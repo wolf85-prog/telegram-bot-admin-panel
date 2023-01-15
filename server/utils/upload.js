@@ -1,7 +1,7 @@
-import { existsSync, mkdirSync } from 'fs'
-import multer from 'multer'
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
+const { existsSync, mkdirSync } = require('fs');
+const multer = require('multer')
+const { dirname, join } = require('path')
+const { fileURLToPath } = require('url')
 
 // путь к текущей директории
 const _dirname = dirname(fileURLToPath(import.meta.url))
