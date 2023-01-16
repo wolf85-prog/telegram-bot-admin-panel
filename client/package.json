@@ -43,7 +43,8 @@
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.6.2",
     "redux": "4.2.0",
-    "simplebar-react": "^2.4.1"
+    "simplebar-react": "^2.4.1",
+    "telegram-admin-panel": "file:.."
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
