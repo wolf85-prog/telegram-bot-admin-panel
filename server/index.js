@@ -3,8 +3,10 @@ const express = require('express')
 const sequelize = require('./db')
 const models = require('./models/models')
 const cors = require('cors')
+const fileUpload = require('express-fileupload')
 const router = require('./routes/index')
 const errorHandler = require('./middleware/ErrorHandling')
+const path = require('path')
 
 //import { Server } from 'socket.io'
 //import onConnection from './socket_io/onConnection.js'
@@ -17,31 +19,11 @@ const port = process.env.PORT || 5000;
 
 const app = express();
 
-app.use(cors());
+app.use(cors())
 app.use(express.json())
+app.use(express.static(path.resolve(__dirname, 'static')))
+app.use(fileUpload({}))
 app.use('/api', router)
-
-// Обрабатываем загрузку файлов
-// app.use('/upload', upload.single('file'), (req, res) => {
-//     if (!req.file) return res.sendStatus(400)
-  
-//     // формируем относительный путь к файлу
-//     const relativeFilePath = req.file.path
-//       .replace(/\\/g, '/')
-//       .split('server/files')[1]
-  
-//     // и возвращаем его
-//     res.status(201).json(relativeFilePath)
-// })
-
-// Обрабатываем получение файлов
-// app.use('/files', (req, res) => {
-//     // формируем абсолютный путь к файлу
-//     const filePath = getFilePath(req.url)
-  
-//     // и возвращаем файл по этому пути
-//     res.status(200).sendFile(filePath)
-// })
 
 // Обработка ошибок, последний middleware
 app.use(errorHandler)
