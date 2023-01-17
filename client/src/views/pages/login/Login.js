@@ -45,13 +45,13 @@ const Login = observer(() => {
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md={6}>
+          <CCol md={5}>
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
                   <CForm>
-                    <h1>{'Авторизация'}</h1>
-                    <p className="text-medium-emphasis">Войдите в свой аккаунт</p>
+                    <h1 style={{textAlign: 'center'}}>{'Авторизация'}</h1>
+                    <p className="text-medium-emphasis" style={{textAlign: 'center'}}>Войдите в свой аккаунт</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
@@ -75,8 +75,8 @@ const Login = observer(() => {
                         onChange={e => setPassword(e.target.value)}
                       />
                     </CInputGroup>
-                    <CRow>
-                      <CCol xs={6}>
+                    <CRow className='text-center'>
+                      <CCol xs={12}>
                         <CButton 
                           color="primary" 
                           className="px-4"
