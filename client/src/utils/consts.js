@@ -1,3 +1,6 @@
 export const ADMIN_ROUTE = '/dashboard'
+export const ANALITIKA_ROUTE = '/base/accordion'
+export const CHAT_ROUTE = '/chat'
+export const THEME_ROUTE = '/theme'
 export const LOGIN_ROUTE = '/login'
 export const REGISTRATION_ROUTE = '/register'

@@ -17,7 +17,7 @@ import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../index";
-import {LOGIN_ROUTE, REGISTRATION_ROUTE, ADMIN_ROUTE} from "../../../utils/consts";
+import {LOGIN_ROUTE, REGISTRATION_ROUTE, ADMIN_ROUTE, THEME_ROUTE} from "../../../utils/consts";
 import {login, registration} from "../../../http/userAPI";
 
 const Login = observer(() => {
@@ -31,11 +31,7 @@ const Login = observer(() => {
     const click = async () => {
         try {
             let data;
-            if (isLogin) {
-                data = await login(email, password);
-            } else {
-                data = await registration(email, password);
-            }
+            data = await login(email, password);
             user.setUser(user)
             user.setIsAuth(true)
             navigate(ADMIN_ROUTE)
@@ -49,12 +45,12 @@ const Login = observer(() => {
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md={8}>
+          <CCol md={6}>
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
                   <CForm>
-                    <h1>{isLogin ? 'Авторизация' : "Регистрация"}</h1>
+                    <h1>{'Авторизация'}</h1>
                     <p className="text-medium-emphasis">Войдите в свой аккаунт</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
@@ -86,7 +82,7 @@ const Login = observer(() => {
                           className="px-4"
                           onClick={click}
                         >
-                          {isLogin ? 'Войти' : 'Регистрация'}
+                          {'Войти'}
                         </CButton>
                       </CCol>
                       <CCol xs={6} className="text-right">
@@ -96,22 +92,6 @@ const Login = observer(() => {
                       </CCol>
                     </CRow>
                   </CForm>
-                </CCardBody>
-              </CCard>
-              <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
-                <CCardBody className="text-center">
-                  <div>
-                    <h2>{isLogin ? 'Регистрация' : "Авторизация"}</h2>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
-                    <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>
-                        {isLogin ? 'Регистрация' : 'Войти'}
-                      </CButton>
-                    </Link>
-                  </div>
                 </CCardBody>
               </CCard>
             </CCardGroup>

@@ -19,7 +19,8 @@ const UserBot = sequelize.define('userbot', {
 const Message = sequelize.define('message', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     messageType: {type: DataTypes.STRING},      //тип сообщения;
-    textOrPathToFile: {type: DataTypes.STRING}, //текст сообщения или путь к файлу;
+    text: {type: DataTypes.STRING}, //текст сообщения;
+    img: {type: DataTypes.STRING}, //путь к файлу;
     to: {type: DataTypes.STRING},
     from: {type: DataTypes.STRING},
     is_bot: {type: DataTypes.BOOLEAN},

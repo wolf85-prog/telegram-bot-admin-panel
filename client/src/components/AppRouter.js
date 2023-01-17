@@ -7,6 +7,7 @@ import {observer} from "mobx-react-lite"
 
 // Pages
 const Login = React.lazy(() => import('./../views/pages/login/Login'))
+const Register = React.lazy(() => import('./../views/pages/register/Register'))
 
 // Containers
 const DefaultLayout = React.lazy(() => import('./../layout/DefaultLayout'))
@@ -21,9 +22,10 @@ const AppRouter = observer(() => {
         {user.isAuth && authRoutes.map(({path, Component}) =>
             <Route key={path} path={path} element={<Component/>} exact/>
         )}
-        <Route path="/login" element={<Login />} />
+        <Route exact path="/login" name="Login Page" element={<Login />} />
+        <Route exact path="/register" name="Register Page" element={<Register />} />
         <Route path="/" element={<Login />} />
-        <Route path="*" name="Home" element={<DefaultLayout />} />
+        {/* <Route path="*" name="Home" element={<DefaultLayout />} /> */}
     </Routes>
   );
 });
