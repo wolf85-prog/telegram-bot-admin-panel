@@ -3,6 +3,7 @@ import "./messenger.css"
 import { CContainer, CSpinner } from '@coreui/react'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../../components/index'
 import Conversation from '../../components/chat/conversations/Conversation'
+import Message from '../../components/message/Message'
 
 export default function Messenger() {
     return (
@@ -25,7 +26,11 @@ export default function Messenger() {
                     <div className='chatBox'>
                         <div className='chatBoxWrapper'>
                             <div className="chatBoxTop">
-                                
+                                <Message />
+                                <Message />
+                                <Message />
+                                <Message />
+                                <Message />
                             </div>
                             <div className="chatBoxBottom"></div>
                         </div>
