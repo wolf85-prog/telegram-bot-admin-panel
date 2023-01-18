@@ -29,7 +29,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Чаты',
-    to: '/chat',
+    to: '/messenger',
     icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
   },
   {

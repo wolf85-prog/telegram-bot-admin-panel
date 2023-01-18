@@ -1,5 +1,5 @@
 import React from 'react'
-import { ADMIN_ROUTE, ANALITIKA_ROUTE, CHAT_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from "./utils/consts";
+import { ADMIN_ROUTE, ANALITIKA_ROUTE, MESSENGER_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from "./utils/consts";
 import Auth from "./views/pages/login/Login";
 import Admin from "./pages/Admin";
 import Analitic from "./pages/Admin";
@@ -7,6 +7,7 @@ import Analitic from "./pages/Admin";
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
 const Chat = React.lazy(() => import('./views/chat/Chat'))
+const Messenger = React.lazy(() => import('./pages/messenger/Messenger'))
 
 export const authRoutes = [
     {
@@ -20,9 +21,9 @@ export const authRoutes = [
         Component: Accordion
     },
     {
-        path: CHAT_ROUTE,
+        path: MESSENGER_ROUTE,
         name: 'Чаты', 
-        Component: Chat
+        Component: Messenger
     },
     // { 
     //     path: '/dashboard', 
