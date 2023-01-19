@@ -23,15 +23,15 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 
 const App = observer(() => {
   //render() {
-    // const {user} = useContext(Context)
-    // const [loading, setLoading] = useState(true)
+    const {user} = useContext(Context)
+    const [loading, setLoading] = useState(true)
 
-    // useEffect(() => {
-    //   check().then(data => {
-    //       user.setUser(true)
-    //       user.setIsAuth(true)
-    //   }).finally(() => setLoading(false))
-    // }, [])
+    useEffect(() => {
+      check().then(data => {
+          user.setUser(true)
+          user.setIsAuth(true)
+      }).finally(() => setLoading(false))
+    }, [])
     
     return (
       <BrowserRouter>
@@ -47,7 +47,7 @@ const App = observer(() => {
         </Suspense>
       </BrowserRouter>     
     )
- // }
+  //}
 })
 
 export default App

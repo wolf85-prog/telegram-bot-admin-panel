@@ -4,6 +4,7 @@ import { CContainer, CSpinner } from '@coreui/react'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../../components/index'
 import Conversation from '../../components/chat/conversations/Conversation'
 import Message from '../../components/message/Message'
+import ChatOnline from '../../components/chatOnline/ChatOnline'
 
 export default function Messenger() {
     return (
@@ -26,16 +27,27 @@ export default function Messenger() {
                     <div className='chatBox'>
                         <div className='chatBoxWrapper'>
                             <div className="chatBoxTop">
+                                <Message />
                                 <Message own={true}/>
-                                <Message own={false}/>
                                 <Message />
                             </div>
-                            <div className="chatBoxBottom"></div>
+                            <div className="chatBoxBottom">
+                                <textarea
+                                    className="chatMessageInput"
+                                    placeholder="write something..."
+                                ></textarea>
+                                <button className="chatSubmitButton">
+                                    Send
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div className='chatOnline'>
                         <div className='chatOnlineWrapper'>
-                            online
+                            <ChatOnline />
+                            <ChatOnline />
+                            <ChatOnline />
+                            <ChatOnline />
                         </div>
                     </div>
                 </div>
