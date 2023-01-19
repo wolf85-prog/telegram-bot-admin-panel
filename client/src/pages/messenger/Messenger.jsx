@@ -26,8 +26,8 @@ export default function Messenger() {
                     <div className='chatBox'>
                         <div className='chatBoxWrapper'>
                             <div className="chatBoxTop">
-                                <Message />
                                 <Message own={true}/>
+                                <Message own={false}/>
                                 <Message />
                             </div>
                             <div className="chatBoxBottom"></div>

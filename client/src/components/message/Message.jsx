@@ -1,9 +1,11 @@
 import React from 'react'
 import "./message.css"
 
-const Message = () => {
+const Message = (own) => {
+    console.log("own: ", own)
+    
     return (
-        <div className="message">
+        <div className={ own ? "message" : "message own"}>
             <div className='messageTop'>
                 <img className='messageImg' src="/static/media/2.0c06e43dc16bee6cdfed.jpg" alt="" />
                 <p className='messageText'>
