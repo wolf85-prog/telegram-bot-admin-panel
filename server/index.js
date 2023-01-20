@@ -5,6 +5,8 @@ const models = require('./models/models')
 const cors = require('cors')
 const fileUpload = require('express-fileupload')
 const router = require('./routes/index')
+const conversationRoute = require('./routes/conversations')
+const messageRoute = require('./routes/messages')
 const errorHandler = require('./middleware/ErrorHandling')
 const path = require('path')
 
@@ -24,6 +26,8 @@ app.use(express.json())
 app.use(express.static(path.resolve(__dirname, 'static')))
 app.use(fileUpload({}))
 app.use('/api', router)
+app.use('/api/conversations', conversationRoute)
+app.use('/api/messages', messageRoute)
 
 // Обработка ошибок, последний middleware
 app.use(errorHandler)

@@ -1,12 +1,31 @@
-import React, { Suspense } from 'react'
+import React, { useContext, Suspense, useState, useEffect } from 'react'
 import "./messenger.css"
 import { CContainer, CSpinner } from '@coreui/react'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../../components/index'
 import Conversation from '../../components/chat/conversations/Conversation'
 import Message from '../../components/message/Message'
 import ChatOnline from '../../components/chatOnline/ChatOnline'
+import {Context} from "../../index";
+
+import { $authHost, $host } from './../../http/index'
 
 export default function Messenger() {
+    const [conversations, setConversations] = useState([])
+    const {user} = useContext(Context)
+
+    useEffect(() => {
+        const getConversations = async () => {
+          try {
+            const res = await $host.get("api/conversations/" + user.id);
+            setConversations(res.data);
+          } catch (err) {
+            console.log(err);
+          }
+        };
+        getConversations();
+    }, [user.id]);
+
+
     return (
         <div>
       <AppSidebar />

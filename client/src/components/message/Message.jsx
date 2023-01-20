@@ -2,7 +2,6 @@ import React from 'react'
 import "./message.css"
 
 const Message = (own) => {
-    console.log("own: ", own.own)
     
     return (
         <div className={ own.own ? "message own" : "message"}>

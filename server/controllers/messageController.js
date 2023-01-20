@@ -6,8 +6,8 @@ const path = require('path')
 class MessageController {
 
     async create(req, res) {
-        const {textOrPathToFile} = req.body
-        const message = await Message.create({textOrPathToFile})
+        const {text} = req.body
+        const message = await Message.create({text})
         return res.json(message)
     }
 
