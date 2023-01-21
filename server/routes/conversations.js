@@ -1,5 +1,6 @@
 const Router = require('express')
 const router = new Router()
+const { Op } = require('sequelize')
 //const Conversation = require('../models/Conversation')
 const {Conversation} = require('../models/models')
 
@@ -20,13 +21,21 @@ router.post("/", async (req, res)=> {
     }
 })
 
-router.get("/userId", async (req, res)=>{
-    const {userId} = req.body
+router.get("/:chatId", async (req, res)=>{
+    const chatId = req.params.chatId
     try {
-        const conversation = await Conversation.findOne({where:{userId}})
+        const conversation = await Conversation.findAll({
+
+            where: {
+                members: {
+                    [Op.contains]: [chatId]
+                }
+            },
+        })
         res.status(200).json(conversation)
     } catch (error) {
        res.status(500).json(error) 
+       console.log(error)
     }
 })
 

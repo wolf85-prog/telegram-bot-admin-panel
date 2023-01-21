@@ -14,10 +14,20 @@ router.post("/", async (req, res) => {
 });
 
 //get
-router.get("/:conversationId", async (req, res) => {
-    const conversationId = req.params.conversationId
+router.get("/:chatId", async (req, res) => {
+    const chatId = req.params.chatId
     try {
-        const messages = await Message.findOne({where: {conversationId}})
+        const messages = await Message.findOne({where: {chatId}})
+        res.status(200).json(messages);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+  });
+
+//get all
+router.get("/", async (req, res) => {
+    try {
+        const messages = await Message.findAll()
         res.status(200).json(messages);
     } catch (err) {
         res.status(500).json(err);

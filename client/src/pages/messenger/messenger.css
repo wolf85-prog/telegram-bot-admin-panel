@@ -2,9 +2,14 @@
     height: calc(100vh - 70px);
     display: flex;
   }
+
+  .userchat {
+    background-color: #ffffff;
+  }
   
   .chatMenu {
     flex: 2.5;
+    background-color: #ffffff;
   }
   
   .chatMenuInput {
