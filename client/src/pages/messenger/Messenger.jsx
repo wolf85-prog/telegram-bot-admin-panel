@@ -1,4 +1,4 @@
-import React, { useContext, Suspense, useState, useEffect } from 'react'
+import React, { useContext, Suspense, useState, useRef, useEffect } from 'react'
 import "./messenger.css"
 import { CContainer, CSpinner } from '@coreui/react'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../../components/index'
@@ -14,6 +14,7 @@ export default function Messenger() {
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
+    const scrollRef = useRef();
 
     const {user} = useContext(Context)
 
@@ -44,9 +45,9 @@ export default function Messenger() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const message = {
-            sender: user._id,
+            chatId: '534534545', //user.id,
             text: newMessage,
-            conversationId: currentChat._id,
+            conversationId: currentChat.id,
         };
 
         try {
@@ -58,6 +59,11 @@ export default function Messenger() {
         }
     }
 
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, [messages]);
+
+    console.log(messages)
 
     return (
         <div>
@@ -86,9 +92,9 @@ export default function Messenger() {
                                 currentChat ?
                             <>
                             <div className="chatBoxTop">
-                                <Message />
-                                <Message own={true}/>
-                                <Message />
+                                <div ref={scrollRef}>
+                                    <Message own={true}/>
+                                </div>
                             </div>
                             <div className="chatBoxBottom">
                                 <textarea
