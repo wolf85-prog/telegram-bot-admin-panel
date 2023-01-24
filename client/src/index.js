@@ -9,6 +9,8 @@ import UserStore from "./store/UserStore";
 
 export const Context = createContext(null)
 console.log('REACT_APP_API_URL:', process.env.REACT_APP_API_URL)
+console.log('REACT_APP_CHAT_ULEY_ID:', process.env.REACT_APP_CHAT_ULEY_ID)
+
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>

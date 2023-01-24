@@ -15,20 +15,23 @@ export default function Messenger() {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const scrollRef = useRef();
+    const chatAdminId = process.env.REACT_APP_CHAT_ULEY_ID
 
     const {user} = useContext(Context)
+
+    //console.log("chatAdminId: ", chatAdminId)
 
     useEffect(() => {
         const getConversations = async () => {
           try {
-            const res = await $host.get("api/conversations/" + '534534545');
+            const res = await $host.get("api/conversations/" + chatAdminId);
             setConversations(res.data);
           } catch (err) {
             console.log(err);
           }
         };
         getConversations();
-    }, ['534534545']);
+    }, [chatAdminId]);
 
     useEffect(() => {
         const getMessages = async () => {
@@ -79,7 +82,7 @@ export default function Messenger() {
 
                             {conversations.map((c, index) => (
                             <div className='userchat' key={`${c}+${index}`} onClick={() => setCurrentChat(c)}>
-                                <Conversation conversation={c} />
+                                <Conversation conversation={c} currentUser={chatAdminId}/>
                             </div>
                             ))}
 
