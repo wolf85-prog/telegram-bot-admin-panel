@@ -3,16 +3,17 @@ import "./conversation.css"
 import { CContainer, CSpinner } from '@coreui/react'
 import { $authHost, $host } from './../../../http/index'
 
-const Conversation = ({conversation, currentUser}) => {
+const Conversation = (conversation) => {
     const [user, setUser] = useState(null)
-    console.log("currentUser ", currentUser)
+    console.log("conversation ", conversation.conversation)
+    console.log("currentUser ", conversation.currentUser)
 
     useEffect(()=> {
-        const friendId = conversation.members.find(m=>m !== currentUser)
+        const friendId = conversation.conversation.members.find(m=>m !== conversation.currentUser)
 
         const getUser = async ()=>{
             try {
-                const res = await $host.get("api/users?userId=" + '534534545');
+                const res = await $host.get("api/users?userId=" + friendId);
                 console.log(res)
                 //setConversations(res.data);
             } catch (err) {
@@ -20,7 +21,7 @@ const Conversation = ({conversation, currentUser}) => {
             } 
         }
         getUser()
-    }, [])
+    }, [conversation.conversation, conversation.currentUser])
 
 
 

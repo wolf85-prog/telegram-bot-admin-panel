@@ -15,7 +15,7 @@ export default function Messenger() {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const scrollRef = useRef();
-    const chatAdminId = process.env.REACT_APP_CHAT_ULEY_ID
+    const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
     const {user} = useContext(Context)
 
