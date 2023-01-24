@@ -5,17 +5,19 @@ import { $authHost, $host } from './../../../http/index'
 
 const Conversation = (conversation) => {
     const [user, setUser] = useState(null)
-    console.log("conversation ", conversation.conversation)
-    console.log("currentUser ", conversation.currentUser)
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER
+    //console.log("conversation ", conversation.conversation)
+    //console.log("currentUser ", conversation.currentUser)
 
     useEffect(()=> {
         const friendId = conversation.conversation.members.find(m=>m !== conversation.currentUser)
 
         const getUser = async ()=>{
             try {
-                const res = await $host.get("api/users?userId=" + friendId);
+                const res = await $host.get("api/userbots/" + friendId);
                 console.log(res)
                 //setConversations(res.data);
+                setUser(res.data);
             } catch (err) {
                 console.log(err);
             } 
@@ -28,7 +30,7 @@ const Conversation = (conversation) => {
     return (
         <div className='conversation'>
             <img className='conversationImg' src="/static/media/2.0c06e43dc16bee6cdfed.jpg" alt="" />
-            <span className="conversationName">{user}</span>
+            <span className="conversationName">{user ? user.firstname +' '+  user.lastname : 'name'}</span>
         </div>
     )
 }

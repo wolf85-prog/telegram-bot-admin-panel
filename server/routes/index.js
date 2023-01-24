@@ -8,6 +8,6 @@ const userBotRouter = require('./userBotRouter')
 router.use('/user', userRouter)
 router.use('/chat', chatRouter)
 router.use('/message', messageRouter)
-router.use('/userbot', userBotRouter)
+router.use('/userbots', userBotRouter)
 
 module.exports = router

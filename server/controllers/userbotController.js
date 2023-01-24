@@ -16,8 +16,12 @@ class UserbotController {
 
     async getOne(req, res) {
         const {id} = req.params
-        const userbot = await UserBot.findOne({where: {id}})
-        return res.json(userbot)
+        try {
+            const userbot = await UserBot.findOne({where: {chatId: id}})
+            return res.status(200).json(userbot);
+          } catch (err) {
+            return res.status(500).json(err);
+          }
     }
 }
 

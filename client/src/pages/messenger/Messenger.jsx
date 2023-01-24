@@ -19,7 +19,7 @@ export default function Messenger() {
 
     const {user} = useContext(Context)
 
-    //console.log("chatAdminId: ", chatAdminId)
+    let friendId 
 
     useEffect(() => {
         const getConversations = async () => {
@@ -31,12 +31,15 @@ export default function Messenger() {
           }
         };
         getConversations();
+
+        //friendId = conversations.members.find(m=>m !== chatAdminId)
+
     }, [chatAdminId]);
 
     useEffect(() => {
         const getMessages = async () => {
           try {
-            const res = await $host.get("/messages/" + currentChat?.id);
+            const res = await $host.get("api/messages/" + currentChat?.id);
             setMessages(res.data);
           } catch (err) {
             console.log(err);
@@ -48,13 +51,15 @@ export default function Messenger() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const message = {
-            chatId: '534534545', //user.id,
+            from: chatAdminId, //user.id,
+            to: "",
             text: newMessage,
             conversationId: currentChat.id,
+            is_bot: false
         };
 
         try {
-            const res = await $host.post("/messages", message);
+            const res = await $host.post("api/messages", message);
             setMessages([...messages, res.data]);
             setNewMessage("");
         } catch (err) {
@@ -66,8 +71,9 @@ export default function Messenger() {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" });
       }, [messages]);
 
-    console.log(messages)
 
+    //console.log("friendId ", friendId)
+ 
     return (
         <div>
       <AppSidebar />
@@ -95,14 +101,16 @@ export default function Messenger() {
                                 currentChat ?
                             <>
                             <div className="chatBoxTop">
-                                <div ref={scrollRef}>
-                                    <Message own={true}/>
-                                </div>
+                                {messages.map((m, index) => (
+                                    <div ref={scrollRef} key={`${m}+${index}`}>
+                                    <Message message={m} own={m.from === chatAdminId} />
+                                    </div>
+                                ))}
                             </div>
                             <div className="chatBoxBottom">
                                 <textarea
                                     className="chatMessageInput"
-                                    placeholder="write something..."
+                                    placeholder="Напишите что-нибудь..."
                                     onChange={(e) => setNewMessage(e.target.value)}
                                     value={newMessage}
                                 ></textarea>
