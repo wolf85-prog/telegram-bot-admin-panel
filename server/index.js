@@ -3,6 +3,7 @@ const express = require('express')
 const sequelize = require('./db')
 const models = require('./models/models')
 const cors = require('cors')
+const https = require('https')
 const fileUpload = require('express-fileupload')
 const router = require('./routes/index')
 const conversationRoute = require('./routes/conversations')
@@ -29,6 +30,19 @@ app.use('/api', router)
 app.use('/api/conversations', conversationRoute)
 app.use('/api/messages', messageRoute)
 
+// Certificate
+const privateKey = fs.readFileSync('privkey.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('cert.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/cert.pem', 'utf8');
+const ca = fs.readFileSync('chain.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/chain.pem', 'utf8');
+
+const credentials = {
+    key: privateKey,
+    cert: certificate,
+    ca: ca
+};
+
+const httpsServer = https.createServer(credentials, app);
+
 // Обработка ошибок, последний middleware
 app.use(errorHandler)
 
@@ -37,7 +51,7 @@ const start = async () => {
         await sequelize.authenticate()
         await sequelize.sync()
         
-        app.listen(port, () => {
+        httpsServer.listen(port, () => {
             console.log('HTTPS Server Admin-panel running on port ' + port);
         });
 
