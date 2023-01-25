@@ -44,8 +44,8 @@
   }
   
   .chatMessageInput {
-    width: 80%;
-    height: 90px;
+    width: 90%;
+    height: 50px;
     padding: 10px;
   }
   
@@ -61,6 +61,7 @@
   
   .chatOnline {
     flex: 2;
+    background-color: #ffffff;
   }
   
   .chatMenuWrapper,

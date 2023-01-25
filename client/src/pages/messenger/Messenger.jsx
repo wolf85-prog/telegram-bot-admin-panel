@@ -12,14 +12,13 @@ import { $authHost, $host } from './../../http/index'
 export default function Messenger() {
     const [conversations, setConversations] = useState([])
     const [currentChat, setCurrentChat] = useState(null);
+    const [friendId, setFriendId] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const scrollRef = useRef();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
     const {user} = useContext(Context)
-
-    let friendId 
 
     useEffect(() => {
         const getConversations = async () => {
@@ -30,9 +29,8 @@ export default function Messenger() {
             console.log(err);
           }
         };
-        getConversations();
 
-        //friendId = conversations.members.find(m=>m !== chatAdminId)
+        getConversations();
 
     }, [chatAdminId]);
 
@@ -50,10 +48,14 @@ export default function Messenger() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const friendId = currentChat.members.find((m) => m !== chatAdminId);
+
         const message = {
             from: chatAdminId, //user.id,
-            to: "",
+            to: friendId,
             text: newMessage,
+            messageType: 'text',
             conversationId: currentChat.id,
             is_bot: false
         };
@@ -72,7 +74,6 @@ export default function Messenger() {
       }, [messages]);
 
 
-    //console.log("friendId ", friendId)
  
     return (
         <div>

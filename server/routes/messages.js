@@ -1,12 +1,12 @@
 const Router = require('express')
 const router = new Router()
-const {Message} = require('../models/Message')
+const Message = require('../models/Message')
 
 //add
 router.post("/", async (req, res) => { 
-    const {conversationId, text, from} = req.body
+    const {conversationId, text, from, to, messageType} = req.body
     try {
-       const savedMessage = await Message.create({conversationId, text, from})
+       const savedMessage = await Message.create({conversationId, text, from, to, messageType})
        res.status(200).json(savedMessage);
     } catch (err) {
        res.status(500).json(err);
@@ -20,6 +20,7 @@ router.get("/:conversationId", async (req, res) => {
         const messages = await Message.findAll({where: {conversationId}})
         res.status(200).json(messages);
     } catch (err) {
+        console.log(err)
         res.status(500).json(err);
     }
   });

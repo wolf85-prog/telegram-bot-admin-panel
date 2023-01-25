@@ -40,33 +40,26 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Аналитика',
-        to: '/base/accordion',
-      }
-    ],
-  },
-  {
-    component: CNavGroup,
-    name: 'Рассылки',
-    to: '/buttons',
-    icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Рассылки',
-        to: '/buttons/buttons',
+        name: 'Отчеты',
+        to: '/reports',
       },
     ],
   },
   {
+    component: CNavItem,
+    name: 'Рассылки',
+    to: '/distribution',
+    icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
+  },
+  {
     component: CNavGroup,
-    name: 'Истории',
+    name: 'Архив',
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Переписки',
-        to: '/forms/form-control',
+        name: 'Сообщения от бота',
+        to: '/messagesbot',
       },
     ],
   },
@@ -77,20 +70,16 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Сообщения',
-        to: '/notifications/alerts',
+        name: 'Уведомления',
+        to: '/notifications',
       },
     ],
   },
   {
     component: CNavItem,
     name: 'Управление ролями',
-    to: '/widgets',
+    to: '/dashboard',
     icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
   },
 ]
 
