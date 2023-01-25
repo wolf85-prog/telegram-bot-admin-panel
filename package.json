@@ -6,8 +6,8 @@
   "scripts": {
     "client-install": "npm install --prefix client",
     "server-install": "npm install --prefix server",
-    "start": "node server.js",
-    "server": "nodemon server.js",
+    "server": "node server.js",
+    "start": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
