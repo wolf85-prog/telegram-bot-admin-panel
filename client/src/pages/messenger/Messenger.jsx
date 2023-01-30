@@ -17,6 +17,7 @@ export default function Messenger() {
     const [newMessage, setNewMessage] = useState("");
     const scrollRef = useRef();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
+    const token = process.env.TELEGRAM_API_TOKEN
 
     const {user} = useContext(Context)
 
@@ -61,9 +62,26 @@ export default function Messenger() {
         };
 
         try {
+            //сохранение сообщения в БД
             const res = await $host.post("api/messages", message);
             setMessages([...messages, res.data]);
+
+            //Передаем данные боту
+            const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${friendId}&parse_mode=html&text=${newMessage}`
+            const sendToTelegram = await $host.get(url_send_msg);
+            //setMessages(res.data);
+
+            //Выводим сообщение об успешной отправке
+            if (sendToTelegram) {
+                console.log('Спасибо! Ваша сообщение отправлено!');
+            }           
+            //А здесь сообщение об ошибке при отправке
+            else {
+                console.log('Что-то пошло не так. Попробуйте ещё раз.');
+            }
+
             setNewMessage("");
+
         } catch (err) {
             console.log(err);
         }
