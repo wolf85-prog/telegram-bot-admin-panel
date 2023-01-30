@@ -4,6 +4,8 @@ const { Op } = require('sequelize')
 //const Conversation = require('../models/Conversation')
 const {Conversation} = require('../models/models')
 
+
+//создать беседу
 router.post("/", async (req, res)=> {
     //const newConversation = new Conversation()
     const {senderId, receiverId} = req.body
@@ -21,11 +23,11 @@ router.post("/", async (req, res)=> {
     }
 })
 
+//найти беседу
 router.get("/:chatId", async (req, res)=>{
     const chatId = req.params.chatId
     try {
         const conversation = await Conversation.findAll({
-
             where: {
                 members: {
                     [Op.contains]: [chatId]
