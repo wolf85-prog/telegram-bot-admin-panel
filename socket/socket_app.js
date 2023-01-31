@@ -8,10 +8,10 @@ const cors = require('cors');
 
 const PORT = 9000;
 const app = express();
-app.use(cors({
-    origin:"https://proj.uley.team:3000",
-    origin:"https://proj.uley.team:8000",
-}));
+// app.use(cors({
+//     origin:"https://proj.uley.team:3000",
+//     origin:"https://proj.uley.team:8000",
+// }));
 
 // Certificate
 const privateKey = fs.readFileSync('privkey.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/privkey.pem', 'utf8');
@@ -37,7 +37,11 @@ httpsServer.listen(PORT, () => {
 });
 
 // Socket setup
-const io = socket(httpsServer);
+const io = socket(httpsServer, {
+    cors:{
+        origin:"https://proj.uley.team:3000"
+    }
+});
 
 
 // const io = require("socket.io")(9000, {
