@@ -17,7 +17,7 @@ export default function Messenger() {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const [arrivalMessage, setArrivalMessage] = useState(null);
-    const socket = useRef(io("http://proj.uley.team:9000"))
+    const socket = useRef(io("https://proj.uley.team:9000"))
     const scrollRef = useRef();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
     const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
@@ -25,7 +25,7 @@ export default function Messenger() {
     const {user} = useContext(Context)
 
     useEffect(() => {
-        socket.current = io("http://proj.uley.team:9000");
+        socket.current = io("https://proj.uley.team:9000");
         socket.current.on("getMessage", data => {
             setArrivalMessage({
                 sender: data.senderId,
