@@ -6,6 +6,7 @@ import Conversation from '../../components/chat/conversations/Conversation'
 import Message from '../../components/message/Message'
 import ChatOnline from '../../components/chatOnline/ChatOnline'
 import {Context} from "../../index";
+import {io} from "socket.io-client"
 
 import { $authHost, $host } from './../../http/index'
 
@@ -15,11 +16,41 @@ export default function Messenger() {
     const [friendId, setFriendId] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
+    const [arrivalMessage, setArrivalMessage] = useState(null);
+    const socket = useRef(io("ws://localhost:9000"))
     const scrollRef = useRef();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
     const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 
     const {user} = useContext(Context)
+
+    useEffect(() => {
+        socket.current = io("ws://localhost:9000");
+        socket.current.on("getMessage", data => {
+            setArrivalMessage({
+                sender: data.senderId,
+                text: data.text,
+                createdAt: Date.now(),
+            })
+        })
+        socket?.current.on("welcome", message=> {
+            console.log(message)
+        })
+    },[socket])
+
+
+    useEffect(()=>{
+        arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
+        setMessages((prev) => [...prev, arrivalMessage])
+    },[arrivalMessage, currentChat])
+
+    useEffect(()=>{
+        socket.current.emit("addUser", chatAdminId)
+        socket.current.on("getUsers", users => {
+            console.log(users);
+        })
+    },[chatAdminId])
+
 
     useEffect(() => {
         const getConversations = async () => {
@@ -60,6 +91,12 @@ export default function Messenger() {
             conversationId: currentChat.id,
             is_bot: false
         };
+
+        // socket.current.emit("sendMessage", {
+        //     senderId: chatAdminId,
+        //     receiverId: friendId,
+        //     text: newMessage,
+        // })
 
         try {
             //сохранение сообщения в БД

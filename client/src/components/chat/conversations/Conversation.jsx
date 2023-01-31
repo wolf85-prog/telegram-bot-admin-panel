@@ -15,7 +15,7 @@ const Conversation = (conversation) => {
         const getUser = async ()=>{
             try {
                 const res = await $host.get("api/userbots/" + friendId);
-                console.log(res)
+                //console.log(res)
                 //setConversations(res.data);
                 setUser(res.data);
             } catch (err) {
