@@ -48,7 +48,7 @@ export default function Messenger() {
     useEffect(()=>{
         socket.current.emit("addUser", chatAdminId)
         socket.current.on("getUsers", users => {
-            console.log(users);
+            console.log("users: ", users);
         })
     },[chatAdminId])
 
