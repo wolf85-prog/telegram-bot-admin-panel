@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon socket_app.js"
+    "start": "node socket_app.js",
+    "dev": "nodemon socket_app.js"
   },
   "keywords": [],
   "author": "",

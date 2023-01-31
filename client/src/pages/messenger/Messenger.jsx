@@ -25,7 +25,7 @@ export default function Messenger() {
     const {user} = useContext(Context)
 
     useEffect(() => {
-        socket.current = io("ws://localhost:9000");
+        socket.current = io("http://proj.uley.team:9000");
         socket.current.on("getMessage", data => {
             setArrivalMessage({
                 sender: data.senderId,
