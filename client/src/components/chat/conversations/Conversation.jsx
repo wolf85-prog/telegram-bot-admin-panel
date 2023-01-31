@@ -6,8 +6,6 @@ import { $authHost, $host } from './../../../http/index'
 const Conversation = (conversation) => {
     const [user, setUser] = useState(null)
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
-    //console.log("conversation ", conversation.conversation)
-    //console.log("currentUser ", conversation.currentUser)
 
     useEffect(()=> {
         const friendId = conversation.conversation.members.find(m=>m !== conversation.currentUser)
@@ -15,8 +13,7 @@ const Conversation = (conversation) => {
         const getUser = async ()=>{
             try {
                 const res = await $host.get("api/userbots/" + friendId);
-                //console.log(res)
-                //setConversations(res.data);
+
                 setUser(res.data);
             } catch (err) {
                 console.log(err);
