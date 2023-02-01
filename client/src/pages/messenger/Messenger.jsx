@@ -17,6 +17,8 @@ export default function Messenger() {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const [arrivalMessage, setArrivalMessage] = useState(null);
+    const [countMess, setCountMess] = useState(0)
+
     const socket = useRef(io("https://proj.uley.team:9000"))
     const scrollRef = useRef();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
@@ -28,6 +30,7 @@ export default function Messenger() {
         socket.current = io("https://proj.uley.team:9000");
         socket.current.on("getMessage", data => {
             console.log("getMessage on client... ")
+            setCountMess(1)
             setArrivalMessage({
                 sender: data.senderId,
                 text: data.text,
@@ -144,7 +147,7 @@ export default function Messenger() {
 
                             {conversations.map((c, index) => (
                             <div className='userchat' key={`${c}+${index}`} onClick={() => setCurrentChat(c)}>
-                                <Conversation conversation={c} currentUser={chatAdminId}/>
+                                <Conversation conversation={c} currentUser={chatAdminId} count={countMess}/>
                             </div>
                             ))}
 
