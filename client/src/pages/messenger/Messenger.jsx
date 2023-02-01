@@ -27,7 +27,7 @@ export default function Messenger() {
     useEffect(() => {
         socket.current = io("https://proj.uley.team:9000");
         socket.current.on("getMessage", data => {
-            console.log("data: ", data)
+            console.log("getMessage on client... ")
             setArrivalMessage({
                 sender: data.senderId,
                 text: data.text,
