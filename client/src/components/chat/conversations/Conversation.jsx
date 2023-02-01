@@ -6,6 +6,7 @@ import { $authHost, $host } from './../../../http/index'
 const Conversation = (conversation) => {
     const [user, setUser] = useState(null)
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
+    const [countMess, setCountMess] = useState(10)
 
     useEffect(()=> {
         const friendId = conversation.conversation.members.find(m=>m !== conversation.currentUser)
@@ -22,12 +23,17 @@ const Conversation = (conversation) => {
         getUser()
     }, [conversation.conversation, conversation.currentUser])
 
+    useEffect(()=> {
+        //setCount
+    }, [])
+
 
 
     return (
         <div className='conversation'>
             <img className='conversationImg' src="/static/media/2.0c06e43dc16bee6cdfed.jpg" alt="" />
             <span className="conversationName">{user ? user.firstname  : '' } {user ? user.lastname  : '' }</span>
+            <div className="chatCountMessageBadge"><span className="spanTextBadge">{countMess>0 ? countMess : ''}</span></div>
         </div>
     )
 }
