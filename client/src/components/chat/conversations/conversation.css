@@ -28,7 +28,8 @@
     border-radius: 50%;
     height: 20px;
     position: relative;
-    left: 10px;
+    text-align: center;
+    left: 5px;
     width: 20px;
   }
 
