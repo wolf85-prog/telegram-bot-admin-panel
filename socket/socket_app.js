@@ -83,7 +83,7 @@ io.on("connection", (socket) => {
     //send and get message
     socket.on("sendMessage", ({senderId, receiverId, text})=>{
         const user = getUser(receiverId)
-        console.log("Сработал сокет sendMessage: ")
+        console.log("Сработал сокет sendMessage, user: ", user)
         io.to(user.socketId).emit("getMessage", {
             senderId,
             text,
