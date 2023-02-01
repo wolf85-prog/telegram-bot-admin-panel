@@ -27,7 +27,7 @@ const Conversation = (conversation) => {
     return (
         <div className='conversation'>
             <img className='conversationImg' src="/static/media/2.0c06e43dc16bee6cdfed.jpg" alt="" />
-            <span className="conversationName">{user ? user.firstname +' '+  user.lastname : 'name'}</span>
+            <span className="conversationName">{user ? user.firstname +' '+  user.lastname ? user.lastname : ''  : 'Без имени'}</span>
         </div>
     )
 }
