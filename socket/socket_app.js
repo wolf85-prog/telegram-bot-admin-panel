@@ -71,6 +71,7 @@ const getUser = (userId)=>{
 io.on("connection", (socket) => {
     //when connect
     console.log("a user connected")
+    
     // Отправляем всем кто подключился сообщение привет
     io.emit("welcome", "hello this is socket server!")
 
@@ -84,7 +85,7 @@ io.on("connection", (socket) => {
     socket.on("sendMessage", ({senderId, receiverId, text})=>{
         const user = getUser(receiverId)
         console.log("Сработал сокет sendMessage, user: ", user)
-        io.to(user.socketId).emit("getMessage", {
+        io.emit("getMessage", {
             senderId,
             text,
         })
