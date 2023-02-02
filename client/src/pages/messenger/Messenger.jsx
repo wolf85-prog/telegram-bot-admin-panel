@@ -57,20 +57,20 @@ export default function Messenger() {
     },[chatAdminId])
 //------------------------------------------------------------------------------------------------    
 
-    useEffect(()=> {
-        const friendId = currentChat.members.find((m) => m !== chatAdminId);
+    // useEffect(()=> {
+    //     const friendId = currentChat.members.find((m) => m !== chatAdminId);
 
-        const getUser = async ()=>{
-            try {
-                const res = await $host.get("api/userbots/" + friendId);
+    //     const getUser = async ()=>{
+    //         try {
+    //             const res = await $host.get("api/userbots/" + friendId);
 
-                setUser(res.data);
-            } catch (err) {
-                console.log(err);
-            } 
-        }
-        getUser()
-    }, [chatAdminId])
+    //             setUser(res.data);
+    //         } catch (err) {
+    //             console.log(err);
+    //         } 
+    //     }
+    //     getUser()
+    // }, [chatAdminId])
 
 
     useEffect(() => {
