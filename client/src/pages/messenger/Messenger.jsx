@@ -150,6 +150,10 @@ export default function Messenger() {
         }
     }
 
+    const handleChat = async (c) => {
+        console.log("click: ", c);
+    }
+
     useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" });
       }, [messages]);
@@ -169,7 +173,7 @@ export default function Messenger() {
                             <input placeholder="Поиск пользователей" className="chatMenuInput" />
 
                             {conversations.map((c, index) => (
-                            <div className='userchat' key={`${c}+${index}`} onClick={() => setCurrentChat(c)}>
+                            <div className='userchat' key={`${c}+${index}`} onClick={()=>handleChat(c)}>
                                 <Conversation conversation={c} currentUser={chatAdminId} count={countMess}/>
                             </div>
                             ))}
