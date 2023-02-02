@@ -152,6 +152,7 @@ export default function Messenger() {
 
     const handleChat = async (c) => {
         console.log("click: ", c);
+        setCurrentChat(c);
     }
 
     useEffect(() => {
