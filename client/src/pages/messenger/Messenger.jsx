@@ -13,7 +13,7 @@ import { $authHost, $host } from './../../http/index'
 export default function Messenger() {
     const [conversations, setConversations] = useState([])
     const [currentChat, setCurrentChat] = useState(null);
-    const [friendId, setFriendId] = useState(null);
+    const [user, setUser] = useState(null)
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -24,8 +24,10 @@ export default function Messenger() {
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
     const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 
-    const {user} = useContext(Context)
+    //const {user} = useContext(Context)
 
+//socket
+//-----------------------------------------------------------------------------    
     useEffect(() => {
         socket.current = io("https://proj.uley.team:9000");
         socket.current.on("getMessage", data => {
@@ -42,7 +44,6 @@ export default function Messenger() {
         })
     },[socket])
 
-
     useEffect(()=>{
         arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
         setMessages((prev) => [...prev, arrivalMessage])
@@ -54,6 +55,22 @@ export default function Messenger() {
             console.log("users: ", users);
         })
     },[chatAdminId])
+//------------------------------------------------------------------------------------------------    
+
+    useEffect(()=> {
+        const friendId = currentChat.members.find((m) => m !== chatAdminId);
+
+        const getUser = async ()=>{
+            try {
+                const res = await $host.get("api/userbots/" + friendId);
+
+                setUser(res.data);
+            } catch (err) {
+                console.log(err);
+            } 
+        }
+        getUser()
+    }, [chatAdminId])
 
 
     useEffect(() => {
@@ -81,6 +98,12 @@ export default function Messenger() {
         };
         getMessages();
     }, [currentChat]);
+
+
+    useEffect(() => {
+
+    },[])
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -160,6 +183,9 @@ export default function Messenger() {
                                 currentChat ?
                             <>
                             <div className="chatBoxTop">
+                                <div className="chatBoxTopName">
+                                     {user ? user.firstname  : '' } {user ? user.lastname  : '' }
+                                </div>
                                 {messages.map((m, index) => (
                                     <div ref={scrollRef} key={`${m}+${index}`}>
                                     <Message message={m} own={m.from === chatAdminId} />
