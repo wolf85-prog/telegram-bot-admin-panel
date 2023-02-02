@@ -8,6 +8,13 @@ const PORT = process.env.REACT_APP_PORT || 3000
 const app = express()
 app.use(express.static(__dirname))
 app.use(express.static(path.resolve(__dirname, 'build')))
+app.use((req, res, next) => {
+    if (req.protocol === 'http') {
+        return res.redirect(301, `https://${req.headers.host}${req.url}`);
+    }
+
+    next();
+});
 
 // Certificate
 const privateKey = fs.readFileSync('privkey.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/privkey.pem', 'utf8');
