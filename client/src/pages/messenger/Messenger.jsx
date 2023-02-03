@@ -32,7 +32,8 @@ export default function Messenger() {
         socket.current = io("https://proj.uley.team:9000");
         socket.current.on("getMessage", data => {
             console.log("getMessage on client... ")
-            setCountMess(1)
+            setCountMess(countMess + 1)
+            console.log("count: ", countMess + 1)
             setArrivalMessage({
                 sender: data.senderId,
                 text: data.text,
