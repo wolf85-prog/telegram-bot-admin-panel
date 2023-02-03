@@ -13,6 +13,7 @@ import { $authHost, $host } from './../../http/index'
 export default function Messenger() {
     const [conversations, setConversations] = useState([])
     const [currentChat, setCurrentChat] = useState(null);
+    const [currentChatId, setCurrentChatId] = useState(null);
     const [user, setUser] = useState(null)
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
@@ -98,12 +99,14 @@ export default function Messenger() {
             }
           };
           getUser();
-    },[chatAdminId])
+    },[currentChat, chatAdminId])
 
 
     const handleChat = async (c) => {
         console.log("click: ", c);
+        console.log("id: ", c.id);
         setCurrentChat(c);
+        setCurrentChatId(c.id)
     }
 
 
