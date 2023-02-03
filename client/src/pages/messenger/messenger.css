@@ -20,15 +20,16 @@
   .chatMenuHeader {
     position: fixed;
     height: 50px;
-    width: 100%;
+    width: 25%;
     background-color: #d8dbe0;
   }
   
   .chatMenuInput {
     width: 90%;
     padding: 10px 0;
-    border: none;
-    border-bottom: 1px solid gray;
+    border: 1px solid gray;
+    border-radius: 10px;
+    background-color: #d8dbe0;
   }
   
   .chatBox {
