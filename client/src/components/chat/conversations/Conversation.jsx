@@ -31,8 +31,8 @@ const Conversation = (conversation) => {
     return (
         <div className='conversation'>
             <img className='conversationImg' src="/static/media/2.0c06e43dc16bee6cdfed.jpg" alt="" />
-            <span className="conversationName">{user ? user.firstname  : '' } {user ? user.lastname  : '' }</span>
-            {(conversation.count > 0 && conversation.id == 4) ? <div className="chatCountMessageBadge"><span className="spanTextBadge">{conversation.count}</span></div>: ''}
+            <span className="conversationName">{conversation.conversation.id} {user ? user.firstname  : '' } {user ? user.lastname  : '' }</span>
+            {(conversation.count > 0) ? <div className="chatCountMessageBadge"><span className="spanTextBadge">{conversation.count}</span></div>: ''}
         </div>
     )
 }

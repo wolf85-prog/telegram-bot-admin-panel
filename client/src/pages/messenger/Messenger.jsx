@@ -103,8 +103,8 @@ export default function Messenger() {
 
 
     const handleChat = async (c) => {
-        console.log("click: ", c);
-        console.log("id: ", c.id);
+        //console.log("click: ", c);
+        //console.log("id: ", c.id);
         setCurrentChat(c);
         setCurrentChatId(c.id)
     }
