@@ -12,6 +12,13 @@
     background-color: #ffffff;
     overflow: auto;
   }
+
+  .chatMenuHeader {
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    background-color: aqua;
+  }
   
   .chatMenuInput {
     width: 90%;
@@ -37,9 +44,11 @@
     padding-right: 10px;
   }
 
-  .chatBoxTopName {
+  .chatBoxHeader {
     position: fixed;
-    background-color: #f3f3f3;
+    background-color: aqua;
+    height: 50px;
+    width: 100%;
   }
   
   .chatBoxBottom {

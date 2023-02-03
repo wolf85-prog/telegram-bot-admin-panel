@@ -171,25 +171,32 @@ export default function Messenger() {
                 <div className='messenger'>
                     <div className='chatMenu'>
                         <div className='chatMenuWrapper'>
-                            <input placeholder="Поиск пользователей" className="chatMenuInput" />
+                            <div className='chatMenuHeader'>
 
-                            {conversations.map((c, index) => (
-                            <div className='userchat' key={`${c}+${index}`} onClick={()=>handleChat(c)}>
-                                <Conversation conversation={c} currentUser={chatAdminId} count={countMess}/>
                             </div>
-                            ))}
+                            <div className='chatMenuBox'>
+                                <input placeholder="Поиск пользователей" className="chatMenuInput" />
 
-                        </div> 
+                                {conversations.map((c, index) => (
+                                <div className='userchat' key={`${c}+${index}`} onClick={()=>handleChat(c)}>
+                                    <Conversation conversation={c} currentUser={chatAdminId} count={countMess}/>
+                                </div>
+                                ))}
+
+                            </div> 
+                        </div>
                     </div>
 
                     <div className='chatBox'>
+                        
                         <div className='chatBoxWrapper'>
                             {
                                 currentChat ?
                             <>
-                            <div className="chatBoxTopName">
+                            <div className='chatBoxHeader'>
                                 {user ? user.firstname  : '' } {user ? user.lastname  : '' }
                             </div>
+
                             <div className="chatBoxTop">
                                 {messages.map((m, index) => (
                                     <div ref={scrollRef} key={`${m}+${index}`}>
@@ -206,12 +213,6 @@ export default function Messenger() {
                                 ></textarea>
                                 <button className="chatSubmitButton" onClick={handleSubmit}>Send</button>
                             </div></> : <span className='noConversationText'>Чтобы начать беседу, нажмите на чат.</span>}
-                        </div>
-                    </div>
-                    <div className='chatOnline'>
-                        <div className='chatOnlineWrapper'>
-                            <ChatOnline />
-                            <ChatOnline />
                         </div>
                     </div>
                 </div>
