@@ -20,6 +20,7 @@ const Conversation = (conversation) => {
             } 
         }
         getUser()
+        console.log("user conver:", user)
     }, [conversation.conversation, conversation.currentUser])
 
     useEffect(()=> {
