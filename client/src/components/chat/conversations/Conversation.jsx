@@ -32,7 +32,7 @@ const Conversation = (conversation) => {
         <div className='conversation'>
             <img className='conversationImg' src="/static/media/2.0c06e43dc16bee6cdfed.jpg" alt="" />
             <span className="conversationName">{user ? user.firstname  : '' } {user ? user.lastname  : '' }</span>
-            {(conversation.count > 0 && conversation.currentUser == 4) ? <div className="chatCountMessageBadge"><span className="spanTextBadge">{conversation.count}</span></div>: ''}
+            {(conversation.count > 0 && conversation.id == 4) ? <div className="chatCountMessageBadge"><span className="spanTextBadge">{conversation.count}</span></div>: ''}
         </div>
     )
 }
