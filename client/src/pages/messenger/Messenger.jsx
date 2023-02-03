@@ -86,8 +86,22 @@ export default function Messenger() {
 
 
     useEffect(() => {
-
+        const getUser = async () => {
+            try {
+                const res = await $host.get("api/userbots/" + friendId);
+                setUser(res.data);
+            } catch (err) {
+              console.log(err);
+            }
+          };
+          getUser();
     },[])
+
+
+    const handleChat = async (c) => {
+        console.log("click: ", c);
+        setCurrentChat(c);
+    }
 
 
     const handleSubmit = async (e) => {
@@ -135,24 +149,6 @@ export default function Messenger() {
         }
     }
 
-    const handleChat = async (c) => {
-        console.log("click: ", c);
-        setCurrentChat(c);
-
-        const friendId = currentChat?.members.find((m) => m !== chatAdminId);
-
-        const getUser = async ()=>{
-            try {
-                const res = await $host.get("api/userbots/" + friendId);
-
-                setUser(res.data);
-            } catch (err) {
-                console.log(err);
-            } 
-        }
-        getUser()
-    }
-
     useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" });
       }, [messages]);
@@ -185,10 +181,10 @@ export default function Messenger() {
                             {
                                 currentChat ?
                             <>
+                            <div className="chatBoxTopName">
+                                {user ? user.firstname  : '' } {user ? user.lastname  : '' }
+                            </div>
                             <div className="chatBoxTop">
-                                <div className="chatBoxTopName">
-                                     {user ? user.firstname  : '' } {user ? user.lastname  : '' }
-                                </div>
                                 {messages.map((m, index) => (
                                     <div ref={scrollRef} key={`${m}+${index}`}>
                                     <Message message={m} own={m.from === chatAdminId} />
