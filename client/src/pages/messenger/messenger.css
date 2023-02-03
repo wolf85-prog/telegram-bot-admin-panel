@@ -45,6 +45,8 @@
   }
 
   .chatBoxHeader {
+    border-left: 1px solid #383434;
+    padding: 10px 16px;
     position: fixed;
     background-color: aqua;
     height: 50px;
@@ -74,14 +76,8 @@
     color: white;
   }
   
-  .chatOnline {
-    flex: 2;
-    background-color: #ffffff;
-  }
-  
   .chatMenuWrapper,
-  .chatBoxWrapper,
-  .chatOnlineWrapper {
+  .chatBoxWrapper {
     padding: 10px;
     height: 100%;
   }
