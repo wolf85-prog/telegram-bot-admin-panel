@@ -103,10 +103,10 @@ export default function Messenger() {
 
 
     const handleChat = async (c) => {
-        //console.log("click: ", c);
-        //console.log("id: ", c.id);
         setCurrentChat(c);
         setCurrentChatId(c.id)
+
+        setCountMess(0)
     }
 
 
@@ -123,12 +123,6 @@ export default function Messenger() {
             conversationId: currentChat.id,
             is_bot: false
         };
-
-        // socket.current.emit("sendMessage", {
-        //     senderId: chatAdminId,
-        //     receiverId: friendId,
-        //     text: newMessage,
-        // })
 
         try {
             //сохранение сообщения в БД
@@ -172,11 +166,9 @@ export default function Messenger() {
                     <div className='chatMenu'>
                         <div className='chatMenuWrapper'>
                             <div className='chatMenuHeader'>
-
+                                <input placeholder="Поиск пользователей" className="chatMenuInput" />
                             </div>
                             <div className='chatMenuBox'>
-                                <input placeholder="Поиск пользователей" className="chatMenuInput" />
-
                                 {conversations.map((c, index) => (
                                 <div className='userchat' key={`${c}+${index}`} onClick={()=>handleChat(c)}>
                                     <Conversation conversation={c} currentUser={chatAdminId} count={countMess}/>
