@@ -92,12 +92,13 @@ export default function Messenger() {
             try {
                 const res = await $host.get("api/userbots/" + friendId);
                 setUser(res.data);
+                console.log('currentUser: ', user)
             } catch (err) {
               console.log(err);
             }
           };
           getUser();
-    },[])
+    },[chatAdminId])
 
 
     const handleChat = async (c) => {
