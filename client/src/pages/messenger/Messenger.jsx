@@ -86,6 +86,8 @@ export default function Messenger() {
 
 
     useEffect(() => {
+
+        const friendId = currentChat?.members.find((m) => m !== chatAdminId);
         const getUser = async () => {
             try {
                 const res = await $host.get("api/userbots/" + friendId);
