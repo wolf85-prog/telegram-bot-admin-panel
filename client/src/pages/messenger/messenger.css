@@ -8,7 +8,7 @@
   }
   
   .chatMenu {
-    flex: 2.5;
+    flex: 1.5;
     background-color: #ffffff;
     overflow: auto;
   }
@@ -20,7 +20,7 @@
   .chatMenuHeader {
     position: fixed;
     height: 50px;
-    width: 25%;
+    width: 17%;
     background-color: #d8dbe0;
   }
   
@@ -47,6 +47,8 @@
     height: 100%;
     overflow-y: scroll;
     padding-right: 10px;
+    padding-top: 50px;
+    padding-left: 50px;
   }
 
   .chatBoxHeader {
