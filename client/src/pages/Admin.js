@@ -59,6 +59,10 @@ import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 // routes config
 import routes from '../routes'
 
+// if (!user._id) {
+//   return <Navigate to="/register" />;
+// }
+
 const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
 const progressExample = [

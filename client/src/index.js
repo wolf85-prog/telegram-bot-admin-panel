@@ -20,6 +20,6 @@ createRoot(document.getElementById('root')).render(
       }}>
         <App />
       </Context.Provider>  
-    </Provider>,
+    </Provider>
   </React.StrictMode> 
 )

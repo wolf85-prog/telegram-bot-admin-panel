@@ -1,12 +1,26 @@
-import React, { useContext, Suspense, useState, useRef, useEffect } from 'react'
+import React, { useContext, createRef, Suspense, useState, useRef, useEffect } from 'react'
+import InputEmoji from "react-input-emoji";
+import SearchIcon from "@mui/icons-material/Search";
+import CallIcon from "@mui/icons-material/Call";
+import VideoCallIcon from "@mui/icons-material/VideoCall";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import styled from "@emotion/styled";
+import SendIcon from "@mui/icons-material/Send";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import { ChatlogicStyling, isSameSender } from "./../../components/chat/ChatstyleLogic";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
+import { Avatar, Badge, Button } from "@mui/material";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./messenger.css"
+import "./../../Chat.css";
 import { CContainer, CSpinner } from '@coreui/react'
-import { AppContent, AppSidebar, AppFooter, AppHeader } from '../../components/index'
+import { AppContent, AppSidebar, AppFooter, AppHeaderChat, AppBreadcrumb } from '../../components/index'
 import Conversation from '../../components/chat/conversations/Conversation'
 import Message from '../../components/message/Message'
-import ChatOnline from '../../components/chatOnline/ChatOnline'
 import {Context} from "../../index";
 import {io} from "socket.io-client"
+
 
 import { $authHost, $host } from './../../http/index'
 
@@ -24,6 +38,8 @@ export default function Messenger() {
     const scrollRef = useRef();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
     const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
+
+    const scrolldiv = createRef();
 
     //const {user} = useContext(Context)
 
@@ -154,61 +170,177 @@ export default function Messenger() {
       }, [messages]);
 
 
+    const ColorButton = styled(Button)(() => ({
+        color: "white",
+        fontSize: "20px",
+        textTransform: "none",
+        padding: "8px",
+        marginRight: "15px",
+        backgroundColor: "#5865f2",
+        "&:hover": {
+          backgroundColor: "#3a45c3",
+        },
+    }));
  
     return (
         <div>
       <AppSidebar />
       <div className="wrapper d-flex flex-column min-vh-100 bg-light">
-        <AppHeader />
+        <AppHeaderChat />
         <div className="body flex-grow-1 px-3">
-            <Suspense fallback={<CSpinner color="primary" />}>
-                <div className='messenger'>
-                    <div className='chatMenu'>
-                        <div className='chatMenuWrapper'>
-                            <div className='chatMenuHeader'>
-                                <input placeholder="Поиск пользователей" className="chatMenuInput" />
-                            </div>
-                            <div className='chatMenuBox'>
-                                {conversations.map((c, index) => (
-                                <div className='userchat' key={`${c}+${index}`} onClick={()=>handleChat(c)}>
-                                    <Conversation conversation={c} currentUser={chatAdminId} count={countMess}/>
+            <CContainer lg>
+                <Suspense fallback={<CSpinner color="primary" />}>
+                    <div className='messenger'>
+                        {/* <div className='chatMenu'>
+                            <div className='chatMenuWrapper'>
+                                <div className='chatMenuHeader'>
+                                    <input placeholder="Поиск пользователей" className="chatMenuInput" />
                                 </div>
-                                ))}
-
-                            </div> 
-                        </div>
-                    </div>
-
-                    <div className='chatBox'>
-                        
-                        <div className='chatBoxWrapper'>
-                            {
-                                currentChat ?
-                            <>
-                            <div className='chatBoxHeader'>
-                                {user ? user.firstname  : '' } {user ? user.lastname  : '' }
-                            </div>
-
-                            <div className="chatBoxTop">
-                                {messages.map((m, index) => (
-                                    <div ref={scrollRef} key={`${m}+${index}`}>
-                                    <Message message={m} own={m.from === chatAdminId} />
+                                <div className='chatMenuBox'>
+                                    {conversations.map((c, index) => (
+                                    <div className='userchat' key={`${c}+${index}`} onClick={()=>handleChat(c)}>
+                                        <Conversation conversation={c} currentUser={chatAdminId} count={countMess}/>
                                     </div>
-                                ))}
+                                    ))}
+
+                                </div> 
                             </div>
-                            <div className="chatBoxBottom">
-                                <textarea
-                                    className="chatMessageInput"
-                                    placeholder="Напишите что-нибудь..."
-                                    onChange={(e) => setNewMessage(e.target.value)}
-                                    value={newMessage}
-                                ></textarea>
-                                <button className="chatSubmitButton" onClick={handleSubmit}>Send</button>
-                            </div></> : <span className='noConversationText'>Чтобы начать беседу, нажмите на чат.</span>}
+                        </div> */}
+
+                        <div className="mychat-cont">
+                            <div>
+                                <div className="notification">
+                                    <h2>Чаты</h2>
+                                    {/* <NotificationsIcon /> */}
+                                    <Badge color="error">
+                                    
+                                    </Badge>
+                                    {/* <AddIcon /> */}
+                                </div>
+                                <div className="search-cont">
+                                    <SearchIcon />
+                                    <input
+                                    type="text"
+                                    placeholder="Поиск пользователя"
+                                    />
+                                </div>
+                                </div>
+                                <div className="recent-chat">
+                                <p className="Recent">Последние</p>
+                                <div className="recent-user">
+                                    {conversations.map((c, index) => (
+                                        <div className='userchat' key={`${c}+${index}`} onClick={()=>handleChat(c)}>
+                                            <Conversation conversation={c} currentUser={chatAdminId} count={countMess}/>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className='chatBox'>
+                            
+                            <div>
+                                {
+                                    currentChat ?
+                                <>
+                                <div className="chattingpage">
+                                    <div className="top-header">
+                                        <div className="user-header">
+                                        <Avatar />
+                                        <p className="user-name"> {user ? user.firstname  : '' } {user ? user.lastname  : '' }</p>
+                                        </div>
+                                        <div>
+                                        <div className="user-fet">
+                                            <SearchIcon />
+                                            <CallIcon />
+                                            <VideoCallIcon />
+                                            <MoreHorizIcon />
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div ref={scrolldiv} className="live-chat">
+                                        {messages.map((el, index) => (
+                                        <div
+                                            key={index}
+                                            className={
+                                                el.from === chatAdminId ? "rihgtuser-chat" : "leftuser-chat"
+                                            }
+                                        >
+                                            <div
+                                                className={el.from === chatAdminId ? "right-avt" : "left-avt"}
+                                            >
+                                            <div className={ChatlogicStyling(el.id, chatAdminId)}>
+                                                <p>{el.text}</p>
+                                                <p className="time chat-time">
+                                                {new Date(el.createdAt).getHours() +
+                                                    ":" +
+                                                    new Date(el.createdAt).getMinutes()}
+                                                </p>
+                                            </div>
+
+                                            {/* {isSameSender(messages, index) ? (
+                                                <Avatar
+                                                src={user.pic}
+                                                />
+                                            ) : ( */}
+                                                <div className="blank-div"></div>
+                                            {/* )} */}
+                                            </div>
+                                        </div>
+                                        ))}
+                                    </div>
+                                    <div className="sender-cont">
+                                        {/* <InputContWithEmog id={_id} token={token} socket={socket} /> */}
+                                        <div className="search-cont send-message">
+                                        <InputEmoji
+                                            value=""
+                                            cleanOnEnter
+                                            placeholder="Напишите сообщение"
+                                            />
+                                        </div>
+                                        <ColorButton
+                                            variant="contained"
+                                            endIcon={<SendIcon />}
+                                        ></ColorButton>
+                                            </div>
+                                        </div>`
+                                
+                                {/* <div className='chatBoxHeader'>
+                                    {user ? user.firstname  : '' } {user ? user.lastname  : '' }
+                                </div>
+
+                                <div className="chatBoxTop">
+                                    {messages.map((m, index) => (
+                                        <div ref={scrollRef} key={`${m}+${index}`}>
+                                        <Message message={m} own={m.from === chatAdminId} />
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="chatBoxBottom">
+                                    <textarea
+                                        className="chatMessageInput"
+                                        placeholder="Напишите что-нибудь..."
+                                        onChange={(e) => setNewMessage(e.target.value)}
+                                        value={newMessage}
+                                    ></textarea>
+                                    <button className="chatSubmitButton" onClick={handleSubmit}>Send</button>
+                                </div> */}
+                                </> 
+                                : 
+                                // <span className='noConversationText'>Чтобы начать беседу, нажмите на чат.</span>
+                                <div className="chattingpage start-msg">
+                                    <div>
+                                        <Avatar sx={{ width: 70, height: 70 }} />
+                                        <h3>Добро пожаловать, name</h3>
+                                        <p>Выберите чат, чтобы начать обмен сообщениями.</p>
+                                    </div>
+                                </div>
+                                }
+                            </div>
                         </div>
                     </div>
-                </div>
-            </Suspense>
+                </Suspense>
+            </CContainer>
         </div>
         <AppFooter />
       </div>

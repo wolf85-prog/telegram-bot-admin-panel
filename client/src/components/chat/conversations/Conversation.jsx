@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./conversation.css"
 import { CContainer, CSpinner } from '@coreui/react'
 import { $authHost, $host } from './../../../http/index'
+import { Avatar, Badge } from "@mui/material"
 
 const Conversation = (conversation) => {
     const [user, setUser] = useState(null)
@@ -20,7 +21,6 @@ const Conversation = (conversation) => {
             } 
         }
         getUser()
-        console.log("user conver:", user)
     }, [conversation.conversation, conversation.currentUser])
 
     useEffect(()=> {
@@ -30,10 +30,27 @@ const Conversation = (conversation) => {
 
 
     return (
-        <div className='conversation'>
-            <img className='conversationImg' src="/static/media/2.0c06e43dc16bee6cdfed.jpg" alt="" />
-            <span className="conversationName">{user ? user.firstname  : '' } {user ? user.lastname  : '' }</span>
-            {(conversation.count > 0 && conversation.conversation.id == 4) ? <div className="chatCountMessageBadge"><span className="spanTextBadge">{conversation.count}</span></div>: ''}
+        // <div className='conversation'>
+        //     <img className='conversationImg' src="/static/media/2.0c06e43dc16bee6cdfed.jpg" alt="" />
+        //     <span className="conversationName">{user ? user.firstname  : '' } {user ? user.lastname  : '' }</span>
+        //     {(conversation.count > 0 && conversation.conversation.id == 4) ? <div className="chatCountMessageBadge"><span className="spanTextBadge">{conversation.count}</span></div>: ''}
+        // </div>
+
+        <div
+            className="user"
+            >
+            <div className="history-cont">
+                <div>{<Avatar />}</div>
+                <div>
+                    <p className="name"></p>
+                <p className="chat">
+                    {user ? user.firstname  : '' } {user ? user.lastname  : '' }
+                </p>
+                </div>
+            </div>
+            <div>
+                <p className="unseen-chat">5</p>
+            </div>
         </div>
     )
 }
