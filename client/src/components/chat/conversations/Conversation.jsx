@@ -44,12 +44,6 @@ const Conversation = (conv) => {
 
 
     return (
-        // <div className='conversation'>
-        //     <img className='conversationImg' src="/static/media/2.0c06e43dc16bee6cdfed.jpg" alt="" />
-        //     <span className="conversationName">{user ? user.firstname  : '' } {user ? user.lastname  : '' }</span>
-        //     {(conversation.count > 0 && conversation.conversation.id == 4) ? <div className="chatCountMessageBadge"><span className="spanTextBadge">{conversation.count}</span></div>: ''}
-        // </div>
-
         <div
             onClick={handleSelectChat}
             className="user"
@@ -61,7 +55,7 @@ const Conversation = (conv) => {
                     <p className="chat">
                         {latestMessage
                             ? latestMessage.content.length > 8
-                            ? latestMessage.content.substring(0, 30) + " . . ."
+                            ? latestMessage.content.substring(0, 30) + " ..."
                             : latestMessage.content
                             : ""}
                     </p>
@@ -77,36 +71,9 @@ const Conversation = (conv) => {
                 ) : (
                     ""
                 )}
-                {/* <p className="unseen-chat">5</p> */}
+                 {(conv.count > 0 && conv.conversation.id == 4) ? <p className="unseen-chat">{conv.count}</p>: ''}
             </div>
         </div>
-
-        // <div className="history-cont">
-        // <div>{<Avatar src={users?.pic} />}</div>
-        // <div>
-        //     <p className="name">{users?.name}</p>
-        //     <p className="chat">
-        //     {latestMessage
-        //         ? latestMessage.content.length > 8
-        //         ? latestMessage.content.substring(0, 30) + " . . ."
-        //         : latestMessage.content
-        //         : ""}
-        //     </p>
-        // </div>
-        // </div>
-        // <div>
-        // {latestMessage ? (
-        //     <p className="time">
-        //     {new Date(latestMessage?.updatedAt).getHours() +
-        //         ":" +
-        //         new Date(latestMessage?.updatedAt).getMinutes()}
-        //     </p>
-        // ) : (
-        //     ""
-        // )}
-        // {/* <p className="unseen-chat">5</p> */}
-        // </div>
-        // </div>
     )
 }
 

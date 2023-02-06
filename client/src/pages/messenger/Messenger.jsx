@@ -33,7 +33,7 @@ export default function Messenger() {
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [countMess, setCountMess] = useState(0)
 
-    const socket = useRef(io("https://proj.uley.team:9000"))
+    //const socket = useRef(io("https://proj.uley.team:9000"))
     const scrollRef = useRef();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
     const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
@@ -44,34 +44,34 @@ export default function Messenger() {
 
 //socket
 //-----------------------------------------------------------------------------    
-    useEffect(() => {
-        socket.current = io("https://proj.uley.team:9000");
-        socket.current.on("getMessage", data => {
-            console.log("getMessage on client... ")
-            setCountMess(countMess + 1)
-            console.log("count: ", countMess + 1)
-            setArrivalMessage({
-                sender: data.senderId,
-                text: data.text,
-                createdAt: Date.now(),
-            })
-        })
-        socket?.current.on("welcome", message=> {
-            console.log(message)
-        })
-    },[socket])
+    // useEffect(() => {
+    //     socket.current = io("https://proj.uley.team:9000");
+    //     socket.current.on("getMessage", data => {
+    //         console.log("getMessage on client... ")
+    //         setCountMess(countMess + 1)
+    //         console.log("count: ", countMess + 1)
+    //         setArrivalMessage({
+    //             sender: data.senderId,
+    //             text: data.text,
+    //             createdAt: Date.now(),
+    //         })
+    //     })
+    //     socket?.current.on("welcome", message=> {
+    //         console.log(message)
+    //     })
+    // },[socket])
 
-    useEffect(()=>{
-        arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
-        setMessages((prev) => [...prev, arrivalMessage])
-    },[arrivalMessage, currentChat])
+    // useEffect(()=>{
+    //     arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
+    //     setMessages((prev) => [...prev, arrivalMessage])
+    // },[arrivalMessage, currentChat])
 
-    useEffect(()=>{
-        socket.current.emit("addUser", chatAdminId)
-        socket.current.on("getUsers", users => {
-            console.log("users: ", users);
-        })
-    },[chatAdminId])
+    // useEffect(()=>{
+    //     socket.current.emit("addUser", chatAdminId)
+    //     socket.current.on("getUsers", users => {
+    //         console.log("users: ", users);
+    //     })
+    // },[chatAdminId])
 //------------------------------------------------------------------------------------------------    
 
     useEffect(() => {

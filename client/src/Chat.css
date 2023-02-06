@@ -38,7 +38,7 @@
   }
   .mychat-cont {
     color: #495057;
-    width: 30%;
+    width: 26%;
     height: 100vh;
     min-width: 350px;
     background-color: #f5f7fb;
@@ -52,6 +52,7 @@
     width: 87%;
     margin: auto;
     border-radius: 5px;
+    margin-bottom: 15px;
   }
   .search-cont svg {
     margin: 0 10px 0 10px;
@@ -91,7 +92,7 @@
     /* border: 2px solid red; */
     overflow-y: scroll;
     box-sizing: border-box;
-    height: 75vh;
+    height: 84vh;
   }
   
   .recent-user::-webkit-scrollbar {
@@ -110,8 +111,9 @@
     height: 3.4rem;
     /* margin: 20px; */
     margin-top: 0px;
-    padding: 11px 13px;
+    padding: 11px 7px;
     margin: 0px 12px;
+    border-bottom: 1px solid #e6ebf5;
   }
   .user:hover {
     border-radius: 7px;
@@ -131,6 +133,7 @@
     font-weight: 600;
     margin-bottom: 0px;
     margin-left: 14px;
+    margin-top: 15px;
   }
   .chat {
     margin-top: 0px;
