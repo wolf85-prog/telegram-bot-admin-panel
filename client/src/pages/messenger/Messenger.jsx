@@ -207,25 +207,21 @@ export default function Messenger() {
                         </div> */}
 
                         <div className="mychat-cont">
-                            <div>
-                                <div className="notification">
-                                    <h2>Чаты</h2>
-                                    {/* <NotificationsIcon /> */}
-                                    <Badge color="error">
-                                        <Notificationcomp />
-                                    </Badge>
-                                    {/* <AddIcon /> */}
-                                </div>
-                                <div className="search-cont">
-                                    <SearchIcon />
-                                    <input
+                            <div className="notification">
+                                <h2>Чаты</h2>
+                                <Badge color="error">
+                                    <Notificationcomp />
+                                </Badge>
+
+                            </div>
+                            <div className="search-cont">
+                                <SearchIcon />
+                                <input
                                     type="text"
                                     placeholder="Поиск пользователя"
-                                    />
-                                </div>
-                                </div>
-                                <div className="recent-chat">
-                                <p className="Recent">Последние</p>
+                                />
+                            </div>
+                            <div className="recent-chat">                            
                                 <div className="recent-user">
                                     {conversations.map((c, index) => (
                                         <div key={`${c}+${index}`} onClick={()=>handleChat(c)}>
@@ -236,15 +232,6 @@ export default function Messenger() {
                                             />
                                         </div>
                                     ))}
-                                    {/* {conversations.map((el, index) => (
-                                            <ChatUserComp
-                                              key={`${el}+${index}`}
-                                              {...el}
-                                              index={index}
-                                            //   chattingwith={chatting._id}
-                                            //   id={user._id}
-                                            />
-                                    ))} */}
                                 </div>
                             </div>
                         </div>
@@ -339,7 +326,7 @@ export default function Messenger() {
                                 <div className="chattingpage start-msg">
                                     <div>
                                         <Avatar sx={{ width: 70, height: 70 }} />
-                                        <h3>Добро пожаловать, name</h3>
+                                        <h3>Добро пожаловать</h3>
                                         <p>Выберите чат, чтобы начать обмен сообщениями.</p>
                                     </div>
                                 </div>
