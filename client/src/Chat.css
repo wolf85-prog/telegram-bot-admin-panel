@@ -50,9 +50,8 @@
     background-color: #e6ebf5;
     padding: 5px;
     width: 87%;
-    margin: auto;
+    margin-left: 15px;
     border-radius: 5px;
-    margin-bottom: 15px;
   }
   .search-cont svg {
     margin: 0 10px 0 10px;
