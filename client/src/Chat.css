@@ -92,6 +92,7 @@
     overflow-y: scroll;
     box-sizing: border-box;
     height: 84vh;
+    padding-top: 15px;
   }
   
   .recent-user::-webkit-scrollbar {
