@@ -4,12 +4,13 @@ import { CContainer, CSpinner } from '@coreui/react'
 import { $authHost, $host } from './../../../http/index'
 import { Avatar, Badge } from "@mui/material"
 
-const Conversation = (conversation) => {
+const Conversation = (conv) => {
     const [user, setUser] = useState(null)
+    const [latestMessage, setLatestMessage] = useState({content: "Текст последнего сообщения", updatedAt: "01-01-2023T12:00"})
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
     useEffect(()=> {
-        const friendId = conversation.conversation.members.find(m=>m !== conversation.currentUser)
+        const friendId = conv.conversation.members.find(m=>m !== conv.currentUser)
 
         const getUser = async ()=>{
             try {
@@ -21,11 +22,24 @@ const Conversation = (conversation) => {
             } 
         }
         getUser()
-    }, [conversation.conversation, conversation.currentUser])
+    }, [conv.conversation, conv.currentUser])
 
     useEffect(()=> {
         //setCount
+        //setLatestMessage({content: "Например", updatedAt: "01-01-2023T12:00"})
     }, [])
+
+    const handleSelectChat = () => {
+        //   dispatch(
+        //     selectChat({
+        //       isGroupChat,
+        //       index,
+        //       user: users.find((el) => el._id != id),
+        //       _id,
+        //       chatName,
+        //     })
+        //   );
+    };
 
 
 
@@ -37,21 +51,62 @@ const Conversation = (conversation) => {
         // </div>
 
         <div
+            onClick={handleSelectChat}
             className="user"
-            >
+        >
             <div className="history-cont">
                 <div>{<Avatar />}</div>
                 <div>
-                    <p className="name"></p>
-                <p className="chat">
-                    {user ? user.firstname  : '' } {user ? user.lastname  : '' }
-                </p>
+                    <p className="name">{user ? user.firstname  : '' } {user ? user.lastname  : '' }</p>
+                    <p className="chat">
+                        {latestMessage
+                            ? latestMessage.content.length > 8
+                            ? latestMessage.content.substring(0, 30) + " . . ."
+                            : latestMessage.content
+                            : ""}
+                    </p>
                 </div>
             </div>
             <div>
-                <p className="unseen-chat">5</p>
+                {latestMessage ? (
+                    <p className="time">
+                    {new Date().getHours() +
+                        ":" +
+                        new Date().getMinutes()}
+                    </p>
+                ) : (
+                    ""
+                )}
+                {/* <p className="unseen-chat">5</p> */}
             </div>
         </div>
+
+        // <div className="history-cont">
+        // <div>{<Avatar src={users?.pic} />}</div>
+        // <div>
+        //     <p className="name">{users?.name}</p>
+        //     <p className="chat">
+        //     {latestMessage
+        //         ? latestMessage.content.length > 8
+        //         ? latestMessage.content.substring(0, 30) + " . . ."
+        //         : latestMessage.content
+        //         : ""}
+        //     </p>
+        // </div>
+        // </div>
+        // <div>
+        // {latestMessage ? (
+        //     <p className="time">
+        //     {new Date(latestMessage?.updatedAt).getHours() +
+        //         ":" +
+        //         new Date(latestMessage?.updatedAt).getMinutes()}
+        //     </p>
+        // ) : (
+        //     ""
+        // )}
+        // {/* <p className="unseen-chat">5</p> */}
+        // </div>
+        // </div>
     )
 }
 

@@ -38,9 +38,9 @@
   }
   .mychat-cont {
     color: #495057;
-    width: 26%;
+    width: 30%;
     height: 100vh;
-    min-width: 270px;
+    min-width: 350px;
     background-color: #f5f7fb;
   }
   .search-cont {
@@ -224,21 +224,23 @@
   }
   .leftuser-chat {
     display: flex;
-    flex-direction: row-reverse;
+    
   }
   .rihgtuser-chat {
     display: flex;
+    flex-direction: row-reverse;
   }
   .right-avt {
     /* border: 2px solid red; */
     display: flex;
-    flex-direction: row-reverse;
+    
     align-items: center;
     gap: 10px;
   }
   .left-avt {
     /* border: 2px solid black; */
     display: flex;
+    flex-direction: row-reverse;
     align-items: center;
     gap: 10px;
   }
@@ -249,7 +251,7 @@
     margin: 3px;
   }
   .right-msg {
-    background-color: #f5f7fb;
+    background-color: #e2e5eb;
     padding: 8px;
     border-radius: 10px;
     margin: 3px;

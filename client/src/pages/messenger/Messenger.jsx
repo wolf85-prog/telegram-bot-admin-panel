@@ -6,10 +6,7 @@ import VideoCallIcon from "@mui/icons-material/VideoCall";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import styled from "@emotion/styled";
 import SendIcon from "@mui/icons-material/Send";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import { ChatlogicStyling, isSameSender } from "./../../components/chat/ChatstyleLogic";
-import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
 import { Avatar, Badge, Button } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
 import "./messenger.css"
@@ -18,6 +15,7 @@ import { CContainer, CSpinner } from '@coreui/react'
 import { AppContent, AppSidebar, AppFooter, AppHeaderChat, AppBreadcrumb } from '../../components/index'
 import Conversation from '../../components/chat/conversations/Conversation'
 import Message from '../../components/message/Message'
+import Notificationcomp from '../../components/chat/Notificationcomp'
 import {Context} from "../../index";
 import {io} from "socket.io-client"
 
@@ -29,6 +27,7 @@ export default function Messenger() {
     const [currentChat, setCurrentChat] = useState(null);
     const [currentChatId, setCurrentChatId] = useState(null);
     const [user, setUser] = useState(null)
+    const [search, setSearch] = useState(false);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -188,7 +187,7 @@ export default function Messenger() {
       <div className="wrapper d-flex flex-column min-vh-100 bg-light">
         <AppHeaderChat />
         <div className="body flex-grow-1 px-3">
-            <CContainer lg>
+            
                 <Suspense fallback={<CSpinner color="primary" />}>
                     <div className='messenger'>
                         {/* <div className='chatMenu'>
@@ -213,7 +212,7 @@ export default function Messenger() {
                                     <h2>Чаты</h2>
                                     {/* <NotificationsIcon /> */}
                                     <Badge color="error">
-                                    
+                                        <Notificationcomp />
                                     </Badge>
                                     {/* <AddIcon /> */}
                                 </div>
@@ -229,10 +228,23 @@ export default function Messenger() {
                                 <p className="Recent">Последние</p>
                                 <div className="recent-user">
                                     {conversations.map((c, index) => (
-                                        <div className='userchat' key={`${c}+${index}`} onClick={()=>handleChat(c)}>
-                                            <Conversation conversation={c} currentUser={chatAdminId} count={countMess}/>
+                                        <div key={`${c}+${index}`} onClick={()=>handleChat(c)}>
+                                            <Conversation 
+                                                conversation={c} 
+                                                currentUser={chatAdminId} 
+                                                count={countMess}
+                                            />
                                         </div>
                                     ))}
+                                    {/* {conversations.map((el, index) => (
+                                            <ChatUserComp
+                                              key={`${el}+${index}`}
+                                              {...el}
+                                              index={index}
+                                            //   chattingwith={chatting._id}
+                                            //   id={user._id}
+                                            />
+                                    ))} */}
                                 </div>
                             </div>
                         </div>
@@ -261,6 +273,7 @@ export default function Messenger() {
                                     <div ref={scrolldiv} className="live-chat">
                                         {messages.map((el, index) => (
                                         <div
+                                            ref={scrollRef}
                                             key={index}
                                             className={
                                                 el.from === chatAdminId ? "rihgtuser-chat" : "leftuser-chat"
@@ -269,22 +282,15 @@ export default function Messenger() {
                                             <div
                                                 className={el.from === chatAdminId ? "right-avt" : "left-avt"}
                                             >
-                                            <div className={ChatlogicStyling(el.id, chatAdminId)}>
+                                            <div className={ChatlogicStyling(el.from, chatAdminId)}>
                                                 <p>{el.text}</p>
                                                 <p className="time chat-time">
                                                 {new Date(el.createdAt).getHours() +
                                                     ":" +
                                                     new Date(el.createdAt).getMinutes()}
                                                 </p>
-                                            </div>
-
-                                            {/* {isSameSender(messages, index) ? (
-                                                <Avatar
-                                                src={user.pic}
-                                                />
-                                            ) : ( */}
-                                                <div className="blank-div"></div>
-                                            {/* )} */}
+                                            </div>                                          
+                                            <div className="blank-div"></div>
                                             </div>
                                         </div>
                                         ))}
@@ -293,12 +299,14 @@ export default function Messenger() {
                                         {/* <InputContWithEmog id={_id} token={token} socket={socket} /> */}
                                         <div className="search-cont send-message">
                                         <InputEmoji
-                                            value=""
+                                            onChange={setNewMessage}
+                                            value={newMessage}
                                             cleanOnEnter
                                             placeholder="Напишите сообщение"
                                             />
                                         </div>
                                         <ColorButton
+                                            onClick={handleSubmit}
                                             variant="contained"
                                             endIcon={<SendIcon />}
                                         ></ColorButton>
@@ -340,7 +348,7 @@ export default function Messenger() {
                         </div>
                     </div>
                 </Suspense>
-            </CContainer>
+
         </div>
         <AppFooter />
       </div>
@@ -348,3 +356,4 @@ export default function Messenger() {
         
     )
 }
+  

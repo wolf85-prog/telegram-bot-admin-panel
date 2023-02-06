@@ -13,6 +13,6 @@ export const ChatlogicStyling = (id, userId) => {
     }
     return (
       index < message.length - 1 &&
-      message[index].sender.id != message[index + 1].sender.id
+      message[index].from != message[index + 1].from
     );
   };
