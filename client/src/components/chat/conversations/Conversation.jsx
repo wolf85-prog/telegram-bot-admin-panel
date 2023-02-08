@@ -12,9 +12,6 @@ const Conversation = (conv) => {
     useEffect(()=> {
         const friendId = conv.conversation.members.find(m=>m !== conv.currentUser)
 
-        console.log("index: " + conv.index + ", id: " + conv.conversation.id)
-
-
         const getUser = async ()=>{
             try {
                 const res = await $host.get("api/userbots/" + friendId);
@@ -54,7 +51,7 @@ const Conversation = (conv) => {
             <div className="history-cont">
                 <div>{<Avatar />}</div>
                 <div>
-                    <p className="name">{user ? user.firstname  : '' } {user ? user.lastname  : '' }</p>
+                    <p className="name">{conv.index} {conv.conversation.id} {user ? user.firstname  : '' } {user ? user.lastname  : '' }</p>
                     <p className="chat">
                         {latestMessage
                             ? latestMessage.content.length > 8
