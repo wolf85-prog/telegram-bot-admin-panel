@@ -71,7 +71,7 @@ const Conversation = (conv) => {
                 ) : (
                     ""
                 )}
-                 {(conv.count > 0 && conv.conversation.id == 4) ? <p className="unseen-chat">{conv.count}</p>: ''}
+                 {(conv.count > 0 && conv.conversation.id === conv.userId) ? <p className="unseen-chat">{conv.count}</p>: ''}
             </div>
         </div>
     )

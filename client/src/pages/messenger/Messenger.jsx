@@ -27,6 +27,7 @@ export default function Messenger() {
     const [currentChat, setCurrentChat] = useState(null);
     const [currentChatId, setCurrentChatId] = useState(null);
     const [user, setUser] = useState(null)
+    const [userId, setUserId] = useState(null)
     const [search, setSearch] = useState(false);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
@@ -45,11 +46,23 @@ export default function Messenger() {
 //socket
 //-----------------------------------------------------------------------------    
     useEffect(() => {
+        const getConversations = async (id) => {
+            try {
+              const res = await $host.get("api/conversations/" + id);
+            } catch (err) {
+              console.log(err);
+            }
+        };
+
         socket.current = io("https://proj.uley.team:9000");
         socket.current.on("getMessage", data => {
             console.log("getMessage on client... ")
             setCountMess(countMess + 1)
-            console.log("count: ", countMess + 1)
+            console.log("count: ", countMess + 1) 
+      
+            const conver = getConversations(data.senderId);
+            setUserId(conver.id)
+
             setArrivalMessage({
                 sender: data.senderId,
                 text: data.text,
@@ -93,6 +106,7 @@ export default function Messenger() {
           try {
             const res = await $host.get("api/messages/" + currentChat?.id);
             setMessages(res.data);
+
           } catch (err) {
             console.log(err);
           }
@@ -231,6 +245,7 @@ export default function Messenger() {
                                                 index={index}
                                                 currentUser={chatAdminId} 
                                                 count={countMess}
+                                                userId={userId}
                                             />
                                         </div>
                                     ))}
