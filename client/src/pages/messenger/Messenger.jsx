@@ -225,9 +225,10 @@ export default function Messenger() {
                             <div className="recent-chat">                            
                                 <div className="recent-user">
                                     {conversations.map((c, index) => (
-                                        <div key={`${c}+${index}`} onClick={()=>handleChat(c)}>
+                                        <div key={c.id} onClick={()=>handleChat(c)}>
                                             <Conversation 
                                                 conversation={c} 
+                                                index={index}
                                                 currentUser={chatAdminId} 
                                                 count={countMess}
                                             />

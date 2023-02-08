@@ -12,6 +12,9 @@ const Conversation = (conv) => {
     useEffect(()=> {
         const friendId = conv.conversation.members.find(m=>m !== conv.currentUser)
 
+        console.log("index: " + conv.index + ", id: " + conv.conversation.id)
+
+
         const getUser = async ()=>{
             try {
                 const res = await $host.get("api/userbots/" + friendId);
@@ -22,7 +25,7 @@ const Conversation = (conv) => {
             } 
         }
         getUser()
-    }, [conv.conversation, conv.currentUser])
+    }, [conv.conversation, conv.currentUser, conv.index])
 
     useEffect(()=> {
         //setCount
