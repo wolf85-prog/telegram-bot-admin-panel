@@ -175,6 +175,7 @@ export default function Messenger() {
         textTransform: "none",
         padding: "8px",
         marginRight: "15px",
+        marginBottom: "10px",
         backgroundColor: "#5865f2",
         "&:hover": {
           backgroundColor: "#3a45c3",

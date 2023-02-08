@@ -92,7 +92,7 @@
     /* border: 2px solid red; */
     overflow-y: scroll;
     box-sizing: border-box;
-    height: 84vh;
+    height: 80vh;
   }
   
   .recent-user::-webkit-scrollbar {
