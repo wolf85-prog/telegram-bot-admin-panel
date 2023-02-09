@@ -51,7 +51,7 @@ const Conversation = (conv) => {
             <div className="history-cont">
                 <div>{<Avatar />}</div>
                 <div>
-                    <p className="name">{conv.index} {conv.conversation.id} {user ? user.firstname  : '' } {user ? user.lastname  : '' }</p>
+                    <p className="name">{conv.index} {conv.conversation.id} {conv.userId} {user ? user.firstname  : '' } {user ? user.lastname  : '' }</p>
                     <p className="chat">
                         {latestMessage
                             ? latestMessage.content.length > 8

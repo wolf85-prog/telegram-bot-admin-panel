@@ -46,13 +46,6 @@ export default function Messenger() {
 //socket
 //-----------------------------------------------------------------------------    
     useEffect(() => {
-        const getConversations = async (id) => {
-            try {
-              const res = await $host.get("api/conversations/" + id);
-            } catch (err) {
-              console.log(err);
-            }
-        };
 
         socket.current = io("https://proj.uley.team:9000");
         socket.current.on("getMessage", data => {
@@ -60,8 +53,7 @@ export default function Messenger() {
             setCountMess(countMess + 1)
             console.log("count: ", countMess + 1) 
       
-            const conver = getConversations(data.senderId);
-            setUserId(conver.id)
+            setUserId(data.convId)
 
             setArrivalMessage({
                 sender: data.senderId,
