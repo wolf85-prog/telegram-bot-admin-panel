@@ -41,7 +41,6 @@ export default function Messenger() {
 
     const scrolldiv = createRef();
 
-    const [arr, setValue] = useState([{id: 'Тише'}, {id: 'мыши'}]);
     //const {user} = useContext(Context)
 
 //socket
@@ -59,13 +58,7 @@ export default function Messenger() {
             console.log("senderId: ", data.senderId)
            
             
-            setValue([...arr, {id: 'кот'}, {id: 'на'}, {id: 'крыше'}]);
-
-            setTimeout(()=> {
-                console.log("arr: ", arr)
-            }, 3000)
-            
-            //setConversations([...conversations, {id: 4, members: [data.senderId, chatAdminId]} ])
+            setConversations([...conversations, {id: Date.now(), members: [data.senderId, chatAdminId], createdAt: '', updatedAt: ''} ])
 
             setArrivalMessage({
                 sender: data.senderId,
@@ -76,7 +69,7 @@ export default function Messenger() {
         socket?.current.on("welcome", message=> {
             console.log(message)
         })
-    },[socket, conversations, arr])
+    },[socket, conversations])
 
     useEffect(()=>{
         arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
