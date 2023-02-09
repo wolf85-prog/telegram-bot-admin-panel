@@ -56,6 +56,17 @@ export default function Messenger() {
             setUserId(data.convId)
             console.log("userId: ", data.convId) 
 
+             const getConversations = async () => {
+                try {
+                    const res = await $host.get("api/conversations/" + chatAdminId);
+                    setConversations(res.data);
+                } catch (err) {
+                    console.log(err);
+                }
+            };
+        
+            getConversations();
+
             //conversations.unshift(...conversations.splice(4,1));
             setConversations([{members: [data.senderId, chatAdminId]}, ...conversations])
 
@@ -88,6 +99,7 @@ export default function Messenger() {
           try {
             const res = await $host.get("api/conversations/" + chatAdminId);
             setConversations(res.data);
+            console.log("conversations: ", res.data)
           } catch (err) {
             console.log(err);
           }
