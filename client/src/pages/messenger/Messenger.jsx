@@ -65,7 +65,7 @@ export default function Messenger() {
                 }
             };
         
-            getConversations();
+            //getConversations();
 
             //conversations.unshift(...conversations.splice(4,1));
             setConversations([...conversations, {id: 4, members: [data.senderId, chatAdminId]} ])
