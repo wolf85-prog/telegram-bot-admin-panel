@@ -59,7 +59,7 @@ export default function Messenger() {
 
             const getConversations = async () => {
                 try {
-                  await $host.get("api/conversations/" + chatAdminId);
+                  const res = await $host.get("api/conversations/" + chatAdminId);
                   setConversations(res.data);
                 } catch (err) {
                   console.log(err);
