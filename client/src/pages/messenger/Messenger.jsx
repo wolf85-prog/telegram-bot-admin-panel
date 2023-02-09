@@ -57,7 +57,7 @@ export default function Messenger() {
             console.log("userId: ", data.convId) 
 
             //conversations.unshift(...conversations.splice(4,1));
-            setConversations([{sender: data.senderId, receiver: chatAdminId}, ...conversations])
+            setConversations([{members: [data.senderId, chatAdminId]}, ...conversations])
 
             setArrivalMessage({
                 sender: data.senderId,
