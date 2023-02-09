@@ -55,6 +55,7 @@ export default function Messenger() {
 
             setUserId(data.convId)
             console.log("userId: ", data.convId) 
+            console.log("senderId: ", data.senderId)
 
              const getConversations = async () => {
                 try {
