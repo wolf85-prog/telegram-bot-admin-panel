@@ -62,7 +62,7 @@ const Conversation = (conv) => {
                 </div>
             </div>
             <div>
-                {latestMessage ? (
+                {/* {latestMessage ? (
                     <p className="time">
                     {new Date().getHours() +
                         ":" +
@@ -70,7 +70,7 @@ const Conversation = (conv) => {
                     </p>
                 ) : (
                     ""
-                )}
+                )} */}
                  {(conv.count > 0 && conv.conversation.id === conv.userId) ? <p className="unseen-chat">{conv.count}</p>: ''}
             </div>
         </div>
