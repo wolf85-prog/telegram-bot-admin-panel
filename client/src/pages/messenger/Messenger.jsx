@@ -85,7 +85,7 @@ export default function Messenger() {
         socket?.current.on("welcome", message=> {
             console.log(message)
         })
-    },[socket])
+    },[socket, chatAdminId])
 
     useEffect(()=>{
         arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
