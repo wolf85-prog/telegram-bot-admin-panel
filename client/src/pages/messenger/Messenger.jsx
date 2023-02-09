@@ -61,6 +61,7 @@ export default function Messenger() {
                 try {
                   const res = await $host.get("api/conversations/" + chatAdminId);
                   setConversations([...res.data, {id: Date.now(), members: [data.senderId, chatAdminId], createdAt: '', updatedAt: ''}]);
+                  setUserId(data.convId)
                 } catch (err) {
                   console.log(err);
                 }
