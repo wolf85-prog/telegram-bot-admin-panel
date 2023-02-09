@@ -68,7 +68,7 @@ export default function Messenger() {
             getConversations();
 
             //conversations.unshift(...conversations.splice(4,1));
-            setConversations([{members: [data.senderId, chatAdminId]}, ...conversations])
+            setConversations([...conversations, {id: 4, members: [data.senderId, chatAdminId]} ])
 
             setArrivalMessage({
                 sender: data.senderId,
@@ -229,7 +229,7 @@ export default function Messenger() {
                             </div>
                             <div className="recent-chat">                            
                                 <div className="recent-user">
-                                    {conversations.map((c, index) => (
+                                    {conversations.slice(0).reverse().map((c, index) => (
                                         <div key={c.id} onClick={()=>handleChat(c)}>
                                             <Conversation 
                                                 conversation={c} 
