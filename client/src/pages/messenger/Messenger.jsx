@@ -54,12 +54,11 @@ export default function Messenger() {
             console.log("count: ", countMess + 1) 
 
             setUserId(data.convId)
-            console.log("senderId: ", data.senderId)
 
             const getConversations = async () => {
                 try {
                   const res = await $host.get("api/conversations/" + chatAdminId);
-                  setConversations([...res.data, {id: 4, members: [data.senderId, chatAdminId], createdAt: '', updatedAt: ''}]);
+                  setConversations([...res.data, {id: data.convId, members: [data.senderId, chatAdminId], createdAt: '', updatedAt: ''}]);
                 } catch (err) {
                   console.log(err);
                 }
@@ -78,10 +77,10 @@ export default function Messenger() {
         })
     },[socket, conversations, chatAdminId])
 
-    useEffect(()=>{
-        setUserId(userId)
-        console.log("userId: ", userId) 
-    }, [conversations])
+    // useEffect(()=>{
+    //     setUserId(userId)
+    //     console.log("userId: ", userId) 
+    // }, [conversations])
 
     useEffect(()=>{
         arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
