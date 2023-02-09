@@ -51,7 +51,7 @@ const Conversation = (conv) => {
             <div className="history-cont">
                 <div>{<Avatar />}</div>
                 <div>
-                    <p className="name">{user ? user.firstname  : '' } {user ? user.lastname  : '' }</p>
+                    <p className="name">{conv.conversation.id} {conv.userId} {user ? user.firstname  : '' } {user ? user.lastname  : '' }</p>
                     <p className="chat">
                         {latestMessage
                             ? latestMessage.content.length > 8
@@ -62,7 +62,7 @@ const Conversation = (conv) => {
                 </div>
             </div>
             <div>
-                {/* {latestMessage ? (
+                {latestMessage ? (
                     <p className="time">
                     {new Date().getHours() +
                         ":" +
@@ -70,7 +70,7 @@ const Conversation = (conv) => {
                     </p>
                 ) : (
                     ""
-                )} */}
+                )}
                  {(conv.count > 0 && conv.conversation.id === conv.userId) ? <p className="unseen-chat">{conv.count}</p>: ''}
             </div>
         </div>
