@@ -56,9 +56,21 @@ export default function Messenger() {
             setUserId(data.convId)
             console.log("userId: ", data.convId) 
             console.log("senderId: ", data.senderId)
-           
+
+            const getConversations = async () => {
+                try {
+                  const res = await $host.get("api/conversations/" + chatAdminId);
+                  //setConversations(res.data);
+                  return res.data
+                } catch (err) {
+                  console.log(err);
+                }
+              };
+      
+              const res = getConversations();
+              console.log("res: ", res)
             
-            setConversations([...conversations, {id: Date.now(), members: [data.senderId, chatAdminId], createdAt: '', updatedAt: ''} ])
+            setConversations([...res, {id: 4, members: [data.senderId, chatAdminId], createdAt: '', updatedAt: ''} ])
 
             setArrivalMessage({
                 sender: data.senderId,
@@ -69,7 +81,7 @@ export default function Messenger() {
         socket?.current.on("welcome", message=> {
             console.log(message)
         })
-    },[socket, conversations])
+    },[socket, conversations, chatAdminId])
 
     useEffect(()=>{
         arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
@@ -89,7 +101,6 @@ export default function Messenger() {
           try {
             const res = await $host.get("api/conversations/" + chatAdminId);
             setConversations(res.data);
-            console.log("conversations: ", res.data)
           } catch (err) {
             console.log(err);
           }
