@@ -60,7 +60,8 @@ export default function Messenger() {
             const getConversations = async () => {
                 try {
                     const res = await $host.get("api/conversations/" + chatAdminId);
-                    setConversations(res.data);
+                    console.log("res: ", res)
+                    //setConversations(res.data);
                 } catch (err) {
                     console.log(err);
                 }
@@ -68,9 +69,9 @@ export default function Messenger() {
         
             getConversations();
            
-            setTimeout(() => {
-                console.log("conversations: ", conversations)
-            }, 5000)
+            // setTimeout(() => {
+            //     console.log("conversations: ", conversations)
+            // }, 5000)
             
 
             //conversations.unshift(...conversations.splice(4,1));
