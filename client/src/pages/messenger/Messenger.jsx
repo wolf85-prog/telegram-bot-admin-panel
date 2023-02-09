@@ -58,9 +58,13 @@ export default function Messenger() {
             console.log("userId: ", data.convId) 
             console.log("senderId: ", data.senderId)
            
-            console.log("arr: ", arr)
+            
             setValue([...arr, {id: 'кот'}, {id: 'на'}, {id: 'крыше'}]);
 
+            setTimeout(()=> {
+                console.log("arr: ", arr)
+            }, 3000)
+            
             //setConversations([...conversations, {id: 4, members: [data.senderId, chatAdminId]} ])
 
             setArrivalMessage({
