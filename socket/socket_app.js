@@ -88,6 +88,7 @@ io.on("connection", (socket) => {
         io.emit("getMessage", {
             senderId,
             text,
+            convId,
         })
     })
 
