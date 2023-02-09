@@ -56,6 +56,8 @@ export default function Messenger() {
             setUserId(data.convId)
             console.log("userId: ", data.convId) 
 
+            conversations.unshift(...conversations.splice(4,1));
+
             setArrivalMessage({
                 sender: data.senderId,
                 text: data.text,
@@ -214,7 +216,7 @@ export default function Messenger() {
                             </div>
                             <div className="recent-chat">                            
                                 <div className="recent-user">
-                                    {conversations.slice(0).reverse().map((c, index) => (
+                                    {conversations.map((c, index) => (
                                         <div key={c.id} onClick={()=>handleChat(c)}>
                                             <Conversation 
                                                 conversation={c} 
