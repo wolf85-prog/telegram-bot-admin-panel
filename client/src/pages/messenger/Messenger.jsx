@@ -60,19 +60,18 @@ export default function Messenger() {
             const getConversations = async () => {
                 try {
                     const res = await $host.get("api/conversations/" + chatAdminId);
-                    console.log("res: ", res)
-                    //setConversations(res.data);
+                    //console.log("res: ", res)
+                    setConversations(res.data);
                 } catch (err) {
                     console.log(err);
                 }
             };
         
-            getConversations();
+            //getConversations();
            
             // setTimeout(() => {
-            //     console.log("conversations: ", conversations)
+            console.log("conversations: ", conversations)
             // }, 5000)
-            
 
             //conversations.unshift(...conversations.splice(4,1));
             //setConversations([...conversations, {id: 4, members: [data.senderId, chatAdminId]} ])
@@ -86,7 +85,7 @@ export default function Messenger() {
         socket?.current.on("welcome", message=> {
             console.log(message)
         })
-    },[socket, chatAdminId])
+    },[socket, conversations])
 
     useEffect(()=>{
         arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
