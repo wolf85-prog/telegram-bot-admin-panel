@@ -198,29 +198,12 @@ export default function Messenger() {
             
                 <Suspense fallback={<CSpinner color="primary" />}>
                     <div className='messenger'>
-                        {/* <div className='chatMenu'>
-                            <div className='chatMenuWrapper'>
-                                <div className='chatMenuHeader'>
-                                    <input placeholder="Поиск пользователей" className="chatMenuInput" />
-                                </div>
-                                <div className='chatMenuBox'>
-                                    {conversations.map((c, index) => (
-                                    <div className='userchat' key={`${c}+${index}`} onClick={()=>handleChat(c)}>
-                                        <Conversation conversation={c} currentUser={chatAdminId} count={countMess}/>
-                                    </div>
-                                    ))}
-
-                                </div> 
-                            </div>
-                        </div> */}
-
                         <div className="mychat-cont">
                             <div className="notification">
                                 <h2>Чаты</h2>
                                 <Badge color="error">
                                     <Notificationcomp />
                                 </Badge>
-
                             </div>
                             <div className="search-cont">
                                 <SearchIcon />
@@ -231,7 +214,7 @@ export default function Messenger() {
                             </div>
                             <div className="recent-chat">                            
                                 <div className="recent-user">
-                                    {conversations.map((c, index) => (
+                                    {conversations.slice(0).reverse().map((c, index) => (
                                         <div key={c.id} onClick={()=>handleChat(c)}>
                                             <Conversation 
                                                 conversation={c} 
