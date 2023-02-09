@@ -143,11 +143,12 @@
   }
   .time {
     font-size: 12px;
+    margin-bottom: 0px;
   }
   .unseen-chat {
     font-size: 14px;
-    color: #ef476f;
-    background-color: rgba(239, 71, 111, 0.18);
+    color: #ffffff;
+    background-color: #0136f9c2;
     border-radius: 50%;
     width: 20px;
     text-align: center;
@@ -248,7 +249,7 @@
     gap: 10px;
   }
   .left-msg {
-    background-color: #7269ef;
+    background-color: #665cf5;
     padding: 8px;
     border-radius: 10px;
     margin: 3px;
