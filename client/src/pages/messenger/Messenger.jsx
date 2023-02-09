@@ -52,8 +52,9 @@ export default function Messenger() {
             console.log("getMessage on client... ")
             setCountMess(countMess + 1)
             console.log("count: ", countMess + 1) 
-      
+
             setUserId(data.convId)
+            console.log("userId: ", data.convId) 
 
             setArrivalMessage({
                 sender: data.senderId,
