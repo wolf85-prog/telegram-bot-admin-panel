@@ -49,7 +49,7 @@ export default function Messenger() {
 
         socket.current = io("https://proj.uley.team:9000");
         socket.current.on("getMessage", data => {
-            console.log("getMessage on client... ")
+           
             setCountMess(countMess + 1)
             console.log("count: ", countMess + 1) 
 
@@ -57,7 +57,7 @@ export default function Messenger() {
             console.log("userId: ", data.convId) 
             console.log("senderId: ", data.senderId)
 
-             const getConversations = async () => {
+            const getConversations = async () => {
                 try {
                     const res = await $host.get("api/conversations/" + chatAdminId);
                     setConversations(res.data);
@@ -67,9 +67,10 @@ export default function Messenger() {
             };
         
             //getConversations();
+            console.log("conversations: ", conversations)
 
             //conversations.unshift(...conversations.splice(4,1));
-            setConversations([...conversations, {id: 4, members: [data.senderId, chatAdminId]} ])
+            //setConversations([...conversations, {id: 4, members: [data.senderId, chatAdminId]} ])
 
             setArrivalMessage({
                 sender: data.senderId,
