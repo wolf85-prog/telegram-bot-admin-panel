@@ -198,9 +198,9 @@ export default function Messenger() {
         padding: "8px",
         marginRight: "15px",
         marginBottom: "10px",
-        backgroundColor: "#5865f2",
+        backgroundColor: "#2e7cdd",
         "&:hover": {
-          backgroundColor: "#3a45c3",
+          backgroundColor: "#0a4a9b",
         },
     }));
  
