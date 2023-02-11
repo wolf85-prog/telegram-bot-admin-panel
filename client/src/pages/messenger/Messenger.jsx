@@ -19,9 +19,9 @@ import Notificationcomp from '../../components/chat/Notificationcomp'
 import {Context} from "../../index";
 import {io} from "socket.io-client"
 
-import { useDispatch } from "react-redux";
-import { makeSearchApi } from "../../components/Redux/Searching/action";
-import { useSelector } from "react-redux";
+// import { useDispatch } from "react-redux";
+// import { makeSearchApi } from "../../components/Redux/Searching/action";
+// import { useSelector } from "react-redux";
 
 import { $authHost, $host } from './../../http/index'
 
@@ -37,18 +37,18 @@ export default function Messenger() {
     const [countMess, setCountMess] = useState(0)
 
     const [search, setSearch] = useState(false);
-    const { search_result, loading, error } = useSelector(
-        (store) => store.search
-    );
-    const { recent_chat, loading: chat_loading } = useSelector(
-        (store) => store.recentChat
-    );
-    const { chatting } = useSelector((store) => store.chatting);
-    const { notification, unseenmsg } = useSelector(
-        (store) => store.notification
-    );
-    const dispatch = useDispatch();
-    const ref = useRef();
+    // const { search_result, loading, error } = useSelector(
+    //     (store) => store.search
+    // );
+    // const { recent_chat, loading: chat_loading } = useSelector(
+    //     (store) => store.recentChat
+    // );
+    // const { chatting } = useSelector((store) => store.chatting);
+    // const { notification, unseenmsg } = useSelector(
+    //     (store) => store.notification
+    // );
+    // const dispatch = useDispatch();
+    // const ref = useRef();
 
     const socket = useRef(io("https://proj.uley.team:9000"))
     const scrollRef = useRef();
@@ -157,11 +157,11 @@ export default function Messenger() {
             setSearch(false);
             return;
           }
-          if (ref.current) clearTimeout(ref.current);
-          setSearch(true);
-          ref.current = setTimeout(() => {
-            dispatch(makeSearchApi(e.target.value));
-          }, 1000);
+        //   if (ref.current) clearTimeout(ref.current);
+        //   setSearch(true);
+        //   ref.current = setTimeout(() => {
+        //     dispatch(makeSearchApi(e.target.value));
+        //   }, 1000);
         };
     };
 
