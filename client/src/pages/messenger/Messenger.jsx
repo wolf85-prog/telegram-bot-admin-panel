@@ -343,9 +343,8 @@ export default function Messenger() {
                         </div>
                     </div>
                 </Suspense>
-
         </div>
-        <AppFooter />
+        {/* <AppFooter /> */}
       </div>
     </div>
         

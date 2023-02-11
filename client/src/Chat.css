@@ -92,7 +92,7 @@
   /* border: 2px solid red; */
   overflow-y: scroll;
   box-sizing: border-box;
-  height: 70vh;
+  height: 66vh;
 }
 
 .recent-user::-webkit-scrollbar {
@@ -157,7 +157,7 @@
   background-color: white;
   width: 100%;
   box-shadow: 0 2px 4px rgb(15 34 58 / 12%);
-  height: 87vh;
+  height: 85vh;
 }
 .top-header {
   display: flex;
