@@ -20,7 +20,7 @@ import {Context} from "../../index";
 import {io} from "socket.io-client"
 
 import { useDispatch } from "react-redux";
-import { makeSearchApi } from "./../../components/Redux/Searching/action";
+import { makeSearchApi } from "../../components/Redux/Searching/action";
 import { useSelector } from "react-redux";
 
 import { $authHost, $host } from './../../http/index'
