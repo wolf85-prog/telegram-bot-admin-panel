@@ -20,7 +20,7 @@ export const makeSearchApi = (search) => async (dispatch) => {
     //     Authorization: `Bearer ${user.token}`,
     //   },
     // });
-    let res = await $host.get("api/conversations/" + chatAdminId);
+    let res = await $host.get("api/conversations/" + '805436270');
     let data = await res.json();
     dispatch(searchResult(data));
   } catch (err) {

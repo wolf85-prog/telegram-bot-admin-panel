@@ -17,8 +17,8 @@ import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../index";
-import {LOGIN_ROUTE, REGISTRATION_ROUTE, ADMIN_ROUTE, THEME_ROUTE} from "../../../utils/consts";
-import {login, registration} from "../../../http/userAPI";
+import {LOGIN_ROUTE, ADMIN_ROUTE} from "../../../utils/consts";
+import {login} from "../../../http/userAPI";
 
 const Login = observer(() => {
     const {user} = useContext(Context)
@@ -30,8 +30,8 @@ const Login = observer(() => {
 
     const click = async () => {
         try {
-            let data;
-            data = await login(email, password);
+            //let data;
+            //data = await login(email, password);
             user.setUser(user)
             user.setIsAuth(true)
             navigate(ADMIN_ROUTE)
