@@ -18,6 +18,7 @@ import Message from '../../components/message/Message'
 import Notificationcomp from '../../components/chat/Notificationcomp'
 import {Context} from "../../index";
 import {io} from "socket.io-client"
+import MySelect from 'src/UI/select/MySelect';
 
 // import { useDispatch } from "react-redux";
 // import { makeSearchApi } from "../../components/Redux/Searching/action";
@@ -37,18 +38,9 @@ export default function Messenger() {
     const [countMess, setCountMess] = useState(0)
 
     const [search, setSearch] = useState(false);
-    // const { search_result, loading, error } = useSelector(
-    //     (store) => store.search
-    // );
-    // const { recent_chat, loading: chat_loading } = useSelector(
-    //     (store) => store.recentChat
-    // );
-    // const { chatting } = useSelector((store) => store.chatting);
-    // const { notification, unseenmsg } = useSelector(
-    //     (store) => store.notification
-    // );
-    // const dispatch = useDispatch();
-    // const ref = useRef();
+    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedSort, setSelectedSort] = useState('');
+
 
     const socket = useRef(io("https://proj.uley.team:9000"))
     const scrollRef = useRef();
@@ -135,7 +127,6 @@ export default function Messenger() {
 
 
     useEffect(() => {
-
         const friendId = currentChat?.members.find((m) => m !== chatAdminId);
         const getUser = async () => {
             try {
@@ -157,11 +148,6 @@ export default function Messenger() {
             setSearch(false);
             return;
           }
-        //   if (ref.current) clearTimeout(ref.current);
-        //   setSearch(true);
-        //   ref.current = setTimeout(() => {
-        //     dispatch(makeSearchApi(e.target.value));
-        //   }, 1000);
         };
     };
 
@@ -230,6 +216,16 @@ export default function Messenger() {
           backgroundColor: "#0a4a9b",
         },
     }));
+
+
+    const removeConversation = (conv) => {
+        setConversations(conversations.filter(c => c.id !== conv.id))
+    }
+
+    const sortConversations = (sort) => {
+        setSelectedSort(sort)
+        setConversations([...conversations].sort((a, b) => a[sort].localeCompare(b[sort])))
+    }
  
     return (
         <div>
@@ -239,6 +235,7 @@ export default function Messenger() {
         <div className="body flex-grow-1 px-3">
             
                 <Suspense fallback={<CSpinner color="primary" />}>
+                    
                     <div className='messenger'>
                         <div className="mychat-cont">
                             <div className="notification">
@@ -250,10 +247,23 @@ export default function Messenger() {
                             <div className="search-cont">
                                 <SearchIcon />
                                 <input
-                                    onChange={handleQuery()}
+                                    value={searchQuery}
+                                    onChange={e => setSearchQuery(e.target.value)}
                                     type="text"
                                     placeholder="Поиск пользователя"
                                 />
+                            </div>
+                            <div>
+                                <MySelect
+                                    value={selectedSort}
+                                    onСhange={sortConversations}
+                                    defaultValue="Сортировка"
+                                    options={[
+                                        {value: 'title', name: 'По фамилии и имени'},
+                                        {value: 'body', name: 'По сообщению'}
+                                    ]}
+                                />
+
                             </div>
                             <div className="recent-chat">                            
                                 <div className="recent-user">
