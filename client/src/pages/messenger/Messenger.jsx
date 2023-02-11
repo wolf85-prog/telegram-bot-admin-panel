@@ -18,6 +18,8 @@ import Message from '../../components/message/Message'
 import Notificationcomp from '../../components/chat/Notificationcomp'
 import {Context} from "../../index";
 import {io} from "socket.io-client"
+import { useDispatch } from "react-redux";
+import { makeSearchApi } from "./Redux/Searching/action";
 
 
 import { $authHost, $host } from './../../http/index'
@@ -28,11 +30,24 @@ export default function Messenger() {
     const [currentChatId, setCurrentChatId] = useState(null);
     const [user, setUser] = useState(null)
     const [userId, setUserId] = useState(null)
-    const [search, setSearch] = useState(false);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [countMess, setCountMess] = useState(0)
+
+    const [search, setSearch] = useState(false);
+    const { search_result, loading, error } = useSelector(
+        (store) => store.search
+    );
+    const { recent_chat, loading: chat_loading } = useSelector(
+        (store) => store.recentChat
+    );
+    const { chatting } = useSelector((store) => store.chatting);
+    const { notification, unseenmsg } = useSelector(
+        (store) => store.notification
+    );
+    const dispatch = useDispatch();
+    const ref = useRef();
 
     const socket = useRef(io("https://proj.uley.team:9000"))
     const scrollRef = useRef();
@@ -72,15 +87,10 @@ export default function Messenger() {
                 createdAt: Date.now(),
             })
         })
-        socket?.current.on("welcome", message=> {
-            console.log(message)
-        })
+        // socket?.current.on("welcome", message=> {
+        //     console.log(message)
+        // })
     },[socket, conversations, chatAdminId])
-
-    // useEffect(()=>{
-    //     setUserId(userId)
-    //     console.log("userId: ", userId) 
-    // }, [conversations])
 
     useEffect(()=>{
         arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
@@ -137,6 +147,22 @@ export default function Messenger() {
           };
           getUser();
     },[currentChat, chatAdminId])
+
+
+    const handleQuery = (e) => {
+        let id;
+        return function (e) {
+          if (!e.target.value) {
+            setSearch(false);
+            return;
+          }
+          if (ref.current) clearTimeout(ref.current);
+          setSearch(true);
+          ref.current = setTimeout(() => {
+            dispatch(makeSearchApi(e.target.value));
+          }, 1000);
+        };
+    };
 
 
     const handleChat = async (c) => {
@@ -223,6 +249,7 @@ export default function Messenger() {
                             <div className="search-cont">
                                 <SearchIcon />
                                 <input
+                                    onChange={handleQuery()}
                                     type="text"
                                     placeholder="Поиск пользователя"
                                 />
