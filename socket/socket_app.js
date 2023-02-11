@@ -33,7 +33,7 @@ const httpsServer = https.createServer(credentials, app);
 
 httpsServer.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
-    console.log(`http://proj.uley.team:${PORT}`);
+    console.log(`https://proj.uley.team:${PORT}`);
 });
 
 // Socket setup
@@ -70,10 +70,10 @@ const getUser = (userId)=>{
 
 io.on("connection", (socket) => {
     //when connect
-    console.log("a user connected")
+    //console.log("a user connected")
     
     // Отправляем всем кто подключился сообщение привет
-    io.emit("welcome", "hello this is socket server!")
+    //io.emit("welcome", "hello this is socket server!")
 
     //take userId and socketId from user
     socket.on("addUser", (userId) => {
@@ -84,7 +84,7 @@ io.on("connection", (socket) => {
     //send and get message
     socket.on("sendMessage", ({senderId, receiverId, text, convId})=>{
         const user = getUser(receiverId)
-        console.log("Сработал сокет sendMessage, user: ", user)
+        //console.log("Сработал сокет sendMessage, user: ", user)
         io.emit("getMessage", {
             senderId,
             text,
@@ -94,7 +94,7 @@ io.on("connection", (socket) => {
 
     //when disconnect
     socket.on("disconnect", ()=> {
-        console.log("a user disconnected!");
+        //console.log("a user disconnected!");
         removeUser(socket.id);
         io.emit("getUsers", users)
     })

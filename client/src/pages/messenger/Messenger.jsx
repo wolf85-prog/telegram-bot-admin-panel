@@ -90,7 +90,7 @@ export default function Messenger() {
     useEffect(()=>{
         socket.current.emit("addUser", chatAdminId)
         socket.current.on("getUsers", users => {
-            console.log("users: ", users);
+            //console.log("users: ", users);
         })
     },[chatAdminId])
 //------------------------------------------------------------------------------------------------    
@@ -130,7 +130,7 @@ export default function Messenger() {
             try {
                 const res = await $host.get("api/userbots/" + friendId);
                 setUser(res.data);
-                console.log('currentUser: ', user)
+                //console.log('currentUser: ', user)
             } catch (err) {
               console.log(err);
             }
