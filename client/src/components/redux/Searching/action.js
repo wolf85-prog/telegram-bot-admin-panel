@@ -1,4 +1,4 @@
-import { $authHost, $host } from './../../../http/index'
+import { $authHost, $host } from '../../../http/index'
 
 export const SEARCH_LOADING = "SEARCH_LOADING";
 export const SEARCH_ERROR = "SEARCH_ERROR";

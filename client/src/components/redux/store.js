@@ -1,3 +1,4 @@
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { notyficationReducer } from "./Notification/reducer";
 import { recentChatReducer } from "./RecentChat/reducer";
 import { serachReducer } from "./Searching/reducer";

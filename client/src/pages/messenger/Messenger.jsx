@@ -18,9 +18,10 @@ import Message from '../../components/message/Message'
 import Notificationcomp from '../../components/chat/Notificationcomp'
 import {Context} from "../../index";
 import {io} from "socket.io-client"
-import { useDispatch } from "react-redux";
-import { makeSearchApi } from "./Redux/Searching/action";
 
+import { useDispatch } from "react-redux";
+import { makeSearchApi } from "./../../components/Redux/Searching/action";
+import { useSelector } from "react-redux";
 
 import { $authHost, $host } from './../../http/index'
 
