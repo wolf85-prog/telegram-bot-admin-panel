@@ -9,6 +9,7 @@ const fileUpload = require('express-fileupload')
 const router = require('./routes/index')
 const conversationRoute = require('./routes/conversations')
 const messageRoute = require('./routes/messages')
+const userbotRoute = require('./routes/users')
 const errorHandler = require('./middleware/ErrorHandling')
 const path = require('path')
 
@@ -30,6 +31,7 @@ app.use(fileUpload({}))
 app.use('/api', router)
 app.use('/api/conversations', conversationRoute)
 app.use('/api/messages', messageRoute)
+app.use('/api/userbots', userbotRoute)
 
 // Certificate
 const privateKey = fs.readFileSync('privkey.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/privkey.pem', 'utf8');
