@@ -31,7 +31,7 @@ app.use(fileUpload({}))
 app.use('/api', router)
 app.use('/api/conversations', conversationRoute)
 app.use('/api/messages', messageRoute)
-app.use('/api/userbots', userbotRoute)
+//app.use('/api/userbots', userbotRoute)
 
 // Certificate
 const privateKey = fs.readFileSync('privkey.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/privkey.pem', 'utf8');
