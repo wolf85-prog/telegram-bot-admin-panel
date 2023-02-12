@@ -10,8 +10,8 @@ class UserbotController {
     }
 
     async getAll(req, res) {
-        const messages = await UserBot.findAll()
-        return res.json(messages)
+        const users = await UserBot.findAll()
+        return res.json(users)
     }
 
     async getOne(req, res) {

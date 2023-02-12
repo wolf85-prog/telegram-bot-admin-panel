@@ -1,4 +1,5 @@
-import React, { useContext, createRef, Suspense, useState, useRef, useEffect } from 'react'
+import React, { useContext, useMemo, createRef, Suspense, useState, useRef, useEffect } from 'react'
+import { CFormSelect } from '@coreui/react'
 import InputEmoji from "react-input-emoji";
 import SearchIcon from "@mui/icons-material/Search";
 import CallIcon from "@mui/icons-material/Call";
@@ -18,11 +19,7 @@ import Message from '../../components/message/Message'
 import Notificationcomp from '../../components/chat/Notificationcomp'
 import {Context} from "../../index";
 import {io} from "socket.io-client"
-import MySelect from 'src/UI/select/MySelect';
-
-// import { useDispatch } from "react-redux";
-// import { makeSearchApi } from "../../components/Redux/Searching/action";
-// import { useSelector } from "react-redux";
+import {useMessages} from "../../hooks/useMessages"
 
 import { $authHost, $host } from './../../http/index'
 
@@ -32,6 +29,7 @@ export default function Messenger() {
     const [currentChatId, setCurrentChatId] = useState(null);
     const [user, setUser] = useState(null)
     const [userId, setUserId] = useState(null)
+    const [users, setUsers] = useState([])
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -42,7 +40,7 @@ export default function Messenger() {
     const [selectedSort, setSelectedSort] = useState('');
 
 
-    //const socket = useRef(io("https://proj.uley.team:9000"))
+    const socket = useRef(io("https://proj.uley.team:9000"))
     const scrollRef = useRef();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
     const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
@@ -51,52 +49,68 @@ export default function Messenger() {
 
     //const {user} = useContext(Context)
 
+    //отсортированный массив
+    const sortedAndSearchedUsers = useMessages(conversations, searchQuery);
+
 //socket
 //-----------------------------------------------------------------------------    
-    // useEffect(() => {
+    useEffect(() => {
 
-    //    // socket.current = io("https://proj.uley.team:9000");
-    //     socket.current.on("getMessage", data => {
+        socket.current = io("https://proj.uley.team:9000");
+        socket.current.on("getMessage", data => {
            
-    //         setCountMess(countMess + 1)
-    //         console.log("count: ", countMess + 1) 
+            setCountMess(countMess + 1)
+            console.log("count: ", countMess + 1) 
 
-    //         setUserId(data.convId)
+            setUserId(data.convId)
 
-    //         const getConversations = async () => {
-    //             try {
-    //               const res = await $host.get("api/conversations/" + chatAdminId);
-    //               setConversations([...res.data, {id: data.convId, members: [data.senderId, chatAdminId], createdAt: '', updatedAt: ''}]);
-    //             } catch (err) {
-    //               console.log(err);
-    //             }
-    //         };
+            const getConversations = async () => {
+                try {
+                  const res = await $host.get("api/conversations/" + chatAdminId);
+                  setConversations([...res.data, {id: data.convId, members: [data.senderId, chatAdminId], createdAt: '', updatedAt: ''}]);
+                } catch (err) {
+                  console.log(err);
+                }
+            };
       
-    //         getConversations();   
+            getConversations();   
 
-    //         setArrivalMessage({
-    //             sender: data.senderId,
-    //             text: data.text,
-    //             createdAt: Date.now(),
-    //         })
-    //     })
-    //     // socket?.current.on("welcome", message=> {
-    //     //     console.log(message)
-    //     // })
-    // },[socket, conversations, chatAdminId])
+            setArrivalMessage({
+                sender: data.senderId,
+                text: data.text,
+                createdAt: Date.now(),
+            })
+        })
+        // socket?.current.on("welcome", message=> {
+        //     console.log(message)
+        // })
+    },[socket, conversations, chatAdminId])
 
-    // useEffect(()=>{
-    //     arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
-    //     setMessages((prev) => [...prev, arrivalMessage])
-    // },[arrivalMessage, currentChat])
+    useEffect(()=>{
+        arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
+        setMessages((prev) => [...prev, arrivalMessage])
+    },[arrivalMessage, currentChat])
 
-    // useEffect(()=>{
-    //     socket.current.emit("addUser", chatAdminId)
-    //     socket.current.on("getUsers", users => {
-    //         //console.log("users: ", users);
-    //     })
-    // },[chatAdminId])
-//------------------------------------------------------------------------------------------------    
+    useEffect(()=>{
+        socket.current.emit("addUser", chatAdminId)
+        socket.current.on("getUsers", users => {
+            //console.log("users: ", users);
+        })
+    },[chatAdminId])
+//------------------------------------------------------------------------------------------------   
+
+    useEffect(() => {
+        const getUsers = async () => {
+        try {
+            const res = await $host.get("api/userbots/");
+            setUsers(res.data);
+
+        } catch (err) {
+            console.log(err);
+        }
+        };
+        getUsers();
+    }, []);
 
     useEffect(() => {
         const getConversations = async () => {
@@ -139,17 +153,6 @@ export default function Messenger() {
           };
           getUser();
     },[currentChat, chatAdminId])
-
-
-    const handleQuery = (e) => {
-        let id;
-        return function (e) {
-          if (!e.target.value) {
-            setSearch(false);
-            return;
-          }
-        };
-    };
 
 
     const handleChat = async (c) => {
@@ -223,9 +226,9 @@ export default function Messenger() {
     }
 
     const sortConversations = (sort) => {
-        //setSelectedSort(sort)
-        //setConversations([...conversations].sort((a, b) => a[sort].localeCompare(b[sort])))
-        console.log(sort)
+        setSelectedSort(sort)
+        setConversations([...conversations].sort((a, b) => a[sort].localeCompare(b[sort])))
+        //console.log("conversations: ", conversations)
     }
  
     return (
@@ -254,21 +257,21 @@ export default function Messenger() {
                                     placeholder="Поиск пользователя"
                                 />
                             </div>
-                            <div>
-                                <MySelect
+                            {/* <div style={{padding: "10px, 20px"}}>
+                                <CFormSelect 
+                                    aria-label="Default select example"
                                     value={selectedSort}
-                                    onСhange={sortConversations}
-                                    defaultValue="Сортировка"
+                                    onChange={e=>sortConversations(e.target.value)}
                                     options={[
-                                        {value: 'title', name: 'По фамилии и имени'},
-                                        {value: 'body', name: 'По сообщению'}
+                                        'Сортировка',
+                                        { label: 'По фамилии и имени', value: 'title' },
+                                        { label: 'По сообщению', value: 'body' },
                                     ]}
                                 />
-
-                            </div>
+                            </div> */}
                             <div className="recent-chat">                            
                                 <div className="recent-user">
-                                    {conversations.slice(0).reverse().map((c, index) => (
+                                    {sortedAndSearchedUsers.map((c, index) => ( //.slice(0).reverse()
                                         <div key={c.id} onClick={()=>handleChat(c)}>
                                             <Conversation 
                                                 conversation={c} 
