@@ -40,7 +40,7 @@ export default function Messenger() {
     const [selectedSort, setSelectedSort] = useState('');
 
 
-    const socket = useRef(io("https://proj.uley.team:9000"))
+    //const socket = useRef(io("https://proj.uley.team:9000"))
     const scrollRef = useRef();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
     const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
@@ -54,49 +54,49 @@ export default function Messenger() {
 
 //socket
 //-----------------------------------------------------------------------------    
-    useEffect(() => {
+    // useEffect(() => {
 
-        socket.current = io("https://proj.uley.team:9000");
-        socket.current.on("getMessage", data => {
+    //     socket.current = io("https://proj.uley.team:9000");
+    //     socket.current.on("getMessage", data => {
            
-            setCountMess(countMess + 1)
-            console.log("count: ", countMess + 1) 
+    //         setCountMess(countMess + 1)
+    //         console.log("count: ", countMess + 1) 
 
-            setUserId(data.convId)
+    //         setUserId(data.convId)
 
-            const getConversations = async () => {
-                try {
-                  const res = await $host.get("api/conversations/" + chatAdminId);
-                  setConversations([...res.data, {id: data.convId, members: [data.senderId, chatAdminId], createdAt: '', updatedAt: ''}]);
-                } catch (err) {
-                  console.log(err);
-                }
-            };
+    //         const getConversations = async () => {
+    //             try {
+    //               const res = await $host.get("api/conversations/" + chatAdminId);
+    //               setConversations([...res.data, {id: data.convId, members: [data.senderId, chatAdminId], createdAt: '', updatedAt: ''}]);
+    //             } catch (err) {
+    //               console.log(err);
+    //             }
+    //         };
       
-            getConversations();   
+    //         getConversations();   
 
-            setArrivalMessage({
-                sender: data.senderId,
-                text: data.text,
-                createdAt: Date.now(),
-            })
-        })
-        // socket?.current.on("welcome", message=> {
-        //     console.log(message)
-        // })
-    },[socket, conversations, chatAdminId])
+    //         setArrivalMessage({
+    //             sender: data.senderId,
+    //             text: data.text,
+    //             createdAt: Date.now(),
+    //         })
+    //     })
+    //     // socket?.current.on("welcome", message=> {
+    //     //     console.log(message)
+    //     // })
+    // },[socket, conversations, chatAdminId])
 
-    useEffect(()=>{
-        arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
-        setMessages((prev) => [...prev, arrivalMessage])
-    },[arrivalMessage, currentChat])
+    // useEffect(()=>{
+    //     arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
+    //     setMessages((prev) => [...prev, arrivalMessage])
+    // },[arrivalMessage, currentChat])
 
-    useEffect(()=>{
-        socket.current.emit("addUser", chatAdminId)
-        socket.current.on("getUsers", users => {
-            //console.log("users: ", users);
-        })
-    },[chatAdminId])
+    // useEffect(()=>{
+    //     socket.current.emit("addUser", chatAdminId)
+    //     socket.current.on("getUsers", users => {
+    //         //console.log("users: ", users);
+    //     })
+    // },[chatAdminId])
 //------------------------------------------------------------------------------------------------   
 
     useEffect(() => {

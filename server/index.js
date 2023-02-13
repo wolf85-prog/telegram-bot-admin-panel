@@ -12,6 +12,7 @@ const messageRoute = require('./routes/messages')
 const userbotRoute = require('./routes/users')
 const errorHandler = require('./middleware/ErrorHandling')
 const path = require('path')
+const bodyParser = require("body-parser");
 
 //import { Server } from 'socket.io'
 //import onConnection from './socket_io/onConnection.js'
@@ -26,6 +27,8 @@ const app = express();
 
 app.use(cors())
 app.use(express.json())
+app.use(bodyParser.json({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static(path.resolve(__dirname, 'static')))
 app.use(fileUpload({}))
 app.use('/api', router)
@@ -57,9 +60,6 @@ const start = async () => {
         httpsServer.listen(port, () => {
             console.log('HTTPS Server Admin-panel running on port ' + port);
         });
-        // app.listen(port, () => {
-        //     console.log('HTTPS Server Admin-panel running on port ' + port);
-        // })
 
     } catch (error) {
         console.log('Подключение к БД сломалось!', error)

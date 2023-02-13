@@ -8,6 +8,7 @@ const cors = require('cors');
 
 const PORT = 9000;
 const app = express();
+app.use(cors())
 // app.use(cors({
 //     origin:"https://proj.uley.team:3000",
 //     origin:"https://proj.uley.team:8000",
@@ -26,11 +27,6 @@ const credentials = {
 
 const httpsServer = https.createServer(credentials, app);
 
-// const server = app.listen(PORT, function () {
-//     console.log(`Listening on port ${PORT}`);
-//     console.log(`http://proj.uley.team:${PORT}`);
-//   });
-
 httpsServer.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
     console.log(`https://proj.uley.team:${PORT}`);
@@ -42,7 +38,6 @@ const io = socket(httpsServer, {
         origin:"https://proj.uley.team:3000"
     }
 });
-
 
 // const io = require("socket.io")(9000, {
 //     cors:{
@@ -69,11 +64,6 @@ const getUser = (userId)=>{
 
 
 io.on("connection", (socket) => {
-    //when connect
-    //console.log("a user connected")
-    
-    // Отправляем всем кто подключился сообщение привет
-    //io.emit("welcome", "hello this is socket server!")
 
     //take userId and socketId from user
     socket.on("addUser", (userId) => {
@@ -84,7 +74,6 @@ io.on("connection", (socket) => {
     //send and get message
     socket.on("sendMessage", ({senderId, receiverId, text, convId})=>{
         const user = getUser(receiverId)
-        //console.log("Сработал сокет sendMessage, user: ", user)
         io.emit("getMessage", {
             senderId,
             text,
@@ -94,7 +83,6 @@ io.on("connection", (socket) => {
 
     //when disconnect
     socket.on("disconnect", ()=> {
-        //console.log("a user disconnected!");
         removeUser(socket.id);
         io.emit("getUsers", users)
     })

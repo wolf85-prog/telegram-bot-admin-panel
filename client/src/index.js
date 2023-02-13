@@ -1,6 +1,6 @@
 import 'react-app-polyfill/stable'
 import 'core-js'
-import React, {createContext} from 'react'
+import React, {createContext, useState} from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App'
 import { Provider } from 'react-redux'
@@ -16,7 +16,7 @@ createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <Context.Provider value={{
-          user: new UserStore(),
+          user: new UserStore()
       }}>
         <App />
       </Context.Provider>  
