@@ -1,4 +1,4 @@
-const {UserBot} = require('../models/models')
+const UserBot = require('../models/UserBot')
 const ApiError = require('../error/ApiError')
 
 class UserbotController {

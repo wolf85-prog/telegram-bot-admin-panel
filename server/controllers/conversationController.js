@@ -1,4 +1,3 @@
-//const {Conversation} = require('../models/models')
 const Conversation = require("../models/Conversation.js");
 
 const { Op } = require('sequelize')

@@ -1,4 +1,3 @@
-//const {Message} = require('../models/models')
 const Message = require('../models/Message')
 const ApiError = require('../error/ApiError')
 const uuid = require('uuid')
