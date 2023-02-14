@@ -1,23 +1,40 @@
-const {Message} = require('../models/models')
+//const {Message} = require('../models/models')
+const Message = require('../models/Message')
 const ApiError = require('../error/ApiError')
 const uuid = require('uuid')
 const path = require('path')
 
 class MessageController {
 
-    async create(req, res) {
-        const {text} = req.body
-        const message = await Message.create({text})
-        return res.json(message)
+    //add message
+    async newMessage(req, res) {
+        const {conversationId, text, from, to, messageType} = req.body
+        try {
+            await Message.create({conversationId, text, from, to, messageType})
+            return res.status(200).json("Message has been sent successfully");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
     }
 
-    async getAll(req, res) {
-        const messages = await Message.findAll()
-        return res.json(messages)
+    //get message conversation
+    async getMessages(req, res) {
+        const conversationId = req.params.id
+        try {           
+            const messages = await Message.findAll({where: {conversationId}})
+            return res.status(200).json(messages);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
     }
 
-    async getOne(req, res) {
-
+    async getAllMessages(req, res) {
+        try {           
+            const messages = await Message.findAll()
+            return res.status(200).json(messages);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
     }
 }
 

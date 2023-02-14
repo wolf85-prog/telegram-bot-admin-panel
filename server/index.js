@@ -6,19 +6,10 @@ const cors = require('cors')
 const fs = require('fs');
 const https = require('https')
 const fileUpload = require('express-fileupload')
-const router = require('./routes/index')
-const conversationRoute = require('./routes/conversations')
-const messageRoute = require('./routes/messages')
-const userbotRoute = require('./routes/users')
+const Route = require('./routes/route')
 const errorHandler = require('./middleware/ErrorHandling')
 const path = require('path')
 const bodyParser = require("body-parser");
-
-//import { Server } from 'socket.io'
-//import onConnection from './socket_io/onConnection.js'
-//import { getFilePath } from './utils/file.js'
-//import onError from './utils/onError.js'
-//const upload = require('./utils/upload.js')
 
 // Port that the webserver listens to
 const port = process.env.PORT || 5000;
@@ -31,10 +22,8 @@ app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static(path.resolve(__dirname, 'static')))
 app.use(fileUpload({}))
-app.use('/api', router)
-app.use('/api/conversations', conversationRoute)
-app.use('/api/messages', messageRoute)
-//app.use('/api/userbots', userbotRoute)
+
+app.use("/api'", Route);
 
 // Certificate
 const privateKey = fs.readFileSync('privkey.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/privkey.pem', 'utf8');

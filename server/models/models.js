@@ -19,24 +19,30 @@ const UserBot = sequelize.define('userbot', {
 const Message = sequelize.define('message', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     conversationId: {type: DataTypes.STRING},
-    messageType: {type: DataTypes.STRING},      //тип сообщения;
+    senderId: {type: DataTypes.STRING},
+    receiverId: {type: DataTypes.STRING},    
     text: {type: DataTypes.STRING}, //текст сообщения;
-    img: {type: DataTypes.STRING}, //путь к файлу;
-    to: {type: DataTypes.STRING},
-    from: {type: DataTypes.STRING},
+    type: {type: DataTypes.STRING},      //тип сообщения;
     is_bot: {type: DataTypes.BOOLEAN},
 })
 
 const Conversation = sequelize.define('conversation', {
     members: {type: DataTypes.ARRAY(DataTypes.STRING)},
+    message: {type:DataTypes.STRING},
 })
 
-//UserBot.hasMany(Message)
-//Message.belongsTo(UserBot)
+const Project = sequelize.define('project', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    name: {type: DataTypes.STRING},  //название проекта
+    datestart: {type: DataTypes.STRING},  //дата начала проекта
+    spec: {type: DataTypes.STRING},
+    equipment: {type: DataTypes.STRING},
+    teh: {type: DataTypes.STRING},
+    geo: {type: DataTypes.STRING},
+    managerId: {type: DataTypes.STRING},
+    companyId: {type: DataTypes.STRING},
+    projectId: {type: DataTypes.STRING},
+    chatId: {type: DataTypes.STRING},
+})
 
-module.exports = {
-    User,
-    UserBot,
-    Message,
-    Conversation
-}
+module.exports = {User, UserBot, Message, Conversation, Project}

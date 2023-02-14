@@ -3,25 +3,41 @@ const ApiError = require('../error/ApiError')
 
 class UserbotController {
 
-    async create(req, res) {
-        const {first_name, last_name, chatId} = req.body
-        const userbot = await UserBot.create({first_name, last_name, chatId})
-        return res.json(userbot)
+    async addUser(req, res) {       
+        try {    
+            let exist=await User.findOne( {sub: request.body.sub})
+            
+            if(exist){
+                response.status(200).json({msg: "user already exist"});
+                return;
+            }
+
+            const {first_name, last_name, chatId} = req.body
+
+            const newUser = await UserBot.create({first_name, last_name, chatId})
+            return res.status(200).json(newUser);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
     }
 
-    async getAll(req, res) {
-        const users = await UserBot.findAll()
-        return res.json(users)
+    async getUsers(req, res) {
+        try {
+            const users = await UserBot.findAll()
+            return res.status(200).json(users);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
     }
 
-    async getOne(req, res) {
+    async getUser(req, res) {
         const {id} = req.params
         try {
             const userbot = await UserBot.findOne({where: {chatId: id}})
             return res.status(200).json(userbot);
-          } catch (err) {
+        } catch (err) {
             return res.status(500).json(err);
-          }
+        }
     }
 }
 
