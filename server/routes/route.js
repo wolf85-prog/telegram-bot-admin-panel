@@ -1,4 +1,5 @@
-import express, { Router } from "express"
+const Router = require('express')
+const route = new Router()
 const userController = require('../controllers/userController')
 const authMiddleware = require('../middleware/authMiddleware')
 const { newMessage, getMessages, getAllMessages } = require('../controllers/messageController')
@@ -6,8 +7,6 @@ const { newConversation, getConversation } = require('../controllers/conversatio
 const { addUser, getUsers, getUser } = require('../controllers/userbotController')
 // const { uploadFile, getImage } = require( "../controller/image-controller.js")
 // const upload = require( "../utils/upload.js")
-
-const route = express.Router();
 
 route.post('/user/registration', userController.registration)
 route.post('/user/login', userController.login)
