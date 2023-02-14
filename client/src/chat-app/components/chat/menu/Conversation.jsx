@@ -9,13 +9,13 @@ import { Avatar, Badge } from "@mui/material"
 function Conversation({ user }) {
 
     const { setPerson, account, newMessageFlag } = useContext(AccountContext);
-
+    const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
     const [message, setMessage] = useState({});
 
     useEffect(() => {
         const getConversationDetails = async () => {
-            const data = await getConversation({ senderId: account.sub, reciverId: user.sub })
-            setMessage({ text: data?.message, timestamp: data?.updatedAt })
+            const data = await getConversation({ senderId: account.chatId, reciverId: chatAdminId })
+            setMessage({ text: data?.message, updatedAt: data?.updatedAt })
         }
         getConversationDetails();
     }, [newMessageFlag])
