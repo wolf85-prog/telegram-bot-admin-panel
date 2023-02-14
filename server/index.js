@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static(path.resolve(__dirname, 'static')))
 app.use(fileUpload({}))
 
-app.use("/api'", Route);
+app.use('/api', Route);
 
 // Certificate
 const privateKey = fs.readFileSync('privkey.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/privkey.pem', 'utf8');
