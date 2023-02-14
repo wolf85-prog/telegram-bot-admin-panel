@@ -29,7 +29,7 @@ class ConversationController {
         try {
             const chatId = req.params.id
     
-            const conversation = await Conversation.findAll({
+            const conversation = await Conversation.findOne({
                 where: {
                     members: {
                         [Op.contains]: [chatId]
