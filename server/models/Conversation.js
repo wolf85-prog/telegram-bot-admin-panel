@@ -7,4 +7,4 @@ const Conversation = sequelize.define('conversation', {
 })
 
 
-module.exports = {Conversation}
+module.exports = Conversation
