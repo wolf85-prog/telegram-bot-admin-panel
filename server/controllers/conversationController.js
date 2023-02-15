@@ -18,7 +18,7 @@ class ConversationController {
                 },
             }) 
             if (exist.length !== 0) {
-                return response.status(200).json(`conversation already exist`);
+                return res.status(200).json(`conversation already exist`);
             }
 
             await Conversation.create({
