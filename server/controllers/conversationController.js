@@ -10,13 +10,18 @@ class ConversationController {
         try {
             const {senderId, receiverId} = req.body
 
-            console.log("senderId: ", senderId)
-
             //найти беседу
-            const exist = await Conversation.findOne({where: { members: {[Op.contains]: [senderId]} }}) 
-            if(exist) {
-                return response.status(200).json(`conversation already exist`);
-            }
+            const exist = await Conversation.findOne({
+                where: { 
+                    members: {
+                        [Op.contains]: [senderId]
+                    } 
+                },
+            }) 
+            return response.status(200).json(`conversation already exist`, exist);
+            // if(exist) {
+            //     return response.status(200).json(`conversation already exist`);
+            // }
 
             await Conversation.create({
                 members: [senderId, receiverId]
