@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Typography, styled } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
 import { AccountContext } from '../../../context/AccountProvider'
-//import { setConversation, getConversation } from '../../../service/api'
+import { setConversation, getConversation } from './../../../../http/chatAPI'
 import { formatDate } from '../../../utils/common-utils'
 import { Avatar, Badge } from "@mui/material"
 import { $authHost, $host } from './../../../../http/index'
@@ -15,25 +15,16 @@ function Conversation({ user }) {
 
     useEffect(() => {
         const getConversationDetails = async () => {
-            const data = await getConversation({ senderId: user.chatId, reciverId: chatAdminId })
+            const data = await getConversation(user.chatId)
             setMessage({ text: data?.message, updatedAt: data?.updatedAt })
         }
         getConversationDetails();
     }, [newMessageFlag])
 
-    const getConversation = async (data) => {
-        try {
-            const res = await $host.get("api/conversation/get/" + data.senderId);
-            return res.data;
-        } catch (error) {
-            console.log("error while calling getConversation api", error.message);
-        }
-    };
-
 
     const getUser = async () => {
         setPerson(user);
-        //await setConversation({ senderId: account.sub, reciverId: user.sub })
+        await setConversation({ senderId: account.sub, reciverId: chatAdminId })
         console.log("account: ", user) 
     }
 
