@@ -4,22 +4,22 @@ import ChatHeader from './ChatHeader';
 import Messages from './Messages';
 import { useContext } from 'react';
 import { AccountContext } from '../../../context/AccountProvider';
-import { getConversation } from '../../../service/api';
+import { getConversation } from './../../../../http/chatAPI';
 
 
 function ChatBox() {
     
-    //const { person, account } = useContext(AccountContext);
+    const { person, account } = useContext(AccountContext);
     const [conversation, setConversation] = useState({});
 
-    // useEffect(()=>{
-    //     const getConversationDetails = async()=>{
-    //        let data = await getConversation({ senderId: account.sub, reciverId: person.sub})
-    //        setConversation(data);
-    //        //console.log(conversation,"adasfa");
-    //     }
-    //     getConversationDetails();
-    // },[person.sub]);
+    useEffect(()=>{
+        const getConversationDetails = async()=>{
+           let data = await getConversation({ senderId: person.chatId, reciverId: person.chatId})
+           setConversation(data);
+           //console.log(conversation,"adasfa");
+        }
+        getConversationDetails();
+    },[person.sub]);
   
     return (
         <Box style={{ height: "75%" }}>

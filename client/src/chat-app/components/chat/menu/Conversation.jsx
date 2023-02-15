@@ -4,8 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import { AccountContext } from '../../../context/AccountProvider'
 import { setConversation, getConversation } from './../../../../http/chatAPI'
 import { formatDate } from '../../../utils/common-utils'
-import { Avatar, Badge } from "@mui/material"
-import { $authHost, $host } from './../../../../http/index'
+import { Avatar } from "@mui/material"
 
 function Conversation({ user }) {
 
@@ -24,8 +23,7 @@ function Conversation({ user }) {
 
     const getUser = async () => {
         setPerson(user);
-        await setConversation({ senderId: account.sub, reciverId: chatAdminId })
-        console.log("account: ", user) 
+        console.log("user: ", user) 
     }
 
 

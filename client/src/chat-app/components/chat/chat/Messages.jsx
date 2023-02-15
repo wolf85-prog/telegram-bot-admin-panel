@@ -3,14 +3,13 @@ import Footer from './Footer';
 import Message from './Message';
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { AccountContext } from "../../../context/AccountProvider"
-import { getMessages, newMessage, getConversation } from '../../../service/api';
+import { getMessages, newMessage, getConversation } from './../../../../http/chatAPI';
 
 const Messages = ({ conversation, person }) => {
 
-
     const [value, setValue] = useState("");
     const [messages, setMessages] = useState([]);
-    // const [newMessageFlag, setNewMessageFlag] = useState(false);
+    //const [newMessageFlag, setNewMessageFlag] = useState(false);
     const [file, setFile] = useState();
     const [image, setImage]= useState("");
     const [incomingMessage, setIncomingMessage]= useState(null);
@@ -19,32 +18,32 @@ const Messages = ({ conversation, person }) => {
     const { account, socket, newMessageFlag, setNewMessageFlag } = useContext(AccountContext);
 
 
-    useEffect(()=>{
-        socket.current.on("getMessage", data => {
-            setIncomingMessage({
-                ...data,
-                createdAt: Date.now()
-            })
-        })
-    },[])
+    // useEffect(()=>{
+    //     socket.current.on("getMessage", data => {
+    //         setIncomingMessage({
+    //             ...data,
+    //             createdAt: Date.now()
+    //         })
+    //     })
+    // },[])
 
 
     // const { person }= useContext(AccountContext);
-    //console.log(conversation,"yevala");
+    // console.log(conversation,"yevala");
 
 
     useEffect(() => {
 
-        // const getConversationDetails = async()=>{
-        //     let data = await getConversation({ senderId: account.sub, reciverId: person.sub})
-        //     setConversation(data);
-        //     //console.log(conversation,"adasfa");
-        //  }
-        //  getConversationDetails();
+        const getConversationDetails = async()=>{
+            let data = await getConversation({ senderId: account.sub, reciverId: person.sub})
+            //setConversation(data);
+            //console.log(conversation,"adasfa");
+         }
+         getConversationDetails();
 
 
         const getMessageDetails = async () => {
-            let data = await getMessages(conversation._id);
+            let data = await getMessages(conversation.id);
             console.log(data);
             setMessages(data);
 

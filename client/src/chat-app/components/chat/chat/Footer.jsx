@@ -2,10 +2,9 @@ import React from 'react'
 import { useEffect } from 'react';
 import { Box, InputBase, styled } from '@mui/material'
 import { EmojiEmotionsOutlined, AttachFile, Mic} from '@mui/icons-material';
-import { uploadFile } from '../../../service/api';
+import { uploadFile } from './../../../../http/chatAPI'
 
 function Footer({ sendText, setValue, value, file, setFile, setImage }) {
-
 
     useEffect(() => {
         const getImage = async () => {
@@ -42,7 +41,7 @@ function Footer({ sendText, setValue, value, file, setFile, setImage }) {
             />
             <Search>
                 <InputField
-                    placeholder='Type a message'
+                    placeholder='Написать сообщение'
                     onChange={(e) => setValue(e.target.value)}
                     onKeyPress={(e) => sendText(e)}
                     value={value}

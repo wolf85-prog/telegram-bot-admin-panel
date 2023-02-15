@@ -20,7 +20,7 @@ const dialogStyle={
 
 const ChatDialog =()=>{
    
-    const { person } = useContext(Context); //useContext(AccountContext); 
+    const { person } = useContext(AccountContext); 
    
     return(
         <Dialog
@@ -37,8 +37,8 @@ const ChatDialog =()=>{
             <RightComponent>
                 {/* <EmptyChat />
                 <ChatBox /> */}
-                {/* {Object.keys(person).length ? <ChatBox /> : <EmptyChat /> } */}
-                <EmptyChat />
+                {Object.keys(person).length ? <ChatBox /> : <EmptyChat /> }
+                {/* <EmptyChat /> */}
             </RightComponent>
         </Component>
 

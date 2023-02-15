@@ -21,7 +21,7 @@ function Header() {
         <>
             <Component>
                 {/* <Image src={account.picture} alt="dp" onClick={toggleDrawer} /> */}
-                <Avatar onClick={toggleDrawer}/>
+                <Avatar />
                 <Wrapper>
                     <MessageIcon />
                     <HeaderMenu setOpenDrawer={setOpenDrawer} />

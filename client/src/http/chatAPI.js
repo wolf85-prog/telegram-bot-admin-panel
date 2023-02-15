@@ -50,11 +50,11 @@ export const getMessages = async(id)=>{
     }
 }
 
-// export const uploadFile = async (data) =>{
-//     try {
-//         return await $host.post(`${url}/file/upload`, data);
-//     } catch (error) {
-//         console.log("error while calling uploadFile api",error.message);
+export const uploadFile = async (data) =>{
+    try {
+        return await $host.post(`api/file/upload`, data);
+    } catch (error) {
+        console.log("error while calling uploadFile api",error.message);
         
-//     }
-// }
+    }
+}

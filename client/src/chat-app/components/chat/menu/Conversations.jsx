@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { Box, styled, Divider } from '@mui/material';
 import Conversation from './Conversation';
 import { AccountContext } from '../../../context/AccountProvider';
+import { getUsers } from './../../../../http/chatAPI'
 import { $authHost, $host } from './../../../../http/index'
 
 
@@ -14,14 +15,14 @@ function Conversations({ text }) {
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
     const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         let response = await getUsers();
-    //         const filteredData = response.filter(user=> user.name.toLowerCase().includes(text.toLowerCase()));
-    //         setUsers(filteredData);
-    //     }
-    //     fetchData();
-    // }, [text]);
+    useEffect(() => {
+        const fetchData = async () => {
+            let response = await getUsers();
+            const filteredData = response.filter(user=> (user.firstname + user.lastname).toLowerCase().includes(text.toLowerCase()));
+            setUsers(filteredData);
+        }
+        fetchData();
+    }, [text]);
 
     // useEffect(()=>{
     //     socket.current.emit("addUsers", account);
@@ -30,23 +31,13 @@ function Conversations({ text }) {
     //     })
     // }, [account])
 
-    //------------------------------------------------------
-    useEffect(() => {
-        const getUsers = async () => {
-            let response = await $host.get("api/userbots/get");
-            const filteredData = response.data.filter(user=> (user.firstname + user.lastname).toLowerCase().includes(text.toLowerCase()));
-            setUsers(filteredData);
-        }
-        getUsers();
-    },[text]);
-
 
     return (
             
         <Component>
             {
                 users.map(user =>(
-                    //user.sub !== account.sub &&
+                    user.chatId !== chatAdminId &&
                     <>   
                         <Conversation user={user} />
                         <StyledDivider />
