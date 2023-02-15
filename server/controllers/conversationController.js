@@ -1,5 +1,4 @@
 const Conversation = require("../models/Conversation");
-
 const { Op } = require('sequelize')
 const ApiError = require('../error/ApiError')
 
@@ -18,17 +17,16 @@ class ConversationController {
                     } 
                 },
             }) 
-            return response.status(200).json(`conversation already exist`, exist);
-            // if(exist) {
-            //     return response.status(200).json(`conversation already exist`);
-            // }
+            if (exist.length !== 0) {
+                return response.status(200).json(`conversation already exist`);
+            }
 
             await Conversation.create({
                 members: [senderId, receiverId]
             }) 
             return res.status(200).json(`coversation saved sucessfully`)
         } catch (error) {
-            return res.status(500).json(error)
+            return res.status(500).json(error.message)
         }
     }
     
