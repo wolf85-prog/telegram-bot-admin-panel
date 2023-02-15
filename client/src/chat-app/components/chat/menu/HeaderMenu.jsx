@@ -23,7 +23,7 @@ function HeaderMenu( {setOpenDrawer} ) {
                 keepMounted
                 open={open}
                 onClose={handleClose}
-                getContentAnchorE1={null}
+                getcontentanchore1={null}
                 anchorOrigin= {{
                     vertical: "bottom",
                     horizontal: "center"

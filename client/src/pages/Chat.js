@@ -4,7 +4,6 @@ import './../chat-app/style/index.css';
 
 const Chat = () => {
     return (        
-
         <Messenger />
     );
 }

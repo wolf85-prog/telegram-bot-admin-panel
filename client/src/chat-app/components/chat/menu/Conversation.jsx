@@ -22,8 +22,11 @@ function Conversation({ user }) {
 
 
     const getUser = async () => {
-        setPerson(user);
-        console.log("user: ", user) 
+        setPerson({
+            name: user.firstname  + ' ' + user.lastname, 
+            id: user.chatId
+        });
+        console.log("person: ", user) 
     }
 
 

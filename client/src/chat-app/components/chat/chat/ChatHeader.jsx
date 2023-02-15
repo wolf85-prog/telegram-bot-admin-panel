@@ -5,21 +5,21 @@ import { Box, Typography, styled } from "@mui/material"
 import { Search, MoreVert } from "@mui/icons-material";
 import { defaultProfilePicture } from '../../../constants/data';
 import { borderRadius } from '@mui/system';
-
+import { Avatar } from "@mui/material"
 
 function ChatHeader({ person }) {
   
-   // const { activeUsers } = useContext(AccountContext);
-  
-  
-  
+   const { activeUsers } = useContext(AccountContext);
+
   
     return (
         <Header>
             {/* <Image src={person.picture} alt='dp' /> */}
+            <Avatar />
             <Box>
-                <Name>name</Name>
+                <Name>{person.name}</Name>
                 {/* <Status>{activeUsers?.find(user => user.sub === person.sub) ? "Online" : "Offline" }</Status> */}
+                <Status>{"Offline"}</Status>
             </Box>
             <RightContainer>
                 <Search />

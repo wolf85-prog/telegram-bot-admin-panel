@@ -26,32 +26,49 @@ const Messages = ({ conversation, person }) => {
     //         })
     //     })
     // },[])
+//----------------------- my socket ------------------------
+     //     socket.current.on("getMessage", data => {
+           
+    //         setCountMess(countMess + 1)
+    //         console.log("count: ", countMess + 1) 
 
+    //         setUserId(data.convId)
 
-    // const { person }= useContext(AccountContext);
-    // console.log(conversation,"yevala");
+    //         const getConversations = async () => {
+    //             try {
+    //               const res = await $host.get("api/conversations/" + chatAdminId);
+    //               setConversations([...res.data, {id: data.convId, members: [data.senderId, chatAdminId], createdAt: '', updatedAt: ''}]);
+    //             } catch (err) {
+    //               console.log(err);
+    //             }
+    //         };
+      
+    //         getConversations();   
+
+    //         setArrivalMessage({
+    //             sender: data.senderId,
+    //             text: data.text,
+    //             createdAt: Date.now(),
+    //         })
+    //     })
+    //     // socket?.current.on("welcome", message=> {
+    //     //     console.log(message)
+    //     // })
+    // },[socket, conversations, chatAdminId])
 
 
     useEffect(() => {
 
-        const getConversationDetails = async()=>{
-            let data = await getConversation({ senderId: account.sub, reciverId: person.sub})
-            //setConversation(data);
-            //console.log(conversation,"adasfa");
-         }
-         getConversationDetails();
-
-
         const getMessageDetails = async () => {
             let data = await getMessages(conversation.id);
-            console.log(data);
+            console.log("messages: ", data);
             setMessages(data);
 
 
         }
-        conversation._id && getMessageDetails();
+        conversation.id && getMessageDetails();
 
-    }, [person._id, conversation._id, newMessageFlag])
+    }, [person.id, conversation.id, newMessageFlag])
 
     useEffect(()=>{
         scrollRef.current?.scrollIntoView({transition: "smooth"})
@@ -71,23 +88,23 @@ const Messages = ({ conversation, person }) => {
 
                 message = {
                     senderId: account.sub,
-                    reciverId: person.sub,
-                    conversationId: conversation._id,
+                    reciverId: person.id,
+                    conversationId: conversation.id,
                     type: "text",
                     text: value
                 }
             } else {
                 message = {
                     senderId: account.sub,
-                    reciverId: person.sub,
-                    conversationId: conversation._id,
+                    reciverId: person.id,
+                    conversationId: conversation.id,
                     type: "file",
                     text: image
                 }
             }
             console.log(message);
 
-            socket.current.emit("sendMessage", message);
+            //socket.current.emit("sendMessage", message);
             
             await newMessage(message);
 
@@ -102,9 +119,9 @@ const Messages = ({ conversation, person }) => {
         <Wrapper>
             <Component>
                 {
-                    messages && messages.map(message => (
+                    messages && messages.map((message, index) => (
 
-                        <Container key={person._id} ref={scrollRef}>
+                        <Container key={person.id+index} ref={scrollRef}>
                             <Message message={message} />
                         </Container>
 

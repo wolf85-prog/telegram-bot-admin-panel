@@ -9,12 +9,13 @@ import { iconPDF } from "../../../constants/data";
 const Message = ({ message }) => {
 
     const { account } = useContext(AccountContext);
+    const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
     return (
 
         <>
             {
-                account.sub === message.senderId ?
+                chatAdminId === message.senderId ?
                     <Own>
 
                         {

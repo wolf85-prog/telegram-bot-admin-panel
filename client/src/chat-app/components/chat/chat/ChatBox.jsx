@@ -12,21 +12,21 @@ function ChatBox() {
     const { person, account } = useContext(AccountContext);
     const [conversation, setConversation] = useState({});
 
+    console.log("chatbox person: ", person)
+
     useEffect(()=>{
         const getConversationDetails = async()=>{
-           let data = await getConversation({ senderId: person.chatId, reciverId: person.chatId})
+           let data = await getConversation(person.id)
            setConversation(data);
-           //console.log(conversation,"adasfa");
+           console.log("conversation: ", data);
         }
         getConversationDetails();
-    },[person.sub]);
+    },[person.id]);
   
     return (
         <Box style={{ height: "75%" }}>
-            {/* <ChatHeader person={person} />
-            <Messages person={person} conversation={conversation} /> */}
-            <ChatHeader />
-            <Messages />
+            <ChatHeader person={person} />
+            <Messages person={person} conversation={conversation} />
         </Box>
     )
 }

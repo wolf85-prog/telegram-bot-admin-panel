@@ -36,10 +36,10 @@ function Conversations({ text }) {
             
         <Component>
             {
-                users.map(user =>(
+                users.map((user, index) =>(
                     user.chatId !== chatAdminId &&
                     <>   
-                        <Conversation user={user} />
+                        <Conversation key={user.id+index} user={user} />
                         <StyledDivider />
                     </>
                 ))
