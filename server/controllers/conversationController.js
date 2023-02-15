@@ -10,7 +10,7 @@ class ConversationController {
         try {
             const {senderId, receiverId} = req.body
 
-            console("senderId: ", senderId)
+            console.log("senderId: ", senderId)
 
             //найти беседу
             const exist = await Conversation.findOne({where: { members: {[Op.contains]: [senderId]} }}) 
