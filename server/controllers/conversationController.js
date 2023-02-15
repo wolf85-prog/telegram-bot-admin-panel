@@ -11,7 +11,7 @@ class ConversationController {
             const {senderId, receiverId} = req.body
 
             //найти беседу
-            const exist = await Conversation.findOne({where: { members: {[Op.contains]: [chatId]} }}) 
+            const exist = await Conversation.findOne({where: { members: {[Op.contains]: [senderId]} }}) 
             if(exist) {
                 return response.status(200).json(`conversation already exist`);
             }

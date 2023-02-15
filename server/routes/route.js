@@ -21,7 +21,7 @@ route.get('/message/get/:id', getMessages)
 route.post('/conversation/add', newConversation)
 route.get('/conversation/get/:id', getConversation)
 
-route.post('/userbots/add', addUser)
+//route.post('/userbots/add', addUser)
 route.get('/userbots/get', getUsers)
 route.get('/userbots/get/:id', getUser)
 

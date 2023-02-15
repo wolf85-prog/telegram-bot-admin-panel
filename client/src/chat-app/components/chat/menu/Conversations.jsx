@@ -33,7 +33,7 @@ function Conversations({ text }) {
     //------------------------------------------------------
     useEffect(() => {
         const getUsers = async () => {
-            let response = await $host.get("api/userbots/");
+            let response = await $host.get("api/userbots/get");
             const filteredData = response.data.filter(user=> (user.firstname + user.lastname).toLowerCase().includes(text.toLowerCase()));
             setUsers(filteredData);
         }
