@@ -16,8 +16,8 @@ function HeaderMenu( {setOpenDrawer} ) {
 
     return (
         <>
-            <MoreVert onClick={handleClick} />
-            <Menu
+            {/* <MoreVert onClick={handleClick} /> */}
+            {/* <Menu
                 id="basic-menu"
                 anchorEl={open}
                 keepMounted
@@ -35,16 +35,16 @@ function HeaderMenu( {setOpenDrawer} ) {
             >
                 <MenuOption onClick={()=> { handleClose(); setOpenDrawer(true); }}>Профиль</MenuOption>
                 <MenuOption onClick={handleClose}>Выйти</MenuOption>
-            </Menu>
+            </Menu> */}
 
         </>
     )
 }
 
-const MenuOption = styled(MenuItem)`
-    font-size: 14px;
-    padding: 15px 60px 5px 24px;
-    color: #4a4a4a;
-`
+// const MenuOption = styled(MenuItem)`
+//     font-size: 14px;
+//     padding: 15px 60px 5px 24px;
+//     color: #4a4a4a;
+// `
 
 export default HeaderMenu

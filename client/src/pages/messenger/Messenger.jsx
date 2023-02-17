@@ -13,7 +13,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import "./messenger.css"
 import "./../../Chat.css";
 import { CContainer, CSpinner } from '@coreui/react'
-import { AppContent, AppSidebar, AppFooter, AppHeaderChat, AppBreadcrumb } from '../../components/index'
+import { AppContent, AppSidebar, AppFooter, AppHeader, AppBreadcrumb } from '../../components/index'
 import Conversation from '../../components/chat/conversations/Conversation'
 import Message from '../../components/message/Message'
 import Notificationcomp from '../../components/chat/Notificationcomp'
@@ -219,23 +219,12 @@ export default function Messenger() {
           backgroundColor: "#0a4a9b",
         },
     }));
-
-
-    const removeConversation = (conv) => {
-        setConversations(conversations.filter(c => c.id !== conv.id))
-    }
-
-    const sortConversations = (sort) => {
-        setSelectedSort(sort)
-        setConversations([...conversations].sort((a, b) => a[sort].localeCompare(b[sort])))
-        //console.log("conversations: ", conversations)
-    }
  
     return (
         <div>
       <AppSidebar />
       <div className="wrapper d-flex flex-column min-vh-100 bg-light">
-        <AppHeaderChat />
+        <AppHeader />
         <div className="body flex-grow-1 px-3">
             
                 <Suspense fallback={<CSpinner color="primary" />}>

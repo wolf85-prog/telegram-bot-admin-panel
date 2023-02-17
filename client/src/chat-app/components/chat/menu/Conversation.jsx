@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import { AccountContext } from '../../../context/AccountProvider'
 import { setConversation, getConversation } from './../../../../http/chatAPI'
 import { formatDate } from '../../../utils/common-utils'
-import { Avatar } from "@mui/material"
+import Avatar from "./../../../../assets/images/avatars/blank-avatar.png"
 
 function Conversation({ user }) {
 
@@ -34,8 +34,8 @@ function Conversation({ user }) {
     return (
         <Component onClick={() => getUser()} >
             <Box>
-                {/* <Image src={user.picture} alt="dp" /> */}
-                <Avatar />
+                <Image src={Avatar} alt="dp" />
+                {/* <Avatar /> */}
             </Box>
             <Box style={{ width: "100%" }}>
                 <Container>

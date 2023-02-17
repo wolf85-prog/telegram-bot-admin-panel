@@ -4,7 +4,6 @@ import EmptyChat from "./chat/EmptyChat";
 import ChatBox from "./chat/ChatBox";
 import React, { useContext } from "react";
 import { AccountContext } from "../../context/AccountProvider";
-import {Context} from "../../../index";
 
 const dialogStyle={
     height: "98%",
@@ -35,10 +34,7 @@ const ChatDialog =()=>{
                 <Menu />
             </LeftComponent>
             <RightComponent>
-                {/* <EmptyChat />
-                <ChatBox /> */}
                 {Object.keys(person).length ? <ChatBox /> : <EmptyChat /> }
-                {/* <EmptyChat /> */}
             </RightComponent>
         </Component>
 

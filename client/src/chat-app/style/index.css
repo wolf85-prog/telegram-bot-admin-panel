@@ -5,6 +5,8 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    box-sizing: content-box;
   }
   
   code {
@@ -23,4 +25,10 @@ body {
   
   ::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.2);
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: content-box;
   }

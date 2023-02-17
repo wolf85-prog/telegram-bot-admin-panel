@@ -5,12 +5,12 @@ import { AccountContext } from '../../../context/AccountProvider'
 import { Chat as MessageIcon } from "@mui/icons-material"
 import HeaderMenu from './HeaderMenu';
 import InfoDrawer from '../../drawer/InfoDrawer';
-import { Avatar, Badge } from "@mui/material"
+import { Avatar } from "@mui/material"
 
 
 function Header() {
 
-   // const { account } = useContext(AccountContext);
+    const { account } = useContext(AccountContext);
     const [openDrawer, setOpenDrawer]= useState(false);
     const toggleDrawer = ()=>{
         setOpenDrawer(true);

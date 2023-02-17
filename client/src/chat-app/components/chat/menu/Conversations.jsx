@@ -1,16 +1,14 @@
 import React, { useEffect, useState, useContext } from 'react'
-//import { getUsers } from '../../../service/api';
 import { Box, styled, Divider } from '@mui/material';
 import Conversation from './Conversation';
 import { AccountContext } from '../../../context/AccountProvider';
 import { getUsers } from './../../../../http/chatAPI'
-import { $authHost, $host } from './../../../../http/index'
 
 
 function Conversations({ text }) {
 
     const [users, setUsers] = useState([]);
-    //const { account, socket, setActiveUsers }= useContext(AccountContext);
+    const { account, socket, setActiveUsers }= useContext(AccountContext);
 
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
     const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
@@ -39,7 +37,7 @@ function Conversations({ text }) {
                 users.map((user, index) =>(
                     user.chatId !== chatAdminId &&
                     <>   
-                        <Conversation key={user.id+index} user={user} />
+                        <Conversation key={index} user={user} />
                         <StyledDivider />
                     </>
                 ))

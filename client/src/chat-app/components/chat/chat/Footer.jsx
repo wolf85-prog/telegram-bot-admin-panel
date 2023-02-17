@@ -1,10 +1,11 @@
 import React from 'react'
 import { useEffect } from 'react';
-import { Box, InputBase, styled } from '@mui/material'
-import { EmojiEmotionsOutlined, AttachFile, Mic} from '@mui/icons-material';
+import { Box, InputBase, styled, Button } from '@mui/material'
+import { EmojiEmotionsOutlined, AttachFile, Send} from '@mui/icons-material';
 import { uploadFile } from './../../../../http/chatAPI'
 
-function Footer({ sendText, setValue, value, file, setFile, setImage }) {
+
+function Footer({ sendText, setValue, value, file, setFile, setImage, handleSubmit }) {
 
     useEffect(() => {
         const getImage = async () => {
@@ -47,10 +48,27 @@ function Footer({ sendText, setValue, value, file, setFile, setImage }) {
                     value={value}
                 />
             </Search>
-            <Mic />
+            <SendButton
+                onClick={handleSubmit}
+                variant="contained"
+                endIcon={<Send />}
+            ></SendButton>
         </Container>
     )
 }
+
+const SendButton = styled(Button)(() => ({
+    color: "white",
+    height: "40px",
+    fontSize: "20px",
+    textTransform: "none",
+    padding: "8px",
+    marginRight: "15px",
+    backgroundColor: "#2e7cdd",
+    "&:hover": {
+      backgroundColor: "#0a4a9b",
+    },
+}));
 
 const Container = styled(Box)`
     height: 60px;

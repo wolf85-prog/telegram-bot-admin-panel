@@ -4,6 +4,7 @@ import Message from './Message';
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { AccountContext } from "../../../context/AccountProvider"
 import { getMessages, newMessage, getConversation } from './../../../../http/chatAPI';
+import { $authHost, $host } from './../../../../http/index'
 
 const Messages = ({ conversation, person }) => {
 
@@ -16,6 +17,9 @@ const Messages = ({ conversation, person }) => {
     //const [conversation, setConversation] = useState({});
     const scrollRef = useRef();
     const { account, socket, newMessageFlag, setNewMessageFlag } = useContext(AccountContext);
+
+    const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
+    const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 
 
     // useEffect(()=>{
@@ -87,32 +91,102 @@ const Messages = ({ conversation, person }) => {
             if(!file) {
 
                 message = {
-                    senderId: account.sub,
+                    senderId: chatAdminId, 
                     reciverId: person.id,
                     conversationId: conversation.id,
                     type: "text",
-                    text: value
+                    text: value,
+                    is_bot: false
                 }
             } else {
                 message = {
-                    senderId: account.sub,
+                    senderId: chatAdminId, 
                     reciverId: person.id,
                     conversationId: conversation.id,
                     type: "file",
-                    text: image
+                    text: image,
+                    is_bot: false
                 }
             }
             console.log(message);
 
             //socket.current.emit("sendMessage", message);
             
-            await newMessage(message);
+            //await newMessage(message);
+            
+            //сохранение сообщения в БД
+            await newMessage(message)
+            //setMessages([...messages, res]);
+
+            //Передаем данные боту
+            const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${value}`
+            const sendToTelegram = await $host.get(url_send_msg);
+
+            //Выводим сообщение об успешной отправке
+            if (sendToTelegram) {
+                console.log('Спасибо! Ваша сообщение отправлено!');
+            }           
+            //А здесь сообщение об ошибке при отправке
+            else {
+                console.log('Что-то пошло не так. Попробуйте ещё раз.');
+            }
 
             setValue("");
             setFile("");
             setImage("")
             setNewMessageFlag(prev => !prev)
         }
+    }
+
+    //отправка сообщени по нажатию кнопки
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        let message = {};
+        if(!file) {
+            message = {
+                senderId: chatAdminId, 
+                reciverId: person.id,
+                conversationId: conversation.id,
+                type: "text",
+                text: value,
+                is_bot: false
+            }
+        } else {
+            message = {
+                senderId: chatAdminId, 
+                reciverId: person.id,
+                conversationId: conversation.id,
+                type: "file",
+                text: image,
+                is_bot: false
+            }
+        }
+        console.log("message send button: ", message);
+
+        //socket.current.emit("sendMessage", message);
+
+        //сохранение сообщения в БД
+        await newMessage(message)
+
+        //Передаем данные боту
+        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${value}`
+        const sendToTelegram = await $host.get(url_send_msg);
+
+        //Выводим сообщение об успешной отправке
+        if (sendToTelegram) {
+            console.log('Спасибо! Ваша сообщение отправлено!');
+        }           
+        //А здесь сообщение об ошибке при отправке
+        else {
+            console.log('Что-то пошло не так. Попробуйте ещё раз.');
+        }
+
+        setValue("");
+        setFile("");
+        setImage("")
+        setNewMessageFlag(prev => !prev)
+
     }
 
     return (
@@ -135,6 +209,9 @@ const Messages = ({ conversation, person }) => {
                 file={file}
                 setFile={setFile}
                 setImage={setImage}
+                handleSubmit={handleSubmit}
+                //person={person}
+                //conversation={conversation}
             />
         </Wrapper>
     )

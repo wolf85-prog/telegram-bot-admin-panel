@@ -3,8 +3,6 @@ import React, { useContext } from 'react'
 import { AppBar, Toolbar, styled, Box } from "@mui/material";
 import ChatDialog from "./chat/ChatDialog";
 import { AccountContext } from "../context/AccountProvider";
-import { Context } from '../../index';
-import './../../chat-app/style/Chat-App.css';
 
 const Messenger = () => {
 
