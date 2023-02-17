@@ -33,6 +33,7 @@ const Header = styled(AppBar)`
     height:125px;
     background-color: #3567e5; 
     box-shadow: none;
+    margin-top: 81px;
 `
 
 //серый фон
