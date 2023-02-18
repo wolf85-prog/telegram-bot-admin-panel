@@ -29,12 +29,6 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Чаты',
-    to: '/messenger',
-    icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Чаты',
     to: '/chat',
     icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
   },
