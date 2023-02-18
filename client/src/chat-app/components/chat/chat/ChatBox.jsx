@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Box } from "@mui/material";
 import ChatHeader from './ChatHeader';
 import Messages from './Messages';
+import Footer from './Footer';
 import { useContext } from 'react';
 import { AccountContext } from '../../../context/AccountProvider';
 import { getConversation } from './../../../../http/chatAPI';
@@ -27,6 +28,7 @@ function ChatBox() {
         <Box style={{ height: "75%" }}>
             <ChatHeader person={person} />
             <Messages person={person} conversation={conversation} />
+            <Footer/>
         </Box>
     )
 }

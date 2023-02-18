@@ -11,7 +11,7 @@ const dialogStyle={
     margin: "20px",
     borderRadius: "0",
     maxWidth: "100%",
-    maxHeight: "100%",
+    maxHeight: "98%",
     boxShadow: "none",
     overflow: "hidden"
 }
@@ -45,13 +45,12 @@ const ChatDialog =()=>{
 
 const Component =styled(Box)`
     display: flex;
-
 `
 const LeftComponent= styled(Box)`
     min-width: 450px;
 `
 const RightComponent = styled(Box)`
-    width: 75%;
+    width: 100%;
     min-width: 300px;
     height: 100%;
     border-left: 1px solid rgba(0, 0, 0, 0.14); 

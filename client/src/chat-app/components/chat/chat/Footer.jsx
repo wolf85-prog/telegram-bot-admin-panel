@@ -74,7 +74,7 @@ const Container = styled(Box)`
     height: 60px;
     background: #ededed;
     display: flex;
-    width: 100%;
+
     align-items: center;
     padding: 5px 15px;
     padding-bottom : 9px;
@@ -82,6 +82,8 @@ const Container = styled(Box)`
         margin: 5px;
         color: #919191;
     }
+    position: relative;
+
 `;
 const Search = styled(Box)`
     background-color: #ffffff;

@@ -7,7 +7,6 @@ import VideoCallIcon from "@mui/icons-material/VideoCall";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import styled from "@emotion/styled";
 import SendIcon from "@mui/icons-material/Send";
-import { ChatlogicStyling, isSameSender } from "./../../components/chat/ChatstyleLogic";
 import { Avatar, Badge, Button } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
 import "./messenger.css"
@@ -15,7 +14,6 @@ import "./../../Chat.css";
 import { CContainer, CSpinner } from '@coreui/react'
 import { AppContent, AppSidebar, AppFooter, AppHeader, AppBreadcrumb } from '../../components/index'
 import Conversation from '../../components/chat/conversations/Conversation'
-import Message from '../../components/message/Message'
 import Notificationcomp from '../../components/chat/Notificationcomp'
 import {Context} from "../../index";
 import {io} from "socket.io-client"
@@ -308,14 +306,14 @@ export default function Messenger() {
                                             <div
                                                 className={el.from === chatAdminId ? "right-avt" : "left-avt"}
                                             >
-                                            <div className={ChatlogicStyling(el.from, chatAdminId)}>
+                                            {/* <div className={ChatlogicStyling(el.from, chatAdminId)}>
                                                 <p>{el.text}</p>
                                                 <p className="time chat-time">
                                                 {new Date(el.createdAt).getHours() +
                                                     ":" +
                                                     new Date(el.createdAt).getMinutes()}
                                                 </p>
-                                            </div>                                          
+                                            </div>                                           */}
                                             <div className="blank-div"></div>
                                             </div>
                                         </div>

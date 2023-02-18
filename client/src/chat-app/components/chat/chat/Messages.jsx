@@ -202,7 +202,7 @@ const Messages = ({ conversation, person }) => {
                     ))
                 }
             </Component>
-            <Footer
+            {/* <Footer
                 sendText={sendText}
                 setValue={setValue}
                 value={value}
@@ -210,9 +210,7 @@ const Messages = ({ conversation, person }) => {
                 setFile={setFile}
                 setImage={setImage}
                 handleSubmit={handleSubmit}
-                //person={person}
-                //conversation={conversation}
-            />
+            /> */}
         </Wrapper>
     )
 }
@@ -222,7 +220,7 @@ const Wrapper = styled(Box)`
     background-size: 50%;
 `
 const Component = styled(Box)`
-    height: 77vh;
+    height: 81vh;
     overflow-y: scroll;
 `
 const Container = styled(Box)`

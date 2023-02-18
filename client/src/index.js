@@ -6,6 +6,8 @@ import App from './App'
 import { Provider } from 'react-redux'
 import store from './store'
 import UserStore from "./store/UserStore";
+import { UsersProvider } from "./chat-app-new/context/usersContext";
+import { SocketProvider } from "./chat-app-new/context/socketContext";
 
 export const Context = createContext(null)
 console.log('REACT_APP_API_URL:', process.env.REACT_APP_API_URL)
@@ -18,7 +20,13 @@ createRoot(document.getElementById('root')).render(
       <Context.Provider value={{
           user: new UserStore()
       }}>
-        <App />
+
+        {/* <SocketProvider> */}
+          {/* <UsersProvider> */}
+            <App />
+          {/* </UsersProvider> */}
+        {/* </SocketProvider> */}
+
       </Context.Provider>  
     </Provider>
   </React.StrictMode> 

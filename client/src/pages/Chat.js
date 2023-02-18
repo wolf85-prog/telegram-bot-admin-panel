@@ -7,7 +7,7 @@ import { CContainer, CSpinner } from '@coreui/react'
 const Chat = () => {
     return (  
         <div>
-            <AppHeaderChat />
+            {/* <AppHeaderChat /> */}
             <Messenger /> 
         </div>              
     );
