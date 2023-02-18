@@ -10,18 +10,23 @@ import Profile from "./components/Profile";
 import Convo from "./components/Convo";
 import { useUsersContext } from "./../../context/usersContext";
 
+import { useContext } from 'react';
+import { AccountContext } from './../../../chat-app/context/AccountProvider';
+import { getConversation } from './../../../http/chatAPI';
+
 const Chat = ({ match, history }) => {
 	// const { users, setUserAsUnread, addNewMessage } = useUsersContext();
+	const { person, account } = useContext(AccountContext);
 
 	// const userId = match.params.id;
 	// let user = users.filter((user) => user.id === Number(userId))[0];
 
-	// const lastMsgRef = useRef(null);
-	// const [showAttach, setShowAttach] = useState(false);
-	// const [showEmojis, setShowEmojis] = useState(false);
-	// const [showProfileSidebar, setShowProfileSidebar] = useState(false);
-	// const [showSearchSidebar, setShowSearchSidebar] = useState(false);
-	// const [newMessage, setNewMessage] = useState("");
+	const lastMsgRef = useRef(null);
+	const [showAttach, setShowAttach] = useState(false);
+	const [showEmojis, setShowEmojis] = useState(false);
+	const [showProfileSidebar, setShowProfileSidebar] = useState(false);
+	const [showSearchSidebar, setShowSearchSidebar] = useState(false);
+	const [newMessage, setNewMessage] = useState("");
 
 	// useEffect(() => {
 	// 	if (!user) history.push("/");
@@ -32,21 +37,41 @@ const Chat = ({ match, history }) => {
 	// }, []);
 
 	// useEffect(() => {
-	// 	user && scrollToLastMsg();
+	// 	person && scrollToLastMsg();
 	// }, [users]);
+	
 
-	// const openSidebar = (cb) => {
-	// 	// close any open sidebar first
-	// 	setShowProfileSidebar(false);
-	// 	setShowSearchSidebar(false);
+	// useEffect(() => {
+    //     const getMessageDetails = async () => {
+    //         let data = await getMessages(conversation.id);
+    //         console.log("messages: ", data);
+    //         setMessages(data);
+    //     }
+    //     conversation.id && getMessageDetails();
 
-	// 	// call callback fn
-	// 	cb(true);
-	// };
+    // }, [person.id, conversation.id, newMessageFlag])
 
-	// const scrollToLastMsg = () => {
-	// 	lastMsgRef.current.scrollIntoView();
-	// };
+    // useEffect(()=>{
+    //     lastMsgRef.current?.scrollIntoView({transition: "smooth"})
+    // },[messages])
+
+    // useEffect(()=>{
+    //     incomingMessage && conversation?.members?.includes(incomingMessage.senderId) &&
+    //         setMessages(prev => [...prev, incomingMessage])
+    // }, [incomingMessage, conversation])
+
+	const openSidebar = (cb) => {
+		// close any open sidebar first
+		setShowProfileSidebar(false);
+		setShowSearchSidebar(false);
+
+		// call callback fn
+		cb(true);
+	};
+
+	const scrollToLastMsg = () => {
+		lastMsgRef.current.scrollIntoView();
+	};
 
 	// const submitNewMessage = () => {
 	// 	addNewMessage(user.id, newMessage);
@@ -59,37 +84,37 @@ const Chat = ({ match, history }) => {
 			<div className="chat__body">
 				<div className="chat__bg"></div>
 
-				{/* <Header
-					user={user}
+				<Header
+					user={person}
 					openProfileSidebar={() => openSidebar(setShowProfileSidebar)}
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 				/>
 				<div className="chat__content">
-					<Convo lastMsgRef={lastMsgRef} messages={user.messages} />
+					<Convo lastMsgRef={lastMsgRef} messages={person.messages} />
 				</div>
 				<footer className="chat__footer">
 					<button
 						className="chat__scroll-btn"
 						aria-label="scroll down"
-						onClick={scrollToLastMsg}
+						// onClick={scrollToLastMsg}
 					>
 						<Icon id="downArrow" />
 					</button>
 					<EmojiTray
-						showEmojis={showEmojis}
-						newMessage={newMessage}
-						setNewMessage={setNewMessage}
+						// showEmojis={showEmojis}
+						// newMessage={newMessage}
+						// setNewMessage={setNewMessage}
 					/>
 					<ChatInput
-						showEmojis={showEmojis}
-						setShowEmojis={setShowEmojis}
-						showAttach={showAttach}
-						setShowAttach={setShowAttach}
-						newMessage={newMessage}
-						setNewMessage={setNewMessage}
-						submitNewMessage={submitNewMessage}
+						// showEmojis={showEmojis}
+						// setShowEmojis={setShowEmojis}
+						// showAttach={showAttach}
+						// setShowAttach={setShowAttach}
+						// newMessage={newMessage}
+						// setNewMessage={setNewMessage}
+						// submitNewMessage={submitNewMessage}
 					/>
-				</footer> */}
+				</footer>
 			</div>
 			{/* <ChatSidebar
 				heading="Search Messages"

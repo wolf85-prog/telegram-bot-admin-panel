@@ -5,7 +5,7 @@ import AppRouter from './components/AppRouter';
 import {observer} from "mobx-react-lite";
 import {Context} from "./index";
 import {check} from "./http/userAPI";
-import AccountProvider from './chat-app/context/AccountProvider';
+
 
 const loading = (
   <div className="pt-3 text-center">
@@ -41,11 +41,8 @@ const App = observer(() => {
             <Route exact path="/500" name="Page 500" element={<Page500 />} />
             <Route path="*" name="Home" element={<DefaultLayout />} />
           </Routes> */}
-       
-          <AccountProvider>
-            <AppRouter />
-          </AccountProvider>
-          
+               
+          <AppRouter />
 
         </Suspense>
       </BrowserRouter>     

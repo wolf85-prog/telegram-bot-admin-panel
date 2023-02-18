@@ -41,8 +41,8 @@ const Chat_new = () => {
 						<Route path="/chat/:id" component={Chat} />
 						<Route component={Home} />
 					</Routes> */}
-                    <Home/>
-                    {/* {Object.keys(person).length ? <Chat /> : <Home /> } */}
+                    {/* <Home/> */}
+                    {Object.keys(person).length ? <Chat /> : <Home /> }
 				</div>
 			{/* </Router> */}
 		</div>
