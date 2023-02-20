@@ -8,25 +8,17 @@ import { AccountContext } from '../../../chat-app/context/AccountProvider'
 import Avatar from "./../../../assets/images/avatars/blank-avatar.png"
 
 const Contact = ({ contact }) => {
+
 	const { setPerson, account, newMessageFlag } = useContext(AccountContext);
-	const [lastMessage, setLastMessage] = useState({});
-	// const { setUserAsUnread } = useUsersContext();
+	const [message, setMessage] = useState({});
 	
-	// const getLastMessage = () => {
-	// 	const messageDates = Object.keys(contact.messages);
-	// 	const recentMessageDate = messageDates[messageDates.length - 1];
-	// 	const messages = [...contact.messages[recentMessageDate]];
-	// 	const lastMessage = messages.pop();
-	// 	return lastMessage;
-	// };
-
-	// const lastMessage = getLastMessage(contact);
-
+	//сделать пользователя непрочитанным
+	const { setUserAsUnread } = useUsersContext();
 
 	useEffect(() => {
         const getConversationDetails = async () => {
             const data = await getConversation(contact.chatId)
-            setLastMessage({ text: data?.message, updatedAt: data?.updatedAt })
+            setMessage({ text: data?.message, updatedAt: data?.updatedAt })
         }
         getConversationDetails();
     }, [newMessageFlag])
@@ -37,8 +29,20 @@ const Contact = ({ contact }) => {
             name: contact.firstname  + ' ' + contact.lastname, 
             id: contact.chatId
         });
-        console.log("person: ", contact) 
+		setUserAsUnread(contact.id)
+        console.log("contact: ", contact) 
     }
+	
+	// const getLastMessage = () => {
+	// 	const messageDates = Object.keys(contact.messages);
+	// 	const recentMessageDate = messageDates[messageDates.length - 1];
+	// 	const messages = [...contact.messages[recentMessageDate]];
+	// 	const lastMessage = messages.pop();
+	// 	return lastMessage;
+	// };
+
+	// const lastMessage = getLastMessage(contact);
+	// console.log("lastMessage: ", lastMessage)
 
 	return (
 		<Link

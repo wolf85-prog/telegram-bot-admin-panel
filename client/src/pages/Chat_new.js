@@ -33,18 +33,11 @@ const Chat_new = () => {
 
 	return (
 		<div className="app">
-			<p className="app__mobile-message"> Only available on desktop 😊. </p>
-			{/* <Router> */}
-				<div className="app-content">
-					<Sidebar />
-					{/* <Routes>
-						<Route path="/chat/:id" component={Chat} />
-						<Route component={Home} />
-					</Routes> */}
-                    {/* <Home/> */}
-                    {Object.keys(person).length ? <Chat /> : <Home /> }
-				</div>
-			{/* </Router> */}
+			<p className="app__mobile-message"> Доступно только на компьютере 😊. </p>
+			<div className="app-content">
+				<Sidebar />
+                {Object.keys(person).length ? <Chat /> : <Home /> }
+			</div>
 		</div>
 	);
 }

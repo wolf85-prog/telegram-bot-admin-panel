@@ -15,11 +15,11 @@ import { AccountContext } from './../../../chat-app/context/AccountProvider';
 import { getConversation } from './../../../http/chatAPI';
 
 const Chat = ({ match, history }) => {
-	// const { users, setUserAsUnread, addNewMessage } = useUsersContext();
+	const { users, setUserAsUnread, addNewMessage } = useUsersContext();
 	const { person, account } = useContext(AccountContext);
 
-	// const userId = match.params.id;
-	// let user = users.filter((user) => user.id === Number(userId))[0];
+	const userId = match.params.id;
+	let user = users.filter((user) => user.id === Number(userId))[0];
 
 	const lastMsgRef = useRef(null);
 	const [showAttach, setShowAttach] = useState(false);
@@ -73,11 +73,11 @@ const Chat = ({ match, history }) => {
 		lastMsgRef.current.scrollIntoView();
 	};
 
-	// const submitNewMessage = () => {
-	// 	addNewMessage(user.id, newMessage);
-	// 	setNewMessage("");
-	// 	scrollToLastMsg();
-	// };
+	const submitNewMessage = () => {
+		addNewMessage(user.id, newMessage);
+		setNewMessage("");
+		scrollToLastMsg();
+	};
 
 	return (
 		<div className="chat">
@@ -90,7 +90,7 @@ const Chat = ({ match, history }) => {
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 				/>
 				<div className="chat__content">
-					<Convo lastMsgRef={lastMsgRef} messages={person.messages} />
+					{/* <Convo lastMsgRef={lastMsgRef} messages={person.messages} /> */}
 				</div>
 				<footer className="chat__footer">
 					<button
@@ -112,7 +112,7 @@ const Chat = ({ match, history }) => {
 						// setShowAttach={setShowAttach}
 						// newMessage={newMessage}
 						// setNewMessage={setNewMessage}
-						// submitNewMessage={submitNewMessage}
+						 submitNewMessage={submitNewMessage}
 					/>
 				</footer>
 			</div>

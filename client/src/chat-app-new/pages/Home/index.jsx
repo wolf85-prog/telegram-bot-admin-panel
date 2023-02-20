@@ -17,23 +17,23 @@ const Home = () => {
 				/>
 			</div>
 
-			<h1 className="home__title"> Keep your phone connected </h1>
+			<h1 className="home__title"> Добро пожаловать <br/>
+			в мессенджер чат-бота Projects</h1>
 			<p className="home__text">
-				WhatsApp connects to your phone to sync messages. To reduce data usage,
-				connect your phone to Wi-Fi.
+				Выберите, кому хотели бы написать сообщение.
 			</p>
 			<p className="home__text">
 				<Icon id="laptop" className="home__icon" />
 				<span>
-					WhatsApp is available for Mac.{" "}
+					Написать разработчику.{" "}
 					<a
-						href="https://www.whatsapp.com/download"
+						href="mailto:seregaland@yandex.ru"
 						target="_blank"
 						rel="noreferrer"
 						className="home__link"
 					>
 						{" "}
-						Get it here
+						Cюда
 					</a>
 					.
 				</span>

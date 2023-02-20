@@ -1,5 +1,5 @@
 @import url(./darktheme.css);
-.sidebar {
+.sidebarB {
     min-width: 300px;
     flex: 40%;
     border-right: 1px solid #DADADA;
@@ -209,19 +209,19 @@
 /*  End Sidebar Contact List */
 
 @media screen and (min-width: 1000px) and (max-width: 1300px) {
-    .sidebar {
+    .sidebarB {
         flex: 35%;
     }
-    .sidebar~div {
+    .sidebarB~div {
         flex: 65%;
     }
 }
 
 @media screen and (min-width: 1301px) {
-    .sidebar {
+    .sidebarB {
         flex: 30%;
     }
-    .sidebar~div {
+    .sidebarB~div {
         flex: 70%;
     }
 }

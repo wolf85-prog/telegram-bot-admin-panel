@@ -74,7 +74,7 @@ const ChatInput = ({
 			</div>
 			<input
 				className="chat__input"
-				placeholder="Type a message"
+				placeholder="Введите сообщение"
 				value={newMessage}
 				onChange={(e) => setNewMessage(e.target.value)}
 				onKeyDown={detectEnterPress}

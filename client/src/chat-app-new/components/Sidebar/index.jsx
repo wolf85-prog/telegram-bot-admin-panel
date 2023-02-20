@@ -11,8 +11,11 @@ import { getUsers } from './../../../http/chatAPI'
 
 const Sidebar = () => {
 	//const { users: contacts } = useUsersContext();
-	const [users, setUsers] = useState([]);
-    //const { account, socket, setActiveUsers }= useContext(AccountContext);
+	const { users } = useUsersContext();
+	//const { account, socket, setActiveUsers }= useContext(AccountContext);
+	//console.log("person: ", contacts);
+
+	const [contacts, setContacts] = useState([]);
 	const[text, setText]= useState("");
 
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
@@ -20,15 +23,17 @@ const Sidebar = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+
             let response = await getUsers();
             const filteredData = response.filter(user=> (user.firstname + user.lastname).toLowerCase().includes(text.toLowerCase()));
-            setUsers(filteredData);
+            setContacts(filteredData);
         }
         fetchData();
     }, [text]);
 
 	return (
-		<aside className="sidebar">
+		<aside className="sidebarB">
+			{/* Header */}
 			<header className="header">
 				<div className="sidebar__avatar-wrapper">
 					<img src={avatar} alt="Karen Okonkwo" className="avatar" />
@@ -60,7 +65,8 @@ const Sidebar = () => {
 					/>
 				</div>
 			</header>
-
+			
+			{/* Search */}
 			<div className="search-wrapper">
 				<div className="search-icons">
 					<Icon id="search" className="search-icon" />
@@ -68,11 +74,20 @@ const Sidebar = () => {
 						<Icon id="back" />
 					</button>
 				</div>
-				<input className="search" placeholder="Search or start a new chat" />
+				<input 
+					className="search" 
+					placeholder="Поиск заказчика" 
+					onChange={(e)=>setText(e.target.value)}
+				/>
 			</div>
+			
+			{/* Conversations */}
 			<div className="sidebar__contacts">
-				{users.map((contact, index) => (
-					<Contact key={index} contact={contact} />
+				{contacts.map((contact, index) => (
+					contact.chatId !== chatAdminId &&
+                    <>   
+						<Contact key={index} contact={contact} />
+					</>
 				))}
 			</div>
 		</aside>

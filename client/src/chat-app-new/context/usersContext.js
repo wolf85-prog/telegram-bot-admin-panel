@@ -8,8 +8,7 @@ const useUsersContext = () => useContext(UsersContext);
 
 const UsersProvider = ({ children }) => {
 	const socket = useSocketContext();
-
-	const [users, setUsers] = useState(contacts);
+	const [users, setUsers] = useState([]); //useState(contacts);
 
 	const _updateUserProp = (userId, prop, value) => {
 		setUsers((users) => {
@@ -77,7 +76,11 @@ const UsersProvider = ({ children }) => {
 	};
 
 	return (
-		<UsersContext.Provider value={{ users, setUserAsUnread, addNewMessage }}>
+		<UsersContext.Provider value={{ 
+			users, 
+			setUserAsUnread, 
+			addNewMessage 
+		}}>
 			{children}
 		</UsersContext.Provider>
 	);
