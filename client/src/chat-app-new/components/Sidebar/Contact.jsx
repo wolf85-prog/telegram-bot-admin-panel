@@ -34,7 +34,6 @@ const Contact = ({ contact }) => {
 	};
 
 	const lastMessage = getLastMessage(contact);
-	//console.log("lastMessage: ", lastMessage)
 
 	return (
 		<Link
@@ -55,9 +54,9 @@ const Contact = ({ contact }) => {
 						{/* {formatTime(lastMessage.time)} */}
 					</span>
 				</div>
-				{/* <div className="sidebar-contact__bottom-content">
+				<div className="sidebar-contact__bottom-content">
 					<p className="sidebar-contact__message-wrapper">
-						{lastMessage.status && (
+						{/* {lastMessage.status && (
 							<Icon
 								id={
 									lastMessage?.status === "sent" ? "singleTick" : "doubleTick"
@@ -69,13 +68,13 @@ const Contact = ({ contact }) => {
 										: ""
 								}`}
 							/>
-						)}
+						)} */}
 						<span
 							className={`sidebar-contact__message ${
 								!!contact.unread ? "sidebar-contact__message--unread" : ""
 							}`}
 						>
-							{contact.typing ? <i> typing...</i> : lastMessage?.content}
+							{contact.typing ? <i> печатает...</i> : lastMessage?.content}
 						</span>
 					</p>
 					<div className="sidebar-contact__icons">
@@ -92,7 +91,7 @@ const Contact = ({ contact }) => {
 							/>
 						</button>
 					</div>
-				</div> */}
+				</div>
 			</div>
 		</Link>
 	);
