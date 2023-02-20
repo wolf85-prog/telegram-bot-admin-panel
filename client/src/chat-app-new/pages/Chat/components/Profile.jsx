@@ -30,14 +30,14 @@ const Profile = ({ user }) => {
 		<div className="profile">
 			<div className="profile__section profile__section--personal">
 				<div className="profile__avatar-wrapper">
-					<img src={user.profile_picture} alt={user.name} className="avatar" />
+					<img src={groupAvatar} alt={user.name} className="avatar" />
 				</div>
 				<h2 className="profile__name"> {user.name} </h2>
 			</div>
 
 			<div className="profile__section profile__section--media">
 				<div className="sb profile__heading-wrapper">
-					<h2 className="profile__heading"> Media, Links and Documents </h2>
+					<h2 className="profile__heading"> Медиа, ссылки и документы </h2>
 					<button>
 						<Icon id="rightArrow" className="profile__heading-icon" />
 					</button>
@@ -53,7 +53,7 @@ const Profile = ({ user }) => {
 				<li className="profile__action">
 					<p className="profile__action-left">
 						<span className="profile__action-text profile__action-text--top">
-							Mute Notifications
+							Отключить уведомления
 						</span>
 					</p>
 					<div className="profile__action-right">
@@ -63,7 +63,7 @@ const Profile = ({ user }) => {
 				<li className="profile__action">
 					<p className="profile__action-left">
 						<span className="profile__action-text profile__action-text--top">
-							Starred Messages
+							Отмеченные сообщения
 						</span>
 					</p>
 					<button className="profile__action-right">
@@ -73,7 +73,7 @@ const Profile = ({ user }) => {
 				<li className="profile__action">
 					<p className="profile__action-left">
 						<span className="profile__action-text profile__action-text--top">
-							Disappearing Messages
+							Исчезающие сообщения
 						</span>
 						<span className="profile__action-text profile__action-text--bottom">
 							Off
@@ -87,7 +87,7 @@ const Profile = ({ user }) => {
 
 			<div className="profile__section profile__section--about">
 				<div className="sb profile__heading-wrapper">
-					<h2 className="profile__heading"> About and phone number </h2>
+					<h2 className="profile__heading"> О компании и номер телефона </h2>
 				</div>
 				<ul>
 					<li className="profile__about-item">
@@ -100,7 +100,7 @@ const Profile = ({ user }) => {
 			<div className="profile__section profile__section--groups">
 				<div className="profile__heading-wrapper">
 					<h2 className="sb profile__heading profile__group-heading">
-						<span> Groups in common </span> <span> 3</span>
+						<span> Общие группы </span> <span> 3</span>
 					</h2>
 				</div>
 				{groups.map((group) => (
@@ -122,17 +122,17 @@ const Profile = ({ user }) => {
 
 			<div className="profile__section profile__section--danger">
 				<Icon id="block" className="profile__danger-icon" />
-				<p className="profile__danger-text"> Block </p>
+				<p className="profile__danger-text"> Заблокировать </p>
 			</div>
 
 			<div className="profile__section profile__section--danger">
 				<Icon id="thumbsDown" className="profile__danger-icon" />
-				<p className="profile__danger-text"> Report contact </p>
+				<p className="profile__danger-text"> Сообщить о контакте </p>
 			</div>
 
 			<div className="profile__section profile__section--danger">
 				<Icon id="delete" className="profile__danger-icon" />
-				<p className="profile__danger-text"> Delete chat </p>
+				<p className="profile__danger-text"> Удалить чат </p>
 			</div>
 		</div>
 	);

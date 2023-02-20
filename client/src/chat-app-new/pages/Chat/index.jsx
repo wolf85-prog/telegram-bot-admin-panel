@@ -12,53 +12,39 @@ import { useUsersContext } from "./../../context/usersContext";
 
 import { useContext } from 'react';
 import { AccountContext } from './../../../chat-app/context/AccountProvider';
-import { getConversation } from './../../../http/chatAPI';
+import { getConversation, newMessage } from './../../../http/chatAPI';
+import { $authHost, $host } from './../../../http/index'
 
-const Chat = ({ match, history }) => {
+const Chat = () => {
 	const { users, setUserAsUnread, addNewMessage } = useUsersContext();
 	const { person, account } = useContext(AccountContext);
 
-	const userId = match.params.id;
-	let user = users.filter((user) => user.id === Number(userId))[0];
+	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
+    const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
+
+	const chatId = person.id;
+	let user = users.filter((user) => user.chatId === chatId.toString())[0];
 
 	const lastMsgRef = useRef(null);
 	const [showAttach, setShowAttach] = useState(false);
 	const [showEmojis, setShowEmojis] = useState(false);
 	const [showProfileSidebar, setShowProfileSidebar] = useState(false);
 	const [showSearchSidebar, setShowSearchSidebar] = useState(false);
-	const [newMessage, setNewMessage] = useState("");
+	//const [newMessage, setNewMessage] = useState("");
+	const [file, setFile] = useState();
+	const [image, setImage]= useState("");
+	const [value, setValue] = useState("");
 
-	// useEffect(() => {
-	// 	if (!user) history.push("/");
-	// 	else {
-	// 		scrollToLastMsg();
-	// 		setUserAsUnread(user.id);
-	// 	}
-	// }, []);
+	useEffect(() => {
+		if (user) {
+			scrollToLastMsg();
+			setUserAsUnread(user.id);
+		}
+	}, []);
 
-	// useEffect(() => {
-	// 	person && scrollToLastMsg();
-	// }, [users]);
-	
-
-	// useEffect(() => {
-    //     const getMessageDetails = async () => {
-    //         let data = await getMessages(conversation.id);
-    //         console.log("messages: ", data);
-    //         setMessages(data);
-    //     }
-    //     conversation.id && getMessageDetails();
-
-    // }, [person.id, conversation.id, newMessageFlag])
-
-    // useEffect(()=>{
-    //     lastMsgRef.current?.scrollIntoView({transition: "smooth"})
-    // },[messages])
-
-    // useEffect(()=>{
-    //     incomingMessage && conversation?.members?.includes(incomingMessage.senderId) &&
-    //         setMessages(prev => [...prev, incomingMessage])
-    // }, [incomingMessage, conversation])
+	useEffect(() => {
+		user && scrollToLastMsg();
+	}, [users]);
 
 	const openSidebar = (cb) => {
 		// close any open sidebar first
@@ -70,13 +56,54 @@ const Chat = ({ match, history }) => {
 	};
 
 	const scrollToLastMsg = () => {
-		lastMsgRef.current.scrollIntoView();
+		lastMsgRef.current?.scrollIntoView({transition: "smooth"});
 	};
 
-	const submitNewMessage = () => {
-		addNewMessage(user.id, newMessage);
-		setNewMessage("");
+	const submitNewMessage = async () => {
+		let message = {};
+        if(!file) {
+            message = {
+                senderId: chatAdminId, 
+                reciverId: user.chatId,
+                conversationId: user.conversationId,
+                type: "text",
+                text: value,
+                is_bot: false
+            }
+        } else {
+            message = {
+                senderId: chatAdminId, 
+                reciverId: user.chatId,
+                conversationId: user.conversationId,
+                type: "file",
+                text: image,
+                is_bot: false
+            }
+        }
+        console.log("message send button: ", message);
+
+		await newMessage(message)
+        //setMessages([...messages, res]);
+
+        //Передаем данные боту
+        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${value}`
+        const sendToTelegram = await $host.get(url_send_msg);
+
+		//addNewMessage(user.id, newMessage);
+		//setNewMessage("");
+		setValue("");
 		scrollToLastMsg();
+		setFile("");
+        setImage("")
+
+		//Выводим сообщение об успешной отправке
+		if (sendToTelegram) {
+			console.log('Спасибо! Ваша сообщение отправлено!');
+		}           
+		//А здесь сообщение об ошибке при отправке
+		else {
+			console.log('Что-то пошло не так. Попробуйте ещё раз.');
+		}
 	};
 
 	return (
@@ -90,34 +117,38 @@ const Chat = ({ match, history }) => {
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 				/>
 				<div className="chat__content">
-					{/* <Convo lastMsgRef={lastMsgRef} messages={person.messages} /> */}
+					<Convo lastMsgRef={lastMsgRef} messages={user.messages} />
 				</div>
 				<footer className="chat__footer">
 					<button
 						className="chat__scroll-btn"
 						aria-label="scroll down"
-						// onClick={scrollToLastMsg}
+						onClick={scrollToLastMsg}
 					>
 						<Icon id="downArrow" />
 					</button>
 					<EmojiTray
-						// showEmojis={showEmojis}
-						// newMessage={newMessage}
-						// setNewMessage={setNewMessage}
+						showEmojis={showEmojis}
+						//newMessage={newMessage}
+						//setNewMessage={setNewMessage}
+						value={value}
+						setValue={setValue}
 					/>
 					<ChatInput
-						// showEmojis={showEmojis}
-						// setShowEmojis={setShowEmojis}
-						// showAttach={showAttach}
-						// setShowAttach={setShowAttach}
-						// newMessage={newMessage}
-						// setNewMessage={setNewMessage}
-						 submitNewMessage={submitNewMessage}
+						showEmojis={showEmojis}
+						setShowEmojis={setShowEmojis}
+						showAttach={showAttach}
+						setShowAttach={setShowAttach}
+						//newMessage={newMessage}
+						value={value}
+						setValue={setValue}
+						//setNewMessage={setNewMessage}
+						submitNewMessage={submitNewMessage}
 					/>
 				</footer>
 			</div>
-			{/* <ChatSidebar
-				heading="Search Messages"
+			<ChatSidebar
+				heading="Поиск сообщения"
 				active={showSearchSidebar}
 				closeSidebar={() => setShowSearchSidebar(false)}
 			>
@@ -125,12 +156,12 @@ const Chat = ({ match, history }) => {
 			</ChatSidebar>
 
 			<ChatSidebar
-				heading="Contact Info"
+				heading="Данные контакта"
 				active={showProfileSidebar}
 				closeSidebar={() => setShowProfileSidebar(false)}
 			>
-				<Profile user={user} />
-			</ChatSidebar> */}
+				{/* <Profile user={user} /> */}
+			</ChatSidebar>
 		</div>
 	);
 };

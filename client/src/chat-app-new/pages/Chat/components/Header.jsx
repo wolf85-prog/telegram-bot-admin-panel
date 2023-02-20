@@ -33,11 +33,11 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {
 					iconId="menu"
 					iconClassName="chat__action-icon"
 					options={[
-						"Contact Info",
-						"Select Messages",
-						"Mute notifications",
-						"Clear messages",
-						"Delete chat",
+						"Данные о контакте",
+						"Выбрать сообщения",
+						"Отключить уведомления",
+						"Очистить переписку",
+						"Удалить чат",
 					]}
 				/>
 			</div>

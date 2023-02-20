@@ -16,8 +16,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 				{dateIndex === 0 && (
 					<p className="chat__encryption-msg">
 						<Icon id="lock" className="chat__encryption-icon" />
-						Messages are end-to-end encrypted. No one outside of this chat, not
-						even WhatsApp, can read or listen to them. Click to learn more.
+						Сообщения шифруются сквозным шифрованием. Никто за пределами этого чата не может читать или слушать их
 					</p>
 				)}
 				<div className="chat__msg-group">

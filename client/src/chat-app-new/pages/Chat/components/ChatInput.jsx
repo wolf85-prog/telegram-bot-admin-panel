@@ -14,8 +14,10 @@ const ChatInput = ({
 	setShowAttach,
 	showEmojis,
 	setShowEmojis,
-	newMessage,
-	setNewMessage,
+	//newMessage,
+	value,
+	setValue,
+	//setNewMessage,
 	submitNewMessage,
 }) => {
 	const detectEnterPress = (e) => {
@@ -75,11 +77,11 @@ const ChatInput = ({
 			<input
 				className="chat__input"
 				placeholder="Введите сообщение"
-				value={newMessage}
-				onChange={(e) => setNewMessage(e.target.value)}
+				value={value} //{newMessage}
+				onChange={(e) => setValue(e.target.value)} //setNewMessage(e.target.value)}
 				onKeyDown={detectEnterPress}
 			/>
-			{newMessage ? (
+			{value ? (
 				<button aria-label="Send message" onClick={submitNewMessage}>
 					<Icon id="send" className="chat__input-icon" />
 				</button>

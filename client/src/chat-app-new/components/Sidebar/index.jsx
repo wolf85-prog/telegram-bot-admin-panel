@@ -7,28 +7,22 @@ import OptionsBtn from "./../../components/OptionsButton";
 import { useUsersContext } from "./../../context/usersContext";
 
 //import { AccountContext } from '../../../context/AccountProvider';
-import { getUsers } from './../../../http/chatAPI'
+
 
 const Sidebar = () => {
-	//const { users: contacts } = useUsersContext();
 	const { users } = useUsersContext();
-	//const { account, socket, setActiveUsers }= useContext(AccountContext);
-	//console.log("person: ", contacts);
 
 	const [contacts, setContacts] = useState([]);
 	const[text, setText]= useState("");
 
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
     const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
+	
 
     useEffect(() => {
-        const fetchData = async () => {
-
-            let response = await getUsers();
-            const filteredData = response.filter(user=> (user.firstname + user.lastname).toLowerCase().includes(text.toLowerCase()));
-            setContacts(filteredData);
-        }
-        fetchData();
+        const filteredData = users.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
+        setContacts(filteredData);
+   
     }, [text]);
 
 	return (

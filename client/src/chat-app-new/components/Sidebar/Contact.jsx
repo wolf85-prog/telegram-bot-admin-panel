@@ -8,41 +8,33 @@ import { AccountContext } from '../../../chat-app/context/AccountProvider'
 import Avatar from "./../../../assets/images/avatars/blank-avatar.png"
 
 const Contact = ({ contact }) => {
-
+	
 	const { setPerson, account, newMessageFlag } = useContext(AccountContext);
 	const [message, setMessage] = useState({});
 	
 	//сделать пользователя непрочитанным
 	const { setUserAsUnread } = useUsersContext();
 
-	useEffect(() => {
-        const getConversationDetails = async () => {
-            const data = await getConversation(contact.chatId)
-            setMessage({ text: data?.message, updatedAt: data?.updatedAt })
-        }
-        getConversationDetails();
-    }, [newMessageFlag])
-
 
     const getUser = async () => {
         setPerson({
-            name: contact.firstname  + ' ' + contact.lastname, 
+            name: contact.name, 
             id: contact.chatId
         });
 		setUserAsUnread(contact.id)
-        console.log("contact: ", contact) 
+        //console.log("current contact: ", contact) 
     }
 	
-	// const getLastMessage = () => {
-	// 	const messageDates = Object.keys(contact.messages);
-	// 	const recentMessageDate = messageDates[messageDates.length - 1];
-	// 	const messages = [...contact.messages[recentMessageDate]];
-	// 	const lastMessage = messages.pop();
-	// 	return lastMessage;
-	// };
+	const getLastMessage = () => {
+		const messageDates = Object.keys(contact.messages);
+		const recentMessageDate = messageDates[messageDates.length - 1];
+		const messages = [...contact.messages[recentMessageDate]];
+		const lastMessage = messages.pop();
+		return lastMessage;
+	};
 
-	// const lastMessage = getLastMessage(contact);
-	// console.log("lastMessage: ", lastMessage)
+	const lastMessage = getLastMessage(contact);
+	//console.log("lastMessage: ", lastMessage)
 
 	return (
 		<Link
@@ -58,7 +50,7 @@ const Contact = ({ contact }) => {
 			</div>
 			<div className="sidebar-contact__content">
 				<div className="sidebar-contact__top-content">
-					<h2 className="sidebar-contact__name"> {contact.firstname} {contact.lastname}</h2>
+					<h2 className="sidebar-contact__name"> {contact.name}</h2>
 					<span className="sidebar-contact__time">
 						{/* {formatTime(lastMessage.time)} */}
 					</span>

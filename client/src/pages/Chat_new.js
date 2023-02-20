@@ -6,8 +6,10 @@ import Loader from "./../chat-app-new/components/Loader";
 import Home from "./../chat-app-new/pages/Home";
 import Sidebar from "./../chat-app-new/components/Sidebar";
 import Chat from "./../chat-app-new/pages/Chat";
+import { getUsers, getConversation, getMessages } from './../http/chatAPI'
 
 import { AccountContext } from "../chat-app/context/AccountProvider";
+import { useUsersContext } from "../chat-app-new/context/usersContext";
 
 const userPrefersDark =
 	window.matchMedia &&
@@ -18,16 +20,63 @@ const Chat_new = () => {
 	const [startLoadProgress, setStartLoadProgress] = useState(false);
 
     const { person } = useContext(AccountContext); 
+	const { users, setUsers } = useUsersContext();
+	
 
 	useEffect(() => {
 		if (userPrefersDark) document.body.classList.add("dark-theme");
 		stopLoad();
-	}, []);
+	}, []);   
 
 	const stopLoad = () => {
 		setStartLoadProgress(true);
-		setTimeout(() => setAppLoaded(true), 3000);
-	};
+		setTimeout(() => setAppLoaded(true), 5000);
+
+		//загрузить всех пользователей (контакты)
+        fetchData();
+	};       
+ 
+	const fetchData = async () => {
+		let response = await getUsers();
+
+		const arrayContact = []
+
+		response.map(async (user) => {
+			
+			let conversationId = await getConversation(user.chatId)
+			let messages = await getMessages(conversationId)
+
+			const arrayMessage = []
+
+			messages.map(message => {
+				let time_mess = message.createdAt.split('T')
+				const newMessage = {
+					content: message.text,
+					sender: message.senderId,
+					time: time_mess[1],
+					status: null,
+				}
+				arrayMessage.push(newMessage)
+			})
+
+			let first_name = user.firstname != null ? user.firstname : ''
+			let last_name = user.lastname != null ? user.lastname : ''
+			const newUser = {
+				id: user.id,
+				name: first_name + ' ' + last_name,
+				chatId: user.chatId,
+				conversationId: conversationId,
+				unread: 0, 
+				pinned: false,
+				typing: false,
+				messages: {"01/01/2023": arrayMessage}
+			}
+			arrayContact.push(newUser)
+		})
+
+		setUsers(arrayContact)
+
+	}
 
 	if (!appLoaded) return <Loader done={startLoadProgress} />;
 

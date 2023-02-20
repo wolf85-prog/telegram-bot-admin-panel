@@ -22,7 +22,10 @@ export const setConversation= async (data)=>{
 export const getConversation= async (id)=>{
     try {
        let response= await $host.get(`api/conversation/get/${id}`);
-        return response.data;
+       if (response.data === null) {
+            return null;
+       }
+        return response.data.id
     } catch (error) {
         console.log("error while calling getConversation api", error.message);
         
