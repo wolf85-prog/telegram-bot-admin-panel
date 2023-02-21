@@ -31,7 +31,7 @@ const Chats = () => {
 
 	const stopLoad = () => {
 		setStartLoadProgress(true);
-		setTimeout(() => setAppLoaded(true), 5000);
+		setTimeout(() => setAppLoaded(true), 3000);
 
         //fetchData();
 	};       
