@@ -1,21 +1,21 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./../chat-app-new/App.css";
 import "./../chat-app-new/index.css";
-import "./../chat-app-new/assets/css/index.css";
-import Loader from "./../chat-app-new/components/Loader";
-import Home from "./../chat-app-new/pages/Home";
-import Sidebar from "./../chat-app-new/components/Sidebar";
-import Chat from "./../chat-app-new/pages/Chat";
-import { getUsers, getConversation, getMessages } from './../http/chatAPI'
+//import "./../chat-app-new/assets/css/index.css";
+import Loader from "../chat-app-new/components/Loader";
+import Home from "../chat-app-new/pages/Home";
+import Sidebar from "../chat-app-new/components/Sidebar";
+import Chat from "../chat-app-new/pages/Chat";
+import { getUsers, getConversation, getMessages } from '../http/chatAPI'
 
-import { AccountContext } from "../chat-app/context/AccountProvider";
+import { AccountContext } from "../chat-app-new/context/AccountProvider";
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
 const userPrefersDark =
 	window.matchMedia &&
 	window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-const Chat_new = () => {
+const Chats = () => {
     const [appLoaded, setAppLoaded] = useState(false);
 	const [startLoadProgress, setStartLoadProgress] = useState(false);
 
@@ -54,7 +54,7 @@ const Chat_new = () => {
 					content: message.text,
 					sender: message.senderId,
 					time: time_mess[1],
-					status: null,
+					status: 'sent',
 				}
 				arrayMessage.push(newMessage)
 			})
@@ -91,4 +91,4 @@ const Chat_new = () => {
 	);
 }
 
-export default Chat_new
+export default Chats

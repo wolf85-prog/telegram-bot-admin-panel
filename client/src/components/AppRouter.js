@@ -3,7 +3,6 @@ import {Routes, Route} from 'react-router-dom';
 import {authRoutes, publicRoutes} from "../routes_start";
 import { LOGIN_ROUTE } from '../utils/consts';
 import { Context } from '../index';
-import { AccountContext } from "../chat-app/context/AccountProvider";
 import {observer} from "mobx-react-lite"
 
 // Pages
@@ -14,9 +13,6 @@ const AppRouter = observer(() => {
 
   const {user} = useContext(Context)
   console.log(user)
-
-  const { setAccount }= useContext(AccountContext);
-  setAccount("true");
 
   return (
     <Routes>  

@@ -11,7 +11,7 @@ import Convo from "./components/Convo";
 import { useUsersContext } from "./../../context/usersContext";
 
 import { useContext } from 'react';
-import { AccountContext } from './../../../chat-app/context/AccountProvider';
+import { AccountContext } from './../../../chat-app-new/context/AccountProvider';
 import { getConversation, newMessage } from './../../../http/chatAPI';
 import { $authHost, $host } from './../../../http/index'
 
@@ -59,7 +59,7 @@ const Chat = () => {
 		lastMsgRef.current?.scrollIntoView({transition: "smooth"});
 	};
 
-	const submitNewMessage = async () => {
+	const sendText = async () => {
 		let message = {};
         if(!file) {
             message = {
@@ -104,6 +104,15 @@ const Chat = () => {
 		else {
 			console.log('Что-то пошло не так. Попробуйте ещё раз.');
 		}
+	}
+
+	const submitNewMessage = (e) => {
+		//e.preventDefault();
+		// const code = e.keyCode || e.which;
+        // if (code === 13) {
+		// 	sendText()
+		// }
+		sendText()
 	};
 
 	return (

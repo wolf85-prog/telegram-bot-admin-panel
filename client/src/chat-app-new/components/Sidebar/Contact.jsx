@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import formatTime from "./../../utils/formatTime";
 import { useUsersContext } from "./../../context/usersContext";
 import { getConversation } from './../../../http/chatAPI'
-import { AccountContext } from '../../../chat-app/context/AccountProvider'
+import { AccountContext } from '../../../chat-app-new/context/AccountProvider'
 import Avatar from "./../../../assets/images/avatars/blank-avatar.png"
 
 const Contact = ({ contact }) => {
@@ -26,14 +26,21 @@ const Contact = ({ contact }) => {
     }
 	
 	const getLastMessage = () => {
-		const messageDates = Object.keys(contact.messages);
-		const recentMessageDate = messageDates[messageDates.length - 1];
-		const messages = [...contact.messages[recentMessageDate]];
-		const lastMessage = messages.pop();
-		return lastMessage;
+			const messageDates = Object.keys(contact.messages);
+			const recentMessageDate = messageDates[messageDates.length - 1];
+			const messages = [...contact.messages[recentMessageDate]];
+
+			if (messages.length) {
+				const lastMessage = messages.pop();
+				return lastMessage;
+			} 
+			const lastMessage = '';
+			return lastMessage;
 	};
 
 	const lastMessage = getLastMessage(contact);
+
+	//console.log("lastMessage: ", lastMessage)
 
 	return (
 		<Link
@@ -51,12 +58,12 @@ const Contact = ({ contact }) => {
 				<div className="sidebar-contact__top-content">
 					<h2 className="sidebar-contact__name"> {contact.name}</h2>
 					<span className="sidebar-contact__time">
-						{/* {formatTime(lastMessage.time)} */}
+						{lastMessage === ''  ? '' : formatTime(lastMessage.time)}
 					</span>
 				</div>
 				<div className="sidebar-contact__bottom-content">
 					<p className="sidebar-contact__message-wrapper">
-						{/* {lastMessage.status && (
+						{lastMessage.status && (
 							<Icon
 								id={
 									lastMessage?.status === "sent" ? "singleTick" : "doubleTick"
@@ -68,7 +75,7 @@ const Contact = ({ contact }) => {
 										: ""
 								}`}
 							/>
-						)} */}
+						)}
 						<span
 							className={`sidebar-contact__message ${
 								!!contact.unread ? "sidebar-contact__message--unread" : ""

@@ -33,12 +33,6 @@ const _nav = [
     icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
   },
   {
-    component: CNavItem,
-    name: 'Чаты New',
-    to: '/chat_new',
-    icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
-  },
-  {
     component: CNavGroup,
     name: 'Аналитика',
     to: '/base',
