@@ -17,8 +17,6 @@ const Sidebar = () => {
 	const[text, setText]= useState("");
 
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
-    const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
-	
 
     useEffect(() => {
         const filteredData = users.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));

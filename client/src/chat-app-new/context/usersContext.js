@@ -8,6 +8,7 @@ const useUsersContext = () => useContext(UsersContext);
 const UsersProvider = ({ children }) => {
 	const socket = useSocketContext();
 	const [users, setUsers] = useState([]); //useState(contacts);
+	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
 	const _updateUserProp = (userId, prop, value) => {
 		setUsers((users) => {
@@ -52,11 +53,24 @@ const UsersProvider = ({ children }) => {
 	// 	socket.on("fetch_response", fetchMessageResponse);
 	// 	socket.on("start_typing", setUserAsTyping);
 	// 	socket.on("stop_typing", setUserAsNotTyping);
+	// 	socket.on("getMessage", getMessageData);
+	// 	socket.on("welcome", message=> { console.log(message) } )
 	// }, [socket]);
+
+	// useEffect(()=>{
+    //     socket.current.emit("addUser", chatAdminId)
+    //     socket.current.on("getUsers", users => {
+    //         //console.log("users: ", users);
+    //     })
+    // },[chatAdminId])
 
 	const setUserAsUnread = (userId) => {
 		_updateUserProp(userId, "unread", 0);
 	};
+
+	const getMessageData = () => {
+
+	}
 
 	const addNewMessage = (userId, message) => {
 		let userIndex = users.findIndex((user) => user.id === userId);

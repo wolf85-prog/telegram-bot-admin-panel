@@ -3,7 +3,6 @@ import Icon from "./../../components/Icon";
 import { Link } from "react-router-dom";
 import formatTime from "./../../utils/formatTime";
 import { useUsersContext } from "./../../context/usersContext";
-import { getConversation } from './../../../http/chatAPI'
 import { AccountContext } from '../../../chat-app-new/context/AccountProvider'
 import Avatar from "./../../../assets/images/avatars/blank-avatar.png"
 

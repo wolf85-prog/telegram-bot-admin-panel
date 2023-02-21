@@ -20,13 +20,13 @@ const Chats = () => {
 	const [startLoadProgress, setStartLoadProgress] = useState(false);
 
     const { person } = useContext(AccountContext); 
-	const { users, setUsers } = useUsersContext();
+	const { setUsers } = useUsersContext();
 	
 
 	useEffect(() => {
 		if (userPrefersDark) document.body.classList.add("dark-theme");
 		stopLoad();
-	}, []);   
+	});   
 
 	const stopLoad = () => {
 		setStartLoadProgress(true);

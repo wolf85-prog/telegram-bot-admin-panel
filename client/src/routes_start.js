@@ -2,23 +2,17 @@ import React from 'react'
 import { 
     ADMIN_ROUTE, 
     ANALITIKA_ROUTE, 
-    MESSENGER_ROUTE, 
     NOTIF_ROUTE,
     MESS_BOT_ROUTE,
     REPORTS_ROUTE,
     DISTRIBUTION_ROUTE,
     SETTINGS_ROUTE,
     CHAT_ROUTE,
-    CHAT_NEW_ROUTE,
     LOGIN_ROUTE, 
     REGISTRATION_ROUTE 
 } from "./utils/consts";
 
-import Auth from "./views/pages/login/Login";
-import Analitic from "./pages/Admin";
-
 const Chats = React.lazy(() => import('./pages/Chats'))
-//const Chat = React.lazy(() => import('./chat-app/components/Messenger'))
 const Admin = React.lazy(() => import('./pages/Admin'))
 const Notifications = React.lazy(() => import('./pages/Notifications'))
 const MessagesBot = React.lazy(() => import('./pages/MessagesBot'))
