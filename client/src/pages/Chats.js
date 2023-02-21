@@ -75,7 +75,7 @@ const Chats = () => {
 		})
 
 		setUsers(arrayContact)
-
+		console.log("contacts: ", arrayContact)
 	}
 
 	if (!appLoaded) return <Loader done={startLoadProgress} />;
