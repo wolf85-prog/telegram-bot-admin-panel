@@ -58,9 +58,9 @@ const UsersProvider = ({ children }) => {
 	}, [socket]);
 
 	useEffect(()=>{
-        socket.current.emit("addUser", chatAdminId)
-        socket.current.on("getUsers", users => {
-            //console.log("users: ", users);
+        socket.emit("addUser", chatAdminId)
+        socket.on("getUsers", users => {
+            console.log("users socket: ", users);
         })
     },[chatAdminId])
 
