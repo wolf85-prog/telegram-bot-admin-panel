@@ -1,14 +1,63 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./socketContext";
+import { getContacts, getConversation, getMessages } from '../../http/chatAPI'
 
 const UsersContext = createContext();
 
 const useUsersContext = () => useContext(UsersContext);
 
 const UsersProvider = ({ children }) => {
-	const socket = useSocketContext();
+	//const socket = useSocketContext();
 	const [users, setUsers] = useState([]); //useState(contacts);
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
+
+	useEffect(() => {
+		const fetchData = async () => {
+			let response = await getContacts();
+	
+			const arrayContact = []
+	
+			response.map(async (user) => {
+				
+				let conversationId = await getConversation(user.chatId)
+				let messages = await getMessages(conversationId)
+	
+				const arrayMessage = []
+	
+				messages.map(message => {
+					let time_mess = message.createdAt.split('T')
+					const newMessage = {
+						content: message.text,
+						sender: message.senderId,
+						time: time_mess[1],
+						status: 'sent',
+					}
+					arrayMessage.push(newMessage)
+				})
+	
+				let first_name = user.firstname != null ? user.firstname : ''
+				let last_name = user.lastname != null ? user.lastname : ''
+				const newUser = {
+					id: user.id,
+					name: first_name + ' ' + last_name,
+					chatId: user.chatId,
+					conversationId: conversationId,
+					unread: 0, 
+					pinned: false,
+					typing: false,
+					messages: {"01/01/2023": arrayMessage}
+				}
+				arrayContact.push(newUser)
+				//console.log("arrayMessage: ", arrayMessage)
+			})
+	
+			setUsers(arrayContact)
+			console.log("contacts: ", arrayContact)
+		}
+
+		fetchData();
+
+	},[])
 
 	const _updateUserProp = (userId, prop, value) => {
 		setUsers((users) => {

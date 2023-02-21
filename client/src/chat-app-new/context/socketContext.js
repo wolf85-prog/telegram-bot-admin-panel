@@ -5,9 +5,9 @@ import io from "socket.io-client";
 // 	? "http://localhost:5000"
 // 	: "https://whatsapp-web-clone-backend.herokuapp.com/";
 
-const SOCKET_URL = "https://proj.uley.team:9000"
+//const SOCKET_URL = "https://proj.uley.team:9000"
 
-const socket = io.connect(SOCKET_URL);
+//const socket = io.connect(SOCKET_URL);
 
 const SocketContext = createContext();
 
@@ -15,7 +15,7 @@ const useSocketContext = () => useContext(SocketContext);
 
 const SocketProvider = ({ children }) => {
 	return (
-		<SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
+		<SocketContext.Provider >{children}</SocketContext.Provider>
 	);
 };
 

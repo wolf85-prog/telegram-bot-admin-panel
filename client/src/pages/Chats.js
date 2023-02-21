@@ -20,7 +20,8 @@ const Chats = () => {
 	const [startLoadProgress, setStartLoadProgress] = useState(false);
 
     const { person } = useContext(AccountContext); 
-	const { setUsers } = useUsersContext();
+	const [users, setContacts] = useState([])
+	//const { setUsers } = useUsersContext();
 	
 
 	useEffect(() => {
@@ -32,51 +33,8 @@ const Chats = () => {
 		setStartLoadProgress(true);
 		setTimeout(() => setAppLoaded(true), 5000);
 
-		//загрузить всех пользователей (контакты)
-        fetchData();
+        //fetchData();
 	};       
- 
-	const fetchData = async () => {
-		let response = await getContacts();
-
-		const arrayContact = []
-
-		response.map(async (user) => {
-			
-			let conversationId = await getConversation(user.chatId)
-			let messages = await getMessages(conversationId)
-
-			const arrayMessage = []
-
-			messages.map(message => {
-				let time_mess = message.createdAt.split('T')
-				const newMessage = {
-					content: message.text,
-					sender: message.senderId,
-					time: time_mess[1],
-					status: 'sent',
-				}
-				arrayMessage.push(newMessage)
-			})
-
-			let first_name = user.firstname != null ? user.firstname : ''
-			let last_name = user.lastname != null ? user.lastname : ''
-			const newUser = {
-				id: user.id,
-				name: first_name + ' ' + last_name,
-				chatId: user.chatId,
-				conversationId: conversationId,
-				unread: 0, 
-				pinned: false,
-				typing: false,
-				messages: {"01/01/2023": arrayMessage}
-			}
-			arrayContact.push(newUser)
-		})
-
-		setUsers(arrayContact)
-		console.log("contacts: ", arrayContact)
-	}
 
 	if (!appLoaded) return <Loader done={startLoadProgress} />;
 
