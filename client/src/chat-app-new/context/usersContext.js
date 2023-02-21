@@ -72,28 +72,28 @@ const UsersProvider = ({ children }) => {
 
 	}
 
-	const addNewMessage = (userId, message) => {
-		let userIndex = users.findIndex((user) => user.id === userId);
-		const usersCopy = [...users];
-		const newMsgObject = {
-			content: message,
-			sender: null,
-			time: new Date().toLocaleTimeString(),
-			status: "delivered",
-		};
+	// const addNewMessage = (userId, message) => {
+	// 	let userIndex = users.findIndex((user) => user.id === userId);
+	// 	const usersCopy = [...users];
+	// 	const newMsgObject = {
+	// 		content: message,
+	// 		sender: null,
+	// 		time: new Date().toLocaleTimeString(),
+	// 		status: "delivered",
+	// 	};
 
-		usersCopy[userIndex].messages.TODAY.push(newMsgObject);
-		setUsers(usersCopy);
+	// 	usersCopy[userIndex].messages.TODAY.push(newMsgObject);
+	// 	setUsers(usersCopy);
 
-		socket.emit("fetch_response", { userId });
-	};
+	// 	socket.emit("fetch_response", { userId });
+	// };
 
 	return (
 		<UsersContext.Provider value={{ 
 			users, 
 			setUsers,
 			setUserAsUnread, 
-			addNewMessage 
+			//addNewMessage 
 		}}>
 			{children}
 		</UsersContext.Provider>

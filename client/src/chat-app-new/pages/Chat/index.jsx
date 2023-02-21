@@ -16,7 +16,7 @@ import { getConversation, newMessage } from './../../../http/chatAPI';
 import { $authHost, $host } from './../../../http/index'
 
 const Chat = () => {
-	const { users, setUserAsUnread, addNewMessage } = useUsersContext();
+	const { users, setUserAsUnread } = useUsersContext();
 	const { person, account } = useContext(AccountContext);
 
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
