@@ -51,7 +51,7 @@ const Contact = ({ contact }) => {
 				<img
 					src={Avatar}//{contact.profile_picture}
 					alt="avatar_default"//{contact.profile_picture}
-					className="avatar"
+					className="avatar-adm"
 				/>
 			</div>
 			<div className="sidebar-contact__content">

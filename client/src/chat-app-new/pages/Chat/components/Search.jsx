@@ -11,10 +11,10 @@ const Search = () => {
 						<Icon id="back" />
 					</button>
 				</div>
-				<input className="search" placeholder="Search..." />
+				<input className="search" placeholder="Поиск..." />
 			</div>
 			<div className="chat-sidebar__search-results">
-				<p> Search for messages with Karen Okonkwo.</p>
+				<p> Поиск сообщений в чате</p>
 			</div>
 		</>
 	);

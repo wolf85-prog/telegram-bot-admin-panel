@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./../chat-app-new/App.css";
 import "./../chat-app-new/index.css";
-//import "./../chat-app-new/assets/css/index.css";
+import "./../chat-app-new/assets/css/index.css";
 import Loader from "../chat-app-new/components/Loader";
 import Home from "../chat-app-new/pages/Home";
 import Sidebar from "../chat-app-new/components/Sidebar";

@@ -28,7 +28,7 @@
     outline-color: rgba(129, 202, 231, 0.3);
 }
 
-.header {
+.headerB {
     background: rgb(237, 237, 237);
     display: flex;
     justify-content: space-between;
@@ -40,7 +40,7 @@
     flex-wrap: nowrap;
 }
 
-.avatar {
+.avatar-adm {
     border-radius: 50%;
     height: 100%;
     width: 100%;

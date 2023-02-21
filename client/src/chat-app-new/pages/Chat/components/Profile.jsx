@@ -30,7 +30,7 @@ const Profile = ({ user }) => {
 		<div className="profile">
 			<div className="profile__section profile__section--personal">
 				<div className="profile__avatar-wrapper">
-					<img src={groupAvatar} alt={user.name} className="avatar" />
+					<img src={groupAvatar} alt={user.name} className="avatar-adm" />
 				</div>
 				<h2 className="profile__name"> {user.name} </h2>
 			</div>

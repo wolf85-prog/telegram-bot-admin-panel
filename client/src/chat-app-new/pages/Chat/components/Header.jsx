@@ -3,11 +3,12 @@ import Icon from "./../../../components/Icon";
 import OptionsBtn from "./../../../components/OptionsButton";
 import Avatar from "./../../../../assets/images/avatars/blank-avatar.png"
 
+
 const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {
 	return (
-		<header className="header chat__header">
+		<header className="headerB chat__header">
 			<div className="chat__avatar-wrapper" onClick={openProfileSidebar}>
-				<img src={Avatar} alt={user?.name} className="avatar" />
+				<img src={Avatar} alt={user?.name} className="avatar-adm" />
 			</div>
 
 			<div className="chat__contact-wrapper" onClick={openProfileSidebar}>

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./styles/main.css";
-import avatar from "./../../assets/images/profile-picture-girl-1.jpeg";
+import avatar from "./../../assets/images/logo_chat_admin.png";
 import Icon from "./../../components/Icon";
 import Contact from "./Contact";
 import OptionsBtn from "./../../components/OptionsButton";
 import { useUsersContext } from "./../../context/usersContext";
+import { Link } from "react-router-dom";
 
 //import { AccountContext } from '../../../context/AccountProvider';
 
@@ -28,11 +29,22 @@ const Sidebar = () => {
 	return (
 		<aside className="sidebarB">
 			{/* Header */}
-			<header className="header">
+			<header className="headerB">
 				<div className="sidebar__avatar-wrapper">
-					<img src={avatar} alt="Karen Okonkwo" className="avatar" />
+					<img src={avatar} alt="Karen Okonkwo" className="avatar-adm" />
 				</div>
 				<div className="sidebar__actions">
+					<Link
+						className="chat__action"
+						aria-label="laptop"
+						to={`/dashboard`}
+						onClick=""
+					>
+						<Icon
+							id="laptop"
+							className="chat__action-icon chat__action-icon--search"
+						/>
+					</Link>
 					<button className="sidebar__action" aria-label="Status">
 						<Icon
 							id="status"
