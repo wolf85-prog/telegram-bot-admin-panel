@@ -22,13 +22,13 @@ createRoot(document.getElementById('root')).render(
           user: new UserStore()
       }}>
 
-        <SocketProvider>
+        {/* <SocketProvider> */}
           <UsersProvider>
             <AccountProvider>
               <App />
             </AccountProvider>        
           </UsersProvider>
-        </SocketProvider>
+        {/* </SocketProvider> */}
 
       </Context.Provider>  
     </Provider>
