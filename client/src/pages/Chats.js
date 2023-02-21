@@ -6,7 +6,7 @@ import Loader from "../chat-app-new/components/Loader";
 import Home from "../chat-app-new/pages/Home";
 import Sidebar from "../chat-app-new/components/Sidebar";
 import Chat from "../chat-app-new/pages/Chat";
-import { getUsers, getConversation, getMessages } from '../http/chatAPI'
+import { getContacts, getConversation, getMessages } from '../http/chatAPI'
 
 import { AccountContext } from "../chat-app-new/context/AccountProvider";
 import { useUsersContext } from "../chat-app-new/context/usersContext";
@@ -37,7 +37,7 @@ const Chats = () => {
 	};       
  
 	const fetchData = async () => {
-		let response = await getUsers();
+		let response = await getContacts();
 
 		const arrayContact = []
 

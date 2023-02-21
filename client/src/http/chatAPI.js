@@ -1,6 +1,6 @@
 import {$authHost, $host} from "./index";
 
-export const getUsers = async () =>{
+export const getContacts = async () =>{
     try {
        let response = await $host.get('api/userbots/get');
        //console.log(response);
