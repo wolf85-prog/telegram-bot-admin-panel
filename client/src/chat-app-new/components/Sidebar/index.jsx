@@ -21,6 +21,8 @@ const Sidebar = () => {
     useEffect(() => {
         const filteredData = users.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
         setContacts(filteredData);
+
+		console.log("filter contacts: ", filteredData)
    
     }, [text]);
 
