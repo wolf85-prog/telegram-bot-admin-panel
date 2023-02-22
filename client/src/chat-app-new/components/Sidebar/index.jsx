@@ -58,13 +58,11 @@ const Sidebar = () => {
 						iconId="menu"
 						iconClassName="sidebar__action-icon"
 						options={[
-							"New group",
-							"Create a room",
-							"Profile",
-							"Archived",
-							"Starred",
-							"Settings",
-							"Log out",
+							"Профиль",
+							"Архив",
+							"Избранные сообщения",
+							"Настройки",
+							"Вернуться в панель управления",
 						]}
 					/>
 				</div>

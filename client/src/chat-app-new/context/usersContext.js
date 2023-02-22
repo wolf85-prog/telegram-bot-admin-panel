@@ -10,6 +10,7 @@ const UsersProvider = ({ children }) => {
 	const socket = useSocketContext();
 	const [users, setUsers] = useState([]); //useState(contacts);
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
+	const [count, setCount] = useState(0)
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -27,6 +28,7 @@ const UsersProvider = ({ children }) => {
 				messages.map(message => {
 					let time_mess = message.createdAt.split('T')
 					const newMessage = {
+						date: time_mess[0],
 						content: message.text,
 						sender: message.senderId,
 						time: time_mess[1],
@@ -37,6 +39,7 @@ const UsersProvider = ({ children }) => {
 	
 				let first_name = user.firstname != null ? user.firstname : ''
 				let last_name = user.lastname != null ? user.lastname : ''
+
 				const newUser = {
 					id: user.id,
 					name: first_name + ' ' + last_name,
@@ -46,9 +49,8 @@ const UsersProvider = ({ children }) => {
 					pinned: false,
 					typing: false,
 					messages: {
-						"01/01/2023": arrayMessage,
-						"Вчера": [],
-						"Сегодня": []		
+						"01/01/2023": arrayMessage,	
+						"Сегодня":[]
 					}
 				}
 				arrayContact.push(newUser)
@@ -84,6 +86,7 @@ const UsersProvider = ({ children }) => {
 	};
 
 	const fetchMessageResponse = (data) => {
+		setCount(count+1);
 		setUsers((users) => {
 			const { senderId, text } = data;
 			//console.log("users: ", users)
@@ -96,10 +99,15 @@ const UsersProvider = ({ children }) => {
 				status: null,
 			};
 			usersCopy[userIndex].messages['Сегодня'].push(newMsgObject);
-			console.log('usersCopy: ', usersCopy)
+			
+			const userObject = usersCopy[userIndex];
+			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1 };
 
-			return usersCopy;
+			console.log("usersCopy: ", usersCopy)
+			//return usersCopy;
 		});
+
+		//_updateUserProp(data.senderId, "uread", value +1);
 	};
 
 	//подключение админа к сокету и вывод всех подключенных

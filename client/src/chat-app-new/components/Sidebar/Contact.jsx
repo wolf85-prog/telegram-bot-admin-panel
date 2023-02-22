@@ -21,7 +21,6 @@ const Contact = ({ contact }) => {
             id: contact.chatId
         });
 		setUserAsUnread(contact.chatId)
-        //console.log("current contact: ", contact) 
     }
 	
 	const getLastMessage = () => {
