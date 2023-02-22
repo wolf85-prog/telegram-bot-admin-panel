@@ -96,7 +96,7 @@ const UsersProvider = ({ children }) => {
 				status: null,
 			};
 
-			usersCopy[userIndex].messages["Сегодня"].push(newMsgObject);
+			usersCopy[userIndex].messages.TODAY.push(newMsgObject);
 
 			return usersCopy;
 		});
@@ -124,7 +124,7 @@ const UsersProvider = ({ children }) => {
 		console.log("new message", data)
 		setUsers((users) => {
 			const { senderId, text } = data;
-			console.log("users: ", users)
+			//console.log("users: ", users)
 			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			const usersCopy = JSON.parse(JSON.stringify(users));
 			const newMsgObject = {
@@ -133,9 +133,10 @@ const UsersProvider = ({ children }) => {
 				time: new Date().toLocaleTimeString(),
 				status: null,
 			};
-			console.log("userIndex: ", userIndex)
+			//console.log("userIndex: ", userIndex)
 			//console.log("usersCopy: ", usersCopy)
-			usersCopy[userIndex].messages.TODAY.push(newMsgObject);
+			usersCopy[userIndex].messages['Сегодня'].push(newMsgObject);
+			console.log('usersCopy: ', usersCopy)
 
 			return usersCopy;
 		});
