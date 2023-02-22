@@ -20,7 +20,7 @@ const Contact = ({ contact }) => {
             name: contact.name, 
             id: contact.chatId
         });
-		setUserAsUnread(contact.id)
+		setUserAsUnread(contact.chatId)
         //console.log("current contact: ", contact) 
     }
 	

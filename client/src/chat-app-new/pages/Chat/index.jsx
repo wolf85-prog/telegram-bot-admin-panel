@@ -38,7 +38,7 @@ const Chat = () => {
 	useEffect(() => {
 		if (user) {
 			scrollToLastMsg();
-			setUserAsUnread(user.id);
+			setUserAsUnread(user.chatId);
 		}
 	}, []);
 

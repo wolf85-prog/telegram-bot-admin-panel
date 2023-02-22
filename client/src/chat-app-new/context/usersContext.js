@@ -66,7 +66,7 @@ const UsersProvider = ({ children }) => {
 	const _updateUserProp = (userId, prop, value) => {
 		setUsers((users) => {
 			const usersCopy = [...users];
-			let userIndex = users.findIndex((user) => user.id === userId);
+			let userIndex = users.findIndex((user) => user.chatId === userId);
 			const userObject = usersCopy[userIndex];
 			usersCopy[userIndex] = { ...userObject, [prop]: value };
 			return usersCopy;
@@ -85,18 +85,18 @@ const UsersProvider = ({ children }) => {
 
 	const fetchMessageResponse = (data) => {
 		setUsers((users) => {
-			const { userId, response } = data;
-
-			let userIndex = users.findIndex((user) => user.id === userId);
+			const { senderId, text } = data;
+			//console.log("users: ", users)
+			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			const usersCopy = JSON.parse(JSON.stringify(users));
 			const newMsgObject = {
-				content: response,
-				sender: userId,
+				content: text,
+				sender: senderId,
 				time: new Date().toLocaleTimeString(),
 				status: null,
 			};
-
-			usersCopy[userIndex].messages.TODAY.push(newMsgObject);
+			usersCopy[userIndex].messages['Сегодня'].push(newMsgObject);
+			console.log('usersCopy: ', usersCopy)
 
 			return usersCopy;
 		});
@@ -111,57 +111,16 @@ const UsersProvider = ({ children }) => {
     },[chatAdminId])
 
 	useEffect(() => {
-		socket.on("getMessage", getMessageData);
-
-		//socket.on("fetch_response", fetchMessageResponse);		
+		socket.on("getMessage", fetchMessageResponse);		
 		//socket.on("start_typing", setUserAsTyping);
 		//socket.on("stop_typing", setUserAsNotTyping);
 		
 	}, [socket]);
 
-
-	const getMessageData = (data) => {
-		console.log("new message", data)
-		setUsers((users) => {
-			const { senderId, text } = data;
-			//console.log("users: ", users)
-			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
-			const usersCopy = JSON.parse(JSON.stringify(users));
-			const newMsgObject = {
-				content: text,
-				sender: senderId,
-				time: new Date().toLocaleTimeString(),
-				status: null,
-			};
-			//console.log("userIndex: ", userIndex)
-			//console.log("usersCopy: ", usersCopy)
-			usersCopy[userIndex].messages['Сегодня'].push(newMsgObject);
-			console.log('usersCopy: ', usersCopy)
-
-			return usersCopy;
-		});
-	}
-
 	const setUserAsUnread = (userId) => {
 		_updateUserProp(userId, "unread", 0);
 	};
 
-
-	// const addNewMessage = (userId, message) => {
-	// 	let userIndex = users.findIndex((user) => user.id === userId);
-	// 	const usersCopy = [...users];
-	// 	const newMsgObject = {
-	// 		content: message,
-	// 		sender: null,
-	// 		time: new Date().toLocaleTimeString(),
-	// 		status: "delivered",
-	// 	};
-
-	// 	usersCopy[userIndex].messages.TODAY.push(newMsgObject);
-	// 	setUsers(usersCopy);
-
-	// 	socket.emit("fetch_response", { userId });
-	// };
 
 	return (
 		<UsersContext.Provider value={{ 
