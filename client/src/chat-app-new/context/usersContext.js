@@ -129,10 +129,11 @@ const UsersProvider = ({ children }) => {
 				time: new Date().toLocaleTimeString(),
 				status: null,
 			};
+			console.log("userIndex: ", userIndex)
+			console.log("usersCopy: ", usersCopy)
+			//usersCopy[userIndex].messages.TODAY.push(newMsgObject);
 
-			usersCopy[userIndex].messages.TODAY.push(newMsgObject);
-
-			return usersCopy;
+			//return usersCopy;
 		});
 	}
 
