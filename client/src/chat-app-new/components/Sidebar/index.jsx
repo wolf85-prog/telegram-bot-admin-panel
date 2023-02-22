@@ -83,7 +83,7 @@ const Sidebar = () => {
 			
 			{/* Conversations */}
 			<div className="sidebar__contacts">
-				{contacts.map((contact, index) => (
+				{users.map((contact, index) => (
 					contact.chatId !== chatAdminId &&
                     <>   
 						<Contact key={index} contact={contact} />
