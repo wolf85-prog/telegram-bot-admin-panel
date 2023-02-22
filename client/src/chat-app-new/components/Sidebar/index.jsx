@@ -17,6 +17,10 @@ const Sidebar = () => {
 	const [text, setText]= useState("");
 
 	useEffect(() => {
+		setContacts(clients)
+	},[clients])
+
+	useEffect(() => {
         const filteredData = clients.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
         setContacts(filteredData);
    
