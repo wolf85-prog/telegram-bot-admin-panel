@@ -19,7 +19,7 @@ const Sidebar = () => {
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
     useEffect(() => {
-        const filteredData = users.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
+        const filteredData = contacts.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
         setUsers(filteredData);
    
     }, [text]);
