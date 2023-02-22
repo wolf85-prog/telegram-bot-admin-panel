@@ -58,7 +58,7 @@ const UsersProvider = ({ children }) => {
 			})
 	
 			setUsers(arrayContact)
-			console.log("contacts: ", arrayContact)
+			//console.log("contacts: ", arrayContact)
 		}
 
 		fetchData();
@@ -104,7 +104,7 @@ const UsersProvider = ({ children }) => {
 			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1 };
 
 			console.log("usersCopy: ", usersCopy)
-			//return usersCopy;
+			return usersCopy;
 		});
 
 		//_updateUserProp(data.senderId, "uread", value +1);
