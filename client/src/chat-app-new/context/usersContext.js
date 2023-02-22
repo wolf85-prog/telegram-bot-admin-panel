@@ -11,7 +11,6 @@ const UsersProvider = ({ children }) => {
 	const [users, setUsers] = useState([]); //useState(contacts);
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const [count, setCount] = useState(0)
-	const [text, setText]= useState("");
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -65,12 +64,6 @@ const UsersProvider = ({ children }) => {
 		fetchData();
 
 	},[])
-
-	useEffect(() => {
-        const filteredData = users.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
-        setUsers(filteredData);
-   
-    }, [text]);
 
 	const _updateUserProp = (userId, prop, value) => {
 		setUsers((users) => {
@@ -139,8 +132,6 @@ const UsersProvider = ({ children }) => {
 
 	return (
 		<UsersContext.Provider value={{ 
-			text,
-			setText,
 			users, 
 			setUsers,
 			setUserAsUnread, 
