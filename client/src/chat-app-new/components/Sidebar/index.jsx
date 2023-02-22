@@ -11,14 +11,14 @@ import { Link } from "react-router-dom";
 
 
 const Sidebar = () => {
-	const { users } = useUsersContext();
+	const { users, setUsers } = useUsersContext();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
 
 	useEffect(() => {
         const filteredData = users.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
-        setContacts(filteredData);
+        setUsers(filteredData);
    
     }, [text]);
 
