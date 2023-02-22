@@ -38,7 +38,7 @@ const Contact = ({ contact }) => {
 
 	const lastMessage = getLastMessage(contact);
 
-	//console.log("lastMessage: ", lastMessage)
+	console.log("contact.unread: ", contact.unread)
 
 	return (
 		<Link
@@ -86,7 +86,7 @@ const Contact = ({ contact }) => {
 						{contact.pinned && (
 							<Icon id="pinned" className="sidebar-contact__icon" />
 						)}
-						{!!contact.unread && (
+						{contact.unread && (
 							<span className="sidebar-contact__unread">{contact.unread}</span>
 						)}
 						<button aria-label="sidebar-contact__btn">
