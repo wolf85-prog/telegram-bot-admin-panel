@@ -7,7 +7,7 @@ const UsersContext = createContext();
 const useUsersContext = () => useContext(UsersContext);
 
 const UsersProvider = ({ children }) => {
-	//const socket = useSocketContext();
+	const socket = useSocketContext();
 	const [users, setUsers] = useState([]); //useState(contacts);
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
@@ -98,20 +98,20 @@ const UsersProvider = ({ children }) => {
 		});
 	};
 
-	// useEffect(() => {
+	//useEffect(() => {
 	// 	socket.on("fetch_response", fetchMessageResponse);
 	// 	socket.on("start_typing", setUserAsTyping);
 	// 	socket.on("stop_typing", setUserAsNotTyping);
 	// 	socket.on("getMessage", getMessageData);
 	// 	socket.on("welcome", message=> { console.log(message) } )
-	// }, [socket]);
+	//}, [socket]);
 
-	// useEffect(()=>{
-    //     socket.emit("addUser", chatAdminId)
-    //     socket.on("getUsers", users => {
-    //         console.log("users socket: ", users);
-    //     })
-    // },[chatAdminId])
+	useEffect(()=>{
+        socket.emit("addUser", chatAdminId)
+        socket.on("getUsers", users => {
+            console.log("users socket: ", users);
+        })
+    },[chatAdminId])
 
 	const setUserAsUnread = (userId) => {
 		_updateUserProp(userId, "unread", 0);
