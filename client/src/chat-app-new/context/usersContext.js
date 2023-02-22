@@ -98,13 +98,22 @@ const UsersProvider = ({ children }) => {
 		});
 	};
 
-	useEffect(() => {
-		socket.on("fetch_response", fetchMessageResponse);
-		socket.on("start_typing", setUserAsTyping);
-		socket.on("stop_typing", setUserAsNotTyping);
-		socket.on("getMessage", getMessageData);
-		socket.on("welcome", message=> { console.log(message) } )
-	}, [socket]);
+	//useEffect(() => {
+		//socket.on("getMessage", fetchMessageResponse);
+		
+		//socket.on("start_typing", setUserAsTyping);
+		//socket.on("stop_typing", setUserAsNotTyping);
+		//socket.on("getMessage", getMessageData);
+		//socket.on("welcome", message=> { console.log(message) } )
+		
+		// Connection established
+		// socket.on('connect', function(data) {
+		// 	$('.connect_error').hide();
+		// 	$('.connected').show();
+		//    console.log(data);
+		//    //socket.emit('create_socket', '');
+		// });
+	//}, [socket]);
 
 	useEffect(()=>{
         socket.emit("addUser", chatAdminId)
