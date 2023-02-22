@@ -98,6 +98,14 @@ const UsersProvider = ({ children }) => {
 		});
 	};
 
+	//подключение админа к сокету и вывод всех подключенных
+	useEffect(()=>{
+        socket.emit("addUser", chatAdminId)
+        socket.on("getUsers", users => {
+            console.log("users socket: ", users);
+        })
+    },[chatAdminId])
+
 	useEffect(() => {
 		socket.on("getMessage", getMessageData);
 
@@ -110,6 +118,22 @@ const UsersProvider = ({ children }) => {
 
 	const getMessageData = (data) => {
 		console.log("new message", data)
+		setUsers((users) => {
+			const { senderId, text } = data;
+
+			let userIndex = users.findIndex((user) => user.id === senderId);
+			const usersCopy = JSON.parse(JSON.stringify(users));
+			const newMsgObject = {
+				content: text,
+				sender: senderId,
+				time: new Date().toLocaleTimeString(),
+				status: null,
+			};
+
+			usersCopy[userIndex].messages.TODAY.push(newMsgObject);
+
+			return usersCopy;
+		});
 	}
 
 	const setUserAsUnread = (userId) => {
