@@ -11,14 +11,14 @@ import { Link } from "react-router-dom";
 
 
 const Sidebar = () => {
-	const { users, setUsers } = useUsersContext();
+	const { users } = useUsersContext();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
 
 	useEffect(() => {
         const filteredData = users.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
-        setUsers(filteredData);
+        setContacts(filteredData);
    
     }, [text]);
 
@@ -83,7 +83,7 @@ const Sidebar = () => {
 			
 			{/* Conversations */}
 			<div className="sidebar__contacts">
-				{users.map((contact, index) => (
+				{contacts.map((contact, index) => (
 					contact.chatId !== chatAdminId &&
                     <>   
 						<Contact key={index} contact={contact} />
