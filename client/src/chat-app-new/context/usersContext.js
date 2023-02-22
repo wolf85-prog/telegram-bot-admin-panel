@@ -45,7 +45,11 @@ const UsersProvider = ({ children }) => {
 					unread: 0, 
 					pinned: false,
 					typing: false,
-					messages: {"01/01/2023": arrayMessage}
+					messages: {
+						"01/01/2023": arrayMessage,
+						"Вчера": [],
+						"Сегодня": []		
+					}
 				}
 				arrayContact.push(newUser)
 				//console.log("arrayMessage: ", arrayMessage)
@@ -92,7 +96,7 @@ const UsersProvider = ({ children }) => {
 				status: null,
 			};
 
-			usersCopy[userIndex].messages.TODAY.push(newMsgObject);
+			usersCopy[userIndex].messages["Сегодня"].push(newMsgObject);
 
 			return usersCopy;
 		});
