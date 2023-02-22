@@ -6,10 +6,8 @@ import Loader from "../chat-app-new/components/Loader";
 import Home from "../chat-app-new/pages/Home";
 import Sidebar from "../chat-app-new/components/Sidebar";
 import Chat from "../chat-app-new/pages/Chat";
-import { getContacts, getConversation, getMessages } from '../http/chatAPI'
 
 import { AccountContext } from "../chat-app-new/context/AccountProvider";
-import { useUsersContext } from "../chat-app-new/context/usersContext";
 
 const userPrefersDark =
 	window.matchMedia &&
@@ -20,9 +18,6 @@ const Chats = () => {
 	const [startLoadProgress, setStartLoadProgress] = useState(false);
 
     const { person } = useContext(AccountContext); 
-	const [users, setContacts] = useState([])
-	//const { setUsers } = useUsersContext();
-	
 
 	useEffect(() => {
 		if (userPrefersDark) document.body.classList.add("dark-theme");
@@ -32,8 +27,6 @@ const Chats = () => {
 	const stopLoad = () => {
 		setStartLoadProgress(true);
 		setTimeout(() => setAppLoaded(true), 3000);
-
-        //fetchData();
 	};       
 
 	if (!appLoaded) return <Loader done={startLoadProgress} />;

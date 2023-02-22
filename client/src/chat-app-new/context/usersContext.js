@@ -98,37 +98,24 @@ const UsersProvider = ({ children }) => {
 		});
 	};
 
-	//useEffect(() => {
-		//socket.on("getMessage", fetchMessageResponse);
-		
+	useEffect(() => {
+		socket.on("getMessage", getMessageData);
+
+		//socket.on("fetch_response", fetchMessageResponse);		
 		//socket.on("start_typing", setUserAsTyping);
 		//socket.on("stop_typing", setUserAsNotTyping);
-		//socket.on("getMessage", getMessageData);
-		//socket.on("welcome", message=> { console.log(message) } )
 		
-		// Connection established
-		// socket.on('connect', function(data) {
-		// 	$('.connect_error').hide();
-		// 	$('.connected').show();
-		//    console.log(data);
-		//    //socket.emit('create_socket', '');
-		// });
-	//}, [socket]);
+	}, [socket]);
 
-	useEffect(()=>{
-        socket.emit("addUser", chatAdminId)
-        socket.on("getUsers", users => {
-            console.log("users socket: ", users);
-        })
-    },[chatAdminId])
+
+	const getMessageData = (data) => {
+		console.log("new message", data)
+	}
 
 	const setUserAsUnread = (userId) => {
 		_updateUserProp(userId, "unread", 0);
 	};
 
-	const getMessageData = () => {
-
-	}
 
 	// const addNewMessage = (userId, message) => {
 	// 	let userIndex = users.findIndex((user) => user.id === userId);

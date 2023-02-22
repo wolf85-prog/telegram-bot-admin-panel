@@ -12,12 +12,12 @@ import { useUsersContext } from "./../../context/usersContext";
 
 import { useContext } from 'react';
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider';
-import { getConversation, newMessage } from './../../../http/chatAPI';
+import { newMessage } from './../../../http/chatAPI';
 import { $authHost, $host } from './../../../http/index'
 
 const Chat = () => {
 	const { users, setUserAsUnread } = useUsersContext();
-	const { person, account } = useContext(AccountContext);
+	const { person } = useContext(AccountContext);
 
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
     const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
