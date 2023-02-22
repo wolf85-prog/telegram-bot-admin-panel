@@ -120,7 +120,7 @@ const UsersProvider = ({ children }) => {
 		console.log("new message", data)
 		setUsers((users) => {
 			const { senderId, text } = data;
-
+			console.log("users: ", users)
 			let userIndex = users.findIndex((user) => user.chatId === senderId);
 			const usersCopy = JSON.parse(JSON.stringify(users));
 			const newMsgObject = {
@@ -130,8 +130,8 @@ const UsersProvider = ({ children }) => {
 				status: null,
 			};
 			console.log("userIndex: ", userIndex)
-			//console.log("usersCopy: ", usersCopy)
-			usersCopy[userIndex].messages.TODAY.push(newMsgObject);
+			console.log("usersCopy: ", usersCopy)
+			//usersCopy[userIndex].messages.TODAY.push(newMsgObject);
 
 			return usersCopy;
 		});
