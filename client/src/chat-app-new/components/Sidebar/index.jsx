@@ -16,15 +16,29 @@ const Sidebar = () => {
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
 
-	useEffect(() => {
-		setContacts(clients)
-	},[clients])
+	const setSortedPosts = (clients) => {
+		const sortedClients = (() => {
+			return [...clients].sort((a, b) => a.name.localeCompare(b.name))
+		}, [clients])
+
+		return sortedClients;
+	}
+
+	//useEffect(() => {
+		//setContacts([...clients].sort((a, b) => a.name.localeCompare(b.name)))
+	//},[clients])
 
 	useEffect(() => {
+
+		const sortedClients = setSortedPosts(clients);
+
+		console.log("sortedClients", sortedClients[0])
+		console.log("clients", clients)
+
         const filteredData = clients.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
         setContacts(filteredData);
    
-    }, [text]);
+    }, [text, clients]);
 
 	return (
 		<aside className="sidebarB">

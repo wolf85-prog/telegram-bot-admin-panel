@@ -38,8 +38,6 @@ const Contact = ({ contact }) => {
 
 	const lastMessage = getLastMessage(contact);
 
-	console.log("contact.unread: ", contact.unread)
-
 	return (
 		<Link
 			className="sidebar-contact"
