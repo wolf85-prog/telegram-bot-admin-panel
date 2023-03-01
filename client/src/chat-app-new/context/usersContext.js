@@ -96,6 +96,7 @@ const UsersProvider = ({ children }) => {
 	};
 
 	const fetchMessageResponse = (data) => {
+		console.log("Пришло сообщение: ", count+1)
 		setCount(count+1);
 		setUsers((users) => {
 			const { senderId, text } = data;

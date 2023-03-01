@@ -56,7 +56,7 @@ const Chat = () => {
 	};
 
 	const scrollToLastMsg = () => {
-		lastMsgRef.current?.scrollIntoView({transition: "smooth"});
+		lastMsgRef.current.scrollIntoView();
 	};
 
 	const sendText = async () => {
@@ -64,7 +64,7 @@ const Chat = () => {
         if(!file) {
             message = {
                 senderId: chatAdminId, 
-                reciverId: user.chatId,
+                receiverId: user.chatId,
                 conversationId: user.conversationId,
                 type: "text",
                 text: value,
@@ -73,7 +73,7 @@ const Chat = () => {
         } else {
             message = {
                 senderId: chatAdminId, 
-                reciverId: user.chatId,
+                receiverId: user.chatId,
                 conversationId: user.conversationId,
                 type: "file",
                 text: image,
@@ -88,13 +88,6 @@ const Chat = () => {
         //Передаем данные боту
         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${value}`
         const sendToTelegram = await $host.get(url_send_msg);
-
-		//addNewMessage(user.id, newMessage);
-		//setNewMessage("");
-		setValue("");
-		scrollToLastMsg();
-		setFile("");
-        setImage("")
 
 		//Выводим сообщение об успешной отправке
 		if (sendToTelegram) {
@@ -112,7 +105,13 @@ const Chat = () => {
         // if (code === 13) {
 		// 	sendText()
 		// }
-		sendText()
+
+		sendText();
+
+		setValue("");
+		scrollToLastMsg();
+		setFile("");
+        setImage("");
 	};
 
 	return (
