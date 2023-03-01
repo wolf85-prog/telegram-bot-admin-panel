@@ -119,6 +119,7 @@ const UsersProvider = ({ children }) => {
 			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			const usersCopy = JSON.parse(JSON.stringify(users));
 			const newMsgObject = {
+				date: new Date().toLocaleDateString(),
 				content: text,
 				sender: senderId,
 				time: new Date().toLocaleTimeString(),
