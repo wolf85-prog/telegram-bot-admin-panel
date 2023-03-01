@@ -125,7 +125,9 @@ const UsersProvider = ({ children }) => {
 				status: null,
 			};
 
-			usersCopy[userIndex].messages[`${new Date()}`].push(newMsgObject);
+			console.log("date: ", new Date())
+
+			usersCopy[userIndex].messages['2023-03-01'].push(newMsgObject);
 			//usersCopy[userIndex].messages['Сегодня'] = newMsgObject;
 			
 			const userObject = usersCopy[userIndex];
