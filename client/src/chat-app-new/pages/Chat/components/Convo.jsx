@@ -32,7 +32,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 								{message.image ? (
 									<div
 										className={`chat__msg chat__img-wrapper ${
-											message.sender != chatAdminId ? "chat__msg--rxd" : "chat__msg--sent"
+											message.sender !== chatAdminId ? "chat__msg--rxd" : "chat__msg--sent"
 										}`}
 										ref={assignRef()}
 									>
@@ -63,7 +63,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											<Icon id="downArrow" className="chat__msg-options-icon" />
 										</button>
 									</div>
-								) : message.sender != chatAdminId ? (
+								) : message.sender !== chatAdminId ? (
 									<p className="chat__msg chat__msg--rxd" ref={assignRef()}>
 										<span>{message.content}</span>
 										<span className="chat__msg-filler"> </span>
