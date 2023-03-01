@@ -14,11 +14,19 @@ const Sidebar = () => {
 	const [text, setText]= useState("");
 
 	useEffect(() => {
-		const sortedClients = [...clients].sort((a, b) => a.name.localeCompare(b.name))
+		//const sortedClients = [...clients].sort((a, b) => a.name.localeCompare(b.name))
+
+		const sortedClients = [...clients].sort((a, b) => {
+                
+			var dateA = new Date(a.date), dateB = new Date(b.date)
+							
+			//     dateA-dateB  //сортировка по возрастающей дате     
+			return dateB-dateA  //сортировка по убывающей дате  
+		})
 
         const filteredData = sortedClients.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
         setContacts(filteredData);
-   
+        
     }, [text]);
 
 	return (

@@ -22,6 +22,14 @@ const UsersProvider = ({ children }) => {
 				
 				let conversationId = await getConversation(user.chatId)
 				let messages = await getMessages(conversationId)
+
+				//получить последнее сообщение
+				const messageDates = Object.keys(messages);
+				const recentMessageDate = messageDates[messageDates.length - 1];
+				const message = messages[recentMessageDate];
+
+				const dateMessage = message ? messages[recentMessageDate].createdAt : "2000-01-01T00:00:00";
+				const lastMessage = message ? messages[recentMessageDate].text : "";			
 	
 				const arrayMessage = []
 	
@@ -48,18 +56,19 @@ const UsersProvider = ({ children }) => {
 					unread: 0, 
 					pinned: false,
 					typing: false,
-					messages:  arrayMessage,
-					// messages: {
-					// 	"01/01/2023": arrayMessage,	
-					// 	"Сегодня":[]
-					// }	
+					message:  lastMessage,
+					date: dateMessage,
+					messages: {
+						"01/01/2023": arrayMessage,	
+						"Сегодня":[]
+					}	
 				}
 				arrayContact.push(newUser)
 				//console.log("arrayMessage: ", arrayMessage)
 			})
 	
 			setUsers(arrayContact)
-			//console.log("contacts: ", arrayContact)
+			console.log("contacts: ", arrayContact)
 		}
 
 		fetchData();

@@ -35,6 +35,12 @@ const Contact = ({ contact }) => {
 			const lastMessage = '';
 			return lastMessage;
 	};
+	// let lastMessage = '';
+
+	// useEffect(() => {
+	// 	lastMessage = getLastMessage(contact);
+	// 	console.log("lastMessage: ", lastMessage)
+	// }, [contact])
 
 	const lastMessage = getLastMessage(contact);
 
