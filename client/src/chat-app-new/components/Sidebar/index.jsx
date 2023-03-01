@@ -7,9 +7,6 @@ import OptionsBtn from "./../../components/OptionsButton";
 import { useUsersContext } from "./../../context/usersContext";
 import { Link } from "react-router-dom";
 
-//import { AccountContext } from '../../../context/AccountProvider';
-
-
 const Sidebar = () => {
 	const { users: clients } = useUsersContext();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 

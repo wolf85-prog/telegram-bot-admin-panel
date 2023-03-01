@@ -48,10 +48,11 @@ const UsersProvider = ({ children }) => {
 					unread: 0, 
 					pinned: false,
 					typing: false,
-					messages: {
-						"01/01/2023": arrayMessage,	
-						"Сегодня":[]
-					}
+					messages:  arrayMessage,
+					// messages: {
+					// 	"01/01/2023": arrayMessage,	
+					// 	"Сегодня":[]
+					// }	
 				}
 				arrayContact.push(newUser)
 				//console.log("arrayMessage: ", arrayMessage)
