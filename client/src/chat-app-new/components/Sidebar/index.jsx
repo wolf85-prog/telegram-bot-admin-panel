@@ -20,12 +20,12 @@ const Sidebar = () => {
 	
 	useEffect(() => {
 		//const sortedClients = [...clients].sort((a, b) => a.name.localeCompare(b.name))
-
+                  
 		const sortedClients = [...clients].sort((a, b) => {            
 			var dateA = new Date(a.date), dateB = new Date(b.date)   
 			return dateB-dateA  //сортировка по убывающей дате  
 		})
-         
+                    
         //const filteredData = sortedClients.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
 
 		const filteredData = clients.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
