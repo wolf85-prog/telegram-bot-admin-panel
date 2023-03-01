@@ -124,7 +124,9 @@ const UsersProvider = ({ children }) => {
 				time: new Date().toLocaleTimeString(),
 				status: null,
 			};
-			usersCopy[userIndex].messages['Сегодня'].push(newMsgObject);
+
+			usersCopy[userIndex].messages[`${new Date()}`].push(newMsgObject);
+			//usersCopy[userIndex].messages['Сегодня'] = newMsgObject;
 			
 			const userObject = usersCopy[userIndex];
 			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1 };
