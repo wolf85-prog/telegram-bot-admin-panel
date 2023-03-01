@@ -36,7 +36,8 @@ const Contact = ({ contact }) => {
 
 			let messages = [];
 			//console.log("contact.messages: ", contact.messages)
-			if (Object.keys(contact.messages).length !== 0) {
+			//JSON.stringify(order) === '{}'
+			if (JSON.stringify(contact.messages) !== '{}') {
 				messages = [...contact.messages[recentMessageDate]];
 			}
 			
