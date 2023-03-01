@@ -13,18 +13,25 @@ const Sidebar = () => {
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
 
+
+	useEffect(() => {
+		setContacts(clients)
+	},[clients])
+	
 	useEffect(() => {
 		//const sortedClients = [...clients].sort((a, b) => a.name.localeCompare(b.name))
 
-		const sortedClients = [...clients].sort((a, b) => {
+		// const sortedClients = [...clients].sort((a, b) => {
                 
-			var dateA = new Date(a.date), dateB = new Date(b.date)
+		// 	var dateA = new Date(a.date), dateB = new Date(b.date)
 							
-			//     dateA-dateB  //сортировка по возрастающей дате     
-			return dateB-dateA  //сортировка по убывающей дате  
-		})
+		// 	//     dateA-dateB  //сортировка по возрастающей дате     
+		// 	return dateB-dateA  //сортировка по убывающей дате  
+		// })
 
-        const filteredData = sortedClients.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
+        //const filteredData = sortedClients.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
+
+		const filteredData = clients.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
         setContacts(filteredData);
         
     }, [text]);
