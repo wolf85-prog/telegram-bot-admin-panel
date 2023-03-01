@@ -32,6 +32,7 @@ const UsersProvider = ({ children }) => {
 				const lastMessage = message ? messages[recentMessageDate].text : "";			
 	
 				const arrayMessage = []
+				const allDate = []
 	
 				messages.map(message => {
 					let time_mess = message.createdAt.split('T')
@@ -43,7 +44,12 @@ const UsersProvider = ({ children }) => {
 						status: 'sent',
 					}
 					arrayMessage.push(newMessage)
+					allDate.push(time_mess[0])
 				})
+
+				const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
+
+				console.log("dates: ", dates)
 	
 				let first_name = user.firstname != null ? user.firstname : ''
 				let last_name = user.lastname != null ? user.lastname : ''
@@ -61,7 +67,8 @@ const UsersProvider = ({ children }) => {
 					messages: {
 						"01/01/2023": arrayMessage,	
 						"Сегодня":[]
-					}	
+					},	
+					messages2: dates,
 				}
 				arrayContact.push(newUser)
 				//console.log("arrayMessage: ", arrayMessage)

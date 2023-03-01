@@ -28,7 +28,7 @@ const Sidebar = () => {
 		// 	//     dateA-dateB  //сортировка по возрастающей дате     
 		// 	return dateB-dateA  //сортировка по убывающей дате  
 		// })
-
+ 
         //const filteredData = sortedClients.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
 
 		const filteredData = clients.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));

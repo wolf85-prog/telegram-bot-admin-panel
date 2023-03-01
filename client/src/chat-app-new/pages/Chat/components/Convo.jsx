@@ -4,10 +4,12 @@ import media from "./../../../assets/images/women.jpeg";
 import formatTime from "./../../../utils/formatTime";
 
 const Convo = ({ lastMsgRef, messages: allMessages }) => {
-	const dates = Object.keys(allMessages);
+	const dates = Object.keys(allMessages);  //['01/01/2023', 'Сегодня']
+	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 
 	return dates.map((date, dateIndex) => {
 		const messages = allMessages[date];
+		console.log("allMessages: ", messages);
 		return (
 			<div key={dateIndex}>
 				<div className="chat__date-wrapper">
@@ -30,7 +32,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 								{message.image ? (
 									<div
 										className={`chat__msg chat__img-wrapper ${
-											message.sender ? "chat__msg--rxd" : "chat__msg--sent"
+											message.sender != chatAdminId ? "chat__msg--rxd" : "chat__msg--sent"
 										}`}
 										ref={assignRef()}
 									>
@@ -61,7 +63,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											<Icon id="downArrow" className="chat__msg-options-icon" />
 										</button>
 									</div>
-								) : message.sender ? (
+								) : message.sender != chatAdminId ? (
 									<p className="chat__msg chat__msg--rxd" ref={assignRef()}>
 										<span>{message.content}</span>
 										<span className="chat__msg-filler"> </span>

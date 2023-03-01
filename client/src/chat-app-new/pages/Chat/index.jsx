@@ -56,7 +56,7 @@ const Chat = () => {
 	};
 
 	const scrollToLastMsg = () => {
-		lastMsgRef.current.scrollIntoView();
+		lastMsgRef.current?.scrollIntoView({transition: "smooth"});
 	};
 
 	const sendText = async () => {
@@ -105,7 +105,7 @@ const Chat = () => {
         // if (code === 13) {
 		// 	sendText()
 		// }
-
+		
 		sendText();
 
 		setValue("");
