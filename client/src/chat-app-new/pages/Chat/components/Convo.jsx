@@ -9,7 +9,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 	return dates.map((date, dateIndex) => {
 		const messages = allMessages[date];
-		console.log("allMessages: ", messages);
+		//console.log("allMessages: ", messages);
 		return (
 			<div key={dateIndex}>
 				<div className="chat__date-wrapper">

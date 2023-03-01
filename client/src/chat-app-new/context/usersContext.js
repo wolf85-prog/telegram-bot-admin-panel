@@ -33,7 +33,7 @@ const UsersProvider = ({ children }) => {
 	
 				const arrayMessage = []
 				const allDate = []
-	
+
 				messages.map(message => {
 					let time_mess = message.createdAt.split('T')
 					const newMessage = {
@@ -45,14 +45,27 @@ const UsersProvider = ({ children }) => {
 					}
 					arrayMessage.push(newMessage)
 					allDate.push(time_mess[0])
+
 				})
 
 				const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
-
-				console.log("dates: ", dates)
 	
 				let first_name = user.firstname != null ? user.firstname : ''
 				let last_name = user.lastname != null ? user.lastname : ''
+
+
+				let obj = {};
+				for (let i = 0; i < dates.length; i++) {
+					const arrayDateMessage = []
+					for (let j = 0; j < arrayMessage.length; j++) {
+						if (arrayMessage[j].date === dates[i]) {
+							arrayDateMessage.push(arrayMessage[j])							
+						}
+					}	
+					obj[dates[i]] = arrayDateMessage;
+				}
+
+				obj["Сегодня"] = []
 
 				const newUser = {
 					id: user.id,
@@ -64,14 +77,9 @@ const UsersProvider = ({ children }) => {
 					typing: false,
 					message:  lastMessage,
 					date: dateMessage,
-					messages: {
-						"01/01/2023": arrayMessage,	
-						"Сегодня":[]
-					},	
-					messages2: dates,
+					messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
 				}
 				arrayContact.push(newUser)
-				//console.log("arrayMessage: ", arrayMessage)
 			})
 	
 			setUsers(arrayContact)
