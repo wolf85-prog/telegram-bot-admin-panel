@@ -24,8 +24,10 @@ const Contact = ({ contact }) => {
     }
 	
 	const getLastMessage = () => {
-			const messageDates = Object.keys(contact.messages);
+			const messageDates = Object.keys(contact.messages);	
+			console.log("messageDates: ", messageDates)		
 			const recentMessageDate = messageDates[messageDates.length - 1];
+			//console.log("recentMessageDate: ", recentMessageDate)
 			const messages = [...contact.messages[recentMessageDate]];
 
 			if (messages.length) {
@@ -35,12 +37,6 @@ const Contact = ({ contact }) => {
 			const lastMessage = '';
 			return lastMessage;
 	};
-	// let lastMessage = '';
-
-	// useEffect(() => {
-	// 	lastMessage = getLastMessage(contact);
-	// 	console.log("lastMessage: ", lastMessage)
-	// }, [contact])
 
 	const lastMessage = getLastMessage(contact);
 

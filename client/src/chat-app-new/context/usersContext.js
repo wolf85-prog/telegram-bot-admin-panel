@@ -65,7 +65,7 @@ const UsersProvider = ({ children }) => {
 					obj[dates[i]] = arrayDateMessage;
 				}
 
-				obj["Сегодня"] = []
+				//obj["Сегодня"] = []
 
 				const newUser = {
 					id: user.id,
