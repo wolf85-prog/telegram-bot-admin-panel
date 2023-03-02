@@ -8,7 +8,7 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {
 	return (
 		<header className="headerB chat__header">
 			<div className="chat__avatar-wrapper" onClick={openProfileSidebar}>
-				<img src={Avatar} alt={user?.name} className="avatar-adm" />
+				<img src={'https://ui-avatars.com/api/?background=random&name=' + user?.name} alt={user?.name} className="avatar-adm" />
 			</div>
 
 			<div className="chat__contact-wrapper" onClick={openProfileSidebar}>
