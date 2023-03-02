@@ -49,10 +49,6 @@ const UsersProvider = ({ children }) => {
 				})
 
 				const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
-	
-				let first_name = user.firstname != null ? user.firstname : ''
-				let last_name = user.lastname != null ? user.lastname : ''
-
 
 				let obj = {};
 				for (let i = 0; i < dates.length; i++) {
@@ -67,6 +63,9 @@ const UsersProvider = ({ children }) => {
 
 				//obj["Сегодня"] = []
 
+				let first_name = user.firstname != null ? user.firstname : ''
+				let last_name = user.lastname != null ? user.lastname : ''
+
 				const newUser = {
 					id: user.id,
 					name: first_name + ' ' + last_name,
@@ -79,26 +78,33 @@ const UsersProvider = ({ children }) => {
 					date: dateMessage,
 					messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
 				}
+
 				arrayContact.push(newUser)
 			})
 
-			// const sortedClients = [...arrayContact].sort((a, b) => {            
-			// 	var dateA = new Date(a.date), dateB = new Date(b.date)   
-			// 	return dateB-dateA  //сортировка по убывающей дате  
-			// })
+			
+			//console.log("arrayContact: ", arrayContact)
 
-			const sortedClients = arrayContact.sort((a, b) => a.name.localeCompare(b.name))
+			setTimeout(() => {
+				const sortedClients = [...arrayContact].sort((a, b) => {       
+					var dateA = new Date(a.date), dateB = new Date(b.date) 
+					return dateB-dateA  //сортировка по убывающей дате  
+				})
 
-			console.log("arrayContact: ", sortedClients)
-	
-			//setUsers(sortedClients)
-			setUsers(arrayContact)
-			console.log("contacts: ", sortedClients)
+				setUsers(sortedClients)
+
+			}, "8000")
+
 		}
 
 		fetchData();
 
 	},[])
+
+
+	useEffect(() => {
+		console.log("users: ", users)
+	},[users])
 
 	const _updateUserProp = (userId, prop, value) => {
 		setUsers((users) => {
