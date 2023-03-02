@@ -81,9 +81,19 @@ const UsersProvider = ({ children }) => {
 				}
 				arrayContact.push(newUser)
 			})
+
+			// const sortedClients = [...arrayContact].sort((a, b) => {            
+			// 	var dateA = new Date(a.date), dateB = new Date(b.date)   
+			// 	return dateB-dateA  //сортировка по убывающей дате  
+			// })
+
+			const sortedClients = arrayContact.sort((a, b) => a.name.localeCompare(b.name))
+
+			console.log("arrayContact: ", sortedClients)
 	
+			//setUsers(sortedClients)
 			setUsers(arrayContact)
-			console.log("contacts: ", arrayContact)
+			console.log("contacts: ", sortedClients)
 		}
 
 		fetchData();
