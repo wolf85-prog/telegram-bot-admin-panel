@@ -82,8 +82,6 @@ const UsersProvider = ({ children }) => {
 				arrayContact.push(newUser)
 			})
 
-			
-			//console.log("arrayContact: ", arrayContact)
 
 			setTimeout(() => {
 				const sortedClients = [...arrayContact].sort((a, b) => {       
@@ -93,7 +91,7 @@ const UsersProvider = ({ children }) => {
 
 				setUsers(sortedClients)
 
-			}, "8000")
+			}, "10000")
 
 		}
 
@@ -102,9 +100,9 @@ const UsersProvider = ({ children }) => {
 	},[])
 
 
-	useEffect(() => {
-		console.log("users: ", users)
-	},[users])
+	// useEffect(() => {
+	// 	console.log("users: ", users)
+	// },[users])
 
 	const _updateUserProp = (userId, prop, value) => {
 		setUsers((users) => {
@@ -129,6 +127,7 @@ const UsersProvider = ({ children }) => {
 	const fetchMessageResponse = (data) => {
 		console.log("Пришло сообщение: ", count+1)
 		setCount(count+1);
+
 		setUsers((users) => {
 			const { senderId, text } = data;
 			//console.log("users: ", users)
@@ -142,16 +141,20 @@ const UsersProvider = ({ children }) => {
 				status: null,
 			};
 
-			console.log("date: ", new Date())
+			const currentDate = new Date().toLocaleDateString()
 
-			usersCopy[userIndex].messages['2023-03-01'].push(newMsgObject);
-			//usersCopy[userIndex].messages['Сегодня'] = newMsgObject;
+			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 			
 			const userObject = usersCopy[userIndex];
 			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1 };
 
-			console.log("usersCopy: ", usersCopy)
-			return usersCopy;
+			const userSort = [...usersCopy].sort((a, b) => {       
+				var dateA = new Date(a.date), dateB = new Date(b.date) 
+				return dateB-dateA  //сортировка по убывающей дате  
+			})
+
+			console.log("userSort: ", userSort)
+			return userSort;
 		});
 
 		//_updateUserProp(data.senderId, "uread", value +1);
