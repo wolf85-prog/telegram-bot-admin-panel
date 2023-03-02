@@ -142,8 +142,9 @@ const UsersProvider = ({ children }) => {
 			};
 
 			const currentDate = new Date().toLocaleDateString()
+			console.log(currentDate)
 
-			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			usersCopy[userIndex].messages['2023-03-02'].push(newMsgObject);
 			
 			const userObject = usersCopy[userIndex];
 			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1 };
