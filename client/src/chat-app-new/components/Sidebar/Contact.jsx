@@ -61,8 +61,8 @@ const Contact = ({ contact }) => {
 		>
 			<div className="sidebar-contact__avatar-wrapper">
 				<img
-					src={Avatar}//{contact.profile_picture}
-					alt="avatar_default"//{contact.profile_picture}
+					src={'https://ui-avatars.com/api/?background=random&name=' + contact.name} //{contact.profile_picture}
+					alt={contact.name} //{contact.profile_picture}
 					className="avatar-adm"
 				/>
 			</div>

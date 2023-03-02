@@ -38,7 +38,7 @@ const Sidebar = () => {
 			{/* Header */}
 			<header className="headerB">
 				<div className="sidebar__avatar-wrapper">
-					<img src={'https://ui-avatars.com/api/?background=random&name='+ user.name} alt={user.name} className="avatar-adm" />
+					<img src={avatar} alt='U.L.E.Y' className="avatar-adm" />
 				</div>
 				<div className="sidebar__actions">
 					<Link
