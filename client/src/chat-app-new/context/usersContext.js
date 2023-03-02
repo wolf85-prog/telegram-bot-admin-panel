@@ -147,8 +147,9 @@ const UsersProvider = ({ children }) => {
 			usersCopy[userIndex].messages['2023-03-02'].push(newMsgObject);
 			
 			const userObject = usersCopy[userIndex];
-			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1 };
+			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
 
+			//сортировка
 			const userSort = [...usersCopy].sort((a, b) => {       
 				var dateA = new Date(a.date), dateB = new Date(b.date) 
 				return dateB-dateA  //сортировка по убывающей дате  
