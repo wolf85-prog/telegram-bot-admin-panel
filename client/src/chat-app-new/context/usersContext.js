@@ -36,15 +36,25 @@ const UsersProvider = ({ children }) => {
 
 				messages.map(message => {
 					let time_mess = message.createdAt.split('T')
+					
+					const d = new Date(message.createdAt);
+					const year = d.getFullYear();
+					const month = String(d.getMonth()+1).padStart(2, "0");
+					const day = String(d.getDate()).padStart(2, "0");
+					const chas = d.getHours();
+					const minut = String(d.getMinutes()).padStart(2, "0");
+
+					const newDateMessage = `${day}.${month}.${year}`
+
 					const newMessage = {
-						date: time_mess[0],
+						date: newDateMessage,
 						content: message.text,
 						sender: message.senderId,
 						time: time_mess[1],
 						status: 'sent',
 					}
 					arrayMessage.push(newMessage)
-					allDate.push(time_mess[0])
+					allDate.push(newDateMessage)
 
 				})
 
@@ -140,9 +150,8 @@ const UsersProvider = ({ children }) => {
 			};
 
 			const currentDate = new Date().toLocaleDateString()
-			console.log(currentDate)
 
-			usersCopy[userIndex].messages['2023-03-03'].push(newMsgObject);
+			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 			
 			const userObject = usersCopy[userIndex];
 			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
@@ -153,7 +162,6 @@ const UsersProvider = ({ children }) => {
 				return dateB-dateA  //сортировка по убывающей дате  
 			})
 
-			console.log("userSort: ", userSort)
 			return userSort;
 		});
 
@@ -189,12 +197,9 @@ const UsersProvider = ({ children }) => {
 			status: "delivered",
 		};
 
-		const currentDate = new Date(); // .toLocaleDateString()
-		const date = currentDate.split('T')
+		const currentDate = new Date().toLocaleDateString()
 
-		console.log("current day: ", date[0])
-
-		usersCopy[userIndex].messages[date[0]].push(newMsgObject);
+		usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 		setUsers(usersCopy);
 
 		//socket.emit("fetch_response", { userId });

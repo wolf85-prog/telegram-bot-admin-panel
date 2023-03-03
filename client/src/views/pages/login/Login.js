@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   CButton,
   CCard,
@@ -17,15 +17,13 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import {observer} from "mobx-react-lite";
-import {Context} from "../../../index";
-import {LOGIN_ROUTE, ADMIN_ROUTE} from "../../../utils/consts";
+import {ADMIN_ROUTE} from "../../../utils/consts";
 import {login} from "../../../http/userAPI";
+import { AccountContext } from "../../../chat-app-new/context/AccountProvider";
 
 const Login = observer(() => {
-   // const {user} = useContext(Context)
-    const location = useLocation()
+    const { setAccount } = useContext(AccountContext);
     const navigate = useNavigate()
-    const isLogin = location.pathname === LOGIN_ROUTE
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -33,8 +31,7 @@ const Login = observer(() => {
         try {
             const data = await login(email, password);
             console.log(data)
-           // user.setUser(user)
-           // user.setIsAuth(true)
+            setAccount(data);
             navigate(ADMIN_ROUTE)
         } catch (e) {
             alert(e.response.data.message)

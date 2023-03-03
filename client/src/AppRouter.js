@@ -2,7 +2,8 @@ import React, {useContext, useEffect} from 'react'
 import {Routes, Route, Navigate } from 'react-router-dom';
 import {authRoutes} from "./routes_start";
 import { Context } from './index';
-import {observer} from "mobx-react-lite"
+import {observer} from "mobx-react-lite";
+import { AccountContext } from "./chat-app-new/context/AccountProvider";
 
 // Pages
 const Login = React.lazy(() => import('./views/pages/login/Login'))
@@ -13,26 +14,18 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 
 const AppRouter = observer(() => {
 
-  // const {user} = useContext(Context)
-  // console.log("user AppRouter: ", user.isAuth)
-  const isAuth = true
-
-  // useEffect(() => {
-  //   console.log("2")
-  //   console.log("isAuth AppRouter: ", user.isAuth)
-    
-  // }, [])
+  const { account } = useContext(AccountContext);
 
   return (
     <Routes>  
-        {isAuth
+        {account
         ? authRoutes.map(({path, Component}) =>
             <Route key={path} path={path} element={<Component/>} exact/>
         ) 
         : <Route exact path="*" element={<Navigate to='/login' />} /> 
         }
 
-        <Route exact path="/" name="Login Page" element={<Login />} />
+        <Route exact path="/login" name="Login Page" element={<Login />} />
         <Route exact path="/register" name="Register Page" element={<Register />} />
         <Route exact path="/404" name="Page 404" element={<Page404 />} />
         <Route exact path="/500" name="Page 500" element={<Page500 />} />

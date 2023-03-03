@@ -25,5 +25,5 @@ export const authRoutes = [
     { path: MESS_BOT_ROUTE, name: 'Сообщения от бота', Component: MessagesBot },
     { path: NOTIF_ROUTE, name: 'Уведомления', Component: Notifications },
     { path: SETTINGS_ROUTE, name: 'Настройки', Component: Settings },
-    // { path: '/', name: 'Home', Component: Admin },
+    { path: '/', name: 'Home', Component: Admin },
 ]

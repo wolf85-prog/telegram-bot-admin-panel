@@ -13,7 +13,7 @@ import { useUsersContext } from "./../../context/usersContext";
 import { useContext } from 'react';
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider';
 import { newMessage } from './../../../http/chatAPI';
-import { $authHost, $host } from './../../../http/index'
+import { $host } from './../../../http/index'
 
 const Chat = () => {
 	const { users, setUserAsUnread, addNewMessage } = useUsersContext();
@@ -83,11 +83,11 @@ const Chat = () => {
         console.log("message send button: ", message);
 
 		await newMessage(message)
-        //setMessages([...messages, res]);
 
         //Передаем данные боту
         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${value}`
-        const sendToTelegram = await $host.get(url_send_msg);
+        console.log(url_send_msg)
+		const sendToTelegram = await $host.get(url_send_msg);
 
 		//Выводим сообщение об успешной отправке
 		if (sendToTelegram) {

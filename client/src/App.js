@@ -3,9 +3,8 @@ import { BrowserRouter } from 'react-router-dom'
 import AppRouter from './AppRouter';
 import './scss/style.scss'
 import {observer} from "mobx-react-lite";
-import {Context} from "./index";
 import {check} from "./http/userAPI";
-
+import { AccountContext } from "./chat-app-new/context/AccountProvider";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -14,27 +13,20 @@ const loading = (
 )
 
 const App = observer(() => {
-  //render() {
-    //const {user} = useContext(Context)
-    //const [loading, setLoading] = useState(true)
+    const { setAccount } = useContext(AccountContext);
 
-    //console.log("user App: ", user.isAuth)
+    const [loading, setLoading] = useState(true)
 
-    // useEffect(() => {
-    //   console.log("1")
-    //   check().then(data => {
-    //       user.setUser(true)
-    //       user.setIsAuth(true)
-    //       console.log("Проверка авторизации")
-    //   }).finally(() => setLoading(false))
-    // }, [])
+    useEffect(() => {
+      check().then(data => {
+        setAccount(data)
+      })
+    }, [])
     
     return (
       <BrowserRouter>
         <Suspense fallback={loading}>
-              
           <AppRouter />
-
         </Suspense>
       </BrowserRouter>     
     )
