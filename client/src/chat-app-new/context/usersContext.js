@@ -80,9 +80,10 @@ const UsersProvider = ({ children }) => {
 				}
 
 				arrayContact.push(newUser)
+
 			})
 
-
+			//подгрузка контактов
 			setTimeout(() => {
 				const sortedClients = [...arrayContact].sort((a, b) => {       
 					var dateA = new Date(a.date), dateB = new Date(b.date) 
@@ -90,6 +91,7 @@ const UsersProvider = ({ children }) => {
 				})
 
 				setUsers(sortedClients)
+				console.log("contacts: ", arrayContact)
 
 			}, "10000")
 
@@ -187,7 +189,12 @@ const UsersProvider = ({ children }) => {
 			status: "delivered",
 		};
 
-		usersCopy[userIndex].messages['2023-03-03'].push(newMsgObject);
+		const currentDate = new Date(); // .toLocaleDateString()
+		const date = currentDate.split('T')
+
+		console.log("current day: ", date[0])
+
+		usersCopy[userIndex].messages[date[0]].push(newMsgObject);
 		setUsers(usersCopy);
 
 		//socket.emit("fetch_response", { userId });
