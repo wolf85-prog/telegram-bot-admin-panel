@@ -1,18 +1,15 @@
 import React, { Suspense } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
 import { CContainer, CSpinner } from '@coreui/react'
-import { AppContent, AppSidebar, AppFooter, AppHeader, AppBreadcrumb } from '../components/index'
-
-// routes config
-import routes from '../routes'
+import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 const Settings = () => {
   return (
     <div>
       <AppSidebar />
       <div className="wrapper d-flex flex-column min-vh-100 bg-light">
-        {/* <AppHeader /> */}
+        <AppHeader />
         <div className="body flex-grow-1 px-3">
+          
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
                     <h2>Настройки</h2>

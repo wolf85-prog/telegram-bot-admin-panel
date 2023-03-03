@@ -94,10 +94,10 @@ const Sidebar = () => {
 			
 			{/* Conversations */}
 			<div className="sidebar__contacts">
-				{contacts.map((contact, index) => (
+				{contacts.map((contact) => (
 					contact.chatId !== chatAdminId &&
                     <>   
-						<Contact key={index} contact={contact} />
+						<Contact contact={contact} />
 					</>
 				))}
 			</div>

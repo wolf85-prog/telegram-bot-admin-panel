@@ -71,12 +71,12 @@ const _nav = [
       },
     ],
   },
-  {
-    component: CNavItem,
-    name: 'Управление ролями',
-    to: '/dashboard',
-    icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Управление ролями',
+  //   to: '/dashboard',
+  //   icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
+  // },
 ]
 
 export default _nav

@@ -1,7 +1,6 @@
 import React from "react";
 import Icon from "./../../../components/Icon";
 import OptionsBtn from "./../../../components/OptionsButton";
-import Avatar from "./../../../../assets/images/avatars/blank-avatar.png"
 
 
 const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {

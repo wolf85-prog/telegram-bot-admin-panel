@@ -1,5 +1,4 @@
 export const ADMIN_ROUTE = '/dashboard'
-export const ANALITIKA_ROUTE = '/base/accordion'
 export const CHAT_ROUTE = '/chat'
 export const MESSENGER_ROUTE = '/messenger'
 export const NOTIF_ROUTE = '/notifications'

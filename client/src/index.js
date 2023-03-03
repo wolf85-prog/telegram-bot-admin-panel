@@ -18,9 +18,9 @@ console.log('REACT_APP_CHAT_ADMIN_ID:', process.env.REACT_APP_CHAT_ADMIN_ID)
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <Context.Provider value={{
+      {/* <Context.Provider value={{
           user: new UserStore()
-      }}>
+      }}> */}
 
         <SocketProvider>
           <UsersProvider>
@@ -30,7 +30,7 @@ createRoot(document.getElementById('root')).render(
           </UsersProvider>
         </SocketProvider>
 
-      </Context.Provider>  
+      {/* </Context.Provider>   */}
     </Provider>
   </React.StrictMode> 
 )

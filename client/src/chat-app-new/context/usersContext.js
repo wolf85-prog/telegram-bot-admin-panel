@@ -100,10 +100,6 @@ const UsersProvider = ({ children }) => {
 	},[])
 
 
-	// useEffect(() => {
-	// 	console.log("users: ", users)
-	// },[users])
-
 	const _updateUserProp = (userId, prop, value) => {
 		setUsers((users) => {
 			const usersCopy = [...users];
@@ -144,7 +140,7 @@ const UsersProvider = ({ children }) => {
 			const currentDate = new Date().toLocaleDateString()
 			console.log(currentDate)
 
-			usersCopy[userIndex].messages['2023-03-02'].push(newMsgObject);
+			usersCopy[userIndex].messages['2023-03-03'].push(newMsgObject);
 			
 			const userObject = usersCopy[userIndex];
 			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
@@ -181,13 +177,29 @@ const UsersProvider = ({ children }) => {
 		_updateUserProp(userId, "unread", 0);
 	};
 
+	const addNewMessage = (userId, message) => {
+		let userIndex = users.findIndex((user) => user.chatId === userId);
+		const usersCopy = [...users];
+		const newMsgObject = {
+			content: message,
+			sender: chatAdminId,
+			time: new Date().toLocaleTimeString(),
+			status: "delivered",
+		};
+
+		usersCopy[userIndex].messages['2023-03-03'].push(newMsgObject);
+		setUsers(usersCopy);
+
+		//socket.emit("fetch_response", { userId });
+	};
+
 
 	return (
 		<UsersContext.Provider value={{ 
 			users, 
 			setUsers,
 			setUserAsUnread, 
-			//addNewMessage 
+			addNewMessage 
 		}}>
 			{children}
 		</UsersContext.Provider>

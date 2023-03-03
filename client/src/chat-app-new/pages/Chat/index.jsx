@@ -16,7 +16,7 @@ import { newMessage } from './../../../http/chatAPI';
 import { $authHost, $host } from './../../../http/index'
 
 const Chat = () => {
-	const { users, setUserAsUnread } = useUsersContext();
+	const { users, setUserAsUnread, addNewMessage } = useUsersContext();
 	const { person } = useContext(AccountContext);
 
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
@@ -97,6 +97,9 @@ const Chat = () => {
 		else {
 			console.log('Что-то пошло не так. Попробуйте ещё раз.');
 		}
+
+		//сохранить в контексте
+		addNewMessage(user.chatId, value);
 	}
 
 	const submitNewMessage = (e) => {
