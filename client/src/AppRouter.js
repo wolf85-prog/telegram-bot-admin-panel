@@ -17,6 +17,7 @@ const AppRouter = observer(() => {
   const { account } = useContext(AccountContext);
 
   useEffect(() => {
+    //console.log("account: ", account)
     if (!account) {
       navigate("/login");
     }
