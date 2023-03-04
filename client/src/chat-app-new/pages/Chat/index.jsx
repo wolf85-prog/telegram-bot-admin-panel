@@ -102,12 +102,13 @@ const Chat = () => {
 		addNewMessage(user.chatId, value);
 	}
 
+	const onFileChange = (e) => {
+        console.log("click");
+        //setFile(e.target.files[0]);
+        //setValue(e.target.files[0].name);
+    }
+
 	const submitNewMessage = (e) => {
-		//e.preventDefault();
-		// const code = e.keyCode || e.which;
-        // if (code === 13) {
-		// 	sendText()
-		// }
 		
 		sendText();
 
@@ -140,8 +141,6 @@ const Chat = () => {
 					</button>
 					<EmojiTray
 						showEmojis={showEmojis}
-						//newMessage={newMessage}
-						//setNewMessage={setNewMessage}
 						value={value}
 						setValue={setValue}
 					/>
@@ -150,10 +149,9 @@ const Chat = () => {
 						setShowEmojis={setShowEmojis}
 						showAttach={showAttach}
 						setShowAttach={setShowAttach}
-						//newMessage={newMessage}
+						onFileChange={onFileChange}
 						value={value}
 						setValue={setValue}
-						//setNewMessage={setNewMessage}
 						submitNewMessage={submitNewMessage}
 					/>
 				</footer>

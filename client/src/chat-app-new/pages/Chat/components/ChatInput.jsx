@@ -2,11 +2,11 @@ import React from "react";
 import Icon from "./../../../components/Icon";
 
 const attachButtons = [
-	{ icon: "attachRooms", label: "Choose room" },
-	{ icon: "attachContacts", label: "Choose contact" },
-	{ icon: "attachDocument", label: "Choose document" },
-	{ icon: "attachCamera", label: "Use camera" },
-	{ icon: "attachImage", label: "Choose image" },
+	{ icon: "attachRooms", label: "Choose room", click: "room" },
+	{ icon: "attachContacts", label: "Choose contact", click: "contact" },
+	{ icon: "attachDocument", label: "Choose document", click: "doc" },
+	{ icon: "attachCamera", label: "Use camera", click: "camera" },
+	{ icon: "attachImage", label: "Choose image", click: "image" },
 ];
 
 const ChatInput = ({
@@ -14,11 +14,10 @@ const ChatInput = ({
 	setShowAttach,
 	showEmojis,
 	setShowEmojis,
-	//newMessage,
 	value,
 	setValue,
-	//setNewMessage,
 	submitNewMessage,
+	onFileChange,
 }) => {
 	const detectEnterPress = (e) => {
 		if (e.key === "Enter" || e.keyCode === 13) {
@@ -69,7 +68,16 @@ const ChatInput = ({
 							aria-label={btn.label}
 							key={btn.label}
 						>
-							<Icon id={btn.icon} className="chat__attach-icon" />
+							<label htmlFor='fileInput'>
+								<Icon id={btn.icon} className="chat__attach-icon" />
+							</label>
+							<input
+								type="file"
+								id="fileInput"
+								style={{ display: "none" }}
+								onChange={(e) => onFileChange(e)}
+							/>							
+							
 						</button>
 					))}
 				</div>
