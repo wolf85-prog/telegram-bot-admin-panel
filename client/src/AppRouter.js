@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react'
-import {Routes, Route, Navigate } from 'react-router-dom';
+import {Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import {authRoutes} from "./routes_start";
-import { Context } from './index';
+import {check} from "./http/userAPI";
 import {observer} from "mobx-react-lite";
 import { AccountContext } from "./chat-app-new/context/AccountProvider";
 
@@ -13,16 +13,21 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 
 
 const AppRouter = observer(() => {
-
+  const navigate = useNavigate();
   const { account } = useContext(AccountContext);
+
+  useEffect(() => {
+    if (!account) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   return (
     <Routes>  
-        {account
-        ? authRoutes.map(({path, Component}) =>
+        {
+        authRoutes.map(({path, Component}) =>
             <Route key={path} path={path} element={<Component/>} exact/>
         ) 
-        : <Route exact path="*" element={<Navigate to='/login' />} /> 
         }
 
         <Route exact path="/login" name="Login Page" element={<Login />} />
