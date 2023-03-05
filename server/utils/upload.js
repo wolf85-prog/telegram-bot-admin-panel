@@ -1,10 +1,10 @@
 const { existsSync, mkdirSync } = require('fs');
 const multer = require('multer')
-const { dirname, join } = require('path')
+const { path, join } = require('path')
 const { fileURLToPath } = require('url')
 
 // путь к текущей директории
-const _dirname = dirname(fileURLToPath(import.meta.url))
+const _dirname = path.resolve(__dirname) //dirname(fileURLToPath(import.meta.url))
 
 const upload = multer({
   storage: multer.diskStorage({
