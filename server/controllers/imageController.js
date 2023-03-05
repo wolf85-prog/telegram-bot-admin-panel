@@ -1,6 +1,6 @@
-import { getFilePath } from './../utils/file.js'
-import onError from './../utils/onError.js'
-import upload from './../utils/upload.js'
+const { getFilePath } = require('./../utils/file.js')
+// import onError from './../utils/onError.js'
+// import upload from './../utils/upload.js'
 
 class ImageController {
 
