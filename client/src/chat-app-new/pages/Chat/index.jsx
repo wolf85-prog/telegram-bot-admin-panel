@@ -14,6 +14,7 @@ import { useContext } from 'react';
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider';
 import { newMessage } from './../../../http/chatAPI';
 import { $host } from './../../../http/index'
+import { uploadFile } from '../../../http/chatAPI';
 
 const Chat = () => {
 	const { users, setUserAsUnread, addNewMessage } = useUsersContext();
@@ -45,6 +46,26 @@ const Chat = () => {
 	useEffect(() => {
 		user && scrollToLastMsg();
 	}, [users]);
+
+	useEffect(() => {
+        const getImage = async () => {
+            if (file) {
+                const data = new FormData();
+                data.append("name", file.name);
+                data.append("file", file);
+
+               let response = await uploadFile(data);
+               setImage(response.data);
+            }
+        }
+        getImage();
+    }, [file])
+
+	const onFileChange = (e) => {
+        console.log('file: ', e.target.files[0]);
+        setFile(e.target.files[0]);
+        setValue(e.target.files[0].name);
+    }
 
 	const openSidebar = (cb) => {
 		// close any open sidebar first
@@ -101,12 +122,6 @@ const Chat = () => {
 		//сохранить в контексте
 		addNewMessage(user.chatId, value);
 	}
-
-	const onFileChange = (e) => {
-        console.log("click");
-        //setFile(e.target.files[0]);
-        //setValue(e.target.files[0].name);
-    }
 
 	const submitNewMessage = (e) => {
 		
