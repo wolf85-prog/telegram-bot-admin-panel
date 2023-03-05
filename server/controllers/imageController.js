@@ -23,15 +23,15 @@ class ImageController {
 
     //Обрабатываем получение файлов:
     async getImage(req, res) {
-        try {
-            // формируем абсолютный путь к файлу
-            const filePath = getFilePath(req.url)           
-            // и возвращаем файл по этому пути
-            //res.status(200).sendFile(filePath)
-            return res.status(200).sendFile(filePath);
-        } catch (error) {
-            return res.status(500).json(error.message);
-        }
+        // try {
+        //     // формируем абсолютный путь к файлу
+        //     const filePath = getFilePath(req.url)           
+        //     // и возвращаем файл по этому пути
+        //     //res.status(200).sendFile(filePath)
+        //     return res.status(200).sendFile(filePath);
+        // } catch (error) {
+        //     return res.status(500).json(error.message);
+        // }
     }
 }
 
