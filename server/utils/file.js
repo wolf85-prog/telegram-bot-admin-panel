@@ -1,7 +1,7 @@
-import { unlink } from 'fs/promises'
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
-import onError from './onError.js'
+const { unlink } = require('fs/promises')
+const { dirname, join } = require('path')
+const { fileURLToPath } = require('url')
+const onError = require('./onError.js')
 
 // путь к текущей директории
 const _dirname = dirname(fileURLToPath(import.meta.url))
