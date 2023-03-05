@@ -1,4 +1,5 @@
 const Router = require('express')
+const multer  = require("multer");
 const route = new Router()
 const userController = require('../controllers/userController')
 const authMiddleware = require('../middleware/authMiddleware')
@@ -7,6 +8,7 @@ const { newConversation, getConversation } = require('../controllers/conversatio
 const { addUser, getUsers, getUser } = require('../controllers/userbotController')
 const { uploadFile, getImage } = require( "../controllers/imageController.js")
 //const upload = require( "../utils/upload.js")
+const upload = multer({dest:"uploads"});
 
 route.post('/user/registration', userController.registration)
 route.post('/user/login', userController.login)
@@ -25,7 +27,7 @@ route.get('/conversation/get/:id', getConversation)
 route.get('/userbots/get', getUsers)
 route.get('/userbots/get/:id', getUser)
 
-//route.post("/file/upload", upload.single("file"), uploadFile);
+route.post("/file/upload", upload.single("filedata"), uploadFile);
 route.get("/file/:filename", getImage);
 
 module.exports = route

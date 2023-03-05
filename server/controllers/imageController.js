@@ -6,6 +6,7 @@ class ImageController {
 
     //Обрабатываем загрузку файлов:
     async uploadFile(req, res) {
+
         try {
             if (!req.file) return res.sendStatus(400)
 

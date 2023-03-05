@@ -10,6 +10,7 @@ const Route = require('./routes/route')
 const errorHandler = require('./middleware/ErrorHandling')
 const path = require('path')
 const bodyParser = require("body-parser");
+const multer  = require("multer");
 
 // Port that the webserver listens to
 const port = process.env.PORT || 5000;
