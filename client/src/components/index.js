@@ -2,7 +2,6 @@ import AppBreadcrumb from './AppBreadcrumb'
 import AppContent from './AppContent'
 import AppFooter from './AppFooter'
 import AppHeader from './AppHeader'
-import AppHeaderChat from './AppHeaderChat'
 import AppHeaderDropdown from './header/AppHeaderDropdown'
 import AppSidebar from './AppSidebar'
 import DocsCallout from './DocsCallout'
@@ -14,7 +13,6 @@ export {
   AppContent,
   AppFooter,
   AppHeader,
-  AppHeaderChat,
   AppHeaderDropdown,
   AppSidebar,
   DocsCallout,
