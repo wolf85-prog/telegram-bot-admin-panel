@@ -1,20 +1,21 @@
 const Router = require('express')
 const multer  = require("multer");
 const route = new Router()
-const userController = require('../controllers/userController')
+const { registration, login, check, getAll, getOne} = require('../controllers/userController')
 const authMiddleware = require('../middleware/authMiddleware')
 const { newMessage, getMessages, getAllMessages } = require('../controllers/messageController')
 const { newConversation, getConversation } = require('../controllers/conversationController')
 const { addUser, getUsers, getUser } = require('../controllers/userbotController')
-const { uploadFile, getImage } = require( "../controllers/imageController.js")
+const { uploadFile, getImage } = require( "../controllers/fileController.js")
 //const upload = require( "../utils/upload.js")
-const upload = multer({dest:"uploads"});
+//const upload = multer({dest:"uploads"});
+const upload = require('../middleware/file')
 
-route.post('/user/registration', userController.registration)
-route.post('/user/login', userController.login)
-route.get('/user/auth', authMiddleware, userController.check)
-route.get('/user/get', authMiddleware, userController.getAll)
-route.get('/user/get/:id', authMiddleware, userController.getOne)
+route.post('/user/registration', registration)
+route.post('/user/login', login)
+route.get('/user/auth', authMiddleware, check)
+route.get('/user/get', authMiddleware, getAll)
+route.get('/user/get/:id', authMiddleware, getOne)
 
 route.post('/message/add', newMessage)
 route.get('/message/get', getAllMessages)

@@ -10,7 +10,6 @@ const Route = require('./routes/route')
 const errorHandler = require('./middleware/ErrorHandling')
 const path = require('path')
 const bodyParser = require("body-parser");
-const multer  = require("multer");
 
 // Port that the webserver listens to
 const port = process.env.PORT || 5000;
@@ -22,6 +21,7 @@ app.use(express.json())
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static(path.resolve(__dirname, 'static')))
+app.use(express.static(path.resolve(__dirname, 'images')))
 app.use(fileUpload({}))
 
 app.use('/api', Route);

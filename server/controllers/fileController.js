@@ -4,7 +4,8 @@
 const ApiError = require('../error/ApiError')
 const path = require('path')
 
-class ImageController {
+
+class FileController {
 
     //Обрабатываем загрузку файлов:
     async uploadFile(req, res) {
@@ -22,13 +23,14 @@ class ImageController {
 
             let filedata = req.file;
  
-            console.log(filedata);
+            //console.log(filedata);
             if(!filedata)
                 res.send("Ошибка при загрузке файла");
             else
                 res.send("Файл загружен");
         } catch (error) {
-            return res.status(500).json(error.message);
+            console.log(error.message)
+            return res.status(500).json({message: "Upload error"});
         }
     }
 
@@ -46,4 +48,4 @@ class ImageController {
     }
 }
 
-module.exports = new ImageController()
+module.exports = new FileController()
