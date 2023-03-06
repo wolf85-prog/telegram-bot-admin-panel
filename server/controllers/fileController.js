@@ -27,9 +27,11 @@ class FileController {
             // else
             //     res.send("Файл загружен");
 
-            if (req.file) {
-                res.json(req.file)
-            }
+            res.send("Файл загружен");
+            
+            // if (req.file) {
+            //     res.json(req.file)
+            // }
         } catch (error) {
             console.log(error.message)
             return res.status(501).json({message: "Upload error"});
