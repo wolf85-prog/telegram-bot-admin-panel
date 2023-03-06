@@ -6,6 +6,7 @@ export const AccountContext = createContext(null);
 
 const AccountProvider = ({ children }) => {
 
+    const [isAuth, setIsAuth] = useState(false);
     const [account, setAccount] = useState();
     const [person, setPerson] = useState({});
     const [activeUsers, setActiveUsers]= useState([]);
@@ -21,6 +22,8 @@ const AccountProvider = ({ children }) => {
 
     return (
         <AccountContext.Provider value={{
+            isAuth,
+            setIsAuth,
             account,
             setAccount,
             person,

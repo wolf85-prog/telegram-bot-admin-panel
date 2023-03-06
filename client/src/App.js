@@ -13,21 +13,24 @@ const loading = (
 )
 
 const App = observer(() => {
-    const { setAccount } = useContext(AccountContext);
-
+    const { isAuth, setAccount, setIsAuth } = useContext(AccountContext);
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
       check().then(data => {
+        console.log("data: ", data)
+        console.log("isAuth: ", isAuth)
         setAccount(data)
+        setIsAuth(true)
       })
+
     }, [])
     
     return (
       <BrowserRouter>
         <Suspense fallback={loading}>
-          <AppRouter />
-        </Suspense>
+          <AppRouter /> 
+        </Suspense>              
       </BrowserRouter>     
     )
   //}

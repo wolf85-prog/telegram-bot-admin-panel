@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {
   CAvatar,
   CBadge,
@@ -20,10 +20,19 @@ import {
   cilUser,
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
-
 import avatar from './../../assets/images/avatars/logo_chat_admin.png'
+import {observer} from "mobx-react-lite";
+import { AccountContext } from "./../../chat-app-new/context/AccountProvider";
 
-const AppHeaderDropdown = () => {
+const AppHeaderDropdown = observer(() => {
+  const {setAccount, setIsAuth} = useContext(AccountContext);
+
+  const logOut = () => {
+    console.log("Выход")
+    setAccount({})
+    setIsAuth(false)
+  }
+
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
@@ -76,13 +85,13 @@ const AppHeaderDropdown = () => {
           </CBadge>
         </CDropdownItem>
         <CDropdownDivider />
-        <CDropdownItem href="#">
+        <CDropdownItem onClick={()=> logOut()}>
           <CIcon icon={cilLockLocked} className="me-2" />
           Выйти
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
   )
-}
+});
 
 export default AppHeaderDropdown

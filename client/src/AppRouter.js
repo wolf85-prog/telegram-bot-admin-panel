@@ -1,9 +1,9 @@
 import React, {useContext, useEffect} from 'react'
-import {Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import {Routes, Route, useNavigate } from 'react-router-dom';
 import {authRoutes} from "./routes_start";
-import {check} from "./http/userAPI";
 import {observer} from "mobx-react-lite";
 import { AccountContext } from "./chat-app-new/context/AccountProvider";
+
 
 // Pages
 const Login = React.lazy(() => import('./views/pages/login/Login'))
@@ -17,19 +17,19 @@ const AppRouter = observer(() => {
   const { account } = useContext(AccountContext);
 
   useEffect(() => {
-    //console.log("account: ", account)
+    console.log("account: ", account)
     if (!account) {
       navigate("/login");
-    }
+    } 
+
   }, [navigate]);
 
   return (
     <Routes>  
-        {
-        authRoutes.map(({path, Component}) =>
+        {authRoutes.map(({path, Component}) =>
             <Route key={path} path={path} element={<Component/>} exact/>
         ) 
-        }
+        }    
 
         <Route exact path="/login" name="Login Page" element={<Login />} />
         <Route exact path="/register" name="Register Page" element={<Register />} />
