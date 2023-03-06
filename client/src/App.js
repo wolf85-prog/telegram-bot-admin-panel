@@ -29,7 +29,7 @@ const App = observer(() => {
     return (
       <BrowserRouter>
         <Suspense fallback={loading}>
-          <AppRouter /> 
+          <AppRouter isLogin={isAuth}/> 
         </Suspense>              
       </BrowserRouter>     
     )

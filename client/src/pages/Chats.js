@@ -6,7 +6,6 @@ import "./../chat-app-new/assets/css/index.css";
 //import Home from "../chat-app-new/pages/Home";
 //import Sidebar from "../chat-app-new/components/Sidebar";
 //import Chat from "../chat-app-new/pages/Chat";
-import { CSpinner } from '@coreui/react'
 
 import { AccountContext } from "../chat-app-new/context/AccountProvider";
 
@@ -18,6 +17,12 @@ const Chat = React.lazy(() => import('../chat-app-new/pages/Chat'))
 const userPrefersDark =
 	window.matchMedia &&
 	window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+const loading = (
+	<div className="pt-3 text-center">
+		<div className="sk-spinner sk-spinner-pulse"></div>
+	</div>
+)
 
 const Chats = () => {
     const [appLoaded, setAppLoaded] = useState(false);
@@ -41,7 +46,7 @@ const Chats = () => {
 		<div className="app">
 			<p className="app__mobile-message"> Доступно только на компьютере 😊. </p>
 			<div className="app-content">
-				<Suspense fallback={<CSpinner color="primary" />}>
+				<Suspense fallback={loading}>
 					<Sidebar />
                 	{Object.keys(person).length ? <Chat /> : <Home /> }
 				</Suspense>
