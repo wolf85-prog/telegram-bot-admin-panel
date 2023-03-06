@@ -132,6 +132,8 @@ const UsersProvider = ({ children }) => {
 		_updateUserProp(userId, "typing", false);
 	};
 
+
+	//получить сообщение из телеграмма
 	const fetchMessageResponse = (data) => {
 		console.log("Пришло сообщение: ", count+1)
 		setCount(count+1);
@@ -151,7 +153,12 @@ const UsersProvider = ({ children }) => {
 
 			const currentDate = new Date().toLocaleDateString()
 
-			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			if (usersCopy[userIndex].messages[currentDate]) {
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			} else {
+				usersCopy[userIndex].messages[currentDate] = [];
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			}
 			
 			const userObject = usersCopy[userIndex];
 			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
@@ -187,10 +194,13 @@ const UsersProvider = ({ children }) => {
 		_updateUserProp(userId, "unread", 0);
 	};
 
+
+	//отправить сообщение из админки 
 	const addNewMessage = (userId, message) => {
 		let userIndex = users.findIndex((user) => user.chatId === userId);
 		const usersCopy = [...users];
 		const newMsgObject = {
+			date: new Date().toLocaleDateString(),
 			content: message,
 			sender: chatAdminId,
 			time: new Date().toLocaleTimeString(),
@@ -199,10 +209,15 @@ const UsersProvider = ({ children }) => {
 
 		const currentDate = new Date().toLocaleDateString()
 
-		usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+		if (usersCopy[userIndex].messages[currentDate]) {
+			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+		} else {
+			usersCopy[userIndex].messages[currentDate] = [];
+			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+		}
+
 		setUsers(usersCopy);
 
-		//socket.emit("fetch_response", { userId });
 	};
 
 
