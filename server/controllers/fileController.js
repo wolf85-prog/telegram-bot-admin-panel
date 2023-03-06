@@ -21,14 +21,14 @@ class FileController {
             // // и возвращаем его
             // res.status(201).json(relativeFilePath)
 
-            // let filedata = req.file;
-            // if(!filedata)
-            //     res.send("Ошибка при загрузке файла");
-            // else
-            //     res.send("Файл загружен");
+            let filedata = req.file;          
 
-            res.send("Файл загружен");
-            
+            if(!filedata)
+                res.send("Ошибка при загрузке файла");
+            else
+                res.send("Файл загружен");
+
+
             // if (req.file) {
             //     res.json(req.file)
             // }
