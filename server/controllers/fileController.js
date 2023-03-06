@@ -21,16 +21,18 @@ class FileController {
             // // и возвращаем его
             // res.status(201).json(relativeFilePath)
 
-            let filedata = req.file;
- 
-            //console.log(filedata);
-            if(!filedata)
-                res.send("Ошибка при загрузке файла");
-            else
-                res.send("Файл загружен");
+            // let filedata = req.file;
+            // if(!filedata)
+            //     res.send("Ошибка при загрузке файла");
+            // else
+            //     res.send("Файл загружен");
+
+            if (req.file) {
+                res.json(req.file)
+            }
         } catch (error) {
             console.log(error.message)
-            return res.status(500).json({message: "Upload error"});
+            return res.status(501).json({message: "Upload error"});
         }
     }
 
