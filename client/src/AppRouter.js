@@ -20,7 +20,7 @@ const AppRouter = observer((isLogin) => {
     
     setTimeout(() => {
       console.log("isLogin: ", isLogin)
-      if (!isLogin) {
+      if (!account) {
         navigate("/login");
       } 
     }, "2000");
