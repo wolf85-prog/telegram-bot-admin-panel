@@ -5,7 +5,6 @@ const models = require('./models/models')
 const cors = require('cors')
 const fs = require('fs');
 const https = require('https')
-const fileUpload = require('express-fileupload')
 const Route = require('./routes/route')
 const errorHandler = require('./middleware/ErrorHandling')
 const path = require('path')
@@ -22,7 +21,6 @@ app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static(path.resolve(__dirname, 'static')))
 app.use(express.static(path.resolve(__dirname, 'images')))
-app.use(fileUpload({}))
 
 app.use('/api', Route);
 
