@@ -9,7 +9,7 @@ const { addUser, getUsers, getUser } = require('../controllers/userbotController
 const { uploadFile, getImage } = require( "../controllers/fileController.js")
 //const upload = require( "../utils/upload.js")
 //const upload = multer({dest:"uploads"});
-const upload = require('../middleware/file')
+//const upload = require('../middleware/file')
 
 route.post('/user/registration', registration)
 route.post('/user/login', login)
@@ -28,7 +28,7 @@ route.get('/conversation/get/:id', getConversation)
 route.get('/userbots/get', getUsers)
 route.get('/userbots/get/:id', getUser)
 
-route.post("/file/upload", upload.single("filedata"), uploadFile);
-route.get("/file/:filename", getImage);
+//route.post("/file/upload", upload.single("filedata"), uploadFile);
+//route.get("/file/:filename", getImage);
 
 module.exports = route
