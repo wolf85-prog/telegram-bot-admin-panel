@@ -18,12 +18,12 @@ const AppRouter = observer((acc) => {
 
   useEffect(() => {
     
-    setTimeout(() => {
-      console.log("account: ", acc)
-      if (!acc) {
+   // setTimeout(() => {
+      console.log("account: ", account)
+      if (!account) {
         navigate("/login");
       } 
-    }, "2000");
+   // }, "4000");
     
   }, [navigate]);
 
