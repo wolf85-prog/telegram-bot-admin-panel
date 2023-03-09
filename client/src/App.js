@@ -13,7 +13,7 @@ const loading = (
 )
 
 const App = observer(() => {
-    const { isAuth, setAccount, setIsAuth } = useContext(AccountContext);
+    const { isAuth, account, setAccount, setIsAuth } = useContext(AccountContext);
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const App = observer(() => {
     return (
       <BrowserRouter>
         <Suspense fallback={loading}>
-          <AppRouter isLogin={isAuth}/> 
+          <AppRouter acc={account}/> 
         </Suspense>              
       </BrowserRouter>     
     )

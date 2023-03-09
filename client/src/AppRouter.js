@@ -12,15 +12,15 @@ const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 
 
-const AppRouter = observer((isLogin) => {
+const AppRouter = observer((acc) => {
   const navigate = useNavigate();
   const { account } = useContext(AccountContext);
 
   useEffect(() => {
     
     setTimeout(() => {
-      console.log("isLogin: ", isLogin)
-      if (!account) {
+      console.log("account: ", acc)
+      if (!acc) {
         navigate("/login");
       } 
     }, "2000");
