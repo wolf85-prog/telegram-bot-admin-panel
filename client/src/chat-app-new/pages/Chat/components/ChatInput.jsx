@@ -74,6 +74,7 @@ const ChatInput = ({
 							<input
 								type="file"
 								id="fileInput"
+								name="filedata"
 								style={{ display: "none" }}
 								onChange={(e) => onFileChange(e)}
 							/>							
