@@ -51,8 +51,7 @@ const Chat = () => {
         const getImage = async () => {
             if (file) {
                 const data = new FormData();
-                data.append("name", file.name);
-                data.append("file", file);
+                data.append("filedata", file);
 
                let response = await uploadFile(data);
                setImage(response.data);
@@ -64,7 +63,7 @@ const Chat = () => {
 	const onFileChange = (e) => {
         console.log('file: ', e.target.files[0]);
         setFile(e.target.files[0]);
-        setValue(e.target.files[0].name);
+        setValue(e.target.files[0].lastModified); //.name
     }
 
 	const openSidebar = (cb) => {
