@@ -11,6 +11,7 @@ class FileController {
     async uploadFile(req, res) {
 
         try {
+            console.log(req.file);
             // if (!req.file) return res.sendStatus(400)
 
             // // формируем относительный путь к файлу
