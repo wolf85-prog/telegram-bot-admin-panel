@@ -52,7 +52,7 @@ const Chat = () => {
             if (file) {
                 const data = new FormData();
                 data.append("name", file.name);
-                data.append("file", file);
+                data.append("filedata", file);
 
 				console.log("file data: ", data)
 
