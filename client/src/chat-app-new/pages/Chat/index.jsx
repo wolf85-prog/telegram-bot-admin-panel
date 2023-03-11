@@ -57,7 +57,7 @@ const Chat = () => {
 				console.log("file data: ", data)
 
                let response = await uploadFile(data);
-               setImage(response.data);
+               setImage(response.path);
             }
         }
         getImage();
@@ -66,7 +66,7 @@ const Chat = () => {
 	const onFileChange = (e) => {
         console.log('file: ', e.target.files[0]);
         setFile(e.target.files[0]);
-        setValue(e.target.files[0].lastModified); //.name
+        setValue(e.target.files[0].name); //.name
     }
 
 	const openSidebar = (cb) => {
