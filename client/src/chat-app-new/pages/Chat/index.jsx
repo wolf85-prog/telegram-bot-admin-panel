@@ -54,6 +54,8 @@ const Chat = () => {
                 data.append("name", file.name);
                 data.append("file", file);
 
+				console.log("file data: ", data)
+
                let response = await uploadFile(data);
                setImage(response.data);
             }
