@@ -35,7 +35,7 @@ const UsersProvider = ({ children }) => {
 				const allDate = []
 
 				messages.map(message => {
-					let time_mess = message.createdAt.split('T')
+					//let time_mess = message.createdAt.split('T')
 					
 					const d = new Date(message.createdAt);
 					const year = d.getFullYear();
@@ -50,7 +50,7 @@ const UsersProvider = ({ children }) => {
 						date: newDateMessage,
 						content: message.text,
 						sender: message.senderId,
-						time: time_mess[1],
+						time: chas + ' : ' + minut,
 						status: 'sent',
 					}
 					arrayMessage.push(newMessage)
@@ -230,6 +230,12 @@ const UsersProvider = ({ children }) => {
 			usersCopy[userIndex].messages[currentDate] = [];
 			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 		}
+
+		//сортировка
+		// const userSort = [...usersCopy].sort((a, b) => {       
+		// 	var dateA = new Date(a.date), dateB = new Date(b.date) 
+		// 	return dateB-dateA  //сортировка по убывающей дате  
+		// })
 
 		setUsers(usersCopy);
 

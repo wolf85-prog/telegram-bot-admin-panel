@@ -15,7 +15,12 @@ const Sidebar = () => {
 
 
 	useEffect(() => {
-		setContacts(clients)
+		//сортировка
+		const userSort = [...clients].sort((a, b) => {       
+			var dateA = new Date(a.date), dateB = new Date(b.date) 
+			return dateB-dateA  //сортировка по убывающей дате  
+		})
+		setContacts(userSort)
 	},[clients])
 	
 	useEffect(() => {
