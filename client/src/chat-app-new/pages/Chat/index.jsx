@@ -56,8 +56,10 @@ const Chat = () => {
 				console.log("file data: ", data)
 
                let response = await uploadFile(data);
-			   console.log("response: ", response)
-               setImage(response.path);
+			   console.log("response: ", response.data)
+               setImage(response.data.path);
+			   //сообщение с ссылкой на файл
+			   setValue('https://proj.uley.team:5000/' + response.data.path)
             }
         }
         getImage();
@@ -67,7 +69,7 @@ const Chat = () => {
         console.log('file: ', e.target.files[0]);
         setFile(e.target.files[0]);
 		//сообщение с ссылкой на файл
-        setValue(e.target.files[0].name); //.name
+        //setValue('https://proj.uley.team:5000/' + image)//(e.target.files[0].name); //.name
     }
 
 	const openSidebar = (cb) => {
@@ -100,7 +102,7 @@ const Chat = () => {
                 receiverId: user.chatId,
                 conversationId: user.conversationId,
                 type: "file",
-                text: image,
+                text: 'https://proj.uley.team:5000/' + image,
                 is_bot: false
             }
         }
