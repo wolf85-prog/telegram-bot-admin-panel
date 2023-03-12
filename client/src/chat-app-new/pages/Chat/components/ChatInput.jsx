@@ -2,10 +2,8 @@ import React from "react";
 import Icon from "./../../../components/Icon";
 
 const attachButtons = [
-	{ icon: "attachRooms", label: "Choose room", click: "room" },
 	{ icon: "attachContacts", label: "Choose contact", click: "contact" },
 	{ icon: "attachDocument", label: "Choose document", click: "doc" },
-	{ icon: "attachCamera", label: "Use camera", click: "camera" },
 	{ icon: "attachImage", label: "Choose image", click: "image" },
 ];
 

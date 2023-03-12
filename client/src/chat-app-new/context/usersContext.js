@@ -58,7 +58,14 @@ const UsersProvider = ({ children }) => {
 
 				})
 
+				const sortedDate = [...allDate].sort((a, b) => {
+					var dateA = new Date(a), dateB = new Date(b)
+					return dateA-dateB //сортировка по возрастающей дате
+				})
+
 				const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
+
+				//console.log("dates: ", dates)
 
 				let obj = {};
 				for (let i = 0; i < dates.length; i++) {
@@ -208,6 +215,14 @@ const UsersProvider = ({ children }) => {
 		};
 
 		const currentDate = new Date().toLocaleDateString()
+		// const today = new Date();
+		// const yyyy = today.getFullYear();
+		// let mm = today.getMonth() + 1; // Months start at 0!
+		// let dd = today.getDate();
+
+		// if (dd < 10) dd = '0' + dd;
+		// if (mm < 10) mm = '0' + mm;
+		// const formattedToday = dd + '.' + mm + '.' + yyyy;
 
 		if (usersCopy[userIndex].messages[currentDate]) {
 			usersCopy[userIndex].messages[currentDate].push(newMsgObject);

@@ -20,7 +20,13 @@ class MessageController {
     async getMessages(req, res) {
         const conversationId = req.params.id
         try {           
-            const messages = await Message.findAll({where: {conversationId}})
+            const messages = await Message.findAll({
+                where: {conversationId},
+                // Add order conditions here....
+                order: [
+                    ['id', 'DESC'],
+                ],
+            })
             return res.status(200).json(messages);
         } catch (error) {
             return res.status(500).json(error.message);
