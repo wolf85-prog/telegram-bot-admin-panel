@@ -12,9 +12,8 @@ import { useUsersContext } from "./../../context/usersContext";
 
 import { useContext } from 'react';
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider';
-import { newMessage } from './../../../http/chatAPI';
+import { newMessage, uploadFile } from './../../../http/chatAPI';
 import { $host } from './../../../http/index'
-import { uploadFile } from '../../../http/chatAPI';
 
 const Chat = () => {
 	const { users, setUserAsUnread, addNewMessage } = useUsersContext();
@@ -57,6 +56,7 @@ const Chat = () => {
 				console.log("file data: ", data)
 
                let response = await uploadFile(data);
+			   console.log("response: ", response)
                setImage(response.path);
             }
         }
@@ -66,6 +66,7 @@ const Chat = () => {
 	const onFileChange = (e) => {
         console.log('file: ', e.target.files[0]);
         setFile(e.target.files[0]);
+		//сообщение с ссылкой на файл
         setValue(e.target.files[0].name); //.name
     }
 

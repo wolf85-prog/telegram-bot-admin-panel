@@ -26,8 +26,11 @@ class FileController {
 
             if(!filedata)
                 res.send("Ошибка при загрузке файла");
-            else
-                res.send("Файл загружен");
+            else {
+                //res.send("Файл загружен");
+                return filedata
+            }
+                
 
 
             // if (req.file) {
