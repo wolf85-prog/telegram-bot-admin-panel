@@ -10,6 +10,16 @@ export const getContacts = async () =>{
     }
 }
 
+export const getContactId = async (id) =>{
+    try {
+       let response = await $host.get(`api/userbots/get/${id}`);
+       //console.log(response);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getUser api", error.message);
+    }
+}
+
 export const setConversation= async (data)=>{
     try {
         await $host.post('api/conversation/add', data);

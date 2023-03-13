@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import groupAvatar from "./../../../assets/images/women.png";
 import media from "./../../../assets/images/placeholder.jpeg";
 import Checkbox from "./../../../components/Checkbox";
 import Icon from "./../../../components/Icon";
+import { newMessage } from './../../../../http/chatAPI';
+import { useUsersContext } from "./../../../context/usersContext";
 
 const groups = [
 	{
@@ -26,13 +28,36 @@ const groups = [
 ];
 
 const Profile = ({ user }) => {
+	const [username, setUsername] = useState("")
+	const { users, setUsers } = useUsersContext();
+
+	const changeUsername = () => {
+		console.log("изменить иммя пользователя")
+	}
+	
+	const handleChange = (e) => {
+		setUsername(e.target.value);
+	}
+	
+	const handleSubmit = (e) => {
+		alert('A name was submitted: ' + username);
+		e.preventDefault();
+	}
+
 	return (
 		<div className="profile">
 			<div className="profile__section profile__section--personal">
 				<div className="profile__avatar-wrapper">
 					<img src={'https://ui-avatars.com/api/?background=random&name=' + user?.name} alt={user?.name} className="avatar-adm" />
 				</div>
-				<h2 className="profile__name"> {user.name} </h2>
+				<form onSubmit={handleSubmit}>
+					<label>
+					Name:
+					<input type="text" value={username} onChange={handleChange} />
+					</label>
+					<input type="submit" value="Обновить" />
+				</form>
+				<h2 className="profile__name"> {user.name} </h2> <span onClick={changeUsername}>Изменить</span>
 			</div>
 
 			<div className="profile__section profile__section--media">
