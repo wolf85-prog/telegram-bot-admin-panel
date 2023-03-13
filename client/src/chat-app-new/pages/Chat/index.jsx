@@ -189,7 +189,7 @@ const Chat = () => {
 				active={showProfileSidebar}
 				closeSidebar={() => setShowProfileSidebar(false)}
 			>
-				{/* <Profile user={user} /> */}
+				<Profile user={user} />
 			</ChatSidebar>
 		</div>
 	);
