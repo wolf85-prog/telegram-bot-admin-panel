@@ -4,6 +4,7 @@ const storage = multer.diskStorage({
     destination(req, file, cd) {
         cd(null, 'images/')
     },
+    //замена оригинального названия файла на название текущей даты в миллесекундах
     filename(req, file, cb) {
         const filename = Date.now()
         cb(null, `${filename}.jpg`)
