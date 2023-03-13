@@ -79,7 +79,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 									</p>
 								) : (
 									<p className="chat__msg chat__msg--sent" ref={assignRef()}>
-										<span>{message.content}</span>
+										<span>{message.content?.includes('https') ? <a className="chat__href" href="#">{message.content}</a> : message.content}</span>
 										<span className="chat__msg-filler"> </span>
 										<span className="chat__msg-footer">
 											<span> {formatTime(message.time)} </span>

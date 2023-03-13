@@ -4,6 +4,11 @@
     position: relative;
 }
 
+.chat__href {
+    text-decoration: underline;
+    color: #1816c1;
+}
+
 .chat__body {
     min-width: 300px;
     flex: 40%;

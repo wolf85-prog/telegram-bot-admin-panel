@@ -69,7 +69,7 @@ const Chat = () => {
         console.log('file: ', e.target.files[0]);
         setFile(e.target.files[0]);
 		//сообщение с ссылкой на файл
-        //setValue('https://proj.uley.team:5000/' + image)//(e.target.files[0].name); //.name
+        //setValue(e.target.files[0].name); //.name
     }
 
 	const openSidebar = (cb) => {

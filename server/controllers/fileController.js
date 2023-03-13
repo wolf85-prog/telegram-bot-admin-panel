@@ -11,16 +11,6 @@ class FileController {
     async uploadFile(req, res) {
 
         try {
-            console.log("api upload req.file: ", req.file);
-            // if (!req.file) return res.sendStatus(400)
-
-            // // формируем относительный путь к файлу
-            // const relativeFilePath = req.file.path
-            //     .replace(/\\/g, '/')
-            //     .split('server/files')[1]
-
-            // // и возвращаем его
-            // res.status(201).json(relativeFilePath)
 
             let filedata = req.file;          
 
@@ -30,12 +20,7 @@ class FileController {
                 //res.send("Файл загружен");
                 res.json(req.file)
             }
-                
 
-
-            // if (req.file) {
-            //     res.json(req.file)
-            // }
         } catch (error) {
             console.log(error.message)
             return res.status(501).json({message: "Upload error"});
