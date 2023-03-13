@@ -65,7 +65,11 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 									</div>
 								) : message.sender !== chatAdminId ? (
 									<p className="chat__msg chat__msg--rxd" ref={assignRef()}>
-										<span>{message.content}</span>
+										<span>
+											{message.content?.includes('https://') 
+											? <a className="chat__href" href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
+											: message.content}
+										</span>
 										<span className="chat__msg-filler"> </span>
 										<span className="chat__msg-footer">
 											{formatTime(message.time)}
@@ -80,7 +84,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 								) : (
 									<p className="chat__msg chat__msg--sent" ref={assignRef()}>
 										<span>
-											{message.content?.includes('https') 
+											{message.content?.includes('https://') 
 											? <a className="chat__href" href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
 											: message.content}
 										</span>
