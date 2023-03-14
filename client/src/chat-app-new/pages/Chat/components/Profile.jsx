@@ -5,6 +5,7 @@ import Icon from "./../../../components/Icon";
 import { editContact } from './../../../../http/chatAPI';
 import { useUsersContext } from "./../../../context/usersContext";
 import { AccountContext } from './../../../context/AccountProvider';
+import AvatarDefault from "./../../../assets/images/no-avatar.png";
 
 const Profile = ({ user }) => {
 	const [username, setUsername] = useState("")
@@ -50,7 +51,7 @@ const Profile = ({ user }) => {
 		<div className="profile">
 			<div className="profile__section profile__section--personal">
 				<div className="profile__avatar-wrapper">
-					<img src={'https://ui-avatars.com/api/?background=random&name=' + user?.name} alt={user?.name} className="avatar-adm" />
+					<img src={AvatarDefault} alt={user?.name} className="avatar-adm" />
 				</div>
 				{
 					form ? <form onSubmit={handleSubmit}>

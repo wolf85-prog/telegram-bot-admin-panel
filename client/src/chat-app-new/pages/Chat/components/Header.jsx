@@ -1,13 +1,14 @@
 import React from "react";
 import Icon from "./../../../components/Icon";
 import OptionsBtn from "./../../../components/OptionsButton";
+import AvatarDefault from "./../../../assets/images/no-avatar.png";
 
 
 const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {
 	return (
 		<header className="headerB chat__header">
 			<div className="chat__avatar-wrapper" onClick={openProfileSidebar}>
-				<img src={'https://ui-avatars.com/api/?background=random&name=' + user?.name} alt={user?.name} className="avatar-adm" />
+				<img src={AvatarDefault} alt={user?.name} className="avatar-adm" />
 			</div>
 
 			<div className="chat__contact-wrapper" onClick={openProfileSidebar}>

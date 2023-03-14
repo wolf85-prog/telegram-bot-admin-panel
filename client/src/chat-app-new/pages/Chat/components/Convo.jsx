@@ -1,6 +1,6 @@
 import Icon from "./../../../components/Icon";
 import React from "react";
-import media from "./../../../assets/images/women.jpeg";
+import media from "./../../../assets/images/profile-picture-boy-1.jpeg";
 import formatTime from "./../../../utils/formatTime";
 
 const Convo = ({ lastMsgRef, messages: allMessages }) => {

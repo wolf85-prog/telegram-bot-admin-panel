@@ -5,6 +5,7 @@ import formatTime from "./../../utils/formatTime";
 import { useUsersContext } from "./../../context/usersContext";
 import { AccountContext } from '../../../chat-app-new/context/AccountProvider'
 import Avatar from "./../../../assets/images/avatars/blank-avatar.png"
+import AvatarDefault from "./../../assets/images/no-avatar.png";
 
 const Contact = ({ contact }) => {
 	
@@ -61,7 +62,7 @@ const Contact = ({ contact }) => {
 		>
 			<div className="sidebar-contact__avatar-wrapper">
 				<img
-					src={'https://ui-avatars.com/api/?background=random&name=' + contact.name} //{contact.profile_picture}
+					src={AvatarDefault} //{contact.profile_picture}
 					alt={contact.name} //{contact.profile_picture}
 					className="avatar-adm"
 				/>
