@@ -16,16 +16,16 @@ const AppRouter = observer((acc) => {
   const navigate = useNavigate();
   const { account } = useContext(AccountContext);
 
-  useEffect(() => {
+  // useEffect(() => {
     
-   // setTimeout(() => {
-      console.log("account: ", account)
-      if (!account) {
-        navigate("/login");
-      } 
-   // }, "4000");
+  //  // setTimeout(() => {
+  //     console.log("account: ", account)
+  //     if (!account) {
+  //       navigate("/login");
+  //     } 
+  //  // }, "4000");
     
-  }, [navigate]);
+  // }, [navigate]);
 
   return (
     <Routes>  
