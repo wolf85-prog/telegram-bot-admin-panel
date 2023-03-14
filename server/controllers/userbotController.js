@@ -24,7 +24,7 @@ class UserbotController {
     async editUser(req, res) { 
         const {id} = req.params      
         try {    
-            let exist=await User.findOne( {where: {chatId: id}} )
+            let exist=await UserBot.findOne( {where: {chatId: id}} )
             
             if(!exist){
                 response.status(500).json({msg: "user not exist"});
