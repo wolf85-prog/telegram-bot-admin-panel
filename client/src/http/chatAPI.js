@@ -20,6 +20,16 @@ export const getContactId = async (id) =>{
     }
 }
 
+export const editContact = async (data, id) =>{
+    try {
+       let response = await $host.patch(`api/userbots/update/${id}`, data);
+       console.log(response);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling editContact api", error.message);
+    }
+}
+
 export const setConversation= async (data)=>{
     try {
         await $host.post('api/conversation/add', data);

@@ -1,47 +1,49 @@
-import React, { useState } from "react";
-import groupAvatar from "./../../../assets/images/women.png";
+import React, { useState, useContext } from "react";
 import media from "./../../../assets/images/placeholder.jpeg";
 import Checkbox from "./../../../components/Checkbox";
 import Icon from "./../../../components/Icon";
-import { newMessage } from './../../../../http/chatAPI';
+import { editContact } from './../../../../http/chatAPI';
 import { useUsersContext } from "./../../../context/usersContext";
-
-const groups = [
-	{
-		name: "Group 1",
-		avatar: groupAvatar,
-		members:
-			"Michelle Obama, Sandra Bullock, Kerry Washington, Beyonce Knowles, Kamala Harris, You",
-	},
-	{
-		name: "Group 2",
-		avatar: groupAvatar,
-		members:
-			"Michelle Obama, Sandra Bullock, Kerry Washington, Beyonce Knowles, Kamala Harris, You",
-	},
-	{
-		name: "Group 3",
-		avatar: groupAvatar,
-		members:
-			"Michelle Obama, Sandra Bullock, Kerry Washington, Beyonce Knowles, Kamala Harris, You",
-	},
-];
+import { AccountContext } from './../../../context/AccountProvider';
 
 const Profile = ({ user }) => {
 	const [username, setUsername] = useState("")
-	const { users, setUsers } = useUsersContext();
+	const [form, setForm] = useState(false)
+	const { addNewName } = useUsersContext();
+	const { setPerson } = useContext(AccountContext);
+	const input = React.useRef();
 
+	//кнопка Изменить
 	const changeUsername = () => {
-		console.log("изменить иммя пользователя")
+		setUsername(user.name);  
+		setForm(true)
 	}
 	
 	const handleChange = (e) => {
+		e.preventDefault();
 		setUsername(e.target.value);
 	}
+
+	const getUser = async () => {
+        setPerson({
+            name: user.name, 
+            id: user.chatId
+        });
+    }
 	
-	const handleSubmit = (e) => {
-		alert('A name was submitted: ' + username);
+	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const newName = {
+			username, 
+		}
+		//сохранить в БД
+		await editContact(newName, user.chatId)
+
+		//сохранить в контексте
+		addNewName(user.chatId, username);
+		getUser()
+
+		setForm(false)
 	}
 
 	return (
@@ -50,14 +52,25 @@ const Profile = ({ user }) => {
 				<div className="profile__avatar-wrapper">
 					<img src={'https://ui-avatars.com/api/?background=random&name=' + user?.name} alt={user?.name} className="avatar-adm" />
 				</div>
-				<form onSubmit={handleSubmit}>
-					<label>
-					Name:
-					<input type="text" value={username} onChange={handleChange} />
-					</label>
-					<input type="submit" value="Обновить" />
-				</form>
-				<h2 className="profile__name"> {user.name} </h2> <span onClick={changeUsername}>Изменить</span>
+				{
+					form ? <form onSubmit={handleSubmit}>
+								<input 
+									type="text" 
+									value={username} 
+									onChange={handleChange} 
+									ref={input}
+        							onFocus={() => input.current.select()}
+									style={{borderBottom: '1px solid #0e892e'}}
+								/>
+								<input type="submit" value="Отправить"  />
+							</form>
+							: <h2 className="profile__name"> {user.name} </h2> 
+				}
+				
+				{
+					!form ? <span onClick={changeUsername} style={{cursor: 'pointer'}}>Редактировать</span>
+					: ""
+				}
 			</div>
 
 			<div className="profile__section profile__section--media">
@@ -116,34 +129,12 @@ const Profile = ({ user }) => {
 				</div>
 				<ul>
 					<li className="profile__about-item">
-						Out here saving the world, one block of code at a time.
+						Несколько слов о компании...
 					</li>
-					<li className="profile__about-item">+23423456789</li>
+					<li className="profile__about-item">+7 123-12-12</li>
 				</ul>
 			</div>
 
-			<div className="profile__section profile__section--groups">
-				<div className="profile__heading-wrapper">
-					<h2 className="sb profile__heading profile__group-heading">
-						<span> Общие группы </span> <span> 3</span>
-					</h2>
-				</div>
-				{groups.map((group) => (
-					<div className="profile__group" key={group.name}>
-						<div className="profile__group-avatar-wrapper">
-							<img src={group.avatar} alt="Group 3" className="avatar" />
-						</div>
-						<div className="profile__group-content">
-							<p className="profile__group-text profile__group-text--top">
-								{group.name}
-							</p>
-							<p className="profile__group-text profile__group-text--bottom">
-								{group.members}
-							</p>
-						</div>
-					</div>
-				))}
-			</div>
 
 			<div className="profile__section profile__section--danger">
 				<Icon id="block" className="profile__danger-icon" />

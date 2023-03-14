@@ -83,9 +83,11 @@ const UsersProvider = ({ children }) => {
 				let first_name = user.firstname != null ? user.firstname : ''
 				let last_name = user.lastname != null ? user.lastname : ''
 
+				let chatName = user.username ? user.username : first_name + ' ' + last_name
+
 				const newUser = {
 					id: user.id,
-					name: first_name + ' ' + last_name,
+					name: chatName,
 					chatId: user.chatId,
 					conversationId: conversationId,
 					unread: 0, 
@@ -243,13 +245,22 @@ const UsersProvider = ({ children }) => {
 
 	};
 
+	//сохранить новое имя пользователя
+	const addNewName = (userId, name) => {
+		let userIndex = users.findIndex((user) => user.chatId === userId);
+		const usersCopy = [...users];
+		usersCopy[userIndex].name = name;
+		setUsers(usersCopy);
+	}
+
 
 	return (
 		<UsersContext.Provider value={{ 
 			users, 
 			setUsers,
 			setUserAsUnread, 
-			addNewMessage 
+			addNewMessage,
+			addNewName 
 		}}>
 			{children}
 		</UsersContext.Provider>
