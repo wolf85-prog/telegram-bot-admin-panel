@@ -27,7 +27,7 @@ class UserbotController {
             let exist=await UserBot.findOne( {where: {chatId: id}} )
             
             if(!exist){
-                response.status(500).json({msg: "user not exist"});
+                res.status(500).json({msg: "user not exist"});
                 return;
             }
 
