@@ -111,7 +111,7 @@ const Chat = () => {
 		await newMessage(message)
 
         //Передаем данные боту
-        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${value}`
+        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${value.replace(/\n/g, '%0A')}`
         console.log(url_send_msg)
 		const sendToTelegram = await $host.get(url_send_msg);
 

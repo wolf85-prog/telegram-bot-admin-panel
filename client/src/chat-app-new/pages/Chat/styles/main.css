@@ -458,12 +458,14 @@
 }
 
 .chat__input {
+    overflow: hidden;
     background: white;
     color: rgb(74, 74, 74);
-    padding: 20px 10px;
-    border-radius: 22px;
+    padding: 10px 10px 30px 10px;
+    border-radius: 11px;
     flex: 1;
     height: 100%;
+    resize: none;
 }
 
 .chat__input::placeholder {

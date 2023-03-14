@@ -18,9 +18,9 @@ const ChatInput = ({
 	onFileChange,
 }) => {
 	const detectEnterPress = (e) => {
-		if (e.key === "Enter" || e.keyCode === 13) {
+		if ((e.key === "Enter" && !e.shiftKey) || (e.keyCode === 13 && !e.shiftKey) ) {
 			submitNewMessage();
-		}
+		} 
 	};
 	return (
 		<div className="chat__input-wrapper">
@@ -81,7 +81,7 @@ const ChatInput = ({
 					))}
 				</div>
 			</div>
-			<input
+			<textarea
 				className="chat__input"
 				placeholder="Введите сообщение"
 				value={value} //{newMessage}
