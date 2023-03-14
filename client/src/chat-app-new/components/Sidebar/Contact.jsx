@@ -1,16 +1,14 @@
-import React, { useContext,useState, useEffect } from "react";
+import React, { useContext } from "react";
 import Icon from "./../../components/Icon";
 import { Link } from "react-router-dom";
 import formatTime from "./../../utils/formatTime";
 import { useUsersContext } from "./../../context/usersContext";
 import { AccountContext } from '../../../chat-app-new/context/AccountProvider'
-import Avatar from "./../../../assets/images/avatars/blank-avatar.png"
 import AvatarDefault from "./../../assets/images/no-avatar.png";
 
 const Contact = ({ contact }) => {
 	
-	const { setPerson, account, newMessageFlag } = useContext(AccountContext);
-	const [message, setMessage] = useState({});
+	const { setPerson } = useContext(AccountContext);
 	
 	//сделать пользователя непрочитанным
 	const { setUserAsUnread } = useUsersContext();
@@ -29,7 +27,7 @@ const Contact = ({ contact }) => {
 			let recentMessageDate
 			//console.log("messageDates: ", messageDates.length)	
 			
-			messageDates.length != 0 	
+			messageDates.length !== 0 	
 			? recentMessageDate = messageDates[messageDates.length - 1]
 			: recentMessageDate = '2000-01-01'
 

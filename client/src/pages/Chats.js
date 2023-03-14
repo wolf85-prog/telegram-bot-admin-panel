@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, Suspense } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./../chat-app-new/App.css";
 import "./../chat-app-new/index.css";
 import "./../chat-app-new/assets/css/index.css";

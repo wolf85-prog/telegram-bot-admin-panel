@@ -217,7 +217,7 @@ const UsersProvider = ({ children }) => {
 		};
 
 		const currentDate = new Date().toLocaleDateString()
-		// const today = new Date();
+		const today = new Date();
 		// const yyyy = today.getFullYear();
 		// let mm = today.getMonth() + 1; // Months start at 0!
 		// let dd = today.getDate();
@@ -228,16 +228,18 @@ const UsersProvider = ({ children }) => {
 
 		if (usersCopy[userIndex].messages[currentDate]) {
 			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			usersCopy[userIndex].date = today;
 		} else {
 			usersCopy[userIndex].messages[currentDate] = [];
 			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			usersCopy[userIndex].date = today;
 		}
 
 		//сортировка
-		const userSort = [...usersCopy].sort((a, b) => {       
-			var dateA = new Date(a.date), dateB = new Date(b.date) 
-			return dateB-dateA  //сортировка по убывающей дате  
-		})
+		// const userSort = [...usersCopy].sort((a, b) => {       
+		// 	var dateA = new Date(a.date), dateB = new Date(b.date) 
+		// 	return dateB-dateA  //сортировка по убывающей дате  
+		// })
 
 		//console.log("userSort: ", userSort)
 

@@ -30,7 +30,6 @@ const Chat = () => {
 	const [showEmojis, setShowEmojis] = useState(false);
 	const [showProfileSidebar, setShowProfileSidebar] = useState(false);
 	const [showSearchSidebar, setShowSearchSidebar] = useState(false);
-	//const [newMessage, setNewMessage] = useState("");
 	const [file, setFile] = useState();
 	const [image, setImage]= useState("");
 	const [value, setValue] = useState("");
@@ -68,8 +67,6 @@ const Chat = () => {
 	const onFileChange = (e) => {
         console.log('file: ', e.target.files[0]);
         setFile(e.target.files[0]);
-		//сообщение с ссылкой на файл
-        //setValue(e.target.files[0].name); //.name
     }
 
 	const openSidebar = (cb) => {
@@ -81,10 +78,12 @@ const Chat = () => {
 		cb(true);
 	};
 
+	//прокрутка
 	const scrollToLastMsg = () => {
 		lastMsgRef.current?.scrollIntoView({transition: "smooth"});
 	};
 
+	//функция отправки сообщения
 	const sendText = async () => {
 		let message = {};
         if(!file) {
@@ -108,11 +107,11 @@ const Chat = () => {
         }
         console.log("message send button: ", message);
 
+		//сохранение сообщения в базе данных
 		await newMessage(message)
 
         //Передаем данные боту
         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${value.replace(/\n/g, '%0A')}`
-        console.log(url_send_msg)
 		const sendToTelegram = await $host.get(url_send_msg);
 
 		//Выводим сообщение об успешной отправке
