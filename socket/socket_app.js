@@ -81,6 +81,15 @@ io.on("connection", (socket) => {
         })
     })
 
+    //send and get message
+    socket.on("sendAdmin", ({senderId, receiverId, text, convId})=>{
+        io.emit("getAdmin", {
+            senderId,
+            text,
+            convId,
+        })
+    })
+
     //when disconnect
     socket.on("disconnect", ()=> {
         removeUser(socket.id);

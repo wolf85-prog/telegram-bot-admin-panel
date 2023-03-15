@@ -192,8 +192,14 @@ const UsersProvider = ({ children }) => {
         })
     },[chatAdminId])
 
+	//получить сообщение в админку
+	const fetchAdmin = (data) => {
+		console.log("Пришло сообщение в Админку: ", data)
+	}
+
 	useEffect(() => {
-		socket.on("getMessage", fetchMessageResponse);		
+		socket.on("getMessage", fetchMessageResponse);
+		socket.on("getAdmin", fetchAdmin);			
 		//socket.on("start_typing", setUserAsTyping);
 		//socket.on("stop_typing", setUserAsNotTyping);
 		
@@ -236,6 +242,14 @@ const UsersProvider = ({ children }) => {
 		}
 
 		setUsers(usersCopy);
+
+
+		socket.emit("sendAdmin", { 
+			senderId: chatAdminId,
+			receiverId: userId,
+			text: message,
+			convId: convId,
+		})
 
 		// socket.emit("sendMessage", { 
 		// 	senderId: userId,
