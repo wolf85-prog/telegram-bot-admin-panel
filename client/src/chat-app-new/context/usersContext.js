@@ -238,8 +238,8 @@ const UsersProvider = ({ children }) => {
 		setUsers(usersCopy);
 
 		socket.emit("sendMessage", { 
-			senderId: chatAdminId,
-			receiverId: userId,
+			senderId: userId,
+			receiverId: chatAdminId,
 			text: message,
 			convId: convId,
 		});
