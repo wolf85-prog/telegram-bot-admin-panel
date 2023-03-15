@@ -220,7 +220,7 @@ const UsersProvider = ({ children }) => {
 			}
 			
 			const userObject = usersCopy[userIndex];
-			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
+			usersCopy[userIndex] = { ...userObject, ['date']: new Date(), ['message']: newMsgObject.content};
 
 			//сортировка
 			const userSort = [...usersCopy].sort((a, b) => {       
@@ -247,36 +247,36 @@ const UsersProvider = ({ children }) => {
 
 	//отправить сообщение из админки 
 	const addNewMessage = (userId, message, convId) => {
-		let userIndex = users.findIndex((user) => user.chatId === userId);
-		const usersCopy = [...users];
-		const newMsgObject = {
-			date: new Date().toLocaleDateString(),
-			content: message,
-			sender: chatAdminId,
-			time: new Date().toLocaleTimeString(),
-			status: "delivered",
-		};
+		// let userIndex = users.findIndex((user) => user.chatId === userId);
+		// const usersCopy = [...users];
+		// const newMsgObject = {
+		// 	date: new Date().toLocaleDateString(),
+		// 	content: message,
+		// 	sender: chatAdminId,
+		// 	time: new Date().toLocaleTimeString(),
+		// 	status: "delivered",
+		// };
 
-		const currentDate = new Date().toLocaleDateString()
-		const today = new Date();
-		// const yyyy = today.getFullYear();
-		// let mm = today.getMonth() + 1; // Months start at 0!
-		// let dd = today.getDate();
+		// const currentDate = new Date().toLocaleDateString()
+		// const today = new Date();
+		// // const yyyy = today.getFullYear();
+		// // let mm = today.getMonth() + 1; // Months start at 0!
+		// // let dd = today.getDate();
 
-		// if (dd < 10) dd = '0' + dd;
-		// if (mm < 10) mm = '0' + mm;
-		// const formattedToday = dd + '.' + mm + '.' + yyyy;
+		// // if (dd < 10) dd = '0' + dd;
+		// // if (mm < 10) mm = '0' + mm;
+		// // const formattedToday = dd + '.' + mm + '.' + yyyy;
 
-		if (usersCopy[userIndex].messages[currentDate]) {
-			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
-			usersCopy[userIndex].date = today;
-		} else {
-			usersCopy[userIndex].messages[currentDate] = [];
-			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
-			usersCopy[userIndex].date = today;
-		}
+		// if (usersCopy[userIndex].messages[currentDate]) {
+		// 	usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+		// 	usersCopy[userIndex].date = today;
+		// } else {
+		// 	usersCopy[userIndex].messages[currentDate] = [];
+		// 	usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+		// 	usersCopy[userIndex].date = today;
+		// }
 
-		setUsers(usersCopy);
+		// setUsers(usersCopy);
 
 
 		socket.emit("sendAdmin", { 
