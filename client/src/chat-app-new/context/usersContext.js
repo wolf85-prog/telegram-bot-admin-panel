@@ -235,16 +235,9 @@ const UsersProvider = ({ children }) => {
 			usersCopy[userIndex].date = today;
 		}
 
-		//сортировка
-		// const userSort = [...usersCopy].sort((a, b) => {       
-		// 	var dateA = new Date(a.date), dateB = new Date(b.date) 
-		// 	return dateB-dateA  //сортировка по убывающей дате  
-		// })
-
-		//console.log("userSort: ", userSort)
-
 		setUsers(usersCopy);
 
+		socket.emit("getMessage", { userId });
 	};
 
 	//сохранить новое имя пользователя
