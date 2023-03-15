@@ -237,12 +237,12 @@ const UsersProvider = ({ children }) => {
 
 		setUsers(usersCopy);
 
-		socket.emit("sendMessage", { 
-			senderId: chatAdminId,
-			receiverId: chatAdminId,
-			text: message,
-			convId: convId,
-		});
+		// socket.emit("sendMessage", { 
+		// 	senderId: chatAdminId,
+		// 	receiverId: chatAdminId,
+		// 	text: message,
+		// 	convId: convId,
+		// });
 	};
 
 	//сохранить новое имя пользователя
