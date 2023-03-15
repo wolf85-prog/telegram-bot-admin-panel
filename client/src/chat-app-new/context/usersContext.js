@@ -239,7 +239,7 @@ const UsersProvider = ({ children }) => {
 
 		socket.emit("sendMessage", { 
 			senderId: chatAdminId,
-			receiverId: userId,
+			receiverId: chatAdminId,
 			text: message,
 			convId: convId,
 		});
