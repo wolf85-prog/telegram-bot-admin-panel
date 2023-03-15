@@ -237,7 +237,7 @@ const UsersProvider = ({ children }) => {
 
 		setUsers(usersCopy);
 
-		socket.emit("getMessage", { userId });
+		socket.emit("getMessage", { chatAdminId });
 	};
 
 	//сохранить новое имя пользователя
