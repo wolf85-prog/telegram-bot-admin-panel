@@ -124,7 +124,7 @@ const Chat = () => {
 		}
 
 		//сохранить в контексте
-		addNewMessage(user.chatId, value);
+		addNewMessage(user.chatId, value, user.conversationId);
 	}
 
 	const submitNewMessage = (e) => {

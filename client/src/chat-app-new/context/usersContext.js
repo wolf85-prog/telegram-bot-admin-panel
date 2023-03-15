@@ -205,7 +205,7 @@ const UsersProvider = ({ children }) => {
 
 
 	//отправить сообщение из админки 
-	const addNewMessage = (userId, message) => {
+	const addNewMessage = (userId, message, convId) => {
 		let userIndex = users.findIndex((user) => user.chatId === userId);
 		const usersCopy = [...users];
 		const newMsgObject = {
@@ -240,7 +240,8 @@ const UsersProvider = ({ children }) => {
 		socket.emit("sendMessage", { 
 			senderId: chatAdminId,
 			receiverId: userId,
-			text: message
+			text: message,
+			convId: convId,
 		});
 	};
 
