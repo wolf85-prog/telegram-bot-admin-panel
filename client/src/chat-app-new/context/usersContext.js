@@ -119,8 +119,16 @@ const UsersProvider = ({ children }) => {
 		fetchData();
 
 	},[])
+//------------------------------------------------------------------------------------------
 
-
+	//подключение админа к сокету и вывод всех подключенных
+	useEffect(()=>{
+		socket.emit("addUser", chatAdminId)
+		socket.on("getUsers", users => {
+			console.log("users socket: ", users);
+		})
+	},[chatAdminId])
+	
 	const _updateUserProp = (userId, prop, value) => {
 		setUsers((users) => {
 			const usersCopy = [...users];
@@ -184,17 +192,44 @@ const UsersProvider = ({ children }) => {
 		//_updateUserProp(data.senderId, "uread", value +1);
 	};
 
-	//подключение админа к сокету и вывод всех подключенных
-	useEffect(()=>{
-        socket.emit("addUser", chatAdminId)
-        socket.on("getUsers", users => {
-            console.log("users socket: ", users);
-        })
-    },[chatAdminId])
 
-	//получить сообщение в админку
+	//получить исходящее сообщение в админку
 	const fetchAdmin = (data) => {
 		console.log("Пришло сообщение в Админку: ", data)
+
+		setUsers((users) => {
+			const { senderId, receiverId, text } = data;
+
+			let userIndex = users.findIndex((user) => user.chatId === receiverId.toString());
+			const usersCopy = JSON.parse(JSON.stringify(users));
+			const newMsgObject = {
+				date: new Date().toLocaleDateString(),
+				content: text,
+				sender: senderId,
+				time: new Date().toLocaleTimeString(),
+				status: null,
+			};
+
+			const currentDate = new Date().toLocaleDateString()
+
+			if (usersCopy[userIndex].messages[currentDate]) {
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			} else {
+				usersCopy[userIndex].messages[currentDate] = [];
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			}
+			
+			const userObject = usersCopy[userIndex];
+			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
+
+			//сортировка
+			const userSort = [...usersCopy].sort((a, b) => {       
+				var dateA = new Date(a.date), dateB = new Date(b.date) 
+				return dateB-dateA  //сортировка по убывающей дате  
+			})
+
+			return userSort;
+		});
 	}
 
 	useEffect(() => {

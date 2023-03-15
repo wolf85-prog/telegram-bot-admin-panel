@@ -85,6 +85,7 @@ io.on("connection", (socket) => {
     socket.on("sendAdmin", ({senderId, receiverId, text, convId})=>{
         io.emit("getAdmin", {
             senderId,
+            receiverId,
             text,
             convId,
         })
