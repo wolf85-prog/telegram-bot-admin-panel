@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./socketContext";
 import { getContacts, getConversation, getMessages } from '../../http/chatAPI'
+import useSound from 'use-sound';
+import boopSfx from './../assets/sounds/boop.mp3';
 
 const UsersContext = createContext();
 
@@ -11,6 +13,8 @@ const UsersProvider = ({ children }) => {
 	const [users, setUsers] = useState([]); //useState(contacts);
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const [count, setCount] = useState(0)
+
+	const [play] = useSound(boopSfx);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -152,7 +156,8 @@ const UsersProvider = ({ children }) => {
 
 	//получить сообщение из телеграмма
 	const fetchMessageResponse = (data) => {
-		console.log("Пришло сообщение: ", count+1)
+		play() //звук прихода сообщения
+		console.log("Пришло новое сообщение: ", count+1)
 		setCount(count+1);
 
 		setUsers((users) => {

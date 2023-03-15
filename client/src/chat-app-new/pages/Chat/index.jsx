@@ -14,6 +14,8 @@ import { useContext } from 'react';
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider';
 import { newMessage, uploadFile } from './../../../http/chatAPI';
 import { $host } from './../../../http/index'
+import useSound from 'use-sound';
+import boopSfx from './../../assets/sounds/boop.mp3';
 
 const Chat = () => {
 	const { users, setUserAsUnread, addNewMessage } = useUsersContext();
@@ -33,6 +35,8 @@ const Chat = () => {
 	const [file, setFile] = useState();
 	const [image, setImage]= useState("");
 	const [value, setValue] = useState("");
+
+	const [play] = useSound(boopSfx);
 
 	useEffect(() => {
 		if (user) {
@@ -128,7 +132,7 @@ const Chat = () => {
 	}
 
 	const submitNewMessage = (e) => {
-		
+		//play();
 		sendText();
 
 		setValue("");
