@@ -207,7 +207,7 @@ const UsersProvider = ({ children }) => {
 				content: text,
 				sender: senderId,
 				time: new Date().toLocaleTimeString(),
-				status: null,
+				status: 'delivered',
 			};
 
 			const currentDate = new Date().toLocaleDateString()
