@@ -1,10 +1,12 @@
 import React, { Suspense, useContext, useEffect, useState } from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, useNavigate } from 'react-router-dom'
 import AppRouter from './AppRouter';
 import './scss/style.scss'
 import {observer} from "mobx-react-lite";
 import {check} from "./http/userAPI";
-import { AccountContext } from "./chat-app-new/context/AccountProvider";
+import {Context} from "./index";
+import Loader from './components/Loader/Loader';
+import Login from './views/pages/login/Login';
 
 const loading = (
   <div className="pt-3 text-center">
@@ -13,23 +15,26 @@ const loading = (
 )
 
 const App = observer(() => {
-    const { isAuth, account, setAccount, setIsAuth } = useContext(AccountContext);
+    const {user} = useContext(Context)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+      setLoading(true)
       check().then(data => {
-        console.log("data: ", data)
-        console.log("isAuth: ", isAuth)
-        setAccount(data)
-        setIsAuth(true)
-      })
+        user.setUser(true)
+        user.setIsAuth(true)
+      }).finally(() => setLoading(false))
 
     }, [])
+
+    if (loading) {
+      return <Loader/>
+    }
     
     return (
       <BrowserRouter>
         <Suspense fallback={loading}>
-          <AppRouter acc={account}/> 
+          <AppRouter /> 
         </Suspense>              
       </BrowserRouter>     
     )

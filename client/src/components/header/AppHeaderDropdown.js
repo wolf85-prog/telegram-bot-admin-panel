@@ -1,4 +1,5 @@
 import React, {useContext} from 'react'
+import {Context} from "../../index";
 import {
   CAvatar,
   CBadge,
@@ -22,16 +23,15 @@ import {
 import CIcon from '@coreui/icons-react'
 import avatar from './../../assets/images/avatars/logo_chat_admin.png'
 import {observer} from "mobx-react-lite";
-import { AccountContext } from "./../../chat-app-new/context/AccountProvider";
 
 const AppHeaderDropdown = observer(() => {
-  const {setAccount, setIsAuth} = useContext(AccountContext);
+  const {user} = useContext(Context)
 
   const logOut = () => {
     console.log("Выход")
-    setAccount({})
-    setIsAuth(false)
-  }
+    user.setUser({})
+    user.setIsAuth(false)
+}
 
   return (
     <CDropdown variant="nav-item">

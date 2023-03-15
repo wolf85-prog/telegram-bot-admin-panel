@@ -19,10 +19,10 @@ import { cilLockLocked, cilUser } from '@coreui/icons'
 import {observer} from "mobx-react-lite";
 import {ADMIN_ROUTE} from "../../../utils/consts";
 import {login} from "../../../http/userAPI";
-import { AccountContext } from "../../../chat-app-new/context/AccountProvider";
+import {Context} from "../../../index";
 
 const Login = observer(() => {
-    const { setAccount } = useContext(AccountContext);
+    const {user} = useContext(Context)
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -31,7 +31,8 @@ const Login = observer(() => {
         try {
             const data = await login(email, password);
             console.log(data)
-            setAccount(data);
+            user.setUser(user)
+            user.setIsAuth(true)
             navigate(ADMIN_ROUTE)
         } catch (e) {
             alert(e.response.data.message)
