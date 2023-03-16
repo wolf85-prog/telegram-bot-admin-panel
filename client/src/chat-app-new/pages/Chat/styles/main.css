@@ -244,7 +244,7 @@
     opacity: 0;
     position: absolute;
     right: 5px;
-    top: 3px;
+    top: 0px;
     pointer-events: none;
     transition: all 0.2s;
 }

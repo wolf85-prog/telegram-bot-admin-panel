@@ -8,10 +8,13 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const dates = Object.keys(allMessages);  //['01/01/2023', 'Сегодня']
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 
+	const optViewRef = React.createRef(null);
+
 	const onSelected = (index) => {
 		switch(index) {
 			case 0: 
-				alert("Удалить сообщение")
+				//alert("Удалить сообщение")
+				//optViewRef.style.visibility = 'hidden';
 				break
 		  
 		  
@@ -119,23 +122,24 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 												}`}
 											/>
 										</span>
-										<button
+										{/* <button
 											aria-label="Message options"
 											className="chat__msg-options"
 										>
-											{/* <Icon id="downArrow" className="chat__msg-options-icon" /> */}
-											<OptionsBtn
-												className="chat__action"
-												ariaLabel="Menu"
-												iconId="downArrow"
-												iconClassName="chat__msg-options-icon"
-												onSelected={onSelected}
-												showPressed={false}
-												options={[
-													"Удалить сообщение",
-												]}
-											/>
-										</button>
+											<Icon id="downArrow" className="chat__msg-options-icon" />											
+										</button> */}
+										<OptionsBtn
+											//ref={optViewRef}
+											className="chat__msg-options"
+											ariaLabel="Menu message options"
+											iconId="downArrow"
+											iconClassName="chat__msg-options-icon"
+											onSelected={onSelected}
+											showPressed={false}
+											options={[
+												"Удалить сообщение",
+											]}
+										/>
 									</p>
 								)}
 							</>

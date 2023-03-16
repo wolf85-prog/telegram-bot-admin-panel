@@ -14,7 +14,8 @@ const UsersProvider = ({ children }) => {
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const [count, setCount] = useState(0)
 
-	const [play] = useSound(boopSfx);
+	//const [play] = useSound(boopSfx);
+	const audio = new Audio(boopSfx);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -156,6 +157,7 @@ const UsersProvider = ({ children }) => {
 
 	//получить сообщение из телеграмма
 	const fetchMessageResponse = (data) => {
+		audio.play();
 		console.log("Пришло новое сообщение: ", count+1)
 		setCount(count+1);
 
