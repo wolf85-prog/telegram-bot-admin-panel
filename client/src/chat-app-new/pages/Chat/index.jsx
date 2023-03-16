@@ -9,13 +9,10 @@ import Search from "./components/Search";
 import Profile from "./components/Profile";
 import Convo from "./components/Convo";
 import { useUsersContext } from "./../../context/usersContext";
-
 import { useContext } from 'react';
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider';
 import { newMessage, uploadFile } from './../../../http/chatAPI';
 import { $host } from './../../../http/index'
-import useSound from 'use-sound';
-import boopSfx from './../../assets/sounds/boop.mp3';
 
 const Chat = () => {
 	const { users, setUserAsUnread, addNewMessage } = useUsersContext();
@@ -35,8 +32,6 @@ const Chat = () => {
 	const [file, setFile] = useState();
 	const [image, setImage]= useState("");
 	const [value, setValue] = useState("");
-
-	const [play] = useSound(boopSfx);
 
 	useEffect(() => {
 		if (user) {
@@ -89,32 +84,7 @@ const Chat = () => {
 
 	//функция отправки сообщения
 	const sendText = async () => {
-		let message = {};
-        if(!file) {
-            message = {
-                senderId: chatAdminId, 
-                receiverId: user.chatId,
-                conversationId: user.conversationId,
-                type: "text",
-                text: value,
-                is_bot: false
-            }
-        } else {
-            message = {
-                senderId: chatAdminId, 
-                receiverId: user.chatId,
-                conversationId: user.conversationId,
-                type: "file",
-                text: 'https://proj.uley.team:5000/' + image,
-                is_bot: false
-            }
-        }
-        console.log("message send button: ", message);
-
-		//сохранение сообщения в базе данных
-		await newMessage(message)
-
-        //Передаем данные боту
+		//Передаем данные боту
         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${value.replace(/\n/g, '%0A')}`
 		const sendToTelegram = await $host.get(url_send_msg);
 
@@ -127,8 +97,35 @@ const Chat = () => {
 			console.log('Что-то пошло не так. Попробуйте ещё раз.');
 		}
 
+		let message = {};
+        if(!file) {
+            message = {
+                senderId: chatAdminId, 
+                receiverId: user.chatId,
+                conversationId: user.conversationId,
+                type: "text",
+                text: value,
+                is_bot: false,
+				messageId: sendToTelegram.data.result.message_id,
+            }
+        } else {
+            message = {
+                senderId: chatAdminId, 
+                receiverId: user.chatId,
+                conversationId: user.conversationId,
+                type: "file",
+                text: 'https://proj.uley.team:5000/' + image,
+                is_bot: false,
+				messageId: sendToTelegram.data.result.message_id,
+            }
+        }
+        console.log("message send button: ", message);
+
+		//сохранение сообщения в базе данных
+		await newMessage(message)
+
 		//сохранить в контексте
-		addNewMessage(user.chatId, value, user.conversationId);
+		addNewMessage(user.chatId, value, user.conversationId, sendToTelegram.data.result.message_id);
 	}
 
 	const submitNewMessage = (e) => {
@@ -176,7 +173,6 @@ const Chat = () => {
 						value={value}
 						setValue={setValue}
 						submitNewMessage={submitNewMessage}
-						play={play}
 					/>
 				</footer>
 			</div>

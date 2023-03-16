@@ -1,20 +1,36 @@
 import Icon from "./../../../components/Icon";
-import React from "react";
+import React, { useContext } from "react";
 import media from "./../../../assets/images/profile-picture-boy-1.jpeg";
 import formatTime from "./../../../utils/formatTime";
 import OptionsBtn from "./../../../components/OptionsButton";
+import { AccountContext } from './../../../context/AccountProvider';
+import { $host } from './../../../../http/index'
 
 const Convo = ({ lastMsgRef, messages: allMessages }) => {
+	const { person } = useContext(AccountContext);
 	const dates = Object.keys(allMessages);  //['01/01/2023', 'Сегодня']
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
+	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 
 	const optViewRef = React.createRef(null);
+
+	const messageId = 12212
 
 	const onSelected = (index) => {
 		switch(index) {
 			case 0: 
 				//alert("Удалить сообщение")
-				//optViewRef.style.visibility = 'hidden';
+				const url_del_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&message_id=${messageId}`
+				const delToTelegram = $host.get(url_del_msg);
+		
+				//Выводим сообщение об успешной отправке
+				if (delToTelegram) {
+					console.log('Ваше сообщение удалено! ', delToTelegram.result);
+				}           
+				//А здесь сообщение об ошибке при отправке
+				else {
+					console.log('Что-то пошло не так. Попробуйте ещё раз.');
+				}
 				break
 		  
 		  
@@ -128,8 +144,8 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 										>
 											<Icon id="downArrow" className="chat__msg-options-icon" />											
 										</button> */}
+										
 										<OptionsBtn
-											//ref={optViewRef}
 											className="chat__msg-options"
 											ariaLabel="Menu message options"
 											iconId="downArrow"

@@ -82,12 +82,13 @@ io.on("connection", (socket) => {
     })
 
     //send and get message
-    socket.on("sendAdmin", ({senderId, receiverId, text, convId})=>{
+    socket.on("sendAdmin", ({senderId, receiverId, text, convId, messageId})=>{
         io.emit("getAdmin", {
             senderId,
             receiverId,
             text,
             convId,
+            messageId,
         })
     })
 

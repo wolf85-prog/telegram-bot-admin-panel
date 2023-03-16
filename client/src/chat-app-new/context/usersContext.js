@@ -57,6 +57,7 @@ const UsersProvider = ({ children }) => {
 						sender: message.senderId,
 						time: chas + ' : ' + minut,
 						status: 'sent',
+						id:message.messageId,
 					}
 					arrayMessage.push(newMessage)
 					allDate.push(newDateMessage)
@@ -204,7 +205,7 @@ const UsersProvider = ({ children }) => {
 		console.log("Пришло сообщение в Админку: ", data)
 
 		setUsers((users) => {
-			const { senderId, receiverId, text } = data;
+			const { senderId, receiverId, text, messageId } = data;
 
 			let userIndex = users.findIndex((user) => user.chatId === receiverId.toString());
 			const usersCopy = JSON.parse(JSON.stringify(users));
@@ -214,6 +215,7 @@ const UsersProvider = ({ children }) => {
 				sender: senderId,
 				time: new Date().toLocaleTimeString(),
 				status: 'delivered',
+				id: messageId,
 			};
 
 			const currentDate = new Date().toLocaleDateString()
@@ -252,7 +254,7 @@ const UsersProvider = ({ children }) => {
 
 
 	//отправить сообщение из админки 
-	const addNewMessage = (userId, message, convId) => {
+	const addNewMessage = (userId, message, convId, messageId) => {
 		// let userIndex = users.findIndex((user) => user.chatId === userId);
 		// const usersCopy = [...users];
 		// const newMsgObject = {
@@ -290,6 +292,7 @@ const UsersProvider = ({ children }) => {
 			receiverId: userId,
 			text: message,
 			convId: convId,
+			messageId,
 		})
 
 		// socket.emit("sendMessage", { 
