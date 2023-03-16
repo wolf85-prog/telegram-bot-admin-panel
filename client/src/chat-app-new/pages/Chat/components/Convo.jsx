@@ -1,20 +1,21 @@
 import Icon from "./../../../components/Icon";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import media from "./../../../assets/images/profile-picture-boy-1.jpeg";
 import formatTime from "./../../../utils/formatTime";
 import OptionsBtn from "./../../../components/OptionsButton";
 import { AccountContext } from './../../../context/AccountProvider';
 import { $host } from './../../../../http/index'
+import { delMessage } from "src/http/chatAPI";
 
 const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const { person } = useContext(AccountContext);
 	const dates = Object.keys(allMessages);  //['01/01/2023', 'Сегодня']
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
+	const [clickContent, setClickContent] = useState(false);
 
 	const optViewRef = React.createRef(null);
-
-	const messageId = 12212
+	const content = React.createRef(null);
 
 	const onSelected = (index, id) => {
 		switch(index) {
@@ -29,6 +30,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 					console.log('Ваше сообщение удалено! ', delToTelegram.result);
 
 					//удалить сообщение в базе данных
+					delMessage(id)
 
 					//удалить сообщение через сокет
 				}           
@@ -59,7 +61,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 						Сообщения шифруются сквозным шифрованием. Никто за пределами этого чата не может читать или слушать их
 					</p>
 				)}
-				<div className="chat__msg-group">
+				<div className="chat__msg-group" >
 					{messages.map((message, msgIndex) => {
 						const assignRef = () =>
 							dateIndex === dates.length - 1 && msgIndex === messages.length - 1

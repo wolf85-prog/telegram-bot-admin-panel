@@ -13,9 +13,9 @@ const OptionsBtn = ({
 	showPressed = true,
 	onSelected,
 	...props
+
 }) => {
 	const [showOptions, setShowOptions] = useState(false);
-
 	return (
 		<div className="pos-rel">
 			<button
