@@ -44,10 +44,10 @@ class MessageController {
 
     //delete message
     async delMessage(req, res) {
-        const {id} = req.params.id
+        const id = req.params.id
         try {
             await Message.destroy({
-                where: { id: id },
+                where: { id },
             })
             return res.status(200).json("Message has been delete successfully");
         } catch (error) {
