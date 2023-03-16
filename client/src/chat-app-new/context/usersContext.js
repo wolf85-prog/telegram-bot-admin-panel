@@ -156,7 +156,6 @@ const UsersProvider = ({ children }) => {
 
 	//получить сообщение из телеграмма
 	const fetchMessageResponse = (data) => {
-		play() //звук прихода сообщения
 		console.log("Пришло новое сообщение: ", count+1)
 		setCount(count+1);
 
@@ -193,6 +192,8 @@ const UsersProvider = ({ children }) => {
 
 			return userSort;
 		});
+
+		play(); //звук прихода сообщения
 
 		//_updateUserProp(data.senderId, "uread", value +1);
 	};

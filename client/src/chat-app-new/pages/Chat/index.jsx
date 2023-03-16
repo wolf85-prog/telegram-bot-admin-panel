@@ -176,6 +176,7 @@ const Chat = () => {
 						value={value}
 						setValue={setValue}
 						submitNewMessage={submitNewMessage}
+						play={play}
 					/>
 				</footer>
 			</div>

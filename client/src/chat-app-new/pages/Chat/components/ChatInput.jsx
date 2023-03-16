@@ -16,6 +16,7 @@ const ChatInput = ({
 	setValue,
 	submitNewMessage,
 	onFileChange,
+	play,
 }) => {
 	const detectEnterPress = (e) => {
 		if ((e.key === "Enter" && !e.shiftKey) || (e.keyCode === 13 && !e.shiftKey) ) {
@@ -93,7 +94,7 @@ const ChatInput = ({
 					<Icon id="send" className="chat__input-icon" />
 				</button>
 			) : (
-				<button aria-label="Record voice note">
+				<button aria-label="Record voice note" onClick={play}>
 					<Icon id="microphone" className="chat__input-icon" />
 				</button>
 			)}
