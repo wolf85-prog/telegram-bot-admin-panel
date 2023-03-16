@@ -3,8 +3,24 @@ import Icon from "./../../../components/Icon";
 import OptionsBtn from "./../../../components/OptionsButton";
 import AvatarDefault from "./../../../assets/images/no-avatar.png";
 
-
 const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {
+
+	const onSelected = (index) => {
+		switch(index) {
+			case 0: //данные о контакте
+				openProfileSidebar()
+				break
+		  
+			case 1: 
+				console.log('1')
+				break
+		  
+			default:
+				console.log("В разработке")
+				break
+		  }
+	};
+
 	return (
 		<header className="headerB chat__header">
 			<div className="chat__avatar-wrapper" onClick={openProfileSidebar}>
@@ -14,7 +30,7 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {
 			<div className="chat__contact-wrapper" onClick={openProfileSidebar}>
 				<h2 className="chat__contact-name"> {user?.name}</h2>
 				<p className="chat__contact-desc">
-					{user.typing ? "typing..." : "online"}
+					{user.typing ? "печатает..." : "данные контакта"}
 				</p>
 			</div>
 			<div className="chat__actions">
@@ -33,6 +49,7 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {
 					ariaLabel="Menu"
 					iconId="menu"
 					iconClassName="chat__action-icon"
+					onSelected={onSelected}
 					options={[
 						"Данные о контакте",
 						"Выбрать сообщения",

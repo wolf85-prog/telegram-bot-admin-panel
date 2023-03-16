@@ -2,10 +2,24 @@ import Icon from "./../../../components/Icon";
 import React from "react";
 import media from "./../../../assets/images/profile-picture-boy-1.jpeg";
 import formatTime from "./../../../utils/formatTime";
+import OptionsBtn from "./../../../components/OptionsButton";
 
 const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const dates = Object.keys(allMessages);  //['01/01/2023', 'Сегодня']
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
+
+	const onSelected = (index) => {
+		switch(index) {
+			case 0: 
+				alert("Удалить сообщение")
+				break
+		  
+		  
+			default:
+				console.log("В разработке")
+				break
+		  }
+	};
 
 	return dates.map((date, dateIndex) => {
 		const messages = allMessages[date];
@@ -109,7 +123,18 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											aria-label="Message options"
 											className="chat__msg-options"
 										>
-											<Icon id="downArrow" className="chat__msg-options-icon" />
+											{/* <Icon id="downArrow" className="chat__msg-options-icon" /> */}
+											<OptionsBtn
+												className="chat__action"
+												ariaLabel="Menu"
+												iconId="downArrow"
+												iconClassName="chat__msg-options-icon"
+												onSelected={onSelected}
+												showPressed={false}
+												options={[
+													"Удалить сообщение",
+												]}
+											/>
 										</button>
 									</p>
 								)}

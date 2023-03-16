@@ -53,6 +53,7 @@ const Profile = ({ user }) => {
 				<div className="profile__avatar-wrapper">
 					<img src={AvatarDefault} alt={user?.name} className="avatar-adm" />
 				</div>
+				<p>{user.chatId}</p>
 				{
 					form ? <form onSubmit={handleSubmit}>
 								<input 
@@ -63,7 +64,7 @@ const Profile = ({ user }) => {
         							onFocus={() => input.current.select()}
 									style={{borderBottom: '1px solid #0e892e'}}
 								/>
-								<input type="submit" value="Отправить"  />
+								<input type="submit" value="Сохранить"  />
 							</form>
 							: <h2 className="profile__name"> {user.name} </h2> 
 				}

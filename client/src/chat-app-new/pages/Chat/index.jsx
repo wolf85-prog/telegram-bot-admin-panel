@@ -120,7 +120,7 @@ const Chat = () => {
 
 		//Выводим сообщение об успешной отправке
 		if (sendToTelegram) {
-			console.log('Спасибо! Ваша сообщение отправлено!');
+			console.log('Спасибо! Ваша сообщение отправлено! ', sendToTelegram.data.result.message_id);
 		}           
 		//А здесь сообщение об ошибке при отправке
 		else {

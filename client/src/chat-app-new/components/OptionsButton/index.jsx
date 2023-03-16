@@ -10,6 +10,7 @@ const OptionsBtn = ({
 	options = [],
 	position = "left",
 	showPressed = true,
+	onSelected,
 	...props
 }) => {
 	const [showOptions, setShowOptions] = useState(false);
@@ -32,7 +33,7 @@ const OptionsBtn = ({
 				} ${position === "right" ? "options-btn__options--right" : ""}`}
 			>
 				{options.map((option, index) => (
-					<li className="options-btn__option" key={index}>
+					<li className="options-btn__option" key={index} onClick={() => onSelected(index)}>
 						{option}
 					</li>
 				))}

@@ -25,21 +25,15 @@ const Contact = ({ contact }) => {
 	const getLastMessage = () => {
 			const messageDates = Object.keys(contact.messages);	
 			let recentMessageDate
-			//console.log("messageDates: ", messageDates.length)	
 			
 			messageDates.length !== 0 	
 			? recentMessageDate = messageDates[messageDates.length - 1]
 			: recentMessageDate = '2000-01-01'
 
-			//console.log("recentMessageDate: ", recentMessageDate)
-
 			let messages = [];
-			//console.log("contact.messages: ", contact.messages)
-			//JSON.stringify(order) === '{}'
 			if (JSON.stringify(contact.messages) !== '{}') {
 				messages = [...contact.messages[recentMessageDate]];
-			}
-			
+			}	
 
 			if (messages.length) {
 				const lastMessage = messages.pop();
@@ -50,8 +44,6 @@ const Contact = ({ contact }) => {
 	};
 
 	const lastMessage = getLastMessage(contact);
-
-	//console.log("lastMessage: ", lastMessage)
 
 	return (
 		<Link

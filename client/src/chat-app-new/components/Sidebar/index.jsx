@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./styles/main.css";
 import avatar from "./../../assets/images/logo_chat_admin.png";
 import Icon from "./../../components/Icon";
@@ -6,8 +7,6 @@ import Contact from "./Contact";
 import OptionsBtn from "./../../components/OptionsButton";
 import { useUsersContext } from "./../../context/usersContext";
 import { Link } from "react-router-dom";
-import useSound from 'use-sound';
-import boopSfx from './../../assets/sounds/boop.mp3';
 
 const Sidebar = () => {
 	const { users: clients } = useUsersContext();
@@ -15,10 +14,9 @@ const Sidebar = () => {
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
 
-	const [play] = useSound(boopSfx);
+	const navigate = useNavigate()
 
 	useEffect(() => {
-		play(); //звук прихода сообщения
 		//сортировка
 		const userSort = [...clients].sort((a, b) => {       
 			var dateA = new Date(a.date), dateB = new Date(b.date) 
@@ -28,11 +26,30 @@ const Sidebar = () => {
 	},[clients])
 	
 	useEffect(() => {
-
 		const filteredData = clients.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
-        setContacts(filteredData);
-        
+        setContacts(filteredData);      
     }, [text]);
+
+
+	const onSelected = (index) => {
+		switch(index) {
+			case 0: //данные о контакте
+				console.log('Профиль')
+				break
+		  
+			case 1: 
+				console.log('1')
+				break
+			
+			case 4: 
+				navigate("/dashboard");
+				break
+		  
+			default:
+				console.log("В разработке")
+				break
+		  }
+	};
 
 	return (
 		<aside className="sidebarB">
@@ -67,6 +84,7 @@ const Sidebar = () => {
 						ariaLabel="Menu"
 						iconId="menu"
 						iconClassName="sidebar__action-icon"
+						onSelected={onSelected}
 						options={[
 							"Профиль",
 							"Архив",
