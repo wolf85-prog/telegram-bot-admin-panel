@@ -41,6 +41,19 @@ class MessageController {
             return res.status(500).json(error.message);
         }
     }
+
+    //delete message
+    async delMessage(req, res) {
+        const {id} = req.params.id
+        try {
+            await Message.destroy({
+                where: { id: id },
+            })
+            return res.status(200).json("Message has been delete successfully");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
 }
 
 module.exports = new MessageController()

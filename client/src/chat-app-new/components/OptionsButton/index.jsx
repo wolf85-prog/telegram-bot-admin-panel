@@ -3,6 +3,7 @@ import Icon from "./../../components/Icon";
 import "./styles/main.css";
 
 const OptionsBtn = ({
+	msgId,
 	className,
 	iconId,
 	iconClassName,
@@ -33,7 +34,7 @@ const OptionsBtn = ({
 				} ${position === "right" ? "options-btn__options--right" : ""}`}
 			>
 				{options.map((option, index) => (
-					<li className="options-btn__option" key={index} onClick={() => onSelected(index)}>
+					<li className="options-btn__option" key={index} onClick={() => onSelected(index, msgId)}>
 						{option}
 					</li>
 				))}

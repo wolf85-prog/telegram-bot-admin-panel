@@ -52,12 +52,19 @@ export const getConversation= async (id)=>{
     }
 }
 
-
 export const newMessage = async (data) =>{
     try {
         await $host.post(`api/message/add`, data); 
     } catch (error) {
         console.log("error while calling newMessage api",error.message);
+    }
+}
+
+export const delMessage = async (id) =>{
+    try {
+        await $host.delete(`api/message/delete/${id}`); 
+    } catch (error) {
+        console.log("error while calling delMessage api",error.message);
     }
 }
 

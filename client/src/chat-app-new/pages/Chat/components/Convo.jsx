@@ -16,24 +16,29 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 	const messageId = 12212
 
-	const onSelected = (index) => {
+	const onSelected = (index, id) => {
 		switch(index) {
 			case 0: 
 				//alert("Удалить сообщение")
-				const url_del_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&message_id=${messageId}`
+				const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${person.id}&message_id=${id}`
+				console.log(url_del_msg)
 				const delToTelegram = $host.get(url_del_msg);
 		
 				//Выводим сообщение об успешной отправке
 				if (delToTelegram) {
 					console.log('Ваше сообщение удалено! ', delToTelegram.result);
+
+					//удалить сообщение в базе данных
+
+					//удалить сообщение через сокет
 				}           
 				//А здесь сообщение об ошибке при отправке
 				else {
 					console.log('Что-то пошло не так. Попробуйте ещё раз.');
 				}
+
 				break
-		  
-		  
+
 			default:
 				console.log("В разработке")
 				break
@@ -146,6 +151,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 										</button> */}
 										
 										<OptionsBtn
+											msgId={message.id}
 											className="chat__msg-options"
 											ariaLabel="Menu message options"
 											iconId="downArrow"
