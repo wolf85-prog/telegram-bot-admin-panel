@@ -193,8 +193,6 @@ const UsersProvider = ({ children }) => {
 			return userSort;
 		});
 
-		play(); //звук прихода сообщения
-
 		//_updateUserProp(data.senderId, "uread", value +1);
 	};
 

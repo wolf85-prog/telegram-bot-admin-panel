@@ -6,6 +6,8 @@ import Contact from "./Contact";
 import OptionsBtn from "./../../components/OptionsButton";
 import { useUsersContext } from "./../../context/usersContext";
 import { Link } from "react-router-dom";
+import useSound from 'use-sound';
+import boopSfx from './../../assets/sounds/boop.mp3';
 
 const Sidebar = () => {
 	const { users: clients } = useUsersContext();
@@ -13,8 +15,10 @@ const Sidebar = () => {
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
 
+	const [play] = useSound(boopSfx);
 
 	useEffect(() => {
+		play(); //звук прихода сообщения
 		//сортировка
 		const userSort = [...clients].sort((a, b) => {       
 			var dateA = new Date(a.date), dateB = new Date(b.date) 
