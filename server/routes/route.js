@@ -17,7 +17,7 @@ route.get('/user/get', authMiddleware, userController.getAll)
 route.get('/user/get/:id', authMiddleware, userController.getOne)
 
 route.post('/message/add', newMessage)
-route.delete('/message/delete', delMessage)
+route.delete('/message/delete/:id', delMessage)
 route.get('/message/get', getAllMessages)
 route.get('/message/get/:id', getMessages)
 
