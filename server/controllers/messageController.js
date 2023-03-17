@@ -47,7 +47,7 @@ class MessageController {
         const id = req.params.id
         try {
             await Message.destroy({
-                where: { messageId: id },
+                where: { messageId: String(id) },
             })
             return res.status(200).json("Message has been delete successfully");
         } catch (error) {
