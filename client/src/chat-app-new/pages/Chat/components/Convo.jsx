@@ -6,6 +6,7 @@ import OptionsBtn from "./../../../components/OptionsButton";
 import { AccountContext } from './../../../context/AccountProvider';
 import { $host } from './../../../../http/index'
 import { delMessage } from "src/http/chatAPI";
+import Dropdown from 'react-bootstrap/Dropdown';
 
 const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const { person } = useContext(AccountContext);
@@ -16,6 +17,46 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 	const optViewRef = React.createRef(null);
 	const content = React.createRef(null);
+
+	const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+		<a
+		  href=""
+		  ref={ref}
+		  onClick={(e) => {
+			e.preventDefault();
+			onClick(e);
+		  }}
+		>
+		  {children}
+		  &#x25bc;
+		</a>
+	));
+
+	CustomToggle.displayName = "Search";
+
+	const CustomMenu = React.forwardRef(
+		({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+		  const [value, setValue] = useState('');
+	  
+		  return (
+			<div
+			  ref={ref}
+			  style={style}
+			  className={className}
+			  aria-labelledby={labeledBy}
+			>
+			  <ul className="list-unstyled">
+				{React.Children.toArray(children).filter(
+				  (child) =>
+					!value || child.props.children.toLowerCase().startsWith(value),
+				)}
+			  </ul>
+			</div>
+		  );
+		},
+	);
+
+	CustomMenu.displayName = CustomMenu
 
 	const onSelected = (index, id) => {
 		switch(index) {
@@ -151,8 +192,16 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 										>
 											<Icon id="downArrow" className="chat__msg-options-icon" />											
 										</button> */}
+
+										<Dropdown>
+											<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
+											</Dropdown.Toggle>
+											<Dropdown.Menu as={CustomMenu}>
+											<Dropdown.Item eventKey="1">Удалить сообщение</Dropdown.Item>
+											</Dropdown.Menu>
+										</Dropdown>
 										
-										<OptionsBtn
+										{/* <OptionsBtn
 											msgId={message.id}
 											className="chat__msg-options"
 											ariaLabel="Menu message options"
@@ -163,7 +212,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											options={[
 												"Удалить сообщение",
 											]}
-										/>
+										/> */}
 									</p>
 								)}
 							</>
