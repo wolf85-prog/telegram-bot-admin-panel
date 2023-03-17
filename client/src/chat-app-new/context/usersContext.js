@@ -240,9 +240,20 @@ const UsersProvider = ({ children }) => {
 		});
 	}
 
+	//получить исходящее сообщение в админку
+	const fetchDelAdmin = (data) => {
+		console.log("Удалено сообщение в Админке: ", data)
+
+		//setUsers((users) => {
+			const { messageId } = data;
+			console.log("message ID: ", messageId)
+		//});
+	}
+
 	useEffect(() => {
 		socket.on("getMessage", fetchMessageResponse);
-		socket.on("getAdmin", fetchAdmin);			
+		socket.on("getAdmin", fetchAdmin);	
+		socket.on("getDelAdmin", fetchDelAdmin);			
 		//socket.on("start_typing", setUserAsTyping);
 		//socket.on("stop_typing", setUserAsNotTyping);
 		
@@ -255,37 +266,6 @@ const UsersProvider = ({ children }) => {
 
 	//отправить сообщение из админки 
 	const addNewMessage = (userId, message, convId, messageId) => {
-		// let userIndex = users.findIndex((user) => user.chatId === userId);
-		// const usersCopy = [...users];
-		// const newMsgObject = {
-		// 	date: new Date().toLocaleDateString(),
-		// 	content: message,
-		// 	sender: chatAdminId,
-		// 	time: new Date().toLocaleTimeString(),
-		// 	status: "delivered",
-		// };
-
-		// const currentDate = new Date().toLocaleDateString()
-		// const today = new Date();
-		// // const yyyy = today.getFullYear();
-		// // let mm = today.getMonth() + 1; // Months start at 0!
-		// // let dd = today.getDate();
-
-		// // if (dd < 10) dd = '0' + dd;
-		// // if (mm < 10) mm = '0' + mm;
-		// // const formattedToday = dd + '.' + mm + '.' + yyyy;
-
-		// if (usersCopy[userIndex].messages[currentDate]) {
-		// 	usersCopy[userIndex].messages[currentDate].push(newMsgObject);
-		// 	usersCopy[userIndex].date = today;
-		// } else {
-		// 	usersCopy[userIndex].messages[currentDate] = [];
-		// 	usersCopy[userIndex].messages[currentDate].push(newMsgObject);
-		// 	usersCopy[userIndex].date = today;
-		// }
-
-		// setUsers(usersCopy);
-
 
 		socket.emit("sendAdmin", { 
 			senderId: chatAdminId,
@@ -303,6 +283,12 @@ const UsersProvider = ({ children }) => {
 		// });
 	};
 
+	const delMessageContext = (messageId) => {
+		socket.emit("delAdmin", { 
+			messageId,
+		})
+	}
+
 	//сохранить новое имя пользователя
 	const addNewName = (userId, name) => {
 		let userIndex = users.findIndex((user) => user.chatId === userId);
@@ -318,6 +304,7 @@ const UsersProvider = ({ children }) => {
 			setUsers,
 			setUserAsUnread, 
 			addNewMessage,
+			delMessageContext,
 			addNewName 
 		}}>
 			{children}

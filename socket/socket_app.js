@@ -92,6 +92,13 @@ io.on("connection", (socket) => {
         })
     })
 
+    //send and get message
+    socket.on("delAdmin", ({messageId})=>{
+        io.emit("getDelAdmin", {
+            messageId,
+        })
+    })
+
     //when disconnect
     socket.on("disconnect", ()=> {
         removeUser(socket.id);

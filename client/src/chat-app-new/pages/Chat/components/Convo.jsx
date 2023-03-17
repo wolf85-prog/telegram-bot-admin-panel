@@ -2,8 +2,8 @@ import Icon from "./../../../components/Icon";
 import React, { useContext, useState } from "react";
 import media from "./../../../assets/images/profile-picture-boy-1.jpeg";
 import formatTime from "./../../../utils/formatTime";
-import OptionsBtn from "./../../../components/OptionsButton";
 import { AccountContext } from './../../../context/AccountProvider';
+import { useUsersContext } from "./../../../context/usersContext";
 import { $host } from './../../../../http/index'
 import { delMessage } from "src/http/chatAPI";
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -13,23 +13,25 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const dates = Object.keys(allMessages);  //['01/01/2023', 'Сегодня']
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
-	const [clickContent, setClickContent] = useState(false);
+
+	const { delMessageContext } = useUsersContext();
 
 	const optViewRef = React.createRef(null);
 	const content = React.createRef(null);
 
 	const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-		<a
-		  href=""
-		  ref={ref}
-		  onClick={(e) => {
-			e.preventDefault();
-			onClick(e);
-		  }}
+		<button
+			aria-label="Message options"
+			className="chat__msg-options"
+			ref={ref}
+			onClick={(e) => {
+				e.preventDefault();
+				onClick(e);
+			}}
 		>
-		  {children}
-		  &#x25bc;
-		</a>
+			{children}
+			<Icon id="downArrow" className="chat__msg-options-icon" />											
+		</button>
 	));
 
 	CustomToggle.displayName = "Search";
@@ -58,35 +60,27 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 	CustomMenu.displayName = CustomMenu
 
-	const onSelected = (index, id) => {
-		switch(index) {
-			case 0: 
-				//alert("Удалить сообщение")
-				const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${person.id}&message_id=${id}`
-				console.log(url_del_msg)
-				const delToTelegram = $host.get(url_del_msg);
-		
-				//Выводим сообщение об успешной отправке
-				if (delToTelegram) {
-					console.log('Ваше сообщение удалено! ', delToTelegram.result);
+	const change = (eventkey) => {
+		//alert(`you chosen: ${eventkey}`)
+		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${person.id}&message_id=${eventkey}`
 
-					//удалить сообщение в базе данных
-					delMessage(id)
+		const delToTelegram = $host.get(url_del_msg);
 
-					//удалить сообщение через сокет
-				}           
-				//А здесь сообщение об ошибке при отправке
-				else {
-					console.log('Что-то пошло не так. Попробуйте ещё раз.');
-				}
+		//Выводим сообщение об успешной отправке
+		if (delToTelegram) {
+			console.log('Ваше сообщение удалено! ', delToTelegram.result);
 
-				break
+			//удалить сообщение в базе данных
+			delMessage(eventkey)
 
-			default:
-				console.log("В разработке")
-				break
-		  }
-	};
+			//удалить сообщение через сокет
+			delMessageContext(eventkey)
+		}           
+		//А здесь сообщение об ошибке при отправке
+		else {
+			console.log('Что-то пошло не так. Попробуйте ещё раз.');
+		}		
+	}
 
 	return dates.map((date, dateIndex) => {
 		const messages = allMessages[date];
@@ -193,26 +187,13 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											<Icon id="downArrow" className="chat__msg-options-icon" />											
 										</button> */}
 
-										<Dropdown>
+										<Dropdown onSelect={change}>
 											<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenu}>
-											<Dropdown.Item eventKey="1">Удалить сообщение</Dropdown.Item>
+											<Dropdown.Item eventKey={message.id}>Удалить сообщение</Dropdown.Item>
 											</Dropdown.Menu>
 										</Dropdown>
-										
-										{/* <OptionsBtn
-											msgId={message.id}
-											className="chat__msg-options"
-											ariaLabel="Menu message options"
-											iconId="downArrow"
-											iconClassName="chat__msg-options-icon"
-											onSelected={onSelected}
-											showPressed={false}
-											options={[
-												"Удалить сообщение",
-											]}
-										/> */}
 									</p>
 								)}
 							</>

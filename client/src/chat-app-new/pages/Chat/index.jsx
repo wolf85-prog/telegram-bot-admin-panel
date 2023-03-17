@@ -129,7 +129,6 @@ const Chat = () => {
 	}
 
 	const submitNewMessage = (e) => {
-		//play();
 		sendText();
 
 		setValue("");
