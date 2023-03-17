@@ -66,6 +66,8 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 		const delToTelegram = $host.get(url_del_msg);
 
+		console.log("Удаляемое сообщение: ", eventkey)
+
 		//Выводим сообщение об успешной отправке
 		if (delToTelegram) {
 			console.log('Ваше сообщение удалено! ', delToTelegram.result);
