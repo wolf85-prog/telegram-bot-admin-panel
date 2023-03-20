@@ -236,6 +236,8 @@ const UsersProvider = ({ children }) => {
 				return dateB-dateA  //сортировка по убывающей дате  
 			})
 
+			console.log(userSort)
+
 			return userSort;
 		});
 	}
