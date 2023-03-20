@@ -63,20 +63,20 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const change = (eventkey) => {
 		//alert(`you chosen: ${eventDate}`)
 		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${person.id}&message_id=${eventkey}`
-
+		console.log(url_del_msg)
 		const delToTelegram = $host.get(url_del_msg);
 
 		console.log("Удаляемое сообщение: ", eventkey)
 
 		//Выводим сообщение об успешной отправке
 		if (delToTelegram) {
-			console.log('Ваше сообщение удалено из телеграм! ', delToTelegram.result);
+			console.log('Ваше сообщение удалено из телеграм! ', delToTelegram);
 
 			//удалить сообщение в базе данных
 			delMessage(eventkey)
 
 			//удалить сообщение через сокет
-			delMessageContext(eventkey)
+			//delMessageContext(eventkey)
 		}           
 		//А здесь сообщение об ошибке при отправке
 		else {
