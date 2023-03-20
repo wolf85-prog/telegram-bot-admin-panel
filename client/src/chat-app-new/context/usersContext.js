@@ -253,13 +253,14 @@ const UsersProvider = ({ children }) => {
 			const usersCopy = JSON.parse(JSON.stringify(users));
 
 			const messageIndex = usersCopy[userIndex].messages[messageDate].lastIndexOf({id: messageId});
+			console.log("messageIndex: ", messageIndex)
 			usersCopy[userIndex].messages[messageDate].splice(messageIndex, 1); 
 
 			const userObject = usersCopy[userIndex];
 
 			console.log(userObject)
 
-
+			console.log("userSort: ", userSort)
 			const userSort = [...usersCopy]
 
 			return userSort;
