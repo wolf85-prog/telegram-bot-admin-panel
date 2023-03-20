@@ -254,6 +254,9 @@ const UsersProvider = ({ children }) => {
 
 			const messageIndex = usersCopy[userIndex].messages[messageDate].lastIndexOf({id: messageId});
 			usersCopy[userIndex].messages[messageDate].splice(messageIndex, 1); 
+
+			const userObject = usersCopy[userIndex];
+			usersCopy[userIndex] = { ...userObject};
 		});
 	}
 
