@@ -244,16 +244,17 @@ const UsersProvider = ({ children }) => {
 	const fetchDelAdmin = (data) => {
 		console.log("Удалено сообщение в Админке: ", data)
 
-		setUsers((users) => {
-			const { messageId } = data;
+		//setUsers((users) => {
+			const { messageId, messageDate } = data;
 			console.log("message ID: ", messageId);
+			console.log("message Date: ", messageDate);
 
 			//let userIndex = users.findIndex((user) => user.chatId === chatAdminId);
 			//const usersCopy = JSON.parse(JSON.stringify(users));
 
 			//usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 			//usersCopy[userIndex].messages.lastIndexOf(); 
-		});
+		//});
 	}
 
 	useEffect(() => {
@@ -289,9 +290,10 @@ const UsersProvider = ({ children }) => {
 		// });
 	};
 
-	const delMessageContext = (messageId) => {
+	const delMessageContext = (messageId, messageDate) => {
 		socket.emit("delAdmin", { 
 			messageId,
+			messageDate,
 		})
 	}
 

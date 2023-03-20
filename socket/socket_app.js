@@ -93,9 +93,10 @@ io.on("connection", (socket) => {
     })
 
     //send and get message
-    socket.on("delAdmin", ({messageId})=>{
+    socket.on("delAdmin", ({messageId, messageDate})=>{
         io.emit("getDelAdmin", {
             messageId,
+            messageDate,
         })
     })
 
