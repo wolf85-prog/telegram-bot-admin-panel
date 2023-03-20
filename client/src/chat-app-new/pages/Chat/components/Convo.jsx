@@ -61,7 +61,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	CustomMenu.displayName = CustomMenu
 
 	const change = (eventkey) => {
-		alert(`you chosen: ${eventkey}`)
+		//alert(`you chosen: ${eventkey}`)
 		const message = JSON.parse(eventkey);
 
 		console.log("id:", message.id)
