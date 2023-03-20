@@ -70,7 +70,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 		//Выводим сообщение об успешной отправке
 		if (delToTelegram) {
-			console.log('Ваше сообщение удалено! ', delToTelegram.result);
+			console.log('Ваше сообщение удалено из телеграм! ', delToTelegram.result);
 
 			//удалить сообщение в базе данных
 			delMessage(eventkey)
@@ -151,12 +151,19 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 										<span className="chat__msg-footer">
 											{formatTime(message.time)}
 										</span>
-										<button
+										{/* <button
 											aria-label="Message options"
 											className="chat__msg-options"
 										>
 											<Icon id="downArrow" className="chat__msg-options-icon" />
-										</button>
+										</button> */}
+										<Dropdown onSelect={change}>
+											<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
+											</Dropdown.Toggle>
+											<Dropdown.Menu as={CustomMenu}>
+											<Dropdown.Item eventKey={message.id}>Удалить сообщение</Dropdown.Item>
+											</Dropdown.Menu>
+										</Dropdown>
 									</p>
 								) : (
 									<p className="chat__msg chat__msg--sent" ref={assignRef()}>
