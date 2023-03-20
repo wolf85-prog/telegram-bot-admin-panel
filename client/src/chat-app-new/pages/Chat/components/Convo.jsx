@@ -64,6 +64,8 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		//alert(`you chosen: ${eventkey}`)
 		const { id, date, chatId } = JSON.parse(eventkey);
 
+		console.log("id:", id)
+
 		//удалить сообщение через сокет
 		delMessageContext(id, date, chatId)
 
