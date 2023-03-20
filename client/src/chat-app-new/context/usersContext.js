@@ -244,17 +244,17 @@ const UsersProvider = ({ children }) => {
 	const fetchDelAdmin = (data) => {
 		console.log("Удалено сообщение в Админке: ", data)
 
-		//setUsers((users) => {
+		setUsers((users) => {
 			const { messageId, messageDate } = data;
 			console.log("message ID: ", messageId);
 			console.log("message Date: ", messageDate);
 
-			//let userIndex = users.findIndex((user) => user.chatId === chatAdminId);
-			//const usersCopy = JSON.parse(JSON.stringify(users));
+			let userIndex = users.findIndex((user) => user.chatId === chatAdminId);
+			const usersCopy = JSON.parse(JSON.stringify(users));
 
-			//usersCopy[userIndex].messages[currentDate].push(newMsgObject);
-			//usersCopy[userIndex].messages.lastIndexOf(); 
-		//});
+			const messageIndex = usersCopy[userIndex].messages[messageDate].lastIndexOf({id: messageId});
+			usersCopy[userIndex].messages[messageDate].splice(messageIndex, 1); 
+		});
 	}
 
 	useEffect(() => {
