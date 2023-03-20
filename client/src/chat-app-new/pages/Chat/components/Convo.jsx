@@ -68,7 +68,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		delMessageContext(id, date, chatId)
 
 		//удалить сообщение в базе данных
-		//delMessage(message.id)
+		delMessage(id)
 
 		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${person.id}&message_id=${id}`
 		//console.log(url_del_msg)
