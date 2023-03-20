@@ -304,10 +304,11 @@ const UsersProvider = ({ children }) => {
 		// });
 	};
 
-	const delMessageContext = (messageId, messageDate) => {
+	const delMessageContext = (messageId, messageDate, chatId) => {
 		socket.emit("delAdmin", { 
 			messageId,
 			messageDate,
+			chatId,
 		})
 	}
 
