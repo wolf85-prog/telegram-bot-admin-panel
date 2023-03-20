@@ -67,24 +67,26 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		//удалить сообщение через сокет
 		delMessageContext(message.id, message.date)
 
+		//удалить сообщение в базе данных
+		//delMessage(message.id)
+
 		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${person.id}&message_id=${message.id}`
 		//console.log(url_del_msg)
-		const delToTelegram = $host.get(url_del_msg);
+		//const delToTelegram = $host.get(url_del_msg);
 
 		console.log("Удаляемое сообщение: ", message.id)
 		console.log("Дата сообщения: ", message.date)
 
 		//Выводим сообщение об успешной отправке
-		if (delToTelegram) {
-			console.log('Ваше сообщение удалено из телеграм! ', delToTelegram);
+		//if (delToTelegram) {
+			//console.log('Ваше сообщение удалено из телеграм! ', delToTelegram);
 
-			//удалить сообщение в базе данных
-			delMessage(message.id)
-		}           
+			
+		//}           
 		//А здесь сообщение об ошибке при отправке
-		else {
-			console.log('Что-то пошло не так. Попробуйте ещё раз.');
-		}		
+		//else {
+		//	console.log('Что-то пошло не так. Попробуйте ещё раз.');
+		//}		
 	}
 
 	return dates.map((date, dateIndex) => {
@@ -164,7 +166,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenu}>
-											<Dropdown.Item eventKey={message.id}>Удалить сообщение</Dropdown.Item>
+											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date})}>Удалить сообщение</Dropdown.Item>
 											</Dropdown.Menu>
 										</Dropdown>
 									</p>
