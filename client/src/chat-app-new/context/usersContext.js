@@ -159,12 +159,12 @@ const UsersProvider = ({ children }) => {
 	//получить сообщение из телеграмма
 	const fetchMessageResponse = (data) => {
 		audio.play();
-		console.log("date: ", date)
+		console.log("date: ", data)
 		console.log("Пришло новое сообщение: ", count+1)
 		setCount(count+1);
 
 		setUsers((users) => {
-			const { senderId, text } = data;
+			const { senderId, text, messageId } = data;
 			//console.log("users: ", users)
 			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			const usersCopy = JSON.parse(JSON.stringify(users));
@@ -174,6 +174,7 @@ const UsersProvider = ({ children }) => {
 				sender: senderId,
 				time: new Date().toLocaleTimeString(),
 				status: null,
+				id: messageId,
 			};
 
 			const currentDate = new Date().toLocaleDateString()
