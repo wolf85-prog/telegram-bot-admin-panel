@@ -253,7 +253,7 @@ const UsersProvider = ({ children }) => {
 			const usersCopy = JSON.parse(JSON.stringify(users));
 
 			const messageIndex = usersCopy[userIndex].messages[messageDate].map(el => el.id).lastIndexOf(messageId);
-
+			console.log(usersCopy[userIndex].messages[messageDate])
 			//const messageIndex = usersCopy[userIndex].messages[messageDate].lastIndexOf(messageId);
 			console.log("messageIndex: ", messageIndex)
 			usersCopy[userIndex].messages[messageDate].splice(messageIndex, 1); 
