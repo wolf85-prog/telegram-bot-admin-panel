@@ -248,8 +248,8 @@ const UsersProvider = ({ children }) => {
 			const { messageId } = data;
 			console.log("message ID: ", messageId);
 
-			let userIndex = users.findIndex((user) => user.chatId === chatAdminId);
-			const usersCopy = JSON.parse(JSON.stringify(users));
+			//let userIndex = users.findIndex((user) => user.chatId === chatAdminId);
+			//const usersCopy = JSON.parse(JSON.stringify(users));
 
 			//usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 			//usersCopy[userIndex].messages.lastIndexOf(); 
