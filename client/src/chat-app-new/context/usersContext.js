@@ -244,14 +244,12 @@ const UsersProvider = ({ children }) => {
 
 	//получить исходящее сообщение в админку
 	const fetchDelAdmin = (data) => {
-		console.log("Удалено сообщение в Админке: ", data)
+		console.log("Удаление сообщение в Админке: ", data)
 
 		setUsers((users) => {
-			const { messageId, messageDate } = data;
-			console.log("message ID: ", messageId);
-			console.log("message Date: ", messageDate);
+			const { messageId, messageDate, currentChatId } = data;
 
-			let userIndex = users.findIndex((user) => user.chatId === chatAdminId);
+			let userIndex = users.findIndex((user) => user.chatId === currentChatId);
 			const usersCopy = JSON.parse(JSON.stringify(users));
 
 			const messageIndex = usersCopy[userIndex].messages[messageDate].map(el => el.id).lastIndexOf(messageId);
