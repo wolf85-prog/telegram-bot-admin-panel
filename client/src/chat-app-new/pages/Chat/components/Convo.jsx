@@ -205,7 +205,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenu}>
-											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: chatAdminId})}>Удалить сообщение</Dropdown.Item>
+											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: person.id})}>Удалить сообщение</Dropdown.Item>
 											</Dropdown.Menu>
 										</Dropdown>
 									</p>
