@@ -60,14 +60,13 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 	CustomMenu.displayName = CustomMenu
 
-	const change = (eventkey, eventDate) => {
-		alert(`you chosen: ${eventDate}`)
+	const change = (eventkey) => {
+		//alert(`you chosen: ${eventDate}`)
 		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${person.id}&message_id=${eventkey}`
 
 		const delToTelegram = $host.get(url_del_msg);
 
 		console.log("Удаляемое сообщение: ", eventkey)
-		console.log(" дата: ", eventDate)
 
 		//Выводим сообщение об успешной отправке
 		if (delToTelegram) {
@@ -162,7 +161,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenu}>
-											<Dropdown.Item eventKey={message.id} eventDate={message.date}>Удалить сообщение</Dropdown.Item>
+											<Dropdown.Item eventKey={message.id}>Удалить сообщение</Dropdown.Item>
 											</Dropdown.Menu>
 										</Dropdown>
 									</p>
