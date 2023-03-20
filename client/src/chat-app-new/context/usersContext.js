@@ -247,11 +247,11 @@ const UsersProvider = ({ children }) => {
 		console.log("Удаление сообщение в Админке: ", data)
 
 		setUsers((users) => {
-			const { messageId, messageDate, currentChatId } = data;
+			const { messageId, messageDate, chatId } = data;
 
-			console.log("currentChatId: ", currentChatId)
+			console.log("currentChatId: ", chatId)
 
-			let userIndex = users.findIndex((user) => user.chatId === currentChatId);
+			let userIndex = users.findIndex((user) => user.chatId === chatId);
 			const usersCopy = JSON.parse(JSON.stringify(users));
 
 			const messageIndex = usersCopy[userIndex].messages[messageDate].map(el => el.id).lastIndexOf(messageId);
