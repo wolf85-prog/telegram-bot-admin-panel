@@ -258,7 +258,11 @@ const UsersProvider = ({ children }) => {
 			const userObject = usersCopy[userIndex];
 
 			console.log(userObject)
-			//usersCopy[userIndex] = { ...userObject};
+
+
+			const userSort = [...usersCopy]
+
+			return userSort;
 		});
 	}
 
