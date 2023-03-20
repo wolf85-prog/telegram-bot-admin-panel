@@ -62,22 +62,22 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 	const change = (eventkey) => {
 		//alert(`you chosen: ${eventkey}`)
-		const { id, date, chatId } = JSON.parse(eventkey);
+		const message = JSON.parse(eventkey);
 
-		console.log("id:", id)
+		console.log("id:", message.id)
 
 		//удалить сообщение через сокет
-		delMessageContext(id, date, chatId)
+		delMessageContext(message.id, message.date, message.chatId)
 
 		//удалить сообщение в базе данных
-		delMessage(id)
+		delMessage(message.id)
 
-		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${person.id}&message_id=${id}`
+		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${person.id}&message_id=${message.id}`
 		//console.log(url_del_msg)
 		const delToTelegram = $host.get(url_del_msg);
 
-		console.log("Удаляемое сообщение: ", id)
-		console.log("Дата сообщения: ", date)
+		console.log("Удаляемое сообщение: ", message.id)
+		console.log("Дата сообщения: ", message.date)
 
 		//Выводим сообщение об успешной отправке
 		if (delToTelegram) {
