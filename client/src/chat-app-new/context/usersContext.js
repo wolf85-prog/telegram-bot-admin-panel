@@ -249,6 +249,8 @@ const UsersProvider = ({ children }) => {
 		setUsers((users) => {
 			const { messageId, messageDate, currentChatId } = data;
 
+			console.log("currentChatId: ", currentChatId)
+
 			let userIndex = users.findIndex((user) => user.chatId === currentChatId);
 			const usersCopy = JSON.parse(JSON.stringify(users));
 
