@@ -64,6 +64,9 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		//alert(`you chosen: ${eventkey}`)
 		const message = JSON.parse(eventkey);
 
+		//удалить сообщение через сокет
+		delMessageContext(message.id, message.date)
+
 		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${person.id}&message_id=${message.id}`
 		//console.log(url_del_msg)
 		const delToTelegram = $host.get(url_del_msg);
@@ -77,9 +80,6 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 			//удалить сообщение в базе данных
 			delMessage(eventkey)
-
-			//удалить сообщение через сокет
-			delMessageContext(message.id, message.date)
 		}           
 		//А здесь сообщение об ошибке при отправке
 		else {
