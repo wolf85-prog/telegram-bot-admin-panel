@@ -79,7 +79,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 		//Выводим сообщение об успешной отправке
 		if (delToTelegram) {
-			console.log('Ваше сообщение удалено из телеграм! ');	
+			console.log('Ваше сообщение удалено из телеграм! ', delToTelegram);	
 		}           
 		//А здесь сообщение об ошибке при отправке
 		else {
