@@ -72,21 +72,19 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${person.id}&message_id=${id}`
 		//console.log(url_del_msg)
-		//const delToTelegram = $host.get(url_del_msg);
+		const delToTelegram = $host.get(url_del_msg);
 
 		console.log("Удаляемое сообщение: ", id)
 		console.log("Дата сообщения: ", date)
 
 		//Выводим сообщение об успешной отправке
-		//if (delToTelegram) {
-			//console.log('Ваше сообщение удалено из телеграм! ', delToTelegram);
-
-			
-		//}           
+		if (delToTelegram) {
+			console.log('Ваше сообщение удалено из телеграм! ', delToTelegram);	
+		}           
 		//А здесь сообщение об ошибке при отправке
-		//else {
-		//	console.log('Что-то пошло не так. Попробуйте ещё раз.');
-		//}		
+		else {
+			console.log('Что-то пошло не так. Попробуйте ещё раз.');
+		}		
 	}
 
 	return dates.map((date, dateIndex) => {
