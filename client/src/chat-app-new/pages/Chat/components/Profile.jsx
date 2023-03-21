@@ -81,7 +81,7 @@ const Profile = ({ user }) => {
 					</div>						
 				</div>
 
-				<button onClick={()=>console.log("клик по кнопке Изменить")}>Изменить аватар</button>
+				<button className="btn" onClick={sendFile}>Изменить аватар</button>
 
 				<p>{user.chatId}</p>
 				{
