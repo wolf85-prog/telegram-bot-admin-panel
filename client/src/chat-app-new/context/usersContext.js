@@ -133,8 +133,9 @@ const UsersProvider = ({ children }) => {
 		socket.emit("addUser", chatAdminId)
 		socket.on("getUsers", users => {
 			console.log("users socket: ", users);
+			setUsersOnline(users)
 		})
-		setUsersOnline(users)
+		
 	},[chatAdminId])
 	
 	const _updateUserProp = (userId, prop, value) => {
