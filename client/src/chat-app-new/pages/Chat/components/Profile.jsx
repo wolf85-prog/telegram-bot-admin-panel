@@ -78,9 +78,11 @@ const Profile = ({ user }) => {
 					<div className="round_adm">
 						<input type="file" name="filedata" onChange={e => setImg(e.target.files[0])}/>
 						<i className = "fa fa-camera" style={{color: '#fff'}}></i>
-					</div>	
-
+					</div>						
 				</div>
+
+				<button onClick={()=>console.log("клик по кнопке Изменить")}>Изменить аватар</button>
+
 				<p>{user.chatId}</p>
 				{
 					form ? <form onSubmit={handleSubmit}>
