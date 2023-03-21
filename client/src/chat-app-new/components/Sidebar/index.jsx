@@ -9,12 +9,14 @@ import { useUsersContext } from "./../../context/usersContext";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-	const { users: clients } = useUsersContext();
+	const { users: clients, usersOnline } = useUsersContext();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
 
 	const navigate = useNavigate()
+
+	console.log("usersOnline: ", usersOnline)
 
 	useEffect(() => {
 		//сортировка

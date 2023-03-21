@@ -14,7 +14,6 @@ const Contact = ({ contact }) => {
 	//сделать пользователя непрочитанным
 	const { setUserAsUnread } = useUsersContext();
 
-
     const getUser = async () => {
         setPerson({
             name: contact.name, 
@@ -52,11 +51,12 @@ const Contact = ({ contact }) => {
 			onClick={() => getUser()}
 		>
 			<div className="sidebar-contact__status-wrapper">
-				<img
-					src={Status} //{contact.profile_picture}
-					alt="status" //{contact.profile_picture}
+				{/* {statusUser === ''  ? '' 
+				: <img
+					src={Status}
+					alt="status" 
 					className="status-adm"
-				/>
+				/>} */}
 			</div>
 			<div className="sidebar-contact__avatar-wrapper">
 				<img

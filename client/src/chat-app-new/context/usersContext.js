@@ -13,6 +13,7 @@ const UsersProvider = ({ children }) => {
 	const [users, setUsers] = useState([]); //useState(contacts);
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const [count, setCount] = useState(0)
+	const [usersOnline, setUsersOnline] = useState([]);
 
 	//const [play] = useSound(boopSfx);
 	const audio = new Audio(boopSfx);
@@ -133,6 +134,7 @@ const UsersProvider = ({ children }) => {
 		socket.on("getUsers", users => {
 			console.log("users socket: ", users);
 		})
+		setUsersOnline(users)
 	},[chatAdminId])
 	
 	const _updateUserProp = (userId, prop, value) => {
@@ -251,22 +253,15 @@ const UsersProvider = ({ children }) => {
 		setUsers((users) => {
 			const { messageId, messageDate, chatId } = data;
 
-			console.log("currentChatId: ", chatId)
-
 			let userIndex = users.findIndex((user) => user.chatId === chatId);
 			const usersCopy = JSON.parse(JSON.stringify(users));
 
 			const messageIndex = usersCopy[userIndex].messages[messageDate].map(el => el.id).lastIndexOf(messageId);
-			console.log(usersCopy[userIndex].messages[messageDate])
-			//const messageIndex = usersCopy[userIndex].messages[messageDate].lastIndexOf(messageId);
-			console.log("messageIndex: ", messageIndex)
+
 			usersCopy[userIndex].messages[messageDate].splice(messageIndex, 1); 
 
 			const userObject = usersCopy[userIndex];
 
-			console.log(userObject)
-
-			console.log("userSort: ", userSort)
 			const userSort = [...usersCopy]
 
 			return userSort;
@@ -330,7 +325,8 @@ const UsersProvider = ({ children }) => {
 			setUserAsUnread, 
 			addNewMessage,
 			delMessageContext,
-			addNewName 
+			addNewName,
+			usersOnline 
 		}}>
 			{children}
 		</UsersContext.Provider>
