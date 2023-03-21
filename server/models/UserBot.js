@@ -7,6 +7,7 @@ const UserBot = sequelize.define('userbot', {
     lastname: {type: DataTypes.STRING},
     chatId: {type: DataTypes.STRING, unique: true},
     username: {type: DataTypes.STRING},
+    avatar: {type: DataTypes.STRING},
 })
 
 module.exports = UserBot

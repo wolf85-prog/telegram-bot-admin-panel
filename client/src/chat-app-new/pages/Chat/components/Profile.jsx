@@ -2,16 +2,18 @@ import React, { useState, useContext } from "react";
 import media from "./../../../assets/images/placeholder.jpeg";
 import Checkbox from "./../../../components/Checkbox";
 import Icon from "./../../../components/Icon";
-import { editContact } from './../../../../http/chatAPI';
+import { editContact, uploadFile } from './../../../../http/chatAPI';
 import { useUsersContext } from "./../../../context/usersContext";
 import { AccountContext } from './../../../context/AccountProvider';
-import AvatarDefault from "./../../../assets/images/no-avatar.png";
+import defaultAvatar from "./../../../assets/images/no-avatar.png";
 
 const Profile = ({ user }) => {
 	const [username, setUsername] = useState("")
 	const [form, setForm] = useState(false)
 	const { addNewName } = useUsersContext();
 	const { setPerson } = useContext(AccountContext);
+	const [img, setImg] = useState(null)
+	const [avatar, setAvatar] = useState(null)
 	const input = React.useRef();
 
 	//кнопка Изменить
@@ -47,11 +49,37 @@ const Profile = ({ user }) => {
 		setForm(false)
 	}
 
+	const sendFile = React.useCallback(async () => {
+		try {
+			const data = new FormData();
+            data.append("filedata", img);
+
+			console.log("file data: ", data)
+
+            let response = await uploadFile(data);
+			console.log("response: ", response.data)
+			setAvatar(response.data.path)
+		} catch (error) {
+			
+		}
+	}, [img])
+
 	return (
 		<div className="profile">
 			<div className="profile__section profile__section--personal">
-				<div className="profile__avatar-wrapper">
-					<img src={AvatarDefault} alt={user?.name} className="avatar-adm" />
+				<div className="profile__avatar-wrapper upload">
+					{
+						avatar
+							? <img src={avatar} alt={user?.name} className="avatar-adm" />
+							: <img src={defaultAvatar} alt={user?.name} className="avatar-adm" />
+					}
+					
+					
+					<div className="round_adm">
+						<input type="file" name="filedata" onChange={e => setImg(e.target.files[0])}/>
+						<i className = "fa fa-camera" style={{color: '#fff'}}></i>
+					</div>	
+
 				</div>
 				<p>{user.chatId}</p>
 				{
