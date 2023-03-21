@@ -14,7 +14,7 @@ const Contact = ({ contact }) => {
 	//сделать пользователя непрочитанным
 	const { setUserAsUnread, usersOnline } = useUsersContext();
 
-	const status = usersOnline.map(el => el.userId).includes(contact.chatId)
+	const status = usersOnline.find(item => item.userId == contact.chatId)
 
     const getUser = async () => {
         setPerson({
