@@ -47,6 +47,12 @@
     object-fit: cover;
 }
 
+.status-adm {
+    height: 18px;
+    width: 20px;
+    object-fit: cover;
+}
+
 .emoji {
     background: url(../../assets/images/emoji-sprite.png) transparent;
     width: 40px;

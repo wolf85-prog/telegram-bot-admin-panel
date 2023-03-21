@@ -5,6 +5,7 @@ import formatTime from "./../../utils/formatTime";
 import { useUsersContext } from "./../../context/usersContext";
 import { AccountContext } from '../../../chat-app-new/context/AccountProvider'
 import AvatarDefault from "./../../assets/images/no-avatar.png";
+import Status from "./../../assets/images/status.jpg";
 
 const Contact = ({ contact }) => {
 	
@@ -50,6 +51,13 @@ const Contact = ({ contact }) => {
 			className="sidebar-contact"
 			onClick={() => getUser()}
 		>
+			<div className="sidebar-contact__status-wrapper">
+				<img
+					src={Status} //{contact.profile_picture}
+					alt="status" //{contact.profile_picture}
+					className="status-adm"
+				/>
+			</div>
 			<div className="sidebar-contact__avatar-wrapper">
 				<img
 					src={AvatarDefault} //{contact.profile_picture}
