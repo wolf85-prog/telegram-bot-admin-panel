@@ -12,7 +12,9 @@ const Contact = ({ contact }) => {
 	const { setPerson } = useContext(AccountContext);
 	
 	//сделать пользователя непрочитанным
-	const { setUserAsUnread } = useUsersContext();
+	const { setUserAsUnread, usersOnline } = useUsersContext();
+
+	const status = usersOnline.include(contact.chatId)
 
     const getUser = async () => {
         setPerson({
@@ -51,12 +53,13 @@ const Contact = ({ contact }) => {
 			onClick={() => getUser()}
 		>
 			<div className="sidebar-contact__status-wrapper">
-				{/* {statusUser === ''  ? '' 
-				: <img
+				{status 
+				? <img
 					src={Status}
 					alt="status" 
 					className="status-adm"
-				/>} */}
+				/> 
+				: ''}
 			</div>
 			<div className="sidebar-contact__avatar-wrapper">
 				<img
