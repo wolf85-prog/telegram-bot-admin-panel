@@ -42,6 +42,27 @@ class UserbotController {
         }
     }
 
+    async editUserAvatar(req, res) { 
+        const {id} = req.params      
+        try {    
+            let exist=await UserBot.findOne( {where: {chatId: id}} )
+            
+            if(!exist){
+                res.status(500).json({msg: "user not exist"});
+                return;
+            }
+
+            const {avatar} = req.body
+
+            const newUser = await UserBot.update(
+                { avatar },
+                { where: {chatId: id} })
+            return res.status(200).json(newUser);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
     async getUsers(req, res) {
         try {
             const users = await UserBot.findAll()

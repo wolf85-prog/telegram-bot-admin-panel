@@ -28,6 +28,7 @@ route.get('/conversation/get/:id', getConversation)
 route.get('/userbots/get', getUsers)
 route.get('/userbots/get/:id', getUser)
 route.patch('/userbots/update/:id', editUser)
+route.patch('/userbots/updatefile/:id', editUserAvatart)
 
 route.post("/file/upload", upload.single("filedata"), uploadFile);
 route.get("/file/:filename", getImage);
