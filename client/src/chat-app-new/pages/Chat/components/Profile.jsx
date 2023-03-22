@@ -70,8 +70,12 @@ const Profile = ({ user }) => {
 			console.log("response: ", response.data)
 			//setAvatar(response.data.path)
 
+			const newAvatar = {
+				avatar: response.data.path, 
+			}
+
 			//сохранить в БД
-			await editContactAvatar(response.data.path, user.chatId)
+			await editContactAvatar(newAvatar, user.chatId)
 			
 			//сохранить в контексте
 			addNewAvatar(user.chatId, response.data.path);

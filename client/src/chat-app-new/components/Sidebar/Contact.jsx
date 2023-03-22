@@ -20,7 +20,8 @@ const Contact = ({ contact }) => {
     const getUser = async () => {
         setPerson({
             name: contact.name, 
-            id: contact.chatId
+            id: contact.chatId, 
+			avatar: contact.avatar
         });
 		setUserAsUnread(contact.chatId)
     }

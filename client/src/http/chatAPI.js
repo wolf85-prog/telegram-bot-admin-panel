@@ -33,7 +33,7 @@ export const editContact = async (data, id) =>{
 export const editContactAvatar = async (data, id) =>{
     try {
        let response = await $host.patch(`api/userbots/updatefile/${id}`, data);
-       console.log(response);
+       console.log("response: ", response);
        return response.data;
     } catch (error) {
         console.log("error while calling editContactAvatar api", error.message);
