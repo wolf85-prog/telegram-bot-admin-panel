@@ -57,6 +57,8 @@
 .btn_save {
     background-color: green;
     color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
 .upload .round_adm {
