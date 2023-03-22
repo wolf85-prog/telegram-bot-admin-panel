@@ -4,7 +4,7 @@ const userController = require('../controllers/userController')
 const authMiddleware = require('../middleware/authMiddleware')
 const { newMessage, delMessage, getMessages, getAllMessages } = require('../controllers/messageController')
 const { newConversation, getConversation } = require('../controllers/conversationController')
-const { addUser, getUsers, getUser, editUser} = require('../controllers/userbotController')
+const { addUser, getUsers, getUser, editUser, editUserAvatar} = require('../controllers/userbotController')
 const { uploadFile, getImage } = require( "../controllers/fileController.js")
 //const upload = require( "../utils/upload.js")
 //const upload = multer({dest:"uploads"});
@@ -28,7 +28,7 @@ route.get('/conversation/get/:id', getConversation)
 route.get('/userbots/get', getUsers)
 route.get('/userbots/get/:id', getUser)
 route.patch('/userbots/update/:id', editUser)
-route.patch('/userbots/updatefile/:id', editUserAvatart)
+route.patch('/userbots/updatefile/:id', editUserAvatar)
 
 route.post("/file/upload", upload.single("filedata"), uploadFile);
 route.get("/file/:filename", getImage);
