@@ -96,6 +96,7 @@ const UsersProvider = ({ children }) => {
 					id: user.id,
 					name: chatName,
 					chatId: user.chatId,
+					avatar: user.avatar,
 					conversationId: conversationId,
 					unread: 0, 
 					pinned: false,
@@ -318,6 +319,14 @@ const UsersProvider = ({ children }) => {
 		setUsers(usersCopy);
 	}
 
+	//сохранить новое имя пользователя
+	const addNewAvatar = (userId, avatar) => {
+		let userIndex = users.findIndex((user) => user.chatId === userId);
+		const usersCopy = [...users];
+		usersCopy[userIndex].avatar = avatar;
+		setUsers(usersCopy);
+	}
+
 
 	return (
 		<UsersContext.Provider value={{ 
@@ -327,6 +336,7 @@ const UsersProvider = ({ children }) => {
 			addNewMessage,
 			delMessageContext,
 			addNewName,
+			addNewAvatar,
 			usersOnline 
 		}}>
 			{children}

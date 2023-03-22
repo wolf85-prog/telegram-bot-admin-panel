@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import media from "./../../../assets/images/placeholder.jpeg";
 import Checkbox from "./../../../components/Checkbox";
 import Icon from "./../../../components/Icon";
-import { editContact, uploadFile } from './../../../../http/chatAPI';
+import { editContact, uploadFile, editContactAvatar } from './../../../../http/chatAPI';
 import { useUsersContext } from "./../../../context/usersContext";
 import { AccountContext } from './../../../context/AccountProvider';
 import defaultAvatar from "./../../../assets/images/no-avatar.png";
@@ -10,10 +10,10 @@ import defaultAvatar from "./../../../assets/images/no-avatar.png";
 const Profile = ({ user }) => {
 	const [username, setUsername] = useState("")
 	const [form, setForm] = useState(false)
-	const { addNewName } = useUsersContext();
+	const { addNewName, addNewAvatar } = useUsersContext();
 	const { setPerson } = useContext(AccountContext);
 	const [img, setImg] = useState(null)
-	const [avatar, setAvatar] = useState(null)
+	//const [avatar, setAvatar] = useState(null)
 	const input = React.useRef();
 
 	const host = process.env.REACT_APP_API_URL
@@ -36,6 +36,7 @@ const Profile = ({ user }) => {
         });
     }
 	
+	//сохранить новое имя
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const newName = {
@@ -51,6 +52,7 @@ const Profile = ({ user }) => {
 		setForm(false)
 	}
 
+	//сохранить новый аватар
 	const sendFile = React.useCallback(async () => {
 		try {
 			const data = new FormData();
@@ -60,7 +62,13 @@ const Profile = ({ user }) => {
 
             let response = await uploadFile(data);
 			console.log("response: ", response.data)
-			setAvatar(response.data.path)
+			//setAvatar(response.data.path)
+
+			//сохранить в БД
+			await editContactAvatar(response.data.path, user.chatId)
+			
+			//сохранить в контексте
+			addNewAvatar(user.chatId, response.data.path);
 
 		} catch (error) {
 			
@@ -72,8 +80,8 @@ const Profile = ({ user }) => {
 			<div className="profile__section profile__section--personal">
 				<div className="profile__avatar-wrapper upload">
 					{
-						avatar
-							? <img src={`${host}/${avatar}`} alt={user?.name} className="avatar-adm" />
+						user.avatar
+							? <img src={`${host}/${user.avatar}`} alt={user?.name} className="avatar-adm" />
 							: <img src={defaultAvatar} alt={user?.name} className="avatar-adm" />
 					}
 					
