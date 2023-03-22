@@ -39,13 +39,13 @@ const Chats2 = () => {
 
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
-                  <div className="app">
+                  {/* <div className="app"> */}
                     <p className="app__mobile-message"> Доступно только на компьютере 😊. </p> 
-                    <div className="app-content">
+                    <div className="app-content" style={{paddingTop: '75px'}}>
                       <Sidebar />
                               {Object.keys(person).length ? <Chat /> : <Home /> }
                     </div>
-                  </div>
+                  {/* </div> */}
 
                 </Suspense>
             </CContainer>
