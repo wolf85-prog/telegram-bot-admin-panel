@@ -16,6 +16,8 @@ const Profile = ({ user }) => {
 	const [avatar, setAvatar] = useState(null)
 	const input = React.useRef();
 
+	const host = process.env.REACT_APP_API_URL
+
 	//кнопка Изменить
 	const changeUsername = () => {
 		setUsername(user.name);  
@@ -59,6 +61,7 @@ const Profile = ({ user }) => {
             let response = await uploadFile(data);
 			console.log("response: ", response.data)
 			setAvatar(response.data.path)
+
 		} catch (error) {
 			
 		}
@@ -70,7 +73,7 @@ const Profile = ({ user }) => {
 				<div className="profile__avatar-wrapper upload">
 					{
 						avatar
-							? <img src={avatar} alt={user?.name} className="avatar-adm" />
+							? <img src={`${host}/${avatar}`} alt={user?.name} className="avatar-adm" />
 							: <img src={defaultAvatar} alt={user?.name} className="avatar-adm" />
 					}
 					
