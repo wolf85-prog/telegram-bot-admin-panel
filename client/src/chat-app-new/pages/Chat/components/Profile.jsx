@@ -115,7 +115,7 @@ const Profile = ({ user }) => {
 
 				{
 					showEdit 
-					? <button className="btn" onClick={sendFile}>Сохранить</button>
+					? <button className="btn_save" onClick={sendFile}>Сохранить</button>
 					: ""
 				}
 

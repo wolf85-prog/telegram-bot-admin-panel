@@ -54,6 +54,11 @@
     object-fit: cover;
 }
 
+.btn_save {
+    background-color: green;
+    color: white;
+}
+
 .upload .round_adm {
     position: absolute;
     bottom: 10px;
