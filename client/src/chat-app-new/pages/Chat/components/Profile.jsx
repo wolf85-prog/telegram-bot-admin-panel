@@ -18,6 +18,8 @@ const Profile = ({ user }) => {
 
 	const host = process.env.REACT_APP_API_URL
 
+	setImg(`${host}/${user.avatar}`)
+
 	//кнопка Изменить
 	const changeUsername = () => {
 		setUsername(user.name);  
@@ -95,7 +97,7 @@ const Profile = ({ user }) => {
 				<div className="profile__avatar-wrapper upload">
 					{
 						user.avatar
-							? <img src={`${host}/${user.avatar}`} alt={user?.name} className="avatar-adm" />
+							? <img src={img} alt={user?.name} className="avatar-adm" />
 							: <img src={defaultAvatar} alt={user?.name} className="avatar-adm" />
 					}
 					
