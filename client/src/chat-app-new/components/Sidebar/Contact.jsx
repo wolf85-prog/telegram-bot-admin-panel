@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import formatTime from "./../../utils/formatTime";
 import { useUsersContext } from "./../../context/usersContext";
 import { AccountContext } from '../../../chat-app-new/context/AccountProvider'
-import AvatarDefault from "./../../assets/images/no-avatar.png";
+import avatarDefault from "./../../assets/images/no-avatar.png";
 import Status from "./../../assets/images/status.jpg";
 
 const Contact = ({ contact }) => {
 	
 	const { setPerson } = useContext(AccountContext);
+	const host = process.env.REACT_APP_API_URL
 	
 	//сделать пользователя непрочитанным
 	const { setUserAsUnread, usersOnline } = useUsersContext();
@@ -62,11 +63,12 @@ const Contact = ({ contact }) => {
 				: ''}
 			</div>
 			<div className="sidebar-contact__avatar-wrapper">
-				<img
-					src={AvatarDefault} //{contact.profile_picture}
-					alt={contact.name} //{contact.profile_picture}
-					className="avatar-adm"
-				/>
+
+				{
+					contact.avatar
+					? <img src={`${host}/${contact.avatar}`} alt={contact.name} className="avatar-adm" />
+					: <img src={avatarDefault} alt={contact?.name} className="avatar-adm" />
+				}
 			</div>
 			<div className="sidebar-contact__content">
 				<div className="sidebar-contact__top-content">
