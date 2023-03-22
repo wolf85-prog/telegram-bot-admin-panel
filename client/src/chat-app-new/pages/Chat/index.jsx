@@ -20,6 +20,7 @@ const Chat = () => {
 
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
     const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
+	const host = process.env.REACT_APP_API_URL
 
 	const chatId = person.id;
 	let user = users.filter((user) => user.chatId === chatId.toString())[0];
@@ -57,7 +58,7 @@ const Chat = () => {
 			   console.log("response: ", response.data)
                setImage(response.data.path);
 			   //сообщение с ссылкой на файл
-			   setValue('https://proj.uley.team:5000/' + response.data.path)
+			   setValue(host + '/' + response.data.path)
             }
         }
         getImage();

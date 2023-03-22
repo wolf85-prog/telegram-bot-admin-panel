@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import media from "./../../../assets/images/placeholder.jpeg";
 import Checkbox from "./../../../components/Checkbox";
 import Icon from "./../../../components/Icon";
@@ -18,7 +18,10 @@ const Profile = ({ user }) => {
 
 	const host = process.env.REACT_APP_API_URL
 
-	setImg(`${host}/${user.avatar}`)
+	useEffect(() => {
+		setImg(`${host}/${user.avatar}`)
+	}, [user]);
+	
 
 	//кнопка Изменить
 	const changeUsername = () => {
@@ -34,7 +37,8 @@ const Profile = ({ user }) => {
 	const getUser = async () => {
         setPerson({
             name: user.name, 
-            id: user.chatId
+            id: user.chatId, 
+			avatar: user.avatar
         });
     }
 	
@@ -82,6 +86,7 @@ const Profile = ({ user }) => {
 			//сохранить в контексте
 			addNewAvatar(user.chatId, response.data.path);
 
+			//получить данные из контекста
 			getUser()
 
 			setShowEdit(false)
