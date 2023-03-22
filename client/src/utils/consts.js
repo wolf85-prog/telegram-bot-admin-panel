@@ -1,5 +1,6 @@
 export const ADMIN_ROUTE = '/dashboard'
 export const CHAT_ROUTE = '/chat'
+export const CHAT_ROUTE2 = '/chat2'
 export const MESSENGER_ROUTE = '/messenger'
 export const NOTIF_ROUTE = '/notifications'
 export const MESS_BOT_ROUTE = '/messagesbot'

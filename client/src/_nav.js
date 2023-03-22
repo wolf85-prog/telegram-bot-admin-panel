@@ -29,6 +29,12 @@ const _nav = [
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
   },
   {
+    component: CNavItem,
+    name: 'Чаты 2.0',
+    to: '/chat2',
+    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+  },
+  {
     component: CNavGroup,
     name: 'Аналитика',
     to: '/base',
