@@ -13,7 +13,7 @@ const Profile = ({ user }) => {
 	const { addNewName, addNewAvatar } = useUsersContext();
 	const { setPerson } = useContext(AccountContext);
 	const [img, setImg] = useState(null)
-	//const [avatar, setAvatar] = useState(null)
+	const [showEdit, setShowEdit] = useState(false)
 	const input = React.useRef();
 
 	const host = process.env.REACT_APP_API_URL
@@ -52,6 +52,12 @@ const Profile = ({ user }) => {
 		setForm(false)
 	}
 
+	const handleAvatar = async (e) => {
+		e.preventDefault();
+		setImg(e.target.files[0])
+		setShowEdit(true)
+	}
+
 	//сохранить новый аватар
 	const sendFile = React.useCallback(async () => {
 		try {
@@ -70,6 +76,10 @@ const Profile = ({ user }) => {
 			//сохранить в контексте
 			addNewAvatar(user.chatId, response.data.path);
 
+			getUser()
+
+			setShowEdit(false)
+
 		} catch (error) {
 			
 		}
@@ -87,12 +97,18 @@ const Profile = ({ user }) => {
 					
 					
 					<div className="round_adm">
-						<input type="file" name="filedata" onChange={e => setImg(e.target.files[0])}/>
+						<input type="file" name="filedata" onChange={handleAvatar}/>
 						<i className = "fa fa-camera" style={{color: '#fff'}}></i>
 					</div>						
 				</div>
 
-				<button className="btn" onClick={sendFile}>Изменить аватар</button>
+				{
+					showEdit 
+					? <button className="btn" onClick={sendFile}>Сохранить</button>
+					: ""
+				}
+
+				
 
 				<p>{user.chatId}</p>
 				{
