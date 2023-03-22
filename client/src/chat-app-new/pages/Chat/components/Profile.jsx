@@ -102,7 +102,7 @@ const Profile = ({ user }) => {
 				<div className="profile__avatar-wrapper upload">
 					{
 						user.avatar
-							? <img src={img} alt={user?.name} className="avatar-adm" />
+							? <img src={`${host}/${user.avatar}`} alt={user?.name} className="avatar-adm" />
 							: <img src={defaultAvatar} alt={user?.name} className="avatar-adm" />
 					}
 					
