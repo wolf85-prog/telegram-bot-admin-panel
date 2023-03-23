@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useRef} from "react";
 import Icon from "./../../../components/Icon";
+
+import useAutosizeTextArea from "./useAutosizeTextArea.ts";
 
 const attachButtons = [
 	{ icon: "attachContacts", label: "Choose contact", click: "contact" },
@@ -17,11 +19,21 @@ const ChatInput = ({
 	submitNewMessage,
 	onFileChange,
 }) => {
+
+	const textAreaRef = useRef(null);
+
+	//useAutosizeTextArea(textAreaRef.current, value);
+
 	const detectEnterPress = (e) => {
 		if ((e.key === "Enter" && !e.shiftKey) || (e.keyCode === 13 && !e.shiftKey) ) {
 			submitNewMessage();
 		} 
 	};
+
+	const handleChange = (e) => {
+		setValue(e.target.value)
+	};
+
 	return (
 		<div className="chat__input-wrapper">
 			{showEmojis && (
@@ -85,8 +97,10 @@ const ChatInput = ({
 				className="chat__input"
 				placeholder="Введите сообщение"
 				value={value} //{newMessage}
-				onChange={(e) => setValue(e.target.value)} //setNewMessage(e.target.value)}
-				onKeyDown={detectEnterPress}
+				onChange={handleChange} //setNewMessage(e.target.value)}
+				// onKeyDown={detectEnterPress}
+				ref={textAreaRef}
+				rows={1}
 			/>
 			{value ? (
 				<button aria-label="Send message" onClick={submitNewMessage}>
