@@ -8,12 +8,12 @@ const useAutosizeTextArea = (
   useEffect(() => {
     if (textAreaRef) {
       
-        // We need to reset the height momentarily to get the correct scrollHeight for the textarea
+        // Нам нужно на мгновение сбросить высоту, чтобы получить правильное значение scrollHeight для текстовой области.
       textAreaRef.style.height = "0px";
-      const scrollHeight = textAreaRef.scrollHeight;
+      const scrollHeight = textAreaRef.scrollHeight - 40;
 
-      // We then set the height directly, outside of the render loop
-      // Trying to set this with state or a ref will product an incorrect value.
+      // Затем мы устанавливаем высоту напрямую, вне цикла рендеринга.
+      // Попытка установить это с помощью состояния или ссылки приведет к неправильному значению.
       textAreaRef.style.height = scrollHeight + "px";
     }
   }, [textAreaRef, value]);

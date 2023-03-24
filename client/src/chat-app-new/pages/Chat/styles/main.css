@@ -277,6 +277,24 @@
 .chat__footer {
     background: rgb(240, 240, 240);
     position: relative;
+
+    box-sizing: border-box;
+    flex: none;
+    width: 100%;
+    min-height: 62px;
+}
+
+.chat__footer-wrapper {
+    padding-right: 17px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+.chat_footer-flex {
+    display: flex;
+    align-items: flex-end;
 }
 
 .chat__scroll-btn {
@@ -391,7 +409,8 @@
 
 .chat__input-wrapper {
     padding: 10px;
-    height: 60px;
+    /* height: 60px; */
+    height: auto;
     position: relative;
     display: flex;
     align-items: center;

@@ -22,7 +22,7 @@ const ChatInput = ({
 
 	const textAreaRef = useRef(null);
 
-	//useAutosizeTextArea(textAreaRef.current, value);
+	useAutosizeTextArea(textAreaRef.current, value);
 
 	const detectEnterPress = (e) => {
 		if ((e.key === "Enter" && !e.shiftKey) || (e.keyCode === 13 && !e.shiftKey) ) {

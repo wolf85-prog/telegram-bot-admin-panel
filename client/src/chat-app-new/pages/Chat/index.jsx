@@ -152,28 +152,30 @@ const Chat = () => {
 					<Convo lastMsgRef={lastMsgRef} messages={user.messages} />
 				</div>
 				<footer className="chat__footer">
-					<button
-						className="chat__scroll-btn"
-						aria-label="scroll down"
-						onClick={scrollToLastMsg}
-					>
+					<div className="chat__footer-wrapper">
+						<button
+							className="chat__scroll-btn"
+							aria-label="scroll down"
+							onClick={scrollToLastMsg}
+						>
 						<Icon id="downArrow" />
-					</button>
-					<EmojiTray
-						showEmojis={showEmojis}
-						value={value}
-						setValue={setValue}
-					/>
-					<ChatInput
-						showEmojis={showEmojis}
-						setShowEmojis={setShowEmojis}
-						showAttach={showAttach}
-						setShowAttach={setShowAttach}
-						onFileChange={onFileChange}
-						value={value}
-						setValue={setValue}
-						submitNewMessage={submitNewMessage}
-					/>
+						</button>
+						<EmojiTray
+							showEmojis={showEmojis}
+							value={value}
+							setValue={setValue}
+						/>
+						<ChatInput
+							showEmojis={showEmojis}
+							setShowEmojis={setShowEmojis}
+							showAttach={showAttach}
+							setShowAttach={setShowAttach}
+							onFileChange={onFileChange}
+							value={value}
+							setValue={setValue}
+							submitNewMessage={submitNewMessage}
+						/>	
+					</div>		
 				</footer>
 			</div>
 			<ChatSidebar
