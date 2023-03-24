@@ -284,6 +284,11 @@
     min-height: 62px;
 }
 
+textarea:focus {
+    outline: none !important;
+    border: 0;
+}
+
 .chat__footer-wrapper {
     padding-right: 17px;
     padding-left: 10px;
