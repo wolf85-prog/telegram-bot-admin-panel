@@ -5,6 +5,7 @@ import {
     MESS_BOT_ROUTE,
     REPORTS_ROUTE,
     DISTRIBUTION_ROUTE,
+    DISTRIBUTIONADD_ROUTE,
     SETTINGS_ROUTE,
     CHAT_ROUTE,
     CHAT_ROUTE2,
@@ -17,6 +18,7 @@ const Notifications = React.lazy(() => import('./pages/Notifications'))
 const MessagesBot = React.lazy(() => import('./pages/MessagesBot'))
 const Reports = React.lazy(() => import('./pages/Reports'))
 const Distribution = React.lazy(() => import('./pages/Distribution'))
+const DistributionAdd = React.lazy(() => import('./pages/DistributionAdd'))
 const Settings = React.lazy(() => import('./pages/Settings'))
 
 export const authRoutes = [
@@ -24,6 +26,7 @@ export const authRoutes = [
     { path: CHAT_ROUTE, name: 'Чаты', Component: Chats },
     { path: CHAT_ROUTE2, name: 'Чаты', Component: Chats2 },
     { path: DISTRIBUTION_ROUTE, name: 'Рассылки', Component: Distribution },
+    { path: DISTRIBUTIONADD_ROUTE, name: 'Создание рассылки', Component: DistributionAdd },
     { path: REPORTS_ROUTE, name: 'Отчеты', Component: Reports },
     { path: MESS_BOT_ROUTE, name: 'Сообщения от бота', Component: MessagesBot },
     { path: NOTIF_ROUTE, name: 'Уведомления', Component: Notifications },

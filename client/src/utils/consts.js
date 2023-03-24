@@ -6,6 +6,7 @@ export const NOTIF_ROUTE = '/notifications'
 export const MESS_BOT_ROUTE = '/messagesbot'
 export const REPORTS_ROUTE = '/reports'
 export const DISTRIBUTION_ROUTE = '/distribution'
+export const DISTRIBUTIONADD_ROUTE = '/distribution_add'
 export const SETTINGS_ROUTE = '/settings'
 
 export const THEME_ROUTE = '/theme'

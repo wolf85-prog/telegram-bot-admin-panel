@@ -7,6 +7,7 @@ const Notifications = React.lazy(() => import('./pages/Notifications'))
 const MessagesBot = React.lazy(() => import('./pages/MessagesBot'))
 const Reports = React.lazy(() => import('./pages/Reports'))
 const Distribution = React.lazy(() => import('./pages/Distribution'))
+const DistributionAdd = React.lazy(() => import('./pages/DistributionAdd'))
 const Settings = React.lazy(() => import('./pages/Settings'))
 
 const routes = [
@@ -15,6 +16,7 @@ const routes = [
   { path: "/chat", name: 'Чаты', Component: Chats },
   { path: "/chat2", name: 'Чаты 2.0', Component: Chats2 },
   { path: '/distribution', name: 'Рассылки', Component: Distribution },
+  { path: '/distribution_add', name: 'Создать рассылку', Component: DistributionAdd },
   { path: '/reports', name: 'Отчеты', Component: Reports },
   { path: '/messagesbot', name: 'Сообщения от бота', Component: MessagesBot },
   { path: "/notifications", name: 'Уведомления', Component: Notifications },
