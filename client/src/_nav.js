@@ -25,46 +25,40 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Чаты',
-    to: '/chat',
-    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Чаты 2.0',
     to: '/chat2',
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
   },
-  {
-    component: CNavGroup,
-    name: 'Аналитика',
-    to: '/base',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Отчеты',
-        to: '/reports',
-      },
-    ],
-  },
+  // {
+  //   component: CNavGroup,
+  //   name: 'Аналитика',
+  //   to: '/base',
+  //   icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+  //   items: [
+  //     {
+  //       component: CNavItem,
+  //       name: 'Отчеты',
+  //       to: '/reports',
+  //     },
+  //   ],
+  // },
   {
     component: CNavItem,
     name: 'Рассылки',
     to: '/distribution',
     icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
   },
-  {
-    component: CNavGroup,
-    name: 'Архив',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Сообщения от бота',
-        to: '/messagesbot',
-      },
-    ],
-  },
+  // {
+  //   component: CNavGroup,
+  //   name: 'Архив',
+  //   icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+  //   items: [
+  //     {
+  //       component: CNavItem,
+  //       name: 'Сообщения от бота',
+  //       to: '/messagesbot',
+  //     },
+  //   ],
+  // },
   {
     component: CNavGroup,
     name: 'Уведомления',

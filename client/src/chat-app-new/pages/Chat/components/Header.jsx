@@ -58,8 +58,8 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {
 					onSelected={onSelected}
 					options={[
 						"Данные о контакте",
-						"Выбрать сообщения",
-						"Отключить уведомления",
+						// "Выбрать сообщения",
+						// "Отключить уведомления",
 						"Очистить переписку",
 						"Удалить чат",
 					]}

@@ -59,26 +59,6 @@ const Sidebar = () => {
 					<img src={avatar} alt='U.L.E.Y' className="avatar-adm" />
 				</div>
 				<div className="sidebar__actions">
-					<Link
-						className="chat__action"
-						aria-label="laptop"
-						to={`/dashboard`}
-						onClick=""
-					>
-						<Icon
-							id="laptop"
-							className="chat__action-icon chat__action-icon--search"
-						/>
-					</Link>
-					<button className="sidebar__action" aria-label="Status">
-						<Icon
-							id="status"
-							className="sidebar__action-icon sidebar__action-icon--status"
-						/>
-					</button>
-					<button className="sidebar__action" aria-label="New chat">
-						<Icon id="chat" className="sidebar__action-icon" />
-					</button>
 					<OptionsBtn
 						className="sidebar__action"
 						ariaLabel="Menu"
@@ -87,10 +67,10 @@ const Sidebar = () => {
 						onSelected={onSelected}
 						options={[
 							"Профиль",
-							"Архив",
-							"Избранные сообщения",
-							"Настройки",
-							"Вернуться в панель управления",
+							// "Архив",
+							// "Избранные сообщения",
+							// "Настройки",
+							// "Вернуться в панель управления",
 						]}
 					/>
 				</div>
