@@ -2,6 +2,7 @@ import React, { Suspense, useContext, useEffect, useState } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import AppRouter from './AppRouter';
 import './scss/style.scss'
+import './App.css'
 import {observer} from "mobx-react-lite";
 import {check} from "./http/userAPI";
 import {Context} from "./index";
