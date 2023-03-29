@@ -54,7 +54,7 @@ const Contact = ({ contact }) => {
 			className="sidebar-contact"
 			onClick={() => getUser()}
 		>
-			<div className="sidebar-contact__status-wrapper">
+			{/* <div className="sidebar-contact__status-wrapper">
 				{status 
 				? <img
 					src={Status}
@@ -62,13 +62,12 @@ const Contact = ({ contact }) => {
 					className="status-adm"
 				/> 
 				: ''}
-			</div>
+			</div> */}
 			<div className="sidebar-contact__avatar-wrapper">
-
 				{
 					contact.avatar
-					? <img src={`${host}/${contact.avatar}`} alt={contact.name} className="avatar-adm" />
-					: <img src={avatarDefault} alt={contact?.name} className="avatar-adm" />
+					? <img src={`${host}/${contact.avatar}`} alt='' className="avatar-adm" />
+					: <img src={avatarDefault} alt='' className="avatar-adm" />
 				}
 			</div>
 			<div className="sidebar-contact__content">

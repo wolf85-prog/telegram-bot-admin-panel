@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useState, useEffect } from 'react'
 import { CContainer, CSpinner } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import {
@@ -37,9 +37,14 @@ import {
   cifUs,
   cilCloudDownload,
   cilPeople,
+  cilPencil,
+  cilX,
 } from '@coreui/icons'
 
-import avatar2 from 'src/assets/images/avatars/2.jpg'
+import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
+import deleteIcon from 'src/assets/images/delete.png'
+import pencilIcon from 'src/assets/images/pencil.png'
+import { useUsersContext } from "./../chat-app-new/context/usersContext";
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 
@@ -57,7 +62,7 @@ const progressExample = [
   { title: 'Отказы', value: 'Average Rate', percent: 40.15, color: 'primary' },
 ]
 
-const tableExample = [
+const tableUserbot = [
   {
     avatar: { src: avatar2, status: 'success' },
     user: {
@@ -65,90 +70,75 @@ const tableExample = [
       new: true,
       registered: 'Jan 1, 2021',
     },
-    country: { name: 'USA', flag: cifUs },
+    TG_ID: '1213244',
+    city: { name: 'Москва' },
+    company: { name: 'U.L.E.Y', icon: cibCcMastercard },
+    phone: '+7 (900)123-12-12',
     usage: {
       value: 50,
       period: 'Jun 11, 2021 - Jul 10, 2021',
       color: 'success',
     },
-    payment: { name: 'Mastercard', icon: cibCcMastercard },
     activity: '10 sec ago',
-  },
-  {
-    avatar: { src: avatar2, status: 'danger' },
-    user: {
-      name: 'Avram Tarasios',
-      new: false,
-      registered: 'Jan 1, 2021',
-    },
-    country: { name: 'Brazil', flag: cifBr },
-    usage: {
-      value: 22,
-      period: 'Jun 11, 2021 - Jul 10, 2021',
-      color: 'info',
-    },
-    payment: { name: 'Visa', icon: cibCcVisa },
-    activity: '5 minutes ago',
-  },
-  {
-    avatar: { src: avatar2, status: 'warning' },
-    user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2021' },
-    country: { name: 'India', flag: cifIn },
-    usage: {
-      value: 74,
-      period: 'Jun 11, 2021 - Jul 10, 2021',
-      color: 'warning',
-    },
-    payment: { name: 'Stripe', icon: cibCcStripe },
-    activity: '1 hour ago',
-  },
-  {
-    avatar: { src: avatar2, status: 'secondary' },
-    user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2021' },
-    country: { name: 'France', flag: cifFr },
-    usage: {
-      value: 98,
-      period: 'Jun 11, 2021 - Jul 10, 2021',
-      color: 'danger',
-    },
-    payment: { name: 'PayPal', icon: cibCcPaypal },
-    activity: 'Last month',
   },
   {
     avatar: { src: avatar2, status: 'success' },
     user: {
-      name: 'Agapetus Tadeáš',
+      name: 'Yiorgos Avraamu',
       new: true,
       registered: 'Jan 1, 2021',
     },
-    country: { name: 'Spain', flag: cifEs },
+    TG_ID: '1213244',
+    city: { name: 'Москва' },
+    company: { name: 'U.L.E.Y', icon: cibCcMastercard },
+    phone: '+7 (900)123-12-12',
     usage: {
-      value: 22,
-      period: 'Jun 11, 2021 - Jul 10, 2021',
-      color: 'primary',
-    },
-    payment: { name: 'Google Wallet', icon: cibCcApplePay },
-    activity: 'Last week',
-  },
-  {
-    avatar: { src: avatar2, status: 'danger' },
-    user: {
-      name: 'Friderik Dávid',
-      new: true,
-      registered: 'Jan 1, 2021',
-    },
-    country: { name: 'Poland', flag: cifPl },
-    usage: {
-      value: 43,
+      value: 50,
       period: 'Jun 11, 2021 - Jul 10, 2021',
       color: 'success',
     },
-    payment: { name: 'Amex', icon: cibCcAmex },
-    activity: 'Last week',
+    activity: '10 sec ago',
   },
+ 
 ]
 
 const Admin = () => {
+
+  const { users: clients } = useUsersContext();
+  const [contacts, setContacts]= useState([]);
+
+  useEffect(() => {
+		//сортировка
+		// const userSort = [...clients].sort((a, b) => {       
+		// 	var dateA = new Date(a.date), dateB = new Date(b.date) 
+		// 	return dateB-dateA  //сортировка по убывающей дате  
+		// })
+    const arrClients = []
+    clients.map((client) => {
+      const newObj = {
+        avatar: { src: client.avatar, status: 'success' },
+        user: {
+          name: client.name,
+          new: true,
+          registered: '01.01.2023',
+        },
+        TG_ID: client.chatId,
+        city: { name: 'Москва' },
+        company: { name: 'U.L.E.Y', icon: cibCcMastercard },
+        phone: '+7 (900)123-12-12',
+        usage: {
+          value: 10,
+          period: '01.01.2023 - 10.01.2023',
+          color: 'success',
+        },
+        activity: '01.01.2023',
+      }
+      arrClients.push(newObj)
+    })
+    
+		setContacts(arrClients)      
+  }, [clients]);
+
   return (
     <div>
       <AppSidebar />
@@ -160,12 +150,12 @@ const Admin = () => {
                 <Suspense fallback={<CSpinner color="primary" />}>
 
                 <>
-                <WidgetsDropdown />
+                <WidgetsDropdown users={clients.length}/>
 
                 <CRow>
                   <CCol xs>
                     <CCard className="mb-4">
-                      <CCardHeader>Трафик и Продажи</CCardHeader>
+                      <CCardHeader>Пользователи бота</CCardHeader>
                       <CCardBody>
                         <CRow>
                           <CCol xs={12} md={6} xl={6}>
@@ -183,19 +173,6 @@ const Admin = () => {
                                 </div>
                               </CCol>
                             </CRow>
-
-                            {/* <hr className="mt-0" />
-                            {progressGroupExample1.map((item, index) => (
-                              <div className="progress-group mb-4" key={index}>
-                                <div className="progress-group-prepend">
-                                  <span className="text-medium-emphasis small">{item.title}</span>
-                                </div>
-                                <div className="progress-group-bars">
-                                  <CProgress thin color="info" value={item.value1} />
-                                  <CProgress thin color="danger" value={item.value2} />
-                                </div>
-                              </div>
-                            ))} */}
                           </CCol>
 
                           <CCol xs={12} md={6} xl={6}>
@@ -214,42 +191,10 @@ const Admin = () => {
                               </CCol>
                             </CRow>
 
-                            {/* <hr className="mt-0" />
-
-                            {progressGroupExample2.map((item, index) => (
-                              <div className="progress-group mb-4" key={index}>
-                                <div className="progress-group-header">
-                                  <CIcon className="me-2" icon={item.icon} size="lg" />
-                                  <span>{item.title}</span>
-                                  <span className="ms-auto fw-semibold">{item.value}%</span>
-                                </div>
-                                <div className="progress-group-bars">
-                                  <CProgress thin color="warning" value={item.value} />
-                                </div>
-                              </div>
-                            ))} */}
-
                             <div className="mb-5"></div>
 
-                            {/* {progressGroupExample3.map((item, index) => (
-                              <div className="progress-group" key={index}>
-                                <div className="progress-group-header">
-                                  <CIcon className="me-2" icon={item.icon} size="lg" />
-                                  <span>{item.title}</span>
-                                  <span className="ms-auto fw-semibold">
-                                    {item.value}{' '}
-                                    <span className="text-medium-emphasis small">({item.percent}%)</span>
-                                  </span>
-                                </div>
-                                <div className="progress-group-bars">
-                                  <CProgress thin color="success" value={item.percent} />
-                                </div>
-                              </div>
-                            ))} */}
                           </CCol>
                         </CRow>
-
-                        <br />
 
                         <CTable align="middle" className="mb-0 border" hover responsive>
                           <CTableHead color="light">
@@ -258,27 +203,39 @@ const Admin = () => {
                                 <CIcon icon={cilPeople} />
                               </CTableHeaderCell>
                               <CTableHeaderCell>Пользователь</CTableHeaderCell>
-                              <CTableHeaderCell className="text-center">Страна</CTableHeaderCell>
+                              <CTableHeaderCell className="text-center">TG ID</CTableHeaderCell>
+                              <CTableHeaderCell className="text-center">Город</CTableHeaderCell>
+                              <CTableHeaderCell className="text-center">Организация</CTableHeaderCell>
+                              <CTableHeaderCell className="text-center">Телефон</CTableHeaderCell>
                               <CTableHeaderCell>Использование</CTableHeaderCell>
-                              <CTableHeaderCell className="text-center">Метод оплаты</CTableHeaderCell>
                               <CTableHeaderCell>Активность</CTableHeaderCell>
+                              <CTableHeaderCell>Управление</CTableHeaderCell>
                             </CTableRow>
                           </CTableHead>
                           <CTableBody>
-                            {tableExample.map((item, index) => (
+                            {contacts.map((item, index) => (
                               <CTableRow v-for="item in tableItems" key={index}>
                                 <CTableDataCell className="text-center">
-                                  <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
+                                  <CAvatar size="md" src={item.avatar.src} />
                                 </CTableDataCell>
                                 <CTableDataCell>
                                   <div>{item.user.name}</div>
                                   <div className="small text-medium-emphasis">
-                                    <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registered:{' '}
+                                    <span>{item.user.new ? 'Новый' : 'Recurring'}</span> | Регистрация:{' '}
                                     {item.user.registered}
                                   </div>
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
-                                  <CIcon size="xl" icon={item.country.flag} title={item.country.name} />
+                                  <div>{item.TG_ID}</div>
+                                </CTableDataCell>
+                                <CTableDataCell className="text-center">
+                                  <div>{item.city.name}</div>
+                                </CTableDataCell>
+                                <CTableDataCell className="text-center">
+                                  <div>{item.company.name}</div>
+                                </CTableDataCell>
+                                <CTableDataCell className="text-center">
+                                  <div>{item.phone}</div>
                                 </CTableDataCell>
                                 <CTableDataCell>
                                   <div className="clearfix">
@@ -291,12 +248,20 @@ const Admin = () => {
                                   </div>
                                   <CProgress thin color={item.usage.color} value={item.usage.value} />
                                 </CTableDataCell>
-                                <CTableDataCell className="text-center">
-                                  <CIcon size="xl" icon={item.payment.icon} />
+                                <CTableDataCell>
+                                  <div className="small text-medium-emphasis">Последний вход</div>
+                                  <strong>{item.activity}</strong>
                                 </CTableDataCell>
                                 <CTableDataCell>
-                                  <div className="small text-medium-emphasis">Last login</div>
-                                  <strong>{item.activity}</strong>
+                                  <CButton color="light">
+                                    <img src={pencilIcon} alt='' width='15px'/>
+                                    {/* <CIcon icon={cilPencil} size="xxl"/> */}
+                                    {/* <CIcon icon={cilX} size="xxl"/> */}
+                                  </CButton>
+                                  &nbsp;
+                                  <CButton color="light">
+                                    <img src={deleteIcon} alt='' width='10px' />
+                                  </CButton>
                                 </CTableDataCell>
                               </CTableRow>
                             ))}
