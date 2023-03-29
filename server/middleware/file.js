@@ -3,15 +3,15 @@ const multer  = require("multer");
 const { path, join } = require('path')
 
 // путь к текущей директории
-const _dirname = path.resolve(__dirname) 
+//const _dirname = path.resolve(__dirname) 
 
 const storage = multer.diskStorage({
     destination(req, file, cd) {
 
         // файлы хранятся по комнатам
         // название директории - идентификатор комнаты
-        const dirPath = join(_dirname, '../images', '111')
-        console.log("dirPath: ", dirPath)
+        //const dirPath = join(_dirname, '../images', '111')
+        //console.log("dirPath: ", dirPath)
 
         // создаем директорию при отсутствии
         // if (!existsSync(dirPath)) {
