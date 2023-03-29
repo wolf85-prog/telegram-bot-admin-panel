@@ -41,6 +41,7 @@ import {
   cilX,
 } from '@coreui/icons'
 
+import avatarDefault from "../chat-app-new/assets/images/no-avatar.png";
 import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 import deleteIcon from 'src/assets/images/delete.png'
 import pencilIcon from 'src/assets/images/pencil.png'
@@ -106,6 +107,7 @@ const Admin = () => {
 
   const { users: clients } = useUsersContext();
   const [contacts, setContacts]= useState([]);
+  const host = process.env.REACT_APP_API_URL
 
   useEffect(() => {
 		//сортировка
@@ -116,7 +118,7 @@ const Admin = () => {
     const arrClients = []
     clients.map((client) => {
       const newObj = {
-        avatar: { src: client.avatar, status: 'success' },
+        avatar: client.avatar,
         user: {
           name: client.name,
           new: true,
@@ -216,7 +218,10 @@ const Admin = () => {
                             {contacts.map((item, index) => (
                               <CTableRow v-for="item in tableItems" key={index}>
                                 <CTableDataCell className="text-center">
-                                  <CAvatar size="md" src={item.avatar.src} />
+                                  {/* <CAvatar size="md" src={item.avatar
+                                    ? <img src={`${host}/${item.avatar}`} alt='' className="avatar-adm" />
+                                    : <img src={avatar2} alt='' className="avatar-adm" />} /> */}
+                                    <CAvatar size="md" src={avatar2} alt='' className="avatar-adm" />
                                 </CTableDataCell>
                                 <CTableDataCell>
                                   <div>{item.user.name}</div>
