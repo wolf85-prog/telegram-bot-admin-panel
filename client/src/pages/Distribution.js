@@ -37,6 +37,8 @@ import {
   cilPeople,
 } from '@coreui/icons'
 import avatar2 from 'src/assets/images/avatars/2.jpg'
+import deleteIcon from 'src/assets/images/delete.png'
+import pencilIcon from 'src/assets/images/pencil.png'
 
 // routes config
 import routes from '../routes'
@@ -149,8 +151,7 @@ const Distribution = () => {
                 <Suspense fallback={<CSpinner color="primary" />}>
                   <>
                     <h2>Рассылки</h2>
-                      <h5>Раздел находится в разработке</h5>
-                      <Link to={'/distribution_add'}><CButton color="primary" size="lg" onClick={handleAddButton}>Создать рассылку</CButton></Link>
+                      <Link to={'/distribution_add'}><CButton color="primary" size="lg" onClick={handleAddButton}>Новая рассылка</CButton></Link>
                       <br />
                       <br />
                       <CRow>
@@ -164,21 +165,18 @@ const Distribution = () => {
                               <CTable align="middle" className="mb-0 border" hover responsive>
                                 <CTableHead color="light">
                                   <CTableRow>
-                                    <CTableHeaderCell className="text-center">
-                                      <CIcon icon={cilPeople} />
-                                    </CTableHeaderCell>
-                                    <CTableHeaderCell>Пользователь</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Страна</CTableHeaderCell>
-                                    <CTableHeaderCell>Использование</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Метод оплаты</CTableHeaderCell>
-                                    <CTableHeaderCell>Активность</CTableHeaderCell>
+                                    <CTableHeaderCell>ID</CTableHeaderCell>
+                                    <CTableHeaderCell>Название</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center">Текст</CTableHeaderCell>
+                                    <CTableHeaderCell>Получатели</CTableHeaderCell>
+                                    <CTableHeaderCell>Управление</CTableHeaderCell>
                                   </CTableRow>
                                 </CTableHead>
                                 <CTableBody>
                                   {tableExample.map((item, index) => (
                                     <CTableRow v-for="item in tableItems" key={index}>
-                                      <CTableDataCell className="text-center">
-                                        <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
+                                      <CTableDataCell>
+                                        <div>{index+1}</div>
                                       </CTableDataCell>
                                       <CTableDataCell>
                                         <div>{item.user.name}</div>
@@ -188,7 +186,7 @@ const Distribution = () => {
                                         </div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <CIcon size="xl" icon={item.country.flag} title={item.country.name} />
+                                        <div>Текст сообщения рассылки</div>
                                       </CTableDataCell>
                                       <CTableDataCell>
                                         <div className="clearfix">
@@ -201,12 +199,14 @@ const Distribution = () => {
                                         </div>
                                         <CProgress thin color={item.usage.color} value={item.usage.value} />
                                       </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <CIcon size="xl" icon={item.payment.icon} />
-                                      </CTableDataCell>
                                       <CTableDataCell>
-                                        <div className="small text-medium-emphasis">Last login</div>
-                                        <strong>{item.activity}</strong>
+                                        <CButton color="light">
+                                          <img src={pencilIcon} alt='' width='15px'/>
+                                        </CButton>
+                                        &nbsp;
+                                        <CButton color="light">
+                                          <img src={deleteIcon} alt='' width='10px' />
+                                        </CButton>
                                       </CTableDataCell>
                                     </CTableRow>
                                   ))}

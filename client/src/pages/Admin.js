@@ -110,12 +110,8 @@ const Admin = () => {
   const host = process.env.REACT_APP_API_URL
 
   useEffect(() => {
-		//сортировка
-		// const userSort = [...clients].sort((a, b) => {       
-		// 	var dateA = new Date(a.date), dateB = new Date(b.date) 
-		// 	return dateB-dateA  //сортировка по убывающей дате  
-		// })
     const arrClients = []
+    
     clients.map((client) => {
       const newObj = {
         avatar: client.avatar,
@@ -260,8 +256,6 @@ const Admin = () => {
                                 <CTableDataCell>
                                   <CButton color="light">
                                     <img src={pencilIcon} alt='' width='15px'/>
-                                    {/* <CIcon icon={cilPencil} size="xxl"/> */}
-                                    {/* <CIcon icon={cilX} size="xxl"/> */}
                                   </CButton>
                                   &nbsp;
                                   <CButton color="light">
