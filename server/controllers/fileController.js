@@ -27,6 +27,7 @@ class FileController {
         }
     }
 
+
     //Обрабатываем получение файлов:
     async getImage(req, res) {
         // try {

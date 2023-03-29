@@ -10,8 +10,10 @@ const upload = multer({
   storage: multer.diskStorage({
     // директория для записи файлов
     destination: async (req, _, cb) => {
+      
       // извлекаем идентификатор комнаты из HTTP-заголовка `X-Room-Id`
       const roomId = req.headers['x-room-id']
+      
       // файлы хранятся по комнатам
       // название директории - идентификатор комнаты
       const dirPath = join(_dirname, '../files', roomId)
