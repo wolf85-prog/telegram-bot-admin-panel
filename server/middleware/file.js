@@ -37,4 +37,4 @@ const storage = multer.diskStorage({
 //     }
 // }
 
-module.exports = multer({storage, fileFilter})
+module.exports = multer({storage})
