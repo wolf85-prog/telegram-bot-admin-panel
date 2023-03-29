@@ -14,9 +14,9 @@ const storage = multer.diskStorage({
         console.log("dirPath: ", dirPath)
 
         // создаем директорию при отсутствии
-        if (!existsSync(dirPath)) {
-            mkdirSync(dirPath, { recursive: true })
-        }
+        // if (!existsSync(dirPath)) {
+        //     mkdirSync(dirPath, { recursive: true })
+        // }
 
         cd(null, 'images/')
     },
