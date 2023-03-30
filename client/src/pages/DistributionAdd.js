@@ -13,12 +13,17 @@ import {
   CFormSelect,
   CFormTextarea,
   CButton,
+  CAlert,
 } from '@coreui/react'
 
 import { MultiSelect } from "react-multi-select-component";
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
+import { $host } from './../http/index'
 
 const DistributionAdd = () => {
+
+  const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
+	const host = process.env.REACT_APP_API_URL
 
   const { users: clients } = useUsersContext();
   const [contacts, setContacts]= useState([]);
@@ -26,6 +31,7 @@ const DistributionAdd = () => {
   const [selected, setSelected] = useState([]);
   const [text, setText] = useState('');
   const [countChar, setCountChar] = useState(0);
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     const arrClients = []
@@ -46,8 +52,19 @@ const DistributionAdd = () => {
   }
 
   const onSendText = () => {
-    console.log(text)
+    console.log(selected)
+    
+    selected.map(async (user) => {
+      console.log("Пользователю ID: " + user.value + " сообщение " + text + " отправлено!")
+      
+      //Передаем данные боту
+      const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+      const sendToTelegram = await $host.get(url_send_msg);
+    })
+
+    setSelected([])
     setText('')
+    setVisible(true)
   }
 
   return (
@@ -67,6 +84,9 @@ const DistributionAdd = () => {
                           <CCard className="mb-4">
                             {/* <CCardHeader>Рассылки</CCardHeader> */}
                             <CCardBody>
+                            <CAlert color="success" dismissible visible={visible} onClose={() => setVisible(false)}>
+                              Сообщение успешно отправлено!
+                            </CAlert>
                               <CForm>
                                 <div className="mb-3">
                                   <CFormLabel htmlFor="exampleFormControlInput1">Выберите получателей:</CFormLabel>
