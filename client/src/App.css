@@ -1,5 +1,10 @@
 .body {
-    /* background-image: url('./assets/images/backgroud.jpg');
+    background-image: url('./assets/images/background2.jpg');
+    background-size: contain;
     background-repeat: no-repeat;
-    background-position: center center; */
+    background-position: right;
+    background-attachment: fixed;
+}
+.bg-light {
+    background-color: #000;
 }
