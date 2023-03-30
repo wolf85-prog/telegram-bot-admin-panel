@@ -11,7 +11,8 @@ import {
   CFormLabel,
   CFormInput,
   CFormSelect,
-  CFormTextarea
+  CFormTextarea,
+  CButton,
 } from '@coreui/react'
 
 import { MultiSelect } from "react-multi-select-component";
@@ -22,19 +23,9 @@ const DistributionAdd = () => {
   const { users: clients } = useUsersContext();
   const [contacts, setContacts]= useState([]);
 
-  // const options = [
-  //   { label: "Grapes 🍇", value: "grapes" },
-  //   { label: "Mango 🥭", value: "mango" },
-  //   { label: "Strawberry 🍓", value: "strawberry" },
-  //   { label: "Watermelon 🍉", value: "watermelon" },
-  //   { label: "Pear 🍐", value: "pear", disabled: true },
-  //   { label: "Apple 🍎", value: "apple" },
-  //   { label: "Tangerine 🍊", value: "tangerine" },
-  //   { label: "Pineapple 🍍", value: "pineapple" },
-  //   { label: "Peach 🍑", value: "peach" }
-  // ];
-
   const [selected, setSelected] = useState([]);
+  const [text, setText] = useState('');
+  const [countChar, setCountChar] = useState(0);
 
   useEffect(() => {
     const arrClients = []
@@ -49,10 +40,20 @@ const DistributionAdd = () => {
     setContacts(arrClients)      
   }, [clients]);
 
+  const onChangeText = (e) => {
+    setText(e.target.value)
+    setCountChar(e.target.value.length)
+  }
+
+  const onSendText = () => {
+    console.log(text)
+    setText('')
+  }
+
   return (
     <div>
       <AppSidebar />
-      <div className="wrapper d-flex flex-column min-vh-100 bg-light">
+      <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
         <AppHeader />
         <div className="body flex-grow-1 px-3">
 
@@ -89,7 +90,18 @@ const DistributionAdd = () => {
                                 </div>
                                 <div className="mb-3">
                                   {/* <CFormLabel htmlFor="exampleFormControlTextarea1">Текст сообщения</CFormLabel> */}
-                                  <CFormTextarea id="exampleFormControlTextarea1" rows={3} placeholder='Введите текст сообщения'></CFormTextarea>
+                                  <CFormTextarea 
+                                    id="exampleFormControlTextarea1" 
+                                    rows={3} 
+                                    placeholder='Введите текст сообщения'
+                                    onChange={onChangeText}
+                                    value={text}
+                                    // helperText = {`${countChar}/500`}
+                                  >           
+                                  </CFormTextarea>
+                                </div>
+                                <div className="mb-3">
+                                  <CButton color="success" onClick={onSendText}>Отправить рассылку</CButton>
                                 </div>
                               </CForm>
                             </CCardBody>
