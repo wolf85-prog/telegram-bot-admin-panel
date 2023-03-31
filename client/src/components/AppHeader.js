@@ -16,6 +16,7 @@ import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
 
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
+import logo from './../assets/brand/logo_04_light.png'
 
 const AppHeader = () => {
   const dispatch = useDispatch()
@@ -31,8 +32,8 @@ const AppHeader = () => {
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
         <CHeaderBrand className="mx-auto d-md-none" to="/">
-          {/* <CIcon icon={logo} height={48} alt="Logo" /> */}
-          <h5>U.L.E.Y TEAM</h5>
+          <CIcon icon={logo} height={48} alt="Logo" />
+          {/* <h5>U.L.E.Y TEAM</h5> */}
         </CHeaderBrand>
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>

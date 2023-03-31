@@ -88,12 +88,13 @@ const DistributionAdd = () => {
                               Сообщение успешно отправлено!
                             </CAlert>
                               <CForm>
-                                <div className="mb-3">
+                                <div className="mb-3" style={{color: '#8f8888'}}>
                                   <CFormLabel htmlFor="exampleFormControlInput1">Выберите получателей:</CFormLabel>
                                   <MultiSelect
                                     options={contacts}
                                     value={selected}
                                     onChange={setSelected}
+                                    style={{color: '#1e1919'}}
                                     overrideStrings={{
                                       "allItemsAreSelected": "Все поля выбраны",
                                       "clearSearch": "Очистить поиск",
@@ -121,7 +122,7 @@ const DistributionAdd = () => {
                                   </CFormTextarea>
                                 </div>
                                 <div className="mb-3">
-                                  <CButton color="success" onClick={onSendText}>Отправить рассылку</CButton>
+                                  <CButton color="primary" onClick={onSendText}>Отправить рассылку</CButton>
                                 </div>
                               </CForm>
                             </CCardBody>

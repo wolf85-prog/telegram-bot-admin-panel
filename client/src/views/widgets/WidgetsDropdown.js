@@ -115,7 +115,7 @@ const WidgetsDropdown = ({users}) => {
               </span>
             </>
           }
-          title="Доходы"
+          title="Проекты"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="p-0">
@@ -201,7 +201,7 @@ const WidgetsDropdown = ({users}) => {
               </span>
             </>
           }
-          title="Коэффициент конверсии"
+          title="Специалисты"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="p-0">
@@ -274,7 +274,7 @@ const WidgetsDropdown = ({users}) => {
               </span>
             </>
           }
-          title="Сессии"
+          title="Часы [за год]"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="p-0">

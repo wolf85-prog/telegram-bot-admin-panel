@@ -77,8 +77,42 @@
     --cui-sidebar-nav-group-toggle-show-color: hsla(0,0%,100%,.6);
 }
 
+.form-control {
+    --cui-input-color: hsla(0,0%,100%,.87);
+    --cui-input-bg: hsla(0,0%,100%,.05);
+    --cui-input-border-color: hsla(0,0%,100%,.09);
+    --cui-input-focus-color: hsla(0,0%,100%,.87);
+    --cui-input-focus-bg: hsla(0,0%,100%,.05);
+    --cui-input-focus-border-color: hsla(0,0%,100%,.2);
+    --cui-input-disabled-bg: rgba(0,0,21,.1);
+    --cui-input-placeholder-color: hsla(0,0%,100%,.6);
+    --cui-input-plaintext-color: hsla(0,0%,100%,.87);
+    --cui-form-text-color: hsla(0,0%,100%,.6);
+}
+
+.form-select {
+    --cui-form-select-color: hsla(0,0%,100%,.87);
+    --cui-form-select-bg: hsla(0,0%,100%,.05);
+    --cui-form-select-border-color: #ffffff17;
+    --cui-form-select-focus-border-color: hsla(0,0%,100%,.2);
+    --cui-form-select-disabled-bg: rgba(0,0,21,.1);
+}
+
+.multi-select {
+    --rmsc-primary: #4285f4;
+    --rmsc-hover: #f1f3f5;
+    --rmsc-selected: #e2e6ea;
+    --rmsc-border: #ccc;
+    --rmsc-gray: #aaa;
+    --rmsc-bg: #000;
+    --rmsc-spacing: 10px;
+    --rmsc-border-radius: 4px;
+    --rmsc-height: 38px;
+  }
+
 .dark-theme {
     --cui-body-bg: #181924;
+    /* --cui-body-bg: #000000; */
     --cui-body-color: hsla(0,0%,100%,.87);
     --cui-elevation-base-color: 0,0,0;
     --cui-high-emphasis: hsla(0,0%,100%,.87);
