@@ -214,7 +214,7 @@ const Admin = () => {
                             {contacts.map((item, index) => (
                               <CTableRow v-for="item in tableItems" key={index}>
                                 <CTableDataCell className="text-center">
-                                    <CAvatar size="md" src={avatar2} alt='' className="avatar-adm" />
+                                    <CAvatar size="md" src={avatar2} alt='' />
                                 </CTableDataCell>
                                 <CTableDataCell>
                                   <div>{item.user.name}</div>

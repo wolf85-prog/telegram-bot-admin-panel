@@ -144,3 +144,10 @@
     --cui-card-border-color: hsla(0,0%,100%,.075);
     --cui-card-cap-bg: #282933;
 }
+
+.dark-theme .footer {
+    --cui-footer-bg: #2a2b36;
+    --cui-footer-color: hsla(0,0%,100%,.87);
+    --cui-footer-border-width: 0;
+    --cui-footer-border-color: transparent;
+}
