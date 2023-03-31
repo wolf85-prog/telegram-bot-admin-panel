@@ -138,9 +138,9 @@ const Admin = () => {
   }, [clients]);
 
   return (
-    <div>
+    <div className='dark-theme'>
       <AppSidebar />
-      <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
+      <div className="wrapper d-flex flex-column min-vh-100 bg-uley bg-dark">
         <AppHeader />
         <div className="body flex-grow-1 px-3">
 
@@ -195,7 +195,7 @@ const Admin = () => {
                         </CRow>
 
                         <CTable align="middle" className="mb-0 border" hover responsive>
-                          <CTableHead color="light">
+                          <CTableHead className='table-dark'>
                             <CTableRow>
                               <CTableHeaderCell className="text-center">
                                 <CIcon icon={cilPeople} />

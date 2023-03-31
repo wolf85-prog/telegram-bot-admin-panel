@@ -18,10 +18,10 @@ const Chats2 = () => {
 
     const { person } = useContext(AccountContext); 
 
-	// useEffect(() => {
-	// 	if (userPrefersDark) document.body.classList.add("dark-theme");
-	// 	stopLoad();
-	// });   
+	useEffect(() => {
+		document.body.classList.add("dark-theme");
+		//stopLoad();
+	});   
 
 	// const stopLoad = () => {
 	// 	setStartLoadProgress(true);

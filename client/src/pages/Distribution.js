@@ -141,7 +141,7 @@ const Distribution = () => {
   }
 
   return (
-    <div>
+    <div className='dark-theme'>
       <AppSidebar />
       <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
         <AppHeader />
@@ -163,7 +163,7 @@ const Distribution = () => {
                               <br />
 
                               <CTable align="middle" className="mb-0 border" hover responsive>
-                                <CTableHead color="light">
+                                <CTableHead className='table-dark'>
                                   <CTableRow>
                                     <CTableHeaderCell>ID</CTableHeaderCell>
                                     <CTableHeaderCell>Название</CTableHeaderCell>
