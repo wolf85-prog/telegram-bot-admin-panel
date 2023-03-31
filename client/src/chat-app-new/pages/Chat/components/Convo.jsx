@@ -43,7 +43,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		  return (
 			<div
 			  ref={ref}
-			  style={style}
+			  style={{backgroundColor: '#20272b'}}
 			  className={className}
 			  aria-labelledby={labeledBy}
 			>
@@ -162,7 +162,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 										>
 											<Icon id="downArrow" className="chat__msg-options-icon" />
 										</button> */}
-										<Dropdown onSelect={change}>
+										<Dropdown onSelect={change} style={{backgroundColor: '#2a2f32'}}>
 											<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenu}>

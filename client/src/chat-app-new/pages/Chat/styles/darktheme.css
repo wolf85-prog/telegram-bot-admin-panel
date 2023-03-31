@@ -80,6 +80,10 @@
     background: transparent;
 }
 
+.dark-theme .chat__href {
+    color: #39f;
+}
+
 /* End Chat Content */
 
 .dark-theme .chat__footer {
