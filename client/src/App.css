@@ -101,10 +101,10 @@
 .multi-select {
     --rmsc-primary: #4285f4;
     --rmsc-hover: #f1f3f5;
-    --rmsc-selected: #e2e6ea;
-    --rmsc-border: #ccc;
+    --rmsc-selected: hsla(0,0%,100%,.2) !important;
+    --rmsc-border: #ffffff17 !important;
     --rmsc-gray: #aaa;
-    --rmsc-bg: #000;
+    --rmsc-bg: #2f3039 !important;
     --rmsc-spacing: 10px;
     --rmsc-border-radius: 4px;
     --rmsc-height: 38px;
