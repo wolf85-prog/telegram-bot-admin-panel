@@ -29,7 +29,8 @@
 
 
 .header {
-    --cui-header-bg: #2a2b36;
+    /* --cui-header-bg: #2a2b36; */
+    --cui-header-bg: #131c21;
     --cui-header-color: hsla(0,0%,100%,.75);
     --cui-header-hover-color: hsla(0,0%,100%,.9);
     --cui-header-active-color: #fff;
@@ -52,7 +53,8 @@
 
 .sidebar {
     --cui-sidebar-color: hsla(0,0%,100%,.87);
-    --cui-sidebar-bg: #2a2b36;
+    /* --cui-sidebar-bg: #2a2b36; */
+    --cui-sidebar-bg: #131c21;
     --cui-sidebar-border-width: 0;
     --cui-sidebar-border-color: transparent;
     --cui-sidebar-brand-color: inherit;
@@ -180,8 +182,21 @@
 }
 
 .dark-theme .footer {
-    --cui-footer-bg: #2a2b36;
+    /* --cui-footer-bg: #2a2b36; */
+    --cui-footer-bg: #131c21;
     --cui-footer-color: hsla(0,0%,100%,.87);
     --cui-footer-border-width: 0;
     --cui-footer-border-color: transparent;
+}
+
+.bg-danger-gradient {
+    background-color: #e55353;
+    background-color: var(--cui-danger,#d93737);
+    background-image: linear-gradient(45deg,#e55353,#d93737);
+    background-image: linear-gradient(45deg,var(--cui-danger-start,#e55353) 0,var(--cui-danger-stop,#d93737 100%));
+}
+
+.rounded-pill {
+    border-radius: 50rem!important;
+    border-radius: var(--cui-border-radius-pill)!important;
 }

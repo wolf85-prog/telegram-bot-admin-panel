@@ -10,6 +10,7 @@ import {
   CHeaderToggler,
   CNavLink,
   CNavItem,
+  CBadge,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
@@ -50,8 +51,14 @@ const AppHeader = () => {
         </CHeaderNav>
         <CHeaderNav>
           <CNavItem>
-            <CNavLink href="#">
+            <CNavLink href="#" style={{position: 'relative'}}>
               <CIcon icon={cilBell} size="lg" />
+              {/* <CBadge color="success" className="ms-2">
+                5
+              </CBadge> */}
+              <span className="badge bg-danger-gradient rounded-pill position-absolute top-0 end-0">
+                1
+              </span>
             </CNavLink>
           </CNavItem>
           <CNavItem>

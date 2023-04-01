@@ -7,7 +7,8 @@ import {
   cilNotes,
   cilPuzzle,
   cilSpeedometer,
-  cilPeople
+  cilPeople,
+  CBadge
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
