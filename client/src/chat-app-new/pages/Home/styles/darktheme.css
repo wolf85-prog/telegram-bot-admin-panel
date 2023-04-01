@@ -1,5 +1,9 @@
 .dark-theme .home {
-    background: rgb(38, 45, 49);
+    background-image: url('./../../../assets/images/home_chat.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgb(38, 45, 49);
     border-bottom-color: #056162;
 }
 

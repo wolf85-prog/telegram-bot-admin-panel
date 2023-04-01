@@ -22,7 +22,7 @@ const App = observer(() => {
     }, [])
 
     if (loading) {
-      return <Loader/>
+      return <div className='bg-uley'><Loader/></div>
     }
     
     return (

@@ -1,5 +1,5 @@
 .body {
-    background-image: url('./assets/images/background3.jpg');
+    background-image: url('./assets/images/background4.jpg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right;
@@ -9,7 +9,7 @@
 }
 
 .bg-uley {
-    background-color: #000;
+    background-color: #12191d;
 
     --cui-body-color: hsla(0,0%,100%,.87);
     

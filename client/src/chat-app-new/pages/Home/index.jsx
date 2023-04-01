@@ -10,15 +10,15 @@ const Home = () => {
 
 	return (
 		<div className="home">
-			<div className="home__img-wrapper">
+			{/* <div className="home__img-wrapper">
 				<img
 					src={darkTheme ? introImgDark : introImgLight}
 					alt=""
 					className="home__img"
 				/>
-			</div>
+			</div> */}
 
-			<h1 className="home__title"> Добро пожаловать <br/>
+			{/* <h1 className="home__title"> Добро пожаловать <br/>
 			в мессенджер чат-бота U.L.E.Y </h1>
 			<p className="home__text">
 				Выберите, кому хотели бы написать сообщение.
@@ -38,7 +38,7 @@ const Home = () => {
 					</a>
 					.
 				</span>
-			</p>
+			</p> */}
 		</div>
 	);
 };
