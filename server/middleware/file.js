@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
     },
     //замена оригинального названия файла на название текущей даты в миллесекундах
     filename(req, file, cb) {
-        strRegexp = strRegexp.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "_")
+        strRegexp = originalname.match(/[-[\]{}()*+?.,\\^$|#\s]/g)
         const filename = new Date().toISOString() + '-' + file.strRegexp //Date.now()
         cb(null, filename)
     }
