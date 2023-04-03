@@ -16,7 +16,7 @@
 }
 
 .thead{
-    --cui-table-bg: hsla(0,0%,100%,.1);
+    --cui-table-bg: #131c21;
     --cui-table-color: hsla(0,0%,100%,.87);
     --cui-table-border-color: hsla(0,0%,100%,.177);
     --cui-table-striped-bg: hsla(0,0%,100%,.139);
@@ -25,6 +25,11 @@
     --cui-table-active-color: rgba(44,56,74,.95);
     --cui-table-hover-bg: hsla(0,0%,100%,.158);
     --cui-table-hover-color: rgba(44,56,74,.95);
+}
+
+.table-dark {
+    --cui-table-bg: #131c21;
+    --cui-table-border-color: #252d32;
 }
 
 
@@ -187,8 +192,13 @@
     /* --cui-card-bg: #24252f; */
     --cui-card-bg: #131c21;
     --cui-card-border-color: hsla(0,0%,100%,.075);
-    --cui-card-cap-bg: #282933;
+    /* --cui-card-cap-bg: #282933; */
+    --cui-card-cap-bg: #131c21;
 }
+
+/* .dark-theme .card-header {
+    background-color: #131c21;
+} */
 
 .dark-theme .footer {
     /* --cui-footer-bg: #2a2b36; */
