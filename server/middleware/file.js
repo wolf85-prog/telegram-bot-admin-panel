@@ -31,6 +31,7 @@ const rusToLat = function(str) {
 }
 
 function translit(word){
+    console.log(word)
 	var answer = '';
 	var converter = {
 		'а': 'a',    'б': 'b',    'в': 'v',    'г': 'g',    'д': 'd',
