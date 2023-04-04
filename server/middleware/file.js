@@ -5,25 +5,40 @@ const { path, join } = require('path')
 // путь к текущей директории
 //const _dirname = path.resolve(__dirname) 
 
+const rusToLat = function(str) {
+    let ru = {
+      'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 
+      'е': 'e', 'ё': 'e', 'ж': 'j', 'з': 'z', 'и': 'i', 
+      'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 
+      'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 
+      'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh', 
+      'щ': 'shch', 'ы': 'y', 'э': 'e', 'ю': 'u', 'я': 'ya',
+      'ъ': 'ie', 'ь': '', 'й': 'i'
+    };
+    let newString = [];
+    
+    return [...str].map(l => {
+      let latL = ru[l.toLocaleLowerCase()];
+      
+      if (l !== l.toLocaleLowerCase()) {
+        latL = latL.charAt(0).toLocaleUpperCase() + latL.slice(1);
+      } else if (latL === undefined) {
+        latL = l;
+      }
+      
+      return latL;
+    }).join('');
+}
+
 const storage = multer.diskStorage({
     destination(req, file, cd) {
-
-        // файлы хранятся по комнатам
-        // название директории - идентификатор комнаты
-        //const dirPath = join(_dirname, '../images', '111')
-        //console.log("dirPath: ", dirPath)
-
-        // создаем директорию при отсутствии
-        // if (!existsSync(dirPath)) {
-        //     mkdirSync(dirPath, { recursive: true })
-        // }
-
+        
         cd(null, 'images/')
     },
+
     //замена оригинального названия файла на название текущей даты в миллесекундах
     filename(req, file, cb) {
-       // strRegexp = originalname.match(/[-[\]{}()*+?.,\\^$|#\s]/g)
-        const filename = new Date().toISOString() + '-' + file.originalname.replace(/\s+/g, '') //Date.now()
+        const filename = new Date().toISOString() + '-' + rusToLat(file.originalname.replace(/\s+/g, '')) //Date.now()
         cb(null, filename)
     }
 })
