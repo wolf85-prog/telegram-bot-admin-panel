@@ -39,7 +39,7 @@ const storage = multer.diskStorage({
     //замена оригинального названия файла на название текущей даты в миллесекундах
     filename(req, file, cb) {
         //rusToLat(file.originalname.replace(/\s+/g, '')
-        const filename = new Date().toISOString() + '-' + rusToLat(file.originalname) //Date.now()
+        const filename = new Date().toISOString() + '-' + file.originalname //Date.now()
         cb(null, filename)
     }
 })
