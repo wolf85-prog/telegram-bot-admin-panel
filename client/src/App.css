@@ -9,7 +9,13 @@
 }
 
 .bg-uley {
-    background-color: #12191d;
+    background-image: url('./assets/images/U.L.E.Y[Background1920х1080].jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-attachment: fixed;
+
+    background-color: #000103!important;
 
     --cui-body-color: hsla(0,0%,100%,.87);
     

@@ -41,7 +41,7 @@ const Login = observer(() => {
     }
 
   return (
-    <div className="bg-dark min-vh-100 d-flex flex-row align-items-center dark-theme">
+    <div className="bg-dark min-vh-100 d-flex flex-row align-items-center dark-theme bg-uley">
       <CContainer>
         <CRow className="justify-content-center">
           <CCol md={5}>
@@ -49,7 +49,7 @@ const Login = observer(() => {
               <CCard className="p-4">
                 <CCardBody>
                   <CForm>
-                    <h1 style={{textAlign: 'center', color: '#fff'}}>{'Авторизация'}</h1>
+                    <h1 style={{textAlign: 'center', color: '#fff'}}>{'U.L.E.Y'}</h1>
                     <p className="text-medium-emphasis" style={{textAlign: 'center', color: '#fff!important'}}>Войдите в свой аккаунт</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
