@@ -19,7 +19,7 @@ const Profile = ({ user }) => {
 	const host = process.env.REACT_APP_API_URL
 
 	useEffect(() => {
-		setImg(`${host}/${user.avatar}`)
+		setImg(`${host}${user.avatar}`)
 	}, [user]);
 	
 
@@ -102,7 +102,7 @@ const Profile = ({ user }) => {
 				<div className="profile__avatar-wrapper upload">
 					{
 						user.avatar
-							? <img src={`${host}/${user.avatar}`} alt={user?.name} className="avatar-adm" />
+							? <img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
 							: <img src={defaultAvatar} alt={user?.name} className="avatar-adm" />
 					}
 					

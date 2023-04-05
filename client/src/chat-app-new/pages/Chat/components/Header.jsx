@@ -28,7 +28,7 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {
 			<div className="chat__avatar-wrapper" onClick={openProfileSidebar}>
 				{
 					user.avatar
-					? <img src={`${host}/${user.avatar}`} alt={user?.name} className="avatar-adm" />
+					? <img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
 					: <img src={avatarDefault} alt={user?.name} className="avatar-adm" />
 				}
 			</div>
