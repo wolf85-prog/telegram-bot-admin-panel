@@ -59,7 +59,7 @@ const Chat = () => {
 
                setImage(response.data.path);
 			   //сообщение с ссылкой на файл
-			   setValue(host + '/' + response.data.path)
+			   setValue(host + response.data.path)
             }
         }
         getImage();
@@ -74,7 +74,8 @@ const Chat = () => {
 		for (let key in e.target.files[0]) {
 			fileObj[key] = e.target.files[0][key];
 		}
-		fileObj.name = newFilename.split(/\s+/).join('-')
+		fileObj.name = newFilename.split(/\s+/).join('_')
+		console.log("fileObj: ", fileObj)
 
         setFile(fileObj);
     }
