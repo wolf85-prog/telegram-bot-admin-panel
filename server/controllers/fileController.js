@@ -12,7 +12,9 @@ class FileController {
 
         try {
 
-            let filedata = req.file;          
+            let filedata = req.file; 
+            
+            console.log("filedata: ", filedata)
 
             if(!filedata)
                 res.send("Ошибка при загрузке файла");

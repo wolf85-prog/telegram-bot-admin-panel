@@ -66,7 +66,7 @@ const Contact = ({ contact }) => {
 			<div className="sidebar-contact__avatar-wrapper">
 				{
 					contact.avatar
-					? <img src={`${host}/${contact.avatar}`} alt='' className="avatar-adm" />
+					? <img src={`${host}${contact.avatar}`} alt='' className="avatar-adm" />
 					: <img src={avatarDefault} alt='' className="avatar-adm" />
 				}
 			</div>
