@@ -11,10 +11,7 @@ class FileController {
     async uploadFile(req, res) {
 
         try {
-
             let filedata = req.file; 
-            
-            console.log("filedata: ", filedata)
 
             if(!filedata)
                 res.send("Ошибка при загрузке файла");
