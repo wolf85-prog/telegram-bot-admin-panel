@@ -121,7 +121,7 @@ const Profile = ({ user }) => {
 
 				
 
-				<p>{user.chatId}</p>
+				<p style={{ color: '#d5d5d5'}}>{user.chatId}</p>
 				{
 					form ? <form onSubmit={handleSubmit}>
 								<input 
@@ -130,15 +130,15 @@ const Profile = ({ user }) => {
 									onChange={handleChange} 
 									ref={input}
         							onFocus={() => input.current.select()}
-									style={{borderBottom: '1px solid #0e892e'}}
+									style={{borderBottom: '1px solid #0e892e', color: '#d5d5d5'}}
 								/>
-								<input type="submit" value="Сохранить"  />
+								<input type="submit" value="Сохранить" style={{ color: '#6a6a6a'}} />
 							</form>
 							: <h2 className="profile__name"> {user.name} </h2> 
 				}
 				
 				{
-					!form ? <span onClick={changeUsername} style={{cursor: 'pointer'}}>Редактировать</span>
+					!form ? <span onClick={changeUsername} style={{cursor: 'pointer', color: '#6a6a6a'}}>Редактировать</span>
 					: ""
 				}
 			</div>
