@@ -51,8 +51,11 @@ const Chat = () => {
                 const data = new FormData();
                 data.append("name", file.name);
                 data.append("filedata", file);
+				console.log("file", file)
 
                let response = await uploadFile(data);
+
+			   console.log("response: ", response)
 
                setImage(response.data.path);
 			   //сообщение с ссылкой на файл
