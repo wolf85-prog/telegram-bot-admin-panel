@@ -119,9 +119,9 @@
 }
 
 .multi-select {
-    --rmsc-primary: #4285f4;
-    --rmsc-hover: #1f272c;
-    --rmsc-selected: hsla(0,0%,100%,.2) !important;
+    --rmsc-primary: #0b182e!important;
+    --rmsc-hover: #1f272c!important;
+    --rmsc-selected: #ab989833 !important;
     --rmsc-border: #ffffff17 !important;
     --rmsc-gray: #aaa;
     --rmsc-bg: #1f272c !important;

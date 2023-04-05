@@ -24,6 +24,7 @@ const DistributionAdd = () => {
 
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 	const host = process.env.REACT_APP_API_URL
+  const admin_user = process.env.REACT_APP_CHAT_ADMIN_ID
 
   const { users: clients } = useUsersContext();
   const [contacts, setContacts]= useState([]);
@@ -31,7 +32,9 @@ const DistributionAdd = () => {
   const [selected, setSelected] = useState([]);
   const [text, setText] = useState('');
   const [countChar, setCountChar] = useState(0);
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
+  const [showEditButtonAdd, setShowEditButtonAdd] = useState(false);
+  const [textButton, setTextButton] = useState('');
 
   useEffect(() => {
     const arrClients = []
@@ -51,20 +54,45 @@ const DistributionAdd = () => {
     setCountChar(e.target.value.length)
   }
 
+  const onChangeTextButton = (e) => {
+    setTextButton(e.target.value)
+  }
+
+  {/* Отправить рассылку */}
   const onSendText = () => {
     console.log(selected)
     
     selected.map(async (user) => {
-      console.log("Пользователю ID: " + user.value + " сообщение " + text + " отправлено!")
+      console.log("Пользователю ID: " + user.value + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
+
+      const text_send_chat = 'Пользователь нажал на кнопку в рассылке!'
       
       //Передаем данные боту
-      const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+      const keyboard = JSON.stringify({
+        inline_keyboard: [
+            [
+                {"text": textButton, "url": `https://api.telegram.org/bot${token}/sendMessage?chat_id=${admin_user}&parse_mode=html&text=${text_send_chat}`},
+            ],
+        ]
+      });
+
+      const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}&reply_markup=${keyboard}`
+      console.log(url_send_msg)
       const sendToTelegram = await $host.get(url_send_msg);
     })
 
     setSelected([])
     setText('')
+    setShowEditButtonAdd(false)
+    setTextButton('')
     setVisible(true)
+  }
+
+  {/* Показать Добавление текста кнопки */}
+  const clickShowEditButton = (e) => {
+    e.preventDefault();
+
+    showEditButtonAdd ? setShowEditButtonAdd (false) : setShowEditButtonAdd (true)
   }
 
   return (
@@ -121,10 +149,36 @@ const DistributionAdd = () => {
                                   >           
                                   </CFormTextarea>
                                 </div>
-                                <div className="mb-3">
+                                <div className="mb-3 text-center">
+                                  <p onClick={clickShowEditButton} > {showEditButtonAdd ? '- Убрать кнопку' : '+ Добавить кнопку'}</p>
+                                </div>
+
+                                <CForm className="row g-3" style={{color: '#8f8888', display: showEditButtonAdd ? "block" : "none" }}>
+                                  <CCol md={6}>
+                                    <CFormInput 
+                                      type="text" 
+                                      id="inputTextButton" 
+                                      label="Название кнопки" 
+                                      placeholder="Введите текст"
+                                      onChange={onChangeTextButton}
+                                      value={textButton}
+                                    />
+                                  </CCol>
+                                </CForm>
+                                
+                                <br/>
+
+                                <div className="mb-6" style={{color: '#8f8888'}}>
+                                  <CFormInput type="file" id="formFile" label="Добавить картинку" />
+                                </div>
+
+                                <div className="mb-3"></div>
+                                
+                                <div className="mb-3" style={{textAlign: 'right'}}>
                                   <CButton color="primary" onClick={onSendText}>Отправить рассылку</CButton>
                                 </div>
                               </CForm>
+
                             </CCardBody>
                           </CCard>
                         </CCol>
