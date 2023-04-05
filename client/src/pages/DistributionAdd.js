@@ -71,7 +71,7 @@ const DistributionAdd = () => {
       const keyboard = JSON.stringify({
         inline_keyboard: [
             [
-                {"text": textButton, "url": `https://api.telegram.org/bot${token}/sendMessage?chat_id=${admin_user}&parse_mode=html&text=${text_send_chat}`},
+                {"text": textButton, callback_data:'/report'},
             ],
         ]
       });
