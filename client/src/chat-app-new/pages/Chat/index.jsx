@@ -52,10 +52,8 @@ const Chat = () => {
                 data.append("name", file.name);
                 data.append("filedata", file);
 
-				console.log("file data: ", data)
-
                let response = await uploadFile(data);
-			   console.log("response: ", response.data)
+
                setImage(response.data.path);
 			   //сообщение с ссылкой на файл
 			   setValue(host + '/' + response.data.path)
@@ -65,34 +63,19 @@ const Chat = () => {
     }, [file])
 
 	const onFileChange = (e) => {
-        console.log('file: ', translit(e.target.files[0]));
-        setFile(translit(e.target.files[0]));
+		const newFilename = translit(e.target.files[0].name)
+
+		let fileObj = {}; // новый пустой объект
+
+		// давайте скопируем все свойства объекта в него
+		for (let key in e.target.files[0]) {
+			fileObj[key] = e.target.files[0][key];
+		}
+		fileObj.name = newFilename.split(/\s+/).join('-')
+
+        setFile(fileObj);
     }
 
-	const rusToLat = function(str) {
-		let ru = {
-		  'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 
-		  'е': 'e', 'ё': 'e', 'ж': 'j', 'з': 'z', 'и': 'i', 
-		  'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 
-		  'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 
-		  'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh', 
-		  'щ': 'shch', 'ы': 'y', 'э': 'e', 'ю': 'u', 'я': 'ya',
-		  'ъ': 'ie', 'ь': '', 'й': 'i'
-		};
-		let newString = [];
-		
-		return [...str].map(l => {
-		  let latL = ru[l.toLocaleLowerCase()];
-		  
-		  if (l !== l.toLocaleLowerCase()) {
-			latL = latL.charAt(0).toLocaleUpperCase() + latL.slice(1);
-		  } else if (latL === undefined) {
-			latL = l;
-		  }
-		  
-		  return latL;
-		}).join('');
-	}
 	
 	function translit(word){
 		var answer = '';

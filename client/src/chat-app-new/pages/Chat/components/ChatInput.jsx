@@ -4,7 +4,7 @@ import Icon from "./../../../components/Icon";
 import useAutosizeTextArea from "./useAutosizeTextArea.ts";
 
 const attachButtons = [
-	{ icon: "attachContacts", label: "Choose contact", click: "contact" },
+	// { icon: "attachContacts", label: "Choose contact", click: "contact" },
 	{ icon: "attachDocument", label: "Choose document", click: "doc" },
 	{ icon: "attachImage", label: "Choose image", click: "image" },
 ];
