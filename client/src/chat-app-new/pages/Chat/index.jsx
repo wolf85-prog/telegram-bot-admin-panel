@@ -65,9 +65,65 @@ const Chat = () => {
     }, [file])
 
 	const onFileChange = (e) => {
-        console.log('file: ', e.target.files[0]);
-        setFile(e.target.files[0]);
+        console.log('file: ', translit(e.target.files[0]));
+        setFile(translit(e.target.files[0]));
     }
+
+	const rusToLat = function(str) {
+		let ru = {
+		  'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 
+		  'е': 'e', 'ё': 'e', 'ж': 'j', 'з': 'z', 'и': 'i', 
+		  'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 
+		  'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 
+		  'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh', 
+		  'щ': 'shch', 'ы': 'y', 'э': 'e', 'ю': 'u', 'я': 'ya',
+		  'ъ': 'ie', 'ь': '', 'й': 'i'
+		};
+		let newString = [];
+		
+		return [...str].map(l => {
+		  let latL = ru[l.toLocaleLowerCase()];
+		  
+		  if (l !== l.toLocaleLowerCase()) {
+			latL = latL.charAt(0).toLocaleUpperCase() + latL.slice(1);
+		  } else if (latL === undefined) {
+			latL = l;
+		  }
+		  
+		  return latL;
+		}).join('');
+	}
+	
+	function translit(word){
+		var answer = '';
+		var converter = {
+			'а': 'a',    'б': 'b',    'в': 'v',    'г': 'g',    'д': 'd',
+			'е': 'e',    'ё': 'e',    'ж': 'zh',   'з': 'z',    'и': 'i',
+			'й': 'y',    'к': 'k',    'л': 'l',    'м': 'm',    'н': 'n',
+			'о': 'o',    'п': 'p',    'р': 'r',    'с': 's',    'т': 't',
+			'у': 'u',    'ф': 'f',    'х': 'h',    'ц': 'c',    'ч': 'ch',
+			'ш': 'sh',   'щ': 'sch',  'ь': '',     'ы': 'y',    'ъ': '',
+			'э': 'e',    'ю': 'yu',   'я': 'ya',
+	 
+			'А': 'A',    'Б': 'B',    'В': 'V',    'Г': 'G',    'Д': 'D',
+			'Е': 'E',    'Ё': 'E',    'Ж': 'Zh',   'З': 'Z',    'И': 'I',
+			'Й': 'Y',    'К': 'K',    'Л': 'L',    'М': 'M',    'Н': 'N',
+			'О': 'O',    'П': 'P',    'Р': 'R',    'С': 'S',    'Т': 'T',
+			'У': 'U',    'Ф': 'F',    'Х': 'H',    'Ц': 'C',    'Ч': 'Ch',
+			'Ш': 'Sh',   'Щ': 'Sch',  'Ь': '',     'Ы': 'Y',    'Ъ': '',
+			'Э': 'E',    'Ю': 'Yu',   'Я': 'Ya'
+		};
+	 
+		for (var i = 0; i < word.length; ++i ) {
+			if (converter[word[i]] == undefined){
+				answer += word[i];
+			} else {
+				answer += converter[word[i]];
+			}
+		}
+	 
+		return answer;
+	}
 
 	const openSidebar = (cb) => {
 		// close any open sidebar first
