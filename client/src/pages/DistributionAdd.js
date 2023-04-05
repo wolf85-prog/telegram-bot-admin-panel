@@ -99,10 +99,10 @@ const DistributionAdd = () => {
                                       "allItemsAreSelected": "Все поля выбраны",
                                       "clearSearch": "Очистить поиск",
                                       "clearSelected": "Очистить выбор",
-                                      "noOptions": "No options",
+                                      "noOptions": "Ничего не найдено",
                                       "search": "Поиск",
                                       "selectAll": "Выбрать всё",
-                                      "selectAllFiltered": "Выбрать всё (Filtered)",
+                                      "selectAllFiltered": "Выбрать всё (Найденных)",
                                       "selectSomeItems": "Выбрать...",
                                       "create": "Создать",
                                     }}   
