@@ -51,10 +51,8 @@ const Chat = () => {
                 const data = new FormData();
                 data.append("name", file.name);
                 data.append("filedata", file);
-				console.log("data", data)
 
                let response = await uploadFile(data);
-
 			   console.log("response: ", response)
 
                setImage(response.data.path);
@@ -66,51 +64,8 @@ const Chat = () => {
     }, [file])
 
 	const onFileChange = (e) => {
-		const newFilename = translit(e.target.files[0].name)
-
-		let fileObj = {}; // новый пустой объект
-
-		// давайте скопируем все свойства объекта в него
-		for (let key in e.target.files[0]) {
-			fileObj[key] = e.target.files[0][key];
-		}
-		fileObj.name = newFilename.split(/\s+/).join('_')
-		console.log("fileObj: ", fileObj)
-
         setFile(e.target.files[0]);
     }
-
-	
-	function translit(word){
-		var answer = '';
-		var converter = {
-			'а': 'a',    'б': 'b',    'в': 'v',    'г': 'g',    'д': 'd',
-			'е': 'e',    'ё': 'e',    'ж': 'zh',   'з': 'z',    'и': 'i',
-			'й': 'y',    'к': 'k',    'л': 'l',    'м': 'm',    'н': 'n',
-			'о': 'o',    'п': 'p',    'р': 'r',    'с': 's',    'т': 't',
-			'у': 'u',    'ф': 'f',    'х': 'h',    'ц': 'c',    'ч': 'ch',
-			'ш': 'sh',   'щ': 'sch',  'ь': '',     'ы': 'y',    'ъ': '',
-			'э': 'e',    'ю': 'yu',   'я': 'ya',
-	 
-			'А': 'A',    'Б': 'B',    'В': 'V',    'Г': 'G',    'Д': 'D',
-			'Е': 'E',    'Ё': 'E',    'Ж': 'Zh',   'З': 'Z',    'И': 'I',
-			'Й': 'Y',    'К': 'K',    'Л': 'L',    'М': 'M',    'Н': 'N',
-			'О': 'O',    'П': 'P',    'Р': 'R',    'С': 'S',    'Т': 'T',
-			'У': 'U',    'Ф': 'F',    'Х': 'H',    'Ц': 'C',    'Ч': 'Ch',
-			'Ш': 'Sh',   'Щ': 'Sch',  'Ь': '',     'Ы': 'Y',    'Ъ': '',
-			'Э': 'E',    'Ю': 'Yu',   'Я': 'Ya'
-		};
-	 
-		for (var i = 0; i < word.length; ++i ) {
-			if (converter[word[i]] == undefined){
-				answer += word[i];
-			} else {
-				answer += converter[word[i]];
-			}
-		}
-	 
-		return answer;
-	}
 
 	const openSidebar = (cb) => {
 		// close any open sidebar first

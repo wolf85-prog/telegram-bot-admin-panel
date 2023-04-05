@@ -13,8 +13,11 @@ const storage = multer.diskStorage({
 
     //замена оригинального названия файла на название текущей даты в миллесекундах
     filename(req, file, cb) {
-        console.log(file.originalname)
-        const filename = new Date().toISOString() + '-' + file.originalname //Date.now()
+        const ras = file.originalname.split('.')
+        console.log("Расширение файла: ", ras[ras.length - 1])
+
+
+        const filename = new Date().toISOString() + '.' + ras[ras.length - 1] //Date.now()
         cb(null, filename)
     }
 })
