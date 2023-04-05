@@ -77,7 +77,7 @@ const Chat = () => {
 		fileObj.name = newFilename.split(/\s+/).join('_')
 		console.log("fileObj: ", fileObj)
 
-        setFile(fileObj);
+        setFile(e.target.files[0]);
     }
 
 	

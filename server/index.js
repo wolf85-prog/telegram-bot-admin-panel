@@ -20,7 +20,9 @@ app.use(express.json())
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static(path.resolve(__dirname, 'images')))
+app.use(express.static(path.resolve(__dirname, 'uploads')))
 app.use('/images', express.static(path.join(__dirname, 'images')))
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 app.use('/api', Route);
 
