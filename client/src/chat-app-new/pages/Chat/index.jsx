@@ -51,7 +51,7 @@ const Chat = () => {
                 const data = new FormData();
                 data.append("name", file.name);
                 data.append("filedata", file);
-				console.log("file", file)
+				console.log("data", data)
 
                let response = await uploadFile(data);
 

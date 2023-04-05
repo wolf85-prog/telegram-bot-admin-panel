@@ -38,7 +38,7 @@ const credentials = {
 const httpsServer = https.createServer(credentials, app);
 
 // Обработка ошибок, последний middleware
-app.use(errorHandler)
+//app.use(errorHandler)
 
 const start = async () => {
     try {
