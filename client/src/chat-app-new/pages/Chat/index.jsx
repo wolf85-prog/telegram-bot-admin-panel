@@ -113,7 +113,7 @@ const Chat = () => {
                 receiverId: user.chatId,
                 conversationId: user.conversationId,
                 type: "file",
-                text: 'https://proj.uley.team:5000/' + image,
+                text: host + image,
                 is_bot: false,
 				messageId: sendToTelegram.data.result.message_id,
             }

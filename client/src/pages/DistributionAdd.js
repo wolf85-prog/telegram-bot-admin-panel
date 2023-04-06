@@ -18,6 +18,7 @@ import {
 
 import { MultiSelect } from "react-multi-select-component";
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
+import { uploadFile } from './../http/chatAPI';
 import { $host } from './../http/index'
 
 const DistributionAdd = () => {
@@ -35,6 +36,10 @@ const DistributionAdd = () => {
   const [visible, setVisible] = useState(false);
   const [showEditButtonAdd, setShowEditButtonAdd] = useState(false);
   const [textButton, setTextButton] = useState('');
+  const [file, setFile] = useState();
+  const [value, setValue] = useState("");
+  
+  let form;
 
   useEffect(() => {
     const arrClients = []
@@ -58,7 +63,23 @@ const DistributionAdd = () => {
     setTextButton(e.target.value)
   }
 
-  {/* Отправить рассылку */}
+  useEffect(() => {
+    const getImage = async () => {
+        if (file) {
+          form = new FormData();
+          form.append("photo", file);
+        }
+    }
+    getImage();
+  }, [file])
+
+  {/* Добавление файла */}
+  const onFileChange = (e) => {
+    setFile(e.target.files[0]);
+    setValue(e.target.value)
+  }
+
+  {/* Отправка рассылки */}
   const onSendText = () => {
     console.log(selected)
     
@@ -77,8 +98,12 @@ const DistributionAdd = () => {
       });
 
       const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}&reply_markup=${keyboard}`
-      console.log(url_send_msg)
       const sendToTelegram = await $host.get(url_send_msg);
+      console.log('sendToTelegram: ', sendToTelegram)
+      
+      const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.value}`
+      const sendPhotoToTelegram = await $host.post(url_send_photo, form);
+      console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
     })
 
     setSelected([])
@@ -86,6 +111,7 @@ const DistributionAdd = () => {
     setShowEditButtonAdd(false)
     setTextButton('')
     setVisible(true)
+    setValue('')
   }
 
   {/* Показать Добавление текста кнопки */}
@@ -153,6 +179,7 @@ const DistributionAdd = () => {
                                   <p onClick={clickShowEditButton} > {showEditButtonAdd ? '- Убрать кнопку' : '+ Добавить кнопку'}</p>
                                 </div>
 
+                                {/* Добавление кнопки */}
                                 <CForm className="row g-3" style={{color: '#8f8888', display: showEditButtonAdd ? "block" : "none" }}>
                                   <CCol md={6}>
                                     <CFormInput 
@@ -168,8 +195,16 @@ const DistributionAdd = () => {
                                 
                                 <br/>
 
+                                {/* Добавление картинки */}
                                 <div className="mb-6" style={{color: '#8f8888'}}>
-                                  <CFormInput type="file" id="formFile" label="Добавить картинку" />
+                                  <CFormInput 
+                                    type="file" 
+                                    id="formFile" 
+                                    label="Добавить картинку" 
+                                    name="photo"
+                                    onChange={(e) => onFileChange(e)}
+                                    value={value}
+                                  />
                                 </div>
 
                                 <div className="mb-3"></div>
