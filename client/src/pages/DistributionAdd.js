@@ -97,11 +97,11 @@ const DistributionAdd = () => {
         ]
       });
 
-      const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}&reply_markup=${keyboard}`
+      const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
       const sendToTelegram = await $host.get(url_send_msg);
       console.log('sendToTelegram: ', sendToTelegram)
       
-      const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.value}`
+      const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.value}&reply_markup=${keyboard}`
       const sendPhotoToTelegram = await $host.post(url_send_photo, form);
       console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
     })
@@ -175,6 +175,22 @@ const DistributionAdd = () => {
                                   >           
                                   </CFormTextarea>
                                 </div>
+                              
+
+                                {/* Добавление картинки */}
+                                <div className="mb-6" style={{color: '#8f8888'}}>
+                                  <CFormInput 
+                                    type="file" 
+                                    id="formFile" 
+                                    label="Добавить картинку" 
+                                    name="photo"
+                                    onChange={(e) => onFileChange(e)}
+                                    value={value}
+                                  />
+                                </div>
+
+                                <div className="mb-3"></div>
+
                                 <div className="mb-3 text-center">
                                   <p style={{color: '#fff'}} onClick={clickShowEditButton} > {showEditButtonAdd ? '- Убрать кнопку' : '+ Добавить кнопку'}</p>
                                 </div>
@@ -192,22 +208,6 @@ const DistributionAdd = () => {
                                     />
                                   </CCol>
                                 </CForm>
-                                
-                                <br/>
-
-                                {/* Добавление картинки */}
-                                <div className="mb-6" style={{color: '#8f8888'}}>
-                                  <CFormInput 
-                                    type="file" 
-                                    id="formFile" 
-                                    label="Добавить картинку" 
-                                    name="photo"
-                                    onChange={(e) => onFileChange(e)}
-                                    value={value}
-                                  />
-                                </div>
-
-                                <div className="mb-3"></div>
                                 
                                 <div className="mb-3" style={{textAlign: 'right'}}>
                                   <CButton color="primary" onClick={onSendText}>Отправить рассылку</CButton>
