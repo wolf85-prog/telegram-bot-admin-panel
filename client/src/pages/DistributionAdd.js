@@ -38,8 +38,6 @@ const DistributionAdd = () => {
   const [textButton, setTextButton] = useState('');
   const [file, setFile] = useState();
   const [value, setValue] = useState("");
-  
-  let form;
 
   useEffect(() => {
     const arrClients = []
@@ -59,15 +57,11 @@ const DistributionAdd = () => {
     setCountChar(e.target.value.length)
   }
 
-  const onChangeTextButton = (e) => {
-    setTextButton(e.target.value)
-  }
-
   useEffect(() => {
     const getImage = async () => {
         if (file) {
-          form = new FormData();
-          form.append("photo", file);
+          const formfile = new FormData();
+          formfile.append("photo", file);
         }
     }
     getImage();
@@ -77,6 +71,17 @@ const DistributionAdd = () => {
   const onFileChange = (e) => {
     setFile(e.target.files[0]);
     setValue(e.target.value)
+  }
+
+  {/* Показать Добавление текста кнопки */}
+  const clickShowEditButton = (e) => {
+    e.preventDefault();
+
+    showEditButtonAdd ? setShowEditButtonAdd (false) : setShowEditButtonAdd (true)
+  }
+
+  const onChangeTextButton = (e) => {
+    setTextButton(e.target.value)
   }
 
   {/* Отправка рассылки */}
@@ -97,13 +102,20 @@ const DistributionAdd = () => {
         ]
       });
 
-      const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
-      const sendToTelegram = await $host.get(url_send_msg);
-      console.log('sendToTelegram: ', sendToTelegram)
-      
+      if (text !== '') {
+        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+        const sendToTelegram = await $host.get(url_send_msg);
+        console.log('sendToTelegram: ', sendToTelegram)
+      }  
+
       const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.value}&reply_markup=${keyboard}`
-      const sendPhotoToTelegram = await $host.post(url_send_photo, form);
-      console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
+      if (file) {
+        const form = new FormData();
+        form.append("photo", file);
+
+        const sendPhotoToTelegram = await $host.post(url_send_photo, form);
+        console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
+      } 
     })
 
     setSelected([])
@@ -112,13 +124,6 @@ const DistributionAdd = () => {
     setTextButton('')
     setVisible(true)
     setValue('')
-  }
-
-  {/* Показать Добавление текста кнопки */}
-  const clickShowEditButton = (e) => {
-    e.preventDefault();
-
-    showEditButtonAdd ? setShowEditButtonAdd (false) : setShowEditButtonAdd (true)
   }
 
   return (
@@ -208,7 +213,7 @@ const DistributionAdd = () => {
                                     />
                                   </CCol>
                                 </CForm>
-                                
+                                <br/>
                                 <div className="mb-3" style={{textAlign: 'right'}}>
                                   <CButton color="primary" onClick={onSendText}>Отправить рассылку</CButton>
                                 </div>
