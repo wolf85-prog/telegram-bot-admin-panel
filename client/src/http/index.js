@@ -21,5 +21,6 @@ $authHost.interceptors.request.use(authInterceptor)
 
 export {
     $host,
+    $host_bot,
     $authHost
 }

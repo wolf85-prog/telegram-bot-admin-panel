@@ -10,6 +10,16 @@ export const getManagers = async () =>{
     }
 }
 
+export const getProjects = async () =>{
+    try {
+       let response = await $host_bot.get('projects');
+       //console.log("projects: ", response.data);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getProjects api", error.message);
+    }
+}
+
 export const getContacts = async () =>{
     try {
        let response = await $host.get('api/userbots/get');

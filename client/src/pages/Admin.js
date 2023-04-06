@@ -46,6 +46,7 @@ import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 import deleteIcon from 'src/assets/images/delete.png'
 import pencilIcon from 'src/assets/images/pencil.png'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
+import { getProjects } from './../http/adminAPI.js'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 
@@ -107,7 +108,9 @@ const Admin = () => {
 
   const { users: clients } = useUsersContext();
   const [contacts, setContacts]= useState([]);
+  const [projects, setProjects]= useState([]);
   const host = process.env.REACT_APP_API_URL
+  const hostAdmin = process.env.REACT_APP_ADMIN_API_URL
 
   useEffect(() => {
     const arrClients = []
@@ -137,6 +140,31 @@ const Admin = () => {
 		setContacts(arrClients)      
   }, [clients]);
 
+  useEffect(() => {
+    const arrProjects = []
+
+    const fetchData = async () => {
+			let response = await getProjects();
+      response.map(async (project) => {
+        const newProject = {
+					id: project.id,
+					name: project.title,
+					start: project.time_start,
+          created: project.time_created,
+          teh: project.teh,
+          manager: project.manager,
+          company: project.company,
+				}
+        arrProjects.push(newProject)
+      })
+
+      setProjects(arrProjects) 
+    }
+
+    fetchData();
+    
+  },[])
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -148,7 +176,7 @@ const Admin = () => {
                 <Suspense fallback={<CSpinner color="primary" />}>
 
                 <>
-                <WidgetsDropdown users={clients.length}/>
+                <WidgetsDropdown users={clients.length} projects={projects.length} />
 
                 <CRow>
                   <CCol xs>

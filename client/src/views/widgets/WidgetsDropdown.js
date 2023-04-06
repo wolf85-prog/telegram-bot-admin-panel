@@ -13,7 +13,7 @@ import { CChartBar, CChartLine } from '@coreui/react-chartjs'
 import CIcon from '@coreui/icons-react'
 import { cilArrowBottom, cilArrowTop, cilOptions } from '@coreui/icons'
 
-const WidgetsDropdown = ({users}) => {
+const WidgetsDropdown = ({users, projects}) => {
   return (
     <CRow>
       <CCol sm={6} lg={3}>
@@ -35,10 +35,9 @@ const WidgetsDropdown = ({users}) => {
                 <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
               </CDropdownToggle>
               <CDropdownMenu>
-                <CDropdownItem>Action</CDropdownItem>
-                <CDropdownItem>Another action</CDropdownItem>
-                <CDropdownItem>Something else here...</CDropdownItem>
-                <CDropdownItem disabled>Disabled action</CDropdownItem>
+                <CDropdownItem>Посмотреть</CDropdownItem>
+                <CDropdownItem>Обновить</CDropdownItem>
+                <CDropdownItem disabled>Другое</CDropdownItem>
               </CDropdownMenu>
             </CDropdown>
           }
@@ -109,10 +108,10 @@ const WidgetsDropdown = ({users}) => {
           color="info"
           value={
             <>
-              $6.200{' '}
-              <span className="fs-6 fw-normal">
+              {projects} 
+              {/* <span className="fs-6 fw-normal">
                 (40.9% <CIcon icon={cilArrowTop} />)
-              </span>
+              </span> */}
             </>
           }
           title="Проекты"
@@ -195,7 +194,7 @@ const WidgetsDropdown = ({users}) => {
           color="warning"
           value={
             <>
-              2.49{' '}
+              50{' '}
               <span className="fs-6 fw-normal">
                 (84.7% <CIcon icon={cilArrowTop} />)
               </span>
@@ -268,7 +267,7 @@ const WidgetsDropdown = ({users}) => {
           color="danger"
           value={
             <>
-              44K{' '}
+              44{' '}
               <span className="fs-6 fw-normal">
                 (-23.6% <CIcon icon={cilArrowBottom} />)
               </span>
