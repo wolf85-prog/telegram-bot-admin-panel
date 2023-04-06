@@ -176,7 +176,7 @@ const DistributionAdd = () => {
                                   </CFormTextarea>
                                 </div>
                                 <div className="mb-3 text-center">
-                                  <p onClick={clickShowEditButton} > {showEditButtonAdd ? '- Убрать кнопку' : '+ Добавить кнопку'}</p>
+                                  <p style={{color: '#fff'}} onClick={clickShowEditButton} > {showEditButtonAdd ? '- Убрать кнопку' : '+ Добавить кнопку'}</p>
                                 </div>
 
                                 {/* Добавление кнопки */}
