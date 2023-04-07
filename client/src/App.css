@@ -20,6 +20,10 @@
     --cui-body-color: hsla(0,0%,100%,.87);   
 }
 
+/* .dark-theme .h2 {
+    color: #ffffff!important;
+} */
+
 .thead{
     --cui-table-bg: #131c21;
     --cui-table-color: hsla(0,0%,100%,.87);
@@ -133,6 +137,7 @@
 .dark-theme {
     --cui-body-bg: #181924;
     /* --cui-body-bg: #000000; */
+    --cui-heading-color: #dfdfdf;
     --cui-body-color: hsla(0,0%,100%,.87);
     --cui-elevation-base-color: 0,0,0;
     --cui-high-emphasis: hsla(0,0%,100%,.87);
