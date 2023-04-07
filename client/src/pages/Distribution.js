@@ -40,100 +40,19 @@ import avatar2 from 'src/assets/images/avatars/2.jpg'
 import deleteIcon from 'src/assets/images/delete.png'
 import pencilIcon from 'src/assets/images/pencil.png'
 
-// routes config
-import routes from '../routes'
 
 const Distribution = () => {
 
-  const tableExample = [
+  const tableDistribution = [
     {
-      avatar: { src: avatar2, status: 'success' },
-      user: {
-        name: 'Yiorgos Avraamu',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'USA', flag: cifUs },
-      usage: {
-        value: 50,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'success',
-      },
-      payment: { name: 'Mastercard', icon: cibCcMastercard },
-      activity: '10 sec ago',
-    },
-    {
-      avatar: { src: avatar2, status: 'danger' },
-      user: {
-        name: 'Avram Tarasios',
-        new: false,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Brazil', flag: cifBr },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'info',
-      },
-      payment: { name: 'Visa', icon: cibCcVisa },
-      activity: '5 minutes ago',
-    },
-    {
-      avatar: { src: avatar2, status: 'warning' },
-      user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2021' },
-      country: { name: 'India', flag: cifIn },
-      usage: {
-        value: 74,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'warning',
-      },
-      payment: { name: 'Stripe', icon: cibCcStripe },
-      activity: '1 hour ago',
-    },
-    {
-      avatar: { src: avatar2, status: 'secondary' },
-      user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2021' },
-      country: { name: 'France', flag: cifFr },
-      usage: {
-        value: 98,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'danger',
-      },
-      payment: { name: 'PayPal', icon: cibCcPaypal },
-      activity: 'Last month',
-    },
-    {
-      avatar: { src: avatar2, status: 'success' },
-      user: {
-        name: 'Agapetus Tadeáš',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Spain', flag: cifEs },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'primary',
-      },
-      payment: { name: 'Google Wallet', icon: cibCcApplePay },
-      activity: 'Last week',
-    },
-    {
-      avatar: { src: avatar2, status: 'danger' },
-      user: {
-        name: 'Friderik Dávid',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Poland', flag: cifPl },
-      usage: {
-        value: 43,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'success',
-      },
-      payment: { name: 'Amex', icon: cibCcAmex },
-      activity: 'Last week',
-    },
+      name: 'название',
+      text: 'текст рассылки',
+      image: 'https://',
+      button: 'текст кнопки',
+      receivers: '[]',
+      datestart: '01.01.2023',
+      delivered: 'доставлено',
+    }
   ]
 
   const handleAddButton = () => {
@@ -168,36 +87,44 @@ const Distribution = () => {
                                     <CTableHeaderCell>ID</CTableHeaderCell>
                                     <CTableHeaderCell>Название</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Текст</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center">Картинка</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center">Кнопка</CTableHeaderCell>
                                     <CTableHeaderCell>Получатели</CTableHeaderCell>
+                                    <CTableHeaderCell>Дата отправки</CTableHeaderCell>
+                                    <CTableHeaderCell>Статус</CTableHeaderCell>
                                     <CTableHeaderCell>Управление</CTableHeaderCell>
                                   </CTableRow>
                                 </CTableHead>
                                 <CTableBody>
-                                  {tableExample.map((item, index) => (
+                                  {tableDistribution.map((item, index) => (
                                     <CTableRow v-for="item in tableItems" key={index}>
                                       <CTableDataCell>
                                         <div>{index+1}</div>
                                       </CTableDataCell>
                                       <CTableDataCell>
-                                        <div>{item.user.name}</div>
-                                        <div className="small text-medium-emphasis">
+                                        <div>{item.name}</div>
+                                        {/* <div className="small text-medium-emphasis">
                                           <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registered:{' '}
                                           {item.user.registered}
-                                        </div>
+                                        </div> */}
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <div>Текст сообщения рассылки</div>
+                                        <div>{item.text}</div>
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        <div>{item.image}</div>
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        <div>{item.button}</div>
                                       </CTableDataCell>
                                       <CTableDataCell>
-                                        <div className="clearfix">
-                                          <div className="float-start">
-                                            <strong>{item.usage.value}%</strong>
-                                          </div>
-                                          <div className="float-end">
-                                            <small className="text-medium-emphasis">{item.usage.period}</small>
-                                          </div>
-                                        </div>
-                                        <CProgress thin color={item.usage.color} value={item.usage.value} />
+                                        <div>{item.receivers}</div>
+                                      </CTableDataCell>
+                                      <CTableDataCell>
+                                        <div>{item.datestart}</div>
+                                      </CTableDataCell>
+                                      <CTableDataCell>
+                                        <div>{item.status}</div>
                                       </CTableDataCell>
                                       <CTableDataCell>
                                         <CButton color="light">

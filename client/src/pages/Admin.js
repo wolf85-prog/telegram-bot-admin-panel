@@ -46,7 +46,7 @@ import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 import deleteIcon from 'src/assets/images/delete.png'
 import pencilIcon from 'src/assets/images/pencil.png'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { getProjects } from './../http/adminAPI.js'
+import { getProjects, getManagers } from './../http/adminAPI.js'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 
@@ -64,58 +64,50 @@ const progressExample = [
   { title: 'Отказы', value: 'Average Rate', percent: 40.15, color: 'primary' },
 ]
 
-const tableUserbot = [
-  {
-    avatar: { src: avatar2, status: 'success' },
-    user: {
-      name: 'Yiorgos Avraamu',
-      new: true,
-      registered: 'Jan 1, 2021',
-    },
-    TG_ID: '1213244',
-    city: { name: 'Москва' },
-    company: { name: 'U.L.E.Y', icon: cibCcMastercard },
-    phone: '+7 (900)123-12-12',
-    usage: {
-      value: 50,
-      period: 'Jun 11, 2021 - Jul 10, 2021',
-      color: 'success',
-    },
-    activity: '10 sec ago',
-  },
-  {
-    avatar: { src: avatar2, status: 'success' },
-    user: {
-      name: 'Yiorgos Avraamu',
-      new: true,
-      registered: 'Jan 1, 2021',
-    },
-    TG_ID: '1213244',
-    city: { name: 'Москва' },
-    company: { name: 'U.L.E.Y', icon: cibCcMastercard },
-    phone: '+7 (900)123-12-12',
-    usage: {
-      value: 50,
-      period: 'Jun 11, 2021 - Jul 10, 2021',
-      color: 'success',
-    },
-    activity: '10 sec ago',
-  },
- 
-]
-
 const Admin = () => {
 
   const { users: clients } = useUsersContext();
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]);
+  const [managers, setManagers]= useState([]);
+
   const host = process.env.REACT_APP_API_URL
   const hostAdmin = process.env.REACT_APP_ADMIN_API_URL
 
+  //get Managers  
+  useEffect(() => {
+    const fetchManagers = async () => {
+      const arrManagers = []
+      let response = await getManagers();
+      response.map(async (manager) => {
+        const newManager = {
+          id: manager.id,
+          name: manager.fio,
+          TG_ID: manager.tgID,
+          phone: manager.phone,
+          sity: '',
+          company: '',
+        }
+        arrManagers.push(newManager)
+      })
+
+      setManagers(arrManagers) 
+    }
+    
+    fetchManagers();
+    
+  },[])
+
+  //get Contacts
   useEffect(() => {
     const arrClients = []
-    
+    //console.log(managers)
+
     clients.map((client) => {
+      let userIndex = managers.findIndex((manager) => manager.TG_ID === client.chatId);  
+      const userObject = managers[userIndex];
+      //console.log(userObject)
+      
       const newObj = {
         avatar: client.avatar,
         user: {
@@ -126,7 +118,7 @@ const Admin = () => {
         TG_ID: client.chatId,
         city: { name: 'Москва' },
         company: { name: 'U.L.E.Y', icon: cibCcMastercard },
-        phone: '+7 (900)123-12-12',
+        phone: userObject?.phone,
         usage: {
           value: 10,
           period: '01.01.2023 - 10.01.2023',
@@ -136,10 +128,12 @@ const Admin = () => {
       }
       arrClients.push(newObj)
     })
+    console.log('userbots: ', arrClients)
     
 		setContacts(arrClients)      
   }, [clients]);
 
+  //get Projects
   useEffect(() => {
     const arrProjects = []
 
@@ -230,7 +224,6 @@ const Admin = () => {
                               </CTableHeaderCell>
                               <CTableHeaderCell>Пользователь</CTableHeaderCell>
                               <CTableHeaderCell className="text-center">TG ID</CTableHeaderCell>
-                              <CTableHeaderCell className="text-center">Город</CTableHeaderCell>
                               <CTableHeaderCell className="text-center">Организация</CTableHeaderCell>
                               <CTableHeaderCell className="text-center">Телефон</CTableHeaderCell>
                               <CTableHeaderCell>Использование</CTableHeaderCell>
@@ -253,9 +246,6 @@ const Admin = () => {
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
                                   <div>{item.TG_ID}</div>
-                                </CTableDataCell>
-                                <CTableDataCell className="text-center">
-                                  <div>{item.city.name}</div>
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
                                   <div>{item.company.name}</div>
