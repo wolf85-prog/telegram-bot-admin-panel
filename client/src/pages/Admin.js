@@ -224,6 +224,7 @@ const Admin = () => {
                               </CTableHeaderCell>
                               <CTableHeaderCell>Пользователь</CTableHeaderCell>
                               <CTableHeaderCell className="text-center">TG ID</CTableHeaderCell>
+                              <CTableHeaderCell className="text-center">Город</CTableHeaderCell>
                               <CTableHeaderCell className="text-center">Организация</CTableHeaderCell>
                               <CTableHeaderCell className="text-center">Телефон</CTableHeaderCell>
                               <CTableHeaderCell>Использование</CTableHeaderCell>
@@ -246,6 +247,9 @@ const Admin = () => {
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
                                   <div>{item.TG_ID}</div>
+                                </CTableDataCell>
+                                <CTableDataCell className="text-center">
+                                  <div>{item.city.name}</div>
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
                                   <div>{item.company.name}</div>
