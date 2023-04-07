@@ -85,7 +85,7 @@ const Admin = () => {
           name: manager.fio,
           TG_ID: manager.tgID,
           phone: manager.phone,
-          sity: '',
+          comment: manager.comment,
           company: '',
         }
         arrManagers.push(newManager)
@@ -101,7 +101,7 @@ const Admin = () => {
   //get Contacts
   useEffect(() => {
     const arrClients = []
-    //console.log(managers)
+    console.log(managers)
 
     clients.map((client) => {
       let userIndex = managers.findIndex((manager) => manager.TG_ID === client.chatId);  
@@ -116,7 +116,7 @@ const Admin = () => {
           registered: '01.01.2023',
         },
         TG_ID: client.chatId,
-        city: { name: 'Москва' },
+        comment: userObject?.comment,
         company: { name: 'U.L.E.Y', icon: cibCcMastercard },
         phone: userObject?.phone,
         usage: {
@@ -224,9 +224,9 @@ const Admin = () => {
                               </CTableHeaderCell>
                               <CTableHeaderCell>Пользователь</CTableHeaderCell>
                               <CTableHeaderCell className="text-center">TG ID</CTableHeaderCell>
-                              <CTableHeaderCell className="text-center">Город</CTableHeaderCell>
                               <CTableHeaderCell className="text-center">Организация</CTableHeaderCell>
                               <CTableHeaderCell className="text-center">Телефон</CTableHeaderCell>
+                              <CTableHeaderCell className="text-center">Комментарий</CTableHeaderCell>
                               <CTableHeaderCell>Использование</CTableHeaderCell>
                               <CTableHeaderCell>Активность</CTableHeaderCell>
                               <CTableHeaderCell>Управление</CTableHeaderCell>
@@ -249,13 +249,13 @@ const Admin = () => {
                                   <div>{item.TG_ID}</div>
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
-                                  <div>{item.city.name}</div>
-                                </CTableDataCell>
-                                <CTableDataCell className="text-center">
                                   <div>{item.company.name}</div>
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
                                   <div>{item.phone}</div>
+                                </CTableDataCell>
+                                <CTableDataCell className="text-center">
+                                  <div>{item.comment}</div>
                                 </CTableDataCell>
                                 <CTableDataCell>
                                   <div className="clearfix">
