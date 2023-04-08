@@ -92,25 +92,25 @@ const DistributionAdd = () => {
   }
 
   {/* Отправка рассылки */}
-  const onSendText = () => {
+  const onSendText = async() => {
     console.log(selected)
+
+    const message = {
+      name: 'Рассылка', 
+      text: text, 
+      image: '', 
+      button: textButton, 
+      receivers: JSON.stringify(selected), 
+      datestart: Date.now(), 
+      delivered: 'true',        
+    }
+    console.log("message send button: ", message);
+
+    //сохранение рассылки в базе данных
+    await newDistribution(message)
     
     selected.map(async (user, index) => {
       console.log("Пользователю ID: " + user.value + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
-
-      const message = {
-        name: 'Рассылка ' + index+1, 
-        text: text, 
-        image: '', 
-        button: textButton, 
-        receivers: JSON.stringify(selected), 
-        datestart: Date.now(), 
-        delivered: 'true',        
-      }
-      console.log("message send button: ", message);
-
-		  //сохранение рассылки в базе данных
-		  await newDistribution(message)
       
       //Передаем данные боту
       const keyboard = JSON.stringify({
