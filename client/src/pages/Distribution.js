@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useState, useEffect } from 'react'
 import { Navigate, Route, Routes, Link } from 'react-router-dom'
 import { 
   CContainer, 
@@ -39,9 +39,10 @@ import {
 import avatar2 from 'src/assets/images/avatars/2.jpg'
 import deleteIcon from 'src/assets/images/delete.png'
 import pencilIcon from 'src/assets/images/pencil.png'
-
+import { getDistributions } from 'src/http/adminAPI';
 
 const Distribution = () => {
+  const [projects, setProjects]= useState([]);
 
   const tableDistribution = [
     {
@@ -54,6 +55,32 @@ const Distribution = () => {
       delivered: 'доставлено',
     }
   ]
+
+  //get Projects
+  useEffect(() => {
+    const arrDitributions = []
+
+    const fetchData = async () => {
+			let response = await getDistributions();
+      response.map(async (project) => {
+        const newDistribution = {
+					name: 'название',
+          text: 'текст рассылки',
+          image: 'https://',
+          button: 'текст кнопки',
+          receivers: '[]',
+          datestart: '01.01.2023',
+          delivered: 'доставлено',
+				}
+        arrDitributions.push(newDistribution)
+      })
+
+      setProjects(arrDitributions) 
+    }
+
+    fetchData();
+    
+  },[])
 
   const handleAddButton = () => {
 

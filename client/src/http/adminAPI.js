@@ -85,22 +85,20 @@ export const newDistribution = async (data) =>{
     }
 }
 
-export const delDistrib = async (id) =>{
+export const getDistributions = async()=>{
     try {
-        await $host.delete(`api/message/delete/${id}`); 
-    } catch (error) {
-        console.log("error while calling delMessage api",error.message);
-    }
+        let response = await $host.get('api/distributions/get');
+        //console.log(response);
+        return response.data;
+     } catch (error) {
+         console.log("error while calling getDistributions api", error.message);
+     }
 }
 
-
-export const getDistrib = async(id)=>{
+export const delDistrib = async (id) =>{
     try {
-        let response= await $host.get(`api/message/get/${id}`);
-        
-        return response.data;
+        await $host.delete(`api/distributions/delete/${id}`); 
     } catch (error) {
-        console.log("error while calling getMessages api",error.message);
-        
+        console.log("error while calling delMessage api",error.message);
     }
 }

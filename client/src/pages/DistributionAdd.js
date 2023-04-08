@@ -143,6 +143,8 @@ const DistributionAdd = () => {
     setTextButton('')
     setVisible(true)
     setValue('')
+
+    navigate('/distribution');
   }
 
   return (
