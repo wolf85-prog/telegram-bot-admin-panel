@@ -42,7 +42,7 @@ import pencilIcon from 'src/assets/images/pencil.png'
 import { getDistributions } from 'src/http/adminAPI';
 
 const Distribution = () => {
-  const [projects, setProjects]= useState([]);
+  const [distributions, setDistributions]= useState([]);
 
   const tableDistribution = [
     {
@@ -62,20 +62,20 @@ const Distribution = () => {
 
     const fetchData = async () => {
 			let response = await getDistributions();
-      response.map(async (project) => {
+      response.map(async (distrib) => {
         const newDistribution = {
-					name: 'название',
-          text: 'текст рассылки',
-          image: 'https://',
-          button: 'текст кнопки',
-          receivers: '[]',
-          datestart: '01.01.2023',
-          delivered: 'доставлено',
+					name: distrib.name,
+          text: distrib.text,
+          image: distrib.image,
+          button: distrib.button,
+          receivers: distrib.receivers,
+          datestart: distrib.datestart,
+          status: distrib.delivered ? "отправлено" : "не отправлено",
 				}
         arrDitributions.push(newDistribution)
       })
 
-      setProjects(arrDitributions) 
+      setDistributions(arrDitributions) 
     }
 
     fetchData();
@@ -123,7 +123,7 @@ const Distribution = () => {
                                   </CTableRow>
                                 </CTableHead>
                                 <CTableBody>
-                                  {tableDistribution.map((item, index) => (
+                                  {distributions.map((item, index) => (
                                     <CTableRow v-for="item in tableItems" key={index}>
                                       <CTableDataCell>
                                         <div>{index+1}</div>
