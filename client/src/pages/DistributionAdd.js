@@ -18,8 +18,9 @@ import {
 
 import { MultiSelect } from "react-multi-select-component";
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { uploadFile } from './../http/chatAPI';
 import { $host } from './../http/index'
+import { useNavigate } from 'react-router-dom';
+import { newDistribution } from './../http/adminAPI';
 
 const DistributionAdd = () => {
 
@@ -38,6 +39,12 @@ const DistributionAdd = () => {
   const [textButton, setTextButton] = useState('');
   const [file, setFile] = useState();
   const [value, setValue] = useState("");
+
+  const navigate = useNavigate();
+
+  const backPage = () => {
+       navigate('/distribution');
+  } 
 
   useEffect(() => {
     const arrClients = []
@@ -88,10 +95,22 @@ const DistributionAdd = () => {
   const onSendText = () => {
     console.log(selected)
     
-    selected.map(async (user) => {
+    selected.map(async (user, index) => {
       console.log("Пользователю ID: " + user.value + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
 
-      const text_send_chat = 'Пользователь нажал на кнопку в рассылке!'
+      const message = {
+        name: 'Рассылка ' + index+1, 
+        text: text, 
+        image: '', 
+        button: textButton, 
+        receivers: selected, 
+        datestart: Date.now(), 
+        delivered: 'true',        
+      }
+      console.log("message send button: ", message);
+
+		  //сохранение рассылки в базе данных
+		  await newDistribution(message)
       
       //Передаем данные боту
       const keyboard = JSON.stringify({
@@ -197,7 +216,7 @@ const DistributionAdd = () => {
                                 <div className="mb-3"></div>
 
                                 <div className="mb-3 text-center">
-                                  <p style={{color: '#fff'}} onClick={clickShowEditButton} > {showEditButtonAdd ? '- Убрать кнопку' : '+ Добавить кнопку'}</p>
+                                  <p style={{color: '#fff', cursor: 'pointer'}} onClick={clickShowEditButton} > {showEditButtonAdd ? '- Убрать кнопку' : '+ Добавить кнопку'}</p>
                                 </div>
 
                                 {/* Добавление кнопки */}
@@ -215,6 +234,7 @@ const DistributionAdd = () => {
                                 </CForm>
                                 <br/>
                                 <div className="mb-3" style={{textAlign: 'right'}}>
+                                  <CButton color="secondary" style={{marginRight: '15px'}} onClick={backPage}>Отмена</CButton>
                                   <CButton color="primary" onClick={onSendText}>Отправить рассылку</CButton>
                                 </div>
                               </CForm>

@@ -74,3 +74,33 @@ export const uploadFile = async (data) =>{
         
     }
 }
+
+
+//distribution
+export const newDistribution = async (data) =>{
+    try {
+        await $host.post(`api/distribution/add`, data); 
+    } catch (error) {
+        console.log("error while calling newDistribution api",error.message);
+    }
+}
+
+export const delDistrib = async (id) =>{
+    try {
+        await $host.delete(`api/message/delete/${id}`); 
+    } catch (error) {
+        console.log("error while calling delMessage api",error.message);
+    }
+}
+
+
+export const getDistrib = async(id)=>{
+    try {
+        let response= await $host.get(`api/message/get/${id}`);
+        
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getMessages api",error.message);
+        
+    }
+}

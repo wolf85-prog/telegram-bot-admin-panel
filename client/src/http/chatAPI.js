@@ -62,6 +62,7 @@ export const getConversation= async (id)=>{
     }
 }
 
+// message
 export const newMessage = async (data) =>{
     try {
         await $host.post(`api/message/add`, data); 
@@ -90,6 +91,7 @@ export const getMessages = async(id)=>{
     }
 }
 
+//file
 export const uploadFile = async (data) =>{
     try {
         return await $host.post(`api/file/upload`, data, {
