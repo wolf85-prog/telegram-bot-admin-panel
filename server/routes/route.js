@@ -32,7 +32,7 @@ route.get('/userbots/get/:id', getUser)
 route.patch('/userbots/update/:id', editUser)
 route.patch('/userbots/updatefile/:id', editUserAvatar)
 
-route.post('/distributions/add', newDistribution)
+route.post('/distribution/add', newDistribution)
 route.get('/distributions/get', getDistributions)
 route.get('/distributions/get/:id', getDistributionsId)
 route.get('/distribution/get/:id', getDistribution)
