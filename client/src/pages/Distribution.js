@@ -58,22 +58,33 @@ const Distribution = () => {
 
   //get Projects
   useEffect(() => {
-    const arrDitributions = []
-
     const fetchData = async () => {
 			let response = await getDistributions();
-      response.map(async (distrib) => {
+      //console.log("response: ", response)
+
+      let strReceivers = ''
+
+      const arrDitributions = []
+      response.map((distrib, index) => {
+        //console.log("receivers: ", JSON.parse(distrib.receivers))
+        JSON.parse(distrib.receivers).map((receiver)=>{
+          //console.log("label: ", receiver.label)
+          strReceivers = receiver.label + ' '
+        })
         const newDistribution = {
 					name: distrib.name,
           text: distrib.text,
           image: distrib.image,
           button: distrib.button,
-          receivers: distrib.receivers,
-          datestart: distrib.datestart,
+          receivers: strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
+          datestart: distrib.createdAt,
           status: distrib.delivered ? "отправлено" : "не отправлено",
 				}
+        console.log(index)
         arrDitributions.push(newDistribution)
       })
+
+      //console.log("arr: ", arrDitributions)
 
       setDistributions(arrDitributions) 
     }
