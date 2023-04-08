@@ -103,7 +103,7 @@ const DistributionAdd = () => {
         text: text, 
         image: '', 
         button: textButton, 
-        receivers: selected, 
+        receivers: JSON.stringify(selected), 
         datestart: Date.now(), 
         delivered: 'true',        
       }
