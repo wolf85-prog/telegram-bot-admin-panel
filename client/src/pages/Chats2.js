@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState, useContext } from 'react'
-import { CContainer, CSpinner } from '@coreui/react'
+import { CContainer, CSpinner, CNav, CNavLink, CNavItem } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeaderChat } from '../components/index'
 
 import "./../chat-app-new/App.css";
@@ -39,6 +39,27 @@ const Chats2 = () => {
 
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
+
+                  {/* <CNav variant="tabs">
+                    <CNavItem>
+                      <CNavLink href="#" active>
+                        Active
+                      </CNavLink>
+                    </CNavItem>
+                    <CNavItem>
+                      <CNavLink href="#">Link</CNavLink>
+                    </CNavItem>
+                    <CNavItem>
+                      <CNavLink href="#">Link</CNavLink>
+                    </CNavItem>
+                    <CNavItem>
+                      <CNavLink href="#" disabled>
+                        Disabled
+                      </CNavLink>
+                    </CNavItem>
+                  </CNav> */}
+                  
+                  
                   <div className="app">
                     <p className="app__mobile-message"> Доступно только на компьютере 😊. </p> 
                     <div className="app-content">

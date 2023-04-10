@@ -24,14 +24,26 @@ const _nav = [
     name: 'Основные разделы',
   },
   {
-    component: CNavItem,
+    component: CNavGroup,
     name: 'Чаты',
     to: '/chat2',
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: '1',
-    },
+    items: [
+      {
+        component: CNavItem,
+        name: 'Заказчики',
+        to: '/chat2',
+        badge: {
+          color: 'info',
+          text: '1',
+        },
+      },
+      {
+        component: CNavItem,
+        name: 'Проекты',
+        to: '/chat3',
+      },
+    ],
   },
   // {
   //   component: CNavGroup,
