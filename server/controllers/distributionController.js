@@ -42,6 +42,19 @@ class DistributionController {
             return res.status(500).json(err);
         }
     }
+
+    //delete message
+    async delDistribution(req, res) {
+        const id = req.params.id
+        try {
+            await Distribution.destroy({
+                where: { id: String(id) },
+            })
+            return res.status(200).json("Distribution has been delete successfully");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
 }
 
 module.exports = new DistributionController()

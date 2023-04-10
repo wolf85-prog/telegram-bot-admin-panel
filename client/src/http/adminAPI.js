@@ -95,7 +95,7 @@ export const getDistributions = async()=>{
      }
 }
 
-export const delDistrib = async (id) =>{
+export const delDistribution = async (id) =>{
     try {
         await $host.delete(`api/distributions/delete/${id}`); 
     } catch (error) {

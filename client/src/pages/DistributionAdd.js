@@ -21,14 +21,16 @@ import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { $host } from './../http/index'
 import { useNavigate } from 'react-router-dom';
 import { newDistribution } from './../http/adminAPI';
+import { newMessage } from './../http/chatAPI';
 
 const DistributionAdd = () => {
 
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 	const host = process.env.REACT_APP_API_URL
-  const admin_user = process.env.REACT_APP_CHAT_ADMIN_ID
+  const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
   const { users: clients } = useUsersContext();
+  const { addNewMessage } = useUsersContext();
   const [contacts, setContacts]= useState([]);
 
   const [selected, setSelected] = useState([]);
@@ -121,20 +123,53 @@ const DistributionAdd = () => {
         ]
       });
 
+      let sendToTelegram
       if (text !== '') {
         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
-        const sendToTelegram = await $host.get(url_send_msg);
+        sendToTelegram = await $host.get(url_send_msg);
         console.log('sendToTelegram: ', sendToTelegram)
       }  
 
       const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.value}&reply_markup=${keyboard}`
+      let sendPhotoToTelegram
       if (file) {
         const form = new FormData();
         form.append("photo", file);
 
-        const sendPhotoToTelegram = await $host.post(url_send_photo, form);
+        sendPhotoToTelegram = await $host.post(url_send_photo, form);
         console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
       } 
+
+      let message = {};
+        if(!file) {
+            message = {
+                senderId: chatAdminId, 
+                receiverId: user.value,
+                conversationId: user.conversationId,
+                type: "text",
+                text: text,
+                is_bot: true,
+				        messageId: sendToTelegram.data.result.message_id,
+            }
+        } else {
+            message = {
+                senderId: chatAdminId, 
+                receiverId: user.value,
+                conversationId: user.conversationId,
+                type: "file",
+                text: host,
+                is_bot: true,
+				        messageId: sendPhotoToTelegram.data.result.message_id,
+            }
+        }
+        console.log("message send: ", message);
+
+        //сохранение сообщения в базе данных
+		    await newMessage(message)
+
+		    //сохранить в контексте
+		    //addNewMessage(user.value, text, user.conversationId, sendPhotoToTelegram.data.result.message_id);
+
     })
 
     setSelected([])

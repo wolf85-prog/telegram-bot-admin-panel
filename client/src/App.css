@@ -204,6 +204,7 @@
     --cui-card-border-color: hsla(0,0%,100%,.075);
     /* --cui-card-cap-bg: #282933; */
     --cui-card-cap-bg: #131c21;
+    --cui-card-cap-color: #ffffff;
 }
 
 /* .dark-theme .card-header {

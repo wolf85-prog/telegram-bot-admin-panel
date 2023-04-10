@@ -39,22 +39,10 @@ import {
 import avatar2 from 'src/assets/images/avatars/2.jpg'
 import deleteIcon from 'src/assets/images/delete.png'
 import pencilIcon from 'src/assets/images/pencil.png'
-import { getDistributions } from 'src/http/adminAPI';
+import { getDistributions, delDistribution } from 'src/http/adminAPI';
 
 const Distribution = () => {
   const [distributions, setDistributions]= useState([]);
-
-  const tableDistribution = [
-    {
-      name: 'название',
-      text: 'текст рассылки',
-      image: 'https://',
-      button: 'текст кнопки',
-      receivers: '[]',
-      datestart: '01.01.2023',
-      delivered: 'доставлено',
-    }
-  ]
 
   //get Projects
   useEffect(() => {
@@ -71,30 +59,43 @@ const Distribution = () => {
           //console.log("label: ", receiver.label)
           strReceivers = receiver.label + ' '
         })
+
+        const d = new Date(distrib.createdAt);
+				const year = d.getFullYear();
+				const month = String(d.getMonth()+1).padStart(2, "0");
+				const day = String(d.getDate()).padStart(2, "0");
+				const chas = d.getHours();
+				const minut = String(d.getMinutes()).padStart(2, "0");
+				const newDateMessage = `${day}.${month}.${year}`
+
         const newDistribution = {
+          id: distrib.id,
 					name: distrib.name,
           text: distrib.text,
           image: distrib.image,
           button: distrib.button,
           receivers: strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
-          datestart: distrib.createdAt,
+          datestart: newDateMessage,
           status: distrib.delivered ? "отправлено" : "не отправлено",
 				}
-        console.log(index)
+        //console.log(index)
         arrDitributions.push(newDistribution)
       })
 
       //console.log("arr: ", arrDitributions)
 
-      setDistributions(arrDitributions) 
+      setDistributions(arrDitributions.reverse()) 
     }
 
     fetchData();
     
   },[])
 
-  const handleAddButton = () => {
-
+  {/* Удаление рассылки */}
+  const removeDescription = async(desk) => {
+    setDistributions(distributions.filter(p => p.id !== desk.id))
+    //удаление сообщения в базе данных
+    await delDistribution(desk.id)
   }
 
   return (
@@ -108,7 +109,7 @@ const Distribution = () => {
                 <Suspense fallback={<CSpinner color="primary" />}>
                   <>
                     <h2>Рассылки</h2>
-                      <Link to={'/distribution_add'}><CButton color="primary" size="lg" onClick={handleAddButton}>Новая рассылка</CButton></Link>
+                      <Link to={'/distribution_add'}><CButton color="primary" size="lg" >Новая рассылка</CButton></Link>
                       <br />
                       <br />
                       <CRow>
@@ -122,13 +123,13 @@ const Distribution = () => {
                               <CTable align="middle" className="mb-0 border" hover responsive>
                                 <CTableHead className='table-dark'>
                                   <CTableRow>
-                                    <CTableHeaderCell>ID</CTableHeaderCell>
-                                    <CTableHeaderCell>Название</CTableHeaderCell>
+                                    <CTableHeaderCell>№</CTableHeaderCell>
+                                    {/* <CTableHeaderCell>Название</CTableHeaderCell> */}
+                                    <CTableHeaderCell>Дата</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Текст</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Картинка</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Кнопка</CTableHeaderCell>
-                                    <CTableHeaderCell>Получатели</CTableHeaderCell>
-                                    <CTableHeaderCell>Дата отправки</CTableHeaderCell>
+                                    <CTableHeaderCell>Получатели</CTableHeaderCell>   
                                     <CTableHeaderCell>Статус</CTableHeaderCell>
                                     <CTableHeaderCell>Управление</CTableHeaderCell>
                                   </CTableRow>
@@ -139,12 +140,15 @@ const Distribution = () => {
                                       <CTableDataCell>
                                         <div>{index+1}</div>
                                       </CTableDataCell>
-                                      <CTableDataCell>
+                                      {/* <CTableDataCell>
                                         <div>{item.name}</div>
-                                        {/* <div className="small text-medium-emphasis">
+                                        <div className="small text-medium-emphasis">
                                           <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registered:{' '}
                                           {item.user.registered}
-                                        </div> */}
+                                        </div> 
+                                      </CTableDataCell>*/}
+                                      <CTableDataCell>
+                                        <div>{item.datestart}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         <div>{item.text}</div>
@@ -159,17 +163,14 @@ const Distribution = () => {
                                         <div>{item.receivers}</div>
                                       </CTableDataCell>
                                       <CTableDataCell>
-                                        <div>{item.datestart}</div>
-                                      </CTableDataCell>
-                                      <CTableDataCell>
                                         <div>{item.status}</div>
                                       </CTableDataCell>
-                                      <CTableDataCell>
-                                        <CButton color="light">
+                                      <CTableDataCell className="text-center">
+                                        {/* <CButton color="light">
                                           <img src={pencilIcon} alt='' width='15px'/>
                                         </CButton>
-                                        &nbsp;
-                                        <CButton color="light">
+                                        &nbsp; */}
+                                        <CButton color="light" onClick={() => removeDescription(item)}>
                                           <img src={deleteIcon} alt='' width='10px' />
                                         </CButton>
                                       </CTableDataCell>
