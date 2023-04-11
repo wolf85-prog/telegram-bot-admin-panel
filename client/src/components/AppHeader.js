@@ -43,10 +43,10 @@ const AppHeader = () => {
             </CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="/chats2">Заказчики</CNavLink>
+            <CNavLink href="/chat2">Заказчики</CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="/chats3">Проекты</CNavLink>
+            <CNavLink href="/chats">Проекты</CNavLink>
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav>
