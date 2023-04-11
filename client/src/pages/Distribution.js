@@ -66,7 +66,7 @@ const Distribution = () => {
 				const day = String(d.getDate()).padStart(2, "0");
 				const chas = d.getHours();
 				const minut = String(d.getMinutes()).padStart(2, "0");
-				const newDateMessage = `${day}.${month}.${year}`
+				const newDateMessage = `${day}.${month}.${year} ${chas}:${minut}`
 
         const newDistribution = {
           id: distrib.id,
@@ -125,13 +125,13 @@ const Distribution = () => {
                                   <CTableRow>
                                     <CTableHeaderCell>№</CTableHeaderCell>
                                     {/* <CTableHeaderCell>Название</CTableHeaderCell> */}
-                                    <CTableHeaderCell>Дата</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Текст</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Картинка</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Кнопка</CTableHeaderCell>
-                                    <CTableHeaderCell>Получатели</CTableHeaderCell>   
-                                    <CTableHeaderCell>Статус</CTableHeaderCell>
-                                    <CTableHeaderCell>Управление</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center">Получатели</CTableHeaderCell>   
+                                    <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center">Управление</CTableHeaderCell>
                                   </CTableRow>
                                 </CTableHead>
                                 <CTableBody>
@@ -147,7 +147,7 @@ const Distribution = () => {
                                           {item.user.registered}
                                         </div> 
                                       </CTableDataCell>*/}
-                                      <CTableDataCell>
+                                      <CTableDataCell className="text-center">
                                         <div>{item.datestart}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
@@ -159,10 +159,10 @@ const Distribution = () => {
                                       <CTableDataCell className="text-center">
                                         <div>{item.button}</div>
                                       </CTableDataCell>
-                                      <CTableDataCell>
+                                      <CTableDataCell className="text-center">
                                         <div>{item.receivers}</div>
                                       </CTableDataCell>
-                                      <CTableDataCell>
+                                      <CTableDataCell className="text-center">
                                         <div>{item.status}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">

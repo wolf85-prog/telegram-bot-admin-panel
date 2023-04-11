@@ -113,6 +113,8 @@ const DistributionAdd = () => {
     
     selected.map(async (user, index) => {
       console.log("Пользователю ID: " + user.value + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
+
+      let client = clients.filter((client) => client.chatId === user.value.toString())[0];
       
       //Передаем данные боту
       const keyboard = JSON.stringify({
@@ -145,7 +147,7 @@ const DistributionAdd = () => {
             message = {
                 senderId: chatAdminId, 
                 receiverId: user.value,
-                conversationId: user.conversationId,
+                conversationId: client.conversationId,
                 type: "text",
                 text: text,
                 is_bot: true,
@@ -155,9 +157,9 @@ const DistributionAdd = () => {
             message = {
                 senderId: chatAdminId, 
                 receiverId: user.value,
-                conversationId: user.conversationId,
+                conversationId: client.conversationId,
                 type: "file",
-                text: host,
+                text: host + '/image',
                 is_bot: true,
 				        messageId: sendPhotoToTelegram.data.result.message_id,
             }
