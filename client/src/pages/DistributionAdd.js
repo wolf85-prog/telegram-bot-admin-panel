@@ -170,7 +170,12 @@ const DistributionAdd = () => {
 		    await newMessage(message)
 
 		    //сохранить в контексте
-		    //addNewMessage(user.value, text, user.conversationId, sendPhotoToTelegram.data.result.message_id);
+        if(!file) {
+          addNewMessage(user.value, text, client.conversationId, sendToTelegram.data.result.message_id);
+        } else {
+          addNewMessage(user.value, host + '/image', client.conversationId, sendPhotoToTelegram.data.result.message_id);
+        }
+		    
 
     })
 
