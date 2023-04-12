@@ -14,6 +14,7 @@ import {
   CFormTextarea,
   CButton,
   CAlert,
+  CFormCheck,
 } from '@coreui/react'
 
 import { MultiSelect } from "react-multi-select-component";
@@ -21,7 +22,7 @@ import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { $host } from './../http/index'
 import { useNavigate } from 'react-router-dom';
 import { newDistribution } from './../http/adminAPI';
-import { newMessage } from './../http/chatAPI';
+import { newMessage, uploadFile } from './../http/chatAPI';
 
 const DistributionAdd = () => {
 
@@ -38,9 +39,11 @@ const DistributionAdd = () => {
   const [countChar, setCountChar] = useState(0);
   const [visible, setVisible] = useState(false);
   const [showEditButtonAdd, setShowEditButtonAdd] = useState(false);
+  const [sendToAdmin, setSendToAdmin] = useState(false);
   const [textButton, setTextButton] = useState('');
   const [file, setFile] = useState();
   const [value, setValue] = useState("");
+  const [image, setImage]= useState("");
 
   const navigate = useNavigate();
 
@@ -71,6 +74,12 @@ const DistributionAdd = () => {
         if (file) {
           const formfile = new FormData();
           formfile.append("photo", file);
+          let response = await uploadFile(formfile);
+          //console.log("response: ", response)
+
+          setImage(response.data.path);
+          //сообщение с ссылкой на файл
+          //setValue(host + response.data.path)
         }
     }
     getImage();
@@ -91,6 +100,10 @@ const DistributionAdd = () => {
 
   const onChangeTextButton = (e) => {
     setTextButton(e.target.value)
+  }
+
+  const onChangeCheck = (e) => {
+    setSendToAdmin(e.target.value)
   }
 
   {/* Отправка рассылки */}
@@ -142,7 +155,8 @@ const DistributionAdd = () => {
         console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
       } 
 
-      let message = {};
+      if (sendToAdmin) {
+        let message = {};
         if(!file) {
             message = {
                 senderId: chatAdminId, 
@@ -158,8 +172,8 @@ const DistributionAdd = () => {
                 senderId: chatAdminId, 
                 receiverId: user.value,
                 conversationId: client.conversationId,
-                type: "file",
-                text: host + '/image',
+                type: "image",
+                text: host + image,
                 is_bot: true,
 				        messageId: sendPhotoToTelegram.data.result.message_id,
             }
@@ -173,13 +187,17 @@ const DistributionAdd = () => {
         if(!file) {
           addNewMessage(user.value, text, client.conversationId, sendToTelegram.data.result.message_id);
         } else {
-          addNewMessage(user.value, host + '/image', client.conversationId, sendPhotoToTelegram.data.result.message_id);
+          addNewMessage(user.value, host + image, client.conversationId, sendPhotoToTelegram.data.result.message_id);
         }
+      }
+
+      
 		    
 
     })
 
     setSelected([])
+    setSendToAdmin(false)
     setText('')
     setShowEditButtonAdd(false)
     setTextButton('')
@@ -231,6 +249,16 @@ const DistributionAdd = () => {
                                   />
                                   <h6>Получателей: <span>{selected.length}</span></h6>
                                 </div>
+
+                                <div className='mb-3'>
+                                  <CFormCheck 
+                                    id="flexCheckDefault" 
+                                    label="Дублировать в админку"
+                                    onChange={onChangeCheck}
+                                    defaultChecked={sendToAdmin}
+                                  />
+                                </div>
+
                                 <div className="mb-3">
                                   {/* <CFormLabel htmlFor="exampleFormControlTextarea1">Текст сообщения</CFormLabel> */}
                                   <CFormTextarea 

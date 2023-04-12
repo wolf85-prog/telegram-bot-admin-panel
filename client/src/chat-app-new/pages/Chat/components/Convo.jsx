@@ -118,7 +118,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 										}`}
 										ref={assignRef()}
 									>
-										<img src={media} alt="" className="chat__img" />
+										<img src={message.content} alt="" className="chat__img" />
 										<span className="chat__msg-footer">
 											<span>{formatTime(message.time)}</span>
 											{!message.sender && (

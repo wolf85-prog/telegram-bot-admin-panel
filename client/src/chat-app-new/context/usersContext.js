@@ -52,9 +52,22 @@ const UsersProvider = ({ children }) => {
 
 					const newDateMessage = `${day}.${month}.${year}`
 
+					let messImage
+
+					if (message.text.includes('png')) {
+						messImage = true
+					} else if (message.text.includes('jpg')) {
+						messImage = true
+					} else if (message.text.includes('jpeg')) {
+						messImage = true
+					} else {
+						messImage = false
+					}
+
 					const newMessage = {
 						date: newDateMessage,
 						content: message.text,
+						image: messImage,
 						sender: message.senderId,
 						time: chas + ' : ' + minut,
 						status: 'sent',

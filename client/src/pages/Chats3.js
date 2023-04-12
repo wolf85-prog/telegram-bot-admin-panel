@@ -20,15 +20,7 @@ const Chats2 = () => {
 
 	useEffect(() => {
 		document.body.classList.add("dark-theme");
-		//stopLoad();
 	});   
-
-	// const stopLoad = () => {
-	// 	setStartLoadProgress(true);
-	// 	setTimeout(() => setAppLoaded(true), 3000);
-	// };       
-
-	// if (!appLoaded) return <Loader done={startLoadProgress} />;
 
   return (
     <div>
@@ -38,16 +30,10 @@ const Chats2 = () => {
         <div className="body flex-grow-1 px-3">
 
             <CContainer lg>
-                <Suspense fallback={<CSpinner color="primary" />}>                 
-                  
-                  <div className="app">
-                    <p className="app__mobile-message"> Доступно только на компьютере 😊. </p> 
-                    <div className="app-content">
-                      <Sidebar />
-                              {Object.keys(person).length ? <Chat /> : <Home /> }
-                    </div>
-                  </div>
-
+                <Suspense fallback={<CSpinner color="primary" />}>
+                  <h2>Проекты</h2>
+                  <h5>Раздел находится в разработке</h5>
+                  <iframe src ="https://webz.telegram.org" width = {700} height = {500}></iframe>
                 </Suspense>
             </CContainer>
 
