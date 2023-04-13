@@ -163,7 +163,11 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											<Icon id="downArrow" className="chat__msg-options-icon" />
 										</button> */}
 										<Dropdown onSelect={change} style={{backgroundColor: '#2a2f32'}}>
-											<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
+											<Dropdown.Toggle 
+												as={CustomToggle} 
+												id="dropdown-custom-components"
+												align={{lg: "start" }}
+											>											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenu}>
 											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: person.id})}>Удалить сообщение</Dropdown.Item>
@@ -202,7 +206,11 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 										</button> */}
 
 										<Dropdown onSelect={change}>
-											<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
+											<Dropdown.Toggle 
+												as={CustomToggle} 
+												id="dropdown-custom-components"
+												align={{lg: "start" }}
+											>											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenu}>
 											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: person.id})}>Удалить сообщение</Dropdown.Item>
