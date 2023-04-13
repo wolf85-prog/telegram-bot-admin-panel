@@ -173,7 +173,7 @@ const DistributionAdd = () => {
                 receiverId: user.value,
                 conversationId: client.conversationId,
                 type: "image",
-                text: host + image,
+                text: host + image + '|' + textButton,
                 is_bot: true,
 				        messageId: sendPhotoToTelegram.data.result.message_id,
             }
@@ -187,12 +187,9 @@ const DistributionAdd = () => {
         if(!file) {
           addNewMessage(user.value, text, client.conversationId, sendToTelegram.data.result.message_id);
         } else {
-          addNewMessage(user.value, host + image, client.conversationId, sendPhotoToTelegram.data.result.message_id);
+          addNewMessage(user.value, host + image + '|' + textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
         }
-      }
-
-      
-		    
+      }  
 
     })
 

@@ -118,32 +118,36 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 										}`}
 										ref={assignRef()}
 									>
-										<img src={message.content} alt="" className="chat__img" />
-										<span className="chat__msg-footer">
-											<span>{formatTime(message.time)}</span>
-											{!message.sender && (
-												<Icon
-													id={
-														message?.status === "sent"
-															? "singleTick"
-															: "doubleTick"
-													}
-													aria-label={message?.status}
-													className={`chat__msg-status-icon ${
-														message?.status === "read"
-															? "chat__msg-status-icon--blue"
-															: ""
-													}`}
-												/>
-											)}
-										</span>
+										<figure>
+											<img src={message.content} alt="" className="chat__img" />
+											<span className="chat__msg-footer">
+												<span>{formatTime(message.time)}</span>
+												{!message.sender && (
+													<Icon
+														id={
+															message?.status === "sent"
+																? "singleTick"
+																: "doubleTick"
+														}
+														aria-label={message?.status}
+														className={`chat__msg-status-icon ${
+															message?.status === "read"
+																? "chat__msg-status-icon--blue"
+																: ""
+														}`}
+													/>
+												)}
+											</span>
 
-										<button
-											aria-label="Message options"
-											className="chat__msg-options"
-										>
-											<Icon id="downArrow" className="chat__msg-options-icon" />
-										</button>
+											<button
+												aria-label="Message options"
+												className="chat__msg-options"
+											>
+												<Icon id="downArrow" className="chat__msg-options-icon" />
+											</button>
+											<figcaption>{message.descript}</figcaption>
+										</figure>
+										
 									</div>
 								) : message.sender !== chatAdminId ? (
 									<p className="chat__msg chat__msg--rxd" ref={assignRef()}>
