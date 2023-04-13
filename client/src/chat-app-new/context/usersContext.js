@@ -67,7 +67,7 @@ const UsersProvider = ({ children }) => {
 					const newMessage = {
 						date: newDateMessage,
 						content: message.text,
-						image: messImage,
+						//image: messImage,
 						sender: message.senderId,
 						time: chas + ' : ' + minut,
 						status: 'sent',

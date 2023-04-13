@@ -33,7 +33,7 @@ const Chats2 = () => {
                 <Suspense fallback={<CSpinner color="primary" />}>
                   <h2>Проекты</h2>
                   <h5>Раздел находится в разработке</h5>
-                  <iframe src ="https://webz.telegram.org" width = {700} height = {500}></iframe>
+                  
                 </Suspense>
             </CContainer>
 
