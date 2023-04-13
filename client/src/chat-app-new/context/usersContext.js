@@ -21,6 +21,8 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			let response = await getContacts();
+
+			console.log("response: ", response)
 	
 			const arrayContact = []
 	
@@ -52,22 +54,10 @@ const UsersProvider = ({ children }) => {
 
 					const newDateMessage = `${day}.${month}.${year}`
 
-					let messImage
-
-					if (message.text.includes('png')) {
-						messImage = true
-					} else if (message.text.includes('jpg')) {
-						messImage = true
-					} else if (message.text.includes('jpeg')) {
-						messImage = true
-					} else {
-						messImage = false
-					}
-
 					const newMessage = {
 						date: newDateMessage,
 						content: message.text,
-						//image: messImage,
+						image: message.type === 'image' ? true : false,
 						sender: message.senderId,
 						time: chas + ' : ' + minut,
 						status: 'sent',
