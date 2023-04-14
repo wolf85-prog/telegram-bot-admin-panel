@@ -21,7 +21,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			let response = await getContacts();
-			console.log("response: ", response)
+			console.log("response: ", response.length)
 	
 			const arrayContact = []
 	
@@ -57,7 +57,7 @@ const UsersProvider = ({ children }) => {
 						date: newDateMessage,
 						content: message.text,
 						image: message.type === 'image' ? true : false,
-						descript: '',
+						descript: message.buttons ? message.buttons : '',
 						sender: message.senderId,
 						time: chas + ' : ' + minut,
 						status: 'sent',
