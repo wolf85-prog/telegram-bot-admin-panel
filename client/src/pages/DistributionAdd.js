@@ -74,14 +74,16 @@ const DistributionAdd = () => {
         if (file) {
           console.log("file:", file)
           const data = new FormData();
-          data.append("photo", file);
+          data.append("name", file.name);
+          data.append("filedata", file);
+          
           let response = await uploadFile(data);
           console.log("response: ", response.data.path)
 
           setImage(response.data.path);
           //сообщение с ссылкой на файл
           console.log(host + response.data.path)
-          setValue(host + response.data.path)
+          //setValue(host + response.data.path)
         }
     }
     getImage();
@@ -151,8 +153,9 @@ const DistributionAdd = () => {
       const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.value}&reply_markup=${keyboard}`
       let sendPhotoToTelegram
       if (file) {
+
         const form = new FormData();
-        form.append("photo", file);
+        form.append("filedata", file);
 
         sendPhotoToTelegram = await $host.post(url_send_photo, form);
         console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
@@ -279,7 +282,7 @@ const DistributionAdd = () => {
                                     type="file" 
                                     id="formFile" 
                                     label="Добавить картинку" 
-                                    name="photo"
+                                    name="filedata"
                                     onChange={(e) => onFileChange(e)}
                                     value={value}
                                   />
