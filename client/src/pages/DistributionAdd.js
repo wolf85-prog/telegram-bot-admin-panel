@@ -75,7 +75,7 @@ const DistributionAdd = () => {
           const formfile = new FormData();
           formfile.append("photo", file);
           let response = await uploadFile(formfile);
-          //console.log("response: ", response)
+          console.log("response: ", response.data.path)
 
           setImage(response.data.path);
           //сообщение с ссылкой на файл

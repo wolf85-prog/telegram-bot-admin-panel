@@ -36,6 +36,8 @@ import {
   cilCloudDownload,
   cilPeople,
 } from '@coreui/icons'
+import DataTable from 'react-data-table-component';
+
 import avatar2 from 'src/assets/images/avatars/2.jpg'
 import deleteIcon from 'src/assets/images/delete.png'
 import pencilIcon from 'src/assets/images/pencil.png'
