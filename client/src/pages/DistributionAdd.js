@@ -72,14 +72,16 @@ const DistributionAdd = () => {
   useEffect(() => {
     const getImage = async () => {
         if (file) {
-          const formfile = new FormData();
-          formfile.append("photo", file);
-          let response = await uploadFile(formfile);
+          console.log("file:", file)
+          const data = new FormData();
+          data.append("photo", file);
+          let response = await uploadFile(data);
           console.log("response: ", response.data.path)
 
           setImage(response.data.path);
           //сообщение с ссылкой на файл
-          //setValue(host + response.data.path)
+          console.log(host + response.data.path)
+          setValue(host + response.data.path)
         }
     }
     getImage();
@@ -110,6 +112,7 @@ const DistributionAdd = () => {
   const onSendText = async() => {
     console.log(selected)
 
+    //новая рассылка
     const message = {
       name: 'Рассылка', 
       text: text, 
