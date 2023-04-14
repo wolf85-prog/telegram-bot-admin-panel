@@ -182,7 +182,7 @@ const DistributionAdd = () => {
                 receiverId: user.value,
                 conversationId: client.conversationId,
                 type: "image",
-                text: host + image + '|' + textButton,
+                text: host + image,
                 is_bot: true,
 				        messageId: sendPhotoToTelegram.data.result.message_id,
             }

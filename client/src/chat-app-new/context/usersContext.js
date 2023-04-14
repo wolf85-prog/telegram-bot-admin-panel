@@ -53,13 +53,11 @@ const UsersProvider = ({ children }) => {
 
 					const newDateMessage = `${day}.${month}.${year}`
 
-					//const message_url = message.text.split('|')
-
 					const newMessage = {
 						date: newDateMessage,
-						content: message.text, //message.type !== 'image' ? message.text : message_url[0],
+						content: message.text,
 						image: message.type === 'image' ? true : false,
-						descript: '', //message_url[1] ? message_url[1] : '',
+						descript: '',
 						sender: message.senderId,
 						time: chas + ' : ' + minut,
 						status: 'sent',
