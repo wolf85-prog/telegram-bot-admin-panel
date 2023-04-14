@@ -40,7 +40,7 @@ route.delete('/distributions/delete/:id', delDistribution)
 route.get('/reports/get', getReports)
 route.get('/reports/get/:id', getReportsId)
 
-route.post("/file/upload", upload.single("filedata"), uploadFile);
+route.post("/file/upload", upload.single("photo"), uploadFile);
 route.get("/file/:filename", getImage);
 
 module.exports = route
