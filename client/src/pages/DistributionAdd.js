@@ -82,7 +82,7 @@ const DistributionAdd = () => {
 
           setImage(response.data.path);
           //сообщение с ссылкой на файл
-          console.log(host + response.data.path)
+          //console.log(host + response.data.path)
           //setValue(host + response.data.path)
         }
     }
@@ -98,7 +98,6 @@ const DistributionAdd = () => {
   {/* Показать Добавление текста кнопки */}
   const clickShowEditButton = (e) => {
     e.preventDefault();
-
     showEditButtonAdd ? setShowEditButtonAdd (false) : setShowEditButtonAdd (true)
   }
 
@@ -118,7 +117,7 @@ const DistributionAdd = () => {
     const message = {
       name: 'Рассылка', 
       text: text, 
-      image: '', 
+      image: host + image, 
       button: textButton, 
       receivers: JSON.stringify(selected), 
       datestart: Date.now(), 

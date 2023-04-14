@@ -156,7 +156,7 @@ const Distribution = () => {
                                         <div>{item.text}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <div>{item.image}</div>
+                                        <div><img src={item.image} width={30} height={30}></img></div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         <div>{item.button}</div>
