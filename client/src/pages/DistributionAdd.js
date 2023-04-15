@@ -199,11 +199,11 @@ const DistributionAdd = () => {
 		    await newMessage(message)
 
 		    //сохранить в контексте
-        // if(!file) {
-        //   addNewMessage(user.value, text, client.conversationId, sendToTelegram.data.result.message_id);
-        // } else {
-        //   addNewMessage(user.value, host + image, textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
-        // }
+        if(!file) {
+          addNewMessage(user.value, text, client.conversationId, sendToTelegram.data.result.message_id);
+        } else {
+          addNewMessage(user.value, host + image, textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
+        }
 
 
         // Подключаемся к серверу socket
