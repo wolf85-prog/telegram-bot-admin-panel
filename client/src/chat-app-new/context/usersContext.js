@@ -297,7 +297,7 @@ const UsersProvider = ({ children }) => {
 			receiverId: userId,
 			text: message,
 			type: type,
-			button: textButton,
+			buttons: textButton,
 			convId: convId,
 			messageId,
 		})
