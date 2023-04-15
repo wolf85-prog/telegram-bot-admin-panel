@@ -68,9 +68,7 @@ const Profile = ({ user }) => {
 	const sendFile = React.useCallback(async () => {
 		try {
 			const data = new FormData();
-            data.append("filedata", img);
-
-			console.log("file data: ", data)
+            data.append("photo", img);
 
             let response = await uploadFile(data);
 			console.log("response: ", response.data)
@@ -108,7 +106,7 @@ const Profile = ({ user }) => {
 					
 					
 					<div className="round_adm">
-						<input type="file" name="filedata" onChange={handleAvatar}/>
+						<input type="file" name="photo" onChange={handleAvatar}/>
 						<i className = "fa fa-camera" style={{color: '#fff'}}></i>
 					</div>						
 				</div>
