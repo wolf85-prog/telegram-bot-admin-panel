@@ -204,32 +204,6 @@ const DistributionAdd = () => {
         } else {
           addNewMessage(user.value, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
         }
-
-
-        // Подключаемся к серверу socket
-        // let socket = io(socketUrl);
-
-        // socket.emit("addUser", user.value)
-
-        // if(!file) {
-        //   socket.emit("sendMessage", {
-        //     senderId: chatAdminId,
-        //     receiverId: user.value,
-        //     text: text,
-        //     convId: client.conversationId,
-        //     messageId: sendToTelegram.data.result.message_id,
-        //     button: '',
-        //   })
-        // } else {
-        //     socket.emit("sendMessage", {
-        //       senderId: chatAdminId,
-        //       receiverId: user.value,
-        //       text: host + image,
-        //       convId: client.conversationId,
-        //       messageId: sendPhotoToTelegram.data.result.message_id,
-        //       button: textButton,
-        //   })
-        // }
   
       }  
 
