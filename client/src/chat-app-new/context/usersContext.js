@@ -288,12 +288,13 @@ const UsersProvider = ({ children }) => {
 
 
 	//отправить сообщение из админки 
-	const addNewMessage = (userId, message, convId, messageId) => {
+	const addNewMessage = (userId, message, textButton, convId, messageId) => {
 
 		socket.emit("sendAdmin", { 
 			senderId: chatAdminId,
 			receiverId: userId,
 			text: message,
+			button: textButton,
 			convId: convId,
 			messageId,
 		})

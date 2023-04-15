@@ -29,6 +29,10 @@ const DistributionAdd = () => {
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 	const host = process.env.REACT_APP_API_URL
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
+  const socketUrl = process.env.REACT_APP_SOCKET_APP_URL
+
+  //socket.io
+  const {io} = require("socket.io-client")
 
   const { users: clients } = useUsersContext();
   const { addNewMessage } = useUsersContext();
@@ -175,6 +179,7 @@ const DistributionAdd = () => {
                 text: text,
                 is_bot: true,
 				        messageId: sendToTelegram.data.result.message_id,
+                button: '',
             }
         } else {
             message = {
@@ -185,6 +190,7 @@ const DistributionAdd = () => {
                 text: host + image,
                 is_bot: true,
 				        messageId: sendPhotoToTelegram.data.result.message_id,
+                button: textButton,
             }
         }
         console.log("message send: ", message);
@@ -196,8 +202,35 @@ const DistributionAdd = () => {
         if(!file) {
           addNewMessage(user.value, text, client.conversationId, sendToTelegram.data.result.message_id);
         } else {
-          addNewMessage(user.value, host + image + '|' + textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
+          addNewMessage(user.value, host + image, textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
         }
+
+
+        // Подключаемся к серверу socket
+        // let socket = io(socketUrl);
+
+        // socket.emit("addUser", user.value)
+
+        // if(!file) {
+        //   socket.emit("sendMessage", {
+        //     senderId: chatAdminId,
+        //     receiverId: user.value,
+        //     text: text,
+        //     convId: client.conversationId,
+        //     messageId: sendToTelegram.data.result.message_id,
+        //     button: '',
+        //   })
+        // } else {
+        //     socket.emit("sendMessage", {
+        //       senderId: chatAdminId,
+        //       receiverId: user.value,
+        //       text: host + image,
+        //       convId: client.conversationId,
+        //       messageId: sendPhotoToTelegram.data.result.message_id,
+        //       button: textButton,
+        //   })
+        // }
+  
       }  
 
     })
