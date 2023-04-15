@@ -200,9 +200,9 @@ const DistributionAdd = () => {
 
 		    //сохранить в контексте
         if(!file) {
-          addNewMessage(user.value, text, client.conversationId, sendToTelegram.data.result.message_id);
+          addNewMessage(user.value, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
         } else {
-          addNewMessage(user.value, host + image, textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
+          addNewMessage(user.value, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
         }
 
 
