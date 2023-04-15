@@ -179,7 +179,7 @@ const DistributionAdd = () => {
                 text: text,
                 is_bot: true,
 				        messageId: sendToTelegram.data.result.message_id,
-                button: '',
+                buttons: '',
             }
         } else {
             message = {
@@ -190,7 +190,7 @@ const DistributionAdd = () => {
                 text: host + image,
                 is_bot: true,
 				        messageId: sendPhotoToTelegram.data.result.message_id,
-                button: textButton,
+                buttons: textButton,
             }
         }
         console.log("message send: ", message);
@@ -199,11 +199,11 @@ const DistributionAdd = () => {
 		    await newMessage(message)
 
 		    //сохранить в контексте
-        if(!file) {
-          addNewMessage(user.value, text, client.conversationId, sendToTelegram.data.result.message_id);
-        } else {
-          addNewMessage(user.value, host + image, textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
-        }
+        // if(!file) {
+        //   addNewMessage(user.value, text, client.conversationId, sendToTelegram.data.result.message_id);
+        // } else {
+        //   addNewMessage(user.value, host + image, textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
+        // }
 
 
         // Подключаемся к серверу socket
@@ -267,7 +267,7 @@ const DistributionAdd = () => {
                               Сообщение успешно отправлено!
                             </CAlert>
                               <CForm>
-                                <div className="mb-3" style={{color: '#8f8888'}}>
+                                <div className="mb-3" style={{color: '#f3f3f3'}}>
                                   <CFormLabel htmlFor="exampleFormControlInput1">Выберите получателей:</CFormLabel>
                                   <MultiSelect
                                     options={contacts}
@@ -286,10 +286,10 @@ const DistributionAdd = () => {
                                       "create": "Создать",
                                     }}   
                                   />
-                                  <h6>Получателей: <span>{selected.length}</span></h6>
+                                  <p style={{color: '#767676'}}>Получателей: <span>{selected.length}</span></p>
                                 </div>
 
-                                <div className='mb-3'>
+                                <div className='mb-3' style={{color: '#f3f3f3'}}>
                                   <CFormCheck 
                                     id="flexCheckDefault" 
                                     label="Дублировать в админку"
