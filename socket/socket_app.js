@@ -83,11 +83,13 @@ io.on("connection", (socket) => {
     })
 
     //send and get message
-    socket.on("sendAdmin", ({senderId, receiverId, text, convId, messageId})=>{
+    socket.on("sendAdmin", ({senderId, receiverId, text, type, buttons, convId, messageId})=>{
         io.emit("getAdmin", {
             senderId,
             receiverId,
             text,
+            type,
+            buttons,
             convId,
             messageId,
         })

@@ -7,9 +7,9 @@ class MessageController {
 
     //add message
     async newMessage(req, res) {
-        const {conversationId, text, senderId, receiverId, type, messageId} = req.body
+        const {conversationId, text, senderId, receiverId, type, messageId, buttons} = req.body
         try {
-            await Message.create({conversationId, text, senderId, receiverId, type, messageId})
+            await Message.create({conversationId, text, senderId, receiverId, type, messageId, buttons})
             return res.status(200).json("Message has been sent successfully");
         } catch (error) {
             return res.status(500).json(error.message);

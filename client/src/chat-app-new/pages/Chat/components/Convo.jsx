@@ -145,7 +145,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											>
 												<Icon id="downArrow" className="chat__msg-options-icon" />
 											</button>
-											<figcaption>{message.descript}</figcaption>
+											<figcaption style={{textAlign: 'center', backgroundColor: '#607a7a', borderRadius: '5px'}}>{message.descript}</figcaption>
 										</figure>
 										
 									</div>

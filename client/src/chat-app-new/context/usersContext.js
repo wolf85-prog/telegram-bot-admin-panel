@@ -214,13 +214,15 @@ const UsersProvider = ({ children }) => {
 		console.log("Пришло сообщение в Админку: ", data)
 
 		setUsers((users) => {
-			const { senderId, receiverId, text, messageId } = data;
+			const { senderId, receiverId, text, type, buttons, messageId } = data;
 
 			let userIndex = users.findIndex((user) => user.chatId === receiverId.toString());
 			const usersCopy = JSON.parse(JSON.stringify(users));
 			const newMsgObject = {
 				date: new Date().toLocaleDateString(),
 				content: text,
+				image: type === 'image' ? true : false,
+				descript: buttons ? buttons : '',
 				sender: senderId,
 				time: new Date().toLocaleTimeString(),
 				status: 'delivered',
@@ -288,12 +290,14 @@ const UsersProvider = ({ children }) => {
 
 
 	//отправить сообщение из админки 
-	const addNewMessage = (userId, message, convId, messageId) => {
+	const addNewMessage = (userId, message, type, textButton, convId, messageId) => {
 
 		socket.emit("sendAdmin", { 
 			senderId: chatAdminId,
 			receiverId: userId,
 			text: message,
+			type: type,
+			buttons: textButton,
 			convId: convId,
 			messageId,
 		})
