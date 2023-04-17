@@ -122,64 +122,45 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 										{message.content.endsWith('.pdf') ? (<figure>
 											<img src={pdf} width={30}/>
 											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a>
-											<span className="chat__msg-footer">
-													<span>{formatTime(message.time)}</span>
-													{!message.sender && (
-														<Icon
-															id={
-																message?.status === "sent"
-																	? "singleTick"
-																	: "doubleTick"
-															}
-															aria-label={message?.status}
-															className={`chat__msg-status-icon ${
-																message?.status === "read"
-																	? "chat__msg-status-icon--blue"
-																	: ""
-															}`}
-														/>
-													)}
-												</span>
-
-												<button
-													aria-label="Message options"
-													className="chat__msg-options"
-												>
-													<Icon id="downArrow" className="chat__msg-options-icon" />
-												</button>
+											
 										</figure>) : (
 											<figure>
 												<a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>
-												<span className="chat__msg-footer">
-													<span>{formatTime(message.time)}</span>
-													{!message.sender && (
-														<Icon
-															id={
-																message?.status === "sent"
-																	? "singleTick"
-																	: "doubleTick"
-															}
-															aria-label={message?.status}
-															className={`chat__msg-status-icon ${
-																message?.status === "read"
-																	? "chat__msg-status-icon--blue"
-																	: ""
-															}`}
-														/>
-													)}
-												</span>
-
-												<button
-													aria-label="Message options"
-													className="chat__msg-options"
-												>
-													<Icon id="downArrow" className="chat__msg-options-icon" />
-												</button>
+												
 												<figcaption style={{textAlign: 'center', backgroundColor: '#607a7a', borderRadius: '5px'}}>{message.descript}</figcaption>
 											</figure>
 											)
 										}
-										
+										<span className="chat__msg-footer">
+											<span>{formatTime(message.time)}</span>
+													{!message.sender && (
+														<Icon
+															id={
+																message?.status === "sent"
+																	? "singleTick"
+																	: "doubleTick"
+															}
+															aria-label={message?.status}
+															className={`chat__msg-status-icon ${
+																message?.status === "read"
+																	? "chat__msg-status-icon--blue"
+																	: ""
+															}`}
+														/>
+													)}
+												</span>
+
+										<Dropdown onSelect={change} style={{backgroundColor: '#2a2f32'}}>
+											<Dropdown.Toggle 
+												as={CustomToggle} 
+												id="dropdown-custom-components"
+												align={{lg: "start" }}
+											>											
+											</Dropdown.Toggle>
+											<Dropdown.Menu as={CustomMenu}>
+											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: person.id})}>Удалить сообщение</Dropdown.Item>
+											</Dropdown.Menu>
+										</Dropdown>	
 									</div>
 								) : message.sender !== chatAdminId ? (
 									<p className="chat__msg chat__msg--rxd" ref={assignRef()}>
