@@ -50,7 +50,7 @@ const Chat = () => {
             if (file) {
                 const data = new FormData();
                 data.append("name", file.name);
-                data.append("photo", file);
+                data.append("filedata", file);
 
                let response = await uploadFile(data);
 			   console.log("response: ", response)
@@ -107,6 +107,9 @@ const Chat = () => {
                 is_bot: false,
 				messageId: sendToTelegram.data.result.message_id,
             }
+
+			//сохранить в контексте
+			addNewMessage(user.chatId, value, 'text', '', user.conversationId, sendToTelegram.data.result.message_id);
         } else {
             message = {
                 senderId: chatAdminId, 
@@ -117,14 +120,16 @@ const Chat = () => {
                 is_bot: false,
 				messageId: sendToTelegram.data.result.message_id,
             }
+
+			//сохранить в контексте
+			addNewMessage(user.chatId, host + image, 'image', '', user.conversationId, sendToTelegram.data.result.message_id);
         }
         console.log("message send button: ", message);
 
 		//сохранение сообщения в базе данных
 		await newMessage(message)
 
-		//сохранить в контексте
-		addNewMessage(user.chatId, value, user.conversationId, sendToTelegram.data.result.message_id);
+		
 	}
 
 	const submitNewMessage = (e) => {
