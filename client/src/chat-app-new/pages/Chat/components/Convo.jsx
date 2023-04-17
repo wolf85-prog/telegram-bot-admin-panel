@@ -1,6 +1,7 @@
 import Icon from "./../../../components/Icon";
 import React, { useContext, useState } from "react";
 import media from "./../../../assets/images/profile-picture-boy-1.jpeg";
+import pdf from "./../../../assets/images/PDFicon.png";
 import formatTime from "./../../../utils/formatTime";
 import { AccountContext } from './../../../context/AccountProvider';
 import { useUsersContext } from "./../../../context/usersContext";
@@ -118,35 +119,66 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 										}`}
 										ref={assignRef()}
 									>
-										<figure>
-											<img src={message.content} alt="" className="chat__img" />
+										{message.content.endsWith('.pdf') ? (<figure>
+											<img src={pdf} width={30}/>
+											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a>
 											<span className="chat__msg-footer">
-												<span>{formatTime(message.time)}</span>
-												{!message.sender && (
-													<Icon
-														id={
-															message?.status === "sent"
-																? "singleTick"
-																: "doubleTick"
-														}
-														aria-label={message?.status}
-														className={`chat__msg-status-icon ${
-															message?.status === "read"
-																? "chat__msg-status-icon--blue"
-																: ""
-														}`}
-													/>
-												)}
-											</span>
+													<span>{formatTime(message.time)}</span>
+													{!message.sender && (
+														<Icon
+															id={
+																message?.status === "sent"
+																	? "singleTick"
+																	: "doubleTick"
+															}
+															aria-label={message?.status}
+															className={`chat__msg-status-icon ${
+																message?.status === "read"
+																	? "chat__msg-status-icon--blue"
+																	: ""
+															}`}
+														/>
+													)}
+												</span>
 
-											<button
-												aria-label="Message options"
-												className="chat__msg-options"
-											>
-												<Icon id="downArrow" className="chat__msg-options-icon" />
-											</button>
-											<figcaption style={{textAlign: 'center', backgroundColor: '#607a7a', borderRadius: '5px'}}>{message.descript}</figcaption>
-										</figure>
+												<button
+													aria-label="Message options"
+													className="chat__msg-options"
+												>
+													<Icon id="downArrow" className="chat__msg-options-icon" />
+												</button>
+										</figure>) : (
+											<figure>
+												<a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>
+												<span className="chat__msg-footer">
+													<span>{formatTime(message.time)}</span>
+													{!message.sender && (
+														<Icon
+															id={
+																message?.status === "sent"
+																	? "singleTick"
+																	: "doubleTick"
+															}
+															aria-label={message?.status}
+															className={`chat__msg-status-icon ${
+																message?.status === "read"
+																	? "chat__msg-status-icon--blue"
+																	: ""
+															}`}
+														/>
+													)}
+												</span>
+
+												<button
+													aria-label="Message options"
+													className="chat__msg-options"
+												>
+													<Icon id="downArrow" className="chat__msg-options-icon" />
+												</button>
+												<figcaption style={{textAlign: 'center', backgroundColor: '#607a7a', borderRadius: '5px'}}>{message.descript}</figcaption>
+											</figure>
+											)
+										}
 										
 									</div>
 								) : message.sender !== chatAdminId ? (

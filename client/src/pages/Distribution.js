@@ -17,6 +17,9 @@ import {
   CCol,
   CProgress,
   CRow,
+  CFormLabel,
+  CFormInput,
+  CForm
 } from '@coreui/react'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
 import CIcon from '@coreui/icons-react'
@@ -36,12 +39,38 @@ import {
   cilCloudDownload,
   cilPeople,
 } from '@coreui/icons'
-import DataTable from 'react-data-table-component';
+import DataTable, { createTheme } from 'react-data-table-component';
 
 import avatar2 from 'src/assets/images/avatars/2.jpg'
 import deleteIcon from 'src/assets/images/delete.png'
 import pencilIcon from 'src/assets/images/pencil.png'
 import { getDistributions, delDistribution } from 'src/http/adminAPI';
+
+const columns = [
+  {
+    name: 'Title',
+    selector: row => row.title,
+    sortable: true,
+  },
+  {
+      name: 'Year',
+      selector: row => row.year,
+      sortable: true,
+  },
+];
+
+const data = [
+  {
+      id: 1,
+      title: 'Beetlejuice',
+      year: '1988',
+  },
+  {
+      id: 2,
+      title: 'Ghostbusters',
+      year: '1984',
+  },
+]
 
 const Distribution = () => {
   const [distributions, setDistributions]= useState([]);
@@ -100,6 +129,28 @@ const Distribution = () => {
     await delDistribution(desk.id)
   }
 
+  createTheme('solarized', {
+    text: {
+      primary: '#268bd2',
+      secondary: '#2aa198',
+    },
+    background: {
+      default: '#002b36',
+    },
+    context: {
+      background: '#cb4b16',
+      text: '#FFFFFF',
+    },
+    divider: {
+      default: '#073642',
+    },
+    action: {
+      button: 'rgba(0,0,0,.54)',
+      hover: 'rgba(0,0,0,.08)',
+      disabled: 'rgba(0,0,0,.12)',
+    },
+  }, 'dark');
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -121,6 +172,22 @@ const Distribution = () => {
                             <CCardBody>
 
                               <br />
+
+                              {/* <CRow className="mb-3">
+                                <CCol sm={3} >
+                                  <CFormInput placeholder="Поиск..." aria-label="City"/>
+                                </CCol>
+                              </CRow>
+
+                              <br /> */}
+
+                              {/* <DataTable
+                                columns={columns}
+                                data={data}
+                                fixedHeader
+                                pagination
+                                theme="solarized"
+                              /> */}
 
                               <CTable align="middle" className="mb-0 border" hover responsive>
                                 <CTableHead className='table-dark'>
@@ -156,7 +223,7 @@ const Distribution = () => {
                                         <div>{item.text}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <div><img src={item.image} width={30} height={30}></img></div>
+                                        <div><a href={item.image} target='_blank' rel="noreferrer"><img src={item.image} width={30} height={30}></img></a></div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         <div>{item.button}</div>
