@@ -1,32 +1,17 @@
 import React, { Suspense, useEffect, useState, useContext } from 'react'
 import { CContainer, CSpinner, CNav, CNavLink, CNavItem } from '@coreui/react'
-import { AppSidebar, AppFooter, AppHeaderChat } from '../components/index'
+import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
-import "./../chat-app-new/App.css";
-import "./../chat-app-new/index.css";
-import "./../chat-app-new/assets/css/index.css";
-import Loader from "../chat-app-new/components/Loader";
-import Home from "../chat-app-new/pages/Home";
-import Sidebar from "../chat-app-new/components/Sidebar";
-import Chat from "../chat-app-new/pages/Chat";
+// routes config
+import routes from '../routes'
 
-import { AccountContext } from "../chat-app-new/context/AccountProvider";
-
-const Chats2 = () => {
-  const [appLoaded, setAppLoaded] = useState(false);
-	const [startLoadProgress, setStartLoadProgress] = useState(false);
-
-    const { person } = useContext(AccountContext); 
-
-	useEffect(() => {
-		document.body.classList.add("dark-theme");
-	});   
+const Chats3 = () => {  
 
   return (
-    <div>
+    <div className='dark-theme'>
       <AppSidebar />
       <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
-        <AppHeaderChat />
+        <AppHeader />
         <div className="body flex-grow-1 px-3">
 
             <CContainer lg>
@@ -44,4 +29,4 @@ const Chats2 = () => {
   )
 }
 
-export default Chats2
+export default Chats3
