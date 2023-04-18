@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./socketContext";
 import { getContacts, getConversation, getMessages } from '../../http/chatAPI'
-import useSound from 'use-sound';
+import { getDistributions } from "src/http/adminAPI";
 import boopSfx from './../assets/sounds/boop.mp3';
 
 const UsersContext = createContext();
@@ -14,6 +14,7 @@ const UsersProvider = ({ children }) => {
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const [count, setCount] = useState(0)
 	const [usersOnline, setUsersOnline] = useState([]);
+	const [distributions, setDistributions] = useState([]); 
 
 	//const [play] = useSound(boopSfx);
 	const audio = new Audio(boopSfx);
@@ -21,7 +22,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			let response = await getContacts();
-			console.log("response: ", response.length)
+			console.log("contacts size: ", response.length)
 	
 			const arrayContact = []
 	
@@ -131,6 +132,19 @@ const UsersProvider = ({ children }) => {
 
 	},[])
 //------------------------------------------------------------------------------------------
+
+  	//get Distribution
+  	useEffect(() => {
+    	const fetchData = async () => {
+			let response = await getDistributions();
+      		console.log("distribution: ", response)
+
+			setDistributions(response)
+		}
+
+	  	fetchData();
+
+	},[])
 
 	//подключение админа к сокету и вывод всех подключенных
 	useEffect(()=>{
@@ -344,7 +358,8 @@ const UsersProvider = ({ children }) => {
 			delMessageContext,
 			addNewName,
 			addNewAvatar,
-			usersOnline 
+			usersOnline,
+			distributions, 
 		}}>
 			{children}
 		</UsersContext.Provider>

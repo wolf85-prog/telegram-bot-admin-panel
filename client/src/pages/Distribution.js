@@ -41,53 +41,26 @@ import {
 } from '@coreui/icons'
 import DataTable, { createTheme } from 'react-data-table-component';
 
-import avatar2 from 'src/assets/images/avatars/2.jpg'
 import deleteIcon from 'src/assets/images/delete.png'
-import pencilIcon from 'src/assets/images/pencil.png'
+import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { getDistributions, delDistribution } from 'src/http/adminAPI';
 
-const columns = [
-  {
-    name: 'Title',
-    selector: row => row.title,
-    sortable: true,
-  },
-  {
-      name: 'Year',
-      selector: row => row.year,
-      sortable: true,
-  },
-];
-
-const data = [
-  {
-      id: 1,
-      title: 'Beetlejuice',
-      year: '1988',
-  },
-  {
-      id: 2,
-      title: 'Ghostbusters',
-      year: '1984',
-  },
-]
-
 const Distribution = () => {
+  const { distributions: messages } = useUsersContext();
   const [distributions, setDistributions]= useState([]);
+  const [loading, setLoading]= useState(true);
 
-  //get Projects
+  //get Distribution
   useEffect(() => {
     const fetchData = async () => {
-			let response = await getDistributions();
-      //console.log("response: ", response)
+			//let response = await getDistributions();
+      console.log("messages: ", messages)
 
       let strReceivers = ''
 
       const arrDitributions = []
-      response.map((distrib, index) => {
-        //console.log("receivers: ", JSON.parse(distrib.receivers))
+      messages.map((distrib, index) => {
         JSON.parse(distrib.receivers).map((receiver)=>{
-          //console.log("label: ", receiver.label)
           strReceivers = receiver.label + ' '
         })
 
@@ -113,14 +86,13 @@ const Distribution = () => {
         arrDitributions.push(newDistribution)
       })
 
-      //console.log("arr: ", arrDitributions)
-
       setDistributions(arrDitributions.reverse()) 
+      setLoading(false)
     }
 
     fetchData();
     
-  },[])
+  },[messages])
 
   {/* Удаление рассылки */}
   const removeDescription = async(desk) => {
@@ -189,11 +161,14 @@ const Distribution = () => {
                                 theme="solarized"
                               /> */}
 
+                            {loading ? 
+                                  
+                              <CSpinner/> :
+
                               <CTable align="middle" className="mb-0 border" hover responsive>
                                 <CTableHead className='table-dark'>
                                   <CTableRow>
                                     <CTableHeaderCell>№</CTableHeaderCell>
-                                    {/* <CTableHeaderCell>Название</CTableHeaderCell> */}
                                     <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Текст</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Картинка</CTableHeaderCell>
@@ -209,13 +184,6 @@ const Distribution = () => {
                                       <CTableDataCell>
                                         <div>{index+1}</div>
                                       </CTableDataCell>
-                                      {/* <CTableDataCell>
-                                        <div>{item.name}</div>
-                                        <div className="small text-medium-emphasis">
-                                          <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registered:{' '}
-                                          {item.user.registered}
-                                        </div> 
-                                      </CTableDataCell>*/}
                                       <CTableDataCell className="text-center">
                                         <div>{item.datestart}</div>
                                       </CTableDataCell>
@@ -223,7 +191,10 @@ const Distribution = () => {
                                         <div>{item.text}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <div><a href={item.image} target='_blank' rel="noreferrer"><img src={item.image} width={30} height={30}></img></a></div>
+                                        {item.image.endsWith('.pdf') ?
+                                        <iframe src={item.image} height="100px" width="200px" title="myFramePdf"/>
+                                        : <div><a href={item.image} target='_blank' rel="noreferrer"><img src={item.image} width={200} height={100} style={{objectFit: 'contain'}}></img></a></div>
+                                        }
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         <div>{item.button}</div>
@@ -235,10 +206,6 @@ const Distribution = () => {
                                         <div>{item.status}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        {/* <CButton color="light">
-                                          <img src={pencilIcon} alt='' width='15px'/>
-                                        </CButton>
-                                        &nbsp; */}
                                         <CButton color="light" onClick={() => removeDescription(item)}>
                                           <img src={deleteIcon} alt='' width='10px' />
                                         </CButton>
@@ -247,6 +214,7 @@ const Distribution = () => {
                                   ))}
                                 </CTableBody>
                               </CTable>
+                            }                              
                             </CCardBody>
                           </CCard>
                         </CCol>

@@ -28,10 +28,10 @@ const _nav = [
     name: 'Заказчики',
     to: '/chat2',
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: '1',
-    },
+    // badge: {
+    //   color: 'info',
+    //   text: '1',
+    // },
   },
   {
     component: CNavItem,

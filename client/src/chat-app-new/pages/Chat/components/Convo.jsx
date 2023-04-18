@@ -1,7 +1,6 @@
 import Icon from "./../../../components/Icon";
 import React, { useContext, useState } from "react";
-import media from "./../../../assets/images/profile-picture-boy-1.jpeg";
-import pdf from "./../../../assets/images/PDFicon.png";
+// import pdf from "./../../../assets/images/PDFicon.png";
 import formatTime from "./../../../utils/formatTime";
 import { AccountContext } from './../../../context/AccountProvider';
 import { useUsersContext } from "./../../../context/usersContext";
@@ -16,9 +15,6 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 
 	const { delMessageContext } = useUsersContext();
-
-	const optViewRef = React.createRef(null);
-	const content = React.createRef(null);
 
 	const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 		<button
@@ -120,9 +116,9 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 										ref={assignRef()}
 									>
 										{message.content.endsWith('.pdf') ? (<figure>
-											<img src={pdf} width={30}/>
-											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a>
-											
+											{/* <img src={pdf} width={30}/>
+											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a>											 */}
+											<iframe src={message.content} height="235px" width="100%" title="myFramePdf"/>
 										</figure>) : (
 											<figure>
 												<a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>
@@ -150,11 +146,10 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 													)}
 												</span>
 
-										<Dropdown onSelect={change} style={{backgroundColor: '#2a2f32'}}>
+										<Dropdown onSelect={change}>
 											<Dropdown.Toggle 
 												as={CustomToggle} 
-												id="dropdown-custom-components"
-												align={{lg: "start" }}
+												id="dropdown-custom-components"	
 											>											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenu}>
@@ -179,11 +174,10 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 										>
 											<Icon id="downArrow" className="chat__msg-options-icon" />
 										</button> */}
-										<Dropdown onSelect={change} style={{backgroundColor: '#2a2f32'}}>
+										<Dropdown onSelect={change}>
 											<Dropdown.Toggle 
 												as={CustomToggle} 
 												id="dropdown-custom-components"
-												align={{lg: "start" }}
 											>											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenu}>
@@ -215,18 +209,11 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 												}`}
 											/>
 										</span>
-										{/* <button
-											aria-label="Message options"
-											className="chat__msg-options"
-										>
-											<Icon id="downArrow" className="chat__msg-options-icon" />											
-										</button> */}
 
 										<Dropdown onSelect={change}>
 											<Dropdown.Toggle 
 												as={CustomToggle} 
 												id="dropdown-custom-components"
-												align={{lg: "start" }}
 											>											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenu}>

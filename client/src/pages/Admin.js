@@ -19,8 +19,6 @@ import {
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
-import { CChartLine } from '@coreui/react-chartjs'
-import { getStyle, hexToRgba } from '@coreui/utils'
 import CIcon from '@coreui/icons-react'
 import {
   cibCcAmex,
@@ -41,7 +39,6 @@ import {
   cilX,
 } from '@coreui/icons'
 
-import avatarDefault from "../chat-app-new/assets/images/no-avatar.png";
 import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 import deleteIcon from 'src/assets/images/delete.png'
 import pencilIcon from 'src/assets/images/pencil.png'
@@ -94,14 +91,13 @@ const Admin = () => {
       setManagers(arrManagers) 
     }
     
-    fetchManagers();
-    
+    fetchManagers();    
   },[])
 
   //get Contacts
   useEffect(() => {
     const arrClients = []
-    console.log(managers)
+    //console.log(managers)
 
     clients.map((client) => {
       let userIndex = managers.findIndex((manager) => manager.TG_ID === client.chatId);  
