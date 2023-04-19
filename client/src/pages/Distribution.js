@@ -101,28 +101,6 @@ const Distribution = () => {
     await delDistribution(desk.id)
   }
 
-  createTheme('solarized', {
-    text: {
-      primary: '#268bd2',
-      secondary: '#2aa198',
-    },
-    background: {
-      default: '#002b36',
-    },
-    context: {
-      background: '#cb4b16',
-      text: '#FFFFFF',
-    },
-    divider: {
-      default: '#073642',
-    },
-    action: {
-      button: 'rgba(0,0,0,.54)',
-      hover: 'rgba(0,0,0,.08)',
-      disabled: 'rgba(0,0,0,.12)',
-    },
-  }, 'dark');
-
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -143,23 +121,7 @@ const Distribution = () => {
                             <CCardHeader>Рассылки</CCardHeader>
                             <CCardBody>
 
-                              <br />
-
-                              {/* <CRow className="mb-3">
-                                <CCol sm={3} >
-                                  <CFormInput placeholder="Поиск..." aria-label="City"/>
-                                </CCol>
-                              </CRow>
-
-                              <br /> */}
-
-                              {/* <DataTable
-                                columns={columns}
-                                data={data}
-                                fixedHeader
-                                pagination
-                                theme="solarized"
-                              /> */}
+                              <br /> 
 
                             {loading ? 
                                   

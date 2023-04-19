@@ -43,7 +43,7 @@ import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 import deleteIcon from 'src/assets/images/delete.png'
 import pencilIcon from 'src/assets/images/pencil.png'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { getProjects, getManagers } from './../http/adminAPI.js'
+import { getProjects, getManagers, getCompanyId } from './../http/adminAPI.js'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 
@@ -64,6 +64,7 @@ const progressExample = [
 const Admin = () => {
 
   const { users: clients } = useUsersContext();
+  const { managers: zakazchiki } = useUsersContext();
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]);
   const [managers, setManagers]= useState([]);
@@ -72,37 +73,42 @@ const Admin = () => {
   const hostAdmin = process.env.REACT_APP_ADMIN_API_URL
 
   //get Managers  
-  useEffect(() => {
-    const fetchManagers = async () => {
-      const arrManagers = []
-      let response = await getManagers();
-      response.map(async (manager) => {
-        const newManager = {
-          id: manager.id,
-          name: manager.fio,
-          TG_ID: manager.tgID,
-          phone: manager.phone,
-          comment: manager.comment,
-          company: '',
-        }
-        arrManagers.push(newManager)
-      })
+  // useEffect(() => {
+  //   const fetchManagers = async () => {
+  //     const arrManagers = []
+  //     let response = await getManagers();
+  //     console.log("managers: ", response)
+  //     response.map(async (manager) => {
+  //       const newManager = {
+  //         id: manager.id,
+  //         name: manager.fio,
+  //         TG_ID: manager.tgID,
+  //         phone: manager.phone,
+  //         comment: manager.comment,
+  //         company: '',
+  //       }
+  //       arrManagers.push(newManager)
+  //     })
 
-      setManagers(arrManagers) 
-    }
+  //     setManagers(arrManagers) 
+  //   }
     
-    fetchManagers();    
-  },[])
+  //   fetchManagers();    
+  // },[])
+
+
 
   //get Contacts
   useEffect(() => {
     const arrClients = []
-    //console.log(managers)
 
     clients.map((client) => {
-      let userIndex = managers.findIndex((manager) => manager.TG_ID === client.chatId);  
+      const managers = [...zakazchiki];
+      let userIndex = zakazchiki.findIndex((manager) => manager.tgID === client.chatId);  
       const userObject = managers[userIndex];
-      //console.log(userObject)
+      //console.log(userObject?.company?.id)
+
+      //const companyName = getCompanyId(userObject.id)
       
       const newObj = {
         avatar: client.avatar,
@@ -113,7 +119,7 @@ const Admin = () => {
         },
         TG_ID: client.chatId,
         comment: userObject?.comment,
-        company: { name: 'U.L.E.Y', icon: cibCcMastercard },
+        company: { name: '...', icon: cibCcMastercard },
         phone: userObject?.phone,
         usage: {
           value: 10,

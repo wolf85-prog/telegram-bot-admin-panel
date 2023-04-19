@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./socketContext";
 import { getContacts, getConversation, getMessages } from '../../http/chatAPI'
-import { getDistributions } from "src/http/adminAPI";
+import { getDistributions, getManagers } from "src/http/adminAPI";
 import boopSfx from './../assets/sounds/boop.mp3';
 
 const UsersContext = createContext();
@@ -15,6 +15,7 @@ const UsersProvider = ({ children }) => {
 	const [count, setCount] = useState(0)
 	const [usersOnline, setUsersOnline] = useState([]);
 	const [distributions, setDistributions] = useState([]); 
+	const [managers, setManagers]= useState([]);
 
 	//const [play] = useSound(boopSfx);
 	const audio = new Audio(boopSfx);
@@ -129,6 +130,20 @@ const UsersProvider = ({ children }) => {
 		}
 
 		fetchData();
+
+	},[])
+//------------------------------------------------------------------------------------------
+
+	//get Managers
+	useEffect(() => {
+    	const fetchData = async () => {
+			let response = await getManagers();
+      		console.log("managers: ", response)
+
+			setManagers(response)
+		}
+
+	  	fetchData();
 
 	},[])
 //------------------------------------------------------------------------------------------
@@ -360,6 +375,7 @@ const UsersProvider = ({ children }) => {
 			addNewAvatar,
 			usersOnline,
 			distributions, 
+			managers,
 		}}>
 			{children}
 		</UsersContext.Provider>
