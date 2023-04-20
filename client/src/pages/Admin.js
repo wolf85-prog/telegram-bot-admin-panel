@@ -237,7 +237,7 @@ const Admin = () => {
                               <CTableHeaderCell className="text-center">Комментарий</CTableHeaderCell>
                               <CTableHeaderCell>Использование</CTableHeaderCell>
                               <CTableHeaderCell>Активность</CTableHeaderCell>
-                              <CTableHeaderCell>Управление</CTableHeaderCell>
+                              {/* <CTableHeaderCell>Управление</CTableHeaderCell> */}
                             </CTableRow>
                           </CTableHead>
                           <CTableBody>
@@ -280,7 +280,7 @@ const Admin = () => {
                                   <div className="small text-medium-emphasis">Последний вход</div>
                                   <strong>{item.activity}</strong>
                                 </CTableDataCell>
-                                <CTableDataCell>
+                                {/* <CTableDataCell>
                                   <CButton color="light">
                                     <img src={pencilIcon} alt='' width='15px'/>
                                   </CButton>
@@ -288,7 +288,7 @@ const Admin = () => {
                                   <CButton color="light">
                                     <img src={deleteIcon} alt='' width='10px' />
                                   </CButton>
-                                </CTableDataCell>
+                                </CTableDataCell> */}
                               </CTableRow>
                             ))}
                           </CTableBody>
