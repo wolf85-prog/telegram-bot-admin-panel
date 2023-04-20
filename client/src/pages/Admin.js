@@ -46,6 +46,7 @@ import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { getProjects, getManagers, getCompanyId } from './../http/adminAPI.js'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
+import Loader from 'src/chat-app-new/components/Loader'
 
 // if (!user._id) {
 //   return <Navigate to="/register" />;
@@ -78,14 +79,30 @@ const Admin = () => {
     const arrClients = []
 
     const fetchData = () => {
-      clients.map(async(client) => {
+      clients.map(async(client, index) => {
         const managers = [...zakazchiki];
         let userIndex = zakazchiki.findIndex((manager) => manager.tgID === client.chatId);  
         const userObject = managers[userIndex];
         //console.log(userObject?.id)
 
         const companyName = await getCompanyId(userObject?.id)
-        console.log(companyName[0].company)
+        console.log(companyName)
+        console.log(index)
+
+        let strCompanys = ''
+        companyName.map((company)=>{
+          strCompanys = company.company + ' '
+        })
+
+        const lastDate = client.date.split('T')
+        const d = new Date(lastDate[0]);
+				const year = d.getFullYear();
+				const month = String(d.getMonth()+1).padStart(2, "0");
+				const day = String(d.getDate()).padStart(2, "0");
+				const chas = d.getHours();
+				const minut = String(d.getMinutes()).padStart(2, "0");
+
+				const newDateActivity = `${day}.${month}.${year}`
         
         const newObj = {
           avatar: client.avatar,
@@ -96,14 +113,14 @@ const Admin = () => {
           },
           TG_ID: client.chatId,
           comment: userObject?.comment,
-          company: { name: companyName[0]?.company, icon: cibCcMastercard },
+          company: { name: strCompanys, icon: cibCcMastercard },
           phone: userObject?.phone,
           usage: {
             value: 10,
             period: '01.01.2023 - 10.01.2023',
             color: 'success',
           },
-          activity: '01.01.2023',
+          activity: newDateActivity,
         }
         arrClients.push(newObj)
       })
@@ -113,7 +130,7 @@ const Admin = () => {
       
       setTimeout(() => {
         setLoading(false)
-      }, "5000")
+      }, "10000")
     }
     
     fetchData();
@@ -232,15 +249,15 @@ const Admin = () => {
                                 <CTableDataCell>
                                   <div>{item.user.name}</div>
                                   <div className="small text-medium-emphasis">
-                                    <span>{item.user.new ? 'Новый' : 'Recurring'}</span> | Регистрация:{' '}
-                                    {item.user.registered}
+                                    {/* <span>{item.user.new ? 'Новый' : 'Recurring'}</span> | Регистрация:{' '}
+                                    {item.user.registered} */}
                                   </div>
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
                                   <div>{item.TG_ID}</div>
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
-                                  <div>{item.company.name}</div>
+                                  {item.company.name ? <div>{item.company.name}</div> : ''}
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
                                   <div>{item.phone}</div>
