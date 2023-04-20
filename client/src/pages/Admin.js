@@ -102,37 +102,43 @@ const Admin = () => {
   useEffect(() => {
     const arrClients = []
 
-    clients.map((client) => {
-      const managers = [...zakazchiki];
-      let userIndex = zakazchiki.findIndex((manager) => manager.tgID === client.chatId);  
-      const userObject = managers[userIndex];
-      //console.log(userObject?.company?.id)
+    const fetchData = () => {
+      clients.map(async(client) => {
+        const managers = [...zakazchiki];
+        let userIndex = zakazchiki.findIndex((manager) => manager.tgID === client.chatId);  
+        const userObject = managers[userIndex];
+        //console.log(userObject?.id)
 
-      //const companyName = getCompanyId(userObject.id)
+        const companyName = await getCompanyId(userObject?.id)
+        //console.log(companyName[0].company)
+        
+        const newObj = {
+          avatar: client.avatar,
+          user: {
+            name: client.name,
+            new: true,
+            registered: '01.01.2023',
+          },
+          TG_ID: client.chatId,
+          comment: userObject?.comment,
+          company: { name: companyName[0]?.company, icon: cibCcMastercard },
+          phone: userObject?.phone,
+          usage: {
+            value: 10,
+            period: '01.01.2023 - 10.01.2023',
+            color: 'success',
+          },
+          activity: '01.01.2023',
+        }
+        arrClients.push(newObj)
+      })
+      console.log('userbots: ', arrClients)
       
-      const newObj = {
-        avatar: client.avatar,
-        user: {
-          name: client.name,
-          new: true,
-          registered: '01.01.2023',
-        },
-        TG_ID: client.chatId,
-        comment: userObject?.comment,
-        company: { name: '...', icon: cibCcMastercard },
-        phone: userObject?.phone,
-        usage: {
-          value: 10,
-          period: '01.01.2023 - 10.01.2023',
-          color: 'success',
-        },
-        activity: '01.01.2023',
-      }
-      arrClients.push(newObj)
-    })
-    console.log('userbots: ', arrClients)
+      setContacts(arrClients)  
+    }
     
-		setContacts(arrClients)      
+    fetchData();
+    
   }, [clients]);
 
   //get Projects

@@ -23,7 +23,7 @@ export const getProjects = async () =>{
 export const getCompanyId = async (id) =>{
     try {
        let response = await $host_bot.get(`company/${id}`);
-       //console.log(response);
+       //console.log("getCompanyId: ", response.data);
        return response.data;
     } catch (error) {
         console.log("error while calling getCompany api", error.message);
