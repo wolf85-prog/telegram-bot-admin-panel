@@ -68,35 +68,10 @@ const Admin = () => {
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]);
   const [managers, setManagers]= useState([]);
+  const [loading, setLoading]= useState(true);
 
   const host = process.env.REACT_APP_API_URL
   const hostAdmin = process.env.REACT_APP_ADMIN_API_URL
-
-  //get Managers  
-  // useEffect(() => {
-  //   const fetchManagers = async () => {
-  //     const arrManagers = []
-  //     let response = await getManagers();
-  //     console.log("managers: ", response)
-  //     response.map(async (manager) => {
-  //       const newManager = {
-  //         id: manager.id,
-  //         name: manager.fio,
-  //         TG_ID: manager.tgID,
-  //         phone: manager.phone,
-  //         comment: manager.comment,
-  //         company: '',
-  //       }
-  //       arrManagers.push(newManager)
-  //     })
-
-  //     setManagers(arrManagers) 
-  //   }
-    
-  //   fetchManagers();    
-  // },[])
-
-
 
   //get Contacts
   useEffect(() => {
@@ -110,7 +85,7 @@ const Admin = () => {
         //console.log(userObject?.id)
 
         const companyName = await getCompanyId(userObject?.id)
-        //console.log(companyName[0].company)
+        console.log(companyName[0].company)
         
         const newObj = {
           avatar: client.avatar,
@@ -135,6 +110,10 @@ const Admin = () => {
       console.log('userbots: ', arrClients)
       
       setContacts(arrClients)  
+      
+      setTimeout(() => {
+        setLoading(false)
+      }, "5000")
     }
     
     fetchData();
@@ -224,6 +203,10 @@ const Admin = () => {
                           </CCol>
                         </CRow>
 
+                      {loading ? 
+                                  
+                        <CSpinner/> :
+
                         <CTable align="middle" className="mb-0 border" hover responsive>
                           <CTableHead className='table-dark'>
                             <CTableRow>
@@ -293,6 +276,7 @@ const Admin = () => {
                             ))}
                           </CTableBody>
                         </CTable>
+                      }
                       </CCardBody>
                     </CCard>
                   </CCol>
