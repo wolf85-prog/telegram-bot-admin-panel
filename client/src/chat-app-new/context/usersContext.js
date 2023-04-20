@@ -200,13 +200,14 @@ const UsersProvider = ({ children }) => {
 		setCount(count+1);
 
 		setUsers((users) => {
-			const { senderId, text, messageId } = data;
+			const { senderId, text, type, messageId } = data;
 			//console.log("users: ", users)
 			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			const usersCopy = JSON.parse(JSON.stringify(users));
 			const newMsgObject = {
 				date: new Date().toLocaleDateString(),
 				content: text,
+				image: type === 'image' ? true : false,
 				sender: senderId,
 				time: new Date().toLocaleTimeString(),
 				status: null,
