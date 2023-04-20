@@ -152,7 +152,7 @@ const Admin = () => {
       
       setTimeout(() => {
         setLoading(false)
-      }, "13000")
+      }, "5000")
     }
     
     fetchData();
