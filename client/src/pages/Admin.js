@@ -85,14 +85,14 @@ const Admin = () => {
         const userObject = managers[userIndex];
         //console.log(userObject?.id)
 
-        const companyName = await getCompanyId(userObject?.id)
-        console.log(companyName)
-        console.log(index)
+        //const companyName = await getCompanyId(userObject?.id)
+        //console.log(companyName)
+        //console.log(index)
 
-        let strCompanys = ''
-        companyName.map((company)=>{
-          strCompanys = company.company + ' '
-        })
+        let strCompanys = '...'
+        // companyName.map((company)=>{
+        //   strCompanys = company.company + ' '
+        // })
 
         const lastDate = client.date.split('T')
         const d = new Date(lastDate[0]);
