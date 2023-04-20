@@ -43,7 +43,7 @@ import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 import deleteIcon from 'src/assets/images/delete.png'
 import pencilIcon from 'src/assets/images/pencil.png'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { getProjects, getManagers, getCompanyId } from './../http/adminAPI.js'
+import { getProjects, getManagers, getCompanyId, getCompanys } from './../http/adminAPI.js'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 import Loader from 'src/chat-app-new/components/Loader'
@@ -74,20 +74,42 @@ const Admin = () => {
   const host = process.env.REACT_APP_API_URL
   const hostAdmin = process.env.REACT_APP_ADMIN_API_URL
 
+  function getNumberOfDays(start, end) { 
+    const date1 = new Date(start); 
+    const date2 = new Date(end); 
+    
+    // One day in milliseconds 
+    const oneDay = 1000 * 60 * 60 * 24; 
+    
+    // Calculating the time difference between two dates 
+    const diffInTime = date2.getTime() - date1.getTime(); 
+    
+    // Calculating the no. of days between two dates 
+    const diffInDays = Math.round(diffInTime / oneDay); 
+    
+    return diffInDays; 
+  } 
+
   //get Contacts
   useEffect(() => {
     const arrClients = []
 
-    const fetchData = () => {
+    const fetchData = async() => {
+
+      let companys = await getCompanys()
+      console.log("companys: ", companys)
+
       clients.map(async(client, index) => {
         const managers = [...zakazchiki];
         let userIndex = zakazchiki.findIndex((manager) => manager.tgID === client.chatId);  
         const userObject = managers[userIndex];
-        //console.log(userObject?.id)
 
-        //const companyName = await getCompanyId(userObject?.id)
-        //console.log(companyName)
-        //console.log(index)
+        const compan = [...companys];
+        let userIndex2 = companys.findIndex((company) => company.propertys["Менеджеры"].relation[0].id === userObject.id);  
+        const userObject2 = compan[userIndex2];
+        //console.log(userObject2.propertys["Название компании"].title[0].plain_text)
+
+        const companyName = userObject2.propertys["Название компании"].title[0].plain_text
 
         let strCompanys = '...'
         // companyName.map((company)=>{
@@ -113,11 +135,11 @@ const Admin = () => {
           },
           TG_ID: client.chatId,
           comment: userObject?.comment,
-          company: { name: strCompanys, icon: cibCcMastercard },
+          company: { name: companyName, icon: cibCcMastercard },
           phone: userObject?.phone,
           usage: {
-            value: 10,
-            period: '01.01.2023 - 10.01.2023',
+            value: ((20 * 100) / getNumberOfDays('01-01-2023', lastDate)).toFixed(),
+            period: '01.01.2023 - ' + newDateActivity,
             color: 'success',
           },
           activity: newDateActivity,
