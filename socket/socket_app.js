@@ -72,11 +72,12 @@ io.on("connection", (socket) => {
     })
 
     //send and get message
-    socket.on("sendMessage", ({senderId, receiverId, text, convId, messageId})=>{
+    socket.on("sendMessage", ({senderId, receiverId, text, type, convId, messageId})=>{
         const user = getUser(receiverId)
         io.emit("getMessage", {
             senderId,
             text,
+            type,
             convId,
             messageId,
         })
