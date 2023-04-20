@@ -149,13 +149,13 @@ const Distribution = () => {
                                       <CTableDataCell className="text-center">
                                         <div>{item.datestart}</div>
                                       </CTableDataCell>
-                                      <CTableDataCell className="text-center">
+                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
                                         <div>{item.text}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         {item.image.endsWith('.pdf') ?
-                                        <iframe src={item.image} height="100px" width="200px" title="myFramePdf"/>
-                                        : <div><a href={item.image} target='_blank' rel="noreferrer"><img src={item.image} width={200} height={100} style={{objectFit: 'contain'}}></img></a></div>
+                                        <iframe src={item.image} height="120px" width="200px" title="myFramePdf"/>
+                                        : <div><a href={item.image} target='_blank' rel="noreferrer"><img src={item.image} width={230} height={120} style={{objectFit: 'contain'}}></img></a></div>
                                         }
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">

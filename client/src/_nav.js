@@ -33,12 +33,12 @@ const _nav = [
     //   text: '1',
     // },
   },
-  {
-    component: CNavItem,
-    name: 'Проекты',
-    to: '/chat3',
-    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Проекты',
+  //   to: '/chat3',
+  //   icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+  // },
   
   // {
   //   component: CNavGroup,
