@@ -29,41 +29,47 @@ import routes from '../routes'
 
 const columns = [
   {
-      name: '№',
-      selector: row => row.id,
+      name: 'Дата/время',
+      selector: row => row.date,
   },
   {
-      name: 'Проект',
+      name: 'Название проекта',
       selector: row => row.title,
-  },
-  {
-      name: 'Текст',
-      selector: row => row.text,
   },
   {
       name: 'Заказчик',
       selector: row => row.receiverId,
   },
   {
-      name: 'Дата',
-      selector: row => row.date,
+      name: 'Менеджер',
+      selector: row => row.managerId,
+  },
+  {
+      name: 'Адрес',
+      selector: row => row.address,
+  },
+  {
+      name: 'Контакты',
+      selector: row => row.contacts,
   },
 ];
 
 const data = [
   {
-      id: 1,
-      title: 'Проект 1',
-      text: 'Запрос специалистов ...',
-      receiverId: '121212',
       date: '01.04.2023 00:00',
+      title: 'Проект 1',
+      receiverId: '121212',
+      managerId: '121212',
+      address: 'Адрес',
+      contacts: 'Контакты',
   },
   {
-      id: 2,
+    date: '01.04.2023 00:00',
       title: 'Проект 2',
-      text: 'Запрос специалистов ...',
       receiverId: '121212',
-      date: '01.04.2023 00:00',
+      managerId: '121212',
+      address: 'Адрес',
+      contacts: 'Контакты',
   },
 ]
 
@@ -104,7 +110,7 @@ const Notifications = () => {
                     <h5>Раздел находится в разработке</h5>
                     <br />
                     
-                    {/* <CRow className="mb-3">
+                    <CRow className="mb-3">
                       <CCol sm={3} >
                         <CFormInput placeholder="Поиск..." aria-label="City"/>
                       </CCol>
@@ -116,7 +122,7 @@ const Notifications = () => {
                       fixedHeader
                       pagination
                       theme="solarized"
-                    /> */}
+                    />
                   </Suspense>
             </CContainer>
 
