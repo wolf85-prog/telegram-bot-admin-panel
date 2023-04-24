@@ -14,24 +14,24 @@ const ChatInput = ({
 	setShowAttach,
 	showEmojis,
 	setShowEmojis,
-	value,
-	setValue,
+	mess,
+	setMess,
 	submitNewMessage,
 	onFileChange,
 }) => {
 
 	const textAreaRef = useRef(null);
+	useAutosizeTextArea(textAreaRef.current, mess);
 
-	useAutosizeTextArea(textAreaRef.current, value);
+	const handleChange = (e) => {
+		console.log(e.target.value)
+		setMess(e.target.value)
+	};
 
 	const detectEnterPress = (e) => {
 		if ((e.key === "Enter" && !e.shiftKey) || (e.keyCode === 13 && !e.shiftKey) ) {
 			submitNewMessage();
 		} 
-	};
-
-	const handleChange = (e) => {
-		setValue(e.target.value)
 	};
 
 	return (
@@ -96,21 +96,15 @@ const ChatInput = ({
 			<textarea
 				className="chat__input"
 				placeholder="Введите сообщение"
-				value={value} //{newMessage}
-				onChange={handleChange} //setNewMessage(e.target.value)}
-				// onKeyDown={detectEnterPress}
-				ref={textAreaRef}
+				value={mess} 
+				onChange={handleChange} 
+				ref={textAreaRef}			
 				rows={1}
 			/>
-			{value ? (
-				<button aria-label="Send message" onClick={submitNewMessage}>
-					<Icon id="send" className="chat__input-icon" />
-				</button>
-			) : (
-				<button aria-label="Record voice note">
-					<Icon id="microphone" className="chat__input-icon" />
-				</button>
-			)}
+
+			<button aria-label="Send message" onClick={submitNewMessage}>
+				<Icon id="send" className="chat__input-icon" />
+			</button>
 		</div>
 	);
 };

@@ -86,6 +86,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		}		
 	}
 
+
 	return dates.map((date, dateIndex) => {
 		const messages = allMessages[date];
 		//console.log("allMessages: ", messages);
@@ -168,12 +169,6 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 										<span className="chat__msg-footer">
 											{formatTime(message.time)}
 										</span>
-										{/* <button
-											aria-label="Message options"
-											className="chat__msg-options"
-										>
-											<Icon id="downArrow" className="chat__msg-options-icon" />
-										</button> */}
 										<Dropdown onSelect={change}>
 											<Dropdown.Toggle 
 												as={CustomToggle} 
@@ -228,7 +223,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 				</div>
 			</div>
 		);
-	});
+	 });
 };
 
 export default Convo;

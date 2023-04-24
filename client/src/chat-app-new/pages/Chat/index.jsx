@@ -14,13 +14,13 @@ import { AccountContext } from './../../../chat-app-new/context/AccountProvider'
 import { newMessage, uploadFile } from './../../../http/chatAPI';
 import { $host } from './../../../http/index'
 
+const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
+const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
+const host = process.env.REACT_APP_API_URL
+
 const Chat = () => {
 	const { users, setUserAsUnread, addNewMessage } = useUsersContext();
 	const { person } = useContext(AccountContext);
-
-	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
-    const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
-	const host = process.env.REACT_APP_API_URL
 
 	const chatId = person.id;
 	let user = users.filter((user) => user.chatId === chatId.toString())[0];
@@ -32,7 +32,7 @@ const Chat = () => {
 	const [showSearchSidebar, setShowSearchSidebar] = useState(false);
 	const [file, setFile] = useState();
 	const [image, setImage]= useState("");
-	const [value, setValue] = useState("");
+	const [mess, setMess] = useState("");
 
 	useEffect(() => {
 		if (user) {
@@ -44,6 +44,11 @@ const Chat = () => {
 	useEffect(() => {
 		user && scrollToLastMsg();
 	}, [users]);
+
+	//прокрутка
+	const scrollToLastMsg = () => {
+		lastMsgRef.current?.scrollIntoView({transition: "smooth"});
+	};
 
 	useEffect(() => {
         const getImage = async () => {
@@ -57,7 +62,7 @@ const Chat = () => {
 
                setImage(response.data.path);
 			   //сообщение с ссылкой на файл
-			   setValue(host + response.data.path)
+			   setMess(host + response.data.path)
             }
         }
         getImage();
@@ -76,15 +81,10 @@ const Chat = () => {
 		cb(true);
 	};
 
-	//прокрутка
-	const scrollToLastMsg = () => {
-		lastMsgRef.current?.scrollIntoView({transition: "smooth"});
-	};
-
 	//функция отправки сообщения
 	const sendText = async () => {
 		//Передаем данные боту
-        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${value.replace(/\n/g, '%0A')}`
+        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${mess.replace(/\n/g, '%0A')}`
 		const sendToTelegram = await $host.get(url_send_msg);
 
 		//Выводим сообщение об успешной отправке
@@ -103,13 +103,13 @@ const Chat = () => {
                 receiverId: user.chatId,
                 conversationId: user.conversationId,
                 type: "text",
-                text: value,
+                text: mess,
                 is_bot: false,
 				messageId: sendToTelegram.data.result.message_id,
             }
 
 			//сохранить в контексте
-			addNewMessage(user.chatId, value, 'text', '', user.conversationId, sendToTelegram.data.result.message_id);
+			addNewMessage(user.chatId, mess, 'text', '', user.conversationId, sendToTelegram.data.result.message_id);
         } else {
             message = {
                 senderId: chatAdminId, 
@@ -127,19 +127,18 @@ const Chat = () => {
         console.log("message send button: ", message);
 
 		//сохранение сообщения в базе данных
-		await newMessage(message)
-
-		
+		await newMessage(message)	
 	}
 
-	const submitNewMessage = (e) => {
+	const submitNewMessage = () => {
 		sendText();
 
-		setValue("");
+		setMess("");
 		scrollToLastMsg();
 		setFile("");
         setImage("");
 	};
+
 
 	return (
 		<div className="chat">
@@ -165,8 +164,8 @@ const Chat = () => {
 						</button>
 						<EmojiTray
 							showEmojis={showEmojis}
-							value={value}
-							setValue={setValue}
+							mess={mess}
+							setMess={setMess}
 						/>
 						<ChatInput
 							showEmojis={showEmojis}
@@ -174,10 +173,11 @@ const Chat = () => {
 							showAttach={showAttach}
 							setShowAttach={setShowAttach}
 							onFileChange={onFileChange}
-							value={value}
-							setValue={setValue}
+							mess={mess}
+							setMess={setMess}
 							submitNewMessage={submitNewMessage}
-						/>	
+						/>
+
 					</div>		
 				</footer>
 			</div>
@@ -196,6 +196,7 @@ const Chat = () => {
 			>
 				<Profile user={user} />
 			</ChatSidebar>
+
 		</div>
 	);
 };

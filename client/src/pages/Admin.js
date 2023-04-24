@@ -3,11 +3,8 @@ import { CContainer, CSpinner } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import {
   CAvatar,
-  CButton,
-  CButtonGroup,
   CCard,
   CCardBody,
-  CCardFooter,
   CCardHeader,
   CCol,
   CProgress,
@@ -21,46 +18,32 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import {
-  cibCcAmex,
-  cibCcApplePay,
   cibCcMastercard,
-  cibCcPaypal,
-  cibCcStripe,
-  cibCcVisa,
-  cifBr,
-  cifEs,
-  cifFr,
-  cifIn,
-  cifPl,
-  cifUs,
-  cilCloudDownload,
   cilPeople,
-  cilPencil,
-  cilX,
 } from '@coreui/icons'
 
 import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
-import deleteIcon from 'src/assets/images/delete.png'
-import pencilIcon from 'src/assets/images/pencil.png'
+// import deleteIcon from 'src/assets/images/delete.png'
+// import pencilIcon from 'src/assets/images/pencil.png'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { getProjects, getManagers, getCompanyId, getCompanys } from './../http/adminAPI.js'
+import { getProjects, getCompanys } from './../http/adminAPI.js'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
-import Loader from 'src/chat-app-new/components/Loader'
+//import Loader from 'src/chat-app-new/components/Loader'
 
 // if (!user._id) {
 //   return <Navigate to="/register" />;
 // }
 
-const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+//const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
-const progressExample = [
-  { title: 'Визиты', value: '29.703 Users', percent: 40, color: 'success' },
-  { title: 'Уникальные', value: '24.093 Users', percent: 20, color: 'info' },
-  { title: 'Просмотры', value: '78.706 Views', percent: 60, color: 'warning' },
-  { title: 'Новые пользователи', value: '22.123 Users', percent: 80, color: 'danger' },
-  { title: 'Отказы', value: 'Average Rate', percent: 40.15, color: 'primary' },
-]
+// const progressExample = [
+//   { title: 'Визиты', value: '29.703 Users', percent: 40, color: 'success' },
+//   { title: 'Уникальные', value: '24.093 Users', percent: 20, color: 'info' },
+//   { title: 'Просмотры', value: '78.706 Views', percent: 60, color: 'warning' },
+//   { title: 'Новые пользователи', value: '22.123 Users', percent: 80, color: 'danger' },
+//   { title: 'Отказы', value: 'Average Rate', percent: 40.15, color: 'primary' },
+// ]
 
 const Admin = () => {
 
@@ -68,11 +51,11 @@ const Admin = () => {
   const { managers: zakazchiki } = useUsersContext();
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]);
-  const [managers, setManagers]= useState([]);
+  //const [managers, setManagers]= useState([]);
   const [loading, setLoading]= useState(true);
 
-  const host = process.env.REACT_APP_API_URL
-  const hostAdmin = process.env.REACT_APP_ADMIN_API_URL
+  //const host = process.env.REACT_APP_API_URL
+  //const hostAdmin = process.env.REACT_APP_ADMIN_API_URL
 
   function getNumberOfDays(start, end) { 
     const date1 = new Date(start); 
@@ -111,18 +94,13 @@ const Admin = () => {
 
         const companyName = userObject2.propertys["Название компании"].title[0].plain_text
 
-        let strCompanys = '...'
-        // companyName.map((company)=>{
-        //   strCompanys = company.company + ' '
-        // })
-
         const lastDate = client.date.split('T')
         const d = new Date(lastDate[0]);
 				const year = d.getFullYear();
 				const month = String(d.getMonth()+1).padStart(2, "0");
 				const day = String(d.getDate()).padStart(2, "0");
-				const chas = d.getHours();
-				const minut = String(d.getMinutes()).padStart(2, "0");
+				//const chas = d.getHours();
+				//const minut = String(d.getMinutes()).padStart(2, "0");
 
 				const newDateActivity = `${day}.${month}.${year}`
         

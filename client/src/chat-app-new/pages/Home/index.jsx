@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles/main.css";
 import Icon from "./../../components/Icon";
 import introImgLight from "./../../assets/images/home_chat.jpeg";

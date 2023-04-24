@@ -1,31 +1,16 @@
 import React, { Suspense } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
-import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
+import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import DataTable, { createTheme } from 'react-data-table-component';
 import { 
   CContainer, 
   CSpinner, 
-  CButton, 
-  CTable, 
-  CTableRow, 
-  CTableHead,
-  CTableHeaderCell,
-  CTableBody,
-  CTableDataCell,
-  CAvatar,
-  CCard,
-  CCardBody,
-  CCardHeader,
   CCol,
-  CProgress,
   CRow,
-  CFormLabel,
   CFormInput,
-  CForm
 } from '@coreui/react'
 
 // routes config
-import routes from '../routes'
+//import routes from '../routes'
 
 const columns = [
   {

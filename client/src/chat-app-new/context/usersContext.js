@@ -377,6 +377,7 @@ const UsersProvider = ({ children }) => {
 			usersOnline,
 			distributions, 
 			managers,
+			count,
 		}}>
 			{children}
 		</UsersContext.Provider>
