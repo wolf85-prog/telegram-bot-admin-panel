@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import DataTable, { createTheme } from 'react-data-table-component';
 import { 
@@ -9,8 +9,9 @@ import {
   CFormInput,
 } from '@coreui/react'
 
-// routes config
-//import routes from '../routes'
+import { getProjectsApi, getCompanys, getManagers } from './../http/adminAPI.js'
+
+
 
 const columns = [
   {
@@ -39,26 +40,9 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-      date: '01.04.2023 00:00',
-      title: 'Проект 1',
-      receiverId: '121212',
-      managerId: '121212',
-      address: 'Адрес',
-      contacts: 'Контакты',
-  },
-  {
-    date: '01.04.2023 00:00',
-      title: 'Проект 2',
-      receiverId: '121212',
-      managerId: '121212',
-      address: 'Адрес',
-      contacts: 'Контакты',
-  },
-]
-
 const Notifications = () => {
+
+  const [projects, setProjects]= useState([]);
 
   createTheme('solarized', {
     text: {
@@ -82,6 +66,56 @@ const Notifications = () => {
     },
   }, 'dark');
 
+  //get Projects
+  useEffect(() => {
+    const arrProjects = []
+
+    const fetchData = async () => {
+			let response = await getProjectsApi();
+
+      let companys = await getCompanys()
+
+      let managers = await getManagers()
+
+      response.map(async (project) => {
+
+        const compan = [...companys];
+        let userIndex = companys.findIndex((company) => company.id === project.companyId);  
+        const userObject = compan[userIndex];
+        const companyName = userObject.propertys["Название компании"].title[0].plain_text
+
+        const manager = [...managers];
+        let userIndex2 = manager.findIndex((man) => man.id === project.managerId);  
+        const userObject2 = manager[userIndex2];
+        const managerName = userObject2.fio
+        const managerPhone = userObject2.phone
+
+        const d = new Date(project.createdAt);
+				const year = d.getFullYear();
+				const month = String(d.getMonth()+1).padStart(2, "0");
+				const day = String(d.getDate()).padStart(2, "0");
+				const chas = d.getHours();
+				const minut = String(d.getMinutes()).padStart(2, "0");
+				const newDateMessage = `${day}.${month}.${year} ${chas}:${minut}`
+
+        const newProject = {
+          date: newDateMessage,
+          title: project.name,
+          receiverId: companyName,
+          managerId: managerName,
+          address: project.geo,
+          contacts: managerPhone,
+				}
+        arrProjects.push(newProject)
+      })
+
+      setProjects(arrProjects) 
+    }
+
+    fetchData();
+    
+  },[])
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -103,7 +137,7 @@ const Notifications = () => {
 
                     <DataTable
                       columns={columns}
-                      data={data}
+                      data={projects}
                       fixedHeader
                       pagination
                       theme="solarized"

@@ -234,7 +234,7 @@ const Admin = () => {
                               <CTableHeaderCell className="text-center">TG ID</CTableHeaderCell>
                               <CTableHeaderCell className="text-center">Организация</CTableHeaderCell>
                               <CTableHeaderCell className="text-center">Телефон</CTableHeaderCell>
-                              <CTableHeaderCell className="text-center">Комментарий</CTableHeaderCell>
+                              <CTableHeaderCell className="text-center">Город</CTableHeaderCell>
                               <CTableHeaderCell>Использование</CTableHeaderCell>
                               <CTableHeaderCell>Активность</CTableHeaderCell>
                               {/* <CTableHeaderCell>Управление</CTableHeaderCell> */}

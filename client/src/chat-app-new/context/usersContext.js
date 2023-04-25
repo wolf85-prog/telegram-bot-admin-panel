@@ -13,6 +13,7 @@ const UsersProvider = ({ children }) => {
 	const [users, setUsers] = useState([]); //useState(contacts);
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const [count, setCount] = useState(0)
+	const [countMessage, setCountMessage] = useState(0)
 	const [usersOnline, setUsersOnline] = useState([]);
 	const [distributions, setDistributions] = useState([]); 
 	const [managers, setManagers]= useState([]);
@@ -198,6 +199,7 @@ const UsersProvider = ({ children }) => {
 		console.log("date: ", data)
 		console.log("Пришло новое сообщение: ", count+1)
 		setCount(count+1);
+		setCountMessage(countMessage + 1)
 
 		setUsers((users) => {
 			const { senderId, text, type, messageId } = data;

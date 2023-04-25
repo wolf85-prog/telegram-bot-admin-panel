@@ -18,27 +18,6 @@ const Home = () => {
 				/>
 			</div> */}
 
-			{/* <h1 className="home__title"> Добро пожаловать <br/>
-			в мессенджер чат-бота U.L.E.Y </h1>
-			<p className="home__text">
-				Выберите, кому хотели бы написать сообщение.
-			</p>
-			<p className="home__text">
-				<Icon id="laptop" className="home__icon" />
-				<span>
-					Написать разработчику.{" "}
-					<a
-						href="mailto:seregaland@yandex.ru"
-						target="_blank"
-						rel="noreferrer"
-						className="home__link"
-					>
-						{" "}
-						Cюда
-					</a>
-					.
-				</span>
-			</p> */}
 		</div>
 	);
 };

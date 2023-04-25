@@ -7,6 +7,7 @@ const { newConversation, getConversation } = require('../controllers/conversatio
 const { addUser, getUsers, getUser, editUser, editUserAvatar} = require('../controllers/userbotController')
 const { newDistribution, getDistributions, getDistributionsId, getDistribution, delDistribution } = require('../controllers/distributionController')
 const { getReports, getReportsId } = require('../controllers/reportController')
+const { getProjects, getProjectsId } = require('../controllers/projectController')
 const { uploadFile, getImage } = require( "../controllers/fileController.js")
 //const upload = require( "../utils/upload.js")
 //const upload = multer({dest:"uploads"});
@@ -39,6 +40,9 @@ route.delete('/distributions/delete/:id', delDistribution)
 
 route.get('/reports/get', getReports)
 route.get('/reports/get/:id', getReportsId)
+
+route.get('/projects/get', getProjects)
+route.get('/projects/get/:id', getProjectsId)
 
 route.post("/file/upload", upload.single("photo"), uploadFile);
 route.get("/file/:filename", getImage);

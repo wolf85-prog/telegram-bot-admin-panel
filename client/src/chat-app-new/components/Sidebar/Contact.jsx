@@ -13,10 +13,11 @@ const Contact = ({ contact }) => {
 	const host = process.env.REACT_APP_API_URL
 	
 	//сделать пользователя непрочитанным
-	const { setUserAsUnread, usersOnline } = useUsersContext();
+	const { setUserAsUnread, usersOnline, setCountMessage } = useUsersContext();
 
 	const status = usersOnline.find(item => item.userId == contact.chatId)
 
+	//обработка нажатия на пользователя из списка
     const getUser = async () => {
         setPerson({
             name: contact.name, 
@@ -24,6 +25,7 @@ const Contact = ({ contact }) => {
 			avatar: contact.avatar
         });
 		setUserAsUnread(contact.chatId)
+		setCountMessage(0)
     }
 	
 	const getLastMessage = () => {
