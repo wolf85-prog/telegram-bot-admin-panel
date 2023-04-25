@@ -24,7 +24,8 @@ const AppSidebar = () => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   const { countMessage } = useUsersContext();
-  //console.log("countMessage: ", countMessage)
+  console.log("countMessage: ", countMessage)
+  
   let navigation = []
   
   countMessage !== 0
