@@ -56,9 +56,9 @@ const AppHeader = () => {
               {/* <CBadge color="success" className="ms-2">
                 5
               </CBadge> */}
-              <span className="badge bg-danger-gradient rounded-pill position-absolute top-0 end-0">
+              {/* <span className="badge bg-danger-gradient rounded-pill position-absolute top-0 end-0">
                 1
-              </span>
+              </span> */}
             </CNavLink>
           </CNavItem>
           <CNavItem>
