@@ -43,6 +43,7 @@ const columns = [
 const Notifications = () => {
 
   const [projects, setProjects]= useState([]);
+  const [pending, setPending] = useState(true);
 
   createTheme('solarized', {
     text: {
@@ -110,6 +111,8 @@ const Notifications = () => {
       })
 
       setProjects(arrProjects) 
+
+      setPending(false);
     }
 
     fetchData();
@@ -141,6 +144,8 @@ const Notifications = () => {
                       fixedHeader
                       pagination
                       theme="solarized"
+                      progressPending={pending}
+			                progressComponent={<CSpinner />}
                     />
                   </Suspense>
             </CContainer>
