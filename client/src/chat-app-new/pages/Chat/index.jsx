@@ -21,6 +21,7 @@ const host = process.env.REACT_APP_API_URL
 const Chat = () => {
 	const { users, setUserAsUnread, addNewMessage } = useUsersContext();
 	const { person } = useContext(AccountContext);
+	const { setCountMessage } = useUsersContext();
 
 	const chatId = person.id;
 	let user = users.filter((user) => user.chatId === chatId.toString())[0];
@@ -38,6 +39,7 @@ const Chat = () => {
 		if (user) {
 			scrollToLastMsg();
 			setUserAsUnread(user.chatId);
+			setCountMessage(0)
 		}
 	}, []);
 
