@@ -1,4 +1,4 @@
-const Project = require('../models/models')
+const Project = require('../models/Project')
 const ApiError = require('../error/ApiError')
 
 class ProjectController {
