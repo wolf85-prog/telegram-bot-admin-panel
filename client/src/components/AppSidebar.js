@@ -87,16 +87,10 @@ const AppSidebar = () => {
       icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
     },
     {
-      component: CNavGroup,
+      component: CNavItem,
       name: 'Уведомления',
+      to: '/notifications',
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-      items: [
-        {
-          component: CNavItem,
-          name: 'Уведомления',
-          to: '/notifications',
-        },
-      ],
     },
   ]
 
