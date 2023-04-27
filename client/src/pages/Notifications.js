@@ -72,13 +72,13 @@ const Notifications = () => {
     const arrProjects = []
 
     const fetchData = async () => {
-			let response = await getProjectsApi();
+			let projects = await getProjectsApi();
 
       let companys = await getCompanys()
 
       let managers = await getManagers()
 
-      response.map(async (project) => {
+      projects.map(async (project) => {
 
         const compan = [...companys];
         let userIndex = companys.findIndex((company) => company.id === project.companyId);  
@@ -117,7 +117,7 @@ const Notifications = () => {
 
     fetchData();
     
-  },[])
+  },[projects])
 
   return (
     <div className='dark-theme'>
@@ -129,8 +129,6 @@ const Notifications = () => {
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
                     <h2>Уведомления</h2>
-                    <h5>Раздел находится в разработке</h5>
-                    <br />
                     
                     <CRow className="mb-3">
                       <CCol sm={3} >

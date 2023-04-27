@@ -103,11 +103,15 @@ const Admin = () => {
 				//const minut = String(d.getMinutes()).padStart(2, "0");
 
 				const newDateActivity = `${day}.${month}.${year}`
+
+        const newClientName = client.name.includes("|") ? client.name.split(" | ")[1] : client.name
+
+        //const count_message = 
         
         const newObj = {
           avatar: client.avatar,
           user: {
-            name: client.name,
+            name: newClientName,
             new: true,
             registered: '01.01.2023',
           },
@@ -116,8 +120,8 @@ const Admin = () => {
           company: { name: companyName, icon: cibCcMastercard },
           phone: userObject?.phone,
           usage: {
-            value: ((20 * 100) / getNumberOfDays('01-01-2023', lastDate)).toFixed(),
-            period: '01.01.2023 - ' + newDateActivity,
+            value: ((20 * 100) / getNumberOfDays('01-04-2023', lastDate)).toFixed(),
+            period: '01.04.2023 - ' + newDateActivity,
             color: 'success',
           },
           activity: newDateActivity,
@@ -227,16 +231,16 @@ const Admin = () => {
                         <CTable align="middle" className="mb-0 border" hover responsive>
                           <CTableHead className='table-dark'>
                             <CTableRow>
-                              <CTableHeaderCell className="text-center">
+                              <CTableHeaderCell className="text-center" style={{width: '100px'}}>
                                 <CIcon icon={cilPeople} />
                               </CTableHeaderCell>
-                              <CTableHeaderCell>Пользователь</CTableHeaderCell>
-                              <CTableHeaderCell className="text-center">TG ID</CTableHeaderCell>
-                              <CTableHeaderCell className="text-center">Организация</CTableHeaderCell>
-                              <CTableHeaderCell className="text-center">Телефон</CTableHeaderCell>
-                              <CTableHeaderCell className="text-center">Город</CTableHeaderCell>
-                              <CTableHeaderCell>Использование</CTableHeaderCell>
-                              <CTableHeaderCell>Активность</CTableHeaderCell>
+                              <CTableHeaderCell style={{width: '160px'}}>Пользователь</CTableHeaderCell>                             
+                              <CTableHeaderCell className="text-center" style={{width: '160px'}}>Организация</CTableHeaderCell>
+                              <CTableHeaderCell className="text-center" style={{width: '160px'}}>Телефон</CTableHeaderCell>
+                              <CTableHeaderCell className="text-center" style={{width: '80px'}}>Город</CTableHeaderCell>
+                              <CTableHeaderCell className="text-center" style={{width: '100px'}}>TG ID</CTableHeaderCell>
+                              <CTableHeaderCell style={{width: '100px'}}>Использование</CTableHeaderCell>
+                              <CTableHeaderCell style={{width: '100px'}}>Активность</CTableHeaderCell>
                               {/* <CTableHeaderCell>Управление</CTableHeaderCell> */}
                             </CTableRow>
                           </CTableHead>
@@ -254,9 +258,6 @@ const Admin = () => {
                                   </div>
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
-                                  <div>{item.TG_ID}</div>
-                                </CTableDataCell>
-                                <CTableDataCell className="text-center">
                                   {item.company.name ? <div>{item.company.name}</div> : ''}
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
@@ -264,6 +265,9 @@ const Admin = () => {
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
                                   <div>{item.comment}</div>
+                                </CTableDataCell>
+                                <CTableDataCell className="text-center">
+                                  <div>{item.TG_ID}</div>
                                 </CTableDataCell>
                                 <CTableDataCell>
                                   <div className="clearfix">

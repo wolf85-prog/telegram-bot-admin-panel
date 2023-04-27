@@ -57,7 +57,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 	CustomMenu.displayName = CustomMenu
 
-	const change = (eventkey) => {
+	const change = async (eventkey) => {
 		//alert(`you chosen: ${eventkey}`)
 		const message = JSON.parse(eventkey);
 
@@ -71,7 +71,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${person.id}&message_id=${message.id}`
 		//console.log(url_del_msg)
-		const delToTelegram = $host.get(url_del_msg);
+		const delToTelegram = await $host.get(url_del_msg);
 
 		console.log("Удаляемое сообщение: ", message.id)
 		console.log("Дата сообщения: ", message.date)
