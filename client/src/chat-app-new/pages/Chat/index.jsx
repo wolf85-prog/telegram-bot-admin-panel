@@ -13,6 +13,7 @@ import { useContext } from 'react';
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider';
 import { newMessage, uploadFile } from './../../../http/chatAPI';
 import { $host } from './../../../http/index'
+import sendSound from './../../assets/sounds/zvuk-icq-quotnovoe-soobscheniequot-22978.mp3';
 
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
@@ -34,6 +35,8 @@ const Chat = () => {
 	const [file, setFile] = useState();
 	const [image, setImage]= useState("");
 	const [mess, setMess] = useState("");
+
+	const audio = new Audio(sendSound);
 
 	useEffect(() => {
 		if (user) {
@@ -133,6 +136,7 @@ const Chat = () => {
 	}
 
 	const submitNewMessage = () => {
+		audio.play();
 		sendText();
 
 		setMess("");

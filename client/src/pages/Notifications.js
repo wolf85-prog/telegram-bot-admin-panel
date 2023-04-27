@@ -45,6 +45,28 @@ const Notifications = () => {
   const [projects, setProjects]= useState([]);
   const [pending, setPending] = useState(true);
 
+  //  Internally, customStyles will deep merges your customStyles with the default styling.
+  const customStyles = {
+    rows: {
+        style: {
+            //minHeight: '72px', // override the row height
+        },
+    },
+    headCells: {
+        style: {
+            fontSize: '14px',
+            //paddingLeft: '8px', // override the cell padding for head cells
+            //paddingRight: '8px',
+        },
+    },
+    cells: {
+        style: {
+            //paddingLeft: '8px', // override the cell padding for data cells
+            //paddingRight: '8px',
+        },
+    },
+  };
+
   createTheme('solarized', {
     text: {
       primary: '#fff',
@@ -144,6 +166,7 @@ const Notifications = () => {
                       theme="solarized"
                       progressPending={pending}
 			                progressComponent={<CSpinner />}
+                      customStyles={customStyles}
                     />
                   </Suspense>
             </CContainer>
