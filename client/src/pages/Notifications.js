@@ -43,6 +43,7 @@ const columns = [
 const Notifications = () => {
 
   const { projects: notifications } = useUsersContext();
+  const { setNewProject } = useUsersContext();
   const [projects, setProjects] = useState([]); 
 
   //const [projects, setProjects]= useState([]);
@@ -94,6 +95,8 @@ const Notifications = () => {
 
   //get Projects
   useEffect(() => {
+    setNewProject(false)
+
     const arrProjects = []
 
     const fetchData = async () => {
