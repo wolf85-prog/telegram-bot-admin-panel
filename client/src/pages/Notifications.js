@@ -8,8 +8,8 @@ import {
   CRow,
   CFormInput,
 } from '@coreui/react'
-
-import { getProjectsApi, getCompanys, getManagers } from './../http/adminAPI.js'
+import { useUsersContext } from "./../chat-app-new/context/usersContext";
+import { getCompanys, getManagers } from './../http/adminAPI.js'
 
 
 
@@ -42,7 +42,10 @@ const columns = [
 
 const Notifications = () => {
 
-  const [projects, setProjects]= useState([]);
+  const { projects: notifications } = useUsersContext();
+  const [projects, setProjects] = useState([]); 
+
+  //const [projects, setProjects]= useState([]);
   const [pending, setPending] = useState(true);
 
   //  Internally, customStyles will deep merges your customStyles with the default styling.
@@ -54,7 +57,7 @@ const Notifications = () => {
     },
     headCells: {
         style: {
-            fontSize: '14px',
+            fontSize: '16px',
             //paddingLeft: '8px', // override the cell padding for head cells
             //paddingRight: '8px',
         },
@@ -94,13 +97,12 @@ const Notifications = () => {
     const arrProjects = []
 
     const fetchData = async () => {
-			let projects = await getProjectsApi();
 
       let companys = await getCompanys()
 
       let managers = await getManagers()
 
-      projects.map(async (project) => {
+      notifications.map(async (project) => {
 
         const compan = [...companys];
         let userIndex = companys.findIndex((company) => company.id === project.companyId);  
@@ -139,7 +141,7 @@ const Notifications = () => {
 
     fetchData();
     
-  },[projects])
+  },[notifications])
 
   return (
     <div className='dark-theme'>

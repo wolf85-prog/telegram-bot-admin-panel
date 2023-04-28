@@ -23,13 +23,12 @@ const AppSidebar = () => {
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { countMessage } = useUsersContext();
+  const { countMessage, newProject } = useUsersContext();
   console.log("countMessage: ", countMessage)
   
   let navigation = []
-  
-  countMessage !== 0
-  ? navigation = [ //показывать бейдж
+
+  navigation = [ //показывать бейдж
     {
       component: CNavItem,
       name: 'Панель управления',
@@ -45,7 +44,7 @@ const AppSidebar = () => {
       name: 'Заказчики',
       to: '/chat2',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-      badge: {color: 'info', text: countMessage,},
+      badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
     },
     
     {
@@ -59,38 +58,7 @@ const AppSidebar = () => {
       name: 'Уведомления',
       to: '/notifications',
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-    },
-  ]
-  : //не показывать бейдж
-  navigation = [
-    {
-      component: CNavItem,
-      name: 'Панель управления',
-      to: '/dashboard',
-      icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    },
-    {
-      component: CNavTitle,
-      name: 'Основные разделы',
-    },
-    {
-      component: CNavItem,
-      name: 'Заказчики',
-      to: '/chat2',
-      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-    },
-    
-    {
-      component: CNavItem,
-      name: 'Рассылки',
-      to: '/distribution',
-      icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
-    },
-    {
-      component: CNavItem,
-      name: 'Уведомления',
-      to: '/notifications',
-      icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
+      badge: newProject ? {color: 'info', text: '1',} : "",
     },
   ]
 

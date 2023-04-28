@@ -15,6 +15,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
 
+import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
 import logo from './../assets/brand/logo_04_light.png'
@@ -22,6 +23,8 @@ import logo from './../assets/brand/logo_04_light.png'
 const AppHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
+
+  const { newProject } = useUsersContext();
 
   return (
     <CHeader position="sticky" className="mb-4">
@@ -56,9 +59,9 @@ const AppHeader = () => {
               {/* <CBadge color="success" className="ms-2">
                 5
               </CBadge> */}
-              {/* <span className="badge bg-danger-gradient rounded-pill position-absolute top-0 end-0">
-                1
-              </span> */}
+              { newProject ?  <span className="badge bg-danger-gradient rounded-pill position-absolute top-0 end-0">1</span> 
+              : ""
+              }
             </CNavLink>
           </CNavItem>
           <CNavItem>

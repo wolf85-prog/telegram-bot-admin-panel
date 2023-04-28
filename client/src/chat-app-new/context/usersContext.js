@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./socketContext";
 import { getContacts, getConversation, getMessages } from '../../http/chatAPI'
-import { getDistributions, getManagers } from "src/http/adminAPI";
+import { getDistributions, getManagers, getProjectsApi } from "src/http/adminAPI";
 import boopSfx from './../assets/sounds/sms-android.mp3';
+import soundNotif from './../assets/sounds/schetchik-banknot-zvuki-scheta-kupyur-41139.mp3';
 
 const UsersContext = createContext();
 
@@ -17,9 +18,12 @@ const UsersProvider = ({ children }) => {
 	const [usersOnline, setUsersOnline] = useState([]);
 	const [distributions, setDistributions] = useState([]); 
 	const [managers, setManagers]= useState([]);
+	const [projects, setProjects] = useState([]); 
+	const [newProject, setNewProject]= useState(false);
 
 	//const [play] = useSound(boopSfx);
 	const audio = new Audio(boopSfx);
+	const audioProject = new Audio(soundNotif);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -161,6 +165,20 @@ const UsersProvider = ({ children }) => {
 	  	fetchData();
 
 	},[])
+//------------------------------------------------------------------------------------------
+
+	//get Projects
+	useEffect(() => {
+    	const fetchData = async () => {
+			let projects = await getProjectsApi();
+      		console.log("projects: ", projects)
+
+			setProjects(projects)
+		}
+
+	  	fetchData();
+
+	},[])
 
 	//подключение админа к сокету и вывод всех подключенных
 	useEffect(()=>{
@@ -191,7 +209,7 @@ const UsersProvider = ({ children }) => {
 		const { userId } = data;
 		_updateUserProp(userId, "typing", false);
 	};
-
+//------------------------------------------------------------------------------------------
 
 	//получить сообщение из телеграмма
 	const fetchMessageResponse = (data) => {
@@ -200,6 +218,11 @@ const UsersProvider = ({ children }) => {
 		console.log("Пришло новое сообщение: ", count+1)
 		setCount(count+1);
 		setCountMessage(countMessage + 1)
+
+		if (data.text.startsWith('Проект успешно создан')) {
+			audioProject.play();
+			setNewProject(true)
+		}
 
 		setUsers((users) => {
 			const { senderId, text, type, messageId } = data;
@@ -382,6 +405,10 @@ const UsersProvider = ({ children }) => {
 			count,
 			countMessage,
 			setCountMessage,
+			newProject,
+			setNewProject,
+			projects,
+			setProjects,
 		}}>
 			{children}
 		</UsersContext.Provider>

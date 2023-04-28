@@ -23,6 +23,7 @@ import { $host } from './../http/index'
 import { useNavigate } from 'react-router-dom';
 import { newDistribution } from './../http/adminAPI';
 import { newMessage, uploadFile } from './../http/chatAPI';
+import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 
 const DistributionAdd = () => {
 
@@ -48,6 +49,8 @@ const DistributionAdd = () => {
   const [file, setFile] = useState();
   const [value, setValue] = useState("");
   const [image, setImage]= useState("");
+
+  const audio = new Audio(sendSound);
 
   const navigate = useNavigate();
 
@@ -116,6 +119,8 @@ const DistributionAdd = () => {
   {/* Отправка рассылки */}
   const onSendText = async() => {
     console.log(selected)
+
+    audio.play();
 
     //новая рассылка
     const message = {
