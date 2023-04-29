@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./socketContext";
 import { getContacts, getConversation, getMessages } from '../../http/chatAPI'
 import { getDistributions, getManagers, getProjectsApi } from "src/http/adminAPI";
-import boopSfx from './../assets/sounds/sms-android.mp3';
+import boopSfx from './../assets/sounds/zvuk-icq.mp3';
 import soundNotif from './../assets/sounds/schetchik-banknot-zvuki-scheta-kupyur-41139.mp3';
 
 const UsersContext = createContext();
