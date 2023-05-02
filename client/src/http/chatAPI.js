@@ -91,6 +91,17 @@ export const getMessages = async(id)=>{
     }
 }
 
+export const getAllMessages = async()=>{
+    try {
+        let response= await $host.get(`api/message/get`);
+        
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getAllMessages api",error.message);
+        
+    }
+}
+
 //file
 export const uploadFile = async (data) =>{
     try {

@@ -27,6 +27,7 @@ import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 // import pencilIcon from 'src/assets/images/pencil.png'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { getProjects, getCompanys } from './../http/adminAPI.js'
+import { getAllMessages } from './../http/chatAPI.js'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 //import Loader from 'src/chat-app-new/components/Loader'
@@ -54,7 +55,8 @@ const Admin = () => {
   //const [managers, setManagers]= useState([]);
   const [loading, setLoading]= useState(true);
 
-  //const host = process.env.REACT_APP_API_URL
+  const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
+  const host = process.env.REACT_APP_API_URL
   //const hostAdmin = process.env.REACT_APP_ADMIN_API_URL
 
   function getNumberOfDays(start, end) { 
@@ -82,6 +84,9 @@ const Admin = () => {
       let companys = await getCompanys()
       console.log("companys: ", companys)
 
+      let messages = await getAllMessages()
+      console.log("messages: ", messages)
+
       clients.map(async(client, index) => {
         const managers = [...zakazchiki];
         let userIndex = zakazchiki.findIndex((manager) => manager.tgID === client.chatId);  
@@ -106,7 +111,9 @@ const Admin = () => {
 
         const newClientName = client.name.includes("|") ? client.name.split(" | ")[1] : client.name
 
-        //const count_message = 
+        //const allMessages = messages.length //всего сообщений
+        //const fromAdmin = messages.filter(el => el.senderId === '1775583141');
+        //const messagesUsers = messages.filter(el => el.senderId === client.chatId);
         
         const newObj = {
           avatar: client.avatar,
@@ -120,7 +127,7 @@ const Admin = () => {
           company: { name: companyName, icon: cibCcMastercard },
           phone: userObject?.phone,
           usage: {
-            value: ((20 * 100) / getNumberOfDays('01-04-2023', lastDate)).toFixed(),
+            value: '', //(messagesUsers.length *100 / (allMessages - fromAdmin)).toFixed(), //((20 * 100) / getNumberOfDays('01-04-2023', lastDate)).toFixed(),
             period: '01.04.2023 - ' + newDateActivity,
             color: 'success',
           },
@@ -248,7 +255,7 @@ const Admin = () => {
                             {contacts.map((item, index) => (
                               <CTableRow v-for="item in tableItems" key={index}>
                                 <CTableDataCell className="text-center">
-                                    <CAvatar size="md" src={avatar2} alt='' />
+                                    <CAvatar size="md" src={item.avatar ? host + item.avatar : avatar2} alt='' />
                                 </CTableDataCell>
                                 <CTableDataCell>
                                   <div>{item.user.name}</div>

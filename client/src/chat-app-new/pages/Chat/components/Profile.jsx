@@ -71,7 +71,7 @@ const Profile = ({ user }) => {
             data.append("photo", img);
 
             let response = await uploadFile(data);
-			console.log("response: ", response.data)
+			//console.log("response: ", response.data)
 			//setAvatar(response.data.path)
 
 			const newAvatar = {
