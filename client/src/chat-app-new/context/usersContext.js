@@ -204,7 +204,7 @@ const UsersProvider = ({ children }) => {
 //------------------------------------------------------------------------------------------
 
 	//получить сообщение из телеграмма
-	const fetchMessageResponse = (data) => {
+	const fetchMessageResponse = async(data) => {
 		audio.play();
 		console.log("date: ", data)
 		console.log("Пришло новое сообщение: ", count+1)
@@ -213,7 +213,14 @@ const UsersProvider = ({ children }) => {
 
 		if (data.text.startsWith('Проект успешно создан')) {
 			audioProject.play();
+			//пришел новый проект
 			setNewProject(true)
+
+			//get all projects
+			let projects = await getProjectsApi();
+			console.log("projects get socket: ", projects.length)
+
+			setProjects(projects)
 		}
 
 		setUsers((users) => {

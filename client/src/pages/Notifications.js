@@ -150,7 +150,7 @@ const Notifications = () => {
 
     fetchData();
     
-  },[])
+  },[notifications])
 
   return (
     <div className='dark-theme'>
