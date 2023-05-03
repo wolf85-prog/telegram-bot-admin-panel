@@ -80,18 +80,14 @@ const Admin = () => {
         
         const managers = [...zakazchiki];
         let userIndex = zakazchiki.findIndex((manager) => manager.tgID === client.chatId);  
-        //let userObject
         const userObject = managers[userIndex];
-        //console.log("userObject: ", userObject?.id)
 
         const compan = [...companys];
         let userIndex2 = companys.findIndex((company) => company.propertys["Менеджеры"].relation[0]?.id === userObject?.id);  
-        //console.log("userIndex2: ", userIndex2)
         const userObject2 = compan[userIndex2];
-        //console.log("userObject: ", userObject2?.id)
 
         const companyName = userObject2?.propertys["Название компании"].title[0]?.plain_text
-        console.log("companyName: ", companyName)
+        //console.log("companyName: ", companyName)
 
         const lastDate = client.date.split('T')
         const d = new Date(lastDate[0]);
@@ -121,7 +117,7 @@ const Admin = () => {
           company: companyName ? companyName : '',
           phone: userObject?.phone,
           usage: {
-            value: (messagesUsers.length * 100 / (allMessages - fromAdmin.length)).toFixed(), 
+            value: Math.round(messagesUsers.length * 100 / (allMessages - fromAdmin.length)), 
             period: '01.04.2023 - ' + newDateActivity,
             color: 'success',
           },

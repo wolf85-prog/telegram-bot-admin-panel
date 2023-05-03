@@ -17,18 +17,22 @@ const columns = [
   {
       name: 'Дата/время',
       selector: row => row.date,
+      sortable: true,
   },
   {
       name: 'Название проекта',
       selector: row => row.title,
+      sortable: true,
   },
   {
       name: 'Заказчик',
       selector: row => row.receiverId,
+      sortable: true,
   },
   {
       name: 'Менеджер',
       selector: row => row.managerId,
+      sortable: true,
   },
   {
       name: 'Адрес',
@@ -37,61 +41,60 @@ const columns = [
   {
       name: 'Контакты',
       selector: row => row.contacts,
+      sortable: true,
   },
 ];
+
+//  Internally, customStyles will deep merges your customStyles with the default styling.
+const customStyles = {
+  rows: {
+      style: {
+          //minHeight: '72px', // override the row height
+      },
+  },
+  headCells: {
+      style: {
+          fontSize: '16px',
+          //paddingLeft: '8px', // override the cell padding for head cells
+          //paddingRight: '8px',
+      },
+  },
+  cells: {
+      style: {
+          //paddingLeft: '8px', // override the cell padding for data cells
+          //paddingRight: '8px',
+      },
+  },
+};
+
+createTheme('solarized', {
+  text: {
+    primary: '#fff',
+    secondary: '#2aa198',
+  },
+  background: {
+    default: '#131c21',
+  },
+  context: {
+    background: '#cb4b16',
+    text: '#FFFFFF',
+  },
+  divider: {
+    default: '#ffffff13',
+  },
+  action: {
+    button: 'rgba(0,0,0,.54)',
+    hover: 'rgba(0,0,0,.08)',
+    disabled: 'rgba(0,0,0,.12)',
+  },
+}, 'dark');
 
 const Notifications = () => {
 
   const { projects: notifications } = useUsersContext();
   const { setNewProject } = useUsersContext();
   const [projects, setProjects] = useState([]); 
-
-  //const [projects, setProjects]= useState([]);
   const [pending, setPending] = useState(true);
-
-  //  Internally, customStyles will deep merges your customStyles with the default styling.
-  const customStyles = {
-    rows: {
-        style: {
-            //minHeight: '72px', // override the row height
-        },
-    },
-    headCells: {
-        style: {
-            fontSize: '16px',
-            //paddingLeft: '8px', // override the cell padding for head cells
-            //paddingRight: '8px',
-        },
-    },
-    cells: {
-        style: {
-            //paddingLeft: '8px', // override the cell padding for data cells
-            //paddingRight: '8px',
-        },
-    },
-  };
-
-  createTheme('solarized', {
-    text: {
-      primary: '#fff',
-      secondary: '#2aa198',
-    },
-    background: {
-      default: '#131c21',
-    },
-    context: {
-      background: '#cb4b16',
-      text: '#FFFFFF',
-    },
-    divider: {
-      default: '#ffffff13',
-    },
-    action: {
-      button: 'rgba(0,0,0,.54)',
-      hover: 'rgba(0,0,0,.08)',
-      disabled: 'rgba(0,0,0,.12)',
-    },
-  }, 'dark');
 
   //get Projects
   useEffect(() => {
@@ -106,18 +109,20 @@ const Notifications = () => {
 
       let managers = await getManagers()
 
+      console.log("notifications: ", notifications)
+
       notifications.map(async (project) => {
 
         const compan = [...companys];
         let userIndex = companys.findIndex((company) => company.id === project.companyId);  
         const userObject = compan[userIndex];
-        const companyName = userObject.propertys["Название компании"].title[0].plain_text
+        const companyName = userObject?.propertys["Название компании"].title[0]?.plain_text
 
         const manager = [...managers];
         let userIndex2 = manager.findIndex((man) => man.id === project.managerId);  
         const userObject2 = manager[userIndex2];
-        const managerName = userObject2.fio ? userObject2.fio : ''
-        const managerPhone = userObject2.phone
+        const managerName = userObject2?.fio ? userObject2.fio : ''
+        const managerPhone = userObject2?.phone
 
         const d = new Date(project.createdAt);
 				const year = d.getFullYear();
@@ -145,7 +150,7 @@ const Notifications = () => {
 
     fetchData();
     
-  },[notifications])
+  },[])
 
   return (
     <div className='dark-theme'>
