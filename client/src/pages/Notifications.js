@@ -102,6 +102,7 @@ const Notifications = () => {
     const fetchData = async () => {
 
       let companys = await getCompanys()
+      console.log("companys: ", companys)
 
       let managers = await getManagers()
 
@@ -115,7 +116,7 @@ const Notifications = () => {
         const manager = [...managers];
         let userIndex2 = manager.findIndex((man) => man.id === project.managerId);  
         const userObject2 = manager[userIndex2];
-        const managerName = userObject2.fio
+        const managerName = userObject2.fio ? userObject2.fio : ''
         const managerPhone = userObject2.phone
 
         const d = new Date(project.createdAt);

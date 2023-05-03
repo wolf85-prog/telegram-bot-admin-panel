@@ -50,6 +50,7 @@ const Admin = () => {
 
   const { users: clients } = useUsersContext();
   const { managers: zakazchiki } = useUsersContext();
+  const { projects: projs } = useUsersContext();
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]);
   //const [managers, setManagers]= useState([]);
@@ -58,22 +59,6 @@ const Admin = () => {
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
   //const hostAdmin = process.env.REACT_APP_ADMIN_API_URL
-
-  function getNumberOfDays(start, end) { 
-    const date1 = new Date(start); 
-    const date2 = new Date(end); 
-    
-    // One day in milliseconds 
-    const oneDay = 1000 * 60 * 60 * 24; 
-    
-    // Calculating the time difference between two dates 
-    const diffInTime = date2.getTime() - date1.getTime(); 
-    
-    // Calculating the no. of days between two dates 
-    const diffInDays = Math.round(diffInTime / oneDay); 
-    
-    return diffInDays; 
-  } 
 
   //get Contacts
   useEffect(() => {
@@ -87,17 +72,26 @@ const Admin = () => {
       let messages = await getAllMessages()
       console.log("messages: ", messages)
 
-      clients.map(async(client, index) => {
+      console.log("clients: ", clients)
+      console.log("managers: ", zakazchiki)
+
+
+      clients.map((client, index) => {
+        
         const managers = [...zakazchiki];
         let userIndex = zakazchiki.findIndex((manager) => manager.tgID === client.chatId);  
+        //let userObject
         const userObject = managers[userIndex];
+        //console.log("userObject: ", userObject?.id)
 
         const compan = [...companys];
-        let userIndex2 = companys.findIndex((company) => company.propertys["Менеджеры"].relation[0].id === userObject.id);  
+        let userIndex2 = companys.findIndex((company) => company.propertys["Менеджеры"].relation[0]?.id === userObject?.id);  
+        //console.log("userIndex2: ", userIndex2)
         const userObject2 = compan[userIndex2];
-        //console.log(userObject2.propertys["Название компании"].title[0].plain_text)
+        //console.log("userObject: ", userObject2?.id)
 
-        const companyName = userObject2.propertys["Название компании"].title[0].plain_text
+        const companyName = userObject2?.propertys["Название компании"].title[0]?.plain_text
+        console.log("companyName: ", companyName)
 
         const lastDate = client.date.split('T')
         const d = new Date(lastDate[0]);
@@ -111,9 +105,9 @@ const Admin = () => {
 
         const newClientName = client.name.includes("|") ? client.name.split(" | ")[1] : client.name
 
-        //const allMessages = messages.length //всего сообщений
-        //const fromAdmin = messages.filter(el => el.senderId === '1775583141');
-        //const messagesUsers = messages.filter(el => el.senderId === client.chatId);
+        const allMessages = messages.length //всего сообщений
+        const fromAdmin = messages.filter(el => el.senderId === chatAdminId);
+        const messagesUsers = messages.filter(el => el.senderId === client.chatId);
         
         const newObj = {
           avatar: client.avatar,
@@ -124,15 +118,16 @@ const Admin = () => {
           },
           TG_ID: client.chatId,
           comment: userObject?.comment,
-          company: { name: companyName, icon: cibCcMastercard },
+          company: companyName ? companyName : '',
           phone: userObject?.phone,
           usage: {
-            value: '', //(messagesUsers.length *100 / (allMessages - fromAdmin)).toFixed(), //((20 * 100) / getNumberOfDays('01-04-2023', lastDate)).toFixed(),
+            value: (messagesUsers.length * 100 / (allMessages - fromAdmin.length)).toFixed(), 
             period: '01.04.2023 - ' + newDateActivity,
             color: 'success',
           },
           activity: newDateActivity,
         }
+
         arrClients.push(newObj)
       })
       console.log('userbots: ', arrClients)
@@ -141,20 +136,20 @@ const Admin = () => {
       
       setTimeout(() => {
         setLoading(false)
-      }, "5000")
+      }, "6000")
     }
     
     fetchData();
     
-  }, [clients]);
+  }, []);
 
   //get Projects
   useEffect(() => {
     const arrProjects = []
 
     const fetchData = async () => {
-			let response = await getProjects();
-      response.map(async (project) => {
+			//let response = await getProjects();
+      projs.map(async (project) => {
         const newProject = {
 					id: project.id,
 					name: project.title,
@@ -265,7 +260,7 @@ const Admin = () => {
                                   </div>
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
-                                  {item.company.name ? <div>{item.company.name}</div> : ''}
+                                  {item.company ? <div>{item.company}</div> : ''}
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
                                   <div>{item.phone}</div>

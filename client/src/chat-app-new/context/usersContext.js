@@ -49,8 +49,6 @@ const UsersProvider = ({ children }) => {
 				const allDate = []
 
 				messages.map(message => {
-					//let time_mess = message.createdAt.split('T')
-					
 					const d = new Date(message.createdAt);
 					const year = d.getFullYear();
 					const month = String(d.getMonth()+1).padStart(2, "0");
@@ -72,7 +70,6 @@ const UsersProvider = ({ children }) => {
 					}
 					arrayMessage.push(newMessage)
 					allDate.push(newDateMessage)
-
 				})
 
 				const sortedDate = [...allDate].sort((a, b) => {
@@ -81,8 +78,6 @@ const UsersProvider = ({ children }) => {
 				})
 
 				const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
-
-				//console.log("dates: ", dates)
 
 				let obj = {};
 				for (let i = 0; i < dates.length; i++) {
@@ -94,8 +89,6 @@ const UsersProvider = ({ children }) => {
 					}	
 					obj[dates[i]] = arrayDateMessage;
 				}
-
-				//obj["Сегодня"] = []
 
 				let first_name = user.firstname != null ? user.firstname : ''
 				let last_name = user.lastname != null ? user.lastname : ''
@@ -117,7 +110,6 @@ const UsersProvider = ({ children }) => {
 				}
 
 				arrayContact.push(newUser)
-
 			})
 
 			//подгрузка контактов
@@ -143,7 +135,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
     	const fetchData = async () => {
 			let response = await getManagers();
-      		console.log("managers: ", response)
+      		console.log("managers: ", response.length)
 
 			setManagers(response)
 		}
@@ -157,7 +149,7 @@ const UsersProvider = ({ children }) => {
   	useEffect(() => {
     	const fetchData = async () => {
 			let response = await getDistributions();
-      		console.log("distribution: ", response)
+      		console.log("distribution: ", response.length)
 
 			setDistributions(response)
 		}
@@ -171,7 +163,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
     	const fetchData = async () => {
 			let projects = await getProjectsApi();
-      		console.log("projects: ", projects)
+			console.log("projects size: ", projects.length)
 
 			setProjects(projects)
 		}
@@ -179,7 +171,7 @@ const UsersProvider = ({ children }) => {
 	  	fetchData();
 
 	},[])
-
+//------------------------------------------------------------------------------------------
 	//подключение админа к сокету и вывод всех подключенных
 	useEffect(()=>{
 		socket.emit("addUser", chatAdminId)
