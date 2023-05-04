@@ -72,11 +72,6 @@ const UsersProvider = ({ children }) => {
 					allDate.push(newDateMessage)
 				})
 
-				const sortedDate = [...allDate].sort((a, b) => {
-					var dateA = new Date(a), dateB = new Date(b)
-					return dateA-dateB //сортировка по возрастающей дате
-				})
-
 				const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
 
 				let obj = {};

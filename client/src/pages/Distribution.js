@@ -1,5 +1,5 @@
 import React, { Suspense, useState, useEffect } from 'react'
-import { Navigate, Route, Routes, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { 
   CContainer, 
   CSpinner, 
@@ -10,40 +10,17 @@ import {
   CTableHeaderCell,
   CTableBody,
   CTableDataCell,
-  CAvatar,
   CCard,
   CCardBody,
   CCardHeader,
   CCol,
-  CProgress,
   CRow,
-  CFormLabel,
-  CFormInput,
-  CForm
 } from '@coreui/react'
-import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
-import CIcon from '@coreui/icons-react'
-import {
-  cibCcAmex,
-  cibCcApplePay,
-  cibCcMastercard,
-  cibCcPaypal,
-  cibCcStripe,
-  cibCcVisa,
-  cifBr,
-  cifEs,
-  cifFr,
-  cifIn,
-  cifPl,
-  cifUs,
-  cilCloudDownload,
-  cilPeople,
-} from '@coreui/icons'
-import DataTable, { createTheme } from 'react-data-table-component';
+import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 import deleteIcon from 'src/assets/images/delete.png'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { getDistributions, delDistribution } from 'src/http/adminAPI';
+import { delDistribution } from 'src/http/adminAPI';
 
 const Distribution = () => {
   const { distributions: messages } = useUsersContext();
@@ -155,7 +132,7 @@ const Distribution = () => {
                                       <CTableDataCell className="text-center">
                                         {item.image.endsWith('.pdf') ?
                                         <iframe src={item.image} height="120px" width="200px" title="myFramePdf"/>
-                                        : <div>{item.image ? <a href={item.image} target='_blank' rel="noreferrer"><img src={item.image} width={230} height={120} style={{objectFit: 'contain'}}></img></a> : ''}</div>
+                                        : <div>{item.image ? <a href={item.image} target='_blank' rel="noreferrer"><img src={item.image} alt='' width={230} height={120} style={{objectFit: 'contain'}}></img></a> : ''}</div>
                                         }
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">

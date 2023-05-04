@@ -1,10 +1,6 @@
 import React, { Suspense } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
 import { CContainer, CSpinner } from '@coreui/react'
-import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
-
-// routes config
-import routes from '../routes'
+import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 const MessageBot = () => {
   return (

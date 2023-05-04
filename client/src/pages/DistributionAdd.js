@@ -5,12 +5,10 @@ import {
   CRow,
   CCol,
   CCard,
-  CCardHeader,
   CCardBody,
   CForm,
   CFormLabel,
   CFormInput,
-  CFormSelect,
   CFormTextarea,
   CButton,
   CAlert,
@@ -30,10 +28,6 @@ const DistributionAdd = () => {
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 	const host = process.env.REACT_APP_API_URL
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
-  const socketUrl = process.env.REACT_APP_SOCKET_APP_URL
-
-  //socket.io
-  const {io} = require("socket.io-client")
 
   const { users: clients } = useUsersContext();
   const { addNewMessage } = useUsersContext();

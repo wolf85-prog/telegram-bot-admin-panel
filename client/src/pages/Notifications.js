@@ -94,12 +94,12 @@ const Notifications = () => {
   const { projects: notifications } = useUsersContext();
   const { setNewProject } = useUsersContext();
   const [projects, setProjects] = useState([]); 
-  const [pending, setPending] = useState(true);
+  const [pending, setPending] = useState(true); 
+
+  setNewProject(false)
 
   //get Projects
   useEffect(() => {
-    setNewProject(false)
-
     const arrProjects = []
 
     const fetchData = async () => {

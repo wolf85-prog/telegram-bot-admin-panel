@@ -18,14 +18,13 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import {
-  cibCcMastercard,
   cilPeople,
 } from '@coreui/icons'
 
 import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { getProjects, getCompanys } from './../http/adminAPI.js'
+import { getCompanys } from './../http/adminAPI.js'
 import { getAllMessages } from './../http/chatAPI.js'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
@@ -127,7 +126,7 @@ const Admin = () => {
     
     fetchData();
     
-  }, []);
+  }, [clients]);
 
   //get Projects
   useEffect(() => {
@@ -153,7 +152,7 @@ const Admin = () => {
 
     fetchData();
     
-  },[])
+  },[projs])
 
   return (
     <div className='dark-theme'>
