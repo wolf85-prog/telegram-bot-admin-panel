@@ -9,6 +9,7 @@ class ProjectController {
                 order: [
                     ['id', 'DESC'],
                 ],
+                limit: 10
             })
             return res.status(200).json(projects);
         } catch (error) {
