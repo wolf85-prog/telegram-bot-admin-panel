@@ -76,7 +76,7 @@ const Distribution = () => {
           id: distrib.id,
 					name: distrib.name,
           text: distrib.text,
-          image: distrib.image,
+          image: distrib.image.split('5000/')[1] !=='' ? distrib.image: '',
           button: distrib.button,
           receivers: strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
           datestart: newDateMessage,
@@ -86,7 +86,7 @@ const Distribution = () => {
         arrDitributions.push(newDistribution)
       })
 
-      setDistributions(arrDitributions.reverse()) 
+      setDistributions(arrDitributions) 
       setLoading(false)
     }
 
@@ -130,7 +130,7 @@ const Distribution = () => {
                               <CTable align="middle" className="mb-0 border" hover responsive>
                                 <CTableHead className='table-dark'>
                                   <CTableRow>
-                                    <CTableHeaderCell>№</CTableHeaderCell>
+                                    {/* <CTableHeaderCell>№</CTableHeaderCell> */}
                                     <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Текст</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Картинка</CTableHeaderCell>
@@ -143,9 +143,9 @@ const Distribution = () => {
                                 <CTableBody>
                                   {distributions.map((item, index) => (
                                     <CTableRow v-for="item in tableItems" key={index}>
-                                      <CTableDataCell>
+                                      {/* <CTableDataCell>
                                         <div>{index+1}</div>
-                                      </CTableDataCell>
+                                      </CTableDataCell> */}
                                       <CTableDataCell className="text-center">
                                         <div>{item.datestart}</div>
                                       </CTableDataCell>
@@ -155,7 +155,7 @@ const Distribution = () => {
                                       <CTableDataCell className="text-center">
                                         {item.image.endsWith('.pdf') ?
                                         <iframe src={item.image} height="120px" width="200px" title="myFramePdf"/>
-                                        : <div><a href={item.image} target='_blank' rel="noreferrer"><img src={item.image} width={230} height={120} style={{objectFit: 'contain'}}></img></a></div>
+                                        : <div>{item.image ? <a href={item.image} target='_blank' rel="noreferrer"><img src={item.image} width={230} height={120} style={{objectFit: 'contain'}}></img></a> : ''}</div>
                                         }
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
