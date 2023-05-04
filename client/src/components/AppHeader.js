@@ -25,6 +25,7 @@ const AppHeader = () => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   const { newProject } = useUsersContext();
+  console.log("countProject: ", newProject)
 
   return (
     <CHeader position="sticky" className="mb-4">
