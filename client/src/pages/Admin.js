@@ -23,44 +23,27 @@ import {
 } from '@coreui/icons'
 
 import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
-// import deleteIcon from 'src/assets/images/delete.png'
-// import pencilIcon from 'src/assets/images/pencil.png'
+
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { getProjects, getCompanys } from './../http/adminAPI.js'
 import { getAllMessages } from './../http/chatAPI.js'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
-//import Loader from 'src/chat-app-new/components/Loader'
-
-// if (!user._id) {
-//   return <Navigate to="/register" />;
-// }
-
-//const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
-
-// const progressExample = [
-//   { title: 'Визиты', value: '29.703 Users', percent: 40, color: 'success' },
-//   { title: 'Уникальные', value: '24.093 Users', percent: 20, color: 'info' },
-//   { title: 'Просмотры', value: '78.706 Views', percent: 60, color: 'warning' },
-//   { title: 'Новые пользователи', value: '22.123 Users', percent: 80, color: 'danger' },
-//   { title: 'Отказы', value: 'Average Rate', percent: 40.15, color: 'primary' },
-// ]
 
 const Admin = () => {
 
   const { users: clients } = useUsersContext();
   const { managers: zakazchiki } = useUsersContext();
   const { projects: projs } = useUsersContext();
+
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]);
   const [newClients, setNewClients]= useState([]);
   const [oldClients, setOldClients]= useState([]);
-  //const [managers, setManagers]= useState([]);
   const [loading, setLoading]= useState(true);
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
-  //const hostAdmin = process.env.REACT_APP_ADMIN_API_URL
   
 
   //get Contacts
@@ -71,13 +54,11 @@ const Admin = () => {
 
       let companys = await getCompanys()
       console.log("companys: ", companys)
-
-      let messages = await getAllMessages()
-      console.log("messages: ", messages)
-
       console.log("clients: ", clients)
       console.log("managers: ", zakazchiki)
 
+      let messages = await getAllMessages()
+      console.log("messages: ", messages)
 
       clients.map((client, index) => {
         
@@ -90,7 +71,6 @@ const Admin = () => {
         const userObject2 = compan[userIndex2];
 
         const companyName = userObject2?.propertys["Название компании"].title[0]?.plain_text
-        //console.log("companyName: ", companyName)
 
         const lastDate = client.date.split('T')
         const d = new Date(lastDate[0]);
@@ -136,8 +116,9 @@ const Admin = () => {
         arrClients.push(newObj)
       })
       console.log('userbots: ', arrClients)
-      
-      setContacts(arrClients)  
+
+      const filteredClients = [...arrClients].filter((el) => el.TG_ID !== chatAdminId); //без админского пользователя     
+      setContacts(filteredClients)  
       
       setTimeout(() => {
         setLoading(false)
