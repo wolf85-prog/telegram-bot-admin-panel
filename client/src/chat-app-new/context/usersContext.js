@@ -215,7 +215,11 @@ const UsersProvider = ({ children }) => {
 			audioProject.play();
 			//пришел новый проект
 			setNewProject(true)
-			console.log("projects get socket: ", projects.length)
+			
+			//get all projects
+			// let projects = await getProjectsApi();
+			//console.log("projects get socket: ", projects.length)
+			// setProjects(projects)
 		}
 
 		setUsers((users) => {
