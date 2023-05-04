@@ -53,12 +53,15 @@ const Admin = () => {
   const { projects: projs } = useUsersContext();
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]);
+  const [newClients, setNewClients]= useState([]);
+  const [oldClients, setOldClients]= useState([]);
   //const [managers, setManagers]= useState([]);
   const [loading, setLoading]= useState(true);
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
   //const hostAdmin = process.env.REACT_APP_ADMIN_API_URL
+  
 
   //get Contacts
   useEffect(() => {
@@ -104,6 +107,12 @@ const Admin = () => {
         const allMessages = messages.length //всего сообщений
         const fromAdmin = messages.filter(el => el.senderId === chatAdminId);
         const messagesUsers = messages.filter(el => el.senderId === client.chatId);
+
+        const arr = clients.filter(el => el.message === '');
+        setNewClients(arr)
+
+        const arr2 = clients.filter(el => el.message !== '');
+        setOldClients(arr2)
         
         const newObj = {
           avatar: client.avatar,
@@ -189,13 +198,13 @@ const Admin = () => {
                               <CCol sm={6}>
                                 <div className="border-start border-start-4 border-start-info py-1 px-3">
                                   <div className="text-medium-emphasis small">Новые клиенты</div>
-                                  <div className="fs-5 fw-semibold">9,123</div>
+                                  <div className="fs-5 fw-semibold">{newClients.length}</div>
                                 </div>
                               </CCol>
                               <CCol sm={6}>
                                 <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
                                   <div className="text-medium-emphasis small">Постоянные клиенты</div>
-                                  <div className="fs-5 fw-semibold">22,643</div>
+                                  <div className="fs-5 fw-semibold">{oldClients.length}</div>
                                 </div>
                               </CCol>
                             </CRow>
@@ -206,13 +215,13 @@ const Admin = () => {
                               <CCol sm={6}>
                                 <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
                                   <div className="text-medium-emphasis small">Просмотры</div>
-                                  <div className="fs-5 fw-semibold">78,623</div>
+                                  <div className="fs-5 fw-semibold">-</div>
                                 </div>
                               </CCol>
                               <CCol sm={6}>
                                 <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
                                   <div className="text-medium-emphasis small">Другое</div>
-                                  <div className="fs-5 fw-semibold">49,123</div>
+                                  <div className="fs-5 fw-semibold">-</div>
                                 </div>
                               </CCol>
                             </CRow>

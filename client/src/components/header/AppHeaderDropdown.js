@@ -41,30 +41,16 @@ const AppHeaderDropdown = observer(() => {
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownHeader className="bg-light fw-semibold py-2">Аккаунт</CDropdownHeader>
         <CDropdownItem href="#">
-          <CIcon icon={cilBell} className="me-2" />
-          Обновления
-          <CBadge color="info" className="ms-2">
-            42
-          </CBadge>
-        </CDropdownItem>
-        <CDropdownItem href="#">
           <CIcon icon={cilEnvelopeOpen} className="me-2" />
           Сообщений
           <CBadge color="success" className="ms-2">
-            42
+            0
           </CBadge>
         </CDropdownItem>
         <CDropdownItem href="#">
-          <CIcon icon={cilTask} className="me-2" />
-          Задачи
-          <CBadge color="danger" className="ms-2">
-            42
-          </CBadge>
-        </CDropdownItem>
-        <CDropdownItem href="#">
-          <CIcon icon={cilCommentSquare} className="me-2" />
-          Комментарии
-          <CBadge color="warning" className="ms-2">
+          <CIcon icon={cilFile} className="me-2" />
+          Проекты
+          <CBadge color="primary" className="ms-2">
             42
           </CBadge>
         </CDropdownItem>
@@ -76,14 +62,7 @@ const AppHeaderDropdown = observer(() => {
         <CDropdownItem href="#">
           <CIcon icon={cilSettings} className="me-2" />
           Настройки
-        </CDropdownItem>
-        <CDropdownItem href="#">
-          <CIcon icon={cilFile} className="me-2" />
-          Проекты
-          <CBadge color="primary" className="ms-2">
-            42
-          </CBadge>
-        </CDropdownItem>
+        </CDropdownItem>       
         <CDropdownDivider />
         <CDropdownItem onClick={()=> logOut()}>
           <CIcon icon={cilLockLocked} className="me-2" />

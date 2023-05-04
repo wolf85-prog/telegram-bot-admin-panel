@@ -217,10 +217,10 @@ const UsersProvider = ({ children }) => {
 			setNewProject(true)
 
 			//get all projects
-			let projects = await getProjectsApi();
-			console.log("projects get socket: ", projects.length)
+			// let projects = await getProjectsApi();
+			// console.log("projects get socket: ", projects.length)
 
-			setProjects(projects)
+			// setProjects(projects)
 		}
 
 		setUsers((users) => {
