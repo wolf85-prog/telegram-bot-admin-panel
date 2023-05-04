@@ -54,7 +54,7 @@ const Distribution = () => {
   useEffect(() => {
     const fetchData = async () => {
 			//let response = await getDistributions();
-      console.log("messages: ", messages)
+      console.log("distributions: ", messages)
 
       let strReceivers = ''
 

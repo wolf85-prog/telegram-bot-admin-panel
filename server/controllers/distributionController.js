@@ -16,7 +16,11 @@ class DistributionController {
 
     async getDistributions(req, res) {
         try {
-            const distributions = await Distribution.findAll()
+            const distributions = await Distribution.findAll({
+                order: [
+                    ['id', 'DESC'],
+                ],
+            })
             return res.status(200).json(distributions);
         } catch (error) {
             return res.status(500).json(error.message);
