@@ -65,10 +65,7 @@ const Admin = () => {
         let userIndex = zakazchiki.findIndex((manager) => manager.tgID === client.chatId);  
         const userObject = managers[userIndex];
 
-        const compan = [...comps];
-        console.log("compan: ", compan)
-        let userIndex2 = comps.findIndex((company) => company.managers.includes(userObject?.id)) //company.managers.map((manager) => manager.id === userObject?.id));  
-        const userObject2 = compan[userIndex2];
+        let userObject2 = comps.find((company) => company.managers.find(man => man.id ===  userObject?.id)) //company.managers.map((manager) => manager.id === userObject?.id));  
 
         const companyName = userObject2?.title
 
