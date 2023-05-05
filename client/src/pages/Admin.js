@@ -68,6 +68,8 @@ const Admin = () => {
         let userObject2 = comps.find((company) => company.managers.find(man => man.id ===  userObject?.id)) //company.managers.map((manager) => manager.id === userObject?.id));  
 
         const companyName = userObject2?.title
+        console.log("companyName: ", companyName)
+        
         const companyCity = userObject2?.city ? userObject2?.city : ''
 
         const lastDate = client.date.split('T')
@@ -110,12 +112,12 @@ const Admin = () => {
 
         arrClients.push(newObj)
       })
-      console.log('userbots: ', arrClients)
 
       const filteredClients = [...arrClients].filter((el) => el.TG_ID !== chatAdminId); //без админского пользователя  
       const clientSort = [...filteredClients].sort((a, b) => {       
 				return b.usage.value-a.usage.value  //сортировка по убывающей активности  
-			})   
+			}) 
+      console.log('userbots: ', clientSort)  
       setContacts(clientSort)  
       
       setTimeout(() => {
@@ -164,12 +166,12 @@ const Admin = () => {
                 <Suspense fallback={<CSpinner color="primary" />}>
 
                 <>
-                <WidgetsDropdown users={clients.length} projects={projects.length} companys={comps.length} />
+                <WidgetsDropdown users={clients.length-1} projects={projects.length} companys={comps.length} />
 
                 <CRow>
                   <CCol xs>
                     <CCard className="mb-4">
-                      <CCardHeader>Пользователи бота</CCardHeader>
+                      <CCardHeader>Пользователи бота ({clients.length - 1})</CCardHeader>
                       <CCardBody>
                         <CRow>
                           <CCol xs={12} md={6} xl={6}>
@@ -183,7 +185,7 @@ const Admin = () => {
                               <CCol sm={6}>
                                 <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
                                   <div className="text-medium-emphasis small">Постоянные клиенты</div>
-                                  <div className="fs-5 fw-semibold">{oldClients.length}</div>
+                                  <div className="fs-5 fw-semibold">{oldClients.length-1}</div>
                                 </div>
                               </CCol>
                             </CRow>
@@ -217,6 +219,7 @@ const Admin = () => {
                         <CTable align="middle" className="mb-0 border" hover responsive>
                           <CTableHead className='table-dark'>
                             <CTableRow>
+                              <CTableHeaderCell style={{width: '30px'}}>№</CTableHeaderCell>
                               <CTableHeaderCell className="text-center" style={{width: '100px'}}>
                                 <CIcon icon={cilPeople} />
                               </CTableHeaderCell>
@@ -233,6 +236,9 @@ const Admin = () => {
                           <CTableBody>
                             {contacts.map((item, index) => (
                               <CTableRow v-for="item in tableItems" key={index}>
+                                <CTableDataCell className="text-center">
+                                  {index+1}
+                                </CTableDataCell>
                                 <CTableDataCell className="text-center">
                                     <CAvatar size="md" src={item.avatar ? host + item.avatar : avatar2} alt='' />
                                 </CTableDataCell>
