@@ -92,7 +92,10 @@ createTheme('solarized', {
 const Notifications = () => {
 
   const { projects: notifications } = useUsersContext();
+  const { managers: zakazchiki } = useUsersContext();
+  const { companys: comps } = useUsersContext();
   const { setNewProject } = useUsersContext();
+
   const [projects, setProjects] = useState([]); 
   const [pending, setPending] = useState(true); 
 
@@ -103,26 +106,20 @@ const Notifications = () => {
     const arrProjects = []
 
     const fetchData = async () => {
-
-      let companys = await getCompanys()
-      console.log("companys: ", companys)
-
-      let managers = await getManagers()
-
+      console.log("companys: ", comps)
+      console.log("managers: ", zakazchiki)
       console.log("notifications: ", notifications)
 
       notifications.map(async (project) => {
 
-        const compan = [...companys];
-        let userIndex = companys.findIndex((company) => company.id === project.companyId);  
-        const userObject = compan[userIndex];
-        const companyName = userObject?.propertys["Название компании"].title[0]?.plain_text
-
-        const manager = [...managers];
-        let userIndex2 = manager.findIndex((man) => man.id === project.managerId);  
+        const manager = [...zakazchiki];
+        let userIndex2 = zakazchiki.findIndex((man) => man.id === project.managerId);  
         const userObject2 = manager[userIndex2];
         const managerName = userObject2?.fio ? userObject2.fio : ''
         const managerPhone = userObject2?.phone
+        
+        let userObject = comps.find((company) => company.id === project.companyId);  
+        const companyName = userObject?.title
 
         const d = new Date(project.createdAt);
 				const year = d.getFullYear();

@@ -221,6 +221,17 @@ const UsersProvider = ({ children }) => {
 		setCount(count+1);
 		setCountMessage(countMessage + 1)
 
+		if (data.text.startsWith('Проект успешно создан')) {
+			audioProject.play();
+			//пришел новый проект
+			setNewProject(true)
+			
+			//get all projects
+			let projects = await getProjectsApi();
+			console.log("projects get socket: ", projects.length)
+			setProjects(projects)
+		}
+
 		setUsers((users) => {
 			const { senderId, text, type, messageId } = data;
 			//console.log("users: ", users)
@@ -258,17 +269,6 @@ const UsersProvider = ({ children }) => {
 		});
 
 		//_updateUserProp(data.senderId, "uread", value +1);
-
-		if (data.text.startsWith('Проект успешно создан')) {
-			audioProject.play();
-			//пришел новый проект
-			setNewProject(true)
-			
-			//get all projects
-			let projects = await getProjectsApi();
-			console.log("projects get socket: ", projects.length)
-			setProjects(projects)
-		}
 	};
 
 

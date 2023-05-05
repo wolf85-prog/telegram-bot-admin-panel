@@ -109,9 +109,9 @@ const Distribution = () => {
                                   <CTableRow>
                                     {/* <CTableHeaderCell>№</CTableHeaderCell> */}
                                     <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Текст</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Картинка</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Кнопка</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center">Текст</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Получатели</CTableHeaderCell>   
                                     <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Управление</CTableHeaderCell>
@@ -125,10 +125,7 @@ const Distribution = () => {
                                       </CTableDataCell> */}
                                       <CTableDataCell className="text-center">
                                         <div>{item.datestart}</div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                        <div>{item.text}</div>
-                                      </CTableDataCell>
+                                      </CTableDataCell>      
                                       <CTableDataCell className="text-center">
                                         {item.image.endsWith('.pdf') ?
                                         <iframe src={item.image} height="120px" width="200px" title="myFramePdf"/>
@@ -137,6 +134,9 @@ const Distribution = () => {
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         <div>{item.button}</div>
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                        <div>{item.text}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         <div>{item.receivers}</div>
