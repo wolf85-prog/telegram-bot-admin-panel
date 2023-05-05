@@ -19,7 +19,7 @@ import { MultiSelect } from "react-multi-select-component";
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { $host } from './../http/index'
 import { useNavigate } from 'react-router-dom';
-import { newDistribution } from './../http/adminAPI';
+import { newDistribution, getDistributions } from './../http/adminAPI';
 import { newMessage, uploadFile } from './../http/chatAPI';
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 
@@ -30,7 +30,7 @@ const DistributionAdd = () => {
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
   const { users: clients } = useUsersContext();
-  const { addNewMessage } = useUsersContext();
+  const { addNewMessage, setDistributions } = useUsersContext();
   const [contacts, setContacts]= useState([]);
 
   const [selected, setSelected] = useState([]);
@@ -205,6 +205,11 @@ const DistributionAdd = () => {
         }
   
       }  
+
+      //обновить список рассылок
+      let response = await getDistributions();
+      console.log("distribution new add: ", response.length)
+			setDistributions(response)
 
     })
 

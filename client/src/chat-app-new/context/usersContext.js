@@ -409,6 +409,7 @@ const UsersProvider = ({ children }) => {
 			addNewAvatar,
 			usersOnline,
 			distributions, 
+			setDistributions,
 			managers,
 			companys,
 			count,
