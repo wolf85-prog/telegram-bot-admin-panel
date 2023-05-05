@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./socketContext";
 import { getContacts, getConversation, getMessages } from '../../http/chatAPI'
-import { getDistributions, getManagers, getProjectsApi } from "src/http/adminAPI";
+import { getDistributions, getManagers, getProjectsApi, getCompanys } from "src/http/adminAPI";
 import boopSfx from './../assets/sounds/zvuk-icq.mp3';
 import soundNotif from './../assets/sounds/schetchik-banknot-zvuki-scheta-kupyur-41139.mp3';
 
@@ -18,6 +18,7 @@ const UsersProvider = ({ children }) => {
 	const [usersOnline, setUsersOnline] = useState([]);
 	const [distributions, setDistributions] = useState([]); 
 	const [managers, setManagers]= useState([]);
+	const [companys, setCompanys]= useState([]);
 	const [projects, setProjects] = useState([]); 
 	const [newProject, setNewProject]= useState(false);
 
@@ -161,6 +162,20 @@ const UsersProvider = ({ children }) => {
 			console.log("projects size: ", projects.length)
 
 			setProjects(projects)
+		}
+
+	  	fetchData();
+
+	},[])
+//------------------------------------------------------------------------------------------
+
+	//get Companys
+	useEffect(() => {
+    	const fetchData = async () => {
+			let companys = await getCompanys();
+			console.log("companys size: ", companys.length)
+
+			setCompanys(companys)
 		}
 
 	  	fetchData();
@@ -395,6 +410,7 @@ const UsersProvider = ({ children }) => {
 			usersOnline,
 			distributions, 
 			managers,
+			companys,
 			count,
 			countMessage,
 			setCountMessage,

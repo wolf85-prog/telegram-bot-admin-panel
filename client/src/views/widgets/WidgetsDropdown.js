@@ -13,7 +13,7 @@ import { CChartBar, CChartLine } from '@coreui/react-chartjs'
 import CIcon from '@coreui/icons-react'
 import { cilArrowBottom, cilArrowTop, cilOptions } from '@coreui/icons'
 
-const WidgetsDropdown = ({users, projects}) => {
+const WidgetsDropdown = ({users, projects, companys}) => {
   return (
     <CRow>
       <CCol sm={6} lg={3}>
@@ -121,10 +121,9 @@ const WidgetsDropdown = ({users, projects}) => {
                 <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
               </CDropdownToggle>
               <CDropdownMenu>
-                <CDropdownItem>Action</CDropdownItem>
-                <CDropdownItem>Another action</CDropdownItem>
-                <CDropdownItem>Something else here...</CDropdownItem>
-                <CDropdownItem disabled>Disabled action</CDropdownItem>
+                <CDropdownItem>Посмотреть</CDropdownItem>
+                <CDropdownItem>Обновить</CDropdownItem>
+                <CDropdownItem disabled>Другое</CDropdownItem>
               </CDropdownMenu>
             </CDropdown>
           }
@@ -194,23 +193,22 @@ const WidgetsDropdown = ({users, projects}) => {
           color="warning"
           value={
             <>
-              50{' '}
-              <span className="fs-6 fw-normal">
+              {companys}{' '}
+              {/* <span className="fs-6 fw-normal">
                 (84.7% <CIcon icon={cilArrowTop} />)
-              </span>
+              </span> */}
             </>
           }
-          title="Специалисты"
+          title="Компании"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="p-0">
                 <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
               </CDropdownToggle>
               <CDropdownMenu>
-                <CDropdownItem>Action</CDropdownItem>
-                <CDropdownItem>Another action</CDropdownItem>
-                <CDropdownItem>Something else here...</CDropdownItem>
-                <CDropdownItem disabled>Disabled action</CDropdownItem>
+                <CDropdownItem>Посмотреть</CDropdownItem>
+                <CDropdownItem>Обновить</CDropdownItem>
+                <CDropdownItem disabled>Другое</CDropdownItem>
               </CDropdownMenu>
             </CDropdown>
           }
@@ -280,10 +278,9 @@ const WidgetsDropdown = ({users, projects}) => {
                 <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
               </CDropdownToggle>
               <CDropdownMenu>
-                <CDropdownItem>Action</CDropdownItem>
-                <CDropdownItem>Another action</CDropdownItem>
-                <CDropdownItem>Something else here...</CDropdownItem>
-                <CDropdownItem disabled>Disabled action</CDropdownItem>
+                <CDropdownItem>Посмотреть</CDropdownItem>
+                <CDropdownItem>Обновить</CDropdownItem>
+                <CDropdownItem disabled>Другое</CDropdownItem>
               </CDropdownMenu>
             </CDropdown>
           }

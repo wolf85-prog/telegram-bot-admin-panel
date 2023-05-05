@@ -24,7 +24,6 @@ import {
 import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { getCompanys } from './../http/adminAPI.js'
 import { getAllMessages } from './../http/chatAPI.js'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
@@ -34,6 +33,7 @@ const Admin = () => {
   const { users: clients } = useUsersContext();
   const { managers: zakazchiki } = useUsersContext();
   const { projects: projs } = useUsersContext();
+  const { companys: comps } = useUsersContext();
 
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]);
@@ -51,8 +51,8 @@ const Admin = () => {
 
     const fetchData = async() => {
 
-      let companys = await getCompanys()
-      console.log("companys: ", companys)
+      //let companys = await getCompanys()
+      console.log("companys: ", comps)
       console.log("clients: ", clients)
       console.log("managers: ", zakazchiki)
 
@@ -65,11 +65,12 @@ const Admin = () => {
         let userIndex = zakazchiki.findIndex((manager) => manager.tgID === client.chatId);  
         const userObject = managers[userIndex];
 
-        const compan = [...companys];
-        let userIndex2 = companys.findIndex((company) => company.propertys["Менеджеры"].relation[0]?.id === userObject?.id);  
+        const compan = [...comps];
+        console.log("compan: ", compan)
+        let userIndex2 = comps.findIndex((company) => company.managers.includes(userObject?.id)) //company.managers.map((manager) => manager.id === userObject?.id));  
         const userObject2 = compan[userIndex2];
 
-        const companyName = userObject2?.propertys["Название компании"].title[0]?.plain_text
+        const companyName = userObject2?.title
 
         const lastDate = client.date.split('T')
         const d = new Date(lastDate[0]);
@@ -165,7 +166,7 @@ const Admin = () => {
                 <Suspense fallback={<CSpinner color="primary" />}>
 
                 <>
-                <WidgetsDropdown users={clients.length} projects={projects.length} />
+                <WidgetsDropdown users={clients.length} projects={projects.length} companys={comps.length} />
 
                 <CRow>
                   <CCol xs>
