@@ -22,7 +22,6 @@ const UsersProvider = ({ children }) => {
 	const [projects, setProjects] = useState([]); 
 	const [newProject, setNewProject]= useState(false);
 
-	//const [play] = useSound(boopSfx);
 	const audio = new Audio(boopSfx);
 	const audioProject = new Audio(soundNotif);
 
@@ -222,6 +221,7 @@ const UsersProvider = ({ children }) => {
 		setCountMessage(countMessage + 1)
 
 		if (data.text.startsWith('Проект успешно создан')) {
+			console.log("Пришел новый проект: ", newProject)
 			audioProject.play();
 			//пришел новый проект
 			setNewProject(true)

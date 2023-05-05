@@ -69,7 +69,7 @@ const Admin = () => {
 
         const companyName = userObject2?.title
 
-        const lastDate = client.date.split('T')
+        const lastDate = client.date?.split('T')
         const d = new Date(lastDate[0]);
 				const year = d.getFullYear();
 				const month = String(d.getMonth()+1).padStart(2, "0");

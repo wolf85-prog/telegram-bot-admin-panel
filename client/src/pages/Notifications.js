@@ -9,7 +9,6 @@ import {
   CFormInput,
 } from '@coreui/react'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { getCompanys, getManagers } from './../http/adminAPI.js'
 
 
 
@@ -99,11 +98,13 @@ const Notifications = () => {
   const [projects, setProjects] = useState([]); 
   const [pending, setPending] = useState(true); 
 
-  setNewProject(false)
+  
 
   //get Projects
   useEffect(() => {
     const arrProjects = []
+
+    setNewProject(false)
 
     const fetchData = async () => {
       console.log("companys: ", comps)
