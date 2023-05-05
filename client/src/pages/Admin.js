@@ -68,6 +68,7 @@ const Admin = () => {
         let userObject2 = comps.find((company) => company.managers.find(man => man.id ===  userObject?.id)) //company.managers.map((manager) => manager.id === userObject?.id));  
 
         const companyName = userObject2?.title
+        const companyCity = userObject2?.city ? userObject2?.city : ''
 
         const lastDate = client.date.split('T')
         const d = new Date(lastDate[0]);
@@ -96,7 +97,7 @@ const Admin = () => {
             registered: '01.01.2023',
           },
           TG_ID: client.chatId,
-          comment: userObject?.comment,
+          city: companyCity,
           company: companyName ? companyName : '',
           phone: userObject?.phone,
           usage: {
@@ -249,7 +250,7 @@ const Admin = () => {
                                   <div>{item.phone}</div>
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
-                                  <div>{item.comment}</div>
+                                  <div>{item.city}</div>
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
                                   <div>{item.TG_ID}</div>
