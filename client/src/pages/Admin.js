@@ -114,8 +114,11 @@ const Admin = () => {
       })
       console.log('userbots: ', arrClients)
 
-      const filteredClients = [...arrClients].filter((el) => el.TG_ID !== chatAdminId); //без админского пользователя     
-      setContacts(filteredClients)  
+      const filteredClients = [...arrClients].filter((el) => el.TG_ID !== chatAdminId); //без админского пользователя  
+      const clientSort = [...filteredClients].sort((a, b) => {       
+				return b.usage.value-a.usage.value  //сортировка по убывающей активности  
+			})   
+      setContacts(clientSort)  
       
       setTimeout(() => {
         setLoading(false)
@@ -125,8 +128,8 @@ const Admin = () => {
     fetchData();
     
   }, [clients]);
-
-  //get Projects
+//---------------------------------------------------------------------------------------------
+//get Projects
   useEffect(() => {
     const arrProjects = []
 
