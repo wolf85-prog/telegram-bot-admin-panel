@@ -24,10 +24,13 @@ const _nav = [
     name: 'Заказчики',
     to: '/chat2',
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-    // badge: {
-    //   color: 'info',
-    //   text: '1',
-    // },
+  },
+
+  {
+    component: CNavItem,
+    name: 'Workhub',
+    to: '/chatwork',
+    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
   },
   
   {

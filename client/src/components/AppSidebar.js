@@ -46,6 +46,13 @@ const AppSidebar = () => {
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
     },
+
+    {
+      component: CNavItem,
+      name: 'Workhub',
+      to: '/chatwork',
+      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+    },
     
     {
       component: CNavItem,
