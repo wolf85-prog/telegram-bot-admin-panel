@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import Icon from "./../../components/Icon";
+import Icon from "src/chat-app-new/components/Icon";
 import { Link } from "react-router-dom";
-import formatTime from "./../../../chat-app-new/utils/formatTime";
-import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
-import { AccountContext } from './../../../chat-app-new/context/AccountProvider'
-import avatarDefault from "./../../../chat-app-new/assets/images/no-avatar.png";
-import Status from "./../../../chat-app-new/assets/images/status.jpg";
+import formatTime from "src/chat-app-new/utils/formatTime";
+import { AccountContext } from 'src/chat-app-new/context/AccountProvider'
+import avatarDefault from "src/chat-app-new/assets/images/no-avatar.png";
+import Status from "src/chat-app-new/assets/images/status.jpg";
+
+import { useWorkersContext } from "src/chat-app-worker/context/workersContext";
 
 const Contact = ({ contact }) => {
 	
@@ -13,7 +14,7 @@ const Contact = ({ contact }) => {
 	const host = process.env.REACT_APP_API_URL
 	
 	//сделать пользователя непрочитанным
-	const { setUserAsUnread, usersOnline, setCountMessage } = useUsersContext();
+	const { setUserAsUnread, usersOnline, setCountMessage } = useWorkersContext();
 
 	const status = usersOnline.find(item => item.userId == contact.chatId)
 

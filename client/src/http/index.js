@@ -8,6 +8,10 @@ const $host_bot = axios.create({
     baseURL: process.env.REACT_APP_ADMIN_API_URL
 })
 
+const $host_worker = axios.create({
+    baseURL: process.env.REACT_APP_WORKER_API_URL
+})
+
 const $authHost = axios.create({
     baseURL: process.env.REACT_APP_API_URL
 })

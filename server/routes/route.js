@@ -9,6 +9,9 @@ const { newDistribution, getDistributions, getDistributionsId, getDistribution, 
 const { getReports, getReportsId } = require('../controllers/reportController')
 const { getProjects, getProjectsId } = require('../controllers/projectController')
 const { uploadFile, getImage } = require( "../controllers/fileController.js")
+
+const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers/wuserbotController')
+
 //const upload = require( "../utils/upload.js")
 //const upload = multer({dest:"uploads"});
 const upload = require('../middleware/file')
@@ -46,5 +49,11 @@ route.get('/projects/get/:id', getProjectsId)
 
 route.post("/file/upload", upload.single("photo"), uploadFile);
 route.get("/file/:filename", getImage);
+
+
+//----------------WORKERS--------------------------------
+route.get('/wuserbots/get', getUserWorkers)
+route.get('/wuserbots/get/:id', getUserWorker)
+route.patch('/wuserbots/update/:id', editUserWorker)
 
 module.exports = route
