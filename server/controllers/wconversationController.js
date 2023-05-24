@@ -1,4 +1,4 @@
-const Conversation = require("../models/Conversation");
+const {Conversation} = require("../models/workers");
 const { Op } = require('sequelize')
 const ApiError = require('../error/ApiError')
 

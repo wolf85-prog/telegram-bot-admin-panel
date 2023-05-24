@@ -1,4 +1,4 @@
-const Message = require('../models/Message')
+const {Message} = require('../models/workers')
 const ApiError = require('../error/ApiError')
 const uuid = require('uuid')
 const path = require('path')
