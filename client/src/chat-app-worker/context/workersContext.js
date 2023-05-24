@@ -264,6 +264,9 @@ const UsersProvider = ({ children }) => {
 			delMessageContext,
 			addNewName,
 			addNewAvatar,
+			count,
+			countMessage,
+			setCountMessage,
 
 		}}>
 			{children}

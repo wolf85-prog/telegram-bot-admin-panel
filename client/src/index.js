@@ -24,7 +24,7 @@ createRoot(document.getElementById('root')).render(
           <UsersProvider>
             <AccountProvider>
               <App />
-            </AccountProvider>        
+            </AccountProvider>          
           </UsersProvider>
         </SocketProvider>
       </Provider>

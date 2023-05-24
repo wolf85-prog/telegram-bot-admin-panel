@@ -1,6 +1,6 @@
 import {$authHost, $host} from "./index";
 
-export const getContacts = async () =>{
+export const getWContacts = async () =>{
     try {
        let response = await $host.get('api/wuserbots/get');
        //console.log(response);
@@ -10,7 +10,7 @@ export const getContacts = async () =>{
     }
 }
 
-export const getContactId = async (id) =>{
+export const getWContactId = async (id) =>{
     try {
        let response = await $host.get(`api/wuserbots/get/${id}`);
        //console.log(response);
@@ -40,7 +40,7 @@ export const editContactAvatar = async (data, id) =>{
     }
 }
 
-export const setConversation= async (data)=>{
+export const setWConversation= async (data)=>{
     try {
         await $host.post('api/wconversation/add', data);
     } catch (error) {
@@ -49,7 +49,7 @@ export const setConversation= async (data)=>{
     }
 }
 
-export const getConversation= async (id)=>{
+export const getWConversation= async (id)=>{
     try {
        let response= await $host.get(`api/wconversation/get/${id}`);
        if (response.data === null) {
@@ -80,7 +80,7 @@ export const delMessage = async (id) =>{
 }
 
 
-export const getMessages = async(id)=>{
+export const getWMessages = async(id)=>{
     try {
         let response= await $host.get(`api/wmessage/get/${id}`);
         

@@ -11,6 +11,8 @@ const { getProjects, getProjectsId } = require('../controllers/projectController
 const { uploadFile, getImage } = require( "../controllers/fileController.js")
 
 const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers/wuserbotController')
+const { newMessageWorker, delMessageWorker, getMessagesWorker, getAllMessagesWorker } = require('../controllers/wmessageController')
+const { newConversationWorker, getConversationWorker } = require('../controllers/wconversationController')
 
 //const upload = require( "../utils/upload.js")
 //const upload = multer({dest:"uploads"});
@@ -55,5 +57,13 @@ route.get("/file/:filename", getImage);
 route.get('/wuserbots/get', getUserWorkers)
 route.get('/wuserbots/get/:id', getUserWorker)
 route.patch('/wuserbots/update/:id', editUserWorker)
+
+route.post('/wmessage/add', newMessageWorker)
+route.delete('/wmessage/delete/:id', delMessageWorker)
+route.get('/wmessage/get', getAllMessagesWorker)
+route.get('/wmessage/get/:id', getMessagesWorker)
+
+route.post('/wconversation/add', newConversationWorker)
+route.get('/wconversation/get/:id', getConversationWorker)
 
 module.exports = route
