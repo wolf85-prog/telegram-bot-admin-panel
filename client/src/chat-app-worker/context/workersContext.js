@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "src/chat-app-new/context/socketContext";
 import { getContacts, getConversation, getMessages } from '../../http/workerAPI'
-import { getDistributions, getManagers, getProjectsApi, getCompanys } from "src/http/adminAPI";
 import boopSfx from 'src/chat-app-new/assets/sounds/zvuk-icq.mp3';
 import soundNotif from 'src/chat-app-new/assets/sounds/schetchik-banknot-zvuki-scheta-kupyur-41139.mp3';
 
@@ -15,12 +14,6 @@ const UsersProvider = ({ children }) => {
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const [count, setCount] = useState(0)
 	const [countMessage, setCountMessage] = useState(0)
-	const [usersOnline, setUsersOnline] = useState([]);
-	const [distributions, setDistributions] = useState([]); 
-	const [managers, setManagers]= useState([]);
-	const [companys, setCompanys]= useState([]);
-	const [projects, setProjects] = useState([]); 
-	const [newProject, setNewProject]= useState(false);
 
 	const audio = new Audio(boopSfx);
 	const audioProject = new Audio(soundNotif);
@@ -126,69 +119,11 @@ const UsersProvider = ({ children }) => {
 	},[])
 //------------------------------------------------------------------------------------------
 
-	//get Managers
-	useEffect(() => {
-    	const fetchData = async () => {
-			let response = await getManagers();
-      		console.log("managers: ", response.length)
 
-			setManagers(response)
-		}
-
-	  	fetchData();
-
-	},[])
-//------------------------------------------------------------------------------------------
-
-  	//get Distribution
-  	useEffect(() => {
-    	const fetchData = async () => {
-			let response = await getDistributions();
-      		console.log("distribution: ", response.length)
-
-			setDistributions(response)
-		}
-
-	  	fetchData();
-
-	},[])
-//------------------------------------------------------------------------------------------
-
-	//get Projects
-	useEffect(() => {
-    	const fetchData = async () => {
-			let projects = await getProjectsApi();
-			console.log("projects size: ", projects.length)
-
-			setProjects(projects)
-		}
-
-	  	fetchData();
-
-	},[])
-//------------------------------------------------------------------------------------------
-
-	//get Companys
-	useEffect(() => {
-    	const fetchData = async () => {
-			let companys = await getCompanys();
-			console.log("companys size: ", companys.length)
-
-			setCompanys(companys)
-		}
-
-	  	fetchData();
-
-	},[])
-//------------------------------------------------------------------------------------------
 	//подключение админа к сокету и вывод всех подключенных
 	useEffect(()=>{
 		socket.emit("addUser", chatAdminId)
-		socket.on("getUsers", users => {
-			console.log("users socket: ", users);
-			setUsersOnline(users)
-		})
-		
+	
 	},[chatAdminId])
 	
 	const _updateUserProp = (userId, prop, value) => {
@@ -219,18 +154,6 @@ const UsersProvider = ({ children }) => {
 		console.log("Пришло новое сообщение: ", count+1)
 		setCount(count+1);
 		setCountMessage(countMessage + 1)
-
-		if (data.text.startsWith('Проект успешно создан')) {
-			console.log("Пришел новый проект: ", newProject)
-			audioProject.play();
-			//пришел новый проект
-			setNewProject(true)
-			
-			//get all projects
-			let projects = await getProjectsApi();
-			console.log("projects get socket: ", projects.length)
-			setProjects(projects)
-		}
 
 		setUsers((users) => {
 			const { senderId, text, type, messageId } = data;
@@ -272,80 +195,14 @@ const UsersProvider = ({ children }) => {
 	};
 
 
-	//получить исходящее сообщение в админку
-	const fetchAdmin = (data) => {
-		console.log("Пришло сообщение в Админку: ", data)
+	
 
-		setUsers((users) => {
-			const { senderId, receiverId, text, type, buttons, messageId } = data;
-
-			let userIndex = users.findIndex((user) => user.chatId === receiverId.toString());
-			const usersCopy = JSON.parse(JSON.stringify(users));
-			const newMsgObject = {
-				date: new Date().toLocaleDateString(),
-				content: text,
-				image: type === 'image' ? true : false,
-				descript: buttons ? buttons : '',
-				sender: senderId,
-				time: new Date().toLocaleTimeString(),
-				status: 'delivered',
-				id: messageId,
-			};
-
-			const currentDate = new Date().toLocaleDateString()
-
-			if (usersCopy[userIndex].messages[currentDate]) {
-				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
-			} else {
-				usersCopy[userIndex].messages[currentDate] = [];
-				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
-			}
-			
-			const userObject = usersCopy[userIndex];
-			usersCopy[userIndex] = { ...userObject, ['date']: new Date(), ['message']: newMsgObject.content};
-
-			//сортировка
-			const userSort = [...usersCopy].sort((a, b) => {       
-				var dateA = new Date(a.date), dateB = new Date(b.date) 
-				return dateB-dateA  //сортировка по убывающей дате  
-			})
-
-			console.log(userSort)
-
-			return userSort;
-		});
-	}
-
-	//получить исходящее сообщение в админку
-	const fetchDelAdmin = (data) => {
-		console.log("Удаление сообщение в Админке: ", data)
-
-		setUsers((users) => {
-			const { messageId, messageDate, chatId } = data;
-
-			let userIndex = users.findIndex((user) => user.chatId === chatId);
-			const usersCopy = JSON.parse(JSON.stringify(users));
-
-			const messageIndex = usersCopy[userIndex].messages[messageDate].map(el => el.id).lastIndexOf(messageId);
-
-			usersCopy[userIndex].messages[messageDate].splice(messageIndex, 1); 
-
-			const userObject = usersCopy[userIndex];
-
-			const userSort = [...usersCopy]
-
-			return userSort;
-		});
-	}
-
-	useEffect(() => {
-		socket.on("getMessage", fetchMessageResponse);
-		socket.on("getAdmin", fetchAdmin);	
-		socket.on("getDelAdmin", fetchDelAdmin);			
-		//socket.on("start_typing", setUserAsTyping);
-		//socket.on("stop_typing", setUserAsNotTyping);
+	// useEffect(() => {
+	// 	socket.on("getMessage", fetchMessageResponse);
+	// 	socket.on("getAdmin", fetchAdmin);	
+	// 	socket.on("getDelAdmin", fetchDelAdmin);			
 		
-	}, [socket]);
+	// }, [socket]);
 
 	const setUserAsUnread = (userId) => {
 		_updateUserProp(userId, "unread", 0);
@@ -407,18 +264,7 @@ const UsersProvider = ({ children }) => {
 			delMessageContext,
 			addNewName,
 			addNewAvatar,
-			usersOnline,
-			distributions, 
-			setDistributions,
-			managers,
-			companys,
-			count,
-			countMessage,
-			setCountMessage,
-			newProject,
-			setNewProject,
-			projects,
-			setProjects,
+
 		}}>
 			{children}
 		</WorkersContext.Provider>
