@@ -8,7 +8,7 @@ import "./../chat-app-new/assets/css/index.css";
 // import Loader from "../chat-app-new/components/Loader";
 import Home from "../chat-app-new/pages/Home";
 import Sidebar from "../chat-app-worker/components/Sidebar";
-//import Chat from "../chat-app-worker/pages/Chat";
+import Chat from "../chat-app-worker/pages/Chat";
 
 import { AccountContext } from "../chat-app-new/context/AccountProvider";
 
@@ -35,7 +35,7 @@ const ChatsWorker = () => {
                     <p className="app__mobile-message"> Доступно только на компьютере 😊. </p> 
                     <div className="app-content">
                       <Sidebar />
-                      {<Home /> }
+                      {Object.keys(person).length ? <Chat /> : <Home /> }
                     </div>
                   </div>
 

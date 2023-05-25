@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import media from "./../../../assets/images/placeholder.jpeg";
+import media from "./../../../../chat-app-new/assets/images/placeholder.jpeg";
 import Checkbox from "./../../../components/Checkbox";
 import Icon from "./../../../components/Icon";
 import { editContact, uploadFile, editContactAvatar } from './../../../../http/chatAPI';
-import { useUsersContext } from "../../../context/workersContext";
-import { AccountContext } from './../../../context/AccountProvider';
-import defaultAvatar from "./../../../assets/images/no-avatar.png";
+import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
+import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
+import defaultAvatar from "./../../../../chat-app-new/assets/images/no-avatar.png";
 
 const Profile = ({ user }) => {
 	const [username, setUsername] = useState("")

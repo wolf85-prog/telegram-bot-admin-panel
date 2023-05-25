@@ -1,9 +1,9 @@
 import Icon from "./../../../components/Icon";
 import React, { useContext, useState } from "react";
 // import pdf from "./../../../assets/images/PDFicon.png";
-import formatTime from "./../../../utils/formatTime";
-import { AccountContext } from './../../../context/AccountProvider';
-import { useUsersContext } from "../../../context/workersContext";
+import formatTime from "./../../../../chat-app-new/utils/formatTime";
+import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
+import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { $host } from './../../../../http/index'
 import { delMessage } from "src/http/chatAPI";
 import Dropdown from 'react-bootstrap/Dropdown';

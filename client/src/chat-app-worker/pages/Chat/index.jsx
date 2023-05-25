@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import "./styles/main.css";
 import EmojiTray from "./components/EmojiTray";
 import ChatInput from "./components/ChatInput";
@@ -8,24 +8,23 @@ import Icon from "./../../components/Icon";
 import Search from "./components/Search";
 import Profile from "./components/Profile";
 import Convo from "./components/Convo";
-import { useUsersContext } from "../../context/workersContext";
-import { useContext } from 'react';
+import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider';
-import { newMessage, uploadFile } from './../../../http/chatAPI';
+import { newMessage, uploadFile } from "src/http/workerAPI";
 import { $host } from './../../../http/index'
-import sendSound from './../../assets/sounds/sendmessage.mp3';
+import sendSound from './../../../chat-app-new/assets/sounds/sendmessage.mp3';
 
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 const host = process.env.REACT_APP_API_URL
 
 const Chat = () => {
-	const { users, setUserAsUnread, addNewMessage } = useUsersContext();
+	const { workers, setUserAsUnread, addNewMessage } = useUsersContext();
 	const { person } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
 	const chatId = person.id;
-	let user = users.filter((user) => user.chatId === chatId.toString())[0];
+	let user = workers.filter((user) => user.chatId === chatId.toString())[0];
 
 	const lastMsgRef = useRef(null);
 	const [showAttach, setShowAttach] = useState(false);
@@ -48,7 +47,7 @@ const Chat = () => {
 
 	useEffect(() => {
 		user && scrollToLastMsg();
-	}, [users]);
+	}, [workers]);
 
 	//прокрутка
 	const scrollToLastMsg = () => {

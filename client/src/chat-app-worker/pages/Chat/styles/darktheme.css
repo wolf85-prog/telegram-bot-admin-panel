@@ -3,7 +3,7 @@
 }
 
 .dark-theme .chat__bg {
-    background: url(../../../assets/images/bg-chat-dark.png) rgb(13, 20, 24);
+    background: url(../../../../chat-app-new/assets/images/bg-chat-dark.png) rgb(13, 20, 24);
 }
 
 /* Chat Header Component  */

@@ -27,6 +27,8 @@ const Contact = ({ contact }) => {
         });
 		//setUserAsUnread(contact.chatId)
 		//setCountMessage(0)
+
+		console.log("click")
     }
 	
 	const getLastMessage = () => {

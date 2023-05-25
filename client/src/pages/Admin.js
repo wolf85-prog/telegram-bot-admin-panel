@@ -68,8 +68,6 @@ const Admin = () => {
         let userObject2 = comps.find((company) => company.managers.find(man => man.id ===  userObject?.id)) //company.managers.map((manager) => manager.id === userObject?.id));  
 
         const companyName = userObject2?.title
-        console.log("companyName: ", companyName)
-        
         const companyCity = userObject2?.city ? userObject2?.city : ''
 
         const lastDate = client.date.split('T')

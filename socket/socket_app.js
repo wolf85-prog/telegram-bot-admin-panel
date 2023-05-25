@@ -83,6 +83,18 @@ io.on("connection", (socket) => {
         })
     })
 
+    //send and get message in workers
+    socket.on("sendMessageSpec", ({senderId, receiverId, text, type, convId, messageId})=>{
+        const user = getUser(receiverId)
+        io.emit("getMessageSpec", {
+            senderId,
+            text,
+            type,
+            convId,
+            messageId,
+        })
+    })
+
     //send and get message
     socket.on("sendAdmin", ({senderId, receiverId, text, type, buttons, convId, messageId})=>{
         io.emit("getAdmin", {
