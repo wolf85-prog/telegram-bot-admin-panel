@@ -11,6 +11,7 @@ import {
     CHAT_ROUTE2,
     CHAT_ROUTE3,
     CHAT_WORKER,
+    WORKERS_ROUTE,
 } from "./utils/consts";
 
 const Chats = React.lazy(() => import('./pages/Chats'))
@@ -24,6 +25,7 @@ const Reports = React.lazy(() => import('./pages/Reports'))
 const Distribution = React.lazy(() => import('./pages/Distribution'))
 const DistributionAdd = React.lazy(() => import('./pages/DistributionAdd'))
 const Settings = React.lazy(() => import('./pages/Settings'))
+const Workers = React.lazy(() => import('./pages/Workers'))
 
 export const authRoutes = [
     { path: ADMIN_ROUTE, name: 'Панель управления', Component: Admin },
@@ -37,5 +39,6 @@ export const authRoutes = [
     { path: MESS_BOT_ROUTE, name: 'Сообщения от бота', Component: MessagesBot },
     { path: NOTIF_ROUTE, name: 'Уведомления', Component: Notifications },
     { path: SETTINGS_ROUTE, name: 'Настройки', Component: Settings },
+    { path: WORKERS_ROUTE, name: 'Специалисты', Component: Workers },
     { path: '/', name: 'Панель управления', Component: Admin },
 ]

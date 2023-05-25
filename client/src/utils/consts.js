@@ -10,6 +10,7 @@ export const REPORTS_ROUTE = '/reports'
 export const DISTRIBUTION_ROUTE = '/distribution'
 export const DISTRIBUTIONADD_ROUTE = '/distribution_add'
 export const SETTINGS_ROUTE = '/settings'
+export const WORKERS_ROUTE = '/workers'
 
 export const THEME_ROUTE = '/theme'
 export const LOGIN_ROUTE = '/login'

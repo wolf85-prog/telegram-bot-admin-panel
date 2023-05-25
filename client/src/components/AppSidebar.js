@@ -67,6 +67,13 @@ const AppSidebar = () => {
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
       badge: newProject ? {color: 'info', text: '1',} : "",
     },
+    {
+      component: CNavItem,
+      name: 'Специалисты',
+      to: '/workers',
+      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      //badge: newProject ? {color: 'info', text: '1',} : "",
+    },
   ]
 
   return (
