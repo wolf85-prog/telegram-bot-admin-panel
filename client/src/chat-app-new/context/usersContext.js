@@ -410,17 +410,17 @@ const UsersProvider = ({ children }) => {
 		//setCount(count+1);
 		//setCountMessage(countMessage + 1)
 
-		if (data.text.startsWith('Специалист успешно добавлен!')) {
-			console.log("Пришел новый специаилст: ")
-			//audioProject.play();
-			//пришел новый проект
-			//setNewProject(true)
+		// if (data.text.startsWith('Специалист успешно добавлен!')) {
+		// 	console.log("Пришел новый специаилст: ")
+		// 	//audioProject.play();
+		// 	//пришел новый проект
+		// 	//setNewProject(true)
 			
-			//get all projects
-			let workers = await getWorkers();
-			//console.log("projects get socket: ", projects.length)
-			setWorkers(workers)
-		}
+		// 	//get all projects
+		// 	let workers = await getWorkers();
+		// 	//console.log("projects get socket: ", projects.length)
+		// 	setWorkers(workers)
+		// }
 
 		setUserWorkers((users) => {
 			const { senderId, text, type, messageId } = data;
