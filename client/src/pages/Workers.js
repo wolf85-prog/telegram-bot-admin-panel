@@ -116,14 +116,15 @@ const Workers = () => {
       workers.map(async (worker) => {
 
         const newWorker = {
-          family: worker.family,
+          family: worker.userfamily,
           name: worker.username,
           phone: worker.phone,
           dateborn: worker.dateborn,
           city: worker.city,
           companys: worker.companys,
-          stag: worker.stah,
+          stag: worker.stag,
           worklist: worker.worklist,
+          chatId: worker.chatId,
 				}
         arrWorkers.push(newWorker)
       })

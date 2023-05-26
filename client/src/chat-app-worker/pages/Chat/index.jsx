@@ -19,12 +19,12 @@ const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 const host = process.env.REACT_APP_API_URL
 
 const Chat = () => {
-	const { workers, setUserAsUnread, addNewMessage } = useUsersContext();
+	const { userWorkers, setUserAsUnread, addNewMessage } = useUsersContext();
 	const { person } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
 	const chatId = person.id;
-	let user = workers.filter((user) => user.chatId === chatId.toString())[0];
+	let user = userWorkers.filter((user) => user.chatId === chatId.toString())[0];
 
 	const lastMsgRef = useRef(null);
 	const [showAttach, setShowAttach] = useState(false);
@@ -47,7 +47,7 @@ const Chat = () => {
 
 	useEffect(() => {
 		user && scrollToLastMsg();
-	}, [workers]);
+	}, [userWorkers]);
 
 	//прокрутка
 	const scrollToLastMsg = () => {

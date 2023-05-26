@@ -9,7 +9,7 @@ import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-	const { workers } = useUsersContext();
+	const { userWorkers } = useUsersContext();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
@@ -17,16 +17,17 @@ const Sidebar = () => {
 	const navigate = useNavigate()
 
 	useEffect(() => {
+		console.log("sidebar contacts: ", userWorkers)
 		//сортировка
-		const userSort = [...workers].sort((a, b) => {       
+		const userSort = [...userWorkers].sort((a, b) => {       
 			var dateA = new Date(a.date), dateB = new Date(b.date) 
 			return dateB-dateA  //сортировка по убывающей дате  
 		})
 		setContacts(userSort)
-	},[workers])
+	},[userWorkers])
 	
 	useEffect(() => {
-		const filteredData = workers.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
+		const filteredData = userWorkers.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
         setContacts(filteredData);      
     }, [text]);
 

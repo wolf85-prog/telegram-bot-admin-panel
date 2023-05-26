@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./socketContext";
 import { getContacts, getConversation, getMessages } from '../../http/chatAPI'
-import { getWContacts, getWConversation, getWMessages } from '../../http/workerAPI'
+import { getWContacts, getWConversation, getWMessages, getWorkers } from '../../http/workerAPI'
 import { getDistributions, getManagers, getProjectsApi, getCompanys } from "src/http/adminAPI";
 import boopSfx from './../assets/sounds/zvuk-icq.mp3';
 import soundNotif from './../assets/sounds/schetchik-banknot-zvuki-scheta-kupyur-41139.mp3';
@@ -13,6 +13,7 @@ const useUsersContext = () => useContext(UsersContext);
 const UsersProvider = ({ children }) => {
 	const socket = useSocketContext();
 	const [users, setUsers] = useState([]); //useState(contacts);
+	const [userWorkers, setUserWorkers] = useState([]); //useState(contacts);
 	const [workers, setWorkers] = useState([]); //useState(contacts);
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const [count, setCount] = useState(0)
@@ -125,8 +126,35 @@ const UsersProvider = ({ children }) => {
 
 //---------get Workers-----------------------------------------
 		const fetchWorkerData = async () => {
-			let response = await getWContacts();
+			let response = await getWorkers();
 			console.log("workers size: ", response.length)
+
+			const arrayWorker = []
+
+			response.map(async (user) => {
+				const newWorker = {
+					id: user.id,
+					userfamily: user.userfamily,
+					username: user.username,
+					phone: user.phone,
+					dateborn: user.dateborn,
+					city: user.city, 
+					companys: user.companys,
+					stag: user.stag,
+					worklist:  user.worklist,
+					chatId: user.chatId,
+				}
+
+				arrayWorker.push(newWorker)
+			})
+
+			setWorkers(arrayWorker)
+		}
+
+//---------get UserWorkers-----------------------------------------
+		const fetchUserWorkerData = async () => {
+			let response = await getWContacts();
+			console.log("userWorkers size: ", response.length)
 	
 			const arrayContact = []
 	
@@ -212,8 +240,8 @@ const UsersProvider = ({ children }) => {
 					return dateB-dateA  //сортировка по убывающей дате  
 				})
 
-				setWorkers(sortedClients)
-				console.log("contacts: ", arrayContact)
+				setUserWorkers(sortedClients)
+				console.log("user contacts: ", arrayContact)
 
 			}, "10000")
 
@@ -222,6 +250,8 @@ const UsersProvider = ({ children }) => {
 		fetchData();
 
 		fetchWorkerData();
+
+		fetchUserWorkerData();
 
 	},[])
 //------------------------------------------------------------------------------------------
@@ -372,6 +402,66 @@ const UsersProvider = ({ children }) => {
 	};
 
 
+	//получить сообщение из телеграмма WorkersBot
+	const fetchMessageSpecResponse = async(data) => {
+		//audio.play();
+		console.log("date: ", data)
+		console.log("Пришло новое сообщение: ", count+1)
+		//setCount(count+1);
+		//setCountMessage(countMessage + 1)
+
+		if (data.text.startsWith('Специалист успешно добавлен!')) {
+			console.log("Пришел новый специаилст: ")
+			//audioProject.play();
+			//пришел новый проект
+			//setNewProject(true)
+			
+			//get all projects
+			let workers = await getWorkers();
+			//console.log("projects get socket: ", projects.length)
+			setWorkers(workers)
+		}
+
+		setUserWorkers((users) => {
+			const { senderId, text, type, messageId } = data;
+			//console.log("users: ", users)
+			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
+			const usersCopy = JSON.parse(JSON.stringify(users));
+			const newMsgObject = {
+				date: new Date().toLocaleDateString(),
+				content: text,
+				image: type === 'image' ? true : false,
+				sender: senderId,
+				time: new Date().toLocaleTimeString(),
+				status: null,
+				id: messageId,
+			};
+
+			const currentDate = new Date().toLocaleDateString()
+
+			if (usersCopy[userIndex].messages[currentDate]) {
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			} else {
+				usersCopy[userIndex].messages[currentDate] = [];
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			}
+			
+			const userObject = usersCopy[userIndex];
+			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
+
+			//сортировка
+			const userSort = [...usersCopy].sort((a, b) => {       
+				var dateA = new Date(a.date), dateB = new Date(b.date) 
+				return dateB-dateA  //сортировка по убывающей дате  
+			})
+
+			return userSort;
+		});
+
+		//_updateUserProp(data.senderId, "uread", value +1);
+	};
+
+
 	//получить исходящее сообщение в админку
 	const fetchAdmin = (data) => {
 		console.log("Пришло сообщение в Админку: ", data)
@@ -440,6 +530,7 @@ const UsersProvider = ({ children }) => {
 
 	useEffect(() => {
 		socket.on("getMessage", fetchMessageResponse);
+		socket.on("getMessageSpec", fetchMessageSpecResponse);
 		socket.on("getAdmin", fetchAdmin);	
 		socket.on("getDelAdmin", fetchDelAdmin);			
 		//socket.on("start_typing", setUserAsTyping);
@@ -519,6 +610,8 @@ const UsersProvider = ({ children }) => {
 			setNewProject,
 			projects,
 			setProjects,
+			userWorkers,
+			setUserWorkers,
 			workers,
 			setWorkers,
 		}}>
