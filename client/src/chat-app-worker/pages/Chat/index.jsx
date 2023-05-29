@@ -15,7 +15,7 @@ import { $host } from './../../../http/index'
 import sendSound from './../../../chat-app-new/assets/sounds/sendmessage.mp3';
 
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
-const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
+const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 const host = process.env.REACT_APP_API_URL
 
 const Chat = () => {
@@ -88,7 +88,7 @@ const Chat = () => {
 	//функция отправки сообщения
 	const sendText = async () => {
 		//Передаем данные боту
-        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${mess.replace(/\n/g, '%0A')}`
+        const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${mess.replace(/\n/g, '%0A')}`
 		const sendToTelegram = await $host.get(url_send_msg);
 
 		//Выводим сообщение об успешной отправке

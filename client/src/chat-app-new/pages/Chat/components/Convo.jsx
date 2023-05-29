@@ -160,15 +160,15 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 									</div>
 								) : message.sender !== chatAdminId ? (
 									<p className="chat__msg chat__msg--rxd" ref={assignRef()}>
-										<div>
-											{2<1 
+										<div className="flex-row">
+											{message.content.includes('_reply_') 
 											? <div className="chat__msg--reply">
 												<div className="reply__content">
 													<div className="reply__full">
 														<span className="reply__left"></span>
 														<div className="reply__pad">
-															<div className="reply__contact">Контакт</div>
-															<div className="reply__text">Пересылаемое сообщение</div>
+															<div className="reply__contact">U.L.E.Y</div>
+															<div className="reply__text">{message.content.split('_reply_')[0]}</div>
 														</div>
 													</div>
 													
@@ -178,12 +178,13 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											<span>
 												{message.content?.startsWith('http') 
 												? <a className="chat__href" href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
-												: message.content}
+												: message.content.includes('_reply_') ? message.content.split('_reply_')[0] : message.content}
 											</span>
 											<span className="chat__msg-filler"> </span>
 											<span className="chat__msg-footer">
 												{formatTime(message.time)}
 											</span>
+										</div>	
 											<Dropdown onSelect={change}>
 												<Dropdown.Toggle 
 													as={CustomToggle} 
@@ -193,9 +194,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 												<Dropdown.Menu as={CustomMenu}>
 												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: person.id})}>Удалить сообщение</Dropdown.Item>
 												</Dropdown.Menu>
-											</Dropdown>
-										</div>
-										
+											</Dropdown>									
 									</p>
 								) : (
 									<p className="chat__msg chat__msg--sent" ref={assignRef()}>

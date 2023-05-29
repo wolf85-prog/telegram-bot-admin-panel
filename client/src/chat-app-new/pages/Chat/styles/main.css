@@ -335,6 +335,10 @@
     -webkit-box-orient: vertical;
 }
 
+.flex-row {
+    
+}
+
 .chat__footer {
     background: rgb(240, 240, 240);
     position: relative;
