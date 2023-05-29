@@ -118,7 +118,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 									>
 										{message.content.endsWith('.pdf') ? (<figure>
 											{/* <img src={pdf} width={30}/>
-											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a>											 */}
+											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a>*/}
 											<iframe src={message.content} height="235px" width="100%" title="myFramePdf"/>
 										</figure>) : (
 											<figure>
