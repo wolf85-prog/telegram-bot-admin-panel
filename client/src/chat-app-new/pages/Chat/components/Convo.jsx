@@ -89,6 +89,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 	return dates.map((date, dateIndex) => {
 		const messages = allMessages[date];
+		let replyMessage = [];
 		//console.log("allMessages: ", messages);
 		return (
 			<div key={dateIndex}>
@@ -103,9 +104,13 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 				)}
 				<div className="chat__msg-group" >
 					{messages.map((message, msgIndex) => {
-						//получить сообщение по его id
-						const replyMessage = [...messages].filter((message)=> message.id === message.content.split('_reply_')[0])
-						console.log("replyMessage: ", replyMessage)
+						//получить сообщение по его id						
+						if (message.content.includes('_reply_')) {
+							//console.log(message.id)	
+							replyMessage = [...messages].filter((mess)=> mess.id === message.content.split('_reply_')[0])
+							console.log("replyMessage: ", replyMessage[0]?.content)
+						}
+						
 						
 						const assignRef = () =>
 							dateIndex === dates.length - 1 && msgIndex === messages.length - 1
@@ -173,7 +178,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 														<div className="reply__pad">
 															<div className="reply__contact">U.L.E.Y</div>
 															{/* <div className="reply__text">{message.content.split('_reply_')[0]}</div> */}
-															<div className="reply__text">{replyMessage.content}</div>
+															<div className="reply__text">{replyMessage[0]?.content}</div>
 														</div>
 													</div>
 													
