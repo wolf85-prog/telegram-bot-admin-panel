@@ -24,8 +24,10 @@ class MessageController {
                 where: {conversationId},
                 // Add order conditions here....
                 order: [
-                    ['id', 'ASC'],
+                    ['id', 'ASC'], //DESC
                 ],
+                offset:(0),
+                limit : 50,
             })
             return res.status(200).json(messages);
         } catch (error) {
