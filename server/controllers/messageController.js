@@ -24,7 +24,7 @@ class MessageController {
                 where: {conversationId},
                 // Add order conditions here....
                 order: [
-                    ['id', 'ASC'], //DESC
+                    ['id', 'DESC'], //DESC
                 ],
                 offset:(0),
                 limit : 50,
