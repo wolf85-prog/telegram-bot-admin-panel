@@ -102,7 +102,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 					</p>
 				)}
 				<div className="chat__msg-group" >
-					{messages.reverse().map((message, msgIndex) => {
+					{messages.map((message, msgIndex) => {
 						//получить сообщение по его id
 						const replyMessage = [...messages].filter((message)=> message.id === message.content.split('_reply_')[0])
 						console.log("replyMessage: ", replyMessage)
