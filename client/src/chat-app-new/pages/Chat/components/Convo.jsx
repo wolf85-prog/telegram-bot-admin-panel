@@ -178,7 +178,8 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 														<span className="reply__left"></span>
 														<div className="reply__pad">
 															<div className="reply__contact">U.L.E.Y</div>
-															<div className="reply__text">{replyMessage?.content.endsWith('.pdf') ? (
+															<div className="reply__text">
+																{/* {replyMessage?.content.endsWith('.pdf') ? (
 																<figure>
 																	<iframe src={message.content} height="50px" width="50px" title="myFramePdf"/>
 																</figure>) : (
@@ -186,7 +187,11 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 																	<a href={replyMessage?.content} target="_blank" rel="noreferrer"><img src={replyMessage?.content} alt="" width='50px' height='50px' /></a>
 																	<figcaption style={{textAlign: 'center', backgroundColor: '#607a7a', borderRadius: '5px'}}></figcaption>
 																</figure>
-																)}
+																)} */}
+																{ replyMessage?.content.startsWith('http') ?
+																	<a href={replyMessage?.content} target="_blank" rel="noreferrer"><img src={replyMessage?.content} alt="" width='50px' height='50px' /></a>
+																	: replyMessage?.content
+																}
 															</div>
 														</div>
 													</div>
