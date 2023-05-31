@@ -14,6 +14,8 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 
+	let replyMessage;
+	
 	const { delMessageContext } = useUsersContext();
 
 	const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -89,7 +91,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 	return dates.map((date, dateIndex) => {
 		const messages = allMessages[date];
-		let replyMessage = [];
+		
 		//console.log("allMessages: ", messages);
 		return (
 			<div key={dateIndex}>
@@ -104,13 +106,12 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 				)}
 				<div className="chat__msg-group" >
 					{messages.map((message, msgIndex) => {
-						//получить сообщение по его id						
+
+						//получить сообщение по его id
 						if (message.content?.includes('_reply_')) {
-							replyMessage = [...messages].filter((mess)=> mess.id === message.content.split('_reply_')[0])
-							console.log("replyMessage: ", replyMessage[0]?.content)
+							replyMessage = messages.find(mess=> mess.id == message.content.split('_reply_')[0])
 						}
-						
-						
+			
 						const assignRef = () =>
 							dateIndex === dates.length - 1 && msgIndex === messages.length - 1
 								? lastMsgRef
@@ -177,7 +178,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 														<div className="reply__pad">
 															<div className="reply__contact">U.L.E.Y</div>
 															{/* <div className="reply__text">{message.content.split('_reply_')[0]}</div> */}
-															<div className="reply__text">{replyMessage[0]?.content}</div>
+															<div className="reply__text">{replyMessage?.content}</div>
 														</div>
 													</div>
 													

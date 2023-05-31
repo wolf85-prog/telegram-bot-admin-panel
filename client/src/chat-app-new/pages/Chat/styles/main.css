@@ -309,7 +309,7 @@
     flex-direction: column;
     align-items: flex-start;
     min-height: 42px;
-    max-height: 82px;
+    /* max-height: 82px; */
     overflow: hidden;
 }
 
