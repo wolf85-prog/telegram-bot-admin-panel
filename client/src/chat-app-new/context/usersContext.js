@@ -362,7 +362,7 @@ const UsersProvider = ({ children }) => {
 			setProjects(projects)
 		}
 
-		setUsers(async (users) => {
+		setUsers((users) => {
 			const { senderId, text, type, messageId, convId } = data;		
 
 			// const newUser = {
