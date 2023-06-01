@@ -149,7 +149,7 @@
 }
 
 .chat__msg {
-    padding: 6px 7px 8px 9px;
+    padding: 6px 7px 18px 9px;
     margin-bottom: 12px;
     font-size: 0.85rem;
     color: #000000;
