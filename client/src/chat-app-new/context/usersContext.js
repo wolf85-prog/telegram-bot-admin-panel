@@ -362,11 +362,44 @@ const UsersProvider = ({ children }) => {
 			setProjects(projects)
 		}
 
-		setUsers((users) => {
+		//let users2 = await getContacts();
+
+		setUsers(async (users) => {
 			const { senderId, text, type, messageId } = data;
-			//console.log("users: ", users)
+
+			let response = await getContacts();
+			
+			console.log("users get message: ", users)
+
+			// response.map(async (user) => {
+
+			// 	let first_name = user.firstname != null ? user.firstname : ''
+			// 	let last_name = user.lastname != null ? user.lastname : ''
+
+			// 	let chatName = user.username ? user.username : first_name + ' ' + last_name
+
+			// 	const newUser = {
+			// 		id: user.id,
+			// 		name: chatName,
+			// 		chatId: user.chatId,
+			// 		avatar: user.avatar,
+			// 		conversationId: conversationId,
+			// 		unread: 0, 
+			// 		pinned: false,
+			// 		typing: false,
+			// 		message:  lastMessage,
+			// 		date: dateMessage,
+			// 		messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
+			// 	}
+
+			// 	arrayContact.push(newUser)
+			// })
+
 			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
+			console.log("userIndex: ", userIndex)
 			const usersCopy = JSON.parse(JSON.stringify(users));
+			console.log("usersCopy: ", usersCopy)
+			
 			const newMsgObject = {
 				date: new Date().toLocaleDateString(),
 				content: text,
