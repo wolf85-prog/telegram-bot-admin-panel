@@ -363,89 +363,28 @@ const UsersProvider = ({ children }) => {
 		}
 
 		setUsers(async (users) => {
-			const { senderId, text, type, messageId } = data;
-			const arrayContact = []
+			const { senderId, text, type, messageId, convId } = data;		
 
-			let response = await getContacts();
+			const newUser = {
+				id: 999,
+				name: 'Новый пользователь',
+				chatId: senderId,
+				avatar: '',
+				conversationId: convId,
+				unread: 0, 
+				pinned: false,
+				typing: false,
+				message:  '',
+				date: '',
+				messages: '', // { "01/01/2023": arrayMessage,"Сегодня":[] },	
+			}	
 
-			response.map(async (user) => {
-				
-				let conversationId = await getConversation(user.chatId)
-				let messages = await getMessages(conversationId)
+			const users2 = JSON.parse(JSON.stringify(users));
+			users2.push(newUser)
 
-				//получить последнее сообщение
-				const messageDates = Object.keys(messages);
-				const recentMessageDate = messageDates[messageDates.length - 1];
-				const message = messages[recentMessageDate];
-
-				const dateMessage = message ? messages[recentMessageDate].createdAt : "2000-01-01T00:00:00";
-				const lastMessage = message ? messages[recentMessageDate].text : "";			
-	
-				const arrayMessage = []
-				const allDate = []
-
-				messages.map(message => {
-					const d = new Date(message.createdAt);
-					const year = d.getFullYear();
-					const month = String(d.getMonth()+1).padStart(2, "0");
-					const day = String(d.getDate()).padStart(2, "0");
-					const chas = d.getHours();
-					const minut = String(d.getMinutes()).padStart(2, "0");
-
-					const newDateMessage = `${day}.${month}.${year}`
-
-					const newMessage = {
-						date: newDateMessage,
-						content: message.text,
-						image: message.type === 'image' ? true : false,
-						descript: message.buttons ? message.buttons : '',
-						sender: message.senderId,
-						time: chas + ' : ' + minut,
-						status: 'sent',
-						id:message.messageId,
-					}
-					arrayMessage.push(newMessage)
-					allDate.push(newDateMessage)
-				})
-
-				const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
-
-				let obj = {};
-				for (let i = 0; i < dates.length; i++) {
-					const arrayDateMessage = []
-					for (let j = 0; j < arrayMessage.length; j++) {
-						if (arrayMessage[j].date === dates[i]) {
-							arrayDateMessage.push(arrayMessage[j])							
-						}
-					}	
-					obj[dates[i]] = arrayDateMessage;
-				}
-
-				let first_name = user.firstname != null ? user.firstname : ''
-				let last_name = user.lastname != null ? user.lastname : ''
-
-				let chatName = user.username ? user.username : first_name + ' ' + last_name
-
-				const newUser = {
-					id: user.id,
-					name: chatName,
-					chatId: user.chatId,
-					avatar: user.avatar,
-					conversationId: conversationId,
-					unread: 0, 
-					pinned: false,
-					typing: false,
-					message:  lastMessage,
-					date: dateMessage,
-					messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
-				}
-
-				arrayContact.push(newUser)
-			})
-
-			let userIndex = arrayContact.findIndex((user) => user.chatId === senderId.toString());
+			let userIndex = users2.findIndex((user) => user.chatId === senderId.toString());
 			console.log("userIndex: ", userIndex)
-			const usersCopy = JSON.parse(JSON.stringify(arrayContact));
+			const usersCopy = JSON.parse(JSON.stringify(users2));
 			//console.log("usersCopy: ", usersCopy)
 			
 			const newMsgObject = {
