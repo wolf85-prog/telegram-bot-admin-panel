@@ -378,7 +378,7 @@ const UsersProvider = ({ children }) => {
 			messages: '', 
 		}	
 			
-		console.log("1: ", users)
+		//console.log("1: ", users)
 
 		//console.log(newUser)
 
@@ -387,10 +387,10 @@ const UsersProvider = ({ children }) => {
 		//console.log(users2);
 //---------------------------------------------------------------------------------
 
-		setUsers((users) => {
+		setUsers((users, newUser) => {
 			const { senderId, text, type, messageId, convId } = data;	
 			
-			console.log("2: ", users)
+			console.log("newUser", newUser)
 
 			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			console.log("userIndex: ", userIndex)
