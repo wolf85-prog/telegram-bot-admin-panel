@@ -422,7 +422,7 @@ const UsersProvider = ({ children }) => {
 			}
 			
 			const userObject = usersCopy2[userIndex2];
-			usersCopy[userIndex2] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
+			usersCopy2[userIndex2] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
 
 			//сортировка
 			const userSort = [...usersCopy2].sort((a, b) => {       
