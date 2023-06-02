@@ -378,7 +378,8 @@ const UsersProvider = ({ children }) => {
 			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			const usersCopy = JSON.parse(JSON.stringify(users));			
 
-			if (!userIndex) {
+			console.log("userIndex: ", userIndex)
+			if (userIndex === -1) {
 				const newUser = {
 					id: usersCopy.length,
 					name: 'Новый заказчик',
