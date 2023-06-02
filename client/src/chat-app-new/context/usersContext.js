@@ -362,21 +362,6 @@ const UsersProvider = ({ children }) => {
 			setProjects(projects)
 		}
 //----------------------------------------------------------------------------
-		const { senderId, text, type, messageId, convId } = data;
-
-		const newUser = {
-			id: 999,
-			name: 'Новый заказчик',
-			chatId: senderId,
-			avatar: '',
-			conversationId: convId,
-			unread: 0, 
-			pinned: false,
-			typing: false,
-			message:  '',
-			date: '',
-			messages: '', 
-		}	
 			
 		//console.log("1: ", users)
 
@@ -389,13 +374,25 @@ const UsersProvider = ({ children }) => {
 
 		setUsers((users, newUser) => {
 			const { senderId, text, type, messageId, convId } = data;	
-			
-			console.log("newUser", newUser)
 
 			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
-			console.log("userIndex: ", userIndex)
 			const usersCopy = JSON.parse(JSON.stringify(users));
-			//console.log("usersCopy: ", usersCopy)
+
+			const newUser = {
+				id: 999,
+				name: 'Новый заказчик',
+				chatId: senderId,
+				avatar: '',
+				conversationId: convId,
+				unread: 0, 
+				pinned: false,
+				typing: false,
+				message:  '',
+				date: '',
+				messages: '', 
+			}	
+
+			console.log("newUser", newUser)
 			
 			const newMsgObject = {
 				date: new Date().toLocaleDateString(),
