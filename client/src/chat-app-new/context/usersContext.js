@@ -375,26 +375,25 @@ const UsersProvider = ({ children }) => {
 		setUsers((users) => {
 			const { senderId, text, type, messageId, convId } = data;	
 
-			//let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
+			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			const usersCopy = JSON.parse(JSON.stringify(users));			
 
-			const newUser = {
-				id: 999,
-				name: 'Новый заказчик',
-				chatId: senderId,
-				avatar: '',
-				conversationId: convId,
-				unread: 0, 
-				pinned: false,
-				typing: false,
-				message:  '',
-				date: '2000-01-01T00:00:00',
-				messages: {}, 
-			}	
-			usersCopy.push(newUser)
+			// const newUser = {
+			// 	id: 999,
+			// 	name: 'Новый заказчик',
+			// 	chatId: senderId,
+			// 	avatar: '',
+			// 	conversationId: convId,
+			// 	unread: 0, 
+			// 	pinned: false,
+			// 	typing: false,
+			// 	message:  '',
+			// 	date: '2000-01-01T00:00:00',
+			// 	messages: {}, 
+			// }	
+			// usersCopy.push(newUser)
 
-			let userIndex = usersCopy.findIndex((user) => user.chatId === senderId.toString());
-			console.log("userIndex: ", userIndex)
+			//let userIndex = usersCopy.findIndex((user) => user.chatId === senderId.toString());
 //-----------------------------------------------------------------------------------------------			
 			const newMsgObject = {
 				date: new Date().toLocaleDateString(),
