@@ -377,6 +377,7 @@ const UsersProvider = ({ children }) => {
 
 			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			const usersCopy = JSON.parse(JSON.stringify(users));
+			const usersCopy2 = JSON.parse(JSON.stringify(users));
 
 			const newUser = {
 				id: 999,
@@ -394,7 +395,7 @@ const UsersProvider = ({ children }) => {
 
 			console.log("newUser", newUser)
 
-			usersCopy.push(newUser)
+			usersCopy2.push(newUser)
 			console.log("usersCopy: ", usersCopy)
 			
 			const newMsgObject = {
