@@ -396,7 +396,7 @@ const UsersProvider = ({ children }) => {
 				usersCopy.push(newUser)
 				console.log("usersCopy: ", usersCopy)
 
-				userIndex = usersCopy.findIndex((user) => user.chatId === senderId.toString());
+				userIndex = usersCopy.length-1; //usersCopy.findIndex((user) => user.chatId === senderId.toString());
 
 				console.log("userIndex new: ", userIndex)
 			}		
@@ -414,9 +414,12 @@ const UsersProvider = ({ children }) => {
 
 			const currentDate = new Date().toLocaleDateString()
 
+			console.log("messages: ", usersCopy[userIndex].messages[currentDate])
+
 			if (usersCopy[userIndex].messages[currentDate]) {
 				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 			} else {
+				console.log("add current date")
 				usersCopy[userIndex].messages[currentDate] = [];
 				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 			}
