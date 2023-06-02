@@ -361,27 +361,31 @@ const UsersProvider = ({ children }) => {
 			console.log("projects get socket: ", projects.length)
 			setProjects(projects)
 		}
+//----------------------------------------------------------------------------
+		const { senderId, text, type, messageId, convId } = data;
+
+		const newUser = {
+			id: 999,
+			name: 'Новый заказчик',
+			chatId: senderId,
+			avatar: '',
+			conversationId: convId,
+			unread: 0, 
+			pinned: false,
+			typing: false,
+			message:  '',
+			date: '',
+			messages: '', 
+		}	
+			
+		console.log(newUser)
+
+		// const users2 = JSON.parse(JSON.stringify(users));
+		// users2.push(newUser)
+//---------------------------------------------------------------------------------
 
 		setUsers((users) => {
 			const { senderId, text, type, messageId, convId } = data;		
-
-			// const newUser = {
-			// 	id: 999,
-			// 	name: 'Новый заказчик',
-			// 	chatId: senderId,
-			// 	avatar: '',
-			// 	conversationId: convId,
-			// 	unread: 0, 
-			// 	pinned: false,
-			// 	typing: false,
-			// 	message:  '',
-			// 	date: '',
-			// 	messages: '', 
-			// }	
-			// console.log(newUser)
-
-			// const users2 = JSON.parse(JSON.stringify(users));
-			// users2.push(newUser)
 
 			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			console.log("userIndex: ", userIndex)
