@@ -394,9 +394,12 @@ const UsersProvider = ({ children }) => {
 					messages: {}, 
 				}	
 				usersCopy.push(newUser)
-			}		
 
-			userIndex = usersCopy.findIndex((user) => user.chatId === senderId.toString());
+				userIndex = usersCopy.findIndex((user) => user.chatId === senderId.toString());
+
+				console.log("userIndex new: ", userIndex)
+			}		
+			
 //-----------------------------------------------------------------------------------------------			
 			const newMsgObject = {
 				date: new Date().toLocaleDateString(),
