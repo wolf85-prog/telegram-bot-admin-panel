@@ -14,6 +14,8 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 
+	//const [replyMessage, setReplyMessage] = useState('');
+
 	let replyMessage;
 	
 	const { delMessageContext } = useUsersContext();
@@ -109,7 +111,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 						//получить сообщение по его id
 						if (message.content?.includes('_reply_')) {
-							replyMessage = messages.find(mess=> mess.id == message.content.split('_reply_')[0])
+						 	replyMessage = messages.find(mess=> mess.id == message.content.split('_reply_')[0])
 						}
 			
 						const assignRef = () =>
