@@ -378,13 +378,14 @@ const UsersProvider = ({ children }) => {
 				date: '',
 				messages: '', 
 			}	
+			console.log(newUser)
 
-			const users2 = JSON.parse(JSON.stringify(users));
-			users2.push(newUser)
+			// const users2 = JSON.parse(JSON.stringify(users));
+			// users2.push(newUser)
 
-			let userIndex = users2.findIndex((user) => user.chatId === senderId.toString());
+			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			console.log("userIndex: ", userIndex)
-			const usersCopy = JSON.parse(JSON.stringify(users2));
+			const usersCopy = JSON.parse(JSON.stringify(users));
 			//console.log("usersCopy: ", usersCopy)
 			
 			const newMsgObject = {
