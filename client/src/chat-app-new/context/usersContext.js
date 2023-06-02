@@ -414,15 +414,15 @@ const UsersProvider = ({ children }) => {
 
 			const currentDate = new Date().toLocaleDateString()
 
-			if (usersCopy2[userIndex2].messages[currentDate]) {
-				usersCopy2[userIndex2].messages[currentDate].push(newMsgObject);
+			if (usersCopy[userIndex].messages[currentDate]) {
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 			} else {
-				usersCopy2[userIndex2].messages[currentDate] = [];
-				usersCopy2[userIndex2].messages[currentDate].push(newMsgObject);
+				usersCopy[userIndex].messages[currentDate] = [];
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 			}
 			
-			const userObject = usersCopy2[userIndex2];
-			usersCopy2[userIndex2] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
+			const userObject = usersCopy[userIndex];
+			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
 
 			//сортировка
 			const userSort = [...usersCopy2].sort((a, b) => {       
