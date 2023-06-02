@@ -425,7 +425,7 @@ const UsersProvider = ({ children }) => {
 			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
 
 			//сортировка
-			const userSort = [...usersCopy2].sort((a, b) => {       
+			const userSort = [...usersCopy].sort((a, b) => {       
 				var dateA = new Date(a.date), dateB = new Date(b.date) 
 				return dateB-dateA  //сортировка по убывающей дате  
 			})
