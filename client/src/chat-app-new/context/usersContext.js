@@ -378,15 +378,19 @@ const UsersProvider = ({ children }) => {
 			messages: '', 
 		}	
 			
-		console.log(newUser)
+		console.log("1: ", users)
 
-		const users2 = JSON.parse(JSON.stringify(users));
-		users2.push(newUser);
-		console.log(users2);
+		//console.log(newUser)
+
+		//const users2 = JSON.parse(JSON.stringify(users));
+		//users2.push(newUser);
+		//console.log(users2);
 //---------------------------------------------------------------------------------
 
 		setUsers((users) => {
-			const { senderId, text, type, messageId, convId } = data;		
+			const { senderId, text, type, messageId, convId } = data;	
+			
+			console.log("2: ", users)
 
 			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			console.log("userIndex: ", userIndex)
