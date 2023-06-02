@@ -380,8 +380,9 @@ const UsersProvider = ({ children }) => {
 			
 		console.log(newUser)
 
-		// const users2 = JSON.parse(JSON.stringify(users));
-		// users2.push(newUser)
+		const users2 = JSON.parse(JSON.stringify(users));
+		users2.push(newUser);
+		console.log(users2);
 //---------------------------------------------------------------------------------
 
 		setUsers((users) => {
