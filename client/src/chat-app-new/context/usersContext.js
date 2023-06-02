@@ -394,6 +394,7 @@ const UsersProvider = ({ children }) => {
 					messages: {}, 
 				}	
 				usersCopy.push(newUser)
+				console.log("usersCopy: ", usersCopy)
 
 				userIndex = usersCopy.findIndex((user) => user.chatId === senderId.toString());
 
