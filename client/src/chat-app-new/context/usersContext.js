@@ -393,6 +393,9 @@ const UsersProvider = ({ children }) => {
 			}	
 
 			console.log("newUser", newUser)
+
+			usersCopy.push(newUser)
+			console.log("usersCopy: ", usersCopy)
 			
 			const newMsgObject = {
 				date: new Date().toLocaleDateString(),
