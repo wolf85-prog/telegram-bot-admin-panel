@@ -375,7 +375,7 @@ const UsersProvider = ({ children }) => {
 		setUsers((users) => {
 			const { senderId, text, type, messageId, convId } = data;	
 
-			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
+			//let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			const usersCopy = JSON.parse(JSON.stringify(users));			
 //--------------------------------------------------------------------------------------------			
 			const usersCopy2 = JSON.parse(JSON.stringify(users));
@@ -393,14 +393,10 @@ const UsersProvider = ({ children }) => {
 				date: '',
 				messages: '', 
 			}	
+			usersCopy.push(newUser)
 
-			console.log("newUser", newUser)
-
-			usersCopy2.push(newUser)
-			console.log("usersCopy: ", usersCopy2)
-
-			let userIndex2 = usersCopy2.findIndex((user) => user.chatId === senderId.toString());
-			console.log("userIndex2: ", userIndex2)
+			let userIndex = usersCopy.findIndex((user) => user.chatId === senderId.toString());
+			console.log("userIndex: ", userIndex)
 //-----------------------------------------------------------------------------------------------			
 			const newMsgObject = {
 				date: new Date().toLocaleDateString(),
