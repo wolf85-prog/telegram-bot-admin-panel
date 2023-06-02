@@ -377,8 +377,6 @@ const UsersProvider = ({ children }) => {
 
 			//let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			const usersCopy = JSON.parse(JSON.stringify(users));			
-//--------------------------------------------------------------------------------------------			
-			const usersCopy2 = JSON.parse(JSON.stringify(users));
 
 			const newUser = {
 				id: 999,
@@ -390,8 +388,8 @@ const UsersProvider = ({ children }) => {
 				pinned: false,
 				typing: false,
 				message:  '',
-				date: '',
-				messages: '', 
+				date: '2000-01-01T00:00:00',
+				messages: {}, 
 			}	
 			usersCopy.push(newUser)
 
