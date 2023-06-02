@@ -26,6 +26,8 @@ const Chat = () => {
 
 	const chatId = person.id;
 	let user = users.filter((user) => user.chatId === chatId.toString())[0];
+	console.log("users context: ", users)
+	console.log("user chat: ", user)
 
 	const lastMsgRef = useRef(null);
 	const [showAttach, setShowAttach] = useState(false);
