@@ -25,11 +25,7 @@ const Chat = () => {
 	const { setCountMessage } = useUsersContext();
 
 	const chatId = person.id;
-	console.log("chatId: ", chatId)
 	let user = users.filter((user) => user.chatId === chatId.toString())[0];
-	let user2 = users.find((user) => user.chatId === chatId.toString());
-	console.log("users context: ", users)
-	console.log("user chat: ", user2)
 
 	const lastMsgRef = useRef(null);
 	const [showAttach, setShowAttach] = useState(false);
