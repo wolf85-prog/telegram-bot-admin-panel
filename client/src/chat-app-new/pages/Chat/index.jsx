@@ -25,6 +25,7 @@ const Chat = () => {
 	const { setCountMessage } = useUsersContext();
 
 	const chatId = person.id;
+	console.log("chatId: ", chatId)
 	let user = users.filter((user) => user.chatId === chatId.toString())[0];
 	console.log("users context: ", users)
 	console.log("user chat: ", user)
