@@ -113,7 +113,6 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 						//получить сообщение по его id
 						if (message.content?.includes('_reply_')) {
 						 	replyMessage = messages.find(mess=> mess.id == message.content.split('_reply_')[0])
-							 console.log("link: ", replyMessage?.content)
 						} 
 			
 						const assignRef = () =>
