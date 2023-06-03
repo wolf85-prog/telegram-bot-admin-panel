@@ -50,6 +50,7 @@ const UsersProvider = ({ children }) => {
 	
 				const arrayMessage = []
 				const allDate = []
+				let replyMessage
 
 				messages.map(message => {
 					const d = new Date(message.createdAt);
@@ -61,9 +62,16 @@ const UsersProvider = ({ children }) => {
 
 					const newDateMessage = `${day}.${month}.${year}`
 
+					//получить сообщение по его id
+					if (message.text?.includes('_reply_')) {
+						replyMessage = messages.find(mess=> mess.id == message.text.split('_reply_')[0])
+				   } else {
+						replyMessage = message.text
+				   }
+
 					const newMessage = {
 						date: newDateMessage,
-						content: message.text,
+						content: replyMessage,//message.text,
 						image: message.type === 'image' ? true : false,
 						descript: message.buttons ? message.buttons : '',
 						sender: message.senderId,
