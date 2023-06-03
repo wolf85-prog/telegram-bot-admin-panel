@@ -71,7 +71,7 @@ const UsersProvider = ({ children }) => {
 
 					const newMessage = {
 						date: newDateMessage,
-						content: replyMessage,//message.text,
+						content: message.text,
 						image: message.type === 'image' ? true : false,
 						descript: message.buttons ? message.buttons : '',
 						sender: message.senderId,

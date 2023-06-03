@@ -171,7 +171,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 									<p className="chat__msg chat__msg--rxd" ref={assignRef()}>
 										<div className="flex-row">
 											{/* пересылаемое сообщение */}
-											{message.content.includes('_reply_') 
+											{message.content?.includes('_reply_') 
 											? <div className="chat__msg--reply">
 												<div className="reply__content">
 													<div className="reply__full">
