@@ -383,7 +383,7 @@ const UsersProvider = ({ children }) => {
 				const newUser = {
 					id: usersCopy.length,
 					name: 'Новый заказчик',
-					chatId: senderId,
+					chatId: `${senderId}`,
 					avatar: '',
 					conversationId: convId,
 					unread: 0, 
