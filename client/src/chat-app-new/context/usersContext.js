@@ -63,11 +63,11 @@ const UsersProvider = ({ children }) => {
 					const newDateMessage = `${day}.${month}.${year}`
 
 					//получить сообщение по его id
-					if (message.text?.includes('_reply_')) {
-						replyMessage = messages.find(mess=> mess.id == message.text.split('_reply_')[0])
-				   } else {
-						replyMessage = message.text
-				   }
+				// 	if (message.text?.includes('_reply_')) {
+				// 		replyMessage = messages.find(mess=> mess.id == message.text.split('_reply_')[0])
+				//    } else {
+				// 		replyMessage = message.text
+				//    }
 
 					const newMessage = {
 						date: newDateMessage,
