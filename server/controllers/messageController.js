@@ -20,14 +20,16 @@ class MessageController {
     async getMessages(req, res) {
         const conversationId = req.params.id
         try {           
+            const count = await Message.count();
+
             const messages = await Message.findAll({
                 where: {conversationId},
                 // Add order conditions here....
                 order: [
                     ['id', 'ASC'], //DESC
                 ],
-                //offset:(0, 50),
-                //limit : 50,
+                offset:(count - 50, count),
+                limit : 50,
             })
             return res.status(200).json(messages);
         } catch (error) {
