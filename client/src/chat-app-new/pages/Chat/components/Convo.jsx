@@ -112,7 +112,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 						//console.log(message.content)
 
 						//получить сообщение по его id
-						if (message.content.includes('_reply_')) {
+						if (message.content?.includes('_reply_')) {
 						 	replyMessage = message?.content.split('_reply_')[0] //messages.find(mess=> mess.id === message.content.split('_reply_')[0])
 						} 
 			
