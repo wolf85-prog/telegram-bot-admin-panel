@@ -19,7 +19,7 @@ const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 const host = process.env.REACT_APP_API_URL
 
 const Chat = () => {
-	const { userWorkers, setUserAsUnread, addNewMessage } = useUsersContext();
+	const { userWorkers, setUserAsUnread, addNewMessage2 } = useUsersContext();
 	const { person } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
@@ -113,7 +113,7 @@ const Chat = () => {
             }
 
 			//сохранить в контексте
-			addNewMessage(user.chatId, mess, 'text', '', user.conversationId, sendToTelegram.data.result.message_id);
+			addNewMessage2(user.chatId, mess, 'text', '', user.conversationId, sendToTelegram.data.result.message_id);
         } else {
             message = {
                 senderId: chatAdminId, 
@@ -126,7 +126,7 @@ const Chat = () => {
             }
 
 			//сохранить в контексте
-			addNewMessage(user.chatId, host + image, 'image', '', user.conversationId, sendToTelegram.data.result.message_id);
+			addNewMessage2(user.chatId, host + image, 'image', '', user.conversationId, sendToTelegram.data.result.message_id);
         }
         console.log("message send button: ", message);
 

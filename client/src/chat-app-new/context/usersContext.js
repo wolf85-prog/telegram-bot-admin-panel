@@ -627,6 +627,32 @@ const UsersProvider = ({ children }) => {
 	}
 
 
+//=======================================================================
+// Workhub
+//=======================================================================
+
+//отправить сообщение из админки 
+const addNewMessage2 = (userId, message, type, textButton, convId, messageId) => {
+
+	socket.emit("sendAdminSpec", { 
+		senderId: chatAdminId,
+		receiverId: userId,
+		text: message,
+		type: type,
+		buttons: textButton,
+		convId: convId,
+		messageId,
+	})
+};
+
+const delMessageContext2 = (messageId, messageDate, chatId) => {
+	socket.emit("delAdminSpec", { 
+		messageId,
+		messageDate,
+		chatId,
+	})
+}
+
 	return (
 		<UsersContext.Provider value={{ 
 			users, 
@@ -652,6 +678,8 @@ const UsersProvider = ({ children }) => {
 			setUserWorkers,
 			workers,
 			setWorkers,
+			addNewMessage2,
+			delMessageContext2,
 		}}>
 			{children}
 		</UsersContext.Provider>

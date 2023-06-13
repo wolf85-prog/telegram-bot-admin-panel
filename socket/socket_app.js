@@ -83,18 +83,6 @@ io.on("connection", (socket) => {
         })
     })
 
-    //send and get message in workers
-    socket.on("sendMessageSpec", ({senderId, receiverId, text, type, convId, messageId})=>{
-        const user = getUser(receiverId)
-        io.emit("getMessageSpec", {
-            senderId,
-            text,
-            type,
-            convId,
-            messageId,
-        })
-    })
-
     //send and get message
     socket.on("sendAdmin", ({senderId, receiverId, text, type, buttons, convId, messageId})=>{
         io.emit("getAdmin", {
@@ -116,6 +104,43 @@ io.on("connection", (socket) => {
             chatId,
         })
     })
+
+// Чат специалистов
+//------------------------------------------------------------------
+    //send and get message in workers
+    socket.on("sendMessageSpec", ({senderId, receiverId, text, type, convId, messageId})=>{
+        const user = getUser(receiverId)
+        io.emit("getMessageSpec", {
+            senderId,
+            text,
+            type,
+            convId,
+            messageId,
+        })
+    })
+
+    //send and get message
+    socket.on("sendAdminSpec", ({senderId, receiverId, text, type, buttons, convId, messageId})=>{
+        io.emit("getAdminSpec", {
+            senderId,
+            receiverId,
+            text,
+            type,
+            buttons,
+            convId,
+            messageId,
+        })
+    })
+
+    //send and get message
+    socket.on("delAdminSpec", ({messageId, messageDate, chatId})=>{
+        io.emit("getDelAdminSpec", {
+            messageId,
+            messageDate,
+            chatId,
+        })
+    })
+
 
     //when disconnect
     socket.on("disconnect", ()=> {

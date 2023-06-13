@@ -14,10 +14,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 
-	//const [replyMessage, setReplyMessage] = useState('');
-
 	let replyMessage;
-	let test;
 	
 	const { delMessageContext } = useUsersContext();
 
