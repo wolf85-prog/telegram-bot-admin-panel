@@ -23,7 +23,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	//прокрутка
 	const scrollToMsg = (id) => {
 		console.log(id)
-		alert(id)
+		//alert(id)
 		//msgRef.current[20].scrollIntoView({transition: "smooth"});
 	};
 
