@@ -1,5 +1,5 @@
 import Icon from "./../../../components/Icon";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 // import pdf from "./../../../assets/images/PDFicon.png";
 import formatTime from "./../../../utils/formatTime";
 import { AccountContext } from './../../../context/AccountProvider';
@@ -14,9 +14,18 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 
+	const msgRef = useRef([]);
+
 	let replyMessage;
 	
 	const { delMessageContext } = useUsersContext();
+
+	//прокрутка
+	const scrollToMsg = (id) => {
+		console.log(id)
+		alert(id)
+		//msgRef.current[20].scrollIntoView({transition: "smooth"});
+	};
 
 	const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 		<button
@@ -167,10 +176,10 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 									</div>
 								) : message.sender !== chatAdminId ? (
 									<p className="chat__msg chat__msg--rxd" ref={assignRef()}>
-										<div className="flex-row">
+										<div className="flex-row" ref={el => msgRef.current[msgIndex] = el} >
 											{/* пересылаемое сообщение */}
 											{message.content?.includes('_reply_') 
-											? <div className="chat__msg--reply">
+											? <div className="chat__msg--reply" onClick={()=>scrollToMsg(message.replay ? message.replay : 'null')}>
 												<div className="reply__content">
 													<div className="reply__full">
 														<span className="reply__left"></span>
