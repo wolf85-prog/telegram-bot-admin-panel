@@ -24,7 +24,8 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const scrollToMsg = (id) => {
 		console.log(id)
 		//alert(id)
-		//msgRef.current[20].scrollIntoView({transition: "smooth"});
+		console.log(msgRef.current)
+		msgRef.current[id].scrollIntoView({transition: "smooth"});
 	};
 
 	const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -176,10 +177,10 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 									</div>
 								) : message.sender !== chatAdminId ? (
 									<p className="chat__msg chat__msg--rxd" ref={assignRef()}>
-										<div className="flex-row" ref={el => msgRef.current[msgIndex] = el} >
+										<div className="flex-row" ref={el => msgRef.current[message.id] = el} >
 											{/* пересылаемое сообщение */}
 											{message.content?.includes('_reply_') 
-											? <div className="chat__msg--reply" onClick={()=>scrollToMsg(message.replay ? message.replay : 'null')}>
+											? <div className="chat__msg--reply" onClick={()=>scrollToMsg(message.reply)}>
 												<div className="reply__content">
 													<div className="reply__full">
 														<span className="reply__left"></span>
