@@ -5,7 +5,11 @@ class WorkersController {
 
     async getWorkers(req, res) {
         try {
-            const workers = await Worker.findAll()
+            const workers = await Worker.findAll({
+                order: [
+                    ['id', 'DESC'],
+                ],
+            })
             return res.status(200).json(workers);
         } catch (error) {
             return res.status(500).json(error.message);
