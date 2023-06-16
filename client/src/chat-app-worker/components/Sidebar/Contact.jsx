@@ -14,7 +14,7 @@ const Contact = ({ contact }) => {
 	const host = process.env.REACT_APP_API_URL
 	
 	//сделать пользователя непрочитанным
-	//const { setCountMessage } = useWorkersContext();
+	const { setUserWorkerAsUnread, setCountMessageWork } = useUsersContext();
 
 	//const status = usersOnline.find(item => item.userId == contact.chatId)
 
@@ -25,10 +25,10 @@ const Contact = ({ contact }) => {
             id: contact.chatId, 
 			avatar: contact.avatar
         });
-		//setUserAsUnread(contact.chatId)
-		//setCountMessage(0)
+		setUserWorkerAsUnread(contact.chatId)
+		setCountMessageWork(0)
 
-		console.log("click")
+		//console.log("click")
     }
 	
 	const getLastMessage = () => {

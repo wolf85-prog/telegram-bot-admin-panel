@@ -12,18 +12,21 @@ const useUsersContext = () => useContext(UsersContext);
 
 const UsersProvider = ({ children }) => {
 	const socket = useSocketContext();
-	const [users, setUsers] = useState([]); //useState(contacts);
-	const [userWorkers, setUserWorkers] = useState([]); //useState(contacts);
-	const [workers, setWorkers] = useState([]); //useState(contacts);
+	const [users, setUsers] = useState([]); //useState(contacts);	
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const [count, setCount] = useState(0)
 	const [countMessage, setCountMessage] = useState(0)
+	
 	const [usersOnline, setUsersOnline] = useState([]);
 	const [distributions, setDistributions] = useState([]); 
 	const [managers, setManagers]= useState([]);
 	const [companys, setCompanys]= useState([]);
 	const [projects, setProjects] = useState([]); 
 	const [newProject, setNewProject]= useState(false);
+
+	const [userWorkers, setUserWorkers] = useState([]); //useState(contacts);
+	const [workers, setWorkers] = useState([]); //useState(contacts);
+	const [countMessageWork, setCountMessageWork] = useState(0)
 
 	const audio = new Audio(boopSfx);
 	const audioProject = new Audio(soundNotif);
@@ -322,10 +325,22 @@ const UsersProvider = ({ children }) => {
 		
 	},[chatAdminId])
 	
+	//users
 	const _updateUserProp = (userId, prop, value) => {
 		setUsers((users) => {
 			const usersCopy = [...users];
 			let userIndex = users.findIndex((user) => user.chatId === userId);
+			const userObject = usersCopy[userIndex];
+			usersCopy[userIndex] = { ...userObject, [prop]: value };
+			return usersCopy;
+		});
+	};
+
+	//workhub
+	const _updateUserWorkerProp = (userId, prop, value) => {
+		setUserWorkers((userWorkers) => {
+			const usersCopy = [...userWorkers];
+			let userIndex = userWorkers.findIndex((user) => user.chatId === userId);
 			const userObject = usersCopy[userIndex];
 			usersCopy[userIndex] = { ...userObject, [prop]: value };
 			return usersCopy;
@@ -487,11 +502,9 @@ const UsersProvider = ({ children }) => {
 			const usersCopy = JSON.parse(JSON.stringify(users));
 
 			const messageIndex = usersCopy[userIndex].messages[messageDate].map(el => el.id).lastIndexOf(messageId);
-
 			usersCopy[userIndex].messages[messageDate].splice(messageIndex, 1); 
 
 			const userObject = usersCopy[userIndex];
-
 			const userSort = [...usersCopy]
 
 			return userSort;
@@ -515,6 +528,10 @@ const UsersProvider = ({ children }) => {
 
 	const setUserAsUnread = (userId) => {
 		_updateUserProp(userId, "unread", 0);
+	};
+
+	const setUserWorkerAsUnread = (userId) => {
+		_updateUserWorkerProp(userId, "unread", 0);
 	};
 
 
@@ -567,7 +584,7 @@ const fetchMessageSpecResponse = async(data) => {
 	console.log("date: ", data)
 	console.log("Пришло новое сообщение в workhub: ", count+1)
 	//setCount(count+1);
-	//setCountMessage(countMessage + 1)
+	setCountMessageWork(countMessageWork + 1)
 
 	if (data.text.startsWith('Специалист успешно добавлен!')) {
 		console.log("Пришел новый специаилст: ")
@@ -676,18 +693,16 @@ const fetchDelAdminSpec = (data) => {
 		const usersCopy = JSON.parse(JSON.stringify(users));
 
 		const messageIndex = usersCopy[userIndex].messages[messageDate].map(el => el.id).lastIndexOf(messageId);
-
 		usersCopy[userIndex].messages[messageDate].splice(messageIndex, 1); 
 
 		const userObject = usersCopy[userIndex];
-
 		const userSort = [...usersCopy]
 
 		return userSort;
 	});
 }
 
-//отправить сообщение из админки 
+//отправить сообщение из админки workhub
 const addNewMessage2 = (userId, message, type, textButton, convId, messageId) => {
 
 	socket.emit("sendAdminSpec", { 
@@ -701,6 +716,7 @@ const addNewMessage2 = (userId, message, type, textButton, convId, messageId) =>
 	})
 };
 
+//удалить сообщение из админки workhub
 const delMessageContext2 = (messageId, messageDate, chatId) => {
 	socket.emit("delAdminSpec", { 
 		messageId,
@@ -708,6 +724,8 @@ const delMessageContext2 = (messageId, messageDate, chatId) => {
 		chatId,
 	})
 }
+
+
 
 	return (
 		<UsersContext.Provider value={{ 
@@ -732,10 +750,14 @@ const delMessageContext2 = (messageId, messageDate, chatId) => {
 			setProjects,
 			userWorkers,
 			setUserWorkers,
+			setUserWorkerAsUnread,
 			workers,
 			setWorkers,
 			addNewMessage2,
 			delMessageContext2,
+			countMessageWork,
+			setCountMessageWork,
+			
 		}}>
 			{children}
 		</UsersContext.Provider>
