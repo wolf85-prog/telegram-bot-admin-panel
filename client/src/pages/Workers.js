@@ -41,6 +41,7 @@ const columns = [
       name: 'Компании',
       selector: row => row.companys,
       sortable: true,
+      width: '20%',
   },
   {
       name: 'Опыт работы',
@@ -51,6 +52,7 @@ const columns = [
       name: 'Специальности',
       selector: row => row.worklist,
       sortable: true,
+      width: '20%',
   },
 ];
 
@@ -109,11 +111,26 @@ const Workers = () => {
   //get Projects
   useEffect(() => {
     const arrWorkers = []
+    let specStr
+    let specArr
 
     const fetchData = async () => {
       console.log("workers: ", workers)
 
       workers.map(async (worker) => {
+        specStr = ''
+        specArr = []
+
+        if (worker.worklist) {
+          specArr = JSON.parse(worker.worklist)
+        }
+        
+        if (specArr) {
+          specArr.map(item => specStr = specStr + item.spec + ', ' )
+        } else {
+          specStr = ''
+        }
+        
 
         const newWorker = {
           family: worker.userfamily,
@@ -123,7 +140,7 @@ const Workers = () => {
           city: worker.city,
           companys: worker.companys,
           stag: worker.stag,
-          worklist: worker.worklist,
+          worklist: specStr,
           chatId: worker.chatId,
 				}
         arrWorkers.push(newWorker)
