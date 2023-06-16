@@ -364,7 +364,7 @@ const UsersProvider = ({ children }) => {
 		}
 
 		setUsers((users) => {
-			const { senderId, text, type, messageId, convId } = data;	
+			const { senderId, text, type, messageId, convId, replyId } = data;	
 
 			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			const usersCopy = JSON.parse(JSON.stringify(users));			
@@ -401,6 +401,7 @@ const UsersProvider = ({ children }) => {
 				time: new Date().toLocaleTimeString(),
 				status: null,
 				id: messageId,
+				reply: replyId,
 			};
 
 			const currentDate = new Date().toLocaleDateString()

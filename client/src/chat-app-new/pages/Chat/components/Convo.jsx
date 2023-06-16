@@ -230,36 +230,39 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 									</p>
 								) : (
 									<p className="chat__msg chat__msg--sent" ref={assignRef()}>
-										<span>
-											{message.content?.startsWith('http') 
-											? <a className="chat__href" href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
-											: message.content}
-										</span>
-										<span className="chat__msg-filler"> </span>
-										<span className="chat__msg-footer">
-											<span> {formatTime(message.time)} </span>
-											<Icon
-												id={
-													message?.status === "sent"
-														? "singleTick"
-														: "doubleTick"
-												}
-												aria-label={message?.status}
-												className={`chat__msg-status-icon ${
-													message?.status === "read"
-														? "chat__msg-status-icon--blue"
-														: ""
-												}`}
-											/>
-										</span>
+										<div ref={el => msgRef.current[message.id] = el}>
+											<span>
+												{message.content?.startsWith('http') 
+												? <a className="chat__href" href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
+												: message.content}
+											</span>
+											<span className="chat__msg-filler"> </span>
+											<span className="chat__msg-footer">
+												<span> {formatTime(message.time)} </span>
+												<Icon
+													id={
+														message?.status === "sent"
+															? "singleTick"
+															: "doubleTick"
+													}
+													aria-label={message?.status}
+													className={`chat__msg-status-icon ${
+														message?.status === "read"
+															? "chat__msg-status-icon--blue"
+															: ""
+													}`}
+												/>
+											</span>
 
-										<Dropdown onSelect={change}>
-											<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
-											</Dropdown.Toggle>
-											<Dropdown.Menu as={CustomMenu}>
-											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: person.id})}>Удалить сообщение</Dropdown.Item>
-											</Dropdown.Menu>
-										</Dropdown>
+											<Dropdown onSelect={change}>
+												<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
+												</Dropdown.Toggle>
+												<Dropdown.Menu as={CustomMenu}>
+												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: person.id})}>Удалить сообщение</Dropdown.Item>
+												</Dropdown.Menu>
+											</Dropdown>
+										</div>
+										
 									</p>
 								)}
 							</>
