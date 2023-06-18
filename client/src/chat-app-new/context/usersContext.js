@@ -27,6 +27,7 @@ const UsersProvider = ({ children }) => {
 	const [userWorkers, setUserWorkers] = useState([]); //useState(contacts);
 	const [workers, setWorkers] = useState([]); //useState(contacts);
 	const [countMessageWork, setCountMessageWork] = useState(0)
+	const [distributionsWork, setDistributionsWork] = useState([]); 
 
 	const audio = new Audio(boopSfx);
 	const audioProject = new Audio(soundNotif);
@@ -281,6 +282,20 @@ const UsersProvider = ({ children }) => {
       		console.log("distribution: ", response.length)
 
 			setDistributions(response)
+		}
+
+	  	fetchData();
+
+	},[])
+//------------------------------------------------------------------------------------------
+
+  	//get DistributionW
+  	useEffect(() => {
+    	const fetchData = async () => {
+			let response = await getDistributions();
+      		console.log("distributionW: ", response.length)
+
+			setDistributionsWork(response)
 		}
 
 	  	fetchData();
@@ -757,7 +772,8 @@ const delMessageContext2 = (messageId, messageDate, chatId) => {
 			delMessageContext2,
 			countMessageWork,
 			setCountMessageWork,
-			
+			distributionsWork, 
+			setDistributionsWork,
 		}}>
 			{children}
 		</UsersContext.Provider>

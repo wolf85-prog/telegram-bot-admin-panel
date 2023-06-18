@@ -130,3 +130,31 @@ export const delDistribution = async (id) =>{
         console.log("error while calling delMessage api",error.message);
     }
 }
+
+
+//distribution2
+export const newDistributionW = async (data) =>{
+    try {
+        await $host.post(`api/distributionw/add`, data); 
+    } catch (error) {
+        console.log("error while calling newDistribution api",error.message);
+    }
+}
+
+export const getDistributionsW = async()=>{
+    try {
+        let response = await $host.get('api/distributionsw/get');
+        //console.log(response);
+        return response.data;
+     } catch (error) {
+         console.log("error while calling getDistributions api", error.message);
+     }
+}
+
+export const delDistributionW = async (id) =>{
+    try {
+        await $host.delete(`api/distributionsw/delete/${id}`); 
+    } catch (error) {
+        console.log("error while calling delMessage api",error.message);
+    }
+}

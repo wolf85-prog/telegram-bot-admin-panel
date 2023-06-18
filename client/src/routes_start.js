@@ -12,6 +12,8 @@ import {
     CHAT_ROUTE3,
     CHAT_WORKER,
     WORKERS_ROUTE,
+    DISTRIBUTIONW_ROUTE,
+    DISTRIBUTIONADDW_ROUTE,
 } from "./utils/consts";
 
 const Chats = React.lazy(() => import('./pages/Chats'))
@@ -26,6 +28,8 @@ const Distribution = React.lazy(() => import('./pages/Distribution'))
 const DistributionAdd = React.lazy(() => import('./pages/DistributionAdd'))
 const Settings = React.lazy(() => import('./pages/Settings'))
 const Workers = React.lazy(() => import('./pages/Workers'))
+const DistributionW = React.lazy(() => import('./pages/DistributionW'))
+const DistributionAddW = React.lazy(() => import('./pages/DistributionAddW'))
 
 export const authRoutes = [
     { path: ADMIN_ROUTE, name: 'Панель управления', Component: Admin },
@@ -40,5 +44,7 @@ export const authRoutes = [
     { path: NOTIF_ROUTE, name: 'Уведомления', Component: Notifications },
     { path: SETTINGS_ROUTE, name: 'Настройки', Component: Settings },
     { path: WORKERS_ROUTE, name: 'Специалисты', Component: Workers },
+    { path: DISTRIBUTIONW_ROUTE, name: 'Рассылки', Component: DistributionW },
+    { path: DISTRIBUTIONADDW_ROUTE, name: 'Создание рассылки', Component: DistributionAddW },
     { path: '/', name: 'Панель управления', Component: Admin },
 ]

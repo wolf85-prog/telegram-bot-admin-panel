@@ -60,6 +60,17 @@ const Distribution = sequelize.define('distribution', {
     delivered: {type: DataTypes.BOOLEAN}, //доставлено
 })
 
+
+const Distributionw = sequelize.define('distributionw', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    text: {type: DataTypes.STRING}, //текст сообщения;
+    image: {type: DataTypes.STRING}, //ссылка на картинку;
+    button: {type: DataTypes.STRING}, //текст кнопки;
+    receivers: {type: DataTypes.STRING}, //массив получателей;
+    datestart: {type: DataTypes.STRING},  //дата начала рассылки
+    delivered: {type: DataTypes.BOOLEAN}, //доставлено
+})
+
 const Report = sequelize.define('report', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
     name: {type: DataTypes.STRING},  //название проекта

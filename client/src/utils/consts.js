@@ -11,6 +11,8 @@ export const DISTRIBUTION_ROUTE = '/distribution'
 export const DISTRIBUTIONADD_ROUTE = '/distribution_add'
 export const SETTINGS_ROUTE = '/settings'
 export const WORKERS_ROUTE = '/workers'
+export const DISTRIBUTIONW_ROUTE = '/distributionw'
+export const DISTRIBUTIONADDW_ROUTE = '/distributionw_add'
 
 export const THEME_ROUTE = '/theme'
 export const LOGIN_ROUTE = '/login'
