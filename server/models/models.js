@@ -88,5 +88,6 @@ module.exports = {
     Conversation, 
     Project, 
     Distribution,
+    Distributionw,
     Report
 }

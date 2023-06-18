@@ -44,6 +44,11 @@ route.get('/distributions/get', getDistributions)
 route.get('/distribution/get/:id', getDistribution)
 route.delete('/distributions/delete/:id', delDistribution)
 
+route.post('/distributionw/add', newDistributionW)
+route.get('/distributionsw/get', getDistributionsW)
+route.get('/distributionw/get/:id', getDistributionW)
+route.delete('/distributionsw/delete/:id', delDistributionW)
+
 route.get('/reports/get', getReports)
 route.get('/reports/get/:id', getReportsId)
 
