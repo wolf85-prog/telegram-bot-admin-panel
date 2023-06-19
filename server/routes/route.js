@@ -5,7 +5,17 @@ const authMiddleware = require('../middleware/authMiddleware')
 const { newMessage, delMessage, getMessages, getAllMessages } = require('../controllers/messageController')
 const { newConversation, getConversation } = require('../controllers/conversationController')
 const { addUser, getUsers, getUser, editUser, editUserAvatar} = require('../controllers/userbotController')
-const { newDistribution, getDistributions, getDistributionsId, getDistribution, delDistribution } = require('../controllers/distributionController')
+const { newDistribution, 
+    getDistributions, 
+    getDistributionsId, 
+    getDistribution, 
+    delDistribution,
+    newDistributionW, 
+    getDistributionsW, 
+    getDistributionsWId, 
+    getDistributionW, 
+    delDistributionW,
+} = require('../controllers/distributionController')
 const { getReports, getReportsId } = require('../controllers/reportController')
 const { getProjects, getProjectsId } = require('../controllers/projectController')
 const { uploadFile, getImage } = require( "../controllers/fileController.js")
