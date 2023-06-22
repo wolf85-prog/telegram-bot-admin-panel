@@ -49,21 +49,72 @@ const DistributionAdd = () => {
   const navigate = useNavigate();
 
   const backPage = () => {
-       navigate('/distribution');
+       navigate('/distributionw');
   } 
+
+  const categories = [ 
+    {
+      name: '1.1 Звук',
+      chatId: '',
+    },
+    {
+      name: '1.2 Свет',
+      chatId: '',
+    },
+    {
+      name: '1.3 Видео',
+      chatId: '',
+    },
+    {
+      name: '1.4 Риггеры',
+      chatId: '',
+    },
+    {
+      name: '1.5 Помощники / Грузчики',
+      chatId: '',
+    },
+    {
+      name: '1.6 Граунд',
+      chatId: '',
+    },
+    {
+      name: '1.7 Водители',
+      chatId: '',
+    },
+    {
+      name: '1.8 Технический продакшн',
+      chatId: '',
+    },
+    {
+      name: '1.9 Фотографы',
+      chatId: '',
+    },
+    {
+      name: '2.0 Кейтеринг',
+      chatId: '',
+    },
+    {
+      name: '2.1 Артисты',
+      chatId: '',
+    },
+    {
+      name: '2.2 Игромания',
+      chatId: '',
+    },   
+  ]
 
   useEffect(() => {
     const arrClients = []
     
-    clients.map((client) => {
+    categories.map((category) => {
       const newObj = {
-        label: client.name, 
-        value: client.chatId,
+        label: category.name, 
+        value: category.chatId,
       }
       arrClients.push(newObj)
     })
     setContacts(arrClients)      
-  }, [clients]);
+  }, [categories]);
 
   const onChangeText = (e) => {
     setText(e.target.value)
@@ -246,7 +297,7 @@ const DistributionAdd = () => {
                             </CAlert>
                               <CForm>
                                 <div className="mb-3" style={{color: '#f3f3f3'}}>
-                                  <CFormLabel htmlFor="exampleFormControlInput1">Выберите получателей:</CFormLabel>
+                                  <CFormLabel htmlFor="exampleFormControlInput1">Выберите категории получателей:</CFormLabel>
                                   <MultiSelect
                                     options={contacts}
                                     value={selected}
