@@ -326,14 +326,28 @@ const DistributionAdd = () => {
 
                                       <h5 style={{color: '#f3f3f3'}}>Рассылка по проекту</h5>
 
-                                      <CFormCheck 
-                                        type="radio"
-                                        id="flexRadioDefault1" 
-                                        name="flexRadioDefault"
-                                        label="Название:"
-                                        onChange={onChangeCheck}
-                                        defaultChecked
-                                      />
+                                      <CRow className="mb-3">
+                                        <CCol sm={6} > 
+                                          <CFormCheck 
+                                            type="radio"
+                                            id="flexRadioDefault1" 
+                                            name="flexRadioDefault"
+                                            label="Название"
+                                            onChange={onChangeCheck}
+                                            defaultChecked
+                                          />
+                                        </CCol>
+                                        <CCol sm={6} > 
+                                          <CFormCheck 
+                                            type="radio"
+                                            id="flexRadioDefault2" 
+                                            name="flexRadioDefault"
+                                            label="Номер"
+                                            onChange={onChangeCheck}
+                                          />
+                                        </CCol>
+                                      </CRow>
+
                                       <MultiSelect
                                         options={contacts}
                                         value={selected}
@@ -352,16 +366,16 @@ const DistributionAdd = () => {
                                         }}   
                                       />
                                       
-                                      <br/>
+                                      {/* <br/> */}
 
-                                      <CFormCheck 
+                                      {/* <CFormCheck 
                                         type="radio"
                                         id="flexRadioDefault2" 
                                         name="flexRadioDefault"
-                                        label="Номер:"
+                                        label="Номер"
                                         onChange={onChangeCheck}
-                                      />
-                                      <MultiSelect
+                                      /> */}
+                                      {/* <MultiSelect
                                         options={contacts}
                                         value={selected}
                                         onChange={setSelected}
@@ -377,7 +391,7 @@ const DistributionAdd = () => {
                                           "selectSomeItems": "Выбрать...",
                                           "create": "Создать",
                                         }}   
-                                      />
+                                      /> */}
 
                                     </CCol>
 
