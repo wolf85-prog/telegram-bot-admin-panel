@@ -24,8 +24,8 @@ const AppHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { newProject } = useUsersContext();
-  console.log("countProject: ", newProject)
+  //const { newProject } = useUsersContext();
+  //console.log("countProject: ", newProject)
 
   return (
     <CHeader position="sticky" className="mb-4">
@@ -60,9 +60,9 @@ const AppHeader = () => {
               {/* <CBadge color="success" className="ms-2">
                 5
               </CBadge> */}
-              { newProject ?  <span className="badge bg-danger-gradient rounded-pill position-absolute top-0 end-0">1</span> 
+              {/* { newProject ?  <span className="badge bg-danger-gradient rounded-pill position-absolute top-0 end-0">1</span> 
               : ""
-              }
+              } */}
             </CNavLink>
           </CNavItem>
           <CNavItem>
