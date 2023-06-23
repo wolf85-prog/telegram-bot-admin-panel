@@ -13,6 +13,11 @@ import {
   CButton,
   CAlert,
   CFormCheck,
+  CDropdown,
+  CDropdownToggle,
+  CDropdownMenu,
+  CDropdownDivider,
+  CDropdownItem
 } from '@coreui/react'
 
 import { MultiSelect } from "react-multi-select-component";
@@ -297,42 +302,123 @@ const DistributionAdd = () => {
                             </CAlert>
                               <CForm>
                                 <div style={{color: '#f3f3f3'}}>
-                                <CRow className="mb-3">
-                                  <CCol sm={3} >                                
-                                    <CFormLabel htmlFor="exampleFormControlInput1">Выберите категории получателей:</CFormLabel>
-                                    <MultiSelect
-                                      options={contacts}
-                                      value={selected}
-                                      onChange={setSelected}
-                                      style={{color: '#1e1919'}}
-                                      overrideStrings={{
-                                        "allItemsAreSelected": "Все поля выбраны",
-                                        "clearSearch": "Очистить поиск",
-                                        "clearSelected": "Очистить выбор",
-                                        "noOptions": "Ничего не найдено",
-                                        "search": "Поиск",
-                                        "selectAll": "Выбрать всё",
-                                        "selectAllFiltered": "Выбрать всё (Найденных)",
-                                        "selectSomeItems": "Выбрать...",
-                                        "create": "Создать",
-                                      }}   
-                                    />
-                                    <p style={{color: '#767676'}}>Получателей: <span>{selected.length}</span></p>
+                                  <CRow className="mb-3">
+                                    <CCol sm={3} >                                
+                                      <CFormLabel htmlFor="exampleFormControlInput1">Выберите категории получателей:</CFormLabel>
+                                      <MultiSelect
+                                        options={contacts}
+                                        value={selected}
+                                        onChange={setSelected}
+                                        style={{color: '#1e1919'}}
+                                        overrideStrings={{
+                                          "allItemsAreSelected": "Все поля выбраны",
+                                          "clearSearch": "Очистить поиск",
+                                          "clearSelected": "Очистить выбор",
+                                          "noOptions": "Ничего не найдено",
+                                          "search": "Поиск",
+                                          "selectAll": "Выбрать всё",
+                                          "selectAllFiltered": "Выбрать всё (Найденных)",
+                                          "selectSomeItems": "Выбрать...",
+                                          "create": "Создать",
+                                        }}   
+                                      />
+                                      <p style={{color: '#767676'}}>Получателей: <span>{selected.length}</span></p>
+
+                                      <h5 style={{color: '#f3f3f3'}}>Рассылка по проекту</h5>
+
+                                      <CFormCheck 
+                                        type="radio"
+                                        id="flexRadioDefault1" 
+                                        name="flexRadioDefault"
+                                        label="Название:"
+                                        onChange={onChangeCheck}
+                                        defaultChecked
+                                      />
+                                      <MultiSelect
+                                        options={contacts}
+                                        value={selected}
+                                        onChange={setSelected}
+                                        style={{color: '#1e1919'}}
+                                        overrideStrings={{
+                                          "allItemsAreSelected": "Все поля выбраны",
+                                          "clearSearch": "Очистить поиск",
+                                          "clearSelected": "Очистить выбор",
+                                          "noOptions": "Ничего не найдено",
+                                          "search": "Поиск",
+                                          "selectAll": "Выбрать всё",
+                                          "selectAllFiltered": "Выбрать всё (Найденных)",
+                                          "selectSomeItems": "Выбрать...",
+                                          "create": "Создать",
+                                        }}   
+                                      />
+                                      
+                                      <br/>
+
+                                      <CFormCheck 
+                                        type="radio"
+                                        id="flexRadioDefault2" 
+                                        name="flexRadioDefault"
+                                        label="Номер:"
+                                        onChange={onChangeCheck}
+                                      />
+                                      <MultiSelect
+                                        options={contacts}
+                                        value={selected}
+                                        onChange={setSelected}
+                                        style={{color: '#1e1919'}}
+                                        overrideStrings={{
+                                          "allItemsAreSelected": "Все поля выбраны",
+                                          "clearSearch": "Очистить поиск",
+                                          "clearSelected": "Очистить выбор",
+                                          "noOptions": "Ничего не найдено",
+                                          "search": "Поиск",
+                                          "selectAll": "Выбрать всё",
+                                          "selectAllFiltered": "Выбрать всё (Найденных)",
+                                          "selectSomeItems": "Выбрать...",
+                                          "create": "Создать",
+                                        }}   
+                                      />
 
                                     </CCol>
-                                    <CCol sm={9}>
-                                      <CFormLabel htmlFor="exampleFormControlInput1">Текст рассылки</CFormLabel>
-                                      <CFormTextarea 
-                                        id="exampleFormControlTextarea1" 
-                                        rows={6} 
-                                        placeholder='Введите текст сообщения'
-                                        onChange={onChangeText}
-                                        value={text}
-                                        // helperText = {`${countChar}/500`}
-                                      >           
-                                    </CFormTextarea>
-                                    </CCol>
-                                </CRow>
+
+                                      <CCol sm={6}>
+                                        <CFormLabel htmlFor="exampleFormControlInput1">Текст рассылки</CFormLabel>
+                                        <CFormTextarea 
+                                          id="exampleFormControlTextarea1" 
+                                          rows={4} 
+                                          placeholder='Введите текст сообщения'
+                                          onChange={onChangeText}
+                                          value={text}
+                                          // helperText = {`${countChar}/500`}
+                                        >           
+                                        </CFormTextarea>
+                                        <br/>
+                                        <CDropdown dark>
+                                          <CDropdownToggle color="secondary">Добавить...</CDropdownToggle>
+                                          <CDropdownMenu>
+                                            <CDropdownItem href="#">Картинка</CDropdownItem>
+                                            <CDropdownItem href="#">Файл</CDropdownItem>
+                                            <CDropdownItem href="#">Аудио</CDropdownItem>
+                                            <CDropdownItem href="#">Видео</CDropdownItem>
+                                          </CDropdownMenu>
+                                        </CDropdown>
+
+                                        <br/><br/>
+
+                                        {/* Добавление картинки */}
+                                        <div style={{color: '#8f8888'}}>
+                                          <CFormInput 
+                                            type="file" 
+                                            id="formFile" 
+                                            label="Добавить картинку" 
+                                            name="photo"
+                                            onChange={(e) => onFileChange(e)}
+                                            value={value}
+                                          />
+                                        </div>
+
+                                      </CCol>
+                                  </CRow>
                                 </div>
 
                                 {/* <div className='mb-3' style={{color: '#f3f3f3'}}>
@@ -344,88 +430,6 @@ const DistributionAdd = () => {
                                   />
                                 </div> */}
 
-                                <div className="mb-3" style={{color: '#f3f3f3'}}>
-                                  <h5>Рассылка по проекту</h5>
-
-                                  <CRow className="mb-3">
-                                  <CCol sm={3} >                                
-                                    {/* <CFormLabel htmlFor="exampleFormControlInput1">Название:</CFormLabel> */}
-                                    <CFormCheck 
-                                      type="radio"
-                                      id="flexRadioDefault1" 
-                                      name="flexRadioDefault"
-                                      label="Название:"
-                                      onChange={onChangeCheck}
-                                      defaultChecked
-                                    />
-                                    <MultiSelect
-                                      options={contacts}
-                                      value={selected}
-                                      onChange={setSelected}
-                                      style={{color: '#1e1919'}}
-                                      overrideStrings={{
-                                        "allItemsAreSelected": "Все поля выбраны",
-                                        "clearSearch": "Очистить поиск",
-                                        "clearSelected": "Очистить выбор",
-                                        "noOptions": "Ничего не найдено",
-                                        "search": "Поиск",
-                                        "selectAll": "Выбрать всё",
-                                        "selectAllFiltered": "Выбрать всё (Найденных)",
-                                        "selectSomeItems": "Выбрать...",
-                                        "create": "Создать",
-                                      }}   
-                                    />
-                                    </CCol>
-                                </CRow>
-
-                                <CRow className="mb-3">
-                                  <CCol sm={3} >                                
-                                    {/* <CFormLabel htmlFor="exampleFormControlInput1">Номер:</CFormLabel> */}
-                                    <CFormCheck 
-                                      type="radio"
-                                      id="flexRadioDefault2" 
-                                      name="flexRadioDefault"
-                                      label="Номер:"
-                                      onChange={onChangeCheck}
-                                    />
-                                    <MultiSelect
-                                      options={contacts}
-                                      value={selected}
-                                      onChange={setSelected}
-                                      style={{color: '#1e1919'}}
-                                      overrideStrings={{
-                                        "allItemsAreSelected": "Все поля выбраны",
-                                        "clearSearch": "Очистить поиск",
-                                        "clearSelected": "Очистить выбор",
-                                        "noOptions": "Ничего не найдено",
-                                        "search": "Поиск",
-                                        "selectAll": "Выбрать всё",
-                                        "selectAllFiltered": "Выбрать всё (Найденных)",
-                                        "selectSomeItems": "Выбрать...",
-                                        "create": "Создать",
-                                      }}   
-                                    />
-
-                                    </CCol>
-                                </CRow>
-                                </div>
-                              
-
-                                {/* Добавление картинки */}
-                                <div style={{color: '#8f8888'}}>
-                                <CRow className="mb-3">
-                                  <CCol sm={3} > 
-                                    <CFormInput 
-                                      type="file" 
-                                      id="formFile" 
-                                      label="Добавить картинку" 
-                                      name="photo"
-                                      onChange={(e) => onFileChange(e)}
-                                      value={value}
-                                    />
-                                  </CCol>
-                                </CRow>
-                                </div>
 
                                 <div className="mb-3"></div>
 
@@ -447,7 +451,7 @@ const DistributionAdd = () => {
                                   </CCol>
                                 </CForm>
                                 <br/>
-                                <div className="mb-3" style={{textAlign: 'right'}}>
+                                <div className="mb-3" style={{textAlign: 'center'}}>
                                   <CButton color="secondary" style={{marginRight: '15px'}} onClick={backPage}>Отмена</CButton>
                                   <CButton color="primary" onClick={onSendText}>Отправить рассылку</CButton>
                                 </div>
