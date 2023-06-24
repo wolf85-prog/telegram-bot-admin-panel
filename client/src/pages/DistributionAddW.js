@@ -304,7 +304,7 @@ const DistributionAdd = () => {
                                 <div style={{color: '#f3f3f3'}}>
                                   <CRow className="mb-3">
                                     <CCol sm={3} >                                
-                                      <CFormLabel htmlFor="exampleFormControlInput1">Выберите получателей:</CFormLabel>
+                                      <CFormLabel htmlFor="exampleFormControlInput1">Выбери категорию:</CFormLabel>
                                       <MultiSelect
                                         options={contacts}
                                         value={selected}
@@ -407,29 +407,33 @@ const DistributionAdd = () => {
                                         >           
                                         </CFormTextarea>
                                         <br/>
-                                        <CDropdown dark>
-                                          <CDropdownToggle color="secondary">Добавить...</CDropdownToggle>
-                                          <CDropdownMenu>
-                                            <CDropdownItem href="#">Картинка</CDropdownItem>
-                                            <CDropdownItem href="#">Файл</CDropdownItem>
-                                            <CDropdownItem href="#">Аудио</CDropdownItem>
-                                            <CDropdownItem href="#">Видео</CDropdownItem>
-                                          </CDropdownMenu>
-                                        </CDropdown>
-
-                                        <br/><br/>
-
-                                        {/* Добавление картинки */}
-                                        <div style={{color: '#8f8888'}}>
-                                          <CFormInput 
-                                            type="file" 
-                                            id="formFile" 
-                                            label="Добавить картинку" 
-                                            name="photo"
-                                            onChange={(e) => onFileChange(e)}
-                                            value={value}
-                                          />
-                                        </div>
+                                        <CRow className="mb-6">
+                                          <CCol sm={3} > 
+                                            {/* <br/> */}
+                                            <CDropdown dark>
+                                              <CDropdownToggle color="secondary">Добавить...</CDropdownToggle>
+                                              <CDropdownMenu>
+                                                <CDropdownItem href="#">Картинка</CDropdownItem>
+                                                <CDropdownItem href="#">Файл</CDropdownItem>
+                                                <CDropdownItem href="#">Аудио</CDropdownItem>
+                                                <CDropdownItem href="#">Видео</CDropdownItem>
+                                              </CDropdownMenu>
+                                            </CDropdown>
+                                          </CCol>
+                                          <CCol sm={9} > 
+                                            {/* Добавление картинки */}
+                                            <div style={{color: '#8f8888'}}>
+                                              <CFormInput 
+                                                type="file" 
+                                                id="formFile" 
+                                                // label="Добавить картинку" 
+                                                name="photo"
+                                                onChange={(e) => onFileChange(e)}
+                                                value={value}
+                                              />
+                                            </div>
+                                          </CCol>
+                                        </CRow>
 
                                       </CCol>
                                   </CRow>
