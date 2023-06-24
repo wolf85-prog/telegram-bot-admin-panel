@@ -304,7 +304,7 @@ const DistributionAdd = () => {
                                 <div style={{color: '#f3f3f3'}}>
                                   <CRow className="mb-3">
                                     <CCol sm={3} >                                
-                                      <CFormLabel htmlFor="exampleFormControlInput1">Выберите категории получателей:</CFormLabel>
+                                      <CFormLabel htmlFor="exampleFormControlInput1">Выберите получателей:</CFormLabel>
                                       <MultiSelect
                                         options={contacts}
                                         value={selected}
@@ -399,7 +399,7 @@ const DistributionAdd = () => {
                                         <CFormLabel htmlFor="exampleFormControlInput1">Текст рассылки</CFormLabel>
                                         <CFormTextarea 
                                           id="exampleFormControlTextarea1" 
-                                          rows={4} 
+                                          rows={5} 
                                           placeholder='Введите текст сообщения'
                                           onChange={onChangeText}
                                           value={text}
