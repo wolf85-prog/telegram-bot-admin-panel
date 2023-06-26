@@ -1,6 +1,7 @@
 import React, { Suspense, useState, useEffect } from 'react'
 import { CContainer, CSpinner } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
+import { Link } from 'react-router-dom'
 import { 
   CRow,
   CCol,
@@ -602,7 +603,7 @@ const DistributionAdd = () => {
                                 <div className="mb-3" style={{textAlign: 'center'}}>
                                   {/* <CButton color="secondary" style={{marginRight: '15px'}} onClick={backPage}>Отмена</CButton> */}
                                   <CButton color="primary" style={{marginRight: '15px'}} onClick={onSendText}>Разослать сейчас</CButton>
-                                  <CButton color="secondary" onClick={onSendText}>Запланировать</CButton>
+                                  <Link to={'/distributionw_planer'}><CButton color="secondary">Запланировать</CButton></Link>
                                 </div>
                               </CForm>
 

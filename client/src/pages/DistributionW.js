@@ -22,7 +22,7 @@ import deleteIcon from 'src/assets/images/delete.png'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { delDistribution } from 'src/http/adminAPI';
 
-const Distribution = () => {
+const DistributionW = () => {
   const { distributionsWork: messages } = useUsersContext();
   const [distributionsWork, setDistributionsWork]= useState([]);
   const [loading, setLoading]= useState(true);
@@ -169,4 +169,4 @@ const Distribution = () => {
   )
 }
 
-export default Distribution
+export default DistributionW
