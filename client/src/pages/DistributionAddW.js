@@ -91,7 +91,7 @@ const DistributionAdd = () => {
       chatId: '',
     },
     {
-      name: '1.9 Фотографы',
+      name: '1.9 Фото',
       chatId: '',
     },
     {
@@ -108,18 +108,18 @@ const DistributionAdd = () => {
     },   
   ]
 
-  useEffect(() => {
-    const arrClients = []
+  // useEffect(() => {
+  //   const arrClients = []
     
-    categories.map((category) => {
-      const newObj = {
-        label: category.name, 
-        value: category.chatId,
-      }
-      arrClients.push(newObj)
-    })
-    setContacts(arrClients)      
-  }, [categories]);
+  //   categories.map((category) => {
+  //     const newObj = {
+  //       label: category.name, 
+  //       value: category.chatId,
+  //     }
+  //     arrClients.push(newObj)
+  //   })
+  //   setContacts(arrClients)      
+  // }, [categories]);
 
   const onChangeText = (e) => {
     setText(e.target.value)
@@ -165,6 +165,15 @@ const DistributionAdd = () => {
   const onChangeCheck = (e) => {
     setSendToAdmin(e.target.value)
   }
+
+  const onChangeAddButton = () => {
+   setShowEditButtonAdd (true)
+   //console.log("dsfsdf")
+  }
+
+  const onChangeAddButton2 = () => {
+    setShowEditButtonAdd (false)
+   }
 
   {/* Отправка рассылки */}
   const onSendText = async() => {
@@ -324,7 +333,7 @@ const DistributionAdd = () => {
                                       />
                                       <p style={{color: '#767676'}}>Получателей: <span>{selected.length}</span></p>
 
-                                      <h5 style={{color: '#f3f3f3'}}>Рассылка по проекту</h5>
+                                      <p style={{color: '#f3f3f3'}}>Рассылка по проекту</p>
 
                                       <CRow className="mb-3">
                                         <CCol sm={6} > 
@@ -365,37 +374,13 @@ const DistributionAdd = () => {
                                           "create": "Создать",
                                         }}   
                                       />
-                                      
-                                      {/* <br/> */}
-
-                                      {/* <CFormCheck 
-                                        type="radio"
-                                        id="flexRadioDefault2" 
-                                        name="flexRadioDefault"
-                                        label="Номер"
-                                        onChange={onChangeCheck}
-                                      /> */}
-                                      {/* <MultiSelect
-                                        options={contacts}
-                                        value={selected}
-                                        onChange={setSelected}
-                                        style={{color: '#1e1919'}}
-                                        overrideStrings={{
-                                          "allItemsAreSelected": "Все поля выбраны",
-                                          "clearSearch": "Очистить поиск",
-                                          "clearSelected": "Очистить выбор",
-                                          "noOptions": "Ничего не найдено",
-                                          "search": "Поиск",
-                                          "selectAll": "Выбрать всё",
-                                          "selectAllFiltered": "Выбрать всё (Найденных)",
-                                          "selectSomeItems": "Выбрать...",
-                                          "create": "Создать",
-                                        }}   
-                                      /> */}
 
                                     </CCol>
 
-                                      <CCol sm={6}>
+                                    <CCol sm={1}></CCol>
+
+                                    {/* Правый блок */}
+                                    <CCol sm={7}>
                                         <CFormLabel htmlFor="exampleFormControlInput1">Текст рассылки</CFormLabel>
                                         <CFormTextarea 
                                           id="exampleFormControlTextarea1" 
@@ -406,10 +391,11 @@ const DistributionAdd = () => {
                                           // helperText = {`${countChar}/500`}
                                         >           
                                         </CFormTextarea>
+
                                         <br/>
+
                                         <CRow className="mb-6">
                                           <CCol sm={3} > 
-                                            {/* <br/> */}
                                             <CDropdown dark>
                                               <CDropdownToggle color="secondary">Добавить...</CDropdownToggle>
                                               <CDropdownMenu>
@@ -420,6 +406,7 @@ const DistributionAdd = () => {
                                               </CDropdownMenu>
                                             </CDropdown>
                                           </CCol>
+
                                           <CCol sm={9} > 
                                             {/* Добавление картинки */}
                                             <div style={{color: '#8f8888'}}>
@@ -433,9 +420,52 @@ const DistributionAdd = () => {
                                               />
                                             </div>
                                           </CCol>
+
                                         </CRow>
 
-                                      </CCol>
+                                        <div className="mb-3"></div>
+
+                                        <CRow className="mb-6">
+                                          <CCol sm={6} > 
+                                            <CFormCheck 
+                                              type="radio"
+                                              id="addButtonRadio" 
+                                              name="groupRadioButton"
+                                              label="+ Добавить кнопку"
+                                              onChange={onChangeAddButton}
+                                            />
+                                            {/* <div className="mb-3 text-left">
+                                              <p style={{color: '#fff', cursor: 'pointer'}} onClick={clickShowEditButton} > {showEditButtonAdd ? '- Убрать кнопку' : '+ Добавить кнопку'}</p>
+                                            </div> */}
+
+                                            {/* Добавление кнопки */}
+                                            <CForm className="row g-3" style={{color: '#8f8888', display: showEditButtonAdd ? "block" : "none" }}>
+                                              <CCol md={6}>
+                                                <CFormInput 
+                                                  type="text" 
+                                                  id="inputTextButton" 
+                                                  label="Название кнопки" 
+                                                  placeholder="Введите текст"
+                                                  onChange={onChangeTextButton}
+                                                  value={textButton}
+                                                />
+                                              </CCol>
+                                            </CForm>
+                                          </CCol>
+
+                                          <CCol sm={6} > 
+                                            <CFormCheck 
+                                              type="radio"
+                                              id="appleButtonRadio" 
+                                              name="groupRadioButton"
+                                              label="Принять / Отклонить"
+                                              onChange={onChangeAddButton2}
+                                              defaultChecked
+                                            />
+                                          </CCol>
+                                        </CRow>
+
+                                    </CCol>
                                   </CRow>
                                 </div>
 
@@ -449,29 +479,16 @@ const DistributionAdd = () => {
                                 </div> */}
 
 
-                                <div className="mb-3"></div>
+                                
 
-                                <div className="mb-3 text-center">
-                                  <p style={{color: '#fff', cursor: 'pointer'}} onClick={clickShowEditButton} > {showEditButtonAdd ? '- Убрать кнопку' : '+ Добавить кнопку'}</p>
-                                </div>
+                                
 
-                                {/* Добавление кнопки */}
-                                <CForm className="row g-3" style={{color: '#8f8888', display: showEditButtonAdd ? "block" : "none" }}>
-                                  <CCol md={6}>
-                                    <CFormInput 
-                                      type="text" 
-                                      id="inputTextButton" 
-                                      label="Название кнопки" 
-                                      placeholder="Введите текст"
-                                      onChange={onChangeTextButton}
-                                      value={textButton}
-                                    />
-                                  </CCol>
-                                </CForm>
                                 <br/>
+
                                 <div className="mb-3" style={{textAlign: 'center'}}>
-                                  <CButton color="secondary" style={{marginRight: '15px'}} onClick={backPage}>Отмена</CButton>
-                                  <CButton color="primary" onClick={onSendText}>Отправить рассылку</CButton>
+                                  {/* <CButton color="secondary" style={{marginRight: '15px'}} onClick={backPage}>Отмена</CButton> */}
+                                  <CButton color="primary" style={{marginRight: '15px'}} onClick={onSendText}>Разослать сейчас</CButton>
+                                  <CButton color="secondary" onClick={onSendText}>Запланировать</CButton>
                                 </div>
                               </CForm>
 
