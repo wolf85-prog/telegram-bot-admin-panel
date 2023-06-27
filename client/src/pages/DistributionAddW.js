@@ -18,8 +18,11 @@ import {
   CDropdownToggle,
   CDropdownMenu,
   CDropdownDivider,
-  CDropdownItem
+  CDropdownItem,
+  CFormSelect
 } from '@coreui/react'
+import CIcon from '@coreui/icons-react';
+import { cilX } from '@coreui/icons';
 
 import { MultiSelect } from "react-multi-select-component";
 import { useUsersContext } from "../chat-app-new/context/usersContext";
@@ -46,11 +49,21 @@ const DistributionAdd = () => {
   const [countChar, setCountChar] = useState(0);
   const [visible, setVisible] = useState(false);
   const [showEditButtonAdd, setShowEditButtonAdd] = useState(false);
+  const [showNameProject, setShowNameProject] = useState(true);
   const [sendToAdmin, setSendToAdmin] = useState(false);
   const [textButton, setTextButton] = useState('');
   const [file, setFile] = useState();
   const [value, setValue] = useState("");
   const [image, setImage]= useState("");
+
+  const [valueSelect, setValueSelect] = useState(0)
+  const [valueSelect2, setValueSelect2] = useState(0)
+  const [valueSelect3, setValueSelect3] = useState(0)
+  const [valueSelect4, setValueSelect4] = useState(0)
+
+  const [showCategories2, setShowCategories2] = useState(false);
+  const [showCategories3, setShowCategories3] = useState(false);
+  const [showCategories4, setShowCategories4] = useState(false);
 
   const audio = new Audio(sendSound);
 
@@ -60,112 +73,83 @@ const DistributionAdd = () => {
        navigate('/distributionw');
   } 
 
-  const categories = [ 
+  const categories = [
+    'Выбрать...',
     {
-      name: '1.1 Звук',
-      chatId: '',
+      label: 'Звук',
+      value: '1',
     },
     {
-      name: '1.2 Свет',
-      chatId: '',
+      label: 'Свет',
+      value: '2',
     },
     {
-      name: '1.3 Видео',
-      chatId: '',
+      label: 'Видео',
+      value: '3',
     },
     {
-      name: '1.4 Риггеры',
-      chatId: '',
+      label: 'Риггеры',
+      value: '4',
     },
     {
-      name: '1.5 Помощники / Грузчики',
-      chatId: '',
+      label: 'Помощники / Грузчики',
+      value: '5',
     },
     {
-      name: '1.6 Граунд',
-      chatId: '',
+      label: 'Граунд',
+      value: '6',
     },
     {
-      name: '1.7 Водители',
-      chatId: '',
+      label: 'Водители',
+      value: '7',
     },
     {
-      name: '1.8 Технический продакшн',
-      chatId: '',
+      label: 'Технический продакшн',
+      value: '8',
     },
     {
-      name: '1.9 Фото',
-      chatId: '',
+      label: 'Фото',
+      value: '9',
     },
     {
-      name: '2.0 Кейтеринг',
-      chatId: '',
+      label: 'Кейтеринг',
+      value: '10',
     },
     {
-      name: '2.1 Артисты',
-      chatId: '',
+      label: 'Артисты',
+      value: '11',
     },
     {
-      name: '2.2 Игромания',
-      chatId: '',
-    },   
-  ]
-
-  const projects_number = [ 
-    {
-      name: '1',
-      chatId: '',
-    },
-    {
-      name: '2',
-      chatId: '',
-    },
-    {
-      name: '3',
-      chatId: '',
-    }, 
-  ]
-
-  const projects_name = [ 
-    {
-      name: 'Проект 1',
-      chatId: '',
-    },
-    {
-      name: 'Проект 2',
-      chatId: '',
-    },
-    {
-      name: 'Проект 3',
-      chatId: '',
-    }, 
+      label: 'Игромания',
+      value: '12',
+    },  
   ]
 
   //категории
   useEffect(() => {
-    const arrClients = []   
-    categories.map((category) => {
-      const newObj = {
-        label: category.name, 
-        value: category.chatId,
-      }
-      arrClients.push(newObj)
-    })
-    setContacts(arrClients)      
+    // const arrClients = []   
+    // categories.map((category) => {
+    //   const newObj = {
+    //     label: category.name, 
+    //     value: category.chatId,
+    //   }
+    //   arrClients.push(newObj)
+    // })
+    // setContacts(arrClients)      
   }, []);
 
 
   //проекты
   useEffect(() => {
-    const arrProjects = []
-    projects_name.map((project) => {
-      const newObj = {
-        label: project.name, 
-        value: project.chatId,
-      }
-      arrProjects.push(newObj)
-    })
-    setProjects(arrProjects)      
+    // const arrProjects = []
+    // projects_name.map((project) => {
+    //   const newObj = {
+    //     label: project.name, 
+    //     value: project.chatId,
+    //   }
+    //   arrProjects.push(newObj)
+    // })
+    // setProjects(arrProjects)      
   }, []);
 
   //проекты 2
@@ -218,22 +202,80 @@ const DistributionAdd = () => {
     showEditButtonAdd ? setShowEditButtonAdd (false) : setShowEditButtonAdd (true)
   }
 
+  const onAddCategory = (e) => {
+    e.preventDefault();
+    setValueSelect(e.target.value)
+    setShowCategories2(true)
+    selected.push(e.target.value)
+  }
+
+  const onAddCategory2 = (e) => {
+    e.preventDefault();
+    setValueSelect2(e.target.value)
+    setShowCategories3(true)
+    selected.push(e.target.value)
+  }
+
+  const onAddCategory3 = (e) => {
+    e.preventDefault();
+    setValueSelect3(e.target.value)
+    setShowCategories4(true)
+    selected.push(e.target.value)
+  }
+
+  const onAddCategory4 = (e) => {
+    e.preventDefault();
+    setValueSelect4(e.target.value)
+    selected.push(e.target.value)
+  }
+
+  //название проекта или номер проекта
+  const onChangeProjectName = () => {
+    setShowNameProject(true)
+    //showNameProject ? setShowNameProject(false) : setShowNameProject (true)
+   }
+
+  const onChangeProjectNumber = () => {
+    setShowNameProject(false)
+    //showNameProject ? setShowNameProject(false) : setShowNameProject (true)  
+  }
+
   const onChangeTextButton = (e) => {
     setTextButton(e.target.value)
   }
 
+  //дублировать в админку
   const onChangeCheck = (e) => {
     setSendToAdmin(e.target.value)
   }
 
   const onChangeAddButton = () => {
    setShowEditButtonAdd (true)
-   //console.log("dsfsdf")
   }
 
   const onChangeAddButton2 = () => {
     setShowEditButtonAdd (false)
-   }
+  }
+
+
+  {/* Удаление категорий */}
+  const delCategory2 = () => {
+    setValueSelect(0)
+    setShowCategories2(false)
+    selected.pop()
+  }
+
+  const delCategory3 = () => {
+    setValueSelect2(0)
+    setShowCategories3(false)
+    selected.pop()
+  }
+
+  const delCategory4 = () => {
+    setValueSelect3(0)
+    setShowCategories4(false)
+    selected.pop()
+  }
 
   {/* Отправка рассылки */}
   const onSendText = async() => {
@@ -374,24 +416,74 @@ const DistributionAdd = () => {
                                   <CRow className="mb-3">
                                     <CCol sm={3} >                                
                                       <CFormLabel htmlFor="exampleFormControlInput1">Выбери категорию:</CFormLabel>
-                                      <MultiSelect
-                                        options={contacts}
-                                        value={selected}
-                                        onChange={setSelected}
-                                        style={{color: '#1e1919'}}
-                                        overrideStrings={{
-                                          "allItemsAreSelected": "Все поля выбраны",
-                                          "clearSearch": "Очистить поиск",
-                                          "clearSelected": "Очистить выбор",
-                                          "noOptions": "Ничего не найдено",
-                                          "search": "Поиск",
-                                          "selectAll": "Выбрать всё",
-                                          "selectAllFiltered": "Выбрать всё (Найденных)",
-                                          "selectSomeItems": "Выбрать...",
-                                          "create": "Создать",
-                                        }}   
+                                      <CFormSelect 
+                                        aria-label="Default select example"
+                                        onChange={onAddCategory}
+                                        options={categories}
+                                        value={valueSelect}
                                       />
-                                      <p style={{color: '#767676'}}>Получателей: <span>{selected.length}</span></p>
+                                      
+                                      <CRow>
+                                        <CCol sm={10} >  
+                                          <CFormSelect 
+                                            aria-label="Default select example"
+                                            onChange={onAddCategory2}
+                                            value={valueSelect2}
+                                            options={categories}
+                                            style={{marginTop: '15px', display: showCategories2 ? "block" : "none"}}
+                                          />
+                                        </CCol>
+                                        <CCol sm={2} >  
+                                          <CIcon 
+                                            icon={cilX} 
+                                            size="xl" 
+                                            style={{marginTop: '20px', display: showCategories2 ? "block" : "none"}} 
+                                            onClick={delCategory2}
+                                          />
+                                        </CCol>
+                                      </CRow>
+
+                                      <CRow>
+                                        <CCol sm={10} >  
+                                          <CFormSelect 
+                                            aria-label="Default select example"
+                                            onChange={onAddCategory3}
+                                            value={valueSelect3}
+                                            options={categories}
+                                            style={{marginTop: '15px', display: showCategories3 ? "block" : "none"}}
+                                          />
+                                        </CCol>
+                                        <CCol sm={2} >  
+                                          <CIcon 
+                                            icon={cilX} 
+                                            size="xl" 
+                                            style={{marginTop: '20px', display: showCategories3 ? "block" : "none"}} 
+                                            onClick={delCategory3}
+                                          />
+                                        </CCol>
+                                      </CRow>
+
+                                      <CRow>
+                                        <CCol sm={10} >  
+                                          <CFormSelect 
+                                            aria-label="Default select example"
+                                            onChange={onAddCategory4}
+                                            value={valueSelect4}
+                                            options={categories}
+                                            style={{marginTop: '15px', display: showCategories4 ? "block" : "none"}}
+                                          />
+                                        </CCol>
+                                        <CCol sm={2} >  
+                                          <CIcon 
+                                            icon={cilX} 
+                                            size="xl" 
+                                            style={{marginTop: '20px', display: showCategories4 ? "block" : "none"}} 
+                                            onClick={delCategory4}
+                                          />
+                                        </CCol>
+                                      </CRow>
+
+                                      <p style={{color: '#767676', marginTop: '10px'}}>Получателей: <span>{selected.length}</span></p>
 
                                       <p style={{color: '#f3f3f3'}}>Рассылка по проекту</p>
 
@@ -402,8 +494,8 @@ const DistributionAdd = () => {
                                             id="flexRadioDefault1" 
                                             name="flexRadioDefault"
                                             label="Название"
-                                            onChange={onChangeCheck}
-                                            defaultChecked
+                                            checked={showNameProject}
+                                            onChange={onChangeProjectName}
                                           />
                                         </CCol>
                                         <CCol sm={6} > 
@@ -412,27 +504,52 @@ const DistributionAdd = () => {
                                             id="flexRadioDefault2" 
                                             name="flexRadioDefault"
                                             label="Номер"
-                                            onChange={onChangeCheck}
+                                            checked={!showNameProject}
+                                            onChange={onChangeProjectNumber}
                                           />
                                         </CCol>
                                       </CRow>
 
-                                      <MultiSelect
-                                        options={projects}
-                                        value={selected}
-                                        onChange={setSelected}
-                                        style={{color: '#1e1919'}}
-                                        overrideStrings={{
-                                          "allItemsAreSelected": "Все поля выбраны",
-                                          "clearSearch": "Очистить поиск",
-                                          "clearSelected": "Очистить выбор",
-                                          "noOptions": "Ничего не найдено",
-                                          "search": "Поиск",
-                                          "selectAll": "Выбрать всё",
-                                          "selectAllFiltered": "Выбрать всё (Найденных)",
-                                          "selectSomeItems": "Выбрать...",
-                                          "create": "Создать",
-                                        }}   
+                                      <CFormSelect 
+                                        aria-label="Default select example"
+                                        style={{display: showNameProject ? "block" : "none" }}
+                                        options={[
+                                          'Выбрать...',
+                                          {
+                                            label: 'Проект 1',
+                                            value: '1',
+                                          },
+                                          {
+                                            label: 'Проект 2',
+                                            value: '2',
+                                          },
+                                          {
+                                            label: 'Проект 3',
+                                            value: '3',
+                                          },
+  
+                                        ]}
+                                      />
+
+                                      <CFormSelect 
+                                        aria-label="Default select example"
+                                        style={{display: !showNameProject ? "block" : "none" }}
+                                        options={[
+                                          'Выбрать...',
+                                          {
+                                            label: '1',
+                                            value: '1',
+                                          },
+                                          {
+                                            label: '2',
+                                            value: '2',
+                                          },
+                                          {
+                                            label: '3',
+                                            value: '3',
+                                          },
+  
+                                        ]}
                                       />
 
                                     </CCol>
@@ -596,8 +713,11 @@ const DistributionAdd = () => {
 
                                     {/* Телефон */}
                                     <CCol sm={3}>
-                                      <img src={phone_image} width='250' alt='phone' />
-                                      <div style={{position: 'absolute', top: '80px', right: '230px'}}>Привет!</div>
+                                      <div style={{position: 'relative'}}>
+                                        <img src={phone_image} width='250' alt='phone' />
+                                        <div style={{position: 'absolute', top: '80px', right: '230px'}}></div>
+                                      </div>
+                                      
                                     </CCol>
 
 
@@ -608,11 +728,10 @@ const DistributionAdd = () => {
 
                                 <br/>
 
-                                <div className="mb-3" style={{textAlign: 'center'}}>
-                                  {/* <CButton color="secondary" style={{marginRight: '15px'}} onClick={backPage}>Отмена</CButton> */}
+                                {/* <div className="mb-3" style={{textAlign: 'center'}}>
                                   <CButton color="primary" style={{marginRight: '15px'}} onClick={onSendText}>Разослать сейчас</CButton>
                                   <Link to={'/distributionw_planer'}><CButton color="secondary">Запланировать</CButton></Link>
-                                </div>
+                                </div> */}
                               </CForm>
 
                             </CCardBody>

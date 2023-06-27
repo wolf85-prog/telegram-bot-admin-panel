@@ -198,6 +198,10 @@
     --cui-dark-stop: #292a2b;
 }
 
+.dark-theme .form-select>option {
+    background-color: #1f272c;
+}
+
 .dark-theme .card {
     /* --cui-card-bg: #24252f; */
     --cui-card-bg: #131c21;
