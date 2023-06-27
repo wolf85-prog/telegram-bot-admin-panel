@@ -28,6 +28,7 @@ import { useNavigate } from 'react-router-dom';
 import { newDistribution, getDistributions } from '../http/adminAPI';
 import { newMessage, uploadFile } from '../http/chatAPI';
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
+import phone_image from './../assets/images/phone.png';
 
 const DistributionAdd = () => {
 
@@ -436,10 +437,10 @@ const DistributionAdd = () => {
 
                                     </CCol>
 
-                                    <CCol sm={2}></CCol>
+                                    {/* <CCol sm={2}></CCol> */}
 
                                     {/* Правый блок */}
-                                    <CCol sm={7}>
+                                    <CCol sm={6}>
                                         <CFormLabel htmlFor="exampleFormControlInput1">Текст рассылки</CFormLabel>
                                         <CFormTextarea 
                                           id="exampleFormControlTextarea1" 
@@ -592,6 +593,13 @@ const DistributionAdd = () => {
                                         </CRow>
                                       </div>
                                     </CCol>
+
+                                    {/* Телефон */}
+                                    <CCol sm={3}>
+                                      <img src={phone_image} width='250' alt='phone' />
+                                      <div style={{position: 'absolute', top: '80px', right: '230px'}}>Привет!</div>
+                                    </CCol>
+
 
                                   
                                   </CRow>

@@ -27,6 +27,7 @@ const DistributionWPlaner = () => {
   const { distributionsWork: messages } = useUsersContext();
   const [distributionsWork, setDistributionsWork]= useState([]);
   const [loading, setLoading]= useState(true);
+  const [showEditTime, setShowEditTime] = useState(false)
 
   //get Distribution
   useEffect(() => {
@@ -79,6 +80,12 @@ const DistributionWPlaner = () => {
     await delDistribution(desk.id)
   }
 
+  {/* Показать Добавление времени */}
+  const clickShowEditTime = (e) => {
+    e.preventDefault();
+    showEditTime ? setShowEditTime (false) : setShowEditTime (true)
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -110,17 +117,17 @@ const DistributionWPlaner = () => {
                                     {/* <CTableHeaderCell>№</CTableHeaderCell> */}
                                     <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Специалисты</CTableHeaderCell>   
+                                    <CTableHeaderCell className="text-center">Проекты</CTableHeaderCell>   
                                     <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
                                   </CTableRow>
                                 </CTableHead>
                                 <CTableBody>
                                     <CTableRow v-for="item in tableItems" >
-                                      <CTableDataCell className="text-center" rowSpan={7}>
+                                      <CTableDataCell className="text-center" rowSpan={9}>
                                         <div>28.06</div>
                                       </CTableDataCell>      
-                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                        <div>06:00</div>
+                                      <CTableDataCell className="text-center" style={{width: '50px'}} >
+                                        <div onClick={clickShowEditTime}>06:00</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         <div></div>
@@ -128,7 +135,18 @@ const DistributionWPlaner = () => {
                                       <CTableDataCell className="text-center">
                                         <CFormCheck id="flexCheckDefault"/>
                                       </CTableDataCell>
-                                    </CTableRow>  
+                                    </CTableRow>
+
+                                    <CTableRow v-for="item in tableItems" style={{display: showEditTime ? "block" : "none" }}>
+                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                        <div>07:____</div>
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        <div></div>
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                      </CTableDataCell>
+                                    </CTableRow> 
 
                                     <CTableRow v-for="item in tableItems" >
                                       <CTableDataCell className="text-center" style={{width: '50px'}}>
