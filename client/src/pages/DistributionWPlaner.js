@@ -111,118 +111,232 @@ const DistributionWPlaner = () => {
                                   
                               <CSpinner/> :
 
-                              <CTable align="middle" className="mb-0 border" hover responsive>
-                                <CTableHead className='table-dark'>
-                                  <CTableRow>
-                                    {/* <CTableHeaderCell>№</CTableHeaderCell> */}
-                                    <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Проекты</CTableHeaderCell>   
-                                    <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
-                                  </CTableRow>
-                                </CTableHead>
-                                <CTableBody>
-                                    <CTableRow v-for="item in tableItems" >
-                                      <CTableDataCell className="text-center" rowSpan={9}>
-                                        <div>28.06</div>
-                                      </CTableDataCell>      
-                                      <CTableDataCell className="text-center" style={{width: '50px'}} >
-                                        <div onClick={clickShowEditTime}>06:00</div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <div></div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <CFormCheck id="flexCheckDefault"/>
-                                      </CTableDataCell>
+                              <CRow>
+                                <CCol xs>
+                                  <CTable align="middle" className="mb-0 border" hover responsive>
+                                  <CTableHead className='table-dark'>
+                                    <CTableRow>
+                                      {/* <CTableHeaderCell>№</CTableHeaderCell> */}
+                                      <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center">Проекты</CTableHeaderCell>   
+                                      <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
                                     </CTableRow>
+                                  </CTableHead>
+                                  <CTableBody>
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" rowSpan={9}>
+                                          <div>28.06</div>
+                                        </CTableDataCell>      
+                                        <CTableDataCell className="text-center" style={{width: '50px'}} >
+                                          <div onClick={clickShowEditTime}>06:00</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow>
 
-                                    <CTableRow v-for="item in tableItems" style={{display: showEditTime ? "block" : "none" }}>
-                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                        <div>07:____</div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <div></div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                      </CTableDataCell>
-                                    </CTableRow> 
+                                      <CTableRow v-for="item in tableItems" style={{display: showEditTime ? "block" : "none" }}>
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>07:____</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                        </CTableDataCell>
+                                      </CTableRow> 
 
-                                    <CTableRow v-for="item in tableItems" >
-                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                        <div>07:00</div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <div></div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <CFormCheck id="flexCheckDefault"/>
-                                      </CTableDataCell>
-                                    </CTableRow> 
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>07:00</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow> 
 
-                                    <CTableRow v-for="item in tableItems" >
-                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                        <div>08:00</div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <div></div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <CFormCheck id="flexCheckDefault"/>
-                                      </CTableDataCell>
-                                    </CTableRow> 
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>08:00</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow> 
 
-                                    <CTableRow v-for="item in tableItems" >
-                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                        <div>09:00</div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <div></div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <CFormCheck id="flexCheckDefault"/>
-                                      </CTableDataCell>
-                                    </CTableRow> 
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>09:00</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow> 
 
-                                    <CTableRow v-for="item in tableItems" >
-                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                        <div>10:00</div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <div></div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <CFormCheck id="flexCheckDefault"/>
-                                      </CTableDataCell>
-                                    </CTableRow> 
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>10:00</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow> 
 
-                                    <CTableRow v-for="item in tableItems" >
-                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                        <div>11:00</div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <div></div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <CFormCheck id="flexCheckDefault"/>
-                                      </CTableDataCell>
-                                    </CTableRow> 
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>11:00</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow> 
 
-                                    <CTableRow v-for="item in tableItems" >
-                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                        <div>12:00</div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <div></div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <CFormCheck id="flexCheckDefault"/>
-                                      </CTableDataCell>
-                                    </CTableRow> 
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>12:00</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow> 
+                                    </CTableBody>
+                                  </CTable>
+                                </CCol>
+                                <CCol xs>
+                                  <CTable align="middle" className="mb-0 border" hover responsive>
+                                  <CTableHead className='table-dark'>
+                                    <CTableRow>
+                                      {/* <CTableHeaderCell>№</CTableHeaderCell> */}
+                                      <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center">Проекты</CTableHeaderCell>   
+                                      <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
+                                    </CTableRow>
+                                  </CTableHead>
+                                  <CTableBody>
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" rowSpan={9}>
+                                          <div>28.06</div>
+                                        </CTableDataCell>      
+                                        <CTableDataCell className="text-center" style={{width: '50px'}} >
+                                          <div onClick={clickShowEditTime}>06:00</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow>
 
+                                      <CTableRow v-for="item in tableItems" style={{display: showEditTime ? "block" : "none" }}>
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>07:____</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                        </CTableDataCell>
+                                      </CTableRow> 
 
-                                </CTableBody>
-                              </CTable>
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>07:00</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow> 
+
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>08:00</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow> 
+
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>09:00</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow> 
+
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>10:00</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow> 
+
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>11:00</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow> 
+
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>12:00</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow> 
+                                    </CTableBody>
+                                  </CTable>
+                                </CCol>
+                              </CRow>
                             }                              
                             </CCardBody>
                           </CCard>
