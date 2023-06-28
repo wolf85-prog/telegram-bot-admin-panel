@@ -31,7 +31,8 @@ import { useNavigate } from 'react-router-dom';
 import { newDistribution, getDistributions } from '../http/adminAPI';
 import { newMessage, uploadFile } from '../http/chatAPI';
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
-import phone_image from './../assets/images/phone.png';
+import phone_image from './../assets/images/phone2.png';
+import poster from './../assets/images/poster.jpeg';
 
 const DistributionAdd = () => {
 
@@ -405,7 +406,7 @@ const DistributionAdd = () => {
 
                     <CRow>
                         <CCol xs>
-                          <CCard className="mb-4">
+                          <CCard className="mb-4" style={{height: '600px'}}>
                             {/* <CCardHeader>Рассылки</CCardHeader> */}
                             <CCardBody>
                             <CAlert color="success" dismissible visible={visible} onClose={() => setVisible(false)}>
@@ -415,7 +416,7 @@ const DistributionAdd = () => {
                                 <div style={{color: '#f3f3f3'}}>
                                   <CRow className="mb-3">
                                     <CCol sm={3} >                                
-                                      <CFormLabel htmlFor="exampleFormControlInput1">Выбери категорию:</CFormLabel>
+                                      <CFormLabel htmlFor="exampleFormControlInput1">Категория:</CFormLabel>
                                       <CFormSelect 
                                         aria-label="Default select example"
                                         onChange={onAddCategory}
@@ -485,7 +486,7 @@ const DistributionAdd = () => {
 
                                       <p style={{color: '#767676', marginTop: '10px'}}>Получателей: <span>{selected.length}</span></p>
 
-                                      <p style={{color: '#f3f3f3'}}>Рассылка по проекту</p>
+                                      <p style={{color: '#f3f3f3'}}>Проект</p>
 
                                       <CRow className="mb-3">
                                         <CCol sm={6} > 
@@ -498,7 +499,7 @@ const DistributionAdd = () => {
                                             onChange={onChangeProjectName}
                                           />
                                         </CCol>
-                                        <CCol sm={6} > 
+                                        <CCol sm={6} style={{display: 'flex', justifyContent: 'flex-end'}}> 
                                           <CFormCheck 
                                             type="radio"
                                             id="flexRadioDefault2" 
@@ -554,10 +555,10 @@ const DistributionAdd = () => {
 
                                     </CCol>
 
-                                    {/* <CCol sm={2}></CCol> */}
+                                    {/* <CCol sm={1}></CCol> */}
 
                                     {/* Правый блок */}
-                                    <CCol sm={6}>
+                                    <CCol sm={5} style={{marginLeft: '50px', marginRight: '30px'}}>
                                         <CFormLabel htmlFor="exampleFormControlInput1">Текст рассылки</CFormLabel>
                                         <CFormTextarea 
                                           id="exampleFormControlTextarea1" 
@@ -573,20 +574,34 @@ const DistributionAdd = () => {
 
                                       <CRow className="mb-6">
                                           <CCol sm={3} > 
-                                            <CDropdown dark>
-                                              <CDropdownToggle color="secondary">Добавить...</CDropdownToggle>
-                                              <CDropdownMenu>
-                                                <CDropdownItem href="#">Картинка</CDropdownItem>
-                                                <CDropdownItem href="#">Файл</CDropdownItem>
-                                                <CDropdownItem href="#">Аудио</CDropdownItem>
-                                                <CDropdownItem href="#">Видео</CDropdownItem>
-                                              </CDropdownMenu>
-                                            </CDropdown>
+                                            <CFormSelect 
+                                              aria-label="Default select example"
+                                              style={{marginTop: '10px'}}
+                                              options={[
+                                                {
+                                                  label: 'Постер',
+                                                  value: '1',
+                                                },
+                                                {
+                                                  label: 'Файл',
+                                                  value: '2',
+                                                },
+                                                {
+                                                  label: 'Аудио',
+                                                  value: '3',
+                                                },
+                                                {
+                                                  label: 'Видео',
+                                                  value: '4',
+                                                },
+        
+                                              ]}
+                                            />
                                           </CCol>
 
                                           <CCol sm={9} > 
                                             {/* Добавление картинки */}
-                                            <div style={{color: '#8f8888'}}>
+                                            <div style={{color: '#8f8888', marginTop: '10px'}}>
                                               <CFormInput 
                                                 type="file" 
                                                 id="formFile" 
@@ -619,7 +634,7 @@ const DistributionAdd = () => {
 
                                           </CCol>
 
-                                        <CCol sm={6} > 
+                                        <CCol sm={6} style={{display: 'flex', justifyContent: 'flex-end'}}> 
                                           <CFormCheck 
                                             type="radio"
                                             id="appleButtonRadio" 
@@ -663,27 +678,15 @@ const DistributionAdd = () => {
                                               type="radio"
                                               id="addTargetRadio" 
                                               name="groupRadioTarget"
-                                              label="Цепь №"
+                                              label="Цепь №"              
                                               // checked={showEditButtonAdd}
                                               // onChange={onChangeAddButton}
                                             />
                                             
-                                            <MultiSelect
-                                              options={projects}
-                                              value={selected}
-                                              onChange={setSelected}
-                                              style={{color: '#1e1919'}}
-                                              overrideStrings={{
-                                                "allItemsAreSelected": "Все поля выбраны",
-                                                "clearSearch": "Очистить поиск",
-                                                "clearSelected": "Очистить выбор",
-                                                "noOptions": "Ничего не найдено",
-                                                "search": "Поиск",
-                                                "selectAll": "Выбрать всё",
-                                                "selectAllFiltered": "Выбрать всё (Найденных)",
-                                                "selectSomeItems": "Выбрать...",
-                                                "create": "Создать",
-                                              }}   
+                                            <CFormSelect 
+                                              aria-label="Default select example"
+                                              style={{marginTop: '10px'}}
+                                              options={[]}
                                             />
                                           </CCol>
 
@@ -693,7 +696,7 @@ const DistributionAdd = () => {
                                               type="radio"
                                               id="addURLRadio" 
                                               name="groupRadioTarget"
-                                              label="Ссылка"
+                                              label="Ссылка"  
                                               // checked={showEditButtonAdd}
                                               // onChange={onChangeAddButton}
                                             />
@@ -702,6 +705,7 @@ const DistributionAdd = () => {
                                               type="text" 
                                               id="inputTextButton" 
                                               placeholder="https://"
+                                              style={{marginTop: '10px'}}
                                               onChange={onChangeTextButton}
                                               value={textButton}
                                             />
@@ -711,11 +715,19 @@ const DistributionAdd = () => {
                                       </div>
                                     </CCol>
 
+                                    {/* <CCol sm={1}></CCol> */}
+
                                     {/* Телефон */}
-                                    <CCol sm={3}>
-                                      <div style={{position: 'relative'}}>
-                                        <img src={phone_image} width='250' alt='phone' />
-                                        <div style={{position: 'absolute', top: '80px', right: '230px'}}></div>
+                                    <CCol sm={3}>   
+                                      <div style={{position: 'relative', marginTop: '10px'}}>
+                                        <div style={{position: 'absolute', top: '10px', left: 0, marginTop: '10px'}}>
+                                          <img src={phone_image} width='310px' alt='phone' />
+                                          <div style={{position: 'absolute', top: '60px', left: '65px'}}>
+                                            <img src={poster} width='180px' alt='poster' style={{borderRadius: '7px'}}/>
+                                          </div>
+                                        </div>
+                                        
+                                        
                                       </div>
                                       
                                     </CCol>
@@ -728,10 +740,10 @@ const DistributionAdd = () => {
 
                                 <br/>
 
-                                {/* <div className="mb-3" style={{textAlign: 'center'}}>
+                                <div className="mb-3" style={{textAlign: 'center', position: 'absolute', bottom: '20px', marginLeft: '36%'}}>
                                   <CButton color="primary" style={{marginRight: '15px'}} onClick={onSendText}>Разослать сейчас</CButton>
                                   <Link to={'/distributionw_planer'}><CButton color="secondary">Запланировать</CButton></Link>
-                                </div> */}
+                                </div>
                               </CForm>
 
                             </CCardBody>
