@@ -31,7 +31,7 @@ import { useNavigate } from 'react-router-dom';
 import { newDistribution, getDistributions } from '../http/adminAPI';
 import { newMessage, uploadFile } from '../http/chatAPI';
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
-import phone_image from './../assets/images/phone2.png';
+import phone_image from './../assets/images/phone.png';
 import poster from './../assets/images/poster.jpeg';
 
 const DistributionAdd = () => {
@@ -720,11 +720,21 @@ const DistributionAdd = () => {
                                     {/* Телефон */}
                                     <CCol sm={3}>   
                                       <div style={{position: 'relative', marginTop: '10px'}}>
-                                        <div style={{position: 'absolute', top: '10px', left: 0, marginTop: '10px'}}>
-                                          <img src={phone_image} width='310px' alt='phone' />
-                                          <div style={{position: 'absolute', top: '60px', left: '65px'}}>
-                                            <img src={poster} width='180px' alt='poster' style={{borderRadius: '7px'}}/>
+                                        <div style={{position: 'absolute', top: '10px', left: 0}}>
+                                          <img src={phone_image} width='250px' alt='phone' />
+                                          <div style={{position: 'absolute', top: '60px', left: '30px'}}>
+                                            <img src={poster} width='210px' alt='poster' style={{borderRadius: '7px'}}/>
                                           </div>
+                                          <div style={{
+                                            position: 'absolute', 
+                                            top: '180px', 
+                                            left: '30px', 
+                                            backgroundColor: '#8a93a2', 
+                                            borderRadius: '5px',
+                                            textAlign: 'center',
+                                            fontSize: '12px',
+                                            padding: '5px', 
+                                            width: '200px'}}>Принять</div>
                                         </div>
                                         
                                         
