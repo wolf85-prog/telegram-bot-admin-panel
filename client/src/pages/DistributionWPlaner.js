@@ -27,7 +27,33 @@ const DistributionWPlaner = () => {
   const { distributionsWork: messages } = useUsersContext();
   const [distributionsWork, setDistributionsWork]= useState([]);
   const [loading, setLoading]= useState(true);
+
   const [showEditTime, setShowEditTime] = useState(false)
+  const [showEditTime2, setShowEditTime2] = useState(false)
+  const [showEditTime3, setShowEditTime3] = useState(false)
+  const [showEditTime4, setShowEditTime4] = useState(false)
+  const [showEditTime5, setShowEditTime5] = useState(false)
+  const [showEditTime6, setShowEditTime6] = useState(false)
+  const [showEditTime7, setShowEditTime7] = useState(false)
+
+  const [time, setTime] = useState('06:00')
+  const [time2, setTime2] = useState('07:00')
+  const [time3, setTime3] = useState('08:00')
+  const [time4, setTime4] = useState('09:00')
+  const [time5, setTime5] = useState('10:00')
+  const [time6, setTime6] = useState('11:00')
+  const [time7, setTime7] = useState('12:00')
+
+  const d = new Date();
+  const month = String(d.getMonth()+1).padStart(2, "0");
+	const day = String(d.getDate()).padStart(2, "0");
+  const date_str = `${day}.${month}`;
+  
+  d.setDate(d.getDate() + 1);
+  const month2 = String(d.getMonth()+1).padStart(2, "0");
+	const day2 = String(d.getDate()).padStart(2, "0");
+  const date_str2 = `${day2}.${month2}`;
+
 
   //get Distribution
   useEffect(() => {
@@ -81,9 +107,38 @@ const DistributionWPlaner = () => {
   }
 
   {/* Показать Добавление времени */}
-  const clickShowEditTime = (e) => {
-    e.preventDefault();
-    showEditTime ? setShowEditTime (false) : setShowEditTime (true)
+  const clickShowEditTime = (t) => {
+    if (t === '06:00')
+      showEditTime ? setShowEditTime (false) : setShowEditTime (true)    
+    if (t === '07:00')
+      showEditTime2 ? setShowEditTime2 (false) : setShowEditTime2 (true)
+    if (t === '08:00')
+      showEditTime3 ? setShowEditTime3 (false) : setShowEditTime3 (true)
+    if (t === '09:00')
+      showEditTime4 ? setShowEditTime4 (false) : setShowEditTime4 (true)
+    if (t === '10:00')
+      showEditTime5 ? setShowEditTime5 (false) : setShowEditTime5 (true)
+    if (t === '11:00')
+      showEditTime6 ? setShowEditTime6 (false) : setShowEditTime6 (true)
+    if (t === '12:00')
+      showEditTime7 ? setShowEditTime7 (false) : setShowEditTime7 (true)
+  }
+
+
+  const changeTimePlus = () => {
+    if (time === '06:00') setTime('06:10')
+    if (time === '06:10') setTime('06:20')
+    if (time === '06:20') setTime('06:30')
+    if (time === '06:30') setTime('06:40')
+    if (time === '06:40') setTime('06:50')
+  }
+
+  const changeTimeMinus = () => {
+    if (time === '06:10') setTime('06:00')
+    if (time === '06:20') setTime('06:10')
+    if (time === '06:30') setTime('06:20')
+    if (time === '06:40') setTime('06:30')
+    if (time === '06:50') setTime('06:40')
   }
 
   return (
@@ -113,23 +168,33 @@ const DistributionWPlaner = () => {
 
                               <CRow>
                                 <CCol xs>
-                                  <CTable align="middle" className="mb-0 border" hover responsive>
-                                  <CTableHead className='table-dark'>
+                                  <CTable align="middle" className="mb-0 border" hover responsive bordered>
+                                  <CTableHead className='table-dark' >
                                     <CTableRow>
                                       {/* <CTableHeaderCell>№</CTableHeaderCell> */}
                                       <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center">Проекты</CTableHeaderCell>   
+                                      <CTableHeaderCell className="text-center">Проект</CTableHeaderCell>   
                                       <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>
                                       <CTableRow v-for="item in tableItems" >
-                                        <CTableDataCell className="text-center" rowSpan={9}>
-                                          <div>28.06</div>
+                                        <CTableDataCell className="text-center" style={{width: '50px'}} rowSpan={9}>
+                                          <div>{date_str2}</div>
                                         </CTableDataCell>      
                                         <CTableDataCell className="text-center" style={{width: '50px'}} >
-                                          <div onClick={clickShowEditTime}>06:00</div>
+                                          <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <div onClick={()=>clickShowEditTime('06:00')} >{time}</div>
+                                            <div style={{display: showEditTime ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                              <div onClick={changeTimePlus}>
+                                                &#9650;
+                                              </div>
+                                              <div onClick={changeTimeMinus}>          	
+                                                &#9660;
+                                              </div>
+                                            </div>   
+                                          </div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div></div>
@@ -139,32 +204,19 @@ const DistributionWPlaner = () => {
                                         </CTableDataCell>
                                       </CTableRow>
 
-                                      <CTableRow v-for="item in tableItems" style={{display: showEditTime ? "block" : "none" }}>
-                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>07:____</div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <div></div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                        </CTableDataCell>
-                                      </CTableRow> 
-
                                       <CTableRow v-for="item in tableItems" >
                                         <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>07:00</div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <div></div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <CFormCheck id="flexCheckDefault"/>
-                                        </CTableDataCell>
-                                      </CTableRow> 
-
-                                      <CTableRow v-for="item in tableItems" >
-                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>08:00</div>
+                                          <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <div onClick={()=>clickShowEditTime('07:00')} >{time2}</div>
+                                            <div style={{display: showEditTime2 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                              <div onClick={changeTimePlus}>
+                                                &#9650;
+                                              </div>
+                                              <div onClick={changeTimeMinus}>          	
+                                                &#9660;
+                                              </div>
+                                            </div>   
+                                          </div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div></div>
@@ -176,7 +228,39 @@ const DistributionWPlaner = () => {
 
                                       <CTableRow v-for="item in tableItems" >
                                         <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>09:00</div>
+                                          <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <div onClick={()=>clickShowEditTime('08:00')} >{time3}</div>
+                                            <div style={{display: showEditTime3 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                              <div onClick={changeTimePlus}>
+                                                &#9650;
+                                              </div>
+                                              <div onClick={changeTimeMinus}>          	
+                                                &#9660;
+                                              </div>
+                                            </div>   
+                                          </div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow> 
+
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <div onClick={()=>clickShowEditTime('09:00')} >{time4}</div>
+                                            <div style={{display: showEditTime4 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                              <div onClick={changeTimePlus}>
+                                                &#9650;
+                                              </div>
+                                              <div onClick={changeTimeMinus}>          	
+                                                &#9660;
+                                              </div>
+                                            </div>   
+                                          </div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div></div>
@@ -188,7 +272,17 @@ const DistributionWPlaner = () => {
 
                                       <CTableRow v-for="item in tableItems" >
                                         <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>10:00</div>
+                                          <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <div onClick={()=>clickShowEditTime('10:00')} >{time5}</div>
+                                            <div style={{display: showEditTime5 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                              <div onClick={changeTimePlus}>
+                                                &#9650;
+                                              </div>
+                                              <div onClick={changeTimeMinus}>          	
+                                                &#9660;
+                                              </div>
+                                            </div>   
+                                          </div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div></div>
@@ -200,7 +294,17 @@ const DistributionWPlaner = () => {
 
                                       <CTableRow v-for="item in tableItems" >
                                         <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>11:00</div>
+                                          <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <div onClick={()=>clickShowEditTime('11:00')} >{time6}</div>
+                                            <div style={{display: showEditTime6 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                              <div onClick={changeTimePlus}>
+                                                &#9650;
+                                              </div>
+                                              <div onClick={changeTimeMinus}>          	
+                                                &#9660;
+                                              </div>
+                                            </div>   
+                                          </div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div></div>
@@ -212,7 +316,17 @@ const DistributionWPlaner = () => {
 
                                       <CTableRow v-for="item in tableItems" >
                                         <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>12:00</div>
+                                          <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <div onClick={()=>clickShowEditTime('12:00')} >{time7}</div>
+                                            <div style={{display: showEditTime7 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                              <div onClick={changeTimePlus}>
+                                                &#9650;
+                                              </div>
+                                              <div onClick={changeTimeMinus}>          	
+                                                &#9660;
+                                              </div>
+                                            </div>   
+                                          </div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div></div>
@@ -224,24 +338,35 @@ const DistributionWPlaner = () => {
                                     </CTableBody>
                                   </CTable>
                                 </CCol>
+
                                 <CCol xs>
-                                  <CTable align="middle" className="mb-0 border" hover responsive>
+                                  <CTable align="middle" className="mb-0 border" hover responsive bordered>
                                   <CTableHead className='table-dark'>
                                     <CTableRow>
                                       {/* <CTableHeaderCell>№</CTableHeaderCell> */}
                                       <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center">Проекты</CTableHeaderCell>   
+                                      <CTableHeaderCell className="text-center">Проект</CTableHeaderCell>   
                                       <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>
                                       <CTableRow v-for="item in tableItems" >
-                                        <CTableDataCell className="text-center" rowSpan={9}>
-                                          <div>28.06</div>
+                                        <CTableDataCell className="text-center" style={{width: '50px'}} rowSpan={9}>
+                                          <div>{date_str2}</div>
                                         </CTableDataCell>      
                                         <CTableDataCell className="text-center" style={{width: '50px'}} >
-                                          <div onClick={clickShowEditTime}>06:00</div>
+                                          <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <div onClick={()=>clickShowEditTime('06:00')} >{time}</div>
+                                            <div style={{display: showEditTime ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                              <div onClick={changeTimePlus}>
+                                                &#9650;
+                                              </div>
+                                              <div onClick={changeTimeMinus}>          	
+                                                &#9660;
+                                              </div>
+                                            </div>   
+                                          </div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div></div>
@@ -251,32 +376,19 @@ const DistributionWPlaner = () => {
                                         </CTableDataCell>
                                       </CTableRow>
 
-                                      <CTableRow v-for="item in tableItems" style={{display: showEditTime ? "block" : "none" }}>
-                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>07:____</div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <div></div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                        </CTableDataCell>
-                                      </CTableRow> 
-
                                       <CTableRow v-for="item in tableItems" >
                                         <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>07:00</div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <div></div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <CFormCheck id="flexCheckDefault"/>
-                                        </CTableDataCell>
-                                      </CTableRow> 
-
-                                      <CTableRow v-for="item in tableItems" >
-                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>08:00</div>
+                                          <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <div onClick={()=>clickShowEditTime('07:00')} >{time2}</div>
+                                            <div style={{display: showEditTime2 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                              <div onClick={changeTimePlus}>
+                                                &#9650;
+                                              </div>
+                                              <div onClick={changeTimeMinus}>          	
+                                                &#9660;
+                                              </div>
+                                            </div>   
+                                          </div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div></div>
@@ -288,7 +400,39 @@ const DistributionWPlaner = () => {
 
                                       <CTableRow v-for="item in tableItems" >
                                         <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>09:00</div>
+                                          <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <div onClick={()=>clickShowEditTime('08:00')} >{time3}</div>
+                                            <div style={{display: showEditTime3 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                              <div onClick={changeTimePlus}>
+                                                &#9650;
+                                              </div>
+                                              <div onClick={changeTimeMinus}>          	
+                                                &#9660;
+                                              </div>
+                                            </div>   
+                                          </div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div></div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <CFormCheck id="flexCheckDefault"/>
+                                        </CTableDataCell>
+                                      </CTableRow> 
+
+                                      <CTableRow v-for="item in tableItems" >
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <div onClick={()=>clickShowEditTime('09:00')} >{time4}</div>
+                                            <div style={{display: showEditTime4 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                              <div onClick={changeTimePlus}>
+                                                &#9650;
+                                              </div>
+                                              <div onClick={changeTimeMinus}>          	
+                                                &#9660;
+                                              </div>
+                                            </div>   
+                                          </div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div></div>
@@ -300,7 +444,17 @@ const DistributionWPlaner = () => {
 
                                       <CTableRow v-for="item in tableItems" >
                                         <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>10:00</div>
+                                          <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <div onClick={()=>clickShowEditTime('10:00')} >{time5}</div>
+                                            <div style={{display: showEditTime5 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                              <div onClick={changeTimePlus}>
+                                                &#9650;
+                                              </div>
+                                              <div onClick={changeTimeMinus}>          	
+                                                &#9660;
+                                              </div>
+                                            </div>   
+                                          </div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div></div>
@@ -312,7 +466,17 @@ const DistributionWPlaner = () => {
 
                                       <CTableRow v-for="item in tableItems" >
                                         <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>11:00</div>
+                                          <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <div onClick={()=>clickShowEditTime('11:00')} >{time6}</div>
+                                            <div style={{display: showEditTime6 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                              <div onClick={changeTimePlus}>
+                                                &#9650;
+                                              </div>
+                                              <div onClick={changeTimeMinus}>          	
+                                                &#9660;
+                                              </div>
+                                            </div>   
+                                          </div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div></div>
@@ -324,7 +488,17 @@ const DistributionWPlaner = () => {
 
                                       <CTableRow v-for="item in tableItems" >
                                         <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>12:00</div>
+                                          <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <div onClick={()=>clickShowEditTime('12:00')} >{time7}</div>
+                                            <div style={{display: showEditTime7 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                              <div onClick={changeTimePlus}>
+                                                &#9650;
+                                              </div>
+                                              <div onClick={changeTimeMinus}>          	
+                                                &#9660;
+                                              </div>
+                                            </div>   
+                                          </div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div></div>
@@ -337,7 +511,13 @@ const DistributionWPlaner = () => {
                                   </CTable>
                                 </CCol>
                               </CRow>
-                            }                              
+                            }   
+
+                            <div style={{display: 'flex', justifyContent: 'center', marginTop: '15px'}}>
+                              <div style={{marginRight: '16px'}}><Link to={'/distributionw_add'}><CButton color="secondary" style={{width: '130px'}}>Назад</CButton></Link></div>
+                              <div><CButton color="primary"  onClick={()=>{}} style={{width: '130px'}}>Сохранить</CButton>  </div>
+                            </div>
+                                                       
                             </CCardBody>
                           </CCard>
                         </CCol>

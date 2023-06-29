@@ -32,7 +32,7 @@ import { newDistribution, getDistributions } from '../http/adminAPI';
 import { newMessage, uploadFile } from '../http/chatAPI';
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 import phone_image from './../assets/images/phone.png';
-import poster from './../assets/images/poster.jpeg';
+import poster from './../assets/images/poster.jpg';
 
 const DistributionAdd = () => {
 
@@ -406,7 +406,7 @@ const DistributionAdd = () => {
 
                     <CRow>
                         <CCol xs>
-                          <CCard className="mb-4" style={{height: '600px'}}>
+                          <CCard className="mb-4" style={{height: '670px'}}>
                             {/* <CCardHeader>Рассылки</CCardHeader> */}
                             <CCardBody>
                             <CAlert color="success" dismissible visible={visible} onClose={() => setVisible(false)}>
@@ -415,7 +415,77 @@ const DistributionAdd = () => {
                               <CForm>
                                 <div style={{color: '#f3f3f3'}}>
                                   <CRow className="mb-3">
-                                    <CCol sm={3} >                                
+                                    <CCol sm={3} >  
+
+                                      <p style={{color: '#f3f3f3'}}>Проект:</p>
+
+                                      <CRow className="mb-3">
+                                        <CCol sm={6} > 
+                                          <CFormCheck 
+                                            type="radio"
+                                            id="flexRadioDefault1" 
+                                            name="flexRadioDefault"
+                                            label="Название"
+                                            checked={showNameProject}
+                                            onChange={onChangeProjectName}
+                                          />
+                                        </CCol>
+                                        <CCol sm={6} style={{display: 'flex', justifyContent: 'flex-end'}}> 
+                                          <CFormCheck 
+                                            type="radio"
+                                            id="flexRadioDefault2" 
+                                            name="flexRadioDefault"
+                                            label="Номер"
+                                            checked={!showNameProject}
+                                            onChange={onChangeProjectNumber}
+                                          />
+                                        </CCol>
+                                      </CRow>
+
+                                      <CFormSelect 
+                                        aria-label="Default select example"
+                                        style={{display: showNameProject ? "block" : "none" }}
+                                        options={[
+                                          'Выбрать...',
+                                          {
+                                            label: 'Проект 1',
+                                            value: '1',
+                                          },
+                                          {
+                                            label: 'Проект 2',
+                                            value: '2',
+                                          },
+                                          {
+                                            label: 'Проект 3',
+                                            value: '3',
+                                          },
+
+                                        ]}
+                                      />
+
+                                      <CFormSelect 
+                                        aria-label="Default select example"
+                                        style={{display: !showNameProject ? "block" : "none" }}
+                                        options={[
+                                          'Выбрать...',
+                                          {
+                                            label: '1',
+                                            value: '1',
+                                          },
+                                          {
+                                            label: '2',
+                                            value: '2',
+                                          },
+                                          {
+                                            label: '3',
+                                            value: '3',
+                                          },
+
+                                        ]}
+                                      />
+
+                                      <br/>
+
                                       <CFormLabel htmlFor="exampleFormControlInput1">Категория:</CFormLabel>
                                       <CFormSelect 
                                         aria-label="Default select example"
@@ -484,74 +554,7 @@ const DistributionAdd = () => {
                                         </CCol>
                                       </CRow>
 
-                                      <p style={{color: '#767676', marginTop: '10px'}}>Получателей: <span>{selected.length}</span></p>
-
-                                      <p style={{color: '#f3f3f3'}}>Проект</p>
-
-                                      <CRow className="mb-3">
-                                        <CCol sm={6} > 
-                                          <CFormCheck 
-                                            type="radio"
-                                            id="flexRadioDefault1" 
-                                            name="flexRadioDefault"
-                                            label="Название"
-                                            checked={showNameProject}
-                                            onChange={onChangeProjectName}
-                                          />
-                                        </CCol>
-                                        <CCol sm={6} style={{display: 'flex', justifyContent: 'flex-end'}}> 
-                                          <CFormCheck 
-                                            type="radio"
-                                            id="flexRadioDefault2" 
-                                            name="flexRadioDefault"
-                                            label="Номер"
-                                            checked={!showNameProject}
-                                            onChange={onChangeProjectNumber}
-                                          />
-                                        </CCol>
-                                      </CRow>
-
-                                      <CFormSelect 
-                                        aria-label="Default select example"
-                                        style={{display: showNameProject ? "block" : "none" }}
-                                        options={[
-                                          'Выбрать...',
-                                          {
-                                            label: 'Проект 1',
-                                            value: '1',
-                                          },
-                                          {
-                                            label: 'Проект 2',
-                                            value: '2',
-                                          },
-                                          {
-                                            label: 'Проект 3',
-                                            value: '3',
-                                          },
-  
-                                        ]}
-                                      />
-
-                                      <CFormSelect 
-                                        aria-label="Default select example"
-                                        style={{display: !showNameProject ? "block" : "none" }}
-                                        options={[
-                                          'Выбрать...',
-                                          {
-                                            label: '1',
-                                            value: '1',
-                                          },
-                                          {
-                                            label: '2',
-                                            value: '2',
-                                          },
-                                          {
-                                            label: '3',
-                                            value: '3',
-                                          },
-  
-                                        ]}
-                                      />
+                                      <p style={{color: '#767676', marginTop: '10px'}}>Получателей: <span>{selected.length}</span></p>  
 
                                     </CCol>
 
@@ -559,10 +562,10 @@ const DistributionAdd = () => {
 
                                     {/* Правый блок */}
                                     <CCol sm={5} style={{marginLeft: '50px', marginRight: '30px'}}>
-                                        <CFormLabel htmlFor="exampleFormControlInput1">Текст рассылки</CFormLabel>
+                                        <CFormLabel htmlFor="exampleFormControlInput1">Текст рассылки:</CFormLabel>
                                         <CFormTextarea 
                                           id="exampleFormControlTextarea1" 
-                                          rows={5} 
+                                          rows={4} 
                                           placeholder='Введите текст сообщения'
                                           onChange={onChangeText}
                                           value={text}
@@ -719,36 +722,34 @@ const DistributionAdd = () => {
 
                                     {/* Телефон */}
                                     <CCol sm={3}>   
-                                      <div style={{position: 'relative', marginTop: '10px'}}>
+                                      <div style={{position: 'relative'}}>
                                         <div style={{position: 'absolute', top: '10px', left: 0}}>
-                                          <img src={phone_image} width='250px' alt='phone' />
+                                          <img src={phone_image} width='280px' alt='phone' />
                                           <div style={{position: 'absolute', top: '60px', left: '22px'}}>
-                                            <img src={poster} width='210px' alt='poster' style={{borderRadius: '7px'}}/>
+                                            <img src={poster} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
                                           </div>
-                                          <div style={{
-                                            position: 'absolute', 
-                                            top: '180px', 
-                                            left: '22px', 
-                                            backgroundColor: '#8a93a2', 
-                                            borderRadius: '5px',
-                                            textAlign: 'center',
-                                            fontSize: '12px',
-                                            padding: '5px', 
-                                            width: '210px'}}>
-                                              Принять
+                                          <div style={{position: 'absolute', top: '210px', left: '22px', display: 'flex', width: '85%'}}>
+                                            <div style={{
+                                              backgroundColor: '#8a93a2', 
+                                              borderRadius: '5px',
+                                              textAlign: 'center',
+                                              fontSize: '12px',
+                                              padding: '5px',
+                                              marginRight: '4px',
+                                              width: '100%'}}>
+                                                Принять
+                                            </div>
+                                            <div style={{
+                                              backgroundColor: '#8a93a2', 
+                                              borderRadius: '5px',
+                                              textAlign: 'center',
+                                              fontSize: '12px',
+                                              padding: '5px',
+                                              width: '100%'}}>
+                                                Отклонить
+                                            </div>
                                           </div>
-                                          <div style={{
-                                            position: 'absolute', 
-                                            top: '210px', 
-                                            left: '22px', 
-                                            backgroundColor: '#8a93a2', 
-                                            borderRadius: '5px',
-                                            textAlign: 'center',
-                                            fontSize: '12px',
-                                            padding: '5px', 
-                                            width: '210px'}}>
-                                              Отклонить
-                                          </div>
+                                          
                                         </div>
                                         
                                         
