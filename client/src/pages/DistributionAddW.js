@@ -722,19 +722,33 @@ const DistributionAdd = () => {
                                       <div style={{position: 'relative', marginTop: '10px'}}>
                                         <div style={{position: 'absolute', top: '10px', left: 0}}>
                                           <img src={phone_image} width='250px' alt='phone' />
-                                          <div style={{position: 'absolute', top: '60px', left: '30px'}}>
+                                          <div style={{position: 'absolute', top: '60px', left: '22px'}}>
                                             <img src={poster} width='210px' alt='poster' style={{borderRadius: '7px'}}/>
                                           </div>
                                           <div style={{
                                             position: 'absolute', 
                                             top: '180px', 
-                                            left: '30px', 
+                                            left: '22px', 
                                             backgroundColor: '#8a93a2', 
                                             borderRadius: '5px',
                                             textAlign: 'center',
                                             fontSize: '12px',
                                             padding: '5px', 
-                                            width: '200px'}}>Принять</div>
+                                            width: '210px'}}>
+                                              Принять
+                                          </div>
+                                          <div style={{
+                                            position: 'absolute', 
+                                            top: '210px', 
+                                            left: '22px', 
+                                            backgroundColor: '#8a93a2', 
+                                            borderRadius: '5px',
+                                            textAlign: 'center',
+                                            fontSize: '12px',
+                                            padding: '5px', 
+                                            width: '210px'}}>
+                                              Отклонить
+                                          </div>
                                         </div>
                                         
                                         
@@ -750,9 +764,9 @@ const DistributionAdd = () => {
 
                                 <br/>
 
-                                <div className="mb-3" style={{textAlign: 'center', position: 'absolute', bottom: '20px', marginLeft: '36%'}}>
-                                  <CButton color="primary" style={{marginRight: '15px'}} onClick={onSendText}>Разослать сейчас</CButton>
-                                  <Link to={'/distributionw_planer'}><CButton color="secondary">Запланировать</CButton></Link>
+                                <div className="mb-3" style={{position: 'absolute', bottom: 0, display: 'flex', width: '97%', justifyContent: 'space-between'}}>
+                                  <div><Link to={'/distributionw_planer'}><CButton color="secondary">Запланировать</CButton></Link></div>
+                                  <div><CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton>  </div>
                                 </div>
                               </CForm>
 
