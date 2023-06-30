@@ -29,6 +29,7 @@ const DistributionWPlaner = () => {
   const [loading, setLoading]= useState(true);
 
   const [showEditTime, setShowEditTime] = useState(false)
+
   const [showEditTime2, setShowEditTime2] = useState(false)
   const [showEditTime3, setShowEditTime3] = useState(false)
   const [showEditTime4, setShowEditTime4] = useState(false)
@@ -55,6 +56,13 @@ const DistributionWPlaner = () => {
   ])
 
   const [countCol, setCountCol] = useState(7)
+  const [countClick1, setCountClick1] = useState(0)
+  const [countClick2, setCountClick2] = useState(0)
+  const [countClick3, setCountClick3] = useState(0)
+  const [countClick4, setCountClick4] = useState(0)
+  const [countClick5, setCountClick5] = useState(0)
+  const [countClick6, setCountClick6] = useState(0)
+  const [countClick7, setCountClick7] = useState(0)
 
   const d = new Date();
   const month = String(d.getMonth()+1).padStart(2, "0");
@@ -120,22 +128,134 @@ const DistributionWPlaner = () => {
     await delDistribution(desk.id)
   }
 
+
   {/* Показать Добавление времени */}
-  const clickShowEditTime = (t) => {
+  const clickShowEditTime = (t, ind) => {
+    console.log(t)
 
-    setCountCol(countCol+1)
+    if (t === '06:00')  {
+      setCountClick1(countClick1+1)
+      console.log("countClick1: ", countClick1+1)
+      if (countClick1 < 1) {
+        setCountCol(countCol+1)
+        arr = dates.slice(0);
+        const newObj = {
+              date: date_str,
+              time: '06:30',
+              proj: ''
+            }
+        arr.splice(ind+1, 0, newObj);
+        setDates(arr)
+      }
+    }
 
-    // if (t === '06:00')
+    if (t === '06:30')  {
+      showEditTime ? setShowEditTime(false) : setShowEditTime(true) 
+    }
+
+    if (t === '07:00')  {
+      setCountClick2(countClick2+1)
+      console.log("countClick2: ", countClick2+1)
+      if (countClick2 < 1) {
+        setCountCol(countCol+1)
+        arr = dates.slice(0);
+        const newObj = {
+              date: date_str,
+              time: '07:30',
+              proj: ''
+            }
+        arr.splice(ind+1, 0, newObj);
+        setDates(arr)
+      }
+    }
+
+    if (t === '08:00')  {
+      setCountClick3(countClick3+1)
+      //console.log("countClick2: ", countClick2+1)
+      if (countClick3 < 1) {
+        setCountCol(countCol+1)
+        arr = dates.slice(0);
+        const newObj = {
+              date: date_str,
+              time: '08:30',
+              proj: ''
+            }
+        arr.splice(ind+1, 0, newObj);
+        setDates(arr)
+      }
+    }
+
+    if (t === '09:00')  {
+      setCountClick4(countClick4+1)
+      //console.log("countClick2: ", countClick2+1)
+      if (countClick4 < 1) {
+        setCountCol(countCol+1)
+        arr = dates.slice(0);
+        const newObj = {
+              date: date_str,
+              time: '09:30',
+              proj: ''
+            }
+        arr.splice(ind+1, 0, newObj);
+        setDates(arr)
+      }
+    }
+
+    if (t === '10:00')  {
+      setCountClick5(countClick5+1)
+      //console.log("countClick2: ", countClick2+1)
+      if (countClick5 < 1) {
+        setCountCol(countCol+1)
+        arr = dates.slice(0);
+        const newObj = {
+              date: date_str,
+              time: '10:30',
+              proj: ''
+            }
+        arr.splice(ind+1, 0, newObj);
+        setDates(arr)
+      }
+    }
+
+    if (t === '11:00')  {
+      setCountClick6(countClick6+1)
+      //console.log("countClick2: ", countClick2+1)
+      if (countClick6 < 1) {
+        setCountCol(countCol+1)
+        arr = dates.slice(0);
+        const newObj = {
+              date: date_str,
+              time: '11:30',
+              proj: ''
+            }
+        arr.splice(ind+1, 0, newObj);
+        setDates(arr)
+      }
+    }
+
+    if (t === '12:00')  {
+      setCountClick7(countClick7+1)
+      //console.log("countClick2: ", countClick2+1)
+      if (countClick7 < 1) {
+        setCountCol(countCol+1)
+        arr = dates.slice(0);
+        const newObj = {
+              date: date_str,
+              time: '12:30',
+              proj: ''
+            }
+        arr.splice(ind+1, 0, newObj);
+        setDates(arr)
+      }
+    }
+
+    
+    
+    
+    
+    
     //   showEditTime ? setShowEditTime (false) : setShowEditTime (true)  
-
-    arr = dates.slice(0);
-    const newObj = {
-          date: '28.06',
-          time: '06:30',
-          proj: ''
-        }
-    arr.splice(1, 0, newObj);
-    setDates(arr)
+  
   }
 
 
@@ -155,64 +275,6 @@ const DistributionWPlaner = () => {
     if (time === '06:50') setTime('06:40')
   }
 
-  // const dates = [
-  //   {
-  //     date: '28.06',
-  //     time: '06:00',
-  //     proj: 'Проект 1',
-  //   },
-  //   {
-  //     date: '',
-  //     time: '07:00',
-  //     proj: 'Проект 2',
-  //   }
-  // ]
-
-
-  // const columns = [
-  //   {
-  //     key: 'id',
-  //     label: 'Дата',
-  //     _props: { scope: 'col', class: 'text-center', width: '50px', rowSpan: 2 },
-  //   },
-  //   {
-  //     key: 'time',
-  //     label: 'Время',
-  //     _props: { scope: 'col', class: 'text-center', width: '50px'},
-  //   },
-  //   {
-  //     key: 'project',
-  //     label: 'Проект',
-  //     _props: { scope: 'col', class: 'text-center'},
-  //   },
-  //   {
-  //     key: 'status',
-  //     label: 'Статус',
-  //     _props: { scope: 'col', class: 'text-center', width: '50px'},
-  //   },
-  // ]
-
-  // const items = [
-  //   {
-  //     id: 1,
-  //     time: 'Mark',
-  //     project: 'Otto',
-  //     status: <CFormCheck id="flexCheckDefault1"/>,
-  //     _cellProps: { id: { scope: 'row', rowSpan: 3, className: 'text-center' }, status: {className: 'text-center'}  },
-  //   },
-  //   {
-  //     time: 'Jacob',
-  //     project: 'Thornton',
-  //     status: <CFormCheck id="flexCheckDefault2"/>,
-  //     _cellProps: { id: { scope: 'row'}, time: {className: 'text-center'}, status: {className: 'text-center'} },
-  //   },
-  //   {
-  //     time: 'Larry the Bird',
-  //     project: 'Thornton',
-  //     status: <CFormCheck id="flexCheckDefault3"/>,
-  //     _cellProps: { id: { scope: 'row' }, status: {className: 'text-center'} },
-  //   },
-  // ]
 
   return (
     <div className='dark-theme'>
@@ -273,7 +335,7 @@ const DistributionWPlaner = () => {
                                           </CTableDataCell> */}     
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center'}}>
-                                              <div onClick={()=>clickShowEditTime('06:00')} >{item.time}</div>
+                                              <div onClick={()=>clickShowEditTime(`${item.time}`, index)} >{item.time}</div>
                                               <div style={{display: showEditTime ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
                                                 <div onClick={changeTimePlus}>
                                                   &#9650;
@@ -316,7 +378,7 @@ const DistributionWPlaner = () => {
                                         <CTableDataCell className="text-center" style={{width: '50px'}} >
                                           <div style={{display: 'flex', alignItems: 'center'}}>
                                             <div onClick={()=>clickShowEditTime('06:00')} >{time}</div>
-                                            <div style={{display: showEditTime ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                            <div style={{display: showEditTime[0] ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
                                               <div onClick={changeTimePlus}>
                                                 &#9650;
                                               </div>

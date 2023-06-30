@@ -31,7 +31,7 @@ import { useNavigate } from 'react-router-dom';
 import { newDistribution, getDistributions } from '../http/adminAPI';
 import { newMessage, uploadFile } from '../http/chatAPI';
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
-import phone_image from './../assets/images/phone.png';
+import phone_image from './../assets/images/phone2.png';
 import poster from './../assets/images/poster.jpg';
 
 const DistributionAdd = () => {
@@ -197,6 +197,7 @@ const DistributionAdd = () => {
     setValue(e.target.value)
   }
 
+
   {/* Показать Добавление текста кнопки */}
   const clickShowEditButton = (e) => {
     e.preventDefault();
@@ -233,12 +234,10 @@ const DistributionAdd = () => {
   //название проекта или номер проекта
   const onChangeProjectName = () => {
     setShowNameProject(true)
-    //showNameProject ? setShowNameProject(false) : setShowNameProject (true)
    }
 
   const onChangeProjectNumber = () => {
     setShowNameProject(false)
-    //showNameProject ? setShowNameProject(false) : setShowNameProject (true)  
   }
 
   const onChangeTextButton = (e) => {
@@ -389,7 +388,7 @@ const DistributionAdd = () => {
     setVisible(true)
     setValue('')
 
-    navigate('/distribution');
+    navigate('/distributionw');
   }
 
   return (
@@ -419,18 +418,8 @@ const DistributionAdd = () => {
 
                                       <p style={{color: '#f3f3f3'}}>Проект:</p>
 
-                                      <CRow className="mb-3">
-                                        <CCol sm={6} > 
-                                          <CFormCheck 
-                                            type="radio"
-                                            id="flexRadioDefault1" 
-                                            name="flexRadioDefault"
-                                            label="Название"
-                                            checked={showNameProject}
-                                            onChange={onChangeProjectName}
-                                          />
-                                        </CCol>
-                                        <CCol sm={6} style={{display: 'flex', justifyContent: 'flex-end'}}> 
+                                      <CRow className="mb-3"> 
+                                        <CCol sm={6}> 
                                           <CFormCheck 
                                             type="radio"
                                             id="flexRadioDefault2" 
@@ -438,6 +427,16 @@ const DistributionAdd = () => {
                                             label="Номер"
                                             checked={!showNameProject}
                                             onChange={onChangeProjectNumber}
+                                          />
+                                        </CCol>
+                                        <CCol sm={6} style={{display: 'flex', justifyContent: 'flex-end'}}> 
+                                          <CFormCheck 
+                                            type="radio"
+                                            id="flexRadioDefault1" 
+                                            name="flexRadioDefault"
+                                            label="Название"
+                                            checked={showNameProject}
+                                            onChange={onChangeProjectName}
                                           />
                                         </CCol>
                                       </CRow>
