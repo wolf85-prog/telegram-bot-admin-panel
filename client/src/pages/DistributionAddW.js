@@ -781,7 +781,7 @@ const DistributionAddW = () => {
                                 <div className="mb-3" style={{position: 'absolute', bottom: 0, display: 'flex', width: '97%', justifyContent: 'space-between'}}>
                                 {/* <div><Link to={'/distributionw_planer/'} state={{ project: proj}}><CButton color="secondary">Запланировать</CButton></Link></div> */}
                                   <div>{proj ? 
-                                    <Link to={'/distributionw_planer/'}><CButton color="secondary">Запланировать</CButton></Link>
+                                    <Link to={'/distributionw_planer/'} state={{ project: proj}}><CButton color="secondary">Запланировать</CButton></Link>
                                     :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>}
                                   </div>
                                   <div><CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton>  </div>

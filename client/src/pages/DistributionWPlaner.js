@@ -25,7 +25,6 @@ import { delDistribution } from 'src/http/adminAPI';
 
 const DistributionWPlaner = () => {
   const location = useLocation()
-  const { distributionsWork: messages } = useUsersContext();
   const [distributionsWork, setDistributionsWork]= useState([]);
   const [loading, setLoading]= useState(true);
 
@@ -90,50 +89,6 @@ const DistributionWPlaner = () => {
 
   let arr = []
   let arr2 = []
-
-  //get Distribution
-  useEffect(() => {
-    const fetchData = async () => {
-			//let response = await getDistributions();
-      console.log("distributionsW: ", messages)
-
-      let strReceivers = ''
-
-      const arrDitributions = []
-      messages.map((distrib, index) => {
-        JSON.parse(distrib.receivers).map((receiver)=>{
-          strReceivers = receiver.label + ' '
-        })
-
-        const d = new Date(distrib.createdAt);
-				const year = d.getFullYear();
-				const month = String(d.getMonth()+1).padStart(2, "0");
-				const day = String(d.getDate()).padStart(2, "0");
-				const chas = d.getHours();
-				const minut = String(d.getMinutes()).padStart(2, "0");
-				const newDateMessage = `${day}.${month}.${year} ${chas}:${minut}`
-
-        const newDistribution = {
-          id: distrib.id,
-					name: distrib.name,
-          text: distrib.text,
-          image: distrib.image.split('5000/')[1] !=='' ? distrib.image: '',
-          button: distrib.button,
-          receivers: strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
-          datestart: newDateMessage,
-          status: distrib.delivered ? "отправлено" : "не отправлено",
-				}
-        //console.log(index)
-        arrDitributions.push(newDistribution)
-      })
-
-      setDistributionsWork(arrDitributions) 
-      setLoading(false)
-    }
-
-    fetchData();
-    
-  },[messages])
 
   {/* Удаление рассылки */}
   const removeDescription = async(desk) => {
@@ -435,10 +390,7 @@ const DistributionWPlaner = () => {
                           <CCard className="mb-4">
                             <CCardHeader>График рассылок</CCardHeader>
                             <CCardBody>
-                            <br /> 
-                            {loading ? 
-                                  
-                              <CSpinner/> :
+                            <br />
 
                               <CRow>
                                 <CCol xs>
@@ -551,7 +503,6 @@ const DistributionWPlaner = () => {
                                   </div>
                                 </CCol>
                               </CRow>
-                            }   
 
                             <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '15px'}}>
                               <div style={{marginRight: '16px'}}><Link to={'/distributionw_add'}><CButton color="secondary" style={{width: '130px'}}>Назад</CButton></Link></div>
