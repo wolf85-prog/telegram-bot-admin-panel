@@ -1,5 +1,5 @@
 import React, { Suspense, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { 
   CContainer, 
   CSpinner, 
@@ -24,45 +24,34 @@ import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { delDistribution } from 'src/http/adminAPI';
 
 const DistributionWPlaner = () => {
+  const location = useLocation()
   const { distributionsWork: messages } = useUsersContext();
   const [distributionsWork, setDistributionsWork]= useState([]);
   const [loading, setLoading]= useState(true);
 
   const [showEditTime, setShowEditTime] = useState(false)
-
-  const [showEditTime2, setShowEditTime2] = useState(false)
-  const [showEditTime3, setShowEditTime3] = useState(false)
-  const [showEditTime4, setShowEditTime4] = useState(false)
-  const [showEditTime5, setShowEditTime5] = useState(false)
-  const [showEditTime6, setShowEditTime6] = useState(false)
-  const [showEditTime7, setShowEditTime7] = useState(false)
-
   const [time, setTime] = useState('06:00')
-  const [time2, setTime2] = useState('07:00')
-  const [time3, setTime3] = useState('08:00')
-  const [time4, setTime4] = useState('09:00')
-  const [time5, setTime5] = useState('10:00')
-  const [time6, setTime6] = useState('11:00')
-  const [time7, setTime7] = useState('12:00')
-
-  const [dates, setDates] = useState([
-    {date: '28.06', time: '06:00', proj: ''},
-    {date: '28.06', time: '07:00', proj: ''},
-    {date: '28.06', time: '08:00', proj: ''},
-    {date: '28.06', time: '09:00', proj: ''},
-    {date: '28.06', time: '10:00', proj: ''},
-    {date: '28.06', time: '11:00', proj: ''},
-    {date: '28.06', time: '12:00', proj: ''}
-  ])
 
   const [countCol, setCountCol] = useState(7)
-  const [countClick1, setCountClick1] = useState(0)
-  const [countClick2, setCountClick2] = useState(0)
-  const [countClick3, setCountClick3] = useState(0)
-  const [countClick4, setCountClick4] = useState(0)
-  const [countClick5, setCountClick5] = useState(0)
-  const [countClick6, setCountClick6] = useState(0)
-  const [countClick7, setCountClick7] = useState(0)
+  const [countCol2, setCountCol2] = useState(7)
+
+  //table1
+  const [countClick11, setCountClick11] = useState(0)
+  const [countClick21, setCountClick21] = useState(0)
+  const [countClick31, setCountClick31] = useState(0)
+  const [countClick41, setCountClick41] = useState(0)
+  const [countClick51, setCountClick51] = useState(0)
+  const [countClick61, setCountClick61] = useState(0)
+  const [countClick71, setCountClick71] = useState(0)
+
+  //table2
+  const [countClick12, setCountClick12] = useState(0)
+  const [countClick22, setCountClick22] = useState(0)
+  const [countClick32, setCountClick32] = useState(0)
+  const [countClick42, setCountClick42] = useState(0)
+  const [countClick52, setCountClick52] = useState(0)
+  const [countClick62, setCountClick62] = useState(0)
+  const [countClick72, setCountClick72] = useState(0)
 
   const d = new Date();
   const month = String(d.getMonth()+1).padStart(2, "0");
@@ -74,8 +63,35 @@ const DistributionWPlaner = () => {
 	const day2 = String(d.getDate()).padStart(2, "0");
   const date_str2 = `${day2}.${month2}`;
 
-  let arr = []
 
+  const [dates, setDates] = useState([
+    {date: date_str, time: '06:00', proj: '', save: false},
+    {date: date_str, time: '07:00', proj: '', save: false},
+    {date: date_str, time: '08:00', proj: 'Проект 3', save: true},
+    {date: date_str, time: '09:00', proj: '', save: false},
+    {date: date_str, time: '10:00', proj: '', save: false},
+    {date: date_str, time: '11:00', proj: '', save: false},
+    {date: date_str, time: '12:00', proj: '', save: false}
+  ])
+
+  const [dates2, setDates2] = useState([
+    {date: date_str2, time: '06:00', proj: '', save: false},
+    {date: date_str2, time: '07:00', proj: '', save: false},
+    {date: date_str2, time: '08:00', proj: '', save: false},
+    {date: date_str2, time: '09:00', proj: '', save: false},
+    {date: date_str2, time: '10:00', proj: '', save: false},
+    {date: date_str2, time: '11:00', proj: '', save: false},
+    {date: date_str2, time: '12:00', proj: '', save: false}
+  ])
+
+
+  const [projectView, setProjectView] = useState(false)
+  const [value1, setValue1] = useState([false, false, false, false, false, false, false])
+
+  let arr = []
+  let arr2 = []
+
+  let value = [false, false, false, false, false, false, false]
 
   //get Distribution
   useEffect(() => {
@@ -128,131 +144,258 @@ const DistributionWPlaner = () => {
     await delDistribution(desk.id)
   }
 
+//поставить галочку Статус
+  const changeStatus = (ind) => {
+    if (value1[ind]) {
+      value1[ind] = false
+      dates[ind].proj = ''
+    } else {
+      value1[ind] = true
+      dates[ind].proj = location.state.project
+    } 
+
+    setValue1(value1)
+
+    projectView ? setProjectView(false) : setProjectView(true)
+  }
+
+  // ---------------------------------------------------------------------
 
   {/* Показать Добавление времени */}
-  const clickShowEditTime = (t, ind) => {
-    console.log(t)
+  const clickShowEditTime = (t, ind, tab) => {
 
     if (t === '06:00')  {
-      setCountClick1(countClick1+1)
-      console.log("countClick1: ", countClick1+1)
-      if (countClick1 < 1) {
-        setCountCol(countCol+1)
-        arr = dates.slice(0);
-        const newObj = {
-              date: date_str,
-              time: '06:30',
-              proj: ''
-            }
-        arr.splice(ind+1, 0, newObj);
-        setDates(arr)
+      if (tab === 1) {
+        setCountClick11(countClick11+1)
+        if (countClick11 < 1) {
+          setCountCol(countCol+1)
+          arr = dates.slice(0);
+          const newObj = {
+                date: date_str,
+                time: '06:30',
+                proj: ''
+              }
+          arr.splice(ind+1, 0, newObj);
+          setDates(arr)
+        }
       }
+
+      if (tab === 2) {
+        setCountClick12(countClick12+1)
+        if (countClick12 < 1) {
+          setCountCol2(countCol2+1)
+          arr2 = dates2.slice(0);
+          const newObj = {
+                date: date_str2,
+                time: '06:30',
+                proj: ''
+              }
+          arr2.splice(ind+1, 0, newObj);
+          setDates2(arr2)
+        }
+      }
+
     }
 
-    if (t === '06:30')  {
-      showEditTime ? setShowEditTime(false) : setShowEditTime(true) 
-    }
+    // if (t === '06:30')  {
+    //   showEditTime ? setShowEditTime(false) : setShowEditTime(true) 
+    // }
 
     if (t === '07:00')  {
-      setCountClick2(countClick2+1)
-      console.log("countClick2: ", countClick2+1)
-      if (countClick2 < 1) {
-        setCountCol(countCol+1)
-        arr = dates.slice(0);
-        const newObj = {
-              date: date_str,
-              time: '07:30',
-              proj: ''
-            }
-        arr.splice(ind+1, 0, newObj);
-        setDates(arr)
+      if (tab === 1) {
+        setCountClick21(countClick21+1)
+        if (countClick21 < 1) {
+          setCountCol(countCol+1)
+          arr = dates.slice(0);
+          const newObj = {
+                date: date_str,
+                time: '07:30',
+                proj: ''
+              }
+          arr.splice(ind+1, 0, newObj);
+          setDates(arr)
+        }
+      }
+
+      if (tab === 2) {
+        setCountClick22(countClick22+1)
+        if (countClick22 < 1) {
+          setCountCol2(countCol2+1)
+          arr2 = dates2.slice(0);
+          const newObj = {
+                date: date_str2,
+                time: '07:30',
+                proj: ''
+              }
+          arr2.splice(ind+1, 0, newObj);
+          setDates2(arr2)
+        }
       }
     }
 
+
     if (t === '08:00')  {
-      setCountClick3(countClick3+1)
-      //console.log("countClick2: ", countClick2+1)
-      if (countClick3 < 1) {
-        setCountCol(countCol+1)
-        arr = dates.slice(0);
-        const newObj = {
-              date: date_str,
-              time: '08:30',
-              proj: ''
-            }
-        arr.splice(ind+1, 0, newObj);
-        setDates(arr)
+      if (tab === 1) {
+        setCountClick31(countClick31+1)
+        if (countClick31 < 1) {
+          setCountCol(countCol+1)
+          arr = dates.slice(0);
+          const newObj = {
+                date: date_str,
+                time: '08:30',
+                proj: ''
+              }
+          arr.splice(ind+1, 0, newObj);
+          setDates(arr)
+        }
+      }
+
+      if (tab === 2) {
+        setCountClick32(countClick32+1)
+        if (countClick32 < 1) {
+          setCountCol2(countCol2+1)
+          arr2 = dates2.slice(0);
+          const newObj = {
+                date: date_str2,
+                time: '08:30',
+                proj: ''
+              }
+          arr2.splice(ind+1, 0, newObj);
+          setDates2(arr2)
+        }
       }
     }
 
     if (t === '09:00')  {
-      setCountClick4(countClick4+1)
-      //console.log("countClick2: ", countClick2+1)
-      if (countClick4 < 1) {
-        setCountCol(countCol+1)
-        arr = dates.slice(0);
-        const newObj = {
-              date: date_str,
-              time: '09:30',
-              proj: ''
-            }
-        arr.splice(ind+1, 0, newObj);
-        setDates(arr)
+      if (tab === 1) {
+        setCountClick41(countClick41+1)
+        if (countClick41 < 1) {
+          setCountCol(countCol+1)
+          arr = dates.slice(0);
+          const newObj = {
+                date: date_str,
+                time: '09:30',
+                proj: ''
+              }
+          arr.splice(ind+1, 0, newObj);
+          setDates(arr)
+        }
+      }
+
+      if (tab === 2) {
+        setCountClick42(countClick42+1)
+        if (countClick42 < 1) {
+          setCountCol2(countCol2+1)
+          arr2 = dates2.slice(0);
+          const newObj = {
+                date: date_str2,
+                time: '09:30',
+                proj: ''
+              }
+          arr2.splice(ind+1, 0, newObj);
+          setDates2(arr2)
+        }
       }
     }
 
     if (t === '10:00')  {
-      setCountClick5(countClick5+1)
-      //console.log("countClick2: ", countClick2+1)
-      if (countClick5 < 1) {
-        setCountCol(countCol+1)
-        arr = dates.slice(0);
-        const newObj = {
-              date: date_str,
-              time: '10:30',
-              proj: ''
-            }
-        arr.splice(ind+1, 0, newObj);
-        setDates(arr)
+      if (tab === 1) {
+        setCountClick51(countClick51+1)
+        if (countClick51 < 1) {
+          setCountCol(countCol+1)
+          arr = dates.slice(0);
+          const newObj = {
+                date: date_str,
+                time: '10:30',
+                proj: ''
+              }
+          arr.splice(ind+1, 0, newObj);
+          setDates(arr)
+        }
+      }
+
+      if (tab === 2) {
+        setCountClick52(countClick52+1)
+        if (countClick52 < 1) {
+          setCountCol2(countCol2+1)
+          arr2 = dates2.slice(0);
+          const newObj = {
+                date: date_str2,
+                time: '10:30',
+                proj: ''
+              }
+          arr2.splice(ind+1, 0, newObj);
+          setDates2(arr2)
+        }
       }
     }
 
     if (t === '11:00')  {
-      setCountClick6(countClick6+1)
-      //console.log("countClick2: ", countClick2+1)
-      if (countClick6 < 1) {
-        setCountCol(countCol+1)
-        arr = dates.slice(0);
-        const newObj = {
-              date: date_str,
-              time: '11:30',
-              proj: ''
-            }
-        arr.splice(ind+1, 0, newObj);
-        setDates(arr)
+      if (tab === 1) {
+        setCountClick61(countClick61+1)
+        if (countClick61 < 1) {
+          setCountCol(countCol+1)
+          arr = dates.slice(0);
+          const newObj = {
+                date: date_str,
+                time: '11:30',
+                proj: ''
+              }
+          arr.splice(ind+1, 0, newObj);
+          setDates(arr)
+        }
+      }
+
+      if (tab === 2) {
+        setCountClick62(countClick62+1)
+        if (countClick62 < 1) {
+          setCountCol2(countCol2+1)
+          arr2 = dates2.slice(0);
+          const newObj = {
+                date: date_str2,
+                time: '11:30',
+                proj: ''
+              }
+          arr2.splice(ind+1, 0, newObj);
+          setDates2(arr2)
+        }
       }
     }
 
     if (t === '12:00')  {
-      setCountClick7(countClick7+1)
-      //console.log("countClick2: ", countClick2+1)
-      if (countClick7 < 1) {
-        setCountCol(countCol+1)
-        arr = dates.slice(0);
-        const newObj = {
-              date: date_str,
-              time: '12:30',
-              proj: ''
-            }
-        arr.splice(ind+1, 0, newObj);
-        setDates(arr)
+      if (tab === 1) {
+        setCountClick71(countClick71+1)
+        if (countClick71 < 1) {
+          setCountCol(countCol+1)
+          arr = dates.slice(0);
+          const newObj = {
+                date: date_str,
+                time: '12:30',
+                proj: ''
+              }
+          arr.splice(ind+1, 0, newObj);
+          setDates(arr)
+        }
       }
+
+      if (tab === 2) {
+        setCountClick72(countClick72+1)
+        if (countClick72 < 1) {
+          setCountCol2(countCol2+1)
+          arr2 = dates2.slice(0);
+          const newObj = {
+                date: date_str2,
+                time: '12:30',
+                proj: ''
+              }
+          arr2.splice(ind+1, 0, newObj);
+          setDates2(arr2)
+        }
+      }
+      
     }
 
-    
-    
-    
-    
+
     
     //   showEditTime ? setShowEditTime (false) : setShowEditTime (true)  
   
@@ -274,6 +417,7 @@ const DistributionWPlaner = () => {
     if (time === '06:40') setTime('06:30')
     if (time === '06:50') setTime('06:40')
   }
+
 
 
   return (
@@ -302,21 +446,20 @@ const DistributionWPlaner = () => {
                                 <CCol xs>
                                     
                                 <div style={{float: "left", display: 'flex'}}>
-                                  <CTable align="middle" className="mb-0 border" hover responsive bordered style={{float: 'left'}}>
-                                    
+                                  <CTable align="middle" className="mb-0 border" hover responsive bordered style={{float: 'left'}}>   
                                     <CTableHead className='table-dark' >
-                                        <CTableRow>
-                                          <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
-                                        </CTableRow>
-                                      </CTableHead>
-                                      <CTableBody>
-                                        <CTableRow v-for="item in tableItems">
-                                          <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol}px`}} >
-                                            <div>{date_str}</div> 
-                                          </CTableDataCell>
-                                        </CTableRow>
-                                      </CTableBody>
-                                    </CTable>
+                                      <CTableRow>
+                                        <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
+                                      </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                      <CTableRow v-for="item in tableItems">
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol}px`}} >
+                                          <div>{date_str}</div> 
+                                        </CTableDataCell>
+                                      </CTableRow>
+                                    </CTableBody>
+                                  </CTable>
 
                                   <CTable align="middle" className="mb-0 border" hover responsive bordered>
                                     <CTableHead className='table-dark' >
@@ -329,28 +472,30 @@ const DistributionWPlaner = () => {
                                     </CTableHead>
                                     <CTableBody>
                                     {dates.map((item, index) => (
-                                        <CTableRow v-for="item in tableItems" key={index}>
-                                          {/* <CTableDataCell className="text-center" style={{width: '50px'}} >
-                                            <div>{item.date}</div> 
-                                          </CTableDataCell> */}     
+                                        <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
-                                            <div style={{display: 'flex', alignItems: 'center'}}>
-                                              <div onClick={()=>clickShowEditTime(`${item.time}`, index)} >{item.time}</div>
-                                              <div style={{display: showEditTime ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                            <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
+                                              <div onClick={()=>clickShowEditTime(`${item.time}`, index, 1)} >{item.time}</div>
+                                              {/* <div style={{display: showEditTime ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
                                                 <div onClick={changeTimePlus}>
                                                   &#9650;
                                                 </div>
                                                 <div onClick={changeTimeMinus}>          	
                                                   &#9660;
                                                 </div>
-                                              </div>   
+                                              </div>    */}
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '400px'}}>
-                                            <div>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none"}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                            <CFormCheck id="flexCheckDefault"/>
+                                            <CFormCheck 
+                                              id="rowCheckTab1"
+                                              checked={value1[index]}
+                                              onChange={()=>changeStatus(index)}
+                                              disabled={item.save ? 'disabled': ''}
+                                            />
                                           </CTableDataCell>
                                         </CTableRow>
                                     ))}
@@ -358,177 +503,54 @@ const DistributionWPlaner = () => {
                                   </CTable>
                                   </div>
                                 </CCol>
-
+{/* ---------------------------------------------------------------------------------------------------------------- */}
                                 <CCol xs>
-                                  <CTable align="middle" className="mb-0 border" hover responsive bordered>
-                                  <CTableHead className='table-dark'>
-                                    <CTableRow>
-                                      {/* <CTableHeaderCell>№</CTableHeaderCell> */}
-                                      <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center">Проект</CTableHeaderCell>   
-                                      <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
-                                    </CTableRow>
-                                  </CTableHead>
-                                  <CTableBody>
-                                      <CTableRow v-for="item in tableItems" >
-                                        <CTableDataCell className="text-center" style={{width: '50px'}} rowSpan={9}>
-                                          <div>{date_str2}</div>
-                                        </CTableDataCell>      
-                                        <CTableDataCell className="text-center" style={{width: '50px'}} >
-                                          <div style={{display: 'flex', alignItems: 'center'}}>
-                                            <div onClick={()=>clickShowEditTime('06:00')} >{time}</div>
-                                            <div style={{display: showEditTime[0] ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
-                                              <div onClick={changeTimePlus}>
-                                                &#9650;
-                                              </div>
-                                              <div onClick={changeTimeMinus}>          	
-                                                &#9660;
-                                              </div>
-                                            </div>   
-                                          </div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <div></div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <CFormCheck id="flexCheckDefault"/>
+                                <div style={{float: "left", display: 'flex'}}>
+                                  <CTable align="middle" className="mb-0 border" hover responsive bordered style={{float: 'left'}}>   
+                                    <CTableHead className='table-dark' >
+                                      <CTableRow>
+                                        <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
+                                      </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                      <CTableRow v-for="item in tableItems">
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol2}px`}} >
+                                          <div>{date_str2}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
-
-                                      <CTableRow v-for="item in tableItems" >
-                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div style={{display: 'flex', alignItems: 'center'}}>
-                                            <div onClick={()=>clickShowEditTime('07:00')} >{time2}</div>
-                                            <div style={{display: showEditTime2 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
-                                              <div onClick={changeTimePlus}>
-                                                &#9650;
-                                              </div>
-                                              <div onClick={changeTimeMinus}>          	
-                                                &#9660;
-                                              </div>
-                                            </div>   
-                                          </div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <div></div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <CFormCheck id="flexCheckDefault"/>
-                                        </CTableDataCell>
-                                      </CTableRow> 
-
-                                      <CTableRow v-for="item in tableItems" >
-                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div style={{display: 'flex', alignItems: 'center'}}>
-                                            <div onClick={()=>clickShowEditTime('08:00')} >{time3}</div>
-                                            <div style={{display: showEditTime3 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
-                                              <div onClick={changeTimePlus}>
-                                                &#9650;
-                                              </div>
-                                              <div onClick={changeTimeMinus}>          	
-                                                &#9660;
-                                              </div>
-                                            </div>   
-                                          </div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <div></div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <CFormCheck id="flexCheckDefault"/>
-                                        </CTableDataCell>
-                                      </CTableRow> 
-
-                                      <CTableRow v-for="item in tableItems" >
-                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div style={{display: 'flex', alignItems: 'center'}}>
-                                            <div onClick={()=>clickShowEditTime('09:00')} >{time4}</div>
-                                            <div style={{display: showEditTime4 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
-                                              <div onClick={changeTimePlus}>
-                                                &#9650;
-                                              </div>
-                                              <div onClick={changeTimeMinus}>          	
-                                                &#9660;
-                                              </div>
-                                            </div>   
-                                          </div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <div></div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <CFormCheck id="flexCheckDefault"/>
-                                        </CTableDataCell>
-                                      </CTableRow> 
-
-                                      <CTableRow v-for="item in tableItems" >
-                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div style={{display: 'flex', alignItems: 'center'}}>
-                                            <div onClick={()=>clickShowEditTime('10:00')} >{time5}</div>
-                                            <div style={{display: showEditTime5 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
-                                              <div onClick={changeTimePlus}>
-                                                &#9650;
-                                              </div>
-                                              <div onClick={changeTimeMinus}>          	
-                                                &#9660;
-                                              </div>
-                                            </div>   
-                                          </div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <div></div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <CFormCheck id="flexCheckDefault"/>
-                                        </CTableDataCell>
-                                      </CTableRow> 
-
-                                      <CTableRow v-for="item in tableItems" >
-                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div style={{display: 'flex', alignItems: 'center'}}>
-                                            <div onClick={()=>clickShowEditTime('11:00')} >{time6}</div>
-                                            <div style={{display: showEditTime6 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
-                                              <div onClick={changeTimePlus}>
-                                                &#9650;
-                                              </div>
-                                              <div onClick={changeTimeMinus}>          	
-                                                &#9660;
-                                              </div>
-                                            </div>   
-                                          </div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <div></div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <CFormCheck id="flexCheckDefault"/>
-                                        </CTableDataCell>
-                                      </CTableRow> 
-
-                                      <CTableRow v-for="item in tableItems" >
-                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div style={{display: 'flex', alignItems: 'center'}}>
-                                            <div onClick={()=>clickShowEditTime('12:00')} >{time7}</div>
-                                            <div style={{display: showEditTime7 ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
-                                              <div onClick={changeTimePlus}>
-                                                &#9650;
-                                              </div>
-                                              <div onClick={changeTimeMinus}>          	
-                                                &#9660;
-                                              </div>
-                                            </div>   
-                                          </div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <div></div>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          <CFormCheck id="flexCheckDefault"/>
-                                        </CTableDataCell>
-                                      </CTableRow> 
                                     </CTableBody>
                                   </CTable>
+
+                                  <CTable align="middle" className="mb-0 border" hover responsive bordered>
+                                    <CTableHead className='table-dark' >
+                                      <CTableRow>
+                                        {/* <CTableHeaderCell className="text-center">Дата</CTableHeaderCell> */}
+                                        <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Проект</CTableHeaderCell>   
+                                        <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
+                                      </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                    {dates2.map((item, index) => (
+                                        <CTableRow v-for="item in tableItems" key={index}>   
+                                          <CTableDataCell className="text-center" style={{width: '50px'}} >
+                                            <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
+                                              <div onClick={()=>clickShowEditTime(`${item.time}`, index, 2)} >{item.time}</div>
+                                            </div>
+                                          </CTableDataCell>
+                                          <CTableDataCell style={{width: '400px'}}>
+                                            <div>{item.proj}</div>
+                                          </CTableDataCell>
+                                          <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                            <CFormCheck 
+                                              id="rowCheckTab2"
+                                            />
+                                          </CTableDataCell>
+                                        </CTableRow>
+                                    ))}
+                                    </CTableBody>
+                                  </CTable>
+                                  </div>
                                 </CCol>
                               </CRow>
                             }   

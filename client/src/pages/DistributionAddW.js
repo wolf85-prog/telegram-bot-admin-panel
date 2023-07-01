@@ -34,7 +34,7 @@ import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 import phone_image from './../assets/images/phone2.png';
 import poster from './../assets/images/poster.jpg';
 
-const DistributionAdd = () => {
+const DistributionAddW = () => {
 
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 	const host = process.env.REACT_APP_API_URL
@@ -66,6 +66,8 @@ const DistributionAdd = () => {
   const [showCategories3, setShowCategories3] = useState(false);
   const [showCategories4, setShowCategories4] = useState(false);
 
+  const [proj, setProj] = useState('');
+
   const audio = new Audio(sendSound);
 
   const navigate = useNavigate();
@@ -73,6 +75,8 @@ const DistributionAdd = () => {
   const backPage = () => {
        navigate('/distributionw');
   } 
+
+  //let proj
 
   const categories = [
     'Выбрать...',
@@ -238,6 +242,15 @@ const DistributionAdd = () => {
 
   const onChangeProjectNumber = () => {
     setShowNameProject(false)
+  }
+
+  const onChangeSelectProject = (e) => {
+    e.preventDefault();
+    if (e.target.value === '1') setProj('Проект 1')
+    if (e.target.value === '2') setProj('Проект 2')
+    if (e.target.value === '3') setProj('Проект 3')
+
+   // console.log(proj)
   }
 
   const onChangeTextButton = (e) => {
@@ -444,6 +457,7 @@ const DistributionAdd = () => {
                                       <CFormSelect 
                                         aria-label="Default select example"
                                         style={{display: showNameProject ? "block" : "none" }}
+                                        onChange={onChangeSelectProject}
                                         options={[
                                           'Выбрать...',
                                           {
@@ -765,7 +779,10 @@ const DistributionAdd = () => {
                                 <br/>
 
                                 <div className="mb-3" style={{position: 'absolute', bottom: 0, display: 'flex', width: '97%', justifyContent: 'space-between'}}>
-                                  <div><Link to={'/distributionw_planer'}><CButton color="secondary">Запланировать</CButton></Link></div>
+                                  <div>{proj ? 
+                                    <Link to={'/distributionw_planer/'} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>
+                                    :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>}
+                                  </div>
                                   <div><CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton>  </div>
                                 </div>
                               </CForm>
@@ -785,4 +802,4 @@ const DistributionAdd = () => {
   )
 }
 
-export default DistributionAdd
+export default DistributionAddW
