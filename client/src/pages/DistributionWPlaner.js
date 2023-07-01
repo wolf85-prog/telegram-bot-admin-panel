@@ -91,8 +91,6 @@ const DistributionWPlaner = () => {
   let arr = []
   let arr2 = []
 
-  let value = [false, false, false, false, false, false, false]
-
   //get Distribution
   useEffect(() => {
     const fetchData = async () => {
