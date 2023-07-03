@@ -14,22 +14,17 @@ import {
   CButton,
   CAlert,
   CFormCheck,
-  CDropdown,
-  CDropdownToggle,
-  CDropdownMenu,
-  CDropdownDivider,
-  CDropdownItem,
   CFormSelect
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react';
 import { cilX } from '@coreui/icons';
 
-import { MultiSelect } from "react-multi-select-component";
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { $host } from '../http/index'
 import { useNavigate } from 'react-router-dom';
-import { newDistribution, getDistributions } from '../http/adminAPI';
+import { newDistribution, getDistributions, getProjects, getProjects2 } from '../http/adminAPI';
 import { newMessage, uploadFile } from '../http/chatAPI';
+
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 import phone_image from './../assets/images/phone2.png';
 import poster from './../assets/images/poster.jpg';
@@ -43,7 +38,9 @@ const DistributionAddW = () => {
   const { users: clients } = useUsersContext();
   const { addNewMessage, setDistributions } = useUsersContext();
   const [contacts, setContacts]= useState([]);
-  const [projects, setProjects]= useState([]);
+  const [projects, setProjects]= useState([]); 
+  const [contacts2, setContacts2]= useState([]);
+  const [projects2, setProjects2]= useState([]);
 
   const [selected, setSelected] = useState([]);
   const [text, setText] = useState('');
@@ -143,32 +140,60 @@ const DistributionAddW = () => {
     // setContacts(arrClients)      
   }, []);
 
-
-  //проекты
   useEffect(() => {
-    // const arrProjects = []
-    // projects_name.map((project) => {
-    //   const newObj = {
-    //     label: project.name, 
-    //     value: project.chatId,
-    //   }
-    //   arrProjects.push(newObj)
-    // })
-    // setProjects(arrProjects)      
+    const fetchData = async () => {
+
+      let projects = await getProjects2();
+      console.log("projects planer size: ", projects.length)
+
+      //let projects2 = await getProjects2();
+      //console.log("projects2 planer size: ", projects2.length)
+
+      setProjects(projects)
+      //setProjects2(projects2)
+    }
+      fetchData();
+  },[])
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+
+  //     let projects2 = await getProjects2();
+  //     console.log("projects2 planer size: ", projects2.length)
+
+  //     setProjects2(projects2)
+  //   }
+  //     fetchData();
+  // },[])
+
+
+   //проекты
+   useEffect(() => {
+    const arrProjects = []
+    console.log("project W: ", projects)
+    projects.map((project) => {
+      const newObj = {
+        label: project.properties.Name.title[0]?.plain_text, 
+        value: project.id,
+      }
+      arrProjects.push(newObj)
+    })
+    setContacts(arrProjects)      
   }, []);
 
-  //проекты 2
+  //проекты2
   // useEffect(() => {
   //   const arrProjects = []
-  //   projects_number.map((project) => {
+  //   console.log("project W2: ", projects2)
+  //   projects2.map((project) => {
   //     const newObj = {
-  //       label: project.name, 
-  //       value: project.chatId,
+  //       label: project.properties.Crm_ID.rich_text[0]?.plain_text, 
+  //       value: project.id,
   //     }
   //     arrProjects.push(newObj)
   //   })
-  //   setProjects(arrProjects)      
-  // }, [projects_number]);
+  //   setContacts2(arrProjects)      
+  // }, []);
 
   const onChangeText = (e) => {
     setText(e.target.value)
@@ -458,27 +483,29 @@ const DistributionAddW = () => {
                                         aria-label="Default select example"
                                         style={{display: showNameProject ? "block" : "none" }}
                                         onChange={onChangeSelectProject}
-                                        options={[
-                                          'Выбрать...',
-                                          {
-                                            label: 'Проект 1',
-                                            value: '1',
-                                          },
-                                          {
-                                            label: 'Проект 2',
-                                            value: '2',
-                                          },
-                                          {
-                                            label: 'Проект 3',
-                                            value: '3',
-                                          },
+                                        options={contacts}
+                                        // options={[
+                                        //   'Выбрать...',
+                                        //   {
+                                        //     label: 'Проект 1',
+                                        //     value: '1',
+                                        //   },
+                                        //   {
+                                        //     label: 'Проект 2',
+                                        //     value: '2',
+                                        //   },
+                                        //   {
+                                        //     label: 'Проект 3',
+                                        //     value: '3',
+                                        //   },
 
-                                        ]}
+                                        // ]}
                                       />
 
                                       <CFormSelect 
                                         aria-label="Default select example"
                                         style={{display: !showNameProject ? "block" : "none" }}
+                                      //options={contacts}
                                         options={[
                                           'Выбрать...',
                                           {
@@ -761,17 +788,12 @@ const DistributionAddW = () => {
                                               width: '100%'}}>
                                                 Отклонить
                                             </div>
-                                          </div>
-                                          
-                                        </div>
-                                        
-                                        
+                                          </div>                                         
+                                        </div>                                                                             
                                       </div>
                                       
                                     </CCol>
-
-
-                                  
+         
                                   </CRow>
 
                                 </div>
@@ -781,7 +803,7 @@ const DistributionAddW = () => {
                                 <div className="mb-3" style={{position: 'absolute', bottom: 0, display: 'flex', width: '97%', justifyContent: 'space-between'}}>
                                 {/* <div><Link to={'/distributionw_planer/'} state={{ project: proj}}><CButton color="secondary">Запланировать</CButton></Link></div> */}
                                   <div>{proj ? 
-                                    <Link to={'/distributionw_planer/'} state={{ project: proj}}><CButton color="secondary">Запланировать</CButton></Link>
+                                    <Link to={'/distributionw_planer'} state={{ project: proj}}><CButton color="secondary">Запланировать</CButton></Link>
                                     :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>}
                                   </div>
                                   <div><CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton>  </div>
