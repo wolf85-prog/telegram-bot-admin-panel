@@ -142,13 +142,14 @@ const DistributionAddW = () => {
       setProjects(projects)
     }
       fetchData();
+      
   },[])
 
 
    //проекты
    useEffect(() => {
     const arrProjects = []
-    console.log("project W: ", projects)
+
     projects.map((project) => {
       const newObj = {
         label: project.name, 
@@ -162,7 +163,7 @@ const DistributionAddW = () => {
   //проекты2
   useEffect(() => {
     const arrProjects = []
-    //console.log("project W2: ", projects)
+
     projects.map((project) => {
       const newObj = {
         label: project.crmID,
@@ -173,19 +174,6 @@ const DistributionAddW = () => {
     setContacts2(arrProjects)      
   }, [projects]);
 
-
-  //категории
-  useEffect(() => {
-    // const arrClients = []   
-    // categories.map((category) => {
-    //   const newObj = {
-    //     label: category.name, 
-    //     value: category.chatId,
-    //   }
-    //   arrClients.push(newObj)
-    // })
-    // setContacts(arrClients)      
-  }, []);
 
 
   const onChangeText = (e) => {
@@ -268,6 +256,7 @@ const DistributionAddW = () => {
 
   const onChangeProjectNumber = () => {
     setShowNameProject(false)
+    selected = []
   }
 
 
@@ -555,7 +544,7 @@ const DistributionAddW = () => {
                                       />
 
                                       <br/>
-
+                                      
                                       <CRow>
                                         <CCol sm={10} > 
                                           <CFormLabel htmlFor="exampleFormControlInput1">Категория:</CFormLabel>
@@ -660,9 +649,9 @@ const DistributionAddW = () => {
                                           />
                                         </CCol>
                                       </CRow>
-
+                                      
                                       <p style={{color: '#767676', marginTop: '10px'}}>Получателей: <span>{selected.length}</span></p>  
-
+                                      
                                     </CCol>
 
                                     {/* <CCol sm={1}></CCol> */}
