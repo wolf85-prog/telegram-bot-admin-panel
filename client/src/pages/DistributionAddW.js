@@ -22,7 +22,7 @@ import { cilX, cilCaretBottom, cilCarAlt, cilCaretLeft } from '@coreui/icons';
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { $host } from '../http/index'
 import { useNavigate } from 'react-router-dom';
-import { newDistribution, getDistributions, getProjects3, getBlocks, getDatabaseId } from '../http/adminAPI';
+import { newDistribution, getDistributions, getProjects, getProjects3, getBlocks, getDatabaseId } from '../http/adminAPI';
 import { newMessage, uploadFile } from '../http/chatAPI';
 import specData from './../data/specData';
 
@@ -136,10 +136,12 @@ const DistributionAddW = () => {
   useEffect(() => {
     const fetchData = async () => {
 
-      let projects = await getProjects3();
-      console.log("projects planer size: ", projects)
+      //console.log("projects planer size: ")
 
-      setProjects(projects)
+      let projects = await getProjects();
+      console.log("projects planer: ", projects)
+
+      //setProjects(projects)
     }
       fetchData();
       
