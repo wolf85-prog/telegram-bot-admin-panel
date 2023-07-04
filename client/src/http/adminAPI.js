@@ -30,6 +30,24 @@ export const getProjects2 = async () =>{
     }
 }
 
+export const getProjects3 = async () =>{
+    try {
+       let response = await $host_bot.get('projects2');
+        const responseResults = response.data.results.map((page) => {
+            return {
+                id: page.id,
+                name: page.properties.Name.title[0]?.plain_text,
+                //datestart: page.properties["Наименование"].multi_select[1]?.name,
+                crmID: page.properties.Crm_ID.rich_text[0]?.plain_text               
+            };
+        });
+       //console.log("projects: ", response.data.results);
+       return responseResults;
+    } catch (error) {
+        console.log("error while calling getProjects3 api", error.message);
+    }
+}
+
 export const getProjectsApi = async () =>{
     try {
        let response = await $host.get('api/projects/get');

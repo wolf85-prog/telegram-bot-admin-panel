@@ -22,7 +22,7 @@ import { cilX } from '@coreui/icons';
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { $host } from '../http/index'
 import { useNavigate } from 'react-router-dom';
-import { newDistribution, getDistributions, getProjects, getProjects2 } from '../http/adminAPI';
+import { newDistribution, getDistributions, getProjects, getProjects3 } from '../http/adminAPI';
 import { newMessage, uploadFile } from '../http/chatAPI';
 
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
@@ -143,37 +143,22 @@ const DistributionAddW = () => {
   useEffect(() => {
     const fetchData = async () => {
 
-      let projects = await getProjects2();
-      console.log("projects planer size: ", projects.length)
-
-      //let projects2 = await getProjects2();
-      //console.log("projects2 planer size: ", projects2.length)
+      let projects = await getProjects3();
+      console.log("projects planer size: ", projects)
 
       setProjects(projects)
-      //setProjects2(projects2)
     }
       fetchData();
   },[])
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-
-  //     let projects2 = await getProjects2();
-  //     console.log("projects2 planer size: ", projects2.length)
-
-  //     setProjects2(projects2)
-  //   }
-  //     fetchData();
-  // },[])
 
 
    //проекты
    useEffect(() => {
     const arrProjects = []
-    console.log("project W: ", projects)
+    //console.log("project W: ", projects)
     projects.map((project) => {
       const newObj = {
-        label: project.properties.Name.title[0]?.plain_text, 
+        label: project.name, 
         value: project.id,
       }
       arrProjects.push(newObj)
@@ -182,18 +167,19 @@ const DistributionAddW = () => {
   }, []);
 
   //проекты2
-  // useEffect(() => {
-  //   const arrProjects = []
-  //   console.log("project W2: ", projects2)
-  //   projects2.map((project) => {
-  //     const newObj = {
-  //       label: project.properties.Crm_ID.rich_text[0]?.plain_text, 
-  //       value: project.id,
-  //     }
-  //     arrProjects.push(newObj)
-  //   })
-  //   setContacts2(arrProjects)      
-  // }, []);
+  useEffect(() => {
+    const arrProjects = []
+    //console.log("project W2: ", projects)
+    projects.map((project) => {
+      const newObj = {
+        label: project.crmID,
+        value: project.id,
+      }
+      arrProjects.push(newObj)
+    })
+    setContacts2(arrProjects)      
+  }, []);
+
 
   const onChangeText = (e) => {
     setText(e.target.value)
@@ -484,44 +470,12 @@ const DistributionAddW = () => {
                                         style={{display: showNameProject ? "block" : "none" }}
                                         onChange={onChangeSelectProject}
                                         options={contacts}
-                                        // options={[
-                                        //   'Выбрать...',
-                                        //   {
-                                        //     label: 'Проект 1',
-                                        //     value: '1',
-                                        //   },
-                                        //   {
-                                        //     label: 'Проект 2',
-                                        //     value: '2',
-                                        //   },
-                                        //   {
-                                        //     label: 'Проект 3',
-                                        //     value: '3',
-                                        //   },
-
-                                        // ]}
                                       />
 
                                       <CFormSelect 
                                         aria-label="Default select example"
                                         style={{display: !showNameProject ? "block" : "none" }}
-                                      //options={contacts}
-                                        options={[
-                                          'Выбрать...',
-                                          {
-                                            label: '1',
-                                            value: '1',
-                                          },
-                                          {
-                                            label: '2',
-                                            value: '2',
-                                          },
-                                          {
-                                            label: '3',
-                                            value: '3',
-                                          },
-
-                                        ]}
+                                        options={contacts2}
                                       />
 
                                       <br/>
@@ -601,7 +555,7 @@ const DistributionAddW = () => {
                                     {/* <CCol sm={1}></CCol> */}
 
                                     {/* Правый блок */}
-                                    <CCol sm={5} style={{marginLeft: '50px', marginRight: '30px'}}>
+                                    <CCol sm={5} style={{marginLeft: '30px', marginRight: '30px'}}>
                                         <CFormLabel htmlFor="exampleFormControlInput1">Текст рассылки:</CFormLabel>
                                         <CFormTextarea 
                                           id="exampleFormControlTextarea1" 
