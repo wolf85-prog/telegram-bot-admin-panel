@@ -30,6 +30,7 @@ export const getProjects2 = async () =>{
     }
 }
 
+//api notion
 export const getProjects3 = async () =>{
     try {
        let response = await $host_bot.get('projects2');
@@ -47,6 +48,29 @@ export const getProjects3 = async () =>{
         console.log("error while calling getProjects3 api", error.message);
     }
 }
+
+
+export const getBlocks = async (projectId) =>{
+    try {
+       let response = await $host_bot.get('blocks/' + projectId);
+       //console.log("blockId: ", response);
+       return response;
+    } catch (error) {
+        console.log("error while calling getBlocks api", error.message);
+    }
+}
+
+export const getDatabaseId = async (blockId) =>{
+    try {
+       let response = await $host_bot.get('database/' + blockId);
+       console.log("database: ", response);
+       return response;
+    } catch (error) {
+        console.log("error while calling getDatabase api", error.message);
+    }
+}
+
+
 
 export const getProjectsApi = async () =>{
     try {

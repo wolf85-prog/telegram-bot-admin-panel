@@ -17,17 +17,20 @@ import {
   CFormSelect
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react';
-import { cilX } from '@coreui/icons';
+import { cilX, cilCaretBottom, cilCarAlt, cilCaretLeft } from '@coreui/icons';
 
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { $host } from '../http/index'
 import { useNavigate } from 'react-router-dom';
-import { newDistribution, getDistributions, getProjects, getProjects3 } from '../http/adminAPI';
+import { newDistribution, getDistributions, getProjects3, getBlocks, getDatabaseId } from '../http/adminAPI';
 import { newMessage, uploadFile } from '../http/chatAPI';
+import specData from './../data/specData';
 
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 import phone_image from './../assets/images/phone2.png';
 import poster from './../assets/images/poster.jpg';
+import Loader from 'src/chat-app-new/components/Loader'
+
 
 const DistributionAddW = () => {
 
@@ -58,6 +61,8 @@ const DistributionAddW = () => {
   const [valueSelect2, setValueSelect2] = useState(0)
   const [valueSelect3, setValueSelect3] = useState(0)
   const [valueSelect4, setValueSelect4] = useState(0)
+  const [valueSelect5, setValueSelect5] = useState(0)
+  const [valueSelect6, setValueSelect6] = useState(0)
 
   const [showCategories2, setShowCategories2] = useState(false);
   const [showCategories3, setShowCategories3] = useState(false);
@@ -127,18 +132,6 @@ const DistributionAddW = () => {
     },  
   ]
 
-  //категории
-  useEffect(() => {
-    // const arrClients = []   
-    // categories.map((category) => {
-    //   const newObj = {
-    //     label: category.name, 
-    //     value: category.chatId,
-    //   }
-    //   arrClients.push(newObj)
-    // })
-    // setContacts(arrClients)      
-  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -155,7 +148,7 @@ const DistributionAddW = () => {
    //проекты
    useEffect(() => {
     const arrProjects = []
-    //console.log("project W: ", projects)
+    console.log("project W: ", projects)
     projects.map((project) => {
       const newObj = {
         label: project.name, 
@@ -164,7 +157,7 @@ const DistributionAddW = () => {
       arrProjects.push(newObj)
     })
     setContacts(arrProjects)      
-  }, []);
+  }, [projects]);
 
   //проекты2
   useEffect(() => {
@@ -178,6 +171,20 @@ const DistributionAddW = () => {
       arrProjects.push(newObj)
     })
     setContacts2(arrProjects)      
+  }, [projects]);
+
+
+  //категории
+  useEffect(() => {
+    // const arrClients = []   
+    // categories.map((category) => {
+    //   const newObj = {
+    //     label: category.name, 
+    //     value: category.chatId,
+    //   }
+    //   arrClients.push(newObj)
+    // })
+    // setContacts(arrClients)      
   }, []);
 
 
@@ -246,22 +253,90 @@ const DistributionAddW = () => {
     selected.push(e.target.value)
   }
 
+  const onAddCategory5 = (e) => {
+    e.preventDefault();
+    setValueSelect5(e.target.value)
+    selected.push(e.target.value)
+  }
+
+
+
   //название проекта или номер проекта
   const onChangeProjectName = () => {
     setShowNameProject(true)
-   }
+  }
 
   const onChangeProjectNumber = () => {
     setShowNameProject(false)
   }
 
-  const onChangeSelectProject = (e) => {
-    e.preventDefault();
-    if (e.target.value === '1') setProj('Проект 1')
-    if (e.target.value === '2') setProj('Проект 2')
-    if (e.target.value === '3') setProj('Проект 3')
 
-   // console.log(proj)
+  let arr_count = []
+
+  const onChangeSelectProject = async(e) => {
+    e.preventDefault();
+    // if (e.target.value === '1') setProj('Проект 1')
+    // if (e.target.value === '2') setProj('Проект 2')
+    // if (e.target.value === '3') setProj('Проект 3')
+
+    let count_title;
+    const blockId = await getBlocks(e.target.value); 
+
+    //console.log("blockId: ", blockId.data)
+
+    if (blockId) {
+      const databaseBlock = await getDatabaseId(blockId.data); 
+
+      const categories = [...databaseBlock.data]
+
+      console.log("categories: ", categories)
+
+      specData.map((category)=> {
+          count_title = 0;
+
+        if (databaseBlock.data) {   
+          databaseBlock.data.map((db) => {
+            if (category.name === db.title) {
+              count_title++
+            }
+          })
+          
+          if (count_title !== 0) {
+            const obj = {
+              id: category.id,
+              title: category.icon,
+              count: count_title,
+            }
+            arr_count.push(obj)
+          }
+          
+        }
+      })  
+
+      console.log("arr_count: ", arr_count)
+
+      setValueSelect(arr_count[0].id)
+      selected.push(arr_count[0].count)
+
+      if(arr_count[1]) {
+        setValueSelect2(arr_count[1]?.id)
+        setShowCategories2(true)
+        selected.push(arr_count[1]?.count)
+      }
+
+      if(arr_count[2]) {
+        setValueSelect2(arr_count[2]?.id)
+        setShowCategories3(true)
+        selected.push(arr_count[2]?.count)
+      }
+
+      if(arr_count[3]) {
+        setValueSelect2(arr_count[3].id)
+        setShowCategories4(true)
+        selected.push(arr_count[3].count)
+      }
+      
+    }
   }
 
   const onChangeTextButton = (e) => {
@@ -475,21 +550,35 @@ const DistributionAddW = () => {
                                       <CFormSelect 
                                         aria-label="Default select example"
                                         style={{display: !showNameProject ? "block" : "none" }}
+                                        onChange={onChangeSelectProject}
                                         options={contacts2}
                                       />
 
                                       <br/>
 
-                                      <CFormLabel htmlFor="exampleFormControlInput1">Категория:</CFormLabel>
-                                      <CFormSelect 
-                                        aria-label="Default select example"
-                                        onChange={onAddCategory}
-                                        options={categories}
-                                        value={valueSelect}
-                                      />
+                                      <CRow>
+                                        <CCol sm={10} > 
+                                          <CFormLabel htmlFor="exampleFormControlInput1">Категория:</CFormLabel>
+                                          <CFormSelect 
+                                            aria-label="Default select example"
+                                            onChange={onAddCategory}
+                                            options={categories}
+                                            value={valueSelect}
+                                          /> 
+                                        </CCol> 
+
+                                        <CCol sm={2}> 
+                                          <CIcon 
+                                            icon={cilCaretBottom}
+                                            size="xl" 
+                                            style={{marginTop: '40px'}} 
+                                            onClick={onAddCategory}
+                                          />
+                                        </CCol>
+                                      </CRow>
                                       
                                       <CRow>
-                                        <CCol sm={10} >  
+                                        <CCol sm={8} >  
                                           <CFormSelect 
                                             aria-label="Default select example"
                                             onChange={onAddCategory2}
@@ -506,10 +595,18 @@ const DistributionAddW = () => {
                                             onClick={delCategory2}
                                           />
                                         </CCol>
+                                        <CCol sm={2}> 
+                                          <CIcon 
+                                            icon={cilCaretBottom}
+                                            size="xl" 
+                                            style={{marginTop: '20px', display: showCategories2 ? "block" : "none"}} 
+                                            onClick={onAddCategory2}
+                                          />
+                                        </CCol>
                                       </CRow>
 
                                       <CRow>
-                                        <CCol sm={10} >  
+                                        <CCol sm={8} >  
                                           <CFormSelect 
                                             aria-label="Default select example"
                                             onChange={onAddCategory3}
@@ -526,10 +623,18 @@ const DistributionAddW = () => {
                                             onClick={delCategory3}
                                           />
                                         </CCol>
+                                        <CCol sm={2}> 
+                                          <CIcon 
+                                            icon={cilCaretBottom}
+                                            size="xl" 
+                                            style={{marginTop: '20px', display: showCategories3 ? "block" : "none"}} 
+                                            onClick={onAddCategory3}
+                                          />
+                                        </CCol>
                                       </CRow>
 
                                       <CRow>
-                                        <CCol sm={10} >  
+                                        <CCol sm={8} >  
                                           <CFormSelect 
                                             aria-label="Default select example"
                                             onChange={onAddCategory4}
@@ -544,6 +649,14 @@ const DistributionAddW = () => {
                                             size="xl" 
                                             style={{marginTop: '20px', display: showCategories4 ? "block" : "none"}} 
                                             onClick={delCategory4}
+                                          />
+                                        </CCol>
+                                        <CCol sm={2}> 
+                                          <CIcon 
+                                            icon={cilCaretBottom}
+                                            size="xl" 
+                                            style={{marginTop: '20px', display: showCategories4 ? "block" : "none"}} 
+                                            onClick={onAddCategory4}
                                           />
                                         </CCol>
                                       </CRow>
