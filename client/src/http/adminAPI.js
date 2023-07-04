@@ -1,4 +1,4 @@
-import {$authHost, $host, $host_bot} from "./index";
+import {$authHost, $host, $host_bot, $host_bot2} from "./index";
 
 export const getManagers = async () =>{
     try {
@@ -33,18 +33,9 @@ export const getProjects2 = async () =>{
 //api notion
 export const getProjects3 = async () =>{
     try {
-        let response = await $host_bot.get('projects2');
-        const responseResults = response.data.results.map((page) => {
-            
-            return {
-                id: page.id,
-                name: page.properties.Name.title[0]?.plain_text,
-                datestart: page.properties.Date.date.start,
-                crmID: page.properties.Crm_ID.rich_text[0]?.plain_text               
-            };
-        });
-       //console.log("projects: ", response.data.results);
-       return responseResults;
+        let response = await $host_bot2.get('projects3');
+        console.log("projectsAPI: ", response);
+        return response.data.results;
     } catch (error) {
         console.log("error while calling getProjects3 api", error.message);
     }
