@@ -151,8 +151,12 @@ const DistributionAddW = () => {
     const arrProjects = []
 
     projects.map((project) => {
+      const d = new Date(project.datestart);
+      const month = String(d.getMonth()+1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+
       const newObj = {
-        label: project.name, 
+        label: `${day}.${month} | ${project.name}`, 
         value: project.id,
       }
       arrProjects.push(newObj)
@@ -214,24 +218,31 @@ const DistributionAddW = () => {
     showEditButtonAdd ? setShowEditButtonAdd (false) : setShowEditButtonAdd (true)
   }
 
-  const onAddCategory = (e) => {
+  const onAddCategory0 = (e) => {
     e.preventDefault();
     setValueSelect(e.target.value)
     setShowCategories2(true)
     selected.push(e.target.value)
   }
 
+  const onAddCategory = (e) => {
+    e.preventDefault();
+    setValueSelect(e.target.value)
+    //setShowCategories2(true)
+    selected.push(e.target.value)
+  }
+
   const onAddCategory2 = (e) => {
     e.preventDefault();
     setValueSelect2(e.target.value)
-    setShowCategories3(true)
+    //setShowCategories3(true)
     selected.push(e.target.value)
   }
 
   const onAddCategory3 = (e) => {
     e.preventDefault();
     setValueSelect3(e.target.value)
-    setShowCategories4(true)
+    //setShowCategories4(true)
     selected.push(e.target.value)
   }
 
@@ -546,7 +557,7 @@ const DistributionAddW = () => {
                                       <br/>
                                       
                                       <CRow>
-                                        <CCol sm={10} > 
+                                        <CCol sm={12} > 
                                           <CFormLabel htmlFor="exampleFormControlInput1">Категория:</CFormLabel>
                                           <CFormSelect 
                                             aria-label="Default select example"
@@ -555,19 +566,10 @@ const DistributionAddW = () => {
                                             value={valueSelect}
                                           /> 
                                         </CCol> 
-
-                                        <CCol sm={2}> 
-                                          <CIcon 
-                                            icon={cilCaretBottom}
-                                            size="xl" 
-                                            style={{marginTop: '40px'}} 
-                                            onClick={onAddCategory}
-                                          />
-                                        </CCol>
                                       </CRow>
                                       
                                       <CRow>
-                                        <CCol sm={8} >  
+                                        <CCol sm={10} >  
                                           <CFormSelect 
                                             aria-label="Default select example"
                                             onChange={onAddCategory2}
@@ -584,18 +586,10 @@ const DistributionAddW = () => {
                                             onClick={delCategory2}
                                           />
                                         </CCol>
-                                        <CCol sm={2}> 
-                                          <CIcon 
-                                            icon={cilCaretBottom}
-                                            size="xl" 
-                                            style={{marginTop: '20px', display: showCategories2 ? "block" : "none"}} 
-                                            onClick={onAddCategory2}
-                                          />
-                                        </CCol>
                                       </CRow>
 
                                       <CRow>
-                                        <CCol sm={8} >  
+                                        <CCol sm={10} >  
                                           <CFormSelect 
                                             aria-label="Default select example"
                                             onChange={onAddCategory3}
@@ -612,18 +606,10 @@ const DistributionAddW = () => {
                                             onClick={delCategory3}
                                           />
                                         </CCol>
-                                        <CCol sm={2}> 
-                                          <CIcon 
-                                            icon={cilCaretBottom}
-                                            size="xl" 
-                                            style={{marginTop: '20px', display: showCategories3 ? "block" : "none"}} 
-                                            onClick={onAddCategory3}
-                                          />
-                                        </CCol>
                                       </CRow>
 
                                       <CRow>
-                                        <CCol sm={8} >  
+                                        <CCol sm={10} >  
                                           <CFormSelect 
                                             aria-label="Default select example"
                                             onChange={onAddCategory4}
@@ -640,12 +626,15 @@ const DistributionAddW = () => {
                                             onClick={delCategory4}
                                           />
                                         </CCol>
-                                        <CCol sm={2}> 
+                                      </CRow>
+
+                                      <CRow>
+                                        <CCol sm={12} > 
                                           <CIcon 
-                                            icon={cilCaretBottom}
-                                            size="xl" 
-                                            style={{marginTop: '20px', display: showCategories4 ? "block" : "none"}} 
-                                            onClick={onAddCategory4}
+                                                icon={cilCaretBottom}
+                                                size="xl" 
+                                                onClick={onAddCategory0}
+                                                style={{marginTop: '15px', textAlign: 'center'}}
                                           />
                                         </CCol>
                                       </CRow>

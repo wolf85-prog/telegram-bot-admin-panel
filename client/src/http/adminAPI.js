@@ -33,12 +33,13 @@ export const getProjects2 = async () =>{
 //api notion
 export const getProjects3 = async () =>{
     try {
-       let response = await $host_bot.get('projects2');
+        let response = await $host_bot.get('projects2');
         const responseResults = response.data.results.map((page) => {
+            
             return {
                 id: page.id,
                 name: page.properties.Name.title[0]?.plain_text,
-                //datestart: page.properties["Наименование"].multi_select[1]?.name,
+                datestart: page.properties.Date.date.start,
                 crmID: page.properties.Crm_ID.rich_text[0]?.plain_text               
             };
         });
