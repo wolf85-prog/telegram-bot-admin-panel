@@ -133,10 +133,9 @@ const DistributionAddW = () => {
   ]
 
 
+  //загрузка новых проектов
   useEffect(() => {
     const fetchData = async () => {
-
-      //console.log("projects planer size: ")
 
       let projects = await getProjects3();
       console.log("projects planer: ", projects)
@@ -153,15 +152,17 @@ const DistributionAddW = () => {
     const arrProjects = []
 
     projects.map((project) => {
-      const d = new Date(project.datestart);
-      const month = String(d.getMonth()+1).padStart(2, "0");
-      const day = String(d.getDate()).padStart(2, "0");
+      if (project != null) {
+        const d = new Date(project.datestart);
+        const month = String(d.getMonth()+1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
 
-      const newObj = {
-        label: `${day}.${month} | ${project.name}`, 
-        value: project.id,
-      }
-      arrProjects.push(newObj)
+        const newObj = {
+          label: `${day}.${month} | ${project.name}`, 
+          value: project.id,
+        }
+        arrProjects.push(newObj)
+      }    
     })
     setContacts(arrProjects)      
   }, [projects]);
@@ -171,11 +172,13 @@ const DistributionAddW = () => {
     const arrProjects = []
 
     projects.map((project) => {
-      const newObj = {
-        label: project.crmID,
-        value: project.id,
+      if (project != null) {
+        const newObj = {
+          label: project.crmID,
+          value: project.id,
+        }
+        arrProjects.push(newObj)
       }
-      arrProjects.push(newObj)
     })
     setContacts2(arrProjects)      
   }, [projects]);
@@ -265,11 +268,14 @@ const DistributionAddW = () => {
   //название проекта или номер проекта
   const onChangeProjectName = () => {
     setShowNameProject(true)
+    setSelected([])
+    setValueSelect(0)
   }
 
   const onChangeProjectNumber = () => {
     setShowNameProject(false)
-    selected = []
+    setSelected([])
+    setValueSelect(0)
   }
 
 
@@ -631,12 +637,12 @@ const DistributionAddW = () => {
                                       </CRow>
 
                                       <CRow>
-                                        <CCol sm={12} > 
+                                        <CCol sm={12} style={{textAlign: 'end'}}> 
                                           <CIcon 
                                                 icon={cilCaretBottom}
                                                 size="xl" 
                                                 onClick={onAddCategory0}
-                                                style={{marginTop: '15px', textAlign: 'center'}}
+                                                style={{marginTop: '15px'}}
                                           />
                                         </CCol>
                                       </CRow>
