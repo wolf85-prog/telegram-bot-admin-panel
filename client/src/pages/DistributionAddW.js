@@ -20,16 +20,18 @@ import CIcon from '@coreui/icons-react';
 import { cilX, cilCaretBottom, cilCarAlt, cilCaretLeft } from '@coreui/icons';
 
 import { useUsersContext } from "../chat-app-new/context/usersContext";
-import { $host } from '../http/index'
+import { $host } from '../http/index';
 import { useNavigate } from 'react-router-dom';
 import { newDistribution, getDistributions, getProjects, getProjects3, getBlocks, getDatabaseId } from '../http/adminAPI';
 import { newMessage, uploadFile } from '../http/chatAPI';
 import specData from './../data/specData';
+import categories from './../data/categories';
 
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 import phone_image from './../assets/images/phone2.png';
 import poster from './../assets/images/poster.jpg';
-import Loader from 'src/chat-app-new/components/Loader'
+import treug from './../assets/images/treugolnik.png';
+import Loader from 'src/chat-app-new/components/Loader';
 
 
 const DistributionAddW = () => {
@@ -78,60 +80,6 @@ const DistributionAddW = () => {
        navigate('/distributionw');
   } 
 
-  //let proj
-
-  const categories = [
-    'Выбрать...',
-    {
-      label: 'Звук',
-      value: '1',
-    },
-    {
-      label: 'Свет',
-      value: '2',
-    },
-    {
-      label: 'Видео',
-      value: '3',
-    },
-    {
-      label: 'Риггеры',
-      value: '4',
-    },
-    {
-      label: 'Помощники / Грузчики',
-      value: '5',
-    },
-    {
-      label: 'Граунд',
-      value: '6',
-    },
-    {
-      label: 'Водители',
-      value: '7',
-    },
-    {
-      label: 'Технический продакшн',
-      value: '8',
-    },
-    {
-      label: 'Фото',
-      value: '9',
-    },
-    {
-      label: 'Кейтеринг',
-      value: '10',
-    },
-    {
-      label: 'Артисты',
-      value: '11',
-    },
-    {
-      label: 'Игромания',
-      value: '12',
-    },  
-  ]
-
 
   //загрузка новых проектов
   useEffect(() => {
@@ -147,10 +95,12 @@ const DistributionAddW = () => {
   },[])
 
 
-   //проекты
+   //проекты с названием
    useEffect(() => {
-    const arrProjects = []
-
+    const arrProjects = [{
+      label: 'Выбрать...',
+      value: '0',
+    }]
     projects.map((project) => {
       if (project != null) {
         const d = new Date(project.datestart);
@@ -167,10 +117,12 @@ const DistributionAddW = () => {
     setContacts(arrProjects)      
   }, [projects]);
 
-  //проекты2
+  //проекты с номерами
   useEffect(() => {
-    const arrProjects = []
-
+    const arrProjects = [{
+      label: 'Выбрать...',
+      value: '0',
+    }]
     projects.map((project) => {
       if (project != null) {
         const newObj = {
@@ -183,7 +135,7 @@ const DistributionAddW = () => {
     setContacts2(arrProjects)      
   }, [projects]);
 
-
+//=======================================================
 
   const onChangeText = (e) => {
     setText(e.target.value)
@@ -630,24 +582,25 @@ const DistributionAddW = () => {
                                           <CIcon 
                                             icon={cilX} 
                                             size="xl" 
-                                            style={{marginTop: '20px', display: showCategories4 ? "block" : "none"}} 
+                                            style={{marginTop: '20px', display: showCategories4 ? "block" : "none", marginLeft: '-12px'}} 
                                             onClick={delCategory4}
                                           />
                                         </CCol>
                                       </CRow>
 
                                       <CRow>
-                                        <CCol sm={12} style={{textAlign: 'end'}}> 
-                                          <CIcon 
+                                        <CCol sm={12} style={{textAlign: 'end', marginTop: '15px', paddingRight: '23px'}}> 
+                                          {/* <CIcon 
                                                 icon={cilCaretBottom}
                                                 size="xl" 
                                                 onClick={onAddCategory0}
                                                 style={{marginTop: '15px'}}
-                                          />
+                                          /> */}
+                                          <img src={treug} alt='' width='20px' onClick={onAddCategory0}/>
                                         </CCol>
                                       </CRow>
                                       
-                                      <p style={{color: '#767676', marginTop: '10px'}}>Получателей: <span>{selected.length}</span></p>  
+                                      <p style={{color: '#767676', marginTop: '-20px'}}>Получателей: <span>{selected.length}</span></p>  
                                       
                                     </CCol>
 
