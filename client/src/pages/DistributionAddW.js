@@ -116,6 +116,7 @@ const DistributionAddW = () => {
     })
     setContacts(arrProjects)      
   }, [projects]);
+  
 
   //проекты с номерами
   useEffect(() => {
@@ -134,6 +135,163 @@ const DistributionAddW = () => {
     })
     setContacts2(arrProjects)      
   }, [projects]);
+
+//=======================================================
+
+const onAddCategory0 = (e) => {
+  e.preventDefault();
+  setValueSelect(e.target.value)
+  setShowCategories2(true)
+  //setShowCategories3(true)
+  selected.push(e.target.value)
+}
+
+const onAddCategory = (e) => {
+  e.preventDefault();
+  console.log(e.target.value)
+  setValueSelect(e.target.value)
+  //setShowCategories2(true)
+  selected.push(e.target.value)
+}
+
+const onAddCategory2 = (e) => {
+  e.preventDefault();
+  setValueSelect2(e.target.value)
+  //setShowCategories3(true)
+  selected.push(e.target.value)
+}
+
+const onAddCategory3 = (e) => {
+  e.preventDefault();
+  setValueSelect3(e.target.value)
+  //setShowCategories4(true)
+  selected.push(e.target.value)
+}
+
+const onAddCategory4 = (e) => {
+  e.preventDefault();
+  setValueSelect4(e.target.value)
+  selected.push(e.target.value)
+}
+
+const onAddCategory5 = (e) => {
+  e.preventDefault();
+  setValueSelect5(e.target.value)
+  selected.push(e.target.value)
+}
+
+
+
+//выбор название проекта или номер проекта
+const onChangeProjectName = () => {
+  setShowNameProject(true)
+  setSelected([])
+  setValueSelect(0)
+}
+
+const onChangeProjectNumber = () => {
+  setShowNameProject(false)
+  setSelected([])
+  setValueSelect(0)
+}
+
+
+let arr_count = []
+
+//выбор проекта
+const onChangeSelectProject = async(e) => {
+  e.preventDefault();
+  // if (e.target.value === '1') setProj('Проект 1')
+  // if (e.target.value === '2') setProj('Проект 2')
+  // if (e.target.value === '3') setProj('Проект 3')
+
+  let count_title;
+  const blockId = await getBlocks(e.target.value); 
+
+  //console.log("blockId: ", blockId.data)
+
+  if (blockId) {
+    const databaseBlock = await getDatabaseId(blockId.data); 
+
+    const categories = [...databaseBlock.data]
+
+    console.log("categories: ", categories)
+
+    specData.map((category)=> {
+        count_title = 0;
+
+      if (databaseBlock.data) {   
+        databaseBlock.data.map((db) => {
+          if (category.name === db.title) {
+            count_title++
+          }
+        })
+        
+        if (count_title !== 0) {
+          const obj = {
+            id: category.id,
+            title: category.icon,
+            count: count_title,
+          }
+          arr_count.push(obj)
+        }
+        
+      }
+    })  
+
+    console.log("arr_count: ", arr_count)
+
+    setValueSelect(arr_count[0].id)
+    selected.push(arr_count[0].count)
+
+    if(arr_count[1]) {
+      setValueSelect2(arr_count[1]?.id)
+      setShowCategories2(true)
+      selected.push(arr_count[1]?.count)
+    }
+
+    if(arr_count[2]) {
+      setValueSelect2(arr_count[2]?.id)
+      setShowCategories3(true)
+      selected.push(arr_count[2]?.count)
+    }
+
+    if(arr_count[3]) {
+      setValueSelect2(arr_count[3].id)
+      setShowCategories4(true)
+      selected.push(arr_count[3].count)
+    }
+    
+  }
+}
+
+const onChangeAddButton = () => {
+  setShowEditButtonAdd (true)
+}
+
+const onChangeAddButton2 = () => {
+  setShowEditButtonAdd (false)
+}
+
+{/* Удаление категорий */}
+const delCategory2 = () => {
+  setValueSelect(0)
+  setShowCategories2(false)
+  selected.pop()
+}
+
+const delCategory3 = () => {
+  setValueSelect2(0)
+  setShowCategories3(false)
+  selected.pop()
+}
+
+const delCategory4 = () => {
+  setValueSelect3(0)
+  setShowCategories4(false)
+  selected.pop()
+}
+
 
 //=======================================================
 
@@ -175,130 +333,6 @@ const DistributionAddW = () => {
     showEditButtonAdd ? setShowEditButtonAdd (false) : setShowEditButtonAdd (true)
   }
 
-  const onAddCategory0 = (e) => {
-    e.preventDefault();
-    setValueSelect(e.target.value)
-    setShowCategories2(true)
-    selected.push(e.target.value)
-  }
-
-  const onAddCategory = (e) => {
-    e.preventDefault();
-    setValueSelect(e.target.value)
-    //setShowCategories2(true)
-    selected.push(e.target.value)
-  }
-
-  const onAddCategory2 = (e) => {
-    e.preventDefault();
-    setValueSelect2(e.target.value)
-    //setShowCategories3(true)
-    selected.push(e.target.value)
-  }
-
-  const onAddCategory3 = (e) => {
-    e.preventDefault();
-    setValueSelect3(e.target.value)
-    //setShowCategories4(true)
-    selected.push(e.target.value)
-  }
-
-  const onAddCategory4 = (e) => {
-    e.preventDefault();
-    setValueSelect4(e.target.value)
-    selected.push(e.target.value)
-  }
-
-  const onAddCategory5 = (e) => {
-    e.preventDefault();
-    setValueSelect5(e.target.value)
-    selected.push(e.target.value)
-  }
-
-
-
-  //название проекта или номер проекта
-  const onChangeProjectName = () => {
-    setShowNameProject(true)
-    setSelected([])
-    setValueSelect(0)
-  }
-
-  const onChangeProjectNumber = () => {
-    setShowNameProject(false)
-    setSelected([])
-    setValueSelect(0)
-  }
-
-
-  let arr_count = []
-
-  const onChangeSelectProject = async(e) => {
-    e.preventDefault();
-    // if (e.target.value === '1') setProj('Проект 1')
-    // if (e.target.value === '2') setProj('Проект 2')
-    // if (e.target.value === '3') setProj('Проект 3')
-
-    let count_title;
-    const blockId = await getBlocks(e.target.value); 
-
-    //console.log("blockId: ", blockId.data)
-
-    if (blockId) {
-      const databaseBlock = await getDatabaseId(blockId.data); 
-
-      const categories = [...databaseBlock.data]
-
-      console.log("categories: ", categories)
-
-      specData.map((category)=> {
-          count_title = 0;
-
-        if (databaseBlock.data) {   
-          databaseBlock.data.map((db) => {
-            if (category.name === db.title) {
-              count_title++
-            }
-          })
-          
-          if (count_title !== 0) {
-            const obj = {
-              id: category.id,
-              title: category.icon,
-              count: count_title,
-            }
-            arr_count.push(obj)
-          }
-          
-        }
-      })  
-
-      console.log("arr_count: ", arr_count)
-
-      setValueSelect(arr_count[0].id)
-      selected.push(arr_count[0].count)
-
-      if(arr_count[1]) {
-        setValueSelect2(arr_count[1]?.id)
-        setShowCategories2(true)
-        selected.push(arr_count[1]?.count)
-      }
-
-      if(arr_count[2]) {
-        setValueSelect2(arr_count[2]?.id)
-        setShowCategories3(true)
-        selected.push(arr_count[2]?.count)
-      }
-
-      if(arr_count[3]) {
-        setValueSelect2(arr_count[3].id)
-        setShowCategories4(true)
-        selected.push(arr_count[3].count)
-      }
-      
-    }
-  }
-
   const onChangeTextButton = (e) => {
     setTextButton(e.target.value)
   }
@@ -308,33 +342,8 @@ const DistributionAddW = () => {
     setSendToAdmin(e.target.value)
   }
 
-  const onChangeAddButton = () => {
-   setShowEditButtonAdd (true)
-  }
+  //===================================================================
 
-  const onChangeAddButton2 = () => {
-    setShowEditButtonAdd (false)
-  }
-
-
-  {/* Удаление категорий */}
-  const delCategory2 = () => {
-    setValueSelect(0)
-    setShowCategories2(false)
-    selected.pop()
-  }
-
-  const delCategory3 = () => {
-    setValueSelect2(0)
-    setShowCategories3(false)
-    selected.pop()
-  }
-
-  const delCategory4 = () => {
-    setValueSelect3(0)
-    setShowCategories4(false)
-    selected.pop()
-  }
 
   {/* Отправка рассылки */}
   const onSendText = async() => {
@@ -542,7 +551,7 @@ const DistributionAddW = () => {
                                           <CIcon 
                                             icon={cilX} 
                                             size="xl" 
-                                            style={{marginTop: '20px', display: showCategories2 ? "block" : "none"}} 
+                                            style={{marginTop: '20px', marginLeft: '-8px', display: showCategories2 ? "block" : "none"}} 
                                             onClick={delCategory2}
                                           />
                                         </CCol>
@@ -562,7 +571,7 @@ const DistributionAddW = () => {
                                           <CIcon 
                                             icon={cilX} 
                                             size="xl" 
-                                            style={{marginTop: '20px', display: showCategories3 ? "block" : "none"}} 
+                                            style={{marginTop: '20px', marginLeft: '-8px', display: showCategories3 ? "block" : "none"}} 
                                             onClick={delCategory3}
                                           />
                                         </CCol>
@@ -582,7 +591,7 @@ const DistributionAddW = () => {
                                           <CIcon 
                                             icon={cilX} 
                                             size="xl" 
-                                            style={{marginTop: '20px', display: showCategories4 ? "block" : "none", marginLeft: '-12px'}} 
+                                            style={{marginTop: '20px', marginLeft: '-8px', display: showCategories4 ? "block" : "none"}} 
                                             onClick={delCategory4}
                                           />
                                         </CCol>
@@ -590,13 +599,12 @@ const DistributionAddW = () => {
 
                                       <CRow>
                                         <CCol sm={12} style={{textAlign: 'end', marginTop: '15px', paddingRight: '23px'}}> 
-                                          {/* <CIcon 
-                                                icon={cilCaretBottom}
-                                                size="xl" 
-                                                onClick={onAddCategory0}
-                                                style={{marginTop: '15px'}}
-                                          /> */}
-                                          <img src={treug} alt='' width='20px' onClick={onAddCategory0}/>
+                                          <img 
+                                            src={treug} 
+                                            alt='' 
+                                            width='20px' 
+                                            onClick={onAddCategory0}
+                                          />
                                         </CCol>
                                       </CRow>
                                       

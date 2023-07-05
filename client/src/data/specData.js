@@ -49,7 +49,7 @@ const specData = [
     {
         id: 5,
         name: 'Stagehands',
-        icon: 'Помощники / Грузчики',
+        icon: 'Помощники \/ Грузчики',
         models: [
             {id: 1, name: 'Помощник \/ Грузчик',},
             {id: 2, name: 'Промоутер',},
