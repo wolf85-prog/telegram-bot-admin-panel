@@ -12,7 +12,7 @@ export const getManagers = async () =>{
 
 export const getProjects = async () =>{
     try {
-       let response = await $host_bottest.get('projects');
+       let response = await $host_bot.get('projects');
        //console.log("projects: ", response.data);
        return response.data;
     } catch (error) {
@@ -33,9 +33,9 @@ export const getProjects2 = async () =>{
 //api notion
 export const getProjects3 = async () =>{
     try {
-        let response = await $host_bot.get('projects3');
-        console.log("projectsAPI: ", response);
-        return response.data.results;
+        let response = await $host_bottest.get('projects3');
+        console.log("projectsAPI: ", response.data);
+        return response.data;
     } catch (error) {
         console.log("error while calling getProjects3 api", error.message);
     }

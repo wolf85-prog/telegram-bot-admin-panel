@@ -9,7 +9,7 @@ const $host_bot = axios.create({
 })
 
 const $host_bottest = axios.create({
-    baseURL: process.env.REACT_APP_ADMIN_API_URL2
+    baseURL: process.env.REACT_APP_ADMIN_API_URL_TEST
 })
 
 const $host_worker = axios.create({

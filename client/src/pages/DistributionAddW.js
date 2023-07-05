@@ -138,10 +138,10 @@ const DistributionAddW = () => {
 
       //console.log("projects planer size: ")
 
-      let projects = await getProjects();
+      let projects = await getProjects3();
       console.log("projects planer: ", projects)
 
-      //setProjects(projects)
+      setProjects(projects)
     }
       fetchData();
       
