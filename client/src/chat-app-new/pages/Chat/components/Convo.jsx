@@ -155,7 +155,8 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 															id={
 																message?.status === "sent"
 																	? "singleTick"
-																	: "doubleTick"
+																	//: "doubleTick"
+																	: "singleTick"
 															}
 															aria-label={message?.status}
 															className={`chat__msg-status-icon ${
@@ -243,7 +244,8 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 													id={
 														message?.status === "sent"
 															? "singleTick"
-															: "doubleTick"
+															// : "doubleTick"
+															: "singleTick"
 													}
 													aria-label={message?.status}
 													className={`chat__msg-status-icon ${

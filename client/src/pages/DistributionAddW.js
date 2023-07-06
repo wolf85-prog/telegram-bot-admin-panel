@@ -40,7 +40,7 @@ const DistributionAddW = () => {
 	const host = process.env.REACT_APP_API_URL
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
-  const { users: clients } = useUsersContext();
+  const { users: clients, workers } = useUsersContext();
   const { addNewMessage, setDistributions } = useUsersContext();
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]); 
@@ -146,19 +146,63 @@ const onAddCategory0 = (e) => {
   selected.push(e.target.value)
 }
 
+let tmpArray = [];
+
 const onAddCategory = (e) => {
   e.preventDefault();
-  console.log(e.target.value)
   setValueSelect(e.target.value)
-  //setShowCategories2(true)
-  selected.push(e.target.value)
+
+  if (e.target.value === '0') {
+    setSelected([])
+  } else {
+    //setSelected([])
+    const cat_name = categories[e.target.value].name
+    workers.map((worker)=> {
+      JSON.parse(worker.worklist).map((work) => {
+        if (work.cat === cat_name) {
+          selected.push(worker.chatId)
+        } else {
+          selected.pop(worker.chatId)
+        }
+      })
+    })
+    const arr = [...selected].filter((el, ind) => ind === selected.indexOf(el));
+    setSelected(arr)
+    console.log(arr)
+  }
+  
 }
 
 const onAddCategory2 = (e) => {
   e.preventDefault();
   setValueSelect2(e.target.value)
-  //setShowCategories3(true)
-  selected.push(e.target.value)
+
+  //selected = []
+
+  if (e.target.value === 0) selected = []
+
+  const cat_name = categories[e.target.value].name
+  workers.map((worker)=> {
+    JSON.parse(worker.worklist).map((work) => {
+      if (work.cat === cat_name) {
+        const newObj = {
+          chatId: worker.chatId,
+        }
+        let flag = false
+        selected.map((id)=>{
+          if (id === worker.chatId) {
+            flag = true
+          }
+          console.log("flag: ", flag)
+        })
+        if (!flag) {
+          selected.push(newObj)
+        }
+      }
+    })
+  })
+  console.log(selected)
+
 }
 
 const onAddCategory3 = (e) => {
