@@ -22,7 +22,7 @@ import { cilX, cilCaretBottom, cilCarAlt, cilCaretLeft } from '@coreui/icons';
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { $host } from '../http/index';
 import { useNavigate } from 'react-router-dom';
-import { newDistribution, getDistributions, getProjects, getProjects3, getBlocks, getDatabaseId } from '../http/adminAPI';
+import { newDistributionW, getDistributionsW, getProjects, getProjects3, getBlocks, getDatabaseId } from '../http/adminAPI';
 import { newMessage, uploadFile } from '../http/chatAPI';
 import specData from './../data/specData';
 import categories from './../data/categories';
@@ -41,7 +41,7 @@ const DistributionAddW = () => {
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
   const { users: clients, workers } = useUsersContext();
-  const { addNewMessage, setDistributions } = useUsersContext();
+  const { addNewMessage, setDistributionsWork } = useUsersContext();
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]); 
   const [contacts2, setContacts2]= useState([]);
@@ -59,6 +59,7 @@ const DistributionAddW = () => {
   const [value, setValue] = useState("");
   const [image, setImage]= useState("");
 
+  const [loader, setLoader] = useState(false)
   const [valueSelect, setValueSelect] = useState(0)
   const [valueSelect2, setValueSelect2] = useState(0)
   const [valueSelect3, setValueSelect3] = useState(0)
@@ -138,16 +139,15 @@ const DistributionAddW = () => {
 
 //=======================================================
 
+//треугольник Добавить категорию
 const onAddCategory0 = (e) => {
   e.preventDefault();
   setValueSelect(e.target.value)
   setShowCategories2(true)
   //setShowCategories3(true)
-  selected.push(e.target.value)
 }
 
-let tmpArray = [];
-
+//Изменить категорию (1-й селект)
 const onAddCategory = (e) => {
   e.preventDefault();
   setValueSelect(e.target.value)
@@ -155,17 +155,16 @@ const onAddCategory = (e) => {
   if (e.target.value === '0') {
     setSelected([])
   } else {
-    //setSelected([])
     const cat_name = categories[e.target.value].name
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
+        console.log(work.cat)
         if (work.cat === cat_name) {
           selected.push(worker.chatId)
-        } else {
-          selected.pop(worker.chatId)
-        }
+        } 
       })
     })
+    //выбрать уникальных специалистов
     const arr = [...selected].filter((el, ind) => ind === selected.indexOf(el));
     setSelected(arr)
     console.log(arr)
@@ -173,55 +172,55 @@ const onAddCategory = (e) => {
   
 }
 
+//Изменить категорию (2-й селект)
 const onAddCategory2 = (e) => {
   e.preventDefault();
   setValueSelect2(e.target.value)
 
-  //selected = []
 
-  if (e.target.value === 0) selected = []
-
-  const cat_name = categories[e.target.value].name
-  workers.map((worker)=> {
-    JSON.parse(worker.worklist).map((work) => {
-      if (work.cat === cat_name) {
-        const newObj = {
-          chatId: worker.chatId,
-        }
-        let flag = false
-        selected.map((id)=>{
-          if (id === worker.chatId) {
-            flag = true
+  if (e.target.value === 0) {
+    setSelected([])
+  } else {
+    const cat_name = categories[e.target.value].name
+    workers.map((worker)=> {
+      JSON.parse(worker.worklist).map((work) => {
+        if (work.cat === cat_name) {
+          const newObj = {
+            chatId: worker.chatId,
           }
-          console.log("flag: ", flag)
-        })
-        if (!flag) {
-          selected.push(newObj)
+          let flag = false
+          selected.map((id)=>{
+            if (id === worker.chatId) {
+              flag = true
+            }
+            console.log("flag: ", flag)
+          })
+          if (!flag) {
+            selected.push(newObj)
+          }
         }
-      }
+      })
     })
-  })
-  console.log(selected)
-
+    console.log(selected)
+  }
 }
 
+//Изменить категорию (3-й селект)
 const onAddCategory3 = (e) => {
   e.preventDefault();
   setValueSelect3(e.target.value)
-  //setShowCategories4(true)
-  selected.push(e.target.value)
 }
 
+//Изменить категорию (4-й селект)
 const onAddCategory4 = (e) => {
   e.preventDefault();
   setValueSelect4(e.target.value)
-  selected.push(e.target.value)
 }
 
+//Изменить категорию (5-й селект)
 const onAddCategory5 = (e) => {
   e.preventDefault();
   setValueSelect5(e.target.value)
-  selected.push(e.target.value)
 }
 
 
@@ -248,65 +247,82 @@ const onChangeSelectProject = async(e) => {
   // if (e.target.value === '1') setProj('Проект 1')
   // if (e.target.value === '2') setProj('Проект 2')
   // if (e.target.value === '3') setProj('Проект 3')
+  //console.log(e.target.value)
 
-  let count_title;
-  const blockId = await getBlocks(e.target.value); 
+  if (e.target.value !== '0') {
+    let count_title;
+    setLoader(true)
+    const blockId = await getBlocks(e.target.value); 
 
-  //console.log("blockId: ", blockId.data)
+    if (blockId) {
+      const databaseBlock = await getDatabaseId(blockId.data); 
+      setLoader(false)
+      const categories2 = [...databaseBlock.data]
 
-  if (blockId) {
-    const databaseBlock = await getDatabaseId(blockId.data); 
+      console.log("categories: ", categories2)
 
-    const categories = [...databaseBlock.data]
+      specData.map((category)=> {
+          count_title = 0;
 
-    console.log("categories: ", categories)
-
-    specData.map((category)=> {
-        count_title = 0;
-
-      if (databaseBlock.data) {   
-        databaseBlock.data.map((db) => {
-          if (category.name === db.title) {
-            count_title++
+        if (databaseBlock.data) {   
+          databaseBlock.data.map((db) => {
+            if (category.name === db.title) {
+              count_title++
+            }
+          })
+          
+          if (count_title !== 0) {
+            const obj = {
+              id: category.id,
+              title: category.icon,
+              count: count_title,
+            }
+            arr_count.push(obj)
           }
-        })
-        
-        if (count_title !== 0) {
-          const obj = {
-            id: category.id,
-            title: category.icon,
-            count: count_title,
-          }
-          arr_count.push(obj)
+          
         }
-        
+      })  
+
+      console.log("arr_count: ", arr_count)
+      
+      if(arr_count[0]) {
+        setValueSelect(arr_count[0].id)
       }
-    })  
 
-    console.log("arr_count: ", arr_count)
+      if(arr_count[1]) {
+        setValueSelect2(arr_count[1]?.id)
+        setShowCategories2(true)
+      }
 
-    setValueSelect(arr_count[0].id)
-    selected.push(arr_count[0].count)
+      if(arr_count[2]) {
+        setValueSelect2(arr_count[2]?.id)
+        setShowCategories3(true)
+      }
 
-    if(arr_count[1]) {
-      setValueSelect2(arr_count[1]?.id)
-      setShowCategories2(true)
-      selected.push(arr_count[1]?.count)
+      if(arr_count[3]) {
+        setValueSelect2(arr_count[3].id)
+        setShowCategories4(true)
+      }
+
+      const cat_name = categories[valueSelect].name
+      console.log("Категория: ", cat_name)
+      workers.map((worker)=> {
+        JSON.parse(worker.worklist).map((work) => {
+          console.log(work.cat)
+          if (work.cat === cat_name) {
+            selected.push(worker.chatId)
+          } 
+        })
+      })
+      //выбрать уникальных специалистов
+      const arr = [...selected].filter((el, ind) => ind === selected.indexOf(el));
+      setSelected(arr)
+      
     }
-
-    if(arr_count[2]) {
-      setValueSelect2(arr_count[2]?.id)
-      setShowCategories3(true)
-      selected.push(arr_count[2]?.count)
-    }
-
-    if(arr_count[3]) {
-      setValueSelect2(arr_count[3].id)
-      setShowCategories4(true)
-      selected.push(arr_count[3].count)
-    }
-    
+  } else {
+    setValueSelect(0)
   }
+  
 }
 
 const onChangeAddButton = () => {
@@ -319,21 +335,15 @@ const onChangeAddButton2 = () => {
 
 {/* Удаление категорий */}
 const delCategory2 = () => {
-  setValueSelect(0)
   setShowCategories2(false)
-  selected.pop()
 }
 
 const delCategory3 = () => {
-  setValueSelect2(0)
   setShowCategories3(false)
-  selected.pop()
 }
 
 const delCategory4 = () => {
-  setValueSelect3(0)
   setShowCategories4(false)
-  selected.pop()
 }
 
 
@@ -391,29 +401,29 @@ const delCategory4 = () => {
 
   {/* Отправка рассылки */}
   const onSendText = async() => {
-    console.log(selected)
+    //console.log(selected)
 
     audio.play();
 
     //новая рассылка
     const message = {
-      name: 'Рассылка', 
+      //name: 'Рассылка', 
       text: text, 
       image: host + image, 
       button: textButton, 
-      receivers: JSON.stringify(selected), 
+      receivers: selected.toString(), 
       datestart: Date.now(), 
       delivered: 'true',        
     }
     console.log("message send button: ", message);
 
     //сохранение рассылки в базе данных
-    await newDistribution(message)
+    await newDistributionW(message)
     
     selected.map(async (user, index) => {
-      console.log("Пользователю ID: " + user.value + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
+      console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
 
-      let client = clients.filter((client) => client.chatId === user.value.toString())[0];
+      let client = clients.filter((client) => client.chatId === user)[0];
       
       //Передаем данные боту
       const keyboard = JSON.stringify({
@@ -427,13 +437,13 @@ const delCategory4 = () => {
       //отправить в телеграмм
       let sendToTelegram
       if (text !== '') {
-        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
         console.log("url_send_msg: ", url_send_msg)
         sendToTelegram = await $host.get(url_send_msg);
         console.log('sendToTelegram: ', sendToTelegram)
       }  
 
-      const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.value}&reply_markup=${keyboard}`
+      const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${keyboard}`
       console.log("url_send_photo: ", url_send_photo)
       
       let sendPhotoToTelegram
@@ -486,9 +496,9 @@ const delCategory4 = () => {
       }  
 
       //обновить список рассылок
-      let response = await getDistributions();
+      let response = await getDistributionsW();
       console.log("distribution new add: ", response.length)
-			setDistributions(response)
+			setDistributionsWork(response)
 
     })
 
@@ -567,7 +577,9 @@ const delCategory4 = () => {
                                         options={contacts2}
                                       />
 
-                                      <br/>
+                                      {/* <br/> */}
+
+                                      {loader ? <CSpinner/> : <br/>}
                                       
                                       <CRow>
                                         <CCol sm={12} > 

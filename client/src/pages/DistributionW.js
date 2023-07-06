@@ -37,9 +37,9 @@ const DistributionW = () => {
 
       const arrDitributions = []
       messages.map((distrib, index) => {
-        JSON.parse(distrib.receivers).map((receiver)=>{
-          strReceivers = receiver.label + ' '
-        })
+        // JSON.parse(distrib.receivers).map((receiver)=>{
+        //   strReceivers = receiver.label + ' '
+        // })
 
         const d = new Date(distrib.createdAt);
 				const year = d.getFullYear();
@@ -53,9 +53,9 @@ const DistributionW = () => {
           id: distrib.id,
 					name: distrib.name,
           text: distrib.text,
-          image: distrib.image.split('5000/')[1] !=='' ? distrib.image: '',
-          button: distrib.button,
-          receivers: strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
+          image: distrib.image.split('5000/')[1] !=='' ? distrib.image: '-',
+          button: distrib.button ? distrib.button : '-',
+          receivers: distrib.receivers, //strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
           datestart: newDateMessage,
           status: distrib.delivered ? "отправлено" : "не отправлено",
 				}
