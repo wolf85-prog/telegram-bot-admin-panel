@@ -53,8 +53,8 @@ const DistributionW = () => {
           id: distrib.id,
 					name: distrib.name,
           text: distrib.text,
-          image: distrib.image.split('5000/')[1] !=='' ? distrib.image: '-',
-          button: distrib.button ? distrib.button : '-',
+          image: distrib.image.split('5000/')[1] !=='' ? distrib.image : '',
+          button: distrib.button ? distrib.button : '',
           receivers: distrib.receivers, //strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
           datestart: newDateMessage,
           status: distrib.delivered ? "отправлено" : "не отправлено",
@@ -133,7 +133,7 @@ const DistributionW = () => {
                                         }
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <div>{item.button}</div>
+                                        <div>{item.button ? item.button : "Принять/отклонить"}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center" style={{width: '50px'}}>
                                         <div>{item.text}</div>

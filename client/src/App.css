@@ -234,3 +234,31 @@
     border-radius: 50rem!important;
     border-radius: var(--cui-border-radius-pill)!important;
 }
+
+/* input[type="file"] {
+    display: none;
+} */
+
+.custom-file-upload {
+    border: 1px solid #8a93a2;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #8a93a2;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+}
+
+.input-file-text {
+    padding: 0 10px;
+	line-height: 40px;
+	text-align: left;
+	height: 38px;
+	display: block;
+	float: left;
+	box-sizing: border-box;
+	width: 235px;
+	border-radius: 6px 0px 0 6px;
+	border: 1px solid #283035;
+    background-color: #1f272c;
+}

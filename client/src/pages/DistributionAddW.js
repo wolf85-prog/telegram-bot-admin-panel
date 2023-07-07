@@ -30,13 +30,14 @@ import categories from './../data/categories';
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 import phone_image from './../assets/images/phone2.png';
 import poster from './../assets/images/poster.jpg';
+import noimage2 from './../assets/images/images.png';
 import treug from './../assets/images/treugolnik.png';
 import Loader from 'src/chat-app-new/components/Loader';
 
 
 const DistributionAddW = () => {
 
-  const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
+  const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_API_URL
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
@@ -70,6 +71,8 @@ const DistributionAddW = () => {
   const [showCategories2, setShowCategories2] = useState(false);
   const [showCategories3, setShowCategories3] = useState(false);
   const [showCategories4, setShowCategories4] = useState(false);
+
+  const [disabledBtn, setDisabledBtn] = useState(true)
 
   const [proj, setProj] = useState('');
 
@@ -154,6 +157,7 @@ const onAddCategory = (e) => {
 
   if (e.target.value === '0') {
     setSelected([])
+    //setDisabledBtn(false)
   } else {
     const cat_name = categories[e.target.value].name
     workers.map((worker)=> {
@@ -167,6 +171,7 @@ const onAddCategory = (e) => {
     //выбрать уникальных специалистов
     const arr = [...selected].filter((el, ind) => ind === selected.indexOf(el));
     setSelected(arr)
+
     console.log(arr)
   }
   
@@ -354,6 +359,7 @@ const delCategory4 = () => {
     setCountChar(e.target.value.length)
   }
 
+
   useEffect(() => {
     const getImage = async () => {
         if (file) {
@@ -367,7 +373,7 @@ const delCategory4 = () => {
 
           setImage(response.data.path);
           //сообщение с ссылкой на файл
-          //console.log(host + response.data.path)
+          console.log(host + response.data.path)
           //setValue(host + response.data.path)
         }
     }
@@ -401,7 +407,7 @@ const delCategory4 = () => {
 
   {/* Отправка рассылки */}
   const onSendText = async() => {
-    //console.log(selected)
+    console.log(selected)
 
     audio.play();
 
@@ -434,6 +440,15 @@ const delCategory4 = () => {
         ]
       });
 
+      const keyboard2 = JSON.stringify({
+        inline_keyboard: [
+            [
+                {"text": 'Принять', callback_data:'/report'},
+                {"text": 'Отклонить', callback_data:'/report'},
+            ],
+        ]
+      });
+
       //отправить в телеграмм
       let sendToTelegram
       if (text !== '') {
@@ -443,7 +458,7 @@ const delCategory4 = () => {
         console.log('sendToTelegram: ', sendToTelegram)
       }  
 
-      const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${keyboard}`
+      const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
       console.log("url_send_photo: ", url_send_photo)
       
       let sendPhotoToTelegram
@@ -527,7 +542,7 @@ const delCategory4 = () => {
 
                     <CRow>
                         <CCol xs>
-                          <CCard className="mb-4" style={{height: '670px'}}>
+                          <CCard className="mb-4" style={{height: '600px'}}>
                             {/* <CCardHeader>Рассылки</CCardHeader> */}
                             <CCardBody>
                             <CAlert color="success" dismissible visible={visible} onClose={() => setVisible(false)}>
@@ -718,11 +733,27 @@ const delCategory4 = () => {
                                               <CFormInput 
                                                 type="file" 
                                                 id="formFile" 
+                                                accept="image/*,image/jpeg"
                                                 // label="Добавить картинку" 
                                                 name="photo"
                                                 onChange={(e) => onFileChange(e)}
                                                 value={value}
                                               />
+
+                                              {/* <form>
+                                                <label htmlFor="formFile" className="custom-file-upload">
+                                                  Выберите файл
+                                                </label> 
+                                                <input 
+                                                  type="file"
+                                                  id="formFile" 
+                                                  accept="image/*,image/jpeg" 
+                                                  name="photo"
+                                                  onChange={(e) => onFileChange(e)}
+                                                  value={value}
+                                                /> 
+                                                <span className="input-file-text" type="text">{value}</span>
+                                              </form> */}
                                             </div>
                                           </CCol>
 
@@ -761,7 +792,7 @@ const delCategory4 = () => {
                                       </CRow>
 
                                       <br/>
-                                      <div style={{color: '#8f8888', display: showEditButtonAdd ? "block" : "none" }}>
+                                      <div style={{color: '#8f8888', visibility: showEditButtonAdd ? "visible" : "hidden" }}>
                                       <CRow className="mb-6" >
                                         
                                         {/* Раскрывающийся ряд */}
@@ -836,9 +867,9 @@ const delCategory4 = () => {
                                         <div style={{position: 'absolute', top: '10px', left: 0}}>
                                           <img src={phone_image} width='280px' alt='phone' />
                                           <div style={{position: 'absolute', top: '60px', left: '22px'}}>
-                                            <img src={poster} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
+                                            <img src={value ? value : noimage2} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
                                           </div>
-                                          <div style={{position: 'absolute', top: '210px', left: '22px', display: 'flex', width: '85%'}}>
+                                          <div style={{position: 'absolute', top: '225px', left: '22px', display: 'flex', width: '85%'}}>
                                             <div style={{
                                               backgroundColor: '#8a93a2', 
                                               borderRadius: '5px',
@@ -870,14 +901,27 @@ const delCategory4 = () => {
 
                                 <br/>
 
-                                <div className="mb-3" style={{position: 'absolute', bottom: 0, display: 'flex', width: '97%', justifyContent: 'space-between'}}>
-                                {/* <div><Link to={'/distributionw_planer/'} state={{ project: proj}}><CButton color="secondary">Запланировать</CButton></Link></div> */}
-                                  <div>{proj ? 
-                                    <Link to={'/distributionw_planer'} state={{ project: proj}}><CButton color="secondary">Запланировать</CButton></Link>
-                                    :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>}
-                                  </div>
-                                  <div><CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton>  </div>
-                                </div>
+                                <CRow>
+                                  <CCol sm={9}>
+                                    <div className="mb-3" style={{
+                                      display: 'flex', 
+                                      width: '97%', 
+                                      justifyContent: 'space-between',
+                                      marginTop: '30px',
+                                      paddingRight: '50px'
+                                    }}>
+                                    {/* <div><Link to={'/distributionw_planer/'} state={{ project: proj}}><CButton color="secondary">Запланировать</CButton></Link></div> */}
+                                      <div>{proj ? 
+                                        <Link to={'/distributionw_planer'} state={{ project: proj}}><CButton color="secondary">Запланировать</CButton></Link>
+                                        :<Link to={''} state={{ project: `${proj}`, }}><CButton color="success">Запланировать</CButton></Link>}
+                                      </div>
+                                      <div><CButton color="primary" disabled={selected.length == 0} onClick={onSendText}>Разослать сейчас</CButton></div>
+                                    </div>
+                                  </CCol>
+                                  <CCol sm={3}></CCol>
+                                </CRow>
+                                
+
                               </CForm>
 
                             </CCardBody>
