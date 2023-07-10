@@ -609,7 +609,7 @@ const delCategory4 = () => {
                                       </CRow>
                                       
                                       <CRow>
-                                        <CCol sm={10} >  
+                                        <CCol sm={12} style={{display: 'flex'}}>  
                                           <CFormSelect 
                                             aria-label="Default select example"
                                             onChange={onAddCategory2}
@@ -617,19 +617,17 @@ const delCategory4 = () => {
                                             options={categories}
                                             style={{marginTop: '15px', display: showCategories2 ? "block" : "none"}}
                                           />
-                                        </CCol>
-                                        <CCol sm={2} >  
                                           <CIcon 
                                             icon={cilX} 
                                             size="xl" 
-                                            style={{marginTop: '20px', marginLeft: '-8px', display: showCategories2 ? "block" : "none"}} 
+                                            style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories2 ? "block" : "none"}} 
                                             onClick={delCategory2}
                                           />
                                         </CCol>
                                       </CRow>
 
                                       <CRow>
-                                        <CCol sm={10} >  
+                                        <CCol sm={12} style={{display: 'flex'}}>  
                                           <CFormSelect 
                                             aria-label="Default select example"
                                             onChange={onAddCategory3}
@@ -637,19 +635,17 @@ const delCategory4 = () => {
                                             options={categories}
                                             style={{marginTop: '15px', display: showCategories3 ? "block" : "none"}}
                                           />
-                                        </CCol>
-                                        <CCol sm={2} >  
                                           <CIcon 
                                             icon={cilX} 
                                             size="xl" 
-                                            style={{marginTop: '20px', marginLeft: '-8px', display: showCategories3 ? "block" : "none"}} 
+                                            style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories2 ? "block" : "none"}} 
                                             onClick={delCategory3}
                                           />
                                         </CCol>
                                       </CRow>
 
                                       <CRow>
-                                        <CCol sm={10} >  
+                                        <CCol sm={12} style={{display: 'flex'}}>
                                           <CFormSelect 
                                             aria-label="Default select example"
                                             onChange={onAddCategory4}
@@ -657,12 +653,10 @@ const delCategory4 = () => {
                                             options={categories}
                                             style={{marginTop: '15px', display: showCategories4 ? "block" : "none"}}
                                           />
-                                        </CCol>
-                                        <CCol sm={2} >  
                                           <CIcon 
                                             icon={cilX} 
                                             size="xl" 
-                                            style={{marginTop: '20px', marginLeft: '-8px', display: showCategories4 ? "block" : "none"}} 
+                                            style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories4 ? "block" : "none"}} 
                                             onClick={delCategory4}
                                           />
                                         </CCol>
