@@ -686,7 +686,7 @@ const delCategory4 = () => {
                                     {/* <CCol sm={1}></CCol> */}
 
                                     {/* Правый блок */}
-                                    <CCol sm={5} style={{marginLeft: '30px', marginRight: '30px'}}>
+                                    <CCol sm={6} style={{paddingLeft: '30px', paddingRight: '30px'}}>
                                         <CFormLabel htmlFor="exampleFormControlInput1">Текст рассылки:</CFormLabel>
                                         <CFormTextarea 
                                           id="exampleFormControlTextarea1" 
@@ -865,7 +865,7 @@ const delCategory4 = () => {
                                     <CCol sm={3}>   
                                       <div style={{position: 'relative'}}>
                                         <div style={{position: 'absolute', top: '10px', left: 0}}>
-                                          <img src={phone_image} width='280px' alt='phone' />
+                                          <img src={phone_image} width='280px' height='546px' alt='phone' />
                                           <div style={{position: 'absolute', top: '60px', left: '22px'}}>
                                             <img src={value ? value : noimage2} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
                                           </div>
@@ -905,10 +905,9 @@ const delCategory4 = () => {
                                   <CCol sm={9}>
                                     <div className="mb-3" style={{
                                       display: 'flex', 
-                                      width: '97%', 
+                                      width: '100%', 
                                       justifyContent: 'space-between',
-                                      marginTop: '30px',
-                                      paddingRight: '50px'
+                                      marginTop: '30px'
                                     }}>
                                     {/* <div><Link to={'/distributionw_planer/'} state={{ project: proj}}><CButton color="secondary">Запланировать</CButton></Link></div> */}
                                       <div>{proj ? 
