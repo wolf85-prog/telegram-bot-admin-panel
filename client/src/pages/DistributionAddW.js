@@ -638,7 +638,7 @@ const delCategory4 = () => {
                                           <CIcon 
                                             icon={cilX} 
                                             size="xl" 
-                                            style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories2 ? "block" : "none"}} 
+                                            style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories3 ? "block" : "none"}} 
                                             onClick={delCategory3}
                                           />
                                         </CCol>
