@@ -443,8 +443,8 @@ const delCategory4 = () => {
       const keyboard2 = JSON.stringify({
         inline_keyboard: [
             [
-                {"text": 'Принять', callback_data:'/report'},
-                {"text": 'Отклонить', callback_data:'/report'},
+                {"text": 'Принять', callback_data:'/accept'},
+                {"text": 'Отклонить', callback_data:'/cancel'},
             ],
         ]
       });
