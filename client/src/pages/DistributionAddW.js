@@ -60,7 +60,7 @@ const DistributionAddW = () => {
   const [value, setValue] = useState("");
   const [image, setImage]= useState("");
 
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
   const [valueSelect, setValueSelect] = useState(0)
   const [valueSelect2, setValueSelect2] = useState(0)
   const [valueSelect3, setValueSelect3] = useState(0)
@@ -72,7 +72,9 @@ const DistributionAddW = () => {
   const [showCategories3, setShowCategories3] = useState(false);
   const [showCategories4, setShowCategories4] = useState(false);
 
-  const [disabledBtn, setDisabledBtn] = useState(true)
+  const [disabledBtn, setDisabledBtn] = useState(true);
+
+  const [projectVar, setProjectVar] = useState('');
 
   const [proj, setProj] = useState('');
 
@@ -252,7 +254,8 @@ const onChangeSelectProject = async(e) => {
   // if (e.target.value === '1') setProj('Проект 1')
   // if (e.target.value === '2') setProj('Проект 2')
   // if (e.target.value === '3') setProj('Проект 3')
-  //console.log(e.target.value)
+
+  setProjectVar(e.target.value)
 
   if (e.target.value !== '0') {
     let count_title;
@@ -443,7 +446,7 @@ const delCategory4 = () => {
       const keyboard2 = JSON.stringify({
         inline_keyboard: [
             [
-                {"text": 'Принять', callback_data:'/accept ' + '123456789'},
+                {"text": 'Принять', callback_data:'/accept ' + projectVar},
                 {"text": 'Отклонить', callback_data:'/cancel'},
             ],
         ]
