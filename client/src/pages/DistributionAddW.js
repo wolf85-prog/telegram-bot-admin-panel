@@ -22,7 +22,7 @@ import { cilX, cilCaretBottom, cilCarAlt, cilCaretLeft } from '@coreui/icons';
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { $host } from '../http/index';
 import { useNavigate } from 'react-router-dom';
-import { newDistributionW, getDistributionsW, getProjects, getProjects3, getBlocks, getDatabaseId } from '../http/adminAPI';
+import { newDistributionW, getDistributionsW, getWorkerId, getProjects3, getBlocks, getDatabaseId } from '../http/adminAPI';
 import { newMessage, uploadFile } from '../http/chatAPI';
 import specData from './../data/specData';
 import categories from './../data/categories';
@@ -428,11 +428,18 @@ const delCategory4 = () => {
 
     //сохранение рассылки в базе данных
     await newDistributionW(message)
+
+    //получить список всех специалистов
+
     
     selected.map(async (user, index) => {
       console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
 
       let client = clients.filter((client) => client.chatId === user)[0];
+
+      //получить id специалиста по его telegramId
+      const worker = await getWorkerId(user)
+      console.log("WorkerId: ", worker)
       
       //Передаем данные боту
       const keyboard = JSON.stringify({

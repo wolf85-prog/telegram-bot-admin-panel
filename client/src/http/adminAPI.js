@@ -41,6 +41,27 @@ export const getProjects3 = async () =>{
     }
 }
 
+//get Workers
+export const getWorkers = async () =>{
+    try {
+       let response = await $host_bottest.get('workers');
+       //console.log(response);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getWorkers api", error.message);
+    }
+}
+
+export const getWorkerId = async (chatId) =>{
+    try {
+       let response = await $host_bottest.get('workers/chat/' + chatId);
+       //console.log("database: ", response);
+       return response;
+    } catch (error) {
+        console.log("error while calling getWorkerId api", error.message);
+    }
+}
+
 
 export const getBlocks = async (projectId) =>{
     try {
