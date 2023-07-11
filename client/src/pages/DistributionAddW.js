@@ -453,7 +453,7 @@ const delCategory4 = () => {
       const keyboard2 = JSON.stringify({
         inline_keyboard: [
             [
-                {"text": 'Принять', callback_data:'/accept ' + projectVar},
+                {"text": 'Принять', callback_data:'/accept ' + projectVar + ' ' + worker},
                 {"text": 'Отклонить', callback_data:'/cancel'},
             ],
         ]
