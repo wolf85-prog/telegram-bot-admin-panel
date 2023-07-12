@@ -223,3 +223,23 @@ export const delDistributionW = async (id) =>{
         console.log("error while calling delMessage api",error.message);
     }
 }
+
+
+//pretendent
+export const newPretendent = async (data) =>{
+    try {
+        await $host.post(`api/pretendent/add`, data); 
+    } catch (error) {
+        console.log("error while calling newDistribution api",error.message);
+    }
+}
+
+export const getPretendentId = async(id)=>{
+    try {
+        let response = await $host.get(`api/pretendent/get/${id}`);
+        //console.log(response);
+        return response.data;
+     } catch (error) {
+         console.log("error while calling getPretendentId api", error.message);
+     }
+}

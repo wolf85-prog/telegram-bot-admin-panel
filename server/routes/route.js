@@ -24,6 +24,7 @@ const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers
 const { newMessageWorker, delMessageWorker, getMessagesWorker, getAllMessagesWorker } = require('../controllers/wmessageController')
 const { newConversationWorker, getConversationWorker } = require('../controllers/wconversationController')
 const { getWorkers, getWorker, editWorker} = require('../controllers/workersController')
+const { newPretendent, getPretendent } = require('../controllers/pretendentController')
 
 //const upload = require( "../utils/upload.js")
 //const upload = multer({dest:"uploads"});
@@ -85,5 +86,8 @@ route.get('/wconversation/get/:id', getConversationWorker)
 route.get('/workers/get', getWorkers)
 route.get('/workers/get/:id', getWorker)
 route.patch('/workers/update/:id', editWorker)
+
+route.post('/pretendent/add', newPretendent)
+route.get('/pretendent/get/:id', getPretendent)
 
 module.exports = route

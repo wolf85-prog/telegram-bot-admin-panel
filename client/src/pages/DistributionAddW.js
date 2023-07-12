@@ -22,7 +22,15 @@ import { cilX, cilCaretBottom, cilCarAlt, cilCaretLeft } from '@coreui/icons';
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { $host } from '../http/index';
 import { useNavigate } from 'react-router-dom';
-import { newDistributionW, getDistributionsW, getWorkerId, getProjects3, getBlocks, getDatabaseId } from '../http/adminAPI';
+import { 
+  newDistributionW, 
+  getDistributionsW, 
+  getWorkerId, 
+  getProjects3, 
+  getBlocks, 
+  getDatabaseId,
+  newPretendent 
+} from '../http/adminAPI';
 import { newMessage, uploadFile } from '../http/chatAPI';
 import specData from './../data/specData';
 import categories from './../data/categories';
@@ -33,7 +41,6 @@ import poster from './../assets/images/poster.jpg';
 import noimage2 from './../assets/images/images.png';
 import treug from './../assets/images/treugolnik.png';
 import Loader from 'src/chat-app-new/components/Loader';
-
 
 const DistributionAddW = () => {
 
@@ -78,6 +85,7 @@ const DistributionAddW = () => {
   const [projectVar, setProjectVar] = useState('');
 
   const [proj, setProj] = useState('');
+  
 
   const audio = new Audio(sendSound);
 
@@ -442,7 +450,18 @@ const delCategory4 = () => {
       console.log("projectVar: ", projectVar)
       console.log(user)
 
-      let str = '/acceptT' + projectVar + 'T' + worker.data;
+
+      //let str = '/acceptT' + projectVar + 'T' + worker.data;
+      
+      //новый претендент
+      const pretendent = {
+        projectId: projectVar, 
+        workerId: worker.data, 
+        receiverId: user,        
+      }
+      const pretendentId = await newPretendent(pretendent)
+      console.log("pretendentId: ", pretendentId)
+
       
       //Передаем данные боту
       const keyboard = JSON.stringify({
@@ -456,7 +475,7 @@ const delCategory4 = () => {
       const keyboard2 = JSON.stringify({
         inline_keyboard: [
             [
-                {"text": 'Принять', callback_data:'/accept|' + projectVar + '|' + worker.data},
+                {"text": 'Принять', callback_data:'/accept ' + pretendentId},
                 {"text": 'Отклонить', callback_data:'/cancel'},
             ],
         ]
