@@ -61,6 +61,7 @@ const DistributionAddW = () => {
   const [image, setImage]= useState("");
 
   const [loader, setLoader] = useState(false);
+  const [valueProject, setValueProject] = useState(0)
   const [valueSelect, setValueSelect] = useState(0)
   const [valueSelect2, setValueSelect2] = useState(0)
   const [valueSelect3, setValueSelect3] = useState(0)
@@ -191,24 +192,17 @@ const onAddCategory2 = (e) => {
     const cat_name = categories[e.target.value].name
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
+        console.log(work.cat)
         if (work.cat === cat_name) {
-          const newObj = {
-            chatId: worker.chatId,
-          }
-          let flag = false
-          selected.map((id)=>{
-            if (id === worker.chatId) {
-              flag = true
-            }
-            console.log("flag: ", flag)
-          })
-          if (!flag) {
-            selected.push(newObj)
-          }
-        }
+          selected.push(worker.chatId)
+        } 
       })
     })
-    console.log(selected)
+    //выбрать уникальных специалистов
+    const arr = [...selected].filter((el, ind) => ind === selected.indexOf(el));
+    setSelected(arr)
+
+    console.log(arr)
   }
 }
 
@@ -254,6 +248,8 @@ const onChangeSelectProject = async(e) => {
   // if (e.target.value === '1') setProj('Проект 1')
   // if (e.target.value === '2') setProj('Проект 2')
   // if (e.target.value === '3') setProj('Проект 3')
+
+  setValueProject(e.target.value)
 
   setProjectVar(e.target.value)
 
@@ -344,14 +340,17 @@ const onChangeAddButton2 = () => {
 {/* Удаление категорий */}
 const delCategory2 = () => {
   setShowCategories2(false)
+  setValueSelect2(0)
 }
 
 const delCategory3 = () => {
   setShowCategories3(false)
+  setValueSelect3(0)
 }
 
 const delCategory4 = () => {
   setShowCategories4(false)
+  setValueSelect4(0)
 }
 
 
@@ -439,7 +438,9 @@ const delCategory4 = () => {
 
       //получить id специалиста по его telegramId
       const worker = await getWorkerId(user)
-      console.log("WorkerId: ", worker)
+      console.log("WorkerId: ", worker.data)
+      console.log("projectVar: ", projectVar)
+      console.log(user)
       
       //Передаем данные боту
       const keyboard = JSON.stringify({
@@ -453,7 +454,7 @@ const delCategory4 = () => {
       const keyboard2 = JSON.stringify({
         inline_keyboard: [
             [
-                {"text": 'Принять', callback_data:'/accept ' + projectVar + ' ' + worker},
+                {"text": 'Принять', callback_data:'/accept ' + projectVar + ' ' + worker.data},
                 {"text": 'Отклонить', callback_data:'/cancel'},
             ],
         ]
@@ -588,18 +589,22 @@ const delCategory4 = () => {
                                         </CCol>
                                       </CRow>
 
+                                      {/* Список проектов по имени */}
                                       <CFormSelect 
                                         aria-label="Default select example"
                                         style={{display: showNameProject ? "block" : "none" }}
                                         onChange={onChangeSelectProject}
                                         options={contacts}
+                                        value={valueProject}
                                       />
 
+                                      {/* Список проектов по id */}
                                       <CFormSelect 
                                         aria-label="Default select example"
                                         style={{display: !showNameProject ? "block" : "none" }}
                                         onChange={onChangeSelectProject}
                                         options={contacts2}
+                                        value={valueProject}
                                       />
 
                                       {/* <br/> */}
