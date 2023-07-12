@@ -80,6 +80,13 @@ const Report = sequelize.define('report', {
     delivered: {type: DataTypes.BOOLEAN}, //доставлено
 })
 
+const Pretendent = sequelize.define('pretendent', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    projectId: {type: DataTypes.STRING},  //id проекта
+    workerId: {type: DataTypes.STRING}, //id специалиста;
+    receiverId: {type: DataTypes.STRING}, //чат-id получателя;
+})
+
 
 module.exports = {
     User, 
@@ -89,5 +96,6 @@ module.exports = {
     Project, 
     Distribution,
     Distributionw,
-    Report
+    Report,
+    Pretendent
 }
