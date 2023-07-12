@@ -9,8 +9,9 @@ class PretendentController {
     async newPretendent(req, res) {
         const {projectId, workerId, receiverId} = req.body
         try {
-            await Pretendent.create({projectId, workerId, receiverId})
-            return res.status(200).json("Pretendent has been sent successfully");
+            const newUser = await Pretendent.create({projectId, workerId, receiverId})
+            //return res.status(200).json("Pretendent has been sent successfully");
+            return res.status(200).json(newUser);
         } catch (error) {
             return res.status(500).json(error.message);
         }
