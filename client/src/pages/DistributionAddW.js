@@ -446,10 +446,9 @@ const delCategory4 = () => {
 
       //получить id специалиста по его telegramId
       const worker = await getWorkerId(user)
-      console.log("WorkerId: ", worker.data)
-      console.log("projectVar: ", projectVar)
-      console.log(user)
-
+      // console.log("WorkerId: ", worker.data)
+      // console.log("projectVar: ", projectVar)
+      // console.log(user)
 
       //let str = '/acceptT' + projectVar + 'T' + worker.data;
       
