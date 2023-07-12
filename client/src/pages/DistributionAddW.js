@@ -441,6 +441,8 @@ const delCategory4 = () => {
       console.log("WorkerId: ", worker.data)
       console.log("projectVar: ", projectVar)
       console.log(user)
+
+      let str = '/acceptT' + projectVar + 'T' + worker.data;
       
       //Передаем данные боту
       const keyboard = JSON.stringify({
@@ -454,7 +456,7 @@ const delCategory4 = () => {
       const keyboard2 = JSON.stringify({
         inline_keyboard: [
             [
-                {"text": 'Принять', callback_data:'/accept ' + projectVar + ' ' + worker.data},
+                {"text": 'Принять', callback_data:'/accept|' + projectVar + '|' + worker.data},
                 {"text": 'Отклонить', callback_data:'/cancel'},
             ],
         ]
