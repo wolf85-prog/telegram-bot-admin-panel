@@ -209,9 +209,8 @@ export const newDistributionW = async (data) =>{
 
 export const getDistributionsW = async()=>{
     try {
-        let response = await $host.get('api/distributionsw/get');
+        await $host.get('api/distributionsw/get');
         //console.log(response);
-        return response.data;
      } catch (error) {
          console.log("error while calling getDistributions api", error.message);
      }
@@ -229,7 +228,9 @@ export const delDistributionW = async (id) =>{
 //pretendent
 export const newPretendent = async (data) =>{
     try {
-        await $host.post(`api/pretendent/add`, data); 
+        let response = await $host.post(`api/pretendent/add`, data);
+        console.log(response);
+        return response.data; 
     } catch (error) {
         console.log("error while calling newDistribution api",error.message);
     }
