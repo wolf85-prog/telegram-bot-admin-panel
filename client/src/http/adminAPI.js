@@ -209,8 +209,9 @@ export const newDistributionW = async (data) =>{
 
 export const getDistributionsW = async()=>{
     try {
-        await $host.get('api/distributionsw/get');
+        let response = await $host.get('api/distributionsw/get');
         //console.log(response);
+        return response.data;
      } catch (error) {
          console.log("error while calling getDistributions api", error.message);
      }

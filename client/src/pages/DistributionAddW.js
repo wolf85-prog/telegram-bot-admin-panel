@@ -455,7 +455,7 @@ const delCategory4 = () => {
       }
       const pretendentId = await newPretendent(pretendent)
 
-      console.log("pretendentId: ", pretendentId)
+      //console.log("pretendentId: ", pretendentId)
 
       
       //Передаем данные боту
@@ -470,7 +470,7 @@ const delCategory4 = () => {
       const keyboard2 = JSON.stringify({
         inline_keyboard: [
             [
-                {"text": 'Принять', callback_data:'/accept ' + pretendentId},
+                {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
                 {"text": 'Отклонить', callback_data:'/cancel'},
             ],
         ]
