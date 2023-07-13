@@ -55,7 +55,16 @@ const DistributionAddW = () => {
   const [contacts2, setContacts2]= useState([]);
   const [projects2, setProjects2]= useState([]);
 
+  const [arrCategory, setArrCategory] = useState([]);
+  const [arrCategory2, setArrCategory2] = useState([]);
+  const [arrCategory3, setArrCategory3] = useState([]);
+  const [arrCategory4, setArrCategory4] = useState([]);
+  const [arrCategory5, setArrCategory5] = useState([]);
+
+  const [categoryAll, setCategoryAll] = useState([]);
+
   const [selected, setSelected] = useState([]);
+  const [arrSelect, setArrSelect] = useState([]);
   const [text, setText] = useState('');
   const [countChar, setCountChar] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -83,14 +92,13 @@ const DistributionAddW = () => {
   const [disabledBtn, setDisabledBtn] = useState(true);
 
   const [projectVar, setProjectVar] = useState('');
-
   const [proj, setProj] = useState('');
-  
 
+  const [count, setCount] = useState(0);
+  
   const audio = new Audio(sendSound);
 
   const navigate = useNavigate();
-
   const backPage = () => {
        navigate('/distributionw');
   } 
@@ -156,9 +164,21 @@ const DistributionAddW = () => {
 //треугольник Добавить категорию
 const onAddCategory0 = (e) => {
   e.preventDefault();
+  setCount(count + 1)
+  console.log(count + 1)
   setValueSelect(e.target.value)
-  setShowCategories2(true)
-  //setShowCategories3(true)
+  if ((count + 1) === 1) {
+    setShowCategories2(true)
+  }
+
+  if ((count + 1) === 2) {
+    setShowCategories3(true)
+  }
+
+  if ((count + 1) === 3) {
+    setShowCategories4(true)
+  }
+  
 }
 
 //Изменить категорию (1-й селект)
@@ -171,19 +191,31 @@ const onAddCategory = (e) => {
     //setDisabledBtn(false)
   } else {
     const cat_name = categories[e.target.value].name
+    setArrSelect([])
+    arrCategory.pop()
+    arrCategory.push(cat_name)
+    console.log("arrCategory: ", arrCategory)
+    setArrCategory(arrCategory)
+    setCategoryAll([...arrCategory, ...arrCategory2])
+    const result = [...arrCategory, ...arrCategory2]
+    console.log(result)
+    
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
-        console.log(work.cat)
-        if (work.cat === cat_name) {
-          selected.push(worker.chatId)
-        } 
+        result.map((cat)=> {
+          if (work.cat === cat) {
+            arrSelect.push(worker.chatId)
+          } 
+        })
       })
     })
+    
     //выбрать уникальных специалистов
-    const arr = [...selected].filter((el, ind) => ind === selected.indexOf(el));
-    setSelected(arr)
+    //const arr = [...arrSelect].filter((el, ind) => ind === selected.indexOf(el));
+    
+    setSelected(arrSelect)
 
-    console.log(arr)
+    console.log(arrSelect)
   }
   
 }
@@ -193,24 +225,35 @@ const onAddCategory2 = (e) => {
   e.preventDefault();
   setValueSelect2(e.target.value)
 
-
   if (e.target.value === 0) {
     setSelected([])
   } else {
     const cat_name = categories[e.target.value].name
+
+    setArrSelect([])
+    arrCategory2.pop()
+    arrCategory2.push(cat_name)
+    console.log("arrCategory: ", arrCategory)
+    setArrCategory2(arrCategory2)
+    setCategoryAll([...arrCategory, ...arrCategory2])
+    const result = [...arrCategory, ...arrCategory2]
+    console.log(result)
+
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
-        console.log(work.cat)
-        if (work.cat === cat_name) {
-          selected.push(worker.chatId)
-        } 
+        result.map((cat)=> {
+          if (work.cat === cat) {
+            arrSelect.push(worker.chatId)
+          } 
+        })
       })
     })
     //выбрать уникальных специалистов
-    const arr = [...selected].filter((el, ind) => ind === selected.indexOf(el));
-    setSelected(arr)
+    //const arr = [...arrSelect].filter((el, ind) => ind === selected.indexOf(el));
+    
+    setSelected(arrSelect)
 
-    console.log(arr)
+    console.log(arrSelect)
   }
 }
 
@@ -230,6 +273,33 @@ const onAddCategory4 = (e) => {
 const onAddCategory5 = (e) => {
   e.preventDefault();
   setValueSelect5(e.target.value)
+}
+
+//----------------------------------------
+
+{/* Удаление категорий */}
+const delCategory2 = () => {
+  setShowCategories2(false)
+  setValueSelect2(0)
+  console.log("Удаление категории 2: ", arrCategory2)
+  arrCategory2.pop()
+  setCount(count - 1)
+}
+
+const delCategory3 = () => {
+  setShowCategories3(false)
+  setValueSelect3(0)
+  console.log("Удаление категории 3: ", arrCategory3)
+  arrCategory3.pop()
+  setCount(count - 1)
+}
+
+const delCategory4 = () => {
+  setShowCategories4(false)
+  setValueSelect4(0)
+  console.log("Удаление категории 4: ", arrCategory4)
+  arrCategory4.pop()
+  setCount(count - 1)
 }
 
 
@@ -345,22 +415,6 @@ const onChangeAddButton2 = () => {
   setShowEditButtonAdd (false)
 }
 
-{/* Удаление категорий */}
-const delCategory2 = () => {
-  setShowCategories2(false)
-  setValueSelect2(0)
-}
-
-const delCategory3 = () => {
-  setShowCategories3(false)
-  setValueSelect3(0)
-}
-
-const delCategory4 = () => {
-  setShowCategories4(false)
-  setValueSelect4(0)
-}
-
 
 //=======================================================
 
@@ -436,8 +490,6 @@ const delCategory4 = () => {
     //сохранение рассылки в базе данных
     await newDistributionW(message)
 
-    //получить список всех специалистов
-
     
     selected.map(async (user, index) => {
       console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
@@ -454,9 +506,6 @@ const delCategory4 = () => {
         receiverId: user,        
       }
       const pretendentId = await newPretendent(pretendent)
-
-      //console.log("pretendentId: ", pretendentId)
-
       
       //Передаем данные боту
       const keyboard = JSON.stringify({
@@ -624,8 +673,19 @@ const delCategory4 = () => {
                                       />
 
                                       {/* <br/> */}
+                                      
 
-                                      {loader ? <div style={{textAlign: 'center'}}><CSpinner/></div> : <br/>}
+                                      {loader ? 
+                                      <>
+                                        <br/>
+                                        <div style={{position: 'relative'}}>
+                                          <div style={{position: 'absolute', top: '-10px', left: '45%'}}>
+                                            <CSpinner/>
+                                          </div>
+                                        </div> 
+                                      </>
+                                      : <br/>
+                                      }
                                       
                                       <CRow>
                                         <CCol sm={12} > 
