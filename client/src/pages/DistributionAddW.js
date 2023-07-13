@@ -446,11 +446,6 @@ const delCategory4 = () => {
 
       //получить id специалиста по его telegramId
       const worker = await getWorkerId(user)
-      // console.log("WorkerId: ", worker.data)
-      // console.log("projectVar: ", projectVar)
-      // console.log(user)
-
-      //let str = '/acceptT' + projectVar + 'T' + worker.data;
       
       //новый претендент
       const pretendent = {
@@ -460,7 +455,7 @@ const delCategory4 = () => {
       }
       const pretendentId = await newPretendent(pretendent)
 
-      console.log("pretendentId: ", pretendentId.id)
+      console.log("pretendentId: ", pretendentId)
 
       
       //Передаем данные боту
@@ -475,7 +470,7 @@ const delCategory4 = () => {
       const keyboard2 = JSON.stringify({
         inline_keyboard: [
             [
-                {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
+                {"text": 'Принять', callback_data:'/accept ' + pretendentId},
                 {"text": 'Отклонить', callback_data:'/cancel'},
             ],
         ]
@@ -630,7 +625,7 @@ const delCategory4 = () => {
 
                                       {/* <br/> */}
 
-                                      {loader ? <CSpinner/> : <br/>}
+                                      {loader ? <div style={{textAlign: 'center'}}><CSpinner/></div> : <br/>}
                                       
                                       <CRow>
                                         <CCol sm={12} > 

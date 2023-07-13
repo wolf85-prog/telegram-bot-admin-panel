@@ -200,7 +200,8 @@ export const delDistribution = async (id) =>{
 //distribution2
 export const newDistributionW = async (data) =>{
     try {
-        await $host.post(`api/distributionw/add`, data); 
+        let response = await $host.post(`api/distributionw/add`, data); 
+        return response.data;
     } catch (error) {
         console.log("error while calling newDistribution api",error.message);
     }
