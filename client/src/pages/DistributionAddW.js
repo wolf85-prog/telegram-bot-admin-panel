@@ -161,11 +161,151 @@ const DistributionAddW = () => {
 
 //=======================================================
 
+//выбор название проекта или номер проекта
+const onChangeProjectName = () => {
+  setShowNameProject(true)
+  setSelected([])
+  setValueSelect(0)
+}
+
+const onChangeProjectNumber = () => {
+  setShowNameProject(false)
+  setSelected([])
+  setValueSelect(0)
+}
+
+
+let arr_count = []
+
+//выбор проекта
+const onChangeSelectProject = async(e) => {
+  e.preventDefault();
+  // if (e.target.value === '1') setProj('Проект 1')
+  // if (e.target.value === '2') setProj('Проект 2')
+  // if (e.target.value === '3') setProj('Проект 3')
+
+  //сбросить кол-во получателей до 0
+  setSelected([])
+  setArrSelect([])
+  //сбросить счетчик нажатий кнопки (Добавить)
+  setCount(0)
+  setValueSelect(0)
+  setValueSelect2(0)
+  setValueSelect3(0)
+  setValueSelect4(0)
+  setValueSelect5(0)
+  setShowCategories2(false)
+  setShowCategories3(false)
+  setShowCategories4(false)
+  //setShowCategories5(false)
+
+
+  setValueProject(e.target.value)
+
+  setProjectVar(e.target.value)
+
+  if (e.target.value !== '0') {
+    let count_title;
+    setLoader(true)
+    const blockId = await getBlocks(e.target.value); 
+
+    if (blockId) {
+      const databaseBlock = await getDatabaseId(blockId.data); 
+      setLoader(false)
+      const categories2 = [...databaseBlock.data]
+
+      console.log("categories: ", categories2)
+
+      specData.map((category)=> {
+        count_title = 0;
+        //console.log(category)
+        if (databaseBlock.data) {   
+          databaseBlock.data.map((db) => {
+            if (category.name === db.title) {
+              count_title++
+            }
+          })
+          
+          if (count_title !== 0) {
+            const obj = {
+              id: category.id,
+              title: category.icon,
+              name: category.name,
+              count: count_title,
+            }
+            arr_count.push(obj)
+          }
+          
+        }
+      })  
+
+      //console.log("arr_count: ", arr_count)
+      
+      if(arr_count[0]) {
+        setValueSelect(arr_count[0].id)
+      }
+
+      if(arr_count[1]) {
+        setValueSelect2(arr_count[1]?.id)
+        setShowCategories2(true)
+      }
+
+      if(arr_count[2]) {
+        setValueSelect3(arr_count[2]?.id)
+        setShowCategories3(true)
+      }
+
+      if(arr_count[3]) {
+        setValueSelect4(arr_count[3].id)
+        setShowCategories4(true)
+      }
+
+      if(arr_count[4]) {
+        setValueSelect5(arr_count[4].id)
+        //setShowCategories5(true)
+      }
+
+      //список специалистов с массивом специальностей (категорий)
+      workers.map((worker)=> {
+        JSON.parse(worker.worklist).map((work) => {
+          arr_count.map((cat)=>{
+            console.log("cat_name: ", cat.name)
+            if (work.cat === cat.name) {
+              arrSelect.push(worker.chatId)
+            } 
+          })
+        })
+      })
+      //выбрать уникальных специалистов
+      const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
+      setSelected(arr)
+
+      console.log(arr)
+      
+    }
+  } else {
+    setValueSelect(0)
+  }
+  
+}
+
+const onChangeAddButton = () => {
+  setShowEditButtonAdd (true)
+}
+
+const onChangeAddButton2 = () => {
+  setShowEditButtonAdd (false)
+}
+
+//=========================================================
+
 //треугольник Добавить категорию
 const onAddCategory0 = (e) => {
   e.preventDefault();
-  setCount(count + 1)
-  console.log(count + 1)
+  if (count < 3) {
+    setCount(count + 1)
+    console.log(count + 1)
+  }
   setValueSelect(e.target.value)
   if ((count + 1) === 1) {
     setShowCategories2(true)
@@ -300,119 +440,6 @@ const delCategory4 = () => {
   console.log("Удаление категории 4: ", arrCategory4)
   arrCategory4.pop()
   setCount(count - 1)
-}
-
-
-
-//выбор название проекта или номер проекта
-const onChangeProjectName = () => {
-  setShowNameProject(true)
-  setSelected([])
-  setValueSelect(0)
-}
-
-const onChangeProjectNumber = () => {
-  setShowNameProject(false)
-  setSelected([])
-  setValueSelect(0)
-}
-
-
-let arr_count = []
-
-//выбор проекта
-const onChangeSelectProject = async(e) => {
-  e.preventDefault();
-  // if (e.target.value === '1') setProj('Проект 1')
-  // if (e.target.value === '2') setProj('Проект 2')
-  // if (e.target.value === '3') setProj('Проект 3')
-
-  setValueProject(e.target.value)
-
-  setProjectVar(e.target.value)
-
-  if (e.target.value !== '0') {
-    let count_title;
-    setLoader(true)
-    const blockId = await getBlocks(e.target.value); 
-
-    if (blockId) {
-      const databaseBlock = await getDatabaseId(blockId.data); 
-      setLoader(false)
-      const categories2 = [...databaseBlock.data]
-
-      console.log("categories: ", categories2)
-
-      specData.map((category)=> {
-          count_title = 0;
-
-        if (databaseBlock.data) {   
-          databaseBlock.data.map((db) => {
-            if (category.name === db.title) {
-              count_title++
-            }
-          })
-          
-          if (count_title !== 0) {
-            const obj = {
-              id: category.id,
-              title: category.icon,
-              count: count_title,
-            }
-            arr_count.push(obj)
-          }
-          
-        }
-      })  
-
-      console.log("arr_count: ", arr_count)
-      
-      if(arr_count[0]) {
-        setValueSelect(arr_count[0].id)
-      }
-
-      if(arr_count[1]) {
-        setValueSelect2(arr_count[1]?.id)
-        setShowCategories2(true)
-      }
-
-      if(arr_count[2]) {
-        setValueSelect2(arr_count[2]?.id)
-        setShowCategories3(true)
-      }
-
-      if(arr_count[3]) {
-        setValueSelect2(arr_count[3].id)
-        setShowCategories4(true)
-      }
-
-      const cat_name = categories[valueSelect].name
-      console.log("Категория: ", cat_name)
-      workers.map((worker)=> {
-        JSON.parse(worker.worklist).map((work) => {
-          console.log(work.cat)
-          if (work.cat === cat_name) {
-            selected.push(worker.chatId)
-          } 
-        })
-      })
-      //выбрать уникальных специалистов
-      const arr = [...selected].filter((el, ind) => ind === selected.indexOf(el));
-      setSelected(arr)
-      
-    }
-  } else {
-    setValueSelect(0)
-  }
-  
-}
-
-const onChangeAddButton = () => {
-  setShowEditButtonAdd (true)
-}
-
-const onChangeAddButton2 = () => {
-  setShowEditButtonAdd (false)
 }
 
 
