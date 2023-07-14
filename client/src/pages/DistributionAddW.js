@@ -183,6 +183,7 @@ const onChangeSelectProject = async(e) => {
   // if (e.target.value === '1') setProj('Проект 1')
   // if (e.target.value === '2') setProj('Проект 2')
   // if (e.target.value === '3') setProj('Проект 3')
+  setProj(e.target.value)
 
   //сбросить кол-во получателей до 0
   setSelected([])
@@ -1023,8 +1024,8 @@ const delCategory4 = () => {
                                     }}>
                                     {/* <div><Link to={'/distributionw_planer/'} state={{ project: proj}}><CButton color="secondary">Запланировать</CButton></Link></div> */}
                                       <div>{proj ? 
-                                        <Link to={'/distributionw_planer'} state={{ project: proj}}><CButton color="secondary">Запланировать</CButton></Link>
-                                        :<Link to={''} state={{ project: `${proj}`, }}><CButton color="success">Запланировать</CButton></Link>}
+                                        <Link to={'/distributionw_planer'} state={{ project: proj}}><CButton color="success">Запланировать</CButton></Link>
+                                        :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>}
                                       </div>
                                       <div><CButton color="primary" disabled={selected.length == 0} onClick={onSendText}>Разослать сейчас</CButton></div>
                                     </div>
