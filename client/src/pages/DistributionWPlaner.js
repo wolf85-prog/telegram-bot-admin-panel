@@ -31,8 +31,8 @@ const DistributionWPlaner = () => {
   const [showEditTime, setShowEditTime] = useState(false)
   const [time, setTime] = useState('06:00')
 
-  const [countCol, setCountCol] = useState(7)
-  const [countCol2, setCountCol2] = useState(7)
+  const [countCol, setCountCol] = useState(6)
+  const [countCol2, setCountCol2] = useState(6)
 
   //table1
   const [countClick11, setCountClick11] = useState(0)
@@ -70,7 +70,24 @@ const DistributionWPlaner = () => {
     {date: date_str, time: '09:00', proj: '', save: false},
     {date: date_str, time: '10:00', proj: '', save: false},
     {date: date_str, time: '11:00', proj: '', save: false},
-    {date: date_str, time: '12:00', proj: '', save: false}
+  ])
+
+  const [dates1, setDates1] = useState([
+    {date: date_str, time: '12:00', proj: '', save: false},
+    {date: date_str, time: '13:00', proj: '', save: false},
+    {date: date_str, time: '14:00', proj: '', save: true},
+    {date: date_str, time: '15:00', proj: '', save: false},
+    {date: date_str, time: '16:00', proj: '', save: false},
+    {date: date_str, time: '17:00', proj: '', save: false},
+  ])
+
+  const [dates11, setDates11] = useState([
+    {date: date_str, time: '18:00', proj: '', save: false},
+    {date: date_str, time: '19:00', proj: '', save: false},
+    {date: date_str, time: '20:00', proj: '', save: false},
+    {date: date_str, time: '21:00', proj: '', save: false},
+    {date: date_str, time: '22:00', proj: '', save: false},
+    {date: date_str, time: '23:00', proj: '', save: false},
   ])
 
   const [dates2, setDates2] = useState([
@@ -393,13 +410,12 @@ const DistributionWPlaner = () => {
                             <br />
 
                               <CRow>
-                                <CCol xs>
-                                    
+                              <CCol xs>                                   
                                 <div style={{float: "left", display: 'flex'}}>
                                   <CTable align="middle" className="mb-0 border" hover responsive bordered style={{float: 'left'}}>   
                                     <CTableHead className='table-dark' >
                                       <CTableRow>
-                                        <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center" style={{width: '70px'}}>Дата</CTableHeaderCell>
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
@@ -436,7 +452,67 @@ const DistributionWPlaner = () => {
                                               </div>    */}
                                             </div>
                                           </CTableDataCell>
-                                          <CTableDataCell style={{width: '400px'}}>
+                                          <CTableDataCell style={{width: '150px'}}>
+                                            <div style={{display: item.proj ? "block": "none"}}>{item.proj}</div>
+                                          </CTableDataCell>
+                                          <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                            <CFormCheck 
+                                              id="rowCheckTab1"
+                                              checked={value1[index]}
+                                              onChange={()=>changeStatus(index)}
+                                              disabled={item.save ? 'disabled': ''}
+                                            />
+                                          </CTableDataCell>
+                                        </CTableRow>
+                                    ))}
+                                    </CTableBody>
+                                  </CTable>
+                                  </div>
+                                </CCol>
+{/* ---------------------------------------------------------------------------------------------------------------- */}
+                                <CCol xs>                                   
+                                <div style={{float: "left", display: 'flex'}}>
+                                  <CTable align="middle" className="mb-0 border" hover responsive bordered style={{float: 'left'}}>   
+                                    <CTableHead className='table-dark' >
+                                      <CTableRow>
+                                        <CTableHeaderCell className="text-center" style={{width: '70px'}}>Дата</CTableHeaderCell>
+                                      </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                      <CTableRow v-for="item in tableItems">
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol}px`}} >
+                                          <div>{date_str}</div> 
+                                        </CTableDataCell>
+                                      </CTableRow>
+                                    </CTableBody>
+                                  </CTable>
+
+                                  <CTable align="middle" className="mb-0 border" hover responsive bordered>
+                                    <CTableHead className='table-dark' >
+                                      <CTableRow>
+                                        {/* <CTableHeaderCell className="text-center">Дата</CTableHeaderCell> */}
+                                        <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Проект</CTableHeaderCell>   
+                                        <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
+                                      </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                    {dates1.map((item, index) => (
+                                        <CTableRow v-for="item in tableItems" key={index}>   
+                                          <CTableDataCell className="text-center" style={{width: '50px'}} >
+                                            <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
+                                              <div onClick={()=>clickShowEditTime(`${item.time}`, index, 1)} >{item.time}</div>
+                                              {/* <div style={{display: showEditTime ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
+                                                <div onClick={changeTimePlus}>
+                                                  &#9650;
+                                                </div>
+                                                <div onClick={changeTimeMinus}>          	
+                                                  &#9660;
+                                                </div>
+                                              </div>    */}
+                                            </div>
+                                          </CTableDataCell>
+                                          <CTableDataCell style={{width: '150px'}}>
                                             <div style={{display: item.proj ? "block": "none"}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
@@ -459,13 +535,13 @@ const DistributionWPlaner = () => {
                                   <CTable align="middle" className="mb-0 border" hover responsive bordered style={{float: 'left'}}>   
                                     <CTableHead className='table-dark' >
                                       <CTableRow>
-                                        <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center" style={{width: '70px'}}>Дата</CTableHeaderCell>
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol2}px`}} >
-                                          <div>{date_str2}</div> 
+                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol2}px`}} >
+                                          <div>{date_str}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
                                     </CTableBody>
@@ -481,14 +557,14 @@ const DistributionWPlaner = () => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates2.map((item, index) => (
+                                    {dates11.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
                                               <div onClick={()=>clickShowEditTime(`${item.time}`, index, 2)} >{item.time}</div>
                                             </div>
                                           </CTableDataCell>
-                                          <CTableDataCell style={{width: '400px'}}>
+                                          <CTableDataCell style={{width: '150px'}}>
                                             <div>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
