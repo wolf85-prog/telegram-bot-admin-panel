@@ -41,6 +41,17 @@ export const getProjects3 = async () =>{
     }
 }
 
+//api id notion
+export const getProjectId = async (id) =>{
+    try {
+        let response = await $host_bottest.get('project/' + id);
+        //console.log("projectsAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectId api", error.message);
+    }
+}
+
 //get Workers
 export const getWorkers = async () =>{
     try {

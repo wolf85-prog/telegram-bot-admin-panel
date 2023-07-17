@@ -28,11 +28,14 @@ const DistributionWPlaner = () => {
   const [distributionsWork, setDistributionsWork]= useState([]);
   const [loading, setLoading]= useState(true);
 
+  console.log(location.state.project);
+
   const [showEditTime, setShowEditTime] = useState(false)
   const [time, setTime] = useState('06:00')
 
   const [countCol, setCountCol] = useState(6)
   const [countCol2, setCountCol2] = useState(6)
+  const [countCol3, setCountCol3] = useState(6)
 
   //table1
   const [countClick11, setCountClick11] = useState(0)
@@ -41,7 +44,6 @@ const DistributionWPlaner = () => {
   const [countClick41, setCountClick41] = useState(0)
   const [countClick51, setCountClick51] = useState(0)
   const [countClick61, setCountClick61] = useState(0)
-  const [countClick71, setCountClick71] = useState(0)
 
   //table2
   const [countClick12, setCountClick12] = useState(0)
@@ -50,7 +52,14 @@ const DistributionWPlaner = () => {
   const [countClick42, setCountClick42] = useState(0)
   const [countClick52, setCountClick52] = useState(0)
   const [countClick62, setCountClick62] = useState(0)
-  const [countClick72, setCountClick72] = useState(0)
+
+  //table3
+  const [countClick13, setCountClick13] = useState(0)
+  const [countClick23, setCountClick23] = useState(0)
+  const [countClick33, setCountClick33] = useState(0)
+  const [countClick43, setCountClick43] = useState(0)
+  const [countClick53, setCountClick53] = useState(0)
+  const [countClick63, setCountClick63] = useState(0)
 
   const d = new Date();
   const month = String(d.getMonth()+1).padStart(2, "0");
@@ -66,7 +75,7 @@ const DistributionWPlaner = () => {
   const [dates, setDates] = useState([
     {date: date_str, time: '06:00', proj: '', save: false},
     {date: date_str, time: '07:00', proj: '', save: false},
-    {date: date_str, time: '08:00', proj: 'Проект 3', save: true},
+    {date: date_str, time: '08:00', proj: '', save: false},
     {date: date_str, time: '09:00', proj: '', save: false},
     {date: date_str, time: '10:00', proj: '', save: false},
     {date: date_str, time: '11:00', proj: '', save: false},
@@ -89,6 +98,8 @@ const DistributionWPlaner = () => {
     {date: date_str, time: '22:00', proj: '', save: false},
     {date: date_str, time: '23:00', proj: '', save: false},
   ])
+
+//----------------------------------------------------------
 
   const [dates2, setDates2] = useState([
     {date: date_str2, time: '06:00', proj: '', save: false},
@@ -149,27 +160,7 @@ const DistributionWPlaner = () => {
           setDates(arr)
         }
       }
-
-      if (tab === 2) {
-        setCountClick12(countClick12+1)
-        if (countClick12 < 1) {
-          setCountCol2(countCol2+1)
-          arr2 = dates2.slice(0);
-          const newObj = {
-                date: date_str2,
-                time: '06:30',
-                proj: ''
-              }
-          arr2.splice(ind+1, 0, newObj);
-          setDates2(arr2)
-        }
-      }
-
     }
-
-    // if (t === '06:30')  {
-    //   showEditTime ? setShowEditTime(false) : setShowEditTime(true) 
-    // }
 
     if (t === '07:00')  {
       if (tab === 1) {
@@ -184,21 +175,6 @@ const DistributionWPlaner = () => {
               }
           arr.splice(ind+1, 0, newObj);
           setDates(arr)
-        }
-      }
-
-      if (tab === 2) {
-        setCountClick22(countClick22+1)
-        if (countClick22 < 1) {
-          setCountCol2(countCol2+1)
-          arr2 = dates2.slice(0);
-          const newObj = {
-                date: date_str2,
-                time: '07:30',
-                proj: ''
-              }
-          arr2.splice(ind+1, 0, newObj);
-          setDates2(arr2)
         }
       }
     }
@@ -219,21 +195,6 @@ const DistributionWPlaner = () => {
           setDates(arr)
         }
       }
-
-      if (tab === 2) {
-        setCountClick32(countClick32+1)
-        if (countClick32 < 1) {
-          setCountCol2(countCol2+1)
-          arr2 = dates2.slice(0);
-          const newObj = {
-                date: date_str2,
-                time: '08:30',
-                proj: ''
-              }
-          arr2.splice(ind+1, 0, newObj);
-          setDates2(arr2)
-        }
-      }
     }
 
     if (t === '09:00')  {
@@ -249,21 +210,6 @@ const DistributionWPlaner = () => {
               }
           arr.splice(ind+1, 0, newObj);
           setDates(arr)
-        }
-      }
-
-      if (tab === 2) {
-        setCountClick42(countClick42+1)
-        if (countClick42 < 1) {
-          setCountCol2(countCol2+1)
-          arr2 = dates2.slice(0);
-          const newObj = {
-                date: date_str2,
-                time: '09:30',
-                proj: ''
-              }
-          arr2.splice(ind+1, 0, newObj);
-          setDates2(arr2)
         }
       }
     }
@@ -283,21 +229,6 @@ const DistributionWPlaner = () => {
           setDates(arr)
         }
       }
-
-      if (tab === 2) {
-        setCountClick52(countClick52+1)
-        if (countClick52 < 1) {
-          setCountCol2(countCol2+1)
-          arr2 = dates2.slice(0);
-          const newObj = {
-                date: date_str2,
-                time: '10:30',
-                proj: ''
-              }
-          arr2.splice(ind+1, 0, newObj);
-          setDates2(arr2)
-        }
-      }
     }
 
     if (t === '11:00')  {
@@ -315,60 +246,216 @@ const DistributionWPlaner = () => {
           setDates(arr)
         }
       }
-
-      if (tab === 2) {
-        setCountClick62(countClick62+1)
-        if (countClick62 < 1) {
-          setCountCol2(countCol2+1)
-          arr2 = dates2.slice(0);
-          const newObj = {
-                date: date_str2,
-                time: '11:30',
-                proj: ''
-              }
-          arr2.splice(ind+1, 0, newObj);
-          setDates2(arr2)
-        }
-      }
     }
 
+    //12:00 - 17:00
+
     if (t === '12:00')  {
-      if (tab === 1) {
-        setCountClick71(countClick71+1)
-        if (countClick71 < 1) {
-          setCountCol(countCol+1)
-          arr = dates.slice(0);
+      if (tab === 2) {
+        setCountClick12(countClick12+1)
+        if (countClick12 < 1) {
+          setCountCol2(countCol2+1)
+          arr = dates1.slice(0);
           const newObj = {
                 date: date_str,
                 time: '12:30',
                 proj: ''
               }
           arr.splice(ind+1, 0, newObj);
-          setDates(arr)
+          setDates1(arr)
         }
       }
-
-      if (tab === 2) {
-        setCountClick72(countClick72+1)
-        if (countClick72 < 1) {
-          setCountCol2(countCol2+1)
-          arr2 = dates2.slice(0);
-          const newObj = {
-                date: date_str2,
-                time: '12:30',
-                proj: ''
-              }
-          arr2.splice(ind+1, 0, newObj);
-          setDates2(arr2)
-        }
-      }
-      
     }
 
+    if (t === '13:00')  {
+      if (tab === 2) {
+        setCountClick22(countClick22+1)
+        if (countClick22 < 1) {
+          setCountCol2(countCol2+1)
+          arr = dates1.slice(0);
+          const newObj = {
+                date: date_str,
+                time: '13:30',
+                proj: ''
+              }
+          arr.splice(ind+1, 0, newObj);
+          setDates1(arr)
+        }
+      }
+    }
 
+    if (t === '14:00')  {
+      if (tab === 2) {
+        setCountClick32(countClick32+1)
+        if (countClick32 < 1) {
+          setCountCol2(countCol2+1)
+          arr = dates1.slice(0);
+          const newObj = {
+                date: date_str,
+                time: '14:30',
+                proj: ''
+              }
+          arr.splice(ind+1, 0, newObj);
+          setDates1(arr)
+        }
+      }
+    }
+
+    if (t === '15:00')  {
+      if (tab === 2) {
+        setCountClick42(countClick42+1)
+        if (countClick42 < 1) {
+          setCountCol2(countCol2+1)
+          arr = dates1.slice(0);
+          const newObj = {
+                date: date_str,
+                time: '15:30',
+                proj: ''
+              }
+          arr.splice(ind+1, 0, newObj);
+          setDates1(arr)
+        }
+      }
+    }
+
+    if (t === '16:00')  {
+      if (tab === 2) {
+        setCountClick52(countClick52+1)
+        if (countClick52 < 1) {
+          setCountCol2(countCol2+1)
+          arr = dates1.slice(0);
+          const newObj = {
+                date: date_str,
+                time: '16:30',
+                proj: ''
+              }
+          arr.splice(ind+1, 0, newObj);
+          setDates1(arr)
+        }
+      }
+    }
+
+    if (t === '17:00')  {
+      if (tab === 2) {
+        setCountClick62(countClick62+1)
+        if (countClick62 < 1) {
+          setCountCol2(countCol2+1)
+          arr = dates1.slice(0);
+          const newObj = {
+                date: date_str,
+                time: '17:30',
+                proj: ''
+              }
+          arr.splice(ind+1, 0, newObj);
+          setDates1(arr)
+        }
+      }
+    }
+
+        //18:00 - 23:00
+
+    if (t === '18:00')  {
+          if (tab === 3) {
+            setCountClick13(countClick13+1)
+            if (countClick13 < 1) {
+              setCountCol3(countCol3+1)
+              arr = dates11.slice(0);
+              const newObj = {
+                    date: date_str,
+                    time: '18:30',
+                    proj: ''
+                  }
+              arr.splice(ind+1, 0, newObj);
+              setDates11(arr)
+            }
+          }
+    }
     
-    //   showEditTime ? setShowEditTime (false) : setShowEditTime (true)  
-  
+    if (t === '19:00')  {
+          if (tab === 3) {
+            setCountClick23(countClick23+1)
+            if (countClick23 < 1) {
+              setCountCol3(countCol3+1)
+              arr = dates11.slice(0);
+              const newObj = {
+                    date: date_str,
+                    time: '19:30',
+                    proj: ''
+                  }
+              arr.splice(ind+1, 0, newObj);
+              setDates11(arr)
+            }
+          }
+    }
+    
+    if (t === '20:00')  {
+          if (tab === 3) {
+            setCountClick33(countClick33+1)
+            if (countClick33 < 1) {
+              setCountCol3(countCol3+1)
+              arr = dates11.slice(0);
+              const newObj = {
+                    date: date_str,
+                    time: '20:30',
+                    proj: ''
+                  }
+              arr.splice(ind+1, 0, newObj);
+              setDates11(arr)
+            }
+          }
+    }
+    
+    if (t === '21:00')  {
+          if (tab === 3) {
+            setCountClick43(countClick43+1)
+            if (countClick43 < 1) {
+              setCountCol3(countCol3+1)
+              arr = dates11.slice(0);
+              const newObj = {
+                    date: date_str,
+                    time: '21:30',
+                    proj: ''
+                  }
+              arr.splice(ind+1, 0, newObj);
+              setDates11(arr)
+            }
+          }
+    }
+    
+    if (t === '22:00')  {
+          if (tab === 3) {
+            setCountClick53(countClick53+1)
+            if (countClick53 < 1) {
+              setCountCol3(countCol3+1)
+              arr = dates11.slice(0);
+              const newObj = {
+                    date: date_str,
+                    time: '22:30',
+                    proj: ''
+                  }
+              arr.splice(ind+1, 0, newObj);
+              setDates11(arr)
+            }
+          }
+    }
+    
+    if (t === '23:00')  {
+          if (tab === 3) {
+            setCountClick63(countClick63+1)
+            if (countClick63 < 1) {
+              setCountCol3(countCol3+1)
+              arr = dates11.slice(0);
+              const newObj = {
+                    date: date_str,
+                    time: '23:30',
+                    proj: ''
+                  }
+              arr.splice(ind+1, 0, newObj);
+              setDates11(arr)
+            }
+          }
+    }
+
   }
 
 
@@ -452,7 +539,7 @@ const DistributionWPlaner = () => {
                                               </div>    */}
                                             </div>
                                           </CTableDataCell>
-                                          <CTableDataCell style={{width: '150px'}}>
+                                          <CTableDataCell style={{width: '180px'}}>
                                             <div style={{display: item.proj ? "block": "none"}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
@@ -469,7 +556,7 @@ const DistributionWPlaner = () => {
                                   </CTable>
                                   </div>
                                 </CCol>
-{/* ---------------------------------------------------------------------------------------------------------------- */}
+{/* -----------------------------12:00----------------------------------------------------------------------------------- */}
                                 <CCol xs>                                   
                                 <div style={{float: "left", display: 'flex'}}>
                                   <CTable align="middle" className="mb-0 border" hover responsive bordered style={{float: 'left'}}>   
@@ -480,7 +567,7 @@ const DistributionWPlaner = () => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol2}px`}} >
                                           <div>{date_str}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -501,7 +588,7 @@ const DistributionWPlaner = () => {
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
-                                              <div onClick={()=>clickShowEditTime(`${item.time}`, index, 1)} >{item.time}</div>
+                                              <div onClick={()=>clickShowEditTime(`${item.time}`, index, 2)} >{item.time}</div>
                                               {/* <div style={{display: showEditTime ? "block" : "none", fontSize: '12px', paddingLeft: '8px'}}>
                                                 <div onClick={changeTimePlus}>
                                                   &#9650;
@@ -512,7 +599,7 @@ const DistributionWPlaner = () => {
                                               </div>    */}
                                             </div>
                                           </CTableDataCell>
-                                          <CTableDataCell style={{width: '150px'}}>
+                                          <CTableDataCell style={{width: '180px'}}>
                                             <div style={{display: item.proj ? "block": "none"}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
@@ -529,7 +616,8 @@ const DistributionWPlaner = () => {
                                   </CTable>
                                   </div>
                                 </CCol>
-{/* ---------------------------------------------------------------------------------------------------------------- */}
+
+{/* ----------------------------18:00------------------------------------------------------------------------------------ */}
                                 <CCol xs>
                                 <div style={{float: "left", display: 'flex'}}>
                                   <CTable align="middle" className="mb-0 border" hover responsive bordered style={{float: 'left'}}>   
@@ -540,7 +628,7 @@ const DistributionWPlaner = () => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol2}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol3}px`}} >
                                           <div>{date_str}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -561,10 +649,10 @@ const DistributionWPlaner = () => {
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
-                                              <div onClick={()=>clickShowEditTime(`${item.time}`, index, 2)} >{item.time}</div>
+                                              <div onClick={()=>clickShowEditTime(`${item.time}`, index, 3)} >{item.time}</div>
                                             </div>
                                           </CTableDataCell>
-                                          <CTableDataCell style={{width: '150px'}}>
+                                          <CTableDataCell style={{width: '180px'}}>
                                             <div>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>

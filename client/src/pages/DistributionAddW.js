@@ -60,11 +60,14 @@ const DistributionAddW = () => {
   const [arrCategory3, setArrCategory3] = useState([]);
   const [arrCategory4, setArrCategory4] = useState([]);
   const [arrCategory5, setArrCategory5] = useState([]);
+  const [arrCategory6, setArrCategory6] = useState([]);
+  const [arrCategory7, setArrCategory7] = useState([]);
 
   const [categoryAll, setCategoryAll] = useState([]);
 
   const [selected, setSelected] = useState([]);
   const [arrSelect, setArrSelect] = useState([]);
+  const [arrLength, setArrLength] = useState(0);
   const [text, setText] = useState('');
   const [countChar, setCountChar] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -84,10 +87,14 @@ const DistributionAddW = () => {
   const [valueSelect4, setValueSelect4] = useState(0)
   const [valueSelect5, setValueSelect5] = useState(0)
   const [valueSelect6, setValueSelect6] = useState(0)
+  const [valueSelect7, setValueSelect7] = useState(0)
 
   const [showCategories2, setShowCategories2] = useState(false);
   const [showCategories3, setShowCategories3] = useState(false);
   const [showCategories4, setShowCategories4] = useState(false);
+  const [showCategories5, setShowCategories5] = useState(false);
+  const [showCategories6, setShowCategories6] = useState(false);
+  const [showCategories7, setShowCategories7] = useState(false);
 
   const [disabledBtn, setDisabledBtn] = useState(true);
 
@@ -183,6 +190,7 @@ const onChangeSelectProject = async(e) => {
   // if (e.target.value === '1') setProj('Проект 1')
   // if (e.target.value === '2') setProj('Проект 2')
   // if (e.target.value === '3') setProj('Проект 3')
+  
   setProj(e.target.value)
 
   //сбросить кол-во получателей до 0
@@ -195,11 +203,14 @@ const onChangeSelectProject = async(e) => {
   setValueSelect3(0)
   setValueSelect4(0)
   setValueSelect5(0)
+  setValueSelect6(0)
+  setValueSelect7(0)
   setShowCategories2(false)
   setShowCategories3(false)
   setShowCategories4(false)
-  //setShowCategories5(false)
-
+  setShowCategories5(false)
+  setShowCategories6(false)
+  setShowCategories7(false)
 
   setValueProject(e.target.value)
 
@@ -240,7 +251,8 @@ const onChangeSelectProject = async(e) => {
         }
       })  
 
-      //console.log("arr_count: ", arr_count)
+      console.log("arr_count: ", arr_count.length)
+      setArrLength(arr_count.length)
       
       if(arr_count[0]) {
         setValueSelect(arr_count[0].id)
@@ -263,14 +275,19 @@ const onChangeSelectProject = async(e) => {
 
       if(arr_count[4]) {
         setValueSelect5(arr_count[4].id)
-        //setShowCategories5(true)
+        setShowCategories5(true)
+      }
+
+      if(arr_count[5]) {
+        setValueSelect6(arr_count[5].id)
+        setShowCategories6(true)
       }
 
       //список специалистов с массивом специальностей (категорий)
       workers.map((worker)=> {
         JSON.parse(worker.worklist).map((work) => {
           arr_count.map((cat)=>{
-            console.log("cat_name: ", cat.name)
+            //console.log("cat_name: ", cat.name)
             if (work.cat === cat.name) {
               arrSelect.push(worker.chatId)
             } 
@@ -308,17 +325,58 @@ const onAddCategory0 = (e) => {
     console.log(count + 1)
   }
   setValueSelect(e.target.value)
-  if ((count + 1) === 1) {
-    setShowCategories2(true)
+
+  if (arrLength < 2) {
+    if ((count + 1) === 1) {
+      setShowCategories2(true)
+    }
+
+    if ((count + 1) === 2) {
+      setShowCategories3(true)
+    }
+
+    if ((count + 1) === 3) {
+      setShowCategories4(true)
+    }
+  } else if (arrLength === 2) {
+    if ((count + 1) === 1) {
+      setShowCategories3(true)
+    }
+
+    if ((count + 1) === 2) {
+      setShowCategories4(true)
+    }
+
+    if ((count + 1) === 3) {
+      setShowCategories5(true)
+    }
+  } else if (arrLength === 3) {
+    if ((count + 1) === 1) {
+      setShowCategories4(true)
+    }
+
+    if ((count + 1) === 2) {
+      setShowCategories5(true)
+    }
+
+    if ((count + 1) === 3) {
+      setShowCategories6(true)
+    }
+  } else if (arrLength === 4) {
+    if ((count + 1) === 1) {
+      setShowCategories5(true)
+    }
+
+    if ((count + 1) === 2) {
+      setShowCategories6(true)
+    }
+
+    if ((count + 1) === 3) {
+      setShowCategories7(true)
+    }
   }
 
-  if ((count + 1) === 2) {
-    setShowCategories3(true)
-  }
-
-  if ((count + 1) === 3) {
-    setShowCategories4(true)
-  }
+  
   
 }
 
@@ -416,6 +474,18 @@ const onAddCategory5 = (e) => {
   setValueSelect5(e.target.value)
 }
 
+//Изменить категорию (6-й селект)
+const onAddCategory6 = (e) => {
+  e.preventDefault();
+  setValueSelect6(e.target.value)
+}
+
+//Изменить категорию (7-й селект)
+const onAddCategory7 = (e) => {
+  e.preventDefault();
+  setValueSelect7(e.target.value)
+}
+
 //----------------------------------------
 
 {/* Удаление категорий */}
@@ -440,6 +510,30 @@ const delCategory4 = () => {
   setValueSelect4(0)
   console.log("Удаление категории 4: ", arrCategory4)
   arrCategory4.pop()
+  setCount(count - 1)
+}
+
+const delCategory5 = () => {
+  setShowCategories5(false)
+  setValueSelect5(0)
+  console.log("Удаление категории 5: ", arrCategory5)
+  arrCategory5.pop()
+  setCount(count - 1)
+}
+
+const delCategory6 = () => {
+  setShowCategories6(false)
+  setValueSelect6(0)
+  console.log("Удаление категории 6: ", arrCategory6)
+  arrCategory6.pop()
+  setCount(count - 1)
+}
+
+const delCategory7 = () => {
+  setShowCategories7(false)
+  setValueSelect7(0)
+  console.log("Удаление категории 7: ", arrCategory7)
+  arrCategory7.pop()
   setCount(count - 1)
 }
 
@@ -646,7 +740,7 @@ const delCategory4 = () => {
 
                     <CRow>
                         <CCol xs>
-                          <CCard className="mb-4" style={{height: '600px'}}>
+                          <CCard className="mb-4" style={{height: '650px'}}>
                             {/* <CCardHeader>Рассылки</CCardHeader> */}
                             <CCardBody>
                             <CAlert color="success" dismissible visible={visible} onClose={() => setVisible(false)}>
@@ -715,6 +809,7 @@ const delCategory4 = () => {
                                       : <br/>
                                       }
                                       
+                                      {/* Категория 1 */}
                                       <CRow>
                                         <CCol sm={12} > 
                                           <CFormLabel htmlFor="exampleFormControlInput1">Категория:</CFormLabel>
@@ -727,6 +822,7 @@ const delCategory4 = () => {
                                         </CCol> 
                                       </CRow>
                                       
+                                      {/* Категория 2 */}
                                       <CRow>
                                         <CCol sm={12} style={{display: 'flex'}}>  
                                           <CFormSelect 
@@ -745,6 +841,7 @@ const delCategory4 = () => {
                                         </CCol>
                                       </CRow>
 
+                                      {/* Категория 3 */}
                                       <CRow>
                                         <CCol sm={12} style={{display: 'flex'}}>  
                                           <CFormSelect 
@@ -763,6 +860,7 @@ const delCategory4 = () => {
                                         </CCol>
                                       </CRow>
 
+                                      {/* Категория 4 */}
                                       <CRow>
                                         <CCol sm={12} style={{display: 'flex'}}>
                                           <CFormSelect 
@@ -781,6 +879,64 @@ const delCategory4 = () => {
                                         </CCol>
                                       </CRow>
 
+                                      {/* Категория 5 */}
+                                      <CRow>
+                                        <CCol sm={12} style={{display: 'flex'}}>
+                                          <CFormSelect 
+                                            aria-label="Default select example"
+                                            onChange={onAddCategory5}
+                                            value={valueSelect5}
+                                            options={categories}
+                                            style={{marginTop: '15px', display: showCategories5 ? "block" : "none"}}
+                                          />
+                                          <CIcon 
+                                            icon={cilX} 
+                                            size="xl" 
+                                            style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories5 ? "block" : "none"}} 
+                                            onClick={delCategory5}
+                                          />
+                                        </CCol>
+                                      </CRow>
+
+                                      {/* Категория 6 */}
+                                      <CRow>
+                                        <CCol sm={12} style={{display: 'flex'}}>
+                                          <CFormSelect 
+                                            aria-label="Default select example"
+                                            onChange={onAddCategory6}
+                                            value={valueSelect6}
+                                            options={categories}
+                                            style={{marginTop: '15px', display: showCategories6 ? "block" : "none"}}
+                                          />
+                                          <CIcon 
+                                            icon={cilX} 
+                                            size="xl" 
+                                            style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories6 ? "block" : "none"}} 
+                                            onClick={delCategory6}
+                                          />
+                                        </CCol>
+                                      </CRow>
+
+                                      {/* Категория 7 */}
+                                      <CRow>
+                                        <CCol sm={12} style={{display: 'flex'}}>
+                                          <CFormSelect 
+                                            aria-label="Default select example"
+                                            onChange={onAddCategory7}
+                                            value={valueSelect7}
+                                            options={categories}
+                                            style={{marginTop: '15px', display: showCategories7 ? "block" : "none"}}
+                                          />
+                                          <CIcon 
+                                            icon={cilX} 
+                                            size="xl" 
+                                            style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories7 ? "block" : "none"}} 
+                                            onClick={delCategory7}
+                                          />
+                                        </CCol>
+                                      </CRow>
+
+                                      {/* Добавить */}
                                       <CRow>
                                         <CCol sm={12} style={{textAlign: 'end', marginTop: '15px', paddingRight: '23px'}}> 
                                           <img 
@@ -978,7 +1134,7 @@ const delCategory4 = () => {
                                     <CCol sm={3}>   
                                       <div style={{position: 'relative'}}>
                                         <div style={{position: 'absolute', top: '10px', left: 0}}>
-                                          <img src={phone_image} width='280px' height='546px' alt='phone' />
+                                          <img src={phone_image} width='280px' height='615px' alt='phone' />
                                           <div style={{position: 'absolute', top: '60px', left: '22px'}}>
                                             <img src={value ? value : noimage2} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
                                           </div>
@@ -1015,12 +1171,11 @@ const delCategory4 = () => {
                                 <br/>
 
                                 <CRow>
-                                  <CCol sm={9}>
+                                  <CCol sm={9} style={{position: 'absolute', top: '600px'}}>
                                     <div className="mb-3" style={{
                                       display: 'flex', 
                                       width: '100%', 
-                                      justifyContent: 'space-between',
-                                      marginTop: '30px'
+                                      justifyContent: 'space-between'
                                     }}>
                                     {/* <div><Link to={'/distributionw_planer/'} state={{ project: proj}}><CButton color="secondary">Запланировать</CButton></Link></div> */}
                                       <div>{proj ? 
