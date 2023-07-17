@@ -21,7 +21,7 @@ import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 import deleteIcon from 'src/assets/images/delete.png'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
-import { delDistribution } from 'src/http/adminAPI';
+import { delDistribution, getProjectId } from 'src/http/adminAPI';
 
 const DistributionWPlaner = () => {
   const location = useLocation()
@@ -117,6 +117,17 @@ const DistributionWPlaner = () => {
 
   let arr = []
   let arr2 = []
+
+  useEffect(() => {
+
+    const fetchData = async () => {
+      let projects = await getProjectId();
+      console.log("projects planer: ", projects)
+
+      //setProjects(projects)
+    }
+      fetchData();
+  })
 
   {/* Удаление рассылки */}
   const removeDescription = async(desk) => {
