@@ -94,6 +94,6 @@ route.get('/pretendent/get/:id', getPretendent)
 
 //------------------PLAN-----------------------------------
 route.post('/plan/add', newPlan)
-route.get('/plan/get', getPlan)
+route.get('/plan/get/:date', getPlan)
 
 module.exports = route
