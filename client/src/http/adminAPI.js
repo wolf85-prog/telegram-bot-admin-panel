@@ -65,6 +65,7 @@ export const getPlan = async (date) => {
     try {
         let response =  await $host.get('api/plan/get/' + date); 
         console.log("planAPI: ", response.data);
+        return response.data;
     } catch (error) {
         console.log("error while calling getPlan api", error.message);
     }

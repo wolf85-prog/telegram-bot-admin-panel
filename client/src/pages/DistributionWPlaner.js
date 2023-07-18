@@ -133,7 +133,7 @@ const DistributionWPlaner = () => {
   useEffect(() => {
     const fetchData = async () => {
       let plan = await getPlan('18.07.2023');
-      console.log("plan: ", plan)
+      console.log("plan: ", JSON.parse(plan.times))
  
       //setProjectName(project.properties.Name.title[0]?.plain_text)
     }
