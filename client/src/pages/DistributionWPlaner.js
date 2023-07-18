@@ -28,7 +28,7 @@ const DistributionWPlaner = () => {
   const [distributionsWork, setDistributionsWork]= useState([]);
   const [loading, setLoading]= useState(true);
 
-  console.log(location.state.project);
+  const projectId= location.state.project
 
   const [showEditTime, setShowEditTime] = useState(false)
   const [time, setTime] = useState('06:00')
@@ -111,9 +111,11 @@ const DistributionWPlaner = () => {
     {date: date_str2, time: '12:00', proj: '', save: false}
   ])
 
-
+  const [projectName, setProjectName] = useState('')
   const [projectView, setProjectView] = useState(false)
   const [value1, setValue1] = useState([false, false, false, false, false, false, false])
+  const [value2, setValue2] = useState([false, false, false, false, false, false, false])
+  const [value3, setValue3] = useState([false, false, false, false, false, false, false])
 
   let arr = []
   let arr2 = []
@@ -121,10 +123,9 @@ const DistributionWPlaner = () => {
   useEffect(() => {
 
     const fetchData = async () => {
-      let projects = await getProjectId();
-      console.log("projects planer: ", projects)
-
-      //setProjects(projects)
+      let project = await getProjectId(projectId);
+ 
+      setProjectName(project.properties.Name.title[0]?.plain_text)
     }
       fetchData();
   })
@@ -137,16 +138,43 @@ const DistributionWPlaner = () => {
   }
 
 //поставить галочку Статус
-  const changeStatus = (ind) => {
-    if (value1[ind]) {
-      value1[ind] = false
-      dates[ind].proj = ''
-    } else {
-      value1[ind] = true
-      dates[ind].proj = location.state.project
-    } 
+  const changeStatus = (ind, tab) => {
+    if (tab === 1) {
+      if (value1[ind]) {
+        value1[ind] = false
+        dates[ind].proj = ''
+      } else {
+        value1[ind] = true
+        dates[ind].proj = projectName //location.state.project
+      } 
 
-    setValue1(value1)
+      setValue1(value1)
+    }
+
+    if (tab === 2) {
+      if (value2[ind]) {
+        value2[ind] = false
+        dates1[ind].proj = ''
+      } else {
+        value2[ind] = true
+        dates1[ind].proj = projectName //location.state.project
+      } 
+
+      setValue2(value2)
+    }
+
+    if (tab === 3) {
+      if (value3[ind]) {
+        value3[ind] = false
+        dates11[ind].proj = ''
+      } else {
+        value3[ind] = true
+        dates11[ind].proj = projectName //location.state.project
+      } 
+
+      setValue3(value3)
+    }
+    
 
     projectView ? setProjectView(false) : setProjectView(true)
   }
@@ -486,6 +514,10 @@ const DistributionWPlaner = () => {
     if (time === '06:50') setTime('06:40')
   }
 
+  const savePlaner = () => {
+    //console.log('save press')
+  }
+
 
 
   return (
@@ -557,7 +589,7 @@ const DistributionWPlaner = () => {
                                             <CFormCheck 
                                               id="rowCheckTab1"
                                               checked={value1[index]}
-                                              onChange={()=>changeStatus(index)}
+                                              onChange={()=>changeStatus(index, 1)}
                                               disabled={item.save ? 'disabled': ''}
                                             />
                                           </CTableDataCell>
@@ -615,9 +647,9 @@ const DistributionWPlaner = () => {
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
-                                              id="rowCheckTab1"
-                                              checked={value1[index]}
-                                              onChange={()=>changeStatus(index)}
+                                              id="rowCheckTab2"
+                                              checked={value2[index]}
+                                              onChange={()=>changeStatus(index, 2)}
                                               disabled={item.save ? 'disabled': ''}
                                             />
                                           </CTableDataCell>
@@ -668,7 +700,10 @@ const DistributionWPlaner = () => {
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
-                                              id="rowCheckTab2"
+                                              id="rowCheckTab3"
+                                              checked={value3[index]}
+                                              onChange={()=>changeStatus(index, 3)}
+                                              disabled={item.save ? 'disabled': ''}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -680,8 +715,14 @@ const DistributionWPlaner = () => {
                               </CRow>
 
                             <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '15px'}}>
-                              <div style={{marginRight: '16px'}}><Link to={'/distributionw_add'}><CButton color="secondary" style={{width: '130px'}}>Назад</CButton></Link></div>
-                              <div><CButton color="primary"  onClick={()=>{}} style={{width: '130px'}}>Сохранить</CButton>  </div>
+                              <div style={{marginRight: '16px'}}>
+                                <Link to={'/distributionw_add'}>
+                                  <CButton color="secondary" style={{width: '130px'}}>Назад</CButton>
+                                </Link>
+                              </div>
+                              <div>
+                                <CButton color="primary" onClick={savePlaner} style={{width: '130px'}}>Сохранить</CButton>  
+                              </div>
                             </div>
                                                        
                             </CCardBody>

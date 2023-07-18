@@ -87,6 +87,12 @@ const Pretendent = sequelize.define('pretendent', {
     receiverId: {type: DataTypes.STRING}, //чат-id получателя;
 })
 
+const Plan = sequelize.define('plan', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    datestart: {type: DataTypes.STRING},  //дата начала рассылки
+    times: {type: DataTypes.STRING},  //json часов проектов
+})
+
 
 module.exports = {
     User, 
@@ -97,5 +103,6 @@ module.exports = {
     Distribution,
     Distributionw,
     Report,
-    Pretendent
+    Pretendent,
+    Plan
 }
