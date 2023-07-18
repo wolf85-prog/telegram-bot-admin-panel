@@ -26,6 +26,8 @@ const { newConversationWorker, getConversationWorker } = require('../controllers
 const { getWorkers, getWorker, editWorker} = require('../controllers/workersController')
 const { newPretendent, getPretendent } = require('../controllers/pretendentController')
 
+const { newPlan, getAllPlans } = require('../controllers/planController')
+
 //const upload = require( "../utils/upload.js")
 //const upload = multer({dest:"uploads"});
 const upload = require('../middleware/file')
@@ -89,5 +91,8 @@ route.patch('/workers/update/:id', editWorker)
 
 route.post('/pretendent/add', newPretendent)
 route.get('/pretendent/get/:id', getPretendent)
+
+//------------------PLAN-----------------------------------
+route.post('/plan/add', newPlan)
 
 module.exports = route

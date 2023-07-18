@@ -52,6 +52,14 @@ export const getProjectId = async (id) =>{
     }
 }
 
+export const newPlan = async (data) => {
+    try {
+        await $host.post(`api/plan/add`, data); 
+    } catch (error) {
+        console.log("error while calling newPlan api", error.message);
+    }
+}
+
 //get Workers
 export const getWorkers = async () =>{
     try {

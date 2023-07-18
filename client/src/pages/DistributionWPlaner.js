@@ -514,8 +514,11 @@ const DistributionWPlaner = () => {
     if (time === '06:50') setTime('06:40')
   }
 
-  const savePlaner = () => {
+  const savePlan = async() => {
     //console.log('save press')
+    const planer = [...dates, ...dates1, ...dates11]
+    const planer_str = JSON.stringify(planer) 
+    
   }
 
 
@@ -721,7 +724,7 @@ const DistributionWPlaner = () => {
                                 </Link>
                               </div>
                               <div>
-                                <CButton color="primary" onClick={savePlaner} style={{width: '130px'}}>Сохранить</CButton>  
+                                <CButton color="primary" onClick={savePlan} style={{width: '130px'}}>Сохранить</CButton>  
                               </div>
                             </div>
                                                        
