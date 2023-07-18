@@ -21,7 +21,7 @@ import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 import deleteIcon from 'src/assets/images/delete.png'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
-import { delDistribution, getProjectId, newPlan } from 'src/http/adminAPI';
+import { delDistribution, getProjectId, newPlan, getPlan } from 'src/http/adminAPI';
 
 const DistributionWPlaner = () => {
   const location = useLocation()
@@ -132,7 +132,8 @@ const DistributionWPlaner = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      //let dates = await getPlan();
+      let plan = await getPlan('18.07.2023');
+      console.log("plan: ", plan)
  
       //setProjectName(project.properties.Name.title[0]?.plain_text)
     }

@@ -61,12 +61,12 @@ export const newPlan = async (data) => {
     }
 }
 
-export const getPlan = async () => {
+export const getPlan = async (date) => {
     try {
-        let response =  await $host.get(`api/plan/get`); 
+        let response =  await $host.get('api/plan/get/' + date); 
         console.log("planAPI: ", response.data);
     } catch (error) {
-        console.log("error while calling newPlan api", error.message);
+        console.log("error while calling getPlan api", error.message);
     }
 }
 
