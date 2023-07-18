@@ -1,5 +1,5 @@
 import React, { Suspense, useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { 
   CContainer, 
   CSpinner, 
@@ -21,7 +21,7 @@ import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 import deleteIcon from 'src/assets/images/delete.png'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
-import { delDistribution, getProjectId } from 'src/http/adminAPI';
+import { delDistribution, getProjectId, newPlan } from 'src/http/adminAPI';
 
 const DistributionWPlaner = () => {
   const location = useLocation()
@@ -81,10 +81,11 @@ const DistributionWPlaner = () => {
     {date: date_str, time: '11:00', proj: '', save: false},
   ])
 
+
   const [dates1, setDates1] = useState([
     {date: date_str, time: '12:00', proj: '', save: false},
     {date: date_str, time: '13:00', proj: '', save: false},
-    {date: date_str, time: '14:00', proj: '', save: true},
+    {date: date_str, time: '14:00', proj: '', save: false},
     {date: date_str, time: '15:00', proj: '', save: false},
     {date: date_str, time: '16:00', proj: '', save: false},
     {date: date_str, time: '17:00', proj: '', save: false},
@@ -121,11 +122,19 @@ const DistributionWPlaner = () => {
   let arr2 = []
 
   useEffect(() => {
-
     const fetchData = async () => {
       let project = await getProjectId(projectId);
  
       setProjectName(project.properties.Name.title[0]?.plain_text)
+    }
+      fetchData();
+  })
+
+  useEffect(() => {
+    const fetchData = async () => {
+      //let dates = await getPlan();
+ 
+      //setProjectName(project.properties.Name.title[0]?.plain_text)
     }
       fetchData();
   })
@@ -146,6 +155,7 @@ const DistributionWPlaner = () => {
       } else {
         value1[ind] = true
         dates[ind].proj = projectName //location.state.project
+        dates[ind].save = true
       } 
 
       setValue1(value1)
@@ -158,6 +168,7 @@ const DistributionWPlaner = () => {
       } else {
         value2[ind] = true
         dates1[ind].proj = projectName //location.state.project
+        dates1[ind].save = true
       } 
 
       setValue2(value2)
@@ -170,6 +181,7 @@ const DistributionWPlaner = () => {
       } else {
         value3[ind] = true
         dates11[ind].proj = projectName //location.state.project
+        dates11[ind].save = true
       } 
 
       setValue3(value3)
@@ -518,9 +530,20 @@ const DistributionWPlaner = () => {
     //console.log('save press')
     const planer = [...dates, ...dates1, ...dates11]
     const planer_str = JSON.stringify(planer) 
-    
+    //console.log("planer_str: ", planer_str)
+    const d_str = new Date().toLocaleDateString()
+    const newObj = {
+      "datestart": d_str,
+      "times": planer_str
+    }
+    await newPlan(newObj);
+    backPage()
   }
 
+  const navigate = useNavigate();
+  const backPage = () => {
+       navigate('/distributionw_add');
+  } 
 
 
   return (

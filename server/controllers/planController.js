@@ -8,19 +8,24 @@ class PlanController {
     //add plan
     async newPlan(req, res) {
         const {datestart, times} = req.body
+        console.log(datestart)
         try {
-            await Plan.create({datestart, times})
-            return res.status(200).json("Plan has been save successfully");
+            const newPlan = await Plan.create({datestart, times})
+            //return res.status(200).json("Plan has been save successfully");
+            return res.status(200).json(newPlan);
         } catch (error) {
             return res.status(500).json(error.message);
         }
     }
 
     //get plans
-    async getAllPlans(req, res) {
+    async getPlan(req, res) {
+        const date = req.params.date
         try {           
-            const plans = await Plan.findAll()
-            return res.status(200).json(plans);
+            const plan = await Plan.findOne({
+                where: {datestart: date}
+            })
+            return res.status(200).json(plan);
         } catch (error) {
             return res.status(500).json(error.message);
         }

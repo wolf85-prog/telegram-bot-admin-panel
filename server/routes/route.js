@@ -26,7 +26,7 @@ const { newConversationWorker, getConversationWorker } = require('../controllers
 const { getWorkers, getWorker, editWorker} = require('../controllers/workersController')
 const { newPretendent, getPretendent } = require('../controllers/pretendentController')
 
-const { newPlan, getAllPlans } = require('../controllers/planController')
+const { newPlan, getPlan } = require('../controllers/planController')
 
 //const upload = require( "../utils/upload.js")
 //const upload = multer({dest:"uploads"});
@@ -94,5 +94,6 @@ route.get('/pretendent/get/:id', getPretendent)
 
 //------------------PLAN-----------------------------------
 route.post('/plan/add', newPlan)
+route.get('/plan/get', getPlan)
 
 module.exports = route
