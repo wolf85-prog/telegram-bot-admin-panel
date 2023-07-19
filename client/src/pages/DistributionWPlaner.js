@@ -134,47 +134,52 @@ const DistributionWPlaner = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let plan = await getPlan('19.07.2023');
+      let plan = await getPlan(new Date().toLocaleDateString());
+      console.log(plan)
 
-      const planTimes = JSON.parse(plan.times)
+      if (plan !== null) {
+        const planTimes = JSON.parse(plan.times)
+        console.log("planTimes: ", planTimes)
 
-      const ind1 = planTimes.findIndex(date => date.time == '12:00')
-      const ind2 = planTimes.findIndex(date => date.time == '18:00')
+        const ind1 = planTimes.findIndex(date => date.time == '12:00')
+        const ind2 = planTimes.findIndex(date => date.time == '18:00')
 
-      const times = planTimes.slice(0, ind1);
-      const times2 = planTimes.slice(ind1+1, ind2);
-      const times3 = planTimes.slice(ind2, planTimes.length-1);
+        const times = planTimes.slice(0, ind1);
+        const times2 = planTimes.slice(ind1+1, ind2);
+        const times3 = planTimes.slice(ind2, planTimes.length-1);
 
-      times.map((time, index)=> {
-        if (time.save) {
-          value1[index] = true
-          setValue1(value1)
-        }
-      })
+        times.map((time, index)=> {
+          if (time.save) {
+            value1[index] = true
+            setValue1(value1)
+          }
+        })
 
-      times2.map((time, index)=> {
-        if (time.save) {
-          value2[index] = true
-          setValue2(value2)
-        }
-      })
+        times2.map((time, index)=> {
+          if (time.save) {
+            value2[index] = true
+            setValue2(value2)
+          }
+        })
 
-      times3.map((time, index)=> {
-        if (time.save) {
-          value3[index] = true
-          setValue3(value3)
-        }
-      })
+        times3.map((time, index)=> {
+          if (time.save) {
+            value3[index] = true
+            setValue3(value3)
+          }
+        })
 
-      setDates(times)
-      setDates1(times2)
-      setDates11(times3)
+        setDates(times)
+        setDates1(times2)
+        setDates11(times3)
 
-      setCountCol(ind1)
-      setCountCol2(ind2 - ind1 - 1)
-      setCountCol3(planTimes.length-1 - ind2)
- 
-      //setProjectName(project.properties.Name.title[0]?.plain_text)
+        setCountCol(ind1)
+        setCountCol2(ind2 - ind1 - 1)
+        setCountCol3(planTimes.length-1 - ind2)
+  
+        //setProjectName(project.properties.Name.title[0]?.plain_text)
+      }
+      
     }
       fetchData();
   },[])
