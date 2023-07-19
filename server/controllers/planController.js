@@ -8,9 +8,10 @@ class PlanController {
     //add plan
     async newPlan(req, res) {
         const {datestart, times} = req.body
+        console.log(datestart)
         try {
             // First try to find the record
-            const foundItem = await Plan.findOne({ where: datestart });
+            const foundItem = await Plan.findOne({ where: {datestart} });
 
             if (!foundItem) {
                 // Item not found, create a new one
