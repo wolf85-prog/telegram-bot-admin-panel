@@ -19,8 +19,10 @@ import {
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 import deleteIcon from 'src/assets/images/delete.png'
+import editIcon from 'src/assets/images/pencil.png'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { delDistribution } from 'src/http/adminAPI';
+import { editContact } from 'src/http/chatAPI'
 
 const DistributionW = () => {
   const { distributionsWork: messages } = useUsersContext();
@@ -109,10 +111,9 @@ const DistributionW = () => {
                                   <CTableRow>
                                     {/* <CTableHeaderCell>№</CTableHeaderCell> */}
                                     <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center">Название проекта</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Картинка</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Кнопка</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Текст</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Получатели</CTableHeaderCell>   
+                                    <CTableHeaderCell className="text-center">Категории</CTableHeaderCell>   
                                     <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Управление</CTableHeaderCell>
                                   </CTableRow>
@@ -125,18 +126,15 @@ const DistributionW = () => {
                                       </CTableDataCell> */}
                                       <CTableDataCell className="text-center">
                                         <div>{item.datestart}</div>
-                                      </CTableDataCell>      
+                                      </CTableDataCell>  
+                                      <CTableDataCell className="text-center">
+                                        <div></div>
+                                      </CTableDataCell>    
                                       <CTableDataCell className="text-center">
                                         {item.image.endsWith('.pdf') ?
                                         <iframe src={item.image} height="120px" width="200px" title="myFramePdf"/>
                                         : <div>{item.image ? <a href={item.image} target='_blank' rel="noreferrer"><img src={item.image} alt='' width={230} height={120} style={{objectFit: 'contain'}}></img></a> : ''}</div>
                                         }
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <div>{item.button ? item.button : "Принять/отклонить"}</div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                        <div>{item.text}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         <div>{item.receivers}</div>
@@ -145,6 +143,10 @@ const DistributionW = () => {
                                         <div>{item.status}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
+                                        <CButton color="light" style={{marginRight: '10px'}}>
+                                          <img src={editIcon} alt='' width='10px' />
+                                        </CButton>
+                                        
                                         <CButton color="light" onClick={() => removeDescription(item)}>
                                           <img src={deleteIcon} alt='' width='10px' />
                                         </CButton>
