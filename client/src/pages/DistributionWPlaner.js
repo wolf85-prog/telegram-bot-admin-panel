@@ -124,21 +124,60 @@ const DistributionWPlaner = () => {
   useEffect(() => {
     const fetchData = async () => {
       let project = await getProjectId(projectId);
+      console.log('project: ', project.properties.Name.title[0]?.plain_text)
  
       setProjectName(project.properties.Name.title[0]?.plain_text)
     }
       fetchData();
-  })
+  },[])
+
 
   useEffect(() => {
     const fetchData = async () => {
-      let plan = await getPlan('18.07.2023');
-      console.log("plan: ", JSON.parse(plan.times))
+      let plan = await getPlan('19.07.2023');
+
+      const planTimes = JSON.parse(plan.times)
+
+      const ind1 = planTimes.findIndex(date => date.time == '12:00')
+      const ind2 = planTimes.findIndex(date => date.time == '18:00')
+
+      const times = planTimes.slice(0, ind1);
+      const times2 = planTimes.slice(ind1+1, ind2);
+      const times3 = planTimes.slice(ind2, planTimes.length-1);
+
+      times.map((time, index)=> {
+        if (time.save) {
+          value1[index] = true
+          setValue1(value1)
+        }
+      })
+
+      times2.map((time, index)=> {
+        if (time.save) {
+          value2[index] = true
+          setValue2(value2)
+        }
+      })
+
+      times3.map((time, index)=> {
+        if (time.save) {
+          value3[index] = true
+          setValue3(value3)
+        }
+      })
+
+      setDates(times)
+      setDates1(times2)
+      setDates11(times3)
+
+      setCountCol(ind1)
+      setCountCol2(ind2 - ind1 - 1)
+      setCountCol3(planTimes.length-1 - ind2)
  
       //setProjectName(project.properties.Name.title[0]?.plain_text)
     }
       fetchData();
-  })
+  },[])
 
   {/* Удаление рассылки */}
   const removeDescription = async(desk) => {
@@ -156,10 +195,11 @@ const DistributionWPlaner = () => {
       } else {
         value1[ind] = true
         dates[ind].proj = projectName //location.state.project
-        dates[ind].save = true
-      } 
+        dates[ind].save = true  
+      }  
 
-      setValue1(value1)
+      setDates(dates)
+      setValue1(value1) 
     }
 
     if (tab === 2) {
@@ -172,6 +212,7 @@ const DistributionWPlaner = () => {
         dates1[ind].save = true
       } 
 
+      setDates1(dates1)
       setValue2(value2)
     }
 
@@ -185,6 +226,7 @@ const DistributionWPlaner = () => {
         dates11[ind].save = true
       } 
 
+      setDates11(dates11)
       setValue3(value3)
     }
     
@@ -206,9 +248,11 @@ const DistributionWPlaner = () => {
           const newObj = {
                 date: date_str,
                 time: '06:30',
-                proj: ''
+                proj: '',
+                save: false
               }
           arr.splice(ind+1, 0, newObj);
+          console.log(arr)
           setDates(arr)
         }
       }
@@ -223,7 +267,8 @@ const DistributionWPlaner = () => {
           const newObj = {
                 date: date_str,
                 time: '07:30',
-                proj: ''
+                proj: '',
+                save: false
               }
           arr.splice(ind+1, 0, newObj);
           setDates(arr)
@@ -241,7 +286,8 @@ const DistributionWPlaner = () => {
           const newObj = {
                 date: date_str,
                 time: '08:30',
-                proj: ''
+                proj: '',
+                save: false
               }
           arr.splice(ind+1, 0, newObj);
           setDates(arr)
@@ -275,7 +321,8 @@ const DistributionWPlaner = () => {
           const newObj = {
                 date: date_str,
                 time: '10:30',
-                proj: ''
+                proj: '',
+                save: false
               }
           arr.splice(ind+1, 0, newObj);
           setDates(arr)
@@ -292,7 +339,8 @@ const DistributionWPlaner = () => {
           const newObj = {
                 date: date_str,
                 time: '11:30',
-                proj: ''
+                proj: '',
+                save: false
               }
           arr.splice(ind+1, 0, newObj);
           setDates(arr)
@@ -311,7 +359,8 @@ const DistributionWPlaner = () => {
           const newObj = {
                 date: date_str,
                 time: '12:30',
-                proj: ''
+                proj: '',
+                save: false
               }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -328,7 +377,8 @@ const DistributionWPlaner = () => {
           const newObj = {
                 date: date_str,
                 time: '13:30',
-                proj: ''
+                proj: '',
+                save: false
               }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -345,7 +395,8 @@ const DistributionWPlaner = () => {
           const newObj = {
                 date: date_str,
                 time: '14:30',
-                proj: ''
+                proj: '',
+                save: false
               }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -362,7 +413,8 @@ const DistributionWPlaner = () => {
           const newObj = {
                 date: date_str,
                 time: '15:30',
-                proj: ''
+                proj: '',
+                save: false
               }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -379,7 +431,8 @@ const DistributionWPlaner = () => {
           const newObj = {
                 date: date_str,
                 time: '16:30',
-                proj: ''
+                proj: '',
+                save: false
               }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -396,7 +449,8 @@ const DistributionWPlaner = () => {
           const newObj = {
                 date: date_str,
                 time: '17:30',
-                proj: ''
+                proj: '',
+                save: false
               }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -415,7 +469,8 @@ const DistributionWPlaner = () => {
               const newObj = {
                     date: date_str,
                     time: '18:30',
-                    proj: ''
+                    proj: '',
+                    save: false
                   }
               arr.splice(ind+1, 0, newObj);
               setDates11(arr)
@@ -432,7 +487,8 @@ const DistributionWPlaner = () => {
               const newObj = {
                     date: date_str,
                     time: '19:30',
-                    proj: ''
+                    proj: '',
+                    save: false
                   }
               arr.splice(ind+1, 0, newObj);
               setDates11(arr)
@@ -449,7 +505,8 @@ const DistributionWPlaner = () => {
               const newObj = {
                     date: date_str,
                     time: '20:30',
-                    proj: ''
+                    proj: '',
+                    save: false
                   }
               arr.splice(ind+1, 0, newObj);
               setDates11(arr)
@@ -466,7 +523,8 @@ const DistributionWPlaner = () => {
               const newObj = {
                     date: date_str,
                     time: '21:30',
-                    proj: ''
+                    proj: '',
+                    save: false
                   }
               arr.splice(ind+1, 0, newObj);
               setDates11(arr)
@@ -511,27 +569,12 @@ const DistributionWPlaner = () => {
   }
 
 
-  const changeTimePlus = () => {
-    if (time === '06:00') setTime('06:10')
-    if (time === '06:10') setTime('06:20')
-    if (time === '06:20') setTime('06:30')
-    if (time === '06:30') setTime('06:40')
-    if (time === '06:40') setTime('06:50')
-  }
-
-  const changeTimeMinus = () => {
-    if (time === '06:10') setTime('06:00')
-    if (time === '06:20') setTime('06:10')
-    if (time === '06:30') setTime('06:20')
-    if (time === '06:40') setTime('06:30')
-    if (time === '06:50') setTime('06:40')
-  }
-
   const savePlan = async() => {
     //console.log('save press')
     const planer = [...dates, ...dates1, ...dates11]
     const planer_str = JSON.stringify(planer) 
     //console.log("planer_str: ", planer_str)
+
     const d_str = new Date().toLocaleDateString()
     const newObj = {
       "datestart": d_str,
@@ -617,7 +660,7 @@ const DistributionWPlaner = () => {
                                               id="rowCheckTab1"
                                               checked={value1[index]}
                                               onChange={()=>changeStatus(index, 1)}
-                                              disabled={item.save ? 'disabled': ''}
+                                              disabled={(projectName === item.proj || item.proj === '')  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -677,7 +720,7 @@ const DistributionWPlaner = () => {
                                               id="rowCheckTab2"
                                               checked={value2[index]}
                                               onChange={()=>changeStatus(index, 2)}
-                                              disabled={item.save ? 'disabled': ''}
+                                              disabled={(projectName === item.proj || item.proj === '')  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -730,7 +773,7 @@ const DistributionWPlaner = () => {
                                               id="rowCheckTab3"
                                               checked={value3[index]}
                                               onChange={()=>changeStatus(index, 3)}
-                                              disabled={item.save ? 'disabled': ''}
+                                              disabled={(projectName === item.proj || item.proj === '')  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
