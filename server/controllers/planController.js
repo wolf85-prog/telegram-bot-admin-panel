@@ -22,13 +22,8 @@ class PlanController {
 
             // Found an item, update it
             const item = await Plan.update({times: times},{where: {datestart: datestart}});
-            //обновить 
-            //await Project.update({projectId: projectId},{where: {id: res.id}})
-            return res.status(200).json("Plan has been update successfully");
 
-            //const newPlan = await Plan.create({datestart, times})
-            //return res.status(200).json("Plan has been save successfully");
-            //return res.status(200).json(newPlan);
+            return res.status(200).json("Plan has been update successfully");
         } catch (error) {
             return res.status(500).json(error.message);
         }
