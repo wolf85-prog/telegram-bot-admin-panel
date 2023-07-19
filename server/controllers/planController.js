@@ -20,7 +20,9 @@ class PlanController {
             }
 
             // Found an item, update it
-            const item = await Plan.update(times);
+            const item = await Plan.update({times: times},{where: {datestart: datestart}});
+            //обновить 
+            //await Project.update({projectId: projectId},{where: {id: res.id}})
             return {item, created: false};
 
             //const newPlan = await Plan.create({datestart, times})
