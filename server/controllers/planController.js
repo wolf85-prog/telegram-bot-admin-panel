@@ -17,14 +17,14 @@ class PlanController {
             if (!foundItem) {
                 // Item not found, create a new one
                 const newPlan = await Plan.create({datestart, times})
-                return  {newPlan, created: true};
+                return res.status(200).json(newPlan);
             }
 
             // Found an item, update it
             const item = await Plan.update({times: times},{where: {datestart: datestart}});
             //обновить 
             //await Project.update({projectId: projectId},{where: {id: res.id}})
-            return {item, created: false};
+            return res.status(200).json("Plan has been update successfully");
 
             //const newPlan = await Plan.create({datestart, times})
             //return res.status(200).json("Plan has been save successfully");
