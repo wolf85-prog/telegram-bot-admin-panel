@@ -198,6 +198,14 @@
     --cui-dark-stop: #292a2b;
 }
 
+.modal {
+    --cui-modal-bg: #1d1f2b;
+    --cui-modal-border-color: rgba(0,0,0,.2);
+    --cui-modal-header-border-color: rgba(0,0,0,.2);
+    --cui-modal-footer-border-color: rgba(0,0,0,.2);
+    --cui-modal-color: #ffffff;
+}
+
 .dark-theme .form-select>option {
     background-color: #1f272c;
 }

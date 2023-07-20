@@ -65,7 +65,7 @@ const Distributionw = sequelize.define('distributionw', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
     text: {type: DataTypes.STRING}, //текст сообщения;
     image: {type: DataTypes.STRING}, //ссылка на картинку;
-    button: {type: DataTypes.STRING}, //текст кнопки;
+    project: {type: DataTypes.STRING}, //проект (название);
     receivers: {type: DataTypes.STRING}, //массив получателей;
     datestart: {type: DataTypes.STRING},  //дата начала рассылки
     delivered: {type: DataTypes.BOOLEAN}, //доставлено

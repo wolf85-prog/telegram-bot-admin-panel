@@ -118,14 +118,16 @@ const DistributionWPlaner = () => {
   const [value2, setValue2] = useState([false, false, false, false, false, false, false])
   const [value3, setValue3] = useState([false, false, false, false, false, false, false])
 
+  const [showLoader, setShowLoader] = useState(true)
+
   let arr = []
   let arr2 = []
 
   useEffect(() => {
     const fetchData = async () => {
       let project = await getProjectId(projectId);
-      console.log('project: ', project.properties.Name.title[0]?.plain_text)
- 
+      console.log('Текущий проект: ', project.properties.Name.title[0]?.plain_text)
+      setShowLoader(false)
       setProjectName(project.properties.Name.title[0]?.plain_text)
     }
       fetchData();
@@ -144,9 +146,16 @@ const DistributionWPlaner = () => {
         const ind1 = planTimes.findIndex(date => date.time == '12:00')
         const ind2 = planTimes.findIndex(date => date.time == '18:00')
 
+        console.log("Индекс 1: ", ind1)
+        console.log("Индекс 2: ", ind2)
+
         const times = planTimes.slice(0, ind1);
-        const times2 = planTimes.slice(ind1+1, ind2);
-        const times3 = planTimes.slice(ind2, planTimes.length-1);
+        const times2 = planTimes.slice(ind1, ind2);
+        const times3 = planTimes.slice(ind2, planTimes.length);
+
+        console.log("times: ", times)
+        console.log("times2: ", times2)
+        console.log("times3: ", times3)
 
         times.map((time, index)=> {
           if (time.save) {
@@ -174,10 +183,8 @@ const DistributionWPlaner = () => {
         setDates11(times3)
 
         setCountCol(ind1)
-        setCountCol2(ind2 - ind1 - 1)
-        setCountCol3(planTimes.length-1 - ind2)
-  
-        //setProjectName(project.properties.Name.title[0]?.plain_text)
+        setCountCol2(ind2 - ind1)
+        setCountCol3(planTimes.length - ind2)
       }
       
     }
@@ -197,6 +204,7 @@ const DistributionWPlaner = () => {
       if (value1[ind]) {
         value1[ind] = false
         dates[ind].proj = ''
+        dates[ind].save = false
       } else {
         value1[ind] = true
         dates[ind].proj = projectName //location.state.project
@@ -211,6 +219,7 @@ const DistributionWPlaner = () => {
       if (value2[ind]) {
         value2[ind] = false
         dates1[ind].proj = ''
+        dates[ind].save = false
       } else {
         value2[ind] = true
         dates1[ind].proj = projectName //location.state.project
@@ -225,6 +234,7 @@ const DistributionWPlaner = () => {
       if (value3[ind]) {
         value3[ind] = false
         dates11[ind].proj = ''
+        dates11[ind].save = false
       } else {
         value3[ind] = true
         dates11[ind].proj = projectName //location.state.project
@@ -575,10 +585,9 @@ const DistributionWPlaner = () => {
 
 
   const savePlan = async() => {
-    //console.log('save press')
-    const planer = [...dates, ...dates1, ...dates11]
-    const planer_str = JSON.stringify(planer) 
-    //console.log("planer_str: ", planer_str)
+    //const planer = [...dates, ...dates1, ...dates11]
+    const newArray = [].concat(dates, dates1, dates11);
+    const planer_str = JSON.stringify(newArray) 
 
     const d_str = new Date().toLocaleDateString()
     const newObj = {
@@ -613,7 +622,10 @@ const DistributionWPlaner = () => {
                             <CCardHeader>График рассылок</CCardHeader>
                             <CCardBody>
                             <br />
-
+                            {
+                              showLoader ? <div style={{textAlign:'center'}}><CSpinner/></div>
+                              :
+                              <>
                               <CRow>
                               <CCol xs>                                   
                                 <div style={{float: "left", display: 'flex'}}>
@@ -799,7 +811,8 @@ const DistributionWPlaner = () => {
                                 <CButton color="primary" onClick={savePlan} style={{width: '130px'}}>Сохранить</CButton>  
                               </div>
                             </div>
-                                                       
+                             </>  
+                            }                        
                             </CCardBody>
                           </CCard>
                         </CCol>

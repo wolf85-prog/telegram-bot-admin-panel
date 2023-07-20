@@ -14,7 +14,12 @@ import {
   CButton,
   CAlert,
   CFormCheck,
-  CFormSelect
+  CFormSelect,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react';
 import { cilX, cilCaretBottom, cilCarAlt, cilCaretLeft } from '@coreui/icons';
@@ -102,6 +107,8 @@ const DistributionAddW = () => {
   const [proj, setProj] = useState('');
 
   const [count, setCount] = useState(0);
+
+  const [visibleModal, setVisibleModal] = useState(false);
   
   const audio = new Audio(sendSound);
 
@@ -595,135 +602,140 @@ const delCategory7 = () => {
   const onSendText = async() => {
     console.log(selected)
 
-    audio.play();
+    setVisibleModal(!visibleModal)
 
-    //новая рассылка
-    const message = {
-      //name: 'Рассылка', 
-      text: text, 
-      image: host + image, 
-      button: textButton, 
-      receivers: selected.toString(), 
-      datestart: Date.now(), 
-      delivered: 'true',        
-    }
-    console.log("message send button: ", message);
+    if (image || text) {
+      audio.play();
 
-    //сохранение рассылки в базе данных
-    await newDistributionW(message)
-
-    
-    selected.map(async (user, index) => {
-      console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
-
-      let client = clients.filter((client) => client.chatId === user)[0];
-
-      //получить id специалиста по его telegramId
-      const worker = await getWorkerId(user)
-      
-      //новый претендент
-      const pretendent = {
-        projectId: projectVar, 
-        workerId: worker.data, 
-        receiverId: user,        
+      //новая рассылка
+      const message = {
+        //name: 'Рассылка', 
+        text: text, 
+        image: host + image, 
+        button: textButton, 
+        receivers: selected.toString(), 
+        datestart: Date.now(), 
+        delivered: 'true',        
       }
-      const pretendentId = await newPretendent(pretendent)
+      console.log("message send button: ", message);
+
+      //сохранение рассылки в базе данных
+      await newDistributionW(message)
+
       
-      //Передаем данные боту
-      const keyboard = JSON.stringify({
-        inline_keyboard: [
-            [
-                {"text": textButton, callback_data:'/report'},
-            ],
-        ]
-      });
+      selected.map(async (user, index) => {
+        console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
 
-      const keyboard2 = JSON.stringify({
-        inline_keyboard: [
-            [
-                {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
-                {"text": 'Отклонить', callback_data:'/cancel'},
-            ],
-        ]
-      });
+        let client = clients.filter((client) => client.chatId === user)[0];
 
-      //отправить в телеграмм
-      let sendToTelegram
-      if (text !== '') {
-        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
-        console.log("url_send_msg: ", url_send_msg)
-        sendToTelegram = await $host.get(url_send_msg);
-        console.log('sendToTelegram: ', sendToTelegram)
-      }  
-
-      const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
-      console.log("url_send_photo: ", url_send_photo)
-      
-      let sendPhotoToTelegram
-      if (file) {
-        const form = new FormData();
-        form.append("photo", file);
-
-        sendPhotoToTelegram = await $host.post(url_send_photo, form);
-        console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
-      } 
-
-      //отправить в админку
-      if (sendToAdmin) {
-        let message = {};
-        if(!file) {
-            message = {
-                senderId: chatAdminId, 
-                receiverId: user.value,
-                conversationId: client.conversationId,
-                type: "text",
-                text: text,
-                is_bot: true,
-				        messageId: sendToTelegram.data.result.message_id,
-                buttons: '',
-            }
-        } else {
-            message = {
-                senderId: chatAdminId, 
-                receiverId: user.value,
-                conversationId: client.conversationId,
-                type: "image",
-                text: host + image,
-                is_bot: true,
-				        messageId: sendPhotoToTelegram.data.result.message_id,
-                buttons: textButton,
-            }
+        //получить id специалиста по его telegramId
+        const worker = await getWorkerId(user)
+        
+        //новый претендент
+        const pretendent = {
+          projectId: projectVar, 
+          workerId: worker.data, 
+          receiverId: user,        
         }
-        console.log("message send: ", message);
+        const pretendentId = await newPretendent(pretendent)
+        
+        //Передаем данные боту
+        const keyboard = JSON.stringify({
+          inline_keyboard: [
+              [
+                  {"text": textButton, callback_data:'/report'},
+              ],
+          ]
+        });
 
-        //сохранение сообщения в базе данных
-		    await newMessage(message)
+        const keyboard2 = JSON.stringify({
+          inline_keyboard: [
+              [
+                  {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
+                  {"text": 'Отклонить', callback_data:'/cancel'},
+              ],
+          ]
+        });
 
-		    //сохранить в контексте
-        if(!file) {
-          addNewMessage(user.value, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
-        } else {
-          addNewMessage(user.value, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
-        }
+        //отправить в телеграмм
+        let sendToTelegram
+        if (text !== '') {
+          const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+          console.log("url_send_msg: ", url_send_msg)
+          sendToTelegram = await $host.get(url_send_msg);
+          console.log('sendToTelegram: ', sendToTelegram)
+        }  
+
+        const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
+        console.log("url_send_photo: ", url_send_photo)
+        
+        let sendPhotoToTelegram
+        if (file) {
+          const form = new FormData();
+          form.append("photo", file);
+
+          sendPhotoToTelegram = await $host.post(url_send_photo, form);
+          console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
+        } 
+
+        //отправить в админку
+        if (sendToAdmin) {
+          let message = {};
+          if(!file) {
+              message = {
+                  senderId: chatAdminId, 
+                  receiverId: user.value,
+                  conversationId: client.conversationId,
+                  type: "text",
+                  text: text,
+                  is_bot: true,
+                  messageId: sendToTelegram.data.result.message_id,
+                  buttons: '',
+              }
+          } else {
+              message = {
+                  senderId: chatAdminId, 
+                  receiverId: user.value,
+                  conversationId: client.conversationId,
+                  type: "image",
+                  text: host + image,
+                  is_bot: true,
+                  messageId: sendPhotoToTelegram.data.result.message_id,
+                  buttons: textButton,
+              }
+          }
+          console.log("message send: ", message);
+
+          //сохранение сообщения в базе данных
+          await newMessage(message)
+
+          //сохранить в контексте
+          if(!file) {
+            addNewMessage(user.value, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
+          } else {
+            addNewMessage(user.value, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
+          }
+    
+        }  
+
+        //обновить список рассылок
+        let response = await getDistributionsW();
+        console.log("distribution new add: ", response.length)
+        setDistributionsWork(response)
+
+      })
+
+      setSelected([])
+      setSendToAdmin(false)
+      setText('')
+      setShowEditButtonAdd(false)
+      setTextButton('')
+      setVisible(true)
+      setValue('')
+
+      navigate('/distributionw');
+    }
   
-      }  
-
-      //обновить список рассылок
-      let response = await getDistributionsW();
-      console.log("distribution new add: ", response.length)
-			setDistributionsWork(response)
-
-    })
-
-    setSelected([])
-    setSendToAdmin(false)
-    setText('')
-    setShowEditButtonAdd(false)
-    setTextButton('')
-    setVisible(true)
-    setValue('')
-
-    navigate('/distributionw');
   }
 
   return (
@@ -1182,7 +1194,21 @@ const delCategory7 = () => {
                                         <Link to={'/distributionw_planer'} state={{ project: proj}}><CButton color="success">Запланировать</CButton></Link>
                                         :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>}
                                       </div>
-                                      <div><CButton color="primary" disabled={selected.length == 0} onClick={onSendText}>Разослать сейчас</CButton></div>
+                                      <div className='dark-theme'>
+                                        <CButton color="primary" disabled={selected.length == 0} onClick={onSendText}>Разослать сейчас</CButton>
+                                        {/* <CButton onClick={() => setVisible(!visible)}>Vertically centered modal</CButton> */}
+                                        <CModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
+                                          <CModalHeader>
+                                            <CModalTitle>Предупреждение</CModalTitle>
+                                          </CModalHeader>
+                                          <CModalBody>
+                                            Чтобы сделать рассылку необходимо добавить текст или изображение!
+                                          </CModalBody>
+                                          <CModalFooter>
+                                            <CButton color="primary" onClick={() => setVisibleModal(false)}>ОК</CButton>
+                                          </CModalFooter>
+                                        </CModal>
+                                      </div>
                                     </div>
                                   </CCol>
                                   <CCol sm={3}></CCol>
