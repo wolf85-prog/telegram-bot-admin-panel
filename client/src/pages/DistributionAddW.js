@@ -59,6 +59,7 @@ const DistributionAddW = () => {
   const [projects, setProjects]= useState([]); 
   const [contacts2, setContacts2]= useState([]);
   const [projects2, setProjects2]= useState([]);
+  const [labelName, setLabelName] = useState({})
 
   const [arrCategory, setArrCategory] = useState([]);
   const [arrCategory2, setArrCategory2] = useState([]);
@@ -222,6 +223,11 @@ const onChangeSelectProject = async(e) => {
   setValueProject(e.target.value)
 
   setProjectVar(e.target.value)
+
+  const obj = contacts.find((item)=>item.value === e.target.value)
+  console.log(obj.label)
+
+  setLabelName(contacts.find((item)=>item.value === e.target.value))
 
   if (e.target.value !== '0') {
     let count_title;
@@ -612,7 +618,7 @@ const delCategory7 = () => {
         //name: 'Рассылка', 
         text: text, 
         image: host + image, 
-        button: textButton, 
+        project: labelName.label, 
         receivers: selected.toString(), 
         datestart: Date.now(), 
         delivered: 'true',        
