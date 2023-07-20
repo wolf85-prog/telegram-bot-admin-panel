@@ -17,14 +17,13 @@ import {
   CRow,
   CFormCheck,
   CToast,
-  CToastHeader,
   CToastBody,
   CToaster,
   CToastClose
 } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
-import { delDistribution, getProjectId, newPlan, getPlan } from 'src/http/adminAPI';
+import { getProjectId, newPlan, getPlan } from 'src/http/adminAPI';
 
 const DistributionWPlaner = () => {
   const location = useLocation()
@@ -101,16 +100,6 @@ const DistributionWPlaner = () => {
 
 //----------------------------------------------------------
 
-  const [dates2, setDates2] = useState([
-    {date: date_str2, time: '06:00', proj: '', save: false},
-    {date: date_str2, time: '07:00', proj: '', save: false},
-    {date: date_str2, time: '08:00', proj: '', save: false},
-    {date: date_str2, time: '09:00', proj: '', save: false},
-    {date: date_str2, time: '10:00', proj: '', save: false},
-    {date: date_str2, time: '11:00', proj: '', save: false},
-    {date: date_str2, time: '12:00', proj: '', save: false}
-  ])
-
   const [projectName, setProjectName] = useState('')
   const [projectView, setProjectView] = useState(false)
   const [value1, setValue1] = useState([false, false, false, false, false, false, false])
@@ -144,8 +133,8 @@ const DistributionWPlaner = () => {
         const planTimes = JSON.parse(plan.times)
         console.log("planTimes: ", planTimes)
 
-        const ind1 = planTimes.findIndex(date => date.time == '12:00')
-        const ind2 = planTimes.findIndex(date => date.time == '18:00')
+        const ind1 = planTimes.findIndex(date => date.time === '12:00')
+        const ind2 = planTimes.findIndex(date => date.time === '18:00')
 
         console.log("Индекс 1: ", ind1)
         console.log("Индекс 2: ", ind2)
@@ -154,9 +143,6 @@ const DistributionWPlaner = () => {
         const times2 = planTimes.slice(ind1, ind2);
         const times3 = planTimes.slice(ind2, planTimes.length);
 
-        console.log("times: ", times)
-        console.log("times2: ", times2)
-        console.log("times3: ", times3)
 
         times.map((time, index)=> {
           if (time.save) {
