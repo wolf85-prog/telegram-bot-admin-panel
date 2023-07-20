@@ -15,11 +15,11 @@ import {
   CAlert,
   CFormCheck,
   CFormSelect,
-  CModal,
-  CModalHeader,
-  CModalTitle,
-  CModalBody,
-  CModalFooter
+  // CModal,
+  // CModalHeader,
+  // CModalTitle,
+  // CModalBody,
+  // CModalFooter
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react';
 import { cilX, cilCaretBottom, cilCarAlt, cilCaretLeft } from '@coreui/icons';
@@ -1200,7 +1200,7 @@ const delCategory7 = () => {
                                       <div>
                                         <CButton color="primary" disabled={selected.length === 0} onClick={onSendText}>Разослать сейчас</CButton>
                                         {/* <CButton onClick={() => setVisible(!visible)}>Vertically centered modal</CButton> */}
-                                        <CModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
+                                        {/* <CModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
                                           <CModalHeader>
                                             <CModalTitle>Предупреждение</CModalTitle>
                                           </CModalHeader>
@@ -1210,7 +1210,7 @@ const delCategory7 = () => {
                                           <CModalFooter>
                                             <CButton color="primary" onClick={() => setVisibleModal(false)}>ОК</CButton>
                                           </CModalFooter>
-                                        </CModal>
+                                        </CModal> */}
                                       </div>
                                     </div>
                                   </CCol>
