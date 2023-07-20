@@ -5,7 +5,6 @@ import formatTime from "./../../utils/formatTime";
 import { useUsersContext } from "./../../context/usersContext";
 import { AccountContext } from '../../../chat-app-new/context/AccountProvider'
 import avatarDefault from "./../../assets/images/no-avatar.png";
-import Status from "./../../assets/images/status.jpg";
 
 const Contact = ({ contact }) => {
 	

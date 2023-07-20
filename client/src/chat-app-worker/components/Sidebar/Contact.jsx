@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import formatTime from "./../../../chat-app-new/utils/formatTime";
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider'
 import avatarDefault from "./../../../chat-app-new/assets/images/no-avatar.png";
-import Status from "./../../../chat-app-new/assets/images/status.jpg";
 
 import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 

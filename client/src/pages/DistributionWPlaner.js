@@ -24,19 +24,13 @@ import {
 } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
-import deleteIcon from 'src/assets/images/delete.png'
-import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { delDistribution, getProjectId, newPlan, getPlan } from 'src/http/adminAPI';
 
 const DistributionWPlaner = () => {
   const location = useLocation()
   const [distributionsWork, setDistributionsWork]= useState([]);
-  const [loading, setLoading]= useState(true);
 
   const projectId= location.state.project
-
-  const [showEditTime, setShowEditTime] = useState(false)
-  const [time, setTime] = useState('06:00')
 
   const [countCol, setCountCol] = useState(6)
   const [countCol2, setCountCol2] = useState(6)
@@ -129,7 +123,6 @@ const DistributionWPlaner = () => {
   const toaster = useRef()
 
   let arr = []
-  let arr2 = []
 
   useEffect(() => {
     const fetchData = async () => {
@@ -198,13 +191,6 @@ const DistributionWPlaner = () => {
     }
       fetchData();
   },[])
-
-  {/* Удаление рассылки */}
-  const removeDescription = async(desk) => {
-    setDistributionsWork(distributionsWork.filter(p => p.id !== desk.id))
-    //удаление сообщения в базе данных
-    await delDistribution(desk.id)
-  }
 
 //поставить галочку Статус
   const changeStatus = (ind, tab) => {

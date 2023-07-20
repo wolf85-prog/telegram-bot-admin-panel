@@ -42,10 +42,8 @@ import categories from './../data/categories';
 
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 import phone_image from './../assets/images/phone2.png';
-import poster from './../assets/images/poster.jpg';
 import noimage2 from './../assets/images/images.png';
 import treug from './../assets/images/treugolnik.png';
-import Loader from 'src/chat-app-new/components/Loader';
 
 const DistributionAddW = () => {
 
@@ -58,7 +56,6 @@ const DistributionAddW = () => {
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]); 
   const [contacts2, setContacts2]= useState([]);
-  const [projects2, setProjects2]= useState([]);
   const [labelName, setLabelName] = useState({})
 
   const [arrCategory, setArrCategory] = useState([]);
