@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from 'react'
+import React, { Suspense, useState, useEffect, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { 
   CContainer, 
@@ -16,6 +16,11 @@ import {
   CCol,
   CRow,
   CFormCheck,
+  CToast,
+  CToastHeader,
+  CToastBody,
+  CToaster,
+  CToastClose
 } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
@@ -119,6 +124,17 @@ const DistributionWPlaner = () => {
   const [value3, setValue3] = useState([false, false, false, false, false, false, false])
 
   const [showLoader, setShowLoader] = useState(true)
+
+  const [toast, addToast] = useState(0)
+  const toaster = useRef()
+  const exampleToast = (
+    <CToast autohide={false} visible={true} color="success" className="text-white align-items-center">
+      <div className="d-flex">
+        <CToastBody>Планирование успешно сохранено!</CToastBody>
+        <CToastClose className="me-2 m-auto" white />
+      </div>
+    </CToast>
+  )
 
   let arr = []
   let arr2 = []
@@ -585,6 +601,7 @@ const DistributionWPlaner = () => {
 
 
   const savePlan = async() => {
+    addToast(exampleToast)
     //const planer = [...dates, ...dates1, ...dates11]
     const newArray = [].concat(dates, dates1, dates11);
     const planer_str = JSON.stringify(newArray) 
@@ -594,8 +611,8 @@ const DistributionWPlaner = () => {
       "datestart": d_str,
       "times": planer_str
     }
-    await newPlan(newObj);
-    backPage()
+    //await newPlan(newObj);
+    //backPage()
   }
 
   const navigate = useNavigate();
@@ -808,7 +825,9 @@ const DistributionWPlaner = () => {
                                 </Link>
                               </div>
                               <div>
-                                <CButton color="primary" onClick={savePlan} style={{width: '130px'}}>Сохранить</CButton>  
+                                <CButton color="primary" onClick={savePlan} style={{width: '130px'}}>Сохранить</CButton>
+                                {/* <CButton onClick={() => addToast(exampleToast)}>Send a toast</CButton> */}
+                                <CToaster ref={toaster} push={toast} placement="top-end" />  
                               </div>
                             </div>
                              </>  

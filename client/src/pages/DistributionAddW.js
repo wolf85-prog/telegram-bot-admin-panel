@@ -1200,7 +1200,7 @@ const delCategory7 = () => {
                                         <Link to={'/distributionw_planer'} state={{ project: proj}}><CButton color="success">Запланировать</CButton></Link>
                                         :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>}
                                       </div>
-                                      <div className='dark-theme'>
+                                      <div>
                                         <CButton color="primary" disabled={selected.length == 0} onClick={onSendText}>Разослать сейчас</CButton>
                                         {/* <CButton onClick={() => setVisible(!visible)}>Vertically centered modal</CButton> */}
                                         <CModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
