@@ -21,7 +21,7 @@ import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import deleteIcon from 'src/assets/images/delete.png'
 import editIcon from 'src/assets/images/pencil.png'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
-import { delDistribution } from 'src/http/adminAPI';
+import { delDistributionW } from 'src/http/adminAPI';
 import { editContact } from 'src/http/chatAPI'
 
 const DistributionW = () => {
@@ -53,10 +53,9 @@ const DistributionW = () => {
 
         const newDistribution = {
           id: distrib.id,
-					name: distrib.name,
           text: distrib.text,
           image: distrib.image.split('5000/')[1] !=='' ? distrib.image : '',
-          button: distrib.button ? distrib.button : '',
+          project: distrib.project,
           receivers: distrib.receivers, //strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
           datestart: newDateMessage,
           status: distrib.delivered ? "отправлено" : "не отправлено",
@@ -77,7 +76,7 @@ const DistributionW = () => {
   const removeDescription = async(desk) => {
     setDistributionsWork(distributionsWork.filter(p => p.id !== desk.id))
     //удаление сообщения в базе данных
-    await delDistribution(desk.id)
+    await delDistributionW(desk.id)
   }
 
   return (
@@ -128,7 +127,7 @@ const DistributionW = () => {
                                         <div>{item.datestart}</div>
                                       </CTableDataCell>  
                                       <CTableDataCell className="text-center">
-                                        <div></div>
+                                        <div>{item.project}</div>
                                       </CTableDataCell>    
                                       <CTableDataCell className="text-center">
                                         {item.image.endsWith('.pdf') ?
