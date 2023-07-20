@@ -127,14 +127,6 @@ const DistributionWPlaner = () => {
 
   const [toast, addToast] = useState(0)
   const toaster = useRef()
-  const exampleToast = (
-    <CToast autohide={false} visible={true} color="success" className="text-white align-items-center">
-      <div className="d-flex">
-        <CToastBody>Планирование успешно сохранено!</CToastBody>
-        <CToastClose className="me-2 m-auto" white />
-      </div>
-    </CToast>
-  )
 
   let arr = []
   let arr2 = []
@@ -599,10 +591,18 @@ const DistributionWPlaner = () => {
 
   }
 
+  const exampleToast = (
+    <CToast autohide={false} visible={true} color="success" className="text-white align-items-center">
+      <div className="d-flex">
+        <CToastBody>Планирование успешно сохранено!</CToastBody>
+        <CToastClose className="me-2 m-auto" white />
+      </div>
+    </CToast>
+  )
 
   const savePlan = async() => {
     addToast(exampleToast)
-    //const planer = [...dates, ...dates1, ...dates11]
+
     const newArray = [].concat(dates, dates1, dates11);
     const planer_str = JSON.stringify(newArray) 
 
@@ -611,7 +611,7 @@ const DistributionWPlaner = () => {
       "datestart": d_str,
       "times": planer_str
     }
-    //await newPlan(newObj);
+    await newPlan(newObj);
     //backPage()
   }
 
