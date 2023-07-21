@@ -15,11 +15,11 @@ import {
   CAlert,
   CFormCheck,
   CFormSelect,
-  // CModal,
-  // CModalHeader,
-  // CModalTitle,
-  // CModalBody,
-  // CModalFooter
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react';
 import { cilX, cilCaretBottom, cilCarAlt, cilCaretLeft } from '@coreui/icons';
@@ -81,6 +81,8 @@ const DistributionAddW = () => {
   const [file, setFile] = useState();
   const [value, setValue] = useState("");
   const [image, setImage]= useState("");
+
+  const [value2, setValue2] = useState("");
 
   const [loader, setLoader] = useState(false);
   const [valueProject, setValueProject] = useState(0)
@@ -400,14 +402,15 @@ const onAddCategory = (e) => {
     //setDisabledBtn(false)
   } else {
     const cat_name = categories[e.target.value].name
+    const cat_label = categories[e.target.value].label
     setArrSelect([])
     arrCategory.pop()
     arrCategory.push(cat_name)
     console.log("arrCategory: ", arrCategory)
     setArrCategory(arrCategory)
     setCategoryAll([...arrCategory, ...arrCategory2])
+
     const result = [...arrCategory, ...arrCategory2]
-    console.log(result)
     
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
@@ -569,8 +572,8 @@ const delCategory7 = () => {
 
           setImage(response.data.path);
           //сообщение с ссылкой на файл
-          console.log(host + response.data.path)
-          //setValue(host + response.data.path)
+          console.log("Путь к файлу: ", host + response.data.path)
+          setValue2(host + response.data.path)
         }
     }
     getImage();
@@ -579,7 +582,7 @@ const delCategory7 = () => {
   {/* Добавление файла */}
   const onFileChange = (e) => {
     setFile(e.target.files[0]);
-    setValue(e.target.value)
+    //setValue('https://proj.uley.team:5000/uploads/2023-07-21T13:43:36.771Z.jpg' + e.target.value)
   }
 
 
@@ -603,11 +606,11 @@ const delCategory7 = () => {
 
   {/* Отправка рассылки */}
   const onSendText = async() => {
-    console.log(selected)
+    console.log("категории: ", categoryAll)
 
     setVisibleModal(!visibleModal)
 
-    if (image || text) {
+    if (selected.length !== 0 && image || selected.length !== 0 && text) {
       audio.play();
 
       //новая рассылка
@@ -616,7 +619,7 @@ const delCategory7 = () => {
         text: text, 
         image: host + image, 
         project: labelName.label, 
-        receivers: selected.toString(), 
+        receivers: categoryAll.toString(), 
         datestart: Date.now(), 
         delivered: 'true',        
       }
@@ -1198,19 +1201,19 @@ const delCategory7 = () => {
                                         :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>}
                                       </div>
                                       <div>
-                                        <CButton color="primary" disabled={selected.length === 0} onClick={onSendText}>Разослать сейчас</CButton>
+                                        <CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton>
                                         {/* <CButton onClick={() => setVisible(!visible)}>Vertically centered modal</CButton> */}
-                                        {/* <CModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
+                                        <CModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
                                           <CModalHeader>
                                             <CModalTitle>Предупреждение</CModalTitle>
                                           </CModalHeader>
                                           <CModalBody>
-                                            Чтобы сделать рассылку необходимо добавить текст или изображение!
+                                            Чтобы отправить рассылку необходимо добавить получателей и текст или изображение!
                                           </CModalBody>
                                           <CModalFooter>
                                             <CButton color="primary" onClick={() => setVisibleModal(false)}>ОК</CButton>
                                           </CModalFooter>
-                                        </CModal> */}
+                                        </CModal>
                                       </div>
                                     </div>
                                   </CCol>

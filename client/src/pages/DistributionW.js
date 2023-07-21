@@ -22,12 +22,12 @@ import deleteIcon from 'src/assets/images/delete.png'
 import editIcon from 'src/assets/images/pencil.png'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { delDistributionW } from 'src/http/adminAPI';
-import { editContact } from 'src/http/chatAPI'
 
 const DistributionW = () => {
   const { distributionsWork: messages } = useUsersContext();
   const [distributionsWork, setDistributionsWork]= useState([]);
   const [loading, setLoading]= useState(true);
+  const [proj, setProj] = useState('');
 
   //get Distribution
   useEffect(() => {
@@ -58,7 +58,7 @@ const DistributionW = () => {
           project: distrib.project,
           receivers: distrib.receivers, //strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
           datestart: newDateMessage,
-          status: distrib.delivered ? "отправлено" : "не отправлено",
+          status: distrib.delivered ? "отправлено" : "запланировано",
 				}
         //console.log(index)
         arrDitributions.push(newDistribution)
@@ -78,6 +78,7 @@ const DistributionW = () => {
     //удаление сообщения в базе данных
     await delDistributionW(desk.id)
   }
+
 
   return (
     <div className='dark-theme'>
@@ -119,7 +120,7 @@ const DistributionW = () => {
                                 </CTableHead>
                                 <CTableBody>
                                   {distributionsWork.map((item, index) => (
-                                    <CTableRow v-for="item in tableItems" key={index}>
+                                    <CTableRow v-for="item in tableItems" key={index} style={{height: '130px'}}>
                                       {/* <CTableDataCell>
                                         <div>{index+1}</div>
                                       </CTableDataCell> */}
@@ -142,9 +143,15 @@ const DistributionW = () => {
                                         <div>{item.status}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <CButton color="light" style={{marginRight: '10px'}}>
-                                          <img src={editIcon} alt='' width='10px' />
-                                        </CButton>
+                                        {/* <Link to={'/distributionw_planer'} state={{ project: proj}}>
+                                          <CButton color="light" style={{marginRight: '10px'}}>
+                                            <img src={editIcon} alt='' width='10px' />
+                                          </CButton>
+                                        </Link> */}
+
+                                        {proj ? 
+                                          <Link to={'/distributionw_planer'} state={{ project: proj}}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
+                                          :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>}
                                         
                                         <CButton color="light" onClick={() => removeDescription(item)}>
                                           <img src={deleteIcon} alt='' width='10px' />

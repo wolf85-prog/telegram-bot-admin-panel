@@ -1,5 +1,5 @@
 import React, { Suspense, useState, useEffect, useRef } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { 
   CContainer, 
   CSpinner, 
@@ -34,30 +34,6 @@ const DistributionWPlaner = () => {
   const [countCol, setCountCol] = useState(6)
   const [countCol2, setCountCol2] = useState(6)
   const [countCol3, setCountCol3] = useState(6)
-
-  //table1
-  const [countClick11, setCountClick11] = useState(0)
-  const [countClick21, setCountClick21] = useState(0)
-  const [countClick31, setCountClick31] = useState(0)
-  const [countClick41, setCountClick41] = useState(0)
-  const [countClick51, setCountClick51] = useState(0)
-  const [countClick61, setCountClick61] = useState(0)
-
-  //table2
-  const [countClick12, setCountClick12] = useState(0)
-  const [countClick22, setCountClick22] = useState(0)
-  const [countClick32, setCountClick32] = useState(0)
-  const [countClick42, setCountClick42] = useState(0)
-  const [countClick52, setCountClick52] = useState(0)
-  const [countClick62, setCountClick62] = useState(0)
-
-  //table3
-  const [countClick13, setCountClick13] = useState(0)
-  const [countClick23, setCountClick23] = useState(0)
-  const [countClick33, setCountClick33] = useState(0)
-  const [countClick43, setCountClick43] = useState(0)
-  const [countClick53, setCountClick53] = useState(0)
-  const [countClick63, setCountClick63] = useState(0)
 
   const d = new Date();
   const month = String(d.getMonth()+1).padStart(2, "0");
@@ -236,110 +212,64 @@ const DistributionWPlaner = () => {
 
     if (t === '06:00')  {
       if (tab === 1) {
-        setCountClick11(countClick11+1)
-        if (countClick11 < 1) {
-          setCountCol(countCol+1)
-          arr = dates.slice(0);
+        //обработка нажатия вкл/выкл
+        if (dates[ind+1].time === '07:00') {
+          setCountCol(countCol+1) //для высоту ячейки с датой
+          arr = dates.slice(0); //копируем массив dates
           const newObj = {
-                date: date_str,
-                time: '06:30',
-                proj: '',
-                save: false
-              }
+            date: date_str,
+            time: '06:30',
+            proj: '',
+            save: false
+          }
           arr.splice(ind+1, 0, newObj);
-          console.log(arr)
           setDates(arr)
+          
+         
+        } else {
+          if (dates[ind+1].proj === ''){
+            setCountCol(countCol-1)
+            dates.splice(ind+1, 1);
+            setDates(dates)
+            
+          }        
         }
       }
     }
 
     if (t === '07:00')  {
       if (tab === 1) {
-        setCountClick21(countClick21+1)
-        if (countClick21 < 1) {
-          setCountCol(countCol+1)
-          arr = dates.slice(0);
-          const newObj = {
-                date: date_str,
-                time: '07:30',
-                proj: '',
-                save: false
-              }
-          arr.splice(ind+1, 0, newObj);
-          setDates(arr)
-        }
+        //обработка нажатия вкл/выкл
+       
       }
     }
 
 
     if (t === '08:00')  {
       if (tab === 1) {
-        setCountClick31(countClick31+1)
-        if (countClick31 < 1) {
-          setCountCol(countCol+1)
-          arr = dates.slice(0);
-          const newObj = {
-                date: date_str,
-                time: '08:30',
-                proj: '',
-                save: false
-              }
-          arr.splice(ind+1, 0, newObj);
-          setDates(arr)
-        }
+        //обработка нажатия вкл/выкл
+        
       }
     }
 
     if (t === '09:00')  {
       if (tab === 1) {
-        setCountClick41(countClick41+1)
-        if (countClick41 < 1) {
-          setCountCol(countCol+1)
-          arr = dates.slice(0);
-          const newObj = {
-                date: date_str,
-                time: '09:30',
-                proj: ''
-              }
-          arr.splice(ind+1, 0, newObj);
-          setDates(arr)
-        }
+        //обработка нажатия вкл/выкл
+        
       }
     }
 
     if (t === '10:00')  {
       if (tab === 1) {
-        setCountClick51(countClick51+1)
-        if (countClick51 < 1) {
-          setCountCol(countCol+1)
-          arr = dates.slice(0);
-          const newObj = {
-                date: date_str,
-                time: '10:30',
-                proj: '',
-                save: false
-              }
-          arr.splice(ind+1, 0, newObj);
-          setDates(arr)
-        }
+        //обработка нажатия вкл/выкл
+       
       }
     }
 
     if (t === '11:00')  {
       if (tab === 1) {
-        setCountClick61(countClick61+1)
-        if (countClick61 < 1) {
-          setCountCol(countCol+1)
-          arr = dates.slice(0);
-          const newObj = {
-                date: date_str,
-                time: '11:30',
-                proj: '',
-                save: false
-              }
-          arr.splice(ind+1, 0, newObj);
-          setDates(arr)
-        }
+        //обработка нажатия вкл/выкл
+        
       }
     }
 
@@ -347,218 +277,88 @@ const DistributionWPlaner = () => {
 
     if (t === '12:00')  {
       if (tab === 2) {
-        setCountClick12(countClick12+1)
-        if (countClick12 < 1) {
-          setCountCol2(countCol2+1)
-          arr = dates1.slice(0);
-          const newObj = {
-                date: date_str,
-                time: '12:30',
-                proj: '',
-                save: false
-              }
-          arr.splice(ind+1, 0, newObj);
-          setDates1(arr)
-        }
+        //обработка нажатия вкл/выкл
+        
       }
     }
 
     if (t === '13:00')  {
       if (tab === 2) {
-        setCountClick22(countClick22+1)
-        if (countClick22 < 1) {
-          setCountCol2(countCol2+1)
-          arr = dates1.slice(0);
-          const newObj = {
-                date: date_str,
-                time: '13:30',
-                proj: '',
-                save: false
-              }
-          arr.splice(ind+1, 0, newObj);
-          setDates1(arr)
-        }
+        //обработка нажатия вкл/выкл
+        
       }
     }
 
     if (t === '14:00')  {
       if (tab === 2) {
-        setCountClick32(countClick32+1)
-        if (countClick32 < 1) {
-          setCountCol2(countCol2+1)
-          arr = dates1.slice(0);
-          const newObj = {
-                date: date_str,
-                time: '14:30',
-                proj: '',
-                save: false
-              }
-          arr.splice(ind+1, 0, newObj);
-          setDates1(arr)
-        }
+        //обработка нажатия вкл/выкл
+        
       }
     }
 
     if (t === '15:00')  {
       if (tab === 2) {
-        setCountClick42(countClick42+1)
-        if (countClick42 < 1) {
-          setCountCol2(countCol2+1)
-          arr = dates1.slice(0);
-          const newObj = {
-                date: date_str,
-                time: '15:30',
-                proj: '',
-                save: false
-              }
-          arr.splice(ind+1, 0, newObj);
-          setDates1(arr)
-        }
+        //обработка нажатия вкл/выкл
+        
       }
     }
 
     if (t === '16:00')  {
       if (tab === 2) {
-        setCountClick52(countClick52+1)
-        if (countClick52 < 1) {
-          setCountCol2(countCol2+1)
-          arr = dates1.slice(0);
-          const newObj = {
-                date: date_str,
-                time: '16:30',
-                proj: '',
-                save: false
-              }
-          arr.splice(ind+1, 0, newObj);
-          setDates1(arr)
-        }
+        //обработка нажатия вкл/выкл
+        
       }
     }
 
     if (t === '17:00')  {
       if (tab === 2) {
-        setCountClick62(countClick62+1)
-        if (countClick62 < 1) {
-          setCountCol2(countCol2+1)
-          arr = dates1.slice(0);
-          const newObj = {
-                date: date_str,
-                time: '17:30',
-                proj: '',
-                save: false
-              }
-          arr.splice(ind+1, 0, newObj);
-          setDates1(arr)
-        }
+        //обработка нажатия вкл/выкл
+        
       }
     }
 
-        //18:00 - 23:00
+//---------------18:00 - 23:00----------------------
 
     if (t === '18:00')  {
-          if (tab === 3) {
-            setCountClick13(countClick13+1)
-            if (countClick13 < 1) {
-              setCountCol3(countCol3+1)
-              arr = dates11.slice(0);
-              const newObj = {
-                    date: date_str,
-                    time: '18:30',
-                    proj: '',
-                    save: false
-                  }
-              arr.splice(ind+1, 0, newObj);
-              setDates11(arr)
-            }
-          }
+      if (tab === 3) {
+        //обработка нажатия вкл/выкл
+        
+      }
     }
     
     if (t === '19:00')  {
-          if (tab === 3) {
-            setCountClick23(countClick23+1)
-            if (countClick23 < 1) {
-              setCountCol3(countCol3+1)
-              arr = dates11.slice(0);
-              const newObj = {
-                    date: date_str,
-                    time: '19:30',
-                    proj: '',
-                    save: false
-                  }
-              arr.splice(ind+1, 0, newObj);
-              setDates11(arr)
-            }
-          }
+      if (tab === 3) {
+        //обработка нажатия вкл/выкл
+        
+      }
     }
     
     if (t === '20:00')  {
-          if (tab === 3) {
-            setCountClick33(countClick33+1)
-            if (countClick33 < 1) {
-              setCountCol3(countCol3+1)
-              arr = dates11.slice(0);
-              const newObj = {
-                    date: date_str,
-                    time: '20:30',
-                    proj: '',
-                    save: false
-                  }
-              arr.splice(ind+1, 0, newObj);
-              setDates11(arr)
-            }
-          }
+      if (tab === 3) {
+        //обработка нажатия вкл/выкл
+        
+      }
     }
     
     if (t === '21:00')  {
-          if (tab === 3) {
-            setCountClick43(countClick43+1)
-            if (countClick43 < 1) {
-              setCountCol3(countCol3+1)
-              arr = dates11.slice(0);
-              const newObj = {
-                    date: date_str,
-                    time: '21:30',
-                    proj: '',
-                    save: false
-                  }
-              arr.splice(ind+1, 0, newObj);
-              setDates11(arr)
-            }
-          }
+      if (tab === 3) {
+        //обработка нажатия вкл/выкл
+        
+      }
     }
     
     if (t === '22:00')  {
-          if (tab === 3) {
-            setCountClick53(countClick53+1)
-            if (countClick53 < 1) {
-              setCountCol3(countCol3+1)
-              arr = dates11.slice(0);
-              const newObj = {
-                    date: date_str,
-                    time: '22:30',
-                    proj: ''
-                  }
-              arr.splice(ind+1, 0, newObj);
-              setDates11(arr)
-            }
-          }
+      if (tab === 3) {
+        //обработка нажатия вкл/выкл
+        
+      }
     }
     
     if (t === '23:00')  {
-          if (tab === 3) {
-            setCountClick63(countClick63+1)
-            if (countClick63 < 1) {
-              setCountCol3(countCol3+1)
-              arr = dates11.slice(0);
-              const newObj = {
-                    date: date_str,
-                    time: '23:30',
-                    proj: ''
-                  }
-              arr.splice(ind+1, 0, newObj);
-              setDates11(arr)
-            }
-          }
+      if (tab === 3) {
+        //обработка нажатия вкл/выкл
+       
+      }
     }
 
   }
@@ -584,13 +384,28 @@ const DistributionWPlaner = () => {
       "times": planer_str
     }
     await newPlan(newObj);
+
+    //новая рассылка
+    // const message = {
+    //   //name: 'Рассылка', 
+    //   text: '', 
+    //   image: '', 
+    //   project: labelName.label, 
+    //   receivers: categoryAll.toString(), 
+    //   datestart: Date.now(), 
+    //   delivered: 'true',        
+    // }
+
+    //сохранение рассылки в базе данных
+    //await newDistributionW(message)
+
     //backPage()
   }
 
-  const navigate = useNavigate();
-  const backPage = () => {
-       navigate('/distributionw_add');
-  } 
+  // const navigate = useNavigate();
+  // const backPage = () => {
+  //      navigate('/distributionw_add');
+  // } 
 
 
   return (
@@ -610,7 +425,8 @@ const DistributionWPlaner = () => {
                           <CCard className="mb-4">
                             <CCardHeader>График рассылок</CCardHeader>
                             <CCardBody>
-                            <br />
+
+                            <p style={{color: '#fff'}}>Текущий проект: &quot;{projectName}&quot;</p>
                             {
                               showLoader ? <div style={{textAlign:'center'}}><CSpinner/></div>
                               :
