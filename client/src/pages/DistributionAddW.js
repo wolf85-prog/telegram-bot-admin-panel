@@ -573,7 +573,7 @@ const delCategory7 = () => {
           setImage(response.data.path);
           //сообщение с ссылкой на файл
           console.log("Путь к файлу: ", host + response.data.path)
-          setValue(host + response.data.path)
+          //setValue(host + response.data.path)
         }
     }
     getImage();
@@ -581,8 +581,8 @@ const delCategory7 = () => {
 
   {/* Добавление файла */}
   const onFileChange = (e) => {
-    setFile(e.target.files[0]);
-    //setValue('https://proj.uley.team:5000/uploads/2023-07-21T13:43:36.771Z.jpg' + e.target.value)
+    //setFile(e.target.files[0]);
+    setFile(URL.createObjectURL(e.target.files[0]));
   }
 
 
@@ -1024,7 +1024,7 @@ const delCategory7 = () => {
                                                 // label="Добавить картинку" 
                                                 name="photo"
                                                 onChange={(e) => onFileChange(e)}
-                                                value={value}
+                                                //value={value}
                                               />
 
                                               {/* <form>
@@ -1155,8 +1155,8 @@ const delCategory7 = () => {
                                           <img src={phone_image} width='280px' height='615px' alt='phone' />
                                           <div style={{position: 'absolute', top: '60px', left: '22px'}}>
                                           {
-                                            value
-                                            ? <img src={value} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
+                                            file
+                                            ? <img src={file} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
                                             : <img src={noimage2} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
                                           }
                                           </div>
