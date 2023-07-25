@@ -69,6 +69,7 @@ const Distributionw = sequelize.define('distributionw', {
     receivers: {type: DataTypes.STRING}, //массив получателей;
     datestart: {type: DataTypes.STRING},  //дата начала рассылки
     delivered: {type: DataTypes.BOOLEAN}, //доставлено
+    projectId: {type: DataTypes.STRING}, //проект (id);
 })
 
 const Report = sequelize.define('report', {
