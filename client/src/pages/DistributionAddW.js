@@ -140,7 +140,7 @@ const DistributionAddW = () => {
     }]
     projects.map((project) => {
       if (project != null) {
-        const d = new Date(project["Дата"]);
+        const d = new Date(project.datestart);
         const month = String(d.getMonth()+1).padStart(2, "0");
         const day = String(d.getDate()).padStart(2, "0");
 
