@@ -33,7 +33,7 @@ export const getProjects2 = async () =>{
 //api notion
 export const getProjects3 = async () =>{
     try {
-        let response = await $host_bottest.get('projects3');
+        let response = await $host_bot.get('projects3');
         console.log("projectsAPI: ", response.data);
         return response.data;
     } catch (error) {

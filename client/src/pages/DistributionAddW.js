@@ -140,7 +140,7 @@ const DistributionAddW = () => {
     }]
     projects.map((project) => {
       if (project != null) {
-        const d = new Date(project.datestart);
+        const d = new Date(project["Дата"]);
         const month = String(d.getMonth()+1).padStart(2, "0");
         const day = String(d.getDate()).padStart(2, "0");
 
@@ -573,7 +573,7 @@ const delCategory7 = () => {
           setImage(response.data.path);
           //сообщение с ссылкой на файл
           console.log("Путь к файлу: ", host + response.data.path)
-          setValue2(host + response.data.path)
+          setValue(host + response.data.path)
         }
     }
     getImage();
@@ -1154,7 +1154,11 @@ const delCategory7 = () => {
                                         <div style={{position: 'absolute', top: '10px', left: 0}}>
                                           <img src={phone_image} width='280px' height='615px' alt='phone' />
                                           <div style={{position: 'absolute', top: '60px', left: '22px'}}>
-                                            <img src={value ? value : noimage2} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
+                                          {
+                                            value
+                                            ? <img src={value} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
+                                            : <img src={noimage2} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
+                                          }
                                           </div>
                                           <div style={{position: 'absolute', top: '225px', left: '22px', display: 'flex', width: '85%'}}>
                                             <div style={{
