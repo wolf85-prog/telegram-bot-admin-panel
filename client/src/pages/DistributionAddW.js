@@ -429,6 +429,7 @@ const onAddCategory = (e) => {
     setCategoryAll([...arrCategory, ...arrCategory2])
 
     const result = [...arrCategory, ...arrCategory2]
+    console.log("categoryAll: ", result)
     
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
@@ -463,11 +464,11 @@ const onAddCategory2 = (e) => {
     setArrSelect([])
     arrCategory2.pop()
     arrCategory2.push(cat_name)
-    console.log("arrCategory: ", arrCategory)
+    console.log("arrCategory2: ", arrCategory2)
     setArrCategory2(arrCategory2)
     setCategoryAll([...arrCategory, ...arrCategory2])
     const result = [...arrCategory, ...arrCategory2]
-    console.log(result)
+    console.log("categoryAll: ", result)
 
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
@@ -491,30 +492,175 @@ const onAddCategory2 = (e) => {
 const onAddCategory3 = (e) => {
   e.preventDefault();
   setValueSelect3(e.target.value)
+
+  if (e.target.value === 0) {
+    setSelected([])
+  } else {
+    const cat_name = categories[e.target.value].name
+
+    setArrSelect([])
+    arrCategory3.pop()
+    arrCategory3.push(cat_name)
+    console.log("arrCategory3: ", arrCategory3)
+    setArrCategory3(arrCategory3)
+    setCategoryAll([...arrCategory, ...arrCategory2, ...arrCategory3])
+    const result = [...arrCategory, ...arrCategory2, ...arrCategory3]
+    console.log("categoryAll: ", result)
+
+    workers.map((worker)=> {
+      JSON.parse(worker.worklist).map((work) => {
+        result.map((cat)=> {
+          if (work.cat === cat) {
+            arrSelect.push(worker.chatId)
+          } 
+        })
+      })
+    })
+    //выбрать уникальных специалистов
+    //const arr = [...arrSelect].filter((el, ind) => ind === selected.indexOf(el));
+    
+    setSelected(arrSelect)
+  }
 }
 
 //Изменить категорию (4-й селект)
 const onAddCategory4 = (e) => {
   e.preventDefault();
   setValueSelect4(e.target.value)
+
+  if (e.target.value === 0) {
+    setSelected([])
+  } else {
+    const cat_name = categories[e.target.value].name
+
+    setArrSelect([])
+    arrCategory4.pop()
+    arrCategory4.push(cat_name)
+    console.log("arrCategory4: ", arrCategory4)
+    setArrCategory4(arrCategory4)
+    setCategoryAll([...arrCategory, ...arrCategory2, ...arrCategory3, ...arrCategory4])
+    const result = [...arrCategory, ...arrCategory2, ...arrCategory3, ...arrCategory4]
+    console.log("categoryAll: ", result)
+
+    workers.map((worker)=> {
+      JSON.parse(worker.worklist).map((work) => {
+        result.map((cat)=> {
+          if (work.cat === cat) {
+            arrSelect.push(worker.chatId)
+          } 
+        })
+      })
+    })
+    //выбрать уникальных специалистов
+    //const arr = [...arrSelect].filter((el, ind) => ind === selected.indexOf(el));
+    
+    setSelected(arrSelect)
+  }
 }
 
 //Изменить категорию (5-й селект)
 const onAddCategory5 = (e) => {
   e.preventDefault();
   setValueSelect5(e.target.value)
+
+  if (e.target.value === 0) {
+    setSelected([])
+  } else {
+    const cat_name = categories[e.target.value].name
+
+    setArrSelect([])
+    arrCategory5.pop()
+    arrCategory5.push(cat_name)
+    console.log("arrCategory5: ", arrCategory5)
+    setArrCategory5(arrCategory5)
+    setCategoryAll([...arrCategory, ...arrCategory2, ...arrCategory3])
+    const result = [...arrCategory, ...arrCategory2, ...arrCategory3]
+    console.log("categoryAll: ", result)
+
+    workers.map((worker)=> {
+      JSON.parse(worker.worklist).map((work) => {
+        result.map((cat)=> {
+          if (work.cat === cat) {
+            arrSelect.push(worker.chatId)
+          } 
+        })
+      })
+    })
+    //выбрать уникальных специалистов
+    //const arr = [...arrSelect].filter((el, ind) => ind === selected.indexOf(el));
+    
+    setSelected(arrSelect)
+  }
 }
 
 //Изменить категорию (6-й селект)
 const onAddCategory6 = (e) => {
   e.preventDefault();
   setValueSelect6(e.target.value)
+
+  if (e.target.value === 0) {
+    setSelected([])
+  } else {
+    const cat_name = categories[e.target.value].name
+
+    setArrSelect([])
+    arrCategory6.pop()
+    arrCategory6.push(cat_name)
+    console.log("arrCategory6: ", arrCategory6)
+    setArrCategory6(arrCategory6)
+    setCategoryAll([...arrCategory, ...arrCategory2, ...arrCategory3])
+    const result = [...arrCategory, ...arrCategory2, ...arrCategory3]
+    //console.log(result)
+
+    workers.map((worker)=> {
+      JSON.parse(worker.worklist).map((work) => {
+        result.map((cat)=> {
+          if (work.cat === cat) {
+            arrSelect.push(worker.chatId)
+          } 
+        })
+      })
+    })
+    //выбрать уникальных специалистов
+    //const arr = [...arrSelect].filter((el, ind) => ind === selected.indexOf(el));
+    
+    setSelected(arrSelect)
+  }
 }
 
 //Изменить категорию (7-й селект)
 const onAddCategory7 = (e) => {
   e.preventDefault();
   setValueSelect7(e.target.value)
+
+  if (e.target.value === 0) {
+    setSelected([])
+  } else {
+    const cat_name = categories[e.target.value].name
+
+    setArrSelect([])
+    arrCategory7.pop()
+    arrCategory7.push(cat_name)
+    console.log("arrCategory7: ", arrCategory7)
+    setArrCategory7(arrCategory7)
+    setCategoryAll([...arrCategory, ...arrCategory2, ...arrCategory3])
+    const result = [...arrCategory, ...arrCategory2, ...arrCategory3]
+    //console.log(result)
+
+    workers.map((worker)=> {
+      JSON.parse(worker.worklist).map((work) => {
+        result.map((cat)=> {
+          if (work.cat === cat) {
+            arrSelect.push(worker.chatId)
+          } 
+        })
+      })
+    })
+    //выбрать уникальных специалистов
+    //const arr = [...arrSelect].filter((el, ind) => ind === selected.indexOf(el));
+    
+    setSelected(arrSelect)
+  }
 }
 
 //----------------------------------------
@@ -624,7 +770,7 @@ const delCategory7 = () => {
   const onPlanerShow = async(proj) => {
     setVisibleModal(!visibleModal)
 
-    if (selected.length !== 0 && image || selected.length !== 0 && text) {
+    if (selected.length !== 0 && file || selected.length !== 0 && text) {
       navigate('/distributionw_planer', {
         state: {
           project: proj,
@@ -639,7 +785,7 @@ const delCategory7 = () => {
 
     setVisibleModal(!visibleModal)
 
-    if (selected.length !== 0 && image || selected.length !== 0 && text) {
+    if (selected.length !== 0 && file || selected.length !== 0 && text) {
       audio.play();
 
       //новая рассылка
