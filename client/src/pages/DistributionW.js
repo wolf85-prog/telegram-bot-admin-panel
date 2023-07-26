@@ -153,7 +153,7 @@ const DistributionW = () => {
                                         </Link> */}
 
                                         {item.projectId ? 
-                                          <Link to={'/distributionw_planer'} state={{ project: item.projectId}}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
+                                          <Link to={'/distributionw_add'} state={{ project: item.projectId}}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
                                           :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>}
                                         
                                         <CButton color="light" onClick={() => removeDescription(item)}>

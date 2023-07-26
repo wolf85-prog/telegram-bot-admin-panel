@@ -1,7 +1,7 @@
 import React, { Suspense, useState, useEffect } from 'react'
 import { CContainer, CSpinner } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { 
   CRow,
   CCol,
@@ -46,6 +46,8 @@ import noimage2 from './../assets/images/images.png';
 import treug from './../assets/images/treugolnik.png';
 
 const DistributionAddW = () => {
+  const location = useLocation()
+  const projId= location.state?.project //? location.state.project : ""
 
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_API_URL
@@ -129,6 +131,11 @@ const DistributionAddW = () => {
       setProjects(projects)
     }
       fetchData();
+
+      //для редактирования рассылки
+      if (projId !== 'undefined') {
+        setValueProject(projId)
+      } 
       
   },[])
 
@@ -195,9 +202,6 @@ let arr_count = []
 //выбор проекта
 const onChangeSelectProject = async(e) => {
   e.preventDefault();
-  // if (e.target.value === '1') setProj('Проект 1')
-  // if (e.target.value === '2') setProj('Проект 2')
-  // if (e.target.value === '3') setProj('Проект 3')
   
   setProj(e.target.value)
 
@@ -242,30 +246,42 @@ const onChangeSelectProject = async(e) => {
 
       console.log("categories: ", categories2)
 
+      // specData.map((specObject)=> {
+      //   specObject.models.map((spec)=> {
+      //       //console.log(spec.name)
+      //       count_fio = 0;
+      //       count_title = 0;
+
+      //       if (databaseBlock) {   
+      //           databaseBlock.map((db) => {
+      //               if (db.date === item.date) {
+      //                   if (spec.name === db.spec) {
+
       specData.map((category)=> {
-        count_title = 0;
-        //console.log(category)
-        if (databaseBlock.data) {   
-          databaseBlock.data.map((db) => {
-            if (category.name === db.title) {
-              count_title++
-            }
-          })
-          
-          if (count_title !== 0) {
-            const obj = {
-              id: category.id,
-              title: category.icon,
-              name: category.name,
-              count: count_title,
-            }
-            arr_count.push(obj)
+        category.models.map((spec)=> {
+          count_title = 0;
+
+          if (databaseBlock.data) {   
+            databaseBlock.data.map((db) => {
+              if (spec.name === db.spec) {
+                count_title++
+              }
+            })
+            
+            if (count_title !== 0) {
+              const obj = {
+                id: category.id,
+                title: category.icon,
+                name: category.name,
+                count: count_title,
+              }
+              arr_count.push(obj)
+            }         
           }
-          
-        }
+        })
       })  
 
-      console.log("arr_count: ", arr_count.length)
+      console.log("arr_count: ", arr_count)
       setArrLength(arr_count.length)
       
       if(arr_count[0]) {
@@ -604,7 +620,18 @@ const delCategory7 = () => {
   }
 
   //===================================================================
+  {/* Запланировать рассылку */}
+  const onPlanerShow = async(proj) => {
+    setVisibleModal(!visibleModal)
 
+    if (selected.length !== 0 && image || selected.length !== 0 && text) {
+      navigate('/distributionw_planer', {
+        state: {
+          project: proj,
+        }
+      });
+    } 
+  }
 
   {/* Отправка рассылки */}
   const onSendText = async() => {
@@ -1203,9 +1230,15 @@ const delCategory7 = () => {
                                       justifyContent: 'space-between'
                                     }}>
                                     {/* <div><Link to={'/distributionw_planer/'} state={{ project: proj}}><CButton color="secondary">Запланировать</CButton></Link></div> */}
-                                      <div>{proj ? 
+                                      {/* <div>{proj ? 
                                         <Link to={'/distributionw_planer'} state={{ project: proj}}><CButton color="success">Запланировать</CButton></Link>
                                         :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>}
+                                      </div> */}
+                                      <div>
+                                        {proj ? 
+                                          <CButton color="success" onClick={()=>onPlanerShow(proj)}>Запланировать</CButton>
+                                          :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>
+                                        }             
                                       </div>
                                       <div>
                                         <CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton>
@@ -1215,7 +1248,7 @@ const delCategory7 = () => {
                                             <CModalTitle>Предупреждение</CModalTitle>
                                           </CModalHeader>
                                           <CModalBody>
-                                            Чтобы отправить рассылку необходимо добавить получателей и текст или изображение!
+                                            Чтобы создать рассылку необходимо добавить получателей и текст или изображение!
                                           </CModalBody>
                                           <CModalFooter>
                                             <CButton color="primary" onClick={() => setVisibleModal(false)}>ОК</CButton>
