@@ -56,6 +56,7 @@ const DistributionW = () => {
           text: distrib.text,
           image: distrib.image.split('5000/')[1] !=='' ? distrib.image : '',
           project: distrib.project,
+          projectId: distrib.projectId ? distrib.projectId : '',
           receivers: distrib.receivers, //strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
           datestart: newDateMessage,
           status: distrib.delivered ? "отправлено" : "запланировано",
@@ -63,6 +64,8 @@ const DistributionW = () => {
         //console.log(index)
         arrDitributions.push(newDistribution)
       })
+
+      console.log("arrDitributions: ", arrDitributions)
 
       setDistributionsWork(arrDitributions) 
       setLoading(false)
@@ -149,8 +152,8 @@ const DistributionW = () => {
                                           </CButton>
                                         </Link> */}
 
-                                        {proj ? 
-                                          <Link to={'/distributionw_planer'} state={{ project: proj}}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
+                                        {item.projectId ? 
+                                          <Link to={'/distributionw_planer'} state={{ project: item.projectId}}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
                                           :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>}
                                         
                                         <CButton color="light" onClick={() => removeDescription(item)}>

@@ -1,5 +1,5 @@
 import React, { Suspense, useState, useEffect, useRef } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { 
   CContainer, 
   CSpinner, 
@@ -23,7 +23,7 @@ import {
 } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
-import { getProjectId, newPlan, getPlan } from 'src/http/adminAPI';
+import { getProjectId, newPlan, getPlan, newDistributionW } from 'src/http/adminAPI';
 
 const DistributionWPlaner = () => {
   const location = useLocation()
@@ -956,26 +956,30 @@ const DistributionWPlaner = () => {
     await newPlan(newObj);
 
     //новая рассылка
-    // const message = {
-    //   //name: 'Рассылка', 
-    //   text: '', 
-    //   image: '', 
-    //   project: labelName.label, 
-    //   receivers: categoryAll.toString(), 
-    //   datestart: Date.now(), 
-    //   delivered: 'true',        
-    // }
+    const message = {
+      //name: 'Рассылка', 
+      text: '', 
+      image: '', 
+      project: projectName, 
+      projectId: projectId, 
+      receivers: "", 
+      datestart: Date.now(), 
+      delivered: 'false',        
+    }
+
+    //console.log(message)
 
     //сохранение рассылки в базе данных
-    //await newDistributionW(message)
+    await newDistributionW(message)
 
+    setTimeout(() => backPage(), 1000);
     //backPage()
   }
 
-  // const navigate = useNavigate();
-  // const backPage = () => {
-  //      navigate('/distributionw_add');
-  // } 
+  const navigate = useNavigate();
+  const backPage = () => {
+       navigate('/distributionw');
+  } 
 
 
   return (
