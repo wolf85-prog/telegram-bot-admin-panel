@@ -61,7 +61,7 @@ const categories = [
       value: '11',
     },
     {
-      label: 'Игромания',
+      label: 'Игры',
       name: 'Games',
       value: '12',
     },  

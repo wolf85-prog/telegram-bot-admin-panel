@@ -24,6 +24,7 @@ import {
 import CIcon from '@coreui/icons-react';
 import { cilX, cilCaretBottom, cilCarAlt, cilCaretLeft } from '@coreui/icons';
 
+//import { MultiSelect } from "react-multi-select-component";
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { $host } from '../http/index';
 import { useNavigate } from 'react-router-dom';
@@ -68,7 +69,8 @@ const DistributionAddW = () => {
   const [arrCategory6, setArrCategory6] = useState([]);
   const [arrCategory7, setArrCategory7] = useState([]);
 
-  const [categoryAll, setCategoryAll] = useState([]);
+  const [categoryAll, setCategoryAll] = useState();
+  const [categoryAll2, setCategoryAll2] = useState();
 
   const [selected, setSelected] = useState([]);
   const [arrSelect, setArrSelect] = useState([]);
@@ -196,6 +198,40 @@ const onChangeProjectNumber = () => {
   setValueSelect(0)
 }
 
+function unDuplicateArraySingleValues(array) {
+  // Проверка, что это не пустой массив
+  if ((Array.isArray(array) || array instanceof Array) && array.length) {
+    // Возвращает массив уникальных значений
+    return [...new Set(array)];
+  } else {
+    // Это не заполненный массив,
+    // возвращаем переданное без изменений
+    return array;
+  }
+}
+
+function unDuplicateArrayObjects(array, propertyName) {
+  if ((Array.isArray(array) || array instanceof Array)
+    && array.length
+    && typeof propertyName === 'string'
+    && propertyName.length) {
+    // Массив значений из ключа propertyName, который надо проверить
+    const objectValuesArrayFromKey = array.map(item => item[propertyName]);
+
+    // Удалить дубли этих значений с помощью предыдущей функции
+    const uniqueValues = unDuplicateArraySingleValues(objectValuesArrayFromKey);
+
+    // Вернуть массив только с уникальными объектами
+    return uniqueValues.map(
+      key => array.find(
+        item => item[propertyName] === key
+      )
+    );
+  } else {
+    return array;
+  }
+}
+
 
 let arr_count = []
 
@@ -246,17 +282,6 @@ const onChangeSelectProject = async(e) => {
 
       console.log("categories: ", categories2)
 
-      // specData.map((specObject)=> {
-      //   specObject.models.map((spec)=> {
-      //       //console.log(spec.name)
-      //       count_fio = 0;
-      //       count_title = 0;
-
-      //       if (databaseBlock) {   
-      //           databaseBlock.map((db) => {
-      //               if (db.date === item.date) {
-      //                   if (spec.name === db.spec) {
-
       specData.map((category)=> {
         category.models.map((spec)=> {
           count_title = 0;
@@ -283,33 +308,48 @@ const onChangeSelectProject = async(e) => {
 
       console.log("arr_count: ", arr_count)
       setArrLength(arr_count.length)
+
+      let unique = unDuplicateArrayObjects(arr_count, 'id')
+
+      const arr2 = []
+      unique.map((item)=> {
+          const obj = {
+            label: item.title,
+            value: item.id
+          }
+          arr2.push(obj)
+      })
+      console.log("arr2: ", arr2)
+      setCategoryAll(arr2)
+
+
       
-      if(arr_count[0]) {
-        setValueSelect(arr_count[0].id)
+      if(arr2[0]) {
+        setValueSelect(arr2[0].value)
       }
 
-      if(arr_count[1]) {
-        setValueSelect2(arr_count[1]?.id)
+      if(arr2[1]) {
+        setValueSelect2(arr2[1]?.value)
         setShowCategories2(true)
       }
 
-      if(arr_count[2]) {
-        setValueSelect3(arr_count[2]?.id)
+      if(arr2[2]) {
+        setValueSelect3(arr2[2]?.value)
         setShowCategories3(true)
       }
 
-      if(arr_count[3]) {
-        setValueSelect4(arr_count[3].id)
+      if(arr2[3]) {
+        setValueSelect4(arr2[3].value)
         setShowCategories4(true)
       }
 
-      if(arr_count[4]) {
-        setValueSelect5(arr_count[4].id)
+      if(arr2[4]) {
+        setValueSelect5(arr2[4].value)
         setShowCategories5(true)
       }
 
-      if(arr_count[5]) {
-        setValueSelect6(arr_count[5].id)
+      if(arr2[5]) {
+        setValueSelect6(arr2[5].value)
         setShowCategories6(true)
       }
 
@@ -404,10 +444,7 @@ const onAddCategory0 = (e) => {
     if ((count + 1) === 3) {
       setShowCategories7(true)
     }
-  }
-
-  
-  
+  } 
 }
 
 //Изменить категорию (1-й селект)
@@ -420,15 +457,16 @@ const onAddCategory = (e) => {
     //setDisabledBtn(false)
   } else {
     const cat_name = categories[e.target.value].name
+    console.log("cat_name1: ", cat_name)
     const cat_label = categories[e.target.value].label
     setArrSelect([])
     arrCategory.pop()
     arrCategory.push(cat_name)
     console.log("arrCategory: ", arrCategory)
     setArrCategory(arrCategory)
-    setCategoryAll([...arrCategory, ...arrCategory2])
+    setCategoryAll([...arrCategory])
 
-    const result = [...arrCategory, ...arrCategory2]
+    const result = [...arrCategory]
     console.log("categoryAll: ", result)
     
     workers.map((worker)=> {
@@ -442,7 +480,7 @@ const onAddCategory = (e) => {
     })
     
     //выбрать уникальных специалистов
-    //const arr = [...arrSelect].filter((el, ind) => ind === selected.indexOf(el));
+    //const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     
     setSelected(arrSelect)
 
@@ -460,7 +498,8 @@ const onAddCategory2 = (e) => {
     setSelected([])
   } else {
     const cat_name = categories[e.target.value].name
-
+    const cat_label = categories[e.target.value].label
+    console.log("cat_name2: ", cat_name)
     setArrSelect([])
     arrCategory2.pop()
     arrCategory2.push(cat_name)
@@ -480,7 +519,7 @@ const onAddCategory2 = (e) => {
       })
     })
     //выбрать уникальных специалистов
-    //const arr = [...arrSelect].filter((el, ind) => ind === selected.indexOf(el));
+    //const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     
     setSelected(arrSelect)
 
@@ -497,7 +536,8 @@ const onAddCategory3 = (e) => {
     setSelected([])
   } else {
     const cat_name = categories[e.target.value].name
-
+    const cat_label = categories[e.target.value].label
+    console.log("cat_name3: ", cat_name)
     setArrSelect([])
     arrCategory3.pop()
     arrCategory3.push(cat_name)
@@ -517,9 +557,11 @@ const onAddCategory3 = (e) => {
       })
     })
     //выбрать уникальных специалистов
-    //const arr = [...arrSelect].filter((el, ind) => ind === selected.indexOf(el));
+    const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     
-    setSelected(arrSelect)
+    setSelected(arr)
+
+    console.log(arr)
   }
 }
 
@@ -532,7 +574,8 @@ const onAddCategory4 = (e) => {
     setSelected([])
   } else {
     const cat_name = categories[e.target.value].name
-
+    const cat_label = categories[e.target.value].label
+    console.log("cat_name4: ", cat_name)
     setArrSelect([])
     arrCategory4.pop()
     arrCategory4.push(cat_name)
@@ -552,9 +595,11 @@ const onAddCategory4 = (e) => {
       })
     })
     //выбрать уникальных специалистов
-    //const arr = [...arrSelect].filter((el, ind) => ind === selected.indexOf(el));
+    const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     
-    setSelected(arrSelect)
+    setSelected(arr)
+
+    console.log(arr)
   }
 }
 
@@ -567,7 +612,8 @@ const onAddCategory5 = (e) => {
     setSelected([])
   } else {
     const cat_name = categories[e.target.value].name
-
+    const cat_label = categories[e.target.value].label
+    console.log("cat_name5: ", cat_name)
     setArrSelect([])
     arrCategory5.pop()
     arrCategory5.push(cat_name)
@@ -587,9 +633,11 @@ const onAddCategory5 = (e) => {
       })
     })
     //выбрать уникальных специалистов
-    //const arr = [...arrSelect].filter((el, ind) => ind === selected.indexOf(el));
+    const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     
-    setSelected(arrSelect)
+    setSelected(arr)
+
+    console.log(arr)
   }
 }
 
@@ -602,7 +650,8 @@ const onAddCategory6 = (e) => {
     setSelected([])
   } else {
     const cat_name = categories[e.target.value].name
-
+    const cat_label = categories[e.target.value].label
+    console.log("cat_name6: ", cat_name)
     setArrSelect([])
     arrCategory6.pop()
     arrCategory6.push(cat_name)
@@ -622,9 +671,11 @@ const onAddCategory6 = (e) => {
       })
     })
     //выбрать уникальных специалистов
-    //const arr = [...arrSelect].filter((el, ind) => ind === selected.indexOf(el));
+    const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     
-    setSelected(arrSelect)
+    setSelected(arr)
+
+    console.log(arr)
   }
 }
 
@@ -637,6 +688,7 @@ const onAddCategory7 = (e) => {
     setSelected([])
   } else {
     const cat_name = categories[e.target.value].name
+    console.log("cat_name7: ", cat_name)
 
     setArrSelect([])
     arrCategory7.pop()
@@ -656,62 +708,95 @@ const onAddCategory7 = (e) => {
         })
       })
     })
-    //выбрать уникальных специалистов
-    //const arr = [...arrSelect].filter((el, ind) => ind === selected.indexOf(el));
     
-    setSelected(arrSelect)
+    //выбрать уникальных специалистов
+    const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
+    
+    setSelected(arr)
+
+    console.log(arr)
   }
 }
 
 //----------------------------------------
 
 {/* Удаление категорий */}
-const delCategory2 = () => {
+const delCategory2 = (category) => {
   setShowCategories2(false)
   setValueSelect2(0)
   console.log("Удаление категории 2: ", arrCategory2)
   arrCategory2.pop()
   setCount(count - 1)
+
+  if (valueSelect2 !== 0) {
+    setCategoryAll(categoryAll.filter((item) => item !== categories[category].name))
+    console.log("categoryAll: ", categoryAll.filter((item) => item !== categories[category].name))
+  }
 }
 
-const delCategory3 = () => {
+const delCategory3 = (category) => {
   setShowCategories3(false)
   setValueSelect3(0)
   console.log("Удаление категории 3: ", arrCategory3)
   arrCategory3.pop()
   setCount(count - 1)
+
+  if (valueSelect3 !== 0) {
+    setCategoryAll(categoryAll.filter((item) => item !== categories[category].name))
+    console.log("categoryAll: ", categoryAll.filter((item) => item !== categories[category].name))
+  }
 }
 
-const delCategory4 = () => {
+const delCategory4 = (category) => {
   setShowCategories4(false)
   setValueSelect4(0)
   console.log("Удаление категории 4: ", arrCategory4)
   arrCategory4.pop()
   setCount(count - 1)
+
+  if (valueSelect4 !== 0) {
+    setCategoryAll(categoryAll.filter((item) => item !== categories[category].name))
+    console.log("categoryAll: ", categoryAll.filter((item) => item !== categories[category].name))
+  }
 }
 
-const delCategory5 = () => {
+const delCategory5 = (category) => {
   setShowCategories5(false)
   setValueSelect5(0)
   console.log("Удаление категории 5: ", arrCategory5)
   arrCategory5.pop()
   setCount(count - 1)
+
+  if (valueSelect5 !== 0) {
+    setCategoryAll(categoryAll.filter((item) => item !== categories[category].name))
+    console.log("categoryAll: ", categoryAll.filter((item) => item !== categories[category].name))
+  }
 }
 
-const delCategory6 = () => {
+const delCategory6 = (category) => {
   setShowCategories6(false)
   setValueSelect6(0)
   console.log("Удаление категории 6: ", arrCategory6)
   arrCategory6.pop()
   setCount(count - 1)
+
+  if (valueSelect6 !== 0) {
+    setCategoryAll(categoryAll.filter((item) => item !== categories[category].name))
+    console.log("categoryAll: ", categoryAll.filter((item) => item !== categories[category].name))
+  }
 }
 
-const delCategory7 = () => {
+const delCategory7 = (category) => {
   setShowCategories7(false)
   setValueSelect7(0)
   console.log("Удаление категории 7: ", arrCategory7)
   arrCategory7.pop()
   setCount(count - 1)
+
+  if (valueSelect7 !== 0) {
+    setCategoryAll(categoryAll.filter((item) => item !== categories[category].name))
+    console.log("categoryAll: ", categoryAll.filter((item) => item !== categories[category].name))
+  }
 }
 
 
@@ -1002,6 +1087,30 @@ const delCategory7 = () => {
                                       </>
                                       : <br/>
                                       }
+
+                                {/* <div className="mb-3" style={{color: '#f3f3f3'}}>
+                                  <CFormLabel htmlFor="exampleFormControlInput1">Категории:</CFormLabel>
+                                  <MultiSelect
+                                    options={categories}
+                                    value={categoryAll}
+                                    onChange={setCategoryAll}
+                                    isLoading={false}
+                                    labelledBy={"Select"}
+                                    style={{color: '#1e1919'}}
+                                    overrideStrings={{
+                                      "allItemsAreSelected": "Все поля выбраны",
+                                      "clearSearch": "Очистить поиск",
+                                      "clearSelected": "Очистить выбор",
+                                      "noOptions": "Ничего не найдено",
+                                      "search": "Поиск",
+                                      "selectAll": "Выбрать всё",
+                                      "selectAllFiltered": "Выбрать всё (Найденных)",
+                                      "selectSomeItems": "Выбрать...",
+                                      "create": "Создать",
+                                    }}   
+                                  />
+                                  <p style={{color: '#767676'}}>Получателей: <span>{categoryAll.length}</span></p>
+                                </div> */}
                                       
                                       {/* Категория 1 */}
                                       <CRow>
@@ -1030,7 +1139,7 @@ const delCategory7 = () => {
                                             icon={cilX} 
                                             size="xl" 
                                             style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories2 ? "block" : "none"}} 
-                                            onClick={delCategory2}
+                                            onClick={()=>delCategory2(valueSelect2)}
                                           />
                                         </CCol>
                                       </CRow>
@@ -1049,7 +1158,7 @@ const delCategory7 = () => {
                                             icon={cilX} 
                                             size="xl" 
                                             style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories3 ? "block" : "none"}} 
-                                            onClick={delCategory3}
+                                            onClick={()=>delCategory3(valueSelect3)}
                                           />
                                         </CCol>
                                       </CRow>
@@ -1068,7 +1177,7 @@ const delCategory7 = () => {
                                             icon={cilX} 
                                             size="xl" 
                                             style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories4 ? "block" : "none"}} 
-                                            onClick={delCategory4}
+                                            onClick={()=>delCategory4(valueSelect4)}
                                           />
                                         </CCol>
                                       </CRow>
@@ -1087,7 +1196,7 @@ const delCategory7 = () => {
                                             icon={cilX} 
                                             size="xl" 
                                             style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories5 ? "block" : "none"}} 
-                                            onClick={delCategory5}
+                                            onClick={()=>delCategory5(valueSelect5)}
                                           />
                                         </CCol>
                                       </CRow>
@@ -1106,7 +1215,7 @@ const delCategory7 = () => {
                                             icon={cilX} 
                                             size="xl" 
                                             style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories6 ? "block" : "none"}} 
-                                            onClick={delCategory6}
+                                            onClick={()=>delCategory6(valueSelect6)}
                                           />
                                         </CCol>
                                       </CRow>
@@ -1125,7 +1234,7 @@ const delCategory7 = () => {
                                             icon={cilX} 
                                             size="xl" 
                                             style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories7 ? "block" : "none"}} 
-                                            onClick={delCategory7}
+                                            onClick={()=>delCategory7(valueSelect7)}
                                           />
                                         </CCol>
                                       </CRow>

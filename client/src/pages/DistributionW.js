@@ -51,13 +51,16 @@ const DistributionW = () => {
 				const minut = String(d.getMinutes()).padStart(2, "0");
 				const newDateMessage = `${day}.${month}.${year} ${chas}:${minut}`
 
+        let space = /,/gi;
+        //var newStr = str.replace(space, '<br>');
+
         const newDistribution = {
           id: distrib.id,
           text: distrib.text,
           image: distrib.image.split('5000/')[1] !=='' ? distrib.image : '',
           project: distrib.project,
           projectId: distrib.projectId ? distrib.projectId : '',
-          receivers: distrib.receivers, //strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
+          receivers: distrib.receivers.replace(space, '<br/>'), //strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
           datestart: newDateMessage,
           status: distrib.delivered ? "отправлено" : "запланировано",
 				}
@@ -112,11 +115,11 @@ const DistributionW = () => {
                               <CTable align="middle" className="mb-0 border" hover responsive>
                                 <CTableHead className='table-dark'>
                                   <CTableRow>
-                                    {/* <CTableHeaderCell>№</CTableHeaderCell> */}
                                     <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Название проекта</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Картинка</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Категории</CTableHeaderCell>   
+                                    <CTableHeaderCell className="text-center">Категории</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center">Кол-во</CTableHeaderCell>    
                                     <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Управление</CTableHeaderCell>
                                   </CTableRow>
@@ -127,7 +130,7 @@ const DistributionW = () => {
                                       {/* <CTableDataCell>
                                         <div>{index+1}</div>
                                       </CTableDataCell> */}
-                                      <CTableDataCell className="text-center">
+                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
                                         <div>{item.datestart}</div>
                                       </CTableDataCell>  
                                       <CTableDataCell className="text-center">
@@ -140,7 +143,10 @@ const DistributionW = () => {
                                         }
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <div>{item.receivers}</div>
+                                        <div dangerouslySetInnerHTML={{__html: item.receivers}} />
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        <div>100</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         <div>{item.status}</div>

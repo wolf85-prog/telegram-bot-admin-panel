@@ -107,7 +107,6 @@ const Distribution = () => {
                               <CTable align="middle" className="mb-0 border" hover responsive>
                                 <CTableHead className='table-dark'>
                                   <CTableRow>
-                                    {/* <CTableHeaderCell>№</CTableHeaderCell> */}
                                     <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Картинка</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Кнопка</CTableHeaderCell>
