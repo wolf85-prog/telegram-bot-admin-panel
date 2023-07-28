@@ -183,8 +183,6 @@ export const editContactAvatar = async (data, id) =>{
     }
 }
 
-
-
 export const uploadFile = async (data) =>{
     try {
         return await $host.post(`api/file/upload`, data, {
