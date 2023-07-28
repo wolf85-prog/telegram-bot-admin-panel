@@ -71,9 +71,6 @@ route.get('/projects/get/:id', getProjectsId)
 route.post("/file/upload", upload.single("photo"), uploadFile);
 route.get("/file/:filename", getImage);
 
-route.post("/file/upload/pre", upload.single("photo"), uploadFile);
-route.post("/file/upload/final", upload.single("photo"), uploadFile);
-
 
 //----------------WORKERS--------------------------------
 route.get('/wuserbots/get', getUserWorkers)
