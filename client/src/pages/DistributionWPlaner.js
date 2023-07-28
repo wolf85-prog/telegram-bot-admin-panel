@@ -157,16 +157,6 @@ const DistributionWPlaner = () => {
 //поставить галочку Статус
   const changeStatus = (ind, tab) => {
     if (tab === 1) {
-      // if (value1[ind]) {
-      //   //value1[ind] = false
-      //   dates[ind].proj = ''
-      //   dates[ind].save = false
-      // } else {
-      //   //value1[ind] = true
-      //   dates[ind].proj = projectName //location.state.project
-      //   dates[ind].save = true  
-      // }  
-
       if (dates[ind].save === true) {
         console.log('true')
         value1[ind] = false
@@ -1000,7 +990,7 @@ const DistributionWPlaner = () => {
                             <CCardHeader>График рассылок</CCardHeader>
                             <CCardBody>
 
-                            <p style={{color: '#fff'}}>Текущий проект: &quot;{projectName}&quot;</p>
+                            <p style={{color: '#fff'}}>Текущий проект: &laquo;{projectName}&raquo;</p>
                             {
                               showLoader ? <div style={{textAlign:'center'}}><CSpinner/></div>
                               :

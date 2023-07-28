@@ -60,6 +60,8 @@ const DistributionAddW = () => {
   const [projects, setProjects]= useState([]); 
   const [contacts2, setContacts2]= useState([]);
   const [labelName, setLabelName] = useState({})
+  const [proj, setProj] = useState('');
+  //const [projectId, setProjectId] = useState('');
 
   const [arrCategory, setArrCategory] = useState([]);
   const [arrCategory2, setArrCategory2] = useState([]);
@@ -108,10 +110,6 @@ const DistributionAddW = () => {
 
   const [disabledBtn, setDisabledBtn] = useState(true);
 
-  const [projectVar, setProjectVar] = useState('');
-  const [proj, setProj] = useState('');
-  const [projectId, setProjectId] = useState('');
-
   const [count, setCount] = useState(0);
 
   const [visibleModal, setVisibleModal] = useState(false);
@@ -138,6 +136,9 @@ const DistributionAddW = () => {
       //для редактирования рассылки
       if (projId !== 'undefined') {
         setValueProject(projId)
+        console.log("Текущий проект: ", projId)
+        //обработка проекта
+        onHandlingProject(projId)
       } 
       
   },[])
@@ -234,47 +235,23 @@ function unDuplicateArrayObjects(array, propertyName) {
 }
 
 
-let arr_count = []
+//функция обработки изменения текущего проекта
+const onHandlingProject = async(projectId) => {
 
-//выбор проекта
-const onChangeSelectProject = async(e) => {
-  e.preventDefault();
-  
-  setProj(e.target.value)
+  //для планировщика рассылок
+  setProj(projectId)
 
-  //сбросить кол-во получателей до 0
-  setSelected([])
-  setArrSelect([])
-  //сбросить счетчик нажатий кнопки (Добавить)
-  setCount(0)
-  setValueSelect(0)
-  setValueSelect2(0)
-  setValueSelect3(0)
-  setValueSelect4(0)
-  setValueSelect5(0)
-  setValueSelect6(0)
-  setValueSelect7(0)
-  setShowCategories2(false)
-  setShowCategories3(false)
-  setShowCategories4(false)
-  setShowCategories5(false)
-  setShowCategories6(false)
-  setShowCategories7(false)
+  //для селектов (value)
+  setValueProject(projectId)
 
-  setValueProject(e.target.value)
-
-  setProjectVar(e.target.value)
-
-  const obj = contacts.find((item)=>item.value === e.target.value)
+  const obj = contacts.find((item)=>item.value === projectId)
   console.log(obj)
+  setLabelName(obj)
 
-  setLabelName(contacts.find((item)=>item.value === e.target.value))
-  setProjectId(obj.value)
-
-  if (e.target.value !== '0') {
+  if (projectId !== '0') {
     let count_title;
     setLoader(true)
-    const blockId = await getBlocks(e.target.value); 
+    const blockId = await getBlocks(projectId); 
 
     if (blockId) {
       const databaseBlock = await getDatabaseId(blockId.data); 
@@ -375,7 +352,36 @@ const onChangeSelectProject = async(e) => {
   } else {
     setValueSelect(0)
   }
+}
+
+
+let arr_count = []
+
+//выбор проекта
+const onChangeSelectProject = async(e) => {
+  e.preventDefault();
+
+  //сбросить кол-во получателей до 0
+  setSelected([])
+  setArrSelect([])
+  //сбросить счетчик нажатий кнопки (Добавить)
+  setCount(0)
+  setValueSelect(0)
+  setValueSelect2(0)
+  setValueSelect3(0)
+  setValueSelect4(0)
+  setValueSelect5(0)
+  setValueSelect6(0)
+  setValueSelect7(0)
+  setShowCategories2(false)
+  setShowCategories3(false)
+  setShowCategories4(false)
+  setShowCategories5(false)
+  setShowCategories6(false)
+  setShowCategories7(false)
   
+  //обработка проекта (поиск категорий)
+  onHandlingProject(e.target.value) 
 }
 
 const onChangeAddButton = () => {
@@ -883,7 +889,7 @@ const delCategory7 = (category) => {
         text: text, 
         image: host + image, 
         project: labelName.label, 
-        projectId: projectId,
+        projectId: valueProject,
         receivers: categoryAll.toString(), 
         datestart: Date.now(), 
         delivered: 'true',        
@@ -904,7 +910,7 @@ const delCategory7 = (category) => {
         
         //новый претендент
         const pretendent = {
-          projectId: projectVar, 
+          projectId: valueProject, 
           workerId: worker.data, 
           receiverId: user,        
         }

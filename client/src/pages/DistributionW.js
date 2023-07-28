@@ -49,7 +49,8 @@ const DistributionW = () => {
 				const day = String(d.getDate()).padStart(2, "0");
 				const chas = d.getHours();
 				const minut = String(d.getMinutes()).padStart(2, "0");
-				const newDateMessage = `${day}.${month}.${year} ${chas}:${minut}`
+				const newDateMessage = `${day}.${month}.${year}`
+        const newTimeMessage = `${chas}:${minut}`
 
         let space = /,/gi;
         //var newStr = str.replace(space, '<br>');
@@ -63,6 +64,7 @@ const DistributionW = () => {
           receivers: distrib.receivers.replace(space, '<br/>'), //strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
           count: distrib.count,
           datestart: newDateMessage,
+          timestart: newTimeMessage,
           status: distrib.delivered ? "отправлено" : "запланировано",
 				}
         //console.log(index)
@@ -117,10 +119,11 @@ const DistributionW = () => {
                                 <CTableHead className='table-dark'>
                                   <CTableRow>
                                     <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Название проекта</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Картинка</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Категории</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center">Кол-во</CTableHeaderCell>    
+                                    {/* <CTableHeaderCell className="text-center">Картинка</CTableHeaderCell> */}
+                                    <CTableHeaderCell className="text-center">Категория</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center">Получатели</CTableHeaderCell>    
                                     <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Управление</CTableHeaderCell>
                                   </CTableRow>
@@ -134,23 +137,34 @@ const DistributionW = () => {
                                       <CTableDataCell className="text-center" style={{width: '50px'}}>
                                         <div>{item.datestart}</div>
                                       </CTableDataCell>  
+                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                        <div>{item.timestart}</div>
+                                      </CTableDataCell>  
                                       <CTableDataCell className="text-center">
                                         <div>{item.project}</div>
                                       </CTableDataCell>    
-                                      <CTableDataCell className="text-center">
+                                      {/* <CTableDataCell className="text-center">
                                         {item.image.endsWith('.pdf') ?
                                         <iframe src={item.image} height="120px" width="200px" title="myFramePdf"/>
                                         : <div>{item.image ? <a href={item.image} target='_blank' rel="noreferrer"><img src={item.image} alt='' width={230} height={120} style={{objectFit: 'contain'}}></img></a> : ''}</div>
                                         }
-                                      </CTableDataCell>
+                                      </CTableDataCell> */}
                                       <CTableDataCell className="text-center">
                                         <div dangerouslySetInnerHTML={{__html: item.receivers}} />
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <div>{item.count}</div>
+                                        {
+                                          item.status === 'запланировано' ? 
+                                          <div style={{color: '#3887cd'}}>{item.count}</div>
+                                          :<div>{item.count}</div>
+                                        }
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <div>{item.status}</div>
+                                        {
+                                          item.status === 'запланировано' ? 
+                                          <div style={{color: '#3887cd'}}>{item.status}</div>
+                                          :<div>{item.status}</div>
+                                        }
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         {/* <Link to={'/distributionw_planer'} state={{ project: proj}}>
