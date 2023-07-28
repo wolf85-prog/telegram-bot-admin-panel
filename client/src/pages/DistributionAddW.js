@@ -83,6 +83,7 @@ const DistributionAddW = () => {
   const [sendToAdmin, setSendToAdmin] = useState(false);
   const [textButton, setTextButton] = useState('');
   const [file, setFile] = useState();
+  const [filePreview, setFilePreview] = useState();
   const [value, setValue] = useState("");
   const [image, setImage]= useState("");
 
@@ -828,10 +829,13 @@ const delCategory7 = (category) => {
     getImage();
   }, [file])
 
+
   {/* Добавление файла */}
   const onFileChange = (e) => {
-    //setFile(e.target.files[0]);
-    setFile(URL.createObjectURL(e.target.files[0]));
+    //console.log("file change: ", e.target.files[0])
+    setFile(e.target.files[0]);
+    setFilePreview(URL.createObjectURL(e.target.files[0]));
+    //console.log("file URL change: ", URL.createObjectURL(e.target.files[0]))
   }
 
 
@@ -1440,8 +1444,8 @@ const delCategory7 = (category) => {
                                           <img src={phone_image} width='280px' height='615px' alt='phone' />
                                           <div style={{position: 'absolute', top: '60px', left: '22px'}}>
                                           {
-                                            file
-                                            ? <img src={file} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
+                                            filePreview
+                                            ? <img src={filePreview} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
                                             : <img src={noimage2} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
                                           }
                                           </div>

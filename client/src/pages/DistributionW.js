@@ -61,6 +61,7 @@ const DistributionW = () => {
           project: distrib.project,
           projectId: distrib.projectId ? distrib.projectId : '',
           receivers: distrib.receivers.replace(space, '<br/>'), //strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
+          count: distrib.count,
           datestart: newDateMessage,
           status: distrib.delivered ? "отправлено" : "запланировано",
 				}
@@ -146,7 +147,7 @@ const DistributionW = () => {
                                         <div dangerouslySetInnerHTML={{__html: item.receivers}} />
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <div>100</div>
+                                        <div>{item.count}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         <div>{item.status}</div>

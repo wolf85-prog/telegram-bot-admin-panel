@@ -70,6 +70,7 @@ const Distributionw = sequelize.define('distributionw', {
     datestart: {type: DataTypes.STRING},  //дата начала рассылки
     delivered: {type: DataTypes.BOOLEAN}, //доставлено
     projectId: {type: DataTypes.STRING}, //проект (id);
+    count: {type: DataTypes.INTEGER}, 
 })
 
 const Report = sequelize.define('report', {
