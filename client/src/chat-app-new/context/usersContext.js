@@ -467,7 +467,7 @@ const UsersProvider = ({ children }) => {
 	//получить исходящее сообщение в админку
 	const fetchAdmin = (data) => {
 		console.log("Пришло сообщение в Админку: ", data)
-		audioSmeta.play();
+		//audioSmeta.play();
 
 		setUsers((users) => {
 			const { senderId, receiverId, text, type, buttons, messageId } = data;
