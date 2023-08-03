@@ -5,6 +5,7 @@ import { getWContacts, getWConversation, getWMessages, getWorkers } from '../../
 import { getDistributions, getDistributionsW, getManagers, getProjectsApi, getCompanys } from "src/http/adminAPI";
 import boopSfx from './../assets/sounds/zvuk-icq.mp3';
 import soundNotif from './../assets/sounds/schetchik-banknot-zvuki-scheta-kupyur-41139.mp3';
+import soundSmeta from './../assets/sounds/predvarit_smeta.mp3';
 
 const UsersContext = createContext();
 
@@ -31,6 +32,7 @@ const UsersProvider = ({ children }) => {
 
 	const audio = new Audio(boopSfx);
 	const audioProject = new Audio(soundNotif);
+	const audioSmeta = new Audio(soundSmeta);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -465,6 +467,7 @@ const UsersProvider = ({ children }) => {
 	//получить исходящее сообщение в админку
 	const fetchAdmin = (data) => {
 		console.log("Пришло сообщение в Админку: ", data)
+		audioSmeta.play();
 
 		setUsers((users) => {
 			const { senderId, receiverId, text, type, buttons, messageId } = data;
