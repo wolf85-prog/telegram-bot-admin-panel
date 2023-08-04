@@ -4,7 +4,7 @@ import { getContacts, getConversation, getMessages } from '../../http/chatAPI'
 import { getWContacts, getWConversation, getWMessages, getWorkers } from '../../http/workerAPI'
 import { getDistributions, getDistributionsW, getManagers, getProjectsApi, getCompanys } from "src/http/adminAPI";
 import boopSfx from './../assets/sounds/zvuk-icq.mp3';
-import soundNotif from './../assets/sounds/schetchik-banknot-zvuki-scheta-kupyur-41139.mp3';
+import soundProject from './../assets/sounds/project_new.mp3';
 import soundSmeta from './../assets/sounds/predvarit_smeta2.mp3';
 
 const UsersContext = createContext();
@@ -31,7 +31,7 @@ const UsersProvider = ({ children }) => {
 	const [distributionsWork, setDistributionsWork] = useState([]); 
 
 	const audio = new Audio(boopSfx);
-	const audioProject = new Audio(soundNotif);
+	const audioProject = new Audio(soundProject);
 	const audioSmeta = new Audio(soundSmeta);
 
 	useEffect(() => {
