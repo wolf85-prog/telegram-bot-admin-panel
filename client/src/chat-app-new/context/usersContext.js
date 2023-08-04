@@ -756,8 +756,8 @@ const delMessageContext2 = (messageId, messageDate, chatId) => {
 //===============================================================
 //                  Notifications
 //===============================================================
-const fetchNotifAdmin = (data) => {
-	console.log("Получено звуковое уведомление: ", data)
+const fetchNotifAdmin = () => {
+	console.log("Получено звуковое уведомление: ")
 
 	audio120.play();
 }

@@ -145,10 +145,8 @@ io.on("connection", (socket) => {
     // Notifications
     //------------------------------------------------------------------
     //send and get message in workers
-    socket.on("sendNotif", ({sound})=>{
-        io.emit("getNotif", {
-            sound,
-        })
+    socket.on("sendNotif", ()=>{
+        io.emit("getNotif")
     })      
 
 
