@@ -6,6 +6,7 @@ import { getDistributions, getDistributionsW, getManagers, getProjectsApi, getCo
 import boopSfx from './../assets/sounds/zvuk-icq.mp3';
 import soundProject from './../assets/sounds/project_new.mp3';
 import soundSmeta from './../assets/sounds/predvarit_smeta2.mp3';
+import sound120 from './../../assets/sound/120_minut_ULEY.mp3';
 
 const UsersContext = createContext();
 
@@ -33,6 +34,7 @@ const UsersProvider = ({ children }) => {
 	const audio = new Audio(boopSfx);
 	const audioProject = new Audio(soundProject);
 	const audioSmeta = new Audio(soundSmeta);
+	const audio120 = new Audio(sound120);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -378,20 +380,16 @@ const UsersProvider = ({ children }) => {
 	//получить сообщение из телеграмма
 	const fetchMessageResponse = async(data) => {
 		console.log("date: ", data)
-		
-		if (data.text.startsWith('Предварительная смета одобрена!')) {
-			console.log("Предварительная смета одобрена!")
-			audioSmeta.play();
-		} else {
-			console.log("Пришло новое сообщение: ", count+1)
-			audio.play();			
-		}
-		
 		setCount(count+1);
 		setCountMessage(countMessage + 1)
 
-		if (data.text.startsWith('Проект успешно создан')) {
+		if (data.text.startsWith('Предварительная смета одобрена!')) {
+			console.log("Предварительная смета одобрена!")
+			//play sound
+			audioSmeta.play(); 
+		} else if (data.text.startsWith('Проект успешно создан')) {
 			console.log("Пришел новый проект: ", newProject)
+			//play sound
 			audioProject.play();
 			//пришел новый проект
 			setNewProject(true)
@@ -400,6 +398,11 @@ const UsersProvider = ({ children }) => {
 			let projects = await getProjectsApi();
 			console.log("projects get socket: ", projects.length)
 			setProjects(projects)
+		}
+		else {
+			console.log("Пришло новое сообщение: ", count+1)
+			//play sound
+			audio.play();		
 		}
 
 		setUsers((users) => {
@@ -545,8 +548,10 @@ const UsersProvider = ({ children }) => {
 		socket.on("getAdminSpec", fetchAdminSpec);	
 		socket.on("getDelAdminSpec", fetchDelAdminSpec);
 
-		//socket.on("start_typing", setUserAsTyping);
-		//socket.on("stop_typing", setUserAsNotTyping);
+		socket.on("getNotif", fetchNotifAdmin);
+
+		socket.on("start_typing", setUserAsTyping);
+		socket.on("stop_typing", setUserAsNotTyping);
 		
 	}, [socket]);
 
@@ -599,7 +604,7 @@ const UsersProvider = ({ children }) => {
 
 
 //=======================================================================
-// Workhub
+// 						Workhub
 //=======================================================================
 
 //получить сообщение из телеграмма WorkersBot
@@ -748,8 +753,16 @@ const delMessageContext2 = (messageId, messageDate, chatId) => {
 		chatId,
 	})
 }
+//===============================================================
+//                  Notifications
+//===============================================================
+const fetchNotifAdmin = (sound) => {
+	console.log("Получено звуковое уведомление: ", sound)
 
-
+	socket.emit("sendAdminNotif", { 
+		notif: sound,
+	})
+}
 
 	return (
 		<UsersContext.Provider value={{ 

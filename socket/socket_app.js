@@ -142,10 +142,20 @@ io.on("connection", (socket) => {
         })
     })
 
+    // Notifications
+    //------------------------------------------------------------------
+    //send and get message in workers
+    socket.on("sendNotif", ({sound})=>{
+        io.emit("getNotif", {
+            sound,
+        })
+    })      
+
 
     //when disconnect
     socket.on("disconnect", ()=> {
         removeUser(socket.id);
         io.emit("getUsers", users)
     })
+
 })
