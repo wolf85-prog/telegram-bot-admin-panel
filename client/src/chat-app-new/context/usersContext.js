@@ -756,12 +756,10 @@ const delMessageContext2 = (messageId, messageDate, chatId) => {
 //===============================================================
 //                  Notifications
 //===============================================================
-const fetchNotifAdmin = (sound) => {
-	console.log("Получено звуковое уведомление: ", sound)
+const fetchNotifAdmin = (data) => {
+	console.log("Получено звуковое уведомление: ", data)
 
-	socket.emit("sendAdminNotif", { 
-		notif: sound,
-	})
+	audio120.play();
 }
 
 	return (
