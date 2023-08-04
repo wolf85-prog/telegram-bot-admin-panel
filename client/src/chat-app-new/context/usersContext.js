@@ -377,9 +377,16 @@ const UsersProvider = ({ children }) => {
 
 	//получить сообщение из телеграмма
 	const fetchMessageResponse = async(data) => {
-		audio.play();
 		console.log("date: ", data)
-		console.log("Пришло новое сообщение: ", count+1)
+		
+		if (data.text.startsWith('Предварительная смета одобрена!')) {
+			console.log("Предварительная смета одобрена!")
+			audioSmeta.play();
+		} else {
+			console.log("Пришло новое сообщение: ", count+1)
+			audio.play();			
+		}
+		
 		setCount(count+1);
 		setCountMessage(countMessage + 1)
 
@@ -467,12 +474,6 @@ const UsersProvider = ({ children }) => {
 	//получить исходящее сообщение в админку
 	const fetchAdmin = (data) => {
 		console.log("Пришло сообщение в Админку: ", data)
-		//audioSmeta.play();
-
-		if (data.text.startsWith('Предварительная смета одобрена!')) {
-			console.log("Предварительная смета одобрена!")
-			audioSmeta.play();
-		}
 
 		setUsers((users) => {
 			const { senderId, receiverId, text, type, buttons, messageId } = data;

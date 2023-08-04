@@ -1,7 +1,26 @@
 import React from 'react'
 import { CFooter } from '@coreui/react'
 
+import { getProject3 } from '../http/adminAPI';
+
 const AppFooter = () => {
+
+  var options = {
+    era: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    weekday: 'long',
+    timezone: 'UTC',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric'
+  };
+
+  var date = new Date('2023-08-03T17:43');
+  var timeDiff = date.getTime() - 720000000;
+  //console.log("Дата и время: ", timeDiff.toISOString());
+
   return (
     <CFooter>
       <div>

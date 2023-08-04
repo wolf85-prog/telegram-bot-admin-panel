@@ -12,8 +12,6 @@ const bodyParser = require("body-parser");
 //планировщик
 const cron = require('node-cron');
 
-const getProject3 = require('../client/http/adminAPI');
-
 // Port that the webserver listens to
 const port = process.env.PORT || 5000;
 
