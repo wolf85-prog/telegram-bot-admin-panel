@@ -1,11 +1,13 @@
 require("dotenv").config();
 const { Client } = require("@notionhq/client");
-import { getProjectCrmId } from './../../client/src/http/adminAPI';
-
+const { getProjectCrmId } = require('./../../client/src/http/adminAPI')
+const { $host_bot } = require('./../../client/src/http/index')
 
 class PosterController {
 
     async sendPoster(req, res) {
+        const token = process.env.TELEGRAM_API_TOKEN
+        const host = process.env.HOST
         const {crmId, chatId, ver} = req.body;
         try {
             //const poster = 'https://proj.uley.team/files/1389/pre/1389_1408579113_customer.pdf'
@@ -22,9 +24,9 @@ class PosterController {
             });
 
             console.log("Отправляю постер...")
-            const url_send_poster = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.value}&reply_markup=${keyboard}`
+            const url_send_poster = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${chatId}&reply_markup=${keyboard}`
             
-            sendPosterToTelegram = await $host.post(url_send_poster);
+            sendPosterToTelegram = await $host_bot.post(url_send_poster);
 
             //сохранение сметы в базе данных
             //const convId = await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')

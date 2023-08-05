@@ -42,7 +42,7 @@ export const getProjects3 = async () =>{
 }
 
 //api notion
-export const getProjectCrmId = async () =>{
+export const getProjectCrmId = async (id) =>{
     try {
         let response = await $host_bot.get('project/crm/' + id);
         console.log("projectCrmIdAPI: ", response.data);
