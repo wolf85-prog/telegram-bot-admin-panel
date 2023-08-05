@@ -41,6 +41,17 @@ export const getProjects3 = async () =>{
     }
 }
 
+//api notion
+export const getProjectCrmId = async () =>{
+    try {
+        let response = await $host_bot.get('project/crm/' + id);
+        console.log("projectCrmIdAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectCrmId api", error.message);
+    }
+}
+
 //api id notion
 export const getProjectId = async (id) =>{
     try {
