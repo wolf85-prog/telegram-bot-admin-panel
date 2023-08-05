@@ -28,7 +28,7 @@ const { newPretendent, getPretendent } = require('../controllers/pretendentContr
 
 const { newPlan, getPlan } = require('../controllers/planController')
 
-const { sendPoster } = require('../controllers/posterController')
+//const { sendPoster } = require('../controllers/posterController')
 
 //const upload = require( "../utils/upload.js")
 //const upload = multer({dest:"uploads"});
@@ -99,6 +99,6 @@ route.post('/plan/add', newPlan)
 route.get('/plan/get/:date', getPlan)
 
 //-----------------POSTER---------------------------------
-route.post('/poster/send', sendPoster)
+//route.post('/poster/send', sendPoster)
 
 module.exports = route
