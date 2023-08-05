@@ -13,7 +13,7 @@ import { useContext } from 'react';
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider';
 import { newMessage, uploadFile } from './../../../http/chatAPI';
 import { $host } from './../../../http/index'
-import sendSound from './../../assets/sounds/sendmessage.mp3';
+//import sendSound from './../../assets/sounds/sendmessage.mp3';
 
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
@@ -36,7 +36,7 @@ const Chat = () => {
 	const [image, setImage]= useState("");
 	const [mess, setMess] = useState("");
 
-	const audio = new Audio(sendSound);
+	//const audio = new Audio(sendSound);
 
 	useEffect(() => {
 		if (user) {
@@ -142,7 +142,7 @@ const Chat = () => {
 	}
 
 	const submitNewMessage = () => {
-		audio.play();
+		//audio.play();
 		sendText();
 
 		setMess("");

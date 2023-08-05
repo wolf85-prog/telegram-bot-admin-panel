@@ -7,6 +7,7 @@ import boopSfx from './../assets/sounds/zvuk-icq.mp3';
 import soundProject from './../assets/sounds/project_new.mp3';
 import soundSmeta from './../assets/sounds/predvarit_smeta2.mp3';
 import sound120 from './../../assets/sound/120_minut_ULEY.mp3';
+import sendSound from './../assets/sounds/sendmessage.mp3';
 
 const UsersContext = createContext();
 
@@ -35,6 +36,7 @@ const UsersProvider = ({ children }) => {
 	const audioProject = new Audio(soundProject);
 	const audioSmeta = new Audio(soundSmeta);
 	const audio120 = new Audio(sound120);
+	const audioSend = new Audio(sendSound);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -477,6 +479,8 @@ const UsersProvider = ({ children }) => {
 	//получить исходящее сообщение в админку
 	const fetchAdmin = (data) => {
 		console.log("Пришло сообщение в Админку: ", data)
+		//play send message
+		audioSend.play();
 
 		setUsers((users) => {
 			const { senderId, receiverId, text, type, buttons, messageId } = data;
