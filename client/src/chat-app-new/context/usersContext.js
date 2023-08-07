@@ -772,18 +772,16 @@ const fetchNotifAdmin = (data) => {
 	console.log("Получено звуковое уведомление: ", data)
 	const { task } = data;
 
-	console.log("task: ", task)
-
 	if (task === 1) {
-		//audio120.play();
+		audio120.play();
 	} else if (task === 2) {
-		//audio60.play();
+		audio60.play();
 	} else if (task === 3) {
-		//audio30.play();
+		audio30.play();
 	} else if (task === 4) {
-		//audio15.play();
+		audio15.play();
 	} else if (task === 5) {
-		//audio0.play();
+		audio0.play();
 	}
 
 	
