@@ -7,6 +7,10 @@ import boopSfx from './../assets/sounds/zvuk-icq.mp3';
 import soundProject from './../assets/sounds/project_new.mp3';
 import soundSmeta from './../assets/sounds/predvarit_smeta2.mp3';
 import sound120 from './../../assets/sound/120_minut_ULEY.mp3';
+import sound60 from './../../assets/sound/60_minut_ULEY.mp3';
+import sound30 from './../../assets/sound/30_minut_ULEY.mp3';
+import sound15 from './../../assets/sound/15_minut_ULEY.mp3';
+import sound0 from './../../assets/sound/0_minut_ULEY.mp3';
 import sendSound from './../assets/sounds/sendmessage.mp3';
 
 const UsersContext = createContext();
@@ -36,6 +40,10 @@ const UsersProvider = ({ children }) => {
 	const audioProject = new Audio(soundProject);
 	const audioSmeta = new Audio(soundSmeta);
 	const audio120 = new Audio(sound120);
+	const audio60 = new Audio(sound60);
+	const audio30 = new Audio(sound30);
+	const audio15 = new Audio(sound15);
+	const audio0 = new Audio(sound0);
 	const audioSend = new Audio(sendSound);
 
 	useEffect(() => {
@@ -760,10 +768,23 @@ const delMessageContext2 = (messageId, messageDate, chatId) => {
 //===============================================================
 //                  Notifications
 //===============================================================
-const fetchNotifAdmin = () => {
+const fetchNotifAdmin = (data) => {
 	console.log("Получено звуковое уведомление: ")
+	const task = data;
 
-	audio120.play();
+	if (task === 1) {
+		audio120.play();
+	} else if (task === 2) {
+		audio60.play();
+	} else if (task === 3) {
+		audio30.play();
+	} else if (task === 4) {
+		audio15.play();
+	} else if (task === 5) {
+		audio0.play();
+	}
+
+	
 }
 
 	return (
