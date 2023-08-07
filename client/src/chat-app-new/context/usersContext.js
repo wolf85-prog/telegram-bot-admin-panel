@@ -769,7 +769,7 @@ const delMessageContext2 = (messageId, messageDate, chatId) => {
 //                  Notifications
 //===============================================================
 const fetchNotifAdmin = (data) => {
-	console.log("Получено звуковое уведомление: ")
+	console.log("Получено звуковое уведомление: ", data)
 	const task = data;
 
 	if (task === 1) {
