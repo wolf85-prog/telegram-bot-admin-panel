@@ -30,7 +30,8 @@ import { $host } from '../http/index';
 import { useNavigate } from 'react-router-dom';
 import { 
   newDistributionW, 
-  getDistributionsW, 
+  getDistributionsW,
+  getDistributionW, 
   getWorkerId, 
   getProjects3, 
   getBlocks, 
@@ -246,8 +247,12 @@ const onHandlingProject = async(projectId, distribId) => {
   //для селектов (value)
   setValueProject(projectId)
 
+  const distrib = await getDistributionW(distribId)
+
   //для текстового поля
-  setText(distribId)
+  setText(distrib.text)
+  //для телефона
+  setFilePreview(distrib.image)
 
   const obj = contacts.find((item)=>item.value === projectId)
   console.log(obj)

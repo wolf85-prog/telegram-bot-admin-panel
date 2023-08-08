@@ -36,6 +36,10 @@ const DistributionWPlaner = () => {
   const [countCol2, setCountCol2] = useState(6)
   const [countCol3, setCountCol3] = useState(6)
 
+  const [timeold1, setTimeold1] = useState([false, false, false, false, false, false, false])
+  const [timeold2, setTimeold2] = useState([false, false, false, false, false, false, false])
+  const [timeold3, setTimeold3] = useState([false, false, false, false, false, false, false])
+
   const d = new Date();
   const month = String(d.getMonth()+1).padStart(2, "0");
 	const day = String(d.getDate()).padStart(2, "0");
@@ -120,11 +124,19 @@ const DistributionWPlaner = () => {
         const times2 = planTimes.slice(ind1, ind2);
         const times3 = planTimes.slice(ind2, planTimes.length);
 
+        const d = new Date() //Текущая дата и время
+        const chas = d.getHours();
+        //const min = String(d.getMinutes()).padStart(2, "0");
 
         times.map((time, index)=> {
           if (time.save) {
             value1[index] = true
             setValue1(value1)
+          }
+          console.log("time: ", chas)
+          if (time.time.split(":")[0] < chas) {
+            timeold1[index] = true
+            setTimeold1(timeold1)
           }
         })
 
@@ -133,12 +145,20 @@ const DistributionWPlaner = () => {
             value2[index] = true
             setValue2(value2)
           }
+          if (time.time.split(":")[0] < chas) {
+            timeold2[index] = true
+            setTimeold2(timeold2)
+          }
         })
 
         times3.map((time, index)=> {
           if (time.save) {
             value3[index] = true
             setValue3(value3)
+          }
+          if (time.time.split(":")[0] < chas) {
+            timeold3[index] = true
+            setTimeold3(timeold3)
           }
         })
 
@@ -149,6 +169,9 @@ const DistributionWPlaner = () => {
         setCountCol(ind1)
         setCountCol2(ind2 - ind1)
         setCountCol3(planTimes.length - ind2)
+
+        
+        
       }
       
     }
@@ -1047,7 +1070,7 @@ const DistributionWPlaner = () => {
                                               id="rowCheckTab1"
                                               checked={value1[index]}
                                               onChange={()=>changeStatus(index, 1)}
-                                              disabled={(projectName === item.proj || item.proj === '')  ? '' : 'disabled'}
+                                              disabled={((projectName === item.proj || item.proj === '') && !timeold1[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -1107,7 +1130,7 @@ const DistributionWPlaner = () => {
                                               id="rowCheckTab2"
                                               checked={value2[index]}
                                               onChange={()=>changeStatus(index, 2)}
-                                              disabled={(projectName === item.proj || item.proj === '')  ? '' : 'disabled'}
+                                              disabled={((projectName === item.proj || item.proj === '') && !timeold2[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -1160,7 +1183,7 @@ const DistributionWPlaner = () => {
                                               id="rowCheckTab3"
                                               checked={value3[index]}
                                               onChange={()=>changeStatus(index, 3)}
-                                              disabled={(projectName === item.proj || item.proj === '')  ? '' : 'disabled'}
+                                              disabled={((projectName === item.proj || item.proj === '') && !timeold3[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
