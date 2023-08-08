@@ -256,6 +256,16 @@ export const getDistributionsW = async()=>{
      }
 }
 
+export const getDistributionW = async(id)=>{
+    try {
+        let response = await $host.get(`api/distributionw/get/${id}`)
+        //console.log(response);
+        return response.data;
+     } catch (error) {
+         console.log("error while calling getDistribution api", error.message);
+     }
+}
+
 export const delDistributionW = async (id) =>{
     try {
         await $host.delete(`api/distributionsw/delete/${id}`); 

@@ -30,6 +30,7 @@ const DistributionWPlaner = () => {
   const [distributionsWork, setDistributionsWork]= useState([]);
 
   const projectId= location.state.project
+  const textDistr= location.state.text
 
   const [countCol, setCountCol] = useState(6)
   const [countCol2, setCountCol2] = useState(6)
@@ -948,7 +949,7 @@ const DistributionWPlaner = () => {
     //новая рассылка
     const message = {
       //name: 'Рассылка', 
-      text: '', 
+      text: textDistr, 
       image: '', 
       project: projectName, 
       projectId: projectId, 

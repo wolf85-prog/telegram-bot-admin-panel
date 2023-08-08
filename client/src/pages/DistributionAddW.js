@@ -48,8 +48,9 @@ import treug from './../assets/images/treugolnik.png';
 
 const DistributionAddW = () => {
   const location = useLocation()
-  const projId= location.state?.project //? location.state.project : ""
-
+  const projId = location.state?.project //? location.state.project : ""
+  const distribId = location.state?.id
+  
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_API_URL
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
@@ -92,7 +93,7 @@ const DistributionAddW = () => {
   const [value2, setValue2] = useState("");
 
   const [loader, setLoader] = useState(false);
-  const [valueProject, setValueProject] = useState(0)
+  const [valueProject, setValueProject] = useState('')
   const [valueSelect, setValueSelect] = useState(0)
   const [valueSelect2, setValueSelect2] = useState(0)
   const [valueSelect3, setValueSelect3] = useState(0)
@@ -135,10 +136,11 @@ const DistributionAddW = () => {
 
       //для редактирования рассылки
       if (projId !== 'undefined') {
-        setValueProject(projId)
+        //setValueProject(projId)
         console.log("Текущий проект: ", projId)
+        console.log("Текущая рассылка: ", distribId)
         //обработка проекта
-        onHandlingProject(projId)
+        onHandlingProject(projId, distribId)
       } 
       
   },[])
@@ -236,13 +238,16 @@ function unDuplicateArrayObjects(array, propertyName) {
 
 
 //функция обработки изменения текущего проекта
-const onHandlingProject = async(projectId) => {
+const onHandlingProject = async(projectId, distribId) => {
 
   //для планировщика рассылок
   setProj(projectId)
 
   //для селектов (value)
   setValueProject(projectId)
+
+  //для текстового поля
+  setText(distribId)
 
   const obj = contacts.find((item)=>item.value === projectId)
   console.log(obj)
@@ -862,13 +867,15 @@ const delCategory7 = (category) => {
 
   //===================================================================
   {/* Запланировать рассылку */}
-  const onPlanerShow = async(proj) => {
+  const onPlanerShow = async(proj, text, id) => {
     setVisibleModal(!visibleModal)
 
     if (selected.length !== 0 && file || selected.length !== 0 && text) {
       navigate('/distributionw_planer', {
         state: {
           project: proj,
+          text: text,
+          id: id,
         }
       });
     } 
@@ -1501,7 +1508,7 @@ const delCategory7 = (category) => {
                                       </div> */}
                                       <div>
                                         {proj ? 
-                                          <CButton color="success" onClick={()=>onPlanerShow(proj)}>Запланировать</CButton>
+                                          <CButton color="success" onClick={()=>onPlanerShow(proj, text, distribId)}>Запланировать</CButton>
                                           :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>
                                         }             
                                       </div>
