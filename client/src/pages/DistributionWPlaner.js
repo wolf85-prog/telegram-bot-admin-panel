@@ -114,8 +114,14 @@ const DistributionWPlaner = () => {
   useEffect(() => {
     const fetchData = async () => {
       let plan = await getPlan(new Date().toLocaleDateString());
-      console.log(plan)
+      console.log("plan: ", plan)
+      
+      const d = new Date() //Текущая дата и время
+      const chas = d.getHours();
+      const min = String(d.getMinutes()).padStart(2, "0");
+      console.log("time: " + chas + ":" + min)
 
+      //открываем план
       if (plan !== null) {
         const planTimes = JSON.parse(plan.times)
         console.log("planTimes: ", planTimes)
@@ -123,26 +129,14 @@ const DistributionWPlaner = () => {
         const ind1 = planTimes.findIndex(date => date.time === '12:00')
         const ind2 = planTimes.findIndex(date => date.time === '18:00')
 
-        //console.log("Индекс 1: ", ind1)
-        //console.log("Индекс 2: ", ind2)
-
         const times = planTimes.slice(0, ind1);
         const times2 = planTimes.slice(ind1, ind2);
-        const times3 = planTimes.slice(ind2, planTimes.length);
-
-        const d = new Date() //Текущая дата и время
-        const chas = d.getHours();
-        //const min = String(d.getMinutes()).padStart(2, "0");
+        const times3 = planTimes.slice(ind2, planTimes.length); 
 
         times.map((time, index)=> {
           if (time.save) {
             value1[index] = true
             setValue1(value1)
-          }
-          console.log("time: ", chas)
-          if (time.time.split(":")[0] < chas) {
-            timeold1[index] = true
-            setTimeold1(timeold1)
           }
         })
 
@@ -151,20 +145,12 @@ const DistributionWPlaner = () => {
             value2[index] = true
             setValue2(value2)
           }
-          if (time.time.split(":")[0] < chas) {
-            timeold2[index] = true
-            setTimeold2(timeold2)
-          }
         })
 
         times3.map((time, index)=> {
           if (time.save) {
             value3[index] = true
             setValue3(value3)
-          }
-          if (time.time.split(":")[0] < chas) {
-            timeold3[index] = true
-            setTimeold3(timeold3)
           }
         })
 
@@ -175,7 +161,31 @@ const DistributionWPlaner = () => {
         setCountCol(ind1)
         setCountCol2(ind2 - ind1)
         setCountCol3(planTimes.length - ind2)   
-      }     
+      } 
+
+      //блокируем прошедшее время
+      dates.map((time, index)=> {
+        console.log("time: ", chas)
+        if (time.time.split(":")[0] <= chas) {
+          timeold1[index] = true
+          setTimeold1(timeold1)
+        }
+      })
+
+      dates1.map((time, index)=> {
+        if (time.time.split(":")[0] <= chas ) {
+          timeold2[index] = true
+          setTimeold2(timeold2)
+        }
+      })
+
+      dates11.map((time, index)=> {
+        if (time.time.split(":")[0] <= chas) {
+          timeold3[index] = true
+          setTimeold3(timeold3)
+        }
+      })
+        
     }
       fetchData();
   },[])
@@ -963,20 +973,6 @@ const DistributionWPlaner = () => {
 
     const newArray = [].concat(dates, dates1, dates11);
     const planer_str = JSON.stringify(newArray)
-    //console.log("save arr: ", newArray) 
-    // let arr_distr = []
-
-    // newArray.forEach((item)=> {
-    //   if (item.save === true && item.proj === projectName) {
-    //     const newObj = {
-    //       "date": item.date,
-    //       "time": item.time
-    //     }
-    //     arr_distr.push(newObj)
-    //   }   
-    // })
-
-    //console.log("arr_distr: ", arr_distr)
 
     const d_str = new Date().toLocaleDateString()
     const newObj = {
