@@ -117,8 +117,8 @@ const DistributionWPlaner = () => {
         const ind1 = planTimes.findIndex(date => date.time === '12:00')
         const ind2 = planTimes.findIndex(date => date.time === '18:00')
 
-        console.log("Индекс 1: ", ind1)
-        console.log("Индекс 2: ", ind2)
+        //console.log("Индекс 1: ", ind1)
+        //console.log("Индекс 2: ", ind2)
 
         const times = planTimes.slice(0, ind1);
         const times2 = planTimes.slice(ind1, ind2);
@@ -960,7 +960,21 @@ const DistributionWPlaner = () => {
     addToast(exampleToast)
 
     const newArray = [].concat(dates, dates1, dates11);
-    const planer_str = JSON.stringify(newArray) 
+    const planer_str = JSON.stringify(newArray)
+    //console.log("save arr: ", newArray) 
+    let arr_distr = []
+
+    newArray.forEach((item)=> {
+      if (item.save === true) {
+        const newObj = {
+          "date": item.date,
+          "time": item.time
+        }
+        arr_distr.push(newObj)
+      }   
+    })
+
+    //console.log("arr_distr: ", arr_distr)
 
     const d_str = new Date().toLocaleDateString()
     const newObj = {
@@ -969,22 +983,24 @@ const DistributionWPlaner = () => {
     }
     await newPlan(newObj);
 
-    //новая рассылка
-    const message = {
-      //name: 'Рассылка', 
-      text: textDistr, 
-      image: '', 
-      project: projectName, 
-      projectId: projectId, 
-      receivers: "", 
-      datestart: Date.now(), 
-      delivered: 'false',        
-    }
-
-    //console.log(message)
-
-    //сохранение рассылки в базе данных
-    await newDistributionW(message)
+    newArray.forEach(async (item)=> {
+      if (item.save === true && item.proj === projectName) {
+        console.log("Дата старта: ", Date.parse(`2023-${item.date.split[1]}-${item.date.split[0]}T${item.time}:00`))
+        //новая рассылка
+        const message = {
+          //name: 'Рассылка', 
+          text: textDistr, 
+          image: '', 
+          project: projectName, 
+          projectId: projectId, 
+          receivers: "", 
+          datestart: Date.parse(`2023-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`), 
+          delivered: 'false',        
+        }
+        //сохранение рассылки в базе данных
+        await newDistributionW(message) 
+      }    
+    })
 
     setTimeout(() => backPage(), 1000);
     //backPage()

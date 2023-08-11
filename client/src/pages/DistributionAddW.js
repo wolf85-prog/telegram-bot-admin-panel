@@ -133,16 +133,25 @@ const DistributionAddW = () => {
 
       setProjects(projects)
     }
-      fetchData();
 
+    const fetchDistrib = async () => {
       //для редактирования рассылки
-      if (projId !== 'undefined') {
+      if (projId) {
         //setValueProject(projId)
         console.log("Текущий проект: ", projId)
         console.log("Текущая рассылка: ", distribId)
-        //обработка проекта
-        onHandlingProject(projId, distribId)
+        
+        const distrib = await getDistributionW(distribId)
+        onHandlingProject(distrib.projectId)
+        //для текстового поля
+        setText(distrib.text)
+        //для телефона
+        setFilePreview(distrib.image)
       } 
+    }
+
+    fetchData();
+    fetchDistrib();
       
   },[])
 
@@ -239,29 +248,22 @@ function unDuplicateArrayObjects(array, propertyName) {
 
 
 //функция обработки изменения текущего проекта
-const onHandlingProject = async(projectId, distribId) => {
+const onHandlingProject = async(projectId) => {
 
   //для планировщика рассылок
   setProj(projectId)
-
+  
   //для селектов (value)
-  setValueProject(projectId)
-
-  const distrib = await getDistributionW(distribId)
-
-  //для текстового поля
-  setText(distrib.text)
-  //для телефона
-  setFilePreview(distrib.image)
+  setValueProject(projectId) 
 
   const obj = contacts.find((item)=>item.value === projectId)
-  console.log(obj)
+  console.log("obj: ", obj)
   setLabelName(obj)
 
   if (projectId !== '0') {
     let count_title;
     setLoader(true)
-    const blockId = await getBlocks(projectId); 
+    const blockId = await getBlocks(projectId);
 
     if (blockId) {
       const databaseBlock = await getDatabaseId(blockId.data); 
@@ -1109,30 +1111,6 @@ const delCategory7 = (category) => {
                                       </>
                                       : <br/>
                                       }
-
-                                {/* <div className="mb-3" style={{color: '#f3f3f3'}}>
-                                  <CFormLabel htmlFor="exampleFormControlInput1">Категории:</CFormLabel>
-                                  <MultiSelect
-                                    options={categories}
-                                    value={categoryAll}
-                                    onChange={setCategoryAll}
-                                    isLoading={false}
-                                    labelledBy={"Select"}
-                                    style={{color: '#1e1919'}}
-                                    overrideStrings={{
-                                      "allItemsAreSelected": "Все поля выбраны",
-                                      "clearSearch": "Очистить поиск",
-                                      "clearSelected": "Очистить выбор",
-                                      "noOptions": "Ничего не найдено",
-                                      "search": "Поиск",
-                                      "selectAll": "Выбрать всё",
-                                      "selectAllFiltered": "Выбрать всё (Найденных)",
-                                      "selectSomeItems": "Выбрать...",
-                                      "create": "Создать",
-                                    }}   
-                                  />
-                                  <p style={{color: '#767676'}}>Получателей: <span>{categoryAll.length}</span></p>
-                                </div> */}
                                       
                                       {/* Категория 1 */}
                                       <CRow>

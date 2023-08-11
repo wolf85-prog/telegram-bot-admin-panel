@@ -90,11 +90,11 @@ const Chat = () => {
 	const sendText = async () => {
 		//Передаем данные боту
 		let temp=mess.replace(/\n/g, '%0A'); //экранирование переноса строки
-		temp = temp.replace(/\#/g, '%23'); 		 //экранирование решетки
-		temp = temp.replace(/\&/g, '%26'); 		 //экранирование &
+		temp = temp.replace(/#/g, '%23'); 		 //экранирование решетки
+		temp = temp.replace(/&/g, '%26'); 		 //экранирование &
 		temp = temp.replace(/\+/g, '%2b'); 		 //экранирование +
-		temp = temp.replace(/\>/g, '%3e'); 		 //экранирование >
-		temp = temp.replace(/\</g, '%3c'); 		 //экранирование <
+		temp = temp.replace(/>/g, '%3e'); 		 //экранирование >
+		temp = temp.replace(/</g, '&lt;'); 		 //экранирование <
         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${temp}`
 		const sendToTelegram = await $host.get(url_send_msg);
 
