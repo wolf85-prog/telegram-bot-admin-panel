@@ -45,7 +45,6 @@ const DistributionW = () => {
 
         //console.log(distrib.datestart)
         const d = new Date(parseInt(distrib.datestart));
-        console.log(d.toString())
 				const year = d.getFullYear();
 				const month = String(d.getMonth()+1).padStart(2, "0");
 				const day = String(d.getDate()).padStart(2, "0");
@@ -165,7 +164,7 @@ const DistributionW = () => {
                                         {
                                           item.status === 'запланировано' ? 
                                           <div style={{color: '#3887cd'}}>{item.status}</div>
-                                          :<div>{item.status}</div>
+                                          :<div style={{color: '#f5f114'}}>{item.status}</div>
                                         }
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">

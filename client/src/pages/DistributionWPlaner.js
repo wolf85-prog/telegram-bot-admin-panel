@@ -31,6 +31,11 @@ const DistributionWPlaner = () => {
 
   const projectId= location.state.project
   const textDistr= location.state.text
+  const catDistr= location.state.category
+  const countReceiver= location.state.count
+
+  console.log("catDistr: ", catDistr)
+  console.log("countReceiver: ", countReceiver)
 
   const [countCol, setCountCol] = useState(6)
   const [countCol2, setCountCol2] = useState(6)
@@ -100,6 +105,7 @@ const DistributionWPlaner = () => {
       console.log('Текущий проект: ', project.properties.Name.title[0]?.plain_text)
       setShowLoader(false)
       setProjectName(project.properties.Name.title[0]?.plain_text)
+
     }
       fetchData();
   },[])
@@ -168,12 +174,8 @@ const DistributionWPlaner = () => {
 
         setCountCol(ind1)
         setCountCol2(ind2 - ind1)
-        setCountCol3(planTimes.length - ind2)
-
-        
-        
-      }
-      
+        setCountCol3(planTimes.length - ind2)   
+      }     
     }
       fetchData();
   },[])
@@ -962,17 +964,17 @@ const DistributionWPlaner = () => {
     const newArray = [].concat(dates, dates1, dates11);
     const planer_str = JSON.stringify(newArray)
     //console.log("save arr: ", newArray) 
-    let arr_distr = []
+    // let arr_distr = []
 
-    newArray.forEach((item)=> {
-      if (item.save === true) {
-        const newObj = {
-          "date": item.date,
-          "time": item.time
-        }
-        arr_distr.push(newObj)
-      }   
-    })
+    // newArray.forEach((item)=> {
+    //   if (item.save === true && item.proj === projectName) {
+    //     const newObj = {
+    //       "date": item.date,
+    //       "time": item.time
+    //     }
+    //     arr_distr.push(newObj)
+    //   }   
+    // })
 
     //console.log("arr_distr: ", arr_distr)
 
@@ -982,6 +984,9 @@ const DistributionWPlaner = () => {
       "times": planer_str
     }
     await newPlan(newObj);
+
+    let str_cats = catDistr.map(item => item).join(',')
+    console.log("Plan Category: ", str_cats)
 
     newArray.forEach(async (item)=> {
       if (item.save === true && item.proj === projectName) {
@@ -993,9 +998,10 @@ const DistributionWPlaner = () => {
           image: '', 
           project: projectName, 
           projectId: projectId, 
-          receivers: "", 
+          receivers: str_cats, 
           datestart: Date.parse(`2023-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`), 
-          delivered: 'false',        
+          delivered: 'false',  
+          count: countReceiver      
         }
         //сохранение рассылки в базе данных
         await newDistributionW(message) 

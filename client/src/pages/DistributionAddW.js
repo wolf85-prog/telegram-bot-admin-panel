@@ -874,8 +874,10 @@ const delCategory7 = (category) => {
 
   //===================================================================
   {/* Запланировать рассылку */}
-  const onPlanerShow = async(proj, text, id) => {
+  const onPlanerShow = async(proj, text, id, cats, count) => {
     setVisibleModal(!visibleModal)
+
+    //console.log(cats)
 
     if (selected.length !== 0 && file || selected.length !== 0 && text) {
       navigate('/distributionw_planer', {
@@ -883,6 +885,8 @@ const delCategory7 = (category) => {
           project: proj,
           text: text,
           id: id,
+          category: cats,
+          count: count,
         }
       });
     } 
@@ -1491,7 +1495,7 @@ const delCategory7 = (category) => {
                                       </div> */}
                                       <div>
                                         {proj ? 
-                                          <CButton color="success" onClick={()=>onPlanerShow(proj, text, distribId)}>Запланировать</CButton>
+                                          <CButton color="success" onClick={()=>onPlanerShow(proj, text, distribId, categoryAll, selected.length)}>Запланировать</CButton>
                                           :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>
                                         }             
                                       </div>
