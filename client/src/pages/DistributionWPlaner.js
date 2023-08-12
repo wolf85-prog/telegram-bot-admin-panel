@@ -992,7 +992,7 @@ const DistributionWPlaner = () => {
           //name: 'Рассылка', 
           text: textDistr, 
           image: '', 
-          project: projectName, 
+          project: `${item.date} | ${projectName}`, 
           projectId: projectId, 
           receivers: str_cats, 
           datestart: Date.parse(`2023-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`), 
