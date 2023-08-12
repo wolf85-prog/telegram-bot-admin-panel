@@ -117,7 +117,7 @@ export const getBlocks = async (projectId) =>{
 export const getDatabaseId = async (blockId) =>{
     try {
        let response = await $host_bot.get('database/' + blockId);
-       console.log("database: ", response);
+       //console.log("database: ", response);
        return response;
     } catch (error) {
         console.log("error while calling getDatabase api", error.message);
@@ -279,7 +279,7 @@ export const delDistributionW = async (id) =>{
 export const newPretendent = async (data) =>{
     try {
         let response = await $host.post(`api/pretendent/add`, data);
-        console.log(response);
+        console.log(response.data);
         return response.data; 
     } catch (error) {
         console.log("error while calling newDistribution api",error.message);

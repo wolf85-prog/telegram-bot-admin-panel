@@ -73,6 +73,14 @@ const DistributionAddW = () => {
   const [arrCategory6, setArrCategory6] = useState([]);
   const [arrCategory7, setArrCategory7] = useState([]);
 
+  const [arrTemp, setArrTemp] = useState([]);
+  const [arrTemp2, setArrTemp2] = useState([]);
+  const [arrTemp3, setArrTemp3] = useState([]);
+  const [arrTemp4, setArrTemp4] = useState([]);
+  const [arrTemp5, setArrTemp5] = useState([]);
+  const [arrTemp6, setArrTemp6] = useState([]);
+  const [arrTemp7, setArrTemp7] = useState([]);
+
   const [categoryAll, setCategoryAll] = useState();
   const [categoryAll2, setCategoryAll2] = useState();
 
@@ -270,7 +278,7 @@ const onHandlingProject = async(projectId) => {
       setLoader(false)
       const categories2 = [...databaseBlock.data]
 
-      console.log("categories: ", categories2)
+      console.log("Основной состав: ", categories2)
 
       specData.map((category)=> {
         category.models.map((spec)=> {
@@ -302,16 +310,19 @@ const onHandlingProject = async(projectId) => {
       let unique = unDuplicateArrayObjects(arr_count, 'id')
 
       const arr2 = []
+      const arr3 = []
       unique.map((item)=> {
           const obj = {
             label: item.title,
             value: item.id
           }
           arr2.push(obj)
+          arr3.push(item.title)
       })
       console.log("arr2: ", arr2)
-      setCategoryAll(arr2)
-
+      console.log("categoryAll: ", arr3)
+      
+      setCategoryAll(arr3)
 
       
       if(arr2[0]) {
@@ -358,7 +369,7 @@ const onHandlingProject = async(projectId) => {
       const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
       setSelected(arr)
 
-      console.log(arr)
+      console.log("selected: ", arr)
       
     }
   } else {
@@ -478,15 +489,19 @@ const onAddCategory = (e) => {
     const cat_name = categories[e.target.value].name
     console.log("cat_name1: ", cat_name)
     const cat_label = categories[e.target.value].label
+    console.log("select1: ", cat_label)
     setArrSelect([])
     arrCategory.pop()
     arrCategory.push(cat_name)
+    //arrTemp.pop()
+    arrTemp.push(cat_label)
     console.log("arrCategory: ", arrCategory)
     setArrCategory(arrCategory)
-    setCategoryAll([...arrCategory])
+    setCategoryAll([...arrTemp])
 
     const result = [...arrCategory]
-    console.log("categoryAll: ", result)
+    const result2 = [...arrTemp]
+    console.log("categoryAll: ", result2)
     
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
@@ -503,7 +518,7 @@ const onAddCategory = (e) => {
     
     setSelected(arrSelect)
 
-    console.log(arrSelect)
+    console.log("selected: ", arrSelect)
   }
   
 }
@@ -519,14 +534,20 @@ const onAddCategory2 = (e) => {
     const cat_name = categories[e.target.value].name
     const cat_label = categories[e.target.value].label
     console.log("cat_name2: ", cat_name)
+    console.log("select2: ", cat_label)
+
     setArrSelect([])
     arrCategory2.pop()
     arrCategory2.push(cat_name)
-    console.log("arrCategory2: ", arrCategory2)
+    arrTemp2.pop()
+    arrTemp2.push(cat_label)
+    
     setArrCategory2(arrCategory2)
-    setCategoryAll([...arrCategory, ...arrCategory2])
+    setCategoryAll([...categoryAll, ...arrTemp2])
+
     const result = [...arrCategory, ...arrCategory2]
-    console.log("categoryAll: ", result)
+    //const result2 = [...categoryAll, ...arrTemp2]
+    //console.log("categoryAll: ", result2)
 
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
@@ -541,7 +562,6 @@ const onAddCategory2 = (e) => {
     //const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     
     setSelected(arrSelect)
-
     console.log(arrSelect)
   }
 }
@@ -557,14 +577,20 @@ const onAddCategory3 = (e) => {
     const cat_name = categories[e.target.value].name
     const cat_label = categories[e.target.value].label
     console.log("cat_name3: ", cat_name)
+    console.log("select3: ", cat_label)
+
     setArrSelect([])
     arrCategory3.pop()
     arrCategory3.push(cat_name)
+    arrTemp3.pop()
+    arrTemp3.push(cat_label)
+
     console.log("arrCategory3: ", arrCategory3)
     setArrCategory3(arrCategory3)
-    setCategoryAll([...arrCategory, ...arrCategory2, ...arrCategory3])
+    setCategoryAll([...arrTemp, ...arrTemp2, ...arrTemp3])
     const result = [...arrCategory, ...arrCategory2, ...arrCategory3]
-    console.log("categoryAll: ", result)
+    const result2 = [...arrTemp, ...arrTemp2, ...arrTemp3]
+    console.log("categoryAll: ", result2)
 
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
@@ -579,7 +605,6 @@ const onAddCategory3 = (e) => {
     const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     
     setSelected(arr)
-
     console.log(arr)
   }
 }
@@ -595,14 +620,18 @@ const onAddCategory4 = (e) => {
     const cat_name = categories[e.target.value].name
     const cat_label = categories[e.target.value].label
     console.log("cat_name4: ", cat_name)
+
     setArrSelect([])
     arrCategory4.pop()
     arrCategory4.push(cat_name)
+    arrTemp4.pop()
+    arrTemp4.push(cat_label)
     console.log("arrCategory4: ", arrCategory4)
     setArrCategory4(arrCategory4)
-    setCategoryAll([...arrCategory, ...arrCategory2, ...arrCategory3, ...arrCategory4])
+    setCategoryAll([...arrTemp, ...arrTemp2, ...arrTemp3, ...arrTemp4])
     const result = [...arrCategory, ...arrCategory2, ...arrCategory3, ...arrCategory4]
-    console.log("categoryAll: ", result)
+    const result2 = [...arrTemp, ...arrTemp2, ...arrTemp3, ...arrTemp4]
+    console.log("categoryAll: ", result2)
 
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
@@ -617,7 +646,6 @@ const onAddCategory4 = (e) => {
     const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     
     setSelected(arr)
-
     console.log(arr)
   }
 }
@@ -636,11 +664,14 @@ const onAddCategory5 = (e) => {
     setArrSelect([])
     arrCategory5.pop()
     arrCategory5.push(cat_name)
+    arrTemp5.pop()
+    arrTemp5.push(cat_label)
     console.log("arrCategory5: ", arrCategory5)
     setArrCategory5(arrCategory5)
-    setCategoryAll([...arrCategory, ...arrCategory2, ...arrCategory3])
-    const result = [...arrCategory, ...arrCategory2, ...arrCategory3]
-    console.log("categoryAll: ", result)
+    setCategoryAll([...arrTemp, ...arrTemp2, ...arrTemp3, ...arrTemp4, ...arrTemp5])
+    const result = [...arrCategory, ...arrCategory2, ...arrCategory3, ...arrCategory4, ...arrCategory5]
+    const result2 = [...arrTemp, ...arrTemp2, ...arrTemp3, ...arrTemp4, ...arrTemp5]
+    console.log("categoryAll: ", result2)
 
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
@@ -655,7 +686,6 @@ const onAddCategory5 = (e) => {
     const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     
     setSelected(arr)
-
     console.log(arr)
   }
 }
@@ -671,13 +701,17 @@ const onAddCategory6 = (e) => {
     const cat_name = categories[e.target.value].name
     const cat_label = categories[e.target.value].label
     console.log("cat_name6: ", cat_name)
+
     setArrSelect([])
     arrCategory6.pop()
     arrCategory6.push(cat_name)
+    arrTemp6.pop()
+    arrTemp6.push(cat_label)
     console.log("arrCategory6: ", arrCategory6)
     setArrCategory6(arrCategory6)
-    setCategoryAll([...arrCategory, ...arrCategory2, ...arrCategory3])
-    const result = [...arrCategory, ...arrCategory2, ...arrCategory3]
+
+    setCategoryAll([...arrTemp, ...arrTemp2, ...arrTemp3, ...arrTemp4, ...arrTemp5, ...arrTemp6])
+    const result = [...arrCategory, ...arrCategory2, ...arrCategory3, ...arrCategory4, ...arrCategory5, ...arrCategory6]
     //console.log(result)
 
     workers.map((worker)=> {
@@ -693,7 +727,6 @@ const onAddCategory6 = (e) => {
     const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     
     setSelected(arr)
-
     console.log(arr)
   }
 }
@@ -707,15 +740,19 @@ const onAddCategory7 = (e) => {
     setSelected([])
   } else {
     const cat_name = categories[e.target.value].name
+    const cat_label = categories[e.target.value].label
     console.log("cat_name7: ", cat_name)
 
     setArrSelect([])
     arrCategory7.pop()
     arrCategory7.push(cat_name)
+    arrTemp7.pop()
+    arrTemp7.push(cat_label)
     console.log("arrCategory7: ", arrCategory7)
     setArrCategory7(arrCategory7)
-    setCategoryAll([...arrCategory, ...arrCategory2, ...arrCategory3])
-    const result = [...arrCategory, ...arrCategory2, ...arrCategory3]
+
+    setCategoryAll([...arrTemp, ...arrTemp2, ...arrTemp3, ...arrTemp4, ...arrTemp5, ...arrTemp6, ...arrTemp7])
+    const result = [...arrCategory, ...arrCategory2, ...arrCategory3, ...arrCategory4, ...arrCategory5, ...arrCategory6, ...arrCategory7]
     //console.log(result)
 
     workers.map((worker)=> {
@@ -732,7 +769,6 @@ const onAddCategory7 = (e) => {
     const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     
     setSelected(arr)
-
     console.log(arr)
   }
 }
@@ -910,7 +946,8 @@ const delCategory7 = (category) => {
         projectId: valueProject,
         receivers: categoryAll.toString(), 
         datestart: Date.now(), 
-        delivered: 'true',        
+        delivered: 'true',   
+        count: selected.length,     
       }
       console.log("message send button: ", message);
 
