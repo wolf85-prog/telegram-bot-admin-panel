@@ -79,6 +79,25 @@ class DistributionController {
                 order: [
                     ['id', 'DESC'],
                 ],
+                where: {
+                    delivered: true
+                }
+            })
+            return res.status(200).json(distributions);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    async getDistributionsWPlan(req, res) {
+        try {
+            const distributions = await Distributionw.findAll({
+                order: [
+                    ['id', 'ASC'],
+                ],
+                where: {
+                    delivered: false
+                }
             })
             return res.status(200).json(distributions);
         } catch (error) {
