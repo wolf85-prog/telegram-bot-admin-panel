@@ -63,6 +63,7 @@ const DistributionW = () => {
           project: distrib.project,
           projectId: distrib.projectId ? distrib.projectId : '',
           receivers: distrib.receivers.replace(space, '<br/>'), //strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
+          categories: distrib.receivers,
           count: distrib.count,
           datestart: newDateMessage,
           timestart: newTimeMessage,
@@ -175,8 +176,9 @@ const DistributionW = () => {
                                         </Link> */}
 
                                         {item.projectId ? 
-                                          <Link to={'/distributionw_add'} state={{ project: item.projectId, id: item.id}}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
-                                          :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>}
+                                          <Link to={'/distributionw_add'} state={{ project: item.projectId, id: item.id, category: item.categories, poster: item.image}}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
+                                          :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
+                                        }
                                         
                                         <CButton color="light" onClick={() => removeDescription(item)}>
                                           <img src={deleteIcon} alt='' width='10px' />

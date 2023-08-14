@@ -46,11 +46,17 @@ import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 import phone_image from './../assets/images/phone2.png';
 import noimage2 from './../assets/images/images.png';
 import treug from './../assets/images/treugolnik.png';
+import { locale } from 'core-js/web'
 
 const DistributionAddW = () => {
   const location = useLocation()
   const projId = location.state?.project //? location.state.project : ""
   const distribId = location.state?.id
+  const categoriesitem = location.state?.category
+  const poster = location.state?.poster
+
+  console.log("Сохраненные категории: ", categoriesitem)
+  console.log("Сохраненный постер: ", poster)
   
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_API_URL
@@ -150,7 +156,7 @@ const DistributionAddW = () => {
         console.log("Текущая рассылка: ", distribId)
         
         const distrib = await getDistributionW(distribId)
-        onHandlingProject(distrib.projectId)
+        onHandlingProject(distrib.projectId, true)
         //для текстового поля
         setText(distrib.text)
         //для телефона
@@ -254,20 +260,40 @@ function unDuplicateArrayObjects(array, propertyName) {
   }
 }
 
+const setCategoryItem = (arr2) => {
+  if(arr2[0]) {
+    setValueSelect(arr2[0].value)
+  }
 
-//функция обработки изменения текущего проекта
-const onHandlingProject = async(projectId) => {
+  if(arr2[1]) {
+    setValueSelect2(arr2[1]?.value)
+    setShowCategories2(true)
+  }
 
-  //для планировщика рассылок
-  setProj(projectId)
-  
-  //для селектов (value)
-  setValueProject(projectId) 
+  if(arr2[2]) {
+    setValueSelect3(arr2[2]?.value)
+    setShowCategories3(true)
+  }
 
-  const obj = contacts.find((item)=>item.value === projectId)
-  console.log("obj: ", obj)
-  setLabelName(obj)
+  if(arr2[3]) {
+    setValueSelect4(arr2[3].value)
+    setShowCategories4(true)
+  }
 
+  if(arr2[4]) {
+    setValueSelect5(arr2[4].value)
+    setShowCategories5(true)
+  }
+
+  if(arr2[5]) {
+    setValueSelect6(arr2[5].value)
+    setShowCategories6(true)
+  }
+
+}
+
+//ф-я получения категорий проекта
+const getCategoryFromNotion = async(projectId) => {
   if (projectId !== '0') {
     let count_title;
     setLoader(true)
@@ -324,36 +350,9 @@ const onHandlingProject = async(projectId) => {
       
       setCategoryAll(arr3)
 
+      //ф-я установки списка категорий
+      setCategoryItem(arr2)
       
-      if(arr2[0]) {
-        setValueSelect(arr2[0].value)
-      }
-
-      if(arr2[1]) {
-        setValueSelect2(arr2[1]?.value)
-        setShowCategories2(true)
-      }
-
-      if(arr2[2]) {
-        setValueSelect3(arr2[2]?.value)
-        setShowCategories3(true)
-      }
-
-      if(arr2[3]) {
-        setValueSelect4(arr2[3].value)
-        setShowCategories4(true)
-      }
-
-      if(arr2[4]) {
-        setValueSelect5(arr2[4].value)
-        setShowCategories5(true)
-      }
-
-      if(arr2[5]) {
-        setValueSelect6(arr2[5].value)
-        setShowCategories6(true)
-      }
-
       //список специалистов с массивом специальностей (категорий)
       workers.map((worker)=> {
         JSON.parse(worker.worklist).map((work) => {
@@ -375,6 +374,68 @@ const onHandlingProject = async(projectId) => {
   } else {
     setValueSelect(0)
   }
+}
+
+
+
+//функция обработки изменения текущего проекта
+const onHandlingProject = async(projectId, save) => {
+
+  //для планировщика рассылок
+  setProj(projectId)
+  
+  //для селектов (value)
+  setValueProject(projectId) 
+
+  const obj = contacts.find((item)=>item.value === projectId)
+  console.log("obj: ", obj)
+  setLabelName(obj)
+
+  if (save) {
+    const result = categoriesitem.split(',');
+    const arr2 = []
+    const arr3 = []
+    specData.map((category)=> {
+      result.map((item)=> {
+        if (item === category.icon) {
+          const obj = {
+              label: category.icon,
+              value: category.id
+          }
+          arr2.push(obj)
+          arr3.push(item)
+        }
+      })
+    })
+      
+    setCategoryAll(arr3)
+
+    //ф-я установки списка категорий
+    setCategoryItem(arr2)
+
+    //список специалистов с массивом специальностей (категорий)
+    workers.map((worker)=> {
+      JSON.parse(worker.worklist).map((work) => {
+        result.map((cat)=>{
+          specData.map((category)=> {
+            if (cat === category.icon) {
+              //console.log("cat_name: ", category.name)
+              if (work.cat === category.name) {
+                arrSelect.push(worker.chatId)
+              } 
+            }
+          })
+        })
+      })
+    })
+    //выбрать уникальных специалистов
+    const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
+    setSelected(arr)
+
+  } else {
+    await getCategoryFromNotion(projectId)
+  }
+  
 }
 
 
@@ -404,7 +465,7 @@ const onChangeSelectProject = async(e) => {
   setShowCategories7(false)
   
   //обработка проекта (поиск категорий)
-  onHandlingProject(e.target.value) 
+  onHandlingProject(e.target.value, false) 
 }
 
 const onChangeAddButton = () => {
