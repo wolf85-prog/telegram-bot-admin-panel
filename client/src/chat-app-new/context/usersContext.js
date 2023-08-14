@@ -2,7 +2,13 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./socketContext";
 import { getContacts, getConversation, getMessages } from '../../http/chatAPI'
 import { getWContacts, getWConversation, getWMessages, getWorkers } from '../../http/workerAPI'
-import { getDistributions, getDistributionsW, getManagers, getProjectsApi, getCompanys } from "src/http/adminAPI";
+import { getDistributions, 
+	getDistributionsW, 
+	getDistributionsWPlan,
+	getManagers, 
+	getProjectsApi, 
+	getCompanys 
+} from "src/http/adminAPI";
 import boopSfx from './../assets/sounds/zvuk-icq.mp3';
 import soundProject from './../assets/sounds/project_new.mp3';
 import soundSmeta from './../assets/sounds/predvarit_smeta2.mp3';
@@ -309,7 +315,12 @@ const UsersProvider = ({ children }) => {
 			let response = await getDistributionsW();
       		console.log("distributionW: ", response.length)
 
-			setDistributionsWork(response)
+			let response2 = await getDistributionsWPlan();
+      		console.log("distributionWPlan: ", response2.length)
+
+			let all = [...response2, ...response]
+
+			setDistributionsWork(all)
 		}
 
 	  	fetchData();
