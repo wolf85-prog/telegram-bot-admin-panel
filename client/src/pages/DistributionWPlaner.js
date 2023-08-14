@@ -23,11 +23,21 @@ import {
 } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
-import { getProjectId, newPlan, getPlan, newDistributionW } from 'src/http/adminAPI';
+import { useUsersContext } from "./../chat-app-new/context/usersContext";
+
+import { 
+  getProjectId, 
+  newPlan, 
+  getPlan, 
+  newDistributionW, 
+  getDistributionsW, 
+  getDistributionsWPlan 
+} from 'src/http/adminAPI';
 
 const DistributionWPlaner = () => {
   const location = useLocation()
-  const [distributionsWork, setDistributionsWork]= useState([]);
+  //const [distributionsWork, setDistributionsWork]= useState([]);
+  const { setDistributionsWork } = useUsersContext();
 
   const projectId= location.state.project
   const textDistr= location.state.text
@@ -1003,6 +1013,12 @@ const DistributionWPlaner = () => {
         await newDistributionW(message) 
       }    
     })
+
+    //обновить список рассылок
+    let response = await getDistributionsW();
+    let response2 = await getDistributionsWPlan();
+    
+    setDistributionsWork([...response2, ...response])
 
     setTimeout(() => backPage(), 1000);
     //backPage()

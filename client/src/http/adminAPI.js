@@ -235,8 +235,9 @@ export const delDistribution = async (id) =>{
     }
 }
 
-
+//--------------------------------------------------------------------------
 //distribution2
+//--------------------------------------------------------------------------
 export const newDistributionW = async (data) =>{
     try {
         let response = await $host.post(`api/distributionw/add`, data); 
