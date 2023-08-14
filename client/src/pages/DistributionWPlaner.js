@@ -46,6 +46,7 @@ const DistributionWPlaner = () => {
 
   console.log("catDistr: ", catDistr)
   console.log("countReceiver: ", countReceiver)
+  
 
   const [countCol, setCountCol] = useState(6)
   const [countCol2, setCountCol2] = useState(6)
@@ -108,6 +109,11 @@ const DistributionWPlaner = () => {
   const toaster = useRef()
 
   let arr = []
+  
+  const navigate = useNavigate();
+  const backPage = () => {
+       navigate('/distributionw');
+  } 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -1024,10 +1030,7 @@ const DistributionWPlaner = () => {
     //backPage()
   }
 
-  const navigate = useNavigate();
-  const backPage = () => {
-       navigate('/distributionw');
-  } 
+  
 
 
   return (
