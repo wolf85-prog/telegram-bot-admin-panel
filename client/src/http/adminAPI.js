@@ -287,7 +287,7 @@ export const delDistributionW = async (id) =>{
 
 export const delDistributionWPlan = async (data) =>{
     try {
-        await $host.delete(`api/distributionsw/delete`, data); 
+        await $host.post(`api/distributionsw/delete`, data); 
     } catch (error) {
         console.log("error while calling delMessage api",error.message);
     }
