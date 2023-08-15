@@ -38,7 +38,7 @@ import {
 const DistributionWPlaner = () => {
   const location = useLocation()
   //const [distributionsWork, setDistributionsWork]= useState([]);
-  const { setDistributionsWork } = useUsersContext();
+  const { addNewDistrib, setDistributionsWork } = useUsersContext();
 
   const projectId= location.state?.project
   const textDistr= location.state?.text
@@ -1036,10 +1036,12 @@ const DistributionWPlaner = () => {
     })
 
     //обновить список рассылок
-    let response = await getDistributionsW();
-    let response2 = await getDistributionsWPlan();
+    //let response = await getDistributionsW();
+    //let response2 = await getDistributionsWPlan(); 
+    //setDistributionsWork([...response2, ...response])
+
+    addNewDistrib(true)
     
-    setDistributionsWork([...response2, ...response])
 
     setTimeout(() => backPage(), 2000);
     //backPage()

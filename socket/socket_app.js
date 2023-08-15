@@ -149,7 +149,16 @@ io.on("connection", (socket) => {
         io.emit("getNotif", {
             task
         })
-    })      
+    })  
+    
+    // Distribution
+    //------------------------------------------------------------------
+    //send and get distrib
+    socket.on("sendDistrib", ({task})=>{
+        io.emit("getDistrib", {
+            task
+        })
+    })
 
 
     //when disconnect

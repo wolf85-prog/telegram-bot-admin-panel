@@ -561,6 +561,19 @@ const UsersProvider = ({ children }) => {
 		});
 	}
 
+	//получить рассылку
+	const fetchDistribution = async () => {
+		let response = await getDistributionsW();
+		  console.log("distributionW: ", response.length)
+
+		let response2 = await getDistributionsWPlan();
+		  console.log("distributionWPlan: ", response2.length)
+
+		let all = [...response2, ...response]
+
+		setDistributionsWork(all)
+	}
+
 	useEffect(() => {
 		socket.on("getMessage", fetchMessageResponse);
 		socket.on("getMessageSpec", fetchMessageSpecResponse);
@@ -572,6 +585,8 @@ const UsersProvider = ({ children }) => {
 		socket.on("getDelAdminSpec", fetchDelAdminSpec);
 
 		socket.on("getNotif", fetchNotifAdmin);
+
+		socket.on("getDistrib", fetchDistribution);
 
 		socket.on("start_typing", setUserAsTyping);
 		socket.on("stop_typing", setUserAsNotTyping);
@@ -624,6 +639,14 @@ const UsersProvider = ({ children }) => {
 		usersCopy[userIndex].avatar = avatar;
 		setUsers(usersCopy);
 	}
+
+
+	//обновить список рассылки
+	const addNewDistrib = (task) => {
+		socket.emit("sendDistrib", { 
+			task,
+		})
+	};
 
 
 //=======================================================================
@@ -830,6 +853,7 @@ const fetchNotifAdmin = (data) => {
 			setCountMessageWork,
 			distributionsWork, 
 			setDistributionsWork,
+			addNewDistrib,
 		}}>
 			{children}
 		</UsersContext.Provider>
