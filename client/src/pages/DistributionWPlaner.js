@@ -31,7 +31,8 @@ import {
   getPlan, 
   newDistributionW, 
   getDistributionsW, 
-  getDistributionsWPlan 
+  getDistributionsWPlan, 
+  delDistributionWPlan
 } from 'src/http/adminAPI';
 
 const DistributionWPlaner = () => {
@@ -39,13 +40,15 @@ const DistributionWPlaner = () => {
   //const [distributionsWork, setDistributionsWork]= useState([]);
   const { setDistributionsWork } = useUsersContext();
 
-  const projectId= location.state.project
-  const textDistr= location.state.text
-  const catDistr= location.state.category
-  const countReceiver= location.state.count
+  const projectId= location.state?.project
+  const textDistr= location.state?.text
+  const catDistr= location.state?.category
+  const countReceiver= location.state?.count
+  const dateDistrib = location.state?.date
 
   console.log("catDistr: ", catDistr)
   console.log("countReceiver: ", countReceiver)
+  console.log("dateDistrib: ", dateDistrib)
   
 
   const [countCol, setCountCol] = useState(6)
@@ -985,7 +988,9 @@ const DistributionWPlaner = () => {
   )
 
   const savePlan = async() => {
-    addToast(exampleToast)
+    //addToast(exampleToast)
+
+    await delDistributionWPlan({id: projectId, date: dateDistrib})
 
     const newArray = [].concat(dates, dates1, dates11);
     const planer_str = JSON.stringify(newArray)
@@ -1017,7 +1022,7 @@ const DistributionWPlaner = () => {
           datestart: Date.parse(`2023-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`), 
           delivered: 'false',  
           count: countReceiver,
-          date: Date.parse(`2023-${item.date.split('.')[1]}-${item.date.split('.')[0]}`),     
+          date: `${day}.${month}.${year}`,    
         }
         //сохранение рассылки в базе данных
         await newDistributionW(message) 
@@ -1030,7 +1035,7 @@ const DistributionWPlaner = () => {
     
     setDistributionsWork([...response2, ...response])
 
-    setTimeout(() => backPage(), 1000);
+    setTimeout(() => backPage(), 2000);
     //backPage()
   }
 

@@ -973,7 +973,7 @@ const delCategory7 = (category) => {
 
   //===================================================================
   {/* Запланировать рассылку */}
-  const onPlanerShow = async(proj, text, id, cats, count) => {
+  const onPlanerShow = async(proj, text, id, cats, count, date) => {
     setVisibleModal(!visibleModal)
 
     //console.log(cats)
@@ -986,6 +986,7 @@ const delCategory7 = (category) => {
           id: id,
           category: cats,
           count: count,
+          date: date,
         }
       });
     } 
@@ -1016,7 +1017,7 @@ const delCategory7 = (category) => {
         datestart: Date.now(), 
         delivered: 'true',   
         count: selected.length, 
-        date: Date.parse(`${year}-${month}-${day}`),      
+        date: `${day}.${month}.${year}`,      
       }
       console.log("message send button: ", message);
 
@@ -1601,7 +1602,7 @@ const delCategory7 = (category) => {
                                       </div> */}
                                       <div>
                                         {proj ? 
-                                          <CButton color="success" onClick={()=>onPlanerShow(proj, text, distribId, categoryAll, selected.length)}>Запланировать</CButton>
+                                          <CButton color="success" onClick={()=>onPlanerShow(proj, text, distribId, categoryAll, selected.length, datestart)}>Запланировать</CButton>
                                           :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>
                                         }             
                                       </div>
