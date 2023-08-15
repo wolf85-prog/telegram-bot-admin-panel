@@ -54,9 +54,11 @@ const DistributionAddW = () => {
   const distribId = location.state?.id
   const categoriesitem = location.state?.category
   const poster = location.state?.poster
+  const datestart = location.state?.date
 
   console.log("Сохраненные категории: ", categoriesitem)
   console.log("Сохраненный постер: ", poster)
+  console.log("Сохраненная дата: ", datestart)
   
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_API_URL
@@ -998,6 +1000,11 @@ const delCategory7 = (category) => {
     if (selected.length !== 0 && file || selected.length !== 0 && text) {
       audio.play();
 
+      const d = new Date();
+      const year = d.getFullYear();
+      const month = String(d.getMonth()+1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+
       //новая рассылка
       const message = {
         //name: 'Рассылка', 
@@ -1008,7 +1015,8 @@ const delCategory7 = (category) => {
         receivers: categoryAll.toString(), 
         datestart: Date.now(), 
         delivered: 'true',   
-        count: selected.length,     
+        count: selected.length, 
+        date: Date.parse(`${year}-${month}-${day}`),      
       }
       console.log("message send button: ", message);
 

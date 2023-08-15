@@ -176,7 +176,7 @@ const DistributionW = () => {
                                         </Link> */}
 
                                         {item.projectId ? 
-                                          <Link to={'/distributionw_add'} state={{ project: item.projectId, id: item.id, category: item.categories, poster: item.image}}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
+                                          <Link to={'/distributionw_add'} state={{ project: item.projectId, id: item.id, category: item.categories, poster: item.image, date: item.datestart}}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
                                           :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
                                         }
                                         

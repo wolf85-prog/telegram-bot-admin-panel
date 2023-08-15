@@ -109,7 +109,7 @@ const DistributionWPlaner = () => {
   const toaster = useRef()
 
   let arr = []
-  
+
   const navigate = useNavigate();
   const backPage = () => {
        navigate('/distributionw');
@@ -1000,9 +1000,12 @@ const DistributionWPlaner = () => {
     let str_cats = catDistr.map(item => item).join(',')
     console.log("Plan Category: ", str_cats)
 
+    const d = new Date();
+    const year = d.getFullYear();
+
     newArray.forEach(async (item)=> {
       if (item.save === true && item.proj === projectName) {
-        console.log("Дата старта: ", Date.parse(`2023-${item.date.split[1]}-${item.date.split[0]}T${item.time}:00`))
+        console.log("Дата старта: ", Date.parse(`${year}-${item.date.split[1]}-${item.date.split[0]}T${item.time}:00`))
         //новая рассылка
         const message = {
           //name: 'Рассылка', 
@@ -1013,7 +1016,8 @@ const DistributionWPlaner = () => {
           receivers: str_cats, 
           datestart: Date.parse(`2023-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`), 
           delivered: 'false',  
-          count: countReceiver      
+          count: countReceiver,
+          date: Date.parse(`2023-${item.date.split('.')[1]}-${item.date.split('.')[0]}`),     
         }
         //сохранение рассылки в базе данных
         await newDistributionW(message) 

@@ -64,9 +64,9 @@ class DistributionController {
 
     //add Distribution
     async newDistributionW(req, res) {
-        const {text, image, project, receivers, datestart, delivered, projectId, count} = req.body
+        const {text, image, project, receivers, datestart, delivered, projectId, count, date} = req.body
         try {
-            await Distributionw.create({text, image, project, receivers, datestart, delivered, projectId, count})
+            await Distributionw.create({text, image, project, receivers, datestart, delivered, projectId, count, date})
             return res.status(200).json("Distribution has been sent successfully");
         } catch (error) {
             return res.status(500).json(error.message);
@@ -131,6 +131,22 @@ class DistributionController {
         try {
             await Distributionw.destroy({
                 where: { id: String(id) },
+            })
+            return res.status(200).json("Distribution has been delete successfully");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    //delete message
+    async delDistributionWPlan(req, res) {
+        const {id, date} = req.body
+        try {
+            await Distributionw.destroy({
+                where: { 
+                    projectId: String(id),
+                    date: String(date)
+                },
             })
             return res.status(200).json("Distribution has been delete successfully");
         } catch (error) {
