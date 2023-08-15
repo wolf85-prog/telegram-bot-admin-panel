@@ -988,9 +988,15 @@ const DistributionWPlaner = () => {
   )
 
   const savePlan = async() => {
-    //addToast(exampleToast)
+    addToast(exampleToast) //ваш план сохранен
 
-    await delDistributionWPlan({id: projectId, date: dateDistrib})
+    //удалить предыдущие записи запланированных рассылок
+    const obj = {
+      id: projectId, 
+      date: dateDistrib
+    }
+    console.log("obj: ", obj)
+    await delDistributionWPlan(obj)
 
     const newArray = [].concat(dates, dates1, dates11);
     const planer_str = JSON.stringify(newArray)

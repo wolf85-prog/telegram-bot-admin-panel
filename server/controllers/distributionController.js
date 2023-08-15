@@ -141,7 +141,8 @@ class DistributionController {
     //delete message
     async delDistributionWPlan(req, res) {
         const {id, date} = req.body
-        console.log(id, date)
+        console.log("PROJECTID: ", id)
+        console.log("DATE: ", date)
         try {
             await Distributionw.destroy({
                 where: { 
