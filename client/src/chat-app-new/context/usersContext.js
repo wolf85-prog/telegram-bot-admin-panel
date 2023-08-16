@@ -318,7 +318,18 @@ const UsersProvider = ({ children }) => {
 			let response2 = await getDistributionsWPlan();
       		console.log("distributionWPlan: ", response2.length)
 
-			let all = [...response2, ...response]
+			//сортировка
+			const messageSort = [...response].sort((a, b) => {       
+				var dateA = new Date(parseInt(a.datestart)), dateB = new Date(parseInt(b.datestart)) 
+				return dateB-dateA  //сортировка по убывающей дате  
+			})
+
+			const messageSort2 = [...response2].sort((a, b) => {       
+				var dateA = new Date(parseInt(a.datestart)), dateB = new Date(parseInt(b.datestart)) 
+				return dateA-dateB  //сортировка по убывающей дате  
+			})
+
+			let all = [...messageSort2, ...messageSort]
 
 			setDistributionsWork(all)
 		}
@@ -564,12 +575,23 @@ const UsersProvider = ({ children }) => {
 	//получить рассылку
 	const fetchDistribution = async () => {
 		let response = await getDistributionsW();
-		  console.log("distributionW: ", response.length)
+		  //console.log("distributionW: ", response.length)
 
 		let response2 = await getDistributionsWPlan();
-		  console.log("distributionWPlan: ", response2.length)
+		  //console.log("distributionWPlan: ", response2.length)
 
-		let all = [...response2, ...response]
+		//сортировка
+		const messageSort = [...response].sort((a, b) => {       
+			var dateA = new Date(parseInt(a.datestart)), dateB = new Date(parseInt(b.datestart)) 
+			return dateB-dateA  //сортировка по убывающей дате  
+		})
+
+		const messageSort2 = [...response2].sort((a, b) => {       
+			var dateA = new Date(parseInt(a.datestart)), dateB = new Date(parseInt(b.datestart)) 
+			return dateA-dateB  //сортировка по убывающей дате  
+		})
+
+		let all = [...messageSort2, ...messageSort]
 
 		setDistributionsWork(all)
 	}

@@ -45,10 +45,12 @@ const DistributionWPlaner = () => {
   const catDistr= location.state?.category
   const countReceiver= location.state?.count
   const dateDistrib = location.state?.date
+  const imageDistrib = location.state?.image
 
   console.log("catDistr: ", catDistr)
   console.log("countReceiver: ", countReceiver)
   console.log("dateDistrib: ", dateDistrib)
+  console.log("imageDistrib: ", imageDistrib)
   
 
   const [countCol, setCountCol] = useState(6)
@@ -234,7 +236,7 @@ const DistributionWPlaner = () => {
       if (value2[ind]) {
         value2[ind] = false
         dates1[ind].proj = ''
-        dates[ind].save = false
+        dates1[ind].save = false
       } else {
         value2[ind] = true
         dates1[ind].proj = projectName //location.state.project
@@ -1021,7 +1023,7 @@ const DistributionWPlaner = () => {
         const message = {
           //name: 'Рассылка', 
           text: textDistr, 
-          image: '', 
+          image: imageDistrib ? imageDistrib : '', 
           project: `${item.date} | ${projectName}`, 
           projectId: projectId, 
           receivers: str_cats, 
@@ -1036,14 +1038,10 @@ const DistributionWPlaner = () => {
     })
 
     //обновить список рассылок
-    //let response = await getDistributionsW();
-    //let response2 = await getDistributionsWPlan(); 
-    //setDistributionsWork([...response2, ...response])
-
     addNewDistrib(true)
     
 
-    setTimeout(() => backPage(), 2000);
+    setTimeout(() => backPage(), 1000);
     //backPage()
   }
 

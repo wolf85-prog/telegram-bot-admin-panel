@@ -32,18 +32,9 @@ const DistributionW = () => {
   //get Distribution
   useEffect(() => {
     const fetchData = async () => {
-			//let response = await getDistributions();
-      console.log("distributionsW: ", messages)
-
-      let strReceivers = ''
 
       const arrDitributions = []
       messages.map((distrib, index) => {
-        // JSON.parse(distrib.receivers).map((receiver)=>{
-        //   strReceivers = receiver.label + ' '
-        // })
-
-        //console.log(distrib.datestart)
         const d = new Date(parseInt(distrib.datestart));
 				const year = d.getFullYear();
 				const month = String(d.getMonth()+1).padStart(2, "0");
@@ -54,12 +45,11 @@ const DistributionW = () => {
         const newTimeMessage = `${chas}:${minut}`
 
         let space = /,/gi;
-        //var newStr = str.replace(space, '<br>');
 
         const newDistribution = {
           id: distrib.id,
           text: distrib.text,
-          image: distrib.image.split('5000/')[1] !=='' ? distrib.image : '',
+          image: distrib.image?.split('5000/')[1] !=='' ||  distrib.image !== null ? distrib.image : '',
           project: distrib.project,
           projectId: distrib.projectId ? distrib.projectId : '',
           receivers: distrib.receivers.replace(space, '<br/>'), //strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
@@ -69,11 +59,10 @@ const DistributionW = () => {
           timestart: newTimeMessage,
           status: distrib.delivered ? "отправлено" : "запланировано",
 				}
-        //console.log(index)
         arrDitributions.push(newDistribution)
       })
 
-      console.log("arrDitributions: ", arrDitributions)
+      //console.log("arrDitributions: ", arrDitributions)
 
       setDistributionsWork(arrDitributions) 
       setLoading(false)

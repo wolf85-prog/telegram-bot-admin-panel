@@ -987,6 +987,7 @@ const delCategory7 = (category) => {
           category: cats,
           count: count,
           date: date,
+          image: poster,
         }
       });
     } 

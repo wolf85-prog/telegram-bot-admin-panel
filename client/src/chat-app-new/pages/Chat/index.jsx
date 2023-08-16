@@ -94,7 +94,7 @@ const Chat = () => {
 		temp = temp.replace(/&/g, '%26'); 		 //экранирование &
 		temp = temp.replace(/\+/g, '%2b'); 		 //экранирование +
 		temp = temp.replace(/>/g, '%3e'); 		 //экранирование >
-		temp = temp.replace(/</g, '&lt;'); 		 //экранирование <
+		temp = temp.replace(/</g, '%3c'); 		 //экранирование <
         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${temp}`
 		const sendToTelegram = await $host.get(url_send_msg);
 
