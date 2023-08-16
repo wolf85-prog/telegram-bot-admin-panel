@@ -49,15 +49,16 @@ import treug from './../assets/images/treugolnik.png';
 import { locale } from 'core-js/web'
 
 const DistributionAddW = () => {
+  const [poster, setPoster]= useState('');
+
   const location = useLocation()
   const projId = location.state?.project //? location.state.project : ""
   const distribId = location.state?.id
   const categoriesitem = location.state?.category
-  const poster = location.state?.poster
   const datestart = location.state?.date
 
   console.log("Сохраненные категории: ", categoriesitem)
-  console.log("Сохраненный постер: ", poster)
+  //console.log("Сохраненный постер: ", poster)
   console.log("Сохраненная дата: ", datestart)
   
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
@@ -153,16 +154,21 @@ const DistributionAddW = () => {
     const fetchDistrib = async () => {
       //для редактирования рассылки
       if (projId) {
-        //setValueProject(projId)
+
+        setPoster(location.state?.poster)
+
         console.log("Текущий проект: ", projId)
         console.log("Текущая рассылка: ", distribId)
+        console.log("Текущий постер: ", location.state?.poster)
         
         const distrib = await getDistributionW(distribId)
         onHandlingProject(distrib.projectId, true)
         //для текстового поля
         setText(distrib.text)
         //для телефона
-        setFilePreview(distrib.image)
+        if (distrib.image !== ' ') {
+          setFilePreview(distrib.image)
+        }       
       } 
     }
 
@@ -941,6 +947,7 @@ const delCategory7 = (category) => {
           //сообщение с ссылкой на файл
           console.log("Путь к файлу: ", host + response.data.path)
           //setValue(host + response.data.path)
+          setPoster(host + response.data.path)
         }
     }
     getImage();
@@ -973,12 +980,12 @@ const delCategory7 = (category) => {
 
   //===================================================================
   {/* Запланировать рассылку */}
-  const onPlanerShow = async(proj, text, id, cats, count, date) => {
+  const onPlanerShow = async(proj, text, id, cats, count, date, poster) => {
     setVisibleModal(!visibleModal)
 
     //console.log(cats)
 
-    if (selected.length !== 0 && file || selected.length !== 0 && text) {
+    if (selected.length !== 0 && file || poster || selected.length !== 0 && text) {
       navigate('/distributionw_planer', {
         state: {
           project: proj,
@@ -1603,7 +1610,7 @@ const delCategory7 = (category) => {
                                       </div> */}
                                       <div>
                                         {proj ? 
-                                          <CButton color="success" onClick={()=>onPlanerShow(proj, text, distribId, categoryAll, selected.length, datestart)}>Запланировать</CButton>
+                                          <CButton color="success" onClick={()=>onPlanerShow(proj, text, distribId, categoryAll, selected.length, datestart, poster)}>Запланировать</CButton>
                                           :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>
                                         }             
                                       </div>

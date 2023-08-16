@@ -49,7 +49,7 @@ const DistributionW = () => {
         const newDistribution = {
           id: distrib.id,
           text: distrib.text,
-          image: distrib.image?.split('5000/')[1] !=='' ||  distrib.image !== null ? distrib.image : '',
+          image: distrib.image !=='' ? distrib.image : '',
           project: distrib.project,
           projectId: distrib.projectId ? distrib.projectId : '',
           receivers: distrib.receivers.replace(space, '<br/>'), //strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
