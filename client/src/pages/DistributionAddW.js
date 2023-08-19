@@ -56,10 +56,7 @@ const DistributionAddW = () => {
   const distribId = location.state?.id
   const categoriesitem = location.state?.category
   const datestart = location.state?.date
-
-  console.log("Сохраненные категории: ", categoriesitem)
-  //console.log("Сохраненный постер: ", poster)
-  console.log("Сохраненная дата: ", datestart)
+  const img = location.state?.img
   
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_API_URL
@@ -155,11 +152,13 @@ const DistributionAddW = () => {
       //для редактирования рассылки
       if (projId) {
 
-        setPoster(location.state?.poster)
+        setPoster(img)
 
         console.log("Текущий проект: ", projId)
         console.log("Текущая рассылка: ", distribId)
-        console.log("Текущий постер: ", location.state?.poster)
+        console.log("Текущий постер: ", img)
+        console.log("Сохраненные категории: ", categoriesitem)
+        console.log("Сохраненная дата: ", datestart)
         
         const distrib = await getDistributionW(distribId)
         onHandlingProject(distrib.projectId, true)
@@ -562,15 +561,16 @@ const onAddCategory = (e) => {
     setArrSelect([])
     arrCategory.pop()
     arrCategory.push(cat_name)
-    //arrTemp.pop()
+    arrTemp.pop()
     arrTemp.push(cat_label)
-    console.log("arrCategory: ", arrCategory)
-    setArrCategory(arrCategory)
-    setCategoryAll([...arrTemp])
+
+    setCategoryAll2(arrCategory)
+    setCategoryAll(arrTemp)
 
     const result = [...arrCategory]
     const result2 = [...arrTemp]
-    console.log("categoryAll: ", result2)
+    console.log("result: ", arrCategory)
+    console.log("categoryAll: ", arrTemp)
     
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
@@ -583,11 +583,10 @@ const onAddCategory = (e) => {
     })
     
     //выбрать уникальных специалистов
-    //const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
+    const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     
-    setSelected(arrSelect)
-
-    console.log("selected: ", arrSelect)
+    setSelected(arr)
+    console.log("selected: ", arr)
   }
   
 }
@@ -611,12 +610,13 @@ const onAddCategory2 = (e) => {
     arrTemp2.pop()
     arrTemp2.push(cat_label)
     
-    setArrCategory2(arrCategory2)
+    setCategoryAll2([...categoryAll2, ...arrCategory2])
     setCategoryAll([...categoryAll, ...arrTemp2])
 
-    const result = [...arrCategory, ...arrCategory2]
-    //const result2 = [...categoryAll, ...arrTemp2]
-    //console.log("categoryAll: ", result2)
+    const result = [...categoryAll2, ...arrCategory2]
+    const result2 = [...categoryAll, ...arrTemp2]
+    console.log("result: ", result)
+    console.log("categoryAll: ", result2)
 
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
@@ -628,10 +628,10 @@ const onAddCategory2 = (e) => {
       })
     })
     //выбрать уникальных специалистов
-    //const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
+    const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     
-    setSelected(arrSelect)
-    console.log(arrSelect)
+    setSelected(arr)
+    console.log(arr)
   }
 }
 
@@ -655,10 +655,12 @@ const onAddCategory3 = (e) => {
     arrTemp3.push(cat_label)
 
     console.log("arrCategory3: ", arrCategory3)
-    setArrCategory3(arrCategory3)
-    setCategoryAll([...arrTemp, ...arrTemp2, ...arrTemp3])
-    const result = [...arrCategory, ...arrCategory2, ...arrCategory3]
-    const result2 = [...arrTemp, ...arrTemp2, ...arrTemp3]
+    setCategoryAll2([...categoryAll2, ...arrCategory3])
+    setCategoryAll([...categoryAll, ...arrTemp3])
+    
+    const result = [...categoryAll2, ...arrCategory3]
+    const result2 = [...categoryAll, ...arrTemp3]
+    console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
     workers.map((worker)=> {
@@ -695,11 +697,13 @@ const onAddCategory4 = (e) => {
     arrCategory4.push(cat_name)
     arrTemp4.pop()
     arrTemp4.push(cat_label)
-    console.log("arrCategory4: ", arrCategory4)
-    setArrCategory4(arrCategory4)
-    setCategoryAll([...arrTemp, ...arrTemp2, ...arrTemp3, ...arrTemp4])
-    const result = [...arrCategory, ...arrCategory2, ...arrCategory3, ...arrCategory4]
-    const result2 = [...arrTemp, ...arrTemp2, ...arrTemp3, ...arrTemp4]
+
+    setCategoryAll2([...categoryAll2, ...arrCategory4])
+    setCategoryAll([...categoryAll, ...arrTemp4])
+    
+    const result = [...categoryAll2, ...arrCategory4]
+    const result2 = [...categoryAll, ...arrTemp4]
+    console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
     workers.map((worker)=> {
@@ -730,16 +734,19 @@ const onAddCategory5 = (e) => {
     const cat_name = categories[e.target.value].name
     const cat_label = categories[e.target.value].label
     console.log("cat_name5: ", cat_name)
+
     setArrSelect([])
     arrCategory5.pop()
     arrCategory5.push(cat_name)
     arrTemp5.pop()
     arrTemp5.push(cat_label)
-    console.log("arrCategory5: ", arrCategory5)
-    setArrCategory5(arrCategory5)
-    setCategoryAll([...arrTemp, ...arrTemp2, ...arrTemp3, ...arrTemp4, ...arrTemp5])
-    const result = [...arrCategory, ...arrCategory2, ...arrCategory3, ...arrCategory4, ...arrCategory5]
-    const result2 = [...arrTemp, ...arrTemp2, ...arrTemp3, ...arrTemp4, ...arrTemp5]
+
+    setCategoryAll2([...categoryAll2, ...arrCategory5])
+    setCategoryAll([...categoryAll, ...arrTemp5])
+    
+    const result = [...categoryAll2, ...arrCategory5]
+    const result2 = [...categoryAll, ...arrTemp5]
+    console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
     workers.map((worker)=> {
@@ -776,12 +783,14 @@ const onAddCategory6 = (e) => {
     arrCategory6.push(cat_name)
     arrTemp6.pop()
     arrTemp6.push(cat_label)
-    console.log("arrCategory6: ", arrCategory6)
-    setArrCategory6(arrCategory6)
 
-    setCategoryAll([...arrTemp, ...arrTemp2, ...arrTemp3, ...arrTemp4, ...arrTemp5, ...arrTemp6])
-    const result = [...arrCategory, ...arrCategory2, ...arrCategory3, ...arrCategory4, ...arrCategory5, ...arrCategory6]
-    //console.log(result)
+    setCategoryAll2([...categoryAll2, ...arrCategory6])
+    setCategoryAll([...categoryAll, ...arrTemp6])
+    
+    const result = [...categoryAll2, ...arrCategory6]
+    const result2 = [...categoryAll, ...arrTemp6]
+    console.log("result: ", result)
+    console.log("categoryAll: ", result2)
 
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
@@ -817,12 +826,14 @@ const onAddCategory7 = (e) => {
     arrCategory7.push(cat_name)
     arrTemp7.pop()
     arrTemp7.push(cat_label)
-    console.log("arrCategory7: ", arrCategory7)
-    setArrCategory7(arrCategory7)
 
-    setCategoryAll([...arrTemp, ...arrTemp2, ...arrTemp3, ...arrTemp4, ...arrTemp5, ...arrTemp6, ...arrTemp7])
-    const result = [...arrCategory, ...arrCategory2, ...arrCategory3, ...arrCategory4, ...arrCategory5, ...arrCategory6, ...arrCategory7]
-    //console.log(result)
+    setCategoryAll2([...categoryAll2, ...arrCategory7])
+    setCategoryAll([...categoryAll, ...arrTemp7])
+
+    const result = [...categoryAll2, ...arrCategory7]
+    const result2 = [...categoryAll, ...arrTemp7]
+    console.log("result: ", result)
+    console.log("categoryAll: ", result2)
 
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
@@ -1003,10 +1014,11 @@ const delCategory7 = (category) => {
   {/* Отправка рассылки */}
   const onSendText = async() => {
     console.log("категории: ", categoryAll)
+    console.log("текст: ", text)
+    console.log("постер: ", img)
+    console.log("получатели: ", selected)
 
-    setVisibleModal(!visibleModal)
-
-    if (selected.length !== 0 && file || selected.length !== 0 && text) {
+    if (selected.length !== 0 && file || img || selected.length !== 0 && text) {
       audio.play();
 
       const d = new Date();
@@ -1144,6 +1156,9 @@ const delCategory7 = (category) => {
       setValue('')
 
       navigate('/distributionw');
+    }
+    else {
+      setVisibleModal(!visibleModal)
     }
   
   }

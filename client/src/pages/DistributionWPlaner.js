@@ -61,6 +61,10 @@ const DistributionWPlaner = () => {
   const [timeold2, setTimeold2] = useState([false, false, false, false, false, false, false])
   const [timeold3, setTimeold3] = useState([false, false, false, false, false, false, false])
 
+  const [timeold21, setTimeold21] = useState([false, false, false, false, false, false, false])
+  const [timeold22, setTimeold22] = useState([false, false, false, false, false, false, false])
+  const [timeold23, setTimeold23] = useState([false, false, false, false, false, false, false])
+
   const d = new Date();
   const month = String(d.getMonth()+1).padStart(2, "0");
 	const day = String(d.getDate()).padStart(2, "0");
@@ -101,12 +105,46 @@ const DistributionWPlaner = () => {
   ])
 
 //----------------------------------------------------------
+const [dates2, setDates2] = useState([
+  {date: date_str2, time: '06:00', proj: '', save: false},
+  {date: date_str2, time: '07:00', proj: '', save: false},
+  {date: date_str2, time: '08:00', proj: '', save: false},
+  {date: date_str2, time: '09:00', proj: '', save: false},
+  {date: date_str2, time: '10:00', proj: '', save: false},
+  {date: date_str2, time: '11:00', proj: '', save: false},
+])
+
+
+const [dates22, setDates22] = useState([
+  {date: date_str2, time: '12:00', proj: '', save: false},
+  {date: date_str2, time: '13:00', proj: '', save: false},
+  {date: date_str2, time: '14:00', proj: '', save: false},
+  {date: date_str2, time: '15:00', proj: '', save: false},
+  {date: date_str2, time: '16:00', proj: '', save: false},
+  {date: date_str2, time: '17:00', proj: '', save: false},
+])
+
+const [dates222, setDates222] = useState([
+  {date: date_str2, time: '18:00', proj: '', save: false},
+  {date: date_str2, time: '19:00', proj: '', save: false},
+  {date: date_str2, time: '20:00', proj: '', save: false},
+  {date: date_str2, time: '21:00', proj: '', save: false},
+  {date: date_str2, time: '22:00', proj: '', save: false},
+  {date: date_str2, time: '23:00', proj: '', save: false},
+])
+
+//----------------------------------------------------------
 
   const [projectName, setProjectName] = useState('')
   const [projectView, setProjectView] = useState(false)
   const [value1, setValue1] = useState([false, false, false, false, false, false, false])
   const [value2, setValue2] = useState([false, false, false, false, false, false, false])
   const [value3, setValue3] = useState([false, false, false, false, false, false, false])
+
+  //date2
+  const [value21, setValue21] = useState([false, false, false, false, false, false, false])
+  const [value22, setValue22] = useState([false, false, false, false, false, false, false])
+  const [value23, setValue23] = useState([false, false, false, false, false, false, false])
 
   const [showLoader, setShowLoader] = useState(true)
 
@@ -260,6 +298,57 @@ const DistributionWPlaner = () => {
 
       setDates11(dates11)
       setValue3(value3)
+    }
+    
+
+    projectView ? setProjectView(false) : setProjectView(true)
+  }
+
+
+  const changeStatus2 = (ind, tab) => {
+    if (tab === 1) {
+      if (dates2[ind].save === true) {
+        value21[ind] = false
+        dates2[ind].save = false
+        dates2[ind].proj = ''
+      } else {
+        value21[ind] = true
+        dates2[ind].proj = projectName //location.state.project
+        dates2[ind].save = true
+      }
+
+      setDates2(dates2)
+      setValue1(value1) 
+    }
+
+    if (tab === 2) {
+      if (value22[ind]) {
+        value22[ind] = false
+        dates22[ind].proj = ''
+        dates22[ind].save = false
+      } else {
+        value22[ind] = true
+        dates22[ind].proj = projectName //location.state.project
+        dates22[ind].save = true
+      } 
+
+      setDates22(dates22)
+      setValue22(value22)
+    }
+
+    if (tab === 3) {
+      if (value23[ind]) {
+        value23[ind] = false
+        dates222[ind].proj = ''
+        dates222[ind].save = false
+      } else {
+        value23[ind] = true
+        dates222[ind].proj = projectName //location.state.project
+        dates222[ind].save = true
+      } 
+
+      setDates222(dates222)
+      setValue23(value23)
     }
     
 
@@ -1236,6 +1325,169 @@ const DistributionWPlaner = () => {
                                               checked={value3[index]}
                                               onChange={()=>changeStatus(index, 3)}
                                               disabled={((projectName === item.proj || item.proj === '') && !timeold3[index])  ? '' : 'disabled'}
+                                            />
+                                          </CTableDataCell>
+                                        </CTableRow>
+                                    ))}
+                                    </CTableBody>
+                                  </CTable>
+                                  </div>
+                                </CCol>
+                              </CRow>
+
+<br/>
+
+
+                              <CRow>
+{/* -----------------------------06:00----------------------------------------------------------------------------------- */}
+                              <CCol xs>                                   
+                                <div style={{float: "left", display: 'flex'}}>
+                                  <CTable align="middle" className="mb-0 border" hover responsive bordered style={{float: 'left'}}>   
+                                    <CTableHead className='table-dark' >
+                                      <CTableRow>
+                                        <CTableHeaderCell className="text-center" style={{width: '70px'}}>Дата</CTableHeaderCell>
+                                      </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                      <CTableRow v-for="item in tableItems">
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol}px`}} >
+                                          <div>{date_str2}</div> 
+                                        </CTableDataCell>
+                                      </CTableRow>
+                                    </CTableBody>
+                                  </CTable>
+
+                                  <CTable align="middle" className="mb-0 border" hover responsive bordered>
+                                    <CTableHead className='table-dark' >
+                                      <CTableRow>
+                                        {/* <CTableHeaderCell className="text-center">Дата</CTableHeaderCell> */}
+                                        <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Проект</CTableHeaderCell>   
+                                        <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
+                                      </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                    {dates2.map((item, index) => (
+                                        <CTableRow v-for="item in tableItems" key={index}>   
+                                          <CTableDataCell className="text-center" style={{width: '50px'}} >
+                                            <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
+                                              <div onClick={()=>clickShowEditTime(`${item.time}`, index, 1)} >{item.time}</div>
+                                            </div>
+                                          </CTableDataCell>
+                                          <CTableDataCell style={{width: '180px'}}>
+                                            <div style={{display: item.proj ? "block": "none"}}>{item.proj}</div>
+                                          </CTableDataCell>
+                                          <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                            <CFormCheck 
+                                              id="rowCheckTab1"
+                                              checked={value21[index]}
+                                              onChange={()=>changeStatus2(index, 1)}
+                                              disabled={((projectName === item.proj || item.proj === '') && !timeold21[index])  ? '' : 'disabled'}
+                                            />
+                                          </CTableDataCell>
+                                        </CTableRow>
+                                    ))}
+                                    </CTableBody>
+                                  </CTable>
+                                  </div>
+                                </CCol>
+{/* -----------------------------12:00----------------------------------------------------------------------------------- */}
+                                <CCol xs>                                   
+                                <div style={{float: "left", display: 'flex'}}>
+                                  <CTable align="middle" className="mb-0 border" hover responsive bordered style={{float: 'left'}}>   
+                                    <CTableHead className='table-dark' >
+                                      <CTableRow>
+                                        <CTableHeaderCell className="text-center" style={{width: '70px'}}>Дата</CTableHeaderCell>
+                                      </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                      <CTableRow v-for="item in tableItems">
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol2}px`}} >
+                                          <div>{date_str2}</div> 
+                                        </CTableDataCell>
+                                      </CTableRow>
+                                    </CTableBody>
+                                  </CTable>
+
+                                  <CTable align="middle" className="mb-0 border" hover responsive bordered>
+                                    <CTableHead className='table-dark' >
+                                      <CTableRow>
+                                        {/* <CTableHeaderCell className="text-center">Дата</CTableHeaderCell> */}
+                                        <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Проект</CTableHeaderCell>   
+                                        <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
+                                      </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                    {dates22.map((item, index) => (
+                                        <CTableRow v-for="item in tableItems" key={index}>   
+                                          <CTableDataCell className="text-center" style={{width: '50px'}} >
+                                            <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
+                                              <div onClick={()=>clickShowEditTime(`${item.time}`, index, 2)} >{item.time}</div>
+                                            </div>
+                                          </CTableDataCell>
+                                          <CTableDataCell style={{width: '180px'}}>
+                                            <div style={{display: item.proj ? "block": "none"}}>{item.proj}</div>
+                                          </CTableDataCell>
+                                          <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                            <CFormCheck 
+                                              id="rowCheckTab2"
+                                              checked={value22[index]}
+                                              onChange={()=>changeStatus2(index, 2)}
+                                              disabled={((projectName === item.proj || item.proj === '') && !timeold22[index])  ? '' : 'disabled'}
+                                            />
+                                          </CTableDataCell>
+                                        </CTableRow>
+                                    ))}
+                                    </CTableBody>
+                                  </CTable>
+                                  </div>
+                                </CCol>
+
+{/* ----------------------------18:00------------------------------------------------------------------------------------ */}
+                                <CCol xs>
+                                <div style={{float: "left", display: 'flex'}}>
+                                  <CTable align="middle" className="mb-0 border" hover responsive bordered style={{float: 'left'}}>   
+                                    <CTableHead className='table-dark' >
+                                      <CTableRow>
+                                        <CTableHeaderCell className="text-center" style={{width: '70px'}}>Дата</CTableHeaderCell>
+                                      </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                      <CTableRow v-for="item in tableItems">
+                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol3}px`}} >
+                                          <div>{date_str2}</div> 
+                                        </CTableDataCell>
+                                      </CTableRow>
+                                    </CTableBody>
+                                  </CTable>
+
+                                  <CTable align="middle" className="mb-0 border" hover responsive bordered>
+                                    <CTableHead className='table-dark' >
+                                      <CTableRow>
+                                        {/* <CTableHeaderCell className="text-center">Дата</CTableHeaderCell> */}
+                                        <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Проект</CTableHeaderCell>   
+                                        <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
+                                      </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                    {dates222.map((item, index) => (
+                                        <CTableRow v-for="item in tableItems" key={index}>   
+                                          <CTableDataCell className="text-center" style={{width: '50px'}} >
+                                            <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
+                                              <div onClick={()=>clickShowEditTime(`${item.time}`, index, 3)} >{item.time}</div>
+                                            </div>
+                                          </CTableDataCell>
+                                          <CTableDataCell style={{width: '180px'}}>
+                                            <div>{item.proj}</div>
+                                          </CTableDataCell>
+                                          <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                            <CFormCheck 
+                                              id="rowCheckTab3"
+                                              checked={value23[index]}
+                                              onChange={()=>changeStatus2(index, 3)}
+                                              disabled={((projectName === item.proj || item.proj === '') && !timeold23[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
