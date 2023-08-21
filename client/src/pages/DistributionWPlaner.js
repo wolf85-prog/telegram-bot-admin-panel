@@ -57,6 +57,10 @@ const DistributionWPlaner = () => {
   const [countCol2, setCountCol2] = useState(6)
   const [countCol3, setCountCol3] = useState(6)
 
+  const [countCol4, setCountCol4] = useState(6)
+  const [countCol5, setCountCol5] = useState(6)
+  const [countCol6, setCountCol6] = useState(6)
+
   const [timeold1, setTimeold1] = useState([false, false, false, false, false, false, false])
   const [timeold2, setTimeold2] = useState([false, false, false, false, false, false, false])
   const [timeold3, setTimeold3] = useState([false, false, false, false, false, false, false])
@@ -182,8 +186,33 @@ const [dates222, setDates222] = useState([
 
       //открываем план
       if (plan !== null) {
-        const planTimes = JSON.parse(plan.times)
-        console.log("planTimes: ", planTimes)
+        const temp = JSON.parse(plan.times)
+        console.log("planTimes: ", temp)
+
+        const planTimes = []
+        const planTimes2 = []
+
+        let indexes = [];
+        temp.forEach((item, index) => {
+          if (item.time === '06:00') indexes.push(index)
+        });
+
+        //1
+        temp.forEach((item, index) => {
+          if (index < indexes[1]) {
+            planTimes.push(item)
+          }
+        });
+
+        //2
+        temp.forEach((item, index) => {
+          if (index >= indexes[1]) {
+            planTimes2.push(item)
+          }
+        });
+
+        console.log("1-й массив", planTimes)
+        console.log("2-й массив", planTimes2)
 
         const ind1 = planTimes.findIndex(date => date.time === '12:00')
         const ind2 = planTimes.findIndex(date => date.time === '18:00')
@@ -191,6 +220,14 @@ const [dates222, setDates222] = useState([
         const times = planTimes.slice(0, ind1);
         const times2 = planTimes.slice(ind1, ind2);
         const times3 = planTimes.slice(ind2, planTimes.length); 
+
+        //2-ц массив
+        const ind3 = planTimes2.findIndex(date => date.time === '12:00')
+        const ind4 = planTimes2.findIndex(date => date.time === '18:00')
+
+        const times4 = planTimes2.slice(0, ind1);
+        const times5 = planTimes2.slice(ind1, ind2);
+        const times6 = planTimes2.slice(ind2, planTimes2.length);
 
         times.map((time, index)=> {
           if (time.save) {
@@ -213,6 +250,29 @@ const [dates222, setDates222] = useState([
           }
         })
 
+        //2-й день
+        times4.map((time, index)=> {
+          if (time.save) {
+            value21[index] = true
+            setValue21(value21)
+          }
+        })
+
+        times5.map((time, index)=> {
+          if (time.save) {
+            value22[index] = true
+            setValue22(value22)
+          }
+        })
+
+        times6.map((time, index)=> {
+          if (time.save) {
+            value23[index] = true
+            setValue23(value23)
+          }
+        })
+
+
         setDates(times)
         setDates1(times2)
         setDates11(times3)
@@ -220,6 +280,15 @@ const [dates222, setDates222] = useState([
         setCountCol(ind1)
         setCountCol2(ind2 - ind1)
         setCountCol3(planTimes.length - ind2)   
+
+        //2
+        setDates2(times4)
+        setDates22(times5)
+        setDates222(times6)
+
+        setCountCol4(ind3)
+        setCountCol5(ind4 - ind3)
+        setCountCol6(planTimes2.length - ind4) 
       } 
 
       //блокируем прошедшее время
@@ -1069,6 +1138,717 @@ const [dates222, setDates222] = useState([
 
   }
 
+//-----------------table 2-----------------------------------------------------------------------------
+const clickShowEditTime2 = (t, ind, tab) => {
+
+  if (t === '06:00')  {
+    if (tab === 1) {
+      //обработка нажатия вкл/выкл
+      if (dates2[ind+1].time === '07:00') {
+        setCountCol4(countCol4+1) //для высоту ячейки с датой
+        arr = dates2.slice(0); //копируем массив dates
+        const newObj = {
+          date: date_str2,
+          time: '06:30',
+          proj: '',
+          save: false
+        }
+        arr.splice(ind+1, 0, newObj);
+        setDates2(arr)
+
+        //изменить чек
+        arr.map((item, index)=> {
+          value21[index] = item.save
+        })
+        setValue21(value21)
+
+      } else {
+        if (dates2[ind+1].proj === ''){
+          setCountCol4(countCol4-1)
+          arr = dates2.slice(0); 
+          arr.splice(ind+1, 1);
+          setDates2(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value21[index] = item.save
+          })
+          setValue21(value21)           
+        }        
+      }
+    }
+  }
+
+  if (t === '07:00')  {
+    if (tab === 1) {
+      //обработка нажатия вкл/выкл
+      if (tab === 1) {
+        //обработка нажатия вкл/выкл
+        if (dates2[ind+1].time === '08:00') {
+          setCountCol4(countCol4+1) //для высоту ячейки с датой
+          arr = dates2.slice(0); //копируем массив dates
+          const newObj = {
+            date: date_str2,
+            time: '07:30',
+            proj: '',
+            save: false
+          }
+          arr.splice(ind+1, 0, newObj);
+          setDates2(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value21[index] = item.save
+          })
+          setValue21(value21)
+                  
+        } else {
+          if (dates2[ind+1].proj === ''){
+            setCountCol4(countCol4-1)
+            arr = dates2.slice(0); 
+            arr.splice(ind+1, 1);
+            setDates2(arr)
+
+            //изменить чек
+            arr.map((item, index)=> {
+              value21[index] = item.save
+            })
+            setValue21(value21)           
+          }        
+        }
+      }
+    }
+  }
+
+
+  if (t === '08:00')  {
+    if (tab === 1) {
+      //обработка нажатия вкл/выкл
+      if (tab === 1) {
+        //обработка нажатия вкл/выкл
+        if (dates2[ind+1].time === '09:00') {
+          setCountCol4(countCol4+1) //для высоту ячейки с датой
+          arr = dates2.slice(0); //копируем массив dates
+          const newObj = {
+            date: date_str2,
+            time: '08:30',
+            proj: '',
+            save: false
+          }
+          arr.splice(ind+1, 0, newObj);
+          setDates2(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value21[index] = item.save
+          })
+          setValue21(value21)                 
+        } else {
+          if (dates2[ind+1].proj === ''){
+            setCountCol4(countCol4-1)
+            arr = dates2.slice(0); 
+            arr.splice(ind+1, 1);
+            setDates2(arr)
+
+            //изменить чек
+            arr.map((item, index)=> {
+              value21[index] = item.save
+            })
+            setValue21(value21)           
+          }        
+        }
+      }
+    }
+  }
+
+  if (t === '09:00')  {
+    if (tab === 1) {
+      //обработка нажатия вкл/выкл
+      if (tab === 1) {
+        //обработка нажатия вкл/выкл
+        if (dates2[ind+1].time === '10:00') {
+          setCountCol4(countCol4+1) //для высоту ячейки с датой
+          arr = dates2.slice(0); //копируем массив dates
+          const newObj = {
+            date: date_str2,
+            time: '09:30',
+            proj: '',
+            save: false
+          }
+          arr.splice(ind+1, 0, newObj);
+          setDates2(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value1[index] = item.save
+          })
+          setValue1(value1)
+                  
+        } else {
+          if (dates2[ind+1].proj === ''){
+            setCountCol4(countCol4-1)
+            arr = dates2.slice(0); 
+            arr.splice(ind+1, 1);
+            setDates2(arr)
+
+            //изменить чек
+            arr.map((item, index)=> {
+              value21[index] = item.save
+            })
+            setValue21(value21)           
+          }        
+        }
+      }
+    }
+  }
+
+  if (t === '10:00')  {
+    if (tab === 1) {
+      //обработка нажатия вкл/выкл
+      if (tab === 1) {
+        //обработка нажатия вкл/выкл
+        if (dates2[ind+1].time === '11:00') {
+          setCountCol4(countCol4+1) //для высоту ячейки с датой
+          arr = dates2.slice(0); //копируем массив dates
+          const newObj = {
+            date: date_str2,
+            time: '10:30',
+            proj: '',
+            save: false
+          }
+          arr.splice(ind+1, 0, newObj);
+          setDates2(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value21[index] = item.save
+          })
+          setValue21(value21)                 
+        } else {
+          if (dates2[ind+1].proj === ''){
+            setCountCol4(countCol4-1)
+            arr = dates2.slice(0); 
+            arr.splice(ind+1, 1);
+            setDates2(arr)
+
+            //изменить чек
+            arr.map((item, index)=> {
+              value21[index] = item.save
+            })
+            setValue21(value21)           
+          }        
+        }
+      }
+    }
+  }
+
+  if (t === '11:00')  {
+    if (tab === 1) {
+      //обработка нажатия вкл/выкл
+        if (dates2[ind+1]?.time !== '11:30') {
+          setCountCol4(countCol4+1) //для высоту ячейки с датой
+          arr = dates2.slice(0); //копируем массив dates
+          console.log(arr)
+          const newObj = {
+            date: date_str2,
+            time: '11:30',
+            proj: '',
+            save: false
+          }
+          arr.splice(ind+1, 0, newObj);
+          setDates2(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value21[index] = item.save
+          })
+          setValue21(value21)          
+        } 
+        
+        if (dates2[ind+1]?.time === '11:30') {
+          if (dates2[ind+1].proj === ''){
+            setCountCol4(countCol4-1)
+            arr = dates2.slice(0); 
+            arr.splice(ind+1, 1);
+            setDates2(arr)
+  
+            //изменить чек
+            arr.map((item, index)=> {
+              value21[index] = item.save
+            })
+            setValue21(value21)           
+          }        
+        }
+    }
+  }
+
+  //12:00 - 17:00
+
+  if (t === '12:00')  {
+    if (tab === 2) {
+      //обработка нажатия вкл/выкл
+      if (dates22[ind+1].time === '13:00') {
+        setCountCol5(countCol5+1) //для высоту ячейки с датой
+        arr = dates22.slice(0); //копируем массив dates
+        const newObj = {
+          date: date_str2,
+          time: '12:30',
+          proj: '',
+          save: false
+        }
+        arr.splice(ind+1, 0, newObj);
+        setDates22(arr)
+
+        //изменить чек
+        arr.map((item, index)=> {
+          value22[index] = item.save
+        })
+        setValue22(value22)
+
+      } else {
+        if (dates22[ind+1].proj === ''){
+          setCountCol5(countCol5-1)
+          arr = dates22.slice(0); 
+          arr.splice(ind+1, 1);
+          setDates22(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value22[index] = item.save
+          })
+          setValue22(value22)           
+        }        
+      }
+    }
+  }
+
+  if (t === '13:00')  {
+    if (tab === 2) {
+      //обработка нажатия вкл/выкл
+      if (dates22[ind+1].time === '14:00') {
+        setCountCol5(countCol5+1) //для высоту ячейки с датой
+        arr = dates22.slice(0); //копируем массив dates
+        const newObj = {
+          date: date_str2,
+          time: '13:30',
+          proj: '',
+          save: false
+        }
+        arr.splice(ind+1, 0, newObj);
+        setDates22(arr)
+
+        //изменить чек
+        arr.map((item, index)=> {
+          value22[index] = item.save
+        })
+        setValue22(value22)
+
+      } else {
+        if (dates22[ind+1].proj === ''){
+          setCountCol5(countCol5-1)
+          arr = dates22.slice(0); 
+          arr.splice(ind+1, 1);
+          setDates22(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value22[index] = item.save
+          })
+          setValue22(value22)           
+        }        
+      }
+    }
+  }
+
+  if (t === '14:00')  {
+    if (tab === 2) {
+      //обработка нажатия вкл/выкл
+      if (dates22[ind+1].time === '15:00') {
+        setCountCol5(countCol5+1) //для высоту ячейки с датой
+        arr = dates22.slice(0); //копируем массив dates
+        const newObj = {
+          date: date_str2,
+          time: '14:30',
+          proj: '',
+          save: false
+        }
+        arr.splice(ind+1, 0, newObj);
+        setDates22(arr)
+
+        //изменить чек
+        arr.map((item, index)=> {
+          value22[index] = item.save
+        })
+        setValue22(value22)
+
+      } else {
+        if (dates22[ind+1].proj === ''){
+          setCountCol5(countCol5-1)
+          arr = dates22.slice(0); 
+          arr.splice(ind+1, 1);
+          setDates22(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value22[index] = item.save
+          })
+          setValue22(value22)           
+        }        
+      }
+    }
+  }
+
+  if (t === '15:00')  {
+    if (tab === 2) {
+      //обработка нажатия вкл/выкл
+      if (dates22[ind+1].time === '16:00') {
+        setCountCol5(countCol5+1) //для высоту ячейки с датой
+        arr = dates22.slice(0); //копируем массив dates
+        const newObj = {
+          date: date_str2,
+          time: '15:30',
+          proj: '',
+          save: false
+        }
+        arr.splice(ind+1, 0, newObj);
+        setDates22(arr)
+
+        //изменить чек
+        arr.map((item, index)=> {
+          value22[index] = item.save
+        })
+        setValue22(value22)
+
+      } else {
+        if (dates22[ind+1].proj === ''){
+          setCountCol5(countCol5-1)
+          arr = dates22.slice(0); 
+          arr.splice(ind+1, 1);
+          setDates22(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value22[index] = item.save
+          })
+          setValue22(value22)           
+        }        
+      }
+    }
+  }
+
+  if (t === '16:00')  {
+    if (tab === 2) {
+      //обработка нажатия вкл/выкл
+      if (dates22[ind+1].time === '17:00') {
+        setCountCol5(countCol5+1) //для высоту ячейки с датой
+        arr = dates22.slice(0); //копируем массив dates
+        const newObj = {
+          date: date_str2,
+          time: '16:30',
+          proj: '',
+          save: false
+        }
+        arr.splice(ind+1, 0, newObj);
+        setDates22(arr)
+
+        //изменить чек
+        arr.map((item, index)=> {
+          value22[index] = item.save
+        })
+        setValue22(value22)
+
+      } else {
+        if (dates22[ind+1].proj === ''){
+          setCountCol5(countCol5-1)
+          arr = dates22.slice(0); 
+          arr.splice(ind+1, 1);
+          setDates22(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value22[index] = item.save
+          })
+          setValue22(value22)           
+        }        
+      }
+    }
+  }
+
+  if (t === '17:00')  {
+    if (tab === 2) {
+      //обработка нажатия вкл/выкл
+      if (dates22[ind+1]?.time !== '17:30') {
+        setCountCol5(countCol5+1) //для высоту ячейки с датой
+        arr = dates22.slice(0); //копируем массив dates
+        console.log(arr)
+        const newObj = {
+          date: date_str2,
+          time: '17:30',
+          proj: '',
+          save: false
+        }
+        arr.splice(ind+1, 0, newObj);
+        setDates22(arr)
+
+        //изменить чек
+        arr.map((item, index)=> {
+          value22[index] = item.save
+        })
+        setValue22(value22)          
+      } 
+      
+      if (dates22[ind+1]?.time === '17:30') {
+        if (dates22[ind+1].proj === ''){
+          setCountCol5(countCol5-1)
+          arr = dates22.slice(0); 
+          arr.splice(ind+1, 1);
+          setDates22(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value22[index] = item.save
+          })
+          setValue22(value22)           
+        }        
+      }
+    }
+  }
+
+//---------------18:00 - 23:00----------------------
+
+  if (t === '18:00')  {
+    if (tab === 3) {
+      //обработка нажатия вкл/выкл
+      if (dates222[ind+1].time === '19:00') {
+        setCountCol6(countCol6+1) //для высоту ячейки с датой
+        arr = dates222.slice(0); //копируем массив dates
+        const newObj = {
+          date: date_str2,
+          time: '18:30',
+          proj: '',
+          save: false
+        }
+        arr.splice(ind+1, 0, newObj);
+        setDates222(arr)
+
+        //изменить чек
+        arr.map((item, index)=> {
+          value23[index] = item.save
+        })
+        setValue23(value23)
+
+      } else {
+        if (dates222[ind+1].proj === ''){
+          setCountCol6(countCol6-1)
+          arr = dates222.slice(0); 
+          arr.splice(ind+1, 1);
+          setDates222(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value23[index] = item.save
+          })
+          setValue23(value23)           
+        }        
+      }
+    }
+  }
+  
+  if (t === '19:00')  {
+    if (tab === 3) {
+      //обработка нажатия вкл/выкл
+      if (dates222[ind+1].time === '20:00') {
+        setCountCol6(countCol6+1) //для высоту ячейки с датой
+        arr = dates222.slice(0); //копируем массив dates
+        const newObj = {
+          date: date_str2,
+          time: '19:30',
+          proj: '',
+          save: false
+        }
+        arr.splice(ind+1, 0, newObj);
+        setDates222(arr)
+
+        //изменить чек
+        arr.map((item, index)=> {
+          value23[index] = item.save
+        })
+        setValue23(value23)
+
+      } else {
+        if (dates222[ind+1].proj === ''){
+          setCountCol6(countCol6-1)
+          arr = dates222.slice(0); 
+          arr.splice(ind+1, 1);
+          setDates222(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value23[index] = item.save
+          })
+          setValue23(value23)           
+        }        
+      }
+    }
+  }
+  
+  if (t === '20:00')  {
+    if (tab === 3) {
+      //обработка нажатия вкл/выкл
+      if (dates222[ind+1].time === '21:00') {
+        setCountCol6(countCol6+1) //для высоту ячейки с датой
+        arr = dates222.slice(0); //копируем массив dates
+        const newObj = {
+          date: date_str2,
+          time: '20:30',
+          proj: '',
+          save: false
+        }
+        arr.splice(ind+1, 0, newObj);
+        setDates222(arr)
+
+        //изменить чек
+        arr.map((item, index)=> {
+          value23[index] = item.save
+        })
+        setValue23(value23)
+
+      } else {
+        if (dates222[ind+1].proj === ''){
+          setCountCol6(countCol6-1)
+          arr = dates222.slice(0); 
+          arr.splice(ind+1, 1);
+          setDates222(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value23[index] = item.save
+          })
+          setValue23(value23)           
+        }        
+      }
+    }
+  }
+  
+  if (t === '21:00')  {
+    if (tab === 3) {
+      //обработка нажатия вкл/выкл
+      if (dates222[ind+1].time === '22:00') {
+        setCountCol6(countCol6+1) //для высоту ячейки с датой
+        arr = dates222.slice(0); //копируем массив dates
+        const newObj = {
+          date: date_str2,
+          time: '21:30',
+          proj: '',
+          save: false
+        }
+        arr.splice(ind+1, 0, newObj);
+        setDates222(arr)
+
+        //изменить чек
+        arr.map((item, index)=> {
+          value23[index] = item.save
+        })
+        setValue23(value23)
+
+      } else {
+        if (dates222[ind+1].proj === ''){
+          setCountCol6(countCol6-1)
+          arr = dates222.slice(0); 
+          arr.splice(ind+1, 1);
+          setDates222(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value23[index] = item.save
+          })
+          setValue23(value23)           
+        }        
+      }
+    }
+  }
+  
+  if (t === '22:00')  {
+    if (tab === 3) {
+      //обработка нажатия вкл/выкл
+      if (dates222[ind+1].time === '23:00') {
+        setCountCol6(countCol6+1) //для высоту ячейки с датой
+        arr = dates222.slice(0); //копируем массив dates
+        const newObj = {
+          date: date_str2,
+          time: '22:30',
+          proj: '',
+          save: false
+        }
+        arr.splice(ind+1, 0, newObj);
+        setDates222(arr)
+
+        //изменить чек
+        arr.map((item, index)=> {
+          value23[index] = item.save
+        })
+        setValue23(value23)
+
+      } else {
+        if (dates222[ind+1].proj === ''){
+          setCountCol6(countCol6-1)
+          arr = dates222.slice(0); 
+          arr.splice(ind+1, 1);
+          setDates222(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value23[index] = item.save
+          })
+          setValue23(value23)           
+        }        
+      }
+    }
+  }
+  
+  if (t === '23:00')  {
+    if (tab === 3) {
+      //обработка нажатия вкл/выкл
+      if (dates222[ind+1]?.time !== '23:30') {
+        setCountCol6(countCol6+1) //для высоту ячейки с датой
+        arr = dates222.slice(0); //копируем массив dates
+        console.log(arr)
+        const newObj = {
+          date: date_str2,
+          time: '23:30',
+          proj: '',
+          save: false
+        }
+        arr.splice(ind+1, 0, newObj);
+        setDates222(arr)
+
+        //изменить чек
+        arr.map((item, index)=> {
+          value23[index] = item.save
+        })
+        setValue23(value23)          
+      } 
+      
+      if (dates222[ind+1]?.time === '23:30') {
+        if (dates222[ind+1].proj === ''){
+          setCountCol6(countCol6-1)
+          arr = dates222.slice(0); 
+          arr.splice(ind+1, 1);
+          setDates222(arr)
+
+          //изменить чек
+          arr.map((item, index)=> {
+            value23[index] = item.save
+          })
+          setValue23(value23)           
+        }        
+      }
+    }
+  }
+
+}
+
+
   const exampleToast = (
     <CToast autohide={false} visible={true} color="success" className="text-white align-items-center">
       <div className="d-flex">
@@ -1089,7 +1869,7 @@ const [dates222, setDates222] = useState([
     console.log("obj: ", obj)
     await delDistributionWPlan(obj)
 
-    const newArray = [].concat(dates, dates1, dates11);
+    const newArray = [].concat(dates, dates1, dates11, dates2, dates22, dates222);
     const planer_str = JSON.stringify(newArray)
 
     const d_str = new Date().toLocaleDateString()
@@ -1350,7 +2130,7 @@ const [dates222, setDates222] = useState([
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol4}px`}} >
                                           <div>{date_str2}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -1371,7 +2151,7 @@ const [dates222, setDates222] = useState([
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
-                                              <div onClick={()=>clickShowEditTime(`${item.time}`, index, 1)} >{item.time}</div>
+                                              <div onClick={()=>clickShowEditTime2(`${item.time}`, index, 1)} >{item.time}</div>
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
@@ -1402,7 +2182,7 @@ const [dates222, setDates222] = useState([
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol2}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol5}px`}} >
                                           <div>{date_str2}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -1423,7 +2203,7 @@ const [dates222, setDates222] = useState([
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
-                                              <div onClick={()=>clickShowEditTime(`${item.time}`, index, 2)} >{item.time}</div>
+                                              <div onClick={()=>clickShowEditTime2(`${item.time}`, index, 2)} >{item.time}</div>
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
@@ -1455,7 +2235,7 @@ const [dates222, setDates222] = useState([
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol3}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol6}px`}} >
                                           <div>{date_str2}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -1476,7 +2256,7 @@ const [dates222, setDates222] = useState([
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
-                                              <div onClick={()=>clickShowEditTime(`${item.time}`, index, 3)} >{item.time}</div>
+                                              <div onClick={()=>clickShowEditTime2(`${item.time}`, index, 3)} >{item.time}</div>
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
