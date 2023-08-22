@@ -155,6 +155,27 @@ class DistributionController {
             return res.status(500).json(error.message);
         }
     }
+
+    async editDistribW(req, res) { 
+        const {id} = req.params      
+        try {    
+            let exist=await Distributionw.findOne( {where: {id: id}} )
+            
+            if(!exist){
+                res.status(500).json({msg: "distrib not exist"});
+                return;
+            }
+
+            const {delivered} = req.body
+
+            const newDistrib = await Distributionw.update(
+                { delivered },
+                { where: {id: id} })
+            return res.status(200).json(newDistrib);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
 }
 
 module.exports = new DistributionController()

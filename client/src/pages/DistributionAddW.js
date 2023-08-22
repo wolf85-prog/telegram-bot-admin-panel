@@ -1006,6 +1006,7 @@ const delCategory7 = (category) => {
           count: count,
           date: date,
           image: poster,
+          selected: selected, 
         }
       });
     } 

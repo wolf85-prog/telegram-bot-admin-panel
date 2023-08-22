@@ -293,6 +293,14 @@ export const delDistributionWPlan = async (data) =>{
     }
 }
 
+export const editDistributionW = async (data, id) =>{
+    try {
+        await $host.patch(`api/distributionsw/update/${id}`, data); 
+    } catch (error) {
+        console.log("error while calling editDistributionW api",error.message);
+    }
+}
+
 
 //pretendent
 export const newPretendent = async (data) =>{

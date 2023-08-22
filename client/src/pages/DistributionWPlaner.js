@@ -22,7 +22,7 @@ import {
   CToastClose
 } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
-
+import { $host } from '../http/index';
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 
 import { 
@@ -32,7 +32,10 @@ import {
   newDistributionW, 
   getDistributionsW, 
   getDistributionsWPlan, 
-  delDistributionWPlan
+  delDistributionWPlan,
+  newPretendent,
+  getWorkerId,
+  editDistributionW,
 } from 'src/http/adminAPI';
 
 const DistributionWPlaner = () => {
@@ -40,17 +43,26 @@ const DistributionWPlaner = () => {
   //const [distributionsWork, setDistributionsWork]= useState([]);
   const { addNewDistrib, setDistributionsWork } = useUsersContext();
 
+  const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
+	const host = process.env.REACT_APP_API_URL
+  const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
+
   const projectId= location.state?.project
   const textDistr= location.state?.text
   const catDistr= location.state?.category
   const countReceiver= location.state?.count
   const dateDistrib = location.state?.date
   const imageDistrib = location.state?.image
+  const showEditButtonAdd = location.state?.showbuttons
+  const textButton = location.state?.textbutton
+  const selected = location.state?.selected
+
 
   console.log("catDistr: ", catDistr)
   console.log("countReceiver: ", countReceiver)
   console.log("dateDistrib: ", dateDistrib)
   console.log("imageDistrib: ", imageDistrib)
+  console.log("selected: ", selected)
   
 
   const [countCol, setCountCol] = useState(6)
@@ -1861,6 +1873,11 @@ const clickShowEditTime2 = (t, ind, tab) => {
   const savePlan = async() => {
     addToast(exampleToast) //ваш план сохранен
 
+    console.log("категории: ", catDistr)
+    console.log("текст: ", textDistr)
+    console.log("постер: ", imageDistrib)
+    console.log("получатели: ", selected)
+
     //удалить предыдущие записи запланированных рассылок
     const obj = {
       id: projectId, 
@@ -1902,12 +1919,80 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: `${day}.${month}.${year}`,    
         }
         //сохранение рассылки в базе данных
-        await newDistributionW(message) 
+        const dataDistrib = await newDistributionW(message) 
+        console.log("Раасылка: ", dataDistrib)
+
+        //запланировать отправку рассылок
+        setTimeout(() => {
+          selected.map(async (user, index) => {
+            console.log("Пользователю ID: " + user + " сообщение " + textDistr + " отправлено! Кнопка " + textButton + " отправлена!")
+    
+            //let client = clients.filter((client) => client.chatId === user)[0];
+    
+            //получить id специалиста по его telegramId
+            const worker = await getWorkerId(user)
+            
+            //новый претендент
+            const pretendent = {
+              projectId: projectId, 
+              workerId: worker.data, 
+              receiverId: user,        
+            }
+            const pretendentId = await newPretendent(pretendent)
+            
+            //Передаем данные боту
+            const keyboard = JSON.stringify({
+              inline_keyboard: [
+                  [
+                      {"text": textButton, callback_data:'/report'},
+                  ],
+              ]
+            });
+    
+            const keyboard2 = JSON.stringify({
+              inline_keyboard: [
+                  [
+                      {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
+                      {"text": 'Отклонить', callback_data:'/cancel'},
+                  ],
+              ]
+            });
+    
+            //отправить в телеграмм
+            let sendToTelegram
+            if (textDistr !== '') {
+              const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${textDistr.replace(/\n/g, '%0A')}`
+              console.log("url_send_msg: ", url_send_msg)
+              
+              sendToTelegram = await $host.get(url_send_msg);
+
+              const objDelivered = {
+                delivered: true
+              }
+              //обновить рассылке статус доставки
+              await editDistributionW(objDelivered, dataDistrib.id)
+            }  
+    
+            const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
+            console.log("url_send_photo: ", url_send_photo)
+            
+            let sendPhotoToTelegram
+            // if (file) {
+            //   const form = new FormData();
+            //   form.append("photo", file);
+    
+            //   sendPhotoToTelegram = await $host.post(url_send_photo, form);
+            //   console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
+            // }
+          }) 
+        }, 5000);
       }    
     })
 
     //обновить список рассылок
     addNewDistrib(true)
+
+    
     
 
     setTimeout(() => backPage(), 1000);

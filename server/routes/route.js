@@ -17,6 +17,7 @@ const { newDistribution,
     getDistributionW, 
     delDistributionW,
     delDistributionWPlan,
+    editDistribW,
 } = require('../controllers/distributionController')
 const { getReports, getReportsId } = require('../controllers/reportController')
 const { getProjects, getProjectsId } = require('../controllers/projectController')
@@ -67,6 +68,7 @@ route.get('/distributionsw/plan/get', getDistributionsWPlan)
 route.get('/distributionw/get/:id', getDistributionW)
 route.delete('/distributionsw/delete/:id', delDistributionW)
 route.post('/distributionsw/delete', delDistributionWPlan)
+route.patch('/distributionsw/update/:id', editDistribW)
 
 route.get('/reports/get', getReports)
 route.get('/reports/get/:id', getReportsId)
