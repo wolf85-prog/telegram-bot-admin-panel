@@ -93,60 +93,60 @@ const DistributionWPlaner = () => {
 
 
   const [dates, setDates] = useState([
-    {date: date_str, time: '06:00', proj: '', save: false},
-    {date: date_str, time: '07:00', proj: '', save: false},
-    {date: date_str, time: '08:00', proj: '', save: false},
-    {date: date_str, time: '09:00', proj: '', save: false},
-    {date: date_str, time: '10:00', proj: '', save: false},
-    {date: date_str, time: '11:00', proj: '', save: false},
+    {date: date_str, time: '06:00', proj: '', save: false, go: false},
+    {date: date_str, time: '07:00', proj: '', save: false, go: false},
+    {date: date_str, time: '08:00', proj: '', save: false, go: false},
+    {date: date_str, time: '09:00', proj: '', save: false, go: false},
+    {date: date_str, time: '10:00', proj: '', save: false, go: false},
+    {date: date_str, time: '11:00', proj: '', save: false, go: false},
   ])
 
 
   const [dates1, setDates1] = useState([
-    {date: date_str, time: '12:00', proj: '', save: false},
-    {date: date_str, time: '13:00', proj: '', save: false},
-    {date: date_str, time: '14:00', proj: '', save: false},
-    {date: date_str, time: '15:00', proj: '', save: false},
-    {date: date_str, time: '16:00', proj: '', save: false},
-    {date: date_str, time: '17:00', proj: '', save: false},
+    {date: date_str, time: '12:00', proj: '', save: false, go: false},
+    {date: date_str, time: '13:00', proj: '', save: false, go: false},
+    {date: date_str, time: '14:00', proj: '', save: false, go: false},
+    {date: date_str, time: '15:00', proj: '', save: false, go: false},
+    {date: date_str, time: '16:00', proj: '', save: false, go: false},
+    {date: date_str, time: '17:00', proj: '', save: false, go: false},
   ])
 
   const [dates11, setDates11] = useState([
-    {date: date_str, time: '18:00', proj: '', save: false},
-    {date: date_str, time: '19:00', proj: '', save: false},
-    {date: date_str, time: '20:00', proj: '', save: false},
-    {date: date_str, time: '21:00', proj: '', save: false},
-    {date: date_str, time: '22:00', proj: '', save: false},
-    {date: date_str, time: '23:00', proj: '', save: false},
+    {date: date_str, time: '18:00', proj: '', save: false, go: false},
+    {date: date_str, time: '19:00', proj: '', save: false, go: false},
+    {date: date_str, time: '20:00', proj: '', save: false, go: false},
+    {date: date_str, time: '21:00', proj: '', save: false, go: false},
+    {date: date_str, time: '22:00', proj: '', save: false, go: false},
+    {date: date_str, time: '23:00', proj: '', save: false, go: false},
   ])
 
 //----------------------------------------------------------
 const [dates2, setDates2] = useState([
-  {date: date_str2, time: '06:00', proj: '', save: false},
-  {date: date_str2, time: '07:00', proj: '', save: false},
-  {date: date_str2, time: '08:00', proj: '', save: false},
-  {date: date_str2, time: '09:00', proj: '', save: false},
-  {date: date_str2, time: '10:00', proj: '', save: false},
-  {date: date_str2, time: '11:00', proj: '', save: false},
+  {date: date_str2, time: '06:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '07:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '08:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '09:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '10:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '11:00', proj: '', save: false, go: false},
 ])
 
 
 const [dates22, setDates22] = useState([
-  {date: date_str2, time: '12:00', proj: '', save: false},
-  {date: date_str2, time: '13:00', proj: '', save: false},
-  {date: date_str2, time: '14:00', proj: '', save: false},
-  {date: date_str2, time: '15:00', proj: '', save: false},
-  {date: date_str2, time: '16:00', proj: '', save: false},
-  {date: date_str2, time: '17:00', proj: '', save: false},
+  {date: date_str2, time: '12:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '13:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '14:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '15:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '16:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '17:00', proj: '', save: false, go: false},
 ])
 
 const [dates222, setDates222] = useState([
-  {date: date_str2, time: '18:00', proj: '', save: false},
-  {date: date_str2, time: '19:00', proj: '', save: false},
-  {date: date_str2, time: '20:00', proj: '', save: false},
-  {date: date_str2, time: '21:00', proj: '', save: false},
-  {date: date_str2, time: '22:00', proj: '', save: false},
-  {date: date_str2, time: '23:00', proj: '', save: false},
+  {date: date_str2, time: '18:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '19:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '20:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '21:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '22:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '23:00', proj: '', save: false, go: false},
 ])
 
 //----------------------------------------------------------
@@ -1878,10 +1878,12 @@ const clickShowEditTime2 = (t, ind, tab) => {
     console.log("постер: ", imageDistrib)
     console.log("получатели: ", selected)
 
+    const d_str = new Date().toLocaleDateString()
+
     //удалить предыдущие записи запланированных рассылок
     const obj = {
       id: projectId, 
-      date: dateDistrib
+      date: d_str
     }
     console.log("obj: ", obj)
     await delDistributionWPlan(obj)
@@ -1889,7 +1891,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     const newArray = [].concat(dates, dates1, dates11, dates2, dates22, dates222);
     const planer_str = JSON.stringify(newArray)
 
-    const d_str = new Date().toLocaleDateString()
+    
     const newObj = {
       "datestart": d_str,
       "times": planer_str
@@ -1903,8 +1905,9 @@ const clickShowEditTime2 = (t, ind, tab) => {
     const year = d.getFullYear();
 
     newArray.forEach(async (item)=> {
-      if (item.save === true && item.proj === projectName) {
-        console.log("Дата старта: ", Date.parse(`${year}-${item.date.split[1]}-${item.date.split[0]}T${item.time}:00`))
+      if (item.save === true && item.proj === projectName && item.go === false) {
+        console.log("Дата старта: ", `${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`)
+        
         //новая рассылка
         const message = {
           //name: 'Рассылка', 
@@ -1913,90 +1916,104 @@ const clickShowEditTime2 = (t, ind, tab) => {
           project: `${item.date} | ${projectName}`, 
           projectId: projectId, 
           receivers: str_cats, 
-          datestart: Date.parse(`2023-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`), 
+          datestart: Date.parse(`${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`), 
           delivered: 'false',  
           count: countReceiver,
           date: `${day}.${month}.${year}`,    
         }
         //сохранение рассылки в базе данных
         const dataDistrib = await newDistributionW(message) 
-        console.log("Раасылка: ", dataDistrib)
 
-        //запланировать отправку рассылок
-        setTimeout(() => {
-          selected.map(async (user, index) => {
-            console.log("Пользователю ID: " + user + " сообщение " + textDistr + " отправлено! Кнопка " + textButton + " отправлена!")
-    
-            //let client = clients.filter((client) => client.chatId === user)[0];
-    
-            //получить id специалиста по его telegramId
-            const worker = await getWorkerId(user)
-            
-            //новый претендент
-            const pretendent = {
-              projectId: projectId, 
-              workerId: worker.data, 
-              receiverId: user,        
-            }
-            const pretendentId = await newPretendent(pretendent)
-            
-            //Передаем данные боту
-            const keyboard = JSON.stringify({
-              inline_keyboard: [
-                  [
-                      {"text": textButton, callback_data:'/report'},
-                  ],
-              ]
-            });
-    
-            const keyboard2 = JSON.stringify({
-              inline_keyboard: [
-                  [
-                      {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
-                      {"text": 'Отклонить', callback_data:'/cancel'},
-                  ],
-              ]
-            });
-    
-            //отправить в телеграмм
-            let sendToTelegram
-            if (textDistr !== '') {
-              const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${textDistr.replace(/\n/g, '%0A')}`
-              console.log("url_send_msg: ", url_send_msg)
+        const d1 = Date.parse(`${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`);
+        const d2 = new Date().getTime() //- 10800000
+        //console.log()
+        
+        const date1 = new Date(d1)
+        const dateNow = new Date(d2)
+        console.log("date1: ", date1)
+        console.log("dateNow: ", dateNow)
+        
+        const milliseconds = Math.floor((date1 - dateNow));       
+        console.log("milliseconds: ", milliseconds)
+
+        if (milliseconds > 0) {
+          //запланировать отправку рассылок
+          setTimeout(() => {
+            selected.map(async (user, index) => {
+              console.log("Пользователю ID: " + user + " сообщение " + textDistr + " отправлено! Кнопка " + textButton + " отправлена!")
+      
+              //let client = clients.filter((client) => client.chatId === user)[0];
+      
+              //получить id специалиста по его telegramId
+              const worker = await getWorkerId(user)
               
-              sendToTelegram = await $host.get(url_send_msg);
-
-              const objDelivered = {
-                delivered: true
+              //новый претендент
+              const pretendent = {
+                projectId: projectId, 
+                workerId: worker.data, 
+                receiverId: user,        
               }
-              //обновить рассылке статус доставки
-              await editDistributionW(objDelivered, dataDistrib.id)
-            }  
-    
-            const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
-            console.log("url_send_photo: ", url_send_photo)
-            
-            let sendPhotoToTelegram
-            // if (file) {
-            //   const form = new FormData();
-            //   form.append("photo", file);
-    
-            //   sendPhotoToTelegram = await $host.post(url_send_photo, form);
-            //   console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
-            // }
-          }) 
-        }, 5000);
+              const pretendentId = await newPretendent(pretendent)
+              
+              //Передаем данные боту
+              const keyboard = JSON.stringify({
+                inline_keyboard: [
+                    [
+                        {"text": textButton, callback_data:'/report'},
+                    ],
+                ]
+              });
+      
+              const keyboard2 = JSON.stringify({
+                inline_keyboard: [
+                    [
+                        {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
+                        {"text": 'Отклонить', callback_data:'/cancel'},
+                    ],
+                ]
+              });
+      
+              //отправить в телеграмм
+              let sendToTelegram
+              if (textDistr !== '') {
+                const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${textDistr.replace(/\n/g, '%0A')}`
+                //console.log("url_send_msg: ", url_send_msg)
+                
+                //sendToTelegram = await $host.get(url_send_msg);
+
+                // const objDelivered = {
+                //   delivered: true
+                // }
+
+                ////обновить рассылке статус отправки
+                //await editDistributionW(objDelivered, dataDistrib.id)
+              }  
+      
+              const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
+              //console.log("url_send_photo: ", url_send_photo)
+              
+              let sendPhotoToTelegram
+              // if (file) {
+              //   const form = new FormData();
+              //   form.append("photo", file);
+      
+              //   sendPhotoToTelegram = await $host.post(url_send_photo, form);
+              //   console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
+              // }
+
+              //обновить список рассылок
+              addNewDistrib(true)
+            }) 
+          }, milliseconds);
+        }
       }    
     })
 
     //обновить список рассылок
     addNewDistrib(true)
 
-    
-    
 
     setTimeout(() => backPage(), 1000);
-    //backPage()
   }
 
   

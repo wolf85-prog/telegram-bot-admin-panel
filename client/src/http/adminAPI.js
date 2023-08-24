@@ -306,7 +306,6 @@ export const editDistributionW = async (data, id) =>{
 export const newPretendent = async (data) =>{
     try {
         let response = await $host.post(`api/pretendent/add`, data);
-        console.log(response.data);
         return response.data; 
     } catch (error) {
         console.log("error while calling newDistribution api",error.message);
