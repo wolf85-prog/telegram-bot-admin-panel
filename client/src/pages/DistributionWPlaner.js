@@ -1892,7 +1892,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     await newPlan(newObj2);
 
     let str_cats = catDistr.map(item => item).join(',')
-    console.log("Plan Category: ", str_cats)
+    //console.log("Plan Category: ", str_cats)
 
     const d = new Date();
     const year = d.getFullYear();
@@ -1920,7 +1920,6 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
         const d1 = Date.parse(`${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`);
         const d2 = new Date().getTime() //- 10800000
-        //console.log()
         
         const date1 = new Date(d1)
         const dateNow = new Date(d2)
@@ -1973,27 +1972,27 @@ const clickShowEditTime2 = (t, ind, tab) => {
                 const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${textDistr.replace(/\n/g, '%0A')}`
                 //console.log("url_send_msg: ", url_send_msg)
                 
-                //sendToTelegram = await $host.get(url_send_msg);
+                sendToTelegram = await $host.get(url_send_msg);
 
-                // const objDelivered = {
-                //   delivered: true
-                // }
+                const objDelivered = {
+                  delivered: true
+                }
 
-                ////обновить рассылке статус отправки
-                //await editDistributionW(objDelivered, dataDistrib.id)
+                //обновить рассылке статус отправки
+                await editDistributionW(objDelivered, dataDistrib.id)
               }  
       
               const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
               //console.log("url_send_photo: ", url_send_photo)
               
               let sendPhotoToTelegram
-              // if (file) {
-              //   const form = new FormData();
-              //   form.append("photo", file);
+              if (file) {
+                const form = new FormData();
+                form.append("photo", file);
       
-              //   sendPhotoToTelegram = await $host.post(url_send_photo, form);
-              //   console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
-              // }
+                sendPhotoToTelegram = await $host.post(url_send_photo, form);
+                console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
+              }
 
               //обновить список рассылок
               addNewDistrib(true)
@@ -2030,9 +2029,6 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
     setTimeout(() => backPage(), 1000);
   }
-
-  
-
 
   return (
     <div className='dark-theme'>
