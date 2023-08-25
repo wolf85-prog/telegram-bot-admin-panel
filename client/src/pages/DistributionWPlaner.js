@@ -91,6 +91,8 @@ const DistributionWPlaner = () => {
 	const day2 = String(d.getDate()).padStart(2, "0");
   const date_str2 = `${day2}.${month2}`;
 
+  const year = d.getFullYear();
+
 
   const [dates, setDates] = useState([
     {date: date_str, time: '06:00', proj: '', save: false, go: false},
@@ -190,41 +192,18 @@ const [dates222, setDates222] = useState([
     const fetchData = async () => {
       let plan = await getPlan(new Date().toLocaleDateString());
       console.log("plan: ", plan)
+
+      let plan2 = await getPlan(`${day2}.${month2}.${year}`);
+      console.log("plan2: ", plan2)
       
-      const d = new Date() //Текущая дата и время
+      //const d = new Date() //Текущая дата и время
       const chas = d.getHours();
       const min = String(d.getMinutes()).padStart(2, "0");
       console.log("time: " + chas + ":" + min)
 
       //открываем план
       if (plan !== null) {
-        const temp = JSON.parse(plan.times)
-        console.log("planTimes: ", temp)
-
-        const planTimes = []
-        const planTimes2 = []
-
-        let indexes = [];
-        temp.forEach((item, index) => {
-          if (item.time === '06:00') indexes.push(index)
-        });
-
-        //1
-        temp.forEach((item, index) => {
-          if (index < indexes[1]) {
-            planTimes.push(item)
-          }
-        });
-
-        //2
-        temp.forEach((item, index) => {
-          if (index >= indexes[1]) {
-            planTimes2.push(item)
-          }
-        });
-
-        console.log("1-й массив", planTimes)
-        console.log("2-й массив", planTimes2)
+        const planTimes = JSON.parse(plan.times)
 
         const ind1 = planTimes.findIndex(date => date.time === '12:00')
         const ind2 = planTimes.findIndex(date => date.time === '18:00')
@@ -232,14 +211,6 @@ const [dates222, setDates222] = useState([
         const times = planTimes.slice(0, ind1);
         const times2 = planTimes.slice(ind1, ind2);
         const times3 = planTimes.slice(ind2, planTimes.length); 
-
-        //2-ц массив
-        const ind3 = planTimes2.findIndex(date => date.time === '12:00')
-        const ind4 = planTimes2.findIndex(date => date.time === '18:00')
-
-        const times4 = planTimes2.slice(0, ind1);
-        const times5 = planTimes2.slice(ind1, ind2);
-        const times6 = planTimes2.slice(ind2, planTimes2.length);
 
         times.map((time, index)=> {
           if (time.save) {
@@ -262,46 +233,56 @@ const [dates222, setDates222] = useState([
           }
         })
 
-        //2-й день
-        times4.map((time, index)=> {
-          if (time.save) {
-            value21[index] = true
-            setValue21(value21)
-          }
-        })
-
-        times5.map((time, index)=> {
-          if (time.save) {
-            value22[index] = true
-            setValue22(value22)
-          }
-        })
-
-        times6.map((time, index)=> {
-          if (time.save) {
-            value23[index] = true
-            setValue23(value23)
-          }
-        })
-
-
         setDates(times)
         setDates1(times2)
         setDates11(times3)
 
         setCountCol(ind1)
         setCountCol2(ind2 - ind1)
-        setCountCol3(planTimes.length - ind2)   
+        setCountCol3(planTimes.length - ind2) 
+      }
 
-        //2
-        setDates2(times4)
-        setDates22(times5)
-        setDates222(times6)
+      //2-й день
+      if (plan2 !== null) {
+        const planTimes2 = JSON.parse(plan2.times)
 
-        setCountCol4(ind3)
-        setCountCol5(ind4 - ind3)
-        setCountCol6(planTimes2.length - ind4) 
-      } 
+        const ind1 = planTimes2.findIndex(date => date.time === '12:00')
+        const ind2 = planTimes2.findIndex(date => date.time === '18:00')
+
+        const times = planTimes2.slice(0, ind1);
+        const times2 = planTimes2.slice(ind1, ind2);
+        const times3 = planTimes2.slice(ind2, planTimes2.length); 
+
+        times.map((time, index)=> {
+          if (time.save) {
+            value21[index] = true
+            setValue21(value21)
+          }
+        })
+
+        times2.map((time, index)=> {
+          if (time.save) {
+            value22[index] = true
+            setValue22(value22)
+          }
+        })
+
+        times3.map((time, index)=> {
+          if (time.save) {
+            value23[index] = true
+            setValue23(value23)
+          }
+        })
+
+        setDates2(times)
+        setDates22(times2)
+        setDates222(times3)
+
+        setCountCol4(ind1)
+        setCountCol5(ind2 - ind1)
+        setCountCol6(planTimes2.length - ind2) 
+
+      }        
 
       //блокируем прошедшее время
       dates.map((time, index)=> {
@@ -1878,7 +1859,9 @@ const clickShowEditTime2 = (t, ind, tab) => {
     console.log("постер: ", imageDistrib)
     console.log("получатели: ", selected)
 
-    const d_str = new Date().toLocaleDateString()
+    const d_str = new Date()
+    const d_str2 = new Date() 
+    d_str2.setDate(d_str2.getDate() + 1)
 
     //удалить предыдущие записи запланированных рассылок
     const obj = {
@@ -1888,15 +1871,25 @@ const clickShowEditTime2 = (t, ind, tab) => {
     console.log("obj: ", obj)
     await delDistributionWPlan(obj)
 
-    const newArray = [].concat(dates, dates1, dates11, dates2, dates22, dates222);
+    const newArray = [].concat(dates, dates1, dates11);
     const planer_str = JSON.stringify(newArray)
 
-    
+    const newArray2 = [].concat(dates2, dates22, dates222);
+    const planer_str2 = JSON.stringify(newArray2)
+
+    //1-й день
     const newObj = {
-      "datestart": d_str,
+      "datestart": d_str.toLocaleDateString(),
       "times": planer_str
     }
     await newPlan(newObj);
+
+    //2-й день
+    const newObj2 = {
+      "datestart": d_str2.toLocaleDateString(),
+      "times": planer_str2
+    }
+    await newPlan(newObj2);
 
     let str_cats = catDistr.map(item => item).join(',')
     console.log("Plan Category: ", str_cats)
@@ -1904,6 +1897,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     const d = new Date();
     const year = d.getFullYear();
 
+    //массив дат 1-го дня
     newArray.forEach(async (item)=> {
       if (item.save === true && item.proj === projectName && item.go === false) {
         console.log("Дата старта: ", `${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`)
@@ -2009,6 +2003,27 @@ const clickShowEditTime2 = (t, ind, tab) => {
       }    
     })
 
+    //массив дат 2-го дня
+    newArray2.forEach(async (item)=> {
+      if (item.save === true && item.proj === projectName && item.go === false) {
+        //новая рассылка
+        const message = {
+          //name: 'Рассылка', 
+          text: textDistr, 
+          image: imageDistrib ? imageDistrib : '', 
+          project: `${item.date} | ${projectName}`, 
+          projectId: projectId, 
+          receivers: str_cats, 
+          datestart: Date.parse(`${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`), 
+          delivered: 'false',  
+          count: countReceiver,
+          date: `${day2}.${month2}.${year}`,    
+        }
+        //сохранение рассылки в базе данных
+        const dataDistrib2 = await newDistributionW(message)
+      }
+    })
+
     //обновить список рассылок
     addNewDistrib(true)
 
@@ -2086,7 +2101,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none"}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -2146,7 +2161,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none"}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -2199,7 +2214,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -2257,7 +2272,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none"}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -2309,7 +2324,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none"}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -2362,7 +2377,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
