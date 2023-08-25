@@ -1982,17 +1982,9 @@ const clickShowEditTime2 = (t, ind, tab) => {
                 await editDistributionW(objDelivered, dataDistrib.id)
               }  
       
-              const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
-              //console.log("url_send_photo: ", url_send_photo)
-              
-              let sendPhotoToTelegram
-              if (file) {
-                const form = new FormData();
-                form.append("photo", file);
-      
-                sendPhotoToTelegram = await $host.post(url_send_photo, form);
-                console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
-              }
+              const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${imageDistrib}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
+              //await $host.post(url_send_photo);
+              await $host.get(url_send_photo);
 
               //обновить список рассылок
               addNewDistrib(true)
