@@ -1983,6 +1983,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
               }  
       
               const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${imageDistrib}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
+              console.log("url_send_photo: ", url_send_photo)
               //await $host.post(url_send_photo);
               await $host.get(url_send_photo);
 
