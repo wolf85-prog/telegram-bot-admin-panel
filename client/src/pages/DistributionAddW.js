@@ -145,10 +145,8 @@ const DistributionAddW = () => {
       let projects = await getProjects3();
       console.log("projects planer: ", projects)
 
-      setProjects(projects)
-    }
-
-    const fetchDistrib = async () => {
+      setProjects(projects) 
+    
       //для редактирования рассылки
       if (projId) {
 
@@ -161,7 +159,7 @@ const DistributionAddW = () => {
         console.log("Сохраненная дата: ", datestart)
         
         const distrib = await getDistributionW(distribId)
-        onHandlingProject(distrib.projectId, true)
+        onHandlingProject(distrib.projectId, true, projects)
         //для текстового поля
         setText(distrib.text)
         //для телефона
@@ -171,8 +169,12 @@ const DistributionAddW = () => {
       } 
     }
 
+    const fetchDistrib = async () => {
+      
+    }
+
     fetchData();
-    fetchDistrib();
+    //fetchDistrib();
       
   },[])
 
@@ -386,15 +388,30 @@ const getCategoryFromNotion = async(projectId) => {
 
 
 //функция обработки изменения текущего проекта
-const onHandlingProject = async(projectId, save) => {
-
+const onHandlingProject = async(projectId, save, projects) => {
+  let arrProjects = []
   //для планировщика рассылок
   setProj(projectId)
   
   //для селектов (value)
-  setValueProject(projectId) 
+  setValueProject(projectId)
+  
+  //console.log("projects: ", projects)
+  projects.map((project) => {
+    if (project != null) {
+      const d = new Date(project.datestart);
+      const month = String(d.getMonth()+1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
 
-  const obj = contacts.find((item)=>item.value === projectId)
+      const newObj = {
+        label: `${day}.${month} | ${project.name}`, 
+        value: project.id,
+      }
+      arrProjects.push(newObj)
+    }    
+  })
+
+  const obj = arrProjects.find((item)=>item.value === projectId)
   console.log("obj: ", obj)
   setLabelName(obj)
 
