@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from 'react'
+import React, { Suspense, useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { 
   CContainer, 
@@ -15,6 +15,10 @@ import {
   CCardHeader,
   CCol,
   CRow,
+  CToast,
+  CToastBody,
+  CToaster,
+  CToastClose
 } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
@@ -28,6 +32,18 @@ const DistributionW = () => {
   const [distributionsWork, setDistributionsWork]= useState([]);
   const [loading, setLoading]= useState(true);
   const [proj, setProj] = useState('');
+
+  const [toast, addToast] = useState(0)
+  const toaster = useRef()
+
+  const exampleToast = (
+    <CToast autohide={true} visible={true} color="success" className="text-white align-items-center">
+      <div className="d-flex">
+        <CToastBody>Рассылка успешно удалена!</CToastBody>
+        <CToastClose className="me-2 m-auto" white />
+      </div>
+    </CToast>
+  )
 
   //get Distribution
   useEffect(() => {
@@ -74,9 +90,12 @@ const DistributionW = () => {
 
   {/* Удаление рассылки */}
   const removeDescription = async(desk) => {
+    addToast(exampleToast) //ваша рассылка удалена
+    
     setDistributionsWork(distributionsWork.filter(p => p.id !== desk.id))
+    
     //удаление сообщения в базе данных
-    await delDistributionW(desk.id)
+    await delDistributionW(desk.id)  
   }
 
 
@@ -92,6 +111,7 @@ const DistributionW = () => {
                   <>
                     <h2>Рассылки</h2>
                       <Link to={'/distributionw_add'}><CButton color="primary" size="lg" >Новая рассылка</CButton></Link>
+                      <CToaster ref={toaster} push={toast} placement="top-end" /> 
                       <br />
                       <br />
                       <CRow>
@@ -172,6 +192,7 @@ const DistributionW = () => {
                                         <CButton color="light" onClick={() => removeDescription(item)}>
                                           <img src={deleteIcon} alt='' width='10px' />
                                         </CButton>
+
                                       </CTableDataCell>
                                     </CTableRow>
                                   ))}
