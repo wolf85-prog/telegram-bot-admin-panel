@@ -388,7 +388,7 @@ const getCategoryFromNotion = async(projectId) => {
 
 
 //функция обработки изменения текущего проекта
-const onHandlingProject = async(projectId, save, projects) => {
+const onHandlingProject = async(projectId, save) => {
   let arrProjects = []
   //для планировщика рассылок
   setProj(projectId)
@@ -397,21 +397,21 @@ const onHandlingProject = async(projectId, save, projects) => {
   setValueProject(projectId)
   
   //console.log("projects: ", projects)
-  projects.map((project) => {
-    if (project != null) {
-      const d = new Date(project.datestart);
-      const month = String(d.getMonth()+1).padStart(2, "0");
-      const day = String(d.getDate()).padStart(2, "0");
+  // projects.map((project) => {
+  //   if (project != null) {
+  //     const d = new Date(project.datestart);
+  //     const month = String(d.getMonth()+1).padStart(2, "0");
+  //     const day = String(d.getDate()).padStart(2, "0");
 
-      const newObj = {
-        label: `${day}.${month} | ${project.name}`, 
-        value: project.id,
-      }
-      arrProjects.push(newObj)
-    }    
-  })
+  //     const newObj = {
+  //       label: `${day}.${month} | ${project.name}`, 
+  //       value: project.id,
+  //     }
+  //     arrProjects.push(newObj)
+  //   }    
+  // })
 
-  const obj = arrProjects.find((item)=>item.value === projectId)
+  const obj = contacts.find((item)=>item.value === projectId)
   console.log("obj: ", obj)
   setLabelName(obj)
 
@@ -1064,7 +1064,7 @@ const delCategory7 = (category) => {
 
       
       selected.map(async (user, index) => {
-        console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
+        //console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
 
         let client = clients.filter((client) => client.chatId === user)[0];
 
@@ -1101,16 +1101,17 @@ const delCategory7 = (category) => {
         let sendToTelegram
         if (text !== '') {
           const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
-          console.log("url_send_msg: ", url_send_msg)
+          //console.log("url_send_msg: ", url_send_msg)
           sendToTelegram = await $host.get(url_send_msg);
-          console.log('sendToTelegram: ', sendToTelegram)
+          //console.log('sendToTelegram: ', sendToTelegram)
         }  
 
         const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
         //console.log("url_send_photo: ", url_send_photo)
 
+
         const url_send_photo2 = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${img}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
-        console.log("url_send_photo2: ", url_send_photo2)
+        //console.log("url_send_photo2: ", url_send_photo2)
 
         let sendPhotoToTelegram
         if (file) {
