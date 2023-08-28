@@ -1170,11 +1170,10 @@ const delCategory7 = (category) => {
         // let response = await getDistributionsW();
         // console.log("distribution new add: ", response.length)
         // setDistributionsWork(response)
-
-        //обновить список рассылок
-        addNewDistrib(true)
-
       })
+
+      //обновить список рассылок
+      addNewDistrib(true)
 
       setSelected([])
       setSendToAdmin(false)
@@ -1184,7 +1183,8 @@ const delCategory7 = (category) => {
       setVisible(true)
       setValue('')
 
-      navigate('/distributionw');
+      setTimeout(() => navigate('/distributionw'), 1000);
+
     }
     else {
       setVisibleModal(!visibleModal)
