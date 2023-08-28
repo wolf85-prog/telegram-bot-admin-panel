@@ -63,7 +63,7 @@ const DistributionAddW = () => {
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
   const { users: clients, workers } = useUsersContext();
-  const { addNewMessage, setDistributionsWork } = useUsersContext();
+  const { addNewDistrib, addNewMessage, setDistributionsWork } = useUsersContext();
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]); 
   const [contacts2, setContacts2]= useState([]);
@@ -1028,8 +1028,9 @@ const delCategory7 = (category) => {
       });
     } 
   }
-
+//==============================================================================================
   {/* Отправка рассылки */}
+//==============================================================================================
   const onSendText = async() => {
     console.log("категории: ", categoryAll)
     console.log("текст: ", text)
@@ -1166,9 +1167,12 @@ const delCategory7 = (category) => {
         }  
 
         //обновить список рассылок
-        let response = await getDistributionsW();
-        console.log("distribution new add: ", response.length)
-        setDistributionsWork(response)
+        // let response = await getDistributionsW();
+        // console.log("distribution new add: ", response.length)
+        // setDistributionsWork(response)
+
+        //обновить список рассылок
+        addNewDistrib(true)
 
       })
 
