@@ -118,7 +118,7 @@ class PlanController {
 
                     //отправить в телеграмм
                     let sendToTelegram
-                    if (textDistr !== '') {
+                    if (text !== '') {
                         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
                         //console.log("url_send_msg: ", url_send_msg)
                         
