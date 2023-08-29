@@ -52,6 +52,17 @@ const start = async () => {
         httpsServer.listen(port, async() => {
             console.log('HTTPS Server Admin-panel running on port ' + port);
 
+            const d = new Date();
+            const month = String(d.getMonth()+1).padStart(2, "0");
+            const day = String(d.getDate()).padStart(2, "0");
+            const date_str = `${day}.${month}`;
+            
+            d.setDate(d.getDate() + 1);
+            const month2 = String(d.getMonth()+1).padStart(2, "0");
+            const day2 = String(d.getDate()).padStart(2, "0");
+            const date_str2 = `${day2}.${month2}`;
+            const year = d.getFullYear();
+
             console.log("Запускаю планировщик задач...")
             const plan = await Plan.findOne({
                 where: {datestart: new Date().toLocaleDateString()}
