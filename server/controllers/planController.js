@@ -64,7 +64,19 @@ class PlanController {
                     console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
                     
                     //обновить план в БД
-                    this.newPlan(plan)
+                    //this.newPlan(plan)
+                    
+                    // First try to find the record
+                    const foundItem = await Plan.findOne({ where: {datestart: plan.datestart} });
+
+                    if (!foundItem) {
+                        // Item not found, create a new one
+                        const newPlan = await Plan.create(plan.datestart, plan.times)
+                        return res.status(200).json(newPlan);
+                    }
+
+                    // Found an item, update it
+                    const item = await Plan.update({times: plan.times},{where: {datestart: plan.datestart}});
                 })
             }, 10000)         
            
