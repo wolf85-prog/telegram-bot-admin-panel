@@ -140,7 +140,7 @@ class PlanController {
                         }
             
                         const newDistrib = await Distributionw.update(
-                            delivered,
+                            { delivered },
                             { where: {id: id} })
                         return res.status(200).json(newDistrib);
                     }
