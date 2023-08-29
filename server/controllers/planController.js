@@ -2,6 +2,10 @@ const {Plan} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const uuid = require('uuid')
 const path = require('path')
+//const { getProjectCrmId } = require('./../../client/src/http/adminAPI')
+const { $host } = require('./../../client/src/http/index')
+
+const token = process.env.TELEGRAM_API_TOKEN_WORK
 
 class PlanController {
 
@@ -77,6 +81,53 @@ class PlanController {
 
                     // Found an item, update it
                     const item = await Plan.update({times: plan.times},{where: {datestart: plan.datestart}});
+
+
+
+                    //получить id специалиста по его telegramId
+                    //const worker = await getWorkerId(user)
+                    
+                    //новый претендент
+                    // const pretendent = {
+                    //     projectId: projectId, 
+                    //     workerId: worker.data, 
+                    //     receiverId: user,        
+                    // }
+                    // const pretendentId = await newPretendent(pretendent)
+              
+                    //Передаем данные боту
+                    const keyboard = JSON.stringify({
+                        inline_keyboard: [
+                            [
+                                {"text": textButton, callback_data:'/report'},
+                            ],
+                        ]
+                    });
+                
+                    const keyboard2 = JSON.stringify({
+                        inline_keyboard: [
+                            [
+                                {"text": 'Принять', callback_data:'/accept '}, //  + pretendent.id
+                                {"text": 'Отклонить', callback_data:'/cancel'},
+                            ],
+                        ]
+                    });
+
+                    //отправить в телеграмм
+                    let sendToTelegram
+                    if (textDistr !== '') {
+                        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+                        //console.log("url_send_msg: ", url_send_msg)
+                        
+                        sendToTelegram = await $host.get(url_send_msg);
+
+                        const objDelivered = {
+                        delivered: true
+                        }
+
+                        //обновить рассылке статус отправки
+                        //await editDistributionW(objDelivered, dataDistrib.id)
+                    }
                 })
             }, 10000)         
            
