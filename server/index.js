@@ -67,12 +67,12 @@ const start = async () => {
             const plan = await Plan.findOne({
                 where: {datestart: `${day}.${month}.${year}`}
             })
-            console.log("plan: ", plan.data)
+            console.log("plan: ", plan.dataValues.times)
 
             const plan2 = await Plan.findOne({
                 where: {datestart: `${day2}.${month2}.${year}`}
             })
-            console.log("plan2: ", plan2.data)
+            console.log("plan2: ", plan2.dataValues.times)
         });
 
     } catch (error) {
