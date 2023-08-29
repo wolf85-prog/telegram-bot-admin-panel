@@ -3,7 +3,10 @@ const ApiError = require('../error/ApiError')
 const uuid = require('uuid')
 const path = require('path')
 //const { getProjectCrmId } = require('./../../client/src/http/adminAPI')
-const { $host } = require('./../../client/src/http/index')
+//const { $host } = require('./../../client/src/http/index')
+
+//fetch api
+const fetch = require('node-fetch');
 
 const token = process.env.TELEGRAM_API_TOKEN_WORK
 
@@ -119,7 +122,8 @@ class PlanController {
                         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
                         //console.log("url_send_msg: ", url_send_msg)
                         
-                        sendToTelegram = await $host.get(url_send_msg);
+                        //sendToTelegram = await $host.get(url_send_msg);
+                        sendToTelegram = await fetch(url_send_msg);
 
                         const objDelivered = {
                         delivered: true
