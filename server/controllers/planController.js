@@ -123,7 +123,7 @@ class PlanController {
                         //console.log("url_send_msg: ", url_send_msg)
                         
                         //sendToTelegram = await $host.get(url_send_msg);
-                        //sendToTelegram = await fetch(url_send_msg);
+                        sendToTelegram = await fetch(url_send_msg);
 
                         const objDelivered = {
                         delivered: true
