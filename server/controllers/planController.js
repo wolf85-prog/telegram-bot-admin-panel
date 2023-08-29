@@ -8,6 +8,7 @@ const path = require('path')
 const fetch = require('node-fetch');
 
 const token = process.env.TELEGRAM_API_TOKEN_WORK
+const host_api_bottest = process.env.BOTTEST_API_URL
 
 class PlanController {
 
@@ -63,7 +64,7 @@ class PlanController {
 
     //get plans
     async addTimer(req, res) {
-        const {users, plan, text, textButton, time, id} = req.body
+        const {users, plan, text, textButton, time, id, projId} = req.body
         try {  
             setTimeout(() => {
                 users.map(async (user, index) => {
@@ -88,13 +89,14 @@ class PlanController {
 
                     //получить id специалиста по его telegramId
                     //const worker = await getWorkerId(user)
+                    const worker = await fetch(host_api_bottest + '/workers/chat/' + user);
                     
                     //новый претендент
-                    // const pretendent = {
-                    //     projectId: projectId, 
-                    //     workerId: worker.data, 
-                    //     receiverId: user,        
-                    // }
+                    const pretendent = {
+                        projectId: projId, 
+                        workerId: worker.data, 
+                        receiverId: user,        
+                    }
                     // const pretendentId = await newPretendent(pretendent)
               
                     //Передаем данные боту
