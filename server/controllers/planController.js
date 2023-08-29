@@ -10,6 +10,8 @@ const fetch = require('node-fetch');
 const token = process.env.TELEGRAM_API_TOKEN_WORK
 const host_api_bottest = process.env.BOTTEST_API_URL
 
+let tasks = []
+
 class PlanController {
 
     //add plan
@@ -66,7 +68,15 @@ class PlanController {
     async addTimer(req, res) {
         const {users, plan, text, textButton, time, id, projId} = req.body
         try {  
-            setTimeout(() => {
+            
+            const temp = tasks.filter((item) => item.projectId === projId)
+            temp.forEach((tmp)=> {
+                clearTimeout(tmp.task)
+                console.log("Задача удалена! ")   
+            })
+            
+            console.log("!!!!Планирую запуск отправки собщения...!!!!")
+            const timerId = setTimeout(() => {
                 users.map(async (user, index) => {
                     console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
                     
@@ -145,7 +155,14 @@ class PlanController {
                         return res.status(200).json(newDistrib);
                     }
                 })
-            }, 10000)         
+            }, 10000)  
+            
+            const obj = {
+                task: timerId,
+                projectId: projId
+            }
+
+            tasks.push(obj)
            
             //return res.status(200).json(plan);
         } catch (error) {
