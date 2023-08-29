@@ -65,14 +65,14 @@ const start = async () => {
 
             console.log("Запускаю планировщик задач...")
             const plan = await Plan.findOne({
-                where: {datestart: new Date().toLocaleDateString()}
+                where: {datestart: `${day}.${month}.${year}`}
             })
-            console.log("plan: ", plan)
+            console.log("plan: ", plan.data)
 
             const plan2 = await Plan.findOne({
                 where: {datestart: `${day2}.${month2}.${year}`}
             })
-            console.log("plan2: ", plan2)
+            console.log("plan2: ", plan2.data)
         });
 
     } catch (error) {
