@@ -6,7 +6,7 @@ const path = require('path')
 //const { $host } = require('./../../client/src/http/index')
 
 //fetch api
-//const fetch = require('node-fetch');
+const fetch = require('node-fetch');
 
 const token = process.env.TELEGRAM_API_TOKEN_WORK
 
