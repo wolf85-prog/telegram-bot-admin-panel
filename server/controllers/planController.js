@@ -6,7 +6,7 @@ const path = require('path')
 //const { $host } = require('./../../client/src/http/index')
 
 //fetch api
-const fetch = require('node-fetch');
+//const fetch = require('node-fetch');
 
 const token = process.env.TELEGRAM_API_TOKEN_WORK
 
@@ -123,7 +123,7 @@ class PlanController {
                         //console.log("url_send_msg: ", url_send_msg)
                         
                         //sendToTelegram = await $host.get(url_send_msg);
-                        sendToTelegram = await fetch(url_send_msg);
+                        //sendToTelegram = await fetch(url_send_msg);
 
                         const objDelivered = {
                         delivered: true
