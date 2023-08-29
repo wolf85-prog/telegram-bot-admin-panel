@@ -54,6 +54,22 @@ class PlanController {
             return res.status(500).json(error.message);
         }
     }
+
+    //get plans
+    async addTimer(req, res) {
+        const {users, plan, text, textButton, time} = req.body
+        try {  
+            setTimeout(() => {
+                users.map(async (user, index) => {
+                    console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
+                })
+            }, time)         
+           
+            //return res.status(200).json(plan);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
 }
 
 module.exports = new PlanController()

@@ -29,7 +29,7 @@ const { newConversationWorker, getConversationWorker } = require('../controllers
 const { getWorkers, getWorker, editWorker} = require('../controllers/workersController')
 const { newPretendent, getPretendent } = require('../controllers/pretendentController')
 
-const { newPlan, getPlan } = require('../controllers/planController')
+const { newPlan, getPlan, addTimer } = require('../controllers/planController')
 
 //const { sendPoster } = require('../controllers/posterController')
 
@@ -103,6 +103,7 @@ route.get('/pretendent/get/:id', getPretendent)
 //------------------PLAN-----------------------------------
 route.post('/plan/add', newPlan)
 route.get('/plan/get/:date', getPlan)
+route.post('/plan/timer/add', addTimer)
 
 //-----------------POSTER---------------------------------
 //route.post('/poster/send', sendPoster)

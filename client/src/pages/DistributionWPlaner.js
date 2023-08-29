@@ -29,6 +29,7 @@ import {
   getProjectId, 
   newPlan, 
   getPlan, 
+  addTimer,
   newDistributionW, 
   getDistributionsW, 
   getDistributionsWPlan, 
@@ -1929,68 +1930,107 @@ const clickShowEditTime2 = (t, ind, tab) => {
         const milliseconds = Math.floor((date1 - dateNow));       
         console.log("milliseconds: ", milliseconds)
 
+        //обновить план
+        let planer_str
+        if (`${item.date.split('.')[0]}.${item.date.split('.')[1]}.${year}` === new Date().toLocaleDateString()) {
+          console.log("dates - true")
+          let dateIndex = newArray.findIndex((i) => i.time === item.time)
+          const datesCopy = JSON.parse(JSON.stringify(newArray));
+          const dateObject = datesCopy[dateIndex];
+          datesCopy[dateIndex] = { ...dateObject, ['go']: true};
+          planer_str = JSON.stringify(datesCopy)
+        } else {
+          console.log("dates2 - true")
+          let dateIndex = newArray2.findIndex((i) => i.time === item.time)
+          const datesCopy = JSON.parse(JSON.stringify(newArray2));
+          const dateObject = datesCopy[dateIndex];
+          datesCopy[dateIndex] = { ...dateObject, ['go']: true};
+          planer_str = JSON.stringify(datesCopy)
+        }
+
+        //1-й день
+        const newObj = {
+          "datestart": d_str.toLocaleDateString(),
+          "times": planer_str
+        }
+        
+
         if (milliseconds > 0) {
+          
+          const objPlan = {
+            users: selected,
+            plan: newObj,
+            text: textDistr,
+            textButton: textButton,
+            time: milliseconds,         
+          }
+
+          await addTimer(objPlan)
+          
           //запланировать отправку рассылок
-          setTimeout(() => {
-            selected.map(async (user, index) => {
-              console.log("Пользователю ID: " + user + " сообщение " + textDistr + " отправлено! Кнопка " + textButton + " отправлена!")
+          // const timerId = setTimeout(() => {
+          //   selected.map(async (user, index) => {
+          //     console.log("Пользователю ID: " + user + " сообщение " + textDistr + " отправлено! Кнопка " + textButton + " отправлена!")
       
-              //let client = clients.filter((client) => client.chatId === user)[0];
-      
-              //получить id специалиста по его telegramId
-              const worker = await getWorkerId(user)
+          //     //обновить план в БД
+          //     await newPlan(newObj)
               
-              //новый претендент
-              const pretendent = {
-                projectId: projectId, 
-                workerId: worker.data, 
-                receiverId: user,        
-              }
-              const pretendentId = await newPretendent(pretendent)
+          //     //let client = clients.filter((client) => client.chatId === user)[0];
+      
+          //     //получить id специалиста по его telegramId
+          //     const worker = await getWorkerId(user)
               
-              //Передаем данные боту
-              const keyboard = JSON.stringify({
-                inline_keyboard: [
-                    [
-                        {"text": textButton, callback_data:'/report'},
-                    ],
-                ]
-              });
+          //     //новый претендент
+          //     const pretendent = {
+          //       projectId: projectId, 
+          //       workerId: worker.data, 
+          //       receiverId: user,        
+          //     }
+          //     const pretendentId = await newPretendent(pretendent)
+              
+          //     //Передаем данные боту
+          //     const keyboard = JSON.stringify({
+          //       inline_keyboard: [
+          //           [
+          //               {"text": textButton, callback_data:'/report'},
+          //           ],
+          //       ]
+          //     });
       
-              const keyboard2 = JSON.stringify({
-                inline_keyboard: [
-                    [
-                        {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
-                        {"text": 'Отклонить', callback_data:'/cancel'},
-                    ],
-                ]
-              });
+          //     const keyboard2 = JSON.stringify({
+          //       inline_keyboard: [
+          //           [
+          //               {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
+          //               {"text": 'Отклонить', callback_data:'/cancel'},
+          //           ],
+          //       ]
+          //     });
       
-              //отправить в телеграмм
-              let sendToTelegram
-              if (textDistr !== '') {
-                const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${textDistr.replace(/\n/g, '%0A')}`
-                //console.log("url_send_msg: ", url_send_msg)
+          //     //отправить в телеграмм
+          //     let sendToTelegram
+          //     if (textDistr !== '') {
+          //       const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${textDistr.replace(/\n/g, '%0A')}`
+          //       //console.log("url_send_msg: ", url_send_msg)
                 
-                sendToTelegram = await $host.get(url_send_msg);
+          //       sendToTelegram = await $host.get(url_send_msg);
 
-                const objDelivered = {
-                  delivered: true
-                }
+          //       const objDelivered = {
+          //         delivered: true
+          //       }
 
-                //обновить рассылке статус отправки
-                await editDistributionW(objDelivered, dataDistrib.id)
-              }  
+          //       //обновить рассылке статус отправки
+          //       await editDistributionW(objDelivered, dataDistrib.id)
+          //     }  
       
-              const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${imageDistrib}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
-              console.log("url_send_photo: ", url_send_photo)
-              //await $host.post(url_send_photo);
-              await $host.get(url_send_photo);
+          //     const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${imageDistrib}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
+          //     //console.log("url_send_photo: ", url_send_photo)
+          //     //await $host.post(url_send_photo);
+          //     await $host.get(url_send_photo);
 
-              //обновить список рассылок
-              addNewDistrib(true)
-            }) 
-          }, milliseconds);
+          //     //обновить список рассылок
+          //     addNewDistrib(true)
+          //   }) 
+          // }, milliseconds);
         }
       }    
     })

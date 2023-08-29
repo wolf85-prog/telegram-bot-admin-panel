@@ -82,6 +82,16 @@ export const getPlan = async (date) => {
     }
 }
 
+export const addTimer = async (data) => {
+    try {
+        let response =  await $host.post(`api/plan/timer/add`, data);
+        //console.log("planAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling addTimer api", error.message);
+    }
+}
+
 //get Workers
 export const getWorkers = async () =>{
     try {
