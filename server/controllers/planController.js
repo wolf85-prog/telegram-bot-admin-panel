@@ -126,9 +126,9 @@ class PlanController {
                         //sendToTelegram = await $host.get(url_send_msg);
                         sendToTelegram = await fetch(url_send_msg);
 
-                        const objDelivered = {
-                            delivered: true
-                        }
+                        //const objDelivered = {
+                        const delivered = true
+                        //}
 
                         //обновить рассылке статус отправки
                         //await editDistributionW(objDelivered, dataDistrib.id)
@@ -140,7 +140,7 @@ class PlanController {
                         }
             
                         const newDistrib = await Distributionw.update(
-                            objDelivered.delivered,
+                            delivered,
                             { where: {id: id} })
                         return res.status(200).json(newDistrib);
                     }

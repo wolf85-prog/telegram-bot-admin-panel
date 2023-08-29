@@ -1918,6 +1918,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
         }
         //сохранение рассылки в базе данных
         const dataDistrib = await newDistributionW(message) 
+        console.log("Рассылка: ", dataDistrib)
 
         const d1 = Date.parse(`${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`);
         const d2 = new Date().getTime() //- 10800000
