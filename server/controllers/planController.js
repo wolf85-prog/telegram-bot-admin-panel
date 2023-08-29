@@ -8,11 +8,11 @@ class PlanController {
     //add plan
     async newPlan(req, res) {
         const {datestart, times} = req.body
-        console.log(datestart)
+        //console.log(datestart)
         try {
             // First try to find the record
             const foundItem = await Plan.findOne({ where: {datestart: datestart} });
-            console.log(foundItem)
+            //console.log(foundItem)
 
             if (!foundItem) {
                 // Item not found, create a new one
@@ -62,8 +62,11 @@ class PlanController {
             setTimeout(() => {
                 users.map(async (user, index) => {
                     console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
+                    
+                    //обновить план в БД
+                    this.newPlan(plan)
                 })
-            }, time)         
+            }, 10000)         
            
             //return res.status(200).json(plan);
         } catch (error) {
