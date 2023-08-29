@@ -1,9 +1,8 @@
-const {Plan} = require('../models/models')
+const {Plan, Distributionw} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const uuid = require('uuid')
 const path = require('path')
-//const { getProjectCrmId } = require('./../../client/src/http/adminAPI')
-//const { $host } = require('./../../client/src/http/index')
+//const { editDistributionW } = require('./../../client/src/http/adminAPI')
 
 //fetch api
 const fetch = require('node-fetch');
@@ -64,7 +63,7 @@ class PlanController {
 
     //get plans
     async addTimer(req, res) {
-        const {users, plan, text, textButton, time} = req.body
+        const {users, plan, text, textButton, time, id} = req.body
         try {  
             setTimeout(() => {
                 users.map(async (user, index) => {
@@ -126,11 +125,22 @@ class PlanController {
                         sendToTelegram = await fetch(url_send_msg);
 
                         const objDelivered = {
-                        delivered: true
+                            delivered: true
                         }
 
                         //обновить рассылке статус отправки
                         //await editDistributionW(objDelivered, dataDistrib.id)
+                        let exist = await Distributionw.findOne( {where: {id: id}} )
+            
+                        if(!exist){
+                            res.status(500).json({msg: "Рассылка не существует!"});
+                            return;
+                        }
+            
+                        const newDistrib = await Distributionw.update(
+                            objDelivered.delivered,
+                            { where: {id: id} })
+                        return res.status(200).json(newDistrib);
                     }
                 })
             }, 10000)         

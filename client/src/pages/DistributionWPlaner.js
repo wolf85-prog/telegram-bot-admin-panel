@@ -1962,7 +1962,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
             plan: newObj,
             text: textDistr,
             textButton: textButton,
-            time: milliseconds,         
+            time: milliseconds,
+            id: dataDistrib.id,         
           }
 
           await addTimer(objPlan)
