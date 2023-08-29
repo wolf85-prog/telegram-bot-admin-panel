@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const sequelize = require('./db')
-const models = require('./models/models')
+const {Plan} = require('./models/models')
 const cors = require('cors')
 const fs = require('fs');
 const https = require('https')
@@ -49,8 +49,19 @@ const start = async () => {
         await sequelize.authenticate()
         await sequelize.sync()
         
-        httpsServer.listen(port, () => {
+        httpsServer.listen(port, async() => {
             console.log('HTTPS Server Admin-panel running on port ' + port);
+
+            console.log("Запускаю планировщик задач...")
+            const plan = await Plan.findOne({
+                where: {datestart: new Date().toLocaleDateString()}
+            })
+            console.log("plan: ", plan)
+
+            const plan2 = await Plan.findOne({
+                where: {datestart: `${day2}.${month2}.${year}`}
+            })
+            console.log("plan2: ", plan2)
         });
 
     } catch (error) {
