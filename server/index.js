@@ -98,17 +98,17 @@ const start = async () => {
                 console.log("milliseconds: ", milliseconds)
             
                 if (milliseconds > 0) {          
-                    const objPlan = {
-                        users: selected,
-                        plan: newObj,
-                        text: textDistr,
-                        textButton: textButton,
-                        time: milliseconds,
-                        id: dataDistrib.id,  
-                        projId: projectId,      
-                    }
+                    // const objPlan = {
+                    //     users: selected,
+                    //     plan: newObj,
+                    //     text: textDistr,
+                    //     textButton: textButton,
+                    //     time: milliseconds,
+                    //     id: dataDistrib.id,  
+                    //     projId: projectId,      
+                    // }
 
-                    console.log("objPlan: ", objPlan)
+                    // console.log("objPlan: ", objPlan)
         
                     //запланировать отправку рассылок
                     //await addTimer(objPlan)
