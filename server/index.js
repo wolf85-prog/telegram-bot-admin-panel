@@ -81,7 +81,7 @@ const start = async () => {
                 "times": plan.dataValues.times
             }
 
-            const newArray = plan.dataValues.times
+            const newArray = JSON.parse(plan.dataValues.times)
 
             //массив дат 1-го дня
             newArray.forEach(async (item)=> {
