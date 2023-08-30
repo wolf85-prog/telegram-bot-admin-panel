@@ -71,6 +71,7 @@ class PlanController {
         const {users, plan, text, textButton, time, id, projId} = req.body
         try {  
             
+            //удаление таймеров
             const temp = tasks.filter((item) => item.projectId === projId)
             temp.forEach((tmp)=> {
                 clearTimeout(tmp.task)

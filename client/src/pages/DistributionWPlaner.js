@@ -1955,7 +1955,6 @@ const clickShowEditTime2 = (t, ind, tab) => {
           "times": planer_str
         }
         
-
         if (milliseconds > 0) {
           
           const objPlan = {
@@ -1968,9 +1967,10 @@ const clickShowEditTime2 = (t, ind, tab) => {
             projId: projectId,      
           }
 
+          //запланировать отправку рассылок
           await addTimer(objPlan)
           
-          //запланировать отправку рассылок
+          
           // const timerId = setTimeout(() => {
           //   selected.map(async (user, index) => {
           //     console.log("Пользователю ID: " + user + " сообщение " + textDistr + " отправлено! Кнопка " + textButton + " отправлена!")
