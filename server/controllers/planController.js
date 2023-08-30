@@ -1,4 +1,4 @@
-const {Plan, Distributionw} = require('../models/models')
+const {Plan, Distributionw, Pretendent} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const uuid = require('uuid')
 const path = require('path')
@@ -104,12 +104,7 @@ class PlanController {
                     const worker = await fetch(host_api_bottest + '/workers/chat/' + user);
                     
                     //новый претендент
-                    const pretendent = {
-                        projectId: projId, 
-                        workerId: worker.data, 
-                        receiverId: user,        
-                    }
-                    // const pretendentId = await newPretendent(pretendent)
+                    const pretendentId = await Pretendent.create(projId, worker.data, user) //{projectId, workerId, receiverId})
               
                     //Передаем данные боту
                     const keyboard = JSON.stringify({
@@ -155,13 +150,10 @@ class PlanController {
                             { delivered },
                             { where: {id: id} })
 
-                        //обновить список рассылок
-                        //addNewDistrib(true)
-
                         return res.status(200).json(newDistrib);
                     }
                 })
-            }, 10000)  
+            }, time)  
             
             const obj = {
                 task: timerId,
