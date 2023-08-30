@@ -28,7 +28,7 @@ import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { delDistributionW } from 'src/http/adminAPI';
 
 const DistributionW = () => {
-  const { distributionsWork: messages } = useUsersContext();
+  const { distributionsWork: messages, addNewDistrib } = useUsersContext();
   const [distributionsWork, setDistributionsWork]= useState([]);
   const [loading, setLoading]= useState(true);
   const [proj, setProj] = useState('');
@@ -92,7 +92,7 @@ const DistributionW = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       //setSeconds(seconds => seconds + 5);
-
+      addNewDistrib(true)
     }, 5000);
     
     // очистка интервала
