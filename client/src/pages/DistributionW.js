@@ -32,6 +32,7 @@ const DistributionW = () => {
   const [distributionsWork, setDistributionsWork]= useState([]);
   const [loading, setLoading]= useState(true);
   const [proj, setProj] = useState('');
+  const [seconds, setSeconds] = useState(1);
 
   const [toast, addToast] = useState(0)
   const toaster = useRef()
@@ -88,6 +89,16 @@ const DistributionW = () => {
     
   },[messages])
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      //setSeconds(seconds => seconds + 5);
+
+    }, 5000);
+    
+    // очистка интервала
+    return () => clearInterval(timer);
+  });
+
   {/* Удаление рассылки */}
   const removeDescription = async(desk) => {
     addToast(exampleToast) //ваша рассылка удалена
@@ -119,7 +130,6 @@ const DistributionW = () => {
                           <CCard className="mb-4">
                             <CCardHeader>Рассылки для специалистов</CCardHeader>
                             <CCardBody>
-
                               <br /> 
 
                             {loading ? 

@@ -4,6 +4,8 @@ const uuid = require('uuid')
 const path = require('path')
 //const { editDistributionW } = require('./../../client/src/http/adminAPI')
 
+//const { useUsersContext }  = require("./../../client/src/chat-app-new/context/usersContext");
+
 //fetch api
 const fetch = require('node-fetch');
 
@@ -152,6 +154,10 @@ class PlanController {
                         const newDistrib = await Distributionw.update(
                             { delivered },
                             { where: {id: id} })
+
+                        //обновить список рассылок
+                        //addNewDistrib(true)
+
                         return res.status(200).json(newDistrib);
                     }
                 })
