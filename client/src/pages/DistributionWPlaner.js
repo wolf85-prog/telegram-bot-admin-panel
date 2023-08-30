@@ -1864,12 +1864,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
     const d_str2 = new Date() 
     d_str2.setDate(d_str2.getDate() + 1)
 
-    //удалить предыдущие записи запланированных рассылок
+    
     const obj = {
       id: projectId, 
-      date: d_str
+      date: d_str.toLocaleDateString()
     }
-    console.log("obj: ", obj)
+    console.log("obj plan: ", obj)
+
+    //удалить предыдущие записи запланированных рассылок
     await delDistributionWPlan(obj)
 
     const newArray = [].concat(dates, dates1, dates11);
