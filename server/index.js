@@ -14,6 +14,7 @@ const cron = require('node-cron');
 
 // Port that the webserver listens to
 const port = process.env.PORT || 5000;
+//const host = process.env.
 
 const app = express();
 
@@ -67,12 +68,58 @@ const start = async () => {
             const plan = await Plan.findOne({
                 where: {datestart: `${day}.${month}.${year}`}
             })
-            console.log("plan: ", plan.dataValues.times)
 
             const plan2 = await Plan.findOne({
                 where: {datestart: `${day2}.${month2}.${year}`}
             })
-            console.log("plan2: ", plan2.dataValues.times)
+
+
+            //запланировать отправку рассылок
+            //1-й день
+            const newObj = {
+                "datestart": plan.dataValues.datestart,
+                "times": plan.dataValues.times
+            }
+
+            const newArray = plan.dataValues.times
+
+            //массив дат 1-го дня
+            newArray.forEach(async (item)=> {
+
+                const d1 = Date.parse(`${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`);
+                const d2 = new Date().getTime() //- 10800000
+                
+                const date1 = new Date(d1)
+                const dateNow = new Date(d2)
+                console.log("date1: ", date1)
+                console.log("dateNow: ", dateNow)
+                
+                const milliseconds = Math.floor((date1 - dateNow));       
+                console.log("milliseconds: ", milliseconds)
+            
+                if (milliseconds > 0) {          
+                    const objPlan = {
+                        users: selected,
+                        plan: newObj,
+                        text: textDistr,
+                        textButton: textButton,
+                        time: milliseconds,
+                        id: dataDistrib.id,  
+                        projId: projectId,      
+                    }
+
+                    console.log("objPlan: ", objPlan)
+        
+                    //запланировать отправку рассылок
+                    //await addTimer(objPlan)
+                    // const response = await fetch('/api/plan/timer/add', {
+                    //     method: 'post',
+                    //     body: JSON.stringify(objPlan),
+                    //     headers: {'Content-Type': 'application/json'}
+                    // });
+                }
+            })
+
         });
 
     } catch (error) {

@@ -1852,27 +1852,29 @@ const clickShowEditTime2 = (t, ind, tab) => {
     </CToast>
   )
 
+  //запланировать (сохранить) рассылки
   const savePlan = async() => {
     addToast(exampleToast) //ваш план сохранен
 
-    console.log("категории: ", catDistr)
-    console.log("текст: ", textDistr)
-    console.log("постер: ", imageDistrib)
-    console.log("получатели: ", selected)
+    // console.log("категории: ", catDistr)
+    // console.log("текст: ", textDistr)
+    // console.log("постер: ", imageDistrib)
+    // console.log("получатели: ", selected)
 
-    const d_str = new Date()
-    const d_str2 = new Date() 
-    d_str2.setDate(d_str2.getDate() + 1)
+    const d_str = new Date() //текущая дата
+    const d_str2 = new Date()  
+    d_str2.setDate(d_str2.getDate() + 1) //завтрашний день
 
     
     const obj = {
       id: projectId, 
       date: d_str.toLocaleDateString()
     }
-    console.log("obj plan: ", obj)
+    //console.log("obj plan: ", obj)
 
     //удалить предыдущие записи запланированных рассылок
-    await delDistributionWPlan(obj)
+    const res = await delDistributionWPlan(obj)
+    console.log("res del: ", res)
 
     const newArray = [].concat(dates, dates1, dates11);
     const planer_str = JSON.stringify(newArray)
@@ -1971,72 +1973,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
           //запланировать отправку рассылок
           await addTimer(objPlan)
-          
-          
-          // const timerId = setTimeout(() => {
-          //   selected.map(async (user, index) => {
-          //     console.log("Пользователю ID: " + user + " сообщение " + textDistr + " отправлено! Кнопка " + textButton + " отправлена!")
-      
-          //     //обновить план в БД
-          //     await newPlan(newObj)
-              
-          //     //let client = clients.filter((client) => client.chatId === user)[0];
-      
-          //     //получить id специалиста по его telegramId
-          //     const worker = await getWorkerId(user)
-              
-          //     //новый претендент
-          //     const pretendent = {
-          //       projectId: projectId, 
-          //       workerId: worker.data, 
-          //       receiverId: user,        
-          //     }
-          //     const pretendentId = await newPretendent(pretendent)
-              
-          //     //Передаем данные боту
-          //     const keyboard = JSON.stringify({
-          //       inline_keyboard: [
-          //           [
-          //               {"text": textButton, callback_data:'/report'},
-          //           ],
-          //       ]
-          //     });
-      
-          //     const keyboard2 = JSON.stringify({
-          //       inline_keyboard: [
-          //           [
-          //               {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
-          //               {"text": 'Отклонить', callback_data:'/cancel'},
-          //           ],
-          //       ]
-          //     });
-      
-          //     //отправить в телеграмм
-          //     let sendToTelegram
-          //     if (textDistr !== '') {
-          //       const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${textDistr.replace(/\n/g, '%0A')}`
-          //       //console.log("url_send_msg: ", url_send_msg)
-                
-          //       sendToTelegram = await $host.get(url_send_msg);
-
-          //       const objDelivered = {
-          //         delivered: true
-          //       }
-
-          //       //обновить рассылке статус отправки
-          //       await editDistributionW(objDelivered, dataDistrib.id)
-          //     }  
-      
-          //     const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${imageDistrib}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
-          //     //console.log("url_send_photo: ", url_send_photo)
-          //     //await $host.post(url_send_photo);
-          //     await $host.get(url_send_photo);
-
-          //     //обновить список рассылок
-          //     addNewDistrib(true)
-          //   }) 
-          // }, milliseconds);
         }
+        
       }    
     })
 
@@ -2058,6 +1996,58 @@ const clickShowEditTime2 = (t, ind, tab) => {
         }
         //сохранение рассылки в базе данных
         const dataDistrib2 = await newDistributionW(message)
+        console.log("Рассылка2: ", dataDistrib2)
+
+        const d1 = Date.parse(`${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`);
+        const d2 = new Date().getTime() //- 10800000
+        
+        const date1 = new Date(d1)
+        const dateNow = new Date(d2)
+        console.log("date1: ", date1)
+        console.log("dateNow: ", dateNow)
+        
+        const milliseconds = Math.floor((date1 - dateNow));       
+        console.log("milliseconds: ", milliseconds)
+
+        //обновить план
+        let planer_str
+        if (`${item.date.split('.')[0]}.${item.date.split('.')[1]}.${year}` === new Date().toLocaleDateString()) {
+          console.log("dates - true")
+          let dateIndex = newArray.findIndex((i) => i.time === item.time)
+          const datesCopy = JSON.parse(JSON.stringify(newArray));
+          const dateObject = datesCopy[dateIndex];
+          datesCopy[dateIndex] = { ...dateObject, ['go']: true};
+          planer_str = JSON.stringify(datesCopy)
+        } else {
+          console.log("dates2 - true")
+          let dateIndex = newArray2.findIndex((i) => i.time === item.time)
+          const datesCopy = JSON.parse(JSON.stringify(newArray2));
+          const dateObject = datesCopy[dateIndex];
+          datesCopy[dateIndex] = { ...dateObject, ['go']: true};
+          planer_str = JSON.stringify(datesCopy)
+        }
+
+        //2-й день
+        const newObj = {
+          "datestart": d_str.toLocaleDateString(),
+          "times": planer_str
+        }
+        
+        if (milliseconds > 0) {
+          
+          const objPlan = {
+            users: selected,
+            plan: newObj,
+            text: textDistr,
+            textButton: textButton,
+            time: milliseconds,
+            id: dataDistrib2.id,  
+            projId: projectId,      
+          }
+
+          //запланировать отправку рассылок
+          await addTimer(objPlan)
+        }
       }
     })
 
