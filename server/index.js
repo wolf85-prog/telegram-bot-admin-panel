@@ -77,8 +77,8 @@ const start = async () => {
             })
 
             distributions.forEach(async (item)=> {
-                const date1 = new Date(item.datestart)
-                const dateNow = new Date()
+                const date1 = item.datestart
+                const dateNow = new Date().getTime + 10800000
                 console.log("date1: ", date1)
                 console.log("dateNow: ", dateNow)
 
