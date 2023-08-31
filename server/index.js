@@ -85,20 +85,20 @@ const start = async () => {
                 const milliseconds = Math.floor((date1 - dateNow));       
                 console.log("milliseconds: ", milliseconds)
 
-                    if (milliseconds > 0) {          
-                        const objPlan = {
-                            //users: selected,
-                            plan: newObj,
-                            text: item.text,
-                            //textButton: textButton,
-                            image: '',
-                            time: milliseconds,
-                            id: item.id,  
-                            projId: item.projectId,      
-                        }
-
-                        console.log("objPlan: ", objPlan)
+                if (milliseconds > 0) {          
+                    const objPlan = {
+                        users: item.users,
+                        plan: newObj,
+                        text: item.text,
+                        textButton: item.textButton,
+                        image: item.image,
+                        time: milliseconds,
+                        id: item.id,  
+                        projId: item.projectId,      
                     }
+
+                    console.log("objPlan: ", objPlan)
+                }
             })
             
             // const plan = await Plan.findOne({
