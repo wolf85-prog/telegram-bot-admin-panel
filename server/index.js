@@ -88,7 +88,7 @@ const start = async () => {
                 if (milliseconds > 0) {          
                     const objPlan = {
                         users: item.users,
-                        plan: newObj,
+                        //plan: newObj,
                         text: item.text,
                         textButton: item.textButton,
                         image: item.image,
