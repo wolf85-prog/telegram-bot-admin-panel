@@ -320,12 +320,12 @@ const UsersProvider = ({ children }) => {
 
 			//сортировка
 			const messageSort = [...response].sort((a, b) => {       
-				var dateA = new Date(parseInt(a.datestart)), dateB = new Date(parseInt(b.datestart)) 
+				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
 				return dateB-dateA  //сортировка по убывающей дате  
 			})
 
 			const messageSort2 = [...response2].sort((a, b) => {       
-				var dateA = new Date(parseInt(a.datestart)), dateB = new Date(parseInt(b.datestart)) 
+				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
 				return dateA-dateB  //сортировка по убывающей дате  
 			})
 
@@ -582,12 +582,12 @@ const UsersProvider = ({ children }) => {
 
 		//сортировка
 		const messageSort = [...response].sort((a, b) => {       
-			var dateA = new Date(parseInt(a.datestart)), dateB = new Date(parseInt(b.datestart)) 
+			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
 			return dateB-dateA  //сортировка по убывающей дате  
 		})
 
 		const messageSort2 = [...response2].sort((a, b) => {       
-			var dateA = new Date(parseInt(a.datestart)), dateB = new Date(parseInt(b.datestart)) 
+			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
 			return dateA-dateB  //сортировка по убывающей дате  
 		})
 
