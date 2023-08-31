@@ -149,9 +149,7 @@ const DistributionAddW = () => {
     
       //для редактирования рассылки
       if (projId) {
-
         setPoster(img)
-
         console.log("Текущий проект: ", projId)
         console.log("Текущая рассылка: ", distribId)
         console.log("Текущий постер: ", img)
@@ -169,13 +167,7 @@ const DistributionAddW = () => {
       } 
     }
 
-    const fetchDistrib = async () => {
-      
-    }
-
-    fetchData();
-    //fetchDistrib();
-      
+    fetchData();  
   },[])
 
 
@@ -376,9 +368,7 @@ const getCategoryFromNotion = async(projectId) => {
       //выбрать уникальных специалистов
       const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
       setSelected(arr)
-
-      console.log("selected: ", arr)
-      
+      //console.log("selected: ", arr)     
     }
   } else {
     setValueSelect(0)
@@ -389,14 +379,14 @@ const getCategoryFromNotion = async(projectId) => {
 
 //функция обработки изменения текущего проекта
 const onHandlingProject = async(projectId, save) => {
-  let arrProjects = []
   //для планировщика рассылок
   setProj(projectId)
   
   //для селектов (value)
   setValueProject(projectId)
   
-  //console.log("projects: ", projects)
+  console.log("contacts: ", contacts)
+  
   // projects.map((project) => {
   //   if (project != null) {
   //     const d = new Date(project.datestart);
@@ -1011,8 +1001,6 @@ const delCategory7 = (category) => {
   const onPlanerShow = async(proj, text, id, cats, count, date, poster) => {
     setVisibleModal(!visibleModal)
 
-    //console.log(cats)
-
     if (selected.length !== 0 && file || poster || selected.length !== 0 && text) {
       navigate('/distributionw_planer', {
         state: {
@@ -1028,6 +1016,8 @@ const delCategory7 = (category) => {
       });
     } 
   }
+
+
 //==============================================================================================
   {/* Отправка рассылки */}
 //==============================================================================================
