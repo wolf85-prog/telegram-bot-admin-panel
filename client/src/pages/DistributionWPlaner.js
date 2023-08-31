@@ -1907,7 +1907,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     //массив дат 1-го дня
     newArray.forEach(async (item)=> {
       if (item.save === true && item.proj === projectName && item.go === false) {
-        console.log("Дата старта: ", `${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`)
+        //console.log("Дата старта: ", `${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`)
         
         //новая рассылка
         const message = {
@@ -1992,7 +1992,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           project: `${item.date} | ${projectName}`, 
           projectId: projectId, 
           receivers: str_cats, 
-          datestart: Date.parse(`${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`), 
+          datestart: `${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`, 
           delivered: 'false',  
           count: countReceiver,
           date: `${day2}.${month2}.${year}`,    
