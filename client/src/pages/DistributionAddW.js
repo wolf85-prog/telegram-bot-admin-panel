@@ -386,7 +386,7 @@ const onHandlingProject = async(projectId, save) => {
   setValueProject(projectId)
   
   console.log("contacts: ", contacts)
-  
+
   // projects.map((project) => {
   //   if (project != null) {
   //     const d = new Date(project.datestart);
@@ -998,12 +998,13 @@ const delCategory7 = (category) => {
 
   //===================================================================
   {/* Запланировать рассылку */}
-  const onPlanerShow = async(proj, text, id, cats, count, date, poster) => {
+  const onPlanerShow = async(label, proj, text, id, cats, count, date, poster) => {
     setVisibleModal(!visibleModal)
 
     if (selected.length !== 0 && file || poster || selected.length !== 0 && text) {
       navigate('/distributionw_planer', {
         state: {
+          labelProj: label,
           project: proj,
           text: text,
           id: id,
@@ -1037,9 +1038,8 @@ const delCategory7 = (category) => {
 
       //новая рассылка
       const message = {
-        //name: 'Рассылка', 
         text: text, 
-        image: host + image, 
+        image: image ? `${host}${image}` : '', 
         project: labelName.label, 
         projectId: valueProject,
         receivers: categoryAll.toString(), 
@@ -1646,7 +1646,7 @@ const delCategory7 = (category) => {
                                       </div> */}
                                       <div>
                                         {proj ? 
-                                          <CButton color="success" onClick={()=>onPlanerShow(proj, text, distribId, categoryAll, selected.length, datestart, poster)}>Запланировать</CButton>
+                                          <CButton color="success" onClick={()=>onPlanerShow(labelName.label, proj, text, distribId, categoryAll, selected.length, datestart, poster)}>Запланировать</CButton>
                                           :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>
                                         }             
                                       </div>

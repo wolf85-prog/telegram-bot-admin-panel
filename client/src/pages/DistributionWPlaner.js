@@ -49,6 +49,7 @@ const DistributionWPlaner = () => {
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
   const projectId= location.state?.project
+  const labelName= location.state?.labelProj
   const textDistr= location.state?.text
   const catDistr= location.state?.category
   const countReceiver= location.state?.count
@@ -64,6 +65,7 @@ const DistributionWPlaner = () => {
   console.log("dateDistrib: ", dateDistrib)
   console.log("imageDistrib: ", imageDistrib)
   console.log("selected: ", selected)
+  console.log("labelName: ", labelName)
   
 
   const [countCol, setCountCol] = useState(6)
@@ -1912,7 +1914,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           //name: 'Рассылка', 
           text: textDistr, 
           image: imageDistrib ? imageDistrib : '', 
-          project: `${item.date} | ${projectName}`, 
+          project: labelName, 
           projectId: projectId, 
           receivers: str_cats, 
           datestart: `${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`, 
@@ -1985,7 +1987,6 @@ const clickShowEditTime2 = (t, ind, tab) => {
       if (item.save === true && item.proj === projectName && item.go === false) {
         //новая рассылка
         const message = {
-          //name: 'Рассылка', 
           text: textDistr, 
           image: imageDistrib ? imageDistrib : '', 
           project: `${item.date} | ${projectName}`, 
