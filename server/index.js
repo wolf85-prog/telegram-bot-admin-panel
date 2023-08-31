@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const sequelize = require('./db')
-const {Plan, Distributionw} = require('./models/models')
+const {Plan, Distributionw, Pretendent} = require('./models/models')
 const cors = require('cors')
 const fs = require('fs');
 const https = require('https')
@@ -14,7 +14,8 @@ const cron = require('node-cron');
 
 // Port that the webserver listens to
 const port = process.env.PORT || 5000;
-//const host = process.env.
+const host_api_bottest = process.env.BOTTEST_API_URL
+const token = process.env.TELEGRAM_API_TOKEN_WORK
 
 const app = express();
 
@@ -76,7 +77,7 @@ const start = async () => {
                 }
             })
 
-            distributions.forEach(async (item)=> {
+            distributions.forEach(async (item, index)=> {
                 const date1 = item.datestart
                 const dateNow = new Date().getTime() + 10800000
                 console.log("date1: ", new Date(date1))
@@ -98,63 +99,82 @@ const start = async () => {
                     }
 
                     console.log("objPlan: ", objPlan)
-                }
+
+                    console.log("!!!!Планирую запуск отправки собщения..." + (index+1))
+                    const timerId = setTimeout(() => {
+                        item.users.map(async (user, index) => {
+                            console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
+                            
+                            //обновить план в БД
+                            const foundItem = await Plan.findOne({ where: {datestart: item.date} });
+
+                            // if (!foundItem) {
+                            //     // Item not found, create a new one
+                            //     const newPlan = await Plan.create(item.date, plan.times)
+                            //     return res.status(200).json(newPlan);
+                            // }
+
+                            // Found an item, update it
+                            //const item = await Plan.update({times: plan.times},{where: {datestart: item.date}});
+
+
+                            //получить id специалиста по его telegramId
+                            //const worker = await getWorkerId(user)
+                            const worker = await fetch(host_api_bottest + '/workers/chat/' + user);
+                            
+                            //новый претендент
+                            const pretendent = await Pretendent.create(projId, worker.data, user) //{projectId, workerId, receiverId})
+                    
+                            //Передаем данные боту
+                            const keyboard = JSON.stringify({
+                                inline_keyboard: [
+                                    [
+                                        {"text": textButton, callback_data:'/report'},
+                                    ],
+                                ]
+                            });
+                        
+                            const keyboard2 = JSON.stringify({
+                                inline_keyboard: [
+                                    [
+                                        {"text": 'Принять', callback_data:'/accept ' + pretendent.id}, //  + pretendent.id
+                                        {"text": 'Отклонить', callback_data:'/cancel'},
+                                    ],
+                                ]
+                            });
+
+                            //отправить в телеграмм
+                            let sendToTelegram
+                            if (text !== '') {
+                                const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
+                                //console.log("url_send_msg: ", url_send_msg)
+                                
+                                //sendToTelegram = await $host.get(url_send_msg);
+                                sendToTelegram = await fetch(url_send_msg);
+
+                                //const objDelivered = {
+                                const delivered = true
+                                //}
+
+                                //обновить рассылке статус отправки
+                                //await editDistributionW(objDelivered, dataDistrib.id)
+                                let exist = await Distributionw.findOne( {where: {id: item.id}} )
+                    
+                                if(!exist){
+                                    res.status(500).json({msg: "Рассылка не существует!"});
+                                    return;
+                                }
+                    
+                                const newDistrib = await Distributionw.update(
+                                    { delivered },
+                                    { where: {id: item.id} })
+
+                                return res.status(200).json(newDistrib);
+                            }
+                        })
+                    }, milliseconds)
+                } 
             })
-            
-            // const plan = await Plan.findOne({
-            //     where: {datestart: `${day}.${month}.${year}`}
-            // })
-
-            // const plan2 = await Plan.findOne({
-            //     where: {datestart: `${day2}.${month2}.${year}`}
-            // })
-
-
-            //запланировать отправку рассылок
-            //1-й день
-            // const newObj = {
-            //     "datestart": plan.dataValues.datestart,
-            //     "times": plan.dataValues.times
-            // }
-
-            //const newArray = JSON.parse(plan.dataValues.times)
-
-            //массив дат 1-го дня
-            // newArray.forEach(async (item)=> {
-
-            //     const d1 = Date.parse(`${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`);
-            //     const d2 = new Date().getTime() //- 10800000
-                
-            //     const date1 = new Date(d1)
-            //     const dateNow = new Date(d2)
-            //     console.log("date1: ", date1)
-            //     console.log("dateNow: ", dateNow)
-                
-            //     const milliseconds = Math.floor((date1 - dateNow));       
-            //     console.log("milliseconds: ", milliseconds)
-            
-            //     if (milliseconds > 0) {          
-            //         // const objPlan = {
-            //         //     users: selected,
-            //         //     plan: newObj,
-            //         //     text: textDistr,
-            //         //     textButton: textButton,
-            //         //     time: milliseconds,
-            //         //     id: dataDistrib.id,  
-            //         //     projId: projectId,      
-            //         // }
-
-            //         // console.log("objPlan: ", objPlan)
-        
-            //         //запланировать отправку рассылок
-            //         //await addTimer(objPlan)
-            //         // const response = await fetch('/api/plan/timer/add', {
-            //         //     method: 'post',
-            //         //     body: JSON.stringify(objPlan),
-            //         //     headers: {'Content-Type': 'application/json'}
-            //         // });
-            //     }
-            // })
 
         });
 

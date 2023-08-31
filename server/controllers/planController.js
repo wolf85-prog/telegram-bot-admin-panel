@@ -105,7 +105,7 @@ class PlanController {
                     const worker = await fetch(host_api_bottest + '/workers/chat/' + user);
                     
                     //новый претендент
-                    const pretendentId = await Pretendent.create(projId, worker.data, user) //{projectId, workerId, receiverId})
+                    const pretendent = await Pretendent.create(projId, worker.data, user) //{projectId, workerId, receiverId})
               
                     //Передаем данные боту
                     const keyboard = JSON.stringify({
@@ -119,7 +119,7 @@ class PlanController {
                     const keyboard2 = JSON.stringify({
                         inline_keyboard: [
                             [
-                                {"text": 'Принять', callback_data:'/accept '}, //  + pretendent.id
+                                {"text": 'Принять', callback_data:'/accept ' + pretendent.id}, //  + pretendent.id
                                 {"text": 'Отклонить', callback_data:'/cancel'},
                             ],
                         ]
