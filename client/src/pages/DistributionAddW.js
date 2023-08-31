@@ -1053,7 +1053,7 @@ const delCategory7 = (category) => {
         project: labelName.label, 
         projectId: valueProject,
         receivers: categoryAll.toString(), 
-        datestart: Date.now(), 
+        datestart: new Date(), 
         delivered: 'true',   
         count: selected.length, 
         date: `${day}.${month}.${year}`, 

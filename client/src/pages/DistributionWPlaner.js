@@ -1915,7 +1915,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           project: `${item.date} | ${projectName}`, 
           projectId: projectId, 
           receivers: str_cats, 
-          datestart: Date.parse(`${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`), 
+          datestart: `${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`, 
           delivered: 'false',  
           count: countReceiver,
           date: `${day}.${month}.${year}`,  
