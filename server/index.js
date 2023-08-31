@@ -82,7 +82,7 @@ const start = async () => {
                 console.log("date1: ", new Date(date1))
                 console.log("dateNow: ", new Date(dateNow))
 
-                const milliseconds = Math.floor((date1 - dateNow));       
+                const milliseconds = Math.floor(new Date(date1) - new Date(dateNow));       
                 console.log("milliseconds: ", milliseconds)
 
                 if (milliseconds > 0) {          
