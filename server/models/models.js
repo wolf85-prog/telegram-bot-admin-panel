@@ -72,6 +72,8 @@ const Distributionw = sequelize.define('distributionw', {
     projectId: {type: DataTypes.STRING}, //проект (id);
     count: {type: DataTypes.INTEGER}, 
     date: {type: DataTypes.STRING},  //дата начала рассылки
+    button: {type: DataTypes.STRING}, //текст кнопки;
+    users: {type: DataTypes.TEXT},
 })
 
 const Report = sequelize.define('report', {

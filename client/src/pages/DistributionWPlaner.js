@@ -1918,7 +1918,9 @@ const clickShowEditTime2 = (t, ind, tab) => {
           datestart: Date.parse(`${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`), 
           delivered: 'false',  
           count: countReceiver,
-          date: `${day}.${month}.${year}`,    
+          date: `${day}.${month}.${year}`,  
+          button: textButton,
+          users: selected.toString(),   
         }
         //сохранение рассылки в базе данных
         const dataDistrib = await newDistributionW(message) 

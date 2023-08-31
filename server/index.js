@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const sequelize = require('./db')
-const {Plan} = require('./models/models')
+const {Plan, Distributionw} = require('./models/models')
 const cors = require('cors')
 const fs = require('fs');
 const https = require('https')
@@ -65,60 +65,96 @@ const start = async () => {
             const year = d.getFullYear();
 
             console.log("Запускаю планировщик задач...")
-            const plan = await Plan.findOne({
-                where: {datestart: `${day}.${month}.${year}`}
+
+            //получить запланированные рассылки
+            const distributions = await Distributionw.findAll({
+                order: [
+                    ['id', 'ASC'],
+                ],
+                where: {
+                    delivered: false
+                }
             })
 
-            const plan2 = await Plan.findOne({
-                where: {datestart: `${day2}.${month2}.${year}`}
+            distributions.forEach(async (item)=> {
+                const date1 = new Date(item.datestart)
+                const dateNow = new Date()
+                console.log("date1: ", date1)
+                console.log("dateNow: ", dateNow)
+
+                const milliseconds = Math.floor((date1 - dateNow));       
+                console.log("milliseconds: ", milliseconds)
+
+                    if (milliseconds > 0) {          
+                        const objPlan = {
+                            //users: selected,
+                            plan: newObj,
+                            text: item.text,
+                            //textButton: textButton,
+                            image: '',
+                            time: milliseconds,
+                            id: item.id,  
+                            projId: item.projectId,      
+                        }
+
+                        console.log("objPlan: ", objPlan)
+                    }
             })
+            
+            // const plan = await Plan.findOne({
+            //     where: {datestart: `${day}.${month}.${year}`}
+            // })
+
+            // const plan2 = await Plan.findOne({
+            //     where: {datestart: `${day2}.${month2}.${year}`}
+            // })
 
 
             //запланировать отправку рассылок
             //1-й день
-            const newObj = {
-                "datestart": plan.dataValues.datestart,
-                "times": plan.dataValues.times
-            }
+            // const newObj = {
+            //     "datestart": plan.dataValues.datestart,
+            //     "times": plan.dataValues.times
+            // }
 
-            const newArray = JSON.parse(plan.dataValues.times)
+            //const newArray = JSON.parse(plan.dataValues.times)
 
             //массив дат 1-го дня
-            newArray.forEach(async (item)=> {
+            // newArray.forEach(async (item)=> {
 
-                const d1 = Date.parse(`${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`);
-                const d2 = new Date().getTime() //- 10800000
+            //     const d1 = Date.parse(`${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`);
+            //     const d2 = new Date().getTime() //- 10800000
                 
-                const date1 = new Date(d1)
-                const dateNow = new Date(d2)
-                console.log("date1: ", date1)
-                console.log("dateNow: ", dateNow)
+            //     const date1 = new Date(d1)
+            //     const dateNow = new Date(d2)
+            //     console.log("date1: ", date1)
+            //     console.log("dateNow: ", dateNow)
                 
-                const milliseconds = Math.floor((date1 - dateNow));       
-                console.log("milliseconds: ", milliseconds)
+            //     const milliseconds = Math.floor((date1 - dateNow));       
+            //     console.log("milliseconds: ", milliseconds)
             
-                if (milliseconds > 0) {          
-                    // const objPlan = {
-                    //     users: selected,
-                    //     plan: newObj,
-                    //     text: textDistr,
-                    //     textButton: textButton,
-                    //     time: milliseconds,
-                    //     id: dataDistrib.id,  
-                    //     projId: projectId,      
-                    // }
+            //     if (milliseconds > 0) {          
+            //         // const objPlan = {
+            //         //     users: selected,
+            //         //     plan: newObj,
+            //         //     text: textDistr,
+            //         //     textButton: textButton,
+            //         //     time: milliseconds,
+            //         //     id: dataDistrib.id,  
+            //         //     projId: projectId,      
+            //         // }
 
-                    // console.log("objPlan: ", objPlan)
+            //         // console.log("objPlan: ", objPlan)
         
-                    //запланировать отправку рассылок
-                    //await addTimer(objPlan)
-                    // const response = await fetch('/api/plan/timer/add', {
-                    //     method: 'post',
-                    //     body: JSON.stringify(objPlan),
-                    //     headers: {'Content-Type': 'application/json'}
-                    // });
-                }
-            })
+            //         //запланировать отправку рассылок
+            //         //await addTimer(objPlan)
+            //         // const response = await fetch('/api/plan/timer/add', {
+            //         //     method: 'post',
+            //         //     body: JSON.stringify(objPlan),
+            //         //     headers: {'Content-Type': 'application/json'}
+            //         // });
+            //     }
+            // })
 
         });
 

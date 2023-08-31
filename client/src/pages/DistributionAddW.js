@@ -1056,7 +1056,9 @@ const delCategory7 = (category) => {
         datestart: Date.now(), 
         delivered: 'true',   
         count: selected.length, 
-        date: `${day}.${month}.${year}`,      
+        date: `${day}.${month}.${year}`, 
+        button: textButton,
+        users: selected.toString(),     
       }
       console.log("message send button: ", message);
 
