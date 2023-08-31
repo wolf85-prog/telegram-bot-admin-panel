@@ -79,8 +79,8 @@ const start = async () => {
             distributions.forEach(async (item)=> {
                 const date1 = item.datestart
                 const dateNow = new Date().getTime() + 10800000
-                console.log("date1: ", date1)
-                console.log("dateNow: ", dateNow)
+                console.log("date1: ", new Date(date1))
+                console.log("dateNow: ", new Date(dateNow))
 
                 const milliseconds = Math.floor((date1 - dateNow));       
                 console.log("milliseconds: ", milliseconds)
