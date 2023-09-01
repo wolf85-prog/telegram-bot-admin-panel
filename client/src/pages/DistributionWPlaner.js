@@ -1874,9 +1874,17 @@ const clickShowEditTime2 = (t, ind, tab) => {
     }
     //console.log("obj plan: ", obj)
 
+    const obj2 = {
+      id: projectId, 
+      date: d_str2.toLocaleDateString()
+    }
+
     //удалить предыдущие записи запланированных рассылок
     const res = await delDistributionWPlan(obj)
     console.log("res del: ", res)
+
+    const res2 = await delDistributionWPlan(obj2)
+    console.log("res2 del: ", res2)
 
     const newArray = [].concat(dates, dates1, dates11);
     const planer_str = JSON.stringify(newArray)

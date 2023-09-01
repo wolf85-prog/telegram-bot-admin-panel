@@ -90,15 +90,15 @@ const DistributionW = () => {
   },[messages])
 
   //обновление списка рассылок
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     //setSeconds(seconds => seconds + 5);
-  //     addNewDistrib(true)
-  //   }, 10000);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      //setSeconds(seconds => seconds + 5);
+      addNewDistrib(true)
+    }, 10000);
     
-  //   // очистка интервала
-  //   return () => clearInterval(timer);
-  // });
+    // очистка интервала
+    return () => clearInterval(timer);
+  });
 
   {/* Удаление рассылки */}
   const removeDescription = async(desk) => {
