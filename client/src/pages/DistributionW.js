@@ -25,7 +25,7 @@ import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import deleteIcon from 'src/assets/images/delete.png'
 import editIcon from 'src/assets/images/pencil.png'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
-import { delDistributionW } from 'src/http/adminAPI';
+import { delDistributionW, getPlan, newPlan } from 'src/http/adminAPI';
 
 const DistributionW = () => {
   const { distributionsWork: messages, addNewDistrib } = useUsersContext();
@@ -108,6 +108,24 @@ const DistributionW = () => {
     
     //удаление сообщения в базе данных
     await delDistributionW(desk.id)  
+
+    //удаление проекта из планировщика
+    //обновить план в БД
+    let plan = await getPlan(desk.datestart);
+    const newArray = JSON.parse(plan.times)
+
+    let dateIndex = newArray.findIndex((i) => i.time === desk.timestart)
+    const datesCopy = JSON.parse(JSON.stringify(newArray));
+    const dateObject = datesCopy[dateIndex];
+    datesCopy[dateIndex] = { ...dateObject, ['proj']: '', ['save']: false};
+    let planer_str = JSON.stringify(datesCopy)
+
+    const newObj = {
+      "datestart": desk.datestart,
+      "times": planer_str
+    }
+
+    await newPlan(newObj)
   }
 
 
