@@ -435,7 +435,8 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '06:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates(arr)
@@ -475,7 +476,8 @@ const [dates222, setDates222] = useState([
               date: date_str,
               time: '07:30',
               proj: '',
-              save: false
+              save: false, 
+              go: false
             }
             arr.splice(ind+1, 0, newObj);
             setDates(arr)
@@ -517,7 +519,8 @@ const [dates222, setDates222] = useState([
               date: date_str,
               time: '08:30',
               proj: '',
-              save: false
+              save: false, 
+              go: false
             }
             arr.splice(ind+1, 0, newObj);
             setDates(arr)
@@ -558,7 +561,8 @@ const [dates222, setDates222] = useState([
               date: date_str,
               time: '09:30',
               proj: '',
-              save: false
+              save: false, 
+              go: false
             }
             arr.splice(ind+1, 0, newObj);
             setDates(arr)
@@ -599,7 +603,8 @@ const [dates222, setDates222] = useState([
               date: date_str,
               time: '10:30',
               proj: '',
-              save: false
+              save: false, 
+              go: false
             }
             arr.splice(ind+1, 0, newObj);
             setDates(arr)
@@ -639,7 +644,8 @@ const [dates222, setDates222] = useState([
               date: date_str,
               time: '11:30',
               proj: '',
-              save: false
+              save: false, 
+              go: false
             }
             arr.splice(ind+1, 0, newObj);
             setDates(arr)
@@ -680,7 +686,8 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '12:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -718,7 +725,8 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '13:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -756,7 +764,8 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '14:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -794,7 +803,8 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '15:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -832,7 +842,8 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '16:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -871,7 +882,8 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '17:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -912,7 +924,8 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '18:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
@@ -950,7 +963,8 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '19:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
@@ -988,7 +1002,8 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '20:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
@@ -1026,7 +1041,8 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '21:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
@@ -1064,7 +1080,8 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '22:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
@@ -1103,7 +1120,8 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '23:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
@@ -1147,7 +1165,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '06:30',
           proj: '',
-          save: false
+          save: false, 
+          go: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates2(arr)
@@ -1187,7 +1206,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
             date: date_str2,
             time: '07:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates2(arr)
@@ -1229,7 +1249,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
             date: date_str2,
             time: '08:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates2(arr)
@@ -1269,7 +1290,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
             date: date_str2,
             time: '09:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates2(arr)
@@ -1310,7 +1332,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
             date: date_str2,
             time: '10:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates2(arr)
@@ -1349,7 +1372,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
             date: date_str2,
             time: '11:30',
             proj: '',
-            save: false
+            save: false, 
+            go: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates2(arr)
@@ -1390,7 +1414,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '12:30',
           proj: '',
-          save: false
+          save: false, 
+          go: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
@@ -1428,7 +1453,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '13:30',
           proj: '',
-          save: false
+          save: false, 
+          go: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
@@ -1466,7 +1492,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '14:30',
           proj: '',
-          save: false
+          save: false, 
+          go: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
@@ -1504,7 +1531,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '15:30',
           proj: '',
-          save: false
+          save: false, 
+          go: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
@@ -1542,7 +1570,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '16:30',
           proj: '',
-          save: false
+          save: false, 
+          go: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
@@ -1581,7 +1610,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '17:30',
           proj: '',
-          save: false
+          save: false, 
+          go: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
@@ -1622,7 +1652,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '18:30',
           proj: '',
-          save: false
+          save: false, 
+          go: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
@@ -1660,7 +1691,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '19:30',
           proj: '',
-          save: false
+          save: false, 
+          go: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
@@ -1698,7 +1730,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '20:30',
           proj: '',
-          save: false
+          save: false, 
+          go: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
@@ -1736,7 +1769,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '21:30',
           proj: '',
-          save: false
+          save: false, 
+          go: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
@@ -1774,7 +1808,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '22:30',
           proj: '',
-          save: false
+          save: false, 
+          go: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
@@ -1813,7 +1848,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '23:30',
           proj: '',
-          save: false
+          save: false, 
+          go: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)

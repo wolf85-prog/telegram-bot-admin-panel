@@ -339,18 +339,22 @@ const getCategoryFromNotion = async(projectId) => {
 
       const arr2 = []
       const arr3 = []
+      const arr4 = []
       unique.map((item)=> {
           const obj = {
             label: item.title,
-            value: item.id
+            value: item.id,
+            name: item.name
           }
           arr2.push(obj)
           arr3.push(item.title)
+          arr4.push(item.name)
       })
       console.log("arr2: ", arr2)
-      console.log("categoryAll: ", arr3)
+      console.log("categoryAll: ", arr4)
       
       setCategoryAll(arr3)
+      setCategoryAll2(arr4)
 
       //ф-я установки списка категорий
       setCategoryItem(arr2)
@@ -424,20 +428,24 @@ const onHandlingProject = async(projectId, save, projects) => {
     const result = categoriesitem.split(',');
     const arr2 = []
     const arr3 = []
+    const arr4 = []
     specData.map((category)=> {
       result.map((item)=> {
         if (item === category.icon) {
           const obj = {
               label: category.icon,
-              value: category.id
+              value: category.id,
+              //name: category.name
           }
           arr2.push(obj)
           arr3.push(item)
+          //arr4.push(item)
         }
       })
     })
       
     setCategoryAll(arr3)
+    //setCategoryAll2(arr4)
 
     //ф-я установки списка категорий
     setCategoryItem(arr2)
@@ -625,7 +633,8 @@ const onAddCategory2 = (e) => {
     const cat_label = categories[e.target.value].label
     console.log("cat_name2: ", cat_name)
     console.log("select2: ", cat_label)
-    //console.log("categoryAll2: ", categoryAll2)
+    console.log("categoryAll2: ", categoryAll2)
+    console.log("categoryAll: ", categoryAll)
 
     setArrSelect([])
 
@@ -634,8 +643,6 @@ const onAddCategory2 = (e) => {
 
     arrTemp2.pop()
     arrTemp2.push(cat_label)
-
-    //setCategoryAll2([...categoryAll, ...arrCategory2])
     
     setCategoryAll2([...categoryAll2, ...arrCategory2])
     setCategoryAll([...categoryAll, ...arrTemp2])
@@ -1021,7 +1028,7 @@ const delCategory7 = (category) => {
   const onPlanerShow = async(label, proj, text, id, cats, count, date, poster) => {
     setVisibleModal(!visibleModal)
 
-    if (selected.length !== 0 && file || poster || selected.length !== 0 && text) {
+    if (selected.length !== 0 && file || selected.length !== 0 && text) {
       navigate('/distributionw_planer', {
         state: {
           labelProj: label,
@@ -1048,7 +1055,7 @@ const delCategory7 = (category) => {
     console.log("постер: ", img)
     console.log("получатели: ", selected)
 
-    if (selected.length !== 0 && file || img || selected.length !== 0 && text) {
+    if (selected.length !== 0 && file || selected.length !== 0 && text) {
       audio.play();
 
       const d = new Date();
