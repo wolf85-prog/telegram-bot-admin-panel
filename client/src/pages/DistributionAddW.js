@@ -143,6 +143,7 @@ const DistributionAddW = () => {
     const fetchData = async () => {
 
       let projects = await getProjects3();
+      console.log("Загрузка проектов из БД ...")
       console.log("projects planer: ", projects)
 
       setProjects(projects) 
@@ -378,7 +379,13 @@ const getCategoryFromNotion = async(projectId) => {
 
 
 //функция обработки изменения текущего проекта
-const onHandlingProject = async(projectId, save) => {
+const onHandlingProject = async(projectId, save, projects) => {
+  const arrProjects = []
+
+  console.log("save: ", save)
+  console.log("projectId: ", projectId)
+  console.log("projects: ", projects)
+
   //для планировщика рассылок
   setProj(projectId)
   
@@ -387,23 +394,31 @@ const onHandlingProject = async(projectId, save) => {
   
   console.log("contacts: ", contacts)
 
-  // projects.map((project) => {
-  //   if (project != null) {
-  //     const d = new Date(project.datestart);
-  //     const month = String(d.getMonth()+1).padStart(2, "0");
-  //     const day = String(d.getDate()).padStart(2, "0");
+  if (save) {
+    projects.map((project) => {
+      if (project != null) {
+        const d = new Date(project.datestart);
+        const month = String(d.getMonth()+1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
 
-  //     const newObj = {
-  //       label: `${day}.${month} | ${project.name}`, 
-  //       value: project.id,
-  //     }
-  //     arrProjects.push(newObj)
-  //   }    
-  // })
+        const newObj = {
+          label: `${day}.${month} | ${project.name}`, 
+          value: project.id,
+        }
+        arrProjects.push(newObj)
+      }    
+    })
+    const obj = arrProjects.find((item1)=>item1.value === projectId)
+    console.log("objSave: ", obj)
+    setLabelName(obj)
 
-  const obj = contacts.find((item)=>item.value === projectId)
-  console.log("obj: ", obj)
-  setLabelName(obj)
+  } else {
+    const obj = contacts.find((item)=>item.value === projectId)
+    console.log("obj: ", obj)
+    setLabelName(obj)
+  }
+
+  
 
   if (save) {
     const result = categoriesitem.split(',');
@@ -610,12 +625,17 @@ const onAddCategory2 = (e) => {
     const cat_label = categories[e.target.value].label
     console.log("cat_name2: ", cat_name)
     console.log("select2: ", cat_label)
+    //console.log("categoryAll2: ", categoryAll2)
 
     setArrSelect([])
+
     arrCategory2.pop()
     arrCategory2.push(cat_name)
+
     arrTemp2.pop()
     arrTemp2.push(cat_label)
+
+    //setCategoryAll2([...categoryAll, ...arrCategory2])
     
     setCategoryAll2([...categoryAll2, ...arrCategory2])
     setCategoryAll([...categoryAll, ...arrTemp2])
@@ -661,7 +681,7 @@ const onAddCategory3 = (e) => {
     arrTemp3.pop()
     arrTemp3.push(cat_label)
 
-    console.log("arrCategory3: ", arrCategory3)
+    //console.log("arrCategory3: ", arrCategory3)
     setCategoryAll2([...categoryAll2, ...arrCategory3])
     setCategoryAll([...categoryAll, ...arrTemp3])
     
