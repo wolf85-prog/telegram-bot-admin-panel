@@ -1997,13 +1997,15 @@ const clickShowEditTime2 = (t, ind, tab) => {
         const message = {
           text: textDistr, 
           image: imageDistrib ? imageDistrib : '', 
-          project: `${item.date} | ${projectName}`, 
+          project: labelName, 
           projectId: projectId, 
           receivers: str_cats, 
           datestart: `${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`, 
           delivered: 'false',  
           count: countReceiver,
-          date: `${day2}.${month2}.${year}`,    
+          date: `${day2}.${month2}.${year}`,   
+          button: textButton,
+          users: selected.toString(),   
         }
         //сохранение рассылки в базе данных
         const dataDistrib2 = await newDistributionW(message)
