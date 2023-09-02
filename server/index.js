@@ -86,94 +86,94 @@ const start = async () => {
                 const milliseconds = Math.floor(new Date(date1) - new Date(dateNow));       
                 console.log("milliseconds: ", milliseconds)
 
-                if (milliseconds > 0) {          
-                    const objPlan = {
-                        users: item.users,
-                        //plan: newObj,
-                        text: item.text,
-                        textButton: item.textButton,
-                        image: item.image,
-                        time: milliseconds,
-                        id: item.id,  
-                        projId: item.projectId,      
-                    }
+                // if (milliseconds > 0) {          
+                //     const objPlan = {
+                //         users: item.users,
+                //         //plan: newObj,
+                //         text: item.text,
+                //         textButton: item.textButton,
+                //         image: item.image,
+                //         time: milliseconds,
+                //         id: item.id,  
+                //         projId: item.projectId,      
+                //     }
 
-                    console.log("objPlan: ", objPlan)
+                //     console.log("objPlan: ", objPlan)
 
-                    console.log("!!!!Планирую запуск отправки собщения..." + (index+1))
-                    const timerId = setTimeout(() => {
-                        item.users.map(async (user, index) => {
-                            console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
+                //     console.log("!!!!Планирую запуск отправки собщения..." + (index+1))
+                //     const timerId = setTimeout(() => {
+                //         item.users.map(async (user, index) => {
+                //             console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
                             
-                            //обновить план в БД
-                            const foundItem = await Plan.findOne({ where: {datestart: item.date} });
+                //             //обновить план в БД
+                //             const foundItem = await Plan.findOne({ where: {datestart: item.date} });
 
-                            // if (!foundItem) {
-                            //     // Item not found, create a new one
-                            //     const newPlan = await Plan.create(item.date, plan.times)
-                            //     return res.status(200).json(newPlan);
-                            // }
+                //             // if (!foundItem) {
+                //             //     // Item not found, create a new one
+                //             //     const newPlan = await Plan.create(item.date, plan.times)
+                //             //     return res.status(200).json(newPlan);
+                //             // }
 
-                            // Found an item, update it
-                            //const item = await Plan.update({times: plan.times},{where: {datestart: item.date}});
+                //             // Found an item, update it
+                //             //const item = await Plan.update({times: plan.times},{where: {datestart: item.date}});
 
 
-                            //получить id специалиста по его telegramId
-                            //const worker = await getWorkerId(user)
-                            const worker = await fetch(host_api_bottest + '/workers/chat/' + user);
+                //             //получить id специалиста по его telegramId
+                //             //const worker = await getWorkerId(user)
+                //             const worker = await fetch(host_api_bottest + '/workers/chat/' + user);
                             
-                            //новый претендент
-                            const pretendent = await Pretendent.create(projId, worker.data, user) //{projectId, workerId, receiverId})
+                //             //новый претендент
+                //             const pretendent = await Pretendent.create(projId, worker.data, user) //{projectId, workerId, receiverId})
                     
-                            //Передаем данные боту
-                            const keyboard = JSON.stringify({
-                                inline_keyboard: [
-                                    [
-                                        {"text": textButton, callback_data:'/report'},
-                                    ],
-                                ]
-                            });
+                //             //Передаем данные боту
+                //             const keyboard = JSON.stringify({
+                //                 inline_keyboard: [
+                //                     [
+                //                         {"text": textButton, callback_data:'/report'},
+                //                     ],
+                //                 ]
+                //             });
                         
-                            const keyboard2 = JSON.stringify({
-                                inline_keyboard: [
-                                    [
-                                        {"text": 'Принять', callback_data:'/accept ' + pretendent.id}, //  + pretendent.id
-                                        {"text": 'Отклонить', callback_data:'/cancel'},
-                                    ],
-                                ]
-                            });
+                //             const keyboard2 = JSON.stringify({
+                //                 inline_keyboard: [
+                //                     [
+                //                         {"text": 'Принять', callback_data:'/accept ' + pretendent.id}, //  + pretendent.id
+                //                         {"text": 'Отклонить', callback_data:'/cancel'},
+                //                     ],
+                //                 ]
+                //             });
 
-                            //отправить в телеграмм
-                            let sendToTelegram
-                            if (text !== '') {
-                                const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
-                                //console.log("url_send_msg: ", url_send_msg)
+                //             //отправить в телеграмм
+                //             let sendToTelegram
+                //             if (text !== '') {
+                //                 const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
+                //                 //console.log("url_send_msg: ", url_send_msg)
                                 
-                                //sendToTelegram = await $host.get(url_send_msg);
-                                sendToTelegram = await fetch(url_send_msg);
+                //                 //sendToTelegram = await $host.get(url_send_msg);
+                //                 sendToTelegram = await fetch(url_send_msg);
 
-                                //const objDelivered = {
-                                const delivered = true
-                                //}
+                //                 //const objDelivered = {
+                //                 const delivered = true
+                //                 //}
 
-                                //обновить рассылке статус отправки
-                                //await editDistributionW(objDelivered, dataDistrib.id)
-                                let exist = await Distributionw.findOne( {where: {id: item.id}} )
+                //                 //обновить рассылке статус отправки
+                //                 //await editDistributionW(objDelivered, dataDistrib.id)
+                //                 let exist = await Distributionw.findOne( {where: {id: item.id}} )
                     
-                                if(!exist){
-                                    res.status(500).json({msg: "Рассылка не существует!"});
-                                    return;
-                                }
+                //                 if(!exist){
+                //                     res.status(500).json({msg: "Рассылка не существует!"});
+                //                     return;
+                //                 }
                     
-                                const newDistrib = await Distributionw.update(
-                                    { delivered },
-                                    { where: {id: item.id} })
+                //                 const newDistrib = await Distributionw.update(
+                //                     { delivered },
+                //                     { where: {id: item.id} })
 
-                                return res.status(200).json(newDistrib);
-                            }
-                        })
-                    }, milliseconds)
-                } 
+                //                 return res.status(200).json(newDistrib);
+                //             }
+                //         })
+                //     }, milliseconds)
+                // } 
             })
 
         });
