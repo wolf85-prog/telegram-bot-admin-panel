@@ -108,7 +108,8 @@ class DistributionController {
                     ['id', 'ASC'],
                 ],
                 where: {
-                    delivered: false
+                    delivered: false,
+                    delete: false
                 }
             })
             return res.status(200).json(distributions);

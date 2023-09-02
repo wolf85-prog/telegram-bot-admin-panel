@@ -1921,7 +1921,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
     const res2 = await delDistributionWPlan(obj2)
     console.log("res2 del: ", res2)
-
+    
     const newArray = [].concat(dates, dates1, dates11);
     const planer_str = JSON.stringify(newArray)
 
@@ -1951,8 +1951,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     //массив дат 1-го дня
     newArray.forEach(async (item)=> {
       if (item.save === true && item.proj === projectName && item.go === false) {
-        //console.log("Дата старта: ", `${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`)
-        
+
         //новая рассылка
         const message = {
           //name: 'Рассылка', 
