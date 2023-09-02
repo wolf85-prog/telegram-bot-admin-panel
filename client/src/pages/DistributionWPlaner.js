@@ -2015,7 +2015,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: `${day}.${month}.${year}`,  
           button: textButton,
           users: selected.toString(), 
-          delete: false  
+          delete: "false"  
         }
         //сохранение рассылки в базе данных
         const dataDistrib = await newDistributionW(message) 

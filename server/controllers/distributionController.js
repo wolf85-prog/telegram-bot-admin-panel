@@ -64,7 +64,7 @@ class DistributionController {
 
     //add Distribution
     async newDistributionW(req, res) {
-        const {text, image, project, receivers, datestart, delivered, projectId, count, date, users, button} = req.body
+        const {text, image, project, receivers, datestart, delivered, projectId, count, date, users, button, del} = req.body
         try {
             const distrib = await Distributionw.create({
                 text, 
@@ -77,7 +77,8 @@ class DistributionController {
                 count, 
                 date, 
                 users, 
-                button
+                button,
+                del
             })
             return res.status(200).json(distrib);
         } catch (error) {
@@ -109,7 +110,7 @@ class DistributionController {
                 ],
                 where: {
                     delivered: false,
-                    delete: false
+                    del: false
                 }
             })
             return res.status(200).json(distributions);
@@ -209,7 +210,7 @@ class DistributionController {
             const del = true
 
             const newDistrib = await Distributionw.update(
-                { delete: del },
+                { del },
                 { where: { 
                     projectId: String(id),
                     date: String(date),
