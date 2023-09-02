@@ -154,8 +154,6 @@ class DistributionController {
     //delete message
     async delDistributionWPlan(req, res) {
         const {id, date} = req.body
-        console.log('ID: ', id)
-        console.log('DATE: ', date)
 
         try {
             await Distributionw.destroy({
@@ -186,6 +184,37 @@ class DistributionController {
             const newDistrib = await Distributionw.update(
                 { delivered },
                 { where: {id: id} })
+            return res.status(200).json(newDistrib);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    async editDistribWPlan(req, res) {
+        const {id, date} = req.body
+        try {    
+            let exist=await Distributionw.findAll( {
+                where: { 
+                    projectId: String(id),
+                    date: String(date),
+                    delivered: false,
+                }
+            } )
+            
+            if(!exist){
+                res.status(500).json({msg: "distrib not exist"});
+                return;
+            }
+
+            const del = true
+
+            const newDistrib = await Distributionw.update(
+                { delete: del },
+                { where: { 
+                    projectId: String(id),
+                    date: String(date),
+                    delivered: false,
+                }})
             return res.status(200).json(newDistrib);
         } catch (error) {
             return res.status(500).json(error.message);

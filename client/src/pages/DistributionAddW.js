@@ -1075,7 +1075,8 @@ const delCategory7 = (category) => {
         count: selected.length, 
         date: `${day}.${month}.${year}`, 
         button: textButton,
-        users: selected.toString(),     
+        users: selected.toString(),
+        delete: false     
       }
       console.log("message send button: ", message);
 

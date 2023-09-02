@@ -34,8 +34,7 @@ import {
   getDistributionsW, 
   getDistributionsWPlan, 
   delDistributionWPlan,
-  newPretendent,
-  getWorkerId,
+  editDistributionWPlan,
   editDistributionW,
 } from 'src/http/adminAPI';
 
@@ -44,9 +43,9 @@ const DistributionWPlaner = () => {
   //const [distributionsWork, setDistributionsWork]= useState([]);
   const { addNewDistrib, setDistributionsWork } = useUsersContext();
 
-  const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
-	const host = process.env.REACT_APP_API_URL
-  const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
+  //const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
+	//const host = process.env.REACT_APP_API_URL
+  //const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
   const projectId= location.state?.project
   const labelName= location.state?.labelProj
@@ -98,60 +97,60 @@ const DistributionWPlaner = () => {
 
 
   const [dates, setDates] = useState([
-    {date: date_str, time: '06:00', proj: '', save: false, go: false},
-    {date: date_str, time: '07:00', proj: '', save: false, go: false},
-    {date: date_str, time: '08:00', proj: '', save: false, go: false},
-    {date: date_str, time: '09:00', proj: '', save: false, go: false},
-    {date: date_str, time: '10:00', proj: '', save: false, go: false},
-    {date: date_str, time: '11:00', proj: '', save: false, go: false},
+    {date: date_str, time: '06:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '07:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '08:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '09:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '10:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '11:00', proj: '', save: false, go: false, old: false},
   ])
 
 
   const [dates1, setDates1] = useState([
-    {date: date_str, time: '12:00', proj: '', save: false, go: false},
-    {date: date_str, time: '13:00', proj: '', save: false, go: false},
-    {date: date_str, time: '14:00', proj: '', save: false, go: false},
-    {date: date_str, time: '15:00', proj: '', save: false, go: false},
-    {date: date_str, time: '16:00', proj: '', save: false, go: false},
-    {date: date_str, time: '17:00', proj: '', save: false, go: false},
+    {date: date_str, time: '12:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '13:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '14:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '15:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '16:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '17:00', proj: '', save: false, go: false, old: false},
   ])
 
   const [dates11, setDates11] = useState([
-    {date: date_str, time: '18:00', proj: '', save: false, go: false},
-    {date: date_str, time: '19:00', proj: '', save: false, go: false},
-    {date: date_str, time: '20:00', proj: '', save: false, go: false},
-    {date: date_str, time: '21:00', proj: '', save: false, go: false},
-    {date: date_str, time: '22:00', proj: '', save: false, go: false},
-    {date: date_str, time: '23:00', proj: '', save: false, go: false},
+    {date: date_str, time: '18:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '19:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '20:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '21:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '22:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '23:00', proj: '', save: false, go: false, old: false},
   ])
 
 //----------------------------------------------------------
 const [dates2, setDates2] = useState([
-  {date: date_str2, time: '06:00', proj: '', save: false, go: false},
-  {date: date_str2, time: '07:00', proj: '', save: false, go: false},
-  {date: date_str2, time: '08:00', proj: '', save: false, go: false},
-  {date: date_str2, time: '09:00', proj: '', save: false, go: false},
-  {date: date_str2, time: '10:00', proj: '', save: false, go: false},
-  {date: date_str2, time: '11:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '06:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '07:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '08:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '09:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '10:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '11:00', proj: '', save: false, go: false, old: false},
 ])
 
 
 const [dates22, setDates22] = useState([
-  {date: date_str2, time: '12:00', proj: '', save: false, go: false},
-  {date: date_str2, time: '13:00', proj: '', save: false, go: false},
-  {date: date_str2, time: '14:00', proj: '', save: false, go: false},
-  {date: date_str2, time: '15:00', proj: '', save: false, go: false},
-  {date: date_str2, time: '16:00', proj: '', save: false, go: false},
-  {date: date_str2, time: '17:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '12:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '13:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '14:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '15:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '16:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '17:00', proj: '', save: false, go: false, old: false},
 ])
 
 const [dates222, setDates222] = useState([
-  {date: date_str2, time: '18:00', proj: '', save: false, go: false},
-  {date: date_str2, time: '19:00', proj: '', save: false, go: false},
-  {date: date_str2, time: '20:00', proj: '', save: false, go: false},
-  {date: date_str2, time: '21:00', proj: '', save: false, go: false},
-  {date: date_str2, time: '22:00', proj: '', save: false, go: false},
-  {date: date_str2, time: '23:00', proj: '', save: false, go: false},
+  {date: date_str2, time: '18:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '19:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '20:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '21:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '22:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '23:00', proj: '', save: false, go: false, old: false},
 ])
 
 //----------------------------------------------------------
@@ -215,21 +214,21 @@ const [dates222, setDates222] = useState([
         const times2 = planTimes.slice(ind1, ind2);
         const times3 = planTimes.slice(ind2, planTimes.length); 
 
-        times.map((time, index)=> {
+        times.forEach((time, index)=> {
           if (time.save) {
             value1[index] = true
             setValue1(value1)
           }
         })
 
-        times2.map((time, index)=> {
+        times2.forEach((time, index)=> {
           if (time.save) {
             value2[index] = true
             setValue2(value2)
           }
         })
 
-        times3.map((time, index)=> {
+        times3.forEach((time, index)=> {
           if (time.save) {
             value3[index] = true
             setValue3(value3)
@@ -256,21 +255,21 @@ const [dates222, setDates222] = useState([
         const times2 = planTimes2.slice(ind1, ind2);
         const times3 = planTimes2.slice(ind2, planTimes2.length); 
 
-        times.map((time, index)=> {
+        times.forEach((time, index)=> {
           if (time.save) {
             value21[index] = true
             setValue21(value21)
           }
         })
 
-        times2.map((time, index)=> {
+        times2.forEach((time, index)=> {
           if (time.save) {
             value22[index] = true
             setValue22(value22)
           }
         })
 
-        times3.map((time, index)=> {
+        times3.forEach((time, index)=> {
           if (time.save) {
             value23[index] = true
             setValue23(value23)
@@ -288,7 +287,7 @@ const [dates222, setDates222] = useState([
       }        
 
       //блокируем прошедшее время
-      dates.map((time, index)=> {
+      dates.forEach((time, index)=> {
         console.log("time: ", chas)
         if (time.time.split(":")[0] <= chas) {
           timeold1[index] = true
@@ -296,14 +295,14 @@ const [dates222, setDates222] = useState([
         }
       })
 
-      dates1.map((time, index)=> {
+      dates1.forEach((time, index)=> {
         if (time.time.split(":")[0] <= chas ) {
           timeold2[index] = true
           setTimeold2(timeold2)
         }
       })
 
-      dates11.map((time, index)=> {
+      dates11.forEach((time, index)=> {
         if (time.time.split(":")[0] <= chas) {
           timeold3[index] = true
           setTimeold3(timeold3)
@@ -436,13 +435,14 @@ const [dates222, setDates222] = useState([
             time: '06:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false  
           }
           arr.splice(ind+1, 0, newObj);
           setDates(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value1[index] = item.save
           })
           setValue1(value1)
@@ -455,7 +455,7 @@ const [dates222, setDates222] = useState([
             setDates(arr)
 
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value1[index] = item.save
             })
             setValue1(value1)           
@@ -477,13 +477,14 @@ const [dates222, setDates222] = useState([
               time: '07:30',
               proj: '',
               save: false, 
-              go: false
+              go: false, 
+              old: false
             }
             arr.splice(ind+1, 0, newObj);
             setDates(arr)
   
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value1[index] = item.save
             })
             setValue1(value1)
@@ -496,7 +497,7 @@ const [dates222, setDates222] = useState([
               setDates(arr)
   
               //изменить чек
-              arr.map((item, index)=> {
+              arr.forEach((item, index)=> {
                 value1[index] = item.save
               })
               setValue1(value1)           
@@ -520,13 +521,14 @@ const [dates222, setDates222] = useState([
               time: '08:30',
               proj: '',
               save: false, 
-              go: false
+              go: false, 
+              old: false
             }
             arr.splice(ind+1, 0, newObj);
             setDates(arr)
   
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value1[index] = item.save
             })
             setValue1(value1)
@@ -539,7 +541,7 @@ const [dates222, setDates222] = useState([
               setDates(arr)
   
               //изменить чек
-              arr.map((item, index)=> {
+              arr.forEach((item, index)=> {
                 value1[index] = item.save
               })
               setValue1(value1)           
@@ -562,13 +564,14 @@ const [dates222, setDates222] = useState([
               time: '09:30',
               proj: '',
               save: false, 
-              go: false
+              go: false, 
+              old: false
             }
             arr.splice(ind+1, 0, newObj);
             setDates(arr)
   
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value1[index] = item.save
             })
             setValue1(value1)
@@ -581,7 +584,7 @@ const [dates222, setDates222] = useState([
               setDates(arr)
   
               //изменить чек
-              arr.map((item, index)=> {
+              arr.forEach((item, index)=> {
                 value1[index] = item.save
               })
               setValue1(value1)           
@@ -604,13 +607,14 @@ const [dates222, setDates222] = useState([
               time: '10:30',
               proj: '',
               save: false, 
-              go: false
+              go: false, 
+              old: false
             }
             arr.splice(ind+1, 0, newObj);
             setDates(arr)
   
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value1[index] = item.save
             })
             setValue1(value1)
@@ -623,7 +627,7 @@ const [dates222, setDates222] = useState([
               setDates(arr)
   
               //изменить чек
-              arr.map((item, index)=> {
+              arr.forEach((item, index)=> {
                 value1[index] = item.save
               })
               setValue1(value1)           
@@ -645,13 +649,14 @@ const [dates222, setDates222] = useState([
               time: '11:30',
               proj: '',
               save: false, 
-              go: false
+              go: false, 
+              old: false
             }
             arr.splice(ind+1, 0, newObj);
             setDates(arr)
   
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value1[index] = item.save
             })
             setValue1(value1)          
@@ -665,7 +670,7 @@ const [dates222, setDates222] = useState([
               setDates(arr)
     
               //изменить чек
-              arr.map((item, index)=> {
+              arr.forEach((item, index)=> {
                 value1[index] = item.save
               })
               setValue1(value1)           
@@ -687,13 +692,14 @@ const [dates222, setDates222] = useState([
             time: '12:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value2[index] = item.save
           })
           setValue2(value2)
@@ -706,7 +712,7 @@ const [dates222, setDates222] = useState([
             setDates1(arr)
 
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value2[index] = item.save
             })
             setValue2(value2)           
@@ -726,13 +732,14 @@ const [dates222, setDates222] = useState([
             time: '13:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value2[index] = item.save
           })
           setValue2(value2)
@@ -745,7 +752,7 @@ const [dates222, setDates222] = useState([
             setDates1(arr)
 
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value1[index] = item.save
             })
             setValue1(value1)           
@@ -765,13 +772,14 @@ const [dates222, setDates222] = useState([
             time: '14:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value2[index] = item.save
           })
           setValue2(value2)
@@ -784,7 +792,7 @@ const [dates222, setDates222] = useState([
             setDates1(arr)
 
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value2[index] = item.save
             })
             setValue2(value2)           
@@ -804,13 +812,14 @@ const [dates222, setDates222] = useState([
             time: '15:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value2[index] = item.save
           })
           setValue2(value2)
@@ -823,7 +832,7 @@ const [dates222, setDates222] = useState([
             setDates1(arr)
 
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value2[index] = item.save
             })
             setValue2(value2)           
@@ -843,13 +852,14 @@ const [dates222, setDates222] = useState([
             time: '16:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value2[index] = item.save
           })
           setValue2(value2)
@@ -862,7 +872,7 @@ const [dates222, setDates222] = useState([
             setDates1(arr)
 
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value2[index] = item.save
             })
             setValue2(value2)           
@@ -883,13 +893,14 @@ const [dates222, setDates222] = useState([
             time: '17:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value2[index] = item.save
           })
           setValue2(value2)          
@@ -903,7 +914,7 @@ const [dates222, setDates222] = useState([
             setDates1(arr)
   
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value2[index] = item.save
             })
             setValue2(value2)           
@@ -925,13 +936,14 @@ const [dates222, setDates222] = useState([
             time: '18:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value3[index] = item.save
           })
           setValue3(value3)
@@ -944,7 +956,7 @@ const [dates222, setDates222] = useState([
             setDates11(arr)
 
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value3[index] = item.save
             })
             setValue3(value3)           
@@ -964,13 +976,14 @@ const [dates222, setDates222] = useState([
             time: '19:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value3[index] = item.save
           })
           setValue3(value3)
@@ -983,7 +996,7 @@ const [dates222, setDates222] = useState([
             setDates11(arr)
 
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value3[index] = item.save
             })
             setValue3(value3)           
@@ -1003,13 +1016,14 @@ const [dates222, setDates222] = useState([
             time: '20:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value3[index] = item.save
           })
           setValue3(value3)
@@ -1022,7 +1036,7 @@ const [dates222, setDates222] = useState([
             setDates11(arr)
 
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value3[index] = item.save
             })
             setValue3(value3)           
@@ -1042,13 +1056,14 @@ const [dates222, setDates222] = useState([
             time: '21:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value3[index] = item.save
           })
           setValue3(value3)
@@ -1061,7 +1076,7 @@ const [dates222, setDates222] = useState([
             setDates11(arr)
 
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value3[index] = item.save
             })
             setValue3(value3)           
@@ -1081,13 +1096,14 @@ const [dates222, setDates222] = useState([
             time: '22:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value3[index] = item.save
           })
           setValue3(value3)
@@ -1100,7 +1116,7 @@ const [dates222, setDates222] = useState([
             setDates11(arr)
 
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value3[index] = item.save
             })
             setValue3(value3)           
@@ -1121,13 +1137,14 @@ const [dates222, setDates222] = useState([
             time: '23:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value3[index] = item.save
           })
           setValue3(value3)          
@@ -1141,7 +1158,7 @@ const [dates222, setDates222] = useState([
             setDates11(arr)
   
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value3[index] = item.save
             })
             setValue3(value3)           
@@ -1166,13 +1183,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
           time: '06:30',
           proj: '',
           save: false, 
-          go: false
+          go: false, 
+          old: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates2(arr)
 
         //изменить чек
-        arr.map((item, index)=> {
+        arr.forEach((item, index)=> {
           value21[index] = item.save
         })
         setValue21(value21)
@@ -1185,7 +1203,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           setDates2(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value21[index] = item.save
           })
           setValue21(value21)           
@@ -1207,13 +1225,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
             time: '07:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates2(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value21[index] = item.save
           })
           setValue21(value21)
@@ -1226,7 +1245,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
             setDates2(arr)
 
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value21[index] = item.save
             })
             setValue21(value21)           
@@ -1250,13 +1269,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
             time: '08:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates2(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value21[index] = item.save
           })
           setValue21(value21)                 
@@ -1268,7 +1288,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
             setDates2(arr)
 
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value21[index] = item.save
             })
             setValue21(value21)           
@@ -1291,13 +1311,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
             time: '09:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates2(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value1[index] = item.save
           })
           setValue1(value1)
@@ -1310,7 +1331,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
             setDates2(arr)
 
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value21[index] = item.save
             })
             setValue21(value21)           
@@ -1333,13 +1354,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
             time: '10:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates2(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value21[index] = item.save
           })
           setValue21(value21)                 
@@ -1351,7 +1373,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
             setDates2(arr)
 
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value21[index] = item.save
             })
             setValue21(value21)           
@@ -1373,13 +1395,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
             time: '11:30',
             proj: '',
             save: false, 
-            go: false
+            go: false, 
+            old: false
           }
           arr.splice(ind+1, 0, newObj);
           setDates2(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value21[index] = item.save
           })
           setValue21(value21)          
@@ -1393,7 +1416,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
             setDates2(arr)
   
             //изменить чек
-            arr.map((item, index)=> {
+            arr.forEach((item, index)=> {
               value21[index] = item.save
             })
             setValue21(value21)           
@@ -1415,13 +1438,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
           time: '12:30',
           proj: '',
           save: false, 
-          go: false
+          go: false, 
+          old: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
 
         //изменить чек
-        arr.map((item, index)=> {
+        arr.forEach((item, index)=> {
           value22[index] = item.save
         })
         setValue22(value22)
@@ -1434,7 +1458,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           setDates22(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value22[index] = item.save
           })
           setValue22(value22)           
@@ -1454,13 +1478,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
           time: '13:30',
           proj: '',
           save: false, 
-          go: false
+          go: false, 
+          old: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
 
         //изменить чек
-        arr.map((item, index)=> {
+        arr.forEach((item, index)=> {
           value22[index] = item.save
         })
         setValue22(value22)
@@ -1473,7 +1498,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           setDates22(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value22[index] = item.save
           })
           setValue22(value22)           
@@ -1493,13 +1518,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
           time: '14:30',
           proj: '',
           save: false, 
-          go: false
+          go: false, 
+          old: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
 
         //изменить чек
-        arr.map((item, index)=> {
+        arr.forEach((item, index)=> {
           value22[index] = item.save
         })
         setValue22(value22)
@@ -1512,7 +1538,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           setDates22(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value22[index] = item.save
           })
           setValue22(value22)           
@@ -1532,13 +1558,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
           time: '15:30',
           proj: '',
           save: false, 
-          go: false
+          go: false, 
+          old: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
 
         //изменить чек
-        arr.map((item, index)=> {
+        arr.forEach((item, index)=> {
           value22[index] = item.save
         })
         setValue22(value22)
@@ -1551,7 +1578,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           setDates22(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value22[index] = item.save
           })
           setValue22(value22)           
@@ -1571,13 +1598,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
           time: '16:30',
           proj: '',
           save: false, 
-          go: false
+          go: false, 
+          old: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
 
         //изменить чек
-        arr.map((item, index)=> {
+        arr.forEach((item, index)=> {
           value22[index] = item.save
         })
         setValue22(value22)
@@ -1590,7 +1618,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           setDates22(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value22[index] = item.save
           })
           setValue22(value22)           
@@ -1611,13 +1639,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
           time: '17:30',
           proj: '',
           save: false, 
-          go: false
+          go: false, 
+          old: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
 
         //изменить чек
-        arr.map((item, index)=> {
+        arr.forEach((item, index)=> {
           value22[index] = item.save
         })
         setValue22(value22)          
@@ -1631,7 +1660,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           setDates22(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value22[index] = item.save
           })
           setValue22(value22)           
@@ -1653,13 +1682,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
           time: '18:30',
           proj: '',
           save: false, 
-          go: false
+          go: false, 
+          old: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
 
         //изменить чек
-        arr.map((item, index)=> {
+        arr.forEach((item, index)=> {
           value23[index] = item.save
         })
         setValue23(value23)
@@ -1672,7 +1702,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           setDates222(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value23[index] = item.save
           })
           setValue23(value23)           
@@ -1692,13 +1722,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
           time: '19:30',
           proj: '',
           save: false, 
-          go: false
+          go: false, 
+          old: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
 
         //изменить чек
-        arr.map((item, index)=> {
+        arr.forEach((item, index)=> {
           value23[index] = item.save
         })
         setValue23(value23)
@@ -1711,7 +1742,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           setDates222(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value23[index] = item.save
           })
           setValue23(value23)           
@@ -1731,13 +1762,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
           time: '20:30',
           proj: '',
           save: false, 
-          go: false
+          go: false, 
+          old: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
 
         //изменить чек
-        arr.map((item, index)=> {
+        arr.forEach((item, index)=> {
           value23[index] = item.save
         })
         setValue23(value23)
@@ -1750,7 +1782,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           setDates222(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value23[index] = item.save
           })
           setValue23(value23)           
@@ -1770,13 +1802,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
           time: '21:30',
           proj: '',
           save: false, 
-          go: false
+          go: false, 
+          old: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
 
         //изменить чек
-        arr.map((item, index)=> {
+        arr.forEach((item, index)=> {
           value23[index] = item.save
         })
         setValue23(value23)
@@ -1789,7 +1822,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           setDates222(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value23[index] = item.save
           })
           setValue23(value23)           
@@ -1809,13 +1842,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
           time: '22:30',
           proj: '',
           save: false, 
-          go: false
+          go: false, 
+          old: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
 
         //изменить чек
-        arr.map((item, index)=> {
+        arr.forEach((item, index)=> {
           value23[index] = item.save
         })
         setValue23(value23)
@@ -1828,7 +1862,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           setDates222(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value23[index] = item.save
           })
           setValue23(value23)           
@@ -1849,13 +1883,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
           time: '23:30',
           proj: '',
           save: false, 
-          go: false
+          go: false, 
+          old: false
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
 
         //изменить чек
-        arr.map((item, index)=> {
+        arr.forEach((item, index)=> {
           value23[index] = item.save
         })
         setValue23(value23)          
@@ -1869,7 +1904,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           setDates222(arr)
 
           //изменить чек
-          arr.map((item, index)=> {
+          arr.forEach((item, index)=> {
             value23[index] = item.save
           })
           setValue23(value23)           
@@ -1915,11 +1950,11 @@ const clickShowEditTime2 = (t, ind, tab) => {
       date: d_str2.toLocaleDateString()
     }
 
-    //удалить предыдущие записи запланированных рассылок
-    const res = await delDistributionWPlan(obj)
+    //поменять статус удалено на true (удалить предыдущие записи запланированных рассылок)
+    const res = await editDistributionWPlan(obj)
     console.log("res del: ", res)
 
-    const res2 = await delDistributionWPlan(obj2)
+    const res2 = await editDistributionWPlan(obj2)
     console.log("res2 del: ", res2)
     
     const newArray = [].concat(dates, dates1, dates11);
@@ -1950,7 +1985,21 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
     //массив дат 1-го дня
     newArray.forEach(async (item)=> {
-      if (item.save === true && item.proj === projectName && item.go === false) {
+      
+      if (item.save === true && item.proj === projectName && item.go === false && item.old === false) {
+
+        //обновить план, установить статус old для даты
+        let dateIndex = newArray.findIndex((i) => i.time === item.time)
+        const datesCopy = JSON.parse(JSON.stringify(newArray));
+        const dateObject = datesCopy[dateIndex];
+        datesCopy[dateIndex] = { ...dateObject, ['old']: true};
+        let plan_old = JSON.stringify(datesCopy)
+
+        const plan_obj = {
+          "datestart": d_str.toLocaleDateString(),
+          "times": plan_old
+        }
+        await newPlan(plan_obj);
 
         //новая рассылка
         const message = {
@@ -1965,7 +2014,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           count: countReceiver,
           date: `${day}.${month}.${year}`,  
           button: textButton,
-          users: selected.toString(),   
+          users: selected.toString(), 
+          delete: false  
         }
         //сохранение рассылки в базе данных
         const dataDistrib = await newDistributionW(message) 
@@ -2027,7 +2077,21 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
     //массив дат 2-го дня
     newArray2.forEach(async (item)=> {
-      if (item.save === true && item.proj === projectName && item.go === false) {
+      if (item.save === true && item.proj === projectName && item.go === false && item.old === false) {
+
+        //обновить план, установить статус old для даты
+        let dateIndex = newArray2.findIndex((i) => i.time === item.time)
+        const datesCopy = JSON.parse(JSON.stringify(newArray2));
+        const dateObject = datesCopy[dateIndex];
+        datesCopy[dateIndex] = { ...dateObject, ['old']: true};
+        let plan_old = JSON.stringify(datesCopy)
+
+        const plan_obj2 = {
+          "datestart": d_str2.toLocaleDateString(),
+          "times": plan_old
+        }
+        await newPlan(plan_obj2);
+
         //новая рассылка
         const message = {
           text: textDistr, 

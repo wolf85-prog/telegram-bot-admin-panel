@@ -311,6 +311,14 @@ export const editDistributionW = async (data, id) =>{
     }
 }
 
+export const editDistributionWPlan = async (data) =>{
+    try {
+        await $host.post(`api/distributionsw/plan/update`, data); 
+    } catch (error) {
+        console.log("error while calling editDistributionW api",error.message);
+    }
+}
+
 
 //pretendent
 export const newPretendent = async (data) =>{
