@@ -75,6 +75,7 @@ const Distributionw = sequelize.define('distributionw', {
     button: {type: DataTypes.STRING}, //текст кнопки;
     users: {type: DataTypes.TEXT},
     del: {type: DataTypes.BOOLEAN}, //удалено из плана
+    uuid: {type: DataTypes.STRING}, //индекс рассылки;
 })
 
 const Report = sequelize.define('report', {

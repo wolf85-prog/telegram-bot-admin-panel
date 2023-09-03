@@ -70,7 +70,7 @@ const DistributionAddW = () => {
   const [contacts2, setContacts2]= useState([]);
   const [labelName, setLabelName] = useState({})
   const [proj, setProj] = useState('');
-  //const [projectId, setProjectId] = useState('');
+  const [uuidDistrib, setUuidDistrib] = useState('');
 
   const [arrCategory, setArrCategory] = useState([]);
   const [arrCategory2, setArrCategory2] = useState([]);
@@ -387,6 +387,7 @@ const getCategoryFromNotion = async(projectId) => {
 const onHandlingProject = async(projectId, save, projects) => {
   const arrProjects = []
 
+  setUuidDistrib(uuidv4())
   console.log("uuid: ", uuidv4()) // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
   console.log("save: ", save)
   console.log("projectId: ", projectId)
@@ -1078,7 +1079,8 @@ const delCategory7 = (category) => {
         date: `${day}.${month}.${year}`, 
         button: textButton,
         users: selected.toString(),
-        del: "false"     
+        del: "false",
+        uuid: uuidDistrib,    
       }
       console.log("message send button: ", message);
 
