@@ -23,7 +23,7 @@ class MessageController {
             const count = await Message.count({
                 where: { conversationId },
               });
-            console.log(count)
+            //console.log(count)
 
             const messages = await Message.findAll({
                 where: {conversationId},
@@ -31,7 +31,7 @@ class MessageController {
                 order: [
                     ['id', 'ASC'], //DESC
                 ],
-                offset: count > 250 ? count - 250 : 0,
+                offset: count > 200 ? count - 200 : 0,
                 //limit : 50,
             })
             return res.status(200).json(messages);
