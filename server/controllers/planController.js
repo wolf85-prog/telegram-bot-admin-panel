@@ -74,10 +74,10 @@ class PlanController {
             //удаление таймеров
             const temp = tasks.filter((item) => item.projectId === projId)
             console.log("temp: ", temp)
-            // temp.forEach((tmp)=> {
-            //     clearTimeout(tmp.task)
-            //     console.log("Задача удалена! ")   
-            // })
+            temp.forEach((tmp)=> {
+                //clearTimeout(tmp.task)
+                console.log("Задача удалена! ", tmp.task)   
+            })
             
             console.log("!!!!Планирую запуск отправки собщения...!!!!")
             const timerId = setTimeout(() => {
