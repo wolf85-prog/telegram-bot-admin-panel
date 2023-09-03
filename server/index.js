@@ -68,23 +68,23 @@ const start = async () => {
             console.log("Запускаю планировщик задач...")
 
             //получить запланированные рассылки
-            const distributions = await Distributionw.findAll({
-                order: [
-                    ['id', 'ASC'],
-                ],
-                where: {
-                    delivered: false
-                }
-            })
+            // const distributions = await Distributionw.findAll({
+            //     order: [
+            //         ['id', 'ASC'],
+            //     ],
+            //     where: {
+            //         delivered: false
+            //     }
+            // })
 
-            distributions.forEach(async (item, index)=> {
-                const date1 = item.datestart
-                const dateNow = new Date().getTime() + 10800000
-                console.log("date1: ", new Date(date1))
-                console.log("dateNow: ", new Date(dateNow))
+            // distributions.forEach(async (item, index)=> {
+            //     const date1 = item.datestart
+            //     const dateNow = new Date().getTime() + 10800000
+            //     console.log("date1: ", new Date(date1))
+            //     console.log("dateNow: ", new Date(dateNow))
 
-                const milliseconds = Math.floor(new Date(date1) - new Date(dateNow));       
-                console.log("milliseconds: ", milliseconds)
+            //     const milliseconds = Math.floor(new Date(date1) - new Date(dateNow));       
+            //     console.log("milliseconds: ", milliseconds)
 
                 // if (milliseconds > 0) {          
                 //     const objPlan = {
@@ -174,7 +174,7 @@ const start = async () => {
                 //         })
                 //     }, milliseconds)
                 // } 
-            })
+            // })
 
         });
 

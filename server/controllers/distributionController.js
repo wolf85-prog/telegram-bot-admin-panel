@@ -103,6 +103,7 @@ class DistributionController {
     }
 
     async getDistributionsWPlan(req, res) {
+        const {status} = req.params
         try {
             const distributions = await Distributionw.findAll({
                 order: [
@@ -110,7 +111,7 @@ class DistributionController {
                 ],
                 where: {
                     delivered: false,
-                    del: false
+                    del: status
                 }
             })
             return res.status(200).json(distributions);
@@ -192,7 +193,7 @@ class DistributionController {
     }
 
     async editDistribWPlan(req, res) {
-        const {id, date} = req.body
+        const {id, date, del} = req.body
         try {    
             let exist=await Distributionw.findAll( {
                 where: { 
@@ -206,8 +207,6 @@ class DistributionController {
                 res.status(500).json({msg: "distrib not exist"});
                 return;
             }
-
-            const del = true
 
             const newDistrib = await Distributionw.update(
                 { del },

@@ -267,9 +267,9 @@ export const getDistributionsW = async()=>{
      }
 }
 
-export const getDistributionsWPlan = async()=>{
+export const getDistributionsWPlan = async(status)=>{
     try {
-        let response = await $host.get('api/distributionsw/plan/get');
+        let response = await $host.get(`api/distributionsw/plan/get/${status}`);
         //console.log(response);
         return response.data;
      } catch (error) {

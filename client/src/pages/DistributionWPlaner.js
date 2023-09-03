@@ -1941,13 +1941,15 @@ const clickShowEditTime2 = (t, ind, tab) => {
     
     const obj = {
       id: projectId, 
-      date: d_str.toLocaleDateString()
+      date: d_str.toLocaleDateString(),
+      del: true
     }
     //console.log("obj plan: ", obj)
 
     const obj2 = {
       id: projectId, 
-      date: d_str2.toLocaleDateString()
+      date: d_str2.toLocaleDateString(),
+      del: true
     }
 
     //поменять статус удалено на true (удалить предыдущие записи запланированных рассылок)
@@ -1983,6 +1985,9 @@ const clickShowEditTime2 = (t, ind, tab) => {
     const d = new Date();
     const year = d.getFullYear();
 
+    //получить все рассылки со статусом del = true
+    const arrDistrib = getDistributionsWPlan(true)
+
     //массив дат 1-го дня
     newArray.forEach(async (item)=> {
       
@@ -2015,7 +2020,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: `${day}.${month}.${year}`,  
           button: textButton,
           users: selected.toString(), 
-          delete: "false"  
+          del: "false"  
         }
         //сохранение рассылки в базе данных
         const dataDistrib = await newDistributionW(message) 
@@ -2072,7 +2077,23 @@ const clickShowEditTime2 = (t, ind, tab) => {
           await addTimer(objPlan)
         }
         
-      }    
+      }  
+      
+      if (item.save === true && item.proj === projectName && item.go === false && item.old === true) {
+        const str_date = `${item.date}.${year}T${item.time}:00`
+        
+        arrDistrib.forEach((item) => {
+          if (str_date === item.datestart) {
+            const obj = {
+              id: "",
+              date:"",
+              del: false
+            }
+            editDistributionWPlan(obj)
+          }
+        })
+        
+      }
     })
 
     //массив дат 2-го дня

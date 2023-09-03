@@ -315,7 +315,7 @@ const UsersProvider = ({ children }) => {
 			let response = await getDistributionsW();
       		console.log("distributionW: ", response.length)
 
-			let response2 = await getDistributionsWPlan();
+			let response2 = await getDistributionsWPlan(false);
       		console.log("distributionWPlan: ", response2.length)
 
 			//сортировка
@@ -577,7 +577,7 @@ const UsersProvider = ({ children }) => {
 		let response = await getDistributionsW();
 		  //console.log("distributionW: ", response.length)
 
-		let response2 = await getDistributionsWPlan();
+		let response2 = await getDistributionsWPlan(false);
 		  //console.log("distributionWPlan: ", response2.length)
 
 		//сортировка

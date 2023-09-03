@@ -65,7 +65,7 @@ route.delete('/distributions/delete/:id', delDistribution)
 
 route.post('/distributionw/add', newDistributionW)
 route.get('/distributionsw/get', getDistributionsW)
-route.get('/distributionsw/plan/get', getDistributionsWPlan)
+route.get('/distributionsw/plan/get/:status', getDistributionsWPlan)
 route.get('/distributionw/get/:id', getDistributionW)
 route.delete('/distributionsw/delete/:id', delDistributionW)
 route.post('/distributionsw/delete', delDistributionWPlan)
