@@ -57,6 +57,7 @@ const DistributionWPlaner = () => {
   const showEditButtonAdd = location.state?.showbuttons
   const textButton = location.state?.textbutton
   const selected = location.state?.selected
+  const uuidDistrib = location.state?.uuid
 
 
   console.log("catDistr: ", catDistr)
@@ -65,6 +66,7 @@ const DistributionWPlaner = () => {
   console.log("imageDistrib: ", imageDistrib)
   console.log("selected: ", selected)
   console.log("labelName: ", labelName)
+  console.log("uuidDistrib: ", uuidDistrib)
   
 
   const [countCol, setCountCol] = useState(6)
@@ -97,60 +99,60 @@ const DistributionWPlaner = () => {
 
 
   const [dates, setDates] = useState([
-    {date: date_str, time: '06:00', proj: '', save: false, go: false, old: false},
-    {date: date_str, time: '07:00', proj: '', save: false, go: false, old: false},
-    {date: date_str, time: '08:00', proj: '', save: false, go: false, old: false},
-    {date: date_str, time: '09:00', proj: '', save: false, go: false, old: false},
-    {date: date_str, time: '10:00', proj: '', save: false, go: false, old: false},
-    {date: date_str, time: '11:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '06:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '07:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '08:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '09:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '10:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '11:00', proj: '', save: false, go: false, old: false, uuid: ""},
   ])
 
 
   const [dates1, setDates1] = useState([
-    {date: date_str, time: '12:00', proj: '', save: false, go: false, old: false},
-    {date: date_str, time: '13:00', proj: '', save: false, go: false, old: false},
-    {date: date_str, time: '14:00', proj: '', save: false, go: false, old: false},
-    {date: date_str, time: '15:00', proj: '', save: false, go: false, old: false},
-    {date: date_str, time: '16:00', proj: '', save: false, go: false, old: false},
-    {date: date_str, time: '17:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '12:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '13:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '14:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '15:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '16:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '17:00', proj: '', save: false, go: false, old: false, uuid: ""},
   ])
 
   const [dates11, setDates11] = useState([
-    {date: date_str, time: '18:00', proj: '', save: false, go: false, old: false},
-    {date: date_str, time: '19:00', proj: '', save: false, go: false, old: false},
-    {date: date_str, time: '20:00', proj: '', save: false, go: false, old: false},
-    {date: date_str, time: '21:00', proj: '', save: false, go: false, old: false},
-    {date: date_str, time: '22:00', proj: '', save: false, go: false, old: false},
-    {date: date_str, time: '23:00', proj: '', save: false, go: false, old: false},
+    {date: date_str, time: '18:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '19:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '20:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '21:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '22:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '23:00', proj: '', save: false, go: false, old: false, uuid: ""},
   ])
 
 //----------------------------------------------------------
 const [dates2, setDates2] = useState([
-  {date: date_str2, time: '06:00', proj: '', save: false, go: false, old: false},
-  {date: date_str2, time: '07:00', proj: '', save: false, go: false, old: false},
-  {date: date_str2, time: '08:00', proj: '', save: false, go: false, old: false},
-  {date: date_str2, time: '09:00', proj: '', save: false, go: false, old: false},
-  {date: date_str2, time: '10:00', proj: '', save: false, go: false, old: false},
-  {date: date_str2, time: '11:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '06:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '07:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '08:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '09:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '10:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '11:00', proj: '', save: false, go: false, old: false, uuid: ""},
 ])
 
 
 const [dates22, setDates22] = useState([
-  {date: date_str2, time: '12:00', proj: '', save: false, go: false, old: false},
-  {date: date_str2, time: '13:00', proj: '', save: false, go: false, old: false},
-  {date: date_str2, time: '14:00', proj: '', save: false, go: false, old: false},
-  {date: date_str2, time: '15:00', proj: '', save: false, go: false, old: false},
-  {date: date_str2, time: '16:00', proj: '', save: false, go: false, old: false},
-  {date: date_str2, time: '17:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '12:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '13:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '14:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '15:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '16:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '17:00', proj: '', save: false, go: false, old: false, uuid: ""},
 ])
 
 const [dates222, setDates222] = useState([
-  {date: date_str2, time: '18:00', proj: '', save: false, go: false, old: false},
-  {date: date_str2, time: '19:00', proj: '', save: false, go: false, old: false},
-  {date: date_str2, time: '20:00', proj: '', save: false, go: false, old: false},
-  {date: date_str2, time: '21:00', proj: '', save: false, go: false, old: false},
-  {date: date_str2, time: '22:00', proj: '', save: false, go: false, old: false},
-  {date: date_str2, time: '23:00', proj: '', save: false, go: false, old: false},
+  {date: date_str2, time: '18:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '19:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '20:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '21:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '22:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '23:00', proj: '', save: false, go: false, old: false, uuid: ""},
 ])
 
 //----------------------------------------------------------
@@ -321,10 +323,12 @@ const [dates222, setDates222] = useState([
         value1[ind] = false
         dates[ind].save = false
         dates[ind].proj = ''
+        dates[ind].uuid = ''
       } else {
         console.log('false')
         value1[ind] = true
         dates[ind].proj = projectName //location.state.project
+        dates[ind].uuid = uuidDistrib
         dates[ind].save = true
       }
 
@@ -338,10 +342,12 @@ const [dates222, setDates222] = useState([
       if (value2[ind]) {
         value2[ind] = false
         dates1[ind].proj = ''
+        dates1[ind].uuid = ''
         dates1[ind].save = false
       } else {
         value2[ind] = true
         dates1[ind].proj = projectName //location.state.project
+        dates1[ind].uuid = uuidDistrib
         dates1[ind].save = true
       } 
 
@@ -353,10 +359,12 @@ const [dates222, setDates222] = useState([
       if (value3[ind]) {
         value3[ind] = false
         dates11[ind].proj = ''
+        dates11[ind].uuid = ''
         dates11[ind].save = false
       } else {
         value3[ind] = true
         dates11[ind].proj = projectName //location.state.project
+        dates11[ind].uuid = uuidDistrib
         dates11[ind].save = true
       } 
 
@@ -375,9 +383,11 @@ const [dates222, setDates222] = useState([
         value21[ind] = false
         dates2[ind].save = false
         dates2[ind].proj = ''
+        dates2[ind].uuid = ''
       } else {
         value21[ind] = true
         dates2[ind].proj = projectName //location.state.project
+        dates2[ind].uuid = uuidDistrib
         dates2[ind].save = true
       }
 
@@ -389,10 +399,12 @@ const [dates222, setDates222] = useState([
       if (value22[ind]) {
         value22[ind] = false
         dates22[ind].proj = ''
+        dates22[ind].uuid = ''
         dates22[ind].save = false
       } else {
         value22[ind] = true
         dates22[ind].proj = projectName //location.state.project
+        dates22[ind].uuid = uuidDistrib
         dates22[ind].save = true
       } 
 
@@ -404,10 +416,12 @@ const [dates222, setDates222] = useState([
       if (value23[ind]) {
         value23[ind] = false
         dates222[ind].proj = ''
+        dates222[ind].uuid = ''
         dates222[ind].save = false
       } else {
         value23[ind] = true
         dates222[ind].proj = projectName //location.state.project
+        dates222[ind].uuid = uuidDistrib
         dates222[ind].save = true
       } 
 
@@ -434,6 +448,7 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '06:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false  
@@ -476,6 +491,7 @@ const [dates222, setDates222] = useState([
               date: date_str,
               time: '07:30',
               proj: '',
+              uuid: '',
               save: false, 
               go: false, 
               old: false
@@ -520,6 +536,7 @@ const [dates222, setDates222] = useState([
               date: date_str,
               time: '08:30',
               proj: '',
+              uuid: '',
               save: false, 
               go: false, 
               old: false
@@ -563,6 +580,7 @@ const [dates222, setDates222] = useState([
               date: date_str,
               time: '09:30',
               proj: '',
+              uuid: '',
               save: false, 
               go: false, 
               old: false
@@ -606,6 +624,7 @@ const [dates222, setDates222] = useState([
               date: date_str,
               time: '10:30',
               proj: '',
+              uuid: '',
               save: false, 
               go: false, 
               old: false
@@ -648,6 +667,7 @@ const [dates222, setDates222] = useState([
               date: date_str,
               time: '11:30',
               proj: '',
+              uuid: '',
               save: false, 
               go: false, 
               old: false
@@ -691,6 +711,7 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '12:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -731,6 +752,7 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '13:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -771,6 +793,7 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '14:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -811,6 +834,7 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '15:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -851,6 +875,7 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '16:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -892,6 +917,7 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '17:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -935,6 +961,7 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '18:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -975,6 +1002,7 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '19:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -1015,6 +1043,7 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '20:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -1055,6 +1084,7 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '21:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -1095,6 +1125,7 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '22:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -1136,6 +1167,7 @@ const [dates222, setDates222] = useState([
             date: date_str,
             time: '23:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -1182,6 +1214,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '06:30',
           proj: '',
+          uuid: '',
           save: false, 
           go: false, 
           old: false
@@ -1224,6 +1257,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
             date: date_str2,
             time: '07:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -1268,6 +1302,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
             date: date_str2,
             time: '08:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -1310,6 +1345,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
             date: date_str2,
             time: '09:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -1353,6 +1389,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
             date: date_str2,
             time: '10:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -1394,6 +1431,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
             date: date_str2,
             time: '11:30',
             proj: '',
+            uuid: '',
             save: false, 
             go: false, 
             old: false
@@ -1437,6 +1475,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '12:30',
           proj: '',
+          uuid: '',
           save: false, 
           go: false, 
           old: false
@@ -1477,6 +1516,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '13:30',
           proj: '',
+          uuid: '',
           save: false, 
           go: false, 
           old: false
@@ -1517,6 +1557,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '14:30',
           proj: '',
+          uuid: '',
           save: false, 
           go: false, 
           old: false
@@ -1557,6 +1598,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '15:30',
           proj: '',
+          uuid: '',
           save: false, 
           go: false, 
           old: false
@@ -1597,6 +1639,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '16:30',
           proj: '',
+          uuid: '',
           save: false, 
           go: false, 
           old: false
@@ -1638,6 +1681,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '17:30',
           proj: '',
+          uuid: '',
           save: false, 
           go: false, 
           old: false
@@ -1681,6 +1725,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '18:30',
           proj: '',
+          uuid: '',
           save: false, 
           go: false, 
           old: false
@@ -1721,6 +1766,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '19:30',
           proj: '',
+          uuid: '',
           save: false, 
           go: false, 
           old: false
@@ -1761,6 +1807,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '20:30',
           proj: '',
+          uuid: '',
           save: false, 
           go: false, 
           old: false
@@ -1801,6 +1848,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '21:30',
           proj: '',
+          uuid: '',
           save: false, 
           go: false, 
           old: false
@@ -1841,6 +1889,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '22:30',
           proj: '',
+          uuid: '',
           save: false, 
           go: false, 
           old: false
@@ -1882,6 +1931,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: date_str2,
           time: '23:30',
           proj: '',
+          uuid: '',
           save: false, 
           go: false, 
           old: false
@@ -2020,7 +2070,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: `${day}.${month}.${year}`,  
           button: textButton ? textButton: "",
           users: selected.toString(), 
-          del: "false"  
+          del: "false",
+          uuid: uuidDistrib,  
         }
         //сохранение рассылки в базе данных
         const dataDistrib = await newDistributionW(message) 
@@ -2125,7 +2176,9 @@ const clickShowEditTime2 = (t, ind, tab) => {
           count: countReceiver,
           date: `${day2}.${month2}.${year}`,   
           button: textButton,
-          users: selected.toString(),   
+          users: selected.toString(),  
+          del: "false",
+          uuid: uuidDistrib,  
         }
         //сохранение рассылки в базе данных
         const dataDistrib2 = await newDistributionW(message)
@@ -2265,7 +2318,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                               id="rowCheckTab1"
                                               checked={value1[index]}
                                               onChange={()=>changeStatus(index, 1)}
-                                              disabled={((projectName === item.proj || item.proj === '') && !timeold1[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold1[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -2325,7 +2378,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                               id="rowCheckTab2"
                                               checked={value2[index]}
                                               onChange={()=>changeStatus(index, 2)}
-                                              disabled={((projectName === item.proj || item.proj === '') && !timeold2[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold2[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -2378,7 +2431,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                               id="rowCheckTab3"
                                               checked={value3[index]}
                                               onChange={()=>changeStatus(index, 3)}
-                                              disabled={((projectName === item.proj || item.proj === '') && !timeold3[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold3[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -2436,7 +2489,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                               id="rowCheckTab1"
                                               checked={value21[index]}
                                               onChange={()=>changeStatus2(index, 1)}
-                                              disabled={((projectName === item.proj || item.proj === '') && !timeold21[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold21[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -2488,7 +2541,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                               id="rowCheckTab2"
                                               checked={value22[index]}
                                               onChange={()=>changeStatus2(index, 2)}
-                                              disabled={((projectName === item.proj || item.proj === '') && !timeold22[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold22[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -2541,7 +2594,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                               id="rowCheckTab3"
                                               checked={value23[index]}
                                               onChange={()=>changeStatus2(index, 3)}
-                                              disabled={((projectName === item.proj || item.proj === '') && !timeold23[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold23[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>

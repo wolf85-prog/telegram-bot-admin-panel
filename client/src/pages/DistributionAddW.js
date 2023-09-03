@@ -58,6 +58,7 @@ const DistributionAddW = () => {
   const categoriesitem = location.state?.category
   const datestart = location.state?.date
   const img = location.state?.img
+  const uuidProj = location.state?.uuid
   
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_API_URL
@@ -157,9 +158,10 @@ const DistributionAddW = () => {
         console.log("Текущий постер: ", img)
         console.log("Сохраненные категории: ", categoriesitem)
         console.log("Сохраненная дата: ", datestart)
+        console.log("Сохраненный UUID", uuidProj)
         
         const distrib = await getDistributionW(distribId)
-        onHandlingProject(distrib.projectId, true, projects)
+        onHandlingProject(distrib.projectId, true, projects, uuidProj)
         //для текстового поля
         setText(distrib.text)
         //для телефона
@@ -384,11 +386,12 @@ const getCategoryFromNotion = async(projectId) => {
 
 
 //функция обработки изменения текущего проекта
-const onHandlingProject = async(projectId, save, projects) => {
+const onHandlingProject = async(projectId, save, projects, uuidProj) => {
   const arrProjects = []
 
-  setUuidDistrib(uuidv4())
+  setUuidDistrib(uuidProj ? uuidProj : uuidv4())
   console.log("uuid: ", uuidv4()) // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+  console.log("uuidSave: ", uuidProj) // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
   console.log("save: ", save)
   console.log("projectId: ", projectId)
   console.log("projects: ", projects)
@@ -1028,7 +1031,7 @@ const delCategory7 = (category) => {
 
   //===================================================================
   {/* Запланировать рассылку */}
-  const onPlanerShow = async(label, proj, text, id, cats, count, date, poster) => {
+  const onPlanerShow = async(label, proj, text, id, cats, count, date, poster, uuidDistrib) => {
     setVisibleModal(!visibleModal)
 
     if (selected.length !== 0 && file || selected.length !== 0 && text) {
@@ -1043,6 +1046,7 @@ const delCategory7 = (category) => {
           date: date,
           image: poster,
           selected: selected, 
+          uuid: uuidDistrib
         }
       });
     } 
@@ -1678,7 +1682,7 @@ const delCategory7 = (category) => {
                                       </div> */}
                                       <div>
                                         {proj ? 
-                                          <CButton color="success" onClick={()=>onPlanerShow(labelName.label, proj, text, distribId, categoryAll, selected.length, datestart, poster)}>Запланировать</CButton>
+                                          <CButton color="success" onClick={()=>onPlanerShow(labelName.label, proj, text, distribId, categoryAll, selected.length, datestart, poster, uuidDistrib)}>Запланировать</CButton>
                                           :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>
                                         }             
                                       </div>
