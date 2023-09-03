@@ -2018,7 +2018,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           delivered: 'false',  
           count: countReceiver,
           date: `${day}.${month}.${year}`,  
-          button: textButton,
+          button: textButton ? textButton: "",
           users: selected.toString(), 
           del: "false"  
         }

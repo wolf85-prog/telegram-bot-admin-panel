@@ -46,7 +46,8 @@ import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 import phone_image from './../assets/images/phone2.png';
 import noimage2 from './../assets/images/images.png';
 import treug from './../assets/images/treugolnik.png';
-import { locale } from 'core-js/web'
+import { locale } from 'core-js/web';
+import { v4 as uuidv4 } from 'uuid';
 
 const DistributionAddW = () => {
   const [poster, setPoster]= useState('');
