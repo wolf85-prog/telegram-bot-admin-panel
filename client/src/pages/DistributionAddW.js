@@ -387,6 +387,7 @@ const getCategoryFromNotion = async(projectId) => {
 const onHandlingProject = async(projectId, save, projects) => {
   const arrProjects = []
 
+  console.log("uuid: ", uuidv4()) // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
   console.log("save: ", save)
   console.log("projectId: ", projectId)
   console.log("projects: ", projects)

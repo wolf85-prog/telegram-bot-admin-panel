@@ -34,7 +34,7 @@ export const getProjects2 = async () =>{
 export const getProjects3 = async () =>{
     try {
         let response = await $host_bot.get('projects3');
-        console.log("projectsAPI: ", response.data);
+        //console.log("projectsAPI: ", response.data);
         return response.data;
     } catch (error) {
         console.log("error while calling getProjects3 api", error.message);

@@ -24,7 +24,7 @@ class PretendentController {
             const count = await Pretendent.count({
                 where: { receiverId },
               });
-            console.log(count)
+            //console.log(count)
 
             const spec = await Pretendent.findAll({
                 where: {receiverId},
