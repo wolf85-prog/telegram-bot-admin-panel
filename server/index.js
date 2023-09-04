@@ -158,7 +158,6 @@ const getDistributionsPlan = async() => {
                     //получить id специалиста по его telegramId
                     //const worker = await getWorkerId(user)
                     const worker = await fetch(host_api_bottest + '/workers/chat/' + user);
-                    //console.log(host_api_bottest + '/workers/chat/' + user)
                     console.log("worker: ", worker)
                     
                     //новый претендент
@@ -167,16 +166,16 @@ const getDistributionsPlan = async() => {
 
                     const projId = item.projectId
 
-                    count = await Pretendent.count({
-                        where: { user, projId },
-                    });
-                    if (count === 0) {
-                        pretendent = await Pretendent.create(projId, worker, user) //{projectId, workerId, receiverId}) 
-                    } else {
-                        pretendent = await Pretendent.findOne({
-                            where: {user, projId},
-                        })
-                    }
+                    // count = await Pretendent.count({
+                    //     where: { user, projId },
+                    // });
+                    // if (count === 0) {
+                    //     pretendent = await Pretendent.create(projId, worker, user) //{projectId, workerId, receiverId}) 
+                    // } else {
+                    //     pretendent = await Pretendent.findOne({
+                    //         where: {user, projId},
+                    //     })
+                    // }
                     
                     //Передаем данные боту
                     const keyboard = JSON.stringify({
@@ -190,7 +189,7 @@ const getDistributionsPlan = async() => {
                     const keyboard2 = JSON.stringify({
                         inline_keyboard: [
                             [
-                                {"text": 'Принять', callback_data:'/accept ' + pretendent.id}, //  + pretendent.id
+                                {"text": 'Принять', callback_data:'/accept '}, //  + pretendent.id
                                 {"text": 'Отклонить', callback_data:'/cancel'},
                             ],
                         ]
