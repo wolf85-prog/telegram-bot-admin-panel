@@ -116,7 +116,7 @@ const start = async () => {
                             
                             //получить план из БД
                             const plan = await Plan.findOne({
-                                where: {datestart: date1}
+                                where: {datestart: date1.toLocaleDateString()}
                             })
                             console.log(plan)
                             //const newArray = JSON.parse(plan.times)
@@ -160,7 +160,7 @@ const start = async () => {
                             const keyboard = JSON.stringify({
                                 inline_keyboard: [
                                     [
-                                        {"text": textButton, callback_data:'/report'},
+                                        {"text": item.textButton, callback_data:'/report'},
                                     ],
                                 ]
                             });
