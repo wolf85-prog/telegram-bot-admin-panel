@@ -157,8 +157,18 @@ const getDistributionsPlan = async() => {
 
                     //получить id специалиста по его telegramId
                     //const worker = await getWorkerId(user)
-                    const worker = await fetch(host_api_bottest + '/workers/chat/' + user);
-                    console.log("worker: ", worker)
+                    let worker
+                    await fetch(host_api_bottest + '/workers/chat/' + user)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data) {
+                            console.log("worker: ", data)
+                            worker = data
+                        } else {
+                            console.log("Worker не найден!")
+                        }                             
+                    });
+                    
                     
                     //новый претендент
                     let count = 0
@@ -217,7 +227,7 @@ const getDistributionsPlan = async() => {
                         )
                     }
                 })
-            }, milliseconds)
+            }, 150000)
 
             tasks.push(timerId)
         } 
