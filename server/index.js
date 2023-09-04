@@ -111,7 +111,7 @@ const start = async () => {
 
                     console.log("!!!!Планирую запуск отправки собщения..." + (index+1))
                     const timerId = setTimeout(() => {
-                        item.users.map(async (user, ind) => {
+                        objPlan.users.map(async (user, ind) => {
                             console.log("Пользователю ID: " + user + " сообщение " + item.text + " отправлено! Кнопка " + item.textButton + " отправлена!")
                             
                             //получить план из БД
