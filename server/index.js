@@ -285,17 +285,18 @@ const start = async () => {
                     //const projId = item.projectId
 
                     count = await Pretendent.count({
-                        where: { receiverId: '805436270', projectId: '5ecac1e4-3559-4bfa-9b3c-28e1591ea3da' },
+                        where: { receiverId: '805436270', projectId: '1ecac1e4-3559-4bfa-9b3c-28e1591ea3d' },
                     });
                     console.log("worker: ", worker)
                     console.log("count: ", count)
                     if (count === 0) {
                         console.log("create...")
-                        pretendent = await Pretendent.create('5ecac1e4-3559-4bfa-9b3c-28e1591ea3da', worker, '805436270') //{projectId, workerId, receiverId}) 
+                        pretendent = await Pretendent.create('1ecac1e4-3559-4bfa-9b3c-28e1591ea3d', worker, '805436270') //{projectId, workerId, receiverId}) 
+                        console.log(pretendent.id)
                     } else {
                         console.log("find...")
                         pretendent = await Pretendent.findOne({
-                            where: {receiverId: '805436270', projectId: '5ecac1e4-3559-4bfa-9b3c-28e1591ea3da' },
+                            where: {receiverId: '805436270', projectId: '1ecac1e4-3559-4bfa-9b3c-28e1591ea3d' },
                         })
                         console.log(pretendent.id)
                     }
