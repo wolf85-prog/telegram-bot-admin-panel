@@ -127,6 +127,7 @@ const start = async () => {
                                 where: {datestart: date2}
                             })
                             console.log("plan: ", plan)
+                            
                             //const newArray = JSON.parse(plan.times)
                             //let time1 = date1.split('T')[1]
 
