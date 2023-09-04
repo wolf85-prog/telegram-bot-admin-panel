@@ -172,6 +172,8 @@ class DistributionController {
         }
     }
 
+
+    //обновить рассылку - поменять статус delivered
     async editDistribW(req, res) { 
         const {id} = req.params      
         try {    
@@ -193,12 +195,13 @@ class DistributionController {
         }
     }
 
+    //обновить рассылку - поменять статус del
     async editDistribWPlan(req, res) {
         const {id, date, del} = req.body
         try {    
             let exist=await Distributionw.findAll( {
                 where: { 
-                    projectId: String(id),
+                    uuid: String(id),
                     date: String(date),
                     delivered: false,
                 }
@@ -212,7 +215,7 @@ class DistributionController {
             const newDistrib = await Distributionw.update(
                 { del },
                 { where: { 
-                    projectId: String(id),
+                    uuid: String(id),
                     date: String(date),
                     delivered: false,
                 }})

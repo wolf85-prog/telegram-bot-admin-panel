@@ -169,6 +169,7 @@ const [dates222, setDates222] = useState([
   const [value23, setValue23] = useState([false, false, false, false, false, false, false])
 
   const [showLoader, setShowLoader] = useState(true)
+  const [showSave, setShowSave] = useState(false)
 
   const [toast, addToast] = useState(0)
   const toaster = useRef()
@@ -1974,10 +1975,11 @@ const clickShowEditTime2 = (t, ind, tab) => {
       </div>
     </CToast>
   )
-
-  //запланировать (сохранить) рассылки
+  //==========================================================================
+  // запланировать (сохранить) рассылки
+  //=========================================================================
   const savePlan = async() => {
-    addToast(exampleToast) //ваш план сохранен
+    setShowSave(true)
 
     // console.log("категории: ", catDistr)
     // console.log("текст: ", textDistr)
@@ -1994,27 +1996,26 @@ const clickShowEditTime2 = (t, ind, tab) => {
       date: d_str.toLocaleDateString(),
       del: true
     }
-    //console.log("obj plan: ", obj)
-
     const obj2 = {
       id: projectId, 
       date: d_str2.toLocaleDateString(),
       del: true
     }
 
-    //поменять статус удалено на true (удалить предыдущие записи запланированных рассылок)
+    //поменять статус удалено/del на true (удалить предыдущие записи запланированных рассылок)
     const res = await editDistributionWPlan(obj)
-    console.log("res del: ", res)
-
     const res2 = await editDistributionWPlan(obj2)
-    console.log("res2 del: ", res2)
     
+
+    //1. сохранить все галочки и название проектов в массиве
     const newArray = [].concat(dates, dates1, dates11);
     const planer_str = JSON.stringify(newArray)
+    //console.log("dates: ", newArray)
 
     const newArray2 = [].concat(dates2, dates22, dates222);
     const planer_str2 = JSON.stringify(newArray2)
 
+    //обновить план
     //1-й день
     const newObj = {
       "datestart": d_str.toLocaleDateString(),
@@ -2029,8 +2030,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
     }
     await newPlan(newObj2);
 
+
     let str_cats = catDistr.map(item => item).join(',')
-    //console.log("Plan Category: ", str_cats)
 
     const d = new Date();
     const year = d.getFullYear();
@@ -2041,7 +2042,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     //массив дат 1-го дня
     newArray.forEach(async (item)=> {
       
-      if (item.save === true && item.proj === projectName && item.go === false && item.old === false) {
+      if (item.save === true && item.uuid === uuidDistrib && item.go === false ) {
 
         //обновить план, установить статус old для даты
         let dateIndex = newArray.findIndex((i) => i.time === item.time)
@@ -2112,32 +2113,30 @@ const clickShowEditTime2 = (t, ind, tab) => {
           "times": planer_str
         }
         
-        if (milliseconds > 0) {
+        // if (milliseconds > 0) {
           
-          const objPlan = {
-            users: selected,
-            plan: newObj,
-            text: textDistr,
-            textButton: textButton,
-            time: milliseconds,
-            id: dataDistrib.id,  
-            projId: projectId,      
-          }
+        //   const objPlan = {
+        //     users: selected,
+        //     plan: newObj,
+        //     text: textDistr,
+        //     textButton: textButton,
+        //     time: milliseconds,
+        //     id: dataDistrib.id,  
+        //     projId: projectId,      
+        //   }
 
-          //запланировать отправку рассылок
-          await addTimer(objPlan)
-        }
+        //   //запланировать отправку рассылок
+        //   await addTimer(objPlan)
+        // }
         
-      }  
-      
-      if (item.save === true && item.proj === projectName && item.go === false && item.old === true) {
+      } else if (item.save === true && item.uuid !== uuidDistrib && item.go === false) {
         const str_date = `${item.date}.${year}T${item.time}:00`
         
         arrDistrib.forEach((item) => {
           if (str_date === item.datestart) {
             const obj = {
-              id: "",
-              date:"",
+              uuid: item.uuid,
+              date: str_date,
               del: false
             }
             editDistributionWPlan(obj)
@@ -2219,29 +2218,31 @@ const clickShowEditTime2 = (t, ind, tab) => {
           "times": planer_str
         }
         
-        if (milliseconds > 0) {
+       // if (milliseconds > 0) {
           
-          const objPlan = {
-            users: selected,
-            plan: newObj,
-            text: textDistr,
-            textButton: textButton,
-            time: milliseconds,
-            id: dataDistrib2.id,  
-            projId: projectId,      
-          }
+          // const objPlan = {
+          //   users: selected,
+          //   plan: newObj,
+          //   text: textDistr,
+          //   textButton: textButton,
+          //   time: milliseconds,
+          //   id: dataDistrib2.id,  
+          //   projId: projectId,      
+          // }
 
           //запланировать отправку рассылок
-          await addTimer(objPlan)
-        }
+          //await addTimer(objPlan)
+       // }
       }
     })
 
     //обновить список рассылок
-    addNewDistrib(true)
+    await addNewDistrib(true)
 
+    addToast(exampleToast) //уведомление - ваш план сохранен
+    setShowSave(false)
 
-    setTimeout(() => backPage(), 1000);
+    setTimeout(() => backPage(), 2000);
   }
 
   return (
@@ -2605,6 +2606,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                 </CCol>
                               </CRow>
 
+
+
                             <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '15px'}}>
                               <div style={{marginRight: '16px'}}>
                                 <Link to={'/distributionw_add'}>
@@ -2612,7 +2615,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                 </Link>
                               </div>
                               <div>
-                                <CButton color="primary" onClick={savePlan} style={{width: '130px'}}>Сохранить</CButton>
+                                <CButton color="primary" onClick={savePlan} style={{width: '130px'}}>{showSave ? <CSpinner style={{width: '20px', height: '20px'}}/> : 'Сохранить'}</CButton>
                                 {/* <CButton onClick={() => addToast(exampleToast)}>Send a toast</CButton> */}
                                 <CToaster ref={toaster} push={toast} placement="top-end" />  
                               </div>
