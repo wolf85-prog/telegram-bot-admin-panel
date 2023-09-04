@@ -166,16 +166,16 @@ const getDistributionsPlan = async() => {
 
                     const projId = item.projectId
 
-                    // count = await Pretendent.count({
-                    //     where: { user, projId },
-                    // });
-                    // if (count === 0) {
-                    //     pretendent = await Pretendent.create(projId, worker, user) //{projectId, workerId, receiverId}) 
-                    // } else {
-                    //     pretendent = await Pretendent.findOne({
-                    //         where: {user, projId},
-                    //     })
-                    // }
+                    count = await Pretendent.count({
+                        where: { receiverId: user, projectId: projId },
+                    });
+                    if (count === 0) {
+                        pretendent = await Pretendent.create(projId, worker, user) //{projectId, workerId, receiverId}) 
+                    } else {
+                        pretendent = await Pretendent.findOne({
+                            where: {receiverId: user, projectId: projId },
+                        })
+                    }
                     
                     //Передаем данные боту
                     const keyboard = JSON.stringify({
