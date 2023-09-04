@@ -259,9 +259,45 @@ const start = async () => {
             console.log('HTTPS Server Admin-panel running on port ' + port);
 
             // начало цикла           
-            setInterval(async() => {              
-                getDistributionsPlan()
-            }, 120000) //каждые 2 минуты);
+            // setInterval(async() => {              
+            //     getDistributionsPlan()
+            // }, 120000) //каждые 2 минуты);
+
+            //получить id специалиста по его telegramId
+
+                    let worker
+                    await fetch(host_api_bottest + '/workers/chat/805436270' )
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data) {
+                            console.log("data: ", data)
+                            worker = data
+                        } else {
+                            console.log("Worker не найден!")
+                        }                             
+                    });
+                    
+                    
+                    //новый претендент
+                    let count = 0
+                    let pretendent
+
+                    const projId = item.projectId
+
+                    count = await Pretendent.count({
+                        where: { receiverId: '805436270', projectId: '5ecac1e4-3559-4bfa-9b3c-28e1591ea3da' },
+                    });
+                    console.log("worker: ", worker)
+                    console.log("count: ", count)
+                    if (count === 0) {
+                        console.log("create...")
+                        pretendent = await Pretendent.create('5ecac1e4-3559-4bfa-9b3c-28e1591ea3da', worker, '805436270') //{projectId, workerId, receiverId}) 
+                    } else {
+                        console.log("find...")
+                        pretendent = await Pretendent.findOne({
+                            where: {receiverId: '805436270', projectId: '5ecac1e4-3559-4bfa-9b3c-28e1591ea3da' },
+                        })
+                    }
         }); 
 
     } catch (error) {
