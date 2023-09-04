@@ -94,6 +94,14 @@ const start = async () => {
                 console.log("date1: ", new Date(date1))
                 console.log("dateNow: ", new Date(dateNow))
 
+                const d = new Date(date1);
+                const month = String(d.getMonth()+1).padStart(2, "0");
+                const day = String(d.getDate()).padStart(2, "0");
+                const year = d.getFullYear();
+                const chas = d.getHours();
+                const minut = String(d.getMinutes()).padStart(2, "0");
+                const date2 = `${day}.${month}.${year}`
+
                 const milliseconds = Math.floor(new Date(date1) - new Date(dateNow));       
                 console.log("milliseconds: ", milliseconds)
 
@@ -113,10 +121,10 @@ const start = async () => {
                     const timerId = setTimeout(() => {
                         objPlan.users.map(async (user, ind) => {
                             console.log("Пользователю ID: " + user + " сообщение " + item.text + " отправлено! Кнопка " + item.textButton + " отправлена!")
-                            console.log(new Date(date1).toLocaleDateString())
+                            console.log(date2)
                             //получить план из БД
                             const plan = await Plan.findOne({
-                                where: {datestart: new Date(date1).toLocaleDateString()}
+                                where: {datestart: date2}
                             })
                             console.log("plan: ", plan)
                             //const newArray = JSON.parse(plan.times)
