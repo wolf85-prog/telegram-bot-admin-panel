@@ -104,7 +104,6 @@ class DistributionController {
     }
 
     async getDistributionsWPlan(req, res) {
-        const {status} = req.params
         try {
             const distributions = await Distributionw.findAll({
                 order: [
@@ -112,7 +111,6 @@ class DistributionController {
                 ],
                 where: {
                     delivered: false,
-                    del: status
                 }
             })
             return res.status(200).json(distributions);

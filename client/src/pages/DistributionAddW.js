@@ -1083,7 +1083,6 @@ const delCategory7 = (category) => {
         date: `${day}.${month}.${year}`, 
         button: textButton,
         users: selected.toString(),
-        del: "false",
         uuid: uuidDistrib,    
       }
       console.log("message send button: ", message);

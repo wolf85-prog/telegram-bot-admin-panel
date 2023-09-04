@@ -1993,15 +1993,13 @@ const clickShowEditTime2 = (t, ind, tab) => {
     const obj = {
       id: uuidDistrib, 
       date: d_str.toLocaleDateString(),
-      //del: true
     }
     const obj2 = {
       id: uuidDistrib, 
       date: d_str2.toLocaleDateString(),
-      //del: true
     }
 
-    //поменять статус удалено/del на true (удалить предыдущие записи запланированных рассылок)
+    //(удалить предыдущие записи запланированных рассылок)
     const res = await delDistributionWPlan(obj) //editDistributionWPlan(obj)
     const res2 = await delDistributionWPlan(obj2) //editDistributionWPlan(obj2)
     
@@ -2036,7 +2034,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     const year = d.getFullYear();
 
     //получить все рассылки со статусом del = true
-    const arrDistrib = getDistributionsWPlan(true)
+    //const arrDistrib = getDistributionsWPlan(true)
 
     //массив дат 1-го дня
     newArray.forEach(async (item)=> {
@@ -2057,7 +2055,6 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: `${day}.${month}.${year}`,  
           button: textButton ? textButton: "",
           users: selected.toString(), 
-          del: "false",
           uuid: uuidDistrib,  
         }
         //сохранение рассылки в базе данных
@@ -2115,21 +2112,22 @@ const clickShowEditTime2 = (t, ind, tab) => {
         //   await addTimer(objPlan)
         // }
         
-      } else if (item.save === true && item.uuid !== uuidDistrib && item.go === false) {
-        const str_date = `${item.date}.${year}T${item.time}:00`
+      } 
+      // else if (item.save === true && item.uuid !== uuidDistrib && item.go === false) {
+      //   const str_date = `${item.date}.${year}T${item.time}:00`
         
-        arrDistrib.forEach((item) => {
-          if (str_date === item.datestart) {
-            const obj = {
-              uuid: item.uuid,
-              date: str_date,
-              del: false
-            }
-            editDistributionWPlan(obj)
-          }
-        })
+      //   arrDistrib.forEach((item) => {
+      //     if (str_date === item.datestart) {
+      //       const obj = {
+      //         uuid: item.uuid,
+      //         date: str_date,
+      //         del: false
+      //       }
+      //       editDistributionWPlan(obj)
+      //     }
+      //   })
         
-      }
+      // }
     })
 
     //массив дат 2-го дня
@@ -2149,7 +2147,6 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: `${day2}.${month2}.${year}`,   
           button: textButton,
           users: selected.toString(),  
-          del: "false",
           uuid: uuidDistrib,  
         }
         //сохранение рассылки в базе данных
@@ -2206,21 +2203,22 @@ const clickShowEditTime2 = (t, ind, tab) => {
           //запланировать отправку рассылок
           //await addTimer(objPlan)
        // }
-      } else if (item.save === true && item.uuid !== uuidDistrib && item.go === false) {
-        const str_date = `${item.date}.${year}T${item.time}:00`
+      } 
+      // else if (item.save === true && item.uuid !== uuidDistrib && item.go === false) {
+      //   const str_date = `${item.date}.${year}T${item.time}:00`
         
-        arrDistrib.forEach((item) => {
-          if (str_date === item.datestart) {
-            const obj = {
-              uuid: item.uuid,
-              date: str_date,
-              del: false
-            }
-            editDistributionWPlan(obj)
-          }
-        })
+      //   arrDistrib.forEach((item) => {
+      //     if (str_date === item.datestart) {
+      //       const obj = {
+      //         uuid: item.uuid,
+      //         date: str_date,
+      //         del: false
+      //       }
+      //       editDistributionWPlan(obj)
+      //     }
+      //   })
         
-      }
+      // }
     })
 
     //обновить список рассылок
