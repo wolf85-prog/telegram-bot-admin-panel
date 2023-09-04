@@ -118,7 +118,7 @@ const start = async () => {
                             const plan = await Plan.findOne({
                                 where: {datestart: new Date(date1).toLocaleDateString()}
                             })
-                            console.log(plan)
+                            console.log("plan: ", plan)
                             //const newArray = JSON.parse(plan.times)
                             //let time1 = date1.split('T')[1]
 
@@ -176,7 +176,7 @@ const start = async () => {
 
                             //отправить в телеграмм
                             let sendToTelegram
-                            if (text !== '') {
+                            if (item.text !== '') {
                                 const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
                                 
                                 sendToTelegram = await fetch(url_send_msg);
