@@ -113,7 +113,7 @@ const start = async () => {
                     const timerId = setTimeout(() => {
                         objPlan.users.map(async (user, ind) => {
                             console.log("Пользователю ID: " + user + " сообщение " + item.text + " отправлено! Кнопка " + item.textButton + " отправлена!")
-                            
+                            console.log(new Date(date1).toLocaleDateString())
                             //получить план из БД
                             const plan = await Plan.findOne({
                                 where: {datestart: new Date(date1).toLocaleDateString()}
