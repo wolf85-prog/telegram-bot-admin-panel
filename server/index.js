@@ -12,6 +12,8 @@ const bodyParser = require("body-parser");
 //планировщик
 const cron = require('node-cron');
 
+let tasks = []
+
 // Port that the webserver listens to
 const port = process.env.PORT || 5000;
 const host_api_bottest = process.env.BOTTEST_API_URL
@@ -65,26 +67,35 @@ const start = async () => {
             const date_str2 = `${day2}.${month2}`;
             const year = d.getFullYear();
 
+            //удаление таймеров
+            // console.log("Запускаю очистку задач...")
+            // const temp = tasks.filter((item) => item.projectId === projId)
+            // console.log("temp: ", temp)
+            // temp.forEach((tmp)=> {
+            //     //clearTimeout(tmp.task)
+            //     console.log("Задача удалена! ", tmp.task)   
+            // })
+
             console.log("Запускаю планировщик задач...")
 
             //получить запланированные рассылки
-            // const distributions = await Distributionw.findAll({
-            //     order: [
-            //         ['id', 'ASC'],
-            //     ],
-            //     where: {
-            //         delivered: false
-            //     }
-            // })
+            const distributions = await Distributionw.findAll({
+                order: [
+                    ['id', 'ASC'],
+                ],
+                where: {
+                    delivered: false
+                }
+            })
 
-            // distributions.forEach(async (item, index)=> {
-            //     const date1 = item.datestart
-            //     const dateNow = new Date().getTime() + 10800000
-            //     console.log("date1: ", new Date(date1))
-            //     console.log("dateNow: ", new Date(dateNow))
+            distributions.forEach(async (item, index)=> {
+                const date1 = item.datestart
+                const dateNow = new Date().getTime() + 10800000
+                console.log("date1: ", new Date(date1))
+                console.log("dateNow: ", new Date(dateNow))
 
-            //     const milliseconds = Math.floor(new Date(date1) - new Date(dateNow));       
-            //     console.log("milliseconds: ", milliseconds)
+                const milliseconds = Math.floor(new Date(date1) - new Date(dateNow));       
+                console.log("milliseconds: ", milliseconds)
 
                 // if (milliseconds > 0) {          
                 //     const objPlan = {
@@ -174,7 +185,7 @@ const start = async () => {
                 //         })
                 //     }, milliseconds)
                 // } 
-            // })
+            })
 
         });
 

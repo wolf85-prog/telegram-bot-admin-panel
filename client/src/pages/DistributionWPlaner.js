@@ -2095,6 +2095,9 @@ const clickShowEditTime2 = (t, ind, tab) => {
           "datestart": d_str.toLocaleDateString(),
           "times": planer_str
         }
+
+        //обновить план в БД
+        newPlan(newObj)
         
         // if (milliseconds > 0) {
           
@@ -2187,6 +2190,10 @@ const clickShowEditTime2 = (t, ind, tab) => {
           "datestart": d_str.toLocaleDateString(),
           "times": planer_str
         }
+
+        //обновить план в БД
+        newPlan(newObj)
+                    
         
        // if (milliseconds > 0) {
           
@@ -2204,21 +2211,6 @@ const clickShowEditTime2 = (t, ind, tab) => {
           //await addTimer(objPlan)
        // }
       } 
-      // else if (item.save === true && item.uuid !== uuidDistrib && item.go === false) {
-      //   const str_date = `${item.date}.${year}T${item.time}:00`
-        
-      //   arrDistrib.forEach((item) => {
-      //     if (str_date === item.datestart) {
-      //       const obj = {
-      //         uuid: item.uuid,
-      //         date: str_date,
-      //         del: false
-      //       }
-      //       editDistributionWPlan(obj)
-      //     }
-      //   })
-        
-      // }
     })
 
     //обновить список рассылок
