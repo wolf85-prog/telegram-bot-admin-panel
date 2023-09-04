@@ -105,7 +105,7 @@ const getDistributionsPlan = async() => {
         const milliseconds = Math.floor(new Date(date1) - new Date(dateNow));       
         console.log("milliseconds: ", milliseconds)
 
-        if (milliseconds > 0) {          
+        //if (milliseconds > 0) {          
             const objPlan = {
                 users: item.users.split(','),
                 text: item.text,
@@ -230,7 +230,7 @@ const getDistributionsPlan = async() => {
             }, 150000)
 
             tasks.push(timerId)
-        } 
+        //} 
     })
 }
 
