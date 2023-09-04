@@ -118,38 +118,40 @@ const start = async () => {
                             const plan = await Plan.findOne({
                                 where: {datestart: date1}
                             })
-                            const newArray = JSON.parse(plan.times)
-                            let time1 = date1.split('T')[1]
+                            console.log(plan)
+                            //const newArray = JSON.parse(plan.times)
+                            //let time1 = date1.split('T')[1]
 
                             //обновить план в БД
-                            let planer_str
-                            let dateIndex = newArray.findIndex((i) => i.time === `${time1.split(':')[0]}:${time1.split(':')[1]}`)
-                            const datesCopy = JSON.parse(JSON.stringify(newArray));
-                            const dateObject = datesCopy[dateIndex];
-                            datesCopy[dateIndex] = { ...dateObject, ['go']: true};
-                            planer_str = JSON.stringify(datesCopy)
+                            // let planer_str
+                            // let dateIndex = newArray.findIndex((i) => i.time === `${time1.split(':')[0]}:${time1.split(':')[1]}`)
+                            // const datesCopy = JSON.parse(JSON.stringify(newArray));
+                            // const dateObject = datesCopy[dateIndex];
+                            // datesCopy[dateIndex] = { ...dateObject, ['go']: true};
+                            // planer_str = JSON.stringify(datesCopy)
 
                             //1-й день
-                            const newObj = {
-                            "datestart": date1.toLocaleDateString(),
-                            "times": planer_str
-                            }
+                            // const newObj = {
+                            // "datestart": date1.toLocaleDateString(),
+                            // "times": planer_str
+                            // }
 
                             //обновить план в БД
-                            const foundItem = await Plan.findOne({ where: {datestart: newObj.datestart} });
-                            if (!foundItem) {
-                                // Item not found, create a new one
-                                const newPlan = await Plan.create(newObj.datestart, newObj.times)
-                                //return res.status(200).json(newPlan);
-                            } else {
-                               // Found an item, update it
-                                const item = await Plan.update({times: newObj.times},{where: {datestart: newObj.datestart}});
-                            }
+                            // const foundItem = await Plan.findOne({ where: {datestart: newObj.datestart} });
+                            // if (!foundItem) {
+                            //     // Item not found, create a new one
+                            //     const newPlan = await Plan.create(newObj.datestart, newObj.times)
+                            //     //return res.status(200).json(newPlan);
+                            // } else {
+                            //    // Found an item, update it
+                            //     const item = await Plan.update({times: newObj.times},{where: {datestart: newObj.datestart}});
+                            // }
                             
 
                             //получить id специалиста по его telegramId
                             //const worker = await getWorkerId(user)
                             const worker = await fetch(host_api_bottest + '/workers/chat/' + user);
+                            console.log("worker: ", worker.data)
                             
                             //новый претендент
                             const pretendent = await Pretendent.create(item.projectId, worker.data, user) //{projectId, workerId, receiverId})
