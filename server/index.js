@@ -179,10 +179,10 @@ const getDistributionsPlan = async() => {
                     count = await Pretendent.count({
                         where: { receiverId: user, projectId: projId },
                     });
-                    console.log("worker: ", worker)
-                    console.log("count: ", count)
+                    //console.log("worker: ", worker)
+                    //console.log("count: ", count)
                     if (count === 0) {
-                        pretendent = await Pretendent.create(projId, worker, user) //{projectId, workerId, receiverId}) 
+                        pretendent = await Pretendent.create({projectId: projId, workerId: worker, receiverId: user}) //{projectId, workerId, receiverId}) 
                     } else {
                         pretendent = await Pretendent.findOne({
                             where: {receiverId: user, projectId: projId },
@@ -259,47 +259,9 @@ const start = async () => {
             console.log('HTTPS Server Admin-panel running on port ' + port);
 
             // начало цикла           
-            // setInterval(async() => {              
-            //     getDistributionsPlan()
-            // }, 120000) //каждые 2 минуты);
-
-            //получить id специалиста по его telegramId
-
-                    let worker
-                    await fetch(host_api_bottest + '/workers/chat/805436270' )
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (data) {
-                            console.log("data: ", data)
-                            worker = data
-                        } else {
-                            console.log("Worker не найден!")
-                        }                             
-                    });
-                    
-                    
-                    //новый претендент
-                    let count = 0
-                    let pretendent
-
-                    //const projId = item.projectId
-
-                    count = await Pretendent.count({
-                        where: { receiverId: '805436270', projectId: '1ecac1e4-3559-4bfa-9b3c-28e1591ea' },
-                    });
-                    console.log("worker: ", worker)
-                    console.log("count: ", count)
-                    if (count === 0) {
-                        console.log("create...")
-                        pretendent = await Pretendent.create({projectId: '1ecac1e4-3559-4bfa-9b3c-28e1591ea', workerId: worker, receiverId: '805436270'}) //{projectId, workerId, receiverId}) 
-                        console.log(pretendent.id)
-                    } else {
-                        console.log("find...")
-                        pretendent = await Pretendent.findOne({
-                            where: {receiverId: '805436270', projectId: '1ecac1e4-3559-4bfa-9b3c-28e1591ea' },
-                        })
-                        console.log(pretendent.id)
-                    }
+            setInterval(async() => {              
+                getDistributionsPlan()
+            }, 120000) //каждые 2 минуты);                 
         }); 
 
     } catch (error) {
