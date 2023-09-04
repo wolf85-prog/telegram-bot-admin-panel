@@ -162,7 +162,7 @@ const getDistributionsPlan = async() => {
                     .then((response) => response.json())
                     .then((data) => {
                         if (data) {
-                            console.log("worker: ", data)
+                            console.log("data: ", data)
                             worker = data
                         } else {
                             console.log("Worker не найден!")
@@ -179,6 +179,8 @@ const getDistributionsPlan = async() => {
                     count = await Pretendent.count({
                         where: { receiverId: user, projectId: projId },
                     });
+                    console.log("worker: ", worker)
+                    console.log("count: ", count)
                     if (count === 0) {
                         pretendent = await Pretendent.create(projId, worker, user) //{projectId, workerId, receiverId}) 
                     } else {
@@ -226,6 +228,20 @@ const getDistributionsPlan = async() => {
                             { where: {id: item.id} }
                         )
                     }
+
+                    const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
+
+                    let sendPhotoToTelegram
+                    if (file) {
+                        const form = new FormData();
+                        form.append("photo", file);
+
+                        //sendPhotoToTelegram = await $host.post(url_send_photo, form);
+                        sendPhotoToTelegram = await fetch(url_send_photo, {
+                            method: 'POST',
+                            body: form,
+                        });
+                    } 
                 })
             }, milliseconds)
 

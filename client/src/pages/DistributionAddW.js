@@ -1138,9 +1138,6 @@ const delCategory7 = (category) => {
         //console.log("url_send_photo: ", url_send_photo)
 
 
-        const url_send_photo2 = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${img}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
-        //console.log("url_send_photo2: ", url_send_photo2)
-
         let sendPhotoToTelegram
         if (file) {
           const form = new FormData();
@@ -1148,10 +1145,7 @@ const delCategory7 = (category) => {
 
           sendPhotoToTelegram = await $host.post(url_send_photo, form);
           console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
-        } else {
-          console.log('sendPhoto2ToTelegram')
-          await $host.get(url_send_photo2);
-        }
+        } 
 
         //отправить в админку
         if (sendToAdmin) {
