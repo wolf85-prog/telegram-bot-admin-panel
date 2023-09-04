@@ -126,7 +126,7 @@ const start = async () => {
                             const plan = await Plan.findOne({
                                 where: {datestart: date2}
                             })
-                            console.log("plan: ", plan)
+                            console.log("plan: ", plan.dataValues.times)
                             
                             //const newArray = JSON.parse(plan.times)
                             //let time1 = date1.split('T')[1]
