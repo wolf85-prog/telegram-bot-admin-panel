@@ -99,60 +99,60 @@ const DistributionWPlaner = () => {
 
 
   const [dates, setDates] = useState([
-    {date: date_str, time: '06:00', proj: '', save: false, go: false, old: false, uuid: ""},
-    {date: date_str, time: '07:00', proj: '', save: false, go: false, old: false, uuid: ""},
-    {date: date_str, time: '08:00', proj: '', save: false, go: false, old: false, uuid: ""},
-    {date: date_str, time: '09:00', proj: '', save: false, go: false, old: false, uuid: ""},
-    {date: date_str, time: '10:00', proj: '', save: false, go: false, old: false, uuid: ""},
-    {date: date_str, time: '11:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '06:00', proj: '', save: false, go: false,  uuid: ""},
+    {date: date_str, time: '07:00', proj: '', save: false, go: false,  uuid: ""},
+    {date: date_str, time: '08:00', proj: '', save: false, go: false,  uuid: ""},
+    {date: date_str, time: '09:00', proj: '', save: false, go: false,  uuid: ""},
+    {date: date_str, time: '10:00', proj: '', save: false, go: false,  uuid: ""},
+    {date: date_str, time: '11:00', proj: '', save: false, go: false,  uuid: ""},
   ])
 
 
   const [dates1, setDates1] = useState([
-    {date: date_str, time: '12:00', proj: '', save: false, go: false, old: false, uuid: ""},
-    {date: date_str, time: '13:00', proj: '', save: false, go: false, old: false, uuid: ""},
-    {date: date_str, time: '14:00', proj: '', save: false, go: false, old: false, uuid: ""},
-    {date: date_str, time: '15:00', proj: '', save: false, go: false, old: false, uuid: ""},
-    {date: date_str, time: '16:00', proj: '', save: false, go: false, old: false, uuid: ""},
-    {date: date_str, time: '17:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '12:00', proj: '', save: false, go: false,  uuid: ""},
+    {date: date_str, time: '13:00', proj: '', save: false, go: false,  uuid: ""},
+    {date: date_str, time: '14:00', proj: '', save: false, go: false,  uuid: ""},
+    {date: date_str, time: '15:00', proj: '', save: false, go: false,  uuid: ""},
+    {date: date_str, time: '16:00', proj: '', save: false, go: false,  uuid: ""},
+    {date: date_str, time: '17:00', proj: '', save: false, go: false,  uuid: ""},
   ])
 
   const [dates11, setDates11] = useState([
-    {date: date_str, time: '18:00', proj: '', save: false, go: false, old: false, uuid: ""},
-    {date: date_str, time: '19:00', proj: '', save: false, go: false, old: false, uuid: ""},
-    {date: date_str, time: '20:00', proj: '', save: false, go: false, old: false, uuid: ""},
-    {date: date_str, time: '21:00', proj: '', save: false, go: false, old: false, uuid: ""},
-    {date: date_str, time: '22:00', proj: '', save: false, go: false, old: false, uuid: ""},
-    {date: date_str, time: '23:00', proj: '', save: false, go: false, old: false, uuid: ""},
+    {date: date_str, time: '18:00', proj: '', save: false, go: false,  uuid: ""},
+    {date: date_str, time: '19:00', proj: '', save: false, go: false,  uuid: ""},
+    {date: date_str, time: '20:00', proj: '', save: false, go: false,  uuid: ""},
+    {date: date_str, time: '21:00', proj: '', save: false, go: false,  uuid: ""},
+    {date: date_str, time: '22:00', proj: '', save: false, go: false,  uuid: ""},
+    {date: date_str, time: '23:00', proj: '', save: false, go: false,  uuid: ""},
   ])
 
 //----------------------------------------------------------
 const [dates2, setDates2] = useState([
-  {date: date_str2, time: '06:00', proj: '', save: false, go: false, old: false, uuid: ""},
-  {date: date_str2, time: '07:00', proj: '', save: false, go: false, old: false, uuid: ""},
-  {date: date_str2, time: '08:00', proj: '', save: false, go: false, old: false, uuid: ""},
-  {date: date_str2, time: '09:00', proj: '', save: false, go: false, old: false, uuid: ""},
-  {date: date_str2, time: '10:00', proj: '', save: false, go: false, old: false, uuid: ""},
-  {date: date_str2, time: '11:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '06:00', proj: '', save: false, go: false,  uuid: ""},
+  {date: date_str2, time: '07:00', proj: '', save: false, go: false,  uuid: ""},
+  {date: date_str2, time: '08:00', proj: '', save: false, go: false,  uuid: ""},
+  {date: date_str2, time: '09:00', proj: '', save: false, go: false,  uuid: ""},
+  {date: date_str2, time: '10:00', proj: '', save: false, go: false,  uuid: ""},
+  {date: date_str2, time: '11:00', proj: '', save: false, go: false,  uuid: ""},
 ])
 
 
 const [dates22, setDates22] = useState([
-  {date: date_str2, time: '12:00', proj: '', save: false, go: false, old: false, uuid: ""},
-  {date: date_str2, time: '13:00', proj: '', save: false, go: false, old: false, uuid: ""},
-  {date: date_str2, time: '14:00', proj: '', save: false, go: false, old: false, uuid: ""},
-  {date: date_str2, time: '15:00', proj: '', save: false, go: false, old: false, uuid: ""},
-  {date: date_str2, time: '16:00', proj: '', save: false, go: false, old: false, uuid: ""},
-  {date: date_str2, time: '17:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '12:00', proj: '', save: false, go: false,  uuid: ""},
+  {date: date_str2, time: '13:00', proj: '', save: false, go: false,  uuid: ""},
+  {date: date_str2, time: '14:00', proj: '', save: false, go: false,  uuid: ""},
+  {date: date_str2, time: '15:00', proj: '', save: false, go: false,  uuid: ""},
+  {date: date_str2, time: '16:00', proj: '', save: false, go: false,  uuid: ""},
+  {date: date_str2, time: '17:00', proj: '', save: false, go: false,  uuid: ""},
 ])
 
 const [dates222, setDates222] = useState([
-  {date: date_str2, time: '18:00', proj: '', save: false, go: false, old: false, uuid: ""},
-  {date: date_str2, time: '19:00', proj: '', save: false, go: false, old: false, uuid: ""},
-  {date: date_str2, time: '20:00', proj: '', save: false, go: false, old: false, uuid: ""},
-  {date: date_str2, time: '21:00', proj: '', save: false, go: false, old: false, uuid: ""},
-  {date: date_str2, time: '22:00', proj: '', save: false, go: false, old: false, uuid: ""},
-  {date: date_str2, time: '23:00', proj: '', save: false, go: false, old: false, uuid: ""},
+  {date: date_str2, time: '18:00', proj: '', save: false, go: false,  uuid: ""},
+  {date: date_str2, time: '19:00', proj: '', save: false, go: false,  uuid: ""},
+  {date: date_str2, time: '20:00', proj: '', save: false, go: false,  uuid: ""},
+  {date: date_str2, time: '21:00', proj: '', save: false, go: false,  uuid: ""},
+  {date: date_str2, time: '22:00', proj: '', save: false, go: false,  uuid: ""},
+  {date: date_str2, time: '23:00', proj: '', save: false, go: false,  uuid: ""},
 ])
 
 //----------------------------------------------------------
@@ -452,7 +452,6 @@ const [dates222, setDates222] = useState([
             uuid: '',
             save: false, 
             go: false, 
-            old: false  
           }
           arr.splice(ind+1, 0, newObj);
           setDates(arr)
@@ -495,7 +494,7 @@ const [dates222, setDates222] = useState([
               uuid: '',
               save: false, 
               go: false, 
-              old: false
+              
             }
             arr.splice(ind+1, 0, newObj);
             setDates(arr)
@@ -540,7 +539,7 @@ const [dates222, setDates222] = useState([
               uuid: '',
               save: false, 
               go: false, 
-              old: false
+              
             }
             arr.splice(ind+1, 0, newObj);
             setDates(arr)
@@ -584,7 +583,7 @@ const [dates222, setDates222] = useState([
               uuid: '',
               save: false, 
               go: false, 
-              old: false
+              
             }
             arr.splice(ind+1, 0, newObj);
             setDates(arr)
@@ -628,7 +627,7 @@ const [dates222, setDates222] = useState([
               uuid: '',
               save: false, 
               go: false, 
-              old: false
+              
             }
             arr.splice(ind+1, 0, newObj);
             setDates(arr)
@@ -671,7 +670,7 @@ const [dates222, setDates222] = useState([
               uuid: '',
               save: false, 
               go: false, 
-              old: false
+              
             }
             arr.splice(ind+1, 0, newObj);
             setDates(arr)
@@ -715,7 +714,7 @@ const [dates222, setDates222] = useState([
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -756,7 +755,7 @@ const [dates222, setDates222] = useState([
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -797,7 +796,7 @@ const [dates222, setDates222] = useState([
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -838,7 +837,7 @@ const [dates222, setDates222] = useState([
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -879,7 +878,7 @@ const [dates222, setDates222] = useState([
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -921,7 +920,7 @@ const [dates222, setDates222] = useState([
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates1(arr)
@@ -965,7 +964,7 @@ const [dates222, setDates222] = useState([
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
@@ -1006,7 +1005,7 @@ const [dates222, setDates222] = useState([
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
@@ -1047,7 +1046,7 @@ const [dates222, setDates222] = useState([
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
@@ -1088,7 +1087,7 @@ const [dates222, setDates222] = useState([
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
@@ -1129,7 +1128,7 @@ const [dates222, setDates222] = useState([
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
@@ -1171,7 +1170,7 @@ const [dates222, setDates222] = useState([
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates11(arr)
@@ -1218,7 +1217,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           uuid: '',
           save: false, 
           go: false, 
-          old: false
+          
         }
         arr.splice(ind+1, 0, newObj);
         setDates2(arr)
@@ -1261,7 +1260,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates2(arr)
@@ -1306,7 +1305,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates2(arr)
@@ -1349,7 +1348,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates2(arr)
@@ -1393,7 +1392,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates2(arr)
@@ -1435,7 +1434,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
             uuid: '',
             save: false, 
             go: false, 
-            old: false
+            
           }
           arr.splice(ind+1, 0, newObj);
           setDates2(arr)
@@ -1479,7 +1478,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           uuid: '',
           save: false, 
           go: false, 
-          old: false
+          
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
@@ -1520,7 +1519,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           uuid: '',
           save: false, 
           go: false, 
-          old: false
+          
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
@@ -1561,7 +1560,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           uuid: '',
           save: false, 
           go: false, 
-          old: false
+          
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
@@ -1602,7 +1601,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           uuid: '',
           save: false, 
           go: false, 
-          old: false
+          
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
@@ -1643,7 +1642,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           uuid: '',
           save: false, 
           go: false, 
-          old: false
+          
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
@@ -1685,7 +1684,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           uuid: '',
           save: false, 
           go: false, 
-          old: false
+          
         }
         arr.splice(ind+1, 0, newObj);
         setDates22(arr)
@@ -1729,7 +1728,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           uuid: '',
           save: false, 
           go: false, 
-          old: false
+          
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
@@ -1770,7 +1769,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           uuid: '',
           save: false, 
           go: false, 
-          old: false
+          
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
@@ -1811,7 +1810,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           uuid: '',
           save: false, 
           go: false, 
-          old: false
+          
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
@@ -1852,7 +1851,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           uuid: '',
           save: false, 
           go: false, 
-          old: false
+          
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
@@ -1893,7 +1892,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           uuid: '',
           save: false, 
           go: false, 
-          old: false
+          
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
@@ -1935,7 +1934,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           uuid: '',
           save: false, 
           go: false, 
-          old: false
+          
         }
         arr.splice(ind+1, 0, newObj);
         setDates222(arr)
@@ -1992,19 +1991,19 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
     
     const obj = {
-      id: projectId, 
+      id: uuidDistrib, 
       date: d_str.toLocaleDateString(),
-      del: true
+      //del: true
     }
     const obj2 = {
-      id: projectId, 
+      id: uuidDistrib, 
       date: d_str2.toLocaleDateString(),
-      del: true
+      //del: true
     }
 
     //поменять статус удалено/del на true (удалить предыдущие записи запланированных рассылок)
-    const res = await editDistributionWPlan(obj)
-    const res2 = await editDistributionWPlan(obj2)
+    const res = await delDistributionWPlan(obj) //editDistributionWPlan(obj)
+    const res2 = await delDistributionWPlan(obj2) //editDistributionWPlan(obj2)
     
 
     //1. сохранить все галочки и название проектов в массиве
@@ -2043,19 +2042,6 @@ const clickShowEditTime2 = (t, ind, tab) => {
     newArray.forEach(async (item)=> {
       
       if (item.save === true && item.uuid === uuidDistrib && item.go === false ) {
-
-        //обновить план, установить статус old для даты
-        let dateIndex = newArray.findIndex((i) => i.time === item.time)
-        const datesCopy = JSON.parse(JSON.stringify(newArray));
-        const dateObject = datesCopy[dateIndex];
-        datesCopy[dateIndex] = { ...dateObject, ['old']: true};
-        let plan_old = JSON.stringify(datesCopy)
-
-        const plan_obj = {
-          "datestart": d_str.toLocaleDateString(),
-          "times": plan_old
-        }
-        await newPlan(plan_obj);
 
         //новая рассылка
         const message = {
@@ -2148,20 +2134,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
     //массив дат 2-го дня
     newArray2.forEach(async (item)=> {
-      if (item.save === true && item.proj === projectName && item.go === false && item.old === false) {
-
-        //обновить план, установить статус old для даты
-        let dateIndex = newArray2.findIndex((i) => i.time === item.time)
-        const datesCopy = JSON.parse(JSON.stringify(newArray2));
-        const dateObject = datesCopy[dateIndex];
-        datesCopy[dateIndex] = { ...dateObject, ['old']: true};
-        let plan_old = JSON.stringify(datesCopy)
-
-        const plan_obj2 = {
-          "datestart": d_str2.toLocaleDateString(),
-          "times": plan_old
-        }
-        await newPlan(plan_obj2);
+      if (item.save === true && item.uuid === uuidDistrib && item.go === false) {
 
         //новая рассылка
         const message = {
@@ -2233,6 +2206,20 @@ const clickShowEditTime2 = (t, ind, tab) => {
           //запланировать отправку рассылок
           //await addTimer(objPlan)
        // }
+      } else if (item.save === true && item.uuid !== uuidDistrib && item.go === false) {
+        const str_date = `${item.date}.${year}T${item.time}:00`
+        
+        arrDistrib.forEach((item) => {
+          if (str_date === item.datestart) {
+            const obj = {
+              uuid: item.uuid,
+              date: str_date,
+              del: false
+            }
+            editDistributionWPlan(obj)
+          }
+        })
+        
       }
     })
 

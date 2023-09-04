@@ -161,7 +161,7 @@ class DistributionController {
         try {
             await Distributionw.destroy({
                 where: { 
-                    projectId: String(id),
+                    uuid: String(id),
                     date: String(date),
                     delivered: false,
                 },
