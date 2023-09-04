@@ -12,6 +12,9 @@ const bodyParser = require("body-parser");
 //планировщик
 const cron = require('node-cron');
 
+//fetch api
+const fetch = require('node-fetch');
+
 let tasks = []
 
 // Port that the webserver listens to
@@ -121,41 +124,38 @@ const start = async () => {
                     const timerId = setTimeout(() => {
                         objPlan.users.map(async (user, ind) => {
                             console.log("Пользователю ID: " + user + " сообщение " + item.text + " отправлено! Кнопка " + item.textButton + " отправлена!")
-                            console.log(date2)
+
                             //получить план из БД
                             const plan = await Plan.findOne({
                                 where: {datestart: date2}
                             })
-                            //console.log("plan: ", plan.dataValues.times)
                             
                             const newArray = JSON.parse(plan.dataValues.times)
                             let time1 = `${chas}:${minut}`
-                            console.log("time1: ", time1)
 
                             //обновить план в БД
-                            // let planer_str
-                            // let dateIndex = newArray.findIndex((i) => i.time === `${time1.split(':')[0]}:${time1.split(':')[1]}`)
-                            // const datesCopy = JSON.parse(JSON.stringify(newArray));
-                            // const dateObject = datesCopy[dateIndex];
-                            // datesCopy[dateIndex] = { ...dateObject, ['go']: true};
-                            // planer_str = JSON.stringify(datesCopy)
+                            let planer_str
+                            let dateIndex = newArray.findIndex((i) => i.time === time1)
+                            const datesCopy = JSON.parse(JSON.stringify(newArray));
+                            const dateObject = datesCopy[dateIndex];
+                            datesCopy[dateIndex] = { ...dateObject, ['go']: true};
+                            planer_str = JSON.stringify(datesCopy)
 
-                            //1-й день
-                            // const newObj = {
-                            // "datestart": date1.toLocaleDateString(),
-                            // "times": planer_str
-                            // }
+                            const newObj = {
+                                "datestart": date2,
+                                "times": planer_str
+                            }
 
                             //обновить план в БД
-                            // const foundItem = await Plan.findOne({ where: {datestart: newObj.datestart} });
-                            // if (!foundItem) {
-                            //     // Item not found, create a new one
-                            //     const newPlan = await Plan.create(newObj.datestart, newObj.times)
-                            //     //return res.status(200).json(newPlan);
-                            // } else {
-                            //    // Found an item, update it
-                            //     const item = await Plan.update({times: newObj.times},{where: {datestart: newObj.datestart}});
-                            // }
+                            const foundItem = await Plan.findOne({ where: {datestart: newObj.datestart} });
+                            if (!foundItem) {
+                                // Item not found, create a new one
+                                const newPlan = await Plan.create(newObj.datestart, newObj.times)
+                                //return res.status(200).json(newPlan);
+                            } else {
+                               // Found an item, update it
+                                const item = await Plan.update({times: newObj.times},{where: {datestart: newObj.datestart}});
+                            }
                             
 
                             //получить id специалиста по его telegramId
