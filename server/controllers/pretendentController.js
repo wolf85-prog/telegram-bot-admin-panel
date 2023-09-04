@@ -18,7 +18,7 @@ class PretendentController {
     }
 
     //get message conversation
-    async getPretendent(req, res) {
+    async getPretendentId(req, res) {
         const receiverId = req.params.id
         try {           
             const count = await Pretendent.count({
@@ -32,6 +32,25 @@ class PretendentController {
                 order: [
                     ['id', 'ASC'], //DESC
                 ],
+            })
+            return res.status(200).json(spec);
+        } catch (error) {
+            return res.status(500).json(error.spec);
+        }
+    }
+
+
+    //get 
+    async getPretendent(req, res) {
+        const {projectId, receiverId} = req.body
+        try {           
+            const count = await Pretendent.count({
+                where: { receiverId, projectId },
+              });
+            //console.log(count)
+
+            const spec = await Pretendent.findOne({
+                where: {receiverId, projectId},
             })
             return res.status(200).json(spec);
         } catch (error) {

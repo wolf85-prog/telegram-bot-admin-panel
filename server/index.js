@@ -162,8 +162,22 @@ const getDistributionsPlan = async() => {
                     console.log("worker: ", worker)
                     
                     //новый претендент
-                    const pretendent = await Pretendent.create(item.projectId, worker.data, user) //{projectId, workerId, receiverId})
-            
+                    let count = 0
+                    let pretendent
+
+                    const projId = item.projectId
+
+                    count = await Pretendent.count({
+                        where: { user, projId },
+                    });
+                    if (count === 0) {
+                        pretendent = await Pretendent.create(projId, worker, user) //{projectId, workerId, receiverId}) 
+                    } else {
+                        pretendent = await Pretendent.findOne({
+                            where: {user, projId},
+                        })
+                    }
+                    
                     //Передаем данные боту
                     const keyboard = JSON.stringify({
                         inline_keyboard: [
