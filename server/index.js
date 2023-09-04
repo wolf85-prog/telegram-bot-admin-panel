@@ -297,6 +297,7 @@ const start = async () => {
                         pretendent = await Pretendent.findOne({
                             where: {receiverId: '805436270', projectId: '5ecac1e4-3559-4bfa-9b3c-28e1591ea3da' },
                         })
+                        console.log(pretendent.id)
                     }
         }); 
 
