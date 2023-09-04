@@ -68,83 +68,105 @@ class PlanController {
 
     //get plans
     async addTimer(req, res) {
-        const {users, plan, text, textButton, time, id, projId} = req.body
-        try {  
+        // const {users, plan, text, textButton, time, id, projId} = req.body
+        // try {  
             
+        //     //удаление таймеров
+        //     const temp = tasks.filter((item) => item.projectId === projId)
+        //     console.log("temp: ", temp)
+        //     temp.forEach((tmp)=> {
+        //         //clearTimeout(tmp.task)
+        //         console.log("Задача удалена! ", tmp.task)   
+        //     })
             
-            
-            // console.log("!!!!Планирую запуск отправки собщения...!!!!")
-            // const timerId = setTimeout(() => {
-            //     users.map(async (user, index) => {
-            //         console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")               
-
-            //         //получить id специалиста по его telegramId
-            //         //const worker = await getWorkerId(user)
-            //         const worker = await fetch(host_api_bottest + '/workers/chat/' + user);
+        //     console.log("!!!!Планирую запуск отправки собщения...!!!!")
+        //     const timerId = setTimeout(() => {
+        //         users.map(async (user, index) => {
+        //             console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
                     
-            //         //новый претендент
-            //         const pretendent = await Pretendent.create(projId, worker.data, user) //{projectId, workerId, receiverId})
+        //             //обновить план в БД
+        //             //this.newPlan(plan)
+                    
+        //             // First try to find the record
+        //             const foundItem = await Plan.findOne({ where: {datestart: plan.datestart} });
+
+        //             if (!foundItem) {
+        //                 // Item not found, create a new one
+        //                 const newPlan = await Plan.create(plan.datestart, plan.times)
+        //                 return res.status(200).json(newPlan);
+        //             }
+
+        //             // Found an item, update it
+        //             const item = await Plan.update({times: plan.times},{where: {datestart: plan.datestart}});
+
+
+        //             //получить id специалиста по его telegramId
+        //             //const worker = await getWorkerId(user)
+        //             const worker = await fetch(host_api_bottest + '/workers/chat/' + user);
+                    
+        //             //новый претендент
+        //             const pretendent = await Pretendent.create(projId, worker.data, user) //{projectId, workerId, receiverId})
               
-            //         //Передаем данные боту
-            //         const keyboard = JSON.stringify({
-            //             inline_keyboard: [
-            //                 [
-            //                     {"text": textButton, callback_data:'/report'},
-            //                 ],
-            //             ]
-            //         });
+        //             //Передаем данные боту
+        //             const keyboard = JSON.stringify({
+        //                 inline_keyboard: [
+        //                     [
+        //                         {"text": textButton, callback_data:'/report'},
+        //                     ],
+        //                 ]
+        //             });
                 
-            //         const keyboard2 = JSON.stringify({
-            //             inline_keyboard: [
-            //                 [
-            //                     {"text": 'Принять', callback_data:'/accept ' + pretendent.id}, //  + pretendent.id
-            //                     {"text": 'Отклонить', callback_data:'/cancel'},
-            //                 ],
-            //             ]
-            //         });
+        //             const keyboard2 = JSON.stringify({
+        //                 inline_keyboard: [
+        //                     [
+        //                         {"text": 'Принять', callback_data:'/accept ' + pretendent.id}, //  + pretendent.id
+        //                         {"text": 'Отклонить', callback_data:'/cancel'},
+        //                     ],
+        //                 ]
+        //             });
 
-            //         //отправить в телеграмм
-            //         let sendToTelegram
-            //         if (text !== '') {
-            //             const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
-            //             //console.log("url_send_msg: ", url_send_msg)
+        //             //отправить в телеграмм
+        //             let sendToTelegram
+        //             if (text !== '') {
+        //                 const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+        //                 //console.log("url_send_msg: ", url_send_msg)
                         
-            //             //sendToTelegram = await $host.get(url_send_msg);
-            //             sendToTelegram = await fetch(url_send_msg);
+        //                 //sendToTelegram = await $host.get(url_send_msg);
+        //                 sendToTelegram = await fetch(url_send_msg);
 
-            //             //const objDelivered = {
-            //             const delivered = true
-            //             //}
+        //                 //const objDelivered = {
+        //                 const delivered = true
+        //                 //}
 
-            //             //обновить рассылке статус отправки
-            //             //await editDistributionW(objDelivered, dataDistrib.id)
-            //             let exist = await Distributionw.findOne( {where: {id: id}} )
+        //                 //обновить рассылке статус отправки
+        //                 //await editDistributionW(objDelivered, dataDistrib.id)
+        //                 let exist = await Distributionw.findOne( {where: {id: id}} )
             
-            //             if(!exist){
-            //                 res.status(500).json({msg: "Рассылка не существует!"});
-            //                 return;
-            //             }
+        //                 if(!exist){
+        //                     res.status(500).json({msg: "Рассылка не существует!"});
+        //                     return;
+        //                 }
             
-            //             const newDistrib = await Distributionw.update(
-            //                 { delivered },
-            //                 { where: {id: id} })
+        //                 const newDistrib = await Distributionw.update(
+        //                     { delivered },
+        //                     { where: {id: id} })
 
-            //             return res.status(200).json(newDistrib);
-            //         }
-            //     })
-            // }, time)  
+        //                 return res.status(200).json(newDistrib);
+        //             }
+        //         })
+        //     }, time)  
             
-            // const obj = {
-            //     task: timerId,
-            //     projectId: projId
-            // }
+        //     const obj = {
+        //         task: timerId,
+        //         projectId: projId
+        //     }
 
-            // tasks.push(obj)
+        //     tasks.push(obj)
            
             //return res.status(200).json(plan);
-        } catch (error) {
-            return res.status(500).json(error.message);
-        }
+        // } catch (error) {
+        //     return res.status(500).json(error.message);
+        // }
     }
 }
 
