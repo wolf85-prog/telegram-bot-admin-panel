@@ -70,7 +70,7 @@ const getDistributionsPlan = async() => {
     console.log("tasks: ", tasks)
     tasks.forEach((tmp)=> {
         clearTimeout(tmp)
-        console.log("Задача удалена! ", tmp)   
+        console.log("Задача удалена! ")   
     })
 
     console.log("Запускаю планировщик задач...")
