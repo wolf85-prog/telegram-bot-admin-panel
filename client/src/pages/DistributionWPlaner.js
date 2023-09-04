@@ -2082,45 +2082,6 @@ const clickShowEditTime2 = (t, ind, tab) => {
         //сохранение рассылки в базе данных
         const dataDistrib2 = await newDistributionW(message)
         console.log("Рассылка2: ", dataDistrib2)
-
-
-        // const d1 = Date.parse(`${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`);
-        // const d2 = new Date().getTime() //- 10800000
-        
-        // const date1 = new Date(d1)
-        // const dateNow = new Date(d2)
-        // console.log("date1: ", date1)
-        // console.log("dateNow: ", dateNow)
-        
-        // const milliseconds = Math.floor((date1 - dateNow));       
-        // console.log("milliseconds: ", milliseconds)
-
-        //обновить план
-        // let planer_str
-        // if (`${item.date.split('.')[0]}.${item.date.split('.')[1]}.${year}` === new Date().toLocaleDateString()) {
-        //   console.log("dates - true")
-        //   let dateIndex = newArray.findIndex((i) => i.time === item.time)
-        //   const datesCopy = JSON.parse(JSON.stringify(newArray));
-        //   const dateObject = datesCopy[dateIndex];
-        //   datesCopy[dateIndex] = { ...dateObject, ['go']: true};
-        //   planer_str = JSON.stringify(datesCopy)
-        // } else {
-        //   console.log("dates2 - true")
-        //   let dateIndex = newArray2.findIndex((i) => i.time === item.time)
-        //   const datesCopy = JSON.parse(JSON.stringify(newArray2));
-        //   const dateObject = datesCopy[dateIndex];
-        //   datesCopy[dateIndex] = { ...dateObject, ['go']: true};
-        //   planer_str = JSON.stringify(datesCopy)
-        // }
-
-        //2-й день
-        // const newObj = {
-        //   "datestart": d_str.toLocaleDateString(),
-        //   "times": planer_str
-        // }
-
-        // //обновить план в БД
-        // newPlan(newObj)
       } 
     })
 

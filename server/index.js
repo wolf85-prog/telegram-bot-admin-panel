@@ -231,6 +231,9 @@ const getDistributionsPlan = async() => {
 
                     const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
 
+                    const url_send_photo2 = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${img}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
+                    //console.log("url_send_photo2: ", url_send_photo2)
+
                     let sendPhotoToTelegram
                     if (file) {
                         const form = new FormData();
@@ -241,7 +244,10 @@ const getDistributionsPlan = async() => {
                             method: 'POST',
                             body: form,
                         });
-                    } 
+                    } else {
+                        console.log('sendPhoto2ToTelegram')
+                        await fetch(url_send_photo2);
+                    }
                 })
             }, milliseconds)
 
