@@ -116,7 +116,7 @@ const start = async () => {
                             
                             //получить план из БД
                             const plan = await Plan.findOne({
-                                where: {datestart: date1.toLocaleDateString()}
+                                where: {datestart: new Date(date1).toLocaleDateString()}
                             })
                             console.log(plan)
                             //const newArray = JSON.parse(plan.times)
