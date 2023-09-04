@@ -74,8 +74,8 @@ const start = async () => {
             console.log("Запускаю очистку задач...")
             console.log("tasks: ", tasks)
             tasks.forEach((tmp)=> {
-                clearTimeout(tmp.task)
-                console.log("Задача удалена! ", tmp.task)   
+                clearTimeout(tmp)
+                console.log("Задача удалена! ", tmp)   
             })
 
             console.log("Запускаю планировщик задач...")
@@ -161,7 +161,8 @@ const start = async () => {
                             //получить id специалиста по его telegramId
                             //const worker = await getWorkerId(user)
                             const worker = await fetch(host_api_bottest + '/workers/chat/' + user);
-                            console.log("worker: ", worker.data)
+                            //console.log(host_api_bottest + '/workers/chat/' + user)
+                            console.log("worker: ", worker)
                             
                             //новый претендент
                             const pretendent = await Pretendent.create(item.projectId, worker.data, user) //{projectId, workerId, receiverId})
@@ -207,6 +208,13 @@ const start = async () => {
                             }
                         })
                     }, 10000)
+
+                    // const obj = {
+                    //     task: timerId,
+                    //     projectId: item.projectId
+                    // }
+
+                    tasks.push(timerId)
                 } 
             })
 
