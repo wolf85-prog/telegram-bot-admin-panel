@@ -99,7 +99,7 @@ const start = async () => {
 
                 if (milliseconds > 0) {          
                     const objPlan = {
-                        users: item.users,
+                        users: item.users.split(','),
                         text: item.text,
                         textButton: item.textButton,
                         image: item.image,
@@ -176,17 +176,12 @@ const start = async () => {
                             let sendToTelegram
                             if (text !== '') {
                                 const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
-                                //console.log("url_send_msg: ", url_send_msg)
                                 
-                                //sendToTelegram = await $host.get(url_send_msg);
                                 sendToTelegram = await fetch(url_send_msg);
 
-                                //const objDelivered = {
                                 const delivered = true
-                                //}
 
                                 //обновить рассылке статус отправки
-                                //await editDistributionW(objDelivered, dataDistrib.id)
                                 let exist = await Distributionw.findOne( {where: {id: item.id}} )
                     
                                 if(!exist){
