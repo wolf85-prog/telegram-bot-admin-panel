@@ -282,7 +282,7 @@ const start = async () => {
                     let count = 0
                     let pretendent
 
-                    const projId = item.projectId
+                    //const projId = item.projectId
 
                     count = await Pretendent.count({
                         where: { receiverId: '805436270', projectId: '5ecac1e4-3559-4bfa-9b3c-28e1591ea3da' },
