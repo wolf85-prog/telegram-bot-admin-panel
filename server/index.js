@@ -236,8 +236,8 @@ const start = async () => {
             // начало цикла           
             setInterval(async() => {              
                 getDistributionsPlan()
-            })
-        }, 120000); //каждые 2 минуты);
+            }, 120000) //каждые 2 минуты);
+        }); 
 
     } catch (error) {
         console.log('Подключение к БД сломалось!', error)
