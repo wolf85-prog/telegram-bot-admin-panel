@@ -126,10 +126,11 @@ const start = async () => {
                             const plan = await Plan.findOne({
                                 where: {datestart: date2}
                             })
-                            console.log("plan: ", plan.dataValues.times)
+                            //console.log("plan: ", plan.dataValues.times)
                             
-                            //const newArray = JSON.parse(plan.times)
-                            //let time1 = date1.split('T')[1]
+                            const newArray = JSON.parse(plan.dataValues.times)
+                            let time1 = `${chas}:${minut}`
+                            console.log("time1: ", time1)
 
                             //обновить план в БД
                             // let planer_str
