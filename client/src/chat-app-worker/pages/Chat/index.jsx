@@ -16,7 +16,7 @@ import sendSound from './../../../chat-app-new/assets/sounds/sendmessage.mp3';
 
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
-const host = process.env.REACT_APP_API_URL
+const host = process.env.REACT_APP_HOST
 
 const Chat = () => {
 	const { userWorkers, setUserAsUnread, addNewMessage2 } = useUsersContext();

@@ -26,7 +26,7 @@ import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 const DistributionAdd = () => {
 
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
-	const host = process.env.REACT_APP_API_URL
+	const host = process.env.REACT_APP_HOST
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
   const { users: clients } = useUsersContext();

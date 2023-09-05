@@ -42,7 +42,7 @@ const Admin = () => {
   const [loading, setLoading]= useState(true);
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
-  const host = process.env.REACT_APP_API_URL
+  const host = process.env.REACT_APP_HOST
   
 
   //get Contacts

@@ -5,7 +5,7 @@ import avatarDefault from "./../../../../chat-app-new/assets/images/no-avatar.pn
 
 const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {
 
-	const host = process.env.REACT_APP_API_URL
+	const host = process.env.REACT_APP_HOST
 
 	const onSelected = (index) => {
 		switch(index) {
