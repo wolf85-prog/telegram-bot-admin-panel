@@ -61,7 +61,7 @@ const DistributionAddW = () => {
   const uuidProj = location.state?.uuid
   
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
-	const host = process.env.REACT_APP_API_URL
+	const host = process.env.REACT_APP_HOST
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
   const { users: clients, workers } = useUsersContext();
@@ -71,6 +71,7 @@ const DistributionAddW = () => {
   const [contacts2, setContacts2]= useState([]);
   const [labelName, setLabelName] = useState({})
   const [proj, setProj] = useState('');
+  const [planShow, setPlanShow] = useState(false);
   const [uuidDistrib, setUuidDistrib] = useState('');
 
   const [arrCategory, setArrCategory] = useState([]);
@@ -131,6 +132,7 @@ const DistributionAddW = () => {
   const [count, setCount] = useState(0);
 
   const [visibleModal, setVisibleModal] = useState(false);
+  const [showUpload, setShowUpload] = useState(false);
   
   const audio = new Audio(sendSound);
 
@@ -167,7 +169,9 @@ const DistributionAddW = () => {
         //для телефона
         if (distrib.image !== ' ') {
           setFilePreview(distrib.image) 
-        }       
+        }  
+        
+        setPlanShow(true)
       } 
     }
 
@@ -980,12 +984,18 @@ const delCategory7 = (category) => {
   const onChangeText = (e) => {
     setText(e.target.value)
     setCountChar(e.target.value.length)
+    if (e.target.value.length > 0) {
+      setPlanShow(true)
+    } else {
+      setPlanShow(false)
+    }
   }
 
 
   useEffect(() => {
     const getImage = async () => {
         if (file) {
+          setShowUpload(true)
           console.log("file:", file)
           const data = new FormData();
           data.append("name", file.name);
@@ -994,11 +1004,13 @@ const delCategory7 = (category) => {
           let response = await uploadFile(data);
           console.log("response: ", response.data.path)
 
-          setImage(response.data.path);
+          setImage(response.data.path.split('.team')[1]);
           //сообщение с ссылкой на файл
-          console.log("Путь к файлу: ", host + response.data.path)
+          console.log("Путь к файлу: ", host + response.data.path.split('.team')[1])
           //setValue(host + response.data.path)
-          setPoster(host + response.data.path)
+          setPoster(host + response.data.path.split('.team')[1])
+          setPlanShow(true)
+          setShowUpload(false)
         }
     }
     getImage();
@@ -1034,7 +1046,7 @@ const delCategory7 = (category) => {
   const onPlanerShow = async(label, proj, text, id, cats, count, date, poster, uuidDistrib) => {
     setVisibleModal(!visibleModal)
 
-    if (selected.length !== 0 && file || selected.length !== 0 && text) {
+    if (selected.length !== 0 && proj || selected.length !== 0 && text) {
       navigate('/distributionw_planer', {
         state: {
           labelProj: label,
@@ -1138,7 +1150,7 @@ const delCategory7 = (category) => {
         //console.log("url_send_photo: ", url_send_photo)
 
 
-        const url_send_photo2 = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${img}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
+        const url_send_photo2 = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${host}${image}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
         console.log("url_send_photo2: ", url_send_photo2)
 
         let sendPhotoToTelegram
@@ -1674,15 +1686,16 @@ const delCategory7 = (category) => {
                                       width: '100%', 
                                       justifyContent: 'space-between'
                                     }}>
-                                    {/* <div><Link to={'/distributionw_planer/'} state={{ project: proj}}><CButton color="secondary">Запланировать</CButton></Link></div> */}
-                                      {/* <div>{proj ? 
-                                        <Link to={'/distributionw_planer'} state={{ project: proj}}><CButton color="success">Запланировать</CButton></Link>
-                                        :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>}
-                                      </div> */}
                                       <div>
-                                        {proj ? 
-                                          <CButton color="success" onClick={()=>onPlanerShow(labelName.label, proj, text, distribId, categoryAll, selected.length, datestart, poster, uuidDistrib)}>Запланировать</CButton>
-                                          :<Link to={''} state={{ project: `${proj}`, }}><CButton color="secondary">Запланировать</CButton></Link>
+                                        {planShow ? 
+                                          <CButton color="success" onClick={()=>onPlanerShow(labelName.label, proj, text, distribId, categoryAll, selected.length, datestart, poster, uuidDistrib)}>
+                                            Запланировать
+                                          </CButton>
+                                          :<Link to={''} state={{ project: `${proj}`, }}>
+                                            <CButton color="secondary">
+                                              {showUpload ? <CSpinner style={{width: '20px', height: '20px'}}/> : 'Запланировать'}
+                                              </CButton>
+                                          </Link>
                                         }             
                                       </div>
                                       <div>
@@ -1693,7 +1706,7 @@ const delCategory7 = (category) => {
                                             <CModalTitle>Предупреждение</CModalTitle>
                                           </CModalHeader>
                                           <CModalBody>
-                                            Чтобы создать рассылку необходимо добавить получателей и текст или изображение!
+                                            Чтобы создать рассылку необходимо выбрать проект и добавить категории получателей!
                                           </CModalBody>
                                           <CModalFooter>
                                             <CButton color="primary" onClick={() => setVisibleModal(false)}>ОК</CButton>

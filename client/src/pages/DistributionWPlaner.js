@@ -1980,10 +1980,10 @@ const clickShowEditTime2 = (t, ind, tab) => {
   const savePlan = async() => {
     setShowSave(true)
 
-    // console.log("категории: ", catDistr)
-    // console.log("текст: ", textDistr)
-    // console.log("постер: ", imageDistrib)
-    // console.log("получатели: ", selected)
+    console.log("категории: ", catDistr)
+    console.log("текст: ", textDistr)
+    console.log("постер: ", imageDistrib)
+    console.log("получатели: ", selected)
 
     const d_str = new Date() //текущая дата
     const d_str2 = new Date()  
