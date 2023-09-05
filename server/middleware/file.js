@@ -2,13 +2,15 @@ const { existsSync, mkdirSync } = require('fs');
 const multer  = require("multer");
 const { path, join } = require('path')
 
+const host_server = process.env.HOST_SERVER
+
 // путь к текущей директории
 //const _dirname = path.resolve(__dirname) 
 
 const storage = multer.diskStorage({
     destination(req, file, cd) {
         
-        cd(null, '/var/www/proj.uley.team/upload')
+        cd(null, `${host_server}/upload`)
     },
 
     //замена оригинального названия файла на название текущей даты в миллесекундах
