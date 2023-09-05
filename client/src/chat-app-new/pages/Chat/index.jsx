@@ -66,7 +66,7 @@ const Chat = () => {
                let response = await uploadFile(data);
 			   console.log("response: ", response)
 
-               setImage(response.data.path);
+               setImage(response.data.path.split('.team')[1]);
 			   //сообщение с ссылкой на файл
 			   setMess(host + response.data.path.split('.team')[1])
             }
