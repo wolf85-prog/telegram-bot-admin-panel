@@ -8,7 +8,7 @@ const { path, join } = require('path')
 const storage = multer.diskStorage({
     destination(req, file, cd) {
         
-        cd(null, 'uploads/')
+        cd(null, '/var/www/proj.uley.team/upload')
     },
 
     //замена оригинального названия файла на название текущей даты в миллесекундах
