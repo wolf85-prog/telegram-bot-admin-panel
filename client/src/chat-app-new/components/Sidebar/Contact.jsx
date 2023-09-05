@@ -9,7 +9,7 @@ import avatarDefault from "./../../assets/images/no-avatar.png";
 const Contact = ({ contact }) => {
 	
 	const { setPerson } = useContext(AccountContext);
-	const host = process.env.REACT_APP_HOST
+	const host = process.env.REACT_APP_API_URL
 	
 	//сделать пользователя непрочитанным
 	const { setUserAsUnread, usersOnline, setCountMessage } = useUsersContext();

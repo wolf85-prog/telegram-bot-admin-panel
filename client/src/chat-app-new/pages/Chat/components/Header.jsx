@@ -5,7 +5,7 @@ import avatarDefault from "./../../../assets/images/no-avatar.png";
 
 const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {
 
-	const host = process.env.REACT_APP_HOST
+	const host = process.env.REACT_APP_API_URL
 
 	const onSelected = (index) => {
 		switch(index) {
