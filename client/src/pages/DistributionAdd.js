@@ -81,7 +81,7 @@ const DistributionAdd = () => {
           let response = await uploadFile(data);
           console.log("response: ", response.data.path)
 
-          setImage(response.data.path);
+          setImage(response.data.path.split('.team')[1]);
           //сообщение с ссылкой на файл
           //console.log(host + response.data.path)
           //setValue(host + response.data.path)

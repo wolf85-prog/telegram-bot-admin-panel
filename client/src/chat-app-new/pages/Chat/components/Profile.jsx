@@ -75,14 +75,14 @@ const Profile = ({ user }) => {
 			//setAvatar(response.data.path)
 
 			const newAvatar = {
-				avatar: response.data.path, 
+				avatar: response.data.path.split('.team')[1], 
 			}
 
 			//сохранить в БД
 			await editContactAvatar(newAvatar, user.chatId)
 			
 			//сохранить в контексте
-			addNewAvatar(user.chatId, response.data.path);
+			addNewAvatar(user.chatId, response.data.path.split('.team')[1]);
 
 			//получить данные из контекста
 			getUser()
