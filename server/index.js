@@ -85,7 +85,7 @@ const getDistributionsPlan = async() => {
         }
     })
 
-    //console.log("Рассылки:", distributions)
+    console.log("Рассылки:", distributions)
 
     //рассылки
     distributions.forEach(async (item, index)=> {
