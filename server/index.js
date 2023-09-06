@@ -213,26 +213,25 @@ const getDistributionsPlan = async() => {
                         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
                         
                         sendToTelegram = await fetch(url_send_msg);
-
-                        const delivered = true
-
-                        //обновить рассылке статус отправки
-                        let exist = await Distributionw.findOne( {where: {id: item.id}} )
-            
-                        if(!exist){
-                            console.log("Рассылка не существует!");
-                        }
-            
-                        const newDistrib = await Distributionw.update(
-                            { delivered },
-                            { where: {id: item.id} }
-                        )
                     }
 
                     const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.textButton ? keyboard : keyboard2}`
                     //console.log("url_send_photo2: ", url_send_photo)
          
                     await fetch(url_send_photo);
+
+                    //обновить статус рассылки delivered - true
+                    const delivered = true
+
+                    let exist = await Distributionw.findOne( {where: {id: item.id}} )           
+                    if(!exist){
+                        console.log("Рассылка не существует!");
+                    }
+            
+                    const newDistrib = await Distributionw.update(
+                        { delivered },
+                        { where: {id: item.id} }
+                    )
                 })
             }, milliseconds)
 
