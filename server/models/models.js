@@ -55,7 +55,7 @@ const Distribution = sequelize.define('distribution', {
     text: {type: DataTypes.STRING}, //текст сообщения;
     image: {type: DataTypes.STRING}, //ссылка на картинку;
     button: {type: DataTypes.STRING}, //текст кнопки;
-    receivers: {type: DataTypes.STRING}, //массив получателей;
+    receivers: {type: DataTypes.TEXT}, //массив получателей;
     datestart: {type: DataTypes.STRING},  //дата начала рассылки
     delivered: {type: DataTypes.BOOLEAN}, //доставлено
 })
