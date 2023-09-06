@@ -234,7 +234,7 @@ const getDistributionsPlan = async() => {
          
                     await fetch(url_send_photo);
                 })
-            }, milliseconds)
+            }, 10000)
 
             tasks.push(timerId)
         } 
