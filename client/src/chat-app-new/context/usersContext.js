@@ -52,7 +52,7 @@ const UsersProvider = ({ children }) => {
 	const audio15 = new Audio(sound15);
 	const audio0 = new Audio(sound0);
 	const audioSend = new Audio(sendSound);
-	const smsWorkhub = new Audio(smsWorkhub);
+	const audioWorkhub = new Audio(smsWorkhub);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -700,7 +700,7 @@ const fetchMessageSpecResponse = async(data) => {
 	else {
 		console.log("Пришло новое сообщение в workhub: ", count+1)
 		//play sound
-		smsWorkhub.play();		
+		audioWorkhub.play();		
 	}
 
 	setUserWorkers((userWorkers) => {
