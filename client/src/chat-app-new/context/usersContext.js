@@ -144,9 +144,9 @@ const UsersProvider = ({ children }) => {
 					return dateB-dateA  //сортировка по убывающей дате  
 				})
 
-				//setUsers(sortedClients)
+				setUsers(sortedClients)
 				console.log("contacts: ", arrayContact)
-				setUsers(arrayContact)
+				//setUsers(arrayContact)
 
 			}, 10000)
 
@@ -268,9 +268,9 @@ const UsersProvider = ({ children }) => {
 					return dateB-dateA  //сортировка по убывающей дате  
 				})
 
-				//setUserWorkers(sortedClients)
+				setUserWorkers(sortedClients)
 				console.log("user contacts: ", arrayContact)
-				setUserWorkers(arrayContact)
+				//setUserWorkers(arrayContact)
 
 			}, "10000")
 
