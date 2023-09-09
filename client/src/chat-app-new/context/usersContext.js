@@ -18,6 +18,7 @@ import sound30 from './../../assets/sound/30_minut_ULEY.mp3';
 import sound15 from './../../assets/sound/15_minut_ULEY.mp3';
 import sound0 from './../../assets/sound/0_minut_ULEY.mp3';
 import sendSound from './../assets/sounds/sendmessage.mp3';
+import smsWorkhub from './../../chat-app-worker/assets/sounds/sms_iphone.mp3';
 
 const UsersContext = createContext();
 
@@ -51,6 +52,7 @@ const UsersProvider = ({ children }) => {
 	const audio15 = new Audio(sound15);
 	const audio0 = new Audio(sound0);
 	const audioSend = new Audio(sendSound);
+	const smsWorkhub = new Audio(smsWorkhub);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -142,10 +144,11 @@ const UsersProvider = ({ children }) => {
 					return dateB-dateA  //сортировка по убывающей дате  
 				})
 
-				setUsers(sortedClients)
+				//setUsers(sortedClients)
 				console.log("contacts: ", arrayContact)
+				setUsers(arrayContact)
 
-			}, "10000")
+			}, 10000)
 
 		}
 
@@ -434,7 +437,7 @@ const UsersProvider = ({ children }) => {
 		else {
 			console.log("Пришло новое сообщение: ", count+1)
 			//play sound
-			audio.play();		
+			smsWorkhub.play();		
 		}
 
 		setUsers((users) => {
@@ -679,7 +682,7 @@ const UsersProvider = ({ children }) => {
 const fetchMessageSpecResponse = async(data) => {
 	//audio.play();
 	console.log("date: ", data)
-	console.log("Пришло новое сообщение в workhub: ", count+1)
+	//console.log("Пришло новое сообщение в workhub: ", count+1)
 	//setCount(count+1);
 	setCountMessageWork(countMessageWork + 1)
 
@@ -693,6 +696,11 @@ const fetchMessageSpecResponse = async(data) => {
 		let workers = await getWorkers();
 		//console.log("projects get socket: ", projects.length)
 		setWorkers(workers)
+	}
+	else {
+		console.log("Пришло новое сообщение в workhub: ", count+1)
+		//play sound
+		audio.play();		
 	}
 
 	setUserWorkers((userWorkers) => {

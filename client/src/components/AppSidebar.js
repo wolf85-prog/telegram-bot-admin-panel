@@ -23,7 +23,7 @@ const AppSidebar = () => {
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { countMessage, newProject } = useUsersContext();
+  const { countMessage, newProject, countMessageWork } = useUsersContext();
   console.log("countMessage: ", countMessage)
   
   let navigation = []
@@ -72,6 +72,7 @@ const AppSidebar = () => {
       name: 'Workhub',
       to: '/chatwork',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      badge: countMessageWork !== 0 ? {color: 'info', text: countMessageWork,} : "",
     },
     {
       component: CNavItem,
