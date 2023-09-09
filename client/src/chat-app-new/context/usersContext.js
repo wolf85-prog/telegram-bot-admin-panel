@@ -437,7 +437,7 @@ const UsersProvider = ({ children }) => {
 		else {
 			console.log("Пришло новое сообщение: ", count+1)
 			//play sound
-			smsWorkhub.play();		
+			audio.play();		
 		}
 
 		setUsers((users) => {
@@ -700,7 +700,7 @@ const fetchMessageSpecResponse = async(data) => {
 	else {
 		console.log("Пришло новое сообщение в workhub: ", count+1)
 		//play sound
-		audio.play();		
+		smsWorkhub.play();		
 	}
 
 	setUserWorkers((userWorkers) => {
