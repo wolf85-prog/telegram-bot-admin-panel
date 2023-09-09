@@ -21,6 +21,7 @@ const Chats2 = () => {
 	useEffect(() => {
 		document.body.classList.add("dark-theme");
 		//stopLoad();
+
 	});   
 
 	// const stopLoad = () => {

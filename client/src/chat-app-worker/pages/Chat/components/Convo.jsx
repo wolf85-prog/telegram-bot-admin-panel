@@ -9,7 +9,7 @@ import { delMessage } from "src/http/chatAPI";
 import Dropdown from 'react-bootstrap/Dropdown';
 
 const Convo = ({ lastMsgRef, messages: allMessages }) => {
-	const { person } = useContext(AccountContext);
+	const { personW } = useContext(AccountContext);
 	const dates = Object.keys(allMessages);  //['01/01/2023', 'Сегодня']
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
@@ -69,7 +69,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		//удалить сообщение в базе данных
 		delMessage(message.id)
 
-		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${person.id}&message_id=${message.id}`
+		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
 		//console.log(url_del_msg)
 		const delToTelegram = await $host.get(url_del_msg);
 
@@ -154,7 +154,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											>											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenu}>
-											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: person.id})}>Удалить сообщение</Dropdown.Item>
+											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить сообщение</Dropdown.Item>
 											</Dropdown.Menu>
 										</Dropdown>	
 									</div>
@@ -176,7 +176,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											>											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenu}>
-											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: person.id})}>Удалить сообщение</Dropdown.Item>
+											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить сообщение</Dropdown.Item>
 											</Dropdown.Menu>
 										</Dropdown>
 									</p>
@@ -212,7 +212,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											>											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenu}>
-											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: person.id})}>Удалить сообщение</Dropdown.Item>
+											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить сообщение</Dropdown.Item>
 											</Dropdown.Menu>
 										</Dropdown>
 									</p>

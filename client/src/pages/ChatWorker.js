@@ -14,7 +14,7 @@ import { AccountContext } from "../chat-app-new/context/AccountProvider";
 
 const ChatsWorker = () => {
 
-  const { person } = useContext(AccountContext); 
+  const { personW } = useContext(AccountContext); 
 
 	useEffect(() => {
 		document.body.classList.add("dark-theme");
@@ -35,7 +35,7 @@ const ChatsWorker = () => {
                     <p className="app__mobile-message"> Доступно только на компьютере 😊. </p> 
                     <div className="app-content">
                       <Sidebar />
-                      {Object.keys(person).length ? <Chat /> : <Home /> }
+                      {Object.keys(personW).length ? <Chat /> : <Home /> }
                     </div>
                   </div>
 

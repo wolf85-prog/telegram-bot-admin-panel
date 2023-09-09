@@ -11,7 +11,7 @@ const Profile = ({ user }) => {
 	const [username, setUsername] = useState("")
 	const [form, setForm] = useState(false)
 	const { addNewName, addNewAvatar } = useUsersContext();
-	const { setPerson } = useContext(AccountContext);
+	const { setPersonW } = useContext(AccountContext);
 	const [img, setImg] = useState(null)
 	const [showEdit, setShowEdit] = useState(false)
 	const input = React.useRef();
@@ -35,7 +35,7 @@ const Profile = ({ user }) => {
 	}
 
 	const getUser = async () => {
-        setPerson({
+        setPersonW({
             name: user.name, 
             id: user.chatId, 
 			avatar: user.avatar
@@ -141,9 +141,9 @@ const Profile = ({ user }) => {
 				}
 			</div>
 
-			<div className="profile__section profile__section--media">
+			{/* <div className="profile__section profile__section--media">
 				<div className="sb profile__heading-wrapper">
-					<h2 className="profile__heading"> Медиа, ссылки и документы </h2>
+					<h2 className="profile__heading"> ФИО </h2>
 					<button>
 						<Icon id="rightArrow" className="profile__heading-icon" />
 					</button>
@@ -153,36 +153,85 @@ const Profile = ({ user }) => {
 					<img src={media} alt="media" className="profile__media" />
 					<img src={media} alt="media" className="profile__media" />
 				</div>
-			</div>
+			</div> */}
 
-			<ul className="profile__section profile__section--actions">
+			<ul className="profile__section profile__section--actions">		
 				<li className="profile__action">
 					<p className="profile__action-left">
-						<span className="profile__action-text profile__action-text--top">
-							Отключить уведомления
+						<span className="profile__action-text profile__action-text--bottom">
+							ФИО
 						</span>
-					</p>
-					<div className="profile__action-right">
-						<Checkbox />
-					</div>
-				</li>
-				<li className="profile__action">
-					<p className="profile__action-left">
 						<span className="profile__action-text profile__action-text--top">
-							Отмеченные сообщения
+							Иванов Иван Иванович
 						</span>
 					</p>
 					<button className="profile__action-right">
-						<Icon id="rightArrow" className="profile__heading-icon" />
+						<Icon id="rightArrow" className="profile__heading-icon" />{" "}
 					</button>
 				</li>
 				<li className="profile__action">
 					<p className="profile__action-left">
-						<span className="profile__action-text profile__action-text--top">
-							Исчезающие сообщения
-						</span>
 						<span className="profile__action-text profile__action-text--bottom">
-							Off
+							Телефон
+						</span>
+						<span className="profile__action-text profile__action-text--top">
+							8 (900) 123-12-12
+						</span>
+					</p>
+					<button className="profile__action-right">
+						<Icon id="rightArrow" className="profile__heading-icon" />{" "}
+					</button>
+				</li>
+
+				<li className="profile__action">
+					{/* <p className="profile__action-left">
+						<span className="profile__action-text profile__action-text--top">
+							селект
+						</span>
+					</p> */}
+					<select>
+						Выберите цепочку
+					</select>
+					<button className="profile__action-right">
+						<Icon id="rightArrow" className="profile__heading-icon" />{" "}
+					</button>
+				</li>
+
+				<li className="profile__action">
+					<p className="profile__action-left">
+						<span className="profile__action-text profile__action-text--bottom">
+							Город
+						</span>
+						<span className="profile__action-text profile__action-text--top">
+							Москва
+						</span>	
+					</p>
+					<button className="profile__action-right">
+						<Icon id="rightArrow" className="profile__heading-icon" />{" "}
+					</button>
+				</li>
+
+				<li className="profile__action">
+					<p className="profile__action-left">
+						<span className="profile__action-text profile__action-text--bottom">
+							Категории
+						</span>
+						<span className="profile__action-text profile__action-text--top">
+							...
+						</span>	
+					</p>
+					<button className="profile__action-right">
+						<Icon id="rightArrow" className="profile__heading-icon" />{" "}
+					</button>
+				</li>
+
+				<li className="profile__action">
+					<p className="profile__action-left">
+						<span className="profile__action-text profile__action-text--bottom">
+							Дата рождения
+						</span>
+						<span className="profile__action-text profile__action-text--top">
+							01.01.2000
 						</span>
 					</p>
 					<button className="profile__action-right">
@@ -191,7 +240,7 @@ const Profile = ({ user }) => {
 				</li>
 			</ul>
 
-			<div className="profile__section profile__section--about">
+			{/* <div className="profile__section profile__section--about">
 				<div className="sb profile__heading-wrapper">
 					<h2 className="profile__heading"> О компании и номер телефона </h2>
 				</div>
@@ -201,7 +250,7 @@ const Profile = ({ user }) => {
 					</li>
 					<li className="profile__about-item">+7 123-12-12</li>
 				</ul>
-			</div>
+			</div> */}
 
 
 			<div className="profile__section profile__section--danger">

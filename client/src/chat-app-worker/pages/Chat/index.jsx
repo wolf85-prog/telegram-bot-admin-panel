@@ -17,14 +17,13 @@ import sendSound from './../../../chat-app-new/assets/sounds/sendmessage.mp3';
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 const host = process.env.REACT_APP_HOST
-const hostPort = process.env.REACT_APP_API_URL
 
 const Chat = () => {
 	const { userWorkers, setUserAsUnread, addNewMessage2 } = useUsersContext();
-	const { person } = useContext(AccountContext);
+	const { personW } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
-	const chatId = person.id;
+	const chatId = personW.id;
 	let user = userWorkers.filter((user) => user.chatId === chatId.toString())[0];
 
 	const lastMsgRef = useRef(null);
@@ -89,7 +88,7 @@ const Chat = () => {
 	//функция отправки сообщения
 	const sendText = async () => {
 		//Передаем данные боту
-        const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${mess.replace(/\n/g, '%0A')}`
+        const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${mess.replace(/\n/g, '%0A')}`
 		const sendToTelegram = await $host.get(url_send_msg);
 
 		//Выводим сообщение об успешной отправке
@@ -152,7 +151,7 @@ const Chat = () => {
 				<div className="chat__bg"></div>
 
 				<Header
-					user={person}
+					user={personW}
 					openProfileSidebar={() => openSidebar(setShowProfileSidebar)}
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 				/>

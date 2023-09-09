@@ -9,7 +9,7 @@ import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 
 const Contact = ({ contact }) => {
 	
-	const { setPerson } = useContext(AccountContext);
+	const { setPersonW } = useContext(AccountContext);
 	const host = process.env.REACT_APP_API_URL
 	
 	//сделать пользователя непрочитанным
@@ -19,7 +19,7 @@ const Contact = ({ contact }) => {
 
 	//обработка нажатия на пользователя из списка
     const getUser = async () => {
-        setPerson({
+        setPersonW({
             name: contact.name, 
             id: contact.chatId, 
 			avatar: contact.avatar
