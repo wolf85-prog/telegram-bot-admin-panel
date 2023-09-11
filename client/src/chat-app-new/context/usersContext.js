@@ -423,7 +423,7 @@ const UsersProvider = ({ children }) => {
 			console.log("Предварительная смета одобрена!")
 			//play sound
 			audioSmeta.play(); 
-		} else if (data.text.startsWith('Проект успешно создан')) {
+		} else if (data.text.startsWith('Проект успешно создан') && !data.text.includes('_reply_')) {
 			console.log("Пришел новый проект: ", newProject)
 			//play sound
 			audioProject.play();
