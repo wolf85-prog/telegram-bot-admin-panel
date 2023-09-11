@@ -687,10 +687,10 @@ const fetchMessageSpecResponse = async(data) => {
 	//setCount(count+1);
 	setCountMessageWork(countMessageWork + 1)
 
-	if (data.text.startsWith('Специалист успешно добавлен!')) {
+	if (data.text.startsWith('Специалист успешно добавлен!') && !data.text.includes('_reply_')) {
 		console.log("Пришел новый специаилст: ")
 		//audioProject.play();
-		//пришел новый проект
+		//пришел новый специалист
 		//setNewProject(true)
 		
 		//get all projects
