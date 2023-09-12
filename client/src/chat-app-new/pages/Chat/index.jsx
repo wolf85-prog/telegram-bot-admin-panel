@@ -18,7 +18,6 @@ import { $host } from './../../../http/index'
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 const host = process.env.REACT_APP_HOST
-const hostPort = process.env.REACT_APP_API_URL
 
 const Chat = () => {
 	const { users, setUserAsUnread, addNewMessage } = useUsersContext();

@@ -14,7 +14,19 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 
+	const msgRef = useRef([]);
+
+	let replyMessage;
+
 	const { delMessageContext } = useUsersContext();
+
+	//прокрутка
+	const scrollToMsg = (id) => {
+		console.log(id)
+		//alert(id)
+		console.log(msgRef.current)
+		msgRef.current[id].scrollIntoView({transition: "smooth"});
+	};
 
 	const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 		<button
@@ -148,73 +160,101 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 												</span>
 
 										<Dropdown onSelect={change}>
-											<Dropdown.Toggle 
-												as={CustomToggle} 
-												id="dropdown-custom-components"	
-											>											
+											<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenu}>
-											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить сообщение</Dropdown.Item>
+											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: person.id})}>Удалить сообщение</Dropdown.Item>
 											</Dropdown.Menu>
-										</Dropdown>	
+										</Dropdown>
 									</div>
 								) : message.sender !== chatAdminId ? (
 									<p className="chat__msg chat__msg--rxd" ref={assignRef()}>
-										<span>
-											{message.content?.startsWith('http') 
-											? <a className="chat__href" href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
-											: message.content}
-										</span>
-										<span className="chat__msg-filler"> </span>
-										<span className="chat__msg-footer">
-											{formatTime(message.time)}
-										</span>
-										<Dropdown onSelect={change}>
-											<Dropdown.Toggle 
-												as={CustomToggle} 
-												id="dropdown-custom-components"
-											>											
-											</Dropdown.Toggle>
-											<Dropdown.Menu as={CustomMenu}>
-											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить сообщение</Dropdown.Item>
-											</Dropdown.Menu>
-										</Dropdown>
+										<div className="flex-row" ref={el => msgRef.current[message.id] = el} >
+											{/* пересылаемое сообщение */}
+											{message.content?.includes('_reply_') 
+											? <div className="chat__msg--reply" onClick={()=>scrollToMsg(message.reply)}>
+												<div className="reply__content">
+													<div className="reply__full">
+														<span className="reply__left"></span>
+														<div className="reply__pad">
+															<div className="reply__contact">U.L.E.Y</div>
+															<div className="reply__text">
+																{/* {replyMessage?.content.endsWith('.pdf') ? (
+																<figure>
+																	<iframe src={message.content} height="50px" width="50px" title="myFramePdf"/>
+																</figure>) : (
+																<figure>
+																	<a href={replyMessage?.content} target="_blank" rel="noreferrer"><img src={replyMessage?.content} alt="" width='50px' height='50px' /></a>
+																	<figcaption style={{textAlign: 'center', backgroundColor: '#607a7a', borderRadius: '5px'}}></figcaption>
+																</figure>
+																)} */}
+																{replyMessage?.startsWith('http') ?
+																	<a href={replyMessage} target="_blank" rel="noreferrer"><img src={replyMessage} alt='' width='50px' height='50px' /></a>
+																	: replyMessage
+																}
+															</div>
+														</div>
+													</div>
+													
+												</div>
+											</div>
+											: <></>}
+											<span>
+												{/* {message.content?.startsWith('http') 
+												? <a className="chat__href" href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
+												: message.content.includes('_reply_') ? message.content.split('_reply_')[1] : message.content}  */}
+												{message.content?.includes('_reply_') 
+												? message.content.split('_reply_')[1] 
+												: message.content}
+											</span>
+											<span className="chat__msg-filler"> </span>
+											<span className="chat__msg-footer">
+												{formatTime(message.time)}
+											</span>
+										</div>	
+											<Dropdown onSelect={change}>
+												<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
+												</Dropdown.Toggle>
+												<Dropdown.Menu as={CustomMenu}>
+												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: person.id})}>Удалить сообщение</Dropdown.Item>
+												</Dropdown.Menu>
+											</Dropdown>									
 									</p>
 								) : (
 									<p className="chat__msg chat__msg--sent" ref={assignRef()}>
-										<span>
-											{message.content?.startsWith('http') 
-											? <a className="chat__href" href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
-											: message.content}
-										</span>
-										<span className="chat__msg-filler"> </span>
-										<span className="chat__msg-footer">
-											<span> {formatTime(message.time)} </span>
-											<Icon
-												id={
-													message?.status === "sent"
-														? "singleTick"
-														: "doubleTick"
-												}
-												aria-label={message?.status}
-												className={`chat__msg-status-icon ${
-													message?.status === "read"
-														? "chat__msg-status-icon--blue"
-														: ""
-												}`}
-											/>
-										</span>
+										<div ref={el => msgRef.current[message.id] = el}>
+											<span>
+												{message.content?.startsWith('http') 
+												? <a className="chat__href" href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
+												: message.content}
+											</span>
+											<span className="chat__msg-filler"> </span>
+											<span className="chat__msg-footer">
+												<span> {formatTime(message.time)} </span>
+												<Icon
+													id={
+														message?.status === "sent"
+															? "singleTick"
+															: "doubleTick"
+													}
+													aria-label={message?.status}
+													className={`chat__msg-status-icon ${
+														message?.status === "read"
+															? "chat__msg-status-icon--blue"
+															: ""
+													}`}
+												/>
+											</span>
 
-										<Dropdown onSelect={change}>
-											<Dropdown.Toggle 
-												as={CustomToggle} 
-												id="dropdown-custom-components"
-											>											
-											</Dropdown.Toggle>
-											<Dropdown.Menu as={CustomMenu}>
-											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить сообщение</Dropdown.Item>
-											</Dropdown.Menu>
-										</Dropdown>
+											<Dropdown onSelect={change}>
+												<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
+												</Dropdown.Toggle>
+												<Dropdown.Menu as={CustomMenu}>
+												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: person.id})}>Удалить сообщение</Dropdown.Item>
+												</Dropdown.Menu>
+											</Dropdown>
+										</div>
+										
 									</p>
 								)}
 							</>
