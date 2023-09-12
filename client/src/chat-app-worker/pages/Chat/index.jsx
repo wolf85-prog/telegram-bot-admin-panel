@@ -13,10 +13,12 @@ import { AccountContext } from './../../../chat-app-new/context/AccountProvider'
 import { newMessage, uploadFile } from "src/http/workerAPI";
 import { $host } from './../../../http/index'
 import sendSound from './../../../chat-app-new/assets/sounds/sendmessage.mp3';
+import axios from 'axios';
 
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 const host = process.env.REACT_APP_HOST
+const baseURL = process.env.REACT_APP_API_URL
 
 const Chat = () => {
 	const { userWorkers, setUserAsUnread, addNewMessage2 } = useUsersContext();
@@ -35,7 +37,16 @@ const Chat = () => {
 	const [image, setImage]= useState("");
 	const [mess, setMess] = useState("");
 
+	// для хранения ответа от бекенда
+	const [data, getFile] = useState({ name: "", path: "" });
+	const [progress, setProgess] = useState(0); // progessbar
+  	const el = useRef(); // для доступа к инпуту
+
 	const audio = new Audio(sendSound);
+
+	const refreshPage = ()=>{
+		window.location.reload(true);
+	 }
 
 	useEffect(() => {
 		if (user) {
@@ -58,11 +69,26 @@ const Chat = () => {
         const getImage = async () => {
             if (file) {
                 const data = new FormData();
-                data.append("name", file.name);
-                data.append("photo", file);
+                data.append("name", file.name); // добавление имени файла
+                data.append("photo", file); // добавление файла
 
                let response = await uploadFile(data);
 			   console.log("response: ", response)
+
+			//    axios.post(baseURL + 'api/file/upload', data, {
+			// 		onUploadProgress: (ProgressEvent) => {
+			// 			let progress = Math.round(
+			// 			ProgressEvent.loaded / ProgressEvent.total * 100
+			// 			) + '%';
+			// 			setProgess(progress);
+			// 		}
+			// 	}).then(res => {
+			// 	console.log(res);
+			// 	getFile({
+			// 		name: res.data.name,
+			// 		path: baseURL + res.data.path
+			// 	})
+			// 	}).catch(err => console.log(err))
 
                setImage(response.data.path.split('.team')[1]);
 			   //сообщение с ссылкой на файл
@@ -72,8 +98,11 @@ const Chat = () => {
         getImage();
     }, [file])
 
-	const onFileChange = (e) => {
-        setFile(e.target.files[0]);
+	const onFileChange = (e) => {	
+		setProgess(0)
+		const file = e.target.files[0]; // доступ к файлу
+		console.log(file);
+		setFile(file); // сохранение файла
     }
 
 	const openSidebar = (cb) => {
@@ -189,6 +218,9 @@ const Chat = () => {
 							submitNewMessage={submitNewMessage}
 						/>
 
+						{/* <div className="progessBar" style={{ width: progress, height: '1rem', width: '0%',  backgroundColor: 'rgb(68, 212, 231)', color: 'white',  padding: '2px' }}>
+							{progress}
+						</div> */}
 					</div>		
 				</footer>
 			</div>

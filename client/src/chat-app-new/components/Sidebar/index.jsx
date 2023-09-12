@@ -7,12 +7,14 @@ import Contact from "./Contact";
 import OptionsBtn from "./../../components/OptionsButton";
 import { useUsersContext } from "./../../context/usersContext";
 import { Link } from "react-router-dom";
+import { CSpinner} from '@coreui/react'
 
 const Sidebar = () => {
 	const { users: clients } = useUsersContext();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
+	const [loading, setLoading]= useState(true);
 
 	const navigate = useNavigate()
 
@@ -23,6 +25,10 @@ const Sidebar = () => {
 			return dateB-dateA  //сортировка по убывающей дате  
 		})
 		setContacts(userSort)
+
+		if(clients.length > 0) {
+			setLoading(false)
+		}
 	},[clients])
 	
 	useEffect(() => {
@@ -93,12 +99,15 @@ const Sidebar = () => {
 			
 			{/* Conversations */}
 			<div className="sidebar__contacts">
-				{contacts.map((contact) => (
+				{loading ? 
+				<CSpinner style={{margin: '50%'}}/> :
+				contacts.map((contact) => (
 					contact.chatId !== chatAdminId &&
                     <>   
 						<Contact contact={contact} />
 					</>
-				))}
+				))
+				}
 			</div>
 		</aside>
 	);
