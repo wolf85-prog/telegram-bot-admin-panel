@@ -6,6 +6,13 @@ import { editContact, uploadFile, editContactAvatar } from './../../../../http/c
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
 import defaultAvatar from "./../../../../chat-app-new/assets/images/no-avatar.png";
+import CIcon from '@coreui/icons-react'
+import {
+  cilPen,
+} from '@coreui/icons'
+import { 
+	CFormSelect,
+  } from '@coreui/react'
 
 const Profile = ({ user }) => {
 	const [username, setUsername] = useState("")
@@ -162,11 +169,12 @@ const Profile = ({ user }) => {
 							ФИО
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							Иванов Иван Иванович
+							Римский-Корсаков Станислав Константинович
 						</span>
 					</p>
 					<button className="profile__action-right">
-						<Icon id="rightArrow" className="profile__heading-icon" />{" "}
+						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
+						<CIcon icon={cilPen} style={{color: 'white'}}/>{" "}
 					</button>
 				</li>
 				<li className="profile__action">
@@ -179,7 +187,8 @@ const Profile = ({ user }) => {
 						</span>
 					</p>
 					<button className="profile__action-right">
-						<Icon id="rightArrow" className="profile__heading-icon" />{" "}
+						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
+						<CIcon icon={cilPen} style={{color: 'white'}}/>{" "}
 					</button>
 				</li>
 
@@ -189,11 +198,14 @@ const Profile = ({ user }) => {
 							селект
 						</span>
 					</p> */}
-					<select>
-						Выберите цепочку
-					</select>
+					<CFormSelect 
+                        aria-label="Default select example"
+                        options={["Выберите цепочку", "Цепочка №1", "Цепочка №2"]}
+                        style={{marginTop: '15px', display: "block"}}
+                    />
 					<button className="profile__action-right">
-						<Icon id="rightArrow" className="profile__heading-icon" />{" "}
+						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
+						{/* <CIcon icon={cilPen} style={{color: 'white'}}/>{" "} */}
 					</button>
 				</li>
 
@@ -203,11 +215,12 @@ const Profile = ({ user }) => {
 							Город
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							Москва
+							Санкт-Петербург
 						</span>	
 					</p>
 					<button className="profile__action-right">
-						<Icon id="rightArrow" className="profile__heading-icon" />{" "}
+						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
+						<CIcon icon={cilPen} style={{color: 'white'}}/>{" "}
 					</button>
 				</li>
 
@@ -217,11 +230,12 @@ const Profile = ({ user }) => {
 							Категории
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							...
+							Звук
 						</span>	
 					</p>
 					<button className="profile__action-right">
-						<Icon id="rightArrow" className="profile__heading-icon" />{" "}
+						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
+						<CIcon icon={cilPen} style={{color: 'white'}}/>{" "}
 					</button>
 				</li>
 
@@ -235,7 +249,8 @@ const Profile = ({ user }) => {
 						</span>
 					</p>
 					<button className="profile__action-right">
-						<Icon id="rightArrow" className="profile__heading-icon" />{" "}
+						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
+						<CIcon icon={cilPen} style={{color: 'white'}}/>{" "}
 					</button>
 				</li>
 			</ul>
