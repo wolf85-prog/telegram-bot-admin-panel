@@ -114,7 +114,13 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 					</p>
 				)}
 				<div className="chat__msg-group" >
-					{messages.map((message, msgIndex) => {		
+					{messages.map((message, msgIndex) => {	
+						
+						//получить сообщение по его id
+						if (message.content?.includes('_reply_')) {
+							replyMessage = message?.content.split('_reply_')[0] //messages.find(mess=> mess.id === message.content.split('_reply_')[0])
+					   	} 
+
 						const assignRef = () =>
 							dateIndex === dates.length - 1 && msgIndex === messages.length - 1
 								? lastMsgRef
