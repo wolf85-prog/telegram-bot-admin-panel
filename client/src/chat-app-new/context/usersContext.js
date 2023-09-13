@@ -221,6 +221,7 @@ const UsersProvider = ({ children }) => {
 						time: chas + ' : ' + minut,
 						status: 'sent',
 						id:message.messageId,
+						reply:message.replyId,
 					}
 					arrayMessage.push(newMessage)
 					allDate.push(newDateMessage)
