@@ -1,8 +1,8 @@
 import Icon from "./../../../components/Icon";
 import React, { useContext, useState, useRef } from "react";
 // import pdf from "./../../../assets/images/PDFicon.png";
-//import docIcon from "./../../../assets/images/DOCicon.png";
-//import xlsIcon from "./../../../assets/images/XLSicon.png";
+import docIcon from "./../../../assets/images/DOCicon.jpg";
+import xlsIcon from "./../../../assets/images/XLSicon.png";
 import formatTime from "./../../../utils/formatTime";
 import { AccountContext } from './../../../context/AccountProvider';
 import { useUsersContext } from "./../../../context/usersContext";
@@ -138,7 +138,12 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											{/* <img src={pdf} width={30}/>
 											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a>*/}
 											<iframe src={message.content} height="235px" width="100%" title="myFramePdf"/>
-										</figure>) : (
+										</figure>) : 
+											message.content.endsWith('.xlsx') ? <figure> <img src={xlsIcon} width={30}/>
+											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> </figure> : 
+											
+											message.content.endsWith('.docx') ? <figure> <img src={docIcon} width={30}/>
+											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> </figure> : (
 											<figure>
 												<a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>
 												
