@@ -1,8 +1,8 @@
 import Icon from "./../../../components/Icon";
 import React, { useContext, useState, useRef } from "react";
 // import pdf from "./../../../assets/images/PDFicon.png";
-import docIcon from "./../../../../chat-app-new/assets/images/DOCicon.png";
-import xlsIcon from "./../../../../chat-app-new/assets/images/XLSicon.png";
+//import docIcon from "./../../../../chat-app-new/assets/images/DOCicon.png";
+//import xlsIcon from "./../../../../chat-app-new/assets/images/XLSicon.png";
 import formatTime from "./../../../../chat-app-new/utils/formatTime";
 import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
