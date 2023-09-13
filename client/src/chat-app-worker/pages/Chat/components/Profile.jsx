@@ -139,9 +139,8 @@ const Profile = ({ user }) => {
 								/>
 								<input type="submit" value="Сохранить" style={{ color: '#6a6a6a'}} />
 							</form>
-							: <><h2 className="profile__name"> Римский-Корсаков</h2> 
-								<h2 className="profile__name"> {user.name}  </h2> 
-								<h2 className="profile__name"> Константинович</h2>
+							: <><h2 className="profile__name">Белов Владимир Сергеевич</h2> 
+								{/* <h2 className="profile__name"> {user.name}  </h2>  */}
 							  </>
 				}
 				
