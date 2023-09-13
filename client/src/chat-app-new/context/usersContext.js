@@ -470,7 +470,7 @@ const UsersProvider = ({ children }) => {
 				console.log("userIndex new: ", userIndex)
 			}		
 			
-//-----------------------------------------------------------------------------------------------			
+		//-----------------------------------------------------------------------------------------------			
 			const newMsgObject = {
 				date: new Date().toLocaleDateString(),
 				content: text,
@@ -484,7 +484,7 @@ const UsersProvider = ({ children }) => {
 
 			const currentDate = new Date().toLocaleDateString()
 
-			console.log("messages: ", usersCopy[userIndex].messages[currentDate])
+			//console.log("messages: ", usersCopy[userIndex].messages[currentDate])
 
 			if (usersCopy[userIndex].messages[currentDate]) {
 				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
@@ -705,10 +705,33 @@ const fetchMessageSpecResponse = async(data) => {
 	}
 
 	setUserWorkers((userWorkers) => {
-		const { senderId, text, type, messageId } = data;
+		const { senderId, text, type, messageId, convId, replyId } = data;
 		//console.log("users: ", users)
 		let userIndex = userWorkers.findIndex((user) => user.chatId === senderId.toString());
 		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
+
+		if (userIndex === -1) {
+			const newUser = {
+				id: usersCopy.length,
+				name: 'Новый заказчик',
+				chatId: `${senderId}`,
+				avatar: '',
+				conversationId: convId,
+				unread: 0, 
+				pinned: false,
+				typing: false,
+				message:  '',
+				date: '2000-01-01T00:00:00',
+				messages: {}, 
+			}	
+			usersCopy.push(newUser)
+			console.log("usersCopy: ", usersCopy)
+
+			userIndex = usersCopy.length-1; //usersCopy.findIndex((user) => user.chatId === senderId.toString());
+
+			console.log("userIndex new: ", userIndex)
+		}
+		
 		const newMsgObject = {
 			date: new Date().toLocaleDateString(),
 			content: text,
@@ -717,6 +740,7 @@ const fetchMessageSpecResponse = async(data) => {
 			time: new Date().toLocaleTimeString(),
 			status: null,
 			id: messageId,
+			reply: replyId,
 		};
 
 		const currentDate = new Date().toLocaleDateString()
