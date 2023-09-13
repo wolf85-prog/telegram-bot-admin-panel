@@ -1,6 +1,8 @@
 import Icon from "./../../../components/Icon";
 import React, { useContext, useState, useRef } from "react";
 // import pdf from "./../../../assets/images/PDFicon.png";
+import docIcon from "./../../../assets/images/DOCicon.png";
+import xlsIcon from "./../../../assets/images/XLSicon.png";
 import formatTime from "./../../../../chat-app-new/utils/formatTime";
 import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
@@ -73,8 +75,6 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		//alert(`you chosen: ${eventkey}`)
 		const message = JSON.parse(eventkey);
 
-		console.log("id:", message.id)
-
 		//удалить сообщение через сокет
 		delMessageContext(message.id, message.date, message.chatId)
 
@@ -82,7 +82,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		delMessage(message.id)
 
 		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
-		//console.log(url_del_msg)
+
 		const delToTelegram = await $host.get(url_del_msg);
 
 		console.log("Удаляемое сообщение: ", message.id)
@@ -101,7 +101,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 	return dates.map((date, dateIndex) => {
 		const messages = allMessages[date];
-		//console.log("allMessages: ", messages);
+		
 		return (
 			<div key={dateIndex}>
 				<div className="chat__date-wrapper">
@@ -114,7 +114,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 					</p>
 				)}
 				<div className="chat__msg-group" >
-					{messages.map((message, msgIndex) => {
+					{messages.map((message, msgIndex) => {		
 						const assignRef = () =>
 							dateIndex === dates.length - 1 && msgIndex === messages.length - 1
 								? lastMsgRef
@@ -130,7 +130,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 									>
 										{message.content.endsWith('.pdf') ? (<figure>
 											{/* <img src={pdf} width={30}/>
-											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a>											 */}
+											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a>*/}
 											<iframe src={message.content} height="235px" width="100%" title="myFramePdf"/>
 										</figure>) : (
 											<figure>
@@ -165,7 +165,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											<Dropdown.Menu as={CustomMenu}>
 											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить сообщение</Dropdown.Item>
 											</Dropdown.Menu>
-										</Dropdown>
+										</Dropdown>	
 									</div>
 								) : message.sender !== chatAdminId ? (
 									<p className="chat__msg chat__msg--rxd" ref={assignRef()}>
@@ -263,7 +263,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 				</div>
 			</div>
 		);
-	 });
+	});
 };
 
 export default Convo;
