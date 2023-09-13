@@ -126,7 +126,7 @@ const Profile = ({ user }) => {
 
 				
 
-				<p style={{ color: '#d5d5d5'}}>{user.chatId}</p>
+				
 				{
 					form ? <form onSubmit={handleSubmit}>
 								<input 
@@ -139,7 +139,10 @@ const Profile = ({ user }) => {
 								/>
 								<input type="submit" value="Сохранить" style={{ color: '#6a6a6a'}} />
 							</form>
-							: <h2 className="profile__name"> {user.name} </h2> 
+							: <><h2 className="profile__name"> Римский-Корсаков</h2> 
+								<h2 className="profile__name"> {user.name}  </h2> 
+								<h2 className="profile__name"> Константинович</h2>
+							  </>
 				}
 				
 				{
@@ -166,20 +169,6 @@ const Profile = ({ user }) => {
 				<li className="profile__action">
 					<p className="profile__action-left">
 						<span className="profile__action-text profile__action-text--bottom">
-							ФИО
-						</span>
-						<span className="profile__action-text profile__action-text--top">
-							Римский-Корсаков Станислав Константинович
-						</span>
-					</p>
-					<button className="profile__action-right">
-						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
-						<CIcon icon={cilPen} style={{color: 'white'}}/>{" "}
-					</button>
-				</li>
-				<li className="profile__action">
-					<p className="profile__action-left">
-						<span className="profile__action-text profile__action-text--bottom">
 							Телефон
 						</span>
 						<span className="profile__action-text profile__action-text--top">
@@ -190,24 +179,7 @@ const Profile = ({ user }) => {
 						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
 						<CIcon icon={cilPen} style={{color: 'white'}}/>{" "}
 					</button>
-				</li>
-
-				<li className="profile__action">
-					{/* <p className="profile__action-left">
-						<span className="profile__action-text profile__action-text--top">
-							селект
-						</span>
-					</p> */}
-					<CFormSelect 
-                        aria-label="Default select example"
-                        options={["Выберите цепочку", "Цепочка №1", "Цепочка №2"]}
-                        style={{marginTop: '15px', display: "block"}}
-                    />
-					<button className="profile__action-right">
-						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
-						{/* <CIcon icon={cilPen} style={{color: 'white'}}/>{" "} */}
-					</button>
-				</li>
+				</li>			
 
 				<li className="profile__action">
 					<p className="profile__action-left">
@@ -217,6 +189,36 @@ const Profile = ({ user }) => {
 						<span className="profile__action-text profile__action-text--top">
 							Санкт-Петербург
 						</span>	
+					</p>
+					<button className="profile__action-right">
+						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
+						<CIcon icon={cilPen} style={{color: 'white'}}/>{" "}
+					</button>
+				</li>			
+
+				<li className="profile__action">
+					<p className="profile__action-left">
+						<span className="profile__action-text profile__action-text--bottom">
+							Дата рождения
+						</span>
+						<span className="profile__action-text profile__action-text--top">
+							01.01.2000
+						</span>
+					</p>
+					<button className="profile__action-right">
+						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
+						<CIcon icon={cilPen} style={{color: 'white'}}/>{" "}
+					</button>
+				</li>
+
+				<li className="profile__action">
+					<p className="profile__action-left">
+						<span className="profile__action-text profile__action-text--bottom">
+							Telegram ID
+						</span>
+						<span className="profile__action-text profile__action-text--top">
+							{user.chatId}
+						</span>
 					</p>
 					<button className="profile__action-right">
 						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
@@ -240,17 +242,19 @@ const Profile = ({ user }) => {
 				</li>
 
 				<li className="profile__action">
-					<p className="profile__action-left">
-						<span className="profile__action-text profile__action-text--bottom">
-							Дата рождения
-						</span>
+					{/* <p className="profile__action-left">
 						<span className="profile__action-text profile__action-text--top">
-							01.01.2000
+							селект
 						</span>
-					</p>
+					</p> */}
+					<CFormSelect 
+                        aria-label="Default select example"
+                        options={["Выберите цепочку", "Цепочка №1", "Цепочка №2"]}
+                        style={{marginTop: '15px', display: "block"}}
+                    />
 					<button className="profile__action-right">
 						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
-						<CIcon icon={cilPen} style={{color: 'white'}}/>{" "}
+						{/* <CIcon icon={cilPen} style={{color: 'white'}}/>{" "} */}
 					</button>
 				</li>
 			</ul>
