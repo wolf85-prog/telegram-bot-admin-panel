@@ -31,5 +31,6 @@ export {
     $host,
     $host_bot,
     $host_bottest,
+    $host_worker,
     $authHost
 }

@@ -1,4 +1,14 @@
-import {$authHost, $host} from "./index";
+import {$authHost, $host, $host_worker} from "./index";
+
+export const getWorkerNotionId = async (id) =>{
+    try {
+       let response = await $host_worker.get(`api/workers/${id}`);
+       //console.log(response);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getWorkerNotionId api", error.message);
+    }
+}
 
 export const getWorkers = async () =>{
     try {
