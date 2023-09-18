@@ -10,6 +10,16 @@ export const getWorkerNotionId = async (id) =>{
     }
 }
 
+export const getWorkerChildrenId = async (id) =>{
+    try {
+       let response = await $host_worker.get(`api/workers/children/${id}`);
+       //console.log(response);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getWorkerChildrenId api", error.message);
+    }
+}
+
 export const getWorkers = async () =>{
     try {
        let response = await $host.get('api/workers/get');

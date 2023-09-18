@@ -3,7 +3,7 @@ import media from "./../../../../chat-app-new/assets/images/placeholder.jpeg";
 import Checkbox from "./../../../components/Checkbox";
 import Icon from "./../../../components/Icon";
 import { editContact, uploadFile, editContactAvatar } from './../../../../http/chatAPI';
-import { getWorkerNotionId} from './../../../../http/workerAPI';
+import { getWorkerNotionId, getWorkerChildrenId} from './../../../../http/workerAPI';
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
 import defaultAvatar from "./../../../../chat-app-new/assets/images/no-avatar.png";
@@ -19,6 +19,7 @@ import { getWorkerId } from "src/http/adminAPI";
 const Profile = ({ user }) => {
 	const [username, setUsername] = useState("")
 	const [worker, setWorker] = useState("")
+	const [avatar, setAvatar] = useState("")
 	const [form, setForm] = useState(false)
 	const { addNewName, addNewAvatar } = useUsersContext();
 	const { setPersonW } = useContext(AccountContext);
@@ -36,6 +37,9 @@ const Profile = ({ user }) => {
 			const fio_notion = await getWorkerNotionId(user.chatId)
 			//console.log("worker: ", fio_notion[0])
 			setWorker(fio_notion[0])
+
+			const avatars = await getWorkerChildrenId(fio_notion[0].id)
+			setAvatar(avatars[0]?.image)
 		}
 
 		fetchData();
@@ -118,8 +122,8 @@ const Profile = ({ user }) => {
 			<div className="profile__section profile__section--personal">
 				<div className="profile__avatar-wrapper upload">
 					{
-						user.avatar
-							? <img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
+						avatar
+							? <img src={avatar} alt={user?.name} className="avatar-adm" /> //<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
 							: <img src={defaultAvatar} alt={user?.name} className="avatar-adm" />
 					}
 					
@@ -243,7 +247,7 @@ const Profile = ({ user }) => {
 							Категории
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							{worker.spec?.map((item)=>item.name)}
+							{worker.spec?.map((item)=>item.name).join('\n')}
 						</span>	
 					</p>
 					<button className="profile__action-right">
