@@ -183,7 +183,7 @@ const Profile = ({ user }) => {
 							Телефон
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							8 (900) 123-12-12
+							{worker.phone}
 						</span>
 					</p>
 					<button className="profile__action-right">
@@ -198,7 +198,7 @@ const Profile = ({ user }) => {
 							Город
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							Санкт-Петербург
+							{worker.city}
 						</span>	
 					</p>
 					<button className="profile__action-right">
@@ -213,7 +213,7 @@ const Profile = ({ user }) => {
 							Дата рождения
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							01.01.2000
+							{worker.age?.start}
 						</span>
 					</p>
 					<button className="profile__action-right">
@@ -243,7 +243,7 @@ const Profile = ({ user }) => {
 							Категории
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							Звук
+							{worker.spec?.map((item)=>item.name)}
 						</span>	
 					</p>
 					<button className="profile__action-right">
