@@ -217,7 +217,7 @@ const Profile = ({ user }) => {
 							Дата рождения
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							{worker.age?.start}
+							{`${worker.age?.start.split('-')[2]}.${worker.age?.start.split('-')[1]}.${worker.age?.start.split('-')[0]}`}
 						</span>
 					</p>
 					<button className="profile__action-right">
