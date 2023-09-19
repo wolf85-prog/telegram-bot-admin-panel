@@ -1,5 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
+import { getWorkers } from './../http/workerAPI'
 import DataTable, { createTheme } from 'react-data-table-component';
 import { 
   CContainer, 
@@ -103,18 +104,19 @@ createTheme('solarized', {
 
 const Workers = () => {
 
-  const { workers } = useUsersContext();
+  //const { workers } = useUsersContext();
 
   const [spec, setSpec] = useState([]); 
   const [pending, setPending] = useState(true);  
 
-  //get Projects
+  //get Workers
   useEffect(() => {
     const arrWorkers = []
     let specStr
     let specArr
 
     const fetchData = async () => {
+      let workers = await getWorkers();
       console.log("workers: ", workers)
 
       workers.map(async (worker) => {
@@ -153,7 +155,7 @@ const Workers = () => {
 
     fetchData();
     
-  },[workers])
+  },[])
 
   return (
     <div className='dark-theme'>

@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./socketContext";
 import { getContacts, getConversation, getMessages } from '../../http/chatAPI'
 import { getWContacts, getWConversation, getWMessages, getWorkers } from '../../http/workerAPI'
+import { getWorkerNotionId, getWorkerChildrenId} from './../../http/workerAPI';
 import { getDistributions, 
 	getDistributionsW, 
 	getDistributionsWPlan,
@@ -187,6 +188,9 @@ const UsersProvider = ({ children }) => {
 			const arrayContact = []
 	
 			response.map(async (user) => {
+
+				let notion = await getWorkerNotionId(user.chatId)
+				//console.log("notion: ", notion[0])
 				
 				let conversationId = await getWConversation(user.chatId)
 				let messages = await getWMessages(conversationId)
@@ -247,7 +251,10 @@ const UsersProvider = ({ children }) => {
 
 				const newUser = {
 					id: user.id,
-					name: chatName,
+					name: notion[0].fio,
+					city: notion[0].city,
+					phone: notion[0].phone,
+					age: notion[0].age,
 					chatId: user.chatId,
 					avatar: user.avatar,
 					conversationId: conversationId,
@@ -263,24 +270,29 @@ const UsersProvider = ({ children }) => {
 			})
 
 			//подгрузка контактов
-			setTimeout(() => {
-				const sortedClients = [...arrayContact].sort((a, b) => {       
-					var dateA = new Date(a.date), dateB = new Date(b.date) 
-					return dateB-dateA  //сортировка по убывающей дате  
-				})
+			// setTimeout(() => {
+			// 	const sortedClients = [...arrayContact].sort((a, b) => {       
+			// 		var dateA = new Date(a.date), dateB = new Date(b.date) 
+			// 		return dateB-dateA  //сортировка по убывающей дате  
+			// 	})
 
-				setUserWorkers(sortedClients)
-				console.log("user contacts: ", arrayContact)
-				//setUserWorkers(arrayContact)
+			// 	setUserWorkers(sortedClients)
+			// 	console.log("workers contacts: ", arrayContact)
 
-			}, "10000")
+			// }, "10000")
+
+			setUserWorkers(arrayContact)
 
 		}
 
+		//все сообщения заказчиков
 		fetchData();
 
-		fetchWorkerData();
+		//все специалисты
+		//fetchWorkerData();
 
+
+		//все сообщения специалистов
 		fetchUserWorkerData();
 
 	},[])

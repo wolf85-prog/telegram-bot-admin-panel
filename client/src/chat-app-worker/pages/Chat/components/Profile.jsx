@@ -42,7 +42,7 @@ const Profile = ({ user }) => {
 			setAvatar(avatars[0]?.image)
 		}
 
-		fetchData();
+		//fetchData();
 	}, [user]);
 	
 
@@ -156,7 +156,7 @@ const Profile = ({ user }) => {
 								<input type="submit" value="Сохранить" style={{ color: '#6a6a6a'}} />
 							</form>
 							: <>{/* <h2 className="profile__name">Белов Владимир Сергеевич</h2>*/} 
-								<h2 className="profile__name">{worker.fio}</h2>  
+								<h2 className="profile__name">{user.name}</h2>  
 							  </>
 				}
 				
@@ -187,7 +187,7 @@ const Profile = ({ user }) => {
 							Телефон
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							{worker.phone}
+							{user.phone}
 						</span>
 					</p>
 					<button className="profile__action-right">
@@ -202,7 +202,7 @@ const Profile = ({ user }) => {
 							Город
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							{worker.city}
+							{user.city}
 						</span>	
 					</p>
 					<button className="profile__action-right">
@@ -217,7 +217,7 @@ const Profile = ({ user }) => {
 							Дата рождения
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							{`${worker.age?.start.split('-')[2]}.${worker.age?.start.split('-')[1]}.${worker.age?.start.split('-')[0]}`}
+							{`${user.age?.start.split('-')[2]}.${worker.age?.start.split('-')[1]}.${worker.age?.start.split('-')[0]}`}
 						</span>
 					</p>
 					<button className="profile__action-right">

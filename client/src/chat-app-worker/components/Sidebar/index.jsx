@@ -20,6 +20,7 @@ const Sidebar = () => {
 
 	useEffect(() => {
 		console.log("sidebar contacts: ", userWorkers)
+		console.log("sidebar userWorkers: ", userWorkers.length)
 		//сортировка
 		const userSort = [...userWorkers].sort((a, b) => {       
 			var dateA = new Date(a.date), dateB = new Date(b.date) 
