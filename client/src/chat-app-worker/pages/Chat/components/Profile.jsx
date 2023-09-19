@@ -122,8 +122,8 @@ const Profile = ({ user }) => {
 			<div className="profile__section profile__section--personal">
 				<div className="profile__avatar-wrapper upload">
 					{
-						avatar
-							? <img src={avatar} alt={user?.name} className="avatar-adm" /> //<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
+						user?.avatar
+							? <img src={user?.avatar} alt={user?.name} className="avatar-adm" /> //<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
 							: <img src={defaultAvatar} alt={user?.name} className="avatar-adm" />
 					}
 					
