@@ -726,7 +726,7 @@ const fetchMessageSpecResponse = async(data) => {
 		if (userIndex === -1) {
 			const newUser = {
 				id: usersCopy.length,
-				name: 'Новый заказчик',
+				name: 'Новый специалист',
 				chatId: `${senderId}`,
 				avatar: '',
 				conversationId: convId,
