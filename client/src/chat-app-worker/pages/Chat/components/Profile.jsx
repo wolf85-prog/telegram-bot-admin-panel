@@ -136,8 +136,8 @@ const Profile = ({ user }) => {
 				<div className="profile__avatar-wrapper upload">
 					{
 						user?.avatar
-							? <img src={user?.avatar} alt={user?.name} style={{width: '190px', height: '190px', objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
-							: <img src={defaultAvatar} alt={user?.name} style={{width: '190px', height: '190px', objectFit: 'cover'}} />
+							? <img src={user?.avatar} alt={user?.name} style={{width: '250px', height: '250px', objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
+							: <img src={defaultAvatar} alt={user?.name} style={{width: '250px', height: '250px', objectFit: 'cover'}} />
 					}
 					
 					
@@ -172,11 +172,6 @@ const Profile = ({ user }) => {
 								<h2 className="profile__name">{user.name}</h2>  
 							  </>
 				}
-				
-				{
-					!form ? <span onClick={changeUsername} style={{cursor: 'pointer', color: '#6a6a6a'}}>Редактировать</span>
-					: ""
-				}
 			</div>
 
 			{/* <div className="profile__section profile__section--media">
@@ -193,7 +188,24 @@ const Profile = ({ user }) => {
 				</div>
 			</div> */}
 
-			<ul className="profile__section profile__section--actions">		
+			<ul className="profile__section profile__section--actions">	
+				<li className="profile__action">
+					{/* <p className="profile__action-left">
+						<span className="profile__action-text profile__action-text--top">
+							селект
+						</span>
+					</p> */}
+					<CFormSelect 
+						style={{marginTop: '10px', marginBottom: '10px',  display: "block"}}
+                        aria-label="Default select example"
+                        options={["Выберите цепочку", "Цепочка №1", "Цепочка №2"]}    
+                    />
+					<button className="profile__action-right">
+						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
+						{/* <CIcon icon={cilPen} style={{color: 'white'}}/>{" "} */}
+					</button>
+				</li>
+
 				<li className="profile__action">
 					<p className="profile__action-left">
 						<span className="profile__action-text profile__action-text--bottom">
@@ -257,10 +269,11 @@ const Profile = ({ user }) => {
 				<li className="profile__action">
 					<p className="profile__action-left">
 						<span className="profile__action-text profile__action-text--bottom">
-							Специальности
+							Специальность
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							{worker.spec?.map((item)=>item.name).join(',\n')}
+							{/* {worker.spec?.map((item)=>item.name).join('')} */}
+							<table className="table-noborder">{worker.spec?.map((worker, index) => <tr key={index}><td>{worker.name}</td></tr> )}</table>
 						</span>	
 					</p>
 					<button className="profile__action-right">
@@ -269,22 +282,7 @@ const Profile = ({ user }) => {
 					</button>
 				</li>
 
-				<li className="profile__action">
-					{/* <p className="profile__action-left">
-						<span className="profile__action-text profile__action-text--top">
-							селект
-						</span>
-					</p> */}
-					<CFormSelect 
-                        aria-label="Default select example"
-                        options={["Выберите цепочку", "Цепочка №1", "Цепочка №2"]}
-                        style={{marginTop: '15px', display: "block"}}
-                    />
-					<button className="profile__action-right">
-						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
-						{/* <CIcon icon={cilPen} style={{color: 'white'}}/>{" "} */}
-					</button>
-				</li>
+				
 			</ul>
 
 			{/* <div className="profile__section profile__section--about">
@@ -303,11 +301,6 @@ const Profile = ({ user }) => {
 			<div className="profile__section profile__section--danger">
 				<Icon id="block" className="profile__danger-icon" />
 				<p className="profile__danger-text"> Заблокировать </p>
-			</div>
-
-			<div className="profile__section profile__section--danger">
-				<Icon id="thumbsDown" className="profile__danger-icon" />
-				<p className="profile__danger-text"> Сообщить о контакте </p>
 			</div>
 
 			<div className="profile__section profile__section--danger">
