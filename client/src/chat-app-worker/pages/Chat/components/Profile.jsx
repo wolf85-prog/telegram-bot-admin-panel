@@ -27,6 +27,8 @@ const Profile = ({ user }) => {
 	const [showEdit, setShowEdit] = useState(false)
 	const input = React.useRef();
 
+	const [phone, setPhone] = useState("")
+
 	const host = process.env.REACT_APP_API_URL
 
 	useEffect(() => {
@@ -35,15 +37,26 @@ const Profile = ({ user }) => {
 		//получить данные из ноушена по телеграм id
 		const fetchData = async () => {
 			const fio_notion = await getWorkerNotionId(user.chatId)
-			//console.log("worker: ", fio_notion[0])
+			console.log("worker: ", fio_notion[0])
 			setWorker(fio_notion[0])
 
 			const avatars = await getWorkerChildrenId(fio_notion[0].id)
 			setAvatar(avatars[0]?.image)
 		}
 
-		//fetchData();
+		fetchData();
 	}, [user]);
+
+	useEffect(() => {
+		console.log(user)
+		if (user.phone.includes('-')) {
+			setPhone(user.phone)
+		} else {
+			let str = user.phone
+			setPhone(`+7 (${str.slice(1, 4)}) ${str.slice(4, 7)}-${str.slice(7, 9)}-${str.slice(9, 11)}`)
+		}
+		
+	}, [user])
 	
 
 	//кнопка Изменить
@@ -187,7 +200,7 @@ const Profile = ({ user }) => {
 							Телефон
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							{user.phone}
+							{phone}
 						</span>
 					</p>
 					<button className="profile__action-right">
@@ -217,7 +230,7 @@ const Profile = ({ user }) => {
 							Дата рождения
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							{`${user.age?.start.split('-')[2]}.${worker.age?.start.split('-')[1]}.${worker.age?.start.split('-')[0]}`}
+							{`${user.age?.start.split('-')[2]}.${user.age?.start.split('-')[1]}.${user.age?.start.split('-')[0]}`}
 						</span>
 					</p>
 					<button className="profile__action-right">
@@ -244,10 +257,10 @@ const Profile = ({ user }) => {
 				<li className="profile__action">
 					<p className="profile__action-left">
 						<span className="profile__action-text profile__action-text--bottom">
-							Категории
+							Специальности
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							{worker.spec?.map((item)=>item.name).join('\n')}
+							{worker.spec?.map((item)=>item.name).join(',\n')}
 						</span>	
 					</p>
 					<button className="profile__action-right">
