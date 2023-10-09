@@ -7,6 +7,8 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {
 
 	const host = process.env.REACT_APP_API_URL
 
+	//console.log("user: ", user)
+
 	const onSelected = (index) => {
 		switch(index) {
 			case 0: //данные о контакте
@@ -28,7 +30,7 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {
 			<div className="chat__avatar-wrapper" onClick={openProfileSidebar}>
 				{
 					user.avatar
-					? <img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
+					? <img src={`${user.avatar}`} alt={user?.name} className="avatar-adm" />
 					: <img src={avatarDefault} alt={user?.name} className="avatar-adm" />
 				}
 			</div>
