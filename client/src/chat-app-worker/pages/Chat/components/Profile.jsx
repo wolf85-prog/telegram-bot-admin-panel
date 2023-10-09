@@ -123,8 +123,8 @@ const Profile = ({ user }) => {
 				<div className="profile__avatar-wrapper upload">
 					{
 						user?.avatar
-							? <figure className="avatar-adm-profile"><img src={user?.avatar} alt={user?.name} /></figure> //<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
-							: <figure className="avatar-adm-profile"><img src={defaultAvatar} alt={user?.name} /></figure>
+							? <img src={user?.avatar} alt={user?.name} style={{width: '190px', height: '190px', objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
+							: <img src={defaultAvatar} alt={user?.name} style={{width: '190px', height: '190px', objectFit: 'cover'}} />
 					}
 					
 					

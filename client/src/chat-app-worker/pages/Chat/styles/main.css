@@ -706,11 +706,6 @@ textarea:focus {
 
 /* End  Chat Sidebar */
 
-.avatar-adm-profile {
-    height: 250px;
-    width: 250px;
-    object-fit: contain;
-}
 
 @media screen and (min-width: 1301px) {
     .chat__msg {
