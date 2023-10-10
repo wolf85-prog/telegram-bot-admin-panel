@@ -136,8 +136,8 @@ const Profile = ({ user }) => {
 				<div className="profile__avatar-wrapper upload">
 					{
 						user?.avatar
-							? <img src={user?.avatar} alt={user?.name} style={{width: '270px', height: '270px', objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
-							: <img src={defaultAvatar} alt={user?.name} style={{width: '270px', height: '270px', objectFit: 'cover'}} />
+							? <img src={user?.avatar} alt={user?.name} style={{width: '290px', height: '290px', objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
+							: <img src={defaultAvatar} alt={user?.name} style={{width: '290px', height: '290px', objectFit: 'cover'}} />
 					}
 					
 					
@@ -174,7 +174,7 @@ const Profile = ({ user }) => {
 				}
 			</div>
 
-			<ul className="profile__section profile__section--actions">	
+			<ul className="profile__sectionW profile__section--actions">	
 				<li className="profile__actionW">
 					{/* <p className="profile__actionW-left">
 						<span className="profile__action-text profile__action-text--top">
@@ -197,7 +197,7 @@ const Profile = ({ user }) => {
 						<span className="profile__action-text profile__action-text--bottom">
 							Телефон
 						</span>
-						<span className="profile__action-text profile__action-text--top">
+						<span className="profile__action-text profile__action-text--top profile__notion">
 							{phone}
 						</span>
 					</p>
@@ -212,7 +212,7 @@ const Profile = ({ user }) => {
 						<span className="profile__action-text profile__action-text--bottom">
 							Город
 						</span>
-						<span className="profile__action-text profile__action-text--top">
+						<span className="profile__action-text profile__action-text--top profile__notion">
 							{user.city ? user.city : "-"}
 						</span>	
 					</p>
@@ -227,7 +227,7 @@ const Profile = ({ user }) => {
 						<span className="profile__action-text profile__action-text--bottom">
 							Дата рождения
 						</span>
-						<span className="profile__action-text profile__action-text--top">
+						<span className="profile__action-text profile__action-text--top profile__notion">
 							{user.age?.start ? 
 							`${user.age?.start.split('-')[2]}.${user.age?.start.split('-')[1]}.${user.age?.start.split('-')[0]}`
 							: "-"}
@@ -244,7 +244,7 @@ const Profile = ({ user }) => {
 						<span className="profile__action-text profile__action-text--bottom">
 							Telegram ID
 						</span>
-						<span className="profile__action-text profile__action-text--top">
+						<span className="profile__action-text profile__action-text--top profile__notion">
 							{user.chatId}
 						</span>
 					</p>
@@ -286,14 +286,14 @@ const Profile = ({ user }) => {
 			</div> */}
 
 
-			<div className="profile__section profile__section--danger">
+			<div className="profile__sectionW profile__section--danger">
 				<Icon id="block" className="profile__danger-icon" />
-				<p className="profile__danger-text"> Заблокировать </p>
+				<p className="profile__danger-text profile__worker"> Заблокировать </p>
 			</div>
 
-			<div className="profile__section profile__section--danger">
+			<div className="profile__sectionW profile__section--danger">
 				<Icon id="delete" className="profile__danger-icon" />
-				<p className="profile__danger-text"> Удалить чат </p>
+				<p className="profile__danger-text profile__worker"> Удалить чат </p>
 			</div>
 		</div>
 	);

@@ -14,6 +14,7 @@ import logo from 'src/assets/brand/logo_04_light.png'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
+import CompIcon2 from 'src/assets/images/dashboard2.png'
 
 // sidebar nav config
 //import navigation from '../_nav'
@@ -36,12 +37,23 @@ const AppSidebar = () => {
       icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
     },
     {
-      component: CNavTitle,
-      name: 'Основные разделы',
+      component: CNavItem,
+      name: '',
+      to: '/',
+    },
+    // {
+    //   component: CNavTitle,
+    //   name: 'Основные разделы',
+    // },
+    {
+      component: CNavItem,
+      name: 'Renthub',
+      to: '/renthub',
+      icon: <img src={CompIcon2} style={{width: '25px', marginRight: '22px'}} />,
     },
     {
       component: CNavItem,
-      name: 'Заказчики',
+      name: 'Менеджеры',
       to: '/chat2',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
@@ -70,22 +82,29 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Workhub',
+      to: '/workhub',
+      icon: <img src={CompIcon2} style={{width: '25px', marginRight: '22px'}} />,
+    },
+
+    {
+      component: CNavItem,
+      name: 'Специалисты',
       to: '/chatwork',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       badge: countMessageWork !== 0 ? {color: 'info', text: countMessageWork,} : "",
     },
     {
       component: CNavItem,
-      name: 'Специалисты',
-      to: '/workers',
-      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-      //badge: newProject ? {color: 'info', text: '1',} : "",
-    },
-    {
-      component: CNavItem,
       name: 'Рассылки',
       to: '/distributionw',
       icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
+    },
+    {
+      component: CNavItem,
+      name: 'Уведомления',
+      to: '/workers',
+      icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
+      //badge: newProject ? {color: 'info', text: '1',} : "",
     },
   ]
 

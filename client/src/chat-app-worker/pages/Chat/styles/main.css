@@ -707,9 +707,17 @@ textarea:focus {
 
 /* End  Chat Sidebar */
 
+.profile__notion {
+    text-align: end;
+    margin-right: 15px;
+}
+
+.profile__worker {
+    margin-bottom: 0;
+}
 
 .table-noborder {
-    width: 90%;
+    width: 95%;
 }
 
 .table-noborder td {

@@ -1,6 +1,8 @@
 import React from 'react'
 import { 
     ADMIN_ROUTE, 
+    RENTHUB_ROUTE,
+    WORKHUB_ROUTE,
     NOTIF_ROUTE,
     MESS_BOT_ROUTE,
     REPORTS_ROUTE,
@@ -22,6 +24,8 @@ const Chats2 = React.lazy(() => import('./pages/Chats2'))
 const Chats3 = React.lazy(() => import('./pages/Chats3'))
 const ChatWorker = React.lazy(() => import('./pages/ChatWorker'))
 const Admin = React.lazy(() => import('./pages/Admin'))
+const Renthub = React.lazy(() => import('./pages/Renthub'))
+const Workhub = React.lazy(() => import('./pages/Workhub'))
 const Notifications = React.lazy(() => import('./pages/Notifications'))
 const MessagesBot = React.lazy(() => import('./pages/MessagesBot'))
 const Reports = React.lazy(() => import('./pages/Reports'))
@@ -35,6 +39,8 @@ const DistributionWPlaner = React.lazy(() => import('./pages/DistributionWPlaner
 
 export const authRoutes = [
     { path: ADMIN_ROUTE, name: 'Панель управления', Component: Admin },
+    { path: RENTHUB_ROUTE, name: 'Renthub', Component: Renthub },
+    { path: WORKHUB_ROUTE, name: 'Workhub', Component: Workhub },
     { path: CHAT_ROUTE, name: 'Чаты', Component: Chats },
     { path: CHAT_ROUTE2, name: 'Заказчики', Component: Chats2 },
     { path: CHAT_ROUTE3, name: 'Проекты', Component: Chats3 },

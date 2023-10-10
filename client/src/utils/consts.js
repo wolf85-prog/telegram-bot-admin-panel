@@ -1,4 +1,6 @@
 export const ADMIN_ROUTE = '/dashboard'
+export const RENTHUB_ROUTE = '/renthub'
+export const WORKHUB_ROUTE = '/workhub'
 export const CHAT_ROUTE = '/chat'
 export const CHAT_ROUTE2 = '/chat2'
 export const CHAT_ROUTE3 = '/chat3'
