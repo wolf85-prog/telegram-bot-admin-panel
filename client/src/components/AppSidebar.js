@@ -15,7 +15,7 @@ import logo from 'src/assets/brand/logo_04_light.png'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import CompIcon from 'src/assets/images/dashboard.png'
+import CompIcon from 'src/assets/images/dashboard3.png'
 
 // sidebar nav config
 //import navigation from '../_nav'
