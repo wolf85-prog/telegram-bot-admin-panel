@@ -53,13 +53,13 @@ const AppSidebar = () => {
       to: '/renthub',
       icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
     },
-    {
-      component: CNavItem,
-      name: 'Менеджеры',
-      to: '/chat2',
-      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-      badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
-    },
+    // {
+    //   component: CNavItem,
+    //   name: 'Менеджеры',
+    //   to: '/chat2',
+    //   icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+    //   badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
+    // },
     
     {
       component: CNavItem,
@@ -81,12 +81,12 @@ const AppSidebar = () => {
       to: '/',
     },
 
-    {
-      component: CNavItem,
-      name: 'Workhub',
-      to: '/workhub',
-      icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    },
+    // {
+    //   component: CNavItem,
+    //   name: 'Workhub',
+    //   to: '/workhub',
+    //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    // },
 
     {
       component: CNavItem,
