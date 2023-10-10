@@ -34,7 +34,8 @@ const AppSidebar = () => {
       component: CNavItem,
       name: 'Панель управления',
       to: '/dashboard',
-      icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+      // icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+      icon: <img src={CompIcon2} style={{width: '25px', marginRight: '22px'}} />,
     },
     {
       component: CNavItem,
@@ -49,7 +50,7 @@ const AppSidebar = () => {
       component: CNavItem,
       name: 'Renthub',
       to: '/renthub',
-      icon: <img src={CompIcon2} style={{width: '25px', marginRight: '22px'}} />,
+      icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
     },
     {
       component: CNavItem,
@@ -83,7 +84,7 @@ const AppSidebar = () => {
       component: CNavItem,
       name: 'Workhub',
       to: '/workhub',
-      icon: <img src={CompIcon2} style={{width: '25px', marginRight: '22px'}} />,
+      icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
     },
 
     {
