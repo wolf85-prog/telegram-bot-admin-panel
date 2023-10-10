@@ -247,10 +247,9 @@ const UsersProvider = ({ children }) => {
 				let first_name = user.firstname != null ? user.firstname : ''
 				let last_name = user.lastname != null ? user.lastname : ''
 
-				let chatName = user.username ? user.username : first_name + ' ' + last_name
-
 				const newUser = {
 					id: user.id,
+					username: user.username,
 					name: notion[0].fio,
 					city: notion[0].city,
 					phone: notion[0].phone,
@@ -277,7 +276,7 @@ const UsersProvider = ({ children }) => {
 			// 	})
 
 			// 	setUserWorkers(sortedClients)
-			// 	console.log("workers contacts: ", arrayContact)
+			 	console.log("workers contacts: ", arrayContact)
 
 			// }, "10000")
 

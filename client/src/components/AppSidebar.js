@@ -2,7 +2,8 @@ import React from 'react'
 import CIcon from '@coreui/icons-react'
 import {
   cilBell,
-  cilCursor,
+  cilEnvelopeLetter,
+  cilEnvelopeClosed,
   cilSpeedometer,
   cilPeople,
 } from '@coreui/icons'
@@ -64,7 +65,7 @@ const AppSidebar = () => {
       component: CNavItem,
       name: 'Рассылки',
       to: '/distribution',
-      icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
+      icon: <CIcon icon={cilEnvelopeLetter} customClassName="nav-icon" />,
     },
     {
       component: CNavItem,
@@ -98,7 +99,7 @@ const AppSidebar = () => {
       component: CNavItem,
       name: 'Рассылки',
       to: '/distributionw',
-      icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
+      icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
     },
     {
       component: CNavItem,

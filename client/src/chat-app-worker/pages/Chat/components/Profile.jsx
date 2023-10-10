@@ -10,6 +10,7 @@ import defaultAvatar from "./../../../../chat-app-new/assets/images/no-avatar.pn
 import CIcon from '@coreui/icons-react'
 import {
   cilPen,
+  cilMediaPlay
 } from '@coreui/icons'
 import { 
 	CFormSelect,
@@ -49,6 +50,7 @@ const Profile = ({ user }) => {
 
 	useEffect(() => {
 		console.log(user)
+		
 		if (user.phone.includes('-')) {
 			setPhone(user.phone)
 		} else {
@@ -57,78 +59,15 @@ const Profile = ({ user }) => {
 		}
 		
 	}, [user])
+
+	// const getUser = async () => {
+    //     setPersonW({
+    //         name: user.name, 
+    //         id: user.chatId, 
+	// 		avatar: user.avatar
+    //     });
+    // }
 	
-
-	//кнопка Изменить
-	const changeUsername = () => {
-		setUsername(user.name);  
-		setForm(true)
-	}
-	
-	const handleChange = (e) => {
-		e.preventDefault();
-		setUsername(e.target.value);
-	}
-
-	const getUser = async () => {
-        setPersonW({
-            name: user.name, 
-            id: user.chatId, 
-			avatar: user.avatar
-        });
-    }
-	
-	//сохранить новое имя
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		const newName = {
-			username, 
-		}
-		//сохранить в БД
-		await editContact(newName, user.chatId)
-
-		//сохранить в контексте
-		addNewName(user.chatId, username);
-		getUser()
-
-		setForm(false)
-	}
-
-	const handleAvatar = async (e) => {
-		e.preventDefault();
-		setImg(e.target.files[0])
-		setShowEdit(true)
-	}
-
-	//сохранить новый аватар
-	const sendFile = React.useCallback(async () => {
-		try {
-			const data = new FormData();
-            data.append("photo", img);
-
-            let response = await uploadFile(data);
-			//console.log("response: ", response.data)
-			//setAvatar(response.data.path)
-
-			const newAvatar = {
-				avatar: response.data.path.split('.team')[1], 
-			}
-
-			//сохранить в БД
-			await editContactAvatar(newAvatar, user.chatId)
-			
-			//сохранить в контексте
-			addNewAvatar(user.chatId, response.data.path.split('.team')[1]);
-
-			//получить данные из контекста
-			getUser()
-
-			setShowEdit(false)
-
-		} catch (error) {
-			
-		}
-	}, [img])
 
 	return (
 		<div className="profile">
@@ -139,39 +78,9 @@ const Profile = ({ user }) => {
 							? <img src={user?.avatar} alt={user?.name} style={{width: '290px', height: '290px', objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
 							: <img src={defaultAvatar} alt={user?.name} style={{width: '290px', height: '290px', objectFit: 'cover'}} />
 					}
-					
-					
-					<div className="round_adm">
-						<input type="file" name="photo" onChange={handleAvatar}/>
-						<i className = "fa fa-camera" style={{color: '#fff'}}></i>
-					</div>						
 				</div>
-
-				{
-					showEdit 
-					? <button className="btn_save" onClick={sendFile}>Сохранить</button>
-					: ""
-				}
-
-				
-
-				
-				{
-					form ? <form onSubmit={handleSubmit}>
-								<input 
-									type="text" 
-									value={username} 
-									onChange={handleChange} 
-									ref={input}
-        							onFocus={() => input.current.select()}
-									style={{borderBottom: '1px solid #0e892e', color: '#d5d5d5'}}
-								/>
-								<input type="submit" value="Сохранить" style={{ color: '#6a6a6a'}} />
-							</form>
-							: <>{/* <h2 className="profile__name">Белов Владимир Сергеевич</h2>*/} 
-								<h2 className="profile__name">{user.name}</h2>  
-							  </>
-				}
+				<h2 className="profile__name">{user.name}</h2>
+				<h5 style={{fontSize: '16px', color: '#656565'}}>@{user.username}</h5>
 			</div>
 
 			<ul className="profile__sectionW profile__section--actions">	
@@ -186,9 +95,9 @@ const Profile = ({ user }) => {
                         aria-label="Default select example"
                         options={["Выберите цепочку", "Цепочка №1", "Цепочка №2"]}    
                     />
-					<button className="profile__action-right">
+					<button className="profile__action-right" style={{padding: '6px'}} onClick={()=>console.log('sdfsdfsd')}>
 						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
-						{/* <CIcon icon={cilPen} style={{color: 'white'}}/>{" "} */}
+						<CIcon icon={cilMediaPlay} style={{color: 'white'}}/>{" "}
 					</button>
 				</li>
 
@@ -201,10 +110,6 @@ const Profile = ({ user }) => {
 							{phone}
 						</span>
 					</p>
-					<button className="profile__action-right">
-						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
-						<CIcon icon={cilPen} style={{color: 'white'}}/>{" "}
-					</button>
 				</li>			
 
 				<li className="profile__actionW">
@@ -216,10 +121,6 @@ const Profile = ({ user }) => {
 							{user.city ? user.city : "-"}
 						</span>	
 					</p>
-					<button className="profile__action-right">
-						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
-						<CIcon icon={cilPen} style={{color: 'white'}}/>{" "}
-					</button>
 				</li>			
 
 				<li className="profile__actionW">
@@ -233,10 +134,6 @@ const Profile = ({ user }) => {
 							: "-"}
 						</span>
 					</p>
-					<button className="profile__action-right">
-						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
-						<CIcon icon={cilPen} style={{color: 'white'}}/>{" "}
-					</button>
 				</li>
 
 				<li className="profile__actionW">
@@ -248,10 +145,6 @@ const Profile = ({ user }) => {
 							{user.chatId}
 						</span>
 					</p>
-					<button className="profile__action-right">
-						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
-						<CIcon icon={cilPen} style={{color: 'white'}}/>{" "}
-					</button>
 				</li>
 
 				<li className="profile__actionW">
@@ -264,10 +157,6 @@ const Profile = ({ user }) => {
 							<table className="table-noborder">{worker.spec?.map((worker, index) => <tr key={index}><td>{worker.name}</td></tr> )}</table>
 						</span>	
 					</p>
-					<button className="profile__action-right">
-						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
-						<CIcon icon={cilPen} style={{color: 'white'}}/>{" "}
-					</button>
 				</li>
 
 				
