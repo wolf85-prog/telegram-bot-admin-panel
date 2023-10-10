@@ -47,19 +47,19 @@ const AppSidebar = () => {
     //   component: CNavTitle,
     //   name: 'Основные разделы',
     // },
-    {
-      component: CNavItem,
-      name: 'Renthub',
-      to: '/renthub',
-      icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    },
     // {
     //   component: CNavItem,
-    //   name: 'Менеджеры',
-    //   to: '/chat2',
-    //   icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-    //   badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
+    //   name: 'Renthub',
+    //   to: '/renthub',
+    //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
     // },
+    {
+      component: CNavItem,
+      name: 'Менеджеры',
+      to: '/chat2',
+      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
+    },
     
     {
       component: CNavItem,
