@@ -546,19 +546,19 @@ textarea:focus {
     padding-bottom: 2pc;
 }
 
-.profile__section {
-    background: white;
+.profile__sectionW {
+    background: #131c21;
     margin-bottom: 10px;
     box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 3px 0px;
     padding: 10px 20px;
 }
 
-.profile__section--personal {
+.profile__sectionW--personal {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    padding: 30px 20px;
+    padding: 20px 20px 10px 20px;
 }
 
 .profile__avatar-wrapper {
@@ -603,22 +603,23 @@ textarea:focus {
     width: 32%;
 }
 
-.profile__action, .profile__about-item {
+.profile__actionW, .profile__about-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
     /* padding: 15px 0;  */
-    padding: 0 0;
+    padding: 0;
     margin-bottom: 5px;
     cursor: pointer;
 }
 
-.profile__action:not(:last-of-type), .profile__about-item:not(:last-of-type), .profile__group:not(:last-of-type) {
-    border-bottom: 1px solid #EBEBEB;
+.profile__actionW:not(:last-of-type), .profile__about-item:not(:last-of-type), .profile__group:not(:last-of-type) {
+    border-bottom: 1px solid #3C4247;
 }
 
-.profile__action-left {
+.profile__actionW-left {
     flex: 1;
+    margin-bottom: 0;
 }
 
 .profile__action-text {
@@ -705,6 +706,16 @@ textarea:focus {
 }
 
 /* End  Chat Sidebar */
+
+
+.table-noborder {
+    width: 90%;
+}
+
+.table-noborder td {
+    float: right;
+    padding: 0;
+}
 
 
 @media screen and (min-width: 1301px) {

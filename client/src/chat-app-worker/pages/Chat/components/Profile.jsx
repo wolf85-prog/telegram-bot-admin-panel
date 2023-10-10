@@ -132,12 +132,12 @@ const Profile = ({ user }) => {
 
 	return (
 		<div className="profile">
-			<div className="profile__section profile__section--personal">
+			<div className="profile__sectionW profile__sectionW--personal">
 				<div className="profile__avatar-wrapper upload">
 					{
 						user?.avatar
-							? <img src={user?.avatar} alt={user?.name} style={{width: '250px', height: '250px', objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
-							: <img src={defaultAvatar} alt={user?.name} style={{width: '250px', height: '250px', objectFit: 'cover'}} />
+							? <img src={user?.avatar} alt={user?.name} style={{width: '270px', height: '270px', objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
+							: <img src={defaultAvatar} alt={user?.name} style={{width: '270px', height: '270px', objectFit: 'cover'}} />
 					}
 					
 					
@@ -174,23 +174,9 @@ const Profile = ({ user }) => {
 				}
 			</div>
 
-			{/* <div className="profile__section profile__section--media">
-				<div className="sb profile__heading-wrapper">
-					<h2 className="profile__heading"> ФИО </h2>
-					<button>
-						<Icon id="rightArrow" className="profile__heading-icon" />
-					</button>
-				</div>
-				<div className="profile__media-wrapper">
-					<img src={media} alt="media" className="profile__media" />
-					<img src={media} alt="media" className="profile__media" />
-					<img src={media} alt="media" className="profile__media" />
-				</div>
-			</div> */}
-
 			<ul className="profile__section profile__section--actions">	
-				<li className="profile__action">
-					{/* <p className="profile__action-left">
+				<li className="profile__actionW">
+					{/* <p className="profile__actionW-left">
 						<span className="profile__action-text profile__action-text--top">
 							селект
 						</span>
@@ -206,8 +192,8 @@ const Profile = ({ user }) => {
 					</button>
 				</li>
 
-				<li className="profile__action">
-					<p className="profile__action-left">
+				<li className="profile__actionW">
+					<p className="profile__actionW-left">
 						<span className="profile__action-text profile__action-text--bottom">
 							Телефон
 						</span>
@@ -221,13 +207,13 @@ const Profile = ({ user }) => {
 					</button>
 				</li>			
 
-				<li className="profile__action">
-					<p className="profile__action-left">
+				<li className="profile__actionW">
+					<p className="profile__actionW-left">
 						<span className="profile__action-text profile__action-text--bottom">
 							Город
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							{user.city}
+							{user.city ? user.city : "-"}
 						</span>	
 					</p>
 					<button className="profile__action-right">
@@ -236,13 +222,15 @@ const Profile = ({ user }) => {
 					</button>
 				</li>			
 
-				<li className="profile__action">
-					<p className="profile__action-left">
+				<li className="profile__actionW">
+					<p className="profile__actionW-left">
 						<span className="profile__action-text profile__action-text--bottom">
 							Дата рождения
 						</span>
 						<span className="profile__action-text profile__action-text--top">
-							{`${user.age?.start.split('-')[2]}.${user.age?.start.split('-')[1]}.${user.age?.start.split('-')[0]}`}
+							{user.age?.start ? 
+							`${user.age?.start.split('-')[2]}.${user.age?.start.split('-')[1]}.${user.age?.start.split('-')[0]}`
+							: "-"}
 						</span>
 					</p>
 					<button className="profile__action-right">
@@ -251,8 +239,8 @@ const Profile = ({ user }) => {
 					</button>
 				</li>
 
-				<li className="profile__action">
-					<p className="profile__action-left">
+				<li className="profile__actionW">
+					<p className="profile__actionW-left">
 						<span className="profile__action-text profile__action-text--bottom">
 							Telegram ID
 						</span>
@@ -266,8 +254,8 @@ const Profile = ({ user }) => {
 					</button>
 				</li>
 
-				<li className="profile__action">
-					<p className="profile__action-left">
+				<li className="profile__actionW">
+					<p className="profile__actionW-left">
 						<span className="profile__action-text profile__action-text--bottom">
 							Специальность
 						</span>
