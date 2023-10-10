@@ -20,7 +20,7 @@ import { $host } from './../../../../http/index'
 
 const Profile = ({ user }) => {
 
-	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
+	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_HOST
 
 	const [username, setUsername] = useState("")
@@ -34,6 +34,9 @@ const Profile = ({ user }) => {
 	const input = React.useRef();
 
 	const [phone, setPhone] = useState("")
+
+	//select
+    const [selectedElement, setSelectedElement] = useState("")
 
 	useEffect(() => {
 		setImg(`${host}${user.avatar}`)
@@ -63,7 +66,13 @@ const Profile = ({ user }) => {
 		
 	}, [user])
 
+	const onSelectChange = (e) => {
+		setSelectedElement(e.target.value);
+		console.log(e.target.value)
+	}
+
 	const sendMyMessage = async() => {
+
 		//Передаем данные боту
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
@@ -77,7 +86,7 @@ const Profile = ({ user }) => {
 		let sendToTelegram
 		let text = 'Тест сценария'
 		if (text !== '') {
-			const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+			const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
 			console.log("url_send_msg: ", url_send_msg)
 			
 			sendToTelegram = await $host.get(url_send_msg);
@@ -109,7 +118,10 @@ const Profile = ({ user }) => {
 					<CFormSelect 
 						style={{marginTop: '10px', marginBottom: '10px',  display: "block"}}
                         aria-label="Default select example"
-                        options={["Выберите цепочку", "Цепочка №1", "Цепочка №2"]}    
+                        options={["Выберите цепочку", "Цепочка №1", "Цепочка №2"]}  
+						selectedElement={selectedElement}
+                    	setSelectedElement={setSelectedElement}
+                        onChange={onSelectChange}  
                     />
 					<button className="profile__action-right" style={{padding: '6px'}} onClick={sendMyMessage}>
 						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
