@@ -34,6 +34,7 @@ const Profile = ({ user }) => {
 	const input = React.useRef();
 
 	const [phone, setPhone] = useState("")
+	const [showButton, setShowButton] = useState(false)
 
 	//select
     const [selectedElement, setSelectedElement] = useState("")
@@ -77,20 +78,41 @@ const Profile = ({ user }) => {
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "Текст на кнопке", callback_data:'/report'},
+					{"text": "Согласен предоставить персональные данные", callback_data:'/report'},
 				],
 			]
 		});
+
 	
 		//отправить в телеграмм
 		let sendToTelegram
-		let text = 'Тест сценария'
-		if (text !== '') {
-			const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
-			console.log("url_send_msg: ", url_send_msg)
-			
-			sendToTelegram = await $host.get(url_send_msg);
+		let text = ''
+		let show = false
+		console.log("selectedElement: ", selectedElement)
+		if (selectedElement === 'Стандартный ответ') {
+			text = `${user.name}, я юный чат-бот и еще не всё умею. Любой вопрос поможет решить наш оператор: +7 (499) 500-14-11`
 		}
+		else if (selectedElement === 'Паспорт') {
+			text = `Добрый день.
+			На связи автоматическая система U.L.E.Y | Workhub.
+			
+			Для участия в предстоящем проекте необходимо предоставить паспортные данные.
+			
+			Продолжив, ты соглашаешся предоставить персональные данные исключительно для передачи их заказчику.`
+
+			//setShowButton(true)
+			show = true
+		}
+		else if (selectedElement === 'Кнопка с номером') {
+			text = `+7 (499) 500-14-11 - Менеджер U.L.E.Y`
+		}
+
+		console.log("text: ", text)
+
+		const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}&reply_markup=${show ? keyboard : ''}`
+		console.log("url_send_msg: ", url_send_msg)
+			
+		sendToTelegram = await $host.get(url_send_msg);
     }
 	
 
@@ -118,7 +140,12 @@ const Profile = ({ user }) => {
 					<CFormSelect 
 						style={{marginTop: '10px', marginBottom: '10px',  display: "block"}}
                         aria-label="Default select example"
-                        options={["Выберите цепочку", "Цепочка №1", "Цепочка №2"]}  
+                        options={[
+								"Выберите цепочку", 
+								"Стандартный ответ", 
+								"Паспорт",
+								"Кнопка с номером"
+							]}  
 						selectedElement={selectedElement}
                     	setSelectedElement={setSelectedElement}
                         onChange={onSelectChange}  

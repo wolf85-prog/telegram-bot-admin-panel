@@ -15,7 +15,7 @@ import logo from 'src/assets/brand/logo_04_light.png'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import CompIcon2 from 'src/assets/images/dashboard2.png'
+import CompIcon from 'src/assets/images/dashboard.png'
 
 // sidebar nav config
 //import navigation from '../_nav'
@@ -36,7 +36,7 @@ const AppSidebar = () => {
       name: 'Панель управления',
       to: '/dashboard',
       // icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-      icon: <img src={CompIcon2} style={{width: '25px', marginRight: '22px'}} />,
+      icon: <img src={CompIcon} style={{width: '25px', marginRight: '22px'}} />,
     },
     {
       component: CNavItem,
