@@ -65,7 +65,7 @@ const AppSidebar = () => {
       component: CNavItem,
       name: 'Рассылки',
       to: '/distribution',
-      icon: <CIcon icon={cilEnvelopeLetter} customClassName="nav-icon" />,
+      icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
     },
     {
       component: CNavItem,
