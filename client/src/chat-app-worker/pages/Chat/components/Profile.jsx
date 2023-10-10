@@ -16,8 +16,13 @@ import {
 	CFormSelect,
   } from '@coreui/react'
 import { getWorkerId } from "src/http/adminAPI";
+import { $host } from './../../../../http/index'
 
 const Profile = ({ user }) => {
+
+	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
+	const host = process.env.REACT_APP_HOST
+
 	const [username, setUsername] = useState("")
 	const [worker, setWorker] = useState("")
 	const [avatar, setAvatar] = useState("")
@@ -29,8 +34,6 @@ const Profile = ({ user }) => {
 	const input = React.useRef();
 
 	const [phone, setPhone] = useState("")
-
-	const host = process.env.REACT_APP_API_URL
 
 	useEffect(() => {
 		setImg(`${host}${user.avatar}`)
@@ -60,13 +63,26 @@ const Profile = ({ user }) => {
 		
 	}, [user])
 
-	// const getUser = async () => {
-    //     setPersonW({
-    //         name: user.name, 
-    //         id: user.chatId, 
-	// 		avatar: user.avatar
-    //     });
-    // }
+	const sendMyMessage = async() => {
+		//Передаем данные боту
+		const keyboard = JSON.stringify({
+			inline_keyboard: [
+				[
+					{"text": "Текст на кнопке", callback_data:'/report'},
+				],
+			]
+		});
+	
+		//отправить в телеграмм
+		let sendToTelegram
+		let text = 'Тест сценария'
+		if (text !== '') {
+			const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+			console.log("url_send_msg: ", url_send_msg)
+			
+			sendToTelegram = await $host.get(url_send_msg);
+		}
+    }
 	
 
 	return (
@@ -80,7 +96,7 @@ const Profile = ({ user }) => {
 					}
 				</div>
 				<h2 className="profile__name">{user.name}</h2>
-				<h5 style={{fontSize: '16px', color: '#656565'}}>@{user.username}</h5>
+				<h5 style={{fontSize: '16px', color: '#656565'}}>{user.username ? `@${user.username}` : user.username}</h5>
 			</div>
 
 			<ul className="profile__sectionW profile__section--actions">	
@@ -95,7 +111,7 @@ const Profile = ({ user }) => {
                         aria-label="Default select example"
                         options={["Выберите цепочку", "Цепочка №1", "Цепочка №2"]}    
                     />
-					<button className="profile__action-right" style={{padding: '6px'}} onClick={()=>console.log('sdfsdfsd')}>
+					<button className="profile__action-right" style={{padding: '6px'}} onClick={sendMyMessage}>
 						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
 						<CIcon icon={cilMediaPlay} style={{color: 'white'}}/>{" "}
 					</button>
