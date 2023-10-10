@@ -16,10 +16,12 @@ import {
 	CFormSelect,
   } from '@coreui/react'
 import { getWorkerId } from "src/http/adminAPI";
-import { $host } from './../../../../http/index'
+import { newMessage } from "src/http/workerAPI";
+import { $host } from './../../../../http/index';
 
 const Profile = ({ user }) => {
 
+	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_HOST
 
@@ -28,6 +30,8 @@ const Profile = ({ user }) => {
 	const [avatar, setAvatar] = useState("")
 	const [form, setForm] = useState(false)
 	const { addNewName, addNewAvatar } = useUsersContext();
+	const { userWorkers } = useUsersContext();
+	const { addNewMessage2 } = useUsersContext();
 	const { setPersonW } = useContext(AccountContext);
 	const [img, setImg] = useState(null)
 	const [showEdit, setShowEdit] = useState(false)
@@ -74,6 +78,10 @@ const Profile = ({ user }) => {
 
 	const sendMyMessage = async() => {
 
+		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+
+		console.log("client: ", client)
+
 		//Передаем данные боту
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
@@ -113,6 +121,28 @@ const Profile = ({ user }) => {
 		console.log("url_send_msg: ", url_send_msg)
 			
 		sendToTelegram = await $host.get(url_send_msg);
+
+		//отправить в админку
+		let message = {};
+			
+		message = {
+			senderId: chatAdminId, 
+			receiverId: user.chatId,
+			conversationId: client.conversationId,
+			type: "text",
+			text: text,
+			is_bot: true,
+			messageId: sendToTelegram.data.result.message_id,
+			buttons: '',
+		}
+			
+		console.log("message send: ", message);
+	
+		//сохранение сообщения в базе данных
+		await newMessage(message)
+	
+		//сохранить в контексте
+		addNewMessage2(user.chatId, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
     }
 	
 
