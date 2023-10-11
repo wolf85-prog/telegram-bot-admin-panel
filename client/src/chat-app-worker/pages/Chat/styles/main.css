@@ -708,10 +708,10 @@ textarea:focus {
 /* End  Chat Sidebar */
 
 .profile__notion {
-    text-align: end;
     margin-right: 15px;
     display: flex;
     justify-content: space-between;
+    flex-direction: row-reverse;
 }
 
 .profile__worker {

@@ -36,7 +36,7 @@ const AppSidebar = () => {
       to: '/dashboard',
       // icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
       icon: <img src={CompIcon} style={{width: '25px', marginRight: '18px', marginLeft: '4px'}} />,
-      style: {backgroundColor: '#252f379c'}, //1b2227 //1f282c
+      style: {backgroundColor: '#343d45cc'}, //1b2227 //1f282c
     },
     {
       component: CNavTitle,
@@ -93,7 +93,7 @@ const AppSidebar = () => {
       to: '/chatwork',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       badge: countMessageWork !== 0 ? {color: 'info', text: countMessageWork,} : "",
-      style: {backgroundColor: '#0078d44a'},
+      style: {backgroundColor: '#0078d426'},
     },
     {
       component: CNavItem,

@@ -64,6 +64,7 @@ const Sidebar = () => {
 				<div className="sidebar__avatar-wrapper">
 					<img src={avatar} alt='U.L.E.Y' className="avatar-adm" />
 				</div>
+				<div>Менеджеры</div>
 				<div className="sidebar__actions">
 					<OptionsBtn
 						className="sidebar__action"
@@ -92,7 +93,7 @@ const Sidebar = () => {
 				</div>
 				<input 
 					className="search" 
-					placeholder="Поиск заказчика" 
+					placeholder="Поиск менеджера" 
 					onChange={(e)=>setText(e.target.value)}
 				/>
 			</div>

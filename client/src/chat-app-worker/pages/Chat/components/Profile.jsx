@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import media from "./../../../../chat-app-new/assets/images/placeholder.jpeg";
 import Checkbox from "./../../../components/Checkbox";
 import Icon from "./../../../components/Icon";
@@ -46,6 +46,10 @@ const Profile = ({ user }) => {
 	//select
     const [selectedElement, setSelectedElement] = useState("")
 
+	const [heightImage, setHeightImage] = useState({})
+
+	const divBlock = useRef(null);
+
 	useEffect(() => {
 		setImg(`${host}${user.avatar}`)
 
@@ -64,6 +68,9 @@ const Profile = ({ user }) => {
 
 	useEffect(() => {
 		console.log(user)
+		console.log(divBlock.current.getBoundingClientRect());
+
+		setHeightImage(divBlock.current.getBoundingClientRect())
 		
 		if (user.phone.includes('-')) {
 			setPhone(user.phone)
@@ -158,12 +165,17 @@ const Profile = ({ user }) => {
 	return (
 		<div className="profile">
 			<div className="profile__sectionW profile__sectionW--personal">
-				<div className="profile__avatar-wrapper profile__avatar-worker">
+				<div className="profile__avatar-wrapper profile__avatar-worker" ref={divBlock}>
 					{
 						user?.avatar
-							? <img src={user?.avatar} alt={user?.name} width='100%' height='300' style={{objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
-							: <img src={defaultAvatar} alt={user?.name} width='100%' height='300' style={{objectFit: 'cover'}} />
+							? <img src={user?.avatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
+							: <img src={defaultAvatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />
 					}
+					{/* {
+						user?.avatar
+							? <div style={{backgroundImage:`url(//${defaultAvatar})`}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
+							: <div style={{backgroundImage:`url(//${defaultAvatar})`}} />
+					} */}
 				</div>
 				<h2 className="profile__name">{user.name}</h2>
 			</div>
@@ -236,8 +248,8 @@ const Profile = ({ user }) => {
 						</span>
 						
 						<span className="profile__action-text profile__action-text--top profile__notion">
-							<div style={{fontSize: '16px', color: '#656565'}}>{user.username ? `@${user.username}` : user.username}</div>
 							{user.chatId}
+							<div style={{fontSize: '16px', color: '#656565'}}>{user.username ? `@${user.username}` : user.username}</div>				
 						</span>
 					</p>
 				</li>

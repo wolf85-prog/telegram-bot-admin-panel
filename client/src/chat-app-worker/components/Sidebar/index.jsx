@@ -68,6 +68,7 @@ const Sidebar = () => {
 				<div className="sidebar__avatar-wrapper">
 					<img src={avatar} alt='U.L.E.Y' className="avatar-adm" />
 				</div>
+				<div>Специалисты</div>
 				<div className="sidebar__actions">
 					<OptionsBtn
 						className="sidebar__action"
