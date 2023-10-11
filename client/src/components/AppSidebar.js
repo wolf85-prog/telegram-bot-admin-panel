@@ -32,11 +32,11 @@ const AppSidebar = () => {
   navigation = [ //показывать бейдж
     {
       component: CNavItem,
-      name: 'Панель управления',
+      name: 'Пункт управления',
       to: '/dashboard',
       // icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
       icon: <img src={CompIcon} style={{width: '25px', marginRight: '18px', marginLeft: '4px'}} />,
-      style: {backgroundColor: '#0078d4'},
+      style: {backgroundColor: '#1b2227'}, //1b2227 //1f282c
     },
     {
       component: CNavTitle,
@@ -58,7 +58,7 @@ const AppSidebar = () => {
       to: '/chat2',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
-      style: {backgroundColor: '#0078d4'},
+      style: {backgroundColor: '#0078d44a'},
     },
     
     {
@@ -93,7 +93,7 @@ const AppSidebar = () => {
       to: '/chatwork',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       badge: countMessageWork !== 0 ? {color: 'info', text: countMessageWork,} : "",
-      style: {backgroundColor: '#0078d4'},
+      style: {backgroundColor: '#0078d44a'},
     },
     {
       component: CNavItem,

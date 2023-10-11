@@ -92,6 +92,12 @@ const Profile = ({ user }) => {
 				[
 					{"text": "Согласен предоставить персональные данные", callback_data:'/passport'},
 				],
+				[
+					{"text": "Отказываюсь от предоставления данных и участия в проектах", callback_data:'/passport2'},
+				],
+				[
+					{"text": "Пояснения", callback_data:'/passport3'},
+				],
 			]
 		});
 
@@ -155,8 +161,8 @@ const Profile = ({ user }) => {
 				<div className="profile__avatar-wrapper profile__avatar-worker">
 					{
 						user?.avatar
-							? <img src={user?.avatar} alt={user?.name} width='300' height='300' style={{objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
-							: <img src={defaultAvatar} alt={user?.name} width='300' height='300' style={{objectFit: 'cover'}} />
+							? <img src={user?.avatar} alt={user?.name} width='100%' height='300' style={{objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
+							: <img src={defaultAvatar} alt={user?.name} width='100%' height='300' style={{objectFit: 'cover'}} />
 					}
 				</div>
 				<h2 className="profile__name">{user.name}</h2>
