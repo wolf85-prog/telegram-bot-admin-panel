@@ -131,7 +131,6 @@ const Profile = ({ user }) => {
 			conversationId: client.conversationId,
 			type: "text",
 			text: text,
-			is_bot: true,
 			messageId: sendToTelegram.data.result.message_id,
 			buttons: show ? 'Согласен предоставить персональные данные' : '',
 		}
@@ -142,7 +141,7 @@ const Profile = ({ user }) => {
 		await newMessage(message)
 	
 		//сохранить в контексте
-		addNewMessage2(user.chatId, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
+		addNewMessage2(user.chatId, text, 'text', 'Согласен предоставить персональные данные', client.conversationId, sendToTelegram.data.result.message_id);
     }
 	
 
