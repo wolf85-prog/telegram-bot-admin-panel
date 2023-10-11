@@ -133,7 +133,7 @@ const Profile = ({ user }) => {
 			text: text,
 			is_bot: true,
 			messageId: sendToTelegram.data.result.message_id,
-			buttons: '',
+			buttons: show ? 'Согласен предоставить персональные данные' : '',
 		}
 			
 		console.log("message send: ", message);
