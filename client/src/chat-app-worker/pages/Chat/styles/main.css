@@ -717,6 +717,11 @@ textarea:focus {
     text-align: right;
 }
 
+.profile__avatar-worker {
+    width: 300px;
+    height: auto;
+}
+
 .table-noborder {
     width: 95%;
 }

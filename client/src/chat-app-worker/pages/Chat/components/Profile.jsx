@@ -148,11 +148,11 @@ const Profile = ({ user }) => {
 	return (
 		<div className="profile">
 			<div className="profile__sectionW profile__sectionW--personal">
-				<div className="profile__avatar-wrapper upload">
+				<div className="profile__avatar-wrapper profile__avatar-worker">
 					{
 						user?.avatar
-							? <img src={user?.avatar} alt={user?.name} style={{width: '290px', height: '290px', objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
-							: <img src={defaultAvatar} alt={user?.name} style={{width: '290px', height: '290px', objectFit: 'cover'}} />
+							? <img src={user?.avatar} alt={user?.name} width='300' height='300' style={{objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
+							: <img src={defaultAvatar} alt={user?.name} width='300' height='300' style={{objectFit: 'cover'}} />
 					}
 				</div>
 				<h2 className="profile__name">{user.name}</h2>
