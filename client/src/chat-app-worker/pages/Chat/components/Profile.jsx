@@ -86,7 +86,7 @@ const Profile = ({ user }) => {
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "Согласен предоставить персональные данные", callback_data:'/report'},
+					{"text": "Согласен предоставить персональные данные", callback_data:'/passport'},
 				],
 			]
 		});

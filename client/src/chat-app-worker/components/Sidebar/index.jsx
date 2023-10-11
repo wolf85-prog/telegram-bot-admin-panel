@@ -96,7 +96,7 @@ const Sidebar = () => {
 				</div>
 				<input 
 					className="search" 
-					placeholder="Поиск заказчика" 
+					placeholder="Поиск специалиста" 
 					onChange={(e)=>setText(e.target.value)}
 				/>
 			</div>

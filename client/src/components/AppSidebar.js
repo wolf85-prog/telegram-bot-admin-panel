@@ -2,7 +2,6 @@ import React from 'react'
 import CIcon from '@coreui/icons-react'
 import {
   cilBell,
-  cilEnvelopeLetter,
   cilEnvelopeClosed,
   cilSpeedometer,
   cilPeople,
@@ -59,6 +58,7 @@ const AppSidebar = () => {
       to: '/chat2',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
+      style: {backgroundColor: '#ffffff0d'},
     },
     
     {
@@ -94,6 +94,7 @@ const AppSidebar = () => {
       to: '/chatwork',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       badge: countMessageWork !== 0 ? {color: 'info', text: countMessageWork,} : "",
+      style: {backgroundColor: '#ffffff0d'},
     },
     {
       component: CNavItem,
