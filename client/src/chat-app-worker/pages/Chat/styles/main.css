@@ -720,7 +720,7 @@ textarea:focus {
 }
 
 .profile__avatar-worker {
-    width: 100%;
+    width: 300px;
     height: auto;
 }
 

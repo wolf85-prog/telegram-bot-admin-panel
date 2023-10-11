@@ -70,7 +70,7 @@ const Profile = ({ user }) => {
 		console.log(user)
 		console.log(divBlock.current.getBoundingClientRect());
 
-		setHeightImage(divBlock.current.getBoundingClientRect())
+		//setHeightImage(divBlock.current.getBoundingClientRect())
 		
 		if (user.phone.includes('-')) {
 			setPhone(user.phone)
@@ -168,8 +168,8 @@ const Profile = ({ user }) => {
 				<div className="profile__avatar-wrapper profile__avatar-worker" ref={divBlock}>
 					{
 						user?.avatar
-							? <img src={user?.avatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
-							: <img src={defaultAvatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />
+							? <img src={user?.avatar} alt={user?.name} width='300' height='300' style={{objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
+							: <img src={defaultAvatar} alt={user?.name} width='300' height='300' style={{objectFit: 'cover'}} />
 					}
 					{/* {
 						user?.avatar
