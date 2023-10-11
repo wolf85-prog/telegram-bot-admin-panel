@@ -710,6 +710,8 @@ textarea:focus {
 .profile__notion {
     text-align: end;
     margin-right: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .profile__worker {

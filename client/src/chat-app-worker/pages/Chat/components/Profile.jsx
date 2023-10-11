@@ -18,6 +18,7 @@ import {
 import { getWorkerId } from "src/http/adminAPI";
 import { newMessage } from "src/http/workerAPI";
 import { $host } from './../../../../http/index';
+import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3';
 
 const Profile = ({ user }) => {
 
@@ -39,6 +40,8 @@ const Profile = ({ user }) => {
 
 	const [phone, setPhone] = useState("")
 	const [showButton, setShowButton] = useState(false)
+
+	const audio = new Audio(sendSound);
 
 	//select
     const [selectedElement, setSelectedElement] = useState("")
@@ -77,6 +80,7 @@ const Profile = ({ user }) => {
 	}
 
 	const sendMyMessage = async() => {
+		audio.play();
 
 		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
 
@@ -156,7 +160,6 @@ const Profile = ({ user }) => {
 					}
 				</div>
 				<h2 className="profile__name">{user.name}</h2>
-				<h5 style={{fontSize: '16px', color: '#656565'}}>{user.username ? `@${user.username}` : user.username}</h5>
 			</div>
 
 			<ul className="profile__sectionW profile__section--actions">	
@@ -225,7 +228,9 @@ const Profile = ({ user }) => {
 						<span className="profile__action-text profile__action-text--bottom">
 							Telegram ID
 						</span>
+						
 						<span className="profile__action-text profile__action-text--top profile__notion">
+							<div style={{fontSize: '16px', color: '#656565'}}>{user.username ? `@${user.username}` : user.username}</div>
 							{user.chatId}
 						</span>
 					</p>

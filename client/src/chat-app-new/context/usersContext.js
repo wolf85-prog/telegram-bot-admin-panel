@@ -47,11 +47,13 @@ const UsersProvider = ({ children }) => {
 	const audio = new Audio(boopSfx);
 	const audioProject = new Audio(soundProject);
 	const audioSmeta = new Audio(soundSmeta);
+	
 	const audio120 = new Audio(sound120);
 	const audio60 = new Audio(sound60);
 	const audio30 = new Audio(sound30);
 	const audio15 = new Audio(sound15);
 	const audio0 = new Audio(sound0);
+	
 	const audioSend = new Audio(sendSound);
 	const audioWorkhub = new Audio(smsWorkhub);
 
