@@ -90,7 +90,7 @@ const Profile = ({ user }) => {
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "Согласен предоставить персональные данные", callback_data:'/passport'},
+					{"text": "Согласен предоставить персональные данные", web_app: {url: 'https://proj.uley.team:7001'}}, //callback_data:'/passport'},
 				],
 				[
 					{"text": "Отказываюсь от предоставления данных и участия в проектах", callback_data:'/passport2'},
