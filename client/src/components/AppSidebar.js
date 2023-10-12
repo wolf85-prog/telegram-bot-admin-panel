@@ -36,7 +36,7 @@ const AppSidebar = () => {
       to: '/dashboard',
       // icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
       icon: <img src={CompIcon} style={{width: '25px', marginRight: '18px', marginLeft: '4px'}} />,
-      style: {backgroundColor: '#343d45cc'}, //1b2227 //1f282c
+      style: {backgroundColor: '#2a2f32'}, //1b2227 //1f282c
     },
     {
       component: CNavTitle,
