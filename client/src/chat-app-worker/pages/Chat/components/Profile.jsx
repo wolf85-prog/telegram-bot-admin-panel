@@ -119,54 +119,60 @@ const Profile = ({ user }) => {
 	
 		//отправить в телеграмм
 		let sendToTelegram
-		let text = ''
 		let show = false
-		console.log("selectedElement: ", selectedElement)
-		if (selectedElement === 'Стандартный ответ') {
-			text = `${user.name}, я юный чат-бот и еще не всё умею. Любой вопрос поможет решить наш оператор: +7 (499) 500-14-11`
-		}
-		else if (selectedElement === 'Паспорт') {
-			text = `Добрый день.
-			На связи автоматическая система U.L.E.Y | Workhub.
-			
-			Для участия в предстоящем проекте необходимо предоставить паспортные данные.
-			
-			Продолжив, ты соглашаешся предоставить персональные данные исключительно для передачи их заказчику.`
 
-			//setShowButton(true)
-			show = true
-		}
-		else if (selectedElement === 'Кнопка с номером') {
-			text = `+7 (499) 500-14-11 - Менеджер U.L.E.Y`
-		}
+		scenarios.map(async(item, index)=> {
+			if (selectedElement === item.value) {
+				console.log("text: ", item.text)
 
-		console.log("text: ", text)
+				const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}&reply_markup=${show ? keyboard : ''}`
+				console.log(url_send_msg)
+				//sendToTelegram = await $host.get(url_send_msg);
+			}
+		})
 
-		const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}&reply_markup=${show ? keyboard : ''}`
-		console.log("url_send_msg: ", url_send_msg)
+		// if (selectedElement === 'Стандартный ответ') {
+		// 	text = `${user.name}, я юный чат-бот и еще не всё умею. Любой вопрос поможет решить наш оператор: +7 (499) 500-14-11`
+		// }
+		// else if (selectedElement === 'Паспорт') {
+		// 	text = `Добрый день.
+		// 	На связи автоматическая система U.L.E.Y | Workhub.
 			
-		sendToTelegram = await $host.get(url_send_msg);
+		// 	Для участия в предстоящем проекте необходимо предоставить паспортные данные.
+			
+		// 	Продолжив, ты соглашаешся предоставить персональные данные исключительно для передачи их заказчику.`
+
+		// 	//setShowButton(true)
+		// 	show = true
+		// }
+		// else if (selectedElement === 'Кнопка с номером') {
+		// 	text = `+7 (499) 500-14-11 - Менеджер U.L.E.Y`
+		// }
+
+		// const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}&reply_markup=${show ? keyboard : ''}`
+			
+		//sendToTelegram = await $host.get(url_send_msg);
 
 		//отправить в админку
 		let message = {};
 			
-		message = {
-			senderId: chatAdminId, 
-			receiverId: user.chatId,
-			conversationId: client.conversationId,
-			type: "text",
-			text: text,
-			messageId: sendToTelegram.data.result.message_id,
-			buttons: show ? 'Согласен предоставить персональные данные' : '',
-		}
+		// message = {
+		// 	senderId: chatAdminId, 
+		// 	receiverId: user.chatId,
+		// 	conversationId: client.conversationId,
+		// 	type: "text",
+		// 	text: text,
+		// 	messageId: sendToTelegram.data.result.message_id,
+		// 	buttons: show ? 'Согласен предоставить персональные данные' : '',
+		// }
 			
-		console.log("message send: ", message);
+		// console.log("message send: ", message);
 	
 		//сохранение сообщения в базе данных
-		await newMessage(message)
+		//await newMessage(message)
 	
 		//сохранить в контексте
-		addNewMessage2(user.chatId, text, 'text', 'Согласен предоставить персональные данные', client.conversationId, sendToTelegram.data.result.message_id);
+		//addNewMessage2(user.chatId, text, 'text', 'Согласен предоставить персональные данные', client.conversationId, sendToTelegram.data.result.message_id);
     }
 	
 
