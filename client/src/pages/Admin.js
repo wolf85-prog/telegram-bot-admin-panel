@@ -161,7 +161,7 @@ const Admin = () => {
         <div className="body flex-grow-1 px-3">
 
             <CContainer lg>
-                <Suspense fallback={<CSpinner color="primary" />}>
+              <Suspense fallback={<CSpinner color="primary" />}>
 
                 <>
                 <WidgetsDropdown users={clients.length-1} projects={projects.length} companys={comps.length} />
