@@ -26,6 +26,7 @@ const Profile = ({ user }) => {
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_HOST
+	const webAppPassport = process.env.REACT_APP_WEBAPP_PASSPORT
 
 	const [username, setUsername] = useState("")
 	const [worker, setWorker] = useState("")
@@ -104,7 +105,7 @@ const Profile = ({ user }) => {
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "Согласен предоставить персональные данные", web_app: {url: 'https://proj.uley.team:7001'}}, //callback_data:'/passport'},
+					{"text": "Согласен предоставить персональные данные", web_app: {url: webAppPassport}}, //callback_data:'/passport'},
 				],
 				[
 					{"text": "Отказываюсь от предоставления данных и участия в проектах", callback_data:'/passport2'},
