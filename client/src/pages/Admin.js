@@ -6,6 +6,12 @@ import {
   CCard,
   CCardBody,
   CCardHeader,
+  CNav,
+  CNavItem,
+  CNavLink,
+  CCardTitle,
+  CCardText,
+  CButton,
   CCol,
   CProgress,
   CRow,
@@ -164,135 +170,151 @@ const Admin = () => {
               <Suspense fallback={<CSpinner color="primary" />}>
 
                 <>
-                <WidgetsDropdown users={clients.length-1} projects={projects.length} companys={comps.length} />
+                {/* Вкладки */}
+                <CCard className="text-center">
+                  <CCardHeader>
+                    <CNav variant="tabs" className="card-header-tabs">
+                      <CNavItem>
+                        <CNavLink href="#" active>Renthub</CNavLink>
+                      </CNavItem>
+                      <CNavItem>
+                        <CNavLink href="#">Workhub</CNavLink>
+                      </CNavItem>
+                    </CNav>
+                  </CCardHeader>
+                  <CCardBody>
+                    <CCardTitle>Renthub</CCardTitle>
+                    <WidgetsDropdown users={clients.length-1} projects={projects.length} companys={comps.length} />
 
-                <CRow>
-                  <CCol xs>
-                    <CCard className="mb-4">
-                      <CCardHeader>Пользователи бота ({clients.length - 1})</CCardHeader>
-                      <CCardBody>
-                        <CRow>
-                          <CCol xs={12} md={6} xl={6}>
+                    <CRow>
+                      <CCol xs>
+                        <CCard className="mb-4">
+                          <CCardHeader>Пользователи бота ({clients.length - 1})</CCardHeader>
+                          <CCardBody>
                             <CRow>
-                              <CCol sm={6}>
-                                <div className="border-start border-start-4 border-start-info py-1 px-3">
-                                  <div className="text-medium-emphasis small">Новые клиенты</div>
-                                  <div className="fs-5 fw-semibold">{newClients.length}</div>
-                                </div>
+                              <CCol xs={12} md={6} xl={6}>
+                                <CRow>
+                                  <CCol sm={6}>
+                                    <div className="border-start border-start-4 border-start-info py-1 px-3">
+                                      <div className="text-medium-emphasis small">Новые клиенты</div>
+                                      <div className="fs-5 fw-semibold">{newClients.length}</div>
+                                    </div>
+                                  </CCol>
+                                  <CCol sm={6}>
+                                    <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
+                                      <div className="text-medium-emphasis small">Постоянные клиенты</div>
+                                      <div className="fs-5 fw-semibold">{oldClients.length-1}</div>
+                                    </div>
+                                  </CCol>
+                                </CRow>
                               </CCol>
-                              <CCol sm={6}>
-                                <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
-                                  <div className="text-medium-emphasis small">Постоянные клиенты</div>
-                                  <div className="fs-5 fw-semibold">{oldClients.length-1}</div>
-                                </div>
+
+                              <CCol xs={12} md={6} xl={6}>
+                                <CRow>
+                                  <CCol sm={6}>
+                                    <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
+                                      <div className="text-medium-emphasis small">Просмотры</div>
+                                      <div className="fs-5 fw-semibold">-</div>
+                                    </div>
+                                  </CCol>
+                                  <CCol sm={6}>
+                                    <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
+                                      <div className="text-medium-emphasis small">Другое</div>
+                                      <div className="fs-5 fw-semibold">-</div>
+                                    </div>
+                                  </CCol>
+                                </CRow>
+
+                                <div className="mb-5"></div>
+
                               </CCol>
                             </CRow>
-                          </CCol>
 
-                          <CCol xs={12} md={6} xl={6}>
-                            <CRow>
-                              <CCol sm={6}>
-                                <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
-                                  <div className="text-medium-emphasis small">Просмотры</div>
-                                  <div className="fs-5 fw-semibold">-</div>
-                                </div>
-                              </CCol>
-                              <CCol sm={6}>
-                                <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
-                                  <div className="text-medium-emphasis small">Другое</div>
-                                  <div className="fs-5 fw-semibold">-</div>
-                                </div>
-                              </CCol>
-                            </CRow>
+                          {loading ? 
+                                      
+                            <CSpinner/> :
 
-                            <div className="mb-5"></div>
-
-                          </CCol>
-                        </CRow>
-
-                      {loading ? 
-                                  
-                        <CSpinner/> :
-
-                        <CTable align="middle" className="mb-0 border" hover responsive>
-                          <CTableHead className='table-dark'>
-                            <CTableRow>
-                              <CTableHeaderCell style={{width: '30px'}}>№</CTableHeaderCell>
-                              <CTableHeaderCell className="text-center" style={{width: '100px'}}>
-                                <CIcon icon={cilPeople} />
-                              </CTableHeaderCell>
-                              <CTableHeaderCell style={{width: '160px'}}>Пользователь</CTableHeaderCell>                             
-                              <CTableHeaderCell className="text-center" style={{width: '160px'}}>Организация</CTableHeaderCell>
-                              <CTableHeaderCell className="text-center" style={{width: '160px'}}>Телефон</CTableHeaderCell>
-                              <CTableHeaderCell className="text-center" style={{width: '80px'}}>Город</CTableHeaderCell>
-                              <CTableHeaderCell className="text-center" style={{width: '100px'}}>TG ID</CTableHeaderCell>
-                              <CTableHeaderCell style={{width: '100px'}}>Использование</CTableHeaderCell>
-                              <CTableHeaderCell style={{width: '100px'}}>Активность</CTableHeaderCell>
-                              {/* <CTableHeaderCell>Управление</CTableHeaderCell> */}
-                            </CTableRow>
-                          </CTableHead>
-                          <CTableBody>
-                            {contacts.map((item, index) => (
-                              <CTableRow v-for="item in tableItems" key={index}>
-                                <CTableDataCell className="text-center">
-                                  {index+1}
-                                </CTableDataCell>
-                                <CTableDataCell className="text-center">
-                                    <CAvatar size="md" src={item.avatar ? host + item.avatar : avatar2} alt='' />
-                                </CTableDataCell>
-                                <CTableDataCell>
-                                  <div>{item.user.name}</div>
-                                  <div className="small text-medium-emphasis">
-                                    {/* <span>{item.user.new ? 'Новый' : 'Recurring'}</span> | Регистрация:{' '}
-                                    {item.user.registered} */}
-                                  </div>
-                                </CTableDataCell>
-                                <CTableDataCell className="text-center">
-                                  {item.company ? <div>{item.company}</div> : ''}
-                                </CTableDataCell>
-                                <CTableDataCell className="text-center">
-                                  <div>{item.phone}</div>
-                                </CTableDataCell>
-                                <CTableDataCell className="text-center">
-                                  <div>{item.city}</div>
-                                </CTableDataCell>
-                                <CTableDataCell className="text-center">
-                                  <div>{item.TG_ID}</div>
-                                </CTableDataCell>
-                                <CTableDataCell>
-                                  <div className="clearfix">
-                                    <div className="float-start">
-                                      <strong>{item.usage.value}%</strong>
-                                    </div>
-                                    <div className="float-end">
-                                      <small className="text-medium-emphasis">{item.usage.period}</small>
-                                    </div>
-                                  </div>
-                                  <CProgress thin color={item.usage.color} value={item.usage.value} />
-                                </CTableDataCell>
-                                <CTableDataCell>
-                                  <div className="small text-medium-emphasis">Последний вход</div>
-                                  <strong>{item.activity}</strong>
-                                </CTableDataCell>
-                                {/* <CTableDataCell>
-                                  <CButton color="light">
-                                    <img src={pencilIcon} alt='' width='15px'/>
-                                  </CButton>
-                                  &nbsp;
-                                  <CButton color="light">
-                                    <img src={deleteIcon} alt='' width='10px' />
-                                  </CButton>
-                                </CTableDataCell> */}
-                              </CTableRow>
-                            ))}
-                          </CTableBody>
-                        </CTable>
-                      }
-                      </CCardBody>
-                    </CCard>
-                  </CCol>
-                </CRow>
-              </>
+                            <CTable align="middle" className="mb-0 border" hover responsive>
+                              <CTableHead className='table-dark'>
+                                <CTableRow>
+                                  <CTableHeaderCell style={{width: '30px'}}>№</CTableHeaderCell>
+                                  <CTableHeaderCell className="text-center" style={{width: '100px'}}>
+                                    <CIcon icon={cilPeople} />
+                                  </CTableHeaderCell>
+                                  <CTableHeaderCell style={{width: '160px'}}>Пользователь</CTableHeaderCell>                             
+                                  <CTableHeaderCell className="text-center" style={{width: '160px'}}>Организация</CTableHeaderCell>
+                                  <CTableHeaderCell className="text-center" style={{width: '160px'}}>Телефон</CTableHeaderCell>
+                                  <CTableHeaderCell className="text-center" style={{width: '80px'}}>Город</CTableHeaderCell>
+                                  <CTableHeaderCell className="text-center" style={{width: '100px'}}>TG ID</CTableHeaderCell>
+                                  <CTableHeaderCell style={{width: '100px'}}>Использование</CTableHeaderCell>
+                                  <CTableHeaderCell style={{width: '100px'}}>Активность</CTableHeaderCell>
+                                  {/* <CTableHeaderCell>Управление</CTableHeaderCell> */}
+                                </CTableRow>
+                              </CTableHead>
+                              <CTableBody>
+                                {contacts.map((item, index) => (
+                                  <CTableRow v-for="item in tableItems" key={index}>
+                                    <CTableDataCell className="text-center">
+                                      {index+1}
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                        <CAvatar size="md" src={item.avatar ? host + item.avatar : avatar2} alt='' />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                      <div>{item.user.name}</div>
+                                      <div className="small text-medium-emphasis">
+                                        {/* <span>{item.user.new ? 'Новый' : 'Recurring'}</span> | Регистрация:{' '}
+                                        {item.user.registered} */}
+                                      </div>
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                      {item.company ? <div>{item.company}</div> : ''}
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                      <div>{item.phone}</div>
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                      <div>{item.city}</div>
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                      <div>{item.TG_ID}</div>
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                      <div className="clearfix">
+                                        <div className="float-start">
+                                          <strong>{item.usage.value}%</strong>
+                                        </div>
+                                        <div className="float-end">
+                                          <small className="text-medium-emphasis">{item.usage.period}</small>
+                                        </div>
+                                      </div>
+                                      <CProgress thin color={item.usage.color} value={item.usage.value} />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                      <div className="small text-medium-emphasis">Последний вход</div>
+                                      <strong>{item.activity}</strong>
+                                    </CTableDataCell>
+                                    {/* <CTableDataCell>
+                                      <CButton color="light">
+                                        <img src={pencilIcon} alt='' width='15px'/>
+                                      </CButton>
+                                      &nbsp;
+                                      <CButton color="light">
+                                        <img src={deleteIcon} alt='' width='10px' />
+                                      </CButton>
+                                    </CTableDataCell> */}
+                                  </CTableRow>
+                                ))}
+                              </CTableBody>
+                            </CTable>
+                          }
+                          </CCardBody>
+                        </CCard>
+                      </CCol>
+                    </CRow>
+                  </CCardBody>
+                </CCard>
+                </>
 
                 </Suspense>
             </CContainer>

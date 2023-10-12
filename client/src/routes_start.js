@@ -55,5 +55,5 @@ export const authRoutes = [
     { path: DISTRIBUTIONW_ROUTE, name: 'Рассылки', Component: DistributionW },
     { path: DISTRIBUTIONADDW_ROUTE, name: 'Создание рассылки', Component: DistributionAddW },
     { path: DISTRIBUTIONWPLANER_ROUTE, name: 'Рассылки', Component: DistributionWPlaner },
-    { path: '/', name: 'Панель управления', Component: Admin },
+    { path: '/', name: 'Пункт управления', Component: Admin },
 ]

@@ -15,7 +15,7 @@ const DistributionW = React.lazy(() => import('./pages/DistributionW'))
 const Workers = React.lazy(() => import('./pages/Workers'))
 
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
+  { path: '/', exact: true, name: 'Пункт управления / Renthub' },
   { path: '/dashboard', name: 'Пункт управления / Renthub', Component: Admin },
   { path: "/chat", name: 'Чаты', Component: Chats },
   { path: "/chat2", name: 'Чаты 2.0', Component: Chats2 },
