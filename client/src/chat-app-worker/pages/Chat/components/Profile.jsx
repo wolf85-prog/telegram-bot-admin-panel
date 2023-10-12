@@ -70,7 +70,10 @@ const Profile = ({ user }) => {
 		console.log(user)
 		console.log(divBlock.current.getBoundingClientRect());
 
-		//setHeightImage(divBlock.current.getBoundingClientRect())
+		setTimeout(()=>{
+			setHeightImage(divBlock.current.getBoundingClientRect())
+		}, 2000)
+		
 		
 		if (user.phone.includes('-')) {
 			setPhone(user.phone)
@@ -168,25 +171,15 @@ const Profile = ({ user }) => {
 				<div className="profile__avatar-wrapper profile__avatar-worker" ref={divBlock}>
 					{
 						user?.avatar
-							? <img src={user?.avatar} alt={user?.name} width='300' height='300' style={{objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
-							: <img src={defaultAvatar} alt={user?.name} width='300' height='300' style={{objectFit: 'cover'}} />
+							? <img src={user?.avatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
+							: <img src={defaultAvatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />
 					}
-					{/* {
-						user?.avatar
-							? <div style={{backgroundImage:`url(//${defaultAvatar})`}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
-							: <div style={{backgroundImage:`url(//${defaultAvatar})`}} />
-					} */}
 				</div>
-				<h2 className="profile__name">{user.name}</h2>
+				<h2 className="profile__name" style={{textAlign: 'center'}}>{user.name}</h2>
 			</div>
 
 			<ul className="profile__sectionW profile__section--actions">	
 				<li className="profile__actionW">
-					{/* <p className="profile__actionW-left">
-						<span className="profile__action-text profile__action-text--top">
-							селект
-						</span>
-					</p> */}
 					<CFormSelect 
 						style={{marginTop: '10px', marginBottom: '10px',  display: "block"}}
                         aria-label="Default select example"
