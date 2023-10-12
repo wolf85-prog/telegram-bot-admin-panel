@@ -19,6 +19,7 @@ import { getWorkerId } from "src/http/adminAPI";
 import { newMessage } from "src/http/workerAPI";
 import { $host } from './../../../../http/index';
 import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3';
+import scenarios from './../../../../data/scenarios'
 
 const Profile = ({ user }) => {
 
@@ -45,6 +46,7 @@ const Profile = ({ user }) => {
 
 	//select
     const [selectedElement, setSelectedElement] = useState("")
+	const [scenari, setScenari] = useState("")
 
 	const [heightImage, setHeightImage] = useState({})
 
@@ -86,8 +88,10 @@ const Profile = ({ user }) => {
 
 	const onSelectChange = (e) => {
 		setSelectedElement(e.target.value);
+		setScenari(e.target.value)
 		console.log(e.target.value)
 	}
+
 
 	const sendMyMessage = async() => {
 		audio.play();
@@ -183,16 +187,12 @@ const Profile = ({ user }) => {
 					<CFormSelect 
 						style={{marginTop: '10px', marginBottom: '10px',  display: "block"}}
                         aria-label="Default select example"
-                        options={[
-								"Выберите цепочку", 
-								"Стандартный ответ", 
-								"Паспорт",
-								"Кнопка с номером"
-							]}  
+                        options={scenarios}  
+						value={scenari}
 						selectedElement={selectedElement}
                     	setSelectedElement={setSelectedElement}
-                        onChange={onSelectChange}  
-                    />
+                        onChange={onSelectChange}
+					/>
 					<button className="profile__action-right" style={{padding: '6px'}} onClick={sendMyMessage}>
 						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
 						<CIcon icon={cilMediaPlay} style={{color: 'white'}}/>{" "}
@@ -257,22 +257,8 @@ const Profile = ({ user }) => {
 							<table className="table-noborder">{worker.spec?.map((worker, index) => <tr key={index}><td>{worker.name}</td></tr> )}</table>
 						</span>	
 					</p>
-				</li>
-
-				
+				</li>			
 			</ul>
-
-			{/* <div className="profile__section profile__section--about">
-				<div className="sb profile__heading-wrapper">
-					<h2 className="profile__heading"> О компании и номер телефона </h2>
-				</div>
-				<ul>
-					<li className="profile__about-item">
-						Несколько слов о компании...
-					</li>
-					<li className="profile__about-item">+7 123-12-12</li>
-				</ul>
-			</div> */}
 
 
 			<div className="profile__sectionW profile__section--danger">
