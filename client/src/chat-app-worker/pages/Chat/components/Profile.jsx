@@ -131,7 +131,7 @@ const Profile = ({ user }) => {
 		let text = ''
 		
 		if (selectedElement === 'Стандартный ответ') {
-			text = `${user.name}, я юный чат-бот и еще не всё умею. Любой вопрос поможет решить наш оператор: +7 (499) 500-14-11`
+			text = `${user.name.split(' ')[1]}, я юный чат-бот и еще не всё умею. Любой вопрос поможет решить наш оператор: +7 (499) 500-14-11`
 		}
 		else if (selectedElement === 'Паспорт') {
 			text = `Добрый день.
@@ -146,6 +146,39 @@ const Profile = ({ user }) => {
 		}
 		else if (selectedElement === 'Кнопка с номером') {
 			text = `+7 (499) 500-14-11 - Менеджер U.L.E.Y`
+		}
+		else if (selectedElement === 'Офис U.L.E.Y') {
+			text = `Офис | U.L.E.Y
+
+			Адрес: г. Москва, ул. Дербеневская набережная, д. 7, стр. 2
+					
+			Карта: https://goo.gl/maps/uFrAfV5NmE2rUXsT8`
+		}
+		else if (selectedElement === 'Оплата / смета') {
+			text = `Для согласования и получения оплаты: 
+			https://t.me/ULEY_Office_Bot`
+		}
+		else if (selectedElement === 'Заявка отклонена') {
+			text = `Добрый день, ${user.name.split(' ')[1]}. Спасибо, что откликнулись на эту заявку. 
+			В настоящий момент основной состав уже сформирован.
+			До встречи на новых проектах!`
+		}
+		else if (selectedElement === 'Заявка одобрена') {
+			text = `Добрый день, ${user.name.split(' ')[1]}. Спасибо, что откликнулись на заявку. 
+			Для согласования тех. задачи на проект позвоните по номеру:
+			+7 (499) 500-14-11`
+		}
+		else if (selectedElement === 'Запрос ключевых данных') {
+			text = `Добрый день, ${user.name.split(' ')[1]}. Вы впервые откликнулись на заявку от компании U.L.E.Y
+			Чтобы мы смогли предложить Вам работу на этом проекте пришлите, пожалуйста, немного информации о себе:
+					
+			✅ ФИО
+					
+			✅ Контакты для связи
+					
+			✅ Год рождения
+					
+			✅ Специальность`
 		}
 
 		const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}&reply_markup=${show ? keyboard : ''}`
