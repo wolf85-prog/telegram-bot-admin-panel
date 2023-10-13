@@ -58,7 +58,7 @@ const AppSidebar = () => {
       to: '/chat2',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
-      style: {backgroundColor: '#0078d426'},
+      style: {backgroundColor: '#0078d421'},
     },
     
     {
@@ -93,7 +93,7 @@ const AppSidebar = () => {
       to: '/chatwork',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       badge: countMessageWork !== 0 ? {color: 'info', text: countMessageWork,} : "",
-      style: {backgroundColor: '#0078d426'},
+      style: {backgroundColor: '#0078d421'},
     },
     {
       component: CNavItem,
