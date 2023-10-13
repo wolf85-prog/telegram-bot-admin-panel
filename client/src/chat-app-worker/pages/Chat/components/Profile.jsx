@@ -70,8 +70,6 @@ const Profile = ({ user }) => {
 	}, [user]);
 
 	useEffect(() => {
-		console.log(user)
-		console.log(divBlock.current.getBoundingClientRect());
 
 		setTimeout(()=>{
 			setHeightImage(divBlock.current.getBoundingClientRect())
@@ -99,7 +97,7 @@ const Profile = ({ user }) => {
 
 		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
 
-		console.log("client: ", client)
+		//console.log("client: ", client)
 
 		//Передаем данные боту
 		const keyboard = JSON.stringify({
@@ -130,10 +128,12 @@ const Profile = ({ user }) => {
 		let show = false
 		let text = ''
 		
-		if (selectedElement === 'Стандартный ответ') {
+		//Стандартный ответ
+		if (selectedElement === '0') {
 			text = `${user.name.split(' ')[1]}, я юный чат-бот и еще не всё умею. Любой вопрос поможет решить наш оператор: +7 (499) 500-14-11`
 		}
-		else if (selectedElement === 'Паспорт') {
+		//Паспорт
+		else if (selectedElement === '1') {
 			text = `Добрый день.
 			На связи автоматическая система U.L.E.Y | Workhub.
 			
@@ -144,31 +144,43 @@ const Profile = ({ user }) => {
 			//setShowButton(true)
 			show = true
 		}
-		else if (selectedElement === 'Кнопка с номером') {
+		//Кнопка с номером
+		else if (selectedElement === '2') {
 			text = `+7 (499) 500-14-11 - Менеджер U.L.E.Y`
 		}
-		else if (selectedElement === 'Офис U.L.E.Y') {
+		//Запас
+		else if (selectedElement === '3') {
+			text = `${user.name.split(' ')[1]}, мы готовы поставить Вас в запас на этот проект. Запас оплачивается.
+			Сумму можно будет уточнить у менеджера. С большой вероятностью Вы будете на нём задействованы, 
+			но для начала придется проснуться вместе с основным составом и быть готовым выйти на работу. Готовы?`
+		}
+		//Офис U.L.E.Y
+		else if (selectedElement === '4') {
 			text = `Офис | U.L.E.Y
 
 			Адрес: г. Москва, ул. Дербеневская набережная, д. 7, стр. 2
 					
 			Карта: https://goo.gl/maps/uFrAfV5NmE2rUXsT8`
 		}
-		else if (selectedElement === 'Оплата / смета') {
+		//Оплата / смета
+		else if (selectedElement === '5') {
 			text = `Для согласования и получения оплаты: 
 			https://t.me/ULEY_Office_Bot`
 		}
-		else if (selectedElement === 'Заявка отклонена') {
+		//Заявка отклонена
+		else if (selectedElement === '6') {
 			text = `Добрый день, ${user.name.split(' ')[1]}. Спасибо, что откликнулись на эту заявку. 
 			В настоящий момент основной состав уже сформирован.
 			До встречи на новых проектах!`
 		}
-		else if (selectedElement === 'Заявка одобрена') {
+		//Заявка одобрена
+		else if (selectedElement === '7') {
 			text = `Добрый день, ${user.name.split(' ')[1]}. Спасибо, что откликнулись на заявку. 
 			Для согласования тех. задачи на проект позвоните по номеру:
 			+7 (499) 500-14-11`
 		}
-		else if (selectedElement === 'Запрос ключевых данных') {
+		//Запрос ключевых данных
+		else if (selectedElement === '8') {
 			text = `Добрый день, ${user.name.split(' ')[1]}. Вы впервые откликнулись на заявку от компании U.L.E.Y
 			Чтобы мы смогли предложить Вам работу на этом проекте пришлите, пожалуйста, немного информации о себе:
 					
@@ -182,7 +194,7 @@ const Profile = ({ user }) => {
 		}
 
 		const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}&reply_markup=${show ? keyboard : ''}`
-			
+		console.log(url_send_msg)	
 		sendToTelegram = await $host.get(url_send_msg);
 
 		//отправить в админку
