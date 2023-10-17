@@ -170,21 +170,21 @@ const Admin = () => {
               <Suspense fallback={<CSpinner color="primary" />}>
 
                 <>
+                <WidgetsDropdown users={clients.length-1} projects={projects.length} companys={comps.length} />
                 {/* Вкладки */}
                 <CCard className="text-center">
                   <CCardHeader>
                     <CNav variant="tabs" className="card-header-tabs">
                       <CNavItem>
-                        <CNavLink href="#" active>Renthub</CNavLink>
+                        <CNavLink href="/renthub" active>Renthub</CNavLink>
                       </CNavItem>
                       <CNavItem>
-                        <CNavLink href="#">Workhub</CNavLink>
+                        <CNavLink href="/workhub">Workhub</CNavLink>
                       </CNavItem>
                     </CNav>
                   </CCardHeader>
                   <CCardBody>
                     <CCardTitle>Renthub</CCardTitle>
-                    <WidgetsDropdown users={clients.length-1} projects={projects.length} companys={comps.length} />
 
                     <CRow>
                       <CCol xs>

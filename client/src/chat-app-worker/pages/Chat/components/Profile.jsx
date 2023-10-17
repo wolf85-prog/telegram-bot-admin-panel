@@ -115,6 +115,7 @@ const Profile = ({ user }) => {
 		});
 
 
+
 		// scenarios.map(async(item, index)=> {
 		// 	if (selectedElement === item.value) {
 		// 		const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}&reply_markup=${show ? keyboard : ''}`
