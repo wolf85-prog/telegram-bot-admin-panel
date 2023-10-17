@@ -47,6 +47,9 @@ const Admin = () => {
   const [oldClients, setOldClients]= useState([]);
   const [loading, setLoading]= useState(true);
 
+  const [showRenthub, setShowRenthub]= useState(true);
+  const [showWorkhub, setShowWorkhub]= useState(false);
+
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
   
@@ -159,6 +162,18 @@ const Admin = () => {
     
   },[projs])
 
+  const openHub = (hub) => {
+    console.log(hub)
+    if (hub === 'Workhub') { 
+      setShowWorkhub(true)
+      setShowRenthub(false)
+    }
+    if (hub === 'Renthub') { 
+      setShowWorkhub(false)
+      setShowRenthub(true)
+    }
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -176,15 +191,16 @@ const Admin = () => {
                   <CCardHeader>
                     <CNav variant="tabs" className="card-header-tabs">
                       <CNavItem>
-                        <CNavLink href="/renthub" active>Renthub</CNavLink>
+                        <CNavLink onClick={() => openHub('Renthub')} active>Renthub</CNavLink>
                       </CNavItem>
                       <CNavItem>
-                        <CNavLink href="/workhub">Workhub</CNavLink>
+                        <CNavLink onClick={() => openHub('Workhub')}>Workhub</CNavLink>
                       </CNavItem>
                     </CNav>
                   </CCardHeader>
-                  <CCardBody>
-                    <CCardTitle>Renthub</CCardTitle>
+
+                  <CCardBody id="Renthub" style={{display: showRenthub ? 'block' : 'none'}}>
+                    {/* <CCardTitle>Renthub</CCardTitle> */}
 
                     <CRow>
                       <CCol xs>
@@ -312,6 +328,10 @@ const Admin = () => {
                         </CCard>
                       </CCol>
                     </CRow>
+                  </CCardBody>
+
+                  <CCardBody id="Workhub" style={{display: showWorkhub ? 'block' : 'none'}}>
+                    <CCardTitle>Workhub</CCardTitle>
                   </CCardBody>
                 </CCard>
                 </>
