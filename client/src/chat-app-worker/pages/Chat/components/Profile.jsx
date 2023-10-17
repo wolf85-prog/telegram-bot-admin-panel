@@ -20,6 +20,7 @@ import { newMessage } from "src/http/workerAPI";
 import { $host } from './../../../../http/index';
 import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3';
 import scenarios from './../../../../data/scenarios'
+import Anketa from './../../../../assets/images/anketa.png'
 
 const Profile = ({ user }) => {
 
@@ -27,6 +28,7 @@ const Profile = ({ user }) => {
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_HOST
 	const webAppPassport = process.env.REACT_APP_WEBAPP_PASSPORT
+	const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
 
 	const [username, setUsername] = useState("")
 	const [worker, setWorker] = useState("")
@@ -117,7 +119,7 @@ const Profile = ({ user }) => {
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "Заполнить анкету", web_app: {url: webAppPassport}},
+					{"text": "Заполнить анкету", web_app: {url: webAppAnketa}},
 				],
 			]
 		});
@@ -143,12 +145,7 @@ const Profile = ({ user }) => {
 		}
 		//Паспорт
 		else if (selectedElement === '1') {
-			text = `Добрый день.
-			На связи автоматическая система U.L.E.Y | Workhub.
-			
-			Для участия в предстоящем проекте необходимо предоставить паспортные данные.
-			
-			Продолжив, ты соглашаешся предоставить персональные данные исключительно для передачи их заказчику.`
+			//text = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
 
 			//setShowButton(true)
 			show = true
@@ -202,9 +199,18 @@ const Profile = ({ user }) => {
 			✅ Специальность`
 		}
 
-		const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}&reply_markup=${show ? keyboard : ''}`
-		console.log(url_send_msg)	
-		sendToTelegram = await $host.get(url_send_msg);
+		if (show) {
+			//send photo
+			const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.chatId}&photo=${Anketa}&reply_markup=${show ? keyboard : ''}`
+			console.log(url_send_photo)	
+			sendToTelegram = await $host.get(url_send_photo);
+		} else {
+			//send message
+			const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}&reply_markup=${show ? keyboard : ''}`
+			console.log(url_send_msg)	
+			sendToTelegram = await $host.get(url_send_msg);
+		}
+		
 
 		//отправить в админку
 		let message = {};
