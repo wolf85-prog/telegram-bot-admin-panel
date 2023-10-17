@@ -100,16 +100,24 @@ const Profile = ({ user }) => {
 		//console.log("client: ", client)
 
 		//Передаем данные боту
+		// const keyboard = JSON.stringify({
+		// 	inline_keyboard: [
+		// 		[
+		// 			{"text": "Согласен предоставить персональные данные", web_app: {url: webAppPassport}}, //callback_data:'/passport'},
+		// 		],
+		// 		[
+		// 			{"text": "Отказываюсь от предоставления данных и участия в проектах", callback_data:'/passport2'},
+		// 		],
+		// 		[
+		// 			{"text": "Пояснения", callback_data:'/passport3'},
+		// 		],
+		// 	]
+		// });
+
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "Согласен предоставить персональные данные", web_app: {url: webAppPassport}}, //callback_data:'/passport'},
-				],
-				[
-					{"text": "Отказываюсь от предоставления данных и участия в проектах", callback_data:'/passport2'},
-				],
-				[
-					{"text": "Пояснения", callback_data:'/passport3'},
+					{"text": "Заполнить анкету", web_app: {url: webAppPassport}},
 				],
 			]
 		});
