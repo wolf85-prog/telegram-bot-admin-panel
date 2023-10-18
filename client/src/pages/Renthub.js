@@ -26,7 +26,7 @@ import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { getAllMessages } from './../http/chatAPI.js'
 
-import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
+import WidgetsDropdown from '../views/widgets/WidgetsDropdown2'
 
 const Renthub = () => {
 

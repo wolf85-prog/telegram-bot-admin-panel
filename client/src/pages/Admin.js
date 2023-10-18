@@ -38,6 +38,7 @@ import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { getAllMessages } from './../http/chatAPI.js'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
+import WidgetsDropdown2 from '../views/widgets/WidgetsDropdown2'
 
 const Admin = () => {
 
@@ -56,6 +57,8 @@ const Admin = () => {
   const [showWorkhub, setShowWorkhub]= useState(false);
 
   const [activeKey, setActiveKey] = useState(1)
+  const [showWidget1, setShowWidget1] = useState(true)
+  const [showWidget2, setShowWidget2] = useState(false)
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
@@ -175,11 +178,15 @@ const Admin = () => {
       setShowWorkhub(true)
       setShowRenthub(false)
       setActiveKey(2)
+      setShowWidget1(false)
+      setShowWidget2(true)
     }
     if (hub === 'Renthub') { 
       setShowWorkhub(false)
       setShowRenthub(true)
       setActiveKey(1)
+      setShowWidget1(true)
+      setShowWidget2(false)
     }
   }
 
@@ -194,7 +201,18 @@ const Admin = () => {
               <Suspense fallback={<CSpinner color="primary" />}>
 
                 <>
-                <WidgetsDropdown users={clients.length-1} projects={projects.length} companys={comps.length} />
+                {showWidget1 
+                ?<WidgetsDropdown
+                  users={clients.length-1} 
+                  projects={projects.length} 
+                  companys={comps.length} 
+                />
+                :<WidgetsDropdown2
+                  users={clients.length-1} 
+                  projects={projects.length} 
+                  companys={comps.length} 
+                />}
+                
                 {/* Вкладки */}
                 <CCard>
                   <CCardHeader>
@@ -388,16 +406,10 @@ const Admin = () => {
                             <CRow>
                               <CCol md={3}>
                                 {/* <CFormInput type="text" size="sm" placeholder="01.01.2000" aria-label="sm input example"/> */}
-                                <CInputGroup className="mb-3">
-                                  <CFormInput placeholder="01.01.2000" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-                                  <CInputGroupText id="basic-addon2"><CIcon icon={cilPeople} customClassName="nav-icon" /></CInputGroupText>
-                                </CInputGroup>
+
                               </CCol>
                               <CCol md={3}>
-                                <CInputGroup className="mb-3">
-                                  <CFormInput placeholder="01.01.2000" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-                                  <CInputGroupText id="basic-addon2"><CIcon icon={cilPeople} customClassName="nav-icon" /></CInputGroupText>
-                                </CInputGroup>                   
+                                                
                               </CCol>
                               <CCol md={3}>
                                 <CButton color="light">Применить</CButton>
