@@ -199,7 +199,7 @@ const WidgetsDropdown2 = ({users, projects, companys}) => {
               </span> */}
             </>
           }
-          title="Компании"
+          title="Активные"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="p-0">
@@ -266,12 +266,9 @@ const WidgetsDropdown2 = ({users, projects, companys}) => {
           value={
             <>
               44{' '}
-              <span className="fs-6 fw-normal">
-                (-23.6% <CIcon icon={cilArrowBottom} />)
-              </span>
             </>
           }
-          title="Часы [за год]"
+          title="Удаленные"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="p-0">

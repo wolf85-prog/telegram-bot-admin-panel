@@ -40,6 +40,14 @@ import { getAllMessages } from './../http/chatAPI.js'
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 import WidgetsDropdown2 from '../views/widgets/WidgetsDropdown2'
 
+import Sound from "./../assets/images/spec/1_sound.svg";
+import Riggers from "./../assets/images/spec/2_riggers.svg";
+import Production from "./../assets/images/spec/3_production.svg";
+import StageGround from "./../assets/images/spec/4_stage_ground.svg";
+import Video from "./../assets/images/spec/5_video.svg";
+import Light from "./../assets/images/spec/6_light.svg";
+import Stagehands from "./../assets/images/spec/7_stagehands.svg";
+
 const Admin = () => {
 
   const { users: clients } = useUsersContext();
@@ -214,17 +222,20 @@ const Admin = () => {
                 />}
                 
                 {/* Вкладки */}
-                <CCard>
-                  <CCardHeader>
-                    <CNav variant="tabs" className="card-header-tabs">
+                <CNav variant="tabs" className="card-header-tabs">
                       <CNavItem>
                         <CNavLink onClick={() => openHub('Renthub')} active={activeKey === 1}>Renthub</CNavLink>
                       </CNavItem>
                       <CNavItem>
                         <CNavLink onClick={() => openHub('Workhub')} active={activeKey === 2}>Workhub</CNavLink>
                       </CNavItem>
-                    </CNav>
-                  </CCardHeader>
+                </CNav>
+                
+                <CCard>
+
+                  {/* <CCardHeader>                    
+                  </CCardHeader> */}
+                  
 
                   <CCardBody id="Renthub" style={{display: showRenthub ? 'block' : 'none'}}>
                     {/* <CCardTitle>Renthub</CCardTitle> */}
@@ -356,27 +367,25 @@ const Admin = () => {
                       </CCol>
                     </CRow>
                   </CCardBody>
-
+{/*-------------------------------------------------------------------------------------------  */}
                   <CCardBody id="Workhub" style={{display: showWorkhub ? 'block' : 'none'}}>
                     {/* <CCardTitle>Workhub</CCardTitle> */}
                     <CRow>
                       <CCol xs>
-                        <CCard className="mb-4">
-                          <CCardHeader>Пользователи бота ({clients.length - 1})</CCardHeader>
-                          <CCardBody>
+                        {/* <CCard className="mb-4">
+                          <CCardBody> */}
                             <CRow>
                               <CCol xs={12} md={6} xl={6}>
                                 <CRow>
                                   <CCol sm={6}>
-                                    <div className="border-start border-start-4 border-start-info py-1 px-3">
-                                      <div className="text-medium-emphasis small">Новые клиенты</div>
-                                      <div className="fs-5 fw-semibold">{newClients.length}</div>
+                                    <div className="border-start border-start-4 border-start-info py-1 px-3">  
+                                      <div className="text-medium-emphasis small"><img src={Sound} alt=''/>  Звук</div>
+                                      <div className="fs-5 fw-semibold">{newClients.length}</div>      
                                     </div>
                                   </CCol>
                                   <CCol sm={6}>
-                                    <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
-                                      <div className="text-medium-emphasis small">Постоянные клиенты</div>
-                                      <div className="fs-5 fw-semibold">{oldClients.length-1}</div>
+                                    <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">  
+                                      <div className="fs-5 fw-semibold"><img src={Light} alt=''/>  {oldClients.length-1}</div>
                                     </div>
                                   </CCol>
                                 </CRow>
@@ -386,13 +395,13 @@ const Admin = () => {
                                 <CRow>
                                   <CCol sm={6}>
                                     <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
-                                      <div className="text-medium-emphasis small">Просмотры</div>
+                                      <div className="text-medium-emphasis small">Видео</div>
                                       <div className="fs-5 fw-semibold">-</div>
                                     </div>
                                   </CCol>
                                   <CCol sm={6}>
                                     <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
-                                      <div className="text-medium-emphasis small">Другое</div>
+                                      <div className="text-medium-emphasis small">Хелперы</div>
                                       <div className="fs-5 fw-semibold">-</div>
                                     </div>
                                   </CCol>
@@ -402,31 +411,37 @@ const Admin = () => {
 
                               </CCol>
                             </CRow>
-{/*-------------------------------------------------------------------------------------------  */}
+
                             <CRow>
-                              <CCol md={3}>
-                                {/* <CFormInput type="text" size="sm" placeholder="01.01.2000" aria-label="sm input example"/> */}
+                              <CCol md={2}>
+                                <CFormInput type="text" placeholder="01.01.2000" aria-label="sm input example"/>
                               </CCol>
-                              <CCol md={3}>
-                                                
+                              <CCol md={2}>
+                                <CFormInput type="text" placeholder="01.01.2000" aria-label="sm input example"/>             
                               </CCol>
-                              <CCol md={3}>
-                                <CButton color="light">Применить</CButton>
+                              <CCol md={2}>
+                                <CButton color="dark">Применить</CButton>
+                              </CCol>
+                              <CCol md={6}>
+                                <CButton color="primary" style={{marginRight: '10px'}}>Сутки</CButton>
+                                <CButton color="secondary" style={{marginRight: '10px'}}>Неделя</CButton>
+                                <CButton color="success" style={{marginRight: '10px'}}>Месяц</CButton>
+                                <CButton color="danger" style={{marginRight: '10px'}}>Год</CButton>
                               </CCol>
                             </CRow>
                             <br/>
                             <CRow>
                               <CCol>
-                                <CButtonGroup role="group" aria-label="Basic outlined example">
+                                {/* <CButtonGroup role="group" aria-label="Basic outlined example">
                                   <CButton color="light" variant="outline">Сутки</CButton>
                                   <CButton color="light" variant="outline">Неделя</CButton>
                                   <CButton color="light" variant="outline">Месяц</CButton>
                                   <CButton color="light" variant="outline">Год</CButton>
-                                </CButtonGroup>
+                                </CButtonGroup> */}
                               </CCol>
                             </CRow>
-                          </CCardBody>
-                        </CCard>
+                          {/* </CCardBody>
+                        </CCard> */}
                       </CCol>
                     </CRow>
                   </CCardBody>
