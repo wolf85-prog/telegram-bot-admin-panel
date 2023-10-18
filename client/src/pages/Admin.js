@@ -406,7 +406,6 @@ const Admin = () => {
                             <CRow>
                               <CCol md={3}>
                                 {/* <CFormInput type="text" size="sm" placeholder="01.01.2000" aria-label="sm input example"/> */}
-
                               </CCol>
                               <CCol md={3}>
                                                 

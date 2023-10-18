@@ -34,7 +34,6 @@
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.1",
-    "@mui/x-date-pickers": "^6.16.2",
     "axios": "^1.2.2",
     "classnames": "^2.3.1",
     "core-js": "^3.24.1",
