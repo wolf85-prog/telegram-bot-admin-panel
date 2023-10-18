@@ -11,6 +11,10 @@ import {
   CNavLink,
   CCardTitle,
   CCardText,
+  CButtonGroup,
+  CFormInput,
+  CInputGroup,
+  CInputGroupText,
   CButton,
   CCol,
   CProgress,
@@ -28,6 +32,7 @@ import {
 } from '@coreui/icons'
 
 import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
+import Calendar from "src/assets/images/calendar.svg";
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { getAllMessages } from './../http/chatAPI.js'
@@ -49,6 +54,8 @@ const Admin = () => {
 
   const [showRenthub, setShowRenthub]= useState(true);
   const [showWorkhub, setShowWorkhub]= useState(false);
+
+  const [activeKey, setActiveKey] = useState(1)
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
@@ -167,10 +174,12 @@ const Admin = () => {
     if (hub === 'Workhub') { 
       setShowWorkhub(true)
       setShowRenthub(false)
+      setActiveKey(2)
     }
     if (hub === 'Renthub') { 
       setShowWorkhub(false)
       setShowRenthub(true)
+      setActiveKey(1)
     }
   }
 
@@ -187,14 +196,14 @@ const Admin = () => {
                 <>
                 <WidgetsDropdown users={clients.length-1} projects={projects.length} companys={comps.length} />
                 {/* Вкладки */}
-                <CCard className="text-center">
+                <CCard>
                   <CCardHeader>
                     <CNav variant="tabs" className="card-header-tabs">
                       <CNavItem>
-                        <CNavLink onClick={() => openHub('Renthub')} active>Renthub</CNavLink>
+                        <CNavLink onClick={() => openHub('Renthub')} active={activeKey === 1}>Renthub</CNavLink>
                       </CNavItem>
                       <CNavItem>
-                        <CNavLink onClick={() => openHub('Workhub')}>Workhub</CNavLink>
+                        <CNavLink onClick={() => openHub('Workhub')} active={activeKey === 2}>Workhub</CNavLink>
                       </CNavItem>
                     </CNav>
                   </CCardHeader>
@@ -205,7 +214,7 @@ const Admin = () => {
                     <CRow>
                       <CCol xs>
                         <CCard className="mb-4">
-                          <CCardHeader>Пользователи бота ({clients.length - 1})</CCardHeader>
+                          <CCardHeader style={{textAlign: 'left'}}>Пользователи бота ({clients.length - 1})</CCardHeader>
                           <CCardBody>
                             <CRow>
                               <CCol xs={12} md={6} xl={6}>
@@ -331,7 +340,84 @@ const Admin = () => {
                   </CCardBody>
 
                   <CCardBody id="Workhub" style={{display: showWorkhub ? 'block' : 'none'}}>
-                    <CCardTitle>Workhub</CCardTitle>
+                    {/* <CCardTitle>Workhub</CCardTitle> */}
+                    <CRow>
+                      <CCol xs>
+                        <CCard className="mb-4">
+                          <CCardHeader>Пользователи бота ({clients.length - 1})</CCardHeader>
+                          <CCardBody>
+                            <CRow>
+                              <CCol xs={12} md={6} xl={6}>
+                                <CRow>
+                                  <CCol sm={6}>
+                                    <div className="border-start border-start-4 border-start-info py-1 px-3">
+                                      <div className="text-medium-emphasis small">Новые клиенты</div>
+                                      <div className="fs-5 fw-semibold">{newClients.length}</div>
+                                    </div>
+                                  </CCol>
+                                  <CCol sm={6}>
+                                    <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
+                                      <div className="text-medium-emphasis small">Постоянные клиенты</div>
+                                      <div className="fs-5 fw-semibold">{oldClients.length-1}</div>
+                                    </div>
+                                  </CCol>
+                                </CRow>
+                              </CCol>
+
+                              <CCol xs={12} md={6} xl={6}>
+                                <CRow>
+                                  <CCol sm={6}>
+                                    <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
+                                      <div className="text-medium-emphasis small">Просмотры</div>
+                                      <div className="fs-5 fw-semibold">-</div>
+                                    </div>
+                                  </CCol>
+                                  <CCol sm={6}>
+                                    <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
+                                      <div className="text-medium-emphasis small">Другое</div>
+                                      <div className="fs-5 fw-semibold">-</div>
+                                    </div>
+                                  </CCol>
+                                </CRow>
+
+                                <div className="mb-5"></div>
+
+                              </CCol>
+                            </CRow>
+{/*-------------------------------------------------------------------------------------------  */}
+                            <CRow>
+                              <CCol md={3}>
+                                {/* <CFormInput type="text" size="sm" placeholder="01.01.2000" aria-label="sm input example"/> */}
+                                <CInputGroup className="mb-3">
+                                  <CFormInput placeholder="01.01.2000" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                                  <CInputGroupText id="basic-addon2"><CIcon icon={cilPeople} customClassName="nav-icon" /></CInputGroupText>
+                                </CInputGroup>
+                              </CCol>
+                              <CCol md={3}>
+                                <CInputGroup className="mb-3">
+                                  <CFormInput placeholder="01.01.2000" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                                  <CInputGroupText id="basic-addon2"><CIcon icon={cilPeople} customClassName="nav-icon" /></CInputGroupText>
+                                </CInputGroup>                   
+                              </CCol>
+                              <CCol md={3}>
+                                <CButton color="light">Применить</CButton>
+                              </CCol>
+                            </CRow>
+                            <br/>
+                            <CRow>
+                              <CCol>
+                                <CButtonGroup role="group" aria-label="Basic outlined example">
+                                  <CButton color="light" variant="outline">Сутки</CButton>
+                                  <CButton color="light" variant="outline">Неделя</CButton>
+                                  <CButton color="light" variant="outline">Месяц</CButton>
+                                  <CButton color="light" variant="outline">Год</CButton>
+                                </CButtonGroup>
+                              </CCol>
+                            </CRow>
+                          </CCardBody>
+                        </CCard>
+                      </CCol>
+                    </CRow>
                   </CCardBody>
                 </CCard>
                 </>
