@@ -5,6 +5,7 @@ const Chats2 = React.lazy(() => import('./pages/Chats2'))
 const Chats3 = React.lazy(() => import('./pages/Chats3'))
 const ChatWorker = React.lazy(() => import('./pages/ChatWorker'))
 const Admin = React.lazy(() => import('./pages/Admin'))
+const Admin2 = React.lazy(() => import('./pages/Admin2'))
 const Notifications = React.lazy(() => import('./pages/Notifications'))
 const MessagesBot = React.lazy(() => import('./pages/MessagesBot'))
 const Reports = React.lazy(() => import('./pages/Reports'))
@@ -29,6 +30,7 @@ const routes = [
   { path: '/settings', name: 'Настройки', Component: Settings },
   { path: '/distributionw', name: 'Workhub / Рассылки', Component: DistributionW },
   { path: "/workers", name: 'Workhub / Уведомления', Component: Workers },
+  { path: '/dashboard2', name: 'Пункт управления / Renthub', Component: Admin2 },
 ]
 
 export default routes

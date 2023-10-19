@@ -1,6 +1,7 @@
 import React, { Suspense, useState, useEffect } from 'react'
 import { CContainer, CSpinner } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
+import {CChart} from '@coreui/react-chartjs'
 import {
   CAvatar,
   CCard,
@@ -35,8 +36,8 @@ import {
 
 import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 
-import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { getAllMessages } from './../http/chatAPI.js'
+import { useUsersContext } from "../chat-app-new/context/usersContext";
+import { getAllMessages } from '../http/chatAPI.js'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 import WidgetsDropdown2 from '../views/widgets/WidgetsDropdown2'
@@ -49,7 +50,18 @@ import Video from "./../assets/images/spec/5_video.svg";
 import Light from "./../assets/images/spec/6_light.svg";
 import Stagehands from "./../assets/images/spec/7_stagehands.svg";
 
-const Admin = () => {
+import {
+  CDropdown,
+  CDropdownMenu,
+  CDropdownItem,
+  CDropdownToggle,
+  CWidgetStatsA,
+} from '@coreui/react'
+import { getStyle } from '@coreui/utils'
+import { CChartBar, CChartLine } from '@coreui/react-chartjs'
+import { cilArrowBottom, cilOptions } from '@coreui/icons'
+
+const Admin2 = () => {
 
   const { users: clients } = useUsersContext();
   const { managers: zakazchiki } = useUsersContext();
@@ -354,6 +366,53 @@ const Admin = () => {
                     <CRow>
                       <CCol xs>
                             <CRow>
+
+                            <CChart
+                              type="line" 
+                              data={{
+                                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                                datasets: [
+                                  {
+                                    label: "My First dataset",
+                                    backgroundColor: "rgba(220, 220, 220, 0.2)",
+                                    borderColor: "rgba(220, 220, 220, 1)",
+                                    pointBackgroundColor: "rgba(220, 220, 220, 1)",
+                                    pointBorderColor: "#fff",
+                                    data: [40, 20, 12, 39, 10, 40, 39, 80, 40]
+                                  },
+                                ],
+                              }}
+                              options={{
+                                plugins: {
+                                  legend: {
+                                    labels: {
+                                      color: getStyle('--cui-body-color'),
+                                    }
+                                  }
+                                },
+                                scales: {
+                                  x: {
+                                    grid: {
+                                      color: getStyle('--cui-border-color-translucent'),
+                                    },
+                                    ticks: {
+                                      color: getStyle('--cui-body-color'),
+                                    },
+                                  },
+                                  y: {
+                                    grid: {
+                                      color: getStyle('--cui-border-color-translucent'),
+                                    },
+                                    ticks: {
+                                      color: getStyle('--cui-body-color'),
+                                    },
+                                  },
+                                },
+                              }}
+                            />
+                            </CRow>
+                            <br/>
+                            <CRow>
                               <CCol xs={12} md={6} xl={6}>
                                 <CRow>
                                   <CCol sm={6}>
@@ -513,4 +572,4 @@ const Admin = () => {
   )
 }
 
-export default Admin
+export default Admin2
