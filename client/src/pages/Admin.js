@@ -34,7 +34,6 @@ import {
 } from '@coreui/icons'
 
 import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
-import Calendar from "src/assets/images/calendar.svg";
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { getAllMessages } from './../http/chatAPI.js'
@@ -224,22 +223,17 @@ const Admin = () => {
                 />}
                 
                 {/* Вкладки */}
-                <CNav variant="tabs" className="card-header-tabs">
+                <CNav variant="tabs" className='dark-theme'>
                       <CNavItem>
-                        <CNavLink onClick={() => openHub('Renthub')} active={activeKey === 1}>Renthub</CNavLink>
+                        <CNavLink style={{background: activeKey !== 1 ? '#08080869' : ''}} onClick={() => openHub('Renthub')} active={activeKey === 1}>Renthub</CNavLink>
                       </CNavItem>
                       <CNavItem>
-                        <CNavLink onClick={() => openHub('Workhub')} active={activeKey === 2}>Workhub</CNavLink>
+                        <CNavLink style={{background: activeKey !== 2 ? '#08080869' : ''}} onClick={() => openHub('Workhub')} active={activeKey === 2}>Workhub</CNavLink>
                       </CNavItem>
                 </CNav>
-                <CCard>
-                  <CCardBody>This is some text within a card body.</CCardBody>
-                </CCard>
                 
-                {/* <CCard> */}
-
-
-                  {/* <CCardBody id="Renthub" style={{display: showRenthub ? 'block' : 'none'}}>
+                <CCard className='rounded-bottom' style={{borderRadius: '0px'}}>
+                  <CCardBody id="Renthub" style={{display: showRenthub ? 'block' : 'none'}}>
                     <CRow>
                       <CCol xs>
                         <CCard className="mb-4">
@@ -354,9 +348,9 @@ const Admin = () => {
                         </CCard>
                       </CCol>
                     </CRow>
-                  </CCardBody> */}
+                  </CCardBody>
 {/*-------------------------------------------------------------------------------------------  */}
-                  {/* <CCardBody id="Workhub" style={{display: showWorkhub ? 'block' : 'none'}}>
+                  <CCardBody id="Workhub" style={{display: showWorkhub ? 'block' : 'none'}}>
                     <CRow>
                       <CCol xs>
                             <CRow>
@@ -379,15 +373,18 @@ const Admin = () => {
                               <CCol xs={12} md={6} xl={6}>
                                 <CRow>
                                   <CCol sm={6}>
-                                    <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
-                                      <div className="text-medium-emphasis small">Видео</div>
-                                      <div className="fs-5 fw-semibold">-</div>
-                                    </div>
+                                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                      <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
+                                        <div className="text-medium-emphasis small">Видео</div>
+                                        <div className="fs-5 fw-semibold">65</div>
+                                      </div>
+                                      <img src={Video} alt='' style={{marginBottom: '15px'}} />
+                                    </div>   
                                   </CCol>
                                   <CCol sm={6}>
                                     <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
                                       <div className="text-medium-emphasis small">Хелперы</div>
-                                      <div className="fs-5 fw-semibold">-</div>
+                                      <div className="fs-5 fw-semibold">23</div>
                                     </div>
                                   </CCol>
                                 </CRow>
@@ -398,31 +395,102 @@ const Admin = () => {
                             </CRow>
 
                             <CRow>
-                              <CCol md={2}>
-                                <CFormInput type="text" placeholder="01.01.2000" aria-label="sm input example"/>
+                              <CCol md={6} style={{textAlign: 'center', display: 'flex'}}>
+                                <CFormInput type="text" placeholder="01.01.2000" aria-label="sm input example" style={{marginLeft: '10px'}}/>
+                                
+                                <CFormInput type="text" placeholder="01.01.2000" aria-label="sm input example"style={{marginLeft: '10px'}}/>             
+
+                                <CButton color="dark" style={{width: '110px', marginLeft: '10px'}}>Применить</CButton>
                               </CCol>
-                              <CCol md={2}>
-                                <CFormInput type="text" placeholder="01.01.2000" aria-label="sm input example"/>             
-                              </CCol>
-                              <CCol md={2}>
-                                <CButton color="dark">Применить</CButton>
-                              </CCol>
-                              <CCol md={6}>
-                                <CButton color="primary" style={{marginRight: '10px'}}>Сутки</CButton>
-                                <CButton color="secondary" style={{marginRight: '10px'}}>Неделя</CButton>
-                                <CButton color="success" style={{marginRight: '10px'}}>Месяц</CButton>
-                                <CButton color="danger" style={{marginRight: '10px'}}>Год</CButton>
+                              <CCol md={6} style={{textAlign: 'center'}}>
+                                <CButton color="primary" style={{marginRight: '10px', width: '110px'}}>Сутки</CButton>
+                                <CButton color="secondary" style={{marginRight: '10px', width: '110px'}}>Неделя</CButton>
+                                <CButton color="success" style={{marginRight: '10px', width: '110px'}}>Месяц</CButton>
+                                <CButton color="danger" style={{marginRight: '10px', width: '110px'}}>Год</CButton>
                               </CCol>
                             </CRow>
+                            
                             <br/>
+                            
                             <CRow>
                               <CCol>
+                                <CTable align="middle" className="mb-0 border" hover responsive>
+                                  <CTableHead className='table-dark'>
+                                    <CTableRow>
+                                      <CTableHeaderCell className="text-center" style={{width: '120px'}}>Дата</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Время</CTableHeaderCell>  
+                                      <CTableHeaderCell className="text-center" style={{width: '260px'}}>ФИО</CTableHeaderCell>                             
+                                      <CTableHeaderCell className="text-center" style={{width: '120px'}}>Ник</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{width: '150px'}}>Дата рождения</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{width: '80px'}}>Город</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{width: '150px'}}>Телефон</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{width: '150px'}}>Специальность</CTableHeaderCell>
+                                    </CTableRow>
+                                  </CTableHead>
+                                  <CTableBody>
+                                    <CTableRow v-for="item in tableItems">
+                                      <CTableDataCell className="text-center">
+                                        12.01.2000
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        12:00
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                          Иванов  Иван Иванович
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        <div>Ваня</div>
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        12.03.1990
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        <div>Москва</div>
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        <div>8 (900) 122-12-12</div>
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        <div>Повар <br/>
+                                          Плотник <br/>
+                                          Охотник</div>
+                                      </CTableDataCell>
+                                    </CTableRow>
+
+                                    <CTableRow v-for="item in tableItems">
+                                      <CTableDataCell className="text-center">
+                                        12.01.2000
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        12:00
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                          Иванов  Иван Иванович
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        <div>Ваня</div>
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        12.03.1990
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        <div>Москва</div>
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        <div>8 (900) 122-12-12</div>
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center">
+                                        <div>-</div>
+                                      </CTableDataCell>
+                                    </CTableRow>
+                                </CTableBody>
+                              </CTable>
                               </CCol>
                             </CRow>
                       </CCol>
                     </CRow>
-                  </CCardBody> */}
-                {/* </CCard> */}
+                  </CCardBody>
+                </CCard>
                 
                 </>
 
