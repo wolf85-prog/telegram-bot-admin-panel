@@ -41,6 +41,18 @@
     --cui-table-border-color: #252d32;
 }
 
+.dark-theme .table-light:not([class*="dark:"]) {
+    --cui-table-bg: hsla(0,0%,100%,.1);
+    --cui-table-color: hsla(0,0%,100%,.87);
+    --cui-table-border-color: hsla(0,0%,100%,.177);
+    --cui-table-striped-bg: hsla(0,0%,100%,.139);
+    --cui-table-striped-color: rgba(44,56,74,.95);
+    --cui-table-active-bg: hsla(0,0%,100%,.177);
+    --cui-table-active-color: rgba(44,56,74,.95);
+    --cui-table-hover-bg: hsla(0,0%,100%,.158);
+    --cui-table-hover-color: rgba(44,56,74,.95);
+}
+
 
 .header {
     /* --cui-header-bg: #2a2b36; */

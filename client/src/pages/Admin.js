@@ -415,7 +415,7 @@ const Admin = () => {
                             <CRow>
                               <CCol>
                                 <CTable align="middle" className="mb-0 border" hover responsive>
-                                  <CTableHead className='table-dark'>
+                                  <CTableHead className='table-light'>
                                     <CTableRow>
                                       <CTableHeaderCell className="text-center" style={{width: '120px'}}>Дата</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '100px'}}>Время</CTableHeaderCell>  
