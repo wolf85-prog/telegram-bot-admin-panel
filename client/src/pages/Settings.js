@@ -53,7 +53,7 @@ const Settings = () => {
                       chart={
                         <CChartLine
                           className="mt-3 mx-3"
-                          style={{ height: '70px' }}
+                          style={{ height: '500px' }}
                           data={{
                             labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
                             datasets: [
@@ -80,18 +80,18 @@ const Settings = () => {
                                   drawBorder: false,
                                 },
                                 ticks: {
-                                  display: false,
+                                  display: true,
                                 },
                               },
                               y: {
-                                min: 30,
-                                max: 89,
-                                display: false,
+                                min: 10,
+                                max: 99,
+                                display: true,
                                 grid: {
                                   display: false,
                                 },
                                 ticks: {
-                                  display: false,
+                                  display: true,
                                 },
                               },
                             },

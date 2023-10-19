@@ -49,6 +49,8 @@ import Video from "./../assets/images/spec/5_video.svg";
 import Light from "./../assets/images/spec/6_light.svg";
 import Stagehands from "./../assets/images/spec/7_stagehands.svg";
 
+import InputMask from 'react-input-mask';
+
 const Admin = () => {
 
   const { users: clients } = useUsersContext();
@@ -232,7 +234,7 @@ const Admin = () => {
                       </CNavItem>
                 </CNav>
                 
-                <CCard className='rounded-bottom' style={{borderRadius: '0px', borderTopRightRadius: '0.375rem'}}>
+                <CCard className='rounded-bottom' style={{borderRadius: '0px', borderColor: '#131c21', borderTopRightRadius: '0.375rem'}}>
                   <CCardBody id="Renthub" style={{display: showRenthub ? 'block' : 'none'}}>
                     <CRow>
                       <CCol xs>
@@ -357,12 +359,23 @@ const Admin = () => {
                               <CCol xs={12} md={6} xl={6}>
                                 <CRow>
                                   <CCol sm={6}>
-                                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                                      <div className="border-start border-start-4 border-start-info py-1 px-3 mb-3">
+                                    <div style={{
+                                        display: 'flex', 
+                                        justifyContent: 'space-between', 
+                                        alignItems: 'flex-start',   
+                                      }}>
+                                      {/* <div className="border-start border-start-4 border-start-info py-1 px-3 mb-3">
                                         <div className="text-medium-emphasis small">Звук</div>
                                         <div className="fs-5 fw-semibold">15</div>
                                       </div>
-                                      <img src={Sound} alt='' style={{marginBottom: '15px'}} />
+                                      <img src={Sound} alt='' style={{marginBottom: '15px'}} /> */}
+                                      <div className="border-start border-start-4 border-start-info"> 
+                                        <img src={Sound} alt='' style={{marginTop: '7px', paddingBottom: '12px', marginLeft: '15px'}} />
+                                      </div>
+                                      <div className='py-1 px-3 mb-3' style={{textAlign: 'right'}}>
+                                        <div className="text-medium-emphasis small">Звук</div>
+                                        <div className="fs-5 fw-semibold">23</div>
+                                      </div> 
                                     </div>   
                                   </CCol>
                                   <CCol sm={6}>
@@ -390,7 +403,7 @@ const Admin = () => {
                                   </CCol>
                                   <CCol sm={6}>
                                     <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                                      <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
+                                      <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3"> 
                                         <div className="text-medium-emphasis small">Хелперы</div>
                                         <div className="fs-5 fw-semibold">23</div>
                                       </div>
@@ -406,14 +419,40 @@ const Admin = () => {
 
                             <CRow>
                               <CCol md={6} style={{textAlign: 'center'}}>
-                                <CButton color="primary" style={{marginRight: '10px', width: '120px'}}>Сутки</CButton>
-                                <CButton color="secondary" style={{marginRight: '10px', width: '120px'}}>Неделя</CButton>
-                                <CButton color="success" style={{marginRight: '10px', width: '120px'}}>Месяц</CButton>
-                                <CButton color="danger" style={{marginRight: '10px', width: '120px'}}>Год</CButton>
+                                <CButton color="dark" style={{marginRight: '20px', width: '120px'}}>Сутки</CButton>
+                                <CButton color="dark" style={{marginRight: '20px', width: '120px'}}>Неделя</CButton>
+                                <CButton color="dark" style={{marginRight: '20px', width: '120px'}}>Месяц</CButton>
+                                <CButton color="dark" style={{marginRight: '20px', width: '120px'}}>Год</CButton>
                               </CCol>
                               <CCol md={6} style={{textAlign: 'center', display: 'flex'}}>
-                                <CFormInput type="text" placeholder="01.01.2000" aria-label="sm input example" style={{marginLeft: '10px'}}/>                               
-                                <CFormInput type="text" placeholder="01.01.2000" aria-label="sm input example"style={{marginLeft: '10px'}}/>             
+                                {/* <CFormInput type="text" placeholder="01.01.2000" aria-label="sm input example" style={{marginLeft: '10px'}}>
+                                  <InputMask
+                                      mask="99.99.2099"
+                                      disabled={false}
+                                      maskChar=""
+                                  />  
+                                </CFormInput> */}
+
+                                <InputMask mask="99.99.9999">
+                                  {(inputProps) => <CFormInput 
+                                                    {...inputProps} 
+                                                    placeholder="01.01.2000" 
+                                                    disableUnderline
+                                                    aria-label="sm input example"
+                                                    style={{marginLeft: '10px'}}
+                                                  />}
+                                </InputMask>
+
+                                <InputMask mask="99.99.9999">
+                                  {(inputProps) => <CFormInput 
+                                                    {...inputProps} 
+                                                    placeholder="01.01.2000" 
+                                                    disableUnderline
+                                                    aria-label="sm input example"
+                                                    style={{marginLeft: '10px'}}
+                                                  />}
+                                </InputMask>                             
+                                            
                                 <CButton color="dark" style={{marginLeft: '10px'}}>Применить</CButton>
                               </CCol>
                               

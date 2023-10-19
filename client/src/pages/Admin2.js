@@ -366,49 +366,86 @@ const Admin2 = () => {
                     <CRow>
                       <CCol xs>
                             <CRow>
-
-                            <CChart
-                              type="line" 
-                              data={{
-                                labels: ["January", "February", "March", "April", "May", "June", "July"],
-                                datasets: [
-                                  {
-                                    label: "My First dataset",
-                                    backgroundColor: "rgba(220, 220, 220, 0.2)",
-                                    borderColor: "rgba(220, 220, 220, 1)",
-                                    pointBackgroundColor: "rgba(220, 220, 220, 1)",
-                                    pointBorderColor: "#fff",
-                                    data: [40, 20, 12, 39, 10, 40, 39, 80, 40]
-                                  },
-                                ],
-                              }}
-                              options={{
-                                plugins: {
-                                  legend: {
-                                    labels: {
-                                      color: getStyle('--cui-body-color'),
-                                    }
-                                  }
-                                },
-                                scales: {
-                                  x: {
-                                    grid: {
-                                      color: getStyle('--cui-border-color-translucent'),
+                            <CWidgetStatsA
+                              className="mb-4"
+                              color="primary"
+                              value={
+                                <>
+                                  
+                                </>
+                              }
+                              title=""
+                              action={
+                                <CDropdown alignment="end">
+                                  <CDropdownToggle color="transparent" caret={false} className="p-0">
+                                    <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
+                                  </CDropdownToggle>
+                                  <CDropdownMenu>
+                                    <CDropdownItem>Посмотреть</CDropdownItem>
+                                    <CDropdownItem>Обновить</CDropdownItem>
+                                    <CDropdownItem disabled>Другое</CDropdownItem>
+                                  </CDropdownMenu>
+                                </CDropdown>
+                              }
+                              chart={
+                                <CChartLine
+                                  className="mt-3 mx-3"
+                                  style={{ height: '500px' }}
+                                  data={{
+                                    labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
+                                    datasets: [
+                                      {
+                                        label: 'My First dataset',
+                                        backgroundColor: 'transparent',
+                                        borderColor: 'rgba(255,255,255,.55)',
+                                        pointBackgroundColor: getStyle('--cui-primary'),
+                                        data: [65, 59, 84, 84, 51, 55, 40],
+                                      },
+                                    ],
+                                  }}
+                                  options={{
+                                    plugins: {
+                                      legend: {
+                                        display: false,
+                                      },
                                     },
-                                    ticks: {
-                                      color: getStyle('--cui-body-color'),
+                                    maintainAspectRatio: false,
+                                    scales: {
+                                      x: {
+                                        grid: {
+                                          display: false,
+                                          drawBorder: false,
+                                        },
+                                        ticks: {
+                                          display: true,
+                                        },
+                                      },
+                                      y: {
+                                        min: 10,
+                                        max: 99,
+                                        display: true,
+                                        grid: {
+                                          display: false,
+                                        },
+                                        ticks: {
+                                          display: true,
+                                        },
+                                      },
                                     },
-                                  },
-                                  y: {
-                                    grid: {
-                                      color: getStyle('--cui-border-color-translucent'),
+                                    elements: {
+                                      line: {
+                                        borderWidth: 1,
+                                        tension: 0.4,
+                                      },
+                                      point: {
+                                        radius: 4,
+                                        hitRadius: 10,
+                                        hoverRadius: 4,
+                                      },
                                     },
-                                    ticks: {
-                                      color: getStyle('--cui-body-color'),
-                                    },
-                                  },
-                                },
-                              }}
+                                  }}
+                                />
+                              }
                             />
                             </CRow>
                             <br/>
