@@ -232,7 +232,7 @@ const Admin = () => {
                       </CNavItem>
                 </CNav>
                 
-                <CCard className='rounded-bottom' style={{borderRadius: '0px'}}>
+                <CCard className='rounded-bottom' style={{borderRadius: '0px', borderTopRightRadius: '0.375rem'}}>
                   <CCardBody id="Renthub" style={{display: showRenthub ? 'block' : 'none'}}>
                     <CRow>
                       <CCol xs>
@@ -357,15 +357,22 @@ const Admin = () => {
                               <CCol xs={12} md={6} xl={6}>
                                 <CRow>
                                   <CCol sm={6}>
-                                    <div className="border-start border-start-4 border-start-info py-1 px-3">  
-                                      <div className="text-medium-emphasis small"><img src={Sound} alt=''/>  Звук</div>
-                                      <div className="fs-5 fw-semibold">{newClients.length}</div>      
-                                    </div>
+                                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                      <div className="border-start border-start-4 border-start-info py-1 px-3 mb-3">
+                                        <div className="text-medium-emphasis small">Звук</div>
+                                        <div className="fs-5 fw-semibold">15</div>
+                                      </div>
+                                      <img src={Sound} alt='' style={{marginBottom: '15px'}} />
+                                    </div>   
                                   </CCol>
                                   <CCol sm={6}>
-                                    <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">  
-                                      <div className="fs-5 fw-semibold"><img src={Light} alt=''/>  {oldClients.length-1}</div>
-                                    </div>
+                                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                      <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
+                                        <div className="text-medium-emphasis small">Свет</div>
+                                        <div className="fs-5 fw-semibold">11</div>
+                                      </div>
+                                      <img src={Light} alt='' style={{marginBottom: '15px'}} />
+                                    </div>   
                                   </CCol>
                                 </CRow>
                               </CCol>
@@ -382,10 +389,13 @@ const Admin = () => {
                                     </div>   
                                   </CCol>
                                   <CCol sm={6}>
-                                    <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
-                                      <div className="text-medium-emphasis small">Хелперы</div>
-                                      <div className="fs-5 fw-semibold">23</div>
-                                    </div>
+                                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                      <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
+                                        <div className="text-medium-emphasis small">Хелперы</div>
+                                        <div className="fs-5 fw-semibold">23</div>
+                                      </div>
+                                      <img src={Stagehands} alt='' style={{marginBottom: '15px'}} />
+                                    </div>   
                                   </CCol>
                                 </CRow>
 
@@ -395,19 +405,18 @@ const Admin = () => {
                             </CRow>
 
                             <CRow>
-                              <CCol md={6} style={{textAlign: 'center', display: 'flex'}}>
-                                <CFormInput type="text" placeholder="01.01.2000" aria-label="sm input example" style={{marginLeft: '10px'}}/>
-                                
-                                <CFormInput type="text" placeholder="01.01.2000" aria-label="sm input example"style={{marginLeft: '10px'}}/>             
-
-                                <CButton color="dark" style={{width: '110px', marginLeft: '10px'}}>Применить</CButton>
-                              </CCol>
                               <CCol md={6} style={{textAlign: 'center'}}>
-                                <CButton color="primary" style={{marginRight: '10px', width: '110px'}}>Сутки</CButton>
-                                <CButton color="secondary" style={{marginRight: '10px', width: '110px'}}>Неделя</CButton>
-                                <CButton color="success" style={{marginRight: '10px', width: '110px'}}>Месяц</CButton>
-                                <CButton color="danger" style={{marginRight: '10px', width: '110px'}}>Год</CButton>
+                                <CButton color="primary" style={{marginRight: '10px', width: '120px'}}>Сутки</CButton>
+                                <CButton color="secondary" style={{marginRight: '10px', width: '120px'}}>Неделя</CButton>
+                                <CButton color="success" style={{marginRight: '10px', width: '120px'}}>Месяц</CButton>
+                                <CButton color="danger" style={{marginRight: '10px', width: '120px'}}>Год</CButton>
                               </CCol>
+                              <CCol md={6} style={{textAlign: 'center', display: 'flex'}}>
+                                <CFormInput type="text" placeholder="01.01.2000" aria-label="sm input example" style={{marginLeft: '10px'}}/>                               
+                                <CFormInput type="text" placeholder="01.01.2000" aria-label="sm input example"style={{marginLeft: '10px'}}/>             
+                                <CButton color="dark" style={{width: '120px', marginLeft: '10px'}}>Применить</CButton>
+                              </CCol>
+                              
                             </CRow>
                             
                             <br/>
