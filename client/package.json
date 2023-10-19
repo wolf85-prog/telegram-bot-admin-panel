@@ -53,6 +53,7 @@
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
     "redux": "4.2.0",
+    "rsuite": "^5.40.0",
     "simplebar-react": "^2.4.1",
     "socket.io-client": "^4.5.4",
     "use-sound": "^4.0.1",

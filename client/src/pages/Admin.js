@@ -21,6 +21,8 @@ import {
   CRow,
   CTable,
   CTableBody,
+  CTabContent,
+  CTabPane,
   CTableDataCell,
   CTableHead,
   CTableHeaderCell,
@@ -230,16 +232,14 @@ const Admin = () => {
                         <CNavLink onClick={() => openHub('Workhub')} active={activeKey === 2}>Workhub</CNavLink>
                       </CNavItem>
                 </CNav>
-                
                 <CCard>
+                  <CCardBody>This is some text within a card body.</CCardBody>
+                </CCard>
+                
+                {/* <CCard> */}
 
-                  {/* <CCardHeader>                    
-                  </CCardHeader> */}
-                  
 
-                  <CCardBody id="Renthub" style={{display: showRenthub ? 'block' : 'none'}}>
-                    {/* <CCardTitle>Renthub</CCardTitle> */}
-
+                  {/* <CCardBody id="Renthub" style={{display: showRenthub ? 'block' : 'none'}}>
                     <CRow>
                       <CCol xs>
                         <CCard className="mb-4">
@@ -302,7 +302,6 @@ const Admin = () => {
                                   <CTableHeaderCell className="text-center" style={{width: '100px'}}>TG ID</CTableHeaderCell>
                                   <CTableHeaderCell style={{width: '100px'}}>Использование</CTableHeaderCell>
                                   <CTableHeaderCell style={{width: '100px'}}>Активность</CTableHeaderCell>
-                                  {/* <CTableHeaderCell>Управление</CTableHeaderCell> */}
                                 </CTableRow>
                               </CTableHead>
                               <CTableBody>
@@ -317,8 +316,6 @@ const Admin = () => {
                                     <CTableDataCell>
                                       <div>{item.user.name}</div>
                                       <div className="small text-medium-emphasis">
-                                        {/* <span>{item.user.new ? 'Новый' : 'Recurring'}</span> | Регистрация:{' '}
-                                        {item.user.registered} */}
                                       </div>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
@@ -348,15 +345,6 @@ const Admin = () => {
                                       <div className="small text-medium-emphasis">Последний вход</div>
                                       <strong>{item.activity}</strong>
                                     </CTableDataCell>
-                                    {/* <CTableDataCell>
-                                      <CButton color="light">
-                                        <img src={pencilIcon} alt='' width='15px'/>
-                                      </CButton>
-                                      &nbsp;
-                                      <CButton color="light">
-                                        <img src={deleteIcon} alt='' width='10px' />
-                                      </CButton>
-                                    </CTableDataCell> */}
                                   </CTableRow>
                                 ))}
                               </CTableBody>
@@ -366,14 +354,11 @@ const Admin = () => {
                         </CCard>
                       </CCol>
                     </CRow>
-                  </CCardBody>
+                  </CCardBody> */}
 {/*-------------------------------------------------------------------------------------------  */}
-                  <CCardBody id="Workhub" style={{display: showWorkhub ? 'block' : 'none'}}>
-                    {/* <CCardTitle>Workhub</CCardTitle> */}
+                  {/* <CCardBody id="Workhub" style={{display: showWorkhub ? 'block' : 'none'}}>
                     <CRow>
                       <CCol xs>
-                        {/* <CCard className="mb-4">
-                          <CCardBody> */}
                             <CRow>
                               <CCol xs={12} md={6} xl={6}>
                                 <CRow>
@@ -432,20 +417,13 @@ const Admin = () => {
                             <br/>
                             <CRow>
                               <CCol>
-                                {/* <CButtonGroup role="group" aria-label="Basic outlined example">
-                                  <CButton color="light" variant="outline">Сутки</CButton>
-                                  <CButton color="light" variant="outline">Неделя</CButton>
-                                  <CButton color="light" variant="outline">Месяц</CButton>
-                                  <CButton color="light" variant="outline">Год</CButton>
-                                </CButtonGroup> */}
                               </CCol>
                             </CRow>
-                          {/* </CCardBody>
-                        </CCard> */}
                       </CCol>
                     </CRow>
-                  </CCardBody>
-                </CCard>
+                  </CCardBody> */}
+                {/* </CCard> */}
+                
                 </>
 
                 </Suspense>
