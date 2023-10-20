@@ -33,6 +33,17 @@ import {
   cilPeople,
 } from '@coreui/icons'
 
+import {
+  CDropdown,
+  CDropdownMenu,
+  CDropdownItem,
+  CDropdownToggle,
+  CWidgetStatsA,
+} from '@coreui/react'
+import { getStyle } from '@coreui/utils'
+import { CChartBar, CChartLine } from '@coreui/react-chartjs'
+import { cilArrowBottom, cilOptions } from '@coreui/icons'
+
 import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
@@ -70,6 +81,8 @@ const Admin = () => {
   const [activeKey, setActiveKey] = useState(1)
   const [showWidget1, setShowWidget1] = useState(true)
   const [showWidget2, setShowWidget2] = useState(false)
+
+  const [showCharts, setShowCharts]= useState(false);
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
@@ -201,6 +214,10 @@ const Admin = () => {
     }
   }
 
+  const showBlock = () => {
+    showCharts ? setShowCharts(false) : setShowCharts(true)
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -223,7 +240,74 @@ const Admin = () => {
                   projects={projects.length} 
                   companys={comps.length} 
                 />}
-                
+
+{showCharts ? <CWidgetStatsA
+                  className="mb-4"
+                  color="primary"
+                  value={<></>}
+                  title=""
+                  action={<></>}
+                  chart={
+                    <CChartLine
+                    className="mt-3 mx-3"
+                    style={{ height: '550px' }}
+                    data={{
+                      labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
+                      datasets: [
+                        {
+                          label: 'My First dataset',
+                          backgroundColor: 'transparent',
+                          borderColor: 'rgba(255,255,255,.55)',
+                          pointBackgroundColor: getStyle('--cui-primary'),
+                          data: [65, 59, 84, 84, 51, 55, 40],
+                        },
+                      ],
+                    }}
+                    options={{
+                      plugins: {
+                        legend: {
+                          display: false,
+                        },
+                      },
+                      maintainAspectRatio: false,
+                      scales: {
+                        x: {
+                          grid: {
+                            display: false,
+                            drawBorder: false,
+                          },
+                          ticks: {
+                            display: true,
+                          },
+                        },
+                        y: {
+                          min: 10,
+                          max: 99,
+                          display: true,
+                          grid: {
+                            display: false,
+                          },
+                          ticks: {
+                            display: true,
+                          },
+                        },
+                      },
+                      elements: {
+                        line: {
+                          borderWidth: 1,
+                          tension: 0.4,
+                        },
+                        point: {
+                          radius: 4,
+                          hitRadius: 10,
+                          hoverRadius: 4,
+                        },
+                      },
+                    }}
+                  />             
+                  }
+                />
+ : ''}               
                 {/* Вкладки */}
                 <CNav variant="tabs" className='dark-theme'>
                       <CNavItem>
@@ -419,10 +503,10 @@ const Admin = () => {
 
                             <CRow>
                               <CCol md={6} style={{textAlign: 'center'}}>
-                                <CButton color="dark" style={{marginRight: '20px', width: '120px'}}>Сутки</CButton>
-                                <CButton color="dark" style={{marginRight: '20px', width: '120px'}}>Неделя</CButton>
-                                <CButton color="dark" style={{marginRight: '20px', width: '120px'}}>Месяц</CButton>
-                                <CButton color="dark" style={{marginRight: '20px', width: '120px'}}>Год</CButton>
+                                <CButton color="dark" onClick={showBlock} style={{marginRight: '20px', width: '120px'}}>Сутки</CButton>
+                                <CButton color="dark" onClick={showBlock} style={{marginRight: '20px', width: '120px'}}>Неделя</CButton>
+                                <CButton color="dark" onClick={showBlock} style={{marginRight: '20px', width: '120px'}}>Месяц</CButton>
+                                <CButton color="dark" onClick={showBlock} style={{marginRight: '20px', width: '120px'}}>Год</CButton>
                               </CCol>
                               <CCol md={6} style={{textAlign: 'center', display: 'flex'}}>
                                 {/* <CFormInput type="text" placeholder="01.01.2000" aria-label="sm input example" style={{marginLeft: '10px'}}>
@@ -453,7 +537,7 @@ const Admin = () => {
                                                   />}
                                 </InputMask>                             
                                             
-                                <CButton color="dark" style={{marginLeft: '10px'}}>Применить</CButton>
+                                <CButton color="dark" onClick={showBlock} style={{marginLeft: '10px'}}>Применить</CButton>
                               </CCol>
                               
                             </CRow>
