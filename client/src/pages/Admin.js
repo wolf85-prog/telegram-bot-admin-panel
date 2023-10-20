@@ -68,12 +68,14 @@ const Admin = () => {
   const { managers: zakazchiki } = useUsersContext();
   const { projects: projs } = useUsersContext();
   const { companys: comps } = useUsersContext();
+  const { userWorkers: workers } = useUsersContext();
 
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]);
   const [newClients, setNewClients]= useState([]);
   const [oldClients, setOldClients]= useState([]);
   const [loading, setLoading]= useState(true);
+  const [loading2, setLoading2]= useState(true);
 
   const [showRenthub, setShowRenthub]= useState(true);
   const [showWorkhub, setShowWorkhub]= useState(false);
@@ -95,9 +97,11 @@ const Admin = () => {
     const fetchData = async() => {
 
       //let companys = await getCompanys()
-      console.log("companys (admin): ", comps)
-      console.log("clients (admin): ", clients)
-      console.log("managers (admin): ", zakazchiki)
+      // console.log("companys (admin): ", comps)
+      // console.log("clients (admin): ", clients)
+      // console.log("managers (admin): ", zakazchiki)
+
+      console.log("workers (admin): ", workers)
 
       let messages = await getAllMessages()
       console.log("messages: ", messages)
@@ -236,9 +240,9 @@ const Admin = () => {
                   companys={comps.length} 
                 />
                 :<WidgetsDropdown2
-                  users={clients.length-1} 
-                  projects={projects.length} 
-                  companys={comps.length} 
+                  users={workers.length}
+                  projects={0} 
+                  companys={0} 
                 />}
 
 {showCharts ? <CWidgetStatsA
@@ -522,7 +526,7 @@ const Admin = () => {
                                 <InputMask mask="99.99.9999">
                                   {(inputProps) => <CFormInput 
                                                     {...inputProps} 
-                                                    placeholder="01.01.2000" 
+                                                    placeholder="31.12.2000" 
                                                     disableUnderline
                                                     aria-label="sm input example"
                                                     style={{marginLeft: '10px'}}
@@ -538,6 +542,10 @@ const Admin = () => {
                             
                             <CRow>
                               <CCol>
+                              {loading2 ? 
+                                      
+                                <CSpinner/> :
+
                                 <CTable align="middle" className="mb-0 border" hover responsive>
                                   <CTableHead className='table-light'>
                                     <CTableRow>
@@ -552,7 +560,8 @@ const Admin = () => {
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>
-                                    <CTableRow v-for="item in tableItems">
+                                  {workers.map((item, index) => (
+                                    <CTableRow v-for="item in tableItems" key={index}>
                                       <CTableDataCell className="text-center">
                                         12.01.2000
                                       </CTableDataCell>
@@ -580,35 +589,10 @@ const Admin = () => {
                                         <div>Ник</div>
                                       </CTableDataCell> 
                                     </CTableRow>
-
-                                    <CTableRow v-for="item in tableItems">
-                                      <CTableDataCell className="text-center">
-                                        12.01.2000
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        12:00
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                          Иванов  Иван Иванович
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <div>Москва</div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        -
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <div>12.03.1990</div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <div>8 (900) 122-12-12</div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <div>Ник</div>
-                                      </CTableDataCell>
-                                    </CTableRow>
+                                  ))}
                                 </CTableBody>
                               </CTable>
+                            }
                               </CCol>
                             </CRow>
                       </CCol>
