@@ -102,6 +102,7 @@ const Admin = () => {
       // console.log("managers (admin): ", zakazchiki)
 
       console.log("workers (admin): ", workers)
+      setLoading2(false)
 
       let messages = await getAllMessages()
       console.log("messages: ", messages)
@@ -172,7 +173,7 @@ const Admin = () => {
     
     fetchData();
     
-  }, [clients]);
+  }, [clients, workers]);
 //---------------------------------------------------------------------------------------------
 //get Projects
   useEffect(() => {
@@ -315,10 +316,20 @@ const Admin = () => {
                 {/* Вкладки */}
                 <CNav variant="tabs" className='dark-theme'>
                       <CNavItem>
-                        <CNavLink style={{background: activeKey !== 1 ? '#08080869' : ''}} onClick={() => openHub('Renthub')} active={activeKey === 1}>Renthub</CNavLink>
+                        <CNavLink 
+                          style={{background: activeKey !== 1 ? '#08080869' : '', cursor: 'pointer'}} 
+                          onClick={() => openHub('Renthub')} 
+                          active={activeKey === 1}>
+                            Renthub
+                        </CNavLink>
                       </CNavItem>
                       <CNavItem>
-                        <CNavLink style={{background: activeKey !== 2 ? '#08080869' : ''}} onClick={() => openHub('Workhub')} active={activeKey === 2}>Workhub</CNavLink>
+                        <CNavLink 
+                          style={{background: activeKey !== 2 ? '#08080869' : '', cursor: 'pointer'}} 
+                          onClick={() => openHub('Workhub')} 
+                          active={activeKey === 2}>
+                            Workhub
+                        </CNavLink>
                       </CNavItem>
                 </CNav>
                 
@@ -541,7 +552,7 @@ const Admin = () => {
                             <br/>
                             
                             <CRow>
-                              <CCol>
+                              <CCol style={{textAlign: 'center'}}>
                               {loading2 ? 
                                       
                                 <CSpinner/> :
@@ -563,16 +574,16 @@ const Admin = () => {
                                   {workers.map((item, index) => (
                                     <CTableRow v-for="item in tableItems" key={index}>
                                       <CTableDataCell className="text-center">
-                                        12.01.2000
+                                        {item.date.split('T')[0]}
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        12:00
+                                        {item.date.split('T')[1]}
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                          Иванов  Иван Иванович
+                                          {item.name}
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <div>Москва</div>
+                                        {item.city}
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         <div>Повар <br/>
