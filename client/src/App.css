@@ -182,12 +182,13 @@
     --cui-danger: #c77171;
     --cui-light: hsla(0,0%,100%,.1);
     --cui-dark: rgba(0,0,21,.1);
-    --cui-primary-rgb: 133,125,204;
+    /* --cui-primary-rgb: 133,125,204; */
+    --cui-primary-rgb: 75, 0, 130;
     --cui-secondary-rgb: 167,167,167;
     --cui-success-rgb: 81,150,104;
-    --cui-info-rgb: 82,153,224;
-    --cui-warning-rgb: 213,164,57;
-    --cui-danger-rgb: 199,113,113;
+    --cui-info-rgb: 30, 144, 255;
+    --cui-warning-rgb: 218, 165, 32;
+    --cui-danger-rgb: 100, 0, 0;
     --cui-light-rgb: 255,255,255;
     --cui-dark-rgb: 0,0,21;
     --cui-body-color-rgb: 255,255,255;
