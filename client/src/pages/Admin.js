@@ -509,14 +509,6 @@ const Admin = () => {
                                 <CButton color="dark" onClick={showBlock} style={{marginRight: '20px', width: '120px'}}>Год</CButton>
                               </CCol>
                               <CCol md={6} style={{textAlign: 'center', display: 'flex'}}>
-                                {/* <CFormInput type="text" placeholder="01.01.2000" aria-label="sm input example" style={{marginLeft: '10px'}}>
-                                  <InputMask
-                                      mask="99.99.2099"
-                                      disabled={false}
-                                      maskChar=""
-                                  />  
-                                </CFormInput> */}
-
                                 <InputMask mask="99.99.9999">
                                   {(inputProps) => <CFormInput 
                                                     {...inputProps} 
