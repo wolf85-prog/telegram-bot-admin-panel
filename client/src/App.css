@@ -309,3 +309,12 @@
 	border: 1px solid #283035;
     background-color: #1f272c;
 }
+
+.box {
+    animation: 5s show ease;
+  }
+  
+  @keyframes show {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }

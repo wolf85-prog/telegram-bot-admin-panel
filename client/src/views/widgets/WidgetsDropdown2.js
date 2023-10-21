@@ -13,7 +13,7 @@ import { CChartBar, CChartLine } from '@coreui/react-chartjs'
 import CIcon from '@coreui/icons-react'
 import { cilArrowBottom, cilOptions } from '@coreui/icons'
 
-const WidgetsDropdown2 = ({users, projects, companys}) => {
+const WidgetsDropdown2 = ({users, newUsers, activeUsers, delUsers}) => {
   return (
     <CRow>
       <CCol sm={6} lg={3}>
@@ -108,7 +108,7 @@ const WidgetsDropdown2 = ({users, projects, companys}) => {
           color="info"
           value={
             <>
-              {projects} 
+              {newUsers} 
               {/* <span className="fs-6 fw-normal">
                 (40.9% <CIcon icon={cilArrowTop} />)
               </span> */}
@@ -193,7 +193,7 @@ const WidgetsDropdown2 = ({users, projects, companys}) => {
           color="warning"
           value={
             <>
-              {companys}{' '}
+              {activeUsers}{' '}
               {/* <span className="fs-6 fw-normal">
                 (84.7% <CIcon icon={cilArrowTop} />)
               </span> */}
@@ -265,7 +265,7 @@ const WidgetsDropdown2 = ({users, projects, companys}) => {
           color="danger"
           value={
             <>
-              44{' '}
+              {delUsers}
             </>
           }
           title="Удаленные"

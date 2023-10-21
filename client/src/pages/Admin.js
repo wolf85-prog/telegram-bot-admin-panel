@@ -103,11 +103,11 @@ const Admin = () => {
       // console.log("managers (admin): ", zakazchiki)
 
       console.log("workers (admin): ", workers)
-      console.log("workersbot (admin): ", specusers)
+      console.log("workersbot (admin): ", specusers.find((user) => user.chatId === '805436270').username)
       setLoading2(false)
 
       let messages = await getAllMessages()
-      console.log("messages: ", messages)
+      //console.log("messages: ", messages)
 
       clients.map((client, index) => {
         
@@ -244,12 +244,13 @@ const Admin = () => {
                 />
                 :<WidgetsDropdown2
                   users={workers.length}
-                  projects={0} 
-                  companys={0} 
+                  newUsers={0} 
+                  activeUsers={0} 
+                  delUsers={0}
                 />}
 
 {showCharts ? <CWidgetStatsA
-                  className="mb-4"
+                  className="mb-4 box"
                   color="primary"
                   value={<></>}
                   title=""
@@ -475,7 +476,7 @@ const Admin = () => {
                                       </div>
                                       <div className='py-1 px-3 mb-3' style={{textAlign: 'right'}}>
                                         <div className="text-medium-emphasis small">Звук</div>
-                                        <div className="fs-5 fw-semibold">23</div>
+                                        <div className="fs-5 fw-semibold">0</div>
                                       </div> 
                                     </div>   
                                   </CCol>
@@ -483,7 +484,7 @@ const Admin = () => {
                                     <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                                       <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
                                         <div className="text-medium-emphasis small">Свет</div>
-                                        <div className="fs-5 fw-semibold">11</div>
+                                        <div className="fs-5 fw-semibold">0</div>
                                       </div>
                                       <img src={Light} alt='' style={{marginBottom: '15px'}} />
                                     </div>   
@@ -497,7 +498,7 @@ const Admin = () => {
                                     <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                                       <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
                                         <div className="text-medium-emphasis small">Видео</div>
-                                        <div className="fs-5 fw-semibold">65</div>
+                                        <div className="fs-5 fw-semibold">0</div>
                                       </div>
                                       <img src={Video} alt='' style={{marginBottom: '15px'}} />
                                     </div>   
@@ -506,7 +507,7 @@ const Admin = () => {
                                     <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                                       <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3"> 
                                         <div className="text-medium-emphasis small">Хелперы</div>
-                                        <div className="fs-5 fw-semibold">23</div>
+                                        <div className="fs-5 fw-semibold">0</div>
                                       </div>
                                       <img src={Stagehands} alt='' style={{marginBottom: '15px'}} />
                                     </div>   
@@ -576,30 +577,30 @@ const Admin = () => {
                                   {workers.map((item, index) => (
                                     <CTableRow v-for="item in tableItems" key={index}>
                                       <CTableDataCell className="text-center">
-                                        {item.date.split('T')[0]}
+                                        {/* {item.date.split('T')[0]} */}
+                                        {item.createDate.split('T')[0].split('-')[2]+ "."+ item.createDate.split('T')[0].split('-')[1] + "." +item.createDate.split('T')[0].split('-')[0]}
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        {item.date.split('T')[1]}
+                                        {/* {item.date.split('T')[1]} */}
+                                        {item.createDate.split('T')[1].split('Z')[0].slice(0, 5)}
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                          {item.name}
+                                          {item.userfamily +" "+ item.username}
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         {item.city}
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <div>Повар <br/>
-                                          Плотник <br/>
-                                          Охотник</div>
+                                        {(JSON.parse(item.worklist)).map(spec=>spec.spec).join(',')}
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        12.03.1990
+                                        {item.dateborn.includes('-') ? item.dateborn.split('-')[0] : item.dateborn}
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <div>8 (900) 122-12-12</div>
+                                        <div>{item.phone}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <div>Ник</div>
+                                        <div>{specusers.find((user) => user.chatId === item.chatId).username}</div>
                                       </CTableDataCell> 
                                     </CTableRow>
                                   ))}

@@ -60,7 +60,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			let response = await getContacts();
-			console.log("contacts size: ", response.length)
+			//console.log("contacts size: ", response.length)
 	
 			const arrayContact = []
 	
@@ -148,7 +148,7 @@ const UsersProvider = ({ children }) => {
 				})
 
 				setUsers(sortedClients)
-				console.log("contacts: ", arrayContact)
+				//console.log("contacts: ", arrayContact)
 				//setUsers(arrayContact)
 
 			}, 10000)
@@ -174,6 +174,7 @@ const UsersProvider = ({ children }) => {
 					stag: user.stag,
 					worklist:  user.worklist,
 					chatId: user.chatId,
+					createDate: user.createdAt,
 				}
 
 				arrayWorker.push(newWorker)
@@ -290,7 +291,7 @@ const UsersProvider = ({ children }) => {
 		fetchData();
 
 		//все специалисты
-		//fetchWorkerData();
+		fetchWorkerData();
 
 
 		//все сообщения специалистов
@@ -303,7 +304,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
     	const fetchData = async () => {
 			let response = await getManagers();
-      		console.log("managers: ", response.length)
+      		//console.log("managers: ", response.length)
 
 			setManagers(response)
 		}
@@ -317,7 +318,7 @@ const UsersProvider = ({ children }) => {
   	useEffect(() => {
     	const fetchData = async () => {
 			let response = await getDistributions();
-      		console.log("distribution: ", response.length)
+      		//console.log("distribution: ", response.length)
 
 			setDistributions(response)
 		}
@@ -331,10 +332,10 @@ const UsersProvider = ({ children }) => {
   	useEffect(() => {
     	const fetchData = async () => {
 			let response = await getDistributionsW();
-      		console.log("distributionW: ", response.length)
+      		//console.log("distributionW: ", response.length)
 
 			let response2 = await getDistributionsWPlan();
-      		console.log("distributionWPlan: ", response2.length)
+      		//console.log("distributionWPlan: ", response2.length)
 
 			//сортировка
 			const messageSort = [...response].sort((a, b) => {       
@@ -361,7 +362,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
     	const fetchData = async () => {
 			let projects = await getProjectsApi();
-			console.log("projects size: ", projects.length)
+			//console.log("projects size: ", projects.length)
 
 			setProjects(projects)
 		}
@@ -375,7 +376,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
     	const fetchData = async () => {
 			let companys = await getCompanys();
-			console.log("companys size: ", companys.length)
+			//console.log("companys size: ", companys.length)
 
 			setCompanys(companys)
 		}
@@ -388,7 +389,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(()=>{
 		socket.emit("addUser", chatAdminId)
 		socket.on("getUsers", users => {
-			console.log("users socket: ", users);
+			//console.log("users socket: ", users);
 			setUsersOnline(users)
 		})
 		
@@ -429,12 +430,12 @@ const UsersProvider = ({ children }) => {
 
 	//получить сообщение из телеграмма
 	const fetchMessageResponse = async(data) => {
-		console.log("date: ", data)
+		//console.log("date: ", data)
 		setCount(count+1);
 		setCountMessage(countMessage + 1)
 
 		if (data.text.startsWith('Предварительная смета одобрена!')) {
-			console.log("Предварительная смета одобрена!")
+			//console.log("Предварительная смета одобрена!")
 			//play sound
 			audioSmeta.play(); 
 		} else if (data.text.startsWith('Проект успешно создан') && !data.text.includes('_reply_')) {
@@ -446,7 +447,7 @@ const UsersProvider = ({ children }) => {
 			
 			//get all projects
 			let projects = await getProjectsApi();
-			console.log("projects get socket: ", projects.length)
+			//console.log("projects get socket: ", projects.length)
 			setProjects(projects)
 		}
 		else {
@@ -461,7 +462,7 @@ const UsersProvider = ({ children }) => {
 			let userIndex = users.findIndex((user) => user.chatId === senderId.toString());
 			const usersCopy = JSON.parse(JSON.stringify(users));			
 
-			console.log("userIndex: ", userIndex)
+			//console.log("userIndex: ", userIndex)
 			if (userIndex === -1) {
 				const newUser = {
 					id: usersCopy.length,
@@ -477,11 +478,11 @@ const UsersProvider = ({ children }) => {
 					messages: {}, 
 				}	
 				usersCopy.push(newUser)
-				console.log("usersCopy: ", usersCopy)
+				//console.log("usersCopy: ", usersCopy)
 
 				userIndex = usersCopy.length-1; //usersCopy.findIndex((user) => user.chatId === senderId.toString());
 
-				console.log("userIndex new: ", userIndex)
+				//console.log("userIndex new: ", userIndex)
 			}		
 			
 		//-----------------------------------------------------------------------------------------------			
@@ -503,7 +504,7 @@ const UsersProvider = ({ children }) => {
 			if (usersCopy[userIndex].messages[currentDate]) {
 				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 			} else {
-				console.log("add current date")
+				//console.log("add current date")
 				usersCopy[userIndex].messages[currentDate] = [];
 				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 			}
@@ -564,7 +565,7 @@ const UsersProvider = ({ children }) => {
 				return dateB-dateA  //сортировка по убывающей дате  
 			})
 
-			console.log(userSort)
+			//console.log(userSort)
 
 			return userSort;
 		});
@@ -696,13 +697,13 @@ const UsersProvider = ({ children }) => {
 //получить сообщение из телеграмма WorkersBot
 const fetchMessageSpecResponse = async(data) => {
 	//audio.play();
-	console.log("date: ", data)
+	//console.log("date: ", data)
 	//console.log("Пришло новое сообщение в workhub: ", count+1)
 	//setCount(count+1);
 	setCountMessageWork(countMessageWork + 1)
 
 	if (data.text.startsWith('Специалист успешно добавлен!') && !data.text.includes('_reply_')) {
-		console.log("Пришел новый специаилст: ")
+		//console.log("Пришел новый специаилст: ")
 		//audioProject.play();
 		//пришел новый специалист
 		//setNewProject(true)
@@ -739,11 +740,11 @@ const fetchMessageSpecResponse = async(data) => {
 				messages: {}, 
 			}	
 			usersCopy.push(newUser)
-			console.log("usersCopy: ", usersCopy)
+			//console.log("usersCopy: ", usersCopy)
 
 			userIndex = usersCopy.length-1; //usersCopy.findIndex((user) => user.chatId === senderId.toString());
 
-			console.log("userIndex new: ", userIndex)
+			//("userIndex new: ", userIndex)
 		}
 		
 		const newMsgObject = {
@@ -820,7 +821,7 @@ const fetchAdminSpec = (data) => {
 			return dateB-dateA  //сортировка по убывающей дате  
 		})
 
-		console.log(userSort)
+		//console.log(userSort)
 
 		return userSort;
 	});
