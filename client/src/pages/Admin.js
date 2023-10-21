@@ -282,7 +282,7 @@ const Admin = () => {
                         x: {
                           grid: {
                             display: false,
-                            drawBorder: false,
+                            drawBorder: true,
                           },
                           ticks: {
                             display: true,
@@ -291,12 +291,12 @@ const Admin = () => {
                         y: {
                           min: 10,
                           max: 99,
-                          display: true,
+                          display: false,
                           grid: {
                             display: false,
                           },
                           ticks: {
-                            display: true,
+                            display: false,
                           },
                         },
                       },
@@ -530,7 +530,7 @@ const Admin = () => {
                                 <InputMask mask="99.99.9999">
                                   {(inputProps) => <CFormInput 
                                                     {...inputProps} 
-                                                    placeholder="01.01.2000" 
+                                                    placeholder="01.01.2022" 
                                                     disableUnderline
                                                     aria-label="sm input example"
                                                     style={{marginLeft: '10px'}}
@@ -540,7 +540,7 @@ const Admin = () => {
                                 <InputMask mask="99.99.9999">
                                   {(inputProps) => <CFormInput 
                                                     {...inputProps} 
-                                                    placeholder="31.12.2000" 
+                                                    placeholder="31.12.2022" 
                                                     disableUnderline
                                                     aria-label="sm input example"
                                                     style={{marginLeft: '10px'}}
