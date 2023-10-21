@@ -68,7 +68,8 @@ const Admin = () => {
   const { managers: zakazchiki } = useUsersContext();
   const { projects: projs } = useUsersContext();
   const { companys: comps } = useUsersContext();
-  const { userWorkers: workers } = useUsersContext();
+  const { userWorkers: specusers } = useUsersContext();
+  const { workers } = useUsersContext();
 
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]);
@@ -102,6 +103,7 @@ const Admin = () => {
       // console.log("managers (admin): ", zakazchiki)
 
       console.log("workers (admin): ", workers)
+      console.log("workersbot (admin): ", specusers)
       setLoading2(false)
 
       let messages = await getAllMessages()
