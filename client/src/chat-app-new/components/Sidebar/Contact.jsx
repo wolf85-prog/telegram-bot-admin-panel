@@ -69,7 +69,7 @@ const Contact = ({ contact }) => {
 					contact.avatar
 					? <img src={`${host}${contact.avatar}`} alt='' className="avatar-adm" />
 					: <img src={avatarDefault} alt='' className="avatar-adm" />
-				}
+				}				
 			</div>
 			<div className="sidebar-contact__content">
 				<div className="sidebar-contact__top-content">

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { CSpinner} from '@coreui/react'
 
 const Sidebar = () => {
-	const { userWorkers } = useUsersContext();
+	const { userWorkers, workers } = useUsersContext();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
@@ -19,7 +19,7 @@ const Sidebar = () => {
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		console.log("sidebar contacts: ", userWorkers)
+		console.log("sidebar workers: ", workers)
 		console.log("sidebar userWorkers: ", userWorkers.length)
 		//сортировка
 		const userSort = [...userWorkers].sort((a, b) => {       
@@ -32,7 +32,7 @@ const Sidebar = () => {
 			setLoading(false)
 		}
 		
-	},[userWorkers])
+	},[userWorkers, workers])
 
 	
 	useEffect(() => {
@@ -109,7 +109,7 @@ const Sidebar = () => {
 				contacts.map((contact) => (
 					contact.chatId !== chatAdminId &&
                     <>   
-						<Contact contact={contact} />
+						<Contact contact={contact} worker={workers.find((item)=> item.chatId === contact.chatId)} />
 					</>
 				))
 				}

@@ -1,21 +1,36 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Icon from "src/chat-app-new/components/Icon";
 import { Link } from "react-router-dom";
 import formatTime from "./../../../chat-app-new/utils/formatTime";
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider'
 import avatarDefault from "./../../../chat-app-new/assets/images/no-avatar.png";
+import avatarBlacklist from "./../../../chat-app-worker/assets/images/uncheck.png";
 
 import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 
-const Contact = ({ contact }) => {
-	
+const Contact = ({ contact, worker }) => {
+	//console.log("worker contact: ", worker)
 	const { setPersonW } = useContext(AccountContext);
 	const host = process.env.REACT_APP_API_URL
 	
 	//сделать пользователя непрочитанным
 	const { setUserWorkerAsUnread, setCountMessageWork } = useUsersContext();
 
-	//const status = usersOnline.find(item => item.userId == contact.chatId)
+	//const {status, setStatus} = useState({})
+	let status
+
+	useEffect(() => {
+		//console.log("use worker", worker)
+		if (worker) {
+			status = (JSON.parse(worker.worklist)).find(item => item.spec === 'Blacklist')
+			//const arr = JSON.parse(worker.worklist)
+			//console.log("!!!!!", (JSON.parse(worker.worklist)).findIndex(item => item.spec === 'Blacklist'))
+		}
+		else {
+			console.log("worker НЕТ")
+		}
+	},[worker])
+
 
 	//обработка нажатия на пользователя из списка
     const getUser = async () => {
@@ -58,20 +73,15 @@ const Contact = ({ contact }) => {
 			className="sidebar-contact"
 			onClick={() => getUser()}
 		>
-			{/* <div className="sidebar-contact__status-wrapper">
-				{status 
-				? <img
-					src={Status}
-					alt="status" 
-					className="status-adm"
-				/> 
-				: ''}
-			</div> */}
-			<div className="sidebar-contact__avatar-wrapper">
+			<div className="sidebar-contact__avatar-wrapper" style={{position: 'relative'}}>
 				{
 					contact.avatar
 					? <img src={`${contact.avatar}`} alt='' className="avatar-adm" />
 					: <img src={avatarDefault} alt='' className="avatar-adm" />
+				}
+				{
+				status ? <img src={avatarBlacklist} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
+				: ""
 				}
 			</div>
 			<div className="sidebar-contact__content">

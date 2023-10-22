@@ -86,6 +86,9 @@ const Admin = () => {
   const [showWidget2, setShowWidget2] = useState(false)
 
   const [showCharts, setShowCharts]= useState(false);
+  const [showCharts2, setShowCharts2]= useState(false);
+  const [showCharts3, setShowCharts3]= useState(false);
+  const [showCharts4, setShowCharts4]= useState(false);
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
@@ -221,8 +224,40 @@ const Admin = () => {
     }
   }
 
-  const showBlock = () => {
-    showCharts ? setShowCharts(false) : setShowCharts(true)
+  const showBlock = (ind) => {
+    switch (ind) {
+      case 1:{
+        setShowCharts(true)
+        setShowCharts2(false)
+        setShowCharts3(false)
+        setShowCharts4(false)
+        break;
+      }
+      case 2:{
+        setShowCharts(false)
+        setShowCharts2(true)
+        setShowCharts3(false)
+        setShowCharts4(false)
+        break;
+      }
+      case 3:{
+        setShowCharts(false)
+        setShowCharts2(false)
+        setShowCharts3(true)
+        setShowCharts4(false)
+        break;
+      }
+      case 4:{
+        setShowCharts(false)
+        setShowCharts2(false)
+        setShowCharts3(false)
+        setShowCharts4(true)
+        break;
+      }
+    }
+    //console.log("index: ", ind)
+    //showCharts ? setShowCharts(false) : setShowCharts(true)
+    //setShowCharts(true)
   }
 
   return (
@@ -248,8 +283,218 @@ const Admin = () => {
                   activeUsers={0} 
                   delUsers={0}
                 />}
+{/* График Сутки */}
+ {showCharts ?  <CWidgetStatsA
+                  className="mb-4 box"
+                  color="primary"
+                  value={<></>}
+                  title=""
+                  action={<></>}
+                  chart={
+                    <CChartLine
+                    className="mt-3 mx-3"
+                    style={{ height: '550px' }}
+                    data={{
+                      labels: Array(24).fill().map((e, i) => `${i}:00`),
+                      datasets: [
+                        {
+                          label: 'My First dataset',
+                          backgroundColor: 'transparent',
+                          borderColor: 'rgba(255,255,255,.55)',
+                          pointBackgroundColor: getStyle('--cui-primary'),
+                          data: [65, 59, 84, 84, 51, 55, 40],
+                        },
+                      ],
+                    }}
+                    options={{
+                      plugins: {
+                        legend: {
+                          display: false,
+                        },
+                      },
+                      maintainAspectRatio: false,
+                      scales: {
+                        x: {
+                          grid: {
+                            display: false,
+                            drawBorder: true,
+                          },
+                          ticks: {
+                            display: true,
+                          },
+                        },
+                        y: {
+                          min: 10,
+                          max: 99,
+                          display: false,
+                          grid: {
+                            display: false,
+                          },
+                          ticks: {
+                            display: false,
+                          },
+                        },
+                      },
+                      elements: {
+                        line: {
+                          borderWidth: 1,
+                          tension: 0.4,
+                        },
+                        point: {
+                          radius: 4,
+                          hitRadius: 10,
+                          hoverRadius: 4,
+                        },
+                      },
+                    }}
+                  />             
+                  }
+                />
+: ""
+}
 
-{showCharts ? <CWidgetStatsA
+{/* График Неделя */}
+{showCharts2 ?  <CWidgetStatsA
+                  className="mb-4 box"
+                  color="primary"
+                  value={<></>}
+                  title=""
+                  action={<></>}
+                  chart={
+                    <CChartLine
+                    className="mt-3 mx-3"
+                    style={{ height: '550px' }}
+                    data={{
+                      labels: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
+                      datasets: [
+                        {
+                          label: 'My First dataset',
+                          backgroundColor: 'transparent',
+                          borderColor: 'rgba(255,255,255,.55)',
+                          pointBackgroundColor: getStyle('--cui-primary'),
+                          data: [65, 59, 84, 84, 51, 55, 40],
+                        },
+                      ],
+                    }}
+                    options={{
+                      plugins: {
+                        legend: {
+                          display: false,
+                        },
+                      },
+                      maintainAspectRatio: false,
+                      scales: {
+                        x: {
+                          grid: {
+                            display: false,
+                            drawBorder: true,
+                          },
+                          ticks: {
+                            display: true,
+                          },
+                        },
+                        y: {
+                          min: 10,
+                          max: 99,
+                          display: false,
+                          grid: {
+                            display: false,
+                          },
+                          ticks: {
+                            display: false,
+                          },
+                        },
+                      },
+                      elements: {
+                        line: {
+                          borderWidth: 1,
+                          tension: 0.4,
+                        },
+                        point: {
+                          radius: 4,
+                          hitRadius: 10,
+                          hoverRadius: 4,
+                        },
+                      },
+                    }}
+                  />             
+                  }
+                />
+: ""
+}
+
+{/* График Месяц */}
+{showCharts3 ?  <CWidgetStatsA
+                  className="mb-4 box"
+                  color="primary"
+                  value={<></>}
+                  title=""
+                  action={<></>}
+                  chart={
+                    <CChartLine
+                    className="mt-3 mx-3"
+                    style={{ height: '550px' }}
+                    data={{
+                      labels: Array(30).fill().map((e, i) => i + 1),
+                      datasets: [
+                        {
+                          label: 'My First dataset',
+                          backgroundColor: 'transparent',
+                          borderColor: 'rgba(255,255,255,.55)',
+                          pointBackgroundColor: getStyle('--cui-primary'),
+                          data: [65, 59, 84, 84, 51, 55, 40],
+                        },
+                      ],
+                    }}
+                    options={{
+                      plugins: {
+                        legend: {
+                          display: false,
+                        },
+                      },
+                      maintainAspectRatio: false,
+                      scales: {
+                        x: {
+                          grid: {
+                            display: false,
+                            drawBorder: true,
+                          },
+                          ticks: {
+                            display: true,
+                          },
+                        },
+                        y: {
+                          min: 10,
+                          max: 99,
+                          display: false,
+                          grid: {
+                            display: false,
+                          },
+                          ticks: {
+                            display: false,
+                          },
+                        },
+                      },
+                      elements: {
+                        line: {
+                          borderWidth: 1,
+                          tension: 0.4,
+                        },
+                        point: {
+                          radius: 4,
+                          hitRadius: 10,
+                          hoverRadius: 4,
+                        },
+                      },
+                    }}
+                  />             
+                  }
+                />
+: ""
+}
+
+{/* График Год */}
+{showCharts4 ?  <CWidgetStatsA
                   className="mb-4 box"
                   color="primary"
                   value={<></>}
@@ -315,7 +560,10 @@ const Admin = () => {
                   />             
                   }
                 />
- : ''}               
+: ""
+}
+
+
                 {/* Вкладки */}
                 <CNav variant="tabs" className='dark-theme'>
                       <CNavItem>
@@ -521,10 +769,10 @@ const Admin = () => {
 
                             <CRow>
                               <CCol md={6} style={{textAlign: 'center'}}>
-                                <CButton color="dark" onClick={showBlock} style={{marginRight: '20px', width: '120px'}}>Сутки</CButton>
-                                <CButton color="dark" onClick={showBlock} style={{marginRight: '20px', width: '120px'}}>Неделя</CButton>
-                                <CButton color="dark" onClick={showBlock} style={{marginRight: '20px', width: '120px'}}>Месяц</CButton>
-                                <CButton color="dark" onClick={showBlock} style={{marginRight: '20px', width: '120px'}}>Год</CButton>
+                                <CButton color="dark" onClick={()=>showBlock(1)} style={{marginRight: '20px', width: '120px'}}>Сутки</CButton>
+                                <CButton color="dark" onClick={()=>showBlock(2)} style={{marginRight: '20px', width: '120px'}}>Неделя</CButton>
+                                <CButton color="dark" onClick={()=>showBlock(3)} style={{marginRight: '20px', width: '120px'}}>Месяц</CButton>
+                                <CButton color="dark" onClick={()=>showBlock(4)} style={{marginRight: '20px', width: '120px'}}>Год</CButton>
                               </CCol>
                               <CCol md={6} style={{textAlign: 'center', display: 'flex'}}>
                                 <InputMask mask="99.99.9999">
@@ -613,7 +861,7 @@ const Admin = () => {
                     </CRow>
                   </CCardBody>
                 </CCard>
-                
+
                 </>
 
                 </Suspense>
