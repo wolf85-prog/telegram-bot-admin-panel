@@ -304,6 +304,14 @@ const Admin = () => {
                           pointBackgroundColor: getStyle('--cui-primary'),
                           data: [65, 59, 84, 84, 51, 55, 40],
                         },
+                        {
+                          label: "My Second dataset",
+                          backgroundColor: "rgba(151, 187, 205, 0.2)",
+                          borderColor: "rgba(255, 0, 0)",
+                          pointBackgroundColor: "rgba(151, 187, 205, 1)",
+                          pointBorderColor: "#fff",
+                          data: [50, 12, 28, 29, 7, 25, 12, 70, 60]
+                        },
                       ],
                     }}
                     options={{
@@ -374,6 +382,14 @@ const Admin = () => {
                           pointBackgroundColor: getStyle('--cui-primary'),
                           data: [65, 59, 84, 84, 51, 55, 40],
                         },
+                        {
+                          label: "My Second dataset",
+                          backgroundColor: "rgba(151, 187, 205, 0.2)",
+                          borderColor: "rgba(255, 0, 0)",
+                          pointBackgroundColor: "rgba(151, 187, 205, 1)",
+                          pointBorderColor: "#fff",
+                          data: [50, 12, 28, 29, 7, 25, 12, 70, 60]
+                        },
                       ],
                     }}
                     options={{
@@ -443,6 +459,14 @@ const Admin = () => {
                           borderColor: 'rgba(255,255,255,.55)',
                           pointBackgroundColor: getStyle('--cui-primary'),
                           data: [65, 59, 84, 84, 51, 55, 40],
+                        },
+                        {
+                          label: "My Second dataset",
+                          backgroundColor: "transparent",
+                          borderColor: "rgba(255, 0, 0)",
+                          pointBackgroundColor: "rgba(151, 187, 205, 1)",
+                          pointBorderColor: "#fff",
+                          data: [50, 12, 28, 29, 7, 25, 12, 70, 60]
                         },
                       ],
                     }}
