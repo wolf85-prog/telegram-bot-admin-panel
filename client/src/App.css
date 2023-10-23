@@ -320,3 +320,33 @@
     /* 0% {transform: translateY(-550px)}
     100% {transform: translateY(0)} */
 }
+
+
+
+/* chart */
+.wrapper-chart {
+    font-size: 14px;
+    font-family: Helvetica;
+    color: #666;
+    padding: 50px;
+  }
+  
+  .svg {
+    overflow: visible;
+  }
+  
+  .axis {
+    color: #ccd6eb;
+    & text {
+      color: #666;
+    }
+    & .domain {
+      display: none;
+    }
+    &.xAxis {
+      & line {
+        display: none;
+      }
+    }
+  }
+  

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   CRow,
   CCol,
@@ -13,7 +13,10 @@ import { CChartBar, CChartLine } from '@coreui/react-chartjs'
 import CIcon from '@coreui/icons-react'
 import { cilArrowBottom, cilOptions } from '@coreui/icons'
 
-const WidgetsDropdown2 = ({users, newUsers, activeUsers, delUsers}) => {
+import Sound from "./../../assets/images/spec/1_sound.svg";
+
+const WidgetsDropdown2 = ({users, newUsers, activeUsers, delUsers, soundUser, showSound}) => {
+
   return (
     <CRow>
       <CCol sm={6} lg={3}>
@@ -22,25 +25,19 @@ const WidgetsDropdown2 = ({users, newUsers, activeUsers, delUsers}) => {
           color="primary"
           value={
             <>
-              {users} {/*{' '}
+              {showSound ? soundUser : users} {/*{' '}
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
-          title="Всего"
+          title={showSound ? "Звук" : "Всего"}
           action={
-            <CDropdown alignment="end">
-              <CDropdownToggle color="transparent" caret={false} className="p-0">
-                <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
-              </CDropdownToggle>
-              <CDropdownMenu>
-                <CDropdownItem>Посмотреть</CDropdownItem>
-                <CDropdownItem>Обновить</CDropdownItem>
-                <CDropdownItem disabled>Другое</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-          }
+          <CDropdown alignment="end">
+            <CDropdownToggle color="transparent" caret={false} className="p-0">
+              <img src={Sound} alt=''/>
+            </CDropdownToggle>
+          </CDropdown>}
           chart={
             <CChartLine
               className="mt-3 mx-3"

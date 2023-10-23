@@ -30,7 +30,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import {
-  cilPeople,
+  cilPeople, cilX,
 } from '@coreui/icons'
 
 import {
@@ -84,8 +84,8 @@ const Admin = () => {
   const [showWorkhub, setShowWorkhub]= useState(true);
 
   const [activeKey, setActiveKey] = useState(2)
-  const [showWidget1, setShowWidget1] = useState(true)
-  const [showWidget2, setShowWidget2] = useState(false)
+  const [showWidget1, setShowWidget1] = useState(false)
+  const [showWidget2, setShowWidget2] = useState(true)
 
   const [showCharts, setShowCharts]= useState(false);
   const [showCharts2, setShowCharts2]= useState(false);
@@ -268,8 +268,44 @@ const Admin = () => {
     { name: 'Mar', value: 4 },
     { name: 'Apr', value: 28 },
     { name: 'May', value: 15 },
-];
+  ];
 
+  // const Chart = ({ data, width, height }) => {
+  //   const [activeIndex, setActiveIndex] = React.useState(null);
+    
+  // }
+
+  const [showSound, setShowSound] = useState(false)
+
+  var myFunc01 = function() {
+    
+  
+  }
+
+  useEffect(() => {
+    // while(true) {
+    //   setTimeout(()=> {
+    //     showSound ? setShowSound(false) : setShowSound(true)
+    //   }, 2000)
+    // } 
+    // var i = 0;
+    // while (i < 100) {
+    //   (function(i) {
+    //     setTimeout(function() {
+    //       showSound ? setShowSound(false) : setShowSound(true)
+    //     }, 10000 * i)
+    //   })(i++)
+    // }
+
+    var i = 0;
+    // store the interval id to clear in future
+    // var intr = setInterval(function() {
+    //   showSound ? setShowSound(false) : setShowSound(true)
+    //   // clear the interval if `i` reached 100
+    //   if (++i == 100) clearInterval(intr);
+    // }, 10000)
+  })
+  
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -281,17 +317,19 @@ const Admin = () => {
               <Suspense fallback={<CSpinner color="primary" />}>
 
                 <>
-                {showWidget1 
-                ?<WidgetsDropdown
-                  users={clients.length-1} 
-                  projects={projects.length} 
-                  companys={comps.length} 
-                />
-                :<WidgetsDropdown2
+                {showWidget2 
+                ?<WidgetsDropdown2
                   users={workers.length}
                   newUsers={0} 
                   activeUsers={0} 
                   delUsers={0}
+                  soundUser={1}
+                  showSound={showSound}
+                />
+                :<WidgetsDropdown
+                  users={clients.length-1} 
+                  projects={projects.length} 
+                  companys={comps.length} 
                 />}
 
 {/* <Chart data={data} width={600} height={300} />,  */}
@@ -302,73 +340,74 @@ const Admin = () => {
                   color="primary"
                   value={<></>}
                   title=""
-                  action={<></>}
+                  action={<><CIcon icon={cilX} className="text-high-emphasis-inverse" /></>}
                   chart={
-                    <CChartLine
-                    className="mt-3 mx-3"
-                    style={{ height: '550px' }}
-                    data={{
-                      labels: Array(24).fill().map((e, i) => `${i}:00`),
-                      datasets: [
-                        {
-                          label: 'My First dataset',
-                          backgroundColor: 'transparent',
-                          borderColor: 'rgba(255,255,255,.55)',
-                          pointBackgroundColor: getStyle('--cui-primary'),
-                          data: [65, 59, 84, 84, 51, 55, 40],
-                        },
-                        {
-                          label: "My Second dataset",
-                          backgroundColor: "rgba(151, 187, 205, 0.2)",
-                          borderColor: "rgba(255, 0, 0)",
-                          pointBackgroundColor: "rgba(151, 187, 205, 1)",
-                          pointBorderColor: "#fff",
-                          data: [50, 12, 28, 29, 7, 25, 12, 70, 60]
-                        },
-                      ],
-                    }}
-                    options={{
-                      plugins: {
-                        legend: {
-                          display: false,
-                        },
-                      },
-                      maintainAspectRatio: false,
-                      scales: {
-                        x: {
-                          grid: {
-                            display: false,
-                            drawBorder: true,
-                          },
-                          ticks: {
-                            display: true,
-                          },
-                        },
-                        y: {
-                          min: 10,
-                          max: 99,
-                          display: false,
-                          grid: {
-                            display: false,
-                          },
-                          ticks: {
-                            display: false,
-                          },
-                        },
-                      },
-                      elements: {
-                        line: {
-                          borderWidth: 1,
-                          tension: 0.4,
-                        },
-                        point: {
-                          radius: 4,
-                          hitRadius: 10,
-                          hoverRadius: 4,
-                        },
-                      },
-                    }}
-                  />             
+                    // <CChartLine
+                    //   className="mt-3 mx-3"
+                    //   style={{ height: '550px' }}
+                    //   data={{
+                    //     labels: Array(24).fill().map((e, i) => `${i}:00`),
+                    //     datasets: [
+                    //       {
+                    //         label: 'My First dataset',
+                    //         backgroundColor: 'transparent',
+                    //         borderColor: 'rgba(255,255,255,.55)',
+                    //         pointBackgroundColor: getStyle('--cui-primary'),
+                    //         data: [65, 59, 84, 84, 51, 55, 40],
+                    //       },
+                    //       {
+                    //         label: "My Second dataset",
+                    //         backgroundColor: "rgba(151, 187, 205, 0.2)",
+                    //         borderColor: "rgba(255, 0, 0)",
+                    //         pointBackgroundColor: "rgba(151, 187, 205, 1)",
+                    //         pointBorderColor: "#fff",
+                    //         data: [50, 12, 28, 29, 7, 25, 12, 70, 60]
+                    //       },
+                    //     ],
+                    //   }}
+                    //   options={{
+                    //     plugins: {
+                    //       legend: {
+                    //         display: false,
+                    //       },
+                    //     },
+                    //     maintainAspectRatio: false,
+                    //     scales: {
+                    //       x: {
+                    //         grid: {
+                    //           display: false,
+                    //           drawBorder: true,
+                    //         },
+                    //         ticks: {
+                    //           display: true,
+                    //         },
+                    //       },
+                    //       y: {
+                    //         min: 10,
+                    //         max: 99,
+                    //         display: false,
+                    //         grid: {
+                    //           display: false,
+                    //         },
+                    //         ticks: {
+                    //           display: false,
+                    //         },
+                    //       },
+                    //     },
+                    //     elements: {
+                    //       line: {
+                    //         borderWidth: 1,
+                    //         tension: 0.4,
+                    //       },
+                    //       point: {
+                    //         radius: 4,
+                    //         hitRadius: 10,
+                    //         hoverRadius: 4,
+                    //       },
+                    //     },
+                    //   }}
+                    // />             
+                    <Chart data={data} width={900} height={550} />
                   }
                 />
 : ""

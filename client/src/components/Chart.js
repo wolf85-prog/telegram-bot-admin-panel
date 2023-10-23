@@ -46,7 +46,7 @@ const Chart = ({ data, width, height }) => {
   };
   
   return (
-    <div className="wrapper">
+    <div className="wrapper-chart">
       <svg
         className="svg"
         width={width}
@@ -54,7 +54,10 @@ const Chart = ({ data, width, height }) => {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
-        <g className="axis" ref={getYAxis} />
+        {/* ось y */}
+        {/* <g className="axis" ref={getYAxis} /> */}
+
+        {/* ось x */}
         <g
           className="axis xAxis"
           ref={getXAxis}
@@ -63,7 +66,7 @@ const Chart = ({ data, width, height }) => {
         <path
           fill="#7cb5ec"
           d={areaPath}
-          opacity={0.2}
+          opacity={0}
         />
         <path
           strokeWidth={3}
