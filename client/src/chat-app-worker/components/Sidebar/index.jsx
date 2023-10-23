@@ -15,11 +15,12 @@ const Sidebar = () => {
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
 	const [loading, setLoading]= useState(true);
+	const [contreg, setContreg]= useState({spec: "", cat: ""});
 
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		console.log("sidebar workers: ", workers)
+		console.log("sidebar workers: ", workers.length)
 		console.log("sidebar userWorkers: ", userWorkers.length)
 		//сортировка
 		const userSort = [...userWorkers].sort((a, b) => {       
@@ -60,6 +61,10 @@ const Sidebar = () => {
 				break
 		  }
 	};
+
+	// const getNeedWorker = (contact) => {
+	// 	workers.find((item)=> item.chatId === contact.chatId)}
+	// };
 
 	return (
 		<aside className="sidebarB">
@@ -109,7 +114,7 @@ const Sidebar = () => {
 				contacts.map((contact) => (
 					contact.chatId !== chatAdminId &&
                     <>   
-						<Contact contact={contact} worker={workers.find((item)=> item.chatId === contact.chatId)} />
+						<Contact contact={contact} worker={workers.filter((item)=> item.chatId === contact.chatId)} />
 					</>
 				))
 				}

@@ -16,22 +16,6 @@ const Contact = ({ contact, worker }) => {
 	//сделать пользователя непрочитанным
 	const { setUserWorkerAsUnread, setCountMessageWork } = useUsersContext();
 
-	//const {status, setStatus} = useState({})
-	let status
-
-	useEffect(() => {
-		//console.log("use worker", worker)
-		if (worker) {
-			status = (JSON.parse(worker.worklist)).find(item => item.spec === 'Blacklist')
-			//const arr = JSON.parse(worker.worklist)
-			//console.log("!!!!!", (JSON.parse(worker.worklist)).findIndex(item => item.spec === 'Blacklist'))
-		}
-		else {
-			console.log("worker НЕТ")
-		}
-	},[worker])
-
-
 	//обработка нажатия на пользователя из списка
     const getUser = async () => {
         setPersonW({
@@ -80,13 +64,16 @@ const Contact = ({ contact, worker }) => {
 					: <img src={avatarDefault} alt='' className="avatar-adm" />
 				}
 				{
-				status ? <img src={avatarBlacklist} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
+				worker.length !== 0 ? 
+				((JSON.parse(worker[0].worklist)).findIndex(item => item.spec === 'Blacklist') === 0 ? 
+				<img src={avatarBlacklist} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
+				: "")
 				: ""
 				}
 			</div>
 			<div className="sidebar-contact__content">
 				<div className="sidebar-contact__top-content">
-					<h2 className="sidebar-contact__name"> {contact.name}</h2>
+					<h2 className="sidebar-contact__name">{contact.name}</h2>
 					<span className="sidebar-contact__time">
 						{lastMessage === ''  ? '' : formatTime(lastMessage.time)}
 					</span>
