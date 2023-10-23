@@ -62,6 +62,8 @@ import Stagehands from "./../assets/images/spec/7_stagehands.svg";
 
 import InputMask from 'react-input-mask';
 
+import Chart from './../components/Chart'
+
 const Admin = () => {
 
   const { users: clients } = useUsersContext();
@@ -78,10 +80,10 @@ const Admin = () => {
   const [loading, setLoading]= useState(true);
   const [loading2, setLoading2]= useState(true);
 
-  const [showRenthub, setShowRenthub]= useState(true);
-  const [showWorkhub, setShowWorkhub]= useState(false);
+  const [showRenthub, setShowRenthub]= useState(false);
+  const [showWorkhub, setShowWorkhub]= useState(true);
 
-  const [activeKey, setActiveKey] = useState(1)
+  const [activeKey, setActiveKey] = useState(2)
   const [showWidget1, setShowWidget1] = useState(true)
   const [showWidget2, setShowWidget2] = useState(false)
 
@@ -89,6 +91,8 @@ const Admin = () => {
   const [showCharts2, setShowCharts2]= useState(false);
   const [showCharts3, setShowCharts3]= useState(false);
   const [showCharts4, setShowCharts4]= useState(false);
+
+  const [activeIndex, setActiveIndex] = useState(null);
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
@@ -255,10 +259,16 @@ const Admin = () => {
         break;
       }
     }
-    //console.log("index: ", ind)
-    //showCharts ? setShowCharts(false) : setShowCharts(true)
-    //setShowCharts(true)
   }
+
+
+  const data = [
+    { name: 'Jan', value: 40 },
+    { name: 'Feb', value: 35 },
+    { name: 'Mar', value: 4 },
+    { name: 'Apr', value: 28 },
+    { name: 'May', value: 15 },
+];
 
   return (
     <div className='dark-theme'>
@@ -283,6 +293,9 @@ const Admin = () => {
                   activeUsers={0} 
                   delUsers={0}
                 />}
+
+{/* <Chart data={data} width={600} height={300} />,  */}
+
 {/* График Сутки */}
  {showCharts ?  <CWidgetStatsA
                   className="mb-4 box"
@@ -592,18 +605,18 @@ const Admin = () => {
                 <CNav variant="tabs" className='dark-theme'>
                       <CNavItem>
                         <CNavLink 
-                          style={{background: activeKey !== 1 ? '#08080869' : '', cursor: 'pointer'}} 
-                          onClick={() => openHub('Renthub')} 
-                          active={activeKey === 1}>
-                            Renthub
-                        </CNavLink>
-                      </CNavItem>
-                      <CNavItem>
-                        <CNavLink 
                           style={{background: activeKey !== 2 ? '#08080869' : '', cursor: 'pointer'}} 
                           onClick={() => openHub('Workhub')} 
                           active={activeKey === 2}>
                             Workhub
+                        </CNavLink>
+                      </CNavItem>
+                      <CNavItem>
+                        <CNavLink 
+                          style={{background: activeKey !== 1 ? '#08080869' : '', cursor: 'pointer'}} 
+                          onClick={() => openHub('Renthub')} 
+                          active={activeKey === 1}>
+                            Renthub
                         </CNavLink>
                       </CNavItem>
                 </CNav>
@@ -729,7 +742,7 @@ const Admin = () => {
                   <CCardBody id="Workhub" style={{display: showWorkhub ? 'block' : 'none'}}>
                     <CRow>
                       <CCol xs>
-                            <CRow>
+                            {/* <CRow>
                               <CCol xs={12} md={6} xl={6}>
                                 <CRow>
                                   <CCol sm={6}>
@@ -738,11 +751,6 @@ const Admin = () => {
                                         justifyContent: 'space-between', 
                                         alignItems: 'flex-start',   
                                       }}>
-                                      {/* <div className="border-start border-start-4 border-start-info py-1 px-3 mb-3">
-                                        <div className="text-medium-emphasis small">Звук</div>
-                                        <div className="fs-5 fw-semibold">15</div>
-                                      </div>
-                                      <img src={Sound} alt='' style={{marginBottom: '15px'}} /> */}
                                       <div className="border-start border-start-4 border-start-info"> 
                                         <img src={Sound} alt='' style={{marginTop: '7px', paddingBottom: '12px', marginLeft: '15px'}} />
                                       </div>
@@ -789,7 +797,7 @@ const Admin = () => {
                                 <div className="mb-5"></div>
 
                               </CCol>
-                            </CRow>
+                            </CRow> */}
 
                             <CRow>
                               <CCol md={6} style={{textAlign: 'center'}}>
