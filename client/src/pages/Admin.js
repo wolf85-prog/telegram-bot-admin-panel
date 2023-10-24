@@ -87,6 +87,7 @@ const Admin = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const [tabhub, setTabhub]= useState('');
+  const [showCategory, setShowCategory] = useState(false)
   const [showSound, setShowSound] = useState(false)
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
@@ -95,6 +96,13 @@ const Admin = () => {
   //set tab
   useEffect(() => {
     setTabhub('Workhub')
+  })
+
+  useEffect(() => {
+    // повторить с интервалом 2 секунды
+    setTimeout(function run() {
+      showSound ? setShowSound(false) : setShowSound(true)
+    }, 3000);
   })
 
   //get Contacts
@@ -237,7 +245,8 @@ const Admin = () => {
         setShowCharts3(false)
         setShowCharts4(false)
 
-        setShowSound(true) //показать категорию Звук
+        setShowCategory(true) //показать категорию
+
         break;
       }
       case 2:{
@@ -266,26 +275,18 @@ const Admin = () => {
 
 
   const data = [
-    { name: 'Jan', value: 40 },
-    { name: 'Feb', value: 35 },
-    { name: 'Mar', value: 4 },
-    { name: 'Apr', value: 28 },
-    { name: 'May', value: 15 },
+    { name: '0:00', value: 40 },
+    { name: '01:00', value: 35 },
+    { name: '02:00', value: 4 },
+    { name: '03:00', value: 28 },
+    { name: '04:00', value: 15 },
   ];
 
-  // const Chart = ({ data, width, height }) => {
-  //   const [activeIndex, setActiveIndex] = React.useState(null);
-    
-  // }
-
-
-
-  var myFunc01 = function() {
-    
-  
-  }
 
   useEffect(() => {
+    // повторить с интервалом 2 секунды
+    //let timerId = setInterval(() => showSound ? setShowSound(false) : setShowSound(true), 3000);
+
     // while(true) {
     //   setTimeout(()=> {
     //     showSound ? setShowSound(false) : setShowSound(true)
@@ -300,7 +301,7 @@ const Admin = () => {
     //   })(i++)
     // }
 
-    var i = 0;
+    //var i = 0;
     // store the interval id to clear in future
     // var intr = setInterval(function() {
     //   showSound ? setShowSound(false) : setShowSound(true)
@@ -311,7 +312,7 @@ const Admin = () => {
 
   const hideCharts = () => {
     setShowCharts(false)
-    setShowSound(false)
+    setShowCategory(false)
   }
   
   return (
@@ -331,7 +332,15 @@ const Admin = () => {
                   newUsers={0} 
                   activeUsers={0} 
                   delUsers={0}
-                  soundUser={1}
+                  soundUsers={1}
+                  lightUsers={1}
+                  videoUsers={1}
+                  stagehandsUsers={1}
+                  riggerUsers={2}
+                  stagegroundUsers={2}
+                  productionUsers={2}
+                  trucksUsers={2}
+                  showCategory={showCategory}
                   showSound={showSound}
                 />
                 :<WidgetsDropdown

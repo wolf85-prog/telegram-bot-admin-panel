@@ -14,16 +14,36 @@ import CIcon from '@coreui/icons-react'
 import { cilArrowBottom, cilOptions } from '@coreui/icons'
 
 import Sound from "./../../assets/images/spec/1_sound.png";
-import Riggers from "./../../assets/images/spec/2_riggers.svg";
-import Production from "./../../assets/images/spec/3_production.svg";
-import StageGround from "./../../assets/images/spec/4_stage_ground.svg";
-import Video from "./../../assets/images/spec/5_video.svg";
-import Light from "./../../assets/images/spec/6_light.svg";
-import Stagehands from "./../../assets/images/spec/7_stagehands.svg";
+import Riggers from "./../../assets/images/spec/2_riggers.png";
+import Production from "./../../assets/images/spec/3_production.png";
+import StageGround from "./../../assets/images/spec/4_stage_ground.png";
+import Video from "./../../assets/images/spec/5_video.png";
+import Light from "./../../assets/images/spec/6_light.png";
+import Stagehands from "./../../assets/images/spec/7_stagehands.png";
+import Trucks from "./../../assets/images/spec/8_trucks.png";
+import Catering from "./../../assets/images/spec/9_catering.png";
+import Photo from "./../../assets/images/spec/10_photo.png";
+import Party from "./../../assets/images/spec/11_party.png";
 
-const WidgetsDropdown2 = ({users, newUsers, activeUsers, delUsers, soundUser, showSound}) => {
-
-  console.log("showSound: ", showSound)
+const WidgetsDropdown2 = ({
+  users, 
+  newUsers, 
+  activeUsers, 
+  delUsers, 
+  showCategory,
+  showSound,
+  soundUsers, 
+  lightUsers, 
+  videoUsers, 
+  stagehandsUsers, 
+  riggerUsers,
+  productionUsers,
+  stagegroundUsers,
+  trucksUsers,
+  cateringUsers,
+  photoUsers,
+  partyUsers,
+}) => {
 
   return (
     <CRow>
@@ -33,14 +53,14 @@ const WidgetsDropdown2 = ({users, newUsers, activeUsers, delUsers, soundUser, sh
           color="primary"
           value={
             <>
-              {showSound ? soundUser : users} {/*{' '}
+              {showCategory ? (showSound ? soundUsers : riggerUsers) : users} {/*{' '}
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
-          title={showSound ? "Звук" : "Всего"}
-          action={showSound ? <img src={Sound} alt='' width={35}/> : ""}
+          title={showCategory ? (showSound ? "Звук" : "Риггер") : "Всего"}
+          action={showCategory ? <img src={showSound ? Sound : Riggers} alt='' width={35}/> : ""}
           chart={
             <CChartLine
               className="mt-3 mx-3"
@@ -108,25 +128,14 @@ const WidgetsDropdown2 = ({users, newUsers, activeUsers, delUsers, soundUser, sh
           color="info"
           value={
             <>
-              {newUsers} 
+              {showCategory ? lightUsers : newUsers} 
               {/* <span className="fs-6 fw-normal">
                 (40.9% <CIcon icon={cilArrowTop} />)
               </span> */}
             </>
           }
-          title="Новые"
-          action={
-            <CDropdown alignment="end">
-              <CDropdownToggle color="transparent" caret={false} className="p-0">
-                <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
-              </CDropdownToggle>
-              <CDropdownMenu>
-                <CDropdownItem>Посмотреть</CDropdownItem>
-                <CDropdownItem>Обновить</CDropdownItem>
-                <CDropdownItem disabled>Другое</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-          }
+          title={showCategory ? "Свет" : "Новые"}
+          action={showCategory ? <img src={Light} alt='' width={35}/> : ""}
           chart={
             <CChartLine
               className="mt-3 mx-3"
@@ -193,25 +202,14 @@ const WidgetsDropdown2 = ({users, newUsers, activeUsers, delUsers, soundUser, sh
           color="warning"
           value={
             <>
-              {activeUsers}{' '}
-              {/* <span className="fs-6 fw-normal">
-                (84.7% <CIcon icon={cilArrowTop} />)
+              {showCategory ? videoUsers : activeUsers} {/*{' '}
+               <span className="fs-6 fw-normal">
+                (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
-          title="Активные"
-          action={
-            <CDropdown alignment="end">
-              <CDropdownToggle color="transparent" caret={false} className="p-0">
-                <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
-              </CDropdownToggle>
-              <CDropdownMenu>
-                <CDropdownItem>Посмотреть</CDropdownItem>
-                <CDropdownItem>Обновить</CDropdownItem>
-                <CDropdownItem disabled>Другое</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-          }
+          title={showCategory ? "Видео" : "Активные"}
+          action={showCategory ? <img src={Video} alt='' width={35}/> : ""}
           chart={
             <CChartLine
               className="mt-3"
@@ -265,22 +263,11 @@ const WidgetsDropdown2 = ({users, newUsers, activeUsers, delUsers, soundUser, sh
           color="danger"
           value={
             <>
-              {delUsers}
+              {showCategory ? stagehandsUsers : delUsers}
             </>
           }
-          title="Удаленные"
-          action={
-            <CDropdown alignment="end">
-              <CDropdownToggle color="transparent" caret={false} className="p-0">
-                <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
-              </CDropdownToggle>
-              <CDropdownMenu>
-                <CDropdownItem>Посмотреть</CDropdownItem>
-                <CDropdownItem>Обновить</CDropdownItem>
-                <CDropdownItem disabled>Другое</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-          }
+          title={showCategory ? "Помощники" : "Удаленные"}
+          action={showCategory ? <img src={Stagehands} alt='' width={35}/> : ""}
           chart={
             <CChartBar
               className="mt-3 mx-3"
