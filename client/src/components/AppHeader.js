@@ -20,7 +20,7 @@ import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
 import logo from './../assets/brand/logo_04_light.png'
 
-const AppHeader = () => {
+const AppHeader = (props) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
@@ -82,7 +82,7 @@ const AppHeader = () => {
       </CContainer>
       <CHeaderDivider />
        <CContainer fluid>
-        <AppBreadcrumb />
+        <AppBreadcrumb tabs={props.tabs} />
       </CContainer>
     </CHeader>
   )

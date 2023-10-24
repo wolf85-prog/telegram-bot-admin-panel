@@ -94,6 +94,8 @@ const Admin = () => {
 
   const [activeIndex, setActiveIndex] = useState(null);
 
+  const [tabhub, setTabhub]= useState('');
+
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
   
@@ -110,7 +112,7 @@ const Admin = () => {
       // console.log("managers (admin): ", zakazchiki)
 
       console.log("workers (admin): ", workers)
-      console.log("workersbot (admin): ", specusers.find((user) => user.chatId === '805436270').username)
+      //console.log("workersbot (admin): ", specusers.find((user) => user.chatId === '805436270').username)
       setLoading2(false)
 
       let messages = await getAllMessages()
@@ -218,6 +220,7 @@ const Admin = () => {
       setActiveKey(2)
       setShowWidget1(false)
       setShowWidget2(true)
+      setTabhub('Workhub')
     }
     if (hub === 'Renthub') { 
       setShowWorkhub(false)
@@ -225,6 +228,7 @@ const Admin = () => {
       setActiveKey(1)
       setShowWidget1(true)
       setShowWidget2(false)
+      setTabhub('Renthub')
     }
   }
 
@@ -310,7 +314,7 @@ const Admin = () => {
     <div className='dark-theme'>
       <AppSidebar />
       <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
-        <AppHeader />
+        <AppHeader tabs={tabhub}/>
         <div className="body flex-grow-1 px-3">
 
             <CContainer lg>
@@ -910,7 +914,7 @@ const Admin = () => {
                                         {item.city}
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        {(JSON.parse(item.worklist)).map(spec=>spec.spec).join(',')}
+                                        {(JSON.parse(item.worklist)).map(spec=>spec.spec)}
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         {item.dateborn.includes('-') ? item.dateborn.split('-')[0] : item.dateborn}

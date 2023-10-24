@@ -5,7 +5,7 @@ import routes from '../routes'
 
 import { CBreadcrumb, CBreadcrumbItem } from '@coreui/react'
 
-const AppBreadcrumb = () => {
+const AppBreadcrumb = (props) => {
   const currentLocation = useLocation().pathname
 
   const getRouteName = (pathname, routes) => {
@@ -40,7 +40,7 @@ const AppBreadcrumb = () => {
             {...(breadcrumb.active ? { active: true } : { href: breadcrumb.pathname })}
             key={index}
           >
-            {breadcrumb.name}
+            {breadcrumb.name} {props.tabs}
           </CBreadcrumbItem>
         )
       })}
