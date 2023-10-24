@@ -914,7 +914,13 @@ const Admin = () => {
                                         {item.city}
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        {(JSON.parse(item.worklist)).map(spec=>spec.spec)}
+                                        <table>
+                                          {(JSON.parse(item.worklist)).map((spec, index)=>( 
+                                              <tr key={index}>
+                                                <td >{spec.spec}</td>
+                                              </tr>          
+                                          ))}
+                                        </table>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
                                         {item.dateborn.includes('-') ? item.dateborn.split('-')[0] : item.dateborn}
@@ -923,7 +929,7 @@ const Admin = () => {
                                         <div>{item.phone}</div>
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
-                                        <div>{specusers.find((user) => user.chatId === item.chatId).username}</div>
+                                        {/* <div>{specusers.find((user) => user.chatId === item.chatId).username}</div> */}
                                       </CTableDataCell> 
                                     </CTableRow>
                                   ))}
