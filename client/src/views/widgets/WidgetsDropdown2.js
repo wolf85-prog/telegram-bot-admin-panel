@@ -13,9 +13,17 @@ import { CChartBar, CChartLine } from '@coreui/react-chartjs'
 import CIcon from '@coreui/icons-react'
 import { cilArrowBottom, cilOptions } from '@coreui/icons'
 
-import Sound from "./../../assets/images/spec/1_sound.svg";
+import Sound from "./../../assets/images/spec/1_sound.png";
+import Riggers from "./../../assets/images/spec/2_riggers.svg";
+import Production from "./../../assets/images/spec/3_production.svg";
+import StageGround from "./../../assets/images/spec/4_stage_ground.svg";
+import Video from "./../../assets/images/spec/5_video.svg";
+import Light from "./../../assets/images/spec/6_light.svg";
+import Stagehands from "./../../assets/images/spec/7_stagehands.svg";
 
 const WidgetsDropdown2 = ({users, newUsers, activeUsers, delUsers, soundUser, showSound}) => {
+
+  console.log("showSound: ", showSound)
 
   return (
     <CRow>
@@ -32,12 +40,7 @@ const WidgetsDropdown2 = ({users, newUsers, activeUsers, delUsers, soundUser, sh
             </>
           }
           title={showSound ? "Звук" : "Всего"}
-          action={
-          <CDropdown alignment="end">
-            <CDropdownToggle color="transparent" caret={false} className="p-0">
-              <img src={Sound} alt=''/>
-            </CDropdownToggle>
-          </CDropdown>}
+          action={showSound ? <img src={Sound} alt='' width={35}/> : ""}
           chart={
             <CChartLine
               className="mt-3 mx-3"
