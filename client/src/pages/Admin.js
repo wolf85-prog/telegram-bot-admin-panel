@@ -92,6 +92,11 @@ const Admin = () => {
   const [showLight, setShowLight] = useState(false)
   const [showVideo, setShowVideo] = useState(false)
   const [showStagehands, setShowStagehands] = useState(false)
+  
+  const [showPhoto, setShowPhoto] = useState(true)
+  const [showCatering, setShowCatering] = useState(true)
+  const [showParty, setShowParty] = useState(true)
+  const [showGames, setShowGames] = useState(true)
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
@@ -108,7 +113,19 @@ const Admin = () => {
       showLight ? setShowLight(false) : setShowLight(true)
       showVideo ? setShowVideo(false) : setShowVideo(true)
       showStagehands ? setShowStagehands(false) : setShowStagehands(true)
-    }, 3000);
+
+      showPhoto ? setShowPhoto(true) : setShowPhoto(false)
+      showCatering ? setShowCatering(true) : setShowCatering(false)
+      showParty ? setShowParty(true) : setShowParty(false)
+      showGames ? setShowGames(true) : setShowGames(false)
+    }, 4000);  
+
+    // setTimeout(function run() {
+    //   showPhoto ? setShowPhoto(false) : setShowPhoto(true)
+    //   showCatering ? setShowCatering(false) : setShowCatering(true)
+    //   showParty ? setShowParty(false) : setShowParty(true)
+    //   showGames ? setShowGames(false) : setShowGames(true)
+    // }, 3000);
   })
 
   //get Contacts
@@ -285,14 +302,6 @@ const Admin = () => {
   }
 
 
-  // const data = [
-  //   { name: '0:00', value: 40 },
-  //   { name: '01:00', value: 35 },
-  //   { name: '02:00', value: 4 },
-  //   { name: '03:00', value: 28 },
-  //   { name: '04:00', value: 15 },
-  // ];
-
 
   const hideCharts = () => {
     setShowCharts(false)
@@ -327,11 +336,19 @@ const Admin = () => {
                   stagegroundUsers={2}
                   productionUsers={2}
                   trucksUsers={2}
+                  photoUsers={3}
+                  cateringUsers={3}
+                  partyUsers={3}
+                  gamesUsers={3}
                   showCategory={showCategory}
                   showSound={showSound}
                   showLight={showLight}
                   showVideo={showVideo}
                   showStagehands={showStagehands}
+                  showPhoto={showPhoto}
+                  showCatering={showCatering}
+                  showParty={showParty}
+                  showGames={showGames}
                 />
                 :<WidgetsDropdown
                   users={clients.length-1} 
@@ -414,13 +431,19 @@ const Admin = () => {
                     //     },
                     //   }}
                     // />             
-                    <Chart data={[
-                      { name: '0:00', value: 40 },
-                      { name: '01:00', value: 35 },
-                      { name: '02:00', value: 4 },
-                      { name: '03:00', value: 28 },
-                      { name: '04:00', value: 15 },
-                    ]} width={900} height={550} />
+                    <Chart data={
+                      [
+                        { name: '0:00', value: 40 },
+                        { name: '01:00', value: 35 },
+                        { name: '02:00', value: 4 },
+                        { name: '03:00', value: 28 },
+                        { name: '04:00', value: 15 },
+                        { name: '05:00', value: 35 },
+                        { name: '06:00', value: 15 },
+                      ]
+                    } 
+                    width={900} height={550} />
+
                   }
                 />
 : ""
