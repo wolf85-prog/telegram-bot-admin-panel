@@ -287,6 +287,25 @@ const Admin = () => {
       case 2:{
         setShowWidget2(false)
         setShowWidget3(true)
+        let i = 0
+        setTimerId(setInterval(() => {
+          if (i % 3 === 0) {
+            setShowWidget3(false)
+            setShowWidget4(true)
+            setShowWidget5(false)
+          }
+          if ((i+1) % 3 === 0) {
+            setShowWidget3(false)
+            setShowWidget4(false)
+            setShowWidget5(true)
+          }
+          if ((i+2) % 3 === 0) {
+            setShowWidget3(true)
+            setShowWidget4(false)
+            setShowWidget5(false)
+          }
+          i++
+        }, 3000));
 
         setShowCharts(false)
         setShowCharts2(true)
@@ -300,6 +319,25 @@ const Admin = () => {
       case 3:{
         setShowWidget2(false)
         setShowWidget3(true)
+        let i = 0
+        setTimerId(setInterval(() => {
+          if (i % 3 === 0) {
+            setShowWidget3(false)
+            setShowWidget4(true)
+            setShowWidget5(false)
+          }
+          if ((i+1) % 3 === 0) {
+            setShowWidget3(false)
+            setShowWidget4(false)
+            setShowWidget5(true)
+          }
+          if ((i+2) % 3 === 0) {
+            setShowWidget3(true)
+            setShowWidget4(false)
+            setShowWidget5(false)
+          }
+          i++
+        }, 3000));
 
         setShowCharts(false)
         setShowCharts2(false)
@@ -313,6 +351,25 @@ const Admin = () => {
       case 4:{
         setShowWidget2(false)
         setShowWidget3(true)
+        let i = 0
+        setTimerId(setInterval(() => {
+          if (i % 3 === 0) {
+            setShowWidget3(false)
+            setShowWidget4(true)
+            setShowWidget5(false)
+          }
+          if ((i+1) % 3 === 0) {
+            setShowWidget3(false)
+            setShowWidget4(false)
+            setShowWidget5(true)
+          }
+          if ((i+2) % 3 === 0) {
+            setShowWidget3(true)
+            setShowWidget4(false)
+            setShowWidget5(false)
+          }
+          i++
+        }, 3000));
 
         setShowCharts(false)
         setShowCharts2(false)
