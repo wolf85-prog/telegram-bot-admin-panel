@@ -321,7 +321,7 @@
 
 
 .box-top {
-    /* animation: 8s show2 ease; */
+    /* animation: 3s show2 ease; */
 }
   
 @keyframes show2 {
@@ -345,16 +345,17 @@
   }
   
   .axis {
-    color: #ccd6eb;
-    & text {
-      color: #666;
+    /* color: #ccd6eb;
+    &  */
+    text {
+      color: #fff;
     }
     & .domain {
       display: none;
     }
     &.xAxis {
       & line {
-        display: none;
+        display: block;
       }
     }
   }

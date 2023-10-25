@@ -7,18 +7,10 @@ import {
 import { getStyle } from '@coreui/utils'
 import { CChartBar, CChartLine } from '@coreui/react-chartjs'
 
-import Sound from "./../../assets/images/spec/1_sound.png";
 import Riggers from "./../../assets/images/spec/2_riggers.png";
 import Production from "./../../assets/images/spec/3_production.png";
 import StageGround from "./../../assets/images/spec/4_stage_ground.png";
-import Video from "./../../assets/images/spec/5_video.png";
-import Light from "./../../assets/images/spec/6_light.png";
-import Stagehands from "./../../assets/images/spec/7_stagehands.png";
 import Trucks from "./../../assets/images/spec/8_trucks.png";
-import Catering from "./../../assets/images/spec/9_catering.png";
-import Photo from "./../../assets/images/spec/10_photo.png";
-import Party from "./../../assets/images/spec/11_party.png";
-import Games from "./../../assets/images/spec/11_party.png";
 
 const WidgetsDropdown5 = ({
   riggerUsers,

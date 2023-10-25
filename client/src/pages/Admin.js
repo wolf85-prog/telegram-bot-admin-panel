@@ -249,12 +249,22 @@ const Admin = () => {
     }
   }
 
+  //нажатия на кнопки
   const showBlock = (ind) => {
     switch (ind) {
       //за сутки
       case 1:{
+        clearTimeout(timerId);
+
+        //закрыть все плашки
         setShowWidget2(false)
+        setShowWidget3(false)
+        setShowWidget4(false)
+        setShowWidget5(false)
+
+        //открыть стартовые плашки
         setShowWidget3(true)
+
         let i = 0
         setTimerId(setInterval(() => {
           if (i % 3 === 0) {
@@ -285,8 +295,16 @@ const Admin = () => {
       }
       //за неделю
       case 2:{
+        clearTimeout(timerId);
+        //закрыть все плашки
         setShowWidget2(false)
+        setShowWidget3(false)
+        setShowWidget4(false)
+        setShowWidget5(false)
+
+        //открыть стартовые плашки
         setShowWidget3(true)
+
         let i = 0
         setTimerId(setInterval(() => {
           if (i % 3 === 0) {
@@ -317,7 +335,15 @@ const Admin = () => {
       }
       //за месяц
       case 3:{
+        clearTimeout(timerId);
+
+        //закрыть все плашки
         setShowWidget2(false)
+        setShowWidget3(false)
+        setShowWidget4(false)
+        setShowWidget5(false)
+
+        //открыть стартовые плашки
         setShowWidget3(true)
         let i = 0
         setTimerId(setInterval(() => {
@@ -349,7 +375,15 @@ const Admin = () => {
       }
       //за год
       case 4:{
+        clearTimeout(timerId);
+
+        //закрыть все плашки
         setShowWidget2(false)
+        setShowWidget3(false)
+        setShowWidget4(false)
+        setShowWidget5(false)
+
+        //открыть стартовые плашки
         setShowWidget3(true)
         let i = 0
         setTimerId(setInterval(() => {
@@ -459,76 +493,11 @@ const Admin = () => {
 {/* График Сутки */}
  {showCharts ?  <CWidgetStatsA
                   className="mb-4 box"
-                  color="primary"
+                  color="success"
                   value={<></>}
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
-                  chart={
-                    // <CChartLine
-                    //   className="mt-3 mx-3"
-                    //   style={{ height: '550px' }}
-                    //   data={{
-                    //     labels: Array(24).fill().map((e, i) => `${i}:00`),
-                    //     datasets: [
-                    //       {
-                    //         label: 'My First dataset',
-                    //         backgroundColor: 'transparent',
-                    //         borderColor: 'rgba(255,255,255,.55)',
-                    //         pointBackgroundColor: getStyle('--cui-primary'),
-                    //         data: [65, 59, 84, 84, 51, 55, 40],
-                    //       },
-                    //       {
-                    //         label: "My Second dataset",
-                    //         backgroundColor: "rgba(151, 187, 205, 0.2)",
-                    //         borderColor: "rgba(255, 0, 0)",
-                    //         pointBackgroundColor: "rgba(151, 187, 205, 1)",
-                    //         pointBorderColor: "#fff",
-                    //         data: [50, 12, 28, 29, 7, 25, 12, 70, 60]
-                    //       },
-                    //     ],
-                    //   }}
-                    //   options={{
-                    //     plugins: {
-                    //       legend: {
-                    //         display: false,
-                    //       },
-                    //     },
-                    //     maintainAspectRatio: false,
-                    //     scales: {
-                    //       x: {
-                    //         grid: {
-                    //           display: false,
-                    //           drawBorder: true,
-                    //         },
-                    //         ticks: {
-                    //           display: true,
-                    //         },
-                    //       },
-                    //       y: {
-                    //         min: 10,
-                    //         max: 99,
-                    //         display: false,
-                    //         grid: {
-                    //           display: false,
-                    //         },
-                    //         ticks: {
-                    //           display: false,
-                    //         },
-                    //       },
-                    //     },
-                    //     elements: {
-                    //       line: {
-                    //         borderWidth: 1,
-                    //         tension: 0.4,
-                    //       },
-                    //       point: {
-                    //         radius: 4,
-                    //         hitRadius: 10,
-                    //         hoverRadius: 4,
-                    //       },
-                    //     },
-                    //   }}
-                    // />             
+                  chart={            
                     <Chart data={
                       [
                         { name: '0:00', value: 40 },
@@ -538,8 +507,53 @@ const Admin = () => {
                         { name: '04:00', value: 15 },
                         { name: '05:00', value: 35 },
                         { name: '06:00', value: 15 },
+                        { name: '07:00', value: 4 },
+                        { name: '08:00', value: 28 },
+                        { name: '09:00', value: 15 },
+                        { name: '10:00', value: 35 },
+                        { name: '11:00', value: 15 },
+                        { name: '12:00', value: 4 },
+                        { name: '13:00', value: 28 },
+                        { name: '14:00', value: 15 },
+                        { name: '15:00', value: 35 },
+                        { name: '16:00', value: 15 },
+                        { name: '17:00', value: 4 },
+                        { name: '18:00', value: 28 },
+                        { name: '19:00', value: 15 },
+                        { name: '20:00', value: 35 },
+                        { name: '21:00', value: 15 },
+                        { name: '22:00', value: 35 },
+                        { name: '23:00', value: 15 },
                       ]
                     } 
+                    data2={
+                      [
+                        { name: '0:00', value: 10 },
+                        { name: '01:00', value: 15 },
+                        { name: '02:00', value: 20 },
+                        { name: '03:00', value: 8 },
+                        { name: '04:00', value: 5 },
+                        { name: '05:00', value: 15 },
+                        { name: '06:00', value: 5 },
+                        { name: '07:00', value: 4 },
+                        { name: '08:00', value: 28 },
+                        { name: '09:00', value: 15 },
+                        { name: '10:00', value: 35 },
+                        { name: '11:00', value: 15 },
+                        { name: '12:00', value: 4 },
+                        { name: '13:00', value: 28 },
+                        { name: '14:00', value: 15 },
+                        { name: '15:00', value: 35 },
+                        { name: '16:00', value: 15 },
+                        { name: '17:00', value: 4 },
+                        { name: '18:00', value: 28 },
+                        { name: '19:00', value: 15 },
+                        { name: '20:00', value: 35 },
+                        { name: '21:00', value: 15 },
+                        { name: '22:00', value: 35 },
+                        { name: '23:00', value: 15 },
+                      ]
+                    }
                     width={900} height={550} />
 
                   }
@@ -555,71 +569,29 @@ const Admin = () => {
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
-                    <CChartLine
-                    className="mt-3 mx-3"
-                    style={{ height: '550px' }}
-                    data={{
-                      labels: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
-                      datasets: [
-                        {
-                          label: 'My First dataset',
-                          backgroundColor: 'transparent',
-                          borderColor: 'rgba(255,255,255,.55)',
-                          pointBackgroundColor: getStyle('--cui-primary'),
-                          data: [65, 59, 84, 84, 51, 55, 40],
-                        },
-                        {
-                          label: "My Second dataset",
-                          backgroundColor: "rgba(151, 187, 205, 0.2)",
-                          borderColor: "rgba(255, 0, 0)",
-                          pointBackgroundColor: "rgba(151, 187, 205, 1)",
-                          pointBorderColor: "#fff",
-                          data: [50, 12, 28, 29, 7, 25, 12, 70, 60]
-                        },
-                      ],
-                    }}
-                    options={{
-                      plugins: {
-                        legend: {
-                          display: false,
-                        },
-                      },
-                      maintainAspectRatio: false,
-                      scales: {
-                        x: {
-                          grid: {
-                            display: false,
-                            drawBorder: true,
-                          },
-                          ticks: {
-                            display: true,
-                          },
-                        },
-                        y: {
-                          min: 10,
-                          max: 99,
-                          display: false,
-                          grid: {
-                            display: false,
-                          },
-                          ticks: {
-                            display: false,
-                          },
-                        },
-                      },
-                      elements: {
-                        line: {
-                          borderWidth: 1,
-                          tension: 0.4,
-                        },
-                        point: {
-                          radius: 4,
-                          hitRadius: 10,
-                          hoverRadius: 4,
-                        },
-                      },
-                    }}
-                  />             
+                    <Chart data={
+                      [
+                        { name: 'Пн', value: 40 },
+                        { name: 'Вт', value: 35 },
+                        { name: 'Ср', value: 4 },
+                        { name: 'Чт', value: 28 },
+                        { name: 'Пт', value: 15 },
+                        { name: 'Сб', value: 35 },
+                        { name: 'Вс', value: 15 },
+                      ]
+                    } 
+                    data2={
+                      [
+                        { name: 'Пн', value: 10 },
+                        { name: 'Вт', value: 15 },
+                        { name: 'Ср', value: 20 },
+                        { name: 'Чт', value: 8 },
+                        { name: 'Пт', value: 5 },
+                        { name: 'Сб', value: 15 },
+                        { name: 'Вс', value: 5 },
+                      ]
+                    }
+                    width={900} height={550} />
                   }
                 />
 : ""
@@ -633,71 +605,39 @@ const Admin = () => {
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
-                    <CChartLine
-                    className="mt-3 mx-3"
-                    style={{ height: '550px' }}
-                    data={{
-                      labels: Array(30).fill().map((e, i) => i + 1),
-                      datasets: [
-                        {
-                          label: 'My First dataset',
-                          backgroundColor: 'transparent',
-                          borderColor: 'rgba(255,255,255,.55)',
-                          pointBackgroundColor: getStyle('--cui-primary'),
-                          data: [65, 59, 84, 84, 51, 55, 40],
-                        },
-                        {
-                          label: "My Second dataset",
-                          backgroundColor: "transparent",
-                          borderColor: "rgba(255, 0, 0)",
-                          pointBackgroundColor: "rgba(151, 187, 205, 1)",
-                          pointBorderColor: "#fff",
-                          data: [50, 12, 28, 29, 7, 25, 12, 70, 60]
-                        },
-                      ],
-                    }}
-                    options={{
-                      plugins: {
-                        legend: {
-                          display: false,
-                        },
-                      },
-                      maintainAspectRatio: false,
-                      scales: {
-                        x: {
-                          grid: {
-                            display: false,
-                            drawBorder: true,
-                          },
-                          ticks: {
-                            display: true,
-                          },
-                        },
-                        y: {
-                          min: 10,
-                          max: 99,
-                          display: false,
-                          grid: {
-                            display: false,
-                          },
-                          ticks: {
-                            display: false,
-                          },
-                        },
-                      },
-                      elements: {
-                        line: {
-                          borderWidth: 1,
-                          tension: 0.4,
-                        },
-                        point: {
-                          radius: 4,
-                          hitRadius: 10,
-                          hoverRadius: 4,
-                        },
-                      },
-                    }}
-                  />             
+                    <Chart data={
+                      [
+                        { name: '01', value: 40 },
+                        { name: '02', value: 35 },
+                        { name: '03', value: 4 },
+                        { name: '04', value: 28 },
+                        { name: '05', value: 15 },
+                        { name: '06', value: 35 },
+                        { name: '07', value: 15 },
+                        { name: '08', value: 4 },
+                        { name: '09', value: 28 },
+                        { name: '10', value: 15 },
+                        { name: '11', value: 35 },
+                        { name: '12', value: 15 },
+                      ]
+                    } 
+                    data2={
+                      [
+                        { name: '01', value: 10 },
+                        { name: '02', value: 15 },
+                        { name: '03', value: 20 },
+                        { name: '04', value: 8 },
+                        { name: '05', value: 5 },
+                        { name: '06', value: 15 },
+                        { name: '07', value: 5 },
+                        { name: '08', value: 20 },
+                        { name: '09', value: 8 },
+                        { name: '10', value: 5 },
+                        { name: '11', value: 15 },
+                        { name: '12', value: 5 },
+                      ]
+                    }
+                    width={900} height={550} />
                   }
                 />
 : ""
@@ -711,63 +651,35 @@ const Admin = () => {
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
                   chart={
-                    <CChartLine
-                    className="mt-3 mx-3"
-                    style={{ height: '550px' }}
-                    data={{
-                      labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
-                      datasets: [
-                        {
-                          label: 'My First dataset',
-                          backgroundColor: 'transparent',
-                          borderColor: 'rgba(255,255,255,.55)',
-                          pointBackgroundColor: getStyle('--cui-primary'),
-                          data: [65, 59, 84, 84, 51, 55, 40],
-                        },
-                      ],
-                    }}
-                    options={{
-                      plugins: {
-                        legend: {
-                          display: false,
-                        },
-                      },
-                      maintainAspectRatio: false,
-                      scales: {
-                        x: {
-                          grid: {
-                            display: false,
-                            drawBorder: true,
-                          },
-                          ticks: {
-                            display: true,
-                          },
-                        },
-                        y: {
-                          min: 10,
-                          max: 99,
-                          display: false,
-                          grid: {
-                            display: false,
-                          },
-                          ticks: {
-                            display: false,
-                          },
-                        },
-                      },
-                      elements: {
-                        line: {
-                          borderWidth: 1,
-                          tension: 0.4,
-                        },
-                        point: {
-                          radius: 4,
-                          hitRadius: 10,
-                          hoverRadius: 4,
-                        },
-                      },
-                    }}
-                  />             
+                    <Chart data={
+                      [
+                        { name: 'Январь', value: 40 },
+                        { name: 'Февраль', value: 35 },
+                        { name: 'Март', value: 4 },
+                        { name: 'Апрель', value: 28 },
+                        { name: 'Май', value: 15 },
+                        { name: 'Июнь', value: 35 },
+                        { name: 'Июль', value: 15 },
+                        { name: 'Август', value: 4 },
+                        { name: 'Сентябрь', value: 8 },
+                        { name: 'Октябрь', value: 1 },
+                      ]
+                    } 
+                    data2={
+                      [
+                        { name: 'Январь', value: 10 },
+                        { name: 'Февраль', value: 15 },
+                        { name: 'Март', value: 20 },
+                        { name: 'Апрель', value: 8 },
+                        { name: 'Май', value: 1 },
+                        { name: 'Июнь', value: 5 },
+                        { name: 'Июль', value: 25 },
+                        { name: 'Август', value: 14 },
+                        { name: 'Сентябрь', value: 2 },
+                        { name: 'Октябрь', value: 9 },
+                      ]
+                    }
+                    width={900} height={550} />             
                   }
                 />
 : ""
