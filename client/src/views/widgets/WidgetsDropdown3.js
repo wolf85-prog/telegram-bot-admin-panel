@@ -20,11 +20,11 @@ import Photo from "./../../assets/images/spec/10_photo.png";
 import Party from "./../../assets/images/spec/11_party.png";
 import Games from "./../../assets/images/spec/11_party.png";
 
-const WidgetsDropdown2 = ({
-  users, 
-  newUsers, 
-  activeUsers, 
-  delUsers, 
+const WidgetsDropdown3 = ({
+  soundUsers, 
+  lightUsers, 
+  videoUsers, 
+  stagehandsUsers, 
 }) => {
 
   return (
@@ -35,14 +35,14 @@ const WidgetsDropdown2 = ({
           color="primary"
           value={
             <>
-              {users} {/*{' '}
+              {soundUsers} {/*{' '}
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
-          title={"Всего"}
-          action={""}
+          title={"Звук"}
+          action={<img src={Sound} alt='' width={35}/>}
           chart={
             <CChartLine
               className="mt-3 mx-3"
@@ -110,14 +110,14 @@ const WidgetsDropdown2 = ({
           color="info"
           value={
             <>
-              {newUsers} 
+              {lightUsers} 
               {/* <span className="fs-6 fw-normal">
                 (40.9% <CIcon icon={cilArrowTop} />)
               </span> */}
             </>
           }
-          title={"Новые"}
-          action={""}
+          title={"Свет"}
+          action={<img src={Light} alt='' width={35}/>}
           chart={
             <CChartLine
               className="mt-3 mx-3"
@@ -184,14 +184,14 @@ const WidgetsDropdown2 = ({
           color="warning"
           value={
             <>
-              {activeUsers} {/*{' '}
+              {videoUsers} {/*{' '}
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
-          title={"Активные"}
-          action={""}
+          title={"Видео"}
+          action={<img src={Video} alt='' width={35}/>}
           chart={
             <CChartLine
               className="mt-3"
@@ -245,11 +245,11 @@ const WidgetsDropdown2 = ({
           color="danger"
           value={
             <>
-              {delUsers}
+              {stagehandsUsers}
             </>
           }
-          title={"Удаленные"}
-          action={""}
+          title={"Помощники"}
+          action={<img src={Stagehands} alt='' width={35}/>}
           chart={
             <CChartBar
               className="mt-3 mx-3"
@@ -320,4 +320,4 @@ const WidgetsDropdown2 = ({
   )
 }
 
-export default WidgetsDropdown2
+export default WidgetsDropdown3

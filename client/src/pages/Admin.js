@@ -51,6 +51,9 @@ import { getAllMessages } from './../http/chatAPI.js'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 import WidgetsDropdown2 from '../views/widgets/WidgetsDropdown2'
+import WidgetsDropdown3 from '../views/widgets/WidgetsDropdown3'
+import WidgetsDropdown4 from '../views/widgets/WidgetsDropdown4'
+import WidgetsDropdown5 from '../views/widgets/WidgetsDropdown5'
 
 import InputMask from 'react-input-mask';
 
@@ -76,8 +79,12 @@ const Admin = () => {
   const [showWorkhub, setShowWorkhub]= useState(true);
 
   const [activeKey, setActiveKey] = useState(2)
-  const [showWidget1, setShowWidget1] = useState(false)
+
+  const [showWidget, setShowWidget] = useState(false)
   const [showWidget2, setShowWidget2] = useState(true)
+  const [showWidget3, setShowWidget3] = useState(false)
+  const [showWidget4, setShowWidget4] = useState(false)
+  const [showWidget5, setShowWidget5] = useState(false)
 
   const [showCharts, setShowCharts]= useState(false);
   const [showCharts2, setShowCharts2]= useState(false);
@@ -108,22 +115,16 @@ const Admin = () => {
     setTabhub('Workhub')
   })
 
-  useEffect(() => {
-    // повторить с интервалом 2 секунды
-    setTimeout(function run() {
-      showSound ? setShowSound(false) : setShowSound(true)
-      showLight ? setShowLight(false) : setShowLight(true)
-      showVideo ? setShowVideo(false) : setShowVideo(true)
-      showStagehands ? setShowStagehands(false) : setShowStagehands(true)
-    }, 4000);
-
-    setTimeout(function run() {
-      showPhoto ? setShowPhoto(false) : setShowPhoto(true)
-      showCatering ? setShowCatering(false) : setShowCatering(true)
-      showParty ? setShowParty(false) : setShowParty(true)
-      showGames ? setShowGames(false) : setShowGames(true)
-    }, 7000);  
-  })
+  // useEffect(() => {
+  //   // повторить с интервалом 2 секунды
+  //   setTimeout(function run() {
+  //     showWidget2 ? setShowWidget2(false) : setShowWidget2(true)
+  //     showWidget3 ? setShowWidget3(false) : setShowWidget3(true)
+  //     showWidget4 ? setShowWidget3(false) : setShowWidget3(true)
+  //     showWidget5 ? setShowWidget3(false) : setShowWidget3(true)
+  //   }, 3000);
+ 
+  // })
 
   //get Contacts
   useEffect(() => {
@@ -243,7 +244,7 @@ const Admin = () => {
       setShowWorkhub(true)
       setShowRenthub(false)
       setActiveKey(2)
-      setShowWidget1(false)
+      setShowWidget(false)
       setShowWidget2(true)
       setTabhub('Workhub')
     }
@@ -251,7 +252,7 @@ const Admin = () => {
       setShowWorkhub(false)
       setShowRenthub(true)
       setActiveKey(1)
-      setShowWidget1(true)
+      setShowWidget(true)
       setShowWidget2(false)
       setTabhub('Renthub')
     }
@@ -261,7 +262,28 @@ const Admin = () => {
     switch (ind) {
       //за сутки
       case 1:{
-        setPeriod(1)
+        setShowWidget2(false)
+        setShowWidget3(true)
+        let i = 0
+        let timerId = setInterval(() => {
+          if (i === 0) {
+            setShowWidget3(false)
+            setShowWidget4(true)
+            setShowWidget5(false)
+          }
+          if (i === 1) {
+            setShowWidget3(false)
+            setShowWidget4(false)
+            setShowWidget5(true)
+          }
+          if (i === 2) {
+            setShowWidget3(true)
+            setShowWidget4(false)
+            setShowWidget5(false)
+          }
+          i++
+        }, 3000);
+
         setShowCharts(true)
         setShowCharts2(false)
         setShowCharts3(false)
@@ -272,7 +294,9 @@ const Admin = () => {
       }
       //за неделю
       case 2:{
-        setPeriod(2)
+        setShowWidget2(false)
+        setShowWidget3(true)
+
         setShowCharts(false)
         setShowCharts2(true)
         setShowCharts3(false)
@@ -283,7 +307,9 @@ const Admin = () => {
       }
       //за месяц
       case 3:{
-        setPeriod(3)
+        setShowWidget2(false)
+        setShowWidget3(true)
+
         setShowCharts(false)
         setShowCharts2(false)
         setShowCharts3(true)
@@ -294,7 +320,9 @@ const Admin = () => {
       }
       //за год
       case 4:{
-        setPeriod(4)
+        setShowWidget2(false)
+        setShowWidget3(true)
+
         setShowCharts(false)
         setShowCharts2(false)
         setShowCharts3(false)
@@ -314,6 +342,11 @@ const Admin = () => {
     setShowCharts3(false)
     setShowCharts4(false)
     setShowCategory(false)
+
+    setShowWidget2(true) //всего
+    setShowWidget3(false) //категория 1
+    setShowWidget4(false) //категория 2
+    setShowWidget5(false) //категория 3
   }
   
   return (
@@ -327,41 +360,50 @@ const Admin = () => {
               <Suspense fallback={<CSpinner color="primary" />}>
 
                 <>
+                {showWidget 
+                ?<WidgetsDropdown
+                  users={clients.length-1} 
+                  projects={projects.length} 
+                  companys={comps.length} 
+                />
+                :""}
+
                 {showWidget2 
                 ?<WidgetsDropdown2
                   users={workers.length}
                   newUsers={0} 
                   activeUsers={0} 
                   delUsers={0}
+                />
+                :""}
+
+                {showWidget3 
+                ?<WidgetsDropdown3
                   soundUsers={1}
                   lightUsers={1}
                   videoUsers={1}
                   stagehandsUsers={1}
-                  riggerUsers={2}
-                  stagegroundUsers={2}
-                  productionUsers={2}
-                  trucksUsers={2}
-                  photoUsers={3}
-                  cateringUsers={3}
-                  partyUsers={3}
-                  gamesUsers={3}
-                  showCategory={showCategory}
-                  showSound={showSound}
-                  showLight={showLight}
-                  showVideo={showVideo}
-                  showStagehands={showStagehands}
-                  showPhoto={showPhoto}
-                  showCatering={showCatering}
-                  showParty={showParty}
-                  showGames={showGames}
                 />
-                :<WidgetsDropdown
-                  users={clients.length-1} 
-                  projects={projects.length} 
-                  companys={comps.length} 
-                />}
+                :""}
 
-{/* <Chart data={data} width={600} height={300} />,  */}
+                {showWidget4 
+                ?<WidgetsDropdown4
+                  photoUsers={2}
+                  cateringUsers={2}
+                  partyUsers={2}
+                  gamesUsers={2}
+                />
+                : ""}
+
+                {showWidget5 
+                ?<WidgetsDropdown5
+                  riggerUsers={3}
+                  stagegroundUsers={3}
+                  productionUsers={3}
+                  trucksUsers={3}
+                />
+                : ""}
+                
 
 {/* График Сутки */}
  {showCharts ?  <CWidgetStatsA

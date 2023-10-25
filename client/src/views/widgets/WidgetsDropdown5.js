@@ -20,11 +20,11 @@ import Photo from "./../../assets/images/spec/10_photo.png";
 import Party from "./../../assets/images/spec/11_party.png";
 import Games from "./../../assets/images/spec/11_party.png";
 
-const WidgetsDropdown2 = ({
-  users, 
-  newUsers, 
-  activeUsers, 
-  delUsers, 
+const WidgetsDropdown5 = ({
+  riggerUsers,
+  productionUsers,
+  stagegroundUsers,
+  trucksUsers,
 }) => {
 
   return (
@@ -35,14 +35,14 @@ const WidgetsDropdown2 = ({
           color="primary"
           value={
             <>
-              {users} {/*{' '}
+              {riggerUsers} {/*{' '}
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
-          title={"Всего"}
-          action={""}
+          title={"Риггер"}
+          action={<img src={Riggers} alt='' width={35}/>}
           chart={
             <CChartLine
               className="mt-3 mx-3"
@@ -110,14 +110,14 @@ const WidgetsDropdown2 = ({
           color="info"
           value={
             <>
-              {newUsers} 
+              {productionUsers} 
               {/* <span className="fs-6 fw-normal">
                 (40.9% <CIcon icon={cilArrowTop} />)
               </span> */}
             </>
           }
-          title={"Новые"}
-          action={""}
+          title={"Продакшн"}
+          action={<img src={Production} alt='' width={35}/>}
           chart={
             <CChartLine
               className="mt-3 mx-3"
@@ -184,14 +184,14 @@ const WidgetsDropdown2 = ({
           color="warning"
           value={
             <>
-              {activeUsers} {/*{' '}
+              {stagegroundUsers} {/*{' '}
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
-          title={"Активные"}
-          action={""}
+          title={"Граунд"}
+          action={<img src={StageGround} alt='' width={35}/>}
           chart={
             <CChartLine
               className="mt-3"
@@ -245,11 +245,11 @@ const WidgetsDropdown2 = ({
           color="danger"
           value={
             <>
-              {delUsers}
+              {trucksUsers}
             </>
           }
-          title={"Удаленные"}
-          action={""}
+          title={"Водители"}
+          action={<img src={Trucks} alt='' width={35}/>}
           chart={
             <CChartBar
               className="mt-3 mx-3"
@@ -320,4 +320,4 @@ const WidgetsDropdown2 = ({
   )
 }
 
-export default WidgetsDropdown2
+export default WidgetsDropdown5
