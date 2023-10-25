@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import {
   CRow,
   CCol,
-  CDropdown,
-  CDropdownMenu,
-  CDropdownItem,
-  CDropdownToggle,
   CWidgetStatsA,
 } from '@coreui/react'
 import { getStyle } from '@coreui/utils'
 import { CChartBar, CChartLine } from '@coreui/react-chartjs'
-import CIcon from '@coreui/icons-react'
-import { cilArrowBottom, cilOptions } from '@coreui/icons'
 
 import Sound from "./../../assets/images/spec/1_sound.png";
 import Riggers from "./../../assets/images/spec/2_riggers.png";

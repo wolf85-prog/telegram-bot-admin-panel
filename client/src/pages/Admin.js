@@ -98,6 +98,8 @@ const Admin = () => {
   const [showParty, setShowParty] = useState(true)
   const [showGames, setShowGames] = useState(true)
 
+  const [period, setPeriod] = useState(0)
+
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
   
@@ -113,19 +115,14 @@ const Admin = () => {
       showLight ? setShowLight(false) : setShowLight(true)
       showVideo ? setShowVideo(false) : setShowVideo(true)
       showStagehands ? setShowStagehands(false) : setShowStagehands(true)
+    }, 4000);
 
-      showPhoto ? setShowPhoto(true) : setShowPhoto(false)
-      showCatering ? setShowCatering(true) : setShowCatering(false)
-      showParty ? setShowParty(true) : setShowParty(false)
-      showGames ? setShowGames(true) : setShowGames(false)
-    }, 4000);  
-
-    // setTimeout(function run() {
-    //   showPhoto ? setShowPhoto(false) : setShowPhoto(true)
-    //   showCatering ? setShowCatering(false) : setShowCatering(true)
-    //   showParty ? setShowParty(false) : setShowParty(true)
-    //   showGames ? setShowGames(false) : setShowGames(true)
-    // }, 3000);
+    setTimeout(function run() {
+      showPhoto ? setShowPhoto(false) : setShowPhoto(true)
+      showCatering ? setShowCatering(false) : setShowCatering(true)
+      showParty ? setShowParty(false) : setShowParty(true)
+      showGames ? setShowGames(false) : setShowGames(true)
+    }, 7000);  
   })
 
   //get Contacts
@@ -262,7 +259,9 @@ const Admin = () => {
 
   const showBlock = (ind) => {
     switch (ind) {
+      //за сутки
       case 1:{
+        setPeriod(1)
         setShowCharts(true)
         setShowCharts2(false)
         setShowCharts3(false)
@@ -271,7 +270,9 @@ const Admin = () => {
         setShowCategory(true) //показать категорию
         break;
       }
+      //за неделю
       case 2:{
+        setPeriod(2)
         setShowCharts(false)
         setShowCharts2(true)
         setShowCharts3(false)
@@ -280,7 +281,9 @@ const Admin = () => {
         setShowCategory(true) //показать категорию
         break;
       }
+      //за месяц
       case 3:{
+        setPeriod(3)
         setShowCharts(false)
         setShowCharts2(false)
         setShowCharts3(true)
@@ -289,7 +292,9 @@ const Admin = () => {
         setShowCategory(true) //показать категорию
         break;
       }
+      //за год
       case 4:{
+        setPeriod(4)
         setShowCharts(false)
         setShowCharts2(false)
         setShowCharts3(false)
