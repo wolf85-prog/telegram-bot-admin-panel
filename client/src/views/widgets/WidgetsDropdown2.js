@@ -32,6 +32,9 @@ const WidgetsDropdown2 = ({
   delUsers, 
   showCategory,
   showSound,
+  showLight,
+  showVideo,
+  showStagehands,
   soundUsers, 
   lightUsers, 
   videoUsers, 
@@ -128,14 +131,14 @@ const WidgetsDropdown2 = ({
           color="info"
           value={
             <>
-              {showCategory ? lightUsers : newUsers} 
+              {showCategory ? (showLight ? lightUsers : productionUsers) : newUsers} 
               {/* <span className="fs-6 fw-normal">
                 (40.9% <CIcon icon={cilArrowTop} />)
               </span> */}
             </>
           }
-          title={showCategory ? "Свет" : "Новые"}
-          action={showCategory ? <img src={Light} alt='' width={35}/> : ""}
+          title={showCategory ? (showLight ? "Свет" : "Продакшн") : "Новые"}
+          action={showCategory ? <img src={showLight ? Light : Production} alt='' width={35}/> : ""}
           chart={
             <CChartLine
               className="mt-3 mx-3"
@@ -202,14 +205,14 @@ const WidgetsDropdown2 = ({
           color="warning"
           value={
             <>
-              {showCategory ? videoUsers : activeUsers} {/*{' '}
+              {showCategory ? (showVideo ? videoUsers : stagegroundUsers) : activeUsers} {/*{' '}
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
-          title={showCategory ? "Видео" : "Активные"}
-          action={showCategory ? <img src={Video} alt='' width={35}/> : ""}
+          title={showCategory ? (showVideo ? "Видео" : "Граунд") : "Активные"}
+          action={showCategory ? <img src={showVideo ? Video : StageGround} alt='' width={35}/> : ""}
           chart={
             <CChartLine
               className="mt-3"
@@ -263,11 +266,11 @@ const WidgetsDropdown2 = ({
           color="danger"
           value={
             <>
-              {showCategory ? stagehandsUsers : delUsers}
+              {showCategory ? (showStagehands ? stagehandsUsers : trucksUsers) : delUsers}
             </>
           }
-          title={showCategory ? "Помощники" : "Удаленные"}
-          action={showCategory ? <img src={Stagehands} alt='' width={35}/> : ""}
+          title={showCategory ? (showStagehands ? "Помощники" : "Водители") : "Удаленные"}
+          action={showCategory ? <img src={showStagehands ? Stagehands : Trucks} alt='' width={35}/> : ""}
           chart={
             <CChartBar
               className="mt-3 mx-3"

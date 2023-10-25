@@ -89,6 +89,9 @@ const Admin = () => {
   const [tabhub, setTabhub]= useState('');
   const [showCategory, setShowCategory] = useState(false)
   const [showSound, setShowSound] = useState(false)
+  const [showLight, setShowLight] = useState(false)
+  const [showVideo, setShowVideo] = useState(false)
+  const [showStagehands, setShowStagehands] = useState(false)
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
@@ -102,6 +105,9 @@ const Admin = () => {
     // повторить с интервалом 2 секунды
     setTimeout(function run() {
       showSound ? setShowSound(false) : setShowSound(true)
+      showLight ? setShowLight(false) : setShowLight(true)
+      showVideo ? setShowVideo(false) : setShowVideo(true)
+      showStagehands ? setShowStagehands(false) : setShowStagehands(true)
     }, 3000);
   })
 
@@ -246,7 +252,6 @@ const Admin = () => {
         setShowCharts4(false)
 
         setShowCategory(true) //показать категорию
-
         break;
       }
       case 2:{
@@ -254,6 +259,8 @@ const Admin = () => {
         setShowCharts2(true)
         setShowCharts3(false)
         setShowCharts4(false)
+
+        setShowCategory(true) //показать категорию
         break;
       }
       case 3:{
@@ -261,6 +268,8 @@ const Admin = () => {
         setShowCharts2(false)
         setShowCharts3(true)
         setShowCharts4(false)
+
+        setShowCategory(true) //показать категорию
         break;
       }
       case 4:{
@@ -268,50 +277,28 @@ const Admin = () => {
         setShowCharts2(false)
         setShowCharts3(false)
         setShowCharts4(true)
+        
+        setShowCategory(true) //показать категорию
         break;
       }
     }
   }
 
 
-  const data = [
-    { name: '0:00', value: 40 },
-    { name: '01:00', value: 35 },
-    { name: '02:00', value: 4 },
-    { name: '03:00', value: 28 },
-    { name: '04:00', value: 15 },
-  ];
+  // const data = [
+  //   { name: '0:00', value: 40 },
+  //   { name: '01:00', value: 35 },
+  //   { name: '02:00', value: 4 },
+  //   { name: '03:00', value: 28 },
+  //   { name: '04:00', value: 15 },
+  // ];
 
-
-  useEffect(() => {
-    // повторить с интервалом 2 секунды
-    //let timerId = setInterval(() => showSound ? setShowSound(false) : setShowSound(true), 3000);
-
-    // while(true) {
-    //   setTimeout(()=> {
-    //     showSound ? setShowSound(false) : setShowSound(true)
-    //   }, 2000)
-    // } 
-    // var i = 0;
-    // while (i < 100) {
-    //   (function(i) {
-    //     setTimeout(function() {
-    //       showSound ? setShowSound(false) : setShowSound(true)
-    //     }, 10000 * i)
-    //   })(i++)
-    // }
-
-    //var i = 0;
-    // store the interval id to clear in future
-    // var intr = setInterval(function() {
-    //   showSound ? setShowSound(false) : setShowSound(true)
-    //   // clear the interval if `i` reached 100
-    //   if (++i == 100) clearInterval(intr);
-    // }, 10000)
-  })
 
   const hideCharts = () => {
     setShowCharts(false)
+    setShowCharts2(false)
+    setShowCharts3(false)
+    setShowCharts4(false)
     setShowCategory(false)
   }
   
@@ -342,6 +329,9 @@ const Admin = () => {
                   trucksUsers={2}
                   showCategory={showCategory}
                   showSound={showSound}
+                  showLight={showLight}
+                  showVideo={showVideo}
+                  showStagehands={showStagehands}
                 />
                 :<WidgetsDropdown
                   users={clients.length-1} 
@@ -424,7 +414,13 @@ const Admin = () => {
                     //     },
                     //   }}
                     // />             
-                    <Chart data={data} width={900} height={550} />
+                    <Chart data={[
+                      { name: '0:00', value: 40 },
+                      { name: '01:00', value: 35 },
+                      { name: '02:00', value: 4 },
+                      { name: '03:00', value: 28 },
+                      { name: '04:00', value: 15 },
+                    ]} width={900} height={550} />
                   }
                 />
 : ""
@@ -436,7 +432,7 @@ const Admin = () => {
                   color="primary"
                   value={<></>}
                   title=""
-                  action={<></>}
+                  action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" /></>}
                   chart={
                     <CChartLine
                     className="mt-3 mx-3"
@@ -514,7 +510,7 @@ const Admin = () => {
                   color="primary"
                   value={<></>}
                   title=""
-                  action={<></>}
+                  action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" /></>}
                   chart={
                     <CChartLine
                     className="mt-3 mx-3"
@@ -592,7 +588,7 @@ const Admin = () => {
                   color="primary"
                   value={<></>}
                   title=""
-                  action={<></>}
+                  action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" /></>}
                   chart={
                     <CChartLine
                     className="mt-3 mx-3"

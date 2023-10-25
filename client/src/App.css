@@ -311,7 +311,7 @@
 }
 
 .box {
-    animation: 3s show ease;
+    animation: 2s show ease;
   }
   
 @keyframes show {
