@@ -31,7 +31,7 @@ const WidgetsDropdown5 = ({
     <CRow>
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
-          className="mb-4"
+          className="mb-4 box-top"
           color="primary"
           value={
             <>
@@ -106,7 +106,7 @@ const WidgetsDropdown5 = ({
       </CCol>
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
-          className="mb-4"
+          className="mb-4 box-top"
           color="info"
           value={
             <>
@@ -180,7 +180,7 @@ const WidgetsDropdown5 = ({
       </CCol>
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
-          className="mb-4"
+          className="mb-4 box-top"
           color="warning"
           value={
             <>
@@ -241,7 +241,7 @@ const WidgetsDropdown5 = ({
       </CCol>
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
-          className="mb-4"
+          className="mb-4 box-top"
           color="danger"
           value={
             <>

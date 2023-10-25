@@ -107,24 +107,15 @@ const Admin = () => {
 
   const [period, setPeriod] = useState(0)
 
+  const [timerId, setTimerId] = useState()
+
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
-  
+
   //set tab
   useEffect(() => {
     setTabhub('Workhub')
   })
-
-  // useEffect(() => {
-  //   // повторить с интервалом 2 секунды
-  //   setTimeout(function run() {
-  //     showWidget2 ? setShowWidget2(false) : setShowWidget2(true)
-  //     showWidget3 ? setShowWidget3(false) : setShowWidget3(true)
-  //     showWidget4 ? setShowWidget3(false) : setShowWidget3(true)
-  //     showWidget5 ? setShowWidget3(false) : setShowWidget3(true)
-  //   }, 3000);
- 
-  // })
 
   //get Contacts
   useEffect(() => {
@@ -265,24 +256,24 @@ const Admin = () => {
         setShowWidget2(false)
         setShowWidget3(true)
         let i = 0
-        let timerId = setInterval(() => {
-          if (i === 0) {
+        setTimerId(setInterval(() => {
+          if (i % 3 === 0) {
             setShowWidget3(false)
             setShowWidget4(true)
             setShowWidget5(false)
           }
-          if (i === 1) {
+          if ((i+1) % 3 === 0) {
             setShowWidget3(false)
             setShowWidget4(false)
             setShowWidget5(true)
           }
-          if (i === 2) {
+          if ((i+2) % 3 === 0) {
             setShowWidget3(true)
             setShowWidget4(false)
             setShowWidget5(false)
           }
           i++
-        }, 3000);
+        }, 3000));
 
         setShowCharts(true)
         setShowCharts2(false)
@@ -342,11 +333,14 @@ const Admin = () => {
     setShowCharts3(false)
     setShowCharts4(false)
     setShowCategory(false)
+    
+    clearTimeout(timerId);
 
     setShowWidget2(true) //всего
     setShowWidget3(false) //категория 1
     setShowWidget4(false) //категория 2
     setShowWidget5(false) //категория 3
+    
   }
   
   return (
@@ -411,7 +405,7 @@ const Admin = () => {
                   color="primary"
                   value={<></>}
                   title=""
-                  action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" /></>}
+                  action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
                   chart={
                     // <CChartLine
                     //   className="mt-3 mx-3"
@@ -502,7 +496,7 @@ const Admin = () => {
                   color="primary"
                   value={<></>}
                   title=""
-                  action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" /></>}
+                  action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
                     <CChartLine
                     className="mt-3 mx-3"
@@ -580,7 +574,7 @@ const Admin = () => {
                   color="primary"
                   value={<></>}
                   title=""
-                  action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" /></>}
+                  action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
                     <CChartLine
                     className="mt-3 mx-3"
@@ -658,7 +652,7 @@ const Admin = () => {
                   color="primary"
                   value={<></>}
                   title=""
-                  action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" /></>}
+                  action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
                   chart={
                     <CChartLine
                     className="mt-3 mx-3"

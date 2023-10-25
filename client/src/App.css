@@ -311,14 +311,23 @@
 }
 
 .box {
-    animation: 2s show ease;
+    animation: 5s show ease;
   }
   
 @keyframes show {
     from { opacity: 0; }
     to { opacity: 1; }
-    /* 0% {transform: translateY(-550px)}
-    100% {transform: translateY(0)} */
+}
+
+
+.box-top {
+    animation: 4s show ease;
+  }
+  
+@keyframes show {
+    0% {opacity: 0; }
+    50% {opacity: 1; }
+    100% {opacity: 0; }
 }
 
 
