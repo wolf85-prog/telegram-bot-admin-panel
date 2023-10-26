@@ -74,6 +74,7 @@ const Admin = () => {
   const [oldClients, setOldClients]= useState([]);
   const [loading, setLoading]= useState(true);
   const [loading2, setLoading2]= useState(true);
+  const [sortWorkers, setSortWorkers]= useState([]);
 
   const [showRenthub, setShowRenthub]= useState(false);
   const [showWorkhub, setShowWorkhub]= useState(true);
@@ -290,7 +291,6 @@ const Admin = () => {
         setShowCharts3(false)
         setShowCharts4(false)
 
-        setShowCategory(true) //показать категорию
         break;
       }
       //за неделю
@@ -330,7 +330,16 @@ const Admin = () => {
         setShowCharts3(false)
         setShowCharts4(false)
 
-        setShowCategory(true) //показать категорию
+        //фильтрация таблицы за неделю
+        const carrentDate = Date.now()
+        console.log("carrentDate: ", carrentDate)
+        const needDate = carrentDate - 604800000
+        console.log("needDate: ", needDate)
+        
+        
+        let arr = workers.map(item => console.log("date: ", new Date(item.createDate).getTime()));
+        //setSortWorkers(arr)
+
         break;
       }
       //за месяц
@@ -370,7 +379,10 @@ const Admin = () => {
         setShowCharts3(true)
         setShowCharts4(false)
 
-        setShowCategory(true) //показать категорию
+        //фильтрация таблицы
+        let arr = workers.filter(item => item.createDate.split('T')[0].split('-')[1] === '10');
+        setSortWorkers(arr)
+
         break;
       }
       //за год
@@ -409,8 +421,11 @@ const Admin = () => {
         setShowCharts2(false)
         setShowCharts3(false)
         setShowCharts4(true)
-        
-        setShowCategory(true) //показать категорию
+
+        //фильтрация таблицы
+        let arr = workers.filter(item => item.createDate.split('T')[0].split('-')[0] === '2023');
+        setSortWorkers(arr)
+
         break;
       }
     }
@@ -823,67 +838,12 @@ const Admin = () => {
                       </CCol>
                     </CRow>
                   </CCardBody>
+
 {/*-------------------------------------------------------------------------------------------  */}
+     
                   <CCardBody id="Workhub" style={{display: showWorkhub ? 'block' : 'none'}}>
                     <CRow>
                       <CCol xs>
-                            {/* <CRow>
-                              <CCol xs={12} md={6} xl={6}>
-                                <CRow>
-                                  <CCol sm={6}>
-                                    <div style={{
-                                        display: 'flex', 
-                                        justifyContent: 'space-between', 
-                                        alignItems: 'flex-start',   
-                                      }}>
-                                      <div className="border-start border-start-4 border-start-info"> 
-                                        <img src={Sound} alt='' style={{marginTop: '7px', paddingBottom: '12px', marginLeft: '15px'}} />
-                                      </div>
-                                      <div className='py-1 px-3 mb-3' style={{textAlign: 'right'}}>
-                                        <div className="text-medium-emphasis small">Звук</div>
-                                        <div className="fs-5 fw-semibold">0</div>
-                                      </div> 
-                                    </div>   
-                                  </CCol>
-                                  <CCol sm={6}>
-                                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                                      <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
-                                        <div className="text-medium-emphasis small">Свет</div>
-                                        <div className="fs-5 fw-semibold">0</div>
-                                      </div>
-                                      <img src={Light} alt='' style={{marginBottom: '15px'}} />
-                                    </div>   
-                                  </CCol>
-                                </CRow>
-                              </CCol>
-
-                              <CCol xs={12} md={6} xl={6}>
-                                <CRow>
-                                  <CCol sm={6}>
-                                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                                      <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
-                                        <div className="text-medium-emphasis small">Видео</div>
-                                        <div className="fs-5 fw-semibold">0</div>
-                                      </div>
-                                      <img src={Video} alt='' style={{marginBottom: '15px'}} />
-                                    </div>   
-                                  </CCol>
-                                  <CCol sm={6}>
-                                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                                      <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3"> 
-                                        <div className="text-medium-emphasis small">Хелперы</div>
-                                        <div className="fs-5 fw-semibold">0</div>
-                                      </div>
-                                      <img src={Stagehands} alt='' style={{marginBottom: '15px'}} />
-                                    </div>   
-                                  </CCol>
-                                </CRow>
-
-                                <div className="mb-5"></div>
-
-                              </CCol>
-                            </CRow> */}
-
                             <CRow>
                               <CCol md={6} style={{textAlign: 'center'}}>
                                 <CButton color="dark" onClick={()=>showBlock(1)} style={{marginRight: '20px', width: '120px'}}>Сутки</CButton>
@@ -913,8 +873,7 @@ const Admin = () => {
                                 </InputMask>                             
                                             
                                 <CButton color="dark" onClick={showBlock} style={{marginLeft: '10px'}}>Применить</CButton>
-                              </CCol>
-                              
+                              </CCol>      
                             </CRow>
                             
                             <br/>
@@ -934,48 +893,49 @@ const Admin = () => {
                                       <CTableHeaderCell className="text-center" style={{width: '150px'}}>Город</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '160px'}}>Специальность</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{width: '140px'}}>Дата рождения</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '150px'}}>Телефон</CTableHeaderCell>                         
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>                         
                                       <CTableHeaderCell className="text-center" style={{width: '120px'}}>Ник</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
-                                  <CTableBody>
-                                  {workers.map((item, index) => (
-                                    <CTableRow v-for="item in tableItems" key={index}>
-                                      <CTableDataCell className="text-center">
-                                        {/* {item.date.split('T')[0]} */}
-                                        {item.createDate.split('T')[0].split('-')[2]+ "."+ item.createDate.split('T')[0].split('-')[1] + "." +item.createDate.split('T')[0].split('-')[0]}
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        {/* {item.date.split('T')[1]} */}
-                                        {item.createDate.split('T')[1].split('Z')[0].slice(0, 5)}
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                          {item.userfamily +" "+ item.username}
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        {item.city}
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <table>
-                                          {(JSON.parse(item.worklist)).map((spec, index)=>( 
-                                              <tr key={index}>
-                                                <td >{spec.spec}</td>
-                                              </tr>          
-                                          ))}
-                                        </table>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        {item.dateborn.includes('-') ? item.dateborn.split('-')[0] : item.dateborn}
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        <div>{item.phone}</div>
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        {/* <div>{specusers.find((user) => user.chatId === item.chatId).username}</div> */}
-                                      </CTableDataCell> 
-                                    </CTableRow>
-                                  ))}
-                                </CTableBody>
+                                  <CTableBody>                                  
+                                    {sortWorkers.map((item, index) => (
+                                      <CTableRow v-for="item in tableItems" key={index}>
+                                        <CTableDataCell className="text-center">
+                                          {/* {item.date.split('T')[0]} */}
+                                          {item.createDate.split('T')[0].split('-')[2]+ "."+ item.createDate.split('T')[0].split('-')[1] + "." +item.createDate.split('T')[0].split('-')[0]}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          {/* {item.date.split('T')[1]} */}
+                                          {item.createDate.split('T')[1].split('Z')[0].slice(0, 5)}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                            {item.userfamily +" "+ item.username}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          {item.city}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <table>
+                                            {(JSON.parse(item.worklist)).map((spec, index)=>( 
+                                                <tr key={index}>
+                                                  <td >{spec.spec}</td>
+                                                </tr>          
+                                            ))}
+                                          </table>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          {item.dateborn.includes('-') ? item.dateborn.split('-')[0] : item.dateborn}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div>{item.phone}</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          {/* <div>{specusers.find((user) => user.chatId === item.chatId).username}</div> */}
+                                        </CTableDataCell> 
+                                      </CTableRow>
+                                      ))
+                                    }
+                                </CTableBody>                   
                               </CTable>
                             }
                               </CCol>
