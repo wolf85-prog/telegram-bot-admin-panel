@@ -76,6 +76,11 @@ const Admin = () => {
   const [loading2, setLoading2]= useState(true);
   const [sortWorkers, setSortWorkers]= useState([]);
 
+  const [dayWorkers, setDayWorkers]= useState([]);
+  const [weekWorkers, setWeekWorkers]= useState([]);
+  const [monthWorkers, setMonthWorkers]= useState([]);
+  const [yearWorkers, setYearWorkers]= useState([]);
+
   const [showRenthub, setShowRenthub]= useState(false);
   const [showWorkhub, setShowWorkhub]= useState(true);
 
@@ -117,6 +122,15 @@ const Admin = () => {
   useEffect(() => {
     setTabhub('Workhub')
   })
+
+  //get filter workers
+  useEffect(() => {
+    setSortWorkers(workers)
+
+    // const currentDate = Date.now()
+    // const arr1 = workers.filter(item => new Date(item.createDate).getTime() > currentDate)
+    // setDayWorkers(arr1)
+  }, workers)
 
   //get Contacts
   useEffect(() => {
@@ -255,6 +269,7 @@ const Admin = () => {
     switch (ind) {
       //за сутки
       case 1:{
+        //console.log("1")
         clearTimeout(timerId);
 
         //закрыть все плашки
@@ -290,6 +305,26 @@ const Admin = () => {
         setShowCharts2(false)
         setShowCharts3(false)
         setShowCharts4(false)
+
+        //фильтрация таблицы за сутки
+        const carrentDate = Date.now()
+        //console.log("carrentDate: ", carrentDate)
+        const needDate = carrentDate - 86400000
+        //console.log("needDate: ", needDate)
+        
+        
+        let arr = workers.filter(item => new Date(item.createDate).getTime() > needDate);
+        setSortWorkers(arr)
+        
+        let days1 = []
+        for (let i=0; i<=23; i++) {
+          const newObj= {
+                name: i + ':00', 
+                value: 1,
+              }
+          days1.push(newObj)
+        }       
+        setDayWorkers(days1)
 
         break;
       }
@@ -332,14 +367,32 @@ const Admin = () => {
 
         //фильтрация таблицы за неделю
         const carrentDate = Date.now()
-        console.log("carrentDate: ", carrentDate)
+        //console.log("carrentDate: ", carrentDate)
         const needDate = carrentDate - 604800000
-        console.log("needDate: ", needDate)
+        //console.log("needDate: ", needDate)
         
         
-        let arr = workers.map(item => console.log("date: ", new Date(item.createDate).getTime()));
-        //setSortWorkers(arr)
+        let arr = workers.filter(item => new Date(item.createDate).getTime() > needDate);
+        setSortWorkers(arr)
 
+        let week2 = []
+        let nameDay = ''
+        for (let i=1; i<=7; i++) {
+          if (i===1) nameDay = 'Пн'
+          if (i===2) nameDay = 'Вт'
+          if (i===3) nameDay = 'Ср'
+          if (i===4) nameDay = 'Чт'
+          if (i===5) nameDay = 'Пт'
+          if (i===6) nameDay = 'Сб'
+          if (i===7) nameDay = 'Вс'
+
+          const newObj= {
+                name: nameDay, 
+                value: 1,
+              }
+          week2.push(newObj)
+        }       
+        setWeekWorkers(week2)
         break;
       }
       //за месяц
@@ -379,10 +432,26 @@ const Admin = () => {
         setShowCharts3(true)
         setShowCharts4(false)
 
-        //фильтрация таблицы
-        let arr = workers.filter(item => item.createDate.split('T')[0].split('-')[1] === '10');
+        //фильтрация таблицы за месяц
+        const carrentDate = Date.now()
+        console.log("carrentDate: ", carrentDate)
+        const needDate = carrentDate - 2592000000
+        console.log("needDate: ", new Date(needDate))
+        
+        
+        let arr = workers.filter(item => new Date(item.createDate).getTime() > needDate);
         setSortWorkers(arr)
+        setMonthWorkers(arr)
 
+        let month3 = []
+        for (let i=1; i<=30; i++) {
+          const newObj= {
+                name: i, 
+                value: 1,
+              }
+              month3.push(newObj)
+        }       
+        setMonthWorkers(month3)
         break;
       }
       //за год
@@ -425,7 +494,30 @@ const Admin = () => {
         //фильтрация таблицы
         let arr = workers.filter(item => item.createDate.split('T')[0].split('-')[0] === '2023');
         setSortWorkers(arr)
+        setYearWorkers(arr)
 
+        let year4 = []
+        let nameMonth = ''
+        for (let i=1; i<=12; i++) {
+          if (i===1) nameMonth = 'Январь'
+          if (i===2) nameMonth = 'Февраль'
+          if (i===3) nameMonth = 'Март'
+          if (i===4) nameMonth = 'Апрель'
+          if (i===5) nameMonth = 'Май'
+          if (i===6) nameMonth = 'Июнь'
+          if (i===7) nameMonth = 'Июль'
+          if (i===8) nameMonth = 'Август'
+          if (i===9) nameMonth = 'Сентябрь'
+          if (i===10) nameMonth = 'Октябрь'
+          if (i===11) nameMonth = 'Ноябрь'
+          if (i===12) nameMonth = 'Декабрь'
+          const newObj= {
+                name: nameMonth, 
+                value: 1,
+              }
+              year4.push(newObj)
+        }       
+        setYearWorkers(year4)
         break;
       }
     }
@@ -470,7 +562,7 @@ const Admin = () => {
 
                 {showWidget2 
                 ?<WidgetsDropdown2
-                  users={workers.length}
+                  users={sortWorkers.length}
                   newUsers={0} 
                   activeUsers={0} 
                   delUsers={0}
@@ -479,28 +571,28 @@ const Admin = () => {
 
                 {showWidget3 
                 ?<WidgetsDropdown3
-                  soundUsers={1}
-                  lightUsers={1}
-                  videoUsers={1}
-                  stagehandsUsers={1}
+                  soundUsers={sortWorkers.length}
+                  lightUsers={sortWorkers.length}
+                  videoUsers={sortWorkers.length}
+                  stagehandsUsers={sortWorkers.length}
                 />
                 :""}
 
                 {showWidget4 
                 ?<WidgetsDropdown4
-                  photoUsers={2}
-                  cateringUsers={2}
-                  partyUsers={2}
-                  gamesUsers={2}
+                  photoUsers={sortWorkers.length}
+                  cateringUsers={sortWorkers.length}
+                  partyUsers={sortWorkers.length}
+                  gamesUsers={sortWorkers.length}
                 />
                 : ""}
 
                 {showWidget5 
                 ?<WidgetsDropdown5
-                  riggerUsers={3}
-                  stagegroundUsers={3}
-                  productionUsers={3}
-                  trucksUsers={3}
+                  riggerUsers={sortWorkers.length}
+                  stagegroundUsers={sortWorkers.length}
+                  productionUsers={sortWorkers.length}
+                  trucksUsers={sortWorkers.length}
                 />
                 : ""}
                 
@@ -513,60 +605,33 @@ const Admin = () => {
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
                   chart={            
-                    <Chart data={
-                      [
-                        { name: '0:00', value: 40 },
-                        { name: '01:00', value: 35 },
-                        { name: '02:00', value: 4 },
-                        { name: '03:00', value: 28 },
-                        { name: '04:00', value: 15 },
-                        { name: '05:00', value: 35 },
-                        { name: '06:00', value: 15 },
-                        { name: '07:00', value: 4 },
-                        { name: '08:00', value: 28 },
-                        { name: '09:00', value: 15 },
-                        { name: '10:00', value: 35 },
-                        { name: '11:00', value: 15 },
-                        { name: '12:00', value: 4 },
-                        { name: '13:00', value: 28 },
-                        { name: '14:00', value: 15 },
-                        { name: '15:00', value: 35 },
-                        { name: '16:00', value: 15 },
-                        { name: '17:00', value: 4 },
-                        { name: '18:00', value: 28 },
-                        { name: '19:00', value: 15 },
-                        { name: '20:00', value: 35 },
-                        { name: '21:00', value: 15 },
-                        { name: '22:00', value: 35 },
-                        { name: '23:00', value: 15 },
-                      ]
-                    } 
+                    <Chart data={dayWorkers} 
                     data2={
                       [
-                        { name: '0:00', value: 10 },
-                        { name: '01:00', value: 15 },
-                        { name: '02:00', value: 20 },
-                        { name: '03:00', value: 8 },
-                        { name: '04:00', value: 5 },
-                        { name: '05:00', value: 15 },
-                        { name: '06:00', value: 5 },
-                        { name: '07:00', value: 4 },
-                        { name: '08:00', value: 28 },
-                        { name: '09:00', value: 15 },
-                        { name: '10:00', value: 35 },
-                        { name: '11:00', value: 15 },
-                        { name: '12:00', value: 4 },
-                        { name: '13:00', value: 28 },
-                        { name: '14:00', value: 15 },
-                        { name: '15:00', value: 35 },
-                        { name: '16:00', value: 15 },
-                        { name: '17:00', value: 4 },
-                        { name: '18:00', value: 28 },
-                        { name: '19:00', value: 15 },
-                        { name: '20:00', value: 35 },
-                        { name: '21:00', value: 15 },
-                        { name: '22:00', value: 35 },
-                        { name: '23:00', value: 15 },
+                        { name: '0:00', value: 1 },
+                        { name: '01:00', value: 0 },
+                        { name: '02:00', value: 0 },
+                        { name: '03:00', value: 0 },
+                        { name: '04:00', value: 0 },
+                        { name: '05:00', value: 0 },
+                        { name: '06:00', value: 0 },
+                        { name: '07:00', value: 1 },
+                        { name: '08:00', value: 0 },
+                        { name: '09:00', value: 0 },
+                        { name: '10:00', value: 0 },
+                        { name: '11:00', value: 0 },
+                        { name: '12:00', value: 0 },
+                        { name: '13:00', value: 0 },
+                        { name: '14:00', value: 0 },
+                        { name: '15:00', value: 0 },
+                        { name: '16:00', value: 0 },
+                        { name: '17:00', value: 2 },
+                        { name: '18:00', value: 1 },
+                        { name: '19:00', value: 0 },
+                        { name: '20:00', value: 0 },
+                        { name: '21:00', value: 0 },
+                        { name: '22:00', value: 0 },
+                        { name: '23:00', value: 0 },
                       ]
                     }
                     width={900} height={550} />
@@ -579,31 +644,21 @@ const Admin = () => {
 {/* График Неделя */}
 {showCharts2 ?  <CWidgetStatsA
                   className="mb-4 box"
-                  color="primary"
+                  color="success"
                   value={<></>}
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
-                    <Chart data={
-                      [
-                        { name: 'Пн', value: 40 },
-                        { name: 'Вт', value: 35 },
-                        { name: 'Ср', value: 4 },
-                        { name: 'Чт', value: 28 },
-                        { name: 'Пт', value: 15 },
-                        { name: 'Сб', value: 35 },
-                        { name: 'Вс', value: 15 },
-                      ]
-                    } 
+                    <Chart data={weekWorkers} 
                     data2={
                       [
-                        { name: 'Пн', value: 10 },
-                        { name: 'Вт', value: 15 },
-                        { name: 'Ср', value: 20 },
-                        { name: 'Чт', value: 8 },
-                        { name: 'Пт', value: 5 },
-                        { name: 'Сб', value: 15 },
-                        { name: 'Вс', value: 5 },
+                        { name: 'Пн', value: 3 },
+                        { name: 'Вт', value: 0 },
+                        { name: 'Ср', value: 0 },
+                        { name: 'Чт', value: 0 },
+                        { name: 'Пт', value: 0 },
+                        { name: 'Сб', value: 0 },
+                        { name: 'Вс', value: 1 },
                       ]
                     }
                     width={900} height={550} />
@@ -615,41 +670,44 @@ const Admin = () => {
 {/* График Месяц */}
 {showCharts3 ?  <CWidgetStatsA
                   className="mb-4 box"
-                  color="primary"
+                  color="success"
                   value={<></>}
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
-                    <Chart data={
-                      [
-                        { name: '01', value: 40 },
-                        { name: '02', value: 35 },
-                        { name: '03', value: 4 },
-                        { name: '04', value: 28 },
-                        { name: '05', value: 15 },
-                        { name: '06', value: 35 },
-                        { name: '07', value: 15 },
-                        { name: '08', value: 4 },
-                        { name: '09', value: 28 },
-                        { name: '10', value: 15 },
-                        { name: '11', value: 35 },
-                        { name: '12', value: 15 },
-                      ]
-                    } 
+                    <Chart data={monthWorkers} 
                     data2={
                       [
-                        { name: '01', value: 10 },
-                        { name: '02', value: 15 },
-                        { name: '03', value: 20 },
-                        { name: '04', value: 8 },
-                        { name: '05', value: 5 },
-                        { name: '06', value: 15 },
-                        { name: '07', value: 5 },
-                        { name: '08', value: 20 },
-                        { name: '09', value: 8 },
-                        { name: '10', value: 5 },
-                        { name: '11', value: 15 },
-                        { name: '12', value: 5 },
+                        { name: '01', value: 1 },
+                        { name: '02', value: 0 },
+                        { name: '03', value: 0 },
+                        { name: '04', value: 0 },
+                        { name: '05', value: 0 },
+                        { name: '06', value: 0 },
+                        { name: '07', value: 0 },
+                        { name: '08', value: 0 },
+                        { name: '09', value: 0 },
+                        { name: '10', value: 0 },
+                        { name: '11', value: 0 },
+                        { name: '12', value: 1 },
+                        { name: '13', value: 1 },
+                        { name: '14', value: 0 },
+                        { name: '15', value: 0 },
+                        { name: '16', value: 0 },
+                        { name: '17', value: 0 },
+                        { name: '18', value: 0 },
+                        { name: '19', value: 0 },
+                        { name: '20', value: 0 },
+                        { name: '21', value: 0 },
+                        { name: '22', value: 0 },
+                        { name: '23', value: 0 },
+                        { name: '24', value: 1 },
+                        { name: '25', value: 1 },
+                        { name: '26', value: 0 },
+                        { name: '27', value: 0 },
+                        { name: '28', value: 0 },
+                        { name: '29', value: 0 },
+                        { name: '30', value: 0 },
                       ]
                     }
                     width={900} height={550} />
@@ -661,37 +719,26 @@ const Admin = () => {
 {/* График Год */}
 {showCharts4 ?  <CWidgetStatsA
                   className="mb-4 box"
-                  color="primary"
+                  color="success"
                   value={<></>}
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
                   chart={
-                    <Chart data={
-                      [
-                        { name: 'Январь', value: 40 },
-                        { name: 'Февраль', value: 35 },
-                        { name: 'Март', value: 4 },
-                        { name: 'Апрель', value: 28 },
-                        { name: 'Май', value: 15 },
-                        { name: 'Июнь', value: 35 },
-                        { name: 'Июль', value: 15 },
-                        { name: 'Август', value: 4 },
-                        { name: 'Сентябрь', value: 8 },
-                        { name: 'Октябрь', value: 1 },
-                      ]
-                    } 
+                    <Chart data={yearWorkers} 
                     data2={
                       [
-                        { name: 'Январь', value: 10 },
-                        { name: 'Февраль', value: 15 },
-                        { name: 'Март', value: 20 },
-                        { name: 'Апрель', value: 8 },
+                        { name: 'Январь', value: 0 },
+                        { name: 'Февраль', value: 0 },
+                        { name: 'Март', value: 0 },
+                        { name: 'Апрель', value: 0 },
                         { name: 'Май', value: 1 },
-                        { name: 'Июнь', value: 5 },
-                        { name: 'Июль', value: 25 },
-                        { name: 'Август', value: 14 },
+                        { name: 'Июнь', value: 0 },
+                        { name: 'Июль', value: 0 },
+                        { name: 'Август', value: 2 },
                         { name: 'Сентябрь', value: 2 },
-                        { name: 'Октябрь', value: 9 },
+                        { name: 'Октябрь', value: 0 },
+                        { name: 'Ноябрь', value: 0 },
+                        { name: 'Декабрь', value: 0 },
                       ]
                     }
                     width={900} height={550} />             
@@ -901,11 +948,9 @@ const Admin = () => {
                                     {sortWorkers.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
                                         <CTableDataCell className="text-center">
-                                          {/* {item.date.split('T')[0]} */}
                                           {item.createDate.split('T')[0].split('-')[2]+ "."+ item.createDate.split('T')[0].split('-')[1] + "." +item.createDate.split('T')[0].split('-')[0]}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          {/* {item.date.split('T')[1]} */}
                                           {item.createDate.split('T')[1].split('Z')[0].slice(0, 5)}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
