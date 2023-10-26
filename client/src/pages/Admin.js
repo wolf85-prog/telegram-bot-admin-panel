@@ -9,20 +9,13 @@ import {
   CNav,
   CNavItem,
   CNavLink,
-  CCardTitle,
-  CCardText,
-  CButtonGroup,
   CFormInput,
-  CInputGroup,
-  CInputGroupText,
   CButton,
   CCol,
   CProgress,
   CRow,
   CTable,
   CTableBody,
-  CTabContent,
-  CTabPane,
   CTableDataCell,
   CTableHead,
   CTableHeaderCell,
@@ -34,15 +27,8 @@ import {
 } from '@coreui/icons'
 
 import {
-  CDropdown,
-  CDropdownMenu,
-  CDropdownItem,
-  CDropdownToggle,
   CWidgetStatsA,
 } from '@coreui/react'
-import { getStyle } from '@coreui/utils'
-import { CChartBar, CChartLine } from '@coreui/react-chartjs'
-import { cilArrowBottom, cilOptions } from '@coreui/icons'
 
 import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 
@@ -75,6 +61,9 @@ const Admin = () => {
   const [loading, setLoading]= useState(true);
   const [loading2, setLoading2]= useState(true);
   const [sortWorkers, setSortWorkers]= useState([]);
+  
+  const [newWorkers, setNewWorkers]= useState([]);
+  const [activWorkers, setActivWorkers]= useState([]);
 
   const [dayWorkers, setDayWorkers]= useState([]);
   const [weekWorkers, setWeekWorkers]= useState([]);
@@ -100,18 +89,9 @@ const Admin = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const [tabhub, setTabhub]= useState('');
-  const [showCategory, setShowCategory] = useState(false)
-  const [showSound, setShowSound] = useState(false)
-  const [showLight, setShowLight] = useState(false)
-  const [showVideo, setShowVideo] = useState(false)
-  const [showStagehands, setShowStagehands] = useState(false)
-  
-  const [showPhoto, setShowPhoto] = useState(true)
-  const [showCatering, setShowCatering] = useState(true)
-  const [showParty, setShowParty] = useState(true)
-  const [showGames, setShowGames] = useState(true)
 
-  const [period, setPeriod] = useState(0)
+  const [periodDate1, setPeriodDate1] = useState("")
+  const [periodDate2, setPeriodDate2] = useState("")
 
   const [timerId, setTimerId] = useState()
 
@@ -127,9 +107,17 @@ const Admin = () => {
   useEffect(() => {
     setSortWorkers(workers)
 
-    // const currentDate = Date.now()
-    // const arr1 = workers.filter(item => new Date(item.createDate).getTime() > currentDate)
-    // setDayWorkers(arr1)
+    const currentDate = new Date()
+    const currentMonth = currentDate.getMonth()
+
+    //массив новых пользователей за текущий месяц
+    const arr1 = workers.filter(item => new Date(item.createDate).getMonth() === currentMonth)
+    setNewWorkers(arr1)
+
+    //массив активных пользователей за текущий месяц
+    const arr2 = specusers.filter(item => new Date(item.date).getMonth() === currentMonth)
+    setActivWorkers(arr2)
+
   }, workers)
 
   //get Contacts
@@ -269,7 +257,6 @@ const Admin = () => {
     switch (ind) {
       //за сутки
       case 1:{
-        //console.log("1")
         clearTimeout(timerId);
 
         //закрыть все плашки
@@ -494,8 +481,8 @@ const Admin = () => {
         //фильтрация таблицы
         let arr = workers.filter(item => item.createDate.split('T')[0].split('-')[0] === '2023');
         setSortWorkers(arr)
-        setYearWorkers(arr)
 
+        //график
         let year4 = []
         let nameMonth = ''
         for (let i=1; i<=12; i++) {
@@ -520,9 +507,64 @@ const Admin = () => {
         setYearWorkers(year4)
         break;
       }
+      //за период
+      case 5:{
+        console.log("за период", periodDate1, periodDate2)
+
+        clearTimeout(timerId);
+
+        //закрыть все плашки
+        setShowWidget2(false)
+        setShowWidget3(false)
+        setShowWidget4(false)
+        setShowWidget5(false)
+
+        //открыть стартовые плашки
+        setShowWidget3(true)
+        let i = 0
+        setTimerId(setInterval(() => {
+          if (i % 3 === 0) {
+            setShowWidget3(false)
+            setShowWidget4(true)
+            setShowWidget5(false)
+          }
+          if ((i+1) % 3 === 0) {
+            setShowWidget3(false)
+            setShowWidget4(false)
+            setShowWidget5(true)
+          }
+          if ((i+2) % 3 === 0) {
+            setShowWidget3(true)
+            setShowWidget4(false)
+            setShowWidget5(false)
+          }
+          i++
+        }, 3000));
+
+        setShowCharts(false)
+        setShowCharts2(false)
+        setShowCharts3(false)
+        setShowCharts4(true)
+
+        //фильтрация таблицы
+        let arr = workers.filter(item => new Date(item.createDate).getTime() > new Date(periodDate1).getTime() && new Date(item.createDate).getTime() < new Date(periodDate2).getTime());
+        setSortWorkers(arr)
+
+        //график
+        //...
+
+        break;
+      }
     }
   }
 
+  const changeDate1 = (e) => {
+    setPeriodDate1(e.target.value)
+  }
+
+  const changeDate2 = (e) => {
+    setPeriodDate2(e.target.value)
+  }
 
 
   const hideCharts = () => {
@@ -530,7 +572,6 @@ const Admin = () => {
     setShowCharts2(false)
     setShowCharts3(false)
     setShowCharts4(false)
-    setShowCategory(false)
     
     clearTimeout(timerId);
 
@@ -563,8 +604,8 @@ const Admin = () => {
                 {showWidget2 
                 ?<WidgetsDropdown2
                   users={sortWorkers.length}
-                  newUsers={0} 
-                  activeUsers={0} 
+                  newUsers={newWorkers.length} 
+                  activeUsers={activWorkers.length} 
                   delUsers={0}
                 />
                 :""}
@@ -899,27 +940,33 @@ const Admin = () => {
                                 <CButton color="dark" onClick={()=>showBlock(4)} style={{marginRight: '20px', width: '120px'}}>Год</CButton>
                               </CCol>
                               <CCol md={6} style={{textAlign: 'center', display: 'flex'}}>
-                                <InputMask mask="99.99.9999">
+                                <InputMask 
+                                  mask="99.99.9999"
+                                  value={periodDate1}
+                                  onChange={changeDate1}>
                                   {(inputProps) => <CFormInput 
                                                     {...inputProps} 
                                                     placeholder="01.01.2022" 
                                                     disableUnderline
                                                     aria-label="sm input example"
-                                                    style={{marginLeft: '10px'}}
+                                                    style={{marginLeft: '10px'}}    
                                                   />}
                                 </InputMask>
 
-                                <InputMask mask="99.99.9999">
+                                <InputMask 
+                                  mask="99.99.9999"
+                                  value={periodDate2}
+                                  onChange={changeDate2}>
                                   {(inputProps) => <CFormInput 
                                                     {...inputProps} 
                                                     placeholder="31.12.2022" 
                                                     disableUnderline
                                                     aria-label="sm input example"
-                                                    style={{marginLeft: '10px'}}
+                                                    style={{marginLeft: '10px'}} 
                                                   />}
                                 </InputMask>                             
                                             
-                                <CButton color="dark" onClick={showBlock} style={{marginLeft: '10px'}}>Применить</CButton>
+                                <CButton color="dark" onClick={()=>showBlock(5)} style={{marginLeft: '10px'}}>Применить</CButton>
                               </CCol>      
                             </CRow>
                             
