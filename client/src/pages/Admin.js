@@ -675,7 +675,7 @@ const Admin = () => {
                         { name: '23:00', value: 0 },
                       ]
                     }
-                    width={900} height={550} />
+                    width={950} height={550} />
 
                   }
                 />
@@ -702,7 +702,7 @@ const Admin = () => {
                         { name: 'Вс', value: 1 },
                       ]
                     }
-                    width={900} height={550} />
+                    width={950} height={550} />
                   }
                 />
 : ""
@@ -751,7 +751,7 @@ const Admin = () => {
                         { name: '30', value: 0 },
                       ]
                     }
-                    width={900} height={550} />
+                    width={950} height={550} />
                   }
                 />
 : ""
@@ -782,7 +782,7 @@ const Admin = () => {
                         { name: 'Декабрь', value: 0 },
                       ]
                     }
-                    width={900} height={550} />             
+                    width={950} height={550} />             
                   }
                 />
 : ""

@@ -15,45 +15,42 @@ import { useUsersContext } from "../chat-app-new/context/usersContext";
 
 const columns = [
   {
-      name: 'Фамилия',
+      name: 'Дата',
       selector: row => row.family,
       sortable: true,
   },
   {
-      name: 'Имя',
+      name: 'Проект',
       selector: row => row.name,
+      sortable: true,
+  },
+  
+  {
+      name: 'ФИО',
+      selector: row => row.family + row.name,
+      sortable: true,
+  },
+  
+  {
+      name: 'Специальности',
+      selector: row => row.worklist,
+      sortable: true,
+      width: '20%',
+  },
+  {
+      name: 'Ранг',
+      selector: row => row.stag,
+      sortable: true,
+  },
+  {
+      name: 'Комментарий',
+      selector: row => row.stag,
       sortable: true,
   },
   {
       name: 'Телефон',
       selector: row => row.phone,
       sortable: true,
-  },
-  {
-      name: 'Дата рождения',
-      selector: row => row.dateborn,
-      sortable: true,
-  },
-  {
-      name: 'Город',
-      selector: row => row.city,
-  },
-  {
-      name: 'Компании',
-      selector: row => row.companys,
-      sortable: true,
-      width: '20%',
-  },
-  {
-      name: 'Опыт работы',
-      selector: row => row.stag,
-      sortable: true,
-  },
-  {
-      name: 'Специальности',
-      selector: row => row.worklist,
-      sortable: true,
-      width: '20%',
   },
 ];
 
@@ -166,7 +163,7 @@ const Workers = () => {
 
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
-                    <h2>Специалисты</h2>
+                    <h2>Претенденты</h2>
                     
                     <CRow className="mb-3">
                       <CCol sm={3} >
