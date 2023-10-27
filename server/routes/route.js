@@ -28,7 +28,7 @@ const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers
 const { newMessageWorker, delMessageWorker, getMessagesWorker, getAllMessagesWorker } = require('../controllers/wmessageController')
 const { newConversationWorker, getConversationWorker } = require('../controllers/wconversationController')
 const { getWorkers, getWorker, editWorker} = require('../controllers/workersController')
-const { newPretendent, getPretendent, getPretendentId } = require('../controllers/pretendentController')
+const { newPretendent, getPretendent, getPretendentId, getAllPretendent } = require('../controllers/pretendentController')
 
 const { newPlan, getPlan, addTimer } = require('../controllers/planController')
 
