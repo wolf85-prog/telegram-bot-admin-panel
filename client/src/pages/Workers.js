@@ -10,7 +10,7 @@ import {
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
-import { getAllPretendent } from './../http/workerAPI'
+import { getAllPretendent, getWorkers } from './../http/workerAPI'
 
 const columns = [
   {
@@ -121,6 +121,8 @@ const Workers = () => {
       let pretendents = await getAllPretendent();
       console.log("pretendents: ", pretendents)
 
+      let workers = await getWorkers()
+
       pretendents.map(async (worker) => {
         specStr = ''
         specArr = []
@@ -135,11 +137,13 @@ const Workers = () => {
           specStr = ''
         }
         
+        //console.log("item: ", workers.map(item => item.chatId))
+        //console.log("worker: ", worker.receiverId)
 
         const newWorker = {
           date: worker.createdAt.split('T')[0].split('-')[2]+ "."+ worker.createdAt.split('T')[0].split('-')[1] + " | "+ worker.createdAt.split('T')[1].split('Z')[0].slice(0, 5),
           project: worker.projectId,
-          worker: worker.workerId,
+          worker: worker.receiverId, //workers.find(item => item.chatId === (worker.receiverId).toString()),
           //worklist: specStr,
           phone: worker.phone,
           // family: worker.userfamily,
