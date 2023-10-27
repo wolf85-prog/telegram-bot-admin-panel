@@ -15,37 +15,38 @@ import { getAllPretendent } from './../http/workerAPI'
 const columns = [
   {
       name: 'Дата',
-      selector: row => "01.01 | 0:00",
+      selector: row => row.date, //"01.01 | 0:00",
       sortable: true,
+      width: '12%',
   },
   {
       name: 'Проект',
-      selector: row => "Название проекта",
+      selector: row => row.project,
       sortable: true,
       width: '15%',
   },
   
   {
       name: 'ФИО',
-      selector: row => row.family +" "+ row.name,
+      selector: row => row.worker, //row.family +" "+ row.name,
       sortable: true,
       width: '20%',
   },
   
   {
       name: 'Специальности',
-      selector: row => row.worklist,
+      selector: row => "", //row.worklist,
       sortable: true,
       width: '25%',
   },
   {
       name: 'Ранг',
-      selector: row => row.stag,
+      selector: row => "", //row.stag,
       sortable: true,
   },
   {
       name: 'Комментарий',
-      selector: row => row.stag,
+      selector: row => "", //row.stag,
       sortable: true,
   },
   {
@@ -136,15 +137,20 @@ const Workers = () => {
         
 
         const newWorker = {
-          family: worker.userfamily,
-          name: worker.username,
+          date: worker.createdAt.split('T')[0].split('-')[2]+ "."+ worker.createdAt.split('T')[0].split('-')[1] + " | "+ worker.createdAt.split('T')[1].split('Z')[0].slice(0, 5),
+          project: worker.projectId,
+          worker: worker.workerId,
+          //worklist: specStr,
           phone: worker.phone,
-          dateborn: worker.dateborn,
-          city: worker.city,
-          companys: worker.companys,
-          stag: worker.stag,
-          worklist: specStr,
-          chatId: worker.chatId,
+          // family: worker.userfamily,
+          // name: worker.username,
+          // phone: worker.phone,
+          // dateborn: worker.dateborn,
+          // city: worker.city,
+          // companys: worker.companys,
+          // stag: worker.stag,
+          // worklist: specStr,
+          // chatId: worker.chatId,
 				}
         arrWorkers.push(newWorker)
       })
