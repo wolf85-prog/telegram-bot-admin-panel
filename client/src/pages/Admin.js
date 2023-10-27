@@ -47,7 +47,7 @@ import Chart from './../components/Chart'
 
 const Admin = () => {
 
-  const grafik_wrapper = useRef(null);
+  const grafik = useRef(null);
 
   const { users: clients } = useUsersContext();
   const { managers: zakazchiki } = useUsersContext();
@@ -87,6 +87,7 @@ const Admin = () => {
   const [showCharts2, setShowCharts2]= useState(false);
   const [showCharts3, setShowCharts3]= useState(false);
   const [showCharts4, setShowCharts4]= useState(false);
+  const [showCharts5, setShowCharts5]= useState(false);
 
   const [activeIndex, setActiveIndex] = useState(null);
 
@@ -107,10 +108,14 @@ const Admin = () => {
     //set tab
     setTabhub('Workhub')
 
-    //get width
-    //console.log("width: ", grafik_wrapper.offsetWidth())
-    //setWdthGrafik(grafik_wrapper.offsetWidth)
+    
   })
+
+  useEffect(() => {
+    //get width
+    console.log('width', grafik.current ? grafik.current.offsetWidth : 0);
+    setWdthGrafik(grafik.current ? grafik.current.offsetWidth - 100 : 0)
+  }, [grafik.current]);
 
   //get filter workers
   useEffect(() => {
@@ -301,6 +306,10 @@ const Admin = () => {
         setShowCharts2(false)
         setShowCharts3(false)
         setShowCharts4(false)
+        setShowCharts5(false)
+
+        //установить ширину графика
+        setTimeout(() =>setWdthGrafik(grafik.current ? grafik.current.clientWidth - 100 : 0), 2000 )
 
         //фильтрация таблицы за сутки
         const carrentDate = Date.now()
@@ -360,6 +369,10 @@ const Admin = () => {
         setShowCharts2(true)
         setShowCharts3(false)
         setShowCharts4(false)
+        setShowCharts5(false)
+
+        //установить ширину графика
+        setTimeout(() =>setWdthGrafik(grafik.current ? grafik.current.clientWidth - 100 : 0), 2000 )
 
         //фильтрация таблицы за неделю
         const carrentDate = Date.now()
@@ -428,6 +441,9 @@ const Admin = () => {
         setShowCharts3(true)
         setShowCharts4(false)
 
+        //установить ширину графика
+        setTimeout(() =>setWdthGrafik(grafik.current ? grafik.current.clientWidth - 100 : 0), 2000 )
+
         //фильтрация таблицы за месяц
         const carrentDate = Date.now()
         console.log("carrentDate: ", carrentDate)
@@ -486,8 +502,12 @@ const Admin = () => {
         setShowCharts2(false)
         setShowCharts3(false)
         setShowCharts4(true)
+        setShowCharts5(false)
 
-        //фильтрация таблицы
+        //установить ширину графика
+        setTimeout(() =>setWdthGrafik(grafik.current ? grafik.current.clientWidth - 100 : 0), 2000 )
+
+        //фильтрация таблицы за год
         let arr = workers.filter(item => item.createDate.split('T')[0].split('-')[0] === '2023');
         setSortWorkers(arr)
 
@@ -553,9 +573,13 @@ const Admin = () => {
         setShowCharts(false)
         setShowCharts2(false)
         setShowCharts3(false)
-        setShowCharts4(true)
+        setShowCharts4(false)
+        setShowCharts5(true)
 
-        //фильтрация таблицы
+        //установить ширину графика
+        setTimeout(() =>setWdthGrafik(grafik.current ? grafik.current.clientWidth - 100 : 0), 2000 )
+
+        //фильтрация таблицы за период
         let arr = workers.filter(item => new Date(item.createDate).getTime() > new Date(periodDate1).getTime() && new Date(item.createDate).getTime() < new Date(periodDate2).getTime());
         setSortWorkers(arr)
 
@@ -649,7 +673,7 @@ const Admin = () => {
 
 {/* График Сутки */}
  {showCharts ?  <CWidgetStatsA
-                  ref={grafik_wrapper}
+                  ref={grafik}
                   className="mb-4 box"
                   color="success"
                   value={<></>}
@@ -685,7 +709,7 @@ const Admin = () => {
                         { name: '23:00', value: 0 },
                       ]
                     }
-                    width={1000} height={350} />
+                    width={widthGrafik} height={350} />
 
                   }
                 />
@@ -694,7 +718,7 @@ const Admin = () => {
 
 {/* График Неделя */}
 {showCharts2 ?  <CWidgetStatsA
-                  ref={grafik_wrapper}
+                  ref={grafik}
                   className="mb-4 box"
                   color="success"
                   value={<></>}
@@ -713,7 +737,7 @@ const Admin = () => {
                         { name: 'Вс', value: 1 },
                       ]
                     }
-                    width={1000} height={350} />
+                    width={widthGrafik} height={350} />
                   }
                 />
 : ""
@@ -721,7 +745,7 @@ const Admin = () => {
 
 {/* График Месяц */}
 {showCharts3 ?  <CWidgetStatsA
-                  ref={grafik_wrapper}
+                  ref={grafik}
                   className="mb-4 box"
                   color="success"
                   value={<></>}
@@ -763,7 +787,7 @@ const Admin = () => {
                         { name: '30', value: 0 },
                       ]
                     }
-                    width={1000} height={350} />
+                    width={widthGrafik} height={350} />
                   }
                 />
 : ""
@@ -771,7 +795,7 @@ const Admin = () => {
 
 {/* График Год */}
 {showCharts4 ?  <CWidgetStatsA
-                  ref={grafik_wrapper}
+                  ref={grafik}
                   className="mb-4 box"
                   color="success"
                   value={<></>}
@@ -795,7 +819,42 @@ const Admin = () => {
                         { name: 'Декабрь', value: 0 },
                       ]
                     }
-                    width={1000} height={350} />             
+                    width={widthGrafik} height={350} />             
+                  }
+                />
+: ""
+}
+
+{/* График Период */}
+{showCharts5 ?  <CWidgetStatsA
+                  ref={grafik}
+                  className="mb-4 box"
+                  color="success"
+                  value={<></>}
+                  title=""
+                  action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
+                  chart={
+                    <Chart 
+                      data={yearWorkers}   
+                      data2={
+                        [
+                          { name: 'Январь', value: 0 },
+                          { name: 'Февраль', value: 0 },
+                          { name: 'Март', value: 0 },
+                          { name: 'Апрель', value: 0 },
+                          { name: 'Май', value: 1 },
+                          { name: 'Июнь', value: 0 },
+                          { name: 'Июль', value: 0 },
+                          { name: 'Август', value: 2 },
+                          { name: 'Сентябрь', value: 2 },
+                          { name: 'Октябрь', value: 0 },
+                          { name: 'Ноябрь', value: 0 },
+                          { name: 'Декабрь', value: 0 },
+                        ]
+                      }                 
+                      width={widthGrafik} 
+                      height={350} 
+                    />             
                   }
                 />
 : ""
