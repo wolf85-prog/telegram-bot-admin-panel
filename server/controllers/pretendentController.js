@@ -67,7 +67,7 @@ class PretendentController {
             const spec = await Pretendent.findAll({
                 // Add order conditions here....
                 order: [
-                    ['id', 'ASC'], //DESC
+                    ['id', 'DESC'], //DESC
                 ],
             })
             return res.status(200).json(spec);
