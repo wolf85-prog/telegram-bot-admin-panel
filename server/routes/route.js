@@ -102,7 +102,7 @@ route.patch('/workers/update/:id', editWorker)
 route.post('/pretendent/add', newPretendent)
 route.get('/pretendent/get/:id', getPretendentId)
 route.post('/pretendent/get', getPretendent)
-route.post('/pretendents/get', getAllPretendent)
+route.get('/pretendents/get', getAllPretendent)
 
 //------------------PLAN-----------------------------------
 route.post('/plan/add', newPlan)

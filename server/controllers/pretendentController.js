@@ -64,7 +64,12 @@ class PretendentController {
             const count = await Pretendent.count();
             //console.log(count)
 
-            const spec = await Pretendent.findAll()
+            const spec = await Pretendent.findAll({
+                // Add order conditions here....
+                order: [
+                    ['id', 'ASC'], //DESC
+                ],
+            })
             return res.status(200).json(spec);
         } catch (error) {
             return res.status(500).json(error.spec);
