@@ -16,26 +16,28 @@ import { useUsersContext } from "../chat-app-new/context/usersContext";
 const columns = [
   {
       name: 'Дата',
-      selector: row => row.family,
+      selector: row => "01.01 | 0:00",
       sortable: true,
   },
   {
       name: 'Проект',
-      selector: row => row.name,
+      selector: row => "Название проекта",
       sortable: true,
+      width: '15%',
   },
   
   {
       name: 'ФИО',
-      selector: row => row.family + row.name,
+      selector: row => row.family +" "+ row.name,
       sortable: true,
+      width: '20%',
   },
   
   {
       name: 'Специальности',
       selector: row => row.worklist,
       sortable: true,
-      width: '20%',
+      width: '25%',
   },
   {
       name: 'Ранг',
@@ -51,6 +53,7 @@ const columns = [
       name: 'Телефон',
       selector: row => row.phone,
       sortable: true,
+      width: '10%',
   },
 ];
 

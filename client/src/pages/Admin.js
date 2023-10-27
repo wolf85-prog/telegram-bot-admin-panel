@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from 'react'
+import React, { Suspense, useState, useEffect, useRef } from 'react'
 import { CContainer, CSpinner } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import {
@@ -46,6 +46,8 @@ import InputMask from 'react-input-mask';
 import Chart from './../components/Chart'
 
 const Admin = () => {
+
+  const grafik_wrapper = useRef(null);
 
   const { users: clients } = useUsersContext();
   const { managers: zakazchiki } = useUsersContext();
@@ -95,12 +97,19 @@ const Admin = () => {
 
   const [timerId, setTimerId] = useState()
 
+  const [widthGrafik, setWdthGrafik] = useState(0);
+
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
 
-  //set tab
+  
   useEffect(() => {
+    //set tab
     setTabhub('Workhub')
+
+    //get width
+    //console.log("width: ", grafik_wrapper.offsetWidth())
+    //setWdthGrafik(grafik_wrapper.offsetWidth)
   })
 
   //get filter workers
@@ -640,6 +649,7 @@ const Admin = () => {
 
 {/* График Сутки */}
  {showCharts ?  <CWidgetStatsA
+                  ref={grafik_wrapper}
                   className="mb-4 box"
                   color="success"
                   value={<></>}
@@ -675,7 +685,7 @@ const Admin = () => {
                         { name: '23:00', value: 0 },
                       ]
                     }
-                    width={950} height={550} />
+                    width={1000} height={350} />
 
                   }
                 />
@@ -684,6 +694,7 @@ const Admin = () => {
 
 {/* График Неделя */}
 {showCharts2 ?  <CWidgetStatsA
+                  ref={grafik_wrapper}
                   className="mb-4 box"
                   color="success"
                   value={<></>}
@@ -702,7 +713,7 @@ const Admin = () => {
                         { name: 'Вс', value: 1 },
                       ]
                     }
-                    width={950} height={550} />
+                    width={1000} height={350} />
                   }
                 />
 : ""
@@ -710,6 +721,7 @@ const Admin = () => {
 
 {/* График Месяц */}
 {showCharts3 ?  <CWidgetStatsA
+                  ref={grafik_wrapper}
                   className="mb-4 box"
                   color="success"
                   value={<></>}
@@ -751,7 +763,7 @@ const Admin = () => {
                         { name: '30', value: 0 },
                       ]
                     }
-                    width={950} height={550} />
+                    width={1000} height={350} />
                   }
                 />
 : ""
@@ -759,6 +771,7 @@ const Admin = () => {
 
 {/* График Год */}
 {showCharts4 ?  <CWidgetStatsA
+                  ref={grafik_wrapper}
                   className="mb-4 box"
                   color="success"
                   value={<></>}
@@ -782,7 +795,7 @@ const Admin = () => {
                         { name: 'Декабрь', value: 0 },
                       ]
                     }
-                    width={950} height={550} />             
+                    width={1000} height={350} />             
                   }
                 />
 : ""
