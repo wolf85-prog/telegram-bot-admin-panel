@@ -1,6 +1,5 @@
 import React, { Suspense, useEffect, useState } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
-import { getWorkers } from './../http/workerAPI'
 import DataTable, { createTheme } from 'react-data-table-component';
 import { 
   CContainer, 
@@ -11,7 +10,7 @@ import {
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
-
+import { getAllPretendent } from './../http/workerAPI'
 
 const columns = [
   {
@@ -102,24 +101,26 @@ createTheme('solarized', {
 }, 'dark');
 
 
+//Workers.js
 const Workers = () => {
 
-  //const { workers } = useUsersContext();
+  //const { pretendents } = useUsersContext();
 
   const [spec, setSpec] = useState([]); 
   const [pending, setPending] = useState(true);  
 
-  //get Workers
+  //get pretendents
   useEffect(() => {
     const arrWorkers = []
     let specStr
     let specArr
 
     const fetchData = async () => {
-      let workers = await getWorkers();
-      console.log("workers: ", workers)
 
-      workers.map(async (worker) => {
+      let pretendents = await getAllPretendent();
+      console.log("pretendents: ", pretendents)
+
+      pretendents.map(async (worker) => {
         specStr = ''
         specArr = []
 

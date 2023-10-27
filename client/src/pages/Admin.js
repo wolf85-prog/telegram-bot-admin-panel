@@ -1072,7 +1072,7 @@ const Admin = () => {
                                         <CTableDataCell className="text-center">
                                           {item.createDate.split('T')[1].split('Z')[0].slice(0, 5)}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
+                                        <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
                                             {item.userfamily +" "+ item.username}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
@@ -1087,8 +1087,8 @@ const Admin = () => {
                                             ))}
                                           </table>
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          {item.dateborn.includes('-') ? item.dateborn.split('-')[0] : item.dateborn}
+                                        <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
+                                          {item.dateborn}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div>{item.phone}</div>

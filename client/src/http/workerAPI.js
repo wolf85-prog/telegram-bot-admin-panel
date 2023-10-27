@@ -29,6 +29,15 @@ export const getWorkers = async () =>{
     }
 }
 
+export const getAllPretendent = async () =>{
+    try {
+       let response = await $host.get('api/pretendents/get');
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getAllPretendent api", error.message);
+    }
+}
+
 export const getWContacts = async () =>{
     try {
        let response = await $host.get('api/wuserbots/get');

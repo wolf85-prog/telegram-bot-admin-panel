@@ -58,6 +58,19 @@ class PretendentController {
         }
     }
 
+    //get All
+    async getAllPretendent(req, res) {
+        try {           
+            const count = await Pretendent.count();
+            //console.log(count)
+
+            const spec = await Pretendent.findAll()
+            return res.status(200).json(spec);
+        } catch (error) {
+            return res.status(500).json(error.spec);
+        }
+    }
+
 }
 
 module.exports = new PretendentController()
