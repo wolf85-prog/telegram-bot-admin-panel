@@ -10,6 +10,11 @@ import {
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
+import { 
+  getWorkerId, 
+  getProjects3, 
+  newPretendent 
+} from './../http/adminAPI';
 import { getAllPretendent, getWorkers } from './../http/workerAPI'
 
 const columns = [
@@ -106,9 +111,10 @@ createTheme('solarized', {
 const Workers = () => {
 
   //const { pretendents } = useUsersContext();
-  const { projects } = useUsersContext();
+  //const { projects } = useUsersContext();
   const { setNewPretendent } = useUsersContext();
 
+  const [projects, setProjects] = useState([]); 
   const [spec, setSpec] = useState([]); 
   const [pending, setPending] = useState(true);  
 
@@ -125,11 +131,13 @@ const Workers = () => {
       let pretendents = await getAllPretendent();
       console.log("pretendents: ", pretendents)
 
+      let workers = await getWorkers()
+      //console.log("workers: ", workers)
+
+      let projects = await getProjects3();
       console.log("projects: ", projects)
 
-      let workers = await getWorkers()
-
-      //console.log("workers: ", workers)
+      setProjects(projects) 
 
       pretendents.map(async (worker) => {
         specStr = ''
@@ -145,7 +153,7 @@ const Workers = () => {
           specStr = ''
         }
 
-        let userObject = projects.find((proj) => proj.projectId === worker.projectId);  
+        let userObject = projects.find((proj) => proj.id === worker.projectId);  
         const projectName = userObject?.name
 
         let userObject2 = workers.find((item) => item.chatId === worker.receiverId);  
