@@ -125,7 +125,7 @@ const Workers = () => {
       let pretendents = await getAllPretendent();
       console.log("pretendents: ", pretendents)
 
-      //console.log("projects: ", projects)
+      console.log("projects: ", projects)
 
       let workers = await getWorkers()
 
@@ -151,7 +151,7 @@ const Workers = () => {
         let userObject2 = workers.find((item) => item.chatId === worker.receiverId);  
         const workerName = userObject2?.userfamily + " "+ userObject2?.username
 
-        const d = new Date(worker.createdAt).getTime() + 10800000 //Текущая дата:  + 3 часа)
+        const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
         const d2 = new Date(d)
 
         const month = String(d2.getMonth()+1).padStart(2, "0");
@@ -160,7 +160,7 @@ const Workers = () => {
         const min = String(d2.getMinutes()).padStart(2, "0");
         
         const newDate = `${day}.${month} ${chas}:${min}`;
-        console.log(newDate)
+        //console.log(newDate)
 
         const newWorker = {
           date: newDate, //newDate,
