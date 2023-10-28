@@ -22,7 +22,7 @@ const columns = [
       name: 'Дата',
       selector: row => row.date, //"01.01 | 0:00",
       sortable: true,
-      maxWidth: '50px',
+      width: '98px',
       center: true,
   },
   {
@@ -45,14 +45,14 @@ const columns = [
       name: 'Специальность',
       selector: row => row.worklist,
       sortable: true,
-      maxWidth: '250px',
+      maxWidth: '200px',
       center: true,
   },
   {
       name: 'U.L.E.Y',
       selector: row => row.rang,
       sortable: true,
-      maxWidth: '50px',
+      width: '110px',
       center: true,
   },
   {
@@ -66,7 +66,7 @@ const columns = [
       name: 'Телефон',
       selector: row => row.phone,
       sortable: true,
-      maxWidth: '150px',
+      width: '150px',
       center: true,
   },
 ];
@@ -76,7 +76,6 @@ const customStyles = {
   rows: {
       style: {
           //minHeight: '72px', // override the row height
-          textAlign: 'cenetr'
       },
   },
   headCells: {
@@ -116,6 +115,9 @@ createTheme('solarized', {
     disabled: 'rgba(0,0,0,.12)',
   },
 }, 'dark');
+
+const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
+
 
 
 //Workers.js
@@ -233,6 +235,8 @@ const Workers = () => {
                       progressPending={pending}
 			                progressComponent={<CSpinner />}
                       customStyles={customStyles}
+                      // expandableRows 
+                      // expandableRowsComponent={ExpandedComponent}
                     />
                   </Suspense>
             </CContainer>
