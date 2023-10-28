@@ -714,7 +714,8 @@ const fetchMessageSpecResponse = async(data) => {
 		audioPretendent.play();
 
 		//пришел новый претендент
-		setNewPretendent(true)
+		//setNewPretendent(true)
+		setCountPretendent(countPretendent + 1);
 
 		//get all pretendent
 		let pretendents = await getAllPretendent();
@@ -935,6 +936,8 @@ const fetchNotifAdmin = (data) => {
 			addNewDistrib,
 			newPretendent,
 			setNewPretendent,
+			countPretendent, 
+			setCountPretendent,
 		}}>
 			{children}
 		</UsersContext.Provider>

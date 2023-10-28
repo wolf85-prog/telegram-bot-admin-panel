@@ -25,7 +25,7 @@ const AppSidebar = () => {
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { countMessage, newProject, countMessageWork, newPretendent } = useUsersContext();
+  const { countMessage, newProject, countMessageWork, countPretendent } = useUsersContext();
   //console.log("countMessage: ", countMessage)
   
   let navigation = []
@@ -107,7 +107,7 @@ const AppSidebar = () => {
       name: 'Уведомления',
       to: '/workers',
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-      badge: newPretendent ? {color: 'info', text: '1',} : "",
+      badge: countPretendent ? {color: 'info', text: '1',} : "",
     },
   ]
 

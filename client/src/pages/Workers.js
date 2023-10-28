@@ -15,50 +15,59 @@ import {
   getProjects3, 
   newPretendent 
 } from './../http/adminAPI';
-import { getAllPretendent, getWorkers } from './../http/workerAPI'
+import { getAllPretendent, getWorkers, getWorkersNotion, getWorkerNotionId } from './../http/workerAPI'
 
 const columns = [
   {
       name: 'Дата',
       selector: row => row.date, //"01.01 | 0:00",
       sortable: true,
-      width: '12%',
+      maxWidth: '50px',
+      center: true,
   },
   {
       name: 'Проект',
       selector: row => row.project,
       sortable: true,
-      width: '15%',
+      maxWidth: '120px',
+      center: true,
   },
   
   {
       name: 'ФИО',
       selector: row => row.worker, //row.family +" "+ row.name,
       sortable: true,
-      width: '20%',
+      maxWidth: '180px',
+      center: true,
   },
   
   {
-      name: 'Специальности',
-      selector: row => "", //row.worklist,
+      name: 'Специальность',
+      selector: row => row.worklist,
       sortable: true,
-      width: '25%',
+      maxWidth: '250px',
+      center: true,
   },
   {
       name: 'U.L.E.Y',
-      selector: row => "", //row.stag,
+      selector: row => row.rang,
       sortable: true,
+      maxWidth: '50px',
+      center: true,
   },
   {
       name: 'Комментарий',
-      selector: row => "", //row.stag,
+      selector: row => row.comment,
       sortable: true,
+      maxWidth: '180px',
+      center: true,
   },
   {
       name: 'Телефон',
       selector: row => row.phone,
       sortable: true,
-      width: '10%',
+      maxWidth: '150px',
+      center: true,
   },
 ];
 
@@ -114,7 +123,7 @@ const Workers = () => {
 
   //const { pretendents } = useUsersContext();
   //const { projects } = useUsersContext();
-  const { setNewPretendent } = useUsersContext();
+  const { setCountPretendent } = useUsersContext();
 
   const [projects, setProjects] = useState([]); 
   const [spec, setSpec] = useState([]); 
@@ -126,7 +135,7 @@ const Workers = () => {
     let specStr
     let specArr
 
-    setNewPretendent(false)
+    setCountPretendent(0)
 
     const fetchData = async () => {
 
@@ -142,18 +151,6 @@ const Workers = () => {
       setProjects(projects) 
 
       pretendents.map(async (worker) => {
-        specStr = ''
-        specArr = []
-
-        if (worker.worklist) {
-          specArr = JSON.parse(worker.worklist)
-        }
-        
-        if (specArr) {
-          specArr.map(item => specStr = specStr + item.spec + ', ' )
-        } else {
-          specStr = ''
-        }
 
         let userObject = projects.find((proj) => proj.id === worker.projectId);  
         const projectName = userObject?.name
@@ -170,22 +167,40 @@ const Workers = () => {
         const min = String(d2.getMinutes()).padStart(2, "0");
         
         const newDate = `${day}.${month} ${chas}:${min}`;
-        //console.log(newDate)
 
-        const newWorker = {
-          date: newDate, //newDate,
-          project: projectName,
-          worker: workerName, 
-          //worklist: specStr,
-          //phone: worker.phone,
+        //worklist
+        const workNotions = await getWorkerNotionId(worker.receiverId)
+        console.log("workNotions: ", workNotions[0])
 
-				}
-        arrWorkers.push(newWorker)
-      })
+        specStr = ''
+        specArr = []
 
-      setSpec(arrWorkers) 
+        
+        if (workNotions[0]) {
+          workNotions[0].spec.map(item => specStr = specStr + item.name + ', ' )
+        } else {
+          specStr = ''
+        }
 
-      setPending(false);
+        setTimeout(()=> {
+          const newWorker = {
+            date: newDate, //newDate,
+            project: projectName,
+            worker: workerName, 
+            worklist: specStr,
+            rang: workNotions[0]?.rank,
+            comment: workNotions[0]?.comment,
+            phone: workNotions[0]?.phone,
+
+          }
+          arrWorkers.push(newWorker)
+
+          setSpec(arrWorkers) 
+
+          setPending(false);
+        }, 3000)
+        
+      })  
     }
 
     fetchData();
