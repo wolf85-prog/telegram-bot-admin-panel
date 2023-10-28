@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./socketContext";
 import { getContacts, getConversation, getMessages } from '../../http/chatAPI'
-import { getWContacts, getWConversation, getWMessages, getWorkers } from '../../http/workerAPI'
+import { getAllPretendent, getWContacts, getWConversation, getWMessages, getWorkers } from '../../http/workerAPI'
 import { getWorkerNotionId, getWorkerChildrenId} from './../../http/workerAPI';
 import { getDistributions, 
 	getDistributionsW, 
@@ -20,6 +20,7 @@ import sound15 from './../../assets/sound/15_minut_ULEY.mp3';
 import sound0 from './../../assets/sound/0_minut_ULEY.mp3';
 import sendSound from './../assets/sounds/sendmessage.mp3';
 import smsWorkhub from './../../chat-app-worker/assets/sounds/sms_iphone.mp3';
+import notifWorkhub from './../../chat-app-worker/assets/sounds/soundPretendent.mp3';
 
 const UsersContext = createContext();
 
@@ -39,6 +40,10 @@ const UsersProvider = ({ children }) => {
 	const [projects, setProjects] = useState([]); 
 	const [newProject, setNewProject]= useState(false);
 
+	const [pretendents, setPretendents] = useState([])
+	const [newPretendent, setNewPretendent] = useState(false);
+	const [countPretendent, setCountPretendent] = useState(0)
+
 	const [userWorkers, setUserWorkers] = useState([]); //useState(contacts);
 	const [workers, setWorkers] = useState([]); //useState(contacts);
 	const [countMessageWork, setCountMessageWork] = useState(0)
@@ -56,6 +61,7 @@ const UsersProvider = ({ children }) => {
 	
 	const audioSend = new Audio(sendSound);
 	const audioWorkhub = new Audio(smsWorkhub);
+	const audioPretendent = new Audio(notifWorkhub)
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -700,20 +706,23 @@ const fetchMessageSpecResponse = async(data) => {
 	//console.log("date: ", data)
 	//console.log("Пришло новое сообщение в workhub: ", count+1)
 	//setCount(count+1);
-	setCountMessageWork(countMessageWork + 1)
 
-	if (data.text.startsWith('Специалист успешно добавлен!') && !data.text.includes('_reply_')) {
-		//console.log("Пришел новый специаилст: ")
-		//audioProject.play();
-		//пришел новый специалист
-		//setNewProject(true)
+	if (data.text.startsWith('Пользователь нажал кнопку "Принять" в рассылке') && !data.text.includes('_reply_')) {
 		
-		//get all projects
-		let workers = await getWorkers();
+		console.log("Добавился новый претендент: ")
+		//play sound
+		audioPretendent.play();
+
+		//пришел новый претендент
+		setNewPretendent(true)
+
+		//get all pretendent
+		let pretendents = await getAllPretendent();
 		//console.log("projects get socket: ", projects.length)
-		setWorkers(workers)
+		setPretendents(pretendents)
 	}
 	else {
+		setCountMessageWork(countMessageWork + 1)
 		console.log("Пришло новое сообщение в workhub: ", count+1)
 		//play sound
 		audioWorkhub.play();		
@@ -924,6 +933,8 @@ const fetchNotifAdmin = (data) => {
 			distributionsWork, 
 			setDistributionsWork,
 			addNewDistrib,
+			newPretendent,
+			setNewPretendent,
 		}}>
 			{children}
 		</UsersContext.Provider>

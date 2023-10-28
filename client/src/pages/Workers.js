@@ -106,6 +106,8 @@ createTheme('solarized', {
 const Workers = () => {
 
   //const { pretendents } = useUsersContext();
+  const { projects } = useUsersContext();
+  const { setNewPretendent } = useUsersContext();
 
   const [spec, setSpec] = useState([]); 
   const [pending, setPending] = useState(true);  
@@ -116,12 +118,18 @@ const Workers = () => {
     let specStr
     let specArr
 
+    setNewPretendent(false)
+
     const fetchData = async () => {
 
       let pretendents = await getAllPretendent();
       console.log("pretendents: ", pretendents)
 
+      //console.log("projects: ", projects)
+
       let workers = await getWorkers()
+
+      //console.log("workers: ", workers)
 
       pretendents.map(async (worker) => {
         specStr = ''
@@ -136,25 +144,31 @@ const Workers = () => {
         } else {
           specStr = ''
         }
+
+        let userObject = projects.find((proj) => proj.projectId === worker.projectId);  
+        const projectName = userObject?.name
+
+        let userObject2 = workers.find((item) => item.chatId === worker.receiverId);  
+        const workerName = userObject2?.userfamily + " "+ userObject2?.username
+
+        const d = new Date(worker.createdAt).getTime() + 10800000 //Текущая дата:  + 3 часа)
+        const d2 = new Date(d)
+
+        const month = String(d2.getMonth()+1).padStart(2, "0");
+        const day = String(d2.getDate()).padStart(2, "0");
+        const chas = d2.getHours();
+        const min = String(d2.getMinutes()).padStart(2, "0");
         
-        //console.log("item: ", workers.map(item => item.chatId))
-        //console.log("worker: ", worker.receiverId)
+        const newDate = `${day}.${month} ${chas}:${min}`;
+        console.log(newDate)
 
         const newWorker = {
-          date: worker.createdAt.split('T')[0].split('-')[2]+ "."+ worker.createdAt.split('T')[0].split('-')[1] + " | "+ worker.createdAt.split('T')[1].split('Z')[0].slice(0, 5),
-          project: worker.projectId,
-          worker: worker.receiverId, //workers.find(item => item.chatId === (worker.receiverId).toString()),
+          date: newDate, //newDate,
+          project: projectName,
+          worker: workerName, 
           //worklist: specStr,
-          phone: worker.phone,
-          // family: worker.userfamily,
-          // name: worker.username,
-          // phone: worker.phone,
-          // dateborn: worker.dateborn,
-          // city: worker.city,
-          // companys: worker.companys,
-          // stag: worker.stag,
-          // worklist: specStr,
-          // chatId: worker.chatId,
+          //phone: worker.phone,
+
 				}
         arrWorkers.push(newWorker)
       })

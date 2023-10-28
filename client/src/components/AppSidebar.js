@@ -15,6 +15,7 @@ import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import CompIcon from 'src/assets/images/dashboard3.png'
+import { newPretendent } from 'src/http/adminAPI'
 
 // sidebar nav config
 //import navigation from '../_nav'
@@ -24,7 +25,7 @@ const AppSidebar = () => {
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { countMessage, newProject, countMessageWork } = useUsersContext();
+  const { countMessage, newProject, countMessageWork, newPretendent } = useUsersContext();
   //console.log("countMessage: ", countMessage)
   
   let navigation = []
@@ -106,7 +107,7 @@ const AppSidebar = () => {
       name: 'Уведомления',
       to: '/workers',
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-      //badge: newProject ? {color: 'info', text: '1',} : "",
+      badge: newPretendent ? {color: 'info', text: '1',} : "",
     },
   ]
 
