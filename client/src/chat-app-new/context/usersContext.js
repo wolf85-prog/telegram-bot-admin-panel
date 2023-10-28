@@ -715,6 +715,7 @@ const fetchMessageSpecResponse = async(data) => {
 
 		//пришел новый претендент
 		//setNewPretendent(true)
+		console.log("countPretendent: ", countPretendent + 1)
 		setCountPretendent(countPretendent + 1);
 
 		//get all pretendent
