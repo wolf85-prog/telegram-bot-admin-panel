@@ -65,6 +65,7 @@ class PretendentController {
             //console.log(count)
 
             const spec = await Pretendent.findAll({
+                where: {accept: true},
                 // Add order conditions here....
                 order: [
                     ['id', 'DESC'], //DESC
