@@ -63,6 +63,7 @@ const DistributionAddW = () => {
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_HOST
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
+  const webAppAddStavka = process.env.REACT_APP_WEBAPP_STAVKA
 
   const { users: clients, workers } = useUsersContext();
   const { addNewDistrib, addNewMessage, setDistributionsWork } = useUsersContext();
@@ -1140,7 +1141,7 @@ const delCategory7 = (category) => {
                     {"text": 'Отклонить', callback_data:'/cancel'},
                 ],
                 [
-                  {"text": "Своя ставка", callback_data:'/addstavka'},
+                  {"text": "Своя ставка", web_app: {url: webAppAnketa}},
               ],
             ]
           });
