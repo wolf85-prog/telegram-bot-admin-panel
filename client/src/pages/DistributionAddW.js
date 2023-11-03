@@ -133,6 +133,8 @@ const DistributionAddW = () => {
 
   const [visibleModal, setVisibleModal] = useState(false);
   const [showUpload, setShowUpload] = useState(false);
+
+  const [onButtonStavka, setOnButtonStavka] = useState(false)
   
   const audio = new Audio(sendSound);
 
@@ -1128,14 +1130,33 @@ const delCategory7 = (category) => {
           ]
         });
 
-        const keyboard2 = JSON.stringify({
-          inline_keyboard: [
-              [
-                  {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
-                  {"text": 'Отклонить', callback_data:'/cancel'},
+        let keyboard2
+
+        if (onButtonStavka) {
+          keyboard2 = JSON.stringify({
+            inline_keyboard: [
+                [
+                    {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
+                    {"text": 'Отклонить', callback_data:'/cancel'},
+                ],
+                [
+                  {"text": "Своя ставка", callback_data:'/addstavka'},
               ],
-          ]
-        });
+            ]
+          });
+        } else {
+          keyboard2 = JSON.stringify({
+            inline_keyboard: [
+                [
+                    {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
+                    {"text": 'Отклонить', callback_data:'/cancel'},
+                ],
+            ]
+          });
+        }
+        
+
+        
 
         //отправить в телеграмм
         let sendToTelegram
@@ -1229,6 +1250,11 @@ const delCategory7 = (category) => {
       setVisibleModal(!visibleModal)
     }
   
+  }
+
+
+  const onChangeCheckButton = (e) => {
+    setOnButtonStavka(e.target.value)
   }
 
   return (
@@ -1554,6 +1580,12 @@ const delCategory7 = (category) => {
 
                                         <CCol sm={6} style={{display: 'flex', justifyContent: 'flex-end'}}> 
                                           <CFormCheck 
+                                            id="flexCheckDefault" 
+                                            label="Изменить cтавку"
+                                            onChange={onChangeCheckButton}
+                                          />
+
+                                          <CFormCheck 
                                             type="radio"
                                             id="appleButtonRadio" 
                                             name="groupRadioButton"
@@ -1561,7 +1593,7 @@ const delCategory7 = (category) => {
                                             checked={!showEditButtonAdd}
                                             onChange={onChangeAddButton2}
                                             //defaultChecked
-                                          />
+                                          /> 
                                         </CCol>
                                       </CRow>
 
