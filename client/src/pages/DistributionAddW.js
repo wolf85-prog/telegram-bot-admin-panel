@@ -1141,7 +1141,7 @@ const delCategory7 = (category) => {
                     {"text": 'Отклонить', callback_data:'/cancel'},
                 ],
                 [
-                  {"text": "Своя ставка", web_app: {url: webAppAddStavka}},
+                  {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka}},
               ],
             ]
           });
@@ -1564,7 +1564,7 @@ const delCategory7 = (category) => {
 
                                         {/* Ряд кнопок */}
                                         <CRow className="mb-6">
-                                          <CCol sm={6} > 
+                                          <CCol sm={4} style={{fontSize: '13px'}}> 
                                             <CFormCheck 
                                               type="radio"
                                               id="addButtonRadio" 
@@ -1579,13 +1579,7 @@ const delCategory7 = (category) => {
 
                                           </CCol>
 
-                                        <CCol sm={6} style={{display: 'flex', justifyContent: 'flex-end'}}> 
-                                          <CFormCheck 
-                                            id="flexCheckDefault" 
-                                            label="Изменить cтавку"
-                                            onChange={onChangeCheckButton}
-                                          />
-
+                                        <CCol sm={4} style={{display: 'flex', justifyContent: 'flex-end', fontSize: '13px'}}> 
                                           <CFormCheck 
                                             type="radio"
                                             id="appleButtonRadio" 
@@ -1595,6 +1589,15 @@ const delCategory7 = (category) => {
                                             onChange={onChangeAddButton2}
                                             //defaultChecked
                                           /> 
+ 
+                                        </CCol>
+
+                                        <CCol sm={4} style={{display: 'flex', justifyContent: 'flex-end', fontSize: '13px'}}>
+                                          <CFormCheck 
+                                            id="flexCheckDefault" 
+                                            label="Альтернативная ставка"
+                                            onChange={onChangeCheckButton}
+                                          />
                                         </CCol>
                                       </CRow>
 
