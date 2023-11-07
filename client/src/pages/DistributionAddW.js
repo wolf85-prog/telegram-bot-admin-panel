@@ -1141,7 +1141,7 @@ const delCategory7 = (category) => {
                     {"text": 'Отклонить', callback_data:'/cancel'},
                 ],
                 [
-                  {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka}},
+                  {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + pretendentId.id}},
               ],
             ]
           });
