@@ -1579,7 +1579,7 @@ const delCategory7 = (category) => {
 
                                           </CCol>
 
-                                        <CCol sm={4} style={{display: 'flex', justifyContent: 'flex-end', fontSize: '13px'}}> 
+                                        <CCol sm={4} style={{display: 'flex', justifyContent: 'flex-start', fontSize: '13px'}}> 
                                           <CFormCheck 
                                             type="radio"
                                             id="appleButtonRadio" 
