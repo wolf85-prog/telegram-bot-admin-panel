@@ -1138,7 +1138,7 @@ const delCategory7 = (category) => {
             inline_keyboard: [
                 [
                     {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
-                    {"text": 'Отклонить', callback_data:'/cancel'},
+                    {"text": 'Отклонить', callback_data:'/cancel ' + pretendentId.id},
                 ],
                 [
                   {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + pretendentId.id}},
