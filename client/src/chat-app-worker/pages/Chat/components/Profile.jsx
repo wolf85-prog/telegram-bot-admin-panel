@@ -200,7 +200,7 @@ const Profile = ({ user }) => {
 
 		if (show) {
 			//send photo
-			let anketa = 'https://proj.uley.team/upload/anketa_poster_new.png' //poster anketa
+			let anketa = 'https://proj.uley.team/upload/2023-11-10T15:12:36.770Z.png' //poster anketa
 			const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.chatId}&photo=${anketa}&reply_markup=${show ? keyboard : ''}`
 			console.log(url_send_photo)	
 			sendToTelegram = await $host.get(url_send_photo);
