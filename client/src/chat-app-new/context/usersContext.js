@@ -20,7 +20,7 @@ import sound15 from './../../assets/sound/15_minut_ULEY.mp3';
 import sound0 from './../../assets/sound/0_minut_ULEY.mp3';
 import sendSound from './../assets/sounds/sendmessage.mp3';
 import smsWorkhub from './../../chat-app-worker/assets/sounds/sms_iphone.mp3';
-import notifPretendent from './../../chat-app-worker/assets/sounds/pretendent.mp3';
+import notifPretendent from './../../chat-app-worker/assets/sounds/pretendent2.mp3';
 
 const UsersContext = createContext();
 

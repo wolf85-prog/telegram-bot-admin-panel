@@ -1138,7 +1138,7 @@ const delCategory7 = (category) => {
             inline_keyboard: [
                 [
                     {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
-                    {"text": 'Отклонить', callback_data:'/cancel'},
+                    {"text": 'Отклонить', callback_data:'/cancel ' + pretendentId.id},
                 ],
                 [
                   {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + pretendentId.id}},
@@ -1150,7 +1150,7 @@ const delCategory7 = (category) => {
             inline_keyboard: [
                 [
                     {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
-                    {"text": 'Отклонить', callback_data:'/cancel'},
+                    {"text": 'Отклонить', callback_data:'/cancel ' + pretendentId.id},
                 ],
             ]
           });
@@ -1579,7 +1579,7 @@ const delCategory7 = (category) => {
 
                                           </CCol>
 
-                                        <CCol sm={4} style={{display: 'flex', justifyContent: 'flex-end', fontSize: '13px'}}> 
+                                        <CCol sm={4} style={{display: 'flex', justifyContent: 'flex-start', fontSize: '13px'}}> 
                                           <CFormCheck 
                                             type="radio"
                                             id="appleButtonRadio" 
