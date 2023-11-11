@@ -15,6 +15,8 @@ import {
   CTableRow,
   CCard,
   CCardBody,
+  CCollapse,
+  CButton, 
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
@@ -38,6 +40,8 @@ const Workers = () => {
   const [pending, setPending] = useState(true);  
 
   const [loading, setLoading]= useState(true);
+
+  const [visibleA, setVisibleA] = useState(false)
 
   //get pretendents
   useEffect(() => {
@@ -173,13 +177,16 @@ const Workers = () => {
                                             {item.worker}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          <table>
-                                            {(item.worklist).map((spec, index)=>( 
-                                                <tr key={index}>
-                                                  <td >{spec.name}</td>
-                                                </tr>          
-                                            ))}
-                                          </table>
+                                          <div onClick={() => setVisibleA(!visibleA)}>Посмотреть</div>
+                                          <CCollapse visible={visibleA}>
+                                            <table>
+                                              {(item.worklist).map((spec, index)=>( 
+                                                  <tr key={index}>
+                                                    <td >{spec.name}</td>
+                                                  </tr>          
+                                              ))}
+                                            </table>
+                                          </CCollapse>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           {item.rang}
