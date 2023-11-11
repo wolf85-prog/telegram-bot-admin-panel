@@ -7,6 +7,14 @@ import {
   CCol,
   CRow,
   CFormInput,
+  CTable,
+  CTableBody,
+  CTableDataCell,
+  CTableHead,
+  CTableHeaderCell,
+  CTableRow,
+  CCard,
+  CCardBody,
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
@@ -16,108 +24,6 @@ import {
   newPretendent 
 } from './../http/adminAPI';
 import { getAllPretendent, getWorkers, getWorkersNotion, getWorkerNotionId } from './../http/workerAPI'
-
-const columns = [
-  {
-      name: 'Дата',
-      selector: row => row.date, //"01.01 | 0:00",
-      sortable: true,
-      width: '98px',
-      center: true,
-  },
-  {
-      name: 'Проект',
-      selector: row => row.project,
-      sortable: true,
-      maxWidth: '120px',
-      center: true,
-  },
-  
-  {
-      name: 'ФИО',
-      selector: row => row.worker, //row.family +" "+ row.name,
-      sortable: true,
-      maxWidth: '180px',
-      center: true,
-  },
-  
-  {
-      name: 'Специальность',
-      selector: row => row.worklist,
-      sortable: true,
-      maxWidth: '200px',
-      center: true,
-  },
-  {
-      name: 'U.L.E.Y',
-      selector: row => row.rang,
-      sortable: true,
-      width: '110px',
-      center: true,
-  },
-  {
-      name: 'Комментарий',
-      selector: row => row.comment,
-      sortable: true,
-      maxWidth: '180px',
-      center: true,
-  },
-  {
-      name: 'Телефон',
-      selector: row => row.phone,
-      sortable: true,
-      width: '150px',
-      center: true,
-  },
-];
-
-//  Internally, customStyles will deep merges your customStyles with the default styling.
-const customStyles = {
-  rows: {
-      style: {
-          //minHeight: '72px', // override the row height
-      },
-  },
-  headCells: {
-      style: {
-          fontSize: '16px',
-          // paddingLeft: '8px', // override the cell padding for head cells
-          // paddingRight: '8px',
-          //textAlign: 'center',
-      },
-  },
-  cells: {
-      style: {
-          // paddingLeft: '8px', // override the cell padding for data cells
-          // paddingRight: '8px',
-      },
-  },
-};
-
-createTheme('solarized', {
-  text: {
-    primary: '#fff',
-    secondary: '#2aa198',
-  },
-  background: {
-    default: '#131c21',
-  },
-  context: {
-    background: '#cb4b16',
-    text: '#FFFFFF',
-  },
-  divider: {
-    default: '#ffffff13',
-  },
-  action: {
-    button: 'rgba(0,0,0,.54)',
-    hover: 'rgba(0,0,0,.08)',
-    disabled: 'rgba(0,0,0,.12)',
-  },
-}, 'dark');
-
-const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
-
 
 
 //Workers.js
@@ -130,6 +36,8 @@ const Workers = () => {
   const [projects, setProjects] = useState([]); 
   const [spec, setSpec] = useState([]); 
   const [pending, setPending] = useState(true);  
+
+  const [loading, setLoading]= useState(true);
 
   //get pretendents
   useEffect(() => {
@@ -145,7 +53,7 @@ const Workers = () => {
       console.log("pretendents: ", pretendents)
 
       let workers = await getWorkers()
-      //console.log("workers: ", workers)
+      console.log("workers: ", workers)
 
       let projects = await getProjects3();
       console.log("projects: ", projects)
@@ -172,13 +80,17 @@ const Workers = () => {
 
         //worklist
         const workNotions = await getWorkerNotionId(worker.receiverId)
-        console.log("workNotions: ", workNotions[0])
-
+        if (workNotions.length > 0) {
+          console.log("workNotions: ", workNotions[0])
+        } else {
+          console.log("workNotions: [] ")
+        }
+        
         specStr = ''
         specArr = []
 
         
-        if (workNotions[0]) {
+        if (workNotions.length > 0) {
           workNotions[0].spec.map(item => specStr = specStr + item.name + ', ' )
         } else {
           specStr = ''
@@ -189,7 +101,7 @@ const Workers = () => {
             date: newDate, //newDate,
             project: projectName,
             worker: workerName, 
-            worklist: specStr,
+            worklist: workNotions[0].spec,
             rang: workNotions[0]?.rank,
             comment: workNotions[0]?.comment,
             phone: workNotions[0]?.phone,
@@ -200,6 +112,8 @@ const Workers = () => {
           setSpec(arrWorkers) 
 
           setPending(false);
+
+          setLoading(false)
         }, 3000)
         
       })  
@@ -226,18 +140,66 @@ const Workers = () => {
                       </CCol>
                     </CRow>
 
-                    <DataTable
-                      columns={columns}
-                      data={spec}
-                      fixedHeader
-                      pagination
-                      theme="solarized"
-                      progressPending={pending}
-			                progressComponent={<CSpinner />}
-                      customStyles={customStyles}
-                      // expandableRows 
-                      // expandableRowsComponent={ExpandedComponent}
-                    />
+                    <CRow>
+                      <CCol style={{textAlign: 'center'}}>
+                        <CCard className="mb-4"> 
+                            <CCardBody>
+                              {loading ? 
+                                      
+                                <CSpinner/> :
+
+                                <CTable align="middle" className="mb-0 border" hover responsive>
+                                  <CTableHead className='table-light'>
+                                    <CTableRow>
+                                      <CTableHeaderCell className="text-center" style={{width: '110px'}}>Дата</CTableHeaderCell>  
+                                      <CTableHeaderCell className="text-center" style={{width: '250px'}}>Проект</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{width: '150px'}}>ФИО</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{width: '160px'}}>Специальность</CTableHeaderCell>  
+                                      <CTableHeaderCell className="text-center" style={{width: '140px'}}>U.L.E.Y</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '120px'}}>Комментарий</CTableHeaderCell>                         
+                                      <CTableHeaderCell className="text-center" style={{width: '160px'}}>Телефон</CTableHeaderCell>
+                                    </CTableRow>
+                                  </CTableHead>
+                                  <CTableBody>                                  
+                                    {spec.map((item, index) => (
+                                      <CTableRow v-for="item in tableItems" key={index}>
+                                        <CTableDataCell className="text-center">
+                                          {item.date}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          {item.project}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
+                                            {item.worker}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <table>
+                                            {(item.worklist).map((spec, index)=>( 
+                                                <tr key={index}>
+                                                  <td >{spec.name}</td>
+                                                </tr>          
+                                            ))}
+                                          </table>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          {item.rang}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
+                                          {item.comment}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div>{item.phone}</div>
+                                        </CTableDataCell>
+                                      </CTableRow>
+                                      ))
+                                    }
+                                </CTableBody>                   
+                              </CTable>
+                            }
+                            </CCardBody>
+                          </CCard>
+                        </CCol>
+                    </CRow>
                   </Suspense>
             </CContainer>
 
