@@ -723,6 +723,19 @@ const fetchMessageSpecResponse = async(data) => {
 		//console.log("projects get socket: ", projects.length)
 		setPretendents(pretendents)
 	}
+	else if (data.text.startsWith('Твоя ставка отправлена!') && !data.text.includes('_reply_')) {
+		console.log("Твоя ставка отправлена: ")
+		//play sound
+		audioPretendent.play();
+
+		//пришел новый претендент
+		console.log("countPretendent: ", countPretendent + 1)
+		setCountPretendent(countPretendent + 1);
+
+		//get all pretendent
+		let pretendents = await getAllPretendent();
+		setPretendents(pretendents)
+	}
 	else {
 		setCountMessageWork(countMessageWork + 1)
 		console.log("Пришло новое сообщение в workhub: ", count+1)
