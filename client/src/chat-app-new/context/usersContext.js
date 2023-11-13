@@ -723,7 +723,7 @@ const fetchMessageSpecResponse = async(data) => {
 		//console.log("projects get socket: ", projects.length)
 		setPretendents(pretendents)
 	}
-	else if (data.text.startsWith('Твоя ставка отправлена!') && !data.text.includes('_reply_')) {
+	else if (data.text.startsWith('Твоя ставка отправлена') && !data.text.includes('_reply_')) {
 		console.log("Твоя ставка отправлена: ")
 		//play sound
 		audioPretendent.play();
