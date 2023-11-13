@@ -59,6 +59,9 @@ const Workers = () => {
       let workers = await getWorkers()
       console.log("workers: ", workers)
 
+      let workersN = await getWorkersNotion()
+      console.log("workersN: ", workersN)
+
       let projects = await getProjects3();
       console.log("projects: ", projects)
 
@@ -72,6 +75,12 @@ const Workers = () => {
         let userObject2 = workers.find((item) => item.chatId === worker.receiverId);  
         const workerName = userObject2?.userfamily + " "+ userObject2?.username
 
+        let userObject3 = workersN.find((item) => item.tgId === worker.receiverId);  
+        const worklist = userObject3?.spec
+        const rang = "" //userObject3?.spec
+        const comment = "" //userObject3?.spec
+        const phone = userObject3?.phone
+
         const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
         const d2 = new Date(d)
 
@@ -83,25 +92,19 @@ const Workers = () => {
         const newDate = `${day}.${month} ${chas}:${min}`;
 
         //worklist
-        setTimeout(async()=> {
-          const workNotions = await getWorkerNotionId(worker.receiverId)
-        
-        
-        // if (workNotions.length > 0) {
-        //   console.log("workNotions: ", workNotions[0])
-        // } else {
-        //   console.log("workNotions: [] ")
-        // }
+        //setTimeout(async()=> {
+          //const workNotions = await getWorkerNotionId(worker.receiverId)
+      
 
         //setTimeout(()=> {
           const newWorker = {
             date: newDate, //newDate,
             project: projectName,
             worker: workerName, 
-            worklist: workNotions[0].spec,
-            rang: workNotions[0]?.rank,
-            comment: workNotions[0]?.comment,
-            phone: workNotions[0]?.phone,
+            worklist: worklist, //workNotions[0].spec,
+            rang: rang, //workNotions[0]?.rank,
+            comment: comment, //workNotions[0]?.comment,
+            phone: phone, //workNotions[0]?.phone,
 
           }
           arrWorkers.push(newWorker)
@@ -109,7 +112,7 @@ const Workers = () => {
           setSpec(arrWorkers) 
 
           setLoading(false)
-        }, 2500 * ++i)
+        //}, 2500 * ++i)
         
       })  
     }
