@@ -64,7 +64,7 @@ const Workers = () => {
 
       setProjects(projects) 
 
-      pretendents.map(async (worker) => {
+      pretendents.map(async (worker, i) => {
 
         let userObject = projects.find((proj) => proj.id === worker.projectId);  
         const projectName = userObject?.name
@@ -83,24 +83,17 @@ const Workers = () => {
         const newDate = `${day}.${month} ${chas}:${min}`;
 
         //worklist
-        const workNotions = await getWorkerNotionId(worker.receiverId)
-        if (workNotions.length > 0) {
-          console.log("workNotions: ", workNotions[0])
-        } else {
-          console.log("workNotions: [] ")
-        }
+        setTimeout(async()=> {
+          const workNotions = await getWorkerNotionId(worker.receiverId)
         
-        specStr = ''
-        specArr = []
-
         
-        if (workNotions.length > 0) {
-          workNotions[0].spec.map(item => specStr = specStr + item.name + ', ' )
-        } else {
-          specStr = ''
-        }
+        // if (workNotions.length > 0) {
+        //   console.log("workNotions: ", workNotions[0])
+        // } else {
+        //   console.log("workNotions: [] ")
+        // }
 
-        setTimeout(()=> {
+        //setTimeout(()=> {
           const newWorker = {
             date: newDate, //newDate,
             project: projectName,
@@ -115,10 +108,8 @@ const Workers = () => {
 
           setSpec(arrWorkers) 
 
-          setPending(false);
-
           setLoading(false)
-        }, 3000)
+        }, 2500 * ++i)
         
       })  
     }
@@ -180,11 +171,14 @@ const Workers = () => {
                                           <div onClick={() => setVisibleA(!visibleA)}>Посмотреть</div>
                                           <CCollapse visible={visibleA}>
                                             <table>
-                                              {(item.worklist).map((spec, index)=>( 
+                                              {item.worklist ? 
+                                              (item.worklist).map((spec, index)=>( 
                                                   <tr key={index}>
                                                     <td >{spec.name}</td>
                                                   </tr>          
-                                              ))}
+                                              ))
+                                              :""
+                                              }
                                             </table>
                                           </CCollapse>
                                         </CTableDataCell>
