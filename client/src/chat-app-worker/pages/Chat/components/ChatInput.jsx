@@ -145,7 +145,7 @@ const ChatInput = ({
 
 			</div>
 
-			<div>
+			<div style={{marginLeft: '8px', marginRight: '8px'}}>
 				{/* <Dropdown onSelect={change}>
 					<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
 					</Dropdown.Toggle>
@@ -160,12 +160,19 @@ const ChatInput = ({
 					drop='up'
 					variant="secondary"
 					title=''
-					>
-					<Dropdown.Item eventKey="1">Action</Dropdown.Item>
-					<Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-					<Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
+					// 
+				>
+					<Dropdown.Item class="dropdown-menu" eventKey="1">Стандартный ответ</Dropdown.Item>
+					<Dropdown.Item eventKey="2">Паспорт</Dropdown.Item>
+					<Dropdown.Item eventKey="3">Кнопка с номером</Dropdown.Item>
+					<Dropdown.Item eventKey="4">Запас</Dropdown.Item>
+					<Dropdown.Item eventKey="5">Офис U.L.E.Y</Dropdown.Item>
+					<Dropdown.Item eventKey="6">Оплата / смета</Dropdown.Item>
+					<Dropdown.Item eventKey="7">Заявка отклонена</Dropdown.Item>
+					<Dropdown.Item eventKey="8">Заявка одобрена</Dropdown.Item>
+					<Dropdown.Item eventKey="9">Запрос ключевых данных</Dropdown.Item>
 					<Dropdown.Divider />
-					<Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
+					<Dropdown.Item eventKey="10"></Dropdown.Item>
 				</DropdownButton>
 				{/* <CFormSelect 
 						style={{marginTop: '10px', marginBottom: '10px',  display: "block"}}
