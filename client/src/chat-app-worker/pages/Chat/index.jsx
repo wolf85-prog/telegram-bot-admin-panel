@@ -14,6 +14,7 @@ import { newMessage, uploadFile } from "src/http/workerAPI";
 import { $host } from './../../../http/index'
 import sendSound from './../../../chat-app-new/assets/sounds/sendmessage.mp3';
 import axios from 'axios';
+import ChatSidebarProfile from "./components/ChatSidebarProfile";
 
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
@@ -232,13 +233,12 @@ const Chat = () => {
 				<Search />
 			</ChatSidebar>
 
-			<ChatSidebar
-				heading="Данные контакта"
+			<ChatSidebarProfile
+				// heading="Данные контакта"
 				active={showProfileSidebar}
-				closeSidebar={() => setShowProfileSidebar(false)}
 			>
-				<Profile user={user} />
-			</ChatSidebar>
+				<Profile user={user} closeSidebar={() => setShowProfileSidebar(false)}/>
+			</ChatSidebarProfile>
 
 		</div>
 	);

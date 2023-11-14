@@ -21,7 +21,7 @@ import { $host } from './../../../../http/index';
 import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3';
 import scenarios from './../../../../data/scenarios'
 
-const Profile = ({ user }) => {
+const Profile = ({ user, closeSidebar }) => {
 
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
@@ -244,12 +244,15 @@ const Profile = ({ user }) => {
 							? <img src={user?.avatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
 							: <img src={defaultAvatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />
 					}
+					<button onClick={closeSidebar} style={{position: 'absolute', top: '0', right: '-15px'}}>
+						<Icon id="cancel" className="chat-sidebar__header-icon" />
+					</button>
 				</div>
 				<h2 className="profile__name" style={{textAlign: 'center'}}>{user.name}</h2>
 			</div>
 
 			<ul className="profile__sectionW profile__section--actions">	
-				<li className="profile__actionW">
+				{/* <li className="profile__actionW">
 					<CFormSelect 
 						style={{marginTop: '10px', marginBottom: '10px',  display: "block"}}
                         aria-label="Default select example"
@@ -260,10 +263,9 @@ const Profile = ({ user }) => {
                         onChange={onSelectChange}
 					/>
 					<button className="profile__action-right" style={{padding: '6px'}} onClick={sendMyMessage}>
-						{/* <Icon id="rightArrow" className="profile__heading-icon" />{" "} */}
 						<CIcon icon={cilMediaPlay} style={{color: 'white'}}/>{" "}
 					</button>
-				</li>
+				</li> */}
 
 				<li className="profile__actionW">
 					<p className="profile__actionW-left">
@@ -322,6 +324,18 @@ const Profile = ({ user }) => {
 							{/* {worker.spec?.map((item)=>item.name).join('')} */}
 							<table className="table-noborder">{worker.spec?.map((worker, index) => <tr key={index}><td>{worker.name}</td></tr> )}</table>
 						</span>	
+					</p>
+				</li>
+
+				<li className="profile__actionW">
+					<p className="profile__actionW-left">
+						<span className="profile__action-text profile__action-text--bottom">
+							Последний отклик на проект
+						</span>
+						
+						<span className="profile__action-text profile__action-text--top profile__notion">
+							0000
+						</span>
 					</p>
 				</li>			
 			</ul>

@@ -1,6 +1,12 @@
 import React, {useRef} from "react";
 import Icon from "./../../../components/Icon";
 
+import CIcon from '@coreui/icons-react'
+import {
+  cilPen,
+  cilMediaPlay
+} from '@coreui/icons'
+
 import useAutosizeTextArea from "./useAutosizeTextArea.ts";
 
 const attachButtons = [
@@ -69,9 +75,7 @@ const ChatInput = ({
 					/>
 				</button>
 
-				<div
-					className={`chat__attach ${showAttach ? "chat__attach--active" : ""}`}
-				>
+				<div className={`chat__attach ${showAttach ? "chat__attach--active" : ""}`}>
 					{attachButtons.map((btn) => (
 						<button
 							className="chat__attach-btn"
@@ -92,7 +96,15 @@ const ChatInput = ({
 						</button>
 					))}
 				</div>
+
 			</div>
+
+			<div>
+				<button className="profile__action-right" style={{padding: '6px'}}>
+					<CIcon icon={cilMediaPlay} style={{color: 'white'}}/>{" "}
+				</button>
+			</div>
+			
 			<textarea
 				className="chat__input"
 				placeholder="Введите сообщение"
