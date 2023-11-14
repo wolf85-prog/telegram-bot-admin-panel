@@ -25,6 +25,7 @@ const ChatInput = ({
 	setMess,
 	submitNewMessage,
 	onFileChange,
+	setSelectedElement,
 }) => {
 
 	const textAreaRef = useRef(null);
@@ -84,6 +85,7 @@ const ChatInput = ({
 
 	const change = async (eventkey) => {
 		//alert(`you chosen: ${eventkey}`)
+		setSelectedElement(eventkey)
 	}
 
 	return (
@@ -155,6 +157,7 @@ const ChatInput = ({
 				</Dropdown> */}
 
 				<DropdownButton
+					onSelect={change}
 					as={ButtonGroup}
 					id={`dropdown-button-drop-up`}
 					drop='up'

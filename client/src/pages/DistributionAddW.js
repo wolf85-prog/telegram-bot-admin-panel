@@ -38,7 +38,8 @@ import {
   getDatabaseId,
   newPretendent 
 } from '../http/adminAPI';
-import { newMessage, uploadFile } from '../http/chatAPI';
+import { uploadFile } from '../http/chatAPI';
+import { newMessage } from '../http/workerAPI';
 import specData from './../data/specData';
 import categories from './../data/categories';
 
@@ -66,7 +67,7 @@ const DistributionAddW = () => {
   const webAppAddStavka = process.env.REACT_APP_WEBAPP_STAVKA
 
   const { users: clients, workers } = useUsersContext();
-  const { addNewDistrib, addNewMessage, setDistributionsWork } = useUsersContext();
+  const { addNewDistrib, addNewMessage2, setDistributionsWork } = useUsersContext();
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]); 
   const [contacts2, setContacts2]= useState([]);
@@ -1215,14 +1216,14 @@ const delCategory7 = (category) => {
           }
           console.log("message send: ", message);
 
-          //сохранение сообщения в базе данных
+          //сохранение сообщения в базе данных wmessage
           await newMessage(message)
 
           //сохранить в контексте
           if(!file) {
-            addNewMessage(user.value, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
+            addNewMessage2(user.value, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
           } else {
-            addNewMessage(user.value, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
+            addNewMessage2(user.value, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
           }
     
         }  

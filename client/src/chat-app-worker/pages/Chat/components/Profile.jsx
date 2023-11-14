@@ -89,7 +89,7 @@ const Profile = ({ user, closeSidebar }) => {
 	const onSelectChange = (e) => {
 		setSelectedElement(e.target.value);
 		setScenari(e.target.value)
-		console.log(e.target.value)
+		//console.log(e.target.value)
 	}
 
 
@@ -98,23 +98,6 @@ const Profile = ({ user, closeSidebar }) => {
 
 		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
 
-		//console.log("client: ", client)
-
-		//Передаем данные боту
-		// const keyboard = JSON.stringify({
-		// 	inline_keyboard: [
-		// 		[
-		// 			{"text": "Согласен предоставить персональные данные", web_app: {url: webAppPassport}}, //callback_data:'/passport'},
-		// 		],
-		// 		[
-		// 			{"text": "Отказываюсь от предоставления данных и участия в проектах", callback_data:'/passport2'},
-		// 		],
-		// 		[
-		// 			{"text": "Пояснения", callback_data:'/passport3'},
-		// 		],
-		// 	]
-		// });
-
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
@@ -122,16 +105,6 @@ const Profile = ({ user, closeSidebar }) => {
 				],
 			]
 		});
-
-
-
-		// scenarios.map(async(item, index)=> {
-		// 	if (selectedElement === item.value) {
-		// 		const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}&reply_markup=${show ? keyboard : ''}`
-		// 		console.log(url_send_msg)
-		// 		sendToTelegram = await $host.get(url_send_msg);
-		// 	}
-		// })
 
 		//отправить в телеграмм
 		let sendToTelegram
@@ -227,7 +200,7 @@ const Profile = ({ user, closeSidebar }) => {
 			
 		// console.log("message send: ", message);
 	
-		//сохранение сообщения в базе данных
+		//сохранение сообщения в базе данных wmessage
 		await newMessage(message)
 	
 		//сохранить в контексте
