@@ -22,7 +22,7 @@ class PretendentController {
         const receiverId = req.params.id
         try {           
             const count = await Pretendent.count({
-                where: { receiverId },
+                where: { receiverId, accept: true },
               });
             //console.log(count)
 

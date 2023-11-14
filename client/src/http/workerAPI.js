@@ -48,6 +48,15 @@ export const getAllPretendent = async () =>{
     }
 }
 
+export const getLastPretendent = async (id) =>{
+    try {
+       let response = await $host.get(`api/pretendent/get/${id}`);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getAllPretendent api", error.message);
+    }
+}
+
 export const getWContacts = async () =>{
     try {
        let response = await $host.get('api/wuserbots/get');
@@ -147,6 +156,18 @@ export const getAllMessages = async()=>{
     } catch (error) {
         console.log("error while calling getAllMessages api",error.message);
         
+    }
+}
+
+
+//api notion получить данные проекта по его id
+export const getProjectId = async (id) =>{
+    try {
+        let response = await $host_worker.get('api/project/' + id);
+        console.log("projectIdAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectId api", error.message);
     }
 }
 
