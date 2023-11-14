@@ -3,7 +3,7 @@ import Icon from "./../../../components/Icon";
 import OptionsBtn from "./../../../components/OptionsButton";
 import avatarDefault from "./../../../../chat-app-new/assets/images/no-avatar.png";
 
-const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {
+const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, showCloseButton }) => {
 
 	const host = process.env.REACT_APP_API_URL
 
@@ -66,6 +66,10 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar }) => {
 						"Удалить чат",
 					]}
 				/>
+
+				<button onClick={closeSidebar} style={{marginLeft: '15px', display: showCloseButton ? "block": "none"}}>
+					<Icon id="cancel" className="chat-sidebar__header-icon" />
+				</button>
 			</div>
 		</header>
 	);

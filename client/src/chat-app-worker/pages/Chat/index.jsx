@@ -38,6 +38,8 @@ const Chat = () => {
 	const [image, setImage]= useState("");
 	const [mess, setMess] = useState("");
 
+	const [showCloseButton, setShowCloseButton] = useState(false)
+
 	// для хранения ответа от бекенда
 	const [data, getFile] = useState({ name: "", path: "" });
 	const [progress, setProgess] = useState(0); // progessbar
@@ -190,6 +192,8 @@ const Chat = () => {
 					user={personW}
 					openProfileSidebar={() => openSidebar(setShowProfileSidebar)}
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
+					closeSidebar={() => setShowProfileSidebar(false)}
+					showCloseButton
 				/>
 				<div className="chat__content">
 					<Convo lastMsgRef={lastMsgRef} messages={user.messages} />
@@ -237,7 +241,7 @@ const Chat = () => {
 				// heading="Данные контакта"
 				active={showProfileSidebar}
 			>
-				<Profile user={user} closeSidebar={() => setShowProfileSidebar(false)}/>
+				<Profile user={user} />
 			</ChatSidebarProfile>
 
 		</div>

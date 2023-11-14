@@ -244,9 +244,6 @@ const Profile = ({ user, closeSidebar }) => {
 							? <img src={user?.avatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
 							: <img src={defaultAvatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />
 					}
-					<button onClick={closeSidebar} style={{position: 'absolute', top: '0', right: '-15px'}}>
-						<Icon id="cancel" className="chat-sidebar__header-icon" />
-					</button>
 				</div>
 				<h2 className="profile__name" style={{textAlign: 'center'}}>{user.name}</h2>
 			</div>
