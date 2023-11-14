@@ -145,6 +145,8 @@ const Chat = () => {
 		if (selectedElement) {
 			//отправка сценария
 			console.log("отправка сценария: ", selectedElement)
+
+			sendMyMessage()
 		} else {
 			//отправка сообщения
 
