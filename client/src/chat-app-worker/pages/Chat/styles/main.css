@@ -521,6 +521,10 @@ textarea:focus {
     color: rgb(145, 145, 145);
 }
 
+.chat-sidebar__header-icon-close {
+    color: rgb(145, 145, 145);
+}
+
 .chat-sidebar__heading {
     flex: 1;
     color: #000000;

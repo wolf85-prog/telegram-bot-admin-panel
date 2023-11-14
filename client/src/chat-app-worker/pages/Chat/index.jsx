@@ -113,8 +113,20 @@ const Chat = () => {
 		setShowProfileSidebar(false);
 		setShowSearchSidebar(false);
 
+		setShowCloseButton(true)
+
 		// call callback fn
 		cb(true);
+	};
+
+	const closeSidebar = (cb) => {
+		// close any open sidebar first
+		setShowProfileSidebar(false);
+
+		setShowCloseButton(false)
+
+		// call callback fn
+		cb(false);
 	};
 
 	//функция отправки сообщения
@@ -192,8 +204,8 @@ const Chat = () => {
 					user={personW}
 					openProfileSidebar={() => openSidebar(setShowProfileSidebar)}
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
-					closeSidebar={() => setShowProfileSidebar(false)}
-					showCloseButton
+					closeSidebar={() => closeSidebar(setShowProfileSidebar)}
+					showCloseButton={showCloseButton}
 				/>
 				<div className="chat__content">
 					<Convo lastMsgRef={lastMsgRef} messages={user.messages} />

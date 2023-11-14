@@ -68,7 +68,7 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 				/>
 
 				<button onClick={closeSidebar} style={{marginLeft: '15px', display: showCloseButton ? "block": "none"}}>
-					<Icon id="cancel" className="chat-sidebar__header-icon" />
+					<Icon id="cancel" className="chat-sidebar__header-icon-close" />
 				</button>
 			</div>
 		</header>

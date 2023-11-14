@@ -102,7 +102,7 @@ const DistributionAddW = () => {
   const [visible, setVisible] = useState(false);
   const [showEditButtonAdd, setShowEditButtonAdd] = useState(false);
   const [showNameProject, setShowNameProject] = useState(true);
-  const [sendToAdmin, setSendToAdmin] = useState(false);
+  const [sendToAdmin, setSendToAdmin] = useState(true);
   const [textButton, setTextButton] = useState('');
   const [file, setFile] = useState();
   const [filePreview, setFilePreview] = useState();
