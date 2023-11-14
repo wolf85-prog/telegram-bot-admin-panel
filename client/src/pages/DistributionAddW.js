@@ -1158,8 +1158,6 @@ const delCategory7 = (category) => {
         }
         
 
-        
-
         //отправить в телеграмм
         let sendToTelegram
         if (text !== '') {

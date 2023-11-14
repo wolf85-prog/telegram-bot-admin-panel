@@ -165,17 +165,17 @@ const ChatInput = ({
 					title=''
 					// 
 				>
-					<Dropdown.Item class="dropdown-menu" eventKey="1">Стандартный ответ</Dropdown.Item>
-					<Dropdown.Item eventKey="2">Паспорт</Dropdown.Item>
-					<Dropdown.Item eventKey="3">Кнопка с номером</Dropdown.Item>
-					<Dropdown.Item eventKey="4">Запас</Dropdown.Item>
-					<Dropdown.Item eventKey="5">Офис U.L.E.Y</Dropdown.Item>
-					<Dropdown.Item eventKey="6">Оплата / смета</Dropdown.Item>
-					<Dropdown.Item eventKey="7">Заявка отклонена</Dropdown.Item>
-					<Dropdown.Item eventKey="8">Заявка одобрена</Dropdown.Item>
-					<Dropdown.Item eventKey="9">Запрос ключевых данных</Dropdown.Item>
+					<Dropdown.Item class="dropdown-menu" eventKey="0">Стандартный ответ</Dropdown.Item>
+					<Dropdown.Item eventKey="1">Паспорт</Dropdown.Item>
+					<Dropdown.Item eventKey="2">Кнопка с номером</Dropdown.Item>
+					<Dropdown.Item eventKey="3">Запас</Dropdown.Item>
+					<Dropdown.Item eventKey="4">Офис U.L.E.Y</Dropdown.Item>
+					<Dropdown.Item eventKey="5">Оплата / смета</Dropdown.Item>
+					<Dropdown.Item eventKey="6">Заявка отклонена</Dropdown.Item>
+					<Dropdown.Item eventKey="7">Заявка одобрена</Dropdown.Item>
+					<Dropdown.Item eventKey="8">Запрос ключевых данных</Dropdown.Item>
 					<Dropdown.Divider />
-					<Dropdown.Item eventKey="10"></Dropdown.Item>
+					<Dropdown.Item eventKey="9"></Dropdown.Item>
 				</DropdownButton>
 				{/* <CFormSelect 
 						style={{marginTop: '10px', marginBottom: '10px',  display: "block"}}
