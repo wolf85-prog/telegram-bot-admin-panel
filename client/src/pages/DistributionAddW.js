@@ -1042,7 +1042,7 @@ const delCategory7 = (category) => {
 
   //дублировать в админку
   const onChangeCheck = (e) => {
-    setSendToAdmin(e.target.value)
+    //setSendToAdmin(e.target.value)
   }
 
   //===================================================================
@@ -1183,7 +1183,7 @@ const delCategory7 = (category) => {
           console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
         } else {
           console.log('sendPhoto2ToTelegram')
-          await $host.get(url_send_photo2);
+          //await $host.get(url_send_photo2);
         }
 
         //отправить в админку
