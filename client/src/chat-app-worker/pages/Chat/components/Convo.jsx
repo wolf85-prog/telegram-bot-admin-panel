@@ -162,7 +162,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 												<img src={docIcon} width={30}/>
 												<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
 											</figure> 
-											: (<figure style={{margin:'0 0 3rem'}}>
+											: (<figure style={{margin:showImage[msgIndex] ? '0 0 3rem': '0 0 1rem'}}>
 												{showImage[msgIndex] ? 
 												<a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>	
 												:<div style={{
