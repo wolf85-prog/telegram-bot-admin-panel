@@ -1160,17 +1160,16 @@ const delCategory7 = (category) => {
         
 
         //отправить в телеграмм
-        let sendToTelegram
+        let sendTextToTelegram
         if (text !== '') {
           const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
           //console.log("url_send_msg: ", url_send_msg)
-          sendToTelegram = await $host.get(url_send_msg);
-          //console.log('sendToTelegram: ', sendToTelegram)
+          sendTextToTelegram = await $host.get(url_send_msg);
+          console.log('sendTextToTelegram: ', sendTextToTelegram)
         }  
 
         const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
         //console.log("url_send_photo: ", url_send_photo)
-
 
         const url_send_photo2 = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${host}${image}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
         console.log("url_send_photo2: ", url_send_photo2)
@@ -1227,24 +1226,19 @@ const delCategory7 = (category) => {
     
         }  
 
-        //обновить список рассылок
-        // let response = await getDistributionsW();
-        // console.log("distribution new add: ", response.length)
-        // setDistributionsWork(response)
       })
 
       //обновить список рассылок
       addNewDistrib(true)
 
       setSelected([])
-      //setSendToAdmin(false)
       setText('')
       setShowEditButtonAdd(false)
       setTextButton('')
       setVisible(true)
       setValue('')
 
-      setTimeout(() => navigate('/distributionw'), 1000);
+      //setTimeout(() => navigate('/distributionw'), 1000);
 
     }
     else {
