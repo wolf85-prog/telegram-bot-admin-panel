@@ -1182,11 +1182,12 @@ const delCategory7 = (category) => {
           sendPhotoToTelegram = await $host.post(url_send_photo, form);
           console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
         } else {
-          console.log('sendPhoto2ToTelegram')
+          
           sendPhotoToTelegram = await $host.get(url_send_photo2);
+          console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
         }
 
-        //отправить в админку
+        //отправить в админкуs
         //if (sendToAdmin) {
           let message = {};
           if(!file) {
