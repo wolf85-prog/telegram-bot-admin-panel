@@ -167,7 +167,13 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 														<img src={imageIcon} alt="" className="chat__img" onClick={()=>setShowImage(true)} style={{width: '50px'}}/>
 														{/* </a> */}
 												</div>}
-												<figcaption style={{textAlign: 'center', backgroundColor: '#607a7a', borderRadius: '5px'}}>{message.descript}</figcaption>
+												<figcaption style={{textAlign: 'center', borderRadius: '5px'}}>
+													{message.descript}
+													<div style={{display: 'flex', justifyContent: 'space-between', padding: '10px 0'}}>
+														<div style={{width:'140px', height: '30px', backgroundColor: '#7b7777', borderRadius: '10px', padding: '3px 0'}}>Принять</div>
+														<div style={{width:'140px', height: '30px', backgroundColor: '#7b7777', borderRadius: '10px', padding: '3px 0'}}>Отклонить</div>
+													</div>
+												</figcaption>
 											</figure>)
 										}
 										<span className="chat__msg-footer">
