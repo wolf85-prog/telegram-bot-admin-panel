@@ -219,12 +219,12 @@ const Chat = () => {
 
 	//функция отправки сообщения
 	const sendText = async () => {
-		if (selectedElement) {
-			//отправка сценария
-			console.log("отправка сценария: ", selectedElement)
+		// if (selectedElement) {
+		// 	//отправка сценария
+		// 	console.log("отправка сценария: ", selectedElement)
 
-			sendMyMessage()
-		} else {
+		// 	sendMyMessage()
+		// } else {
 			//отправка сообщения
 
 			//Передаем данные боту
@@ -278,7 +278,7 @@ const Chat = () => {
 
 			//сохранение сообщения в базе данных
 			await newMessage(message)	
-		}
+		//}
 	}
 
 	const submitNewMessage = () => {

@@ -1193,7 +1193,7 @@ const delCategory7 = (category) => {
           if(!file) {
               message = {
                   senderId: chatAdminId, 
-                  receiverId: user.value,
+                  receiverId: user,
                   conversationId: client.conversationId,
                   type: "text",
                   text: text,
@@ -1204,7 +1204,7 @@ const delCategory7 = (category) => {
           } else {
               message = {
                   senderId: chatAdminId, 
-                  receiverId: user.value,
+                  receiverId: user,
                   conversationId: client.conversationId,
                   type: "image",
                   text: host + image,
@@ -1220,9 +1220,9 @@ const delCategory7 = (category) => {
 
           //сохранить в контексте
           if(!file) {
-            addNewMessage2(user.value, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
+            addNewMessage2(user, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
           } else {
-            addNewMessage2(user.value, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
+            addNewMessage2(user, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
           }
     
         }  
