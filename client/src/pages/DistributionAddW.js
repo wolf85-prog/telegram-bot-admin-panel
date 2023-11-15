@@ -1187,7 +1187,7 @@ const delCategory7 = (category) => {
         }
 
         //отправить в админку
-        if (sendToAdmin) {
+        //if (sendToAdmin) {
           let message = {};
           if(!file) {
               message = {
@@ -1224,7 +1224,7 @@ const delCategory7 = (category) => {
             addNewMessage2(user, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
           }
     
-        }  
+        //}  
 
       })
 
