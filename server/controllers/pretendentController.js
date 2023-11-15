@@ -24,10 +24,10 @@ class PretendentController {
             const count = await Pretendent.count({
                 where: { receiverId, accept: true },
               });
-            //console.log(count)
+            console.log("Кол-во претендентов: ", count)
 
             const spec = await Pretendent.findAll({
-                where: {receiverId},
+                where: {receiverId, accept: true },
                 // Add order conditions here....
                 order: [
                     ['id', 'ASC'], //DESC
