@@ -1197,7 +1197,7 @@ const delCategory7 = (category) => {
                   type: "text",
                   text: text,
                   is_bot: true,
-                  messageId: sendToTelegram.data.result.message_id,
+                  messageId: sendTextToTelegram.data.result.message_id,
                   buttons: '',
               }
           } else {
@@ -1219,7 +1219,7 @@ const delCategory7 = (category) => {
 
           //сохранить в контексте
           if(!file) {
-            addNewMessage2(user, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
+            addNewMessage2(user, text, 'text', '', client.conversationId, sendTextToTelegram.data.result.message_id);
           } else {
             addNewMessage2(user, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
           }
