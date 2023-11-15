@@ -7,9 +7,9 @@ class PretendentController {
 
     //add message
     async newPretendent(req, res) {
-        const {projectId, workerId, receiverId} = req.body
+        const {projectId, workerId, receiverId, accept} = req.body
         try {
-            const newUser = await Pretendent.create({projectId, workerId, receiverId})
+            const newUser = await Pretendent.create({projectId, workerId, receiverId, accept})
             //return res.status(200).json("Pretendent has been sent successfully");
             return res.status(200).json(newUser);
         } catch (error) {

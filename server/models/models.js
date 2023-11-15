@@ -91,6 +91,7 @@ const Pretendent = sequelize.define('pretendent', {
     projectId: {type: DataTypes.STRING},  //id проекта
     workerId: {type: DataTypes.STRING}, //id специалиста;
     receiverId: {type: DataTypes.STRING}, //чат-id получателя;
+    accept: {type: DataTypes.BOOLEAN}, //принято
 })
 
 const Plan = sequelize.define('plan', {

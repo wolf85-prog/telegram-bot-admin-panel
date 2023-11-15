@@ -1119,7 +1119,8 @@ const delCategory7 = (category) => {
         const pretendent = {
           projectId: valueProject, 
           workerId: worker.data, 
-          receiverId: user,        
+          receiverId: user,  
+          accept: false,      
         }
         const pretendentId = await newPretendent(pretendent)
         

@@ -91,20 +91,26 @@ const Profile = ({ user, closeSidebar }) => {
 
 		const fetch = async() => {
 			const pretendentArray = await getLastPretendent(user.chatId)
-			//console.log("pretendentArray: ", pretendentArray)
+			console.log("pretendentArray: ", pretendentArray)
 			
-			const projectId = pretendentArray[pretendentArray.length-1].projectId
-			//console.log("projectId: ", projectId)
+			if (pretendentArray.length > 0) {
+				const projectId = pretendentArray[pretendentArray.length-1].projectId
+				//console.log("projectId: ", projectId)
+				//получить CrmId по id проекта
+				const project = await getProjectId(projectId)
+				const crmId = project.properties.Crm_ID.rich_text[0].plain_text
+				//console.log("crmId: ", crmId)
+				setCrmId(crmId)
+			} else {
+				setCrmId('-')
+			}
 			
-			//получить CrmId по id проекта
-			const project = await getProjectId(projectId)
-			const crmId = project.properties.Crm_ID.rich_text[0].plain_text
-			console.log("crmId: ", crmId)
-			setCrmId(crmId)
+			
+			
 		}
 		
 		fetch()
-	})
+	}, [user])
 	
 
 	return (

@@ -72,6 +72,83 @@ const Chat = () => {
 		console.log(selectedElement)
 		setSelectedElement(selectedElement);
 		setScenari(selectedElement)
+
+
+		let show = false
+		let text = ''
+		
+		//Стандартный ответ
+		if (selectedElement === '0') {
+			text = `${user.name.split(' ')[1]}, я юный чат-бот и еще не всё умею. Любой вопрос поможет решить наш оператор: +7 (499) 500-14-11`
+			setMess(text)
+		}
+		//Паспорт
+		else if (selectedElement === '1') {
+			text = ""
+			setMess(text)
+		}
+		//Кнопка с номером
+		else if (selectedElement === '2') {
+			text = `+7 (499) 500-14-11 - Менеджер U.L.E.Y`
+			setMess(text)
+		}
+		//Запас
+		else if (selectedElement === '3') {
+			text = `${user.name.split(' ')[1]}, мы готовы поставить Вас в запас на этот проект. Запас оплачивается.
+			Сумму можно будет уточнить у менеджера. С большой вероятностью Вы будете на нём задействованы, 
+			но для начала придется проснуться вместе с основным составом и быть готовым выйти на работу. Готовы?`
+			
+			setMess(text)
+		}
+		//Офис U.L.E.Y
+		else if (selectedElement === '4') {
+			text = `Офис | U.L.E.Y
+
+			Адрес: г. Москва, ул. Дербеневская набережная, д. 7, стр. 2
+					
+			Карта: https://goo.gl/maps/uFrAfV5NmE2rUXsT8`
+
+			setMess(text)
+		}
+		//Оплата / смета
+		else if (selectedElement === '5') {
+			text = `Для согласования и получения оплаты: 
+			https://t.me/ULEY_Office_Bot`
+
+			setMess(text)
+		}
+		//Заявка отклонена
+		else if (selectedElement === '6') {
+			text = `Добрый день, ${user.name.split(' ')[1]}. Спасибо, что откликнулись на эту заявку. 
+			В настоящий момент основной состав уже сформирован.
+			До встречи на новых проектах!`
+
+			setMess(text)
+		}
+		//Заявка одобрена
+		else if (selectedElement === '7') {
+			text = `Добрый день, ${user.name.split(' ')[1]}. Спасибо, что откликнулись на заявку. 
+			Для согласования тех. задачи на проект позвоните по номеру:
+			+7 (499) 500-14-11`
+
+			setMess(text)
+		}
+		//Запрос ключевых данных
+		else if (selectedElement === '8') {
+			text = `Добрый день, ${user.name.split(' ')[1]}. Вы впервые откликнулись на заявку от компании U.L.E.Y
+			Чтобы мы смогли предложить Вам работу на этом проекте пришлите, пожалуйста, немного информации о себе:
+					
+			✅ ФИО
+					
+			✅ Контакты для связи
+					
+			✅ Год рождения
+					
+			✅ Специальность`
+
+			setMess(text)
+		}
+
 	}, [selectedElement]);
 
 	//прокрутка
