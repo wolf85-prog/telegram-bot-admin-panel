@@ -1183,13 +1183,14 @@ const delCategory7 = (category) => {
           console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
         } else {
           console.log('sendPhoto2ToTelegram')
-          //await $host.get(url_send_photo2);
+          sendPhotoToTelegram = await $host.get(url_send_photo2);
         }
 
         //отправить в админку
         //if (sendToAdmin) {
           let message = {};
           if(!file) {
+            console.log("no file")
               message = {
                   senderId: chatAdminId, 
                   receiverId: user,
