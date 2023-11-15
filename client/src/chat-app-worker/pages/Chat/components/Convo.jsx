@@ -9,12 +9,15 @@ import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { $host } from './../../../../http/index'
 import { delMessage } from "src/http/chatAPI";
 import Dropdown from 'react-bootstrap/Dropdown';
+import imageIcon from "./../../../assets/images/sp-i-m-image-placeholder.svg";
 
 const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const { personW } = useContext(AccountContext);
 	const dates = Object.keys(allMessages);  //['01/01/2023', 'Сегодня']
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
+
+	const [showImage, setShowImage] = useState(false)
 
 	const msgRef = useRef([]);
 
@@ -139,17 +142,33 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a>*/}
 											<iframe src={message.content} height="235px" width="100%" title="myFramePdf"/>
 										</figure>) : 
-											message.content.endsWith('.xlsx') ? <figure> <img src={xlsIcon} width={30}/>
-											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> </figure> : 
-											
-											message.content.endsWith('.docx') ? <figure> <img src={docIcon} width={30}/>
-											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> </figure> : (
-											<figure>
-												<a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>
-												
+											message.content.endsWith('.xlsx') 
+											? <figure> 
+												<img src={xlsIcon} width={30}/>
+												<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
+											</figure> 
+											: message.content.endsWith('.docx') 
+											? <figure> 
+												<img src={docIcon} width={30}/>
+												<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
+											</figure> 
+											: (<figure>
+												{showImage ? 
+												<a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>	
+												:<div style={{
+														width: '292px', 
+														height: '120px', 
+														backgroundColor: '#3179a3', 
+														borderRadius: '10px', 
+														padding: '35px 75px',
+														textAlign: 'center',
+													}}>
+													{/* <a href={message.content} target="_blank" rel="noreferrer"> */}
+														<img src={imageIcon} alt="" className="chat__img" onClick={()=>setShowImage(true)} style={{width: '50px'}}/>
+														{/* </a> */}
+												</div>}
 												<figcaption style={{textAlign: 'center', backgroundColor: '#607a7a', borderRadius: '5px'}}>{message.descript}</figcaption>
-											</figure>
-											)
+											</figure>)
 										}
 										<span className="chat__msg-footer">
 											<span>{formatTime(message.time)}</span>

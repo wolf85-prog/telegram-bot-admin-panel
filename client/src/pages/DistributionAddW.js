@@ -66,7 +66,7 @@ const DistributionAddW = () => {
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const webAppAddStavka = process.env.REACT_APP_WEBAPP_STAVKA
 
-  const { users: clients, workers } = useUsersContext();
+  const { userWorkers: clients, workers } = useUsersContext();
   const { addNewDistrib, addNewMessage2, setDistributionsWork } = useUsersContext();
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]); 
