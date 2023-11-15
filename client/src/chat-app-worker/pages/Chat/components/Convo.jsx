@@ -17,7 +17,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 
-	const [showImage, setShowImage] = useState(false)
+	const [showImage, setShowImage] = useState([false])
 
 	const msgRef = useRef([]);
 
@@ -101,6 +101,16 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		}		
 	}
 
+	const handleClick = (ind) => {
+        //console.log(ind, showImage)
+
+        setShowImage(prevShownImage => ({
+            ...prevShownImage,
+            [ind]: !prevShownImage[ind]
+          }));
+
+    }
+
 
 	return dates.map((date, dateIndex) => {
 		const messages = allMessages[date];
@@ -152,11 +162,11 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 												<img src={docIcon} width={30}/>
 												<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
 											</figure> 
-											: (<figure>
-												{showImage ? 
+											: (<figure style={{margin:'0 0 3rem'}}>
+												{showImage[msgIndex] ? 
 												<a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>	
 												:<div style={{
-														width: '292px', 
+														width: '315px', 
 														height: '120px', 
 														backgroundColor: '#3179a3', 
 														borderRadius: '10px', 
@@ -164,7 +174,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 														textAlign: 'center',
 													}}>
 													{/* <a href={message.content} target="_blank" rel="noreferrer"> */}
-														<img src={imageIcon} alt="" className="chat__img" onClick={()=>setShowImage(true)} style={{width: '50px'}}/>
+														<img src={imageIcon} alt="" className="chat__img" onClick={()=>handleClick(msgIndex)} style={{width: '50px'}}/>
 														{/* </a> */}
 												</div>}
 												<figcaption style={{textAlign: 'center', borderRadius: '5px'}}>
