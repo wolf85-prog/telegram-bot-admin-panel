@@ -30,7 +30,7 @@ class PretendentController {
                 where: {receiverId, accept: true },
                 // Add order conditions here....
                 order: [
-                    ['id', 'ASC'], //DESC
+                    ['updatedAt', 'ASC'], //DESC
                 ],
             })
             return res.status(200).json(spec);
