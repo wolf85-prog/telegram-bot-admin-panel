@@ -162,19 +162,21 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 												<img src={docIcon} width={30}/>
 												<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
 											</figure> 
-											: (<figure style={{margin:showImage[msgIndex] ? '0 0 3rem': '0 0 1rem'}}>
-												{showImage[msgIndex] ? 
+											: (<figure style={{margin:showImage[msgIndex + personW.id] ? '0 0 3rem': '0 0 1rem'}}>
+												{showImage[msgIndex + personW.id] ? 
 												<a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>	
 												:<div style={{
-														width: '315px', 
+														width: '100%', 
 														height: '120px', 
 														backgroundColor: '#3179a3', 
 														borderRadius: '10px', 
 														padding: '35px 75px',
 														textAlign: 'center',
+														position: 'relative',
+														cursor: 'pointer',
 													}}>
 													{/* <a href={message.content} target="_blank" rel="noreferrer"> */}
-														<img src={imageIcon} alt="" className="chat__img" onClick={()=>handleClick(msgIndex)} style={{width: '50px'}}/>
+														<img src={imageIcon} alt="" className="chat__img" onClick={()=>handleClick(msgIndex + personW.id)} style={{width: '50px'}}/>
 														{/* </a> */}
 												</div>}
 												<figcaption style={{textAlign: 'center', borderRadius: '5px'}}>
