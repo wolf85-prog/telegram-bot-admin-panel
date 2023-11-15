@@ -1237,7 +1237,7 @@ const delCategory7 = (category) => {
       addNewDistrib(true)
 
       setSelected([])
-      setSendToAdmin(false)
+      //setSendToAdmin(false)
       setText('')
       setShowEditButtonAdd(false)
       setTextButton('')
