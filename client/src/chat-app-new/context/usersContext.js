@@ -228,7 +228,7 @@ const UsersProvider = ({ children }) => {
 			response.map(async (user) => {
 
 				let notion = await getWorkerNotionId(user.chatId)
-				const avatars = "" //await getWorkerChildrenId(notion[0]?.id)
+				const avatars = await getWorkerChildrenId(notion[0]?.id)
 				
 				let conversationId = await getWConversation(user.chatId)
 				let messages = await getWMessages(conversationId)
@@ -314,7 +314,7 @@ const UsersProvider = ({ children }) => {
 
 				setUserWorkers(sortedClients)
 
-			}, "5000")
+			}, "10000")
 
 			//console.log("context userWorkers: ", arrayContact)
 			//setUserWorkers(arrayContact)
