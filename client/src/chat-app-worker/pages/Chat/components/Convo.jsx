@@ -140,18 +140,19 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 								: undefined;
 						return (
 							<>
-								{message.image ? (
-									<div
+								{message.image 
+								? (<div
 										className={`chat__msg chat__img-wrapper ${
 											message.sender !== chatAdminId ? "chat__msg--rxd" : "chat__msg--sent"
 										}`}
 										ref={assignRef()}
 									>
-										{message.content.endsWith('.pdf') ? (<figure>
+										{message.content.endsWith('.pdf') 
+										? (<figure>
 											{/* <img src={pdf} width={30}/>
 											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a>*/}
 											<iframe src={message.content} height="235px" width="100%" title="myFramePdf"/>
-										</figure>) : 
+										 </figure>) : 
 											message.content.endsWith('.xlsx') 
 											? <figure> 
 												<img src={xlsIcon} width={30}/>
@@ -163,14 +164,14 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 												<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
 											</figure> 
 											: (<figure style={{margin:showImage[msgIndex + personW.id] ? '0 0 3rem': '0 0 1rem'}}>
-												{showImage[msgIndex + personW.id] ? 
-												<a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>	
-												:<div style={{
+												{showImage[msgIndex + personW.id]  
+												? <a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>	
+												: <div style={{
 														width: '100%', 
-														height: '120px', 
+														height: '100px', 
 														backgroundColor: '#3179a3', 
 														borderRadius: '10px', 
-														padding: '35px 75px',
+														padding: '25px 75px',
 														textAlign: 'center',
 														position: 'relative',
 														cursor: 'pointer',
@@ -182,8 +183,8 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 												<figcaption style={{textAlign: 'center', borderRadius: '5px'}}>
 													{message.descript}
 													<div style={{display: 'flex', justifyContent: 'space-between', padding: '10px 0'}}>
-														<div style={{width:'140px', height: '30px', backgroundColor: '#7b7777', borderRadius: '10px', padding: '3px 0'}}>Принять</div>
-														<div style={{width:'140px', height: '30px', backgroundColor: '#7b7777', borderRadius: '10px', padding: '3px 0'}}>Отклонить</div>
+														<div style={{width:'100px', height: '30px', backgroundColor: '#7b7777', borderRadius: '10px', padding: '3px 0'}}>Принять</div>
+														<div style={{width:'100px', height: '30px', backgroundColor: '#7b7777', borderRadius: '10px', padding: '3px 0'}}>Отклонить</div>
 													</div>
 												</figcaption>
 											</figure>)

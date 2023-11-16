@@ -303,21 +303,23 @@ const UsersProvider = ({ children }) => {
 				}
 
 				arrayContact.push(newUser)
+
+				console.log("arrayContact: ", arrayContact)
 			})
 
 			//подгрузка контактов
-			setTimeout(() => {
-				const sortedClients = [...arrayContact].sort((a, b) => {       
-					var dateA = new Date(a.date), dateB = new Date(b.date) 
-					return dateB-dateA  //сортировка по убывающей дате  
-				})
+			// setTimeout(() => {
+			// 	const sortedClients = [...arrayContact].sort((a, b) => {       
+			// 		var dateA = new Date(a.date), dateB = new Date(b.date) 
+			// 		return dateB-dateA  //сортировка по убывающей дате  
+			// 	})
 
-				setUserWorkers(sortedClients)
+			// 	setUserWorkers(sortedClients)
 
-			}, "10000")
+			// }, "10000")
 
 			//console.log("context userWorkers: ", arrayContact)
-			//setUserWorkers(arrayContact)
+			setUserWorkers(arrayContact)
 
 		}
 
