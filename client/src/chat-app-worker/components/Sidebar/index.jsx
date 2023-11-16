@@ -28,19 +28,11 @@ const Sidebar = () => {
 		console.log("sidebar userWorkers: ", userSort)
 		setContacts(userSort)
 		
-		// if(userWorkers.length > 0) {
-		// 	setLoading(false)
-		// }
-		
-	},[userWorkers])
-
-	useEffect(() => {
-		
-		if(contacts.length > 0) {
+		if(userSort.length > 0) {
 			setLoading(false)
 		}
 		
-	},[contacts])
+	},[userWorkers])
 
 	
 	useEffect(() => {
