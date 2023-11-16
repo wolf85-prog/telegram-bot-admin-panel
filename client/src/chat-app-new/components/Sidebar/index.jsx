@@ -6,7 +6,6 @@ import Icon from "./../../components/Icon";
 import Contact from "./Contact";
 import OptionsBtn from "./../../components/OptionsButton";
 import { useUsersContext } from "./../../context/usersContext";
-import { Link } from "react-router-dom";
 import { CSpinner} from '@coreui/react'
 
 const Sidebar = () => {
@@ -25,6 +24,8 @@ const Sidebar = () => {
 			return dateB-dateA  //сортировка по убывающей дате  
 		})
 		setContacts(userSort)
+
+		//console.log("clients: ", clients)
 
 		if(clients.length > 0) {
 			setLoading(false)

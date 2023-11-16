@@ -194,7 +194,7 @@ const UsersProvider = ({ children }) => {
 
 			//1 все специалисты
 			let response1 = await getWorkers();
-			console.log("workers size: ", response1.length)
+			console.log("workers size: ", response1)
 
 			const arrayWorker = []
 
@@ -232,6 +232,8 @@ const UsersProvider = ({ children }) => {
 				
 				let conversationId = await getWConversation(user.chatId)
 				let messages = await getWMessages(conversationId)
+
+				console.log("messages: ", messages)
 
 				//получить последнее сообщение
 				const messageDates = Object.keys(messages);
@@ -312,8 +314,9 @@ const UsersProvider = ({ children }) => {
 
 				setUserWorkers(sortedClients)
 
-			}, "7000")
+			}, "5000")
 
+			//console.log("context userWorkers: ", arrayContact)
 			//setUserWorkers(arrayContact)
 
 		}

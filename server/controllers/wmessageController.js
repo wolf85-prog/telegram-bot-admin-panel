@@ -26,6 +26,8 @@ class WmessageController {
                 order: [
                     ['id', 'ASC'],
                 ],
+                offset: count > 60 ? count - 60 : 0,
+                //limit : 50,
             })
             return res.status(200).json(messages);
         } catch (error) {

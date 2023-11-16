@@ -6,7 +6,6 @@ import Icon from "./../../../chat-app-new/components/Icon";
 import Contact from "./Contact";
 import OptionsBtn from "./../../../chat-app-new/components/OptionsButton";
 import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
-import { Link } from "react-router-dom";
 import { CSpinner} from '@coreui/react'
 
 const Sidebar = () => {
@@ -15,35 +14,24 @@ const Sidebar = () => {
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
 	const [loading, setLoading]= useState(true);
-	const [contreg, setContreg]= useState({spec: "", cat: ""});
 
 	const navigate = useNavigate()
 
-	//console.log("sidebar userWorkers: ", userWorkers)
-
 	useEffect(() => {
 
-		setTimeout(() => {
-			//console.log("sidebar workers: ", workers)
-			console.log("sidebar userWorkers: ", userWorkers)
-
-			//setContacts(userWorkers)
-			setLoading(false)
-		}, "10000")
-		
 		//сортировка
-		// const userSort = [...userWorkers].sort((a, b) => {       
-		// 	var dateA = new Date(a.date), dateB = new Date(b.date) 
-		// 	return dateB-dateA  //сортировка по убывающей дате  
-		// })
+		const userSort = [...userWorkers].sort((a, b) => {       
+			var dateA = new Date(a.date), dateB = new Date(b.date) 
+			return dateB-dateA //сортировка по убывающей дате  
+		})
+
+		console.log("sidebar userWorkers: ", userSort)
 		
+		if(userWorkers.length > 0) {
+			setLoading(false)
+		}
 		
-		
-		//if(userWorkers.length > 0) {
-			//setLoading(false)
-		//}
-		
-	},[])
+	},[userWorkers])
 
 	
 	useEffect(() => {
@@ -122,7 +110,7 @@ const Sidebar = () => {
 				{loading ? 
 				<CSpinner style={{margin: '50%'}}/> :
 				
-				userWorkers.map((contact) => (
+				contacts.map((contact) => (
 					contact.chatId !== chatAdminId &&
                     <>   
 						<Contact contact={contact} worker={workers.filter((item)=> item.chatId === contact.chatId)} />
