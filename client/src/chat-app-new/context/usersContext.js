@@ -191,15 +191,44 @@ const UsersProvider = ({ children }) => {
 
 //---------get UserWorkers-----------------------------------------
 		const fetchUserWorkerData = async () => {
+
+			//1 все специалисты
+			let response1 = await getWorkers();
+			console.log("workers size: ", response1.length)
+
+			const arrayWorker = []
+
+			response1.map(async (user) => {
+				const newWorker = {
+					id: user.id,
+					userfamily: user.userfamily,
+					username: user.username,
+					phone: user.phone,
+					dateborn: user.dateborn,
+					city: user.city, 
+					companys: user.companys,
+					stag: user.stag,
+					worklist:  user.worklist,
+					chatId: user.chatId,
+					createDate: user.createdAt,
+				}
+
+				arrayWorker.push(newWorker)
+			})
+
+			setWorkers(arrayWorker)
+
+
+			//2
 			let response = await getWContacts();
-			console.log("userWorkers size: ", response.length)
+			console.log("userWorkers size: ", response)
 	
 			const arrayContact = []
 	
 			response.map(async (user) => {
 
 				let notion = await getWorkerNotionId(user.chatId)
-				const avatars = await getWorkerChildrenId(notion[0].id)
+				const avatars = "" //await getWorkerChildrenId(notion[0]?.id)
 				
 				let conversationId = await getWConversation(user.chatId)
 				let messages = await getWMessages(conversationId)
@@ -253,16 +282,13 @@ const UsersProvider = ({ children }) => {
 					obj[dates[i]] = arrayDateMessage;
 				}
 
-				let first_name = user.firstname != null ? user.firstname : ''
-				let last_name = user.lastname != null ? user.lastname : ''
-
 				const newUser = {
 					id: user.id,
 					username: user.username,
-					name: notion[0].fio,
-					city: notion[0].city,
-					phone: notion[0].phone,
-					age: notion[0].age,
+					name: notion[0]?.fio,
+					city: notion[0]?.city,
+					phone: notion[0]?.phone,
+					age: notion[0]?.age,
 					chatId: user.chatId,
 					avatar: avatars[0]?.image, //user.avatar,
 					conversationId: conversationId,
@@ -278,26 +304,23 @@ const UsersProvider = ({ children }) => {
 			})
 
 			//подгрузка контактов
-			// setTimeout(() => {
-			// 	const sortedClients = [...arrayContact].sort((a, b) => {       
-			// 		var dateA = new Date(a.date), dateB = new Date(b.date) 
-			// 		return dateB-dateA  //сортировка по убывающей дате  
-			// 	})
+			setTimeout(() => {
+				const sortedClients = [...arrayContact].sort((a, b) => {       
+					var dateA = new Date(a.date), dateB = new Date(b.date) 
+					return dateB-dateA  //сортировка по убывающей дате  
+				})
 
-			// 	setUserWorkers(sortedClients)
-			 	console.log("workers contacts: ", arrayContact)
+				setUserWorkers(sortedClients)
 
-			// }, "10000")
+			}, "5000")
 
-			setUserWorkers(arrayContact)
+			//setUserWorkers(arrayContact)
 
 		}
 
 		//все сообщения заказчиков
 		fetchData();
 
-		//все специалисты
-		fetchWorkerData();
 
 
 		//все сообщения специалистов

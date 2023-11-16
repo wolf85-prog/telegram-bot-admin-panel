@@ -19,21 +19,31 @@ const Sidebar = () => {
 
 	const navigate = useNavigate()
 
+	console.log("sidebar userWorkers: ", userWorkers)
+
 	useEffect(() => {
-		console.log("sidebar workers: ", workers.length)
-		console.log("sidebar userWorkers: ", userWorkers.length)
-		//сортировка
-		const userSort = [...userWorkers].sort((a, b) => {       
-			var dateA = new Date(a.date), dateB = new Date(b.date) 
-			return dateB-dateA  //сортировка по убывающей дате  
-		})
-		setContacts(userSort)
-		
-		if(userWorkers.length > 0) {
+
+		setTimeout(() => {
+			//console.log("sidebar workers: ", workers)
+			//console.log("sidebar userWorkers: ", userWorkers)
+
+			//setContacts(userWorkers)
 			setLoading(false)
-		}
+		}, "2000")
 		
-	},[userWorkers, workers])
+		//сортировка
+		// const userSort = [...userWorkers].sort((a, b) => {       
+		// 	var dateA = new Date(a.date), dateB = new Date(b.date) 
+		// 	return dateB-dateA  //сортировка по убывающей дате  
+		// })
+		
+		
+		
+		//if(userWorkers.length > 0) {
+			//setLoading(false)
+		//}
+		
+	},[workers, userWorkers])
 
 	
 	useEffect(() => {
@@ -111,7 +121,8 @@ const Sidebar = () => {
 			<div className="sidebar__contacts">
 				{loading ? 
 				<CSpinner style={{margin: '50%'}}/> :
-				contacts.map((contact) => (
+				
+				userWorkers.map((contact) => (
 					contact.chatId !== chatAdminId &&
                     <>   
 						<Contact contact={contact} worker={workers.filter((item)=> item.chatId === contact.chatId)} />
