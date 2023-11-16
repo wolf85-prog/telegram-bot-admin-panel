@@ -19,17 +19,17 @@ const Sidebar = () => {
 
 	const navigate = useNavigate()
 
-	console.log("sidebar userWorkers: ", userWorkers)
+	//console.log("sidebar userWorkers: ", userWorkers)
 
 	useEffect(() => {
 
 		setTimeout(() => {
 			//console.log("sidebar workers: ", workers)
-			//console.log("sidebar userWorkers: ", userWorkers)
+			console.log("sidebar userWorkers: ", userWorkers)
 
 			//setContacts(userWorkers)
 			setLoading(false)
-		}, "2000")
+		}, "10000")
 		
 		//сортировка
 		// const userSort = [...userWorkers].sort((a, b) => {       
@@ -43,7 +43,7 @@ const Sidebar = () => {
 			//setLoading(false)
 		//}
 		
-	},[workers, userWorkers])
+	},[])
 
 	
 	useEffect(() => {

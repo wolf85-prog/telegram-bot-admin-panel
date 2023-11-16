@@ -312,7 +312,7 @@ const UsersProvider = ({ children }) => {
 
 				setUserWorkers(sortedClients)
 
-			}, "5000")
+			}, "7000")
 
 			//setUserWorkers(arrayContact)
 
@@ -320,7 +320,6 @@ const UsersProvider = ({ children }) => {
 
 		//все сообщения заказчиков
 		fetchData();
-
 
 
 		//все сообщения специалистов
