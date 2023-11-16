@@ -28,10 +28,13 @@ const Sidebar = () => {
 		console.log("sidebar userWorkers: ", userSort)
 		setContacts(userSort)
 		
-		//if(userSort.length > 0) {
-		setTimeout(()=>{
+		if(userWorkers.length > 0) {
 			setLoading(false)
-		}, 5000)
+		}
+
+		// setTimeout(()=>{
+		// 	setLoading(false)
+		// }, 5000)
 			
 		
 	},[userWorkers])

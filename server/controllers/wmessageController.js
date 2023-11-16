@@ -19,7 +19,11 @@ class WmessageController {
     //get message conversation
     async getMessagesWorker(req, res) {
         const conversationId = req.params.id
-        try {           
+        try {   
+            const count = await Message.count({
+                where: { conversationId },
+            });
+
             const messages = await Message.findAll({
                 where: {conversationId},
                 // Add order conditions here....
