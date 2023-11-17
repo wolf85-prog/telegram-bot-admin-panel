@@ -166,7 +166,9 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											: (<figure style={{margin:showImage[msgIndex + personW.id] ? '0 0 3rem': '0 0 1rem'}}>
 												{showImage[msgIndex + personW.id]  
 												? <a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>	
-												: <div style={{
+												: <div 
+													onClick={()=>handleClick(msgIndex + personW.id)}
+													style={{
 														width: '100%', 
 														height: '100px', 
 														backgroundColor: '#3179a3', 
