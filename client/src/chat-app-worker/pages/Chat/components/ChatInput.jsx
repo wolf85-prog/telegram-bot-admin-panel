@@ -73,7 +73,7 @@ const ChatInput = ({
 			  <ul className="list-unstyled">
 				{React.Children.toArray(children).filter(
 				  (child) =>
-					!value || child.props.children.toLowerCase().startsWith(value),
+					!value || child.props.children?.toLowerCase().startsWith(value),
 				)}
 			  </ul>
 			</div>

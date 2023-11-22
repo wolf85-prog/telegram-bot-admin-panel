@@ -33,7 +33,7 @@ const Sidebar = () => {
 	},[clients])
 	
 	useEffect(() => {
-		const filteredData = clients.filter(user=> (user.name).toLowerCase().includes(text.toLowerCase()));
+		const filteredData = clients.filter(user=> (user.name)?.toLowerCase().includes(text.toLowerCase()));
         setContacts(filteredData);      
     }, [text]);
 
