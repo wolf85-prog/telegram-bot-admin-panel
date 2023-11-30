@@ -63,7 +63,7 @@ const Chat = () => {
                 data.append("photo", file);
 
                let response = await uploadFile(data);
-			   console.log("response: ", response)
+			   //console.log("response: ", response)
 
                setImage(response.data.path.split('.team')[1]);
 			   //сообщение с ссылкой на файл
@@ -135,7 +135,7 @@ const Chat = () => {
 			//сохранить в контексте
 			addNewMessage(user.chatId, host + image, 'image', '', user.conversationId, sendToTelegram.data.result.message_id);
         }
-        console.log("message send button: ", message);
+        //console.log("message send button: ", message);
 
 		//сохранение сообщения в базе данных
 		await newMessage(message)	

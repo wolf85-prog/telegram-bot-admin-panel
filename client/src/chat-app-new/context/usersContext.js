@@ -164,7 +164,7 @@ const UsersProvider = ({ children }) => {
 //---------get Workers-----------------------------------------
 		const fetchWorkerData = async () => {
 			let response = await getWorkers();
-			console.log("workers size: ", response.length)
+			//console.log("workers size: ", response.length)
 
 			const arrayWorker = []
 
@@ -194,7 +194,7 @@ const UsersProvider = ({ children }) => {
 
 			//1 все специалисты
 			let response1 = await getWorkers();
-			console.log("workers size: ", response1)
+			//console.log("workers size: ", response1)
 
 			const arrayWorker = []
 
@@ -221,7 +221,7 @@ const UsersProvider = ({ children }) => {
 
 			//2
 			let response = await getWContacts();
-			console.log("userWorkers size: ", response)
+			//console.log("userWorkers size: ", response)
 	
 			const arrayContact = []
 	
@@ -233,7 +233,7 @@ const UsersProvider = ({ children }) => {
 				let conversationId = await getWConversation(user.chatId)
 				let messages = await getWMessages(conversationId)
 
-				console.log("messages: ", messages)
+				//console.log("messages: ", messages)
 
 				//получить последнее сообщение
 				const messageDates = Object.keys(messages);
@@ -304,7 +304,7 @@ const UsersProvider = ({ children }) => {
 
 				arrayContact.push(newUser)
 
-				console.log("arrayContact: ", arrayContact)
+				//console.log("arrayContact: ", arrayContact)
 			})
 
 			//подгрузка контактов
@@ -581,6 +581,7 @@ const UsersProvider = ({ children }) => {
 			};
 
 			const currentDate = new Date().toLocaleDateString()
+			console.log("currentDate: ", currentDate)
 
 			if (usersCopy[userIndex].messages[currentDate]) {
 				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
@@ -606,7 +607,7 @@ const UsersProvider = ({ children }) => {
 
 	//получить исходящее сообщение в админку
 	const fetchDelAdmin = (data) => {
-		console.log("Удаление сообщение в Админке: ", data)
+		//console.log("Удаление сообщение в Админке: ", data)
 
 		setUsers((users) => {
 			const { messageId, messageDate, chatId } = data;
@@ -736,13 +737,13 @@ const fetchMessageSpecResponse = async(data) => {
 
 	if (data.text.startsWith('Пользователь нажал кнопку "Принять" в рассылке') && !data.text.includes('_reply_')) {
 		
-		console.log("Добавился новый претендент: ")
+		//console.log("Добавился новый претендент: ")
 		//play sound
 		audioPretendent.play();
 
 		//пришел новый претендент
 		//setNewPretendent(true)
-		console.log("countPretendent: ", countPretendent + 1)
+		//console.log("countPretendent: ", countPretendent + 1)
 		setCountPretendent(countPretendent + 1);
 
 		//get all pretendent
@@ -751,12 +752,12 @@ const fetchMessageSpecResponse = async(data) => {
 		setPretendents(pretendents)
 	}
 	else if (data.text.startsWith('Твоя ставка отправлена') && !data.text.includes('_reply_')) {
-		console.log("Твоя ставка отправлена: ")
+		//console.log("Твоя ставка отправлена: ")
 		//play sound
 		audioPretendent.play();
 
 		//пришел новый претендент
-		console.log("countPretendent: ", countPretendent + 1)
+		//console.log("countPretendent: ", countPretendent + 1)
 		setCountPretendent(countPretendent + 1);
 
 		//get all pretendent
@@ -765,7 +766,7 @@ const fetchMessageSpecResponse = async(data) => {
 	}
 	else {
 		setCountMessageWork(countMessageWork + 1)
-		console.log("Пришло новое сообщение в workhub: ", count+1)
+		//console.log("Пришло новое сообщение в workhub: ", count+1)
 		//play sound
 		audioWorkhub.play();		
 	}
@@ -834,9 +835,9 @@ const fetchMessageSpecResponse = async(data) => {
 };
 
 
-//получить исходящее сообщение в админку
+//получить исходящее сообщение в админку workhub
 const fetchAdminSpec = (data) => {
-	console.log("Пришло сообщение в Админку: ", data)
+	//console.log("Пришло сообщение в Админку: ", data)
 
 	setUserWorkers((userWorkers) => {
 		const { senderId, receiverId, text, type, buttons, messageId } = data;
@@ -880,7 +881,7 @@ const fetchAdminSpec = (data) => {
 
 //получить исходящее сообщение в админку
 const fetchDelAdminSpec = (data) => {
-	console.log("Удаление сообщение в Админке: ", data)
+	//console.log("Удаление сообщение в Админке: ", data)
 
 	setUsers((users) => {
 		const { messageId, messageDate, chatId } = data;
@@ -924,7 +925,7 @@ const delMessageContext2 = (messageId, messageDate, chatId) => {
 //                  Notifications
 //===============================================================
 const fetchNotifAdmin = (data) => {
-	console.log("Получено звуковое уведомление: ", data)
+	//console.log("Получено звуковое уведомление: ", data)
 	const { task } = data;
 
 	if (task === 1) {
