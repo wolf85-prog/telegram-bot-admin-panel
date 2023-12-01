@@ -339,3 +339,23 @@ export const getPretendentId = async(id)=>{
          console.log("error while calling getPretendentId api", error.message);
      }
 }
+
+
+export const getCountMessage = async()=>{
+    try {
+        let response = await $host.get(`api/message/count/get`);
+        //console.log(response);
+        return response.data;
+     } catch (error) {
+         console.log("error while calling getCountMessage api", error.message);
+     }
+}
+
+// message
+export const newCountMessage = async (count) =>{
+    try {
+        await $host.get(`api/message/count/add/${count}`); 
+    } catch (error) {
+        console.log("error while calling newCountMessage api",error.message);
+    }
+}

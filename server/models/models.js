@@ -100,6 +100,14 @@ const Plan = sequelize.define('plan', {
     times: {type: DataTypes.STRING},  //json часов проектов
 })
 
+const CountMessage = sequelize.define('countmessage', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    managers: {type: DataTypes.INTEGER},
+    projects: {type: DataTypes.INTEGER},
+    workers: {type: DataTypes.INTEGER},
+    pretendents: {type: DataTypes.INTEGER},
+})
+
 
 module.exports = {
     User, 
@@ -111,5 +119,6 @@ module.exports = {
     Distributionw,
     Report,
     Pretendent,
-    Plan
+    Plan,
+    CountMessage
 }
