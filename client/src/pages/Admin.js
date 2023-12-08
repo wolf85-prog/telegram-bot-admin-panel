@@ -1067,10 +1067,10 @@ const Admin = () => {
                                     {sortWorkers.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
                                         <CTableDataCell className="text-center">
-                                          {item.createDate.split('T')[0].split('-')[2]+ "."+ item.createDate.split('T')[0].split('-')[1] + "." +item.createDate.split('T')[0].split('-')[0]}
+                                          {String(new Date(item.createDate).getDate()).padStart(2, "0")+ "."+ String(new Date(item.createDate).getMonth()+1).padStart(2, "0") + "." +new Date(item.createDate).getFullYear()}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          {item.createDate.split('T')[1].split('Z')[0].slice(0, 5)}
+                                          {new Date(item.createDate).getHours() + ' : '+ new Date(item.createDate).getMinutes()}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
                                             {item.userfamily +" "+ item.username}
