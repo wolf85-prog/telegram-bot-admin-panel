@@ -8,7 +8,8 @@ import { getDistributions,
 	getDistributionsWPlan,
 	getManagers, 
 	getProjectsApi, 
-	getCompanys 
+	getCompanys,
+	getCountMessage 
 } from "src/http/adminAPI";
 import boopSfx from './../assets/sounds/zvuk-icq.mp3';
 import soundProject from './../assets/sounds/project_new.mp3';
@@ -464,6 +465,8 @@ const UsersProvider = ({ children }) => {
 	//получить сообщение из телеграмма
 	const fetchMessageResponse = async(data) => {
 		//console.log("date: ", data)
+		getCountMessage()
+		
 		setCount(count+1);
 		setCountMessage(countMessage + 1)
 

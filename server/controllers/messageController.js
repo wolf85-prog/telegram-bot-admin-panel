@@ -1,9 +1,35 @@
 const Message = require('../models/Message')
+const {CountMessage} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const uuid = require('uuid')
 const path = require('path')
 
 class MessageController {
+
+    //add count message
+    async newCountMessage(req, res) {
+        const count = req.params.count
+        try {
+            await CountMessage.update({managers: count}, {where: {id: 1}})
+
+            return res.status(200).json("Message has been sent successfully");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    //count message
+    async getCountMessages(req, res) {
+        try {           
+            const count = await CountMessage.findOne({
+                where: {id: 1},
+            })
+            return res.status(200).json(count);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
 
     //add message
     async newMessage(req, res) {
