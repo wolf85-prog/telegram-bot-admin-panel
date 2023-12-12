@@ -76,6 +76,8 @@ const UsersProvider = ({ children }) => {
 				let conversationId = await getConversation(user.chatId)
 				let messages = await getMessages(conversationId)
 
+				console.log("count message: ", messages.length)
+
 				//получить последнее сообщение
 				const messageDates = Object.keys(messages);
 				const recentMessageDate = messageDates[messageDates.length - 1];
