@@ -57,7 +57,7 @@ class MessageController {
                 order: [
                     ['id', 'ASC'], //DESC
                 ],
-                offset: count > 100 ? count - 100 : 0,
+                offset: count > 150 ? count - 150 : 0,
                 //limit : 50,
             })
             return res.status(200).json(messages);
