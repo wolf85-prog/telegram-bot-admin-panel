@@ -5,6 +5,7 @@ import formatTime from "./../../utils/formatTime";
 import { useUsersContext } from "./../../context/usersContext";
 import { AccountContext } from '../../../chat-app-new/context/AccountProvider'
 import avatarDefault from "./../../assets/images/no-avatar.png";
+import { CSpinner} from '@coreui/react'
 
 const Contact = ({ contact }) => {
 	
@@ -77,11 +78,12 @@ const Contact = ({ contact }) => {
 				<div className="sidebar-contact__top-content">
 					<h2 className="sidebar-contact__name"> {contact.name}</h2>
 					<span className="sidebar-contact__time">
-						{lastMessage === ''  ? '' : formatTime(lastMessage.time)}
+						<CSpinner />
+						{/* {lastMessage === ''  ? '' : formatTime(lastMessage.time)} */}
 					</span>
 				</div>
 				<div className="sidebar-contact__bottom-content">
-					<p className="sidebar-contact__message-wrapper">
+					{/* <p className="sidebar-contact__message-wrapper">
 						{lastMessage.status && (
 							<Icon
 								id={
@@ -102,8 +104,8 @@ const Contact = ({ contact }) => {
 						>
 							{contact.typing ? <i> печатает...</i> : lastMessage?.content}
 						</span>
-					</p>
-					<div className="sidebar-contact__icons">
+					</p> */}
+					{/* <div className="sidebar-contact__icons">
 						{contact.pinned && (
 							<Icon id="pinned" className="sidebar-contact__icon" />
 						)}
@@ -116,7 +118,7 @@ const Contact = ({ contact }) => {
 								className="sidebar-contact__icon sidebar-contact__icon--dropdown"
 							/>
 						</button>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</Link>

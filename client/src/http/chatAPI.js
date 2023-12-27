@@ -91,6 +91,17 @@ export const getMessages = async(id)=>{
     }
 }
 
+export const getLastMessages = async(id)=>{
+    try {
+        let response= await $host.get(`api/message/last/get/${id}`);
+        
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getLastMessages api",error.message);
+        
+    }
+}
+
 export const getAllMessages = async()=>{
     try {
         let response= await $host.get(`api/message/get`);

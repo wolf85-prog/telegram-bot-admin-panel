@@ -9,11 +9,11 @@ import { useUsersContext } from "./../../context/usersContext";
 import { CSpinner} from '@coreui/react'
 
 const Sidebar = () => {
-	const { users: clients } = useUsersContext();
+	const { users: clients, contacts, setContacts } = useUsersContext();
 
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 
-	const [contacts, setContacts]= useState([]);
+	//const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
 	const [loading, setLoading]= useState(true);
 
@@ -22,32 +22,30 @@ const Sidebar = () => {
 	useEffect(() => {
 		
 		//КЭШ браузера
-		const retrievedData = localStorage.getItem("contacts");
-		const contactsStorage = JSON.parse(retrievedData)
+		//const retrievedData = localStorage.getItem("contacts");
+		//const contactsStorage = JSON.parse(retrievedData)
 
 		//сортировка
-		const userSort = [...clients].sort((a, b) => {       
-			var dateA = new Date(a.date), dateB = new Date(b.date) 
-			return dateB-dateA  //сортировка по убывающей дате  
-		})
+		// const userSort = [...contactsStorage].sort((a, b) => {       
+		// 	var dateA = new Date(a.date), dateB = new Date(b.date) 
+		// 	return dateB-dateA  //сортировка по убывающей дате  
+		// })
 
-		setTimeout(()=> {
-			setContacts(userSort)
+		//setTimeout(()=> {
+			//setContacts(userSort)
 			setLoading(false)
-		}, 1000)
+		//}, 2000)
 		
-	},[])
+	},[contacts])
 
-	useEffect(() => {
-		console.log("contacts: ", contacts)
-	}, [contacts])
+	
 	
 	useEffect(() => {
 		//КЭШ браузера
 		const retrievedData = localStorage.getItem("contacts");
 		const contactsStorage = JSON.parse(retrievedData)
 		
-		const filteredData = clients.filter(user=> (user.name)?.toLowerCase().includes(text.toLowerCase()));
+		const filteredData = contacts.filter(user=> (user.name)?.toLowerCase().includes(text.toLowerCase()));
         setContacts(filteredData);      
     }, [text]);
 

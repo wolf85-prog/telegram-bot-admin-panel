@@ -66,6 +66,24 @@ class MessageController {
         }
     }
 
+    //get message conversation
+    async getLastMessages(req, res) {
+        const conversationId = req.params.id
+        try {           
+
+            const messages = await Message.findOne({
+                where: {conversationId},
+                // последнее сообщение
+                order: [ 
+                    [ 'createdAt', 'DESC' ]
+                ],
+            })
+            return res.status(200).json(messages);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
     async getAllMessages(req, res) {
         try {           
             const messages = await Message.findAll()
