@@ -10,7 +10,9 @@ import { CSpinner} from '@coreui/react'
 
 const Sidebar = () => {
 	const { users: clients } = useUsersContext();
+
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
+
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
 	const [loading, setLoading]= useState(true);
@@ -18,21 +20,33 @@ const Sidebar = () => {
 	const navigate = useNavigate()
 
 	useEffect(() => {
+		
+		//КЭШ браузера
+		const retrievedData = localStorage.getItem("contacts");
+		const contactsStorage = JSON.parse(retrievedData)
+
 		//сортировка
 		const userSort = [...clients].sort((a, b) => {       
 			var dateA = new Date(a.date), dateB = new Date(b.date) 
 			return dateB-dateA  //сортировка по убывающей дате  
 		})
-		setContacts(userSort)
 
-		//console.log("clients: ", clients)
-
-		if(clients.length > 0) {
+		setTimeout(()=> {
+			setContacts(userSort)
 			setLoading(false)
-		}
-	},[clients])
+		}, 1000)
+		
+	},[])
+
+	useEffect(() => {
+		console.log("contacts: ", contacts)
+	}, [contacts])
 	
 	useEffect(() => {
+		//КЭШ браузера
+		const retrievedData = localStorage.getItem("contacts");
+		const contactsStorage = JSON.parse(retrievedData)
+		
 		const filteredData = clients.filter(user=> (user.name)?.toLowerCase().includes(text.toLowerCase()));
         setContacts(filteredData);      
     }, [text]);
