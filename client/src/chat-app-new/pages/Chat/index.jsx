@@ -46,77 +46,73 @@ const Chat = () => {
 
 	//const audio = new Audio(sendSound);
 
-	useEffect(() => {
-		const fetchData = async () => {
-			setLoading(true)
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		setLoading(true)
 
-			let conversationId = await getConversation(user.chatId)
+	// 		let conversationId = await getConversation(user.chatId)
 
-			let messages = await getMessages(conversationId)
+	// 		let messages = await getMessages(conversationId)
 
-			console.log("messages: ", messages)
+	// 		console.log("messages: ", messages)
 			
 
-			const arrayMessage = []
-			const allDate = []
+	// 		const arrayMessage = []
+	// 		const allDate = []
 
-				messages.map(message => {
-						const d = new Date(message.createdAt);
-						const year = d.getFullYear();
-						const month = String(d.getMonth()+1).padStart(2, "0");
-						const day = String(d.getDate()).padStart(2, "0");
-						const chas = d.getHours();
-						const minut = String(d.getMinutes()).padStart(2, "0");
+	// 			messages.map(message => {
+	// 					const d = new Date(message.createdAt);
+	// 					const year = d.getFullYear();
+	// 					const month = String(d.getMonth()+1).padStart(2, "0");
+	// 					const day = String(d.getDate()).padStart(2, "0");
+	// 					const chas = d.getHours();
+	// 					const minut = String(d.getMinutes()).padStart(2, "0");
 
-						const newDateMessage = `${day}.${month}.${year}`
+	// 					const newDateMessage = `${day}.${month}.${year}`
 
-						const newMessage = {
-							date: newDateMessage,
-							content: message.text,
-							image: message.type === 'image' ? true : false,
-							descript: message.buttons ? message.buttons : '',
-							sender: message.senderId,
-							time: chas + ' : ' + minut,
-							status: 'sent',
-							id:message.messageId,
-							reply:message.replyId,
-						}
-						arrayMessage.push(newMessage)
-						allDate.push(newDateMessage)
-				})
+	// 					const newMessage = {
+	// 						date: newDateMessage,
+	// 						content: message.text,
+	// 						image: message.type === 'image' ? true : false,
+	// 						descript: message.buttons ? message.buttons : '',
+	// 						sender: message.senderId,
+	// 						time: chas + ' : ' + minut,
+	// 						status: 'sent',
+	// 						id:message.messageId,
+	// 						reply:message.replyId,
+	// 					}
+	// 					arrayMessage.push(newMessage)
+	// 					allDate.push(newDateMessage)
+	// 			})
 
-				const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
+	// 			const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
 
-				let obj = {};
-				for (let i = 0; i < dates.length; i++) {
-					const arrayDateMessage = []
-					for (let j = 0; j < arrayMessage.length; j++) {
-						if (arrayMessage[j].date === dates[i]) {
-							arrayDateMessage.push(arrayMessage[j])							
-						}
-					}	
-					obj[dates[i]] = arrayDateMessage;
-				}
+	// 			let obj = {};
+	// 			for (let i = 0; i < dates.length; i++) {
+	// 				const arrayDateMessage = []
+	// 				for (let j = 0; j < arrayMessage.length; j++) {
+	// 					if (arrayMessage[j].date === dates[i]) {
+	// 						arrayDateMessage.push(arrayMessage[j])							
+	// 					}
+	// 				}	
+	// 				obj[dates[i]] = arrayDateMessage;
+	// 			}
 
-				setMessages(obj)
+	// 			setMessages(obj)
 
-				// let user = users.filter((user) => user.chatId === chatId.toString())[0];
-				// setUser2(user)
-				// console.log("user: ", user)
+	// 			let userIndex = users.findIndex((user) => user.chatId === chatId.toString());
+	// 			const usersCopy = [...users];
+	// 			usersCopy[userIndex].messages = obj;
+	// 			setUsers(usersCopy);
 
-				let userIndex = users.findIndex((user) => user.chatId === chatId.toString());
-				const usersCopy = [...users];
-				usersCopy[userIndex].messages = obj;
-				setUsers(usersCopy);
+	// 			setUser2(usersCopy[userIndex])
+	// 			console.log("user message: ", usersCopy[userIndex].messages)
 
-				setUser2(usersCopy[userIndex])
-				console.log("user message: ", usersCopy[userIndex].messages)
+	// 			setLoading(false)
+	// 	}
 
-				setLoading(false)
-		}
-
-		fetchData()
-	},[person])
+	// 	fetchData()
+	// },[person])
 
 	useEffect(() => {
 		if (user) {
@@ -245,7 +241,7 @@ const Chat = () => {
 				<div className="chat__content">
 					{loading ?
 						<CSpinner style={{margin: '50%'}}/>
-						 :<Convo lastMsgRef={lastMsgRef} messages={user2.messages} />
+						 :<Convo lastMsgRef={lastMsgRef} messages={user.messages} />
 					}
 				</div>
 				<footer className="chat__footer">
