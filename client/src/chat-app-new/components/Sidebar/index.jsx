@@ -44,13 +44,13 @@ const Sidebar = () => {
 						name: chatName,
 						chatId: user.chatId,
 						avatar: user.avatar,
-						//conversationId: conversationId,
+						conversationId: '',
 						unread: 0, 
 						pinned: false,
 						typing: false,
-						//message:  lastMessage,
-						//date: dateMessage,
-						//messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
+						message:  '',
+						date: '',
+						messages: '', // { "01/01/2023": arrayMessage,"Сегодня":[] },	
 					}
 					arrayContact.push(newUser)
 				})
@@ -65,102 +65,94 @@ const Sidebar = () => {
 					setUsers(arrayContact)
 					setContacts(arrayContact)
 	
-					//localStorage.setItem('contacts', JSON.stringify(arrayContact));
 					setLoading(false)
 
 				}, 1000)
 			};
-	
+
 			//все сообщения заказчиков
 			fetchData();
+			
 	}, [])
 
 	//подгрузка сообщений
   	useEffect(() => {
-		//console.log("contacts page: ", users)
+		//КЭШ браузера
+		const retrievedData = localStorage.getItem("contacts");
+		const contactsStorage = JSON.parse(retrievedData ? retrievedData : [])
 
     	const arrayContact = []
 
-    	users.map(async (user, index) => {
-      		let conversationId = await getConversation(user.chatId)
+		//если есть кэш браузера
+		if (contactsStorage.length > 0) {
+			setUsers2(contactsStorage)
+		} else {
+			users.map(async (user, index) => {
+				let conversationId = await getConversation(user.chatId)
 
-			//получить последнее сообщение
-			let message = await getLastMessages(conversationId)
-		
+				//получить последнее сообщение
+				let message = await getLastMessages(conversationId)
+			
+				let newMessage = ''
+				let dateMessage = "2000-01-01T00:00:00"
 
-			let newMessage = ''
-			let dateMessage = "2000-01-01T00:00:00"
+				if (message) {
+					dateMessage = message ? message.createdAt : "2000-01-01T00:00:00";		
 
-			if (message) {
-				dateMessage = message ? message.createdAt : "2000-01-01T00:00:00";		
+					const d = new Date(message?.createdAt);
+					const year = d.getFullYear();
+					const month = String(d.getMonth()+1).padStart(2, "0");
+					const day = String(d.getDate()).padStart(2, "0");
+					const chas = d.getHours();
+					const minut = String(d.getMinutes()).padStart(2, "0");
 
-				const d = new Date(message?.createdAt);
-				const year = d.getFullYear();
-				const month = String(d.getMonth()+1).padStart(2, "0");
-				const day = String(d.getDate()).padStart(2, "0");
-				const chas = d.getHours();
-				const minut = String(d.getMinutes()).padStart(2, "0");
+					const newDateMessage = `${day}.${month}.${year}`
 
-				const newDateMessage = `${day}.${month}.${year}`
-
-				newMessage = {
-					date: newDateMessage,
-					content: message?.text,
-					image: message?.type === 'image' ? true : false,
-					descript: message?.buttons ? message.buttons : '',
-					sender: message?.senderId,
-					time: chas + ' : ' + minut,
-					status: 'sent',
-					id:message?.messageId,
-					reply:message?.replyId,
+					newMessage = {
+						date: newDateMessage,
+						content: message?.text,
+						image: message?.type === 'image' ? true : false,
+						descript: message?.buttons ? message.buttons : '',
+						sender: message?.senderId,
+						time: chas + ' : ' + minut,
+						status: 'sent',
+						id:message?.messageId,
+						reply:message?.replyId,
+					}
 				}
-			}
 
-        	const newUser = {
-				id: user.id,
-				name: user.name,
-				chatId: user.chatId,
-				avatar: user.avatar,
-				conversationId: conversationId,
-				unread: 0, 
-				pinned: false,
-				typing: false,
-				message:  newMessage , //lastMessage,
-				date: dateMessage,
-				//messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
-			}
-			arrayContact.push(newUser)
+				const newUser = {
+					id: user.id,
+					name: user.name,
+					chatId: user.chatId,
+					avatar: user.avatar,
+					conversationId: conversationId,
+					unread: 0, 
+					pinned: false,
+					typing: false,
+					message:  newMessage , //lastMessage,
+					date: dateMessage,
+					messages: '', // { "01/01/2023": arrayMessage,"Сегодня":[] },	
+				}
+				arrayContact.push(newUser)
 
-			setTimeout(() => {	
-				console.log("arrayContact: ", arrayContact)	
-				//localStorage.setItem('contacts', arrayContact);
-				setUsers2(arrayContact)
-			}, 10000)
-		})
+				setTimeout(() => {	
+					console.log("arrayContact: ", arrayContact)	
+					localStorage.setItem('contacts', JSON.stringify(arrayContact));
+					setUsers2(arrayContact)
+				}, 10000)
+			})
+		}
 	}, [users])
 
 	//сортировка
 	useEffect(()=> {
-		//КЭШ браузера
-		//const retrievedData = localStorage.getItem("contacts");
-		//const contactsStorage = JSON.parse(retrievedData ? retrievedData : '[]')
-
-		//если есть кэш браузера
-		// if (contactsStorage.length > 0) {
-		// 	const sortedClients = [...contactsStorage].sort((a, b) => {       
-		// 		var dateA = new Date(a.date), dateB = new Date(b.date) 
-		// 		return dateB-dateA  //сортировка по убывающей дате  
-		// 	})
+		const sortedClients = [...users2].sort((a, b) => {       
+			var dateA = new Date(a.date), dateB = new Date(b.date) 
+			return dateB-dateA  //сортировка по убывающей дате  
+		})
 				
-		// 	setContacts(sortedClients)
-		// } else {
-			const sortedClients = [...users2].sort((a, b) => {       
-				var dateA = new Date(a.date), dateB = new Date(b.date) 
-				return dateB-dateA  //сортировка по убывающей дате  
-			})
-				
-			setContacts(sortedClients)
-		//}
+		setContacts(sortedClients)
 
 	}, [users2])
 

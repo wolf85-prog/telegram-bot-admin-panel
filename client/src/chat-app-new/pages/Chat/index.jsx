@@ -22,13 +22,12 @@ const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 const host = process.env.REACT_APP_HOST
 
 const Chat = () => {
-	const { users, setUserAsUnread, addNewMessage } = useUsersContext();
+	const { users, setUsers, setUserAsUnread, addNewMessage } = useUsersContext();
 	const { person } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
 	const chatId = person.id;
 	let user = users.filter((user) => user.chatId === chatId.toString())[0];
-	//console.log("user: ", user)
 
 	const lastMsgRef = useRef(null);
 	const [showAttach, setShowAttach] = useState(false);
@@ -41,6 +40,8 @@ const Chat = () => {
 
 	const [messages, setMessages] = useState([]);
 	const [loading, setLoading]= useState(false);
+
+	const [user2, setUser2] = useState();
 	
 
 	//const audio = new Audio(sendSound);
@@ -98,6 +99,18 @@ const Chat = () => {
 				}
 
 				setMessages(obj)
+
+				// let user = users.filter((user) => user.chatId === chatId.toString())[0];
+				// setUser2(user)
+				// console.log("user: ", user)
+
+				let userIndex = users.findIndex((user) => user.chatId === chatId.toString());
+				const usersCopy = [...users];
+				usersCopy[userIndex].messages = obj;
+				setUsers(usersCopy);
+
+				setUser2(usersCopy[userIndex])
+				console.log("user message: ", usersCopy[userIndex].messages)
 
 				setLoading(false)
 		}
@@ -232,7 +245,7 @@ const Chat = () => {
 				<div className="chat__content">
 					{loading ?
 						<CSpinner style={{margin: '50%'}}/>
-						:<Convo lastMsgRef={lastMsgRef} messages={messages} />
+						 :<Convo lastMsgRef={lastMsgRef} messages={user2.messages} />
 					}
 				</div>
 				<footer className="chat__footer">
