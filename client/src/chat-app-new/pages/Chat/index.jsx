@@ -40,13 +40,15 @@ const Chat = () => {
 	const [mess, setMess] = useState("");
 
 	const [messages, setMessages] = useState([]);
-
+	const [loading, setLoading]= useState(false);
 	
 
 	//const audio = new Audio(sendSound);
 
 	useEffect(() => {
 		const fetchData = async () => {
+			setLoading(true)
+
 			let conversationId = await getConversation(user.chatId)
 
 			let messages = await getMessages(conversationId)
@@ -96,10 +98,12 @@ const Chat = () => {
 				}
 
 				setMessages(obj)
+
+				setLoading(false)
 		}
 
 		fetchData()
-	},[])
+	},[person])
 
 	useEffect(() => {
 		if (user) {
@@ -226,9 +230,9 @@ const Chat = () => {
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 				/>
 				<div className="chat__content">
-					{messages ?
-						<Convo lastMsgRef={lastMsgRef} messages={messages} />
-						:<CSpinner style={{margin: '50%'}}/>
+					{loading ?
+						<CSpinner style={{margin: '50%'}}/>
+						:<Convo lastMsgRef={lastMsgRef} messages={messages} />
 					}
 				</div>
 				<footer className="chat__footer">
