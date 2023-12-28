@@ -50,8 +50,52 @@ const Chat = () => {
 			let conversationId = await getConversation(user.chatId)
 
 			let messages = await getMessages(conversationId)
-			setMessages(messages)
-			console.log("message: ", messages)
+
+			console.log("messages: ", messages)
+			
+
+			const arrayMessage = []
+			const allDate = []
+
+				messages.map(message => {
+						const d = new Date(message.createdAt);
+						const year = d.getFullYear();
+						const month = String(d.getMonth()+1).padStart(2, "0");
+						const day = String(d.getDate()).padStart(2, "0");
+						const chas = d.getHours();
+						const minut = String(d.getMinutes()).padStart(2, "0");
+
+						const newDateMessage = `${day}.${month}.${year}`
+
+						const newMessage = {
+							date: newDateMessage,
+							content: message.text,
+							image: message.type === 'image' ? true : false,
+							descript: message.buttons ? message.buttons : '',
+							sender: message.senderId,
+							time: chas + ' : ' + minut,
+							status: 'sent',
+							id:message.messageId,
+							reply:message.replyId,
+						}
+						arrayMessage.push(newMessage)
+						allDate.push(newDateMessage)
+				})
+
+				const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
+
+				let obj = {};
+				for (let i = 0; i < dates.length; i++) {
+					const arrayDateMessage = []
+					for (let j = 0; j < arrayMessage.length; j++) {
+						if (arrayMessage[j].date === dates[i]) {
+							arrayDateMessage.push(arrayMessage[j])							
+						}
+					}	
+					obj[dates[i]] = arrayDateMessage;
+				}
+
+				setMessages(obj)
 		}
 
 		fetchData()
@@ -182,7 +226,7 @@ const Chat = () => {
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 				/>
 				<div className="chat__content">
-					{messages.length > 0 ?
+					{messages ?
 						<Convo lastMsgRef={lastMsgRef} messages={messages} />
 						:<CSpinner style={{margin: '50%'}}/>
 					}

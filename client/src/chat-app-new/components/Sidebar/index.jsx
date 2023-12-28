@@ -77,70 +77,22 @@ const Sidebar = () => {
 
 	//подгрузка сообщений
   	useEffect(() => {
-		console.log("contacts page: ", users)
+		//console.log("contacts page: ", users)
 
     	const arrayContact = []
 
     	users.map(async (user, index) => {
       		let conversationId = await getConversation(user.chatId)
-        	//console.log(conversationId)
-
-			let message = await getLastMessages(conversationId)
-			//console.log("last message: ", message)
 
 			//получить последнее сообщение
-			//const messageDates = Object.keys(messages);
-			//const recentMessageDate = messageDates[messageDates.length - 1];
-			//const message = messages[recentMessageDate];
+			let message = await getLastMessages(conversationId)
+		
 
 			let newMessage = ''
 			let dateMessage = "2000-01-01T00:00:00"
 
 			if (message) {
-
-				dateMessage = message ? message.createdAt : "2000-01-01T00:00:00";
-				//const lastMessage = message ? message.text : "";			
-		
-				const arrayMessage = []
-				const allDate = []
-
-				// messages.map(message => {
-				// 		const d = new Date(message.createdAt);
-				// 		const year = d.getFullYear();
-				// 		const month = String(d.getMonth()+1).padStart(2, "0");
-				// 		const day = String(d.getDate()).padStart(2, "0");
-				// 		const chas = d.getHours();
-				// 		const minut = String(d.getMinutes()).padStart(2, "0");
-
-				// 		const newDateMessage = `${day}.${month}.${year}`
-
-				// 		const newMessage = {
-				// 			date: newDateMessage,
-				// 			content: message.text,
-				// 			image: message.type === 'image' ? true : false,
-				// 			descript: message.buttons ? message.buttons : '',
-				// 			sender: message.senderId,
-				// 			time: chas + ' : ' + minut,
-				// 			status: 'sent',
-				// 			id:message.messageId,
-				// 			reply:message.replyId,
-				// 		}
-				// 		arrayMessage.push(newMessage)
-				// 		allDate.push(newDateMessage)
-				// })
-
-				// const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
-
-				// let obj = {};
-				// for (let i = 0; i < dates.length; i++) {
-				// 	const arrayDateMessage = []
-				// 	for (let j = 0; j < arrayMessage.length; j++) {
-				// 		if (arrayMessage[j].date === dates[i]) {
-				// 			arrayDateMessage.push(arrayMessage[j])							
-				// 		}
-				// 	}	
-				// 	obj[dates[i]] = arrayDateMessage;
-				// }
+				dateMessage = message ? message.createdAt : "2000-01-01T00:00:00";		
 
 				const d = new Date(message?.createdAt);
 				const year = d.getFullYear();
@@ -162,7 +114,6 @@ const Sidebar = () => {
 					id:message?.messageId,
 					reply:message?.replyId,
 				}
-
 			}
 
         	const newUser = {
@@ -180,56 +131,45 @@ const Sidebar = () => {
 			}
 			arrayContact.push(newUser)
 
-			//setTimeout(() => {		
+			setTimeout(() => {	
+				console.log("arrayContact: ", arrayContact)	
+				//localStorage.setItem('contacts', arrayContact);
 				setUsers2(arrayContact)
-				//console.log("arrayContact: ", arrayContact.length)
-			//}, 10000)
+			}, 10000)
 		})
-
 	}, [users])
 
 	//сортировка
 	useEffect(()=> {
-		const sortedClients = [...users2].sort((a, b) => {       
+		//КЭШ браузера
+		//const retrievedData = localStorage.getItem("contacts");
+		//const contactsStorage = JSON.parse(retrievedData ? retrievedData : '[]')
+
+		//если есть кэш браузера
+		// if (contactsStorage.length > 0) {
+		// 	const sortedClients = [...contactsStorage].sort((a, b) => {       
+		// 		var dateA = new Date(a.date), dateB = new Date(b.date) 
+		// 		return dateB-dateA  //сортировка по убывающей дате  
+		// 	})
+				
+		// 	setContacts(sortedClients)
+		// } else {
+			const sortedClients = [...users2].sort((a, b) => {       
 				var dateA = new Date(a.date), dateB = new Date(b.date) 
 				return dateB-dateA  //сортировка по убывающей дате  
 			})
-		console.log("YES!!!!!!", sortedClients)
-			setContacts(sortedClients)
-	}, [users2])
-
-	// useEffect(() => {
-		
-	// 	//КЭШ браузера
-	// 	const retrievedData = localStorage.getItem("contacts");
-	// 	const contactsStorage = JSON.parse(retrievedData)
-
-
-	// 	console.log(contactsStorage)
-	// 	console.log(contacts)
-
-		//сортировка
-		// const userSort = [...contactsStorage].sort((a, b) => {       
-		// 	var dateA = new Date(a.date), dateB = new Date(b.date) 
-		// 	return dateB-dateA  //сортировка по убывающей дате  
-		// })
-
-		//setTimeout(()=> {
-			//setContacts(userSort)
-			//if (contacts.length > 0) {
 				
-			//}
-			
-		//}, 2000)
-		
-	//},[])
+			setContacts(sortedClients)
+		//}
+
+	}, [users2])
 
 	
 	
 	useEffect(() => {
 		//КЭШ браузера
-		const retrievedData = localStorage.getItem("contacts");
-		const contactsStorage = JSON.parse(retrievedData)
+		//const retrievedData = localStorage.getItem("contacts");
+		//const contactsStorage = JSON.parse(retrievedData)
 		
 		const filteredData = contacts.filter(user=> (user.name)?.toLowerCase().includes(text.toLowerCase()));
         setContacts(filteredData);      
