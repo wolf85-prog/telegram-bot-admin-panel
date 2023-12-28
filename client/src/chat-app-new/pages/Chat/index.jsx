@@ -11,9 +11,11 @@ import Convo from "./components/Convo";
 import { useUsersContext } from "./../../context/usersContext";
 import { useContext } from 'react';
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider';
-import { newMessage, uploadFile } from './../../../http/chatAPI';
+import { newMessage, uploadFile, getMessages, getConversation } from './../../../http/chatAPI';
 import { $host } from './../../../http/index'
 //import sendSound from './../../assets/sounds/sendmessage.mp3';
+import { CSpinner} from '@coreui/react'
+
 
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
@@ -26,6 +28,7 @@ const Chat = () => {
 
 	const chatId = person.id;
 	let user = users.filter((user) => user.chatId === chatId.toString())[0];
+	//console.log("user: ", user)
 
 	const lastMsgRef = useRef(null);
 	const [showAttach, setShowAttach] = useState(false);
@@ -36,7 +39,23 @@ const Chat = () => {
 	const [image, setImage]= useState("");
 	const [mess, setMess] = useState("");
 
+	const [messages, setMessages] = useState([]);
+
+	
+
 	//const audio = new Audio(sendSound);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			let conversationId = await getConversation(user.chatId)
+
+			let messages = await getMessages(conversationId)
+			setMessages(messages)
+			console.log("message: ", messages)
+		}
+
+		fetchData()
+	},[])
 
 	useEffect(() => {
 		if (user) {
@@ -163,7 +182,10 @@ const Chat = () => {
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 				/>
 				<div className="chat__content">
-					<Convo lastMsgRef={lastMsgRef} messages={user.messages} />
+					{messages.length > 0 ?
+						<Convo lastMsgRef={lastMsgRef} messages={messages} />
+						:<CSpinner style={{margin: '50%'}}/>
+					}
 				</div>
 				<footer className="chat__footer">
 					<div className="chat__footer-wrapper">

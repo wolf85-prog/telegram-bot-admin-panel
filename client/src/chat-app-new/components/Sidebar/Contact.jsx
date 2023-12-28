@@ -27,31 +27,8 @@ const Contact = ({ contact }) => {
 		setUserAsUnread(contact.chatId)
 		setCountMessage(0)
     }
-	
-	const getLastMessage = () => {
-			// const messageDates = Object.keys(contact.messages);	
-			// let recentMessageDate
-			
-			// messageDates.length !== 0 	
-			// ? recentMessageDate = messageDates[messageDates.length - 1]
-			// : recentMessageDate = '2000-01-01'
 
-			// let messages = [];
-			// if (JSON.stringify(contact.messages) !== '{}') {
-			// 	messages = [...contact.messages[recentMessageDate]];
-			// }	
-
-			// if (messages.length) {
-			// 	const lastMessage = messages.pop();
-			// 	return lastMessage;
-			// } 
-			
-			const lastMessage = '';
-
-			return lastMessage;
-	};
-
-	const lastMessage = getLastMessage(contact);
+	const lastMessage =  contact.message ? contact.message : '' //getLastMessage(contact);
 
 	return (
 		<Link
@@ -78,12 +55,14 @@ const Contact = ({ contact }) => {
 				<div className="sidebar-contact__top-content">
 					<h2 className="sidebar-contact__name"> {contact.name}</h2>
 					<span className="sidebar-contact__time">
-						<CSpinner />
-						{/* {lastMessage === ''  ? '' : formatTime(lastMessage.time)} */}
+						{ lastMessage ? 
+							lastMessage === ''  ? '' : formatTime(lastMessage.time)
+							:<CSpinner />
+						}
 					</span>
 				</div>
 				<div className="sidebar-contact__bottom-content">
-					{/* <p className="sidebar-contact__message-wrapper">
+					<p className="sidebar-contact__message-wrapper">
 						{lastMessage.status && (
 							<Icon
 								id={
@@ -104,8 +83,8 @@ const Contact = ({ contact }) => {
 						>
 							{contact.typing ? <i> печатает...</i> : lastMessage?.content}
 						</span>
-					</p> */}
-					{/* <div className="sidebar-contact__icons">
+					</p>
+					<div className="sidebar-contact__icons">
 						{contact.pinned && (
 							<Icon id="pinned" className="sidebar-contact__icon" />
 						)}
@@ -118,7 +97,7 @@ const Contact = ({ contact }) => {
 								className="sidebar-contact__icon sidebar-contact__icon--dropdown"
 							/>
 						</button>
-					</div> */}
+					</div>
 				</div>
 			</div>
 		</Link>
