@@ -30,7 +30,7 @@ const Chats2 = () => {
 	
 			const arrayContact = []
 	
-			response.map(async (user) => {
+			response.map(async (user, index) => {
 				
 				let conversationId = await getConversation(user.chatId)
 				let messages = await getMessages(conversationId)
@@ -106,20 +106,31 @@ const Chats2 = () => {
 				}
 
 				arrayContact.push(newUser)
+
+				//если элемент массива последний
+				if (index === response.length-1) {
+					const sortedClients = [...arrayContact].sort((a, b) => {       
+						var dateA = new Date(a.date), dateB = new Date(b.date) 
+						return dateB-dateA  //сортировка по убывающей дате  
+					})
+	
+					setUsers(sortedClients)
+					console.log("contacts: ", arrayContact)
+				}
 			})
 
 			//подгрузка контактов
-			setTimeout(() => {
-				const sortedClients = [...arrayContact].sort((a, b) => {       
-					var dateA = new Date(a.date), dateB = new Date(b.date) 
-					return dateB-dateA  //сортировка по убывающей дате  
-				})
+			//setTimeout(() => {
+				// const sortedClients = [...arrayContact].sort((a, b) => {       
+				// 	var dateA = new Date(a.date), dateB = new Date(b.date) 
+				// 	return dateB-dateA  //сортировка по убывающей дате  
+				// })
 
-				setUsers(sortedClients)
-				//console.log("contacts: ", arrayContact)
+				// setUsers(sortedClients)
+				// console.log("contacts: ", arrayContact)
 				//setUsers(arrayContact)
 
-			}, 10000)
+			//}, 20000)
 
     }
       
