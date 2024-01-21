@@ -44,6 +44,7 @@ import WidgetsDropdown5 from '../views/widgets/WidgetsDropdown5'
 import InputMask from 'react-input-mask';
 
 import Chart from './../components/Chart'
+import specData from 'src/data/specData'
 
 const Admin = () => {
 
@@ -66,6 +67,8 @@ const Admin = () => {
   
   const [newWorkers, setNewWorkers]= useState([]);
   const [activWorkers, setActivWorkers]= useState([]);
+
+  const [catCount, setCatCount] = useState([])
 
   const [dayWorkers, setDayWorkers]= useState([]);
   const [weekWorkers, setWeekWorkers]= useState([]);
@@ -271,6 +274,7 @@ const Admin = () => {
     switch (ind) {
       //за сутки
       case 1:{
+        console.log("Фильтр за сутки: ", ind)
         clearTimeout(timerId);
 
         //закрыть все плашки
@@ -319,6 +323,31 @@ const Admin = () => {
         
         
         let arr = workers.filter(item => new Date(item.createDate).getTime() > needDate);
+
+        let categories = []
+        let count_cat
+
+        specData.map((category)=> {
+          count_cat = 0;
+
+          arr.map((item)=> {
+            JSON.parse(item.worklist).map((work)=> {
+              if (category.name === work.cat) {
+                count_cat++
+              }   
+            })
+          })
+
+          const obj = {
+            cat: category.name,
+            count: count_cat
+          }
+          categories.push(obj)
+        })
+
+        console.log("categories: ", categories)
+        setCatCount(categories)
+
         setSortWorkers(arr)
         
         let days1 = []
@@ -382,6 +411,29 @@ const Admin = () => {
         
         
         let arr = workers.filter(item => new Date(item.createDate).getTime() > needDate);
+        let categories = []
+        let count_cat
+
+        specData.map((category)=> {
+          count_cat = 0;
+
+          arr.map((item)=> {
+            JSON.parse(item.worklist).map((work)=> {
+              if (category.name === work.cat) {
+                count_cat++
+              }   
+            })
+          })
+
+          const obj = {
+            cat: category.name,
+            count: count_cat
+          }
+          categories.push(obj)
+        })
+
+        console.log("categories: ", categories)
+        setCatCount(categories)
         setSortWorkers(arr)
 
         let week2 = []
@@ -452,6 +504,29 @@ const Admin = () => {
         
         
         let arr = workers.filter(item => new Date(item.createDate).getTime() > needDate);
+        let categories = []
+        let count_cat
+
+        specData.map((category)=> {
+          count_cat = 0;
+
+          arr.map((item)=> {
+            JSON.parse(item.worklist).map((work)=> {
+              if (category.name === work.cat) {
+                count_cat++
+              }   
+            })
+          })
+
+          const obj = {
+            cat: category.name,
+            count: count_cat
+          }
+          categories.push(obj)
+        })
+
+        console.log("categories: ", categories)
+        setCatCount(categories)
         setSortWorkers(arr)
         setMonthWorkers(arr)
 
@@ -508,7 +583,30 @@ const Admin = () => {
         setTimeout(() =>setWdthGrafik(grafik.current ? grafik.current.clientWidth - 100 : 0), 2000 )
 
         //фильтрация таблицы за год
-        let arr = workers.filter(item => item.createDate.split('T')[0].split('-')[0] === '2023');
+        let arr = workers.filter(item => item.createDate.split('T')[0].split('-')[0] === '2024');
+        let categories = []
+        let count_cat
+
+        specData.map((category)=> {
+          count_cat = 0;
+
+          arr.map((item)=> {
+            JSON.parse(item.worklist).map((work)=> {
+              if (category.name === work.cat) {
+                count_cat++
+              }   
+            })
+          })
+
+          const obj = {
+            cat: category.name,
+            count: count_cat
+          }
+          categories.push(obj)
+        })
+
+        console.log("categories: ", categories)
+        setCatCount(categories)
         setSortWorkers(arr)
 
         //график
@@ -645,28 +743,28 @@ const Admin = () => {
 
                 {showWidget3 
                 ?<WidgetsDropdown3
-                  soundUsers={sortWorkers.length}
-                  lightUsers={sortWorkers.length}
-                  videoUsers={sortWorkers.length}
-                  stagehandsUsers={sortWorkers.length}
+                  soundUsers={catCount[0].count}
+                  lightUsers={catCount[1].count}
+                  videoUsers={catCount[2].count}
+                  stagehandsUsers={catCount[4].count}
                 />
                 :""}
 
                 {showWidget4 
                 ?<WidgetsDropdown4
-                  photoUsers={sortWorkers.length}
-                  cateringUsers={sortWorkers.length}
-                  partyUsers={sortWorkers.length}
-                  gamesUsers={sortWorkers.length}
+                  photoUsers={catCount[8].count}
+                  cateringUsers={catCount[9].count}
+                  partyUsers={catCount[10].count}
+                  gamesUsers={catCount[11].count}
                 />
                 : ""}
 
                 {showWidget5 
                 ?<WidgetsDropdown5
-                  riggerUsers={sortWorkers.length}
-                  stagegroundUsers={sortWorkers.length}
-                  productionUsers={sortWorkers.length}
-                  trucksUsers={sortWorkers.length}
+                  riggerUsers={catCount[3].count}
+                  stagegroundUsers={catCount[5].count}
+                  productionUsers={catCount[7].count}
+                  trucksUsers={catCount[6].count}
                 />
                 : ""}
                 
@@ -1018,7 +1116,7 @@ const Admin = () => {
                                   onChange={changeDate1}>
                                   {(inputProps) => <CFormInput 
                                                     {...inputProps} 
-                                                    placeholder="01.01.2022" 
+                                                    placeholder="01.01.2024" 
                                                     disableUnderline
                                                     aria-label="sm input example"
                                                     style={{marginLeft: '10px'}}    
@@ -1031,7 +1129,7 @@ const Admin = () => {
                                   onChange={changeDate2}>
                                   {(inputProps) => <CFormInput 
                                                     {...inputProps} 
-                                                    placeholder="31.12.2022" 
+                                                    placeholder="31.12.2024" 
                                                     disableUnderline
                                                     aria-label="sm input example"
                                                     style={{marginLeft: '10px'}} 
