@@ -331,11 +331,9 @@ const Admin = () => {
           count_cat = 0;
 
           arr.map((item)=> {
-            JSON.parse(item.worklist).map((work)=> {
-              if (category.name === work.cat) {
-                count_cat++
-              }   
-            })
+            if (JSON.parse(item.worklist).find(work => work.cat === category.name)) {
+              count_cat++
+            }
           })
 
           const obj = {
@@ -418,11 +416,9 @@ const Admin = () => {
           count_cat = 0;
 
           arr.map((item)=> {
-            JSON.parse(item.worklist).map((work)=> {
-              if (category.name === work.cat) {
-                count_cat++
-              }   
-            })
+            if (JSON.parse(item.worklist).find(work => work.cat === category.name)) {
+              count_cat++
+            }
           })
 
           const obj = {
@@ -511,11 +507,9 @@ const Admin = () => {
           count_cat = 0;
 
           arr.map((item)=> {
-            JSON.parse(item.worklist).map((work)=> {
-              if (category.name === work.cat) {
-                count_cat++
-              }   
-            })
+            if (JSON.parse(item.worklist).find(work => work.cat === category.name)) {
+              count_cat++
+            }
           })
 
           const obj = {
@@ -591,11 +585,9 @@ const Admin = () => {
           count_cat = 0;
 
           arr.map((item)=> {
-            JSON.parse(item.worklist).map((work)=> {
-              if (category.name === work.cat) {
-                count_cat++
-              }   
-            })
+            if (JSON.parse(item.worklist).find(work => work.cat === category.name)) {
+              count_cat++
+            }
           })
 
           const obj = {
