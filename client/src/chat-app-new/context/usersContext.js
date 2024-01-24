@@ -12,7 +12,7 @@ import { getDistributions,
 	getCountMessage 
 } from "src/http/adminAPI";
 import boopSfx from './../assets/sounds/zvuk-icq.mp3';
-import soundProject from './../assets/sounds/project_new.mp3';
+import soundProject from './../assets/sounds/project_new2.mp3';
 import soundSmeta from './../assets/sounds/predvarit_smeta2.mp3';
 import sound120 from './../../assets/sound/120_minut_ULEY_new.mp3';
 import sound60 from './../../assets/sound/60_minut_ULEY_new.mp3';
