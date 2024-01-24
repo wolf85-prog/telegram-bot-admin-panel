@@ -23,8 +23,8 @@ import sound0 from './../../assets/sound/0_minut_ULEY.mp3';
 import sound5 from './../../assets/sound/5_minut_ULEY.mp3';
 import sound10 from './../../assets/sound/10_minut_ULEY.mp3';
 
-import soundNarush2 from './../../assets/sound/narushitel_2_ULEY.mp3';
-import soundNarush from './../../assets/sound/narushitel_ULEY.mp3';
+import soundNarush2 from './../../assets/sound/api/narushitel_2_ULEY.mp3';
+import soundNarush from './../../assets/sound/api/narushitel_ULEY.mp3';
 
 import sendSound from './../assets/sounds/sendmessage.mp3';
 import smsWorkhub from './../../chat-app-worker/assets/sounds/sms_iphone.mp3';
