@@ -14,11 +14,18 @@ import { getDistributions,
 import boopSfx from './../assets/sounds/zvuk-icq.mp3';
 import soundProject from './../assets/sounds/project_new.mp3';
 import soundSmeta from './../assets/sounds/predvarit_smeta2.mp3';
-import sound120 from './../../assets/sound/120_minut_ULEY.mp3';
-import sound60 from './../../assets/sound/60_minut_ULEY.mp3';
-import sound30 from './../../assets/sound/30_minut_ULEY.mp3';
+import sound120 from './../../assets/sound/120_minut_ULEY_new.mp3';
+import sound60 from './../../assets/sound/60_minut_ULEY_new.mp3';
+import sound30 from './../../assets/sound/30_minut_ULEY_new.mp3';
 import sound15 from './../../assets/sound/15_minut_ULEY.mp3';
 import sound0 from './../../assets/sound/0_minut_ULEY.mp3';
+
+import sound5 from './../../assets/sound/5_minut_ULEY.mp3';
+import sound10 from './../../assets/sound/10_minut_ULEY.mp3';
+
+import soundNarush2 from './../../assets/sound/narushitel_2.0_ULEY.mp3';
+import soundNarush from './../../assets/sound/narushitel_ULEY.mp3';
+
 import sendSound from './../assets/sounds/sendmessage.mp3';
 import smsWorkhub from './../../chat-app-worker/assets/sounds/sms_iphone.mp3';
 import notifPretendent from './../../chat-app-worker/assets/sounds/pretendent2.mp3';
