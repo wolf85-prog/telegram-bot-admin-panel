@@ -4,6 +4,9 @@
 const ApiError = require('../error/ApiError')
 const path = require('path')
 
+const soundNarush2 = require('./../../client/src/assets/sound/api/narushitel_2_ULEY.mp3');
+const soundNarush = require('./../../client/src/assets/sound/api/narushitel_ULEY.mp3');
+
 
 class FileController {
 
@@ -42,7 +45,15 @@ class FileController {
 
     //запуск звуков:
     async sendNarush(req, res) {
-        console.log("запуск звука Нарушитель")
+        try {
+            console.log("запуск звука Нарушитель")
+
+            const audioNarush = new Audio(soundNarush);
+            audioNarush.play();
+        } catch (error) {
+            console.log(error.message)
+            return res.status(501).json({message: "Error"});
+        }
     }
 }
 
