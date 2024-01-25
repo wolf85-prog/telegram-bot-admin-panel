@@ -23,9 +23,6 @@ import sound0 from './../../assets/sound/0_minut_ULEY.mp3';
 import sound5 from './../../assets/sound/5_minut_ULEY.mp3';
 import sound10 from './../../assets/sound/10_minut_ULEY.mp3';
 
-import soundNarush2 from './../../assets/sound/api/narushitel_2_ULEY.mp3';
-import soundNarush from './../../assets/sound/api/narushitel_ULEY.mp3';
-
 import sendSound from './../assets/sounds/sendmessage.mp3';
 import smsWorkhub from './../../chat-app-worker/assets/sounds/sms_iphone.mp3';
 import notifPretendent from './../../chat-app-worker/assets/sounds/pretendent2.mp3';
@@ -67,6 +64,9 @@ const UsersProvider = ({ children }) => {
 	const audio30 = new Audio(sound30);
 	const audio15 = new Audio(sound15);
 	const audio0 = new Audio(sound0);
+
+	const audio10 = new Audio(sound10);
+	const audio5 = new Audio(sound5);
 	
 	const audioSend = new Audio(sendSound);
 	const audioWorkhub = new Audio(smsWorkhub);
@@ -849,10 +849,15 @@ const fetchNotifAdmin = (data) => {
 		audio60.play();
 	} else if (task === 3) {
 		audio30.play();
-	} else if (task === 4) {
-		audio15.play();
+	//} else if (task === 4) {
+		//audio15.play();
 	} else if (task === 5) {
 		audio0.play();
+	
+	} else if (task === 6) {
+		audio10.play();
+	} else if (task === 7) {
+		audio5.play();
 	}
 
 	
