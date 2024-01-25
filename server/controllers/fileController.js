@@ -49,6 +49,7 @@ class FileController {
     async sendNarush(req, res) {
         try {
             console.log("запуск звука Нарушитель")
+            const __dirname = path.resolve();
             const filePath = path.join(__dirname, "../assets/api/narushitel_ULEY.mp3");
 
             await sound.play(filePath);
