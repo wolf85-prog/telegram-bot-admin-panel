@@ -7,6 +7,8 @@ const path = require('path')
 // const soundNarush2 = require('./../assets/api/narushitel_2_ULEY.mp3');
 //const soundNarush = require('./../assets/api/narushitel_ULEY.mp3');
 
+const sound = require("sound-play");
+
 
 class FileController {
 
@@ -48,8 +50,8 @@ class FileController {
         try {
             console.log("запуск звука Нарушитель")
 
-            //const audioNarush = new Audio(soundNarush);
-           // audioNarush.play();
+           sound.play("./../assets/api/narushitel_ULEY.mp3");
+
            return res.status(200).json({message: "Succes"});
         } catch (error) {
             console.log(error.message)
