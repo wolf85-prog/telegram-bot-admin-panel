@@ -51,7 +51,6 @@ class FileController {
             console.log("запуск звука Нарушитель")
             const filePath = path.join(__dirname, "../assets/api/narushitel_ULEY.mp3");
 
-            sound.play(filePath);
             await sound.play(filePath);
             console.log("done");
 
