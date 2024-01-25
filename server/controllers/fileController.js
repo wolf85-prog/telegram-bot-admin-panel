@@ -4,8 +4,8 @@
 const ApiError = require('../error/ApiError')
 const path = require('path')
 
-const soundNarush2 = require('./../../client/src/assets/sound/api/narushitel_2_ULEY.mp3');
-const soundNarush = require('./../../client/src/assets/sound/api/narushitel_ULEY.mp3');
+const soundNarush2 = require('./../assets/api/narushitel_2_ULEY.mp3');
+const soundNarush = require('./../assets/api/narushitel_ULEY.mp3');
 
 
 class FileController {
