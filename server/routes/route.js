@@ -22,7 +22,7 @@ const { newDistribution,
 } = require('../controllers/distributionController')
 const { getReports, getReportsId } = require('../controllers/reportController')
 const { getProjects, getProjectsId } = require('../controllers/projectController')
-const { uploadFile, getImage } = require( "../controllers/fileController.js")
+const { uploadFile, getImage, sendNarush } = require( "../controllers/fileController.js")
 
 const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers/wuserbotController')
 const { newMessageWorker, delMessageWorker, getMessagesWorker, getAllMessagesWorker } = require('../controllers/wmessageController')
