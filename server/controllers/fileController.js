@@ -39,6 +39,11 @@ class FileController {
         //     return res.status(500).json(error.message);
         // }
     }
+
+    //запуск звуков:
+    async sendNarush(req, res) {
+        console.log("запуск звука Нарушитель")
+    }
 }
 
 module.exports = new FileController()

@@ -115,4 +115,8 @@ route.post('/plan/timer/add', addTimer)
 //-----------------POSTER---------------------------------
 //route.post('/poster/send', sendPoster)
 
+
+//-----------------НАРУШИТЕЛИ---------------------------------
+route.get('/sounds/narush', sendNarush)
+
 module.exports = route
