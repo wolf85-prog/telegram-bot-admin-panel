@@ -4,7 +4,7 @@
 const ApiError = require('../error/ApiError')
 const path = require('path')
 
-//const soundNarush2 = require('./../assets/api/narushitel_2_ULEY.mp3');
+// const soundNarush2 = require('./../assets/api/narushitel_2_ULEY.mp3');
 //const soundNarush = require('./../assets/api/narushitel_ULEY.mp3');
 
 
@@ -50,6 +50,7 @@ class FileController {
 
             //const audioNarush = new Audio(soundNarush);
            // audioNarush.play();
+           return res.status(200).json({message: "Succes"});
         } catch (error) {
             console.log(error.message)
             return res.status(501).json({message: "Error"});
