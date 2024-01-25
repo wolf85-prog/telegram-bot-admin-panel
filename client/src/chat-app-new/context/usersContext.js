@@ -18,7 +18,7 @@ import sound120 from './../../assets/sound/120_minut_ULEY_new.mp3';
 import sound60 from './../../assets/sound/60_minut_ULEY_new.mp3';
 import sound30 from './../../assets/sound/30_minut_ULEY_new.mp3';
 import sound15 from './../../assets/sound/15_minut_ULEY.mp3';
-import sound0 from './../../assets/sound/0_minut_ULEY.mp3';
+import sound0 from './../../assets/sound/0_minut_ULEY_new.mp3';
 
 import sound5 from './../../assets/sound/5_minut_ULEY.mp3';
 import sound10 from './../../assets/sound/10_minut_ULEY.mp3';
@@ -849,8 +849,8 @@ const fetchNotifAdmin = (data) => {
 		audio60.play();
 	} else if (task === 3) {
 		audio30.play();
-	//} else if (task === 4) {
-		//audio15.play();
+	} else if (task === 4) {
+		audio15.play();
 	} else if (task === 5) {
 		audio0.play();
 	
