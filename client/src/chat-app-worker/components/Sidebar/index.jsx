@@ -25,17 +25,12 @@ const Sidebar = () => {
 			return dateB-dateA //сортировка по убывающей дате  
 		})
 
-		console.log("sidebar userWorkers: ", userSort)
+		//console.log("sidebar userWorkers: ", userSort)
 		setContacts(userSort)
 		
 		if(userWorkers.length > 0) {
 			setLoading(false)
-		}
-
-		// setTimeout(()=>{
-		// 	setLoading(false)
-		// }, 5000)
-			
+		}		
 		
 	},[userWorkers])
 
