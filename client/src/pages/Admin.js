@@ -120,6 +120,8 @@ const Admin = () => {
     setWdthGrafik(grafik.current ? grafik.current.offsetWidth - 100 : 0)
   }, [grafik.current]);
 
+  
+
   //get filter workers
   useEffect(() => {
     setSortWorkers(workers)
