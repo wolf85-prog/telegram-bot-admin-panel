@@ -1162,7 +1162,7 @@ const Admin = () => {
                                           {String(new Date(item.createDate).getDate()).padStart(2, "0")+ "."+ String(new Date(item.createDate).getMonth()+1).padStart(2, "0") + "." +new Date(item.createDate).getFullYear()}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          {new Date(item.createDate).getHours() + ' : '+ new Date(item.createDate).getMinutes()}
+                                          {new Date(item.createDate).getHours() + ' : '+ String(new Date(item.createDate).getMinutes()).padStart(2, "0")}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
                                             {item.userfamily +" "+ item.username}
