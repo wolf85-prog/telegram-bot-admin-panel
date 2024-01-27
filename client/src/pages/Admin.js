@@ -1097,11 +1097,11 @@ const Admin = () => {
                     <CRow>
                       <CCol xs>
                             <CRow>
-                              <CCol md={6} style={{textAlign: 'center'}}>
-                                <CButton color="dark" onClick={()=>showBlock(1)} style={{marginRight: '20px', width: '120px'}}>Сутки</CButton>
-                                <CButton color="dark" onClick={()=>showBlock(2)} style={{marginRight: '20px', width: '120px'}}>Неделя</CButton>
-                                <CButton color="dark" onClick={()=>showBlock(3)} style={{marginRight: '20px', width: '120px'}}>Месяц</CButton>
-                                <CButton color="dark" onClick={()=>showBlock(4)} style={{marginRight: '20px', width: '120px'}}>Год</CButton>
+                              <CCol md={6} style={{textAlign: 'left'}}>
+                                <CButton color="dark" onClick={()=>showBlock(1)} style={{marginRight: '20px', width: '100px'}}>Сутки</CButton>
+                                <CButton color="dark" onClick={()=>showBlock(2)} style={{marginRight: '20px', width: '100px'}}>Неделя</CButton>
+                                <CButton color="dark" onClick={()=>showBlock(3)} style={{marginRight: '20px', width: '100px'}}>Месяц</CButton>
+                                <CButton color="dark" onClick={()=>showBlock(4)} style={{marginRight: '20px', width: '100px'}}>Год</CButton>
                               </CCol>
                               <CCol md={6} style={{textAlign: 'center', display: 'flex'}}>
                                 <InputMask 
