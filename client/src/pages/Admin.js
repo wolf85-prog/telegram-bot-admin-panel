@@ -120,7 +120,7 @@ const Admin = () => {
     setWdthGrafik(grafik.current ? grafik.current.offsetWidth - 100 : 0)
   }, [grafik.current]);
 
-  
+
 
   //get filter workers
   useEffect(() => {
@@ -134,7 +134,7 @@ const Admin = () => {
     setNewWorkers(arr1)
 
     //массив активных пользователей за текущий месяц
-    const arr2 = specusers.filter(item => new Date(item.date).getMonth() === currentMonth)
+    const arr2 = workers.filter(item => new Date(item.date).getMonth() === currentMonth) //specusers
     setActivWorkers(arr2)
 
   }, workers)
