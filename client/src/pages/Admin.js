@@ -436,18 +436,37 @@ const Admin = () => {
 
         let week2 = []
         let nameDay = ''
+        let countSpec = 0
         for (let i=1; i<=7; i++) {
-          if (i===1) nameDay = 'Пн'
-          if (i===2) nameDay = 'Вт'
-          if (i===3) nameDay = 'Ср'
-          if (i===4) nameDay = 'Чт'
-          if (i===5) nameDay = 'Пт'
-          if (i===6) nameDay = 'Сб'
-          if (i===7) nameDay = 'Вс'
+          if (i===1) {
+            nameDay = 'Пн'
+            //let date = new Date(item.createDate);
+            //let dayWeek = [7, 1, 2, 3, 4, 5, 6][date.getDay()];
+            //const arrSpec = arr.filter(item => new Date(item.createDate).getTime());
+            //countSpec = arrSpec.length
+          }
+          if (i===2) {
+            nameDay = 'Вт'
+          }
+          if (i===3) {
+            nameDay = 'Ср'
+          }
+          if (i===4) {
+            nameDay = 'Чт'
+          }
+          if (i===5) {
+            nameDay = 'Пт'
+          }
+          if (i===6) {
+            nameDay = 'Сб'
+          }
+          if (i===7) {
+            nameDay = 'Вс'
+          }
 
           const newObj= {
                 name: nameDay, 
-                value: 1,
+                value: countSpec,
               }
           week2.push(newObj)
         }       
@@ -817,19 +836,33 @@ const Admin = () => {
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
-                    <Chart data={weekWorkers} 
-                    data2={
-                      [
-                        { name: 'Пн', value: 3 },
-                        { name: 'Вт', value: 0 },
-                        { name: 'Ср', value: 0 },
-                        { name: 'Чт', value: 0 },
-                        { name: 'Пт', value: 0 },
-                        { name: 'Сб', value: 0 },
-                        { name: 'Вс', value: 1 },
-                      ]
-                    }
-                    width={widthGrafik} height={350} />
+                    <Chart 
+                      // data={weekWorkers} 
+                      data={
+                        [
+                          { name: 'Пн', value: 3 },
+                          { name: 'Вт', value: 7 },
+                          { name: 'Ср', value: 1 },
+                          { name: 'Чт', value: 2 },
+                          { name: 'Пт', value: 3 },
+                          { name: 'Сб', value: 0 },
+                          { name: 'Вс', value: 1 },
+                        ]
+                      }
+                      data2={[]} //удаленные пользователи
+                      // data2={
+                      //   [
+                      //     { name: 'Пн', value: 0 },
+                      //     { name: 'Вт', value: 0 },
+                      //     { name: 'Ср', value: 0 },
+                      //     { name: 'Чт', value: 0 },
+                      //     { name: 'Пт', value: 0 },
+                      //     { name: 'Сб', value: 0 },
+                      //     { name: 'Вс', value: 0 },
+                      //   ]
+                      // }
+                      width={widthGrafik} height={350} 
+                    />
                   }
                 />
 : ""
@@ -1170,11 +1203,11 @@ const Admin = () => {
                                         <CTableDataCell className="text-center">
                                           {item.city}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
+                                        <CTableDataCell style={{textAlign: 'left'}}>
                                           <table>
                                             {(JSON.parse(item.worklist)).map((spec, index)=>( 
                                                 <tr key={index}>
-                                                  <td >{spec.spec}</td>
+                                                  <td>{spec.spec !== '' ? "- " + spec.spec : ''}</td>
                                                 </tr>          
                                             ))}
                                           </table>
@@ -1193,7 +1226,14 @@ const Admin = () => {
                                     }
                                 </CTableBody>                   
                               </CTable>
+                              
                             }
+                            
+                              </CCol>
+                            </CRow>
+                            <CRow>
+                              <CCol>
+                                Всего: {sortWorkers.length}
                               </CCol>
                             </CRow>
                       </CCol>
