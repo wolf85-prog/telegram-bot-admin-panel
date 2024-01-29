@@ -442,26 +442,38 @@ const Admin = () => {
             nameDay = 'Пн'
             //let date = new Date(item.createDate);
             //let dayWeek = [7, 1, 2, 3, 4, 5, 6][date.getDay()];
-            //const arrSpec = arr.filter(item => new Date(item.createDate).getTime());
-            //countSpec = arrSpec.length
+            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]);
+            countSpec = arrSpec.length
           }
           if (i===2) {
             nameDay = 'Вт'
+            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]);
+            countSpec = arrSpec.length
           }
           if (i===3) {
             nameDay = 'Ср'
+            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]);
+            countSpec = arrSpec.length
           }
           if (i===4) {
             nameDay = 'Чт'
+            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]);
+            countSpec = arrSpec.length
           }
           if (i===5) {
             nameDay = 'Пт'
+            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]);
+            countSpec = arrSpec.length
           }
           if (i===6) {
             nameDay = 'Сб'
+            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]);
+            countSpec = arrSpec.length
           }
           if (i===7) {
             nameDay = 'Вс'
+            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]);
+            countSpec = arrSpec.length
           }
 
           const newObj= {
@@ -469,7 +481,8 @@ const Admin = () => {
                 value: countSpec,
               }
           week2.push(newObj)
-        }       
+        }  
+        console.log("week: ", week2)     
         setWeekWorkers(week2)
         break;
       }
@@ -543,16 +556,23 @@ const Admin = () => {
         console.log("categories: ", categories)
         setCatCount(categories)
         setSortWorkers(arr)
-        setMonthWorkers(arr)
+        //setMonthWorkers(arr)
 
+        let countSpec = 0
         let month3 = []
-        for (let i=1; i<=30; i++) {
+
+        for (let i=1; i<=31; i++) {
+          //if (i === 1) {
+            const arrSpec = arr.filter(item => i === new Date(item.createDate).getDate());
+            countSpec = arrSpec.length
+          //}
           const newObj= {
-                name: i, 
-                value: 1,
+                name: i<10 ? '0'+ i : ''+ i, 
+                value: countSpec,
               }
               month3.push(newObj)
-        }       
+        }  
+        console.log("month3: ", month3)     
         setMonthWorkers(month3)
         break;
       }
@@ -791,36 +811,38 @@ const Admin = () => {
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
                   chart={            
-                    <Chart data={dayWorkers} 
-                    data2={
-                      [
-                        { name: '0:00', value: 1 },
-                        { name: '01:00', value: 0 },
-                        { name: '02:00', value: 0 },
-                        { name: '03:00', value: 0 },
-                        { name: '04:00', value: 0 },
-                        { name: '05:00', value: 0 },
-                        { name: '06:00', value: 0 },
-                        { name: '07:00', value: 1 },
-                        { name: '08:00', value: 0 },
-                        { name: '09:00', value: 0 },
-                        { name: '10:00', value: 0 },
-                        { name: '11:00', value: 0 },
-                        { name: '12:00', value: 0 },
-                        { name: '13:00', value: 0 },
-                        { name: '14:00', value: 0 },
-                        { name: '15:00', value: 0 },
-                        { name: '16:00', value: 0 },
-                        { name: '17:00', value: 2 },
-                        { name: '18:00', value: 1 },
-                        { name: '19:00', value: 0 },
-                        { name: '20:00', value: 0 },
-                        { name: '21:00', value: 0 },
-                        { name: '22:00', value: 0 },
-                        { name: '23:00', value: 0 },
-                      ]
-                    }
-                    width={widthGrafik} height={350} />
+                    <Chart 
+                      data={dayWorkers} 
+                      // data2={
+                      //   [
+                      //     { name: '0:00', value: 1 },
+                      //     { name: '01:00', value: 0 },
+                      //     { name: '02:00', value: 0 },
+                      //     { name: '03:00', value: 0 },
+                      //     { name: '04:00', value: 0 },
+                      //     { name: '05:00', value: 0 },
+                      //     { name: '06:00', value: 0 },
+                      //     { name: '07:00', value: 1 },
+                      //     { name: '08:00', value: 0 },
+                      //     { name: '09:00', value: 0 },
+                      //     { name: '10:00', value: 0 },
+                      //     { name: '11:00', value: 0 },
+                      //     { name: '12:00', value: 0 },
+                      //     { name: '13:00', value: 0 },
+                      //     { name: '14:00', value: 0 },
+                      //     { name: '15:00', value: 0 },
+                      //     { name: '16:00', value: 0 },
+                      //     { name: '17:00', value: 2 },
+                      //     { name: '18:00', value: 1 },
+                      //     { name: '19:00', value: 0 },
+                      //     { name: '20:00', value: 0 },
+                      //     { name: '21:00', value: 0 },
+                      //     { name: '22:00', value: 0 },
+                      //     { name: '23:00', value: 0 },
+                      //   ]
+                      // }
+                      width={widthGrafik} height={350} 
+                    />
 
                   }
                 />
@@ -837,18 +859,7 @@ const Admin = () => {
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
                     <Chart 
-                      // data={weekWorkers} 
-                      data={
-                        [
-                          { name: 'Пн', value: 3 },
-                          { name: 'Вт', value: 7 },
-                          { name: 'Ср', value: 1 },
-                          { name: 'Чт', value: 2 },
-                          { name: 'Пт', value: 3 },
-                          { name: 'Сб', value: 0 },
-                          { name: 'Вс', value: 1 },
-                        ]
-                      }
+                      data={weekWorkers} 
                       data2={[]} //удаленные пользователи
                       // data2={
                       //   [
@@ -877,42 +888,44 @@ const Admin = () => {
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
-                    <Chart data={monthWorkers} 
-                    data2={
-                      [
-                        { name: '01', value: 1 },
-                        { name: '02', value: 0 },
-                        { name: '03', value: 0 },
-                        { name: '04', value: 0 },
-                        { name: '05', value: 0 },
-                        { name: '06', value: 0 },
-                        { name: '07', value: 0 },
-                        { name: '08', value: 0 },
-                        { name: '09', value: 0 },
-                        { name: '10', value: 0 },
-                        { name: '11', value: 0 },
-                        { name: '12', value: 1 },
-                        { name: '13', value: 1 },
-                        { name: '14', value: 0 },
-                        { name: '15', value: 0 },
-                        { name: '16', value: 0 },
-                        { name: '17', value: 0 },
-                        { name: '18', value: 0 },
-                        { name: '19', value: 0 },
-                        { name: '20', value: 0 },
-                        { name: '21', value: 0 },
-                        { name: '22', value: 0 },
-                        { name: '23', value: 0 },
-                        { name: '24', value: 1 },
-                        { name: '25', value: 1 },
-                        { name: '26', value: 0 },
-                        { name: '27', value: 0 },
-                        { name: '28', value: 0 },
-                        { name: '29', value: 0 },
-                        { name: '30', value: 0 },
-                      ]
-                    }
-                    width={widthGrafik} height={350} />
+                    <Chart 
+                      data={monthWorkers} 
+                      // data={
+                      //   [
+                      //     { name: '01', value: 1 },
+                      //     { name: '02', value: 0 },
+                      //     { name: '03', value: 0 },
+                      //     { name: '04', value: 0 },
+                      //     { name: '05', value: 0 },
+                      //     { name: '06', value: 0 },
+                      //     { name: '07', value: 0 },
+                      //     { name: '08', value: 0 },
+                      //     { name: '09', value: 0 },
+                      //     { name: '10', value: 0 },
+                      //     { name: '11', value: 0 },
+                      //     { name: '12', value: 1 },
+                      //     { name: '13', value: 1 },
+                      //     { name: '14', value: 0 },
+                      //     { name: '15', value: 0 },
+                      //     { name: '16', value: 0 },
+                      //     { name: '17', value: 0 },
+                      //     { name: '18', value: 0 },
+                      //     { name: '19', value: 0 },
+                      //     { name: '20', value: 0 },
+                      //     { name: '21', value: 0 },
+                      //     { name: '22', value: 0 },
+                      //     { name: '23', value: 0 },
+                      //     { name: '24', value: 1 },
+                      //     { name: '25', value: 1 },
+                      //     { name: '26', value: 0 },
+                      //     { name: '27', value: 0 },
+                      //     { name: '28', value: 0 },
+                      //     { name: '29', value: 0 },
+                      //     { name: '30', value: 0 },
+                      //   ]
+                      // }
+                      data2={[]} //удаленные пользователи
+                      width={widthGrafik} height={350} />
                   }
                 />
 : ""
