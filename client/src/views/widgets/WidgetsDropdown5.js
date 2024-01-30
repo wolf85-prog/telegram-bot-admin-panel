@@ -43,11 +43,11 @@ const WidgetsDropdown5 = ({
                 labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
                 datasets: [
                   {
-                    label: 'My First dataset',
+                    label: 'Кол-во специалистов',
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-primary'),
-                    data: [65, 59, 84, 84, 51, 55, 40],
+                    data: [riggerUsers, 0, 0, 0, 0, 0, 0],
                   },
                 ],
               }}
@@ -69,8 +69,8 @@ const WidgetsDropdown5 = ({
                     },
                   },
                   y: {
-                    min: 30,
-                    max: 89,
+                    min: -10,
+                    max: 90,
                     display: false,
                     grid: {
                       display: false,
@@ -115,14 +115,14 @@ const WidgetsDropdown5 = ({
               className="mt-3 mx-3"
               style={{ height: '70px' }}
               data={{
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
                 datasets: [
                   {
-                    label: 'My First dataset',
+                    label: 'Кол-во специалистов',
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-info'),
-                    data: [1, 18, 9, 17, 34, 22, 11],
+                    data: [productionUsers, 0, 0, 0, 0, 0, 0],
                   },
                 ],
               }}
@@ -144,8 +144,8 @@ const WidgetsDropdown5 = ({
                     },
                   },
                   y: {
-                    min: -9,
-                    max: 39,
+                    min: -10,
+                    max: 90,
                     display: false,
                     grid: {
                       display: false,
@@ -189,13 +189,13 @@ const WidgetsDropdown5 = ({
               className="mt-3"
               style={{ height: '70px' }}
               data={{
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
                 datasets: [
                   {
-                    label: 'My First dataset',
+                    label: 'Кол-во специалистов',
                     backgroundColor: 'rgba(255,255,255,.2)',
                     borderColor: 'rgba(255,255,255,.55)',
-                    data: [78, 81, 80, 45, 34, 12, 40],
+                    data: [stagegroundUsers, 0, 0, 0, 0, 0, 0],
                     fill: true,
                   },
                 ],
@@ -248,29 +248,19 @@ const WidgetsDropdown5 = ({
               style={{ height: '70px' }}
               data={{
                 labels: [
-                  'January',
-                  'February',
-                  'March',
-                  'April',
-                  'May',
-                  'June',
-                  'July',
-                  'August',
-                  'September',
-                  'October',
-                  'November',
-                  'December',
-                  'January',
-                  'February',
-                  'March',
-                  'April',
+                  'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль',
+                  'Август',
+                  'Сентябрь',
+                  'Октябрь',
+                  'Ноябрь',
+                  'Декабрь',
                 ],
                 datasets: [
                   {
-                    label: 'My First dataset',
+                    label: 'Кол-во специалистов',
                     backgroundColor: 'rgba(255,255,255,.2)',
                     borderColor: 'rgba(255,255,255,.55)',
-                    data: [78, 81, 80, 45, 34, 12, 40, 85, 65, 23, 12, 98, 34, 84, 67, 82],
+                    data: [trucksUsers, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     barPercentage: 0.6,
                   },
                 ],

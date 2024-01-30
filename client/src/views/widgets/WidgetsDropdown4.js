@@ -7,14 +7,6 @@ import {
 import { getStyle } from '@coreui/utils'
 import { CChartBar, CChartLine } from '@coreui/react-chartjs'
 
-import Sound from "./../../assets/images/spec/1_sound.png";
-import Riggers from "./../../assets/images/spec/2_riggers.png";
-import Production from "./../../assets/images/spec/3_production.png";
-import StageGround from "./../../assets/images/spec/4_stage_ground.png";
-import Video from "./../../assets/images/spec/5_video.png";
-import Light from "./../../assets/images/spec/6_light.png";
-import Stagehands from "./../../assets/images/spec/7_stagehands.png";
-import Trucks from "./../../assets/images/spec/8_trucks.png";
 import Catering from "./../../assets/images/spec/9_catering.png";
 import Photo from "./../../assets/images/spec/10_photo.png";
 import Party from "./../../assets/images/spec/11_party.png";
@@ -51,11 +43,11 @@ const WidgetsDropdown4 = ({
                 labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
                 datasets: [
                   {
-                    label: 'My First dataset',
+                    label: 'Кол-во специалистов',
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-primary'),
-                    data: [65, 59, 84, 84, 51, 55, 40],
+                    data: [photoUsers, 0, 0, 0, 0, 0, 0],
                   },
                 ],
               }}
@@ -77,8 +69,8 @@ const WidgetsDropdown4 = ({
                     },
                   },
                   y: {
-                    min: 30,
-                    max: 89,
+                    min: -10,
+                    max: 90,
                     display: false,
                     grid: {
                       display: false,
@@ -123,14 +115,14 @@ const WidgetsDropdown4 = ({
               className="mt-3 mx-3"
               style={{ height: '70px' }}
               data={{
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
                 datasets: [
                   {
-                    label: 'My First dataset',
+                    label: 'Кол-во специалистов',
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-info'),
-                    data: [1, 18, 9, 17, 34, 22, 11],
+                    data: [cateringUsers, 0, 0, 0, 0, 0, 0],
                   },
                 ],
               }}
@@ -152,8 +144,8 @@ const WidgetsDropdown4 = ({
                     },
                   },
                   y: {
-                    min: -9,
-                    max: 39,
+                    min: -10,
+                    max: 90,
                     display: false,
                     grid: {
                       display: false,
@@ -197,13 +189,13 @@ const WidgetsDropdown4 = ({
               className="mt-3"
               style={{ height: '70px' }}
               data={{
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
                 datasets: [
                   {
-                    label: 'My First dataset',
+                    label: 'Кол-во специалистов',
                     backgroundColor: 'rgba(255,255,255,.2)',
                     borderColor: 'rgba(255,255,255,.55)',
-                    data: [78, 81, 80, 45, 34, 12, 40],
+                    data: [partyUsers, 0, 0, 0, 0, 0, 0],
                     fill: true,
                   },
                 ],
@@ -256,29 +248,19 @@ const WidgetsDropdown4 = ({
               style={{ height: '70px' }}
               data={{
                 labels: [
-                  'January',
-                  'February',
-                  'March',
-                  'April',
-                  'May',
-                  'June',
-                  'July',
-                  'August',
-                  'September',
-                  'October',
-                  'November',
-                  'December',
-                  'January',
-                  'February',
-                  'March',
-                  'April',
+                  'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль',
+                  'Август',
+                  'Сентябрь',
+                  'Октябрь',
+                  'Ноябрь',
+                  'Декабрь',
                 ],
                 datasets: [
                   {
-                    label: 'My First dataset',
+                    label: 'Кол-во специалистов',
                     backgroundColor: 'rgba(255,255,255,.2)',
                     borderColor: 'rgba(255,255,255,.55)',
-                    data: [78, 81, 80, 45, 34, 12, 40, 85, 65, 23, 12, 98, 34, 84, 67, 82],
+                    data: [gamesUsers, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     barPercentage: 0.6,
                   },
                 ],

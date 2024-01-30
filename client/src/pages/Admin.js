@@ -274,6 +274,7 @@ const Admin = () => {
   //нажатия на кнопки
   const showBlock = (ind) => {
     switch (ind) {
+
       //за сутки
       case 1:{
         console.log("Фильтр за сутки: ", ind)
@@ -351,17 +352,28 @@ const Admin = () => {
         setSortWorkers(arr)
         
         let days1 = []
+        let countSpec = 0
+
+        arr.map(item => console.log("arr: ", new Date(item.createDate)));
+
         for (let i=0; i<=23; i++) {
+
+          const arrSpec = arr.filter(item => i === new Date(item.createDate).getHours());
+          countSpec = arrSpec.length
+          
           const newObj= {
-                name: i + ':00', 
-                value: 1,
-              }
+            name: i<10 ? '0'+ i + ':00' : ''+ i + ':00', 
+            value: countSpec,
+          }
+
           days1.push(newObj)
         }       
+
         setDayWorkers(days1)
 
         break;
       }
+
       //за неделю
       case 2:{
         clearTimeout(timerId);
@@ -486,6 +498,7 @@ const Admin = () => {
         setWeekWorkers(week2)
         break;
       }
+
       //за месяц
       case 3:{
         clearTimeout(timerId);
@@ -562,20 +575,19 @@ const Admin = () => {
         let month3 = []
 
         for (let i=1; i<=31; i++) {
-          //if (i === 1) {
-            const arrSpec = arr.filter(item => i === new Date(item.createDate).getDate());
-            countSpec = arrSpec.length
-          //}
+          const arrSpec = arr.filter(item => i === new Date(item.createDate).getDate());
+          countSpec = arrSpec.length
           const newObj= {
-                name: i<10 ? '0'+ i : ''+ i, 
-                value: countSpec,
-              }
-              month3.push(newObj)
+            name: i<10 ? '0'+ i : ''+ i, 
+            value: countSpec,
+          }
+          month3.push(newObj)
         }  
         console.log("month3: ", month3)     
         setMonthWorkers(month3)
         break;
       }
+
       //за год
       case 4:{
         clearTimeout(timerId);
@@ -622,6 +634,8 @@ const Admin = () => {
         let categories = []
         let count_cat
 
+        console.log("arr year: ", arr)
+
         specData.map((category)=> {
           count_cat = 0;
 
@@ -642,31 +656,85 @@ const Admin = () => {
         setCatCount(categories)
         setSortWorkers(arr)
 
+        arr.map((item)=>console.log("month: ", new Date(item.createDate).getMonth()+1))
+
         //график
         let year4 = []
         let nameMonth = ''
+        let countSpec = 0
         for (let i=1; i<=12; i++) {
-          if (i===1) nameMonth = 'Январь'
-          if (i===2) nameMonth = 'Февраль'
-          if (i===3) nameMonth = 'Март'
-          if (i===4) nameMonth = 'Апрель'
-          if (i===5) nameMonth = 'Май'
-          if (i===6) nameMonth = 'Июнь'
-          if (i===7) nameMonth = 'Июль'
-          if (i===8) nameMonth = 'Август'
-          if (i===9) nameMonth = 'Сентябрь'
-          if (i===10) nameMonth = 'Октябрь'
-          if (i===11) nameMonth = 'Ноябрь'
-          if (i===12) nameMonth = 'Декабрь'
+          if (i===1) {
+            nameMonth = 'Январь'
+            const arrSpec = arr.filter(item => i === new Date(item.createDate).getMonth()+1);
+            countSpec = arrSpec.length
+          }
+          if (i===2) {
+            nameMonth = 'Февраль'
+            const arrSpec = arr.filter(item => i === new Date(item.createDate).getMonth()+1);
+            countSpec = arrSpec.length
+          }
+          if (i===3) {
+            nameMonth = 'Март'
+            const arrSpec = arr.filter(item => i === new Date(item.createDate).getMonth()+1);
+            countSpec = arrSpec.length
+          }
+          if (i===4) {
+            nameMonth = 'Апрель'
+            const arrSpec = arr.filter(item => i === new Date(item.createDate).getMonth()+1);
+            countSpec = arrSpec.length
+          }
+          if (i===5) {
+            nameMonth = 'Май'
+            const arrSpec = arr.filter(item => i === new Date(item.createDate).getMonth()+1);
+            countSpec = arrSpec.length
+          }
+          if (i===6) {
+            nameMonth = 'Июнь'
+            const arrSpec = arr.filter(item => i === new Date(item.createDate).getMonth()+1);
+            countSpec = arrSpec.length
+          }
+          if (i===7) {
+            nameMonth = 'Июль'
+            const arrSpec = arr.filter(item => i === new Date(item.createDate).getMonth()+1);
+            countSpec = arrSpec.length
+          }
+          if (i===8) {
+            nameMonth = 'Август'
+            const arrSpec = arr.filter(item => i === new Date(item.createDate).getMonth()+1);
+            countSpec = arrSpec.length
+          }
+          if (i===9) {
+            nameMonth = 'Сентябрь'
+            const arrSpec = arr.filter(item => i === new Date(item.createDate).getMonth()+1);
+            countSpec = arrSpec.length
+          }
+          if (i===10) {
+            nameMonth = 'Октябрь'
+            const arrSpec = arr.filter(item => i === new Date(item.createDate).getMonth()+1);
+            countSpec = arrSpec.length
+          }
+          if (i===11) {
+            nameMonth = 'Ноябрь'
+            const arrSpec = arr.filter(item => i === new Date(item.createDate).getMonth()+1);
+            countSpec = arrSpec.length
+          }
+          if (i===12) {
+            nameMonth = 'Декабрь'
+            const arrSpec = arr.filter(item => i === new Date(item.createDate).getMonth()+1);
+            countSpec = arrSpec.length
+          }
+          
           const newObj= {
                 name: nameMonth, 
-                value: 1,
+                value: countSpec,
               }
               year4.push(newObj)
-        }       
+        }  
+        console.log("year4: ", year4)     
         setYearWorkers(year4)
         break;
       }
+
       //за период
       case 5:{
         console.log("за период", periodDate1, periodDate2)
@@ -813,6 +881,7 @@ const Admin = () => {
                   chart={            
                     <Chart 
                       data={dayWorkers} 
+                      data2={[]}
                       // data2={
                       //   [
                       //     { name: '0:00', value: 1 },
@@ -940,24 +1009,27 @@ const Admin = () => {
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
                   chart={
-                    <Chart data={yearWorkers} 
-                    data2={
-                      [
-                        { name: 'Январь', value: 0 },
-                        { name: 'Февраль', value: 0 },
-                        { name: 'Март', value: 0 },
-                        { name: 'Апрель', value: 0 },
-                        { name: 'Май', value: 1 },
-                        { name: 'Июнь', value: 0 },
-                        { name: 'Июль', value: 0 },
-                        { name: 'Август', value: 2 },
-                        { name: 'Сентябрь', value: 2 },
-                        { name: 'Октябрь', value: 0 },
-                        { name: 'Ноябрь', value: 0 },
-                        { name: 'Декабрь', value: 0 },
-                      ]
-                    }
-                    width={widthGrafik} height={350} />             
+                    <Chart 
+                      data={yearWorkers}
+                      data2={[]} 
+                      // data2={
+                      //   [
+                      //     { name: 'Январь', value: 0 },
+                      //     { name: 'Февраль', value: 0 },
+                      //     { name: 'Март', value: 0 },
+                      //     { name: 'Апрель', value: 0 },
+                      //     { name: 'Май', value: 1 },
+                      //     { name: 'Июнь', value: 0 },
+                      //     { name: 'Июль', value: 0 },
+                      //     { name: 'Август', value: 2 },
+                      //     { name: 'Сентябрь', value: 2 },
+                      //     { name: 'Октябрь', value: 0 },
+                      //     { name: 'Ноябрь', value: 0 },
+                      //     { name: 'Декабрь', value: 0 },
+                      //   ]
+                      // }
+                      width={widthGrafik} height={350} 
+                    />             
                   }
                 />
 : ""
@@ -973,23 +1045,24 @@ const Admin = () => {
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
                   chart={
                     <Chart 
-                      data={yearWorkers}   
-                      data2={
-                        [
-                          { name: 'Январь', value: 0 },
-                          { name: 'Февраль', value: 0 },
-                          { name: 'Март', value: 0 },
-                          { name: 'Апрель', value: 0 },
-                          { name: 'Май', value: 1 },
-                          { name: 'Июнь', value: 0 },
-                          { name: 'Июль', value: 0 },
-                          { name: 'Август', value: 2 },
-                          { name: 'Сентябрь', value: 2 },
-                          { name: 'Октябрь', value: 0 },
-                          { name: 'Ноябрь', value: 0 },
-                          { name: 'Декабрь', value: 0 },
-                        ]
-                      }                 
+                      data={yearWorkers} 
+                      data2={[]}  
+                      // data2={
+                      //   [
+                      //     { name: 'Январь', value: 0 },
+                      //     { name: 'Февраль', value: 0 },
+                      //     { name: 'Март', value: 0 },
+                      //     { name: 'Апрель', value: 0 },
+                      //     { name: 'Май', value: 1 },
+                      //     { name: 'Июнь', value: 0 },
+                      //     { name: 'Июль', value: 0 },
+                      //     { name: 'Август', value: 2 },
+                      //     { name: 'Сентябрь', value: 2 },
+                      //     { name: 'Октябрь', value: 0 },
+                      //     { name: 'Ноябрь', value: 0 },
+                      //     { name: 'Декабрь', value: 0 },
+                      //   ]
+                      // }                 
                       width={widthGrafik} 
                       height={350} 
                     />             
