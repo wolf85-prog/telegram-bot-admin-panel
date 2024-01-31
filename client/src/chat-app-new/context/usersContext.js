@@ -134,7 +134,7 @@ const UsersProvider = ({ children }) => {
 				let conversationId = await getWConversation(user.chatId)
 				let messages = await getWMessages(conversationId)
 		
-				console.log("messages: ", messages)
+				//console.log("messages: ", messages)
 		
 				//получить последнее сообщение
 				const messageDates = Object.keys(messages);
@@ -202,7 +202,7 @@ const UsersProvider = ({ children }) => {
 				  date: dateMessage,
 				  messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
 				}
-				console.log(newUser)
+				//console.log(newUser)
 				arrayContact.push(newUser)
 	
 				//если элемент массива последний
