@@ -55,7 +55,7 @@ const AppHeader = (props) => {
         </CHeaderNav>
         <CHeaderNav>
           <CNavItem>
-            <CNavLink href="#" style={{position: 'relative'}}>
+            <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
               <CIcon icon={cilBell} size="lg" />
               {/* <CBadge color="success" className="ms-2">
                 5

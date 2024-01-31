@@ -18,6 +18,7 @@ import {
     DISTRIBUTIONW_ROUTE,
     DISTRIBUTIONADDW_ROUTE,
     DISTRIBUTIONWPLANER_ROUTE,
+    SOUNDSNOTIF_ROUTE,
 } from "./utils/consts";
 
 const Chats = React.lazy(() => import('./pages/Chats'))
@@ -39,6 +40,8 @@ const DistributionW = React.lazy(() => import('./pages/DistributionW'))
 const DistributionAddW = React.lazy(() => import('./pages/DistributionAddW'))
 const DistributionWPlaner = React.lazy(() => import('./pages/DistributionWPlaner'))
 
+const SoundsNotif = React.lazy(() => import('./pages/SoundsNotif'))
+
 export const authRoutes = [
     { path: ADMIN_ROUTE, name: 'Панель управления', Component: Admin },
     { path: ADMIN_ROUTE2, name: 'Панель управления', Component: Admin2 },
@@ -58,5 +61,6 @@ export const authRoutes = [
     { path: DISTRIBUTIONW_ROUTE, name: 'Рассылки', Component: DistributionW },
     { path: DISTRIBUTIONADDW_ROUTE, name: 'Создание рассылки', Component: DistributionAddW },
     { path: DISTRIBUTIONWPLANER_ROUTE, name: 'Рассылки', Component: DistributionWPlaner },
+    { path: SOUNDSNOTIF_ROUTE, name: 'Звуковые уведомления', Component: SoundsNotif },
     { path: '/', name: 'Пункт управления', Component: Admin },
 ]

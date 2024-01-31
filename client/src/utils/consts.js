@@ -21,3 +21,5 @@ export const DISTRIBUTIONWPLANER_ROUTE = '/distributionw_planer'
 export const THEME_ROUTE = '/theme'
 export const LOGIN_ROUTE = '/login'
 export const REGISTRATION_ROUTE = '/register'
+
+export const SOUNDSNOTIF_ROUTE = '/soundsnotif'
