@@ -80,6 +80,11 @@ const UsersProvider = ({ children }) => {
 	const audioWorkhub = new Audio(smsWorkhub);
 	const audioPretendent = new Audio(notifPretendent)
 
+//-------------------------------------------------------------------------
+	const refreshPage = ()=>{
+		window.location.reload();
+	}
+
 //---------get Workers----------------------------------------------------
 
 	useEffect(() => {
@@ -206,27 +211,8 @@ const UsersProvider = ({ children }) => {
 				  })
 		  
 				  setUserWorkers(sortedClients)
-				  //console.log("contacts: ", arrayContact)
 				}
-		
-				//console.log("arrayContact: ", arrayContact)
-			  })
-		
-			  //подгрузка контактов
-			  // setTimeout(() => {
-			  // 	const sortedClients = [...arrayContact].sort((a, b) => {       
-			  // 		var dateA = new Date(a.date), dateB = new Date(b.date) 
-			  // 		return dateB-dateA  //сортировка по убывающей дате  
-			  // 	})
-		
-			  // 	setUserWorkers(sortedClients)
-		
-			  // }, "20000")
-		
-			  //console.log("context userWorkers: ", arrayContact)
-	
-			  //setUserWorkers(arrayContact)
-		
+			})	
 		}
 		
 		//все сообщения специалистов
