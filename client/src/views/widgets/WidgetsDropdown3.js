@@ -44,7 +44,7 @@ const WidgetsDropdown3 = ({
                 labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
                 datasets: [
                   {
-                    label: 'Кол-во специалистов',
+                    label: 'Специалисты',
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-primary'),
@@ -119,7 +119,7 @@ const WidgetsDropdown3 = ({
                 labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
                 datasets: [
                   {
-                    label: 'Кол-во специалистов',
+                    label: 'Специалисты',
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-info'),
@@ -193,7 +193,7 @@ const WidgetsDropdown3 = ({
                 labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
                 datasets: [
                   {
-                    label: 'Кол-во специалистов',
+                    label: 'Специалисты',
                     backgroundColor: 'rgba(255,255,255,.2)',
                     borderColor: 'rgba(255,255,255,.55)',
                     data: [videoUsers, 0, 0, 0, 0, 0, 0],
@@ -264,7 +264,7 @@ const WidgetsDropdown3 = ({
                 ],
                 datasets: [
                   {
-                    label: 'Кол-во специалистов',
+                    label: 'Специалисты',
                     backgroundColor: 'rgba(255,255,255,.2)',
                     borderColor: 'rgba(255,255,255,.55)',
                     data: [stagehandsUsers, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
