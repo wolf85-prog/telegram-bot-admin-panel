@@ -21,6 +21,8 @@ const Worker = sequelize.define('worker', {
     stag: {type: DataTypes.STRING},
     worklist: {type: DataTypes.STRING},
     chatId: {type: DataTypes.STRING, unique: true},
+    promoId: {type: DataTypes.STRING},
+    from: {type: DataTypes.STRING},
 })
 
 const Message = sequelize.define('wmessage', {
