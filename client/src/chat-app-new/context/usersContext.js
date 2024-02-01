@@ -112,6 +112,8 @@ const UsersProvider = ({ children }) => {
 				  worklist:  user.worklist,
 				  chatId: user.chatId,
 				  createDate: user.createdAt,
+				  from: user.from,
+				  promoId: user.promoId,
 				}
 		
 				arrayWorker.push(newWorker)

@@ -137,7 +137,7 @@ const Admin = () => {
     const arr2 = workers.filter(item => new Date(item.date).getMonth() === currentMonth) //specusers
     setActivWorkers(arr2)
 
-  }, workers)
+  }, [workers])
 
   //get Contacts
   useEffect(() => {
@@ -1284,7 +1284,7 @@ const Admin = () => {
                                           {new Date(item.createDate).getHours() + ' : '+ String(new Date(item.createDate).getMinutes()).padStart(2, "0")}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
-                                            {item.userfamily +" "+ item.username + item.from }
+                                            {item.userfamily +" "+ item.username + " "} {item.from ? (item.from === 'Notion' ? "[N]" : '')  : ''}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           {item.city}
