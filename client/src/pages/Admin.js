@@ -111,7 +111,7 @@ const Admin = () => {
     //set tab
     setTabhub('Workhub')
 
-    
+    //console.log("specusers: ", specusers)
   })
 
   useEffect(() => {
@@ -1305,7 +1305,7 @@ const Admin = () => {
                                           <div>{item.phone}</div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          {/* <div>{specusers.find((user) => user.chatId === item.chatId).username}</div> */}
+                                          <div>{specusers.find((user) => user.chatId === item.chatId)?.username}</div>
                                         </CTableDataCell> 
                                       </CTableRow>
                                       ))
