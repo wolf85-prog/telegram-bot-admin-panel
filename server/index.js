@@ -182,7 +182,7 @@ const getDistributionsPlan = async() => {
                     //console.log("worker: ", worker)
                     //console.log("count: ", count)
                     if (count === 0) {
-                        pretendent = await Pretendent.create({projectId: projId, workerId: worker, receiverId: user}) //{projectId, workerId, receiverId}) 
+                        pretendent = await Pretendent.create({projectId: projId, workerId: worker, receiverId: user, accept: false}) //{projectId, workerId, receiverId}) 
                     } else {
                         pretendent = await Pretendent.findOne({
                             where: {receiverId: user, projectId: projId },
@@ -201,8 +201,8 @@ const getDistributionsPlan = async() => {
                     const keyboard2 = JSON.stringify({
                         inline_keyboard: [
                             [
-                                {"text": 'Принять', callback_data:'/accept '}, //  + pretendent.id
-                                {"text": 'Отклонить', callback_data:'/cancel'},
+                                {"text": 'Принять', callback_data:'/accept ' + pretendent.id}, //  + pretendent.id
+                                {"text": 'Отклонить', callback_data:'/cancel' + pretendent.id},
                             ],
                         ]
                     });

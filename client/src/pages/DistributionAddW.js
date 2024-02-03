@@ -1123,6 +1123,7 @@ const delCategory7 = (category) => {
           accept: false,      
         }
         const pretendentId = await newPretendent(pretendent)
+        console.log("Претендент: ", pretendentId)
         
         //Передаем данные боту
         const keyboard = JSON.stringify({
