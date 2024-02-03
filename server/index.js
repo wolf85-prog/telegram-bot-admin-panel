@@ -188,6 +188,8 @@ const getDistributionsPlan = async() => {
                             where: {receiverId: user, projectId: projId },
                         })
                     }
+
+                    console.log("Претендент: ", pretendent)
                     
                     //Передаем данные боту
                     const keyboard = JSON.stringify({
