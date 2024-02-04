@@ -63,7 +63,7 @@ const Profile = ({ user, closeSidebar }) => {
 			console.log("worker: ", fio_notion[0])
 			setWorker(fio_notion[0])
 
-			const avatars = await getWorkerChildrenId(fio_notion[0].id)
+			const avatars = await getWorkerChildrenId(fio_notion[0]?.id)
 			setAvatar(avatars[0]?.image)
 		}
 
@@ -178,7 +178,7 @@ const Profile = ({ user, closeSidebar }) => {
 						</span>
 						<span className="profile__action-text profile__action-text--top">
 							{/* {worker.spec?.map((item)=>item.name).join('')} */}
-							<table className="table-noborder">{worker.spec?.map((worker, index) => <tr key={index}><td>{worker.name}</td></tr> )}</table>
+							<table className="table-noborder">{worker ? worker.spec?.map((worker, index) => <tr key={index}><td>{worker.name}</td></tr> ) : '-'}</table>
 						</span>	
 					</p>
 				</li>
