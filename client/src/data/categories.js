@@ -65,6 +65,11 @@ const categories = [
       name: 'Games',
       value: '12',
     },  
+    {
+      label: 'Тест',
+      name: 'Test',
+      value: '13',
+    }, 
 ]
 
 export default categories;

@@ -189,20 +189,23 @@ const DistributionAddW = () => {
       label: 'Выбрать...',
       value: '0',
     }]
-    projects.map((project) => {
-      if (project != null) {
-        const d = new Date(project.datestart);
-        const month = String(d.getMonth()+1).padStart(2, "0");
-        const day = String(d.getDate()).padStart(2, "0");
+    
+    if (projects.length > 0) {
+      projects.map((project) => {
+        if (project != null) {
+          const d = new Date(project.datestart);
+          const month = String(d.getMonth()+1).padStart(2, "0");
+          const day = String(d.getDate()).padStart(2, "0");
 
-        const newObj = {
-          label: `${day}.${month} | ${project.name}`, 
-          value: project.id,
-        }
-        arrProjects.push(newObj)
-      }    
-    })
-    setContacts(arrProjects)      
+          const newObj = {
+            label: `${day}.${month} | ${project.name}`, 
+            value: project.id,
+          }
+          arrProjects.push(newObj)
+        }    
+      })
+      setContacts(arrProjects)    
+    }  
   }, [projects]);
   
 
@@ -212,16 +215,20 @@ const DistributionAddW = () => {
       label: 'Выбрать...',
       value: '0',
     }]
-    projects.map((project) => {
-      if (project != null) {
-        const newObj = {
-          label: project.crmID,
-          value: project.id,
+
+    if (projects.length > 0) {
+      projects.map((project) => {
+        if (project != null) {
+          const newObj = {
+            label: project.crmID,
+            value: project.id,
+          }
+          arrProjects.push(newObj)
         }
-        arrProjects.push(newObj)
-      }
-    })
-    setContacts2(arrProjects)      
+      })
+      setContacts2(arrProjects)
+    }
+          
   }, [projects]);
 
 //=======================================================
@@ -1164,7 +1171,7 @@ const delCategory7 = (category) => {
         let sendTextToTelegram
         if (text !== '') {
           const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
-          //console.log("url_send_msg: ", url_send_msg)
+          console.log("url_send_msg: ", url_send_msg)
           sendTextToTelegram = await $host.get(url_send_msg);
           console.log('sendTextToTelegram: ', sendTextToTelegram)
         }  
