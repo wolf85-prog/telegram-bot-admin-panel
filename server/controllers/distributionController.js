@@ -193,6 +193,27 @@ class DistributionController {
         }
     }
 
+    async editDistribW2(req, res) { 
+        const {id} = req.params      
+        try {    
+            let exist=await Distributionw.findOne( {where: {id: id}} )
+            
+            if(!exist){
+                res.status(500).json({msg: "distrib not exist"});
+                return;
+            }
+
+            const {success} = req.body
+
+            const newDistrib = await Distributionw.update(
+                { success },
+                { where: {id: id} })
+            return res.status(200).json(newDistrib);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
     //обновить рассылку - поменять статус del
     async editDistribWPlan(req, res) {
         const {id, date, del} = req.body

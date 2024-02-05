@@ -36,7 +36,8 @@ import {
   getProjects3, 
   getBlocks, 
   getDatabaseId,
-  newPretendent 
+  newPretendent,
+  editDistributionW2 
 } from '../http/adminAPI';
 import { uploadFile } from '../http/chatAPI';
 import { newMessage } from '../http/workerAPI';
@@ -189,7 +190,7 @@ const DistributionAddW = () => {
       label: 'Выбрать...',
       value: '0',
     }]
-    
+
     if (projects.length > 0) {
       projects.map((project) => {
         if (project != null) {
@@ -1085,6 +1086,8 @@ const delCategory7 = (category) => {
     console.log("постер: ", img)
     console.log("получатели: ", selected)
 
+    let countSuccess = 0
+
     if (selected.length !== 0 && file || selected.length !== 0 && text) {
       audio.play();
 
@@ -1111,7 +1114,7 @@ const delCategory7 = (category) => {
       console.log("message send button: ", message);
 
       //сохранение рассылки в базе данных
-      await newDistributionW(message)
+      const distrNew = await newDistributionW(message)
 
       
       selected.map(async (user, index) => {
@@ -1173,7 +1176,12 @@ const delCategory7 = (category) => {
           const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
           console.log("url_send_msg: ", url_send_msg)
           sendTextToTelegram = await $host.get(url_send_msg);
+
           console.log('sendTextToTelegram: ', sendTextToTelegram)
+
+          if (sendTextToTelegram.data.ok) {
+            countSuccess++
+          }
         }  
 
         const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
@@ -1189,12 +1197,18 @@ const delCategory7 = (category) => {
 
           sendPhotoToTelegram = await $host.post(url_send_photo, form);
           console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
+          
         } else {
           
           sendPhotoToTelegram = await $host.get(url_send_photo2);
           console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
         }
 
+        if (sendPhotoToTelegram.data.ok) {
+          countSuccess++
+        }
+
+        
         //отправить в админкуs
         //if (sendToAdmin) {
           let message = {};
@@ -1237,6 +1251,10 @@ const delCategory7 = (category) => {
         //}  
 
       })
+
+      //обновить бд рассылку
+      await editDistributionW2(countSuccess, distrNew.id)
+
 
       //обновить список рассылок
       addNewDistrib(true)
