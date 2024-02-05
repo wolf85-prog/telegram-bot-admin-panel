@@ -1086,9 +1086,6 @@ const delCategory7 = (category) => {
     console.log("постер: ", img)
     console.log("получатели: ", selected)
 
-    const res = await editDistributionW2(0, 680)
-    console.log("res: ", res)
-
     let countSuccess = 0
 
     if (selected.length !== 0 && file || selected.length !== 0 && text) {
@@ -1185,6 +1182,8 @@ const delCategory7 = (category) => {
           if (sendTextToTelegram.data.ok) {
             countSuccess = countSuccess + 1
             console.log("countSuccess: ", countSuccess)
+            //обновить бд рассылку
+            await editDistributionW2({success: countSuccess}, distrNew.id)
           }
         }  
 
@@ -1200,17 +1199,19 @@ const delCategory7 = (category) => {
           form.append("photo", file);
 
           sendPhotoToTelegram = await $host.post(url_send_photo, form);
-          console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
-          
-        } else {
-          
+          console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)  
+
+        } else {         
           sendPhotoToTelegram = await $host.get(url_send_photo2);
           console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
         }
 
-        if (sendPhotoToTelegram.data.ok) {
+        if (sendPhotoToTelegram.data.ok && text === '') {
           countSuccess = countSuccess + 1
           console.log("countSuccess Photo: ", countSuccess)
+
+          //обновить бд рассылку
+          await editDistributionW2({success: countSuccess}, distrNew.id)
         }
 
         
@@ -1255,12 +1256,14 @@ const delCategory7 = (category) => {
     
         //}  
 
-        // if (selected.length-1 === index) {
-        //   console.log(countSuccess, distrNew.id)
-        //   //обновить бд рассылку
-        //   const res = await editDistributionW2(0, distrNew.id)
-        //   console.log("res: ", res)
-        // }
+       //console.log("index: ", index)
+
+       // if (selected.length-1 === index) {
+        //  console.log("fsfsfsfsfsf")
+          //console.log(countSuccess, distrNew.id)
+          //обновить бд рассылку
+          const res = await editDistributionW2({success: countSuccess}, distrNew.id)
+        //}
 
       })
 
@@ -1279,7 +1282,7 @@ const delCategory7 = (category) => {
 
     }
     else {
-      //setVisibleModal(!visibleModal)
+      setVisibleModal(!visibleModal)
     }
   
   }

@@ -76,6 +76,7 @@ const DistributionW = () => {
           timestart: newTimeMessage,
           status: distrib.delivered ? "отправлено" : "запланировано",
           uuid: distrib.uuid,
+          success: distrib.success,
 				}
         arrDitributions.push(newDistribution)
       })
@@ -197,7 +198,7 @@ const DistributionW = () => {
                                         {
                                           item.status === 'запланировано' ? 
                                           <div style={{color: '#3887cd'}}>{item.count}</div>
-                                          :<div>{item.count}</div>
+                                          :<div>{item.count} | {item.success ? item.success : ""}</div>
                                         }
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
