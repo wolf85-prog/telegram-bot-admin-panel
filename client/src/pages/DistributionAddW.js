@@ -1086,6 +1086,9 @@ const delCategory7 = (category) => {
     console.log("постер: ", img)
     console.log("получатели: ", selected)
 
+    const res = await editDistributionW2(0, 680)
+    console.log("res: ", res)
+
     let countSuccess = 0
 
     if (selected.length !== 0 && file || selected.length !== 0 && text) {
@@ -1211,7 +1214,7 @@ const delCategory7 = (category) => {
         }
 
         
-        //отправить в админкуs
+        //отправить в админку
         //if (sendToAdmin) {
           let message = {};
           if(!file) {
@@ -1252,12 +1255,12 @@ const delCategory7 = (category) => {
     
         //}  
 
-        if (selected.length-1 === index) {
-          console.log(countSuccess, distrNew.id)
-          //обновить бд рассылку
-          const res = await editDistributionW2(0, distrNew.id)
-          console.log("res: ", res)
-        }
+        // if (selected.length-1 === index) {
+        //   console.log(countSuccess, distrNew.id)
+        //   //обновить бд рассылку
+        //   const res = await editDistributionW2(0, distrNew.id)
+        //   console.log("res: ", res)
+        // }
 
       })
 
@@ -1276,7 +1279,7 @@ const delCategory7 = (category) => {
 
     }
     else {
-      setVisibleModal(!visibleModal)
+      //setVisibleModal(!visibleModal)
     }
   
   }

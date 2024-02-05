@@ -315,7 +315,7 @@ export const editDistributionW2 = async (data, id) =>{
     try {
         await $host.patch(`api/distributionsw2/update/${id}`, data); 
     } catch (error) {
-        console.log("error while calling editDistributionW api",error.message);
+        console.log("error while calling editDistributionW2 api",error.message);
     }
 }
 
