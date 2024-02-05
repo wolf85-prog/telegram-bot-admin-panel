@@ -63,8 +63,8 @@ const Profile = ({ user, closeSidebar }) => {
 			console.log("worker: ", fio_notion[0])
 			setWorker(fio_notion[0])
 
-			const avatars = await getWorkerChildrenId(fio_notion[0]?.id)
-			setAvatar(avatars[0]?.image)
+			//const avatars = await getWorkerChildrenId(fio_notion[0]?.id)
+			//setAvatar(avatars[0]?.image)
 		}
 
 		fetchData();

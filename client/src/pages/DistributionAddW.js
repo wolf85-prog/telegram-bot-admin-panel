@@ -331,7 +331,7 @@ const getCategoryFromNotion = async(projectId) => {
         category.models.map((spec)=> {
           count_title = 0;
 
-          if (databaseBlock.data) {   
+          if (databaseBlock.data.length > 0) {   
             databaseBlock.data.map((db) => {
               if (spec.name === db.spec) {
                 count_title++
@@ -1180,7 +1180,8 @@ const delCategory7 = (category) => {
           console.log('sendTextToTelegram: ', sendTextToTelegram)
 
           if (sendTextToTelegram.data.ok) {
-            countSuccess++
+            countSuccess = countSuccess + 1
+            console.log("countSuccess: ", countSuccess)
           }
         }  
 
@@ -1205,7 +1206,8 @@ const delCategory7 = (category) => {
         }
 
         if (sendPhotoToTelegram.data.ok) {
-          countSuccess++
+          countSuccess = countSuccess + 1
+          console.log("countSuccess Photo: ", countSuccess)
         }
 
         
@@ -1250,10 +1252,14 @@ const delCategory7 = (category) => {
     
         //}  
 
-      })
+        if (selected.length-1 === index) {
+          console.log(countSuccess, distrNew.id)
+          //обновить бд рассылку
+          const res = await editDistributionW2(0, distrNew.id)
+          console.log("res: ", res)
+        }
 
-      //обновить бд рассылку
-      await editDistributionW2(countSuccess, distrNew.id)
+      })
 
 
       //обновить список рассылок

@@ -313,7 +313,7 @@ export const editDistributionW = async (data, id) =>{
 
 export const editDistributionW2 = async (data, id) =>{
     try {
-        await $host.patch(`api/distributionsw/update/${id}`, data); 
+        await $host.patch(`api/distributionsw2/update/${id}`, data); 
     } catch (error) {
         console.log("error while calling editDistributionW api",error.message);
     }

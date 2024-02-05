@@ -130,8 +130,10 @@ const UsersProvider = ({ children }) => {
 		  
 			  response2.map(async (user, index) => {
 		
-				let notion = await getWorkerNotionId(user.chatId)
-				const avatars = await getWorkerChildrenId(notion[0]?.id)
+				let notion = {} //await getWorkerNotionId(user.chatId)
+
+				//частый запрос к notion
+				//const avatars = await getWorkerChildrenId(notion[0]?.id)
 				
 				let conversationId = await getWConversation(user.chatId)
 				let messages = await getWMessages(conversationId)
@@ -195,7 +197,7 @@ const UsersProvider = ({ children }) => {
 				  phone: notion[0]?.phone ? notion[0]?.phone : '',
 				  age: notion[0]?.age ? notion[0]?.age : "",
 				  chatId: user.chatId,
-				  avatar: avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
+				  avatar: "", //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
 				  conversationId: conversationId ? conversationId : 0,
 				  unread: 0, 
 				  pinned: false,
