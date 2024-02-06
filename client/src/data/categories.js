@@ -64,11 +64,16 @@ const categories = [
       label: 'Игры',
       name: 'Games',
       value: '12',
-    },  
+    },
+    {
+      label: 'Вне категории',
+      name: 'NoTag',
+      value: '13',
+    },   
     {
       label: 'Тест',
       name: 'Test',
-      value: '13',
+      value: '14',
     }, 
 ]
 
