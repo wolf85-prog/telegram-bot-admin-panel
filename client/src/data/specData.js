@@ -136,6 +136,14 @@ const specData = [
             {id: 6, name: 'Активности \/ аттракционы',},
         ]
     },
+    {
+        id: 13,
+        name: 'NoTag',
+        icon: 'Вне категории',
+        models: [
+            {id: 1, name: 'Вне категории',},
+        ]
+    },
 ];
 
 export default specData;
