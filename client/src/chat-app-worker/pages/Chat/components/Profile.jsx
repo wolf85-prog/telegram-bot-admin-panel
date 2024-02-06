@@ -77,7 +77,7 @@ const Profile = ({ user, closeSidebar }) => {
 		}, 2000)
 		
 		
-		if (user.phone.includes('-')) {
+		if (user.phone?.includes('-')) {
 			setPhone(user.phone)
 		} else {
 			let str = user.phone
