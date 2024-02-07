@@ -874,7 +874,7 @@ const Admin = () => {
  {showCharts ?  <CWidgetStatsA
                   ref={grafik}
                   className="mb-4 box"
-                  color="success"
+                  color="dark"
                   value={<></>}
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
@@ -922,7 +922,7 @@ const Admin = () => {
 {showCharts2 ?  <CWidgetStatsA
                   ref={grafik}
                   className="mb-4 box"
-                  color="success"
+                  color="dark"
                   value={<></>}
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
@@ -952,7 +952,7 @@ const Admin = () => {
 {showCharts3 ?  <CWidgetStatsA
                   ref={grafik}
                   className="mb-4 box"
-                  color="success"
+                  color="dark"
                   value={<></>}
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
@@ -1004,7 +1004,7 @@ const Admin = () => {
 {showCharts4 ?  <CWidgetStatsA
                   ref={grafik}
                   className="mb-4 box"
-                  color="success"
+                  color="dark"
                   value={<></>}
                   title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
