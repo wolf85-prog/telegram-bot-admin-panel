@@ -92,6 +92,8 @@ const Admin = () => {
   const [showCharts4, setShowCharts4]= useState(false);
   const [showCharts5, setShowCharts5]= useState(false);
 
+  const [showNick, setShowNick]= useState(false);
+
   const [activeIndex, setActiveIndex] = useState(null);
 
   const [tabhub, setTabhub]= useState('');
@@ -112,6 +114,10 @@ const Admin = () => {
     setTabhub('Workhub')
 
     //console.log("specusers: ", specusers)
+
+    setTimeout(()=> {
+      setShowNick(!showNick)
+    }, 10000)
   })
 
   useEffect(() => {
@@ -1305,7 +1311,8 @@ const Admin = () => {
                                           <div>{item.phone}</div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          <div>{specusers.find((user) => user.chatId === item.chatId)?.username}</div>
+                                          {/* <div>{specusers.find((user) => user.chatId === item.chatId)?.username}</div> */}
+                                          <div>{showNick ? specusers.find((user) => user.chatId === item.chatId)?.username : item.chatId}</div>
                                         </CTableDataCell> 
                                       </CTableRow>
                                       ))
