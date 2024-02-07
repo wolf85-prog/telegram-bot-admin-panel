@@ -204,7 +204,7 @@ const getDistributionsPlan = async() => {
                         inline_keyboard: [
                             [
                                 {"text": 'Принять', callback_data:'/accept ' + pretendent.id}, //  + pretendent.id
-                                {"text": 'Отклонить', callback_data:'/cancel' + pretendent.id},
+                                {"text": 'Отклонить', callback_data:'/cancel ' + pretendent.id},
                             ],
                         ]
                     });
