@@ -9,7 +9,7 @@ const Chart = ({ data, data2, width, height }) => {
     .range([0, width]);
 
   const getY = d3.scaleLinear()
-    .domain([0, 500])
+    .domain([0, 1000])
     .range([height, 0]);
   
   const getYAxis = ref => {
