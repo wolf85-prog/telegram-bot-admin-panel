@@ -149,9 +149,9 @@ const Workers = () => {
                                       <CTableHeaderCell className="text-center" style={{width: '250px'}}>Проект</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '150px'}}>ФИО</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '160px'}}>Специальность</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{width: '140px'}}>U.L.E.Y</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{width: '120px'}}>U.L.E.Y</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{minWidth: '120px'}}>Комментарий</CTableHeaderCell>                         
-                                      <CTableHeaderCell className="text-center" style={{width: '160px'}}>Телефон</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{width: '180px'}}>Телефон</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
@@ -166,14 +166,14 @@ const Workers = () => {
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
                                             {item.worker}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
+                                        <CTableDataCell style={{fontSize: '13px', textAlign: 'left'}}>
                                           <div onClick={() => setVisibleA(!visibleA)}>Посмотреть</div>
                                           <CCollapse visible={visibleA}>
                                             <table>
                                               {item.worklist ? 
                                               (item.worklist).map((spec, index)=>( 
                                                   <tr key={index}>
-                                                    <td >{spec.name}</td>
+                                                    <td>- {spec.name}</td>
                                                   </tr>          
                                               ))
                                               :""
@@ -184,7 +184,7 @@ const Workers = () => {
                                         <CTableDataCell className="text-center">
                                           {item.rang}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
+                                        <CTableDataCell style={{color: item.dateborn >= 2005 ? 'red' : '', fontSize: '13px', textAlign: 'left'}}>
                                           {item.comment}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
