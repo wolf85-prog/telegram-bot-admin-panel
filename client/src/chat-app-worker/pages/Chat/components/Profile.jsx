@@ -81,7 +81,8 @@ const Profile = ({ user, closeSidebar }) => {
 			setPhone(user.phone)
 		} else {
 			let str = user.phone
-			setPhone(`+7 (${str.slice(1, 4)}) ${str.slice(4, 7)}-${str.slice(7, 9)}-${str.slice(9, 11)}`)
+			//setPhone(`+7 (${str.slice(1, 4)}) ${str.slice(4, 7)}-${str.slice(7, 9)}-${str.slice(9, 11)}`)
+			setPhone(user.phone)
 		}
 		
 	}, [user])
