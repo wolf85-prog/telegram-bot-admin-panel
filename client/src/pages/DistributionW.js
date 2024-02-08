@@ -198,7 +198,7 @@ const DistributionW = () => {
                                         {
                                           item.status === 'запланировано' ? 
                                           <div style={{color: '#3887cd'}}>{item.count}</div>
-                                          :<div>{item.count} | {item.success ? item.success : ""}</div>
+                                          :<div>{item.count} | {item.success ? item.success : "0"}</div>
                                         }
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center">
