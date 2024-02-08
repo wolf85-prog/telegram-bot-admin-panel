@@ -198,7 +198,7 @@ fetchData()
 		
 			  //1 все специалисты
 			  let response = await getWorkers();
-			  //console.log("workers size: ", response)
+			  console.log("workers size: ", response)
 		
 			  const arrayWorker = []
 		
@@ -227,7 +227,7 @@ fetchData()
 		
 			  //2
 			  let response2 = await getWContacts();
-			  //console.log("userWorkers size: ", response2)
+			  console.log("userWorkers size: ", response2)
 		  
 			  const arrayContact = []
 		  
@@ -237,13 +237,13 @@ fetchData()
 				let worker = arrayWorker.find((item)=> item.chatId === user.chatId)
 				console.log("worker: ", worker)
 
-				//частый запрос к notion
-				//const avatars = await getWorkerChildrenId(notion[0]?.id)
 				
 				let conversationId = await getWConversation(user.chatId)
-				let messages = await getWMessages(conversationId)
-		
-				//console.log("messages: ", messages)
+				//console.log("conversationId: ", conversationId)
+				//let messages
+				//if (conversationId) {
+				let	messages = await getWMessages(conversationId)
+				//}
 		
 				//получить последнее сообщение
 				const messageDates = Object.keys(messages);
@@ -294,25 +294,28 @@ fetchData()
 				  obj[dates[i]] = arrayDateMessage;
 				}
 		
-				const newUser = {
-				  id: user.id,
-				  username: user.username ? user.username : '',
-				  name: worker?.userfamily + " " + worker?.username, //notion[0]?.fio ? notion[0]?.fio : '',
-				  city: worker?.city, //notion[0]?.city ? notion[0]?.city : '',
-				  phone: worker?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
-				  age: worker?.dateborn, //notion[0]?.age ? notion[0]?.age : "",
-				  chatId: user.chatId,
-				  avatar: "", //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
-				  conversationId: conversationId ? conversationId : 0,
-				  unread: 0, 
-				  pinned: false,
-				  typing: false,
-				  message:  lastMessage,
-				  date: dateMessage,
-				  messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
+				if (worker) {
+					const newUser = {
+						id: user.id,
+						username: user.username ? user.username : '',
+						name: worker?.userfamily + " " + worker?.username, //notion[0]?.fio ? notion[0]?.fio : '',
+						city: worker?.city, //notion[0]?.city ? notion[0]?.city : '',
+						phone: worker?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
+						age: worker?.dateborn, //notion[0]?.age ? notion[0]?.age : "",
+						chatId: user.chatId,
+						avatar: "", //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
+						conversationId: conversationId ? conversationId : 0,
+						unread: 0, 
+						pinned: false,
+						typing: false,
+						message:  lastMessage,
+						date: dateMessage,
+						messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
+					}
+					//console.log(newUser)
+					arrayContact.push(newUser)
 				}
-				//console.log(newUser)
-				arrayContact.push(newUser)
+				
 	
 				//если элемент массива последний
 				if (index === response2.length-1) {

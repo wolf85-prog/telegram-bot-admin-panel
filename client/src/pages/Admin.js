@@ -1297,11 +1297,11 @@ const Admin = () => {
                                         </CTableDataCell>
                                         <CTableDataCell style={{textAlign: 'left'}}>
                                           <table>
-                                            {(JSON.parse(item.worklist)).map((spec, index)=>( 
+                                            {item.worklist !== '' ? (JSON.parse(item.worklist)).map((spec, index)=>( 
                                                 <tr key={index}>
                                                   <td>{spec.spec !== '' ? "- " + spec.spec : ''}</td>
                                                 </tr>          
-                                            ))}
+                                            )) : ""}
                                           </table>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
@@ -1311,7 +1311,6 @@ const Admin = () => {
                                           <div>{item.phone}</div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          {/* <div>{specusers.find((user) => user.chatId === item.chatId)?.username}</div> */}
                                           <div>{showNick ? specusers.find((user) => user.chatId === item.chatId)?.username : item.chatId}</div>
                                         </CTableDataCell> 
                                       </CTableRow>
