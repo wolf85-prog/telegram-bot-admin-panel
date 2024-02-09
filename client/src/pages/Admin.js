@@ -1290,10 +1290,10 @@ const Admin = () => {
                                           {new Date(item.createDate).getHours() + ' : '+ String(new Date(item.createDate).getMinutes()).padStart(2, "0")}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 || item.userfamily === 'Неизвестный' ? '#cd3838' : ''}}>
-                                            {item.userfamily ? item.userfamily : '' +" "+ item.username ? item.username : '' + " "} {item.from ? (item.from === 'Notion' ? "[N]" : '')  : ''}
+                                            {item.userfamily ? item.userfamily : ''} {item.username ? item.username : ''} {item.from ? (item.from === 'Notion' ? "[N]" : '')  : ''}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          {item.city}
+                                          {item.city ? item.city : ''}
                                         </CTableDataCell>
                                         <CTableDataCell style={{textAlign: 'left'}}>
                                           <table>
@@ -1305,10 +1305,10 @@ const Admin = () => {
                                           </table>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
-                                          {item.dateborn}
+                                          {item.dateborn ? item.dateborn : ''}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          <div>{item.phone}</div>
+                                          <div>{item.phone ? item.phone : ''}</div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div>{showNick ? specusers.find((user) => user.chatId === item.chatId)?.username : item.chatId}</div>
