@@ -151,17 +151,11 @@ const Admin = () => {
 
     const fetchData = async() => {
 
-      //let companys = await getCompanys()
-      // console.log("companys (admin): ", comps)
-      // console.log("clients (admin): ", clients)
-      // console.log("managers (admin): ", zakazchiki)
-
       console.log("workers (admin): ", workers)
       //console.log("workersbot (admin): ", specusers.find((user) => user.chatId === '805436270').username)
       setLoading2(false)
 
       let messages = await getAllMessages()
-      //console.log("messages: ", messages)
 
       clients.map((client, index) => {
         
@@ -174,7 +168,7 @@ const Admin = () => {
         const companyName = userObject2?.title
         const companyCity = userObject2?.city ? userObject2?.city : ''
 
-        const lastDate = client.date.split('T')
+        const lastDate = client.date ? client.date.split('T') : ''
         const d = new Date(lastDate[0]);
 				const year = d.getFullYear();
 				const month = String(d.getMonth()+1).padStart(2, "0");
