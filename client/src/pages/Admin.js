@@ -1290,7 +1290,7 @@ const Admin = () => {
                                           {new Date(item.createDate).getHours() + ' : '+ String(new Date(item.createDate).getMinutes()).padStart(2, "0")}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 || item.userfamily === 'Неизвестный' ? '#cd3838' : ''}}>
-                                            {item.userfamily +" "+ item.username + " "} {item.from ? (item.from === 'Notion' ? "[N]" : '')  : ''}
+                                            {item.userfamily ? item.userfamily : '' +" "+ item.username ? item.username : '' + " "} {item.from ? (item.from === 'Notion' ? "[N]" : '')  : ''}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           {item.city}
