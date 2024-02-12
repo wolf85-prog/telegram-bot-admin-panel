@@ -89,6 +89,7 @@ const getDistributionsPlan = async() => {
 
     //рассылки
     distributions.forEach(async (item, index)=> {
+        let countSuccess = 0
         const date1 = item.datestart //дата отправки рассылки
         const dateNow = new Date().getTime() + 10800000 //текущая дата
         console.log("date1: ", new Date(date1))
@@ -215,12 +216,21 @@ const getDistributionsPlan = async() => {
                         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
                         
                         sendToTelegram = await fetch(url_send_msg);
+
+                        if (sendToTelegram.data.ok) {
+                            countSuccess = countSuccess + 1
+                        }
                     }
 
                     const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.textButton ? keyboard : keyboard2}`
                     //console.log("url_send_photo2: ", url_send_photo)
-         
-                    await fetch(url_send_photo);
+
+                    let sendPhotoToTelegram = await fetch(url_send_photo);
+
+                    if (sendPhotoToTelegram.data.ok && item.text === '') {
+                        countSuccess = countSuccess + 1            
+                    }
+                    
 
                     //обновить статус рассылки delivered - true
                     const delivered = true
@@ -231,7 +241,8 @@ const getDistributionsPlan = async() => {
                     }
             
                     const newDistrib = await Distributionw.update(
-                        { delivered },
+                        { delivered,
+                          success: countSuccess},
                         { where: {id: item.id} }
                     )
                 })
