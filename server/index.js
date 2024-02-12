@@ -217,8 +217,10 @@ const getDistributionsPlan = async() => {
                         
                         sendToTelegram = await fetch(url_send_msg);
 
-                        if (sendToTelegram.data) {
-                            countSuccess = countSuccess + 1
+                        const { status } = sendToTelegram;
+
+                        if (status === 200 && item.text === '') {
+                            countSuccess = countSuccess + 1            
                         }
                     }
 
@@ -228,7 +230,9 @@ const getDistributionsPlan = async() => {
                     let sendPhotoToTelegram = await fetch(url_send_photo);
                     console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
 
-                    if (sendPhotoToTelegram.data && item.text === '') {
+                    const { status } = sendPhotoToTelegram;
+
+                    if (status === 200 && item.text === '') {
                         countSuccess = countSuccess + 1            
                     }
                     
