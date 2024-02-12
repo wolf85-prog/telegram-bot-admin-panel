@@ -1181,7 +1181,7 @@ const delCategory7 = (category) => {
 
             if (sendTextToTelegram.data.ok) {
               countSuccess = countSuccess + 1
-              console.log("countSuccess: ", countSuccess)
+              console.log("Получатель: ", user)
               //обновить бд рассылку
               await editDistributionW2({success: countSuccess}, distrNew.id)
             }
@@ -1208,7 +1208,7 @@ const delCategory7 = (category) => {
 
           if (sendPhotoToTelegram.data.ok && text === '') {
             countSuccess = countSuccess + 1
-            console.log("countSuccess Photo: ", countSuccess)
+            console.log("Получатель: ", user)
 
             //обновить бд рассылку
             await editDistributionW2({success: countSuccess}, distrNew.id)
