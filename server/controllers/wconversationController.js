@@ -46,6 +46,15 @@ class WconversationController {
             return res.status(500).json(error.message);
         }
     }
+
+    async getConversationsW(req, res) {  
+        try {   
+            const conversations = await Conversation.findAll()
+            return res.status(200).json(conversations);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
 }
 
 module.exports = new WconversationController()

@@ -225,7 +225,7 @@ fetchData()
 			setWorkers(arrayWorker)
 		
 		
-			//2
+			//2 все пользователи бота
 			let response2 = await getWContacts();
 			console.log("userWorkers size: ", response2)
 		  
@@ -241,10 +241,11 @@ fetchData()
 				let conversationId = await getWConversation(user.chatId)
 				//console.log("conversationId: ", conversationId)
 				let messages
-				//if (conversationId) {
+				if (conversationId !== null) {
 					messages = await getWMessages(conversationId)
+					//console.log("messages: ", messages)
 				
-				//	if (messages.length > 0) {
+					if (messages?.length > 0) {
 
 						//получить последнее сообщение
 						const messageDates = Object.keys(messages);
@@ -320,15 +321,15 @@ fetchData()
 			
 						//если элемент массива последний
 						if (index === response2.length-1) {
-						const sortedClients = [...arrayContact].sort((a, b) => {       
-							var dateA = new Date(a.date), dateB = new Date(b.date) 
-							return dateB-dateA  //сортировка по убывающей дате  
-						})
+							const sortedClients = [...arrayContact].sort((a, b) => {       
+								var dateA = new Date(a.date), dateB = new Date(b.date) 
+								return dateB-dateA  //сортировка по убывающей дате  
+							})
 			
-						setUserWorkers(sortedClients)
+							setUserWorkers(sortedClients)
+						}
 					}
-				//}
-			//}
+				}
 			})	
 		}
 		

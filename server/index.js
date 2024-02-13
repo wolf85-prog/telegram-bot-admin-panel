@@ -67,13 +67,13 @@ const getDistributionsPlan = async() => {
 
     //удаление таймеров
     console.log("Запускаю очистку задач...")
-    console.log("tasks: ", tasks)
+    //console.log("tasks: ", tasks)
     tasks.forEach((tmp)=> {
         clearTimeout(tmp)
-        console.log("Задача удалена! ")   
+        //console.log("Задача удалена! ")   
     })
 
-    console.log("Запускаю планировщик задач...")
+    //console.log("Запускаю планировщик задач...")
 
     //получить запланированные рассылки
     const distributions = await Distributionw.findAll({
@@ -154,7 +154,7 @@ const getDistributionsPlan = async() => {
                        // Found an item, update it
                         const item = await Plan.update({times: newObj.times},{where: {datestart: newObj.datestart}});
                     }
-                    
+
                     const projId = item.projectId
 
                     //получить id специалиста по его telegramId

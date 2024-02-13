@@ -139,8 +139,13 @@ export const delMessage = async (id) =>{
 
 export const getWMessages = async(id)=>{
     try {
-        let response= await $host.get(`api/wmessage/get/${id}`);
-        
+        let response
+        if (id !== null) {
+            response = await $host.get(`api/wmessage/get/${id}`);
+        } else {
+            return [] 
+        }
+         
         return response.data;
     } catch (error) {
         console.log("error while calling getMessages api",error.message);
