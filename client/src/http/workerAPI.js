@@ -114,8 +114,16 @@ export const getWConversation= async (id)=>{
        }
         return response.data.id
     } catch (error) {
-        console.log("error while calling getConversation api", error.message);
-        
+        console.log("error while calling getConversation api", error.message);       
+    }
+}
+
+export const getWConversations= async ()=>{
+    try {
+       let response= await $host.get(`api/wconversations/get`);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getConversation api", error.message);       
     }
 }
 

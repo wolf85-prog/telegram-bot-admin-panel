@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./socketContext";
 import { getContacts, getConversation, getMessages } from '../../http/chatAPI'
-import { getAllPretendent, getWContacts, getWConversation, getWMessages, getWorkers } from '../../http/workerAPI'
+import { getAllPretendent, getWContacts, getWConversation, getWConversations, getWMessages, getWorkers } from '../../http/workerAPI'
 import { getWorkerNotionId, getWorkerChildrenId} from './../../http/workerAPI';
 
 import { getDistributions, 
@@ -181,7 +181,7 @@ useEffect(() => {
 				})
 
 				setUsers(sortedClients)
-				console.log("contacts: ", arrayContact)
+				console.log("managers contacts: ", arrayContact)
 			}
 		})
 }
@@ -198,7 +198,7 @@ fetchData()
 		
 			//1 все специалисты
 			let response = await getWorkers();
-			console.log("workers size: ", response)
+			//console.log("workers size: ", response)
 		
 			const arrayWorker = []
 		
@@ -227,25 +227,29 @@ fetchData()
 		
 			//2 все пользователи бота
 			let response2 = await getWContacts();
-			console.log("userWorkers size: ", response2)
-		  
+			//console.log("userWorkers size: ", response2)
 			const arrayContact = []
-		  
-			response2.map(async (user, index) => {
-		
-				//let notion = {} //await getWorkerNotionId(user.chatId)
-				let worker = arrayWorker.find((item)=> item.chatId === user.chatId)
-				//console.log("worker: ", worker)
 
+
+			//3 все беседы (conversations)
+			let response3 = await getWConversations();
+			console.log("workers: ", response3)
+		  
+			response3.map(async (user, index) => {
 				
-				let conversationId = await getWConversation(user.chatId)
+				//let notion = {} //await getWorkerNotionId(user.chatId)
+				let worker = arrayWorker.find((item)=> item.chatId === user.members[0])
+				//console.log("worker: ", worker)
+				
+				let conversationId = await getWConversation(user.members[0])
 				//console.log("conversationId: ", conversationId)
+
 				let messages
 				if (conversationId !== null) {
 					messages = await getWMessages(conversationId)
 					//console.log("messages: ", messages)
 				
-					if (messages?.length > 0) {
+					//if (messages?.length > 0) {
 
 						//получить последнее сообщение
 						const messageDates = Object.keys(messages);
@@ -298,13 +302,13 @@ fetchData()
 				
 						if (worker) {
 							const newUser = {
-								id: user.id,
-								username: user.username ? user.username : '',
+								id: worker.id,
+								username: '', // user.username ? user.username : '',
 								name: worker?.userfamily + " " + worker?.username, //notion[0]?.fio ? notion[0]?.fio : '',
 								city: worker?.city, //notion[0]?.city ? notion[0]?.city : '',
 								phone: worker?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
 								age: worker?.dateborn, //notion[0]?.age ? notion[0]?.age : "",
-								chatId: user.chatId,
+								chatId: worker?.chatId,
 								avatar: "", //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
 								conversationId: conversationId ? conversationId : 0,
 								unread: 0, 
@@ -320,7 +324,7 @@ fetchData()
 						
 			
 						//если элемент массива последний
-						if (index === response2.length-1) {
+						if (index === response3.length-1) {
 							const sortedClients = [...arrayContact].sort((a, b) => {       
 								var dateA = new Date(a.date), dateB = new Date(b.date) 
 								return dateB-dateA  //сортировка по убывающей дате  
@@ -328,7 +332,7 @@ fetchData()
 			
 							setUserWorkers(sortedClients)
 						}
-					}
+					//}
 				}
 			})	
 		}
