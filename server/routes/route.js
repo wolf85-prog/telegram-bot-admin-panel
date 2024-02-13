@@ -99,7 +99,7 @@ route.get('/wmessage/get/:id', getMessagesWorker)
 
 route.post('/wconversation/add', newConversationWorker)
 route.get('/wconversation/get/:id', getConversationWorker)
-route.get('/wconversation/get', getConversationsW)
+route.get('/wconversations/get', getConversationsW)
 
 route.get('/workers/get', getWorkers)
 route.get('/workers/get/:id', getWorker)
