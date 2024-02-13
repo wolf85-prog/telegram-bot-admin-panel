@@ -1270,7 +1270,7 @@ const delCategory7 = (category) => {
               setVisible(true)
             }
 
-        }, 2000 * ++index)   
+        }, 1000 * ++index)   
 
       })
 
