@@ -211,32 +211,36 @@ const getDistributionsPlan = async() => {
                         ]
                     });
 
-                    //отправить в телеграмм
-                    let sendToTelegram
-                    if (item.text !== '') {
-                        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
-                        
-                        sendToTelegram = await fetch(url_send_msg);
+                    try {
+                        //отправить в телеграмм
+                        let sendToTelegram
+                        if (item.text !== '') {
+                            const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
+                            
+                            sendToTelegram = await fetch(url_send_msg);
 
-                        const { status } = sendToTelegram;
+                            const { status } = sendToTelegram;
+
+                            if (status === 200 && item.text === '') {
+                                countSuccess = countSuccess + 1            
+                            }
+                        }
+
+                        const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.textButton ? keyboard : keyboard2}`
+                        //console.log("url_send_photo2: ", url_send_photo)
+
+                        let sendPhotoToTelegram = await fetch(url_send_photo);
+                        console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
+
+                        const { status } = sendPhotoToTelegram;
 
                         if (status === 200 && item.text === '') {
                             countSuccess = countSuccess + 1            
                         }
-                    }
-
-                    const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.textButton ? keyboard : keyboard2}`
-                    //console.log("url_send_photo2: ", url_send_photo)
-
-                    let sendPhotoToTelegram = await fetch(url_send_photo);
-                    console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
-
-                    const { status } = sendPhotoToTelegram;
-
-                    if (status === 200 && item.text === '') {
-                        countSuccess = countSuccess + 1            
-                    }
                     
+                    } catch (error) {
+                        console.error(error.message)
+                    }
 
                     //обновить статус рассылки delivered - true
                     const delivered = true
