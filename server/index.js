@@ -85,7 +85,7 @@ const getDistributionsPlan = async() => {
         }
     })
 
-    console.log("Рассылки:", distributions)
+    //console.log("Рассылки:", distributions)
 
     //рассылки
     distributions.forEach(async (item, index)=> {
@@ -121,7 +121,7 @@ const getDistributionsPlan = async() => {
             console.log("!!!!Планирую запуск отправки собщения..." + (index+1))
             const timerId = setTimeout(() => {
                 objPlan.users.map(async (user, ind) => {
-                    console.log("Пользователю ID: " + user + " сообщение " + item.text + " отправлено! Кнопка " + item.textButton + " отправлена!")
+                    console.log("Пользователю ID: " + user + " сообщение " + item.text + " отправлено!")
 
                     //получить план из БД
                     const plan = await Plan.findOne({
@@ -155,42 +155,43 @@ const getDistributionsPlan = async() => {
                         const item = await Plan.update({times: newObj.times},{where: {datestart: newObj.datestart}});
                     }
                     
+                    const projId = item.projectId
 
                     //получить id специалиста по его telegramId
                     //const worker = await getWorkerId(user)
-                    let worker
-                    await fetch(host_api_bottest + '/workers/chat/' + user)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (data) {
-                            console.log("data: ", data)
-                            worker = data
-                        } else {
-                            console.log("Worker не найден!")
-                        }                             
-                    });
+                    // let worker
+                    // await fetch(host_api_bottest + '/workers/chat/' + user)
+                    // .then((response) => response.json())
+                    // .then((data) => {
+                    //     if (data) {
+                    //         console.log("data: ", data)
+                    //         worker = data
+                    //     } else {
+                    //         console.log("Worker не найден!")
+                    //     }                             
+                    // });
                     
                     
                     //новый претендент
-                    let count = 0
-                    let pretendent
+                    // let count = 0
+                    // let pretendent
 
-                    const projId = item.projectId
+                    // const projId = item.projectId
 
-                    count = await Pretendent.count({
-                        where: { receiverId: user, projectId: projId },
-                    });
-                    //console.log("worker: ", worker)
-                    //console.log("count: ", count)
-                    if (count === 0) {
-                        pretendent = await Pretendent.create({projectId: projId, workerId: worker, receiverId: user, accept: false}) //{projectId, workerId, receiverId}) 
-                    } else {
-                        pretendent = await Pretendent.findOne({
-                            where: {receiverId: user, projectId: projId },
-                        })
-                    }
+                    // count = await Pretendent.count({
+                    //     where: { receiverId: user, projectId: projId },
+                    // });
+                    // //console.log("worker: ", worker)
+                    // //console.log("count: ", count)
+                    // if (count === 0) {
+                    //     pretendent = await Pretendent.create({projectId: projId, workerId: worker, receiverId: user, accept: false}) //{projectId, workerId, receiverId}) 
+                    // } else {
+                    //     pretendent = await Pretendent.findOne({
+                    //         where: {receiverId: user, projectId: projId },
+                    //     })
+                    // }
 
-                    console.log("Претендент: ", pretendent)
+                    // console.log("Претендент: ", pretendent)
                     
                     //Передаем данные боту
                     const keyboard = JSON.stringify({
@@ -204,8 +205,8 @@ const getDistributionsPlan = async() => {
                     const keyboard2 = JSON.stringify({
                         inline_keyboard: [
                             [
-                                {"text": 'Принять', callback_data:'/accept ' + pretendent.id}, //  + pretendent.id
-                                {"text": 'Отклонить', callback_data:'/cancel ' + pretendent.id},
+                                {"text": 'Принять', callback_data:'/accept ' + projId}, //  + pretendent.id
+                                {"text": 'Отклонить', callback_data:'/cancel ' + projId},
                             ],
                         ]
                     });

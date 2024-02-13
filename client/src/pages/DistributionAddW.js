@@ -1128,17 +1128,17 @@ const delCategory7 = (category) => {
           let client = clients.filter((client) => client.chatId === user)[0];
 
           //получить id специалиста по его telegramId
-          const worker = await getWorkerId(user)
+          //const worker = await getWorkerId(user)
           
           //новый претендент
-          const pretendent = {
-            projectId: valueProject, 
-            workerId: worker.data, 
-            receiverId: user,  
-            accept: false,      
-          }
-          const pretendentId = await newPretendent(pretendent)
-          console.log("Претендент: ", pretendentId)
+          // const pretendent = {
+          //   projectId: valueProject, 
+          //   workerId: worker.data, 
+          //   receiverId: user,  
+          //   accept: false,      
+          // }
+          // const pretendentId = await newPretendent(pretendent)
+          // console.log("Претендент: ", pretendentId)
           
           //Передаем данные боту
           const keyboard = JSON.stringify({
@@ -1155,11 +1155,11 @@ const delCategory7 = (category) => {
             keyboard2 = JSON.stringify({
               inline_keyboard: [
                   [
-                      {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
-                      {"text": 'Отклонить', callback_data:'/cancel ' + pretendentId.id},
+                      {"text": 'Принять', callback_data:'/accept ' + valueProject},
+                      {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
                   ],
                   [
-                    {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + pretendentId.id}},
+                    {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + valueProject}},
                 ],
               ]
             });
@@ -1167,8 +1167,8 @@ const delCategory7 = (category) => {
             keyboard2 = JSON.stringify({
               inline_keyboard: [
                   [
-                      {"text": 'Принять', callback_data:'/accept ' + pretendentId.id},
-                      {"text": 'Отклонить', callback_data:'/cancel ' + pretendentId.id},
+                      {"text": 'Принять', callback_data:'/accept ' + valueProject},
+                      {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
                   ],
               ]
             });
