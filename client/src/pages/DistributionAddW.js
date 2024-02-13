@@ -136,6 +136,8 @@ const DistributionAddW = () => {
 
   const [visibleModal, setVisibleModal] = useState(false);
   const [showUpload, setShowUpload] = useState(false);
+  const [showSend, setShowSend] = useState(false);
+  const [countSend, setCountSend] = useState(0)
 
   const [onButtonStavka, setOnButtonStavka] = useState(false)
   
@@ -1081,10 +1083,12 @@ const delCategory7 = (category) => {
   {/* Отправка рассылки */}
 //==============================================================================================
   const onSendText = async() => {
-    console.log("категории: ", categoryAll)
-    console.log("текст: ", text)
-    console.log("постер: ", img)
-    console.log("получатели: ", selected)
+    //console.log("категории: ", categoryAll)
+    //console.log("текст: ", text)
+    //console.log("постер: ", img)
+    //console.log("получатели: ", selected)
+
+    setShowSend(true)
 
     let countSuccess = 0
 
@@ -1111,15 +1115,16 @@ const delCategory7 = (category) => {
         users: selected.toString(),
         uuid: uuidDistrib,    
       }
-      console.log("message send button: ", message);
+      //console.log("message send button: ", message);
 
       //сохранение рассылки в базе данных
       const distrNew = await newDistributionW(message)
 
       
-      selected.map(async (user, index) => {
-        //console.log("Пользователю ID: " + user + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
-        setTimeout(async()=> {  
+      selected.map(async (user, index) => {      
+        setTimeout(async()=> { 
+          console.log(index + " Пользователю ID: " + user + " сообщение отправлено!")
+
           let client = clients.filter((client) => client.chatId === user)[0];
 
           //получить id специалиста по его telegramId
@@ -1193,30 +1198,29 @@ const delCategory7 = (category) => {
           const url_send_photo2 = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${host}${image}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
           console.log("url_send_photo2: ", url_send_photo2)
 
-          let sendPhotoToTelegram
-          if (file) {
-            const form = new FormData();
-            form.append("photo", file);
+            let sendPhotoToTelegram
+            if (file) {
+              const form = new FormData();
+              form.append("photo", file);
 
-            sendPhotoToTelegram = await $host.post(url_send_photo, form);
-            console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)  
+              sendPhotoToTelegram = await $host.post(url_send_photo, form);
+              console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)  
 
-          } else {         
-            sendPhotoToTelegram = await $host.get(url_send_photo2);
-            console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
-          }
+            } else {         
+              sendPhotoToTelegram = await $host.get(url_send_photo2);
+              console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
+            }
 
-          if (sendPhotoToTelegram.data.ok && text === '') {
-            countSuccess = countSuccess + 1
-            console.log("Получатель: ", user)
+            if (sendPhotoToTelegram.data.ok && text === '') {
+              countSuccess = countSuccess + 1
+              console.log("Получатель: ", user)
 
-            //обновить бд рассылку
-            await editDistributionW2({success: countSuccess}, distrNew.id)
-          }
+              //обновить бд рассылку
+              await editDistributionW2({success: countSuccess}, distrNew.id)
+            }
 
           
-          //отправить в админку
-          //if (sendToAdmin) {
+            //отправить в админку
             let message = {};
             if(!file) {
               console.log("no file")
@@ -1242,7 +1246,7 @@ const delCategory7 = (category) => {
                     buttons: textButton,
                 }
             }
-            console.log("message send: ", message);
+            //console.log("message send: ", message);
 
             //сохранение сообщения в базе данных wmessage
             await newMessage(message)
@@ -1254,17 +1258,19 @@ const delCategory7 = (category) => {
               addNewMessage2(user, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
             }
       
-          //}  
+ 
 
-          //console.log("index: ", index)
+            //обновить бд рассылку
+            const res = await editDistributionW2({success: countSuccess}, distrNew.id)
 
-          // if (selected.length-1 === index) {
-            //  console.log("fsfsfsfsfsf")
-              //console.log(countSuccess, distrNew.id)
-              //обновить бд рассылку
-              const res = await editDistributionW2({success: countSuccess}, distrNew.id)
-            //}
-          }, 2000 * ++index)   
+            setCountSend(index)
+
+            if (index === selected.length - 1) {
+              setShowSend(false)
+              setVisible(true)
+            }
+
+        }, 2000 * ++index)   
 
       })
 
@@ -1276,7 +1282,7 @@ const delCategory7 = (category) => {
       setText('')
       setShowEditButtonAdd(false)
       setTextButton('')
-      setVisible(true)
+      //setVisible(true)
       setValue('')
 
       //setTimeout(() => navigate('/distributionw'), 1000);
@@ -1770,8 +1776,10 @@ const delCategory7 = (category) => {
                                         }             
                                       </div>
                                       <div>
-                                        <CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton>
+                                        <CButton color="primary"  onClick={onSendText}>{showSend ? <><CSpinner style={{width: '20px', height: '20px'}}/> Отправлено {countSend}</> : 'Разослать сейчас'}</CButton>
+                                        
                                         {/* <CButton onClick={() => setVisible(!visible)}>Vertically centered modal</CButton> */}
+                                        
                                         <CModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
                                           <CModalHeader>
                                             <CModalTitle>Предупреждение</CModalTitle>

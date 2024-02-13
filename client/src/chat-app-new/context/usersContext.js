@@ -235,7 +235,7 @@ fetchData()
 		
 				//let notion = {} //await getWorkerNotionId(user.chatId)
 				let worker = arrayWorker.find((item)=> item.chatId === user.chatId)
-				console.log("worker: ", worker)
+				//console.log("worker: ", worker)
 
 				
 				let conversationId = await getWConversation(user.chatId)
