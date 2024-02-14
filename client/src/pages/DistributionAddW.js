@@ -1179,14 +1179,13 @@ const delCategory7 = (category) => {
           let sendTextToTelegram
           if (text !== '') {
             const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
-            console.log("url_send_msg: ", url_send_msg)
+            //console.log("url_send_msg: ", url_send_msg)
             sendTextToTelegram = await $host.get(url_send_msg);
 
-            console.log('sendTextToTelegram: ', sendTextToTelegram)
+            //console.log('sendTextToTelegram: ', sendTextToTelegram)
 
             if (sendTextToTelegram.data.ok) {
               countSuccess = countSuccess + 1
-              console.log("Получатель: ", user)
               //обновить бд рассылку
               await editDistributionW2({success: countSuccess}, distrNew.id)
             }
@@ -1196,7 +1195,7 @@ const delCategory7 = (category) => {
           //console.log("url_send_photo: ", url_send_photo)
 
           const url_send_photo2 = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${host}${image}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
-          console.log("url_send_photo2: ", url_send_photo2)
+          //console.log("url_send_photo2: ", url_send_photo2)
 
             let sendPhotoToTelegram
             if (file) {
@@ -1204,16 +1203,15 @@ const delCategory7 = (category) => {
               form.append("photo", file);
 
               sendPhotoToTelegram = await $host.post(url_send_photo, form);
-              console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)  
+              //console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)  
 
             } else {         
               sendPhotoToTelegram = await $host.get(url_send_photo2);
-              console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
+              //console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
             }
 
             if (sendPhotoToTelegram.data.ok && text === '') {
               countSuccess = countSuccess + 1
-              console.log("Получатель: ", user)
 
               //обновить бд рассылку
               await editDistributionW2({success: countSuccess}, distrNew.id)
