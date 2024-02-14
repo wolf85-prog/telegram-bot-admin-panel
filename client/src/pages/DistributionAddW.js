@@ -1126,19 +1126,6 @@ const delCategory7 = (category) => {
           console.log(index + " Пользователю ID: " + user + " сообщение отправлено!")
 
           let client = clients.filter((client) => client.chatId === user)[0];
-
-          //получить id специалиста по его telegramId
-          //const worker = await getWorkerId(user)
-          
-          //новый претендент
-          // const pretendent = {
-          //   projectId: valueProject, 
-          //   workerId: worker.data, 
-          //   receiverId: user,  
-          //   accept: false,      
-          // }
-          // const pretendentId = await newPretendent(pretendent)
-          // console.log("Претендент: ", pretendentId)
           
           //Передаем данные боту
           const keyboard = JSON.stringify({
@@ -1255,8 +1242,6 @@ const delCategory7 = (category) => {
             } else {
               addNewMessage2(user, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
             }
-      
- 
 
             //обновить бд рассылку
             const res = await editDistributionW2({success: countSuccess}, distrNew.id)
@@ -1268,7 +1253,7 @@ const delCategory7 = (category) => {
               setVisible(true)
             }
 
-        }, 1000 * ++index)   
+        }, 500 * ++index)   
 
       })
 
