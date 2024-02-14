@@ -25,7 +25,7 @@ import {
   getProjects3, 
   newPretendent 
 } from './../http/adminAPI';
-import { getAllPretendent, getWorkers, getWorkersNotion, getWorkerNotionId } from './../http/workerAPI'
+import { getAllPretendent, getWorkers, getWorkersNotion100, getWorkersNotion, getWorkerNotionId } from './../http/workerAPI'
 
 
 //Workers.js
@@ -43,6 +43,8 @@ const Workers = () => {
 
   const [visibleA, setVisibleA] = useState(false)
 
+  const [showTable, setShowTable] = useState([])
+
   //get pretendents
   useEffect(() => {
     const arrWorkers = []
@@ -57,8 +59,8 @@ const Workers = () => {
       let workers = await getWorkers()
       console.log("workers: ", workers)
 
-      //let workersN = await getWorkersNotion()
-      //console.log("workersN: ", workersN)
+      let workersN = await getWorkersNotion()
+      console.log("workersN: ", workersN)
 
       let projects = await getProjects3();
       console.log("projects: ", projects)
@@ -73,11 +75,11 @@ const Workers = () => {
         let userObject2 = workers.find((item) => item.chatId === worker.receiverId);  
         const workerName = userObject2?.userfamily + " "+ userObject2?.username
 
-        //let userObject3 = workersN.find((item) => item.tgId === worker.receiverId);  
-        const worklist = "" //userObject3?.spec
-        const rang = "" //userObject3?.spec
-        const comment = "" //userObject3?.spec
-        const phone = "" //userObject3?.phone
+        let userObject3 = workersN.find((item) => item.tgId === parseInt(worker.receiverId));  
+        const worklist = userObject3?.spec
+        const rang = userObject3?.rank
+        const comment = userObject3?.comment
+        const phone = userObject3?.phone
 
         const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
         const d2 = new Date(d)
@@ -89,26 +91,44 @@ const Workers = () => {
         
         const newDate = `${day}.${month} ${chas}:${min}`;
 
-        //worklist
-        setTimeout(async()=> {
-          const workNotions = await getWorkerNotionId(worker.receiverId)
+        //const workNotions = await getWorkerNotionId(worker.receiverId)
       
-          const newWorker = {
-            date: newDate, //newDate,
-            project: projectName,
-            worker: workerName, 
-            worklist: workNotions[0].spec,
-            rang: workNotions[0]?.rank,
-            comment: workNotions[0]?.comment,
-            phone: workNotions[0]?.phone,
+        //worklist
+        const newWorker = {
+          date: newDate, //newDate,
+          project: projectName,
+          worker: workerName, 
+          worklist: worklist, //workNotions[0].spec,
+          rang: rang, //workNotions[0]?.rank,
+          comment: comment, //workNotions[0]?.comment,
+          phone: phone, //workNotions[0]?.phone,
+        }
+        arrWorkers.push(newWorker)
 
-          }
-          arrWorkers.push(newWorker)
+        setSpec(arrWorkers)
 
-          setSpec(arrWorkers)
+        setLoading(false)
 
-          setLoading(false)
-        }, 1500 * ++i)
+        
+        // setTimeout(async()=> {
+        //   const workNotions = await getWorkerNotionId(worker.receiverId)
+      
+        //   const newWorker = {
+        //     date: newDate, //newDate,
+        //     project: projectName,
+        //     worker: workerName, 
+        //     worklist: workNotions[0].spec,
+        //     rang: workNotions[0]?.rank,
+        //     comment: workNotions[0]?.comment,
+        //     phone: workNotions[0]?.phone,
+
+        //   }
+        //   arrWorkers.push(newWorker)
+
+        //   setSpec(arrWorkers)
+
+        //   setLoading(false)
+        // }, 1500 * ++i)
         
       })  
     }
@@ -116,6 +136,16 @@ const Workers = () => {
     fetchData();
     
   },[])
+
+  const handleClick = (ind) => {
+    console.log(ind, showTable[ind])
+
+    setShowTable(prevShownTable => ({
+        ...prevShownTable,
+        [ind]: !prevShownTable[ind]
+      }));
+
+  }
 
   return (
     <div className='dark-theme'>
@@ -167,8 +197,8 @@ const Workers = () => {
                                             {item.worker}
                                         </CTableDataCell>
                                         <CTableDataCell style={{fontSize: '13px', textAlign: 'left'}}>
-                                          <div onClick={() => setVisibleA(!visibleA)}>Посмотреть</div>
-                                          <CCollapse visible={visibleA}>
+                                          <div onClick={()=>handleClick(index)}>Посмотреть</div>
+                                          <CCollapse visible={showTable[index]}>
                                             <table>
                                               {item.worklist ? 
                                               (item.worklist).map((spec, index)=>( 
