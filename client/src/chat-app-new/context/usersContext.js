@@ -227,7 +227,7 @@ fetchData()
 		
 			//2 все пользователи бота
 			let response2 = await getWContacts();
-			//console.log("userWorkers size: ", response2)
+			console.log("userWorkers size: ", response2)
 			const arrayContact = []
 
 
@@ -239,10 +239,10 @@ fetchData()
 				
 				//let notion = {} //await getWorkerNotionId(user.chatId)
 				let worker = arrayWorker.find((item)=> item.chatId === user.members[0])
-				//console.log("worker: ", worker)
+
+				let userbot = response2.find((item)=> item.chatId === worker?.chatId)		
 				
 				let conversationId = await getWConversation(user.members[0])
-				//console.log("conversationId: ", conversationId)
 
 				let messages
 				if (conversationId !== null) {
@@ -303,7 +303,7 @@ fetchData()
 						if (worker) {
 							const newUser = {
 								id: worker.id,
-								username: '', // user.username ? user.username : '',
+								username: userbot.username ? userbot.username : '', // user.username ? user.username : '',
 								name: worker?.userfamily + " " + worker?.username, //notion[0]?.fio ? notion[0]?.fio : '',
 								city: worker?.city, //notion[0]?.city ? notion[0]?.city : '',
 								phone: worker?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
