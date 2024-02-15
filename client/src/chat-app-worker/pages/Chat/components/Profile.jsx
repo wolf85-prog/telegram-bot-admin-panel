@@ -76,14 +76,15 @@ const Profile = ({ user, closeSidebar }) => {
 			setHeightImage(divBlock.current.getBoundingClientRect())
 		}, 2000)
 		
+		setPhone(user.phone)
 		
-		if (user.phone?.includes('-')) {
-			setPhone(user.phone)
-		} else {
-			let str = user.phone
-			//setPhone(`+7 (${str.slice(1, 4)}) ${str.slice(4, 7)}-${str.slice(7, 9)}-${str.slice(9, 11)}`)
-			setPhone(user.phone)
-		}
+		// if (user.phone?.includes('-')) {
+		// 	setPhone(user.phone)
+		// } else {
+		// 	let str = user.phone
+		// 	//setPhone(`+7 (${str.slice(1, 4)}) ${str.slice(4, 7)}-${str.slice(7, 9)}-${str.slice(9, 11)}`)
+		// 	setPhone(user.phone)
+		// }
 		
 	}, [user])
 
