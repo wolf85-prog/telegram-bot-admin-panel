@@ -1184,30 +1184,30 @@ const delCategory7 = (category) => {
           const url_send_photo2 = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${host}${image}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
           //console.log("url_send_photo2: ", url_send_photo2)
 
-            let sendPhotoToTelegram
-            if (file) {
-              const form = new FormData();
-              form.append("photo", file);
+          let sendPhotoToTelegram
+          if (file) {
+            const form = new FormData();
+            form.append("photo", file);
 
-              sendPhotoToTelegram = await $host.post(url_send_photo, form);
-              //console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)  
+            sendPhotoToTelegram = await $host.post(url_send_photo, form);
+            //console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)  
 
-            } else {         
-              sendPhotoToTelegram = await $host.get(url_send_photo2);
-              //console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
-            }
+          } else {         
+            sendPhotoToTelegram = await $host.get(url_send_photo2);
+            //console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
+          }
 
-            if (sendPhotoToTelegram.data.ok && text === '') {
-              countSuccess = countSuccess + 1
+          if (sendPhotoToTelegram.data.ok && text === '') {
+            countSuccess = countSuccess + 1
 
-              //обновить бд рассылку
-              await editDistributionW2({success: countSuccess}, distrNew.id)
-            }
+            //обновить бд рассылку
+            await editDistributionW2({success: countSuccess}, distrNew.id)
+          }
 
           
-            //отправить в админку
-            let message = {};
-            if(!file) {
+          //отправить в админку
+          let message = {};
+          if(!file) {
               console.log("no file")
                 message = {
                     senderId: chatAdminId, 
@@ -1219,7 +1219,7 @@ const delCategory7 = (category) => {
                     messageId: sendTextToTelegram.data.result.message_id,
                     buttons: '',
                 }
-            } else {
+          } else {
                 message = {
                     senderId: chatAdminId, 
                     receiverId: user,
@@ -1230,28 +1230,28 @@ const delCategory7 = (category) => {
                     messageId: sendPhotoToTelegram.data.result.message_id,
                     buttons: textButton,
                 }
-            }
-            //console.log("message send: ", message);
+          }
+          //console.log("message send: ", message);
 
-            //сохранение сообщения в базе данных wmessage
-            await newMessage(message)
+          //сохранение сообщения в базе данных wmessage
+          await newMessage(message)
 
-            //сохранить в контексте
-            if(!file) {
+          //сохранить в контексте
+          if(!file) {
               addNewMessage2(user, text, 'text', '', client.conversationId, sendTextToTelegram.data.result.message_id);
-            } else {
+          } else {
               addNewMessage2(user, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
-            }
+          }
 
-            //обновить бд рассылку
-            const res = await editDistributionW2({success: countSuccess}, distrNew.id)
+          //обновить бд рассылку
+          const res = await editDistributionW2({success: countSuccess}, distrNew.id)
 
-            setCountSend(index)
+          setCountSend(index)
 
-            if (index === selected.length - 1) {
+          if (index === selected.length - 1) {
               setShowSend(false)
               setVisible(true)
-            }
+          }
 
         }, 500 * ++index)   
 

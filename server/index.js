@@ -155,43 +155,7 @@ const getDistributionsPlan = async() => {
                         const item = await Plan.update({times: newObj.times},{where: {datestart: newObj.datestart}});
                     }
 
-                    const projId = item.projectId
-
-                    //получить id специалиста по его telegramId
-                    //const worker = await getWorkerId(user)
-                    // let worker
-                    // await fetch(host_api_bottest + '/workers/chat/' + user)
-                    // .then((response) => response.json())
-                    // .then((data) => {
-                    //     if (data) {
-                    //         console.log("data: ", data)
-                    //         worker = data
-                    //     } else {
-                    //         console.log("Worker не найден!")
-                    //     }                             
-                    // });
-                    
-                    
-                    //новый претендент
-                    // let count = 0
-                    // let pretendent
-
-                    // const projId = item.projectId
-
-                    // count = await Pretendent.count({
-                    //     where: { receiverId: user, projectId: projId },
-                    // });
-                    // //console.log("worker: ", worker)
-                    // //console.log("count: ", count)
-                    // if (count === 0) {
-                    //     pretendent = await Pretendent.create({projectId: projId, workerId: worker, receiverId: user, accept: false}) //{projectId, workerId, receiverId}) 
-                    // } else {
-                    //     pretendent = await Pretendent.findOne({
-                    //         where: {receiverId: user, projectId: projId },
-                    //     })
-                    // }
-
-                    // console.log("Претендент: ", pretendent)
+                    const projId = item.projectId            
                     
                     //Передаем данные боту
                     const keyboard = JSON.stringify({
@@ -255,6 +219,46 @@ const getDistributionsPlan = async() => {
                           success: countSuccess},
                         { where: {id: item.id} }
                     )
+
+                    //отправить в админку
+                    let message = {};
+                    console.log("Image: ", item.image)
+                    
+                    if(!item.image) {
+                        console.log("no file")
+                        message = {
+                            senderId: chatAdminId, 
+                            receiverId: user,
+                            conversationId: client.conversationId,
+                            type: "text",
+                            text: text,
+                            is_bot: true,
+                            messageId: sendTextToTelegram.data.result.message_id,
+                            buttons: '',
+                        }
+                    } else {
+                        message = {
+                            senderId: chatAdminId, 
+                            receiverId: user,
+                            conversationId: client.conversationId,
+                            type: "image",
+                            text: host + image,
+                            is_bot: true,
+                            messageId: sendPhotoToTelegram.data.result.message_id,
+                            buttons: textButton,
+                        }
+                    }
+                    console.log("message send: ", message);
+
+                    //сохранение сообщения в базе данных wmessage
+                    //await newMessage(message)
+
+                    //сохранить в контексте
+                    // if(!file) {
+                    //     addNewMessage2(user, text, 'text', '', client.conversationId, sendTextToTelegram.data.result.message_id);
+                    // } else {
+                    //     addNewMessage2(user, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
+                    // }
                 })
             }, milliseconds)
 
