@@ -231,7 +231,7 @@ const getDistributionsPlan = async() => {
                         //console.log("url_send_photo2: ", url_send_photo)
 
                         sendPhotoToTelegram = await fetch(url_send_photo);
-                        //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
+                        console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
 
                         const { status } = sendPhotoToTelegram;
 
@@ -270,7 +270,7 @@ const getDistributionsPlan = async() => {
                             type: "text",
                             text: text,
                             is_bot: true,
-                            messageId: sendToTelegram.data.result.message_id,
+                            messageId: '',
                             buttons: '',
                         }
                     } else {
@@ -281,7 +281,7 @@ const getDistributionsPlan = async() => {
                             type: "image",
                             text: host + item.image,
                             is_bot: true,
-                            messageId: sendPhotoToTelegram.data.result.message_id,
+                            messageId: '',
                             buttons: item.textButton,
                         }
                     }
@@ -292,9 +292,9 @@ const getDistributionsPlan = async() => {
 
                     //сохранить в контексте
                     if(!item.image) {
-                        addNewMessage2(user, text, 'text', '', conversation_id, sendToTelegram.data.result.message_id);
+                        addNewMessage2(user, text, 'text', '', conversation_id, '');
                     } else {
-                        addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, sendPhotoToTelegram.data.result.message_id);
+                        addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, '');
                     }
                 })
             }, milliseconds)
