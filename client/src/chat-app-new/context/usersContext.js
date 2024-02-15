@@ -245,17 +245,17 @@ fetchData()
 				let conversationId = await getWConversation(user.members[0])
 
 				let messages
+				let messages2 = []
 
 				if (conversationId !== null) {
 					messages = await getWMessages(conversationId)
 					//console.log("messages: ", messages)
-				
 
 					//получить последнее сообщение (без сообщений из рассылки)
-					const messages2 = messages.map((message) => {
+					messages.map((message) => {
 						if (message.is_bot === false || message.is_bot === null) {
-							message
-						}
+							messages2.push(message)
+						}	
 					})
 					//const newArray = array.map((element)=>element);
 					const messageDates = Object.keys(messages2); //messages
