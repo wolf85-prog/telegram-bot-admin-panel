@@ -132,6 +132,8 @@ const getDistributionsPlan = async() => {
 
                     //let conversationId = await getConversation(user)
                     let  conversation_id  
+                    let sendToTelegram
+                    let sendPhotoToTelegram
 
                     //найти беседу
                     const conversation = await Conversation.findOne({
@@ -213,7 +215,6 @@ const getDistributionsPlan = async() => {
 
                     try {
                         //отправить в телеграмм
-                        let sendToTelegram
                         if (item.text !== '') {
                             const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
                             
@@ -229,7 +230,7 @@ const getDistributionsPlan = async() => {
                         const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.textButton ? keyboard : keyboard2}`
                         //console.log("url_send_photo2: ", url_send_photo)
 
-                        let sendPhotoToTelegram = await fetch(url_send_photo);
+                        sendPhotoToTelegram = await fetch(url_send_photo);
                         //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
 
                         const { status } = sendPhotoToTelegram;
