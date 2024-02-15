@@ -10,7 +10,7 @@ const Route = require('./routes/route')
 const errorHandler = require('./middleware/ErrorHandling')
 const path = require('path')
 const bodyParser = require("body-parser");
-const getConversation = require("./common/getConversation");
+
 //планировщик
 const cron = require('node-cron');
 
