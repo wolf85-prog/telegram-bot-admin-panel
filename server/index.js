@@ -259,7 +259,6 @@ const getDistributionsPlan = async() => {
 
                     //отправить в админку
                     let message = {};
-                    console.log("Image: ", item.image)
                     
                     if(!item.image) {
                         console.log("no file")
@@ -282,7 +281,7 @@ const getDistributionsPlan = async() => {
                             text: item.image,
                             is_bot: true,
                             messageId: '',
-                            buttons: item.textButton,
+                            buttons: item.textButton ? item.textButton : '',
                         }
                     }
                     console.log("message send: ", message);
