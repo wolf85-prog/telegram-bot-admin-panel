@@ -1239,9 +1239,9 @@ const delCategory7 = (category) => {
 
           //сохранить в контексте
           if(!file) {
-              addNewMessage2(user, text, 'text', '', client.conversationId, sendTextToTelegram.data.result.message_id);
+              addNewMessage2(user, text, 'text', '', client.conversationId, sendTextToTelegram.data.result.message_id, true);
           } else {
-              addNewMessage2(user, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
+              addNewMessage2(user, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id, true);
           }
 
           //обновить бд рассылку

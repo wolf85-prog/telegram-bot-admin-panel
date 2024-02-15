@@ -292,9 +292,9 @@ const getDistributionsPlan = async() => {
 
                     //сохранить в контексте
                     if(!item.image) {
-                        addNewMessage2(user, text, 'text', '', conversation_id, '');
+                        addNewMessage2(user, text, 'text', '', conversation_id, '', true);
                     } else {
-                        addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, '');
+                        addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, '', true);
                     }
                 })
             }, milliseconds)
@@ -305,7 +305,7 @@ const getDistributionsPlan = async() => {
 }
 
 //отправить сообщение из админки workhub
-const addNewMessage2 = (userId, message, type, textButton, convId, messageId) => {
+const addNewMessage2 = (userId, message, type, textButton, convId, messageId, isBot) => {
 
     // Подключаемся к серверу socket
     let socket = io(socketUrl);
@@ -320,6 +320,7 @@ const addNewMessage2 = (userId, message, type, textButton, convId, messageId) =>
 		buttons: textButton,
 		convId: convId,
 		messageId,
+        isBot,
 	})
 };
 

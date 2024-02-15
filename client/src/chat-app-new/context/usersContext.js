@@ -859,12 +859,14 @@ const fetchAdminSpec = (data) => {
 	//console.log("Пришло сообщение в Админку: ", data)
 
 	setUserWorkers((userWorkers) => {
-		const { senderId, receiverId, text, type, buttons, messageId } = data;
+		const { senderId, receiverId, text, type, buttons, messageId, isBot } = data;
+
+		console.log("is_bot: ", isBot)
 
 		let userIndex = userWorkers.findIndex((user) => user.chatId === receiverId.toString());
 		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
 		const newMsgObject = {
-			date: new Date().toLocaleDateString(),
+			date: !isBot ? new Date().toLocaleDateString() : '2000-01-01T00:00:00',
 			content: text,
 			image: type === 'image' ? true : false,
 			descript: buttons ? buttons : '',
@@ -919,7 +921,7 @@ const fetchDelAdminSpec = (data) => {
 }
 
 //отправить сообщение из админки workhub
-const addNewMessage2 = (userId, message, type, textButton, convId, messageId) => {
+const addNewMessage2 = (userId, message, type, textButton, convId, messageId, isBot) => {
 
 	socket.emit("sendAdminSpec", { 
 		senderId: chatAdminId,
@@ -929,6 +931,7 @@ const addNewMessage2 = (userId, message, type, textButton, convId, messageId) =>
 		buttons: textButton,
 		convId: convId,
 		messageId,
+		isBot: isBot,
 	})
 };
 
