@@ -261,10 +261,10 @@ fetchData()
 					const messageDates = Object.keys(messages2); //messages
 
 					const recentMessageDate = messageDates[messageDates.length - 1];
-					const message = messages[recentMessageDate];
+					const message = messages2[recentMessageDate];
 				
-					const dateMessage = message ? messages[recentMessageDate].createdAt : "2000-01-01T00:00:00";
-					const lastMessage = message ? messages[recentMessageDate].text : "";			
+					const dateMessage = message ? messages2[recentMessageDate].createdAt : "2000-01-01T00:00:00";
+					const lastMessage = message ? messages2[recentMessageDate].text : "";			
 				
 					const arrayMessage = []
 					const allDate = []
