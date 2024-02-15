@@ -59,8 +59,9 @@ const Workers = () => {
       let workers = await getWorkers()
       console.log("workers: ", workers)
 
-      let workersN = await getWorkersNotion()
-      console.log("workersN: ", workersN)
+
+      //let workersN = await getWorkersNotion()
+      //console.log("workersN: ", workersN)
 
       let projects = await getProjects3();
       console.log("projects: ", projects)
@@ -74,12 +75,11 @@ const Workers = () => {
 
         let userObject2 = workers.find((item) => item.chatId === worker.receiverId);  
         const workerName = userObject2?.userfamily + " "+ userObject2?.username
-
-        let userObject3 = workersN.find((item) => item.tgId === parseInt(worker.receiverId));  
-        const worklist = userObject3?.spec
-        const rang = userObject3?.rank
-        const comment = userObject3?.comment
-        const phone = userObject3?.phone
+  
+        const worklist = userObject2?.worklist ? JSON.parse(userObject2?.worklist) : ''
+        const rang = userObject2?.rank ? userObject2?.rank : ''
+        const comment = userObject2?.comment ? userObject2?.comment : ''
+        const phone = userObject2?.phone
 
         const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
         const d2 = new Date(d)
@@ -108,27 +108,6 @@ const Workers = () => {
         setSpec(arrWorkers)
 
         setLoading(false)
-
-        
-        // setTimeout(async()=> {
-        //   const workNotions = await getWorkerNotionId(worker.receiverId)
-      
-        //   const newWorker = {
-        //     date: newDate, //newDate,
-        //     project: projectName,
-        //     worker: workerName, 
-        //     worklist: workNotions[0].spec,
-        //     rang: workNotions[0]?.rank,
-        //     comment: workNotions[0]?.comment,
-        //     phone: workNotions[0]?.phone,
-
-        //   }
-        //   arrWorkers.push(newWorker)
-
-        //   setSpec(arrWorkers)
-
-        //   setLoading(false)
-        // }, 1500 * ++i)
         
       })  
     }
@@ -203,7 +182,7 @@ const Workers = () => {
                                               {item.worklist ? 
                                               (item.worklist).map((spec, index)=>( 
                                                   <tr key={index}>
-                                                    <td>- {spec.name}</td>
+                                                    <td>- {spec.spec}</td>
                                                   </tr>          
                                               ))
                                               :""
