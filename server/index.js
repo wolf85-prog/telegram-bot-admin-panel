@@ -279,7 +279,7 @@ const getDistributionsPlan = async() => {
                             receiverId: user,
                             conversationId: conversation_id,
                             type: "image",
-                            text: host + item.image,
+                            text: item.image,
                             is_bot: true,
                             messageId: '',
                             buttons: item.textButton,
