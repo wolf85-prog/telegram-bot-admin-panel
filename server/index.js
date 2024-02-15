@@ -231,7 +231,7 @@ const getDistributionsPlan = async() => {
                         //console.log("url_send_photo2: ", url_send_photo)
 
                         sendPhotoToTelegram = await fetch(url_send_photo);
-                        console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
+                        //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
 
                         const { status } = sendPhotoToTelegram;
 
