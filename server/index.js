@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const sequelize = require('./db')
 const {Plan, Distributionw, Conversation, Message} = require('./models/models')
+const {Message} = require('./models/workers')
 const { Op } = require('sequelize')
 const cors = require('cors')
 const fs = require('fs');
