@@ -3,7 +3,7 @@ const route = new Router()
 const userController = require('../controllers/userController')
 const authMiddleware = require('../middleware/authMiddleware')
 const { newMessage, delMessage, getMessages, getLastMessages, getAllMessages, getCountMessages, newCountMessage } = require('../controllers/messageController')
-const { newConversation, getConversation } = require('../controllers/conversationController')
+const { newConversation, getConversation, getConversations } = require('../controllers/conversationController')
 const { addUser, getUsers, getUser, editUser, editUserAvatar} = require('../controllers/userbotController')
 const { newDistribution, 
     getDistributions, 
@@ -55,6 +55,7 @@ route.get('/message/count/add/:count', newCountMessage)
 
 route.post('/conversation/add', newConversation)
 route.get('/conversation/get/:id', getConversation)
+route.get('/conversations/get', getConversations)
 
 //route.post('/userbots/add', addUser)
 route.get('/userbots/get', getUsers)
