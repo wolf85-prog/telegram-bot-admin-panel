@@ -1,7 +1,8 @@
 require('dotenv').config()
 const express = require('express')
 const sequelize = require('./db')
-const {Plan, Distributionw, Pretendent} = require('./models/models')
+const {Plan, Distributionw, Conversation, Message} = require('./models/models')
+const { Op } = require('sequelize')
 const cors = require('cors')
 const fs = require('fs');
 const https = require('https')
@@ -9,18 +10,24 @@ const Route = require('./routes/route')
 const errorHandler = require('./middleware/ErrorHandling')
 const path = require('path')
 const bodyParser = require("body-parser");
+const getConversation = require("./common/getConversation");
 //планировщик
 const cron = require('node-cron');
 
 //fetch api
 const fetch = require('node-fetch');
 
+//socket.io
+const {io} = require("socket.io-client")
+const socketUrl = process.env.SOCKET_APP_URL
+
 let tasks = []
 
 // Port that the webserver listens to
 const port = process.env.PORT || 5000;
-const host_api_bottest = process.env.BOTTEST_API_URL
 const token = process.env.TELEGRAM_API_TOKEN_WORK
+const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
+const host = process.env.HOST
 
 const app = express();
 
@@ -122,6 +129,35 @@ const getDistributionsPlan = async() => {
             const timerId = setTimeout(() => {
                 objPlan.users.map(async (user, ind) => {
                     console.log("Пользователю ID: " + user + " сообщение " + item.text + " отправлено!")
+
+                    //let conversationId = await getConversation(user)
+                    let  conversation_id  
+
+                    //найти беседу
+                    const conversation = await Conversation.findOne({
+                        where: {
+                            members: {
+                                [Op.contains]: [user]
+                            }
+                        },
+                    }) 
+
+                     //если нет беседы, то создать 
+                    if (!conversation) {
+                        const conv = await Conversation.create(
+                        {
+                            members: [user, chatAdminId],
+                        })
+                        console.log("Беседа успешно создана: ", conv) 
+                        console.log("conversationId: ", conv.id)
+                        
+                        conversation_id = conv.id
+                    } else {
+                        console.log('Беседа уже создана в БД')  
+                        console.log("conversationId: ", conversation.id)  
+                        
+                        conversation_id = conversation.id
+                    }
 
                     //получить план из БД
                     const plan = await Plan.findOne({
@@ -229,36 +265,36 @@ const getDistributionsPlan = async() => {
                         message = {
                             senderId: chatAdminId, 
                             receiverId: user,
-                            conversationId: client.conversationId,
+                            conversationId: conversation_id,
                             type: "text",
                             text: text,
                             is_bot: true,
-                            messageId: sendTextToTelegram.data.result.message_id,
+                            messageId: sendToTelegram.data.result.message_id,
                             buttons: '',
                         }
                     } else {
                         message = {
                             senderId: chatAdminId, 
                             receiverId: user,
-                            conversationId: client.conversationId,
+                            conversationId: conversation_id,
                             type: "image",
-                            text: host + image,
+                            text: host + item.image,
                             is_bot: true,
                             messageId: sendPhotoToTelegram.data.result.message_id,
-                            buttons: textButton,
+                            buttons: item.textButton,
                         }
                     }
                     console.log("message send: ", message);
 
                     //сохранение сообщения в базе данных wmessage
-                    //await newMessage(message)
+                    await Message.create(message)
 
                     //сохранить в контексте
-                    // if(!file) {
-                    //     addNewMessage2(user, text, 'text', '', client.conversationId, sendTextToTelegram.data.result.message_id);
-                    // } else {
-                    //     addNewMessage2(user, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
-                    // }
+                    if(!item.image) {
+                        addNewMessage2(user, text, 'text', '', conversation_id, sendToTelegram.data.result.message_id);
+                    } else {
+                        addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, sendPhotoToTelegram.data.result.message_id);
+                    }
                 })
             }, milliseconds)
 
@@ -266,6 +302,25 @@ const getDistributionsPlan = async() => {
         } 
     })
 }
+
+//отправить сообщение из админки workhub
+const addNewMessage2 = (userId, message, type, textButton, convId, messageId) => {
+
+    // Подключаемся к серверу socket
+    let socket = io(socketUrl);
+    socket.emit("addUser", chatId)
+      
+    //отправить сообщение в админку
+	socket.emit("sendAdminSpec", { 
+		senderId: chatAdminId,
+		receiverId: userId,
+		text: message,
+		type: type,
+		buttons: textButton,
+		convId: convId,
+		messageId,
+	})
+};
 
 const start = async () => {
     try {

@@ -156,6 +156,7 @@ const DistributionAddW = () => {
       let projects = await getProjects3();
       console.log("Загрузка проектов из БД ...")
       console.log("projects planer: ", projects)
+      console.log("clients: ", clients)
 
       setProjects(projects) 
     
