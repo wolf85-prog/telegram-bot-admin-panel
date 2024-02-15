@@ -866,7 +866,7 @@ const fetchAdminSpec = (data) => {
 		let userIndex = userWorkers.findIndex((user) => user.chatId === receiverId.toString());
 		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
 		const newMsgObject = {
-			date: !isBot ? new Date().toLocaleDateString() : '2000-01-01T00:00:00',
+			date: new Date().toLocaleDateString(),
 			content: text,
 			image: type === 'image' ? true : false,
 			descript: buttons ? buttons : '',
