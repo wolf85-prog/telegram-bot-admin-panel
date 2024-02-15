@@ -309,7 +309,7 @@ const addNewMessage2 = (userId, message, type, textButton, convId, messageId) =>
 
     // Подключаемся к серверу socket
     let socket = io(socketUrl);
-    socket.emit("addUser", chatId)
+    socket.emit("addUser", userId)
       
     //отправить сообщение в админку
 	socket.emit("sendAdminSpec", { 
