@@ -122,7 +122,7 @@ io.on("connection", (socket) => {
     })
 
     //send and get message
-    socket.on("sendAdminSpec", ({senderId, receiverId, text, type, buttons, convId, messageId})=>{
+    socket.on("sendAdminSpec", ({senderId, receiverId, text, type, buttons, convId, messageId, isBot})=>{
         io.emit("getAdminSpec", {
             senderId,
             receiverId,
@@ -131,6 +131,7 @@ io.on("connection", (socket) => {
             buttons,
             convId,
             messageId,
+            isBot,
         })
     })
 
