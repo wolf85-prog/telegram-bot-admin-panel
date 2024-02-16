@@ -106,7 +106,7 @@ const DistributionAddW = () => {
   const [showNameProject, setShowNameProject] = useState(true);
   const [sendToAdmin, setSendToAdmin] = useState(true);
   const [textButton, setTextButton] = useState('');
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(0);
   const [filePreview, setFilePreview] = useState();
   const [value, setValue] = useState("");
   const [image, setImage]= useState("");
@@ -1123,8 +1123,17 @@ const delCategory7 = (category) => {
 
       
       selected.map(async (user, index) => {      
-        setTimeout(async()=> { 
+        //setTimeout(async()=> { 
           console.log(index + " Пользователю ID: " + user + " сообщение отправлено!")
+
+          //информация об отправке
+          setCountSend(index)
+          
+          if (index === selected.length - 1) {
+            setShowSend(false)
+            setVisible(true)
+          }
+
 
           let client = clients.filter((client) => client.chatId === user)[0];
           
@@ -1167,15 +1176,16 @@ const delCategory7 = (category) => {
           let sendTextToTelegram
           if (text !== '') {
             const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
-            //console.log("url_send_msg: ", url_send_msg)
+            
+            console.log("Отправка текста...")
             sendTextToTelegram = await $host.get(url_send_msg);
 
-            //console.log('sendTextToTelegram: ', sendTextToTelegram)
-
-            if (sendTextToTelegram.data.ok) {
+            if (sendTextToTelegram?.data?.ok) {
               countSuccess = countSuccess + 1
               //обновить бд рассылку
               await editDistributionW2({success: countSuccess}, distrNew.id)
+            } else {
+              console.log("Текстовое сообщение не отправлено!")
             }
           }  
 
@@ -1185,30 +1195,34 @@ const delCategory7 = (category) => {
           const url_send_photo2 = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${host}${image}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
           //console.log("url_send_photo2: ", url_send_photo2)
 
+          console.log("file: ", file)
+
           let sendPhotoToTelegram
           if (file) {
             const form = new FormData();
             form.append("photo", file);
 
             sendPhotoToTelegram = await $host.post(url_send_photo, form);
-            //console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)  
+            console.log('sendPhotoToTelegram1: ', sendPhotoToTelegram)  
 
           } else {         
             sendPhotoToTelegram = await $host.get(url_send_photo2);
-            //console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
+            console.log('sendPhotoToTelegram2: ', sendPhotoToTelegram)
           }
 
-          if (sendPhotoToTelegram.data.ok && text === '') {
+          if (sendPhotoToTelegram?.data?.ok && text === '') {
             countSuccess = countSuccess + 1
 
             //обновить бд рассылку
             await editDistributionW2({success: countSuccess}, distrNew.id)
+          } else {
+            console.log("Картинка не отправлена!")
           }
 
           
           //отправить в админку
           let message = {};
-          if(!file) {
+          if(text !== '') {
               console.log("no file")
                 message = {
                     senderId: chatAdminId, 
@@ -1217,10 +1231,11 @@ const delCategory7 = (category) => {
                     type: "text",
                     text: text,
                     is_bot: true,
-                    messageId: sendTextToTelegram.data.result.message_id,
+                    messageId: sendTextToTelegram?.data?.result?.message_id,
                     buttons: '',
                 }
-          } else {
+          } else if (file) {
+              console.log("file yes")
                 message = {
                     senderId: chatAdminId, 
                     receiverId: user,
@@ -1228,11 +1243,11 @@ const delCategory7 = (category) => {
                     type: "image",
                     text: host + image,
                     is_bot: true,
-                    messageId: sendPhotoToTelegram.data.result.message_id,
+                    messageId: sendPhotoToTelegram?.data?.result?.message_id,
                     buttons: textButton,
                 }
           }
-          //console.log("message send: ", message);
+          console.log("message send: ", message);
 
           //сохранение сообщения в базе данных wmessage
           await newMessage(message)
@@ -1245,16 +1260,10 @@ const delCategory7 = (category) => {
           }
 
           //обновить бд рассылку
-          const res = await editDistributionW2({success: countSuccess}, distrNew.id)
+          await editDistributionW2({success: countSuccess}, distrNew.id)
+ 
 
-          setCountSend(index)
-
-          if (index === selected.length - 1) {
-              setShowSend(false)
-              setVisible(true)
-          }
-
-        }, 500 * ++index)   
+        //}, 500 * ++index)   
 
       })
 

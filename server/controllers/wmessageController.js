@@ -7,9 +7,9 @@ class WmessageController {
 
     //add message
     async newMessageWorker(req, res) {
-        const {conversationId, text, senderId, receiverId, type, messageId, buttons} = req.body
+        const {conversationId, text, senderId, receiverId, type, messageId, buttons, is_bot} = req.body
         try {
-            await Message.create({conversationId, text, senderId, receiverId, type, messageId, buttons})
+            await Message.create({conversationId, text, senderId, receiverId, type, messageId, buttons, is_bot})
             return res.status(200).json("Message has been sent successfully");
         } catch (error) {
             return res.status(500).json(error.message);

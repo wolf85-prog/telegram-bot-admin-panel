@@ -922,6 +922,7 @@ const fetchDelAdminSpec = (data) => {
 
 //отправить сообщение из админки workhub
 const addNewMessage2 = (userId, message, type, textButton, convId, messageId, isBot) => {
+	console.log("isBot: ", isBot)
 
 	socket.emit("sendAdminSpec", { 
 		senderId: chatAdminId,
