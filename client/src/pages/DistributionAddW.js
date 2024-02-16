@@ -1230,7 +1230,7 @@ const delCategory7 = (category) => {
                     conversationId: client.conversationId,
                     type: "text",
                     text: text,
-                    is_bot: true,
+                    isBot: true,
                     messageId: sendTextToTelegram?.data?.result?.message_id,
                     buttons: '',
                 }
@@ -1242,7 +1242,7 @@ const delCategory7 = (category) => {
                     conversationId: client.conversationId,
                     type: "image",
                     text: host + image,
-                    is_bot: true,
+                    isBot: true,
                     messageId: sendPhotoToTelegram?.data?.result?.message_id,
                     buttons: textButton,
                 }
