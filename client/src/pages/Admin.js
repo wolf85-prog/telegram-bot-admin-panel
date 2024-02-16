@@ -105,6 +105,8 @@ const Admin = () => {
 
   const [widthGrafik, setWdthGrafik] = useState(0);
 
+  const [text, setText]= useState("");
+
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
 
@@ -126,6 +128,11 @@ const Admin = () => {
     setWdthGrafik(grafik.current ? grafik.current.offsetWidth - 100 : 0)
   }, [grafik.current]);
 
+
+  useEffect(() => {
+		const filteredData = workers.filter(user=> (user.userfamily+user.username+user.chatId)?.toLowerCase().includes(text.toLowerCase()));
+    setSortWorkers(filteredData);      
+  }, [text]);
 
 
   //get filter workers
@@ -1254,6 +1261,11 @@ const Admin = () => {
                             </CRow>
                             
                             <br/>
+                            <CRow className="mb-3">
+                              <CCol sm={3} >
+                                <CFormInput placeholder="Поиск специалиста..." onChange={(e)=>setText(e.target.value)} aria-label="workers"/>
+                              </CCol>
+                            </CRow>
                             
                             <CRow>
                               <CCol style={{textAlign: 'center'}}>
