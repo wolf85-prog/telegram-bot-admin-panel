@@ -253,7 +253,7 @@ fetchData()
 
 					//получить последнее сообщение (без сообщений из рассылки)
 					messages.map((message) => {
-						if (message.is_bot === false || message.is_bot === null) {
+						if (message.isBot === false || message.isBot === null) {
 							messages2.push(message)
 						}	
 					})

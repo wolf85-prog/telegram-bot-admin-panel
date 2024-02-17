@@ -253,7 +253,7 @@ const Chat = () => {
 					conversationId: user.conversationId,
 					type: "text",
 					text: mess,
-					is_bot: false,
+					isBot: null,
 					messageId: sendToTelegram.data.result.message_id,
 				}
 
@@ -266,7 +266,7 @@ const Chat = () => {
 					conversationId: user.conversationId,
 					type: "image",
 					text: host + image,
-					is_bot: false,
+					isBot: null,
 					messageId: sendToTelegram.data.result.message_id,
 				}
 
