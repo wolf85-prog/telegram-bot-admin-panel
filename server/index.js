@@ -128,14 +128,14 @@ const getDistributionsPlan = async() => {
             }
 
             //сохранить отчет о доставке
-            const addReport = await Reportdistribw.create({
-                date: new Date().toLocaleDateString(),
-                project: item.project,
-                categories: item.receivers,
-                users: '',
-            })
+            // const addReport = await Reportdistribw.create({
+            //     date: new Date().toLocaleDateString(),
+            //     project: item.project,
+            //     categories: item.receivers,
+            //     users: '',
+            // })
 
-            console.log("addReport: ", addReport)
+            // console.log("addReport: ", addReport)
 
             console.log("!!!!Планирую запуск отправки собщения..." + (index+1))
             const timerId = setTimeout(() => {
@@ -272,10 +272,11 @@ const getDistributionsPlan = async() => {
                         }
 
                         //Обновить отчет о доставке
-                        const newDistrib = await Distributionw.update(
-                            { users: arrUsers},
-                            { where: {id: addReport.dataValues.id} }
-                        )
+                        // const newDistrib = await Distributionw.update(
+                        //     { users: arrUsers,
+                        //       buttons: },
+                        //     { where: {id: addReport.dataValues.id} }
+                        // )
                     
                     } catch (error) {
                         console.error(error.message)
@@ -291,6 +292,7 @@ const getDistributionsPlan = async() => {
             
                     const newDistrib = await Distributionw.update(
                         { delivered,
+                          buttons: arrUsers,  
                           success: countSuccess},
                         { where: {id: item.id} }
                     )
