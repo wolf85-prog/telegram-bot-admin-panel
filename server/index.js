@@ -274,7 +274,7 @@ const getDistributionsPlan = async() => {
                         //Обновить отчет о доставке
                         const newDistrib = await Distributionw.update(
                             { users: arrUsers},
-                            { where: {id: addReport.id} }
+                            { where: {id: addReport.dataValues.id} }
                         )
                     
                     } catch (error) {
