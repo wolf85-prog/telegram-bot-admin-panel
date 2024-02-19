@@ -78,15 +78,6 @@ const Distributionw = sequelize.define('distributionw', {
     success: {type: DataTypes.INTEGER}, 
 })
 
-const Reportdistribw = sequelize.define('reportdistribw', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
-    date: {type: DataTypes.STRING},  //дата получения рассылки
-    project: {type: DataTypes.STRING},  //название проекта
-    categories: {type: DataTypes.STRING}, //категории;
-    users: {type: DataTypes.STRING}, //чат-id получателя;   
-    delivered: {type: DataTypes.BOOLEAN}, //доставлено
-})
-
 const Report = sequelize.define('report', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
     name: {type: DataTypes.STRING},  //название проекта
@@ -127,7 +118,6 @@ module.exports = {
     Project, 
     Distribution,
     Distributionw,
-    Reportdistribw,
     Report,
     Pretendent,
     Plan,
