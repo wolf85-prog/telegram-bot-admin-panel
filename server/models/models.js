@@ -74,6 +74,7 @@ const Distributionw = sequelize.define('distributionw', {
     date: {type: DataTypes.STRING},  //дата начала рассылки
     button: {type: DataTypes.STRING}, //текст кнопки;
     users: {type: DataTypes.TEXT},
+    report: {type: DataTypes.TEXT},
     uuid: {type: DataTypes.STRING}, //индекс рассылки;
     success: {type: DataTypes.INTEGER}, 
 })
