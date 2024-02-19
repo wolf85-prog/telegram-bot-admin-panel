@@ -129,7 +129,7 @@ const getDistributionsPlan = async() => {
 
             //сохранить отчет о доставке
             const addReport = await Reportdistribw.create({
-                date: new Date(),
+                date: new Date().toLocaleDateString(),
                 project: item.project,
                 categories: item.receivers,
                 users: '',
