@@ -1101,6 +1101,8 @@ const delCategory7 = (category) => {
       const month = String(d.getMonth()+1).padStart(2, "0");
       const day = String(d.getDate()).padStart(2, "0");
 
+      let arrUsers = []
+
       //новая рассылка
       const message = {
         text: text, 
@@ -1125,6 +1127,7 @@ const delCategory7 = (category) => {
       selected.map(async (user, index) => {      
         //setTimeout(async()=> { 
           console.log(index + " Пользователю ID: " + user + " сообщение отправлено!")
+          arrUsers = []
 
           //информация об отправке
           setCountSend(index)
@@ -1213,9 +1216,20 @@ const delCategory7 = (category) => {
           if (sendPhotoToTelegram?.data?.ok && text === '') {
             countSuccess = countSuccess + 1
 
+            arrUsers.push({
+                user: user,
+                status: 200,
+            })  
+
             //обновить бд рассылку
-            await editDistributionW2({success: countSuccess}, distrNew.id)
+            await editDistributionW2({success: countSuccess, report: JSON.stringify(arrUsers)}, distrNew.id)
+
           } else {
+            arrUsers.push({
+                user: user,
+                status: 500,
+            })
+            await editDistributionW2({success: countSuccess, report: JSON.stringify(arrUsers)}, distrNew.id)
             console.log("Картинка не отправлена!")
           }
 

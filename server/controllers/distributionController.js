@@ -203,11 +203,13 @@ class DistributionController {
                 return;
             }
 
-            const {success} = req.body
+            const {success, report} = req.body
             console.log("success count distrib: ", success)
 
             const newDistrib = await Distributionw.update(
-                { success },
+                { success,
+                  report, 
+                },
                 { where: {id: id} })
             return res.status(200).json(newDistrib);
         } catch (error) {

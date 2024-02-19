@@ -282,7 +282,7 @@ const getDistributionsPlan = async() => {
             
                     const newDistrib = await Distributionw.update(
                         { delivered,
-                          report: JSOB.stringify(arrUsers),  
+                          report: JSON.stringify(arrUsers),  
                           success: countSuccess},
                         { where: {id: item.id} }
                     )
