@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const sequelize = require('./db')
-const {Plan, Distributionw, } = require('./models/models')
+const {Plan, Distributionw, Reportdistribw} = require('./models/models')
 const {Message, Conversation} = require('./models/workers')
 const { Op } = require('sequelize')
 const cors = require('cors')
@@ -110,6 +110,7 @@ const getDistributionsPlan = async() => {
         const chas = d.getHours();
         const minut = String(d.getMinutes()).padStart(2, "0");
         const date2 = `${day}.${month}.${year}`
+        let arrUsers = []
 
         const milliseconds = Math.floor(new Date(date1) - new Date(dateNow));       
         console.log("milliseconds: ", milliseconds)
@@ -126,11 +127,21 @@ const getDistributionsPlan = async() => {
                 uuid: item.uuid     
             }
 
+            //сохранить отчет о доставке
+            const addReport = await Reportdistribw.create({
+                date: new Date(),
+                project: item.project,
+                categories: item.receivers,
+                users: '',
+            })
+
+            console.log("addReport: ", addReport)
+
             console.log("!!!!Планирую запуск отправки собщения..." + (index+1))
             const timerId = setTimeout(() => {
                 objPlan.users.map(async (user, ind) => {
                     console.log("Пользователю ID: " + user + " сообщение " + item.text + " отправлено!")
-
+                    arrUsers = []
                     //let conversationId = await getConversation(user)
                     let  conversation_id  
                     let sendToTelegram
@@ -224,7 +235,17 @@ const getDistributionsPlan = async() => {
                             const { status } = sendToTelegram;
 
                             if (status === 200 && item.text === '') {
-                                countSuccess = countSuccess + 1            
+                                countSuccess = countSuccess + 1 
+                                
+                                arrUsers.push({
+                                    user: user,
+                                    status: 200,
+                                })           
+                            } else {
+                                arrUsers.push({
+                                    user: user,
+                                    status: 500,
+                                })
                             }
                         }
 
@@ -237,8 +258,24 @@ const getDistributionsPlan = async() => {
                         const { status } = sendPhotoToTelegram;
 
                         if (status === 200 && item.text === '') {
-                            countSuccess = countSuccess + 1            
+                            countSuccess = countSuccess + 1  
+                            
+                            arrUsers.push({
+                                user: user,
+                                status: 200,
+                            })
+                        } else {
+                            arrUsers.push({
+                                user: user,
+                                status: 500,
+                            })
                         }
+
+                        //Обновить отчет о доставке
+                        const newDistrib = await Distributionw.update(
+                            { users: arrUsers},
+                            { where: {id: addReport.id} }
+                        )
                     
                     } catch (error) {
                         console.error(error.message)
