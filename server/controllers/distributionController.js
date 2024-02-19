@@ -205,6 +205,7 @@ class DistributionController {
 
             const {success, report} = req.body
             console.log("success count distrib: ", success)
+            console.log("report: ", report)
 
             const newDistrib = await Distributionw.update(
                 { success,
