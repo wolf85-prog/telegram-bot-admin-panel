@@ -234,7 +234,7 @@ const getDistributionsPlan = async() => {
 
                             const { status } = sendToTelegram;
 
-                            if (status === 200 && item.text === '') {
+                            if (status === 200) {
                                 countSuccess = countSuccess + 1 
                                 
                                 arrUsers.push({
