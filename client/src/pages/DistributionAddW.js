@@ -1127,7 +1127,7 @@ const delCategory7 = (category) => {
       selected.map(async (user, index) => {      
         //setTimeout(async()=> { 
           console.log(index + " Пользователю ID: " + user + " сообщение отправлено!")
-          arrUsers = []
+          //arrUsers = []
 
           //информация об отправке
           setCountSend(index)
@@ -1173,7 +1173,12 @@ const delCategory7 = (category) => {
               ]
             });
           }
-          
+
+          //по-умолчанию пока сообщение не отправлено
+          arrUsers.push({
+            user: user,
+            status: 500,
+          })        
 
           //отправить в телеграмм
           let sendTextToTelegram
@@ -1185,8 +1190,12 @@ const delCategory7 = (category) => {
 
             if (sendTextToTelegram?.data?.ok) {
               countSuccess = countSuccess + 1
+
+              //обновить статус доставки
+              arrUsers[index].status = 200  
+
               //обновить бд рассылку
-              await editDistributionW2({success: countSuccess}, distrNew.id)
+              await editDistributionW2({success: countSuccess, report: JSON.stringify(arrUsers)}, distrNew.id)
             } else {
               console.log("Текстовое сообщение не отправлено!")
             }
@@ -1215,23 +1224,13 @@ const delCategory7 = (category) => {
 
           if (sendPhotoToTelegram?.data?.ok && text === '') {
             countSuccess = countSuccess + 1
+ 
+            //обновить статус доставки
+            arrUsers[index].status = 200  
 
-            arrUsers.push({
-                user: user,
-                status: 200,
-            })  
-
-            //обновить бд рассылку
+             //обновить бд рассылку
             await editDistributionW2({success: countSuccess, report: JSON.stringify(arrUsers)}, distrNew.id)
-
-          } else {
-            arrUsers.push({
-                user: user,
-                status: 500,
-            })
-            await editDistributionW2({success: countSuccess, report: JSON.stringify(arrUsers)}, distrNew.id)
-            console.log("Картинка не отправлена!")
-          }
+          } 
 
           
           //отправить в админку
