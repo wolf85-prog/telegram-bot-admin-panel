@@ -88,7 +88,7 @@ const Report = sequelize.define('report', {
     delivered: {type: DataTypes.BOOLEAN}, //доставлено
 })
 
-const SoundNotif = sequelize.define('soundnotif', {
+const SoundNotif = sequelize.define('soundnotifs', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
     name: {type: DataTypes.STRING},  //название проекта
     text: {type: DataTypes.STRING}, //текст сообщения;
