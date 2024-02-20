@@ -25,8 +25,9 @@ class ReportController {
 
     async getSoundNotif(req, res) {
         try {
-            const users = await SoundNotif.findAll()
-            return res.status(200).json(users);
+            console.log("start get notif")
+            const notifs = await SoundNotif.findAll()
+            return res.status(200).json(notifs);
         } catch (error) {
             return res.status(500).json(error.message);
         }
