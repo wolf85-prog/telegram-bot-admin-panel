@@ -27,7 +27,7 @@ class PretendentController {
             //console.log("Кол-во претендентов: ", count)
 
             const spec = await Pretendent.findAll({
-                where: {receiverId, accept: true },
+                //where: {receiverId, accept: true },
                 // Add order conditions here....
                 order: [
                     ['updatedAt', 'ASC'], //DESC
