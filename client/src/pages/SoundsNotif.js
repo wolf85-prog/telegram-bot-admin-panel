@@ -45,7 +45,9 @@ const SoundsNotif = () => {
       const fetchData = async() => {
 
         let notifs = await getSoundNotif()
-        console.log("notifs: ", notifs)    
+        console.log("notifs: ", notifs) 
+
+        setSoundNotif(notifs)  
 
       }
       
@@ -65,13 +67,13 @@ const SoundsNotif = () => {
                   <h2>Звуковые уведомления</h2>
 
                   <CCard>
-                    <CCardHeader>Header</CCardHeader>
+                    <CCardHeader>Журнал</CCardHeader>
                     <CCardBody>
-                      <CCardTitle>Special title treatment</CCardTitle>
+                      {/* <CCardTitle>Special title treatment</CCardTitle> */}
                       <CTable>
                         <CTableHead>
                           <CTableRow>
-                            <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">№</CTableHeaderCell>
                             <CTableHeaderCell scope="col">Дата</CTableHeaderCell>
                             <CTableHeaderCell scope="col">Проект</CTableHeaderCell>
                             <CTableHeaderCell scope="col">Оповещение</CTableHeaderCell>
@@ -79,13 +81,13 @@ const SoundsNotif = () => {
                           </CTableRow>
                         </CTableHead>
                         <CTableBody>
-                        {sortWorkers.map((item, index) => (
-                          <CTableRow>
-                            <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                            <CTableDataCell>Mark</CTableDataCell>
-                            <CTableDataCell>Otto</CTableDataCell>
-                            <CTableDataCell>@mdo</CTableDataCell>
-                            <CTableDataCell>@mdo</CTableDataCell>
+                        {soundNotif.map((item, index) => (
+                          <CTableRow key={index}>
+                            <CTableHeaderCell scope="row">{index+1}</CTableHeaderCell>
+                            <CTableDataCell>{item.date}</CTableDataCell>
+                            <CTableDataCell>{item.name}</CTableDataCell>
+                            <CTableDataCell>{item.text}</CTableDataCell>
+                            <CTableDataCell>{item.delivered ? "Запланировано" : "Прошло"}</CTableDataCell>
                           </CTableRow>
                          ))
                         } 
