@@ -1,8 +1,33 @@
 import React, { Suspense, useEffect, useState, useContext } from 'react'
-import { CContainer, CSpinner, CNav, CNavLink, CNavItem } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
+import { getSoundNotif } from './../http/adminAPI.js'
+
+import {
+  CContainer, 
+  CSpinner,
+  CAvatar,
+  CCard,
+  CCardBody,
+  CCardHeader,
+  CCardTitle,
+  CCardText,
+  CNav,
+  CNavItem,
+  CNavLink,
+  CFormInput,
+  CButton,
+  CCol,
+  CProgress,
+  CRow,
+  CTable,
+  CTableBody,
+  CTableDataCell,
+  CTableHead,
+  CTableHeaderCell,
+  CTableRow,
+} from '@coreui/react'
 
 // routes config
 import routes from '../routes'
@@ -10,6 +35,23 @@ import routes from '../routes'
 const SoundsNotif = () => {  
 
   const { soundsNotif } = useUsersContext();
+
+  const [soundNotif, setSoundNotif] = useState([]); 
+
+    //get Contacts
+    useEffect(() => {
+      //const arrClients = []
+  
+      const fetchData = async() => {
+
+        let notifs = await getSoundNotif()
+        console.log("notifs: ", notifs)    
+
+      }
+      
+      fetchData();
+      
+    }, []);
 
   return (
     <div className='dark-theme'>
@@ -21,6 +63,36 @@ const SoundsNotif = () => {
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
                   <h2>Звуковые уведомления</h2>
+
+                  <CCard>
+                    <CCardHeader>Header</CCardHeader>
+                    <CCardBody>
+                      <CCardTitle>Special title treatment</CCardTitle>
+                      <CTable>
+                        <CTableHead>
+                          <CTableRow>
+                            <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Дата</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Проект</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Оповещение</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Статус</CTableHeaderCell>
+                          </CTableRow>
+                        </CTableHead>
+                        <CTableBody>
+                        {sortWorkers.map((item, index) => (
+                          <CTableRow>
+                            <CTableHeaderCell scope="row">1</CTableHeaderCell>
+                            <CTableDataCell>Mark</CTableDataCell>
+                            <CTableDataCell>Otto</CTableDataCell>
+                            <CTableDataCell>@mdo</CTableDataCell>
+                            <CTableDataCell>@mdo</CTableDataCell>
+                          </CTableRow>
+                         ))
+                        } 
+                        </CTableBody>
+                      </CTable>
+                    </CCardBody>
+                  </CCard>
                   
                   {soundsNotif.map((item, index) => (
                       <p key={index}>- {item}</p>

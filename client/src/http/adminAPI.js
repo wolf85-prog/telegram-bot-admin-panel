@@ -367,3 +367,14 @@ export const newCountMessage = async (count) =>{
         console.log("error while calling newCountMessage api",error.message);
     }
 }
+
+//notif
+export const getSoundNotif = async()=>{
+    try {
+        let response = await $host.get('api/soundnotif/get');
+        //console.log(response);
+        return response.data;
+     } catch (error) {
+         console.log("error while calling getDistributionsW api", error.message);
+     }
+}

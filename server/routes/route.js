@@ -21,7 +21,7 @@ const { newDistribution,
     editDistribW2,
     editDistribWPlan,
 } = require('../controllers/distributionController')
-const { getReports, getReportsId } = require('../controllers/reportController')
+const { getReports, getReportsId, getSoundNotif } = require('../controllers/reportController')
 const { getProjects, getProjectsId } = require('../controllers/projectController')
 const { uploadFile, getImage, sendNarush } = require( "../controllers/fileController.js")
 
@@ -77,6 +77,9 @@ route.post('/distributionsw/delete', delDistributionWPlan)
 route.patch('/distributionsw/update/:id', editDistribW)
 route.patch('/distributionsw2/update/:id', editDistribW2)
 route.post('/distributionsw/plan/update', editDistribWPlan)
+
+//----------------SOUND NOTIFICATIONS--------------------------------
+route.get('/soundnotif/get', getSoundNotif)
 
 route.get('/reports/get', getReports)
 route.get('/reports/get/:id', getReportsId)

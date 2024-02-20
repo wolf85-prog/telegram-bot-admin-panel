@@ -1,4 +1,4 @@
-const Report = require('../models/models')
+const {Report, SoundNotif} = require('../models/models')
 const ApiError = require('../error/ApiError')
 
 class ReportController {
@@ -19,6 +19,16 @@ class ReportController {
             return res.status(200).json(reports);
         } catch (err) {
             return res.status(500).json(err);
+        }
+    }
+
+
+    async getSoundNotif(req, res) {
+        try {
+            const users = await SoundNotif.findAll()
+            return res.status(200).json(users);
+        } catch (error) {
+            return res.status(500).json(error.message);
         }
     }
 }

@@ -88,6 +88,14 @@ const Report = sequelize.define('report', {
     delivered: {type: DataTypes.BOOLEAN}, //доставлено
 })
 
+const SoundNotif = sequelize.define('soundnotif', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    name: {type: DataTypes.STRING},  //название проекта
+    text: {type: DataTypes.STRING}, //текст сообщения;
+    date: {type: DataTypes.STRING},  //дата отправки отчета
+    delivered: {type: DataTypes.BOOLEAN}, //доставлено
+})
+
 const Pretendent = sequelize.define('pretendent', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
     projectId: {type: DataTypes.STRING},  //id проекта
@@ -120,6 +128,7 @@ module.exports = {
     Distribution,
     Distributionw,
     Report,
+    SoundNotif,
     Pretendent,
     Plan,
     CountMessage
