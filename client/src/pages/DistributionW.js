@@ -18,7 +18,12 @@ import {
   CToast,
   CToastBody,
   CToaster,
-  CToastClose
+  CToastClose,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter
 } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
@@ -28,11 +33,17 @@ import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { delDistributionW, getPlan, newPlan } from 'src/http/adminAPI';
 
 const DistributionW = () => {
-  const { distributionsWork: messages, addNewDistrib } = useUsersContext();
+  const { distributionsWork: messages, addNewDistrib, workers } = useUsersContext();
   const [distributionsWork, setDistributionsWork]= useState([]);
+  const [userReceivers, setUserReceivers]= useState([]);
   const [loading, setLoading]= useState(true);
   const [proj, setProj] = useState('');
   const [seconds, setSeconds] = useState(1);
+
+  const [visibleModal, setVisibleModal] = useState(false);
+
+  const [count, setCount] = useState(0)
+  const [count2, setCount2] = useState(0)
 
   const [toast, addToast] = useState(0)
   const toaster = useRef()
@@ -77,6 +88,7 @@ const DistributionW = () => {
           status: distrib.delivered ? "отправлено" : "запланировано",
           uuid: distrib.uuid,
           success: distrib.success,
+          report: distrib.report,
 				}
         arrDitributions.push(newDistribution)
       })
@@ -128,6 +140,33 @@ const DistributionW = () => {
     }
 
     await newPlan(newObj)
+  }
+
+  const showReceivers = (users) => {
+    console.log(workers)
+
+    setVisibleModal(true)
+    let count = 0
+    let count2 = 0
+    let arrReceiver = []
+    JSON.parse(users).map((item, index)=> {
+      if (item.status === 200) {
+        count++
+      } else {
+        count2++
+      }
+      const worker = workers.find((i)=> i.chatId === item.user)
+      const obj = {
+        user: item.user,
+        status: item.status,
+        fio: worker.userfamily + " " + worker.username,
+      }
+      arrReceiver.push(obj)
+    })
+    setCount(count)
+    setCount2(count2)
+    setUserReceivers(arrReceiver)
+    //console.log(JSON.stringify(users))
   }
 
 
@@ -194,7 +233,7 @@ const DistributionW = () => {
                                       <CTableDataCell className="text-center">
                                         <div dangerouslySetInnerHTML={{__html: item.receivers}} />
                                       </CTableDataCell>
-                                      <CTableDataCell className="text-center">
+                                      <CTableDataCell className="text-center" onClick={()=>showReceivers(item.report)} style={{cursor: 'pointer'}}>
                                         {
                                           item.status === 'запланировано' ? 
                                           <div style={{color: '#3887cd'}}>{item.count}</div>
@@ -232,6 +271,39 @@ const DistributionW = () => {
                             }                              
                             </CCardBody>
                           </CCard>
+
+                                        <CModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
+                                          <CModalHeader>
+                                            <CModalTitle>Получатели рассылки</CModalTitle>
+                                          </CModalHeader>
+                                          <CModalBody>
+                                            <CTable align="middle" className="mb-0" responsive style={{color: '#ffffff'}}>
+                                              <CTableHead className='table-dark'>
+                                                <CTableRow>
+                                                  <CTableHeaderCell scope="col">№</CTableHeaderCell>
+                                                  <CTableHeaderCell scope="col">TelegramId</CTableHeaderCell>
+                                                  <CTableHeaderCell scope="col">ФИО</CTableHeaderCell>
+                                                  <CTableHeaderCell scope="col">Статус</CTableHeaderCell>
+                                                </CTableRow>
+                                              </CTableHead>
+                                              <CTableBody>
+                                              {userReceivers.map((item, index) => (
+                                                <CTableRow key={index}>
+                                                  <CTableHeaderCell scope="row">{index+1}</CTableHeaderCell>
+                                                  <CTableDataCell>{item.user}</CTableDataCell>
+                                                  <CTableDataCell>{item.fio}</CTableDataCell>
+                                                  <CTableDataCell style={{color: item.status === 200 ? '#7070e7' : 'red'}}>{item.status === 200 ? "Получено" : "Не получено"}</CTableDataCell>
+                                                </CTableRow> 
+                                              ))
+                                              }   
+                                              </CTableBody>
+                                            </CTable>
+                                            <p>Получено: {count} Не получено: {count2}</p>  
+                                          </CModalBody>
+                                          <CModalFooter>
+                                            <CButton color="primary" onClick={() => setVisibleModal(false)}>ОК</CButton>
+                                          </CModalFooter>
+                                        </CModal>
                         </CCol>
                       </CRow>
                   </>
