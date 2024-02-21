@@ -84,7 +84,7 @@ const SoundsNotif = () => {
                         {soundNotif.map((item, index) => (
                           <CTableRow key={index}>
                             <CTableHeaderCell scope="row">{index+1}</CTableHeaderCell>
-                            <CTableDataCell>{item.date}</CTableDataCell>
+                            <CTableDataCell>{new Date(parseInt(item.date)).toLocaleDateString()} {new Date(parseInt(item.date)).toLocaleTimeString().split(':')[0]}:{new Date(parseInt(item.date)).toLocaleTimeString().split(':')[1]}</CTableDataCell>
                             <CTableDataCell>{item.name}</CTableDataCell>
                             <CTableDataCell>{item.text}</CTableDataCell>
                             <CTableDataCell>{item.delivered ? "Запланировано" : "Прошло"}</CTableDataCell>
