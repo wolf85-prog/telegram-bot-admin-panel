@@ -23,7 +23,8 @@ import {
   CModalHeader,
   CModalTitle,
   CModalBody,
-  CModalFooter
+  CModalFooter,
+  CFormInput
 } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
@@ -36,11 +37,14 @@ const DistributionW = () => {
   const { distributionsWork: messages, addNewDistrib, workers } = useUsersContext();
   const [distributionsWork, setDistributionsWork]= useState([]);
   const [userReceivers, setUserReceivers]= useState([]);
+  const [users, setUsers]= useState([]);
   const [loading, setLoading]= useState(true);
   const [proj, setProj] = useState('');
   const [seconds, setSeconds] = useState(1);
 
   const [visibleModal, setVisibleModal] = useState(false);
+
+  const [text, setText]= useState("");
 
   const [count, setCount] = useState(0)
   const [count2, setCount2] = useState(0)
@@ -159,15 +163,25 @@ const DistributionW = () => {
       const obj = {
         user: item.user,
         status: item.status,
-        fio: worker.userfamily + " " + worker.username,
+        userfamily: worker.userfamily,
+        username: worker.username,
       }
       arrReceiver.push(obj)
     })
     setCount(count)
     setCount2(count2)
     setUserReceivers(arrReceiver)
+    setUsers(arrReceiver)
     //console.log(JSON.stringify(users))
   }
+
+
+  //поиск
+  useEffect(() => {
+    console.log("users: ", users)
+		const filteredData = users.filter(user=> (user.userfamily+user.username+user.user)?.toLowerCase().includes(text.toLowerCase()));
+    setUserReceivers(filteredData);      
+  }, [text, users]);
 
 
   return (
@@ -277,6 +291,11 @@ const DistributionW = () => {
                                             <CModalTitle>Получатели рассылки</CModalTitle>
                                           </CModalHeader>
                                           <CModalBody>
+                                            <CRow className="mb-3">
+                                              <CCol sm={12} >
+                                                <CFormInput placeholder="Поиск..." onChange={(e)=>setText(e.target.value)} aria-label="spec"/>
+                                              </CCol>
+                                            </CRow>
                                             <CTable align="middle" className="mb-0" responsive style={{color: '#ffffff'}}>
                                               <CTableHead className='table-dark'>
                                                 <CTableRow>
@@ -291,7 +310,7 @@ const DistributionW = () => {
                                                 <CTableRow key={index}>
                                                   <CTableHeaderCell scope="row">{index+1}</CTableHeaderCell>
                                                   <CTableDataCell>{item.user}</CTableDataCell>
-                                                  <CTableDataCell>{item.fio}</CTableDataCell>
+                                                  <CTableDataCell>{item.userfamily} {item.username}</CTableDataCell>
                                                   <CTableDataCell style={{color: item.status === 200 ? '#7070e7' : 'red'}}>{item.status === 200 ? "Получено" : "Не получено"}</CTableDataCell>
                                                 </CTableRow> 
                                               ))
