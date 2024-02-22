@@ -165,6 +165,7 @@ const DistributionW = () => {
         status: item.status,
         userfamily: worker.userfamily,
         username: worker.username,
+        categories: worker.worklist,
       }
       arrReceiver.push(obj)
     })
@@ -300,8 +301,9 @@ const DistributionW = () => {
                                               <CTableHead className='table-dark'>
                                                 <CTableRow>
                                                   <CTableHeaderCell scope="col">№</CTableHeaderCell>
-                                                  <CTableHeaderCell scope="col">TelegramId</CTableHeaderCell>
+                                                  <CTableHeaderCell scope="col">TelegramID</CTableHeaderCell>
                                                   <CTableHeaderCell scope="col">ФИО</CTableHeaderCell>
+                                                  <CTableHeaderCell scope="col" style={{width: '100px'}}>Категории</CTableHeaderCell>
                                                   <CTableHeaderCell scope="col">Статус</CTableHeaderCell>
                                                 </CTableRow>
                                               </CTableHead>
@@ -311,13 +313,14 @@ const DistributionW = () => {
                                                   <CTableHeaderCell scope="row">{index+1}</CTableHeaderCell>
                                                   <CTableDataCell>{item.user}</CTableDataCell>
                                                   <CTableDataCell>{item.userfamily} {item.username}</CTableDataCell>
+                                                  <CTableDataCell style={{fontSize: '11px'}}>{JSON.parse(item.categories).map(it=>"- "+it.spec).join('\n')}</CTableDataCell>
                                                   <CTableDataCell style={{color: item.status === 200 ? '#7070e7' : 'red'}}>{item.status === 200 ? "Получено" : "Не получено"}</CTableDataCell>
                                                 </CTableRow> 
                                               ))
                                               }   
                                               </CTableBody>
                                             </CTable>
-                                            <p>Получено: {count} Не получено: {count2}</p>  
+                                            <p style={{display: 'flex', justifyContent: 'space-between'}}><span>Получено: {count}</span> <span>Не получено: {count2}</span></p>  
                                           </CModalBody>
                                           <CModalFooter>
                                             <CButton color="primary" onClick={() => setVisibleModal(false)}>ОК</CButton>
