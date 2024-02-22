@@ -11,8 +11,10 @@ import { getDistributions,
 	getProjectsApi, 
 	getCompanys,
 	getCountMessage, 
-	getWorkerId
+	getWorkerId,
+	getProjects3,
 } from "src/http/adminAPI";
+
 import boopSfx from './../assets/sounds/zvuk-icq.mp3';
 import soundProject from './../assets/sounds/project_new2.mp3';
 import soundSmeta from './../assets/sounds/predvarit_smeta2.mp3';
@@ -434,6 +436,78 @@ fetchData()
 	  	fetchData();
 
 	},[])
+
+//-----------------------------------------------------------------------------------------
+
+//get pretendents
+useEffect(() => {
+    const arrWorkers = []
+
+    setCountPretendent(0)
+
+    const fetchData = async () => {
+
+      let pretendents = await getAllPretendent();
+      console.log("pretendents: ", pretendents)
+
+      let workers = await getWorkers()
+      //console.log("workers: ", workers)
+
+      let projects = await getProjects3();
+      //console.log("projects: ", projects)
+
+      setProjects(projects) 
+
+      pretendents.map(async (worker, i) => {
+
+        let userObject = projects.find((proj) => proj.id === worker.projectId);  
+        const projectName = userObject?.name
+
+        let userObject2 = workers.find((item) => item.chatId === worker.receiverId);  
+        const workerName = userObject2?.userfamily + " "+ userObject2?.username
+  
+        const worklist = userObject2?.worklist ? JSON.parse(userObject2?.worklist) : ''
+        const rang = userObject2?.rank ? userObject2?.rank : ''
+        const comment = userObject2?.comment ? userObject2?.comment : ''
+        const phone = userObject2?.phone
+
+        const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+        const d2 = new Date(d)
+
+        const month = String(d2.getMonth()+1).padStart(2, "0");
+        const day = String(d2.getDate()).padStart(2, "0");
+        const chas = d2.getHours();
+        const min = String(d2.getMinutes()).padStart(2, "0");
+        
+        const newDate = `${day}.${month} ${chas}:${min}`;
+
+        //const workNotions = await getWorkerNotionId(worker.receiverId)
+      
+        //worklist
+        const newWorker = {
+          date: newDate, //newDate,
+          project: projectName,
+          //worker: workerName, 
+          workerFamily: userObject2?.userfamily,
+          workerName: userObject2?.username,
+          worklist: worklist, //workNotions[0].spec,
+          rang: rang, //workNotions[0]?.rank,
+          comment: comment, //workNotions[0]?.comment,
+          phone: phone, //workNotions[0]?.phone,
+        }
+        arrWorkers.push(newWorker)
+		//console.log(newWorker)
+
+        setPretendents(arrWorkers)
+
+        //setLoading(false)
+        
+      })  
+    }
+
+    fetchData();
+    
+  },[])
 //------------------------------------------------------------------------------------------
 	//подключение админа к сокету и вывод всех подключенных
 	useEffect(()=>{
@@ -861,7 +935,7 @@ const fetchAdminSpec = (data) => {
 	setUserWorkers((userWorkers) => {
 		const { senderId, receiverId, text, type, buttons, messageId, isBot } = data;
 
-		console.log("is_bot: ", isBot)
+		//console.log("is_bot: ", isBot)
 
 		let userIndex = userWorkers.findIndex((user) => user.chatId === receiverId.toString());
 		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
@@ -886,7 +960,12 @@ const fetchAdminSpec = (data) => {
 		}
 		
 		const userObject = usersCopy[userIndex];
-		usersCopy[userIndex] = { ...userObject, ['date']: new Date(), ['message']: newMsgObject.content};
+		if (isBot) {
+			usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
+		} else {
+			usersCopy[userIndex] = { ...userObject, ['date']: new Date(), ['message']: newMsgObject.content};
+		}
+		
 
 		//сортировка
 		const userSort = [...usersCopy].sort((a, b) => {       
@@ -1058,7 +1137,8 @@ const fetchNotifAdmin = (data) => {
 			countPretendent, 
 			setCountPretendent,
 			soundsNotif, 
-			setSoundsNotif
+			setSoundsNotif,
+			pretendents
 		}}>
 			{children}
 		</UsersContext.Provider>

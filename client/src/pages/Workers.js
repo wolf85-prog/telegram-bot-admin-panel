@@ -20,11 +20,6 @@ import {
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
-import { 
-  getWorkerId, 
-  getProjects3, 
-  newPretendent 
-} from './../http/adminAPI';
 import { getAllPretendent, getWorkers, getWorkersNotion100, getWorkersNotion, getWorkerNotionId } from './../http/workerAPI'
 
 
@@ -33,10 +28,11 @@ const Workers = () => {
 
   //const { pretendents } = useUsersContext();
   //const { projects } = useUsersContext();
-  const { setCountPretendent } = useUsersContext();
+  const { setCountPretendent, pretendents } = useUsersContext();
 
   const [projects, setProjects] = useState([]); 
   const [spec, setSpec] = useState([]); 
+
   const [pending, setPending] = useState(true);  
 
   const [loading, setLoading]= useState(true);
@@ -45,77 +41,17 @@ const Workers = () => {
 
   const [showTable, setShowTable] = useState([])
 
-  //get pretendents
-  useEffect(() => {
-    const arrWorkers = []
+  const [text, setText]= useState("");
 
-    setCountPretendent(0)
-
-    const fetchData = async () => {
-
-      let pretendents = await getAllPretendent();
-      console.log("pretendents: ", pretendents)
-
-      let workers = await getWorkers()
-      console.log("workers: ", workers)
-
-
-      //let workersN = await getWorkersNotion()
-      //console.log("workersN: ", workersN)
-
-      let projects = await getProjects3();
-      console.log("projects: ", projects)
-
-      setProjects(projects) 
-
-      pretendents.map(async (worker, i) => {
-
-        let userObject = projects.find((proj) => proj.id === worker.projectId);  
-        const projectName = userObject?.name
-
-        let userObject2 = workers.find((item) => item.chatId === worker.receiverId);  
-        const workerName = userObject2?.userfamily + " "+ userObject2?.username
   
-        const worklist = userObject2?.worklist ? JSON.parse(userObject2?.worklist) : ''
-        const rang = userObject2?.rank ? userObject2?.rank : ''
-        const comment = userObject2?.comment ? userObject2?.comment : ''
-        const phone = userObject2?.phone
 
-        const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
-        const d2 = new Date(d)
+  //поиск
+  useEffect(() => {
+		const filteredData = pretendents.filter(user=> (user.workerFamily+user.workerName)?.toLowerCase().includes(text.toLowerCase()));
+    setSpec(filteredData);      
+  }, [text]);
 
-        const month = String(d2.getMonth()+1).padStart(2, "0");
-        const day = String(d2.getDate()).padStart(2, "0");
-        const chas = d2.getHours();
-        const min = String(d2.getMinutes()).padStart(2, "0");
-        
-        const newDate = `${day}.${month} ${chas}:${min}`;
-
-        //const workNotions = await getWorkerNotionId(worker.receiverId)
-      
-        //worklist
-        const newWorker = {
-          date: newDate, //newDate,
-          project: projectName,
-          worker: workerName, 
-          worklist: worklist, //workNotions[0].spec,
-          rang: rang, //workNotions[0]?.rank,
-          comment: comment, //workNotions[0]?.comment,
-          phone: phone, //workNotions[0]?.phone,
-        }
-        arrWorkers.push(newWorker)
-
-        setSpec(arrWorkers)
-
-        setLoading(false)
-        
-      })  
-    }
-
-    fetchData();
-    
-  },[])
-
+  //
   const handleClick = (ind) => {
     console.log(ind, showTable[ind])
 
@@ -123,8 +59,19 @@ const Workers = () => {
         ...prevShownTable,
         [ind]: !prevShownTable[ind]
       }));
-
   }
+
+  //get Contacts
+  useEffect(() => {
+
+    const fetchData = async() => {
+      console.log("workers-pretendent: ", pretendents)
+      setSpec(pretendents); 
+      setLoading(false)
+    }
+
+    fetchData()
+  }, [pretendents])
 
   return (
     <div className='dark-theme'>
@@ -139,7 +86,7 @@ const Workers = () => {
                     
                     <CRow className="mb-3">
                       <CCol sm={3} >
-                        <CFormInput placeholder="Поиск..." aria-label="City"/>
+                        <CFormInput placeholder="Поиск..." onChange={(e)=>setText(e.target.value)} aria-label="spec"/>
                       </CCol>
                     </CRow>
 
@@ -173,10 +120,10 @@ const Workers = () => {
                                           {item.project}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
-                                            {item.worker}
+                                            {item.workerFamily + " " + item.workerName}
                                         </CTableDataCell>
                                         <CTableDataCell style={{fontSize: '13px', textAlign: 'left'}}>
-                                          <div onClick={()=>handleClick(index)}>Посмотреть</div>
+                                          <div onClick={()=>handleClick(index)} style={{cursor: 'pointer'}}>Посмотреть</div>
                                           <CCollapse visible={showTable[index]}>
                                             <table>
                                               {item.worklist ? 
