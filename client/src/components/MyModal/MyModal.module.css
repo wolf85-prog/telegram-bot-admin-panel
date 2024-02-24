@@ -1,0 +1,42 @@
+.myModal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: none;
+    background: rgba(26,24,24, 0.88);  
+    z-index: 101;
+    animation: showModal 0.25s linear forwards;
+    /* animation-delay: 1s; */
+}
+
+.myModalContent {
+    padding: 25px;
+    background: #272727;
+    border-radius: 16px;
+    min-width: 750px;
+    color: #fff;
+    position: relative;
+    z-index: 101;
+    height: 350px;
+    overflow: auto;
+}
+
+.myModal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes showModal {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+    /* 100% {
+      opacity: 0;
+    } */
+  }

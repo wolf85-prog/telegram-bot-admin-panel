@@ -113,16 +113,16 @@ const Workers = () => {
                                   <CTableBody>                                  
                                     {spec.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
-                                        <CTableDataCell className="text-center">
+                                        <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
                                           {item.date}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
+                                        <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
                                           {item.project}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
                                             {item.workerFamily + " " + item.workerName}
                                         </CTableDataCell>
-                                        <CTableDataCell style={{fontSize: '13px', textAlign: 'left'}}>
+                                        <CTableDataCell style={{fontSize: '13px', textAlign: 'left', color: item.accept && "red"}}>
                                           <div onClick={()=>handleClick(index)} style={{cursor: 'pointer'}}>Посмотреть</div>
                                           <CCollapse visible={showTable[index]}>
                                             <table>
@@ -137,13 +137,13 @@ const Workers = () => {
                                             </table>
                                           </CCollapse>
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
+                                        <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
                                           {item.rang}
                                         </CTableDataCell>
                                         <CTableDataCell style={{color: item.dateborn >= 2005 ? 'red' : '', fontSize: '13px', textAlign: 'left'}}>
                                           {item.comment}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
+                                        <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
                                           <div>{item.phone}</div>
                                         </CTableDataCell>
                                       </CTableRow>

@@ -33,6 +33,8 @@ import editIcon from 'src/assets/images/pencil.png'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { delDistributionW, getPlan, newPlan } from 'src/http/adminAPI';
 
+import MyModal from "../components/MyModal/MyModal";
+
 const DistributionW = () => {
   const { distributionsWork: messages, addNewDistrib, workers } = useUsersContext();
   const [distributionsWork, setDistributionsWork]= useState([]);
@@ -287,11 +289,12 @@ const DistributionW = () => {
                             </CCardBody>
                           </CCard>
 
-                                        <CModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
-                                          <CModalHeader>
+                                        <MyModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
+                                          {/* <CModalHeader>
                                             <CModalTitle>Получатели рассылки</CModalTitle>
-                                          </CModalHeader>
-                                          <CModalBody>
+                                          </CModalHeader> */}
+                                          <h3>Получатели рассылки</h3>
+                                          <CCardBody>
                                             <CRow className="mb-3">
                                               <CCol sm={12} >
                                                 <CFormInput placeholder="Поиск..." onChange={(e)=>setText(e.target.value)} aria-label="spec"/>
@@ -301,10 +304,10 @@ const DistributionW = () => {
                                               <CTableHead className='table-dark'>
                                                 <CTableRow>
                                                   <CTableHeaderCell scope="col">№</CTableHeaderCell>
-                                                  <CTableHeaderCell scope="col">TelegramID</CTableHeaderCell>
+                                                  <CTableHeaderCell scope="col"style={{width: '100px'}}>TelegramID</CTableHeaderCell>
                                                   <CTableHeaderCell scope="col">ФИО</CTableHeaderCell>
-                                                  <CTableHeaderCell scope="col" style={{width: '100px'}}>Категории</CTableHeaderCell>
-                                                  <CTableHeaderCell scope="col">Статус</CTableHeaderCell>
+                                                  <CTableHeaderCell scope="col" style={{width: '180px'}}>Категории</CTableHeaderCell>
+                                                  <CTableHeaderCell scope="col" style={{width: '130px'}}>Статус</CTableHeaderCell>
                                                 </CTableRow>
                                               </CTableHead>
                                               <CTableBody>
@@ -321,11 +324,15 @@ const DistributionW = () => {
                                               </CTableBody>
                                             </CTable>
                                             <p style={{display: 'flex', justifyContent: 'space-between'}}><span>Получено: {count}</span> <span>Не получено: {count2}</span></p>  
-                                          </CModalBody>
-                                          <CModalFooter>
+                                          </CCardBody>
+                                          {/* <CModalFooter>
                                             <CButton color="primary" onClick={() => setVisibleModal(false)}>ОК</CButton>
-                                          </CModalFooter>
-                                        </CModal>
+                                          </CModalFooter> */}
+                                          <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                                            <CButton color="primary" onClick={()=>setVisibleModal(false)}>ОК</CButton>
+                                          </div>
+                                          
+                                        </MyModal>
                         </CCol>
                       </CRow>
                   </>
