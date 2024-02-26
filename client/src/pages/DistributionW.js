@@ -34,6 +34,7 @@ import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { delDistributionW, getPlan, newPlan } from 'src/http/adminAPI';
 
 import MyModal from "../components/MyModal/MyModal";
+import Close from "../assets/images/close.svg"
 
 const DistributionW = () => {
   const { distributionsWork: messages, addNewDistrib, workers } = useUsersContext();
@@ -294,6 +295,7 @@ const DistributionW = () => {
                                             <CModalTitle>Получатели рассылки</CModalTitle>
                                           </CModalHeader> */}
                                           <h3>Получатели рассылки</h3>
+                                          <img onClick={()=>setVisibleModal(false)} src={Close} alt='' style={{position: 'absolute', right: '20px', top: '20px', width: '15px'}}/>
                                           <CCardBody>
                                             <CRow className="mb-3">
                                               <CCol sm={12} >
