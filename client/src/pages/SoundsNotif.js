@@ -47,7 +47,12 @@ const SoundsNotif = () => {
         let notifs = await getSoundNotif()
         console.log("notifs: ", notifs) 
 
-        setSoundNotif(notifs)  
+        const sortedNotif = [...notifs].sort((a, b) => {       
+					var dateA = a.date, dateB = b.date 
+					return dateA-dateB  //сортировка по убывающей дате  
+				})
+
+        setSoundNotif(sortedNotif)  
 
       }
       
