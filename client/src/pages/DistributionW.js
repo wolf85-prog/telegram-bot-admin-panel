@@ -294,32 +294,46 @@ const DistributionW = () => {
                                           {/* <CModalHeader>
                                             <CModalTitle>Получатели рассылки</CModalTitle>
                                           </CModalHeader> */}
-                                          <h3>Получатели рассылки</h3>
-                                          <img onClick={()=>setVisibleModal(false)} src={Close} alt='' style={{position: 'absolute', right: '20px', top: '20px', width: '15px'}}/>
-                                          <CCardBody>
-                                            <CRow className="mb-3">
-                                              <CCol sm={12} >
+                                          <div style={{paddingTop: '25px'}}>
+                                            <CRow className="mb-3" >
+                                              <CCol sm={9} >
+                                                <h3>Получатели</h3>
+                                              </CCol>
+                                              <CCol sm={3} >
                                                 <CFormInput placeholder="Поиск..." onChange={(e)=>setText(e.target.value)} aria-label="spec"/>
                                               </CCol>
                                             </CRow>
+                                          </div>
+                                          
+                                          <img onClick={()=>setVisibleModal(false)} src={Close} alt='' style={{position: 'absolute', right: '20px', top: '20px', width: '15px'}}/>
+                                          <CCardBody>
                                             <CTable align="middle" className="mb-0" responsive style={{color: '#ffffff'}}>
                                               <CTableHead className='table-dark'>
                                                 <CTableRow>
                                                   <CTableHeaderCell scope="col">№</CTableHeaderCell>
                                                   <CTableHeaderCell scope="col"style={{width: '100px'}}>TelegramID</CTableHeaderCell>
-                                                  <CTableHeaderCell scope="col">ФИО</CTableHeaderCell>
-                                                  <CTableHeaderCell scope="col" style={{width: '180px'}}>Категории</CTableHeaderCell>
-                                                  <CTableHeaderCell scope="col" style={{width: '130px'}}>Статус</CTableHeaderCell>
+                                                  <CTableHeaderCell scope="col" >ФИО</CTableHeaderCell>
+                                                  <CTableHeaderCell scope="col" style={{width: '180px'}}>Специальность</CTableHeaderCell>
+                                                  <CTableHeaderCell scope="col" style={{width: '130px'}} className='text-center'>Статус</CTableHeaderCell>
                                                 </CTableRow>
                                               </CTableHead>
                                               <CTableBody>
                                               {userReceivers.map((item, index) => (
-                                                <CTableRow key={index}>
-                                                  <CTableHeaderCell scope="row">{index+1}</CTableHeaderCell>
+                                                <CTableRow key={index+1}>
+                                                  <CTableHeaderCell scope="row">{index < 9 ? '0'+(index+1) : index+1}</CTableHeaderCell>
                                                   <CTableDataCell>{item.user}</CTableDataCell>
                                                   <CTableDataCell>{item.userfamily} {item.username}</CTableDataCell>
-                                                  <CTableDataCell style={{fontSize: '11px'}}>{JSON.parse(item.categories).map(it=>"- "+it.spec).join('\n')}</CTableDataCell>
-                                                  <CTableDataCell style={{color: item.status === 200 ? '#7070e7' : 'red'}}>{item.status === 200 ? "Получено" : "Не получено"}</CTableDataCell>
+                                                  <CTableDataCell style={{fontSize: '11px'}}>
+                                                    {/* {JSON.parse(item.categories).map(it=>"- "+it.spec).join('\n')} */}
+                                                    <table>
+                                                      {item.categories !== '' ? (JSON.parse(item.categories)).map((spec, index)=>( 
+                                                          <tr key={index}>
+                                                            <td>{spec.spec !== '' ? "- " + spec.spec : ''}</td>
+                                                          </tr>          
+                                                      )) : ""}
+                                                    </table>
+                                                  </CTableDataCell>
+                                                  <CTableDataCell className='text-center' style={{color: item.status === 200 ? '#7070e7' : 'red'}}>{item.status === 200 ? "Получено" : "Не получено"}</CTableDataCell>
                                                 </CTableRow> 
                                               ))
                                               }   
