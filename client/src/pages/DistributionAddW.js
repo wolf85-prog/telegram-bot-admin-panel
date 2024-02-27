@@ -1073,7 +1073,8 @@ const delCategory7 = (category) => {
           date: date,
           image: poster,
           selected: selected, 
-          uuid: uuidDistrib
+          uuid: uuidDistrib,
+          textbutton: textButton
         }
       });
     } 

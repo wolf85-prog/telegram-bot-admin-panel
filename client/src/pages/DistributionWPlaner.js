@@ -67,6 +67,7 @@ const DistributionWPlaner = () => {
   console.log("selected: ", selected)
   console.log("labelName: ", labelName)
   console.log("uuidDistrib: ", uuidDistrib)
+  console.log("textButton: ", textButton)
   
 
   const [countCol, setCountCol] = useState(6)
