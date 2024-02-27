@@ -261,7 +261,8 @@ class DistributionController {
                 return;
             }
 
-            console.log("exist: ", exist)
+            const selected = exist.dataValues.users.split(',')
+            console.log("selected: ", selected)
 
             // selected.map(async (user, index) => {      
             //     //setTimeout(async()=> { 
