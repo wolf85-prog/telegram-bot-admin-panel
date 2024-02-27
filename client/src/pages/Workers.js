@@ -106,8 +106,8 @@ const Workers = () => {
                                       <CTableHeaderCell className="text-center" style={{width: '150px'}}>ФИО</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '160px'}}>Специальность</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{width: '120px'}}>U.L.E.Y</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '120px'}}>Комментарий</CTableHeaderCell>                         
-                                      <CTableHeaderCell className="text-center" style={{width: '180px'}}>Телефон</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" >Комментарий</CTableHeaderCell>                         
+                                      <CTableHeaderCell className="text-center" style={{width: '250px'}}>Телефон</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  

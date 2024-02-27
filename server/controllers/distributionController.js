@@ -1,6 +1,8 @@
 const { Distribution, Distributionw }= require('../models/models')
 const ApiError = require('../error/ApiError')
 
+const webAppAddStavka = process.env.WEBAPP_STAVKA
+
 class DistributionController {
 
     //add Distribution
@@ -262,57 +264,48 @@ class DistributionController {
             }
 
             const selected = exist.dataValues.users.split(',')
-            console.log("selected: ", selected)
+            const valueProject = exist.dataValues.projectId
+            const textButton = exist.dataValues.button
 
-            // selected.map(async (user, index) => {      
-            //     //setTimeout(async()=> { 
-            //     console.log(index + " Пользователю ID: " + user + " сообщение отправлено!")
-            //     //arrUsers = []
+            selected.map(async (user, index) => {      
+               //setTimeout(async()=> { 
+               console.log(index + " Пользователю ID: " + user + " сообщение отправлено!")
 
-            //     //информация об отправке
-            //     setCountSend(index)
+                //let client = clients.filter((client) => client.chatId === user)[0];
                 
-            //     if (index === selected.length - 1) {
-            //         setShowSend(false)
-            //         setVisible(true)
-            //     }
+                //Передаем данные боту
+                const keyboard = JSON.stringify({
+                    inline_keyboard: [
+                        [
+                            {"text": textButton, callback_data:'/report'},
+                        ],
+                    ]
+                });
 
+                let keyboard2
 
-            //     let client = clients.filter((client) => client.chatId === user)[0];
-                
-            //     //Передаем данные боту
-            //     const keyboard = JSON.stringify({
-            //         inline_keyboard: [
-            //             [
-            //                 {"text": textButton, callback_data:'/report'},
-            //             ],
-            //         ]
-            //     });
-
-            //     let keyboard2
-
-            //     if (onButtonStavka) {
-            //         keyboard2 = JSON.stringify({
-            //         inline_keyboard: [
-            //             [
-            //                 {"text": 'Принять', callback_data:'/accept ' + valueProject},
-            //                 {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
-            //             ],
-            //             [
-            //                 {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + valueProject}},
-            //             ],
-            //         ]
-            //         });
-            //     } else {
-            //         keyboard2 = JSON.stringify({
-            //         inline_keyboard: [
-            //             [
-            //                 {"text": 'Принять', callback_data:'/accept ' + valueProject},
-            //                 {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
-            //             ],
-            //         ]
-            //         });
-            //     }
+                if (onButtonStavka) {
+                    keyboard2 = JSON.stringify({
+                    inline_keyboard: [
+                        [
+                            {"text": 'Принять', callback_data:'/accept ' + valueProject},
+                            {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
+                        ],
+                        [
+                            {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + valueProject}},
+                        ],
+                    ]
+                    });
+                } else {
+                    keyboard2 = JSON.stringify({
+                    inline_keyboard: [
+                        [
+                            {"text": 'Принять', callback_data:'/accept ' + valueProject},
+                            {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
+                        ],
+                    ]
+                    });
+                }
 
             //     //по-умолчанию пока сообщение не отправлено
             //     arrUsers.push({
@@ -418,7 +411,7 @@ class DistributionController {
 
             //     //}, 500 * ++index)   
 
-            // })
+            })
 
             return res.status(200).json("Distribution has been send successfully");
         } catch (error) {

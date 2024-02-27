@@ -1127,7 +1127,7 @@ const delCategory7 = (category) => {
       console.log("distrNew: ", distrNew.id)
 
 
-      const res = await $host.get(hostServer + '/api/distributionsw/send/' + distrNew.id);
+      const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id);
       //console.log("res send: ", res)
 
       
@@ -1789,7 +1789,7 @@ const delCategory7 = (category) => {
                                         }             
                                       </div>
                                       <div>
-                                        <CButton color="primary"  onClick={onSendText}>{showSend ? <><CSpinner style={{width: '20px', height: '20px'}}/> Отправлено {countSend}</> : 'Разослать сейчас'}</CButton>
+                                        <CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton>
                                         
                                         {/* <CButton onClick={() => setVisible(!visible)}>Vertically centered modal</CButton> */}
                                         
