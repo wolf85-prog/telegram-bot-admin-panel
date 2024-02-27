@@ -344,9 +344,9 @@ const DistributionW = () => {
                                           {/* <CModalFooter>
                                             <CButton color="primary" onClick={() => setVisibleModal(false)}>ОК</CButton>
                                           </CModalFooter> */}
-                                          <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                                          {/* <div style={{display: 'flex', justifyContent: 'flex-end'}}>
                                             <CButton color="primary" onClick={()=>setVisibleModal(false)}>ОК</CButton>
-                                          </div>
+                                          </div> */}
                                           
                                         </MyModal>
                         </CCol>

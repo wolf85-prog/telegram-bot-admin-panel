@@ -195,16 +195,28 @@ const getDistributionsPlan = async() => {
                         const item = await Plan.update({times: newObj.times},{where: {datestart: newObj.datestart}});
                     }
 
-                    const projId = item.projectId            
+                    const projId = item.projectId 
+                    
+                    let keyboard
                     
                     //Передаем данные боту
-                    const keyboard = JSON.stringify({
-                        inline_keyboard: [
-                            [
-                                {"text": item.textButton, callback_data:'/report'},
-                            ],
-                        ]
-                    });
+                    if (item.textButton === 'нет') {
+                        keyboard = JSON.stringify({
+                            inline_keyboard: [
+                                [
+                                    {"text": '', callback_data:'/report'},
+                                ],
+                            ]
+                        });
+                    } else {
+                        keyboard = JSON.stringify({
+                            inline_keyboard: [
+                                [
+                                    {"text": item.textButton, callback_data:'/report'},
+                                ],
+                            ]
+                        });
+                    }
                 
                     const keyboard2 = JSON.stringify({
                         inline_keyboard: [
@@ -239,7 +251,7 @@ const getDistributionsPlan = async() => {
                             }
                         }
 
-                        const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.textButton === 'нет' ? keyboard : keyboard2}`
+                        const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.textButton ? keyboard : keyboard2}`
                         //console.log("url_send_photo2: ", url_send_photo)
 
                         sendPhotoToTelegram = await fetch(url_send_photo);
