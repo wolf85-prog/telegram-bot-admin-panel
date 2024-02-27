@@ -247,6 +247,25 @@ class DistributionController {
             return res.status(500).json(error.message);
         }
     }
+
+
+    //send message
+    async sendDistribW(req, res) {
+        const {id} = req.params  
+
+        try {
+            let exist=await Distributionw.findOne( {where: {id: id}} )
+            
+            if(!exist){
+                res.status(500).json({msg: "distrib not exist"});
+                return;
+            }
+
+            return res.status(200).json("Distribution has been delete successfully");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
 }
 
 module.exports = new DistributionController()
