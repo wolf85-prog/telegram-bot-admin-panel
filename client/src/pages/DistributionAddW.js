@@ -66,6 +66,7 @@ const DistributionAddW = () => {
 	const host = process.env.REACT_APP_HOST
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const webAppAddStavka = process.env.REACT_APP_WEBAPP_STAVKA
+  const hostServer = process.env.REACT_APP_API_URL
 
   const { userWorkers: clients, workers } = useUsersContext();
   const { addNewDistrib, addNewMessage2, setDistributionsWork } = useUsersContext();
@@ -1126,8 +1127,8 @@ const delCategory7 = (category) => {
       console.log("distrNew: ", distrNew.id)
 
 
-      const res = await $host.get(host+'/api/distributionsw/send/' + distrNew.id);
-      console.log("res send: ", res)
+      const res = await $host.get(hostServer + '/api/distributionsw/send/' + distrNew.id);
+      //console.log("res send: ", res)
 
       
       // selected.map(async (user, index) => {      
