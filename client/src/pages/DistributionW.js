@@ -290,7 +290,7 @@ const DistributionW = () => {
                             </CCardBody>
                           </CCard>
 
-                                        <MyModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
+                                        <MyModal alignment="center" visible={visibleModal} setVisible={setVisibleModal} onClose={() => setVisibleModal(false)}>
                                           {/* <CModalHeader>
                                             <CModalTitle>Получатели рассылки</CModalTitle>
                                           </CModalHeader> */}
@@ -307,46 +307,51 @@ const DistributionW = () => {
                                           
                                           <img onClick={()=>setVisibleModal(false)} src={Close} alt='' style={{position: 'absolute', right: '20px', top: '20px', width: '15px'}}/>
                                           <CCardBody>
-                                            <CTable align="middle" className="mb-0" responsive style={{color: '#ffffff'}}>
-                                              <CTableHead className='table-dark'>
-                                                <CTableRow>
-                                                  <CTableHeaderCell scope="col">№</CTableHeaderCell>
-                                                  <CTableHeaderCell scope="col"style={{width: '100px'}}>TelegramID</CTableHeaderCell>
-                                                  <CTableHeaderCell scope="col" >ФИО</CTableHeaderCell>
-                                                  <CTableHeaderCell scope="col" style={{width: '180px'}}>Специальность</CTableHeaderCell>
-                                                  <CTableHeaderCell scope="col" style={{width: '130px'}} className='text-center'>Статус</CTableHeaderCell>
-                                                </CTableRow>
-                                              </CTableHead>
-                                              <CTableBody>
-                                              {userReceivers.map((item, index) => (
-                                                <CTableRow key={index+1}>
-                                                  <CTableHeaderCell scope="row">{index < 9 ? '0'+(index+1) : index+1}</CTableHeaderCell>
-                                                  <CTableDataCell>{item.user}</CTableDataCell>
-                                                  <CTableDataCell>{item.userfamily} {item.username}</CTableDataCell>
-                                                  <CTableDataCell style={{fontSize: '11px'}}>
-                                                    {/* {JSON.parse(item.categories).map(it=>"- "+it.spec).join('\n')} */}
-                                                    <table>
-                                                      {item.categories !== '' ? (JSON.parse(item.categories)).map((spec, index)=>( 
-                                                          <tr key={index}>
-                                                            <td>{spec.spec !== '' ? "- " + spec.spec : ''}</td>
-                                                          </tr>          
-                                                      )) : ""}
-                                                    </table>
-                                                  </CTableDataCell>
-                                                  <CTableDataCell className='text-center' style={{color: item.status === 200 ? '#7070e7' : 'red'}}>{item.status === 200 ? "Получено" : "Не получено"}</CTableDataCell>
-                                                </CTableRow> 
-                                              ))
-                                              }   
-                                              </CTableBody>
-                                            </CTable>
-                                            <p style={{display: 'flex', justifyContent: 'space-between'}}><span>Получено: {count}</span> <span>Не получено: {count2}</span></p>  
-                                          </CCardBody>
-                                          {/* <CModalFooter>
-                                            <CButton color="primary" onClick={() => setVisibleModal(false)}>ОК</CButton>
-                                          </CModalFooter> */}
-                                          {/* <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                                            <CButton color="primary" onClick={()=>setVisibleModal(false)}>ОК</CButton>
-                                          </div> */}
+
+                                          {/* Рассылка: 800 | Доставлен: 600 | Не доставлено: 200  */}
+                                          <p style={{display: 'flex', justifyContent: 'space-between'}}><span>Рассылка: {count+count2}</span> <span>Доставлено: {count}</span> <span> Не доставлено: {count2}</span></p>  
+
+                                            <div className="scroll-table">
+                                              <CTable align="middle" className="mb-0" responsive style={{color: '#ffffff'}}>
+                                                <CTableHead className='table-dark'>
+                                                  <CTableRow>
+                                                    <CTableHeaderCell scope="col" style={{width: '45px'}}>№</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col"style={{width: '110px'}}>TelegramID</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col" style={{width: '170px'}}>ФИО</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col" style={{width: '180px'}}>Специальность</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col" style={{width: '100px'}}>Статус</CTableHeaderCell>
+                                                  </CTableRow>
+                                                </CTableHead>
+                                              </CTable>	
+                                              <div className="scroll-table-body" style={{height: '300px', overflowX: 'auto'}}>
+                                                <CTable>
+                                                  <CTableBody style={{height: '300px', overflowX: 'auto'}}>
+                                                  {userReceivers.map((item, index) => (
+                                                    <CTableRow key={index+1}>
+                                                      <CTableHeaderCell style={{width: '45px'}} scope="row">{index < 9 ? '0'+(index+1) : index+1}</CTableHeaderCell>
+                                                      <CTableDataCell style={{width: '110px'}}>{item.user}</CTableDataCell>
+                                                      <CTableDataCell style={{width: '170px'}}>{item.userfamily} {item.username}</CTableDataCell>
+                                                      <CTableDataCell style={{fontSize: '11px', width: '180px'}}>
+                                                        {/* {JSON.parse(item.categories).map(it=>"- "+it.spec).join('\n')} */}
+                                                        <table>
+                                                          {item.categories !== '' ? (JSON.parse(item.categories)).map((spec, index)=>( 
+                                                              <tr key={index}>
+                                                                <td>{spec.spec !== '' ? "- " + spec.spec : ''}</td>
+                                                              </tr>          
+                                                          )) : ""}
+                                                        </table>
+                                                      </CTableDataCell>
+                                                      <CTableDataCell className='text-center' style={{width: '100px', color: item.status === 200 ? '#7070e7' : 'red'}}>{item.status === 200 ? "Получено" : "Не получено"}</CTableDataCell>
+                                                    </CTableRow> 
+                                                  ))
+                                                  }   
+                                                  </CTableBody>
+                                                </CTable>
+                                              </div>	
+                                            </div>
+
+                                            {/* <p style={{display: 'flex', justifyContent: 'space-between'}}><span>Получено: {count}</span> <span>Не получено: {count2}</span></p>   */}
+                                          </CCardBody> 
                                           
                                         </MyModal>
                         </CCol>
