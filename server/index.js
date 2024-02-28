@@ -255,7 +255,7 @@ const getDistributionsPlan = async() => {
                             }
                         }
 
-                        const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.textButton ? keyboard : keyboard2}`
+                        const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.textButton.lenght > 0 ? keyboard : keyboard2}`
                         //console.log("url_send_photo2: ", url_send_photo)
 
                         sendPhotoToTelegram = await fetch(url_send_photo);

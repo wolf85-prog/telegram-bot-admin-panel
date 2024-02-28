@@ -264,6 +264,7 @@ class DistributionController {
     async sendDistribW(req, res) {
         const {id} = req.params  
         let arrUsers = []
+        let countSuccess = 0
 
         try {
             let exist=await Distributionw.findOne( {where: {id: id}} )
@@ -278,7 +279,6 @@ class DistributionController {
             const textButton = exist.dataValues.button
             const text = exist.dataValues.text
             const image = exist.dataValues.image
-            const id = exist.dataValues.id
 
             selected.map(async (user, index) => {      
                 //setTimeout(async()=> { 
