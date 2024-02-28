@@ -2,6 +2,8 @@ const { Distribution, Distributionw }= require('../models/models')
 const {Message, Conversation} = require('../models/workers')
 const ApiError = require('../error/ApiError')
 
+const { Op } = require('sequelize')
+
 const webAppAddStavka = process.env.WEBAPP_STAVKA
 const token = process.env.TELEGRAM_API_TOKEN_WORK
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
@@ -262,7 +264,7 @@ class DistributionController {
     async sendDistribW(req, res) {
         const {id} = req.params  
         let arrUsers = []
-        
+
         try {
             let exist=await Distributionw.findOne( {where: {id: id}} )
             
