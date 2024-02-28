@@ -349,8 +349,8 @@ class DistributionController {
                 let sendTextToTelegram
                 let sendPhotoToTelegram
                 
-                if (text !== '') {
-                    const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+                if (item.text !== '') {
+                    const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
                     
                     console.log("Отправка текста...")
                     
