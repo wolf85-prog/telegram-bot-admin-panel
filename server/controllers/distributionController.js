@@ -1,7 +1,13 @@
-const { Distribution, Distributionw }= require('../models/models')
+const { Distribution, Distributionw, Message }= require('../models/models')
 const ApiError = require('../error/ApiError')
 
 const webAppAddStavka = process.env.WEBAPP_STAVKA
+const token = process.env.TELEGRAM_API_TOKEN_WORK
+const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
+
+//socket.io
+const {io} = require("socket.io-client")
+const socketUrl = process.env.SOCKET_APP_URL
 
 class DistributionController {
 
@@ -269,6 +275,7 @@ class DistributionController {
 
             selected.map(async (user, index) => {      
                //setTimeout(async()=> { 
+               arrUsers = []
                console.log(index + " Пользователю ID: " + user + " сообщение отправлено!")
 
                 //let client = clients.filter((client) => client.chatId === user)[0];
@@ -307,109 +314,142 @@ class DistributionController {
                     });
                 }
 
-            //     //по-умолчанию пока сообщение не отправлено
-            //     arrUsers.push({
-            //         user: user,
-            //         status: 500,
-            //     })        
+                //по-умолчанию пока сообщение не отправлено
+                // arrUsers.push({
+                //     user: user,
+                //     status: 500,
+                // })        
 
-            //     //отправить в телеграмм
-            //     let sendTextToTelegram
-            //     if (text !== '') {
-            //         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
-                    
-            //         console.log("Отправка текста...")
-            //         sendTextToTelegram = await $host.get(url_send_msg);
-
-            //         if (sendTextToTelegram?.data?.ok) {
-            //         countSuccess = countSuccess + 1
-
-            //         //обновить статус доставки
-            //         arrUsers[index].status = 200  
-
-            //         //обновить бд рассылку
-            //         await editDistributionW2({success: countSuccess, report: JSON.stringify(arrUsers)}, distrNew.id)
-            //         } else {
-            //         console.log("Текстовое сообщение не отправлено!")
-            //         }
-            //     }  
-
-            //     const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
-            //     //console.log("url_send_photo: ", url_send_photo)
-
-            //     const url_send_photo2 = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${host}${image}&reply_markup=${showEditButtonAdd ? keyboard : keyboard2}`
-            //     //console.log("url_send_photo2: ", url_send_photo2)
-
-            //     console.log("file: ", file)
-
-            //     let sendPhotoToTelegram
-            //     if (file) {
-            //         const form = new FormData();
-            //         form.append("photo", file);
-
-            //         sendPhotoToTelegram = await $host.post(url_send_photo, form);
-            //         console.log('sendPhotoToTelegram1: ', sendPhotoToTelegram)  
-
-            //     } else {         
-            //         sendPhotoToTelegram = await $host.get(url_send_photo2);
-            //         console.log('sendPhotoToTelegram2: ', sendPhotoToTelegram)
-            //     }
-
-            //     if (sendPhotoToTelegram?.data?.ok && text === '') {
-            //         countSuccess = countSuccess + 1
-        
-            //         //обновить статус доставки
-            //         arrUsers[index].status = 200  
-
-            //         //обновить бд рассылку
-            //         await editDistributionW2({success: countSuccess, report: JSON.stringify(arrUsers)}, distrNew.id)
-            //     } 
-
+                //отправить в телеграмм
+                let sendTextToTelegram
+                let sendPhotoToTelegram
                 
-            //     //отправить в админку
-            //     let message = {};
-            //     if(text !== '') {
-            //         console.log("no file")
-            //             message = {
-            //                 senderId: chatAdminId, 
-            //                 receiverId: user,
-            //                 conversationId: client.conversationId,
-            //                 type: "text",
-            //                 text: text,
-            //                 isBot: true,
-            //                 messageId: sendTextToTelegram?.data?.result?.message_id,
-            //                 buttons: '',
-            //             }
-            //     } else if (file) {
-            //         console.log("file yes")
-            //             message = {
-            //                 senderId: chatAdminId, 
-            //                 receiverId: user,
-            //                 conversationId: client.conversationId,
-            //                 type: "image",
-            //                 text: host + image,
-            //                 isBot: true,
-            //                 messageId: sendPhotoToTelegram?.data?.result?.message_id,
-            //                 buttons: textButton,
-            //             }
-            //     }
-            //     console.log("message send: ", message);
+                if (text !== '') {
+                    const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+                    
+                    console.log("Отправка текста...")
+                    
+                    sendTextToTelegram = await fetch(url_send_msg);
+                    console.log("sendTextToTelegram: ", sendTextToTelegram)
 
-            //     //сохранение сообщения в базе данных wmessage
-            //     await newMessage(message)
+                    const { status } = sendTextToTelegram;
 
-            //     //сохранить в контексте
-            //     if(!file) {
-            //         addNewMessage2(user, text, 'text', '', client.conversationId, sendTextToTelegram.data.result.message_id, true);
-            //     } else {
-            //         addNewMessage2(user, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id, true);
-            //     }
+                    if (status === 200) {
+                        countSuccess = countSuccess + 1 
+                        
+                        arrUsers.push({
+                            user: user,
+                            status: 200,
+                        })           
+                    } else {
+                        arrUsers.push({
+                            user: user,
+                            status: 500,
+                        })
+                    }
+                } 
+                
+                const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.textButton ? keyboard : keyboard2}`
+                console.log("url_send_photo2: ", url_send_photo)
 
-            //     //обновить бд рассылку
-            //     await editDistributionW2({success: countSuccess}, distrNew.id)
-        
+                sendPhotoToTelegram = await fetch(url_send_photo);
+                console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
 
-            //     //}, 500 * ++index)   
+                const { status } = sendPhotoToTelegram;
+
+                if (status === 200 && item.text === '') {
+                    countSuccess = countSuccess + 1  
+                            
+                    arrUsers.push({
+                        user: user,
+                        status: 200,
+                    })
+                } else {
+                    arrUsers.push({
+                        user: user,
+                        status: 500,
+                    })
+                }
+
+                //обновить статус рассылки delivered - true
+                const delivered = true
+
+                //обновить бд рассылку
+                const newDistrib = await Distributionw.update(
+                    { delivered,
+                      report: JSON.stringify(arrUsers),  
+                      success: countSuccess},
+                    { where: {id: item.id} }
+                )
+                
+                //отправить в админку
+                let message = {};
+                // if(text !== '') {
+                //     console.log("no file")
+                //         message = {
+                //             senderId: chatAdminId, 
+                //             receiverId: user,
+                //             conversationId: client.conversationId,
+                //             type: "text",
+                //             text: text,
+                //             isBot: true,
+                //             messageId: sendTextToTelegram?.data?.result?.message_id,
+                //             buttons: '',
+                //         }
+                // } else if (item.image) {
+                //     console.log("file yes")
+                //         message = {
+                //             senderId: chatAdminId, 
+                //             receiverId: user,
+                //             conversationId: client.conversationId,
+                //             type: "image",
+                //             text: host + image,
+                //             isBot: true,
+                //             messageId: sendPhotoToTelegram?.data?.result?.message_id,
+                //             buttons: textButton,
+                //         }
+                // }
+                console.log("message send: ", message);
+
+                //сохранение сообщения в базе данных wmessage
+                await Message.create(message)
+
+                //сохранить в контексте
+                if(!item.image) {
+                    //addNewMessage2(user, text, 'text', '', conversation_id, '', true);
+                    // Подключаемся к серверу socket
+                    let socket = io(socketUrl);
+                    socket.emit("addUser", user)
+                    
+                    //отправить сообщение в админку
+                    socket.emit("sendAdminSpec", { 
+                        senderId: chatAdminId,
+                        receiverId: user,
+                        text: text,
+                        type: 'text',
+                        buttons: textButton,
+                        convId: client.conversationId,
+                        messageId: sendTextToTelegram.data.result.message_id,
+                        isBot: true,
+                    })
+                } else {
+                    //addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, '', true);
+                    // Подключаемся к серверу socket
+                    let socket = io(socketUrl);
+                    socket.emit("addUser", user)
+                    
+                    //отправить сообщение в админку
+                    socket.emit("sendAdminSpec", { 
+                        senderId: chatAdminId,
+                        receiverId: user,
+                        text: host + item.image,
+                        type: 'image',
+                        buttons: item.textButton,
+                        convId: conversation_id,
+                        messageId: sendPhotoToTelegram.data.result.message_id,
+                        isBot: true,
+                    })
+                }  
 
             })
 
