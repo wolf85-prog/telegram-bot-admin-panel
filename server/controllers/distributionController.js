@@ -499,7 +499,7 @@ class DistributionController {
                             isBot: true,
                         })
                     }  
-                }, 500 * ++index) 
+                }, 61 * ++index) 
 
             })
 
