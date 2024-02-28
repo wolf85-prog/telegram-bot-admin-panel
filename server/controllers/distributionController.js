@@ -359,7 +359,7 @@ class DistributionController {
                     console.log("Отправка текста...")
                     
                     sendTextToTelegram = await fetch(url_send_msg);
-                    console.log("sendTextToTelegram: ", sendTextToTelegram)
+                    //console.log("sendTextToTelegram: ", sendTextToTelegram)
 
                     const { status } = sendTextToTelegram;
 
@@ -379,10 +379,10 @@ class DistributionController {
                 } 
                 
                 const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${textButton ? keyboard : keyboard2}`
-                console.log("url_send_photo2: ", url_send_photo)
+                //console.log("url_send_photo2: ", url_send_photo)
 
                 sendPhotoToTelegram = await fetch(url_send_photo);
-                console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
+                //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
 
                 const { status } = sendPhotoToTelegram;
 
@@ -432,13 +432,13 @@ class DistributionController {
                             receiverId: user,
                             conversationId: conversation_id,
                             type: "image",
-                            text: host + image,
+                            text: image,
                             isBot: true,
                             messageId: '',
                             buttons: textButton,
                         }
                 }
-                console.log("message send: ", message);
+                //console.log("message send: ", message);
 
                 //сохранение сообщения в базе данных wmessage
                 await Message.create(message)
@@ -458,7 +458,7 @@ class DistributionController {
                         type: 'text',
                         buttons: textButton,
                         convId: conversation_id,
-                        messageId: sendTextToTelegram.data.result.message_id,
+                        messageId: '',
                         isBot: true,
                     })
                 } else {
@@ -475,7 +475,7 @@ class DistributionController {
                         type: 'image',
                         buttons: textButton,
                         convId: conversation_id,
-                        messageId: sendPhotoToTelegram.data.result.message_id,
+                        messageId: '',
                         isBot: true,
                     })
                 }  
