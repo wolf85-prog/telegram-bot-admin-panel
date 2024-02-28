@@ -321,28 +321,28 @@ class DistributionController {
 
                 let keyboard2
 
-                if (onButtonStavka) {
+                // if (onButtonStavka) {
+                //     keyboard2 = JSON.stringify({
+                //     inline_keyboard: [
+                //         [
+                //             {"text": 'Принять', callback_data:'/accept ' + valueProject},
+                //             {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
+                //         ],
+                //         [
+                //             {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + valueProject}},
+                //         ],
+                //     ]
+                //     });
+                // } else {
                     keyboard2 = JSON.stringify({
                     inline_keyboard: [
                         [
                             {"text": 'Принять', callback_data:'/accept ' + valueProject},
                             {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
                         ],
-                        [
-                            {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + valueProject}},
-                        ],
                     ]
                     });
-                } else {
-                    keyboard2 = JSON.stringify({
-                    inline_keyboard: [
-                        [
-                            {"text": 'Принять', callback_data:'/accept ' + valueProject},
-                            {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
-                        ],
-                    ]
-                    });
-                }
+                //}
        
 
                 //отправить в телеграмм
