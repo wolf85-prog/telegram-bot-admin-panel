@@ -318,13 +318,30 @@ class DistributionController {
                 }
                 
                 //Передаем данные боту
-                const keyboard = JSON.stringify({
-                    inline_keyboard: [
-                        [
-                            {"text": textButton, callback_data:'/report'},
-                        ],
-                    ]
-                });
+                console.log("textButton: ", textButton)
+
+                //Передаем данные боту
+                let keyboard
+                if (item.textButton === 'нет') {
+                    console.log("textButton: НЕТ")
+                    keyboard = JSON.stringify({
+                        inline_keyboard: [
+                            [
+                                {"text": '', callback_data:'/report'},
+                            ],
+                        ]
+                    });
+                } else {
+                    console.log("textButton: ...")
+                    keyboard = JSON.stringify({
+                        inline_keyboard: [
+                            [
+                                {"text": textButton, callback_data:'/report'},
+                            ],
+                        ]
+                    });
+                }
+
 
                 let keyboard2
 
