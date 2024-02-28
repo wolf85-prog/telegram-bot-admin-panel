@@ -1,5 +1,5 @@
 const { Distribution, Distributionw }= require('../models/models')
-const {Message, Conversation} = require('./models/workers')
+const {Message, Conversation} = require('../models/workers')
 const ApiError = require('../error/ApiError')
 
 const webAppAddStavka = process.env.WEBAPP_STAVKA
