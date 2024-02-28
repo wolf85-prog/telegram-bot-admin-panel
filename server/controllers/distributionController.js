@@ -7,6 +7,7 @@ const { Op } = require('sequelize')
 const webAppAddStavka = process.env.WEBAPP_STAVKA
 const token = process.env.TELEGRAM_API_TOKEN_WORK
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
+const host = process.env.HOST
 
 //socket.io
 const {io} = require("socket.io-client")
