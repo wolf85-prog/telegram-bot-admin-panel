@@ -422,7 +422,7 @@ class DistributionController {
                             type: "text",
                             text: text,
                             isBot: true,
-                            messageId: sendTextToTelegram?.data?.result?.message_id,
+                            messageId: '',
                             buttons: '',
                         }
                 } else if (image) {
@@ -434,7 +434,7 @@ class DistributionController {
                             type: "image",
                             text: host + image,
                             isBot: true,
-                            messageId: sendPhotoToTelegram?.data?.result?.message_id,
+                            messageId: '',
                             buttons: textButton,
                         }
                 }
@@ -471,7 +471,7 @@ class DistributionController {
                     socket.emit("sendAdminSpec", { 
                         senderId: chatAdminId,
                         receiverId: user,
-                        text: host + image,
+                        text: image,
                         type: 'image',
                         buttons: textButton,
                         convId: conversation_id,
