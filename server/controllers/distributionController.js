@@ -276,6 +276,7 @@ class DistributionController {
             const selected = exist.dataValues.users.split(',')
             const valueProject = exist.dataValues.projectId
             const textButton = exist.dataValues.button
+            const text = exist.dataValues.text
 
             selected.map(async (user, index) => {      
                 //setTimeout(async()=> { 
@@ -349,8 +350,8 @@ class DistributionController {
                 let sendTextToTelegram
                 let sendPhotoToTelegram
                 
-                if (item.text !== '') {
-                    const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
+                if (text !== '') {
+                    const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
                     
                     console.log("Отправка текста...")
                     
