@@ -322,7 +322,7 @@ class DistributionController {
 
                 //Передаем данные боту
                 let keyboard
-                if (item.textButton === 'нет') {
+                if (textButton === 'нет') {
                     console.log("textButton: НЕТ")
                     keyboard = JSON.stringify({
                         inline_keyboard: [
