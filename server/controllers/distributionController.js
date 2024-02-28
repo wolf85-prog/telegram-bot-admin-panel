@@ -9,6 +9,9 @@ const token = process.env.TELEGRAM_API_TOKEN_WORK
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const host = process.env.HOST
 
+//fetch api
+const fetch = require('node-fetch');
+
 //socket.io
 const {io} = require("socket.io-client")
 const socketUrl = process.env.SOCKET_APP_URL
