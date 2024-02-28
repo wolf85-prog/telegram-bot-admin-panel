@@ -494,6 +494,7 @@ useEffect(() => {
           rang: rang, //workNotions[0]?.rank,
           comment: comment, //workNotions[0]?.comment,
           phone: phone, //workNotions[0]?.phone,
+		  accept: worker.accept,
         }
         arrWorkers.push(newWorker)
 		//console.log(newWorker)
