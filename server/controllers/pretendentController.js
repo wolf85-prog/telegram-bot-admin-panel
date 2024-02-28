@@ -2,6 +2,7 @@ const {Pretendent} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const uuid = require('uuid')
 const path = require('path')
+const { Op } = require('sequelize')
 
 class PretendentController {
 
@@ -65,7 +66,9 @@ class PretendentController {
             //console.log(count)
 
             const spec = await Pretendent.findAll({
-                where: {otclick: !null},
+                where: {otclick: {
+                    [Op.not]: null
+                }},
                 // Add order conditions here....
                 order: [
                     ['id', 'DESC'], //DESC
