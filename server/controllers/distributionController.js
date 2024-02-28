@@ -277,6 +277,8 @@ class DistributionController {
             const valueProject = exist.dataValues.projectId
             const textButton = exist.dataValues.button
             const text = exist.dataValues.text
+            const image = exist.dataValues.image
+            const id = exist.dataValues.id
 
             selected.map(async (user, index) => {      
                 //setTimeout(async()=> { 
@@ -375,7 +377,7 @@ class DistributionController {
                     }
                 } 
                 
-                const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.textButton ? keyboard : keyboard2}`
+                const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${textButton ? keyboard : keyboard2}`
                 console.log("url_send_photo2: ", url_send_photo)
 
                 sendPhotoToTelegram = await fetch(url_send_photo);
@@ -383,7 +385,7 @@ class DistributionController {
 
                 const { status } = sendPhotoToTelegram;
 
-                if (status === 200 && item.text === '') {
+                if (status === 200 && text === '') {
                     countSuccess = countSuccess + 1  
                             
                     arrUsers.push({
@@ -405,7 +407,7 @@ class DistributionController {
                     { delivered,
                       report: JSON.stringify(arrUsers),  
                       success: countSuccess},
-                    { where: {id: item.id} }
+                    { where: {id: id} }
                 )
                 
                 //отправить в админку
@@ -422,7 +424,7 @@ class DistributionController {
                             messageId: sendTextToTelegram?.data?.result?.message_id,
                             buttons: '',
                         }
-                } else if (item.image) {
+                } else if (image) {
                     console.log("file yes")
                         message = {
                             senderId: chatAdminId, 
@@ -441,7 +443,7 @@ class DistributionController {
                 await Message.create(message)
 
                 //сохранить в контексте
-                if(!item.image) {
+                if(!image) {
                     //addNewMessage2(user, text, 'text', '', conversation_id, '', true);
                     // Подключаемся к серверу socket
                     let socket = io(socketUrl);
@@ -468,9 +470,9 @@ class DistributionController {
                     socket.emit("sendAdminSpec", { 
                         senderId: chatAdminId,
                         receiverId: user,
-                        text: host + item.image,
+                        text: host + image,
                         type: 'image',
-                        buttons: item.textButton,
+                        buttons: textButton,
                         convId: conversation_id,
                         messageId: sendPhotoToTelegram.data.result.message_id,
                         isBot: true,
