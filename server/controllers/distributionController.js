@@ -1,4 +1,5 @@
-const { Distribution, Distributionw, Message }= require('../models/models')
+const { Distribution, Distributionw }= require('../models/models')
+const {Message, Conversation} = require('./models/workers')
 const ApiError = require('../error/ApiError')
 
 const webAppAddStavka = process.env.WEBAPP_STAVKA
@@ -274,11 +275,37 @@ class DistributionController {
             const textButton = exist.dataValues.button
 
             selected.map(async (user, index) => {      
-               //setTimeout(async()=> { 
-               arrUsers = []
-               console.log(index + " Пользователю ID: " + user + " сообщение отправлено!")
+                //setTimeout(async()=> { 
+                arrUsers = []
+               
+                console.log(index + " Пользователю ID: " + user + " сообщение отправлено!")
+                let  conversation_id  
 
-                //let client = clients.filter((client) => client.chatId === user)[0];
+                //найти беседу
+                const conversation = await Conversation.findOne({
+                    where: {
+                        members: {
+                            [Op.contains]: [user]
+                        }
+                    },
+                }) 
+
+                 //если нет беседы, то создать 
+                if (!conversation) {
+                    const conv = await Conversation.create(
+                    {
+                        members: [user, chatAdminId],
+                    })
+                    console.log("Беседа успешно создана: ", conv) 
+                    console.log("conversationId: ", conv.id)
+                    
+                    conversation_id = conv.id
+                } else {
+                    console.log('Беседа уже создана в БД')  
+                    console.log("conversationId: ", conversation.id)  
+                    
+                    conversation_id = conversation.id
+                }
                 
                 //Передаем данные боту
                 const keyboard = JSON.stringify({
@@ -313,12 +340,7 @@ class DistributionController {
                     ]
                     });
                 }
-
-                //по-умолчанию пока сообщение не отправлено
-                // arrUsers.push({
-                //     user: user,
-                //     status: 500,
-                // })        
+       
 
                 //отправить в телеграмм
                 let sendTextToTelegram
@@ -384,31 +406,31 @@ class DistributionController {
                 
                 //отправить в админку
                 let message = {};
-                // if(text !== '') {
-                //     console.log("no file")
-                //         message = {
-                //             senderId: chatAdminId, 
-                //             receiverId: user,
-                //             conversationId: client.conversationId,
-                //             type: "text",
-                //             text: text,
-                //             isBot: true,
-                //             messageId: sendTextToTelegram?.data?.result?.message_id,
-                //             buttons: '',
-                //         }
-                // } else if (item.image) {
-                //     console.log("file yes")
-                //         message = {
-                //             senderId: chatAdminId, 
-                //             receiverId: user,
-                //             conversationId: client.conversationId,
-                //             type: "image",
-                //             text: host + image,
-                //             isBot: true,
-                //             messageId: sendPhotoToTelegram?.data?.result?.message_id,
-                //             buttons: textButton,
-                //         }
-                // }
+                if(text !== '') {
+                    console.log("no file")
+                        message = {
+                            senderId: chatAdminId, 
+                            receiverId: user,
+                            conversationId: conversation_id,
+                            type: "text",
+                            text: text,
+                            isBot: true,
+                            messageId: sendTextToTelegram?.data?.result?.message_id,
+                            buttons: '',
+                        }
+                } else if (item.image) {
+                    console.log("file yes")
+                        message = {
+                            senderId: chatAdminId, 
+                            receiverId: user,
+                            conversationId: conversation_id,
+                            type: "image",
+                            text: host + image,
+                            isBot: true,
+                            messageId: sendPhotoToTelegram?.data?.result?.message_id,
+                            buttons: textButton,
+                        }
+                }
                 console.log("message send: ", message);
 
                 //сохранение сообщения в базе данных wmessage
@@ -428,7 +450,7 @@ class DistributionController {
                         text: text,
                         type: 'text',
                         buttons: textButton,
-                        convId: client.conversationId,
+                        convId: conversation_id,
                         messageId: sendTextToTelegram.data.result.message_id,
                         isBot: true,
                     })
