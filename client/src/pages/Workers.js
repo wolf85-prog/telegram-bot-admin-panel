@@ -46,10 +46,10 @@ const Workers = () => {
   
 
   //поиск
-  useEffect(() => {
-		const filteredData = pretendents.filter(user=> (user.workerFamily+user.workerName)?.toLowerCase().includes(text.toLowerCase()));
-    setSpec(filteredData);      
-  }, [text]);
+  // useEffect(() => {
+	// 	const filteredData = pretendents.filter(user=> (user.workerFamily+user.workerName)?.toLowerCase().includes(text.toLowerCase()));
+  //   setSpec(filteredData);      
+  // }, [text]);
 
   //
   const handleClick = (ind) => {
