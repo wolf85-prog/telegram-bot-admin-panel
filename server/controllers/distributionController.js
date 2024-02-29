@@ -385,7 +385,7 @@ class DistributionController {
                     //     if (status === 200) {
                     //         countSuccess = countSuccess + 1 
                     //     }
-                    console.log(sendTextToTelegram)
+                    console.log(sendTextToTelegram.res.statusCode)
                     
                     // if (text !== '') {
                     //     const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
@@ -456,7 +456,7 @@ class DistributionController {
                     //             type: "text",
                     //             text: text,
                     //             isBot: true,
-                    //             messageId: '',
+                    //             messageId: sendToTelegram.data.result.message_id,
                     //             buttons: '',
                     //         }
                     // } else if (image) {
@@ -468,7 +468,7 @@ class DistributionController {
                     //             type: "image",
                     //             text: image,
                     //             isBot: true,
-                    //             messageId: '',
+                    //             messageId: sendToTelegram.data.result.message_id,
                     //             buttons: textButton,
                     //         }
                     // }
@@ -492,7 +492,7 @@ class DistributionController {
                     //         type: 'text',
                     //         buttons: textButton,
                     //         convId: conversation_id,
-                    //         messageId: '',
+                    //         messageId: sendToTelegram.data.result.message_id,
                     //         isBot: true,
                     //     })
                     // } else {
@@ -509,7 +509,7 @@ class DistributionController {
                     //         type: 'image',
                     //         buttons: textButton,
                     //         convId: conversation_id,
-                    //         messageId: '',
+                    //         messageId: sendToTelegram.data.result.message_id,
                     //         isBot: true,
                     //     })
                     // }  

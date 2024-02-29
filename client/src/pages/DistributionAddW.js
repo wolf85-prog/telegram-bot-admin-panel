@@ -1121,11 +1121,11 @@ const delCategory7 = (category) => {
         uuid: uuidDistrib,  
         editButton: showEditButtonAdd,  
       }
-      console.log("message send button: ", message);
+      //console.log("message send button: ", message);
 
       //сохранение рассылки в базе данных
-      //const distrNew = await newDistributionW(message)
-      //console.log("distrNew: ", distrNew.id)
+      const distrNew = await newDistributionW(message)
+      console.log("distrNew: ", distrNew.id)
 
       // console.log("selected: ", selected)
 
