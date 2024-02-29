@@ -4,13 +4,18 @@ const ApiError = require('../error/ApiError')
 
 const { Op } = require('sequelize')
 
+//fetch api
+const fetch = require('node-fetch');
+const axios = require("axios");
+
 const webAppAddStavka = process.env.WEBAPP_STAVKA
 const token = process.env.TELEGRAM_API_TOKEN_WORK
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const host = process.env.HOST
 
-//fetch api
-const fetch = require('node-fetch');
+const $host = axios.create({
+    baseURL: process.env.REACT_APP_API_URL
+})
 
 //socket.io
 const {io} = require("socket.io-client")
@@ -286,7 +291,7 @@ class DistributionController {
             const image = exist.dataValues.image
             const editButton = exist.dataValues.editButton
 
-            console.log("selected: ", selected)
+            //console.log("selected: ", selected)
 
             selected.map(async (user, index) => {      
                 setTimeout(async()=> { 
@@ -375,12 +380,12 @@ class DistributionController {
                     let sendPhotoToTelegram
 
                     const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
-                    sendTextToTelegram = await fetch(url_send_msg);
-                    const { status } = sendTextToTelegram;
-                        if (status === 200) {
-                            countSuccess = countSuccess + 1 
-                        }
-                    console.log(user, status, countSuccess)
+                    sendTextToTelegram = await $host.get(url_send_msg);
+                    // const { status } = sendTextToTelegram;
+                    //     if (status === 200) {
+                    //         countSuccess = countSuccess + 1 
+                    //     }
+                    console.log(sendTextToTelegram)
                     
                     // if (text !== '') {
                     //     const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
