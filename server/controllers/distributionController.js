@@ -20,9 +20,9 @@ class DistributionController {
 
     //add Distribution
     async newDistribution(req, res) {
-        const {name, text, image, button, receivers, datestart, delivered, editButton} = req.body
+        const {name, text, image, button, receivers, datestart, delivered} = req.body
         try {
-            await Distribution.create({name, text, image, button, receivers, datestart, delivered, editButton})
+            await Distribution.create({name, text, image, button, receivers, datestart, delivered})
             return res.status(200).json("Distribution has been sent successfully");
         } catch (error) {
             return res.status(500).json(error.message);
@@ -79,7 +79,7 @@ class DistributionController {
 
     //add Distribution
     async newDistributionW(req, res) {
-        const {text, image, project, receivers, datestart, delivered, projectId, count, date, users, button, del, uuid} = req.body
+        const {text, image, project, receivers, datestart, delivered, projectId, count, date, users, button, del, uuid, editButton} = req.body
         try {
             const distrib = await Distributionw.create({
                 text, 
@@ -94,7 +94,8 @@ class DistributionController {
                 users, 
                 button,
                 del,
-                uuid
+                uuid, 
+                editButton
             })
             return res.status(200).json(distrib);
         } catch (error) {
