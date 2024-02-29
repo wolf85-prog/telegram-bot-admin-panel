@@ -1121,14 +1121,23 @@ const delCategory7 = (category) => {
         uuid: uuidDistrib,  
         editButton: showEditButtonAdd,  
       }
-      console.log("message send button: ", message);
+      //console.log("message send button: ", message);
 
       //сохранение рассылки в базе данных
       const distrNew = await newDistributionW(message)
       console.log("distrNew: ", distrNew.id)
 
+      // console.log("selected: ", selected)
 
-      //const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id);
+      // selected.map(async (user, index) => { 
+      //   const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
+      //   const sendTextToTelegram = await $host.get(url_send_msg);
+      //   console.log("res: ", sendTextToTelegram)
+      // })
+
+
+
+      const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id);
       //console.log("res send: ", res)
 
       

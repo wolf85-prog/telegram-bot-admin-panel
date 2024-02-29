@@ -4,13 +4,18 @@ const ApiError = require('../error/ApiError')
 
 const { Op } = require('sequelize')
 
+//fetch api
+const fetch = require('node-fetch');
+const axios = require("axios");
+
 const webAppAddStavka = process.env.WEBAPP_STAVKA
 const token = process.env.TELEGRAM_API_TOKEN_WORK
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const host = process.env.HOST
 
-//fetch api
-const fetch = require('node-fetch');
+const $host = axios.create({
+    baseURL: process.env.REACT_APP_API_URL
+})
 
 //socket.io
 const {io} = require("socket.io-client")
@@ -286,7 +291,7 @@ class DistributionController {
             const image = exist.dataValues.image
             const editButton = exist.dataValues.editButton
 
-            console.log("selected: ", selected)
+            //console.log("selected: ", selected)
 
             selected.map(async (user, index) => {      
                 setTimeout(async()=> { 
@@ -315,8 +320,8 @@ class DistributionController {
                         
                         conversation_id = conv.id
                     } else {
-                        console.log('Беседа уже создана в БД')  
-                        console.log("conversationId: ", conversation.id)  
+                        //console.log('Беседа уже создана в БД')  
+                        //console.log("conversationId: ", conversation.id)  
                         
                         conversation_id = conversation.id
                     }
@@ -373,6 +378,14 @@ class DistributionController {
                     //отправить в телеграмм
                     let sendTextToTelegram
                     let sendPhotoToTelegram
+
+                    const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
+                    sendTextToTelegram = await $host.get(url_send_msg);
+                    const { status } = sendTextToTelegram;
+                    if (status === 200) {
+                        countSuccess = countSuccess + 1 
+                    }
+                    console.log(countSuccess)
                     
                     if (text !== '') {
                         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
@@ -443,7 +456,7 @@ class DistributionController {
                     //             type: "text",
                     //             text: text,
                     //             isBot: true,
-                    //             messageId: '',
+                    //             messageId: sendToTelegram.data.result.message_id,
                     //             buttons: '',
                     //         }
                     // } else if (image) {
@@ -455,7 +468,7 @@ class DistributionController {
                     //             type: "image",
                     //             text: image,
                     //             isBot: true,
-                    //             messageId: '',
+                    //             messageId: sendToTelegram.data.result.message_id,
                     //             buttons: textButton,
                     //         }
                     // }
@@ -479,7 +492,7 @@ class DistributionController {
                     //         type: 'text',
                     //         buttons: textButton,
                     //         convId: conversation_id,
-                    //         messageId: '',
+                    //         messageId: sendToTelegram.data.result.message_id,
                     //         isBot: true,
                     //     })
                     // } else {
@@ -496,11 +509,11 @@ class DistributionController {
                     //         type: 'image',
                     //         buttons: textButton,
                     //         convId: conversation_id,
-                    //         messageId: '',
+                    //         messageId: sendToTelegram.data.result.message_id,
                     //         isBot: true,
                     //     })
                     // }  
-                }, 61 * ++index) 
+                }, 100 * ++index) 
 
             })
 
