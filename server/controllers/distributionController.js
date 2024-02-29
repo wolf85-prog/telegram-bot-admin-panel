@@ -393,7 +393,7 @@ class DistributionController {
                         console.log("Отправка текста...")
                         
                         sendTextToTelegram = await $host.get(url_send_msg);
-                        console.log("sendTextToTelegram: ", sendTextToTelegram)
+                        //console.log("sendTextToTelegram: ", sendTextToTelegram)
 
                         const { status } = sendTextToTelegram;
 
@@ -456,7 +456,7 @@ class DistributionController {
                                 type: "text",
                                 text: text,
                                 isBot: true,
-                                messageId: sendToTelegram.data.result.message_id,
+                                messageId: sendTextToTelegram.data.result.message_id,
                                 buttons: '',
                             }
                     } else if (image) {
@@ -468,7 +468,7 @@ class DistributionController {
                                 type: "image",
                                 text: image,
                                 isBot: true,
-                                messageId: sendToTelegram.data.result.message_id,
+                                messageId: sendTextToTelegram.data.result.message_id,
                                 buttons: textButton,
                             }
                     }
@@ -507,7 +507,7 @@ class DistributionController {
                             type: 'image',
                             buttons: textButton,
                             convId: conversation_id,
-                            messageId: sendToTelegram.data.result.message_id,
+                            messageId: sendTextToTelegram.data.result.message_id,
                             isBot: true,
                         })
                     }  
