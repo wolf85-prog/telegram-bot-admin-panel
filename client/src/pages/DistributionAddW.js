@@ -532,11 +532,11 @@ const onChangeSelectProject = async(e) => {
 }
 
 const onChangeAddButton = () => {
-  setShowEditButtonAdd (true)
+  setShowEditButtonAdd(true)
 }
 
 const onChangeAddButton2 = () => {
-  setShowEditButtonAdd (false)
+  setShowEditButtonAdd(false)
 }
 
 //=========================================================
@@ -1118,7 +1118,8 @@ const delCategory7 = (category) => {
         date: `${day}.${month}.${year}`, 
         button: textButton,
         users: selected.toString(),
-        uuid: uuidDistrib,    
+        uuid: uuidDistrib,  
+        editButton: showEditButtonAdd,  
       }
       //console.log("message send button: ", message);
 

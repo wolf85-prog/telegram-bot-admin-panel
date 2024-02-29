@@ -71,12 +71,13 @@ const Distributionw = sequelize.define('distributionw', {
     delivered: {type: DataTypes.BOOLEAN}, //доставлено
     projectId: {type: DataTypes.STRING}, //проект (id);
     count: {type: DataTypes.INTEGER}, 
-    date: {type: DataTypes.STRING},  //дата начала рассылки
-    button: {type: DataTypes.STRING}, //текст кнопки;
+    date: {type: DataTypes.STRING},  //дата начала рассылки  
     users: {type: DataTypes.TEXT},
-    report: {type: DataTypes.TEXT},
+    button: {type: DataTypes.STRING}, //текст кнопки;
     uuid: {type: DataTypes.STRING}, //индекс рассылки;
     success: {type: DataTypes.INTEGER}, 
+    report: {type: DataTypes.TEXT},
+    editButton: {type: DataTypes.BOOLEAN}, //редактируемая кнопка
 })
 
 const Report = sequelize.define('report', {
