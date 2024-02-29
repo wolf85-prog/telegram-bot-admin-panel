@@ -474,7 +474,7 @@ class DistributionController {
                                 type: "image",
                                 text: image,
                                 isBot: true,
-                                messageId: sendTextToTelegram.data.result.message_id,
+                                messageId: sendPhotoToTelegram.data.result.message_id,
                                 buttons: textButton,
                             }
                     }
@@ -513,7 +513,7 @@ class DistributionController {
                             type: 'image',
                             buttons: textButton,
                             convId: conversation_id,
-                            messageId: sendTextToTelegram.data.result.message_id,
+                            messageId: sendPhotoToTelegram.data.result.message_id,
                             isBot: true,
                         })
                     }  
