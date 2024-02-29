@@ -375,7 +375,8 @@ class DistributionController {
                     let sendPhotoToTelegram
 
                     const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
-                    console.log(url_send_msg)
+                    sendTextToTelegram = await fetch(url_send_msg);
+                    console.log(sendTextToTelegram)
                     
                     // if (text !== '') {
                     //     const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
