@@ -381,11 +381,11 @@ class DistributionController {
 
                     const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
                     sendTextToTelegram = await $host.get(url_send_msg);
-                    // const { status } = sendTextToTelegram;
+                    const { status } = sendTextToTelegram;
                     //     if (status === 200) {
                     //         countSuccess = countSuccess + 1 
                     //     }
-                    console.log(sendTextToTelegram.res.statusCode)
+                    console.log(status)
                     
                     // if (text !== '') {
                     //     const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
