@@ -439,18 +439,6 @@ class DistributionController {
                     }
                     
                     
-
-                    //обновить статус рассылки delivered - true
-                    const delivered = true
-
-                    //обновить бд рассылку
-                    const newDistrib = await Distributionw.update(
-                        { delivered,
-                        report: JSON.stringify(arrUsers),  
-                        success: countSuccess},
-                        { where: {id: id} }
-                    )
-                    
                     //отправить в админку
                     let message = {};
                     if (text !== '') {
@@ -518,6 +506,14 @@ class DistributionController {
                         })
                     }  
                 }, 100 * ++index) 
+
+                //обновить бд рассылку
+                const newDistrib = await Distributionw.update(
+                    { delivered: true,
+                    report: JSON.stringify(arrUsers),  
+                    success: countSuccess},
+                    { where: {id: id} }
+                )
 
             })
 
