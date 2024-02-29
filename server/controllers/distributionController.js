@@ -283,6 +283,7 @@ class DistributionController {
             const textButton = exist.dataValues.button
             const text = exist.dataValues.text
             const image = exist.dataValues.image
+            const editButton = exist.dataValues.editButton
 
             selected.map(async (user, index) => {      
                 setTimeout(async()=> { 
@@ -302,27 +303,24 @@ class DistributionController {
 
                     //если нет беседы, то создать 
                     if (!conversation) {
-                        const conv = await Conversation.create(
-                        {
-                            members: [user, chatAdminId],
-                        })
-                        console.log("Беседа успешно создана: ", conv) 
-                        console.log("conversationId: ", conv.id)
+                        // const conv = await Conversation.create(
+                        // {
+                        //     members: [user, chatAdminId],
+                        // })
+                        // console.log("Беседа успешно создана: ", conv) 
+                        // console.log("conversationId: ", conv.id)
                         
-                        conversation_id = conv.id
+                        // conversation_id = conv.id
                     } else {
                         console.log('Беседа уже создана в БД')  
                         console.log("conversationId: ", conversation.id)  
                         
                         conversation_id = conversation.id
                     }
-                    
-                    //Передаем данные боту
-                    console.log("textButton: ", textButton)
 
                     //Передаем данные боту
                     let keyboard
-                    if (textButton === 'нет') {
+                    if (editButton) {
                         console.log("textButton: НЕТ")
                         keyboard = JSON.stringify({
                             inline_keyboard: [
@@ -373,132 +371,132 @@ class DistributionController {
                     let sendTextToTelegram
                     let sendPhotoToTelegram
                     
-                    if (text !== '') {
-                        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+                    // if (text !== '') {
+                    //     const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
                         
-                        console.log("Отправка текста...")
+                    //     console.log("Отправка текста...")
                         
-                        sendTextToTelegram = await fetch(url_send_msg);
-                        //console.log("sendTextToTelegram: ", sendTextToTelegram)
+                    //     sendTextToTelegram = await fetch(url_send_msg);
+                    //     //console.log("sendTextToTelegram: ", sendTextToTelegram)
 
-                        const { status } = sendTextToTelegram;
+                    //     const { status } = sendTextToTelegram;
 
-                        if (status === 200) {
-                            countSuccess = countSuccess + 1 
+                    //     if (status === 200) {
+                    //         countSuccess = countSuccess + 1 
                             
-                            arrUsers.push({
-                                user: user,
-                                status: 200,
-                            })           
-                        } else {
-                            arrUsers.push({
-                                user: user,
-                                status: 500,
-                            })
-                        }
-                    } 
+                    //         arrUsers.push({
+                    //             user: user,
+                    //             status: 200,
+                    //         })           
+                    //     } else {
+                    //         arrUsers.push({
+                    //             user: user,
+                    //             status: 500,
+                    //         })
+                    //     }
+                    // } 
                     
-                    const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${textButton ? keyboard : keyboard2}`
-                    //console.log("url_send_photo2: ", url_send_photo)
+                    // const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${textButton ? keyboard : keyboard2}`
+                    // //console.log("url_send_photo2: ", url_send_photo)
 
-                    sendPhotoToTelegram = await fetch(url_send_photo);
-                    //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
+                    // sendPhotoToTelegram = await fetch(url_send_photo);
+                    // //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
 
-                    const { status } = sendPhotoToTelegram;
+                    // const { status } = sendPhotoToTelegram;
 
-                    if (status === 200 && text === '') {
-                        countSuccess = countSuccess + 1  
+                    // if (status === 200 && text === '') {
+                    //     countSuccess = countSuccess + 1  
                                 
-                        arrUsers.push({
-                            user: user,
-                            status: 200,
-                        })
-                    } else {
-                        arrUsers.push({
-                            user: user,
-                            status: 500,
-                        })
-                    }
+                    //     arrUsers.push({
+                    //         user: user,
+                    //         status: 200,
+                    //     })
+                    // } else {
+                    //     arrUsers.push({
+                    //         user: user,
+                    //         status: 500,
+                    //     })
+                    // }
 
-                    //обновить статус рассылки delivered - true
-                    const delivered = true
+                    // //обновить статус рассылки delivered - true
+                    // const delivered = true
 
-                    //обновить бд рассылку
-                    const newDistrib = await Distributionw.update(
-                        { delivered,
-                        report: JSON.stringify(arrUsers),  
-                        success: countSuccess},
-                        { where: {id: id} }
-                    )
+                    // //обновить бд рассылку
+                    // const newDistrib = await Distributionw.update(
+                    //     { delivered,
+                    //     report: JSON.stringify(arrUsers),  
+                    //     success: countSuccess},
+                    //     { where: {id: id} }
+                    // )
                     
-                    //отправить в админку
-                    let message = {};
-                    if(text !== '') {
-                        console.log("no file")
-                            message = {
-                                senderId: chatAdminId, 
-                                receiverId: user,
-                                conversationId: conversation_id,
-                                type: "text",
-                                text: text,
-                                isBot: true,
-                                messageId: '',
-                                buttons: '',
-                            }
-                    } else if (image) {
-                        console.log("file yes")
-                            message = {
-                                senderId: chatAdminId, 
-                                receiverId: user,
-                                conversationId: conversation_id,
-                                type: "image",
-                                text: image,
-                                isBot: true,
-                                messageId: '',
-                                buttons: textButton,
-                            }
-                    }
-                    //console.log("message send: ", message);
+                    // //отправить в админку
+                    // let message = {};
+                    // if(text !== '') {
+                    //     console.log("no file")
+                    //         message = {
+                    //             senderId: chatAdminId, 
+                    //             receiverId: user,
+                    //             conversationId: conversation_id,
+                    //             type: "text",
+                    //             text: text,
+                    //             isBot: true,
+                    //             messageId: '',
+                    //             buttons: '',
+                    //         }
+                    // } else if (image) {
+                    //     console.log("file yes")
+                    //         message = {
+                    //             senderId: chatAdminId, 
+                    //             receiverId: user,
+                    //             conversationId: conversation_id,
+                    //             type: "image",
+                    //             text: image,
+                    //             isBot: true,
+                    //             messageId: '',
+                    //             buttons: textButton,
+                    //         }
+                    // }
+                    // //console.log("message send: ", message);
 
-                    //сохранение сообщения в базе данных wmessage
-                    await Message.create(message)
+                    // //сохранение сообщения в базе данных wmessage
+                    // await Message.create(message)
 
-                    //сохранить в контексте
-                    if(!image) {
-                        //addNewMessage2(user, text, 'text', '', conversation_id, '', true);
-                        // Подключаемся к серверу socket
-                        let socket = io(socketUrl);
-                        socket.emit("addUser", user)
+                    // //сохранить в контексте
+                    // if(!image) {
+                    //     //addNewMessage2(user, text, 'text', '', conversation_id, '', true);
+                    //     // Подключаемся к серверу socket
+                    //     let socket = io(socketUrl);
+                    //     socket.emit("addUser", user)
                         
-                        //отправить сообщение в админку
-                        socket.emit("sendAdminSpec", { 
-                            senderId: chatAdminId,
-                            receiverId: user,
-                            text: text,
-                            type: 'text',
-                            buttons: textButton,
-                            convId: conversation_id,
-                            messageId: '',
-                            isBot: true,
-                        })
-                    } else {
-                        //addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, '', true);
-                        // Подключаемся к серверу socket
-                        let socket = io(socketUrl);
-                        socket.emit("addUser", user)
+                    //     //отправить сообщение в админку
+                    //     socket.emit("sendAdminSpec", { 
+                    //         senderId: chatAdminId,
+                    //         receiverId: user,
+                    //         text: text,
+                    //         type: 'text',
+                    //         buttons: textButton,
+                    //         convId: conversation_id,
+                    //         messageId: '',
+                    //         isBot: true,
+                    //     })
+                    // } else {
+                    //     //addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, '', true);
+                    //     // Подключаемся к серверу socket
+                    //     let socket = io(socketUrl);
+                    //     socket.emit("addUser", user)
                         
-                        //отправить сообщение в админку
-                        socket.emit("sendAdminSpec", { 
-                            senderId: chatAdminId,
-                            receiverId: user,
-                            text: image,
-                            type: 'image',
-                            buttons: textButton,
-                            convId: conversation_id,
-                            messageId: '',
-                            isBot: true,
-                        })
-                    }  
+                    //     //отправить сообщение в админку
+                    //     socket.emit("sendAdminSpec", { 
+                    //         senderId: chatAdminId,
+                    //         receiverId: user,
+                    //         text: image,
+                    //         type: 'image',
+                    //         buttons: textButton,
+                    //         convId: conversation_id,
+                    //         messageId: '',
+                    //         isBot: true,
+                    //     })
+                    // }  
                 }, 61 * ++index) 
 
             })
