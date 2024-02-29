@@ -395,9 +395,10 @@ class DistributionController {
                         sendTextToTelegram = await $host.get(url_send_msg);
                         //console.log("sendTextToTelegram: ", sendTextToTelegram)
 
-                        const { status } = sendTextToTelegram;
+                        const { status1 } = sendTextToTelegram;
 
-                        if (status === 200) {
+                        if (status1 === 200) {
+                            console.log("статус 200 текст")
                             countSuccess = countSuccess + 1 
                             
                             arrUsers.push({
@@ -412,27 +413,28 @@ class DistributionController {
                         }
                     } 
                     
-                    // const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${textButton ? keyboard : keyboard2}`
+                    const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${editButton ? keyboard : keyboard2}`
                     // //console.log("url_send_photo2: ", url_send_photo)
 
-                    // sendPhotoToTelegram = await fetch(url_send_photo);
-                    // //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
+                    sendPhotoToTelegram = await $host.get(url_send_photo);
+                    //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
 
-                    // const { status } = sendPhotoToTelegram;
+                    const { status2 } = sendPhotoToTelegram;
 
-                    // if (status === 200 && text === '') {
-                    //     countSuccess = countSuccess + 1  
+                    if (status2 === 200 && text === '') {
+                        console.log("статус 200 фото")
+                        countSuccess = countSuccess + 1  
                                 
-                    //     arrUsers.push({
-                    //         user: user,
-                    //         status: 200,
-                    //     })
-                    // } else {
-                    //     arrUsers.push({
-                    //         user: user,
-                    //         status: 500,
-                    //     })
-                    // }
+                        arrUsers.push({
+                            user: user,
+                            status: 200,
+                        })
+                    } else {
+                        arrUsers.push({
+                            user: user,
+                            status: 500,
+                        })
+                    }
 
                     //обновить статус рассылки delivered - true
                     const delivered = true
