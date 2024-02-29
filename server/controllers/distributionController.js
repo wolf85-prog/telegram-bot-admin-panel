@@ -285,11 +285,13 @@ class DistributionController {
             const image = exist.dataValues.image
             const editButton = exist.dataValues.editButton
 
+            console.log("selected: ", selected)
+
             selected.map(async (user, index) => {      
                 setTimeout(async()=> { 
                     arrUsers = []
                 
-                    console.log(index + " Пользователю ID: " + user + " сообщение отправлено!")
+                    console.log(index + " Пользователю ID: " + user + " сообщение отправляется!")
                     let  conversation_id  
 
                     //найти беседу
