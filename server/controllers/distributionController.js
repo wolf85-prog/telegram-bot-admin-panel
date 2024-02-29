@@ -306,14 +306,14 @@ class DistributionController {
 
                     //если нет беседы, то создать 
                     if (!conversation) {
-                        // const conv = await Conversation.create(
-                        // {
-                        //     members: [user, chatAdminId],
-                        // })
-                        // console.log("Беседа успешно создана: ", conv) 
-                        // console.log("conversationId: ", conv.id)
+                        const conv = await Conversation.create(
+                        {
+                            members: [user, chatAdminId],
+                        })
+                        console.log("Беседа успешно создана: ", conv) 
+                        console.log("conversationId: ", conv.id)
                         
-                        // conversation_id = conv.id
+                        conversation_id = conv.id
                     } else {
                         console.log('Беседа уже создана в БД')  
                         console.log("conversationId: ", conversation.id)  
@@ -374,30 +374,30 @@ class DistributionController {
                     let sendTextToTelegram
                     let sendPhotoToTelegram
                     
-                    // if (text !== '') {
-                    //     const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+                    if (text !== '') {
+                        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
                         
-                    //     console.log("Отправка текста...")
+                        console.log("Отправка текста...")
                         
-                    //     sendTextToTelegram = await fetch(url_send_msg);
-                    //     //console.log("sendTextToTelegram: ", sendTextToTelegram)
+                        sendTextToTelegram = await fetch(url_send_msg);
+                        //console.log("sendTextToTelegram: ", sendTextToTelegram)
 
-                    //     const { status } = sendTextToTelegram;
+                        const { status } = sendTextToTelegram;
 
-                    //     if (status === 200) {
-                    //         countSuccess = countSuccess + 1 
+                        if (status === 200) {
+                            countSuccess = countSuccess + 1 
                             
-                    //         arrUsers.push({
-                    //             user: user,
-                    //             status: 200,
-                    //         })           
-                    //     } else {
-                    //         arrUsers.push({
-                    //             user: user,
-                    //             status: 500,
-                    //         })
-                    //     }
-                    // } 
+                            arrUsers.push({
+                                user: user,
+                                status: 200,
+                            })           
+                        } else {
+                            arrUsers.push({
+                                user: user,
+                                status: 500,
+                            })
+                        }
+                    } 
                     
                     // const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${textButton ? keyboard : keyboard2}`
                     // //console.log("url_send_photo2: ", url_send_photo)
