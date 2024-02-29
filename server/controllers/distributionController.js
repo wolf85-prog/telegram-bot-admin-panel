@@ -379,6 +379,8 @@ class DistributionController {
                     let sendTextToTelegram
                     let sendPhotoToTelegram
 
+                    let url_send_photo
+
                     // const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
                     // sendTextToTelegram = await $host.get(url_send_msg);
                     // const { status } = sendTextToTelegram;
@@ -395,9 +397,9 @@ class DistributionController {
                         sendTextToTelegram = await $host.get(url_send_msg);
                         //console.log("sendTextToTelegram: ", sendTextToTelegram)
 
-                        const { status1 } = sendTextToTelegram;
+                        const { status } = sendTextToTelegram;
 
-                        if (status1 === 200) {
+                        if (status === 200) {
                             console.log("статус 200 текст")
                             countSuccess = countSuccess + 1 
                             
@@ -411,30 +413,32 @@ class DistributionController {
                                 status: 500,
                             })
                         }
-                    } 
-                    
-                    const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${editButton ? keyboard : keyboard2}`
-                    // //console.log("url_send_photo2: ", url_send_photo)
-
-                    sendPhotoToTelegram = await $host.get(url_send_photo);
-                    //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
-
-                    const { status2 } = sendPhotoToTelegram;
-
-                    if (status2 === 200 && text === '') {
-                        console.log("статус 200 фото")
-                        countSuccess = countSuccess + 1  
-                                
-                        arrUsers.push({
-                            user: user,
-                            status: 200,
-                        })
                     } else {
-                        arrUsers.push({
-                            user: user,
-                            status: 500,
-                        })
+                        url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${editButton ? keyboard : keyboard2}`
+                        // //console.log("url_send_photo2: ", url_send_photo)
+
+                        sendPhotoToTelegram = await $host.get(url_send_photo);
+                        //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
+
+                        const { status } = sendPhotoToTelegram;
+
+                        if (status === 200 && text === '') {
+                            console.log("статус 200 фото")
+                            countSuccess = countSuccess + 1  
+                                    
+                            arrUsers.push({
+                                user: user,
+                                status: 200,
+                            })
+                        } else {
+                            arrUsers.push({
+                                user: user,
+                                status: 500,
+                            })
+                        }
                     }
+                    
+                    
 
                     //обновить статус рассылки delivered - true
                     const delivered = true
