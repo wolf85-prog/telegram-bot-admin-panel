@@ -128,7 +128,7 @@ const getDistributionsPlan = async() => {
             }
 
             console.log("!!!!Планирую запуск отправки собщения..." + (index+1))
-            const timerId = setTimeout(() => {
+            const timerId = setTimeout(async() => {
                 objPlan.users.map(async (user, ind) => {
                     console.log("Пользователю ID: " + user + " сообщение " + item.text + " отправлено!")
                     arrUsers = []
@@ -276,32 +276,10 @@ const getDistributionsPlan = async() => {
                                 status: 500,
                             })
                         }
-
-                        //Обновить отчет о доставке
-                        // const newDistrib = await Distributionw.update(
-                        //     { users: arrUsers,
-                        //       buttons: },
-                        //     { where: {id: addReport.dataValues.id} }
-                        // )
                     
                     } catch (error) {
                         console.error(error.message)
                     }
-
-                    //обновить статус рассылки delivered - true
-                    const delivered = true
-
-                    let exist = await Distributionw.findOne( {where: {id: item.id}} )           
-                    if(!exist){
-                        console.log("Рассылка не существует!");
-                    }
-            
-                    const newDistrib = await Distributionw.update(
-                        { delivered,
-                          report: JSON.stringify(arrUsers),  
-                          success: countSuccess},
-                        { where: {id: item.id} }
-                    )
 
                     //отправить в админку
                     let message = {};
@@ -342,6 +320,18 @@ const getDistributionsPlan = async() => {
                         addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, '', true);
                     }
                 })
+
+                let exist = await Distributionw.findOne( {where: {id: item.id}} )           
+                if(!exist){
+                        console.log("Рассылка не существует!");
+                }
+                //Обновить отчет о доставке
+                const newDistrib = await Distributionw.update(
+                    { delivered: true,
+                        report: JSON.stringify(arrUsers),  
+                        success: countSuccess},
+                    { where: {id: item.id} }
+                )
             }, milliseconds)
 
             tasks.push(timerId)
