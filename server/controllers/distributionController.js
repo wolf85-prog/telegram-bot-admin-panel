@@ -401,7 +401,7 @@ class DistributionController {
                         console.log("Отправка текста...")
                         
                         sendTextToTelegram = await $host.get(url_send_msg);
-                        console.log("sendTextToTelegram: ", sendTextToTelegram)
+                        //console.log("sendTextToTelegram: ", sendTextToTelegram)
 
                         const { status } = sendTextToTelegram;              
 
@@ -411,7 +411,14 @@ class DistributionController {
                             //обновить статус доставки
                             arrUsers[index].status = 200  
                             
-                            //console.log("arrUsers[index]: ", arrUsers[index])
+
+                            //обновить бд рассылку
+                            const newDistrib = await Distributionw.update(
+                                { delivered: true,
+                                report: JSON.stringify(arrUsers),  
+                                success: countSuccess},
+                                { where: {id: id} }
+                            )
                             
                             //     arrUsers.push({
                             //         user: user,
@@ -516,16 +523,6 @@ class DistributionController {
                             isBot: true,
                         })
                     }  
-
-                    if (index === selected.length - 1) {
-                        //обновить бд рассылку
-                        const newDistrib = await Distributionw.update(
-                            { delivered: true,
-                            report: JSON.stringify(arrUsers),  
-                            success: countSuccess},
-                            { where: {id: id} }
-                        )
-                    }
 
                 }, 100 * ++index) 
 
