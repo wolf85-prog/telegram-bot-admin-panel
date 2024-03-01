@@ -410,10 +410,9 @@ class DistributionController {
                         if (status === 200) {
                             console.log("статус 200 текст")
                             countSuccess = countSuccess + 1 
-                            //обновить статус доставки
-                            console.log("index: ", index)
-                            arrUsers[index].status = 200  
                             
+                            //обновить статус доставки
+                            arrUsers[index-1].status = 200  
 
                             //обновить бд рассылку
                             const newDistrib = await Distributionw.update(
@@ -422,16 +421,6 @@ class DistributionController {
                                 success: countSuccess},
                                 { where: {id: id} }
                             )
-                            
-                            //     arrUsers.push({
-                            //         user: user,
-                            //         status: 200,
-                            //     })           
-                            // } else {
-                            //     arrUsers.push({
-                            //         user: user,
-                            //         status: 500,
-                            //     })
                         }
                         
                     } else {
