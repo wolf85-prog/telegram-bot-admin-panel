@@ -411,6 +411,8 @@ class DistributionController {
                             //обновить статус доставки
                             arrUsers[index].status = 200  
                             
+                            console.log("arrUsers[index]: ", arrUsers[index])
+                            
                             //     arrUsers.push({
                             //         user: user,
                             //         status: 200,
