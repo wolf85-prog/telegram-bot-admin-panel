@@ -411,8 +411,8 @@ class DistributionController {
                             console.log("статус 200 текст")
                             countSuccess = countSuccess + 1 
                             //обновить статус доставки
-                            console.log("arrUsers: ", arrUsers)
-                            //arrUsers[index].status = 200  
+                            console.log("index: ", index)
+                            arrUsers[index].status = 200  
                             
 
                             //обновить бд рассылку
