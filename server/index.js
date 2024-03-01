@@ -270,7 +270,7 @@ const getDistributionsPlan = async() => {
                             }
                         } else {
 
-                            url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.textButton.lenght > 0 ? keyboard : keyboard2}`
+                            url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.editButton ? keyboard : keyboard2}`
                             //console.log("url_send_photo2: ", url_send_photo)
 
                             sendPhotoToTelegram = await $host.get(url_send_photo);
@@ -310,7 +310,7 @@ const getDistributionsPlan = async() => {
                             type: "text",
                             text: text,
                             isBot: true,
-                            messageId: sendToTelegram.data.result.message_id,
+                            messageId: '',
                             buttons: '',
                         }
                     } else {
@@ -321,7 +321,7 @@ const getDistributionsPlan = async() => {
                             type: "image",
                             text: item.image,
                             isBot: true,
-                            messageId: sendPhotoToTelegram.data.result.message_id,
+                            messageId: '',
                             buttons: item.textButton ? item.textButton : '',
                         }
                     }
