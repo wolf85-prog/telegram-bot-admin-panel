@@ -295,7 +295,6 @@ class DistributionController {
 
             selected.map(async (user, index) => {      
                 setTimeout(async()=> { 
-                    arrUsers = []
                 
                     console.log(index + " Пользователю ID: " + user + " сообщение отправляется!")
                     let  conversation_id  
@@ -390,10 +389,10 @@ class DistributionController {
                     // console.log(countSuccess)
 
                     //по-умолчанию пока сообщение не отправлено
-                    // arrUsers.push({
-                    //     user: user,
-                    //     status: 500,
-                    // }) 
+                    arrUsers.push({
+                        user: user,
+                        status: 500,
+                    }) 
                     
                     if (text !== '') {
                         //const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
@@ -402,7 +401,7 @@ class DistributionController {
                         console.log("Отправка текста...")
                         
                         sendTextToTelegram = await $host.get(url_send_msg);
-                        //console.log("sendTextToTelegram: ", sendTextToTelegram)
+                        console.log("sendTextToTelegram: ", sendTextToTelegram)
 
                         const { status } = sendTextToTelegram;              
 
@@ -410,17 +409,17 @@ class DistributionController {
                             console.log("статус 200 текст")
                             countSuccess = countSuccess + 1 
                             //обновить статус доставки
-                            //arrUsers[index].status = 200  
+                            arrUsers[index].status = 200  
                             
-                                arrUsers.push({
-                                    user: user,
-                                    status: 200,
-                                })           
-                            } else {
-                                arrUsers.push({
-                                    user: user,
-                                    status: 500,
-                                })
+                            //     arrUsers.push({
+                            //         user: user,
+                            //         status: 200,
+                            //     })           
+                            // } else {
+                            //     arrUsers.push({
+                            //         user: user,
+                            //         status: 500,
+                            //     })
                         }
                         
                     } else {
