@@ -468,7 +468,7 @@ class DistributionController {
                                 type: "text",
                                 text: text,
                                 isBot: true,
-                                messageId: sendTextToTelegram.data.result.message_id,
+                                messageId: '', //sendTextToTelegram.data.result.message_id,
                                 buttons: '',
                             }
                     } else if (image) {
@@ -480,7 +480,7 @@ class DistributionController {
                                 type: "image",
                                 text: image,
                                 isBot: true,
-                                messageId: sendPhotoToTelegram.data.result.message_id,
+                                messageId: '',//sendPhotoToTelegram.data.result.message_id,
                                 buttons: textButton,
                             }
                     }
@@ -503,7 +503,7 @@ class DistributionController {
                             type: 'text',
                             buttons: textButton,
                             convId: conversation_id,
-                            messageId: sendTextToTelegram.data.result.message_id,
+                            messageId: '',//sendTextToTelegram.data.result.message_id,
                             isBot: true,
                         })
                     } else {
@@ -519,7 +519,7 @@ class DistributionController {
                             type: 'image',
                             buttons: textButton,
                             convId: conversation_id,
-                            messageId: sendPhotoToTelegram.data.result.message_id,
+                            messageId: '', //sendPhotoToTelegram.data.result.message_id,
                             isBot: true,
                         })
                     }  
