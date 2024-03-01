@@ -517,15 +517,15 @@ class DistributionController {
                     }  
                 }, 100 * ++index) 
 
-                //обновить бд рассылку
-                const newDistrib = await Distributionw.update(
-                    { delivered: true,
-                    report: JSON.stringify(arrUsers),  
-                    success: countSuccess},
-                    { where: {id: id} }
-                )
-
             })
+
+            //обновить бд рассылку
+            const newDistrib = await Distributionw.update(
+                { delivered: true,
+                report: JSON.stringify(arrUsers),  
+                success: countSuccess},
+                { where: {id: id} }
+            )
 
             return res.status(200).json("Distribution has been send successfully");
         } catch (error) {
