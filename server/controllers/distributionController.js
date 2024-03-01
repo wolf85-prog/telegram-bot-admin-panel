@@ -411,7 +411,7 @@ class DistributionController {
                             //обновить статус доставки
                             arrUsers[index].status = 200  
                             
-                            console.log("arrUsers[index]: ", arrUsers[index])
+                            //console.log("arrUsers[index]: ", arrUsers[index])
                             
                             //     arrUsers.push({
                             //         user: user,
@@ -516,17 +516,20 @@ class DistributionController {
                             isBot: true,
                         })
                     }  
+
+                    if (index === selected.length - 1) {
+                        //обновить бд рассылку
+                        const newDistrib = await Distributionw.update(
+                            { delivered: true,
+                            report: JSON.stringify(arrUsers),  
+                            success: countSuccess},
+                            { where: {id: id} }
+                        )
+                    }
+
                 }, 100 * ++index) 
 
             })
-
-            //обновить бд рассылку
-            const newDistrib = await Distributionw.update(
-                { delivered: true,
-                report: JSON.stringify(arrUsers),  
-                success: countSuccess},
-                { where: {id: id} }
-            )
 
             return res.status(200).json("Distribution has been send successfully");
         } catch (error) {
