@@ -299,6 +299,12 @@ class DistributionController {
                     console.log(index + " Пользователю ID: " + user + " сообщение отправляется!")
                     let  conversation_id  
 
+                    //по-умолчанию пока сообщение не отправлено
+                    arrUsers.push({
+                        user: user,
+                        status: 500,
+                    }) 
+
                     //найти беседу
                     const conversation = await Conversation.findOne({
                         where: {
@@ -388,11 +394,7 @@ class DistributionController {
                     // }
                     // console.log(countSuccess)
 
-                    //по-умолчанию пока сообщение не отправлено
-                    arrUsers.push({
-                        user: user,
-                        status: 500,
-                    }) 
+                    
                     
                     if (text !== '') {
                         //const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
@@ -409,7 +411,8 @@ class DistributionController {
                             console.log("статус 200 текст")
                             countSuccess = countSuccess + 1 
                             //обновить статус доставки
-                            arrUsers[index].status = 200  
+                            console.log("arrUsers: ", arrUsers)
+                            //arrUsers[index].status = 200  
                             
 
                             //обновить бд рассылку
