@@ -526,7 +526,7 @@ class DistributionController {
     }
 
     //del messages
-    async sendDistribW(req, res) {
+    async delMessagesDistribW(req, res) {
         const {id} = req.params  
         let arrUsers = []
         let countSuccess = 0
@@ -581,7 +581,7 @@ class DistributionController {
                         conversation_id = conversation.id
                     }
 
-                    
+
  
 
                 }, 100 * ++index) 
