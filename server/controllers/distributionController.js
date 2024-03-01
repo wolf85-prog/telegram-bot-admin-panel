@@ -397,8 +397,8 @@ class DistributionController {
                     
                     
                     if (text !== '') {
-                        //const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
-                        const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
+                        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+                        //const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
                         
                         console.log("Отправка текста...")
                         
@@ -436,15 +436,16 @@ class DistributionController {
                             console.log("статус 200 фото")
                             countSuccess = countSuccess + 1  
                                     
-                            arrUsers.push({
-                                user: user,
-                                status: 200,
-                            })
-                        } else {
-                            arrUsers.push({
-                                user: user,
-                                status: 500,
-                            })
+                            //обновить статус доставки
+                            arrUsers[index-1].status = 200  
+
+                            //обновить бд рассылку
+                            const newDistrib = await Distributionw.update(
+                                { delivered: true,
+                                report: JSON.stringify(arrUsers),  
+                                success: countSuccess},
+                                { where: {id: id} }
+                            )
                         }
                     }
                     
@@ -460,7 +461,7 @@ class DistributionController {
                                 type: "text",
                                 text: text,
                                 isBot: true,
-                                messageId: '', //sendTextToTelegram.data.result.message_id,
+                                messageId: sendTextToTelegram.data.result.message_id,
                                 buttons: '',
                             }
                     } else if (image) {
@@ -472,7 +473,7 @@ class DistributionController {
                                 type: "image",
                                 text: image,
                                 isBot: true,
-                                messageId: '',//sendPhotoToTelegram.data.result.message_id,
+                                messageId: sendPhotoToTelegram.data.result.message_id,
                                 buttons: textButton,
                             }
                     }
@@ -495,7 +496,7 @@ class DistributionController {
                             type: 'text',
                             buttons: textButton,
                             convId: conversation_id,
-                            messageId: '',//sendTextToTelegram.data.result.message_id,
+                            messageId: sendTextToTelegram.data.result.message_id,
                             isBot: true,
                         })
                     } else {
@@ -511,7 +512,7 @@ class DistributionController {
                             type: 'image',
                             buttons: textButton,
                             convId: conversation_id,
-                            messageId: '', //sendPhotoToTelegram.data.result.message_id,
+                            messageId: sendPhotoToTelegram.data.result.message_id,
                             isBot: true,
                         })
                     }  
