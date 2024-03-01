@@ -2053,7 +2053,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: `${day}.${month}.${year}`,  
           button: textButton ? textButton: "",
           users: selected.toString(), 
-          uuid: uuidDistrib,  
+          uuid: uuidDistrib, 
+          editButton: showEditButtonAdd, 
         }
         //сохранение рассылки в базе данных
         const dataDistrib = await newDistributionW(message) 
@@ -2078,7 +2079,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           date: `${day2}.${month2}.${year}`,   
           button: textButton,
           users: selected.toString(),  
-          uuid: uuidDistrib,  
+          uuid: uuidDistrib, 
+          editButton: showEditButtonAdd,  
         }
         //сохранение рассылки в базе данных
         const dataDistrib2 = await newDistributionW(message)
