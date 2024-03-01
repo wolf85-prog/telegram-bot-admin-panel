@@ -524,6 +524,75 @@ class DistributionController {
             return res.status(500).json(error.message);
         }
     }
+
+    //del messages
+    async sendDistribW(req, res) {
+        const {id} = req.params  
+        let arrUsers = []
+        let countSuccess = 0
+
+        try {
+            let exist=await Distributionw.findOne( {where: {id: id}} )
+            
+            if(!exist){
+                res.status(500).json({msg: "distrib not exist"});
+                return;
+            }
+
+            const selected = exist.dataValues.users.split(',')
+            const valueProject = exist.dataValues.projectId
+            const textButton = exist.dataValues.button
+            const text = exist.dataValues.text
+            const image = exist.dataValues.image
+            const editButton = exist.dataValues.editButton
+
+            //console.log("selected: ", selected)
+
+            selected.map(async (user, index) => {      
+                setTimeout(async()=> { 
+                
+                    console.log(index + " Пользователю ID: " + user + " сообщение удалено!")
+                    let  conversation_id  
+
+
+                    //найти беседу
+                    const conversation = await Conversation.findOne({
+                        where: {
+                            members: {
+                                [Op.contains]: [user]
+                            }
+                        },
+                    }) 
+
+                    //если нет беседы, то создать 
+                    if (!conversation) {
+                        const conv = await Conversation.create(
+                        {
+                            members: [user, chatAdminId],
+                        })
+                        console.log("Беседа успешно создана: ", conv) 
+                        console.log("conversationId: ", conv.id)
+                        
+                        conversation_id = conv.id
+                    } else {
+                        //console.log('Беседа уже создана в БД')  
+                        //console.log("conversationId: ", conversation.id)  
+                        
+                        conversation_id = conversation.id
+                    }
+
+                    
+ 
+
+                }, 100 * ++index) 
+
+            })
+
+            return res.status(200).json("Distribution has been send successfully");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
 }
 
 module.exports = new DistributionController()
