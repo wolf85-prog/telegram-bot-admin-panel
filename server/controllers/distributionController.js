@@ -343,7 +343,7 @@ class DistributionController {
                             ]
                         });
                     } else {
-                        console.log("textButton: ...")
+                        //console.log("textButton: ...")
                         keyboard = JSON.stringify({
                             inline_keyboard: [
                                 [
@@ -383,7 +383,6 @@ class DistributionController {
                     //отправить в телеграмм
                     let sendTextToTelegram
                     let sendPhotoToTelegram
-
                     let url_send_photo
 
                     // const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
@@ -400,7 +399,7 @@ class DistributionController {
                         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
                         //const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
                         
-                        console.log("Отправка текста...")
+                        //console.log("Отправка текста...")
                         
                         sendTextToTelegram = await $host.get(url_send_msg);
                         //console.log("sendTextToTelegram: ", sendTextToTelegram)
@@ -421,8 +420,7 @@ class DistributionController {
                                 success: countSuccess},
                                 { where: {id: id} }
                             )
-                        }
-                        
+                        }                    
                     } else {
                         url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${editButton ? keyboard : keyboard2}`
                         // //console.log("url_send_photo2: ", url_send_photo)
@@ -442,8 +440,8 @@ class DistributionController {
                             //обновить бд рассылку
                             const newDistrib = await Distributionw.update(
                                 { delivered: true,
-                                report: JSON.stringify(arrUsers),  
-                                success: countSuccess},
+                                    report: JSON.stringify(arrUsers),  
+                                    success: countSuccess},
                                 { where: {id: id} }
                             )
                         }

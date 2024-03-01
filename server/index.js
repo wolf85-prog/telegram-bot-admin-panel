@@ -17,6 +17,7 @@ const cron = require('node-cron');
 
 //fetch api
 const fetch = require('node-fetch');
+const axios = require("axios");
 
 //socket.io
 const {io} = require("socket.io-client")
@@ -29,6 +30,10 @@ const port = process.env.PORT || 5000;
 const token = process.env.TELEGRAM_API_TOKEN_WORK
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const host = process.env.HOST
+
+const $host = axios.create({
+    baseURL: process.env.REACT_APP_API_URL
+})
 
 const app = express();
 
@@ -129,13 +134,22 @@ const getDistributionsPlan = async() => {
 
             console.log("!!!!Планирую запуск отправки собщения..." + (index+1))
             const timerId = setTimeout(async() => {
+               
                 objPlan.users.map(async (user, ind) => {
                     console.log("Пользователю ID: " + user + " сообщение " + item.text + " отправлено!")
-                    arrUsers = []
+
                     //let conversationId = await getConversation(user)
-                    let  conversation_id  
+                    let conversation_id  
                     let sendToTelegram
                     let sendPhotoToTelegram
+                    let url_send_photo
+
+                    //по-умолчанию пока сообщение не отправлено
+                    arrUsers.push({
+                        user: user,
+                        status: 500,
+                    }) 
+
 
                     //найти беседу
                     const conversation = await Conversation.findOne({
@@ -157,8 +171,8 @@ const getDistributionsPlan = async() => {
                         
                         conversation_id = conv.id
                     } else {
-                        console.log('Беседа уже создана в БД')  
-                        console.log("conversationId: ", conversation.id)  
+                        //console.log('Беседа уже создана в БД')  
+                        //console.log("conversationId: ", conversation.id)  
                         
                         conversation_id = conversation.id
                     }
@@ -199,10 +213,10 @@ const getDistributionsPlan = async() => {
                     
                     let keyboard
                     
-                    console.log("textButton: ", item.textButton)
+                    //console.log("textButton: ", item.textButton)
 
                     //Передаем данные боту
-                    if (item.textButton === 'нет') {
+                    if (item.editButton) {
                         console.log("textButton: НЕТ")
                         keyboard = JSON.stringify({
                             inline_keyboard: [
@@ -212,7 +226,7 @@ const getDistributionsPlan = async() => {
                             ]
                         });
                     } else {
-                        console.log("textButton: ...")
+                        //console.log("textButton: ...")
                         keyboard = JSON.stringify({
                             inline_keyboard: [
                                 [
@@ -236,45 +250,48 @@ const getDistributionsPlan = async() => {
                         if (item.text !== '') {
                             const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
                             
-                            sendToTelegram = await fetch(url_send_msg);
+                            sendToTelegram = await $host.get(url_send_msg);
 
                             const { status } = sendToTelegram;
 
                             if (status === 200) {
                                 countSuccess = countSuccess + 1 
                                 
-                                arrUsers.push({
-                                    user: user,
-                                    status: 200,
-                                })           
-                            } else {
-                                arrUsers.push({
-                                    user: user,
-                                    status: 500,
-                                })
+                                //обновить статус доставки
+                                arrUsers[index-1].status = 200 
+
+                                //обновить бд рассылку
+                                const newDistrib = await Distributionw.update(
+                                    { delivered: true,
+                                        report: JSON.stringify(arrUsers),  
+                                        success: countSuccess},
+                                    { where: {id: item.id} }
+                                )
                             }
-                        }
-
-                        const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.textButton.lenght > 0 ? keyboard : keyboard2}`
-                        //console.log("url_send_photo2: ", url_send_photo)
-
-                        sendPhotoToTelegram = await fetch(url_send_photo);
-                        console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
-
-                        const { status } = sendPhotoToTelegram;
-
-                        if (status === 200 && item.text === '') {
-                            countSuccess = countSuccess + 1  
-                            
-                            arrUsers.push({
-                                user: user,
-                                status: 200,
-                            })
                         } else {
-                            arrUsers.push({
-                                user: user,
-                                status: 500,
-                            })
+
+                            url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.textButton.lenght > 0 ? keyboard : keyboard2}`
+                            //console.log("url_send_photo2: ", url_send_photo)
+
+                            sendPhotoToTelegram = await $host.get(url_send_photo);
+                            //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
+
+                            const { status } = sendPhotoToTelegram;
+
+                            if (status === 200 && item.text === '') {
+                                countSuccess = countSuccess + 1  
+                                
+                                //обновить статус доставки
+                                arrUsers[index-1].status = 200  
+
+                                //обновить бд рассылку
+                                const newDistrib = await Distributionw.update(
+                                    { delivered: true,
+                                        report: JSON.stringify(arrUsers),  
+                                        success: countSuccess},
+                                    { where: {id: item.id} }
+                                )
+                            }
                         }
                     
                     } catch (error) {
@@ -293,7 +310,7 @@ const getDistributionsPlan = async() => {
                             type: "text",
                             text: text,
                             isBot: true,
-                            messageId: '',
+                            messageId: sendToTelegram.data.result.message_id,
                             buttons: '',
                         }
                     } else {
@@ -304,11 +321,11 @@ const getDistributionsPlan = async() => {
                             type: "image",
                             text: item.image,
                             isBot: true,
-                            messageId: '',
+                            messageId: sendPhotoToTelegram.data.result.message_id,
                             buttons: item.textButton ? item.textButton : '',
                         }
                     }
-                    console.log("message send: ", message);
+                    //console.log("message send: ", message);
 
                     //сохранение сообщения в базе данных wmessage
                     await Message.create(message)
@@ -321,17 +338,17 @@ const getDistributionsPlan = async() => {
                     }
                 })
 
-                let exist = await Distributionw.findOne( {where: {id: item.id}} )           
-                if(!exist){
-                        console.log("Рассылка не существует!");
-                }
-                //Обновить отчет о доставке
-                const newDistrib = await Distributionw.update(
-                    { delivered: true,
-                        report: JSON.stringify(arrUsers),  
-                        success: countSuccess},
-                    { where: {id: item.id} }
-                )
+                // let exist = await Distributionw.findOne( {where: {id: item.id}} )           
+                // if(!exist){
+                //         console.log("Рассылка не существует!");
+                // }
+                // //Обновить отчет о доставке
+                // const newDistrib = await Distributionw.update(
+                //     { delivered: true,
+                //         report: JSON.stringify(arrUsers),  
+                //         success: countSuccess},
+                //     { where: {id: item.id} }
+                // )
             }, milliseconds)
 
             tasks.push(timerId)
