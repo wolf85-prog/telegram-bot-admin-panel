@@ -258,7 +258,7 @@ const getDistributionsPlan = async() => {
                                 countSuccess = countSuccess + 1 
                                 
                                 //обновить статус доставки
-                                arrUsers[index-1].status = 200 
+                                arrUsers[ind-1].status = 200 
 
                                 //обновить бд рассылку
                                 const newDistrib = await Distributionw.update(
@@ -282,7 +282,7 @@ const getDistributionsPlan = async() => {
                                 countSuccess = countSuccess + 1  
                                 
                                 //обновить статус доставки
-                                arrUsers[index-1].status = 200  
+                                arrUsers[ind-1].status = 200  
 
                                 //обновить бд рассылку
                                 const newDistrib = await Distributionw.update(
