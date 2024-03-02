@@ -71,7 +71,7 @@ const DistributionAddW = () => {
   const hostServer = process.env.REACT_APP_API_URL
 
   const { userWorkers: clients, workers } = useUsersContext();
-  const { addNewDistrib, addNewMessage2, setDistributionsWork } = useUsersContext();
+  const { addNewDistrib, addNewMessage2, distributionsWork, setDistributionsWork } = useUsersContext();
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]); 
   const [contacts2, setContacts2]= useState([]);
@@ -1171,6 +1171,37 @@ const delCategory7 = (category) => {
     setOnButtonStavka(e.target.value)
   }
 
+  const onDeleteMessages = (id) => {
+    const distrib = distributionsWork.filter(p => p.id === id)
+    console.log("distrib: ", distrib)
+    const arrUsers = JSON.parse(distrib[0].report)
+    arrUsers.map(async(item)=> {
+      console.log(item.mess ? item.mess : '...')
+      
+      //удалить сообщение через сокет
+      //delMessageContext(message.id, message.date, message.chatId)
+
+      //удалить сообщение в базе данных
+      //delMessage(message.id)
+
+      const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${item.user}&message_id=${item.mess}`
+
+      const delToTelegram = await $host.get(url_del_msg);
+
+      //console.log("Удаляемое сообщение: ", message.id)
+      //console.log("Дата сообщения: ", message.date)
+
+      //Выводим сообщение об успешной отправке
+      if (delToTelegram) {
+        console.log('Ваше сообщение удалено из телеграм! ', delToTelegram);	
+      }           
+      //А здесь сообщение об ошибке при отправке
+      else {
+        console.log('Что-то пошло не так. Попробуйте ещё раз.');
+      }
+    })
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -1649,7 +1680,7 @@ const delCategory7 = (category) => {
                                       </div>
                                       <div>
                                         {(editDistrib && delivered) ? 
-                                          <CButton color="danger">
+                                          <CButton color="danger" onClick={()=>onDeleteMessages(distribId)}>
                                             Удалить
                                           </CButton>
                                         :<></>

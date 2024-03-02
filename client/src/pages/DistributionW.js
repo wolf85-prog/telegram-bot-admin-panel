@@ -80,6 +80,7 @@ const DistributionW = () => {
         const newTimeMessage = `${chas}:${minut}`
 
         let space = /,/gi;
+        let deliv = distrib.delivered
 
         const newDistribution = {
           id: distrib.id,
@@ -92,11 +93,11 @@ const DistributionW = () => {
           count: distrib.count,
           datestart: newDateMessage,
           timestart: newTimeMessage,
-          status: distrib.delivered ? "отправлено" : "запланировано",
+          status: deliv ? "отправлено" : "запланировано",
           uuid: distrib.uuid,
           success: distrib.success,
           report: distrib.report,
-          delivered: distrib.delivered,
+          delivered: deliv,
 				}
         arrDitributions.push(newDistribution)
       })
