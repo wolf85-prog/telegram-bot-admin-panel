@@ -148,6 +148,7 @@ const getDistributionsPlan = async() => {
                     arrUsers.push({
                         user: user,
                         status: 500,
+                        mess: null,
                     }) 
 
 
@@ -236,14 +237,30 @@ const getDistributionsPlan = async() => {
                         });
                     }
                 
-                    const keyboard2 = JSON.stringify({
+                    let keyboard2
+
+                    if (item.stavka) {
+                        keyboard2 = JSON.stringify({
                         inline_keyboard: [
                             [
-                                {"text": 'Принять', callback_data:'/accept ' + projId}, //  + pretendent.id
-                                {"text": 'Отклонить', callback_data:'/cancel ' + projId},
+                                {"text": 'Принять', callback_data:'/accept ' + valueProject},
+                                {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
+                            ],
+                            [
+                                {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + valueProject}},
                             ],
                         ]
-                    });
+                        });
+                    } else {
+                        keyboard2 = JSON.stringify({
+                        inline_keyboard: [
+                            [
+                                {"text": 'Принять', callback_data:'/accept ' + valueProject},
+                                {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
+                            ],
+                        ]
+                        });
+                    }
 
                     try {
                         //отправить в телеграмм
@@ -259,6 +276,8 @@ const getDistributionsPlan = async() => {
                                 
                                 //обновить статус доставки
                                 arrUsers[ind-1].status = 200 
+                                arrUsers[ind-1].mess = sendToTelegram.data.result.message_id 
+
 
                                 //обновить бд рассылку
                                 const newDistrib = await Distributionw.update(
@@ -282,7 +301,9 @@ const getDistributionsPlan = async() => {
                                 countSuccess = countSuccess + 1  
                                 
                                 //обновить статус доставки
-                                arrUsers[ind-1].status = 200  
+                                arrUsers[ind-1].status = 200 
+                                arrUsers[ind-1].mess = sendPhotoToTelegram.data.result.message_id   
+
 
                                 //обновить бд рассылку
                                 const newDistrib = await Distributionw.update(

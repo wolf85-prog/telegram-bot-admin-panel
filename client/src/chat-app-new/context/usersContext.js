@@ -845,6 +845,11 @@ const fetchMessageSpecResponse = async(data) => {
 		//console.log("projects get socket: ", projects.length)
 		setPretendents(pretendents)
 	}
+	else if (data.text.startsWith('Пользователь нажал кнопку "Отклонить" в рассылке') && !data.text.includes('_reply_')) {
+		//get all pretendent
+		let pretendents = await getAllPretendent();
+		setPretendents(pretendents)
+	}
 	else if (data.text.startsWith('Твоя ставка отправлена') && !data.text.includes('_reply_')) {
 		//console.log("Твоя ставка отправлена: ")
 		//play sound

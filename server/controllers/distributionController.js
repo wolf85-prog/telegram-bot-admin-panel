@@ -290,6 +290,7 @@ class DistributionController {
             const text = exist.dataValues.text
             const image = exist.dataValues.image
             const editButton = exist.dataValues.editButton
+            const stavkaButton = exist.dataValues.stavka
 
             //console.log("selected: ", selected)
 
@@ -303,6 +304,7 @@ class DistributionController {
                     arrUsers.push({
                         user: user,
                         status: 500,
+                        mess: null,
                     }) 
 
                     //найти беседу
@@ -356,19 +358,19 @@ class DistributionController {
 
                     let keyboard2
 
-                    // if (onButtonStavka) {
-                    //     keyboard2 = JSON.stringify({
-                    //     inline_keyboard: [
-                    //         [
-                    //             {"text": 'Принять', callback_data:'/accept ' + valueProject},
-                    //             {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
-                    //         ],
-                    //         [
-                    //             {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + valueProject}},
-                    //         ],
-                    //     ]
-                    //     });
-                    // } else {
+                    if (stavkaButton) {
+                        keyboard2 = JSON.stringify({
+                        inline_keyboard: [
+                            [
+                                {"text": 'Принять', callback_data:'/accept ' + valueProject},
+                                {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
+                            ],
+                            [
+                                {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + valueProject}},
+                            ],
+                        ]
+                        });
+                    } else {
                         keyboard2 = JSON.stringify({
                         inline_keyboard: [
                             [
@@ -377,7 +379,7 @@ class DistributionController {
                             ],
                         ]
                         });
-                    //}
+                    }
         
 
                     //отправить в телеграмм
@@ -399,7 +401,7 @@ class DistributionController {
                         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
                         //const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
                         
-                        //console.log("Отправка текста...")
+                        console.log("Отправка текста...")
                         
                         sendTextToTelegram = await $host.get(url_send_msg);
                         //console.log("sendTextToTelegram: ", sendTextToTelegram)
@@ -412,12 +414,13 @@ class DistributionController {
                             
                             //обновить статус доставки
                             arrUsers[index-1].status = 200  
+                            arrUsers[index-1].mess = sendTextToTelegram.data.result.message_id 
 
                             //обновить бд рассылку
                             const newDistrib = await Distributionw.update(
                                 { delivered: true,
-                                report: JSON.stringify(arrUsers),  
-                                success: countSuccess},
+                                    report: JSON.stringify(arrUsers),  
+                                    success: countSuccess},
                                 { where: {id: id} }
                             )
                         }                    
@@ -435,7 +438,8 @@ class DistributionController {
                             countSuccess = countSuccess + 1  
                                     
                             //обновить статус доставки
-                            arrUsers[index-1].status = 200  
+                            arrUsers[index-1].status = 200
+                            arrUsers[index-1].mess = sendPhotoToTelegram.data.result.message_id   
 
                             //обновить бд рассылку
                             const newDistrib = await Distributionw.update(

@@ -61,6 +61,8 @@ const DistributionAddW = () => {
   const datestart = location.state?.date
   const img = location.state?.img
   const uuidProj = location.state?.uuid
+  const editDistrib = location.state?.editD
+  const delivered = location.state?.delivered
   
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_HOST
@@ -170,6 +172,7 @@ const DistributionAddW = () => {
         console.log("Сохраненные категории: ", categoriesitem)
         console.log("Сохраненная дата: ", datestart)
         console.log("Сохраненный UUID", uuidProj)
+        console.log("Доставлено: ", delivered)
         
         const distrib = await getDistributionW(distribId)
         onHandlingProject(distrib.projectId, true, projects, uuidProj)
@@ -1077,6 +1080,7 @@ const delCategory7 = (category) => {
           uuid: uuidDistrib,
           textbutton: textButton,
           showbuttons: showEditButtonAdd,
+          stavka: onButtonStavka,
         }
       });
     } 
@@ -1120,7 +1124,8 @@ const delCategory7 = (category) => {
         button: textButton,
         users: selected.toString(),
         uuid: uuidDistrib,  
-        editButton: showEditButtonAdd,  
+        editButton: showEditButtonAdd,
+        stavka: onButtonStavka,  
       }
       //console.log("message send button: ", message);
 
@@ -1640,6 +1645,14 @@ const delCategory7 = (category) => {
                                               {showUpload ? <CSpinner style={{width: '20px', height: '20px'}}/> : 'Запланировать'}
                                               </CButton>
                                           </Link>
+                                        }             
+                                      </div>
+                                      <div>
+                                        {(editDistrib && delivered) ? 
+                                          <CButton color="danger">
+                                            Удалить
+                                          </CButton>
+                                        :<></>
                                         }             
                                       </div>
                                       <div>
