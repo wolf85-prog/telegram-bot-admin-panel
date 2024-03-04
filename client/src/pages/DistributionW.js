@@ -80,7 +80,9 @@ const DistributionW = () => {
         const newTimeMessage = `${chas}:${minut}`
 
         let space = /,/gi;
+
         let deliv = distrib.delivered
+        //console.log("deliv: ", distrib.delivered)
 
         const newDistribution = {
           id: distrib.id,

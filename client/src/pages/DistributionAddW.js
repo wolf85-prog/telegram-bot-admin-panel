@@ -39,7 +39,7 @@ import {
   newPretendent,
   editDistributionW2 
 } from '../http/adminAPI';
-import { uploadFile } from '../http/chatAPI';
+import { uploadFile, delMessage } from '../http/chatAPI';
 import { newMessage } from '../http/workerAPI';
 import specData from './../data/specData';
 import categories from './../data/categories';
@@ -71,7 +71,7 @@ const DistributionAddW = () => {
   const hostServer = process.env.REACT_APP_API_URL
 
   const { userWorkers: clients, workers } = useUsersContext();
-  const { addNewDistrib, addNewMessage2, distributionsWork, setDistributionsWork } = useUsersContext();
+  const { addNewDistrib, addNewMessage2, distributionsWork, setDistributionsWork, delMessageContext } = useUsersContext();
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]); 
   const [contacts2, setContacts2]= useState([]);
@@ -104,7 +104,8 @@ const DistributionAddW = () => {
   const [arrLength, setArrLength] = useState(0);
   const [text, setText] = useState('');
   const [countChar, setCountChar] = useState(0);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false); //показать сообщенме об отпарвке
+  const [visibleDelMess, setVisibleDelMess] = useState(false); //показать сообщенме об удалении
   const [showEditButtonAdd, setShowEditButtonAdd] = useState(false);
   const [showNameProject, setShowNameProject] = useState(true);
   const [sendToAdmin, setSendToAdmin] = useState(true);
@@ -1152,7 +1153,7 @@ const delCategory7 = (category) => {
       setText('')
       setShowEditButtonAdd(false)
       setTextButton('')
-      setVisible(true)
+      setVisible(true) //показать сообщение об отправке
       setValue('')
 
       setValueSelect(0)
@@ -1175,28 +1176,28 @@ const delCategory7 = (category) => {
     const distrib = distributionsWork.filter(p => p.id === id)
     console.log("distrib: ", distrib)
     const arrUsers = JSON.parse(distrib[0].report)
+    
     arrUsers.map(async(item)=> {
       console.log(item.mess ? item.mess : '...')
       
       //удалить сообщение через сокет
-      //delMessageContext(message.id, message.date, message.chatId)
+      //delMessageContext(item.mess, message.date, message.chatId)
 
       //удалить сообщение в базе данных
-      //delMessage(message.id)
+      delMessage(item.mess)
 
       const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${item.user}&message_id=${item.mess}`
 
       const delToTelegram = await $host.get(url_del_msg);
 
-      //console.log("Удаляемое сообщение: ", message.id)
-      //console.log("Дата сообщения: ", message.date)
 
       //Выводим сообщение об успешной отправке
       if (delToTelegram) {
         console.log('Ваше сообщение удалено из телеграм! ', delToTelegram);	
+        setVisibleDelMess(true) //показать сообщение об отправке
       }           
-      //А здесь сообщение об ошибке при отправке
       else {
+        //А здесь сообщение об ошибке при отправке
         console.log('Что-то пошло не так. Попробуйте ещё раз.');
       }
     })
@@ -1221,6 +1222,9 @@ const delCategory7 = (category) => {
                             <CCardBody>
                             <CAlert color="success" dismissible visible={visible} onClose={() => setVisible(false)}>
                               Сообщение успешно отправлено!
+                            </CAlert>
+                            <CAlert color="success" dismissible visible={visibleDelMess} onClose={() => setVisibleDelMess(false)}>
+                              Сообщения рассылки успешно удалены!
                             </CAlert>
                               <CForm>
                                 <div style={{color: '#f3f3f3'}}>
