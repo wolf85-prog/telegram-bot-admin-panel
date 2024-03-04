@@ -40,6 +40,7 @@ const Workers = () => {
   const [visibleA, setVisibleA] = useState(false)
 
   const [showTable, setShowTable] = useState([])
+  const [showComment, setShowComment] = useState([])
 
   const [text, setText]= useState("");
 
@@ -58,6 +59,15 @@ const Workers = () => {
     setShowTable(prevShownTable => ({
         ...prevShownTable,
         [ind]: !prevShownTable[ind]
+      }));
+  }
+
+  const handleClickCom = (ind) => {
+    console.log(ind, showComment[ind])
+
+    setShowComment(prevShownComment => ({
+        ...prevShownComment,
+        [ind]: !prevShownComment[ind]
       }));
   }
 
@@ -141,7 +151,10 @@ const Workers = () => {
                                           {item.rang}
                                         </CTableDataCell>
                                         <CTableDataCell style={{fontSize: '13px', textAlign: 'left'}}>
-                                          {item.comment}
+                                          <div onClick={()=>handleClickCom(index)} style={{cursor: 'pointer'}}>{!showComment[index] ? (item.comment ? 'Посмотреть' : '') : <br/>}</div>
+                                          <CCollapse visible={showComment[index]}>
+                                            {item.comment ? item.comment : <></>}
+                                          </CCollapse>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
                                           <div>{item.phone}</div>

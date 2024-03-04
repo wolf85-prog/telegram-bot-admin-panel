@@ -30,7 +30,7 @@ const Login = observer(() => {
     const click = async () => {
         try {
             const data = await login(email, password);
-            console.log(data)
+            //console.log(data)
             user.setUser(user)
             user.setIsAuth(true)
             navigate(ADMIN_ROUTE)
