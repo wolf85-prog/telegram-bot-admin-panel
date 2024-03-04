@@ -20,6 +20,7 @@ import {
   CTableHead,
   CTableHeaderCell,
   CTableRow,
+  CCollapse,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import {
@@ -106,6 +107,8 @@ const Admin = () => {
   const [widthGrafik, setWdthGrafik] = useState(0);
 
   const [text, setText]= useState("");
+
+  const [showTable, setShowTable] = useState([])
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
@@ -821,6 +824,15 @@ const Admin = () => {
     setShowWidget5(false) //категория 3
     
   }
+
+  const handleClick = (ind) => {
+    console.log(ind, showTable[ind])
+
+    setShowTable(prevShownTable => ({
+        ...prevShownTable,
+        [ind]: !prevShownTable[ind]
+      }));
+  }
   
   return (
     <div className='dark-theme'>
@@ -1274,17 +1286,17 @@ const Admin = () => {
                                       
                                 <CSpinner/> :
 
-                                <CTable align="middle" className="mb-0 border" hover responsive>
+                                <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '14px'}}>
                                   <CTableHead className='table-light'>
                                     <CTableRow>
                                       <CTableHeaderCell className="text-center" style={{width: '90px'}}>Дата</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '70px'}}>Время</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{width: '250px'}}>ФИО</CTableHeaderCell> 
-                                      <CTableHeaderCell className="text-center" style={{width: '150px'}}>Город</CTableHeaderCell> 
-                                      <CTableHeaderCell className="text-center" style={{width: '160px'}}>Специальность</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{width: '140px'}}>Дата рождения</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '240px'}}>ФИО</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{width: '130px'}}>Город</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" >Специальность</CTableHeaderCell>  
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '130px'}}>Дата рождения</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>                         
-                                      <CTableHeaderCell className="text-center" style={{width: '120px'}}>Ник</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" >Ник</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
@@ -1303,13 +1315,18 @@ const Admin = () => {
                                           {item.city ? item.city : ''}
                                         </CTableDataCell>
                                         <CTableDataCell style={{textAlign: 'left'}}>
-                                          <table>
-                                            {item.worklist !== '' ? (JSON.parse(item.worklist)).map((spec, index)=>( 
-                                                <tr key={index}>
-                                                  <td>{spec.spec !== '' ? "- " + spec.spec : ''}</td>
-                                                </tr>          
-                                            )) : ""}
-                                          </table>
+                                          <div onClick={()=>handleClick(index)} style={{cursor: 'pointer'}}>{!showTable[index] ? 'Посмотреть' : <br/>}</div>
+                                          <CCollapse visible={showTable[index]}>
+                                            <table>
+                                              <tbody>
+                                                {item.worklist !== '' ? (JSON.parse(item.worklist)).map((spec, index)=>( 
+                                                    <tr key={index}>
+                                                      <td>{spec.spec !== '' ? "- " + spec.spec : ''}</td>
+                                                    </tr>          
+                                                )) : ""}
+                                              </tbody> 
+                                            </table>
+                                          </CCollapse>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
                                           {item.dateborn ? item.dateborn : ''}
@@ -1318,7 +1335,7 @@ const Admin = () => {
                                           <div>{item.phone ? item.phone : ''}</div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          <div>{showNick ? specusers.find((user) => user.chatId === item.chatId)?.username : item.chatId}</div>
+                                          <div style={{fontSize: showNick ? '12px' : '14px'}}>{showNick ? specusers.find((user) => user.chatId === item.chatId)?.username : item.chatId}</div>
                                         </CTableDataCell> 
                                       </CTableRow>
                                       ))
