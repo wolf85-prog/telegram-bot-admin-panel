@@ -177,6 +177,11 @@ const DistributionAddW = () => {
         
         const distrib = await getDistributionW(distribId)
         onHandlingProject(distrib.projectId, true, projects, uuidProj)
+
+        //установка категорий
+        const indexCat = categories.findIndex(item=>item.label === categoriesitem)
+        setValueSelect(indexCat)
+
         //для текстового поля
         setText(distrib.text)
         //для телефона

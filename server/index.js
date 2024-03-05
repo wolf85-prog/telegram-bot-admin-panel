@@ -243,11 +243,11 @@ const getDistributionsPlan = async() => {
                         keyboard2 = JSON.stringify({
                         inline_keyboard: [
                             [
-                                {"text": 'Принять', callback_data:'/accept ' + valueProject},
-                                {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
+                                {"text": 'Принять', callback_data:'/accept ' + projId},
+                                {"text": 'Отклонить', callback_data:'/cancel ' + projId},
                             ],
                             [
-                                {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + valueProject}},
+                                {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + projId}},
                             ],
                         ]
                         });
@@ -255,8 +255,8 @@ const getDistributionsPlan = async() => {
                         keyboard2 = JSON.stringify({
                         inline_keyboard: [
                             [
-                                {"text": 'Принять', callback_data:'/accept ' + valueProject},
-                                {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
+                                {"text": 'Принять', callback_data:'/accept ' + projId},
+                                {"text": 'Отклонить', callback_data:'/cancel ' + projId},
                             ],
                         ]
                         });
@@ -331,7 +331,7 @@ const getDistributionsPlan = async() => {
                             type: "text",
                             text: text,
                             isBot: true,
-                            messageId: '',
+                            messageId: sendToTelegram.data.result.message_id,
                             buttons: '',
                         }
                     } else {
@@ -342,7 +342,7 @@ const getDistributionsPlan = async() => {
                             type: "image",
                             text: item.image,
                             isBot: true,
-                            messageId: '',
+                            messageId: sendPhotoToTelegram.data.result.message_id,
                             buttons: item.textButton ? item.textButton : '',
                         }
                     }
@@ -353,9 +353,9 @@ const getDistributionsPlan = async() => {
 
                     //сохранить в контексте
                     if(!item.image) {
-                        addNewMessage2(user, text, 'text', '', conversation_id, '', true);
+                        addNewMessage2(user, text, 'text', '', conversation_id, sendToTelegram.data.result.message_id, true);
                     } else {
-                        addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, '', true);
+                        addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, sendPhotoToTelegram.data.result.message_id, true);
                     }
                 })
 
