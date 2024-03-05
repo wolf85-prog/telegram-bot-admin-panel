@@ -24,7 +24,8 @@ import {
   CModalTitle,
   CModalBody,
   CModalFooter,
-  CFormInput
+  CFormInput,
+  CCollapse,
 } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
@@ -51,6 +52,8 @@ const DistributionW = () => {
 
   const [count, setCount] = useState(0)
   const [count2, setCount2] = useState(0)
+
+  const [showTable, setShowTable] = useState([])
 
   const [toast, addToast] = useState(0)
   const toaster = useRef()
@@ -191,6 +194,15 @@ const DistributionW = () => {
     setUserReceivers(filteredData);      
   }, [text, users]);
 
+
+  const handleClick = (ind) => {
+    console.log(ind, showTable[ind])
+
+    setShowTable(prevShownTable => ({
+        ...prevShownTable,
+        [ind]: !prevShownTable[ind]
+      }));
+  }
 
   return (
     <div className='dark-theme'>
@@ -337,13 +349,19 @@ const DistributionW = () => {
                                                       <CTableDataCell style={{width: '170px'}}>{item.userfamily} {item.username}</CTableDataCell>
                                                       <CTableDataCell style={{fontSize: '11px', width: '180px'}}>
                                                         {/* {JSON.parse(item.categories).map(it=>"- "+it.spec).join('\n')} */}
-                                                        <table>
-                                                          {item.categories !== '' ? (JSON.parse(item.categories)).map((spec, index)=>( 
-                                                              <tr key={index}>
-                                                                <td>{spec.spec !== '' ? "- " + spec.spec : ''}</td>
-                                                              </tr>          
-                                                          )) : ""}
-                                                        </table>
+                                                        
+                                                        <div onClick={()=>handleClick(index)} style={{cursor: 'pointer', paddingLeft: '35px'}}>{!showTable[index] ? 'Посмотреть' : <br/>}</div>
+                                                        <CCollapse visible={showTable[index]}>
+                                                          <table>
+                                                            <tbody>
+                                                              {item.categories !== '' ? (JSON.parse(item.categories)).map((spec, index)=>( 
+                                                                  <tr key={index}>
+                                                                    <td>{spec.spec !== '' ? "- " + spec.spec : ''}</td>
+                                                                  </tr>          
+                                                              )) : ""}
+                                                            </tbody> 
+                                                          </table>
+                                                        </CCollapse>
                                                       </CTableDataCell>
                                                       <CTableDataCell className='text-center' style={{width: '100px', color: item.status === 200 ? '#7070e7' : 'red'}}>{item.status === 200 ? "Получено" : "Не получено"}</CTableDataCell>
                                                     </CTableRow> 

@@ -118,7 +118,7 @@ const Admin = () => {
     //set tab
     setTabhub('Workhub')
 
-    //console.log("specusers: ", specusers)
+    console.log("specusers: ", specusers)
 
     setTimeout(()=> {
       setShowNick(!showNick)
@@ -1294,9 +1294,9 @@ const Admin = () => {
                                       <CTableHeaderCell className="text-center" style={{minWidth: '240px'}}>ФИО</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '130px'}}>Город</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" >Специальность</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '130px'}}>Дата рождения</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Дата</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>                         
-                                      <CTableHeaderCell className="text-center" >Ник</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>Ник</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
@@ -1309,13 +1309,13 @@ const Admin = () => {
                                           {new Date(item.createDate).getHours() + ' : '+ String(new Date(item.createDate).getMinutes()).padStart(2, "0")}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 || item.userfamily === 'Неизвестный' ? '#cd3838' : ''}}>
-                                            {item.userfamily ? item.userfamily : ''} {item.username ? item.username : ''} {item.from ? (item.from === 'Notion' ? "[N]" : '')  : ''}
+                                            {item.userfamily ? item.userfamily : ''} {item.username ? item.username : ''} {item.from ? (item.from === 'Notion' ? "[N]" : '')  : ''} {specusers.find((user) => user.chatId === item.chatId)?.block ? "[U]" : ''}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           {item.city ? item.city : ''}
                                         </CTableDataCell>
                                         <CTableDataCell style={{textAlign: 'left'}}>
-                                          <div onClick={()=>handleClick(index)} style={{cursor: 'pointer'}}>{!showTable[index] ? 'Посмотреть' : <br/>}</div>
+                                          <div onClick={()=>handleClick(index)} style={{cursor: 'pointer', textAlign: 'center'}}>{!showTable[index] ? 'Посмотреть' : <br/>}</div>
                                           <CCollapse visible={showTable[index]}>
                                             <table>
                                               <tbody>

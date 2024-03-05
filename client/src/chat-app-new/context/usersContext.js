@@ -241,6 +241,7 @@ fetchData()
 				
 				//let notion = {} //await getWorkerNotionId(user.chatId)
 				let worker = arrayWorker.find((item)=> item.chatId === user.members[0])
+				//console.log(worker)
 
 				let userbot = response2.find((item)=> item.chatId === worker?.chatId)		
 				
@@ -320,6 +321,7 @@ fetchData()
 							chatId: worker?.chatId,
 							avatar: "", //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
 							conversationId: conversationId ? conversationId : 0,
+							block: userbot.block ? userbot.block : '',
 							unread: 0, 
 							pinned: false,
 							typing: false,
