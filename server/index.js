@@ -329,7 +329,7 @@ const getDistributionsPlan = async() => {
                             receiverId: user,
                             conversationId: conversation_id,
                             type: "text",
-                            text: text,
+                            text: item.text,
                             isBot: true,
                             messageId: sendToTelegram.data.result.message_id,
                             buttons: '',
@@ -353,7 +353,7 @@ const getDistributionsPlan = async() => {
 
                     //сохранить в контексте
                     if(!item.image) {
-                        addNewMessage2(user, text, 'text', '', conversation_id, sendToTelegram.data.result.message_id, true);
+                        addNewMessage2(user, item.text, 'text', '', conversation_id, sendToTelegram.data.result.message_id, true);
                     } else {
                         addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, sendPhotoToTelegram.data.result.message_id, true);
                     }
