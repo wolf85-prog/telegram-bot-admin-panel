@@ -84,7 +84,7 @@ class DistributionController {
 
     //add Distribution
     async newDistributionW(req, res) {
-        const {text, image, project, receivers, datestart, delivered, projectId, count, date, users, button, del, uuid, editButton} = req.body
+        const {text, image, project, receivers, datestart, delivered, projectId, count, date, users, button, del, uuid, editButton, stavka} = req.body
         try {
             const distrib = await Distributionw.create({
                 text, 
@@ -100,7 +100,8 @@ class DistributionController {
                 button,
                 del,
                 uuid, 
-                editButton
+                editButton,
+                stavka
             })
             return res.status(200).json(distrib);
         } catch (error) {
