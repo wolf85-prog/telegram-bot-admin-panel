@@ -216,11 +216,11 @@ const Chat = () => {
                 type: "image",
                 text: host + image,
                 //isBot: '',
-				messageId: sendToTelegram.data.result.message_id,
+				messageId: sendPhotoToTelegram.data.result.message_id,
             }
 
 			//сохранить в контексте
-			addNewMessage(user.chatId, host + image, 'image', '', user.conversationId, sendToTelegram.data.result.message_id);
+			addNewMessage(user.chatId, host + image, 'image', '', user.conversationId, sendPhotoToTelegram.data.result.message_id);
         }
         //console.log("message send button: ", message);
 
