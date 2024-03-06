@@ -1143,11 +1143,11 @@ const delCategory7 = (category) => {
         editButton: showEditButtonAdd,
         stavka: onButtonStavka,  
       }
-      //console.log("message send button: ", message);
+      console.log("message send button: ", message);
 
       //сохранение рассылки в базе данных
-      const distrNew = await newDistributionW(message)
-      console.log("distrNew: ", distrNew.id)
+      //const distrNew = await newDistributionW(message)
+      //console.log("distrNew: ", distrNew.id)
 
       // selected.map(async (user, index) => { 
       //   const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
@@ -1157,7 +1157,7 @@ const delCategory7 = (category) => {
 
 
 
-      const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id);
+      //const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id);
 
       setShowSend(false)
 
@@ -1182,9 +1182,8 @@ const delCategory7 = (category) => {
   
   }
 
-
   const onChangeCheckButton = (e) => {
-    setOnButtonStavka(e.target.value)
+    setOnButtonStavka(e.target.checked)
   }
 
   const onDeleteMessages = (id) => {
