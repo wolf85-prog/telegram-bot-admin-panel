@@ -231,7 +231,8 @@ const getDistributionsPlan = async() => {
                         keyboard = JSON.stringify({
                             inline_keyboard: [
                                 [
-                                    {"text": item.textButton, callback_data:'/report'},
+                                    // {"text": item.textButton, callback_data:'/report'},
+                                    {"text": textButton, web_app: {url: item.target}}, 
                                 ],
                             ]
                         });
