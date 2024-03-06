@@ -103,6 +103,7 @@ const DistributionW = () => {
           success: distrib.success,
           report: distrib.report,
           delivered: deliv,
+          users: distrib.users,
 				}
         arrDitributions.push(newDistribution)
       })
@@ -289,7 +290,7 @@ const DistributionW = () => {
                                         </Link> */}
 
                                         {item.projectId ? 
-                                          <Link to={'/distributionw_add'} state={{editD: true, delivered: item.delivered, project: item.projectId, id: item.id, category: item.categories, img: item.image, date: item.datestart, uuid: item.uuid}}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
+                                          <Link to={'/distributionw_add'} state={{editD: true, delivered: item.delivered, project: item.projectId, id: item.id, category: item.categories, users: item.users, img: item.image, date: item.datestart, uuid: item.uuid}}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
                                           :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
                                         }
                                         

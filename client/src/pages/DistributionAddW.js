@@ -63,6 +63,7 @@ const DistributionAddW = () => {
   const uuidProj = location.state?.uuid
   const editDistrib = location.state?.editD
   const delivered = location.state?.delivered
+  const users = location.state?.users
   
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_HOST
@@ -174,6 +175,7 @@ const DistributionAddW = () => {
         console.log("Сохраненная дата: ", datestart)
         console.log("Сохраненный UUID", uuidProj)
         console.log("Доставлено: ", delivered)
+        console.log("Получатели: ", users.split(',').length)
         
         const distrib = await getDistributionW(distribId)
         onHandlingProject(distrib.projectId, true, projects, uuidProj)
@@ -181,6 +183,9 @@ const DistributionAddW = () => {
         //установка категорий
         const indexCat = categories.findIndex(item=>item.label === categoriesitem)
         setValueSelect(indexCat)
+
+        //установка получателей
+        setSelected([...users.split(',')])
 
         //для текстового поля
         setText(distrib.text)
