@@ -171,8 +171,19 @@ const Chat = () => {
 		temp = temp.replace(/\+/g, '%2b'); 		 //экранирование +
 		temp = temp.replace(/>/g, '%3e'); 		 //экранирование >
 		temp = temp.replace(/</g, '%3c'); 		 //экранирование <
-        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${temp}`
-		const sendToTelegram = await $host.get(url_send_msg);
+
+		let sendToTelegram
+		let sendPhotoToTelegram
+
+		if(!file) {
+			const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${temp}`
+			sendToTelegram = await $host.get(url_send_msg);
+		} else {
+			const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${person.id}&photo=${host+image}`
+            sendPhotoToTelegram = await $host.get(url_send_photo);
+		}
+        
+		
 
 		//Выводим сообщение об успешной отправке
 		if (sendToTelegram) {

@@ -858,7 +858,7 @@ const Admin = () => {
                   users={sortWorkers.length}
                   newUsers={newWorkers.length} 
                   activeUsers={activWorkers.length} 
-                  delUsers={0}
+                  delUsers={24}
                 />
                 :""}
 
