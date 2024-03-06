@@ -79,6 +79,7 @@ const Distributionw = sequelize.define('distributionw', {
     report: {type: DataTypes.TEXT},
     editButton: {type: DataTypes.BOOLEAN}, //редактируемая кнопка
     stavka: {type: DataTypes.BOOLEAN}, //альтернативная ставка кнопка
+    target: {type: DataTypes.STRING}, //ссылка;
 })
 
 const Report = sequelize.define('report', {
