@@ -217,7 +217,7 @@ const getDistributionsPlan = async() => {
                     //console.log("textButton: ", item.textButton)
 
                     //Передаем данные боту
-                    if (item.editButton) {
+                    if (item.textButton === '') {
                         console.log("textButton: НЕТ")
                         keyboard = JSON.stringify({
                             inline_keyboard: [

@@ -111,6 +111,7 @@ const DistributionAddW = () => {
   const [showNameProject, setShowNameProject] = useState(true);
   const [sendToAdmin, setSendToAdmin] = useState(true);
   const [textButton, setTextButton] = useState('');
+  const [textUrl, setTextUrl] = useState('');
   const [file, setFile] = useState(0);
   const [filePreview, setFilePreview] = useState();
   const [value, setValue] = useState("");
@@ -1066,6 +1067,10 @@ const delCategory7 = (category) => {
     setTextButton(e.target.value)
   }
 
+  const onChangeTextUrl = (e) => {
+    setTextUrl(e.target.value)
+  }
+
   //дублировать в админку
   const onChangeCheck = (e) => {
     //setSendToAdmin(e.target.value)
@@ -1618,8 +1623,8 @@ const delCategory7 = (category) => {
                                               id="inputTextButton" 
                                               placeholder="https://"
                                               style={{marginTop: '10px'}}
-                                              onChange={onChangeTextButton}
-                                              value={textButton}
+                                              onChange={onChangeTextUrl}
+                                              value={textUrl}
                                             />
                                           </CCol>
                                           
