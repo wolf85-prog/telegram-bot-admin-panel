@@ -64,6 +64,7 @@ const DistributionAddW = () => {
   const editDistrib = location.state?.editD
   const delivered = location.state?.delivered
   const users = location.state?.users
+  //const target = location.state?.target
   
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_HOST
@@ -80,6 +81,7 @@ const DistributionAddW = () => {
   const [proj, setProj] = useState('');
   const [planShow, setPlanShow] = useState(false);
   const [uuidDistrib, setUuidDistrib] = useState('');
+  const [target, setTarget] = useState('');
 
   const [arrCategory, setArrCategory] = useState([]);
   const [arrCategory2, setArrCategory2] = useState([]);
@@ -1068,7 +1070,7 @@ const delCategory7 = (category) => {
   }
 
   const onChangeTextUrl = (e) => {
-    setTextUrl(e.target.value)
+    setTarget(e.target.value)
   }
 
   //дублировать в админку
@@ -1097,6 +1099,7 @@ const delCategory7 = (category) => {
           textbutton: textButton,
           showbuttons: showEditButtonAdd,
           stavka: onButtonStavka,
+          target: target,
         }
       });
     } 
@@ -1142,6 +1145,7 @@ const delCategory7 = (category) => {
         uuid: uuidDistrib,  
         editButton: showEditButtonAdd,
         stavka: onButtonStavka,  
+        target: target,
       }
       console.log("message send button: ", message);
 
@@ -1623,7 +1627,7 @@ const delCategory7 = (category) => {
                                               placeholder="https://"
                                               style={{marginTop: '10px'}}
                                               onChange={onChangeTextUrl}
-                                              value={textUrl}
+                                              value={target}
                                             />
                                           </CCol>
                                           

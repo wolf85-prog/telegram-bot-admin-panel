@@ -59,6 +59,7 @@ const DistributionWPlaner = () => {
   const selected = location.state?.selected
   const uuidDistrib = location.state?.uuid
   const stavka = location.state?.stavka
+  const target = location.state?.target
 
 
   console.log("catDistr: ", catDistr)
@@ -2057,6 +2058,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           uuid: uuidDistrib, 
           editButton: showEditButtonAdd, 
           stavka: stavka,
+          target: target,
         }
         //сохранение рассылки в базе данных
         const dataDistrib = await newDistributionW(message) 

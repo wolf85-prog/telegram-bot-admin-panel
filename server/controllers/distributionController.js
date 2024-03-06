@@ -84,7 +84,7 @@ class DistributionController {
 
     //add Distribution
     async newDistributionW(req, res) {
-        const {text, image, project, receivers, datestart, delivered, projectId, count, date, users, button, del, uuid, editButton, stavka} = req.body
+        const {text, image, project, receivers, datestart, delivered, projectId, count, date, users, button, del, uuid, editButton, stavka, target} = req.body
         try {
             const distrib = await Distributionw.create({
                 text, 
@@ -101,7 +101,8 @@ class DistributionController {
                 del,
                 uuid, 
                 editButton,
-                stavka
+                stavka,
+                target
             })
             return res.status(200).json(distrib);
         } catch (error) {
@@ -292,6 +293,7 @@ class DistributionController {
             const image = exist.dataValues.image
             const editButton = exist.dataValues.editButton
             const stavkaButton = exist.dataValues.stavka
+            const target = exist.dataValues.target
 
             //console.log("selected: ", selected)
 
@@ -350,7 +352,7 @@ class DistributionController {
                         keyboard = JSON.stringify({
                             inline_keyboard: [
                                 [
-                                    {"text": textButton, callback_data:'/report'},
+                                    {"text": textButton, callback_data:'/report ' + target},
                                 ],
                             ]
                         });
@@ -550,6 +552,7 @@ class DistributionController {
             const text = exist.dataValues.text
             const image = exist.dataValues.image
             const editButton = exist.dataValues.editButton
+            const target = exist.dataValues.target
 
             //console.log("selected: ", selected)
 
