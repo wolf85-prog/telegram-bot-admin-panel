@@ -586,7 +586,7 @@ const Admin = () => {
         let month3 = []
 
         for (let i=1; i<=31; i++) {
-          const arrSpec = arr.filter(item => i === new Date(item.createDate).getDate());
+          const arrSpec = arr.filter(item => i === new Date(item.createDate).getDate() && new Date().getMonth() === new Date(item.createDate).getMonth());
           countSpec = arrSpec.length
           const newObj= {
             name: i<10 ? '0'+ i : ''+ i, 
@@ -974,7 +974,7 @@ const Admin = () => {
                   className="mb-4 box"
                   color="dark"
                   value={<></>}
-                  title=""
+                  title={new Date().toLocaleString('default', { month: 'long' })}
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
                     <Chart 
@@ -1026,7 +1026,7 @@ const Admin = () => {
                   className="mb-4 box"
                   color="dark"
                   value={<></>}
-                  title=""
+                  title={new Date().getFullYear()}
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
                   chart={
                     <Chart 

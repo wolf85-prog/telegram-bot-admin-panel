@@ -77,6 +77,7 @@ const ChatInput = ({
 							className="chat__attach-btn"
 							aria-label={btn.label}
 							key={btn.label}
+							onClick={()=>console.log(btn.click)}
 						>
 							<label htmlFor='fileInput'>
 								<Icon id={btn.icon} className="chat__attach-icon" />
