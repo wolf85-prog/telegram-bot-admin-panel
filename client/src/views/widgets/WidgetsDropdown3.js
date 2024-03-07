@@ -48,7 +48,7 @@ const WidgetsDropdown3 = ({
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-primary'),
-                    data: [soundUsers, 0, 0, 0, 0, 0, 0], //min: -5, max: 89,
+                    data: [(soundUsers-10)*100/soundUsers, (soundUsers-20)*100/soundUsers, (soundUsers-30)*100/soundUsers, 0, 0, 0, 0], //min: -5, max: 89,
                   },
                 ],
               }}
@@ -123,7 +123,7 @@ const WidgetsDropdown3 = ({
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-info'),
-                    data: [lightUsers, 0, 0, 0, 0, 0, 0], //min: -5 max: 39
+                    data: [(lightUsers-30)*100/lightUsers, (lightUsers-20)*100/lightUsers, (lightUsers-10)*100/lightUsers, 0, 0, 0, 0], //min: -5 max: 39
                   },
                 ],
               }}

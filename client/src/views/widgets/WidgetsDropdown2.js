@@ -55,7 +55,7 @@ const WidgetsDropdown2 = ({
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-primary'),
-                    data: [users, 0, 0, 0, 0, 0, 0],
+                    data: [(users-250)*100/users, (users-150)*100/users, (users-170)*100/users, 0, 0, 0, 0],
                   },
                 ],
               }}
@@ -130,7 +130,7 @@ const WidgetsDropdown2 = ({
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-info'),
-                    data: [newUsers, 0, 0, 0, 0, 0, 0],
+                    data: [(newUsers-2)*100/newUsers, (newUsers-5)*100/newUsers, (newUsers-2)*100/newUsers, 0, 0, 0, 0],
                   },
                 ],
               }}
