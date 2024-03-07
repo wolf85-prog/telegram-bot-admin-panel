@@ -465,37 +465,37 @@ const Admin = () => {
             nameDay = 'Пн'
             //let date = new Date(item.createDate);
             //let dayWeek = [7, 1, 2, 3, 4, 5, 6][date.getDay()];
-            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]);
+            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]  && i <= [7, 1, 2, 3, 4, 5, 6][new Date().getDay()]);
             countSpec = arrSpec.length
           }
           if (i===2) {
             nameDay = 'Вт'
-            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]);
+            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]  && i <= [7, 1, 2, 3, 4, 5, 6][new Date().getDay()]);
             countSpec = arrSpec.length
           }
           if (i===3) {
             nameDay = 'Ср'
-            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]);
+            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]  && i <= [7, 1, 2, 3, 4, 5, 6][new Date().getDay()]);
             countSpec = arrSpec.length
           }
           if (i===4) {
             nameDay = 'Чт'
-            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]);
+            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]  && i <= [7, 1, 2, 3, 4, 5, 6][new Date().getDay()]);
             countSpec = arrSpec.length
           }
           if (i===5) {
             nameDay = 'Пт'
-            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]);
+            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]  && i <= [7, 1, 2, 3, 4, 5, 6][new Date().getDay()]);
             countSpec = arrSpec.length
           }
           if (i===6) {
             nameDay = 'Сб'
-            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]);
+            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]  && i <= [7, 1, 2, 3, 4, 5, 6][new Date().getDay()]);
             countSpec = arrSpec.length
           }
           if (i===7) {
             nameDay = 'Вс'
-            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()]);
+            const arrSpec = arr.filter(item => i === [7, 1, 2, 3, 4, 5, 6][new Date(item.createDate).getDay()] && i <= [7, 1, 2, 3, 4, 5, 6][new Date().getDay()]);
             countSpec = arrSpec.length
           }
 
@@ -900,6 +900,7 @@ const Admin = () => {
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
                   chart={            
                     <Chart 
+                      range={20}
                       data={dayWorkers} 
                       data2={[]}
                       // data2={
@@ -948,6 +949,7 @@ const Admin = () => {
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
                     <Chart 
+                      range={20}
                       data={weekWorkers} 
                       data2={[]} //удаленные пользователи
                       // data2={
@@ -978,6 +980,7 @@ const Admin = () => {
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
                     <Chart 
+                      range={20}
                       data={monthWorkers} 
                       // data={
                       //   [
@@ -1030,6 +1033,7 @@ const Admin = () => {
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
                   chart={
                     <Chart 
+                      range={800}
                       data={yearWorkers}
                       data2={[]} 
                       // data2={

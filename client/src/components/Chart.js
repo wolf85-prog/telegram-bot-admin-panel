@@ -1,7 +1,7 @@
 import React from 'react';
 import * as d3 from "d3";
 
-const Chart = ({ data, data2, width, height }) => {
+const Chart = ({ data, data2, width, height, range }) => {
   const [activeIndex, setActiveIndex] = React.useState(null);
   
   const getX = d3.scaleBand()
@@ -9,7 +9,7 @@ const Chart = ({ data, data2, width, height }) => {
     .range([0, width]);
 
   const getY = d3.scaleLinear()
-    .domain([0, 1000])
+    .domain([0, range])
     .range([height, 0]);
   
   const getYAxis = ref => {
