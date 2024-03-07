@@ -190,6 +190,9 @@ const DistributionAddW = () => {
         //установка получателей
         setSelected([...users.split(',')])
 
+        //установка категори получателей
+        setCategoryAll(categoriesitem)
+
         //для текстового поля
         setText(distrib.text)
         //для телефона
