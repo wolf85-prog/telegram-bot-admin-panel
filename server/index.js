@@ -232,7 +232,7 @@ const getDistributionsPlan = async() => {
                             inline_keyboard: [
                                 [
                                     // {"text": item.textButton, callback_data:'/report'},
-                                    {"text": textButton, web_app: {url: item.target}}, 
+                                    {"text": item.textButton, web_app: {url: item.target}}, 
                                 ],
                             ]
                         });
