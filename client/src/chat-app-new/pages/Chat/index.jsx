@@ -183,7 +183,6 @@ const Chat = () => {
             sendPhotoToTelegram = await $host.get(url_send_photo);
 		}
         
-		
 
 		//Выводим сообщение об успешной отправке
 		if (sendToTelegram) {
@@ -202,7 +201,7 @@ const Chat = () => {
                 conversationId: user.conversationId,
                 type: "text",
                 text: mess,
-                //isBot: false,
+                isBot: null,
 				messageId: sendToTelegram.data.result.message_id,
             }
 
@@ -215,7 +214,7 @@ const Chat = () => {
                 conversationId: user.conversationId,
                 type: "image",
                 text: host + image,
-                //isBot: '',
+                isBot: null,
 				messageId: sendPhotoToTelegram.data.result.message_id,
             }
 

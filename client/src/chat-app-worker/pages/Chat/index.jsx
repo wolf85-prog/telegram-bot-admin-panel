@@ -233,8 +233,20 @@ const Chat = () => {
 			temp = temp.replace(/\+/g, '%2b'); 		 //экранирование +
 			temp = temp.replace(/>/g, '%3e'); 		 //экранирование >
 			temp = temp.replace(/</g, '%3c'); 		 //экранирование <
-			const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`
-			const sendToTelegram = await $host.get(url_send_msg);
+			
+			let sendToTelegram
+			let sendPhotoToTelegram
+
+			// const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`
+			// const sendToTelegram = await $host.get(url_send_msg);
+
+			if(!file) {
+				const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`
+				sendToTelegram = await $host.get(url_send_msg);
+			} else {
+				const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
+				sendPhotoToTelegram = await $host.get(url_send_photo);
+			}
 
 			//Выводим сообщение об успешной отправке
 			if (sendToTelegram) {
@@ -267,11 +279,11 @@ const Chat = () => {
 					type: "image",
 					text: host + image,
 					isBot: null,
-					messageId: sendToTelegram.data.result.message_id,
+					messageId: sendPhotoToTelegram.data.result.message_id,
 				}
 
 				//сохранить в контексте
-				addNewMessage2(user.chatId, host + image, 'image', '', user.conversationId, sendToTelegram.data.result.message_id);
+				addNewMessage2(user.chatId, host + image, 'image', '', user.conversationId, sendPhotoToTelegram.data.result.message_id);
 			}
 			console.log("message send button: ", message);
 

@@ -255,11 +255,14 @@ fetchData()
 					//console.log("messages: ", messages)
 
 					//получить последнее сообщение (без сообщений из рассылки)
-					messages.map((message) => {
-						if (message.isBot === false || message.isBot === null) {
-							messages2.push(message)
-						}	
-					})
+					if (messages) {
+						messages.map((message) => {
+							if (message.isBot === false || message.isBot === null) {
+								messages2.push(message)
+							}	
+						})
+					}
+					
 					//const newArray = array.map((element)=>element);
 					const messageDates = Object.keys(messages2); //messages
 
@@ -272,30 +275,32 @@ fetchData()
 					const arrayMessage = []
 					const allDate = []
 				
-					messages.map(message => {
-						const d = new Date(message.createdAt);
-						const year = d.getFullYear();
-						const month = String(d.getMonth()+1).padStart(2, "0");
-						const day = String(d.getDate()).padStart(2, "0");
-						const chas = d.getHours();
-						const minut = String(d.getMinutes()).padStart(2, "0");
+					if (messages) {
+						messages.map(message => {
+							const d = new Date(message.createdAt);
+							const year = d.getFullYear();
+							const month = String(d.getMonth()+1).padStart(2, "0");
+							const day = String(d.getDate()).padStart(2, "0");
+							const chas = d.getHours();
+							const minut = String(d.getMinutes()).padStart(2, "0");
+						
+							const newDateMessage = `${day}.${month}.${year}`
 					
-						const newDateMessage = `${day}.${month}.${year}`
-				
-						const newMessage = {
-							date: newDateMessage,
-							content: message.text,
-							image: message.type === 'image' ? true : false,
-							descript: message.buttons ? message.buttons : '',
-							sender: message.senderId,
-							time: chas + ' : ' + minut,
-							status: 'sent',
-							id:message.messageId,
-							reply:message.replyId,
-						}
-						arrayMessage.push(newMessage)
-						allDate.push(newDateMessage)
-					})
+							const newMessage = {
+								date: newDateMessage,
+								content: message.text,
+								image: message.type === 'image' ? true : false,
+								descript: message.buttons ? message.buttons : '',
+								sender: message.senderId,
+								time: chas + ' : ' + minut,
+								status: 'sent',
+								id:message.messageId,
+								reply:message.replyId,
+							}
+							arrayMessage.push(newMessage)
+							allDate.push(newDateMessage)
+						})
+					}
 				
 					const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
 				
@@ -771,7 +776,7 @@ useEffect(() => {
 
 
 	//отправить сообщение из админки 
-	const addNewMessage = (userId, message, type, textButton, convId, messageId) => {
+	const addNewMessage = (userId, message, type, textButton, convId, messageId, isBot) => {
 
 		socket.emit("sendAdmin", { 
 			senderId: chatAdminId,
@@ -781,6 +786,7 @@ useEffect(() => {
 			buttons: textButton,
 			convId: convId,
 			messageId,
+			isBot: isBot,
 		})
 	};
 
