@@ -39,6 +39,8 @@ const Chat = () => {
 	const [image, setImage]= useState("");
 	const [mess, setMess] = useState("");
 
+	const [clearFile, setClearFile] = useState(false)
+
 	const [showCloseButton, setShowCloseButton] = useState(false)
 
 	//select
@@ -244,8 +246,14 @@ const Chat = () => {
 				const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`
 				sendToTelegram = await $host.get(url_send_msg);
 			} else {
-				const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
-				sendPhotoToTelegram = await $host.get(url_send_photo);
+				console.log("send image: ", image.slice(-3))
+				if (image.slice(-3) === 'jpg' || image.slice(-3) === 'png' || image.slice(-3)==='peg' || image.slice(-3)==='tif' || image.slice(-3)==='bmp') {
+					const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
+					sendPhotoToTelegram = await $host.get(url_send_photo);
+				} else {
+					const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personW.id}&document=${host+image}`
+					sendPhotoToTelegram = await $host.get(url_send_doc);
+				}	
 			}
 
 			//Выводим сообщение об успешной отправке
@@ -354,6 +362,11 @@ const Chat = () => {
 		addNewMessage2(user.chatId, text, 'text', 'Согласен предоставить персональные данные', client.conversationId, sendToTelegram.data.result.message_id);
     }
 
+	const clickClearFile = () => {
+		console.log("clear file...")
+		setClearFile(false)
+		
+	}
 
 	return (
 		<div className="chat">
@@ -366,6 +379,9 @@ const Chat = () => {
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 					closeSidebar={() => closeSidebar(setShowProfileSidebar)}
 					showCloseButton={showCloseButton}
+					setClearFile={setClearFile}
+					clearFile={clearFile}
+					clickClearFile={clickClearFile}
 				/>
 				<div className="chat__content">
 					<Convo lastMsgRef={lastMsgRef} messages={user.messages} />

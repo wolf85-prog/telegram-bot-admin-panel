@@ -25,6 +25,7 @@ const Chat = () => {
 	const { users, setUsers, setUserAsUnread, addNewMessage } = useUsersContext();
 	const { person } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
+	const [clearFile, setClearFile] = useState(false)
 
 	const chatId = person.id;
 	let user = users.filter((user) => user.chatId === chatId.toString())[0];
@@ -144,6 +145,8 @@ const Chat = () => {
                setImage(response.data.path.split('.team')[1]);
 			   //сообщение с ссылкой на файл
 			   setMess(host + response.data.path.split('.team')[1])
+
+			   setClearFile(true)
             }
         }
         getImage();
@@ -179,8 +182,14 @@ const Chat = () => {
 			const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${temp}`
 			sendToTelegram = await $host.get(url_send_msg);
 		} else {
-			const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${person.id}&photo=${host+image}`
-            sendPhotoToTelegram = await $host.get(url_send_photo);
+			console.log("send image: ", image.slice(-3))
+			if (image.slice(-3) === 'jpg' || image.slice(-3) === 'png' || image.slice(-3)==='peg' || image.slice(-3)==='tif' || image.slice(-3)==='bmp') {
+				const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${person.id}&photo=${host+image}`
+				sendPhotoToTelegram = await $host.get(url_send_photo);
+			} else {
+				const url_send_doc = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${person.id}&document=${host+image}`
+				sendPhotoToTelegram = await $host.get(url_send_doc);
+			}
 		}
         
 
@@ -237,6 +246,12 @@ const Chat = () => {
         setImage("");
 	};
 
+	const clickClearFile = () => {
+		console.log("clear file...")
+		setClearFile(false)
+		
+	}
+
 
 	return (
 		<div className="chat">
@@ -247,6 +262,9 @@ const Chat = () => {
 					user={person}
 					openProfileSidebar={() => openSidebar(setShowProfileSidebar)}
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
+					setClearFile={setClearFile}
+					clearFile={clearFile}
+					clickClearFile={clickClearFile}
 				/>
 				<div className="chat__content">
 					{loading ?

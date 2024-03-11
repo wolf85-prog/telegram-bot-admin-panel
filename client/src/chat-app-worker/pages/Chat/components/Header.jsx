@@ -2,8 +2,11 @@ import React from "react";
 import Icon from "./../../../components/Icon";
 import OptionsBtn from "./../../../components/OptionsButton";
 import avatarDefault from "./../../../../chat-app-new/assets/images/no-avatar.png";
-
-const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, showCloseButton }) => {
+import { 
+	CButton
+  } from '@coreui/react'
+  
+const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, showCloseButton, clearFile, setClearFile, clickClearFile  }) => {
 
 	const host = process.env.REACT_APP_API_URL
 
@@ -42,6 +45,7 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 				</p>
 			</div>
 			<div className="chat__actions">
+				{clearFile ? <CButton color="danger" onClick={clickClearFile}>Очистить</CButton> : ''}
 				<button
 					className="chat__action"
 					aria-label="Search"
