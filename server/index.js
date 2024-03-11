@@ -277,7 +277,7 @@ const getDistributionsPlan = async() => {
                                 
                                 //обновить статус доставки
                                 arrUsers[ind-1].status = 200 
-                                arrUsers[ind-1].mess = sendToTelegram.data.result.message_id 
+                                arrUsers[ind-1].mess = sendToTelegram?.data?.result.message_id 
 
 
                                 //обновить бд рассылку
@@ -303,7 +303,7 @@ const getDistributionsPlan = async() => {
                                 
                                 //обновить статус доставки
                                 arrUsers[ind-1].status = 200 
-                                arrUsers[ind-1].mess = sendPhotoToTelegram.data.result.message_id   
+                                arrUsers[ind-1].mess = sendPhotoToTelegram?.data?.result.message_id   
 
 
                                 //обновить бд рассылку
@@ -332,7 +332,7 @@ const getDistributionsPlan = async() => {
                             type: "text",
                             text: item.text,
                             isBot: true,
-                            messageId: sendToTelegram.data.result.message_id,
+                            messageId: sendToTelegram?.data?.result.message_id,
                             buttons: '',
                         }
                     } else {
@@ -343,7 +343,7 @@ const getDistributionsPlan = async() => {
                             type: "image",
                             text: item.image,
                             isBot: true,
-                            messageId: sendPhotoToTelegram.data.result.message_id,
+                            messageId: sendPhotoToTelegram?.data?.result.message_id,
                             buttons: item.textButton ? item.textButton : '',
                         }
                     }
@@ -354,9 +354,9 @@ const getDistributionsPlan = async() => {
 
                     //сохранить в контексте
                     if(!item.image) {
-                        addNewMessage2(user, item.text, 'text', '', conversation_id, sendToTelegram.data.result.message_id, true);
+                        addNewMessage2(user, item.text, 'text', '', conversation_id, sendToTelegram?.data?.result.message_id, true);
                     } else {
-                        addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, sendPhotoToTelegram.data.result.message_id, true);
+                        addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, sendPhotoToTelegram?.data?.result.message_id, true);
                     }
                 })
 
