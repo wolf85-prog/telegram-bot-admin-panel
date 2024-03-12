@@ -181,7 +181,7 @@ const DistributionEditW = () => {
         console.log("Получатели: ", users.split(',').length)
         
         const distrib = await getDistributionW(distribId)
-        onHandlingProject(distrib.projectId, true, projects, uuidProj)
+        onHandlingProject(projId, true, projects, uuidProj)
 
         //установка категорий
         const indexCat = categories.findIndex(item=>item.label === categoriesitem)
@@ -194,10 +194,11 @@ const DistributionEditW = () => {
         setCategoryAll(categoriesitem)
 
         //для текстового поля
-        setText(distrib.text)
+        //setText(distrib.text)
+
         //для телефона
-        if (distrib.image !== ' ') {
-          setFilePreview(distrib.image) 
+        if (img !== ' ') {
+          setFilePreview(img) 
         }  
         
         setPlanShow(true)
@@ -1118,7 +1119,7 @@ const delCategory7 = (category) => {
     //console.log("постер: ", img)
     //console.log("получатели: ", selected)
 
-    setShowSend(true)
+    //setShowSend(true)
 
     let countSuccess = 0
 
@@ -1153,8 +1154,8 @@ const delCategory7 = (category) => {
       console.log("message send button: ", message);
 
       //сохранение рассылки в базе данных
-      const distrNew = await newDistributionW(message)
-      console.log("distrNew: ", distrNew.id)
+      //const distrNew = await newDistributionW(message)
+      //console.log("distrNew: ", distrNew.id)
 
       // selected.map(async (user, index) => { 
       //   const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
@@ -1164,9 +1165,9 @@ const delCategory7 = (category) => {
 
 
 
-      const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id);
+      //const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id);
 
-      setShowSend(false)
+      //setShowSend(false)
 
       //обновить список рассылок
       addNewDistrib(true)
@@ -1180,7 +1181,7 @@ const delCategory7 = (category) => {
 
       setValueSelect(0)
 
-      //setTimeout(() => navigate('/distributionw'), 1000);
+      setTimeout(() => navigate('/distributionw'), 1000);
 
     }
     else {
@@ -1712,7 +1713,7 @@ const delCategory7 = (category) => {
                                         }             
                                       </div>
                                       <div>
-                                        <CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton>
+                                        <CButton color="primary"  onClick={onSendText}>Сохранить</CButton>
                                         
                                         {/* <CButton onClick={() => setVisible(!visible)}>Vertically centered modal</CButton> */}
                                         

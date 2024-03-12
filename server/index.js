@@ -232,7 +232,6 @@ const getDistributionsPlan = async() => {
                         keyboard = JSON.stringify({
                             inline_keyboard: [
                                 [
-                                    // {"text": item.textButton, callback_data:'/report'},
                                     {"text": item.textButton, web_app: {url: item.target}}, 
                                 ],
                             ]
@@ -293,7 +292,7 @@ const getDistributionsPlan = async() => {
                         } else {
 
                             url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.editButton ? keyboard : keyboard2}`
-                            //console.log("url_send_photo2: ", url_send_photo)
+                            console.log("url_send_photo2: ", url_send_photo)
 
                             sendPhotoToTelegram = await $host.get(url_send_photo);
                             console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)

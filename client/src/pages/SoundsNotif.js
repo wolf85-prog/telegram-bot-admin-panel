@@ -49,7 +49,7 @@ const SoundsNotif = () => {
 
         const sortedNotif = [...notifs].sort((a, b) => {       
 					var dateA = a.date, dateB = b.date 
-					return dateA-dateB  //сортировка по убывающей дате  
+					return dateB-dateA  //сортировка по убывающей дате  
 				})
 
         setSoundNotif(sortedNotif)  
