@@ -352,7 +352,6 @@ class DistributionController {
                         keyboard = JSON.stringify({
                             inline_keyboard: [
                                 [
-                                    // {"text": textButton, callback_data:'/report ' + target},
                                     {"text": textButton, web_app: {url: target}}, 
                                 ],
                             ]
@@ -398,7 +397,6 @@ class DistributionController {
                     //     countSuccess = countSuccess + 1 
                     // }
                     // console.log(countSuccess)
-
                     
                     
                     if (text !== '') {
@@ -418,7 +416,7 @@ class DistributionController {
                             
                             //обновить статус доставки
                             arrUsers[index-1].status = 200  
-                            arrUsers[index-1].mess = sendTextToTelegram.data.result.message_id 
+                            arrUsers[index-1].mess = sendTextToTelegram.data?.result?.message_id 
 
                             //обновить бд рассылку
                             const newDistrib = await Distributionw.update(
@@ -430,7 +428,7 @@ class DistributionController {
                         }                    
                     } else {
                         url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${editButton ? keyboard : keyboard2}`
-                        // //console.log("url_send_photo2: ", url_send_photo)
+                        console.log("url_send_photo2: ", url_send_photo)
 
                         sendPhotoToTelegram = await $host.get(url_send_photo);
                         //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
@@ -443,7 +441,7 @@ class DistributionController {
                                     
                             //обновить статус доставки
                             arrUsers[index-1].status = 200
-                            arrUsers[index-1].mess = sendPhotoToTelegram.data.result.message_id   
+                            arrUsers[index-1].mess = sendPhotoToTelegram.data?.result?.message_id   
 
                             //обновить бд рассылку
                             const newDistrib = await Distributionw.update(
@@ -467,7 +465,7 @@ class DistributionController {
                                 type: "text",
                                 text: text,
                                 isBot: true,
-                                messageId: sendTextToTelegram.data.result.message_id,
+                                messageId: sendTextToTelegram.data?.result?.message_id,
                                 buttons: '',
                             }
                     } else if (image) {
@@ -479,7 +477,7 @@ class DistributionController {
                                 type: "image",
                                 text: image,
                                 isBot: true,
-                                messageId: sendPhotoToTelegram.data.result.message_id,
+                                messageId: sendPhotoToTelegram.data?.result?.message_id,
                                 buttons: textButton,
                             }
                     }

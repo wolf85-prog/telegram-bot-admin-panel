@@ -214,11 +214,9 @@ const getDistributionsPlan = async() => {
                     const projId = item.projectId 
                     
                     let keyboard
-                    
-                    //console.log("textButton: ", item.textButton)
 
                     //Передаем данные боту
-                    if (item.textButton === '') {
+                    if (item.button === '') {
                         console.log("textButton: НЕТ")
                         keyboard = JSON.stringify({
                             inline_keyboard: [
@@ -228,11 +226,11 @@ const getDistributionsPlan = async() => {
                             ]
                         });
                     } else {
-                        //console.log("textButton: ...")
+                        //console.log("textButton: ", item.button)
                         keyboard = JSON.stringify({
                             inline_keyboard: [
                                 [
-                                    {"text": item.textButton, web_app: {url: item.target}}, 
+                                    {"text": item.button, web_app: {url: item.target}}, 
                                 ],
                             ]
                         });
@@ -295,7 +293,7 @@ const getDistributionsPlan = async() => {
                             console.log("url_send_photo2: ", url_send_photo)
 
                             sendPhotoToTelegram = await $host.get(url_send_photo);
-                            console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
+                            //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
 
                             const { status } = sendPhotoToTelegram;
 
@@ -333,7 +331,7 @@ const getDistributionsPlan = async() => {
                             type: "text",
                             text: item.text,
                             isBot: true,
-                            messageId: '',
+                            messageId: sendToTelegram.data?.result?.message_id,
                             buttons: '',
                         }
                     } else {
@@ -344,8 +342,8 @@ const getDistributionsPlan = async() => {
                             type: "image",
                             text: item.image,
                             isBot: true,
-                            messageId: '',
-                            buttons: item.textButton ? item.textButton : '',
+                            messageId: sendPhotoToTelegram.data?.result?.message_id,
+                            buttons: item.button ? item.button : '',
                         }
                     }
                     //console.log("message send: ", message);
@@ -355,9 +353,9 @@ const getDistributionsPlan = async() => {
 
                     //сохранить в контексте
                     if(!item.image) {
-                        addNewMessage2(user, item.text, 'text', '', conversation_id, '', true);
+                        addNewMessage2(user, item.text, 'text', '', conversation_id, sendToTelegram.data?.result?.message_id, true);
                     } else {
-                        addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, '', true);
+                        addNewMessage2(user, host + item.image, 'image', item.button, conversation_id, sendPhotoToTelegram.data?.result?.message_id, true);
                     }
                 }, 100 * ++ind) 
                 
