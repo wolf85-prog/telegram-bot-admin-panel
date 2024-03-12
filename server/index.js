@@ -269,6 +269,7 @@ const getDistributionsPlan = async() => {
                             const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
                             
                             sendToTelegram = await $host.get(url_send_msg);
+                            console.log(sendToTelegram)
 
                             const { status } = sendToTelegram;
 
@@ -294,7 +295,7 @@ const getDistributionsPlan = async() => {
                             //console.log("url_send_photo2: ", url_send_photo)
 
                             sendPhotoToTelegram = await $host.get(url_send_photo);
-                            //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
+                            console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
 
                             const { status } = sendPhotoToTelegram;
 

@@ -187,10 +187,10 @@ const Admin = () => {
 				const newDateActivity = `${day}.${month}.${year}`
 
         const newClientName = client.name.includes("|") ? client.name.split(" | ")[1] : client.name
-
-        const allMessages = messages.length //всего сообщений
-        const fromAdmin = messages.filter(el => el.senderId === chatAdminId);
-        const messagesUsers = messages.filter(el => el.senderId === client.chatId);
+         
+        const allMessages = messages ? messages.length : [] //всего сообщений
+        const fromAdmin = messages ? messages.filter(el => el.senderId === chatAdminId) : [];
+        const messagesUsers = messages ? messages.filter(el => el.senderId === client.chatId) : [];
 
         const arr = clients.filter(el => el.message === '');
         setNewClients(arr)
