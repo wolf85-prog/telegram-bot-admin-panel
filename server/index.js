@@ -136,6 +136,7 @@ const getDistributionsPlan = async() => {
             const timerId = setTimeout(async() => {
                
                 objPlan.users.map(async (user, ind) => {
+                setTimeout(async()=> { 
                     console.log("Пользователю ID: " + user + " сообщение " + item.text + " отправлено!")
 
                     //let conversationId = await getConversation(user)
@@ -269,7 +270,7 @@ const getDistributionsPlan = async() => {
                             const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
                             
                             sendToTelegram = await $host.get(url_send_msg);
-                            console.log(sendToTelegram)
+                            //console.log(sendToTelegram)
 
                             const { status } = sendToTelegram;
 
@@ -278,7 +279,7 @@ const getDistributionsPlan = async() => {
                                 
                                 //обновить статус доставки
                                 arrUsers[ind-1].status = 200 
-                                arrUsers[ind-1].mess = '' 
+                                arrUsers[ind-1].mess = sendToTelegram.data?.result?.message_id    
 
 
                                 //обновить бд рассылку
@@ -295,7 +296,7 @@ const getDistributionsPlan = async() => {
                             //console.log("url_send_photo2: ", url_send_photo)
 
                             sendPhotoToTelegram = await $host.get(url_send_photo);
-                            console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
+                            //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
 
                             const { status } = sendPhotoToTelegram;
 
@@ -304,7 +305,7 @@ const getDistributionsPlan = async() => {
                                 
                                 //обновить статус доставки
                                 arrUsers[ind-1].status = 200 
-                                arrUsers[ind-1].mess = ''   
+                                arrUsers[ind-1].mess = sendPhotoToTelegram.data?.result?.message_id   
 
 
                                 //обновить бд рассылку
@@ -359,6 +360,8 @@ const getDistributionsPlan = async() => {
                     } else {
                         addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, '', true);
                     }
+                }, 100 * ++index) 
+                
                 })
 
                 // let exist = await Distributionw.findOne( {where: {id: item.id}} )           
