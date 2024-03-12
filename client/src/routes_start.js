@@ -17,6 +17,7 @@ import {
     WORKERS_ROUTE,
     DISTRIBUTIONW_ROUTE,
     DISTRIBUTIONADDW_ROUTE,
+    DISTRIBUTIONEDITW_ROUTE,
     DISTRIBUTIONWPLANER_ROUTE,
     SOUNDSNOTIF_ROUTE,
 } from "./utils/consts";
@@ -38,6 +39,7 @@ const Settings = React.lazy(() => import('./pages/Settings'))
 const Workers = React.lazy(() => import('./pages/Workers'))
 const DistributionW = React.lazy(() => import('./pages/DistributionW'))
 const DistributionAddW = React.lazy(() => import('./pages/DistributionAddW'))
+const DistributionEditW = React.lazy(() => import('./pages/DistributionEditW'))
 const DistributionWPlaner = React.lazy(() => import('./pages/DistributionWPlaner'))
 
 const SoundsNotif = React.lazy(() => import('./pages/SoundsNotif'))
@@ -60,6 +62,7 @@ export const authRoutes = [
     { path: WORKERS_ROUTE, name: 'Специалисты', Component: Workers },
     { path: DISTRIBUTIONW_ROUTE, name: 'Рассылки', Component: DistributionW },
     { path: DISTRIBUTIONADDW_ROUTE, name: 'Создание рассылки', Component: DistributionAddW },
+    { path: DISTRIBUTIONEDITW_ROUTE, name: 'Редактирование рассылки', Component: DistributionEditW },
     { path: DISTRIBUTIONWPLANER_ROUTE, name: 'Рассылки', Component: DistributionWPlaner },
     { path: SOUNDSNOTIF_ROUTE, name: 'Звуковые уведомления', Component: SoundsNotif },
     { path: '/', name: 'Пункт управления', Component: Admin },

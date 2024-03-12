@@ -296,7 +296,7 @@ const getDistributionsPlan = async() => {
                             //console.log("url_send_photo2: ", url_send_photo)
 
                             sendPhotoToTelegram = await $host.get(url_send_photo);
-                            //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
+                            console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
 
                             const { status } = sendPhotoToTelegram;
 
@@ -364,17 +364,6 @@ const getDistributionsPlan = async() => {
                 
                 })
 
-                // let exist = await Distributionw.findOne( {where: {id: item.id}} )           
-                // if(!exist){
-                //         console.log("Рассылка не существует!");
-                // }
-                // //Обновить отчет о доставке
-                // const newDistrib = await Distributionw.update(
-                //     { delivered: true,
-                //         report: JSON.stringify(arrUsers),  
-                //         success: countSuccess},
-                //     { where: {id: item.id} }
-                // )
             }, milliseconds)
 
             tasks.push(timerId)
