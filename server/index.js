@@ -360,7 +360,7 @@ const getDistributionsPlan = async() => {
                     } else {
                         addNewMessage2(user, host + item.image, 'image', item.textButton, conversation_id, '', true);
                     }
-                }, 100 * ++index) 
+                }, 100 * ++ind) 
                 
                 })
 
