@@ -30,6 +30,7 @@ const port = process.env.PORT || 5000;
 const token = process.env.TELEGRAM_API_TOKEN_WORK
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const host = process.env.HOST
+const webAppAddStavka = process.env.WEBAPP_STAVKA
 
 const $host = axios.create({
     baseURL: process.env.REACT_APP_API_URL
