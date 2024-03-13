@@ -249,9 +249,11 @@ const Chat = () => {
 				console.log("send image: ", image.slice(-3))
 				if (image.slice(-3) === 'jpg' || image.slice(-3) === 'png' || image.slice(-3)==='peg' || image.slice(-3)==='tif' || image.slice(-3)==='bmp' || image.slice(-3)==='pdf') {
 					const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
+					console.log("url_send_photo: ", url_send_photo)
 					sendPhotoToTelegram = await $host.get(url_send_photo);
 				} else {
 					const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personW.id}&document=${host+image}`
+					console.log("url_send_doc: ", url_send_doc)
 					sendPhotoToTelegram = await $host.get(url_send_doc);
 				}	
 			}
