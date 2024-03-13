@@ -182,13 +182,12 @@ const Chat = () => {
 			const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${person.id}&parse_mode=html&text=${temp}`
 			sendToTelegram = await $host.get(url_send_msg);
 		} else {
-			console.log("send image: ", image.slice(-3))
-			if (image.slice(-3) === 'jpg' || image.slice(-3) === 'png' || image.slice(-3)==='peg' || image.slice(-3)==='tiff' || image.slice(-3)==='bmp') {
-				const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${person.id}&photo=${host+image}`
-				sendPhotoToTelegram = await $host.get(url_send_photo);
-			} else {
+			if (image.slice(-3) === 'gif' || image.slice(-3) === 'pdf' || image.slice(-3)==='zip') {
 				const url_send_doc = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${person.id}&document=${host+image}`
 				sendPhotoToTelegram = await $host.get(url_send_doc);
+			} else {
+				const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${person.id}&photo=${host+image}`
+				sendPhotoToTelegram = await $host.get(url_send_photo);
 			}
 		}
         
