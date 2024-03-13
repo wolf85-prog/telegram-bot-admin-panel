@@ -1630,7 +1630,6 @@ const delCategory7 = (category) => {
                                               placeholder="https://"
                                               style={{marginTop: '10px'}}
                                               onChange={onChangeTextUrl}
-                                              value={target}
                                             />
                                           </CCol>
                                           
