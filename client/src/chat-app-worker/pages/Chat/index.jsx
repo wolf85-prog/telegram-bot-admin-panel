@@ -247,7 +247,7 @@ const Chat = () => {
 				sendToTelegram = await $host.get(url_send_msg);
 			} else {
 				console.log("send image: ", image.slice(-3))
-				if (image.slice(-3) === 'jpg' || image.slice(-3) === 'png' || image.slice(-3)==='peg' || image.slice(-3)==='tif' || image.slice(-3)==='bmp') {
+				if (image.slice(-3) === 'jpg' || image.slice(-3) === 'png' || image.slice(-3)==='peg' || image.slice(-3)==='tif' || image.slice(-3)==='bmp' || image.slice(-3)==='pdf') {
 					const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
 					sendPhotoToTelegram = await $host.get(url_send_photo);
 				} else {
