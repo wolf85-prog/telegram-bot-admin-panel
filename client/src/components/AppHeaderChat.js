@@ -49,12 +49,12 @@ const AppHeader = () => {
         </CHeaderNav>
         <CHeaderNav>
           <CNavItem>
-            <CNavLink href="#">
+            <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
               <CIcon icon={cilBell} size="lg" />
             </CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="#">
+            <CNavLink href="/filemanager" style={{position: 'relative'}}>
               <CIcon icon={cilList} size="lg" />
             </CNavLink>
           </CNavItem>

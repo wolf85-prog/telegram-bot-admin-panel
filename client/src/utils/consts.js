@@ -24,3 +24,4 @@ export const LOGIN_ROUTE = '/login'
 export const REGISTRATION_ROUTE = '/register'
 
 export const SOUNDSNOTIF_ROUTE = '/soundsnotif'
+export const FILEMANAGER_ROUTE = '/filemanager'

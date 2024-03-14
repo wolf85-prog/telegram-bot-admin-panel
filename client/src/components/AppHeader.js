@@ -66,7 +66,7 @@ const AppHeader = (props) => {
             </CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="#">
+            <CNavLink href="/filemanager" style={{position: 'relative'}}>
               <CIcon icon={cilList} size="lg" />
             </CNavLink>
           </CNavItem>
