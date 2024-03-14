@@ -463,7 +463,7 @@ useEffect(() => {
       let projects = await getProjects3();
       //console.log("projects: ", projects)
 
-      setProjects(projects) 
+      //setProjects(projects) 
 
 		pretendents.map(async (worker, i) => {
 
@@ -578,7 +578,6 @@ useEffect(() => {
 			
 			//get all projects
 			let projects = await getProjectsApi();
-			//console.log("projects get socket: ", projects.length)
 			setProjects(projects)
 		}
 		else {
@@ -851,7 +850,7 @@ const fetchMessageSpecResponse = async(data) => {
 
 		let workers = await getWorkers()
       	let projects = await getProjects3();
-      	setProjects(projects) 
+      	//setProjects(projects) 
 
 		pretendents.map(async (worker, i) => {
 
@@ -902,7 +901,7 @@ const fetchMessageSpecResponse = async(data) => {
 		//setPretendents(pretendents)
 		let workers = await getWorkers()
       	let projects = await getProjects3();
-      	setProjects(projects) 
+      	//setProjects(projects) 
 
 		pretendents.map(async (worker, i) => {
 
@@ -959,7 +958,7 @@ const fetchMessageSpecResponse = async(data) => {
 		//setPretendents(pretendents)
 		let workers = await getWorkers()
       	let projects = await getProjects3();
-      	setProjects(projects) 
+      	//setProjects(projects) 
 
 		pretendents.map(async (worker, i) => {
 

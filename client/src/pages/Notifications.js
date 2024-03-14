@@ -25,21 +25,21 @@ const columns = [
   },
   {
       name: 'Заказчик',
-      //selector: row => row.receiverId,
+      selector: row => row.receiverId,
       sortable: true,
   },
   {
       name: 'Менеджер',
-      //selector: row => row.managerId,
+      selector: row => row.managerId,
       sortable: true,
   },
   {
       name: 'Адрес',
-      //selector: row => row.address,
+      selector: row => row.address,
   },
   {
       name: 'Контакты',
-      //selector: row => row.contacts,
+      selector: row => row.contacts,
       sortable: true,
   },
 ];
@@ -112,7 +112,7 @@ const Notifications = () => {
       console.log("notifications: ", notifications)
 
       notifications.map(async (project) => {
-        console.log("date: ", project.createdAt)
+        //console.log("date: ", project.createdAt)
 
         const manager = [...zakazchiki];
         let userIndex2 = zakazchiki?.findIndex((man) => man.id === project.managerId);  
