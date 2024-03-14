@@ -369,7 +369,7 @@ const Admin = () => {
 
         for (let i=0; i<=23; i++) {
 
-          const arrSpec = arr.filter(item => i === new Date(item.createDate).getHours());
+          const arrSpec = arr.filter(item => i === new Date(item.createDate).getHours() && i <= new Date().getHours());
           countSpec = arrSpec.length
           
           const newObj= {
@@ -855,8 +855,8 @@ const Admin = () => {
 
                 {showWidget2 
                 ?<WidgetsDropdown2
-                  users={sortWorkers.length}
-                  newUsers={newWorkers.length} 
+                  users={sortWorkers}
+                  newUsers={newWorkers} 
                   activeUsers={activWorkers.length} 
                   delUsers={24}
                 />

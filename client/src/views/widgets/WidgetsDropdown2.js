@@ -35,7 +35,7 @@ const WidgetsDropdown2 = ({
           color="primary"
           value={
             <>
-              {users} {/*{' '}
+              {users.length} {/*{' '}
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
@@ -55,7 +55,12 @@ const WidgetsDropdown2 = ({
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-primary'),
-                    data: [(users-250)*100/users, (users-150)*100/users, (users-170)*100/users, 0, 0, 0, 0],
+                    data: [
+                      (users.filter(item => new Date(item.createDate).getMonth() === 0)).length*100/users.length-5, 
+                      (users.filter(item => new Date(item.createDate).getMonth() === 1)).length*100/users.length-5, 
+                      (users.filter(item => new Date(item.createDate).getMonth() === 2)).length*100/users.length-5, 
+                      0, 0, 0, 0
+                    ],
                   },
                 ],
               }}
@@ -77,8 +82,8 @@ const WidgetsDropdown2 = ({
                     },
                   },
                   y: {
-                    min: -10,
-                    max: 90,
+                    min: -5,
+                    max: 95,
                     display: false,
                     grid: {
                       display: false,
@@ -110,7 +115,7 @@ const WidgetsDropdown2 = ({
           color="info"
           value={
             <>
-              {newUsers} 
+              {newUsers.length} 
               {/* <span className="fs-6 fw-normal">
                 (40.9% <CIcon icon={cilArrowTop} />)
               </span> */}
@@ -130,7 +135,12 @@ const WidgetsDropdown2 = ({
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-info'),
-                    data: [(newUsers-2)*100/newUsers, (newUsers-5)*100/newUsers, (newUsers-2)*100/newUsers, 0, 0, 0, 0],
+                    data: [
+                      (newUsers.filter(item => new Date(item.createDate).getMonth() === 0)).length*100/newUsers.length-5, 
+                      (newUsers.filter(item => new Date(item.createDate).getMonth() === 1)).length*100/newUsers.length-5, 
+                      (newUsers.filter(item => new Date(item.createDate).getMonth() === 2)).length*100/newUsers.length-5, 
+                      0, 0, 0, 0
+                    ],
                   },
                 ],
               }}
@@ -152,8 +162,8 @@ const WidgetsDropdown2 = ({
                     },
                   },
                   y: {
-                    min: -10,
-                    max: 90,
+                    min: -5,
+                    max: 95,
                     display: false,
                     grid: {
                       display: false,
