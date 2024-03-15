@@ -11,6 +11,7 @@ import Convo from "./components/Convo";
 import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider';
 import { newMessage, uploadFile } from "src/http/workerAPI";
+import { editCountWMessage } from "src/http/adminAPI";
 import { $host } from './../../../http/index'
 import sendSound from './../../../chat-app-new/assets/sounds/sendmessage.mp3';
 import axios from 'axios';
@@ -63,6 +64,8 @@ const Chat = () => {
 			scrollToLastMsg();
 			setUserAsUnread(user.chatId);
 			setCountMessage(0)
+			//обнулить кол-во сообщений
+			editCountWMessage()
 		}
 	}, []);
 

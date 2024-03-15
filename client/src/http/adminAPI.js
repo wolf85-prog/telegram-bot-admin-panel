@@ -386,6 +386,39 @@ export const newCountMessagePretendent = async (count) =>{
     }
 }
 
+
+//--------------------------------------------------------------------------------------
+
+// message
+export const editCountMessage = async (count) =>{
+    try {
+        await $host.get(`api/message/count/update`); 
+    } catch (error) {
+        console.log("error while calling newCountMessage api",error.message);
+    }
+}
+
+// wmessage
+export const editCountWMessage = async (count) =>{
+    try {
+        await $host.get(`api/wmessage/count/update`); 
+    } catch (error) {
+        console.log("error while calling newCountWMessage api",error.message);
+    }
+}
+
+// pretendent
+export const editCountMessagePretendent = async (count) =>{
+    try {
+        await $host.get(`api/pretendent/count/update`); 
+    } catch (error) {
+        console.log("error while calling newCountMessagePretendent api",error.message);
+    }
+}
+
+
+//------------------------------------------------------------------------------------------
+
 //notif
 export const getSoundNotif = async()=>{
     try {
