@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import CIcon from '@coreui/icons-react'
 import {
   cilBell,
@@ -15,7 +15,7 @@ import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import CompIcon from 'src/assets/images/dashboard3.png'
-import { newPretendent } from 'src/http/adminAPI'
+import { newPretendent, getCountMessage } from 'src/http/adminAPI'
 
 // sidebar nav config
 //import navigation from '../_nav'
@@ -26,7 +26,17 @@ const AppSidebar = () => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   const { countMessage, newProject, countMessageWork, countPretendent } = useUsersContext();
-  //console.log("countMessage: ", countMessage)
+
+  const [count, setCount ] = useState(0);
+  const [countMesW, setCountMesW ] = useState(0);
+  //console.log("countMessage: ", getCountMessage())
+
+  useEffect(async() => {
+    const res = await getCountMessage()
+    console.log("res appsidebar: ", res)
+    setCount(res.pretendents)
+    setCountMesW(res.workers)
+  },[countMessage, newProject, countMessageWork, countPretendent])
   
   let navigation = []
 
@@ -93,7 +103,7 @@ const AppSidebar = () => {
       name: 'Специалисты',
       to: '/chatwork',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-      badge: countMessageWork !== 0 ? {color: 'info', text: countMessageWork,} : "",
+      badge: countMessageWork !== 0 ? {color: 'info', text: countMesW,} : "",
       style: {backgroundColor: '#0078d421'},
     },
     {
@@ -107,7 +117,7 @@ const AppSidebar = () => {
       name: 'Уведомления',
       to: '/workers',
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-      badge: countPretendent ? {color: 'info', text: '1',} : "",
+      badge: countPretendent ? {color: 'info', text: count,} : "",
     },
   ]
 

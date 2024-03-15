@@ -18,6 +18,30 @@ class MessageController {
         }
     }
 
+    //add count message
+    async newCountWMessage(req, res) {
+        const count = req.params.count
+        try {
+            await CountMessage.update({workers: count}, {where: {id: 1}})
+
+            return res.status(200).json("Message has been sent successfully");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    //add count message
+    async newCountMessagePretendent(req, res) {
+        const count = req.params.count
+        try {
+            await CountMessage.update({pretendents: count}, {where: {id: 1}})
+
+            return res.status(200).json("Message has been sent successfully");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
     //count message
     async getCountMessages(req, res) {
         try {           

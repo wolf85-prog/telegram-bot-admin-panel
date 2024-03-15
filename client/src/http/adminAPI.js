@@ -368,6 +368,24 @@ export const newCountMessage = async (count) =>{
     }
 }
 
+// wmessage
+export const newCountWMessage = async (count) =>{
+    try {
+        await $host.get(`api/wmessage/count/add/${count}`); 
+    } catch (error) {
+        console.log("error while calling newCountWMessage api",error.message);
+    }
+}
+
+// pretendent
+export const newCountMessagePretendent = async (count) =>{
+    try {
+        await $host.get(`api/pretendent/count/add/${count}`); 
+    } catch (error) {
+        console.log("error while calling newCountMessagePretendent api",error.message);
+    }
+}
+
 //notif
 export const getSoundNotif = async()=>{
     try {

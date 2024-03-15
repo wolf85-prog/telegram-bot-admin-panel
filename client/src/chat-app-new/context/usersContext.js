@@ -10,6 +10,8 @@ import { getDistributions,
 	getManagers, 
 	getProjectsApi, 
 	getCompanys,
+	newCountMessagePretendent,
+	newCountWMessage,
 	getCountMessage, 
 	getWorkerId,
 	getProjects3,
@@ -841,8 +843,8 @@ const fetchMessageSpecResponse = async(data) => {
 		audioPretendent.play();
 
 		//пришел новый претендент
-		//setNewPretendent(true)
-		//console.log("countPretendent: ", countPretendent + 1)
+		const res = await newCountMessagePretendent(countPretendent + 1)
+
 		setCountPretendent(countPretendent + 1);
 
 		//get all pretendent
@@ -1003,7 +1005,11 @@ const fetchMessageSpecResponse = async(data) => {
 	}
 	else {
 		setCountMessageWork(countMessageWork + 1)
+		
+		//пришло новое сообщение
+		const res = await newCountWMessage(countMessageWork + 1)
 		//console.log("Пришло новое сообщение в workhub: ", count+1)
+
 		//play sound
 		audioWorkhub.play();		
 	}

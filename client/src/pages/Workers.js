@@ -78,6 +78,7 @@ const Workers = () => {
       console.log("workers-pretendent: ", pretendents)
       setSpec(pretendents); 
       setLoading(false)
+      setCountPretendent(0)
     }
 
     fetchData()
