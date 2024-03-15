@@ -2085,6 +2085,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
           users: selected.toString(),  
           uuid: uuidDistrib, 
           editButton: showEditButtonAdd,  
+          stavka: stavka,
+          target: target,
         }
         //сохранение рассылки в базе данных
         const dataDistrib2 = await newDistributionW(message)
