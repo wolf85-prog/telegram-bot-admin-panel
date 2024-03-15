@@ -42,43 +42,6 @@ class MessageController {
         }
     }
 
-//-----------------------------------------------------------------------------
-
-    async editCountMessage(req, res) {
-        //const count = req.params.count
-        try {
-            await CountMessage.update({managers: 0}, {where: {id: 1}})
-
-            return res.status(200).json("Message has been sent successfully");
-        } catch (error) {
-            return res.status(500).json(error.message);
-        }
-    }
-
-    //add count message
-    async editCountWMessage(req, res) {
-        //const count = req.params.count
-        try {
-            await CountMessage.update({workers: 0}, {where: {id: 1}})
-
-            return res.status(200).json("Message has been sent successfully");
-        } catch (error) {
-            return res.status(500).json(error.message);
-        }
-    }
-
-    //add count message
-    async editCountMessagePretendent(req, res) {
-        //const count = req.params.count
-        try {
-            await CountMessage.update({pretendents: 0}, {where: {id: 1}})
-
-            return res.status(200).json("Message has been sent successfully");
-        } catch (error) {
-            return res.status(500).json(error.message);
-        }
-    }
-
 //------------------------------------------------------------------------------
 
     //count message

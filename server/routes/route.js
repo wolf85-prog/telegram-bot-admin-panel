@@ -4,7 +4,6 @@ const userController = require('../controllers/userController')
 const authMiddleware = require('../middleware/authMiddleware')
 const { newMessage, delMessage, getMessages, getLastMessages, getAllMessages, getCountMessages, 
     newCountMessage, newCountWMessage, newCountMessagePretendent,
-    editCountMessage, editCountWMessage, editCountMessagePretendent,
  } = require('../controllers/messageController')
 const { newConversation, getConversation, getConversations } = require('../controllers/conversationController')
 const { addUser, getUsers, getUser, editUser, editUserAvatar} = require('../controllers/userbotController')
@@ -61,10 +60,6 @@ route.get('/message/count/get', getCountMessages)
 route.get('/message/count/add/:count', newCountMessage)
 route.get('/wmessage/count/add/:count', newCountWMessage)
 route.get('/pretendent/count/add/:count', newCountMessagePretendent)
-
-route.get('/message/count/update', editCountMessage)
-route.get('/wmessage/count/update', editCountWMessage)
-route.get('/pretendent/count/update', editCountMessagePretendent)
 
 
 route.post('/conversation/add', newConversation)
