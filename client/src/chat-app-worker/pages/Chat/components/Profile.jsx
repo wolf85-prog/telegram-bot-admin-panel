@@ -53,6 +53,8 @@ const Profile = ({ user, closeSidebar }) => {
 	const divBlock = useRef(null);
 
 	const [crmId, setCrmId] = useState("")
+	const [crmId2, setCrmId2] = useState("")
+	const [crmId3, setCrmId3] = useState("")
 
 	useEffect(() => {
 		setImg(`${host}${user.avatar}`)
@@ -96,11 +98,21 @@ const Profile = ({ user, closeSidebar }) => {
 			console.log("pretendentArray: ", pretendentArray)
 			
 			if (pretendentArray.length > 0) {
-				const projectId = pretendentArray[pretendentArray.length-1].projectId
+				const projectId = pretendentArray[pretendentArray.length-1]?.projectId
+				const projectId2 = pretendentArray[pretendentArray.length-2]?.projectId
+				const projectId3 = pretendentArray[pretendentArray.length-3]?.projectId
 				//получить CrmId по id проекта
 				const project = await getProjectId(projectId)
-				const crmId = project.properties.Crm_ID.rich_text[0].plain_text
+				const project2 = await getProjectId(projectId2)
+				const project3 = await getProjectId(projectId3)
+
+				const crmId = project?.properties ? project?.properties?.Crm_ID.rich_text[0].plain_text : '-'
+				const crmId2 = project?.properties ? project2?.properties?.Crm_ID.rich_text[0].plain_text : '-'
+				const crmId3 = project?.properties ? project3?.properties?.Crm_ID.rich_text[0].plain_text : '-' 
+
 				setCrmId(crmId)
+				setCrmId2(crmId2)
+				setCrmId3(crmId3)
 			} else {
 				setCrmId('-')
 			}		
@@ -191,6 +203,12 @@ const Profile = ({ user, closeSidebar }) => {
 							Последний отклик на проект
 						</span>
 						
+						<span className="profile__action-text profile__action-text--top profile__notion">
+							{crmId3}
+						</span>
+						<span className="profile__action-text profile__action-text--top profile__notion">
+							{crmId2}
+						</span>
 						<span className="profile__action-text profile__action-text--top profile__notion">
 							{crmId}
 						</span>

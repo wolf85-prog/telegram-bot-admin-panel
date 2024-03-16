@@ -10,12 +10,6 @@ import {
 import useAutosizeTextArea from "./useAutosizeTextArea.ts";
 import {Dropdown, DropdownButton, ButtonGroup } from 'react-bootstrap';
 
-const attachButtons = [
-	// { icon: "attachContacts", label: "Choose contact", click: "contact" },
-	{ icon: "attachDocument", label: "Choose document", click: "doc" },
-	{ icon: "attachImage", label: "Choose image", click: "image" },
-];
-
 const ChatInput = ({
 	showAttach,
 	setShowAttach,
@@ -124,25 +118,43 @@ const ChatInput = ({
 				</button>
 
 				<div className={`chat__attach ${showAttach ? "chat__attach--active" : ""}`}>
-					{attachButtons.map((btn) => (
 						<button
 							className="chat__attach-btn"
-							aria-label={btn.label}
-							key={btn.label}
+							aria-label="Choose document"
+							key="Choose document"
+							// onClick={()=>console.log("Choose document")}
+						>
+							<label htmlFor='fileInput2'>
+								<Icon id="attachDocument" className="chat__attach-icon" />
+							</label>
+							<input
+								type="file"
+								id="fileInput2"
+								name="photo"
+								style={{ display: "none" }}
+								onChange={(e)=>onFileChange(e, 'doc')}
+							/>							
+							
+						</button>
+
+						<button
+							className="chat__attach-btn"
+							aria-label="attachImage"
+							key="attachImage"
+							// onClick={()=>console.log("Choose image")}
 						>
 							<label htmlFor='fileInput'>
-								<Icon id={btn.icon} className="chat__attach-icon" />
+								<Icon id="attachImage" className="chat__attach-icon" />
 							</label>
 							<input
 								type="file"
 								id="fileInput"
 								name="photo"
 								style={{ display: "none" }}
-								onChange={(e) => onFileChange(e)}
+								onChange={(e)=>onFileChange(e, 'image')}
 							/>							
 							
 						</button>
-					))}
 				</div>
 
 			</div>

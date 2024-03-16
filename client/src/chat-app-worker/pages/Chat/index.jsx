@@ -39,6 +39,7 @@ const Chat = () => {
 	const [file, setFile] = useState();
 	const [image, setImage]= useState("");
 	const [mess, setMess] = useState("");
+	const [fileType, setFileType] = useState("");
 
 	const [clearFile, setClearFile] = useState(false)
 
@@ -193,11 +194,14 @@ const Chat = () => {
         getImage();
     }, [file])
 
-	const onFileChange = (e) => {	
+	const onFileChange = (e, key) => {	
 		setProgess(0)
 		const file = e.target.files[0]; // доступ к файлу
+		console.log("key: ", key);
+		setFileType(key)
 		console.log(file);
 		setFile(file); // сохранение файла
+		setShowAttach(false)
     }
 
 	const openSidebar = (cb) => {
@@ -250,13 +254,13 @@ const Chat = () => {
 				const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`
 				sendToTelegram = await $host.get(url_send_msg);
 			} else {
-				if (image.slice(-3) === 'gif' || image.slice(-3)==='zip') {
+				if (fileType === 'doc') { //(image.slice(-3) === 'gif' || image.slice(-3)==='zip') {
 					const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personW.id}&document=${host+image}`
-					console.log("url_send_doc: ", url_send_doc)
+					//console.log("url_send_doc: ", url_send_doc)
 					sendPhotoToTelegram = await $host.get(url_send_doc);			
-				} else {
+				} else if (fileType === 'image') {
 					const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
-					console.log("url_send_photo: ", url_send_photo)
+					//console.log("url_send_photo: ", url_send_photo)
 					sendPhotoToTelegram = await $host.get(url_send_photo);
 				}	
 			}
