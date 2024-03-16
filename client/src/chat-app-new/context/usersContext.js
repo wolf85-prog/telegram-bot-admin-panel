@@ -948,6 +948,7 @@ const fetchMessageSpecResponse = async(data) => {
 	}
 	else if (data.text.endsWith('раз нажали кнопку Отклонить') && !data.text.includes('_reply_')) {
 		//без звука
+		console.log("раз нажали кнопку Отклонить в workhub: ")
 	}
 	else if (data.text.startsWith('Твоя ставка отправлена') && !data.text.includes('_reply_')) {
 		//console.log("Твоя ставка отправлена: ")
@@ -1018,7 +1019,7 @@ const fetchMessageSpecResponse = async(data) => {
 	}
 
 	setUserWorkers((userWorkers) => {
-		const { senderId, text, type, messageId, convId, replyId } = data;
+		const { senderId, text, type, messageId, convId, replyId, isBot } = data;
 		//console.log("users: ", users)
 		let userIndex = userWorkers.findIndex((user) => user.chatId === senderId.toString());
 		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
@@ -1054,6 +1055,7 @@ const fetchMessageSpecResponse = async(data) => {
 			status: null,
 			id: messageId,
 			reply: replyId,
+			isBot: isBot,  
 		};
 
 		const currentDate = new Date().toLocaleDateString()
@@ -1066,7 +1068,12 @@ const fetchMessageSpecResponse = async(data) => {
 		}
 		
 		const userObject = usersCopy[userIndex];
-		usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
+		if (isBot) {
+			usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
+		} else {
+			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
+		}
+		
 
 		//сортировка
 		const userSort = [...usersCopy].sort((a, b) => {       
