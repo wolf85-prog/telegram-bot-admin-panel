@@ -946,6 +946,9 @@ const fetchMessageSpecResponse = async(data) => {
 			setPretendents(arrWorkers) 
 		})
 	}
+	else if (data.text.endsWith('раз нажали кнопку Отклонить') && !data.text.includes('_reply_')) {
+		//без звука
+	}
 	else if (data.text.startsWith('Твоя ставка отправлена') && !data.text.includes('_reply_')) {
 		//console.log("Твоя ставка отправлена: ")
 		//play sound
