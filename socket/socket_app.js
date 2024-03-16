@@ -109,7 +109,7 @@ io.on("connection", (socket) => {
 // Чат специалистов
 //------------------------------------------------------------------
     //send and get message in workers
-    socket.on("sendMessageSpec", ({senderId, receiverId, text, type, convId, messageId, replyId})=>{
+    socket.on("sendMessageSpec", ({senderId, receiverId, text, type, convId, messageId, replyId, isBot})=>{
         const user = getUser(receiverId)
         io.emit("getMessageSpec", {
             senderId,
@@ -118,6 +118,7 @@ io.on("connection", (socket) => {
             convId,
             messageId,
             replyId,
+            isBot, 
         })
     })
 
