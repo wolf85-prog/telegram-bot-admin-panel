@@ -255,9 +255,15 @@ const Chat = () => {
 				sendToTelegram = await $host.get(url_send_msg);
 			} else {
 				if (fileType === 'doc') { //(image.slice(-3) === 'gif' || image.slice(-3)==='zip') {
-					const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personW.id}&document=${host+image}`
-					//console.log("url_send_doc: ", url_send_doc)
-					sendPhotoToTelegram = await $host.get(url_send_doc);			
+					if (image.slice(-3) === 'ocx' || image.slice(-3)==='doc' || image.slice(-3)==='lsx' || image.slice(-3)==='xls' || image.slice(-3)==='iff') {
+						const url_send_doc = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${host+image}`
+						//console.log("url_send_doc: ", url_send_doc)
+						sendPhotoToTelegram = await $host.get(url_send_doc);
+					} else {
+						const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personW.id}&document=${host+image}`
+						//console.log("url_send_doc: ", url_send_doc)
+						sendPhotoToTelegram = await $host.get(url_send_doc);	
+					}		
 				} else if (fileType === 'image') {
 					const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
 					//console.log("url_send_photo: ", url_send_photo)
