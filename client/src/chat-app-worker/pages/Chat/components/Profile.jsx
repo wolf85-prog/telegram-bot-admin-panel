@@ -125,7 +125,7 @@ const Profile = ({ user, closeSidebar }) => {
 	const clickSetBlocked = () => {
 		setBlockWorker(!blockWorker)
 		//заблокировать/разблокировать пользователю рассылки
-		blockedWorkers()
+		blockedWorkers(user.chatId)
 	}
 	
 

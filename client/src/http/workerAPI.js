@@ -50,7 +50,7 @@ export const getWorkers = async () =>{
 }
 
 
-export const blockedWorkers = async () =>{
+export const blockedWorkers = async (id) =>{
     try {
        let response = await $host.get(`api/workers/block/${id}`);
        return response.data;
