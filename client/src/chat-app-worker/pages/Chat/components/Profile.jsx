@@ -41,6 +41,7 @@ const Profile = ({ user, closeSidebar }) => {
 
 	const [phone, setPhone] = useState("")
 	const [showButton, setShowButton] = useState(false)
+	const [blockWorker, setBlockWorker] = useState(false)
 
 	const audio = new Audio(sendSound);
 
@@ -120,6 +121,10 @@ const Profile = ({ user, closeSidebar }) => {
 		
 		fetch()
 	}, [user])
+
+	const clickSetBlocked = () => {
+		setBlockWorker(!blockWorker)
+	}
 	
 
 	return (
@@ -219,7 +224,7 @@ const Profile = ({ user, closeSidebar }) => {
 
 			<div className="profile__sectionW profile__section--danger">
 				<Icon id="block" className="profile__danger-icon" />
-				<p className="profile__danger-text profile__worker"> Заблокировать </p>
+				<p className="profile__danger-text profile__worker" onClick={clickSetBlocked}>{blockWorker ? 'Заблокировать' : 'Разблокировать'}</p>
 			</div>
 
 			<div className="profile__sectionW profile__section--danger">
