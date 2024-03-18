@@ -1,5 +1,5 @@
 const { Distribution, Distributionw }= require('../models/models')
-const {Message, Conversation} = require('../models/workers')
+const {Message, Conversation, Worker} = require('../models/workers')
 const ApiError = require('../error/ApiError')
 
 const { Op } = require('sequelize')
@@ -310,6 +310,17 @@ class DistributionController {
                         mess: null,
                     }) 
 
+                    //найти специалиста
+                    const blockedWork = await Worker.findOne({
+                        where: {
+                            chatId: user
+                        },
+                    })
+
+                    if (blockedWork.dataValues.block) {
+                        console.log("Блок: ", user)
+                    } 
+
                     //найти беседу
                     const conversation = await Conversation.findOne({
                         where: {
@@ -331,8 +342,6 @@ class DistributionController {
                         conversation_id = conv.id
                     } else {
                         //console.log('Беседа уже создана в БД')  
-                        //console.log("conversationId: ", conversation.id)  
-                        
                         conversation_id = conversation.id
                     }
 
@@ -388,16 +397,7 @@ class DistributionController {
                     //отправить в телеграмм
                     let sendTextToTelegram
                     let sendPhotoToTelegram
-                    let url_send_photo
-
-                    // const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
-                    // sendTextToTelegram = await $host.get(url_send_msg);
-                    // const { status } = sendTextToTelegram;
-                    // if (status === 200) {
-                    //     countSuccess = countSuccess + 1 
-                    // }
-                    // console.log(countSuccess)
-                    
+                    let url_send_photo                   
                     
                     if (text !== '') {
                         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
