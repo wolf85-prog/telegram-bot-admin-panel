@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const sequelize = require('./db')
 const {Plan, Distributionw, Reportdistribw} = require('./models/models')
-const {Message, Conversation} = require('./models/workers')
+const {Message, Conversation, Worker} = require('./models/workers')
 const { Op } = require('sequelize')
 const cors = require('cors')
 const fs = require('fs');
@@ -153,211 +153,222 @@ const getDistributionsPlan = async() => {
                         mess: null,
                     }) 
 
-
-                    //найти беседу
-                    const conversation = await Conversation.findOne({
+                    //найти специалиста
+                    const blockedWork = await Worker.findOne({
                         where: {
-                            members: {
-                                [Op.contains]: [user]
-                            }
+                            chatId: user
                         },
-                    }) 
-
-                     //если нет беседы, то создать 
-                    if (!conversation) {
-                        const conv = await Conversation.create(
-                        {
-                            members: [user, chatAdminId],
-                        })
-                        console.log("Беседа успешно создана: ", conv) 
-                        console.log("conversationId: ", conv.id)
-                        
-                        conversation_id = conv.id
-                    } else {
-                        //console.log('Беседа уже создана в БД')  
-                        //console.log("conversationId: ", conversation.id)  
-                        
-                        conversation_id = conversation.id
-                    }
-
-                    //получить план из БД
-                    const plan = await Plan.findOne({
-                        where: {datestart: date2}
                     })
-                    
-                    const newArray = JSON.parse(plan.dataValues.times)
-                    let time1 = `${chas}:${minut}`
 
-                    //обновить план в БД
-                    let planer_str
-                    let dateIndex = newArray.findIndex((i) => i.time === time1)
-                    const datesCopy = JSON.parse(JSON.stringify(newArray));
-                    const dateObject = datesCopy[dateIndex];
-                    datesCopy[dateIndex] = { ...dateObject, ['go']: true};
-                    planer_str = JSON.stringify(datesCopy)
-
-                    const newObj = {
-                        "datestart": date2,
-                        "times": planer_str
-                    }
-
-                    //обновить план в БД
-                    const foundItem = await Plan.findOne({ where: {datestart: newObj.datestart} });
-                    if (!foundItem) {
-                        // Item not found, create a new one
-                        const newPlan = await Plan.create(newObj.datestart, newObj.times)
-                        //return res.status(200).json(newPlan);
+                    if (blockedWork.dataValues.block !== null && blockedWork.dataValues.block) {
+                        console.log("Блок: ", user)
                     } else {
-                       // Found an item, update it
-                        const item = await Plan.update({times: newObj.times},{where: {datestart: newObj.datestart}});
-                    }
+                        //найти беседу
+                        const conversation = await Conversation.findOne({
+                            where: {
+                                members: {
+                                    [Op.contains]: [user]
+                                }
+                            },
+                        }) 
 
-                    const projId = item.projectId 
-                    
-                    let keyboard
-
-                    //Передаем данные боту
-                    if (item.button === '') {
-                        console.log("textButton: НЕТ")
-                        keyboard = JSON.stringify({
-                            inline_keyboard: [
-                                [
-                                    {"text": '', callback_data:'/report'},
-                                ],
-                            ]
-                        });
-                    } else {
-                        //console.log("textButton: ", item.button)
-                        keyboard = JSON.stringify({
-                            inline_keyboard: [
-                                [
-                                    {"text": item.button, web_app: {url: item.target}}, 
-                                ],
-                            ]
-                        });
-                    }
-                
-                    let keyboard2
-
-                    if (item.stavka) {
-                        keyboard2 = JSON.stringify({
-                        inline_keyboard: [
-                            [
-                                {"text": 'Принять', callback_data:'/accept ' + projId},
-                                {"text": 'Отклонить', callback_data:'/cancel ' + projId},
-                            ],
-                            [
-                                {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + projId}},
-                            ],
-                        ]
-                        });
-                    } else {
-                        keyboard2 = JSON.stringify({
-                        inline_keyboard: [
-                            [
-                                {"text": 'Принять', callback_data:'/accept ' + projId},
-                                {"text": 'Отклонить', callback_data:'/cancel ' + projId},
-                            ],
-                        ]
-                        });
-                    }
-
-                    try {
-                        //отправить в телеграмм
-                        if (item.text !== '') {
-                            const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
+                        //если нет беседы, то создать 
+                        if (!conversation) {
+                            const conv = await Conversation.create(
+                            {
+                                members: [user, chatAdminId],
+                            })
+                            console.log("Беседа успешно создана: ", conv) 
+                            console.log("conversationId: ", conv.id)
                             
-                            sendToTelegram = await $host.get(url_send_msg);
-                            //console.log(sendToTelegram)
+                            conversation_id = conv.id
+                        } else {
+                            //console.log('Беседа уже создана в БД')  
+                            //console.log("conversationId: ", conversation.id)  
+                            
+                            conversation_id = conversation.id
+                        }
 
-                            const { status } = sendToTelegram;
+                        //получить план из БД
+                        const plan = await Plan.findOne({
+                            where: {datestart: date2}
+                        })
+                        
+                        const newArray = JSON.parse(plan.dataValues.times)
+                        let time1 = `${chas}:${minut}`
 
-                            if (status === 200) {
-                                countSuccess = countSuccess + 1 
+                        //обновить план в БД
+                        let planer_str
+                        let dateIndex = newArray.findIndex((i) => i.time === time1)
+                        const datesCopy = JSON.parse(JSON.stringify(newArray));
+                        const dateObject = datesCopy[dateIndex];
+                        datesCopy[dateIndex] = { ...dateObject, ['go']: true};
+                        planer_str = JSON.stringify(datesCopy)
+
+                        const newObj = {
+                            "datestart": date2,
+                            "times": planer_str
+                        }
+
+                        //обновить план в БД
+                        const foundItem = await Plan.findOne({ where: {datestart: newObj.datestart} });
+                        if (!foundItem) {
+                            // Item not found, create a new one
+                            const newPlan = await Plan.create(newObj.datestart, newObj.times)
+                            //return res.status(200).json(newPlan);
+                        } else {
+                        // Found an item, update it
+                            const item = await Plan.update({times: newObj.times},{where: {datestart: newObj.datestart}});
+                        }
+
+                        const projId = item.projectId 
+                    
+                        let keyboard
+
+                        //Передаем данные боту
+                        if (item.button === '') {
+                            console.log("textButton: НЕТ")
+                            keyboard = JSON.stringify({
+                                inline_keyboard: [
+                                    [
+                                        {"text": '', callback_data:'/report'},
+                                    ],
+                                ]
+                            });
+                        } else {
+                            //console.log("textButton: ", item.button)
+                            keyboard = JSON.stringify({
+                                inline_keyboard: [
+                                    [
+                                        {"text": item.button, web_app: {url: item.target}}, 
+                                    ],
+                                ]
+                            });
+                        }
+                
+                        let keyboard2
+
+                        if (item.stavka) {
+                            keyboard2 = JSON.stringify({
+                            inline_keyboard: [
+                                [
+                                    {"text": 'Принять', callback_data:'/accept ' + projId},
+                                    {"text": 'Отклонить', callback_data:'/cancel ' + projId},
+                                ],
+                                [
+                                    {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + projId}},
+                                ],
+                            ]
+                            });
+                        } else {
+                            keyboard2 = JSON.stringify({
+                            inline_keyboard: [
+                                [
+                                    {"text": 'Принять', callback_data:'/accept ' + projId},
+                                    {"text": 'Отклонить', callback_data:'/cancel ' + projId},
+                                ],
+                            ]
+                            });
+                        }
+
+                        try {
+                            //отправить в телеграмм
+                            if (item.text !== '') {
+                                const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${item.text.replace(/\n/g, '%0A')}`
                                 
-                                //обновить статус доставки
-                                arrUsers[ind-1].status = 200 
-                                arrUsers[ind-1].mess = sendToTelegram.data?.result?.message_id    
+                                sendToTelegram = await $host.get(url_send_msg);
+                                //console.log(sendToTelegram)
+
+                                const { status } = sendToTelegram;
+
+                                if (status === 200) {
+                                    countSuccess = countSuccess + 1 
+                                    
+                                    //обновить статус доставки
+                                    arrUsers[ind-1].status = 200 
+                                    arrUsers[ind-1].mess = sendToTelegram.data?.result?.message_id    
 
 
-                                //обновить бд рассылку
-                                const newDistrib = await Distributionw.update(
-                                    { delivered: true,
-                                        report: JSON.stringify(arrUsers),  
-                                        success: countSuccess},
-                                    { where: {id: item.id} }
-                                )
+                                    //обновить бд рассылку
+                                    const newDistrib = await Distributionw.update(
+                                        { delivered: true,
+                                            report: JSON.stringify(arrUsers),  
+                                            success: countSuccess},
+                                        { where: {id: item.id} }
+                                    )
+                                }
+                            } else {
+
+                                url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.editButton ? keyboard : keyboard2}`
+                                console.log("url_send_photo2: ", url_send_photo)
+
+                                sendPhotoToTelegram = await $host.get(url_send_photo);
+                                //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
+
+                                const { status } = sendPhotoToTelegram;
+
+                                if (status === 200 && item.text === '') {
+                                    countSuccess = countSuccess + 1  
+                                    
+                                    //обновить статус доставки
+                                    arrUsers[ind-1].status = 200 
+                                    arrUsers[ind-1].mess = sendPhotoToTelegram.data?.result?.message_id   
+
+
+                                    //обновить бд рассылку
+                                    const newDistrib = await Distributionw.update(
+                                        { delivered: true,
+                                            report: JSON.stringify(arrUsers),  
+                                            success: countSuccess},
+                                        { where: {id: item.id} }
+                                    )
+                                }
+                            }
+                        
+                        } catch (error) {
+                            console.error(error.message)
+                        }
+
+                        //отправить в админку
+                        let message = {};
+                        
+                        if(!item.image) {
+                            console.log("no file")
+                            message = {
+                                senderId: chatAdminId, 
+                                receiverId: user,
+                                conversationId: conversation_id,
+                                type: "text",
+                                text: item.text,
+                                isBot: true,
+                                messageId: sendToTelegram.data?.result?.message_id,
+                                buttons: '',
                             }
                         } else {
-
-                            url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${item.image}&reply_markup=${item.editButton ? keyboard : keyboard2}`
-                            console.log("url_send_photo2: ", url_send_photo)
-
-                            sendPhotoToTelegram = await $host.get(url_send_photo);
-                            //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
-
-                            const { status } = sendPhotoToTelegram;
-
-                            if (status === 200 && item.text === '') {
-                                countSuccess = countSuccess + 1  
-                                
-                                //обновить статус доставки
-                                arrUsers[ind-1].status = 200 
-                                arrUsers[ind-1].mess = sendPhotoToTelegram.data?.result?.message_id   
-
-
-                                //обновить бд рассылку
-                                const newDistrib = await Distributionw.update(
-                                    { delivered: true,
-                                        report: JSON.stringify(arrUsers),  
-                                        success: countSuccess},
-                                    { where: {id: item.id} }
-                                )
+                            message = {
+                                senderId: chatAdminId, 
+                                receiverId: user,
+                                conversationId: conversation_id,
+                                type: "image",
+                                text: item.image,
+                                isBot: true,
+                                messageId: sendPhotoToTelegram.data?.result?.message_id,
+                                buttons: item.button ? item.button : '',
                             }
                         }
-                    
-                    } catch (error) {
-                        console.error(error.message)
-                    }
+                        //console.log("message send: ", message);
 
-                    //отправить в админку
-                    let message = {};
-                    
-                    if(!item.image) {
-                        console.log("no file")
-                        message = {
-                            senderId: chatAdminId, 
-                            receiverId: user,
-                            conversationId: conversation_id,
-                            type: "text",
-                            text: item.text,
-                            isBot: true,
-                            messageId: sendToTelegram.data?.result?.message_id,
-                            buttons: '',
+                        //сохранение сообщения в базе данных wmessage
+                        await Message.create(message)
+
+                        //сохранить в контексте
+                        if(!item.image) {
+                            addNewMessage2(user, item.text, 'text', '', conversation_id, sendToTelegram.data?.result?.message_id, true);
+                        } else {
+                            addNewMessage2(user, host + item.image, 'image', item.button, conversation_id, sendPhotoToTelegram.data?.result?.message_id, true);
                         }
-                    } else {
-                        message = {
-                            senderId: chatAdminId, 
-                            receiverId: user,
-                            conversationId: conversation_id,
-                            type: "image",
-                            text: item.image,
-                            isBot: true,
-                            messageId: sendPhotoToTelegram.data?.result?.message_id,
-                            buttons: item.button ? item.button : '',
-                        }
-                    }
-                    //console.log("message send: ", message);
-
-                    //сохранение сообщения в базе данных wmessage
-                    await Message.create(message)
-
-                    //сохранить в контексте
-                    if(!item.image) {
-                        addNewMessage2(user, item.text, 'text', '', conversation_id, sendToTelegram.data?.result?.message_id, true);
-                    } else {
-                        addNewMessage2(user, host + item.image, 'image', item.button, conversation_id, sendPhotoToTelegram.data?.result?.message_id, true);
-                    }
+                    } // end if block  
+                    
                 }, 100 * ++ind) 
                 
                 })
