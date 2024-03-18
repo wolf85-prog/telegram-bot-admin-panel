@@ -226,7 +226,7 @@ const Profile = ({ user, closeSidebar }) => {
 
 			<div className="profile__sectionW profile__section--danger">
 				<Icon id="block" className="profile__danger-icon" />
-				<p className="profile__danger-text profile__worker" onClick={clickSetBlocked}>{blockWorker ? 'Заблокировать' : 'Разблокировать'}</p>
+				<p className="profile__danger-text profile__worker" style={{cursor: 'pointer'}} onClick={clickSetBlocked}>{blockWorker ? 'Разблокировать' : 'Заблокировать'}</p>
 			</div>
 
 			<div className="profile__sectionW profile__section--danger">
