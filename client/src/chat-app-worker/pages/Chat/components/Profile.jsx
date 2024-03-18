@@ -116,7 +116,9 @@ const Profile = ({ user, closeSidebar }) => {
 				setCrmId3(crmId3)
 			} else {
 				setCrmId('-')
-			}		
+			}	
+			
+			//await getWorker(user.chatId)
 		}
 		
 		fetch()
