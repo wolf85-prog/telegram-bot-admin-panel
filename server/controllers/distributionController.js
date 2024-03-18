@@ -316,6 +316,7 @@ class DistributionController {
                             chatId: user
                         },
                     })
+                    console.log(blockedWork)
 
                     if (blockedWork.dataValues.block) {
                         console.log("Блок: ", user)
