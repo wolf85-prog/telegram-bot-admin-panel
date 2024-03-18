@@ -46,6 +46,27 @@ class WorkersController {
             return res.status(500).json(error.message);
         }
     }
+
+    async blockWorker(req, res) { 
+        const {id} = req.params      
+        try {    
+            let exist=await Worker.findOne( {where: {chatId: id}} )
+            
+            if(!exist){
+                res.status(500).json({msg: "user not exist"});
+                return;
+            }
+
+
+
+            const newUser = await Worker.update(
+                { block: exist.dataValues.block !==null ? !exist.dataValues.block : true},
+                { where: {chatId: id} })
+            return res.status(200).json(newUser);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
 }
 
 module.exports = new WorkersController()

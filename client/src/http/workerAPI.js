@@ -49,6 +49,16 @@ export const getWorkers = async () =>{
     }
 }
 
+
+export const blockedWorkers = async () =>{
+    try {
+       let response = await $host.get(`api/workers/block/${id}`);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling blockedWorkers api", error.message);
+    }
+}
+
 export const getAllPretendent = async () =>{
     try {
        let response = await $host.get('api/pretendents/get');
