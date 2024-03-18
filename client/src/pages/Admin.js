@@ -34,7 +34,8 @@ import {
 import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { getAllMessages } from './../http/chatAPI.js'
+import { getAllMessages, getMessages } from './../http/chatAPI.js'
+import { getAllWMessages } from './../http/workerAPI.js'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 import WidgetsDropdown2 from '../views/widgets/WidgetsDropdown2'
@@ -150,11 +151,32 @@ const Admin = () => {
     const arr1 = workers.filter(item => new Date(item.createDate).getMonth() === currentMonth)
     setNewWorkers(arr1)
 
-    //массив активных пользователей за текущий месяц
-    const arr2 = workers.filter(item => new Date(item.date).getMonth() === currentMonth) //specusers
-    setActivWorkers(arr2)
-
   }, [workers])
+
+//get workers active
+useEffect(() => {
+  const arrClients = []
+
+  const fetchData = async() => {
+
+    let messages = await getAllWMessages()
+
+    workers.map((client, index) => {
+
+      const allMessages = messages ? messages.length : [] //всего сообщений
+      const currentMonth = new Date().getMonth()
+      const messagesUser = messages.find(el => el.senderId === client.chatId  && new Date(el.createdAt).getMonth() === currentMonth);
+      //массив активных пользователей за текущий месяц
+      if (messagesUser !== undefined) {
+        arrClients.push(messagesUser)
+      }  
+    })
+    setActivWorkers(arrClients)
+  }
+  
+  fetchData();
+  
+}, [workers]);
 
   //get Contacts
   useEffect(() => {

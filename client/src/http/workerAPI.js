@@ -190,13 +190,13 @@ export const getWMessages = async(id)=>{
     }
 }
 
-export const getAllMessages = async()=>{
+export const getAllWMessages = async()=>{
     try {
         let response= await $host.get(`api/wmessage/get`);
         
         return response.data;
     } catch (error) {
-        console.log("error while calling getAllMessages api",error.message);
+        console.log("error while calling getAllWMessages api",error.message);
         
     }
 }
