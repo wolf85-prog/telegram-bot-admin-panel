@@ -49,6 +49,15 @@ export const getWorkers = async () =>{
     }
 }
 
+export const getWorker = async (id) =>{
+    try {
+       let response = await $host.get(`api/workers/get/${id}`);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getWorker api", error.message);
+    }
+}
+
 
 export const blockedWorkers = async (id) =>{
     try {

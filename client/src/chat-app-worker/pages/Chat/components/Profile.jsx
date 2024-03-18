@@ -3,7 +3,7 @@ import media from "./../../../../chat-app-new/assets/images/placeholder.jpeg";
 import Checkbox from "./../../../components/Checkbox";
 import Icon from "./../../../components/Icon";
 import { editContact, uploadFile, editContactAvatar } from './../../../../http/chatAPI';
-import { getWorkerNotionId, getWorkerChildrenId, getLastPretendent, getProjectId, blockedWorkers } from './../../../../http/workerAPI';
+import { getWorkerNotionId, getWorkerChildrenId, getLastPretendent, getProjectId, blockedWorkers, getWorker } from './../../../../http/workerAPI';
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
 import defaultAvatar from "./../../../../chat-app-new/assets/images/no-avatar.png";
@@ -118,7 +118,9 @@ const Profile = ({ user, closeSidebar }) => {
 				setCrmId('-')
 			}	
 			
-			//await getWorker(user.chatId)
+			const blocked = await getWorker(user.chatId)
+			//console.log("blocked: ", blocked)
+			setBlockWorker(blocked?.block ? blocked?.block : false)
 		}
 		
 		fetch()
