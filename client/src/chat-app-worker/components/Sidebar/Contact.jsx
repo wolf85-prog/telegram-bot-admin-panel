@@ -61,10 +61,10 @@ const Contact = ({ contact, worker }) => {
 			<div className="sidebar-contact__avatar-wrapper" style={{position: 'relative'}}>
 				{
 					contact.avatar
-					? <> {2===1 ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
+					? <> {contact.blockw ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
 						<img src={`${contact.avatar}`} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
 					</>
-					: <> {2===1 ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
+					: <> {contact.blockw ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
 						<img src={avatarDefault} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
 					</>
 				}

@@ -330,6 +330,7 @@ fetchData()
 							avatar: "", //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
 							conversationId: conversationId ? conversationId : 0,
 							block: userbot.block ? userbot.block : '',
+							blockw: worker?.block,
 							unread: 0, 
 							pinned: false,
 							typing: false,
