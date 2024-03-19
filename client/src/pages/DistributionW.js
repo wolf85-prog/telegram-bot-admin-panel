@@ -31,6 +31,7 @@ import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 import deleteIcon from 'src/assets/images/delete.png'
 import editIcon from 'src/assets/images/pencil.png'
+import copyIcon from 'src/assets/images/copy.png'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { delDistributionW, getPlan, newPlan } from 'src/http/adminAPI';
 
@@ -290,7 +291,7 @@ const DistributionW = () => {
                                         </Link> */}
 
                                         {item.projectId ? 
-                                          <Link to={'/distributionw_edit'} state={{editD: true, delivered: item.delivered, project: item.projectId, id: item.id, category: item.categories, users: item.users, img: item.image, date: item.datestart, uuid: item.uuid}}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
+                                          <Link to={'/distributionw_edit'} state={{editD: true, delivered: item.delivered, project: item.projectId, id: item.id, category: item.categories, users: item.users, img: item.image, date: item.datestart, uuid: item.uuid}}><CButton color="light" style={{marginRight: '10px'}}><img src={item.delivered ? copyIcon : editIcon} alt='' width='10px' /></CButton></Link>
                                           :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
                                         }
                                         
