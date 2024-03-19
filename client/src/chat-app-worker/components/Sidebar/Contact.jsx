@@ -5,6 +5,7 @@ import formatTime from "./../../../chat-app-new/utils/formatTime";
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider'
 import avatarDefault from "./../../../chat-app-new/assets/images/no-avatar.png";
 import avatarBlacklist from "./../../../chat-app-worker/assets/images/uncheck.png";
+import blockUser from "./../../../chat-app-worker/assets/images/stop.png";
 
 import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 
@@ -60,8 +61,12 @@ const Contact = ({ contact, worker }) => {
 			<div className="sidebar-contact__avatar-wrapper" style={{position: 'relative'}}>
 				{
 					contact.avatar
-					? <img src={`${contact.avatar}`} alt='' className="avatar-adm" />
-					: <img src={avatarDefault} alt='' className="avatar-adm" />
+					? <> {2===1 ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
+						<img src={`${contact.avatar}`} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
+					</>
+					: <> {2===1 ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
+						<img src={avatarDefault} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
+					</>
 				}
 				{
 				worker.length !== 0 ? 

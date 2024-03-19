@@ -221,6 +221,7 @@ fetchData()
 				  createDate: user.createdAt,
 				  from: user.from,
 				  promoId: user.promoId,
+				  block: user.block,
 				}
 		
 				arrayWorker.push(newWorker)
