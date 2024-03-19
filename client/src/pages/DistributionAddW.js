@@ -157,7 +157,7 @@ const DistributionAddW = () => {
        navigate('/distributionw');
   } 
 
-
+//-----------------------------------------------------------------------------------
   //загрузка новых проектов
   useEffect(() => {
     const fetchData = async () => {

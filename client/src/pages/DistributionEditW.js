@@ -1713,7 +1713,8 @@ const delCategory7 = (category) => {
                                         }             
                                       </div>
                                       <div>
-                                        <CButton color="primary"  onClick={onSendText}>Сохранить</CButton>
+                                        {delivered ? <CButton color="primary" onClick={onSendText}>Разослать сейчас</CButton>
+                                        :<CButton color="primary" onClick={onSendText}>Сохранить</CButton>}
                                         
                                         {/* <CButton onClick={() => setVisible(!visible)}>Vertically centered modal</CButton> */}
                                         
