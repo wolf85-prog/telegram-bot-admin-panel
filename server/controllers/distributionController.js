@@ -252,14 +252,23 @@ class DistributionController {
                 return;
             }
 
-            const {text, category} = req.body
-            //console.log("success count distrib: ", success)
-            //console.log("report: ", report)
+            const {text, category, image, project, projectId,datestart, count, date, button, users, editButton, stavka, target} = req.body
 
             const newDistrib = await Distributionw.update(
                 { 
                     text,
                     category, 
+                    image, 
+                    project, 
+                    projectId,
+                    datestart,   
+                    count, 
+                    date, 
+                    button,
+                    users,
+                    editButton,
+                    stavka,  
+                    target,
                 },
                 { where: {id: id} })
             return res.status(200).json(newDistrib);
