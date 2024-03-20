@@ -1295,20 +1295,21 @@ const onSaveText = async() => {
       //новая рассылка
       const message = {
         text: text, 
-        image: image ? `${host}${image}` : '', 
-        project: labelName.label, 
-        projectId: valueProject,
-        receivers: categoryAll.toString(), 
-        datestart: new Date(), 
-        delivered: 'true',   
-        count: selected.length, 
-        date: `${day}.${month}.${year}`, 
-        button: textButton,
-        users: selected.toString(),
-        uuid: uuidDistrib,  
-        editButton: showEditButtonAdd,
-        stavka: onButtonStavka,  
-        target: target,
+        category: categoryAll.toString(),
+        // image: image ? `${host}${image}` : '', 
+        // project: labelName.label, 
+        // projectId: valueProject,
+        // receivers: categoryAll.toString(), 
+        // datestart: new Date(), 
+        // delivered: 'true',   
+        // count: selected.length, 
+        // date: `${day}.${month}.${year}`, 
+        // button: textButton,
+        // users: selected.toString(),
+        // uuid: uuidDistrib,  
+        // editButton: showEditButtonAdd,
+        // stavka: onButtonStavka,  
+        // target: target,
       }
       console.log("message send button: ", message);
 
@@ -1319,7 +1320,7 @@ const onSaveText = async() => {
       //setShowSend(false)
 
       //обновить список рассылок
-      addNewDistrib(true)
+      //addNewDistrib(true)
 
       setSelected([])
       setText('')
@@ -1579,7 +1580,8 @@ const onSaveText = async() => {
                                           onChange={onChangeText}
                                           value={text}
                                           // helperText = {`${countChar}/500`}
-                                        >           
+                                        >  
+                                          <CSpinner style={{width: '20px', height: '20px'}}/>         
                                         </CFormTextarea>
 
                                         <br/>
