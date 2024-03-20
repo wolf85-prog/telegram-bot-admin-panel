@@ -123,6 +123,7 @@ const DistributionAddW = () => {
   const [value2, setValue2] = useState("");
 
   const [loader, setLoader] = useState(false);
+  const [loaderStart, setLoaderStart] = useState(true);
   const [valueProject, setValueProject] = useState('')
   const [valueSelect, setValueSelect] = useState(0)
   const [valueSelect2, setValueSelect2] = useState(0)
@@ -167,42 +168,8 @@ const DistributionAddW = () => {
       console.log("projects planer: ", projects)
       console.log("clients: ", clients)
 
-      setProjects(projects) 
-    
-      //для редактирования рассылки
-      if (projId) {
-        setPoster(img)
-        console.log("Текущий проект: ", projId)
-        console.log("Текущая рассылка: ", distribId)
-        console.log("Текущий постер: ", img)
-        console.log("Сохраненные категории: ", categoriesitem)
-        console.log("Сохраненная дата: ", datestart)
-        console.log("Сохраненный UUID", uuidProj)
-        console.log("Доставлено: ", delivered)
-        console.log("Получатели: ", users.split(',').length)
-        
-        const distrib = await getDistributionW(distribId)
-        onHandlingProject(distrib.projectId, true, projects, uuidProj)
-
-        //установка категорий
-        const indexCat = categories.findIndex(item=>item.label === categoriesitem)
-        setValueSelect(indexCat)
-
-        //установка получателей
-        setSelected([...users.split(',')])
-
-        //установка категори получателей
-        setCategoryAll(categoriesitem)
-
-        //для текстового поля
-        setText(distrib.text)
-        //для телефона
-        if (distrib.image !== ' ') {
-          setFilePreview(distrib.image) 
-        }  
-        
-        setPlanShow(true)
-      } 
+      setProjects(projects)
+      setLoaderStart(false)  
     }
 
     fetchData();  
@@ -1236,8 +1203,8 @@ const delCategory7 = (category) => {
                 <Suspense fallback={<CSpinner color="primary" />}>
                   <>
                     <h2>Новая рассылка</h2>
-
-                    <CRow>
+                    {loaderStart ? <div className='text-center' style={{marginTop: '25%'}}><CSpinner/></div>
+                    :<><CRow>
                         <CCol xs>
                           <CCard className="mb-4" style={{height: '650px'}}>
                             {/* <CCardHeader>Рассылки</CCardHeader> */}
@@ -1740,6 +1707,7 @@ const delCategory7 = (category) => {
                           </CCard>
                         </CCol>
                       </CRow>
+                    </>}
                   </>
                 </Suspense>
             </CContainer>
