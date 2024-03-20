@@ -37,7 +37,8 @@ import {
   getBlocks, 
   getDatabaseId,
   newPretendent,
-  editDistributionW2 
+  editDistributionW2,
+  editDistributionWAll, 
 } from '../http/adminAPI';
 import { uploadFile, delMessage } from '../http/chatAPI';
 import { newMessage } from '../http/workerAPI';
@@ -191,9 +192,45 @@ const DistributionEditW = () => {
         const distrib = await getDistributionW(distribId)
         onHandlingProject(projId, true, projects, uuidProj)
 
+        const catItems = categoriesitem.split(',')
+
         //установка категорий
-        const indexCat = categories.findIndex(item=>item.label === categoriesitem)
-        setValueSelect(indexCat)
+        catItems.map((cat, index)=> {
+          //console.log("cat: ", cat)
+          const indexCat = categories.findIndex(item=>item.label === cat)
+          // console.log("catItems: ", catItems)
+          console.log("indexCat: ", indexCat)
+
+          if (index === 0) {
+            //console.log("index1: ", index)
+            setValueSelect(indexCat)
+          }
+          if (index === 1) {
+            //console.log("index2: ", index)
+            setValueSelect2(indexCat)
+          } 
+          if (index === 2) {
+            //console.log("index2: ", index)
+            setValueSelect3(indexCat)
+          } 
+          if (index === 3) {
+            //console.log("index2: ", index)
+            setValueSelect4(indexCat)
+          } 
+          if (index === 4) {
+            //console.log("index2: ", index)
+            setValueSelect5(indexCat)
+          } 
+          if (index === 5) {
+            //console.log("index2: ", index)
+            setValueSelect6(indexCat)
+          } 
+          if (index === 6) {
+            //console.log("index2: ", index)
+            setValueSelect7(indexCat)
+          } 
+        })
+        
 
         //установка получателей
         setSelected([...users.split(',')])
@@ -1133,7 +1170,7 @@ const delCategory7 = (category) => {
     //console.log("постер: ", img)
     //console.log("получатели: ", selected)
 
-    //setShowSend(true)
+    setShowSend(true)
 
     let countSuccess = 0
 
@@ -1168,20 +1205,18 @@ const delCategory7 = (category) => {
       console.log("message send button: ", message);
 
       //сохранение рассылки в базе данных
-      //const distrNew = await newDistributionW(message)
-      //console.log("distrNew: ", distrNew.id)
+      const distrNew = await newDistributionW(message)
+      console.log("distrNew: ", distrNew.id)
 
-      // selected.map(async (user, index) => { 
-      //   const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
-      //   const sendTextToTelegram = await $host.get(url_send_msg);
-      //   console.log("res: ", sendTextToTelegram)
-      // })
+      selected.map(async (user, index) => { 
+        const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
+        const sendTextToTelegram = await $host.get(url_send_msg);
+        console.log("res: ", sendTextToTelegram)
+      })
 
+      const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id);
 
-
-      //const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id);
-
-      //setShowSend(false)
+      setShowSend(false)
 
       //обновить список рассылок
       addNewDistrib(true)
@@ -1238,6 +1273,70 @@ const delCategory7 = (category) => {
       }
     })
   }
+
+  //==============================================================================================
+  {/* Сохранение рассылки */}
+//==============================================================================================
+const onSaveText = async() => {
+    //setShowSend(true)
+
+    let countSuccess = 0
+
+    if (selected.length !== 0 && file || selected.length !== 0 && text) {
+      audio.play();
+
+      const d = new Date();
+      const year = d.getFullYear();
+      const month = String(d.getMonth()+1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+
+      let arrUsers = []
+
+      //новая рассылка
+      const message = {
+        text: text, 
+        image: image ? `${host}${image}` : '', 
+        project: labelName.label, 
+        projectId: valueProject,
+        receivers: categoryAll.toString(), 
+        datestart: new Date(), 
+        delivered: 'true',   
+        count: selected.length, 
+        date: `${day}.${month}.${year}`, 
+        button: textButton,
+        users: selected.toString(),
+        uuid: uuidDistrib,  
+        editButton: showEditButtonAdd,
+        stavka: onButtonStavka,  
+        target: target,
+      }
+      console.log("message send button: ", message);
+
+      //сохранение рассылки в базе данных
+      await editDistributionWAll(message, distribId)
+      //console.log("distrNew: ", distrNew.id)
+
+      //setShowSend(false)
+
+      //обновить список рассылок
+      addNewDistrib(true)
+
+      setSelected([])
+      setText('')
+      setShowEditButtonAdd(false)
+      setTextButton('')
+      setVisible(true) //показать сообщение об отправке
+      setValue('')
+
+      setValueSelect(0)
+
+      setTimeout(() => navigate('/distributionw'), 1000);
+
+    }
+    else {
+      setVisibleModal(!visibleModal)
+    }
+}
 
   return (
     <div className='dark-theme'>
@@ -1729,7 +1828,7 @@ const delCategory7 = (category) => {
                                       </div>
                                       <div>
                                         {delivered ? <CButton color="primary" onClick={onSendText}>Разослать сейчас</CButton>
-                                        :<CButton color="primary" onClick={onSendText}>Сохранить</CButton>}
+                                        :<CButton color="primary" onClick={onSaveText}>Сохранить</CButton>}
                                         
                                         {/* <CButton onClick={() => setVisible(!visible)}>Vertically centered modal</CButton> */}
                                         

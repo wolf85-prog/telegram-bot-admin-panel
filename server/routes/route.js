@@ -24,6 +24,7 @@ const { newDistribution,
     editDistribWPlan,
     sendDistribW,
     delMessagesDistribW,
+    editDistribWAll,
 } = require('../controllers/distributionController')
 const { getReports, getReportsId, getSoundNotif } = require('../controllers/reportController')
 const { getProjects, getProjectsId } = require('../controllers/projectController')
@@ -85,6 +86,7 @@ route.delete('/distributionsw/delete/:id', delDistributionW)
 route.post('/distributionsw/delete', delDistributionWPlan)
 route.patch('/distributionsw/update/:id', editDistribW)
 route.patch('/distributionsw2/update/:id', editDistribW2)
+route.patch('/distributionswall/update/:id', editDistribWAll)
 route.post('/distributionsw/plan/update', editDistribWPlan)
 
 route.get('/distributionsw/send/:id', sendDistribW)
