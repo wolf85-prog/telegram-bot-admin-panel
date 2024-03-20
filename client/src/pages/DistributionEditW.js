@@ -246,6 +246,7 @@ const DistributionEditW = () => {
         //для телефона
         if (img !== ' ') {
           setFilePreview(img) 
+          setImage(img)
         }  
         
         setPlanShow(true)
@@ -1191,7 +1192,7 @@ const delCategory7 = (category) => {
       //новая рассылка
       const message = {
         text: text, 
-        image: image ? `${host}${image}` : '', 
+        image: image ? `${image}` : '', 
         project: labelName.label, 
         projectId: valueProject,
         receivers: categoryAll.toString(), 
@@ -1212,11 +1213,11 @@ const delCategory7 = (category) => {
       const distrNew = await newDistributionW(message)
       console.log("distrNew: ", distrNew.id)
 
-      selected.map(async (user, index) => { 
-        const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
-        const sendTextToTelegram = await $host.get(url_send_msg);
-        console.log("res: ", sendTextToTelegram)
-      })
+      // selected.map(async (user, index) => { 
+      //   const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
+      //   const sendTextToTelegram = await $host.get(url_send_msg);
+      //   console.log("res: ", sendTextToTelegram)
+      // })
 
       const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id);
 
