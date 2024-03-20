@@ -38,6 +38,7 @@ import {
   getDatabaseId,
   newPretendent,
   editDistributionW2,
+  getProjectNewDate, 
   editDistributionWAll, 
 } from '../http/adminAPI';
 import { uploadFile, delMessage } from '../http/chatAPI';
@@ -127,6 +128,7 @@ const DistributionEditW = () => {
   const [value2, setValue2] = useState("");
 
   const [loader, setLoader] = useState(false);
+  const [loaderStart, setLoaderStart] = useState(true);
   const [valueProject, setValueProject] = useState('')
   const [valueSelect, setValueSelect] = useState(0)
   const [valueSelect2, setValueSelect2] = useState(0)
@@ -166,7 +168,7 @@ const DistributionEditW = () => {
   useEffect(() => {
     const fetchData = async () => {
 
-      let projects = await getProjects3();
+      let projects = await getProjectNewDate();
       console.log("Загрузка проектов из БД ...")
       console.log("projects planer: ", projects)
       console.log("clients: ", clients)
@@ -253,6 +255,8 @@ const DistributionEditW = () => {
         setTextButton(button)
 
         setTarget(target2)
+
+        setLoaderStart(false)
       } 
     }
 
@@ -1165,16 +1169,16 @@ const delCategory7 = (category) => {
   {/* Отправка рассылки */}
 //==============================================================================================
   const onSendText = async() => {
-    //console.log("категории: ", categoryAll)
-    //console.log("текст: ", text)
-    //console.log("постер: ", img)
-    //console.log("получатели: ", selected)
+    console.log("категории: ", categoryAll)
+    console.log("текст: ", text)
+    console.log("постер: ", image)
+    console.log("получатели: ", selected)
 
     setShowSend(true)
 
     let countSuccess = 0
 
-    if (selected.length !== 0 && file || selected.length !== 0 && text) {
+    if (selected.length !== 0 && file || selected.length !== 0 || image) {
       audio.play();
 
       const d = new Date();
@@ -1297,19 +1301,19 @@ const onSaveText = async() => {
         text: text, 
         category: categoryAll.toString(),
         // image: image ? `${host}${image}` : '', 
-        // project: labelName.label, 
-        // projectId: valueProject,
+        project: labelName.label, 
+        projectId: valueProject,
         // receivers: categoryAll.toString(), 
-        // datestart: new Date(), 
+        datestart: new Date(), 
         // delivered: 'true',   
-        // count: selected.length, 
+        count: selected.length, 
         // date: `${day}.${month}.${year}`, 
-        // button: textButton,
-        // users: selected.toString(),
-        // uuid: uuidDistrib,  
-        // editButton: showEditButtonAdd,
-        // stavka: onButtonStavka,  
-        // target: target,
+        button: textButton,
+        users: selected.toString(),
+        uuid: uuidDistrib,  
+        editButton: showEditButtonAdd,
+        stavka: onButtonStavka,  
+        target: target,
       }
       console.log("message send button: ", message);
 
@@ -1350,514 +1354,516 @@ const onSaveText = async() => {
                 <Suspense fallback={<CSpinner color="primary" />}>
                   <>
                     <h2>Редактирование рассылки</h2>
+                    {loaderStart ? <div className='text-center' style={{marginTop: '25%'}}><CSpinner/></div>
+                  : <>                 
+                      <CRow>
+                          <CCol xs>
+                            <CCard className="mb-4" style={{height: '650px'}}>
+                              {/* <CCardHeader>Рассылки</CCardHeader> */}
+                              <CCardBody>
+                              <CAlert color="success" dismissible visible={visible} onClose={() => setVisible(false)}>
+                                Сообщение успешно отправлено!
+                              </CAlert>
+                              <CAlert color="success" dismissible visible={visibleDelMess} onClose={() => setVisibleDelMess(false)}>
+                                Сообщения рассылки успешно удалены!
+                              </CAlert>
+                                <CForm>
+                                  <div style={{color: '#f3f3f3'}}>
+                                    <CRow className="mb-3">
+                                      <CCol sm={3} >  
 
-                    <CRow>
-                        <CCol xs>
-                          <CCard className="mb-4" style={{height: '650px'}}>
-                            {/* <CCardHeader>Рассылки</CCardHeader> */}
-                            <CCardBody>
-                            <CAlert color="success" dismissible visible={visible} onClose={() => setVisible(false)}>
-                              Сообщение успешно отправлено!
-                            </CAlert>
-                            <CAlert color="success" dismissible visible={visibleDelMess} onClose={() => setVisibleDelMess(false)}>
-                              Сообщения рассылки успешно удалены!
-                            </CAlert>
-                              <CForm>
-                                <div style={{color: '#f3f3f3'}}>
-                                  <CRow className="mb-3">
-                                    <CCol sm={3} >  
+                                        <p style={{color: '#f3f3f3'}}>Проект:</p>
 
-                                      <p style={{color: '#f3f3f3'}}>Проект:</p>
-
-                                      <CRow className="mb-3"> 
-                                        <CCol sm={6}> 
-                                          <CFormCheck 
-                                            type="radio"
-                                            id="flexRadioDefault2" 
-                                            name="flexRadioDefault"
-                                            label="Номер"
-                                            checked={!showNameProject}
-                                            onChange={onChangeProjectNumber}
-                                          />
-                                        </CCol>
-                                        <CCol sm={6} style={{display: 'flex', justifyContent: 'flex-end'}}> 
-                                          <CFormCheck 
-                                            type="radio"
-                                            id="flexRadioDefault1" 
-                                            name="flexRadioDefault"
-                                            label="Название"
-                                            checked={showNameProject}
-                                            onChange={onChangeProjectName}
-                                          />
-                                        </CCol>
-                                      </CRow>
-
-                                      {/* Список проектов по имени */}
-                                      <CFormSelect 
-                                        aria-label="Default select example"
-                                        style={{display: showNameProject ? "block" : "none" }}
-                                        onChange={onChangeSelectProject}
-                                        options={contacts}
-                                        value={valueProject}
-                                      />
-
-                                      {/* Список проектов по id */}
-                                      <CFormSelect 
-                                        aria-label="Default select example"
-                                        style={{display: !showNameProject ? "block" : "none" }}
-                                        onChange={onChangeSelectProject}
-                                        options={contacts2}
-                                        value={valueProject}
-                                      />
-
-                                      {/* <br/> */}
-                                      
-
-                                      {loader ? 
-                                      <>
-                                        <br/>
-                                        <div style={{position: 'relative'}}>
-                                          <div style={{position: 'absolute', top: '-10px', left: '45%'}}>
-                                            <CSpinner/>
-                                          </div>
-                                        </div> 
-                                      </>
-                                      : <br/>
-                                      }
-                                      
-                                      {/* Категория 1 */}
-                                      <CRow>
-                                        <CCol sm={12} > 
-                                          <CFormLabel htmlFor="exampleFormControlInput1">Категория:</CFormLabel>
-                                          <CFormSelect 
-                                            aria-label="Default select example"
-                                            onChange={onAddCategory}
-                                            options={categories}
-                                            value={valueSelect}
-                                          /> 
-                                        </CCol> 
-                                      </CRow>
-                                      
-                                      {/* Категория 2 */}
-                                      <CRow>
-                                        <CCol sm={12} style={{display: 'flex'}}>  
-                                          <CFormSelect 
-                                            aria-label="Default select example"
-                                            onChange={onAddCategory2}
-                                            value={valueSelect2}
-                                            options={categories}
-                                            style={{marginTop: '15px', display: showCategories2 ? "block" : "none"}}
-                                          />
-                                          <CIcon 
-                                            icon={cilX} 
-                                            size="xl" 
-                                            style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories2 ? "block" : "none"}} 
-                                            onClick={()=>delCategory2(valueSelect2)}
-                                          />
-                                        </CCol>
-                                      </CRow>
-
-                                      {/* Категория 3 */}
-                                      <CRow>
-                                        <CCol sm={12} style={{display: 'flex'}}>  
-                                          <CFormSelect 
-                                            aria-label="Default select example"
-                                            onChange={onAddCategory3}
-                                            value={valueSelect3}
-                                            options={categories}
-                                            style={{marginTop: '15px', display: showCategories3 ? "block" : "none"}}
-                                          />
-                                          <CIcon 
-                                            icon={cilX} 
-                                            size="xl" 
-                                            style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories3 ? "block" : "none"}} 
-                                            onClick={()=>delCategory3(valueSelect3)}
-                                          />
-                                        </CCol>
-                                      </CRow>
-
-                                      {/* Категория 4 */}
-                                      <CRow>
-                                        <CCol sm={12} style={{display: 'flex'}}>
-                                          <CFormSelect 
-                                            aria-label="Default select example"
-                                            onChange={onAddCategory4}
-                                            value={valueSelect4}
-                                            options={categories}
-                                            style={{marginTop: '15px', display: showCategories4 ? "block" : "none"}}
-                                          />
-                                          <CIcon 
-                                            icon={cilX} 
-                                            size="xl" 
-                                            style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories4 ? "block" : "none"}} 
-                                            onClick={()=>delCategory4(valueSelect4)}
-                                          />
-                                        </CCol>
-                                      </CRow>
-
-                                      {/* Категория 5 */}
-                                      <CRow>
-                                        <CCol sm={12} style={{display: 'flex'}}>
-                                          <CFormSelect 
-                                            aria-label="Default select example"
-                                            onChange={onAddCategory5}
-                                            value={valueSelect5}
-                                            options={categories}
-                                            style={{marginTop: '15px', display: showCategories5 ? "block" : "none"}}
-                                          />
-                                          <CIcon 
-                                            icon={cilX} 
-                                            size="xl" 
-                                            style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories5 ? "block" : "none"}} 
-                                            onClick={()=>delCategory5(valueSelect5)}
-                                          />
-                                        </CCol>
-                                      </CRow>
-
-                                      {/* Категория 6 */}
-                                      <CRow>
-                                        <CCol sm={12} style={{display: 'flex'}}>
-                                          <CFormSelect 
-                                            aria-label="Default select example"
-                                            onChange={onAddCategory6}
-                                            value={valueSelect6}
-                                            options={categories}
-                                            style={{marginTop: '15px', display: showCategories6 ? "block" : "none"}}
-                                          />
-                                          <CIcon 
-                                            icon={cilX} 
-                                            size="xl" 
-                                            style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories6 ? "block" : "none"}} 
-                                            onClick={()=>delCategory6(valueSelect6)}
-                                          />
-                                        </CCol>
-                                      </CRow>
-
-                                      {/* Категория 7 */}
-                                      <CRow>
-                                        <CCol sm={12} style={{display: 'flex'}}>
-                                          <CFormSelect 
-                                            aria-label="Default select example"
-                                            onChange={onAddCategory7}
-                                            value={valueSelect7}
-                                            options={categories}
-                                            style={{marginTop: '15px', display: showCategories7 ? "block" : "none"}}
-                                          />
-                                          <CIcon 
-                                            icon={cilX} 
-                                            size="xl" 
-                                            style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories7 ? "block" : "none"}} 
-                                            onClick={()=>delCategory7(valueSelect7)}
-                                          />
-                                        </CCol>
-                                      </CRow>
-
-                                      {/* Добавить */}
-                                      <CRow>
-                                        <CCol sm={12} style={{textAlign: 'end', marginTop: '15px', paddingRight: '23px'}}> 
-                                          <img 
-                                            src={treug} 
-                                            alt='' 
-                                            width='20px' 
-                                            onClick={onAddCategory0}
-                                          />
-                                        </CCol>
-                                      </CRow>
-                                      
-                                      <p style={{color: '#767676', marginTop: '-20px'}}>Получателей: <span>{selected.length}</span></p>  
-                                      
-                                    </CCol>
-
-                                    {/* <CCol sm={1}></CCol> */}
-
-                                    {/* Правый блок */}
-                                    <CCol sm={6} style={{paddingLeft: '30px', paddingRight: '30px'}}>
-                                        <CFormLabel htmlFor="exampleFormControlInput1">Текст рассылки:</CFormLabel>
-                                        <CFormTextarea 
-                                          id="exampleFormControlTextarea1" 
-                                          rows={4} 
-                                          placeholder='Введите текст сообщения'
-                                          onChange={onChangeText}
-                                          value={text}
-                                          // helperText = {`${countChar}/500`}
-                                        >  
-                                          <CSpinner style={{width: '20px', height: '20px'}}/>         
-                                        </CFormTextarea>
-
-                                        <br/>
-
-                                      <CRow className="mb-6">
-                                          <CCol sm={3} > 
-                                            <CFormSelect 
-                                              aria-label="Default select example"
-                                              style={{marginTop: '10px'}}
-                                              options={[
-                                                {
-                                                  label: 'Постер',
-                                                  value: '1',
-                                                },
-                                                {
-                                                  label: 'Файл',
-                                                  value: '2',
-                                                },
-                                                {
-                                                  label: 'Аудио',
-                                                  value: '3',
-                                                },
-                                                {
-                                                  label: 'Видео',
-                                                  value: '4',
-                                                },
-        
-                                              ]}
+                                        <CRow className="mb-3"> 
+                                          <CCol sm={6}> 
+                                            <CFormCheck 
+                                              type="radio"
+                                              id="flexRadioDefault2" 
+                                              name="flexRadioDefault"
+                                              label="Номер"
+                                              checked={!showNameProject}
+                                              onChange={onChangeProjectNumber}
                                             />
                                           </CCol>
+                                          <CCol sm={6} style={{display: 'flex', justifyContent: 'flex-end'}}> 
+                                            <CFormCheck 
+                                              type="radio"
+                                              id="flexRadioDefault1" 
+                                              name="flexRadioDefault"
+                                              label="Название"
+                                              checked={showNameProject}
+                                              onChange={onChangeProjectName}
+                                            />
+                                          </CCol>
+                                        </CRow>
 
-                                          <CCol sm={9} > 
-                                            {/* Добавление картинки */}
-                                            <div style={{color: '#8f8888', marginTop: '10px'}}>
-                                              <CFormInput 
-                                                type="file" 
-                                                id="formFile" 
-                                                accept="image/*,image/jpeg"
-                                                // label="Добавить картинку" 
-                                                name="photo"
-                                                onChange={(e) => onFileChange(e)}
-                                                //value={value}
+                                        {/* Список проектов по имени */}
+                                        <CFormSelect 
+                                          aria-label="Default select example"
+                                          style={{display: showNameProject ? "block" : "none" }}
+                                          onChange={onChangeSelectProject}
+                                          options={contacts}
+                                          value={valueProject}
+                                        />
+
+                                        {/* Список проектов по id */}
+                                        <CFormSelect 
+                                          aria-label="Default select example"
+                                          style={{display: !showNameProject ? "block" : "none" }}
+                                          onChange={onChangeSelectProject}
+                                          options={contacts2}
+                                          value={valueProject}
+                                        />
+
+                                        {/* <br/> */}
+                                        
+
+                                        {loader ? 
+                                        <>
+                                          <br/>
+                                          <div style={{position: 'relative'}}>
+                                            <div style={{position: 'absolute', top: '-10px', left: '45%'}}>
+                                              <CSpinner/>
+                                            </div>
+                                          </div> 
+                                        </>
+                                        : <br/>
+                                        }
+                                        
+                                        {/* Категория 1 */}
+                                        <CRow>
+                                          <CCol sm={12} > 
+                                            <CFormLabel htmlFor="exampleFormControlInput1">Категория:</CFormLabel>
+                                            <CFormSelect 
+                                              aria-label="Default select example"
+                                              onChange={onAddCategory}
+                                              options={categories}
+                                              value={valueSelect}
+                                            /> 
+                                          </CCol> 
+                                        </CRow>
+                                        
+                                        {/* Категория 2 */}
+                                        <CRow>
+                                          <CCol sm={12} style={{display: 'flex'}}>  
+                                            <CFormSelect 
+                                              aria-label="Default select example"
+                                              onChange={onAddCategory2}
+                                              value={valueSelect2}
+                                              options={categories}
+                                              style={{marginTop: '15px', display: showCategories2 ? "block" : "none"}}
+                                            />
+                                            <CIcon 
+                                              icon={cilX} 
+                                              size="xl" 
+                                              style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories2 ? "block" : "none"}} 
+                                              onClick={()=>delCategory2(valueSelect2)}
+                                            />
+                                          </CCol>
+                                        </CRow>
+
+                                        {/* Категория 3 */}
+                                        <CRow>
+                                          <CCol sm={12} style={{display: 'flex'}}>  
+                                            <CFormSelect 
+                                              aria-label="Default select example"
+                                              onChange={onAddCategory3}
+                                              value={valueSelect3}
+                                              options={categories}
+                                              style={{marginTop: '15px', display: showCategories3 ? "block" : "none"}}
+                                            />
+                                            <CIcon 
+                                              icon={cilX} 
+                                              size="xl" 
+                                              style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories3 ? "block" : "none"}} 
+                                              onClick={()=>delCategory3(valueSelect3)}
+                                            />
+                                          </CCol>
+                                        </CRow>
+
+                                        {/* Категория 4 */}
+                                        <CRow>
+                                          <CCol sm={12} style={{display: 'flex'}}>
+                                            <CFormSelect 
+                                              aria-label="Default select example"
+                                              onChange={onAddCategory4}
+                                              value={valueSelect4}
+                                              options={categories}
+                                              style={{marginTop: '15px', display: showCategories4 ? "block" : "none"}}
+                                            />
+                                            <CIcon 
+                                              icon={cilX} 
+                                              size="xl" 
+                                              style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories4 ? "block" : "none"}} 
+                                              onClick={()=>delCategory4(valueSelect4)}
+                                            />
+                                          </CCol>
+                                        </CRow>
+
+                                        {/* Категория 5 */}
+                                        <CRow>
+                                          <CCol sm={12} style={{display: 'flex'}}>
+                                            <CFormSelect 
+                                              aria-label="Default select example"
+                                              onChange={onAddCategory5}
+                                              value={valueSelect5}
+                                              options={categories}
+                                              style={{marginTop: '15px', display: showCategories5 ? "block" : "none"}}
+                                            />
+                                            <CIcon 
+                                              icon={cilX} 
+                                              size="xl" 
+                                              style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories5 ? "block" : "none"}} 
+                                              onClick={()=>delCategory5(valueSelect5)}
+                                            />
+                                          </CCol>
+                                        </CRow>
+
+                                        {/* Категория 6 */}
+                                        <CRow>
+                                          <CCol sm={12} style={{display: 'flex'}}>
+                                            <CFormSelect 
+                                              aria-label="Default select example"
+                                              onChange={onAddCategory6}
+                                              value={valueSelect6}
+                                              options={categories}
+                                              style={{marginTop: '15px', display: showCategories6 ? "block" : "none"}}
+                                            />
+                                            <CIcon 
+                                              icon={cilX} 
+                                              size="xl" 
+                                              style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories6 ? "block" : "none"}} 
+                                              onClick={()=>delCategory6(valueSelect6)}
+                                            />
+                                          </CCol>
+                                        </CRow>
+
+                                        {/* Категория 7 */}
+                                        <CRow>
+                                          <CCol sm={12} style={{display: 'flex'}}>
+                                            <CFormSelect 
+                                              aria-label="Default select example"
+                                              onChange={onAddCategory7}
+                                              value={valueSelect7}
+                                              options={categories}
+                                              style={{marginTop: '15px', display: showCategories7 ? "block" : "none"}}
+                                            />
+                                            <CIcon 
+                                              icon={cilX} 
+                                              size="xl" 
+                                              style={{marginTop: '20px', marginLeft: '15px', marginRight: '12px', display: showCategories7 ? "block" : "none"}} 
+                                              onClick={()=>delCategory7(valueSelect7)}
+                                            />
+                                          </CCol>
+                                        </CRow>
+
+                                        {/* Добавить */}
+                                        <CRow>
+                                          <CCol sm={12} style={{textAlign: 'end', marginTop: '15px', paddingRight: '23px'}}> 
+                                            <img 
+                                              src={treug} 
+                                              alt='' 
+                                              width='20px' 
+                                              onClick={onAddCategory0}
+                                            />
+                                          </CCol>
+                                        </CRow>
+                                        
+                                        <p style={{color: '#767676', marginTop: '-20px'}}>Получателей: <span>{selected.length}</span></p>  
+                                        
+                                      </CCol>
+
+                                      {/* <CCol sm={1}></CCol> */}
+
+                                      {/* Правый блок */}
+                                      <CCol sm={6} style={{paddingLeft: '30px', paddingRight: '30px'}}>
+                                          <CFormLabel htmlFor="exampleFormControlInput1">Текст рассылки:</CFormLabel>
+                                          <CFormTextarea 
+                                            id="exampleFormControlTextarea1" 
+                                            rows={4} 
+                                            placeholder='Введите текст сообщения'
+                                            onChange={onChangeText}
+                                            value={text}
+                                            // helperText = {`${countChar}/500`}
+                                          >  
+                                            <CSpinner style={{width: '20px', height: '20px'}}/>         
+                                          </CFormTextarea>
+
+                                          <br/>
+
+                                        <CRow className="mb-6">
+                                            <CCol sm={3} > 
+                                              <CFormSelect 
+                                                aria-label="Default select example"
+                                                style={{marginTop: '10px'}}
+                                                options={[
+                                                  {
+                                                    label: 'Постер',
+                                                    value: '1',
+                                                  },
+                                                  {
+                                                    label: 'Файл',
+                                                    value: '2',
+                                                  },
+                                                  {
+                                                    label: 'Аудио',
+                                                    value: '3',
+                                                  },
+                                                  {
+                                                    label: 'Видео',
+                                                    value: '4',
+                                                  },
+          
+                                                ]}
                                               />
+                                            </CCol>
 
-                                              {/* <form>
-                                                <label htmlFor="formFile" className="custom-file-upload">
-                                                  Выберите файл
-                                                </label> 
-                                                <input 
-                                                  type="file"
+                                            <CCol sm={9} > 
+                                              {/* Добавление картинки */}
+                                              <div style={{color: '#8f8888', marginTop: '10px'}}>
+                                                <CFormInput 
+                                                  type="file" 
                                                   id="formFile" 
-                                                  accept="image/*,image/jpeg" 
+                                                  accept="image/*,image/jpeg"
+                                                  // label="Добавить картинку" 
                                                   name="photo"
                                                   onChange={(e) => onFileChange(e)}
-                                                  value={value}
-                                                /> 
-                                                <span className="input-file-text" type="text">{value}</span>
-                                              </form> */}
-                                            </div>
-                                          </CCol>
+                                                  //value={value}
+                                                />
 
-                                        </CRow>
+                                                {/* <form>
+                                                  <label htmlFor="formFile" className="custom-file-upload">
+                                                    Выберите файл
+                                                  </label> 
+                                                  <input 
+                                                    type="file"
+                                                    id="formFile" 
+                                                    accept="image/*,image/jpeg" 
+                                                    name="photo"
+                                                    onChange={(e) => onFileChange(e)}
+                                                    value={value}
+                                                  /> 
+                                                  <span className="input-file-text" type="text">{value}</span>
+                                                </form> */}
+                                              </div>
+                                            </CCol>
 
-                                        <div className="mb-3"></div>
+                                          </CRow>
 
-                                        {/* Ряд кнопок */}
-                                        <CRow className="mb-6">
-                                          <CCol sm={4} style={{fontSize: '13px'}}> 
+                                          <div className="mb-3"></div>
+
+                                          {/* Ряд кнопок */}
+                                          <CRow className="mb-6">
+                                            <CCol sm={4} style={{fontSize: '13px'}}> 
+                                              <CFormCheck 
+                                                type="radio"
+                                                id="addButtonRadio" 
+                                                name="groupRadioButton"
+                                                label="Добавить кнопку"
+                                                checked={showEditButtonAdd}
+                                                onChange={onChangeAddButton}
+                                              />
+                                              {/* <div className="mb-3 text-left">
+                                                <p style={{color: '#fff', cursor: 'pointer'}} onClick={clickShowEditButton} > {showEditButtonAdd ? '- Убрать кнопку' : '+ Добавить кнопку'}</p>
+                                              </div> */}
+
+                                            </CCol>
+
+                                          <CCol sm={4} style={{display: 'flex', justifyContent: 'flex-start', fontSize: '13px'}}> 
                                             <CFormCheck 
                                               type="radio"
-                                              id="addButtonRadio" 
+                                              id="appleButtonRadio" 
                                               name="groupRadioButton"
-                                              label="Добавить кнопку"
-                                              checked={showEditButtonAdd}
-                                              onChange={onChangeAddButton}
-                                            />
-                                            {/* <div className="mb-3 text-left">
-                                              <p style={{color: '#fff', cursor: 'pointer'}} onClick={clickShowEditButton} > {showEditButtonAdd ? '- Убрать кнопку' : '+ Добавить кнопку'}</p>
-                                            </div> */}
-
+                                              label="Принять / Отклонить"
+                                              checked={!showEditButtonAdd}
+                                              onChange={onChangeAddButton2}
+                                              //defaultChecked
+                                            /> 
+  
                                           </CCol>
 
-                                        <CCol sm={4} style={{display: 'flex', justifyContent: 'flex-start', fontSize: '13px'}}> 
-                                          <CFormCheck 
-                                            type="radio"
-                                            id="appleButtonRadio" 
-                                            name="groupRadioButton"
-                                            label="Принять / Отклонить"
-                                            checked={!showEditButtonAdd}
-                                            onChange={onChangeAddButton2}
-                                            //defaultChecked
-                                          /> 
- 
-                                        </CCol>
-
-                                        <CCol sm={4} style={{display: 'flex', justifyContent: 'flex-end', fontSize: '13px'}}>
-                                          <CFormCheck 
-                                            id="flexCheckDefault" 
-                                            label="Альтернативная ставка"
-                                            onChange={onChangeCheckButton}
-                                            checked={stavka}
-                                          />
-                                        </CCol>
-                                      </CRow>
-
-                                      <br/>
-                                      <div style={{color: '#8f8888', visibility: showEditButtonAdd ? "visible" : "hidden" }}>
-                                      <CRow className="mb-6" >
-                                        
-                                        {/* Раскрывающийся ряд */}
-                                        {/* Добавление кнопки */}
-                                        <CCol sm={6} > 
-                                          {/* <CForm className="row g-3" style={{color: '#8f8888', display: showEditButtonAdd ? "block" : "none" }}>                                              */}
-                                            <CFormInput 
-                                              type="text" 
-                                              id="inputTextButton" 
-                                              label="Название кнопки" 
-                                              placeholder="Введите текст"
-                                              onChange={onChangeTextButton}
-                                              value={textButton}
+                                          <CCol sm={4} style={{display: 'flex', justifyContent: 'flex-end', fontSize: '13px'}}>
+                                            <CFormCheck 
+                                              id="flexCheckDefault" 
+                                              label="Альтернативная ставка"
+                                              onChange={onChangeCheckButton}
+                                              checked={stavka}
                                             />
-                                          {/* </CForm> */}
-                                        </CCol>
-                                      </CRow>
-
-                                        <CRow>
-                                          <br/>
+                                          </CCol>
                                         </CRow>
 
-                                        <CRow className="mb-6">
-                                          <CCol sm={6} >         
-                                            {/* Цепь */}
-                                            <CFormCheck 
-                                              type="radio"
-                                              id="addTargetRadio" 
-                                              name="groupRadioTarget"
-                                              label="Цепь №"              
-                                              // checked={showEditButtonAdd}
-                                              // onChange={onChangeAddButton}
-                                            />
-                                            
-                                            <CFormSelect 
-                                              aria-label="Default select example"
-                                              style={{marginTop: '10px'}}
-                                              options={[]}
-                                            />
-                                          </CCol>
-
-                                          <CCol sm={6} > 
-                                            {/* Ссылка */}
-                                            <CFormCheck 
-                                              type="radio"
-                                              id="addURLRadio" 
-                                              name="groupRadioTarget"
-                                              label="Ссылка"  
-                                              // checked={showEditButtonAdd}
-                                              // onChange={onChangeAddButton}
-                                            />
-
-                                            <CFormInput 
-                                              type="text" 
-                                              id="inputTextButton" 
-                                              placeholder="https://"
-                                              style={{marginTop: '10px'}}
-                                              onChange={onChangeTextUrl}
-                                              value={target}
-                                            />
-                                          </CCol>
+                                        <br/>
+                                        <div style={{color: '#8f8888', visibility: showEditButtonAdd ? "visible" : "hidden" }}>
+                                        <CRow className="mb-6" >
                                           
+                                          {/* Раскрывающийся ряд */}
+                                          {/* Добавление кнопки */}
+                                          <CCol sm={6} > 
+                                            {/* <CForm className="row g-3" style={{color: '#8f8888', display: showEditButtonAdd ? "block" : "none" }}>                                              */}
+                                              <CFormInput 
+                                                type="text" 
+                                                id="inputTextButton" 
+                                                label="Название кнопки" 
+                                                placeholder="Введите текст"
+                                                onChange={onChangeTextButton}
+                                                value={textButton}
+                                              />
+                                            {/* </CForm> */}
+                                          </CCol>
                                         </CRow>
+
+                                          <CRow>
+                                            <br/>
+                                          </CRow>
+
+                                          <CRow className="mb-6">
+                                            <CCol sm={6} >         
+                                              {/* Цепь */}
+                                              <CFormCheck 
+                                                type="radio"
+                                                id="addTargetRadio" 
+                                                name="groupRadioTarget"
+                                                label="Цепь №"              
+                                                // checked={showEditButtonAdd}
+                                                // onChange={onChangeAddButton}
+                                              />
+                                              
+                                              <CFormSelect 
+                                                aria-label="Default select example"
+                                                style={{marginTop: '10px'}}
+                                                options={[]}
+                                              />
+                                            </CCol>
+
+                                            <CCol sm={6} > 
+                                              {/* Ссылка */}
+                                              <CFormCheck 
+                                                type="radio"
+                                                id="addURLRadio" 
+                                                name="groupRadioTarget"
+                                                label="Ссылка"  
+                                                // checked={showEditButtonAdd}
+                                                // onChange={onChangeAddButton}
+                                              />
+
+                                              <CFormInput 
+                                                type="text" 
+                                                id="inputTextButton" 
+                                                placeholder="https://"
+                                                style={{marginTop: '10px'}}
+                                                onChange={onChangeTextUrl}
+                                                value={target}
+                                              />
+                                            </CCol>
+                                            
+                                          </CRow>
+                                        </div>
+                                      </CCol>
+
+                                      {/* <CCol sm={1}></CCol> */}
+
+                                      {/* Телефон */}
+                                      <CCol sm={3}>   
+                                        <div style={{position: 'relative'}}>
+                                          <div style={{position: 'absolute', top: '10px', left: 0}}>
+                                            <img src={phone_image} width='280px' height='615px' alt='phone' />
+                                            <div style={{position: 'absolute', top: '60px', left: '22px'}}>
+                                            {
+                                              filePreview
+                                              ? <img src={filePreview} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
+                                              : <img src={noimage2} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
+                                            }
+                                            </div>
+                                            <div style={{position: 'absolute', top: '225px', left: '22px', display: 'flex', width: '85%'}}>
+                                              <div style={{
+                                                backgroundColor: '#8a93a2', 
+                                                borderRadius: '5px',
+                                                textAlign: 'center',
+                                                fontSize: '12px',
+                                                padding: '5px',
+                                                marginRight: '4px',
+                                                width: '100%'}}>
+                                                  Принять
+                                              </div>
+                                              <div style={{
+                                                backgroundColor: '#8a93a2', 
+                                                borderRadius: '5px',
+                                                textAlign: 'center',
+                                                fontSize: '12px',
+                                                padding: '5px',
+                                                width: '100%'}}>
+                                                  Отклонить
+                                              </div>
+                                            </div>                                         
+                                          </div>                                                                             
+                                        </div>
+                                        
+                                      </CCol>
+          
+                                    </CRow>
+
+                                  </div>
+
+                                  <br/>
+
+                                  <CRow>
+                                    <CCol sm={9} style={{position: 'absolute', top: '600px'}}>
+                                      <div className="mb-3" style={{
+                                        display: 'flex', 
+                                        width: '100%', 
+                                        justifyContent: 'space-between'
+                                      }}>
+                                        <div>
+                                          {planShow ? 
+                                            <CButton color="success" onClick={()=>onPlanerShow(labelName.label, proj, text, distribId, categoryAll, selected.length, datestart, poster, uuidDistrib)}>
+                                              Запланировать
+                                            </CButton>
+                                            :<Link to={''} state={{ project: `${proj}`, }}>
+                                              <CButton color="secondary">
+                                                {showUpload ? <CSpinner style={{width: '20px', height: '20px'}}/> : 'Запланировать'}
+                                                </CButton>
+                                            </Link>
+                                          }             
+                                        </div>
+                                        <div>
+                                          {(editDistrib && delivered) ? 
+                                            <CButton color="danger" onClick={()=>onDeleteMessages(distribId)}>
+                                              Удалить
+                                            </CButton>
+                                          :<></>
+                                          }             
+                                        </div>
+                                        <div>
+                                          {delivered ? <CButton color="primary" onClick={onSendText}>Разослать сейчас</CButton>
+                                          :<CButton color="primary" onClick={onSaveText}>Сохранить</CButton>}
+                                          
+                                          {/* <CButton onClick={() => setVisible(!visible)}>Vertically centered modal</CButton> */}
+                                          
+                                          <CModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
+                                            <CModalHeader>
+                                              <CModalTitle>Предупреждение</CModalTitle>
+                                            </CModalHeader>
+                                            <CModalBody>
+                                              Чтобы создать рассылку необходимо выбрать проект и добавить категории получателей!
+                                            </CModalBody>
+                                            <CModalFooter>
+                                              <CButton color="primary" onClick={() => setVisibleModal(false)}>ОК</CButton>
+                                            </CModalFooter>
+                                          </CModal>
+                                        </div>
                                       </div>
                                     </CCol>
-
-                                    {/* <CCol sm={1}></CCol> */}
-
-                                    {/* Телефон */}
-                                    <CCol sm={3}>   
-                                      <div style={{position: 'relative'}}>
-                                        <div style={{position: 'absolute', top: '10px', left: 0}}>
-                                          <img src={phone_image} width='280px' height='615px' alt='phone' />
-                                          <div style={{position: 'absolute', top: '60px', left: '22px'}}>
-                                          {
-                                            filePreview
-                                            ? <img src={filePreview} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
-                                            : <img src={noimage2} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
-                                          }
-                                          </div>
-                                          <div style={{position: 'absolute', top: '225px', left: '22px', display: 'flex', width: '85%'}}>
-                                            <div style={{
-                                              backgroundColor: '#8a93a2', 
-                                              borderRadius: '5px',
-                                              textAlign: 'center',
-                                              fontSize: '12px',
-                                              padding: '5px',
-                                              marginRight: '4px',
-                                              width: '100%'}}>
-                                                Принять
-                                            </div>
-                                            <div style={{
-                                              backgroundColor: '#8a93a2', 
-                                              borderRadius: '5px',
-                                              textAlign: 'center',
-                                              fontSize: '12px',
-                                              padding: '5px',
-                                              width: '100%'}}>
-                                                Отклонить
-                                            </div>
-                                          </div>                                         
-                                        </div>                                                                             
-                                      </div>
-                                      
-                                    </CCol>
-         
+                                    <CCol sm={3}></CCol>
                                   </CRow>
+                                  
 
-                                </div>
+                                </CForm>
 
-                                <br/>
-
-                                <CRow>
-                                  <CCol sm={9} style={{position: 'absolute', top: '600px'}}>
-                                    <div className="mb-3" style={{
-                                      display: 'flex', 
-                                      width: '100%', 
-                                      justifyContent: 'space-between'
-                                    }}>
-                                      <div>
-                                        {planShow ? 
-                                          <CButton color="success" onClick={()=>onPlanerShow(labelName.label, proj, text, distribId, categoryAll, selected.length, datestart, poster, uuidDistrib)}>
-                                            Запланировать
-                                          </CButton>
-                                          :<Link to={''} state={{ project: `${proj}`, }}>
-                                            <CButton color="secondary">
-                                              {showUpload ? <CSpinner style={{width: '20px', height: '20px'}}/> : 'Запланировать'}
-                                              </CButton>
-                                          </Link>
-                                        }             
-                                      </div>
-                                      <div>
-                                        {(editDistrib && delivered) ? 
-                                          <CButton color="danger" onClick={()=>onDeleteMessages(distribId)}>
-                                            Удалить
-                                          </CButton>
-                                        :<></>
-                                        }             
-                                      </div>
-                                      <div>
-                                        {delivered ? <CButton color="primary" onClick={onSendText}>Разослать сейчас</CButton>
-                                        :<CButton color="primary" onClick={onSaveText}>Сохранить</CButton>}
-                                        
-                                        {/* <CButton onClick={() => setVisible(!visible)}>Vertically centered modal</CButton> */}
-                                        
-                                        <CModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
-                                          <CModalHeader>
-                                            <CModalTitle>Предупреждение</CModalTitle>
-                                          </CModalHeader>
-                                          <CModalBody>
-                                            Чтобы создать рассылку необходимо выбрать проект и добавить категории получателей!
-                                          </CModalBody>
-                                          <CModalFooter>
-                                            <CButton color="primary" onClick={() => setVisibleModal(false)}>ОК</CButton>
-                                          </CModalFooter>
-                                        </CModal>
-                                      </div>
-                                    </div>
-                                  </CCol>
-                                  <CCol sm={3}></CCol>
-                                </CRow>
-                                
-
-                              </CForm>
-
-                            </CCardBody>
-                          </CCard>
-                        </CCol>
+                              </CCardBody>
+                            </CCard>
+                          </CCol>
                       </CRow>
+                    </>}
                   </>
                 </Suspense>
             </CContainer>
