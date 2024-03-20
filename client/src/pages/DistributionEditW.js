@@ -60,11 +60,15 @@ const DistributionEditW = () => {
   const categoriesitem = location.state?.category
   const datestart = location.state?.date
   const img = location.state?.img
+  const text2 = location.state?.text
   const uuidProj = location.state?.uuid
   const editDistrib = location.state?.editD
   const delivered = location.state?.delivered
   const users = location.state?.users
-  //const target = location.state?.target
+  const target2 = location.state?.target
+  const stavka = location.state?.stavka
+  const button = location.state?.button
+  const editButton = location.state?.editButton
   
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_HOST
@@ -179,6 +183,10 @@ const DistributionEditW = () => {
         console.log("Сохраненный UUID", uuidProj)
         console.log("Доставлено: ", delivered)
         console.log("Получатели: ", users.split(',').length)
+        console.log("Кнопка: ", button)
+        console.log("Ставка: ", stavka)
+        console.log("Ред. кнопка: ", editButton)
+        console.log("Ссылка: ", target2)
         
         const distrib = await getDistributionW(distribId)
         onHandlingProject(projId, true, projects, uuidProj)
@@ -194,7 +202,7 @@ const DistributionEditW = () => {
         setCategoryAll(categoriesitem)
 
         //для текстового поля
-        //setText(distrib.text)
+        setText(text2)
 
         //для телефона
         if (img !== ' ') {
@@ -202,6 +210,12 @@ const DistributionEditW = () => {
         }  
         
         setPlanShow(true)
+
+        setShowEditButtonAdd(editButton)
+
+        setTextButton(button)
+
+        setTarget(target2)
       } 
     }
 
@@ -1567,6 +1581,7 @@ const delCategory7 = (category) => {
                                             id="flexCheckDefault" 
                                             label="Альтернативная ставка"
                                             onChange={onChangeCheckButton}
+                                            checked={stavka}
                                           />
                                         </CCol>
                                       </CRow>

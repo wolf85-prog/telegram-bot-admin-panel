@@ -105,6 +105,10 @@ const DistributionW = () => {
           report: distrib.report,
           delivered: deliv,
           users: distrib.users,
+          button: distrib.button,
+          stavka: distrib.stavka,
+          editButton: distrib.editButton,
+          target: distrib.target,
 				}
         arrDitributions.push(newDistribution)
       })
@@ -290,10 +294,9 @@ const DistributionW = () => {
                                           </CButton>
                                         </Link> */}
 
-                                        {item.projectId ? 
-                                          (item.delivered ? <Link to={'/distributionw_add'} state={{editD: true, delivered: item.delivered, project: item.projectId, id: item.id, category: item.categories, users: item.users, img: item.image, date: item.datestart, uuid: item.uuid}}><CButton color="light" style={{marginRight: '10px'}}><img src={copyIcon} alt='' width='10px' /></CButton></Link>
-                                          :<Link to={'/distributionw_edit'} state={{editD: true, delivered: item.delivered, project: item.projectId, id: item.id, category: item.categories, users: item.users, img: item.image, date: item.datestart, uuid: item.uuid}}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>)
-                                          :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{marginRight: '10px'}}><img src={editIcon} alt='' width='10px' /></CButton></Link>
+                                        {item.projectId ?   
+                                          <Link to={'/distributionw_edit'} state={{editD: true, delivered: item.delivered, project: item.projectId, id: item.id, category: item.categories, users: item.users, text: item.text, img: item.image, date: item.datestart, uuid: item.uuid, button: item.button, editButton: item.editButton, stavka: item.stavka, target: item.target}}><CButton color="light" style={{marginRight: '10px'}}><img src={item.delivered ? copyIcon : editIcon} alt='' width='10px' /></CButton></Link>
+                                          :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{marginRight: '10px'}}><img src={item.delivered ? copyIcon : editIcon} alt='' width='10px' /></CButton></Link>
                                         }
                                         
                                         <CButton color="light" onClick={() => removeDescription(item)}>
