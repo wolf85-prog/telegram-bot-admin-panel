@@ -38,8 +38,10 @@ import {
   getDatabaseId,
   newPretendent,
   editDistributionW2,
-  getProjectNewDate, 
+  getProjectNewDate,
+  getProjectNewCash, 
 } from '../http/adminAPI';
+
 import { uploadFile, delMessage } from '../http/chatAPI';
 import { newMessage } from '../http/workerAPI';
 import specData from './../data/specData';
@@ -163,7 +165,7 @@ const DistributionAddW = () => {
   useEffect(() => {
     const fetchData = async () => {
 
-      let projects = await getProjectNewDate();
+      let projects = await getProjectNewCash();
       console.log("Загрузка проектов из БД ...")
       console.log("projects planer: ", projects)
       console.log("clients: ", clients)

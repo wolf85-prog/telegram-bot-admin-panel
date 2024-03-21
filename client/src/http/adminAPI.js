@@ -48,7 +48,18 @@ export const getProjectNewDate = async () =>{
         //console.log("projectsAPI: ", response.data);
         return response.data;
     } catch (error) {
-        console.log("error while calling getProjects3 api", error.message);
+        console.log("error while calling getProjectNewDate api", error.message);
+    }
+}
+
+//api бд
+export const getProjectNewCash = async () =>{
+    try {
+        let response = await $host_bot.get('projectsnewcash');
+        //console.log("projectsAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectNewCash api", error.message);
     }
 }
 

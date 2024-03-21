@@ -28,6 +28,7 @@ import { cilX, cilCaretBottom, cilCarAlt, cilCaretLeft } from '@coreui/icons';
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { $host } from '../http/index';
 import { useNavigate } from 'react-router-dom';
+
 import { 
   newDistributionW, 
   getDistributionsW,
@@ -40,7 +41,9 @@ import {
   editDistributionW2,
   getProjectNewDate, 
   editDistributionWAll, 
+  getProjectNewCash,
 } from '../http/adminAPI';
+
 import { uploadFile, delMessage } from '../http/chatAPI';
 import { newMessage } from '../http/workerAPI';
 import specData from '../data/specData';
@@ -168,7 +171,7 @@ const DistributionEditW = () => {
   useEffect(() => {
     const fetchData = async () => {
 
-      let projects = await getProjectNewDate();
+      let projects = await getProjectNewCash();
       console.log("Загрузка проектов из БД ...")
       console.log("projects planer: ", projects)
       console.log("clients: ", clients)
