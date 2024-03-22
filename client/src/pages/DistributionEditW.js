@@ -1296,7 +1296,7 @@ const onSaveText = async() => {
 
     let countSuccess = 0
 
-    if (selected.length !== 0 && file || selected.length !== 0 && text) {
+    if (selected.length !== 0 && file || selected.length !== 0 || image) {
       audio.play();
 
       const d = new Date();
@@ -1310,7 +1310,7 @@ const onSaveText = async() => {
       const message = {
         text: text, 
         category: categoryAll.toString(),
-        // image: image ? `${host}${image}` : '', 
+        image: image ? `${host}${image}` : '', 
         project: labelName.label, 
         projectId: valueProject,
         // receivers: categoryAll.toString(), 
