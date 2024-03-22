@@ -476,7 +476,7 @@ const getCategoryFromNotion = async(projectId) => {
       //выбрать уникальных специалистов
       const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
       setSelected(arr)
-      //console.log("selected: ", arr)     
+      console.log("selected 0: ", arr)     
     }
   } else {
     setValueSelect(0)
@@ -556,6 +556,7 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
     //ф-я установки списка категорий
     setCategoryItem(arr2)
 
+    let arr_temp = []
     //список специалистов с массивом специальностей (категорий)
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
@@ -564,7 +565,7 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
             if (cat === category.icon) {
               //console.log("cat_name: ", category.name)
               if (work.cat === category.name) {
-                arrSelect.push(worker.chatId)
+                arr_temp.push(worker.chatId)
               } 
             }
           })
@@ -572,7 +573,7 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
       })
     })
     //выбрать уникальных специалистов
-    const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
+    const arr = [...arr_temp].filter((el, ind) => ind === arr_temp.indexOf(el));
     setSelected(arr)
 
   } else {
@@ -707,6 +708,7 @@ const onAddCategory = (e) => {
     const result2 = [...arrTemp]
     console.log("result: ", arrCategory)
     console.log("categoryAll: ", arrTemp)
+    console.log("arr: ", arrSelect)
     
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {

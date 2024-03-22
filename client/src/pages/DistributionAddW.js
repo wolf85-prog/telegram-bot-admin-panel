@@ -56,18 +56,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 const DistributionAddW = () => {
   const [poster, setPoster]= useState('');
-
-  const location = useLocation()
-  const projId = location.state?.project //? location.state.project : ""
-  const distribId = location.state?.id
-  const categoriesitem = location.state?.category
-  const datestart = location.state?.date
-  const img = location.state?.img
-  const uuidProj = location.state?.uuid
-  const editDistrib = location.state?.editD
-  const delivered = location.state?.delivered
-  const users = location.state?.users
-  //const target = location.state?.target
   
   const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_HOST
@@ -394,7 +382,6 @@ const getCategoryFromNotion = async(projectId) => {
 }
 
 
-
 //функция обработки изменения текущего проекта
 const onHandlingProject = async(projectId, save, projects, uuidProj) => {
   const arrProjects = []
@@ -402,7 +389,6 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
   setUuidDistrib(uuidProj ? uuidProj : uuidv4())
   console.log("uuid: ", uuidv4()) // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
   console.log("uuidSave: ", uuidProj) // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
-  console.log("save: ", save)
   console.log("projectId: ", projectId)
   console.log("projects: ", projects)
 
@@ -414,81 +400,13 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
   
   console.log("contacts: ", contacts)
 
-  if (save) {
-    projects.map((project) => {
-      if (project != null) {
-        const d = new Date(project.datestart);
-        const month = String(d.getMonth()+1).padStart(2, "0");
-        const day = String(d.getDate()).padStart(2, "0");
+  const obj = contacts.find((item)=>item.value === projectId)
+  console.log("obj: ", obj)
+  setLabelName(obj)
 
-        const newObj = {
-          label: `${day}.${month} | ${project.name}`, 
-          value: project.id,
-        }
-        arrProjects.push(newObj)
-      }    
-    })
-    const obj = arrProjects.find((item1)=>item1.value === projectId)
-    console.log("objSave: ", obj)
-    setLabelName(obj)
 
-  } else {
-    const obj = contacts.find((item)=>item.value === projectId)
-    console.log("obj: ", obj)
-    setLabelName(obj)
-  }
+  await getCategoryFromNotion(projectId)
 
-  
-
-  if (save) {
-    const result = categoriesitem.split(',');
-    const arr2 = []
-    const arr3 = []
-    const arr4 = []
-    specData.map((category)=> {
-      result.map((item)=> {
-        if (item === category.icon) {
-          const obj = {
-              label: category.icon,
-              value: category.id,
-              //name: category.name
-          }
-          arr2.push(obj)
-          arr3.push(item)
-          //arr4.push(item)
-        }
-      })
-    })
-      
-    setCategoryAll(arr3)
-    //setCategoryAll2(arr4)
-
-    //ф-я установки списка категорий
-    setCategoryItem(arr2)
-
-    //список специалистов с массивом специальностей (категорий)
-    workers.map((worker)=> {
-      JSON.parse(worker.worklist).map((work) => {
-        result.map((cat)=>{
-          specData.map((category)=> {
-            if (cat === category.icon) {
-              //console.log("cat_name: ", category.name)
-              if (work.cat === category.name) {
-                arrSelect.push(worker.chatId)
-              } 
-            }
-          })
-        })
-      })
-    })
-    //выбрать уникальных специалистов
-    const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
-    setSelected(arr)
-
-  } else {
-    await getCategoryFromNotion(projectId)
-  }
-  
 }
 
 
@@ -1053,7 +971,7 @@ const delCategory7 = (category) => {
 
   //===================================================================
   {/* Запланировать рассылку */}
-  const onPlanerShow = async(label, proj, text, id, cats, count, date, poster, uuidDistrib) => {
+  const onPlanerShow = async(label, proj, text, cats, count, poster, uuidDistrib) => {
     setVisibleModal(!visibleModal)
 
     if (selected.length !== 0 && proj || selected.length !== 0 && text) {
@@ -1062,10 +980,10 @@ const delCategory7 = (category) => {
           labelProj: label,
           project: proj,
           text: text,
-          id: id,
+          //id: id,
           category: cats,
           count: count,
-          date: date,
+          date: new Date(),
           image: poster,
           selected: selected, 
           uuid: uuidDistrib,
@@ -1662,7 +1580,7 @@ const delCategory7 = (category) => {
                                     }}>
                                       <div>
                                         {planShow ? 
-                                          <CButton color="success" onClick={()=>onPlanerShow(labelName.label, proj, text, distribId, categoryAll, selected.length, datestart, poster, uuidDistrib)}>
+                                          <CButton color="success" onClick={()=>onPlanerShow(labelName.label, proj, text, categoryAll, selected.length, poster, uuidDistrib)}>
                                             Запланировать
                                           </CButton>
                                           :<Link to={''} state={{ project: `${proj}`, }}>
@@ -1673,17 +1591,8 @@ const delCategory7 = (category) => {
                                         }             
                                       </div>
                                       <div>
-                                        {(editDistrib && delivered) ? 
-                                          <CButton color="danger" onClick={()=>onDeleteMessages(distribId)}>
-                                            Удалить
-                                          </CButton>
-                                        :<></>
-                                        }             
-                                      </div>
-                                      <div>
                                         <CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton>
-                                        
-                                        {/* <CButton onClick={() => setVisible(!visible)}>Vertically centered modal</CButton> */}
+                              
                                         
                                         <CModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
                                           <CModalHeader>
