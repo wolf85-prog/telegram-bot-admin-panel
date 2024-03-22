@@ -2031,7 +2031,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     await newPlan(newObj2);
 
 
-    let str_cats = catDistr.map(item => item).join(',')
+    let str_cats = catDistr.split(',').map(item => item).join(',')
 
     const d = new Date();
     const year = d.getFullYear();

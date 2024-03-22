@@ -127,6 +127,7 @@ const DistributionEditW = () => {
   const [filePreview, setFilePreview] = useState();
   const [value, setValue] = useState("");
   const [image, setImage]= useState("");
+  const [stavka2, setStavka2] = useState(false);
 
   const [value2, setValue2] = useState("");
 
@@ -257,6 +258,8 @@ const DistributionEditW = () => {
         setShowEditButtonAdd(editButton)
 
         setTextButton(button)
+
+        setStavka2(stavka)
 
         setTarget(target2)
 
@@ -1197,7 +1200,7 @@ const delCategory7 = (category) => {
       //новая рассылка
       const message = {
         text: text, 
-        image: image ? `${image}` : '', 
+        image: image ? (image.startsWith('https://') ? `${image}` : `https://proj.uley.team${image}`) : '', 
         project: labelName.label, 
         projectId: valueProject,
         receivers: categoryAll.toString(), 
@@ -1250,6 +1253,7 @@ const delCategory7 = (category) => {
   }
 
   const onChangeCheckButton = (e) => {
+    setStavka2(!stavka2)
     setOnButtonStavka(e.target.checked)
   }
 
@@ -1693,7 +1697,7 @@ const onSaveText = async() => {
                                               id="flexCheckDefault" 
                                               label="Альтернативная ставка"
                                               onChange={onChangeCheckButton}
-                                              checked={stavka}
+                                              checked={stavka2}
                                             />
                                           </CCol>
                                         </CRow>
