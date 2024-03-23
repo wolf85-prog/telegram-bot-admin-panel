@@ -21,6 +21,7 @@ import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3'
 
 const Profile = ({ user, closeSidebar }) => {
 
+	//console.log('user: ', user)
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_HOST
@@ -176,8 +177,8 @@ const Profile = ({ user, closeSidebar }) => {
 							Дата рождения
 						</span>
 						<span className="profile__action-text profile__action-text--top profile__notion">
-							{user.age?.start ? 
-							`${user.age?.start.split('-')[2]}.${user.age?.start.split('-')[1]}.${user.age?.start.split('-')[0]}`
+							{user ? 
+							user.age
 							: "-"}
 						</span>
 					</p>
