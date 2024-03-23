@@ -17,6 +17,15 @@ import sendSound from './../../../chat-app-new/assets/sounds/sendmessage.mp3';
 import axios from 'axios';
 import ChatSidebarProfile from "./components/ChatSidebarProfile";
 
+import { 
+	CButton,
+	CModal,
+	CModalHeader,
+	CModalTitle,
+	CModalBody,
+	CModalFooter
+  } from '@coreui/react'
+
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 const host = process.env.REACT_APP_HOST
@@ -44,6 +53,7 @@ const Chat = () => {
 	const [clearFile, setClearFile] = useState(false)
 
 	const [showCloseButton, setShowCloseButton] = useState(false)
+	const [showErrorFile, setShowErrorFile] = useState(false);
 
 	//select
     const [selectedElement, setSelectedElement] = useState("")
@@ -259,15 +269,21 @@ const Chat = () => {
 						const url_send_doc = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${host+image}`
 						//console.log("url_send_doc: ", url_send_doc)
 						sendPhotoToTelegram = await $host.get(url_send_doc);
+					} else if (image.slice(-3) === 'png' || image.slice(-3)==='jpg' || image.slice(-3)==='peg') {
+						setShowErrorFile(true)
 					} else {
 						const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personW.id}&document=${host+image}`
 						//console.log("url_send_doc: ", url_send_doc)
-						sendPhotoToTelegram = await $host.get(url_send_doc);	
+						sendPhotoToTelegram = await $host.get(url_send_doc);
 					}		
 				} else if (fileType === 'image') {
-					const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
-					//console.log("url_send_photo: ", url_send_photo)
-					sendPhotoToTelegram = await $host.get(url_send_photo);
+					if (image.slice(-3) !== 'png' || image.slice(-3)!=='jpg' || image.slice(-3)!=='peg') {
+						setShowErrorFile(true)
+					} else {
+						const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
+						//console.log("url_send_photo: ", url_send_photo)
+						sendPhotoToTelegram = await $host.get(url_send_photo);
+					}		
 				}	
 			}
 
@@ -400,6 +416,17 @@ const Chat = () => {
 				/>
 				<div className="chat__content">
 					<Convo lastMsgRef={lastMsgRef} messages={user.messages} />
+					<CModal alignment="center" visible={showErrorFile} onClose={() => setShowErrorFile(false)}>
+                        <CModalHeader>
+                        	<CModalTitle>Предупреждение</CModalTitle>
+                        </CModalHeader>
+                        <CModalBody>
+                        	...
+                        </CModalBody>
+                        <CModalFooter>
+                        	<CButton color="primary" onClick={() => setShowErrorFile(false)}>ОК</CButton>
+                        </CModalFooter>
+                    </CModal>
 				</div>
 				<footer className="chat__footer">
 					<div className="chat__footer-wrapper">

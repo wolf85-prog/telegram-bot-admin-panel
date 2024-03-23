@@ -37,6 +37,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		<button
 			aria-label="Message options"
 			className="chat__msg-options"
+			style={{right: '0', top: '0px'}}
 			ref={ref}
 			onClick={(e) => {
 				e.preventDefault();
@@ -48,7 +49,24 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		</button>
 	));
 
-	CustomToggle.displayName = "Search";
+	const CustomToggle2 = React.forwardRef(({ children, onClick }, ref) => (
+		<button
+			aria-label="Message options"
+			className="chat__msg-options"
+			style={{right: '0', top: '-20px'}}
+			ref={ref}
+			onClick={(e) => {
+				e.preventDefault();
+				onClick(e);
+			}}
+		>
+			{children}
+			<Icon id="downArrow" className="chat__msg-options-icon" />											
+		</button>
+	));
+
+	CustomToggle.displayName = "Del";
+	CustomToggle2.displayName = "Del2";
 
 	const CustomMenu = React.forwardRef(
 		({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
@@ -57,7 +75,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		  return (
 			<div
 			  ref={ref}
-			  style={{backgroundColor: '#20272b'}}
+			  style={{backgroundColor: '#20272b', right: 0}}
 			  className={className}
 			  aria-labelledby={labeledBy}
 			>
@@ -298,7 +316,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											</span>
 
 											<Dropdown onSelect={change}>
-												<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
+												<Dropdown.Toggle as={CustomToggle2} id="dropdown-custom-components">											
 												</Dropdown.Toggle>
 												<Dropdown.Menu as={CustomMenu}>
 												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить сообщение</Dropdown.Item>
