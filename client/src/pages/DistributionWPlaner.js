@@ -2030,8 +2030,14 @@ const clickShowEditTime2 = (t, ind, tab) => {
     }
     await newPlan(newObj2);
 
-
-    let str_cats = catDistr.split(',').map(item => item).join(',')
+    //console.log("catDistr2: ", catDistr)
+    let str_cats
+    if (typeof catDistr === 'string') {
+      str_cats = catDistr.split(',').map(item => item).join(',')
+    } else {
+      str_cats = catDistr.map(item => item).join(',')
+    }
+    
 
     const d = new Date();
     const year = d.getFullYear();
