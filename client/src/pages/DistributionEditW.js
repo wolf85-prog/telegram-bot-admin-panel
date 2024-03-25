@@ -199,6 +199,7 @@ const DistributionEditW = () => {
         onHandlingProject(projId, true, projects, uuidProj)
 
         const catItems = categoriesitem.split(',')
+        console.log("catItems: ", catItems)
 
         //установка категорий
         catItems.map((cat, index)=> {
@@ -208,32 +209,38 @@ const DistributionEditW = () => {
           console.log("indexCat: ", indexCat)
 
           if (index === 0) {
-            //console.log("index1: ", index)
+            console.log("index1: ", index)
             setValueSelect(indexCat)
           }
           if (index === 1) {
-            //console.log("index2: ", index)
+            console.log("index2: ", index)
             setValueSelect2(indexCat)
+            setShowCategories2(true)
           } 
           if (index === 2) {
-            //console.log("index2: ", index)
+            console.log("index3: ", index)
             setValueSelect3(indexCat)
+            setShowCategories3(true)
           } 
           if (index === 3) {
-            //console.log("index2: ", index)
+            console.log("index4: ", index)
             setValueSelect4(indexCat)
+            setShowCategories4(true)
           } 
           if (index === 4) {
-            //console.log("index2: ", index)
+            console.log("index5: ", index)
             setValueSelect5(indexCat)
+            setShowCategories5(true)
           } 
           if (index === 5) {
-            //console.log("index2: ", index)
+            console.log("index6: ", index)
             setValueSelect6(indexCat)
+            setShowCategories6(true)
           } 
           if (index === 6) {
-            //console.log("index2: ", index)
+            console.log("index7: ", index)
             setValueSelect7(indexCat)
+            setShowCategories7(true)
           } 
         })
         
@@ -246,10 +253,13 @@ const DistributionEditW = () => {
         const cat1 = categoriesitem.split(',')
         setCategoryAll(cat1)
 
-        const cat_name = categories.find(item=>item.label === categoriesitem)
-        //console.log('cat_name: ', cat_name)
-        const cat2 = cat_name.name.split(',')
-        setCategoryAll2(cat2)
+        cat1.map((cat)=> {
+          const cat_name = categories.find(item=>item.label === cat)
+          //const cat2 = cat_name.name.split(',')
+          let arr = []
+          arr.push(cat_name)
+          setCategoryAll2(arr)    
+        })
 
         //для текстового поля
         setText(text2)
