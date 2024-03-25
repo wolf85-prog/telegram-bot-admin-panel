@@ -252,7 +252,7 @@ class DistributionController {
                 return;
             }
 
-            const {text, category, image, project, projectId,datestart, count, date, button, users, editButton, stavka, target} = req.body
+            const {text, category, image, project, projectId, receivers, datestart, count, date, button, users, editButton, stavka, target} = req.body
 
             const newDistrib = await Distributionw.update(
                 { 
@@ -261,6 +261,7 @@ class DistributionController {
                     image, 
                     project, 
                     projectId,
+                    receivers,
                     datestart,   
                     count, 
                     date, 

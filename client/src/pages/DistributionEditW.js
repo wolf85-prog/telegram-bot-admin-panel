@@ -1313,7 +1313,7 @@ const onSaveText = async() => {
         image: image ? `${host}${image}` : '', 
         project: labelName.label, 
         projectId: valueProject,
-        // receivers: categoryAll.toString(), 
+        receivers: categoryAll.toString(), 
         datestart: new Date(), 
         // delivered: 'true',   
         count: selected.length, 
