@@ -242,7 +242,14 @@ const DistributionEditW = () => {
         setSelected([...users.split(',')])
 
         //установка категори получателей
-        setCategoryAll(categoriesitem)
+        console.log("categoriesitem: ", categoriesitem)
+        const cat1 = categoriesitem.split(',')
+        setCategoryAll(cat1)
+
+        const cat_name = categories.find(item=>item.label === categoriesitem)
+        //console.log('cat_name: ', cat_name)
+        const cat2 = cat_name.name.split(',')
+        setCategoryAll2(cat2)
 
         //для текстового поля
         setText(text2)
