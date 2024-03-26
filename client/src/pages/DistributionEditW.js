@@ -1425,13 +1425,16 @@ const onSaveText = async() => {
                                         </CRow>
 
                                         {/* Список проектов по имени */}
-                                        <CFormSelect 
-                                          aria-label="Default select example"
-                                          style={{display: showNameProject ? "block" : "none" }}
-                                          onChange={onChangeSelectProject}
-                                          options={contacts}
-                                          value={valueProject}
-                                        />
+                                        <div style={{overflowY: 'scroll', height: '20px'}}>
+                                          <CFormSelect 
+                                            aria-label="Default select example"
+                                            style={{display: showNameProject ? "block" : "none" }}
+                                            onChange={onChangeSelectProject}
+                                            options={contacts}
+                                            value={valueProject}
+                                          />
+                                        </div>
+                                        
 
                                         {/* Список проектов по id */}
                                         <CFormSelect 

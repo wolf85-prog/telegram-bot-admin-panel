@@ -94,6 +94,8 @@ const Admin = () => {
   const [showCharts4, setShowCharts4]= useState(false);
   const [showCharts5, setShowCharts5]= useState(false);
 
+  const [showCountAll, setShowCountAll] = useState(false);
+
   const [showNick, setShowNick]= useState(false);
 
   const [activeIndex, setActiveIndex] = useState(null);
@@ -306,6 +308,7 @@ useEffect(() => {
 
   //нажатия на кнопки
   const showBlock = (ind) => {
+    setShowCountAll(true)
     switch (ind) {
 
       //за сутки
@@ -1304,6 +1307,10 @@ useEffect(() => {
                               <CCol sm={3} >
                                 <CFormInput placeholder="Поиск специалиста..." onChange={(e)=>setText(e.target.value)} aria-label="workers"/>
                               </CCol>
+                              <CCol sm={6}></CCol>
+                              <CCol sm={3} style={{textAlign: 'right'}}>
+                                {showCountAll ? 'Всего: ' + sortWorkers.length : ''}
+                              </CCol>
                             </CRow>
                             
                             <CRow>
@@ -1374,9 +1381,9 @@ useEffect(() => {
                               </CCol>
                             </CRow>
                             <CRow>
-                              <CCol>
+                              {/* <CCol>
                                 Всего: {sortWorkers.length}
-                              </CCol>
+                              </CCol> */}
                             </CRow>
                       </CCol>
                     </CRow>
