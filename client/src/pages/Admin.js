@@ -925,7 +925,7 @@ useEffect(() => {
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
                   chart={            
                     <Chart 
-                      range={20}
+                      range={8}
                       data={dayWorkers} 
                       data2={[]}
                       // data2={
@@ -974,7 +974,7 @@ useEffect(() => {
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
                     <Chart 
-                      range={20}
+                      range={12}
                       data={weekWorkers} 
                       data2={[]} //удаленные пользователи
                       // data2={
