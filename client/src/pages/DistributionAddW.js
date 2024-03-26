@@ -964,11 +964,6 @@ const delCategory7 = (category) => {
     setTarget(e.target.value)
   }
 
-  //дублировать в админку
-  const onChangeCheck = (e) => {
-    //setSendToAdmin(e.target.value)
-  }
-
   //===================================================================
   {/* Запланировать рассылку */}
   const onPlanerShow = async(label, proj, text, cats, count, poster, uuidDistrib) => {
@@ -1079,37 +1074,6 @@ const delCategory7 = (category) => {
 
   const onChangeCheckButton = (e) => {
     setOnButtonStavka(e.target.checked)
-  }
-
-  const onDeleteMessages = (id) => {
-    const distrib = distributionsWork.filter(p => p.id === id)
-    console.log("distrib: ", distrib)
-    const arrUsers = JSON.parse(distrib[0].report)
-    
-    arrUsers.map(async(item)=> {
-      console.log(item.mess ? item.mess : '...')
-      
-      //удалить сообщение через сокет
-      //delMessageContext(item.mess, message.date, message.chatId)
-
-      //удалить сообщение в базе данных
-      delMessage(item.mess)
-
-      const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${item.user}&message_id=${item.mess}`
-
-      const delToTelegram = await $host.get(url_del_msg);
-
-
-      //Выводим сообщение об успешной отправке
-      if (delToTelegram) {
-        console.log('Ваше сообщение удалено из телеграм! ', delToTelegram);	
-        setVisibleDelMess(true) //показать сообщение об отправке
-      }           
-      else {
-        //А здесь сообщение об ошибке при отправке
-        console.log('Что-то пошло не так. Попробуйте ещё раз.');
-      }
-    })
   }
 
   return (
