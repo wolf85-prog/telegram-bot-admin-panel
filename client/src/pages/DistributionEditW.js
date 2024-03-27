@@ -160,7 +160,7 @@ const DistributionEditW = () => {
 
   const [onButtonStavka, setOnButtonStavka] = useState(false)
 
-  const [showCheckTarget, setShowCheckTarget] = useState(false)
+  const [showCheckTarget, setShowCheckTarget] = useState(true)
   
   const audio = new Audio(sendSound);
 
@@ -476,7 +476,7 @@ const getCategoryFromNotion = async(projectId) => {
           arr4.push(item.name)
       })
       console.log("arr2: ", arr2)
-      console.log("categoryAll: ", arr4)
+      console.log("categoryAll2: ", arr4)
       
       setCategoryAll(arr3)
       setCategoryAll2(arr4)
@@ -1154,7 +1154,11 @@ const delCategory7 = (category) => {
 
   const onChangeTextButton = (e) => {
     setTextButton(e.target.value)
-    setShowCheckTarget(true)
+    //setShowCheckTarget(true)
+  }
+
+  const onChangeCheckTarget = (e) => {
+    setShowCheckTarget(!showCheckTarget)
   }
 
   const onChangeTextUrl = (e) => {
@@ -1270,10 +1274,6 @@ const delCategory7 = (category) => {
   const onChangeCheckButton = (e) => {
     setStavka2(!stavka2)
     setOnButtonStavka(e.target.checked)
-  }
-
-  const onChangeCheckTarget = (e) => {
-    setShowCheckTarget(!showCheckTarget)
   }
 
   const onDeleteMessages = (id) => {

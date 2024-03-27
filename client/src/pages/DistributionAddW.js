@@ -355,7 +355,7 @@ const getCategoryFromNotion = async(projectId) => {
           arr4.push(item.name)
       })
       console.log("arr2: ", arr2)
-      console.log("categoryAll: ", arr4)
+      console.log("categoryAll2: ", arr4)
       
       setCategoryAll(arr3)
       setCategoryAll2(arr4)
@@ -444,6 +444,7 @@ const onChangeSelectProject = async(e) => {
 
 const onChangeAddButton = () => {
   setShowEditButtonAdd(true)
+  //setShowCheckTarget(true)
 }
 
 const onChangeAddButton2 = () => {
@@ -961,6 +962,7 @@ const delCategory7 = (category) => {
 
   const onChangeTextButton = (e) => {
     setTextButton(e.target.value)
+    //setShowCheckTarget(true)
   }
 
   const onChangeCheckTarget = (e) => {
