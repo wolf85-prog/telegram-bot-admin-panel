@@ -46,6 +46,7 @@ import WidgetsDropdown5 from '../views/widgets/WidgetsDropdown5'
 import InputMask from 'react-input-mask';
 
 import Chart from './../components/Chart'
+import ChartBar from './../components/ChartBar'
 import specData from 'src/data/specData'
 
 const Admin = () => {
