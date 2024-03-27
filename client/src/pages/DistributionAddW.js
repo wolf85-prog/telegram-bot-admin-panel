@@ -73,7 +73,7 @@ const DistributionAddW = () => {
   const [proj, setProj] = useState('');
   const [planShow, setPlanShow] = useState(false);
   const [uuidDistrib, setUuidDistrib] = useState('');
-  const [target, setTarget] = useState('https://');
+  const [target, setTarget] = useState('https://www.ru');
 
   const [arrCategory, setArrCategory] = useState([]);
   const [arrCategory2, setArrCategory2] = useState([]);

@@ -1333,7 +1333,7 @@ const onSaveText = async() => {
         project: labelName.label, 
         projectId: valueProject,
         receivers: categoryAll.toString(), 
-        datestart: new Date(), 
+        datestart: datestart, 
         // delivered: 'true',   
         count: selected.length, 
         // date: `${day}.${month}.${year}`, 
@@ -1348,7 +1348,6 @@ const onSaveText = async() => {
 
       //сохранение рассылки в базе данных
       await editDistributionWAll(message, distribId)
-      //console.log("distrNew: ", distrNew.id)
 
       //setShowSend(false)
 
@@ -1365,7 +1364,6 @@ const onSaveText = async() => {
       setValueSelect(0)
 
       setTimeout(() => navigate('/distributionw'), 1000);
-
     }
     else {
       setVisibleModal(!visibleModal)
