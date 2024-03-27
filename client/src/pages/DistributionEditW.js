@@ -159,6 +159,8 @@ const DistributionEditW = () => {
   const [countSend, setCountSend] = useState(0)
 
   const [onButtonStavka, setOnButtonStavka] = useState(false)
+
+  const [showCheckTarget, setShowCheckTarget] = useState(false)
   
   const audio = new Audio(sendSound);
 
@@ -1152,15 +1154,11 @@ const delCategory7 = (category) => {
 
   const onChangeTextButton = (e) => {
     setTextButton(e.target.value)
+    setShowCheckTarget(true)
   }
 
   const onChangeTextUrl = (e) => {
     setTarget(e.target.value)
-  }
-
-  //дублировать в админку
-  const onChangeCheck = (e) => {
-    //setSendToAdmin(e.target.value)
   }
 
   //===================================================================
@@ -1272,6 +1270,10 @@ const delCategory7 = (category) => {
   const onChangeCheckButton = (e) => {
     setStavka2(!stavka2)
     setOnButtonStavka(e.target.checked)
+  }
+
+  const onChangeCheckTarget = (e) => {
+    setShowCheckTarget(!showCheckTarget)
   }
 
   const onDeleteMessages = (id) => {
@@ -1752,8 +1754,8 @@ const onSaveText = async() => {
                                                 id="addTargetRadio" 
                                                 name="groupRadioTarget"
                                                 label="Цепь №"              
-                                                // checked={showEditButtonAdd}
-                                                // onChange={onChangeAddButton}
+                                                checked={!showCheckTarget}
+                                                onChange={onChangeCheckTarget}
                                               />
                                               
                                               <CFormSelect 
@@ -1770,8 +1772,8 @@ const onSaveText = async() => {
                                                 id="addURLRadio" 
                                                 name="groupRadioTarget"
                                                 label="Ссылка"  
-                                                // checked={showEditButtonAdd}
-                                                // onChange={onChangeAddButton}
+                                                checked={showCheckTarget}
+                                                onChange={onChangeCheckTarget}
                                               />
 
                                               <CFormInput 
@@ -1779,7 +1781,7 @@ const onSaveText = async() => {
                                                 id="inputTextButton" 
                                                 placeholder="https://"
                                                 style={{marginTop: '10px'}}
-                                                onChange={onChangeTextUrl}
+                                                //onChange={onChangeTextUrl}
                                                 value={target}
                                               />
                                             </CCol>

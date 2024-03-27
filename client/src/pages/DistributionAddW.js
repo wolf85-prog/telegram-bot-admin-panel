@@ -141,6 +141,8 @@ const DistributionAddW = () => {
   const [countSend, setCountSend] = useState(0)
 
   const [onButtonStavka, setOnButtonStavka] = useState(false)
+
+  const [showCheckTarget, setShowCheckTarget] = useState(true)
   
   const audio = new Audio(sendSound);
 
@@ -961,6 +963,10 @@ const delCategory7 = (category) => {
     setTextButton(e.target.value)
   }
 
+  const onChangeCheckTarget = (e) => {
+    setShowCheckTarget(!showCheckTarget)
+  }
+
   const onChangeTextUrl = (e) => {
     setTarget(e.target.value)
   }
@@ -1457,8 +1463,8 @@ const delCategory7 = (category) => {
                                               id="addTargetRadio" 
                                               name="groupRadioTarget"
                                               label="Цепь №"              
-                                              // checked={showEditButtonAdd}
-                                              // onChange={onChangeAddButton}
+                                              checked={!showCheckTarget}
+                                              onChange={onChangeCheckTarget}
                                             />
                                             
                                             <CFormSelect 
@@ -1475,8 +1481,8 @@ const delCategory7 = (category) => {
                                               id="addURLRadio" 
                                               name="groupRadioTarget"
                                               label="Ссылка"  
-                                              // checked={showEditButtonAdd}
-                                              // onChange={onChangeAddButton}
+                                              checked={showCheckTarget}
+                                              onChange={onChangeCheckTarget}
                                             />
 
                                             <CFormInput 
