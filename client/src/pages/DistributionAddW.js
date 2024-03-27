@@ -837,7 +837,7 @@ const delCategory2 = (category) => {
 
   if (valueSelect2 !== 0) {
     setCategoryAll(categoryAll.filter((item) => item !== categories[category].name))
-    console.log("categoryAll: ", categoryAll.filter((item) => item !== categories[category].name))
+    console.log("categoryAll after del: ", categoryAll.filter((item) => item !== categories[category].name))
   }
 }
 
@@ -977,6 +977,8 @@ const delCategory7 = (category) => {
   {/* Запланировать рассылку */}
   const onPlanerShow = async(label, proj, text, cats, count, poster, uuidDistrib) => {
     setVisibleModal(!visibleModal)
+
+    //console.log("cats: ", cats)
 
     if (selected.length !== 0 && proj || selected.length !== 0 && text) {
       navigate('/distributionw_planer', {
