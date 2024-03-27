@@ -97,8 +97,9 @@ const DistributionW = () => {
           receivers: distrib.receivers.replace(space, '<br/>'), //strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
           categories: distrib.receivers,
           count: distrib.count,
-          datestart: newDateMessage,
+          date: newDateMessage,
           timestart: newTimeMessage,
+          datestart: distrib.datestart,
           status: deliv ? "отправлено" : "запланировано",
           uuid: distrib.uuid,
           success: distrib.success,
@@ -256,7 +257,7 @@ const DistributionW = () => {
                                         <div>{index+1}</div>
                                       </CTableDataCell> */}
                                       <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                        <div>{item.datestart}</div>
+                                        <div>{item.date}</div>
                                       </CTableDataCell>  
                                       <CTableDataCell className="text-center" style={{width: '50px'}}>
                                         <div>{item.timestart}</div>
