@@ -46,7 +46,7 @@ import WidgetsDropdown5 from '../views/widgets/WidgetsDropdown5'
 import InputMask from 'react-input-mask';
 
 import Chart from './../components/Chart'
-import ChartBar from './../components/ChartBar'
+import ChartBar from './../components/Chart2'
 import specData from 'src/data/specData'
 
 const Admin = () => {
@@ -922,10 +922,10 @@ useEffect(() => {
                   className="mb-4 box"
                   color="dark"
                   value={<></>}
-                  title=""
+                  title={new Date().toLocaleDateString()}
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
                   chart={            
-                    <Chart 
+                    <ChartBar
                       range={8}
                       data={dayWorkers} 
                       data2={[]}
@@ -971,10 +971,10 @@ useEffect(() => {
                   className="mb-4 box"
                   color="dark"
                   value={<></>}
-                  title=""
+                  title="пвапва"
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
-                    <Chart 
+                    <ChartBar 
                       range={12}
                       data={weekWorkers} 
                       data2={[]} //удаленные пользователи
@@ -1309,8 +1309,8 @@ useEffect(() => {
                                 <CFormInput placeholder="Поиск специалиста..." onChange={(e)=>setText(e.target.value)} aria-label="workers"/>
                               </CCol>
                               <CCol sm={6}></CCol>
-                              <CCol sm={3} style={{textAlign: 'right'}}>
-                                {showCountAll ? 'Всего: ' + sortWorkers.length : ''}
+                              <CCol sm={3} style={{textAlign: 'right', position: 'absolute', top: '-500px', right: '0'}}>
+                                {showCountAll ? sortWorkers.length : ''}
                               </CCol>
                             </CRow>
                             
