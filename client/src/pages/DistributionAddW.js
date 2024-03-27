@@ -1,6 +1,7 @@
 import React, { Suspense, useState, useEffect } from 'react'
 import { CContainer, CSpinner } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
+import Dropdown from '../components/Dropdown/Dropdown'
 import { Link, useLocation } from 'react-router-dom'
 import { 
   CRow,
@@ -1137,6 +1138,8 @@ const delCategory7 = (category) => {
                                         options={contacts}
                                         value={valueProject}
                                       />
+                                      
+                                      {/* <Dropdown options={contacts}/>   */}
 
                                       {/* Список проектов по id */}
                                       <CFormSelect 
