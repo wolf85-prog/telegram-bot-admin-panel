@@ -26,6 +26,7 @@ import {
   CModalFooter,
   CFormInput,
   CCollapse,
+  CTooltip,
 } from '@coreui/react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
@@ -263,7 +264,12 @@ const DistributionW = () => {
                                         <div>{item.timestart}</div>
                                       </CTableDataCell>  
                                       <CTableDataCell className="text-center">
-                                        <div>{item.project}</div>
+                                        <CTooltip
+                                          content={item.uuid}
+                                          placement="top"
+                                        >
+                                          <div>{item.project}</div>
+                                        </CTooltip>
                                       </CTableDataCell>    
                                       {/* <CTableDataCell className="text-center">
                                         {item.image.endsWith('.pdf') ?
