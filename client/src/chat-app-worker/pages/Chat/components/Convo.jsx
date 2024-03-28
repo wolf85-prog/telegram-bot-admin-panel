@@ -15,7 +15,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const { personW } = useContext(AccountContext);
 	const dates = Object.keys(allMessages);  //['01/01/2023', 'Сегодня']
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
-	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
+	const tokenW = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 
 	const [showImage, setShowImage] = useState([false])
 
@@ -126,7 +126,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		//удалить сообщение в базе данных
 		await delWMessage(message.id)
 
-		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
+		const url_del_msg = `https://api.telegram.org/bot${tokenW}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
 
 		const delToTelegram = await $host.get(url_del_msg);
 
