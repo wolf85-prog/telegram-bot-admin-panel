@@ -75,6 +75,28 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		  return (
 			<div
 			  ref={ref}
+			  style={{backgroundColor: '#20272b', left: 0}}
+			  className={className}
+			  aria-labelledby={labeledBy}
+			>
+			  <ul className="list-unstyled">
+				{React.Children.toArray(children).filter(
+				  (child) =>
+					!value || child.props.children?.toLowerCase().startsWith(value),
+				)}
+			  </ul>
+			</div>
+		  );
+		},
+	);
+
+	const CustomMenu2 = React.forwardRef(
+		({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+		  const [value, setValue] = useState('');
+	  
+		  return (
+			<div
+			  ref={ref}
 			  style={{backgroundColor: '#20272b', right: 0}}
 			  className={className}
 			  aria-labelledby={labeledBy}
@@ -91,6 +113,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	);
 
 	CustomMenu.displayName = CustomMenu
+	CustomMenu2.displayName = CustomMenu2
 
 	const change = async (eventkey) => {
 		//alert(`you chosen: ${eventkey}`)
@@ -319,7 +342,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 											<Dropdown onSelect={change}>
 												<Dropdown.Toggle as={CustomToggle2} id="dropdown-custom-components">											
 												</Dropdown.Toggle>
-												<Dropdown.Menu as={CustomMenu}>
+												<Dropdown.Menu as={CustomMenu2}>
 												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить сообщение</Dropdown.Item>
 												</Dropdown.Menu>
 											</Dropdown>
