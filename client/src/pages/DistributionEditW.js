@@ -1346,7 +1346,7 @@ const onSaveText = async() => {
       const message = {
         text: text, 
         category: categoryAll.toString(),
-        image: image ? `${host}${image}` : '', 
+        image: image ? (image.startsWith('http') ? image : `${host}${image}`) : '', 
         project: labelName.label, 
         projectId: valueProject,
         receivers: categoryAll.toString(), 
