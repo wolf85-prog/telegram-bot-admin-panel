@@ -1309,7 +1309,8 @@ useEffect(() => {
                                 <CFormInput placeholder="Поиск специалиста..." onChange={(e)=>setText(e.target.value)} aria-label="workers"/>
                               </CCol>
                               <CCol sm={6}></CCol>
-                              <CCol sm={3} style={{textAlign: 'right', position: 'absolute', top: '-500px', right: '0'}}>
+
+                              <CCol sm={3} style={{textAlign: 'right', position: 'absolute', top: '-538px', right: '0', marginRight: '35px'}}>
                                 {showCountAll ? sortWorkers.length : ''}
                               </CCol>
                             </CRow>

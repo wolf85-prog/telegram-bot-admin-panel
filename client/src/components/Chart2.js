@@ -128,12 +128,12 @@ const Chart2 = ({ data, data2, width, height, range }) => {
           return (
             <g key={index}>
               <rect key={index}
-                width={20}
+                width={40}
                 height={height - getY(item.value)}
-                x={getX(item.name) + getX.bandwidth() / 2 - 10}
+                x={getX(item.name) + getX.bandwidth() / 2 - 20}
                 y={getY(item.value)}
                 fill='#7cb5ec'
-                rx="5" ry="5"
+                rx="2" ry="2"
               />
               <text
                 fill="#fff"
