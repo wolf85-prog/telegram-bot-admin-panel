@@ -44,8 +44,8 @@ import {
   getProjectNewCash,
 } from '../http/adminAPI';
 
-import { uploadFile, delMessage } from '../http/chatAPI';
-import { newMessage } from '../http/workerAPI';
+import { uploadFile } from '../http/chatAPI';
+import { newMessage, delMessage } from '../http/workerAPI';
 import specData from '../data/specData';
 import categories from '../data/categories';
 
@@ -1294,20 +1294,22 @@ const delCategory7 = (category) => {
     const arrUsers = JSON.parse(distrib[0].report)
     
     arrUsers.map(async(item)=> {
-      console.log(item.mess ? item.mess : '...')
+      console.log(item.mess ? 'mess: ' + item.mess : '...')
       
       //удалить сообщение через сокет
       //delMessageContext(item.mess, message.date, message.chatId)
 
       //удалить сообщение в базе данных
-      delMessage(item.mess)
+      if (item.mess) {
+        await delMessage(item.mess)
+      } 
 
       const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${item.user}&message_id=${item.mess}`
 
       const delToTelegram = await $host.get(url_del_msg);
 
 
-      //Выводим сообщение об успешной отправке
+      //Выводим сообщение об успешном удалении
       if (delToTelegram) {
         console.log('Ваше сообщение удалено из телеграм! ', delToTelegram);	
         setVisibleDelMess(true) //показать сообщение об отправке
