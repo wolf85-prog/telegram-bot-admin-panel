@@ -265,7 +265,7 @@ const DistributionW = () => {
                                       </CTableDataCell>  
                                       <CTableDataCell className="text-center">
                                         <CTooltip
-                                          content={item.uuid}
+                                          content={item.projectId}
                                           placement="top"
                                         >
                                           <div>{item.project}</div>
