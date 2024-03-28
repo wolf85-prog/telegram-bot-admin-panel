@@ -1149,7 +1149,7 @@ const fetchDelAdminSpec = (data) => {
 		const { messageId, messageDate, chatId } = data;
 
 		let userIndex = userWorkers.findIndex((user) => user.chatId === chatId);
-		const usersCopy = JSON.parse(JSON.stringify(users));
+		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
 
 		const messageIndex = usersCopy[userIndex].messages[messageDate].map(el => el.id).lastIndexOf(messageId);
 		usersCopy[userIndex].messages[messageDate].splice(messageIndex, 1); 
