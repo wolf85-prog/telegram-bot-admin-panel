@@ -147,7 +147,7 @@ const DistributionW = () => {
 
     //удаление проекта из планировщика
     //обновить план в БД
-    let plan = await getPlan(desk.datestart);
+    let plan = await getPlan(desk.date);
     const newArray = JSON.parse(plan.times)
 
     let dateIndex = newArray.findIndex((i) => i.time === desk.timestart)
@@ -157,7 +157,7 @@ const DistributionW = () => {
     let planer_str = JSON.stringify(datesCopy)
 
     const newObj = {
-      "datestart": desk.datestart,
+      "datestart": desk.date,
       "times": planer_str
     }
 
