@@ -1023,78 +1023,90 @@ const onAddCategory7 = (e) => {
 const delCategory2 = (category) => {
   setShowCategories2(false)
   setValueSelect2(0)
-  console.log("Удаление категории 2: ", arrCategory2)
-  arrCategory2.pop()
+  // console.log("Удаление категории 2: ", arrCategory2)
+  // arrCategory2.pop()
   setCount(count - 1)
 
+  categoryAll.pop()
+
   if (valueSelect2 !== 0) {
-    setCategoryAll(categoryAll.filter((item) => item !== categories[category].name))
-    console.log("categoryAll: ", categoryAll.filter((item) => item !== categories[category].name))
+    setCategoryAll(categoryAll) //.filter((item) => item !== categories[category].name))
+    console.log("categoryAll: ", categoryAll) //.filter((item) => item !== categories[category].name))
   }
 }
 
 const delCategory3 = (category) => {
   setShowCategories3(false)
   setValueSelect3(0)
-  console.log("Удаление категории 3: ", arrCategory3)
-  arrCategory3.pop()
+  // console.log("Удаление категории 3: ", arrCategory3)
+  // arrCategory3.pop()
   setCount(count - 1)
 
+  categoryAll.pop()
+
   if (valueSelect3 !== 0) {
-    setCategoryAll(categoryAll.filter((item) => item !== categories[category].name))
-    console.log("categoryAll: ", categoryAll.filter((item) => item !== categories[category].name))
+    setCategoryAll(categoryAll) //.filter((item) => item !== categories[category].name))
+    console.log("categoryAll: ", categoryAll) //.filter((item) => item !== categories[category].name))
   }
 }
 
 const delCategory4 = (category) => {
   setShowCategories4(false)
   setValueSelect4(0)
-  console.log("Удаление категории 4: ", arrCategory4)
-  arrCategory4.pop()
+  //console.log("Удаление категории 4: ", arrCategory4)
+  //arrCategory4.pop()
   setCount(count - 1)
 
+  categoryAll.pop()
+
   if (valueSelect4 !== 0) {
-    setCategoryAll(categoryAll.filter((item) => item !== categories[category].name))
-    console.log("categoryAll: ", categoryAll.filter((item) => item !== categories[category].name))
+    setCategoryAll(categoryAll) //.filter((item) => item !== categories[category].name))
+    console.log("categoryAll: ", categoryAll) //.filter((item) => item !== categories[category].name))
   }
 }
 
 const delCategory5 = (category) => {
   setShowCategories5(false)
   setValueSelect5(0)
-  console.log("Удаление категории 5: ", arrCategory5)
-  arrCategory5.pop()
+  // console.log("Удаление категории 5: ", arrCategory5)
+  // arrCategory5.pop()
   setCount(count - 1)
 
+  categoryAll.pop()
+
   if (valueSelect5 !== 0) {
-    setCategoryAll(categoryAll.filter((item) => item !== categories[category].name))
-    console.log("categoryAll: ", categoryAll.filter((item) => item !== categories[category].name))
+    setCategoryAll(categoryAll) //.filter((item) => item !== categories[category].name))
+    console.log("categoryAll: ", categoryAll) //.filter((item) => item !== categories[category].name))
   }
 }
 
 const delCategory6 = (category) => {
   setShowCategories6(false)
   setValueSelect6(0)
-  console.log("Удаление категории 6: ", arrCategory6)
-  arrCategory6.pop()
+  // console.log("Удаление категории 6: ", arrCategory6)
+  // arrCategory6.pop()
   setCount(count - 1)
 
+  categoryAll.pop()
+
   if (valueSelect6 !== 0) {
-    setCategoryAll(categoryAll.filter((item) => item !== categories[category].name))
-    console.log("categoryAll: ", categoryAll.filter((item) => item !== categories[category].name))
+    setCategoryAll(categoryAll) //.filter((item) => item !== categories[category].name))
+    console.log("categoryAll: ", categoryAll) //.filter((item) => item !== categories[category].name))
   }
 }
 
 const delCategory7 = (category) => {
   setShowCategories7(false)
   setValueSelect7(0)
-  console.log("Удаление категории 7: ", arrCategory7)
-  arrCategory7.pop()
+  // console.log("Удаление категории 7: ", arrCategory7)
+  // arrCategory7.pop()
   setCount(count - 1)
 
+  categoryAll.pop()
+
   if (valueSelect7 !== 0) {
-    setCategoryAll(categoryAll.filter((item) => item !== categories[category].name))
-    console.log("categoryAll: ", categoryAll.filter((item) => item !== categories[category].name))
+    setCategoryAll(categoryAll) //.filter((item) => item !== categories[category].name))
+    console.log("categoryAll: ", categoryAll) //.filter((item) => item !== categories[category].name))
   }
 }
 
