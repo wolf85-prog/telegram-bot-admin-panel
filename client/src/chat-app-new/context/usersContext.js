@@ -1145,10 +1145,10 @@ const fetchAdminSpec = (data) => {
 const fetchDelAdminSpec = (data) => {
 	//console.log("Удаление сообщение в Админке: ", data)
 
-	setUsers((users) => {
+	setUserWorkers((userWorkers) => {
 		const { messageId, messageDate, chatId } = data;
 
-		let userIndex = users.findIndex((user) => user.chatId === chatId);
+		let userIndex = userWorkers.findIndex((user) => user.chatId === chatId);
 		const usersCopy = JSON.parse(JSON.stringify(users));
 
 		const messageIndex = usersCopy[userIndex].messages[messageDate].map(el => el.id).lastIndexOf(messageId);
@@ -1178,7 +1178,7 @@ const addNewMessage2 = (userId, message, type, textButton, convId, messageId, is
 };
 
 //удалить сообщение из админки workhub
-const delMessageContext2 = (messageId, messageDate, chatId) => {
+const delWMessageContext = (messageId, messageDate, chatId) => {
 	socket.emit("delAdminSpec", { 
 		messageId,
 		messageDate,
@@ -1288,7 +1288,7 @@ const fetchNotifAdmin = (data) => {
 			workers,
 			setWorkers,
 			addNewMessage2,
-			delMessageContext2,
+			delWMessageContext,
 			countMessageWork,
 			setCountMessageWork,
 			distributionsWork, 

@@ -971,7 +971,7 @@ useEffect(() => {
                   className="mb-4 box"
                   color="dark"
                   value={<></>}
-                  title="пвапва"
+                  title=""
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
                     <ChartBar 

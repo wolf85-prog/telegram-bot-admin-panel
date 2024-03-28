@@ -7,7 +7,7 @@ import formatTime from "./../../../../chat-app-new/utils/formatTime";
 import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { $host } from './../../../../http/index'
-import { delMessage } from "src/http/chatAPI";
+import { delWMessage } from "src/http/workerAPI";
 import Dropdown from 'react-bootstrap/Dropdown';
 import imageIcon from "./../../../assets/images/sp-i-m-image-placeholder.svg";
 
@@ -23,7 +23,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 	let replyMessage;
 
-	const { delMessageContext } = useUsersContext();
+	const { delWMessageContext } = useUsersContext();
 
 	//прокрутка
 	const scrollToMsg = (id) => {
@@ -95,12 +95,13 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const change = async (eventkey) => {
 		//alert(`you chosen: ${eventkey}`)
 		const message = JSON.parse(eventkey);
+		console.log("message: ", message)
 
 		//удалить сообщение через сокет
-		delMessageContext(message.id, message.date, message.chatId)
+		delWMessageContext(message.id, message.date, message.chatId)
 
 		//удалить сообщение в базе данных
-		delMessage(message.id)
+		await delWMessage(message.id)
 
 		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
 

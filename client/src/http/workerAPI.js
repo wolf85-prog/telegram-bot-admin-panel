@@ -165,7 +165,7 @@ export const newMessage = async (data) =>{
     }
 }
 
-export const delMessage = async (id) =>{
+export const delWMessage = async (id) =>{
     try {
         await $host.delete(`api/wmessage/delete/${id}`); 
     } catch (error) {

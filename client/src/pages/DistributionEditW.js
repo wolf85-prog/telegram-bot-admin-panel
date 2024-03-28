@@ -45,7 +45,7 @@ import {
 } from '../http/adminAPI';
 
 import { uploadFile } from '../http/chatAPI';
-import { newMessage, delMessage } from '../http/workerAPI';
+import { newMessage, delWMessage } from '../http/workerAPI';
 import specData from '../data/specData';
 import categories from '../data/categories';
 
@@ -82,7 +82,7 @@ const DistributionEditW = () => {
   const hostServer = process.env.REACT_APP_API_URL
 
   const { userWorkers: clients, workers } = useUsersContext();
-  const { addNewDistrib, addNewMessage2, distributionsWork, setDistributionsWork, delMessageContext } = useUsersContext();
+  const { addNewDistrib, addNewMessage2, distributionsWork, setDistributionsWork, delWMessageContext } = useUsersContext();
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]); 
   const [contacts2, setContacts2]= useState([]);
@@ -1288,6 +1288,9 @@ const delCategory7 = (category) => {
     setOnButtonStavka(e.target.checked)
   }
 
+  //------------------------------------------------------------
+  //-------------Удаление сообщений в рассылке-------------------
+  //------------------------------------------------------------
   const onDeleteMessages = (id) => {
     const distrib = distributionsWork.filter(p => p.id === id)
     console.log("distrib: ", distrib)
@@ -1297,11 +1300,11 @@ const delCategory7 = (category) => {
       console.log(item.mess ? 'mess: ' + item.mess : '...')
       
       //удалить сообщение через сокет
-      //delMessageContext(item.mess, message.date, message.chatId)
+      //delWMessageContext(item.mess, message.date, message.chatId)
 
       //удалить сообщение в базе данных
       if (item.mess) {
-        await delMessage(item.mess)
+        await delWMessage(item.mess)
       } 
 
       const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${item.user}&message_id=${item.mess}`
