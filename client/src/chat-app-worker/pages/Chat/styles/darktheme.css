@@ -260,7 +260,7 @@
 .dropdown-item {
     background-color: initial;
     border: 0;
-    border-radius: var(--bs-dropdown-item-border-radius,0);
+    border-radius: 10px;
     clear: both;
     color: var(--bs-dropdown-link-color);
     display: block;

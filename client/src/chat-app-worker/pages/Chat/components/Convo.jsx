@@ -75,11 +75,11 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		  return (
 			<div
 			  ref={ref}
-			  style={{backgroundColor: '#20272b', left: 0}}
+			  style={{backgroundColor: '#20272b', left: 0, borderRadius: '15px', padding: '0 0 0 0', fontSize: '14px', top: '10px', minWidth:'50px'}}
 			  className={className}
 			  aria-labelledby={labeledBy}
 			>
-			  <ul className="list-unstyled">
+			  <ul className="list-unstyled" style={{marginBottom: '0'}}>
 				{React.Children.toArray(children).filter(
 				  (child) =>
 					!value || child.props.children?.toLowerCase().startsWith(value),
@@ -97,11 +97,11 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		  return (
 			<div
 			  ref={ref}
-			  style={{backgroundColor: '#20272b', right: 0}}
+			  style={{backgroundColor: '#20272b', right: 0, borderRadius: '15px', padding: '0 0 0 0', fontSize: '14px', top: '10px', minWidth:'50px'}}
 			  className={className}
 			  aria-labelledby={labeledBy}
 			>
-			  <ul className="list-unstyled">
+			  <ul className="list-unstyled" style={{marginBottom: '0'}}>
 				{React.Children.toArray(children).filter(
 				  (child) =>
 					!value || child.props.children?.toLowerCase().startsWith(value),
@@ -261,8 +261,8 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 										<Dropdown onSelect={change}>
 											<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
 											</Dropdown.Toggle>
-											<Dropdown.Menu as={CustomMenu}>
-											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить сообщение</Dropdown.Item>
+											<Dropdown.Menu as={CustomMenu2}>
+											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
 											</Dropdown.Menu>
 										</Dropdown>	
 									</div>
@@ -315,7 +315,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 												<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
 												</Dropdown.Toggle>
 												<Dropdown.Menu as={CustomMenu}>
-												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить сообщение</Dropdown.Item>
+												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
 												</Dropdown.Menu>
 											</Dropdown>									
 									</p>
@@ -349,7 +349,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 												<Dropdown.Toggle as={CustomToggle2} id="dropdown-custom-components">											
 												</Dropdown.Toggle>
 												<Dropdown.Menu as={CustomMenu2}>
-												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить сообщение</Dropdown.Item>
+												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
 												</Dropdown.Menu>
 											</Dropdown>
 										</div>
