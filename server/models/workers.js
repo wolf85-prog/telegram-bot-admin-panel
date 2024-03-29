@@ -24,6 +24,7 @@ const Worker = sequelize.define('worker', {
     chatId: {type: DataTypes.STRING, unique: true},
     promoId: {type: DataTypes.STRING},
     from: {type: DataTypes.STRING},
+    avatar: {type: DataTypes.STRING},
     comment: {type: DataTypes.TEXT}, 
     rank: {type: DataTypes.INTEGER}, 
     block: {type: DataTypes.BOOLEAN}, 

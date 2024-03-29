@@ -63,12 +63,14 @@ const Profile = ({ user, closeSidebar }) => {
 
 		//получить данные из ноушена по телеграм id
 		const fetchData = async () => {
+			console.log("user: ", user)
 			const fio_notion = await getWorkerNotionId(user.chatId)
 			console.log("worker: ", fio_notion[0])
 			setWorker(fio_notion[0])
 
 			//const avatars = await getWorkerChildrenId(fio_notion[0]?.id)
-			//setAvatar(avatars[0]?.image)
+			//const avatars = await getWorker(user.chatId)
+			setAvatar(user.avatar)
 		}
 
 		fetchData();
