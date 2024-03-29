@@ -208,7 +208,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 												<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
 											</figure> 
 											: (
-											<figure style={{margin:showImage[msgIndex + personW.id] ? '0 0 3rem': '0 0 1rem'}}>
+											<figure style={{margin:showImage[msgIndex + personW.id] ? '0 0 3rem': '0 0 1rem', position: 'relative'}}>
 												{showImage[msgIndex + personW.id]  
 												? <a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>	
 												: <div 
@@ -227,6 +227,26 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 														<img src={imageIcon} alt="" className="chat__img" onClick={()=>handleClick(msgIndex + personW.id)} style={{width: '50px'}}/>
 														{/* </a> */}
 												</div>}
+
+												{/* footer */}
+												<span className="chat__msg_img-footer">
+													<span>{formatTime(message.time)}</span>
+														{!message.sender && (
+															<Icon
+																id={
+																	message?.status === "sent"
+																		? "singleTick"
+																		: "doubleTick"
+																}
+																aria-label={message?.status}
+																className={`chat__msg-status-icon ${
+																	message?.status === "read"
+																		? "chat__msg-status-icon--blue"
+																		: ""
+																}`}
+															/>
+														)}
+												</span>
 												
 												<figcaption style={{textAlign: 'center', borderRadius: '5px'}}>
 													{message.descript}
@@ -238,25 +258,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 											</figure>)
 										}
-										{/* footer */}
-										<span className="chat__msg_img-footer">
-											<span>{formatTime(message.time)}</span>
-												{!message.sender && (
-													<Icon
-														id={
-															message?.status === "sent"
-																? "singleTick"
-																: "doubleTick"
-														}
-														aria-label={message?.status}
-														className={`chat__msg-status-icon ${
-															message?.status === "read"
-																? "chat__msg-status-icon--blue"
-																: ""
-														}`}
-													/>
-												)}
-										</span>
+										
 
 										<Dropdown onSelect={change}>
 											<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											

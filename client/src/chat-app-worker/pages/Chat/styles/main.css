@@ -244,7 +244,7 @@
 .chat__img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .chat__msg-filler {
@@ -270,7 +270,7 @@
     display: flex;
     align-items: center;
     right: 10px;
-    bottom: 25px;
+    bottom: 10px;
     color: rgba(243, 233, 233, 0.75);
     font-size: 0.7rem;
     font-weight: 500;
