@@ -73,7 +73,7 @@ const Chart2 = ({ data, data2, width, height, range }) => {
           transform={`translate(0,${getY(0)})`}
         />
         <path
-          fill="#7cb5ec"
+          fill="#4b0082"
           d={areaPath}
           opacity={0}
         />
