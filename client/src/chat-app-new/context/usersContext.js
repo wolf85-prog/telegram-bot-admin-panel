@@ -219,6 +219,7 @@ fetchData()
 				  worklist:  user.worklist,
 				  chatId: user.chatId,
 				  createDate: user.createdAt,
+				  avatar: user.avatar,
 				  from: user.from,
 				  promoId: user.promoId,
 				  block: user.block,
@@ -327,7 +328,7 @@ fetchData()
 							phone: worker?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
 							age: worker?.dateborn, //notion[0]?.age ? notion[0]?.age : "",
 							chatId: worker?.chatId,
-							avatar: "", //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
+							avatar: worker?.avatar ? worker?.avatar : '', //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
 							conversationId: conversationId ? conversationId : 0,
 							block: userbot.block ? userbot.block : '',
 							blockw: worker?.block,
@@ -459,7 +460,7 @@ useEffect(() => {
     const fetchData = async () => {
 
       let pretendents = await getAllPretendent();
-      console.log("pretendents: ", pretendents)
+      //console.log("pretendents: ", pretendents)
 
       let workers = await getWorkers()
       //console.log("workers: ", workers)

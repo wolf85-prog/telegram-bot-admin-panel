@@ -54,6 +54,15 @@
     background: rgb(38, 45, 49);
 }
 
+.dark-theme .chat__msg_img--sent {
+    background: transparent;
+}
+
+.dark-theme .chat__msg_img--rxd {
+    background: transparent;
+}
+
+
 .dark-theme .chat__msg-group>*:nth-child(1):not(.chat__msg--sent)::before, .dark-theme .chat__msg--sent+.chat__msg--rxd::before {
     border-top-color: rgb(38, 45, 49);
     border-right-color: rgb(38, 45, 49);

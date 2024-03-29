@@ -183,18 +183,20 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 						return (
 							<>
 								{message.image 
-								? (<div
+								? (	//картинки
+									<div
 										className={`chat__msg chat__img-wrapper ${
-											message.sender !== chatAdminId ? "chat__msg--rxd" : "chat__msg--sent"
+											message.sender !== chatAdminId ? "chat__msg_img--rxd" : "chat__msg_img--sent"
 										}`}
 										ref={assignRef()}
 									>
 										{message.content.endsWith('.pdf') 
-										? (<figure>
+										? ( //pdf
+										<figure>
 											{/* <img src={pdf} width={30}/>
 											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a>*/}
 											<iframe src={message.content} height="235px" width="100%" title="myFramePdf"/>
-										 </figure>) : 
+										</figure>) : 
 											message.content.endsWith('.xlsx') 
 											? <figure> 
 												<img src={xlsIcon} width={30}/>
@@ -205,7 +207,8 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 												<img src={docIcon} width={30}/>
 												<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
 											</figure> 
-											: (<figure style={{margin:showImage[msgIndex + personW.id] ? '0 0 3rem': '0 0 1rem'}}>
+											: (
+											<figure style={{margin:showImage[msgIndex + personW.id] ? '0 0 3rem': '0 0 1rem'}}>
 												{showImage[msgIndex + personW.id]  
 												? <a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>	
 												: <div 
@@ -224,33 +227,36 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 														<img src={imageIcon} alt="" className="chat__img" onClick={()=>handleClick(msgIndex + personW.id)} style={{width: '50px'}}/>
 														{/* </a> */}
 												</div>}
+												
 												<figcaption style={{textAlign: 'center', borderRadius: '5px'}}>
 													{message.descript}
-													<div style={{display: 'flex', justifyContent: 'space-between', padding: '10px 0'}}>
+													{/* <div style={{display: 'flex', justifyContent: 'space-between', padding: '10px 0'}}>
 														<div style={{width:'100px', height: '30px', backgroundColor: '#7b7777', borderRadius: '10px', padding: '3px 0'}}>Принять</div>
 														<div style={{width:'100px', height: '30px', backgroundColor: '#7b7777', borderRadius: '10px', padding: '3px 0'}}>Отклонить</div>
-													</div>
+													</div> */}
 												</figcaption>
+
 											</figure>)
 										}
-										<span className="chat__msg-footer">
+										{/* footer */}
+										<span className="chat__msg_img-footer">
 											<span>{formatTime(message.time)}</span>
-													{!message.sender && (
-														<Icon
-															id={
-																message?.status === "sent"
-																	? "singleTick"
-																	: "doubleTick"
-															}
-															aria-label={message?.status}
-															className={`chat__msg-status-icon ${
-																message?.status === "read"
-																	? "chat__msg-status-icon--blue"
-																	: ""
-															}`}
-														/>
-													)}
-												</span>
+												{!message.sender && (
+													<Icon
+														id={
+															message?.status === "sent"
+																? "singleTick"
+																: "doubleTick"
+														}
+														aria-label={message?.status}
+														className={`chat__msg-status-icon ${
+															message?.status === "read"
+																? "chat__msg-status-icon--blue"
+																: ""
+														}`}
+													/>
+												)}
+										</span>
 
 										<Dropdown onSelect={change}>
 											<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
