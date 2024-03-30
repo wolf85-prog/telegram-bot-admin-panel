@@ -180,11 +180,13 @@
 .chat__msg_img--sent {
     background: transparent;
     align-self: flex-end;
+    justify-content: flex-end;
 }
 
 .chat__msg_img--rxd {
     background: transparent;
     align-self: flex-start;
+    justify-content: flex-start;
 }
 
 .chat__msg-group>*:nth-child(1):not(.chat__msg--sent)::before, .chat__msg--sent+.chat__msg--rxd::before {
