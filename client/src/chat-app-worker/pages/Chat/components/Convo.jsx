@@ -49,6 +49,22 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		</button>
 	));
 
+	const CustomToggleBottom = React.forwardRef(({ children, onClick }, ref) => (
+		<button
+			aria-label="Message options"
+			className="chat__msg-options"
+			style={{right: '0', top: '-35px'}}
+			ref={ref}
+			onClick={(e) => {
+				e.preventDefault();
+				onClick(e);
+			}}
+		>
+			{children}
+			<Icon id="downArrow" className="chat__msg-options-icon" />											
+		</button>
+	));
+
 	const CustomToggle2 = React.forwardRef(({ children, onClick }, ref) => (
 		<button
 			aria-label="Message options"
@@ -67,6 +83,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 	CustomToggle.displayName = "Del";
 	CustomToggle2.displayName = "Del2";
+	CustomToggleBottom.displayName = "Del3";
 
 	const CustomMenu = React.forwardRef(
 		({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
@@ -112,8 +129,31 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		},
 	);
 
+	const CustomMenuBottom = React.forwardRef(
+		({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+		  const [value, setValue] = useState('');
+	  
+		  return (
+			<div
+			  ref={ref}
+			  style={{backgroundColor: '#20272b', right: 0, borderRadius: '15px', padding: '0 0 0 0', fontSize: '14px', bottom: '-28px', minWidth:'50px'}}
+			  className={className}
+			  aria-labelledby={labeledBy}
+			>
+			  <ul className="list-unstyled" style={{marginBottom: '0'}}>
+				{React.Children.toArray(children).filter(
+				  (child) =>
+					!value || child.props.children?.toLowerCase().startsWith(value),
+				)}
+			  </ul>
+			</div>
+		  );
+		},
+	);
+
 	CustomMenu.displayName = CustomMenu
 	CustomMenu2.displayName = CustomMenu2
+	CustomMenuBottom.displayName = CustomMenuBottom
 
 	const change = async (eventkey) => {
 		//alert(`you chosen: ${eventkey}`)
@@ -256,17 +296,17 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 													</div> 
 												</figcaption>*/}
 
-											</figure>)
-										}
-										
-
 										<Dropdown onSelect={change}>
-											<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
+											<Dropdown.Toggle as={CustomToggleBottom} id="dropdown-custom-components">											
 											</Dropdown.Toggle>
-											<Dropdown.Menu as={CustomMenu2}>
+											<Dropdown.Menu as={CustomMenuBottom}>
 											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
 											</Dropdown.Menu>
 										</Dropdown>	
+
+											</figure>)
+										}
+										
 									</div>
 								) : message.sender !== chatAdminId ? (
 									<p className="chat__msg chat__msg--rxd" ref={assignRef()}>
