@@ -248,13 +248,13 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 														)}
 												</span>
 												
-												<figcaption style={{textAlign: 'center', borderRadius: '5px'}}>
+												{/*<figcaption style={{textAlign: 'center', borderRadius: '5px'}}>
 													{message.descript}
-													{/* <div style={{display: 'flex', justifyContent: 'space-between', padding: '10px 0'}}>
+													 <div style={{display: 'flex', justifyContent: 'space-between', padding: '10px 0'}}>
 														<div style={{width:'100px', height: '30px', backgroundColor: '#7b7777', borderRadius: '10px', padding: '3px 0'}}>Принять</div>
 														<div style={{width:'100px', height: '30px', backgroundColor: '#7b7777', borderRadius: '10px', padding: '3px 0'}}>Отклонить</div>
-													</div> */}
-												</figcaption>
+													</div> 
+												</figcaption>*/}
 
 											</figure>)
 										}
