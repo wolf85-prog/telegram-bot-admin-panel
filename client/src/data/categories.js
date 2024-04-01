@@ -21,48 +21,48 @@ const categories = [
       value: '3',
     },
     {
-      label: 'Риггеры',
-      name: 'Riggers',
+      label: 'Фото',
+      name: 'Photo',
       value: '4',
     },
     {
-      label: 'Помощники / Грузчики',
-      name: 'Stagehands',
+      label: 'Промо / Кастинг',
+      name: 'Promo',
       value: '5',
-    },
-    {
-      label: 'Граунд',
-      name: 'Stage Ground',
-      value: '6',
-    },
-    {
-      label: 'Водители',
-      name: 'Trucks',
-      value: '7',
-    },
-    {
-      label: 'Технический продакшн',
-      name: 'Production',
-      value: '8',
-    },
-    {
-      label: 'Фото',
-      name: 'Photo',
-      value: '9',
     },
     {
       label: 'Кейтеринг',
       name: 'Catering',
-      value: '10',
+      value: '6',
+    },
+    {
+      label: 'Помощники / Грузчики',
+      name: 'Stagehands',
+      value: '7',
+    },
+    {
+      label: 'Риггер / Граунд',
+      name: 'Stage Ground',
+      value: '8',
+    },
+    {
+      label: 'Водители',
+      name: 'Trucks',
+      value: '9',
     },
     {
       label: 'Артисты',
       name: 'Party',
-      value: '11',
+      value: '10',
     },
     {
       label: 'Игры',
       name: 'Games',
+      value: '11',
+    },
+    {
+      label: 'Технический продакшн',
+      name: 'Production',
       value: '12',
     },
     {

@@ -132,7 +132,7 @@ const Chart2 = ({ data, data2, width, height, range }) => {
                 height={height - getY(item.value)}
                 x={getX(item.name) + getX.bandwidth() / 2 - 20}
                 y={getY(item.value)}
-                fill='#7cb5ec'
+                fill='#4b0082'
                 rx="2" ry="2"
               />
               <text
