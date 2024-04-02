@@ -367,8 +367,9 @@ const getCategoryFromNotion = async(projectId) => {
       workers.map((worker)=> {
         JSON.parse(worker.worklist).map((work) => {
           arr_count.map((cat)=>{
-            //console.log("cat_name: ", cat.name)
-            if (work.cat === cat.name) {
+            //console.log("work: ", work.cat)
+            //console.log("cat: ", cat.title)
+            if (work.cat === cat.title) { //cat.name (кирилица)
               arrSelect.push(worker.chatId)
             } 
           })
@@ -377,7 +378,7 @@ const getCategoryFromNotion = async(projectId) => {
       //выбрать уникальных специалистов
       const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
       setSelected(arr)
-      //console.log("selected: ", arr)     
+      console.log("selected: ", arr)     
     }
   } else {
     setValueSelect(0)
@@ -543,6 +544,8 @@ const onAddCategory = (e) => {
     workers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
+          //console.log("work: ", work.cat)
+          //console.log("cat: ", cat)
           if (work.cat === cat) {
             arrSelect.push(worker.chatId)
           } 

@@ -488,8 +488,8 @@ const getCategoryFromNotion = async(projectId) => {
       workers.map((worker)=> {
         JSON.parse(worker.worklist).map((work) => {
           arr_count.map((cat)=>{
-            //console.log("cat_name: ", cat.name)
-            if (work.cat === cat.name) {
+            //console.log("cat: ", work.cat)
+            if (work.cat === cat.title) {
               arrSelect.push(worker.chatId)
             } 
           })

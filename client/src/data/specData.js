@@ -6,10 +6,11 @@ const specData = [
         icon: 'Sound',
         models: [
             {id: 1, name: 'Звукорежиссер',},
-            {id: 2, name: 'RF-Менеджер',},
-            {id: 3, name: 'Backline',},
-            {id: 4, name: 'Roadie',},
-            {id: 5, name: 'Техник по звуку',},
+            {id: 2, name: 'Системный инженер',},
+            {id: 3, name: 'RF-Менеджер',},
+            {id: 4, name: 'Backline',},
+            {id: 5, name: 'Roadie',},
+            {id: 6, name: 'Техник по звуку',},
         ]
     },
     {
@@ -52,7 +53,7 @@ const specData = [
     },
     {
         id: 5,
-        name: 'Промо',
+        name: 'Промо \/ Кастинг',
         icon: 'Promo',
         models: [
             {id: 1, name: 'Модель',},
@@ -83,14 +84,13 @@ const specData = [
     },
     {
         id: 8,
-        name: 'Граунд',
+        name: 'Риггер / Граунд',
         icon: 'StageGround',
         models: [
-            {id: 1, name: 'Riggers \/ Ground',},
-            {id: 2, name: 'Верхний Риггер',},
-            {id: 3, name: 'Нижний Риггер',},
-            {id: 4, name: 'Монтажник [Ground]',},
-            {id: 5, name: 'Декоратор',},
+            {id: 1, name: 'Верхний Риггер',},
+            {id: 2, name: 'Нижний Риггер',},
+            {id: 3, name: 'Монтажник [Ground]',},
+            {id: 4, name: 'Декоратор',},
         ]
     }, 
     {
