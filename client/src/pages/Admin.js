@@ -106,6 +106,8 @@ const Admin = () => {
   const [periodDate1, setPeriodDate1] = useState("")
   const [periodDate2, setPeriodDate2] = useState("")
 
+  const [startWeek, setStartWeek] = useState("")
+
   const [timerId, setTimerId] = useState()
 
   const [widthGrafik, setWdthGrafik] = useState(0);
@@ -467,6 +469,7 @@ useEffect(() => {
         const dayNumber = [7, 1, 2, 3, 4, 5, 6][new Date().getDay()] -1
 
         const needDate = carrentDate - 86400000*dayNumber //604800000
+        setStartWeek(new Date(needDate).toLocaleDateString())
         //console.log("needDate: ", needDate)
         
         
@@ -990,7 +993,7 @@ useEffect(() => {
                   className="mb-4 box"
                   color="dark"
                   value={<></>}
-                  title=''
+                  title={startWeek + ' - ' + new Date().toLocaleDateString()}
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
                     <ChartBar 
