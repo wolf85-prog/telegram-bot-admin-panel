@@ -48,10 +48,11 @@ const WidgetsDropdown4 = ({
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-primary'),
                     data: [
-                      (photoUsers-10)*100/photoUsers, 
-                      (photoUsers-5)*100/photoUsers, 
-                      (photoUsers-10)*100/photoUsers, 
-                      0, 0, 0, 0],
+                      Math.floor((photoUsers-10)*100/photoUsers), 
+                      Math.floor((photoUsers-5)*100/photoUsers), 
+                      Math.floor((photoUsers-10)*100/photoUsers), 
+                      Math.floor((photoUsers-10)*100/photoUsers), 
+                      0, 0, 0],
                   },
                 ],
               }}
@@ -73,8 +74,8 @@ const WidgetsDropdown4 = ({
                     },
                   },
                   y: {
-                    min: -10,
-                    max: 90,
+                    min: 0,
+                    max: 500,
                     display: false,
                     grid: {
                       display: false,
@@ -127,10 +128,11 @@ const WidgetsDropdown4 = ({
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-info'),
                     data: [
-                      (cateringUsers-10)*100/cateringUsers, 
-                      (cateringUsers-10)*100/cateringUsers, 
-                      (cateringUsers-10)*100/cateringUsers, 
-                      0, 0, 0, 0],
+                      Math.floor((cateringUsers-10)*100/cateringUsers), 
+                      Math.floor((cateringUsers-10)*100/cateringUsers), 
+                      Math.floor((cateringUsers-10)*100/cateringUsers), 
+                      Math.floor((cateringUsers-10)*100/cateringUsers), 
+                      0, 0, 0],
                   },
                 ],
               }}
@@ -152,8 +154,8 @@ const WidgetsDropdown4 = ({
                     },
                   },
                   y: {
-                    min: -10,
-                    max: 90,
+                    min: 0,
+                    max: 500,
                     display: false,
                     grid: {
                       display: false,
@@ -204,10 +206,11 @@ const WidgetsDropdown4 = ({
                     backgroundColor: 'rgba(255,255,255,.2)',
                     borderColor: 'rgba(255,255,255,.55)',
                     data: [
-                      (partyUsers-10)*100/partyUsers, 
-                      (partyUsers-10)*100/partyUsers, 
-                      (partyUsers-10)*100/partyUsers, 
-                      0, 0, 0, 0],
+                      Math.floor((partyUsers-10)*100/partyUsers), 
+                      Math.floor((partyUsers-10)*100/partyUsers), 
+                      Math.floor((partyUsers-10)*100/partyUsers), 
+                      Math.floor((partyUsers-10)*100/partyUsers), 
+                      0, 0, 0],
                     fill: true,
                   },
                 ],
@@ -272,7 +275,12 @@ const WidgetsDropdown4 = ({
                     label: 'Специалисты',
                     backgroundColor: 'rgba(255,255,255,.2)',
                     borderColor: 'rgba(255,255,255,.55)',
-                    data: [(gamesUsers-10)*100/gamesUsers, (gamesUsers-10)*100/gamesUsers, (gamesUsers-10)*100/gamesUsers, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    data: [
+                      Math.floor((gamesUsers-10)*100/gamesUsers), 
+                      Math.floor((gamesUsers-10)*100/gamesUsers), 
+                      Math.floor((gamesUsers-10)*100/gamesUsers), 
+                      Math.floor((gamesUsers-10)*100/gamesUsers), 
+                      0, 0, 0, 0, 0, 0, 0, 0],
                     barPercentage: 0.6,
                   },
                 ],

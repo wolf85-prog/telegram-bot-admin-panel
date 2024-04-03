@@ -47,7 +47,12 @@ const WidgetsDropdown5 = ({
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-primary'),
-                    data: [(riggerUsers-10)*100/riggerUsers, (riggerUsers-10)*100/riggerUsers, (riggerUsers-10)*100/riggerUsers, 0, 0, 0, 0],
+                    data: [
+                      (riggerUsers-10)*100/riggerUsers, 
+                      (riggerUsers-10)*100/riggerUsers, 
+                      (riggerUsers-10)*100/riggerUsers, 
+                      (riggerUsers-10)*100/riggerUsers, 
+                      0, 0, 0],
                   },
                 ],
               }}
@@ -69,8 +74,8 @@ const WidgetsDropdown5 = ({
                     },
                   },
                   y: {
-                    min: -10,
-                    max: 90,
+                    min: 0,
+                    max: 500,
                     display: false,
                     grid: {
                       display: false,
@@ -122,7 +127,12 @@ const WidgetsDropdown5 = ({
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-info'),
-                    data: [(productionUsers-10)*100/productionUsers, (productionUsers-10)*100/productionUsers, (productionUsers-10)*100/productionUsers, 0, 0, 0, 0],
+                    data: [
+                      Math.floor((productionUsers-10)*100/productionUsers), 
+                      Math.floor((productionUsers-10)*100/productionUsers), 
+                      Math.floor((productionUsers-10)*100/productionUsers), 
+                      Math.floor((productionUsers-10)*100/productionUsers), 
+                      0, 0, 0],
                   },
                 ],
               }}
@@ -144,8 +154,8 @@ const WidgetsDropdown5 = ({
                     },
                   },
                   y: {
-                    min: -10,
-                    max: 90,
+                    min: 0,
+                    max: 500,
                     display: false,
                     grid: {
                       display: false,
@@ -195,7 +205,12 @@ const WidgetsDropdown5 = ({
                     label: 'Специалисты',
                     backgroundColor: 'rgba(255,255,255,.2)',
                     borderColor: 'rgba(255,255,255,.55)',
-                    data: [(stagegroundUsers-10)*100/stagegroundUsers, (stagegroundUsers-10)*100/stagegroundUsers, (stagegroundUsers-10)*100/stagegroundUsers, 0, 0, 0, 0],
+                    data: [
+                      (stagegroundUsers-10)*100/stagegroundUsers, 
+                      (stagegroundUsers-10)*100/stagegroundUsers, 
+                      (stagegroundUsers-10)*100/stagegroundUsers, 
+                      (stagegroundUsers-10)*100/stagegroundUsers, 
+                      0, 0, 0],
                     fill: true,
                   },
                 ],
@@ -260,7 +275,12 @@ const WidgetsDropdown5 = ({
                     label: 'Кол-во специалистов',
                     backgroundColor: 'rgba(255,255,255,.2)',
                     borderColor: 'rgba(255,255,255,.55)',
-                    data: [(trucksUsers-10)*100/trucksUsers, (trucksUsers-10)*100/trucksUsers, (trucksUsers-10)*100/trucksUsers, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    data: [
+                      (trucksUsers-10)*100/trucksUsers, 
+                      (trucksUsers-10)*100/trucksUsers, 
+                      (trucksUsers-10)*100/trucksUsers, 
+                      (trucksUsers-10)*100/trucksUsers, 
+                      0, 0, 0, 0, 0, 0, 0, 0],
                     barPercentage: 0.6,
                   },
                 ],
