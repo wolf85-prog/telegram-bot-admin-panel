@@ -456,7 +456,7 @@ useEffect(() => {
         const carrentDate = Date.now()
         //console.log("carrentDate: ", carrentDate)
 
-        const dayNumber = [7, 1, 2, 3, 4, 5, 6][new Date().getDay()]
+        const dayNumber = [7, 1, 2, 3, 4, 5, 6][new Date().getDay()] -1
 
         const needDate = carrentDate - 86400000*dayNumber //604800000
         //console.log("needDate: ", needDate)
@@ -581,11 +581,14 @@ useEffect(() => {
 
         //фильтрация таблицы за месяц
         const carrentDate = Date.now()
-        console.log("carrentDate: ", carrentDate)
-        const needDate = carrentDate - 2592000000
-        console.log("needDate: ", new Date(needDate))
+        //console.log("carrentDate: ", carrentDate)
+
+        const dayNumber = new Date().getDate() - 1
         
+        const needDate = carrentDate - dayNumber*86400000 //2592000000
+        //console.log("needDate: ", new Date(needDate))
         
+        //кол-во специалистов за период на начало месяца по текущее число
         let arr = workers.filter(item => new Date(item.createDate).getTime() > needDate);
         let categories = []
         let count_cat
