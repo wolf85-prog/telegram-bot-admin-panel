@@ -1104,6 +1104,12 @@ const delCategory7 = (category) => {
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
                   <>
+                    <CAlert color="success" dismissible visible={!visible} onClose={() => setVisible(false)}>
+                      Сообщение успешно отправлено!
+                    </CAlert>
+                    <CAlert color="success" dismissible visible={visibleDelMess} onClose={() => setVisibleDelMess(false)}>
+                      Сообщения рассылки успешно удалены!
+                    </CAlert>
                     <h2>Новая рассылка</h2>
                     {loaderStart ? <div className='text-center' style={{marginTop: '25%'}}><CSpinner/></div>
                     :<><CRow>
@@ -1111,12 +1117,7 @@ const delCategory7 = (category) => {
                           <CCard className="mb-4" style={{height: '650px'}}>
                             {/* <CCardHeader>Рассылки</CCardHeader> */}
                             <CCardBody>
-                            <CAlert color="success" dismissible visible={visible} onClose={() => setVisible(false)}>
-                              Сообщение успешно отправлено!
-                            </CAlert>
-                            <CAlert color="success" dismissible visible={visibleDelMess} onClose={() => setVisibleDelMess(false)}>
-                              Сообщения рассылки успешно удалены!
-                            </CAlert>
+    
                               <CForm>
                                 <div style={{color: '#f3f3f3'}}>
                                   <CRow className="mb-3">

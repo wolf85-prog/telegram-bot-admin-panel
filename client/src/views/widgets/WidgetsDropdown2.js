@@ -59,7 +59,8 @@ const WidgetsDropdown2 = ({
                       (users.filter(item => new Date(item.createDate).getMonth() === 0)).length*100/users.length-5, 
                       (users.filter(item => new Date(item.createDate).getMonth() === 1)).length*100/users.length-5, 
                       (users.filter(item => new Date(item.createDate).getMonth() === 2)).length*100/users.length-5, 
-                      0, 0, 0, 0
+                      (users.filter(item => new Date(item.createDate).getMonth() === 3)).length*100/users.length-5, 
+                     0, 0, 0
                     ],
                   },
                 ],
@@ -139,7 +140,8 @@ const WidgetsDropdown2 = ({
                       (newUsers.filter(item => new Date(item.createDate).getMonth() === 0)).length*100/newUsers.length-5, 
                       (newUsers.filter(item => new Date(item.createDate).getMonth() === 1)).length*100/newUsers.length-5, 
                       (newUsers.filter(item => new Date(item.createDate).getMonth() === 2)).length*100/newUsers.length-5, 
-                      0, 0, 0, 0
+                      (newUsers.filter(item => new Date(item.createDate).getMonth() === 3)).length*100/newUsers.length-5, 
+                      0, 0, 0
                     ],
                   },
                 ],

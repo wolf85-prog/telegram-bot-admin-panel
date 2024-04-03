@@ -373,11 +373,13 @@ useEffect(() => {
         let categories = []
         let count_cat
 
+        console.log("arr1: ", arr)
+
         specData.map((category)=> {
           count_cat = 0;
 
           arr.map((item)=> {
-            if (JSON.parse(item.worklist).find(work => work.cat === category.name)) {
+            if (JSON.parse(item.worklist).find(work => work.cat === category.icon)) { //category.name
               count_cat++
             }
           })
@@ -472,11 +474,14 @@ useEffect(() => {
         let categories = []
         let count_cat
 
+        console.log("arr2: ", arr)
+        console.log("specData: ", specData)
+
         specData.map((category)=> {
           count_cat = 0;
 
           arr.map((item)=> {
-            if (JSON.parse(item.worklist).find(work => work.cat === category.name)) {
+            if (JSON.parse(item.worklist).find(work => work.cat === category.icon)) { //category.name
               count_cat++
             }
           })
@@ -599,11 +604,13 @@ useEffect(() => {
         let categories = []
         let count_cat
 
+        console.log("arr3: ", arr)
+
         specData.map((category)=> {
           count_cat = 0;
 
           arr.map((item)=> {
-            if (JSON.parse(item.worklist).find(work => work.cat === category.name)) {
+            if (JSON.parse(item.worklist).find(work => work.cat === category.icon)) { //category.name
               count_cat++
             }
           })
@@ -689,7 +696,7 @@ useEffect(() => {
           count_cat = 0;
 
           arr.map((item)=> {
-            if (JSON.parse(item.worklist).find(work => work.cat === category.name)) {
+            if (JSON.parse(item.worklist).find(work => work.cat === category.icon)) { //category.name
               count_cat++
             }
           })

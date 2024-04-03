@@ -48,7 +48,11 @@ const WidgetsDropdown3 = ({
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-primary'),
-                    data: [(soundUsers-50)*100/soundUsers, (soundUsers-60)*100/soundUsers, (soundUsers-90)*100/soundUsers, 0, 0, 0, 0], //min: -5, max: 89,
+                    data: [
+                      (soundUsers-50)*100/soundUsers, 
+                      (soundUsers-60)*100/soundUsers, 
+                      (soundUsers-90)*100/soundUsers, 
+                      0, 0, 0, 0], //min: -5, max: 89,
                   },
                 ],
               }}
@@ -123,7 +127,11 @@ const WidgetsDropdown3 = ({
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-info'),
-                    data: [(lightUsers-30)*100/lightUsers, (lightUsers-20)*100/lightUsers, (lightUsers-10)*100/lightUsers, 0, 0, 0, 0], //min: -5 max: 39
+                    data: [
+                      (lightUsers-30)*100/lightUsers, 
+                      (lightUsers-20)*100/lightUsers, 
+                      (lightUsers-10)*100/lightUsers, 
+                      0, 0, 0, 0], //min: -5 max: 39
                   },
                 ],
               }}
@@ -196,7 +204,11 @@ const WidgetsDropdown3 = ({
                     label: 'Специалисты',
                     backgroundColor: 'rgba(255,255,255,.2)',
                     borderColor: 'rgba(255,255,255,.55)',
-                    data: [(videoUsers-30)*100/videoUsers, (videoUsers-30)*100/videoUsers, (videoUsers-30)*100/videoUsers, 0, 0, 0, 0],
+                    data: [
+                      (videoUsers-30)*100/videoUsers, 
+                      (videoUsers-30)*100/videoUsers, 
+                      (videoUsers-30)*100/videoUsers, 
+                      0, 0, 0, 0],
                     fill: true,
                   },
                 ],
@@ -267,7 +279,11 @@ const WidgetsDropdown3 = ({
                     label: 'Специалисты',
                     backgroundColor: 'rgba(255,255,255,.2)',
                     borderColor: 'rgba(255,255,255,.55)',
-                    data: [(stagehandsUsers-30)*100/stagehandsUsers, (stagehandsUsers-30)*100/stagehandsUsers, (stagehandsUsers-30)*100/stagehandsUsers, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    data: [
+                      (stagehandsUsers-30)*100/stagehandsUsers, 
+                      (stagehandsUsers-30)*100/stagehandsUsers, 
+                      (stagehandsUsers-30)*100/stagehandsUsers, 
+                      0, 0, 0, 0, 0, 0, 0, 0, 0],
                     barPercentage: 0.6,
                   },
                 ],
