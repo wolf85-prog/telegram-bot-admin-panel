@@ -1104,7 +1104,7 @@ const delCategory7 = (category) => {
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
                   <>
-                    <CAlert color="success" dismissible visible={!visible} onClose={() => setVisible(false)}>
+                    <CAlert color="success" dismissible visible={visible} onClose={() => setVisible(false)}>
                       Сообщение успешно отправлено!
                     </CAlert>
                     <CAlert color="success" dismissible visible={visibleDelMess} onClose={() => setVisibleDelMess(false)}>
