@@ -358,7 +358,13 @@ useEffect(() => {
         //фильтрация таблицы за сутки
         const carrentDate = Date.now()
         //console.log("carrentDate: ", carrentDate)
-        const needDate = carrentDate - 86400000
+
+        //кол-во часов
+        const currentChas = new Date().getHours()
+        console.log("currentChas: ", currentChas)
+        
+        //за несколько часов
+        const needDate = carrentDate - currentChas*3600000
         //console.log("needDate: ", needDate)
         
         
