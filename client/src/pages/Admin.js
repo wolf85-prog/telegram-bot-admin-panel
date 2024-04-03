@@ -455,7 +455,10 @@ useEffect(() => {
         //фильтрация таблицы за неделю
         const carrentDate = Date.now()
         //console.log("carrentDate: ", carrentDate)
-        const needDate = carrentDate - 604800000
+
+        const dayNumber = [7, 1, 2, 3, 4, 5, 6][new Date().getDay()]
+
+        const needDate = carrentDate - 86400000*dayNumber //604800000
         //console.log("needDate: ", needDate)
         
         
