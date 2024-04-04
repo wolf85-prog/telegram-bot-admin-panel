@@ -1365,7 +1365,7 @@ useEffect(() => {
                                         <CTableDataCell className="text-center">
                                           {new Date(item.createDate).getHours() + ' : '+ String(new Date(item.createDate).getMinutes()).padStart(2, "0")}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 || item.userfamily === 'Неизвестный' ? '#cd3838' : ''}}>
+                                        <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 || item.userfamily === 'Неизвестный' ? 'red' : ''}}>
                                             {item.userfamily ? item.userfamily : ''} {item.username ? item.username : ''} {specusers.find((user) => user.chatId === item.chatId)?.block ? "[U]" : ''}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">

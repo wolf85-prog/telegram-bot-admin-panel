@@ -69,20 +69,20 @@ const Chart = ({ data, data2, width, height, range }) => {
           transform={`translate(0,${getY(0)})`}
         />
         <path
-          fill="#7cb5ec"
+          fill="#4b0082"
           d={areaPath}
           opacity={0}
         />
         <path
           strokeWidth={3}
           fill="none"
-          stroke="#7cb5ec"
+          stroke="#4b0082"
           d={linePath}
         />
         <path
           strokeWidth={3}
           fill="none"
-          stroke="#e10c16"
+          stroke="#4b0082"
           d={linePath2}
         />
         {data.map((item, index) => {
@@ -92,7 +92,7 @@ const Chart = ({ data, data2, width, height, range }) => {
                 cx={getX(item.name) + getX.bandwidth() / 2}
                 cy={getY(item.value)}
                 r={index === activeIndex ? 6 : 4}
-                fill="#7cb5ec"
+                fill="#4b0082"
                 strokeWidth={index === activeIndex ? 2 : 0}
                 stroke="#fff"
                 style={{ transition: `ease-out .1s` }}
