@@ -77,6 +77,7 @@ const Admin = () => {
   const [weekWorkers, setWeekWorkers]= useState([]);
   const [monthWorkers, setMonthWorkers]= useState([]);
   const [yearWorkers, setYearWorkers]= useState([]);
+  const [periodWorkers, setPeriodWorkers]= useState([]);
 
   const [showRenthub, setShowRenthub]= useState(false);
   const [showWorkhub, setShowWorkhub]= useState(true);
@@ -838,11 +839,50 @@ useEffect(() => {
         setTimeout(() =>setWdthGrafik(grafik.current ? grafik.current.clientWidth - 100 : 0), 2000 )
 
         //фильтрация таблицы за период
-        let arr = workers.filter(item => new Date(item.createDate).getTime() > new Date(periodDate1).getTime() && new Date(item.createDate).getTime() < new Date(periodDate2).getTime());
-        setSortWorkers(arr)
+        let arr5 = workers.filter(item => new Date(item.createDate).getTime() > new Date(periodDate1).getTime() && new Date(item.createDate).getTime() < new Date(periodDate2).getTime());
+        setSortWorkers(arr5)
+
+        let categories = []
+        let count_cat
+
+        console.log("arr5 period: ", arr5)
+
+        specData.map((category)=> {
+          count_cat = 0;
+
+          arr5.map((item)=> {
+            if (JSON.parse(item.worklist).find(work => work.cat === category.icon)) { //category.name
+              count_cat++
+            }
+          })
+
+          const obj = {
+            cat: category.name,
+            count: count_cat
+          }
+          categories.push(obj)
+        })
+
+        console.log("categories: ", categories)
+        setCatCount(categories)
+        setSortWorkers(arr5)
+
+        arr5.map((item)=>console.log("period: ", new Date(item.createDate).getMonth()+1))
 
         //график
-        //...
+        let period5 = []
+        let nameMonth = ''
+        let countSpec = 0
+
+          
+        const newObj= {
+          name: nameMonth, 
+          value: countSpec,
+        }
+        period5.push(newObj)
+        
+        console.log("period5: ", period5)     
+        setPeriodWorkers(period5)
 
         break;
       }
@@ -1111,30 +1151,14 @@ useEffect(() => {
 {showCharts5 ?  <CWidgetStatsA
                   ref={grafik}
                   className="mb-4 box"
-                  color="success"
+                  color="dark"
                   value={<></>}
-                  title=""
+                  title={periodDate1 + ' - ' + periodDate2}
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
                   chart={
                     <Chart 
-                      data={yearWorkers} 
-                      data2={[]}  
-                      // data2={
-                      //   [
-                      //     { name: 'Январь', value: 0 },
-                      //     { name: 'Февраль', value: 0 },
-                      //     { name: 'Март', value: 0 },
-                      //     { name: 'Апрель', value: 0 },
-                      //     { name: 'Май', value: 1 },
-                      //     { name: 'Июнь', value: 0 },
-                      //     { name: 'Июль', value: 0 },
-                      //     { name: 'Август', value: 2 },
-                      //     { name: 'Сентябрь', value: 2 },
-                      //     { name: 'Октябрь', value: 0 },
-                      //     { name: 'Ноябрь', value: 0 },
-                      //     { name: 'Декабрь', value: 0 },
-                      //   ]
-                      // }                 
+                      data={periodWorkers} 
+                      data2={[]}                  
                       width={widthGrafik} 
                       height={350} 
                     />             
