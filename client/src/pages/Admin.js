@@ -1040,7 +1040,7 @@ useEffect(() => {
                   className="mb-4 box"
                   color="dark"
                   value={<></>}
-                  title={startWeek + ' - ' + new Date().toLocaleDateString()}
+                  title={startWeek + ' - ' + new Date(new Date(startWeek.split('.')[2], startWeek.split('.')[1]-1, startWeek.split('.')[0]).setDate(new Date(startWeek.split('.')[2], startWeek.split('.')[1]-1, startWeek.split('.')[0]).getDate() + 6)).toLocaleDateString()}
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
                     <ChartBar 
