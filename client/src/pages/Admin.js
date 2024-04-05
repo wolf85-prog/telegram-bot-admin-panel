@@ -871,15 +871,33 @@ useEffect(() => {
 
         //график
         let period5 = []
-        let nameMonth = ''
+        let day = ''
         let countSpec = 0
 
-          
-        const newObj= {
-          name: nameMonth, 
-          value: countSpec,
+        let j = 86400000;
+        let nextDay = new Date(periodDate1.split('.')[2], periodDate1.split('.')[1]-1, periodDate1.split('.')[0])
+        let endDay = new Date(periodDate2.split('.')[2], periodDate2.split('.')[1]-1, periodDate2.split('.')[0])
+        console.log(nextDay, endDay)
+        
+        while (nextDay.getTime() < endDay.getTime()) { // выводит 0, затем 1, затем 2
+          const newObj= {
+            name: nextDay.toLocaleDateString(), 
+            //value: countSpec,
+          }
+          period5.push(newObj)
+          //nextDay = nextDay + j
+          nextDay.setDate(nextDay.getDate() + 1);
         }
-        period5.push(newObj)
+        
+        // for (let i=1; i<=31; i++) {
+        //   //const arrSpec = arr5.filter(item => i === new Date(item.createDate).getDate() && new Date().getMonth() === new Date(item.createDate).getMonth());
+        //   //countSpec = arrSpec.length
+        //   const newObj= {
+        //     name: day, 
+        //     //value: countSpec,
+        //   }
+        //   period5.push(newObj)
+        // }
         
         console.log("period5: ", period5)     
         setPeriodWorkers(period5)
