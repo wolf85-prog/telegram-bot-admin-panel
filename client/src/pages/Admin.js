@@ -838,8 +838,11 @@ useEffect(() => {
         //установить ширину графика
         setTimeout(() =>setWdthGrafik(grafik.current ? grafik.current.clientWidth - 100 : 0), 2000 )
 
+        let nextDay = new Date(periodDate1.split('.')[2], periodDate1.split('.')[1]-1, periodDate1.split('.')[0])
+        let endDay = new Date(periodDate2.split('.')[2], periodDate2.split('.')[1]-1, periodDate2.split('.')[0])
+
         //фильтрация таблицы за период
-        let arr5 = workers.filter(item => new Date(item.createDate).getTime() > new Date(periodDate1).getTime() && new Date(item.createDate).getTime() < new Date(periodDate2).getTime());
+        let arr5 = workers.filter(item => new Date(item.createDate) > nextDay && new Date(item.createDate) < endDay);
         setSortWorkers(arr5)
 
         let categories = []
@@ -867,37 +870,23 @@ useEffect(() => {
         setCatCount(categories)
         setSortWorkers(arr5)
 
-        arr5.map((item)=>console.log("period: ", new Date(item.createDate).getMonth()+1))
+        //arr5.map((item)=>console.log("period: ", item))
 
         //график
         let period5 = []
-        let day = ''
         let countSpec = 0
 
-        let j = 86400000;
-        let nextDay = new Date(periodDate1.split('.')[2], periodDate1.split('.')[1]-1, periodDate1.split('.')[0])
-        let endDay = new Date(periodDate2.split('.')[2], periodDate2.split('.')[1]-1, periodDate2.split('.')[0])
-        console.log(nextDay, endDay)
-        
         while (nextDay.getTime() < endDay.getTime()) { // выводит 0, затем 1, затем 2
+          const arrSpec = arr5.filter(item => nextDay.toLocaleDateString() === new Date(item.createDate).toLocaleDateString());
+          countSpec = arrSpec.length
           const newObj= {
-            name: nextDay.toLocaleDateString(), 
-            //value: countSpec,
+            name: nextDay.getDate().toString().length < 2 ? '0'+nextDay.getDate() : nextDay.getDate().toString(), 
+            value: countSpec,
           }
           period5.push(newObj)
           //nextDay = nextDay + j
           nextDay.setDate(nextDay.getDate() + 1);
         }
-        
-        // for (let i=1; i<=31; i++) {
-        //   //const arrSpec = arr5.filter(item => i === new Date(item.createDate).getDate() && new Date().getMonth() === new Date(item.createDate).getMonth());
-        //   //countSpec = arrSpec.length
-        //   const newObj= {
-        //     name: day, 
-        //     //value: countSpec,
-        //   }
-        //   period5.push(newObj)
-        // }
         
         console.log("period5: ", period5)     
         setPeriodWorkers(period5)
@@ -1175,6 +1164,7 @@ useEffect(() => {
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
                   chart={
                     <Chart 
+                      range={800}
                       data={periodWorkers} 
                       data2={[]}                  
                       width={widthGrafik} 
