@@ -460,7 +460,7 @@ useEffect(() => {
     const fetchData = async () => {
 
       let pretendents = await getAllPretendent();
-      //console.log("pretendents: ", pretendents)
+      console.log("pretendents: ", pretendents)
 
       let workers = await getWorkers()
       //console.log("workers: ", workers)
