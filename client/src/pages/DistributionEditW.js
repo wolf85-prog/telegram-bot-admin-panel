@@ -1797,7 +1797,7 @@ const onSaveText = async() => {
                                                 id="inputTextButton" 
                                                 placeholder="https://"
                                                 style={{marginTop: '10px'}}
-                                                //onChange={onChangeTextUrl}
+                                                onChange={onChangeTextUrl}
                                                 value={target}
                                               />
                                             </CCol>
