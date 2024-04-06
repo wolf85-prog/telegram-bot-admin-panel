@@ -483,7 +483,7 @@ useEffect(() => {
 			const comment = userObject2?.comment ? userObject2?.comment : ''
 			const phone = userObject2?.phone
 
-			const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+			const d = new Date(worker.updatedAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
 			const d2 = new Date(d)
 
 			const month = String(d2.getMonth()+1).padStart(2, "0");
