@@ -7,7 +7,7 @@ class WorkersController {
         try {
             const workers = await Worker.findAll({
                 order: [
-                    ['id', 'DESC'],
+                    ['id', 'ASK'], //DESK
                 ],
             })
             return res.status(200).json(workers);
