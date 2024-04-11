@@ -206,7 +206,7 @@ const DistributionEditW = () => {
         //установка категорий
         catItems.map((cat, index)=> {
           //console.log("cat: ", cat)
-          const indexCat = categories.findIndex(item=>item.name === cat) //item.label
+          const indexCat = categories.findIndex(item=>item.label === cat) //item.label
           // console.log("catItems: ", catItems)
           console.log("indexCat: ", indexCat)
 

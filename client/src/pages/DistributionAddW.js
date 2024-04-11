@@ -318,7 +318,7 @@ const getCategoryFromNotion = async(projectId) => {
 
           if (databaseBlock.data.length > 0) {   
             databaseBlock.data.map((db) => {
-              if (spec.name === db.spec) {
+              if (spec.name === db.spec) {  //cat (латиница)
                 count_title++
               }
             })
@@ -326,8 +326,8 @@ const getCategoryFromNotion = async(projectId) => {
             if (count_title !== 0) {
               const obj = {
                 id: category.id,
-                title: category.icon,
-                name: category.name,
+                title: category.name,
+                name: category.icon,
                 count: count_title,
               }
               arr_count.push(obj)
@@ -369,7 +369,7 @@ const getCategoryFromNotion = async(projectId) => {
           arr_count.map((cat)=>{
             //console.log("work: ", work.cat)
             //console.log("cat: ", cat.title)
-            if (work.cat === cat.title) { //cat.name (кирилица)
+            if (work.cat === cat.name) { //cat.name (латиница)
               arrSelect.push(worker.chatId)
             } 
           })
@@ -992,8 +992,6 @@ const delCategory7 = (category) => {
   {/* Запланировать рассылку */}
   const onPlanerShow = async(label, proj, text, cats, count, poster, uuidDistrib) => {
     setVisibleModal(!visibleModal)
-
-    //console.log("cats: ", cats)
 
     if (selected.length !== 0 && proj || selected.length !== 0 && text) {
       navigate('/distributionw_planer', {
