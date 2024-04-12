@@ -42,7 +42,7 @@ const categories = [
     },
     {
       label: 'Риггер / Граунд',
-      name: 'Stage Ground',
+      name: 'Riggers \/ Ground',
       value: '8',
     },
     {
