@@ -80,6 +80,18 @@ const Profile = ({ user, closeSidebar }) => {
 
 		setTimeout(()=>{
 			setHeightImage(divBlock.current.getBoundingClientRect())
+
+			var imgsize = new Image();
+
+			imgsize.onload = function(){
+				var height = imgsize.height;
+				var width = imgsize.width;
+
+				// code here to use the dimensions
+				console.log("height: ", height, "width: ", width)
+			}
+
+			imgsize.src = user?.avatar;
 		}, 2000)
 		
 		setPhone(user.phone)
