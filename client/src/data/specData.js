@@ -32,7 +32,7 @@ const specData = [
             {id: 1, name: 'Инженер VMix',},
             {id: 2, name: 'Инженер Resolume',},
             {id: 3, name: 'Оператор Zoom',},
-            {id: 4, name: 'Оператор [сameraman]',},
+            {id: 4, name: 'Оператор [cameraman]',},
             {id: 5, name: 'Оператор-постановщик',},
             {id: 6, name: 'Режиссер эфиров',},
             {id: 7, name: 'Техник монтажа',},
