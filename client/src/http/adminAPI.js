@@ -42,6 +42,17 @@ export const getProjects3 = async () =>{
 }
 
 //api notion
+export const getProjectAll = async () =>{
+    try {
+        let response = await $host_bot.get('projectall');
+        //console.log("projectsAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectAll api", error.message);
+    }
+}
+
+//api notion
 export const getProjectNewDate = async () =>{
     try {
         let response = await $host_bot.get('projectnewdate');

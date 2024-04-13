@@ -15,6 +15,8 @@ import { getDistributions,
 	getCountMessage, 
 	getWorkerId,
 	getProjects3,
+	getProjectAll,
+	getProjects,
 } from "src/http/adminAPI";
 
 import boopSfx from './../assets/sounds/zvuk-icq.mp3';
@@ -460,20 +462,20 @@ useEffect(() => {
     const fetchData = async () => {
 
       let pretendents = await getAllPretendent();
-      console.log("pretendents: ", pretendents)
+      console.log("pretendents context: ", pretendents)
 
       let workers = await getWorkers()
-      //console.log("workers: ", workers)
+      console.log("workers context: ", workers)
 
-      let projects = await getProjects3();
-      //console.log("projects: ", projects)
+      let projects = await getProjects();
+      console.log("projects context: ", projects)
 
       //setProjects(projects) 
 
 		pretendents.map(async (worker, i) => {
 
 			let userObject = projects.find((proj) => proj.id === worker.projectId);  
-			const projectName = userObject?.name
+			const projectName = userObject?.title
 
 			let userObject2 = workers.find((item) => item.chatId === worker.receiverId);  
 			const workerName = userObject2?.userfamily + " "+ userObject2?.username
