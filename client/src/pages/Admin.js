@@ -81,6 +81,7 @@ const Admin = () => {
 
   const [showRenthub, setShowRenthub]= useState(false);
   const [showWorkhub, setShowWorkhub]= useState(true);
+  const [showDeleted, setShowDeleted]= useState(false);
 
   const [activeKey, setActiveKey] = useState(2)
 
@@ -295,6 +296,7 @@ useEffect(() => {
     if (hub === 'Workhub') { 
       setShowWorkhub(true)
       setShowRenthub(false)
+      setShowDeleted(false)
       setActiveKey(2)
       setShowWidget(false)
       setShowWidget2(true)
@@ -303,10 +305,20 @@ useEffect(() => {
     if (hub === 'Renthub') { 
       setShowWorkhub(false)
       setShowRenthub(true)
+      setShowDeleted(false)
       setActiveKey(1)
       setShowWidget(true)
       setShowWidget2(false)
       setTabhub('Renthub')
+    }
+    if (hub === 'Удаленные') { 
+      setShowWorkhub(false)
+      setShowRenthub(false)
+      setShowDeleted(true)
+      setActiveKey(3)
+      // setShowWidget(true)
+      // setShowWidget2(false)
+      setTabhub('Удаленные')
     }
   }
 
@@ -1194,6 +1206,14 @@ useEffect(() => {
                             Renthub
                         </CNavLink>
                       </CNavItem>
+                      <CNavItem>
+                        <CNavLink 
+                          style={{background: activeKey !== 3 ? '#08080869' : '', cursor: 'pointer'}} 
+                          onClick={() => openHub('Удаленные')} 
+                          active={activeKey === 3}>
+                            Удаленные
+                        </CNavLink>
+                      </CNavItem>
                 </CNav>
                 
                 <CCard className='rounded-bottom' style={{borderRadius: '0px', borderColor: '#131c21', borderTopRightRadius: '0.375rem'}}>
@@ -1444,6 +1464,138 @@ useEffect(() => {
                       </CCol>
                     </CRow>
                   </CCardBody>
+
+{/*-------------------------------------------------------------------------------------------  */}
+     
+                  <CCardBody id="Deleted" style={{display: showDeleted ? 'block' : 'none'}}>
+                    <CRow>
+                      <CCol xs>
+                            <CRow>
+                              <CCol md={6} style={{textAlign: 'left'}}>
+                                <CButton color="dark" onClick={()=>showBlock(1)} style={{marginRight: '20px', width: '100px'}}>Сутки</CButton>
+                                <CButton color="dark" onClick={()=>showBlock(2)} style={{marginRight: '20px', width: '100px'}}>Неделя</CButton>
+                                <CButton color="dark" onClick={()=>showBlock(3)} style={{marginRight: '20px', width: '100px'}}>Месяц</CButton>
+                                <CButton color="dark" onClick={()=>showBlock(4)} style={{marginRight: '20px', width: '100px'}}>Год</CButton>
+                              </CCol>
+                              <CCol md={6} style={{textAlign: 'center', display: 'flex'}}>
+                                <InputMask 
+                                  mask="99.99.9999"
+                                  value={periodDate1}
+                                  onChange={changeDate1}>
+                                  {(inputProps) => <CFormInput 
+                                                    {...inputProps} 
+                                                    placeholder="01.01.2024" 
+                                                    disableUnderline
+                                                    aria-label="sm input example"
+                                                    style={{marginLeft: '10px'}}    
+                                                  />}
+                                </InputMask>
+
+                                <InputMask 
+                                  mask="99.99.9999"
+                                  value={periodDate2}
+                                  onChange={changeDate2}>
+                                  {(inputProps) => <CFormInput 
+                                                    {...inputProps} 
+                                                    placeholder="31.12.2024" 
+                                                    disableUnderline
+                                                    aria-label="sm input example"
+                                                    style={{marginLeft: '10px'}} 
+                                                  />}
+                                </InputMask>                             
+                                            
+                                <CButton color="dark" onClick={()=>showBlock(5)} style={{marginLeft: '10px'}}>Применить</CButton>
+                              </CCol>      
+                            </CRow>
+                            
+                            <br/>
+                            <CRow className="mb-3">
+                              <CCol sm={3} >
+                                <CFormInput placeholder="Поиск специалиста..." onChange={(e)=>setText(e.target.value)} aria-label="workers"/>
+                              </CCol>
+                              <CCol sm={6}></CCol>
+
+                              <CCol sm={3} style={{textAlign: 'right', position: 'absolute', top: '-538px', right: '0', marginRight: '35px'}}>
+                                {showCountAll ? sortWorkers.length : ''}
+                              </CCol>
+                            </CRow>
+                            
+                            <CRow>
+                              <CCol style={{textAlign: 'center'}}>
+                              {loading2 ? 
+                                      
+                                <CSpinner/> :
+
+                                <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '14px'}}>
+                                  <CTableHead className='table-light'>
+                                    <CTableRow>
+                                      <CTableHeaderCell className="text-center" style={{width: '90px'}}>Дата</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{width: '70px'}}>Время</CTableHeaderCell>  
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '240px'}}>ФИО</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{width: '130px'}}>Город</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" >Специальность</CTableHeaderCell>  
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Дата</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>                         
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>Ник</CTableHeaderCell>
+                                    </CTableRow>
+                                  </CTableHead>
+                                  <CTableBody>                                  
+                                    {/* {sortWorkers.map((item, index) => (
+                                      <CTableRow v-for="item in tableItems" key={index}>
+                                        <CTableDataCell className="text-center">
+                                          {String(new Date(item.createDate).getDate()).padStart(2, "0")+ "."+ String(new Date(item.createDate).getMonth()+1).padStart(2, "0") + "." +new Date(item.createDate).getFullYear()}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          {new Date(item.createDate).getHours() + ' : '+ String(new Date(item.createDate).getMinutes()).padStart(2, "0")}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 || item.userfamily === 'Неизвестный' ? 'red' : ''}}>
+                                            {item.userfamily ? item.userfamily : ''} {item.username ? item.username : ''} {specusers.find((user) => user.chatId === item.chatId)?.block ? "[U]" : ''}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          {item.city ? item.city : ''}
+                                        </CTableDataCell>
+                                        <CTableDataCell style={{textAlign: 'left'}}>
+                                          <div onClick={()=>handleClick(index)} style={{cursor: 'pointer', textAlign: 'center'}}>{!showTable[index] ? 'Посмотреть' : <br/>}</div>
+                                          <CCollapse visible={showTable[index]}>
+                                            <table>
+                                              <tbody>
+                                                {item.worklist !== '' ? (JSON.parse(item.worklist)).map((spec, index)=>( 
+                                                    <tr key={index}>
+                                                      <td>{spec.spec !== '' ? "- " + spec.spec : ''}</td>
+                                                    </tr>          
+                                                )) : ""}
+                                              </tbody> 
+                                            </table>
+                                          </CCollapse>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
+                                          {item.dateborn ? item.dateborn : ''}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div>{item.phone ? item.phone : ''}</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div style={{fontSize: showNick ? '12px' : '14px'}}>{showNick ? specusers.find((user) => user.chatId === item.chatId)?.username : item.chatId}</div>
+                                        </CTableDataCell> 
+                                      </CTableRow>
+                                      ))
+                                    } */}
+                                </CTableBody>                   
+                              </CTable>
+                              
+                            }
+                            
+                              </CCol>
+                            </CRow>
+                            <CRow>
+                              {/* <CCol>
+                                Всего: {sortWorkers.length}
+                              </CCol> */}
+                            </CRow>
+                      </CCol>
+                    </CRow>
+                  </CCardBody>
+
                 </CCard>
 
                 </>
