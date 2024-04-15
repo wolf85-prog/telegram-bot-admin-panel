@@ -8,16 +8,16 @@ import { getStyle } from '@coreui/utils'
 import { CChartBar, CChartLine } from '@coreui/react-chartjs'
 
 import Sound from "./../../assets/images/spec/1_sound.png";
-import Video from "./../../assets/images/spec/5_video.png";
-import Light from "./../../assets/images/spec/6_light.png";
-import Stagehands from "./../../assets/images/spec/7_stagehands.png";
+import Light from "./../../assets/images/spec/2_light.png";
+import Video from "./../../assets/images/spec/3_video.png";
+import Photo from "./../../assets/images/spec/4_photo.png";
 
 
 const WidgetsDropdown3 = ({
   soundUsers, 
   lightUsers, 
   videoUsers, 
-  stagehandsUsers, 
+  photoUsers,
 }) => {
 
   return (
@@ -253,71 +253,73 @@ const WidgetsDropdown3 = ({
           color="danger"
           value={
             <>
-              {stagehandsUsers}
+              {photoUsers} {/*{' '}
+               <span className="fs-6 fw-normal">
+                (-12.4% <CIcon icon={cilArrowBottom} />)
+              </span> */}
             </>
           }
-          title={"Помощники"}
-          action={<img src={Stagehands} alt='' width={35}/>}
+          title={"Фото"}
+          action={<img src={Photo} alt='' width={35}/>}
           chart={
-            <CChartBar
+            <CChartLine
               className="mt-3 mx-3"
               style={{ height: '70px' }}
               data={{
-                labels: [
-                  'Январь', 
-                  'Февраль', 
-                  'Март', 
-                  'Апрель', 
-                  'Май', 
-                  'Июнь', 
-                  'Июль',
-                  'Август',
-                  'Сентябрь',
-                  'Октябрь',
-                  'Ноябрь',
-                  'Декабрь',
-                ],
+                labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
                 datasets: [
                   {
                     label: 'Специалисты',
-                    backgroundColor: 'rgba(255,255,255,.2)',
+                    backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
+                    pointBackgroundColor: getStyle('--cui-primary'),
                     data: [
-                      Math.floor((stagehandsUsers-30)*100/stagehandsUsers), 
-                      Math.floor((stagehandsUsers-30)*100/stagehandsUsers), 
-                      Math.floor((stagehandsUsers-30)*100/stagehandsUsers), 
-                      Math.floor((stagehandsUsers-30)*100/stagehandsUsers), 
-                      0, 0, 0, 0, 0, 0, 0, 0],
-                    barPercentage: 0.6,
+                      Math.floor((photoUsers-10)*100/photoUsers), 
+                      Math.floor((photoUsers-5)*100/photoUsers), 
+                      Math.floor((photoUsers-10)*100/photoUsers), 
+                      Math.floor((photoUsers-10)*100/photoUsers), 
+                      0, 0, 0],
                   },
                 ],
               }}
               options={{
-                maintainAspectRatio: false,
                 plugins: {
                   legend: {
                     display: false,
                   },
                 },
+                maintainAspectRatio: false,
                 scales: {
                   x: {
                     grid: {
                       display: false,
-                      drawTicks: false,
+                      drawBorder: false,
                     },
                     ticks: {
                       display: false,
                     },
                   },
                   y: {
+                    min: 0,
+                    max: 500,
+                    display: false,
                     grid: {
                       display: false,
-                      drawBorder: false,
-                      drawTicks: false,
                     },
                     ticks: {
                       display: false,
                     },
+                  },
+                },
+                elements: {
+                  line: {
+                    borderWidth: 1,
+                    tension: 0.4,
+                  },
+                  point: {
+                    radius: 4,
+                    hitRadius: 10,
+                    hoverRadius: 4,
                   },
                 },
               }}

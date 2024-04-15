@@ -974,25 +974,25 @@ useEffect(() => {
                   soundUsers={catCount[0].count}
                   lightUsers={catCount[1].count}
                   videoUsers={catCount[2].count}
-                  stagehandsUsers={catCount[4].count}
+                  photoUsers={catCount[3].count}
                 />
                 :""}
 
                 {showWidget4 
-                ?<WidgetsDropdown4
-                  photoUsers={catCount[8].count}
-                  cateringUsers={catCount[9].count}
-                  partyUsers={catCount[10].count}
-                  gamesUsers={catCount[11].count}
+                ?<WidgetsDropdown4                
+                  promoUsers={catCount[4].count}
+                  cateringUsers={catCount[5].count}
+                  stagehandsUsers={catCount[6].count}
+                  riggerUsers={catCount[7].count}
                 />
                 : ""}
 
                 {showWidget5 
                 ?<WidgetsDropdown5
-                  riggerUsers={catCount[3].count}
-                  stagegroundUsers={catCount[5].count}
-                  productionUsers={catCount[7].count}
-                  trucksUsers={catCount[6].count}
+                  trucksUsers={catCount[8].count}
+                  partyUsers={catCount[9].count}
+                  gamesUsers={catCount[10].count}
+                  productionUsers={catCount[11].count}
                 />
                 : ""}
                 
@@ -1187,34 +1187,43 @@ useEffect(() => {
 : ""
 }
 
+                <CRow className="mb-12">
+                  {/* Вкладки */}
+                  <CCol sm={6}>
+                    <CNav variant="tabs" className='dark-theme'>
+                          <CNavItem>
+                            <CNavLink 
+                              style={{background: activeKey !== 2 ? '#08080869' : '', cursor: 'pointer'}} 
+                              onClick={() => openHub('Workhub')} 
+                              active={activeKey === 2}>
+                                Workhub
+                            </CNavLink>
+                          </CNavItem>
+                          <CNavItem>
+                            <CNavLink 
+                              style={{background: activeKey !== 1 ? '#08080869' : '', cursor: 'pointer'}} 
+                              onClick={() => openHub('Renthub')} 
+                              active={activeKey === 1}>
+                                Renthub
+                            </CNavLink>
+                          </CNavItem>
+                    </CNav>
+                  </CCol>
 
-                {/* Вкладки */}
-                <CNav variant="tabs" className='dark-theme'>
-                      <CNavItem>
-                        <CNavLink 
-                          style={{background: activeKey !== 2 ? '#08080869' : '', cursor: 'pointer'}} 
-                          onClick={() => openHub('Workhub')} 
-                          active={activeKey === 2}>
-                            Workhub
-                        </CNavLink>
-                      </CNavItem>
-                      <CNavItem>
-                        <CNavLink 
-                          style={{background: activeKey !== 1 ? '#08080869' : '', cursor: 'pointer'}} 
-                          onClick={() => openHub('Renthub')} 
-                          active={activeKey === 1}>
-                            Renthub
-                        </CNavLink>
-                      </CNavItem>
-                      <CNavItem>
-                        <CNavLink 
-                          style={{background: activeKey !== 3 ? '#08080869' : '', cursor: 'pointer'}} 
-                          onClick={() => openHub('Удаленные')} 
-                          active={activeKey === 3}>
-                            Удаленные
-                        </CNavLink>
-                      </CNavItem>
-                </CNav>
+                  <CCol sm={6}>
+                    <CNav variant="tabs" className='dark-theme' style={{justifyContent: 'flex-end'}}>
+                          <CNavItem>
+                            <CNavLink 
+                              style={{background: activeKey !== 3 ? '#08080869' : '', cursor: 'pointer'}} 
+                              onClick={() => openHub('Удаленные')} 
+                              active={activeKey === 3}>
+                                Удаленные
+                            </CNavLink>
+                          </CNavItem>
+                    </CNav>
+                  </CCol> 
+                </CRow>
+                
                 
                 <CCard className='rounded-bottom' style={{borderRadius: '0px', borderColor: '#131c21', borderTopRightRadius: '0.375rem'}}>
                   <CCardBody id="Renthub" style={{display: showRenthub ? 'block' : 'none'}}>
@@ -1405,7 +1414,7 @@ useEffect(() => {
                                       <CTableHeaderCell className="text-center" >Специальность</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Дата</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>                         
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>Ник</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>{ showNick ? 'Ник' : 'Телеграм ID' }</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
@@ -1536,7 +1545,7 @@ useEffect(() => {
                                       <CTableHeaderCell className="text-center" >Специальность</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Дата</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>                         
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>Ник</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>{ showNick ? 'Ник' : 'Телеграм ID' }</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  

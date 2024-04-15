@@ -7,52 +7,54 @@ import {
 import { getStyle } from '@coreui/utils'
 import { CChartBar, CChartLine } from '@coreui/react-chartjs'
 
-import Catering from "./../../assets/images/spec/9_catering.png";
-import Photo from "./../../assets/images/spec/10_photo.png";
-import Party from "./../../assets/images/spec/11_party.png";
-import Games from "./../../assets/images/spec/11_party.png";
+import Promo from "./../../assets/images/spec/6_catering.png";
+import Catering from "./../../assets/images/spec/6_catering.png";
+import Stagehands from "./../../assets/images/spec/7_stagehands.png";
+import Riggers from "./../../assets/images/spec/8_riggers.png";
 
 const WidgetsDropdown4 = ({
+  promoUsers,
   cateringUsers,
-  photoUsers,
-  partyUsers,
-  gamesUsers,
+  stagehandsUsers, 
+  riggerUsers,
+  
 }) => {
 
   return (
     <CRow>
+      {/* Promo */}
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4 box-top"
           color="primary"
           value={
             <>
-              {photoUsers} {/*{' '}
+              {promoUsers} {/*{' '}
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
-          title={"Фото"}
-          action={<img src={Photo} alt='' width={35}/>}
+          title={"Промо / Кастинг"}
+          action={<img src={Promo} alt='' width={35}/>}
           chart={
             <CChartLine
-              className="mt-3 mx-3"
+              className="mt-3"
               style={{ height: '70px' }}
               data={{
                 labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
                 datasets: [
                   {
                     label: 'Специалисты',
-                    backgroundColor: 'transparent',
+                    backgroundColor: 'rgba(255,255,255,.2)',
                     borderColor: 'rgba(255,255,255,.55)',
-                    pointBackgroundColor: getStyle('--cui-primary'),
                     data: [
-                      Math.floor((photoUsers-10)*100/photoUsers), 
-                      Math.floor((photoUsers-5)*100/photoUsers), 
-                      Math.floor((photoUsers-10)*100/photoUsers), 
-                      Math.floor((photoUsers-10)*100/photoUsers), 
+                      (promoUsers-10)*100/promoUsers, 
+                      (promoUsers-10)*100/promoUsers, 
+                      (promoUsers-10)*100/promoUsers, 
+                      (promoUsers-10)*100/promoUsers, 
                       0, 0, 0],
+                    fill: true,
                   },
                 ],
               }}
@@ -65,33 +67,19 @@ const WidgetsDropdown4 = ({
                 maintainAspectRatio: false,
                 scales: {
                   x: {
-                    grid: {
-                      display: false,
-                      drawBorder: false,
-                    },
-                    ticks: {
-                      display: false,
-                    },
+                    display: false,
                   },
                   y: {
-                    min: 0,
-                    max: 500,
                     display: false,
-                    grid: {
-                      display: false,
-                    },
-                    ticks: {
-                      display: false,
-                    },
                   },
                 },
                 elements: {
                   line: {
-                    borderWidth: 1,
+                    borderWidth: 2,
                     tension: 0.4,
                   },
                   point: {
-                    radius: 4,
+                    radius: 0,
                     hitRadius: 10,
                     hoverRadius: 4,
                   },
@@ -101,6 +89,8 @@ const WidgetsDropdown4 = ({
           }
         />
       </CCol>
+
+      {/* Catering */}
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4 box-top"
@@ -113,7 +103,7 @@ const WidgetsDropdown4 = ({
               </span> */}
             </>
           }
-          title={"Кейтегинг"}
+          title={"Кейтеринг"}
           action={<img src={Catering} alt='' width={35}/>}
           chart={
             <CChartLine
@@ -180,90 +170,32 @@ const WidgetsDropdown4 = ({
           }
         />
       </CCol>
+
+      {/* Stagehands */}
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4 box-top"
           color="warning"
           value={
             <>
-              {partyUsers} {/*{' '}
-               <span className="fs-6 fw-normal">
-                (-12.4% <CIcon icon={cilArrowBottom} />)
-              </span> */}
+              {stagehandsUsers}
             </>
           }
-          title={"Артисты"}
-          action={<img src={Party} alt='' width={35}/>}
-          chart={
-            <CChartLine
-              className="mt-3"
-              style={{ height: '70px' }}
-              data={{
-                labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
-                datasets: [
-                  {
-                    label: 'Специалисты',
-                    backgroundColor: 'rgba(255,255,255,.2)',
-                    borderColor: 'rgba(255,255,255,.55)',
-                    data: [
-                      Math.floor((partyUsers-10)*100/partyUsers), 
-                      Math.floor((partyUsers-10)*100/partyUsers), 
-                      Math.floor((partyUsers-10)*100/partyUsers), 
-                      Math.floor((partyUsers-10)*100/partyUsers), 
-                      0, 0, 0],
-                    fill: true,
-                  },
-                ],
-              }}
-              options={{
-                plugins: {
-                  legend: {
-                    display: false,
-                  },
-                },
-                maintainAspectRatio: false,
-                scales: {
-                  x: {
-                    display: false,
-                  },
-                  y: {
-                    display: false,
-                  },
-                },
-                elements: {
-                  line: {
-                    borderWidth: 2,
-                    tension: 0.4,
-                  },
-                  point: {
-                    radius: 0,
-                    hitRadius: 10,
-                    hoverRadius: 4,
-                  },
-                },
-              }}
-            />
-          }
-        />
-      </CCol>
-      <CCol sm={6} lg={3}>
-        <CWidgetStatsA
-          className="mb-4 box-top"
-          color="danger"
-          value={
-            <>
-              {gamesUsers}
-            </>
-          }
-          title={"Игры"}
-          action={<img src={Games} alt='' width={35}/>}
+          title={"Помощники / Грузчики"}
+          action={<img src={Stagehands} alt='' width={35}/>}
           chart={
             <CChartBar
               className="mt-3 mx-3"
               style={{ height: '70px' }}
               data={{
                 labels: [
-                  'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль',
+                  'Январь', 
+                  'Февраль', 
+                  'Март', 
+                  'Апрель', 
+                  'Май', 
+                  'Июнь', 
+                  'Июль',
                   'Август',
                   'Сентябрь',
                   'Октябрь',
@@ -276,10 +208,10 @@ const WidgetsDropdown4 = ({
                     backgroundColor: 'rgba(255,255,255,.2)',
                     borderColor: 'rgba(255,255,255,.55)',
                     data: [
-                      Math.floor((gamesUsers-10)*100/gamesUsers), 
-                      Math.floor((gamesUsers-10)*100/gamesUsers), 
-                      Math.floor((gamesUsers-10)*100/gamesUsers), 
-                      Math.floor((gamesUsers-10)*100/gamesUsers), 
+                      Math.floor((stagehandsUsers-30)*100/stagehandsUsers), 
+                      Math.floor((stagehandsUsers-30)*100/stagehandsUsers), 
+                      Math.floor((stagehandsUsers-30)*100/stagehandsUsers), 
+                      Math.floor((stagehandsUsers-30)*100/stagehandsUsers), 
                       0, 0, 0, 0, 0, 0, 0, 0],
                     barPercentage: 0.6,
                   },
@@ -311,6 +243,88 @@ const WidgetsDropdown4 = ({
                     ticks: {
                       display: false,
                     },
+                  },
+                },
+              }}
+            />
+          }
+        />
+      </CCol>
+
+      {/* Rigger */}
+      <CCol sm={6} lg={3}>
+        <CWidgetStatsA
+          className="mb-4 box-top"
+          color="danger"
+          value={
+            <>
+              {riggerUsers} {/*{' '}
+               <span className="fs-6 fw-normal">
+                (-12.4% <CIcon icon={cilArrowBottom} />)
+              </span> */}
+            </>
+          }
+          title={"Риггер / Граунд"}
+          action={<img src={Riggers} alt='' width={35}/>}
+          chart={
+            <CChartLine
+              className="mt-3 mx-3"
+              style={{ height: '70px' }}
+              data={{
+                labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
+                datasets: [
+                  {
+                    label: 'Специалисты',
+                    backgroundColor: 'transparent',
+                    borderColor: 'rgba(255,255,255,.55)',
+                    pointBackgroundColor: getStyle('--cui-primary'),
+                    data: [
+                      (riggerUsers-10)*100/riggerUsers, 
+                      (riggerUsers-10)*100/riggerUsers, 
+                      (riggerUsers-10)*100/riggerUsers, 
+                      (riggerUsers-10)*100/riggerUsers, 
+                      0, 0, 0],
+                  },
+                ],
+              }}
+              options={{
+                plugins: {
+                  legend: {
+                    display: false,
+                  },
+                },
+                maintainAspectRatio: false,
+                scales: {
+                  x: {
+                    grid: {
+                      display: false,
+                      drawBorder: false,
+                    },
+                    ticks: {
+                      display: false,
+                    },
+                  },
+                  y: {
+                    min: 0,
+                    max: 500,
+                    display: false,
+                    grid: {
+                      display: false,
+                    },
+                    ticks: {
+                      display: false,
+                    },
+                  },
+                },
+                elements: {
+                  line: {
+                    borderWidth: 1,
+                    tension: 0.4,
+                  },
+                  point: {
+                    radius: 4,
+                    hitRadius: 10,
+                    hoverRadius: 4,
                   },
                 },
               }}

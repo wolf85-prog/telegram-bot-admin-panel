@@ -43,11 +43,8 @@ import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 import WidgetsDropdown2 from '../views/widgets/WidgetsDropdown2'
 
 import Sound from "./../assets/images/spec/1_sound.svg";
-import Riggers from "./../assets/images/spec/2_riggers.svg";
-import Production from "./../assets/images/spec/3_production.svg";
-import StageGround from "./../assets/images/spec/4_stage_ground.svg";
-import Video from "./../assets/images/spec/5_video.svg";
-import Light from "./../assets/images/spec/6_light.svg";
+import Video from "./../assets/images/spec/3_video.svg";
+import Light from "./../assets/images/spec/2_light.svg";
 import Stagehands from "./../assets/images/spec/7_stagehands.svg";
 
 import {
