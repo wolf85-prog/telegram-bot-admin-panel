@@ -439,19 +439,20 @@ class DistributionController {
                             
                             console.log("Отправка текста...")
                             
-                            sendTextToTelegram = await $host.get(url_send_msg);
-                            //console.log("sendTextToTelegram: ", sendTextToTelegram)
-
-                            if (!sendTextToTelegram.data.ok && sendTextToTelegram.data.description === "Forbidden: bot was blocked by the user") {
-                                await Worker.update({ 
-                                    deleted: true  
-                                },
-                                {
-                                    where: {
-                                        chatId: user,
-                                    },
-                                })
-                            }    
+                            sendTextToTelegram = await $host.get(url_send_msg)
+                                    .catch(async(err) => {
+                                        if (err.response.status === 403 && err.response.data.description === "Forbidden: bot was blocked by the user") {
+                                            await Worker.update({ 
+                                                deleted: true  
+                                            },
+                                            {
+                                                where: {
+                                                    chatId: user,
+                                                },
+                                            }) 
+                                        }
+                                    });
+  
 
                             const { status } = sendTextToTelegram;              
 
