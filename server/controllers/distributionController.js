@@ -440,7 +440,7 @@ class DistributionController {
                             console.log("Отправка текста...")
                             
                             sendTextToTelegram = await $host.get(url_send_msg);
-                            //console.log("sendTextToTelegram: ", sendTextToTelegram)
+                            console.log("sendTextToTelegram: ", sendTextToTelegram)
 
                             const { status } = sendTextToTelegram;              
 
