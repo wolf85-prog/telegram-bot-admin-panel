@@ -71,6 +71,7 @@ const Chat = () => {
 	 }
 
 	useEffect(() => {
+		console.log("personW: ", personW.id)
 		if (user) {
 			scrollToLastMsg();
 			setUserAsUnread(user.chatId);
@@ -262,6 +263,7 @@ const Chat = () => {
 
 			if(!file) {
 				const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`
+				
 				sendToTelegram = await $host.get(url_send_msg);
 			} else {
 				if (fileType === 'doc') { //(image.slice(-3) === 'gif' || image.slice(-3)==='zip') {
