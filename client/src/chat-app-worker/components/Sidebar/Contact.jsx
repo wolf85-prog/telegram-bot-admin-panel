@@ -10,7 +10,7 @@ import blockUser from "./../../../chat-app-worker/assets/images/stop.png";
 import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 
 const Contact = ({ contact, worker }) => {
-	console.log("worker contact: ", worker)
+	//console.log("worker contact: ", worker)
 	const { setPersonW } = useContext(AccountContext);
 	const host = process.env.REACT_APP_API_URL
 	
