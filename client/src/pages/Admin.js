@@ -66,11 +66,15 @@ const Admin = () => {
   const [oldClients, setOldClients]= useState([]);
   const [loading, setLoading]= useState(true);
   const [loading2, setLoading2]= useState(true);
-  const [sortWorkers, setSortWorkers]= useState([]);
   
+  const [sortWorkers, setSortWorkers]= useState([]);
   const [newWorkers, setNewWorkers]= useState([]);
   const [activWorkers, setActivWorkers]= useState([]);
   const [delWorkers, setDelWorkers]= useState([]);
+
+  const [sortWorkers2, setSortWorkers2]= useState([]);
+  const [activWorkers2, setActivWorkers2]= useState([]);
+  const [delWorkers2, setDelWorkers2]= useState([]);
 
   const [catCount, setCatCount] = useState([])
 
@@ -91,6 +95,7 @@ const Admin = () => {
   const [showWidget3, setShowWidget3] = useState(false)
   const [showWidget4, setShowWidget4] = useState(false)
   const [showWidget5, setShowWidget5] = useState(false)
+  const [showWidget6, setShowWidget6] = useState(false)
 
   const [showCharts, setShowCharts]= useState(false);
   const [showCharts2, setShowCharts2]= useState(false);
@@ -342,6 +347,7 @@ useEffect(() => {
         setShowWidget3(false)
         setShowWidget4(false)
         setShowWidget5(false)
+        setShowWidget6(false)
 
         //открыть стартовые плашки
         setShowWidget3(true)
@@ -447,6 +453,7 @@ useEffect(() => {
         setShowWidget3(false)
         setShowWidget4(false)
         setShowWidget5(false)
+        setShowWidget6(false)
 
         //открыть стартовые плашки
         setShowWidget3(true)
@@ -580,6 +587,7 @@ useEffect(() => {
         setShowWidget3(false)
         setShowWidget4(false)
         setShowWidget5(false)
+        setShowWidget6(false)
 
         //открыть стартовые плашки
         setShowWidget3(true)
@@ -674,6 +682,7 @@ useEffect(() => {
         setShowWidget3(false)
         setShowWidget4(false)
         setShowWidget5(false)
+        setShowWidget6(false)
 
         //открыть стартовые плашки
         setShowWidget3(true)
@@ -823,6 +832,7 @@ useEffect(() => {
         setShowWidget3(false)
         setShowWidget4(false)
         setShowWidget5(false)
+        setShowWidget6(false)
 
         //открыть стартовые плашки
         setShowWidget3(true)
@@ -970,7 +980,7 @@ useEffect(() => {
                   users={sortWorkers}
                   newUsers={newWorkers} 
                   activeUsers={activWorkers.length} 
-                  delUsers={24}
+                  delUsers={delWorkers.length}
                 />
                 :""}
 
@@ -1000,6 +1010,15 @@ useEffect(() => {
                   productionUsers={catCount[11].count}
                 />
                 : ""}
+
+                {showWidget6 
+                ?<WidgetsDropdown2
+                  users={sortWorkers2}
+                  newUsers={newWorkers} 
+                  activeUsers={activWorkers2.length} 
+                  delUsers={delWorkers2.length}
+                />
+                :""}
                 
 
 {/* График Сутки */}
