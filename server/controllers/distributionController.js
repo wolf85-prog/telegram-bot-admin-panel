@@ -466,9 +466,12 @@ class DistributionController {
 
                                 //обновить бд рассылку
                                 const newDistrib = await Distributionw.update(
-                                    { delivered: true,
+                                    {   
+                                        delivered: true,
+                                        deleted: false,  
                                         report: JSON.stringify(arrUsers),  
-                                        success: countSuccess},
+                                        success: countSuccess
+                                    },
                                     { where: {id: id} }
                                 )
                             }                    
