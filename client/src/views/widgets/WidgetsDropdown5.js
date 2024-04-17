@@ -252,7 +252,7 @@ const WidgetsDropdown5 = ({
               </span> */}
             </>
           }
-          title={"Технический продакшн"}
+          title={"Продакшн"}
           action={<img src={Production} alt='' width={35}/>}
           chart={
             <CChartLine
