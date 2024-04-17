@@ -225,6 +225,7 @@ fetchData()
 				  from: user.from,
 				  promoId: user.promoId,
 				  block: user.block,
+				  deleted: user.deleted,
 				}
 		
 				arrayWorker.push(newWorker)
