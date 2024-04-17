@@ -70,6 +70,7 @@ const Admin = () => {
   
   const [newWorkers, setNewWorkers]= useState([]);
   const [activWorkers, setActivWorkers]= useState([]);
+  const [delWorkers, setDelWorkers]= useState([]);
 
   const [catCount, setCatCount] = useState([])
 
@@ -157,6 +158,10 @@ const Admin = () => {
     //массив новых пользователей за текущий месяц
     const arr1 = workers.filter(item => new Date(item.createDate).getMonth() === currentMonth)
     setNewWorkers(arr1)
+
+    //массив удаленных пользователей
+    const arrDel = workers.filter(item => item.deleted === true)
+    setDelWorkers(arrDel)
 
   }, [workers])
 
@@ -1549,7 +1554,7 @@ useEffect(() => {
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
-                                    {/* {sortWorkers.map((item, index) => (
+                                    {delWorkers.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
                                         <CTableDataCell className="text-center">
                                           {String(new Date(item.createDate).getDate()).padStart(2, "0")+ "."+ String(new Date(item.createDate).getMonth()+1).padStart(2, "0") + "." +new Date(item.createDate).getFullYear()}
@@ -1588,7 +1593,7 @@ useEffect(() => {
                                         </CTableDataCell> 
                                       </CTableRow>
                                       ))
-                                    } */}
+                                    }
                                 </CTableBody>                   
                               </CTable>
                               
