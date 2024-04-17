@@ -479,8 +479,20 @@ class DistributionController {
                             url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${editButton ? keyboard : keyboard2}`
                             console.log("url_send_photo2: ", url_send_photo)
 
-                            sendPhotoToTelegram = await $host.get(url_send_photo);
-                            //console.log("sendPhotoToTelegram: ", sendPhotoToTelegram)
+                            sendPhotoToTelegram = await $host.get(url_send_photo)
+                                .catch(async(err) => {
+                                    if (err.response.status === 403 && err.response.data.description === "Forbidden: bot was blocked by the user") {
+                                        await Worker.update({ 
+                                            deleted: true  
+                                        },
+                                        {
+                                            where: {
+                                                chatId: user,
+                                            },
+                                        }) 
+                                    }
+                                });
+                            
 
                             const { status } = sendPhotoToTelegram;
 
