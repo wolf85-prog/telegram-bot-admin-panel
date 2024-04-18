@@ -104,10 +104,7 @@ const Admin = () => {
   const [showCharts5, setShowCharts5]= useState(false);
 
   const [showCountAll, setShowCountAll] = useState(false);
-
   const [showNick, setShowNick]= useState(false);
-
-  const [activeIndex, setActiveIndex] = useState(null);
 
   const [tabhub, setTabhub]= useState('');
 
@@ -115,18 +112,13 @@ const Admin = () => {
   const [periodDate2, setPeriodDate2] = useState("")
 
   const [startWeek, setStartWeek] = useState("")
-
   const [timerId, setTimerId] = useState()
-
   const [widthGrafik, setWdthGrafik] = useState(0);
-
   const [text, setText]= useState("");
-
   const [showTable, setShowTable] = useState([])
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
-
   
   useEffect(() => {
     //set tab
@@ -141,10 +133,9 @@ const Admin = () => {
 
   useEffect(() => {
     //get width
-    console.log('width', grafik.current ? grafik.current.offsetWidth : 0);
     setWdthGrafik(grafik.current ? grafik.current.offsetWidth - 100 : 0)
   }, [grafik.current]);
-
+//--------------------------------------------------------------------------------------------------
 
   //поиск
   useEffect(() => {
@@ -169,6 +160,7 @@ const Admin = () => {
     setDelWorkers(arrDel)
 
   }, [workers])
+//--------------------------------------------------------------------------------------------------
 
 //get workers active
 useEffect(() => {
@@ -194,6 +186,7 @@ useEffect(() => {
   fetchData();
   
 }, [workers]);
+//---------------------------------------------------------------------------------------------------------
 
   //get Contacts
   useEffect(() => {
@@ -202,7 +195,6 @@ useEffect(() => {
     const fetchData = async() => {
 
       console.log("workers (admin): ", workers)
-      //console.log("workersbot (admin): ", specusers.find((user) => user.chatId === '805436270').username)
       setLoading2(false)
 
       let messages = await getAllMessages()
@@ -263,7 +255,7 @@ useEffect(() => {
       const clientSort = [...filteredClients].sort((a, b) => {       
 				return b.usage.value-a.usage.value  //сортировка по убывающей активности  
 			}) 
-      console.log('userbots: ', clientSort)  
+ 
       setContacts(clientSort)  
       
       setTimeout(() => {
@@ -275,12 +267,13 @@ useEffect(() => {
     
   }, [clients, workers]);
 //---------------------------------------------------------------------------------------------
+
 //get Projects
   useEffect(() => {
     const arrProjects = []
 
     const fetchData = async () => {
-			//let response = await getProjects();
+			
       projs.map(async (project) => {
         const newProject = {
 					id: project.id,
@@ -301,8 +294,9 @@ useEffect(() => {
     
   },[projs])
 
+//-----------------------------------------------------------------------------------------------
+
   const openHub = (hub) => {
-    console.log(hub)
     if (hub === 'Workhub') { 
       setShowWorkhub(true)
       setShowRenthub(false)
@@ -383,7 +377,6 @@ useEffect(() => {
 
         //фильтрация таблицы за сутки
         const carrentDate = Date.now()
-        //console.log("carrentDate: ", carrentDate)
 
         //кол-во часов
         const currentChas = new Date().getHours()
@@ -391,15 +384,13 @@ useEffect(() => {
         
         //за несколько часов
         const needDate = carrentDate - currentChas*3600000
-        //console.log("needDate: ", needDate)
-        
-        
+
         let arr = workers.filter(item => new Date(item.createDate).getTime() > needDate);
 
         let categories = []
         let count_cat
 
-        console.log("arr1: ", arr)
+        //console.log("arr1: ", arr)
 
         specData.map((category)=> {
           count_cat = 0;
@@ -417,7 +408,7 @@ useEffect(() => {
           categories.push(obj)
         })
 
-        console.log("categories: ", categories)
+        //console.log("categories: ", categories)
         setCatCount(categories)
 
         setSortWorkers(arr)
@@ -425,7 +416,7 @@ useEffect(() => {
         let days1 = []
         let countSpec = 0
 
-        arr.map(item => console.log("arr: ", new Date(item.createDate)));
+        //arr.map(item => console.log("arr: ", new Date(item.createDate)));
 
         for (let i=0; i<=23; i++) {
 
@@ -1214,6 +1205,7 @@ useEffect(() => {
                 <CRow className="mb-12">
                   {/* Вкладки */}
                   <CCol sm={6}>
+                    {/* Renthub Workhub */} 
                     <CNav variant="tabs" className='dark-theme'>
                           <CNavItem>
                             <CNavLink 
@@ -1235,6 +1227,7 @@ useEffect(() => {
                   </CCol>
 
                   <CCol sm={6}>
+                    {/* Удаленные */} 
                     <CNav variant="tabs" className='dark-theme' style={{justifyContent: 'flex-end'}}>
                           <CNavItem>
                             <CNavLink 
@@ -1248,7 +1241,7 @@ useEffect(() => {
                   </CCol> 
                 </CRow>
                 
-                
+{/*---------------------------------------- Renthub ------------------------------------  */} 
                 <CCard className='rounded-bottom' style={{borderRadius: '0px', borderColor: '#131c21', borderTopRightRadius: '0.375rem'}}>
                   <CCardBody id="Renthub" style={{display: showRenthub ? 'block' : 'none'}}>
                     <CRow>
@@ -1367,7 +1360,7 @@ useEffect(() => {
                     </CRow>
                   </CCardBody>
 
-{/*-------------------------------------------------------------------------------------------  */}
+{/*----------------------------------------- Workhub ----------------------------------------  */}
      
                   <CCardBody id="Workhub" style={{display: showWorkhub ? 'block' : 'none'}}>
                     <CRow>
@@ -1498,7 +1491,7 @@ useEffect(() => {
                     </CRow>
                   </CCardBody>
 
-{/*-------------------------------------------------------------------------------------------  */}
+{/*----------------------------------------- Удаленные -----------------------------------------  */}
      
                   <CCardBody id="Deleted" style={{display: showDeleted ? 'block' : 'none'}}>
                     <CRow>

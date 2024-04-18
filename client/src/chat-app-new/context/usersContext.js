@@ -521,6 +521,7 @@ useEffect(() => {
     fetchData();
     
   },[])
+
 //------------------------------------------------------------------------------------------
 	//подключение админа к сокету и вывод всех подключенных
 	useEffect(()=>{
@@ -754,6 +755,7 @@ useEffect(() => {
 		setDistributionsWork(all)
 	}
 
+//------------------------------------------------------------------------------------
 	useEffect(() => {
 		socket.on("getMessage", fetchMessageResponse);
 		socket.on("getMessageSpec", fetchMessageSpecResponse);
@@ -773,6 +775,7 @@ useEffect(() => {
 		
 	}, [socket]);
 
+//------------------------------------------------------------------------------------
 	const setUserAsUnread = (userId) => {
 		_updateUserProp(userId, "unread", 0);
 	};
@@ -1189,6 +1192,7 @@ const delWMessageContext = (messageId, messageDate, chatId) => {
 		chatId,
 	})
 }
+
 //===============================================================
 //                  Notifications
 //===============================================================
