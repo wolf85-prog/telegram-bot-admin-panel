@@ -420,7 +420,12 @@ useEffect(() => {
         //console.log("categories: ", categories)
         setCatCount(categories)
 
+        //всего пользователей
         setSortWorkers(arr)
+
+        //массив удаленных пользователей
+        const arrDel = workers.filter(item => item.deleted === true && new Date(item.createDate).getTime() > needDate)
+        setDelWorkers(arrDel)
         
         let days1 = []
         let countSpec = 0
@@ -532,7 +537,12 @@ useEffect(() => {
 
         console.log("categories: ", categories)
         setCatCount(categories)
+
         setSortWorkers(arr)
+
+        //массив удаленных пользователей
+        const arrDel = workers.filter(item => item.deleted === true && new Date(item.createDate).getTime() > needDate)
+        setDelWorkers(arrDel)
 
         let week2 = []
         let nameDay = ''
@@ -672,8 +682,13 @@ useEffect(() => {
 
         console.log("categories: ", categories)
         setCatCount(categories)
+
         setSortWorkers(arr)
         //setMonthWorkers(arr)
+
+        //массив удаленных пользователей
+        const arrDel = workers.filter(item => item.deleted === true && new Date(item.createDate).getTime() > needDate)
+        setDelWorkers(arrDel)
 
         let countSpec = 0
         let month3 = []
@@ -769,7 +784,12 @@ useEffect(() => {
 
         console.log("categories: ", categories)
         setCatCount(categories)
+
         setSortWorkers(arr)
+
+        //массив удаленных пользователей
+        const arrDel = workers.filter(item => item.deleted === true && item.createDate.split('T')[0].split('-')[0] === '2024')
+        setDelWorkers(arrDel)
 
         arr.map((item)=>console.log("month: ", new Date(item.createDate).getMonth()+1))
 
@@ -1052,9 +1072,9 @@ useEffect(() => {
 
                 {showWidget6 
                 ?<WidgetsDropdown2
-                  users={sortWorkers2}
+                  users={sortWorkers}
                   newUsers={newWorkers} 
-                  activeUsers={activWorkers2.length} 
+                  activeUsers={activWorkers.length} 
                   delUsers={delWorkers2.length}
                 />
                 :""}
