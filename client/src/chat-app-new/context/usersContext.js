@@ -2,7 +2,6 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./socketContext";
 import { getContacts, getConversation, getMessages } from '../../http/chatAPI'
 import { getAllPretendent, getWContacts, getWConversation, getWConversations, getWMessages, getWorkers } from '../../http/workerAPI'
-import { getWorkerNotionId, getWorkerChildrenId} from './../../http/workerAPI';
 
 import { getDistributions, 
 	getDistributionsW, 
@@ -94,110 +93,109 @@ const UsersProvider = ({ children }) => {
 		window.location.reload();
 	}
 
-//---------get Managers---------------------------------------------------
-useEffect(() => {
-	const fetchData = async () => {
-		let response = await getContacts();
-		//console.log("contacts size: ", response.length)
+//---------get Userbots---------------------------------------------------
+	useEffect(() => {
+		const fetchData = async () => {
+			let response = await getContacts();
+			//console.log("contacts size: ", response.length)
 
-		const arrayContact = []
+			const arrayContact = []
 
-		response.map(async (user, index) => {
-			
-			let conversationId = await getConversation(user.chatId)
-			let messages = await getMessages(conversationId)
+			response.map(async (user, index) => {
+				
+				let conversationId = await getConversation(user.chatId)
+				let messages = await getMessages(conversationId)
 
-			//console.log("count message: ", messages.length)
+				//console.log("count message: ", messages.length)
 
-			//получить последнее сообщение
-			const messageDates = Object.keys(messages);
-			const recentMessageDate = messageDates[messageDates.length - 1];
-			const message = messages[recentMessageDate];
+				//получить последнее сообщение
+				const messageDates = Object.keys(messages);
+				const recentMessageDate = messageDates[messageDates.length - 1];
+				const message = messages[recentMessageDate];
 
-			const dateMessage = message ? messages[recentMessageDate].createdAt : "2000-01-01T00:00:00";
-			const lastMessage = message ? messages[recentMessageDate].text : "";			
+				const dateMessage = message ? messages[recentMessageDate].createdAt : "2000-01-01T00:00:00";
+				const lastMessage = message ? messages[recentMessageDate].text : "";			
 
-			const arrayMessage = []
-			const allDate = []
+				const arrayMessage = []
+				const allDate = []
 
-			messages.map(message => {
-				const d = new Date(message.createdAt);
-				const year = d.getFullYear();
-				const month = String(d.getMonth()+1).padStart(2, "0");
-				const day = String(d.getDate()).padStart(2, "0");
-				const chas = d.getHours();
-				const minut = String(d.getMinutes()).padStart(2, "0");
+				messages.map(message => {
+					const d = new Date(message.createdAt);
+					const year = d.getFullYear();
+					const month = String(d.getMonth()+1).padStart(2, "0");
+					const day = String(d.getDate()).padStart(2, "0");
+					const chas = d.getHours();
+					const minut = String(d.getMinutes()).padStart(2, "0");
 
-				const newDateMessage = `${day}.${month}.${year}`
+					const newDateMessage = `${day}.${month}.${year}`
 
-				const newMessage = {
-					date: newDateMessage,
-					content: message.text,
-					image: message.type === 'image' ? true : false,
-					descript: message.buttons ? message.buttons : '',
-					sender: message.senderId,
-					time: chas + ' : ' + minut,
-					status: 'sent',
-					id:message.messageId,
-					reply:message.replyId,
-				}
-				arrayMessage.push(newMessage)
-				allDate.push(newDateMessage)
-			})
-
-			const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
-
-			let obj = {};
-			for (let i = 0; i < dates.length; i++) {
-				const arrayDateMessage = []
-				for (let j = 0; j < arrayMessage.length; j++) {
-					if (arrayMessage[j].date === dates[i]) {
-						arrayDateMessage.push(arrayMessage[j])							
+					const newMessage = {
+						date: newDateMessage,
+						content: message.text,
+						image: message.type === 'image' ? true : false,
+						descript: message.buttons ? message.buttons : '',
+						sender: message.senderId,
+						time: chas + ' : ' + minut,
+						status: 'sent',
+						id:message.messageId,
+						reply:message.replyId,
 					}
-				}	
-				obj[dates[i]] = arrayDateMessage;
-			}
-
-			let first_name = user.firstname != null ? user.firstname : ''
-			let last_name = user.lastname != null ? user.lastname : ''
-
-			let chatName = user.username ? user.username : first_name + ' ' + last_name
-
-			const newUser = {
-				id: user.id,
-				name: chatName,
-				chatId: user.chatId,
-				avatar: user.avatar,
-				conversationId: conversationId,
-				unread: 0, 
-				pinned: false,
-				typing: false,
-				message:  lastMessage,
-				date: dateMessage,
-				messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
-			}
-
-			arrayContact.push(newUser)
-
-			//если элемент массива последний
-			if (index === response.length-1) {
-				const sortedClients = [...arrayContact].sort((a, b) => {       
-					var dateA = new Date(a.date), dateB = new Date(b.date) 
-					return dateB-dateA  //сортировка по убывающей дате  
+					arrayMessage.push(newMessage)
+					allDate.push(newDateMessage)
 				})
 
-				setUsers(sortedClients)
-				console.log("managers contacts: ", arrayContact)
-			}
-		})
-}
-  
-fetchData()
+				const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
 
-}, [])
+				let obj = {};
+				for (let i = 0; i < dates.length; i++) {
+					const arrayDateMessage = []
+					for (let j = 0; j < arrayMessage.length; j++) {
+						if (arrayMessage[j].date === dates[i]) {
+							arrayDateMessage.push(arrayMessage[j])							
+						}
+					}	
+					obj[dates[i]] = arrayDateMessage;
+				}
+
+				let first_name = user.firstname != null ? user.firstname : ''
+				let last_name = user.lastname != null ? user.lastname : ''
+
+				let chatName = user.username ? user.username : first_name + ' ' + last_name
+
+				const newUser = {
+					id: user.id,
+					name: chatName,
+					chatId: user.chatId,
+					avatar: user.avatar,
+					conversationId: conversationId,
+					unread: 0, 
+					pinned: false,
+					typing: false,
+					message:  lastMessage,
+					date: dateMessage,
+					messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
+				}
+
+				arrayContact.push(newUser)
+
+				//если элемент массива последний
+				if (index === response.length-1) {
+					const sortedClients = [...arrayContact].sort((a, b) => {       
+						var dateA = new Date(a.date), dateB = new Date(b.date) 
+						return dateB-dateA  //сортировка по убывающей дате  
+					})
+
+					setUsers(sortedClients)
+					console.log("managers contacts: ", arrayContact)
+				}
+			})
+	}
+	
+	fetchData()
+
+	}, [])
 
 //---------get Workers----------------------------------------------------
-
 	useEffect(() => {
 		//---------get UserWorkers-----------------------------------------
 		const fetchUserWorkerData = async () => {
@@ -231,26 +229,22 @@ fetchData()
 				arrayWorker.push(newWorker)
 			})
 		
-			setWorkers(arrayWorker)
-		
+			setWorkers(arrayWorker)	
 		
 			//2 все пользователи бота
-			let response2 = await getWContacts();
-			console.log("userWorkers size: ", response2)
+			let wuserbots = await getWContacts();
+			console.log("wuserbots size: ", wuserbots.length)
 			const arrayContact = []
 
-
 			//3 все беседы (conversations)
-			let response3 = await getWConversations();
-			console.log("workers: ", response3)
+			let convers = await getWConversations();
+			console.log("wconversations: ", convers)
 		  
-			response3.map(async (user, index) => {
+			convers.map(async (user, index) => {
 				
-				//let notion = {} //await getWorkerNotionId(user.chatId)
 				let worker = arrayWorker.find((item)=> item.chatId === user.members[0])
-				//console.log(worker)
 
-				let userbot = response2.find((item)=> item.chatId === worker?.chatId)		
+				let userbot = wuserbots.find((item)=> item.chatId === worker?.chatId)		
 				
 				let conversationId = await getWConversation(user.members[0])
 
@@ -348,7 +342,7 @@ fetchData()
 						
 			
 					//если элемент массива последний
-					if (index === response3.length-1) {
+					if (index === convers.length-1) {
 						const sortedClients = [...arrayContact].sort((a, b) => {       
 							var dateA = new Date(a.date), dateB = new Date(b.date) 
 							return dateB-dateA  //сортировка по убывающей дате  
@@ -382,17 +376,17 @@ fetchData()
 //------------------------------------------------------------------------------------------
 
   	//get Distribution
-  	useEffect(() => {
-    	const fetchData = async () => {
-			let response = await getDistributions();
-      		//console.log("distribution: ", response.length)
+  	// useEffect(() => {
+    // 	const fetchData = async () => {
+	// 		let response = await getDistributions();
+    //   		//console.log("distribution: ", response.length)
 
-			setDistributions(response)
-		}
+	// 		setDistributions(response)
+	// 	}
 
-	  	fetchData();
+	//   	fetchData();
 
-	},[])
+	// },[])
 //------------------------------------------------------------------------------------------
 
   	//get DistributionW
@@ -1211,8 +1205,8 @@ const fetchNotifAdmin = (data) => {
 			addNewName,
 			addNewAvatar,
 			usersOnline,
-			distributions, 
-			setDistributions,
+			// distributions, 
+			// setDistributions,
 			managers,
 			companys,
 			count,

@@ -20,18 +20,18 @@ import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 import deleteIcon from 'src/assets/images/delete.png'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { delDistribution } from 'src/http/adminAPI';
+import { delDistribution, getDistributions } from 'src/http/adminAPI';
 
 const Distribution = () => {
-  const { distributions: messages } = useUsersContext();
+  //const { distributions: messages } = useUsersContext();
   const [distributions, setDistributions]= useState([]);
   const [loading, setLoading]= useState(true);
 
   //get Distribution
   useEffect(() => {
     const fetchData = async () => {
-			//let response = await getDistributions();
-      console.log("distributions: ", messages)
+			let messages = await getDistributions();
+      //console.log("distributions: ", messages)
 
       let strReceivers = ''
 
@@ -69,7 +69,7 @@ const Distribution = () => {
 
     fetchData();
     
-  },[messages])
+  },[])
 
   {/* Удаление рассылки */}
   const removeDescription = async(desk) => {
