@@ -452,75 +452,7 @@ fetchData()
 
 	},[])
 
-//-----------------------------------------------------------------------------------------
-//			get pretendents
-//-----------------------------------------------------------------------------------------
-useEffect(() => {
-    const arrWorkers = []
 
-    setCountPretendent(0)
-
-    const fetchData = async () => {
-
-      let pretendents = await getAllPretendent();
-      console.log("pretendents context: ", pretendents)
-
-      let workers = await getWorkers()
-      console.log("workers context: ", workers)
-
-      let projects = await getProjects();
-      console.log("projects context: ", projects)
-
-      //setProjects(projects) 
-
-		pretendents.map(async (worker, i) => {
-
-			let userObject = projects.find((proj) => proj.id === worker.projectId);  
-			const projectName = userObject?.title
-
-			let userObject2 = workers.find((item) => item.chatId === worker.receiverId);  
-			const workerName = userObject2?.userfamily + " "+ userObject2?.username
-	
-			const worklist = userObject2?.worklist ? JSON.parse(userObject2?.worklist) : ''
-			const rang = userObject2?.rank ? userObject2?.rank : ''
-			const comment = userObject2?.comment ? userObject2?.comment : ''
-			const phone = userObject2?.phone
-
-			const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
-			const d2 = new Date(d)
-
-			const month = String(d2.getMonth()+1).padStart(2, "0");
-			const day = String(d2.getDate()).padStart(2, "0");
-			const chas = d2.getHours();
-			const min = String(d2.getMinutes()).padStart(2, "0");
-			
-			const newDate = `${day}.${month} ${chas}:${min}`;
-
-			//const workNotions = await getWorkerNotionId(worker.receiverId)
-		
-			//worklist
-			const newWorker = {
-			date: newDate, //newDate,
-			project: projectName,
-			//worker: workerName, 
-			workerFamily: userObject2?.userfamily,
-			workerName: userObject2?.username,
-			worklist: worklist, //workNotions[0].spec,
-			rang: rang, //workNotions[0]?.rank,
-			comment: comment, //workNotions[0]?.comment,
-			phone: phone, //workNotions[0]?.phone,
-			accept: worker.accept,
-			}
-			arrWorkers.push(newWorker)
-			//console.log(newWorker)
-
-			setPretendents(arrWorkers) 
-		})  
-    }
-
-    fetchData();
-    
-  },[])
 
 //------------------------------------------------------------------------------------------
 	//подключение админа к сокету и вывод всех подключенных

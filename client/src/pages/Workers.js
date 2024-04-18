@@ -20,14 +20,14 @@ import {
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
-import { getAllPretendent, getWorkers, getWorkersNotion100, getWorkersNotion, getWorkerNotionId } from './../http/workerAPI'
+import { getAllPretendent, getWorkers, getWorkersNotion100, getWorkersNotion, getWorkerNotionId} from './../http/workerAPI'
+
+import {getProjects} from './../http/adminAPI'
 
 
 //Workers.js
 const Workers = () => {
 
-  //const { pretendents } = useUsersContext();
-  //const { projects } = useUsersContext();
   const { setCountPretendent, pretendents } = useUsersContext();
 
   const [projects, setProjects] = useState([]); 
@@ -36,8 +36,6 @@ const Workers = () => {
   const [pending, setPending] = useState(true);  
 
   const [loading, setLoading]= useState(true);
-
-  const [visibleA, setVisibleA] = useState(false)
 
   const [showTable, setShowTable] = useState([])
   const [showComment, setShowComment] = useState([])
@@ -52,7 +50,86 @@ const Workers = () => {
   //   setSpec(filteredData);      
   // }, [text]);
 
-  //
+
+  //get Contacts
+  // useEffect(() => {
+  //   const fetchData = async() => {
+  //     console.log("workers-pretendent: ", pretendents)
+  //     setSpec(pretendents); 
+  //     setLoading(false)
+  //     setCountPretendent(0)
+  //   }
+  //   fetchData()
+  // }, [pretendents])
+
+
+  //-----------------------------------------------------------------------------------------
+  //			get pretendents
+  //-----------------------------------------------------------------------------------------
+  useEffect(() => {
+    const arrWorkers = []
+
+    setCountPretendent(0)
+
+    const fetchData = async () => {
+
+      let pretendents = await getAllPretendent();
+      //console.log("pretendents context: ", pretendents)
+
+      let workers = await getWorkers()
+      //console.log("workers context: ", workers)
+
+      let projects = await getProjects();
+      //console.log("projects workers: ", projects)
+
+      pretendents.map(async (worker, i) => {
+
+        let userObject = projects.find((proj) => proj.id === worker.projectId);  
+        const projectName = userObject?.title
+
+        let workerObject = workers.find((item) => item.chatId === worker.receiverId);  
+        const workerName = workerObject?.userfamily + " "+ workerObject?.username
+
+        const worklist = workerObject?.worklist ? JSON.parse(workerObject?.worklist) : ''
+        const rang = workerObject?.rank ? workerObject?.rank : ''
+        const comment = workerObject?.comment ? workerObject?.comment : ''
+        const phone = workerObject?.phone
+
+        const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+        const d2 = new Date(d)
+
+        const month = String(d2.getMonth()+1).padStart(2, "0");
+        const day = String(d2.getDate()).padStart(2, "0");
+        const chas = d2.getHours();
+        const min = String(d2.getMinutes()).padStart(2, "0");
+        
+        const newDate = `${day}.${month} ${chas}:${min}`;
+
+      
+        //worklist
+        const newWorker = {
+          date: newDate, 
+          project: projectName,
+          workerFamily: workerObject?.userfamily,
+          workerName: workerObject?.username,
+          worklist: worklist, 
+          rang: rang, 
+          comment: comment, 
+          phone: phone, 
+          accept: worker.accept,
+        }
+        arrWorkers.push(newWorker)
+
+        setSpec(arrWorkers) 
+      })  
+      setLoading(false)
+    }
+
+    fetchData();
+    
+  },[])
+
+  //Посмотреть
   const handleClick = (ind) => {
     console.log(ind, showTable[ind])
 
@@ -63,26 +140,12 @@ const Workers = () => {
   }
 
   const handleClickCom = (ind) => {
-    console.log(ind, showComment[ind])
 
     setShowComment(prevShownComment => ({
         ...prevShownComment,
         [ind]: !prevShownComment[ind]
       }));
   }
-
-  //get Contacts
-  useEffect(() => {
-
-    const fetchData = async() => {
-      console.log("workers-pretendent: ", pretendents)
-      setSpec(pretendents); 
-      setLoading(false)
-      setCountPretendent(0)
-    }
-
-    fetchData()
-  }, [pretendents])
 
   return (
     <div className='dark-theme'>
