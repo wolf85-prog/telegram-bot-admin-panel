@@ -344,24 +344,33 @@ useEffect(() => {
         setShowWidget6(false)
 
         //открыть стартовые плашки
-        setShowWidget3(true)
+        setShowWidget6(true)
 
         let i = 0
         setTimerId(setInterval(() => {
-          if (i % 3 === 0) {
-            setShowWidget3(false)
-            setShowWidget4(true)
-            setShowWidget5(false)
-          }
-          if ((i+1) % 3 === 0) {
-            setShowWidget3(false)
-            setShowWidget4(false)
-            setShowWidget5(true)
-          }
-          if ((i+2) % 3 === 0) {
-            setShowWidget3(true)
+          if ((i) % 4 === 0) {
+            setShowWidget3(true) //3
             setShowWidget4(false)
             setShowWidget5(false)
+            setShowWidget6(false)
+          }
+          if ((i+1) % 4 === 0) {
+            setShowWidget3(false)
+            setShowWidget4(true) //4
+            setShowWidget5(false)
+            setShowWidget6(false)
+          }
+          if ((i+2) % 4 === 0) {
+            setShowWidget3(false)
+            setShowWidget4(false)
+            setShowWidget5(true) //5
+            setShowWidget6(false)
+          }  
+          if ((i+3) % 4 === 0) {
+            setShowWidget3(false)
+            setShowWidget4(false)
+            setShowWidget5(false)
+            setShowWidget6(true) //6
           }
           i++
         }, 3000));
@@ -446,28 +455,37 @@ useEffect(() => {
         setShowWidget5(false)
         setShowWidget6(false)
 
-        //открыть стартовые плашки
-        setShowWidget3(true)
+         //открыть стартовые плашки
+         setShowWidget6(true)
 
-        let i = 0
-        setTimerId(setInterval(() => {
-          if (i % 3 === 0) {
-            setShowWidget3(false)
-            setShowWidget4(true)
-            setShowWidget5(false)
-          }
-          if ((i+1) % 3 === 0) {
-            setShowWidget3(false)
-            setShowWidget4(false)
-            setShowWidget5(true)
-          }
-          if ((i+2) % 3 === 0) {
-            setShowWidget3(true)
-            setShowWidget4(false)
-            setShowWidget5(false)
-          }
-          i++
-        }, 3000));
+         let i = 0
+         setTimerId(setInterval(() => {
+            if ((i) % 4 === 0) {
+              setShowWidget3(true) //3
+              setShowWidget4(false)
+              setShowWidget5(false)
+              setShowWidget6(false)
+            }
+            if ((i+1) % 4 === 0) {
+              setShowWidget3(false)
+              setShowWidget4(true) //4
+              setShowWidget5(false)
+              setShowWidget6(false)
+            }
+            if ((i+2) % 4 === 0) {
+              setShowWidget3(false)
+              setShowWidget4(false)
+              setShowWidget5(true) //5
+              setShowWidget6(false)
+            }  
+            if ((i+3) % 4 === 0) {
+              setShowWidget3(false)
+              setShowWidget4(false)
+              setShowWidget5(false)
+              setShowWidget6(true) //6
+            }
+            i++
+          }, 3000));
 
         setShowCharts(false)
         setShowCharts2(true)
@@ -580,27 +598,37 @@ useEffect(() => {
         setShowWidget5(false)
         setShowWidget6(false)
 
-        //открыть стартовые плашки
-        setShowWidget3(true)
-        let i = 0
-        setTimerId(setInterval(() => {
-          if (i % 3 === 0) {
-            setShowWidget3(false)
-            setShowWidget4(true)
-            setShowWidget5(false)
-          }
-          if ((i+1) % 3 === 0) {
-            setShowWidget3(false)
-            setShowWidget4(false)
-            setShowWidget5(true)
-          }
-          if ((i+2) % 3 === 0) {
-            setShowWidget3(true)
-            setShowWidget4(false)
-            setShowWidget5(false)
-          }
-          i++
-        }, 3000));
+         //открыть стартовые плашки
+         setShowWidget6(true)
+
+         let i = 0
+         setTimerId(setInterval(() => {
+           if ((i) % 4 === 0) {
+             setShowWidget3(true) //3
+             setShowWidget4(false)
+             setShowWidget5(false)
+             setShowWidget6(false)
+           }
+           if ((i+1) % 4 === 0) {
+             setShowWidget3(false)
+             setShowWidget4(true) //4
+             setShowWidget5(false)
+             setShowWidget6(false)
+           }
+           if ((i+2) % 4 === 0) {
+             setShowWidget3(false)
+             setShowWidget4(false)
+             setShowWidget5(true) //5
+             setShowWidget6(false)
+           }  
+           if ((i+3) % 4 === 0) {
+             setShowWidget3(false)
+             setShowWidget4(false)
+             setShowWidget5(false)
+             setShowWidget6(true) //6
+           }
+           i++
+         }, 3000));
 
         setShowCharts(false)
         setShowCharts2(false)
@@ -675,27 +703,37 @@ useEffect(() => {
         setShowWidget5(false)
         setShowWidget6(false)
 
-        //открыть стартовые плашки
-        setShowWidget3(true)
-        let i = 0
-        setTimerId(setInterval(() => {
-          if (i % 3 === 0) {
-            setShowWidget3(false)
-            setShowWidget4(true)
-            setShowWidget5(false)
-          }
-          if ((i+1) % 3 === 0) {
-            setShowWidget3(false)
-            setShowWidget4(false)
-            setShowWidget5(true)
-          }
-          if ((i+2) % 3 === 0) {
-            setShowWidget3(true)
-            setShowWidget4(false)
-            setShowWidget5(false)
-          }
-          i++
-        }, 3000));
+         //открыть стартовые плашки
+         setShowWidget6(true)
+
+         let i = 0
+         setTimerId(setInterval(() => {
+           if ((i) % 4 === 0) {
+             setShowWidget3(true) //3
+             setShowWidget4(false)
+             setShowWidget5(false)
+             setShowWidget6(false)
+           }
+           if ((i+1) % 4 === 0) {
+             setShowWidget3(false)
+             setShowWidget4(true) //4
+             setShowWidget5(false)
+             setShowWidget6(false)
+           }
+           if ((i+2) % 4 === 0) {
+             setShowWidget3(false)
+             setShowWidget4(false)
+             setShowWidget5(true) //5
+             setShowWidget6(false)
+           }  
+           if ((i+3) % 4 === 0) {
+             setShowWidget3(false)
+             setShowWidget4(false)
+             setShowWidget5(false)
+             setShowWidget6(true) //6
+           }
+           i++
+         }, 3000));
 
         setShowCharts(false)
         setShowCharts2(false)
@@ -826,25 +864,35 @@ useEffect(() => {
         setShowWidget6(false)
 
         //открыть стартовые плашки
-        setShowWidget3(true)
-        let i = 0
+        setShowWidget6(true)
+
+         let i = 0
         setTimerId(setInterval(() => {
-          if (i % 3 === 0) {
-            setShowWidget3(false)
-            setShowWidget4(true)
-            setShowWidget5(false)
-          }
-          if ((i+1) % 3 === 0) {
-            setShowWidget3(false)
-            setShowWidget4(false)
-            setShowWidget5(true)
-          }
-          if ((i+2) % 3 === 0) {
-            setShowWidget3(true)
-            setShowWidget4(false)
-            setShowWidget5(false)
-          }
-          i++
+           if ((i) % 4 === 0) {
+             setShowWidget3(true) //3
+             setShowWidget4(false)
+             setShowWidget5(false)
+             setShowWidget6(false)
+           }
+           if ((i+1) % 4 === 0) {
+             setShowWidget3(false)
+             setShowWidget4(true) //4
+             setShowWidget5(false)
+             setShowWidget6(false)
+           }
+           if ((i+2) % 4 === 0) {
+             setShowWidget3(false)
+             setShowWidget4(false)
+             setShowWidget5(true) //5
+             setShowWidget6(false)
+           }  
+           if ((i+3) % 4 === 0) {
+             setShowWidget3(false)
+             setShowWidget4(false)
+             setShowWidget5(false)
+             setShowWidget6(true) //6
+           }
+           i++
         }, 3000));
 
         setShowCharts(false)
