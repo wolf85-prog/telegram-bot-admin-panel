@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./socketContext";
-import { getContacts, getConversation, getMessages } from '../../http/chatAPI'
-import { getAllPretendent, getWContacts, getWConversation, getWConversations, getWMessages, getWorkers } from '../../http/workerAPI'
+import { getAllMessages, getContacts, getConversation, getMessages } from '../../http/chatAPI'
+import { getAllPretendent, getWContacts, getWConversation, 
+	getWConversations, getWMessages, getWorkers, getAllWMessages, 
+	getWMessagesCount } from '../../http/workerAPI'
 
 import { getDistributions, 
 	getDistributionsW, 
@@ -65,6 +67,9 @@ const UsersProvider = ({ children }) => {
 	const [workers, setWorkers] = useState([]); //useState(contacts);
 	const [countMessageWork, setCountMessageWork] = useState(0)
 	const [distributionsWork, setDistributionsWork] = useState([]); 
+
+	const [conversations, setConversations] = useState([]); 
+	const [wuserbots, setWuserbots] = useState([]); 
 
 	const [soundsNotif, setSoundsNotif] = useState([]); 
 
@@ -197,6 +202,15 @@ const UsersProvider = ({ children }) => {
 
 //---------get Workers----------------------------------------------------
 	useEffect(() => {
+		const fetchData = async () => {
+			//const res1 = await get
+		}
+
+		fetchData()
+
+	}, [])
+
+	useEffect(() => {
 		//---------get UserWorkers-----------------------------------------
 		const fetchUserWorkerData = async () => {
 		
@@ -239,20 +253,25 @@ const UsersProvider = ({ children }) => {
 			//3 все беседы (conversations)
 			let convers = await getWConversations()
 
+			//4 все сообщения бота
+			let messagesAll = await getWMessagesCount(5000)
+			console.log("messagesAll: ", messagesAll)
+
 			let count = 0
 			convers.forEach(async (user, index) => {
 		
 				let worker = arrayWorker.find((item)=> item.chatId === user.members[0])
 				let userbot = wuserbots.find((item)=> item.chatId === worker?.chatId)	
 				
-				let conversationId = await getWConversation(user.members[0])
+				let conversationId = user.id //await getWConversation(user.members[0])
+				//console.log("conversationId: ", conversationId)
 
 				let messages
 				let messages2 = []
 
 
 				if (conversationId) {
-					messages = await getWMessages(conversationId)
+					messages = await getWMessagesCount(conversationId)
 					count = count + messages.length
 					console.log("messages: ", count)
 				}

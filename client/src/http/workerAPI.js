@@ -201,6 +201,17 @@ export const getAllWMessages = async()=>{
     }
 }
 
+export const getWMessagesCount = async(count)=>{
+    try {
+        let response= await $host.get(`api/wmessage/get/${count}`);
+        
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getAllWMessages api",error.message);
+        
+    }
+}
+
 
 //api notion получить данные проекта по его id
 export const getProjectId = async (id) =>{

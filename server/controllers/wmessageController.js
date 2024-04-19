@@ -48,6 +48,22 @@ class WmessageController {
         }
     }
 
+    async getMessagesWorkerCount(req, res) {
+        const count = req.params.count
+        try {   
+            const messages = await Message.findAll({
+                order: [
+                    ['id', 'ASC'],
+                ],
+                offset: count, //count > 50 ? count - 50 : 0,
+                //limit : 50,
+            })
+            return res.status(200).json(messages);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
     //delete message
     async delMessageWorker(req, res) {
         const id = req.params.id
