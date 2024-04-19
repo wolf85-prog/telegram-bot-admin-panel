@@ -51,7 +51,6 @@ const Chat = () => {
 	const [fileType, setFileType] = useState("");
 
 	const [clearFile, setClearFile] = useState(false)
-
 	const [showCloseButton, setShowCloseButton] = useState(false)
 	const [showErrorFile, setShowErrorFile] = useState(false);
 
@@ -71,7 +70,7 @@ const Chat = () => {
 	 }
 
 	useEffect(() => {
-		console.log("personW: ", personW.id)
+		//console.log("personW: ", personW.id)
 		if (user) {
 			scrollToLastMsg();
 			setUserAsUnread(user.chatId);

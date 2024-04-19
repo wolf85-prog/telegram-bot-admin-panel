@@ -186,7 +186,7 @@ const UsersProvider = ({ children }) => {
 					})
 
 					setUsers(sortedClients)
-					console.log("managers contacts: ", arrayContact)
+					//console.log("managers contacts: ", arrayContact)
 				}
 			})
 	}
@@ -237,121 +237,130 @@ const UsersProvider = ({ children }) => {
 			const arrayContact = []
 
 			//3 все беседы (conversations)
-			let convers = await getWConversations();
-			console.log("wconversations: ", convers)
-		  
-			convers.map(async (user, index) => {
-				
-				let worker = arrayWorker.find((item)=> item.chatId === user.members[0])
+			let convers = await getWConversations()
 
-				let userbot = wuserbots.find((item)=> item.chatId === worker?.chatId)		
+			let count = 0
+			convers.forEach(async (user, index) => {
+		
+				let worker = arrayWorker.find((item)=> item.chatId === user.members[0])
+				let userbot = wuserbots.find((item)=> item.chatId === worker?.chatId)	
 				
 				let conversationId = await getWConversation(user.members[0])
 
 				let messages
 				let messages2 = []
 
-				if (conversationId !== null) {
+
+				if (conversationId) {
 					messages = await getWMessages(conversationId)
-					//console.log("messages: ", messages)
-
-					//получить последнее сообщение (без сообщений из рассылки)
-					if (messages) {
-						messages.map((message) => {
-							if (message.isBot === false || message.isBot === null) {
-								messages2.push(message)
-							}	
-						})
-					}
-					
-					//const newArray = array.map((element)=>element);
-					const messageDates = Object.keys(messages2); //messages
-
-					const recentMessageDate = messageDates[messageDates.length - 1];
-					const message = messages2[recentMessageDate];
-				
-					const dateMessage = message ? messages2[recentMessageDate].createdAt : "2000-01-01T00:00:00";
-					const lastMessage = message ? messages2[recentMessageDate].text : "";			
-				
-					const arrayMessage = []
-					const allDate = []
-				
-					if (messages) {
-						messages.map(message => {
-							const d = new Date(message.createdAt);
-							const year = d.getFullYear();
-							const month = String(d.getMonth()+1).padStart(2, "0");
-							const day = String(d.getDate()).padStart(2, "0");
-							const chas = d.getHours();
-							const minut = String(d.getMinutes()).padStart(2, "0");
-						
-							const newDateMessage = `${day}.${month}.${year}`
-					
-							const newMessage = {
-								date: newDateMessage,
-								content: message.text,
-								image: message.type === 'image' ? true : false,
-								descript: message.buttons ? message.buttons : '',
-								sender: message.senderId,
-								time: chas + ' : ' + minut,
-								status: 'sent',
-								id:message.messageId,
-								reply:message.replyId,
-							}
-							arrayMessage.push(newMessage)
-							allDate.push(newDateMessage)
-						})
-					}
-				
-					const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
-				
-					let obj = {};
-					for (let i = 0; i < dates.length; i++) {
-						const arrayDateMessage = []
-						for (let j = 0; j < arrayMessage.length; j++) {
-							if (arrayMessage[j].date === dates[i]) {
-								arrayDateMessage.push(arrayMessage[j])							
-							}
-						}	
-						obj[dates[i]] = arrayDateMessage;
-					}
-				
-					if (worker) {
-						const newUser = {
-							id: worker.id,
-							username: userbot.username ? userbot.username : '', // user.username ? user.username : '',
-							name: worker?.userfamily + " " + worker?.username, //notion[0]?.fio ? notion[0]?.fio : '',
-							city: worker?.city, //notion[0]?.city ? notion[0]?.city : '',
-							phone: worker?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
-							age: worker?.dateborn, //notion[0]?.age ? notion[0]?.age : "",
-							chatId: worker?.chatId,
-							avatar: worker?.avatar ? worker?.avatar : '', //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
-							conversationId: conversationId ? conversationId : 0,
-							block: userbot.block ? userbot.block : '',
-							blockw: worker?.block,
-							unread: 0, 
-							pinned: false,
-							typing: false,
-							message:  lastMessage,
-							date: dateMessage,
-							messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
-						}
-						//console.log(newUser)
-						arrayContact.push(newUser)
-					}
-						
-			
-					//если элемент массива последний
-					if (index === convers.length-1) {
-						const sortedClients = [...arrayContact].sort((a, b) => {       
-							var dateA = new Date(a.date), dateB = new Date(b.date) 
-							return dateB-dateA  //сортировка по убывающей дате  
-						})
-			
-						setUserWorkers(sortedClients)
-					}
+					count = count + messages.length
+					console.log("messages: ", count)
 				}
+
+				// if (conversationId !== null) {
+				// 	messages = await getWMessages(conversationId)
+				// 	//console.log("messages: ", messages)
+
+				// 	//получить последнее сообщение (без сообщений из рассылки)
+				// 	if (messages) {
+				// 		messages.map((message) => {
+				// 			if (message.isBot === false || message.isBot === null) {
+				// 				messages2.push(message)
+				// 			}	
+				// 		})
+				// 	}
+					
+				// 	//const newArray = array.map((element)=>element);
+				// 	const messageDates = Object.keys(messages2); //messages
+
+				// 	const recentMessageDate = messageDates[messageDates.length - 1];
+				// 	const message = messages2[recentMessageDate];
+				
+				// 	const dateMessage = message ? messages2[recentMessageDate].createdAt : "2000-01-01T00:00:00";
+				// 	const lastMessage = message ? messages2[recentMessageDate].text : "";			
+				
+				// 	const arrayMessage = []
+				// 	const allDate = []
+				
+				// 	if (messages) {
+				// 		messages.map(message => {
+				// 			const d = new Date(message.createdAt);
+				// 			const year = d.getFullYear();
+				// 			const month = String(d.getMonth()+1).padStart(2, "0");
+				// 			const day = String(d.getDate()).padStart(2, "0");
+				// 			const chas = d.getHours();
+				// 			const minut = String(d.getMinutes()).padStart(2, "0");
+						
+				// 			const newDateMessage = `${day}.${month}.${year}`
+					
+				// 			const newMessage = {
+				// 				date: newDateMessage,
+				// 				content: message.text,
+				// 				image: message.type === 'image' ? true : false,
+				// 				descript: message.buttons ? message.buttons : '',
+				// 				sender: message.senderId,
+				// 				time: chas + ' : ' + minut,
+				// 				status: 'sent',
+				// 				id:message.messageId,
+				// 				reply:message.replyId,
+				// 			}
+				// 			arrayMessage.push(newMessage)
+				// 			allDate.push(newDateMessage)
+				// 		})
+				// 	}
+				
+				// 	const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
+				
+				// 	let obj = {};
+				// 	for (let i = 0; i < dates.length; i++) {
+				// 		const arrayDateMessage = []
+				// 		for (let j = 0; j < arrayMessage.length; j++) {
+				// 			if (arrayMessage[j].date === dates[i]) {
+				// 				arrayDateMessage.push(arrayMessage[j])							
+				// 			}
+				// 		}	
+				// 		obj[dates[i]] = arrayDateMessage;
+				// 	}
+				
+				// 	if (worker) {
+				// 		const newUser = {
+				// 			id: worker.id,
+				// 			username: userbot.username ? userbot.username : '', // user.username ? user.username : '',
+				// 			name: worker?.userfamily + " " + worker?.username, //notion[0]?.fio ? notion[0]?.fio : '',
+				// 			city: worker?.city, //notion[0]?.city ? notion[0]?.city : '',
+				// 			phone: worker?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
+				// 			age: worker?.dateborn, //notion[0]?.age ? notion[0]?.age : "",
+				// 			chatId: worker?.chatId,
+				// 			avatar: worker?.avatar ? worker?.avatar : '', //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
+				// 			conversationId: conversationId ? conversationId : 0,
+				// 			block: userbot.block ? userbot.block : '',
+				// 			blockw: worker?.block,
+				// 			unread: 0, 
+				// 			pinned: false,
+				// 			typing: false,
+				// 			message:  lastMessage,
+				// 			date: dateMessage,
+				// 			messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
+				// 		}
+				// 		//console.log(newUser)
+				// 		arrayContact.push(newUser)
+				// 	}
+						
+			
+				// 	//если элемент массива последний
+				// 	if (index === convers.length-1) {
+				// 		const sortedClients = [...arrayContact].sort((a, b) => {       
+				// 			var dateA = new Date(a.date), dateB = new Date(b.date) 
+				// 			return dateB-dateA  //сортировка по убывающей дате  
+				// 		})
+			
+				// 		setUserWorkers(sortedClients)
+				// 	}
+				// }
 			})	
+					
+
+			
 		}
 		
 		//все сообщения специалистов

@@ -206,7 +206,7 @@ export const getAllWMessages = async()=>{
 export const getProjectId = async (id) =>{
     try {
         let response = await $host_worker.get('api/project/' + id);
-        console.log("projectIdAPI: ", response.data);
+        //console.log("projectIdAPI: ", response.data);
         return response.data;
     } catch (error) {
         console.log("error while calling getProjectId api", error.message);

@@ -28,7 +28,7 @@ import {getProjects} from './../http/adminAPI'
 //Workers.js
 const Workers = () => {
 
-  const { setCountPretendent, pretendents } = useUsersContext();
+  const { setCountPretendent, pretendents, setPretendents } = useUsersContext();
 
   const [projects, setProjects] = useState([]); 
   const [spec, setSpec] = useState([]); 
@@ -52,15 +52,15 @@ const Workers = () => {
 
 
   //get Contacts
-  // useEffect(() => {
-  //   const fetchData = async() => {
-  //     console.log("workers-pretendent: ", pretendents)
-  //     setSpec(pretendents); 
-  //     setLoading(false)
-  //     setCountPretendent(0)
-  //   }
-  //   fetchData()
-  // }, [pretendents])
+  useEffect(() => {
+    const fetchData = async() => {
+      console.log("workers-pretendent: ", pretendents)
+      setSpec(pretendents); 
+      setLoading(false)
+      setCountPretendent(0)
+    }
+    fetchData()
+  }, [pretendents])
 
 
   //-----------------------------------------------------------------------------------------
@@ -121,6 +121,7 @@ const Workers = () => {
         arrWorkers.push(newWorker)
 
         setSpec(arrWorkers) 
+        setPretendents(arrWorkers)
       })  
       setLoading(false)
     }
