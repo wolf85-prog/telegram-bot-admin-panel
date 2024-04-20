@@ -788,12 +788,11 @@ const fetchMessageSpecResponse = async(data) => {
 		
 		//console.log("Добавился новый претендент: ")
 		//play sound
-		audioPretendent.play();
+		//audioPretendent.play();
 
 		//пришел новый претендент
-		const res = await newCountMessagePretendent(countPretendent + 1)
-
-		setCountPretendent(countPretendent + 1);
+		//const res = await newCountMessagePretendent(countPretendent + 1)
+		//setCountPretendent(countPretendent + 1);
 
 		//get all pretendent
 		let pretendents = await getAllPretendent();
@@ -1039,6 +1038,13 @@ const fetchMessageSpecResponse = async(data) => {
 //получить исходящее сообщение в админку workhub
 const fetchAdminSpec = (data) => {
 	//console.log("Пришло сообщение в Админку: ", data)
+
+	if (data.text.startsWith('Заявка принята! Мы свяжемся с вами в ближайшее время.') && !data.text.includes('_reply_')) {
+		
+		//console.log("Добавился новый претендент: ")
+		//play sound
+		audioPretendent.play();
+	}
 
 	setUserWorkers((userWorkers) => {
 		const { senderId, receiverId, text, type, buttons, messageId, isBot } = data;
