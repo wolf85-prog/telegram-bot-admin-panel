@@ -264,10 +264,19 @@ const UsersProvider = ({ children }) => {
 					
 				let conversationId = user.id //await getWConversation(user.members[0])
 
-				let messages
+				let messages = []
 				let messages2 = []
 				
-				messages = messagesAll.filter(item => item.conversationId === conversationId.toString()) //await getWMessages(conversationId)
+				//messages = messagesAll.filter(item => item.conversationId === conversationId.toString()) //await getWMessages(conversationId)
+
+				//выбрать из всех сообщений только пользователя в кол-ве 20 шт.
+				for (const item of messagesAll) {
+					if (item.conversationId === conversationId.toString())
+						messages.push(item)
+					
+					if (messages.length === 20)
+					  break;
+				}
 
 				//получить последнее сообщение (без сообщений из рассылки)
 				if (messages.length > 0) {
