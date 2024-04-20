@@ -194,7 +194,7 @@ useEffect(() => {
 
     const fetchData = async() => {
 
-      console.log("workers (admin): ", workers)
+      console.log("workers (admin): ", workers.length)
       setLoading2(false)
 
       let messages = await getAllMessages()
@@ -698,7 +698,7 @@ useEffect(() => {
           countSpec = arrSpec.length
           const newObj= {
             name: i<10 ? '0'+ i : ''+ i, 
-            value: countSpec,
+            value: countSpec > 0 ? countSpec : '',
           }
           month3.push(newObj)
         }  
@@ -861,7 +861,7 @@ useEffect(() => {
           
           const newObj= {
                 name: nameMonth, 
-                value: countSpec,
+                value: countSpec > 0 ? countSpec : '',
               }
               year4.push(newObj)
         }  
@@ -967,7 +967,7 @@ useEffect(() => {
           countSpec = arrSpec.length
           const newObj= {
             name: nextDay.getDate().toString().length < 2 ? '0'+nextDay.getDate() : nextDay.getDate().toString(), 
-            value: countSpec,
+            value: countSpec > 0 ? countSpec : '',
           }
           period5.push(newObj)
           //nextDay = nextDay + j
@@ -1139,7 +1139,7 @@ useEffect(() => {
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
                   chart={
                     <ChartBar 
-                      range={12}
+                      range={40}
                       data={weekWorkers} 
                       data2={[]} //удаленные пользователи
                       // data2={
