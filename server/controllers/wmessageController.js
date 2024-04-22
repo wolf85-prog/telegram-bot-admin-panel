@@ -60,7 +60,7 @@ class WmessageController {
 
             const messages = await Message.findAll({
                 order: [
-                    ['id', 'DESC'],
+                    ['id', 'ASC'],
                 ],
                 offset: countAll > count ? countAll - count : 0,
                 //limit : 50,
