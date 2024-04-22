@@ -1,5 +1,8 @@
 import Icon from "./../../../components/Icon";
 import React, { useContext, useState, useRef } from "react";
+
+import { CSpinner } from '@coreui/react'
+
 // import pdf from "./../../../assets/images/PDFicon.png";
 import docIcon from "./../../../../chat-app-new/assets/images/DOCicon.jpg";
 import xlsIcon from "./../../../../chat-app-new/assets/images/XLSicon.png";
@@ -18,6 +21,7 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const tokenW = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 
 	const [showImage, setShowImage] = useState([false])
+	const [loading, setLoading]= useState(false);
 
 	const msgRef = useRef([]);
 
@@ -193,12 +197,22 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
     }
 
+	const startLoadMessages = () => {
+        console.log('personW: ', personW.id)
+		setLoading(!loading)
+    }
+
 
 	return dates.map((date, dateIndex) => {
 		const messages = allMessages[date];
 		
 		return (
 			<div key={dateIndex}>
+				<div className="chat__date-wrapper">{loading && <CSpinner/>}</div>
+				
+				<div className="chat__date-wrapper">
+					<span className="chat__date" onClick={startLoadMessages}>Загрузить ещё сообщения</span>
+				</div>
 				<div className="chat__date-wrapper">
 					<span className="chat__date"> {date}</span>
 				</div>
