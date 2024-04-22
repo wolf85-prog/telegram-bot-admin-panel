@@ -52,6 +52,7 @@ class WmessageController {
         }
     }
 
+    //выбрать сообщения с конца таблицы (последние)
     async getMessagesWorkerCount(req, res) {
         const count = req.params.count
         try {   
