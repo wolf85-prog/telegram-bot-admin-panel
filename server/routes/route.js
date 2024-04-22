@@ -114,7 +114,7 @@ route.post('/wmessage/add', newMessageWorker)
 route.delete('/wmessage/delete/:id', delMessageWorker)
 route.get('/wmessage/get', getAllMessagesWorker)
 route.get('/wmessage/get/:id', getMessagesWorker)
-route.get('/wmessage/get/:count', getMessagesWorkerCount)
+route.get('/wmessage/get/count/:count', getMessagesWorkerCount)
 
 route.post('/wconversation/add', newConversationWorker)
 route.get('/wconversation/get/:id', getConversationWorker)
