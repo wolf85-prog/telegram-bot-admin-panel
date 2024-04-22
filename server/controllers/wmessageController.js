@@ -65,7 +65,7 @@ class WmessageController {
                 offset: countAll > count ? countAll - count : 0,
                 //limit : 50,
             })
-            console.log("MessagesCount: ", messages)
+            console.log("MessagesCount: ", messages.length)
             return res.status(200).json(messages);
         } catch (error) {
             return res.status(500).json(error.message);
