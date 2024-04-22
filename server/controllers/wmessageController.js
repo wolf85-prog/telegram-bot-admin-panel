@@ -41,7 +41,11 @@ class WmessageController {
 
     async getAllMessagesWorker(req, res) {
         try {           
-            const messages = await Message.findAll()
+            const messages = await Message.findAll({
+                order: [
+                    ['id', 'DESC'], //DESC ASC
+                ],
+            })
             return res.status(200).json(messages);
         } catch (error) {
             return res.status(500).json(error.message);
@@ -51,11 +55,15 @@ class WmessageController {
     async getMessagesWorkerCount(req, res) {
         const count = req.params.count
         try {   
+            const countAll = await Message.count({
+                where: { conversationId },
+            });
+
             const messages = await Message.findAll({
                 order: [
                     ['id', 'ASC'],
                 ],
-                offset: count, //count > 50 ? count - 50 : 0,
+                offset: countAll > count ? countAll - count : 0,
                 //limit : 50,
             })
             return res.status(200).json(messages);
