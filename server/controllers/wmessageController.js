@@ -39,6 +39,30 @@ class WmessageController {
         }
     }
 
+    async getMessagesWorker2(req, res) {
+        const conversationId = req.params.id
+        const kol = req.params.count
+        try {   
+            const count = await Message.count({
+                where: { conversationId },
+            });
+
+            const messages = await Message.findAll({
+                where: {conversationId},
+                // Add order conditions here....
+                order: [
+                    ['id', 'ASC'],
+                ],
+                offset: count > 20*kol ? count - 20*kol : 0,
+                //limit : 50,
+            })
+            console.log("messages count: ", messages.length)
+            return res.status(200).json(messages);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
     async getAllMessagesWorker(req, res) {
         try {           
             const messages = await Message.findAll({

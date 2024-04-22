@@ -31,7 +31,7 @@ const { getProjects, getProjectsId } = require('../controllers/projectController
 const { uploadFile, getImage, sendNarush } = require( "../controllers/fileController.js")
 
 const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers/wuserbotController')
-const { newMessageWorker, delMessageWorker, getMessagesWorker, getAllMessagesWorker, getMessagesWorkerCount } = require('../controllers/wmessageController')
+const { newMessageWorker, delMessageWorker, getMessagesWorker, getMessagesWorker2, getAllMessagesWorker, getMessagesWorkerCount } = require('../controllers/wmessageController')
 const { newConversationWorker, getConversationWorker, getConversationsW } = require('../controllers/wconversationController')
 const { getWorkers, getWorker, editWorker, blockWorker} = require('../controllers/workersController')
 const { newPretendent, getPretendent, getPretendentId, getAllPretendent } = require('../controllers/pretendentController')
@@ -115,6 +115,7 @@ route.delete('/wmessage/delete/:id', delMessageWorker)
 route.get('/wmessage/get', getAllMessagesWorker)
 route.get('/wmessage/get/:id', getMessagesWorker)
 route.get('/wmessage/get/count/:count', getMessagesWorkerCount)
+route.get('/wmessage2/get/:id/:count', getMessagesWorker2)
 
 route.post('/wconversation/add', newConversationWorker)
 route.get('/wconversation/get/:id', getConversationWorker)

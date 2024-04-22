@@ -190,6 +190,22 @@ export const getWMessages = async(id)=>{
     }
 }
 
+export const getWMessages2 = async(id, count)=>{
+    try {
+        let response
+        if (id !== null) {
+            response = await $host.get(`api/wmessage2/get/${id}/${count}`);
+        } else {
+            return [] 
+        }
+         
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getMessages api",error.message);
+        
+    }
+}
+
 export const getAllWMessages = async()=>{
     try {
         let response= await $host.get(`api/wmessage/get`);
@@ -203,11 +219,11 @@ export const getAllWMessages = async()=>{
 
 export const getWMessagesCount = async(count)=>{
     try {
-        let response= await $host.get(`api/wmessage/get/${count}`);
+        let response= await $host.get(`api/wmessage/get/count/${count}`);
         
         return response.data;
     } catch (error) {
-        console.log("error while calling getAllWMessages api",error.message);
+        console.log("error while calling getWMessagesCount api",error.message);
         
     }
 }
