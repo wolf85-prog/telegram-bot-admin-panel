@@ -10,11 +10,11 @@ import formatTime from "./../../../../chat-app-new/utils/formatTime";
 import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { $host } from './../../../../http/index'
-import { delWMessage } from "src/http/workerAPI";
+import { delWMessage, getWMessages2 } from "src/http/workerAPI";
 import Dropdown from 'react-bootstrap/Dropdown';
 import imageIcon from "./../../../assets/images/sp-i-m-image-placeholder.svg";
 
-const Convo = ({ lastMsgRef, messages: allMessages }) => {
+const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 	const { personW } = useContext(AccountContext);
 	const dates = Object.keys(allMessages);  //['01/01/2023', 'Сегодня']
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
@@ -22,6 +22,10 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
 	const [showImage, setShowImage] = useState([false])
 	const [loading, setLoading]= useState(false);
+
+	const [newMessages, setNewMessages] = useState(allMessages)
+
+	console.log("allMessages: ", newMessages)
 
 	const msgRef = useRef([]);
 
@@ -197,14 +201,66 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 
     }
 
-	const startLoadMessages = () => {
-        console.log('personW: ', personW.id)
+	const startLoadMessages = async() => {
+        console.log('convId: ', convId)
 		setLoading(!loading)
+
+		const newMessages = await getWMessages2(convId, 10)
+		//console.log("newMessages: ", newMessages)
+
+		//setNewMessages(newMessages)
+
+		const arrayMessage = []
+		const allDate = []
+
+		if (newMessages) {
+			newMessages.reverse().map(message => {
+				const d = new Date(message.createdAt);
+				const year = d.getFullYear();
+				const month = String(d.getMonth()+1).padStart(2, "0");
+				const day = String(d.getDate()).padStart(2, "0");
+				const chas = d.getHours();
+				const minut = String(d.getMinutes()).padStart(2, "0");
+			
+				const newDateMessage = `${day}.${month}.${year}`
+		
+				const newMessage = {
+					date: newDateMessage,
+					content: message.text,
+					image: message.type === 'image' ? true : false,
+					descript: message.buttons ? message.buttons : '',
+					sender: message.senderId,
+					time: chas + ' : ' + minut,
+					status: 'sent',
+					id:message.messageId,
+					reply:message.replyId,
+				}
+				arrayMessage.push(newMessage)
+				allDate.push(newDateMessage)
+			})
+		}	
+		
+		const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
+		
+		let obj = {};
+		for (let i = 0; i < dates.length; i++) {
+			const arrayDateMessage = []
+			for (let j = 0; j < arrayMessage.length; j++) {
+				if (arrayMessage[j].date === dates[i]) {
+					arrayDateMessage.push(arrayMessage[j])							
+				}
+			}	
+			obj[dates[i]] = arrayDateMessage;
+		}
+
+		setNewMessages(obj)
+
+		setLoading(false)
     }
 
 
 	return dates.map((date, dateIndex) => {
-		const messages = allMessages[date];
+		const messages = newMessages[date]; //allMessages[date]; 
 		
 		return (
 			<div key={dateIndex}>

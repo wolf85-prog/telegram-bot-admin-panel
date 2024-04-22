@@ -53,7 +53,7 @@ class WmessageController {
                 order: [
                     ['id', 'ASC'],
                 ],
-                offset: count > 20*kol ? count - 20*kol : 0,
+                offset: count > 20+kol ? count - 20+kol : 0,
                 //limit : 50,
             })
             console.log("messages count: ", messages.length)
