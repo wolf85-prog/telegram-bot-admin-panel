@@ -208,15 +208,21 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		
 		return (
 			<div key={dateIndex}>
-				<div className="chat__date-wrapper">{loading && <CSpinner/>}</div>
+				{dateIndex === 0 && (
+					<>
+						<div className="chat__date-wrapper">{loading && <CSpinner/>}</div>
+					
+						<div className="chat__date-wrapper">
+							<span className="chat__date" onClick={startLoadMessages}>Загрузить ещё сообщения</span>
+						</div>
+					</>
+				)}
 				
-				<div className="chat__date-wrapper">
-					<span className="chat__date" onClick={startLoadMessages}>Загрузить ещё сообщения</span>
-				</div>
 				<div className="chat__date-wrapper">
 					<span className="chat__date"> {date}</span>
 				</div>
 				{dateIndex === 0 && (
+
 					<p className="chat__encryption-msg">
 						<Icon id="lock" className="chat__encryption-icon" />
 						Сообщения шифруются сквозным шифрованием. Никто за пределами этого чата не может читать или слушать их
