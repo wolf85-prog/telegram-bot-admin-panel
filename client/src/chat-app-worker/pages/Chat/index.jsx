@@ -392,7 +392,7 @@ const Chat = () => {
 	//отправка сценария
 	const sendMyMessage = async() => {
 		console.log("send passport")
-		audio.play();
+		//audio.play();
 
 		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
 
@@ -443,7 +443,7 @@ const Chat = () => {
 	//отправка сценария Правила
 	const sendMyMessage2 = async() => {
 		console.log("send rule")
-		audio.play();
+		//audio.play();
 
 		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
 
