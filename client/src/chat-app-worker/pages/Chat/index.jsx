@@ -457,16 +457,24 @@ const Chat = () => {
 
 		//отправить в телеграмм
 		let sendToTelegram
-		let text = ''
+		//let text = ''
 		
-		//Паспорт
+		//Правила
 		if (selectedElement === '9') {
 			//send photo
-			let anketa = 'https://proj.uley.team/upload/2023-11-10T15:12:36.770Z.png' //poster anketa
-			const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${user.chatId}&photo=${anketa}&reply_markup=${keyboard}`
-			console.log(url_send_photo)	
-			sendToTelegram = await $host.get(url_send_photo);
+			//let anketa = 'https://proj.uley.team/upload/2023-11-10T15:12:36.770Z.png' //poster anketa
+			const url_send_text = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${mess}`
+			console.log(url_send_text)	
+			sendToTelegram = await $host.get(url_send_text);
 		} 
+
+		// if (selectedElement === '9') {
+		// 	//send photo
+		// 	let anketa = 'https://proj.uley.team/upload/2023-11-10T15:12:36.770Z.png' //poster anketa
+		// 	const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${user.chatId}&photo=${anketa}&reply_markup=${keyboard}`
+		// 	console.log(url_send_photo)	
+		// 	sendToTelegram = await $host.get(url_send_photo);
+		// } 
 		
 
 		//отправить в админку
@@ -477,9 +485,9 @@ const Chat = () => {
 			receiverId: user.chatId,
 			conversationId: client.conversationId,
 			type: "text",
-			text: text,
+			text: mess,
 			messageId: sendToTelegram.data.result.message_id,
-			buttons: 'Прочитал правила',
+			buttons: '',
 		}
 			
 		// console.log("message send: ", message);
@@ -488,7 +496,7 @@ const Chat = () => {
 		await newMessage(message)
 	
 		//сохранить в контексте
-		addNewMessage2(user.chatId, text, 'text', 'Прочитал правила', client.conversationId, sendToTelegram.data.result.message_id);
+		addNewMessage2(user.chatId, mess, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
     }
 
 	const clickClearFile = () => {
