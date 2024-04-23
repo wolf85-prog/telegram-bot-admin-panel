@@ -23,9 +23,9 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 	const [showImage, setShowImage] = useState([false])
 	const [loading, setLoading]= useState(false);
 
-	const [newMessages, setNewMessages] = useState(allMessages)
+	const [newMessages, setNewMessages] = useState([])
 
-	console.log("allMessages: ", newMessages)
+	//console.log("allMessages: ", newMessages)
 
 	const msgRef = useRef([]);
 
@@ -260,7 +260,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
 
 	return dates.map((date, dateIndex) => {
-		const messages = newMessages[date]; //allMessages[date]; 
+		const messages = allMessages[date]; 
 		
 		return (
 			<div key={dateIndex}>
