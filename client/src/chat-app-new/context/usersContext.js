@@ -304,7 +304,7 @@ const UsersProvider = ({ children }) => {
 				const allDate = []
 				
 				if (messages) {
-					messages.reverse().map(message => {
+					messages.map(message => {
 						const d = new Date(message.createdAt);
 						const year = d.getFullYear();
 						const month = String(d.getMonth()+1).padStart(2, "0");
