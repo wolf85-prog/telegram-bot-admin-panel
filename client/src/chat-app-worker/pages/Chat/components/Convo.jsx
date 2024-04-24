@@ -206,7 +206,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		setLoading(!loading)
 
 		const newMessages = await getWMessages2(convId, 10)
-		//console.log("newMessages: ", newMessages)
+		console.log("newMessages: ", newMessages)
 
 		//setNewMessages(newMessages)
 
