@@ -14,21 +14,27 @@ const Sidebar = () => {
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
 	const [loading, setLoading]= useState(true);
+	const CountWorkers = 50
 
 	const navigate = useNavigate()
 
 	useEffect(() => {
-
 		//сортировка
-		const userSort = [...userWorkers].sort((a, b) => {       
-			var dateA = new Date(a.date), dateB = new Date(b.date) 
-			return dateB-dateA //сортировка по убывающей дате  
-		})
+		// const userSort = [...userWorkers].sort((a, b) => {       
+		// 	var dateA = new Date(a.date), dateB = new Date(b.date) 
+		// 	return dateB-dateA //сортировка по убывающей дате  
+		// })
+		const arr = []
 
-		//console.log("sidebar userWorkers: ", userSort)
-		setContacts(userSort)
+		for (const item of userWorkers) {		
+			arr.push(item)
+			if (arr.length === CountWorkers)
+			  break;
+		}
+
+		setContacts(arr)
 		
-		if(userWorkers.length > 0) {
+		if(arr.length > 0) {
 			setLoading(false)
 		}		
 		
@@ -36,8 +42,15 @@ const Sidebar = () => {
 
 	
 	useEffect(() => {
+		const arr = []
+		for (const item of userWorkers) {			
+			arr.push(item)
+			if (arr.length === CountWorkers)
+			  break;
+		}
 		const filteredData = userWorkers.filter(user=> (user.name+user.chatId)?.toLowerCase().includes(text.toLowerCase()));
-        setContacts(filteredData);      
+        
+		setContacts(text === '' ? arr : filteredData);      
     }, [text]);
 
 
