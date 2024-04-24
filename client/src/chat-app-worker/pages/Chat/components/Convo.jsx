@@ -1,5 +1,5 @@
 import Icon from "./../../../components/Icon";
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 
 import { CSpinner } from '@coreui/react'
 
@@ -16,7 +16,7 @@ import imageIcon from "./../../../assets/images/sp-i-m-image-placeholder.svg";
 
 const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 	const { personW } = useContext(AccountContext);
-	const dates = Object.keys(allMessages);  //['01/01/2023', 'Сегодня']
+	
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const tokenW = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 
@@ -24,14 +24,20 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 	const [loading, setLoading]= useState(false);
 
 	const [newMessages, setNewMessages] = useState([])
+	const [dates, setDates] = useState([])
 
-	//console.log("allMessages: ", newMessages)
+	//const dates = Object.keys(allMessages);  //['01/01/2023', 'Сегодня']
 
 	const msgRef = useRef([]);
 
 	let replyMessage;
 
 	const { delWMessageContext } = useUsersContext();
+
+	useEffect(() => {
+		setDates(Object.keys(allMessages))  //['01/01/2023', 'Сегодня']
+		setNewMessages(allMessages)
+	}, [allMessages])
 
 	//прокрутка
 	const scrollToMsg = (id) => {
@@ -205,7 +211,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
         console.log('convId: ', convId)
 		setLoading(!loading)
 
-		const newMessages = await getWMessages2(convId, 10)
+		const newMessages = await getWMessages2(convId, 30)
 		console.log("newMessages: ", newMessages)
 
 		//setNewMessages(newMessages)
@@ -260,7 +266,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
 
 	return dates.map((date, dateIndex) => {
-		const messages = allMessages[date]; 
+		const messages = newMessages[date] //allMessages[date]; 
 		
 		return (
 			<div key={dateIndex}>

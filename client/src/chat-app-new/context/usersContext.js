@@ -274,6 +274,8 @@ const UsersProvider = ({ children }) => {
 				for (const item of messagesAll) {
 					if (item.conversationId === conversationId.toString())
 						messages.push(item)
+					//if (item.conversationId === '480')
+					//	console.log(item.conversationId, item)
 					
 					if (messages.length === 10)
 					  break;
@@ -291,6 +293,8 @@ const UsersProvider = ({ children }) => {
 						}	
 					})
 				}
+
+				console.log("last messages: ", user, messages2)
 					
 				const messageDates = Object.keys(messages2); //messages
 
