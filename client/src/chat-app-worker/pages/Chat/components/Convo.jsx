@@ -289,7 +289,6 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
 	return dates.map((date, dateIndex) => {
 		const messages = newMessages[date] //allMessages[date]; 
-		//console.log("messages: ", messages)
 		
 		return (
 			<div key={dateIndex}>
@@ -297,7 +296,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 					<>
 						<div className="chat__date-wrapper">{loading && <CSpinner/>}</div>
 					
-						<div className="chat__date-wrapper">
+						<div className="chat__date-wrapper" style={{cursor: 'pointer'}}>
 							<span className="chat__date" onClick={startLoadMessages}>Загрузить ещё сообщения</span>
 						</div>
 					</>
