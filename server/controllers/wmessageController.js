@@ -47,6 +47,7 @@ class WmessageController {
             const count = await Message.count({
                 where: { conversationId },
             });
+            console.log("Всего сообщений спеца: ", count, kol + prev)
 
             const messages = await Message.findAll({
                 where: {conversationId},

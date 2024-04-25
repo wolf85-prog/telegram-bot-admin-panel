@@ -62,7 +62,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		const allDate = []
 
 		if (newMess) {
-			newMess.reverse().map(message => {
+			newMess.map(message => {
 				const d = new Date(message.createdAt);
 				const year = d.getFullYear();
 				const month = String(d.getMonth()+1).padStart(2, "0");
