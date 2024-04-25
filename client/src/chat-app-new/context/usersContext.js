@@ -254,8 +254,8 @@ const UsersProvider = ({ children }) => {
 			let convers = await getWConversations()
 
 			//4 все сообщения бота
-			let messagesAll = await getAllWMessages() //getWMessagesCount(1000) //getAllWMessages()
-			console.log("messagesAll: ", messagesAll.length)
+			let messagesAll = await getWMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
+			//console.log("messagesAll: ", messagesAll)
 
 			let count = 0
 			convers.forEach(async (user, index) => {
@@ -269,13 +269,12 @@ const UsersProvider = ({ children }) => {
 				let messages2 = []
 				
 				//messages = messagesAll.filter(item => item.conversationId === conversationId.toString()) //await getWMessages(conversationId)
+				//messagesAll.reverse()
 
 				//выбрать из всех сообщений только пользователя в кол-ве 10 шт.
-				for (const item of messagesAll) {
-					if (item.conversationId === conversationId.toString())
-						messages.push(item)
-					//if (item.conversationId === '480')
-					//	console.log(item.conversationId, item)
+				for (let i = messagesAll.length-1; i >= 0; i--) {
+					if (messagesAll[i].conversationId === conversationId.toString())
+						messages.push(messagesAll[i])
 					
 					if (messages.length === 10)
 					  break;
@@ -283,11 +282,9 @@ const UsersProvider = ({ children }) => {
 
 				//console.log("messages: ", messages)
 
-				//messages = await getWMessages()
-
 				//получить последнее сообщение (без сообщений из рассылки)
 				if (messages.length > 0) {
-					messages.map((message) => {
+					[...messages].reverse().map((message) => {
 						if (message.isBot === false || message.isBot === null) {
 							messages2.push(message)
 						}	
@@ -308,7 +305,7 @@ const UsersProvider = ({ children }) => {
 				const allDate = []
 				
 				if (messages) {
-					messages.map(message => {
+					[...messages].reverse().map(message => {
 						const d = new Date(message.createdAt);
 						const year = d.getFullYear();
 						const month = String(d.getMonth()+1).padStart(2, "0");
