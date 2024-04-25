@@ -39,11 +39,13 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 	useEffect(() => {
 		setDates(Object.keys(allMessages))  //['01/01/2023', 'Сегодня']
 		setNewMessages(allMessages)
+
+		console.log("array: ", allMessages[Object.keys(allMessages)].length)
 		
-		Object.keys(allMessages).map((date, dateIndex) => {
-			array.push(newMessages[date]) //allMessages[date];
-		}) 
-		setAllArr(array.length)
+		// Object.keys(allMessages).map((date, dateIndex) => {
+		// 	array.push(newMessages[date]) //allMessages[date];
+		// }) 
+		setAllArr(allMessages[Object.keys(allMessages)].length)
 		
 	}, [allMessages])
 
@@ -53,7 +55,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
 		console.log("array: ", allArr)
 
-		const newMess = await getWMessages2(convId, 30, 10)
+		const newMess = await getWMessages2(convId, 20, allArr)
 		console.log("newMessages: ", newMess.length + allArr)
 
 		setAllArr(newMess.length + allArr)
