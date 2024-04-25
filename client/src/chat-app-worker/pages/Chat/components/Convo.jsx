@@ -40,14 +40,22 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		setDates(Object.keys(allMessages))  //['01/01/2023', 'Сегодня']
 		setNewMessages(allMessages)
 
-		console.log("array: ", allMessages[Object.keys(allMessages)].length)
+		//console.log("array: ", allMessages)
+
+		const objDate = Object.keys(allMessages)
 		
-		// Object.keys(allMessages).map((date, dateIndex) => {
-		// 	array.push(newMessages[date]) //allMessages[date];
-		// }) 
-		setAllArr(allMessages[Object.keys(allMessages)].length)
+		objDate.map((date, dateIndex) => {
+			array.push(...allMessages[date]) //allMessages[date];
+		}) 
+		//console.log("array: ", array)
+		setAllArr(array.length)
 		
 	}, [allMessages])
+
+	useEffect(() => {
+		setDates(Object.keys(newMessages))  //['01/01/2023', 'Сегодня']
+		
+	}, [newMessages])
 
 	const startLoadMessages = async() => {
         console.log('convId: ', convId)
@@ -102,6 +110,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 			}	
 			obj[dates[i]] = arrayDateMessage;
 		}
+		console.log("obj: ", obj)
 
 		setNewMessages(obj)
 
