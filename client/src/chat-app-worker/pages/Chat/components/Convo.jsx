@@ -25,28 +25,38 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
 	const [newMessages, setNewMessages] = useState([])
 	const [dates, setDates] = useState([])
+	const [allArr, setAllArr] = useState(0)
 
 	//const dates = Object.keys(allMessages);  //['01/01/2023', 'Сегодня']
 
 	const msgRef = useRef([]);
 
 	let replyMessage;
+	let array = []
 
 	const { delWMessageContext } = useUsersContext();
 
 	useEffect(() => {
 		setDates(Object.keys(allMessages))  //['01/01/2023', 'Сегодня']
 		setNewMessages(allMessages)
+		
+		Object.keys(allMessages).map((date, dateIndex) => {
+			array.push(newMessages[date]) //allMessages[date];
+		}) 
+		setAllArr(array.length)
+		
 	}, [allMessages])
 
 	const startLoadMessages = async() => {
         console.log('convId: ', convId)
 		setLoading(!loading)
 
-		const newMess = await getWMessages2(convId, 30, newMessages.length)
-		console.log("newMessages: ", newMessages.length)
+		console.log("array: ", allArr)
 
-		//setNewMessages(newMessages)
+		const newMess = await getWMessages2(convId, 30, 10)
+		console.log("newMessages: ", newMess.length + allArr)
+
+		setAllArr(newMess.length + allArr)
 
 		const arrayMessage = []
 		const allDate = []
