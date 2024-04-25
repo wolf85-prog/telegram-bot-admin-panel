@@ -63,9 +63,9 @@ const Profile = ({ user, closeSidebar }) => {
 
 		//получить данные из ноушена по телеграм id
 		const fetchData = async () => {
-			console.log("user: ", user)
+			//console.log("user: ", user)
 			const fio_notion = await getWorkerNotionId(user.chatId)
-			console.log("worker: ", fio_notion[0])
+			//console.log("worker: ", fio_notion[0])
 			setWorker(fio_notion[0])
 
 			//const avatars = await getWorkerChildrenId(fio_notion[0]?.id)
@@ -88,7 +88,7 @@ const Profile = ({ user, closeSidebar }) => {
 				var width = imgsize.width;
 
 				// code here to use the dimensions
-				console.log("height: ", height, "width: ", width)
+				//console.log("height: ", height, "width: ", width)
 			}
 
 			imgsize.src = user?.avatar;
@@ -111,7 +111,7 @@ const Profile = ({ user, closeSidebar }) => {
 
 		const fetch = async() => {
 			const pretendentArray = await getLastPretendent(user.chatId)
-			console.log("pretendentArray: ", pretendentArray)
+			console.log("pretendentArray: ", pretendentArray.length)
 			
 			if (pretendentArray.length > 0) {
 				const projectId = pretendentArray[pretendentArray.length-1]?.projectId

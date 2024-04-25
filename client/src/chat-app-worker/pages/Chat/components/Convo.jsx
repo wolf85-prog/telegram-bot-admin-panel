@@ -39,6 +39,64 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		setNewMessages(allMessages)
 	}, [allMessages])
 
+	const startLoadMessages = async() => {
+        console.log('convId: ', convId)
+		setLoading(!loading)
+
+		const newMessages = await getWMessages2(convId, 30)
+		console.log("newMessages: ", newMessages.length)
+
+		//setNewMessages(newMessages)
+
+		const arrayMessage = []
+		const allDate = []
+
+		if (newMessages) {
+			newMessages.reverse().map(message => {
+				const d = new Date(message.createdAt);
+				const year = d.getFullYear();
+				const month = String(d.getMonth()+1).padStart(2, "0");
+				const day = String(d.getDate()).padStart(2, "0");
+				const chas = d.getHours();
+				const minut = String(d.getMinutes()).padStart(2, "0");
+			
+				const newDateMessage = `${day}.${month}.${year}`
+		
+				const newMessage = {
+					date: newDateMessage,
+					content: message.text,
+					image: message.type === 'image' ? true : false,
+					descript: message.buttons ? message.buttons : '',
+					sender: message.senderId,
+					time: chas + ' : ' + minut,
+					status: 'sent',
+					id:message.messageId,
+					reply:message.replyId,
+				}
+				arrayMessage.push(newMessage)
+				allDate.push(newDateMessage)
+			})
+		}	
+		
+		const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
+		
+		let obj = {};
+		for (let i = 0; i < dates.length; i++) {
+			const arrayDateMessage = []
+			for (let j = 0; j < arrayMessage.length; j++) {
+				if (arrayMessage[j].date === dates[i]) {
+					arrayDateMessage.push(arrayMessage[j])							
+				}
+			}	
+			obj[dates[i]] = arrayDateMessage;
+		}
+
+		setNewMessages(obj)
+
+		setLoading(false)
+    }
+
+
 	//прокрутка
 	const scrollToMsg = (id) => {
 		console.log(id)
@@ -207,66 +265,10 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
     }
 
-	const startLoadMessages = async() => {
-        console.log('convId: ', convId)
-		setLoading(!loading)
-
-		const newMessages = await getWMessages2(convId, 30)
-		console.log("newMessages: ", newMessages)
-
-		//setNewMessages(newMessages)
-
-		const arrayMessage = []
-		const allDate = []
-
-		if (newMessages) {
-			newMessages.reverse().map(message => {
-				const d = new Date(message.createdAt);
-				const year = d.getFullYear();
-				const month = String(d.getMonth()+1).padStart(2, "0");
-				const day = String(d.getDate()).padStart(2, "0");
-				const chas = d.getHours();
-				const minut = String(d.getMinutes()).padStart(2, "0");
-			
-				const newDateMessage = `${day}.${month}.${year}`
-		
-				const newMessage = {
-					date: newDateMessage,
-					content: message.text,
-					image: message.type === 'image' ? true : false,
-					descript: message.buttons ? message.buttons : '',
-					sender: message.senderId,
-					time: chas + ' : ' + minut,
-					status: 'sent',
-					id:message.messageId,
-					reply:message.replyId,
-				}
-				arrayMessage.push(newMessage)
-				allDate.push(newDateMessage)
-			})
-		}	
-		
-		const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
-		
-		let obj = {};
-		for (let i = 0; i < dates.length; i++) {
-			const arrayDateMessage = []
-			for (let j = 0; j < arrayMessage.length; j++) {
-				if (arrayMessage[j].date === dates[i]) {
-					arrayDateMessage.push(arrayMessage[j])							
-				}
-			}	
-			obj[dates[i]] = arrayDateMessage;
-		}
-
-		setNewMessages(obj)
-
-		setLoading(false)
-    }
-
 
 	return dates.map((date, dateIndex) => {
 		const messages = newMessages[date] //allMessages[date]; 
+		//console.log("messages: ", messages)
 		
 		return (
 			<div key={dateIndex}>

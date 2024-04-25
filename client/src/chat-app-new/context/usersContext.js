@@ -255,7 +255,7 @@ const UsersProvider = ({ children }) => {
 
 			//4 все сообщения бота
 			let messagesAll = await getWMessagesCount(1000) //getAllWMessages()
-			console.log("messagesAll: ", messagesAll)
+			console.log("messagesAll: ", messagesAll.length)
 
 			let count = 0
 			convers.forEach(async (user, index) => {
@@ -294,7 +294,7 @@ const UsersProvider = ({ children }) => {
 					})
 				}
 
-				console.log("last messages: ", user, messages2)
+				//console.log("last messages: ", user, messages2)
 					
 				const messageDates = Object.keys(messages2); //messages
 
