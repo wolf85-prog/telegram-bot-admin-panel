@@ -254,7 +254,7 @@ const UsersProvider = ({ children }) => {
 			let convers = await getWConversations()
 
 			//4 все сообщения бота
-			let messagesAll = await getWMessagesCount(1000) //getAllWMessages()
+			let messagesAll = await getAllWMessages() //getWMessagesCount(1000) //getAllWMessages()
 			console.log("messagesAll: ", messagesAll.length)
 
 			let count = 0

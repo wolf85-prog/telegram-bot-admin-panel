@@ -55,6 +55,7 @@ const Contact = ({ contact, worker }) => {
 
 	return (
 		<Link
+			key={contact.id}
 			className="sidebar-contact"
 			onClick={() => getUser()}
 		>

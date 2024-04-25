@@ -124,7 +124,7 @@ const Sidebar = () => {
 				{loading ? 
 				<CSpinner style={{margin: '50%'}}/> :
 				
-				contacts.map((contact) => (
+				contacts.map((contact, ind) => (
 					contact.chatId !== chatAdminId &&
                     <>   
 						<Contact contact={contact} worker={workers.filter((item)=> item.chatId === contact.chatId)} />

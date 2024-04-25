@@ -67,7 +67,7 @@ class WmessageController {
         try {           
             const messages = await Message.findAll({
                 order: [
-                    ['id', 'DESC'], //DESC ASC
+                    ['id', 'ASC'], //DESC ASC
                 ],
             })
             return res.status(200).json(messages);
@@ -81,7 +81,7 @@ class WmessageController {
         const count = req.params.count
         try {   
             const countAll = await Message.count();
-            console.log("MessagesAll: ", countAll)
+            //console.log("MessagesAll: ", countAll)
 
             const messages = await Message.findAll({
                 order: [
@@ -90,7 +90,7 @@ class WmessageController {
                 offset: countAll > count ? countAll - count : 0,
                 //limit : 50,
             })
-            console.log("MessagesCount: ", messages.length)
+            //console.log("MessagesCount: ", messages.length)
             return res.status(200).json(messages);
         } catch (error) {
             return res.status(500).json(error.message);
