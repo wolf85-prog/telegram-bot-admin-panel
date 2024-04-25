@@ -190,11 +190,11 @@ export const getWMessages = async(id)=>{
     }
 }
 
-export const getWMessages2 = async(id, count)=>{
+export const getWMessages2 = async(id, count, prev)=>{
     try {
         let response
         if (id !== null) {
-            response = await $host.get(`api/wmessage2/get/${id}/${count}`);
+            response = await $host.get(`api/wmessage2/get/${id}/${count}/${prev}`);
         } else {
             return [] 
         }

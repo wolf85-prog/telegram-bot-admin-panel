@@ -43,7 +43,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
         console.log('convId: ', convId)
 		setLoading(!loading)
 
-		const newMessages = await getWMessages2(convId, 30)
+		const newMess = await getWMessages2(convId, 30, newMessages.length)
 		console.log("newMessages: ", newMessages.length)
 
 		//setNewMessages(newMessages)
@@ -51,8 +51,8 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		const arrayMessage = []
 		const allDate = []
 
-		if (newMessages) {
-			newMessages.reverse().map(message => {
+		if (newMess) {
+			newMess.reverse().map(message => {
 				const d = new Date(message.createdAt);
 				const year = d.getFullYear();
 				const month = String(d.getMonth()+1).padStart(2, "0");

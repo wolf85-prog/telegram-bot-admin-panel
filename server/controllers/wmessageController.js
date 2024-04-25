@@ -42,6 +42,7 @@ class WmessageController {
     async getMessagesWorker2(req, res) {
         const conversationId = req.params.id
         const kol = req.params.count
+        const prev = req.params.prev
         try {   
             const count = await Message.count({
                 where: { conversationId },
@@ -53,7 +54,7 @@ class WmessageController {
                 order: [
                     ['id', 'ASC'],
                 ],
-                offset: count > kol ? count - kol : 0,
+                offset: count > kol + prev ? count - kol + prev : 0,
                 //limit : 50,
             })
             console.log("messages count: ", messages.length)
