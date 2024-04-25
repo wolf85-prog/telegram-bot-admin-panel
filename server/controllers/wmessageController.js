@@ -47,15 +47,16 @@ class WmessageController {
             const count = await Message.count({
                 where: { conversationId },
             });
-            console.log("Всего сообщений спеца: ", count, parseInt(kol) + parseInt(prev))
-
+            const k = parseInt(kol) + parseInt(prev)
+            console.log("Всего сообщений спеца: ", count, k)
+            
             const messages = await Message.findAll({
                 where: {conversationId},
                 // Add order conditions here....
                 order: [
                     ['id', 'ASC'],
                 ],
-                offset: count > parseInt(kol) + parseInt(prev) ? count - parseInt(kol) + parseInt(prev) : 0,
+                offset: count > k ? count - k : 0,
                 //limit : 50,
             })
             console.log("messages count: ", messages.length)
