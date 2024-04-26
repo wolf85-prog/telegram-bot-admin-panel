@@ -20,7 +20,7 @@ import {
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
-import { getAllPretendent, getWorkers, getWorkersNotion100, getWorkersNotion, getWorkerNotionId} from './../http/workerAPI'
+import { getAllPretendent, getAllPretendentCount, getWorkers, getWorkersNotion100, getWorkersNotion, getWorkerNotionId} from './../http/workerAPI'
 
 import {getProjects} from './../http/adminAPI'
 

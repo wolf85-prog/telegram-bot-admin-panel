@@ -291,11 +291,6 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
     }
 
-	const handleClick2 = (elem) => {
-		var id = elem.target.id
-		console.log("id: ", id)
-	}
-
 
 	return dates.map((date, dateIndex) => {
 		const messages = newMessages[date] //allMessages[date]; 

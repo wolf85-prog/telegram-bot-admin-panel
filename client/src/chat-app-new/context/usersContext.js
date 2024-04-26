@@ -65,7 +65,9 @@ const UsersProvider = ({ children }) => {
 	const [countPretendent, setCountPretendent] = useState(0)
 
 	const [userWorkers, setUserWorkers] = useState([]); //useState(contacts);
-	const [workers, setWorkers] = useState([]); //useState(contacts);
+	const [workers, setWorkers] = useState([]); //100 последних специалистов;
+	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
+
 	const [countMessageWork, setCountMessageWork] = useState(0)
 	const [distributionsWork, setDistributionsWork] = useState([]); 
 
@@ -215,8 +217,37 @@ const UsersProvider = ({ children }) => {
 		//---------get UserWorkers-----------------------------------------
 		const fetchUserWorkerData = async () => {
 		
-			//1 все специалисты
-			let response = await getWorkersCount(100);
+			//0 все специалисты
+			let all = await getWorkers()
+			const arrayWorkerAll = []
+		
+			all.map(async (user) => {
+				const newWorker = {
+				  id: user.id,
+				  userfamily: user.userfamily,
+				  username: user.username,
+				  phone: user.phone,
+				  dateborn: user.dateborn,
+				  city: user.city, 
+				  companys: user.companys,
+				  stag: user.stag,
+				  worklist:  user.worklist,
+				  chatId: user.chatId,
+				  createDate: user.createdAt,
+				  avatar: user.avatar,
+				  from: user.from,
+				  promoId: user.promoId,
+				  block: user.block,
+				  deleted: user.deleted,
+				}
+		
+				arrayWorkerAll.push(newWorker)
+			})
+		
+			setWorkersAll(arrayWorkerAll)
+
+			//1 все специалисты 100
+			let response = await getWorkersCount(100, workers.length);
 			console.log("workers size: ", response.length)
 		
 			const arrayWorker = []
@@ -1255,6 +1286,8 @@ const fetchNotifAdmin = (data) => {
 			setUserWorkerAsUnread,
 			workers,
 			setWorkers,
+			workersAll,
+			setWorkersAll,
 			addNewMessage2,
 			delWMessageContext,
 			countMessageWork,

@@ -86,6 +86,15 @@ export const getAllPretendent = async () =>{
     }
 }
 
+export const getAllPretendentCount = async (count, prev) =>{
+    try {
+       let response = await $host.get(`api/pretendents/count/get/${count}/${prev}`);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getAllPretendent api", error.message);
+    }
+}
+
 export const getLastPretendent = async (id) =>{
     try {
        let response = await $host.get(`api/pretendent/get/${id}`);

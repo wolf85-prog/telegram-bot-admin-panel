@@ -58,7 +58,7 @@ const Admin = () => {
   const { projects: projs } = useUsersContext();
   const { companys: comps } = useUsersContext();
   const { userWorkers: specusers } = useUsersContext();
-  const { workers, setWorkers } = useUsersContext();
+  const { workersAll, workers, setWorkers } = useUsersContext();
 
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]);
@@ -139,27 +139,27 @@ const Admin = () => {
 
   //поиск
   useEffect(() => {
-		const filteredData = workers.filter(user=> (user.userfamily+user.username+user.chatId)?.toLowerCase().includes(text.toLowerCase()));
-    setSortWorkers(filteredData);      
+		const filteredData = workersAll.filter(user=> (user.userfamily+user.username+user.chatId)?.toLowerCase().includes(text.toLowerCase()));
+    setSortWorkers(text === '' ? workersAll : filteredData);     
   }, [text]);
 
 
   //get filter workers
   useEffect(() => {
-    setSortWorkers(workers)
+    //setSortWorkers(workers)
 
     const currentDate = new Date()
     const currentMonth = currentDate.getMonth()
 
     //массив новых пользователей за текущий месяц
-    const arr1 = workers.filter(item => new Date(item.createDate).getMonth() === currentMonth)
+    const arr1 = workersAll.filter(item => new Date(item.createDate).getMonth() === currentMonth)
     setNewWorkers(arr1)
 
     //массив удаленных пользователей
-    const arrDel = workers.filter(item => item.deleted === true)
+    const arrDel = workersAll.filter(item => item.deleted === true)
     setDelWorkers(arrDel)
 
-  }, [workers])
+  }, [workersAll])
 //--------------------------------------------------------------------------------------------------
 
 //get workers active
@@ -170,7 +170,7 @@ useEffect(() => {
 
     let messages = await getAllWMessages()
 
-    workers.map((client, index) => {
+    workersAll.map((client, index) => {
 
       const allMessages = messages ? messages.length : [] //всего сообщений
       const currentMonth = new Date().getMonth()
@@ -185,7 +185,7 @@ useEffect(() => {
   
   fetchData();
   
-}, [workers]);
+}, [workersAll]);
 //---------------------------------------------------------------------------------------------------------
 
   //get Contacts
@@ -265,7 +265,7 @@ useEffect(() => {
     
     fetchData();
     
-  }, [clients, workers]);
+  }, [clients, workersAll]);
 //---------------------------------------------------------------------------------------------
 
 //get Projects
@@ -394,7 +394,7 @@ useEffect(() => {
         //за несколько часов
         const needDate = carrentDate - currentChas*3600000
 
-        let arr = workers.filter(item => new Date(item.createDate).getTime() > needDate);
+        let arr = workersAll.filter(item => new Date(item.createDate).getTime() > needDate);
 
         let categories = []
         let count_cat
@@ -424,7 +424,7 @@ useEffect(() => {
         setSortWorkers(arr)
 
         //массив удаленных пользователей
-        const arrDel = workers.filter(item => item.deleted === true && new Date(item.createDate).getTime() > needDate)
+        const arrDel = workersAll.filter(item => item.deleted === true && new Date(item.createDate).getTime() > needDate)
         setDelWorkers(arrDel)
         
         let days1 = []
@@ -512,7 +512,7 @@ useEffect(() => {
         //console.log("needDate: ", needDate)
         
         
-        let arr = workers.filter(item => new Date(item.createDate).getTime() > needDate);
+        let arr = workersAll.filter(item => new Date(item.createDate).getTime() > needDate);
         let categories = []
         let count_cat
 
@@ -541,7 +541,7 @@ useEffect(() => {
         setSortWorkers(arr)
 
         //массив удаленных пользователей
-        const arrDel = workers.filter(item => item.deleted === true && new Date(item.createDate).getTime() > needDate)
+        const arrDel = workersAll.filter(item => item.deleted === true && new Date(item.createDate).getTime() > needDate)
         setDelWorkers(arrDel)
 
         let week2 = []
@@ -658,7 +658,7 @@ useEffect(() => {
         //console.log("needDate: ", new Date(needDate))
         
         //кол-во специалистов за период на начало месяца по текущее число
-        let arr = workers.filter(item => new Date(item.createDate).getTime() > needDate);
+        let arr = workersAll.filter(item => new Date(item.createDate).getTime() > needDate);
         let categories = []
         let count_cat
 
@@ -687,7 +687,7 @@ useEffect(() => {
         //setMonthWorkers(arr)
 
         //массив удаленных пользователей
-        const arrDel = workers.filter(item => item.deleted === true && new Date(item.createDate).getTime() > needDate)
+        const arrDel = workersAll.filter(item => item.deleted === true && new Date(item.createDate).getTime() > needDate)
         setDelWorkers(arrDel)
 
         let countSpec = 0
@@ -760,7 +760,7 @@ useEffect(() => {
         setTimeout(() =>setWdthGrafik(grafik.current ? grafik.current.clientWidth - 100 : 0), 2000 )
 
         //фильтрация таблицы за год
-        let arr = workers.filter(item => item.createDate.split('T')[0].split('-')[0] === '2024');
+        let arr = workersAll.filter(item => item.createDate.split('T')[0].split('-')[0] === '2024');
         let categories = []
         let count_cat
 
@@ -788,7 +788,7 @@ useEffect(() => {
         setSortWorkers(arr)
 
         //массив удаленных пользователей
-        const arrDel = workers.filter(item => item.deleted === true && item.createDate.split('T')[0].split('-')[0] === '2024')
+        const arrDel = workersAll.filter(item => item.deleted === true && item.createDate.split('T')[0].split('-')[0] === '2024')
         setDelWorkers(arrDel)
 
         arr.map((item)=>console.log("month: ", new Date(item.createDate).getMonth()+1))
@@ -928,7 +928,7 @@ useEffect(() => {
         let endDay = new Date(periodDate2.split('.')[2], periodDate2.split('.')[1]-1, periodDate2.split('.')[0])
 
         //фильтрация таблицы за период
-        let arr5 = workers.filter(item => new Date(item.createDate) > nextDay && new Date(item.createDate) < endDay);
+        let arr5 = workersAll.filter(item => new Date(item.createDate) > nextDay && new Date(item.createDate) < endDay);
         setSortWorkers(arr5)
 
         let categories = []
@@ -1045,9 +1045,11 @@ useEffect(() => {
 		
 				arrayWorker.push(newWorker)
 			})    
+
+      console.log("Всего сейчас: ", arrayWorker.length)
 			
-      setWorkers([...workers].push(arrayWorker))	
-      console.log("Ещё: ", [...workers].push(arrayWorker))
+      setWorkers(arrayWorker)	
+      console.log("Ещё: ", arrayWorker.length)
   }
   
   return (
@@ -1514,7 +1516,7 @@ useEffect(() => {
                               <CCol sm={6}></CCol>
 
                               <CCol sm={3} style={{textAlign: 'right', position: 'absolute', top: '-538px', right: '0', marginRight: '35px'}}>
-                                {showCountAll ? sortWorkers.length : ''}
+                                {/* {showCountAll ? sortWorkers.length : ''} */}
                               </CCol>
                             </CRow>
                             
@@ -1538,7 +1540,7 @@ useEffect(() => {
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
-                                    {sortWorkers.map((item, index) => (
+                                    {workers.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
                                         <CTableDataCell className="text-center">
                                           {String(new Date(item.createDate).getDate()).padStart(2, "0")+ "."+ String(new Date(item.createDate).getMonth()+1).padStart(2, "0") + "." +new Date(item.createDate).getFullYear()}
@@ -1578,7 +1580,11 @@ useEffect(() => {
                                       </CTableRow>
                                       ))
                                     }
-                                    <CButton color="dark" onClick={()=>clickNext()} style={{width: '100px'}}>Ещё</CButton>
+                                    {/* <CTableRow>
+                                      <CTableDataCell className="text-center">
+                                        <CButton color="dark" onClick={()=>clickNext()} style={{width: '100px'}}>Ещё</CButton>
+                                      </CTableDataCell>
+                                    </CTableRow> */}
                                 </CTableBody>                   
                               </CTable>
                               
@@ -1586,10 +1592,11 @@ useEffect(() => {
                             
                               </CCol>
                             </CRow>
-                            <CRow>
+                            <CRow style={{justifyContent: 'center' }}>
                               {/* <CCol>
                                 Всего: {sortWorkers.length}
                               </CCol> */}
+                              <CButton color="dark" onClick={()=>clickNext()} style={{width: '100px', marginTop: '15px'}}>Ещё</CButton>
                             </CRow>
                       </CCol>
                     </CRow>

@@ -80,6 +80,27 @@ class PretendentController {
         }
     }
 
+    //get All Count
+    async getAllPretendentCount(req, res) {
+        try {           
+            const count = await Pretendent.count();
+            //console.log(count)
+
+            const spec = await Pretendent.findAll({
+                where: {otclick: {
+                    [Op.not]: null
+                }},
+                // Add order conditions here....
+                order: [
+                    ['id', 'DESC'], //DESC
+                ],
+            })
+            return res.status(200).json(spec);
+        } catch (error) {
+            return res.status(500).json(error.spec);
+        }
+    }
+
 }
 
 module.exports = new PretendentController()
