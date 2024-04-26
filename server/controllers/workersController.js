@@ -20,9 +20,10 @@ class WorkersController {
         const kol = req.params.count
         try {
             const count = await Worker.count();
+            console.log(count)
             const workers = await Worker.findAll({
                 order: [
-                    ['id', 'DESC'], //DESC, ASC
+                    ['id', 'ASC'], //DESC, ASC
                 ],
                 offset: count > kol ? count - kol : 0,
                 //limit : 50,
