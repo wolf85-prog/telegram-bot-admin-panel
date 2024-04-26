@@ -194,7 +194,7 @@ useEffect(() => {
 
     const fetchData = async() => {
 
-      console.log("workers (admin): ", workers.length)
+      //console.log("workers (admin): ", workers.length)
       setLoading2(false)
 
       let messages = await getAllMessages()

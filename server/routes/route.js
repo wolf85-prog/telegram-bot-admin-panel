@@ -33,7 +33,7 @@ const { uploadFile, getImage, sendNarush } = require( "../controllers/fileContro
 const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers/wuserbotController')
 const { newMessageWorker, delMessageWorker, getMessagesWorker, getMessagesWorker2, getAllMessagesWorker, getMessagesWorkerCount } = require('../controllers/wmessageController')
 const { newConversationWorker, getConversationWorker, getConversationsW } = require('../controllers/wconversationController')
-const { getWorkers, getWorker, editWorker, blockWorker} = require('../controllers/workersController')
+const { getWorkers, getWorkersCount, getWorker, editWorker, blockWorker} = require('../controllers/workersController')
 const { newPretendent, getPretendent, getPretendentId, getAllPretendent } = require('../controllers/pretendentController')
 
 const { newPlan, getPlan, addTimer } = require('../controllers/planController')
@@ -125,6 +125,7 @@ route.get('/workers/get', getWorkers)
 route.get('/workers/get/:id', getWorker)
 route.patch('/workers/update/:id', editWorker)
 route.get('/workers/block/:id', blockWorker)
+route.get('/workers/get/:count', getWorkersCount)
 
 route.post('/pretendent/add', newPretendent)
 route.get('/pretendent/get/:id', getPretendentId)

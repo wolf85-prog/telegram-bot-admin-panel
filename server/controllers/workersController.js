@@ -16,6 +16,25 @@ class WorkersController {
         }
     }
 
+    async getWorkersCount(req, res) {
+        const kol = req.params.count
+        try {
+            const count = await Message.count({
+                where: { conversationId },
+            });
+            const workers = await Worker.findAll({
+                order: [
+                    ['id', 'DESC'], //DESC, ASC
+                ],
+                offset: count > kol ? count - kol : 0,
+                //limit : 50,
+            })
+            return res.status(200).json(workers);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
     async getWorker(req, res) {
         const {id} = req.params
         try {
