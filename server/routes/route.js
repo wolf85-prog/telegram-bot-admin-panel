@@ -115,7 +115,7 @@ route.delete('/wmessage/delete/:id', delMessageWorker)
 route.get('/wmessage/get', getAllMessagesWorker)
 route.get('/wmessage/get/:id', getMessagesWorker)
 route.get('/wmessage/get/count/:count', getMessagesWorkerCount)
-route.get('/wmessage2/get/:id/:count/:prev', getMessagesWorker2)
+route.get('/wmessage2/get/:id/:count/:prev', getMessagesWorker2) //еще
 
 route.post('/wconversation/add', newConversationWorker)
 route.get('/wconversation/get/:id', getConversationWorker)
@@ -125,7 +125,7 @@ route.get('/workers/get', getWorkers)
 route.get('/workers/get/:id', getWorker)
 route.patch('/workers/update/:id', editWorker)
 route.get('/workers/block/:id', blockWorker)
-route.get('/workers/count/get/:count', getWorkersCount)
+route.get('/workers/count/get/:count/:prev', getWorkersCount) //еще
 
 route.post('/pretendent/add', newPretendent)
 route.get('/pretendent/get/:id', getPretendentId)

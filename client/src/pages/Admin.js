@@ -35,7 +35,7 @@ import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { getAllMessages, getMessages } from './../http/chatAPI.js'
-import { getAllWMessages } from './../http/workerAPI.js'
+import { getAllWMessages, getWorkersCount } from './../http/workerAPI.js'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 import WidgetsDropdown2 from '../views/widgets/WidgetsDropdown2'
@@ -58,7 +58,7 @@ const Admin = () => {
   const { projects: projs } = useUsersContext();
   const { companys: comps } = useUsersContext();
   const { userWorkers: specusers } = useUsersContext();
-  const { workers } = useUsersContext();
+  const { workers, setWorkers } = useUsersContext();
 
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]);
@@ -1014,6 +1014,41 @@ useEffect(() => {
         [ind]: !prevShownTable[ind]
       }));
   }
+
+  const clickNext = async() => {
+
+    //1 все специалисты
+		let response = await getWorkersCount(100, workers.length);
+    console.log("workers size: ", workers.length)
+
+    const arrayWorker = []
+		
+			response.reverse().map(async (user) => {
+				const newWorker = {
+				  id: user.id,
+				  userfamily: user.userfamily,
+				  username: user.username,
+				  phone: user.phone,
+				  dateborn: user.dateborn,
+				  city: user.city, 
+				  companys: user.companys,
+				  stag: user.stag,
+				  worklist:  user.worklist,
+				  chatId: user.chatId,
+				  createDate: user.createdAt,
+				  avatar: user.avatar,
+				  from: user.from,
+				  promoId: user.promoId,
+				  block: user.block,
+				  deleted: user.deleted,
+				}
+		
+				arrayWorker.push(newWorker)
+			})    
+			
+      setWorkers([...workers].push(arrayWorker))	
+      console.log("Ещё: ", [...workers].push(arrayWorker))
+  }
   
   return (
     <div className='dark-theme'>
@@ -1543,7 +1578,7 @@ useEffect(() => {
                                       </CTableRow>
                                       ))
                                     }
-                                    <CButton color="dark" onClick={()=>console.log("xvxcvxc")} style={{width: '100px'}}>Ещё</CButton>
+                                    <CButton color="dark" onClick={()=>clickNext()} style={{width: '100px'}}>Ещё</CButton>
                                 </CTableBody>                   
                               </CTable>
                               
