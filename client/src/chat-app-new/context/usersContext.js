@@ -221,7 +221,7 @@ const UsersProvider = ({ children }) => {
 		
 			const arrayWorker = []
 		
-			response.map(async (user) => {
+			response.reverse().map(async (user) => {
 				const newWorker = {
 				  id: user.id,
 				  userfamily: user.userfamily,

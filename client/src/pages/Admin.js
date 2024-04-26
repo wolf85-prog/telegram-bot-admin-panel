@@ -1543,6 +1543,7 @@ useEffect(() => {
                                       </CTableRow>
                                       ))
                                     }
+                                    <CButton color="dark" onClick={()=>console.log("xvxcvxc")} style={{width: '100px'}}>Ещё</CButton>
                                 </CTableBody>                   
                               </CTable>
                               
