@@ -71,7 +71,7 @@ const Contact = ({ contact, worker }) => {
 				}
 				{
 				worker.length !== 0 ? 
-				((JSON.parse(worker[0].worklist)).findIndex(item => item.spec === 'Blacklist') === 0 ? 
+				((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ? 
 				<img src={avatarBlacklist} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
 				: "")
 				: ""

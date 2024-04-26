@@ -278,13 +278,23 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
 	const handleClick = (ind) => {
         //console.log(ind, showImage)
+		window.event.stopPropagation();	
 
         setShowImage(prevShownImage => ({
             ...prevShownImage,
             [ind]: !prevShownImage[ind]
-          }));
+        }));
+
+		setTimeout(()=> {
+			setShowImage(false)
+		}, 30000)
 
     }
+
+	const handleClick2 = (elem) => {
+		var id = elem.target.id
+		console.log("id: ", id)
+	}
 
 
 	return dates.map((date, dateIndex) => {
@@ -296,7 +306,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 					<>
 						<div className="chat__date-wrapper">{loading && <CSpinner/>}</div>
 					
-						<div className="chat__date-wrapper" style={{cursor: 'pointer'}}>
+						<div className="chat__date-wrapper" style={{cursor: 'pointer', textAlign: 'end'}}>
 							<span className="chat__date" onClick={startLoadMessages}>Загрузить ещё сообщения</span>
 						</div>
 					</>
@@ -367,9 +377,12 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 														position: 'relative',
 														cursor: 'pointer',
 													}}>
-													{/* <a href={message.content} target="_blank" rel="noreferrer"> */}
-														<img src={imageIcon} alt="" className="chat__img" onClick={()=>handleClick(msgIndex + personW.id)} style={{width: '50px'}}/>
-														{/* </a> */}
+														<div onClick={()=>console.log("console")}>
+															{/* <a href={message.content} target="_blank" rel="noreferrer"> */}
+																<img src={imageIcon} alt="" className="chat__img"  style={{width: '50px'}}/>
+															{/* </a> */}
+														</div>	
+													
 												</div>}
 
 												{/* footer */}

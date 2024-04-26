@@ -19,6 +19,7 @@ const Sidebar = () => {
 	const navigate = useNavigate()
 
 	useEffect(() => {
+		
 		//сортировка
 		// const userSort = [...userWorkers].sort((a, b) => {       
 		// 	var dateA = new Date(a.date), dateB = new Date(b.date) 
@@ -31,6 +32,8 @@ const Sidebar = () => {
 			if (arr.length === CountWorkers)
 			  break;
 		}
+
+		//console.log("workers: ", workers)
 
 		setContacts(arr)
 		
