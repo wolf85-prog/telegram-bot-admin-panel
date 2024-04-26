@@ -3,7 +3,8 @@ import { useSocketContext } from "./socketContext";
 import { getAllMessages, getContacts, getConversation, getMessages } from '../../http/chatAPI'
 import { getAllPretendent, getWContacts, getWConversation, 
 	getWConversations, getWMessages, getWorkers, getAllWMessages, 
-	getWMessagesCount } from '../../http/workerAPI'
+	getWMessagesCount, 
+	getWorkersCount} from '../../http/workerAPI'
 
 import { getDistributions, 
 	getDistributionsW, 
@@ -215,7 +216,7 @@ const UsersProvider = ({ children }) => {
 		const fetchUserWorkerData = async () => {
 		
 			//1 все специалисты
-			let response = await getWorkers();
+			let response = await getWorkersCount(100);
 			console.log("workers size: ", response.length)
 		
 			const arrayWorker = []

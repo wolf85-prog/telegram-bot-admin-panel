@@ -19,9 +19,7 @@ class WorkersController {
     async getWorkersCount(req, res) {
         const kol = req.params.count
         try {
-            const count = await Message.count({
-                where: { conversationId },
-            });
+            const count = await Worker.count();
             const workers = await Worker.findAll({
                 order: [
                     ['id', 'DESC'], //DESC, ASC
