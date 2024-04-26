@@ -125,7 +125,7 @@ route.get('/workers/get', getWorkers)
 route.get('/workers/get/:id', getWorker)
 route.patch('/workers/update/:id', editWorker)
 route.get('/workers/block/:id', blockWorker)
-route.get('/workers/get/:count', getWorkersCount)
+route.get('/workers/count/get/:count', getWorkersCount)
 
 route.post('/pretendent/add', newPretendent)
 route.get('/pretendent/get/:id', getPretendentId)

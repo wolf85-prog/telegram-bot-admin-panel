@@ -51,7 +51,7 @@ export const getWorkers = async () =>{
 
 export const getWorkersCount = async (count) =>{
     try {
-       let response = await $host.get(`api/workers/get/${count}`);
+       let response = await $host.get(`api/workers/count/get/${count}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getWorkersCount api", error.message);
