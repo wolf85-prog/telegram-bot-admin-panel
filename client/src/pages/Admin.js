@@ -32,6 +32,7 @@ import {
 } from '@coreui/react'
 
 import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
+import arrowDown from 'src/assets/images/arrowDown.svg'
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { getAllMessages, getMessages } from './../http/chatAPI.js'
@@ -204,7 +205,7 @@ useEffect(() => {
 
       clients.map((client, index) => {
         
-        let userIndex = zakazchiki.findIndex((manager) => manager.tgID === client.chatId);  
+        let userIndex = zakazchiki?.findIndex((manager) => manager.tgID === client.chatId);  
         const userObject = managers[userIndex];
 
         let userObject2 = comps.find((company) => company.managers.find(man => man.id ===  userObject?.id)) //company.managers.map((manager) => manager.id === userObject?.id));  
@@ -1598,7 +1599,8 @@ useEffect(() => {
                               {/* <CCol>
                                 Всего: {sortWorkers.length}
                               </CCol> */}
-                              <CButton color="dark" onClick={()=>clickNext()} style={{width: '100px', marginTop: '15px'}}>Ещё</CButton>
+                              <img src={arrowDown} alt='' onClick={()=>clickNext()} style={{width: '50px', marginTop: '15px'}}></img>
+                              {/* <CButton color="dark" onClick={()=>clickNext()} style={{width: '100px', marginTop: '15px'}}>Ещё</CButton> */}
                             </div>
                       </CCol>
                     </CRow>

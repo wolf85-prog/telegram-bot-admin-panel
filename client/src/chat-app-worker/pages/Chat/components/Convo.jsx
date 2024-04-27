@@ -302,7 +302,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 						<div className="chat__date-wrapper">{loading && <CSpinner/>}</div>
 					
 						<div className="chat__date-wrapper" style={{cursor: 'pointer', textAlign: 'end'}}>
-							<span className="chat__date" onClick={startLoadMessages}>Загрузить ещё сообщения</span>
+							<span className="chat__date" onClick={startLoadMessages}>Загрузить ещё</span>
 						</div>
 					</>
 				)}
