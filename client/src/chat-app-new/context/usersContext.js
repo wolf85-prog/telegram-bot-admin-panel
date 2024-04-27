@@ -284,15 +284,16 @@ const UsersProvider = ({ children }) => {
 
 			//3 все беседы (conversations)
 			let convers = await getWConversations()
+			console.log("conversations: ", convers.length)
 
 			//4 все сообщения бота
 			let messagesAll = await getWMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
-			//console.log("messagesAll: ", messagesAll)
+			console.log("messagesAll: ", messagesAll.length)
 
 			let count = 0
 			convers.forEach(async (user, index) => {
 		
-				let worker = arrayWorker.find((item)=> item.chatId === user.members[0])
+				let worker = arrayWorkerAll.find((item)=> item.chatId === user.members[0])
 				let userbot = wuserbots.find((item)=> item.chatId === worker?.chatId)	
 					
 				let conversationId = user.id //await getWConversation(user.members[0])
@@ -308,7 +309,7 @@ const UsersProvider = ({ children }) => {
 					if (messagesAll[i].conversationId === conversationId.toString())
 						messages.push(messagesAll[i])
 					
-					if (messages.length === 10)
+					if (messages.length === 20)
 					  break;
 				}
 
@@ -407,6 +408,8 @@ const UsersProvider = ({ children }) => {
 						var dateA = new Date(a.date), dateB = new Date(b.date) 
 						return dateB-dateA  //сортировка по убывающей дате  
 					})
+
+					console.log("sortedClients: ", sortedClients.length)
 		
 					setUserWorkers(sortedClients)
 				}				

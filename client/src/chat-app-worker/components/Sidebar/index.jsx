@@ -9,11 +9,12 @@ import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 import { CSpinner} from '@coreui/react'
 
 const Sidebar = () => {
-	const { userWorkers, workers } = useUsersContext();
+	const { userWorkers, workersAll } = useUsersContext();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
 	const [loading, setLoading]= useState(true);
+
 	const CountWorkers = 50
 
 	const navigate = useNavigate()
@@ -33,7 +34,7 @@ const Sidebar = () => {
 			  break;
 		}
 
-		//console.log("workers: ", workers)
+		//console.log("contacts: ", userWorkers)
 
 		setContacts(arr)
 		
@@ -130,7 +131,7 @@ const Sidebar = () => {
 				contacts.map((contact, ind) => (
 					contact.chatId !== chatAdminId &&
                     <>   
-						<Contact contact={contact} worker={workers.filter((item)=> item.chatId === contact.chatId)} />
+						<Contact contact={contact} worker={workersAll.filter((item)=> item.chatId === contact.chatId)} />
 					</>
 				))
 				}
