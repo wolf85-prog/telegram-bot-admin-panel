@@ -424,7 +424,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
     	const fetchData = async () => {
 			let response = await getManagers();
-      		//console.log("managers: ", response.length)
+      		console.log("managers context: ", response.length)
 
 			setManagers(response)
 		}

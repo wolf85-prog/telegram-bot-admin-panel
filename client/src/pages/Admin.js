@@ -199,9 +199,11 @@ useEffect(() => {
 
       let messages = await getAllMessages()
 
+      const managers = [...zakazchiki];
+      //console.log("zakazchiki: ", zakazchiki)
+
       clients.map((client, index) => {
         
-        const managers = [...zakazchiki];
         let userIndex = zakazchiki.findIndex((manager) => manager.tgID === client.chatId);  
         const userObject = managers[userIndex];
 
@@ -1592,12 +1594,12 @@ useEffect(() => {
                             
                               </CCol>
                             </CRow>
-                            <CRow style={{justifyContent: 'center' }}>
+                            <div style={{display: 'flex', justifyContent: 'center' }}>
                               {/* <CCol>
                                 Всего: {sortWorkers.length}
                               </CCol> */}
                               <CButton color="dark" onClick={()=>clickNext()} style={{width: '100px', marginTop: '15px'}}>Ещё</CButton>
-                            </CRow>
+                            </div>
                       </CCol>
                     </CRow>
                   </CCardBody>
