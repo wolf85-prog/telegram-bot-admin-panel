@@ -16,9 +16,9 @@ import { AccountContext } from "../chat-app-new/context/AccountProvider";
 const ChatsWorker = () => {
 
   const { personW } = useContext(AccountContext); 
-  const { userWorkers, setUserWorkers} = useUsersContext();
+  //const { userWorkers, setUserWorkers} = useUsersContext();
 
-  const [workers, setWorkers] = useState([]); //useState(contacts);
+  //const [workers, setWorkers] = useState([]); //useState(contacts);
   //const [userWorkers, setUserWorkers] = useState([]); //useState(contacts);
 
 	useEffect(() => {

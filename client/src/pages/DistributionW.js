@@ -40,7 +40,7 @@ import MyModal from "../components/MyModal/MyModal";
 import Close from "../assets/images/close.svg"
 
 const DistributionW = () => {
-  const { distributionsWork: messages, addNewDistrib, workers } = useUsersContext();
+  const { distributionsWork: messages, addNewDistrib, workersAll } = useUsersContext();
   const [distributionsWork, setDistributionsWork]= useState([]);
   const [userReceivers, setUserReceivers]= useState([]);
   const [users, setUsers]= useState([]);
@@ -165,7 +165,7 @@ const DistributionW = () => {
   }
 
   const showReceivers = (users) => {
-    console.log(workers)
+    console.log(workersAll)
 
     setVisibleModal(true)
     let count = 0
@@ -177,7 +177,7 @@ const DistributionW = () => {
       } else {
         count2++
       }
-      const worker = workers.find((i)=> i.chatId === item.user)
+      const worker = workersAll.find((i)=> i.chatId === item.user)
       const obj = {
         user: item.user,
         status: item.status,

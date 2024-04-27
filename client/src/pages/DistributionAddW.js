@@ -64,7 +64,7 @@ const DistributionAddW = () => {
   const webAppAddStavka = process.env.REACT_APP_WEBAPP_STAVKA
   const hostServer = process.env.REACT_APP_API_URL
 
-  const { userWorkers: clients, workers } = useUsersContext();
+  const { userWorkers: clients, workersAll } = useUsersContext();
   const { addNewDistrib, addNewMessage2, distributionsWork, setDistributionsWork, delMessageContext } = useUsersContext();
   const [contacts, setContacts]= useState([]);
   const [projects, setProjects]= useState([]); 
@@ -364,7 +364,7 @@ const getCategoryFromNotion = async(projectId) => {
       setCategoryItem(arr2)
       
       //список специалистов с массивом специальностей (категорий)
-      workers.map((worker)=> {
+      workersAll.map((worker)=> {
         JSON.parse(worker.worklist).map((work) => {
           arr_count.map((cat)=>{
             //console.log("work: ", work.cat)
@@ -541,7 +541,7 @@ const onAddCategory = (e) => {
     console.log("result: ", arrCategory)
     console.log("categoryAll: ", arrTemp)
     
-    workers.map((worker)=> {
+    workersAll.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           //console.log("work: ", work.cat)
@@ -593,7 +593,7 @@ const onAddCategory2 = (e) => {
     console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
-    workers.map((worker)=> {
+    workersAll.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
@@ -638,7 +638,7 @@ const onAddCategory3 = (e) => {
     console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
-    workers.map((worker)=> {
+    workersAll.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
@@ -681,7 +681,7 @@ const onAddCategory4 = (e) => {
     console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
-    workers.map((worker)=> {
+    workersAll.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
@@ -724,7 +724,7 @@ const onAddCategory5 = (e) => {
     console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
-    workers.map((worker)=> {
+    workersAll.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
@@ -767,7 +767,7 @@ const onAddCategory6 = (e) => {
     console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
-    workers.map((worker)=> {
+    workersAll.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
@@ -810,7 +810,7 @@ const onAddCategory7 = (e) => {
     console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
-    workers.map((worker)=> {
+    workersAll.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
