@@ -111,7 +111,7 @@ const Profile = ({ user, closeSidebar }) => {
 
 		const fetch = async() => {
 			const pretendentArray = await getLastPretendent(user.chatId)
-			console.log("pretendentArray: ", pretendentArray.length)
+			//console.log("pretendentArray: ", pretendentArray.length)
 			
 			if (pretendentArray.length > 0) {
 				const projectId = pretendentArray[pretendentArray.length-1]?.projectId
@@ -122,15 +122,15 @@ const Profile = ({ user, closeSidebar }) => {
 				const project2 = await getProjectId(projectId2)
 				const project3 = await getProjectId(projectId3)
 
-				const crmId = project?.properties ? project?.properties?.Crm_ID.rich_text[0].plain_text : '-'
-				const crmId2 = project?.properties ? project2?.properties?.Crm_ID.rich_text[0].plain_text : '-'
-				const crmId3 = project?.properties ? project3?.properties?.Crm_ID.rich_text[0].plain_text : '-' 
+				const crmId = project?.properties ? project?.properties?.Crm_ID.rich_text[0].plain_text : '—'
+				const crmId2 = project?.properties ? project2?.properties?.Crm_ID.rich_text[0].plain_text : '—'
+				const crmId3 = project?.properties ? project3?.properties?.Crm_ID.rich_text[0].plain_text : '—' 
 
 				setCrmId(crmId)
 				setCrmId2(crmId2)
 				setCrmId3(crmId3)
 			} else {
-				setCrmId('-')
+				setCrmId('—')
 			}	
 			
 			const blocked = await getWorker(user.chatId)
@@ -180,7 +180,7 @@ const Profile = ({ user, closeSidebar }) => {
 							Город
 						</span>
 						<span className="profile__action-text profile__action-text--top profile__notion">
-							{user.city ? user.city : "-"}
+							{user.city ? user.city : "—"}
 						</span>	
 					</p>
 				</li>			
@@ -193,7 +193,7 @@ const Profile = ({ user, closeSidebar }) => {
 						<span className="profile__action-text profile__action-text--top profile__notion">
 							{user ? 
 							user.age
-							: "-"}
+							: "—"}
 						</span>
 					</p>
 				</li>
@@ -218,7 +218,7 @@ const Profile = ({ user, closeSidebar }) => {
 						</span>
 						<span className="profile__action-text profile__action-text--top">
 							{/* {worker.spec?.map((item)=>item.name).join('')} */}
-							<table className="table-noborder">{worker ? worker.spec?.map((worker, index) => <tr key={index}><td>{worker.name}</td></tr> ) : '-'}</table>
+							<table className="table-noborder">{worker ? worker.spec?.map((worker, index) => <tr key={index}><td>{worker.name}</td></tr> ) : '—'}</table>
 						</span>	
 					</p>
 				</li>
