@@ -22,7 +22,7 @@ import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3'
 
 const Profile = ({ user, closeSidebar }) => {
 
-	//console.log('user: ', user)
+	console.log('user: ', user)
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_HOST
@@ -173,7 +173,9 @@ const Profile = ({ user, closeSidebar }) => {
 							Телефон
 						</span>
 						<span className="profile__action-text--top profile__notion">
-							{phone}
+							{user ? 
+							(user.phone !== '' ? user.phone : "—")
+							: "—"}
 						</span>
 					</p>
 				</li>			
@@ -184,7 +186,9 @@ const Profile = ({ user, closeSidebar }) => {
 							Город
 						</span>
 						<span className="profile__action-text--top profile__notion">
-							{user.city ? user.city : "—"}
+						{user ? 
+							(user.city !== '' ? user.city : "—")
+							: "—"}
 						</span>	
 					</p>
 				</li>			
@@ -196,7 +200,7 @@ const Profile = ({ user, closeSidebar }) => {
 						</span>
 						<span className="profile__action-text--top profile__notion">
 							{user ? 
-							user.age
+							(user.age !== '' ? user.age : "—")
 							: "—"}
 						</span>
 					</p>
@@ -220,7 +224,7 @@ const Profile = ({ user, closeSidebar }) => {
 						<span className="profile__action-text--bottom">
 							Специальность
 						</span>
-						<span className="profile__action-text--top">
+						<span className="profile__action-text--top" style={{textAlign: 'right'}}>
 							{/* {worker.spec?.map((item)=>item.name).join('')} */}
 							<table className="table-noborder">{worker ? worker.spec?.map((worker, index) => <tr key={index}><td>{worker.name}</td></tr> ) : '—'}</table>
 						</span>	
