@@ -1,4 +1,4 @@
-const {Worker} = require('../models/workers')
+const {Worker, Canceled} = require('../models/workers')
 const ApiError = require('../error/ApiError')
 
 class WorkersController {
@@ -85,6 +85,19 @@ class WorkersController {
                 { block: exist.dataValues.block !==null ? !exist.dataValues.block : true},
                 { where: {chatId: id} })
             return res.status(200).json(newUser);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    async getCanceled(req, res) {
+        try {
+            const workers = await Canceled.findAll({
+                order: [
+                    ['id', 'DESC'], //DESC, ASC
+                ],
+            })
+            return res.status(200).json(workers);
         } catch (error) {
             return res.status(500).json(error.message);
         }

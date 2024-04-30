@@ -48,10 +48,20 @@ const Conversation = sequelize.define('wconversation', {
     members: {type: DataTypes.ARRAY(DataTypes.STRING)},
 })
 
+const Canceled = sequelize.define('canceled', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    projectId: {type: DataTypes.STRING},  //id проекта
+    workerId: {type: DataTypes.STRING}, //id специалиста;
+    receiverId: {type: DataTypes.STRING}, //чат-id получателя;
+    blockId: {type: DataTypes.STRING}, //id таблицы Претенденты;
+    cancel: {type: DataTypes.BOOLEAN}, //отказано
+})
+
 
 module.exports = {
     UserBot, 
     Message, 
     Conversation, 
     Worker,
+    Canceled,
 }

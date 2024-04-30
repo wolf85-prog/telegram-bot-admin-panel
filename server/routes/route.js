@@ -127,6 +127,8 @@ route.patch('/workers/update/:id', editWorker)
 route.get('/workers/block/:id', blockWorker)
 route.get('/workers/count/get/:count/:prev', getWorkersCount) //еще
 
+route.get('/canceled/get', getCanceled) //еще
+
 route.post('/pretendent/add', newPretendent)
 route.get('/pretendent/get/:id', getPretendentId)
 route.post('/pretendent/get', getPretendent)
