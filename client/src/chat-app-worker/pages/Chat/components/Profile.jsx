@@ -10,7 +10,8 @@ import defaultAvatar from "./../../../../chat-app-new/assets/images/no-avatar.pn
 import CIcon from '@coreui/icons-react'
 import {
   cilPen,
-  cilMediaPlay
+  cilMediaPlay,
+  cilPhone
 } from '@coreui/icons'
 import { 
 	CFormSelect,
@@ -147,6 +148,9 @@ const Profile = ({ user, closeSidebar }) => {
 		blockedWorkers(user.chatId)
 	}
 	
+	const onImageError = (e) => {
+		e.target.src = defaultAvatar
+	}
 
 	return (
 		<div className="profile">
@@ -154,7 +158,7 @@ const Profile = ({ user, closeSidebar }) => {
 				<div className="profile__avatar-wrapper profile__avatar-worker" ref={divBlock}>
 					{
 						user?.avatar
-							? <img src={user?.avatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
+							? <img src={user?.avatar} onError={onImageError} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
 							: <img src={defaultAvatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />
 					}
 				</div>
@@ -242,6 +246,10 @@ const Profile = ({ user, closeSidebar }) => {
 				</li>			
 			</ul>
 
+			<div className="profile__sectionW profile__section--success">
+				<CIcon icon={cilPhone} className="profile__success-icon" />
+				<p className="profile__success-text profile__worker" style={{cursor: 'pointer'}} onClick={()=>console.log("Позвонить")}>Позвонить</p>
+			</div>
 
 			<div className="profile__sectionW profile__section--danger">
 				<Icon id="block" className="profile__danger-icon" />

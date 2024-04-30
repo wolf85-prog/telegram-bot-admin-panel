@@ -28,12 +28,16 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 		  }
 	};
 
+	const onImageError = (e) => {
+		e.target.src = avatarDefault
+	}
+
 	return (
 		<header className="headerB chat__header">
 			<div className="chat__avatar-wrapper" onClick={openProfileSidebar}>
 				{
 					user.avatar
-					? <img src={`${user.avatar}`} alt={user?.name} className="avatar-adm" />
+					? <img src={`${user.avatar}`} onError={onImageError} alt={user?.name} className="avatar-adm" />
 					: <img src={avatarDefault} alt={user?.name} className="avatar-adm" />
 				}
 			</div>
