@@ -7,7 +7,7 @@ import {
 import { getStyle } from '@coreui/utils'
 import { CChartBar, CChartLine } from '@coreui/react-chartjs'
 
-const WidgetsDropdown2 = ({
+const WidgetsDropdown6 = ({
   users, 
   newUsers, 
   activeUsers, 
@@ -315,4 +315,4 @@ const WidgetsDropdown2 = ({
   )
 }
 
-export default WidgetsDropdown2
+export default WidgetsDropdown6

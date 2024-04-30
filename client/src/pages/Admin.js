@@ -43,6 +43,7 @@ import WidgetsDropdown2 from '../views/widgets/WidgetsDropdown2'
 import WidgetsDropdown3 from '../views/widgets/WidgetsDropdown3'
 import WidgetsDropdown4 from '../views/widgets/WidgetsDropdown4'
 import WidgetsDropdown5 from '../views/widgets/WidgetsDropdown5'
+import WidgetsDropdown6 from '../views/widgets/WidgetsDropdown6'
 
 import InputMask from 'react-input-mask';
 
@@ -61,19 +62,20 @@ const Admin = () => {
   const { userWorkers: specusers } = useUsersContext();
   const { workersAll, workers, setWorkers } = useUsersContext();
 
-  const [contacts, setContacts]= useState([]);
-  const [projects, setProjects]= useState([]);
-  const [newClients, setNewClients]= useState([]);
-  const [oldClients, setOldClients]= useState([]);
-  const [loading, setLoading]= useState(true);
-  const [loading2, setLoading2]= useState(true);
+  const [contacts, setContacts] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [newClients, setNewClients] = useState([]);
+  const [oldClients, setOldClients] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(true);
   
-  const [sortWorkers, setSortWorkers]= useState([]);
-  const [newWorkers, setNewWorkers]= useState([]);
-  const [activWorkers, setActivWorkers]= useState([]);
-  const [delWorkers, setDelWorkers]= useState([]);
+  const [sortWorkers, setSortWorkers] = useState([]);
+  const [newWorkers, setNewWorkers] = useState([]);
+  const [activWorkers, setActivWorkers] = useState([]);
+  const [delWorkers, setDelWorkers] = useState([]);
 
-  const [sortWorkers2, setSortWorkers2]= useState([]);
+  const [sortWorkers2, setSortWorkers2] = useState([]);
+  const [newWorkers2, setNewWorkers2] = useState([]);
   const [activWorkers2, setActivWorkers2]= useState([]);
   const [delWorkers2, setDelWorkers2]= useState([]);
 
@@ -353,24 +355,35 @@ useEffect(() => {
         let i = 0
         setTimerId(setInterval(() => {
           if ((i) % 4 === 0) {
-            setShowWidget3(true) //3
+            setShowWidget2(true) //2
+            setShowWidget3(false) 
             setShowWidget4(false)
             setShowWidget5(false)
             setShowWidget6(false)
           }
           if ((i+1) % 4 === 0) {
+            setShowWidget2(false)
+            setShowWidget3(true) //3
+            setShowWidget4(false)
+            setShowWidget5(false)
+            setShowWidget6(false) 
+          }
+          if ((i+2) % 4 === 0) {
+            setShowWidget2(false)
             setShowWidget3(false)
             setShowWidget4(true) //4
             setShowWidget5(false)
             setShowWidget6(false)
           }
-          if ((i+2) % 4 === 0) {
+          if ((i+3) % 4 === 0) {
+            setShowWidget2(false)
             setShowWidget3(false)
             setShowWidget4(false)
             setShowWidget5(true) //5
             setShowWidget6(false)
           }  
-          if ((i+3) % 4 === 0) {
+          if ((i+4) % 4 === 0) {
+            setShowWidget2(false)
             setShowWidget3(false)
             setShowWidget4(false)
             setShowWidget5(false)
@@ -426,10 +439,19 @@ useEffect(() => {
 
         //всего пользователей
         setSortWorkers(arr)
+        setWorkers(arr)
+
+        //массив новых пользователей за сутки
+        const arrNew = workersAll.filter(item => new Date(item.createDate).getTime() > needDate)
+        setNewWorkers2(arrNew)
+
+        //массив активных пользователей
+        // const arrActiv = activWorkers2.filter(item => new Date(item.createDate).getTime() > needDate)
+        // setActivWorkers2(arrActiv)
 
         //массив удаленных пользователей
-        const arrDel = workersAll.filter(item => item.deleted === true && new Date(item.createDate).getTime() > needDate)
-        setDelWorkers(arrDel)
+        const arrDel = delWorkers.filter(item => item.deleted === true && new Date(item.createDate).getTime() > needDate)
+        setDelWorkers2(arrDel)
         
         let days1 = []
         let countSpec = 0
@@ -470,24 +492,35 @@ useEffect(() => {
          let i = 0
          setTimerId(setInterval(() => {
             if ((i) % 4 === 0) {
-              setShowWidget3(true) //3
+              setShowWidget2(true) //2
+              setShowWidget3(false) 
               setShowWidget4(false)
               setShowWidget5(false)
               setShowWidget6(false)
             }
             if ((i+1) % 4 === 0) {
+              setShowWidget2(false)
+              setShowWidget3(true) //3
+              setShowWidget4(false)
+              setShowWidget5(false)
+              setShowWidget6(false) 
+            }
+            if ((i+2) % 4 === 0) {
+              setShowWidget2(false)
               setShowWidget3(false)
               setShowWidget4(true) //4
               setShowWidget5(false)
               setShowWidget6(false)
             }
-            if ((i+2) % 4 === 0) {
+            if ((i+3) % 4 === 0) {
+              setShowWidget2(false)
               setShowWidget3(false)
               setShowWidget4(false)
               setShowWidget5(true) //5
               setShowWidget6(false)
             }  
-            if ((i+3) % 4 === 0) {
+            if ((i+4) % 4 === 0) {
+              setShowWidget2(false)
               setShowWidget3(false)
               setShowWidget4(false)
               setShowWidget5(false)
@@ -543,10 +576,19 @@ useEffect(() => {
         setCatCount(categories)
 
         setSortWorkers(arr)
+        setWorkers(arr)
+
+        //массив новых пользователей за неделю
+        const arrNew = workersAll.filter(item => new Date(item.createDate).getTime() > needDate)
+        setNewWorkers2(arrNew)
+
+        //массив активных пользователей
+        // const arrActiv = workersAll.filter(item => new Date(item.createDate).getTime() > needDate)
+        // setActivWorkers2(arrActiv)
 
         //массив удаленных пользователей
-        const arrDel = workersAll.filter(item => item.deleted === true && new Date(item.createDate).getTime() > needDate)
-        setDelWorkers(arrDel)
+        const arrDel = delWorkers.filter(item => item.deleted === true && new Date(item.createDate).getTime() > needDate)
+        setDelWorkers2(arrDel)
 
         let week2 = []
         let nameDay = ''
@@ -617,30 +659,41 @@ useEffect(() => {
 
          let i = 0
          setTimerId(setInterval(() => {
-           if ((i) % 4 === 0) {
-             setShowWidget3(true) //3
-             setShowWidget4(false)
-             setShowWidget5(false)
-             setShowWidget6(false)
-           }
-           if ((i+1) % 4 === 0) {
-             setShowWidget3(false)
-             setShowWidget4(true) //4
-             setShowWidget5(false)
-             setShowWidget6(false)
-           }
-           if ((i+2) % 4 === 0) {
-             setShowWidget3(false)
-             setShowWidget4(false)
-             setShowWidget5(true) //5
-             setShowWidget6(false)
-           }  
-           if ((i+3) % 4 === 0) {
-             setShowWidget3(false)
-             setShowWidget4(false)
-             setShowWidget5(false)
-             setShowWidget6(true) //6
-           }
+          if ((i) % 4 === 0) {
+            setShowWidget2(true) //2
+            setShowWidget3(false) 
+            setShowWidget4(false)
+            setShowWidget5(false)
+            setShowWidget6(false)
+          }
+          if ((i+1) % 4 === 0) {
+            setShowWidget2(false)
+            setShowWidget3(true) //3
+            setShowWidget4(false)
+            setShowWidget5(false)
+            setShowWidget6(false) 
+          }
+          if ((i+2) % 4 === 0) {
+            setShowWidget2(false)
+            setShowWidget3(false)
+            setShowWidget4(true) //4
+            setShowWidget5(false)
+            setShowWidget6(false)
+          }
+          if ((i+3) % 4 === 0) {
+            setShowWidget2(false)
+            setShowWidget3(false)
+            setShowWidget4(false)
+            setShowWidget5(true) //5
+            setShowWidget6(false)
+          }  
+          if ((i+4) % 4 === 0) {
+            setShowWidget2(false)
+            setShowWidget3(false)
+            setShowWidget4(false)
+            setShowWidget5(false)
+            setShowWidget6(true) //6
+          }
            i++
          }, 3000));
 
@@ -689,10 +742,19 @@ useEffect(() => {
 
         setSortWorkers(arr)
         //setMonthWorkers(arr)
+        setWorkers(arr)
+
+        //массив новых пользователей за месяц
+        const arrNew = workersAll.filter(item => new Date(item.createDate).getTime() > needDate)
+        setNewWorkers2(arrNew)
+
+        //массив активных пользователей
+        // const arrActiv = activWorkers2.filter(item => new Date(item.createDate).getTime() > needDate)
+        // setActivWorkers2(arrActiv)
 
         //массив удаленных пользователей
-        const arrDel = workersAll.filter(item => item.deleted === true && new Date(item.createDate).getTime() > needDate)
-        setDelWorkers(arrDel)
+        const arrDel = delWorkers.filter(item => item.deleted === true && new Date(item.createDate).getTime() > needDate)
+        setDelWorkers2(arrDel)
 
         let countSpec = 0
         let month3 = []
@@ -727,30 +789,41 @@ useEffect(() => {
 
          let i = 0
          setTimerId(setInterval(() => {
-           if ((i) % 4 === 0) {
-             setShowWidget3(true) //3
-             setShowWidget4(false)
-             setShowWidget5(false)
-             setShowWidget6(false)
-           }
-           if ((i+1) % 4 === 0) {
-             setShowWidget3(false)
-             setShowWidget4(true) //4
-             setShowWidget5(false)
-             setShowWidget6(false)
-           }
-           if ((i+2) % 4 === 0) {
-             setShowWidget3(false)
-             setShowWidget4(false)
-             setShowWidget5(true) //5
-             setShowWidget6(false)
-           }  
-           if ((i+3) % 4 === 0) {
-             setShowWidget3(false)
-             setShowWidget4(false)
-             setShowWidget5(false)
-             setShowWidget6(true) //6
-           }
+          if ((i) % 4 === 0) {
+            setShowWidget2(true) //2
+            setShowWidget3(false) 
+            setShowWidget4(false)
+            setShowWidget5(false)
+            setShowWidget6(false)
+          }
+          if ((i+1) % 4 === 0) {
+            setShowWidget2(false)
+            setShowWidget3(true) //3
+            setShowWidget4(false)
+            setShowWidget5(false)
+            setShowWidget6(false) 
+          }
+          if ((i+2) % 4 === 0) {
+            setShowWidget2(false)
+            setShowWidget3(false)
+            setShowWidget4(true) //4
+            setShowWidget5(false)
+            setShowWidget6(false)
+          }
+          if ((i+3) % 4 === 0) {
+            setShowWidget2(false)
+            setShowWidget3(false)
+            setShowWidget4(false)
+            setShowWidget5(true) //5
+            setShowWidget6(false)
+          }  
+          if ((i+4) % 4 === 0) {
+            setShowWidget2(false)
+            setShowWidget3(false)
+            setShowWidget4(false)
+            setShowWidget5(false)
+            setShowWidget6(true) //6
+          }
            i++
          }, 3000));
 
@@ -790,10 +863,17 @@ useEffect(() => {
         setCatCount(categories)
 
         setSortWorkers(arr)
+        setWorkers(arr)
+
+        //массив новых пользователей
+
+         //массив новых пользователей за год
+         const arrNew = workersAll.filter(item => item.createDate.split('T')[0].split('-')[0] === '2024')
+         setNewWorkers2(arrNew)
 
         //массив удаленных пользователей
-        const arrDel = workersAll.filter(item => item.deleted === true && item.createDate.split('T')[0].split('-')[0] === '2024')
-        setDelWorkers(arrDel)
+        const arrDel = delWorkers.filter(item => item.deleted === true && item.createDate.split('T')[0].split('-')[0] === '2024')
+        setDelWorkers2(arrDel)
 
         arr.map((item)=>console.log("month: ", new Date(item.createDate).getMonth()+1))
 
@@ -892,30 +972,41 @@ useEffect(() => {
 
          let i = 0
         setTimerId(setInterval(() => {
-           if ((i) % 4 === 0) {
-             setShowWidget3(true) //3
-             setShowWidget4(false)
-             setShowWidget5(false)
-             setShowWidget6(false)
-           }
-           if ((i+1) % 4 === 0) {
-             setShowWidget3(false)
-             setShowWidget4(true) //4
-             setShowWidget5(false)
-             setShowWidget6(false)
-           }
-           if ((i+2) % 4 === 0) {
-             setShowWidget3(false)
-             setShowWidget4(false)
-             setShowWidget5(true) //5
-             setShowWidget6(false)
-           }  
-           if ((i+3) % 4 === 0) {
-             setShowWidget3(false)
-             setShowWidget4(false)
-             setShowWidget5(false)
-             setShowWidget6(true) //6
-           }
+          if ((i) % 4 === 0) {
+            setShowWidget2(true) //2
+            setShowWidget3(false) 
+            setShowWidget4(false)
+            setShowWidget5(false)
+            setShowWidget6(false)
+          }
+          if ((i+1) % 4 === 0) {
+            setShowWidget2(false)
+            setShowWidget3(true) //3
+            setShowWidget4(false)
+            setShowWidget5(false)
+            setShowWidget6(false) 
+          }
+          if ((i+2) % 4 === 0) {
+            setShowWidget2(false)
+            setShowWidget3(false)
+            setShowWidget4(true) //4
+            setShowWidget5(false)
+            setShowWidget6(false)
+          }
+          if ((i+3) % 4 === 0) {
+            setShowWidget2(false)
+            setShowWidget3(false)
+            setShowWidget4(false)
+            setShowWidget5(true) //5
+            setShowWidget6(false)
+          }  
+          if ((i+4) % 4 === 0) {
+            setShowWidget2(false)
+            setShowWidget3(false)
+            setShowWidget4(false)
+            setShowWidget5(false)
+            setShowWidget6(true) //6
+          }
            i++
         }, 3000));
 
@@ -934,6 +1025,17 @@ useEffect(() => {
         //фильтрация таблицы за период
         let arr5 = workersAll.filter(item => new Date(item.createDate) > nextDay && new Date(item.createDate) < endDay);
         setSortWorkers(arr5)
+
+
+        //массив новых пользователей за период
+        const arrNew = workersAll.filter(item => new Date(item.createDate) > nextDay && new Date(item.createDate) < endDay)
+        setNewWorkers2(arrNew)
+
+        //массив активных пользователей
+
+        //массив удаленных пользователей
+        const arrDel = delWorkers.filter(item => new Date(item.createDate) > nextDay && new Date(item.createDate) < endDay)
+        setDelWorkers2(arrDel)
 
         let categories = []
         let count_cat
@@ -959,6 +1061,7 @@ useEffect(() => {
         console.log("categories: ", categories)
         setCatCount(categories)
         setSortWorkers(arr5)
+        setWorkers(arr5)
 
         //arr5.map((item)=>console.log("period: ", item))
 
@@ -1007,6 +1110,7 @@ useEffect(() => {
     setShowWidget3(false) //категория 1
     setShowWidget4(false) //категория 2
     setShowWidget5(false) //категория 3
+    setShowWidget6(false) //категория 3
     
   }
 
@@ -1077,10 +1181,10 @@ useEffect(() => {
 
                 {showWidget2 
                 ?<WidgetsDropdown2
-                  users={sortWorkers}
+                  users={workersAll}
                   newUsers={newWorkers} 
-                  activeUsers={activWorkers.length} 
-                  delUsers={delWorkers.length}
+                  activeUsers={activWorkers} 
+                  delUsers={delWorkers}
                 />
                 :""}
 
@@ -1112,11 +1216,11 @@ useEffect(() => {
                 : ""}
 
                 {showWidget6 
-                ?<WidgetsDropdown2
-                  users={sortWorkers}
-                  newUsers={newWorkers} 
-                  activeUsers={activWorkers.length} 
-                  delUsers={delWorkers2.length}
+                ?<WidgetsDropdown6
+                  users={workersAll}
+                  newUsers={newWorkers2} 
+                  activeUsers={activWorkers} 
+                  delUsers={delWorkers2}
                 />
                 :""}
                 

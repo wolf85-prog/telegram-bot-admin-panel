@@ -53,6 +53,10 @@ const Contact = ({ contact, worker }) => {
 
 	const lastMessage = getLastMessage(contact);
 
+	const onImageError = (e) => {
+		e.target.src = avatarDefault
+	}
+
 	return (
 		<Link
 			key={contact.id}
@@ -63,7 +67,7 @@ const Contact = ({ contact, worker }) => {
 				{
 					contact.avatar
 					? <> {contact.blockw ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
-						<img src={`${contact.avatar}`} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
+						<img src={`${contact.avatar}`} alt='' onError={onImageError} className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
 					</>
 					: <> {contact.blockw ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
 						<img src={avatarDefault} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
