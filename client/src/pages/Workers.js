@@ -17,6 +17,7 @@ import {
   CCardBody,
   CCollapse,
   CButton, 
+  CTooltip,
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
@@ -108,7 +109,9 @@ const Workers = () => {
       
         //worklist
         const newWorker = {
+          workerId: worker.workerId,
           date: newDate, 
+          projectId: worker.projectId,
           project: projectName,
           workerFamily: workerObject?.userfamily,
           workerName: workerObject?.username,
@@ -192,10 +195,20 @@ const Workers = () => {
                                           {item.date}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
-                                          {item.project}
+                                          <CTooltip
+                                              content={item.projectId}
+                                              placement="top"
+                                            >
+                                              <div>{item.project}</div>
+                                          </CTooltip>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 || item.accept ? 'red' : ''}}>
-                                            {item.workerFamily + " " + item.workerName}
+                                          <CTooltip
+                                            content={item.workerId}
+                                            placement="top"
+                                          > 
+                                            <div>{item.workerFamily + " " + item.workerName}</div>
+                                          </CTooltip>
                                         </CTableDataCell>
                                         <CTableDataCell style={{fontSize: '13px', textAlign: 'left'}}>
                                           <div onClick={()=>handleClick(index)} style={{cursor: 'pointer'}}>{!showTable[index] ? 'Посмотреть' : <br/>}</div>

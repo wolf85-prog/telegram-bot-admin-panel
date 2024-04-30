@@ -1304,7 +1304,8 @@ const fetchNotifAdmin = (data) => {
 			setCountPretendent,
 			soundsNotif, 
 			setSoundsNotif,
-			pretendents
+			pretendents,
+			setPretendents
 		}}>
 			{children}
 		</UsersContext.Provider>
