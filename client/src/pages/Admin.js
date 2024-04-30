@@ -142,7 +142,7 @@ const Admin = () => {
 
   //поиск
   useEffect(() => {
-		const filteredData = workersAll.filter(user=> (user.userfamily+user.username+user.chatId)?.toLowerCase().includes(text.toLowerCase()));
+		const filteredData = workersAll.filter(user=> (user.userfamily + user.username + user.chatId)?.toLowerCase().includes(text.toLowerCase()));
     setSortWorkers(text === '' ? workersAll : filteredData); 
     setWorkers(text === '' ? workers : filteredData);        
   }, [text]);
