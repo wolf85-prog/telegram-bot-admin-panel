@@ -155,7 +155,7 @@ const Profile = ({ user, closeSidebar }) => {
 	return (
 		<div className="profile">
 			<div className="profile__sectionW profile__sectionW--personal">
-				<div className="profile__avatar-wrapper profile__avatar-worker" ref={divBlock}>
+				<div className="profile__avatar-wrapperW profile__avatar-worker" ref={divBlock}>
 					{
 						user?.avatar
 							? <img src={user?.avatar} onError={onImageError} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
