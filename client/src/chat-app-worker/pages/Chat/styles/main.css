@@ -678,7 +678,7 @@ textarea:focus {
 }
 
 .profile__action-text {
-    display: block;
+    /* display: block; */
 }
 
 .profile__action-text--top, .profile__about-item {

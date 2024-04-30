@@ -169,10 +169,10 @@ const Profile = ({ user, closeSidebar }) => {
 
 				<li className="profile__actionW">
 					<p className="profile__actionW-left">
-						<span className="profile__action-text profile__action-text--bottom">
+						<span className="profile__action-text--bottom">
 							Телефон
 						</span>
-						<span className="profile__action-text profile__action-text--top profile__notion">
+						<span className="profile__action-text--top profile__notion">
 							{phone}
 						</span>
 					</p>
@@ -180,10 +180,10 @@ const Profile = ({ user, closeSidebar }) => {
 
 				<li className="profile__actionW">
 					<p className="profile__actionW-left">
-						<span className="profile__action-text profile__action-text--bottom">
+						<span className="profile__action-text--bottom">
 							Город
 						</span>
-						<span className="profile__action-text profile__action-text--top profile__notion">
+						<span className="profile__action-text--top profile__notion">
 							{user.city ? user.city : "—"}
 						</span>	
 					</p>
@@ -191,10 +191,10 @@ const Profile = ({ user, closeSidebar }) => {
 
 				<li className="profile__actionW">
 					<p className="profile__actionW-left">
-						<span className="profile__action-text profile__action-text--bottom">
+						<span className="profile__action-text--bottom">
 							Дата рождения
 						</span>
-						<span className="profile__action-text profile__action-text--top profile__notion">
+						<span className="profile__action-text--top profile__notion">
 							{user ? 
 							user.age
 							: "—"}
@@ -204,11 +204,11 @@ const Profile = ({ user, closeSidebar }) => {
 
 				<li className="profile__actionW">
 					<p className="profile__actionW-left">
-						<span className="profile__action-text profile__action-text--bottom">
+						<span className="profile__action-text--bottom">
 							Telegram ID
 						</span>
 						
-						<span className="profile__action-text profile__action-text--top profile__notion">
+						<span className="profile__action-text--top profile__notion">
 							{user.chatId}
 							<div style={{fontSize: '16px', color: '#656565'}}>{user.username ? `@${user.username}` : user.username}</div>				
 						</span>
@@ -217,10 +217,10 @@ const Profile = ({ user, closeSidebar }) => {
 
 				<li className="profile__actionW">
 					<p className="profile__actionW-left">
-						<span className="profile__action-text profile__action-text--bottom">
+						<span className="profile__action-text--bottom">
 							Специальность
 						</span>
-						<span className="profile__action-text profile__action-text--top">
+						<span className="profile__action-text--top">
 							{/* {worker.spec?.map((item)=>item.name).join('')} */}
 							<table className="table-noborder">{worker ? worker.spec?.map((worker, index) => <tr key={index}><td>{worker.name}</td></tr> ) : '—'}</table>
 						</span>	
@@ -229,17 +229,17 @@ const Profile = ({ user, closeSidebar }) => {
 
 				<li className="profile__actionW">
 					<p className="profile__actionW-left">
-						<span className="profile__action-text profile__action-text--bottom">
+						<span className="profile__action-text--bottom">
 							Последний отклик на проект
 						</span>
 						
-						<span className="profile__action-text profile__action-text--top profile__notion">
+						<span className="profile__action-text--top profile__notion">
 							{crmId3}
 						</span>
-						<span className="profile__action-text profile__action-text--top profile__notion">
+						<span className="profile__action-text--top profile__notion">
 							{crmId2}
 						</span>
-						<span className="profile__action-text profile__action-text--top profile__notion">
+						<span className="profile__action-text--top profile__notion">
 							{crmId}
 						</span>
 					</p>
