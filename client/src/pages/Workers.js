@@ -21,6 +21,8 @@ import {
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
+import arrowDown from '../assets/images/arrowDown.svg'
+
 import { getAllPretendent, getAllPretendentCount, getWorkers, getWorkersNotion100, getWorkersNotion, getWorkerNotionId} from './../http/workerAPI'
 
 import {getProjects} from './../http/adminAPI'
@@ -74,8 +76,8 @@ const Workers = () => {
 
     const fetchData = async () => {
 
-      let pretendents = await getAllPretendent();
-      //console.log("pretendents context: ", pretendents)
+      let res = await getAllPretendentCount(20, pretendents.length) //getAllPretendent();
+      console.log("pretendents workers: ", res)
 
       let workers = await getWorkers()
       //console.log("workers context: ", workers)
@@ -83,7 +85,7 @@ const Workers = () => {
       let projects = await getProjects();
       //console.log("projects workers: ", projects)
 
-      pretendents.map(async (worker, i) => {
+      res.map(async (worker, i) => {
 
         let userObject = projects.find((proj) => proj.id === worker.projectId);  
         const projectName = userObject?.title
@@ -149,6 +151,21 @@ const Workers = () => {
         ...prevShownComment,
         [ind]: !prevShownComment[ind]
       }));
+  }
+
+  const clickNext = async() => {
+
+    //1 все рассылки
+		let response = await getAllPretendentCount(20, pretendents.length) //getAllPretendent();
+    console.log("pretendent size: ", response.length)
+
+    const arrayPretendent = []
+			   
+
+    console.log("Всего сейчас: ", response.length)
+			
+    // setPretendents(response)	
+    // console.log("Ещё: ", response.length)
   }
 
   return (
@@ -241,8 +258,12 @@ const Workers = () => {
                                       ))
                                     }
                                 </CTableBody>                   
-                              </CTable>
-                            }
+                                </CTable>
+                              }
+
+                              <div style={{display: 'flex', justifyContent: 'center' }}>
+                                <img src={arrowDown} alt='' onClick={()=>clickNext()} style={{width: '50px', marginTop: '15px', cursor: 'pointer'}}></img>
+                              </div> 
                             </CCardBody>
                           </CCard>
                         </CCol>

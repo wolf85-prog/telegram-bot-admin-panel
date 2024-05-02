@@ -82,22 +82,28 @@ class PretendentController {
 
     //get All Count
     async getAllPretendentCount(req, res) {
-        try {           
+
+        const kol = req.params.count
+        const prev = req.params.prev
+        try {
             const count = await Pretendent.count();
             //console.log(count)
+
+            const k = parseInt(kol) + parseInt(prev)
 
             const spec = await Pretendent.findAll({
                 where: {otclick: {
                     [Op.not]: null
                 }},
-                // Add order conditions here....
                 order: [
-                    ['id', 'DESC'], //DESC
+                    ['id', 'ASC'], //DESC, ASC
                 ],
+                offset: count > 20 ? count - 20 : 0,
+                //limit : 50,
             })
             return res.status(200).json(spec);
         } catch (error) {
-            return res.status(500).json(error.spec);
+            return res.status(500).json(error.message);
         }
     }
 
