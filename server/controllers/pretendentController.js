@@ -94,11 +94,11 @@ class PretendentController {
             console.log("k: ", k)
 
             const spec = await Pretendent.findAll({
-                where: {otclick: {
-                    [Op.not]: null
-                }},
+                // where: {otclick: {
+                //     [Op.not]: null
+                // }},
                 order: [
-                    ['id', 'DESC'], //DESC, ASC
+                    ['id', 'ASC'], //DESC, ASC
                 ],
                 offset: count > k ? count - k : 0,
                 //limit : 50,
