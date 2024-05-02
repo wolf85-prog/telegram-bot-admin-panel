@@ -76,7 +76,7 @@ const Workers = () => {
 
     const fetchData = async () => {
 
-      let res = await getAllPretendentCount(20, pretendents.length) //getAllPretendent();
+      let res = await getAllPretendentCount(20, 0) //getAllPretendent();
       console.log("pretendents workers: ", res)
 
       let workers = await getWorkers()
