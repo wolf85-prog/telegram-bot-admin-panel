@@ -34,10 +34,11 @@ import deleteIcon from 'src/assets/images/delete.png'
 import editIcon from 'src/assets/images/pencil.png'
 import copyIcon from 'src/assets/images/copy.png'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
-import { delDistributionW, getPlan, newPlan } from 'src/http/adminAPI';
+import { delDistributionW, getDistributionsCountW, getPlan, newPlan } from 'src/http/adminAPI';
 
 import MyModal from "../components/MyModal/MyModal";
 import Close from "../assets/images/close.svg"
+import arrowDown from '../assets/images/arrowDown.svg'
 
 const DistributionW = () => {
   const { distributionsWork: messages, addNewDistrib, workersAll } = useUsersContext();
@@ -212,6 +213,16 @@ const DistributionW = () => {
       }));
   }
 
+  const clickNext = async() => {
+
+    //1 все рассылки
+		let response = await getDistributionsCountW(100, distributionsWork.length);
+    console.log("distrib size: ", response.length)
+
+    const arrayDistrib = []
+		
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -234,88 +245,92 @@ const DistributionW = () => {
                             <CCardBody>
                               <br /> 
 
-                            {loading ? 
-                                  
-                              <CSpinner/> :
+                              {loading ? 
+                                    
+                                <CSpinner/> :
 
-                              <CTable align="middle" className="mb-0 border" hover responsive>
-                                <CTableHead className='table-dark'>
-                                  <CTableRow>
-                                    <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Название проекта</CTableHeaderCell>
-                                    {/* <CTableHeaderCell className="text-center">Картинка</CTableHeaderCell> */}
-                                    <CTableHeaderCell className="text-center">Категория</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center">Получатели</CTableHeaderCell>    
-                                    <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Управление</CTableHeaderCell>
-                                  </CTableRow>
-                                </CTableHead>
-                                <CTableBody>
-                                  {distributionsWork.map((item, index) => (
-                                    <CTableRow v-for="item in tableItems" key={index} style={{height: '130px'}}>
-                                      {/* <CTableDataCell>
-                                        <div>{index+1}</div>
-                                      </CTableDataCell> */}
-                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                        <div>{item.date}</div>
-                                      </CTableDataCell>  
-                                      <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                        <div>{item.timestart}</div>
-                                      </CTableDataCell>  
-                                      <CTableDataCell className="text-center">
-                                        <CTooltip
-                                          content={item.projectId}
-                                          placement="top"
-                                        >
-                                          <div>{item.project}</div>
-                                        </CTooltip>
-                                      </CTableDataCell>    
-                                      {/* <CTableDataCell className="text-center">
-                                        {item.image.endsWith('.pdf') ?
-                                        <iframe src={item.image} height="120px" width="200px" title="myFramePdf"/>
-                                        : <div>{item.image ? <a href={item.image} target='_blank' rel="noreferrer"><img src={item.image} alt='' width={230} height={120} style={{objectFit: 'contain'}}></img></a> : ''}</div>
-                                        }
-                                      </CTableDataCell> */}
-                                      <CTableDataCell className="text-center">
-                                        <div dangerouslySetInnerHTML={{__html: item.receivers}} />
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center" onClick={()=>showReceivers(item.report)} style={{cursor: 'pointer'}}>
-                                        {
-                                          item.status === 'запланировано' ? 
-                                          <div style={{color: '#3887cd'}}>{item.count}</div>
-                                          :<div>{item.count} | {item.success ? item.success : "0"}</div>
-                                        }
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        {
-                                          item.status === 'запланировано' ? 
-                                          <div style={{color: '#3887cd'}}>{item.status}</div>
-                                          :<div style={{color: '#f5f114'}}>{item.status}</div>
-                                        }
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center">
-                                        {/* <Link to={'/distributionw_planer'} state={{ project: proj}}>
-                                          <CButton color="light" style={{marginRight: '10px'}}>
-                                            <img src={editIcon} alt='' width='10px' />
-                                          </CButton>
-                                        </Link> */}
-
-                                        {item.projectId ?   
-                                          <Link to={'/distributionw_edit'} state={{editD: true, delivered: item.delivered, project: item.projectId, id: item.id, category: item.categories, users: item.users, text: item.text, img: item.image, date: item.datestart, uuid: item.uuid, button: item.button, editButton: item.editButton, stavka: item.stavka, target: item.target}}><CButton color="light" style={{marginRight: '10px'}}><img src={item.delivered ? copyIcon : editIcon} alt='' width='10px' /></CButton></Link>
-                                          :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{marginRight: '10px'}}><img src={item.delivered ? copyIcon : editIcon} alt='' width='10px' /></CButton></Link>
-                                        }
-                                        
-                                        <CButton color="light" onClick={() => removeDescription(item)}>
-                                          <img src={deleteIcon} alt='' width='10px' />
-                                        </CButton>
-
-                                      </CTableDataCell>
+                                <CTable align="middle" className="mb-0 border" hover responsive>
+                                  <CTableHead className='table-dark'>
+                                    <CTableRow>
+                                      <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center">Название проекта</CTableHeaderCell>
+                                      {/* <CTableHeaderCell className="text-center">Картинка</CTableHeaderCell> */}
+                                      <CTableHeaderCell className="text-center">Категория</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center">Получатели</CTableHeaderCell>    
+                                      <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center">Управление</CTableHeaderCell>
                                     </CTableRow>
-                                  ))}
-                                </CTableBody>
-                              </CTable>
-                            }                              
+                                  </CTableHead>
+                                  <CTableBody>
+                                    {distributionsWork.map((item, index) => (
+                                      <CTableRow v-for="item in tableItems" key={index} style={{height: '130px'}}>
+                                        {/* <CTableDataCell>
+                                          <div>{index+1}</div>
+                                        </CTableDataCell> */}
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>{item.date}</div>
+                                        </CTableDataCell>  
+                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                          <div>{item.timestart}</div>
+                                        </CTableDataCell>  
+                                        <CTableDataCell className="text-center">
+                                          <CTooltip
+                                            content={item.projectId}
+                                            placement="top"
+                                          >
+                                            <div>{item.project}</div>
+                                          </CTooltip>
+                                        </CTableDataCell>    
+                                        {/* <CTableDataCell className="text-center">
+                                          {item.image.endsWith('.pdf') ?
+                                          <iframe src={item.image} height="120px" width="200px" title="myFramePdf"/>
+                                          : <div>{item.image ? <a href={item.image} target='_blank' rel="noreferrer"><img src={item.image} alt='' width={230} height={120} style={{objectFit: 'contain'}}></img></a> : ''}</div>
+                                          }
+                                        </CTableDataCell> */}
+                                        <CTableDataCell className="text-center">
+                                          <div dangerouslySetInnerHTML={{__html: item.receivers}} />
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center" onClick={()=>showReceivers(item.report)} style={{cursor: 'pointer'}}>
+                                          {
+                                            item.status === 'запланировано' ? 
+                                            <div style={{color: '#3887cd'}}>{item.count}</div>
+                                            :<div>{item.count} | {item.success ? item.success : "0"}</div>
+                                          }
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          {
+                                            item.status === 'запланировано' ? 
+                                            <div style={{color: '#3887cd'}}>{item.status}</div>
+                                            :<div style={{color: '#f5f114'}}>{item.status}</div>
+                                          }
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          {/* <Link to={'/distributionw_planer'} state={{ project: proj}}>
+                                            <CButton color="light" style={{marginRight: '10px'}}>
+                                              <img src={editIcon} alt='' width='10px' />
+                                            </CButton>
+                                          </Link> */}
+
+                                          {item.projectId ?   
+                                            <Link to={'/distributionw_edit'} state={{editD: true, delivered: item.delivered, project: item.projectId, id: item.id, category: item.categories, users: item.users, text: item.text, img: item.image, date: item.datestart, uuid: item.uuid, button: item.button, editButton: item.editButton, stavka: item.stavka, target: item.target}}><CButton color="light" style={{marginRight: '10px'}}><img src={item.delivered ? copyIcon : editIcon} alt='' width='10px' /></CButton></Link>
+                                            :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{marginRight: '10px'}}><img src={item.delivered ? copyIcon : editIcon} alt='' width='10px' /></CButton></Link>
+                                          }
+                                          
+                                          <CButton color="light" onClick={() => removeDescription(item)}>
+                                            <img src={deleteIcon} alt='' width='10px' />
+                                          </CButton>
+
+                                        </CTableDataCell>
+                                      </CTableRow>
+                                    ))}
+                                  </CTableBody>
+                                </CTable>
+                              } 
+
+                              <div style={{display: 'flex', justifyContent: 'center' }}>
+                                <img src={arrowDown} alt='' onClick={()=>clickNext()} style={{width: '50px', marginTop: '15px'}}></img>
+                              </div>                             
                             </CCardBody>
                           </CCard>
 

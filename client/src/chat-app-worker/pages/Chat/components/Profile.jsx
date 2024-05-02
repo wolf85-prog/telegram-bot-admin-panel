@@ -22,7 +22,7 @@ import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3'
 
 const Profile = ({ user, closeSidebar }) => {
 
-	console.log('user: ', user)
+	//console.log('user: ', user)
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
 	const host = process.env.REACT_APP_HOST

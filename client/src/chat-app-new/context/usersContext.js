@@ -8,6 +8,7 @@ import { getAllPretendent, getWContacts, getWConversation,
 
 import { getDistributions, 
 	getDistributionsW, 
+	getDistributionsCountW,
 	getDistributionsWPlan,
 	getManagers, 
 	getProjectsApi, 
@@ -454,7 +455,9 @@ const UsersProvider = ({ children }) => {
   	//get DistributionW
   	useEffect(() => {
     	const fetchData = async () => {
-			let response = await getDistributionsW();
+			//let response = await getDistributionsW();
+			//1 все рассылки 20
+			let response = await getDistributionsCountW(20, distributionsWork.length);
       		//console.log("distributionW: ", response.length)
 
 			let response2 = await getDistributionsWPlan();

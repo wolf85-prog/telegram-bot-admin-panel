@@ -14,6 +14,7 @@ const { newDistribution,
     delDistribution,
     newDistributionW, 
     getDistributionsW, 
+    getDistributionsCount,
     getDistributionsWPlan, 
     getDistributionsWId, 
     getDistributionW, 
@@ -91,6 +92,8 @@ route.post('/distributionsw/plan/update', editDistribWPlan)
 
 route.get('/distributionsw/send/:id', sendDistribW)
 route.get('/distributionsw/delmessages/:id', delMessagesDistribW)
+
+route.get('/distributionsw/count/get/:count/:prev', getDistributionsCount) //еще
 
 //----------------SOUND NOTIFICATIONS--------------------------------
 route.get('/soundnotif/get', getSoundNotif)

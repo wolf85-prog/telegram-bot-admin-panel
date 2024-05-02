@@ -126,6 +126,28 @@ class DistributionController {
         }
     }
 
+    async getDistributionsCount(req, res) {
+        const kol = req.params.count
+        const prev = req.params.prev
+        try {
+            const count = await Distributionw.count();
+            //console.log(count)
+
+            const k = parseInt(kol) + parseInt(prev)
+
+            const distributions = await Distributionw.findAll({
+                order: [
+                    ['id', 'ASC'], //DESC, ASC
+                ],
+                offset: count > k ? count - k : 0,
+                //limit : 50,
+            })
+            return res.status(200).json(distributions);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
     async getDistributionsWPlan(req, res) {
         try {
             const distributions = await Distributionw.findAll({

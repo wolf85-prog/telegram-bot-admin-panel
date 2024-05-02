@@ -300,6 +300,16 @@ export const getDistributionsW = async()=>{
      }
 }
 
+export const getDistributionsCountW = async(count, prev)=>{
+    try {
+        let response = await $host.get(`api/distributionsw/count/get/${count}/${prev}`);
+        //console.log(response);
+        return response.data;
+     } catch (error) {
+         console.log("error while calling getDistributionsW api", error.message);
+     }
+}
+
 export const getDistributionsWPlan = async()=>{
     try {
         let response = await $host.get(`api/distributionsw/plan/get`);
