@@ -96,10 +96,10 @@ class PretendentController {
                     [Op.not]: null
                 }},
                 order: [
-                    ['id', 'ASC'], //DESC, ASC
+                    ['id', 'DESC'], //DESC, ASC
                 ],
                 //offset: count > k ? count - k : 0,
-                limit : 50,
+                limit : k,
             })
             return res.status(200).json(spec);
         } catch (error) {
