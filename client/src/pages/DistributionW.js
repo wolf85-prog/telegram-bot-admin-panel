@@ -329,7 +329,7 @@ const DistributionW = () => {
                               } 
 
                               <div style={{display: 'flex', justifyContent: 'center' }}>
-                                <img src={arrowDown} alt='' onClick={()=>clickNext()} style={{width: '50px', marginTop: '15px'}}></img>
+                                <img src={arrowDown} alt='' onClick={()=>clickNext()} style={{width: '50px', marginTop: '15px', cursor: 'pointer'}}></img>
                               </div>                             
                             </CCardBody>
                           </CCard>
