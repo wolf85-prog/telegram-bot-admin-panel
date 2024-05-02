@@ -251,7 +251,8 @@ const Profile = ({ user, closeSidebar }) => {
 			</ul>
 
 			<div className="profile__sectionW profile__section--success">
-				<CIcon icon={cilPhone} className="profile__success-icon" />
+				{/* <CIcon icon={cilPhone} className="profile__success-icon" /> */}
+				<Icon id="phone" className="profile__success-icon" />
 				<p className="profile__success-text profile__worker" style={{cursor: 'pointer'}} onClick={()=>console.log("Позвонить")}>Позвонить</p>
 			</div>
 

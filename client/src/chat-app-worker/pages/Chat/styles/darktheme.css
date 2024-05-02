@@ -215,7 +215,8 @@
 }
 
 .dark-theme .profile__section--danger {
-    color: rgb(239, 105, 122);
+    /* color: rgb(239, 105, 122); */
+    color: rgb(223, 51, 51);
 }
 
 .dropdown-menu {
