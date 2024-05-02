@@ -85,7 +85,7 @@ const Workers = () => {
       let projects = await getProjects();
       //console.log("projects workers: ", projects)
 
-      res.reverse.map(async (worker, i) => {
+      res.map(async (worker, i) => {
 
         let userObject = projects.find((proj) => proj.id === worker.projectId);  
         const projectName = userObject?.title
