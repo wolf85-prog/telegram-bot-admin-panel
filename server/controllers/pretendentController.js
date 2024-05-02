@@ -87,16 +87,14 @@ class PretendentController {
         const prev = req.params.prev
         try {
             const count = await Pretendent.count();
-            console.log(count)
+            //console.log(count)
 
             const k = parseInt(kol) + parseInt(prev)
 
-            console.log("k: ", k)
-
             const spec = await Pretendent.findAll({
-                // where: {otclick: {
-                //     [Op.not]: null
-                // }},
+                where: {otclick: {
+                    [Op.not]: null
+                }},
                 order: [
                     ['id', 'ASC'], //DESC, ASC
                 ],
