@@ -457,7 +457,7 @@ const UsersProvider = ({ children }) => {
     	const fetchData = async () => {
 			//let response = await getDistributionsW();
 			//1 все рассылки 20
-			let response = await getDistributionsCountW(20, distributionsWork.length);
+			let response = await getDistributionsCountW(10, distributionsWork.length);
       		//console.log("distributionW: ", response.length)
 
 			let response2 = await getDistributionsWPlan();

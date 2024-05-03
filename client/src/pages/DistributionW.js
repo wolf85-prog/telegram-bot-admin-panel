@@ -233,7 +233,7 @@ const DistributionW = () => {
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
                   <>
-                    <h2>Рассылки</h2>
+                    {/* <h2>Рассылки</h2> */}
                       <Link to={'/distributionw_add'}><CButton color="primary" size="lg" >Новая рассылка</CButton></Link>
                       <CToaster ref={toaster} push={toast} placement="top-end" /> 
                       <br />
@@ -241,16 +241,14 @@ const DistributionW = () => {
                       <CRow>
                         <CCol xs>
                           <CCard className="mb-4">
-                            <CCardHeader>Рассылки для специалистов</CCardHeader>
                             <CCardBody>
-                              <br /> 
 
                               {loading ? 
                                     
                                 <CSpinner/> :
 
                                 <CTable align="middle" className="mb-0 border" hover responsive>
-                                  <CTableHead className='table-dark'>
+                                  <CTableHead className='table-light'>
                                     <CTableRow>
                                       <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
@@ -264,7 +262,7 @@ const DistributionW = () => {
                                   </CTableHead>
                                   <CTableBody>
                                     {distributionsWork.map((item, index) => (
-                                      <CTableRow v-for="item in tableItems" key={index} style={{height: '130px'}}>
+                                      <CTableRow v-for="item in tableItems" key={index} >
                                         {/* <CTableDataCell>
                                           <div>{index+1}</div>
                                         </CTableDataCell> */}

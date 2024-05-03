@@ -177,7 +177,7 @@ const Workers = () => {
 
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
-                    <h2>Претенденты</h2>
+                    {/* <h2>Претенденты</h2> */}
                     
                     <CRow className="mb-3">
                       <CCol sm={3} >
