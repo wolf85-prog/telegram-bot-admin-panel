@@ -34,7 +34,7 @@ const Contact = ({ contact, worker }) => {
 		if (Object.keys(contact.messages).length === 0) {
 			console.log("Сообщения не загружены!")
 			const messages = await getWMessages2(contact.conversationId, 10, 0)
-			console.log("messages: ", messages)
+			//console.log("messages: ", messages)
 
 			const arrayMessage = []
 				const allDate = []
@@ -79,15 +79,18 @@ const Contact = ({ contact, worker }) => {
 					obj[dates[i]] = arrayDateMessage;
 				}
 
-				console.log("obj: ", obj)
+				//console.log("obj: ", obj)
 
 				//сохранить сообщения в контексте пользователя
 				setUserWorkers((userWorkers) => {
 					let userIndex = userWorkers.findIndex((user) => user.chatId === contact.chatId.toString());
 					const usersCopy = JSON.parse(JSON.stringify(userWorkers));
+					usersCopy[userIndex].messages = obj
+
+					return usersCopy;
 				})
 		} else {
-			console.log(contact.conversationId)
+			//console.log(contact.conversationId)
 		}
 		
     }
