@@ -26,6 +26,7 @@ const Sidebar = () => {
 		// 	var dateA = new Date(a.date), dateB = new Date(b.date) 
 		// 	return dateB-dateA //сортировка по убывающей дате  
 		// })
+		
 		const arr = []
 
 		for (const item of userWorkers) {		

@@ -74,6 +74,8 @@ const Admin = () => {
   const [activWorkers, setActivWorkers] = useState([]);
   const [delWorkers, setDelWorkers] = useState([]);
 
+  const [sortDelWorkers, setSortDelWorkers] = useState([]);
+
   const [sortWorkers2, setSortWorkers2] = useState([]);
   const [newWorkers2, setNewWorkers2] = useState([]);
   const [activWorkers2, setActivWorkers2]= useState([]);
@@ -118,6 +120,7 @@ const Admin = () => {
   const [timerId, setTimerId] = useState()
   const [widthGrafik, setWdthGrafik] = useState(0);
   const [text, setText]= useState("");
+  const [textDelete, setTextDelete]= useState("");
   const [showTable, setShowTable] = useState([])
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
@@ -142,10 +145,16 @@ const Admin = () => {
 
   //поиск
   useEffect(() => {
-		const filteredData = workersAll.filter(user=> (user.userfamily + user.username + user.chatId)?.toLowerCase().includes(text.toLowerCase()));
+		const filteredData = workersAll.filter(user=> (user.userfamily + user.username + user.chatId)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setSortWorkers(text === '' ? workersAll : filteredData); 
-    setWorkers(text === '' ? workers : filteredData);        
+    setWorkers(text === '' ? workers : filteredData);  
   }, [text]);
+
+  //поиск удаленных специалистов
+  useEffect(() => {
+		const filteredData = delWorkers.filter(user=> (user.userfamily + user.username + user.chatId)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(textDelete.replace(/[её]/g, '(е|ё)').toLowerCase()));
+    setSortDelWorkers(textDelete === '' ? delWorkers : filteredData);  
+  }, [textDelete]);
 
 
   //get filter workers
@@ -162,6 +171,7 @@ const Admin = () => {
     //массив удаленных пользователей
     const arrDel = workersAll.filter(item => item.deleted === true)
     setDelWorkers(arrDel)
+    setSortDelWorkers(arrDel)
 
   }, [workersAll])
 //--------------------------------------------------------------------------------------------------
@@ -1753,7 +1763,7 @@ useEffect(() => {
                             <br/>
                             <CRow className="mb-3">
                               <CCol sm={3} >
-                                <CFormInput placeholder="Поиск специалиста..." onChange={(e)=>setText(e.target.value)} aria-label="workers"/>
+                                <CFormInput placeholder="Поиск специалиста..." onChange={(e)=>setTextDelete(e.target.value)} aria-label="workers"/>
                               </CCol>
                               <CCol sm={6}></CCol>
 
@@ -1782,7 +1792,7 @@ useEffect(() => {
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
-                                    {delWorkers.map((item, index) => (
+                                    {sortDelWorkers.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
                                         <CTableDataCell className="text-center">
                                           {String(new Date(item.createDate).getDate()).padStart(2, "0")+ "."+ String(new Date(item.createDate).getMonth()+1).padStart(2, "0") + "." +new Date(item.createDate).getFullYear()}

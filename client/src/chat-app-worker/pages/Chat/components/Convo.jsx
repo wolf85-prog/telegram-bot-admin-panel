@@ -307,7 +307,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 					</>
 				)}
 				
-				<div className="chat__date-wrapper">
+				<div key={dateIndex} className="chat__date-wrapper">
 					<span className="chat__date"> {date}</span>
 				</div>
 				{dateIndex === 0 && (

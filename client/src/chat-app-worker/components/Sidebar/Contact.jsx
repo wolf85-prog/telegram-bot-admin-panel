@@ -9,6 +9,8 @@ import blockUser from "./../../../chat-app-worker/assets/images/stop.png";
 
 import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 
+import { getWMessages2} from '../../../http/workerAPI'
+
 const Contact = ({ contact, worker }) => {
 	//console.log("worker contact: ", worker)
 	const { setPersonW } = useContext(AccountContext);
@@ -16,6 +18,7 @@ const Contact = ({ contact, worker }) => {
 	
 	//сделать пользователя непрочитанным
 	const { setUserWorkerAsUnread, setCountMessageWork } = useUsersContext();
+	const { userWorkers, setUserWorkers } = useUsersContext();
 
 	//обработка нажатия на пользователя из списка
     const getUser = async () => {
@@ -24,10 +27,69 @@ const Contact = ({ contact, worker }) => {
             id: contact.chatId, 
 			avatar: contact.avatar
         });
+
 		setUserWorkerAsUnread(contact.chatId)
 		setCountMessageWork(0)
 
-		//console.log("click")
+		if (Object.keys(contact.messages).length === 0) {
+			console.log("Сообщения не загружены!")
+			const messages = await getWMessages2(contact.conversationId, 10, 0)
+			console.log("messages: ", messages)
+
+			const arrayMessage = []
+				const allDate = []
+				
+				if (messages) {
+					[...messages].map(message => {
+						const d = new Date(message.createdAt);
+						const year = d.getFullYear();
+						const month = String(d.getMonth()+1).padStart(2, "0");
+						const day = String(d.getDate()).padStart(2, "0");
+						const chas = d.getHours();
+						const minut = String(d.getMinutes()).padStart(2, "0");
+					
+						const newDateMessage = `${day}.${month}.${year}`
+				
+						const newMessage = {
+							date: newDateMessage,
+							content: message.text,
+							image: message.type === 'image' ? true : false,
+							descript: message.buttons ? message.buttons : '',
+							sender: message.senderId,
+							time: chas + ' : ' + minut,
+							status: 'sent',
+							id:message.messageId,
+							reply:message.replyId,
+						}
+						arrayMessage.push(newMessage)
+						allDate.push(newDateMessage)
+					})
+				}	
+				
+				const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
+				
+				let obj = {};
+				for (let i = 0; i < dates.length; i++) {
+					const arrayDateMessage = []
+					for (let j = 0; j < arrayMessage.length; j++) {
+						if (arrayMessage[j].date === dates[i]) {
+							arrayDateMessage.push(arrayMessage[j])							
+						}
+					}	
+					obj[dates[i]] = arrayDateMessage;
+				}
+
+				console.log("obj: ", obj)
+
+				//сохранить сообщения в контексте пользователя
+				setUserWorkers((userWorkers) => {
+					let userIndex = userWorkers.findIndex((user) => user.chatId === contact.chatId.toString());
+					const usersCopy = JSON.parse(JSON.stringify(userWorkers));
+				})
+		} else {
+			console.log(contact.conversationId)
+		}
+		
     }
 	
 	const getLastMessage = () => {
@@ -42,6 +104,8 @@ const Contact = ({ contact, worker }) => {
 			if (JSON.stringify(contact.messages) !== '{}') {
 				messages = [...contact.messages[recentMessageDate]];
 			}	
+
+			//console.log("Сообщения: ", messages.length)
 
 			if (messages.length) {
 				const lastMessage = messages.pop();
