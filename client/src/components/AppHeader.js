@@ -46,18 +46,26 @@ const AppHeader = (props) => {
     <CToast autohide={false} visible={true} color="success" className="text-white align-items-center">
       <div className="d-flex">
         <CToastBody>
-          <svg
-              className="rounded me-2"
-              width="100"
-              height="100"
-              xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="xMidYMid slice"
-              focusable="false"
-              role="img"
-          >
-            <rect width="100%" height="100%" fill="#007aff"></rect>
-          </svg>
-          ФИО
+          <div style={{display: 'flex'}}>
+            <svg
+                className="rounded me-2"
+                width="100"
+                height="100"
+                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="xMidYMid slice"
+                focusable="false"
+                role="img"
+            >
+              <rect width="100%" height="100%" fill="#007aff"></rect>
+            </svg>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+              <p>ФИО</p>
+              <span>г. Москва</span>
+              <span>01.01.2000</span>
+              <span>-звукорежиссер</span>
+            </div>
+          </div>
+          
         </CToastBody>
         <CToastClose className="me-2 m-auto" white />
       </div>
