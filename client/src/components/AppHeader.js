@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useRef} from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -15,6 +15,10 @@ import {
   CFormInput,
   CProgress,
   CProgressBar,
+  CToast,
+  CToastBody,
+  CToaster,
+  CToastClose,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import Icon from "./../../src/chat-app-new/components/Icon";
@@ -29,8 +33,36 @@ const AppHeader = (props) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  //const { newProject } = useUsersContext();
-  //console.log("countProject: ", newProject)
+  const [toast, addToast] = useState(0)
+  const toaster = useRef()
+
+
+  const clickPhone = () => {
+    addToast(exampleToast) //ваша рассылка удалена
+    console.log("vsdfdsf")
+  }
+
+  const exampleToast = (
+    <CToast autohide={false} visible={true} color="success" className="text-white align-items-center">
+      <div className="d-flex">
+        <CToastBody>
+          <svg
+              className="rounded me-2"
+              width="100"
+              height="100"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="xMidYMid slice"
+              focusable="false"
+              role="img"
+          >
+            <rect width="100%" height="100%" fill="#007aff"></rect>
+          </svg>
+          ФИО
+        </CToastBody>
+        <CToastClose className="me-2 m-auto" white />
+      </div>
+    </CToast>
+  )
 
   return (
     <CHeader position="sticky" className="mb-4">
@@ -45,6 +77,9 @@ const AppHeader = (props) => {
           <CIcon icon={logo} height={48} alt="Logo" />
           {/* <h5>U.L.E.Y TEAM</h5> */}
         </CHeaderBrand>
+
+        <CToaster ref={toaster} push={toast} placement="top-end" /> 
+
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
             <CNavLink to="/dashboard" component={NavLink}>
@@ -98,7 +133,7 @@ const AppHeader = (props) => {
             </CButton>
           </CNavItem>
           <CNavItem>
-            <Icon id="phone"/>
+            <Icon id="phone" onClick={clickPhone}/>
             {/* <CIcon icon={cilPhone} size="lg" /> */}
           </CNavItem>
           <CNavItem>
@@ -132,6 +167,7 @@ const AppHeader = (props) => {
         <AppBreadcrumb tabs={props.tabs} />
       </CContainer>
     </CHeader>
+
   )
 }
 

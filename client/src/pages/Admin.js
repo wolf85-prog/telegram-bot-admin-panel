@@ -21,6 +21,9 @@ import {
   CTableHeaderCell,
   CTableRow,
   CCollapse,
+  CToast,
+  CToastBody,
+  CToastClose,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import {
@@ -1854,7 +1857,6 @@ useEffect(() => {
 
                 </Suspense>
             </CContainer>
-
         </div>
         <AppFooter />
       </div>
