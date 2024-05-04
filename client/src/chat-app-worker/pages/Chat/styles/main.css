@@ -215,7 +215,7 @@
     border-left: 6px solid #DBF8C6;
 }
 
-
+/* image */
 
 .chat__msg-group>*:nth-child(1):not(.chat__msg_img--sent)::before, .chat__msg_img--sent+.chat__msg_img--rxd::before {
     content: "";

@@ -11,9 +11,14 @@ import {
   CNavLink,
   CNavItem,
   CBadge,
+  CButton,
+  CFormInput,
+  CProgress,
+  CProgressBar,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
+import Icon from "./../../src/chat-app-new/components/Icon";
+import { cilBell, cilEnvelopeOpen, cilList, cilMenu, cilPhone } from '@coreui/icons'
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { AppBreadcrumb } from './index'
@@ -53,7 +58,49 @@ const AppHeader = (props) => {
             <CNavLink href="/chat3">Проекты</CNavLink>
           </CNavItem>
         </CHeaderNav>
-        <CHeaderNav>
+        <CHeaderNav style={{marginTop: 'auto'}}>
+          <CNavItem> 
+            <CButton color="dark" style={{marginRight: '10px', background: '#595d5f', fontSize: '12px'}}>
+              Д
+            </CButton>
+          </CNavItem>
+          <CNavItem>
+            <div style={{marginRight: '20px', width:'50px'}}>
+              <CProgress color="success" height={32} value={100} >100%</CProgress>
+            </div>
+          </CNavItem>
+          <CNavItem> 
+            <CButton color="dark" style={{marginRight: '10px', background: '#595d5f', fontSize: '12px'}}>
+              А
+            </CButton>
+          </CNavItem>
+          <CNavItem>
+            <div style={{marginRight: '20px', width:'50px'}}>
+              <CProgress color="success" height={32} value={100} >100%</CProgress>
+            </div>
+          </CNavItem>
+          <CNavItem>
+            <CButton color="dark" style={{marginRight: '10px', background: '#595d5f', fontSize: '12px'}}>
+              -
+            </CButton>
+          </CNavItem>
+          <CNavItem>
+            <CFormInput id="autoSizingInput" placeholder="100" style={{width: '55px', marginRight: '10px', fontSize: '12px'}}/>
+          </CNavItem> 
+          <CNavItem> 
+            <CButton color="dark" style={{marginRight: '10px', background: '#595d5f', fontSize: '12px'}}>
+              +
+            </CButton>
+          </CNavItem>
+          <CNavItem>
+            <CButton color="dark" style={{marginRight: '10px', background: 'red', fontSize: '12px'}}>
+              Mute
+            </CButton>
+          </CNavItem>
+          <CNavItem>
+            <Icon id="phone"/>
+            {/* <CIcon icon={cilPhone} size="lg" /> */}
+          </CNavItem>
           <CNavItem>
             <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
               <CIcon icon={cilBell} size="lg" />

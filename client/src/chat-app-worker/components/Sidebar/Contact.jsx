@@ -6,6 +6,7 @@ import { AccountContext } from './../../../chat-app-new/context/AccountProvider'
 import avatarDefault from "./../../../chat-app-new/assets/images/no-avatar.png";
 import avatarBlacklist from "./../../../chat-app-worker/assets/images/uncheck.png";
 import blockUser from "./../../../chat-app-worker/assets/images/stop.png";
+import block18 from "./../../../assets/images/block18.png";
 
 import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 
@@ -141,11 +142,18 @@ const Contact = ({ contact, worker }) => {
 					</>
 				}
 				{
-				worker.length !== 0 ? 
-				((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ? 
-				<img src={avatarBlacklist} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
-				: "")
-				: ""
+					worker.length !== 0 ? 
+					((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ? 
+					<img src={avatarBlacklist} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
+					: "")
+					: ""
+				}
+				{
+					worker.length !== 0 ? 
+					((JSON.parse(worker[0].worklist)).find(item => item.spec === '+18') ? 
+					<img src={block18} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
+					: "")
+					: ""
 				}
 			</div>
 			<div className="sidebar-contact__content">

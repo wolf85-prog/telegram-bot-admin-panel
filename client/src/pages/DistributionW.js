@@ -311,11 +311,11 @@ const DistributionW = () => {
                                           </Link> */}
 
                                           {item.projectId ?   
-                                            <Link to={'/distributionw_edit'} state={{editD: true, delivered: item.delivered, project: item.projectId, id: item.id, category: item.categories, users: item.users, text: item.text, img: item.image, date: item.datestart, uuid: item.uuid, button: item.button, editButton: item.editButton, stavka: item.stavka, target: item.target}}><CButton color="light" style={{marginRight: '10px'}}><img src={item.delivered ? copyIcon : editIcon} alt='' width='10px' /></CButton></Link>
-                                            :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{marginRight: '10px'}}><img src={item.delivered ? copyIcon : editIcon} alt='' width='10px' /></CButton></Link>
+                                            <Link to={'/distributionw_edit'} state={{editD: true, delivered: item.delivered, project: item.projectId, id: item.id, category: item.categories, users: item.users, text: item.text, img: item.image, date: item.datestart, uuid: item.uuid, button: item.button, editButton: item.editButton, stavka: item.stavka, target: item.target}}><CButton color="light" style={{marginRight: '10px', borderColor: 'transparent', background: '#2b3338',}}><img src={item.delivered ? copyIcon : editIcon} alt='' width='10px' /></CButton></Link>
+                                            :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{borderColor: 'transparent', background: '#2b3338', marginRight: '10px'}}><img src={item.delivered ? copyIcon : editIcon} alt='' width='10px' /></CButton></Link>
                                           }
                                           
-                                          <CButton color="light" onClick={() => removeDescription(item)}>
+                                          <CButton color="light" style={{borderColor: 'transparent', background: '#2b3338'}} onClick={() => removeDescription(item)}>
                                             <img src={deleteIcon} alt='' width='10px' />
                                           </CButton>
 
