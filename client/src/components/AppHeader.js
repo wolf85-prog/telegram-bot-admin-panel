@@ -39,7 +39,6 @@ const AppHeader = (props) => {
 
   const clickPhone = () => {
     addToast(exampleToast) //ваша рассылка удалена
-    console.log("vsdfdsf")
   }
 
   const exampleToast = (
@@ -101,26 +100,27 @@ const AppHeader = (props) => {
             <CNavLink href="/chat3">Проекты</CNavLink>
           </CNavItem>
         </CHeaderNav>
-        <CHeaderNav style={{marginTop: 'auto'}}>
+        <CHeaderNav style={{marginTop: 'auto', display: 'flex', alignItems: 'center'}}>
           <CNavItem> 
-            <CButton color="dark" style={{marginRight: '10px', background: '#595d5f', fontSize: '12px'}}>
-              Д
-            </CButton>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+              <CButton color="dark" style={{marginRight: '10px', marginBottom: '5px', background: '#595d5f', fontSize: '10px', width:'20px', height: '20px', padding: '0'}}>
+                Д
+              </CButton>
+              <CButton color="dark" style={{marginRight: '10px',  background: '#595d5f', fontSize: '10px', width:'20px', height: '20px', padding: '0'}}>
+                А
+              </CButton>
+            </div>  
           </CNavItem>
           <CNavItem>
-            <div style={{marginRight: '20px', width:'50px'}}>
-              <CProgress color="success" height={32} value={100} >100%</CProgress>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+              <div style={{marginRight: '20px', marginBottom: '5px', width:'200px'}}>
+                <CProgress color="success" height={20} value={100} >100%</CProgress>
+              </div>
+              <div style={{marginRight: '20px', width:'200px'}}>
+                <CProgress color="success" height={20} value={100} >100%</CProgress>
+              </div>
             </div>
-          </CNavItem>
-          <CNavItem> 
-            <CButton color="dark" style={{marginRight: '10px', background: '#595d5f', fontSize: '12px'}}>
-              А
-            </CButton>
-          </CNavItem>
-          <CNavItem>
-            <div style={{marginRight: '20px', width:'50px'}}>
-              <CProgress color="success" height={32} value={100} >100%</CProgress>
-            </div>
+            
           </CNavItem>
           <CNavItem>
             <CButton color="dark" style={{marginRight: '10px', background: '#595d5f', fontSize: '12px', width: '35px', height: '35px'}}>
@@ -141,9 +141,8 @@ const AppHeader = (props) => {
             </CButton>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
-              {/* <Icon id="phone" onClick={clickPhone}/> */}
-              <CIcon icon={cilPhone} size="lg" />
+            <CNavLink onClick={clickPhone} style={{position: 'relative'}}>
+              <CIcon icon={cilPhone} size="lg"  />
             </CNavLink>
           </CNavItem>
           <CNavItem>
