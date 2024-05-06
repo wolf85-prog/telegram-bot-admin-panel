@@ -33,6 +33,8 @@ const AppHeader = (props) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
+  const [soundCount, setSoundCount] = useState(100)
+
   const [toast, addToast] = useState(0)
   const toaster = useRef()
 
@@ -70,6 +72,30 @@ const AppHeader = (props) => {
       </div>
     </CToast>
   )
+
+  const plusSound = () => {
+    if (soundCount === 75) {
+      setSoundCount(100)
+    } else if (soundCount === 50) {
+      setSoundCount(75)
+    } else if (soundCount === 25) {
+      setSoundCount(50)
+    } else if (soundCount === 0) {
+      setSoundCount(25)
+    }  
+  }
+
+  const minusSound = () => {
+    if (soundCount === 100) {
+      setSoundCount(75)
+    } else if (soundCount === 75) {
+      setSoundCount(50)
+    } else if (soundCount === 50) {
+      setSoundCount(25)
+    } else if (soundCount === 25) {
+      setSoundCount(0)
+    } 
+  }
 
   return (
     <CHeader position="sticky" className="mb-4">
@@ -123,20 +149,24 @@ const AppHeader = (props) => {
             
           </CNavItem>
           <CNavItem>
-            <CButton color="dark" style={{marginRight: '10px', background: '#595d5f', fontSize: '12px', width: '35px', height: '35px'}}>
-              -
-            </CButton>
-          </CNavItem>
-          <CNavItem>
-            <CFormInput id="autoSizingInput" placeholder="100" style={{width: '35px', marginRight: '10px', fontSize: '10px', marginRight: '10px', height: '35px', paddingLeft: '8px', paddingRight: '0px'}}/>
-          </CNavItem> 
-          <CNavItem> 
-            <CButton color="dark" style={{marginRight: '10px', background: '#595d5f', fontSize: '12px', width: '35px', height: '35px'}}>
+            <CButton onClick={plusSound} color="dark" style={{marginRight: '10px', textAlign:'center', background: '#595d5f', fontSize: '10px', width: '30px', height: '30px'}}>
               +
             </CButton>
           </CNavItem>
           <CNavItem>
-            <CButton color="dark" style={{marginRight: '10px', background: 'red', fontSize: '10px', width: '35px', height: '35px', paddingRight: '0px', paddingLeft: '0px'}}>
+            <CFormInput 
+              id="autoSizingInput" 
+              style={{width: '30px', textAlign:'center', marginRight: '10px', fontSize: '10px', marginRight: '10px', height: '30px', paddingLeft: '0px', paddingRight: '0px'}}
+              value={soundCount}
+            />
+          </CNavItem> 
+          <CNavItem> 
+            <CButton onClick={minusSound} color="dark" style={{marginRight: '10px', textAlign:'center', background: '#595d5f', fontSize: '10px', width: '30px', height: '30px'}}>
+              -
+            </CButton>
+          </CNavItem>
+          <CNavItem>
+            <CButton color="dark" style={{marginRight: '10px', background: 'red', fontSize: '10px', width: '30px', height: '30px', paddingRight: '0px', paddingLeft: '0px'}}>
               Mute
             </CButton>
           </CNavItem>
