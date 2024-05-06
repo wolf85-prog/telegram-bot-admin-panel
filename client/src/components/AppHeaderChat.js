@@ -121,50 +121,50 @@ const AppHeader = () => {
         <CHeaderNav style={{marginTop: 'auto', display: 'flex', alignItems: 'center'}}>
           <CNavItem> 
             <div style={{display: 'flex', flexDirection: 'column'}}>
-              <CButton color="dark" style={{marginRight: '10px', marginBottom: '5px', background: '#595d5f', fontSize: '10px', width:'20px', height: '20px', padding: '0'}}>
+              <CButton color="dark" style={{marginRight: '10px', marginBottom: '5px', background: '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
                 Д
               </CButton>
-              <CButton color="dark" style={{marginRight: '10px',  background: '#595d5f', fontSize: '10px', width:'20px', height: '20px', padding: '0'}}>
+              <CButton color="dark" style={{marginRight: '10px',  background: '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
                 А
               </CButton>
             </div>  
           </CNavItem>
           <CNavItem>
             <div style={{display: 'flex', flexDirection: 'column'}}>
-              <div style={{marginRight: '20px', marginBottom: '5px', width:'200px'}}>
-                <CProgress color="success" height={20} value={100} >100%</CProgress>
+              <div style={{marginRight: '20px', marginBottom: '15px', width:'200px'}}>
+                <CProgress color="success" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
               </div>
               <div style={{marginRight: '20px', width:'200px'}}>
-                <CProgress color="success" height={20} value={100} >100%</CProgress>
+                <CProgress color="success" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
               </div>
             </div>
             
           </CNavItem>
           <CNavItem>
-            <CButton onClick={plusSound} color="dark" style={{marginRight: '10px', textAlign:'center', background: '#595d5f', fontSize: '10px', width: '30px', height: '30px'}}>
+            <CButton onClick={plusSound} color="dark" style={{marginRight: '10px', textAlign:'center', padding: '0', background: '#595d5f', fontSize: '14px', width: '23px', height: '23px', marginTop: '-7px'}}>
               +
             </CButton>
           </CNavItem>
           <CNavItem>
             <CFormInput 
               id="autoSizingInput" 
-              style={{width: '30px', textAlign:'center', marginRight: '10px', fontSize: '10px', marginRight: '10px', height: '30px', paddingLeft: '0px', paddingRight: '0px'}}
+              style={{width: '25px', textAlign:'center', marginRight: '10px', fontSize: '9px', marginRight: '10px', height: '25px', paddingLeft: '0px', paddingRight: '0px', marginTop: '-2px'}}
               value={soundCount}
             />
           </CNavItem> 
           <CNavItem> 
-            <CButton onClick={minusSound} color="dark" style={{marginRight: '10px', textAlign:'center', background: '#595d5f', fontSize: '10px', width: '30px', height: '30px'}}>
+            <CButton onClick={minusSound} color="dark" style={{marginRight: '10px', textAlign:'center', padding: '0', background: '#595d5f', fontSize: '14px', width: '23px', height: '23px', marginTop: '-7px'}}>
               -
             </CButton>
           </CNavItem>
           <CNavItem>
-            <CButton color="dark" style={{marginRight: '10px', background: 'red', fontSize: '10px', width: '30px', height: '30px', paddingRight: '0px', paddingLeft: '0px'}}>
+            <CButton color="dark" style={{marginRight: '20px', background: 'red', fontSize: '7px', width: '23px', height: '23px', paddingRight: '0px', paddingLeft: '0px', marginTop: '-7px'}}>
               Mute
             </CButton>
           </CNavItem>
           <CNavItem>
-            <CNavLink onClick={clickPhone} style={{position: 'relative'}}>
-              <CIcon icon={cilPhone} size="lg"  />
+            <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
+              <CIcon icon={cilPhone} size="lg"/>
             </CNavLink>
           </CNavItem>
           <CNavItem>
