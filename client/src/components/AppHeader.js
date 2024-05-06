@@ -140,10 +140,10 @@ const AppHeader = (props) => {
           <CNavItem>
             <div style={{display: 'flex', flexDirection: 'column'}}>
               <div style={{marginRight: '20px', marginBottom: '15px', width:'200px'}}>
-                <CProgress color="success" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
+                <CProgress color="primery" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
               </div>
               <div style={{marginRight: '20px', width:'200px'}}>
-                <CProgress color="success" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
+                <CProgress color="info" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
               </div>
             </div>
             
