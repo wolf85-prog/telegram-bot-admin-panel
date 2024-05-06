@@ -123,26 +123,28 @@ const AppHeader = (props) => {
             </div>
           </CNavItem>
           <CNavItem>
-            <CButton color="dark" style={{marginRight: '10px', background: '#595d5f', fontSize: '12px'}}>
+            <CButton color="dark" style={{marginRight: '10px', background: '#595d5f', fontSize: '12px', width: '35px', height: '35px'}}>
               -
             </CButton>
           </CNavItem>
           <CNavItem>
-            <CFormInput id="autoSizingInput" placeholder="100" style={{width: '55px', marginRight: '10px', fontSize: '12px'}}/>
+            <CFormInput id="autoSizingInput" placeholder="100" style={{width: '35px', marginRight: '10px', fontSize: '10px', marginRight: '10px', height: '35px', paddingLeft: '8px', paddingRight: '0px'}}/>
           </CNavItem> 
           <CNavItem> 
-            <CButton color="dark" style={{marginRight: '10px', background: '#595d5f', fontSize: '12px'}}>
+            <CButton color="dark" style={{marginRight: '10px', background: '#595d5f', fontSize: '12px', width: '35px', height: '35px'}}>
               +
             </CButton>
           </CNavItem>
           <CNavItem>
-            <CButton color="dark" style={{marginRight: '10px', background: 'red', fontSize: '12px'}}>
+            <CButton color="dark" style={{marginRight: '10px', background: 'red', fontSize: '10px', width: '35px', height: '35px', paddingRight: '0px', paddingLeft: '0px'}}>
               Mute
             </CButton>
           </CNavItem>
           <CNavItem>
-            <Icon id="phone" onClick={clickPhone}/>
-            {/* <CIcon icon={cilPhone} size="lg" /> */}
+            <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
+              {/* <Icon id="phone" onClick={clickPhone}/> */}
+              <CIcon icon={cilPhone} size="lg" />
+            </CNavLink>
           </CNavItem>
           <CNavItem>
             <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
