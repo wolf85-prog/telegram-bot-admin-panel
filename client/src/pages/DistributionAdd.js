@@ -114,7 +114,7 @@ const DistributionAdd = () => {
 
   {/* Отправка рассылки */}
   const onSendText = async() => {
-    console.log(selected)
+    //console.log(selected)
     
     let arrUsers = []
     let countSuccess = 0
@@ -161,6 +161,7 @@ const DistributionAdd = () => {
       //отправить в телеграмм
       let sendToTelegram
       if (text !== '') {
+        console.log(arrUsers, distrNew)
         const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
         console.log("url_send_msg: ", url_send_msg)
         sendToTelegram = await $host.get(url_send_msg);
@@ -168,15 +169,17 @@ const DistributionAdd = () => {
 
         const { status } = sendToTelegram;              
         if (status === 200) {
-          console.log("статус 200 текст")
+          console.log("статус 200 текст", arrUsers, distrNew.id)
           //countSuccess = countSuccess + 1 
           
           //обновить статус доставки
           arrUsers[index-1].status = 200  
           arrUsers[index-1].mess = sendToTelegram.data?.result?.message_id 
+          
+          console.log("res: ", {receivers: JSON.stringify(arrUsers)}, distrNew.id)
 
           //обновить бд рассылку
-          await editDistribution(JSON.stringify(arrUsers), distrNew.id)
+          await editDistribution({receivers: JSON.stringify(arrUsers)}, distrNew.id)
           // const newDistrib = await Distribution.update(
           //     {    
           //         report: JSON.stringify(arrUsers),  
@@ -210,7 +213,7 @@ const DistributionAdd = () => {
           arrUsers[index-1].mess = sendPhotoToTelegram.data?.result?.message_id   
 
           //обновить бд рассылку
-          await editDistribution(JSON.stringify(arrUsers), distrNew.id)
+          await editDistribution({receivers: JSON.stringify(arrUsers)}, distrNew.id)
           // const newDistrib = await Distributionw.update(
           //     { delivered: true,
           //         report: JSON.stringify(arrUsers),  

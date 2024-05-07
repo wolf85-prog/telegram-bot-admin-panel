@@ -254,7 +254,8 @@ export const uploadFile = async (data) =>{
 //distribution
 export const newDistribution = async (data) =>{
     try {
-        await $host.post(`api/distribution/add`, data); 
+        let response = await $host.post(`api/distribution/add`, data); 
+        return response.data;
     } catch (error) {
         console.log("error while calling newDistribution api",error.message);
     }
@@ -294,7 +295,7 @@ export const newDistributionW = async (data) =>{
         let response = await $host.post(`api/distributionw/add`, data); 
         return response.data;
     } catch (error) {
-        console.log("error while calling newDistribution api",error.message);
+        console.log("error while calling newDistributionW api",error.message);
     }
 }
 
