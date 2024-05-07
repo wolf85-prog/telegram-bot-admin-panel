@@ -12,6 +12,7 @@ const { newDistribution,
     getDistributionsId, 
     getDistribution, 
     delDistribution,
+    editDistrib,
     newDistributionW, 
     getDistributionsW, 
     getDistributionsCount,
@@ -78,6 +79,7 @@ route.post('/distribution/add', newDistribution)
 route.get('/distributions/get', getDistributions)
 route.get('/distribution/get/:id', getDistribution)
 route.delete('/distributions/delete/:id', delDistribution)
+route.patch('/distributions/update/:id', editDistrib)
 
 route.post('/distributionw/add', newDistributionW)
 route.get('/distributionsw/get', getDistributionsW)

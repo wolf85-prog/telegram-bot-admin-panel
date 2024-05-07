@@ -19,9 +19,10 @@ import { MultiSelect } from "react-multi-select-component";
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { $host } from './../http/index'
 import { useNavigate } from 'react-router-dom';
-import { newDistribution, getDistributions } from './../http/adminAPI';
+import { newDistribution, getDistributions, editDistribution } from './../http/adminAPI';
 import { newMessage, uploadFile } from './../http/chatAPI';
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
+
 
 const DistributionAdd = () => {
 
@@ -114,6 +115,9 @@ const DistributionAdd = () => {
   {/* Отправка рассылки */}
   const onSendText = async() => {
     console.log(selected)
+    
+    let arrUsers = []
+    let countSuccess = 0
 
     audio.play();
 
@@ -130,10 +134,18 @@ const DistributionAdd = () => {
     console.log("message send button: ", message);
 
     //сохранение рассылки в базе данных
-    await newDistribution(message)
+    const distrNew = await newDistribution(message)
     
     selected.map(async (user, index) => {
       console.log("Пользователю ID: " + user.value + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
+
+      //по-умолчанию пока сообщение не отправлено
+      arrUsers.push({
+        label: user.label,
+        value: user.value,
+        status: 500,
+        mess: null,
+      }) 
 
       let client = clients.filter((client) => client.chatId === user.value.toString())[0];
       
@@ -153,6 +165,27 @@ const DistributionAdd = () => {
         console.log("url_send_msg: ", url_send_msg)
         sendToTelegram = await $host.get(url_send_msg);
         console.log('sendToTelegram: ', sendToTelegram)
+
+        const { status } = sendToTelegram;              
+        if (status === 200) {
+          console.log("статус 200 текст")
+          //countSuccess = countSuccess + 1 
+          
+          //обновить статус доставки
+          arrUsers[index-1].status = 200  
+          arrUsers[index-1].mess = sendToTelegram.data?.result?.message_id 
+
+          //обновить бд рассылку
+          await editDistribution(JSON.stringify(arrUsers), distrNew.id)
+          // const newDistrib = await Distribution.update(
+          //     {    
+          //         report: JSON.stringify(arrUsers),  
+          //         success: countSuccess
+          //     },
+          //     { where: {id: id} }
+          // )
+        } 
+                            
       }  
 
       const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.value}&reply_markup=${keyboard}`
@@ -165,6 +198,26 @@ const DistributionAdd = () => {
 
         sendPhotoToTelegram = await $host.post(url_send_photo, form);
         console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
+
+        const { status } = sendPhotoToTelegram;
+
+        if (status === 200 && text === '') {
+          console.log("статус 200 фото")
+          //countSuccess = countSuccess + 1  
+                  
+          //обновить статус доставки
+          arrUsers[index-1].status = 200
+          arrUsers[index-1].mess = sendPhotoToTelegram.data?.result?.message_id   
+
+          //обновить бд рассылку
+          await editDistribution(JSON.stringify(arrUsers), distrNew.id)
+          // const newDistrib = await Distributionw.update(
+          //     { delivered: true,
+          //         report: JSON.stringify(arrUsers),  
+          //         success: countSuccess},
+          //     { where: {id: id} }
+          // )
+        }
       } 
 
       //отправить в админку

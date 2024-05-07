@@ -278,6 +278,14 @@ export const delDistribution = async (id) =>{
     }
 }
 
+export const editDistribution = async (data, id) =>{
+    try {
+        await $host.patch(`api/distributions/update/${id}`, data); 
+    } catch (error) {
+        console.log("error while calling editDistribution api",error.message);
+    }
+}
+
 //--------------------------------------------------------------------------
 //distribution2
 //--------------------------------------------------------------------------

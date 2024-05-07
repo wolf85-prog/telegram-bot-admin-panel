@@ -80,6 +80,30 @@ class DistributionController {
         }
     }
 
+    //обновить рассылку - поменять статус получателей
+    async editDistrib(req, res) { 
+        const {id} = req.params      
+        try {    
+            let exist=await Distribution.findOne( {where: {id: id}} )
+            
+            if(!exist){
+                res.status(500).json({msg: "distrib not exist"});
+                return;
+            }
+
+            const {receivers} = req.body
+
+            const newDistrib = await Distribution.update(
+                { 
+                    receivers,
+                },
+                { where: {id: id} })
+            return res.status(200).json(newDistrib);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
 //=========== Workhub =====================================================================
 
     //add Distribution
