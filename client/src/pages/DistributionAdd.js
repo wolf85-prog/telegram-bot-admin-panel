@@ -173,8 +173,8 @@ const DistributionAdd = () => {
           //countSuccess = countSuccess + 1 
           
           //обновить статус доставки
-          arrUsers[index-1].status = 200  
-          arrUsers[index-1].mess = sendToTelegram.data?.result?.message_id 
+          arrUsers[index].status = 200  
+          arrUsers[index].mess = sendToTelegram.data?.result?.message_id 
           
           console.log("res: ", {receivers: JSON.stringify(arrUsers)}, distrNew.id)
 

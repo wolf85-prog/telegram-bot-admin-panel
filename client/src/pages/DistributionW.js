@@ -166,7 +166,7 @@ const DistributionW = () => {
   }
 
   const showReceivers = (users) => {
-    console.log(workersAll)
+    //console.log(workersAll)
 
     setVisibleModal(true)
     let count = 0
@@ -332,7 +332,7 @@ const DistributionW = () => {
                             </CCardBody>
                           </CCard>
 
-                                        <MyModal alignment="center" visible={visibleModal} setVisible={setVisibleModal} onClose={() => setVisibleModal(false)}>
+                          <MyModal alignment="center" visible={visibleModal} setVisible={setVisibleModal} onClose={() => setVisibleModal(false)}>
                                           {/* <CModalHeader>
                                             <CModalTitle>Получатели рассылки</CModalTitle>
                                           </CModalHeader> */}
@@ -401,7 +401,7 @@ const DistributionW = () => {
                                             {/* <p style={{display: 'flex', justifyContent: 'space-between'}}><span>Получено: {count}</span> <span>Не получено: {count2}</span></p>   */}
                                           </CCardBody> 
                                           
-                                        </MyModal>
+                          </MyModal>              
                         </CCol>
                       </CRow>
                   </>
