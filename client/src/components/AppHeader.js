@@ -215,12 +215,12 @@ const AppHeader = (props) => {
                           А
                         </CButton>
                       </div> 
-                      <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-                          <div style={{marginRight: '20px', marginBottom: '15px', width:'180px'}}>
-                            <CProgress color="primery" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
+                      <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '200px'}}>
+                          <div style={{marginRight: '20px', marginBottom: '15px', width:'100%'}}>
+                            <CProgress color="primery" progressBarClassName="text-dark" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
                           </div>
-                          <div style={{marginRight: '20px', width:'180px'}}>
-                            <CProgress color="info" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
+                          <div style={{marginRight: '20px', width:'100%'}}>
+                            <CProgress color="primery" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
                           </div>
                       </div>
                     </div>
