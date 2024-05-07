@@ -37,9 +37,27 @@ const AppHeaderDropdown2 = observer(() => {
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end" style={{backgroundColor: '#2a2f32'}}>   
         <CDropdownItem href="#" style={{color: 'fff'}}>
-          Обновить данные
+          <div style={{display: 'flex'}}>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+                <CButton color="dark" style={{marginRight: '10px', marginBottom: '5px', background: '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                  Д
+                </CButton>
+                <CButton color="dark" style={{marginRight: '10px',  background: '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                  А
+                </CButton>
+              </div> 
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+                <div style={{marginRight: '20px', marginBottom: '15px', width:'200px'}}>
+                  <CProgress color="primery" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
+                </div>
+                <div style={{marginRight: '20px', width:'200px'}}>
+                  <CProgress color="info" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
+                </div>
+            </div>
+          </div>
+          
         </CDropdownItem>
-        <CDropdownHeader className="fw-semibold py-2" style={{backgroundColor: '#2a2f32'}}>
+        {/* <CDropdownHeader className="fw-semibold py-2" style={{backgroundColor: '#2a2f32'}}>
           <CProgress color="primery" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
         </CDropdownHeader>
         <CDropdownDivider />
@@ -48,8 +66,10 @@ const AppHeaderDropdown2 = observer(() => {
         </CDropdownItem>
         <CDropdownHeader className="fw-semibold py-2" style={{backgroundColor: '#2a2f32'}}>
           <CProgress color="primery" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
-        </CDropdownHeader>     
+        </CDropdownHeader>      */}
       </CDropdownMenu>
+
+      
     </CDropdown>
   )
 });
