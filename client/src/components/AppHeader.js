@@ -37,7 +37,7 @@ const AppHeader = (props) => {
 
   const [soundCount, setSoundCount] = useState(100)
   const [mutePress, setMutePress] = useState(false)
-
+  const [showBar, setShowBar] = useState(false)
   const [toast, addToast] = useState(0)
   const toaster = useRef()
 
@@ -190,10 +190,43 @@ const AppHeader = (props) => {
             </CNavLink>
           </CNavItem>
           <CNavItem>
-            {/*<CNavLink href="/filemanager" style={{position: 'relative'}}>
-              <CIcon icon={cilList} size="lg" />
-            </CNavLink>*/}
-            <AppHeaderDropdown2 />
+            <CNavLink style={{position: 'relative'}}>
+              <CIcon icon={cilList} size="lg" onClick={()=>setShowBar(!showBar)}/>
+              <div 
+                style={{
+                  backgroundColor: '#2a2f32', 
+                  width: '250px', 
+                  height: '100px', 
+                  position: 'absolute', 
+                  top: '50px', 
+                  right: '10px',
+                  display: showBar ? 'flex' : 'none',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '15px',
+                  padding: '15px',
+                }}>
+                  <div style={{display: 'flex'}}>
+                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                        <CButton color="dark" style={{marginRight: '10px', marginBottom: '5px', background: '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                          Д
+                        </CButton>
+                        <CButton color="dark" style={{marginRight: '10px',  background: '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                          А
+                        </CButton>
+                      </div> 
+                      <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                          <div style={{marginRight: '20px', marginBottom: '15px', width:'180px'}}>
+                            <CProgress color="primery" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
+                          </div>
+                          <div style={{marginRight: '20px', width:'180px'}}>
+                            <CProgress color="info" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+            </CNavLink>
+            {/* <AppHeaderDropdown2 /> */}
           </CNavItem>
           <CNavItem>
             <CNavLink href="#">
