@@ -26,14 +26,17 @@ import { cilBell, cilEnvelopeOpen, cilList, cilMenu, cilPhone } from '@coreui/ic
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { AppBreadcrumb } from './index'
-import { AppHeaderDropdown } from './header/index'
+import { AppHeaderDropdown, AppHeaderDropdown2 } from './header/index'
 import logo from './../assets/brand/logo_04_light.png'
+
+import './DropdownHeader.css'
 
 const AppHeader = (props) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   const [soundCount, setSoundCount] = useState(100)
+  const [mutePress, setMutePress] = useState(false)
 
   const [toast, addToast] = useState(0)
   const toaster = useRef()
@@ -44,14 +47,14 @@ const AppHeader = (props) => {
   }
 
   const exampleToast = (
-    <CToast autohide={false} visible={true} color="success" className="text-white align-items-center">
+    <CToast autohide={false} visible={true} className="text-white align-items-center" style={{width: '500px', height: '300px', backgroundColor: '#2a2f32'}}>
       <div className="d-flex">
         <CToastBody>
           <div style={{display: 'flex'}}>
             <svg
                 className="rounded me-2"
-                width="100"
-                height="100"
+                width="200"
+                height="200"
                 xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="xMidYMid slice"
                 focusable="false"
@@ -127,7 +130,7 @@ const AppHeader = (props) => {
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav style={{marginTop: 'auto', display: 'flex', alignItems: 'center'}}>
-          <CNavItem> 
+          {/* <CNavItem> 
             <div style={{display: 'flex', flexDirection: 'column'}}>
               <CButton color="dark" style={{marginRight: '10px', marginBottom: '5px', background: '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
                 Д
@@ -147,7 +150,7 @@ const AppHeader = (props) => {
               </div>
             </div>
             
-          </CNavItem>
+          </CNavItem> */}
           <CNavItem>
             <CButton onClick={plusSound} color="dark" style={{marginRight: '10px', textAlign:'center', padding: '0', background: '#595d5f', fontSize: '14px', width: '23px', height: '23px', marginTop: '-7px'}}>
               +
@@ -166,7 +169,7 @@ const AppHeader = (props) => {
             </CButton>
           </CNavItem>
           <CNavItem>
-            <CButton color="dark" style={{marginRight: '20px', background: 'red', fontSize: '7px', width: '23px', height: '23px', paddingRight: '0px', paddingLeft: '0px', marginTop: '-7px'}}>
+            <CButton onClick={()=>setMutePress(!mutePress)} className={mutePress ? 'button-m' : ''} color="dark" style={{marginRight: '20px', background: 'red', fontSize: '7px', width: '23px', height: '23px', paddingRight: '0px', paddingLeft: '0px', marginTop: '-7px'}}>
               Mute
             </CButton>
           </CNavItem>
@@ -187,9 +190,10 @@ const AppHeader = (props) => {
             </CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="/filemanager" style={{position: 'relative'}}>
+            {/*<CNavLink href="/filemanager" style={{position: 'relative'}}>
               <CIcon icon={cilList} size="lg" />
-            </CNavLink>
+            </CNavLink>*/}
+            <AppHeaderDropdown2 />
           </CNavItem>
           <CNavItem>
             <CNavLink href="#">
