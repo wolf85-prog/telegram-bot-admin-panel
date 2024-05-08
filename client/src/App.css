@@ -236,6 +236,9 @@
     --cui-card-color: #ffffff;
 }
 
+.dark-theme .progress {
+    --cui-progress-bg: hsla(0,0%,100%,.2);
+}
 
 /* .dark-theme .card-header {
     background-color: #131c21;

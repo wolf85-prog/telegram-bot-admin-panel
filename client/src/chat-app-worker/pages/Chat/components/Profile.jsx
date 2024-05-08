@@ -256,12 +256,12 @@ const Profile = ({ user, closeSidebar }) => {
 				<p className="profile__success-text profile__worker" style={{cursor: 'pointer'}} onClick={()=>console.log("Позвонить")}>Позвонить</p>
 			</div>
 
-			<div className="profile__sectionW profile__section--danger">
+			<div className="profile__sectionW profile__sectionW--danger">
 				<Icon id="block" className="profile__danger-icon" />
 				<p className="profile__danger-text profile__worker" style={{cursor: 'pointer'}} onClick={clickSetBlocked}>{blockWorker ? 'Разблокировать' : 'Заблокировать'}</p>
 			</div>
 
-			<div className="profile__sectionW profile__section--danger">
+			<div className="profile__sectionW profile__sectionW--danger">
 				<Icon id="delete" className="profile__danger-icon" />
 				<p className="profile__danger-text profile__worker"> Удалить чат </p>
 			</div>

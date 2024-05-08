@@ -137,137 +137,125 @@ const DistributionAdd = () => {
     const distrNew = await newDistribution(message)
     
     selected.map(async (user, index) => {
-      console.log("Пользователю ID: " + user.value + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
+      setTimeout(async()=> { 
+        console.log("Пользователю ID: " + user.value + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
 
-      //по-умолчанию пока сообщение не отправлено
-      arrUsers.push({
-        label: user.label,
-        value: user.value,
-        status: 500,
-        mess: null,
-      }) 
+        //по-умолчанию пока сообщение не отправлено
+        arrUsers.push({
+          label: user.label,
+          value: user.value,
+          status: 500,
+          mess: null,
+        }) 
 
-      let client = clients.filter((client) => client.chatId === user.value.toString())[0];
-      
-      //Передаем данные боту
-      const keyboard = JSON.stringify({
-        inline_keyboard: [
-            [
-                {"text": textButton, callback_data:'/report'},
-            ],
-        ]
-      });
+        let client = clients.filter((client) => client.chatId === user.value.toString())[0];
+        
+        //Передаем данные боту
+        const keyboard = JSON.stringify({
+          inline_keyboard: [
+              [
+                  {"text": textButton, callback_data:'/report'},
+              ],
+          ]
+        });
 
-      //отправить в телеграмм
-      let sendToTelegram
-      if (text !== '') {
-        console.log(arrUsers, distrNew)
-        const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
-        console.log("url_send_msg: ", url_send_msg)
-        sendToTelegram = await $host.get(url_send_msg);
-        console.log('sendToTelegram: ', sendToTelegram)
+        //отправить в телеграмм
+        let sendToTelegram
+        if (text !== '') {
+          console.log(arrUsers, distrNew)
+          const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+          console.log("url_send_msg: ", url_send_msg)
+          sendToTelegram = await $host.get(url_send_msg);
+          console.log('sendToTelegram: ', sendToTelegram)
 
-        const { status } = sendToTelegram;              
-        if (status === 200) {
-          console.log("статус 200 текст", arrUsers, distrNew.id)
-          //countSuccess = countSuccess + 1 
-          
-          //обновить статус доставки
-          arrUsers[index].status = 200  
-          arrUsers[index].mess = sendToTelegram.data?.result?.message_id 
-          
-          console.log("res: ", {receivers: JSON.stringify(arrUsers)}, distrNew.id)
+          const { status } = sendToTelegram;              
+          if (status === 200) {
+            console.log("статус 200 текст", arrUsers, distrNew.id)
+            //countSuccess = countSuccess + 1 
+            
+            //обновить статус доставки
+            arrUsers[index-1].status = 200  
+            arrUsers[index-1].mess = sendToTelegram.data?.result?.message_id 
+            
+            console.log("res: ", {receivers: JSON.stringify(arrUsers)}, distrNew.id)
 
-          //обновить бд рассылку
-          await editDistribution({receivers: JSON.stringify(arrUsers)}, distrNew.id)
-          // const newDistrib = await Distribution.update(
-          //     {    
-          //         report: JSON.stringify(arrUsers),  
-          //         success: countSuccess
-          //     },
-          //     { where: {id: id} }
-          // )
+            //обновить бд рассылку
+            await editDistribution({receivers: JSON.stringify(arrUsers)}, distrNew.id)
+          } 
+                              
+        }  
+
+        const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.value}&reply_markup=${keyboard}`
+        console.log("url_send_photo: ", url_send_photo)
+        
+        let sendPhotoToTelegram
+        if (file) {
+          const form = new FormData();
+          form.append("photo", file);
+
+          sendPhotoToTelegram = await $host.post(url_send_photo, form);
+          console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
+
+          const { status } = sendPhotoToTelegram;
+
+          if (status === 200 && text === '') {
+            console.log("статус 200 фото")
+            //countSuccess = countSuccess + 1  
+                    
+            //обновить статус доставки
+            arrUsers[index-1].status = 200
+            arrUsers[index-1].mess = sendPhotoToTelegram.data?.result?.message_id   
+
+            //обновить бд рассылку
+            await editDistribution({receivers: JSON.stringify(arrUsers)}, distrNew.id)
+          }
         } 
-                            
-      }  
 
-      const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.value}&reply_markup=${keyboard}`
-      console.log("url_send_photo: ", url_send_photo)
-      
-      let sendPhotoToTelegram
-      if (file) {
-        const form = new FormData();
-        form.append("photo", file);
+        //отправить в админку
+        if (sendToAdmin) {
+          let message = {};
+          if(!file) {
+              message = {
+                  senderId: chatAdminId, 
+                  receiverId: user.value,
+                  conversationId: client.conversationId,
+                  type: "text",
+                  text: text,
+                  is_bot: true,
+                  messageId: sendToTelegram.data.result.message_id,
+                  buttons: '',
+              }
+          } else {
+              message = {
+                  senderId: chatAdminId, 
+                  receiverId: user.value,
+                  conversationId: client.conversationId,
+                  type: "image",
+                  text: host + image,
+                  is_bot: true,
+                  messageId: sendPhotoToTelegram.data.result.message_id,
+                  buttons: textButton,
+              }
+          }
+          console.log("message send: ", message);
 
-        sendPhotoToTelegram = await $host.post(url_send_photo, form);
-        console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
+          //сохранение сообщения в базе данных
+          await newMessage(message)
 
-        const { status } = sendPhotoToTelegram;
+          //сохранить в контексте
+          if(!file) {
+            addNewMessage(user.value, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
+          } else {
+            addNewMessage(user.value, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
+          }
+    
+        }  
 
-        if (status === 200 && text === '') {
-          console.log("статус 200 фото")
-          //countSuccess = countSuccess + 1  
-                  
-          //обновить статус доставки
-          arrUsers[index-1].status = 200
-          arrUsers[index-1].mess = sendPhotoToTelegram.data?.result?.message_id   
-
-          //обновить бд рассылку
-          await editDistribution({receivers: JSON.stringify(arrUsers)}, distrNew.id)
-          // const newDistrib = await Distributionw.update(
-          //     { delivered: true,
-          //         report: JSON.stringify(arrUsers),  
-          //         success: countSuccess},
-          //     { where: {id: id} }
-          // )
-        }
-      } 
-
-      //отправить в админку
-      if (sendToAdmin) {
-        let message = {};
-        if(!file) {
-            message = {
-                senderId: chatAdminId, 
-                receiverId: user.value,
-                conversationId: client.conversationId,
-                type: "text",
-                text: text,
-                is_bot: true,
-				        messageId: sendToTelegram.data.result.message_id,
-                buttons: '',
-            }
-        } else {
-            message = {
-                senderId: chatAdminId, 
-                receiverId: user.value,
-                conversationId: client.conversationId,
-                type: "image",
-                text: host + image,
-                is_bot: true,
-				        messageId: sendPhotoToTelegram.data.result.message_id,
-                buttons: textButton,
-            }
-        }
-        console.log("message send: ", message);
-
-        //сохранение сообщения в базе данных
-		    await newMessage(message)
-
-		    //сохранить в контексте
-        if(!file) {
-          addNewMessage(user.value, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
-        } else {
-          addNewMessage(user.value, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
-        }
-  
-      }  
-
-      //обновить список рассылок
-      let response = await getDistributions();
-      console.log("distribution new add: ", response.length)
-			setDistributions(response)
-
+        //обновить список рассылок
+        let response = await getDistributions();
+        console.log("distribution new add: ", response.length)
+        setDistributions(response)
+      }, 3000 * ++index) 
     })
 
     setSelected([])

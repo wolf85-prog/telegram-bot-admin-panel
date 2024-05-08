@@ -39,42 +39,14 @@ const AppHeader = (props) => {
   const [mutePress, setMutePress] = useState(false)
   const [showBar, setShowBar] = useState(false)
   const [toast, addToast] = useState(0)
+  const [showToast, setShowToast] = useState(false)
   const toaster = useRef()
 
 
   const clickPhone = () => {
-    addToast(exampleToast) //ваша рассылка удалена
+    //addToast(exampleToast) //ваша рассылка удалена
+    setShowToast(!showToast)
   }
-
-  const exampleToast = (
-    <CToast autohide={false} visible={true} className="text-white align-items-center" style={{width: '500px', height: '300px', backgroundColor: '#2a2f32'}}>
-      <div className="d-flex">
-        <CToastBody>
-          <div style={{display: 'flex'}}>
-            <svg
-                className="rounded me-2"
-                width="200"
-                height="200"
-                xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                role="img"
-            >
-              <rect width="100%" height="100%" fill="#007aff"></rect>
-            </svg>
-            <div style={{display: 'flex', flexDirection: 'column'}}>
-              <p>ФИО</p>
-              <span>г. Москва</span>
-              <span>01.01.2000</span>
-              <span>-звукорежиссер</span>
-            </div>
-          </div>
-          
-        </CToastBody>
-        <CToastClose className="me-2 m-auto" white />
-      </div>
-    </CToast>
-  )
 
   const plusSound = () => {
     if (soundCount === 75) {
@@ -177,6 +149,34 @@ const AppHeader = (props) => {
             <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
               <CIcon icon={cilPhone} size="lg"/>
             </CNavLink>
+            <div style={{display: showToast ? 'block' : 'none', position: 'absolute', top: '65px', right: '25px', width: '900px', height: '300px', backgroundColor: '#2a2f32', borderRadius: '15px', padding: '15px'}}>
+                <div className="d-flex" style={{justifyContent: 'space-between'}}>
+                  <CToastBody>
+                    <div style={{display: 'flex'}}>
+                      <svg
+                          className="rounded me-2"
+                          width="270"
+                          height="270"
+                          xmlns="http://www.w3.org/2000/svg"
+                          preserveAspectRatio="xMidYMid slice"
+                          focusable="false"
+                          role="img"
+                      >
+                        <rect width="100%" height="100%" fill="#007aff"></rect>
+                      </svg>
+                      <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
+                        <h3 style={{color: '#fff'}}>Фамилия Имя</h3>
+                        <h3 style={{color: '#fff'}}>Отчество</h3>
+                        <span style={{fontSize: '22px', color: '#858585', fontWeight: '700'}}>г. Москва</span>
+                        <span style={{fontSize: '22px', color: '#858585', fontWeight: '700'}}>01.01.2000</span>
+                        <span style={{fontSize: '16px', color: '#858585'}}>-звукорежиссер</span>
+                      </div>
+                    </div>
+                    
+                  </CToastBody>
+                  <CToastClose onClick={()=>setShowToast(false)} white style={{marginTop: '0px', marginRight: '0px'}}/>
+                </div>
+            </div> 
           </CNavItem>
           <CNavItem>
             <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
@@ -196,7 +196,7 @@ const AppHeader = (props) => {
                 style={{
                   backgroundColor: '#2a2f32', 
                   width: '250px', 
-                  height: '100px', 
+                  height: '80px', 
                   position: 'absolute', 
                   top: '50px', 
                   right: '10px',
@@ -215,16 +215,16 @@ const AppHeader = (props) => {
                           А
                         </CButton>
                       </div> 
-                      <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '200px'}}>
+                      <div className='dark-theme' style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '200px'}}>
                           <div style={{marginRight: '20px', marginBottom: '15px', width:'100%'}}>
-                            <CProgress color="primery" progressBarClassName="text-dark" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
+                            <CProgress color="primery" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
                           </div>
                           <div style={{marginRight: '20px', width:'100%'}}>
                             <CProgress color="primery" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
                           </div>
                       </div>
                     </div>
-                </div>
+              </div>
             </CNavLink>
             {/* <AppHeaderDropdown2 /> */}
           </CNavItem>
@@ -247,9 +247,5 @@ const AppHeader = (props) => {
   )
 }
 
-const iconRotate90 = {
-  
-
-}
 
 export default AppHeader
