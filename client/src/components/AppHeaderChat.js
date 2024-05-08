@@ -33,7 +33,9 @@ const AppHeader = () => {
   const [mutePress, setMutePress] = useState(false)
   const [showBar, setShowBar] = useState(false)
   const [toast, addToast] = useState(0)
-  const [showToast, setShowToast] = useState(true)
+  const [showToast, setShowToast] = useState(false)
+  const [shake, setShake] = useState(false)
+  const [shake2, setShake2] = useState(false)
   const toaster = useRef()
 
 
@@ -43,6 +45,12 @@ const AppHeader = () => {
   }
 
   const plusSound = () => {
+    // Button begins to shake
+    setShake2(true);
+        
+    // Buttons stops to shake after 2 seconds
+    setTimeout(() => setShake2(false), 100);
+
     if (soundCount === 75) {
       setSoundCount(100)
     } else if (soundCount === 50) {
@@ -55,6 +63,12 @@ const AppHeader = () => {
   }
 
   const minusSound = () => {
+    // Button begins to shake
+    setShake(true);
+        
+    // Buttons stops to shake after 2 seconds
+    setTimeout(() => setShake(false), 100);
+
     if (soundCount === 100) {
       setSoundCount(75)
     } else if (soundCount === 75) {
@@ -94,19 +108,19 @@ const AppHeader = () => {
         </CHeaderNav>
         <CHeaderNav style={{marginTop: 'auto', display: 'flex', alignItems: 'center'}}>
         <CNavItem>
-            <CButton onClick={plusSound} color="dark" style={{marginRight: '10px', textAlign:'center', padding: '0', background: '#595d5f', fontSize: '14px', width: '23px', height: '23px', marginTop: '-7px'}}>
+            <CButton onClick={plusSound} color="dark" style={{marginRight: '10px', textAlign:'center', padding: '0', background: shake2 ? '#262829' : '#595d5f', fontSize: '14px', width: '23px', height: '23px', marginTop: '-7px'}}>
               +
             </CButton>
           </CNavItem>
           <CNavItem>
             <CFormInput 
               id="autoSizingInput" 
-              style={{width: '25px', textAlign:'center', marginRight: '10px', fontSize: '9px', marginRight: '10px', height: '25px', paddingLeft: '0px', paddingRight: '0px', marginTop: '-2px'}}
+              style={{width: '25px', textAlign:'center', marginRight: '10px', fontSize: '12px', marginRight: '10px', height: '25px', paddingLeft: '0px', paddingRight: '0px', marginTop: '-2px'}}
               value={soundCount}
             />
           </CNavItem> 
           <CNavItem> 
-            <CButton onClick={minusSound} color="dark" style={{marginRight: '10px', textAlign:'center', padding: '0', background: '#595d5f', fontSize: '14px', width: '23px', height: '23px', marginTop: '-7px'}}>
+            <CButton onClick={minusSound} color="dark" style={{marginRight: '10px', textAlign:'center', padding: '0', background: shake ? '#262829' : '#595d5f', fontSize: '14px', width: '23px', height: '23px', marginTop: '-7px'}}>
               -
             </CButton>
           </CNavItem>
@@ -165,7 +179,7 @@ const AppHeader = () => {
               <div 
                 style={{
                   backgroundColor: '#2a2f32', 
-                  width: '250px', 
+                  // width: '250px', 
                   height: '80px', 
                   position: 'absolute', 
                   top: '50px', 
@@ -176,26 +190,29 @@ const AppHeader = () => {
                   borderRadius: '15px',
                   padding: '15px',
                 }}>
-                  <div style={{display: 'flex'}}>
-                    <div style={{display: 'flex', flexDirection: 'column'}}>
-                        <CButton color="dark" style={{marginRight: '10px', marginBottom: '5px', background: '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
-                          Д
-                        </CButton>
-                        <CButton color="dark" style={{marginRight: '10px',  background: '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
-                          А
-                        </CButton>
-                      </div> 
-                      <div className='dark-theme' style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '200px'}}>
-                          <div style={{marginRight: '20px', marginBottom: '15px', width:'100%'}}>
-                            <CProgress color="primery" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
+                  <div style={{display: 'flex'}}> 
+                    <div className='dark-theme' style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '200px'}}>
+                          <div style={{marginRight: '20px', marginBottom: '12px', width:'100%', position: 'relative'}}>
+                            <CProgress color="primery" height={10} value={10}/>
+                            <span style={{position: 'absolute', top: '-3px', right: '85px', fontSize: '10px'}}>10%</span>
                           </div>
-                          <div style={{marginRight: '20px', width:'100%'}}>
-                            <CProgress color="primery" height={10} value={100} style={{fontSize: '8px'}}>100%</CProgress>
+                          <div style={{marginRight: '20px', width:'100%', position: 'relative'}}>
+                            <CProgress color="primery" height={10} value={100}></CProgress>
+                            <span style={{position: 'absolute', top: '-3px', right: '85px', fontSize: '10px'}}>100%</span>
                           </div>
-                      </div>
                     </div>
-                </div>
+                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                      <CButton color="dark" style={{marginLeft: '10px', marginBottom: '5px', background: '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                        Д
+                      </CButton>
+                      <CButton color="dark" style={{marginLeft: '10px',  background: '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                        А
+                      </CButton>
+                    </div>
+                  </div>
+              </div>
             </CNavLink>
+            {/* <AppHeaderDropdown2 /> */}
           </CNavItem>
           <CNavItem>
             <CNavLink href="#">
