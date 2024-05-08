@@ -44,6 +44,8 @@ const Distribution = () => {
 
       const arrDitributions = []
       messages.map((distrib, index) => {
+        countSuccess = 0
+        
         JSON.parse(distrib.receivers).map((receiver)=>{
           strReceivers = receiver.label + ' '
           if (receiver.status === 200) {
