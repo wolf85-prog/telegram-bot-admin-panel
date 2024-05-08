@@ -252,9 +252,9 @@ const DistributionAdd = () => {
         }  
 
         //обновить список рассылок
-        let response = await getDistributions();
-        console.log("distribution new add: ", response.length)
-        setDistributions(response)
+        //let response = await getDistributions();
+        //console.log("distribution new add: ", response.length)
+        //setDistributions(response)
       }, 3000 * ++index) 
     })
 
