@@ -93,7 +93,7 @@ const Distribution = () => {
   }
 
   const showReceivers = (users) => {
-    console.log("users: ", zakazchiki.length)
+    console.log("users: ", zakazchiki)
     console.log("users2: ", users)
 
     setVisibleModal(true)
@@ -108,11 +108,11 @@ const Distribution = () => {
         count2++
       }
       const worker = zakazchiki.find((i)=> i.chatId === item.value)
-      console.log("worker: ", worker)
+      //console.log("worker: ", worker)
       const obj = {
         user: item.value,
         status: item.status,
-        userfamily: worker.name,
+        userfamily: worker?.name,
         username: '',
       }
       arrReceiver.push(obj)
