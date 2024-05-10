@@ -35,6 +35,8 @@ const AppHeader = (props) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
+  const { workerCall, showCallCard, setShowCallCard, } = useUsersContext();
+
   const [soundCount, setSoundCount] = useState(100)
   const [mutePress, setMutePress] = useState(false)
   const [showBar, setShowBar] = useState(false)
@@ -42,6 +44,8 @@ const AppHeader = (props) => {
   const [showToast, setShowToast] = useState(false)
   const [shake, setShake] = useState(false)
   const [shake2, setShake2] = useState(false)
+  const [shake3, setShake3] = useState(false)
+  const [shake4, setShake4] = useState(false)
   const toaster = useRef()
 
 
@@ -84,6 +88,22 @@ const AppHeader = (props) => {
     } else if (soundCount === 25) {
       setSoundCount(0)
     } 
+  }
+
+  const updateD = () => {
+    // Button begins to shake
+    setShake3(true);
+        
+    // Buttons stops to shake after 2 seconds
+    setTimeout(() => setShake3(false), 100);
+  }
+
+  const updateA = () => {
+    // Button begins to shake
+    setShake4(true);
+        
+    // Buttons stops to shake after 2 seconds
+    setTimeout(() => setShake4(false), 100);
   }
 
   return (
@@ -144,7 +164,7 @@ const AppHeader = (props) => {
             <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
               <CIcon icon={cilPhone} size="lg"/>
             </CNavLink>
-            <div style={{display: showToast ? 'block' : 'none', position: 'absolute', top: '65px', right: '25px', width: '900px', height: '300px', backgroundColor: '#2a2f32', borderRadius: '15px', padding: '15px'}}>
+            <div style={{display: showCallCard ? 'block' : 'none', position: 'absolute', top: '65px', right: '25px', width: '900px', height: '300px', backgroundColor: '#2a2f32', borderRadius: '15px', padding: '15px'}}>
                 <div className="d-flex" style={{justifyContent: 'space-between'}}>
                   <CToastBody>
                     <div style={{display: 'flex'}}>
@@ -169,7 +189,7 @@ const AppHeader = (props) => {
                     </div>
                     
                   </CToastBody>
-                  <CToastClose onClick={()=>setShowToast(false)} white style={{marginTop: '0px', marginRight: '0px'}}/>
+                  <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/>
                 </div>
             </div> 
           </CNavItem>
@@ -213,10 +233,10 @@ const AppHeader = (props) => {
                           </div>
                     </div>
                     <div style={{display: 'flex', flexDirection: 'column'}}>
-                      <CButton color="dark" style={{marginLeft: '10px', marginBottom: '5px', background: '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                      <CButton onClick={updateD} color="dark" style={{marginLeft: '10px', marginBottom: '5px', background: shake3 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
                         Д
                       </CButton>
-                      <CButton color="dark" style={{marginLeft: '10px',  background: '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                      <CButton onClick={updateA} color="dark" style={{marginLeft: '10px',  background: shake4 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
                         А
                       </CButton>
                     </div>

@@ -78,7 +78,11 @@ const UsersProvider = ({ children }) => {
 
 	const [soundsNotif, setSoundsNotif] = useState([]); 
 
+	const [showCallCard, setShowCallCard] = useState(false);
+	const [workerCall, setWorkerCall] = useState();
+
 	const audioMessage = new Audio(soundMessage);
+	const audioMessageW = new Audio(boopSfx);
 	const audioProject = new Audio(soundProject);
 	const audioSmeta = new Audio(soundSmeta);
 	
@@ -1015,7 +1019,8 @@ const fetchMessageSpecResponse = async(data) => {
 		//console.log("Пришло новое сообщение в workhub: ", count+1)
 
 		//play sound
-		audioWorkhub.play();		
+		//audioWorkhub.play();	
+		audioMessageW.play();	
 	}
 
 	setUserWorkers((userWorkers) => {
@@ -1194,9 +1199,9 @@ const delWMessageContext = (messageId, messageDate, chatId) => {
 //===============================================================
 //                  Notifications
 //===============================================================
-const fetchNotifAdmin = (data) => {
+const fetchNotifAdmin = (dataAll) => {
 	//console.log("Получено звуковое уведомление: ", data)
-	const { task } = data;
+	const { task, data } = dataAll;
 
 	if (task === 1) {
 		audio120.play();
@@ -1263,6 +1268,10 @@ const fetchNotifAdmin = (data) => {
 	else if (task === 101) {
 		audioNarush2.play();
 	}
+	else if (task === 200) {
+		setShowCallCard(true)
+		setWorkerCall(data.fio)
+	}
 }
 
 	return (
@@ -1309,7 +1318,10 @@ const fetchNotifAdmin = (data) => {
 			soundsNotif, 
 			setSoundsNotif,
 			pretendents,
-			setPretendents
+			setPretendents,
+			workerCall,
+			showCallCard,
+			setShowCallCard,
 		}}>
 			{children}
 		</UsersContext.Provider>

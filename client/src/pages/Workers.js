@@ -47,10 +47,10 @@ const Workers = () => {
 
 
   //поиск
-  useEffect(() => {
-		const filteredData = pretendents.filter(user=> (user.project + user.workerFamily + user.workerName)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
-    setSpec(text === '' ? pretendents : filteredData) 
-  }, [text]);
+  // useEffect(() => {
+	// 	const filteredData = pretendents.filter(user=> (user.project + user.workerFamily + user.workerName)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+  //   setSpec(text === '' ? pretendents : filteredData) 
+  // }, [text]);
 
 
 
