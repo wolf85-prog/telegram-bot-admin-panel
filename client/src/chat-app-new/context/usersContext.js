@@ -81,6 +81,9 @@ const UsersProvider = ({ children }) => {
 	const [showCallCard, setShowCallCard] = useState(false);
 	const [workerCall, setWorkerCall] = useState('');
 
+	const [showUpdate, setShowUpdate] = useState(false);
+	const [workerUpdate, setWorkerUpdate] = useState(0);
+
 	const audioMessage = new Audio(soundMessage);
 	const audioMessageW = new Audio(boopSfx);
 	const audioProject = new Audio(soundProject);
@@ -1209,6 +1212,7 @@ const fetchNotifAdmin = (dataAll) => {
 		projects, 
 		specialities, 
 		comtags, 
+		workers_update,
 	} = dataAll;
 
 	if (task === 1) {
@@ -1289,6 +1293,12 @@ const fetchNotifAdmin = (dataAll) => {
             comtags,
 		})
 	}
+	//обновление данных
+	else if (task === 300) {
+		//console.log("fio: ", data)
+		setShowUpdate(true)
+		setWorkerUpdate(workers_update)
+	}
 }
 
 	return (
@@ -1339,6 +1349,9 @@ const fetchNotifAdmin = (dataAll) => {
 			workerCall,
 			showCallCard,
 			setShowCallCard,
+			showUpdate,
+			setShowUpdate,
+			workerUpdate,
 		}}>
 			{children}
 		</UsersContext.Provider>
