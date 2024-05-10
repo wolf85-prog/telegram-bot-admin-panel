@@ -185,7 +185,7 @@ const AppHeader = (props) => {
                         {/* <h3 style={{color: '#fff'}}>Отчество</h3> */}
                         <span style={{fontSize: '22px', color: '#858585', fontWeight: '700'}}>{workerCall.fio}</span>
                         <span style={{fontSize: '22px', color: '#858585', fontWeight: '700'}}>{workerCall.year_of_birth}</span>
-                        {(workerCall.specialities).split(',').map((spec, index)=>( 
+                        {workerCall.specialities !== '' && (workerCall.specialities).split(',').map((spec, index)=>( 
                           <span key={index} style={{fontSize: '16px', color: '#858585'}}>
                             - {spec}
                           </span>
