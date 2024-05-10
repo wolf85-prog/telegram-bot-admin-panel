@@ -1207,8 +1207,8 @@ const fetchNotifAdmin = (dataAll) => {
 		year_of_birth, 
 		rating, 
 		projects, 
-		specialisies, 
-		comtags 
+		specialities, 
+		comtags, 
 	} = dataAll;
 
 	if (task === 1) {
@@ -1285,7 +1285,7 @@ const fetchNotifAdmin = (dataAll) => {
             year_of_birth, 
             rating, 
             projects, 
-            specialisies, 
+            specialities, 
             comtags,
 		})
 	}
