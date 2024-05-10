@@ -1269,6 +1269,7 @@ const fetchNotifAdmin = (dataAll) => {
 		audioNarush2.play();
 	}
 	else if (task === 200) {
+		console.log("fio: ", data)
 		setShowCallCard(true)
 		setWorkerCall(data.fio)
 	}
