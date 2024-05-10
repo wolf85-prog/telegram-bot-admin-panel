@@ -148,18 +148,20 @@ io.on("connection", (socket) => {
     // Notifications
     //------------------------------------------------------------------
     //send and get message in workers
-    socket.on("sendNotif", ({task})=>{
+    socket.on("sendNotif", ({task, fio})=>{
         io.emit("getNotif", {
-            task
+            task,
+            fio
         })
     })  
     
     // Distribution
     //------------------------------------------------------------------
     //send and get distrib
-    socket.on("sendDistrib", ({task})=>{
+    socket.on("sendDistrib", ({task, fio})=>{
         io.emit("getDistrib", {
-            task
+            task,
+            fio
         })
     })
 
