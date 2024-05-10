@@ -158,10 +158,9 @@ io.on("connection", (socket) => {
     // Distribution
     //------------------------------------------------------------------
     //send and get distrib
-    socket.on("sendDistrib", ({task, fio})=>{
+    socket.on("sendDistrib", ({task})=>{
         io.emit("getDistrib", {
-            task,
-            fio
+            task
         })
     })
 
