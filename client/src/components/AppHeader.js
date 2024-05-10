@@ -203,13 +203,13 @@ const AppHeader = (props) => {
                 }}>
                   <div style={{display: 'flex'}}> 
                     <div className='dark-theme' style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '200px'}}>
-                          <div style={{marginRight: '20px', marginBottom: '12px', width:'100%', position: 'relative'}}>
+                          <div style={{marginRight: '20px', marginBottom: '12px', width:'100%', position: 'relative', textAlign: 'center'}}>
                             <CProgress color="primery" height={10} value={10}/>
-                            <span style={{position: 'absolute', top: '-3px', right: '85px', fontSize: '10px'}}>10%</span>
+                            <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>10%</span>
                           </div>
-                          <div style={{marginRight: '20px', width:'100%', position: 'relative'}}>
+                          <div style={{marginRight: '20px', width:'100%', position: 'relative', textAlign: 'center'}}>
                             <CProgress color="primery" height={10} value={100}></CProgress>
-                            <span style={{position: 'absolute', top: '-3px', right: '85px', fontSize: '10px'}}>100%</span>
+                            <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>100%</span>
                           </div>
                     </div>
                     <div style={{display: 'flex', flexDirection: 'column'}}>

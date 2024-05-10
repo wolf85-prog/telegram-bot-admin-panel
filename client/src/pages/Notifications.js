@@ -98,7 +98,15 @@ const Notifications = () => {
   const [projects, setProjects] = useState([]); 
   const [pending, setPending] = useState(true); 
 
-  
+  const [text, setText]= useState("");
+
+  //поиск
+  useEffect(() => {
+		const filteredData = [...projects].filter(item=> (item.title + item.id + item.chatId)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+    //setSortWorkers(text === '' ? workersAll : filteredData); 
+    setProjects(text === '' ? projects : filteredData) 
+    //setWorkers(text === '' ? workers : filteredData);  
+  }, [text]);
 
   //get Projects
   useEffect(() => {
@@ -164,7 +172,7 @@ const Notifications = () => {
                     
                     <CRow className="mb-3">
                       <CCol sm={3} >
-                        <CFormInput placeholder="Поиск..." aria-label="City"/>
+                        <CFormInput placeholder="Поиск..." aria-label="City" onChange={(e)=>setText(e.target.value)}/>
                       </CCol>
                     </CRow>
 

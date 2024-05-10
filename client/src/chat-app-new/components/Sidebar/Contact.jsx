@@ -53,6 +53,10 @@ const Contact = ({ contact }) => {
 
 	//const lastMessage =  contact.message ? contact.message : '' //getLastMessage(contact);
 
+	const onImageError = (e) => {
+		e.target.src = avatarDefault
+	}
+
 	return (
 		<Link
 			className="sidebar-contact"
@@ -70,7 +74,7 @@ const Contact = ({ contact }) => {
 			<div className="sidebar-contact__avatar-wrapper">
 				{
 					contact.avatar
-					? <img src={`${host}${contact.avatar}`} alt='' className="avatar-adm" />
+					? <img src={`${host}${contact.avatar}`} onError={onImageError} alt='' className="avatar-adm" />
 					: <img src={avatarDefault} alt='' className="avatar-adm" />
 				}				
 			</div>

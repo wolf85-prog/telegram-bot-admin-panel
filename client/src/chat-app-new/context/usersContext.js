@@ -23,6 +23,7 @@ import { getDistributions,
 } from "src/http/adminAPI";
 
 import boopSfx from './../assets/sounds/zvuk-icq.mp3';
+import soundMessage from './../assets/sounds/U.L.E.Y_messageNew.mp3';
 import soundProject from './../assets/sounds/project_new2.mp3';
 import soundSmeta from './../assets/sounds/predvarit_smeta2.mp3';
 import sound120 from './../../assets/sound/120_minut_ULEY_new.mp3';
@@ -77,7 +78,7 @@ const UsersProvider = ({ children }) => {
 
 	const [soundsNotif, setSoundsNotif] = useState([]); 
 
-	const audio = new Audio(boopSfx);
+	const audioMessage = new Audio(soundMessage);
 	const audioProject = new Audio(soundProject);
 	const audioSmeta = new Audio(soundSmeta);
 	
@@ -583,7 +584,7 @@ const UsersProvider = ({ children }) => {
 		else {
 			console.log("Пришло новое сообщение: ", count+1)
 			//play sound
-			audio.play();		
+			audioMessage.play();		
 		}
 
 		setUsers((users) => {

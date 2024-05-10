@@ -177,8 +177,9 @@ const Sidebar = () => {
 	},[clients])
 
 	useEffect(() => {
-		const filteredData = clients.filter(user=> (user.name)?.toLowerCase().includes(text.toLowerCase()));
-        setContacts(filteredData);      
+		//const filteredData = clients.filter(user=> (user.name)?.toLowerCase().includes(text.toLowerCase()));
+        const filteredData = clients.filter(user=> (user.name+user.chatId)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase())); 
+		setContacts(filteredData);      
     }, [text]);
 
 
