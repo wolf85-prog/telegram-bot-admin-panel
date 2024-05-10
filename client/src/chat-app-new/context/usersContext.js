@@ -79,7 +79,7 @@ const UsersProvider = ({ children }) => {
 	const [soundsNotif, setSoundsNotif] = useState([]); 
 
 	const [showCallCard, setShowCallCard] = useState(false);
-	const [workerCall, setWorkerCall] = useState();
+	const [workerCall, setWorkerCall] = useState('');
 
 	const audioMessage = new Audio(soundMessage);
 	const audioMessageW = new Audio(boopSfx);
