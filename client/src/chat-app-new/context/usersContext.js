@@ -1201,7 +1201,7 @@ const delWMessageContext = (messageId, messageDate, chatId) => {
 //===============================================================
 const fetchNotifAdmin = (dataAll) => {
 	console.log("Получено уведомление: ", dataAll)
-	const { task, data } = dataAll;
+	const { task, fio } = dataAll;
 
 	if (task === 1) {
 		audio120.play();
@@ -1269,9 +1269,9 @@ const fetchNotifAdmin = (dataAll) => {
 		audioNarush2.play();
 	}
 	else if (task === 200) {
-		console.log("fio: ", data)
+		//console.log("fio: ", data)
 		setShowCallCard(true)
-		setWorkerCall(data.fio)
+		setWorkerCall(fio)
 	}
 }
 
