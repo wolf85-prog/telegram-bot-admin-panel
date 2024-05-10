@@ -180,7 +180,7 @@ const AppHeader = (props) => {
                         <rect width="100%" height="100%" fill="#007aff"></rect>
                       </svg>
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <h3 style={{color: '#fff'}}>Фамилия Имя</h3>
+                        <h3 style={{color: '#fff'}}>{workerCall}</h3>
                         <h3 style={{color: '#fff'}}>Отчество</h3>
                         <span style={{fontSize: '22px', color: '#858585', fontWeight: '700'}}>г. Москва</span>
                         <span style={{fontSize: '22px', color: '#858585', fontWeight: '700'}}>01.01.2000</span>
