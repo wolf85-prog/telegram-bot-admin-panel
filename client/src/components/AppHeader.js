@@ -190,7 +190,7 @@ const AppHeader = (props) => {
                             - {spec}
                           </span>
                         ))} */}
-                        <span style={{fontSize: '16px', color: '#858585'}}>{workerCall.projects}</span>
+                        <span style={{fontSize: '16px', color: '#858585'}}>Проекты: {workerCall.projects}</span>
                         <span style={{fontSize: '16px', color: '#858585'}}>- {workerCall.specialities}</span>
                         <span style={{fontSize: '16px', color: '#858585'}}>{workerCall.comtags}</span>
                       </div>
