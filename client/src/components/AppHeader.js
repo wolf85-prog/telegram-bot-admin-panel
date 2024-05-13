@@ -28,6 +28,9 @@ import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown, AppHeaderDropdown2 } from './header/index'
 import logo from './../assets/brand/logo_04_light.png'
+import Star from "./../assets/images/star.png";
+import StarActive from "./../assets/images/star_activ.svg";
+import Krestik from './../assets/images/krestik.png'
 
 import './DropdownHeader.css'
 
@@ -47,6 +50,10 @@ const AppHeader = (props) => {
   const [shake3, setShake3] = useState(false)
   const [shake4, setShake4] = useState(false)
   const toaster = useRef()
+
+  const [workerCall2, setWorkerCall2] = useState({fio: 'Иванов Иван Ивановия', sity: 'Майкоп', year_of_birth: '01.01.1985', projects: '5', 
+  specialities: 'спец1,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2', 
+  comtags: 'опоздание'})
 
 
   const clickPhone = () => {
@@ -164,7 +171,7 @@ const AppHeader = (props) => {
             <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
               <CIcon icon={cilPhone} size="lg"/>
             </CNavLink>
-            <div style={{display: showCallCard ? 'block' : 'none', position: 'absolute', top: '65px', right: '25px', width: '900px', height: '300px', backgroundColor: '#2a2f32', borderRadius: '15px', padding: '15px'}}>
+            <div style={{display: showCallCard ? 'block' : 'block', position: 'absolute', top: '65px', right: '25px', width: '900px', height: '300px', backgroundColor: '#2a2f32', borderRadius: '15px', padding: '15px'}}>
                 <div className="d-flex" style={{justifyContent: 'space-between'}}>
                   <CToastBody>
                     <div style={{display: 'flex'}}>
@@ -177,22 +184,34 @@ const AppHeader = (props) => {
                           focusable="false"
                           role="img"
                       >
-                        <rect width="100%" height="100%" fill="#007aff"></rect>
+                        <rect width="270px" height="270px" fill="#007aff"></rect>
                       </svg>
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <h3 style={{color: '#fff'}}>{workerCall.fio}</h3>
-                        {/* <h3 style={{color: '#fff'}}>{workerCall.split(' ')[2]}</h3> */}
+                        <h3 style={{color: '#fff'}}>{workerCall2.fio.split(' ')[0]}</h3>
+                        <h3 style={{color: '#fff'}}>{workerCall2.fio.split(' ')[1]} {workerCall.fio?.split(' ')[2]}</h3>
                         {/* <h3 style={{color: '#fff'}}>Отчество</h3> */}
                         <span style={{fontSize: '22px', color: '#858585', fontWeight: '700'}}>{workerCall.sity}</span>
                         <span style={{fontSize: '22px', color: '#858585', fontWeight: '700'}}>{workerCall.year_of_birth}</span>
-                        {/* {workerCall.specialities !== '' && (workerCall.specialities).split(',').map((spec, index)=>( 
-                          <span key={index} style={{fontSize: '16px', color: '#858585'}}>
-                            - {spec}
-                          </span>
-                        ))} */}
-                        <span style={{fontSize: '16px', color: '#858585'}}>Проекты: {workerCall.projects}</span>
-                        <span style={{fontSize: '16px', color: '#858585'}}>- {workerCall.specialities}</span>
-                        <span style={{fontSize: '16px', color: '#858585'}}>{workerCall.comtags}</span>
+                        <div className="star-block">
+                          <img className='star-icon' src={StarActive} width={26} alt='' /> 
+                          <img className='star-icon' src={StarActive} width={26} alt='' />
+                          <img className='star-icon' src={StarActive} width={26} alt='' />
+                          <img className='star-icon' src={Star} width={26} alt='' />
+                          <img className='star-icon' src={Star} width={26} alt='' />
+                      </div>
+                        <ul><li style={{fontSize: '16px', color: '#858585', paddingLeft: '20px', paddingTop: '5px'}}>Проекты: {workerCall.projects}</li></ul>
+                        <div style={{overflow: 'scroll', height: '50px'}}>
+                          <ul>
+                            {workerCall.specialities.split(',').map((item, index)=> 
+                              (<li key={index} style={{fontSize: '16px', color: '#858585'}}>
+                                {item}
+                              </li>)
+                            )}
+                            
+                          </ul>
+                        </div>
+                        {/* <span style={{fontSize: '16px', color: '#858585'}}>- {workerCall2.specialities}</span> */}
+                        <span style={{fontSize: '16px', color: '#858585'}}><img src={Krestik} width={16} alt=''/> {workerCall.comtags}</span>
                       </div>
                     </div>
                     
