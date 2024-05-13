@@ -187,8 +187,8 @@ const AppHeader = (props) => {
                         <rect width="370px" height="370px" fill="#007aff"></rect>
                       </svg>
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <h3 style={{color: '#fff'}}>{workerCall.fio?.split(' ')[0]}</h3>
-                        <h3 style={{color: '#fff'}}>{workerCall.fio?.split(' ')[1]} {workerCall.fio?.split(' ')[2]}</h3>
+                        <h3 style={{color: '#fff'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</h3>
+                        <h3 style={{color: '#fff'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</h3>
                         {/* <h3 style={{color: '#fff'}}>Отчество</h3> */}
                         <span style={{fontSize: '22px', color: '#858585', fontWeight: '700'}}>{workerCall.sity}</span>
                         <span style={{fontSize: '22px', color: '#858585', fontWeight: '700'}}>{workerCall.year_of_birth}</span>
