@@ -174,7 +174,7 @@ const AppHeader = (props) => {
               <CIcon icon={cilPhone} size="lg"/>
             </CNavLink>
             <div style={{
-              display: showCallCard ? 'block' : 'none', 
+              display: showCallCard ? 'block' : 'block', 
               position: 'absolute', top: '65px', right: '0', 
               width: '900px', height: '330px', 
               backgroundColor: '#2a2f32', 
