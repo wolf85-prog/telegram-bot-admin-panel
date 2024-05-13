@@ -237,16 +237,16 @@ const AppHeader = (props) => {
                       workerCall.specialities ? 
                       (workerCall.specialities.split(',').find(item => item === 'Blacklist') ? 
                       (workerCall.specialities.split(',').find(item => item === '+18') ? 
-                      <img src={block18} width={100} alt='' style={{position: 'absolute', top: '270px', right: '540px'}}/>
+                      <img src={block18} width={100} alt='' style={{position: 'absolute', top: '230px', right: '580px'}}/>
                       :
-                      <img src={Krestik} width={100} alt='' style={{position: 'absolute', top: '270px', right: '540px'}}/>)
+                      <img src={Krestik} width={100} alt='' style={{position: 'absolute', top: '230px', right: '580px'}}/>)
                       : "")
                       : ""
                     }
                     {
                       workerCall.specialities ? 
                       (workerCall.specialities.split(',').find(item => item === '+18') ? 
-                      <img src={block18} width={100} alt='' style={{position: 'absolute', top: '270px', right: '540px'}}/>
+                      <img src={block18} width={100} alt='' style={{position: 'absolute', top: '230px', right: '580px'}}/>
                       : "")
                       : ""
                     }
