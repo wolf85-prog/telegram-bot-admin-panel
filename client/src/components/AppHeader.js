@@ -202,11 +202,11 @@ const AppHeader = (props) => {
                         <ul><li style={{fontSize: '16px', color: '#858585', paddingLeft: '20px', paddingTop: '5px'}}>Проекты: {workerCall.projects}</li></ul>
                         <div style={{overflow: 'scroll', height: '145px'}}>
                           <ul>
-                            {workerCall.specialities.split(',').map((item, index)=> 
+                            {workerCall.specialities ? workerCall.specialities.split(',').map((item, index)=> 
                               (<li key={index} style={{fontSize: '16px', color: '#858585'}}>
                                 {item}
                               </li>)
-                            )}
+                            ) : null}
                             
                           </ul>
                         </div>
