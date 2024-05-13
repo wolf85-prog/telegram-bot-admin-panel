@@ -171,7 +171,7 @@ const AppHeader = (props) => {
             <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
               <CIcon icon={cilPhone} size="lg"/>
             </CNavLink>
-            <div style={{display: showCallCard ? 'block' : 'block', position: 'absolute', top: '65px', right: '0', width: '900px', height: '400px', backgroundColor: '#2a2f32', borderRadius: '15px', padding: '15px'}}>
+            <div style={{display: showCallCard ? 'block' : 'none', position: 'absolute', top: '65px', right: '0', width: '900px', height: '400px', backgroundColor: '#2a2f32', borderRadius: '15px', padding: '15px'}}>
                 <div className="d-flex" style={{justifyContent: 'space-between'}}>
                   <CToastBody>
                     <div style={{display: 'flex'}}>
