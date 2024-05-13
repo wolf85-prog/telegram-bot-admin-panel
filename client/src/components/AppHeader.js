@@ -30,7 +30,9 @@ import { AppHeaderDropdown, AppHeaderDropdown2 } from './header/index'
 import logo from './../assets/brand/logo_04_light.png'
 import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
-import Krestik from './../assets/images/krestik.png'
+import Krestik from './../assets/images/krestik.png';
+import block18 from "./../assets/images/block18.png";
+import Trubka from "./../assets/images/trubka.png";
 
 import './DropdownHeader.css'
 
@@ -52,7 +54,7 @@ const AppHeader = (props) => {
   const toaster = useRef()
 
   const [workerCall2, setWorkerCall2] = useState({fio: 'Иванов Иван Ивановия', sity: 'Майкоп', year_of_birth: '01.01.1985', projects: '5', 
-  specialities: 'Художник по свету,Звукорежиссер,Backline,Репортажная съемка,Диджей,Ведущий,Официант,Инженер Resolume', 
+  specialities: 'Художник по свету,Звукорежиссер,Backline,Репортажная съемка,Диджей,Ведущий,Официант,Инженер Resolume,+18,Blacklist', 
   comtags: 'опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание'})
 
 
@@ -184,13 +186,11 @@ const AppHeader = (props) => {
                           focusable="false"
                           role="img"
                       >
-                        <rect width="370px" height="370px" fill="#007aff"></rect>
+                        <rect width="370px" height="370px" fill="#007aff"></rect> 
                       </svg>
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <h2 style={{color: '#fff'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</h2>
-                        <h2 style={{color: '#fff'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} 
-                          {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}
-                        </h2>
+                        <span style={{color: '#fff', fontSize: '28px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
+                        <span style={{color: '#fff', fontSize: '28px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
                         <span style={{fontSize: '18px', color: '#858585', fontWeight: '700'}}>{workerCall.sity}</span>
                         <span style={{fontSize: '18px', color: '#858585', fontWeight: '700'}}>{workerCall.year_of_birth}</span>
                         <div className="star-block">
@@ -211,16 +211,40 @@ const AppHeader = (props) => {
                               (<li key={index} style={{fontSize: '14px', color: '#858585'}}>
                                 {item}
                               </li>)
-                            ) : null}
-                            
+                            ) : null}    
                           </ul>
                         </div>
-                        <span style={{fontSize: '14px', color: 'red', width:'450px'}}>
-                          <img src={Krestik} width={16} alt=''/> {workerCall.comtags}
-                        </span>
+                        <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
+                          <li style={{fontSize: '14px', color: 'red', width:'470px'}}>
+                            {workerCall.comtags ? workerCall.comtags.split(',').map((item, index)=> 
+                              (<span key={index}>
+                                {item} {index === workerCall.comtags.split(',').length-1 ? '' : '|'}
+                              </span>)
+                            ) : null}
+                          </li>
+                        </ul>
                       </div>
                     </div>
-                    
+                      
+                    {
+                      workerCall.specialities ? 
+                      (workerCall.specialities.split(',').find(item => item === 'Blacklist') ? 
+                      (workerCall.specialities.split(',').find(item => item === '+18') ? 
+                      <img src={block18} width={100} alt='' style={{position: 'absolute', top: '270px', right: '540px'}}/>
+                      :
+                      <img src={Krestik} width={100} alt='' style={{position: 'absolute', top: '270px', right: '540px'}}/>)
+                      : "")
+                      : ""
+                    }
+                    {
+                      workerCall.specialities ? 
+                      (workerCall.specialities.split(',').find(item => item === '+18') ? 
+                      <img src={block18} width={100} alt='' style={{position: 'absolute', top: '270px', right: '540px'}}/>
+                      : "")
+                      : ""
+                    }
+
+                    <img src={Trubka} width={100} alt='' style={{position: 'absolute', top: '100px', right: '150px'}}/>
                   </CToastBody>
                   <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/>
                 </div>
