@@ -173,20 +173,27 @@ const AppHeader = (props) => {
             <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
               <CIcon icon={cilPhone} size="lg"/>
             </CNavLink>
-            <div style={{display: showCallCard ? 'block' : 'none', position: 'absolute', top: '65px', right: '0', width: '900px', height: '400px', backgroundColor: '#2a2f32', borderRadius: '15px', padding: '15px'}}>
+            <div style={{
+              display: showCallCard ? 'block' : 'none', 
+              position: 'absolute', top: '65px', right: '0', 
+              width: '900px', height: '330px', 
+              backgroundColor: '#2a2f32', 
+              borderRadius: '15px', 
+              padding: '15px'}
+            }>
                 <div className="d-flex" style={{justifyContent: 'space-between'}}>
                   <CToastBody>
                     <div style={{display: 'flex'}}>
                       <svg
                           className="rounded me-2"
-                          width="370"
-                          height="370"
+                          width="300"
+                          height="300"
                           xmlns="http://www.w3.org/2000/svg"
                           preserveAspectRatio="xMidYMid slice"
                           focusable="false"
                           role="img"
                       >
-                        <rect width="370px" height="370px" fill="#007aff"></rect> 
+                        <rect width="300px" height="300px" fill="#007aff"></rect> 
                       </svg>
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
                         <span style={{color: '#fff', fontSize: '28px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
@@ -214,11 +221,11 @@ const AppHeader = (props) => {
                             ) : null}    
                           </ul>
                         </div>
-                        <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
-                          <li style={{fontSize: '14px', color: 'red', width:'470px'}}>
+                        <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px'}}>
+                          <li style={{fontSize: '14px', color: 'red', width:'440px'}}>
                             {workerCall.comtags ? workerCall.comtags.split(',').map((item, index)=> 
                               (<span key={index}>
-                                {item} {index === workerCall.comtags.split(',').length-1 ? '' : '|'}
+                                {item} {index === workerCall.comtags.split(',').length-1 ? '' : '| '}
                               </span>)
                             ) : null}
                           </li>
@@ -244,7 +251,7 @@ const AppHeader = (props) => {
                       : ""
                     }
 
-                    <img src={Trubka} width={100} alt='' style={{position: 'absolute', top: '100px', right: '150px'}}/>
+                    <img src={Trubka} width={70} alt='' style={{position: 'absolute', top: '100px', right: '150px'}}/>
                   </CToastBody>
                   <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/>
                 </div>
