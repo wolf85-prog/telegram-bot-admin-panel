@@ -52,7 +52,7 @@ const AppHeader = (props) => {
   const toaster = useRef()
 
   const [workerCall2, setWorkerCall2] = useState({fio: 'Иванов Иван Ивановия', sity: 'Майкоп', year_of_birth: '01.01.1985', projects: '5', 
-  specialities: 'спец1,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2,спец2', 
+  specialities: 'Художник по свету,Звукорежиссер,Backline,Репортажная съемка,Диджей,Ведущий,Официант,Инженер Resolume', 
   comtags: 'опоздание'})
 
 
@@ -171,20 +171,20 @@ const AppHeader = (props) => {
             <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
               <CIcon icon={cilPhone} size="lg"/>
             </CNavLink>
-            <div style={{display: showCallCard ? 'block' : 'block', position: 'absolute', top: '65px', right: '25px', width: '900px', height: '300px', backgroundColor: '#2a2f32', borderRadius: '15px', padding: '15px'}}>
+            <div style={{display: showCallCard ? 'block' : 'none', position: 'absolute', top: '65px', right: '25px', width: '900px', height: '400px', backgroundColor: '#2a2f32', borderRadius: '15px', padding: '15px'}}>
                 <div className="d-flex" style={{justifyContent: 'space-between'}}>
                   <CToastBody>
                     <div style={{display: 'flex'}}>
                       <svg
                           className="rounded me-2"
-                          width="270"
-                          height="270"
+                          width="370"
+                          height="370"
                           xmlns="http://www.w3.org/2000/svg"
                           preserveAspectRatio="xMidYMid slice"
                           focusable="false"
                           role="img"
                       >
-                        <rect width="270px" height="270px" fill="#007aff"></rect>
+                        <rect width="370px" height="370px" fill="#007aff"></rect>
                       </svg>
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
                         <h3 style={{color: '#fff'}}>{workerCall.fio.split(' ')[0]}</h3>
@@ -200,7 +200,7 @@ const AppHeader = (props) => {
                           <img className='star-icon' src={Star} width={26} alt='' />
                       </div>
                         <ul><li style={{fontSize: '16px', color: '#858585', paddingLeft: '20px', paddingTop: '5px'}}>Проекты: {workerCall.projects}</li></ul>
-                        <div style={{overflow: 'scroll', height: '50px'}}>
+                        <div style={{overflow: 'scroll', height: '145px'}}>
                           <ul>
                             {workerCall.specialities.split(',').map((item, index)=> 
                               (<li key={index} style={{fontSize: '16px', color: '#858585'}}>
@@ -210,8 +210,9 @@ const AppHeader = (props) => {
                             
                           </ul>
                         </div>
-                        {/* <span style={{fontSize: '16px', color: '#858585'}}>- {workerCall2.specialities}</span> */}
-                        <span style={{fontSize: '16px', color: '#858585'}}><img src={Krestik} width={16} alt=''/> {workerCall.comtags}</span>
+                        <span style={{fontSize: '16px', color: '#858585'}}>
+                          <img src={Krestik} width={16} alt=''/> {workerCall.comtags}
+                        </span>
                       </div>
                     </div>
                     
