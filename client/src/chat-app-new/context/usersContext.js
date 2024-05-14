@@ -1296,7 +1296,7 @@ const fetchNotifAdmin = async (dataAll) => {
             projects, 
             specialities, 
             comtags,
-			avatar,
+			avatar: avatar.avatar,
 		})
 
 	}
