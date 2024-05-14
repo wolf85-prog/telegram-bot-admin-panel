@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./socketContext";
 import { getAllMessages, getContacts, getConversation, getMessages } from '../../http/chatAPI'
 import { getAllPretendent, getWContacts, getWConversation, 
-	getWConversations, getWMessages, getWorkers, getAllWMessages, 
+	getWConversations, getWMessages, getWorkers, getWorker, getAllWMessages, 
 	getWMessagesCount, 
 	getWorkersCount} from '../../http/workerAPI'
 
@@ -1202,9 +1202,10 @@ const delWMessageContext = (messageId, messageDate, chatId) => {
 //===============================================================
 //                  Notifications
 //===============================================================
-const fetchNotifAdmin = (dataAll) => {
+const fetchNotifAdmin = async (dataAll) => {
 	console.log("Получено уведомление: ", dataAll)
 	const { task, 
+		tg_id,
 		fio,
 		sity,
 		year_of_birth, 
@@ -1283,7 +1284,10 @@ const fetchNotifAdmin = (dataAll) => {
 	else if (task === 200) {
 		//console.log("fio: ", data)
 		setShowCallCard(true)
+
+		const avatar = await getWorker(tg_id)
 		setWorkerCall({
+			tg_id,
 			fio,
             sity,
             year_of_birth, 
@@ -1291,7 +1295,9 @@ const fetchNotifAdmin = (dataAll) => {
             projects, 
             specialities, 
             comtags,
+			avatar,
 		})
+
 	}
 	//обновление данных
 	else if (task === 300) {

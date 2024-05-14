@@ -53,9 +53,10 @@ const AppHeader = (props) => {
   const [shake4, setShake4] = useState(false)
   const toaster = useRef()
 
-  const [workerCall2, setWorkerCall2] = useState({fio: 'Иванов Иван Ивановия', sity: 'Майкоп', year_of_birth: '01.01.1985', projects: '5', 
+  const [workerCall2, setWorkerCall2] = useState({tg_id: '805436270', fio: 'Иванов Иван Ивановия', sity: 'Майкоп', year_of_birth: '01.01.1985', projects: '5', 
   specialities: 'Художник по свету,Звукорежиссер,Backline,Репортажная съемка,Диджей,Ведущий,Официант,Инженер Resolume,+18,Blacklist', 
-  comtags: 'опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание'})
+  comtags: 'опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание',
+avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
 
 
   const clickPhone = () => {
@@ -174,7 +175,7 @@ const AppHeader = (props) => {
               <CIcon icon={cilPhone} size="lg"/>
             </CNavLink>
             <div style={{
-              display: showCallCard ? 'block' : 'block', 
+              display: showCallCard ? 'block' : 'none', 
               position: 'absolute', top: '65px', right: '0', 
               width: '900px', height: '330px', 
               backgroundColor: '#2a2f32', 
@@ -184,7 +185,9 @@ const AppHeader = (props) => {
                 <div className="d-flex" style={{justifyContent: 'space-between'}}>
                   <CToastBody>
                     <div style={{display: 'flex'}}>
-                      <svg
+                      {workerCall.avatar ? 
+                      <img src={workerCall.avatar} alt='' style={{borderRadius: '15px'}} width={300} height={300}/>
+                      : <svg
                           className="rounded me-2"
                           width="300"
                           height="300"
@@ -195,6 +198,7 @@ const AppHeader = (props) => {
                       >
                         <rect width="300px" height="300px" fill="#007aff"></rect> 
                       </svg>
+                      }
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
                         <span style={{color: '#fff', fontSize: '28px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
                         <span style={{color: '#fff', fontSize: '28px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
