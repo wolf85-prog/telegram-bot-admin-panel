@@ -1214,6 +1214,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		specialities, 
 		comtags, 
 		workers_update,
+		phone,
 	} = dataAll;
 
 	if (task === 1) {
@@ -1297,6 +1298,15 @@ const fetchNotifAdmin = async (dataAll) => {
             specialities, 
             comtags,
 			avatar: avatar.avatar,
+		})
+
+	}
+	else if (task === 201) {
+		//console.log("fio: ", data)
+		setShowCallCard(true)
+
+		setWorkerCall({
+			phone,
 		})
 
 	}
