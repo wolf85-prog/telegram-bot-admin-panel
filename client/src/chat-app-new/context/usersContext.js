@@ -1286,6 +1286,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		setShowCallCard(true)
 
 		const avatar = await getWorker(tg_id)
+		console.log("avatar: ", avatar)
 		setWorkerCall({
 			tg_id,
 			fio,
