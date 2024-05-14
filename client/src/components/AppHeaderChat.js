@@ -192,7 +192,7 @@ const AppHeader = () => {
                             ) : null}    
                           </ul>
                         </div>
-                        <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '0px'}}>
+                        <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
                           <li style={{fontSize: '14px', color: 'red', width:'480px'}}>
                             <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
                               {workerCall.comtags ? workerCall.comtags.split(',').map((item, index)=> 
