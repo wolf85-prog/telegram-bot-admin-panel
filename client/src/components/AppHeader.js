@@ -28,7 +28,7 @@ import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
 import Krestik from './../assets/images/krestik.png';
 import block18 from "./../assets/images/block18.png";
-import Trubka from "./../assets/images/trubka.png";
+import Trubka from "./../assets/images/trubka.gif";
 
 import './DropdownHeader.css'
 
@@ -194,34 +194,34 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                       </svg>
                       }
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '-10px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
+                        <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '-9px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
                         <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
                         <div className="star-block" style={{marginTop: '85px'}}>
-                          <img className='star-icon' src={StarActive} width={23} alt='' /> 
-                          <img className='star-icon' src={StarActive} width={23} alt='' />
-                          <img className='star-icon' src={StarActive} width={23} alt='' />
-                          <img className='star-icon' src={Star} width={23} alt='' />
-                          <img className='star-icon' src={Star} width={23} alt='' />
+                          <img className='star-icon' src={StarActive} width={25} alt='' /> 
+                          <img className='star-icon' src={StarActive} width={25} alt='' />
+                          <img className='star-icon' src={StarActive} width={25} alt='' />
+                          <img className='star-icon' src={Star} width={25} alt='' />
+                          <img className='star-icon' src={Star} width={25} alt='' />
                         </div>
-                        <span style={{fontSize: '18px', color: '#858585', fontWeight: '700'}}>{workerCall.year_of_birth}</span>
-                        <span style={{fontSize: '18px', color: '#858585', fontWeight: '700'}}>{workerCall.sity}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerCall.year_of_birth}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.sity}</span>
                         
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
-                          <li style={{fontSize: '14px', color: '#858585', paddingTop: '5px'}}>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             Проекты: {workerCall.projects}
                           </li>
                         </ul>
-                        <div style={{overflow: 'auto', height: '65px'}}>
+                        <div style={{overflow: 'auto', height: '70px'}}>
                           <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                             {workerCall.specialities ? workerCall.specialities.split(',').map((item, index)=> 
-                              (<li key={index} style={{fontSize: '14px', color: '#858585'}}>
+                              (<li key={index} style={{fontSize: '16px', color: '#858585'}}>
                                 {item}
                               </li>)
                             ) : null}    
                           </ul>
                         </div>
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
-                          <li style={{fontSize: '14px', color: 'red', width:'480px'}}>
+                          <li style={{fontSize: '16px', color: 'red', width:'495px'}}>
                             <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
                               {workerCall.comtags ? workerCall.comtags.split(',').map((item, index)=> 
                                 (<span key={index}>
