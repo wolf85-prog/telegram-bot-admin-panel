@@ -38,6 +38,8 @@ import sound10 from './../../assets/sound/10_minut_ULEY.mp3';
 import soundNarush from './../../assets/sound/narush_ULEY.mp3';
 import soundNarush2 from './../../assets/sound/narush2_ULEY.mp3';
 
+import soundCall from './../../assets/sound/Skype.mp3';
+
 import sendSound from './../assets/sounds/sendmessage.mp3';
 import smsWorkhub from './../../chat-app-worker/assets/sounds/sms_iphone.mp3';
 import notifPretendent from './../../chat-app-worker/assets/sounds/pretendent2.mp3';
@@ -107,6 +109,8 @@ const UsersProvider = ({ children }) => {
 	const audioSend = new Audio(sendSound);
 	const audioWorkhub = new Audio(smsWorkhub);
 	const audioPretendent = new Audio(notifPretendent)
+
+	const audioCall = new Audio(soundCall)
 
 //-------------------------------------------------------------------------
 	const refreshPage = ()=>{
@@ -1303,6 +1307,8 @@ const fetchNotifAdmin = async (dataAll) => {
 			avatar: worker.avatar,
 		})
 
+		audioCall.play();
+
 	}
 	else if (task === 201) {
 		//console.log("fio: ", data)
@@ -1311,7 +1317,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		setWorkerCallNo({
 			phone,
 		})
-
+		audioCall.play();
 	}
 	//обновление данных
 	else if (task === 300) {
