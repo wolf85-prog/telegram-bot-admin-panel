@@ -195,7 +195,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                       </svg>
                       }
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '-6px'}}>{workerCall2.fio ? workerCall2.fio?.split(' ')[0] : ''}</span>
+                        <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '-6px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
                         <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
                         <div className="star-block" style={{marginTop: '85px'}}>
                           <img className='star-icon' src={StarActive} width={25} alt='' /> 
