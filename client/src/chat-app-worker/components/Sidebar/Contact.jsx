@@ -141,20 +141,26 @@ const Contact = ({ contact, worker }) => {
 						<img src={avatarDefault} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
 					</>
 				}
+				
 				{
-					worker.length !== 0 ? 
-					((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ? 
-					<img src={avatarBlacklist} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
-					: "")
-					: ""
-				}
+                    worker.length !== 0 ?  
+                    ((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ? 
+                    ((JSON.parse(worker[0].worklist)).find(item => item.spec === '+18') ?  
+                    <img src={block18} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px', width: '23px'}}/>
+                    :
+                    <img src={avatarBlacklist} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>)
+                    : "")
+                    : ""
+                }
+                
 				{
-					worker.length !== 0 ? 
-					((JSON.parse(worker[0].worklist)).find(item => item.spec === '+18') ? 
-					<img src={block18} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px', width: '23px'}}/>
-					: "")
-					: ""
-				}
+                    worker.length !== 0 ? 
+                    ((JSON.parse(worker[0].worklist)).find(item => item.spec === '+18') ?   
+                    <img src={block18} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px', width: '23px'}}/>
+                    : "")
+                    : ""
+                }
+				
 			</div>
 			<div className="sidebar-contact__content">
 				<div className="sidebar-contact__top-content">

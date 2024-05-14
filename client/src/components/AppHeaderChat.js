@@ -14,20 +14,26 @@ import {
   CButton,
   CFormInput,
   CProgress,
-  CProgressBar,
-  CToast,
   CToastBody,
-  CToaster,
-  CToastClose,
+
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilBell, cilEnvelopeOpen, cilList, cilMenu, cilPhone } from '@coreui/icons'
 import logo from './../assets/brand/logo_04_light.png'
+import Star from "./../assets/images/star.png";
+import StarActive from "./../assets/images/star_activ.svg";
+import Krestik from './../assets/images/krestik.png';
+import block18 from "./../assets/images/block18.png";
+import Trubka from "./../assets/images/trubka.png";
+
+import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { AppHeaderDropdown } from './header/index'
 
 const AppHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
+
+  const { workerCall, showCallCard, setShowCallCard, } = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
   const [mutePress, setMutePress] = useState(false)
@@ -36,6 +42,8 @@ const AppHeader = () => {
   const [showToast, setShowToast] = useState(false)
   const [shake, setShake] = useState(false)
   const [shake2, setShake2] = useState(false)
+  const [shake3, setShake3] = useState(false)
+  const [shake4, setShake4] = useState(false)
   const toaster = useRef()
 
 
@@ -133,32 +141,98 @@ const AppHeader = () => {
             <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
               <CIcon icon={cilPhone} size="lg"/>
             </CNavLink>
-            <div style={{display: showToast ? 'block' : 'none', position: 'absolute', top: '65px', right: '25px', width: '900px', height: '300px', backgroundColor: '#2a2f32', borderRadius: '15px', padding: '15px'}}>
+            <div style={{
+              display: showCallCard ? 'block' : 'none', 
+              position: 'absolute', top: '65px', right: '0', 
+              width: '900px', height: '330px', 
+              backgroundColor: '#2a2f32', 
+              borderRadius: '15px', 
+              padding: '8px'}
+            }>
                 <div className="d-flex" style={{justifyContent: 'space-between'}}>
                   <CToastBody>
                     <div style={{display: 'flex'}}>
-                      <svg
+                      {workerCall.avatar ? 
+                      <img src={workerCall.avatar} alt='' style={{borderRadius: '15px'}} width={314} height={314}/>
+                      : <svg
                           className="rounded me-2"
-                          width="270"
-                          height="270"
+                          width="314"
+                          height="314"
                           xmlns="http://www.w3.org/2000/svg"
                           preserveAspectRatio="xMidYMid slice"
                           focusable="false"
                           role="img"
                       >
-                        <rect width="100%" height="100%" fill="#007aff"></rect>
+                        <rect width="314px" height="314px" fill="#007aff"></rect> 
                       </svg>
+                      }
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <h3 style={{color: '#fff'}}>Фамилия Имя</h3>
-                        <h3 style={{color: '#fff'}}>Отчество</h3>
-                        <span style={{fontSize: '22px', color: '#858585', fontWeight: '700'}}>г. Москва</span>
-                        <span style={{fontSize: '22px', color: '#858585', fontWeight: '700'}}>01.01.2000</span>
-                        <span style={{fontSize: '16px', color: '#858585'}}>-звукорежиссер</span>
+                        <span style={{color: '#fff', fontSize: '44px', position: 'absolute', top: '-10px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
+                        <span style={{color: '#fff', fontSize: '44px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
+                        <span style={{fontSize: '18px', color: '#858585', fontWeight: '700', marginTop: '90px'}}>{workerCall.sity}</span>
+                        <span style={{fontSize: '18px', color: '#858585', fontWeight: '700'}}>{workerCall.year_of_birth}</span>
+                        <div className="star-block">
+                          <img className='star-icon' src={StarActive} width={23} alt='' /> 
+                          <img className='star-icon' src={StarActive} width={23} alt='' />
+                          <img className='star-icon' src={StarActive} width={23} alt='' />
+                          <img className='star-icon' src={Star} width={23} alt='' />
+                          <img className='star-icon' src={Star} width={23} alt='' />
+                      </div>
+                        <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
+                          <li style={{fontSize: '14px', color: '#858585', paddingTop: '5px'}}>
+                            Проекты: {workerCall.projects}
+                          </li>
+                        </ul>
+                        <div style={{overflow: 'auto', height: '65px'}}>
+                          <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
+                            {workerCall.specialities ? workerCall.specialities.split(',').map((item, index)=> 
+                              (<li key={index} style={{fontSize: '14px', color: '#858585'}}>
+                                {item}
+                              </li>)
+                            ) : null}    
+                          </ul>
+                        </div>
+                        <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '0px'}}>
+                          <li style={{fontSize: '14px', color: 'red', width:'480px'}}>
+                            <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
+                              {workerCall.comtags ? workerCall.comtags.split(',').map((item, index)=> 
+                                (<span key={index}>
+                                  {item} {index === workerCall.comtags.split(',').length-1 ? '' : '| '}
+                                </span>)
+                              ) : null}
+                            </div>
+                            
+                          </li>
+                        </ul>
                       </div>
                     </div>
-                    
+                      
+                    {
+                      workerCall.specialities ? 
+                      (workerCall.specialities.split(',').find(item => item === 'Blacklist') ? 
+                      (workerCall.specialities.split(',').find(item => item === '+18') ? 
+                      <img src={block18} width={100} alt='' style={{position: 'absolute', top: '230px', right: '580px'}}/>
+                      :
+                      <img src={Krestik} width={100} alt='' style={{position: 'absolute', top: '230px', right: '580px'}}/>)
+                      : "")
+                      : ""
+                    }
+                    {
+                      workerCall.specialities ? 
+                      (workerCall.specialities.split(',').find(item => item === '+18') ? 
+                      <img src={block18} width={100} alt='' style={{position: 'absolute', top: '230px', right: '580px'}}/>
+                      : "")
+                      : ""
+                    }
+
                   </CToastBody>
-                  <CToastClose onClick={()=>setShowToast(false)} white style={{marginTop: '0px', marginRight: '0px'}}/>
+                  {/* <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/> */}
+                  <img 
+                    src={Trubka} 
+                    onClick={()=>setShowCallCard(false)} 
+                    width={70} alt='' 
+                    style={{position: 'absolute', top: '20px', right: '20px'}}
+                  />
                 </div>
             </div> 
           </CNavItem>

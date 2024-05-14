@@ -14,11 +14,7 @@ import {
   CButton,
   CFormInput,
   CProgress,
-  CProgressBar,
-  CToast,
   CToastBody,
-  CToaster,
-  CToastClose,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import Icon from "./../../src/chat-app-new/components/Icon";
@@ -26,7 +22,7 @@ import { cilBell, cilEnvelopeOpen, cilList, cilMenu, cilPhone } from '@coreui/ic
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { AppBreadcrumb } from './index'
-import { AppHeaderDropdown, AppHeaderDropdown2 } from './header/index'
+import { AppHeaderDropdown } from './header/index'
 import logo from './../assets/brand/logo_04_light.png'
 import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
@@ -130,8 +126,6 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
           {/* <h5>U.L.E.Y TEAM</h5> */}
         </CHeaderBrand>
 
-        <CToaster ref={toaster} push={toast} placement="top-end" /> 
-
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
             <CNavLink to="/dashboard" component={NavLink}>
@@ -180,29 +174,29 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               width: '900px', height: '330px', 
               backgroundColor: '#2a2f32', 
               borderRadius: '15px', 
-              padding: '15px'}
+              padding: '8px'}
             }>
                 <div className="d-flex" style={{justifyContent: 'space-between'}}>
                   <CToastBody>
                     <div style={{display: 'flex'}}>
                       {workerCall.avatar ? 
-                      <img src={workerCall.avatar} alt='' style={{borderRadius: '15px'}} width={300} height={300}/>
+                      <img src={workerCall.avatar} alt='' style={{borderRadius: '15px'}} width={314} height={314}/>
                       : <svg
                           className="rounded me-2"
-                          width="300"
-                          height="300"
+                          width="314"
+                          height="314"
                           xmlns="http://www.w3.org/2000/svg"
                           preserveAspectRatio="xMidYMid slice"
                           focusable="false"
                           role="img"
                       >
-                        <rect width="300px" height="300px" fill="#007aff"></rect> 
+                        <rect width="314px" height="314px" fill="#007aff"></rect> 
                       </svg>
                       }
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <span style={{color: '#fff', fontSize: '28px', position: 'absolute', top: '5px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
-                        <span style={{color: '#fff', fontSize: '28px', position: 'absolute', top: '35px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
-                        <span style={{fontSize: '18px', color: '#858585', fontWeight: '700', marginTop: '60px'}}>{workerCall.sity}</span>
+                        <span style={{color: '#fff', fontSize: '44px', position: 'absolute', top: '-10px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
+                        <span style={{color: '#fff', fontSize: '44px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
+                        <span style={{fontSize: '18px', color: '#858585', fontWeight: '700', marginTop: '90px'}}>{workerCall.sity}</span>
                         <span style={{fontSize: '18px', color: '#858585', fontWeight: '700'}}>{workerCall.year_of_birth}</span>
                         <div className="star-block">
                           <img className='star-icon' src={StarActive} width={23} alt='' /> 
@@ -216,7 +210,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                             Проекты: {workerCall.projects}
                           </li>
                         </ul>
-                        <div style={{overflow: 'auto', height: '90px'}}>
+                        <div style={{overflow: 'auto', height: '65px'}}>
                           <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                             {workerCall.specialities ? workerCall.specialities.split(',').map((item, index)=> 
                               (<li key={index} style={{fontSize: '14px', color: '#858585'}}>
@@ -225,13 +219,16 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                             ) : null}    
                           </ul>
                         </div>
-                        <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px'}}>
+                        <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '0px'}}>
                           <li style={{fontSize: '14px', color: 'red', width:'480px'}}>
-                            {workerCall.comtags ? workerCall.comtags.split(',').map((item, index)=> 
-                              (<span key={index}>
-                                {item} {index === workerCall.comtags.split(',').length-1 ? '' : '| '}
-                              </span>)
-                            ) : null}
+                            <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
+                              {workerCall.comtags ? workerCall.comtags.split(',').map((item, index)=> 
+                                (<span key={index}>
+                                  {item} {index === workerCall.comtags.split(',').length-1 ? '' : '| '}
+                                </span>)
+                              ) : null}
+                            </div>
+                            
                           </li>
                         </ul>
                       </div>

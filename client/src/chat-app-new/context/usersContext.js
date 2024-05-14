@@ -1286,8 +1286,8 @@ const fetchNotifAdmin = async (dataAll) => {
 		//console.log("fio: ", data)
 		setShowCallCard(true)
 
-		const avatar = await getWorker(tg_id)
-		console.log("avatar: ", avatar)
+		const worker = await getWorker(tg_id)
+		//console.log("avatar: ", avatar)
 		setWorkerCall({
 			tg_id,
 			fio,
@@ -1297,7 +1297,7 @@ const fetchNotifAdmin = async (dataAll) => {
             projects, 
             specialities, 
             comtags,
-			avatar: avatar.avatar,
+			avatar: worker.avatar,
 		})
 
 	}
