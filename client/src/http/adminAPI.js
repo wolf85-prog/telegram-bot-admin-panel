@@ -489,16 +489,3 @@ export const getSoundNotif = async()=>{
          console.log("error while calling getDistributionsW api", error.message);
      }
 }
-
-//------------------------------------------------------------------------------------------
-
-//call
-export const getToCall = async()=>{
-    try {
-        let response = await $host.get('api/call/get');
-        //console.log(response);
-        return response.data;
-     } catch (error) {
-         console.log("error while calling getDistributionsW api", error.message);
-     }
-}

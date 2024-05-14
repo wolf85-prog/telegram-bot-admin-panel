@@ -37,7 +37,7 @@ const AppHeader = (props) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo} = useUsersContext();
+  const { workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
   const [mutePress, setMutePress] = useState(false)
@@ -175,7 +175,8 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               width: '900px', height: '330px', 
               backgroundColor: '#2a2f32', 
               borderRadius: '15px', 
-              padding: '8px'}
+              padding: '8px',
+              zIndex: callIndex}
             }>
                 <div className="d-flex" style={{justifyContent: 'space-between'}}>
                   <CToastBody>
@@ -268,7 +269,8 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               width: '900px', height: '330px', 
               backgroundColor: '#2a2f32', 
               borderRadius: '15px', 
-              padding: '8px'}
+              padding: '8px',
+              zIndex: callIndex}
             }>
                 <div className="d-flex" style={{justifyContent: 'space-between'}}>
                   <CToastBody>
@@ -279,7 +281,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
                         <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '100px'}}>Номер не зарегистрирован</span>
 
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '150px'}}>{workerCallNo}</span>
+                        <span style={{fontSize: '26px', color: '#858585', fontWeight: '700', marginTop: '150px'}}>{workerCallNo}</span>
                         
                       </div>
                     </div>
