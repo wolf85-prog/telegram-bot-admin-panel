@@ -37,7 +37,7 @@ const AppHeader = (props) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex} = useUsersContext();
+  const { workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
   const [mutePress, setMutePress] = useState(false)
@@ -270,7 +270,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               backgroundColor: '#2a2f32', 
               borderRadius: '15px', 
               padding: '8px',
-              zIndex: callIndex}
+              zIndex: callIndex2}
             }>
                 <div className="d-flex" style={{justifyContent: 'space-between'}}>
                   <CToastBody>

@@ -86,6 +86,7 @@ const UsersProvider = ({ children }) => {
 	const [showCallCardNo, setShowCallCardNo] = useState(false);
 	const [workerCallNo, setWorkerCallNo] = useState('');
 	const [callIndex, setCallIndex] = useState(0)
+	const [callIndex2, setCallIndex2] = useState(0)
 
 	const [showUpdate, setShowUpdate] = useState(false);
 	const [workerUpdate, setWorkerUpdate] = useState(0);
@@ -1290,9 +1291,11 @@ const fetchNotifAdmin = async (dataAll) => {
 	else if (task === 101) {
 		audioNarush2.play();
 	}
+	//звонок специалиста
 	else if (task === 200) {
 		//console.log("fio: ", data)
 		setShowCallCard(true)
+
 
 		const worker = await getWorker(tg_id)
 		//console.log("avatar: ", avatar)
@@ -1310,8 +1313,10 @@ const fetchNotifAdmin = async (dataAll) => {
 
 		audioCall.play();
 
-		setCallIndex(callIndex+1)
+		setCallIndex(2)
+		setCallIndex2(1)
 	}
+	//неизвестный номер
 	else if (task === 201) {
 		//console.log("fio: ", data)
 		setShowCallCardNo(true)
@@ -1319,7 +1324,8 @@ const fetchNotifAdmin = async (dataAll) => {
 		setWorkerCallNo(phone)
 		audioCall.play();
 
-		setCallIndex(callIndex+1)
+		setCallIndex(1)
+		setCallIndex2(2)
 	}
 	//обновление данных
 	else if (task === 300) {
@@ -1381,6 +1387,7 @@ const fetchNotifAdmin = async (dataAll) => {
 			setShowCallCardNo,
 			workerCallNo,
 			callIndex,
+			callIndex2,
 			showUpdate,
 			setShowUpdate,
 			workerUpdate,
