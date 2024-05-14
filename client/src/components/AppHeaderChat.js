@@ -167,17 +167,18 @@ const AppHeader = () => {
                       </svg>
                       }
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <span style={{color: '#fff', fontSize: '44px', position: 'absolute', top: '-10px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
-                        <span style={{color: '#fff', fontSize: '44px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
-                        <span style={{fontSize: '18px', color: '#858585', fontWeight: '700', marginTop: '90px'}}>{workerCall.sity}</span>
-                        <span style={{fontSize: '18px', color: '#858585', fontWeight: '700'}}>{workerCall.year_of_birth}</span>
-                        <div className="star-block">
+                        <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '-10px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
+                        <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
+                        <div className="star-block" style={{marginTop: '85px'}}>
                           <img className='star-icon' src={StarActive} width={23} alt='' /> 
                           <img className='star-icon' src={StarActive} width={23} alt='' />
                           <img className='star-icon' src={StarActive} width={23} alt='' />
                           <img className='star-icon' src={Star} width={23} alt='' />
                           <img className='star-icon' src={Star} width={23} alt='' />
-                      </div>
+                        </div>
+                        <span style={{fontSize: '18px', color: '#858585', fontWeight: '700'}}>{workerCall.year_of_birth}</span>
+                        <span style={{fontSize: '18px', color: '#858585', fontWeight: '700'}}>{workerCall.sity}</span>
+                        
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                           <li style={{fontSize: '14px', color: '#858585', paddingTop: '5px'}}>
                             Проекты: {workerCall.projects}
@@ -210,17 +211,14 @@ const AppHeader = () => {
                     {
                       workerCall.specialities ? 
                       (workerCall.specialities.split(',').find(item => item === 'Blacklist') ? 
-                      (workerCall.specialities.split(',').find(item => item === '+18') ? 
-                      <img src={block18} width={100} alt='' style={{position: 'absolute', top: '230px', right: '580px'}}/>
-                      :
-                      <img src={Krestik} width={100} alt='' style={{position: 'absolute', top: '230px', right: '580px'}}/>)
+                      <img src={Krestik} width={40} alt='' style={{position: 'absolute', top: '280px', right: '580px'}}/>
                       : "")
                       : ""
                     }
                     {
                       workerCall.specialities ? 
                       (workerCall.specialities.split(',').find(item => item === '+18') ? 
-                      <img src={block18} width={100} alt='' style={{position: 'absolute', top: '230px', right: '580px'}}/>
+                      <img src={block18} width={50} alt='' style={{position: 'absolute', top: '10px', right: '580px'}}/>
                       : "")
                       : ""
                     }
@@ -234,7 +232,7 @@ const AppHeader = () => {
                     style={{position: 'absolute', top: '20px', right: '20px'}}
                   />
                 </div>
-            </div> 
+            </div>
           </CNavItem>
           <CNavItem>
             <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
