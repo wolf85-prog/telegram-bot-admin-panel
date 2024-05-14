@@ -152,6 +152,10 @@ const Profile = ({ user, closeSidebar }) => {
 		e.target.src = defaultAvatar
 	}
 
+	const clickToCall = () => {
+		
+	}
+
 	return (
 		<div className="profile">
 			<div className="profile__sectionW profile__sectionW--personal">
@@ -253,7 +257,7 @@ const Profile = ({ user, closeSidebar }) => {
 			<div className="profile__sectionW profile__section--success">
 				{/* <CIcon icon={cilPhone} className="profile__success-icon" /> */}
 				<Icon id="phone" className="profile__success-icon" />
-				<p className="profile__success-text profile__worker" style={{cursor: 'pointer'}} onClick={()=>console.log("Позвонить")}>Позвонить</p>
+				<p className="profile__success-text profile__worker" style={{cursor: 'pointer'}} onClick={clickToCall}>Позвонить</p>
 			</div>
 
 			<div className="profile__sectionW profile__sectionW--danger">

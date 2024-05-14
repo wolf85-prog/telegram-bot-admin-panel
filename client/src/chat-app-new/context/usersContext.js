@@ -1314,9 +1314,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		//console.log("fio: ", data)
 		setShowCallCardNo(true)
 
-		setWorkerCallNo({
-			phone,
-		})
+		setWorkerCallNo(phone)
 		audioCall.play();
 	}
 	//обновление данных
@@ -1377,6 +1375,7 @@ const fetchNotifAdmin = async (dataAll) => {
 			setShowCallCard,
 			showCallCardNo,
 			setShowCallCardNo,
+			workerCallNo,
 			showUpdate,
 			setShowUpdate,
 			workerUpdate,
