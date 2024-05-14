@@ -29,6 +29,7 @@ import StarActive from "./../assets/images/star_activ.svg";
 import Krestik from './../assets/images/krestik.png';
 import block18 from "./../assets/images/block18.png";
 import Trubka from "./../assets/images/trubka.gif";
+import Photo1 from "./../assets/images/photo_1.jpg";
 
 import './DropdownHeader.css'
 
@@ -194,7 +195,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                       </svg>
                       }
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '-9px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
+                        <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '-6px'}}>{workerCall2.fio ? workerCall2.fio?.split(' ')[0] : ''}</span>
                         <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
                         <div className="star-block" style={{marginTop: '85px'}}>
                           <img className='star-icon' src={StarActive} width={25} alt='' /> 
@@ -260,6 +261,38 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                   />
                 </div>
             </div> 
+            <div style={{
+              display: showToast ? 'block' : 'none', 
+              position: 'absolute', top: '65px', right: '0', 
+              width: '900px', height: '330px', 
+              backgroundColor: '#2a2f32', 
+              borderRadius: '15px', 
+              padding: '8px'}
+            }>
+                <div className="d-flex" style={{justifyContent: 'space-between'}}>
+                  <CToastBody>
+                    <div style={{display: 'flex'}}>
+                      
+                      <img src={Photo1} alt='' style={{borderRadius: '15px'}} width={314} height={314}/>
+
+                      <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
+                        <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '100px'}}>Неизвестный специалист</span>
+
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '150px'}}>+7 (909) 156-15-15</span>
+                        
+                      </div>
+                    </div>
+
+                  </CToastBody>
+                  {/* <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/> */}
+                  <img 
+                    src={Trubka} 
+                    onClick={()=>setShowToast(false)} 
+                    width={70} alt='' 
+                    style={{position: 'absolute', top: '20px', right: '20px'}}
+                  />
+                </div>
+            </div>
           </CNavItem>
           <CNavItem>
             <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
