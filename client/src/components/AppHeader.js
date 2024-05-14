@@ -222,7 +222,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                           </ul>
                         </div>
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
-                          <li style={{fontSize: '16px', color: 'red', width:'495px'}}>
+                          <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
                             <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
                               {workerCall.comtags ? workerCall.comtags.split(',').map((item, index)=> 
                                 (<span key={index}>
