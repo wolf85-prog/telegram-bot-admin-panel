@@ -81,6 +81,9 @@ const UsersProvider = ({ children }) => {
 	const [showCallCard, setShowCallCard] = useState(false);
 	const [workerCall, setWorkerCall] = useState('');
 
+	const [showCallCardNo, setShowCallCardNo] = useState(false);
+	const [workerCallNo, setWorkerCallNo] = useState('');
+
 	const [showUpdate, setShowUpdate] = useState(false);
 	const [workerUpdate, setWorkerUpdate] = useState(0);
 
@@ -1303,9 +1306,9 @@ const fetchNotifAdmin = async (dataAll) => {
 	}
 	else if (task === 201) {
 		//console.log("fio: ", data)
-		setShowCallCard(true)
+		setShowCallCardNo(true)
 
-		setWorkerCall({
+		setWorkerCallNo({
 			phone,
 		})
 
@@ -1366,6 +1369,8 @@ const fetchNotifAdmin = async (dataAll) => {
 			workerCall,
 			showCallCard,
 			setShowCallCard,
+			showCallCardNo,
+			setShowCallCardNo,
 			showUpdate,
 			setShowUpdate,
 			workerUpdate,

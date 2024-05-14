@@ -37,7 +37,7 @@ const AppHeader = (props) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { workerCall, showCallCard, setShowCallCard, } = useUsersContext();
+  const { workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
   const [mutePress, setMutePress] = useState(false)
@@ -261,8 +261,9 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                   />
                 </div>
             </div> 
+            
             <div style={{
-              display: showToast ? 'block' : 'none', 
+              display: showCallCardNo ? 'block' : 'none', 
               position: 'absolute', top: '65px', right: '0', 
               width: '900px', height: '330px', 
               backgroundColor: '#2a2f32', 
@@ -278,7 +279,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
                         <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '100px'}}>Неизвестный специалист</span>
 
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '150px'}}>+7 (909) 156-15-15</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '150px'}}>{workerCallNo}</span>
                         
                       </div>
                     </div>
@@ -287,7 +288,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                   {/* <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/> */}
                   <img 
                     src={Trubka} 
-                    onClick={()=>setShowToast(false)} 
+                    onClick={()=>setShowCallCardNo(false)} 
                     width={70} alt='' 
                     style={{position: 'absolute', top: '20px', right: '20px'}}
                   />
