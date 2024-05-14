@@ -200,9 +200,9 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                       </svg>
                       }
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <span style={{color: '#fff', fontSize: '28px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
-                        <span style={{color: '#fff', fontSize: '28px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
-                        <span style={{fontSize: '18px', color: '#858585', fontWeight: '700'}}>{workerCall.sity}</span>
+                        <span style={{color: '#fff', fontSize: '28px', position: 'absolute', top: '5px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
+                        <span style={{color: '#fff', fontSize: '28px', position: 'absolute', top: '35px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
+                        <span style={{fontSize: '18px', color: '#858585', fontWeight: '700', marginTop: '60px'}}>{workerCall.sity}</span>
                         <span style={{fontSize: '18px', color: '#858585', fontWeight: '700'}}>{workerCall.year_of_birth}</span>
                         <div className="star-block">
                           <img className='star-icon' src={StarActive} width={23} alt='' /> 
@@ -226,7 +226,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                           </ul>
                         </div>
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px'}}>
-                          <li style={{fontSize: '14px', color: 'red', width:'440px'}}>
+                          <li style={{fontSize: '14px', color: 'red', width:'480px'}}>
                             {workerCall.comtags ? workerCall.comtags.split(',').map((item, index)=> 
                               (<span key={index}>
                                 {item} {index === workerCall.comtags.split(',').length-1 ? '' : '| '}
@@ -255,9 +255,14 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                       : ""
                     }
 
-                    <img src={Trubka} width={70} alt='' style={{position: 'absolute', top: '100px', right: '150px'}}/>
                   </CToastBody>
-                  <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/>
+                  {/* <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/> */}
+                  <img 
+                    src={Trubka} 
+                    onClick={()=>setShowCallCard(false)} 
+                    width={70} alt='' 
+                    style={{position: 'absolute', top: '20px', right: '20px'}}
+                  />
                 </div>
             </div> 
           </CNavItem>
