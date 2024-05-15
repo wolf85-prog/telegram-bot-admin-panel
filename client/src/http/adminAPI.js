@@ -1,4 +1,5 @@
-import {$authHost, $host, $host_bot, $host_bottest} from "./index";
+import {$authHost, $host, $host_bot, $host_bottest, $host_call} from "./index";
+
 
 export const getManagers = async () =>{
     try {
@@ -488,4 +489,19 @@ export const getSoundNotif = async()=>{
      } catch (error) {
          console.log("error while calling getDistributionsW api", error.message);
      }
+}
+
+//------------------------------------------------------------------------------------------
+
+//call
+export const getSendCall = async(tg_id)=>{
+    try {
+        const response = await $host_call.post('https://tm.uley.team:7878/calls', {
+            "tg_id": tg_id
+        });
+        console.log("call: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getSendCall api", error.message);
+    }
 }

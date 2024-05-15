@@ -4,6 +4,7 @@ import Checkbox from "./../../../components/Checkbox";
 import Icon from "./../../../components/Icon";
 import { editContact, uploadFile, editContactAvatar } from './../../../../http/chatAPI';
 import { getWorkerNotionId, getWorkerChildrenId, getLastPretendent, getProjectId, blockedWorkers, getWorker } from './../../../../http/workerAPI';
+import { getSendCall } from './../../../../http/adminAPI';
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
 import defaultAvatar from "./../../../../chat-app-new/assets/images/no-avatar.png";
@@ -152,8 +153,8 @@ const Profile = ({ user, closeSidebar }) => {
 		e.target.src = defaultAvatar
 	}
 
-	const clickToCall = () => {
-		
+	const clickToCall = async(id) => {
+		await getSendCall(id)
 	}
 
 	return (
@@ -257,7 +258,7 @@ const Profile = ({ user, closeSidebar }) => {
 			<div className="profile__sectionW profile__section--success">
 				{/* <CIcon icon={cilPhone} className="profile__success-icon" /> */}
 				<Icon id="phone" className="profile__success-icon" />
-				<p className="profile__success-text profile__worker" style={{cursor: 'pointer'}} onClick={clickToCall}>Позвонить</p>
+				<p className="profile__success-text profile__worker" style={{cursor: 'pointer'}} onClick={()=>clickToCall(user.chatId)}>Позвонить</p>
 			</div>
 
 			<div className="profile__sectionW profile__sectionW--danger">

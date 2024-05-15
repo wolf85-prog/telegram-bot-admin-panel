@@ -16,6 +16,10 @@ const $host_worker = axios.create({
     baseURL: process.env.REACT_APP_WORKER_API_URL
 })
 
+const $host_call = axios.create({
+    baseURL: process.env.REACT_APP_WEBAPP_CALL
+})
+
 const $authHost = axios.create({
     baseURL: process.env.REACT_APP_API_URL
 })
@@ -32,5 +36,6 @@ export {
     $host_bot,
     $host_bottest,
     $host_worker,
+    $host_call,
     $authHost
 }
