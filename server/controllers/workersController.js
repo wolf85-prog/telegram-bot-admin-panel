@@ -142,7 +142,7 @@ class WorkersController {
                         }]
                     });
             
-                    const notion = response.results.map((page) => {
+                    const notionW = response.results.map((page) => {
                         return {
                             id: page.id,
                             fio: page.properties.Name.title[0]?.plain_text,
