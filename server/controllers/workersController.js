@@ -142,7 +142,7 @@ class WorkersController {
                         }]
                     });
             
-                    const worker = response.results.map((page) => {
+                    const notion = response.results.map((page) => {
                         return {
                             id: page.id,
                             fio: page.properties.Name.title[0]?.plain_text,
@@ -160,8 +160,8 @@ class WorkersController {
                         };
                     });
 
-                    if (worker && worker.length > 0) {
-                        console.log("worker: ", worker)
+                    if (notion && notion.length > 0) {
+                        console.log("worker: ", notion)
                     //     //список специалистов
                     //     notion[0].spec.map((item) => {
                     //         specData.map((category)=> {
