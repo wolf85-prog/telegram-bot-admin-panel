@@ -162,7 +162,7 @@ class WorkersController {
                     });
             
                     if (notionW && notionW.length > 0) {
-                       console.log("worker: ", notionW)
+                       //console.log("worker: ", notionW)
                         //список специалистов
                         notionW[0].spec.map((item) => {
                             specData.map((category)=> {
