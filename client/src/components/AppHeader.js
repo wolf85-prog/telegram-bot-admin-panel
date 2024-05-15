@@ -31,6 +31,8 @@ import block18 from "./../assets/images/block18.png";
 import Trubka from "./../assets/images/trubka.gif";
 import Photo1 from "./../assets/images/photo_1.jpg";
 
+import { getUpdateWorkers } from './../http/adminAPI';
+
 import './DropdownHeader.css'
 
 const AppHeader = (props) => {
@@ -97,12 +99,14 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
     } 
   }
 
-  const updateD = () => {
+  const updateD = async() => {
     // Button begins to shake
     setShake3(true);
         
     // Buttons stops to shake after 2 seconds
     setTimeout(() => setShake3(false), 100);
+
+    const resUpdate = await getUpdateWorkers()
   }
 
   const updateA = () => {

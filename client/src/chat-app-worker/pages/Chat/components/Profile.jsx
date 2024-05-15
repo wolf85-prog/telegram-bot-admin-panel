@@ -20,6 +20,7 @@ import {
 
 import { $host } from './../../../../http/index';
 import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3';
+import ishodCall from './../../../../assets/sound/ishod.mp3';
 
 const Profile = ({ user, closeSidebar }) => {
 
@@ -45,8 +46,10 @@ const Profile = ({ user, closeSidebar }) => {
 	const [phone, setPhone] = useState("")
 	const [showButton, setShowButton] = useState(false)
 	const [blockWorker, setBlockWorker] = useState(false)
+	const [press, setPress] = useState(false)
 
 	const audio = new Audio(sendSound);
+	const audioIshodCall = new Audio(ishodCall);
 
 	//select
     const [selectedElement, setSelectedElement] = useState("")
@@ -154,6 +157,14 @@ const Profile = ({ user, closeSidebar }) => {
 	}
 
 	const clickToCall = async(id) => {
+		// Button begins to shake
+		setPress(true);
+		console.log(press)
+        
+		// Buttons stops to shake after 2 seconds
+		setTimeout(() => setPress(false), 200);
+
+		audioIshodCall.play();
 		await getSendCall(id)
 	}
 
@@ -255,10 +266,14 @@ const Profile = ({ user, closeSidebar }) => {
 				</li>			
 			</ul>
 
-			<div className="profile__sectionW profile__section--success">
+			<div 
+				className="profile__sectionW profile__section--success" 
+				onClick={()=>clickToCall(user.chatId)} 
+				style={{cursor: 'pointer', backgroundColor: press ? '#0e1518' : '#131c21'}} 
+			>
 				{/* <CIcon icon={cilPhone} className="profile__success-icon" /> */}
 				<Icon id="phone" className="profile__success-icon" />
-				<p className="profile__success-text profile__worker" style={{cursor: 'pointer'}} onClick={()=>clickToCall(user.chatId)}>Позвонить</p>
+				<p className="profile__success-text profile__worker">Позвонить</p>
 			</div>
 
 			<div className="profile__sectionW profile__sectionW--danger">

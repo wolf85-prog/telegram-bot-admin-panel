@@ -505,3 +505,16 @@ export const getSendCall = async(tg_id)=>{
         console.log("error while calling getSendCall api", error.message);
     }
 }
+
+//------------------------------------------------------------------------------------------
+
+//update
+export const getUpdateWorkers = async()=>{
+    try {
+        const response = await $host.get('/workers/update/get');
+        console.log("update: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getUpdateWorkers api", error.message);
+    }
+}
