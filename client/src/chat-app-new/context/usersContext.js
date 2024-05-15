@@ -1313,6 +1313,10 @@ const fetchNotifAdmin = async (dataAll) => {
 
 		audioCall.play();
 
+		setTimeout(()=>{
+			audioCall.pause()
+		}, 4000)
+
 		setCallIndex(2)
 		setCallIndex2(1)
 	}
@@ -1323,6 +1327,10 @@ const fetchNotifAdmin = async (dataAll) => {
 
 		setWorkerCallNo(phone)
 		audioCall.play();
+
+		setTimeout(()=>{
+			audioCall.pause()
+		}, 4000)
 
 		setCallIndex(1)
 		setCallIndex2(2)
