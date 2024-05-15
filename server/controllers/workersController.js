@@ -159,9 +159,10 @@ class WorkersController {
                             passport: page.properties.Passport.rich_text[0]?.plain_text,
                         };
                     });
+                    console.log(notion)
 
-                    if (notion && notion.length > 0) {
-                        console.log("worker: ", notion)
+                    //if (notion && notion.length > 0) {
+                    //    console.log("worker: ", notion)
                     //     //список специалистов
                     //     notion[0].spec.map((item) => {
                     //         specData.map((category)=> {
@@ -281,7 +282,7 @@ class WorkersController {
                         
                     // } else {
                     //     console.log("Специалист не найден в Notion!", worker.chatId, i) 
-                    }              
+                    //}              
 
                 }, 1000 * ++i)   
             })
