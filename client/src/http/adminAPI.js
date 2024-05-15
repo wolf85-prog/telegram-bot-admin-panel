@@ -496,7 +496,7 @@ export const getSoundNotif = async()=>{
 //call
 export const getSendCall = async(tg_id)=>{
     try {
-        const response = await $host_call.post('https://tm.uley.team:7878/calls', {
+        const response = await $host_call.post('/calls', {
             "tg_id": tg_id
         });
         console.log("call: ", response.data);
