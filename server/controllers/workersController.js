@@ -159,130 +159,134 @@ class WorkersController {
                             passport: page.properties.Passport.rich_text[0]?.plain_text,
                         };
                     });
-                    console.log(notion)
-
-                    //if (notion && notion.length > 0) {
-                    //    console.log("worker: ", notion)
-                    //     //список специалистов
-                    //     notion[0].spec.map((item) => {
-                    //         specData.map((category)=> {
-                    //             category.models.map((work)=> {
-                    //                 if (work.name === item.name){
-                    //                     const obj = {
-                    //                         spec: item.name,
-                    //                         cat: category.icon,
-                    //                     }
-                    //                     specArr.push(obj)
-                    //                 }
-                    //             })
-                    //             if (category.icon === item.name) {
-                    //                 const obj = {
-                    //                     spec: item.name,
-                    //                     cat: category.icon,
-                    //                 }
-                    //                 specArr.push(obj) 
-                    //             }
-                    //         })
-                    //         if (item.name === 'Blacklist') {
-                    //             const obj = {
-                    //                 spec: item.name,
-                    //                 cat: 'Blacklist',
-                    //             }
-                    //             specArr.push(obj) 
-                    //         }
-                    //     })
+            
+                    if (notionW && notionW.length > 0) {
+                       console.log("worker: ", notionW)
+                        //список специалистов
+                        notionW[0].spec.map((item) => {
+                            specData.map((category)=> {
+                                category.models.map((work)=> {
+                                    if (work.name === item.name){
+                                        const obj = {
+                                            spec: item.name,
+                                            cat: category.icon,
+                                        }
+                                        specArr.push(obj)
+                                    }
+                                })
+                                if (category.icon === item.name) {
+                                    const obj = {
+                                        spec: item.name,
+                                        cat: category.icon,
+                                    }
+                                    specArr.push(obj) 
+                                }
+                            })
+                            if (item.name === 'Blacklist') {
+                                const obj = {
+                                    spec: item.name,
+                                    cat: 'Blacklist',
+                                }
+                                specArr.push(obj) 
+                            }
+                            if (item.name === '+18') {
+                                const obj = {
+                                    spec: item.name,
+                                    cat: '+18',
+                                }
+                                specArr.push(obj) 
+                            }
+                        })
     
-                    //     if (specArr.length > 0) {
-                    //         //обновить бд
-                    //         if (worker.chatId === '1408579113' || worker.chatId === '805436270' || worker.chatId === '639113098' || worker.chatId === '1300119841' || worker.chatId === '276285228') {
-                    //             newSpec = {
-                    //                 spec: 'Вне категории',
-                    //                 cat: 'NoTag'
-                    //             }
-                    //             newSpec2 = {
-                    //                 spec: 'Тест',
-                    //                 cat: 'Test'
-                    //             }
-                    //             specArr.push(newSpec)
-                    //             specArr.push(newSpec2)
+                        if (specArr.length > 0) {
+                            //обновить бд
+                            if (worker.chatId === '1408579113' || worker.chatId === '805436270' || worker.chatId === '639113098' || worker.chatId === '1300119841' || worker.chatId === '276285228') {
+                                newSpec = {
+                                    spec: 'Вне категории',
+                                    cat: 'NoTag'
+                                }
+                                newSpec2 = {
+                                    spec: 'Тест',
+                                    cat: 'Test'
+                                }
+                                specArr.push(newSpec)
+                                specArr.push(newSpec2)
 
-                    //             const res = await Worker.update({ 
-                    //                 worklist: JSON.stringify(specArr)  
-                    //             },
-                    //             { 
-                    //                 where: {chatId: worker.chatId} 
-                    //             })
-                    //         } else {             
-                    //             const res = await Worker.update({ 
-                    //                 worklist: JSON.stringify(specArr)  
-                    //             },
-                    //             { 
-                    //                 where: {chatId: worker.chatId} 
-                    //             })
-                    //         }   
-                    //         console.log("Список специальностей (есть) обновлен! ", worker.chatId, i)                                        
-                    //     } else {
-                    //         //обновить бд
-                    //         if (worker.chatId === '1408579113' || worker.chatId === '805436270' || worker.chatId === '639113098' || worker.chatId === '1300119841' || worker.chatId === '276285228') {
-                    //             newSpec = {
-                    //                 spec: 'Вне категории',
-                    //                 cat: 'NoTag'
-                    //             }
-                    //             newSpec2 = {
-                    //                 spec: 'Тест',
-                    //                 cat: 'Test'
-                    //             }
-                    //             specArr.push(newSpec)
-                    //             specArr.push(newSpec2)
+                                const res = await Worker.update({ 
+                                    worklist: JSON.stringify(specArr)  
+                                },
+                                { 
+                                    where: {chatId: worker.chatId} 
+                                })
+                            } else {             
+                                const res = await Worker.update({ 
+                                    worklist: JSON.stringify(specArr)  
+                                },
+                                { 
+                                    where: {chatId: worker.chatId} 
+                                })
+                            }   
+                            console.log("Список специальностей (есть) обновлен! ", worker.chatId, i)                                        
+                        } else {
+                            //обновить бд
+                            if (worker.chatId === '1408579113' || worker.chatId === '805436270' || worker.chatId === '639113098' || worker.chatId === '1300119841' || worker.chatId === '276285228') {
+                                newSpec = {
+                                    spec: 'Вне категории',
+                                    cat: 'NoTag'
+                                }
+                                newSpec2 = {
+                                    spec: 'Тест',
+                                    cat: 'Test'
+                                }
+                                specArr.push(newSpec)
+                                specArr.push(newSpec2)
 
-                    //             const res = await Worker.update({ 
-                    //                 worklist: JSON.stringify(specArr)  
-                    //             },
-                    //             { 
-                    //                 where: {chatId: worker.chatId} 
-                    //             })
-                    //         } else {
-                    //             const res = await Worker.update({ 
-                    //                 worklist: JSON.stringify([{
-                    //                     spec: 'Вне категории',
-                    //                     cat: 'NoTag'
-                    //                 }]) 
-                    //             },
-                    //             { 
-                    //                 where: {chatId: worker.chatId} 
-                    //             })
-                    //         }
-                    //         console.log("Список специальностей (нет) обновлен! ", worker.chatId, i) 
-                    //     }
+                                const res = await Worker.update({ 
+                                    worklist: JSON.stringify(specArr)  
+                                },
+                                { 
+                                    where: {chatId: worker.chatId} 
+                                })
+                            } else {
+                                const res = await Worker.update({ 
+                                    worklist: JSON.stringify([{
+                                        spec: 'Вне категории',
+                                        cat: 'NoTag'
+                                    }]) 
+                                },
+                                { 
+                                    where: {chatId: worker.chatId} 
+                                })
+                            }
+                            console.log("Список специальностей (нет) обновлен! ", worker.chatId, i) 
+                        }
                             
-                    //     console.log("ФИО: ", worker.id, notion[0]?.fio, i)
+                        console.log("ФИО: ", worker.id, notionW[0]?.fio, i)
                            
-                    //     //получить аватарку
-                    //     //...
 
-                    //     //обновить фио
-                    //     const res = await Worker.update({ 
-                    //         userfamily: notion[0]?.fio.split(" ")[0],
-                    //         username: notion[0]?.fio.split(" ")[1],
-                    //         phone: notion[0]?.phone && notion[0]?.phone,
-                    //         dateborn: notion[0].age?.start.split('-')[0],
-                    //         city: notion[0].city && notion[0].city,                    
-                    //         from: 'Notion',
-                    //         comment: notion[0]?.comment ? notion[0]?.comment : '',
-                    //         rank: notion[0]?.rank ? notion[0]?.rank : null,
-                    //     },
-                    //     { 
-                    //         where: {chatId: worker.chatId} 
-                    //     })
-                    //     if (res) {
-                    //        console.log("Специалист обновлен! ", worker.chatId, i) 
-                    //     }else {
-                    //         console.log("Ошибка обновления! ", worker.chatId, i) 
-                    //     }
+                        //обновить фио
+                        const res = await Worker.update({ 
+                            userfamily: notionW[0]?.fio.split(" ")[0],
+                            username: notionW[0]?.fio.split(" ")[1],
+                            phone: notionW[0]?.phone && notionW[0]?.phone,
+                            dateborn: notionW[0].age?.start.split('-')[0],
+                            city: notionW[0].city && notionW[0].city,                    
+                            from: 'Notion',
+                            comment: notionW[0]?.comment ? notionW[0]?.comment : '',
+                            rank: notionW[0]?.rank ? notionW[0]?.rank : null,
+                        },
+                        { 
+                            where: {chatId: worker.chatId} 
+                        })
+                        if (res) {
+                           console.log("Специалист обновлен! ", worker.chatId, i) 
+                        }else {
+                            console.log("Ошибка обновления! ", worker.chatId, i) 
+                        }
                         
-                    // } else {
-                    //     console.log("Специалист не найден в Notion!", worker.chatId, i) 
-                    //}              
+                    } else {
+                        console.log("Специалист не найден в Notion!", worker.chatId, i) 
+                    }              
 
                 }, 1000 * ++i)   
             })
