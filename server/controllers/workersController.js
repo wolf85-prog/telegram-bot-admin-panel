@@ -133,7 +133,7 @@ class WorkersController {
                         "filter": {
                             "property": "Telegram",
                             "number": {
-                                "equals": id ? parseInt(worker.chatId) : 0
+                                "equals": worker.chatId ? parseInt(worker.chatId) : 0
                             }
                         },
                         "sorts": [{ 
@@ -160,7 +160,8 @@ class WorkersController {
                         };
                     });
 
-                    // if (worker && worker.length > 0) {
+                    if (worker && worker.length > 0) {
+                        console.log("worker: ", worker)
                     //     //список специалистов
                     //     notion[0].spec.map((item) => {
                     //         specData.map((category)=> {
@@ -280,7 +281,7 @@ class WorkersController {
                         
                     // } else {
                     //     console.log("Специалист не найден в Notion!", worker.chatId, i) 
-                    // }              
+                    }              
 
                 }, 1000 * ++i)   
             })
