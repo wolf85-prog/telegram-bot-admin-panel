@@ -445,7 +445,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                         <CButton onClick={updateD} className={shake3 ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', marginBottom: '5px', background: shake3 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
                           Д
                         </CButton>
-                        <CButton onClick={updateA} color="dark" style={{marginLeft: '10px',  background: shake4 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                        <CButton onClick={updateA} className={shake4 ? 'button-d' : ''} color="dark" style={{marginLeft: '10px',  background: shake4 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
                           А
                         </CButton>
                       </div>
