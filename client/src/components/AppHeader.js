@@ -39,7 +39,7 @@ const AppHeader = (props) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2} = useUsersContext();
+  const { workerUpdate, workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
   const [mutePress, setMutePress] = useState(false)
@@ -332,8 +332,8 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                   <div style={{display: 'flex'}}> 
                     <div className='dark-theme' style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '200px'}}>
                           <div style={{marginRight: '20px', marginBottom: '12px', width:'100%', position: 'relative', textAlign: 'center'}}>
-                            <CProgress color="primery" height={10} value={10}/>
-                            <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>10%</span>
+                            <CProgress color="primery" height={10} value={workerUpdate}/>
+                            <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>{workerUpdate}%</span>
                           </div>
                           <div style={{marginRight: '20px', width:'100%', position: 'relative', textAlign: 'center'}}>
                             <CProgress color="primery" height={10} value={100}></CProgress>

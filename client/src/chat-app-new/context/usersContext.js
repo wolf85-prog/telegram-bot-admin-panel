@@ -1337,7 +1337,6 @@ const fetchNotifAdmin = async (dataAll) => {
 	}
 	//обновление данных
 	else if (task === 300) {
-		//console.log("fio: ", data)
 		setShowUpdate(true)
 		setWorkerUpdate(workers_update)
 	}

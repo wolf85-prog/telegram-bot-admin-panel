@@ -7,6 +7,10 @@ const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseWorkerId = process.env.NOTION_DATABASE_WORKERS_ID
 const {specData} = require('./../data/specData');
 
+//socket.io
+const {io} = require("socket.io-client")
+const socketUrl = process.env.SOCKET_APP_URL
+
 class WorkersController {
 
     async getWorkers(req, res) {
@@ -111,6 +115,9 @@ class WorkersController {
 
     async updateWorkers(req, res) {
         console.log("Start update")
+
+        // Подключаемся к серверу socket
+        let socket = io(socketUrl);
 
         try {
             console.log("START GET WORKERS ALL...")
@@ -287,7 +294,12 @@ class WorkersController {
                         
                     } else {
                         console.log("Специалист не найден в Notion!", worker.chatId, i) 
-                    }              
+                    }     
+                    
+                    socket.emit("sendNotif", {
+                        task: 300,
+                        workers_update: Math.round((i+1)*100/workers.length),
+                    }) 
 
                 }, 1000 * ++i)   
             })
