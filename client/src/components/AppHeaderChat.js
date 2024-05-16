@@ -24,7 +24,7 @@ import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
 import Krestik from './../assets/images/krestik.png';
 import block18 from "./../assets/images/block18.png";
-import Trubka from "./../assets/images/trubka.png";
+import Trubka from "./../assets/images/trubka.gif";
 import Photo1 from "./../assets/images/photo_1.jpg";
 import Help from "./../assets/images/help.png";
 
