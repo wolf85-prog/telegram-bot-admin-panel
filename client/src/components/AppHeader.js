@@ -30,6 +30,7 @@ import Krestik from './../assets/images/krestik.png';
 import block18 from "./../assets/images/block18.png";
 import Trubka from "./../assets/images/trubka.gif";
 import Photo1 from "./../assets/images/photo_1.jpg";
+import Help from "./../assets/images/help.png";
 
 import { getUpdateWorkers } from './../http/adminAPI';
 
@@ -44,6 +45,7 @@ const AppHeader = (props) => {
   const [soundCount, setSoundCount] = useState(100)
   const [mutePress, setMutePress] = useState(false)
   const [showBar, setShowBar] = useState(false)
+  const [showBarHelp, setShowBarHelp] = useState(false)
   const [toast, addToast] = useState(0)
   const [showToast, setShowToast] = useState(false)
   const [shake, setShake] = useState(false)
@@ -101,12 +103,17 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
 
   const updateD = async() => {
     // Button begins to shake
-    setShake3(true);
+    if (shake3) {
+      setShake3(false);
+    } else {
+      setShake3(true);
+    }
+    
         
     // Buttons stops to shake after 2 seconds
-    setTimeout(() => setShake3(false), 100);
+    //setTimeout(() => setShake3(false), 100);
 
-    const resUpdate = await getUpdateWorkers()
+    //const resUpdate = await getUpdateWorkers()
   }
 
   const updateA = () => {
@@ -200,8 +207,8 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                       </svg>
                       }
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <span style={{color: '#fff', fontSize: '38px', position: 'absolute', top: '-6px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
-                        <span style={{color: '#fff', fontSize: '38px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
+                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '-6px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
+                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
                         <div className="star-block" style={{marginTop: '85px'}}>
                           <img className='star-icon' src={StarActive} width={25} alt='' /> 
                           <img className='star-icon' src={StarActive} width={25} alt='' />
@@ -302,6 +309,26 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
             </div>
           </CNavItem>
           <CNavItem>
+            <CNavLink onClick={()=>setShowBarHelp(!showBarHelp)} style={{position: 'relative'}}>
+              <img src={Help} style={{width: '17px', paddingBottom: '6px'}}/>
+              <div 
+                style={{
+                  backgroundColor: '#2a2f32', 
+                  width: '150px', 
+                  height: '160px', 
+                  position: 'absolute', 
+                  top: '50px', 
+                  right: '10px',
+                  display: showBarHelp ? 'flex' : 'none',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '15px',
+                  padding: '15px',
+                }}>
+              </div>
+            </CNavLink>
+          </CNavItem>
+          <CNavItem>
             <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
               <CIcon icon={cilBell} size="lg" />
               {/* <CBadge color="success" className="ms-2">
@@ -341,7 +368,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                           </div>
                     </div>
                     <div style={{display: 'flex', flexDirection: 'column'}}>
-                      <CButton onClick={updateD} color="dark" style={{marginLeft: '10px', marginBottom: '5px', background: shake3 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                      <CButton onClick={updateD} className={shake3 ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', marginBottom: '5px', background: shake3 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
                         Д
                       </CButton>
                       <CButton onClick={updateA} color="dark" style={{marginLeft: '10px',  background: shake4 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>

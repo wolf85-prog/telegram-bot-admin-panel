@@ -12,3 +12,14 @@
 .button-m {
     animation: glowing 1300ms infinite;
 }
+
+
+@keyframes glowing2 {
+    0% { background-color: rgb(83, 80, 80); box-shadow: 0 0 5px rgb(83, 80, 80); }
+    50% { background-color: rgb(6, 9, 199); box-shadow: 0 0 20px rgb(6, 9, 199); }
+    100% { background-color: rgb(83, 80, 80); box-shadow: 0 0 5px rgb(83, 80, 80); }
+}
+    
+.button-d{
+    animation: glowing2 500ms infinite;
+}
