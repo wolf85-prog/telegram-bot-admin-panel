@@ -35,7 +35,7 @@ const { uploadFile, getImage, sendNarush } = require( "../controllers/fileContro
 const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers/wuserbotController')
 const { newMessageWorker, delMessageWorker, getMessagesWorker, getMessagesWorker2, getAllMessagesWorker, getMessagesWorkerCount } = require('../controllers/wmessageController')
 const { newConversationWorker, getConversationWorker, getConversationsW } = require('../controllers/wconversationController')
-const { getWorkers, getWorkersCount, getWorker, editWorker, blockWorker, getCanceled, updateWorkers} = require('../controllers/workersController')
+const { getWorkers, getWorkersCount, getWorker, editWorker, blockWorker, getCanceled, updateWorkers, updateWorkersAvatar} = require('../controllers/workersController')
 const { newPretendent, getPretendent, getPretendentId, getAllPretendent, getAllPretendentCount } = require('../controllers/pretendentController')
 
 const { newPlan, getPlan, addTimer } = require('../controllers/planController')
@@ -154,5 +154,8 @@ route.get('/sounds/narush', sendNarush)
 
 //-----------------Обновление данных профиля---------------------------------
 route.get('/workers/update/get', updateWorkers)
+
+//-----------------Обновление аватара профиля---------------------------------
+route.get('/workers/update/avatar/get', updateWorkersAvatar)
 
 module.exports = route
