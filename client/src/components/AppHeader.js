@@ -437,8 +437,8 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                               <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>{workerUpdate}%</span>
                             </div>
                             <div style={{marginRight: '20px', width:'100%', position: 'relative', textAlign: 'center'}}>
-                              <CProgress color="primery" height={10} value={100}></CProgress>
-                              <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>100%</span>
+                              <CProgress color="primery" height={10} value={avatarUpdate}></CProgress>
+                              <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>{avatarUpdate}%</span>
                             </div>
                       </div>
                       <div style={{display: 'flex', flexDirection: 'column'}}>
