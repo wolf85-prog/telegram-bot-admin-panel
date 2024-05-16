@@ -89,7 +89,7 @@ const UsersProvider = ({ children }) => {
 	const [callIndex2, setCallIndex2] = useState(0)
 
 	const [showUpdate, setShowUpdate] = useState(false);
-	const [workerUpdate, setWorkerUpdate] = useState(0);
+	const [workerUpdate, setWorkerUpdate] = useState(100);
 
 	const audioMessage = new Audio(soundMessage);
 	const audioMessageW = new Audio(boopSfx);
@@ -527,6 +527,23 @@ const UsersProvider = ({ children }) => {
 	  	fetchData();
 
 	},[])
+
+//------------------------------------------------------------------------------------------
+	//звонок по телефону
+	useEffect(()=>{
+		if (showCallCard) {
+			audioCall.play()
+		} else {
+			audioCall.pause()
+		}
+
+		if (showCallCardNo) {
+			audioCall.play()
+		} else {
+			audioCall.pause()
+		}
+		
+	},[showCallCard, showCallCardNo])
 
 
 
@@ -1311,11 +1328,11 @@ const fetchNotifAdmin = async (dataAll) => {
 			avatar: worker.avatar,
 		})
 
-		audioCall.play();
+		//audioCall.play();
 
-		setTimeout(()=>{
-			audioCall.pause()
-		}, 4000)
+		// setTimeout(()=>{
+		// 	audioCall.pause()
+		// }, 4000)
 
 		setCallIndex(2)
 		setCallIndex2(1)
@@ -1326,11 +1343,12 @@ const fetchNotifAdmin = async (dataAll) => {
 		setShowCallCardNo(true)
 
 		setWorkerCallNo(phone)
-		audioCall.play();
 
-		setTimeout(()=>{
-			audioCall.pause()
-		}, 4000)
+		//audioCall.play();
+
+		// setTimeout(()=>{
+		// 	audioCall.pause()
+		// }, 4000)
 
 		setCallIndex(1)
 		setCallIndex2(2)

@@ -15,7 +15,7 @@ import {
   CFormInput,
   CProgress,
   CToastBody,
-
+  CTooltip,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilBell, cilEnvelopeOpen, cilList, cilMenu, cilPhone } from '@coreui/icons'
@@ -25,19 +25,23 @@ import StarActive from "./../assets/images/star_activ.svg";
 import Krestik from './../assets/images/krestik.png';
 import block18 from "./../assets/images/block18.png";
 import Trubka from "./../assets/images/trubka.png";
+import Photo1 from "./../assets/images/photo_1.jpg";
+import Help from "./../assets/images/help.png";
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { AppHeaderDropdown } from './header/index'
+import { getUpdateWorkers } from './../http/adminAPI';
 
-const AppHeader = () => {
+const AppHeaderChat = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { workerCall, showCallCard, setShowCallCard, } = useUsersContext();
+  const { workerUpdate, workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
   const [mutePress, setMutePress] = useState(false)
   const [showBar, setShowBar] = useState(false)
+  const [showBarHelp, setShowBarHelp] = useState(false)
   const [toast, addToast] = useState(0)
   const [showToast, setShowToast] = useState(false)
   const [shake, setShake] = useState(false)
@@ -57,7 +61,7 @@ const AppHeader = () => {
     setShake2(true);
         
     // Buttons stops to shake after 2 seconds
-    setTimeout(() => setShake2(false), 100);
+    setTimeout(() => setShake2(false), 200);
 
     if (soundCount === 75) {
       setSoundCount(100)
@@ -75,7 +79,7 @@ const AppHeader = () => {
     setShake(true);
         
     // Buttons stops to shake after 2 seconds
-    setTimeout(() => setShake(false), 100);
+    setTimeout(() => setShake(false), 200);
 
     if (soundCount === 100) {
       setSoundCount(75)
@@ -86,6 +90,29 @@ const AppHeader = () => {
     } else if (soundCount === 25) {
       setSoundCount(0)
     } 
+  }
+
+  const updateD = async() => {
+    // Button begins to shake
+    if (shake3) {
+      setShake3(false);
+    } else {
+      setShake3(true);
+    }
+    
+        
+    // Buttons stops to shake after 2 seconds
+    setTimeout(() => setShake3(false), 100);
+
+    const resUpdate = await getUpdateWorkers()
+  }
+
+  const updateA = () => {
+    // Button begins to shake
+    setShake4(true);
+        
+    // Buttons stops to shake after 2 seconds
+    setTimeout(() => setShake4(false), 100);
   }
 
   return (
@@ -138,16 +165,22 @@ const AppHeader = () => {
             </CButton>
           </CNavItem>
           <CNavItem>
-            <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
-              <CIcon icon={cilPhone} size="lg"/>
-            </CNavLink>
+            <CTooltip
+              content="Манго"
+              placement="bottom"
+            >
+              <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
+                <CIcon icon={cilPhone} size="lg"/>
+              </CNavLink>
+            </CTooltip>
             <div style={{
               display: showCallCard ? 'block' : 'none', 
               position: 'absolute', top: '65px', right: '0', 
               width: '900px', height: '330px', 
               backgroundColor: '#2a2f32', 
               borderRadius: '15px', 
-              padding: '8px'}
+              padding: '8px',
+              zIndex: callIndex}
             }>
                 <div className="d-flex" style={{justifyContent: 'space-between'}}>
                   <CToastBody>
@@ -167,34 +200,34 @@ const AppHeader = () => {
                       </svg>
                       }
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '-10px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
-                        <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
+                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '-6px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
+                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
                         <div className="star-block" style={{marginTop: '85px'}}>
-                          <img className='star-icon' src={StarActive} width={23} alt='' /> 
-                          <img className='star-icon' src={StarActive} width={23} alt='' />
-                          <img className='star-icon' src={StarActive} width={23} alt='' />
-                          <img className='star-icon' src={Star} width={23} alt='' />
-                          <img className='star-icon' src={Star} width={23} alt='' />
+                          <img className='star-icon' src={StarActive} width={25} alt='' /> 
+                          <img className='star-icon' src={StarActive} width={25} alt='' />
+                          <img className='star-icon' src={StarActive} width={25} alt='' />
+                          <img className='star-icon' src={Star} width={25} alt='' />
+                          <img className='star-icon' src={Star} width={25} alt='' />
                         </div>
-                        <span style={{fontSize: '18px', color: '#858585', fontWeight: '700'}}>{workerCall.year_of_birth}</span>
-                        <span style={{fontSize: '18px', color: '#858585', fontWeight: '700'}}>{workerCall.sity}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerCall.year_of_birth}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.sity}</span>
                         
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
-                          <li style={{fontSize: '14px', color: '#858585', paddingTop: '5px'}}>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             Проекты: {workerCall.projects}
                           </li>
                         </ul>
-                        <div style={{overflow: 'auto', height: '65px'}}>
+                        <div style={{overflow: 'auto', height: '70px'}}>
                           <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                             {workerCall.specialities ? workerCall.specialities.split(',').map((item, index)=> 
-                              (<li key={index} style={{fontSize: '14px', color: '#858585'}}>
+                              (<li key={index} style={{fontSize: '16px', color: '#858585'}}>
                                 {item}
                               </li>)
                             ) : null}    
                           </ul>
                         </div>
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
-                          <li style={{fontSize: '14px', color: 'red', width:'480px'}}>
+                          <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
                             <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
                               {workerCall.comtags ? workerCall.comtags.split(',').map((item, index)=> 
                                 (<span key={index}>
@@ -211,7 +244,7 @@ const AppHeader = () => {
                     {
                       workerCall.specialities ? 
                       (workerCall.specialities.split(',').find(item => item === 'Blacklist') ? 
-                      <img src={Krestik} width={40} alt='' style={{position: 'absolute', top: '280px', right: '580px'}}/>
+                      <img src={Krestik} width={30} alt='' style={{position: 'absolute', top: '280px', right: '580px'}}/>
                       : "")
                       : ""
                     }
@@ -232,59 +265,172 @@ const AppHeader = () => {
                     style={{position: 'absolute', top: '20px', right: '20px'}}
                   />
                 </div>
+            </div> 
+            
+            <div style={{
+              display: showCallCardNo ? 'block' : 'none', 
+              position: 'absolute', top: '65px', right: '0', 
+              width: '900px', height: '330px', 
+              backgroundColor: '#2a2f32', 
+              borderRadius: '15px', 
+              padding: '8px',
+              zIndex: callIndex2}
+            }>
+                <div className="d-flex" style={{justifyContent: 'space-between'}}>
+                  <CToastBody>
+                    <div style={{display: 'flex'}}>
+                      
+                      <img src={Photo1} alt='' style={{borderRadius: '15px'}} width={314} height={314}/>
+
+                      <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
+                        <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '100px'}}>Номер не зарегистрирован</span>
+
+                        <span style={{fontSize: '26px', color: '#858585', fontWeight: '700', marginTop: '150px'}}>{workerCallNo}</span>
+                        
+                      </div>
+                    </div>
+
+                  </CToastBody>
+                  {/* <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/> */}
+                  <img 
+                    src={Trubka} 
+                    onClick={()=>setShowCallCardNo(false)} 
+                    width={70} alt='' 
+                    style={{position: 'absolute', top: '20px', right: '20px'}}
+                  />
+                </div>
             </div>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
-              <CIcon icon={cilBell} size="lg" />
-              {/* <CBadge color="success" className="ms-2">
-                5
-              </CBadge> */}
-              {/* { newProject ?  <span className="badge bg-danger-gradient rounded-pill position-absolute top-0 end-0">1</span> 
-              : ""
-              } */}
-            </CNavLink>
+            <CTooltip
+              content="Основные команды"
+              placement="bottom"
+            >
+              <CNavLink onClick={()=>setShowBarHelp(!showBarHelp)} style={{position: 'relative'}}>
+                <img src={Help} style={{width: '17px', paddingBottom: '6px'}}/>
+                <div 
+                  style={{
+                    backgroundColor: '#2a2f32', 
+                    width: '250px', 
+                    height: '830px', 
+                    position: 'absolute', 
+                    top: '50px', 
+                    right: '10px',
+                    display: showBarHelp ? 'flex' : 'none',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '15px',
+                    padding: '15px',
+                  }}>
+                    <div style={{fontSize: '11px'}}><p>✅ Команды:<br/>
+                      <br/>
+                      /help &mdash; список комманд;<br/>
+                      /next &mdash; 10 ближайших запусков;<br/>
+                      /status &mdash; вызов кнопок статуса;<br/>
+                      /info &mdash; панель информации;<br/>
+                      <br/>
+                      /go &mdash; перекличка;<br/>
+                      /phone &mdash; контакты на площадке;<br/>
+                      /place &mdash; адрес площадки;<br/>
+                      /office &mdash; адрес офиса &laquo;U.L.E.Y&raquo;;<br/>
+                      <br/>
+                      /update &mdash; смена основного состава;<br/>
+                      /mango &mdash; смена распределения звонков;<br/>
+                      /ping &mdash; тест сервера; [отклик &mdash; Pong]<br/>
+                      /stop &mdash; остановить смену;<br/>
+                      <br/>
+                      /id &mdash; номер ID проекта;<br/>
+                      /1 /2 /3 /4 /5 &mdash; перенос запроса статуса окончания работ;<br/>
+                      /deleted &mdash; удаленные проекты за 24 часа;<br/>
+                      /error &mdash; ошибки в проектах;<br/>
+                      <br/>
+                      ✅ Триггеры:<br/>
+                      <br/>
+                      Правила &mdash; правила работы на проектах;<br/>
+                      Такси &mdash; инструкция по использованию;<br/>
+                      Геолокация &mdash; инструкция как подключить;<br/>
+                      Контакты &mdash; номер телефона &laquo;U.L.E.Y&raquo;;<br/>
+                      <br/>
+                      Оплата &mdash; чат-бот &laquo;Office&raquo;;<br/>
+                      Дресс-код &mdash; форма одежды;<br/>
+                      Мерч &mdash; описание и условия получения;<br/>
+                      Фотоотчет &mdash; инструкция по отчету;<br/>
+                      <br/>
+                      Активатор &mdash; инструкция по активации кнопок;<br/>
+                      Соня &mdash; предупреждение о времени выхода на связь;<br/>
+                      Ночь &mdash; логистика в ночное время;<br/>
+                      Сказка на ночь &mdash; подготовка к ночному проекту;<br/>
+                      <br/>
+                      Оплата &mdash; чат-бот &laquo;Office&raquo;;<br/>
+                      Штраф &mdash; информация о штрафах;<br/>
+                      Самозанятость &mdash; НЕ готово;<br/>
+                      Ставка &mdash; НЕ готово;</p>
+                    </div>
+                </div>
+              </CNavLink>
+            </CTooltip>
+          </CNavItem>
+          <CNavItem>
+            <CTooltip
+              content="Звуки"
+              placement="bottom"
+            >
+              <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
+                <CIcon icon={cilBell} size="lg" />
+                {/* <CBadge color="success" className="ms-2">
+                  5
+                </CBadge> */}
+                {/* { newProject ?  <span className="badge bg-danger-gradient rounded-pill position-absolute top-0 end-0">1</span> 
+                : ""
+                } */}
+              </CNavLink>
+            </CTooltip>
           </CNavItem>
           <CNavItem>
             <CNavLink style={{position: 'relative'}}>
-              <CIcon icon={cilList} size="lg" onClick={()=>setShowBar(!showBar)}/>
+              <CTooltip
+                content="Обновление данных"
+                placement="bottom"
+              >
+                <CIcon icon={cilList} size="lg" onClick={()=>setShowBar(!showBar)}/>
+              </CTooltip>
               <div 
-                style={{
-                  backgroundColor: '#2a2f32', 
-                  // width: '250px', 
-                  height: '80px', 
-                  position: 'absolute', 
-                  top: '50px', 
-                  right: '10px',
-                  display: showBar ? 'flex' : 'none',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: '15px',
-                  padding: '15px',
-                }}>
-                  <div style={{display: 'flex'}}> 
-                    <div className='dark-theme' style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '200px'}}>
-                          <div style={{marginRight: '20px', marginBottom: '12px', width:'100%', position: 'relative', textAlign: 'center'}}>
-                            <CProgress color="primery" height={10} value={10}/>
-                            <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>10%</span>
-                          </div>
-                          <div style={{marginRight: '20px', width:'100%', position: 'relative', textAlign: 'center'}}>
-                            <CProgress color="primery" height={10} value={100}></CProgress>
-                            <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>100%</span>
-                          </div>
+                  style={{
+                    backgroundColor: '#2a2f32', 
+                    // width: '250px', 
+                    height: '80px', 
+                    position: 'absolute', 
+                    top: '50px', 
+                    right: '10px',
+                    display: showBar ? 'flex' : 'none',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '15px',
+                    padding: '15px',
+                  }}>
+                    <div style={{display: 'flex'}}> 
+                      <div className='dark-theme' style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '200px'}}>
+                            <div style={{marginRight: '20px', marginBottom: '12px', width:'100%', position: 'relative', textAlign: 'center'}}>
+                              <CProgress color="primery" height={10} value={workerUpdate}/>
+                              <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>{workerUpdate}%</span>
+                            </div>
+                            <div style={{marginRight: '20px', width:'100%', position: 'relative', textAlign: 'center'}}>
+                              <CProgress color="primery" height={10} value={100}></CProgress>
+                              <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>100%</span>
+                            </div>
+                      </div>
+                      <div style={{display: 'flex', flexDirection: 'column'}}>
+                        <CButton onClick={updateD} className={shake3 ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', marginBottom: '5px', background: shake3 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                          Д
+                        </CButton>
+                        <CButton onClick={updateA} color="dark" style={{marginLeft: '10px',  background: shake4 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                          А
+                        </CButton>
+                      </div>
                     </div>
-                    <div style={{display: 'flex', flexDirection: 'column'}}>
-                      <CButton color="dark" style={{marginLeft: '10px', marginBottom: '5px', background: '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
-                        Д
-                      </CButton>
-                      <CButton color="dark" style={{marginLeft: '10px',  background: '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
-                        А
-                      </CButton>
-                    </div>
-                  </div>
               </div>
             </CNavLink>
-            {/* <AppHeaderDropdown2 /> */}
+              {/* <AppHeaderDropdown2 /> */}
           </CNavItem>
           <CNavItem>
             <CNavLink href="#">
@@ -300,4 +446,4 @@ const AppHeader = () => {
   )
 }
 
-export default AppHeader
+export default AppHeaderChat

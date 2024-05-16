@@ -15,6 +15,7 @@ import {
   CFormInput,
   CProgress,
   CToastBody,
+  CTooltip,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import Icon from "./../../src/chat-app-new/components/Icon";
@@ -113,7 +114,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
     // Buttons stops to shake after 2 seconds
     //setTimeout(() => setShake3(false), 100);
 
-    //const resUpdate = await getUpdateWorkers()
+    const resUpdate = await getUpdateWorkers()
   }
 
   const updateA = () => {
@@ -121,7 +122,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
     setShake4(true);
         
     // Buttons stops to shake after 2 seconds
-    setTimeout(() => setShake4(false), 100);
+    setTimeout(() => setShake4(false), 200);
   }
 
   return (
@@ -177,9 +178,14 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
             </CButton>
           </CNavItem>
           <CNavItem>
-            <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
-              <CIcon icon={cilPhone} size="lg"/>
-            </CNavLink>
+            <CTooltip
+              content="Манго"
+              placement="bottom"
+            >
+              <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
+                <CIcon icon={cilPhone} size="lg"/>
+              </CNavLink>
+            </CTooltip>
             <div style={{
               display: showCallCard ? 'block' : 'none', 
               position: 'absolute', top: '65px', right: '0', 
@@ -251,7 +257,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                     {
                       workerCall.specialities ? 
                       (workerCall.specialities.split(',').find(item => item === 'Blacklist') ? 
-                      <img src={Krestik} width={40} alt='' style={{position: 'absolute', top: '280px', right: '580px'}}/>
+                      <img src={Krestik} width={30} alt='' style={{position: 'absolute', top: '280px', right: '580px'}}/>
                       : "")
                       : ""
                     }
@@ -309,76 +315,135 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
             </div>
           </CNavItem>
           <CNavItem>
-            <CNavLink onClick={()=>setShowBarHelp(!showBarHelp)} style={{position: 'relative'}}>
-              <img src={Help} style={{width: '17px', paddingBottom: '6px'}}/>
-              <div 
-                style={{
-                  backgroundColor: '#2a2f32', 
-                  width: '150px', 
-                  height: '160px', 
-                  position: 'absolute', 
-                  top: '50px', 
-                  right: '10px',
-                  display: showBarHelp ? 'flex' : 'none',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: '15px',
-                  padding: '15px',
-                }}>
-              </div>
-            </CNavLink>
+            <CTooltip
+              content="Основные команды"
+              placement="bottom"
+            >
+              <CNavLink onClick={()=>setShowBarHelp(!showBarHelp)} style={{position: 'relative'}}>
+                <img src={Help} style={{width: '17px', paddingBottom: '6px'}}/>
+                <div 
+                  style={{
+                    backgroundColor: '#2a2f32', 
+                    width: '250px', 
+                    height: '830px', 
+                    position: 'absolute', 
+                    top: '50px', 
+                    right: '10px',
+                    display: showBarHelp ? 'flex' : 'none',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '15px',
+                    padding: '15px',
+                  }}>
+                    <div style={{fontSize: '11px'}}><p>✅ Команды:<br/>
+                      <br/>
+                      /help &mdash; список комманд;<br/>
+                      /next &mdash; 10 ближайших запусков;<br/>
+                      /status &mdash; вызов кнопок статуса;<br/>
+                      /info &mdash; панель информации;<br/>
+                      <br/>
+                      /go &mdash; перекличка;<br/>
+                      /phone &mdash; контакты на площадке;<br/>
+                      /place &mdash; адрес площадки;<br/>
+                      /office &mdash; адрес офиса &laquo;U.L.E.Y&raquo;;<br/>
+                      <br/>
+                      /update &mdash; смена основного состава;<br/>
+                      /mango &mdash; смена распределения звонков;<br/>
+                      /ping &mdash; тест сервера; [отклик &mdash; Pong]<br/>
+                      /stop &mdash; остановить смену;<br/>
+                      <br/>
+                      /id &mdash; номер ID проекта;<br/>
+                      /1 /2 /3 /4 /5 &mdash; перенос запроса статуса окончания работ;<br/>
+                      /deleted &mdash; удаленные проекты за 24 часа;<br/>
+                      /error &mdash; ошибки в проектах;<br/>
+                      <br/>
+                      ✅ Триггеры:<br/>
+                      <br/>
+                      Правила &mdash; правила работы на проектах;<br/>
+                      Такси &mdash; инструкция по использованию;<br/>
+                      Геолокация &mdash; инструкция как подключить;<br/>
+                      Контакты &mdash; номер телефона &laquo;U.L.E.Y&raquo;;<br/>
+                      <br/>
+                      Оплата &mdash; чат-бот &laquo;Office&raquo;;<br/>
+                      Дресс-код &mdash; форма одежды;<br/>
+                      Мерч &mdash; описание и условия получения;<br/>
+                      Фотоотчет &mdash; инструкция по отчету;<br/>
+                      <br/>
+                      Активатор &mdash; инструкция по активации кнопок;<br/>
+                      Соня &mdash; предупреждение о времени выхода на связь;<br/>
+                      Ночь &mdash; логистика в ночное время;<br/>
+                      Сказка на ночь &mdash; подготовка к ночному проекту;<br/>
+                      <br/>
+                      Оплата &mdash; чат-бот &laquo;Office&raquo;;<br/>
+                      Штраф &mdash; информация о штрафах;<br/>
+                      Самозанятость &mdash; НЕ готово;<br/>
+                      Ставка &mdash; НЕ готово;</p>
+                    </div>
+                </div>
+              </CNavLink>
+            </CTooltip>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
-              <CIcon icon={cilBell} size="lg" />
-              {/* <CBadge color="success" className="ms-2">
-                5
-              </CBadge> */}
-              {/* { newProject ?  <span className="badge bg-danger-gradient rounded-pill position-absolute top-0 end-0">1</span> 
-              : ""
-              } */}
-            </CNavLink>
+            <CTooltip
+              content="Звуки"
+              placement="bottom"
+            >
+              <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
+                <CIcon icon={cilBell} size="lg" />
+                {/* <CBadge color="success" className="ms-2">
+                  5
+                </CBadge> */}
+                {/* { newProject ?  <span className="badge bg-danger-gradient rounded-pill position-absolute top-0 end-0">1</span> 
+                : ""
+                } */}
+              </CNavLink>
+            </CTooltip>
           </CNavItem>
           <CNavItem>
             <CNavLink style={{position: 'relative'}}>
-              <CIcon icon={cilList} size="lg" onClick={()=>setShowBar(!showBar)}/>
+              <CTooltip
+                content="Обновление данных"
+                placement="bottom"
+              >
+                <CIcon icon={cilList} size="lg" onClick={()=>setShowBar(!showBar)}/>
+              </CTooltip>
               <div 
-                style={{
-                  backgroundColor: '#2a2f32', 
-                  // width: '250px', 
-                  height: '80px', 
-                  position: 'absolute', 
-                  top: '50px', 
-                  right: '10px',
-                  display: showBar ? 'flex' : 'none',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: '15px',
-                  padding: '15px',
-                }}>
-                  <div style={{display: 'flex'}}> 
-                    <div className='dark-theme' style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '200px'}}>
-                          <div style={{marginRight: '20px', marginBottom: '12px', width:'100%', position: 'relative', textAlign: 'center'}}>
-                            <CProgress color="primery" height={10} value={workerUpdate}/>
-                            <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>{workerUpdate}%</span>
-                          </div>
-                          <div style={{marginRight: '20px', width:'100%', position: 'relative', textAlign: 'center'}}>
-                            <CProgress color="primery" height={10} value={100}></CProgress>
-                            <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>100%</span>
-                          </div>
+                  style={{
+                    backgroundColor: '#2a2f32', 
+                    // width: '250px', 
+                    height: '80px', 
+                    position: 'absolute', 
+                    top: '50px', 
+                    right: '10px',
+                    display: showBar ? 'flex' : 'none',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '15px',
+                    padding: '15px',
+                  }}>
+                    <div style={{display: 'flex'}}> 
+                      <div className='dark-theme' style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '200px'}}>
+                            <div style={{marginRight: '20px', marginBottom: '12px', width:'100%', position: 'relative', textAlign: 'center'}}>
+                              <CProgress color="primery" height={10} value={workerUpdate}/>
+                              <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>{workerUpdate}%</span>
+                            </div>
+                            <div style={{marginRight: '20px', width:'100%', position: 'relative', textAlign: 'center'}}>
+                              <CProgress color="primery" height={10} value={100}></CProgress>
+                              <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>100%</span>
+                            </div>
+                      </div>
+                      <div style={{display: 'flex', flexDirection: 'column'}}>
+                        <CButton onClick={updateD} className={shake3 ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', marginBottom: '5px', background: shake3 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                          Д
+                        </CButton>
+                        <CButton onClick={updateA} color="dark" style={{marginLeft: '10px',  background: shake4 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                          А
+                        </CButton>
+                      </div>
                     </div>
-                    <div style={{display: 'flex', flexDirection: 'column'}}>
-                      <CButton onClick={updateD} className={shake3 ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', marginBottom: '5px', background: shake3 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
-                        Д
-                      </CButton>
-                      <CButton onClick={updateA} color="dark" style={{marginLeft: '10px',  background: shake4 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
-                        А
-                      </CButton>
-                    </div>
-                  </div>
               </div>
             </CNavLink>
-            {/* <AppHeaderDropdown2 /> */}
+              {/* <AppHeaderDropdown2 /> */}
           </CNavItem>
           <CNavItem>
             <CNavLink href="#">
