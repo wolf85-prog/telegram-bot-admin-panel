@@ -87,9 +87,12 @@ const UsersProvider = ({ children }) => {
 	const [workerCallNo, setWorkerCallNo] = useState('');
 	const [callIndex, setCallIndex] = useState(0)
 	const [callIndex2, setCallIndex2] = useState(0)
-
+	//update workers
 	const [showUpdate, setShowUpdate] = useState(false);
 	const [workerUpdate, setWorkerUpdate] = useState(100);
+	//update avatar
+	const [showUpdate2, setShowUpdate2] = useState(false);
+	const [avatarUpdate, setAvatarUpdate] = useState(100);
 
 	const audioMessage = new Audio(soundMessage);
 	const audioMessageW = new Audio(boopSfx);
@@ -1240,6 +1243,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		specialities, 
 		comtags, 
 		workers_update,
+		avatar_update,
 		phone,
 	} = dataAll;
 
@@ -1358,6 +1362,11 @@ const fetchNotifAdmin = async (dataAll) => {
 		setShowUpdate(true)
 		setWorkerUpdate(workers_update)
 	}
+	//обновление avatara
+	else if (task === 301) {
+		setShowUpdate(true)
+		setWorkerUpdate(avatar_update)
+	}
 }
 
 	return (
@@ -1415,7 +1424,10 @@ const fetchNotifAdmin = async (dataAll) => {
 			callIndex2,
 			showUpdate,
 			setShowUpdate,
+			showUpdate2,
+			setShowUpdate2,
 			workerUpdate,
+			avatarUpdate,
 		}}>
 			{children}
 		</UsersContext.Provider>

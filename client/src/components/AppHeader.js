@@ -33,7 +33,7 @@ import Trubka from "./../assets/images/trubka.gif";
 import Photo1 from "./../assets/images/photo_1.jpg";
 import Help from "./../assets/images/help.png";
 
-import { getUpdateWorkers } from './../http/adminAPI';
+import { getUpdateWorkers, getUpdateAvatars } from './../http/adminAPI';
 
 import './DropdownHeader.css'
 
@@ -41,7 +41,7 @@ const AppHeader = (props) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { workerUpdate, workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2} = useUsersContext();
+  const { workerUpdate, avatarUpdate, workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
   const [mutePress, setMutePress] = useState(false)
@@ -117,12 +117,21 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
     const resUpdate = await getUpdateWorkers()
   }
 
-  const updateA = () => {
+  const updateA = async() => {
     // Button begins to shake
-    setShake4(true);
+    //setShake4(true);
         
     // Buttons stops to shake after 2 seconds
-    setTimeout(() => setShake4(false), 200);
+    //setTimeout(() => setShake4(false), 200);
+
+    if (shake4) {
+      setShake4(false);
+    } else {
+      setShake4(true);
+    }
+
+
+    const resUpdate = await getUpdateAvatars()
   }
 
   return (

@@ -6,6 +6,10 @@ const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseWorkerId = process.env.NOTION_DATABASE_WORKERS_ID
 const {specData} = require('./../data/specData');
+const host = process.env.HOST
+
+const https = require('https');
+const fs = require('fs');
 
 //socket.io
 const {io} = require("socket.io-client")
@@ -314,6 +318,19 @@ class WorkersController {
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
 
+        const directory = "/var/www/proj.uley.team/avatars";
+        //очистить директорию
+        // fs.readdir(directory, (err, files) => {
+        // if (err) throw err;
+
+        // console.log("Начинаю удаление аватарок...")
+        // for (const file of files) {
+        //     fs.unlink(path.join(directory, file), (err) => {
+        //     if (err) throw err;
+        //     });
+        // }
+        // });
+
         try {
             console.log("START GET WORKERS ALL...")
             //const workers = await getWorkersAll()
@@ -366,7 +383,18 @@ class WorkersController {
                     if (notionW && notionW.length > 0) {
                         
                         //получить аватарку
-                        const spec = await getWorkerChildren(notionW[0]?.id) 
+                        //const spec = await getWorkerChildren(notionW[0]?.id) 
+                        const response = await notion.blocks.children.list({
+                            block_id: notionW[0]?.id,
+                        });
+
+                        const spec = response.results.map((page) => {
+                            return {
+                                id: page.id,
+                                image: page.image ? (page.image?.file ? page.image?.file.url : page.image.external.url) : null,
+                                //image: page.image,
+                            };
+                        });
                         if (spec.length > 0) {
                             console.log("avatar: ", spec[0].image, worker.id) 
 
@@ -375,43 +403,43 @@ class WorkersController {
 
                                 try {
                                     //сохранить фото на сервере
-                                    if (spec[0].image) {  
-                                        const file = fs.createWriteStream('/var/www/proj.uley.team/avatars/avatar_' + worker.chatId + '_' + currentDate + '.jpg');
+                                    // if (spec[0].image) {  
+                                    //     const file = fs.createWriteStream('/var/www/proj.uley.team/avatars/avatar_' + worker.chatId + '_' + currentDate + '.jpg');
                                         
-                                        const transformer = sharp()
-                                        .resize(500)
-                                        .on('info', ({ height }) => {
-                                            console.log(`Image height is ${height}`);
-                                        });
+                                    //     const transformer = sharp()
+                                    //     .resize(500)
+                                    //     .on('info', ({ height }) => {
+                                    //         console.log(`Image height is ${height}`);
+                                    //     });
                                         
-                                        const request = https.get(spec[0].image, function(response) {
-                                            response.pipe(transformer).pipe(file);
+                                    //     const request = https.get(spec[0].image, function(response) {
+                                    //         response.pipe(transformer).pipe(file);
                     
-                                            // after download completed close filestream
-                                            file.on("finish", async() => {
-                                                file.close();
-                                                console.log("Download Completed");
+                                    //         // after download completed close filestream
+                                    //         file.on("finish", async() => {
+                                    //             file.close();
+                                    //             console.log("Download Completed");
 
-                                                const url = `${host}/avatars/avatar_` + worker.chatId + '_' + currentDate + '.jpg'
+                                    //             const url = `${host}/avatars/avatar_` + worker.chatId + '_' + currentDate + '.jpg'
                     
-                                                //обновить бд
-                                                const res = await Worker.update({ 
-                                                    avatar: url,
-                                                },
-                                                { 
-                                                    where: {chatId: worker.chatId} 
-                                                })
+                                    //             //обновить бд
+                                    //             const res = await Worker.update({ 
+                                    //                 avatar: url,
+                                    //             },
+                                    //             { 
+                                    //                 where: {chatId: worker.chatId} 
+                                    //             })
                     
-                                                if (res) {
-                                                    console.log("Специалиста аватар обновлен! ", i, url) 
-                                                }else {
-                                                    console.log("Ошибка обновления! ", worker.chatId) 
-                                                }
-                                            });
-                                        });
-                                    } else {
-                                        console.log("Аватар не читается! ", worker.chatId, i) 
-                                    }
+                                    //             if (res) {
+                                    //                 console.log("Специалиста аватар обновлен! ", i, url) 
+                                    //             }else {
+                                    //                 console.log("Ошибка обновления! ", worker.chatId) 
+                                    //             }
+                                    //         });
+                                    //     });
+                                    // } else {
+                                    //     console.log("Аватар не читается! ", worker.chatId, i) 
+                                    // }
                                 } catch (err) {
                                     console.error(err);
                                 }
@@ -421,7 +449,12 @@ class WorkersController {
                         
                     } else {
                         console.log("Специалист не найден в Notion!", worker.chatId, i) 
-                    }              
+                    }      
+                    
+                    socket.emit("sendNotif", {
+                        task: 301,
+                        avatar_update: Math.round((i+1)*100/workers.length),
+                    }) 
 
                 }, 6000 * ++i) //1206000 * ++i)   
             })   

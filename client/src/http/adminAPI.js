@@ -512,9 +512,20 @@ export const getSendCall = async(tg_id)=>{
 export const getUpdateWorkers = async()=>{
     try {
         const response = await $host.get('api/workers/update/get');
-        console.log("update: ", response.data);
+        //console.log("update: ", response.data);
         return response.data;
     } catch (error) {
         console.log("error while calling getUpdateWorkers api", error.message);
+    }
+}
+
+//update avatar
+export const getUpdateAvatars= async()=>{
+    try {
+        const response = await $host.get('api/workers/update/avatar/get');
+        //console.log("update: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getUpdateAvatars api", error.message);
     }
 }
