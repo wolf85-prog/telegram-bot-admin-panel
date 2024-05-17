@@ -200,8 +200,8 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                 <div
                   style={{
                     backgroundColor: '#2a2f32', 
-                    width: '630px', 
-                    height: '390px', 
+                    width: '650px', 
+                    height: '470px', 
                     position: 'absolute', 
                     top: '50px', 
                     right: '10px',
@@ -211,7 +211,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                     borderRadius: '15px',
                     padding: '15px',
                   }}>
-                    <p style={{fontSize: '11px', paddingRight: '15px'}}>✅ Команды:<br/>
+                    <p style={{fontSize: '13px', paddingRight: '15px'}}>✅ <b>Команды:</b><br/>
                       <br/>
                       /help &mdash; список комманд;<br/>
                       /next &mdash; 10 ближайших запусков;<br/>
@@ -234,7 +234,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                       /error &mdash; ошибки в проектах;<br/>
                       <br/>
                     </p>
-                    <p style={{fontSize: '11px'}}>✅ Триггеры:<br/>
+                    <p style={{fontSize: '13px'}}>✅ <b>Триггеры:</b><br/>
                       <br/>
                       Правила &mdash; правила работы на проектах;<br/>
                       Такси &mdash; инструкция по использованию;<br/>
