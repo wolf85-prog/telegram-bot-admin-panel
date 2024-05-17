@@ -1048,6 +1048,7 @@ const fetchMessageSpecResponse = async(data) => {
 		setCountMessageWork(countMessageWork + 1)
 		
 		//пришло новое сообщение
+		//const kol = await getCountMessage()
 		//const res = await newCountWMessage(countMessageWork + 1)
 		//console.log("Пришло новое сообщение в workhub: ", count+1)
 
