@@ -882,7 +882,7 @@ const fetchMessageSpecResponse = async(data) => {
 
 		//пришел новый претендент
 		//const res = await newCountMessagePretendent(countPretendent + 1)
-		//setCountPretendent(countPretendent + 1);
+		setCountPretendent(countPretendent + 1);
 
 		//get all pretendent
 		let pretendents = await getAllPretendent();
