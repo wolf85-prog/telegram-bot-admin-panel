@@ -30,13 +30,14 @@ import Help from "./../assets/images/help.png";
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { AppHeaderDropdown } from './header/index'
-import { getUpdateWorkers } from './../http/adminAPI';
+import { getUpdateWorkers, getUpdateAvatars } from './../http/adminAPI';
 
 const AppHeaderChat = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { workerUpdate, workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2} = useUsersContext();
+  const { workerUpdate, avatarUpdate, showUpdate, showUpdate2, setShowUpdate, setShowUpdate2, 
+    workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
   const [mutePress, setMutePress] = useState(false)
@@ -94,25 +95,34 @@ const AppHeaderChat = () => {
 
   const updateD = async() => {
     // Button begins to shake
-    if (shake3) {
-      setShake3(false);
+    if (showUpdate) {
+      setShowUpdate(false);
     } else {
-      setShake3(true);
+      setShowUpdate(true);
     }
     
         
     // Buttons stops to shake after 2 seconds
-    setTimeout(() => setShake3(false), 100);
+    // setTimeout(() => setShake3(false), 100);
 
     const resUpdate = await getUpdateWorkers()
   }
 
-  const updateA = () => {
+  const updateA = async() => {
     // Button begins to shake
-    setShake4(true);
+    // setShake4(true);
         
-    // Buttons stops to shake after 2 seconds
-    setTimeout(() => setShake4(false), 100);
+    // // Buttons stops to shake after 2 seconds
+    // setTimeout(() => setShake4(false), 100);
+
+    if (shake4) {
+      setShake4(false);
+    } else {
+      setShake4(true);
+    }
+
+
+    const resUpdate = await getUpdateAvatars()
   }
 
   return (
@@ -141,12 +151,15 @@ const AppHeaderChat = () => {
             <CNavLink href="/chat3">Проекты</CNavLink>
           </CNavItem>
         </CHeaderNav>
+        
         <CHeaderNav style={{marginTop: 'auto', display: 'flex', alignItems: 'center'}}>
-        <CNavItem>
+          {/* + */}
+          <CNavItem>
             <CButton onClick={plusSound} color="dark" style={{marginRight: '10px', textAlign:'center', padding: '0', background: shake2 ? '#262829' : '#595d5f', fontSize: '14px', width: '23px', height: '23px', marginTop: '-7px'}}>
               +
             </CButton>
           </CNavItem>
+          
           <CNavItem>
             <CFormInput 
               id="autoSizingInput" 
@@ -154,19 +167,145 @@ const AppHeaderChat = () => {
               value={soundCount}
             />
           </CNavItem> 
+          
+          {/* - */}
           <CNavItem> 
             <CButton onClick={minusSound} color="dark" style={{marginRight: '10px', textAlign:'center', padding: '0', background: shake ? '#262829' : '#595d5f', fontSize: '14px', width: '23px', height: '23px', marginTop: '-7px'}}>
               -
             </CButton>
           </CNavItem>
+          
+          {/* Mute */}
           <CNavItem>
             <CButton onClick={()=>setMutePress(!mutePress)} className={mutePress ? 'button-m' : ''} color="dark" style={{marginRight: '20px', background: 'red', fontSize: '7px', width: '23px', height: '23px', paddingRight: '0px', paddingLeft: '0px', marginTop: '-7px'}}>
               Mute
             </CButton>
           </CNavItem>
+
+          {/* Команды*/}
           <CNavItem>
             <CTooltip
-              content="Манго"
+              content="Команды / Триггеры"
+              placement="bottom"
+            >
+              <CNavLink onClick={()=>setShowBarHelp(!showBarHelp)} style={{position: 'relative'}}>
+                <img src={Help} style={{width: '17px', paddingBottom: '6px'}}/>
+                <div
+                  style={{
+                    backgroundColor: '#2a2f32', 
+                    width: '650px', 
+                    height: '470px', 
+                    position: 'absolute', 
+                    top: '50px', 
+                    right: '10px',
+                    display: showBarHelp ? 'flex' : 'none',
+                    alignItems: 'flex-start',
+                    justifyContent: 'center',
+                    borderRadius: '15px',
+                    padding: '15px',
+                  }}>
+                    <p style={{fontSize: '13px', paddingRight: '15px'}}>✅ <b>Команды:</b><br/>
+                      <br/>
+                      /help &mdash; список комманд;<br/>
+                      /next &mdash; 10 ближайших запусков;<br/>
+                      /status &mdash; вызов кнопок статуса;<br/>
+                      /info &mdash; панель информации;<br/>
+                      <br/>
+                      /go &mdash; перекличка;<br/>
+                      /phone &mdash; контакты на площадке;<br/>
+                      /place &mdash; адрес площадки;<br/>
+                      /office &mdash; адрес офиса &laquo;U.L.E.Y&raquo;;<br/>
+                      <br/>
+                      /update &mdash; смена основного состава;<br/>
+                      /mango &mdash; смена распределения звонков;<br/>
+                      /ping &mdash; тест сервера; [отклик &mdash; Pong]<br/>
+                      /stop &mdash; остановить смену;<br/>
+                      <br/>
+                      /id &mdash; номер ID проекта;<br/>
+                      /1 /2 /3 /4 /5 &mdash; перенос запроса статуса окончания работ;<br/>
+                      /deleted &mdash; удаленные проекты за 24 часа;<br/>
+                      /error &mdash; ошибки в проектах;<br/>
+                      <br/>
+                    </p>
+                    <p style={{fontSize: '13px'}}>✅ <b>Триггеры:</b><br/>
+                      <br/>
+                      Правила &mdash; правила работы на проектах;<br/>
+                      Такси &mdash; инструкция по использованию;<br/>
+                      Геолокация &mdash; инструкция как подключить;<br/>
+                      Контакты &mdash; номер телефона &laquo;U.L.E.Y&raquo;;<br/>
+                      <br/>
+                      Оплата &mdash; чат-бот &laquo;Office&raquo;;<br/>
+                      Дресс-код &mdash; форма одежды;<br/>
+                      Мерч &mdash; описание и условия получения;<br/>
+                      Фотоотчет &mdash; инструкция по отчету;<br/>
+                      <br/>
+                      Активатор &mdash; инструкция по активации кнопок;<br/>
+                      Соня &mdash; предупреждение о времени выхода на связь;<br/>
+                      Ночь &mdash; логистика в ночное время;<br/>
+                      Сказка на ночь &mdash; подготовка к ночному проекту;<br/>
+                      <br/>
+                      Оплата &mdash; чат-бот &laquo;Office&raquo;;<br/>
+                      Штраф &mdash; информация о штрафах;<br/>
+                      Самозанятость &mdash; НЕ готово;<br/>
+                      Ставка &mdash; НЕ готово;
+                    </p>
+                </div>
+              </CNavLink>
+            </CTooltip>
+          </CNavItem>
+          
+          {/* Обновление данных */}
+          <CNavItem>
+            <CNavLink style={{position: 'relative'}}>
+              <CTooltip
+                content="Обновление данных"
+                placement="bottom"
+              >
+                <CIcon icon={cilList} size="lg" onClick={()=>setShowBar(!showBar)}/>
+              </CTooltip>
+              <div 
+                  style={{
+                    backgroundColor: '#2a2f32', 
+                    // width: '250px', 
+                    height: '80px', 
+                    position: 'absolute', 
+                    top: '50px', 
+                    right: '10px',
+                    display: showBar ? 'flex' : 'none',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '15px',
+                    padding: '15px',
+                  }}>
+                    <div style={{display: 'flex'}}> 
+                      <div className='dark-theme' style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '200px'}}>
+                            <div style={{marginRight: '20px', marginBottom: '12px', width:'100%', position: 'relative', textAlign: 'center'}}>
+                              <CProgress color="primery" height={10} value={workerUpdate}/>
+                              <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>{workerUpdate}%</span>
+                            </div>
+                            <div style={{marginRight: '20px', width:'100%', position: 'relative', textAlign: 'center'}}>
+                              <CProgress color="primery" height={10} value={avatarUpdate}></CProgress>
+                              <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>{avatarUpdate}%</span>
+                            </div>
+                      </div>
+                      <div style={{display: 'flex', flexDirection: 'column'}}>
+                        <CButton onClick={updateD} className={showUpdate ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', marginBottom: '5px', background: shake3 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                          Д
+                        </CButton>
+                        <CButton onClick={updateA} className={showUpdate2 ? 'button-d' : ''} color="dark" style={{marginLeft: '10px',  background: shake4 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                          А
+                        </CButton>
+                      </div>
+                    </div>
+              </div>
+            </CNavLink>
+              {/* <AppHeaderDropdown2 /> */}
+          </CNavItem>
+
+          {/* Mango */}
+          <CNavItem>
+            <CTooltip
+              content="Mango"
               placement="bottom"
             >
               <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
@@ -301,75 +440,8 @@ const AppHeaderChat = () => {
                 </div>
             </div>
           </CNavItem>
-          <CNavItem>
-            <CTooltip
-              content="Основные команды"
-              placement="bottom"
-            >
-              <CNavLink onClick={()=>setShowBarHelp(!showBarHelp)} style={{position: 'relative'}}>
-                <img src={Help} style={{width: '17px', paddingBottom: '6px'}}/>
-                <div 
-                  style={{
-                    backgroundColor: '#2a2f32', 
-                    width: '250px', 
-                    height: '830px', 
-                    position: 'absolute', 
-                    top: '50px', 
-                    right: '10px',
-                    display: showBarHelp ? 'flex' : 'none',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: '15px',
-                    padding: '15px',
-                  }}>
-                    <div style={{fontSize: '11px'}}><p>✅ Команды:<br/>
-                      <br/>
-                      /help &mdash; список комманд;<br/>
-                      /next &mdash; 10 ближайших запусков;<br/>
-                      /status &mdash; вызов кнопок статуса;<br/>
-                      /info &mdash; панель информации;<br/>
-                      <br/>
-                      /go &mdash; перекличка;<br/>
-                      /phone &mdash; контакты на площадке;<br/>
-                      /place &mdash; адрес площадки;<br/>
-                      /office &mdash; адрес офиса &laquo;U.L.E.Y&raquo;;<br/>
-                      <br/>
-                      /update &mdash; смена основного состава;<br/>
-                      /mango &mdash; смена распределения звонков;<br/>
-                      /ping &mdash; тест сервера; [отклик &mdash; Pong]<br/>
-                      /stop &mdash; остановить смену;<br/>
-                      <br/>
-                      /id &mdash; номер ID проекта;<br/>
-                      /1 /2 /3 /4 /5 &mdash; перенос запроса статуса окончания работ;<br/>
-                      /deleted &mdash; удаленные проекты за 24 часа;<br/>
-                      /error &mdash; ошибки в проектах;<br/>
-                      <br/>
-                      ✅ Триггеры:<br/>
-                      <br/>
-                      Правила &mdash; правила работы на проектах;<br/>
-                      Такси &mdash; инструкция по использованию;<br/>
-                      Геолокация &mdash; инструкция как подключить;<br/>
-                      Контакты &mdash; номер телефона &laquo;U.L.E.Y&raquo;;<br/>
-                      <br/>
-                      Оплата &mdash; чат-бот &laquo;Office&raquo;;<br/>
-                      Дресс-код &mdash; форма одежды;<br/>
-                      Мерч &mdash; описание и условия получения;<br/>
-                      Фотоотчет &mdash; инструкция по отчету;<br/>
-                      <br/>
-                      Активатор &mdash; инструкция по активации кнопок;<br/>
-                      Соня &mdash; предупреждение о времени выхода на связь;<br/>
-                      Ночь &mdash; логистика в ночное время;<br/>
-                      Сказка на ночь &mdash; подготовка к ночному проекту;<br/>
-                      <br/>
-                      Оплата &mdash; чат-бот &laquo;Office&raquo;;<br/>
-                      Штраф &mdash; информация о штрафах;<br/>
-                      Самозанятость &mdash; НЕ готово;<br/>
-                      Ставка &mdash; НЕ готово;</p>
-                    </div>
-                </div>
-              </CNavLink>
-            </CTooltip>
-          </CNavItem>
+          
+          {/* Звуки */}
           <CNavItem>
             <CTooltip
               content="Звуки"
@@ -386,52 +458,8 @@ const AppHeaderChat = () => {
               </CNavLink>
             </CTooltip>
           </CNavItem>
-          <CNavItem>
-            <CNavLink style={{position: 'relative'}}>
-              <CTooltip
-                content="Обновление данных"
-                placement="bottom"
-              >
-                <CIcon icon={cilList} size="lg" onClick={()=>setShowBar(!showBar)}/>
-              </CTooltip>
-              <div 
-                  style={{
-                    backgroundColor: '#2a2f32', 
-                    // width: '250px', 
-                    height: '80px', 
-                    position: 'absolute', 
-                    top: '50px', 
-                    right: '10px',
-                    display: showBar ? 'flex' : 'none',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: '15px',
-                    padding: '15px',
-                  }}>
-                    <div style={{display: 'flex'}}> 
-                      <div className='dark-theme' style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '200px'}}>
-                            <div style={{marginRight: '20px', marginBottom: '12px', width:'100%', position: 'relative', textAlign: 'center'}}>
-                              <CProgress color="primery" height={10} value={workerUpdate}/>
-                              <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>{workerUpdate}%</span>
-                            </div>
-                            <div style={{marginRight: '20px', width:'100%', position: 'relative', textAlign: 'center'}}>
-                              <CProgress color="primery" height={10} value={100}></CProgress>
-                              <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>100%</span>
-                            </div>
-                      </div>
-                      <div style={{display: 'flex', flexDirection: 'column'}}>
-                        <CButton onClick={updateD} className={shake3 ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', marginBottom: '5px', background: shake3 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
-                          Д
-                        </CButton>
-                        <CButton onClick={updateA} color="dark" style={{marginLeft: '10px',  background: shake4 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
-                          А
-                        </CButton>
-                      </div>
-                    </div>
-              </div>
-            </CNavLink>
-              {/* <AppHeaderDropdown2 /> */}
-          </CNavItem>
+          
+          {/* Конверт */}
           <CNavItem>
             <CNavLink href="#">
               <CIcon icon={cilEnvelopeOpen} size="lg" />
