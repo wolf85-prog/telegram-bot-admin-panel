@@ -1246,6 +1246,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		workers_update,
 		processUpdateD,
 		avatar_update,
+		processUpdateA,
 		phone,
 	} = dataAll;
 
