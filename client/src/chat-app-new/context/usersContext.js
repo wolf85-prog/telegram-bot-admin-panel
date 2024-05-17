@@ -116,6 +116,7 @@ const UsersProvider = ({ children }) => {
 	const audioPretendent = new Audio(notifPretendent)
 
 	const audioCall = new Audio(soundCall)
+	const audioCall2 = new Audio(soundCall)
 
 //-------------------------------------------------------------------------
 	const refreshPage = ()=>{
@@ -541,9 +542,9 @@ const UsersProvider = ({ children }) => {
 		}
 
 		if (showCallCardNo) {
-			audioCall.play()
+			audioCall2.play()
 		} else {
-			audioCall.pause()
+			audioCall2.pause()
 		}
 		
 	},[showCallCard, showCallCardNo])
