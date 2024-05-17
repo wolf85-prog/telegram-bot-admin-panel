@@ -1243,6 +1243,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		specialities, 
 		comtags, 
 		workers_update,
+		processUpdateD,
 		avatar_update,
 		phone,
 	} = dataAll;
@@ -1359,7 +1360,7 @@ const fetchNotifAdmin = async (dataAll) => {
 	}
 	//обновление данных
 	else if (task === 300) {
-		setShowUpdate(true)
+		setShowUpdate(processUpdateD)
 		setWorkerUpdate(workers_update)
 	}
 	//обновление avatara

@@ -123,6 +123,12 @@ class WorkersController {
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
 
+        socket.emit("sendNotif", {
+            task: 300,
+            workers_update: 0,
+            processUpdateD: true,
+        }) 
+
         try {
             console.log("START GET WORKERS ALL...")
             //const workers = await getWorkersAll()
@@ -303,6 +309,7 @@ class WorkersController {
                     socket.emit("sendNotif", {
                         task: 300,
                         workers_update: Math.round((i+1)*100/workers.length),
+                        processUpdateD: true,
                     }) 
 
                 }, 1000 * ++i)   
@@ -312,6 +319,7 @@ class WorkersController {
         }
     }
 
+    //UPDATE AVATAR
     async updateWorkersAvatar(req, res) {
         console.log("Start update avatar")
 
@@ -321,6 +329,7 @@ class WorkersController {
         socket.emit("sendNotif", {
             task: 301,
             avatar_update: 0,
+            //processUpdateA: true,
         }) 
 
         const directory = "/var/www/proj.uley.team/avatars";
@@ -453,6 +462,7 @@ class WorkersController {
                     socket.emit("sendNotif", {
                         task: 301,
                         avatar_update: Math.round((i+1)*100/workers.length),
+                        //processUpdateA: true,
                     }) 
 
                 }, 6000 * ++i) //1206000 * ++i)   
