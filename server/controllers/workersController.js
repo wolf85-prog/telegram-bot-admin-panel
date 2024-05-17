@@ -318,6 +318,11 @@ class WorkersController {
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
 
+        socket.emit("sendNotif", {
+            task: 301,
+            avatar_update: 0,
+        }) 
+
         const directory = "/var/www/proj.uley.team/avatars";
         //очистить директорию
         // fs.readdir(directory, (err, files) => {
@@ -333,7 +338,6 @@ class WorkersController {
 
         try {
             console.log("START GET WORKERS ALL...")
-            //const workers = await getWorkersAll()
             const workers = await Worker.findAll({
                 order: [
                     ['id', 'DESC'], //DESC, ASC
@@ -346,8 +350,6 @@ class WorkersController {
                 let specArr = []
                 setTimeout(async()=> {  
                     //получить данные специалиста по его id
-                    //const notion = await getWorkerNotion(worker.chatId)
-                    //console.log(JSON.stringify(notion))
                     const response = await notion.databases.query({
                         database_id: databaseWorkerId, 
                         "filter": {
@@ -380,10 +382,8 @@ class WorkersController {
                         };
                     });
 
-                    if (notionW && notionW.length > 0) {
-                        
+                    if (notionW && notionW.length > 0) {                       
                         //получить аватарку
-                        //const spec = await getWorkerChildren(notionW[0]?.id) 
                         const response = await notion.blocks.children.list({
                             block_id: notionW[0]?.id,
                         });
@@ -392,7 +392,6 @@ class WorkersController {
                             return {
                                 id: page.id,
                                 image: page.image ? (page.image?.file ? page.image?.file.url : page.image.external.url) : null,
-                                //image: page.image,
                             };
                         });
                         if (spec.length > 0) {
