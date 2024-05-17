@@ -312,6 +312,20 @@ class WorkersController {
                         processUpdateD: true,
                     }) 
 
+                    if (i === (workers.length-1)) {
+                        socket.emit("sendNotif", {
+                            task: 300,
+                            workers_update: Math.round((i+1)*100/workers.length),
+                            processUpdateD: false,
+                        })  
+                    } else {
+                        socket.emit("sendNotif", {
+                            task: 300,
+                            workers_update: Math.round((i+1)*100/workers.length),
+                            processUpdateD: true,
+                        })  
+                    }
+
                 }, 1000 * ++i)   
             })
         } catch (error) {
