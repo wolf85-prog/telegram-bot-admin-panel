@@ -41,7 +41,8 @@ const AppHeader = (props) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { workerUpdate, avatarUpdate, workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2} = useUsersContext();
+  const { workerUpdate, avatarUpdate, showUpdate, showUpdate2, setShowUpdate, setShowUpdate2, 
+    workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
   const [mutePress, setMutePress] = useState(false)
@@ -104,16 +105,12 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
 
   const updateD = async() => {
     // Button begins to shake
-    if (shake3) {
-      setShake3(false);
+    if (showUpdate) {
+      setShowUpdate(false);
     } else {
-      setShake3(true);
+      setShowUpdate(true);
     }
     
-        
-    // Buttons stops to shake after 2 seconds
-    //setTimeout(() => setShake3(false), 100);
-
     const resUpdate = await getUpdateWorkers()
   }
 
@@ -299,10 +296,10 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                             </div>
                       </div>
                       <div style={{display: 'flex', flexDirection: 'column'}}>
-                        <CButton onClick={updateD} className={shake3 ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', marginBottom: '5px', background: shake3 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                        <CButton onClick={updateD} className={showUpdate ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', marginBottom: '5px', background: shake3 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
                           Д
                         </CButton>
-                        <CButton onClick={updateA} className={shake4 ? 'button-d' : ''} color="dark" style={{marginLeft: '10px',  background: shake4 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                        <CButton onClick={updateA} className={showUpdate2 ? 'button-d' : ''} color="dark" style={{marginLeft: '10px',  background: shake4 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
                           А
                         </CButton>
                       </div>

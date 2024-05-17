@@ -1365,7 +1365,7 @@ const fetchNotifAdmin = async (dataAll) => {
 	}
 	//обновление avatara
 	else if (task === 301) {
-		setShowUpdate(true)
+		setShowUpdate2(true)
 		setAvatarUpdate(avatar_update)
 	}
 }
