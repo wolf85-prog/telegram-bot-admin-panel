@@ -121,12 +121,17 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
     // Buttons stops to shake after 2 seconds
     //setTimeout(() => setShake4(false), 200);
 
-    if (shake4) {
-      setShake4(false);
-    } else {
-      setShake4(true);
-    }
+    // if (shake4) {
+    //   setShake4(false);
+    // } else {
+    //   setShake4(true);
+    // }
 
+    if (showUpdate2) {
+      setShowUpdate2(false);
+    } else {
+      setShowUpdate2(true);
+    }
 
     const resUpdate = await getUpdateAvatars()
   }
