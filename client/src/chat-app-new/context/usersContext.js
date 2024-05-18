@@ -16,6 +16,7 @@ import { getDistributions,
 	newCountMessage,
 	newCountMessagePretendent,
 	newCountWMessage,
+	newCountProjects,
 	getCountMessage, 
 	getWorkerId,
 	getProjects3,
@@ -633,7 +634,7 @@ const UsersProvider = ({ children }) => {
 			//пришел новый проект
 			const kol = await getCountMessage()
 			setCountProjects(kol.projects + 1)
-			const res = await newCountMessagePretendent(kol.projects + 1)
+			const res = await newCountProjects(kol.projects + 1)
 
 			console.log("Пришел новое проект в renthub: ", kol.projects + 1)
 

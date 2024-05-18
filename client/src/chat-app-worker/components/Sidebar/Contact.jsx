@@ -12,6 +12,8 @@ import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 
 import { getWMessages2} from '../../../http/workerAPI'
 
+import { newCountWMessage } from "src/http/adminAPI";
+
 const Contact = ({ contact, worker }) => {
 	//console.log("worker contact: ", worker)
 	const { setPersonW } = useContext(AccountContext);
@@ -31,6 +33,7 @@ const Contact = ({ contact, worker }) => {
 
 		setUserWorkerAsUnread(contact.chatId)
 		setCountMessageWork(0)
+		await newCountWMessage(0)
 
 		if (Object.keys(contact.messages).length === 0) {
 			console.log("Сообщения не загружены!")

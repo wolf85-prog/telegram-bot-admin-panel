@@ -69,10 +69,11 @@ const Workers = () => {
   //-----------------------------------------------------------------------------------------
   //			get pretendents
   //-----------------------------------------------------------------------------------------
-  useEffect(() => {
+  useEffect(async() => {
     const arrWorkers = []
 
     setCountPretendent(0)
+    await newCountMessagePretendent(0)
 
     const fetchData = async () => {
 

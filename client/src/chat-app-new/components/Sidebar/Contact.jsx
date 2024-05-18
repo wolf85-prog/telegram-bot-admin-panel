@@ -7,6 +7,8 @@ import { AccountContext } from '../../../chat-app-new/context/AccountProvider'
 import avatarDefault from "./../../assets/images/no-avatar.png";
 import { CSpinner} from '@coreui/react'
 
+import { newCountMessage } from "src/http/adminAPI";
+
 const Contact = ({ contact }) => {
 	
 	const { setPerson } = useContext(AccountContext);
@@ -26,6 +28,7 @@ const Contact = ({ contact }) => {
         });
 		setUserAsUnread(contact.chatId)
 		setCountMessage(0)
+		await newCountMessage(0)
     }
 
 	const getLastMessage = () => {

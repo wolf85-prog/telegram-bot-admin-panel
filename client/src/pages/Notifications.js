@@ -93,7 +93,7 @@ const Notifications = () => {
   const { projects: notifications } = useUsersContext();
   const { managers: zakazchiki } = useUsersContext();
   const { companys: comps } = useUsersContext();
-  const { setNewProject } = useUsersContext();
+  const { setNewProject, setCountProjects } = useUsersContext();
 
   const [projects, setProjects] = useState([]); 
   const [pending, setPending] = useState(true); 
@@ -109,10 +109,12 @@ const Notifications = () => {
   }, [text]);
 
   //get Projects
-  useEffect(() => {
+  useEffect(async() => {
     const arrProjects = []
 
-    setNewProject(false)
+    //setNewProject(false)
+    setCountProjects(0)
+    await newCountProjects(0)
 
     const fetchData = async () => {
       console.log("companys: ", comps)
