@@ -479,13 +479,13 @@ class WorkersController {
                     if (i === (workers.length-1)) {
                         socket.emit("sendNotif", {
                             task: 301,
-                            workers_update: Math.round((i+1)*100/workers.length),
+                            avatar_update: Math.round((i+1)*100/workers.length),
                             processUpdateA: false,
                         })  
                     } else {
                         socket.emit("sendNotif", {
                             task: 301,
-                            workers_update: Math.round((i+1)*100/workers.length),
+                            avatar_update: Math.round((i+1)*100/workers.length),
                             processUpdateA: true,
                         })  
                     }

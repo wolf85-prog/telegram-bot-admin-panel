@@ -1399,7 +1399,7 @@ const fetchNotifAdmin = async (dataAll) => {
 	}
 	//обновление avatara
 	else if (task === 301) {
-		setShowUpdate2(processUpdateD)
+		setShowUpdate2(processUpdateA)
 		setAvatarUpdate(avatar_update)
 	}
 }
