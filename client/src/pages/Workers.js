@@ -73,7 +73,7 @@ const Workers = () => {
     const arrWorkers = []
 
     setCountPretendent(0)
-    await newCountMessagePretendent(0)
+    //await newCountMessagePretendent(0)
 
     const fetchData = async () => {
 

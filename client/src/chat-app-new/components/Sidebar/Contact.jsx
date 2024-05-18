@@ -28,7 +28,7 @@ const Contact = ({ contact }) => {
         });
 		setUserAsUnread(contact.chatId)
 		setCountMessage(0)
-		await newCountMessage(0)
+		//await newCountMessage(0)
     }
 
 	const getLastMessage = () => {

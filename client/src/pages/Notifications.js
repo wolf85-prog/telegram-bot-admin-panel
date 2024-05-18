@@ -114,7 +114,7 @@ const Notifications = () => {
 
     //setNewProject(false)
     setCountProjects(0)
-    await newCountProjects(0)
+    //await newCountProjects(0)
 
     const fetchData = async () => {
       console.log("companys: ", comps)
