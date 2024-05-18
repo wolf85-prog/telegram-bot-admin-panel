@@ -25,7 +25,7 @@ import arrowDown from '../assets/images/arrowDown.svg'
 
 import { getAllPretendent, getAllPretendentCount, getWorkers, getWorkersNotion100, getWorkersNotion, getWorkerNotionId} from './../http/workerAPI'
 
-import {getProjects} from './../http/adminAPI'
+import {getProjects, newCountMessagePretendent} from './../http/adminAPI'
 
 
 //Workers.js
@@ -60,7 +60,7 @@ const Workers = () => {
       console.log("workers-pretendent: ", pretendents)
       setSpec(pretendents); 
       setLoading(false)
-      setCountPretendent(0)
+      //setCountPretendent(0)
     }
     fetchData()
   }, [pretendents])
