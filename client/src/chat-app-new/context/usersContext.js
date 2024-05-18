@@ -598,7 +598,7 @@ const UsersProvider = ({ children }) => {
 	//получить сообщение из телеграмма
 	const fetchMessageResponse = async(data) => {
 		//console.log("date: ", data)
-		getCountMessage()
+		const kol = getCountMessage()
 		
 		setCount(count+1);
 		setCountMessage(countMessage + 1)
@@ -1045,12 +1045,12 @@ const fetchMessageSpecResponse = async(data) => {
 		})
 	}
 	else {
-		setCountMessageWork(countMessageWork + 1)
-		
+			
 		//пришло новое сообщение
-		//const kol = await getCountMessage()
-		//const res = await newCountWMessage(countMessageWork + 1)
-		//console.log("Пришло новое сообщение в workhub: ", count+1)
+		const kol = await getCountMessage()
+		setCountMessageWork(kol.workers + 1)
+		const res = await newCountWMessage(kol.workers + 1)
+		console.log("Пришло новое сообщение в workhub: ", kol.workers + 1)
 
 		//play sound
 		//audioWorkhub.play();	
