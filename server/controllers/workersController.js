@@ -11,6 +11,7 @@ const host = process.env.HOST
 const https = require('https');
 const fs = require('fs');
 const path = require('path')
+const sharp = require('sharp');
 
 //socket.io
 const {io} = require("socket.io-client")
