@@ -438,6 +438,15 @@ export const newCountWMessage = async (count) =>{
     }
 }
 
+// projects
+export const newCountProjects = async (count) =>{
+    try {
+        await $host.get(`api/projects/count/add/${count}`); 
+    } catch (error) {
+        console.log("error while calling newCountProjects api",error.message);
+    }
+}
+
 // pretendent
 export const newCountMessagePretendent = async (count) =>{
     try {

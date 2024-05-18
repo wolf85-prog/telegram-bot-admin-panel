@@ -25,7 +25,7 @@ const AppSidebar = () => {
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { countMessage, newProject, countMessageWork, countPretendent } = useUsersContext();
+  const { countMessage, newProject, countProjects, countMessageWork, countPretendent } = useUsersContext();
 
   const [count, setCount ] = useState(0);
   const [countMesW, setCountMesW ] = useState(0);
@@ -83,7 +83,7 @@ const AppSidebar = () => {
       name: 'Уведомления',
       to: '/notifications',
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-      badge: newProject ? {color: 'info', text: '1',} : "",
+      badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
     },
 
     {
@@ -103,7 +103,7 @@ const AppSidebar = () => {
       name: 'Специалисты',
       to: '/chatwork',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-      badge: countMessageWork !== 0 ? {color: 'info', text: '1',} : "",
+      badge: countMessageWork !== 0 ? {color: 'info', text: countMessageWork,} : "",
       style: {backgroundColor: '#0078d421'},
     },
     {
@@ -117,7 +117,7 @@ const AppSidebar = () => {
       name: 'Уведомления',
       to: '/workers',
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-      badge: countPretendent ? {color: 'info', text: '1',} : "",
+      badge: countPretendent ? {color: 'info', text: countPretendent,} : "",
     },
   ]
 

@@ -3,7 +3,7 @@ const route = new Router()
 const userController = require('../controllers/userController')
 const authMiddleware = require('../middleware/authMiddleware')
 const { newMessage, delMessage, getMessages, getLastMessages, getAllMessages, getCountMessages, 
-    newCountMessage, newCountWMessage, newCountMessagePretendent,
+    newCountMessage, newCountWMessage, newCountProjects, newCountMessagePretendent,
  } = require('../controllers/messageController')
 const { newConversation, getConversation, getConversations } = require('../controllers/conversationController')
 const { addUser, getUsers, getUser, editUser, editUserAvatar} = require('../controllers/userbotController')
@@ -60,8 +60,10 @@ route.get('/message/last/get/:id', getLastMessages)
 
 route.get('/message/count/get', getCountMessages)
 
+//кол-во сообщений
 route.get('/message/count/add/:count', newCountMessage)
 route.get('/wmessage/count/add/:count', newCountWMessage)
+route.get('/projects/count/add/:count', newCountProjects)
 route.get('/pretendent/count/add/:count', newCountMessagePretendent)
 
 

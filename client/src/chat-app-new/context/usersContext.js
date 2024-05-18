@@ -13,6 +13,7 @@ import { getDistributions,
 	getManagers, 
 	getProjectsApi, 
 	getCompanys,
+	newCountMessage,
 	newCountMessagePretendent,
 	newCountWMessage,
 	getCountMessage, 
@@ -63,6 +64,7 @@ const UsersProvider = ({ children }) => {
 	const [companys, setCompanys]= useState([]);
 	const [projects, setProjects] = useState([]); 
 	const [newProject, setNewProject]= useState(false);
+	const [countProjects, setCountProjects] = useState(0)
 
 	const [pretendents, setPretendents] = useState([])
 	const [newPretendent, setNewPretendent] = useState(false);
@@ -123,6 +125,23 @@ const UsersProvider = ({ children }) => {
 		window.location.reload();
 	}
 
+//-------------get count messages------------------------------------------
+	useEffect(() => {
+
+		const fetchData = async () => {
+			const kol = await getCountMessage()
+			console.log("kol: ", kol)
+
+			setCountMessage(kol.managers)
+			setCountMessageWork(kol.workers)
+
+			setCountProjects(kol.projects)
+			setCountPretendent(kol.pretendents)
+		}
+
+		fetchData()
+
+	}, [])
 //---------get Userbots---------------------------------------------------
 	useEffect(() => {
 		const fetchData = async () => {
@@ -226,14 +245,14 @@ const UsersProvider = ({ children }) => {
 	}, [])
 
 //---------get Workers----------------------------------------------------
-	useEffect(() => {
-		const fetchData = async () => {
-			//const res1 = await get
-		}
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		//const res1 = await get
+	// 	}
 
-		fetchData()
+	// 	fetchData()
 
-	}, [])
+	// }, [])
 
 	useEffect(() => {
 		//---------get UserWorkers-----------------------------------------
@@ -597,22 +616,30 @@ const UsersProvider = ({ children }) => {
 
 	//получить сообщение из телеграмма
 	const fetchMessageResponse = async(data) => {
-		//console.log("date: ", data)
-		const kol = getCountMessage()
+		//пришло новое сообщение
+		const kol = await getCountMessage()
+		setCountMessage(kol.managers + 1)
+		const res = await newCountMessage(kol.managers + 1)
 		
-		setCount(count+1);
-		setCountMessage(countMessage + 1)
+		console.log("Пришло новое сообщение в renthub: ", kol.managers + 1)
+
 
 		if (data.text.startsWith('Предварительная смета одобрена!')) {
 			//console.log("Предварительная смета одобрена!")
 			//play sound
 			audioSmeta.play(); 
 		} else if (data.text.startsWith('Проект успешно создан') && !data.text.includes('_reply_')) {
-			console.log("Пришел новый проект: ", newProject)
+
+			//пришел новый проект
+			const kol = await getCountMessage()
+			setCountProjects(kol.projects + 1)
+			const res = await newCountMessagePretendent(kol.projects + 1)
+
+			console.log("Пришел новое проект в renthub: ", kol.projects + 1)
+
 			//play sound
 			audioProject.play();
-			//пришел новый проект
-			setNewProject(true)
+
 			
 			//get all projects
 			let projects = await getProjectsApi();
@@ -993,8 +1020,12 @@ const fetchMessageSpecResponse = async(data) => {
 		audioPretendent.play();
 
 		//пришел новый претендент
-		//console.log("countPretendent: ", countPretendent + 1)
-		setCountPretendent(countPretendent + 1);
+		const kol = await getCountMessage()
+		setCountPretendent(kol.pretendents + 1)
+		const res = await newCountMessagePretendent(kol.pretendents + 1)
+		
+		console.log("Пришло новое сообщение в renthub: ", kol.pretendents + 1)
+
 
 		//get all pretendent
 		let pretendents = await getAllPretendent();

@@ -30,6 +30,18 @@ class MessageController {
         }
     }
 
+    //add count projects
+    async newCountProjects(req, res) {
+        const count = req.params.count
+        try {
+            await CountMessage.update({projects: count}, {where: {id: 1}})
+
+            return res.status(200).json("Projects has been sent successfully");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
     //add count message
     async newCountMessagePretendent(req, res) {
         const count = req.params.count
