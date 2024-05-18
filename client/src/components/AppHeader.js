@@ -205,8 +205,8 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                 <div
                   style={{
                     backgroundColor: '#2a2f32', 
-                    width: '650px', 
-                    height: '470px', 
+                    width: '740px', 
+                    height: '450px', 
                     position: 'absolute', 
                     top: '50px', 
                     right: '10px',
@@ -218,8 +218,8 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                   }}>
                     <p style={{fontSize: '13px', paddingRight: '15px'}}>✅ <b>Команды:</b><br/>
                       <br/>
-                      /help &mdash; список комманд;<br/>
-                      /next &mdash; 10 ближайших запусков;<br/>
+                      /help &mdash; <span style={{color: '#bebec5'}}>список комманд;</span><br/>
+                      /next &mdash; <span style={{color: '#bebec5'}}>10 ближайших запусков;</span><br/>
                       /status &mdash; вызов кнопок статуса;<br/>
                       /info &mdash; панель информации;<br/>
                       <br/>

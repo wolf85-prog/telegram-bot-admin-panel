@@ -193,8 +193,8 @@ const AppHeaderChat = () => {
                 <div
                   style={{
                     backgroundColor: '#2a2f32', 
-                    width: '650px', 
-                    height: '470px', 
+                    width: '740px', 
+                    height: '450px',
                     position: 'absolute', 
                     top: '50px', 
                     right: '10px',
