@@ -10,6 +10,7 @@ const host = process.env.HOST
 
 const https = require('https');
 const fs = require('fs');
+const path = require('path')
 
 //socket.io
 const {io} = require("socket.io-client")
