@@ -47,8 +47,6 @@ const AppHeaderChat = () => {
   const [showToast, setShowToast] = useState(false)
   const [shake, setShake] = useState(false)
   const [shake2, setShake2] = useState(false)
-  const [shake3, setShake3] = useState(false)
-  const [shake4, setShake4] = useState(false)
   const toaster = useRef()
 
 
@@ -100,25 +98,17 @@ const AppHeaderChat = () => {
     } else {
       setShowUpdate(true);
     }
-    
-        
-    // Buttons stops to shake after 2 seconds
-    // setTimeout(() => setShake3(false), 100);
+
 
     const resUpdate = await getUpdateWorkers()
   }
 
   const updateA = async() => {
-    // Button begins to shake
-    // setShake4(true);
-        
-    // // Buttons stops to shake after 2 seconds
-    // setTimeout(() => setShake4(false), 100);
 
-    if (shake4) {
-      setShake4(false);
+    if (showUpdate2) {
+      setShowUpdate2(false);
     } else {
-      setShake4(true);
+      setShowUpdate2(true);
     }
 
 
@@ -289,10 +279,10 @@ const AppHeaderChat = () => {
                             </div>
                       </div>
                       <div style={{display: 'flex', flexDirection: 'column'}}>
-                        <CButton onClick={updateD} className={showUpdate ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', marginBottom: '5px', background: shake3 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                        <CButton onClick={updateD} className={showUpdate ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', marginBottom: '5px', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
                           Д
                         </CButton>
-                        <CButton onClick={updateA} className={showUpdate2 ? 'button-d' : ''} color="dark" style={{marginLeft: '10px',  background: shake4 ? '#262829' : '#595d5f', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                        <CButton onClick={updateA} className={showUpdate2 ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
                           А
                         </CButton>
                       </div>
