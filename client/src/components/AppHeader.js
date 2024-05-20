@@ -15,6 +15,7 @@ import {
   CFormInput,
   CProgress,
   CToastBody,
+  CToastClose,
   CTooltip,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
@@ -63,6 +64,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
   const clickPhone = () => {
     //addToast(exampleToast) //ваша рассылка удалена
     setShowToast(!showToast)
+    //setShowCallCard(!showCallCard)
   }
 
   const plusSound = () => {
@@ -202,50 +204,50 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                     borderRadius: '15px',
                     padding: '15px',
                   }}>
-                    <p style={{fontSize: '13px', paddingRight: '15px'}}>✅ <b>Команды:</b><br/>
+                    <p style={{fontSize: '13px', paddingRight: '15px'}}><b>Команды:</b><br/>
                       <br/>
-                      /help <span style={{color: '#bebec5'}}>&mdash; список комманд;</span><br/>
-                      /next <span style={{color: '#bebec5'}}>&mdash; 10 ближайших запусков;</span><br/>
-                      /status &mdash; вызов кнопок статуса;<br/>
-                      /info &mdash; панель информации;<br/>
+                      /help <span style={{color: '#6e6e6e'}}>&mdash; список комманд;</span><br/>
+                      /next <span style={{color: '#6e6e6e'}}>&mdash; 10 ближайших запусков;</span><br/>
+                      /status <span style={{color: '#6e6e6e'}}>&mdash; вызов кнопок статуса;</span><br/>
+                      /info <span style={{color: '#6e6e6e'}}>&mdash; панель информации;</span><br/>
                       <br/>
-                      /go &mdash; перекличка;<br/>
-                      /phone &mdash; контакты на площадке;<br/>
-                      /place &mdash; адрес площадки;<br/>
-                      /office &mdash; адрес офиса &laquo;U.L.E.Y&raquo;;<br/>
+                      /go <span style={{color: '#6e6e6e'}}>&mdash; перекличка;</span><br/>
+                      /phone <span style={{color: '#6e6e6e'}}>&mdash; контакты на площадке;</span><br/>
+                      /place <span style={{color: '#6e6e6e'}}>&mdash; адрес площадки;</span><br/>
+                      /office <span style={{color: '#6e6e6e'}}>&mdash; адрес офиса &laquo;U.L.E.Y&raquo;;</span><br/>
                       <br/>
-                      /update &mdash; смена основного состава;<br/>
-                      /mango &mdash; смена распределения звонков;<br/>
-                      /ping &mdash; тест сервера; [отклик &mdash; Pong]<br/>
-                      /stop &mdash; остановить смену;<br/>
+                      /update <span style={{color: '#6e6e6e'}}>&mdash; смена основного состава;</span><br/>
+                      /mango <span style={{color: '#6e6e6e'}}>&mdash; смена распределения звонков;</span><br/>
+                      /ping <span style={{color: '#6e6e6e'}}>&mdash; тест сервера; [отклик &mdash; Pong]</span><br/>
+                      /stop <span style={{color: '#6e6e6e'}}>&mdash; остановить смену;</span><br/>
                       <br/>
-                      /id &mdash; номер ID проекта;<br/>
-                      /1 /2 /3 /4 /5 &mdash; перенос запроса статуса окончания работ;<br/>
-                      /deleted &mdash; удаленные проекты за 24 часа;<br/>
-                      /error &mdash; ошибки в проектах;<br/>
+                      /id <span style={{color: '#6e6e6e'}}>&mdash; номер ID проекта;</span><br/>
+                      /1 /2 /3 /4 /5 <span style={{color: '#6e6e6e'}}>&mdash; перенос запроса статуса окончания работ;</span><br/>
+                      /deleted <span style={{color: '#6e6e6e'}}>&mdash; удаленные проекты за 24 часа;</span><br/>
+                      /error <span style={{color: '#6e6e6e'}}>&mdash; ошибки в проектах;</span><br/>
                       <br/>
                     </p>
-                    <p style={{fontSize: '13px'}}>✅ <b>Триггеры:</b><br/>
+                    <p style={{fontSize: '13px'}}><b>Триггеры:</b><br/>
                       <br/>
-                      Правила &mdash; правила работы на проектах;<br/>
-                      Такси &mdash; инструкция по использованию;<br/>
-                      Геолокация &mdash; инструкция как подключить;<br/>
-                      Контакты &mdash; номер телефона &laquo;U.L.E.Y&raquo;;<br/>
+                      Правила <span style={{color: '#6e6e6e'}}>&mdash; правила работы на проектах;</span><br/>
+                      Такси <span style={{color: '#6e6e6e'}}>&mdash; инструкция по использованию;</span><br/>
+                      Геолокация <span style={{color: '#6e6e6e'}}>&mdash; инструкция как подключить;</span><br/>
+                      Контакты <span style={{color: '#6e6e6e'}}>&mdash; номер телефона &laquo;U.L.E.Y&raquo;;</span><br/>
                       <br/>
-                      Оплата &mdash; чат-бот &laquo;Office&raquo;;<br/>
-                      Дресс-код &mdash; форма одежды;<br/>
-                      Мерч &mdash; описание и условия получения;<br/>
-                      Фотоотчет &mdash; инструкция по отчету;<br/>
+                      Оплата <span style={{color: '#6e6e6e'}}>&mdash; чат-бот &laquo;Office&raquo;;</span><br/>
+                      Дресс-код <span style={{color: '#6e6e6e'}}>&mdash; форма одежды;</span><br/>
+                      Мерч <span style={{color: '#6e6e6e'}}>&mdash; описание и условия получения;</span><br/>
+                      Фотоотчет <span style={{color: '#6e6e6e'}}>&mdash; инструкция по отчету;</span><br/>
                       <br/>
-                      Активатор &mdash; инструкция по активации кнопок;<br/>
-                      Соня &mdash; предупреждение о времени выхода на связь;<br/>
-                      Ночь &mdash; логистика в ночное время;<br/>
-                      Сказка на ночь &mdash; подготовка к ночному проекту;<br/>
+                      Активатор <span style={{color: '#6e6e6e'}}>&mdash; инструкция по активации кнопок;</span><br/>
+                      Соня <span style={{color: '#6e6e6e'}}>&mdash; предупреждение о времени выхода на связь;</span><br/>
+                      Ночь <span style={{color: '#6e6e6e'}}>&mdash; логистика в ночное время;</span><br/>
+                      Сказка на ночь <span style={{color: '#6e6e6e'}}>&mdash; подготовка к ночному проекту;</span><br/>
                       <br/>
-                      Оплата &mdash; чат-бот &laquo;Office&raquo;;<br/>
-                      Штраф &mdash; информация о штрафах;<br/>
-                      Самозанятость &mdash; НЕ готово;<br/>
-                      Ставка &mdash; НЕ готово;
+                      Оплата <span style={{color: '#6e6e6e'}}>&mdash; чат-бот &laquo;Office&raquo;;</span><br/>
+                      Штраф <span style={{color: '#6e6e6e'}}>&mdash; информация о штрафах;</span><br/>
+                      Самозанятость <span style={{color: '#6e6e6e'}}>&mdash; НЕ готово;</span><br/>
+                      Ставка <span style={{color: '#6e6e6e'}}>&mdash; НЕ готово;</span>
                     </p>
                 </div>
               </CNavLink>
@@ -336,8 +338,9 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                         <rect width="314px" height="314px" fill="#007aff"></rect> 
                       </svg>
                       }
+                      <CToastClose onClick={()=>setShowCallCard(false)} white style={{position: 'absolute'}}/>
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '-6px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
+                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
                         <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
                         <div className="star-block" style={{marginTop: '85px'}}>
                           <img className='star-icon' src={StarActive} width={25} alt='' /> 
@@ -418,6 +421,8 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                     <div style={{display: 'flex'}}>
                       
                       <img src={Photo1} alt='' style={{borderRadius: '15px'}} width={314} height={314}/>
+
+                      <CToastClose onClick={()=>setShowCallCardNo(false)} white style={{position: 'absolute'}}/>
 
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
                         <span style={{color: '#fff', fontSize: '40px', position: 'absolute', top: '100px'}}>Номер не зарегистрирован</span>

@@ -894,10 +894,10 @@ const UsersProvider = ({ children }) => {
 
 //получить сообщение из телеграмма WorkersBot
 const fetchMessageSpecResponse = async(data) => {
-	//audio.play();
-	//console.log("date: ", data)
-	//console.log("Пришло новое сообщение в workhub: ", count+1)
-	//setCount(count+1);
+	
+	console.log("Получено сообзщение от специалиста: ", data)
+	const { isBot} = data;
+
 	let arrWorkers = []
 
 	if (data.text.startsWith('Пользователь нажал кнопку "Принять" в рассылке') && !data.text.includes('_reply_')) {
@@ -1083,9 +1083,11 @@ const fetchMessageSpecResponse = async(data) => {
 		//const res = await newCountWMessage(kol.workers + 1)
 		console.log("Пришло новое сообщение в workhub: ", count + 1)
 
-		//play sound
-		//audioWorkhub.play();	
-		audioMessageW.play();	
+		if (!isBot || isBot === null) {
+			//play sound
+			audioMessageW.play();	
+		} 
+		
 	}
 
 	setUserWorkers((userWorkers) => {
