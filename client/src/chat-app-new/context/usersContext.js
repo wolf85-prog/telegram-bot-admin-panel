@@ -1464,7 +1464,9 @@ const fetchNotifAdmin = async (dataAll) => {
 			showUpdate2,
 			setShowUpdate2,
 			workerUpdate,
+			setWorkerUpdate,
 			avatarUpdate,
+			setAvatarUpdate,
 		}}>
 			{children}
 		</UsersContext.Provider>

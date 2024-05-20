@@ -37,7 +37,7 @@ const AppHeaderChat = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { workerUpdate, avatarUpdate, showUpdate, showUpdate2, setShowUpdate, setShowUpdate2, 
+  const { workerUpdate, setWorkerUpdate, avatarUpdate, setAvatarUpdate, showUpdate, showUpdate2, setShowUpdate, setShowUpdate2, 
     workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
@@ -106,18 +106,19 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
       setShowUpdate(true);
     }
 
-
+    setWorkerUpdate(0)
+    
     const resUpdate = await getUpdateWorkers()
   }
 
   const updateA = async() => {
-
     if (showUpdate2) {
       setShowUpdate2(false);
     } else {
       setShowUpdate2(true);
     }
 
+    setAvatarUpdate(0)
 
     const resUpdate = await getUpdateAvatars()
   }
