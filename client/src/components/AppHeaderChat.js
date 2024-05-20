@@ -163,7 +163,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               style={{width: '25px', textAlign:'center', marginRight: '10px', fontSize: '12px', marginRight: '10px', height: '25px', paddingLeft: '0px', paddingRight: '0px', marginTop: '-2px'}}
               value={soundCount}
             />
-          </CNavItem> 
+            </CNavItem> 
           
           {/* - */}
           <CNavItem> 
@@ -190,7 +190,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                 <div
                   style={{
                     backgroundColor: '#2a2f32', 
-                    width: '740px', 
+                    width: '780px', 
                     height: '450px',
                     position: 'absolute', 
                     top: '50px', 
