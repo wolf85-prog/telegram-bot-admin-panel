@@ -384,7 +384,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                     {
                       workerCall.specialities ? 
                       (workerCall.specialities.split(',').find(item => item === 'Blacklist') ? 
-                      <img src={Krestik} width={30} alt='' style={{position: 'absolute', top: '280px', right: '580px'}}/>
+                      <img src={Krestik} width={30} alt='' style={{position: 'absolute', top: '280px', right: '590px'}}/>
                       : "")
                       : ""
                     }

@@ -50,6 +50,11 @@ const AppHeaderChat = () => {
   const [shake2, setShake2] = useState(false)
   const toaster = useRef()
 
+  const [workerCall2, setWorkerCall2] = useState({tg_id: '805436270', fio: 'Иванов Иван Ивановия', sity: 'Майкоп', year_of_birth: '01.01.1985', projects: '5', 
+  specialities: 'Художник по свету,Звукорежиссер,Backline,Репортажная съемка,Диджей,Ведущий,Официант,Инженер Resolume,+18,Blacklist', 
+  comtags: 'опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание',
+avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
+
 
   const clickPhone = () => {
     //addToast(exampleToast) //ваша рассылка удалена
@@ -376,7 +381,7 @@ const AppHeaderChat = () => {
                     {
                       workerCall.specialities ? 
                       (workerCall.specialities.split(',').find(item => item === 'Blacklist') ? 
-                      <img src={Krestik} width={30} alt='' style={{position: 'absolute', top: '280px', right: '580px'}}/>
+                      <img src={Krestik} width={30} alt='' style={{position: 'absolute', top: '280px', right: '590px'}}/>
                       : "")
                       : ""
                     }
