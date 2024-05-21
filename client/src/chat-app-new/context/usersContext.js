@@ -75,7 +75,15 @@ const UsersProvider = ({ children }) => {
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
 	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
 
-	const [countMessageWork, setCountMessageWork] = useState(0)
+	//const [countMessageWork, setCountMessageWork] = useState(0)
+	const [countMessageWork, setCountMessageWork] = useState(() => {
+		// getting stored value
+		const saved = localStorage.getItem("countMessageWork");
+		const initialValue = saved;
+		return initialValue || 0;
+	});
+
+
 	const [distributionsWork, setDistributionsWork] = useState([]); 
 
 	const [conversations, setConversations] = useState([]); 
@@ -143,6 +151,12 @@ const UsersProvider = ({ children }) => {
 	// 	fetchData()
 
 	// }, [])
+
+	useEffect(() => {
+		// storing input name
+		localStorage.setItem("countMessageWork", countMessageWork);
+	}, [countMessageWork]);
+
 //---------get Userbots---------------------------------------------------
 	useEffect(() => {
 		const fetchData = async () => {

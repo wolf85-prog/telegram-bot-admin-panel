@@ -143,6 +143,8 @@ const DistributionAddW = () => {
   const [onButtonStavka, setOnButtonStavka] = useState(false)
 
   const [showCheckTarget, setShowCheckTarget] = useState(true)
+
+  const [customButton, setCustomButton] = useState(0)
   
   const audio = new Audio(sendSound);
 
@@ -446,6 +448,8 @@ const onChangeSelectProject = async(e) => {
 const onChangeAddButton = () => {
   setShowEditButtonAdd(true)
   //setShowCheckTarget(true)
+
+  setCustomButton(1)
 }
 
 const onChangeAddButton2 = () => {
@@ -1089,6 +1093,7 @@ const delCategory7 = (category) => {
   }
 
   const onChangeCheckButton = (e) => {
+    console.log(e.target.checked)
     setOnButtonStavka(e.target.checked)
   }
 
@@ -1437,6 +1442,7 @@ const delCategory7 = (category) => {
                                             id="flexCheckDefault" 
                                             label="Альтернативная ставка"
                                             onChange={onChangeCheckButton}
+                                            checked={onButtonStavka}
                                           />
                                         </CCol>
                                       </CRow>
@@ -1522,28 +1528,56 @@ const delCategory7 = (category) => {
                                             : <img src={noimage2} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
                                           }
                                           </div>
-                                          <div style={{position: 'absolute', top: '225px', left: '22px', display: 'flex', width: '85%'}}>
-                                            <div style={{
-                                              backgroundColor: '#8a93a2', 
-                                              borderRadius: '5px',
-                                              textAlign: 'center',
-                                              fontSize: '12px',
-                                              padding: '5px',
-                                              marginRight: '4px',
-                                              width: '100%'}}>
-                                                Принять
+                                          {
+                                            !showEditButtonAdd ?
+                                            
+                                            <><div style={{position: 'absolute', top: '225px', left: '22px', display: 'flex', width: '85%'}}>
+                                              <div style={{
+                                                backgroundColor: '#8a93a2', 
+                                                borderRadius: '5px',
+                                                textAlign: 'center',
+                                                fontSize: '12px',
+                                                padding: '5px',
+                                                marginRight: '4px',
+                                                width: '100%'}}>
+                                                  Принять
+                                              </div>
+                                              <div style={{
+                                                backgroundColor: '#8a93a2', 
+                                                borderRadius: '5px',
+                                                textAlign: 'center',
+                                                fontSize: '12px',
+                                                padding: '5px',
+                                                width: '100%'}}>
+                                                  Отклонить
+                                              </div>
+                                            </div> 
+                                            {onButtonStavka && <div style={{position: 'absolute', top: '258px', left: '22px', display: 'flex', width: '85%'}}>
+                                              <div style={{
+                                                backgroundColor: '#8a93a2', 
+                                                borderRadius: '5px',
+                                                textAlign: 'center',
+                                                fontSize: '12px',
+                                                padding: '5px',
+                                                width: '100%'}}>
+                                                  Альтернативная ставка
+                                              </div>
+                                            </div> }
+                                            </>                                      
+                                            :<div style={{position: 'absolute', top: '225px', left: '22px', display: 'flex', width: '85%'}}>
+                                              <div style={{
+                                                backgroundColor: '#8a93a2', 
+                                                borderRadius: '5px',
+                                                textAlign: 'center',
+                                                fontSize: '12px',
+                                                padding: '5px',
+                                                width: '100%'}}>
+                                                  {textButton}
+                                              </div>
                                             </div>
-                                            <div style={{
-                                              backgroundColor: '#8a93a2', 
-                                              borderRadius: '5px',
-                                              textAlign: 'center',
-                                              fontSize: '12px',
-                                              padding: '5px',
-                                              width: '100%'}}>
-                                                Отклонить
-                                            </div>
-                                          </div>                                         
-                                        </div>                                                                             
+                                          } 
+                                        </div> 
+                                                                           
                                       </div>
                                       
                                     </CCol>

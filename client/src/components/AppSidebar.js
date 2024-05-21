@@ -29,7 +29,7 @@ const AppSidebar = () => {
 
   const [count, setCount ] = useState(0);
   const [countMesW, setCountMesW ] = useState(0);
-  //console.log("countMessage: ", getCountMessage())
+  console.log("countMessage: ", countMessageWork)
 
   // useEffect(async() => {
   //   const res = await getCountMessage()
@@ -103,7 +103,7 @@ const AppSidebar = () => {
       name: 'Специалисты',
       to: '/chatwork',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-      badge: countMessageWork !== 0 ? {color: 'info', text: countMessageWork,} : "",
+      badge: countMessageWork !== '0' ? {color: 'info', text: countMessageWork,} : "",
       style: {backgroundColor: '#0078d421'},
     },
     {
