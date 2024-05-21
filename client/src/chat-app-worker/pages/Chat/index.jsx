@@ -93,7 +93,6 @@ const Chat = () => {
 		setScenari(selectedElement)
 
 		let text = ''
-		let poster = ''
 		
 		//Стандартный ответ
 		if (selectedElement === '0') {
