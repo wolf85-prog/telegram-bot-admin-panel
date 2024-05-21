@@ -32,7 +32,7 @@ const Contact = ({ contact, worker }) => {
         });
 
 		setUserWorkerAsUnread(contact.chatId)
-		setCountMessageWork(0)
+		setCountMessageWork('0')
 		//await newCountWMessage(0)
 
 		if (Object.keys(contact.messages).length === 0) {

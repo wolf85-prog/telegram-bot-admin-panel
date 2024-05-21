@@ -348,18 +348,18 @@ class WorkersController {
             processUpdateA: true,
         }) 
 
-        const directory = "/var/www/proj.uley.team/avatars";
-        //очистить директорию
-        fs.readdir(directory, (err, files) => {
-        if (err) throw err;
+        // const directory = "/var/www/proj.uley.team/avatars";
+        // //очистить директорию
+        // fs.readdir(directory, (err, files) => {
+        // if (err) throw err;
 
-        console.log("Начинаю удаление аватарок...")
-        for (const file of files) {
-            fs.unlink(path.join(directory, file), (err) => {
-            if (err) throw err;
-            });
-        }
-        });
+        // console.log("Начинаю удаление аватарок...")
+        // for (const file of files) {
+        //     fs.unlink(path.join(directory, file), (err) => {
+        //     if (err) throw err;
+        //     });
+        // }
+        // });
 
         try {
             console.log("START GET WORKERS ALL...")

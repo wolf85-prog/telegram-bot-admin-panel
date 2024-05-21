@@ -152,7 +152,12 @@ const UsersProvider = ({ children }) => {
 
 	// }, [])
 
-	useEffect(() => {
+	// useEffect(() => {
+	// 	const saved = localStorage.getItem("countMessageWork");
+	// 	setCountMessageWork(saved)
+	// })
+
+	useEffect(() => {	
 		// storing input name
 		localStorage.setItem("countMessageWork", countMessageWork);
 	}, [countMessageWork]);

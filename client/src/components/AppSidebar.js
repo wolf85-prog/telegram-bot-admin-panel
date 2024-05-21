@@ -103,7 +103,7 @@ const AppSidebar = () => {
       name: 'Специалисты',
       to: '/chatwork',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-      badge: countMessageWork !== 0 ? {color: 'info', text: countMessageWork,} : "",
+      badge: countMessageWork !== '0' ? {color: 'info', text: countMessageWork,} : "",
       style: {backgroundColor: '#0078d421'},
     },
     {
