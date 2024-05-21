@@ -524,7 +524,7 @@ https://t.me/ULEY_Office_Bot
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "Принято/Понято", callback_data:'/accept_poster'},
+					{"text": "Принято / Понято", callback_data:'/poster_accept'},
 				],
 			]
 		});
