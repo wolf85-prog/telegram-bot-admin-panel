@@ -1157,7 +1157,7 @@ const fetchMessageSpecResponse = async(data) => {
 		if (isBot) {
 			usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
 		} else {
-			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
+			usersCopy[userIndex] = { ...userObject, ['unread']: countMessageWork + 1, ['date']: new Date(), ['message']: newMsgObject.content};
 		}
 		
 
