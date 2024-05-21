@@ -188,6 +188,7 @@ const ChatInput = ({
 					<Dropdown.Item eventKey="8">Запрос ключевых данных</Dropdown.Item>
 					<Dropdown.Divider />
 					<Dropdown.Item eventKey="9">Первый проект</Dropdown.Item>
+					<Dropdown.Item eventKey="10">Постер</Dropdown.Item>
 				</DropdownButton>
 				{/* <CFormSelect 
 						style={{marginTop: '10px', marginBottom: '10px',  display: "block"}}

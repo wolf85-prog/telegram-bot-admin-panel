@@ -91,6 +91,7 @@ const Chat = () => {
 		setScenari(selectedElement)
 
 		let text = ''
+		let poster = ''
 		
 		//Стандартный ответ
 		if (selectedElement === '0') {
@@ -171,6 +172,11 @@ const Chat = () => {
 			setMess(text)
 		}
 
+		//Постер
+		else if (selectedElement === '10') {
+			poster = 'https://proj.uley.team/upload/2024-05-21T06:26:45.939Z.jpg'
+		}
+
 	}, [selectedElement]);
 
 	//прокрутка
@@ -248,13 +254,17 @@ const Chat = () => {
 		if (selectedElement === '1') { //выбран паспорт
 			//отправка сценария
 			console.log("отправка сценария: ", selectedElement)
-
 			sendMyMessage()
+
 		} else if (selectedElement === '9') { //выбран Правила
 				//отправка сценария
 				console.log("отправка сценария: ", selectedElement)
-	
 				sendMyMessage2()
+
+		} else if (selectedElement === '10') { //выбран Постер
+			console.log("отправка сценария: ", selectedElement)
+			sendMyMessagePoster()
+	
 		} else {
 			//отправка сообщения
 
@@ -496,6 +506,52 @@ https://t.me/ULEY_Office_Bot
 	
 		//сохранить в контексте
 		addNewMessage2(user.chatId, 'Сценарий "Первый проект"', 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
+    
+	}
+
+	//отправка сценария Постер
+	const sendMyMessagePoster = async() => {
+		console.log("send poster")
+		//audio.play();
+
+		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+
+		const keyboard = JSON.stringify({
+			inline_keyboard: [
+				[
+					{"text": "Принято/Понято", callback_data:'/accept_poster'},
+				],
+			]
+		});
+
+		let sendToTelegram
+		
+		//Постер
+		const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${user.chatId}&photo=${poster}&reply_markup=${keyboard}`
+		console.log(url_send_photo)	
+		sendToTelegram = await $host.get(url_send_photo);
+		
+
+		//отправить в админку
+		let message = {};
+			
+		message = {
+			senderId: chatAdminId, 
+			receiverId: user.chatId,
+			conversationId: client.conversationId,
+			type: "image",
+			text: poster,
+			isBot: null,
+			messageId: sendToTelegram.data.result.message_id,
+			buttons: '',
+		}
+			
+	
+		//сохранение сообщения в базе данных
+		await newMessage(message)
+	
+		//сохранить в контексте
+		addNewMessage2(user.chatId, poster, 'image', '', client.conversationId, sendToTelegram.data.result.message_id);
     
 	}
 
