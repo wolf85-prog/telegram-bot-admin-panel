@@ -65,7 +65,7 @@ const Chat = () => {
 
 	const audio = new Audio(sendSound);
 
-	let poster = ''
+	const [poster, setPoster] = useState("")
 
 	const refreshPage = ()=>{
 		window.location.reload(true);
@@ -175,7 +175,7 @@ const Chat = () => {
 
 		//Постер
 		else if (selectedElement === '10') {
-			poster = 'https://proj.uley.team/upload/2024-05-21T06:26:45.939Z.jpg'
+			setPoster('https://proj.uley.team/upload/2024-05-21T06:26:45.939Z.jpg')
 
 			text = 'https://proj.uley.team/upload/2024-05-21T06:26:45.939Z.jpg'
 
