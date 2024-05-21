@@ -177,6 +177,10 @@ const Chat = () => {
 		//Постер
 		else if (selectedElement === '10') {
 			poster = 'https://proj.uley.team/upload/2024-05-21T06:26:45.939Z.jpg'
+
+			text = 'https://proj.uley.team/upload/2024-05-21T06:26:45.939Z.jpg'
+
+			setMess(text)
 		}
 
 	}, [selectedElement]);
