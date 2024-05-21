@@ -65,6 +65,8 @@ const Chat = () => {
 
 	const audio = new Audio(sendSound);
 
+	let poster = ''
+
 	const refreshPage = ()=>{
 		window.location.reload(true);
 	 }
