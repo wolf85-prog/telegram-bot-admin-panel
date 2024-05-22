@@ -368,7 +368,7 @@ class WorkersController {
             if(err) throw err;
             for(var i=0; i<list.length; i++)
             {
-                if(path.extname(list[i]).includes(fileType))
+                if(path.extname(list[i]) === fileType)
                 {
                     console.log(list[i]); //print the file
                     files.push(list[i]); //store the file name into the array files
