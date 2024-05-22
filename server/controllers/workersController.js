@@ -340,13 +340,13 @@ class WorkersController {
         console.log("Start update avatar")
 
         // Подключаемся к серверу socket
-        //let socket = io(socketUrl);
+        let socket = io(socketUrl);
 
-        // socket.emit("sendNotif", {
-        //     task: 301,
-        //     avatar_update: 0,
-        //     processUpdateA: true,
-        // }) 
+        socket.emit("sendNotif", {
+            task: 301,
+            avatar_update: 0,
+            processUpdateA: true,
+        }) 
 
         const directory = "/var/www/proj.uley.team/avatars";
         // //очистить директорию
@@ -440,6 +440,7 @@ class WorkersController {
                                                     //удалить найденный файл (синхронно)
                                                     fs.unlinkSync(path.join(directory, list[i]), (err) => {
                                                         if (err) throw err;
+                                                        console.log("Файл удален!")
                                                     });
                                                 }
                                             }
