@@ -628,7 +628,7 @@ class DistributionController {
                         }
                     }  
 
-                }, 100 * ++index) 
+                }, 1000 * ++index) 
 
             })
 

@@ -391,7 +391,7 @@ const getDistributionsPlan = async() => {
                         }
                     } // end if block  
                     
-                }, 100 * ++ind) 
+                }, 1000 * ++ind) 
                 
                 })
 

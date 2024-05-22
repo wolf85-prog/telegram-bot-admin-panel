@@ -1820,7 +1820,10 @@ const onSaveText = async() => {
                                               : <img src={noimage2} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
                                             }
                                             </div>
-                                            <div style={{position: 'absolute', top: '225px', left: '22px', display: 'flex', width: '85%'}}>
+                                            {
+                                            !showEditButtonAdd ?
+                                            
+                                            <><div style={{position: 'absolute', top: '225px', left: '22px', display: 'flex', width: '85%'}}>
                                               <div style={{
                                                 backgroundColor: '#8a93a2', 
                                                 borderRadius: '5px',
@@ -1840,7 +1843,32 @@ const onSaveText = async() => {
                                                 width: '100%'}}>
                                                   Отклонить
                                               </div>
-                                            </div>                                         
+                                            </div> 
+                                            {onButtonStavka && <div style={{position: 'absolute', top: '258px', left: '22px', display: 'flex', width: '85%'}}>
+                                              <div style={{
+                                                backgroundColor: '#8a93a2', 
+                                                borderRadius: '5px',
+                                                textAlign: 'center',
+                                                fontSize: '12px',
+                                                padding: '5px',
+                                                width: '100%'}}>
+                                                  Альтернативная ставка
+                                              </div>
+                                            </div> }
+                                            </>                                      
+                                            :<div style={{position: 'absolute', top: '225px', left: '22px', display: 'flex', width: '85%'}}>
+                                              <div style={{
+                                                backgroundColor: '#8a93a2', 
+                                                borderRadius: '5px',
+                                                textAlign: 'center',
+                                                fontSize: '12px',
+                                                padding: '5px',
+                                                width: '100%'}}>
+                                                  {textButton}
+                                              </div>
+                                            </div>
+                                          } 
+                                                                                  
                                           </div>                                                                             
                                         </div>
                                         
