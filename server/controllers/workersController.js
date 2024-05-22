@@ -372,6 +372,11 @@ class WorkersController {
                 {
                     console.log(list[i]); //print the file
                     files.push(list[i]); //store the file name into the array files
+                    //удалить найденный файл
+                    fs.unlink(path.join(directory, list[i]), (err) => {
+                        if (err) throw err;
+                        console.log("Файл удален!")
+                    });
                 }
             }
         });
