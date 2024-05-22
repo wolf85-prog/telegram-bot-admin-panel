@@ -362,13 +362,13 @@ class WorkersController {
         // });
 
 
-        var fileName = '550452931'; //file extension
+        var fileType = '550452931'; //file extension
         var files = [];
         fs.readdir(directory, function(err,list){
             if(err) throw err;
             for(var i=0; i<list.length; i++)
             {
-                if(path.includes(fileName))
+                if(list[i].includes(fileType))
                 {
                     console.log(list[i]); //print the file
                     files.push(list[i]); //store the file name into the array files
