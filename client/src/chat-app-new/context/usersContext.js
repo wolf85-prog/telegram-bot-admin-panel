@@ -1197,6 +1197,8 @@ const fetchAdminSpec = (data) => {
 
 		let userIndex = userWorkers.findIndex((user) => user.chatId === receiverId.toString());
 		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
+		console.log("usersCopy: ", usersCopy)
+		
 		const newMsgObject = {
 			date: new Date().toLocaleDateString(),
 			content: text,
