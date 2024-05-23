@@ -714,7 +714,8 @@ const UsersProvider = ({ children }) => {
 
 			//console.log("messages: ", usersCopy[userIndex].messages[currentDate])
 
-			if (usersCopy[userIndex].messages[currentDate]) {
+			//if (usersCopy[userIndex].messages[currentDate]) {
+			if (!isObjectEmpty(usersCopy[userIndex].messages)) {
 				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 			} else {
 				//console.log("add current date")

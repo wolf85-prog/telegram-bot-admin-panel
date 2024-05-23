@@ -78,8 +78,8 @@ const Chat = () => {
 			setUserAsUnread(user.chatId);
 			setCountMessage(0)
 			//обнулить кол-во сообщений
-			const kol_mess = getCountMessage()
-			newCountWMessage(kol_mess - 1)
+			//const kol_mess = getCountMessage()
+			//newCountWMessage(kol_mess - 1)
 		}
 	}, []);
 
