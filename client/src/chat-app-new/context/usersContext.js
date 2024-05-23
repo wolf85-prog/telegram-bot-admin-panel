@@ -1198,7 +1198,7 @@ const fetchAdminSpec = (data) => {
 		let userIndex = userWorkers.findIndex((user) => user.chatId === receiverId.toString());
 		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
 		console.log("usersCopy: ", usersCopy)
-		
+
 		const newMsgObject = {
 			date: new Date().toLocaleDateString(),
 			content: text,
@@ -1212,7 +1212,8 @@ const fetchAdminSpec = (data) => {
 
 		const currentDate = new Date().toLocaleDateString()
 
-		if (usersCopy[userIndex].messages[currentDate]) {
+		//if (usersCopy[userIndex].messages[currentDate]) {
+		if (!isObjectEmpty(usersCopy[userIndex].messages)) {
 			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 		} else {
 			usersCopy[userIndex].messages[currentDate] = [];
@@ -1425,6 +1426,10 @@ const fetchNotifAdmin = async (dataAll) => {
 		setShowUpdate2(processUpdateA)
 		setAvatarUpdate(avatar_update)
 	}
+}
+
+function isObjectEmpty(obj) {
+	return Object.keys(obj).length === 0;
 }
 
 	return (
