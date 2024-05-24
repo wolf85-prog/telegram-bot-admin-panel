@@ -299,6 +299,10 @@ const Chat = () => {
 						sendPhotoToTelegram = await $host.get(url_send_doc);
 					} else if (image.slice(-3) === 'png' || image.slice(-3)==='jpg' || image.slice(-3)==='peg' || image.slice(-3) !== 'PNG' || image.slice(-3)!=='JPG' || image.slice(-3)!=='PEG') {
 						setShowErrorFile(true)
+					} else if (image.slice(-3) === 'pdf' ) {
+						const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personW.id}&document=${host+image}`
+						//console.log("url_send_doc: ", url_send_doc)
+						sendPhotoToTelegram = await $host.get(url_send_doc);
 					} else {
 						const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personW.id}&document=${host+image}`
 						//console.log("url_send_doc: ", url_send_doc)
