@@ -716,9 +716,13 @@ const UsersProvider = ({ children }) => {
 
 			//if (usersCopy[userIndex].messages[currentDate]) {
 			if (!isObjectEmpty(usersCopy[userIndex].messages)) {
-				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+				if (usersCopy[userIndex].messages[currentDate]) {
+					usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+				} else {
+					usersCopy[userIndex].messages[currentDate] = [];
+					usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+				}
 			} else {
-				//console.log("add current date")
 				usersCopy[userIndex].messages[currentDate] = [];
 				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 			}
@@ -1215,7 +1219,12 @@ const fetchAdminSpec = (data) => {
 
 		//if (usersCopy[userIndex].messages[currentDate]) {
 		if (!isObjectEmpty(usersCopy[userIndex].messages)) {
-			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			if (usersCopy[userIndex].messages[currentDate]) {
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			} else {
+				usersCopy[userIndex].messages[currentDate] = [];
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			}
 		} else {
 			usersCopy[userIndex].messages[currentDate] = [];
 			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
