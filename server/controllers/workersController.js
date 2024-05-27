@@ -142,7 +142,13 @@ class WorkersController {
 
             //получить всех специалистов из ноушен
             const workersN = await getWorkersNotion()
-            console.log("workersN: ", workersN.length)
+
+            if (Object.keys(workersN).length !== 0) {
+               console.log("workersN: ", workersN.length) 
+            } else {
+                console.log("Ошибка получения данных из таблицы 'Специалисты' Notion!") 
+            }
+            
 
             // 1
             // console.log("START UPDATE WORKERS")
@@ -513,6 +519,7 @@ class WorkersController {
             
         // }
     }
+
 }
 
 module.exports = new WorkersController()
