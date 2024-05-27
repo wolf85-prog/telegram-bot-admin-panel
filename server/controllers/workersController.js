@@ -308,11 +308,6 @@ class WorkersController {
                         console.log("Специалист не найден в Notion!", worker.chatId, i) 
                     }     
                     
-                    socket.emit("sendNotif", {
-                        task: 300,
-                        workers_update: Math.round((i+1)*100/workers.length),
-                        processUpdateD: true,
-                    }) 
 
                     if (i === (workers.length-1)) {
                         socket.emit("sendNotif", {
