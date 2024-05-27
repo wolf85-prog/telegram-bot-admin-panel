@@ -7,9 +7,6 @@ const databaseWorkerId = process.env.NOTION_DATABASE_WORKERS_ID
 //получить id блока заданной страницы по id
 module.exports = async function getWorkersNotion() {
     try {
-        const response = await notion.databases.query({
-            database_id: databaseWorkerId
-        });
 
         const responseResults = response.results.map((page) => {
             return {
@@ -19,8 +16,32 @@ module.exports = async function getWorkersNotion() {
             };
         });
 
-        //console.log(responseResults);
-        return responseResults;
+        let results = []
+
+        let data = await notion.databases.query({
+            database_id: databaseWorkerId
+        });
+
+        results = [...data.results]
+
+        while(data.has_more) {
+            data = await notion.databases.query({
+                database_id: databaseWorkerId,
+                start_cursor: data.next_cursor,
+            }); 
+
+            results = [...results, ...data.results];
+        }
+
+        const workers = results.map((worker) => {
+            return {
+               id: worker.id,
+               fio: worker.properties.Name.title[0]?.plain_text,
+               tgId: worker.properties.Telegram.number
+            };
+        });
+
+        return workers;
     } catch (error) {
         console.error(error.message)
     }
