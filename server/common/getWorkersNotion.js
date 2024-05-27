@@ -8,14 +8,6 @@ const databaseWorkerId = process.env.NOTION_DATABASE_WORKERS_ID
 module.exports = async function getWorkersNotion() {
     try {
 
-        const responseResults = response.results.map((page) => {
-            return {
-               id: page.id,
-               fio: page.properties.Name.title[0]?.plain_text,
-               tgId: page.properties.Telegram.number
-            };
-        });
-
         let results = []
 
         let data = await notion.databases.query({
