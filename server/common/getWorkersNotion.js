@@ -39,7 +39,8 @@ module.exports = async function getWorkersNotion() {
                merch: worker.properties.Merch.multi_select,
                comteg: worker.properties["КомТег"].multi_select,
                rank: worker.properties["Ранг"].number,
-               passport: worker.properties.Passport.rich_text[0]?.plain_text,                                         
+               passport: worker.properties.Passport.rich_text[0]?.plain_text,   
+               profile: page.properties["Профиль"].files[0]?.external.url,                                      
             };
         });
 
