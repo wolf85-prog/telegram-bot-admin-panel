@@ -186,11 +186,11 @@ const [dates222, setDates222] = useState([
 
   useEffect(() => {
     const fetchData = async () => {
-      let project = await getProjectId(projectId);
-      console.log('Текущий проект: ', project.properties.Name.title[0]?.plain_text)
+      //let project = await getProjectId(projectId);
+      //console.log('Текущий проект: ', project.properties.Name.title[0]?.plain_text)
       setShowLoader(false)
-      setProjectName(project.properties.Name.title[0]?.plain_text)
-
+      //setProjectName(project.properties.Name.title[0]?.plain_text)
+      setProjectName(labelName)
     }
       fetchData();
   },[])
