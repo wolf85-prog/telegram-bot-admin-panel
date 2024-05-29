@@ -40,7 +40,7 @@ module.exports = async function getWorkersNotion() {
                comteg: worker.properties["КомТег"].multi_select,
                rank: worker.properties["Ранг"].number,
                passport: worker.properties.Passport.rich_text[0]?.plain_text,   
-               profile: worker.properties["Профиль"].files[0]?.file.url,                                   
+               profile: worker.properties["Профиль"]?.files[0],                                   
             };
         });
 
