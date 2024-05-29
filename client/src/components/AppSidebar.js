@@ -119,6 +119,30 @@ const AppSidebar = () => {
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
       badge: countPretendent ? {color: 'info', text: countPretendent,} : "",
     },
+
+    {
+      component: CNavTitle,
+      name: '',
+    },
+
+    {
+      component: CNavItem,
+      name: 'Проекты',
+      to: 'https://www.notion.so/amusienko/0e317603bca24676ac25616243e10ab4?v=d61a947d60834e3eafcc2dba4b46cb96',
+      icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
+    },
+    {
+      component: CNavItem,
+      name: 'Специалисты',
+      to: 'https://www.notion.so/amusienko/b1b7c39c50a7497da828d7e568f062de?v=5f8ceffc7f7340f4ba5aa3739457f1e7',
+      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+    },
+    {
+      component: CNavItem,
+      name: 'Менеджеры',
+      to: 'https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893',
+      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+    },
   ]
 
   return (
