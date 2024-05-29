@@ -144,7 +144,7 @@ class WorkersController {
             const workersN = await getWorkersNotion()
 
             if (Object.keys(workersN).length !== 0) {
-               console.log("workersN: ", workersN.length) 
+               console.log("workersN: ", JSON.stringify(workersN)) 
             } else {
                 console.log("Ошибка получения данных из таблицы 'Специалисты' Notion!") 
             }         
@@ -155,13 +155,13 @@ class WorkersController {
                 let specArr = []
                 setTimeout(async()=> {  
                     //получить данные специалиста по его id
-                    const workerN = workersN.find((item)=> item.tgId === worker.chatId)
-                    console.log("workerN: ", workerN)
+                    const workerN = workersN.filter((item)=> item.tgId === worker.chatId)
+                    console.log("workerN: ", workerN[0])
             
-                    if (workerN) {
+                    if (workerN[0]) {
                        //console.log("worker: ", workersN)
                         //список специалистов
-                        workerN.spec.map((item) => {
+                        workerN[0].spec.map((item) => {
                             specData.map((category)=> {
                                 category.models.map((work)=> {
                                     if (work.name === item.name){
@@ -264,14 +264,14 @@ class WorkersController {
 
                         //обновить фио
                         const res = await Worker.update({ 
-                            userfamily: workerN?.fio.split(" ")[0],
-                            username: workerN?.fio.split(" ")[1],
-                            phone: workerN?.phone && workerN?.phone,
-                            dateborn: workerN.age?.start.split('-')[0],
-                            city: workerN.city && workerN.city,                    
+                            userfamily: workerN[0]?.fio.split(" ")[0],
+                            username: workerN[0]?.fio.split(" ")[1],
+                            phone: workerN[0]?.phone && workerN[0]?.phone,
+                            dateborn: workerN[0].age?.start.split('-')[0],
+                            city: workerN[0].city && workerN[0].city,                    
                             from: 'Notion',
-                            comment: workerN?.comment ? workerN?.comment : '',
-                            rank: workerN?.rank ? workerN?.rank : null,
+                            comment: workerN[0]?.comment ? workerN[0]?.comment : '',
+                            rank: workerN[0]?.rank ? workerN[0]?.rank : null,
                         },
                         { 
                             where: {chatId: worker.chatId} 
