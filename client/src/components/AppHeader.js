@@ -194,7 +194,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               placement="bottom"
             >
               <CNavLink href="https://www.notion.so/amusienko/dfed170e9f0242f8af156b8d175f038e?v=d6a54b36fb4b4e2487256a2f2578ecbc" style={{position: 'relative'}}>
-                <img src={Vopros} style={{width: '17px', paddingBottom: '6px'}}/>               
+                <img src={Vopros} style={{width: '20px', paddingBottom: '6px'}}/>               
               </CNavLink>
             </CTooltip>
           </CNavItem>
