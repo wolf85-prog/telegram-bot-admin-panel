@@ -33,6 +33,7 @@ import block18 from "./../assets/images/block18.png";
 import Trubka from "./../assets/images/trubka.gif";
 import Photo1 from "./../assets/images/photo_1.jpg";
 import Help from "./../assets/images/help.png";
+import Vopros from "./../assets/images/vopros.png";
 
 import { getUpdateWorkers, getUpdateAvatars } from './../http/adminAPI';
 
@@ -184,6 +185,18 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
             <CButton onClick={()=>setMutePress(!mutePress)} className={mutePress ? 'button-m' : ''} color="dark" style={{marginRight: '20px', background: 'red', fontSize: '7px', width: '23px', height: '23px', paddingRight: '0px', paddingLeft: '0px', marginTop: '-7px'}}>
               Mute
             </CButton>
+          </CNavItem>
+
+          {/* Помощь*/}
+          <CNavItem>
+            <CTooltip
+              content="Помощь"
+              placement="bottom"
+            >
+              <CNavLink href="https://www.notion.so/amusienko/dfed170e9f0242f8af156b8d175f038e?v=d6a54b36fb4b4e2487256a2f2578ecbc" style={{position: 'relative'}}>
+                <img src={Vopros} style={{width: '17px', paddingBottom: '6px'}}/>               
+              </CNavLink>
+            </CTooltip>
           </CNavItem>
 
           {/* Команды*/}
