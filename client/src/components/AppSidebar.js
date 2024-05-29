@@ -128,7 +128,7 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Проекты',
-      to: '../www.notion.so/amusienko/0e317603bca24676ac25616243e10ab4?v=d61a947d60834e3eafcc2dba4b46cb96',
+      to: '/www.notion.so/amusienko/0e317603bca24676ac25616243e10ab4?v=d61a947d60834e3eafcc2dba4b46cb96',
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
     },
     {
