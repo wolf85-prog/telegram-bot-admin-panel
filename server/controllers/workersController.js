@@ -144,7 +144,7 @@ class WorkersController {
             const workersN = await getWorkersNotion()
 
             if (Object.keys(workersN).length !== 0) {
-               console.log("workersN: ", JSON.stringify(workersN)) 
+               //console.log("workersN: ", JSON.stringify(workersN)) 
             } else {
                 console.log("Ошибка получения данных из таблицы 'Специалисты' Notion!") 
             }         
@@ -155,7 +155,7 @@ class WorkersController {
                 let specArr = []
                 setTimeout(async()=> {  
                     //получить данные специалиста по его id
-                    const workerN = workersN.filter((item)=> item.tgId === worker.chatId)
+                    const workerN = workersN.filter((item)=> item.tgId.toString() === worker.chatId)
                     console.log("workerN: ", workerN[0])
             
                     if (workerN[0]) {
