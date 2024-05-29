@@ -155,7 +155,7 @@ class WorkersController {
                 let specArr = []
                 setTimeout(async()=> {  
                     //получить данные специалиста по его id
-                    const workerN = workersN.filter((item)=> item.tgId.toString() === worker.chatId)
+                    const workerN = workersN.filter((item)=> item.tgId?.toString() === worker.chatId)
                     console.log("workerN: ", workerN[0])
             
                     if (workerN[0]) {
@@ -301,7 +301,7 @@ class WorkersController {
                         })  
                     }
 
-                }, 500 * ++i)   
+                }, 1000 * ++i)   
             })
         } catch (error) {
             console.log(error.message)
