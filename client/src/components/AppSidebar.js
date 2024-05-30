@@ -156,20 +156,20 @@ const AppSidebar = () => {
     {
       component: CNavLink,
       name: 'В эфире',
-      href: 'https://www.notion.so/amusienko/0e317603bca24676ac25616243e10ab4?v=d61a947d60834e3eafcc2dba4b46cb96',
+      href: 'https://www.notion.so/amusienko/On-Air-fc187957a95a4814ac365d6ce6188585',
       icon: <CIcon icon={cilMicrophone} customClassName="nav-icon" />,
       style: {backgroundColor: '#0078d421'},
     },
     {
       component: CNavLink,
       name: 'Telegram',
-      href: 'https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893',
+      href: 'https://t.me/ULEY_Assistant',
       icon: <CIcon icon={cilSend} customClassName="nav-icon" />,
     },
     {
       component: CNavLink,
       name: 'Площадки',
-      href: 'https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893',
+      href: 'https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
     },
   ]

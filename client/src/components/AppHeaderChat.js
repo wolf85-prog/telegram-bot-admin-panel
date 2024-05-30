@@ -286,36 +286,25 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                   style={{
                     backgroundColor: '#2a2f32', 
                     // width: '250px', 
-                    height: '80px', 
+                    height: '44px', 
                     position: 'absolute', 
                     top: '50px', 
                     right: '10px',
                     display: showBar ? 'flex' : 'none',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    borderRadius: '15px',
-                    padding: '15px',
+                    borderRadius: '10px',
+                    padding: '10px',
                   }}>
-                    <div style={{display: 'flex'}}> 
-                      <div className='dark-theme' style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '200px'}}>
-                            <div style={{marginRight: '20px', marginBottom: '12px', width:'100%', position: 'relative', textAlign: 'center'}}>
+                      <div className='dark-theme' style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '200px'}}>
+                            <div style={{marginBottom: '12px', width:'100%', position: 'relative', textAlign: 'center'}}>
                               <CProgress color="primery" height={10} value={workerUpdate}/>
                               <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>{workerUpdate}%</span>
                             </div>
-                            <div style={{marginRight: '20px', width:'100%', position: 'relative', textAlign: 'center'}}>
-                              <CProgress color="primery" height={10} value={avatarUpdate}></CProgress>
-                              <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>{avatarUpdate}%</span>
-                            </div>
+                            <CButton onClick={updateD} className={showUpdate ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
+                              Д
+                            </CButton>
                       </div>
-                      <div style={{display: 'flex', flexDirection: 'column'}}>
-                        <CButton onClick={updateD} className={showUpdate ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', marginBottom: '5px', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
-                          Д
-                        </CButton>
-                        <CButton onClick={updateA} className={showUpdate2 ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
-                          А
-                        </CButton>
-                      </div>
-                    </div>
               </div>
             </CNavLink>
               {/* <AppHeaderDropdown2 /> */}
