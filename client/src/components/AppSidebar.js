@@ -5,6 +5,8 @@ import {
   cilEnvelopeClosed,
   cilSpeedometer,
   cilPeople,
+  cilMicrophone,
+  cilSend,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavLink, CNavTitle } from '@coreui/react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -15,6 +17,7 @@ import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import CompIcon from 'src/assets/images/dashboard3.png'
+import ProjIcon from 'src/assets/images/projects.png'
 import { newPretendent, getCountMessage } from 'src/http/adminAPI'
 
 // sidebar nav config
@@ -128,19 +131,45 @@ const AppSidebar = () => {
     {
       component: CNavLink,
       name: 'Проекты',
-      to: 'https://www.notion.so/amusienko/0e317603bca24676ac25616243e10ab4?v=d61a947d60834e3eafcc2dba4b46cb96',
-      icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
+      href: 'https://www.notion.so/amusienko/0e317603bca24676ac25616243e10ab4?v=d61a947d60834e3eafcc2dba4b46cb96',
+      icon: <img src={ProjIcon} style={{width: '25px', marginRight: '18px', marginLeft: '4px'}} />,
+      style: {backgroundColor: '#0078d421'},
     },
     {
       component: CNavLink,
       name: 'Специалисты',
-      to: 'https://www.notion.so/amusienko/b1b7c39c50a7497da828d7e568f062de?v=5f8ceffc7f7340f4ba5aa3739457f1e7',
+      href: 'https://www.notion.so/amusienko/b1b7c39c50a7497da828d7e568f062de?v=5f8ceffc7f7340f4ba5aa3739457f1e7',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
     },
     {
       component: CNavLink,
       name: 'Менеджеры',
-      to: 'https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893',
+      href: 'https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893',
+      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+    },
+
+    {
+      component: CNavTitle,
+      name: '',
+    },
+
+    {
+      component: CNavLink,
+      name: 'В эфире',
+      href: 'https://www.notion.so/amusienko/0e317603bca24676ac25616243e10ab4?v=d61a947d60834e3eafcc2dba4b46cb96',
+      icon: <CIcon icon={cilMicrophone} customClassName="nav-icon" />,
+      style: {backgroundColor: '#0078d421'},
+    },
+    {
+      component: CNavLink,
+      name: 'Telegram',
+      href: 'https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893',
+      icon: <CIcon icon={cilSend} customClassName="nav-icon" />,
+    },
+    {
+      component: CNavLink,
+      name: 'Площадки',
+      href: 'https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
     },
   ]

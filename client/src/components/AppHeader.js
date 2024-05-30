@@ -33,7 +33,15 @@ import block18 from "./../assets/images/block18.png";
 import Trubka from "./../assets/images/trubka.gif";
 import Photo1 from "./../assets/images/photo_1.jpg";
 import Help from "./../assets/images/help.png";
+import Help2 from "./../assets/images/help2.png";
+import Next from "./../assets/images/next.png";
+import Next2 from "./../assets/images/next2.png";
 import Vopros from "./../assets/images/vopros.png";
+import Vopros2 from "./../assets/images/vopros2.png";
+import Error from "./../assets/images/error.png";
+import Error2 from "./../assets/images/error2.png";
+import Delete from "./../assets/images/cart.png";
+import Delete2 from "./../assets/images/cart2.png";
 
 import { getUpdateWorkers, getUpdateAvatars } from './../http/adminAPI';
 
@@ -187,14 +195,14 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
             </CButton>
           </CNavItem>
 
-          {/* Помощь*/}
+          {/* Инструкция*/}
           <CNavItem>
             <CTooltip
-              content="Помощь"
+              content="Инструкция"
               placement="bottom"
             >
               <CNavLink href="https://www.notion.so/amusienko/dfed170e9f0242f8af156b8d175f038e?v=d6a54b36fb4b4e2487256a2f2578ecbc" style={{position: 'relative'}}>
-                <img src={Vopros} style={{width: '17px', paddingBottom: '6px'}}/>               
+                <img src={Vopros} onMouseOver={e => (e.currentTarget.src = Vopros2)} onMouseOut={e => (e.currentTarget.src = Vopros)}  style={{width: '18px', paddingBottom: '5px'}}/>               
               </CNavLink>
             </CTooltip>
           </CNavItem>
@@ -206,7 +214,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               placement="bottom"
             >
               <CNavLink onClick={()=>setShowBarHelp(!showBarHelp)} style={{position: 'relative'}}>
-                <img src={Help} style={{width: '17px', paddingBottom: '6px'}}/>
+                <img src={Help} onMouseOver={e => (e.currentTarget.src = Help2)} onMouseOut={e => (e.currentTarget.src = Help)}  style={{width: '18px', paddingBottom: '5px'}}/>
                 <div
                   style={{
                     backgroundColor: '#2a2f32', 
@@ -459,6 +467,42 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                   />
                 </div>
             </div>
+          </CNavItem>
+
+          {/* Next*/}
+          <CNavItem>
+            <CTooltip
+              content="Next"
+              placement="bottom"
+            >
+              <CNavLink href="#" style={{position: 'relative'}}>
+                <img src={Next} onMouseOver={e => (e.currentTarget.src = Next2)} onMouseOut={e => (e.currentTarget.src = Next)}  style={{width: '18px', paddingBottom: '5px'}}/>               
+              </CNavLink>
+            </CTooltip>
+          </CNavItem>
+
+          {/* Корзина*/}
+          <CNavItem>
+            <CTooltip
+              content="Корзина"
+              placement="bottom"
+            >
+              <CNavLink href="#" style={{position: 'relative'}}>
+                <img src={Delete} onMouseOver={e => (e.currentTarget.src = Delete2)} onMouseOut={e => (e.currentTarget.src = Delete)} style={{width: '18px', paddingBottom: '5px'}}/>               
+              </CNavLink>
+            </CTooltip>
+          </CNavItem>
+
+          {/* Ошибки*/}
+          <CNavItem>
+            <CTooltip
+              content="Ошибки"
+              placement="bottom"
+            >
+              <CNavLink href="#" style={{position: 'relative'}}>
+                <img src={Error} onMouseOver={e => (e.currentTarget.src = Error2)} onMouseOut={e => (e.currentTarget.src = Error)}  style={{width: '18px', paddingBottom: '5px'}}/>               
+              </CNavLink>
+            </CTooltip>
           </CNavItem>
           
           {/* Звуки */}
