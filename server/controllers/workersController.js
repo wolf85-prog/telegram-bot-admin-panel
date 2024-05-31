@@ -155,10 +155,10 @@ class WorkersController {
                 let specArr = []
                 setTimeout(async()=> {  
                     //получить данные специалиста по его id
-                    console.log(worker.chatId, i)
-                if (worker.chatId === '805436270') {    
+                    //console.log(worker.chatId, i)
+                //if (worker.chatId === '805436270') {    
                     const workerN = workersN.filter((item)=> item.tgId?.toString() === worker.chatId)
-                    console.log("workerN: ", workerN[0])
+                    //console.log("workerN: ", workerN[0])
                 
                     if (workerN[0]) {
                        //console.log("worker: ", workersN)
@@ -339,7 +339,7 @@ class WorkersController {
                                             })
                 
                                             if (res) {
-                                                console.log("Специалиста аватар обновлен! ", i, url) 
+                                                console.log("Аватар обновлен! ", i, url) 
                                             }else {
                                                 console.log("Ошибка обновления! ", worker.chatId) 
                                             }
@@ -374,9 +374,9 @@ class WorkersController {
                             processUpdateD: true,
                         })  
                     }
-                }
+                //}
 
-                }, 500 * ++i)   
+                }, 6000 * ++i)   
             })
         } catch (error) {
             console.log(error.message)
