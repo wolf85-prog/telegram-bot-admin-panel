@@ -466,7 +466,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
           {/* Корзина*/}
           <CNavItem>
             <CTooltip
-              content="Удаленные проекты за 24 часа"
+              content="Удаленные проекты"
               placement="bottom"
             >
               <CNavLink href="#" style={{position: 'relative'}}>
