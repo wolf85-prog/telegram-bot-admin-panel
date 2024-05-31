@@ -155,9 +155,10 @@ class WorkersController {
                 let specArr = []
                 setTimeout(async()=> {  
                     //получить данные специалиста по его id
+                if (worker.chatId === '805436270') {    
                     const workerN = workersN.filter((item)=> item.tgId?.toString() === worker.chatId)
-                    //console.log("workerN: ", workerN[0])
-            
+                    console.log("workerN: ", workerN[0])
+                
                     if (workerN[0]) {
                        //console.log("worker: ", workersN)
                         //список специалистов
@@ -282,7 +283,6 @@ class WorkersController {
                             console.log("Ошибка обновления! ", worker.chatId, i) 
                         }
 
-
                         //обновление аватара
                         if (workerN[0].profile) {
                             console.log("avatar: ", workerN[0].profile.file.url, worker.id) 
@@ -373,6 +373,7 @@ class WorkersController {
                             processUpdateD: true,
                         })  
                     }
+                }
 
                 }, 7000 * ++i)   
             })

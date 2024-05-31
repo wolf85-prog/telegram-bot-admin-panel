@@ -461,7 +461,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
           {/* Next*/}
           <CNavItem>
             <CTooltip
-              content="Next"
+              content="10 ближайших проектов"
               placement="bottom"
             >
               <CNavLink href="#" style={{position: 'relative'}}>
@@ -473,7 +473,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
           {/* Корзина*/}
           <CNavItem>
             <CTooltip
-              content="Корзина"
+              content="Удаленные проекты за 24 часа"
               placement="bottom"
             >
               <CNavLink href="#" style={{position: 'relative'}}>
@@ -485,7 +485,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
           {/* Ошибки*/}
           <CNavItem>
             <CTooltip
-              content="Ошибки"
+              content="Ошибки в проектах"
               placement="bottom"
             >
               <CNavLink href="#" style={{position: 'relative'}}>
@@ -497,7 +497,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
           {/* Звуки */}
           <CNavItem>
             <CTooltip
-              content="Звуки"
+              content="Звуковые уведомления"
               placement="bottom"
             >
               <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
