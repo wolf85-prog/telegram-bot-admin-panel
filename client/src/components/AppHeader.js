@@ -303,7 +303,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                     padding: '10px',
                   }}>
                       <div className='dark-theme' style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '200px'}}>
-                            <div style={{marginBottom: '12px', width:'100%', position: 'relative', textAlign: 'center'}}>
+                            <div style={{width:'100%', position: 'relative', textAlign: 'center'}}>
                               <CProgress color="primery" height={10} value={workerUpdate}/>
                               <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>{workerUpdate}%</span>
                             </div>

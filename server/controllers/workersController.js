@@ -155,6 +155,7 @@ class WorkersController {
                 let specArr = []
                 setTimeout(async()=> {  
                     //получить данные специалиста по его id
+                    console.log(worker.chatId, i)
                 if (worker.chatId === '805436270') {    
                     const workerN = workersN.filter((item)=> item.tgId?.toString() === worker.chatId)
                     console.log("workerN: ", workerN[0])
