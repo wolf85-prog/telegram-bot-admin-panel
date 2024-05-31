@@ -293,7 +293,7 @@ class WorkersController {
                                 const currentDate = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}T${date.getHours()}:${date.getMinutes()}`
                                 const directory = "/var/www/proj.uley.team/avatars";
 
-                                if (spec[0].image) {  
+                                if (workerN[0].profile.file.url) {  
                                     //найти старое фото
                                     var fileName = worker.chatId; 
                                     fs.readdir(directory, function(err,list){
@@ -320,7 +320,7 @@ class WorkersController {
                                         console.log(`Image height is ${height}`);
                                     });
                                     
-                                    const request = https.get(spec[0].image, function(response) {
+                                    const request = https.get(workerN[0].profile.file.url, function(response) {
                                         response.pipe(transformer).pipe(file);
                 
                                         // after download completed close filestream
