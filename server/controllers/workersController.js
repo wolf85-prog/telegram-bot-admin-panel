@@ -376,7 +376,7 @@ class WorkersController {
                     }
                 }
 
-                }, 7000 * ++i)   
+                }, 500 * ++i)   
             })
         } catch (error) {
             console.log(error.message)
