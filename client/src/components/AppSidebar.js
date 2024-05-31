@@ -18,6 +18,7 @@ import 'simplebar/dist/simplebar.min.css'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import CompIcon from 'src/assets/images/dashboard3.png'
 import ProjIcon from 'src/assets/images/projects.png'
+import ChatIcon from 'src/assets/images/chat.png'
 import { newPretendent, getCountMessage } from 'src/http/adminAPI'
 
 // sidebar nav config
@@ -70,7 +71,7 @@ const AppSidebar = () => {
       component: CNavItem,
       name: 'Менеджеры',
       to: '/chat2',
-      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      icon: <img src={ChatIcon} style={{width: '24px', marginRight: '18px', marginLeft: '4px'}} />,
       badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
       style: {backgroundColor: '#0078d421'},
     },
@@ -111,7 +112,7 @@ const AppSidebar = () => {
       component: CNavItem,
       name: 'Специалисты',
       to: '/chatwork',
-      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      icon: <img src={ChatIcon} style={{width: '24px', marginRight: '18px', marginLeft: '4px'}} />,
       badge: countMessageWork !== '0' ? {color: 'info', text: countMessageWork,} : "",
       style: {backgroundColor: '#0078d421'},
     },
