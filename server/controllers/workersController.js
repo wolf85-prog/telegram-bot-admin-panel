@@ -117,7 +117,9 @@ class WorkersController {
             return res.status(500).json(error.message);
         }
     }
-
+//------------------------------------------------------------
+//        обновление аватарок
+//------------------------------------------------------------
     async updateWorkers(req, res) {
         console.log("Start update")
 
@@ -349,7 +351,7 @@ class WorkersController {
                                     console.log("Аватар не читается! ", worker.chatId, i) 
                                 }
                             } catch (err) {
-                                console.error(err);
+                                console.error(err, new Date().toLocaleDateString());
                             }
                                 
                         } else {
@@ -379,168 +381,8 @@ class WorkersController {
                 }, 6000 * ++i)   
             })
         } catch (error) {
+            console.log(new Date().toLocaleDateString())
             console.log(error.message)
-        }
-    }
-
-    //UPDATE AVATAR
-    async updateWorkersAvatar(req, res) {
-        console.log("Start update avatar")
-
-        // Подключаемся к серверу socket
-        let socket = io(socketUrl);
-
-        socket.emit("sendNotif", {
-            task: 301,
-            avatar_update: 0,
-            processUpdateA: true,
-        }) 
-
-        const directory = "/var/www/proj.uley.team/avatars";
-        // //очистить директорию
-        // fs.readdir(directory, (err, files) => {
-        // if (err) throw err;
-
-        // console.log("Начинаю удаление аватарок...")
-        // for (const file of files) {
-        //     fs.unlink(path.join(directory, file), (err) => {
-        //     if (err) throw err;
-        //     });
-        // }
-        // });
-
-
-        try {
-            console.log("START GET WORKERS ALL...")
-            const workers = await Worker.findAll({
-                order: [
-                    ['id', 'DESC'], //DESC, ASC
-                ],
-            })
-            console.log("workers: ", workers.length) 
-
-            //получить всех специалистов из ноушен
-            const workersN = await getWorkersNotion()
-
-            if (Object.keys(workersN).length !== 0) {
-               console.log("workersN: ", workersN.length) 
-            } else {
-                console.log("Ошибка получения данных из таблицы 'Специалисты' Notion!") 
-            }   
-            
-            //2
-            workers.map(async(worker, i)=> {
-                let specArr = []
-                setTimeout(async()=> {  
-                    //получить данные специалиста по его id
-                    const workerN = workersN.find((item)=> item.tgId === worker.chatId)
-                    console.log("workerN: ", workerN)
-
-                    if (workerN) {                       
-                        //получить аватарку
-                        const response = await notion.blocks.children.list({
-                            block_id: workerN?.id,
-                        });
-
-                        const spec = response.results.map((page) => {
-                            return {
-                                id: page.id,
-                                image: page.image ? (page.image?.file ? page.image?.file.url : page.image.external.url) : null,
-                            };
-                        });
-                        if (spec.length > 0) {
-                            console.log("avatar: ", spec[0].image, worker.id) 
-
-                                try {
-                                    //сохранить фото на сервере
-                                    const date = new Date()
-                                    const currentDate = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}T${date.getHours()}:${date.getMinutes()}`
-
-                                    if (spec[0].image) {  
-                                        //найти старое фото
-                                        var fileName = worker.chatId; 
-                                        fs.readdir(directory, function(err,list){
-                                            if(err) throw err;
-                                            for(var i=0; i<list.length; i++)
-                                            {
-                                                if(list[i].includes(fileName))
-                                                {
-                                                    //удалить найденный файл (синхронно)
-                                                    fs.unlinkSync(path.join(directory, list[i]), (err) => {
-                                                        if (err) throw err;
-                                                        console.log("Файл удален!")
-                                                    });
-                                                }
-                                            }
-                                        });
-
-                                        //сохранить новое фото
-                                        const file = fs.createWriteStream('/var/www/proj.uley.team/avatars/avatar_' + worker.chatId + '_' + currentDate + '.jpg');
-                                        
-                                        const transformer = sharp()
-                                        .resize(500)
-                                        .on('info', ({ height }) => {
-                                            console.log(`Image height is ${height}`);
-                                        });
-                                        
-                                        const request = https.get(spec[0].image, function(response) {
-                                            response.pipe(transformer).pipe(file);
-                    
-                                            // after download completed close filestream
-                                            file.on("finish", async() => {
-                                                file.close();
-                                                console.log("Download Completed");
-
-                                                const url = `${host}/avatars/avatar_` + worker.chatId + '_' + currentDate + '.jpg'
-                    
-                                                //обновить бд
-                                                const res = await Worker.update({ 
-                                                    avatar: url,
-                                                },
-                                                { 
-                                                    where: {chatId: worker.chatId} 
-                                                })
-                    
-                                                if (res) {
-                                                    console.log("Специалиста аватар обновлен! ", i, url) 
-                                                }else {
-                                                    console.log("Ошибка обновления! ", worker.chatId) 
-                                                }
-                                            });
-                                        });
-                                    } else {
-                                        console.log("Аватар не читается! ", worker.chatId, i) 
-                                    }
-                                } catch (err) {
-                                    console.error(err);
-                                }
-                        } else {
-                            console.log("Аватар не найден в Notion!", worker.chatId, i) 
-                        }   
-                        
-                    } else {
-                        console.log("Специалист не найден в Notion!", worker.chatId, i) 
-                    }      
-                    
-
-                    if (i === (workers.length-1)) {
-                        socket.emit("sendNotif", {
-                            task: 301,
-                            avatar_update: Math.round((i+1)*100/workers.length),
-                            processUpdateA: false,
-                        })  
-                    } else {
-                        socket.emit("sendNotif", {
-                            task: 301,
-                            avatar_update: Math.round((i+1)*100/workers.length),
-                            processUpdateA: true,
-                        })  
-                    }
-
-                }, 7000 * ++i) //1206000 * ++i)   
-            })   
-        } catch (error) {
-            
         }
     }
 
