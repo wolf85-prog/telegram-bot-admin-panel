@@ -148,17 +148,17 @@ class WorkersController {
             //const workersN = await getWorkersNotion()
 
             //получить 100 специалистов из ноушен
-            const workersN = await getWorkersNotion100s()
+            //const workersN = await getWorkersNotion100s()
 
             //получить 100 специалистов из ноушен
             //const workers1 = await getWorkersNotion100(workers0.cursor)
 
 
-            if (Object.keys(workersN).length !== 0) {
-               console.log("workersN: ", workersN.length) 
-            } else {
-                console.log("Ошибка получения данных из таблицы 'Специалисты' Notion!") 
-            }         
+            // if (Object.keys(workersN).length !== 0) {
+            //    console.log("workersN: ", workersN.length) 
+            // } else {
+            //     console.log("Ошибка получения данных из таблицы 'Специалисты' Notion!") 
+            // }         
 
             // 1
             console.log("START UPDATE WORKERS")
