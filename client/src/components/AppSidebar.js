@@ -41,6 +41,11 @@ const AppSidebar = () => {
   //   setCount(res.pretendents)
   //   setCountMesW(res.workers)
   // },[countMessage, newProject, countMessageWork, countPretendent])
+
+  const handleLinkClick = (url) => {
+    // Open the link in a new tab with desired features (optional)
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
   
   let navigation = []
 
@@ -85,8 +90,9 @@ const AppSidebar = () => {
     {
       component: CNavLink,
       name: 'Профиль',
-      href: 'https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893',
+      //href: 'https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893'),
     },
     {
       component: CNavItem,
@@ -125,8 +131,9 @@ const AppSidebar = () => {
     {
       component: CNavLink,
       name: 'Профиль',
-      href: 'https://www.notion.so/amusienko/b1b7c39c50a7497da828d7e568f062de?v=5f8ceffc7f7340f4ba5aa3739457f1e7',
+      //href: 'https://www.notion.so/amusienko/b1b7c39c50a7497da828d7e568f062de?v=5f8ceffc7f7340f4ba5aa3739457f1e7',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/b1b7c39c50a7497da828d7e568f062de?v=5f8ceffc7f7340f4ba5aa3739457f1e7'),
     },
     {
       component: CNavItem,
@@ -144,27 +151,31 @@ const AppSidebar = () => {
     {
       component: CNavLink,
       name: 'Проекты',
-      href: 'https://www.notion.so/amusienko/0e317603bca24676ac25616243e10ab4?v=d61a947d60834e3eafcc2dba4b46cb96',
+      // href: 'https://www.notion.so/amusienko/0e317603bca24676ac25616243e10ab4?v=d61a947d60834e3eafcc2dba4b46cb96',
       icon: <img src={ProjIcon} style={{width: '25px', marginRight: '18px', marginLeft: '4px'}} />,
       style: {backgroundColor: '#0078d421'},
+      onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/0e317603bca24676ac25616243e10ab4?v=d61a947d60834e3eafcc2dba4b46cb96'),
     },
     {
       component: CNavLink,
       name: 'В эфире',
-      href: 'https://www.notion.so/amusienko/On-Air-fc187957a95a4814ac365d6ce6188585',
+      //href: 'https://www.notion.so/amusienko/On-Air-fc187957a95a4814ac365d6ce6188585',
       icon: <CIcon icon={cilMicrophone} customClassName="nav-icon" />,
+      onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/On-Air-fc187957a95a4814ac365d6ce6188585'),
     },
     {
       component: CNavLink,
       name: 'Площадки',
-      href: 'https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be',
+      //href: 'https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be'),
     },
     {
       component: CNavLink,
       name: 'Telegram',
-      href: 'https://t.me/ULEY_Assistant',
+      //href: 'https://t.me/ULEY_Assistant',
       icon: <CIcon icon={cilSend} customClassName="nav-icon" />,
+      onClick: ()=>handleLinkClick('https://t.me/ULEY_Assistant'),
     },
     
   ]
