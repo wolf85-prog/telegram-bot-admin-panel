@@ -148,36 +148,36 @@ class WorkersController {
             //const workersN = await getWorkersNotion()
 
             //получить 100 специалистов из ноушен
-            //const workersN = await getWorkersNotion100s()
+            const workersN = await getWorkersNotion100s()
 
             //получить 100 специалистов из ноушен
             //const workers1 = await getWorkersNotion100(workers0.cursor)
 
 
-            // if (Object.keys(workersN).length !== 0) {
-            //    console.log("workersN: ", workersN.length) 
-            // } else {
-            //     console.log("Ошибка получения данных из таблицы 'Специалисты' Notion!") 
-            // }         
+            if (Object.keys(workersN).length !== 0) {
+               console.log("workersN: ", workersN.length) 
+            } else {
+                console.log("Ошибка получения данных из таблицы 'Специалисты' Notion!") 
+            }         
 
             // 1
             console.log("START UPDATE WORKERS")
             
             
-            // workersN.map(async(worker, i) => {
-            //     //получить данные специалиста по его id  
-            //     const workerApp = workers.find((item)=> item.chatId === worker.tgId.toString())
+            workersN.map(async(worker, i) => {
+                //получить данные специалиста по его id  
+                const workerApp = workers.find((item)=> item.chatId === worker.tgId.toString())
 
-            //     setTimeout(async()=> {  
-            //         console.log(i)
+                setTimeout(async()=> {  
+                    console.log(i)
 
-            //         if (i === 99) {
-            //             //получить следующие 100 специалистов из ноушен
-            //             const workers1 = await getWorkersNotion100(workersN.cursor)
-            //             console.log(JSON.stringify(workers1))
-            //         }
-            //     }, 1000)
-            // })
+                    if (i === 99) {
+                        //получить следующие 100 специалистов из ноушен
+                        const workers1 = await getWorkersNotion100(workersN.cursor)
+                        console.log(JSON.stringify(workers1))
+                    }
+                }, 1000)
+            })
 
             
             
