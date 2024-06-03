@@ -218,7 +218,7 @@ class WorkersController {
                         }]
                     });
             
-                    const workerN = response.results.map((page) => {
+                    const workerN = response.results.map((worker) => {
                         return {
                             id: worker.id,
                             fio: worker.properties.Name.title[0]?.plain_text,

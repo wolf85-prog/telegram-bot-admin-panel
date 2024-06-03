@@ -1198,7 +1198,7 @@ const fetchAdminSpec = (data) => {
 	setUserWorkers((userWorkers) => {
 		const { senderId, receiverId, text, type, buttons, messageId, isBot } = data;
 
-		//console.log("is_bot: ", isBot)
+		console.log("userWorkers: ", userWorkers)
 
 		let userIndex = userWorkers.findIndex((user) => user.chatId === receiverId.toString());
 		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
