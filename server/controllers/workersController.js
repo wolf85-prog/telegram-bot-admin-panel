@@ -155,7 +155,7 @@ class WorkersController {
 
 
             if (Object.keys(workersN).length !== 0) {
-               console.log("workersN: ", workersN.length) 
+               console.log("workersN: ", workersN.workers.length) 
             } else {
                 console.log("Ошибка получения данных из таблицы 'Специалисты' Notion!") 
             }         
@@ -164,7 +164,7 @@ class WorkersController {
             console.log("START UPDATE WORKERS")
             
             
-            workersN.map(async(worker, i) => {
+            workersN.workers.map(async(worker, i) => {
                 //получить данные специалиста по его id  
                 const workerApp = workers.find((item)=> item.chatId === worker.tgId.toString())
 
