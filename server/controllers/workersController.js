@@ -191,7 +191,7 @@ class WorkersController {
                     //         }
                     //     })
                     // }
-                }, 6000)
+                }, 6000 * ++i)
             })
 
             
