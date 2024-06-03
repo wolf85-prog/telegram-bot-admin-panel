@@ -165,19 +165,28 @@ class WorkersController {
             
             
             workersN.workers.map(async(worker, i) => {
-                //получить данные специалиста по его id  
-                const workerApp = workers.find((item)=> item.chatId === worker.tgId?.toString())
-                console.log(workerApp)
+                
 
                 setTimeout(async()=> {  
-                    console.log(i)
+                    //console.log(i)
+
+                    //получить данные специалиста по его id  
+                    const workerApp = workers.find((item)=> item.chatId === worker.tgId?.toString())
+                    console.log(workerApp)
 
                     if (i === 99) {
                         //получить следующие 100 специалистов из ноушен
                         const workers1 = await getWorkersNotion100(workersN.cursor)
                         console.log("Получил следующие 100")
+
+                        workers1.workers.map(async(worker, i2) => {
+                            if (i2 === 99 && workers1.more) {
+                                const workers2 = await getWorkersNotion100(workers1.cursor)
+                                console.log("Получил 200")
+                            }
+                        })
                     }
-                }, 1000)
+                }, 2000)
             })
 
             
