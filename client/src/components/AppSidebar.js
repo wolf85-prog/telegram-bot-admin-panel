@@ -93,6 +93,7 @@ const AppSidebar = () => {
       //href: 'https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893'),
+      style: {cursor: 'pointer'},
     },
     {
       component: CNavItem,
@@ -134,6 +135,7 @@ const AppSidebar = () => {
       //href: 'https://www.notion.so/amusienko/b1b7c39c50a7497da828d7e568f062de?v=5f8ceffc7f7340f4ba5aa3739457f1e7',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/b1b7c39c50a7497da828d7e568f062de?v=5f8ceffc7f7340f4ba5aa3739457f1e7'),
+      style: {cursor: 'pointer'},
     },
     {
       component: CNavItem,
@@ -153,7 +155,7 @@ const AppSidebar = () => {
       name: 'Проекты',
       // href: 'https://www.notion.so/amusienko/0e317603bca24676ac25616243e10ab4?v=d61a947d60834e3eafcc2dba4b46cb96',
       icon: <img src={ProjIcon} style={{width: '25px', marginRight: '18px', marginLeft: '4px'}} />,
-      style: {backgroundColor: '#0078d421'},
+      style: {backgroundColor: '#0078d421', cursor: 'pointer'},
       onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/0e317603bca24676ac25616243e10ab4?v=d61a947d60834e3eafcc2dba4b46cb96'),
     },
     {
@@ -162,6 +164,7 @@ const AppSidebar = () => {
       //href: 'https://www.notion.so/amusienko/On-Air-fc187957a95a4814ac365d6ce6188585',
       icon: <CIcon icon={cilMicrophone} customClassName="nav-icon" />,
       onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/On-Air-fc187957a95a4814ac365d6ce6188585'),
+      style: {cursor: 'pointer'},
     },
     {
       component: CNavLink,
@@ -169,6 +172,7 @@ const AppSidebar = () => {
       //href: 'https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be'),
+      style: {cursor: 'pointer'},
     },
     {
       component: CNavLink,
@@ -176,6 +180,7 @@ const AppSidebar = () => {
       //href: 'https://t.me/ULEY_Assistant',
       icon: <CIcon icon={cilSend} customClassName="nav-icon" />,
       onClick: ()=>handleLinkClick('https://t.me/ULEY_Assistant'),
+      style: {cursor: 'pointer'},
     },
     
   ]
