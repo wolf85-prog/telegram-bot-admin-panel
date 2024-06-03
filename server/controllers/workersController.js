@@ -166,7 +166,8 @@ class WorkersController {
             
             workersN.workers.map(async(worker, i) => {
                 //получить данные специалиста по его id  
-                const workerApp = workers.find((item)=> item.chatId === worker.tgId.toString())
+                const workerApp = workers.find((item)=> item.chatId === worker.tgId?.toString())
+                console.log(workerApp)
 
                 setTimeout(async()=> {  
                     console.log(i)
@@ -174,7 +175,7 @@ class WorkersController {
                     if (i === 99) {
                         //получить следующие 100 специалистов из ноушен
                         const workers1 = await getWorkersNotion100(workersN.cursor)
-                        console.log(JSON.stringify(workers1))
+                        console.log("Получил следующие 100")
                     }
                 }, 1000)
             })
