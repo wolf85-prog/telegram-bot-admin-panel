@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const {Worker} = require('../models/workers')
 const https = require('https');
 const fs = require('fs');
 const path = require('path')
