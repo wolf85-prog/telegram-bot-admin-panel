@@ -182,6 +182,8 @@ class WorkersController {
                     setTimeout(async()=> {             
                         //if (workersN && workersN.length > 0) {
 
+                            const workerN = workersN.filter((item)=> item.tgId?.toString() === worker.chatId)
+
                             //список специалистов
                             workersN[0].spec.map((item) => {
                                 specData.map((category)=> {
@@ -281,19 +283,19 @@ class WorkersController {
                                 console.log("Список специальностей (нет) обновлен! ", worker.chatId, i) 
                             }
                                 
-                            console.log("ФИО: ", worker.id, workersN[0]?.fio, i)
+                            console.log("ФИО: ", worker.id, workerN[0]?.fio, i)
                             
 
                             //обновить фио
                             const res = await Worker.update({ 
-                                userfamily: workersN[0]?.fio.split(" ")[0],
-                                username: workersN[0]?.fio.split(" ")[1],
-                                phone: workersN[0]?.phone && workersN[0]?.phone,
-                                dateborn: workersN[0].age?.start.split('-')[0],
-                                city: workersN[0].city && workersN[0].city,                    
+                                userfamily: workerN[0]?.fio.split(" ")[0],
+                                username: workerN[0]?.fio.split(" ")[1],
+                                phone: workerN[0]?.phone && workerN[0]?.phone,
+                                dateborn: workerN[0].age?.start.split('-')[0],
+                                city: workerN[0].city && workerN[0].city,                    
                                 from: 'Notion',
-                                comment: workersN[0]?.comment ? workersN[0]?.comment : '',
-                                rank: workersN[0]?.rank ? workersN[0]?.rank : null,
+                                comment: workerN[0]?.comment ? workerN[0]?.comment : '',
+                                rank: workerN[0]?.rank ? workerN[0]?.rank : null,
                             },
                             { 
                                 where: {chatId: worker.chatId} 
@@ -329,40 +331,6 @@ class WorkersController {
             } else {
                 console.log("Ошибка получения данных из таблицы 'Специалисты' Notion!") 
             }         
-
-            // // 1
-            // console.log("START UPDATE WORKERS")
-            
-            // //while (workersN.more)
-            // workersN.workers.map(async(worker, i) => {        
-            //     setTimeout(async()=> {  
-
-            //         //получить данные специалиста по его id  
-            //         const workerApp = workers.find((item)=> item.chatId === worker.tgId?.toString())
-            //         console.log(workerApp.dataValues.id)
-
-            //         if (workerApp.dataValues.id) {
-            //             const profile = worker.profile
-            //             console.log("profile: ", profile)
-
-            //             //обновить аватар
-            //             updateAvatar(profile, workerApp.dataValues)
-            //         }             
-
-            //         if (i === 99) {
-            //             //получить следующие 100 специалистов из ноушен
-            //             const workers1 = await getWorkersNotion100(workersN.cursor)
-            //             console.log("Получил следующие 100")
-
-            //             workers1.workers.map(async(worker, j) => {
-            //                 if (j === 99 && workers1.more) {
-            //                     const workers2 = await getWorkersNotion100(workers1.cursor)
-            //                     console.log("Получил 200")
-            //                 }
-            //             })
-            //         }
-            //     }, 6000 * ++i)
-            // })
 
         } catch (error) {
             console.log(new Date().toLocaleDateString())
