@@ -6,17 +6,17 @@ const path = require('path')
 const sharp = require('sharp');
 
 //получить id блока заданной страницы по id
-module.exports = async function updateAvatar(profile, worker) {
+module.exports = async function updateAvatar(avatar, worker) {
     //обновление аватара
-    if (profile) {
-        console.log("avatar: ", profile.file.url, worker.id) 
+    if (avatar) {
+        console.log("avatar: ", avatar, worker.id) 
         try {
             //сохранить фото на сервере
             const date = new Date()
             const currentDate = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}T${date.getHours()}:${date.getMinutes()}`
             const directory = "/var/www/proj.uley.team/avatars";
 
-            if (profile.file.url) {  
+            //if (avatar) {  
                 //найти старое фото
                 var fileName = worker.chatId; 
                 fs.readdir(directory, function(err,list){
@@ -43,7 +43,7 @@ module.exports = async function updateAvatar(profile, worker) {
                     console.log(`Image height is ${height}`);
                 });
                 
-                const request = https.get(profile.file.url, function(response) {
+                const request = https.get(avatar, function(response) {
                     response.pipe(transformer).pipe(file);
 
                     // after download completed close filestream
@@ -68,9 +68,9 @@ module.exports = async function updateAvatar(profile, worker) {
                         }
                     });
                 });
-            } else {
-                console.log("Аватар не читается! ", worker.chatId, i) 
-            }
+            // } else {
+            //     console.log("Аватар не читается! ", worker.chatId, i) 
+            // }
         } catch (err) {
             console.error(err, new Date().toLocaleDateString());
         }

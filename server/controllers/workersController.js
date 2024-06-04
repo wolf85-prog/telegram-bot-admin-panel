@@ -160,6 +160,15 @@ class WorkersController {
             if (workersN.length > 0) {
                 const workersProf = workersN.filter((item)=> item.profile && item.profile !== null)
                 console.log("workersProf: ", workersProf.length) 
+
+                //обновить аватар
+                workersProf.map((worker)=>{
+                    const workerApp = workers.find((item)=> item.chatId === worker.tgId?.toString())
+                    const avatar = worker.profile ? (worker.profile?.file ? worker.profile?.file.url : worker.profile?.external.url) : null
+                    
+                    updateAvatar(avatar, workerApp.dataValues)
+                })
+                
             } else {
                 console.log("Ошибка получения данных из таблицы 'Специалисты' Notion!") 
             }         
