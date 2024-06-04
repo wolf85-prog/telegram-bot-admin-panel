@@ -65,21 +65,21 @@ module.exports = async function updateAvatar(avatar, worker) {
                         })
 
                         if (res) {
-                            console.log("Аватар обновлен! ", i, url) 
+                            console.log("Аватар обновлен! ", url) 
                         }else {
                             console.log("Ошибка обновления! ", worker.chatId) 
                         }
                     });
                 });
             // } else {
-            //     console.log("Аватар не читается! ", worker.chatId, i) 
+            //     console.log("Аватар не читается! ", worker.chatId) 
             // }
         } catch (err) {
             console.error(err, new Date().toLocaleDateString());
         }
             
     } else {
-        console.log("Аватар не найден в Notion!", worker.chatId, i) 
+        console.log("Аватар не найден в Notion!", worker.chatId) 
     }
                         
 }
