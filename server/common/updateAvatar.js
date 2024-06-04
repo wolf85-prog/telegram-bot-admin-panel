@@ -5,6 +5,8 @@ const fs = require('fs');
 const path = require('path')
 const sharp = require('sharp');
 
+const host = process.env.HOST
+
 //получить id блока заданной страницы по id
 module.exports = async function updateAvatar(avatar, worker) {
     //обновление аватара
