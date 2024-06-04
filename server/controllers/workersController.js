@@ -164,9 +164,11 @@ class WorkersController {
                 //обновить аватар
                 workersProf.map((worker)=>{
                     const workerApp = workers.find((item)=> item.chatId === worker.tgId?.toString())
+                    console.log("workerApp: ", workerApp)
                     const avatar = worker.profile ? (worker.profile?.file ? worker.profile?.file.url : worker.profile?.external.url) : null
+                    console.log("avatar: ", avatar)
                     
-                    updateAvatar(avatar, workerApp.dataValues)
+                    //updateAvatar(avatar, workerApp.dataValues)
                 })
                 
             } else {
