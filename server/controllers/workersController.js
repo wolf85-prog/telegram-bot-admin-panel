@@ -179,13 +179,12 @@ class WorkersController {
                 console.log("ОБНОВЛЕНИЕ ДАННЫХ СПЕЦИАЛИСТОВ")
                 workers.map(async(worker, i)=> {
                     let specArr = []
-                    setTimeout(async()=> {             
-                        //if (workersN && workersN.length > 0) {
-
-                            const workerN = workersN.filter((item)=> item.tgId?.toString() === worker.chatId)
-
+                    setTimeout(async()=> {     
+                        const workerN = workersN.filter((item)=> item.tgId?.toString() === worker.chatId)        
+                        
+                        if (workerN && workerN.length > 0) {
                             //список специалистов
-                            workersN[0].spec.map((item) => {
+                            workerN[0].spec.map((item) => {
                                 specData.map((category)=> {
                                     category.models.map((work)=> {
                                         if (work.name === item.name){
@@ -306,9 +305,9 @@ class WorkersController {
                                 console.log("Ошибка обновления! ", worker.chatId, i) 
                             }
                             
-                        // } else {
-                        //     console.log("Специалист не найден в Notion!", worker.chatId, i) 
-                        // }     
+                        } else {
+                            console.log("Специалист не найден в Notion!", worker.chatId, i) 
+                        }     
                         
 
                         if (i === (workers.length-1)) {
