@@ -9,7 +9,7 @@ const sharp = require('sharp');
 module.exports = async function updateAvatar(avatar, worker) {
     //обновление аватара
     if (avatar) {
-        console.log("avatar: ", avatar, worker.id) 
+        console.log("UPDATE avatar: ", avatar, worker.id) 
         try {
             //сохранить фото на сервере
             const date = new Date()
@@ -17,6 +17,7 @@ module.exports = async function updateAvatar(avatar, worker) {
             const directory = "/var/www/proj.uley.team/avatars";
 
             //if (avatar) {  
+
                 //найти старое фото
                 var fileName = worker.chatId; 
                 fs.readdir(directory, function(err,list){
