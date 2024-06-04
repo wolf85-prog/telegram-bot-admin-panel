@@ -286,14 +286,14 @@ class WorkersController {
 
                             //обновить фио
                             const res = await Worker.update({ 
-                                userfamily: workerN[0]?.fio.split(" ")[0],
-                                username: workerN[0]?.fio.split(" ")[1],
-                                phone: workerN[0]?.phone && workerN[0]?.phone,
-                                dateborn: workerN[0].age?.start.split('-')[0],
-                                city: workerN[0].city && workerN[0].city,                    
+                                userfamily: workersN[0]?.fio.split(" ")[0],
+                                username: workersN[0]?.fio.split(" ")[1],
+                                phone: workersN[0]?.phone && workersN[0]?.phone,
+                                dateborn: workersN[0].age?.start.split('-')[0],
+                                city: workersN[0].city && workersN[0].city,                    
                                 from: 'Notion',
-                                comment: workerN[0]?.comment ? workerN[0]?.comment : '',
-                                rank: workerN[0]?.rank ? workerN[0]?.rank : null,
+                                comment: workersN[0]?.comment ? workersN[0]?.comment : '',
+                                rank: workersN[0]?.rank ? workersN[0]?.rank : null,
                             },
                             { 
                                 where: {chatId: worker.chatId} 
