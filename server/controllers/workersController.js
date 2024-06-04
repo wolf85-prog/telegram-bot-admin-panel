@@ -149,15 +149,20 @@ class WorkersController {
             })
             console.log("workers: ", workers.length)  
 
-            //получить 100 специалистов из ноушен
-            // const workersN = await getWorkersNotion100s()
+            //получить всех специалистов из ноушен
+            const workersN = await getWorkersNotion()
+            console.log("workersN: ", workersN.length)  
+
+             
 
 
-            // if (Object.keys(workersN).length !== 0) {
-            //    console.log("workersN: ", workersN.workers.length) 
-            // } else {
-            //     console.log("Ошибка получения данных из таблицы 'Специалисты' Notion!") 
-            // }         
+            //if (Object.keys(workersN).length !== 0) {
+            if (workersN.length > 0) {
+                const workersProf = workersN.filter((item)=> item.profile && item.profile !== null)
+                console.log("workersProf: ", workersProf.length) 
+            } else {
+                console.log("Ошибка получения данных из таблицы 'Специалисты' Notion!") 
+            }         
 
             // // 1
             // console.log("START UPDATE WORKERS")
