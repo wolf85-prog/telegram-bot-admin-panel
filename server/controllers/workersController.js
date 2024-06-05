@@ -326,7 +326,7 @@ class WorkersController {
                                     workers_update: Math.round((i+1)*100/workers.length),
                                     processUpdateD: true,
                                 })  
-                            }, 10000)
+                            }, 10000 * ++i)
                         }
                     //}
 
