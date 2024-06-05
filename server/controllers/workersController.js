@@ -320,10 +320,11 @@ class WorkersController {
                             
                         } else {
                             console.log("Идет обновление данных...: i=", i)
+                            let proc = Math.round((i+1)*100/workers.length)
                             setTimeout(()=> {
                                 socket.emit("sendNotif", {
                                     task: 300,
-                                    workers_update: Math.round((i+1)*100/workers.length),
+                                    workers_update: proc,
                                     processUpdateD: true,
                                 })  
                             }, 10000 * ++i)
