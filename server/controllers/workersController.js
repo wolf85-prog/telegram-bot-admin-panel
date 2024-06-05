@@ -310,7 +310,7 @@ class WorkersController {
                         }     
                         
 
-                        if (i === (workers.length-1)) {
+                        if (i === (workers.length)) {
                             console.log("Обновление данных завершено: i=", i)
                             socket.emit("sendNotif", {
                                 task: 300,
