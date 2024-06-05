@@ -311,12 +311,14 @@ class WorkersController {
                         
 
                         if (i === (workers.length-1)) {
+                            console.log("Обновление данных завершено: i=", i)
                             socket.emit("sendNotif", {
                                 task: 300,
                                 workers_update: Math.round((i+1)*100/workers.length),
                                 processUpdateD: false,
                             })  
                         } else {
+                            console.log("Идет обновление данных...: i=", i)
                             socket.emit("sendNotif", {
                                 task: 300,
                                 workers_update: Math.round((i+1)*100/workers.length),
