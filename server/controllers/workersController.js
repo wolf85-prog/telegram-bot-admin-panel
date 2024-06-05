@@ -177,6 +177,7 @@ class WorkersController {
 
                 //обновить данные
                 console.log("ОБНОВЛЕНИЕ ДАННЫХ СПЕЦИАЛИСТОВ")
+                let proc = 0
                 workers.map(async(worker, i)=> {
                     let specArr = []
                     setTimeout(async()=> {     
@@ -309,9 +310,10 @@ class WorkersController {
                             console.log("Специалист не найден в Notion!", worker.chatId, i) 
                         }     
                         
+                        proc = Math.round((i+1)*100/workers.length)
 
                         if (i === (workers.length)) {
-                            console.log("Обновление данных завершено: i=", i)
+                            console.log("Обновление данных завершено: i=", i, proc)
                             socket.emit("sendNotif", {
                                 task: 300,
                                 workers_update: Math.round((i+1)*100/workers.length),
@@ -319,8 +321,7 @@ class WorkersController {
                             })  
                             
                         } else {
-                            console.log("Идет обновление данных...: i=", i)
-                            let proc = Math.round((i+1)*100/workers.length)
+                            console.log("Идет обновление данных...: i=", i, proc)                      
                             setTimeout(()=> {
                                 socket.emit("sendNotif", {
                                     task: 300,
