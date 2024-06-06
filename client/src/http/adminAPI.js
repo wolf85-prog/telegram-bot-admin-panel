@@ -538,3 +538,16 @@ export const getUpdateAvatars= async()=>{
         console.log("error while calling getUpdateAvatars api", error.message);
     }
 }
+
+//-------------------------------------------------------------------
+
+//api бд
+export const getPretendent= async (data) =>{
+    try {
+        let response = await $host.post('pretendent/get', data);
+        //console.log("projectsAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getPretendent api", error.message);
+    }
+}

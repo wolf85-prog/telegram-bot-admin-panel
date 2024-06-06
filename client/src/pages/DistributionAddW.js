@@ -37,7 +37,7 @@ import {
   getProjects3, 
   getBlocks, 
   getDatabaseId,
-  newPretendent,
+  getPretendent,
   editDistributionW2,
   getProjectNewDate,
   getProjectNewCash, 
@@ -178,9 +178,19 @@ const DistributionAddW = () => {
   useEffect(() => {
     //массив без удаленных пользователей
     const arrDel = workersAll.filter(item => item.deleted !== true)
+
+    let arr = []
+
+    arrDel.map(async(item)=>{
+      console.log("Фильтрация по блокировке рассылки...")
+      const res = await getPretendent(item.chatId, proj)
+
+      console.log(res.dataValues)
+    })
+
     setDelWorkers(arrDel)
 
-  }, [workersAll])
+  }, [workersAll, proj])
 
 //----------------------------------------------------------------------------------
    //проекты с названием
