@@ -316,7 +316,7 @@ class WorkersController {
                             console.log("Обновление данных завершено: i=", i, proc)
                             socket.emit("sendNotif", {
                                 task: 300,
-                                workers_update: Math.round((i+1)*100/workers.length),
+                                workers_update: proc,
                                 processUpdateD: false,
                             })  
                             
@@ -328,7 +328,7 @@ class WorkersController {
                                     workers_update: proc,
                                     processUpdateD: true,
                                 })  
-                            }, 10000 * ++i)
+                            }, 10000 * i)
                         }
                     //}
 

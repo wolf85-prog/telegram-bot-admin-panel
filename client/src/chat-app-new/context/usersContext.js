@@ -1432,10 +1432,10 @@ const fetchNotifAdmin = async (dataAll) => {
 		setWorkerUpdate(workers_update)
 	}
 	//обновление avatara
-	else if (task === 301) {
-		setShowUpdate2(processUpdateA)
-		setAvatarUpdate(avatar_update)
-	}
+	// else if (task === 301) {
+	// 	setShowUpdate2(processUpdateA)
+	// 	setAvatarUpdate(avatar_update)
+	// }
 }
 
 function isObjectEmpty(obj) {
