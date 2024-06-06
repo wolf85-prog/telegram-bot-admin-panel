@@ -544,7 +544,7 @@ export const getUpdateAvatars= async()=>{
 //api бд
 export const getPretendent= async (data) =>{
     try {
-        let response = await $host.post('pretendent/get', data);
+        let response = await $host.post('api/pretendent/get', data);
         //console.log("projectsAPI: ", response.data);
         return response.data;
     } catch (error) {

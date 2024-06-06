@@ -179,18 +179,9 @@ const DistributionAddW = () => {
     //массив без удаленных пользователей
     const arrDel = workersAll.filter(item => item.deleted !== true)
 
-    let arr = []
-
-    arrDel.map(async(item)=>{
-      console.log("Фильтрация по блокировке рассылки...")
-      const res = await getPretendent(item.chatId, proj)
-
-      console.log(res.dataValues)
-    })
-
     setDelWorkers(arrDel)
 
-  }, [workersAll, proj])
+  }, [workersAll])
 
 //----------------------------------------------------------------------------------
    //проекты с названием
@@ -200,7 +191,7 @@ const DistributionAddW = () => {
       value: '0',
     }]
 
-    if (projects.length > 0) {
+    if (projects && projects.length > 0) {
       projects.map((project) => {
         if (project != null) {
           const d = new Date(project.datestart);
@@ -581,9 +572,30 @@ const onAddCategory = (e) => {
     
     //выбрать уникальных специалистов
     const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
+
+    //выбрать специалистов без блокировки
+    let arrNew = []
+
+    arr.map(async(item)=>{
+      //console.log("Фильтрация по блокировке рассылки...", item, proj)
+      const newObj = {
+        projectId: proj, 
+        receiverId: item
+      }
+      const res = await getPretendent(newObj)
+      //console.log(res)
+
+      if (res && res.blockDistrib === true) {
+        //arrNew.push(item)
+        //console.log("item: ")
+      } else {
+        console.log("item: ", item)
+        arrNew.push(item.toString())
+      }
+    })
     
-    setSelected(arr)
-    console.log("selected: ", arr)
+    setSelected(arrNew)
+    console.log("selected: ", arrNew)
   }
   
 }
