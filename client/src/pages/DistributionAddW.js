@@ -576,26 +576,27 @@ const onAddCategory = (e) => {
     //выбрать специалистов без блокировки
     let arrNew = []
 
-    arr.map(async(item)=>{
-      //console.log("Фильтрация по блокировке рассылки...", item, proj)
+    //Фильтрация по заблокировавшим рассылки
+    arr.map(async(item, index)=>{
       const newObj = {
         projectId: proj, 
         receiverId: item
       }
       const res = await getPretendent(newObj)
-      //console.log(res)
 
       if (res && res.blockDistrib === true) {
-        //arrNew.push(item)
-        //console.log("item: ")
+        console.log("res: ", res)
       } else {
-        console.log("item: ", item)
+        //console.log("item: ", item)
         arrNew.push(item.toString())
+      }
+
+      if (index === arr.length-1) {
+        setSelected(arrNew)
+        console.log("selected: ", arrNew, index)
       }
     })
     
-    setSelected(arrNew)
-    console.log("selected: ", arrNew)
   }
   
 }

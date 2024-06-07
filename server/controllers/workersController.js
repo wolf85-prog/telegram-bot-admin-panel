@@ -162,18 +162,16 @@ class WorkersController {
                 console.log("workersProf: ", workersProf.length) 
 
                 //обновить аватар
-                workersProf.map((worker)=>{
-                    const workerApp = workers.find((item)=> item.chatId === worker.tgId?.toString())
-                    //console.log("workerApp: ", workerApp)
-                    const avatar = worker.profile ? (worker.profile?.file ? worker.profile?.file.url : worker.profile?.external.url) : null
-                    //console.log("avatar: ", avatar)
+                // workersProf.map((worker)=>{
+                //     const workerApp = workers.find((item)=> item.chatId === worker.tgId?.toString())
+                //     const avatar = worker.profile ? (worker.profile?.file ? worker.profile?.file.url : worker.profile?.external.url) : null
                     
-                    if (workerApp) {
-                        updateAvatar(avatar, workerApp.dataValues)
-                    } else {
-                        console.log("Специалист не найден!")  
-                    }         
-                })
+                //     if (workerApp) {
+                //         updateAvatar(avatar, workerApp.dataValues)
+                //     } else {
+                //         console.log("Специалист не найден!")  
+                //     }         
+                // })
 
                 //обновить данные
                 console.log("ОБНОВЛЕНИЕ ДАННЫХ СПЕЦИАЛИСТОВ")
