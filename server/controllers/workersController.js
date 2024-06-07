@@ -317,6 +317,7 @@ class WorkersController {
                                 workers_update: proc,
                                 processUpdateD: false,
                             })  
+                            socket.disconnect()
                             
                         } else {
                             console.log("Идет обновление данных...: i=", i, proc)                      
