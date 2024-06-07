@@ -104,7 +104,7 @@ const DistributionAddW = () => {
   const [visibleDelMess, setVisibleDelMess] = useState(false); //показать сообщенме об удалении
   const [showEditButtonAdd, setShowEditButtonAdd] = useState(false);
   const [showNameProject, setShowNameProject] = useState(true);
-  const [showCity, setShowCity] = useState(true);
+  const [showCity, setShowCity] = useState(false);
   
   const [sendToAdmin, setSendToAdmin] = useState(true);
   const [textButton, setTextButton] = useState('');
@@ -242,12 +242,14 @@ const onChangeProjectName = () => {
   setShowNameProject(true)
   setSelected([])
   setValueSelect(0)
+  setShowCity(false)
 }
 
 const onChangeProjectNumber = () => {
   setShowNameProject(false)
   setSelected([])
   setValueSelect(0)
+  setShowCity(false)
 }
 
 function unDuplicateArraySingleValues(array) {
@@ -429,6 +431,8 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
 
   await getCategoryFromNotion(projectId)
 
+  setShowCity(true)
+
 }
 
 
@@ -456,6 +460,8 @@ const onChangeSelectProject = async(e) => {
   setShowCategories5(false)
   setShowCategories6(false)
   setShowCategories7(false)
+
+  // setShowCity(false)
   
   //обработка проекта (поиск категорий)
   onHandlingProject(e.target.value, false) 
@@ -1354,12 +1360,11 @@ const delCategory7 = (category) => {
                                       <br/>
 
                                       <CRow>
-                                        <CCol sm={12}>
+                                        <CCol sm={12} style={{display: showCity ? "block" : "none" }}>
                                           <CFormLabel htmlFor="exampleFormControlInput1">Город:</CFormLabel>
                                           {/* Список городов */}
                                           <CFormSelect 
-                                            aria-label="Default select example"
-                                            style={{display: showCity ? "block" : "none" }}
+                                            aria-label="Default select example" 
                                             //onChange={onChangeSelectProject}
                                             options={cityData}
                                           />
