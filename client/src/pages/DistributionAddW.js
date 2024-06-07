@@ -47,6 +47,7 @@ import { uploadFile, delMessage } from '../http/chatAPI';
 import { newMessage } from '../http/workerAPI';
 import specData from './../data/specData';
 import categories from './../data/categories';
+import cityData from './../data/cityData';
 
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 import phone_image from './../assets/images/phone2.png';
@@ -103,6 +104,8 @@ const DistributionAddW = () => {
   const [visibleDelMess, setVisibleDelMess] = useState(false); //показать сообщенме об удалении
   const [showEditButtonAdd, setShowEditButtonAdd] = useState(false);
   const [showNameProject, setShowNameProject] = useState(true);
+  const [showCity, setShowCity] = useState(true);
+  
   const [sendToAdmin, setSendToAdmin] = useState(true);
   const [textButton, setTextButton] = useState('');
   const [textUrl, setTextUrl] = useState('');
@@ -1348,9 +1351,29 @@ const delCategory7 = (category) => {
                                         </CCol>
                                       </CRow>
 
+                                      <br/>
+
+                                      <CRow>
+                                        <CCol sm={12}>
+                                          <CFormLabel htmlFor="exampleFormControlInput1">Город:</CFormLabel>
+                                          {/* Список городов */}
+                                          <CFormSelect 
+                                            aria-label="Default select example"
+                                            style={{display: showCity ? "block" : "none" }}
+                                            //onChange={onChangeSelectProject}
+                                            options={cityData}
+                                          />
+                                        </CCol>
+                                      </CRow>
+
+                                      <br/><br/>
+                                      
+                                      
+                                      <p style={{color: '#767676', marginTop: '-30px'}}>Получателей: <span>{selected.length}</span></p>  
+
                                       {/* Добавить */}
                                       <CRow>
-                                        <CCol sm={12} style={{textAlign: 'end', marginTop: '15px', paddingRight: '23px'}}> 
+                                        <CCol sm={12} style={{textAlign: 'end', marginTop: '-43px', paddingRight: '23px'}}> 
                                           <img 
                                             src={treug} 
                                             alt='' 
@@ -1359,9 +1382,7 @@ const delCategory7 = (category) => {
                                           />
                                         </CCol>
                                       </CRow>
-                                      
-                                      <p style={{color: '#767676', marginTop: '-20px'}}>Получателей: <span>{selected.length}</span></p>  
-                                      
+  
                                     </CCol>
 
                                     {/* <CCol sm={1}></CCol> */}
