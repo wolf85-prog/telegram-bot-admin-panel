@@ -25,6 +25,8 @@ import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import { $host } from '../http/index';
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 
+import { Plan } from "./../components/index"
+
 import { 
   getProjectId, 
   newPlan, 
@@ -42,10 +44,6 @@ const DistributionWPlaner = () => {
   const location = useLocation()
   //const [distributionsWork, setDistributionsWork]= useState([]);
   const { addNewDistrib, setDistributionsWork } = useUsersContext();
-
-  //const token = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
-	//const host = process.env.REACT_APP_API_URL
-  //const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
   const projectId= location.state?.project
   const labelName= location.state?.labelProj
@@ -173,6 +171,8 @@ const [dates222, setDates222] = useState([
 
   const [showLoader, setShowLoader] = useState(true)
   const [showSave, setShowSave] = useState(false)
+
+  const [showPlan, setShowPlan] = useState(false)
 
   const [toast, addToast] = useState(0)
   const toaster = useRef()
@@ -2470,13 +2470,17 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                 </CCol>
                               </CRow>
 
-
+                              {showPlan ? <Plan /> : <></>}
 
                             <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '15px'}}>
                               <div style={{marginRight: '16px'}}>
                                 <Link to={'/distributionw_add'}>
                                   <CButton color="secondary" style={{width: '130px'}}>Назад</CButton>
                                 </Link>
+                              </div>
+                              <div>
+                                {/* <CButton color="primary" onClick={savePlan} style={{width: '130px'}}>{showSave ? <CSpinner style={{width: '20px', height: '20px'}}/> : 'Сохранить'}</CButton> */}
+                                <CButton color="secondary" onClick={() => setShowPlan(true)}>Ещё</CButton> 
                               </div>
                               <div>
                                 <CButton color="primary" onClick={savePlan} style={{width: '130px'}}>{showSave ? <CSpinner style={{width: '20px', height: '20px'}}/> : 'Сохранить'}</CButton>

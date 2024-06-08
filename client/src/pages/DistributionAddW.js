@@ -1625,7 +1625,8 @@ const delCategory7 = (category) => {
                                               </div>
                                             </div> }
                                             </>                                      
-                                            :<div style={{position: 'absolute', top: '225px', left: '22px', display: 'flex', width: '85%'}}>
+                                            : (textButton.length > 0 ? 
+                                            <div style={{position: 'absolute', top: '225px', left: '22px', display: 'flex', width: '85%'}}>
                                               <div style={{
                                                 backgroundColor: '#8a93a2', 
                                                 borderRadius: '5px',
@@ -1636,6 +1637,7 @@ const delCategory7 = (category) => {
                                                   {textButton}
                                               </div>
                                             </div>
+                                            :"")
                                           } 
                                         </div> 
                                                                            

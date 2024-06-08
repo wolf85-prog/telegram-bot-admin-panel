@@ -9,6 +9,7 @@ import DocsCallout from './DocsCallout'
 import DocsLink from './DocsLink'
 import DocsExample from './DocsExample'
 import Chart from './Chart'
+import Plan from './Plan'
 
 export {
   AppBreadcrumb,
@@ -22,4 +23,5 @@ export {
   DocsLink,
   DocsExample,
   Chart,
+  Plan,
 }
