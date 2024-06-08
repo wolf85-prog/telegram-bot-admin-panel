@@ -1311,9 +1311,10 @@ const fetchNotifAdmin = async (dataAll) => {
 		comtags, 
 		workers_update,
 		processUpdateD,
-		avatar_update,
-		processUpdateA,
 		phone,
+		telegram_id, 
+		srm_id, 
+		chat_link,
 	} = dataAll;
 
 	if (task === 1) {
@@ -1431,11 +1432,11 @@ const fetchNotifAdmin = async (dataAll) => {
 		setShowUpdate(processUpdateD)
 		setWorkerUpdate(workers_update)
 	}
-	//обновление avatara
-	// else if (task === 301) {
-	// 	setShowUpdate2(processUpdateA)
-	// 	setAvatarUpdate(avatar_update)
-	// }
+
+	//получение списка специалистов
+	else if (task === 301) {
+		console.log(telegram_id, srm_id, chat_link)
+	}
 }
 
 function isObjectEmpty(obj) {
