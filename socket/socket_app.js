@@ -180,12 +180,10 @@ io.on("connection", (socket) => {
     })
 
     //send and get message in workers
-    socket.on("sendWorker", ({task, telegram_id, srm_id, chat_link})=>{
+    socket.on("sendWorker", ({task, data})=>{
         io.emit("getWorker", {
             task,
-            telegram_id, 
-            srm_id, 
-            chat_link,
+            data,
         })
     })  
 
