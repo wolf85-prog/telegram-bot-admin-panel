@@ -179,6 +179,16 @@ io.on("connection", (socket) => {
         })
     })
 
+    //send and get message in workers
+    socket.on("sendWorker", ({task, telegram_id, srm_id, chat_link})=>{
+        io.emit("getWorker", {
+            task,
+            telegram_id, 
+            srm_id, 
+            chat_link,
+        })
+    })  
+
 
     //when disconnect
     socket.on("disconnect", ()=> {
