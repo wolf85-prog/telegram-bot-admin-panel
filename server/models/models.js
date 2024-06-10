@@ -113,7 +113,7 @@ const Pretendent = sequelize.define('pretendent', {
 const Plan = sequelize.define('plan', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
     datestart: {type: DataTypes.STRING},  //дата начала рассылки
-    times: {type: DataTypes.STRING},  //json часов проектов
+    times: {type: DataTypes.TEXT},  //json часов проектов
 })
 
 const CountMessage = sequelize.define('countmessage', {
