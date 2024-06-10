@@ -174,6 +174,8 @@ const [dates222, setDates222] = useState([
 
   const [showPlan, setShowPlan] = useState(false)
 
+  const [needDate, setNeedDate] = useState("")
+
   const [toast, addToast] = useState(0)
   const toaster = useRef()
 
@@ -2109,6 +2111,13 @@ const clickShowEditTime2 = (t, ind, tab) => {
     setTimeout(() => backPage(), 2000);
   }
 
+
+  const saveNeedDate = (date) => {
+    setNeedDate(date)
+    setShowPlan(true)
+  }
+
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -2470,7 +2479,21 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                 </CCol>
                               </CRow>
 
-                              {showPlan ? <Plan /> : <></>}
+
+                              {showPlan ? <Plan  uuidDistrib={uuidDistrib} needDate={needDate} /> : <></>}
+
+<br/> 
+                            <CRow>
+                              <div style={{display: 'flex', justifyContent: 'center'}}>
+                                <CButton color="secondary" onClick={() => saveNeedDate('12.06.2024')} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>12.06.22024</CButton>
+                                <CButton color="secondary" onClick={() => saveNeedDate('13.06.2024')} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>13.06.22024</CButton>
+                                <CButton color="secondary" onClick={() => saveNeedDate('14.06.2024')} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>14.06.22024</CButton>
+                                <CButton color="secondary" onClick={() => saveNeedDate('15.06.2024')} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>15.06.22024</CButton>
+                                <CButton color="secondary" onClick={() => saveNeedDate('16.06.2024')} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>16.06.22024</CButton>
+                                <CButton color="secondary" onClick={() => saveNeedDate('17.06.2024')} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>17.06.22024</CButton>
+                              </div>
+                              
+                            </CRow>
 
                             <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '15px'}}>
                               <div style={{marginRight: '16px'}}>
@@ -2478,10 +2501,9 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                   <CButton color="secondary" style={{width: '130px'}}>Назад</CButton>
                                 </Link>
                               </div>
-                              <div>
-                                {/* <CButton color="primary" onClick={savePlan} style={{width: '130px'}}>{showSave ? <CSpinner style={{width: '20px', height: '20px'}}/> : 'Сохранить'}</CButton> */}
+                              {/* <div>
                                 <CButton color="secondary" onClick={() => setShowPlan(true)}>Ещё</CButton> 
-                              </div>
+                              </div> */}
                               <div>
                                 <CButton color="primary" onClick={savePlan} style={{width: '130px'}}>{showSave ? <CSpinner style={{width: '20px', height: '20px'}}/> : 'Сохранить'}</CButton>
                                 {/* <CButton onClick={() => addToast(exampleToast)}>Send a toast</CButton> */}

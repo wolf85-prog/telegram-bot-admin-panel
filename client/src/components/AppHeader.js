@@ -339,7 +339,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                   <CToastBody>
                     <div style={{display: 'flex'}}>
                       {workerCall.avatar ? 
-                      <img src={workerCall.avatar} alt='' style={{borderRadius: '15px'}} width={314} height={314}/>
+                      <img src={workerCall.avatar} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
                       : <svg
                           className="rounded me-2"
                           width="314"
