@@ -91,10 +91,53 @@ const DistributionWPlaner = () => {
 	const day = String(d.getDate()).padStart(2, "0");
   const date_str = `${day}.${month}`;
   
+  //день 2
   d.setDate(d.getDate() + 1);
   const month2 = String(d.getMonth()+1).padStart(2, "0");
 	const day2 = String(d.getDate()).padStart(2, "0");
   const date_str2 = `${day2}.${month2}`;
+
+  //день 3
+  const d3 = d.setDate(d.getDate() + 1);
+  const month3 = String(d.getMonth()+1).padStart(2, "0");
+	const day3 = String(d.getDate()).padStart(2, "0");
+  const year3 = d.getFullYear()
+  const date_str3 = `${day3}.${month3}.${year3}`;
+
+  //день 4
+  const d4 =  d.setDate(d.getDate() + 1);
+  const month4 = String(d.getMonth()+1).padStart(2, "0");
+	const day4 = String(d.getDate()).padStart(2, "0");
+  const year4 = d.getFullYear()
+  const date_str4 = `${day4}.${month4}.${year4}`;
+
+  //день 5
+  const d5 = d.setDate(d.getDate() + 1);
+  const month5 = String(d.getMonth()+1).padStart(2, "0");
+	const day5 = String(d.getDate()).padStart(2, "0");
+  const year5 = d.getFullYear()
+  const date_str5 = `${day5}.${month5}.${year5}`;
+
+  //день 6
+  const d6 =  d.setDate(d.getDate() + 1);
+  const month6 = String(d.getMonth()+1).padStart(2, "0");
+	const day6 = String(d.getDate()).padStart(2, "0");
+  const year6 = d.getFullYear()
+  const date_str6 = `${day6}.${month6}.${year6}`;
+
+  //день 7
+  const d7 = d.setDate(d.getDate() + 1);
+  const month7 = String(d.getMonth()+1).padStart(2, "0");
+	const day7 = String(d.getDate()).padStart(2, "0");
+  const year7 = d.getFullYear()
+  const date_str7 = `${day7}.${month7}.${year7}`;
+
+  //день 8
+  const d8 = d.setDate(d.getDate() + 1);
+  const month8 = String(d.getMonth()+1).padStart(2, "0");
+	const day8 = String(d.getDate()).padStart(2, "0");
+  const year8 = d.getFullYear()
+  const date_str8 = `${day8}.${month8}.${year8}`;
 
   const year = d.getFullYear();
 
@@ -172,9 +215,21 @@ const [dates222, setDates222] = useState([
   const [showLoader, setShowLoader] = useState(true)
   const [showSave, setShowSave] = useState(false)
 
-  const [showPlan, setShowPlan] = useState(false)
+  const [showPlan3, setShowPlan3] = useState(false)
+  const [showPlan4, setShowPlan4] = useState(false)
+  const [showPlan5, setShowPlan5] = useState(false)
+  const [showPlan6, setShowPlan6] = useState(false)
+  const [showPlan7, setShowPlan7] = useState(false)
+  const [showPlan8, setShowPlan8] = useState(false)
 
-  const [needDate, setNeedDate] = useState("")
+  const [needDate3, setNeedDate3] = useState("")
+  const [needDate4, setNeedDate4] = useState("")
+  const [needDate5, setNeedDate5] = useState("")
+  const [needDate6, setNeedDate6] = useState("")
+  const [needDate7, setNeedDate7] = useState("")
+  const [needDate8, setNeedDate8] = useState("")
+
+  const [countClick, setCountClick] = useState(0)
 
   const [toast, addToast] = useState(0)
   const toaster = useRef()
@@ -2112,10 +2167,67 @@ const clickShowEditTime2 = (t, ind, tab) => {
   }
 
 
-  const saveNeedDate = (date) => {
-    setNeedDate(date)
-    setShowPlan(true)
+  const saveNeedDate3 = (date) => {
+    setNeedDate3(date)
+    setShowPlan3(true)
   }
+
+  const saveNeedDate4 = (date) => {
+    setNeedDate4(date)
+    setShowPlan4(true)
+  }
+
+  const saveNeedDate5 = (date) => {
+    setNeedDate5(date)
+    setShowPlan5(true)
+  }
+
+  const saveNeedDate6 = (date) => {
+    setNeedDate6(date)
+    setShowPlan6(true)
+  }
+
+  const saveNeedDate7 = (date) => {
+    setNeedDate7(date)
+    setShowPlan7(true)
+  }
+
+  const saveNeedDate8 = (date) => {
+    setNeedDate8(date)
+    setShowPlan8(true)
+  }
+
+
+  const saveNeedDate = (d3, count) => {
+    console.log("count: ", count)
+    setCountClick(count+1)
+    if (count === 1) {
+      setNeedDate3(d3)
+      setShowPlan3(true)
+    }
+    if (count === 2) {
+      setNeedDate4(d4)
+      setShowPlan4(true)
+    }
+    if (count === 3) {
+      setNeedDate5(d5)
+      setShowPlan5(true)
+    }
+    if (count === 4) {
+      setNeedDate6(d6)
+      setShowPlan6(true)
+    }
+    if (count === 5) {
+      setNeedDate7(d7)
+      setShowPlan7(true)
+    }
+    if (count === 6) {
+      setNeedDate8(d8)
+      setShowPlan8(true)
+    }
+    
+  }
+
 
 
   return (
@@ -2480,17 +2592,22 @@ const clickShowEditTime2 = (t, ind, tab) => {
                               </CRow>
 
 
-                              {showPlan ? <Plan  uuidDistrib={uuidDistrib} needDate={needDate} /> : <></>}
+                              {showPlan3 ? <Plan  uuidDistrib={uuidDistrib} needDate={d3} /> : <></>}
+                              {showPlan4 ? <Plan  uuidDistrib={uuidDistrib} needDate={d4} /> : <></>}
+                              {showPlan5 ? <Plan  uuidDistrib={uuidDistrib} needDate={d5} /> : <></>}
+                              {showPlan6 ? <Plan  uuidDistrib={uuidDistrib} needDate={d6} /> : <></>}
+                              {showPlan7 ? <Plan  uuidDistrib={uuidDistrib} needDate={d7} /> : <></>}
+                              {showPlan8 ? <Plan  uuidDistrib={uuidDistrib} needDate={d8} /> : <></>}
 
 <br/> 
                             <CRow>
                               <div style={{display: 'flex', justifyContent: 'center'}}>
-                                <CButton color="secondary" onClick={() => saveNeedDate('12.06.2024')} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>12.06.22024</CButton>
-                                <CButton color="secondary" onClick={() => saveNeedDate('13.06.2024')} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>13.06.22024</CButton>
-                                <CButton color="secondary" onClick={() => saveNeedDate('14.06.2024')} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>14.06.22024</CButton>
-                                <CButton color="secondary" onClick={() => saveNeedDate('15.06.2024')} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>15.06.22024</CButton>
-                                <CButton color="secondary" onClick={() => saveNeedDate('16.06.2024')} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>16.06.22024</CButton>
-                                <CButton color="secondary" onClick={() => saveNeedDate('17.06.2024')} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>17.06.22024</CButton>
+                                <CButton color="secondary" onClick={() => saveNeedDate3(date_str3)} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>{date_str3}</CButton>
+                                <CButton color="secondary" onClick={() => saveNeedDate4(date_str4)} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>{date_str4}</CButton>
+                                <CButton color="secondary" onClick={() => saveNeedDate5(date_str5)} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>{date_str5}</CButton>
+                                <CButton color="secondary" onClick={() => saveNeedDate6(date_str6)} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>{date_str6}</CButton>
+                                <CButton color="secondary" onClick={() => saveNeedDate7(date_str7)} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>{date_str7}</CButton>
+                                <CButton color="secondary" onClick={() => saveNeedDate8(date_str8)} style={{width: '90px', fontSize: '12px', marginRight: '10px'}}>{date_str8}</CButton>
                               </div>
                               
                             </CRow>
@@ -2501,9 +2618,9 @@ const clickShowEditTime2 = (t, ind, tab) => {
                                   <CButton color="secondary" style={{width: '130px'}}>Назад</CButton>
                                 </Link>
                               </div>
-                              {/* <div>
-                                <CButton color="secondary" onClick={() => setShowPlan(true)}>Ещё</CButton> 
-                              </div> */}
+                              <div>
+                                <CButton color="secondary" onClick={() => saveNeedDate(date_str3, countClick)}>Ещё</CButton> 
+                              </div>
                               <div>
                                 <CButton color="primary" onClick={savePlan} style={{width: '130px'}}>{showSave ? <CSpinner style={{width: '20px', height: '20px'}}/> : 'Сохранить'}</CButton>
                                 {/* <CButton onClick={() => addToast(exampleToast)}>Send a toast</CButton> */}
