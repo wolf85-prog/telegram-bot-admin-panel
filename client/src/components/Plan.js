@@ -33,8 +33,7 @@ const Plan = ({uuidDistrib, needDate}) => {
     const [timeold22, setTimeold22] = useState([false, false, false, false, false, false, false])
     const [timeold23, setTimeold23] = useState([false, false, false, false, false, false, false])
 
-    //const d = new Date(needDate.split('.')[2], needDate.split('.')[1], needDate.split('.')[0]);
-    //console.log("needDate: ", needDate)
+
     const d = new Date(needDate)
     const month = String(d.getMonth()+1).padStart(2, "0");
     const day = String(d.getDate()).padStart(2, "0");
@@ -901,17 +900,7 @@ const Plan = ({uuidDistrib, needDate}) => {
 
   }
 
-
     return (
-        // <div 
-        //     className={`${cl.select} ${menuShow && cl.selectClicked}`}
-        //     onClick={()=> setMenuShow(!menuShow)}
-        // >
-        //     <span className={cl.select}>
-        //         {selected}
-        //     </span>
-        //     <div className={`${cl.caret} ${menuShow && cl.caretRotate}`}></div>
-        // </div>
       <>
         <br/>
         <CRow>
