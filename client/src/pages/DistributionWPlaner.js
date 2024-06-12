@@ -142,6 +142,7 @@ const DistributionWPlaner = () => {
   const year = d.getFullYear();
 
 
+  //день 1
   const [dates, setDates] = useState([
     {date: date_str, time: '06:00', proj: '', save: false, go: false,  uuid: ""},
     {date: date_str, time: '07:00', proj: '', save: false, go: false,  uuid: ""},
@@ -150,7 +151,6 @@ const DistributionWPlaner = () => {
     {date: date_str, time: '10:00', proj: '', save: false, go: false,  uuid: ""},
     {date: date_str, time: '11:00', proj: '', save: false, go: false,  uuid: ""},
   ])
-
 
   const [dates1, setDates1] = useState([
     {date: date_str, time: '12:00', proj: '', save: false, go: false,  uuid: ""},
@@ -171,6 +171,7 @@ const DistributionWPlaner = () => {
   ])
 
 //----------------------------------------------------------
+//день 2
 const [dates2, setDates2] = useState([
   {date: date_str2, time: '06:00', proj: '', save: false, go: false,  uuid: ""},
   {date: date_str2, time: '07:00', proj: '', save: false, go: false,  uuid: ""},
@@ -179,7 +180,6 @@ const [dates2, setDates2] = useState([
   {date: date_str2, time: '10:00', proj: '', save: false, go: false,  uuid: ""},
   {date: date_str2, time: '11:00', proj: '', save: false, go: false,  uuid: ""},
 ])
-
 
 const [dates22, setDates22] = useState([
   {date: date_str2, time: '12:00', proj: '', save: false, go: false,  uuid: ""},
@@ -198,6 +198,19 @@ const [dates222, setDates222] = useState([
   {date: date_str2, time: '22:00', proj: '', save: false, go: false,  uuid: ""},
   {date: date_str2, time: '23:00', proj: '', save: false, go: false,  uuid: ""},
 ])
+
+//день 3
+const [dates3, setDates3] = useState([])
+
+//день 4
+
+//день 5
+
+//день 6
+
+//день 7
+
+//день 8
 
 //----------------------------------------------------------
 
@@ -2201,27 +2214,27 @@ const clickShowEditTime2 = (t, ind, tab) => {
   const saveNeedDate = (d3, count) => {
     console.log("count: ", count)
     setCountClick(count+1)
-    if (count === 1) {
+    if (count === 0) {
       setNeedDate3(d3)
       setShowPlan3(true)
     }
-    if (count === 2) {
+    if (count === 1) {
       setNeedDate4(d4)
       setShowPlan4(true)
     }
-    if (count === 3) {
+    if (count === 2) {
       setNeedDate5(d5)
       setShowPlan5(true)
     }
-    if (count === 4) {
+    if (count === 3) {
       setNeedDate6(d6)
       setShowPlan6(true)
     }
-    if (count === 5) {
+    if (count === 4) {
       setNeedDate7(d7)
       setShowPlan7(true)
     }
-    if (count === 6) {
+    if (count === 5) {
       setNeedDate8(d8)
       setShowPlan8(true)
     }
@@ -2592,7 +2605,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                               </CRow>
 
 
-                              {showPlan3 ? <Plan  uuidDistrib={uuidDistrib} needDate={d3} /> : <></>}
+                              {showPlan3 ? <Plan  uuidDistrib={uuidDistrib} needDate={d3} arrayDate={dates3} /> : <></>}
                               {showPlan4 ? <Plan  uuidDistrib={uuidDistrib} needDate={d4} /> : <></>}
                               {showPlan5 ? <Plan  uuidDistrib={uuidDistrib} needDate={d5} /> : <></>}
                               {showPlan6 ? <Plan  uuidDistrib={uuidDistrib} needDate={d6} /> : <></>}

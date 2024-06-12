@@ -13,7 +13,7 @@ import {
     CFormCheck,
   } from '@coreui/react'
 
-const Plan = ({uuidDistrib, needDate}) => {
+const Plan = ({uuidDistrib, needDate, arrayDate}) => {
 
   let arr = []
 
@@ -67,6 +67,9 @@ const Plan = ({uuidDistrib, needDate}) => {
         {date: date_str, time: '22:00', proj: '', save: false, go: false,  uuid: ""},
         {date: date_str, time: '23:00', proj: '', save: false, go: false,  uuid: ""},
     ])
+
+    arrayDate = [].concat(dates, dates1, dates11);
+    //console.log("arrayDate: ", arrayDate)
 
     const [projectName, setProjectName] = useState('')
     const [projectView, setProjectView] = useState(false)
@@ -984,9 +987,9 @@ const Plan = ({uuidDistrib, needDate}) => {
                                     {dates1.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
-                                            {/* <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
+                                            <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
                                               <div onClick={()=>clickShowEditTime(`${item.time}`, index, 2)} >{item.time}</div>
-                                            </div> */}
+                                            </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
                                             <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
@@ -1036,9 +1039,9 @@ const Plan = ({uuidDistrib, needDate}) => {
                                     {dates11.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
-                                            {/* <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
+                                            <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
                                               <div onClick={()=>clickShowEditTime(`${item.time}`, index, 3)} >{item.time}</div>
-                                            </div> */}
+                                            </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
                                             <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
