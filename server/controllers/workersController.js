@@ -220,7 +220,7 @@ class WorkersController {
         
                             if (specArr.length > 0) {
                                 //обновить бд
-                                if (worker.chatId === '1408579113' || worker.chatId === '805436270' || worker.chatId === '639113098' || worker.chatId === '1300119841' || worker.chatId === '276285228') {
+                                if (worker.chatId === '1408579113' || worker.chatId === '805436270' || worker.chatId === '639113098' || worker.chatId === '1300119841' || worker.chatId === '276285228' || worker.chatId === '1144954767') {
                                     const newSpec = {
                                         spec: 'Вне категории',
                                         cat: 'NoTag'
