@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 // import cl from './Select.module.css'
 
 import { 
@@ -13,7 +13,7 @@ import {
     CFormCheck,
   } from '@coreui/react'
 
-const Plan = ({uuidDistrib, needDate, arrayDate}) => {
+const Plan = ({uuidDistrib, needDate, arrayDate, setArrayDate}) => {
 
   let arr = []
 
@@ -68,14 +68,20 @@ const Plan = ({uuidDistrib, needDate, arrayDate}) => {
         {date: date_str, time: '23:00', proj: '', save: false, go: false,  uuid: ""},
     ])
 
-    arrayDate = [].concat(dates, dates1, dates11);
-    //console.log("arrayDate: ", arrayDate)
+    
+    //setArrayDate(arr_temp)
 
     const [projectName, setProjectName] = useState('')
     const [projectView, setProjectView] = useState(false)
     const [value1, setValue1] = useState([false, false, false, false, false, false, false])
     const [value2, setValue2] = useState([false, false, false, false, false, false, false])
     const [value3, setValue3] = useState([false, false, false, false, false, false, false])
+
+  // useEffect(() => {
+  //   const arr_temp = [].concat(dates, dates1, dates11);
+  //   console.log("arrayDate: ", arr_temp)
+  //   setArrayDate(arr_temp)
+  // },[])
 
     //поставить галочку Статус
   const changeStatus = (ind, tab) => {

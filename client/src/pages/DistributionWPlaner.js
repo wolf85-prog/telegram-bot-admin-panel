@@ -60,14 +60,14 @@ const DistributionWPlaner = () => {
   const target = location.state?.target
 
 
-  console.log("catDistr: ", catDistr)
-  console.log("countReceiver: ", countReceiver)
-  console.log("dateDistrib: ", dateDistrib)
-  console.log("imageDistrib: ", imageDistrib)
-  console.log("selected: ", selected)
-  console.log("labelName: ", labelName)
-  console.log("uuidDistrib: ", uuidDistrib)
-  console.log("textButton: ", textButton)
+  // console.log("catDistr: ", catDistr)
+  // console.log("countReceiver: ", countReceiver)
+  // console.log("dateDistrib: ", dateDistrib)
+  // console.log("imageDistrib: ", imageDistrib)
+  // console.log("selected: ", selected)
+  // console.log("labelName: ", labelName)
+  // console.log("uuidDistrib: ", uuidDistrib)
+  // console.log("textButton: ", textButton)
   
 
   const [countCol, setCountCol] = useState(6)
@@ -279,7 +279,7 @@ const [dates3, setDates3] = useState([])
       const min = String(d.getMinutes()).padStart(2, "0");
       console.log("time: " + chas + ":" + min)
 
-      //открываем план
+      //открываем план день 1
       if (plan !== null) {
         const planTimes = JSON.parse(plan.times)
 
@@ -449,7 +449,6 @@ const [dates3, setDates3] = useState([])
 
     projectView ? setProjectView(false) : setProjectView(true)
   }
-
 
   const changeStatus2 = (ind, tab) => {
     if (tab === 1) {
@@ -2053,10 +2052,10 @@ const clickShowEditTime2 = (t, ind, tab) => {
   const savePlan = async() => {
     setShowSave(true)
 
-    console.log("категории: ", catDistr)
-    console.log("текст: ", textDistr)
-    console.log("постер: ", imageDistrib)
-    console.log("получатели: ", selected)
+    // console.log("категории: ", catDistr)
+    // console.log("текст: ", textDistr)
+    // console.log("постер: ", imageDistrib)
+    // console.log("получатели: ", selected)
 
     const d_str = new Date() //текущая дата
     const d_str2 = new Date()  
@@ -2073,8 +2072,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
     }
 
     //(удалить предыдущие записи запланированных рассылок)
-    const res = await delDistributionWPlan(obj) //editDistributionWPlan(obj)
-    const res2 = await delDistributionWPlan(obj2) //editDistributionWPlan(obj2)
+    // const res = await delDistributionWPlan(obj) //editDistributionWPlan(obj)
+    // const res2 = await delDistributionWPlan(obj2) //editDistributionWPlan(obj2)
     
 
     //1. сохранить все галочки и название проектов в массиве
@@ -2084,6 +2083,11 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
     const newArray2 = [].concat(dates2, dates22, dates222);
     const planer_str2 = JSON.stringify(newArray2)
+
+    const planer_str3 = JSON.stringify(dates3)
+    console.log("dates3: ", dates3)
+
+
 
     //обновить план
     //1-й день
@@ -2171,12 +2175,12 @@ const clickShowEditTime2 = (t, ind, tab) => {
     })
 
     //обновить список рассылок
-    await addNewDistrib(true)
+    //await addNewDistrib(true)
 
-    addToast(exampleToast) //уведомление - ваш план сохранен
-    setShowSave(false)
+    // addToast(exampleToast) //уведомление - ваш план сохранен
+    // setShowSave(false)
 
-    setTimeout(() => backPage(), 2000);
+    // setTimeout(() => backPage(), 2000);
   }
 
 
@@ -2267,7 +2271,8 @@ const clickShowEditTime2 = (t, ind, tab) => {
                               :
                               <>
                               <CRow>
-                              <CCol xs>                                   
+{/* -----------------------------06:00----------------------------------------------------------------------------------- */}
+                                <CCol xs>                                   
                                 <div style={{float: "left", display: 'flex'}}>
                                   <CTable align="middle" className="mb-0 border" hover responsive bordered style={{float: 'left'}}>   
                                     <CTableHead className='table-dark' >
@@ -2605,7 +2610,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                               </CRow>
 
 
-                              {showPlan3 ? <Plan  uuidDistrib={uuidDistrib} needDate={d3} arrayDate={dates3} /> : <></>}
+                              {showPlan3 ? <Plan  uuidDistrib={uuidDistrib} needDate={d3} arrayDate={dates3} setArrayDate={setDates3} /> : <></>}
                               {showPlan4 ? <Plan  uuidDistrib={uuidDistrib} needDate={d4} /> : <></>}
                               {showPlan5 ? <Plan  uuidDistrib={uuidDistrib} needDate={d5} /> : <></>}
                               {showPlan6 ? <Plan  uuidDistrib={uuidDistrib} needDate={d6} /> : <></>}
