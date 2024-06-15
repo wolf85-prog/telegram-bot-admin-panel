@@ -577,13 +577,13 @@ const UsersProvider = ({ children }) => {
 		if (showCallCard) {
 			audioCall.play()
 		} else {
-			audioCall.pause()
+			//audioCall.pause()
 		}
 
 		if (showCallCardNo) {
 			audioCall2.play()
 		} else {
-			audioCall2.pause()
+			//audioCall2.pause()
 		}
 		
 	},[showCallCard, showCallCardNo])
@@ -1433,10 +1433,6 @@ const fetchNotifAdmin = async (dataAll) => {
 		setWorkerUpdate(workers_update)
 	}
 
-	//получение списка специалистов
-	else if (task === 301) {
-		console.log(telegram_id, srm_id, chat_link)
-	}
 }
 
 function isObjectEmpty(obj) {
