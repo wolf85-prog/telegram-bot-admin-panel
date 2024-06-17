@@ -70,13 +70,39 @@ const DistributionWPlaner = () => {
   // console.log("textButton: ", textButton)
   
 
-  const [countCol, setCountCol] = useState(6)
+  const [countCol1, setCountCol1] = useState(6)
   const [countCol2, setCountCol2] = useState(6)
   const [countCol3, setCountCol3] = useState(6)
 
-  const [countCol4, setCountCol4] = useState(6)
-  const [countCol5, setCountCol5] = useState(6)
-  const [countCol6, setCountCol6] = useState(6)
+  const [countCol21, setCountCol21] = useState(6)
+  const [countCol22, setCountCol22] = useState(6)
+  const [countCol23, setCountCol23] = useState(6)
+
+  const [countCol31, setCountCol31] = useState(6)
+  const [countCol32, setCountCol32] = useState(6)
+  const [countCol33, setCountCol33] = useState(6)
+
+  const [countCol41, setCountCol41] = useState(6)
+  const [countCol42, setCountCol42] = useState(6)
+  const [countCol43, setCountCol43] = useState(6)
+
+  const [countCol51, setCountCol51] = useState(6)
+  const [countCol52, setCountCol52] = useState(6)
+  const [countCol53, setCountCol53] = useState(6)
+
+  const [countCol61, setCountCol61] = useState(6)
+  const [countCol62, setCountCol62] = useState(6)
+  const [countCol63, setCountCol63] = useState(6)
+
+  const [countCol71, setCountCol71] = useState(6)
+  const [countCol72, setCountCol72] = useState(6)
+  const [countCol73, setCountCol73] = useState(6)
+
+  const [countCol81, setCountCol81] = useState(6)
+  const [countCol82, setCountCol82] = useState(6)
+  const [countCol83, setCountCol83] = useState(6)
+
+  //----------------------------------------------------
 
   const [timeold1, setTimeold1] = useState([false, false, false, false, false, false, false])
   const [timeold2, setTimeold2] = useState([false, false, false, false, false, false, false])
@@ -85,6 +111,30 @@ const DistributionWPlaner = () => {
   const [timeold21, setTimeold21] = useState([false, false, false, false, false, false, false])
   const [timeold22, setTimeold22] = useState([false, false, false, false, false, false, false])
   const [timeold23, setTimeold23] = useState([false, false, false, false, false, false, false])
+
+  const [timeold31, setTimeold31] = useState([false, false, false, false, false, false, false])
+  const [timeold32, setTimeold32] = useState([false, false, false, false, false, false, false])
+  const [timeold33, setTimeold33] = useState([false, false, false, false, false, false, false])
+
+  const [timeold41, setTimeold41] = useState([false, false, false, false, false, false, false])
+  const [timeold42, setTimeold42] = useState([false, false, false, false, false, false, false])
+  const [timeold43, setTimeold43] = useState([false, false, false, false, false, false, false])
+
+  const [timeold51, setTimeold51] = useState([false, false, false, false, false, false, false])
+  const [timeold52, setTimeold52] = useState([false, false, false, false, false, false, false])
+  const [timeold53, setTimeold53] = useState([false, false, false, false, false, false, false])
+
+  const [timeold61, setTimeold61] = useState([false, false, false, false, false, false, false])
+  const [timeold62, setTimeold62] = useState([false, false, false, false, false, false, false])
+  const [timeold63, setTimeold63] = useState([false, false, false, false, false, false, false])
+
+  const [timeold71, setTimeold71] = useState([false, false, false, false, false, false, false])
+  const [timeold72, setTimeold72] = useState([false, false, false, false, false, false, false])
+  const [timeold73, setTimeold73] = useState([false, false, false, false, false, false, false])
+
+  const [timeold81, setTimeold81] = useState([false, false, false, false, false, false, false])
+  const [timeold82, setTimeold82] = useState([false, false, false, false, false, false, false])
+  const [timeold83, setTimeold83] = useState([false, false, false, false, false, false, false])
 
   const d = new Date();
   const month = String(d.getMonth()+1).padStart(2, "0");
@@ -459,6 +509,26 @@ const [dates888, setDates888] = useState([
 
       let plan2 = await getPlan(`${day2}.${month2}.${year}`);
       console.log("plan2: ", plan2)
+
+      let plan3 = await getPlan(`${day3}.${month3}.${year}`);
+      console.log("plan3: ", plan3)
+
+      let plan4 = await getPlan(`${day4}.${month4}.${year}`);
+      console.log("plan4: ", plan4)
+
+      let plan5 = await getPlan(`${day5}.${month5}.${year}`);
+      console.log("plan5: ", plan5)
+
+      let plan6 = await getPlan(`${day6}.${month6}.${year}`);
+      console.log("plan6: ", plan6)
+
+      let plan7 = await getPlan(`${day7}.${month7}.${year}`);
+      console.log("plan7: ", plan7)
+
+      let plan8 = await getPlan(`${day8}.${month8}.${year}`);
+      console.log("plan8: ", plan8)
+
+
       
       //const d = new Date() //Текущая дата и время
       const chas = d.getHours();
@@ -501,7 +571,7 @@ const [dates888, setDates888] = useState([
         setDates1(times2)
         setDates11(times3)
 
-        setCountCol(ind1)
+        setCountCol1(ind1)
         setCountCol2(ind2 - ind1)
         setCountCol3(planTimes.length - ind2) 
       }
@@ -542,13 +612,263 @@ const [dates888, setDates888] = useState([
         setDates22(times2)
         setDates222(times3)
 
-        setCountCol4(ind1)
-        setCountCol5(ind2 - ind1)
-        setCountCol6(planTimes2.length - ind2) 
+        setCountCol21(ind1)
+        setCountCol22(ind2 - ind1)
+        setCountCol23(planTimes2.length - ind2) 
 
-      }        
+      }     
+      
+      //3-й день
+      if (plan2 !== null) {
+        const planTimes3 = JSON.parse(plan2.times)
 
+        const ind1 = planTimes3.findIndex(date => date.time === '12:00')
+        const ind2 = planTimes3.findIndex(date => date.time === '18:00')
 
+        const times = planTimes3.slice(0, ind1);
+        const times2 = planTimes3.slice(ind1, ind2);
+        const times3 = planTimes3.slice(ind2, planTimes3.length); 
+
+        times.forEach((time, index)=> {
+          if (time.save) {
+            value31[index] = true
+            setValue31(value31)
+          }
+        })
+
+        times2.forEach((time, index)=> {
+          if (time.save) {
+            value32[index] = true
+            setValue32(value32)
+          }
+        })
+
+        times3.forEach((time, index)=> {
+          if (time.save) {
+            value33[index] = true
+            setValue33(value33)
+          }
+        })
+
+        setDates3(times)
+        setDates33(times2)
+        setDates333(times3)
+
+        setCountCol31(ind1)
+        setCountCol32(ind2 - ind1)
+        setCountCol33(planTimes3.length - ind2) 
+
+      } 
+
+      //4-й день
+      if (plan4 !== null) {
+        const planTimes4 = JSON.parse(plan4.times)
+
+        const ind1 = planTimes4.findIndex(date => date.time === '12:00')
+        const ind2 = planTimes4.findIndex(date => date.time === '18:00')
+
+        const times = planTimes4.slice(0, ind1);
+        const times2 = planTimes4.slice(ind1, ind2);
+        const times3 = planTimes4.slice(ind2, planTimes4.length); 
+
+        times.forEach((time, index)=> {
+          if (time.save) {
+            value41[index] = true
+            setValue41(value41)
+          }
+        })
+
+        times2.forEach((time, index)=> {
+          if (time.save) {
+            value42[index] = true
+            setValue42(value42)
+          }
+        })
+
+        times3.forEach((time, index)=> {
+          if (time.save) {
+            value43[index] = true
+            setValue43(value43)
+          }
+        })
+
+        setDates4(times)
+        setDates44(times2)
+        setDates44(times3)
+
+        setCountCol41(ind1)
+        setCountCol42(ind2 - ind1)
+        setCountCol43(planTimes4.length - ind2) 
+
+      } 
+
+      //5-й день
+      if (plan5 !== null) {
+        const planTimes5 = JSON.parse(plan5.times)
+
+        const ind1 = planTimes5.findIndex(date => date.time === '12:00')
+        const ind2 = planTimes5.findIndex(date => date.time === '18:00')
+
+        const times = planTimes5.slice(0, ind1);
+        const times2 = planTimes5.slice(ind1, ind2);
+        const times3 = planTimes5.slice(ind2, planTimes5.length); 
+
+        times.forEach((time, index)=> {
+          if (time.save) {
+            value51[index] = true
+            setValue51(value51)
+          }
+        })
+
+        times2.forEach((time, index)=> {
+          if (time.save) {
+            value52[index] = true
+            setValue52(value52)
+          }
+        })
+
+        times3.forEach((time, index)=> {
+          if (time.save) {
+            value53[index] = true
+            setValue53(value53)
+          }
+        })
+
+        setDates5(times)
+        setDates55(times2)
+        setDates555(times3)
+
+        setCountCol51(ind1)
+        setCountCol52(ind2 - ind1)
+        setCountCol53(planTimes5.length - ind2) 
+
+      } 
+
+      //6-й день
+      if (plan6 !== null) {
+        const planTimes6 = JSON.parse(plan6.times)
+
+        const ind1 = planTimes6.findIndex(date => date.time === '12:00')
+        const ind2 = planTimes6.findIndex(date => date.time === '18:00')
+
+        const times = planTimes6.slice(0, ind1);
+        const times2 = planTimes6.slice(ind1, ind2);
+        const times3 = planTimes6.slice(ind2, planTimes6.length); 
+
+        times.forEach((time, index)=> {
+          if (time.save) {
+            value61[index] = true
+            setValue61(value61)
+          }
+        })
+
+        times2.forEach((time, index)=> {
+          if (time.save) {
+            value62[index] = true
+            setValue62(value62)
+          }
+        })
+
+        times3.forEach((time, index)=> {
+          if (time.save) {
+            value63[index] = true
+            setValue63(value63)
+          }
+        })
+
+        setDates6(times)
+        setDates66(times2)
+        setDates666(times3)
+
+        setCountCol61(ind1)
+        setCountCol62(ind2 - ind1)
+        setCountCol63(planTimes6.length - ind2) 
+
+      } 
+
+      //7-й день
+      if (plan7 !== null) {
+        const planTimes7 = JSON.parse(plan7.times)
+
+        const ind1 = planTimes7.findIndex(date => date.time === '12:00')
+        const ind2 = planTimes7.findIndex(date => date.time === '18:00')
+
+        const times = planTimes7.slice(0, ind1);
+        const times2 = planTimes7.slice(ind1, ind2);
+        const times3 = planTimes7.slice(ind2, planTimes7.length); 
+
+        times.forEach((time, index)=> {
+          if (time.save) {
+            value71[index] = true
+            setValue71(value71)
+          }
+        })
+
+        times2.forEach((time, index)=> {
+          if (time.save) {
+            value72[index] = true
+            setValue72(value72)
+          }
+        })
+
+        times3.forEach((time, index)=> {
+          if (time.save) {
+            value73[index] = true
+            setValue73(value73)
+          }
+        })
+
+        setDates7(times)
+        setDates77(times2)
+        setDates777(times3)
+
+        setCountCol71(ind1)
+        setCountCol72(ind2 - ind1)
+        setCountCol73(planTimes7.length - ind2) 
+
+      } 
+
+      //8-й день
+      if (plan8 !== null) {
+        const planTimes8 = JSON.parse(plan8.times)
+
+        const ind1 = planTimes8.findIndex(date => date.time === '12:00')
+        const ind2 = planTimes8.findIndex(date => date.time === '18:00')
+
+        const times = planTimes8.slice(0, ind1);
+        const times2 = planTimes8.slice(ind1, ind2);
+        const times3 = planTimes8.slice(ind2, planTimes8.length); 
+
+        times.forEach((time, index)=> {
+          if (time.save) {
+            value81[index] = true
+            setValue81(value81)
+          }
+        })
+
+        times2.forEach((time, index)=> {
+          if (time.save) {
+            value82[index] = true
+            setValue82(value82)
+          }
+        })
+
+        times3.forEach((time, index)=> {
+          if (time.save) {
+            value83[index] = true
+            setValue83(value83)
+          }
+        })
+
+        setDates8(times)
+        setDates88(times2)
+        setDates888(times3)
+
+        setCountCol81(ind1)
+        setCountCol82(ind2 - ind1)
+        setCountCol83(planTimes8.length - ind2) 
+
+      } 
 
 
       //блокируем прошедшее время
@@ -582,13 +902,11 @@ const [dates888, setDates888] = useState([
   const changeStatus = (ind, tab) => {
     if (tab === 1) {
       if (dates[ind].save === true) {
-        console.log('true')
         value1[ind] = false
         dates[ind].save = false
         dates[ind].proj = ''
         dates[ind].uuid = ''
       } else {
-        console.log('false')
         value1[ind] = true
         dates[ind].proj = projectName //location.state.project
         dates[ind].uuid = uuidDistrib
@@ -654,7 +972,7 @@ const [dates888, setDates888] = useState([
       }
 
       setDates2(dates2)
-      setValue1(value1) 
+      setValue21(value21) 
     }
 
     if (tab === 2) {
@@ -710,7 +1028,7 @@ const [dates888, setDates888] = useState([
       }
 
       setDates3(dates3)
-      setValue1(value1) 
+      setValue31(value31) 
     }
 
     if (tab === 2) {
@@ -727,24 +1045,24 @@ const [dates888, setDates888] = useState([
       } 
 
       setDates33(dates33)
-      setValue22(value22)
+      setValue32(value32)
     }
 
     if (tab === 3) {
-      if (value23[ind]) {
-        value23[ind] = false
+      if (value33[ind]) {
+        value33[ind] = false
         dates333[ind].proj = ''
         dates333[ind].uuid = ''
         dates333[ind].save = false
       } else {
-        value23[ind] = true
+        value33[ind] = true
         dates333[ind].proj = projectName //location.state.project
         dates333[ind].uuid = uuidDistrib
         dates333[ind].save = true
       } 
 
       setDates333(dates333)
-      setValue23(value23)
+      setValue33(value33)
     }
     
 
@@ -754,53 +1072,53 @@ const [dates888, setDates888] = useState([
   const changeStatus4 = (ind, tab) => {
     if (tab === 1) {
       if (dates4[ind].save === true) {
-        value21[ind] = false
+        value41[ind] = false
         dates4[ind].save = false
         dates4[ind].proj = ''
         dates4[ind].uuid = ''
       } else {
-        value21[ind] = true
+        value41[ind] = true
         dates4[ind].proj = projectName //location.state.project
         dates4[ind].uuid = uuidDistrib
         dates4[ind].save = true
       }
 
       setDates4(dates4)
-      setValue1(value1) 
+      setValue41(value41) 
     }
 
     if (tab === 2) {
-      if (value22[ind]) {
-        value22[ind] = false
+      if (value42[ind]) {
+        value42[ind] = false
         dates44[ind].proj = ''
         dates44[ind].uuid = ''
         dates44[ind].save = false
       } else {
-        value22[ind] = true
+        value42[ind] = true
         dates44[ind].proj = projectName //location.state.project
         dates44[ind].uuid = uuidDistrib
         dates44[ind].save = true
       } 
 
       setDates44(dates44)
-      setValue22(value22)
+      setValue42(value42)
     }
 
     if (tab === 3) {
-      if (value23[ind]) {
-        value23[ind] = false
+      if (value43[ind]) {
+        value43[ind] = false
         dates444[ind].proj = ''
         dates444[ind].uuid = ''
         dates444[ind].save = false
       } else {
-        value23[ind] = true
+        value43[ind] = true
         dates444[ind].proj = projectName //location.state.project
         dates444[ind].uuid = uuidDistrib
         dates444[ind].save = true
       } 
 
       setDates444(dates444)
-      setValue23(value23)
+      setValue43(value43)
     }
     
 
@@ -810,53 +1128,53 @@ const [dates888, setDates888] = useState([
   const changeStatus5 = (ind, tab) => {
     if (tab === 1) {
       if (dates5[ind].save === true) {
-        value21[ind] = false
+        value51[ind] = false
         dates5[ind].save = false
         dates5[ind].proj = ''
         dates5[ind].uuid = ''
       } else {
-        value21[ind] = true
+        value51[ind] = true
         dates5[ind].proj = projectName //location.state.project
         dates5[ind].uuid = uuidDistrib
         dates5[ind].save = true
       }
 
-      setDates2(dates2)
-      setValue1(value1) 
+      setDates5(dates5)
+      setValue51(value51) 
     }
 
     if (tab === 2) {
-      if (value22[ind]) {
-        value22[ind] = false
+      if (value52[ind]) {
+        value52[ind] = false
         dates55[ind].proj = ''
         dates55[ind].uuid = ''
         dates55[ind].save = false
       } else {
-        value22[ind] = true
+        value52[ind] = true
         dates55[ind].proj = projectName //location.state.project
         dates55[ind].uuid = uuidDistrib
         dates55[ind].save = true
       } 
 
       setDates55(dates55)
-      setValue22(value22)
+      setValue22(value52)
     }
 
     if (tab === 3) {
-      if (value23[ind]) {
-        value23[ind] = false
+      if (value53[ind]) {
+        value53[ind] = false
         dates555[ind].proj = ''
         dates555[ind].uuid = ''
         dates555[ind].save = false
       } else {
-        value23[ind] = true
+        value53[ind] = true
         dates555[ind].proj = projectName //location.state.project
         dates555[ind].uuid = uuidDistrib
         dates555[ind].save = true
       } 
 
       setDates555(dates555)
-      setValue23(value23)
+      setValue53(value53)
     }
     
 
@@ -866,53 +1184,53 @@ const [dates888, setDates888] = useState([
   const changeStatus6 = (ind, tab) => {
     if (tab === 1) {
       if (dates6[ind].save === true) {
-        value21[ind] = false
+        value61[ind] = false
         dates6[ind].save = false
         dates6[ind].proj = ''
         dates6[ind].uuid = ''
       } else {
-        value21[ind] = true
+        value61[ind] = true
         dates6[ind].proj = projectName //location.state.project
         dates6[ind].uuid = uuidDistrib
         dates6[ind].save = true
       }
 
       setDates6(dates6)
-      setValue1(value1) 
+      setValue61(value61) 
     }
 
     if (tab === 2) {
-      if (value22[ind]) {
-        value22[ind] = false
+      if (value62[ind]) {
+        value62[ind] = false
         dates66[ind].proj = ''
         dates66[ind].uuid = ''
         dates66[ind].save = false
       } else {
-        value22[ind] = true
+        value62[ind] = true
         dates66[ind].proj = projectName //location.state.project
         dates66[ind].uuid = uuidDistrib
         dates66[ind].save = true
       } 
 
-      setDates66(dates22)
-      setValue22(value22)
+      setDates66(dates66)
+      setValue62(value62)
     }
 
     if (tab === 3) {
-      if (value23[ind]) {
-        value23[ind] = false
+      if (value63[ind]) {
+        value63[ind] = false
         dates666[ind].proj = ''
         dates666[ind].uuid = ''
         dates666[ind].save = false
       } else {
-        value23[ind] = true
+        value63[ind] = true
         dates666[ind].proj = projectName //location.state.project
         dates666[ind].uuid = uuidDistrib
         dates666[ind].save = true
       } 
 
       setDates666(dates666)
-      setValue23(value23)
+      setValue63(value63)
     }
     
 
@@ -922,53 +1240,53 @@ const [dates888, setDates888] = useState([
   const changeStatus7 = (ind, tab) => {
     if (tab === 1) {
       if (dates7[ind].save === true) {
-        value21[ind] = false
+        value71[ind] = false
         dates7[ind].save = false
         dates7[ind].proj = ''
         dates7[ind].uuid = ''
       } else {
-        value21[ind] = true
+        value71[ind] = true
         dates7[ind].proj = projectName //location.state.project
         dates7[ind].uuid = uuidDistrib
         dates7[ind].save = true
       }
 
       setDates7(dates7)
-      setValue1(value1) 
+      setValue71(value71) 
     }
 
     if (tab === 2) {
-      if (value22[ind]) {
-        value22[ind] = false
+      if (value72[ind]) {
+        value72[ind] = false
         dates77[ind].proj = ''
         dates77[ind].uuid = ''
         dates77[ind].save = false
       } else {
-        value22[ind] = true
+        value72[ind] = true
         dates77[ind].proj = projectName //location.state.project
         dates77[ind].uuid = uuidDistrib
         dates77[ind].save = true
       } 
 
       setDates77(dates77)
-      setValue22(value22)
+      setValue72(value72)
     }
 
     if (tab === 3) {
-      if (value23[ind]) {
-        value23[ind] = false
+      if (value73[ind]) {
+        value73[ind] = false
         dates777[ind].proj = ''
         dates777[ind].uuid = ''
         dates777[ind].save = false
       } else {
-        value23[ind] = true
+        value73[ind] = true
         dates777[ind].proj = projectName //location.state.project
         dates777[ind].uuid = uuidDistrib
         dates777[ind].save = true
       } 
 
       setDates777(dates777)
-      setValue23(value23)
+      setValue73(value73)
     }
     
 
@@ -978,53 +1296,53 @@ const [dates888, setDates888] = useState([
   const changeStatus8 = (ind, tab) => {
     if (tab === 1) {
       if (dates8[ind].save === true) {
-        value21[ind] = false
+        value81[ind] = false
         dates8[ind].save = false
         dates8[ind].proj = ''
         dates8[ind].uuid = ''
       } else {
-        value21[ind] = true
+        value81[ind] = true
         dates8[ind].proj = projectName //location.state.project
         dates8[ind].uuid = uuidDistrib
         dates8[ind].save = true
       }
 
       setDates8(dates8)
-      setValue1(value1) 
+      setValue81(value81) 
     }
 
     if (tab === 2) {
-      if (value22[ind]) {
-        value22[ind] = false
+      if (value82[ind]) {
+        value82[ind] = false
         dates88[ind].proj = ''
         dates88[ind].uuid = ''
         dates88[ind].save = false
       } else {
-        value22[ind] = true
+        value82[ind] = true
         dates88[ind].proj = projectName //location.state.project
         dates88[ind].uuid = uuidDistrib
         dates88[ind].save = true
       } 
 
       setDates88(dates88)
-      setValue22(value22)
+      setValue82(value82)
     }
 
     if (tab === 3) {
-      if (value23[ind]) {
-        value23[ind] = false
+      if (value83[ind]) {
+        value83[ind] = false
         dates888[ind].proj = ''
         dates888[ind].uuid = ''
         dates888[ind].save = false
       } else {
-        value23[ind] = true
+        value83[ind] = true
         dates888[ind].proj = projectName //location.state.project
         dates888[ind].uuid = uuidDistrib
         dates888[ind].save = true
       } 
 
       setDates888(dates888)
-      setValue23(value23)
+      setValue83(value83)
     }
     
 
@@ -1040,7 +1358,7 @@ const [dates888, setDates888] = useState([
       if (tab === 1) {
         //обработка нажатия вкл/выкл
         if (dates[ind+1].time === '07:00') {
-          setCountCol(countCol+1) //для высоту ячейки с датой
+          setCountCol1(countCol1+1) //для высоту ячейки с датой
           arr = dates.slice(0); //копируем массив dates
           const newObj = {
             date: date_str,
@@ -1061,7 +1379,7 @@ const [dates888, setDates888] = useState([
 
         } else {
           if (dates[ind+1].proj === ''){
-            setCountCol(countCol-1)
+            setCountCol1(countCol1-1)
             arr = dates.slice(0); 
             arr.splice(ind+1, 1);
             setDates(arr)
@@ -1082,7 +1400,7 @@ const [dates888, setDates888] = useState([
         if (tab === 1) {
           //обработка нажатия вкл/выкл
           if (dates[ind+1].time === '08:00') {
-            setCountCol(countCol+1) //для высоту ячейки с датой
+            setCountCol1(countCol1+1) //для высоту ячейки с датой
             arr = dates.slice(0); //копируем массив dates
             const newObj = {
               date: date_str,
@@ -1104,7 +1422,7 @@ const [dates888, setDates888] = useState([
                     
           } else {
             if (dates[ind+1].proj === ''){
-              setCountCol(countCol-1)
+              setCountCol1(countCol1-1)
               arr = dates.slice(0); 
               arr.splice(ind+1, 1);
               setDates(arr)
@@ -1127,7 +1445,7 @@ const [dates888, setDates888] = useState([
         if (tab === 1) {
           //обработка нажатия вкл/выкл
           if (dates[ind+1].time === '09:00') {
-            setCountCol(countCol+1) //для высоту ячейки с датой
+            setCountCol1(countCol1+1) //для высоту ячейки с датой
             arr = dates.slice(0); //копируем массив dates
             const newObj = {
               date: date_str,
@@ -1149,7 +1467,7 @@ const [dates888, setDates888] = useState([
                     
           } else {
             if (dates[ind+1].proj === ''){
-              setCountCol(countCol-1)
+              setCountCol1(countCol1-1)
               arr = dates.slice(0); 
               arr.splice(ind+1, 1);
               setDates(arr)
@@ -1171,7 +1489,7 @@ const [dates888, setDates888] = useState([
         if (tab === 1) {
           //обработка нажатия вкл/выкл
           if (dates[ind+1].time === '10:00') {
-            setCountCol(countCol+1) //для высоту ячейки с датой
+            setCountCol1(countCol1+1) //для высоту ячейки с датой
             arr = dates.slice(0); //копируем массив dates
             const newObj = {
               date: date_str,
@@ -1193,7 +1511,7 @@ const [dates888, setDates888] = useState([
                     
           } else {
             if (dates[ind+1].proj === ''){
-              setCountCol(countCol-1)
+              setCountCol1(countCol1-1)
               arr = dates.slice(0); 
               arr.splice(ind+1, 1);
               setDates(arr)
@@ -1215,7 +1533,7 @@ const [dates888, setDates888] = useState([
         if (tab === 1) {
           //обработка нажатия вкл/выкл
           if (dates[ind+1].time === '11:00') {
-            setCountCol(countCol+1) //для высоту ячейки с датой
+            setCountCol1(countCol1+1) //для высоту ячейки с датой
             arr = dates.slice(0); //копируем массив dates
             const newObj = {
               date: date_str,
@@ -1237,7 +1555,7 @@ const [dates888, setDates888] = useState([
                     
           } else {
             if (dates[ind+1].proj === ''){
-              setCountCol(countCol-1)
+              setCountCol1(countCol1-1)
               arr = dates.slice(0); 
               arr.splice(ind+1, 1);
               setDates(arr)
@@ -1257,7 +1575,7 @@ const [dates888, setDates888] = useState([
       if (tab === 1) {
         //обработка нажатия вкл/выкл
           if (dates[ind+1]?.time !== '11:30') {
-            setCountCol(countCol+1) //для высоту ячейки с датой
+            setCountCol1(countCol1+1) //для высоту ячейки с датой
             arr = dates.slice(0); //копируем массив dates
             console.log(arr)
             const newObj = {
@@ -1281,7 +1599,7 @@ const [dates888, setDates888] = useState([
           
           if (dates[ind+1]?.time === '11:30') {
             if (dates[ind+1].proj === ''){
-              setCountCol(countCol-1)
+              setCountCol1(countCol1-1)
               arr = dates.slice(0); 
               arr.splice(ind+1, 1);
               setDates(arr)
@@ -1805,7 +2123,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     if (tab === 1) {
       //обработка нажатия вкл/выкл
       if (dates2[ind+1].time === '07:00') {
-        setCountCol4(countCol4+1) //для высоту ячейки с датой
+        setCountCol21(countCol21+1) //для высоту ячейки с датой
         arr = dates2.slice(0); //копируем массив dates
         const newObj = {
           date: date_str2,
@@ -1827,7 +2145,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
       } else {
         if (dates2[ind+1].proj === ''){
-          setCountCol4(countCol4-1)
+          setCountCol21(countCol21-1)
           arr = dates2.slice(0); 
           arr.splice(ind+1, 1);
           setDates2(arr)
@@ -1848,7 +2166,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
       if (tab === 1) {
         //обработка нажатия вкл/выкл
         if (dates2[ind+1].time === '08:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
+          setCountCol21(countCol21+1) //для высоту ячейки с датой
           arr = dates2.slice(0); //копируем массив dates
           const newObj = {
             date: date_str2,
@@ -1870,7 +2188,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                   
         } else {
           if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
+            setCountCol21(countCol21-1)
             arr = dates2.slice(0); 
             arr.splice(ind+1, 1);
             setDates2(arr)
@@ -1893,7 +2211,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
       if (tab === 1) {
         //обработка нажатия вкл/выкл
         if (dates2[ind+1].time === '09:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
+          setCountCol21(countCol21+1) //для высоту ячейки с датой
           arr = dates2.slice(0); //копируем массив dates
           const newObj = {
             date: date_str2,
@@ -1914,7 +2232,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           setValue21(value21)                 
         } else {
           if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
+            setCountCol21(countCol21-1)
             arr = dates2.slice(0); 
             arr.splice(ind+1, 1);
             setDates2(arr)
@@ -1936,7 +2254,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
       if (tab === 1) {
         //обработка нажатия вкл/выкл
         if (dates2[ind+1].time === '10:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
+          setCountCol21(countCol21+1) //для высоту ячейки с датой
           arr = dates2.slice(0); //копируем массив dates
           const newObj = {
             date: date_str2,
@@ -1958,7 +2276,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
                   
         } else {
           if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
+            setCountCol21(countCol21-1)
             arr = dates2.slice(0); 
             arr.splice(ind+1, 1);
             setDates2(arr)
@@ -1980,7 +2298,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
       if (tab === 1) {
         //обработка нажатия вкл/выкл
         if (dates2[ind+1].time === '11:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
+          setCountCol21(countCol21+1) //для высоту ячейки с датой
           arr = dates2.slice(0); //копируем массив dates
           const newObj = {
             date: date_str2,
@@ -2001,7 +2319,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
           setValue21(value21)                 
         } else {
           if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
+            setCountCol21(countCol21-1)
             arr = dates2.slice(0); 
             arr.splice(ind+1, 1);
             setDates2(arr)
@@ -2021,7 +2339,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     if (tab === 1) {
       //обработка нажатия вкл/выкл
         if (dates2[ind+1]?.time !== '11:30') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
+          setCountCol21(countCol21+1) //для высоту ячейки с датой
           arr = dates2.slice(0); //копируем массив dates
           console.log(arr)
           const newObj = {
@@ -2045,7 +2363,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
         
         if (dates2[ind+1]?.time === '11:30') {
           if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
+            setCountCol21(countCol21-1)
             arr = dates2.slice(0); 
             arr.splice(ind+1, 1);
             setDates2(arr)
@@ -2066,7 +2384,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
       if (dates22[ind+1].time === '13:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
+        setCountCol22(countCol22+1) //для высоту ячейки с датой
         arr = dates22.slice(0); //копируем массив dates
         const newObj = {
           date: date_str2,
@@ -2088,7 +2406,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
       } else {
         if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
+          setCountCol22(countCol22-1)
           arr = dates22.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
@@ -2107,7 +2425,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
       if (dates22[ind+1].time === '14:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
+        setCountCol22(countCol22+1) //для высоту ячейки с датой
         arr = dates22.slice(0); //копируем массив dates
         const newObj = {
           date: date_str2,
@@ -2129,7 +2447,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
       } else {
         if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
+          setCountCol22(countCol22-1)
           arr = dates22.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
@@ -2148,7 +2466,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
       if (dates22[ind+1].time === '15:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
+        setCountCol22(countCol22+1) //для высоту ячейки с датой
         arr = dates22.slice(0); //копируем массив dates
         const newObj = {
           date: date_str2,
@@ -2170,7 +2488,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
       } else {
         if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
+          setCountCol22(countCol22-1)
           arr = dates22.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
@@ -2189,7 +2507,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
       if (dates22[ind+1].time === '16:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
+        setCountCol22(countCol22+1) //для высоту ячейки с датой
         arr = dates22.slice(0); //копируем массив dates
         const newObj = {
           date: date_str2,
@@ -2211,7 +2529,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
       } else {
         if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
+          setCountCol22(countCol22-1)
           arr = dates22.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
@@ -2230,7 +2548,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
       if (dates22[ind+1].time === '17:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
+        setCountCol22(countCol22+1) //для высоту ячейки с датой
         arr = dates22.slice(0); //копируем массив dates
         const newObj = {
           date: date_str2,
@@ -2252,7 +2570,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
       } else {
         if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
+          setCountCol22(countCol22-1)
           arr = dates22.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
@@ -2271,7 +2589,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
       if (dates22[ind+1]?.time !== '17:30') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
+        setCountCol22(countCol22+1) //для высоту ячейки с датой
         arr = dates22.slice(0); //копируем массив dates
         console.log(arr)
         const newObj = {
@@ -2295,7 +2613,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
       
       if (dates22[ind+1]?.time === '17:30') {
         if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
+          setCountCol22(countCol22-1)
           arr = dates22.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
@@ -2316,7 +2634,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
       if (dates222[ind+1].time === '19:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
+        setCountCol23(countCol23+1) //для высоту ячейки с датой
         arr = dates222.slice(0); //копируем массив dates
         const newObj = {
           date: date_str2,
@@ -2338,7 +2656,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
       } else {
         if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
+          setCountCol23(countCol23-1)
           arr = dates222.slice(0); 
           arr.splice(ind+1, 1);
           setDates222(arr)
@@ -2357,7 +2675,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
       if (dates222[ind+1].time === '20:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
+        setCountCol23(countCol23+1) //для высоту ячейки с датой
         arr = dates222.slice(0); //копируем массив dates
         const newObj = {
           date: date_str2,
@@ -2379,7 +2697,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
       } else {
         if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
+          setCountCol23(countCol23-1)
           arr = dates222.slice(0); 
           arr.splice(ind+1, 1);
           setDates222(arr)
@@ -2398,7 +2716,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
       if (dates222[ind+1].time === '21:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
+        setCountCol23(countCol23+1) //для высоту ячейки с датой
         arr = dates222.slice(0); //копируем массив dates
         const newObj = {
           date: date_str2,
@@ -2420,7 +2738,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
       } else {
         if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
+          setCountCol23(countCol23-1)
           arr = dates222.slice(0); 
           arr.splice(ind+1, 1);
           setDates222(arr)
@@ -2439,7 +2757,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
       if (dates222[ind+1].time === '22:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
+        setCountCol23(countCol23+1) //для высоту ячейки с датой
         arr = dates222.slice(0); //копируем массив dates
         const newObj = {
           date: date_str2,
@@ -2461,7 +2779,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
       } else {
         if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
+          setCountCol23(countCol23-1)
           arr = dates222.slice(0); 
           arr.splice(ind+1, 1);
           setDates222(arr)
@@ -2480,7 +2798,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
       if (dates222[ind+1].time === '23:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
+        setCountCol23(countCol23 + 1) //для высоту ячейки с датой
         arr = dates222.slice(0); //копируем массив dates
         const newObj = {
           date: date_str2,
@@ -2502,7 +2820,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
 
       } else {
         if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
+          setCountCol23(countCol23-1)
           arr = dates222.slice(0); 
           arr.splice(ind+1, 1);
           setDates222(arr)
@@ -2521,7 +2839,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
       if (dates222[ind+1]?.time !== '23:30') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
+        setCountCol23(countCol23+1) //для высоту ячейки с датой
         arr = dates222.slice(0); //копируем массив dates
         console.log(arr)
         const newObj = {
@@ -2545,7 +2863,7 @@ const clickShowEditTime2 = (t, ind, tab) => {
       
       if (dates222[ind+1]?.time === '23:30') {
         if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
+          setCountCol23(countCol23-1)
           arr = dates222.slice(0); 
           arr.splice(ind+1, 1);
           setDates222(arr)
@@ -2568,11 +2886,11 @@ const clickShowEditTime3 = (t, ind, tab) => {
   if (t === '06:00')  {
     if (tab === 1) {
       //обработка нажатия вкл/выкл
-      if (dates2[ind+1].time === '07:00') {
-        setCountCol4(countCol4+1) //для высоту ячейки с датой
-        arr = dates2.slice(0); //копируем массив dates
+      if (dates3[ind+1].time === '07:00') {
+        setCountCol31(countCol31+1) //для высоту ячейки с датой
+        arr = dates3.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str3,
           time: '06:30',
           proj: '',
           uuid: '',
@@ -2581,26 +2899,26 @@ const clickShowEditTime3 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates2(arr)
+        setDates3(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value21[index] = item.save
+          value31[index] = item.save
         })
-        setValue21(value21)
+        setValue31(value31)
 
       } else {
-        if (dates2[ind+1].proj === ''){
-          setCountCol4(countCol4-1)
-          arr = dates2.slice(0); 
+        if (dates3[ind+1].proj === ''){
+          setCountCol31(countCol31-1)
+          arr = dates3.slice(0); 
           arr.splice(ind+1, 1);
-          setDates2(arr)
+          setDates3(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value31[index] = item.save
           })
-          setValue21(value21)           
+          setValue31(value31)           
         }        
       }
     }
@@ -2611,11 +2929,11 @@ const clickShowEditTime3 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '08:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates3[ind+1].time === '08:00') {
+          setCountCol31(countCol31+1) //для высоту ячейки с датой
+          arr = dates3.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str3,
             time: '07:30',
             proj: '',
             uuid: '',
@@ -2624,26 +2942,26 @@ const clickShowEditTime3 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates3(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value31[index] = item.save
           })
-          setValue21(value21)
+          setValue31(value31)
                   
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates3[ind+1].proj === ''){
+            setCountCol31(countCol31-1)
+            arr = dates3.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates3(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value31[index] = item.save
             })
-            setValue21(value21)           
+            setValue31(value31)           
           }        
         }
       }
@@ -2656,11 +2974,11 @@ const clickShowEditTime3 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '09:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates3[ind+1].time === '09:00') {
+          setCountCol31(countCol31+1) //для высоту ячейки с датой
+          arr = dates3.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str3,
             time: '08:30',
             proj: '',
             uuid: '',
@@ -2669,25 +2987,25 @@ const clickShowEditTime3 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates3(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value31[index] = item.save
           })
-          setValue21(value21)                 
+          setValue31(value31)                 
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates3[ind+1].proj === ''){
+            setCountCol31(countCol31-1)
+            arr = dates3.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates3(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value31[index] = item.save
             })
-            setValue21(value21)           
+            setValue31(value31)           
           }        
         }
       }
@@ -2699,11 +3017,11 @@ const clickShowEditTime3 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '10:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates3[ind+1].time === '10:00') {
+          setCountCol31(countCol31+1) //для высоту ячейки с датой
+          arr = dates3.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str3,
             time: '09:30',
             proj: '',
             uuid: '',
@@ -2712,26 +3030,26 @@ const clickShowEditTime3 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates3(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value1[index] = item.save
+            value31[index] = item.save
           })
-          setValue1(value1)
+          setValue31(value31)
                   
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates3[ind+1].proj === ''){
+            setCountCol31(countCol31-1)
+            arr = dates3.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates3(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value31[index] = item.save
             })
-            setValue21(value21)           
+            setValue31(value31)           
           }        
         }
       }
@@ -2743,11 +3061,11 @@ const clickShowEditTime3 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '11:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates3[ind+1].time === '11:00') {
+          setCountCol31(countCol31+1) //для высоту ячейки с датой
+          arr = dates3.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str3,
             time: '10:30',
             proj: '',
             uuid: '',
@@ -2756,25 +3074,25 @@ const clickShowEditTime3 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates3(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value31[index] = item.save
           })
-          setValue21(value21)                 
+          setValue31(value31)                 
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates3[ind+1].proj === ''){
+            setCountCol31(countCol31-1)
+            arr = dates3.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates3(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value31[index] = item.save
             })
-            setValue21(value21)           
+            setValue31(value31)           
           }        
         }
       }
@@ -2784,12 +3102,12 @@ const clickShowEditTime3 = (t, ind, tab) => {
   if (t === '11:00')  {
     if (tab === 1) {
       //обработка нажатия вкл/выкл
-        if (dates2[ind+1]?.time !== '11:30') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates3[ind+1]?.time !== '11:30') {
+          setCountCol31(countCol31+1) //для высоту ячейки с датой
+          arr = dates3.slice(0); //копируем массив dates
           console.log(arr)
           const newObj = {
-            date: date_str2,
+            date: date_str3,
             time: '11:30',
             proj: '',
             uuid: '',
@@ -2798,27 +3116,27 @@ const clickShowEditTime3 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates3(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value31[index] = item.save
           })
-          setValue21(value21)          
+          setValue31(value31)          
         } 
         
-        if (dates2[ind+1]?.time === '11:30') {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+        if (dates3[ind+1]?.time === '11:30') {
+          if (dates3[ind+1].proj === ''){
+            setCountCol31(countCol31-1)
+            arr = dates3.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates3(arr)
   
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value31[index] = item.save
             })
-            setValue21(value21)           
+            setValue31(value31)           
           }        
         }
     }
@@ -2829,11 +3147,11 @@ const clickShowEditTime3 = (t, ind, tab) => {
   if (t === '12:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '13:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates33[ind+1].time === '13:00') {
+        setCountCol32(countCol32+1) //для высоту ячейки с датой
+        arr = dates33.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str3,
           time: '12:30',
           proj: '',
           uuid: '',
@@ -2842,26 +3160,26 @@ const clickShowEditTime3 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates33(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value32[index] = item.save
         })
-        setValue22(value22)
+        setValue32(value32)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates33[ind+1].proj === ''){
+          setCountCol32(countCol32-1)
+          arr = dates33.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates33(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value32[index] = item.save
           })
-          setValue22(value22)           
+          setValue32(value32)           
         }        
       }
     }
@@ -2870,11 +3188,11 @@ const clickShowEditTime3 = (t, ind, tab) => {
   if (t === '13:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '14:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates33[ind+1].time === '14:00') {
+        setCountCol32(countCol32+1) //для высоту ячейки с датой
+        arr = dates33.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str3,
           time: '13:30',
           proj: '',
           uuid: '',
@@ -2883,26 +3201,26 @@ const clickShowEditTime3 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates33(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
           value22[index] = item.save
         })
-        setValue22(value22)
+        setValue32(value32)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates33[ind+1].proj === ''){
+          setCountCol32(countCol32-1)
+          arr = dates33.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates33(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value32[index] = item.save
           })
-          setValue22(value22)           
+          setValue32(value22)           
         }        
       }
     }
@@ -2911,11 +3229,11 @@ const clickShowEditTime3 = (t, ind, tab) => {
   if (t === '14:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '15:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates33[ind+1].time === '15:00') {
+        setCountCol32(countCol32+1) //для высоту ячейки с датой
+        arr = dates33.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str3,
           time: '14:30',
           proj: '',
           uuid: '',
@@ -2924,26 +3242,26 @@ const clickShowEditTime3 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates33(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value32[index] = item.save
         })
-        setValue22(value22)
+        setValue32(value32)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates33[ind+1].proj === ''){
+          setCountCol32(countCol32-1)
+          arr = dates33.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value32[index] = item.save
           })
-          setValue22(value22)           
+          setValue32(value32)           
         }        
       }
     }
@@ -2952,11 +3270,11 @@ const clickShowEditTime3 = (t, ind, tab) => {
   if (t === '15:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '16:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates33[ind+1].time === '16:00') {
+        setCountCol32(countCol32+1) //для высоту ячейки с датой
+        arr = dates33.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str3,
           time: '15:30',
           proj: '',
           uuid: '',
@@ -2965,26 +3283,26 @@ const clickShowEditTime3 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates33(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value32[index] = item.save
         })
-        setValue22(value22)
+        setValue32(value32)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates33[ind+1].proj === ''){
+          setCountCol32(countCol32-1)
+          arr = dates33.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value32[index] = item.save
           })
-          setValue22(value22)           
+          setValue32(value32)           
         }        
       }
     }
@@ -2993,11 +3311,11 @@ const clickShowEditTime3 = (t, ind, tab) => {
   if (t === '16:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '17:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates33[ind+1].time === '17:00') {
+        setCountCol32(countCol32+1) //для высоту ячейки с датой
+        arr = dates33.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str3,
           time: '16:30',
           proj: '',
           uuid: '',
@@ -3006,26 +3324,26 @@ const clickShowEditTime3 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates33(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value32[index] = item.save
         })
-        setValue22(value22)
+        setValue32(value32)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates33[ind+1].proj === ''){
+          setCountCol32(countCol32-1)
+          arr = dates33.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value32[index] = item.save
           })
-          setValue22(value22)           
+          setValue32(value32)           
         }        
       }
     }
@@ -3034,12 +3352,12 @@ const clickShowEditTime3 = (t, ind, tab) => {
   if (t === '17:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1]?.time !== '17:30') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates33[ind+1]?.time !== '17:30') {
+        setCountCol32(countCol32+1) //для высоту ячейки с датой
+        arr = dates33.slice(0); //копируем массив dates
         console.log(arr)
         const newObj = {
-          date: date_str2,
+          date: date_str3,
           time: '17:30',
           proj: '',
           uuid: '',
@@ -3048,27 +3366,27 @@ const clickShowEditTime3 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates33(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value32[index] = item.save
         })
-        setValue22(value22)          
+        setValue32(value32)          
       } 
       
-      if (dates22[ind+1]?.time === '17:30') {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+      if (dates33[ind+1]?.time === '17:30') {
+        if (dates33[ind+1].proj === ''){
+          setCountCol32(countCol32-1)
+          arr = dates33.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates33(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value32[index] = item.save
           })
-          setValue22(value22)           
+          setValue32(value32)           
         }        
       }
     }
@@ -3079,11 +3397,11 @@ const clickShowEditTime3 = (t, ind, tab) => {
   if (t === '18:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '19:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates333[ind+1].time === '19:00') {
+        setCountCol33(countCol33+1) //для высоту ячейки с датой
+        arr = dates333.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str3,
           time: '18:30',
           proj: '',
           uuid: '',
@@ -3092,26 +3410,26 @@ const clickShowEditTime3 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates333(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value33[index] = item.save
         })
-        setValue23(value23)
+        setValue33(value33)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates333[ind+1].proj === ''){
+          setCountCol33(countCol33-1)
+          arr = dates333.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates333(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value33[index] = item.save
           })
-          setValue23(value23)           
+          setValue33(value33)           
         }        
       }
     }
@@ -3120,11 +3438,11 @@ const clickShowEditTime3 = (t, ind, tab) => {
   if (t === '19:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '20:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates333[ind+1].time === '20:00') {
+        setCountCol33(countCol33+1) //для высоту ячейки с датой
+        arr = dates333.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str3,
           time: '19:30',
           proj: '',
           uuid: '',
@@ -3133,26 +3451,26 @@ const clickShowEditTime3 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates333(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value33[index] = item.save
         })
-        setValue23(value23)
+        setValue33(value33)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates333[ind+1].proj === ''){
+          setCountCol33(countCol33-1)
+          arr = dates333.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates333(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value33[index] = item.save
           })
-          setValue23(value23)           
+          setValue33(value33)           
         }        
       }
     }
@@ -3161,11 +3479,11 @@ const clickShowEditTime3 = (t, ind, tab) => {
   if (t === '20:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '21:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates333[ind+1].time === '21:00') {
+        setCountCol33(countCol33+1) //для высоту ячейки с датой
+        arr = dates333.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str3,
           time: '20:30',
           proj: '',
           uuid: '',
@@ -3174,26 +3492,26 @@ const clickShowEditTime3 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates333(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value33[index] = item.save
         })
-        setValue23(value23)
+        setValue33(value33)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates333[ind+1].proj === ''){
+          setCountCol33(countCol33-1)
+          arr = dates333.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates333(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value33[index] = item.save
           })
-          setValue23(value23)           
+          setValue33(value33)           
         }        
       }
     }
@@ -3202,11 +3520,11 @@ const clickShowEditTime3 = (t, ind, tab) => {
   if (t === '21:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '22:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates333[ind+1].time === '22:00') {
+        setCountCol33(countCol33+1) //для высоту ячейки с датой
+        arr = dates333.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str3,
           time: '21:30',
           proj: '',
           uuid: '',
@@ -3215,26 +3533,26 @@ const clickShowEditTime3 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates333(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value33[index] = item.save
         })
-        setValue23(value23)
+        setValue33(value33)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates333[ind+1].proj === ''){
+          setCountCol33(countCol33-1)
+          arr = dates333.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates333(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value33[index] = item.save
           })
-          setValue23(value23)           
+          setValue33(value33)           
         }        
       }
     }
@@ -3243,11 +3561,11 @@ const clickShowEditTime3 = (t, ind, tab) => {
   if (t === '22:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '23:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates333[ind+1].time === '23:00') {
+        setCountCol33(countCol33+1) //для высоту ячейки с датой
+        arr = dates333.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str3,
           time: '22:30',
           proj: '',
           uuid: '',
@@ -3256,26 +3574,26 @@ const clickShowEditTime3 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates333(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value33[index] = item.save
         })
-        setValue23(value23)
+        setValue33(value33)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates333[ind+1].proj === ''){
+          setCountCol33(countCol33-1)
+          arr = dates333.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates333(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value33[index] = item.save
           })
-          setValue23(value23)           
+          setValue33(value33)           
         }        
       }
     }
@@ -3284,12 +3602,12 @@ const clickShowEditTime3 = (t, ind, tab) => {
   if (t === '23:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1]?.time !== '23:30') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates333[ind+1]?.time !== '23:30') {
+        setCountCol33(countCol33+1) //для высоту ячейки с датой
+        arr = dates333.slice(0); //копируем массив dates
         console.log(arr)
         const newObj = {
-          date: date_str2,
+          date: date_str3,
           time: '23:30',
           proj: '',
           uuid: '',
@@ -3298,27 +3616,27 @@ const clickShowEditTime3 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates333(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value33[index] = item.save
         })
-        setValue23(value23)          
+        setValue33(value33)          
       } 
       
-      if (dates222[ind+1]?.time === '23:30') {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+      if (dates333[ind+1]?.time === '23:30') {
+        if (dates333[ind+1].proj === ''){
+          setCountCol33(countCol33-1)
+          arr = dates333.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates333(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value33[index] = item.save
           })
-          setValue23(value23)           
+          setValue33(value33)           
         }        
       }
     }
@@ -3332,11 +3650,11 @@ const clickShowEditTime4 = (t, ind, tab) => {
   if (t === '06:00')  {
     if (tab === 1) {
       //обработка нажатия вкл/выкл
-      if (dates2[ind+1].time === '07:00') {
-        setCountCol4(countCol4+1) //для высоту ячейки с датой
-        arr = dates2.slice(0); //копируем массив dates
+      if (dates4[ind+1].time === '07:00') {
+        setCountCol41(countCol41+1) //для высоту ячейки с датой
+        arr = dates4.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str4,
           time: '06:30',
           proj: '',
           uuid: '',
@@ -3345,26 +3663,26 @@ const clickShowEditTime4 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates2(arr)
+        setDates4(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value21[index] = item.save
+          value41[index] = item.save
         })
-        setValue21(value21)
+        setValue41(value41)
 
       } else {
-        if (dates2[ind+1].proj === ''){
-          setCountCol4(countCol4-1)
-          arr = dates2.slice(0); 
+        if (dates4[ind+1].proj === ''){
+          setCountCol41(countCol41-1)
+          arr = dates4.slice(0); 
           arr.splice(ind+1, 1);
-          setDates2(arr)
+          setDates4(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value41[index] = item.save
           })
-          setValue21(value21)           
+          setValue41(value41)           
         }        
       }
     }
@@ -3375,11 +3693,11 @@ const clickShowEditTime4 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '08:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates4[ind+1].time === '08:00') {
+          setCountCol41(countCol41+1) //для высоту ячейки с датой
+          arr = dates4.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str4,
             time: '07:30',
             proj: '',
             uuid: '',
@@ -3388,26 +3706,26 @@ const clickShowEditTime4 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates4(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value41[index] = item.save
           })
-          setValue21(value21)
+          setValue41(value41)
                   
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates4[ind+1].proj === ''){
+            setCountCol41(countCol41-1)
+            arr = dates4.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates4(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value41[index] = item.save
             })
-            setValue21(value21)           
+            setValue41(value41)           
           }        
         }
       }
@@ -3420,11 +3738,11 @@ const clickShowEditTime4 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '09:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates4[ind+1].time === '09:00') {
+          setCountCol41(countCol41+1) //для высоту ячейки с датой
+          arr = dates4.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str4,
             time: '08:30',
             proj: '',
             uuid: '',
@@ -3433,25 +3751,25 @@ const clickShowEditTime4 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates4(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value41[index] = item.save
           })
-          setValue21(value21)                 
+          setValue41(value41)                 
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates4[ind+1].proj === ''){
+            setCountCol41(countCol41-1)
+            arr = dates4.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates4(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value41[index] = item.save
             })
-            setValue21(value21)           
+            setValue41(value41)           
           }        
         }
       }
@@ -3463,11 +3781,11 @@ const clickShowEditTime4 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '10:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates4[ind+1].time === '10:00') {
+          setCountCol41(countCol41+1) //для высоту ячейки с датой
+          arr = dates4.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str4,
             time: '09:30',
             proj: '',
             uuid: '',
@@ -3476,7 +3794,7 @@ const clickShowEditTime4 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates4(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
@@ -3485,17 +3803,17 @@ const clickShowEditTime4 = (t, ind, tab) => {
           setValue1(value1)
                   
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates4[ind+1].proj === ''){
+            setCountCol41(countCol41-1)
+            arr = dates4.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates4(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value41[index] = item.save
             })
-            setValue21(value21)           
+            setValue41(value41)           
           }        
         }
       }
@@ -3507,11 +3825,11 @@ const clickShowEditTime4 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '11:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates4[ind+1].time === '11:00') {
+          setCountCol41(countCol41+1) //для высоту ячейки с датой
+          arr = dates4.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str4,
             time: '10:30',
             proj: '',
             uuid: '',
@@ -3520,25 +3838,25 @@ const clickShowEditTime4 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates4(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value41[index] = item.save
           })
-          setValue21(value21)                 
+          setValue41(value41)                 
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates4[ind+1].proj === ''){
+            setCountCol41(countCol41-1)
+            arr = dates4.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates4(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value41[index] = item.save
             })
-            setValue21(value21)           
+            setValue41(value41)           
           }        
         }
       }
@@ -3548,12 +3866,12 @@ const clickShowEditTime4 = (t, ind, tab) => {
   if (t === '11:00')  {
     if (tab === 1) {
       //обработка нажатия вкл/выкл
-        if (dates2[ind+1]?.time !== '11:30') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates4[ind+1]?.time !== '11:30') {
+          setCountCol41(countCol41+1) //для высоту ячейки с датой
+          arr = dates4.slice(0); //копируем массив dates
           console.log(arr)
           const newObj = {
-            date: date_str2,
+            date: date_str4,
             time: '11:30',
             proj: '',
             uuid: '',
@@ -3562,27 +3880,27 @@ const clickShowEditTime4 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates4(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value41[index] = item.save
           })
-          setValue21(value21)          
+          setValue41(value41)          
         } 
         
-        if (dates2[ind+1]?.time === '11:30') {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+        if (dates4[ind+1]?.time === '11:30') {
+          if (dates4[ind+1].proj === ''){
+            setCountCol41(countCol41-1)
+            arr = dates4.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates4(arr)
   
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value41[index] = item.save
             })
-            setValue21(value21)           
+            setValue41(value41)           
           }        
         }
     }
@@ -3593,11 +3911,11 @@ const clickShowEditTime4 = (t, ind, tab) => {
   if (t === '12:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '13:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates44[ind+1].time === '13:00') {
+        setCountCol42(countCol42+1) //для высоту ячейки с датой
+        arr = dates44.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str4,
           time: '12:30',
           proj: '',
           uuid: '',
@@ -3615,9 +3933,9 @@ const clickShowEditTime4 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates44[ind+1].proj === ''){
+          setCountCol42(countCol42-1)
+          arr = dates44.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -3634,11 +3952,11 @@ const clickShowEditTime4 = (t, ind, tab) => {
   if (t === '13:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '14:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates44[ind+1].time === '14:00') {
+        setCountCol42(countCol42+1) //для высоту ячейки с датой
+        arr = dates44.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str4,
           time: '13:30',
           proj: '',
           uuid: '',
@@ -3656,9 +3974,9 @@ const clickShowEditTime4 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates44[ind+1].proj === ''){
+          setCountCol42(countCol42-1)
+          arr = dates44.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -3675,11 +3993,11 @@ const clickShowEditTime4 = (t, ind, tab) => {
   if (t === '14:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '15:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates44[ind+1].time === '15:00') {
+        setCountCol42(countCol42+1) //для высоту ячейки с датой
+        arr = dates44.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str4,
           time: '14:30',
           proj: '',
           uuid: '',
@@ -3697,9 +4015,9 @@ const clickShowEditTime4 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates44[ind+1].proj === ''){
+          setCountCol42(countCol42-1)
+          arr = dates44.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -3716,11 +4034,11 @@ const clickShowEditTime4 = (t, ind, tab) => {
   if (t === '15:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '16:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates44[ind+1].time === '16:00') {
+        setCountCol42(countCol42+1) //для высоту ячейки с датой
+        arr = dates44.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str4,
           time: '15:30',
           proj: '',
           uuid: '',
@@ -3738,9 +4056,9 @@ const clickShowEditTime4 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates44[ind+1].proj === ''){
+          setCountCol42(countCol42-1)
+          arr = dates44.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -3757,11 +4075,11 @@ const clickShowEditTime4 = (t, ind, tab) => {
   if (t === '16:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '17:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates44[ind+1].time === '17:00') {
+        setCountCol42(countCol42+1) //для высоту ячейки с датой
+        arr = dates44.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str4,
           time: '16:30',
           proj: '',
           uuid: '',
@@ -3779,9 +4097,9 @@ const clickShowEditTime4 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates44[ind+1].proj === ''){
+          setCountCol42(countCol42-1)
+          arr = dates44.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -3798,12 +4116,12 @@ const clickShowEditTime4 = (t, ind, tab) => {
   if (t === '17:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1]?.time !== '17:30') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates44[ind+1]?.time !== '17:30') {
+        setCountCol42(countCol42+1) //для высоту ячейки с датой
+        arr = dates44.slice(0); //копируем массив dates
         console.log(arr)
         const newObj = {
-          date: date_str2,
+          date: date_str4,
           time: '17:30',
           proj: '',
           uuid: '',
@@ -3821,10 +4139,10 @@ const clickShowEditTime4 = (t, ind, tab) => {
         setValue22(value22)          
       } 
       
-      if (dates22[ind+1]?.time === '17:30') {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+      if (dates44[ind+1]?.time === '17:30') {
+        if (dates44[ind+1].proj === ''){
+          setCountCol42(countCol42-1)
+          arr = dates44.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -3843,11 +4161,11 @@ const clickShowEditTime4 = (t, ind, tab) => {
   if (t === '18:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '19:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates444[ind+1].time === '19:00') {
+        setCountCol43(countCol43+1) //для высоту ячейки с датой
+        arr = dates444.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str4,
           time: '18:30',
           proj: '',
           uuid: '',
@@ -3856,26 +4174,26 @@ const clickShowEditTime4 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates444(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value43[index] = item.save
         })
-        setValue23(value23)
+        setValue43(value43)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates444[ind+1].proj === ''){
+          setCountCol43(countCol43-1)
+          arr = dates444.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates444(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value43[index] = item.save
           })
-          setValue23(value23)           
+          setValue43(value43)           
         }        
       }
     }
@@ -3884,11 +4202,11 @@ const clickShowEditTime4 = (t, ind, tab) => {
   if (t === '19:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '20:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates444[ind+1].time === '20:00') {
+        setCountCol43(countCol43+1) //для высоту ячейки с датой
+        arr = dates444.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str4,
           time: '19:30',
           proj: '',
           uuid: '',
@@ -3897,26 +4215,26 @@ const clickShowEditTime4 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates444(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value43[index] = item.save
         })
-        setValue23(value23)
+        setValue43(value43)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates444[ind+1].proj === ''){
+          setCountCol43(countCol43-1)
+          arr = dates444.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates444(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value43[index] = item.save
           })
-          setValue23(value23)           
+          setValue43(value43)           
         }        
       }
     }
@@ -3925,11 +4243,11 @@ const clickShowEditTime4 = (t, ind, tab) => {
   if (t === '20:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '21:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates444[ind+1].time === '21:00') {
+        setCountCol43(countCol43+1) //для высоту ячейки с датой
+        arr = dates444.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str4,
           time: '20:30',
           proj: '',
           uuid: '',
@@ -3938,26 +4256,26 @@ const clickShowEditTime4 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates444(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value43[index] = item.save
         })
-        setValue23(value23)
+        setValue43(value43)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates444[ind+1].proj === ''){
+          setCountCol43(countCol43-1)
+          arr = dates444.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates444(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value43[index] = item.save
           })
-          setValue23(value23)           
+          setValue43(value43)           
         }        
       }
     }
@@ -3966,11 +4284,11 @@ const clickShowEditTime4 = (t, ind, tab) => {
   if (t === '21:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '22:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates444[ind+1].time === '22:00') {
+        setCountCol43(countCol43+1) //для высоту ячейки с датой
+        arr = dates444.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str4,
           time: '21:30',
           proj: '',
           uuid: '',
@@ -3979,26 +4297,26 @@ const clickShowEditTime4 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates444(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value43[index] = item.save
         })
-        setValue23(value23)
+        setValue43(value43)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates444[ind+1].proj === ''){
+          setCountCol43(countCol43-1)
+          arr = dates444.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates444(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value43[index] = item.save
           })
-          setValue23(value23)           
+          setValue43(value43)           
         }        
       }
     }
@@ -4007,11 +4325,11 @@ const clickShowEditTime4 = (t, ind, tab) => {
   if (t === '22:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '23:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates444[ind+1].time === '23:00') {
+        setCountCol43(countCol43+1) //для высоту ячейки с датой
+        arr = dates444.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str4,
           time: '22:30',
           proj: '',
           uuid: '',
@@ -4020,26 +4338,26 @@ const clickShowEditTime4 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates444(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value43[index] = item.save
         })
-        setValue23(value23)
+        setValue43(value43)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates444[ind+1].proj === ''){
+          setCountCol43(countCol43-1)
+          arr = dates444.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates444(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value43[index] = item.save
           })
-          setValue23(value23)           
+          setValue43(value43)           
         }        
       }
     }
@@ -4048,12 +4366,12 @@ const clickShowEditTime4 = (t, ind, tab) => {
   if (t === '23:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1]?.time !== '23:30') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates444[ind+1]?.time !== '23:30') {
+        setCountCol43(countCol43+1) //для высоту ячейки с датой
+        arr = dates444.slice(0); //копируем массив dates
         console.log(arr)
         const newObj = {
-          date: date_str2,
+          date: date_str4,
           time: '23:30',
           proj: '',
           uuid: '',
@@ -4062,27 +4380,27 @@ const clickShowEditTime4 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates444(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value43[index] = item.save
         })
-        setValue23(value23)          
+        setValue43(value43)          
       } 
       
-      if (dates222[ind+1]?.time === '23:30') {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+      if (dates444[ind+1]?.time === '23:30') {
+        if (dates444[ind+1].proj === ''){
+          setCountCol43(countCol43-1)
+          arr = dates444.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates444(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value43[index] = item.save
           })
-          setValue23(value23)           
+          setValue43(value43)           
         }        
       }
     }
@@ -4097,11 +4415,11 @@ const clickShowEditTime5 = (t, ind, tab) => {
   if (t === '06:00')  {
     if (tab === 1) {
       //обработка нажатия вкл/выкл
-      if (dates2[ind+1].time === '07:00') {
-        setCountCol4(countCol4+1) //для высоту ячейки с датой
-        arr = dates2.slice(0); //копируем массив dates
+      if (dates5[ind+1].time === '07:00') {
+        setCountCol51(countCol51+1) //для высоту ячейки с датой
+        arr = dates5.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str5,
           time: '06:30',
           proj: '',
           uuid: '',
@@ -4110,26 +4428,26 @@ const clickShowEditTime5 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates2(arr)
+        setDates4(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value21[index] = item.save
+          value51[index] = item.save
         })
-        setValue21(value21)
+        setValue51(value51)
 
       } else {
-        if (dates2[ind+1].proj === ''){
-          setCountCol4(countCol4-1)
-          arr = dates2.slice(0); 
+        if (dates5[ind+1].proj === ''){
+          setCountCol51(countCol51-1)
+          arr = dates5.slice(0); 
           arr.splice(ind+1, 1);
           setDates2(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value51[index] = item.save
           })
-          setValue21(value21)           
+          setValue51(value51)           
         }        
       }
     }
@@ -4140,11 +4458,11 @@ const clickShowEditTime5 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '08:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates5[ind+1].time === '08:00') {
+          setCountCol51(countCol51+1) //для высоту ячейки с датой
+          arr = dates5.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str5,
             time: '07:30',
             proj: '',
             uuid: '',
@@ -4153,26 +4471,26 @@ const clickShowEditTime5 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates5(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value51[index] = item.save
           })
-          setValue21(value21)
+          setValue51(value51)
                   
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates5[ind+1].proj === ''){
+            setCountCol51(countCol51-1)
+            arr = dates5.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates5(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value51[index] = item.save
             })
-            setValue21(value21)           
+            setValue51(value51)           
           }        
         }
       }
@@ -4185,11 +4503,11 @@ const clickShowEditTime5 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '09:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates5[ind+1].time === '09:00') {
+          setCountCol51(countCol51+1) //для высоту ячейки с датой
+          arr = dates5.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str5,
             time: '08:30',
             proj: '',
             uuid: '',
@@ -4198,25 +4516,25 @@ const clickShowEditTime5 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates5(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value51[index] = item.save
           })
-          setValue21(value21)                 
+          setValue51(value51)                 
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates5[ind+1].proj === ''){
+            setCountCol51(countCol51-1)
+            arr = dates5.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates5(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value51[index] = item.save
             })
-            setValue21(value21)           
+            setValue51(value51)           
           }        
         }
       }
@@ -4228,11 +4546,11 @@ const clickShowEditTime5 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '10:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates5[ind+1].time === '10:00') {
+          setCountCol51(countCol51+1) //для высоту ячейки с датой
+          arr = dates5.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str5,
             time: '09:30',
             proj: '',
             uuid: '',
@@ -4241,7 +4559,7 @@ const clickShowEditTime5 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates5(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
@@ -4250,17 +4568,17 @@ const clickShowEditTime5 = (t, ind, tab) => {
           setValue1(value1)
                   
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates5[ind+1].proj === ''){
+            setCountCol51(countCol51-1)
+            arr = dates5.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates5(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value51[index] = item.save
             })
-            setValue21(value21)           
+            setValue51(value51)           
           }        
         }
       }
@@ -4272,11 +4590,11 @@ const clickShowEditTime5 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '11:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates5[ind+1].time === '11:00') {
+          setCountCol51(countCol51+1) //для высоту ячейки с датой
+          arr = dates5.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str5,
             time: '10:30',
             proj: '',
             uuid: '',
@@ -4285,25 +4603,25 @@ const clickShowEditTime5 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates5(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value51[index] = item.save
           })
-          setValue21(value21)                 
+          setValue51(value51)                 
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates5[ind+1].proj === ''){
+            setCountCol51(countCol51-1)
+            arr = dates5.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates5(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value51[index] = item.save
             })
-            setValue21(value21)           
+            setValue51(value51)           
           }        
         }
       }
@@ -4313,12 +4631,12 @@ const clickShowEditTime5 = (t, ind, tab) => {
   if (t === '11:00')  {
     if (tab === 1) {
       //обработка нажатия вкл/выкл
-        if (dates2[ind+1]?.time !== '11:30') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates5[ind+1]?.time !== '11:30') {
+          setCountCol51(countCol51+1) //для высоту ячейки с датой
+          arr = dates5.slice(0); //копируем массив dates
           console.log(arr)
           const newObj = {
-            date: date_str2,
+            date: date_str5,
             time: '11:30',
             proj: '',
             uuid: '',
@@ -4327,27 +4645,27 @@ const clickShowEditTime5 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates5(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value51[index] = item.save
           })
-          setValue21(value21)          
+          setValue51(value51)          
         } 
         
-        if (dates2[ind+1]?.time === '11:30') {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+        if (dates5[ind+1]?.time === '11:30') {
+          if (dates5[ind+1].proj === ''){
+            setCountCol51(countCol51-1)
+            arr = dates5.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates5(arr)
   
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value51[index] = item.save
             })
-            setValue21(value21)           
+            setValue51(value51)           
           }        
         }
     }
@@ -4358,11 +4676,11 @@ const clickShowEditTime5 = (t, ind, tab) => {
   if (t === '12:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '13:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates55[ind+1].time === '13:00') {
+        setCountCol52(countCol52+1) //для высоту ячейки с датой
+        arr = dates55.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str5,
           time: '12:30',
           proj: '',
           uuid: '',
@@ -4371,7 +4689,7 @@ const clickShowEditTime5 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates55(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
@@ -4380,9 +4698,9 @@ const clickShowEditTime5 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates55[ind+1].proj === ''){
+          setCountCol52(countCol52-1)
+          arr = dates55.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -4399,11 +4717,11 @@ const clickShowEditTime5 = (t, ind, tab) => {
   if (t === '13:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '14:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates55[ind+1].time === '14:00') {
+        setCountCol52(countCol52+1) //для высоту ячейки с датой
+        arr = dates55.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str5,
           time: '13:30',
           proj: '',
           uuid: '',
@@ -4421,9 +4739,9 @@ const clickShowEditTime5 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates55[ind+1].proj === ''){
+          setCountCol52(countCol52-1)
+          arr = dates55.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -4440,11 +4758,11 @@ const clickShowEditTime5 = (t, ind, tab) => {
   if (t === '14:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '15:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates55[ind+1].time === '15:00') {
+        setCountCol52(countCol52+1) //для высоту ячейки с датой
+        arr = dates55.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str5,
           time: '14:30',
           proj: '',
           uuid: '',
@@ -4462,9 +4780,9 @@ const clickShowEditTime5 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates55[ind+1].proj === ''){
+          setCountCol52(countCol52-1)
+          arr = dates55.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -4481,11 +4799,11 @@ const clickShowEditTime5 = (t, ind, tab) => {
   if (t === '15:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '16:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates55[ind+1].time === '16:00') {
+        setCountCol52(countCol52+1) //для высоту ячейки с датой
+        arr = dates55.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str5,
           time: '15:30',
           proj: '',
           uuid: '',
@@ -4503,9 +4821,9 @@ const clickShowEditTime5 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates55[ind+1].proj === ''){
+          setCountCol52(countCol52-1)
+          arr = dates55.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -4522,11 +4840,11 @@ const clickShowEditTime5 = (t, ind, tab) => {
   if (t === '16:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '17:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates55[ind+1].time === '17:00') {
+        setCountCol52(countCol52+1) //для высоту ячейки с датой
+        arr = dates55.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str5,
           time: '16:30',
           proj: '',
           uuid: '',
@@ -4544,9 +4862,9 @@ const clickShowEditTime5 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates55[ind+1].proj === ''){
+          setCountCol52(countCol52-1)
+          arr = dates55.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -4563,12 +4881,12 @@ const clickShowEditTime5 = (t, ind, tab) => {
   if (t === '17:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1]?.time !== '17:30') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates55[ind+1]?.time !== '17:30') {
+        setCountCol52(countCol52+1) //для высоту ячейки с датой
+        arr = dates55.slice(0); //копируем массив dates
         console.log(arr)
         const newObj = {
-          date: date_str2,
+          date: date_str5,
           time: '17:30',
           proj: '',
           uuid: '',
@@ -4586,10 +4904,10 @@ const clickShowEditTime5 = (t, ind, tab) => {
         setValue22(value22)          
       } 
       
-      if (dates22[ind+1]?.time === '17:30') {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+      if (dates55[ind+1]?.time === '17:30') {
+        if (dates55[ind+1].proj === ''){
+          setCountCol52(countCol52-1)
+          arr = dates55.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -4608,11 +4926,11 @@ const clickShowEditTime5 = (t, ind, tab) => {
   if (t === '18:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '19:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates555[ind+1].time === '19:00') {
+        setCountCol53(countCol53+1) //для высоту ячейки с датой
+        arr = dates555.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str5,
           time: '18:30',
           proj: '',
           uuid: '',
@@ -4621,26 +4939,26 @@ const clickShowEditTime5 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates555(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value53[index] = item.save
         })
-        setValue23(value23)
+        setValue53(value53)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates555[ind+1].proj === ''){
+          setCountCol53(countCol53-1)
+          arr = dates555.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates555(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value53[index] = item.save
           })
-          setValue23(value23)           
+          setValue53(value53)           
         }        
       }
     }
@@ -4649,11 +4967,11 @@ const clickShowEditTime5 = (t, ind, tab) => {
   if (t === '19:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '20:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates555[ind+1].time === '20:00') {
+        setCountCol53(countCol53+1) //для высоту ячейки с датой
+        arr = dates555.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str5,
           time: '19:30',
           proj: '',
           uuid: '',
@@ -4662,26 +4980,26 @@ const clickShowEditTime5 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates555(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value53[index] = item.save
         })
-        setValue23(value23)
+        setValue53(value53)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates555[ind+1].proj === ''){
+          setCountCol53(countCol53-1)
+          arr = dates555.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates555(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value53[index] = item.save
           })
-          setValue23(value23)           
+          setValue53(value53)           
         }        
       }
     }
@@ -4690,11 +5008,11 @@ const clickShowEditTime5 = (t, ind, tab) => {
   if (t === '20:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '21:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates555[ind+1].time === '21:00') {
+        setCountCol53(countCol53+1) //для высоту ячейки с датой
+        arr = dates555.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str5,
           time: '20:30',
           proj: '',
           uuid: '',
@@ -4703,26 +5021,26 @@ const clickShowEditTime5 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates555(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value53[index] = item.save
         })
-        setValue23(value23)
+        setValue53(value53)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates555[ind+1].proj === ''){
+          setCountCol53(countCol53-1)
+          arr = dates555.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates555(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value53[index] = item.save
           })
-          setValue23(value23)           
+          setValue53(value53)           
         }        
       }
     }
@@ -4731,11 +5049,11 @@ const clickShowEditTime5 = (t, ind, tab) => {
   if (t === '21:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '22:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates555[ind+1].time === '22:00') {
+        setCountCol53(countCol53+1) //для высоту ячейки с датой
+        arr = dates555.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str5,
           time: '21:30',
           proj: '',
           uuid: '',
@@ -4744,26 +5062,26 @@ const clickShowEditTime5 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates555(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value53[index] = item.save
         })
-        setValue23(value23)
+        setValue53(value53)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates555[ind+1].proj === ''){
+          setCountCol53(countCol53-1)
+          arr = dates555.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates555(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value53[index] = item.save
           })
-          setValue23(value23)           
+          setValue53(value53)           
         }        
       }
     }
@@ -4772,11 +5090,11 @@ const clickShowEditTime5 = (t, ind, tab) => {
   if (t === '22:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '23:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates555[ind+1].time === '23:00') {
+        setCountCol53(countCol53+1) //для высоту ячейки с датой
+        arr = dates555.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str5,
           time: '22:30',
           proj: '',
           uuid: '',
@@ -4785,26 +5103,26 @@ const clickShowEditTime5 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates555(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value53[index] = item.save
         })
-        setValue23(value23)
+        setValue53(value53)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates555[ind+1].proj === ''){
+          setCountCol53(countCol53-1)
+          arr = dates555.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates555(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value53[index] = item.save
           })
-          setValue23(value23)           
+          setValue53(value53)           
         }        
       }
     }
@@ -4813,12 +5131,12 @@ const clickShowEditTime5 = (t, ind, tab) => {
   if (t === '23:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1]?.time !== '23:30') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates555[ind+1]?.time !== '23:30') {
+        setCountCol53(countCol53+1) //для высоту ячейки с датой
+        arr = dates555.slice(0); //копируем массив dates
         console.log(arr)
         const newObj = {
-          date: date_str2,
+          date: date_str5,
           time: '23:30',
           proj: '',
           uuid: '',
@@ -4827,27 +5145,27 @@ const clickShowEditTime5 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates555(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value53[index] = item.save
         })
-        setValue23(value23)          
+        setValue53(value53)          
       } 
       
-      if (dates222[ind+1]?.time === '23:30') {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+      if (dates555[ind+1]?.time === '23:30') {
+        if (dates555[ind+1].proj === ''){
+          setCountCol53(countCol53-1)
+          arr = dates555.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates555(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value53[index] = item.save
           })
-          setValue23(value23)           
+          setValue53(value53)           
         }        
       }
     }
@@ -4862,11 +5180,11 @@ const clickShowEditTime6 = (t, ind, tab) => {
   if (t === '06:00')  {
     if (tab === 1) {
       //обработка нажатия вкл/выкл
-      if (dates2[ind+1].time === '07:00') {
-        setCountCol4(countCol4+1) //для высоту ячейки с датой
-        arr = dates2.slice(0); //копируем массив dates
+      if (dates6[ind+1].time === '07:00') {
+        setCountCol61(countCol61+1) //для высоту ячейки с датой
+        arr = dates6.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str6,
           time: '06:30',
           proj: '',
           uuid: '',
@@ -4875,26 +5193,26 @@ const clickShowEditTime6 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates2(arr)
+        setDates6(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value21[index] = item.save
+          value61[index] = item.save
         })
-        setValue21(value21)
+        setValue61(value61)
 
       } else {
-        if (dates2[ind+1].proj === ''){
-          setCountCol4(countCol4-1)
-          arr = dates2.slice(0); 
+        if (dates6[ind+1].proj === ''){
+          setCountCol61(countCol61-1)
+          arr = dates6.slice(0); 
           arr.splice(ind+1, 1);
-          setDates2(arr)
+          setDates6(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value61[index] = item.save
           })
-          setValue21(value21)           
+          setValue61(value61)           
         }        
       }
     }
@@ -4905,11 +5223,11 @@ const clickShowEditTime6 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '08:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates6[ind+1].time === '08:00') {
+          setCountCol61(countCol61+1) //для высоту ячейки с датой
+          arr = dates6.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str6,
             time: '07:30',
             proj: '',
             uuid: '',
@@ -4918,26 +5236,26 @@ const clickShowEditTime6 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates6(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value61[index] = item.save
           })
-          setValue21(value21)
+          setValue61(value61)
                   
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates6[ind+1].proj === ''){
+            setCountCol61(countCol61-1)
+            arr = dates6.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates6(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value61[index] = item.save
             })
-            setValue21(value21)           
+            setValue61(value61)           
           }        
         }
       }
@@ -4950,11 +5268,11 @@ const clickShowEditTime6 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '09:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates6[ind+1].time === '09:00') {
+          setCountCol61(countCol61+1) //для высоту ячейки с датой
+          arr = dates6.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str6,
             time: '08:30',
             proj: '',
             uuid: '',
@@ -4963,25 +5281,25 @@ const clickShowEditTime6 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates6(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value61[index] = item.save
           })
-          setValue21(value21)                 
+          setValue61(value61)                 
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates6[ind+1].proj === ''){
+            setCountCol61(countCol61-1)
+            arr = dates6.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates6(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value61[index] = item.save
             })
-            setValue21(value21)           
+            setValue61(value61)           
           }        
         }
       }
@@ -4993,11 +5311,11 @@ const clickShowEditTime6 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '10:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates6[ind+1].time === '10:00') {
+          setCountCol61(countCol61+1) //для высоту ячейки с датой
+          arr = dates6.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str6,
             time: '09:30',
             proj: '',
             uuid: '',
@@ -5006,7 +5324,7 @@ const clickShowEditTime6 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates6(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
@@ -5015,17 +5333,17 @@ const clickShowEditTime6 = (t, ind, tab) => {
           setValue1(value1)
                   
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates6[ind+1].proj === ''){
+            setCountCol61(countCol61-1)
+            arr = dates6.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates6(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value61[index] = item.save
             })
-            setValue21(value21)           
+            setValue61(value61)           
           }        
         }
       }
@@ -5037,11 +5355,11 @@ const clickShowEditTime6 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '11:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates6[ind+1].time === '11:00') {
+          setCountCol61(countCol61+1) //для высоту ячейки с датой
+          arr = dates6.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str6,
             time: '10:30',
             proj: '',
             uuid: '',
@@ -5050,25 +5368,25 @@ const clickShowEditTime6 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates6(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value61[index] = item.save
           })
-          setValue21(value21)                 
+          setValue61(value61)                 
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates6[ind+1].proj === ''){
+            setCountCol61(countCol61-1)
+            arr = dates6.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates6(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value61[index] = item.save
             })
-            setValue21(value21)           
+            setValue61(value61)           
           }        
         }
       }
@@ -5078,12 +5396,12 @@ const clickShowEditTime6 = (t, ind, tab) => {
   if (t === '11:00')  {
     if (tab === 1) {
       //обработка нажатия вкл/выкл
-        if (dates2[ind+1]?.time !== '11:30') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates6[ind+1]?.time !== '11:30') {
+          setCountCol61(countCol61+1) //для высоту ячейки с датой
+          arr = dates6.slice(0); //копируем массив dates
           console.log(arr)
           const newObj = {
-            date: date_str2,
+            date: date_str6,
             time: '11:30',
             proj: '',
             uuid: '',
@@ -5092,27 +5410,27 @@ const clickShowEditTime6 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates6(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value61[index] = item.save
           })
-          setValue21(value21)          
+          setValue61(value61)          
         } 
         
-        if (dates2[ind+1]?.time === '11:30') {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+        if (dates6[ind+1]?.time === '11:30') {
+          if (dates6[ind+1].proj === ''){
+            setCountCol61(countCol61-1)
+            arr = dates6.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates6(arr)
   
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value61[index] = item.save
             })
-            setValue21(value21)           
+            setValue61(value61)           
           }        
         }
     }
@@ -5123,11 +5441,11 @@ const clickShowEditTime6 = (t, ind, tab) => {
   if (t === '12:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '13:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates66[ind+1].time === '13:00') {
+        setCountCol62(countCol62+1) //для высоту ячейки с датой
+        arr = dates66.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str6,
           time: '12:30',
           proj: '',
           uuid: '',
@@ -5145,9 +5463,9 @@ const clickShowEditTime6 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates66[ind+1].proj === ''){
+          setCountCol62(countCol62-1)
+          arr = dates66.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -5164,11 +5482,11 @@ const clickShowEditTime6 = (t, ind, tab) => {
   if (t === '13:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '14:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates66[ind+1].time === '14:00') {
+        setCountCol62(countCol62+1) //для высоту ячейки с датой
+        arr = dates66.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str6,
           time: '13:30',
           proj: '',
           uuid: '',
@@ -5186,9 +5504,9 @@ const clickShowEditTime6 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates66[ind+1].proj === ''){
+          setCountCol62(countCol62-1)
+          arr = dates66.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -5205,11 +5523,11 @@ const clickShowEditTime6 = (t, ind, tab) => {
   if (t === '14:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '15:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates66[ind+1].time === '15:00') {
+        setCountCol62(countCol62+1) //для высоту ячейки с датой
+        arr = dates66.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str6,
           time: '14:30',
           proj: '',
           uuid: '',
@@ -5227,9 +5545,9 @@ const clickShowEditTime6 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates66[ind+1].proj === ''){
+          setCountCol62(countCol62-1)
+          arr = dates66.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -5246,11 +5564,11 @@ const clickShowEditTime6 = (t, ind, tab) => {
   if (t === '15:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '16:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates66[ind+1].time === '16:00') {
+        setCountCol62(countCol62+1) //для высоту ячейки с датой
+        arr = dates66.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str6,
           time: '15:30',
           proj: '',
           uuid: '',
@@ -5268,9 +5586,9 @@ const clickShowEditTime6 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates66[ind+1].proj === ''){
+          setCountCol62(countCol62-1)
+          arr = dates66.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -5287,11 +5605,11 @@ const clickShowEditTime6 = (t, ind, tab) => {
   if (t === '16:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '17:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates66[ind+1].time === '17:00') {
+        setCountCol62(countCol62+1) //для высоту ячейки с датой
+        arr = dates66.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str6,
           time: '16:30',
           proj: '',
           uuid: '',
@@ -5309,9 +5627,9 @@ const clickShowEditTime6 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates66[ind+1].proj === ''){
+          setCountCol62(countCol62-1)
+          arr = dates66.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -5328,12 +5646,12 @@ const clickShowEditTime6 = (t, ind, tab) => {
   if (t === '17:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1]?.time !== '17:30') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates66[ind+1]?.time !== '17:30') {
+        setCountCol62(countCol62+1) //для высоту ячейки с датой
+        arr = dates66.slice(0); //копируем массив dates
         console.log(arr)
         const newObj = {
-          date: date_str2,
+          date: date_str6,
           time: '17:30',
           proj: '',
           uuid: '',
@@ -5351,10 +5669,10 @@ const clickShowEditTime6 = (t, ind, tab) => {
         setValue22(value22)          
       } 
       
-      if (dates22[ind+1]?.time === '17:30') {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+      if (dates66[ind+1]?.time === '17:30') {
+        if (dates66[ind+1].proj === ''){
+          setCountCol62(countCol62-1)
+          arr = dates66.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -5373,11 +5691,11 @@ const clickShowEditTime6 = (t, ind, tab) => {
   if (t === '18:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '19:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates666[ind+1].time === '19:00') {
+        setCountCol63(countCol63+1) //для высоту ячейки с датой
+        arr = dates666.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str6,
           time: '18:30',
           proj: '',
           uuid: '',
@@ -5386,26 +5704,26 @@ const clickShowEditTime6 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates666(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value63[index] = item.save
         })
-        setValue23(value23)
+        setValue63(value63)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates666[ind+1].proj === ''){
+          setCountCol63(countCol63-1)
+          arr = dates666.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates666(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value63[index] = item.save
           })
-          setValue23(value23)           
+          setValue63(value63)           
         }        
       }
     }
@@ -5414,11 +5732,11 @@ const clickShowEditTime6 = (t, ind, tab) => {
   if (t === '19:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '20:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates666[ind+1].time === '20:00') {
+        setCountCol63(countCol63+1) //для высоту ячейки с датой
+        arr = dates666.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str6,
           time: '19:30',
           proj: '',
           uuid: '',
@@ -5427,26 +5745,26 @@ const clickShowEditTime6 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates666(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value63[index] = item.save
         })
-        setValue23(value23)
+        setValue63(value63)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates666[ind+1].proj === ''){
+          setCountCol63(countCol63-1)
+          arr = dates666.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates666(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value63[index] = item.save
           })
-          setValue23(value23)           
+          setValue63(value63)           
         }        
       }
     }
@@ -5455,11 +5773,11 @@ const clickShowEditTime6 = (t, ind, tab) => {
   if (t === '20:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '21:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates666[ind+1].time === '21:00') {
+        setCountCol63(countCol63+1) //для высоту ячейки с датой
+        arr = dates666.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str6,
           time: '20:30',
           proj: '',
           uuid: '',
@@ -5468,26 +5786,26 @@ const clickShowEditTime6 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates666(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value63[index] = item.save
         })
-        setValue23(value23)
+        setValue63(value63)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates666[ind+1].proj === ''){
+          setCountCol63(countCol63-1)
+          arr = dates666.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates666(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value63[index] = item.save
           })
-          setValue23(value23)           
+          setValue63(value63)           
         }        
       }
     }
@@ -5496,11 +5814,11 @@ const clickShowEditTime6 = (t, ind, tab) => {
   if (t === '21:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '22:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates666[ind+1].time === '22:00') {
+        setCountCol63(countCol63+1) //для высоту ячейки с датой
+        arr = dates666.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str6,
           time: '21:30',
           proj: '',
           uuid: '',
@@ -5509,26 +5827,26 @@ const clickShowEditTime6 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates666(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value63[index] = item.save
         })
-        setValue23(value23)
+        setValue63(value63)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates666[ind+1].proj === ''){
+          setCountCol63(countCol63-1)
+          arr = dates666.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates666(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value63[index] = item.save
           })
-          setValue23(value23)           
+          setValue63(value63)           
         }        
       }
     }
@@ -5537,11 +5855,11 @@ const clickShowEditTime6 = (t, ind, tab) => {
   if (t === '22:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '23:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates666[ind+1].time === '23:00') {
+        setCountCol63(countCol63+1) //для высоту ячейки с датой
+        arr = dates666.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str6,
           time: '22:30',
           proj: '',
           uuid: '',
@@ -5550,26 +5868,26 @@ const clickShowEditTime6 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates666(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value63[index] = item.save
         })
-        setValue23(value23)
+        setValue63(value63)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates666[ind+1].proj === ''){
+          setCountCol63(countCol63-1)
+          arr = dates666.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates666(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value63[index] = item.save
           })
-          setValue23(value23)           
+          setValue63(value63)           
         }        
       }
     }
@@ -5578,12 +5896,12 @@ const clickShowEditTime6 = (t, ind, tab) => {
   if (t === '23:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1]?.time !== '23:30') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates666[ind+1]?.time !== '23:30') {
+        setCountCol63(countCol63+1) //для высоту ячейки с датой
+        arr = dates666.slice(0); //копируем массив dates
         console.log(arr)
         const newObj = {
-          date: date_str2,
+          date: date_str6,
           time: '23:30',
           proj: '',
           uuid: '',
@@ -5592,27 +5910,27 @@ const clickShowEditTime6 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates666(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value63[index] = item.save
         })
-        setValue23(value23)          
+        setValue63(value63)          
       } 
       
-      if (dates222[ind+1]?.time === '23:30') {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+      if (dates666[ind+1]?.time === '23:30') {
+        if (dates666[ind+1].proj === ''){
+          setCountCol63(countCol63-1)
+          arr = dates666.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates666(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value63[index] = item.save
           })
-          setValue23(value23)           
+          setValue63(value63)           
         }        
       }
     }
@@ -5627,11 +5945,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
   if (t === '06:00')  {
     if (tab === 1) {
       //обработка нажатия вкл/выкл
-      if (dates2[ind+1].time === '07:00') {
-        setCountCol4(countCol4+1) //для высоту ячейки с датой
-        arr = dates2.slice(0); //копируем массив dates
+      if (dates7[ind+1].time === '07:00') {
+        setCountCol71(countCol71+1) //для высоту ячейки с датой
+        arr = dates7.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str7,
           time: '06:30',
           proj: '',
           uuid: '',
@@ -5640,26 +5958,26 @@ const clickShowEditTime7 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates2(arr)
+        setDates7(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value21[index] = item.save
+          value71[index] = item.save
         })
-        setValue21(value21)
+        setValue71(value71)
 
       } else {
-        if (dates2[ind+1].proj === ''){
-          setCountCol4(countCol4-1)
-          arr = dates2.slice(0); 
+        if (dates7[ind+1].proj === ''){
+          setCountCol71(countCol71-1)
+          arr = dates7.slice(0); 
           arr.splice(ind+1, 1);
-          setDates2(arr)
+          setDates7(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value71[index] = item.save
           })
-          setValue21(value21)           
+          setValue71(value71)           
         }        
       }
     }
@@ -5670,11 +5988,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '08:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates7[ind+1].time === '08:00') {
+          setCountCol71(countCol71+1) //для высоту ячейки с датой
+          arr = dates7.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str7,
             time: '07:30',
             proj: '',
             uuid: '',
@@ -5683,26 +6001,26 @@ const clickShowEditTime7 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates7(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value71[index] = item.save
           })
-          setValue21(value21)
+          setValue71(value71)
                   
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates7[ind+1].proj === ''){
+            setCountCol71(countCol71-1)
+            arr = dates7.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates7(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value71[index] = item.save
             })
-            setValue21(value21)           
+            setValue71(value71)           
           }        
         }
       }
@@ -5715,11 +6033,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '09:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates7[ind+1].time === '09:00') {
+          setCountCol71(countCol71+1) //для высоту ячейки с датой
+          arr = dates7.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str7,
             time: '08:30',
             proj: '',
             uuid: '',
@@ -5728,25 +6046,25 @@ const clickShowEditTime7 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates7(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value71[index] = item.save
           })
-          setValue21(value21)                 
+          setValue71(value71)                 
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates7[ind+1].proj === ''){
+            setCountCol71(countCol71-1)
+            arr = dates7.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates7(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value71[index] = item.save
             })
-            setValue21(value21)           
+            setValue71(value71)           
           }        
         }
       }
@@ -5758,11 +6076,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '10:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates7[ind+1].time === '10:00') {
+          setCountCol71(countCol71+1) //для высоту ячейки с датой
+          arr = dates7.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str7,
             time: '09:30',
             proj: '',
             uuid: '',
@@ -5771,7 +6089,7 @@ const clickShowEditTime7 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates7(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
@@ -5780,17 +6098,17 @@ const clickShowEditTime7 = (t, ind, tab) => {
           setValue1(value1)
                   
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates7[ind+1].proj === ''){
+            setCountCol71(countCol71-1)
+            arr = dates7.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates7(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value71[index] = item.save
             })
-            setValue21(value21)           
+            setValue71(value71)           
           }        
         }
       }
@@ -5802,11 +6120,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '11:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates7[ind+1].time === '11:00') {
+          setCountCol71(countCol71+1) //для высоту ячейки с датой
+          arr = dates7.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str7,
             time: '10:30',
             proj: '',
             uuid: '',
@@ -5815,25 +6133,25 @@ const clickShowEditTime7 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates7(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value71[index] = item.save
           })
-          setValue21(value21)                 
+          setValue71(value71)                 
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates7[ind+1].proj === ''){
+            setCountCol71(countCol71-1)
+            arr = dates7.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates7(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value71[index] = item.save
             })
-            setValue21(value21)           
+            setValue71(value71)           
           }        
         }
       }
@@ -5843,12 +6161,12 @@ const clickShowEditTime7 = (t, ind, tab) => {
   if (t === '11:00')  {
     if (tab === 1) {
       //обработка нажатия вкл/выкл
-        if (dates2[ind+1]?.time !== '11:30') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates7[ind+1]?.time !== '11:30') {
+          setCountCol71(countCol71+1) //для высоту ячейки с датой
+          arr = dates7.slice(0); //копируем массив dates
           console.log(arr)
           const newObj = {
-            date: date_str2,
+            date: date_str7,
             time: '11:30',
             proj: '',
             uuid: '',
@@ -5857,27 +6175,27 @@ const clickShowEditTime7 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates7(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value71[index] = item.save
           })
-          setValue21(value21)          
+          setValue71(value71)          
         } 
         
-        if (dates2[ind+1]?.time === '11:30') {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+        if (dates7[ind+1]?.time === '11:30') {
+          if (dates7[ind+1].proj === ''){
+            setCountCol71(countCol71-1)
+            arr = dates7.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates7(arr)
   
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value71[index] = item.save
             })
-            setValue21(value21)           
+            setValue71(value71)           
           }        
         }
     }
@@ -5888,11 +6206,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
   if (t === '12:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '13:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates77[ind+1].time === '13:00') {
+        setCountCol72(countCol72+1) //для высоту ячейки с датой
+        arr = dates77.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str7,
           time: '12:30',
           proj: '',
           uuid: '',
@@ -5910,9 +6228,9 @@ const clickShowEditTime7 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates77[ind+1].proj === ''){
+          setCountCol72(countCol72-1)
+          arr = dates77.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -5929,11 +6247,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
   if (t === '13:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '14:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates77[ind+1].time === '14:00') {
+        setCountCol72(countCol72+1) //для высоту ячейки с датой
+        arr = dates77.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str7,
           time: '13:30',
           proj: '',
           uuid: '',
@@ -5951,9 +6269,9 @@ const clickShowEditTime7 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates77[ind+1].proj === ''){
+          setCountCol72(countCol72-1)
+          arr = dates77.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -5970,11 +6288,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
   if (t === '14:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '15:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates77[ind+1].time === '15:00') {
+        setCountCol72(countCol72+1) //для высоту ячейки с датой
+        arr = dates77.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str7,
           time: '14:30',
           proj: '',
           uuid: '',
@@ -5992,9 +6310,9 @@ const clickShowEditTime7 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates77[ind+1].proj === ''){
+          setCountCol72(countCol72-1)
+          arr = dates77.slice(0); 
           arr.splice(ind+1, 1);
           setDates22(arr)
 
@@ -6011,11 +6329,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
   if (t === '15:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '16:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates77[ind+1].time === '16:00') {
+        setCountCol72(countCol72+1) //для высоту ячейки с датой
+        arr = dates77.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str7,
           time: '15:30',
           proj: '',
           uuid: '',
@@ -6024,7 +6342,7 @@ const clickShowEditTime7 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates77(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
@@ -6033,11 +6351,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates77[ind+1].proj === ''){
+          setCountCol72(countCol72-1)
+          arr = dates77.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates77(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
@@ -6052,11 +6370,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
   if (t === '16:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '17:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates77[ind+1].time === '17:00') {
+        setCountCol72(countCol72+1) //для высоту ячейки с датой
+        arr = dates77.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str7,
           time: '16:30',
           proj: '',
           uuid: '',
@@ -6065,7 +6383,7 @@ const clickShowEditTime7 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates77(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
@@ -6074,11 +6392,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
         setValue22(value22)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates77[ind+1].proj === ''){
+          setCountCol72(countCol72-1)
+          arr = dates77.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates77(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
@@ -6093,12 +6411,12 @@ const clickShowEditTime7 = (t, ind, tab) => {
   if (t === '17:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1]?.time !== '17:30') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates77[ind+1]?.time !== '17:30') {
+        setCountCol72(countCol72+1) //для высоту ячейки с датой
+        arr = dates77.slice(0); //копируем массив dates
         console.log(arr)
         const newObj = {
-          date: date_str2,
+          date: date_str7,
           time: '17:30',
           proj: '',
           uuid: '',
@@ -6107,7 +6425,7 @@ const clickShowEditTime7 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates77(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
@@ -6116,12 +6434,12 @@ const clickShowEditTime7 = (t, ind, tab) => {
         setValue22(value22)          
       } 
       
-      if (dates22[ind+1]?.time === '17:30') {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+      if (dates77[ind+1]?.time === '17:30') {
+        if (dates77[ind+1].proj === ''){
+          setCountCol72(countCol72-1)
+          arr = dates77.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates77(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
@@ -6138,11 +6456,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
   if (t === '18:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '19:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates777[ind+1].time === '19:00') {
+        setCountCol73(countCol73+1) //для высоту ячейки с датой
+        arr = dates777.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str7,
           time: '18:30',
           proj: '',
           uuid: '',
@@ -6151,26 +6469,26 @@ const clickShowEditTime7 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates777(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value73[index] = item.save
         })
-        setValue23(value23)
+        setValue73(value73)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates777[ind+1].proj === ''){
+          setCountCol73(countCol73-1)
+          arr = dates777.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates777(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value73[index] = item.save
           })
-          setValue23(value23)           
+          setValue73(value73)           
         }        
       }
     }
@@ -6179,11 +6497,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
   if (t === '19:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '20:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates777[ind+1].time === '20:00') {
+        setCountCol73(countCol73+1) //для высоту ячейки с датой
+        arr = dates777.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str7,
           time: '19:30',
           proj: '',
           uuid: '',
@@ -6192,26 +6510,26 @@ const clickShowEditTime7 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates777(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value73[index] = item.save
         })
-        setValue23(value23)
+        setValue73(value73)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates777[ind+1].proj === ''){
+          setCountCol73(countCol73-1)
+          arr = dates777.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates777(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value73[index] = item.save
           })
-          setValue23(value23)           
+          setValue73(value73)           
         }        
       }
     }
@@ -6220,11 +6538,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
   if (t === '20:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '21:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (setDates777[ind+1].time === '21:00') {
+        setCountCol73(countCol73+1) //для высоту ячейки с датой
+        arr = dates777.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str7,
           time: '20:30',
           proj: '',
           uuid: '',
@@ -6233,26 +6551,26 @@ const clickShowEditTime7 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates777(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value73[index] = item.save
         })
-        setValue23(value23)
+        setValue73(value73)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates777[ind+1].proj === ''){
+          setCountCol73(countCol73-1)
+          arr = dates777.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates777(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value73[index] = item.save
           })
-          setValue23(value23)           
+          setValue73(value73)           
         }        
       }
     }
@@ -6261,11 +6579,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
   if (t === '21:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '22:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates777[ind+1].time === '22:00') {
+        setCountCol73(countCol73+1) //для высоту ячейки с датой
+        arr = dates777.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str7,
           time: '21:30',
           proj: '',
           uuid: '',
@@ -6274,26 +6592,26 @@ const clickShowEditTime7 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates777(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value73[index] = item.save
         })
-        setValue23(value23)
+        setValue73(value73)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates777[ind+1].proj === ''){
+          setCountCol73(countCol73-1)
+          arr = dates777.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates777(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value73[index] = item.save
           })
-          setValue23(value23)           
+          setValue73(value73)           
         }        
       }
     }
@@ -6302,11 +6620,11 @@ const clickShowEditTime7 = (t, ind, tab) => {
   if (t === '22:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '23:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates777[ind+1].time === '23:00') {
+        setCountCol73(countCol73+1) //для высоту ячейки с датой
+        arr = dates777.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str7,
           time: '22:30',
           proj: '',
           uuid: '',
@@ -6315,26 +6633,26 @@ const clickShowEditTime7 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates777(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value73[index] = item.save
         })
-        setValue23(value23)
+        setValue73(value73)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates777[ind+1].proj === ''){
+          setCountCol73(countCol73-1)
+          arr = dates777.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates777(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value73[index] = item.save
           })
-          setValue23(value23)           
+          setValue73(value73)           
         }        
       }
     }
@@ -6343,12 +6661,12 @@ const clickShowEditTime7 = (t, ind, tab) => {
   if (t === '23:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1]?.time !== '23:30') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates777[ind+1]?.time !== '23:30') {
+        setCountCol73(countCol73+1) //для высоту ячейки с датой
+        arr = dates777.slice(0); //копируем массив dates
         console.log(arr)
         const newObj = {
-          date: date_str2,
+          date: date_str7,
           time: '23:30',
           proj: '',
           uuid: '',
@@ -6357,27 +6675,27 @@ const clickShowEditTime7 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates777(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value73[index] = item.save
         })
-        setValue23(value23)          
+        setValue73(value73)          
       } 
       
-      if (dates222[ind+1]?.time === '23:30') {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+      if (dates777[ind+1]?.time === '23:30') {
+        if (dates777[ind+1].proj === ''){
+          setCountCol73(countCol73-1)
+          arr = dates777.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates777(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value73[index] = item.save
           })
-          setValue23(value23)           
+          setValue73(value73)           
         }        
       }
     }
@@ -6392,11 +6710,11 @@ const clickShowEditTime8 = (t, ind, tab) => {
   if (t === '06:00')  {
     if (tab === 1) {
       //обработка нажатия вкл/выкл
-      if (dates2[ind+1].time === '07:00') {
-        setCountCol4(countCol4+1) //для высоту ячейки с датой
-        arr = dates2.slice(0); //копируем массив dates
+      if (dates8[ind+1].time === '07:00') {
+        setCountCol81(countCol81+1) //для высоту ячейки с датой
+        arr = dates8.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str8,
           time: '06:30',
           proj: '',
           uuid: '',
@@ -6405,26 +6723,26 @@ const clickShowEditTime8 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates2(arr)
+        setDates8(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value21[index] = item.save
+          value81[index] = item.save
         })
-        setValue21(value21)
+        setValue81(value81)
 
       } else {
-        if (dates2[ind+1].proj === ''){
-          setCountCol4(countCol4-1)
-          arr = dates2.slice(0); 
+        if (dates8[ind+1].proj === ''){
+          setCountCol81(countCol81-1)
+          arr = dates8.slice(0); 
           arr.splice(ind+1, 1);
-          setDates2(arr)
+          setDates8(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value81[index] = item.save
           })
-          setValue21(value21)           
+          setValue81(value81)           
         }        
       }
     }
@@ -6435,11 +6753,11 @@ const clickShowEditTime8 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '08:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates8[ind+1].time === '08:00') {
+          setCountCol81(countCol81+1) //для высоту ячейки с датой
+          arr = dates8.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str8,
             time: '07:30',
             proj: '',
             uuid: '',
@@ -6448,26 +6766,26 @@ const clickShowEditTime8 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates8(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value81[index] = item.save
           })
-          setValue21(value21)
+          setValue81(value81)
                   
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates8[ind+1].proj === ''){
+            setCountCol81(countCol81-1)
+            arr = dates8.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates8(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value81[index] = item.save
             })
-            setValue21(value21)           
+            setValue81(value81)           
           }        
         }
       }
@@ -6480,11 +6798,11 @@ const clickShowEditTime8 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '09:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates8[ind+1].time === '09:00') {
+          setCountCol81(countCol81+1) //для высоту ячейки с датой
+          arr = dates8.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str8,
             time: '08:30',
             proj: '',
             uuid: '',
@@ -6493,25 +6811,25 @@ const clickShowEditTime8 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates8(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value81[index] = item.save
           })
-          setValue21(value21)                 
+          setValue81(value81)                 
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates8[ind+1].proj === ''){
+            setCountCol81(countCol81-1)
+            arr = dates8.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates8(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value81[index] = item.save
             })
-            setValue21(value21)           
+            setValue81(value81)           
           }        
         }
       }
@@ -6523,11 +6841,11 @@ const clickShowEditTime8 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '10:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates8[ind+1].time === '10:00') {
+          setCountCol81(countCol81+1) //для высоту ячейки с датой
+          arr = dates8.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str8,
             time: '09:30',
             proj: '',
             uuid: '',
@@ -6536,26 +6854,26 @@ const clickShowEditTime8 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates8(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value1[index] = item.save
+            value81[index] = item.save
           })
-          setValue1(value1)
+          setValue81(value81)
                   
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates8[ind+1].proj === ''){
+            setCountCol81(countCol81-1)
+            arr = dates8.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates8(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value81[index] = item.save
             })
-            setValue21(value21)           
+            setValue81(value81)           
           }        
         }
       }
@@ -6567,11 +6885,11 @@ const clickShowEditTime8 = (t, ind, tab) => {
       //обработка нажатия вкл/выкл
       if (tab === 1) {
         //обработка нажатия вкл/выкл
-        if (dates2[ind+1].time === '11:00') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates8[ind+1].time === '11:00') {
+          setCountCol81(countCol81+1) //для высоту ячейки с датой
+          arr = dates8.slice(0); //копируем массив dates
           const newObj = {
-            date: date_str2,
+            date: date_str8,
             time: '10:30',
             proj: '',
             uuid: '',
@@ -6580,25 +6898,25 @@ const clickShowEditTime8 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates8(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value81[index] = item.save
           })
-          setValue21(value21)                 
+          setValue81(value81)                 
         } else {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+          if (dates8[ind+1].proj === ''){
+            setCountCol81(countCol81-1)
+            arr = dates8.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates8(arr)
 
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value81[index] = item.save
             })
-            setValue21(value21)           
+            setValue81(value81)           
           }        
         }
       }
@@ -6608,12 +6926,12 @@ const clickShowEditTime8 = (t, ind, tab) => {
   if (t === '11:00')  {
     if (tab === 1) {
       //обработка нажатия вкл/выкл
-        if (dates2[ind+1]?.time !== '11:30') {
-          setCountCol4(countCol4+1) //для высоту ячейки с датой
-          arr = dates2.slice(0); //копируем массив dates
+        if (dates8[ind+1]?.time !== '11:30') {
+          setCountCol81(countCol81+1) //для высоту ячейки с датой
+          arr = dates8.slice(0); //копируем массив dates
           console.log(arr)
           const newObj = {
-            date: date_str2,
+            date: date_str8,
             time: '11:30',
             proj: '',
             uuid: '',
@@ -6622,27 +6940,27 @@ const clickShowEditTime8 = (t, ind, tab) => {
             
           }
           arr.splice(ind+1, 0, newObj);
-          setDates2(arr)
+          setDates8(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value21[index] = item.save
+            value81[index] = item.save
           })
-          setValue21(value21)          
+          setValue81(value81)          
         } 
         
-        if (dates2[ind+1]?.time === '11:30') {
-          if (dates2[ind+1].proj === ''){
-            setCountCol4(countCol4-1)
-            arr = dates2.slice(0); 
+        if (dates8[ind+1]?.time === '11:30') {
+          if (dates8[ind+1].proj === ''){
+            setCountCol81(countCol81-1)
+            arr = dates8.slice(0); 
             arr.splice(ind+1, 1);
-            setDates2(arr)
+            setDates8(arr)
   
             //изменить чек
             arr.forEach((item, index)=> {
-              value21[index] = item.save
+              value81[index] = item.save
             })
-            setValue21(value21)           
+            setValue81(value81)           
           }        
         }
     }
@@ -6653,11 +6971,11 @@ const clickShowEditTime8 = (t, ind, tab) => {
   if (t === '12:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '13:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates88[ind+1].time === '13:00') {
+        setCountCol82(countCol82+1) //для высоту ячейки с датой
+        arr = dates88.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str8,
           time: '12:30',
           proj: '',
           uuid: '',
@@ -6666,26 +6984,26 @@ const clickShowEditTime8 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates88(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value82[index] = item.save
         })
-        setValue22(value22)
+        setValue82(value82)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates88[ind+1].proj === ''){
+          setCountCol82(countCol82-1)
+          arr = dates88.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates88(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value82[index] = item.save
           })
-          setValue22(value22)           
+          setValue82(value82)           
         }        
       }
     }
@@ -6694,11 +7012,11 @@ const clickShowEditTime8 = (t, ind, tab) => {
   if (t === '13:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '14:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates88[ind+1].time === '14:00') {
+        setCountCol82(countCol82+1) //для высоту ячейки с датой
+        arr = dates88.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str8,
           time: '13:30',
           proj: '',
           uuid: '',
@@ -6707,26 +7025,26 @@ const clickShowEditTime8 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates88(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value82[index] = item.save
         })
-        setValue22(value22)
+        setValue82(value82)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates88[ind+1].proj === ''){
+          setCountCol82(countCol82-1)
+          arr = dates88.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates88(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value82[index] = item.save
           })
-          setValue22(value22)           
+          setValue82(value82)           
         }        
       }
     }
@@ -6735,11 +7053,11 @@ const clickShowEditTime8 = (t, ind, tab) => {
   if (t === '14:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '15:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates88[ind+1].time === '15:00') {
+        setCountCol82(countCol82+1) //для высоту ячейки с датой
+        arr = dates88.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str8,
           time: '14:30',
           proj: '',
           uuid: '',
@@ -6748,26 +7066,26 @@ const clickShowEditTime8 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates88(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value82[index] = item.save
         })
-        setValue22(value22)
+        setValue82(value82)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates88[ind+1].proj === ''){
+          setCountCol82(countCol82-1)
+          arr = dates88.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates88(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value82[index] = item.save
           })
-          setValue22(value22)           
+          setValue82(value82)           
         }        
       }
     }
@@ -6776,11 +7094,11 @@ const clickShowEditTime8 = (t, ind, tab) => {
   if (t === '15:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '16:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates88[ind+1].time === '16:00') {
+        setCountCol82(countCol82+1) //для высоту ячейки с датой
+        arr = dates88.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str8,
           time: '15:30',
           proj: '',
           uuid: '',
@@ -6789,26 +7107,26 @@ const clickShowEditTime8 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates88(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value82[index] = item.save
         })
-        setValue22(value22)
+        setValue82(value82)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates88[ind+1].proj === ''){
+          setCountCol82(countCol82-1)
+          arr = dates88.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates88(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value82[index] = item.save
           })
-          setValue22(value22)           
+          setValue82(value82)           
         }        
       }
     }
@@ -6817,11 +7135,11 @@ const clickShowEditTime8 = (t, ind, tab) => {
   if (t === '16:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1].time === '17:00') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates88[ind+1].time === '17:00') {
+        setCountCol82(countCol82+1) //для высоту ячейки с датой
+        arr = dates88.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str8,
           time: '16:30',
           proj: '',
           uuid: '',
@@ -6830,26 +7148,26 @@ const clickShowEditTime8 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates88(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value82[index] = item.save
         })
-        setValue22(value22)
+        setValue82(value82)
 
       } else {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+        if (dates88[ind+1].proj === ''){
+          setCountCol82(countCol82-1)
+          arr = dates77.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates88(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value82[index] = item.save
           })
-          setValue22(value22)           
+          setValue82(value82)           
         }        
       }
     }
@@ -6858,12 +7176,12 @@ const clickShowEditTime8 = (t, ind, tab) => {
   if (t === '17:00')  {
     if (tab === 2) {
       //обработка нажатия вкл/выкл
-      if (dates22[ind+1]?.time !== '17:30') {
-        setCountCol5(countCol5+1) //для высоту ячейки с датой
-        arr = dates22.slice(0); //копируем массив dates
+      if (dates88[ind+1]?.time !== '17:30') {
+        setCountCol82(countCol82+1) //для высоту ячейки с датой
+        arr = dates88.slice(0); //копируем массив dates
         console.log(arr)
         const newObj = {
-          date: date_str2,
+          date: date_str8,
           time: '17:30',
           proj: '',
           uuid: '',
@@ -6872,27 +7190,27 @@ const clickShowEditTime8 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates88(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value82[index] = item.save
         })
-        setValue22(value22)          
+        setValue82(value82)          
       } 
       
-      if (dates22[ind+1]?.time === '17:30') {
-        if (dates22[ind+1].proj === ''){
-          setCountCol5(countCol5-1)
-          arr = dates22.slice(0); 
+      if (dates88[ind+1]?.time === '17:30') {
+        if (dates88[ind+1].proj === ''){
+          setCountCol82(countCol82-1)
+          arr = dates88.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates88(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value82[index] = item.save
           })
-          setValue22(value22)           
+          setValue82(value82)           
         }        
       }
     }
@@ -6903,11 +7221,11 @@ const clickShowEditTime8 = (t, ind, tab) => {
   if (t === '18:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '19:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates888[ind+1].time === '19:00') {
+        setCountCol83(countCol83+1) //для высоту ячейки с датой
+        arr = dates888.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str8,
           time: '18:30',
           proj: '',
           uuid: '',
@@ -6916,26 +7234,26 @@ const clickShowEditTime8 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates888(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value83[index] = item.save
         })
-        setValue23(value23)
+        setValue83(value83)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates888[ind+1].proj === ''){
+          setCountCol83(countCol83-1)
+          arr = dates888.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates888(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value83[index] = item.save
           })
-          setValue23(value23)           
+          setValue83(value83)           
         }        
       }
     }
@@ -6944,11 +7262,11 @@ const clickShowEditTime8 = (t, ind, tab) => {
   if (t === '19:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '20:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates888[ind+1].time === '20:00') {
+        setCountCol83(countCol83+1) //для высоту ячейки с датой
+        arr = dates888.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str8,
           time: '19:30',
           proj: '',
           uuid: '',
@@ -6957,26 +7275,26 @@ const clickShowEditTime8 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates888(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value83[index] = item.save
         })
-        setValue23(value23)
+        setValue83(value83)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates888[ind+1].proj === ''){
+          setCountCol83(countCol83-1)
+          arr = dates888.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates888(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value83[index] = item.save
           })
-          setValue23(value23)           
+          setValue83(value83)           
         }        
       }
     }
@@ -6985,11 +7303,11 @@ const clickShowEditTime8 = (t, ind, tab) => {
   if (t === '20:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '21:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates888[ind+1].time === '21:00') {
+        setCountCol83(countCol83+1) //для высоту ячейки с датой
+        arr = dates888.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str8,
           time: '20:30',
           proj: '',
           uuid: '',
@@ -6998,26 +7316,26 @@ const clickShowEditTime8 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates888(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value83[index] = item.save
         })
-        setValue23(value23)
+        setValue83(value83)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates888[ind+1].proj === ''){
+          setCountCol83(countCol83-1)
+          arr = dates888.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates888(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value83[index] = item.save
           })
-          setValue23(value23)           
+          setValue83(value83)           
         }        
       }
     }
@@ -7026,11 +7344,11 @@ const clickShowEditTime8 = (t, ind, tab) => {
   if (t === '21:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '22:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates888[ind+1].time === '22:00') {
+        setCountCol83(countCol83+1) //для высоту ячейки с датой
+        arr = dates888.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str8,
           time: '21:30',
           proj: '',
           uuid: '',
@@ -7039,26 +7357,26 @@ const clickShowEditTime8 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates888(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value83[index] = item.save
         })
-        setValue23(value23)
+        setValue83(value83)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates888[ind+1].proj === ''){
+          setCountCol83(countCol83-1)
+          arr = dates888.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates888(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value83[index] = item.save
           })
-          setValue23(value23)           
+          setValue83(value83)           
         }        
       }
     }
@@ -7067,11 +7385,11 @@ const clickShowEditTime8 = (t, ind, tab) => {
   if (t === '22:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1].time === '23:00') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates888[ind+1].time === '23:00') {
+        setCountCol83(countCol83+1) //для высоту ячейки с датой
+        arr = dates888.slice(0); //копируем массив dates
         const newObj = {
-          date: date_str2,
+          date: date_str8,
           time: '22:30',
           proj: '',
           uuid: '',
@@ -7080,26 +7398,26 @@ const clickShowEditTime8 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates888(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value83[index] = item.save
         })
-        setValue23(value23)
+        setValue83(value83)
 
       } else {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+        if (dates888[ind+1].proj === ''){
+          setCountCol83(countCol83-1)
+          arr = dates888.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates888(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value83[index] = item.save
           })
-          setValue23(value23)           
+          setValue83(value83)           
         }        
       }
     }
@@ -7108,12 +7426,12 @@ const clickShowEditTime8 = (t, ind, tab) => {
   if (t === '23:00')  {
     if (tab === 3) {
       //обработка нажатия вкл/выкл
-      if (dates222[ind+1]?.time !== '23:30') {
-        setCountCol6(countCol6+1) //для высоту ячейки с датой
-        arr = dates222.slice(0); //копируем массив dates
+      if (dates888[ind+1]?.time !== '23:30') {
+        setCountCol83(countCol83+1) //для высоту ячейки с датой
+        arr = dates888.slice(0); //копируем массив dates
         console.log(arr)
         const newObj = {
-          date: date_str2,
+          date: date_str8,
           time: '23:30',
           proj: '',
           uuid: '',
@@ -7122,27 +7440,27 @@ const clickShowEditTime8 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates222(arr)
+        setDates888(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value23[index] = item.save
+          value83[index] = item.save
         })
-        setValue23(value23)          
+        setValue83(value83)          
       } 
       
-      if (dates222[ind+1]?.time === '23:30') {
-        if (dates222[ind+1].proj === ''){
-          setCountCol6(countCol6-1)
-          arr = dates222.slice(0); 
+      if (dates888[ind+1]?.time === '23:30') {
+        if (dates888[ind+1].proj === ''){
+          setCountCol83(countCol83-1)
+          arr = dates888.slice(0); 
           arr.splice(ind+1, 1);
-          setDates222(arr)
+          setDates888(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value23[index] = item.save
+            value83[index] = item.save
           })
-          setValue23(value23)           
+          setValue83(value83)           
         }        
       }
     }
@@ -7396,7 +7714,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol1}px`}} >
                                           <div>{date_str}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -7575,7 +7893,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol4}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol21}px`}} >
                                           <div>{date_str2}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -7627,7 +7945,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol5}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol22}px`}} >
                                           <div>{date_str2}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -7680,7 +7998,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol6}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol23}px`}} >
                                           <div>{date_str2}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -7739,7 +8057,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol4}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol31}px`}} >
                                           <div>{date_str3}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -7756,7 +8074,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates2.map((item, index) => (
+                                    {dates3.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -7769,9 +8087,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab1"
-                                              checked={value21[index]}
+                                              checked={value31[index]}
                                               onChange={()=>changeStatus3(index, 1)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold21[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold31[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -7791,7 +8109,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol5}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol32}px`}} >
                                           <div>{date_str3}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -7808,7 +8126,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates22.map((item, index) => (
+                                    {dates33.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -7821,9 +8139,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab2"
-                                              checked={value22[index]}
+                                              checked={value32[index]}
                                               onChange={()=>changeStatus3(index, 2)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold22[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold32[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -7844,7 +8162,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol6}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol33}px`}} >
                                           <div>{date_str3}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -7861,7 +8179,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates222.map((item, index) => (
+                                    {dates333.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -7874,9 +8192,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab3"
-                                              checked={value23[index]}
+                                              checked={value33[index]}
                                               onChange={()=>changeStatus3(index, 3)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold23[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold33[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -7904,7 +8222,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol4}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol41}px`}} >
                                           <div>{date_str4}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -7921,7 +8239,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates2.map((item, index) => (
+                                    {dates4.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -7934,9 +8252,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab1"
-                                              checked={value21[index]}
+                                              checked={value41[index]}
                                               onChange={()=>changeStatus4(index, 1)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold21[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold41[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -7956,7 +8274,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol5}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol42}px`}} >
                                           <div>{date_str4}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -7973,7 +8291,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates22.map((item, index) => (
+                                    {dates44.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -7986,9 +8304,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab2"
-                                              checked={value22[index]}
+                                              checked={value42[index]}
                                               onChange={()=>changeStatus4(index, 2)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold22[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold42[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -8009,7 +8327,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol6}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol43}px`}} >
                                           <div>{date_str4}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -8026,7 +8344,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates222.map((item, index) => (
+                                    {dates444.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -8039,9 +8357,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab3"
-                                              checked={value23[index]}
+                                              checked={value43[index]}
                                               onChange={()=>changeStatus4(index, 3)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold23[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold43[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -8069,7 +8387,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol4}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol51}px`}} >
                                           <div>{date_str5}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -8086,7 +8404,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates2.map((item, index) => (
+                                    {dates5.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -8099,9 +8417,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab1"
-                                              checked={value21[index]}
+                                              checked={value51[index]}
                                               onChange={()=>changeStatus5(index, 1)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold21[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold51[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -8121,7 +8439,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol5}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol52}px`}} >
                                           <div>{date_str5}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -8151,9 +8469,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab2"
-                                              checked={value22[index]}
+                                              checked={value52[index]}
                                               onChange={()=>changeStatus5(index, 2)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold22[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold52[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -8174,7 +8492,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol6}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol53}px`}} >
                                           <div>{date_str5}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -8191,7 +8509,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates222.map((item, index) => (
+                                    {dates555.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -8204,9 +8522,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab3"
-                                              checked={value23[index]}
+                                              checked={value53[index]}
                                               onChange={()=>changeStatus5(index, 3)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold23[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold53[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -8234,7 +8552,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol4}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol61}px`}} >
                                           <div>{date_str6}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -8251,7 +8569,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates2.map((item, index) => (
+                                    {dates6.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -8264,9 +8582,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab1"
-                                              checked={value21[index]}
+                                              checked={value61[index]}
                                               onChange={()=>changeStatus6(index, 1)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold21[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold61[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -8286,7 +8604,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol5}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol62}px`}} >
                                           <div>{date_str6}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -8303,7 +8621,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates22.map((item, index) => (
+                                    {dates66.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -8316,9 +8634,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab2"
-                                              checked={value22[index]}
+                                              checked={value62[index]}
                                               onChange={()=>changeStatus6(index, 2)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold22[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold62[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -8339,7 +8657,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol6}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol63}px`}} >
                                           <div>{date_str6}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -8356,7 +8674,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates222.map((item, index) => (
+                                    {dates666.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -8369,9 +8687,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab3"
-                                              checked={value23[index]}
+                                              checked={value63[index]}
                                               onChange={()=>changeStatus6(index, 3)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold23[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold63[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -8399,7 +8717,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol4}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol71}px`}} >
                                           <div>{date_str7}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -8416,7 +8734,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates2.map((item, index) => (
+                                    {dates7.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -8429,9 +8747,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab1"
-                                              checked={value21[index]}
+                                              checked={value71[index]}
                                               onChange={()=>changeStatus7(index, 1)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold21[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold71[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -8451,7 +8769,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol5}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol72}px`}} >
                                           <div>{date_str7}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -8468,7 +8786,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates22.map((item, index) => (
+                                    {dates77.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -8481,9 +8799,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab2"
-                                              checked={value22[index]}
+                                              checked={value72[index]}
                                               onChange={()=>changeStatus7(index, 2)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold22[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold72[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -8504,7 +8822,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol6}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol73}px`}} >
                                           <div>{date_str7}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -8521,7 +8839,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates222.map((item, index) => (
+                                    {dates777.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -8534,9 +8852,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab3"
-                                              checked={value23[index]}
+                                              checked={value73[index]}
                                               onChange={()=>changeStatus7(index, 3)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold23[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold73[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -8564,7 +8882,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol4}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol81}px`}} >
                                           <div>{date_str8}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -8581,7 +8899,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates2.map((item, index) => (
+                                    {dates8.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -8594,9 +8912,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab1"
-                                              checked={value21[index]}
+                                              checked={value81[index]}
                                               onChange={()=>changeStatus8(index, 1)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold21[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold81[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -8616,7 +8934,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol5}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '50px', height: `${41*countCol82}px`}} >
                                           <div>{date_str8}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -8633,7 +8951,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates22.map((item, index) => (
+                                    {dates88.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -8646,9 +8964,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab2"
-                                              checked={value22[index]}
+                                              checked={value82[index]}
                                               onChange={()=>changeStatus8(index, 2)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold22[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold82[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
@@ -8669,7 +8987,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                     </CTableHead>
                                     <CTableBody>
                                       <CTableRow v-for="item in tableItems">
-                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol6}px`}} >
+                                        <CTableDataCell className="text-center" style={{width: '70px', height: `${41*countCol83}px`}} >
                                           <div>{date_str8}</div> 
                                         </CTableDataCell>
                                       </CTableRow>
@@ -8686,7 +9004,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                    {dates222.map((item, index) => (
+                                    {dates888.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index}>   
                                           <CTableDataCell className="text-center" style={{width: '50px'}} >
                                             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
@@ -8699,9 +9017,9 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
                                               id="rowCheckTab3"
-                                              checked={value23[index]}
+                                              checked={value83[index]}
                                               onChange={()=>changeStatus8(index, 3)}
-                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold23[index])  ? '' : 'disabled'}
+                                              disabled={((uuidDistrib === item.uuid || item.proj === '') && !timeold83[index])  ? '' : 'disabled'}
                                             />
                                           </CTableDataCell>
                                         </CTableRow>
