@@ -7492,7 +7492,12 @@ const clickShowEditTime8 = (t, ind, tab) => {
     const d_str2 = new Date()  
     d_str2.setDate(d_str2.getDate() + 1) //завтрашний день
 
-    let d_str3, d_str4, d_str5, d_str6, d_str7, d_str8
+    const d_str3 = new Date()  
+    const d_str4 = new Date()  
+    const d_str5 = new Date()  
+    const d_str6 = new Date()  
+    const d_str7 = new Date()  
+    const d_str8 = new Date()  
 
     d_str3.setDate(d_str2.getDate() + 2) //3 день
     d_str4.setDate(d_str2.getDate() + 3) //4 день
