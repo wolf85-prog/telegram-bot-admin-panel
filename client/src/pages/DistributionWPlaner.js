@@ -7492,6 +7492,16 @@ const clickShowEditTime8 = (t, ind, tab) => {
     const d_str2 = new Date()  
     d_str2.setDate(d_str2.getDate() + 1) //завтрашний день
 
+    let d_str3, d_str4, d_str5, d_str6, d_str7, d_str8
+
+    d_str3.setDate(d_str2.getDate() + 2) //3 день
+    d_str4.setDate(d_str2.getDate() + 3) //4 день
+    d_str5.setDate(d_str2.getDate() + 4) //5 день
+    d_str6.setDate(d_str2.getDate() + 5) //6 день
+    d_str7.setDate(d_str2.getDate() + 6) //7 день
+    d_str8.setDate(d_str2.getDate() + 7) //8 день
+
+
     
     const obj = {
       id: uuidDistrib, 
@@ -7502,9 +7512,46 @@ const clickShowEditTime8 = (t, ind, tab) => {
       date: d_str2.toLocaleDateString(),
     }
 
+    const obj3 = {
+      id: uuidDistrib, 
+      date: d_str3.toLocaleDateString(),
+    }
+
+    const obj4 = {
+      id: uuidDistrib, 
+      date: d_str4.toLocaleDateString(),
+    }
+
+    const obj5 = {
+      id: uuidDistrib, 
+      date: d_str5.toLocaleDateString(),
+    }
+
+    const obj6 = {
+      id: uuidDistrib, 
+      date: d_str6.toLocaleDateString(),
+    }
+
+    const obj7 = {
+      id: uuidDistrib, 
+      date: d_str7.toLocaleDateString(),
+    }
+
+    const obj8 = {
+      id: uuidDistrib, 
+      date: d_str8.toLocaleDateString(),
+    }
+
     //(удалить предыдущие записи запланированных рассылок)
     const res = await delDistributionWPlan(obj) //editDistributionWPlan(obj)
     const res2 = await delDistributionWPlan(obj2) //editDistributionWPlan(obj2)
+
+    const res3 = await delDistributionWPlan(obj3) //editDistributionWPlan(obj2)
+    const res4 = await delDistributionWPlan(obj4) //editDistributionWPlan(obj2)
+    const res5 = await delDistributionWPlan(obj5) //editDistributionWPlan(obj2)
+    const res6 = await delDistributionWPlan(obj6) //editDistributionWPlan(obj2)
+    const res7 = await delDistributionWPlan(obj7) //editDistributionWPlan(obj2)
+    const res8 = await delDistributionWPlan(obj8) //editDistributionWPlan(obj2)
     
 
     //1. сохранить все галочки и название проектов в массиве
@@ -7515,8 +7562,23 @@ const clickShowEditTime8 = (t, ind, tab) => {
     const newArray2 = [].concat(dates2, dates22, dates222);
     const planer_str2 = JSON.stringify(newArray2)
 
-    const planer_str3 = JSON.stringify(dates3)
-    console.log("dates3: ", dates3)
+    const newArray3 = [].concat(dates3, dates33, dates333);
+    const planer_str3 = JSON.stringify(newArray3)
+
+    const newArray4 = [].concat(dates4, dates44, dates444);
+    const planer_str4 = JSON.stringify(newArray4)
+
+    const newArray5 = [].concat(dates5, dates55, dates555);
+    const planer_str5 = JSON.stringify(newArray5)
+
+    const newArray6 = [].concat(dates6, dates66, dates666);
+    const planer_str6 = JSON.stringify(newArray6)
+
+    const newArray7 = [].concat(dates7, dates77, dates777);
+    const planer_str7 = JSON.stringify(newArray7)
+
+    const newArray8 = [].concat(dates8, dates88, dates888);
+    const planer_str8 = JSON.stringify(newArray8)
 
 
 
@@ -7534,6 +7596,50 @@ const clickShowEditTime8 = (t, ind, tab) => {
       "times": planer_str2
     }
     await newPlan(newObj2);
+
+    //3-й день
+    const newObj3 = {
+      "datestart": d_str3.toLocaleDateString(),
+      "times": planer_str3
+    }
+    await newPlan(newObj3);
+
+    //4-й день
+    const newObj4 = {
+      "datestart": d_str4.toLocaleDateString(),
+      "times": planer_str4
+    }
+    await newPlan(newObj4);
+
+    //5-й день
+    const newObj5 = {
+      "datestart": d_str5.toLocaleDateString(),
+      "times": planer_str5
+    }
+    await newPlan(newObj5);
+
+    //6-й день
+    const newObj6 = {
+      "datestart": d_str6.toLocaleDateString(),
+      "times": planer_str6
+    }
+    await newPlan(newObj6);
+
+    //7-й день
+    const newObj7 = {
+      "datestart": d_str7.toLocaleDateString(),
+      "times": planer_str7
+    }
+    await newPlan(newObj7);
+
+    //8-й день
+    const newObj8 = {
+      "datestart": d_str8.toLocaleDateString(),
+      "times": planer_str8
+    }
+    await newPlan(newObj8);
+    
+
 
     //console.log("catDistr2: ", catDistr)
     let str_cats
@@ -7602,6 +7708,174 @@ const clickShowEditTime8 = (t, ind, tab) => {
         //сохранение рассылки в базе данных
         const dataDistrib2 = await newDistributionW(message)
         console.log("Рассылка2: ", dataDistrib2)
+      } 
+    })
+
+    //массив дат 3-го дня
+    newArray3.forEach(async (item)=> {
+      if (item.save === true && item.uuid === uuidDistrib && item.go === false) {
+
+        //новая рассылка
+        const message = {
+          text: textDistr, 
+          image: imageDistrib ? imageDistrib : '', 
+          project: labelName, 
+          projectId: projectId, 
+          receivers: str_cats, 
+          datestart: `${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`, 
+          delivered: 'false',  
+          count: countReceiver,
+          date: `${day2}.${month2}.${year}`,   
+          button: textButton,
+          users: selected.toString(),  
+          uuid: uuidDistrib, 
+          editButton: showEditButtonAdd,  
+          stavka: stavka,
+          target: target,
+        }
+        //сохранение рассылки в базе данных
+        const dataDistrib3 = await newDistributionW(message)
+        console.log("Рассылка3: ", dataDistrib3)
+      } 
+    })
+
+    //массив дат 4-го дня
+    newArray4.forEach(async (item)=> {
+      if (item.save === true && item.uuid === uuidDistrib && item.go === false) {
+
+        //новая рассылка
+        const message = {
+          text: textDistr, 
+          image: imageDistrib ? imageDistrib : '', 
+          project: labelName, 
+          projectId: projectId, 
+          receivers: str_cats, 
+          datestart: `${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`, 
+          delivered: 'false',  
+          count: countReceiver,
+          date: `${day2}.${month2}.${year}`,   
+          button: textButton,
+          users: selected.toString(),  
+          uuid: uuidDistrib, 
+          editButton: showEditButtonAdd,  
+          stavka: stavka,
+          target: target,
+        }
+        //сохранение рассылки в базе данных
+        const dataDistrib4 = await newDistributionW(message)
+        console.log("Рассылка4: ", dataDistrib4)
+      } 
+    })
+
+    //массив дат 5-го дня
+    newArray5.forEach(async (item)=> {
+      if (item.save === true && item.uuid === uuidDistrib && item.go === false) {
+
+        //новая рассылка
+        const message = {
+          text: textDistr, 
+          image: imageDistrib ? imageDistrib : '', 
+          project: labelName, 
+          projectId: projectId, 
+          receivers: str_cats, 
+          datestart: `${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`, 
+          delivered: 'false',  
+          count: countReceiver,
+          date: `${day2}.${month2}.${year}`,   
+          button: textButton,
+          users: selected.toString(),  
+          uuid: uuidDistrib, 
+          editButton: showEditButtonAdd,  
+          stavka: stavka,
+          target: target,
+        }
+        //сохранение рассылки в базе данных
+        const dataDistrib5 = await newDistributionW(message)
+        console.log("Рассылка5: ", dataDistrib5)
+      } 
+    })
+
+    //массив дат 6-го дня
+    newArray6.forEach(async (item)=> {
+      if (item.save === true && item.uuid === uuidDistrib && item.go === false) {
+
+        //новая рассылка
+        const message = {
+          text: textDistr, 
+          image: imageDistrib ? imageDistrib : '', 
+          project: labelName, 
+          projectId: projectId, 
+          receivers: str_cats, 
+          datestart: `${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`, 
+          delivered: 'false',  
+          count: countReceiver,
+          date: `${day2}.${month2}.${year}`,   
+          button: textButton,
+          users: selected.toString(),  
+          uuid: uuidDistrib, 
+          editButton: showEditButtonAdd,  
+          stavka: stavka,
+          target: target,
+        }
+        //сохранение рассылки в базе данных
+        const dataDistrib6 = await newDistributionW(message)
+        console.log("Рассылка6: ", dataDistrib6)
+      } 
+    })
+
+    //массив дат 7-го дня
+    newArray7.forEach(async (item)=> {
+      if (item.save === true && item.uuid === uuidDistrib && item.go === false) {
+
+        //новая рассылка
+        const message = {
+          text: textDistr, 
+          image: imageDistrib ? imageDistrib : '', 
+          project: labelName, 
+          projectId: projectId, 
+          receivers: str_cats, 
+          datestart: `${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`, 
+          delivered: 'false',  
+          count: countReceiver,
+          date: `${day2}.${month2}.${year}`,   
+          button: textButton,
+          users: selected.toString(),  
+          uuid: uuidDistrib, 
+          editButton: showEditButtonAdd,  
+          stavka: stavka,
+          target: target,
+        }
+        //сохранение рассылки в базе данных
+        const dataDistrib7 = await newDistributionW(message)
+        console.log("Рассылка7: ", dataDistrib7)
+      } 
+    })
+
+    //массив дат 8-го дня
+    newArray8.forEach(async (item)=> {
+      if (item.save === true && item.uuid === uuidDistrib && item.go === false) {
+
+        //новая рассылка
+        const message = {
+          text: textDistr, 
+          image: imageDistrib ? imageDistrib : '', 
+          project: labelName, 
+          projectId: projectId, 
+          receivers: str_cats, 
+          datestart: `${year}-${item.date.split('.')[1]}-${item.date.split('.')[0]}T${item.time}:00`, 
+          delivered: 'false',  
+          count: countReceiver,
+          date: `${day2}.${month2}.${year}`,   
+          button: textButton,
+          users: selected.toString(),  
+          uuid: uuidDistrib, 
+          editButton: showEditButtonAdd,  
+          stavka: stavka,
+          target: target,
+        }
+        //сохранение рассылки в базе данных
+        const dataDistrib8 = await newDistributionW(message)
+        console.log("Рассылка8: ", dataDistrib8)
       } 
     })
 
