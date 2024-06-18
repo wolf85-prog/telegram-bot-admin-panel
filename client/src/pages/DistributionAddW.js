@@ -181,6 +181,7 @@ const DistributionAddW = () => {
 
   //get filter delete workers
   useEffect(() => {
+    console.log("workersAll: ", workersAll)
     //массив без удаленных пользователей
     const arrDel = workersAll.filter(item => item.deleted !== true)
 
@@ -974,12 +975,24 @@ const delCategory7 = (category) => {
 const onChangeSelectCity = (e) => {
     e.preventDefault();
     setValueCity(e.target.value)
+    const val = e.target.value
+
+    const res = cityData.find((item, ind) => val.toString() === ind.toString())
 
     //выбрать специалистов из выбранного города
-    //const arr = [...selected].filter((el) => el === );
+    const arr = workersAll.filter((el) => el.city === res.name);
 
-    //setSelected(arr)
-    //console.log("selected city: ", arr)
+    let new_selected = []
+    
+    selected.map((item)=> {
+      arr.map(el => {
+        if (item === el.chatId) {
+          new_selected.push(item) // массив специалистов из города N
+        }
+      })
+    })
+
+    setSelected(new_selected)
 }
 
 

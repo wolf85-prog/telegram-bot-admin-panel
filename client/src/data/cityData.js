@@ -3,7 +3,7 @@ const cityData = [
             {value: 0, name: "Выбрать...", label: 'Выбрать...', },
             {value: 1, name: "№1", label: '№1',},
             {value: 2, name: "№2", label: '№2',},
-            // {value: 1, name: "Москва", label: 'Москва',},
+            {value: 3, name: "Москва", label: 'Москва',},
             // {value: 2, name: "Санкт-Петербург", label: "Санкт-Петербург",},
             // {value: 3, label: "Анапа",},
             // {value: 4, label: "Архангельск",},

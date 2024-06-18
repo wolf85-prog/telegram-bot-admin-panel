@@ -619,8 +619,8 @@ const [dates888, setDates888] = useState([
       }     
       
       //3-й день
-      if (plan2 !== null) {
-        const planTimes3 = JSON.parse(plan2.times)
+      if (plan3 !== null) {
+        const planTimes3 = JSON.parse(plan3.times)
 
         const ind1 = planTimes3.findIndex(date => date.time === '12:00')
         const ind2 = planTimes3.findIndex(date => date.time === '18:00')
