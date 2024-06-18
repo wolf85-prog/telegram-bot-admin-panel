@@ -979,7 +979,7 @@ const onChangeSelectCity = (e) => {
     //const arr = [...selected].filter((el) => el === );
 
     //setSelected(arr)
-    console.log("selected city: ", arr)
+    //console.log("selected city: ", arr)
 }
 
 
