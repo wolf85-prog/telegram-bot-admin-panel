@@ -291,7 +291,7 @@ class WorkersController {
                                 phone: workerN[0]?.phone && workerN[0]?.phone,
                                 dateborn: workerN[0].age?.start.split('-')[0],
                                 city: workerN[0].city && workerN[0].city,     
-                                newcity: workerN[0].newcity && workerN[0].newcity,                
+                                newcity: workerN[0].newcity && workerN[0].newcity[0].name,                
                                 from: 'Notion',
                                 comment: workerN[0]?.comment ? workerN[0]?.comment : '',
                                 rank: workerN[0]?.rank ? workerN[0]?.rank : null,
