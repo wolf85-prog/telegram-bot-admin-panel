@@ -33,6 +33,7 @@ module.exports = async function getWorkersNotion() {
                phone: worker.properties.Phone.phone_number,
                age: worker.properties.Age.date,
                city: worker.properties.City.rich_text[0]?.plain_text,
+               newcity: worker.properties["Город"].multi_select,
                spec: worker.properties.Specialization.multi_select,
                comment: worker.properties["Комментарии"].rich_text[0]?.plain_text,
                reyting: worker.properties["Рейтинг"].rich_text[0]?.plain_text,

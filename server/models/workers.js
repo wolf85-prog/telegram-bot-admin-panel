@@ -29,6 +29,7 @@ const Worker = sequelize.define('worker', {
     rank: {type: DataTypes.INTEGER}, 
     block: {type: DataTypes.BOOLEAN}, 
     deleted: {type: DataTypes.BOOLEAN},
+    newcity: {type: DataTypes.STRING},
 })
 
 const Message = sequelize.define('wmessage', {
