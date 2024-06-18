@@ -290,6 +290,7 @@ const UsersProvider = ({ children }) => {
 				  phone: user.phone,
 				  dateborn: user.dateborn,
 				  city: user.city, 
+				  newcity: user.newcity, 
 				  companys: user.companys,
 				  stag: user.stag,
 				  worklist:  user.worklist,

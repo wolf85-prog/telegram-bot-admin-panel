@@ -980,7 +980,7 @@ const onChangeSelectCity = (e) => {
     const res = cityData.find((item, ind) => val.toString() === ind.toString())
 
     //выбрать специалистов из выбранного города
-    const arr = workersAll.filter((el) => el.city === res.name);
+    const arr = workersAll.filter((el) => el.newcity === res.name);
 
     let new_selected = []
     
