@@ -127,6 +127,8 @@ const DistributionAddW = () => {
   const [valueSelect6, setValueSelect6] = useState(0)
   const [valueSelect7, setValueSelect7] = useState(0)
 
+  const [valueCity, setValueCity] = useState(0)
+
   const [showCategories2, setShowCategories2] = useState(false);
   const [showCategories3, setShowCategories3] = useState(false);
   const [showCategories4, setShowCategories4] = useState(false);
@@ -969,6 +971,17 @@ const delCategory7 = (category) => {
   }
 }
 
+const onChangeSelectCity = (e) => {
+    e.preventDefault();
+    setValueCity(e.target.value)
+
+    //выбрать специалистов из выбранного города
+    //const arr = [...selected].filter((el) => el === );
+
+    //setSelected(arr)
+    console.log("selected city: ", arr)
+}
+
 
 //=======================================================
 
@@ -1365,7 +1378,8 @@ const delCategory7 = (category) => {
                                           {/* Список городов */}
                                           <CFormSelect 
                                             aria-label="Default select example" 
-                                            //onChange={onChangeSelectProject}
+                                            onChange={onChangeSelectCity}
+                                            value={valueCity}
                                             options={cityData}
                                           />
                                         </CCol>
