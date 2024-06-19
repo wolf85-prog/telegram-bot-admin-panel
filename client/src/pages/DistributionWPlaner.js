@@ -7499,12 +7499,12 @@ const clickShowEditTime8 = (t, ind, tab) => {
     const d_str7 = new Date()  
     const d_str8 = new Date()  
 
-    d_str3.setDate(d_str2.getDate() + 2) //3 день
-    d_str4.setDate(d_str2.getDate() + 3) //4 день
-    d_str5.setDate(d_str2.getDate() + 4) //5 день
-    d_str6.setDate(d_str2.getDate() + 5) //6 день
-    d_str7.setDate(d_str2.getDate() + 6) //7 день
-    d_str8.setDate(d_str2.getDate() + 7) //8 день
+    d_str3.setDate(d_str3.getDate() + 2) //3 день
+    d_str4.setDate(d_str4.getDate() + 3) //4 день
+    d_str5.setDate(d_str5.getDate() + 4) //5 день
+    d_str6.setDate(d_str6.getDate() + 5) //6 день
+    d_str7.setDate(d_str7.getDate() + 6) //7 день
+    d_str8.setDate(d_str8.getDate() + 7) //8 день
 
 
     
@@ -7885,7 +7885,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
     })
 
     //обновить список рассылок
-    await addNewDistrib(true)
+    //await addNewDistrib(true)
 
     addToast(exampleToast) //уведомление - ваш план сохранен
     setShowSave(false)
@@ -7894,62 +7894,25 @@ const clickShowEditTime8 = (t, ind, tab) => {
   }
 
 
-  const saveNeedDate3 = (date) => {
-    setNeedDate3(date)
-    setShowPlan3(true)
-  }
-
-  const saveNeedDate4 = (date) => {
-    setNeedDate4(date)
-    setShowPlan4(true)
-  }
-
-  const saveNeedDate5 = (date) => {
-    setNeedDate5(date)
-    setShowPlan5(true)
-  }
-
-  const saveNeedDate6 = (date) => {
-    setNeedDate6(date)
-    setShowPlan6(true)
-  }
-
-  const saveNeedDate7 = (date) => {
-    setNeedDate7(date)
-    setShowPlan7(true)
-  }
-
-  const saveNeedDate8 = (date) => {
-    setNeedDate8(date)
-    setShowPlan8(true)
-  }
-
-
   const saveNeedDate = (d3, count) => {
     console.log("count: ", count)
     setCountClick(count+1)
     if (count === 0) {
-      setNeedDate3(d3)
       setShowPlan3(true)
     }
     if (count === 1) {
-      setNeedDate4(d4)
       setShowPlan4(true)
     }
     if (count === 2) {
-      setNeedDate5(d5)
       setShowPlan5(true)
     }
     if (count === 3) {
-      setNeedDate6(d6)
       setShowPlan6(true)
     }
     if (count === 4) {
-      setNeedDate7(d7)
       setShowPlan7(true)
     }
     if (count === 5) {
-      setNeedDate8(d8)
       setShowPlan8(true)
     }
     
