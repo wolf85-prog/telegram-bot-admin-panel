@@ -972,6 +972,7 @@ const delCategory7 = (category) => {
   }
 }
 
+// выбор города
 const onChangeSelectCity = (e) => {
     e.preventDefault();
     setValueCity(e.target.value)
