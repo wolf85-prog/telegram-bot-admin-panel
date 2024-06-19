@@ -656,6 +656,7 @@ const [dates888, setDates888] = useState([
       //4-й день
       if (plan4 !== null) {
         const planTimes4 = JSON.parse(plan4.times)
+        //console.log("plan4 full: ", planTimes4)
 
         const ind1 = planTimes4.findIndex(date => date.time === '12:00')
         const ind2 = planTimes4.findIndex(date => date.time === '18:00')
@@ -3917,7 +3918,7 @@ const clickShowEditTime4 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates44(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
@@ -3930,13 +3931,13 @@ const clickShowEditTime4 = (t, ind, tab) => {
           setCountCol42(countCol42-1)
           arr = dates44.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates44(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value42[index] = item.save
           })
-          setValue22(value22)           
+          setValue42(value42)           
         }        
       }
     }
@@ -3958,26 +3959,26 @@ const clickShowEditTime4 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates44(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value42[index] = item.save
         })
-        setValue22(value22)
+        setValue42(value42)
 
       } else {
         if (dates44[ind+1].proj === ''){
           setCountCol42(countCol42-1)
           arr = dates44.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates44(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value42[index] = item.save
           })
-          setValue22(value22)           
+          setValue42(value42)           
         }        
       }
     }
@@ -3999,26 +4000,26 @@ const clickShowEditTime4 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates44(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value42[index] = item.save
         })
-        setValue22(value22)
+        setValue42(value42)
 
       } else {
         if (dates44[ind+1].proj === ''){
           setCountCol42(countCol42-1)
           arr = dates44.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates44(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value42[index] = item.save
           })
-          setValue22(value22)           
+          setValue42(value42)           
         }        
       }
     }
@@ -4040,26 +4041,26 @@ const clickShowEditTime4 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates44(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value42[index] = item.save
         })
-        setValue22(value22)
+        setValue42(value42)
 
       } else {
         if (dates44[ind+1].proj === ''){
           setCountCol42(countCol42-1)
           arr = dates44.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates44(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value42[index] = item.save
           })
-          setValue22(value22)           
+          setValue42(value42)           
         }        
       }
     }
@@ -4081,26 +4082,26 @@ const clickShowEditTime4 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates44(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value42[index] = item.save
         })
-        setValue22(value22)
+        setValue42(value42)
 
       } else {
         if (dates44[ind+1].proj === ''){
           setCountCol42(countCol42-1)
           arr = dates44.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates44(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value42[index] = item.save
           })
-          setValue22(value22)           
+          setValue42(value42)           
         }        
       }
     }
@@ -4123,13 +4124,13 @@ const clickShowEditTime4 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates22(arr)
+        setDates44(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value42[index] = item.save
         })
-        setValue22(value22)          
+        setValue42(value42)          
       } 
       
       if (dates44[ind+1]?.time === '17:30') {
@@ -4137,13 +4138,13 @@ const clickShowEditTime4 = (t, ind, tab) => {
           setCountCol42(countCol42-1)
           arr = dates44.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates44(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
-            value22[index] = item.save
+            value42[index] = item.save
           })
-          setValue22(value22)           
+          setValue42(value42)           
         }        
       }
     }
