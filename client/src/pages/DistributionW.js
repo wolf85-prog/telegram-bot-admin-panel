@@ -131,7 +131,7 @@ const DistributionW = () => {
     const timer = setInterval(() => {
       //setSeconds(seconds => seconds + 5);
       addNewDistrib(true)
-    }, 10000);
+    }, 5000);
     
     // очистка интервала
     return () => clearInterval(timer);

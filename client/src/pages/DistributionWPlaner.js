@@ -3205,7 +3205,7 @@ const clickShowEditTime3 = (t, ind, tab) => {
 
         //изменить чек
         arr.forEach((item, index)=> {
-          value22[index] = item.save
+          value32[index] = item.save
         })
         setValue32(value32)
 
@@ -3255,7 +3255,7 @@ const clickShowEditTime3 = (t, ind, tab) => {
           setCountCol32(countCol32-1)
           arr = dates33.slice(0); 
           arr.splice(ind+1, 1);
-          setDates22(arr)
+          setDates33(arr)
 
           //изменить чек
           arr.forEach((item, index)=> {
@@ -4428,7 +4428,7 @@ const clickShowEditTime5 = (t, ind, tab) => {
           
         }
         arr.splice(ind+1, 0, newObj);
-        setDates4(arr)
+        setDates5(arr)
 
         //изменить чек
         arr.forEach((item, index)=> {
