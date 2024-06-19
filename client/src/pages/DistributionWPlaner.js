@@ -471,13 +471,6 @@ const [dates888, setDates888] = useState([
   const [showPlan7, setShowPlan7] = useState(false)
   const [showPlan8, setShowPlan8] = useState(false)
 
-  const [needDate3, setNeedDate3] = useState("")
-  const [needDate4, setNeedDate4] = useState("")
-  const [needDate5, setNeedDate5] = useState("")
-  const [needDate6, setNeedDate6] = useState("")
-  const [needDate7, setNeedDate7] = useState("")
-  const [needDate8, setNeedDate8] = useState("")
-
   const [countClick, setCountClick] = useState(0)
 
   const [toast, addToast] = useState(0)
@@ -694,7 +687,7 @@ const [dates888, setDates888] = useState([
 
         setDates4(times)
         setDates44(times2)
-        setDates44(times3)
+        setDates444(times3)
 
         setCountCol41(ind1)
         setCountCol42(ind2 - ind1)
