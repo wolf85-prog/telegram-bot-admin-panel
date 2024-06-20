@@ -27,7 +27,7 @@ import { cilX, cilCaretBottom, cilCarAlt, cilCaretLeft } from '@coreui/icons';
 
 //import { MultiSelect } from "react-multi-select-component";
 import { useUsersContext } from "../chat-app-new/context/usersContext";
-import { $host } from '../http/index';
+import { $host, $host_bottest } from '../http/index';
 import { useNavigate } from 'react-router-dom';
 import { 
   newDistributionW, 
@@ -64,6 +64,7 @@ const DistributionAddW = () => {
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const webAppAddStavka = process.env.REACT_APP_WEBAPP_STAVKA
   const hostServer = process.env.REACT_APP_API_URL
+  const hostServerTest = process.env.REACT_APP_ADMIN_API_URL_TEST
 
   const { userWorkers: clients, workersAll } = useUsersContext();
   const { addNewDistrib, addNewMessage2, distributionsWork, setDistributionsWork, delMessageContext } = useUsersContext();
@@ -1138,7 +1139,8 @@ const onChangeSelectCity = (e) => {
       const distrNew = await newDistributionW(message)
       console.log("distrNew: ", distrNew.id)
 
-      const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id);
+      //const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id); 
+      const res = await $host_bottest.get(hostServerTest + 'distributionsw/send/' + distrNew.id);
 
       setShowSend(false)
 

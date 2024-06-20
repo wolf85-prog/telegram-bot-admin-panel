@@ -431,9 +431,9 @@ const start = async () => {
             console.log('HTTPS Server Admin-panel running on port ' + port);
 
             // начало цикла           
-            setInterval(async() => {              
-                getDistributionsPlan()
-            }, 120000) //каждые 2 минуты);                 
+            // setInterval(async() => {              
+            //     getDistributionsPlan()
+            // }, 120000) //каждые 2 минуты);                 
         }); 
 
     } catch (error) {
