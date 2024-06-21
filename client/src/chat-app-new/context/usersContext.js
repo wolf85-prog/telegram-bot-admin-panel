@@ -22,6 +22,7 @@ import { getDistributions,
 	getProjects3,
 	getProjectAll,
 	getProjects,
+	getProjectNewCash,
 } from "src/http/adminAPI";
 
 import boopSfx from './../assets/sounds/zvuk-icq.mp3';
@@ -105,6 +106,8 @@ const UsersProvider = ({ children }) => {
 	const [showUpdate2, setShowUpdate2] = useState(false);
 	const [avatarUpdate, setAvatarUpdate] = useState(100);
 
+	const [projectsNew, setProjectsNew] = useState([])
+
 	const audioMessage = new Audio(soundMessage);
 	const audioMessageW = new Audio(boopSfx);
 	const audioProject = new Audio(soundProject);
@@ -156,6 +159,23 @@ const UsersProvider = ({ children }) => {
 	// 	const saved = localStorage.getItem("countMessageWork");
 	// 	setCountMessageWork(saved)
 	// })
+
+//------------------------------------------------------------
+//загрузка новых проектов
+// useEffect(() => {
+//     const fetchData = async () => {
+
+//       let projects = await getProjectNewCash();
+//       console.log("Загрузка проектов из БД ...")
+//       console.log("projects planer: ", projects)
+
+// 	  setProjectsNew(projects)
+//     }
+
+//     fetchData();  
+//   },[])
+
+//----------------------------------------------------------------------
 
 	useEffect(() => {	
 		// storing input name
@@ -1501,6 +1521,7 @@ function isObjectEmpty(obj) {
 			setWorkerUpdate,
 			avatarUpdate,
 			setAvatarUpdate,
+			projectsNew,
 		}}>
 			{children}
 		</UsersContext.Provider>

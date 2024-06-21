@@ -66,11 +66,11 @@ const DistributionAddW = () => {
   const hostServer = process.env.REACT_APP_API_URL
   const hostServerTest = process.env.REACT_APP_ADMIN_API_URL_TEST
 
-  const { userWorkers: clients, workersAll } = useUsersContext();
+  const { userWorkers: clients, workersAll, projectsNew } = useUsersContext();
   const { addNewDistrib, addNewMessage2, distributionsWork, setDistributionsWork, delMessageContext } = useUsersContext();
-  const [contacts, setContacts]= useState([]);
+  const [contacts, setContacts]= useState([{label: 'Выбрать...', value: '0',}]);
+  const [contacts2, setContacts2]= useState([{label: 'Выбрать...', value: '0',}]);
   const [projects, setProjects]= useState([]); 
-  const [contacts2, setContacts2]= useState([]);
   const [labelName, setLabelName] = useState({})
   const [proj, setProj] = useState('');
   const [planShow, setPlanShow] = useState(false);
@@ -118,7 +118,7 @@ const DistributionAddW = () => {
   const [value2, setValue2] = useState("");
 
   const [loader, setLoader] = useState(false);
-  const [loaderStart, setLoaderStart] = useState(true);
+  const [loaderStart, setLoaderStart] = useState(false);
   const [valueProject, setValueProject] = useState('')
   const [valueSelect, setValueSelect] = useState(0)
   const [valueSelect2, setValueSelect2] = useState(0)
@@ -163,20 +163,20 @@ const DistributionAddW = () => {
 
 //-----------------------------------------------------------------------------------
   //загрузка новых проектов
-  useEffect(() => {
-    const fetchData = async () => {
+  // useEffect(() => {
+  //   const fetchData = async () => {
 
-      let projects = await getProjectNewCash();
-      console.log("Загрузка проектов из БД ...")
-      console.log("projects planer: ", projects)
-      console.log("clients: ", clients)
+  //     let projects = await getProjectNewCash();
+  //     console.log("Загрузка проектов из БД ...")
+  //     console.log("projects planer: ", projects)
+  //     console.log("clients: ", clients)
 
-      setProjects(projects)
-      setLoaderStart(false)  
-    }
+  //     setProjects(projects)
+  //     setLoaderStart(false)  
+  //   }
 
-    fetchData();  
-  },[])
+  //   fetchData();  
+  // },[])
 
   //--------------------------------------------------------------
 
@@ -197,6 +197,7 @@ const DistributionAddW = () => {
       label: 'Выбрать...',
       value: '0',
     }]
+    console.log("projectsNew: ", projects)
 
     if (projects && projects.length > 0) {
       projects.map((project) => {
@@ -224,7 +225,7 @@ const DistributionAddW = () => {
       value: '0',
     }]
 
-    if (projects.length > 0) {
+    if (projects && projects.length > 0) {
       projects.map((project) => {
         if (project != null) {
           const newObj = {
@@ -437,6 +438,19 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
 
   setShowCity(true)
 
+}
+
+const clickProjects = async() => {
+  const fetchData = async () => {
+
+    let projects = await getProjectNewCash();
+    console.log("Загрузка проектов из БД ...")
+    console.log("projects planer: ", projects)
+
+    setProjects(projects)
+  }
+
+  fetchData();
 }
 
 
@@ -1231,6 +1245,7 @@ const onChangeSelectCity = (e) => {
                                         onChange={onChangeSelectProject}
                                         options={contacts}
                                         value={valueProject}
+                                        onClick={clickProjects}
                                       />
                                       
                                       {/* <Dropdown options={contacts}/>   */}
@@ -1242,6 +1257,7 @@ const onChangeSelectCity = (e) => {
                                         onChange={onChangeSelectProject}
                                         options={contacts2}
                                         value={valueProject}
+                                        onClick={clickProjects}
                                       />
 
                                       {/* <br/> */}
