@@ -68,8 +68,8 @@ const DistributionAddW = () => {
 
   const { userWorkers: clients, workersAll, projectsNew } = useUsersContext();
   const { addNewDistrib, addNewMessage2, distributionsWork, setDistributionsWork, delMessageContext } = useUsersContext();
-  const [contacts, setContacts]= useState([{label: 'Выбрать...', value: '0',}]);
-  const [contacts2, setContacts2]= useState([{label: 'Выбрать...', value: '0',}]);
+  const [contacts, setContacts]= useState([{value: 0, name: "Выбрать...", label: 'Выбрать...',}]);
+  const [contacts2, setContacts2]= useState([{value: 0, name: "Выбрать...", label: 'Выбрать...',}]);
   const [projects, setProjects]= useState([]); 
   const [labelName, setLabelName] = useState({})
   const [proj, setProj] = useState('');
@@ -97,6 +97,7 @@ const DistributionAddW = () => {
   const [categoryAll2, setCategoryAll2] = useState();
 
   const [selected, setSelected] = useState([]);
+  const [selectedCat, setSelectedCat] = useState([])
   const [arrSelect, setArrSelect] = useState([]);
   const [arrLength, setArrLength] = useState(0);
   const [text, setText] = useState('');
@@ -562,6 +563,7 @@ const onAddCategory0 = (e) => {
 const onAddCategory = (e) => {
   e.preventDefault();
   setValueSelect(e.target.value)
+  setValueCity(0)
 
   if (e.target.value === '0') {
     setSelected([])
@@ -584,7 +586,8 @@ const onAddCategory = (e) => {
     const result2 = [...arrTemp]
     console.log("result: ", arrCategory)
     console.log("categoryAll: ", arrTemp)
-    
+    console.log("deleted: ", delWorkers)
+
     delWorkers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
@@ -620,6 +623,7 @@ const onAddCategory = (e) => {
 
       if (index === arr.length-1) {
         setSelected(arrNew)
+        setSelectedCat(arrNew)
         console.log("selected: ", arrNew, index)
       }
     })
@@ -992,23 +996,35 @@ const onChangeSelectCity = (e) => {
     e.preventDefault();
     setValueCity(e.target.value)
     const val = e.target.value
+    console.log(val)
 
-    const res = cityData.find((item, ind) => val.toString() === ind.toString())
-
-    //выбрать специалистов из выбранного города
-    const arr = workersAll.filter((el) => el.newcity === res.name);
-
-    let new_selected = []
+    let res = ''
+    if (val !== 'Выбрать...') {
+      res = cityData.find((item, ind) => val.toString() === ind.toString())
+      console.log("res: ", res)
     
-    selected.map((item)=> {
-      arr.map(el => {
-        if (item === el.chatId) {
-          new_selected.push(item) // массив специалистов из города N
-        }
-      })
-    })
 
-    setSelected(new_selected)
+      //выбрать специалистов из выбранного города
+      console.log("workersAll: ", workersAll)
+      const arr = workersAll.filter((el) => el.newcity === res.name);
+
+      let new_selected = []
+
+      console.log("selected: ", selected)
+      
+      selectedCat.map((item)=> {
+        arr.map(el => {
+          if (item === el.chatId) {
+            new_selected.push(item) // массив специалистов из города N
+          }
+        })
+      })
+    
+
+      console.log("selected city: ", new_selected)
+
+      setSelected(new_selected)
+    }
 }
 
 
