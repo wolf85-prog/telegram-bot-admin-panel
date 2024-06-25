@@ -75,6 +75,16 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 			</div>
 			<div className="chat__actions">
 				{clearFile ? <CButton color="danger" onClick={clickClearFile}>Очистить</CButton> : ''}
+
+				<button
+					className="chat__action"
+					aria-label="Phone"
+					onClick={()=>clickToCall(user?.chatId)} 
+					style={{transform: 'rotate(90deg)', color: '#aaabad'}}
+				>
+					<CIcon icon={cilPhone} size="lg"/>
+				</button>
+				
 				<button
 					className="chat__action"
 					aria-label="Search"
@@ -84,15 +94,6 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 						id="search"
 						className="chat__action-icon chat__action-icon--search"
 					/>
-				</button>
-
-				<button
-					className="chat__action"
-					aria-label="Phone"
-					onClick={()=>clickToCall(user?.chatId)} 
-					style={{transform: 'rotate(90deg)', color: '#aaabad'}}
-				>
-					<CIcon icon={cilPhone} size="lg"/>
 				</button>
 
 
