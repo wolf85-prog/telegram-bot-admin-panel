@@ -284,15 +284,9 @@ const UsersProvider = ({ children }) => {
 
 	}, [])
 
+
+	
 //---------get Workers----------------------------------------------------
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		//const res1 = await get
-	// 	}
-
-	// 	fetchData()
-
-	// }, [])
 
 	useEffect(() => {
 		//---------get UserWorkers-----------------------------------------
@@ -1522,6 +1516,8 @@ function isObjectEmpty(obj) {
 			avatarUpdate,
 			setAvatarUpdate,
 			projectsNew,
+			countProjects, 
+			setCountProjects,
 		}}>
 			{children}
 		</UsersContext.Provider>

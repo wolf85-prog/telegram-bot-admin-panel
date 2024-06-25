@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState, useContext, useEffect, useRef }  from "react";
 import Icon from "./../../../components/Icon";
 import OptionsBtn from "./../../../components/OptionsButton";
 import avatarDefault from "./../../../../chat-app-new/assets/images/no-avatar.png";
 import { 
 	CButton
   } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
+import { cilPhone } from '@coreui/icons'
+
+import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3';
+import ishodCall from './../../../../assets/sound/ishod.mp3';
+
+import { getSendCall } from './../../../../http/adminAPI';
   
 const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, showCloseButton, clearFile, setClearFile, clickClearFile  }) => {
+
+	const [press, setPress] = useState(false)
+
+	const audio = new Audio(sendSound);
+	const audioIshodCall = new Audio(ishodCall);
 
 	const host = process.env.REACT_APP_API_URL
 
@@ -30,6 +42,19 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 
 	const onImageError = (e) => {
 		e.target.src = avatarDefault
+	}
+
+
+	const clickToCall = async(id) => {
+		// Button begins to shake
+		setPress(true);
+		console.log(press)
+        
+		// Buttons stops to shake after 2 seconds
+		setTimeout(() => setPress(false), 200);
+
+		audioIshodCall.play();
+		await getSendCall(id)
 	}
 
 	return (
@@ -60,7 +85,18 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 						className="chat__action-icon chat__action-icon--search"
 					/>
 				</button>
-				<OptionsBtn
+
+				<button
+					className="chat__action"
+					aria-label="Phone"
+					onClick={()=>clickToCall(user?.chatId)} 
+					style={{transform: 'rotate(90deg)', color: '#aaabad'}}
+				>
+					<CIcon icon={cilPhone} size="lg"/>
+				</button>
+
+
+				{/* <OptionsBtn
 					className="chat__action"
 					ariaLabel="Menu"
 					iconId="menu"
@@ -68,12 +104,10 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 					onSelected={onSelected}
 					options={[
 						"Данные о контакте",
-						// "Выбрать сообщения",
-						// "Отключить уведомления",
 						"Очистить переписку",
 						"Удалить чат",
 					]}
-				/>
+				/> */}
 
 				<button onClick={closeSidebar} style={{marginLeft: '15px', display: showCloseButton ? "block": "none"}}>
 					<Icon id="cancel" className="chat-sidebar__header-icon-close" />

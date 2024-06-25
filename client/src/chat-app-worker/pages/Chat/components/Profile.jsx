@@ -283,6 +283,11 @@ const Profile = ({ user, closeSidebar }) => {
 
 			<div className="profile__sectionW profile__sectionW--danger">
 				<Icon id="delete" className="profile__danger-icon" />
+				<p className="profile__danger-text profile__worker"> Очистить переписку </p>
+			</div>
+
+			<div className="profile__sectionW profile__sectionW--danger">
+				<Icon id="delete" className="profile__danger-icon" />
 				<p className="profile__danger-text profile__worker"> Удалить чат </p>
 			</div>
 		</div>
