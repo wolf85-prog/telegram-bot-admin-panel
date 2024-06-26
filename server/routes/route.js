@@ -45,6 +45,7 @@ const { newPlan, getPlan, addTimer } = require('../controllers/planController')
 //const upload = require( "../utils/upload.js")
 //const upload = multer({dest:"uploads"});
 const upload = require('../middleware/file')
+const uploadDistrib = require('../middleware/fileDistrib.js') //папка для файлов в рассылках
 
 route.post('/user/registration', userController.registration)
 route.post('/user/login', userController.login)
@@ -109,6 +110,7 @@ route.get('/projects/get', getProjects)
 route.get('/projects/get/:id', getProjectsId)
 
 route.post("/file/upload", upload.single("photo"), uploadFile);
+route.post("/file/distrib", uploadDistrib.single("photo"), uploadFile);
 route.get("/file/:filename", getImage);
 
 

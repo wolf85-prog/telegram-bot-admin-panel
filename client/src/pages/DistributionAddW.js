@@ -43,7 +43,7 @@ import {
   getProjectNewCash, 
 } from '../http/adminAPI';
 
-import { uploadFile, delMessage } from '../http/chatAPI';
+import { uploadFile, delMessage, distribFile } from '../http/chatAPI';
 import { newMessage } from '../http/workerAPI';
 import specData from './../data/specData';
 import categories from './../data/categories';
@@ -1050,7 +1050,7 @@ const onChangeSelectCity = (e) => {
           data.append("name", file.name);
           data.append("photo", file);
           
-          let response = await uploadFile(data);
+          let response = await distribFile(data);
           console.log("response: ", response.data.path)
 
           setImage(response.data.path.split('.team')[1]);
