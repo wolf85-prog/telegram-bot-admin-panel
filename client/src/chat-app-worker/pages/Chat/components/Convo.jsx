@@ -59,62 +59,62 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
 	const startLoadMessages = async() => {
         console.log('convId: ', convId)
-		// setLoading(!loading)
+		setLoading(!loading)
 
-		// console.log("array: ", allArr)
+		console.log("array: ", allArr)
 
-		// const newMess = await getWMessages2(convId, 20, allArr)
-		// console.log("newMessages: ", newMess.length + allArr)
+		const newMess = await getWMessages2(convId, 20, allArr)
+		console.log("newMessages: ", newMess.length + allArr)
 
-		// setAllArr(newMess.length + allArr)
+		setAllArr(newMess.length + allArr)
 
-		// const arrayMessage = []
-		// const allDate = []
+		const arrayMessage = []
+		const allDate = []
 
-		// if (newMess) {
-		// 	newMess.map(message => {
-		// 		const d = new Date(message.createdAt);
-		// 		const year = d.getFullYear();
-		// 		const month = String(d.getMonth()+1).padStart(2, "0");
-		// 		const day = String(d.getDate()).padStart(2, "0");
-		// 		const chas = d.getHours();
-		// 		const minut = String(d.getMinutes()).padStart(2, "0");
+		if (newMess && newMess.length > 0) {
+			newMess.map(message => {
+				const d = new Date(message.createdAt);
+				const year = d.getFullYear();
+				const month = String(d.getMonth()+1).padStart(2, "0");
+				const day = String(d.getDate()).padStart(2, "0");
+				const chas = d.getHours();
+				const minut = String(d.getMinutes()).padStart(2, "0");
 			
-		// 		const newDateMessage = `${day}.${month}.${year}`
+				const newDateMessage = `${day}.${month}.${year}`
 		
-		// 		const newMessage = {
-		// 			date: newDateMessage,
-		// 			content: message.text,
-		// 			image: message.type === 'image' ? true : false,
-		// 			descript: message.buttons ? message.buttons : '',
-		// 			sender: message.senderId,
-		// 			time: chas + ' : ' + minut,
-		// 			status: 'sent',
-		// 			id:message.messageId,
-		// 			reply:message.replyId,
-		// 		}
-		// 		arrayMessage.push(newMessage)
-		// 		allDate.push(newDateMessage)
-		// 	})
-		// }	
+				const newMessage = {
+					date: newDateMessage,
+					content: message.text,
+					image: message.type === 'image' ? true : false,
+					descript: message.buttons ? message.buttons : '',
+					sender: message.senderId,
+					time: chas + ' : ' + minut,
+					status: 'sent',
+					id:message.messageId,
+					reply:message.replyId,
+				}
+				arrayMessage.push(newMessage)
+				allDate.push(newDateMessage)
+			})
+		}	
 		
-		// const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
+		const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
 		
-		// let obj = {};
-		// for (let i = 0; i < dates.length; i++) {
-		// 	const arrayDateMessage = []
-		// 	for (let j = 0; j < arrayMessage.length; j++) {
-		// 		if (arrayMessage[j].date === dates[i]) {
-		// 			arrayDateMessage.push(arrayMessage[j])							
-		// 		}
-		// 	}	
-		// 	obj[dates[i]] = arrayDateMessage;
-		// }
-		// console.log("obj: ", obj)
+		let obj = {};
+		for (let i = 0; i < dates.length; i++) {
+			const arrayDateMessage = []
+			for (let j = 0; j < arrayMessage.length; j++) {
+				if (arrayMessage[j].date === dates[i]) {
+					arrayDateMessage.push(arrayMessage[j])							
+				}
+			}	
+			obj[dates[i]] = arrayDateMessage;
+		}
+		console.log("obj: ", obj)
 
-		// setNewMessages(obj)
+		setNewMessages(obj)
 
-		// setLoading(false)
+		setLoading(false)
     }
 
 
