@@ -10,7 +10,7 @@ const host_server = process.env.HOST_SERVER
 const storage = multer.diskStorage({
     destination(req, file, cd) {
         
-        cd(null, `${host_server}/distribFiles`)
+        cd(null, `${host_server}/distrib`)
     },
 
     //замена оригинального названия файла на название текущей даты в миллесекундах
