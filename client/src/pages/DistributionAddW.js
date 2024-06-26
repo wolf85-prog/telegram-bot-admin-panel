@@ -1050,7 +1050,7 @@ const onChangeSelectCity = (e) => {
           data.append("name", file.name);
           data.append("photo", file);
           
-          let response = await uploadFile(data) //distribFile(data);
+          let response = await uploadFile(data) //distribFile(data) // uploadFile(data)
           console.log("response: ", response.data.path)
 
           setImage(response.data.path.split('.team')[1]);
