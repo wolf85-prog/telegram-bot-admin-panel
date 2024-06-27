@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react'
 import { AppSidebarNav } from './AppSidebarNav'
 import logo from 'src/assets/brand/logo_04_light.png'
+import logo2 from 'src/assets/brand/logo_04_blue.png'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
@@ -194,14 +195,17 @@ const AppSidebar = () => {
         dispatch({ type: 'set', sidebarShow: visible })
       }}
     >
-      <CSidebarBrand className="d-none d-md-flex" to="/">
+      <CSidebarBrand className="d-none d-md-flex" to="/dashboard">
         <img src={logo} alt='' height={35} className="sidebar-brand-full"/>
+        <img src={logo2} alt='' height={35} style={{display: 'none'}} className="sidebar-brand-full"/>
       </CSidebarBrand>
+
       <CSidebarNav>
         <SimpleBar>
           <AppSidebarNav items={navigation} />
         </SimpleBar>
       </CSidebarNav>
+
       <CSidebarToggler
         className="d-none d-lg-flex"
         onClick={() => dispatch({ type: 'set', sidebarUnfoldable: !unfoldable })}
