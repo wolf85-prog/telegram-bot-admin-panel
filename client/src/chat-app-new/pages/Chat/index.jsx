@@ -120,8 +120,8 @@ const Chat = () => {
 			scrollToLastMsg();
 			setUserAsUnread(user.chatId);
 			setCountMessage(0)
+			setShowGetMess(false)
 		}
-		setShowGetMess(false)
 	}, []);
 
 	useEffect(() => {

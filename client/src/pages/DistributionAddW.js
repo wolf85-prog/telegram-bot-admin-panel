@@ -40,7 +40,12 @@ import {
   getPretendent,
   editDistributionW2,
   getProjectNewDate,
-  getProjectNewCash, 
+  getProjectNewCash,
+  getProjectNew,
+  getProjectNewId,
+  getProjectNewCreate,
+  getProjectNewUpdate,
+  getProjectNewDel,  
 } from '../http/adminAPI';
 
 import { uploadFile, delMessage, distribFile } from '../http/chatAPI';
@@ -443,12 +448,56 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
 
 const clickProjects = async() => {
   const fetchData = async () => {
+    let projects2 = await getProjectNewCash();
+    setProjects(projects2)
 
-    let projects = await getProjectNewCash();
     console.log("Загрузка проектов из БД ...")
-    console.log("projects planer: ", projects)
+    try {  
+        //notion
+        const projects = await getProjectNewDate()
+        console.log("projects: ", projects)  
 
-    setProjects(projects)
+        const projectsNew = await getProjectNew()
+        console.log("projectsNew: ", projectsNew)
+
+        //добавление новых проектов
+        if (projects && projects.length > 0) {
+            projects.map(async(project)=> {
+                const id = project.id
+                
+                let exist = await getProjectNewId(id)
+                
+                if(!exist){
+                    await getProjectNewCreate({
+                      id: project.id, 
+                      name: project.name, 
+                      datestart: project.datestart, 
+                      crmID: project.crmID, 
+                    })
+                } else {
+                    await getProjectNewUpdate({name: project.name, id: project.id})    
+                    console.log("Проект в кеше обновлен!")   
+                }   
+            })
+
+            //удаление старых проектов
+            projectsNew.map(async(project, index)=> {
+                const projectOld = projects.find(item => item.id === project.id)
+                //console.log("projectOld: ", projectOld)
+                if (projectOld === undefined) {
+                    await getProjectNewDel({
+                            id: project.id,
+                        })
+                    console.log("Удаленный проект: ", index)
+                }
+            })
+        }  
+
+    } catch (error) {
+        console.error(error.message)
+    }
+
+    
   }
 
   fetchData();

@@ -125,17 +125,11 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
     const resUpdate = await getUpdateWorkers()
   }
 
-  const updateA = async() => {
-    if (showUpdate2) {
-      setShowUpdate2(false);
-    } else {
-      setShowUpdate2(true);
-    }
 
-    setAvatarUpdate(0)
-
-    const resUpdate = await getUpdateAvatars()
-  }
+  const handleLinkClick = (url) => {
+    // Open the link in a new tab with desired features (optional)
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <CHeader position="sticky" className="mb-4">
@@ -201,7 +195,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               content="Инструкция"
               placement="bottom"
             >
-              <CNavLink href="https://www.notion.so/amusienko/dfed170e9f0242f8af156b8d175f038e?v=d6a54b36fb4b4e2487256a2f2578ecbc" style={{position: 'relative'}}>
+              <CNavLink onClick={()=>handleLinkClick('https://www.notion.so/amusienko/dfed170e9f0242f8af156b8d175f038e?v=d6a54b36fb4b4e2487256a2f2578ecbc')} style={{position: 'relative', cursor: 'pointer'}}>
                 <img src={Vopros} onMouseOver={e => (e.currentTarget.src = Vopros2)} onMouseOut={e => (e.currentTarget.src = Vopros)}  style={{width: '18px', paddingBottom: '5px'}}/>               
               </CNavLink>
             </CTooltip>
@@ -213,7 +207,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               content="Команды / Триггеры"
               placement="bottom"
             >
-              <CNavLink onClick={()=>setShowBarHelp(!showBarHelp)} style={{position: 'relative'}}>
+              <CNavLink onClick={()=>setShowBarHelp(!showBarHelp)} style={{position: 'relative',  cursor: 'pointer'}}>
                 <img src={Help} onMouseOver={e => (e.currentTarget.src = Help2)} onMouseOut={e => (e.currentTarget.src = Help)}  style={{width: '18px', paddingBottom: '5px'}}/>
                 <div
                   style={{
@@ -227,6 +221,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                     alignItems: 'flex-start',
                     justifyContent: 'center',
                     borderRadius: '15px',
+                    border: '1px solid #4b4b4b',
                     padding: '15px',
                   }}>
                     <p style={{fontSize: '13px', paddingRight: '15px'}}><b>Команды:</b><br/>
@@ -300,6 +295,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                     alignItems: 'center',
                     justifyContent: 'center',
                     borderRadius: '10px',
+                    border: '1px solid #4b4b4b',
                     padding: '10px',
                   }}>
                       <div className='dark-theme' style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '200px'}}>
@@ -332,6 +328,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               width: '900px', height: '330px', 
               backgroundColor: '#2a2f32', 
               borderRadius: '15px', 
+              border: '1px solid #4b4b4b',
               padding: '8px',
               zIndex: callIndex}
             }>
@@ -427,6 +424,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               width: '900px', height: '330px', 
               backgroundColor: '#2a2f32', 
               borderRadius: '15px', 
+              border: '1px solid #4b4b4b',
               padding: '8px',
               zIndex: callIndex2}
             }>

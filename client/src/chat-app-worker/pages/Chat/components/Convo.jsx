@@ -112,7 +112,9 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		}
 		console.log("obj: ", obj)
 
-		setNewMessages(obj)
+		if (Object.keys(obj).length !== 0) {
+			setNewMessages(obj)
+		}
 
 		setLoading(false)
     }

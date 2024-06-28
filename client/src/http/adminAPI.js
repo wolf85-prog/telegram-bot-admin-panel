@@ -126,6 +126,56 @@ export const addTimer = async (data) => {
     }
 }
 
+export const getProjectNew = async () => {
+    try {
+        let response =  await $host.get(`api/projectnew/get`);
+        //console.log("planAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectNew api", error.message);
+    }
+}
+
+export const getProjectNewId = async (id) => {
+    try {
+        let response =  await $host.get(`api/projectnew/get/` + id);
+        //console.log("planAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectNewId api", error.message);
+    }
+}
+
+export const getProjectNewCreate = async (data) => {
+    try {
+        let response =  await $host.post(`api/projectnew/add`, data);
+        //console.log("planAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectNewCreate api", error.message);
+    }
+}
+
+export const getProjectNewUpdate = async (data) => {
+    try {
+        let response =  await $host.post(`api/projectnew/update`, data);
+        //console.log("planAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectNewUpdate api", error.message);
+    }
+}
+
+export const getProjectNewDel = async (data) => {
+    try {
+        let response =  await $host.post(`api/projectnew/del`, data);
+        //console.log("planAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectNewDel api", error.message);
+    }
+}
+
 //get Workers
 export const getWorkers = async () =>{
     try {

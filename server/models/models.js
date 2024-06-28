@@ -124,6 +124,13 @@ const CountMessage = sequelize.define('countmessage', {
     pretendents: {type: DataTypes.INTEGER},
 })
 
+const ProjectNew = sequelize.define('projectnew', {
+    id: {type: DataTypes.STRING, primaryKey: true}, // id проекта
+    name: {type: DataTypes.STRING},  //название проекта
+    datestart: {type: DataTypes.STRING}, //начало
+    crmID: {type: DataTypes.STRING},
+})
+
 
 module.exports = {
     User, 
@@ -137,5 +144,6 @@ module.exports = {
     SoundNotif,
     Pretendent,
     Plan,
-    CountMessage
+    CountMessage,
+    ProjectNew
 }

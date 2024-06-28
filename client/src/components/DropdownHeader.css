@@ -26,7 +26,7 @@
 
 
 .logo-anim {
-    animation: brightness 0.25s linear infinite;
+    animation: brightness 0.33s linear infinite;
 }
 
 @keyframes brightness {
@@ -39,7 +39,7 @@
 }
 
 .logo-anim2 {
-    animation: brightness2 0.25s linear infinite;
+    animation: brightness2 0.33s linear infinite;
 }
 
 @keyframes brightness2 {
