@@ -23,3 +23,30 @@
 .button-d{
     animation: glowing2 1000ms infinite;
 }
+
+
+.logo-anim {
+    animation: brightness 0.25s linear infinite;
+}
+
+@keyframes brightness {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.logo-anim2 {
+    animation: brightness2 0.25s linear infinite;
+}
+
+@keyframes brightness2 {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

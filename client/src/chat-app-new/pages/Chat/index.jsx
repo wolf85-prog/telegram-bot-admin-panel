@@ -22,7 +22,7 @@ const token = process.env.REACT_APP_TELEGRAM_API_TOKEN
 const host = process.env.REACT_APP_HOST
 
 const Chat = () => {
-	const { users, setUsers, setUserAsUnread, addNewMessage } = useUsersContext();
+	const { users, setUsers, setUserAsUnread, addNewMessage, setShowGetMess } = useUsersContext();
 	const { person } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 	const [clearFile, setClearFile] = useState(false)
@@ -121,6 +121,7 @@ const Chat = () => {
 			setUserAsUnread(user.chatId);
 			setCountMessage(0)
 		}
+		setShowGetMess(false)
 	}, []);
 
 	useEffect(() => {

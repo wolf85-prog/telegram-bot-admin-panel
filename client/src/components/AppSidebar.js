@@ -30,11 +30,12 @@ const AppSidebar = () => {
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { countMessage, newProject, countProjects, countMessageWork, countPretendent } = useUsersContext();
+  const { countMessage, newProject, countProjects, countMessageWork, countPretendent, showGetMess } = useUsersContext();
 
   const [count, setCount ] = useState(0);
   const [countMesW, setCountMesW ] = useState(0);
   console.log("countMessage: ", countMessageWork)
+
 
   // useEffect(async() => {
   //   const res = await getCountMessage()
@@ -196,8 +197,8 @@ const AppSidebar = () => {
       }}
     >
       <CSidebarBrand className="d-none d-md-flex" to="/dashboard">
-        <img src={logo} alt='' height={35} className="sidebar-brand-full"/>
-        <img src={logo2} alt='' height={35} style={{display: 'none'}} className="sidebar-brand-full"/>
+        <img src={logo} alt='' height={35} style={{position: 'absolute'}} className={showGetMess ? "logo-anim sidebar-brand-full" : "sidebar-brand-full"}/>
+        <img src={logo2} alt='' height={35} style={{position: 'absolute', opacity: 0}} className={showGetMess ? "logo-anim2 sidebar-brand-full" : "sidebar-brand-full"}/>
       </CSidebarBrand>
 
       <CSidebarNav>

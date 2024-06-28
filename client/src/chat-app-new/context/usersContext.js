@@ -108,6 +108,8 @@ const UsersProvider = ({ children }) => {
 
 	const [projectsNew, setProjectsNew] = useState([])
 
+	const [showGetMess, setShowGetMess ] = useState(false);
+
 	const audioMessage = new Audio(soundMessage);
 	const audioMessageW = new Audio(boopSfx);
 	const audioProject = new Audio(soundProject);
@@ -656,6 +658,7 @@ const UsersProvider = ({ children }) => {
 		setCountMessage(count+1)
 		//const res = await newCountMessage(kol.managers + 1)
 		console.log("Пришло новое сообщение в renthub: ", count + 1)
+		setShowGetMess(true)
 
 
 		if (data.text.startsWith('Предварительная смета одобрена!')) {
@@ -1518,6 +1521,8 @@ function isObjectEmpty(obj) {
 			projectsNew,
 			countProjects, 
 			setCountProjects,
+			showGetMess,
+			setShowGetMess,
 		}}>
 			{children}
 		</UsersContext.Provider>
