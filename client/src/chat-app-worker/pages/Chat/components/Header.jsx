@@ -48,7 +48,7 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 	const clickToCall = async(id) => {
 		// Button begins to shake
 		setPress(true);
-		console.log(press)
+		console.log(id)
         
 		// Buttons stops to shake after 2 seconds
 		setTimeout(() => setPress(false), 200);
@@ -79,7 +79,7 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 				<button
 					className="chat__action"
 					aria-label="Phone"
-					onClick={()=>clickToCall(user?.chatId)} 
+					onClick={()=>clickToCall(user?.id)} 
 					style={{transform: 'rotate(90deg)', color: '#aaabad'}}
 				>
 					<CIcon icon={cilPhone} size="lg"/>
