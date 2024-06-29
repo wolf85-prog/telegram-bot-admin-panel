@@ -80,6 +80,7 @@ const Distributionw = sequelize.define('distributionw', {
     editButton: {type: DataTypes.BOOLEAN}, //редактируемая кнопка
     stavka: {type: DataTypes.BOOLEAN}, //альтернативная ставка кнопка
     target: {type: DataTypes.STRING}, //ссылка;
+    type: {type: DataTypes.INTEGER}, //тип файла
 })
 
 const Report = sequelize.define('report', {

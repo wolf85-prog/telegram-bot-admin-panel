@@ -58,6 +58,7 @@ const DistributionWPlaner = () => {
   const uuidDistrib = location.state?.uuid
   const stavka = location.state?.stavka
   const target = location.state?.target
+  const type = location.state?.type
 
 
   // console.log("catDistr: ", catDistr)
@@ -7675,6 +7676,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           editButton: showEditButtonAdd, 
           stavka: stavka,
           target: target,
+          type: type,
         }
         //сохранение рассылки в базе данных
         const dataDistrib = await newDistributionW(message) 
@@ -7703,6 +7705,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           editButton: showEditButtonAdd,  
           stavka: stavka,
           target: target,
+          type: type,
         }
         //сохранение рассылки в базе данных
         const dataDistrib2 = await newDistributionW(message)
@@ -7731,6 +7734,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           editButton: showEditButtonAdd,  
           stavka: stavka,
           target: target,
+          type: type,
         }
         //сохранение рассылки в базе данных
         const dataDistrib3 = await newDistributionW(message)
@@ -7759,6 +7763,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           editButton: showEditButtonAdd,  
           stavka: stavka,
           target: target,
+          type: type,
         }
         //сохранение рассылки в базе данных
         const dataDistrib4 = await newDistributionW(message)
@@ -7787,6 +7792,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           editButton: showEditButtonAdd,  
           stavka: stavka,
           target: target,
+          type: type,
         }
         //сохранение рассылки в базе данных
         const dataDistrib5 = await newDistributionW(message)
@@ -7815,6 +7821,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           editButton: showEditButtonAdd,  
           stavka: stavka,
           target: target,
+          type: type,
         }
         //сохранение рассылки в базе данных
         const dataDistrib6 = await newDistributionW(message)
@@ -7843,6 +7850,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           editButton: showEditButtonAdd,  
           stavka: stavka,
           target: target,
+          type: type,
         }
         //сохранение рассылки в базе данных
         const dataDistrib7 = await newDistributionW(message)
@@ -7871,6 +7879,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           editButton: showEditButtonAdd,  
           stavka: stavka,
           target: target,
+          type: type,
         }
         //сохранение рассылки в базе данных
         const dataDistrib8 = await newDistributionW(message)

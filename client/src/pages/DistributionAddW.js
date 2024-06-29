@@ -81,7 +81,7 @@ const DistributionAddW = () => {
   const [planShow, setPlanShow] = useState(false);
   const [uuidDistrib, setUuidDistrib] = useState('');
   const [target, setTarget] = useState('https://www.ru');
-  const [typeFile, setTypeFile] = useState(0);
+  const [typeFile, setTypeFile] = useState(1);
 
   const [arrCategory, setArrCategory] = useState([]);
   const [arrCategory2, setArrCategory2] = useState([]);
@@ -1171,6 +1171,7 @@ const onChangeSelectCity = (e) => {
           showbuttons: showEditButtonAdd,
           stavka: onButtonStavka,
           target: target,
+          type: typeFile,
         }
       });
     } 
@@ -1223,9 +1224,10 @@ const onChangeSelectCity = (e) => {
       //сохранение рассылки в базе данных
       const distrNew = await newDistributionW(message)
       console.log("distrNew: ", distrNew.id)
-
+      //console.log(hostServerTest + 'distributionsw/send/' + distrNew.id +'&'+ typeFile)
       //const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id); 
-      const res = await $host_bottest.get(hostServerTest + 'distributionsw/send/' + distrNew.id + typeFile);
+      const res = await $host_bottest.get(hostServerTest + 'distributionsw/send/' + distrNew.id +'/'+ typeFile);
+      //const res = await $host_bottest.get(hostServerTest + 'distributionsw/send/' + distrNew.id);
 
       setShowSend(false)
 
