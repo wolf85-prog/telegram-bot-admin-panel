@@ -206,7 +206,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                   style={{
                     backgroundColor: '#2a2f32', 
                     width: '780px', 
-                    height: '450px',
+                    height: '575px',
                     position: 'absolute', 
                     top: '50px', 
                     right: '10px',
@@ -229,16 +229,22 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                       /place <span style={{color: '#6e6e6e'}}>&mdash; адрес площадки;</span><br/>
                       /office <span style={{color: '#6e6e6e'}}>&mdash; адрес офиса &laquo;U.L.E.Y&raquo;;</span><br/>
                       <br/>
+                      /hallo <span style={{color: '#6e6e6e'}}>&mdash; приветствие-запрос;</span><br/>
+                      /alert <span style={{color: '#6e6e6e'}}>&mdash; вызов на связь всех участников проекта;</span><br/>
                       /update <span style={{color: '#6e6e6e'}}>&mdash; смена основного состава;</span><br/>
                       /mango <span style={{color: '#6e6e6e'}}>&mdash; смена распределения звонков;</span><br/>
+                      <br/>
                       /ping <span style={{color: '#6e6e6e'}}>&mdash; тест сервера; [отклик &mdash; Pong]</span><br/>
+                      /telegram <span style={{color: '#6e6e6e'}}>&mdash; напоминание отключить блокировку;</span><br/>
+                      /boost <span style={{color: '#6e6e6e'}}>&mdash; ускоритель обработки данных нового проекта;</span><br/>
                       /stop <span style={{color: '#6e6e6e'}}>&mdash; остановить смену;</span><br/>
                       <br/>
+                      /inn <span style={{color: '#6e6e6e'}}>&mdash; запрос данных о самозанятости специалиста;</span><br/>
                       /id <span style={{color: '#6e6e6e'}}>&mdash; номер ID проекта;</span><br/>
-                      /1 /2 /3 /4 /5 <span style={{color: '#6e6e6e'}}>&mdash; перенос запроса статуса окончания работ;</span><br/>
                       /deleted <span style={{color: '#6e6e6e'}}>&mdash; удаленные проекты за 24 часа;</span><br/>
                       /error <span style={{color: '#6e6e6e'}}>&mdash; ошибки в проектах;</span><br/>
                       <br/>
+                      /1 /2 /3 /4 /5 <span style={{color: '#6e6e6e'}}>&mdash; перенос запроса статуса окончания работ;</span><br/>
                     </p>
                     <p style={{fontSize: '13px'}}><b>Триггеры:</b><br/>
                       <br/>

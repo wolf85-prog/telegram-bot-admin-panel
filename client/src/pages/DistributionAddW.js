@@ -81,6 +81,7 @@ const DistributionAddW = () => {
   const [planShow, setPlanShow] = useState(false);
   const [uuidDistrib, setUuidDistrib] = useState('');
   const [target, setTarget] = useState('https://www.ru');
+  const [typeFile, setTypeFile] = useState(0);
 
   const [arrCategory, setArrCategory] = useState([]);
   const [arrCategory2, setArrCategory2] = useState([]);
@@ -1143,6 +1144,11 @@ const onChangeSelectCity = (e) => {
     setTarget(e.target.value)
   }
 
+  const changeType = (e) => {
+    console.log(e.target.value)
+    setTypeFile(e.target.value)
+  }
+
   //===================================================================
   {/* Запланировать рассылку */}
   const onPlanerShow = async(label, proj, text, cats, count, poster, uuidDistrib) => {
@@ -1219,7 +1225,7 @@ const onChangeSelectCity = (e) => {
       console.log("distrNew: ", distrNew.id)
 
       //const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id); 
-      const res = await $host_bottest.get(hostServerTest + 'distributionsw/send/' + distrNew.id);
+      const res = await $host_bottest.get(hostServerTest + 'distributionsw/send/' + distrNew.id + typeFile);
 
       setShowSend(false)
 
@@ -1523,6 +1529,7 @@ const onChangeSelectCity = (e) => {
                                             <CFormSelect 
                                               aria-label="Default select example"
                                               style={{marginTop: '10px'}}
+                                              onChange={changeType}
                                               options={[
                                                 {
                                                   label: 'Постер',
