@@ -30,10 +30,10 @@
 }
 
 @keyframes brightness {
-    0% {
+    from {
         opacity: 0;
     }
-    100% {
+    to {
         opacity: 1;
     }
 }
@@ -43,10 +43,10 @@
 }
 
 @keyframes brightness2 {
-    0% {
+    from {
         opacity: 1;
     }
-    100% {
+    to {
         opacity: 0;
     }
 }
