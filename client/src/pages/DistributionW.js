@@ -199,8 +199,11 @@ const DistributionW = () => {
   //поиск
   useEffect(() => {
     console.log("users: ", users)
-		const filteredData = users.filter(user=> (user.userfamily+user.username+user.user)?.toLowerCase().includes(text.toLowerCase()));
-    setUserReceivers(filteredData);      
+    if (users.length > 0) {
+      const filteredData = users.filter(user=> (user.userfamily+user.username+user.user)?.toLowerCase().includes(text.toLowerCase()));
+      setUserReceivers(filteredData);
+    }
+		      
   }, [text, users]);
 
 
