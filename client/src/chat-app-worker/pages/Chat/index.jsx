@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import "./styles/main.css";
+import EmojiPicker from 'emoji-picker-react';
+
 import EmojiTray from "./components/EmojiTray";
 import ChatInput from "./components/ChatInput";
 import Header from "./components/Header";
@@ -49,6 +51,8 @@ const Chat = () => {
 	const [image, setImage]= useState("");
 	const [mess, setMess] = useState("");
 	const [fileType, setFileType] = useState("");
+	const [showPicker, setShowPicker] = useState(false)
+	const [chosenEmoji, setChosenEmoji] = useState('');
 
 	const [clearFile, setClearFile] = useState(false)
 	const [showCloseButton, setShowCloseButton] = useState(false)
@@ -570,6 +574,12 @@ https://t.me/ULEY_Office_Bot
 		
 	}
 
+	const onEmojiClick = (emojiObject, event) => {
+		console.log(emojiObject)
+		setMess(prevInp =>prevInp + emojiObject.emoji);
+
+	};
+
 	return (
 		<div className="chat">
 			<div className="chat__body">
@@ -608,14 +618,22 @@ https://t.me/ULEY_Office_Bot
 						>
 						<Icon id="downArrow" />
 						</button>
-						<EmojiTray
+						{/* <EmojiTray
 							showEmojis={showEmojis}
 							mess={mess}
 							setMess={setMess}
+						/> */}
+						<EmojiPicker 
+							open={showPicker} 
+							theme='dark'
+							height={500} 
+							width={400} 
+							onEmojiClick={onEmojiClick}
 						/>
 						<ChatInput
 							showEmojis={showEmojis}
 							setShowEmojis={setShowEmojis}
+							setShowPicker={setShowPicker}
 							showAttach={showAttach}
 							setShowAttach={setShowAttach}
 							onFileChange={onFileChange}
@@ -623,6 +641,7 @@ https://t.me/ULEY_Office_Bot
 							setMess={setMess}
 							submitNewMessage={submitNewMessage}
 							setSelectedElement={setSelectedElement}
+							chosenEmoji={chosenEmoji}
 						/>
 
 						{/* <div className="progessBar" style={{ width: progress, height: '1rem', width: '0%',  backgroundColor: 'rgb(68, 212, 231)', color: 'white',  padding: '2px' }}>

@@ -1,5 +1,6 @@
 import React, {useRef, useState} from "react";
 import Icon from "./../../../components/Icon";
+import EmojiPicker from 'emoji-picker-react';
 
 import CIcon from '@coreui/icons-react'
 import {
@@ -15,6 +16,9 @@ const ChatInput = ({
 	setShowAttach,
 	showEmojis,
 	setShowEmojis,
+	showPicker,
+	setShowPicker,
+	chosenEmoji,
 	mess,
 	setMess,
 	submitNewMessage,
@@ -82,14 +86,24 @@ const ChatInput = ({
 		setSelectedElement(eventkey)
 	}
 
+	const clickEmojis = () => {
+		setShowPicker(true)
+		setShowEmojis(true)
+	}
+
+	const clickClose = () => {
+		setShowEmojis(false)
+		setShowPicker(false)
+	}
+
 	return (
 		<div className="chat__input-wrapper">
 			{showEmojis && (
-				<button aria-label="Close emojis" onClick={() => setShowEmojis(false)}>
+				<button aria-label="Close emojis" onClick={clickClose}>
 					<Icon id="cancel" className="chat__input-icon" />
 				</button>
 			)}
-			<button aria-label="Emojis" onClick={() => setShowEmojis(true)}>
+			<button aria-label="Emojis" onClick={clickEmojis}>
 				<Icon
 					id="smiley"
 					className={`chat__input-icon ${
@@ -97,7 +111,7 @@ const ChatInput = ({
 					}`}
 				/>
 			</button>
-			{showEmojis && (
+			{/* {showEmojis && (
 				<>
 					<button aria-label="Choose GIF">
 						<Icon id="gif" className="chat__input-icon" />
@@ -106,7 +120,7 @@ const ChatInput = ({
 						<Icon id="sticker" className="chat__input-icon" />
 					</button>
 				</>
-			)}
+			)} */}
 			<div className="pos-rel">
 				<button aria-label="Attach" onClick={() => setShowAttach(!showAttach)}>
 					<Icon
@@ -156,6 +170,7 @@ const ChatInput = ({
 							
 						</button>
 				</div>
+
 
 			</div>
 
