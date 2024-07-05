@@ -74,6 +74,11 @@ const categories = [
       label: 'Тест',
       name: 'Test',
       value: '14',
+    },
+    {
+      label: 'Все',
+      name: 'All',
+      value: '15',
     }, 
 ]
 

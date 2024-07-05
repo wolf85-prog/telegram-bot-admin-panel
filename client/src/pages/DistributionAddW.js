@@ -126,6 +126,7 @@ const DistributionAddW = () => {
 
   const [loader, setLoader] = useState(false);
   const [loaderStart, setLoaderStart] = useState(false);
+  const [loaderCount, setLoaderCount] = useState(false);
   const [valueProject, setValueProject] = useState('')
   const [valueSelect, setValueSelect] = useState(0)
   const [valueSelect2, setValueSelect2] = useState(0)
@@ -619,6 +620,7 @@ const onAddCategory = (e) => {
     setSelected([])
     //setDisabledBtn(false)
   } else {
+    setLoaderCount(true)
     const cat_name = categories[e.target.value].name
     console.log("cat_name1: ", cat_name)
     const cat_label = categories[e.target.value].label
@@ -638,17 +640,25 @@ const onAddCategory = (e) => {
     console.log("categoryAll: ", arrTemp)
     console.log("deleted: ", delWorkers)
 
-    delWorkers.map((worker)=> {
-      JSON.parse(worker.worklist).map((work) => {
-        result.map((cat)=> {
-          //console.log("work: ", work.cat)
-          //console.log("cat: ", cat)
-          if (work.cat === cat) {
-            arrSelect.push(worker.chatId)
-          } 
+    if (cat_name === 'All') {
+      delWorkers.map((worker)=> {
+        arrSelect.push(worker.chatId)
+      })
+      //console.log("arrSelect: ", arrSelect)
+    } else {
+      delWorkers.map((worker)=> {
+        JSON.parse(worker.worklist).map((work) => {
+          result.map((cat)=> {
+            //console.log("work: ", work.cat)
+            //console.log("cat: ", cat)
+            if (work.cat === cat) {
+              arrSelect.push(worker.chatId)
+            } 
+          })
         })
       })
-    })
+      console.log("arrSelect: ", arrSelect)
+    } 
     
     //выбрать уникальных специалистов
     const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
@@ -675,6 +685,7 @@ const onAddCategory = (e) => {
         setSelected(arrNew)
         setSelectedCat(arrNew)
         console.log("selected: ", arrNew, index)
+        setLoaderCount(false)
       }
     })
     
@@ -1493,7 +1504,7 @@ const onChangeSelectCity = (e) => {
                                       <br/><br/>
                                       
                                       
-                                      <p style={{color: '#767676', marginTop: '-30px'}}>Получателей: <span>{selected.length}</span></p>  
+                                      <p style={{color: '#767676', marginTop: '-30px'}}>Получателей: {loaderCount ? <CSpinner style={{width: '20px', height: '20px'}}/> : <span>{selected.length}</span>}</p>  
 
                                       {/* Добавить */}
                                       <CRow>

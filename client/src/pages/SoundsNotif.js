@@ -44,6 +44,8 @@ const SoundsNotif = () => {
   
       const fetchData = async() => {
 
+        console.log("Открываю страницу Звуковые уведомления")
+
         let notifs = await getSoundNotif()
         console.log("notifs: ", notifs) 
 
@@ -69,8 +71,11 @@ const SoundsNotif = () => {
 
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
-                  <h2>Звуковые уведомления</h2>
-
+                  <CRow className="justify-content-between">
+                    <CCol xs={6}><h2>Звуковые уведомления</h2></CCol>
+                    <CCol xs={6} className="align-self-center" style={{textAlign: 'end'}}><CButton color="secondary" size="sm" >Обновить</CButton></CCol>
+                  </CRow>
+ 
                   <CCard>
                     <CCardHeader>Журнал</CCardHeader>
                     <CCardBody>
