@@ -28,7 +28,7 @@ const { newDistribution,
     delMessagesDistribW,
     editDistribWAll,
 } = require('../controllers/distributionController')
-const { getReports, getReportsId, getSoundNotif } = require('../controllers/reportController')
+const { getReports, getReportsId, getSoundNotif, delSoundNotif} = require('../controllers/reportController')
 const { getProjects, getProjectsId, getProjectNew, getProjectNewId, getProjectNewCreate, getProjectNewUpdate, getProjectNewDel } = require('../controllers/projectController')
 const { uploadFile, getImage, sendNarush } = require( "../controllers/fileController.js")
 
@@ -102,7 +102,9 @@ route.get('/distributionsw/count/get/:count/:prev', getDistributionsCount) //ะตั
 
 //----------------SOUND NOTIFICATIONS--------------------------------
 route.get('/soundnotif/get', getSoundNotif)
+route.get('/soundnotif/del', delSoundNotif)
 
+//-------------------------------------------------------------------
 route.get('/reports/get', getReports)
 route.get('/reports/get/:id', getReportsId)
 

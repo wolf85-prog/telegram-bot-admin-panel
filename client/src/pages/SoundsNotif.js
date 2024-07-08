@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useState, useContext } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { getSoundNotif } from './../http/adminAPI.js'
+import { delSoundNotif, getSoundNotif } from './../http/adminAPI.js'
 
 import {
   CContainer, 
@@ -62,6 +62,42 @@ const SoundsNotif = () => {
       
     }, []);
 
+  const clickUpdate = async() => {
+    //очистить таблицу уведомлений
+    await delSoundNotif()
+    console.log('Таблица звуковых уведомлений очищена...');
+    
+    // 1. получить новые проекты
+    // let arr = []
+    // const d = new Date().getTime() + 10800000
+    // //notion
+    // const arrProjects = await getAllProjects()
+
+    // console.log("Новые проекты: ", arrProjects)
+
+    // console.log("Запускаю фильтрацию проектов...")
+
+    // if (arrProjects && arrProjects.length > 0) {
+    //     arrProjects.forEach(async(page)=> {
+    //         const blockId = await getBlocks(page.id);
+    //         if (blockId) { 
+    //             databaseBlock = await getDatabaseId(blockId);  
+                
+    //             if (databaseBlock && databaseBlock?.length !== 0) {
+    //                 //console.log("main table: ", databaseBlock)
+    //                 let project = databaseBlock.find(item => new Date(item?.date) >= d)
+    //                 const obj = {
+    //                     id: page.id,
+    //                     name: page.name,
+    //                     date: project?.date,
+    //                 }
+    //                 arr.push(obj)
+    //             }
+    //         }
+    //     }) 
+    // }
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -73,7 +109,7 @@ const SoundsNotif = () => {
                 <Suspense fallback={<CSpinner color="primary" />}>
                   <CRow className="justify-content-between">
                     <CCol xs={6}><h2>Звуковые уведомления</h2></CCol>
-                    <CCol xs={6} className="align-self-center" style={{textAlign: 'end'}}><CButton color="secondary" size="sm" >Обновить</CButton></CCol>
+                    <CCol xs={6} className="align-self-center" style={{textAlign: 'end'}}><CButton onClick={clickUpdate} color="secondary" size="sm" >Обновить</CButton></CCol>
                   </CRow>
  
                   <CCard>

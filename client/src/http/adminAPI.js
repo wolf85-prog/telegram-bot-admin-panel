@@ -546,7 +546,17 @@ export const getSoundNotif = async()=>{
         //console.log(response);
         return response.data;
      } catch (error) {
-         console.log("error while calling getDistributionsW api", error.message);
+         console.log("error while calling getSoundNotif api", error.message);
+     }
+}
+
+export const delSoundNotif = async()=>{
+    try {
+        let response = await $host.get('api/soundnotif/del');
+        //console.log(response);
+        return response.data;
+     } catch (error) {
+         console.log("error while calling delSoundNotif api", error.message);
      }
 }
 

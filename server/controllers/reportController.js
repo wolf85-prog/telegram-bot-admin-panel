@@ -40,6 +40,19 @@ class ReportController {
             return res.status(500).json(error.message);
         }
     }
+
+    async delSoundNotif(req, res) {
+        try {
+            const notifs = await SoundNotif.destroy({
+                where: {
+                    delivered: false
+                },
+            });
+            return res.status(200).json(notifs);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
 }
 
 module.exports = new ReportController()
