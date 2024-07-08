@@ -1,5 +1,6 @@
 const {Report, SoundNotif} = require('../models/models')
 const ApiError = require('../error/ApiError')
+const { Op } = require('sequelize')
 
 class ReportController {
 
@@ -25,8 +26,15 @@ class ReportController {
 
     async getSoundNotif(req, res) {
         try {
-            console.log("start get notif")
-            const notifs = await SoundNotif.findAll()
+            const daysAgo30 = new Date(new Date().setDate(new Date().getDate() - 10));
+            //console.log("start get notif")
+            const notifs = await SoundNotif.findAll({
+                where: {
+                    createdAt: {
+                        [Op.gte]: daysAgo30
+                    }
+                }
+            })
             return res.status(200).json(notifs);
         } catch (error) {
             return res.status(500).json(error.message);
