@@ -23,9 +23,9 @@ import { useUsersContext } from "../chat-app-new/context/usersContext";
 
 import arrowDown from '../assets/images/arrowDown.svg'
 
-import { getAllPretendent, getAllPretendentCount, getWorkers, getWorkersNotion100, getWorkersNotion, getWorkerNotionId} from './../http/workerAPI'
+import { getAllPretendent, getAllPretendentCount, getWorkers, getWorkersNotion100, getWorkersNotion, getWorkerNotionId} from '../http/workerAPI'
 
-import {getProjects, newCountMessagePretendent} from './../http/adminAPI'
+import {getProjects, newCountMessagePretendent} from '../http/adminAPI'
 
 
 //Workers.js
@@ -46,13 +46,6 @@ const Workers = () => {
   const [text, setText]= useState("");
 
 
-  //поиск
-  // useEffect(() => {
-	// 	const filteredData = pretendents.filter(user=> (user.project + user.workerFamily + user.workerName)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
-  //   setSpec(text === '' ? pretendents : filteredData) 
-  // }, [text]);
-
-
 
   //get Contacts
   useEffect(() => {
@@ -62,7 +55,8 @@ const Workers = () => {
       setLoading(false)
       //setCountPretendent(0)
     }
-    fetchData()
+    
+    //fetchData()
   }, [pretendents])
 
 
@@ -81,10 +75,10 @@ const Workers = () => {
       console.log("pretendents workers: ", res)
 
       let workers = await getWorkers()
-      console.log("workers context: ", workers)
+      //console.log("workers context: ", workers)
 
       let projects = await getProjects();
-      console.log("projects workers: ", projects)
+      //console.log("projects workers: ", projects)
 
       res.map(async (worker, i) => {
 
@@ -132,7 +126,7 @@ const Workers = () => {
       setLoading(false)
     }
 
-    fetchData();
+    //fetchData();
     
   },[])
 
@@ -155,6 +149,7 @@ const Workers = () => {
   }
 
   const clickNext = async() => {
+
     //1 все рассылки
 		let response = await getAllPretendentCount(20, pretendents.length) //getAllPretendent();
     console.log("pretendent size: ", response.length)
@@ -206,7 +201,7 @@ const Workers = () => {
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
-                                    {spec.map((item, index) => (
+                                    {spec.length > 0 && spec.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
                                         <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
                                           {item.date}

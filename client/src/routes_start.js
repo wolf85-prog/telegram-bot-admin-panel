@@ -15,6 +15,7 @@ import {
     CHAT_ROUTE3,
     CHAT_WORKER,
     WORKERS_ROUTE,
+    WORKERS_ROUTE2,
     DISTRIBUTIONW_ROUTE,
     DISTRIBUTIONADDW_ROUTE,
     DISTRIBUTIONEDITW_ROUTE,
@@ -38,6 +39,7 @@ const Distribution = React.lazy(() => import('./pages/Distribution'))
 const DistributionAdd = React.lazy(() => import('./pages/DistributionAdd'))
 const Settings = React.lazy(() => import('./pages/Settings'))
 const Workers = React.lazy(() => import('./pages/Workers'))
+const Workers2 = React.lazy(() => import('./pages/Workers2'))
 const DistributionW = React.lazy(() => import('./pages/DistributionW'))
 const DistributionAddW = React.lazy(() => import('./pages/DistributionAddW'))
 const DistributionEditW = React.lazy(() => import('./pages/DistributionEditW'))
@@ -62,6 +64,7 @@ export const authRoutes = [
     { path: NOTIF_ROUTE, name: 'Уведомления', Component: Notifications },
     { path: SETTINGS_ROUTE, name: 'Настройки', Component: Settings },
     { path: WORKERS_ROUTE, name: 'Специалисты', Component: Workers },
+    { path: WORKERS_ROUTE2, name: 'Специалисты', Component: Workers2 },
     { path: DISTRIBUTIONW_ROUTE, name: 'Рассылки', Component: DistributionW },
     { path: DISTRIBUTIONADDW_ROUTE, name: 'Создание рассылки', Component: DistributionAddW },
     { path: DISTRIBUTIONEDITW_ROUTE, name: 'Редактирование рассылки', Component: DistributionEditW },

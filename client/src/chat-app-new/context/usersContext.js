@@ -188,7 +188,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			let response = await getContacts();
-			//console.log("contacts size: ", response.length)
+			console.log("contacts: ", response)
 
 			const arrayContact = []
 

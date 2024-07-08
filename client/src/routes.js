@@ -14,6 +14,7 @@ const DistributionAdd = React.lazy(() => import('./pages/DistributionAdd'))
 const Settings = React.lazy(() => import('./pages/Settings'))
 const DistributionW = React.lazy(() => import('./pages/DistributionW'))
 const Workers = React.lazy(() => import('./pages/Workers'))
+const Workers2 = React.lazy(() => import('./pages/Workers2'))
 
 const routes = [
   { path: '/', exact: true, name: 'Пункт управления / ' },
@@ -30,6 +31,7 @@ const routes = [
   { path: '/settings', name: 'Настройки', Component: Settings },
   { path: '/distributionw', name: 'Workhub / Рассылки', Component: DistributionW },
   { path: "/workers", name: 'Workhub / Уведомления', Component: Workers },
+  { path: "/workers2", name: 'Workhub / Уведомления', Component: Workers2 },
   { path: '/dashboard2', name: 'Пункт управления / Renthub', Component: Admin2 },
 ]
 
