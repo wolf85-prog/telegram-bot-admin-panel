@@ -23,7 +23,7 @@ import { useUsersContext } from "../chat-app-new/context/usersContext";
 
 import arrowDown from '../assets/images/arrowDown.svg'
 
-import { getAllPretendent, getAllPretendentCount, getWorkers, getWorkersNotion100, getWorkersNotion, getWorkerNotionId} from '../http/workerAPI'
+import { getAllPretendent, getAllPretendentCount, getWorkers, getWorkersNotion100, getWorkersNotion, getWorkerNotionId, getCanceled} from '../http/workerAPI'
 
 import {getProjects, newCountMessagePretendent} from '../http/adminAPI'
 
@@ -45,25 +45,16 @@ const Workers = () => {
 
   const [text, setText]= useState("");
 
+  const [countWorker, setCountWorker] = useState(0);  
+  const [countWorkerNew, setCountWorkerNew] = useState(0); 
 
-
-  //get Contacts
-  useEffect(() => {
-    const fetchData = async() => {
-      console.log("workers-pretendent: ", pretendents)
-      setSpec(pretendents); 
-      setLoading(false)
-      //setCountPretendent(0)
-    }
-    
-    //fetchData()
-  }, [pretendents])
+  const [loadingCount, setLoadingCount] = useState(false); 
 
 
   //-----------------------------------------------------------------------------------------
   //			get pretendents
   //-----------------------------------------------------------------------------------------
-  useEffect(async() => {
+  useEffect(() => {
     const arrWorkers = []
 
     setCountPretendent(0)
@@ -71,27 +62,25 @@ const Workers = () => {
 
     const fetchData = async () => {
 
-      let res = await getAllPretendentCount(20, 0) //getAllPretendent();
-      console.log("pretendents workers: ", res)
-
       let workers = await getWorkers()
       //console.log("workers context: ", workers)
 
       let projects = await getProjects();
-      //console.log("projects workers: ", projects)
+      //console.log("projects: ", projects)
 
-      res.map(async (worker, i) => {
+      let cancels = await getCanceled();
+      //console.log("cancels: ", cancels)
+
+      cancels.map(async (worker, i) => {
 
         let userObject = projects.find((proj) => proj.id === worker.projectId);  
         const projectName = userObject?.title
+        const crmId = userObject?.crmID
 
         let workerObject = workers.find((item) => item.chatId === worker.receiverId);  
         const workerName = workerObject?.userfamily + " "+ workerObject?.username
 
-        const worklist = workerObject?.worklist ? JSON.parse(workerObject?.worklist) : ''
-        const rang = workerObject?.rank ? workerObject?.rank : ''
-        const comment = workerObject?.comment ? workerObject?.comment : ''
-        const phone = workerObject?.phone
+        const status = worker.cancel
 
         const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
         const d2 = new Date(d)
@@ -110,58 +99,27 @@ const Workers = () => {
           date: newDate, 
           projectId: worker.projectId,
           project: projectName,
+          crmId: crmId,
           workerFamily: workerObject?.userfamily,
           workerName: workerObject?.username,
-          worklist: worklist, 
-          rang: rang, 
-          comment: comment, 
-          phone: phone, 
+          tgId: worker.receiverId, 
+          status: status,  
           accept: worker.accept,
         }
         arrWorkers.push(newWorker)
 
         setSpec(arrWorkers) 
-        setPretendents(arrWorkers)
+
       })  
       setLoading(false)
+      //setLoadingCount(false)
     }
 
-    //fetchData();
+    fetchData();
     
   },[])
 
-  //Посмотреть
-  const handleClick = (ind) => {
-    console.log(ind, showTable[ind])
 
-    setShowTable(prevShownTable => ({
-        ...prevShownTable,
-        [ind]: !prevShownTable[ind]
-      }));
-  }
-
-  const handleClickCom = (ind) => {
-
-    setShowComment(prevShownComment => ({
-        ...prevShownComment,
-        [ind]: !prevShownComment[ind]
-      }));
-  }
-
-  const clickNext = async() => {
-
-    //1 все рассылки
-		let response = await getAllPretendentCount(20, pretendents.length) //getAllPretendent();
-    console.log("pretendent size: ", response.length)
-
-    const arrayPretendent = []
-			   
-
-    console.log("Всего сейчас: ", response.length)
-			
-    // setPretendents(response)	
-    // console.log("Ещё: ", response.length)
-  }
 
   return (
     <div className='dark-theme'>
@@ -191,18 +149,21 @@ const Workers = () => {
                                 <CTable align="middle" className="mb-0 border" hover responsive>
                                   <CTableHead className='table-light'>
                                     <CTableRow>
+                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Дата</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{width: '200px'}}>Дата</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{width: '320px'}}>Проект</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{width: '320px'}}>CRM ID</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '370px'}}>ФИО</CTableHeaderCell> 
-                                      <CTableHeaderCell className="text-center" style={{width: '160px'}}>Специальность</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>U.L.E.Y</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" >Комментарий</CTableHeaderCell>                         
-                                      <CTableHeaderCell className="text-center" style={{width: '250px'}}>Телефон</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{width: '160px'}}>TelegramId</CTableHeaderCell>  
+                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Статус</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
                                     {spec.length > 0 && spec.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
+                                        <CTableDataCell className="text-center">
+                                          {index+1}
+                                        </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
                                           {item.date}
                                         </CTableDataCell>
@@ -214,6 +175,9 @@ const Workers = () => {
                                               <div>{item.project}</div>
                                           </CTooltip>
                                         </CTableDataCell>
+                                        <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
+                                          <div>{item.crmId}</div>
+                                        </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 || item.accept ? 'red' : ''}}>
                                           <CTooltip
                                             content={item.workerId}
@@ -223,31 +187,11 @@ const Workers = () => {
                                           </CTooltip>
                                         </CTableDataCell>
                                         <CTableDataCell style={{fontSize: '13px', textAlign: 'left'}}>
-                                          <div onClick={()=>handleClick(index)} style={{cursor: 'pointer'}}>{!showTable[index] ? 'Посмотреть' : <br/>}</div>
-                                          <CCollapse visible={showTable[index]}>
-                                            <table>
-                                              {item.worklist ? 
-                                              (item.worklist).map((spec, index)=>( 
-                                                  <tr key={index}>
-                                                    <td>- {spec.spec}</td>
-                                                  </tr>          
-                                              ))
-                                              :""
-                                              }
-                                            </table>
-                                          </CCollapse>
+                                          {item.tgId}
+                                          
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.accept && 'red'}}>
-                                          {item.rang}
-                                        </CTableDataCell>
-                                        <CTableDataCell style={{fontSize: '13px', textAlign: 'left'}}>
-                                          <div onClick={()=>handleClickCom(index)} style={{cursor: 'pointer'}}>{!showComment[index] ? (item.comment ? 'Посмотреть' : '') : <br/>}</div>
-                                          <CCollapse visible={showComment[index]}>
-                                            {item.comment ? item.comment : <></>}
-                                          </CCollapse>
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
-                                          <div>{item.phone}</div>
+                                          {item.status === true ? 'Отказано' : ''}
                                         </CTableDataCell>
                                       </CTableRow>
                                       ))
@@ -256,9 +200,6 @@ const Workers = () => {
                                 </CTable>
                               }
 
-                              <div style={{display: 'flex', justifyContent: 'center' }}>
-                                <img src={arrowDown} alt='' onClick={()=>clickNext()} style={{width: '50px', marginTop: '15px', cursor: 'pointer'}}></img>
-                              </div> 
                             </CCardBody>
                           </CCard>
                         </CCol>

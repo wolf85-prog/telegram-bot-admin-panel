@@ -134,10 +134,6 @@ const UsersProvider = ({ children }) => {
 	const audioCall = new Audio(soundCall)
 	const audioCall2 = new Audio(soundCall)
 
-//-------------------------------------------------------------------------
-	const refreshPage = ()=>{
-		window.location.reload();
-	}
 
 //-------------get count messages------------------------------------------
 	// useEffect(() => {
@@ -162,20 +158,6 @@ const UsersProvider = ({ children }) => {
 	// 	setCountMessageWork(saved)
 	// })
 
-//------------------------------------------------------------
-//загрузка новых проектов
-// useEffect(() => {
-//     const fetchData = async () => {
-
-//       let projects = await getProjectNewCash();
-//       console.log("Загрузка проектов из БД ...")
-//       console.log("projects planer: ", projects)
-
-// 	  setProjectsNew(projects)
-//     }
-
-//     fetchData();  
-//   },[])
 
 //----------------------------------------------------------------------
 
@@ -513,20 +495,7 @@ const UsersProvider = ({ children }) => {
 	  	fetchData();
 
 	},[])
-//------------------------------------------------------------------------------------------
 
-  	//get Distribution
-  	// useEffect(() => {
-    // 	const fetchData = async () => {
-	// 		let response = await getDistributions();
-    //   		//console.log("distribution: ", response.length)
-
-	// 		setDistributions(response)
-	// 	}
-
-	//   	fetchData();
-
-	// },[])
 //------------------------------------------------------------------------------------------
 
   	//get DistributionW
@@ -609,14 +578,14 @@ const UsersProvider = ({ children }) => {
 
 //------------------------------------------------------------------------------------------
 	//подключение админа к сокету и вывод всех подключенных
-	useEffect(()=>{
-		socket.emit("addUser", chatAdminId)
-		socket.on("getUsers", users => {
-			//console.log("users socket: ", users);
-			setUsersOnline(users)
-		})
+	// useEffect(()=>{
+	// 	socket.emit("addUser", chatAdminId)
+	// 	socket.on("getUsers", users => {
+	// 		//console.log("users socket: ", users);
+	// 		setUsersOnline(users)
+	// 	})
 		
-	},[chatAdminId])
+	// },[chatAdminId])
 	
 	//users
 	const _updateUserProp = (userId, prop, value) => {

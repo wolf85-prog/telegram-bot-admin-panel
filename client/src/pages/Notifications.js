@@ -109,20 +109,17 @@ const Notifications = () => {
   }, [text]);
 
   //get Projects
-  useEffect(async() => {
+  useEffect(() => {
     const arrProjects = []
 
-    //setNewProject(false)
     setCountProjects(0)
-    //await newCountProjects(0)
 
     const fetchData = async () => {
-      console.log("companys: ", comps)
-      console.log("managers: ", zakazchiki)
-      console.log("notifications: ", notifications)
+      // console.log("companys: ", comps)
+      // console.log("managers: ", zakazchiki)
+      // console.log("notifications: ", notifications)
 
       notifications.map(async (project) => {
-        //console.log("date: ", project.createdAt)
 
         const manager = [...zakazchiki];
         let userIndex2 = zakazchiki?.findIndex((man) => man.id === project.managerId);  
@@ -159,7 +156,7 @@ const Notifications = () => {
 
     fetchData();
     
-  },[notifications])
+  }, [notifications])
 
   return (
     <div className='dark-theme'>

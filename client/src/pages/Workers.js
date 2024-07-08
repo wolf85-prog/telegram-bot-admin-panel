@@ -45,6 +45,10 @@ const Workers = () => {
 
   const [text, setText]= useState("");
 
+  const [countWorker, setCountWorker] = useState(0);  
+  const [countWorkerNew, setCountWorkerNew] = useState(0); 
+
+  const [loadingCount, setLoadingCount] = useState(false); 
 
   //поиск
   // useEffect(() => {
@@ -54,22 +58,10 @@ const Workers = () => {
 
 
 
-  //get Contacts
-  useEffect(() => {
-    const fetchData = async() => {
-      console.log("workers-pretendent: ", pretendents)
-      setSpec(pretendents); 
-      setLoading(false)
-      //setCountPretendent(0)
-    }
-    fetchData()
-  }, [pretendents])
-
-
   //-----------------------------------------------------------------------------------------
   //			get pretendents
   //-----------------------------------------------------------------------------------------
-  useEffect(async() => {
+  useEffect(() => {
     const arrWorkers = []
 
     setCountPretendent(0)
@@ -77,14 +69,16 @@ const Workers = () => {
 
     const fetchData = async () => {
 
-      let res = await getAllPretendentCount(20, 0) //getAllPretendent();
-      console.log("pretendents workers: ", res)
+      let res = await getAllPretendentCount(20, countWorker) //getAllPretendent();
+      //console.log("pretendents workers: ", res)
+
+      setCountWorker(countWorker+20)
 
       let workers = await getWorkers()
-      console.log("workers context: ", workers)
+      //console.log("workers context: ", workers)
 
       let projects = await getProjects();
-      console.log("projects workers: ", projects)
+      //console.log("projects workers: ", projects)
 
       res.map(async (worker, i) => {
 
@@ -130,11 +124,12 @@ const Workers = () => {
         setPretendents(arrWorkers)
       })  
       setLoading(false)
+      setLoadingCount(false)
     }
 
     fetchData();
     
-  },[])
+  },[countWorkerNew])
 
   //Посмотреть
   const handleClick = (ind) => {
@@ -155,12 +150,12 @@ const Workers = () => {
   }
 
   const clickNext = async() => {
+    setLoadingCount(true)
     //1 все рассылки
-		let response = await getAllPretendentCount(20, pretendents.length) //getAllPretendent();
-    console.log("pretendent size: ", response.length)
+		let response = await getAllPretendentCount(20, countWorker) //getAllPretendent();
+    console.log("pretendent size: ", response.length)   
 
-    const arrayPretendent = []
-			   
+    setCountWorkerNew(countWorker+20)
 
     console.log("Всего сейчас: ", response.length)
 			
@@ -260,7 +255,7 @@ const Workers = () => {
                                 </CTableBody>                   
                                 </CTable>
                               }
-
+                              {loadingCount ? <CSpinner/> : "" }
                               <div style={{display: 'flex', justifyContent: 'center' }}>
                                 <img src={arrowDown} alt='' onClick={()=>clickNext()} style={{width: '50px', marginTop: '15px', cursor: 'pointer'}}></img>
                               </div> 

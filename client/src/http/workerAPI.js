@@ -271,3 +271,15 @@ export const uploadFile = async (data) =>{
         
     }
 }
+
+
+export const getCanceled = async()=>{
+    try {
+        let response= await $host.get(`api/canceled/get`);
+        
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getCanceled api",error.message);
+        
+    }
+}
