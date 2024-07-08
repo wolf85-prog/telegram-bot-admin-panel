@@ -50,6 +50,13 @@ const Workers = () => {
 
   const [loadingCount, setLoadingCount] = useState(false); 
 
+    //поиск
+  useEffect(() => {
+    //let cancels = getCanceled();
+		const filteredData = spec.filter(user=> (user.tgId + user.crmId)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+    setSpec(text === '' ? spec : filteredData) 
+  }, [text]);
+
 
   //-----------------------------------------------------------------------------------------
   //			get pretendents
