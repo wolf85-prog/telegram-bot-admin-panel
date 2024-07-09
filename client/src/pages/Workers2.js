@@ -99,6 +99,17 @@ const Workers = () => {
         
         const newDate = `${day}.${month} ${chas}:${min}`;
 
+
+
+        const d3 = new Date(worker.updatedAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+        const d4 = new Date(d3)
+
+        const month2 = String(d4.getMonth()+1).padStart(2, "0");
+        const day2 = String(d4.getDate()).padStart(2, "0");
+        const chas2 = d4.getHours();
+        const min2 = String(d4.getMinutes()).padStart(2, "0");
+        const updateDate = `${day2}.${month2} ${chas2}:${min2}`;
+
       
         //worklist
         const newWorker = {
@@ -112,6 +123,7 @@ const Workers = () => {
           tgId: worker.receiverId, 
           status: status,  
           accept: worker.accept,
+          updatedAt: updateDate,
         }
         arrWorkers.push(newWorker)
 
@@ -163,6 +175,7 @@ const Workers = () => {
                                       <CTableHeaderCell className="text-center" style={{width: '370px'}}>ФИО</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '160px'}}>TelegramId</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{width: '100px'}}>Статус</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Обновлено</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
@@ -199,6 +212,9 @@ const Workers = () => {
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.accept && 'red'}}>
                                           {item.status === true ? 'Отказано' : ''}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center" style={{color: item.accept && 'red'}}>
+                                          {item.updatedAt}
                                         </CTableDataCell>
                                       </CTableRow>
                                       ))
