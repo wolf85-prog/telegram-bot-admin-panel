@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useState, useContext } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { delSoundNotif, getSoundNotif } from './../http/adminAPI.js'
+import { delSoundNotif, getSoundNotif, startSoundNotif } from './../http/adminAPI.js'
 
 import {
   CContainer, 
@@ -63,39 +63,8 @@ const SoundsNotif = () => {
     }, []);
 
   const clickUpdate = async() => {
-    //очистить таблицу уведомлений
-    await delSoundNotif()
-    console.log('Таблица звуковых уведомлений очищена...');
-    
-    // 1. получить новые проекты
-    // let arr = []
-    // const d = new Date().getTime() + 10800000
-    // //notion
-    // const arrProjects = await getAllProjects()
-
-    // console.log("Новые проекты: ", arrProjects)
-
-    // console.log("Запускаю фильтрацию проектов...")
-
-    // if (arrProjects && arrProjects.length > 0) {
-    //     arrProjects.forEach(async(page)=> {
-    //         const blockId = await getBlocks(page.id);
-    //         if (blockId) { 
-    //             databaseBlock = await getDatabaseId(blockId);  
-                
-    //             if (databaseBlock && databaseBlock?.length !== 0) {
-    //                 //console.log("main table: ", databaseBlock)
-    //                 let project = databaseBlock.find(item => new Date(item?.date) >= d)
-    //                 const obj = {
-    //                     id: page.id,
-    //                     name: page.name,
-    //                     date: project?.date,
-    //                 }
-    //                 arr.push(obj)
-    //             }
-    //         }
-    //     }) 
-    // }
+    console.log("Начинаю обновление уведомлений через бота заказчиков...")
+    await startSoundNotif()
   }
 
   return (

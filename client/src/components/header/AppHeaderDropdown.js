@@ -54,6 +54,13 @@ const AppHeaderDropdown = observer(() => {
             42
           </CBadge>
         </CDropdownItem>
+        <CDropdownItem href="/workers2">
+          <CIcon icon={cilFile} className="me-2" />
+          Отказы
+          <CBadge color="primary" className="ms-2">
+            0
+          </CBadge>
+        </CDropdownItem>
         <CDropdownHeader className="bg-light fw-semibold py-2">Настройки</CDropdownHeader>
         <CDropdownItem href="#">
           <CIcon icon={cilUser} className="me-2" />

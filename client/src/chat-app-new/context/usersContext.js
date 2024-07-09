@@ -72,7 +72,11 @@ const UsersProvider = ({ children }) => {
 	const [newPretendent, setNewPretendent] = useState(false);
 	const [countPretendent, setCountPretendent] = useState(0)
 
-	const [userWorkers, setUserWorkers] = useState([]); //useState(contacts);
+	const [userWorkers, setUserWorkers] = useState( () => {
+		const savedUserWorkers = localStorage.getItem("userWorkers");
+	   	const parsedUserWorkers = JSON.parse(savedUserWorkers);
+	   	return parsedUserWorkers || "";
+	}); 
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
 	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
 
@@ -170,7 +174,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			let response = await getContacts();
-			console.log("contacts: ", response)
+			//console.log("contacts: ", response)
 
 			const arrayContact = []
 
@@ -259,7 +263,9 @@ const UsersProvider = ({ children }) => {
 					})
 
 					setUsers(sortedClients)
-					//console.log("managers contacts: ", arrayContact)
+					
+					//сохранить кэш
+					localStorage.setItem("users", JSON.stringify(sortedClients));
 				}
 			})
 	}
@@ -275,6 +281,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
 		//---------get UserWorkers-----------------------------------------
 		const fetchUserWorkerData = async () => {
+			//console.log("userWorkers: ", userWorkers)
 		
 			//0 все специалисты
 			let all = await getWorkers()
@@ -474,6 +481,9 @@ const UsersProvider = ({ children }) => {
 					console.log("sortedClients: ", sortedClients.length)
 		
 					setUserWorkers(sortedClients)
+
+					//сохранить кэш
+					localStorage.setItem("userWorkers", JSON.stringify(sortedClients));
 				}				
 			})	
 		}
@@ -539,6 +549,9 @@ const UsersProvider = ({ children }) => {
 			//console.log("projects size: ", projects.length)
 
 			setProjects(projects)
+
+			//сохранить кэш
+			localStorage.setItem("projects", JSON.stringify(projects));
 		}
 
 	  	fetchData();

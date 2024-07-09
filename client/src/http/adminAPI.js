@@ -176,6 +176,17 @@ export const getProjectNewDel = async (data) => {
     }
 }
 
+
+export const getProjectsAllNotion = async () =>{
+    try {
+       let response = await $host_bot.get('projectsallnotion');
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectsAllNotion api", error.message);
+    }
+}
+
+
 //get Workers
 export const getWorkers = async () =>{
     try {
@@ -559,6 +570,18 @@ export const delSoundNotif = async()=>{
          console.log("error while calling delSoundNotif api", error.message);
      }
 }
+
+
+export const startSoundNotif = async()=>{
+    try {
+        let response = await $host_bot.get('api/startsoundnotif');
+        //console.log(response);
+        return response.data;
+     } catch (error) {
+         console.log("error while calling startSoundNotif api", error.message);
+     }
+}
+
 
 //------------------------------------------------------------------------------------------
 
