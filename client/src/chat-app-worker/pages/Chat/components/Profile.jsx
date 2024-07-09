@@ -82,6 +82,7 @@ const Profile = ({ user, closeSidebar }) => {
 	}, [user]);
 
 	useEffect(() => {
+		console.log("user: ", user)
 
 		setTimeout(()=>{
 			setHeightImage(divBlock.current.getBoundingClientRect())
@@ -203,7 +204,7 @@ const Profile = ({ user, closeSidebar }) => {
 						</span>
 						<span className="profile__action-text--top profile__notion">
 						{user ? 
-							(user.city !== '' ? user.city : "—")
+							(user.newcity !== '' ? user.newcity : "—")
 							: "—"}
 						</span>	
 					</p>
