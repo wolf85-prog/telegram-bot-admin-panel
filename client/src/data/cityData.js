@@ -129,7 +129,7 @@ const cityData = [
             {value: 91, label: "Санкт-Петербург", disabled: true},
             {value: 92, label: "Выборг", disabled: true},
             {value: 93, label: "Гатчина", disabled: true},
-            
+
             {value: 94, label: "Липецкая обл.",},
             {value: 95, label: "Елец", disabled: true},
             {value: 96, label: "Липецк", disabled: true},
@@ -245,49 +245,46 @@ const cityData = [
             {value: 170, label: "Тульская обл.",},
             {value: 171, label: "Тула", disabled: true},
 
-            {value: 172, label: "Томская обл.",},
-            {value: 173, label: "Томск", disabled: true},
+            {value: 172, label: "Тюменская обл.",},
+            {value: 173, label: "Тюмень", disabled: true},
 
-            {value: 174, label: "Тюменская обл.",},
-            {value: 175, label: "Тюмень", disabled: true},
+            {value: 174, label: "Удмуртская Республика ",},
+            {value: 175, label: "Ижевск", disabled: true},
 
-            {value: 176, label: "Удмуртская Республика ",},
-            {value: 177, label: "Ижевск", disabled: true},
+            {value: 176, label: "Ульяновская обл.",},
+            {value: 177, label: "Ульяновск", disabled: true},
 
-            {value: 178, label: "Ульяновская обл.",},
-            {value: 179, label: "Ульяновск", disabled: true},
+            {value: 178, label: "Хакасия Республика",},
+            {value: 179, label: "Абакан", disabled: true},
 
-            {value: 180, label: "Хакасия Республика",},
-            {value: 181, label: "Абакан", disabled: true},
+            {value: 180, label: "Хабаровский край",},
+            {value: 181, label: "Хабаровск", disabled: true},
 
-            {value: 182, label: "Хабаровский край",},
-            {value: 183, label: "Хабаровск", disabled: true},
+            {value: 182, label: "Ханты-Мансийский автономный округ - Югра",},
+            {value: 183, label: "Ханты-Мансийск", disabled: true},
 
-            {value: 184, label: "Ханты-Мансийский автономный округ - Югра",},
-            {value: 185, label: "Ханты-Мансийск", disabled: true},
+            {value: 184, label: "Чеченская Республика",},
+            {value: 185, label: "Грозный", disabled: true},
 
-            {value: 186, label: "Чеченская Республика",},
-            {value: 187, label: "Грозный", disabled: true},
+            {value: 186, label: "Чувашия",},
+            {value: 187, label: "Чебоксары", disabled: true},
 
-            {value: 188, label: "Чувашия",},
-            {value: 189, label: "Чебоксары", disabled: true},
+            {value: 188, label: "Челябинская обл.",},
+            {value: 189, label: "Челябинск", disabled: true},
 
-            {value: 190, label: "Челябинская обл.",},
-            {value: 191, label: "Челябинск", disabled: true},
+            {value: 190, label: "Чукотский автономный округ",},
+            {value: 191, label: "Анадырь", disabled: true},
 
-            {value: 192, label: "Чукотский автономный округ",},
-            {value: 193, label: "Анадырь", disabled: true},
+            {value: 192, label: "Ярославская обл.",},
+            {value: 193, label: "Ростов Великий", disabled: true},
+            {value: 194, label: "Рыбинск", disabled: true},
+            {value: 195, label: "Ярославль", disabled: true},
 
-            {value: 194, label: "Ярославская обл.",},
-            {value: 195, label: "Ростов Великий", disabled: true},
-            {value: 196, label: "Рыбинск", disabled: true},
-            {value: 197, label: "Ярославль", disabled: true},
+            {value: 196, label: "Ямало-Ненецкий автономный округ",},
+            {value: 197, label: "Салехард", disabled: true},
 
-            {value: 198, label: "Ямало-Ненецкий автономный округ",},
-            {value: 199, label: "Салехард", disabled: true},
-
-            {value: 200, label: "Якутская область (Республика Саха)",},
-            {value: 201, label: "Якутск", disabled: true},
+            {value: 198, label: "Якутская область (Республика Саха)",},
+            {value: 199, label: "Якутск", disabled: true},
 
 ];
 
