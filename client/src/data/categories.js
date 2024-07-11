@@ -80,6 +80,11 @@ const categories = [
       name: 'All',
       value: '15',
     }, 
+    {
+      label: 'Удаленные',
+      name: 'Delete',
+      value: '16',
+    }, 
 ]
 
 export default categories;

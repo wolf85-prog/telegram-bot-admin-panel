@@ -161,6 +161,7 @@ const DistributionAddW = () => {
   const [customButton, setCustomButton] = useState(0)
 
   const [delWorkers, setDelWorkers] = useState([]);
+  const [delNotWorkers, setDelNotWorkers] = useState([]);
   
   const audio = new Audio(sendSound);
 
@@ -193,8 +194,10 @@ const DistributionAddW = () => {
     console.log("workersAll: ", workersAll)
     //массив без удаленных пользователей
     const arrDel = workersAll.filter(item => item.deleted !== true)
-
     setDelWorkers(arrDel)
+
+    const arrNotDel = workersAll.filter(item => item.deleted === true)
+    setDelNotWorkers(arrNotDel)
 
   }, [workersAll])
 
@@ -645,6 +648,11 @@ const onAddCategory = (e) => {
         arrSelect.push(worker.chatId)
       })
       //console.log("arrSelect: ", arrSelect)
+    } else if (cat_name === 'Delete') {
+      console.log("Удаленные")
+      delNotWorkers.map((worker)=> {
+        arrSelect.push(worker.chatId)
+      })
     } else {
       delWorkers.map((worker)=> {
         JSON.parse(worker.worklist).map((work) => {
