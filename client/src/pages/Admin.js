@@ -1792,6 +1792,7 @@ useEffect(() => {
                                       <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Дата</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>                         
                                       <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>{ showNick ? 'Ник' : 'Телеграм ID' }</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}></CTableHeaderCell>   
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
@@ -1831,6 +1832,9 @@ useEffect(() => {
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div style={{fontSize: showNick ? '12px' : '14px'}}>{showNick ? specusers.find((user) => user.chatId === item.chatId)?.username : item.chatId}</div>
+                                        </CTableDataCell> 
+                                        <CTableDataCell className="text-center">
+                                          <div><button>Восстановить</button></div>
                                         </CTableDataCell> 
                                       </CTableRow>
                                       ))
