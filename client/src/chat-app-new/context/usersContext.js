@@ -1322,61 +1322,65 @@ const fetchNotifAdmin = async (dataAll) => {
 	if (task === 1) {
 		audio120.play();
 		
-		setSoundsNotif((soundsNotif) => {	
-			const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
-			soundsNotifCopy.push("Звуковое оповещение - 120 минут")
-			return soundsNotifCopy;
-		});	
+		// setSoundsNotif((soundsNotif) => {	
+		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
+		// 	soundsNotifCopy.push("Звуковое оповещение - 120 минут")
+		// 	return soundsNotifCopy;
+		// });	
 
 	} else if (task === 2) {
 		audio60.play();
 
-		setSoundsNotif((soundsNotif) => {	
-			const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
-			soundsNotifCopy.push("Звуковое оповещение - 60 минут")
-			return soundsNotifCopy;
-		});
+		// setSoundsNotif((soundsNotif) => {	
+		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
+		// 	soundsNotifCopy.push("Звуковое оповещение - 60 минут")
+		// 	return soundsNotifCopy;
+		// });
+
 	} else if (task === 3) {
 		audio30.play();
 
-		setSoundsNotif((soundsNotif) => {	
-			const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
-			soundsNotifCopy.push("Звуковое оповещение - 30 минут")
-			return soundsNotifCopy;
-		});
+		// setSoundsNotif((soundsNotif) => {	
+		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
+		// 	soundsNotifCopy.push("Звуковое оповещение - 30 минут")
+		// 	return soundsNotifCopy;
+		// });
+
 	} else if (task === 4) {
 		audio15.play();
 
-		setSoundsNotif((soundsNotif) => {	
-			const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
-			soundsNotifCopy.push("Звуковое оповещение - 15 минут")
-			return soundsNotifCopy;
-		});
-	} else if (task === 5) {
-		audio0.play();
+		// setSoundsNotif((soundsNotif) => {	
+		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
+		// 	soundsNotifCopy.push("Звуковое оповещение - 15 минут")
+		// 	return soundsNotifCopy;
+		// });
 
-		setSoundsNotif((soundsNotif) => {	
-			const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
-			soundsNotifCopy.push("Звуковое оповещение - 0 минут")
-			return soundsNotifCopy;
-		});
-	
-	} else if (task === 6) {
+	} else if (task === 5) {
 		audio10.play();
 
-		setSoundsNotif((soundsNotif) => {	
-			const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
-			soundsNotifCopy.push("Звуковое оповещение - 10 минут")
-			return soundsNotifCopy;
-		});
-	} else if (task === 7) {
+		// setSoundsNotif((soundsNotif) => {	
+		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
+		// 	soundsNotifCopy.push("Звуковое оповещение - 10 минут")
+		// 	return soundsNotifCopy;
+		// });
+
+	} else if (task === 6) {
 		audio5.play();
 
-		setSoundsNotif((soundsNotif) => {	
-			const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
-			soundsNotifCopy.push("Звуковое оповещение - 5 минут")
-			return soundsNotifCopy;
-		});
+		// setSoundsNotif((soundsNotif) => {	
+		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
+		// 	soundsNotifCopy.push("Звуковое оповещение - 5 минут")
+		// 	return soundsNotifCopy;
+		// });
+		
+	} else if (task === 7) {
+		audio0.play();
+
+		// setSoundsNotif((soundsNotif) => {	
+		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
+		// 	soundsNotifCopy.push("Звуковое оповещение - 0 минут")
+		// 	return soundsNotifCopy;
+		// });
 	}
 	else if (task === 100) {
 		audioNarush.play();
