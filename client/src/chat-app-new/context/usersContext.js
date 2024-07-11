@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import useSound from 'use-sound';
+
 import { useSocketContext } from "./socketContext";
 import { getAllMessages, getContacts, getConversation, getMessages } from '../../http/chatAPI'
 import { getAllPretendent, getWContacts, getWConversation, 
@@ -113,6 +115,8 @@ const UsersProvider = ({ children }) => {
 	const [projectsNew, setProjectsNew] = useState([])
 
 	const [showGetMess, setShowGetMess ] = useState(false);
+
+	const [soundVolume, setSoundVolume] = useState(1)
 
 	const audioMessage = new Audio(soundMessage);
 	const audioMessageW = new Audio(boopSfx);
