@@ -1834,7 +1834,7 @@ useEffect(() => {
                                           <div style={{fontSize: showNick ? '12px' : '14px'}}>{showNick ? specusers.find((user) => user.chatId === item.chatId)?.username : item.chatId}</div>
                                         </CTableDataCell> 
                                         <CTableDataCell className="text-center">
-                                          <div><button>Восстановить</button></div>
+                                          <CButton size="sm" color="dark">Восстановить</CButton>
                                         </CTableDataCell> 
                                       </CTableRow>
                                       ))
