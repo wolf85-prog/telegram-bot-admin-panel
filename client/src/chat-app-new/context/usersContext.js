@@ -1360,9 +1360,9 @@ const fetchNotifAdmin = async (dataAll) => {
 		const savedMute = localStorage.getItem("soundMute");
 
 		audio120.volume = savedVolume
-		audio120.muted = savedMute
-		console.log("mute: ", savedMute)
-		console.log("volume: ", savedVolume)
+		//audio120.muted = savedMute
+		//console.log("mute: ", savedMute)
+		//console.log("volume: ", savedVolume)
 		
 		audio120.play();
 
