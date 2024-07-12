@@ -66,25 +66,30 @@ const categories = [
       value: '12',
     },
     {
+      label: '__________________________',
+      disabled: true
+    },
+    {
       label: 'Вне категории',
       name: 'NoTag',
       value: '13',
     },   
     {
+      label: 'Удаленные',
+      name: 'Delete',
+      value: '14',
+    }, 
+    {
       label: 'Тест',
       name: 'Test',
-      value: '14',
+      value: '15',
     },
     {
       label: 'Все',
       name: 'All',
-      value: '15',
-    }, 
-    {
-      label: 'Удаленные',
-      name: 'Delete',
       value: '16',
     }, 
+    
 ]
 
 export default categories;
