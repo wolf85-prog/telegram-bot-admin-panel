@@ -52,7 +52,8 @@ const AppHeader = (props) => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   const { workerUpdate, setWorkerUpdate, avatarUpdate, setAvatarUpdate, showUpdate, showUpdate2, setShowUpdate, setShowUpdate2, 
-    workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2} = useUsersContext();
+    workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2, 
+    soundVolume, setSoundVolume, soundMute, setSoundMute} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
   const [mutePress, setMutePress] = useState(false)
@@ -85,12 +86,16 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
 
     if (soundCount === 75) {
       setSoundCount(100)
+      setSoundVolume(1.0)
     } else if (soundCount === 50) {
       setSoundCount(75)
+      setSoundVolume(0.75)
     } else if (soundCount === 25) {
       setSoundCount(50)
+      setSoundVolume(0.5)
     } else if (soundCount === 0) {
       setSoundCount(25)
+      setSoundVolume(0.25)
     }  
   }
 
@@ -103,12 +108,16 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
 
     if (soundCount === 100) {
       setSoundCount(75)
+      setSoundVolume(0.75)
     } else if (soundCount === 75) {
       setSoundCount(50)
+      setSoundVolume(0.50)
     } else if (soundCount === 50) {
       setSoundCount(25)
+      setSoundVolume(0.25)
     } else if (soundCount === 25) {
       setSoundCount(0)
+      setSoundVolume(0.0)
     } 
   }
 
@@ -130,6 +139,11 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
     // Open the link in a new tab with desired features (optional)
     window.open(url, '_blank', 'noopener,noreferrer');
   };
+
+  const clickMute = () => {
+    setMutePress(!mutePress)
+    setSoundMute(!soundMute)
+  }
 
   return (
     <CHeader position="sticky" className="mb-4">
@@ -184,7 +198,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
           
           {/* Mute */}
           <CNavItem>
-            <CButton onClick={()=>setMutePress(!mutePress)} className={mutePress ? 'button-m' : ''} color="dark" style={{marginRight: '20px', background: 'red', fontSize: '7px', width: '23px', height: '23px', paddingRight: '0px', paddingLeft: '0px', marginTop: '-7px'}}>
+            <CButton onClick={clickMute} className={mutePress ? 'button-m' : ''} color="dark" style={{marginRight: '20px', background: 'red', fontSize: '7px', width: '23px', height: '23px', paddingRight: '0px', paddingLeft: '0px', marginTop: '-7px'}}>
               Mute
             </CButton>
           </CNavItem>

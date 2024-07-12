@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import useSound from 'use-sound';
 
 import { useSocketContext } from "./socketContext";
 import { getAllMessages, getContacts, getConversation, getMessages } from '../../http/chatAPI'
@@ -116,7 +115,8 @@ const UsersProvider = ({ children }) => {
 
 	const [showGetMess, setShowGetMess ] = useState(false);
 
-	const [soundVolume, setSoundVolume] = useState(0.0)
+	const [soundVolume, setSoundVolume] = useState(1.0)
+	const [soundMute, setSoundMute] = useState(true)
 
 
 	const audioMessage = new Audio(soundMessage);
@@ -132,7 +132,6 @@ const UsersProvider = ({ children }) => {
 	const audio10 = new Audio(sound10);
 	const audio5 = new Audio(sound5);
 
-	//const [audio120] = useSound(sound120, { volume: soundVolume });
 
 	const audioNarush = new Audio(soundNarush)
 	const audioNarush2 = new Audio(soundNarush2)
@@ -144,6 +143,20 @@ const UsersProvider = ({ children }) => {
 	const audioCall = new Audio(soundCall)
 	const audioCall2 = new Audio(soundCall)
 
+
+
+	audioSend.volume = soundVolume
+	audioSend.muted = soundMute
+	audioWorkhub.volume = soundVolume
+	audioWorkhub.muted = soundMute
+	audioPretendent.volume = soundVolume
+	audioPretendent.muted = soundMute
+	audioMessage.volume = soundVolume
+	audioMessage.muted = soundMute
+	audioMessageW.volume = soundVolume
+	audioMessageW.muted = soundMute
+	audioProject.volume = soundVolume
+	audioProject.muted = soundMute
 
 //-------------get count messages------------------------------------------
 	// useEffect(() => {
@@ -582,12 +595,16 @@ const UsersProvider = ({ children }) => {
 	//звонок по телефону
 	useEffect(()=>{
 		if (showCallCard) {
+			audioCall.volume = soundVolume
+			audioCall.muted = soundMute
 			audioCall.play()
 		} else {
 			//audioCall.pause()
 		}
 
 		if (showCallCardNo) {
+			audioCall2.volume = soundVolume
+			audioCall2.muted = soundMute
 			audioCall2.play()
 		} else {
 			//audioCall2.pause()
@@ -654,6 +671,8 @@ const UsersProvider = ({ children }) => {
 		if (data.text.startsWith('Предварительная смета одобрена!')) {
 			//console.log("Предварительная смета одобрена!")
 			//play sound
+			audioSmeta.volume = soundVolume
+			audioSmeta.muted = soundMute
 			audioSmeta.play(); 
 		} else if (data.text.startsWith('Проект успешно создан') && !data.text.includes('_reply_')) {
 
@@ -1327,6 +1346,7 @@ const fetchNotifAdmin = async (dataAll) => {
 
 	if (task === 1) {
 		audio120.volume = soundVolume
+		audio120.muted = soundMute
 		audio120.play();
 
 		//audio120()
@@ -1338,7 +1358,8 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });	
 
 	} else if (task === 2) {
-		audio60.muted = true
+		audio60.volume = soundVolume
+		audio60.muted = soundMute
 		audio60.play();
 
 		// setSoundsNotif((soundsNotif) => {	
@@ -1348,6 +1369,8 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });
 
 	} else if (task === 3) {
+		audio30.volume = soundVolume
+		audio30.muted = soundMute
 		audio30.play();
 
 		// setSoundsNotif((soundsNotif) => {	
@@ -1357,6 +1380,8 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });
 
 	} else if (task === 4) {
+		audio15.volume = soundVolume
+		audio15.muted = soundMute
 		audio15.play();
 
 		// setSoundsNotif((soundsNotif) => {	
@@ -1366,6 +1391,8 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });
 
 	} else if (task === 5) {
+		audio10.volume = soundVolume
+		audio10.muted = soundMute
 		audio10.play();
 
 		// setSoundsNotif((soundsNotif) => {	
@@ -1375,6 +1402,8 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });
 
 	} else if (task === 6) {
+		audio5.volume = soundVolume
+		audio5.muted = soundMute
 		audio5.play();
 
 		// setSoundsNotif((soundsNotif) => {	
@@ -1384,6 +1413,8 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });
 		
 	} else if (task === 7) {
+		audio0.volume = soundVolume
+		audio0.muted = soundMute
 		audio0.play();
 
 		// setSoundsNotif((soundsNotif) => {	
@@ -1393,9 +1424,13 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });
 	}
 	else if (task === 100) {
+		audioNarush.volume = soundVolume
+		audioNarush.muted = soundMute
 		audioNarush.play();
 	}
 	else if (task === 101) {
+		audioNarush2.volume = soundVolume
+		audioNarush2.muted = soundMute
 		audioNarush2.play();
 	}
 	//звонок специалиста
@@ -1521,6 +1556,10 @@ function isObjectEmpty(obj) {
 			setCountProjects,
 			showGetMess,
 			setShowGetMess,
+			soundVolume, 
+			setSoundVolume,
+			soundMute, 
+			setSoundMute,
 		}}>
 			{children}
 		</UsersContext.Provider>
