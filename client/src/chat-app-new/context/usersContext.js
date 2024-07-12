@@ -116,7 +116,7 @@ const UsersProvider = ({ children }) => {
 
 	const [showGetMess, setShowGetMess ] = useState(false);
 
-	const [soundVolume, setSoundVolume] = useState(0)
+	const [soundVolume, setSoundVolume] = useState(0.0)
 
 
 	const audioMessage = new Audio(soundMessage);
@@ -1338,6 +1338,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });	
 
 	} else if (task === 2) {
+		audio60.muted = true
 		audio60.play();
 
 		// setSoundsNotif((soundsNotif) => {	
