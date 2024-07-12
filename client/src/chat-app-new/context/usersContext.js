@@ -124,7 +124,7 @@ const UsersProvider = ({ children }) => {
 	const audioProject = new Audio(soundProject);
 	const audioSmeta = new Audio(soundSmeta);
 	
-	//const audio120 = new Audio(sound120);
+	const audio120 = new Audio(sound120);
 	const audio60 = new Audio(sound60);
 	const audio30 = new Audio(sound30);
 	const audio15 = new Audio(sound15);
@@ -132,7 +132,7 @@ const UsersProvider = ({ children }) => {
 	const audio10 = new Audio(sound10);
 	const audio5 = new Audio(sound5);
 
-	const [audio120] = useSound(sound120, { volume: soundVolume });
+	//const [audio120] = useSound(sound120, { volume: soundVolume });
 
 	const audioNarush = new Audio(soundNarush)
 	const audioNarush2 = new Audio(soundNarush2)
@@ -1326,9 +1326,10 @@ const fetchNotifAdmin = async (dataAll) => {
 	} = dataAll;
 
 	if (task === 1) {
-		//audio120.play();
+		audio120.volume = soundVolume
+		audio120.play();
 
-		audio120()
+		//audio120()
 		
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
