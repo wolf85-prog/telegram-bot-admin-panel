@@ -176,6 +176,7 @@ const UsersProvider = ({ children }) => {
 		console.log("volume: ", soundVolume)
 
 		localStorage.setItem("soundVolume", soundVolume);
+		localStorage.setItem("soundMute", soundMute);
 
 		audioSend.volume = soundVolume
 		audioSend.muted = soundMute
@@ -190,7 +191,7 @@ const UsersProvider = ({ children }) => {
 		audioProject.volume = soundVolume
 		audioProject.muted = soundMute
 		
-	}, [soundVolume]);
+	}, [soundVolume, soundMute]);
 
 
 
@@ -1356,11 +1357,14 @@ const fetchNotifAdmin = async (dataAll) => {
 
 	if (task === 1) {
 		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
 		audio120.volume = savedVolume
-		audio120.muted = soundMute
-		console.log("mute: ", soundMute)
+		audio120.muted = savedMute
+		console.log("mute: ", savedMute)
 		console.log("volume: ", savedVolume)
-		//audio120.play();
+		
+		audio120.play();
 
 		//audio120()
 		
