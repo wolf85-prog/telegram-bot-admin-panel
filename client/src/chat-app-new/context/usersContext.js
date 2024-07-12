@@ -145,19 +145,6 @@ const UsersProvider = ({ children }) => {
 
 
 
-	audioSend.volume = soundVolume
-	audioSend.muted = soundMute
-	audioWorkhub.volume = soundVolume
-	audioWorkhub.muted = soundMute
-	audioPretendent.volume = soundVolume
-	audioPretendent.muted = soundMute
-	audioMessage.volume = soundVolume
-	audioMessage.muted = soundMute
-	audioMessageW.volume = soundVolume
-	audioMessageW.muted = soundMute
-	audioProject.volume = soundVolume
-	audioProject.muted = soundMute
-
 //-------------get count messages------------------------------------------
 	// useEffect(() => {
 
@@ -183,6 +170,30 @@ const UsersProvider = ({ children }) => {
 
 
 //----------------------------------------------------------------------
+
+	useEffect(() => {	
+		// storing input name
+		console.log("volume: ", soundVolume)
+
+		audio120.volume = soundVolume
+		audio120.muted = soundMute
+
+		audioSend.volume = soundVolume
+		audioSend.muted = soundMute
+		audioWorkhub.volume = soundVolume
+		audioWorkhub.muted = soundMute
+		audioPretendent.volume = soundVolume
+		audioPretendent.muted = soundMute
+		audioMessage.volume = soundVolume
+		audioMessage.muted = soundMute
+		audioMessageW.volume = soundVolume
+		audioMessageW.muted = soundMute
+		audioProject.volume = soundVolume
+		audioProject.muted = soundMute
+		
+	}, [soundVolume]);
+
+
 
 	useEffect(() => {	
 		// storing input name
@@ -1345,8 +1356,7 @@ const fetchNotifAdmin = async (dataAll) => {
 	} = dataAll;
 
 	if (task === 1) {
-		audio120.volume = 0.0
-		audio120.muted = soundMute
+		
 		console.log("mute: ", soundMute)
 		console.log("volume: ", soundVolume)
 		//audio120.play();
