@@ -116,7 +116,7 @@ const UsersProvider = ({ children }) => {
 	const [showGetMess, setShowGetMess ] = useState(false);
 
 	const [soundVolume, setSoundVolume] = useState(1.0)
-	const [soundMute, setSoundMute] = useState(true)
+	const [soundMute, setSoundMute] = useState(false)
 
 
 	const audioMessage = new Audio(soundMessage);
