@@ -116,21 +116,23 @@ const UsersProvider = ({ children }) => {
 
 	const [showGetMess, setShowGetMess ] = useState(false);
 
-	const [soundVolume, setSoundVolume] = useState(1)
+	const [soundVolume, setSoundVolume] = useState(0.25)
+
 
 	const audioMessage = new Audio(soundMessage);
 	const audioMessageW = new Audio(boopSfx);
 	const audioProject = new Audio(soundProject);
 	const audioSmeta = new Audio(soundSmeta);
 	
-	const audio120 = new Audio(sound120);
+	//const audio120 = new Audio(sound120);
 	const audio60 = new Audio(sound60);
 	const audio30 = new Audio(sound30);
 	const audio15 = new Audio(sound15);
 	const audio0 = new Audio(sound0);
-
 	const audio10 = new Audio(sound10);
 	const audio5 = new Audio(sound5);
+
+	const [audio120] = useSound(sound120, { volume: soundVolume });
 
 	const audioNarush = new Audio(soundNarush)
 	const audioNarush2 = new Audio(soundNarush2)
@@ -1324,7 +1326,9 @@ const fetchNotifAdmin = async (dataAll) => {
 	} = dataAll;
 
 	if (task === 1) {
-		audio120.play();
+		//audio120.play();
+
+		audio120()
 		
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
