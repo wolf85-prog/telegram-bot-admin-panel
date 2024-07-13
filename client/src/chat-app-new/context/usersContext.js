@@ -136,17 +136,6 @@ const UsersProvider = ({ children }) => {
 	const audioCall = new Audio(soundCall)
 	const audioCall2 = new Audio(soundCall)
 
-	// const savedVolume = localStorage.getItem("soundVolume");
-	// const savedMute = localStorage.getItem("soundMute");
-
-	//const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundMute});
-
-	// const [audio60] = useSound(sound60, {volume: soundVolume, soundEnabled: soundMute});
-	// const [audio30] = useSound(sound30, {volume: soundVolume, soundEnabled: soundMute});
-	// const [audio15] = useSound(sound15, {volume: soundVolume, soundEnabled: soundMute});
-	// const [audio10] = useSound(sound10, {volume: soundVolume, soundEnabled: soundMute});
-	// const [audio5] = useSound(sound5, {volume: soundVolume, soundEnabled: soundMute});
-	// const [audio0] = useSound(sound0, {volume: soundVolume, soundEnabled: soundMute});
 	
 	const audio120 = new Audio(sound120);
 	const audio60 = new Audio(sound60);
@@ -188,25 +177,6 @@ const UsersProvider = ({ children }) => {
 
 		localStorage.setItem("soundVolume", soundVolume);
 		localStorage.setItem("soundMute", soundMute);
-
-		const savedVolume = localStorage.getItem("soundVolume");
-		const savedMute = localStorage.getItem("soundMute");
-
-		// audio60.volume = soundVolume
-		// audio60.muted = soundMute
-
-		audioSend.volume = soundVolume
-		audioSend.muted = soundMute
-		audioWorkhub.volume = soundVolume
-		audioWorkhub.muted = soundMute
-		audioPretendent.volume = soundVolume
-		audioPretendent.muted = soundMute
-		audioMessage.volume = soundVolume
-		audioMessage.muted = soundMute
-		audioMessageW.volume = soundVolume
-		audioMessageW.muted = soundMute
-		audioProject.volume = soundVolume
-		audioProject.muted = soundMute
 		
 	}, [soundVolume, soundMute]);
 
@@ -623,17 +593,27 @@ const UsersProvider = ({ children }) => {
 	//звонок по телефону
 	useEffect(()=>{
 		if (showCallCard) {
-			audioCall.volume = soundVolume
-			audioCall.muted = soundMute
-			audioCall.play()
+			const savedVolume = localStorage.getItem("soundVolume");
+			const savedMute = localStorage.getItem("soundMute");
+
+			if (savedMute === 'false') {
+				console.log("savedMute: ", savedMute)
+				audioCall.volume = parseFloat(savedVolume)
+				audioCall.play();
+			} 
 		} else {
 			//audioCall.pause()
 		}
 
 		if (showCallCardNo) {
-			audioCall2.volume = soundVolume
-			audioCall2.muted = soundMute
-			audioCall2.play()
+			const savedVolume = localStorage.getItem("soundVolume");
+			const savedMute = localStorage.getItem("soundMute");
+
+			if (savedMute === 'false') {
+				console.log("savedMute: ", savedMute)
+				audioCall2.volume = parseFloat(savedVolume)
+				audioCall2.play();
+			}
 		} else {
 			//audioCall2.pause()
 		}
@@ -699,9 +679,16 @@ const UsersProvider = ({ children }) => {
 		if (data.text.startsWith('Предварительная смета одобрена!')) {
 			//console.log("Предварительная смета одобрена!")
 			//play sound
-			audioSmeta.volume = soundVolume
-			audioSmeta.muted = soundMute
-			audioSmeta.play(); 
+
+			const savedVolume = localStorage.getItem("soundVolume");
+			const savedMute = localStorage.getItem("soundMute");
+
+			if (savedMute === 'false') {
+				console.log("savedMute: ", savedMute)
+				audioSmeta.volume = parseFloat(savedVolume)
+				audioSmeta.play();
+			}
+			
 		} else if (data.text.startsWith('Проект успешно создан') && !data.text.includes('_reply_')) {
 
 			//пришел новый проект
@@ -711,7 +698,14 @@ const UsersProvider = ({ children }) => {
 			console.log("Пришел новое проект в renthub: ", count + 1)
 
 			//play sound
-			audioProject.play();
+			const savedVolume = localStorage.getItem("soundVolume");
+			const savedMute = localStorage.getItem("soundMute");
+
+			if (savedMute === 'false') {
+				console.log("savedMute: ", savedMute)
+				audioProject.volume = parseFloat(savedVolume)
+				audioProject.play();
+			}
 
 			
 			//get all projects
@@ -721,7 +715,14 @@ const UsersProvider = ({ children }) => {
 		else {
 			console.log("Пришло новое сообщение: ", count+1)
 			//play sound
-			audioMessage.play();		
+			const savedVolume = localStorage.getItem("soundVolume");
+			const savedMute = localStorage.getItem("soundMute");
+
+			if (savedMute === 'false') {
+				console.log("savedMute: ", savedMute)
+				audioMessage.volume = parseFloat(savedVolume)
+				audioMessage.play();
+			}		
 		}
 
 		setUsers((users) => {
@@ -802,7 +803,15 @@ const UsersProvider = ({ children }) => {
 	const fetchAdmin = (data) => {
 		console.log("Пришло сообщение в Админку: ", data)
 		//play send message
-		audioSend.play();
+		//audioSend.play();
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+			audioSend.volume = parseFloat(savedVolume)
+			audioSend.play();
+		}
 
 		setUsers((users) => {
 			const { senderId, receiverId, text, type, buttons, messageId } = data;
@@ -1097,7 +1106,15 @@ const fetchMessageSpecResponse = async(data) => {
 	else if (data.text.startsWith('Твоя ставка отправлена') && !data.text.includes('_reply_')) {
 		//console.log("Твоя ставка отправлена: ")
 		//play sound
-		audioPretendent.play();
+		//audioPretendent.play();
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+			audioPretendent.volume = parseFloat(savedVolume)
+			audioPretendent.play();
+		}
 
 		//пришел новый претендент
 		const kol = await getCountMessage()
@@ -1164,7 +1181,15 @@ const fetchMessageSpecResponse = async(data) => {
 
 		if (!isBot || isBot === null) {
 			//play sound
-			audioMessageW.play();	
+			//audioMessageW.play();
+			const savedVolume = localStorage.getItem("soundVolume");
+			const savedMute = localStorage.getItem("soundMute");
+
+			if (savedMute === 'false') {
+				console.log("savedMute: ", savedMute)
+				audioMessageW.volume = parseFloat(savedVolume)
+				audioMessageW.play();
+			}	
 		} 
 		
 	}
@@ -1247,7 +1272,15 @@ const fetchAdminSpec = (data) => {
 		
 		//console.log("Добавился новый претендент: ")
 		//play sound
-		audioPretendent.play();
+		//audioPretendent.play();
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+			audioPretendent.volume = parseFloat(savedVolume)
+			audioPretendent.play();
+		}
 	}
 
 	setUserWorkers((userWorkers) => {
@@ -1390,20 +1423,11 @@ const fetchNotifAdmin = async (dataAll) => {
 		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
 
 		
-		// setSoundVolume(parseFloat(savedVolume))
-		
-		// audio120()
 		if (savedMute === 'false') {
 		 	console.log("savedMute: ", savedMute)
 			audio120.volume = parseFloat(savedVolume)
 			audio120.play();
 		} 
-		else {
-			console.log("savedMute: ", savedMute)
-			//audio120.muted = true
-			//audio120.play();
-		}
-		
 		
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
@@ -1412,13 +1436,14 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });	
 
 	} else if (task === 2) {
-		// const savedVolume = localStorage.getItem("soundVolume");
-		// const savedMute = localStorage.getItem("soundMute");
-		// console.log("volume 2: ", parseFloat(savedVolume))
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
 
-		// audio60.volume = parseFloat(savedVolume)
-		// audio60.muted = savedMute
-		audio60.play();
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+		   	audio60.volume = parseFloat(savedVolume)
+		   	audio60.play();
+		} 
 
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
@@ -1427,9 +1452,14 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });
 
 	} else if (task === 3) {
-		audio30.volume = soundVolume
-		audio30.muted = soundMute
-		audio30.play();
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+		   	audio30.volume = parseFloat(savedVolume)
+		   	audio30.play();
+		} 
 
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
@@ -1438,9 +1468,14 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });
 
 	} else if (task === 4) {
-		audio15.volume = soundVolume
-		audio15.muted = soundMute
-		audio15.play();
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+		   	audio15.volume = parseFloat(savedVolume)
+		   	audio15.play();
+		} 
 
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
@@ -1449,9 +1484,14 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });
 
 	} else if (task === 5) {
-		audio10.volume = soundVolume
-		audio10.muted = soundMute
-		audio10.play();
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+		   	audio10.volume = parseFloat(savedVolume)
+		   	audio10.play();
+		} 
 
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
@@ -1460,9 +1500,14 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });
 
 	} else if (task === 6) {
-		audio5.volume = soundVolume
-		audio5.muted = soundMute
-		audio5.play();
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+		   	audio5.volume = parseFloat(savedVolume)
+		   	audio5.play();
+		} 
 
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
@@ -1471,9 +1516,14 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });
 		
 	} else if (task === 7) {
-		audio0.volume = soundVolume
-		audio0.muted = soundMute
-		audio0.play();
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+		   	audio0.volume = parseFloat(savedVolume)
+		   	audio0.play();
+		} 
 
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
@@ -1482,14 +1532,24 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });
 	}
 	else if (task === 100) {
-		audioNarush.volume = soundVolume
-		audioNarush.muted = soundMute
-		audioNarush.play();
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+			audioNarush.volume = parseFloat(savedVolume)
+		   	audioNarush.play();
+		} 
 	}
 	else if (task === 101) {
-		audioNarush2.volume = soundVolume
-		audioNarush2.muted = soundMute
-		audioNarush2.play();
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+			audioNarush2.volume = parseFloat(savedVolume)
+			audioNarush2.play();
+		} 
 	}
 	//звонок специалиста
 	else if (task === 200) {
@@ -1511,11 +1571,6 @@ const fetchNotifAdmin = async (dataAll) => {
 			avatar: worker.avatar,
 		})
 
-		//audioCall.play();
-
-		// setTimeout(()=>{
-		// 	audioCall.pause()
-		// }, 4000)
 
 		setCallIndex(2)
 		setCallIndex2(1)
@@ -1527,11 +1582,6 @@ const fetchNotifAdmin = async (dataAll) => {
 
 		setWorkerCallNo(phone)
 
-		//audioCall.play();
-
-		// setTimeout(()=>{
-		// 	audioCall.pause()
-		// }, 4000)
 
 		setCallIndex(1)
 		setCallIndex2(2)

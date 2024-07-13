@@ -152,7 +152,7 @@ const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundM
   }
 
   const clickBell = () => {
-    audio120()
+    //audio120()
   }
 
   return (
@@ -528,7 +528,7 @@ const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundM
               content="Звуковые уведомления"
               placement="bottom"
             >
-              {/* <CNavLink href="/soundsnotif" style={{position: 'relative'}}> */}
+              <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
                 <CIcon onClick={clickBell} icon={cilBell} size="lg" />
                 {/* <CBadge color="success" className="ms-2">
                   5
@@ -536,7 +536,7 @@ const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundM
                 {/* { newProject ?  <span className="badge bg-danger-gradient rounded-pill position-absolute top-0 end-0">1</span> 
                 : ""
                 } */}
-              {/* </CNavLink> */}
+              </CNavLink>
             </CTooltip>
           </CNavItem>
           
