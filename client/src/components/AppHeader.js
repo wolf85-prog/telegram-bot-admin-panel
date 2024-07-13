@@ -43,9 +43,13 @@ import Error2 from "./../assets/images/error2.png";
 import Delete from "./../assets/images/cart.png";
 import Delete2 from "./../assets/images/cart2.png";
 
+import sound120 from './../assets/sound/120_minut_ULEY_new.mp3';
+
 import { getUpdateWorkers, getUpdateAvatars } from './../http/adminAPI';
 
 import './DropdownHeader.css'
+
+import useSound from 'use-sound';
 
 const AppHeader = (props) => {
   const dispatch = useDispatch()
@@ -69,6 +73,8 @@ const AppHeader = (props) => {
   specialities: 'Художник по свету,Звукорежиссер,Backline,Репортажная съемка,Диджей,Ведущий,Официант,Инженер Resolume,+18,Blacklist', 
   comtags: 'опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание',
 avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
+
+const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundMute});
 
 
   const clickPhone = () => {
@@ -143,6 +149,10 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
   const clickMute = () => {
     setMutePress(!mutePress)
     setSoundMute(!soundMute)
+  }
+
+  const clickBell = () => {
+    audio120()
   }
 
   return (
@@ -518,15 +528,15 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               content="Звуковые уведомления"
               placement="bottom"
             >
-              <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
-                <CIcon icon={cilBell} size="lg" />
+              {/* <CNavLink href="/soundsnotif" style={{position: 'relative'}}> */}
+                <CIcon onClick={clickBell} icon={cilBell} size="lg" />
                 {/* <CBadge color="success" className="ms-2">
                   5
                 </CBadge> */}
                 {/* { newProject ?  <span className="badge bg-danger-gradient rounded-pill position-absolute top-0 end-0">1</span> 
                 : ""
                 } */}
-              </CNavLink>
+              {/* </CNavLink> */}
             </CTooltip>
           </CNavItem>
           
