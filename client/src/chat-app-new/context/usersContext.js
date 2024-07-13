@@ -1372,7 +1372,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
 
 
-		audio120.volume = savedVolume
+		//audio120.volume = savedVolume
 		//audio120.muted = savedMute
 		//console.log("mute: ", savedMute)
 		//console.log("volume: ", savedVolume)
