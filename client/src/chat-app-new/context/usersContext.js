@@ -1387,8 +1387,25 @@ const fetchNotifAdmin = async (dataAll) => {
 		//audio120.muted = savedMute
 		//console.log("mute: ", savedMute)
 		//console.log("volume: ", savedVolume)
+
+		if (savedVolume === 0.75) {
+			audio120.volume = 0.75
+			audio120.play();
+		} else if (savedVolume === 0.5) {
+			audio120.volume = 0.5
+			audio120.play();
+		} else if (savedVolume === 0.25) {
+			audio120.volume = 0.25
+			audio120.play();
+		} else if (savedVolume === 0.0) {
+			audio120.volume = 0.0
+			audio120.play();
+		} else if (savedVolume === 1.0) {
+			audio120.volume = 1.0
+			audio120.play();
+		}
 		
-		audio120.play();
+		
 
 		
 		//audio120()
