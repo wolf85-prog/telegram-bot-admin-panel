@@ -1417,8 +1417,8 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });	
 
 	} else if (task === 2) {
-		audio60.volume = soundVolume
-		audio60.muted = soundMute
+		// audio60.volume = soundVolume
+		// audio60.muted = soundMute
 		audio60.play();
 
 		// setSoundsNotif((soundsNotif) => {	
