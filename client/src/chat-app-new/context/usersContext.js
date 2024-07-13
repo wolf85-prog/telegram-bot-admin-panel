@@ -141,21 +141,22 @@ const UsersProvider = ({ children }) => {
 
 	console.log("savedVolume: ", savedVolume)
 
-	const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundMute});
+	const [audio120] = useSound(sound120);
 
-	const [audio60] = useSound(sound60, {volume: soundVolume, soundEnabled: soundMute});
-	const [audio30] = useSound(sound30, {volume: soundVolume, soundEnabled: soundMute});
-	const [audio15] = useSound(sound15, {volume: soundVolume, soundEnabled: soundMute});
-	const [audio10] = useSound(sound10, {volume: soundVolume, soundEnabled: soundMute});
-	const [audio5] = useSound(sound5, {volume: soundVolume, soundEnabled: soundMute});
-	const [audio0] = useSound(sound0, {volume: soundVolume, soundEnabled: soundMute});
+	// const [audio60] = useSound(sound60, {volume: soundVolume, soundEnabled: soundMute});
+	// const [audio30] = useSound(sound30, {volume: soundVolume, soundEnabled: soundMute});
+	// const [audio15] = useSound(sound15, {volume: soundVolume, soundEnabled: soundMute});
+	// const [audio10] = useSound(sound10, {volume: soundVolume, soundEnabled: soundMute});
+	// const [audio5] = useSound(sound5, {volume: soundVolume, soundEnabled: soundMute});
+	// const [audio0] = useSound(sound0, {volume: soundVolume, soundEnabled: soundMute});
+	
 	//const audio120 = new Audio(sound120);
-	// const audio60 = new Audio(sound60);
-	// const audio30 = new Audio(sound30);
-	// const audio15 = new Audio(sound15);
-	// const audio0 = new Audio(sound0);
-	// const audio10 = new Audio(sound10);
-	// const audio5 = new Audio(sound5);
+	const audio60 = new Audio(sound60);
+	const audio30 = new Audio(sound30);
+	const audio15 = new Audio(sound15);
+	const audio0 = new Audio(sound0);
+	const audio10 = new Audio(sound10);
+	const audio5 = new Audio(sound5);
 
 //-------------get count messages------------------------------------------
 	// useEffect(() => {
