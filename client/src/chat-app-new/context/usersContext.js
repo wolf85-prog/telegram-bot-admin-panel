@@ -1393,15 +1393,15 @@ const fetchNotifAdmin = async (dataAll) => {
 		// setSoundVolume(parseFloat(savedVolume))
 		
 		// audio120()
-		if (!savedMute) {
-			console.log("savedMute: ", savedMute)
+		// if (!savedMute) {
+		 	console.log("savedMute: ", savedMute)
 			audio120.volume = parseFloat(savedVolume)
 			audio120.play();
-		} else {
-			console.log("savedMute: ", savedMute)
-			audio120.muted = true
-			audio120.play();
-		}
+		// } else {
+			// console.log("savedMute: ", savedMute)
+			// audio120.muted = true
+			// audio120.play();
+		//}
 		
 		
 		// setSoundsNotif((soundsNotif) => {	
