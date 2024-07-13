@@ -137,7 +137,7 @@ const UsersProvider = ({ children }) => {
 	const audioCall2 = new Audio(soundCall)
 
 
-	const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundMute});
+	// const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundMute});
 	const [audio60] = useSound(sound60, {volume: soundVolume, soundEnabled: soundMute});
 	const [audio30] = useSound(sound30, {volume: soundVolume, soundEnabled: soundMute});
 	const [audio15] = useSound(sound15, {volume: soundVolume, soundEnabled: soundMute});
@@ -1363,8 +1363,8 @@ const fetchNotifAdmin = async (dataAll) => {
 	} = dataAll;
 
 	if (task === 1) {
-		// const savedVolume = localStorage.getItem("soundVolume");
-		// const savedMute = localStorage.getItem("soundMute");
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
 		const savedTask = localStorage.getItem("currentTask");
 
 		let arrTemp = []
@@ -1384,6 +1384,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		
 		//audio120.play();
 
+		const [audio120] = useSound(sound120, {volume: savedVolume, soundEnabled: savedMute});
 		audio120()
 		
 		// setSoundsNotif((soundsNotif) => {	
