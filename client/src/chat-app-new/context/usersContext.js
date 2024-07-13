@@ -136,8 +136,11 @@ const UsersProvider = ({ children }) => {
 	const audioCall = new Audio(soundCall)
 	const audioCall2 = new Audio(soundCall)
 
+	const savedVolume = localStorage.getItem("soundVolume");
+	const savedMute = localStorage.getItem("soundMute");
 
-	// const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundMute});
+	const [audio120] = useSound(sound120, {volume: savedVolume, soundEnabled: savedMute});
+
 	const [audio60] = useSound(sound60, {volume: soundVolume, soundEnabled: soundMute});
 	const [audio30] = useSound(sound30, {volume: soundVolume, soundEnabled: soundMute});
 	const [audio15] = useSound(sound15, {volume: soundVolume, soundEnabled: soundMute});
@@ -1384,7 +1387,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		
 		//audio120.play();
 
-		const [audio120] = useSound(sound120, {volume: savedVolume, soundEnabled: savedMute});
+		
 		audio120()
 		
 		// setSoundsNotif((soundsNotif) => {	
