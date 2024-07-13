@@ -1392,7 +1392,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		// setSoundVolume(parseFloat(savedVolume))
 		
 		// audio120()
-		if (savedMute) {
+		if (!savedMute) {
 			audio120.volume = parseFloat(savedVolume)
 			audio120.play();
 		} else {
