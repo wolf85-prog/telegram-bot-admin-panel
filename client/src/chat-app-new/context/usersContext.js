@@ -139,7 +139,7 @@ const UsersProvider = ({ children }) => {
 	// const savedVolume = localStorage.getItem("soundVolume");
 	// const savedMute = localStorage.getItem("soundMute");
 
-	//const [audio120] = useSound(sound120);
+	const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundMute});
 
 	// const [audio60] = useSound(sound60, {volume: soundVolume, soundEnabled: soundMute});
 	// const [audio30] = useSound(sound30, {volume: soundVolume, soundEnabled: soundMute});
@@ -148,7 +148,7 @@ const UsersProvider = ({ children }) => {
 	// const [audio5] = useSound(sound5, {volume: soundVolume, soundEnabled: soundMute});
 	// const [audio0] = useSound(sound0, {volume: soundVolume, soundEnabled: soundMute});
 	
-	const audio120 = new Audio(sound120);
+	//const audio120 = new Audio(sound120);
 	const audio60 = new Audio(sound60);
 	const audio30 = new Audio(sound30);
 	const audio15 = new Audio(sound15);
@@ -1388,27 +1388,27 @@ const fetchNotifAdmin = async (dataAll) => {
 		//console.log("mute: ", savedMute)
 		//console.log("volume: ", savedVolume)
 
-		if (savedVolume === 0.75) {
-			audio120.volume = 0.75
-			audio120.play();
-		} else if (savedVolume === 0.5) {
-			audio120.volume = 0.5
-			audio120.play();
-		} else if (savedVolume === 0.25) {
-			audio120.volume = 0.25
-			audio120.play();
-		} else if (savedVolume === 0.0) {
-			audio120.volume = 0.0
-			audio120.play();
-		} else if (savedVolume === 1.0) {
-			audio120.volume = 1.0
-			audio120.play();
-		}
+		// if (savedVolume === 0.75) {
+		// 	audio120.volume = 0.75
+		// 	audio120.play();
+		// } else if (savedVolume === 0.5) {
+		// 	audio120.volume = 0.5
+		// 	audio120.play();
+		// } else if (savedVolume === 0.25) {
+		// 	audio120.volume = 0.25
+		// 	audio120.play();
+		// } else if (savedVolume === 0.0) {
+		// 	audio120.volume = 0.0
+		// 	audio120.play();
+		// } else if (savedVolume === 1.0) {
+		// 	audio120.volume = 1.0
+		// 	audio120.play();
+		// }
 		
 		
-
+		setSoundVolume(savedVolume)
 		
-		//audio120()
+		audio120()
 		
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
@@ -1417,7 +1417,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });	
 
 	} else if (task === 2) {
-		// audio60.volume = soundVolume
+		audio60.volume = 0.25
 		// audio60.muted = soundMute
 		audio60.play();
 
