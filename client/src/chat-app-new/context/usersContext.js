@@ -1417,7 +1417,9 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });	
 
 	} else if (task === 2) {
-		audio60.volume = 0.25
+		const savedVolume = localStorage.getItem("soundVolume");
+		console.log("volume 2: ", parseFloat(savedVolume))
+		audio60.volume = parseFloat(savedVolume)
 		// audio60.muted = soundMute
 		audio60.play();
 
