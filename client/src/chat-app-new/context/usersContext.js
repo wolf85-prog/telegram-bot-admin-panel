@@ -191,8 +191,9 @@ const UsersProvider = ({ children }) => {
 
 		const savedVolume = localStorage.getItem("soundVolume");
 		const savedMute = localStorage.getItem("soundMute");
-		audio60.volume = parseFloat(savedVolume)
-		audio60.muted = savedMute
+
+		audio60.volume = soundVolume
+		audio60.muted = soundMute
 
 		audioSend.volume = soundVolume
 		audioSend.muted = soundMute
@@ -1252,11 +1253,11 @@ const fetchAdminSpec = (data) => {
 	setUserWorkers((userWorkers) => {
 		const { senderId, receiverId, text, type, buttons, messageId, isBot } = data;
 
-		console.log("userWorkers: ", userWorkers)
+		//console.log("userWorkers: ", userWorkers)
 
 		let userIndex = userWorkers.findIndex((user) => user.chatId === receiverId.toString());
 		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
-		console.log("usersCopy: ", usersCopy)
+		//console.log("usersCopy: ", usersCopy)
 
 		const newMsgObject = {
 			date: new Date().toLocaleDateString(),
