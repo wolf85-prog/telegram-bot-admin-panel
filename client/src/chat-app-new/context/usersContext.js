@@ -117,7 +117,7 @@ const UsersProvider = ({ children }) => {
 	const [showGetMess, setShowGetMess ] = useState(false);
 
 	const [soundVolume, setSoundVolume] = useState(1.0)
-	const [soundMute, setSoundMute] = useState(true)
+	const [soundMute, setSoundMute] = useState(false)
 
 
 	const audioMessage = new Audio(soundMessage);
@@ -188,6 +188,11 @@ const UsersProvider = ({ children }) => {
 
 		localStorage.setItem("soundVolume", soundVolume);
 		localStorage.setItem("soundMute", soundMute);
+
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+		audio60.volume = parseFloat(savedVolume)
+		audio60.muted = savedMute
 
 		audioSend.volume = soundVolume
 		audioSend.muted = soundMute
@@ -1382,31 +1387,8 @@ const fetchNotifAdmin = async (dataAll) => {
 		arrTemp.push(newObj)
 		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
 
-
-		//audio120.volume = savedVolume
-		//audio120.muted = savedMute
-		//console.log("mute: ", savedMute)
-		//console.log("volume: ", savedVolume)
-
-		// if (savedVolume === 0.75) {
-		// 	audio120.volume = 0.75
-		// 	audio120.play();
-		// } else if (savedVolume === 0.5) {
-		// 	audio120.volume = 0.5
-		// 	audio120.play();
-		// } else if (savedVolume === 0.25) {
-		// 	audio120.volume = 0.25
-		// 	audio120.play();
-		// } else if (savedVolume === 0.0) {
-		// 	audio120.volume = 0.0
-		// 	audio120.play();
-		// } else if (savedVolume === 1.0) {
-		// 	audio120.volume = 1.0
-		// 	audio120.play();
-		// }
 		
-		
-		setSoundVolume(savedVolume)
+		setSoundVolume(parseFloat(savedVolume))
 		
 		audio120()
 		
@@ -1417,10 +1399,12 @@ const fetchNotifAdmin = async (dataAll) => {
 		// });	
 
 	} else if (task === 2) {
-		const savedVolume = localStorage.getItem("soundVolume");
-		console.log("volume 2: ", parseFloat(savedVolume))
-		audio60.volume = parseFloat(savedVolume)
-		// audio60.muted = soundMute
+		// const savedVolume = localStorage.getItem("soundVolume");
+		// const savedMute = localStorage.getItem("soundMute");
+		// console.log("volume 2: ", parseFloat(savedVolume))
+
+		// audio60.volume = parseFloat(savedVolume)
+		// audio60.muted = savedMute
 		audio60.play();
 
 		// setSoundsNotif((soundsNotif) => {	
