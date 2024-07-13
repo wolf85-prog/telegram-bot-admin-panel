@@ -136,10 +136,8 @@ const UsersProvider = ({ children }) => {
 	const audioCall = new Audio(soundCall)
 	const audioCall2 = new Audio(soundCall)
 
-	const savedVolume = localStorage.getItem("soundVolume");
-	const savedMute = localStorage.getItem("soundMute");
-
-	console.log("savedVolume: ", savedVolume)
+	// const savedVolume = localStorage.getItem("soundVolume");
+	// const savedMute = localStorage.getItem("soundMute");
 
 	const [audio120] = useSound(sound120);
 
@@ -1372,6 +1370,8 @@ const fetchNotifAdmin = async (dataAll) => {
 		const savedVolume = localStorage.getItem("soundVolume");
 		const savedMute = localStorage.getItem("soundMute");
 		const savedTask = localStorage.getItem("currentTask");
+
+		console.log("savedVolume: ", savedVolume)
 
 		let arrTemp = []
 		const currentDate = new Date()
