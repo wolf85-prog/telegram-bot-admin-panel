@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import useSound from 'use-sound';
 
 import { useSocketContext } from "./socketContext";
 import { getAllMessages, getContacts, getConversation, getMessages } from '../../http/chatAPI'
@@ -124,7 +125,8 @@ const UsersProvider = ({ children }) => {
 	const audioProject = new Audio(soundProject);
 	const audioSmeta = new Audio(soundSmeta);
 	
-	const audio120 = new Audio(sound120);
+	const [audio120] = useSound(sound120);
+	//const audio120 = new Audio(sound120);
 	const audio60 = new Audio(sound60);
 	const audio30 = new Audio(sound30);
 	const audio15 = new Audio(sound15);
@@ -1358,15 +1360,26 @@ const fetchNotifAdmin = async (dataAll) => {
 	if (task === 1) {
 		const savedVolume = localStorage.getItem("soundVolume");
 		const savedMute = localStorage.getItem("soundMute");
+		const savedTask = localStorage.getItem("currentTask");
+
+		let arrTemp = []
+		const currentDate = new Date()
+		const newObj = {
+			task: 1,
+			date: currentDate
+		}
+		arrTemp.push(newObj)
+		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
+
 
 		audio120.volume = savedVolume
 		//audio120.muted = savedMute
 		//console.log("mute: ", savedMute)
 		//console.log("volume: ", savedVolume)
 		
-		audio120.play();
+		//audio120.play();
 
-		//audio120()
+		audio120()
 		
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
