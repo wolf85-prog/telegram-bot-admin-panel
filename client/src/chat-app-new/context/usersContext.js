@@ -1389,9 +1389,13 @@ const fetchNotifAdmin = async (dataAll) => {
 		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
 
 		
-		setSoundVolume(parseFloat(savedVolume))
+		// setSoundVolume(parseFloat(savedVolume))
 		
-		audio120()
+		// audio120()
+
+		audio120.volume = parseFloat(savedVolume)
+		audio120.muted = savedMute
+		audio120.play();
 		
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
