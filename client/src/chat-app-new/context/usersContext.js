@@ -139,7 +139,7 @@ const UsersProvider = ({ children }) => {
 	const savedVolume = localStorage.getItem("soundVolume");
 	const savedMute = localStorage.getItem("soundMute");
 
-	const [audio120] = useSound(sound120, {volume: savedVolume, soundEnabled: savedMute});
+	const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundMute});
 
 	const [audio60] = useSound(sound60, {volume: soundVolume, soundEnabled: soundMute});
 	const [audio30] = useSound(sound30, {volume: soundVolume, soundEnabled: soundMute});
