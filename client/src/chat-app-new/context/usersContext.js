@@ -125,7 +125,7 @@ const UsersProvider = ({ children }) => {
 	const audioProject = new Audio(soundProject);
 	const audioSmeta = new Audio(soundSmeta);
 	
-	const [audio120] = useSound(sound120);
+	const [audio120] = useSound(sound120, {volume: 0.25});
 	//const audio120 = new Audio(sound120);
 	const audio60 = new Audio(sound60);
 	const audio30 = new Audio(sound30);
