@@ -1378,6 +1378,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		const savedTask = localStorage.getItem("currentTask");
 
 		console.log("savedVolume: ", savedVolume)
+		
 
 		let arrTemp = []
 		const currentDate = new Date()
@@ -1393,10 +1394,12 @@ const fetchNotifAdmin = async (dataAll) => {
 		
 		// audio120()
 		if (!savedMute) {
+			console.log("savedMute: ", savedMute)
 			audio120.volume = parseFloat(savedVolume)
 			audio120.play();
 		} else {
-			audio120.muted = savedMute
+			console.log("savedMute: ", savedMute)
+			audio120.muted = true
 			audio120.play();
 		}
 		
