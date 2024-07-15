@@ -53,7 +53,7 @@ const cityData = [
             {value: 35, label: "Дагестан",},
             {value: 36, label: "• Махачкала", disabled: true},
 
-            {value: 37, label: "Еврейская автономная обл.",},
+            {value: 37, label: "ЕАО",},
             {value: 38, label: "• Биробиджан", disabled: true},
 
             {value: 39, label: "Забайкальский край",},
@@ -103,7 +103,7 @@ const cityData = [
             {value: 72, label: "• Сочи", disabled: true},
 
             {value: 73, label: "Красноярский край",},
-            {value: 74, label: "• Кросноярск", disabled: true},
+            {value: 74, label: "• Красноярск", disabled: true},
             {value: 75, label: "• Норильск", disabled: true},
             {value: 76, label: "• Таганрог", disabled: true},
 

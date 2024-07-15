@@ -220,10 +220,16 @@ const DistributionAddW = () => {
           const newObj = {
             label: `${day}.${month} | ${project.name}`, 
             value: project.id,
+            date: d,
           }
           arrProjects.push(newObj)
         }    
       })
+
+      arrProjects.sort(function(a, b) {
+        return a.date - b.date;
+      })
+
       setContacts(arrProjects)    
     }  
   }, [projects]);
@@ -245,6 +251,9 @@ const DistributionAddW = () => {
           }
           arrProjects.push(newObj)
         }
+      })
+      arrProjects.sort(function(a, b) {
+        return a.label - b.label;
       })
       setContacts2(arrProjects)
     }
@@ -471,12 +480,13 @@ const clickProjects = async() => {
                 const id = project.id
                 
                 let exist = await getProjectNewId(id)
+                const projCashDate = projects2.find((item)=>item.id === id)
                 
                 if(!exist){
                     await getProjectNewCreate({
                       id: project.id, 
                       name: project.name, 
-                      datestart: project.datestart, 
+                      datestart: projCashDate, //project.datestart, 
                       crmID: project.crmID, 
                     })
                 } else {

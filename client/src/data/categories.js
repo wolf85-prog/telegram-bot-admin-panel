@@ -67,27 +67,28 @@ const categories = [
     },
     {
       label: '__________________________',
-      disabled: true
+      disabled: true,
+      value: '13',
     },
     {
       label: 'Вне категории',
       name: 'NoTag',
-      value: '13',
+      value: '14',
     },   
     {
       label: 'Удаленные',
       name: 'Delete',
-      value: '14',
+      value: '15',
     }, 
     {
       label: 'Тест',
       name: 'Test',
-      value: '15',
+      value: '16',
     },
     {
       label: 'Все',
       name: 'All',
-      value: '16',
+      value: '17',
     }, 
     
 ]

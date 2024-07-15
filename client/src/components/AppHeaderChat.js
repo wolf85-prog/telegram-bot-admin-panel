@@ -79,18 +79,33 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
     // Buttons stops to shake after 2 seconds
     setTimeout(() => setShake2(false), 200);
 
-    if (soundCount === 75) {
+    if (soundCount === 90) {
       setSoundCount(100)
       setSoundVolume(1.0)
+    } else if (soundCount === 80) {
+      setSoundCount(90)
+      setSoundVolume(0.9)
+    } else if (soundCount === 70) {
+      setSoundCount(80)
+      setSoundVolume(0.8)
+    } else if (soundCount === 60) {
+      setSoundCount(70)
+      setSoundVolume(0.7)
     } else if (soundCount === 50) {
-      setSoundCount(75)
-      setSoundVolume(0.75)
-    } else if (soundCount === 25) {
+      setSoundCount(60)
+      setSoundVolume(0.6)
+    } else if (soundCount === 40) {
       setSoundCount(50)
       setSoundVolume(0.5)
-    } else if (soundCount === 0) {
-      setSoundCount(25)
-      setSoundVolume(0.25)
+    } else if (soundCount === 30) {
+      setSoundCount(40)
+      setSoundVolume(0.4)
+    } else if (soundCount === 20) {
+      setSoundCount(30)
+      setSoundVolume(0.3)
+    } else if (soundCount === 10) {
+      setSoundCount(20)
+      setSoundVolume(0.2)
     }   
   }
 
@@ -102,17 +117,32 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
     setTimeout(() => setShake(false), 200);
 
     if (soundCount === 100) {
-      setSoundCount(75)
-      setSoundVolume(0.75)
-    } else if (soundCount === 75) {
+      setSoundCount(90)
+      setSoundVolume(0.90)
+    } else if (soundCount === 90) {
+      setSoundCount(80)
+      setSoundVolume(0.80)
+    } else if (soundCount === 80) {
+      setSoundCount(70)
+      setSoundVolume(0.70)
+    } else if (soundCount === 70) {
+      setSoundCount(60)
+      setSoundVolume(0.60)
+    } else if (soundCount === 60) {
       setSoundCount(50)
       setSoundVolume(0.50)
     } else if (soundCount === 50) {
-      setSoundCount(25)
-      setSoundVolume(0.25)
-    } else if (soundCount === 25) {
-      setSoundCount(0)
-      setSoundVolume(0.0)
+      setSoundCount(40)
+      setSoundVolume(0.40)
+    } else if (soundCount === 40) {
+      setSoundCount(30)
+      setSoundVolume(0.30)
+    } else if (soundCount === 30) {
+      setSoundCount(20)
+      setSoundVolume(0.20)
+    } else if (soundCount === 20) {
+      setSoundCount(10)
+      setSoundVolume(0.10)
     } 
   }
 
