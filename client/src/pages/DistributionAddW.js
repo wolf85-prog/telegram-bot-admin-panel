@@ -53,6 +53,7 @@ import { newMessage } from '../http/workerAPI';
 import specData from './../data/specData';
 import categories from './../data/categories';
 import cityData from './../data/cityData';
+import cityRegData from './../data/cityRegData';
 
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 import phone_image from './../assets/images/phone2.png';
@@ -1082,12 +1083,23 @@ const onChangeSelectCity = (e) => {
       res = cityData.find((item, ind) => val.toString() === ind.toString())
       console.log("res: ", res)
     
+      const res2 = cityRegData.find((item)=>item.name === res.label)
+      console.log("res2: ", res2.models)
+
 
       //выбрать специалистов из выбранного города
       console.log("workersAll: ", workersAll)
-      const arr = workersAll.filter((el) => el.newcity === res.name);
-
+      //const arr = workersAll.filter((el) => el.newcity === res.label);
+      let arr = []
       let new_selected = []
+
+      workersAll.map((item)=> {
+        res2.models.map((city) => {
+          if (city.name === item.newcity) {
+            arr.push(item)
+          }
+        })
+      })
 
       console.log("selected: ", selected)
       

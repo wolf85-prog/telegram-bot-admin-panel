@@ -140,20 +140,20 @@ const cityData = [
             {value: 98, label: "Луганская обл.",},
             {value: 99, label: "• Луганск", disabled: true},
             
-            {value: 100, label: "Марий-Эл Республика",},
+            {value: 100, label: "Марий-Эл",},
             {value: 101, label: "• Йошкар-Ола", disabled: true},
             
-            {value: 102, label: "Мордовия Республика",},
+            {value: 102, label: "Мордовия",},
             {value: 103, label: "• Саранск", disabled: true},
             
             {value: 104, label: "Магаданская обл.",},
             {value: 105, label: "• Магадан", disabled: true},
             
-            {value: 106, label: "Московская обл.",},
-            {value: 107, label: "• Москва", disabled: true},
+            // {value: 106, label: "Московская обл.",},
+            // {value: 107, label: "• Москва", disabled: true},
             
-            // {value: 107, label: "Мурманская обл.",},
-            // {value: 108, label: "• Мурманск", disabled: true},
+            {value: 106, label: "Мурманская обл.",},
+            {value: 107, label: "• Мурманск", disabled: true},
             
             {value: 108, label: "Минская обл.",},
             {value: 109, label: "• Минск", disabled: true},
@@ -228,11 +228,11 @@ const cityData = [
             {value: 155, label: "Смоленская обл.",},
             {value: 156, label: "• Смоленск", disabled: true},
 
-            {value: 157, label: "Татарстан Республика",},
+            {value: 157, label: "Татарстан",},
             {value: 158, label: "• Казань", disabled: true},
             {value: 159, label: "• Набережные Челны", disabled: true},
 
-            {value: 160, label: "Тыва (Тува) Республика",},
+            {value: 160, label: "Тыва (Тува)",},
             {value: 161, label: "• Кызыл", disabled: true},
 
             {value: 162, label: "Тамбовская обл.",},
@@ -266,7 +266,7 @@ const cityData = [
             {value: 181, label: "Ханты-Мансийский автономный округ - Югра",},
             {value: 182, label: "• Ханты-Мансийск", disabled: true},
 
-            {value: 183, label: "Чеченская Республика",},
+            {value: 183, label: "Чечня",},
             {value: 184, label: "• Грозный", disabled: true},
 
             {value: 185, label: "Чувашия",},
