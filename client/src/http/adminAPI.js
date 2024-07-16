@@ -75,6 +75,17 @@ export const getProjectNewCash = async () =>{
     }
 }
 
+//api бд
+export const getProjectCash = async () =>{
+    try {
+        let response = await $host_bot.get('projectscash');
+        //console.log("projectsAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectCash api", error.message);
+    }
+}
+
 //api notion
 export const getProjectCrmId = async (id) =>{
     try {

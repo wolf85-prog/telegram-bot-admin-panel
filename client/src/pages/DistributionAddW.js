@@ -46,6 +46,7 @@ import {
   getProjectNewCreate,
   getProjectNewUpdate,
   getProjectNewDel,  
+  getProjectCash,
 } from '../http/adminAPI';
 
 import { uploadFile, delMessage, distribFile } from '../http/chatAPI';
@@ -464,6 +465,8 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
 const clickProjects = async() => {
   const fetchData = async () => {
     let projects2 = await getProjectNewCash();
+    let projects3 = await getProjectCash();
+    console.log("projects3: ", projects3)
     setProjects(projects2)
 
     console.log("Загрузка проектов из БД ...")
@@ -481,7 +484,8 @@ const clickProjects = async() => {
                 const id = project.id
                 
                 let exist = await getProjectNewId(id)
-                const projCashDate = projects2.find((item)=>item.id === id)
+                const projCashDate = projects3.find((item)=>item.id === id)
+                console.log("projCashDate: ", projCashDate)
                 
                 if(!exist){
                     await getProjectNewCreate({
