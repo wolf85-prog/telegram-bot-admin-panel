@@ -1413,7 +1413,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		console.log("savedVolume: ", savedVolume)
 		
 
-		let arrTemp = []
+		let arrTemp = JSON.parse(savedTask)
 		const currentDate = new Date()
 		const newObj = {
 			task: 1,
@@ -1438,12 +1438,27 @@ const fetchNotifAdmin = async (dataAll) => {
 	} else if (task === 2) {
 		const savedVolume = localStorage.getItem("soundVolume");
 		const savedMute = localStorage.getItem("soundMute");
+		const savedTask = localStorage.getItem("currentTask");
 
-		if (savedMute === 'false') {
-			console.log("savedMute: ", savedMute)
-		   	audio60.volume = parseFloat(savedVolume)
-		   	audio60.play();
-		} 
+		let arrTemp = JSON.parse(savedTask)
+		const currentDate = new Date()
+		
+		if (task !== arrTemp[arrTemp.length-1].task && currentDate === new Date(arrTemp[arrTemp.length-1])) {
+			setTimeout(()=> {
+				if (savedMute === 'false') {
+					console.log("savedMute: ", savedMute)
+					audio60.volume = parseFloat(savedVolume)
+					audio60.play();
+				}
+			}, 60000)
+		} else {
+			if (savedMute === 'false') {
+				console.log("savedMute: ", savedMute)
+				audio60.volume = parseFloat(savedVolume)
+				audio60.play();
+			}
+		}
+		 
 
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
