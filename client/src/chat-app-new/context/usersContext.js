@@ -1440,10 +1440,22 @@ const fetchNotifAdmin = async (dataAll) => {
 		const savedMute = localStorage.getItem("soundMute");
 		const savedTask = localStorage.getItem("currentTask");
 
+		const currentDate = new Date()
+		// const newObj = {
+		// 	task: 2,
+		// 	date: currentDate
+		// }
+		// arrTemp.push(newObj)
+		//localStorage.setItem("currentTask", JSON.stringify(arrTemp));
+
 		let arrTemp = JSON.parse(savedTask)
-		const currentDate = new Date().getTime()
+		//const currentDate = new Date().getTime()
 		
+		console.log("task: ", task, currentDate)
+		console.log("task old: ", arrTemp[arrTemp.length-1].task, new Date(arrTemp[arrTemp.length-1]).getTime())
+
 		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1]).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1]).getTime()-10000)) {
+			console.log("no play 60")
 			setTimeout(()=> {
 				if (savedMute === 'false') {
 					console.log("savedMute: ", savedMute)
@@ -1452,6 +1464,7 @@ const fetchNotifAdmin = async (dataAll) => {
 				}
 			}, 60000)
 		} else {
+			console.log("play 60")
 			if (savedMute === 'false') {
 				console.log("savedMute: ", savedMute)
 				audio60.volume = parseFloat(savedVolume)
