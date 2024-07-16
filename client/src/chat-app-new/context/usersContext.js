@@ -1449,6 +1449,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		//localStorage.setItem("currentTask", JSON.stringify(arrTemp));
 
 		let arrTemp = JSON.parse(savedTask)
+		console.log("arrTemp: ", arrTemp)
 		//const currentDate = new Date().getTime()
 		
 		console.log("task: ", task, currentDate)
