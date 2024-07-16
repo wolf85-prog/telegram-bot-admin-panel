@@ -466,7 +466,7 @@ const clickProjects = async() => {
   const fetchData = async () => {
     let projects2 = await getProjectNewCash();
     let projects3 = await getProjectCash();
-    console.log("projects3: ", projects3)
+    //console.log("projects3: ", projects3)
     setProjects(projects2)
 
     console.log("Загрузка проектов из БД ...")
@@ -485,14 +485,15 @@ const clickProjects = async() => {
                 
                 let exist = await getProjectNewId(id)
                 const projCashDate = projects3.find((item)=>item.id === id)
-                console.log("projCashDate: ", projCashDate)
+                //console.log("projCashDate: ", projCashDate)
                 
                 if(!exist){
                     await getProjectNewCreate({
                       id: project.id, 
                       name: project.name, 
-                      datestart: projCashDate, //project.datestart, 
+                      datestart: projCashDate.dateStart, //project.datestart, 
                       crmID: project.crmID, 
+                      dateend: projCashDate.dateEnd !== null ? projCashDate.dateEnd : projCashDate.dateStart, //project.datestart, 
                     })
                 } else {
                     await getProjectNewUpdate({name: project.name, id: project.id})    
