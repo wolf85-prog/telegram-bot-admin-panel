@@ -79,7 +79,7 @@ const Workers = () => {
       //console.log("cancels: ", cancels)
 
       cancels.map(async (worker, i) => {
-
+        console.log(worker)
         let userObject = projects.find((proj) => proj.id === worker.projectId);  
         const projectName = userObject?.title
         const crmId = userObject?.crmID
@@ -110,6 +110,31 @@ const Workers = () => {
         const min2 = String(d4.getMinutes()).padStart(2, "0");
         const updateDate = `${day2}.${month2} ${chas2}:${min2}`;
 
+        let startDate = ''
+        if (worker.dateend) {
+          const d5 = new Date(worker.datestart).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+          const d6 = new Date(d5)
+
+          const month3 = String(d6.getMonth()+1).padStart(2, "0");
+          const day3 = String(d6.getDate()).padStart(2, "0");
+          const chas3 = d6.getHours();
+          const min3 = String(d6.getMinutes()).padStart(2, "0");
+          startDate = `${day3}.${month3} ${chas3}:${min3}`;
+        }
+
+        let endDate = ''
+        if (worker.dateend) {
+          const d7 = new Date(worker.dateend).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+          const d8 = new Date(d7)
+
+          const month4 = String(d7.getMonth()+1).padStart(2, "0");
+          const day4 = String(d7.getDate()).padStart(2, "0");
+          const chas4 = d7.getHours();
+          const min4 = String(d7.getMinutes()).padStart(2, "0");
+          endDate = `${day4}.${month4} ${chas4}:${min4}`;
+        }
+        
+
       
         //worklist
         const newWorker = {
@@ -124,6 +149,8 @@ const Workers = () => {
           status: status,  
           accept: worker.accept,
           updatedAt: updateDate,
+          datestart: startDate,
+          dateend: endDate,
         }
         arrWorkers.push(newWorker)
 
@@ -168,7 +195,7 @@ const Workers = () => {
                                 <CTable align="middle" className="mb-0 border" hover responsive>
                                   <CTableHead className='table-light'>
                                     <CTableRow>
-                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Дата</CTableHeaderCell>  
+                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>№</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{width: '200px'}}>Дата</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{width: '320px'}}>Проект</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '320px'}}>CRM ID</CTableHeaderCell> 
@@ -176,6 +203,8 @@ const Workers = () => {
                                       <CTableHeaderCell className="text-center" style={{width: '160px'}}>TelegramId</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{width: '100px'}}>Статус</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{width: '100px'}}>Обновлено</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Start</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>End</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
@@ -215,6 +244,12 @@ const Workers = () => {
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.accept && 'red'}}>
                                           {item.updatedAt}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
+                                          {item.datestart}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
+                                          {item.dateend}
                                         </CTableDataCell>
                                       </CTableRow>
                                       ))
