@@ -1441,9 +1441,9 @@ const fetchNotifAdmin = async (dataAll) => {
 		const savedTask = localStorage.getItem("currentTask");
 
 		let arrTemp = JSON.parse(savedTask)
-		const currentDate = new Date()
+		const currentDate = new Date().getTime()
 		
-		if (task !== arrTemp[arrTemp.length-1].task && currentDate === new Date(arrTemp[arrTemp.length-1])) {
+		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1]).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1]).getTime()-10000)) {
 			setTimeout(()=> {
 				if (savedMute === 'false') {
 					console.log("savedMute: ", savedMute)

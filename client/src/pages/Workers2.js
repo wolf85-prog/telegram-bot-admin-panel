@@ -111,7 +111,7 @@ const Workers = () => {
         const updateDate = `${day2}.${month2} ${chas2}:${min2}`;
 
         let startDate = ''
-        if (worker.dateend) {
+        if (worker.datestart) {
           const d5 = new Date(worker.datestart).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
           const d6 = new Date(d5)
 
@@ -127,10 +127,10 @@ const Workers = () => {
           const d7 = new Date(worker.dateend).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
           const d8 = new Date(d7)
 
-          const month4 = String(d7.getMonth()+1).padStart(2, "0");
-          const day4 = String(d7.getDate()).padStart(2, "0");
-          const chas4 = d7.getHours();
-          const min4 = String(d7.getMinutes()).padStart(2, "0");
+          const month4 = String(d8.getMonth()+1).padStart(2, "0");
+          const day4 = String(d8.getDate()).padStart(2, "0");
+          const chas4 = d8.getHours();
+          const min4 = String(d8.getMinutes()).padStart(2, "0");
           endDate = `${day4}.${month4} ${chas4}:${min4}`;
         }
         
