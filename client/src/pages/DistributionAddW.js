@@ -1081,7 +1081,10 @@ const onChangeSelectCity = (e) => {
     e.preventDefault();
     setValueCity(e.target.value)
     const val = e.target.value
-    console.log(val)
+    console.log("val: ", val)
+
+    let arr = []
+    let new_selected = []
 
     let res = ''
     if (val !== 'Выбрать...') {
@@ -1094,32 +1097,45 @@ const onChangeSelectCity = (e) => {
 
       //выбрать специалистов из выбранного города
       console.log("workersAll: ", workersAll)
-      //const arr = workersAll.filter((el) => el.newcity === res.label);
-      let arr = []
-      let new_selected = []
 
-      workersAll.map((item)=> {
-        res2.models.map((city) => {
-          if (city.name === item.newcity) {
-            arr.push(item)
-          }
+      if (val === 1 || 2) {
+        const arr = [...workersAll].filter((el) => el.newcity === res.label);
+        selectedCat.map((item)=> {
+          arr.map(el => {
+            if (item === el.chatId) {
+              new_selected.push(el) // массив специалистов из города N
+           }
+          })
         })
-      })
+        setSelected(new_selected)
+      } 
+      else {
+        workersAll.map((item)=> {
+          res2.models.map((city) => {
+            if (city.name === item.newcity) {
+              arr.push(item)
+            }
+          })
+        })
 
-      console.log("selected: ", selected)
+        console.log("selected: ", selected)
+        
+        selectedCat.map((item)=> {
+          arr.map(el => {
+            if (item === el.chatId) {
+              new_selected.push(item) // массив специалистов из города N
+            }
+          })
+        })
       
-      selectedCat.map((item)=> {
-        arr.map(el => {
-          if (item === el.chatId) {
-            new_selected.push(item) // массив специалистов из города N
-          }
-        })
-      })
-    
 
-      console.log("selected city: ", new_selected)
+        console.log("selected city: ", new_selected)
 
-      setSelected(new_selected)
+        setSelected(new_selected)
+      }
+      
+    } else {
+        setSelected(selectedCat)
     }
 }
 

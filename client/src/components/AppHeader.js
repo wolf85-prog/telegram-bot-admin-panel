@@ -225,7 +225,7 @@ const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundM
             <CFormInput 
               id="autoSizingInput" 
               style={{width: '25px', textAlign:'center', marginRight: '10px', fontSize: '12px', marginRight: '10px', height: '25px', paddingLeft: '0px', paddingRight: '0px', marginTop: '-2px'}}
-              value={soundCount}
+              value={soundVolume*100}
             />
           </CNavItem> 
           

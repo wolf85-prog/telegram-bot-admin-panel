@@ -1,7 +1,7 @@
 
 const cityData = [
             {name: 'Выбрать...', label: 'Выбрать...',},
-            {value: 1, label: "Москва",},
+            {value: 1, label: "Москва ",},
             {value: 2, label: "Санкт-Петербург"},
             
             {value: 3, label: 'Адыгея',},

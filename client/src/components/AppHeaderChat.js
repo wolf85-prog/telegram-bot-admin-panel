@@ -208,7 +208,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
             <CFormInput 
               id="autoSizingInput" 
               style={{width: '25px', textAlign:'center', marginRight: '10px', fontSize: '12px', marginRight: '10px', height: '25px', paddingLeft: '0px', paddingRight: '0px', marginTop: '-2px'}}
-              value={soundCount}
+              value={soundVolume*100}
             />
             </CNavItem> 
           

@@ -172,6 +172,16 @@ const UsersProvider = ({ children }) => {
 //----------------------------------------------------------------------
 
 	useEffect(() => {	
+		const saveVolume = localStorage.getItem("soundVolume")
+		if (saveVolume) {
+			setSoundVolume(saveVolume);
+		}
+		//setSoundMute(localStorage.getItem("soundMute"));
+		
+	}, []);
+
+
+	useEffect(() => {	
 		// storing input name
 		console.log("volume: ", soundVolume)
 
@@ -179,7 +189,7 @@ const UsersProvider = ({ children }) => {
 		localStorage.setItem("soundMute", soundMute);
 		
 	}, [soundVolume, soundMute]);
-
+	
 
 
 	useEffect(() => {	
@@ -1440,7 +1450,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		const savedMute = localStorage.getItem("soundMute");
 		const savedTask = localStorage.getItem("currentTask");
 
-		const currentDate = new Date()
+		const currentDate = new Date().getTime()
 		// const newObj = {
 		// 	task: 2,
 		// 	date: currentDate

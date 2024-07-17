@@ -322,7 +322,7 @@ const cityRegData = [
     },
     {
         id: 44,
-        name: 'Москва',
+        name: 'Москва ',
         models: [
             {id: 1, name: '• Москва',},
         ]
