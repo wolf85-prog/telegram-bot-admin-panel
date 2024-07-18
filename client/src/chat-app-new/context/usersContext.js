@@ -1460,6 +1460,8 @@ const fetchNotifAdmin = async (dataAll) => {
 		const savedTask = localStorage.getItem("currentTask");
 
 		const currentDate = new Date().getTime()
+		let arrTemp = JSON.parse(savedTask)
+
 		// const newObj = {
 		// 	task: 2,
 		// 	date: currentDate
@@ -1467,12 +1469,10 @@ const fetchNotifAdmin = async (dataAll) => {
 		// arrTemp.push(newObj)
 		//localStorage.setItem("currentTask", JSON.stringify(arrTemp));
 
-		let arrTemp = JSON.parse(savedTask)
-		console.log("arrTemp: ", arrTemp)
-		//const currentDate = new Date().getTime()
 		
-		console.log("task: ", task, currentDate)
-		console.log("task old: ", arrTemp[arrTemp.length-1].task, new Date(arrTemp[arrTemp.length-1].date).getTime())
+		//console.log("arrTemp: ", arrTemp)
+		//console.log("task: ", task, currentDate)
+		//console.log("task old: ", arrTemp[arrTemp.length-1].task, new Date(arrTemp[arrTemp.length-1].date).getTime())
 
 		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
 			console.log("no play 60")
@@ -1502,12 +1502,26 @@ const fetchNotifAdmin = async (dataAll) => {
 	} else if (task === 3) {
 		const savedVolume = localStorage.getItem("soundVolume");
 		const savedMute = localStorage.getItem("soundMute");
+		const savedTask = localStorage.getItem("currentTask");
 
-		if (savedMute === 'false') {
-			console.log("savedMute: ", savedMute)
-		   	audio30.volume = parseFloat(savedVolume)
-		   	audio30.play();
-		} 
+		const currentDate = new Date().getTime()
+		let arrTemp = JSON.parse(savedTask)
+
+		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
+			console.log("no play 30")
+			setTimeout(()=> {
+				if (savedMute === 'false') {
+					audio30.volume = parseFloat(savedVolume)
+					audio30.play();
+				}
+			}, 60000)
+		} else {
+			console.log("play 30")
+			if (savedMute === 'false') {
+				audio30.volume = parseFloat(savedVolume)
+				audio30.play();
+			}
+		}
 
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
@@ -1518,12 +1532,26 @@ const fetchNotifAdmin = async (dataAll) => {
 	} else if (task === 4) {
 		const savedVolume = localStorage.getItem("soundVolume");
 		const savedMute = localStorage.getItem("soundMute");
+		const savedTask = localStorage.getItem("currentTask");
 
-		if (savedMute === 'false') {
-			console.log("savedMute: ", savedMute)
-		   	audio15.volume = parseFloat(savedVolume)
-		   	audio15.play();
-		} 
+		const currentDate = new Date().getTime()
+		let arrTemp = JSON.parse(savedTask)
+
+		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
+			console.log("no play 15")
+			setTimeout(()=> {
+				if (savedMute === 'false') {
+					audio15.volume = parseFloat(savedVolume)
+					audio15.play();
+				}
+			}, 60000)
+		} else {
+			console.log("play 15")
+			if (savedMute === 'false') {
+				audio15.volume = parseFloat(savedVolume)
+				audio15.play();
+			}
+		}
 
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
@@ -1534,11 +1562,25 @@ const fetchNotifAdmin = async (dataAll) => {
 	} else if (task === 5) {
 		const savedVolume = localStorage.getItem("soundVolume");
 		const savedMute = localStorage.getItem("soundMute");
+		const savedTask = localStorage.getItem("currentTask");
 
-		if (savedMute === 'false') {
-			console.log("savedMute: ", savedMute)
-		   	audio10.volume = parseFloat(savedVolume)
-		   	audio10.play();
+		const currentDate = new Date().getTime()
+		let arrTemp = JSON.parse(savedTask)
+
+		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
+			console.log("no play 10")
+			setTimeout(()=> {
+				if (savedMute === 'false') {
+					audio10.volume = parseFloat(savedVolume)
+					audio10.play();
+				}
+			}, 60000)
+		} else {
+			console.log("play 10")
+			if (savedMute === 'false') {
+				audio10.volume = parseFloat(savedVolume)
+				audio10.play();
+			}
 		} 
 
 		// setSoundsNotif((soundsNotif) => {	
@@ -1550,12 +1592,26 @@ const fetchNotifAdmin = async (dataAll) => {
 	} else if (task === 6) {
 		const savedVolume = localStorage.getItem("soundVolume");
 		const savedMute = localStorage.getItem("soundMute");
+		const savedTask = localStorage.getItem("currentTask");
 
-		if (savedMute === 'false') {
-			console.log("savedMute: ", savedMute)
-		   	audio5.volume = parseFloat(savedVolume)
-		   	audio5.play();
-		} 
+		const currentDate = new Date().getTime()
+		let arrTemp = JSON.parse(savedTask)
+
+		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
+			console.log("no play 5")
+			setTimeout(()=> {
+				if (savedMute === 'false') {
+					audio5.volume = parseFloat(savedVolume)
+					audio5.play();
+				}
+			}, 60000)
+		} else {
+			console.log("play 5")
+			if (savedMute === 'false') {
+				audio5.volume = parseFloat(savedVolume)
+				audio5.play();
+			}
+		}
 
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
@@ -1566,12 +1622,26 @@ const fetchNotifAdmin = async (dataAll) => {
 	} else if (task === 7) {
 		const savedVolume = localStorage.getItem("soundVolume");
 		const savedMute = localStorage.getItem("soundMute");
+		const savedTask = localStorage.getItem("currentTask");
 
-		if (savedMute === 'false') {
-			console.log("savedMute: ", savedMute)
-		   	audio0.volume = parseFloat(savedVolume)
-		   	audio0.play();
-		} 
+		const currentDate = new Date().getTime()
+		let arrTemp = JSON.parse(savedTask)
+
+		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
+			console.log("no play 0")
+			setTimeout(()=> {
+				if (savedMute === 'false') {
+					audio0.volume = parseFloat(savedVolume)
+					audio0.play();
+				}
+			}, 60000)
+		} else {
+			console.log("play 0")
+			if (savedMute === 'false') {
+				audio0.volume = parseFloat(savedVolume)
+				audio0.play();
+			}
+		}
 
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));

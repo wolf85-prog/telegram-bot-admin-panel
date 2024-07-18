@@ -107,6 +107,7 @@ const DistributionAddW = () => {
   const [selected, setSelected] = useState([]);
   const [selectedCat, setSelectedCat] = useState([])
   const [arrSelect, setArrSelect] = useState([]);
+  const [arrSelectAll, setArrSelectAll] = useState([]);
   const [arrLength, setArrLength] = useState(0);
   const [text, setText] = useState('');
   const [countChar, setCountChar] = useState(0);
@@ -662,6 +663,7 @@ const onAddCategory = (e) => {
     if (cat_name === 'All') {
       delWorkers.map((worker)=> {
         arrSelect.push(worker.chatId)
+        arrSelectAll.push(worker)
       })
       //console.log("arrSelect: ", arrSelect)
     } else if (cat_name === 'Delete') {
@@ -673,22 +675,24 @@ const onAddCategory = (e) => {
       delWorkers.map((worker)=> {
         JSON.parse(worker.worklist).map((work) => {
           result.map((cat)=> {
-            //console.log("work: ", work.cat)
-            //console.log("cat: ", cat)
             if (work.cat === cat) {
               arrSelect.push(worker.chatId)
+              //arrSelectAll.push(worker)
             } 
           })
         })
       })
       console.log("arrSelect: ", arrSelect)
+      //console.log("arrSelectAll: ", arrSelectAll)
     } 
     
     //выбрать уникальных специалистов
     const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
+    //const arr2 = [...arrSelectAll].filter((el, ind) => ind === arrSelectAll.indexOf(el));
 
     //выбрать специалистов без блокировки
     let arrNew = []
+    //let arrNew2 = []
 
     //Фильтрация по заблокировавшим рассылки
     arr.map(async(item, index)=>{
@@ -1081,13 +1085,14 @@ const onChangeSelectCity = (e) => {
     e.preventDefault();
     setValueCity(e.target.value)
     const val = e.target.value
-    console.log("val: ", val)
+    //console.log("val: ", val)
 
     let arr = []
     let new_selected = []
 
     let res = ''
     if (val !== 'Выбрать...') {
+      setLoaderCount(true)
       res = cityData.find((item, ind) => val.toString() === ind.toString())
       console.log("res: ", res)
     
@@ -1096,42 +1101,51 @@ const onChangeSelectCity = (e) => {
 
 
       //выбрать специалистов из выбранного города
-      console.log("workersAll: ", workersAll)
+      //console.log("workersAll: ", workersAll)
 
-      if (val === 1 || 2) {
-        const arr = [...workersAll].filter((el) => el.newcity === res.label);
-        selectedCat.map((item)=> {
-          arr.map(el => {
-            if (item === el.chatId) {
-              new_selected.push(el) // массив специалистов из города N
-           }
-          })
-        })
-        setSelected(new_selected)
+      if (val === '1' || val === '2') {
+        console.log("val12: ", val)
+        // const arr = [...workersAll].filter((el) => el.newcity === res.label);
+        // selectedCat.map((item)=> {
+        //   arr.map(el => {
+        //     if (item === el.chatId) {
+        //       new_selected.push(el) // массив специалистов из города N
+        //    }
+        //   })
+        // })
+        // setSelected(new_selected)
       } 
       else {
+        console.log("valAll: ", val)
         workersAll.map((item)=> {
           res2.models.map((city) => {
             if (city.name === item.newcity) {
               arr.push(item)
+              console.log("arr: ", arr)
             }
           })
+          if (item === workersAll.length-1) {
+            setLoaderCount(false)
+          }
         })
-
-        console.log("selected: ", selected)
         
-        selectedCat.map((item)=> {
-          arr.map(el => {
-            if (item === el.chatId) {
-              new_selected.push(item) // массив специалистов из города N
-            }
-          })
-        })
-      
+        
 
-        console.log("selected city: ", new_selected)
+        // if (arr.length > 0) {
+        //   selectedCat.map((item)=> {
+        //     arr.map(el => {
+        //       if (item === el.chatId) {
+        //         new_selected.push(item) // массив специалистов из города N
+        //       }
+        //     })
+        //   })
+        //   setSelected(new_selected)
+        // } else {
+        //   setSelected(selectedCat)
+        // }
 
-        setSelected(new_selected)
+        //console.log("selected city: ", new_selected)
+  
       }
       
     } else {
