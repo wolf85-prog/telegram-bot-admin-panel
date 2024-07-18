@@ -1472,9 +1472,9 @@ const fetchNotifAdmin = async (dataAll) => {
 		//const currentDate = new Date().getTime()
 		
 		console.log("task: ", task, currentDate)
-		console.log("task old: ", arrTemp[arrTemp.length-1].task, new Date(arrTemp[arrTemp.length-1]).getTime())
+		console.log("task old: ", arrTemp[arrTemp.length-1].task, new Date(arrTemp[arrTemp.length-1].date).getTime())
 
-		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1]).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1]).getTime()-10000)) {
+		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
 			console.log("no play 60")
 			setTimeout(()=> {
 				if (savedMute === 'false') {
