@@ -116,8 +116,17 @@ const UsersProvider = ({ children }) => {
 
 	const [showGetMess, setShowGetMess ] = useState(false);
 
-	const [soundVolume, setSoundVolume] = useState(1.0)
-	const [soundMute, setSoundMute] = useState(false)
+	const [soundVolume, setSoundVolume] = useState(() => {
+		const savedItem = localStorage.getItem("soundVolume");
+		const parsedItem = JSON.parse(savedItem);
+		return parsedItem || 1.0;
+	})
+	//const [soundMute, setSoundMute] = useState(false)
+	const [soundMute, setSoundMute] = useState(() => {
+		const savedItem = localStorage.getItem("soundMute");
+		const parsedItem = JSON.parse(savedItem);
+		return parsedItem || false;
+	})
 
 
 	const audioMessage = new Audio(soundMessage);
@@ -171,14 +180,14 @@ const UsersProvider = ({ children }) => {
 
 //----------------------------------------------------------------------
 
-	useEffect(() => {	
-		const saveVolume = localStorage.getItem("soundVolume")
-		if (saveVolume) {
-			setSoundVolume(saveVolume);
-		}
-		//setSoundMute(localStorage.getItem("soundMute"));
+	// useEffect(() => {	
+	// 	const saveVolume = localStorage.getItem("soundVolume")
+	// 	if (saveVolume) {
+	// 		setSoundVolume(saveVolume);
+	// 	}
+	// 	//setSoundMute(localStorage.getItem("soundMute"));
 		
-	}, []);
+	// }, []);
 
 
 	useEffect(() => {	

@@ -60,7 +60,6 @@ const AppHeader = (props) => {
     soundVolume, setSoundVolume, soundMute, setSoundMute} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
-  const [mutePress, setMutePress] = useState(false)
   const [showBar, setShowBar] = useState(false)
   const [showBarHelp, setShowBarHelp] = useState(false)
   const [toast, addToast] = useState(0)
@@ -90,32 +89,23 @@ const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundM
     // Buttons stops to shake after 2 seconds
     setTimeout(() => setShake2(false), 100);
 
-    if (soundCount === 90) {
-      setSoundCount(100)
+    if (soundVolume === 0.90) {
       setSoundVolume(1.0)
-    } else if (soundCount === 80) {
-      setSoundCount(90)
+    } else if (soundVolume === 0.80) {
       setSoundVolume(0.9)
-    } else if (soundCount === 70) {
-      setSoundCount(80)
+    } else if (soundVolume === 0.70) {
       setSoundVolume(0.8)
-    } else if (soundCount === 60) {
-      setSoundCount(70)
+    } else if (soundVolume === 0.60) {
       setSoundVolume(0.7)
-    } else if (soundCount === 50) {
-      setSoundCount(60)
+    } else if (soundVolume === 0.50) {
       setSoundVolume(0.6)
-    } else if (soundCount === 40) {
-      setSoundCount(50)
+    } else if (soundVolume === 0.40) {
       setSoundVolume(0.5)
-    } else if (soundCount === 30) {
-      setSoundCount(40)
+    } else if (soundVolume === 0.30) {
       setSoundVolume(0.4)
-    } else if (soundCount === 20) {
-      setSoundCount(30)
+    } else if (soundVolume === 0.20) {
       setSoundVolume(0.3)
-    } else if (soundCount === 10) {
-      setSoundCount(20)
+    } else if (soundVolume === 0.10) {
       setSoundVolume(0.2)
     } 
   }
@@ -127,32 +117,23 @@ const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundM
     // Buttons stops to shake after 2 seconds
     setTimeout(() => setShake(false), 100);
 
-    if (soundCount === 100) {
-      setSoundCount(90)
+    if (soundVolume === 1.0) {
       setSoundVolume(0.90)
-    } else if (soundCount === 90) {
-      setSoundCount(80)
+    } else if (soundVolume === 0.90) {
       setSoundVolume(0.80)
-    } else if (soundCount === 80) {
-      setSoundCount(70)
+    } else if (soundVolume === 0.80) {
       setSoundVolume(0.70)
-    } else if (soundCount === 70) {
-      setSoundCount(60)
+    } else if (soundVolume === 0.70) {
       setSoundVolume(0.60)
-    } else if (soundCount === 60) {
-      setSoundCount(50)
+    } else if (soundVolume === 0.60) {
       setSoundVolume(0.50)
-    } else if (soundCount === 50) {
-      setSoundCount(40)
+    } else if (soundVolume === 0.50) {
       setSoundVolume(0.40)
-    } else if (soundCount === 40) {
-      setSoundCount(30)
+    } else if (soundVolume === 0.40) {
       setSoundVolume(0.30)
-    } else if (soundCount === 30) {
-      setSoundCount(20)
+    } else if (soundVolume === 0.30) {
       setSoundVolume(0.20)
-    } else if (soundCount === 20) {
-      setSoundCount(10)
+    } else if (soundVolume === 0.20) {
       setSoundVolume(0.10)
     } 
   }
@@ -177,7 +158,6 @@ const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundM
   };
 
   const clickMute = () => {
-    setMutePress(!mutePress)
     setSoundMute(!soundMute)
   }
 
@@ -238,7 +218,7 @@ const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundM
           
           {/* Mute */}
           <CNavItem>
-            <CButton onClick={clickMute} className={mutePress ? 'button-m' : ''} color="dark" style={{marginRight: '20px', background: 'red', fontSize: '7px', width: '23px', height: '23px', paddingRight: '0px', paddingLeft: '0px', marginTop: '-7px'}}>
+            <CButton onClick={clickMute} className={soundMute ? 'button-m' : ''} color="dark" style={{marginRight: '20px', background: 'red', fontSize: '7px', width: '23px', height: '23px', paddingRight: '0px', paddingLeft: '0px', marginTop: '-7px'}}>
               Mute
             </CButton>
           </CNavItem>
