@@ -1122,33 +1122,37 @@ const onChangeSelectCity = (e) => {
       else {
         console.log("valAll: ", val)
         arrSelectAll.forEach((item)=> {
-          // res2.models.map((city) => {
-          //   if (city.name === item.newcity) {
-          //     arr.push(item)
-          //     console.log("arr: ", arr)
-          //   }
-          // })
-          if (item === arrSelectAll.length-1) {
-            setLoaderCount(false)
-          }
+          res2.models.map((city) => {
+            if (city.name === item.newcity) {
+              arr.push(item)
+              console.log("arr: ", arr)
+            }
+            if (item === arrSelectAll.length-1) {
+              setLoaderCount(false)
+            }
+          })
+          
         })
-        setLoaderCount(false)
-        
 
-        // if (arr.length > 0) {
-        //   selectedCat.map((item)=> {
-        //     arr.map(el => {
-        //       if (item === el.chatId) {
-        //         new_selected.push(item) // массив специалистов из города N
-        //       }
-        //     })
-        //   })
-        //   setSelected(new_selected)
-        // } else {
-        //   setSelected(selectedCat)
-        // }
 
-        //console.log("selected city: ", new_selected)
+        if (arr.length > 0) {
+          selectedCat.map((item)=> {
+            arr.map(el => {
+              if (item === el.chatId) {
+                new_selected.push(item) // массив специалистов из города N
+              }
+            })
+          })
+          //выбрать уникальных специалистов
+          const arr3 = [...new_selected].filter((el, ind) => ind === new_selected.indexOf(el));
+          setLoaderCount(false)
+          setSelected(arr3)
+        } else {
+          setLoaderCount(false)
+          setSelected(arr)
+        }
+
+        console.log("selected city: ", new_selected)
   
       }
       
