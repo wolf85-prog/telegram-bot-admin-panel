@@ -1431,9 +1431,9 @@ const fetchNotifAdmin = async (dataAll) => {
 
 		console.log("savedVolume: ", savedVolume)
 		
-
+		const currentDate = new Date().getTime()
 		let arrTemp = JSON.parse(savedTask)
-		const currentDate = new Date()
+		
 		const newObj = {
 			task: 1,
 			date: currentDate
@@ -1441,12 +1441,25 @@ const fetchNotifAdmin = async (dataAll) => {
 		arrTemp.push(newObj)
 		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
 
-		
-		if (savedMute === 'false') {
-		 	console.log("savedMute: ", savedMute)
-			audio120.volume = parseFloat(savedVolume)
-			audio120.play();
-		} 
+
+
+		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
+			console.log("no play 120")
+			setTimeout(()=> {
+				if (savedMute === 'false') {
+					console.log("savedMute: ", savedMute)
+					audio120.volume = parseFloat(savedVolume)
+					audio120.play();
+				}
+			}, 60000)
+		} else {
+			console.log("play 120")
+			if (savedMute === 'false') {
+				console.log("savedMute: ", savedMute)
+				audio120.volume = parseFloat(savedVolume)
+				audio120.play();
+			}
+		}
 		
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
@@ -1459,21 +1472,12 @@ const fetchNotifAdmin = async (dataAll) => {
 		const savedMute = localStorage.getItem("soundMute");
 		const savedTask = localStorage.getItem("currentTask");
 
+		console.log("savedVolume: ", savedVolume)
+
 		const currentDate = new Date().getTime()
 		let arrTemp = JSON.parse(savedTask)
 
-		// const newObj = {
-		// 	task: 2,
-		// 	date: currentDate
-		// }
-		// arrTemp.push(newObj)
-		//localStorage.setItem("currentTask", JSON.stringify(arrTemp));
-
 		
-		//console.log("arrTemp: ", arrTemp)
-		//console.log("task: ", task, currentDate)
-		//console.log("task old: ", arrTemp[arrTemp.length-1].task, new Date(arrTemp[arrTemp.length-1].date).getTime())
-
 		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
 			console.log("no play 60")
 			setTimeout(()=> {
@@ -1491,6 +1495,14 @@ const fetchNotifAdmin = async (dataAll) => {
 				audio60.play();
 			}
 		}
+
+		const newObj = {
+			task: 2,
+			date: currentDate
+		}
+		arrTemp.push(newObj)
+		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
+
 		 
 
 		// setSoundsNotif((soundsNotif) => {	
@@ -1507,6 +1519,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		const currentDate = new Date().getTime()
 		let arrTemp = JSON.parse(savedTask)
 
+
 		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
 			console.log("no play 30")
 			setTimeout(()=> {
@@ -1522,6 +1535,15 @@ const fetchNotifAdmin = async (dataAll) => {
 				audio30.play();
 			}
 		}
+
+		const newObj = {
+			task: 3,
+			date: currentDate
+		}
+		arrTemp.push(newObj)
+		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
+
+
 
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
@@ -1553,6 +1575,15 @@ const fetchNotifAdmin = async (dataAll) => {
 			}
 		}
 
+
+		const newObj = {
+			task: 4,
+			date: currentDate
+		}
+		arrTemp.push(newObj)
+		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
+
+
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
 		// 	soundsNotifCopy.push("Звуковое оповещение - 15 минут")
@@ -1582,6 +1613,14 @@ const fetchNotifAdmin = async (dataAll) => {
 				audio10.play();
 			}
 		} 
+
+		const newObj = {
+			task: 5,
+			date: currentDate
+		}
+		arrTemp.push(newObj)
+		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
+
 
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
@@ -1613,6 +1652,14 @@ const fetchNotifAdmin = async (dataAll) => {
 			}
 		}
 
+		const newObj = {
+			task: 6,
+			date: currentDate
+		}
+		arrTemp.push(newObj)
+		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
+
+
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
 		// 	soundsNotifCopy.push("Звуковое оповещение - 5 минут")
@@ -1642,6 +1689,14 @@ const fetchNotifAdmin = async (dataAll) => {
 				audio0.play();
 			}
 		}
+
+		const newObj = {
+			task: 7,
+			date: currentDate
+		}
+		arrTemp.push(newObj)
+		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
+
 
 		// setSoundsNotif((soundsNotif) => {	
 		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
