@@ -426,6 +426,7 @@ const getCategoryFromNotion = async(projectId) => {
       //выбрать уникальных специалистов
       const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
       setSelected(arr)
+      setSelectedCat(arr)
       console.log("selected: ", arr)     
     }
   } else {
@@ -677,7 +678,8 @@ const onAddCategory = (e) => {
           result.map((cat)=> {
             if (work.cat === cat) {
               arrSelect.push(worker.chatId)
-              //arrSelectAll.push(worker)
+              //console.log(worker)
+              arrSelectAll.push(worker)
             } 
           })
         })
@@ -1105,30 +1107,32 @@ const onChangeSelectCity = (e) => {
 
       if (val === '1' || val === '2') {
         console.log("val12: ", val)
-        // const arr = [...workersAll].filter((el) => el.newcity === res.label);
-        // selectedCat.map((item)=> {
-        //   arr.map(el => {
-        //     if (item === el.chatId) {
-        //       new_selected.push(el) // массив специалистов из города N
-        //    }
-        //   })
-        // })
-        // setSelected(new_selected)
+        const arr = [...workersAll].filter((el) => el.newcity === res.label);
+        console.log("selectedCat: ", selectedCat)
+        selectedCat.map((item)=> {
+          arr.map(el => {
+            if (item === el.chatId) {
+              new_selected.push(el) // массив специалистов из города N
+           }
+          })
+        })
+        setLoaderCount(false)
+        setSelected(new_selected)
       } 
       else {
         console.log("valAll: ", val)
-        workersAll.map((item)=> {
-          res2.models.map((city) => {
-            if (city.name === item.newcity) {
-              arr.push(item)
-              console.log("arr: ", arr)
-            }
-          })
-          if (item === workersAll.length-1) {
+        arrSelectAll.forEach((item)=> {
+          // res2.models.map((city) => {
+          //   if (city.name === item.newcity) {
+          //     arr.push(item)
+          //     console.log("arr: ", arr)
+          //   }
+          // })
+          if (item === arrSelectAll.length-1) {
             setLoaderCount(false)
           }
         })
-        
+        setLoaderCount(false)
         
 
         // if (arr.length > 0) {
