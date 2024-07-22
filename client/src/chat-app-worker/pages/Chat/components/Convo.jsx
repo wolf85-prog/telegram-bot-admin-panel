@@ -280,12 +280,12 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
 	const handleClick = (ind) => {
         //console.log(ind, showImage)
-		// window.event.stopPropagation();	
+		window.event.stopPropagation();	
 
-        // setShowImage(prevShownImage => ({
-        //     ...prevShownImage,
-        //     [ind]: !prevShownImage[ind]
-        // }));
+        setShowImage(prevShownImage => ({
+            ...prevShownImage,
+            [ind]: !prevShownImage[ind]
+        }));
 
 		// setTimeout(()=> {
 		// 	setShowImage(false)
