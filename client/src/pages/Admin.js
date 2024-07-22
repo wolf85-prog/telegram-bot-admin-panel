@@ -1657,7 +1657,7 @@ useEffect(() => {
                                       <CTableHeaderCell className="text-center" >Специальность</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Дата</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>                         
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>{ showNick ? 'Ник' : 'Телеграм ID' }</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>{ showNick ? 'Ник' : 'ID' }</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
@@ -1791,7 +1791,7 @@ useEffect(() => {
                                       <CTableHeaderCell className="text-center" >Специальность</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Дата</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>                         
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>{ showNick ? 'Ник' : 'Телеграм ID' }</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>{ showNick ? 'Ник' : 'ID' }</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}></CTableHeaderCell>   
                                     </CTableRow>
                                   </CTableHead>
