@@ -7992,7 +7992,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8052,7 +8052,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8105,7 +8105,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8163,7 +8163,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8215,7 +8215,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8268,7 +8268,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8327,7 +8327,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8379,7 +8379,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8432,7 +8432,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8492,7 +8492,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8544,7 +8544,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8597,7 +8597,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8657,7 +8657,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8709,7 +8709,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8762,7 +8762,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8822,7 +8822,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8874,7 +8874,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8927,7 +8927,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -8987,7 +8987,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -9039,7 +9039,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -9092,7 +9092,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -9152,7 +9152,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -9204,7 +9204,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
@@ -9257,7 +9257,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
                                             </div>
                                           </CTableDataCell>
                                           <CTableDataCell style={{width: '180px'}}>
-                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': ''}}>{item.proj}</div>
+                                            <div style={{display: item.proj ? "block": "none", color: item.go ? '#2eb85c': '', whiteSpace: 'nowrap'}}>{item.proj}</div>
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center" style={{width: '50px'}}>
                                             <CFormCheck 
