@@ -58,7 +58,7 @@ const SoundsNotif = () => {
 
       }
       
-      fetchData();
+      //fetchData();
       
     }, []);
 
@@ -77,7 +77,7 @@ const SoundsNotif = () => {
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
                   <CRow className="justify-content-between">
-                    <CCol xs={6}><h2>Звуковые уведомления</h2></CCol>
+                    <CCol xs={6}><h2>Мониторинг</h2></CCol>
                     <CCol xs={6} className="align-self-center" style={{textAlign: 'end'}}><CButton onClick={clickUpdate} color="secondary" size="sm" >Обновить</CButton></CCol>
                   </CRow>
  
@@ -85,7 +85,7 @@ const SoundsNotif = () => {
                     <CCardHeader>Журнал</CCardHeader>
                     <CCardBody>
                       {/* <CCardTitle>Special title treatment</CCardTitle> */}
-                      <CTable>
+                      {/* <CTable>
                         <CTableHead>
                           <CTableRow>
                             <CTableHeaderCell scope="col">№</CTableHeaderCell>
@@ -107,14 +107,15 @@ const SoundsNotif = () => {
                          ))
                         } 
                         </CTableBody>
-                      </CTable>
+                      </CTable> */}
+                      <iframe width="650" height="500" src="https://proj.uley.team:8001/status" title="description"></iframe>
                     </CCardBody>
                   </CCard>
                   
-                  {soundsNotif.map((item, index) => (
+                  {/* {soundsNotif.map((item, index) => (
                       <p key={index}>- {item}</p>
                     ))
-                  }
+                  } */}
                   
                 </Suspense>
             </CContainer>
