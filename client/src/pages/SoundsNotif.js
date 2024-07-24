@@ -108,7 +108,13 @@ const SoundsNotif = () => {
                         } 
                         </CTableBody>
                       </CTable> */}
-                      <iframe width="650" height="500" src="https://proj.uley.team:8001/status" title="description"></iframe>
+
+                    <CRow>
+                      <CCol xs={6}><iframe width="600" height="500" src="https://proj.uley.team:8000/status" title="description"></iframe></CCol>
+                      <CCol xs={6}><iframe width="600" height="500" src="https://proj.uley.team:8001/status" title="description"></iframe></CCol>
+                    </CRow>
+                      
+                      
                     </CCardBody>
                   </CCard>
                   
