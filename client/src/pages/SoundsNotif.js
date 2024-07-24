@@ -37,6 +37,8 @@ const SoundsNotif = () => {
   const { soundsNotif } = useUsersContext();
 
   const [soundNotif, setSoundNotif] = useState([]); 
+  const [activeKey, setActiveKey] = useState(2)
+  const [tabhub, setTabhub]= useState('');
 
     //get Contacts
     useEffect(() => {
@@ -67,6 +69,27 @@ const SoundsNotif = () => {
     await startSoundNotif()
   }
 
+  const openHub = (hub) => {
+    if (hub === 'Static') { 
+      // setShowWorkhub(true)
+      // setShowRenthub(false)
+      // setShowDeleted(false)
+      // setActiveKey(2)
+      // setShowWidget(false)
+      // setShowWidget2(true)
+      setTabhub('Static')
+    }
+    if (hub === 'Process') { 
+      // setShowWorkhub(false)
+      // setShowRenthub(true)
+      // setShowDeleted(false)
+      // setActiveKey(1)
+      // setShowWidget(true)
+      // setShowWidget2(false)
+      setTabhub('Process')
+    }
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -76,13 +99,38 @@ const SoundsNotif = () => {
 
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
+
                   <CRow className="justify-content-between">
                     <CCol xs={6}><h2>Мониторинг</h2></CCol>
-                    <CCol xs={6} className="align-self-center" style={{textAlign: 'end'}}><CButton onClick={clickUpdate} color="secondary" size="sm" >Обновить</CButton></CCol>
                   </CRow>
+
+                  <CRow className="mb-12">
+                    {/* Вкладки */}
+                    <CCol sm={6}>
+                      {/* Renthub Workhub */} 
+                      <CNav variant="tabs" className='dark-theme'>
+                            <CNavItem>
+                              <CNavLink 
+                                style={{background: activeKey !== 2 ? '#08080869' : '', cursor: 'pointer'}} 
+                                onClick={() => openHub('Static')} 
+                                active={activeKey === 2}>
+                                  Производительность
+                              </CNavLink>
+                            </CNavItem>
+                            <CNavItem>
+                              <CNavLink 
+                                style={{background: activeKey !== 1 ? '#08080869' : '', cursor: 'pointer'}} 
+                                onClick={() => openHub('Process')} 
+                                active={activeKey === 1}>
+                                  Процессы
+                              </CNavLink>
+                            </CNavItem>
+                      </CNav>
+                    </CCol>
+                  </CRow>    
  
                   <CCard>
-                    <CCardHeader>Производительность</CCardHeader>
+                    {/* <CCardHeader>Производительность</CCardHeader> */}
                     <CCardBody>
                       {/* <CCardTitle>Special title treatment</CCardTitle> */}
                       {/* <CTable>
