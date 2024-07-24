@@ -82,7 +82,7 @@ const SoundsNotif = () => {
                   </CRow>
  
                   <CCard>
-                    <CCardHeader>Журнал</CCardHeader>
+                    <CCardHeader>Производительность</CCardHeader>
                     <CCardBody>
                       {/* <CCardTitle>Special title treatment</CCardTitle> */}
                       {/* <CTable>
@@ -110,8 +110,8 @@ const SoundsNotif = () => {
                       </CTable> */}
 
                     <CRow>
-                      <CCol xs={6}><iframe width="600" height="500" src="https://proj.uley.team:8000/status" title="description"></iframe></CCol>
-                      <CCol xs={6}><iframe width="600" height="500" src="https://proj.uley.team:8001/status" title="description"></iframe></CCol>
+                      <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:8000/status" title="description"></iframe></CCol>
+                      <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:8001/status" title="description"></iframe></CCol>
                     </CRow>
                       
                       
