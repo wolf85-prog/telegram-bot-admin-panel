@@ -43,7 +43,7 @@ class WorkersController {
         const prev = req.params.prev
         try {
             const count = await Worker.count();
-            console.log(count)
+            //console.log(count)
 
             const k = parseInt(kol) + parseInt(prev)
 
