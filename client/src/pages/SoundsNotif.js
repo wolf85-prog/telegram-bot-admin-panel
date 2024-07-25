@@ -161,6 +161,12 @@ const SoundsNotif = () => {
                       <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:8000/status" title="description"></iframe></CCol>
                       <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:8001/status" title="description"></iframe></CCol>
                     </CRow>
+                    <hr></hr>
+                    <br/>
+                    <CRow>
+                      <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:8080/status" title="description"></iframe></CCol>
+                      <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:5000/status" title="description"></iframe></CCol>
+                    </CRow>
                       
                       
                     </CCardBody>
