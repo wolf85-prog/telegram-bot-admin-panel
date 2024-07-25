@@ -608,8 +608,20 @@ https://t.me/ULEY_Office_Bot
                         	<CButton color="primary" onClick={() => setShowErrorFile(false)}>ОК</CButton>
                         </CModalFooter>
                     </CModal>
+					
 				</div>
+				<div style={{position: 'relative', zIndex: '100'}}>
+					<EmojiPicker 
+						open={showPicker} 
+						theme='dark'
+						height={500} 
+						width={400} 
+						onEmojiClick={onEmojiClick}
+					/>
+				</div>
+				
 				<footer className="chat__footer">
+				
 					<div className="chat__footer-wrapper">
 						<button
 							className="chat__scroll-btn"
@@ -623,13 +635,13 @@ https://t.me/ULEY_Office_Bot
 							mess={mess}
 							setMess={setMess}
 						/> */}
-						<EmojiPicker 
+						{/* <EmojiPicker 
 							open={showPicker} 
 							theme='dark'
 							height={500} 
 							width={400} 
 							onEmojiClick={onEmojiClick}
-						/>
+						/> */}
 						<ChatInput
 							showEmojis={showEmojis}
 							setShowEmojis={setShowEmojis}
