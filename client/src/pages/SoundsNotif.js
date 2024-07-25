@@ -39,28 +39,19 @@ const SoundsNotif = () => {
   const [soundNotif, setSoundNotif] = useState([]); 
   const [activeKey, setActiveKey] = useState(2)
   const [tabhub, setTabhub]= useState('');
+  const [showStatic, setShowStatic]= useState(true);
+  const [showProcess, setShowProcess]= useState(false);
 
     //get Contacts
     useEffect(() => {
-      //const arrClients = []
   
       const fetchData = async() => {
 
         console.log("Открываю страницу Звуковые уведомления")
 
-        let notifs = await getSoundNotif()
-        console.log("notifs: ", notifs) 
-
-        const sortedNotif = [...notifs].sort((a, b) => {       
-					var dateA = a.date, dateB = b.date 
-					return dateB-dateA  //сортировка по убывающей дате  
-				})
-
-        setSoundNotif(sortedNotif)  
-
       }
       
-      //fetchData();
+      fetchData();
       
     }, []);
 
@@ -71,21 +62,15 @@ const SoundsNotif = () => {
 
   const openHub = (hub) => {
     if (hub === 'Static') { 
-      // setShowWorkhub(true)
-      // setShowRenthub(false)
-      // setShowDeleted(false)
-      // setActiveKey(2)
-      // setShowWidget(false)
-      // setShowWidget2(true)
+      setShowStatic(true)
+      setShowProcess(false)
+      setActiveKey(2)
       setTabhub('Static')
     }
     if (hub === 'Process') { 
-      // setShowWorkhub(false)
-      // setShowRenthub(true)
-      // setShowDeleted(false)
-      // setActiveKey(1)
-      // setShowWidget(true)
-      // setShowWidget2(false)
+      setShowStatic(false)
+      setShowProcess(true)
+      setActiveKey(1)
       setTabhub('Process')
     }
   }
@@ -129,53 +114,60 @@ const SoundsNotif = () => {
                     </CCol>
                   </CRow>    
  
-                  <CCard>
-                    {/* <CCardHeader>Производительность</CCardHeader> */}
-                    <CCardBody>
-                      {/* <CCardTitle>Special title treatment</CCardTitle> */}
-                      {/* <CTable>
-                        <CTableHead>
-                          <CTableRow>
-                            <CTableHeaderCell scope="col">№</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Дата</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Проект</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Оповещение</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Статус</CTableHeaderCell>
-                          </CTableRow>
-                        </CTableHead>
-                        <CTableBody>
-                        {soundNotif.map((item, index) => (
-                          <CTableRow key={index}>
-                            <CTableHeaderCell scope="row">{index+1}</CTableHeaderCell>
-                            <CTableDataCell>{new Date(parseInt(item.date)).toLocaleDateString()} {new Date(parseInt(item.date)).toLocaleTimeString().split(':')[0]}:{new Date(parseInt(item.date)).toLocaleTimeString().split(':')[1]}</CTableDataCell>
-                            <CTableDataCell>{item.name}</CTableDataCell>
-                            <CTableDataCell>{item.text}</CTableDataCell>
-                            <CTableDataCell>{item.delivered ? "Получено" : "Запланировано"}</CTableDataCell>
-                          </CTableRow>
-                         ))
-                        } 
-                        </CTableBody>
-                      </CTable> */}
+                  <CCard className='rounded-bottom' style={{borderRadius: '0px', borderColor: '#131c21', borderTopRightRadius: '0.375rem'}}>
+                    <CCardBody id="Static" style={{display: showStatic ? 'block' : 'none'}}>
 
-                    <CRow>
-                      <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:8000/status" title="description"></iframe></CCol>
-                      <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:8001/status" title="description"></iframe></CCol>
-                    </CRow>
-                    <hr></hr>
-                    <br/>
-                    <CRow>
-                      <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:8080/status" title="description"></iframe></CCol>
-                      <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:5000/status" title="description"></iframe></CCol>
-                    </CRow>
-                      
+                      <CRow>
+                        <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:8000/status" title="description"></iframe></CCol>
+                        <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:8001/status" title="description"></iframe></CCol>
+                      </CRow>
+                      <hr></hr>
+                      <br/>
+                      <CRow>
+                        <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:8080/status" title="description"></iframe></CCol>
+                        <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:5000/status" title="description"></iframe></CCol>
+                      </CRow>
                       
                     </CCardBody>
-                  </CCard>
                   
-                  {/* {soundsNotif.map((item, index) => (
-                      <p key={index}>- {item}</p>
-                    ))
-                  } */}
+
+                    <CCardBody id="Process" style={{display: showProcess ? 'block' : 'none'}}>
+                      <CCardTitle></CCardTitle> 
+                        <CTable>
+                          <CTableHead>
+                            <CTableRow>
+                              <CTableHeaderCell scope="col">№</CTableHeaderCell>
+                              <CTableHeaderCell scope="col">Название запроса</CTableHeaderCell>
+                              <CTableHeaderCell scope="col">Состояние</CTableHeaderCell>
+                              <CTableHeaderCell scope="col">Кол-во</CTableHeaderCell>
+                              <CTableHeaderCell scope="col">Время</CTableHeaderCell>
+                              <CTableHeaderCell scope="col">Ед. изм.</CTableHeaderCell>
+                            </CTableRow>
+                          </CTableHead>
+                          <CTableBody>
+                          {/* {soundNotif.map((item, index) => ( */}
+                            <CTableRow>
+                              <CTableHeaderCell scope="row">1</CTableHeaderCell>
+                              <CTableDataCell>-</CTableDataCell>
+                              <CTableDataCell>-</CTableDataCell>
+                              <CTableDataCell>-</CTableDataCell>
+                              <CTableDataCell>-</CTableDataCell>
+                              <CTableDataCell>-</CTableDataCell>
+                            </CTableRow>
+                            <CTableRow>
+                              <CTableHeaderCell scope="row">2</CTableHeaderCell>
+                              <CTableDataCell>-</CTableDataCell>
+                              <CTableDataCell>-</CTableDataCell>
+                              <CTableDataCell>-</CTableDataCell>
+                              <CTableDataCell>-</CTableDataCell>
+                              <CTableDataCell>-</CTableDataCell>
+                            </CTableRow>
+                          {/* ))
+                          }  */}
+                          </CTableBody>
+                        </CTable>
+                    </CCardBody>
+                  </CCard>
                   
                 </Suspense>
             </CContainer>
