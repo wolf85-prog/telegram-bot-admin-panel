@@ -136,31 +136,34 @@ const SoundsNotif = () => {
                         <CTable>
                           <CTableHead>
                             <CTableRow>
-                              <CTableHeaderCell scope="col">№</CTableHeaderCell>
-                              <CTableHeaderCell scope="col">Название запроса</CTableHeaderCell>
-                              <CTableHeaderCell scope="col">Состояние</CTableHeaderCell>
-                              <CTableHeaderCell scope="col">Кол-во</CTableHeaderCell>
-                              <CTableHeaderCell scope="col">Время</CTableHeaderCell>
-                              <CTableHeaderCell scope="col">Ед. изм.</CTableHeaderCell>
+                              <CTableHeaderCell scope="col" className="text-center" style={{width: '50px'}}>№</CTableHeaderCell>
+                              <CTableHeaderCell scope="col" className="text-center" style={{width: '90px'}}>Кол-во</CTableHeaderCell>
+                              <CTableHeaderCell scope="col" className="text-center" style={{width: '90px'}}>Время</CTableHeaderCell>
+                              <CTableHeaderCell scope="col" className="text-center" style={{width: '90px'}}>Ед. изм.</CTableHeaderCell>
+                              <CTableHeaderCell scope="col" className="text-center">Название запроса</CTableHeaderCell>
+                              <CTableHeaderCell scope="col" className="text-center" style={{width: '90px'}}>Статус</CTableHeaderCell>   
+                              <CTableHeaderCell scope="col" className="text-center" style={{width: '150px'}}>Управление</CTableHeaderCell>    
                             </CTableRow>
                           </CTableHead>
                           <CTableBody>
                           {/* {soundNotif.map((item, index) => ( */}
                             <CTableRow>
-                              <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                              <CTableDataCell>-</CTableDataCell>
-                              <CTableDataCell>-</CTableDataCell>
-                              <CTableDataCell>-</CTableDataCell>
-                              <CTableDataCell>-</CTableDataCell>
-                              <CTableDataCell>-</CTableDataCell>
+                              <CTableHeaderCell scope="row" className="text-center">1</CTableHeaderCell>
+                              <CTableDataCell className="text-center">10</CTableDataCell>
+                              <CTableDataCell className="text-center">20</CTableDataCell>
+                              <CTableDataCell className="text-center">S</CTableDataCell>
+                              <CTableDataCell className="text-center">Запрос №1</CTableDataCell>
+                              <CTableDataCell className="text-center">-</CTableDataCell>
+                              <CTableDataCell className="text-center"></CTableDataCell>
                             </CTableRow>
                             <CTableRow>
-                              <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                              <CTableDataCell>-</CTableDataCell>
-                              <CTableDataCell>-</CTableDataCell>
-                              <CTableDataCell>-</CTableDataCell>
-                              <CTableDataCell>-</CTableDataCell>
-                              <CTableDataCell>-</CTableDataCell>
+                              <CTableHeaderCell scope="row" className="text-center">2</CTableHeaderCell>
+                              <CTableDataCell className="text-center">20</CTableDataCell>
+                              <CTableDataCell className="text-center">30</CTableDataCell>
+                              <CTableDataCell className="text-center">M</CTableDataCell>
+                              <CTableDataCell className="text-center">Запрос №2</CTableDataCell>
+                              <CTableDataCell className="text-center">-</CTableDataCell>
+                              <CTableDataCell className="text-center"></CTableDataCell>
                             </CTableRow>
                           {/* ))
                           }  */}
