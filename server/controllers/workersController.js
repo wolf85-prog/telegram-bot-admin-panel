@@ -162,22 +162,29 @@ class WorkersController {
                 console.log("workersProf: ", workersProf.length) 
 
                 //обновить аватар
-                workersProf.map((worker, index)=>{
-                    const workerApp = workers.find((item)=> item.chatId === worker.tgId?.toString())
-                    const avatar = worker.profile ? (worker.profile?.file ? worker.profile?.file.url : worker.profile?.external.url) : null
-                    setTimeout(()=> {
-                        if (workerApp) {
-                            updateAvatar(avatar, workerApp.dataValues)
-                        } else {
-                            console.log("Специалист не найден!")  
-                        }
-                    }, 500 * ++index)              
-                })
+                let j = 0
+                while (j < workersProf.length) { 
+                //workersProf.map((worker, index)=>{
+                    const workerApp = workers.find((item)=> item.chatId === workersProf[j].tgId?.toString())
+                    const avatar = workersProf[j].profile ? (workersProf[j].profile?.file ? workersProf[j].profile?.file.url : workersProf[j].profile?.external.url) : null
+                    
+                    if (workerApp) {
+                        updateAvatar(avatar, workerApp.dataValues)
+                    } else {
+                        console.log("Специалист не найден!")  
+                    }
+                    
+                    j++       
+                    //await delay(1000) // 10 сек  
+                    new Promise((resolve) => {
+                        setTimeout(resolve, 1000);
+                    });           
+                }
 
                 //обновить данные
                 console.log("ОБНОВЛЕНИЕ ДАННЫХ СПЕЦИАЛИСТОВ")
                 let proc = 0
-                workers.map(async(worker, i)=> {
+                workers.map(async(worker)=> {
                     let specArr = []
                     setTimeout(async()=> {     
                         const workerN = workersN.filter((item)=> item.tgId?.toString() === worker.chatId)        
@@ -344,9 +351,6 @@ class WorkersController {
             console.log(error.message)
         }
     }
-
-
-
 
 }
 
