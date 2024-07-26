@@ -32,10 +32,13 @@ import {
 // routes config
 import routes from '../routes'
 
+import MyModal from "../components/MyModal/MyModal";
+
 import stopIcon from 'src/assets/images/stop.png'
 import stopIcon2 from 'src/assets/images/stop_press.png'
 import playIcon from 'src/assets/images/play.png'
 import playIcon2 from 'src/assets/images/play_press.png'
+import recIcon from 'src/assets/images/rec.png'
 
 import status1Icon from 'src/assets/images/status1.png'
 import status2Icon from 'src/assets/images/status2.png'
@@ -50,11 +53,13 @@ const SoundsNotif = () => {
   const [showStatic, setShowStatic]= useState(true);
   const [showProcess, setShowProcess]= useState(false);
 
-  const [playProcess, setPlayProcess]= useState(true);
-  const [stopProcess, setStopProcess]= useState(false);
+  const [playProcess, setPlayProcess]= useState(false);
+  const [stopProcess, setStopProcess]= useState(true);
 
-  const [playProcess2, setPlayProcess2]= useState(true);
-  const [stopProcess2, setStopProcess2]= useState(false);
+  const [playProcess2, setPlayProcess2]= useState(false);
+  const [stopProcess2, setStopProcess2]= useState(true);
+
+  const [showRec, setShowRec]= useState(false);
 
     //get Contacts
     useEffect(() => {
@@ -97,6 +102,10 @@ const SoundsNotif = () => {
   const clickPlay2 = () => {
     setPlayProcess2(!playProcess2)
     setStopProcess2(!stopProcess2)
+  }
+
+  const clickRec = () => {
+    setShowRec(true)
   }
 
   return (
@@ -161,46 +170,52 @@ const SoundsNotif = () => {
                           <CTableHead>
                             <CTableRow>
                               <CTableHeaderCell scope="col" className="text-center" style={{width: '50px'}}>№</CTableHeaderCell>
-                              <CTableHeaderCell scope="col" className="text-center" style={{width: '90px'}}>Запрос</CTableHeaderCell>
                               <CTableHeaderCell scope="col" className="text-center" style={{width: '90px'}}>Интервал</CTableHeaderCell>
                               <CTableHeaderCell scope="col" className="text-center" style={{width: '90px'}}>Время</CTableHeaderCell>
-                              <CTableHeaderCell scope="col" className="text-center">Название запроса</CTableHeaderCell>
+                              <CTableHeaderCell scope="col" className="text-center">Запрос</CTableHeaderCell>
+                              <CTableHeaderCell scope="col" className="text-center" style={{width: '150px'}}>Ресурс</CTableHeaderCell>
                               <CTableHeaderCell scope="col" className="text-center" style={{width: '90px'}}>Статус</CTableHeaderCell>   
-                              <CTableHeaderCell scope="col" className="text-center" style={{width: '150px'}}>Управление</CTableHeaderCell>    
+                              <CTableHeaderCell scope="col" className="text-center" style={{width: '200px'}}>Управление</CTableHeaderCell>    
                             </CTableRow>
                           </CTableHead>
                           <CTableBody>
                           {/* {soundNotif.map((item, index) => ( */}
                             <CTableRow>
                               <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>1</CTableHeaderCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle'}}>10</CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle'}}>20</CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle'}}>S</CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle'}}>Запрос №1</CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle'}}><img src={status1Icon} alt='' width='25px' /></CTableDataCell>
-                              <CTableDataCell className="text-center">
-                                <CButton disabled={!playProcess} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay}>
-                                  <img src={playProcess ? playIcon : playIcon2} alt='' width='25px' />
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>20</CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>S</CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>Запрос №1</CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>Бот заказчиков</CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}><img src={status1Icon} alt='' width='25px' /></CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickRec}>
+                                  <img src={recIcon} alt='' width='25px' />
                                 </CButton>
                                 <CButton disabled={!stopProcess} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay}>
                                   <img src={stopProcess ? stopIcon : stopIcon2} alt='' width='25px' />
                                 </CButton>
+                                <CButton disabled={!playProcess} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay}>
+                                  <img src={playProcess ? playIcon : playIcon2} alt='' width='25px' />
+                                </CButton> 
                               </CTableDataCell>
                             </CTableRow>
                             <CTableRow>
                               <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>2</CTableHeaderCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle'}}>20</CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle'}}>30</CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle'}}>M</CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle'}}>Запрос №2</CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle'}}><img src={status2Icon} alt='' width='25px' /></CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle'}}>
-                                <CButton disabled={!playProcess2} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay2}>
-                                  <img src={playProcess2 ? playIcon : playIcon2} alt='' width='25px' />
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>30</CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>M</CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>Запрос №2</CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>Бот специалистов</CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}><img src={status2Icon} alt='' width='25px' /></CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickRec}>
+                                  <img src={recIcon} alt='' width='25px' />
                                 </CButton>
                                 <CButton disabled={!stopProcess2} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay2}>
                                   <img src={stopProcess2 ? stopIcon : stopIcon2} alt='' width='25px' />
                                 </CButton>
+                                <CButton disabled={!playProcess2} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay2}>
+                                  <img src={playProcess2 ? playIcon : playIcon2} alt='' width='25px' />
+                                </CButton> 
                               </CTableDataCell>
                             </CTableRow>
                           {/* ))
@@ -209,6 +224,48 @@ const SoundsNotif = () => {
                         </CTable>
                     </CCardBody>
                   </CCard>
+
+                  <MyModal alignment="center" visible={showRec} setVisible={setShowRec} onClose={() => setShowRec(false)} style={{height: '50px'}}>
+                                          <CCardBody>
+                                            <div className="scroll-table">
+                                              <CTable align="middle" className="mb-0" responsive style={{color: '#ffffff'}}>
+                                                <CTableHead className='table-dark'>
+                                                  <CTableRow>
+                                                    <CTableHeaderCell scope="col" className="text-center" style={{width: '50px'}}>№</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col" className="text-center" style={{width: '150px'}}>Интервал</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col" className="text-center" style={{width: '90px'}}>Время</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col" className="text-center" style={{width: '150px'}}>Запрос</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col" className="text-center" style={{width: '150px'}}>Ресурс</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col" className="text-center" style={{width: '90px'}}>Статус</CTableHeaderCell>   
+                                                  </CTableRow>
+                                                </CTableHead>
+                                              </CTable>	
+                                              <div className="scroll-table-body" >
+                                                <CTable>
+                                                  <CTableBody>
+                                                    <CTableRow>
+                                                      <CTableHeaderCell className="text-center" scope="row">1</CTableHeaderCell>
+                                                      <CTableDataCell className="text-center" style={{width: '150px'}}>
+                                                        <CFormInput type="email" id="exampleFormControlInput1" placeholder="0"/>
+                                                      </CTableDataCell>
+                                                      <CTableDataCell className="text-center">S</CTableDataCell>
+                                                      <CTableDataCell className="text-center">Запрос</CTableDataCell>
+                                                      <CTableDataCell className="text-center">Бот заказчиков</CTableDataCell>
+                                                      <CTableDataCell className="text-center"><img src={status2Icon} alt='' width='25px' /></CTableDataCell>
+                                                    </CTableRow>   
+                                                  </CTableBody>
+                                                </CTable>
+                                              </div>	
+                                            </div>
+                                            <CRow>
+                                              <CCol></CCol>
+                                              <CCol style={{textAlign: 'end'}}><CButton color="success" size="lg" >Сохранить</CButton></CCol>
+                                            </CRow>
+                                            
+                                            {/* <p style={{display: 'flex', justifyContent: 'space-between'}}><span>Получено: {count}</span> <span>Не получено: {count2}</span></p>   */}
+                                          </CCardBody> 
+                                          
+                          </MyModal>  
                   
                 </Suspense>
             </CContainer>
