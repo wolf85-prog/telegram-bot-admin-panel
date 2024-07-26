@@ -162,15 +162,16 @@ class WorkersController {
                 console.log("workersProf: ", workersProf.length) 
 
                 //обновить аватар
-                workersProf.map((worker)=>{
+                workersProf.map((worker, index)=>{
                     const workerApp = workers.find((item)=> item.chatId === worker.tgId?.toString())
                     const avatar = worker.profile ? (worker.profile?.file ? worker.profile?.file.url : worker.profile?.external.url) : null
-                    
-                    if (workerApp) {
-                        updateAvatar(avatar, workerApp.dataValues)
-                    } else {
-                        console.log("Специалист не найден!")  
-                    }         
+                    setTimeout(()=> {
+                        if (workerApp) {
+                            updateAvatar(avatar, workerApp.dataValues)
+                        } else {
+                            console.log("Специалист не найден!")  
+                        }
+                    }, 500 * ++index)              
                 })
 
                 //обновить данные
