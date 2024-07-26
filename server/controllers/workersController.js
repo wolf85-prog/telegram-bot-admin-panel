@@ -184,7 +184,7 @@ class WorkersController {
                 //обновить данные
                 console.log("ОБНОВЛЕНИЕ ДАННЫХ СПЕЦИАЛИСТОВ")
                 let proc = 0
-                workers.map(async(worker)=> {
+                workers.map(async(worker, i)=> {
                     let specArr = []
                     setTimeout(async()=> {     
                         const workerN = workersN.filter((item)=> item.tgId?.toString() === worker.chatId)        
