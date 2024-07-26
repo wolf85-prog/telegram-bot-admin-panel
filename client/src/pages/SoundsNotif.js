@@ -32,7 +32,7 @@ import {
 // routes config
 import routes from '../routes'
 
-import MyModal from "../components/MyModal/MyModal";
+import MyModalSmall from "../components/MyModalSmall/MyModalSmall";
 
 import stopIcon from 'src/assets/images/stop.png'
 import stopIcon2 from 'src/assets/images/stop_press.png'
@@ -106,6 +106,10 @@ const SoundsNotif = () => {
 
   const clickRec = () => {
     setShowRec(true)
+  }
+
+  const clickSaveReq = () => {
+    setShowRec(false)
   }
 
   return (
@@ -225,7 +229,7 @@ const SoundsNotif = () => {
                     </CCardBody>
                   </CCard>
 
-                  <MyModal alignment="center" visible={showRec} setVisible={setShowRec} onClose={() => setShowRec(false)} style={{height: '50px'}}>
+                  <MyModalSmall alignment="center" visible={showRec} setVisible={setShowRec} onClose={() => setShowRec(false)} style={{height: '50px'}}>
                                           <CCardBody>
                                             <div className="scroll-table">
                                               <CTable align="middle" className="mb-0" responsive style={{color: '#ffffff'}}>
@@ -244,14 +248,14 @@ const SoundsNotif = () => {
                                                 <CTable>
                                                   <CTableBody>
                                                     <CTableRow>
-                                                      <CTableHeaderCell className="text-center" scope="row">1</CTableHeaderCell>
+                                                      <CTableHeaderCell className="text-center" scope="row" style={{width: '50px'}}>1</CTableHeaderCell>
                                                       <CTableDataCell className="text-center" style={{width: '150px'}}>
                                                         <CFormInput type="email" id="exampleFormControlInput1" placeholder="0"/>
                                                       </CTableDataCell>
-                                                      <CTableDataCell className="text-center">S</CTableDataCell>
-                                                      <CTableDataCell className="text-center">Запрос</CTableDataCell>
-                                                      <CTableDataCell className="text-center">Бот заказчиков</CTableDataCell>
-                                                      <CTableDataCell className="text-center"><img src={status2Icon} alt='' width='25px' /></CTableDataCell>
+                                                      <CTableDataCell className="text-center" style={{width: '90px'}}>S</CTableDataCell>
+                                                      <CTableDataCell className="text-center" style={{width: '150px'}}>Запрос</CTableDataCell>
+                                                      <CTableDataCell className="text-center" style={{width: '150px'}}>Бот заказчиков</CTableDataCell>
+                                                      <CTableDataCell className="text-center" style={{width: '90px'}}><img src={status2Icon} alt='' width='25px' /></CTableDataCell>
                                                     </CTableRow>   
                                                   </CTableBody>
                                                 </CTable>
@@ -259,13 +263,12 @@ const SoundsNotif = () => {
                                             </div>
                                             <CRow>
                                               <CCol></CCol>
-                                              <CCol style={{textAlign: 'end'}}><CButton color="success" size="lg" >Сохранить</CButton></CCol>
+                                              <CCol style={{textAlign: 'end'}}><CButton color="success" size="lg" onClick={clickSaveReq}>Сохранить</CButton></CCol>
                                             </CRow>
                                             
-                                            {/* <p style={{display: 'flex', justifyContent: 'space-between'}}><span>Получено: {count}</span> <span>Не получено: {count2}</span></p>   */}
                                           </CCardBody> 
                                           
-                          </MyModal>  
+                          </MyModalSmall>  
                   
                 </Suspense>
             </CContainer>
