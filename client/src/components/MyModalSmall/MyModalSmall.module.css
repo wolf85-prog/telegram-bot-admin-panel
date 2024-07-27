@@ -15,11 +15,11 @@
     padding: 25px;
     background: #272727;
     border-radius: 16px;
-    min-width: 950px;
+    min-width: 200px;
     color: #fff;
     position: relative;
     z-index: 101;
-    height: 210px;
+    height: 170px;
 }
 
 .myModal.active {

@@ -27,6 +27,8 @@ import {
   CTableHead,
   CTableHeaderCell,
   CTableRow,
+  CFormSelect,
+  CFormLabel,
 } from '@coreui/react'
 
 // routes config
@@ -192,15 +194,16 @@ const SoundsNotif = () => {
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>Бот заказчиков</CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}><img src={status1Icon} alt='' width='25px' /></CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickRec}>
-                                  <img src={recIcon} alt='' width='25px' />
-                                </CButton>
+                                
                                 <CButton disabled={!stopProcess} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay}>
                                   <img src={stopProcess ? stopIcon : stopIcon2} alt='' width='25px' />
                                 </CButton>
                                 <CButton disabled={!playProcess} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay}>
                                   <img src={playProcess ? playIcon : playIcon2} alt='' width='25px' />
                                 </CButton> 
+                                <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickRec}>
+                                  <img src={recIcon} alt='' width='25px' />
+                                </CButton>
                               </CTableDataCell>
                             </CTableRow>
                             <CTableRow>
@@ -211,15 +214,16 @@ const SoundsNotif = () => {
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>Бот специалистов</CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}><img src={status2Icon} alt='' width='25px' /></CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickRec}>
-                                  <img src={recIcon} alt='' width='25px' />
-                                </CButton>
+                                
                                 <CButton disabled={!stopProcess2} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay2}>
                                   <img src={stopProcess2 ? stopIcon : stopIcon2} alt='' width='25px' />
                                 </CButton>
                                 <CButton disabled={!playProcess2} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay2}>
                                   <img src={playProcess2 ? playIcon : playIcon2} alt='' width='25px' />
                                 </CButton> 
+                                <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickRec}>
+                                  <img src={recIcon} alt='' width='25px' />
+                                </CButton>
                               </CTableDataCell>
                             </CTableRow>
                           {/* ))
@@ -231,7 +235,62 @@ const SoundsNotif = () => {
 
                   <MyModalSmall alignment="center" visible={showRec} setVisible={setShowRec} onClose={() => setShowRec(false)} style={{height: '50px'}}>
                                           <CCardBody>
-                                            <div className="scroll-table">
+                                            <CRow>
+                                              <CCol>
+                                                <CFormLabel htmlFor="exampleFormControlInput1">Инт</CFormLabel>
+                                                <CFormSelect 
+                                                  aria-label="Default select example"
+                                                  style={{marginTop: '10px'}}
+                                                  options={[
+                                                    {
+                                                      label: '1',
+                                                      value: '1',
+                                                    },
+                                                    {
+                                                      label: '2',
+                                                      value: '2',
+                                                    },
+                                                    {
+                                                      label: '3',
+                                                      value: '3',
+                                                    },
+                                                    {
+                                                      label: '4',
+                                                      value: '4',
+                                                    },
+            
+                                                  ]}
+                                                />
+                                              </CCol>
+                                              <CCol>
+                                                <CFormLabel htmlFor="exampleFormControlInput1">Время</CFormLabel>
+                                                <CFormSelect 
+                                                  aria-label="Default select example"
+                                                  style={{marginTop: '10px'}}
+                                                  options={[
+                                                    {
+                                                      label: '1',
+                                                      value: '1',
+                                                    },
+                                                    {
+                                                      label: '2',
+                                                      value: '2',
+                                                    },
+                                                    {
+                                                      label: '3',
+                                                      value: '3',
+                                                    },
+                                                    {
+                                                      label: '4',
+                                                      value: '4',
+                                                    },
+            
+                                                  ]}
+                                                />
+                                              </CCol>
+                                            </CRow>
+                                         
+                                            {/* <div className="scroll-table">
                                               <CTable align="middle" className="mb-0" responsive style={{color: '#ffffff'}}>
                                                 <CTableHead className='table-dark'>
                                                   <CTableRow>
@@ -260,10 +319,10 @@ const SoundsNotif = () => {
                                                   </CTableBody>
                                                 </CTable>
                                               </div>	
-                                            </div>
-                                            <CRow>
-                                              <CCol></CCol>
-                                              <CCol style={{textAlign: 'end'}}><CButton color="success" size="lg" onClick={clickSaveReq}>Сохранить</CButton></CCol>
+                                            </div> */}
+                                            <br/>
+                                            <CRow> 
+                                              <CCol class='text-center'><CButton color="success" size="sm" onClick={clickSaveReq}>Сохранить</CButton></CCol>
                                             </CRow>
                                             
                                           </CCardBody> 
