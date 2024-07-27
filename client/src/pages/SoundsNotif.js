@@ -210,12 +210,12 @@ const SoundsNotif = () => {
 
   const clickRec = (ind) => {
     if (ind === 1) {
-      setShowInterval(true)
-      setShowTime(true)
+      setShowInterval(!showInterval)
+      setShowTime(!showTime)
     } 
     else if (ind === 2) {
-      setShowInterval2(true)
-      setShowTime2(true)
+      setShowInterval2(!showInterval2)
+      setShowTime2(!showTime2)
     } 
   }
 
@@ -309,14 +309,14 @@ const SoundsNotif = () => {
                     <CCardBody id="Static" style={{display: showStatic ? 'block' : 'none'}}>
 
                       <CRow>
-                        <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:8000/status" title="description"></iframe></CCol>
-                        <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:8001/status" title="description"></iframe></CCol>
+                        <CCol md={6}><iframe width="600" height="600" src="https://proj.uley.team:8000/status" title="description"></iframe></CCol>
+                        <CCol md={6}><iframe width="600" height="600" src="https://proj.uley.team:8001/status" title="description"></iframe></CCol>
                       </CRow>
                       <hr></hr>
                       <br/>
                       <CRow>
-                        <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:8080/status" title="description"></iframe></CCol>
-                        <CCol xs={6}><iframe width="600" height="600" src="https://proj.uley.team:5000/status" title="description"></iframe></CCol>
+                        <CCol md={6}><iframe width="600" height="600" src="https://proj.uley.team:8080/status" title="description"></iframe></CCol>
+                        <CCol md={6}><iframe width="600" height="600" src="https://proj.uley.team:5000/status" title="description"></iframe></CCol>
                       </CRow>
                       
                     </CCardBody>
