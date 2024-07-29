@@ -277,6 +277,8 @@ const Chat = () => {
 		} else {
 			//отправка сообщения
 
+			let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+
 			//Передаем данные боту
 			let temp=mess.replace(/\n/g, '%0A'); //экранирование переноса строки
 			temp = temp.replace(/#/g, '%23'); 		 //экранирование решетки
@@ -337,7 +339,7 @@ const Chat = () => {
 				message = {
 					senderId: chatAdminId, 
 					receiverId: user.chatId,
-					conversationId: user.conversationId,
+					conversationId: client.conversationId,
 					type: "text",
 					text: mess,
 					isBot: null,
@@ -345,12 +347,12 @@ const Chat = () => {
 				}
 
 				//сохранить в контексте
-				addNewMessage2(user.chatId, mess, 'text', '', user.conversationId, sendToTelegram.data.result.message_id);
+				addNewMessage2(user.chatId, mess, 'text', '', user.conversationId, sendToTelegram.data.result.message_id, null);
 			} else {
 				message = {
 					senderId: chatAdminId, 
 					receiverId: user.chatId,
-					conversationId: user.conversationId,
+					conversationId: client.conversationId,
 					type: "image",
 					text: host + image,
 					isBot: null,
@@ -358,7 +360,7 @@ const Chat = () => {
 				}
 
 				//сохранить в контексте
-				addNewMessage2(user.chatId, host + image, 'image', '', user.conversationId, sendPhotoToTelegram.data.result.message_id);
+				addNewMessage2(user.chatId, host + image, 'image', '', user.conversationId, sendPhotoToTelegram.data.result.message_id, null);
 			}
 			console.log("message send button: ", message);
 
