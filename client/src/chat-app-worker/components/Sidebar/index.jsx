@@ -53,7 +53,7 @@ const Sidebar = () => {
 			if (arr.length === CountWorkers)
 			  break;
 		}
-		const filteredData = userWorkers.filter(user=> (user.name+user.chatId)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+		const filteredData = userWorkers.filter(user=> (user.name+user.chatId+user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
         
 		setContacts(text === '' ? arr : filteredData);      
     }, [text]);
