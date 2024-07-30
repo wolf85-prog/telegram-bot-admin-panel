@@ -615,7 +615,7 @@ https://t.me/ULEY_Office_Bot
 					<EmojiPicker 
 						open={showPicker} 
 						theme='dark'
-						height={500} 
+						height={300} 
 						width={400} 
 						onEmojiClick={onEmojiClick}
 					/>
