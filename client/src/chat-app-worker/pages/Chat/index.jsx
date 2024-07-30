@@ -35,12 +35,13 @@ const baseURL = process.env.REACT_APP_API_URL
 const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
 
 const Chat = () => {
-	const { userWorkers, setUserAsUnread, addNewMessage2 } = useUsersContext();
+	const { userWorkers, setUserAsUnread, addNewMessage2, conversations } = useUsersContext();
 	const { personW } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
 	const chatId = personW.id;
 	let user = userWorkers.filter((user) => user.chatId === chatId.toString())[0];
+	let convs = conversations.find((conv) => conv.members[0] === chatId.toString());
 
 	const lastMsgRef = useRef(null);
 	const [showAttach, setShowAttach] = useState(false);
@@ -277,8 +278,6 @@ const Chat = () => {
 		} else {
 			//отправка сообщения
 
-			let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
-
 			//Передаем данные боту
 			let temp=mess.replace(/\n/g, '%0A'); //экранирование переноса строки
 			temp = temp.replace(/#/g, '%23'); 		 //экранирование решетки
@@ -339,7 +338,7 @@ const Chat = () => {
 				message = {
 					senderId: chatAdminId, 
 					receiverId: user.chatId,
-					conversationId: client.conversationId,
+					conversationId: convs.id,
 					type: "text",
 					text: mess,
 					isBot: null,
@@ -347,12 +346,12 @@ const Chat = () => {
 				}
 
 				//сохранить в контексте
-				addNewMessage2(user.chatId, mess, 'text', '', user.conversationId, sendToTelegram.data.result.message_id, null);
+				addNewMessage2(user.chatId, mess, 'text', '', convs.id, sendToTelegram.data.result.message_id, null);
 			} else {
 				message = {
 					senderId: chatAdminId, 
 					receiverId: user.chatId,
-					conversationId: client.conversationId,
+					conversationId: convs.id,
 					type: "image",
 					text: host + image,
 					isBot: null,
@@ -360,9 +359,9 @@ const Chat = () => {
 				}
 
 				//сохранить в контексте
-				addNewMessage2(user.chatId, host + image, 'image', '', user.conversationId, sendPhotoToTelegram.data.result.message_id, null);
+				addNewMessage2(user.chatId, host + image, 'image', '', convs.id, sendPhotoToTelegram.data.result.message_id, null);
 			}
-			console.log("message send button: ", message);
+			console.log("message send: ", message);
 
 			//сохранение сообщения в базе данных
 			await newMessage(message)	

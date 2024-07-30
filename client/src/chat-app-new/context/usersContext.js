@@ -389,6 +389,7 @@ const UsersProvider = ({ children }) => {
 			//3 все беседы (conversations)
 			let convers = await getWConversations()
 			console.log("conversations: ", convers.length)
+			setConversations(convers)
 
 			//4 все сообщения бота
 			let messagesAll = await getWMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
@@ -1797,6 +1798,8 @@ function isObjectEmpty(obj) {
 			userWorkers,
 			setUserWorkers,
 			setUserWorkerAsUnread,
+			conversations, 
+			setConversations,
 			workers,
 			setWorkers,
 			workersAll,
