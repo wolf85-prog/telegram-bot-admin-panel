@@ -611,11 +611,11 @@ https://t.me/ULEY_Office_Bot
                     </CModal>
 					
 				</div>
-				<div style={{position: 'relative', zIndex: '100'}}>
+				<div style={{position: 'absolute', bottom: '70px', zIndex: '100'}}>
 					<EmojiPicker 
 						open={showPicker} 
 						theme='dark'
-						height={300} 
+						height={400} 
 						width={400} 
 						onEmojiClick={onEmojiClick}
 					/>
