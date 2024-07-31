@@ -87,6 +87,8 @@ const SoundsNotif = () => {
   const [arrInt3, setArrInt3] = useState([])
   const [arrInt4, setArrInt4] = useState([])
 
+  const arrTime = [{label: 'S', value: 'S',},{label: 'M', value: 'M',},{label: 'H',value: 'H',},]
+
   const arrH = [
     {label: 1, value: 1,},
     {label: 2, value: 2,},
@@ -301,10 +303,11 @@ const SoundsNotif = () => {
                             </CTableRow>
                           </CTableHead>
                           <CTableBody>
-                          {/* {soundNotif.map((item, index) => ( */}
-
+                            {/* 1 */}
                             <CTableRow>
-                              <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>1</CTableHeaderCell>
+                              <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
+                                1
+                              </CTableHeaderCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 {!showInterval ? valueInterval : <CFormSelect 
                                               aria-label="Default select example"
@@ -321,25 +324,13 @@ const SoundsNotif = () => {
                                     style={{width: '63px', fontSize: '12px'}}
                                     onChange={(e)=>changeTime(e, 1)}
                                     value={valueTime}
-                                    options={[
-                                      {
-                                        label: 'S',
-                                        value: 'S',
-                                      },
-                                      {
-                                        label: 'M',
-                                        value: 'M',
-                                      },
-                                      {
-                                        label: 'H',
-                                        value: 'H',
-                                      },       
-                                    ]}
+                                    options={arrTime}
                                   />
                                 }
                               </CTableDataCell>
                               <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 Запрос названия и статуса проекта
+                                <br/><span style={{fontSize: '12px'}}>ф-я getReports()</span>
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 Бот заказчиков
@@ -360,9 +351,12 @@ const SoundsNotif = () => {
                                 </CButton>
                               </CTableDataCell>
                             </CTableRow>
-
+                            
+                            {/* 2 */}
                             <CTableRow>
-                              <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>1</CTableHeaderCell>
+                              <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
+                                2
+                              </CTableHeaderCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 {!showInterval ? valueInterval2 : <CFormSelect 
                                               aria-label="Default select example"
@@ -379,25 +373,13 @@ const SoundsNotif = () => {
                                     style={{width: '63px', fontSize: '12px'}}
                                     onChange={(e)=>changeTime(e, 1)}
                                     value={valueTime2}
-                                    options={[
-                                      {
-                                        label: 'S',
-                                        value: 'S',
-                                      },
-                                      {
-                                        label: 'M',
-                                        value: 'M',
-                                      },
-                                      {
-                                        label: 'H',
-                                        value: 'H',
-                                      },       
-                                    ]}
+                                    options={arrTime}
                                   />
                                 }
                               </CTableDataCell>
                               <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 Запрос дат проекта из основного состава
+                                <br/><span style={{fontSize: '12px'}}>ф-я getReports()</span>
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 Бот заказчиков
@@ -419,8 +401,11 @@ const SoundsNotif = () => {
                               </CTableDataCell>
                             </CTableRow>
 
+                            {/* 3 */}
                             <CTableRow>
-                              <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>2</CTableHeaderCell>
+                              <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
+                                3
+                              </CTableHeaderCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 {!showInterval3 ? valueInterval3 : 
                                   <CFormSelect 
@@ -440,26 +425,20 @@ const SoundsNotif = () => {
                                     style={{width: '63px', fontSize: '12px'}}
                                     onChange={(e)=>changeTime(e, 2)}
                                     value={valueTime3}
-                                    options={[
-                                      {
-                                        label: 'S',
-                                        value: 'S',
-                                      },
-                                      {
-                                        label: 'M',
-                                        value: 'M',
-                                      },
-                                      {
-                                        label: 'H',
-                                        value: 'H',
-                                      },       
-                                    ]}
+                                    options={arrTime}
                                   />
                                 }
                               </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>Запрос №2</CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>Бот специалистов</CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}><img src={status2Icon} alt='' width='25px' /></CTableDataCell>
+                              <CTableDataCell style={{padding: '0 2px 0 2px'}}>
+                                Запрос TelegramID менеджера проекта
+                                <br/><span style={{fontSize: '12px'}}>ф-я getReports()</span>
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                Бот заказчиков
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                <img src={status1Icon} alt='' width='25px' />
+                              </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 
                                 <CButton disabled={!stopProcess2} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay2}>
@@ -473,8 +452,157 @@ const SoundsNotif = () => {
                                 </CButton>
                               </CTableDataCell>
                             </CTableRow>
-                          {/* ))
-                          }  */}
+
+                            
+                            {/* 4 */}
+                            <CTableRow>
+                              <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
+                                4
+                              </CTableHeaderCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                {!showInterval ? valueInterval : <CFormSelect 
+                                              aria-label="Default select example"
+                                              style={{width: '63px', fontSize: '12px'}}
+                                              onChange={(e)=>changeInterval(e, 1)}
+                                              value={valueInterval}
+                                              options={arrInt}
+                                            />}
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                {!showTime ? valueTime : 
+                                  <CFormSelect 
+                                    aria-label="Default select example"
+                                    style={{width: '63px', fontSize: '12px'}}
+                                    onChange={(e)=>changeTime(e, 1)}
+                                    value={valueTime}
+                                    options={arrTime}
+                                  />
+                                }
+                              </CTableDataCell>
+                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                Запрос названия и статуса проекта
+                                <br/><span style={{fontSize: '12px'}}>ф-я getReportsRestart()</span>
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                Бот заказчиков
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                <img src={status1Icon} alt='' width='25px' />
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                
+                                <CButton disabled={!stopProcess} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay}>
+                                  <img src={stopProcess ? stopIcon : stopIcon2} alt='' width='25px' />
+                                </CButton>
+                                <CButton disabled={!playProcess} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay}>
+                                  <img src={playProcess ? playIcon : playIcon2} alt='' width='25px' />
+                                </CButton> 
+                                <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(1)}>
+                                  <img src={recIcon} alt='' width='25px' />
+                                </CButton>
+                              </CTableDataCell>
+                            </CTableRow>
+                            
+                            {/* 5 */}
+                            <CTableRow>
+                              <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
+                                5
+                              </CTableHeaderCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                {!showInterval ? valueInterval2 : <CFormSelect 
+                                              aria-label="Default select example"
+                                              style={{width: '63px', fontSize: '12px'}}
+                                              onChange={(e)=>changeInterval(e, 1)}
+                                              value={valueInterval2}
+                                              options={arrInt}
+                                            />}
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                {!showTime ? valueTime : 
+                                  <CFormSelect 
+                                    aria-label="Default select example"
+                                    style={{width: '63px', fontSize: '12px'}}
+                                    onChange={(e)=>changeTime(e, 1)}
+                                    value={valueTime2}
+                                    options={arrTime}
+                                  />
+                                }
+                              </CTableDataCell>
+                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                Запрос дат проекта из основного состава
+                                <br/><span style={{fontSize: '12px'}}>ф-я getReportsRestart()</span>
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                Бот заказчиков
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                <img src={status1Icon} alt='' width='25px' />
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                
+                                <CButton disabled={!stopProcess} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay}>
+                                  <img src={stopProcess ? stopIcon : stopIcon2} alt='' width='25px' />
+                                </CButton>
+                                <CButton disabled={!playProcess} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay}>
+                                  <img src={playProcess ? playIcon : playIcon2} alt='' width='25px' />
+                                </CButton> 
+                                <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(1)}>
+                                  <img src={recIcon} alt='' width='25px' />
+                                </CButton>
+                              </CTableDataCell>
+                            </CTableRow>
+
+                            {/* 6 */}
+                            <CTableRow>
+                              <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
+                                6
+                              </CTableHeaderCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                {!showInterval3 ? valueInterval3 : 
+                                  <CFormSelect 
+                                    aria-label="Default select example"
+                                    style={{width: '63px', fontSize: '12px'}}
+                                    onChange={(e)=>changeInterval(e, 2)}
+                                    value={valueInterval3}
+                                    options={arrInt3}
+                                  />
+                                }
+                              </CTableDataCell>
+                              
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                {!showTime3 ? valueTime3 : 
+                                  <CFormSelect 
+                                    aria-label="Default select example"
+                                    style={{width: '63px', fontSize: '12px'}}
+                                    onChange={(e)=>changeTime(e, 2)}
+                                    value={valueTime3}
+                                    options={arrTime}
+                                  />
+                                }
+                              </CTableDataCell>
+                              <CTableDataCell style={{padding: '0 2px 0 2px'}}>
+                                Запрос TelegramID менеджера проекта
+                                <br/><span style={{fontSize: '12px'}}>ф-я getReportsRestart()</span>
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                Бот заказчиков
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                <img src={status1Icon} alt='' width='25px' />
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                
+                                <CButton disabled={!stopProcess2} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay2}>
+                                  <img src={stopProcess2 ? stopIcon : stopIcon2} alt='' width='25px' />
+                                </CButton>
+                                <CButton disabled={!playProcess2} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay2}>
+                                  <img src={playProcess2 ? playIcon : playIcon2} alt='' width='25px' />
+                                </CButton> 
+                                <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(2)}>
+                                  <img src={recIcon} alt='' width='25px' />
+                                </CButton>
+                              </CTableDataCell>
+                            </CTableRow>
                           </CTableBody>
                         </CTable>
                     </CCardBody>

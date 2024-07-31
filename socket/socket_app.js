@@ -185,6 +185,17 @@ io.on("connection", (socket) => {
     })  
 
 
+    // Process
+    //------------------------------------------------------------------
+    //send and get process
+    socket.on("sendProcess", ({process, data})=>{
+        io.emit("getProcess", {
+            process,
+            data,
+        })
+    })
+
+
     //when disconnect
     socket.on("disconnect", ()=> {
         removeUser(socket.id);
