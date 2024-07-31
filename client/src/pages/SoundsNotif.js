@@ -54,6 +54,7 @@ const SoundsNotif = () => {
   const [tabhub, setTabhub]= useState('');
   const [showStatic, setShowStatic]= useState(true);
   const [showProcess, setShowProcess]= useState(false);
+  const [showProcessInfo, setShowProcessInfo]= useState(false);
 
   const [playProcess, setPlayProcess]= useState(false);
   const [stopProcess, setStopProcess]= useState(true);
@@ -326,11 +327,11 @@ const SoundsNotif = () => {
                                     value={valueTime}
                                     options={arrTime}
                                   />
-                                }
+                                }                                
                               </CTableDataCell>
-                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}} onClick={()=>setShowProcessInfo(!showProcessInfo)}>
                                 Запрос названия и статуса проекта
-                                <br/><span style={{fontSize: '12px'}}>ф-я getReports()</span>
+                                {showProcessInfo ? <><br/><span style={{fontSize: '12px'}}>ф-я getReports()</span></> : ''}
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 Бот заказчиков
@@ -377,9 +378,9 @@ const SoundsNotif = () => {
                                   />
                                 }
                               </CTableDataCell>
-                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}} onClick={()=>setShowProcessInfo(!showProcessInfo)}>
                                 Запрос дат проекта из основного состава
-                                <br/><span style={{fontSize: '12px'}}>ф-я getReports()</span>
+                                {showProcessInfo ? <><br/><span style={{fontSize: '12px'}}>ф-я getReports()</span></> : ''}
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 Бот заказчиков
@@ -429,9 +430,9 @@ const SoundsNotif = () => {
                                   />
                                 }
                               </CTableDataCell>
-                              <CTableDataCell style={{padding: '0 2px 0 2px'}}>
+                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}} onClick={()=>setShowProcessInfo(!showProcessInfo)}>
                                 Запрос TelegramID менеджера проекта
-                                <br/><span style={{fontSize: '12px'}}>ф-я getReports()</span>
+                                {showProcessInfo ? <><br/><span style={{fontSize: '12px'}}>ф-я getReports()</span></> : ''}
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 Бот заказчиков
@@ -479,9 +480,9 @@ const SoundsNotif = () => {
                                   />
                                 }
                               </CTableDataCell>
-                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}} onClick={()=>setShowProcessInfo(!showProcessInfo)}>
                                 Запрос названия и статуса проекта
-                                <br/><span style={{fontSize: '12px'}}>ф-я getReportsRestart()</span>
+                                {showProcessInfo ? <><br/><span style={{fontSize: '12px'}}>ф-я getReportsRestart()</span></> : ''}
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 Бот заказчиков
@@ -528,9 +529,9 @@ const SoundsNotif = () => {
                                   />
                                 }
                               </CTableDataCell>
-                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}} onClick={()=>setShowProcessInfo(!showProcessInfo)}>
                                 Запрос дат проекта из основного состава
-                                <br/><span style={{fontSize: '12px'}}>ф-я getReportsRestart()</span>
+                                {showProcessInfo ? <><br/><span style={{fontSize: '12px'}}>ф-я getReportsRestart()</span></> : ''}
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 Бот заказчиков
@@ -580,9 +581,9 @@ const SoundsNotif = () => {
                                   />
                                 }
                               </CTableDataCell>
-                              <CTableDataCell style={{padding: '0 2px 0 2px'}}>
+                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}} onClick={()=>setShowProcessInfo(!showProcessInfo)}>
                                 Запрос TelegramID менеджера проекта
-                                <br/><span style={{fontSize: '12px'}}>ф-я getReportsRestart()</span>
+                                {showProcessInfo ? <><br/><span style={{fontSize: '12px'}}>ф-я getReportsRestart()</span></> : ''}
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 Бот заказчиков
