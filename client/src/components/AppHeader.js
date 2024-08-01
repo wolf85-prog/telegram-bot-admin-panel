@@ -73,7 +73,7 @@ const AppHeader = (props) => {
   comtags: 'опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание, опоздание',
 avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
 
-const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundMute});
+//const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundMute});
 
 
   const clickPhone = () => {

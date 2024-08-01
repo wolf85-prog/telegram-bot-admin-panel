@@ -1403,6 +1403,15 @@ const delWMessageContext = (messageId, messageDate, chatId) => {
 	})
 }
 
+
+//отправить номер процесса и данные
+const sendNumberProcess = (number, data) => {
+	socket.emit("sendProcess", { 
+		process: number,
+		data: data,
+	})
+};
+
 //===============================================================
 //                  Notifications
 //===============================================================
@@ -1844,6 +1853,7 @@ function isObjectEmpty(obj) {
 			setSoundVolume,
 			soundMute, 
 			setSoundMute,
+			sendNumberProcess,
 		}}>
 			{children}
 		</UsersContext.Provider>

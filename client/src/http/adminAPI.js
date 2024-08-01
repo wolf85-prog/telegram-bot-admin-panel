@@ -645,3 +645,17 @@ export const getPretendent= async (data) =>{
         console.log("error while calling getPretendent api", error.message);
     }
 }
+
+
+//-------------------------------------------------------------------
+
+//api бд
+export const getProcess= async (count, on) =>{
+    try {
+        let response = await $host_bot.get(`api/process/update/${count}/${on}`);
+        //console.log("projectsAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getProcess api", error.message);
+    }
+}

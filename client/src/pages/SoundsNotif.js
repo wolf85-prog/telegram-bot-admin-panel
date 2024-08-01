@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useState, useContext } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { delSoundNotif, getSoundNotif, startSoundNotif } from './../http/adminAPI.js'
+import { delSoundNotif, getProcess, getSoundNotif, startSoundNotif } from './../http/adminAPI.js'
 
 import {
   CContainer, 
@@ -47,7 +47,7 @@ import status2Icon from 'src/assets/images/status2.png'
 
 const SoundsNotif = () => {  
 
-  const { soundsNotif } = useUsersContext();
+  const { soundsNotif, sendNumberProcess } = useUsersContext();
 
   const [soundNotif, setSoundNotif] = useState([]); 
   const [activeKey, setActiveKey] = useState(2)
@@ -154,9 +154,23 @@ const SoundsNotif = () => {
     }
   }
 
-  const clickPlay = () => {
+  const clickPlay = async(ind) => {
     setPlayProcess(!playProcess)
     setStopProcess(!stopProcess)
+
+    //нажата кнопка Стоп
+    if (stopProcess) {
+      console.log("stop")
+      await getProcess(ind, false)
+      await sendNumberProcess(ind, false)
+    }
+
+    //нажата кнопка Play
+    if (playProcess) {
+      console.log("play")
+      await getProcess(ind, true)
+      await sendNumberProcess(ind, false)
+    }
   }
 
   const clickPlay2 = () => {
