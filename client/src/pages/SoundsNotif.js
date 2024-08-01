@@ -359,10 +359,10 @@ const SoundsNotif = () => {
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 
-                                <CButton disabled={!stopProcess} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay}>
+                                <CButton disabled={!stopProcess} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(1)}>
                                   <img src={stopProcess ? stopIcon : stopIcon2} alt='' width='25px' />
                                 </CButton>
-                                <CButton disabled={!playProcess} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={clickPlay}>
+                                <CButton disabled={!playProcess} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(1)}>
                                   <img src={playProcess ? playIcon : playIcon2} alt='' width='25px' />
                                 </CButton> 
                                 <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(1)}>
