@@ -1406,6 +1406,7 @@ const delWMessageContext = (messageId, messageDate, chatId) => {
 
 //отправить номер процесса и данные
 const sendNumberProcess = (number, data) => {
+	console.log("send: ", number)
 	socket.emit("sendProcess", { 
 		process: number,
 		data: data,

@@ -156,7 +156,7 @@ const SoundsNotif = () => {
     }
   }
 
-  const clickPlay = async(ind) => {
+  const clickPlay = (ind) => {
     setPlayProcess(!playProcess)
     setStopProcess(!stopProcess)
 
@@ -164,14 +164,14 @@ const SoundsNotif = () => {
     if (stopProcess) {
       console.log("stop")
       //await getProcess(ind, false)
-      await sendNumberProcess(ind, false)
+      sendNumberProcess(ind, false)
     }
 
     //нажата кнопка Play
     if (playProcess) {
       console.log("play")
       //await getProcess(ind, true)
-      await sendNumberProcess(ind, true)
+      sendNumberProcess(ind, true)
     }
   }
 
