@@ -47,7 +47,14 @@ import status2Icon from 'src/assets/images/status2.png'
 
 const SoundsNotif = () => {  
 
-  const { soundsNotif, sendNumberProcess, statusProcess, statusProcess6 } = useUsersContext();
+  const { soundsNotif, 
+    sendNumberProcess, 
+    statusProcess, 
+    statusProcess2, 
+    statusProcess3, 
+    statusProcess4, 
+    statusProcess5, 
+    statusProcess6 } = useUsersContext();
 
   const [loadingIframe, setLoadingIframe] = useState(true);
 
@@ -484,7 +491,7 @@ const SoundsNotif = () => {
                                 Бот заказчиков
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                <img src={status1Icon} alt='' width='25px' />
+                                {statusProcess2 ? <img src={status1Icon} alt='' width='25px' /> : <img src={status2Icon} alt='' width='25px' />}
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 
@@ -536,7 +543,7 @@ const SoundsNotif = () => {
                                 Бот заказчиков
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                <img src={status1Icon} alt='' width='25px' />
+                                {statusProcess3 ? <img src={status1Icon} alt='' width='25px' /> : <img src={status2Icon} alt='' width='25px' />}
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 
@@ -586,7 +593,7 @@ const SoundsNotif = () => {
                                 Бот заказчиков
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                <img src={status1Icon} alt='' width='25px' />
+                                {statusProcess4 ? <img src={status1Icon} alt='' width='25px' /> : <img src={status2Icon} alt='' width='25px' />}
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 
@@ -638,7 +645,7 @@ const SoundsNotif = () => {
                                 Бот заказчиков
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                <img src={status1Icon} alt='' width='25px' />
+                                {statusProcess5 ? <img src={status1Icon} alt='' width='25px' /> : <img src={status2Icon} alt='' width='25px' />}
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 

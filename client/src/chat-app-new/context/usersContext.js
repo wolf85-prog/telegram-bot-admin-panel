@@ -115,6 +115,11 @@ const UsersProvider = ({ children }) => {
 	const [projectsNew, setProjectsNew] = useState([])
 
 	const [statusProcess, setStatusProcess] = useState(true)
+	const [statusProcess2, setStatusProcess2] = useState(true)
+	const [statusProcess3, setStatusProcess3] = useState(true)
+	const [statusProcess4, setStatusProcess4] = useState(true)
+	const [statusProcess5, setStatusProcess5] = useState(true)
+	const [statusProcess6, setStatusProcess6] = useState(true)
 
 	const [showGetMess, setShowGetMess ] = useState(false);
 
@@ -1867,7 +1872,11 @@ function isObjectEmpty(obj) {
 			setSoundMute,
 			sendNumberProcess,
 			statusProcess, 
-			setStatusProcess,
+			statusProcess2, 
+			statusProcess3, 
+			statusProcess4, 
+			statusProcess5, 
+			statusProcess6,
 		}}>
 			{children}
 		</UsersContext.Provider>
