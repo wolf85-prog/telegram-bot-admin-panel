@@ -923,8 +923,8 @@ const UsersProvider = ({ children }) => {
 	//получить процесс
 	const fetchProcess = async (dataAll) => {
 		console.log("Ответ о процессу получен: ", dataAll)
-		const { process, on } = dataAll
-		setStatusProcess(on)
+		const { process, data } = dataAll
+		setStatusProcess(data)
 	}
 
 //------------------------------------------------------------------------------------
