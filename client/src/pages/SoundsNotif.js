@@ -47,7 +47,7 @@ import status2Icon from 'src/assets/images/status2.png'
 
 const SoundsNotif = () => {  
 
-  const { soundsNotif, sendNumberProcess } = useUsersContext();
+  const { soundsNotif, sendNumberProcess, statusProcess } = useUsersContext();
 
   const [loadingIframe, setLoadingIframe] = useState(true);
 
@@ -355,7 +355,7 @@ const SoundsNotif = () => {
                                 Бот заказчиков
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                <img src={status1Icon} alt='' width='25px' />
+                                {statusProcess ? <img src={status1Icon} alt='' width='25px' /> : <img src={status2Icon} alt='' width='25px' />}
                               </CTableDataCell>
                               <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                 
@@ -370,7 +370,7 @@ const SoundsNotif = () => {
                                 </CButton>
                               </CTableDataCell>
                             </CTableRow>
-                            
+ {/* ---------------------------------------------------------------------------------------------------------------------------------- */}                           
                             {/* 2 */}
                             <CTableRow>
                               <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
@@ -419,7 +419,7 @@ const SoundsNotif = () => {
                                 </CButton>
                               </CTableDataCell>
                             </CTableRow>
-
+{/* ---------------------------------------------------------------------------------------------------------------------------------- */}
                             {/* 3 */}
                             <CTableRow>
                               <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
@@ -472,7 +472,7 @@ const SoundsNotif = () => {
                               </CTableDataCell>
                             </CTableRow>
 
-                            
+{/* ---------------------------------------------------------------------------------------------------------------------------------- */}                            
                             {/* 4 */}
                             <CTableRow>
                               <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
@@ -521,7 +521,7 @@ const SoundsNotif = () => {
                                 </CButton>
                               </CTableDataCell>
                             </CTableRow>
-                            
+{/* ---------------------------------------------------------------------------------------------------------------------------------- */}                            
                             {/* 5 */}
                             <CTableRow>
                               <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
@@ -573,7 +573,7 @@ const SoundsNotif = () => {
                                 </CButton>
                               </CTableDataCell>
                             </CTableRow>
-
+{/* ---------------------------------------------------------------------------------------------------------------------------------- */}
                             {/* 6 */}
                             <CTableRow>
                               <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>

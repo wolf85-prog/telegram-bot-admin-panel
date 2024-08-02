@@ -114,6 +114,8 @@ const UsersProvider = ({ children }) => {
 
 	const [projectsNew, setProjectsNew] = useState([])
 
+	const [statusProcess, setStatusProcess] = useState(true)
+
 	const [showGetMess, setShowGetMess ] = useState(false);
 
 	const [soundVolume, setSoundVolume] = useState(() => {
@@ -918,6 +920,12 @@ const UsersProvider = ({ children }) => {
 		setDistributionsWork(all)
 	}
 
+	//получить процесс
+	const fetchProcess = async (dataAll) => {
+		const { process, on } = dataAll
+		setStatusProcess(on)
+	}
+
 //------------------------------------------------------------------------------------
 	useEffect(() => {
 		socket.on("getMessage", fetchMessageResponse);
@@ -932,6 +940,8 @@ const UsersProvider = ({ children }) => {
 		socket.on("getNotif", fetchNotifAdmin);
 
 		socket.on("getDistrib", fetchDistribution);
+
+		socket.on("getProcess", fetchProcess);
 
 		socket.on("start_typing", setUserAsTyping);
 		socket.on("stop_typing", setUserAsNotTyping);
@@ -1855,6 +1865,8 @@ function isObjectEmpty(obj) {
 			soundMute, 
 			setSoundMute,
 			sendNumberProcess,
+			statusProcess, 
+			setStatusProcess,
 		}}>
 			{children}
 		</UsersContext.Provider>
