@@ -165,14 +165,20 @@ const SoundsNotif = () => {
 
   useEffect(() => {
 
-      setArrInt(arrH)
-      setArrInt2(arrH)
-      setArrInt3(arrH)
-      setArrInt4(arrH)
-      setArrInt5(arrH)
-      setArrInt6(arrH)
+    const fetchData = async() => {
+      console.log("Открываю страницу Звуковые уведомления")
+    }
 
-      const arr = [
+    fetchData();
+
+    setArrInt(arrH)
+    setArrInt2(arrH)
+    setArrInt3(arrH)
+    setArrInt4(arrH)
+    setArrInt5(arrH)
+    setArrInt6(arrH)
+
+    const arr = [
         {
           interval: valueInterval, 
           process: 'Запрос названия и статуса проекта', 
@@ -253,35 +259,45 @@ const SoundsNotif = () => {
         } 
       ]
 
-      setProcessAll(arr)
-  
-      const fetchData = async() => {
-        console.log("Открываю страницу Звуковые уведомления")
+      //setProcessAll(arr)
+
+    //console.log(arr)
+    if (clickSort) {
+      if (sortInterval) {
+        arr.sort((a,b)=> a.interval - b.interval)
+        setProcessAll(arr)
+      } else {
+        arr.sort((a,b)=> b.interval - a.interval)
+        setProcessAll(arr)
       }
-      //fetchData();
+    } else {
+      setProcessAll(arr)
+    }
+    
       
-  }, []);
+  }, [clickSort, sortInterval]);
 
-  useEffect(() => {
-    if (sortInterval) {
-      processAll.sort((a,b)=> a.interval - b.interval)
-      setProcessAll(processAll)
-    } else {
-      processAll.sort((a,b)=> b.interval - a.interval)
-      setProcessAll(processAll)
-    }
+  // useEffect(() => {
+  //   console.log(sortInterval)
+  //   // if (sortInterval) {
+  //   //   processAll.sort((a,b)=> a.interval - b.interval)
+  //   //   setProcessAll(processAll)
+  //   // } else {
+  //   //   processAll.sort((a,b)=> b.interval - a.interval)
+  //   //   setProcessAll(processAll)
+  //   // }
 
-  }, [sortInterval]);
+  // }, [sortInterval]);
 
-  useEffect(() => {
-    if (sortTime) {
-      processAll.sort((a,b)=> a.time - b.time)
-      setProcessAll(processAll)
-    } else {
-      processAll.sort((a,b)=> b.time - a.time)
-      setProcessAll(processAll)
-    }
-  }, [sortTime]);
+  // useEffect(() => {
+  //   if (sortTime) {
+  //     processAll.sort((a,b)=> a.time - b.time)
+  //     setProcessAll(processAll)
+  //   } else {
+  //     processAll.sort((a,b)=> b.time - a.time)
+  //     setProcessAll(processAll)
+  //   }
+  // }, [sortTime, processAll]);
 
   const openHub = (hub) => {
     if (hub === 'Static') { 
@@ -534,7 +550,8 @@ const SoundsNotif = () => {
 
 
   const sortInt = () => {
-    //setClickSort(true)
+    setClickSort(true)
+    //console.log(!sortInterval)
     setSortInterval(!sortInterval)
   }
 
