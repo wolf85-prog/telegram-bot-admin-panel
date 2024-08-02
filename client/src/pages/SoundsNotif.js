@@ -120,6 +120,12 @@ const SoundsNotif = () => {
   const [arrInt5, setArrInt5] = useState([])
   const [arrInt6, setArrInt6] = useState([])
 
+  const [sortInterval, setSortInterval] = useState(false)
+  const [sortTime, setSortTime] = useState(false)
+  const [clickSort, setClickSort] = useState(false)
+
+  const [processAll, setProcessAll] = useState([])
+
   const arrTime = [{label: 'S', value: 'S',},{label: 'M', value: 'M',},{label: 'H',value: 'H',},]
 
   const arrH = [
@@ -165,6 +171,89 @@ const SoundsNotif = () => {
       setArrInt4(arrH)
       setArrInt5(arrH)
       setArrInt6(arrH)
+
+      const arr = [
+        {
+          interval: valueInterval, 
+          process: 'Запрос названия и статуса проекта', 
+          dop: 'getReports()',
+          resurs: 'Бот заказчиков',
+          time: valueTime, 
+          status: statusProcess,
+          play: playProcess,
+          stop: stopProcess,
+          info: showProcessInfo,
+          showInterval: showInterval,
+          showTime: showTime,
+        }, 
+        {
+          interval: valueInterval2, 
+          process: 'Запрос дат проекта из основного состава', 
+          dop: 'getReports()',
+          resurs: 'Бот заказчиков',
+          time: valueTime2, 
+          status: statusProcess2,
+          play: playProcess2,
+          stop: stopProcess2,
+          info: showProcessInfo2,
+          showInterval: showInterval2,
+          showTime: showTime2,
+        }, 
+        {
+          interval: valueInterval3, 
+          process: 'Запрос TelegramID менеджера проекта', 
+          dop: 'getReports()',
+          resurs: 'Бот заказчиков',
+          time: valueTime3, 
+          status: statusProcess3,
+          play: playProcess3,
+          stop: stopProcess3,
+          info: showProcessInfo3,
+          showInterval: showInterval3,
+          showTime: showTime3,
+        },
+        {
+          interval: valueInterval4, 
+          process: 'Запрос названия и статуса проекта', 
+          dop: 'getReportsRestart()',
+          resurs: 'Бот заказчиков',
+          time: valueTime4, 
+          status: statusProcess4,
+          play: playProcess4,
+          stop: stopProcess4,
+          info: showProcessInfo4,
+          showInterval: showInterval4,
+          showTime: showTime4,
+        },
+        {
+          interval: valueInterval5, 
+          process: 'Запрос дат проекта из основного состава', 
+          dop: 'getReportsRestart()',
+          resurs: 'Бот заказчиков',
+          time: valueTime5, 
+          status: statusProcess5,
+          play: playProcess5,
+          stop: stopProcess5,
+          info: showProcessInfo5,
+          showInterval: showInterval5,
+          showTime: showTime5,
+        },
+        {
+          interval: valueInterval6, 
+          process: 'Запрос TelegramID менеджера проекта', 
+          dop: 'getReportsRestart()',
+          resurs: 'Бот заказчиков',
+          time: valueTime6, 
+          status: statusProcess6,
+          play: playProcess6,
+          stop: stopProcess6,
+          info: showProcessInfo6,
+          showInterval: showInterval6,
+          showTime: showTime6,
+        } 
+      ]
+
+      setProcessAll(arr)
   
       const fetchData = async() => {
         console.log("Открываю страницу Звуковые уведомления")
@@ -173,6 +262,26 @@ const SoundsNotif = () => {
       
   }, []);
 
+  useEffect(() => {
+    if (sortInterval) {
+      processAll.sort((a,b)=> a.interval - b.interval)
+      setProcessAll(processAll)
+    } else {
+      processAll.sort((a,b)=> b.interval - a.interval)
+      setProcessAll(processAll)
+    }
+
+  }, [sortInterval]);
+
+  useEffect(() => {
+    if (sortTime) {
+      processAll.sort((a,b)=> a.time - b.time)
+      setProcessAll(processAll)
+    } else {
+      processAll.sort((a,b)=> b.time - a.time)
+      setProcessAll(processAll)
+    }
+  }, [sortTime]);
 
   const openHub = (hub) => {
     if (hub === 'Static') { 
@@ -187,6 +296,28 @@ const SoundsNotif = () => {
       setActiveKey(1)
       setTabhub('Process')
     }
+  }
+
+  const clickInfo = (ind, info) => {
+    if (ind === 1) {
+      setShowProcessInfo(!info)
+    } 
+    else if (ind === 2) {
+      setShowProcessInfo2(!info)
+    }
+    else if (ind === 3) {
+      setShowProcessInfo3(!info)
+    }
+    else if (ind === 4) {
+      setShowProcessInfo4(!info)
+    }
+    else if (ind === 5) {
+      setShowProcessInfo5(!info)
+    }
+    else if (ind === 6) {
+      setShowProcessInfo6(!info)
+    }
+    
   }
 
   const clickPlay = (ind) => {
@@ -299,6 +430,22 @@ const SoundsNotif = () => {
       setShowInterval2(false)
       setValueInterval2(val)
     }
+    else if (ind === 3) {
+      setShowInterval3(false)
+      setValueInterval3(val)
+    }
+    else if (ind === 4) {
+      setShowInterval4(false)
+      setValueInterval4(val)
+    }
+    else if (ind === 5) {
+      setShowInterval5(false)
+      setValueInterval5(val)
+    }
+    else if (ind === 6) {
+      setShowInterval6(false)
+      setValueInterval6(val)
+    }
     
   }
 
@@ -330,10 +477,71 @@ const SoundsNotif = () => {
         setArrInt2(arrM)
       } 
     }
+
+    else if (ind === 3) {
+      setShowTime3(false)
+      setValueTime3(val)
+
+      if (val === 'M') {
+        setArrInt3(arrM)
+      } else if (val === 'H') {
+        setArrInt3(arrH)
+      } else if (val === 'S') {
+        setArrInt3(arrM)
+      } 
+    }
+
+    else if (ind === 4) {
+      setShowTime4(false)
+      setValueTime4(val)
+
+      if (val === 'M') {
+        setArrInt4(arrM)
+      } else if (val === 'H') {
+        setArrInt4(arrH)
+      } else if (val === 'S') {
+        setArrInt4(arrM)
+      } 
+    }
+
+    else if (ind === 5) {
+      setShowTime5(false)
+      setValueTime5(val)
+
+      if (val === 'M') {
+        setArrInt5(arrM)
+      } else if (val === 'H') {
+        setArrInt5(arrH)
+      } else if (val === 'S') {
+        setArrInt5(arrM)
+      } 
+    }
+
+    else if (ind === 6) {
+      setShowTime6(false)
+      setValueTime6(val)
+
+      if (val === 'M') {
+        setArrInt6(arrM)
+      } else if (val === 'H') {
+        setArrInt6(arrH)
+      } else if (val === 'S') {
+        setArrInt6(arrM)
+      } 
+    }
     
   }
 
 
+  const sortInt = () => {
+    //setClickSort(true)
+    setSortInterval(!sortInterval)
+  }
+
+  const sortT = () => {
+    //setClickSort(true)
+    setSortTime(!sortTime)
+  }
 
   return (
     <div className='dark-theme'>
@@ -400,8 +608,8 @@ const SoundsNotif = () => {
                           <CTableHead>
                             <CTableRow>
                               <CTableHeaderCell scope="col" className="text-center" style={{width: '50px'}}>№</CTableHeaderCell>
-                              <CTableHeaderCell scope="col" className="text-center" style={{width: '90px'}}>Интервал</CTableHeaderCell>
-                              <CTableHeaderCell scope="col" className="text-center" style={{width: '90px'}}>Время</CTableHeaderCell>
+                              <CTableHeaderCell onClick={sortInt} scope="col" className="text-center" style={{width: '90px', cursor: 'pointer'}}>Интервал</CTableHeaderCell>
+                              <CTableHeaderCell onClick={sortT} scope="col" className="text-center" style={{width: '90px', cursor: 'pointer'}}>Время</CTableHeaderCell>
                               <CTableHeaderCell scope="col" className="text-center">Запрос</CTableHeaderCell>
                               <CTableHeaderCell scope="col" className="text-center" style={{width: '150px'}}>Ресурс</CTableHeaderCell>
                               <CTableHeaderCell scope="col" className="text-center" style={{width: '90px'}}>Статус</CTableHeaderCell>   
@@ -410,308 +618,58 @@ const SoundsNotif = () => {
                           </CTableHead>
                           <CTableBody>
                             {/* 1 */}
-                            <CTableRow>
-                              <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
-                                1
-                              </CTableHeaderCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {!showInterval ? valueInterval : <CFormSelect 
-                                              aria-label="Default select example"
-                                              style={{width: '63px', fontSize: '12px'}}
-                                              onChange={(e)=>changeInterval(e, 1)}
-                                              value={valueInterval}
-                                              options={arrInt}
-                                            />}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {!showTime ? valueTime : 
-                                  <CFormSelect 
-                                    aria-label="Default select example"
-                                    style={{width: '63px', fontSize: '12px'}}
-                                    onChange={(e)=>changeTime(e, 1)}
-                                    value={valueTime}
-                                    options={arrTime}
-                                  />
-                                }                                
-                              </CTableDataCell>
-                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}} onClick={()=>setShowProcessInfo(!showProcessInfo)}>
-                                Запрос названия и статуса проекта
-                                {showProcessInfo ? <><br/><span style={{fontSize: '12px', color: '#8a93a2'}}>getReports()</span></> : ''}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                Бот заказчиков
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {statusProcess ? <img src={status1Icon} alt='' width='25px' /> : <img src={status2Icon} alt='' width='25px' />}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                
-                                <CButton disabled={!stopProcess} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(1)}>
-                                  <img src={stopProcess ? stopIcon : stopIcon2} alt='' width='25px' />
-                                </CButton>
-                                <CButton disabled={!playProcess} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(1)}>
-                                  <img src={playProcess ? playIcon : playIcon2} alt='' width='25px' />
-                                </CButton> 
-                                <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(1)}>
-                                  <img src={recIcon} alt='' width='25px' />
-                                </CButton>
-                              </CTableDataCell>
-                            </CTableRow>
- {/* ---------------------------------------------------------------------------------------------------------------------------------- */}                           
-                            {/* 2 */}
-                            <CTableRow>
-                              <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
-                                2
-                              </CTableHeaderCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {!showInterval2 ? valueInterval2 : <CFormSelect 
-                                              aria-label="Default select example"
-                                              style={{width: '63px', fontSize: '12px'}}
-                                              onChange={(e)=>changeInterval(e, 1)}
-                                              value={valueInterval2}
-                                              options={arrInt2}
-                                            />}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {!showTime2 ? valueTime2 : 
-                                  <CFormSelect 
-                                    aria-label="Default select example"
-                                    style={{width: '63px', fontSize: '12px'}}
-                                    onChange={(e)=>changeTime(e, 1)}
-                                    value={valueTime2}
-                                    options={arrTime}
-                                  />
-                                }
-                              </CTableDataCell>
-                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}} onClick={()=>setShowProcessInfo2(!showProcessInfo2)}>
-                                Запрос дат проекта из основного состава
-                                {showProcessInfo2 ? <><br/><span style={{fontSize: '12px', color: '#8a93a2'}}>getReports()</span></> : ''}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                Бот заказчиков
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {statusProcess2 ? <img src={status1Icon} alt='' width='25px' /> : <img src={status2Icon} alt='' width='25px' />}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                
-                                <CButton disabled={!stopProcess2} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(2)}>
-                                  <img src={stopProcess2 ? stopIcon : stopIcon2} alt='' width='25px' />
-                                </CButton>
-                                <CButton disabled={!playProcess2} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(2)}>
-                                  <img src={playProcess2 ? playIcon : playIcon2} alt='' width='25px' />
-                                </CButton> 
-                                <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(1)}>
-                                  <img src={recIcon} alt='' width='25px' />
-                                </CButton>
-                              </CTableDataCell>
-                            </CTableRow>
-{/* ---------------------------------------------------------------------------------------------------------------------------------- */}
-                            {/* 3 */}
-                            <CTableRow>
-                              <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
-                                3
-                              </CTableHeaderCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {!showInterval3 ? valueInterval3 : 
-                                  <CFormSelect 
-                                    aria-label="Default select example"
-                                    style={{width: '63px', fontSize: '12px'}}
-                                    onChange={(e)=>changeInterval(e, 2)}
-                                    value={valueInterval3}
-                                    options={arrInt3}
-                                  />
-                                }
-                              </CTableDataCell>
-                              
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {!showTime3 ? valueTime3 : 
-                                  <CFormSelect 
-                                    aria-label="Default select example"
-                                    style={{width: '63px', fontSize: '12px'}}
-                                    onChange={(e)=>changeTime(e, 2)}
-                                    value={valueTime3}
-                                    options={arrTime}
-                                  />
-                                }
-                              </CTableDataCell>
-                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}} onClick={()=>setShowProcessInfo3(!showProcessInfo3)}>
-                                Запрос TelegramID менеджера проекта
-                                {showProcessInfo3 ? <><br/><span style={{fontSize: '12px', color: '#8a93a2'}}>getReports()</span></> : ''}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                Бот заказчиков
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {statusProcess3 ? <img src={status1Icon} alt='' width='25px' /> : <img src={status2Icon} alt='' width='25px' />}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                
-                                <CButton disabled={!stopProcess3} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(3)}>
-                                  <img src={stopProcess2 ? stopIcon : stopIcon2} alt='' width='25px' />
-                                </CButton>
-                                <CButton disabled={!playProcess3} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(3)}>
-                                  <img src={playProcess3 ? playIcon : playIcon2} alt='' width='25px' />
-                                </CButton> 
-                                <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(3)}>
-                                  <img src={recIcon} alt='' width='25px' />
-                                </CButton>
-                              </CTableDataCell>
-                            </CTableRow>
+                            {processAll.map((item, index) => (
+                              <CTableRow key={index}>
+                                <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
+                                  {index+1}
+                                </CTableHeaderCell>
+                                <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                  {!item.showInterval ? item.interval : <CFormSelect 
+                                                aria-label="Default select example"
+                                                style={{width: '63px', fontSize: '12px'}}
+                                                onChange={(e)=>changeInterval(e, 1)}
+                                                value={valueInterval}
+                                                options={arrInt}
+                                              />}
+                                </CTableDataCell>
+                                <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                  {!item.showTime ? item.time : 
+                                    <CFormSelect 
+                                      aria-label="Default select example"
+                                      style={{width: '63px', fontSize: '12px'}}
+                                      onChange={(e)=>changeTime(e, index+1)}
+                                      value={item.time}
+                                      options={arrTime}
+                                    />
+                                  }                                
+                                </CTableDataCell>
+                                <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px', cursor: 'pointer'}} onClick={()=>clickInfo(index+1, item.info)}>
+                                  {item.process}
+                                  {item.info ? <><br/><span style={{fontSize: '12px', color: '#8a93a2'}}>{item.dop}</span></> : ''}
+                                </CTableDataCell>
+                                <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                  {item.resurs}
+                                </CTableDataCell>
+                                <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                  {item.status ? <img src={status1Icon} alt='' width='25px' /> : <img src={status2Icon} alt='' width='25px' />}
+                                </CTableDataCell>
+                                <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                  
+                                  <CButton disabled={!item.stop} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index+1)}>
+                                    <img src={item.stop ? stopIcon : stopIcon2} alt='' width='25px' />
+                                  </CButton>
+                                  <CButton disabled={!item.play} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index+1)}>
+                                    <img src={item.play ? playIcon : playIcon2} alt='' width='25px' />
+                                  </CButton> 
+                                  <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(index+1)}>
+                                    <img src={recIcon} alt='' width='25px' />
+                                  </CButton>
+                                </CTableDataCell>
+                              </CTableRow>
+                              ))
+                            }
 
-{/* ---------------------------------------------------------------------------------------------------------------------------------- */}                            
-                            {/* 4 */}
-                            <CTableRow>
-                              <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
-                                4
-                              </CTableHeaderCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {!showInterval4 ? valueInterval4 : <CFormSelect 
-                                              aria-label="Default select example"
-                                              style={{width: '63px', fontSize: '12px'}}
-                                              onChange={(e)=>changeInterval(e, 1)}
-                                              value={valueInterval4}
-                                              options={arrInt4}
-                                            />}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {!showTime4 ? valueTime4 : 
-                                  <CFormSelect 
-                                    aria-label="Default select example"
-                                    style={{width: '63px', fontSize: '12px'}}
-                                    onChange={(e)=>changeTime(e, 1)}
-                                    value={valueTime4}
-                                    options={arrTime}
-                                  />
-                                }
-                              </CTableDataCell>
-                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}} onClick={()=>setShowProcessInfo4(!showProcessInfo4)}>
-                                Запрос названия и статуса проекта
-                                {showProcessInfo4 ? <><br/><span style={{fontSize: '12px', color: '#8a93a2'}}>getReportsRestart()</span></> : ''}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                Бот заказчиков
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {statusProcess4 ? <img src={status1Icon} alt='' width='25px' /> : <img src={status2Icon} alt='' width='25px' />}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                
-                                <CButton disabled={!stopProcess4} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(4)}>
-                                  <img src={stopProcess4 ? stopIcon : stopIcon2} alt='' width='25px' />
-                                </CButton>
-                                <CButton disabled={!playProcess4} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(4)}>
-                                  <img src={playProcess4 ? playIcon : playIcon2} alt='' width='25px' />
-                                </CButton> 
-                                <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(4)}>
-                                  <img src={recIcon} alt='' width='25px' />
-                                </CButton>
-                              </CTableDataCell>
-                            </CTableRow>
-{/* ---------------------------------------------------------------------------------------------------------------------------------- */}                            
-                            {/* 5 */}
-                            <CTableRow>
-                              <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
-                                5
-                              </CTableHeaderCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {!showInterval5 ? valueInterval5 : <CFormSelect 
-                                              aria-label="Default select example"
-                                              style={{width: '63px', fontSize: '12px'}}
-                                              onChange={(e)=>changeInterval(e, 1)}
-                                              value={valueInterval5}
-                                              options={arrInt5}
-                                            />}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {!showTime5 ? valueTime5 : 
-                                  <CFormSelect 
-                                    aria-label="Default select example"
-                                    style={{width: '63px', fontSize: '12px'}}
-                                    onChange={(e)=>changeTime(e, 1)}
-                                    value={valueTime5}
-                                    options={arrTime}
-                                  />
-                                }
-                              </CTableDataCell>
-                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}} onClick={()=>setShowProcessInfo5(!showProcessInfo5)}>
-                                Запрос дат проекта из основного состава
-                                {showProcessInfo5 ? 
-                                <>
-                                  <br/><span style={{fontSize: '12px', color: '#8a93a2'}}>getReportsRestart()</span>
-                                </> : ''}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                Бот заказчиков
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {statusProcess5 ? <img src={status1Icon} alt='' width='25px' /> : <img src={status2Icon} alt='' width='25px' />}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                
-                                <CButton disabled={!stopProcess5} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(5)}>
-                                  <img src={stopProcess5 ? stopIcon : stopIcon2} alt='' width='25px' />
-                                </CButton>
-                                <CButton disabled={!playProcess5} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(5)}>
-                                  <img src={playProcess5 ? playIcon : playIcon2} alt='' width='25px' />
-                                </CButton> 
-                                <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(5)}>
-                                  <img src={recIcon} alt='' width='25px' />
-                                </CButton>
-                              </CTableDataCell>
-                            </CTableRow>
-{/* ---------------------------------------------------------------------------------------------------------------------------------- */}
-                            {/* 6 */}
-                            <CTableRow>
-                              <CTableHeaderCell scope="row" className="text-center" style={{verticalAlign: 'middle'}}>
-                                6
-                              </CTableHeaderCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {!showInterval6 ? valueInterval6 : 
-                                  <CFormSelect 
-                                    aria-label="Default select example"
-                                    style={{width: '63px', fontSize: '12px'}}
-                                    onChange={(e)=>changeInterval(e, 6)}
-                                    value={valueInterval6}
-                                    options={arrInt6}
-                                  />
-                                }
-                              </CTableDataCell>
-                              
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {!showTime6 ? valueTime6 : 
-                                  <CFormSelect 
-                                    aria-label="Default select example"
-                                    style={{width: '63px', fontSize: '12px'}}
-                                    onChange={(e)=>changeTime(e, 6)}
-                                    value={valueTime6}
-                                    options={arrTime}
-                                  />
-                                }
-                              </CTableDataCell>
-                              <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}} onClick={()=>setShowProcessInfo6(!showProcessInfo6)}>
-                                Запрос TelegramID менеджера проекта
-                                {showProcessInfo6 ? <><br/><span style={{fontSize: '12px', color: '#8a93a2'}}>getReportsRestart()</span></> : ''}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                Бот заказчиков
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                {statusProcess6 ? <img src={status1Icon} alt='' width='25px' /> : <img src={status2Icon} alt='' width='25px' />}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                
-                                <CButton disabled={!stopProcess6} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(6)}>
-                                  <img src={stopProcess6 ? stopIcon : stopIcon2} alt='' width='25px' />
-                                </CButton>
-                                <CButton disabled={!playProcess6} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(6)}>
-                                  <img src={playProcess6 ? playIcon : playIcon2} alt='' width='25px' />
-                                </CButton> 
-                                <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(6)}>
-                                  <img src={recIcon} alt='' width='25px' />
-                                </CButton>
-                              </CTableDataCell>
-                            </CTableRow>
+
                           </CTableBody>
                         </CTable>
                     </CCardBody>
