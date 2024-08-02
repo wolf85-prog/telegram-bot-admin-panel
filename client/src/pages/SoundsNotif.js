@@ -275,29 +275,8 @@ const SoundsNotif = () => {
     }
     
       
-  }, [clickSort, sortInterval]);
+  }, [clickSort, sortInterval, statusProcess, statusProcess2]);
 
-  // useEffect(() => {
-  //   console.log(sortInterval)
-  //   // if (sortInterval) {
-  //   //   processAll.sort((a,b)=> a.interval - b.interval)
-  //   //   setProcessAll(processAll)
-  //   // } else {
-  //   //   processAll.sort((a,b)=> b.interval - a.interval)
-  //   //   setProcessAll(processAll)
-  //   // }
-
-  // }, [sortInterval]);
-
-  // useEffect(() => {
-  //   if (sortTime) {
-  //     processAll.sort((a,b)=> a.time - b.time)
-  //     setProcessAll(processAll)
-  //   } else {
-  //     processAll.sort((a,b)=> b.time - a.time)
-  //     setProcessAll(processAll)
-  //   }
-  // }, [sortTime, processAll]);
 
   const openHub = (hub) => {
     if (hub === 'Static') { 
