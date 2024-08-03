@@ -929,7 +929,14 @@ const UsersProvider = ({ children }) => {
 	const fetchProcess = async (dataAll) => {
 		console.log("Ответ о процессу получен: ", dataAll)
 		const { process, data } = dataAll
-		setStatusProcess(data)
+
+		if (process === '1') {
+			setStatusProcess(data)
+		}
+		else if (process === '2') {
+			setStatusProcess2(data)
+		}
+		
 	}
 
 //------------------------------------------------------------------------------------

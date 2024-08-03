@@ -1375,7 +1375,7 @@ useEffect(() => {
 {showCharts4 ?  <CWidgetStatsA
                   ref={grafik}
                   className="mb-4 box"
-                  color="dark"
+                  color="green"
                   value={<></>}
                   title={new Date().getFullYear()}
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
