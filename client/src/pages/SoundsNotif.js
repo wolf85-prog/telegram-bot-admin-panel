@@ -71,18 +71,18 @@ const SoundsNotif = () => {
   const [showProcessInfo5, setShowProcessInfo5]= useState(false);
   const [showProcessInfo6, setShowProcessInfo6]= useState(false);
 
-  const [playProcess, setPlayProcess]= useState(false);
-  const [stopProcess, setStopProcess]= useState(true);
-  const [playProcess2, setPlayProcess2]= useState(false);
-  const [stopProcess2, setStopProcess2]= useState(true);
-  const [playProcess3, setPlayProcess3]= useState(false);
-  const [stopProcess3, setStopProcess3]= useState(true);
-  const [playProcess4, setPlayProcess4]= useState(false);
-  const [stopProcess4, setStopProcess4]= useState(true);
-  const [playProcess5, setPlayProcess5]= useState(false);
-  const [stopProcess5, setStopProcess5]= useState(true);
-  const [playProcess6, setPlayProcess6]= useState(false);
-  const [stopProcess6, setStopProcess6]= useState(true);
+  const [playProcess, setPlayProcess]= useState(true);
+  const [stopProcess, setStopProcess]= useState(false);
+  const [playProcess2, setPlayProcess2]= useState(true);
+  const [stopProcess2, setStopProcess2]= useState(false);
+  const [playProcess3, setPlayProcess3]= useState(true);
+  const [stopProcess3, setStopProcess3]= useState(false);
+  const [playProcess4, setPlayProcess4]= useState(true);
+  const [stopProcess4, setStopProcess4]= useState(false);
+  const [playProcess5, setPlayProcess5]= useState(true);
+  const [stopProcess5, setStopProcess5]= useState(false);
+  const [playProcess6, setPlayProcess6]= useState(true);
+  const [stopProcess6, setStopProcess6]= useState(false);
 
   const [showInterval, setShowInterval]= useState(false);
   const [showTime, setShowTime]= useState(false);

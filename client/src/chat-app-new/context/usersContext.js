@@ -114,12 +114,12 @@ const UsersProvider = ({ children }) => {
 
 	const [projectsNew, setProjectsNew] = useState([])
 
-	const [statusProcess, setStatusProcess] = useState(true)
-	const [statusProcess2, setStatusProcess2] = useState(true)
-	const [statusProcess3, setStatusProcess3] = useState(true)
-	const [statusProcess4, setStatusProcess4] = useState(true)
-	const [statusProcess5, setStatusProcess5] = useState(true)
-	const [statusProcess6, setStatusProcess6] = useState(true)
+	const [statusProcess, setStatusProcess] = useState(false)
+	const [statusProcess2, setStatusProcess2] = useState(false)
+	const [statusProcess3, setStatusProcess3] = useState(false)
+	const [statusProcess4, setStatusProcess4] = useState(false)
+	const [statusProcess5, setStatusProcess5] = useState(false)
+	const [statusProcess6, setStatusProcess6] = useState(false)
 
 	const [showGetMess, setShowGetMess ] = useState(false);
 
