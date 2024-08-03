@@ -164,8 +164,9 @@
     --cui-bg-info: #5299e0;
     --cui-bg-warning: #d5a439;
     --cui-bg-danger: #c77171;
-    --cui-bg-light: hsla(0,0%,100%,.1);
-    --cui-bg-dark: rgba(0,0,21,.1);
+    --cui-bg-light: hsla(0, 0%, 100%, 0.1);
+    --cui-bg-dark: #0000151a;
+    --cui-bg-gray: #131c21;
     --cui-text-primary: #857dcc;
     --cui-text-secondary: #a7a7a7;
     --cui-text-success: #519668;

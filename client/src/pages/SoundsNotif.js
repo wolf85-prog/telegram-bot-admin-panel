@@ -181,7 +181,7 @@ const SoundsNotif = () => {
     const arr = [
         {
           interval: valueInterval, 
-          process: 'Запрос названия и статуса проекта', 
+          process: 'Название и статус проекта', 
           dop: 'getReports()',
           resurs: 'Renthub',
           time: valueTime, 
@@ -194,7 +194,7 @@ const SoundsNotif = () => {
         }, 
         {
           interval: valueInterval2, 
-          process: 'Запрос дат проекта из основного состава', 
+          process: 'Даты проекта из основного состава', 
           dop: 'getReports()',
           resurs: 'Renthub',
           time: valueTime2, 
@@ -207,7 +207,7 @@ const SoundsNotif = () => {
         }, 
         {
           interval: valueInterval3, 
-          process: 'Запрос TelegramID менеджера проекта', 
+          process: 'TelegramID менеджера проекта', 
           dop: 'getReports()',
           resurs: 'Renthub',
           time: valueTime3, 
@@ -220,7 +220,7 @@ const SoundsNotif = () => {
         },
         {
           interval: valueInterval4, 
-          process: 'Запрос названия и статуса проекта', 
+          process: 'Название и статус проекта', 
           dop: 'getReportsRestart()',
           resurs: 'Renthub',
           time: valueTime4, 
@@ -233,7 +233,7 @@ const SoundsNotif = () => {
         },
         {
           interval: valueInterval5, 
-          process: 'Запрос дат проекта из основного состава', 
+          process: 'Даты проекта из основного состава', 
           dop: 'getReportsRestart()',
           resurs: 'Renthub',
           time: valueTime5, 
@@ -246,7 +246,7 @@ const SoundsNotif = () => {
         },
         {
           interval: valueInterval6, 
-          process: 'Запрос TelegramID менеджера проекта', 
+          process: 'TelegramID менеджера проекта', 
           dop: 'getReportsRestart()',
           resurs: 'Renthub',
           time: valueTime6, 

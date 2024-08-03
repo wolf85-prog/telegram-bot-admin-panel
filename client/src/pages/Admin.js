@@ -1242,7 +1242,7 @@ useEffect(() => {
  {showCharts ?  <CWidgetStatsA
                   ref={grafik}
                   className="mb-4 box"
-                  color="dark"
+                  color="gray"
                   value={<></>}
                   title={new Date().toLocaleDateString()}
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
@@ -1291,7 +1291,7 @@ useEffect(() => {
 {showCharts2 ?  <CWidgetStatsA
                   ref={grafik}
                   className="mb-4 box"
-                  color="dark"
+                  color="gray"
                   value={<></>}
                   title={startWeek + ' - ' + new Date(new Date(startWeek.split('.')[2], startWeek.split('.')[1]-1, startWeek.split('.')[0]).setDate(new Date(startWeek.split('.')[2], startWeek.split('.')[1]-1, startWeek.split('.')[0]).getDate() + 6)).toLocaleDateString()}
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
@@ -1322,7 +1322,7 @@ useEffect(() => {
 {showCharts3 ?  <CWidgetStatsA
                   ref={grafik}
                   className="mb-4 box"
-                  color="dark"
+                  color="gray"
                   value={<></>}
                   title={new Date().toLocaleString('default', { month: 'long' })}
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}}/></>}
@@ -1375,7 +1375,7 @@ useEffect(() => {
 {showCharts4 ?  <CWidgetStatsA
                   ref={grafik}
                   className="mb-4 box"
-                  color="green"
+                  color="gray"
                   value={<></>}
                   title={new Date().getFullYear()}
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
@@ -1411,7 +1411,7 @@ useEffect(() => {
 {showCharts5 ?  <CWidgetStatsA
                   ref={grafik}
                   className="mb-4 box"
-                  color="dark"
+                  color="gray"
                   value={<></>}
                   title={periodDate1 + ' - ' + periodDate2}
                   action={<><CIcon icon={cilX} onClick={hideCharts} className="text-high-emphasis-inverse" style={{cursor: 'pointer'}} /></>}
