@@ -65,50 +65,29 @@ const SoundsNotif = () => {
   const [showProcess, setShowProcess]= useState(false);
   
   const [showProcessInfo, setShowProcessInfo]= useState([]);
-  const [showProcessInfo2, setShowProcessInfo2]= useState(false);
-  const [showProcessInfo3, setShowProcessInfo3]= useState(false);
-  const [showProcessInfo4, setShowProcessInfo4]= useState(false);
-  const [showProcessInfo5, setShowProcessInfo5]= useState(false);
-  const [showProcessInfo6, setShowProcessInfo6]= useState(false);
 
-  const [playProcess, setPlayProcess]= useState(true);
-  const [stopProcess, setStopProcess]= useState(false);
-  const [playProcess2, setPlayProcess2]= useState(true);
-  const [stopProcess2, setStopProcess2]= useState(false);
-  const [playProcess3, setPlayProcess3]= useState(true);
-  const [stopProcess3, setStopProcess3]= useState(false);
-  const [playProcess4, setPlayProcess4]= useState(true);
-  const [stopProcess4, setStopProcess4]= useState(false);
-  const [playProcess5, setPlayProcess5]= useState(true);
-  const [stopProcess5, setStopProcess5]= useState(false);
-  const [playProcess6, setPlayProcess6]= useState(true);
-  const [stopProcess6, setStopProcess6]= useState(false);
 
-  const [showInterval, setShowInterval]= useState(false);
-  const [showTime, setShowTime]= useState(false);
-  const [showInterval2, setShowInterval2]= useState(false);
-  const [showTime2, setShowTime2]= useState(false);
-  const [showInterval3, setShowInterval3]= useState(false);
-  const [showTime3, setShowTime3]= useState(false);
-  const [showInterval4, setShowInterval4]= useState(false);
-  const [showTime4, setShowTime4]= useState(false);
-  const [showInterval5, setShowInterval5]= useState(false);
-  const [showTime5, setShowTime5]= useState(false);
-  const [showInterval6, setShowInterval6]= useState(false);
-  const [showTime6, setShowTime6]= useState(false);
+  const [playProcess, setPlayProcess]= useState([false, false, false, false, false, false]);
+  const [stopProcess, setStopProcess]= useState([true, true, true, true, true, true]);
 
-  const [valueInterval, setValueInterval] = useState(2)
-  const [valueTime, setValueTime] = useState('S')
-  const [valueInterval2, setValueInterval2] = useState(10)
-  const [valueTime2, setValueTime2] = useState('S')
-  const [valueInterval3, setValueInterval3] = useState(10)
-  const [valueTime3, setValueTime3] = useState('S')
-  const [valueInterval4, setValueInterval4] = useState(10)
-  const [valueTime4, setValueTime4] = useState('S')
-  const [valueInterval5, setValueInterval5] = useState(10)
-  const [valueTime5, setValueTime5] = useState('S')
-  const [valueInterval6, setValueInterval6] = useState(10)
-  const [valueTime6, setValueTime6] = useState('S')
+
+  const [showInterval, setShowInterval]= useState([false, false, false, false, false, false]);
+  const [showTime, setShowTime]= useState([false, false, false, false, false, false]);
+
+  // const [showInterval2, setShowInterval2]= useState(false);
+  // const [showTime2, setShowTime2]= useState(false);
+  // const [showInterval3, setShowInterval3]= useState(false);
+  // const [showTime3, setShowTime3]= useState(false);
+  // const [showInterval4, setShowInterval4]= useState(false);
+  // const [showTime4, setShowTime4]= useState(false);
+  // const [showInterval5, setShowInterval5]= useState(false);
+  // const [showTime5, setShowTime5]= useState(false);
+  // const [showInterval6, setShowInterval6]= useState(false);
+  // const [showTime6, setShowTime6]= useState(false);
+
+  const [valueInterval, setValueInterval] = useState([2, 2, 2, 2, 2, 2])
+  const [valueTime, setValueTime] = useState(['S', 'S', 'S', 'S', 'S', 'S'])
+
 
   //const [arrM, setArrM] = useState([])
   //const [arrS, setArrS] = useState([])
@@ -180,82 +159,82 @@ const SoundsNotif = () => {
 
     const arr = [
         {
-          interval: valueInterval, 
+          interval: valueInterval[0], 
+          time: valueTime[0], 
           process: 'Название и статус проекта', 
           dop: 'getReports()',
           resurs: 'Renthub',
-          time: valueTime, 
           status: statusProcess,
-          play: playProcess,
-          stop: stopProcess,
-          info: showProcessInfo,
-          showInterval: showInterval,
-          showTime: showTime,
+          // play: playProcess,
+          // stop: stopProcess,
+          // info: showProcessInfo,
+          // showInterval: showInterval,
+          // showTime: showTime,
         }, 
         {
-          interval: valueInterval2, 
+          interval: valueInterval[1], 
+          time: valueTime[1], 
           process: 'Даты проекта из основного состава', 
           dop: 'getReports()',
-          resurs: 'Renthub',
-          time: valueTime2, 
-          status: statusProcess2,
-          play: playProcess2,
-          stop: stopProcess2,
-          info: showProcessInfo2,
-          showInterval: showInterval2,
-          showTime: showTime2,
+          resurs: 'Renthub',  
+          status: statusProcess,
+          // play: playProcess2,
+          // stop: stopProcess2,
+          // info: showProcessInfo2,
+          // showInterval: showInterval2,
+          // showTime: showTime2,
         }, 
         {
-          interval: valueInterval3, 
+          interval: valueInterval[2], 
+          time: valueTime[2], 
           process: 'TelegramID менеджера проекта', 
           dop: 'getReports()',
           resurs: 'Renthub',
-          time: valueTime3, 
-          status: statusProcess3,
-          play: playProcess3,
-          stop: stopProcess3,
-          info: showProcessInfo3,
-          showInterval: showInterval3,
-          showTime: showTime3,
+          status: statusProcess,
+          // play: playProcess3,
+          // stop: stopProcess3,
+          // info: showProcessInfo3,
+          // showInterval: showInterval3,
+          // showTime: showTime3,
         },
         {
-          interval: valueInterval4, 
+          interval: valueInterval[3], 
+          time: valueTime[3], 
           process: 'Название и статус проекта', 
           dop: 'getReportsRestart()',
           resurs: 'Renthub',
-          time: valueTime4, 
-          status: statusProcess4,
-          play: playProcess4,
-          stop: stopProcess4,
-          info: showProcessInfo4,
-          showInterval: showInterval4,
-          showTime: showTime4,
+          status: statusProcess2,
+          // play: playProcess4,
+          // stop: stopProcess4,
+          // info: showProcessInfo4,
+          // showInterval: showInterval4,
+          // showTime: showTime4,
         },
         {
-          interval: valueInterval5, 
+          interval: valueInterval[4], 
+          time: valueTime[4], 
           process: 'Даты проекта из основного состава', 
           dop: 'getReportsRestart()',
-          resurs: 'Renthub',
-          time: valueTime5, 
-          status: statusProcess5,
-          play: playProcess5,
-          stop: stopProcess5,
-          info: showProcessInfo5,
-          showInterval: showInterval5,
-          showTime: showTime5,
+          resurs: 'Renthub', 
+          status: statusProcess2,
+          // play: playProcess5,
+          // stop: stopProcess5,
+          // info: showProcessInfo5,
+          // showInterval: showInterval5,
+          // showTime: showTime5,
         },
         {
-          interval: valueInterval6, 
+          interval: valueInterval[5],
+          time: valueTime[5],  
           process: 'TelegramID менеджера проекта', 
           dop: 'getReportsRestart()',
           resurs: 'Renthub',
-          time: valueTime6, 
-          status: statusProcess6,
-          play: playProcess6,
-          stop: stopProcess6,
-          info: showProcessInfo6,
-          showInterval: showInterval6,
-          showTime: showTime6,
+          status: statusProcess2,
+          // play: playProcess6,
+          // stop: stopProcess6,
+          // info: showProcessInfo6,
+          // showInterval: showInterval6,
+          // showTime: showTime6,
         } 
       ]
 
@@ -274,8 +253,9 @@ const SoundsNotif = () => {
       setProcessAll(arr)
     }
     
+    console.log("playProcess: ", playProcess)
       
-  }, [clickSort, sortInterval, statusProcess, statusProcess2]);
+  }, [clickSort, sortInterval, statusProcess, statusProcess2, playProcess]);
 
 
   const openHub = (hub) => {
@@ -304,100 +284,115 @@ const SoundsNotif = () => {
   }
 
   const clickPlay = (ind) => {
-    if (ind === 1) {
-      setPlayProcess(!playProcess)
-      setStopProcess(!stopProcess)
+    console.log("ind: ", ind)
+
+    setPlayProcess(prevShownTable => ({
+      ...prevShownTable,
+      [ind]: !prevShownTable[ind]
+    }));
+
+    setStopProcess(prevShownTable => ({
+      ...prevShownTable,
+      [ind]: !prevShownTable[ind]
+    }));
+
+    if (ind === 0) {
 
       //нажата кнопка Стоп
-      if (stopProcess) {
-        console.log("stop")
-        //await getProcess(ind, false)
-        sendNumberProcess(ind, false)
-      }
+      // if (stopProcess[1]) {
+      //   console.log("stop")
+      //   //await getProcess(ind, false)
+      //   sendNumberProcess(ind, false)
+      // }
 
       //нажата кнопка Play
-      if (playProcess) {
-        console.log("play")
-        //await getProcess(ind, true)
-        sendNumberProcess(ind, true)
-      }
+      // if (playProcess[1]) {
+      //   console.log("play")
+      //   //await getProcess(ind, true)
+      //   sendNumberProcess(ind, true)
+      // }
     }
     else if (ind === 2) {
-      setPlayProcess2(!playProcess2)
-      setStopProcess2(!stopProcess2)
+
     }
     else if (ind === 3) {
-      setPlayProcess3(!playProcess3)
-      setStopProcess3(!stopProcess3)
+
     }
     else if (ind === 4) {
-      setPlayProcess4(!playProcess4)
-      setStopProcess4(!stopProcess4)
+
     }
     else if (ind === 5) {
-      setPlayProcess5(!playProcess5)
-      setStopProcess5(!stopProcess5)
+
     }
     else if (ind === 6) {
-      setPlayProcess6(!playProcess6)
-      setStopProcess6(!stopProcess6)
+
     }
     
   }
 
   const clickRec = (ind) => {
-    if (ind === 1) {
-      setShowInterval(true)
-      setShowTime(true)
+    setShowInterval(prevShownTable => ({
+      ...prevShownTable,
+      [ind]: !prevShownTable[ind]
+    }));
+
+    setShowTime(prevShownTable => ({
+      ...prevShownTable,
+      [ind]: !prevShownTable[ind]
+    }));
+
+    if (ind === 0) {
+      // setShowInterval(true)
+      // setShowTime(true)
 
       setTimeout(()=>{
-        setShowInterval(false)
-        setShowTime(false)
+        // setShowInterval(false)
+        // setShowTime(false)
+      }, 5000)
+    } 
+    else if (ind === 1) {
+      // setShowInterval2(true)
+      // setShowTime2(true)
+
+      setTimeout(()=>{
+        // setShowInterval2(false)
+        // setShowTime2(false)
       }, 10000)
     } 
     else if (ind === 2) {
-      setShowInterval2(true)
-      setShowTime2(true)
+      // setShowInterval3(true)
+      // setShowTime3(true)
 
       setTimeout(()=>{
-        setShowInterval2(false)
-        setShowTime2(false)
+        // setShowInterval3(false)
+        // setShowTime3(false)
       }, 10000)
     } 
     else if (ind === 3) {
-      setShowInterval3(true)
-      setShowTime3(true)
+      // setShowInterval4(true)
+      // setShowTime4(true)
 
       setTimeout(()=>{
-        setShowInterval3(false)
-        setShowTime3(false)
+        // setShowInterval4(false)
+        // setShowTime4(false)
       }, 10000)
     } 
     else if (ind === 4) {
-      setShowInterval4(true)
-      setShowTime4(true)
+      // setShowInterval5(true)
+      // setShowTime5(true)
 
       setTimeout(()=>{
-        setShowInterval4(false)
-        setShowTime4(false)
+        // setShowInterval5(false)
+        // setShowTime5(false)
       }, 10000)
     } 
     else if (ind === 5) {
-      setShowInterval5(true)
-      setShowTime5(true)
+      // setShowInterval6(true)
+      // setShowTime6(true)
 
       setTimeout(()=>{
-        setShowInterval5(false)
-        setShowTime5(false)
-      }, 10000)
-    } 
-    else if (ind === 6) {
-      setShowInterval6(true)
-      setShowTime6(true)
-
-      setTimeout(()=>{
-        setShowInterval6(false)
-        setShowTime6(false)
+        // setShowInterval6(false)
+        // setShowTime6(false)
       }, 10000)
     } 
   }
@@ -405,29 +400,32 @@ const SoundsNotif = () => {
 
   const changeInterval = (e, ind) => {
     const val = e.target.value
+
+    
+
     if (ind === 1) {
       setShowInterval(false)
       setValueInterval(val)
     }
     else if (ind === 2) {
-      setShowInterval2(false)
-      setValueInterval2(val)
+      // setShowInterval2(false)
+      // setValueInterval2(val)
     }
     else if (ind === 3) {
-      setShowInterval3(false)
-      setValueInterval3(val)
+      // setShowInterval3(false)
+      // setValueInterval3(val)
     }
     else if (ind === 4) {
-      setShowInterval4(false)
-      setValueInterval4(val)
+      // setShowInterval4(false)
+      // setValueInterval4(val)
     }
     else if (ind === 5) {
-      setShowInterval5(false)
-      setValueInterval5(val)
+      // setShowInterval5(false)
+      // setValueInterval5(val)
     }
     else if (ind === 6) {
-      setShowInterval6(false)
-      setValueInterval6(val)
+      // setShowInterval6(false)
+      // setValueInterval6(val)
     }
     
   }
@@ -436,8 +434,8 @@ const SoundsNotif = () => {
     const val = e.target.value
     console.log(val, ind)
     if (ind === 1) {
-      setShowTime(false)
-      setValueTime(val)
+      // setShowTime(false)
+      // setValueTime(val)
 
       if (val === 'M') {
         setArrInt(arrM)
@@ -449,8 +447,8 @@ const SoundsNotif = () => {
     } 
     
     else if (ind === 2) {
-      setShowTime2(false)
-      setValueTime2(val)
+      // setShowTime2(false)
+      // setValueTime2(val)
 
       if (val === 'M') {
         setArrInt2(arrM)
@@ -462,8 +460,8 @@ const SoundsNotif = () => {
     }
 
     else if (ind === 3) {
-      setShowTime3(false)
-      setValueTime3(val)
+      // setShowTime3(false)
+      // setValueTime3(val)
 
       if (val === 'M') {
         setArrInt3(arrM)
@@ -475,8 +473,8 @@ const SoundsNotif = () => {
     }
 
     else if (ind === 4) {
-      setShowTime4(false)
-      setValueTime4(val)
+      // setShowTime4(false)
+      // setValueTime4(val)
 
       if (val === 'M') {
         setArrInt4(arrM)
@@ -488,8 +486,8 @@ const SoundsNotif = () => {
     }
 
     else if (ind === 5) {
-      setShowTime5(false)
-      setValueTime5(val)
+      // setShowTime5(false)
+      // setValueTime5(val)
 
       if (val === 'M') {
         setArrInt5(arrM)
@@ -501,8 +499,8 @@ const SoundsNotif = () => {
     }
 
     else if (ind === 6) {
-      setShowTime6(false)
-      setValueTime6(val)
+      // setShowTime6(false)
+      // setValueTime6(val)
 
       if (val === 'M') {
         setArrInt6(arrM)
@@ -608,7 +606,7 @@ const SoundsNotif = () => {
                                   {index+1}
                                 </CTableHeaderCell>
                                 <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                  {!item.showInterval ? item.interval : <CFormSelect 
+                                  {!showInterval[index] ? item.interval : <CFormSelect 
                                                 aria-label="Default select example"
                                                 style={{width: '63px', fontSize: '12px'}}
                                                 onChange={(e)=>changeInterval(e, 1)}
@@ -617,7 +615,7 @@ const SoundsNotif = () => {
                                               />}
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                  {!item.showTime ? item.time : 
+                                  {!showTime[index] ? item.time : 
                                     <CFormSelect 
                                       aria-label="Default select example"
                                       style={{width: '63px', fontSize: '12px'}}
@@ -639,13 +637,13 @@ const SoundsNotif = () => {
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                   
-                                  <CButton disabled={!item.stop} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index+1)}>
-                                    <img src={item.stop ? stopIcon : stopIcon2} alt='' width='25px' />
+                                  <CButton disabled={!stopProcess[index]} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
+                                    <img src={stopProcess[index] ? stopIcon : stopIcon2} alt='' width='25px' />
                                   </CButton>
-                                  <CButton disabled={!item.play} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index+1)}>
-                                    <img src={item.play ? playIcon : playIcon2} alt='' width='25px' />
+                                  <CButton disabled={!playProcess[index]} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
+                                    <img src={playProcess[index] ? playIcon : playIcon2} alt='' width='25px' />
                                   </CButton> 
-                                  <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(index+1)}>
+                                  <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(index)}>
                                     <img src={recIcon} alt='' width='25px' />
                                   </CButton>
                                 </CTableDataCell>
