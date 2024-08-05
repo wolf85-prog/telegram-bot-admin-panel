@@ -235,7 +235,46 @@ const SoundsNotif = () => {
           // info: showProcessInfo6,
           // showInterval: showInterval6,
           // showTime: showTime6,
-        } 
+        },
+        {
+          interval: 10,
+          time: 'M',  
+          process: 'Все проекты', 
+          dop: 'getProjects',
+          resurs: 'Workhub',
+          status: statusProcess,
+          // play: playProcess6,
+          // stop: stopProcess6,
+          // info: showProcessInfo6,
+          // showInterval: showInterval6,
+          // showTime: showTime6,
+        },
+        {
+          interval: 10,
+          time: 'M',  
+          process: 'Все сметы', 
+          dop: 'getSmetaAll',
+          resurs: 'Workhub',
+          status: statusProcess,
+          // play: playProcess6,
+          // stop: stopProcess6,
+          // info: showProcessInfo6,
+          // showInterval: showInterval6,
+          // showTime: showTime6,
+        },
+        {
+          interval: 10,
+          time: 'M',  
+          process: 'Статус работы претендента', 
+          dop: 'getWorkerPretendent()',
+          resurs: 'Workhub',
+          status: statusProcess,
+          // play: playProcess6,
+          // stop: stopProcess6,
+          // info: showProcessInfo6,
+          // showInterval: showInterval6,
+          // showTime: showTime6,
+        }  
       ]
 
       //setProcessAll(arr)
