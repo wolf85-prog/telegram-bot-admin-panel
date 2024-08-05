@@ -64,7 +64,7 @@ const SoundsNotif = () => {
   const [showStatic, setShowStatic]= useState(true);
   const [showProcess, setShowProcess]= useState(false);
   
-  const [showProcessInfo, setShowProcessInfo]= useState(false);
+  const [showProcessInfo, setShowProcessInfo]= useState([]);
   const [showProcessInfo2, setShowProcessInfo2]= useState(false);
   const [showProcessInfo3, setShowProcessInfo3]= useState(false);
   const [showProcessInfo4, setShowProcessInfo4]= useState(false);
@@ -294,25 +294,13 @@ const SoundsNotif = () => {
   }
 
   const clickInfo = (ind, info) => {
-    if (ind === 1) {
-      setShowProcessInfo(!info)
-    } 
-    else if (ind === 2) {
-      setShowProcessInfo2(!info)
-    }
-    else if (ind === 3) {
-      setShowProcessInfo3(!info)
-    }
-    else if (ind === 4) {
-      setShowProcessInfo4(!info)
-    }
-    else if (ind === 5) {
-      setShowProcessInfo5(!info)
-    }
-    else if (ind === 6) {
-      setShowProcessInfo6(!info)
-    }
-    
+    console.log(ind, showProcessInfo[ind])
+
+    setShowProcessInfo(prevShownTable => ({
+      ...prevShownTable,
+      [ind]: !prevShownTable[ind]
+    }));
+
   }
 
   const clickPlay = (ind) => {
@@ -641,7 +629,7 @@ const SoundsNotif = () => {
                                 </CTableDataCell>
                                 <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px', cursor: 'pointer'}} onClick={()=>clickInfo(index+1, item.info)}>
                                   {item.process}
-                                  {item.info ? <><br/><span style={{fontSize: '12px', color: '#8a93a2'}}>{item.dop}</span></> : ''}
+                                  {showProcessInfo[index+1] ? <><br/><span style={{fontSize: '12px', color: '#8a93a2'}}>{item.dop}</span></> : ''}
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                   {item.resurs}
