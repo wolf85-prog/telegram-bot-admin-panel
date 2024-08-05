@@ -606,7 +606,7 @@ const SoundsNotif = () => {
                   <CCard className='rounded-bottom' style={{borderRadius: '0px', borderColor: '#131c21', borderTopRightRadius: '0.375rem'}}>
                     <CCardBody id="Static" style={{display: showStatic ? 'block' : 'none'}}>
 
-                      {/* <CRow>
+                      <CRow>
                         <CCol md={6} style={{overflow: 'auto', transform: 'scale(0.9)', transformOrigin: 'top left'}}>
                           <iframe width="650" height="600" src="https://proj.uley.team:8000/status" title="description" onLoad={() => setLoadingIframe(false)} loading = "lazy"></iframe>
                           {loadingIframe ? <p> Загрузка...</p> : null}
@@ -618,7 +618,7 @@ const SoundsNotif = () => {
                       <CRow>
                         <CCol md={6} style={{overflow: 'auto', transform: 'scale(0.9)', transformOrigin: 'top left'}}><iframe width="650" height="600" src="https://proj.uley.team:8080/status" title="description" loading = "lazy"></iframe></CCol>
                         <CCol md={6} style={{overflow: 'auto', transform: 'scale(0.9)', transformOrigin: 'top left'}}><iframe width="650" height="600" src="https://proj.uley.team:5000/status" title="description" loading = "lazy"></iframe></CCol>
-                      </CRow> */}
+                      </CRow>
                       
                     </CCardBody>
                   
