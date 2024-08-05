@@ -67,8 +67,8 @@ const SoundsNotif = () => {
   const [showProcessInfo, setShowProcessInfo]= useState([]);
 
 
-  const [playProcess, setPlayProcess]= useState([false, false, false, false, false, false]);
-  const [stopProcess, setStopProcess]= useState([true, true, true, true, true, true]);
+  const [playProcess, setPlayProcess]= useState([false, false, false, false, false, false, false, false, false]);
+  const [stopProcess, setStopProcess]= useState([true, true, true, true, true, true, true, true, true, true]);
 
 
   const [showInterval, setShowInterval]= useState([false, false, false, false, false, false]);
