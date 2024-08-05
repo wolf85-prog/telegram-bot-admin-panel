@@ -936,6 +936,9 @@ const UsersProvider = ({ children }) => {
 		else if (process === '2') {
 			setStatusProcess2(data)
 		}
+		else if (process === '3') {
+			setStatusProcess3(data)
+		}
 		
 	}
 
