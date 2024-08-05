@@ -302,7 +302,7 @@ const SoundsNotif = () => {
     
     console.log("playProcess: ", playProcess)
       
-  }, [clickSort, sortInterval, statusProcess, statusProcess2, playProcess]);
+  }, [clickSort, sortInterval, statusProcess, statusProcess2, statusProcess3, playProcess]);
 
 
   const openHub = (hub) => {
