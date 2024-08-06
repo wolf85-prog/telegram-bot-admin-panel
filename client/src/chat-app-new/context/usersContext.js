@@ -121,9 +121,9 @@ const UsersProvider = ({ children }) => {
 	const [statusProcess5, setStatusProcess5] = useState(false)
 	const [statusProcess6, setStatusProcess6] = useState(false)
 
-	const [intervalProcess, setIntervalProcess] = useState('0')
-	const [intervalProcess2, setIntervalProcess2] = useState('0')
-	const [intervalProcess3, setIntervalProcess3] = useState('0')
+	const [intervalProcess, setIntervalProcess] = useState('')
+	const [intervalProcess2, setIntervalProcess2] = useState('')
+	const [intervalProcess3, setIntervalProcess3] = useState('')
 
 	const [timeProcess, setTimeProcess] = useState('S')
 	const [timeProcess2, setTimeProcess2] = useState('S')
@@ -1445,11 +1445,13 @@ const delWMessageContext = (messageId, messageDate, chatId) => {
 
 
 //отправить номер процесса и данные
-const sendNumberProcess = (number, data) => {
+const sendNumberProcess = (number, data, interval, time) => {
 	console.log("send: ", number)
 	socket.emit("sendProcess", { 
 		process: number,
 		data: data,
+		interval,
+		time,
 	})
 };
 

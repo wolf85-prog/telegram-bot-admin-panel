@@ -90,18 +90,7 @@ const SoundsNotif = () => {
   const [showInterval, setShowInterval]= useState([false, false, false, false, false, false]);
   const [showTime, setShowTime]= useState([false, false, false, false, false, false]);
 
-  // const [showInterval2, setShowInterval2]= useState(false);
-  // const [showTime2, setShowTime2]= useState(false);
-  // const [showInterval3, setShowInterval3]= useState(false);
-  // const [showTime3, setShowTime3]= useState(false);
-  // const [showInterval4, setShowInterval4]= useState(false);
-  // const [showTime4, setShowTime4]= useState(false);
-  // const [showInterval5, setShowInterval5]= useState(false);
-  // const [showTime5, setShowTime5]= useState(false);
-  // const [showInterval6, setShowInterval6]= useState(false);
-  // const [showTime6, setShowTime6]= useState(false);
-
-  const [valueInterval, setValueInterval] = useState([2, 2, 2, 2, 2, 2])
+  const [valueInterval, setValueInterval] = useState(['', '', '', '', '', ''])
   const [valueTime, setValueTime] = useState(['S', 'S', 'S', 'S', 'S', 'S'])
 
 
@@ -179,7 +168,7 @@ const SoundsNotif = () => {
           time: valueTime[0], 
           process: 'Название и статус проекта', 
           dop: 'getReports()',
-          resurs: 'Renthub',
+          resurs: 'Rent',
           status: statusProcess,
           // play: playProcess,
           // stop: stopProcess,
@@ -192,7 +181,7 @@ const SoundsNotif = () => {
           time: valueTime[1], 
           process: 'Даты проекта из основного состава', 
           dop: 'getReports()',
-          resurs: 'Renthub',  
+          resurs: 'Rent',  
           status: statusProcess,
           // play: playProcess2,
           // stop: stopProcess2,
@@ -205,7 +194,7 @@ const SoundsNotif = () => {
           time: valueTime[2], 
           process: 'TelegramID менеджера проекта', 
           dop: 'getReports()',
-          resurs: 'Renthub',
+          resurs: 'Rent',
           status: statusProcess,
           // play: playProcess3,
           // stop: stopProcess3,
@@ -218,7 +207,7 @@ const SoundsNotif = () => {
           time: valueTime[3], 
           process: 'Название и статус проекта', 
           dop: 'getReportsRestart()',
-          resurs: 'Renthub',
+          resurs: 'Rent',
           status: statusProcess2,
           // play: playProcess4,
           // stop: stopProcess4,
@@ -231,7 +220,7 @@ const SoundsNotif = () => {
           time: valueTime[4], 
           process: 'Даты проекта из основного состава', 
           dop: 'getReportsRestart()',
-          resurs: 'Renthub', 
+          resurs: 'Rent', 
           status: statusProcess2,
           // play: playProcess5,
           // stop: stopProcess5,
@@ -244,7 +233,7 @@ const SoundsNotif = () => {
           time: valueTime[5],  
           process: 'TelegramID менеджера проекта', 
           dop: 'getReportsRestart()',
-          resurs: 'Renthub',
+          resurs: 'Rent',
           status: statusProcess2,
           // play: playProcess6,
           // stop: stopProcess6,
@@ -253,11 +242,11 @@ const SoundsNotif = () => {
           // showTime: showTime6,
         },
         {
-          interval: 10,
+          interval: intervalProcess3,
           time: 'S',  
           process: 'Все проекты', 
           dop: 'getProjects',
-          resurs: 'Workhub',
+          resurs: 'Work',
           status: statusProcess3,
           // play: playProcess6,
           // stop: stopProcess6,
@@ -266,11 +255,11 @@ const SoundsNotif = () => {
           // showTime: showTime6,
         },
         {
-          interval: 10,
+          interval: intervalProcess3,
           time: 'S',  
           process: 'Все сметы', 
           dop: 'getSmetaAll',
-          resurs: 'Workhub',
+          resurs: 'Work',
           status: statusProcess3,
           // play: playProcess6,
           // stop: stopProcess6,
@@ -279,11 +268,11 @@ const SoundsNotif = () => {
           // showTime: showTime6,
         },
         {
-          interval: 10,
+          interval: intervalProcess3,
           time: 'S',  
           process: 'Статус работы претендента', 
           dop: 'getWorkerPretendent()',
-          resurs: 'Workhub',
+          resurs: 'Work',
           status: statusProcess3,
           // play: playProcess6,
           // stop: stopProcess6,
@@ -292,13 +281,21 @@ const SoundsNotif = () => {
           // showTime: showTime6,
         },
         {
-          interval: 10,
+          interval: intervalProcess3,
           time: 'S',
           process: 'Название проекта',
           dop: 'getProjectName',
-          resurs: 'Workhub',
+          resurs: 'Work',
           status: statusProcess3,
-        }  
+        },
+        {
+          interval: intervalProcess3,
+          time: 'S',
+          process: 'Отправка рассылки',
+          dop: 'sendDistribution',
+          resurs: 'Mail',
+          status: statusProcess4,
+        }   
       ]
 
       //setProcessAll(arr)
@@ -318,7 +315,7 @@ const SoundsNotif = () => {
     
     console.log("playProcess: ", playProcess)
       
-  }, [clickSort, sortInterval, statusProcess, statusProcess2, statusProcess3, playProcess]);
+  }, [clickSort, sortInterval, statusProcess, statusProcess2, statusProcess3, playProcess, intervalProcess3]);
 
 
   const openHub = (hub) => {
@@ -678,7 +675,7 @@ const SoundsNotif = () => {
                                   {index+1}
                                 </CTableHeaderCell>
                                 <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                  {!showInterval[index] ? (2<0 ? item.interval : <CSpinner size="sm" />) : 
+                                  {!showInterval[index] ? (item.interval && item.interval.length > 0 ? item.interval : <CSpinner size="sm" />) : 
                                               <CFormSelect 
                                                 aria-label="Default select example"
                                                 style={{width: '63px', fontSize: '12px'}}
@@ -710,7 +707,7 @@ const SoundsNotif = () => {
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                   
-                                  <CButton disabled={!stopProcess[index]} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
+                                  <CButton disabled={2>0 || !stopProcess[index]} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
                                     <img src={stopProcess[index] && 2<0 ? stopIcon : stopIcon2} alt='' width='25px' />
                                   </CButton>
                                   <CButton disabled={!playProcess[index]} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
