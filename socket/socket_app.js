@@ -188,10 +188,12 @@ io.on("connection", (socket) => {
     // Process
     //------------------------------------------------------------------
     //send and get process
-    socket.on("sendProcess", ({process, data})=>{
+    socket.on("sendProcess", ({process, data, interval, time})=>{
         io.emit("getProcess", {
             process,
             data,
+            interval,
+            time,
         })
     })
 
