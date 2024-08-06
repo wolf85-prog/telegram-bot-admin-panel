@@ -121,9 +121,9 @@ const UsersProvider = ({ children }) => {
 	const [statusProcess5, setStatusProcess5] = useState(false)
 	const [statusProcess6, setStatusProcess6] = useState(false)
 
-	const [intervalProcess, setIntervalProcess] = useState('')
-	const [intervalProcess2, setIntervalProcess2] = useState('')
-	const [intervalProcess3, setIntervalProcess3] = useState('')
+	const [intervalProcess, setIntervalProcess] = useState('10') //бот заказчика
+	const [intervalProcess2, setIntervalProcess2] = useState('10') // бот специалиста
+	const [intervalProcess3, setIntervalProcess3] = useState('10') // бот рассылки
 
 	const [timeProcess, setTimeProcess] = useState('S')
 	const [timeProcess2, setTimeProcess2] = useState('S')
@@ -1903,6 +1903,18 @@ function isObjectEmpty(obj) {
 			statusProcess4, 
 			statusProcess5, 
 			statusProcess6,
+			intervalProcess,
+			intervalProcess2,
+			intervalProcess3,
+			setIntervalProcess,
+			setIntervalProcess2,
+			setIntervalProcess3,
+			timeProcess,
+			timeProcess2,
+			timeProcess3,
+			setTimeProcess,
+			setTimeProcess2,
+			setTimeProcess3,
 		}}>
 			{children}
 		</UsersContext.Provider>

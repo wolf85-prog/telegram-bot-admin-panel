@@ -90,7 +90,7 @@ const SoundsNotif = () => {
   const [showInterval, setShowInterval]= useState([false, false, false, false, false, false]);
   const [showTime, setShowTime]= useState([false, false, false, false, false, false]);
 
-  const [valueInterval, setValueInterval] = useState(['', '', '', '', '', ''])
+  const [valueInterval, setValueInterval] = useState(['2', '2', '2', '2', '2', '2'])
   const [valueTime, setValueTime] = useState(['S', 'S', 'S', 'S', 'S', 'S'])
 
 
@@ -148,12 +148,6 @@ const SoundsNotif = () => {
   ]
 
   useEffect(() => {
-
-    const fetchData = async() => {
-      console.log("Открываю страницу Звуковые уведомления")
-    }
-
-    fetchData();
 
     setArrInt(arrH)
     setArrInt2(arrH)
@@ -298,6 +292,7 @@ const SoundsNotif = () => {
         }   
       ]
 
+      console.log(arr)
       //setProcessAll(arr)
 
     //console.log(arr)
@@ -315,7 +310,15 @@ const SoundsNotif = () => {
     
     console.log("playProcess: ", playProcess)
       
-  }, [clickSort, sortInterval, statusProcess, statusProcess2, statusProcess3, playProcess, intervalProcess3]);
+  }, [clickSort, 
+    sortInterval, 
+    statusProcess, 
+    statusProcess2, 
+    statusProcess3, 
+    playProcess,
+    intervalProcess,
+    intervalProcess2, 
+    intervalProcess3]);
 
 
   const openHub = (hub) => {
