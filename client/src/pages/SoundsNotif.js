@@ -41,6 +41,7 @@ import stopIcon2 from 'src/assets/images/stop_press.png'
 import playIcon from 'src/assets/images/play.png'
 import playIcon2 from 'src/assets/images/play_press.png'
 import recIcon from 'src/assets/images/rec.png'
+import recIcon2 from 'src/assets/images/rec_press.png'
 
 import status1Icon from 'src/assets/images/status1.png'
 import status2Icon from 'src/assets/images/status2.png'
@@ -58,9 +59,15 @@ const SoundsNotif = () => {
     intervalProcess,
     intervalProcess2,
     intervalProcess3,
+    setIntervalProcess,
+    setIntervalProcess2,
+    setIntervalProcess3,
     timeProcess,
     timeProcess2,
-    timeProcess3 } = useUsersContext();
+    timeProcess3,
+    setTimeProcess,
+    setTimeProcess2,
+    setTimeProcess3 } = useUsersContext();
 
   const [loadingIframe, setLoadingIframe] = useState(true);
   const [loadingIframe2, setLoadingIframe2] = useState(true);
@@ -169,7 +176,7 @@ const SoundsNotif = () => {
     const arr = [
         {
           interval: intervalProcess, 
-          time: timeProcess, 
+          time: valueTime[0], 
           process: 'Название и статус проекта', 
           dop: 'getReports()',
           resurs: 'Renthub',
@@ -182,7 +189,7 @@ const SoundsNotif = () => {
         }, 
         {
           interval: intervalProcess, 
-          time: timeProcess, 
+          time: valueTime[1], 
           process: 'Даты проекта из основного состава', 
           dop: 'getReports()',
           resurs: 'Renthub',  
@@ -195,7 +202,7 @@ const SoundsNotif = () => {
         }, 
         {
           interval: intervalProcess, 
-          time: timeProcess, 
+          time: valueTime[2], 
           process: 'TelegramID менеджера проекта', 
           dop: 'getReports()',
           resurs: 'Renthub',
@@ -247,7 +254,7 @@ const SoundsNotif = () => {
         },
         {
           interval: 10,
-          time: 'M',  
+          time: 'S',  
           process: 'Все проекты', 
           dop: 'getProjects',
           resurs: 'Workhub',
@@ -260,7 +267,7 @@ const SoundsNotif = () => {
         },
         {
           interval: 10,
-          time: 'M',  
+          time: 'S',  
           process: 'Все сметы', 
           dop: 'getSmetaAll',
           resurs: 'Workhub',
@@ -273,7 +280,7 @@ const SoundsNotif = () => {
         },
         {
           interval: 10,
-          time: 'M',  
+          time: 'S',  
           process: 'Статус работы претендента', 
           dop: 'getWorkerPretendent()',
           resurs: 'Workhub',
@@ -671,7 +678,8 @@ const SoundsNotif = () => {
                                   {index+1}
                                 </CTableHeaderCell>
                                 <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                  {!showInterval[index] ? item.interval : <CFormSelect 
+                                  {!showInterval[index] ? (2<0 ? item.interval : <CSpinner size="sm" />) : 
+                                              <CFormSelect 
                                                 aria-label="Default select example"
                                                 style={{width: '63px', fontSize: '12px'}}
                                                 onChange={(e)=>changeInterval(e, 1)}
@@ -703,13 +711,13 @@ const SoundsNotif = () => {
                                 <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                   
                                   <CButton disabled={!stopProcess[index]} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
-                                    <img src={stopProcess[index] ? stopIcon : stopIcon2} alt='' width='25px' />
+                                    <img src={stopProcess[index] && 2<0 ? stopIcon : stopIcon2} alt='' width='25px' />
                                   </CButton>
                                   <CButton disabled={!playProcess[index]} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
                                     <img src={playProcess[index] ? playIcon : playIcon2} alt='' width='25px' />
                                   </CButton> 
-                                  <CButton color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(index)}>
-                                    <img src={recIcon} alt='' width='25px' />
+                                  <CButton disabled={2>0} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(index)}>
+                                    <img src={2<0 ? recIcon : recIcon2} alt='' width='25px' />
                                   </CButton>
                                 </CTableDataCell>
                               </CTableRow>
