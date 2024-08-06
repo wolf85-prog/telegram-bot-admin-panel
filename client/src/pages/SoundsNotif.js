@@ -82,7 +82,7 @@ const SoundsNotif = () => {
   
   const [showProcessInfo, setShowProcessInfo]= useState([]);
 
-
+  const [loadStatus, setLoadStatus]= useState([false, false, false, false, false, false, false, false, false]);
   const [playProcess, setPlayProcess]= useState([false, false, false, false, false, false, false, false, false]);
   const [stopProcess, setStopProcess]= useState([true, true, true, true, true, true, true, true, true, true]);
 
@@ -349,6 +349,12 @@ const SoundsNotif = () => {
   const clickPlay = (ind) => {
     console.log("ind: ", ind)
 
+    //setLoadStatus(true)
+    setLoadStatus(prevShownTable => ({
+      ...prevShownTable,
+      [ind]: !prevShownTable[ind]
+    }));
+
     setPlayProcess(prevShownTable => ({
       ...prevShownTable,
       [ind]: !prevShownTable[ind]
@@ -358,6 +364,9 @@ const SoundsNotif = () => {
       ...prevShownTable,
       [ind]: !prevShownTable[ind]
     }));
+
+    setTimeout(()=>{setLoadStatus(false)}, 3000)
+    
 
     if (ind === 0) {
 
@@ -706,18 +715,19 @@ const SoundsNotif = () => {
                                   {item.resurs}
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                  {item.status ? <img src={status1Icon} alt='' width='25px' /> : <img src={status2Icon} alt='' width='25px' />}
+                                  {loadStatus[index] ? <CSpinner size="sm" /> : (item.status ? <img src={status1Icon} alt='' width='25px' /> : <img src={status2Icon} alt='' width='25px' />)
+                                  }
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                   
-                                  <CButton disabled={2>0 || !stopProcess[index]} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
-                                    <img src={stopProcess[index] && 2<0 ? stopIcon : stopIcon2} alt='' width='25px' />
+                                  <CButton disabled={!item.status || !stopProcess[index]} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
+                                    <img src={stopProcess[index] && item.status ? stopIcon : stopIcon2} alt='' width='25px' />
                                   </CButton>
                                   <CButton disabled={!playProcess[index]} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
                                     <img src={playProcess[index] ? playIcon : playIcon2} alt='' width='25px' />
                                   </CButton> 
-                                  <CButton disabled={2>0} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(index)}>
-                                    <img src={2<0 ? recIcon : recIcon2} alt='' width='25px' />
+                                  <CButton disabled={!item.status} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(index)}>
+                                    <img src={item.status ? recIcon : recIcon2} alt='' width='25px' />
                                   </CButton>
                                 </CTableDataCell>
                               </CTableRow>
