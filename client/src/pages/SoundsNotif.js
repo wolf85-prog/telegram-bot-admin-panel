@@ -168,7 +168,8 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess, 
           time: timeProcess, 
-          process: '[1] Название и статус проекта', 
+          process: 'Название и статус проекта',
+          code: '1', 
           dop: 'getReports()',
           resurs: 'Rent',
           status: statusProcess,
@@ -176,7 +177,8 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess, 
           time: timeProcess, 
-          process: '[1] Даты проекта из основного состава', 
+          process: 'Даты проекта из основного состава', 
+          code: '1', 
           dop: 'getReports()',
           resurs: 'Rent',  
           status: statusProcess,
@@ -184,7 +186,8 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess, 
           time: timeProcess, 
-          process: '[1] TelegramID менеджера проекта', 
+          process: 'TelegramID менеджера проекта', 
+          code: '1', 
           dop: 'getReports()',
           resurs: 'Rent',
           status: statusProcess,
@@ -192,7 +195,8 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess2, 
           time: timeProcess2, 
-          process: '[2] Название и статус проекта', 
+          process: 'Название и статус проекта', 
+          code: '2', 
           dop: 'getReportsRestart()',
           resurs: 'Rent',
           status: statusProcess2,
@@ -200,7 +204,8 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess2, 
           time: timeProcess2, 
-          process: '[2] Даты проекта из основного состава', 
+          process: 'Даты проекта из основного состава', 
+          code: '2', 
           dop: 'getReportsRestart()',
           resurs: 'Rent', 
           status: statusProcess2,
@@ -208,7 +213,8 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess2,
           time: timeProcess2,  
-          process: '[2] TelegramID менеджера проекта', 
+          process: 'TelegramID менеджера проекта', 
+          code: '2', 
           dop: 'getReportsRestart()',
           resurs: 'Rent',
           status: statusProcess2,
@@ -216,7 +222,8 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess3,
           time: timeProcess3,  
-          process: '[3] Все проекты', 
+          process: 'Все проекты', 
+          code: '3', 
           dop: 'getProjects',
           resurs: 'Work',
           status: statusProcess3,
@@ -224,7 +231,8 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess3,
           time: timeProcess3,  
-          process: '[3] Все сметы', 
+          process: 'Все сметы', 
+          code: '3', 
           dop: 'getSmetaAll',
           resurs: 'Work',
           status: statusProcess3,
@@ -232,7 +240,8 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess3,
           time: timeProcess3,  
-          process: '[3] Статус работы претендента', 
+          process: 'Статус работы претендента', 
+          code: '3', 
           dop: 'getWorkerPretendent()',
           resurs: 'Work',
           status: statusProcess3,
@@ -240,7 +249,8 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess3,
           time: timeProcess3,
-          process: '[3] Название проекта',
+          process: 'Название проекта',
+          code: '3', 
           dop: 'getProjectName',
           resurs: 'Work',
           status: statusProcess3,
@@ -248,7 +258,8 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess3,
           time: timeProcess3,
-          process: '[3] ID специалиста в Notion',
+          process: 'ID специалиста в Notion',
+          code: '3', 
           dop: 'getWorkerChatId',
           resurs: 'Work',
           status: statusProcess3,
@@ -256,7 +267,8 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess4,
           time: timeProcess4,
-          process: '[4] Название проекта',
+          process: 'Название проекта',
+          code: '4', 
           dop: 'getProjectName | Принять',
           resurs: 'Work',
           status: statusProcess4,
@@ -264,7 +276,8 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess5,
           time: timeProcess5,
-          process: '[5] Отправка рассылки',
+          process: 'Отправка рассылки',
+          code: '5', 
           dop: 'sendDistribution',
           resurs: 'Mail',
           status: statusProcess5,
@@ -746,6 +759,7 @@ const SoundsNotif = () => {
                               <CTableHeaderCell onClick={sortInt} scope="col" className="text-center" style={{width: '90px', cursor: 'pointer'}}>Интервал</CTableHeaderCell>
                               <CTableHeaderCell onClick={sortT} scope="col" className="text-center" style={{width: '90px', cursor: 'pointer'}}>Время</CTableHeaderCell>
                               <CTableHeaderCell scope="col" className="text-center">Запрос</CTableHeaderCell>
+                              <CTableHeaderCell scope="col" className="text-center" style={{width: '50px'}}>Код</CTableHeaderCell>
                               <CTableHeaderCell scope="col" className="text-center" style={{width: '150px'}}>Ресурс</CTableHeaderCell>
                               <CTableHeaderCell scope="col" className="text-center" style={{width: '90px'}}>Статус</CTableHeaderCell>   
                               <CTableHeaderCell scope="col" className="text-center" style={{width: '200px'}}>Управление</CTableHeaderCell>    
@@ -782,6 +796,9 @@ const SoundsNotif = () => {
                                 <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px', cursor: 'pointer'}} onClick={()=>clickInfo(index+1, item.info)}>
                                   {item.process}
                                   {showProcessInfo[index+1] ? <><br/><span style={{fontSize: '12px', color: '#8a93a2'}}>{item.dop}</span></> : ''}
+                                </CTableDataCell>
+                                <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                  {item.code}
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                   {item.resurs}
