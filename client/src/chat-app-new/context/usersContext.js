@@ -123,11 +123,15 @@ const UsersProvider = ({ children }) => {
 
 	const [intervalProcess, setIntervalProcess] = useState('10') //бот заказчика
 	const [intervalProcess2, setIntervalProcess2] = useState('10') // бот специалиста
-	const [intervalProcess3, setIntervalProcess3] = useState('10') // бот рассылки
+	const [intervalProcess3, setIntervalProcess3] = useState('10') // бот специалиста
+	const [intervalProcess4, setIntervalProcess4] = useState('10') // бот специалиста
+	const [intervalProcess5, setIntervalProcess5] = useState('4') // бот рассылки
 
 	const [timeProcess, setTimeProcess] = useState('S')
 	const [timeProcess2, setTimeProcess2] = useState('S')
 	const [timeProcess3, setTimeProcess3] = useState('S')
+	const [timeProcess4, setTimeProcess4] = useState('S')
+	const [timeProcess5, setTimeProcess5] = useState('M')
 
 	const [showGetMess, setShowGetMess ] = useState(false);
 
@@ -1446,7 +1450,7 @@ const delWMessageContext = (messageId, messageDate, chatId) => {
 
 //отправить номер процесса и данные
 const sendNumberProcess = (number, data, interval, time) => {
-	console.log("send: ", number)
+	console.log("send: ", number, data, interval, time)
 	socket.emit("sendProcess", { 
 		process: number,
 		data: data,
@@ -1454,6 +1458,7 @@ const sendNumberProcess = (number, data, interval, time) => {
 		time,
 	})
 };
+
 
 //===============================================================
 //                  Notifications
@@ -1906,15 +1911,23 @@ function isObjectEmpty(obj) {
 			intervalProcess,
 			intervalProcess2,
 			intervalProcess3,
+			intervalProcess4,
+			intervalProcess5,
 			setIntervalProcess,
 			setIntervalProcess2,
 			setIntervalProcess3,
+			setIntervalProcess4,
+			setIntervalProcess5,
 			timeProcess,
 			timeProcess2,
 			timeProcess3,
+			timeProcess4,
+			timeProcess5,
 			setTimeProcess,
 			setTimeProcess2,
 			setTimeProcess3,
+			setTimeProcess4,
+			setTimeProcess5,
 		}}>
 			{children}
 		</UsersContext.Provider>

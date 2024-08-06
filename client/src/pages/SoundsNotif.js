@@ -59,15 +59,23 @@ const SoundsNotif = () => {
     intervalProcess,
     intervalProcess2,
     intervalProcess3,
+    intervalProcess4,
+    intervalProcess5,
     setIntervalProcess,
     setIntervalProcess2,
     setIntervalProcess3,
+    setIntervalProcess4,
+    setIntervalProcess5,
     timeProcess,
     timeProcess2,
     timeProcess3,
+    timeProcess4,
+    timeProcess5,
     setTimeProcess,
     setTimeProcess2,
-    setTimeProcess3 } = useUsersContext();
+    setTimeProcess3,
+    setTimeProcess4,
+    setTimeProcess5} = useUsersContext();
 
   const [loadingIframe, setLoadingIframe] = useState(true);
   const [loadingIframe2, setLoadingIframe2] = useState(true);
@@ -159,136 +167,107 @@ const SoundsNotif = () => {
     const arr = [
         {
           interval: intervalProcess, 
-          time: valueTime[0], 
-          process: 'Название и статус проекта', 
+          time: timeProcess, 
+          process: 'Название и статус проекта [1]', 
           dop: 'getReports()',
           resurs: 'Rent',
           status: statusProcess,
-          // play: playProcess,
-          // stop: stopProcess,
-          // info: showProcessInfo,
-          // showInterval: showInterval,
-          // showTime: showTime,
         }, 
         {
           interval: intervalProcess, 
-          time: valueTime[1], 
-          process: 'Даты проекта из основного состава', 
+          time: timeProcess, 
+          process: 'Даты проекта из основного состава [1]', 
           dop: 'getReports()',
           resurs: 'Rent',  
           status: statusProcess,
-          // play: playProcess2,
-          // stop: stopProcess2,
-          // info: showProcessInfo2,
-          // showInterval: showInterval2,
-          // showTime: showTime2,
         }, 
         {
           interval: intervalProcess, 
-          time: valueTime[2], 
-          process: 'TelegramID менеджера проекта', 
+          time: timeProcess, 
+          process: 'TelegramID менеджера проекта [1]', 
           dop: 'getReports()',
           resurs: 'Rent',
           status: statusProcess,
-          // play: playProcess3,
-          // stop: stopProcess3,
-          // info: showProcessInfo3,
-          // showInterval: showInterval3,
-          // showTime: showTime3,
         },
         {
-          interval: valueInterval[3], 
-          time: valueTime[3], 
-          process: 'Название и статус проекта', 
+          interval: intervalProcess2, 
+          time: timeProcess2, 
+          process: 'Название и статус проекта [2]', 
           dop: 'getReportsRestart()',
           resurs: 'Rent',
           status: statusProcess2,
-          // play: playProcess4,
-          // stop: stopProcess4,
-          // info: showProcessInfo4,
-          // showInterval: showInterval4,
-          // showTime: showTime4,
         },
         {
-          interval: valueInterval[4], 
-          time: valueTime[4], 
-          process: 'Даты проекта из основного состава', 
+          interval: intervalProcess2, 
+          time: timeProcess2, 
+          process: 'Даты проекта из основного состава [2]', 
           dop: 'getReportsRestart()',
           resurs: 'Rent', 
           status: statusProcess2,
-          // play: playProcess5,
-          // stop: stopProcess5,
-          // info: showProcessInfo5,
-          // showInterval: showInterval5,
-          // showTime: showTime5,
         },
         {
-          interval: valueInterval[5],
-          time: valueTime[5],  
-          process: 'TelegramID менеджера проекта', 
+          interval: intervalProcess2,
+          time: timeProcess2,  
+          process: 'TelegramID менеджера проекта [2]', 
           dop: 'getReportsRestart()',
           resurs: 'Rent',
           status: statusProcess2,
-          // play: playProcess6,
-          // stop: stopProcess6,
-          // info: showProcessInfo6,
-          // showInterval: showInterval6,
-          // showTime: showTime6,
         },
         {
           interval: intervalProcess3,
-          time: 'S',  
-          process: 'Все проекты', 
+          time: timeProcess3,  
+          process: 'Все проекты [3]', 
           dop: 'getProjects',
           resurs: 'Work',
           status: statusProcess3,
-          // play: playProcess6,
-          // stop: stopProcess6,
-          // info: showProcessInfo6,
-          // showInterval: showInterval6,
-          // showTime: showTime6,
         },
         {
           interval: intervalProcess3,
-          time: 'S',  
-          process: 'Все сметы', 
+          time: timeProcess3,  
+          process: 'Все сметы [3]', 
           dop: 'getSmetaAll',
           resurs: 'Work',
           status: statusProcess3,
-          // play: playProcess6,
-          // stop: stopProcess6,
-          // info: showProcessInfo6,
-          // showInterval: showInterval6,
-          // showTime: showTime6,
         },
         {
           interval: intervalProcess3,
-          time: 'S',  
-          process: 'Статус работы претендента', 
+          time: timeProcess3,  
+          process: 'Статус работы претендента [3]', 
           dop: 'getWorkerPretendent()',
           resurs: 'Work',
           status: statusProcess3,
-          // play: playProcess6,
-          // stop: stopProcess6,
-          // info: showProcessInfo6,
-          // showInterval: showInterval6,
-          // showTime: showTime6,
         },
         {
           interval: intervalProcess3,
-          time: 'S',
-          process: 'Название проекта',
+          time: timeProcess3,
+          process: 'Название проекта [3]',
           dop: 'getProjectName',
           resurs: 'Work',
           status: statusProcess3,
         },
         {
           interval: intervalProcess3,
-          time: 'S',
-          process: 'Отправка рассылки',
+          time: timeProcess3,
+          process: 'ID специалиста в Notion [3]',
+          dop: 'getWorkerChatId',
+          resurs: 'Work',
+          status: statusProcess3,
+        },
+        {
+          interval: intervalProcess4,
+          time: timeProcess4,
+          process: 'Название проекта [4]',
+          dop: 'getProjectName | Принять',
+          resurs: 'Work',
+          status: statusProcess4,
+        },
+        {
+          interval: intervalProcess5,
+          time: timeProcess5,
+          process: 'Отправка рассылки [5]',
           dop: 'sendDistribution',
           resurs: 'Mail',
-          status: statusProcess4,
+          status: statusProcess5,
         }   
       ]
 
@@ -346,6 +325,7 @@ const SoundsNotif = () => {
 
   }
 
+  //остановить или запустить процесс
   const clickPlay = (ind) => {
     console.log("ind: ", ind)
 
@@ -369,39 +349,129 @@ const SoundsNotif = () => {
     
 
     if (ind === 0) {
-
       //нажата кнопка Стоп
-      // if (stopProcess[1]) {
-      //   console.log("stop")
-      //   //await getProcess(ind, false)
-      //   sendNumberProcess(ind, false)
-      // }
+      if (stopProcess[0]) {
+        console.log("stop")
+        //await getProcess(ind, false)
+        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+      }
 
       //нажата кнопка Play
-      // if (playProcess[1]) {
-      //   console.log("play")
-      //   //await getProcess(ind, true)
-      //   sendNumberProcess(ind, true)
-      // }
+      if (playProcess[0]) {
+        console.log("play")
+        //await getProcess(ind, true)
+        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+      }
+    }
+    else if (ind === 1) {
+      //нажата кнопка Стоп
+      if (stopProcess[1]) {
+        //console.log("stop")
+        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+      }
+
+      //нажата кнопка Play
+      if (playProcess[1]) {
+        //console.log("play")
+        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+      }
     }
     else if (ind === 2) {
+      //нажата кнопка Стоп
+      if (stopProcess[2]) {
+        //console.log("stop")
+        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+      }
 
+      //нажата кнопка Play
+      if (playProcess[2]) {
+        //console.log("play")
+        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+      }
     }
     else if (ind === 3) {
+      //нажата кнопка Стоп
+      if (stopProcess[3]) {
+        //console.log("stop")
+        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+      }
 
+      //нажата кнопка Play
+      if (playProcess[3]) {
+        //console.log("play")
+        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+      }
     }
     else if (ind === 4) {
+      //нажата кнопка Стоп
+      if (stopProcess[4]) {
+        //console.log("stop")
+        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+      }
 
+      //нажата кнопка Play
+      if (playProcess[4]) {
+        //console.log("play")
+        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+      }
     }
     else if (ind === 5) {
+      //нажата кнопка Стоп
+      if (stopProcess[5]) {
+        //console.log("stop")
+        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+      }
 
+      //нажата кнопка Play
+      if (playProcess[5]) {
+        //console.log("play")
+        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+      }
     }
     else if (ind === 6) {
+      //нажата кнопка Стоп
+      if (stopProcess[6]) {
+        //console.log("stop")
+        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+      }
 
+      //нажата кнопка Play
+      if (playProcess[6]) {
+        //console.log("play")
+        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+      }
     }
-    
+
+    else if (ind === 7) {
+      //нажата кнопка Стоп
+      if (stopProcess[7]) {
+        //console.log("stop")
+        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+      }
+
+      //нажата кнопка Play
+      if (playProcess[7]) {
+        //console.log("play")
+        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+      }
+    }
+
+    else if (ind === 8) {
+      //нажата кнопка Стоп
+      if (stopProcess[8]) {
+        //console.log("stop")
+        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+      }
+
+      //нажата кнопка Play
+      if (playProcess[8]) {
+        //console.log("play")
+        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+      }
+    }
   }
 
+  //начать изменения
   const clickRec = (ind) => {
     setShowInterval(prevShownTable => ({
       ...prevShownTable,
@@ -413,101 +483,74 @@ const SoundsNotif = () => {
       [ind]: !prevShownTable[ind]
     }));
 
-    if (ind === 0) {
-      // setShowInterval(true)
-      // setShowTime(true)
-
-      setTimeout(()=>{
-        // setShowInterval(false)
-        // setShowTime(false)
-      }, 5000)
-    } 
-    else if (ind === 1) {
-      // setShowInterval2(true)
-      // setShowTime2(true)
-
-      setTimeout(()=>{
-        // setShowInterval2(false)
-        // setShowTime2(false)
-      }, 10000)
-    } 
-    else if (ind === 2) {
-      // setShowInterval3(true)
-      // setShowTime3(true)
-
-      setTimeout(()=>{
-        // setShowInterval3(false)
-        // setShowTime3(false)
-      }, 10000)
-    } 
-    else if (ind === 3) {
-      // setShowInterval4(true)
-      // setShowTime4(true)
-
-      setTimeout(()=>{
-        // setShowInterval4(false)
-        // setShowTime4(false)
-      }, 10000)
-    } 
-    else if (ind === 4) {
-      // setShowInterval5(true)
-      // setShowTime5(true)
-
-      setTimeout(()=>{
-        // setShowInterval5(false)
-        // setShowTime5(false)
-      }, 10000)
-    } 
-    else if (ind === 5) {
-      // setShowInterval6(true)
-      // setShowTime6(true)
-
-      setTimeout(()=>{
-        // setShowInterval6(false)
-        // setShowTime6(false)
-      }, 10000)
-    } 
+    //убрать редактирование
+    setTimeout(()=> {
+      setShowInterval(prevShownTable => ({
+        ...prevShownTable,
+        [ind]: !prevShownTable[ind]
+      }));
+  
+      setShowTime(prevShownTable => ({
+        ...prevShownTable,
+        [ind]: !prevShownTable[ind]
+      }));
+    }, 10000)
   }
 
-
+  //изменить интервал
   const changeInterval = (e, ind) => {
-    const val = e.target.value
+    const val = e.target.value   
 
-    
+    console.log("val: ", val)
 
+    setShowInterval(prevShownTable => ({
+      ...prevShownTable,
+      [ind]: !prevShownTable[ind]
+    }));
+
+    if (ind === 0) {
+      setIntervalProcess(val)
+    }
     if (ind === 1) {
-      setShowInterval(false)
-      setValueInterval(val)
+      setIntervalProcess(val)
     }
     else if (ind === 2) {
-      // setShowInterval2(false)
-      // setValueInterval2(val)
+      setIntervalProcess(val)
     }
     else if (ind === 3) {
-      // setShowInterval3(false)
-      // setValueInterval3(val)
+      setIntervalProcess(val)
     }
     else if (ind === 4) {
-      // setShowInterval4(false)
-      // setValueInterval4(val)
+      setIntervalProcess2(val)
     }
     else if (ind === 5) {
-      // setShowInterval5(false)
-      // setValueInterval5(val)
+      setIntervalProcess2(val)
     }
     else if (ind === 6) {
-      // setShowInterval6(false)
-      // setValueInterval6(val)
+      setIntervalProcess2(val)
     }
+    else if (ind === 7) {
+      setIntervalProcess3(val)
+    }
+
+    //отправить сокет
+    sendNumberProcess(ind, true, val, 'S')
     
   }
 
+  //изменить время
   const changeTime = (e, ind) => {
     const val = e.target.value
     console.log(val, ind)
+
+    setShowTime(prevShownTable => ({
+      ...prevShownTable,
+      [ind]: !prevShownTable[ind]
+    }));
+
     if (ind === 1) {
-      // setShowTime(false)
-      // setValueTime(val)
+      //отправить сокет
+      sendNumberProcess(ind, true, intervalProcess, val)
 
       if (val === 'M') {
         setArrInt(arrM)
@@ -519,8 +562,8 @@ const SoundsNotif = () => {
     } 
     
     else if (ind === 2) {
-      // setShowTime2(false)
-      // setValueTime2(val)
+      //отправить сокет
+      sendNumberProcess(ind, true, intervalProcess, val)
 
       if (val === 'M') {
         setArrInt2(arrM)
@@ -532,8 +575,8 @@ const SoundsNotif = () => {
     }
 
     else if (ind === 3) {
-      // setShowTime3(false)
-      // setValueTime3(val)
+      //отправить сокет
+      sendNumberProcess(ind, true, intervalProcess, val)
 
       if (val === 'M') {
         setArrInt3(arrM)
@@ -545,8 +588,8 @@ const SoundsNotif = () => {
     }
 
     else if (ind === 4) {
-      // setShowTime4(false)
-      // setValueTime4(val)
+      //отправить сокет
+      sendNumberProcess(ind, true, intervalProcess2, val)
 
       if (val === 'M') {
         setArrInt4(arrM)
@@ -558,8 +601,8 @@ const SoundsNotif = () => {
     }
 
     else if (ind === 5) {
-      // setShowTime5(false)
-      // setValueTime5(val)
+      //отправить сокет
+      sendNumberProcess(ind, true, intervalProcess2, val)
 
       if (val === 'M') {
         setArrInt5(arrM)
@@ -571,8 +614,8 @@ const SoundsNotif = () => {
     }
 
     else if (ind === 6) {
-      // setShowTime6(false)
-      // setValueTime6(val)
+      //отправить сокет
+      sendNumberProcess(ind, true, intervalProcess2, val)
 
       if (val === 'M') {
         setArrInt6(arrM)
@@ -582,6 +625,35 @@ const SoundsNotif = () => {
         setArrInt6(arrM)
       } 
     }
+
+    else if (ind === 7) {
+
+      //отправить сокет
+      sendNumberProcess(ind, true, intervalProcess2, val)
+
+      if (val === 'M') {
+        setArrInt6(arrM)
+      } else if (val === 'H') {
+        setArrInt6(arrH)
+      } else if (val === 'S') {
+        setArrInt6(arrM)
+      } 
+    }
+
+    else if (ind === 8) {
+      //отправить сокет
+      sendNumberProcess(ind, true, intervalProcess3, val)
+
+      if (val === 'M') {
+        setArrInt6(arrM)
+      } else if (val === 'H') {
+        setArrInt6(arrH)
+      } else if (val === 'S') {
+        setArrInt6(arrM)
+      } 
+    }
+
+    
     
   }
 
