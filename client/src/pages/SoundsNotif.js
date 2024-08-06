@@ -168,7 +168,7 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess, 
           time: timeProcess, 
-          process: 'Название и статус проекта [1]', 
+          process: '[1] Название и статус проекта', 
           dop: 'getReports()',
           resurs: 'Rent',
           status: statusProcess,
@@ -176,7 +176,7 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess, 
           time: timeProcess, 
-          process: 'Даты проекта из основного состава [1]', 
+          process: '[1] Даты проекта из основного состава', 
           dop: 'getReports()',
           resurs: 'Rent',  
           status: statusProcess,
@@ -184,7 +184,7 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess, 
           time: timeProcess, 
-          process: 'TelegramID менеджера проекта [1]', 
+          process: '[1] TelegramID менеджера проекта', 
           dop: 'getReports()',
           resurs: 'Rent',
           status: statusProcess,
@@ -192,7 +192,7 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess2, 
           time: timeProcess2, 
-          process: 'Название и статус проекта [2]', 
+          process: '[2] Название и статус проекта', 
           dop: 'getReportsRestart()',
           resurs: 'Rent',
           status: statusProcess2,
@@ -200,7 +200,7 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess2, 
           time: timeProcess2, 
-          process: 'Даты проекта из основного состава [2]', 
+          process: '[2] Даты проекта из основного состава', 
           dop: 'getReportsRestart()',
           resurs: 'Rent', 
           status: statusProcess2,
@@ -208,7 +208,7 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess2,
           time: timeProcess2,  
-          process: 'TelegramID менеджера проекта [2]', 
+          process: '[2] TelegramID менеджера проекта', 
           dop: 'getReportsRestart()',
           resurs: 'Rent',
           status: statusProcess2,
@@ -216,7 +216,7 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess3,
           time: timeProcess3,  
-          process: 'Все проекты [3]', 
+          process: '[3] Все проекты', 
           dop: 'getProjects',
           resurs: 'Work',
           status: statusProcess3,
@@ -224,7 +224,7 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess3,
           time: timeProcess3,  
-          process: 'Все сметы [3]', 
+          process: '[3] Все сметы', 
           dop: 'getSmetaAll',
           resurs: 'Work',
           status: statusProcess3,
@@ -232,7 +232,7 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess3,
           time: timeProcess3,  
-          process: 'Статус работы претендента [3]', 
+          process: '[3] Статус работы претендента', 
           dop: 'getWorkerPretendent()',
           resurs: 'Work',
           status: statusProcess3,
@@ -240,7 +240,7 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess3,
           time: timeProcess3,
-          process: 'Название проекта [3]',
+          process: '[3] Название проекта',
           dop: 'getProjectName',
           resurs: 'Work',
           status: statusProcess3,
@@ -248,7 +248,7 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess3,
           time: timeProcess3,
-          process: 'ID специалиста в Notion [3]',
+          process: '[3] ID специалиста в Notion',
           dop: 'getWorkerChatId',
           resurs: 'Work',
           status: statusProcess3,
@@ -256,7 +256,7 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess4,
           time: timeProcess4,
-          process: 'Название проекта [4]',
+          process: '[4] Название проекта',
           dop: 'getProjectName | Принять',
           resurs: 'Work',
           status: statusProcess4,
@@ -264,7 +264,7 @@ const SoundsNotif = () => {
         {
           interval: intervalProcess5,
           time: timeProcess5,
-          process: 'Отправка рассылки [5]',
+          process: '[5] Отправка рассылки',
           dop: 'sendDistribution',
           resurs: 'Mail',
           status: statusProcess5,
