@@ -54,9 +54,18 @@ const SoundsNotif = () => {
     statusProcess3, 
     statusProcess4, 
     statusProcess5, 
-    statusProcess6 } = useUsersContext();
+    statusProcess6,
+    intervalProcess,
+    intervalProcess2,
+    intervalProcess3,
+    timeProcess,
+    timeProcess2,
+    timeProcess3 } = useUsersContext();
 
   const [loadingIframe, setLoadingIframe] = useState(true);
+  const [loadingIframe2, setLoadingIframe2] = useState(true);
+  const [loadingIframe3, setLoadingIframe3] = useState(true);
+  const [loadingIframe4, setLoadingIframe4] = useState(true);
 
   const [soundNotif, setSoundNotif] = useState([]); 
   const [activeKey, setActiveKey] = useState(2)
@@ -159,8 +168,8 @@ const SoundsNotif = () => {
 
     const arr = [
         {
-          interval: valueInterval[0], 
-          time: valueTime[0], 
+          interval: intervalProcess, 
+          time: timeProcess, 
           process: 'Название и статус проекта', 
           dop: 'getReports()',
           resurs: 'Renthub',
@@ -172,8 +181,8 @@ const SoundsNotif = () => {
           // showTime: showTime,
         }, 
         {
-          interval: valueInterval[1], 
-          time: valueTime[1], 
+          interval: intervalProcess, 
+          time: timeProcess, 
           process: 'Даты проекта из основного состава', 
           dop: 'getReports()',
           resurs: 'Renthub',  
@@ -185,8 +194,8 @@ const SoundsNotif = () => {
           // showTime: showTime2,
         }, 
         {
-          interval: valueInterval[2], 
-          time: valueTime[2], 
+          interval: intervalProcess, 
+          time: timeProcess, 
           process: 'TelegramID менеджера проекта', 
           dop: 'getReports()',
           resurs: 'Renthub',
@@ -616,16 +625,25 @@ const SoundsNotif = () => {
 
                       <CRow>
                         <CCol md={6} style={{overflow: 'auto', transform: 'scale(0.9)', transformOrigin: 'top left'}}>
-                          <iframe width="650" height="600" src="https://proj.uley.team:8000/status" title="description" onLoad={() => setLoadingIframe(false)} loading = "lazy"></iframe>
                           {loadingIframe ? <p> Загрузка...</p> : null}
+                          <iframe width="650" height="600" src="https://proj.uley.team:8000/status" title="description" onLoad={() => setLoadingIframe(false)} loading = "lazy"></iframe>
                         </CCol>
-                        <CCol md={6} style={{overflow: 'auto', transform: 'scale(0.9)', transformOrigin: 'top left'}}><iframe width="650" height="600" src="https://proj.uley.team:8001/status" title="description" loading = "lazy"></iframe></CCol>
+                        <CCol md={6} style={{overflow: 'auto', transform: 'scale(0.9)', transformOrigin: 'top left'}}>
+                          {loadingIframe2 ? <p> Загрузка...</p> : null}
+                          <iframe width="650" height="600" src="https://proj.uley.team:8001/status" title="description" onLoad={() => setLoadingIframe2(false)} loading = "lazy"></iframe>
+                        </CCol>
                       </CRow>
                       <hr></hr>
                       <br/>
                       <CRow>
-                        <CCol md={6} style={{overflow: 'auto', transform: 'scale(0.9)', transformOrigin: 'top left'}}><iframe width="650" height="600" src="https://proj.uley.team:8080/status" title="description" loading = "lazy"></iframe></CCol>
-                        <CCol md={6} style={{overflow: 'auto', transform: 'scale(0.9)', transformOrigin: 'top left'}}><iframe width="650" height="600" src="https://proj.uley.team:5000/status" title="description" loading = "lazy"></iframe></CCol>
+                        <CCol md={6} style={{overflow: 'auto', transform: 'scale(0.9)', transformOrigin: 'top left'}}>
+                          {loadingIframe3 ? <p> Загрузка...</p> : null}
+                          <iframe width="650" height="600" src="https://proj.uley.team:8080/status" title="description" onLoad={() => setLoadingIframe3(false)} loading = "lazy"></iframe>
+                        </CCol>
+                        <CCol md={6} style={{overflow: 'auto', transform: 'scale(0.9)', transformOrigin: 'top left'}}>
+                          {loadingIframe4 ? <p> Загрузка...</p> : null}
+                          <iframe width="650" height="600" src="https://proj.uley.team:5000/status" title="description" onLoad={() => setLoadingIframe4(false)} loading = "lazy"></iframe>
+                        </CCol>
                       </CRow>
                       
                     </CCardBody>

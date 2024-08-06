@@ -121,6 +121,14 @@ const UsersProvider = ({ children }) => {
 	const [statusProcess5, setStatusProcess5] = useState(false)
 	const [statusProcess6, setStatusProcess6] = useState(false)
 
+	const [intervalProcess, setIntervalProcess] = useState('0')
+	const [intervalProcess2, setIntervalProcess2] = useState('0')
+	const [intervalProcess3, setIntervalProcess3] = useState('0')
+
+	const [timeProcess, setTimeProcess] = useState('S')
+	const [timeProcess2, setTimeProcess2] = useState('S')
+	const [timeProcess3, setTimeProcess3] = useState('S')
+
 	const [showGetMess, setShowGetMess ] = useState(false);
 
 	const [soundVolume, setSoundVolume] = useState(() => {
@@ -927,17 +935,23 @@ const UsersProvider = ({ children }) => {
 
 	//получить процесс
 	const fetchProcess = async (dataAll) => {
-		console.log("Ответ о процессу получен: ", dataAll)
-		const { process, data } = dataAll
+		console.log("Ответ о процессе получен: ", dataAll)
+		const { process, data, interval, time } = dataAll
 
 		if (process === '1') {
 			setStatusProcess(data)
+			setIntervalProcess(interval)
+			setTimeProcess(time)
 		}
 		else if (process === '2') {
 			setStatusProcess2(data)
+			setIntervalProcess2(interval)
+			setTimeProcess2(time)
 		}
 		else if (process === '3') {
 			setStatusProcess3(data)
+			setIntervalProcess3(interval)
+			setTimeProcess3(time)
 		}
 		
 	}
