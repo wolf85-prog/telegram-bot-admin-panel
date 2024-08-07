@@ -115,9 +115,9 @@ const UsersProvider = ({ children }) => {
 	const [projectsNew, setProjectsNew] = useState([])
 
 	const [statusProcess, setStatusProcess] = useState(false)
-	const [statusProcess2, setStatusProcess2] = useState(false)
-	const [statusProcess3, setStatusProcess3] = useState(false)
-	const [statusProcess4, setStatusProcess4] = useState(false)
+	const [statusProcess2, setStatusProcess2] = useState(true)
+	const [statusProcess3, setStatusProcess3] = useState(true)
+	const [statusProcess4, setStatusProcess4] = useState(true)
 	const [statusProcess5, setStatusProcess5] = useState(false)
 	const [statusProcess6, setStatusProcess6] = useState(false)
 
@@ -127,10 +127,10 @@ const UsersProvider = ({ children }) => {
 	const [intervalProcess4, setIntervalProcess4] = useState('10') // бот специалиста
 	const [intervalProcess5, setIntervalProcess5] = useState('4') // бот рассылки
 
-	const [timeProcess, setTimeProcess] = useState('S')
-	const [timeProcess2, setTimeProcess2] = useState('S')
-	const [timeProcess3, setTimeProcess3] = useState('S')
-	const [timeProcess4, setTimeProcess4] = useState('S')
+	const [timeProcess, setTimeProcess] = useState('M')
+	const [timeProcess2, setTimeProcess2] = useState('M')
+	const [timeProcess3, setTimeProcess3] = useState('M')
+	const [timeProcess4, setTimeProcess4] = useState('M')
 	const [timeProcess5, setTimeProcess5] = useState('M')
 
 	const [showGetMess, setShowGetMess ] = useState(false);
@@ -942,21 +942,21 @@ const UsersProvider = ({ children }) => {
 		console.log("Ответ о процессе получен: ", dataAll)
 		const { process, data, interval, time } = dataAll
 
-		if (process === '1') {
-			setStatusProcess(data)
-			setIntervalProcess(interval)
-			setTimeProcess(time)
-		}
-		else if (process === '2') {
-			setStatusProcess2(data)
-			setIntervalProcess2(interval)
-			setTimeProcess2(time)
-		}
-		else if (process === '3') {
-			setStatusProcess3(data)
-			setIntervalProcess3(interval)
-			setTimeProcess3(time)
-		}
+		// if (process === '1') {
+		// 	setStatusProcess(data)
+		// 	setIntervalProcess(interval)
+		// 	setTimeProcess(time)
+		// }
+		// else if (process === '2') {
+		// 	setStatusProcess2(data)
+		// 	setIntervalProcess2(interval)
+		// 	setTimeProcess2(time)
+		// }
+		// else if (process === '3') {
+		// 	setStatusProcess3(data)
+		// 	setIntervalProcess3(interval)
+		// 	setTimeProcess3(time)
+		// }
 		
 	}
 

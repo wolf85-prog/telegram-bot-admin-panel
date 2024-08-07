@@ -56,6 +56,12 @@ const SoundsNotif = () => {
     statusProcess4, 
     statusProcess5, 
     statusProcess6,
+    setStatusProcess, 
+    setStatusProcess2, 
+    setStatusProcess3, 
+    setStatusProcess4, 
+    setStatusProcess5, 
+    setStatusProcess6,
     intervalProcess,
     intervalProcess2,
     intervalProcess3,
@@ -98,8 +104,7 @@ const SoundsNotif = () => {
   const [showInterval, setShowInterval]= useState([false, false, false, false, false, false]);
   const [showTime, setShowTime]= useState([false, false, false, false, false, false]);
 
-  const [valueInterval, setValueInterval] = useState(['2', '2', '2', '2', '2', '2'])
-  const [valueTime, setValueTime] = useState(['S', 'S', 'S', 'S', 'S', 'S'])
+  //const [valueInterval, setValueInterval] = useState(['2', '2', '2', '2', '2', '2'])
 
 
   //const [arrM, setArrM] = useState([])
@@ -304,10 +309,10 @@ const SoundsNotif = () => {
       
   }, [clickSort, 
     sortInterval, 
-    statusProcess, 
-    statusProcess2, 
-    statusProcess3, 
-    playProcess,
+    // statusProcess, 
+    // statusProcess2, 
+    // statusProcess3, 
+    //playProcess,
     intervalProcess,
     intervalProcess2, 
     intervalProcess3]);
@@ -358,7 +363,7 @@ const SoundsNotif = () => {
       [ind]: !prevShownTable[ind]
     }));
 
-    setTimeout(()=>{setLoadStatus(false)}, 3000)
+    //setTimeout(()=>{setLoadStatus(false)}, 3000)
     
 
     if (ind === 0) {
@@ -366,92 +371,125 @@ const SoundsNotif = () => {
       if (stopProcess[0]) {
         console.log("stop")
         //await getProcess(ind, false)
-        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //setStatusProcess(false)
+        fetchAllProcess(ind, false)
       }
 
       //нажата кнопка Play
       if (playProcess[0]) {
         console.log("play")
         //await getProcess(ind, true)
-        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //setStatusProcess(true)
+        fetchAllProcess(ind, true)
       }
     }
     else if (ind === 1) {
       //нажата кнопка Стоп
       if (stopProcess[1]) {
         //console.log("stop")
-        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //setStatusProcess(false)
+        fetchAllProcess(ind, false)
       }
 
       //нажата кнопка Play
       if (playProcess[1]) {
         //console.log("play")
-        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //setStatusProcess(true)
+        fetchAllProcess(ind, true)
       }
     }
     else if (ind === 2) {
       //нажата кнопка Стоп
       if (stopProcess[2]) {
         //console.log("stop")
-        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //setStatusProcess(false)
+        fetchAllProcess(ind, false)
       }
 
       //нажата кнопка Play
       if (playProcess[2]) {
         //console.log("play")
-        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //setStatusProcess(true)
+        fetchAllProcess(ind, true)
+        //setStatusProcess3(!statusProcess3)
       }
     }
     else if (ind === 3) {
       //нажата кнопка Стоп
       if (stopProcess[3]) {
         //console.log("stop")
-        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //setStatusProcess(false)
+        fetchAllProcess(ind, false)
       }
 
       //нажата кнопка Play
       if (playProcess[3]) {
         //console.log("play")
-        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //setStatusProcess(true)
+        fetchAllProcess(ind, true)
       }
     }
     else if (ind === 4) {
       //нажата кнопка Стоп
       if (stopProcess[4]) {
         //console.log("stop")
-        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //setStatusProcess(false)
+        fetchAllProcess(ind, false)
       }
 
       //нажата кнопка Play
       if (playProcess[4]) {
         //console.log("play")
-        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //setStatusProcess(true)
+        fetchAllProcess(ind, true)
       }
     }
     else if (ind === 5) {
       //нажата кнопка Стоп
       if (stopProcess[5]) {
         //console.log("stop")
-        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, false, intervalProcess, timeProcess)
+
+        //setStatusProcess(false)
+        fetchAllProcess(ind, false)
       }
 
       //нажата кнопка Play
       if (playProcess[5]) {
         //console.log("play")
-        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, true, intervalProcess, timeProcess)
+
+        //setStatusProcess(true)
+        fetchAllProcess(ind, true)
       }
     }
     else if (ind === 6) {
       //нажата кнопка Стоп
       if (stopProcess[6]) {
         //console.log("stop")
-        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, false, intervalProcess, timeProcess)
+
+        //setStatusProcess(false)
+        fetchAllProcess(ind, false)
       }
 
       //нажата кнопка Play
       if (playProcess[6]) {
         //console.log("play")
-        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, true, intervalProcess, timeProcess)
+
+        //setStatusProcess(true)
+        fetchAllProcess(ind, true)
       }
     }
 
@@ -459,13 +497,19 @@ const SoundsNotif = () => {
       //нажата кнопка Стоп
       if (stopProcess[7]) {
         //console.log("stop")
-        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, false, intervalProcess, timeProcess)
+
+        //setStatusProcess(false)
+        fetchAllProcess(ind, false)
       }
 
       //нажата кнопка Play
       if (playProcess[7]) {
         //console.log("play")
-        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, true, intervalProcess, timeProcess)
+
+        //setStatusProcess(true)
+        fetchAllProcess(ind, true)
       }
     }
 
@@ -473,15 +517,29 @@ const SoundsNotif = () => {
       //нажата кнопка Стоп
       if (stopProcess[8]) {
         //console.log("stop")
-        sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, false, intervalProcess, timeProcess)
+
+        //setStatusProcess(false)
+        fetchAllProcess(ind, false)
       }
 
       //нажата кнопка Play
       if (playProcess[8]) {
         //console.log("play")
-        sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //sendNumberProcess(ind, true, intervalProcess, timeProcess)
+
+        //setStatusProcess(true)
+        fetchAllProcess(ind, true)
       }
     }
+  }
+
+  const fetchAllProcess = (ind, on) => {
+    processAll[ind].status = on
+    setProcessAll(processAll)
+
+    setTimeout(()=>setLoadStatus(false), 3000)
+    
   }
 
   //начать изменения
@@ -778,7 +836,7 @@ const SoundsNotif = () => {
                                                 aria-label="Default select example"
                                                 style={{width: '63px', fontSize: '12px'}}
                                                 onChange={(e)=>changeInterval(e, 1)}
-                                                value={valueInterval}
+                                                value={item.interval}
                                                 options={arrInt}
                                               />}
                                 </CTableDataCell>
@@ -810,7 +868,7 @@ const SoundsNotif = () => {
                                 <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                   
                                   <CButton disabled={!item.status || !stopProcess[index]} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
-                                    <img src={stopProcess[index] && item.status ? stopIcon : stopIcon2} alt='' width='25px' />
+                                    <img src={stopProcess[index] || item.status ? stopIcon : stopIcon2} alt='' width='25px' />
                                   </CButton>
                                   <CButton disabled={!playProcess[index]} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
                                     <img src={playProcess[index] ? playIcon : playIcon2} alt='' width='25px' />
