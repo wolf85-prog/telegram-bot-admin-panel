@@ -120,7 +120,7 @@ const SoundsNotif = () => {
   const [processAll, setProcessAll] = useState(() => {
 		const savedItem = localStorage.getItem("processAll");
 		const parsedItem = JSON.parse(savedItem);
-		return parsedItem || false;
+		return parsedItem || [];
 	})
 
   const arrTime = [{label: 'S', value: 'S',},{label: 'M', value: 'M',},{label: 'H',value: 'H',},]
