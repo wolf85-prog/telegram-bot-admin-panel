@@ -293,12 +293,12 @@ const SoundsNotif = () => {
 
   useEffect(() => {
     const savedItem = localStorage.getItem("processAll");
-	  const parseItem = JSON.parse(savedItem);
 
-    if (parseItem.length === 0) {
-      setProcessAll(arr)
-    } else {
+    if (savedItem) {
+      const parseItem = JSON.parse(savedItem);
       setProcessAll(parseItem)
+    } else {
+      setProcessAll(arr)
     }
     
   },[])
