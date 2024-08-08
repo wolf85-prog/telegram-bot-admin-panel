@@ -121,17 +121,7 @@ const UsersProvider = ({ children }) => {
 	const [statusProcess5, setStatusProcess5] = useState(false)
 	const [statusProcess6, setStatusProcess6] = useState(false)
 
-	const [intervalProcess, setIntervalProcess] = useState('10') //бот заказчика
-	const [intervalProcess2, setIntervalProcess2] = useState('10') // бот специалиста
-	const [intervalProcess3, setIntervalProcess3] = useState('10') // бот специалиста
-	const [intervalProcess4, setIntervalProcess4] = useState('10') // бот специалиста
-	const [intervalProcess5, setIntervalProcess5] = useState('4') // бот рассылки
-
-	const [timeProcess, setTimeProcess] = useState('M')
-	const [timeProcess2, setTimeProcess2] = useState('M')
-	const [timeProcess3, setTimeProcess3] = useState('M')
-	const [timeProcess4, setTimeProcess4] = useState('M')
-	const [timeProcess5, setTimeProcess5] = useState('M')
+	
 
 	const [showGetMess, setShowGetMess ] = useState(false);
 
@@ -1908,26 +1898,26 @@ function isObjectEmpty(obj) {
 			statusProcess4, 
 			statusProcess5, 
 			statusProcess6,
-			intervalProcess,
-			intervalProcess2,
-			intervalProcess3,
-			intervalProcess4,
-			intervalProcess5,
-			setIntervalProcess,
-			setIntervalProcess2,
-			setIntervalProcess3,
-			setIntervalProcess4,
-			setIntervalProcess5,
-			timeProcess,
-			timeProcess2,
-			timeProcess3,
-			timeProcess4,
-			timeProcess5,
-			setTimeProcess,
-			setTimeProcess2,
-			setTimeProcess3,
-			setTimeProcess4,
-			setTimeProcess5,
+			// intervalProcess,
+			// intervalProcess2,
+			// intervalProcess3,
+			// intervalProcess4,
+			// intervalProcess5,
+			// setIntervalProcess,
+			// setIntervalProcess2,
+			// setIntervalProcess3,
+			// setIntervalProcess4,
+			// setIntervalProcess5,
+			// timeProcess,
+			// timeProcess2,
+			// timeProcess3,
+			// timeProcess4,
+			// timeProcess5,
+			// setTimeProcess,
+			// setTimeProcess2,
+			// setTimeProcess3,
+			// setTimeProcess4,
+			// setTimeProcess5,
 		}}>
 			{children}
 		</UsersContext.Provider>

@@ -60,26 +60,39 @@ const SoundsNotif = () => {
     setStatusProcess4, 
     setStatusProcess5, 
     setStatusProcess6,
-    intervalProcess,
-    intervalProcess2,
-    intervalProcess3,
-    intervalProcess4,
-    intervalProcess5,
-    setIntervalProcess,
-    setIntervalProcess2,
-    setIntervalProcess3,
-    setIntervalProcess4,
-    setIntervalProcess5,
-    timeProcess,
-    timeProcess2,
-    timeProcess3,
-    timeProcess4,
-    timeProcess5,
-    setTimeProcess,
-    setTimeProcess2,
-    setTimeProcess3,
-    setTimeProcess4,
-    setTimeProcess5} = useUsersContext();
+    // intervalProcess,
+    // intervalProcess2,
+    // intervalProcess3,
+    // intervalProcess4,
+    // intervalProcess5,
+    // setIntervalProcess,
+    // setIntervalProcess2,
+    // setIntervalProcess3,
+    // setIntervalProcess4,
+    // setIntervalProcess5,
+    // timeProcess,
+    // timeProcess2,
+    // timeProcess3,
+    // timeProcess4,
+    // timeProcess5,
+    // setTimeProcess,
+    // setTimeProcess2,
+    // setTimeProcess3,
+    // setTimeProcess4,
+    // setTimeProcess5
+  } = useUsersContext();
+
+  const [intervalProcess, setIntervalProcess] = useState('10') //бот заказчика
+	const [intervalProcess2, setIntervalProcess2] = useState('10') // бот специалиста
+	const [intervalProcess3, setIntervalProcess3] = useState('10') // бот специалиста
+	const [intervalProcess4, setIntervalProcess4] = useState('10') // бот специалиста
+	const [intervalProcess5, setIntervalProcess5] = useState('4') // бот рассылки
+
+	const [timeProcess, setTimeProcess] = useState('M')
+	const [timeProcess2, setTimeProcess2] = useState('M')
+	const [timeProcess3, setTimeProcess3] = useState('M')
+	const [timeProcess4, setTimeProcess4] = useState('M')
+	const [timeProcess5, setTimeProcess5] = useState('M')
 
   const [loadingIframe, setLoadingIframe] = useState(true);
   const [loadingIframe2, setLoadingIframe2] = useState(true);
@@ -158,6 +171,138 @@ const SoundsNotif = () => {
     {label: 60, value: 60,},
   ]
 
+  const arr = [
+    {
+      interval: intervalProcess, 
+      time: timeProcess, 
+      process: 'Название и статус проекта',
+      code: 'yellow', 
+      dop: 'getReports()',
+      resurs: 'Rent',
+      status: statusProcess,
+    }, 
+    {
+      interval: intervalProcess, 
+      time: timeProcess, 
+      process: 'Даты проекта из основного состава', 
+      code: 'yellow', 
+      dop: 'getReports()',
+      resurs: 'Rent',  
+      status: statusProcess,
+    }, 
+    {
+      interval: intervalProcess, 
+      time: timeProcess, 
+      process: 'TelegramID менеджера проекта', 
+      code: 'yellow', 
+      dop: 'getReports()',
+      resurs: 'Rent',
+      status: statusProcess,
+    },
+    {
+      interval: intervalProcess2, 
+      time: timeProcess2, 
+      process: 'Название и статус проекта', 
+      code: 'purple', 
+      dop: 'getReportsRestart()',
+      resurs: 'Rent',
+      status: statusProcess2,
+    },
+    {
+      interval: intervalProcess2, 
+      time: timeProcess2, 
+      process: 'Даты проекта из основного состава', 
+      code: 'purple', 
+      dop: 'getReportsRestart()',
+      resurs: 'Rent', 
+      status: statusProcess2,
+    },
+    {
+      interval: intervalProcess2,
+      time: timeProcess2,  
+      process: 'TelegramID менеджера проекта', 
+      code: 'purple', 
+      dop: 'getReportsRestart()',
+      resurs: 'Rent',
+      status: statusProcess2,
+    },
+    {
+      interval: intervalProcess3,
+      time: timeProcess3,  
+      process: 'Все проекты', 
+      code: 'blue', 
+      dop: 'getProjects',
+      resurs: 'Work',
+      status: statusProcess3,
+    },
+    {
+      interval: intervalProcess3,
+      time: timeProcess3,  
+      process: 'Все сметы', 
+      code: 'blue', 
+      dop: 'getSmetaAll',
+      resurs: 'Work',
+      status: statusProcess3,
+    },
+    {
+      interval: intervalProcess3,
+      time: timeProcess3,  
+      process: 'Статус работы претендента', 
+      code: 'blue', 
+      dop: 'getWorkerPretendent()',
+      resurs: 'Work',
+      status: statusProcess3,
+    },
+    {
+      interval: intervalProcess3,
+      time: timeProcess3,
+      process: 'Название проекта',
+      code: 'blue', 
+      dop: 'getProjectName',
+      resurs: 'Work',
+      status: statusProcess3,
+    },
+    {
+      interval: intervalProcess3,
+      time: timeProcess3,
+      process: 'ID специалиста в Notion',
+      code: 'blue', 
+      dop: 'getWorkerChatId',
+      resurs: 'Work',
+      status: statusProcess3,
+    },
+    {
+      interval: intervalProcess4,
+      time: timeProcess4,
+      process: 'Название проекта',
+      code: 'orange', 
+      dop: 'getProjectName | Принять',
+      resurs: 'Work',
+      status: statusProcess4,
+    },
+    {
+      interval: intervalProcess5,
+      time: timeProcess5,
+      process: 'Отправка рассылки',
+      code: 'gray', 
+      dop: 'sendDistribution',
+      resurs: 'Mail',
+      status: statusProcess5,
+    }   
+  ]
+
+  useEffect(() => {
+    const savedItem = localStorage.getItem("processAll");
+	  const parseItem = JSON.parse(savedItem);
+
+    if (parseItem.length === 0) {
+      setProcessAll(arr)
+    } else {
+      setProcessAll(parseItem)
+    }
+    
+  },[])
+
   useEffect(() => {
 
     setArrInt(arrH)
@@ -167,156 +312,34 @@ const SoundsNotif = () => {
     setArrInt5(arrH)
     setArrInt6(arrH)
 
-    const arr = [
-        {
-          interval: intervalProcess, 
-          time: timeProcess, 
-          process: 'Название и статус проекта',
-          code: 'yellow', 
-          dop: 'getReports()',
-          resurs: 'Rent',
-          status: statusProcess,
-        }, 
-        {
-          interval: intervalProcess, 
-          time: timeProcess, 
-          process: 'Даты проекта из основного состава', 
-          code: 'yellow', 
-          dop: 'getReports()',
-          resurs: 'Rent',  
-          status: statusProcess,
-        }, 
-        {
-          interval: intervalProcess, 
-          time: timeProcess, 
-          process: 'TelegramID менеджера проекта', 
-          code: 'yellow', 
-          dop: 'getReports()',
-          resurs: 'Rent',
-          status: statusProcess,
-        },
-        {
-          interval: intervalProcess2, 
-          time: timeProcess2, 
-          process: 'Название и статус проекта', 
-          code: 'purple', 
-          dop: 'getReportsRestart()',
-          resurs: 'Rent',
-          status: statusProcess2,
-        },
-        {
-          interval: intervalProcess2, 
-          time: timeProcess2, 
-          process: 'Даты проекта из основного состава', 
-          code: 'purple', 
-          dop: 'getReportsRestart()',
-          resurs: 'Rent', 
-          status: statusProcess2,
-        },
-        {
-          interval: intervalProcess2,
-          time: timeProcess2,  
-          process: 'TelegramID менеджера проекта', 
-          code: 'purple', 
-          dop: 'getReportsRestart()',
-          resurs: 'Rent',
-          status: statusProcess2,
-        },
-        {
-          interval: intervalProcess3,
-          time: timeProcess3,  
-          process: 'Все проекты', 
-          code: 'blue', 
-          dop: 'getProjects',
-          resurs: 'Work',
-          status: statusProcess3,
-        },
-        {
-          interval: intervalProcess3,
-          time: timeProcess3,  
-          process: 'Все сметы', 
-          code: 'blue', 
-          dop: 'getSmetaAll',
-          resurs: 'Work',
-          status: statusProcess3,
-        },
-        {
-          interval: intervalProcess3,
-          time: timeProcess3,  
-          process: 'Статус работы претендента', 
-          code: 'blue', 
-          dop: 'getWorkerPretendent()',
-          resurs: 'Work',
-          status: statusProcess3,
-        },
-        {
-          interval: intervalProcess3,
-          time: timeProcess3,
-          process: 'Название проекта',
-          code: 'blue', 
-          dop: 'getProjectName',
-          resurs: 'Work',
-          status: statusProcess3,
-        },
-        {
-          interval: intervalProcess3,
-          time: timeProcess3,
-          process: 'ID специалиста в Notion',
-          code: 'blue', 
-          dop: 'getWorkerChatId',
-          resurs: 'Work',
-          status: statusProcess3,
-        },
-        {
-          interval: intervalProcess4,
-          time: timeProcess4,
-          process: 'Название проекта',
-          code: 'orange', 
-          dop: 'getProjectName | Принять',
-          resurs: 'Work',
-          status: statusProcess4,
-        },
-        {
-          interval: intervalProcess5,
-          time: timeProcess5,
-          process: 'Отправка рассылки',
-          code: 'gray', 
-          dop: 'sendDistribution',
-          resurs: 'Mail',
-          status: statusProcess5,
-        }   
-      ]
 
-      console.log(arr)
-      //setProcessAll(arr)
-
-    //console.log(arr)
     if (clickSort) {
       if (sortInterval) {
-        arr.sort((a,b)=> a.interval - b.interval)
-        setProcessAll(arr)
+        const temp = [...processAll].sort((a,b)=> a.interval - b.interval)
+        setProcessAll(temp)
       } else {
-        arr.sort((a,b)=> b.interval - a.interval)
-        setProcessAll(arr)
+        const temp = [...processAll].sort((a,b)=> b.interval - a.interval)
+        setProcessAll(temp)
       }
-    } else {
-      setProcessAll(arr)
-    }
+    } 
+
     //localStorage.setItem("processAll", JSON.stringify(arr));
     //console.log("playProcess: ", playProcess)
       
-  }, [clickSort, 
+  }, [
+    clickSort, 
     sortInterval, 
-    timeProcess,
-    timeProcess2,
-    timeProcess3,
-    timeProcess4,
-    timeProcess5,
-    intervalProcess,
-    intervalProcess2,
-    intervalProcess3,
-    intervalProcess4, 
-    intervalProcess5]);
+    // timeProcess,
+    // timeProcess2,
+    // timeProcess3,
+    // timeProcess4,
+    // timeProcess5,
+    // intervalProcess,
+    // intervalProcess2,
+    // intervalProcess3,
+    // intervalProcess4, 
+    // intervalProcess5
+  ]);
 
 
   const openHub = (hub) => {
@@ -589,7 +612,7 @@ const SoundsNotif = () => {
   const fetchAllProcess = (ind, on) => {
     processAll[ind].status = on
     setProcessAll(processAll)
-    //localStorage.setItem("processAll", JSON.stringify(processAll));
+    localStorage.setItem("processAll", JSON.stringify(processAll));
 
     setTimeout(()=>setLoadStatus(false), 3000)
     
@@ -632,45 +655,51 @@ const SoundsNotif = () => {
       [ind]: false
     }));
 
-    if (ind === 0) {
-      setIntervalProcess(val)
-    }
-    if (ind === 1) {
-      setIntervalProcess(val)
-    }
-    else if (ind === 2) {
-      setIntervalProcess(val)
-    }
-    else if (ind === 3) {
-      setIntervalProcess2(val)
-    }
-    else if (ind === 4) {
-      setIntervalProcess2(val)
-    }
-    else if (ind === 5) {
-      setIntervalProcess2(val)
-    }
-    else if (ind === 6) {
-      setIntervalProcess3(val)
-    }
-    else if (ind === 7) {
-      setIntervalProcess3(val)
-    }
-    else if (ind === 8) {
-      setIntervalProcess3(val)
-    }
-    else if (ind === 9) {
-      setIntervalProcess3(val)
-    }
-    else if (ind === 10) {
-      setIntervalProcess3(val)
-    }
-    else if (ind === 11) {
-      setIntervalProcess4(val)
-    }
-    else if (ind === 12) {
-      setIntervalProcess5(val)
-    }
+    // if (ind === 0) {
+    //   //setIntervalProcess(val)
+    // }
+    // if (ind === 1) {
+    //   setIntervalProcess(val)
+    // }
+    // else if (ind === 2) {
+    //   setIntervalProcess(val)
+    // }
+    // else if (ind === 3) {
+    //   setIntervalProcess2(val)
+    // }
+    // else if (ind === 4) {
+    //   setIntervalProcess2(val)
+    // }
+    // else if (ind === 5) {
+    //   processAll[ind].interval = val
+    //   setProcessAll(processAll)
+    //   localStorage.setItem("processAll", JSON.stringify(processAll));
+    // }
+    // else if (ind === 6) {
+    //   setIntervalProcess3(val)
+    // }
+    // else if (ind === 7) {
+    //   setIntervalProcess3(val)
+    // }
+    // else if (ind === 8) {
+    //   setIntervalProcess3(val)
+    // }
+    // else if (ind === 9) {
+    //   setIntervalProcess3(val)
+    // }
+    // else if (ind === 10) {
+    //   setIntervalProcess3(val)
+    // }
+    // else if (ind === 11) {
+    //   setIntervalProcess4(val)
+    // }
+    // else if (ind === 12) {
+    //   setIntervalProcess5(val)
+    // }
+
+    processAll[ind].interval = val
+    setProcessAll(processAll)
+    localStorage.setItem("processAll", JSON.stringify(processAll));
 
     //отправить сокет
     sendNumberProcess(ind, true, val, 'S')
