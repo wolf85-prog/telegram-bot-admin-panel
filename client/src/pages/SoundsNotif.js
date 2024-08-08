@@ -304,7 +304,7 @@ const SoundsNotif = () => {
     } else {
       setProcessAll(arr)
     }
-    localStorage.setItem("processAll", arr);
+    localStorage.setItem("processAll", JSON.stringify(arr));
     //console.log("playProcess: ", playProcess)
       
   }, [clickSort, 
@@ -591,7 +591,7 @@ const SoundsNotif = () => {
   const fetchAllProcess = (ind, on) => {
     processAll[ind].status = on
     setProcessAll(processAll)
-    localStorage.setItem("processAll", processAll);
+    localStorage.setItem("processAll", JSON.stringify(processAll));
 
     setTimeout(()=>setLoadStatus(false), 3000)
     
