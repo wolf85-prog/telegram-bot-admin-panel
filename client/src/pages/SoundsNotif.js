@@ -97,18 +97,13 @@ const SoundsNotif = () => {
   const [showProcessInfo, setShowProcessInfo]= useState([]);
 
   const [loadStatus, setLoadStatus]= useState([false, false, false, false, false, false, false, false, false]);
-  const [playProcess, setPlayProcess]= useState([false, false, false, false, false, false, false, false, false]);
-  const [stopProcess, setStopProcess]= useState([true, true, true, true, true, true, true, true, true, true]);
+  const [playProcess, setPlayProcess]= useState([false, false, false, false, false, false, false, false, false, false, false, false, false]);
+  const [stopProcess, setStopProcess]= useState([true, true, true, true, true, true, true, true, true, true, true, true, true]);
 
 
-  const [showInterval, setShowInterval]= useState([false, false, false, false, false, false]);
-  const [showTime, setShowTime]= useState([false, false, false, false, false, false]);
+  const [showInterval, setShowInterval]= useState([false, false, false, false, false, false, false, false, false, false, false, false, false]);
+  const [showTime, setShowTime]= useState([false, false, false, false, false, false, false, false, false, false, false, false, false]);
 
-  //const [valueInterval, setValueInterval] = useState(['2', '2', '2', '2', '2', '2'])
-
-
-  //const [arrM, setArrM] = useState([])
-  //const [arrS, setArrS] = useState([])
 
   const [arrInt, setArrInt] = useState([])
   const [arrInt2, setArrInt2] = useState([])
@@ -174,7 +169,7 @@ const SoundsNotif = () => {
           interval: intervalProcess, 
           time: timeProcess, 
           process: 'Название и статус проекта',
-          code: '1', 
+          code: 'yellow', 
           dop: 'getReports()',
           resurs: 'Rent',
           status: statusProcess,
@@ -183,7 +178,7 @@ const SoundsNotif = () => {
           interval: intervalProcess, 
           time: timeProcess, 
           process: 'Даты проекта из основного состава', 
-          code: '1', 
+          code: 'yellow', 
           dop: 'getReports()',
           resurs: 'Rent',  
           status: statusProcess,
@@ -192,7 +187,7 @@ const SoundsNotif = () => {
           interval: intervalProcess, 
           time: timeProcess, 
           process: 'TelegramID менеджера проекта', 
-          code: '1', 
+          code: 'yellow', 
           dop: 'getReports()',
           resurs: 'Rent',
           status: statusProcess,
@@ -201,7 +196,7 @@ const SoundsNotif = () => {
           interval: intervalProcess2, 
           time: timeProcess2, 
           process: 'Название и статус проекта', 
-          code: '2', 
+          code: 'purple', 
           dop: 'getReportsRestart()',
           resurs: 'Rent',
           status: statusProcess2,
@@ -210,7 +205,7 @@ const SoundsNotif = () => {
           interval: intervalProcess2, 
           time: timeProcess2, 
           process: 'Даты проекта из основного состава', 
-          code: '2', 
+          code: 'purple', 
           dop: 'getReportsRestart()',
           resurs: 'Rent', 
           status: statusProcess2,
@@ -219,7 +214,7 @@ const SoundsNotif = () => {
           interval: intervalProcess2,
           time: timeProcess2,  
           process: 'TelegramID менеджера проекта', 
-          code: '2', 
+          code: 'purple', 
           dop: 'getReportsRestart()',
           resurs: 'Rent',
           status: statusProcess2,
@@ -228,7 +223,7 @@ const SoundsNotif = () => {
           interval: intervalProcess3,
           time: timeProcess3,  
           process: 'Все проекты', 
-          code: '3', 
+          code: 'blue', 
           dop: 'getProjects',
           resurs: 'Work',
           status: statusProcess3,
@@ -237,7 +232,7 @@ const SoundsNotif = () => {
           interval: intervalProcess3,
           time: timeProcess3,  
           process: 'Все сметы', 
-          code: '3', 
+          code: 'blue', 
           dop: 'getSmetaAll',
           resurs: 'Work',
           status: statusProcess3,
@@ -246,7 +241,7 @@ const SoundsNotif = () => {
           interval: intervalProcess3,
           time: timeProcess3,  
           process: 'Статус работы претендента', 
-          code: '3', 
+          code: 'blue', 
           dop: 'getWorkerPretendent()',
           resurs: 'Work',
           status: statusProcess3,
@@ -255,7 +250,7 @@ const SoundsNotif = () => {
           interval: intervalProcess3,
           time: timeProcess3,
           process: 'Название проекта',
-          code: '3', 
+          code: 'blue', 
           dop: 'getProjectName',
           resurs: 'Work',
           status: statusProcess3,
@@ -264,7 +259,7 @@ const SoundsNotif = () => {
           interval: intervalProcess3,
           time: timeProcess3,
           process: 'ID специалиста в Notion',
-          code: '3', 
+          code: 'blue', 
           dop: 'getWorkerChatId',
           resurs: 'Work',
           status: statusProcess3,
@@ -273,7 +268,7 @@ const SoundsNotif = () => {
           interval: intervalProcess4,
           time: timeProcess4,
           process: 'Название проекта',
-          code: '4', 
+          code: 'orange', 
           dop: 'getProjectName | Принять',
           resurs: 'Work',
           status: statusProcess4,
@@ -282,7 +277,7 @@ const SoundsNotif = () => {
           interval: intervalProcess5,
           time: timeProcess5,
           process: 'Отправка рассылки',
-          code: '5', 
+          code: 'gray', 
           dop: 'sendDistribution',
           resurs: 'Mail',
           status: statusProcess5,
@@ -309,13 +304,16 @@ const SoundsNotif = () => {
       
   }, [clickSort, 
     sortInterval, 
-    // statusProcess, 
-    // statusProcess2, 
-    // statusProcess3, 
-    //playProcess,
+    timeProcess,
+    timeProcess2,
+    timeProcess3,
+    timeProcess4,
+    timeProcess5,
     intervalProcess,
-    intervalProcess2, 
-    intervalProcess3]);
+    intervalProcess2,
+    intervalProcess3,
+    intervalProcess4, 
+    intervalProcess5]);
 
 
   const openHub = (hub) => {
@@ -375,7 +373,6 @@ const SoundsNotif = () => {
         //setStatusProcess(false)
         fetchAllProcess(ind, false)
       }
-
       //нажата кнопка Play
       if (playProcess[0]) {
         console.log("play")
@@ -393,7 +390,6 @@ const SoundsNotif = () => {
         //setStatusProcess(false)
         fetchAllProcess(ind, false)
       }
-
       //нажата кнопка Play
       if (playProcess[1]) {
         //console.log("play")
@@ -410,7 +406,6 @@ const SoundsNotif = () => {
         //setStatusProcess(false)
         fetchAllProcess(ind, false)
       }
-
       //нажата кнопка Play
       if (playProcess[2]) {
         //console.log("play")
@@ -428,7 +423,6 @@ const SoundsNotif = () => {
         //setStatusProcess(false)
         fetchAllProcess(ind, false)
       }
-
       //нажата кнопка Play
       if (playProcess[3]) {
         //console.log("play")
@@ -445,7 +439,6 @@ const SoundsNotif = () => {
         //setStatusProcess(false)
         fetchAllProcess(ind, false)
       }
-
       //нажата кнопка Play
       if (playProcess[4]) {
         //console.log("play")
@@ -459,16 +452,13 @@ const SoundsNotif = () => {
       if (stopProcess[5]) {
         //console.log("stop")
         //sendNumberProcess(ind, false, intervalProcess, timeProcess)
-
         //setStatusProcess(false)
         fetchAllProcess(ind, false)
       }
-
       //нажата кнопка Play
       if (playProcess[5]) {
         //console.log("play")
         //sendNumberProcess(ind, true, intervalProcess, timeProcess)
-
         //setStatusProcess(true)
         fetchAllProcess(ind, true)
       }
@@ -478,16 +468,13 @@ const SoundsNotif = () => {
       if (stopProcess[6]) {
         //console.log("stop")
         //sendNumberProcess(ind, false, intervalProcess, timeProcess)
-
         //setStatusProcess(false)
         fetchAllProcess(ind, false)
       }
-
       //нажата кнопка Play
       if (playProcess[6]) {
         //console.log("play")
         //sendNumberProcess(ind, true, intervalProcess, timeProcess)
-
         //setStatusProcess(true)
         fetchAllProcess(ind, true)
       }
@@ -498,16 +485,13 @@ const SoundsNotif = () => {
       if (stopProcess[7]) {
         //console.log("stop")
         //sendNumberProcess(ind, false, intervalProcess, timeProcess)
-
         //setStatusProcess(false)
         fetchAllProcess(ind, false)
       }
-
       //нажата кнопка Play
       if (playProcess[7]) {
         //console.log("play")
         //sendNumberProcess(ind, true, intervalProcess, timeProcess)
-
         //setStatusProcess(true)
         fetchAllProcess(ind, true)
       }
@@ -518,16 +502,81 @@ const SoundsNotif = () => {
       if (stopProcess[8]) {
         //console.log("stop")
         //sendNumberProcess(ind, false, intervalProcess, timeProcess)
-
         //setStatusProcess(false)
         fetchAllProcess(ind, false)
       }
-
       //нажата кнопка Play
       if (playProcess[8]) {
         //console.log("play")
         //sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //setStatusProcess(true)
+        fetchAllProcess(ind, true)
+      }
+    }
 
+    else if (ind === 9) {
+      //нажата кнопка Стоп
+      if (stopProcess[9]) {
+        //console.log("stop")
+        //sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //setStatusProcess(false)
+        fetchAllProcess(ind, false)
+      }
+      //нажата кнопка Play
+      if (playProcess[9]) {
+        //console.log("play")
+        //sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //setStatusProcess(true)
+        fetchAllProcess(ind, true)
+      }
+    }
+
+    else if (ind === 10) {
+      //нажата кнопка Стоп
+      if (stopProcess[10]) {
+        //console.log("stop")
+        //sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //setStatusProcess(false)
+        fetchAllProcess(ind, false)
+      }
+      //нажата кнопка Play
+      if (playProcess[10]) {
+        //console.log("play")
+        //sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //setStatusProcess(true)
+        fetchAllProcess(ind, true)
+      }
+    }
+
+    else if (ind === 11) {
+      //нажата кнопка Стоп
+      if (stopProcess[11]) {
+        //console.log("stop")
+        //sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //setStatusProcess(false)
+        fetchAllProcess(ind, false)
+      }
+      //нажата кнопка Play
+      if (playProcess[11]) {
+        //console.log("play")
+        //sendNumberProcess(ind, true, intervalProcess, timeProcess)
+        //setStatusProcess(true)
+        fetchAllProcess(ind, true)
+      }
+    }
+
+    else if (ind === 12) {
+      //нажата кнопка Стоп
+      if (stopProcess[12]) {
+        //console.log("stop")
+        //sendNumberProcess(ind, false, intervalProcess, timeProcess)
+        //setStatusProcess(false)
+        fetchAllProcess(ind, false)
+      }
+      //нажата кнопка Play
+      if (playProcess[12]) {
+        //console.log("play")
+        //sendNumberProcess(ind, true, intervalProcess, timeProcess)
         //setStatusProcess(true)
         fetchAllProcess(ind, true)
       }
@@ -546,26 +595,26 @@ const SoundsNotif = () => {
   const clickRec = (ind) => {
     setShowInterval(prevShownTable => ({
       ...prevShownTable,
-      [ind]: !prevShownTable[ind]
+      [ind]: true
     }));
 
     setShowTime(prevShownTable => ({
       ...prevShownTable,
-      [ind]: !prevShownTable[ind]
+      [ind]: true
     }));
 
     //убрать редактирование
     setTimeout(()=> {
       setShowInterval(prevShownTable => ({
         ...prevShownTable,
-        [ind]: !prevShownTable[ind]
+        [ind]: false
       }));
   
       setShowTime(prevShownTable => ({
         ...prevShownTable,
-        [ind]: !prevShownTable[ind]
+        [ind]: false
       }));
-    }, 10000)
+    }, 8000)
   }
 
   //изменить интервал
@@ -576,7 +625,7 @@ const SoundsNotif = () => {
 
     setShowInterval(prevShownTable => ({
       ...prevShownTable,
-      [ind]: !prevShownTable[ind]
+      [ind]: false
     }));
 
     if (ind === 0) {
@@ -589,7 +638,7 @@ const SoundsNotif = () => {
       setIntervalProcess(val)
     }
     else if (ind === 3) {
-      setIntervalProcess(val)
+      setIntervalProcess2(val)
     }
     else if (ind === 4) {
       setIntervalProcess2(val)
@@ -598,10 +647,25 @@ const SoundsNotif = () => {
       setIntervalProcess2(val)
     }
     else if (ind === 6) {
-      setIntervalProcess2(val)
+      setIntervalProcess3(val)
     }
     else if (ind === 7) {
       setIntervalProcess3(val)
+    }
+    else if (ind === 8) {
+      setIntervalProcess3(val)
+    }
+    else if (ind === 9) {
+      setIntervalProcess3(val)
+    }
+    else if (ind === 10) {
+      setIntervalProcess3(val)
+    }
+    else if (ind === 11) {
+      setIntervalProcess4(val)
+    }
+    else if (ind === 12) {
+      setIntervalProcess5(val)
     }
 
     //отправить сокет
@@ -616,12 +680,13 @@ const SoundsNotif = () => {
 
     setShowTime(prevShownTable => ({
       ...prevShownTable,
-      [ind]: !prevShownTable[ind]
+      [ind]: false
     }));
 
-    if (ind === 1) {
+    if (ind === 0) {
       //отправить сокет
-      sendNumberProcess(ind, true, intervalProcess, val)
+      //sendNumberProcess(ind, true, intervalProcess, val)
+      setTimeProcess(val)
 
       if (val === 'M') {
         setArrInt(arrM)
@@ -632,9 +697,10 @@ const SoundsNotif = () => {
       } 
     } 
     
-    else if (ind === 2) {
+    else if (ind === 1) {
       //отправить сокет
-      sendNumberProcess(ind, true, intervalProcess, val)
+      //sendNumberProcess(ind, true, intervalProcess, val)
+      setTimeProcess(val)
 
       if (val === 'M') {
         setArrInt2(arrM)
@@ -645,9 +711,10 @@ const SoundsNotif = () => {
       } 
     }
 
-    else if (ind === 3) {
+    else if (ind === 2) {
       //отправить сокет
-      sendNumberProcess(ind, true, intervalProcess, val)
+      //sendNumberProcess(ind, true, intervalProcess, val)
+      setTimeProcess(val)
 
       if (val === 'M') {
         setArrInt3(arrM)
@@ -658,9 +725,10 @@ const SoundsNotif = () => {
       } 
     }
 
-    else if (ind === 4) {
+    else if (ind === 3) {
       //отправить сокет
-      sendNumberProcess(ind, true, intervalProcess2, val)
+      //sendNumberProcess(ind, true, intervalProcess2, val)
+      setTimeProcess2(val)
 
       if (val === 'M') {
         setArrInt4(arrM)
@@ -671,9 +739,10 @@ const SoundsNotif = () => {
       } 
     }
 
-    else if (ind === 5) {
+    else if (ind === 4) {
       //отправить сокет
-      sendNumberProcess(ind, true, intervalProcess2, val)
+      //sendNumberProcess(ind, true, intervalProcess2, val)
+      setTimeProcess2(val)
 
       if (val === 'M') {
         setArrInt5(arrM)
@@ -684,9 +753,24 @@ const SoundsNotif = () => {
       } 
     }
 
+    else if (ind === 5) {
+      //отправить сокет
+      //sendNumberProcess(ind, true, intervalProcess2, val)
+      setTimeProcess2(val)
+
+      if (val === 'M') {
+        setArrInt6(arrM)
+      } else if (val === 'H') {
+        setArrInt6(arrH)
+      } else if (val === 'S') {
+        setArrInt6(arrM)
+      } 
+    }
+
     else if (ind === 6) {
       //отправить сокет
-      sendNumberProcess(ind, true, intervalProcess2, val)
+      //sendNumberProcess(ind, true, intervalProcess2, val)
+      setTimeProcess3(val)
 
       if (val === 'M') {
         setArrInt6(arrM)
@@ -698,9 +782,9 @@ const SoundsNotif = () => {
     }
 
     else if (ind === 7) {
-
       //отправить сокет
-      sendNumberProcess(ind, true, intervalProcess2, val)
+      //sendNumberProcess(ind, true, intervalProcess3, val)
+      setTimeProcess3(val)
 
       if (val === 'M') {
         setArrInt6(arrM)
@@ -713,7 +797,8 @@ const SoundsNotif = () => {
 
     else if (ind === 8) {
       //отправить сокет
-      sendNumberProcess(ind, true, intervalProcess3, val)
+      //sendNumberProcess(ind, true, intervalProcess3, val)
+      setTimeProcess3(val)
 
       if (val === 'M') {
         setArrInt6(arrM)
@@ -724,6 +809,61 @@ const SoundsNotif = () => {
       } 
     }
 
+    else if (ind === 9) {
+      //отправить сокет
+      //sendNumberProcess(ind, true, intervalProcess3, val)
+      setTimeProcess3(val)
+
+      if (val === 'M') {
+        setArrInt6(arrM)
+      } else if (val === 'H') {
+        setArrInt6(arrH)
+      } else if (val === 'S') {
+        setArrInt6(arrM)
+      } 
+    }
+
+    else if (ind === 10) {
+      //отправить сокет
+      //sendNumberProcess(ind, true, intervalProcess3, val)
+      setTimeProcess3(val)
+
+      if (val === 'M') {
+        setArrInt6(arrM)
+      } else if (val === 'H') {
+        setArrInt6(arrH)
+      } else if (val === 'S') {
+        setArrInt6(arrM)
+      } 
+    }
+
+    else if (ind === 11) {
+      //отправить сокет
+      //sendNumberProcess(ind, true, intervalProcess3, val)
+      setTimeProcess4(val)
+
+      if (val === 'M') {
+        setArrInt6(arrM)
+      } else if (val === 'H') {
+        setArrInt6(arrH)
+      } else if (val === 'S') {
+        setArrInt6(arrM)
+      } 
+    }
+
+    else if (ind === 12) {
+      //отправить сокет
+      //sendNumberProcess(ind, true, intervalProcess3, val)
+      setTimeProcess5(val)
+
+      if (val === 'M') {
+        setArrInt6(arrM)
+      } else if (val === 'H') {
+        setArrInt6(arrH)
+      } else if (val === 'S') {
+        setArrInt6(arrM)
+      } 
+    }
     
     
   }
@@ -814,10 +954,10 @@ const SoundsNotif = () => {
                           <CTableHead>
                             <CTableRow>
                               <CTableHeaderCell scope="col" className="text-center" style={{width: '50px'}}>№</CTableHeaderCell>
+                              <CTableHeaderCell scope="col" className="text-center" style={{width: '50px'}}>Код</CTableHeaderCell>
                               <CTableHeaderCell onClick={sortInt} scope="col" className="text-center" style={{width: '90px', cursor: 'pointer'}}>Интервал</CTableHeaderCell>
                               <CTableHeaderCell onClick={sortT} scope="col" className="text-center" style={{width: '90px', cursor: 'pointer'}}>Время</CTableHeaderCell>
-                              <CTableHeaderCell scope="col" className="text-center">Запрос</CTableHeaderCell>
-                              <CTableHeaderCell scope="col" className="text-center" style={{width: '50px'}}>Код</CTableHeaderCell>
+                              <CTableHeaderCell scope="col" className="text-center">Запрос</CTableHeaderCell>  
                               <CTableHeaderCell scope="col" className="text-center" style={{width: '150px'}}>Ресурс</CTableHeaderCell>
                               <CTableHeaderCell scope="col" className="text-center" style={{width: '90px'}}>Статус</CTableHeaderCell>   
                               <CTableHeaderCell scope="col" className="text-center" style={{width: '200px'}}>Управление</CTableHeaderCell>    
@@ -831,11 +971,14 @@ const SoundsNotif = () => {
                                   {index+1}
                                 </CTableHeaderCell>
                                 <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
+                                  <div style={{width: '15px', height: '15px', borderRadius: '2px', marginLeft: '25%', background: item.code}}></div>
+                                </CTableDataCell>
+                                <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                   {!showInterval[index] ? (item.interval && item.interval.length > 0 ? item.interval : <CSpinner size="sm" />) : 
                                               <CFormSelect 
                                                 aria-label="Default select example"
                                                 style={{width: '63px', fontSize: '12px'}}
-                                                onChange={(e)=>changeInterval(e, 1)}
+                                                onChange={(e)=>changeInterval(e, index)}
                                                 value={item.interval}
                                                 options={arrInt}
                                               />}
@@ -845,7 +988,7 @@ const SoundsNotif = () => {
                                     <CFormSelect 
                                       aria-label="Default select example"
                                       style={{width: '63px', fontSize: '12px'}}
-                                      onChange={(e)=>changeTime(e, index+1)}
+                                      onChange={(e)=>changeTime(e, index)}
                                       value={item.time}
                                       options={arrTime}
                                     />
@@ -854,9 +997,6 @@ const SoundsNotif = () => {
                                 <CTableDataCell style={{verticalAlign: 'middle', padding: '0 2px 0 2px', cursor: 'pointer'}} onClick={()=>clickInfo(index+1, item.info)}>
                                   {item.process}
                                   {showProcessInfo[index+1] ? <><br/><span style={{fontSize: '12px', color: '#8a93a2'}}>{item.dop}</span></> : ''}
-                                </CTableDataCell>
-                                <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
-                                  {item.code}
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                   {item.resurs}
