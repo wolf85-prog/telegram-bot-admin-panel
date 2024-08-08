@@ -1040,11 +1040,11 @@ const SoundsNotif = () => {
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center" style={{verticalAlign: 'middle', padding: '0 2px 0 2px'}}>
                                   
-                                  <CButton disabled={!item.status || !stopProcess[index]} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
-                                    <img src={stopProcess[index] || item.status ? stopIcon : stopIcon2} alt='' width='25px' />
+                                  <CButton disabled={!stopProcess[index] || !item.status} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
+                                    <img src={item.status ? stopIcon : stopIcon2} alt='' width='25px' />
                                   </CButton>
-                                  <CButton disabled={!playProcess[index]} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
-                                    <img src={playProcess[index] ? playIcon : playIcon2} alt='' width='25px' />
+                                  <CButton disabled={item.status} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickPlay(index)}>
+                                    <img src={playProcess[index] || !item.status ? playIcon : playIcon2} alt='' width='25px' />
                                   </CButton> 
                                   <CButton disabled={!item.status} color="light" style={{borderColor: 'transparent', background: 'transparent'}} onClick={()=>clickRec(index)}>
                                     <img src={item.status ? recIcon : recIcon2} alt='' width='25px' />
