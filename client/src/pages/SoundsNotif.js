@@ -34,8 +34,6 @@ import {
 // routes config
 import routes from '../routes'
 
-import MyModalSmall from "../components/MyModalSmall/MyModalSmall";
-
 import stopIcon from 'src/assets/images/stop.png'
 import stopIcon2 from 'src/assets/images/stop_press.png'
 import playIcon from 'src/assets/images/play.png'
@@ -116,12 +114,12 @@ const SoundsNotif = () => {
   const [sortTime, setSortTime] = useState(false)
   const [clickSort, setClickSort] = useState(false)
 
-  //const [processAll, setProcessAll] = useState([])
-  const [processAll, setProcessAll] = useState(() => {
-		const savedItem = localStorage.getItem("processAll");
-		const parsedItem = JSON.parse(savedItem);
-		return parsedItem || "";
-	})
+  const [processAll, setProcessAll] = useState([])
+  // const [processAll, setProcessAll] = useState(() => {
+	// 	const savedItem = localStorage.getItem("processAll");
+	// 	const parsedItem = JSON.parse(savedItem);
+	// 	return parsedItem || "";
+	// })
 
   const arrTime = [{label: 'S', value: 'S',},{label: 'M', value: 'M',},{label: 'H',value: 'H',},]
 
@@ -304,7 +302,7 @@ const SoundsNotif = () => {
     } else {
       setProcessAll(arr)
     }
-    localStorage.setItem("processAll", JSON.stringify(arr));
+    //localStorage.setItem("processAll", JSON.stringify(arr));
     //console.log("playProcess: ", playProcess)
       
   }, [clickSort, 
@@ -591,7 +589,7 @@ const SoundsNotif = () => {
   const fetchAllProcess = (ind, on) => {
     processAll[ind].status = on
     setProcessAll(processAll)
-    localStorage.setItem("processAll", JSON.stringify(processAll));
+    //localStorage.setItem("processAll", JSON.stringify(processAll));
 
     setTimeout(()=>setLoadStatus(false), 3000)
     
