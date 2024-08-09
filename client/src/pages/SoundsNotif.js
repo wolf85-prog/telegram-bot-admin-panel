@@ -128,6 +128,7 @@ const SoundsNotif = () => {
   const [sortInterval, setSortInterval] = useState(false)
   const [sortTime, setSortTime] = useState(false)
   const [clickSort, setClickSort] = useState(false)
+  const [clickSortTime, setClickSortTime] = useState(false)
 
   const [processAll, setProcessAll] = useState([])
 
@@ -329,11 +330,25 @@ const SoundsNotif = () => {
 
 
     if (clickSort) {
+      console.log('sort interval')
       if (sortInterval) {
         const temp = [...processAll].sort((a,b)=> a.interval - b.interval)
         setProcessAll(temp)
       } else {
         const temp = [...processAll].sort((a,b)=> b.interval - a.interval)
+        setProcessAll(temp)
+      }
+    } 
+
+    if (clickSortTime) {
+      console.log('sort time')
+      if (sortTime) {
+        console.log('sort true')
+        const temp = [...processAll].sort((a,b)=> a.time.localeCompare(b.time))
+        setProcessAll(temp)
+      } else {
+        console.log('sort true')
+        const temp = [...processAll].sort((a,b)=> b.time.localeCompare(a.time))
         setProcessAll(temp)
       }
     } 
@@ -344,6 +359,8 @@ const SoundsNotif = () => {
   }, [
     clickSort, 
     sortInterval, 
+    clickSortTime, 
+    sortTime, 
     // timeProcess,
     // timeProcess2,
     // timeProcess3,
@@ -670,47 +687,6 @@ const SoundsNotif = () => {
       [ind]: false
     }));
 
-    // if (ind === 0) {
-    //   //setIntervalProcess(val)
-    // }
-    // if (ind === 1) {
-    //   setIntervalProcess(val)
-    // }
-    // else if (ind === 2) {
-    //   setIntervalProcess(val)
-    // }
-    // else if (ind === 3) {
-    //   setIntervalProcess2(val)
-    // }
-    // else if (ind === 4) {
-    //   setIntervalProcess2(val)
-    // }
-    // else if (ind === 5) {
-    //   processAll[ind].interval = val
-    //   setProcessAll(processAll)
-    //   localStorage.setItem("processAll", JSON.stringify(processAll));
-    // }
-    // else if (ind === 6) {
-    //   setIntervalProcess3(val)
-    // }
-    // else if (ind === 7) {
-    //   setIntervalProcess3(val)
-    // }
-    // else if (ind === 8) {
-    //   setIntervalProcess3(val)
-    // }
-    // else if (ind === 9) {
-    //   setIntervalProcess3(val)
-    // }
-    // else if (ind === 10) {
-    //   setIntervalProcess3(val)
-    // }
-    // else if (ind === 11) {
-    //   setIntervalProcess4(val)
-    // }
-    // else if (ind === 12) {
-    //   setIntervalProcess5(val)
-    // }
 
     processAll[ind].interval = val
     setProcessAll(processAll)
@@ -902,7 +878,35 @@ const SoundsNotif = () => {
     else if (ind === 12) {
       //отправить сокет
       //sendNumberProcess(ind, true, intervalProcess3, val)
+      setTimeProcess4(val)
+
+      if (val === 'M') {
+        setArrInt6(arrM)
+      } else if (val === 'H') {
+        setArrInt6(arrH)
+      } else if (val === 'S') {
+        setArrInt6(arrM)
+      } 
+    }
+
+    else if (ind === 13) {
+      //отправить сокет
+      //sendNumberProcess(ind, true, intervalProcess3, val)
       setTimeProcess5(val)
+
+      if (val === 'M') {
+        setArrInt6(arrM)
+      } else if (val === 'H') {
+        setArrInt6(arrH)
+      } else if (val === 'S') {
+        setArrInt6(arrM)
+      } 
+    }
+
+    else if (ind === 14) {
+      //отправить сокет
+      //sendNumberProcess(ind, true, intervalProcess3, val)
+      setTimeProcess6(val)
 
       if (val === 'M') {
         setArrInt6(arrM)
@@ -918,13 +922,14 @@ const SoundsNotif = () => {
 
 
   const sortInt = () => {
+    setClickSortTime(false)
     setClickSort(true)
-    //console.log(!sortInterval)
     setSortInterval(!sortInterval)
   }
 
   const sortT = () => {
-    //setClickSort(true)
+    setClickSort(false)
+    setClickSortTime(true)
     setSortTime(!sortTime)
   }
 
