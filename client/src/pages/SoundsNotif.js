@@ -85,14 +85,16 @@ const SoundsNotif = () => {
   const [intervalProcess, setIntervalProcess] = useState('10') //бот заказчика
 	const [intervalProcess2, setIntervalProcess2] = useState('10') // бот специалиста
 	const [intervalProcess3, setIntervalProcess3] = useState('10') // бот специалиста
-	const [intervalProcess4, setIntervalProcess4] = useState('10') // бот специалиста
-	const [intervalProcess5, setIntervalProcess5] = useState('4') // бот рассылки
+	const [intervalProcess4, setIntervalProcess4] = useState('4') // бот специалиста
+	const [intervalProcess5, setIntervalProcess5] = useState('1') // бот рассылки
+  const [intervalProcess6, setIntervalProcess6] = useState('2') // бот рассылки (планировщик)
 
 	const [timeProcess, setTimeProcess] = useState('M')
 	const [timeProcess2, setTimeProcess2] = useState('M')
 	const [timeProcess3, setTimeProcess3] = useState('M')
-	const [timeProcess4, setTimeProcess4] = useState('M')
-	const [timeProcess5, setTimeProcess5] = useState('M')
+	const [timeProcess4, setTimeProcess4] = useState('S')
+	const [timeProcess5, setTimeProcess5] = useState('S')
+  const [timeProcess6, setTimeProcess6] = useState('M')
 
   const [loadingIframe, setLoadingIframe] = useState(true);
   const [loadingIframe2, setLoadingIframe2] = useState(true);
@@ -108,8 +110,8 @@ const SoundsNotif = () => {
   const [showProcessInfo, setShowProcessInfo]= useState([]);
 
   const [loadStatus, setLoadStatus]= useState([]);
-  const [playProcess, setPlayProcess]= useState([false,false,false,false,false,false,false,false,false,false,false,false,false]);
-  const [stopProcess, setStopProcess]= useState([true,true,true,true,true,true,true,true,true,true,true,true,true]);
+  const [playProcess, setPlayProcess]= useState([false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]);
+  const [stopProcess, setStopProcess]= useState([true,true,true,true,true,true,true,true,true,true,true,true,true,true,true]);
 
 
   const [showInterval, setShowInterval]= useState([]);
@@ -128,11 +130,6 @@ const SoundsNotif = () => {
   const [clickSort, setClickSort] = useState(false)
 
   const [processAll, setProcessAll] = useState([])
-  // const [processAll, setProcessAll] = useState(() => {
-	// 	const savedItem = localStorage.getItem("processAll");
-	// 	const parsedItem = JSON.parse(savedItem);
-	// 	return parsedItem || "";
-	// })
 
   const arrTime = [{label: 'S', value: 'S',},{label: 'M', value: 'M',},{label: 'H',value: 'H',},]
 
@@ -246,19 +243,19 @@ const SoundsNotif = () => {
     },
     {
       interval: intervalProcess3,
-      time: timeProcess3,  
-      process: 'Статус работы претендента', 
+      time: timeProcess3,
+      process: 'Название проекта',
       code: 'blue', 
-      dop: 'getWorkerPretendent()',
+      dop: 'Отказы | getProjectName',
       resurs: 'Work',
       status: statusProcess3,
     },
     {
       interval: intervalProcess3,
-      time: timeProcess3,
-      process: 'Название проекта',
+      time: timeProcess3,  
+      process: 'Статус работы претендента', 
       code: 'blue', 
-      dop: 'getProjectName',
+      dop: 'Отказы | getWorkerPretendent',
       resurs: 'Work',
       status: statusProcess3,
     },
@@ -276,7 +273,16 @@ const SoundsNotif = () => {
       time: timeProcess4,
       process: 'Название проекта',
       code: 'orange', 
-      dop: 'getProjectName | Принять',
+      dop: 'Принять | getProjectName',
+      resurs: 'Work',
+      status: statusProcess4,
+    },
+    {
+      interval: intervalProcess4,
+      time: timeProcess4,
+      process: 'Статус работы претендента',
+      code: 'orange', 
+      dop: 'Принять | getWorkerPretendent',
       resurs: 'Work',
       status: statusProcess4,
     },
@@ -288,18 +294,27 @@ const SoundsNotif = () => {
       dop: 'sendDistribution',
       resurs: 'Mail',
       status: statusProcess5,
-    }   
+    },
+    {
+      interval: intervalProcess6,
+      time: timeProcess6,
+      process: 'Планировщик рассылки',
+      code: 'green', 
+      dop: 'сканирование плана рассылок',
+      resurs: 'Mail',
+      status: statusProcess6,
+    }    
   ]
 
   useEffect(() => {
-    const savedItem = localStorage.getItem("processAll");
+    const savedItem = localStorage.getItem("processAll");   
 
-    if (savedItem) {
-      const parseItem = JSON.parse(savedItem);
-      setProcessAll(parseItem)
-    } else {
+    // if (savedItem) {
+    //   const parseItem = JSON.parse(savedItem);
+    //   setProcessAll(parseItem)
+    // } else {
       setProcessAll(arr)
-    }
+    //}
     
   },[])
 

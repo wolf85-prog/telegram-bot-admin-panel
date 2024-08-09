@@ -119,7 +119,7 @@ const UsersProvider = ({ children }) => {
 	const [statusProcess3, setStatusProcess3] = useState(true)
 	const [statusProcess4, setStatusProcess4] = useState(true)
 	const [statusProcess5, setStatusProcess5] = useState(false)
-	const [statusProcess6, setStatusProcess6] = useState(false)
+	const [statusProcess6, setStatusProcess6] = useState(true)
 
 	
 
