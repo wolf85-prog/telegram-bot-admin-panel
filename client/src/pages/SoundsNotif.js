@@ -1,25 +1,20 @@
-import React, { Suspense, useEffect, useState, useContext } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
-import { delSoundNotif, getProcess, getSoundNotif, startSoundNotif } from './../http/adminAPI.js'
+//import { delSoundNotif, getProcess, getSoundNotif, startSoundNotif } from './../http/adminAPI.js'
 
 import {
   CContainer, 
   CSpinner,
-  CAvatar,
   CCard,
   CCardBody,
-  CCardHeader,
   CCardTitle,
-  CCardText,
   CNav,
   CNavItem,
   CNavLink,
-  CFormInput,
   CButton,
   CCol,
-  CProgress,
   CRow,
   CTable,
   CTableBody,
@@ -32,7 +27,7 @@ import {
 } from '@coreui/react'
 
 // routes config
-import routes from '../routes'
+//import routes from '../routes'
 
 import stopIcon from 'src/assets/images/stop.png'
 import stopIcon2 from 'src/assets/images/stop_press.png'
