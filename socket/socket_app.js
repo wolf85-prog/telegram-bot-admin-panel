@@ -35,11 +35,9 @@ httpsServer.listen(PORT, () => {
 
 // Socket setup
 const io = socket(httpsServer, {
-    cors:[{
-        origin: host_admin,
-    },{
-        origin: host_admin2
-    }]
+    cors: {
+        origin: [host_admin,host_admin2],
+    }
 });
 
 
