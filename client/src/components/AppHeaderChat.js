@@ -17,6 +17,7 @@ import {
   CToastBody,
   CToastClose,
   CTooltip,
+  CCardBody,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilBell, cilEnvelopeOpen, cilList, cilMenu, cilPhone } from '@coreui/icons'
@@ -42,13 +43,16 @@ import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { AppHeaderDropdown } from './header/index'
 import { getUpdateWorkers, getUpdateAvatars } from './../http/adminAPI';
 
+import MyModalSmall from './MyModalSmall/MyModalSmall'
+import Close from "./../assets/images/close.svg"
+
 const AppHeaderChat = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   const { workerUpdate, setWorkerUpdate, avatarUpdate, setAvatarUpdate, showUpdate, showUpdate2, setShowUpdate, setShowUpdate2, 
     workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2, 
-    soundVolume, setSoundVolume, soundMute, setSoundMute} = useUsersContext();
+    soundVolume, setSoundVolume, soundMute, setSoundMute, showDistrib, setShowDistrib} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
   const [showBar, setShowBar] = useState(false)
@@ -58,6 +62,8 @@ const AppHeaderChat = () => {
   const [shake, setShake] = useState(false)
   const [shake2, setShake2] = useState(false)
   const toaster = useRef()
+
+  const [visibleModal, setVisibleModal] = useState(false);
 
   const [workerCall2, setWorkerCall2] = useState({tg_id: '805436270', fio: 'Иванов Иван Ивановия', sity: 'Майкоп', year_of_birth: '01.01.1985', projects: '5', 
   specialities: 'Художник по свету,Звукорежиссер,Backline,Репортажная съемка,Диджей,Ведущий,Официант,Инженер Resolume,+18,Blacklist', 
@@ -128,16 +134,22 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
   }
 
   const updateD = async() => {
-    // Button begins to shake
-    if (showUpdate) {
-      setShowUpdate(false);
-    } else {
-      setShowUpdate(true);
-    }
+    // показать предупреждение о рассылке
+    if (showDistrib) {
+      setVisibleModal(true)
+    } 
+    else {
+      if (showUpdate) {
+        setShowUpdate(false);
+      } else {
+        setShowUpdate(true);
+      }
 
-    setWorkerUpdate(0)
+      //обновление данных
+      setWorkerUpdate(0)
+      const resUpdate = await getUpdateWorkers()
+    }
     
-    const resUpdate = await getUpdateWorkers()
   }
 
   const handleLinkClick = (url) => {
@@ -149,7 +161,13 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
     setSoundMute(!soundMute)
   }
 
+  const clickClose = () => {
+    setVisibleModal(false)
+    setShowBar(false)
+  }
+
   return (
+    <>
     <CHeader position="sticky" >
       <CContainer fluid>
         <CHeaderToggler
@@ -544,6 +562,19 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
         </CHeaderNav>
       </CContainer>
     </CHeader>
+
+    <MyModalSmall alignment="center" visible={visibleModal} setVisible={setVisibleModal} onClose={() => setVisibleModal(false)}>
+    <img onClick={()=>setVisibleModal(false)} src={Close} alt='' style={{position: 'absolute', right: '20px', top: '20px', width: '15px'}}/>
+    <CCardBody style={{textAlign: 'center'}}>
+      <p style={{fontSize: '16px', width: '290px',  paddingTop: '25px', paddingBottom: '5px'}}>
+        В данный момент идет рассылка.         
+        Попробуйте обновить данные позже... 
+      </p>
+      <CButton size="sm" onClick={clickClose}>Закрыть</CButton>
+    </CCardBody> 
+
+    </MyModalSmall> 
+    </>
   )
 }
 

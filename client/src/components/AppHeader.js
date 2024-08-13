@@ -587,10 +587,6 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
     </CHeader>
 
     <MyModalSmall alignment="center" visible={visibleModal} setVisible={setVisibleModal} onClose={() => setVisibleModal(false)}>
-      {/* <CModalHeader>
-        <CModalTitle>Предупреждение</CModalTitle> 
-        
-      </CModalHeader>*/}
       <img onClick={()=>setVisibleModal(false)} src={Close} alt='' style={{position: 'absolute', right: '20px', top: '20px', width: '15px'}}/>
       <CCardBody style={{textAlign: 'center'}}>
         <p style={{fontSize: '16px', width: '290px',  paddingTop: '25px', paddingBottom: '5px'}}>
