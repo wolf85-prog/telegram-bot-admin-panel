@@ -175,11 +175,13 @@ class WorkersController {
                         console.log("Специалист не найден!")  
                     }
                     
-                    j++       
-                    //await delay(1000) // 10 сек  
+                     
                     new Promise((resolve) => {
                         setTimeout(resolve, 2000*j);
-                    });           
+                    });   
+                    
+                    j++       
+                    //await delay(1000) // 10 сек 
                 }
 
                 //обновить данные
