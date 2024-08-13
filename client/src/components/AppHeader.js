@@ -17,6 +17,9 @@ import {
   CToastBody,
   CToastClose,
   CTooltip,
+  CCardBody,
+  CModalHeader,
+  CModalTitle,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import Icon from "./../../src/chat-app-new/components/Icon";
@@ -50,6 +53,8 @@ import { getUpdateWorkers, getUpdateAvatars } from './../http/adminAPI';
 import './DropdownHeader.css'
 
 import useSound from 'use-sound';
+import MyModalSmall from './MyModalSmall/MyModalSmall'
+import Close from "./../assets/images/close.svg"
 
 const AppHeader = (props) => {
   const dispatch = useDispatch()
@@ -67,6 +72,8 @@ const AppHeader = (props) => {
   const [shake, setShake] = useState(false)
   const [shake2, setShake2] = useState(false)
   const toaster = useRef()
+
+  const [visibleModal, setVisibleModal] = useState(false);
 
   const [workerCall2, setWorkerCall2] = useState({tg_id: '805436270', fio: 'Иванов Иван Ивановия', sity: 'Майкоп', year_of_birth: '01.01.1985', projects: '5', 
   specialities: 'Художник по свету,Звукорежиссер,Backline,Репортажная съемка,Диджей,Ведущий,Официант,Инженер Resolume,+18,Blacklist', 
@@ -140,15 +147,19 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
 
   const updateD = async() => {
     // Button begins to shake
-    if (showUpdate) {
-      setShowUpdate(false);
+    if (2>3) {
+      setVisibleModal(true)
     } else {
-      setShowUpdate(true);
-    }
+      if (showUpdate) {
+        setShowUpdate(false);
+      } else {
+        setShowUpdate(true);
+      }
 
-    setWorkerUpdate(0)
+      setWorkerUpdate(0)
+      const resUpdate = await getUpdateWorkers()
+    }
     
-    const resUpdate = await getUpdateWorkers()
   }
 
 
@@ -165,7 +176,13 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
     //audio120()
   }
 
+  const clickClose = () => {
+    setVisibleModal(false)
+    setShowBar(false)
+  }
+
   return (
+    <>
     <CHeader position="sticky" className="mb-4">
       <CContainer fluid>
         <CHeaderToggler
@@ -567,6 +584,22 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
       </CContainer>
     </CHeader>
 
+    <MyModalSmall alignment="center" visible={visibleModal} setVisible={setVisibleModal} onClose={() => setVisibleModal(false)}>
+      {/* <CModalHeader>
+        <CModalTitle>Предупреждение</CModalTitle> 
+        
+      </CModalHeader>*/}
+      <img onClick={()=>setVisibleModal(false)} src={Close} alt='' style={{position: 'absolute', right: '20px', top: '20px', width: '15px'}}/>
+      <CCardBody style={{textAlign: 'center'}}>
+        <p style={{fontSize: '16px', width: '290px',  paddingTop: '25px', paddingBottom: '5px'}}>
+          В данный момент идет рассылка.         
+          Попробуйте обновить данные позже... 
+        </p>
+        <CButton size="sm" onClick={clickClose}>Закрыть</CButton>
+      </CCardBody> 
+      
+    </MyModalSmall> 
+    </>
   )
 }
 

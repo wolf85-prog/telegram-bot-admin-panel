@@ -172,7 +172,7 @@ class WorkersController {
                         const avatar = worker.profile ? (worker.profile?.file ? worker.profile?.file.url : worker.profile?.external.url) : null
                         
                         if (workerApp) {
-                            //updateAvatar(avatar, workerApp.dataValues)
+                            updateAvatar(avatar, workerApp.dataValues)
                             console.log("Специалист найден!", index)  
                         } else {
                             console.log("Специалист не найден!", index)  
