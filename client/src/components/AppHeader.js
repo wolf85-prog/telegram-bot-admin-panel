@@ -62,7 +62,7 @@ const AppHeader = (props) => {
 
   const { workerUpdate, setWorkerUpdate, avatarUpdate, setAvatarUpdate, showUpdate, showUpdate2, setShowUpdate, setShowUpdate2, 
     workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2, 
-    soundVolume, setSoundVolume, soundMute, setSoundMute} = useUsersContext();
+    soundVolume, setSoundVolume, soundMute, setSoundMute, showDistrib, setShowDistrib} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
   const [showBar, setShowBar] = useState(false)
@@ -146,16 +146,18 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
   }
 
   const updateD = async() => {
-    // Button begins to shake
-    if (2>3) {
+    // показать предупреждение о рассылке
+    if (showDistrib) {
       setVisibleModal(true)
-    } else {
+    } 
+    else {
       if (showUpdate) {
         setShowUpdate(false);
       } else {
         setShowUpdate(true);
       }
 
+      //обновление данных
       setWorkerUpdate(0)
       const resUpdate = await getUpdateWorkers()
     }

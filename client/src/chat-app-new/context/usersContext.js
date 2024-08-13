@@ -111,6 +111,8 @@ const UsersProvider = ({ children }) => {
 	//update avatar
 	const [showUpdate2, setShowUpdate2] = useState(false);
 	const [avatarUpdate, setAvatarUpdate] = useState(100);
+	//show distrib
+	const [showDistrib, setShowDistrib] = useState(false);
 
 	const [projectsNew, setProjectsNew] = useState([])
 
@@ -1812,6 +1814,10 @@ const fetchNotifAdmin = async (dataAll) => {
 		setShowUpdate(processUpdateD)
 		setWorkerUpdate(workers_update)
 	}
+	//рассылка
+	else if (task === 400) {
+		setShowDistrib(processDistrib)
+	}
 
 }
 
@@ -1882,6 +1888,8 @@ function isObjectEmpty(obj) {
 			setWorkerUpdate,
 			avatarUpdate,
 			setAvatarUpdate,
+			showDistrib,
+			setShowDistrib,
 			projectsNew,
 			countProjects, 
 			setCountProjects,
