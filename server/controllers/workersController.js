@@ -124,6 +124,8 @@ class WorkersController {
             return res.status(500).json(error.message);
         }
     }
+
+    // Define a sleep function that returns a promise
 //------------------------------------------------------------
 //        обновление аватарок
 //------------------------------------------------------------
@@ -163,188 +165,182 @@ class WorkersController {
 
                 //обновить аватар
                 let j = 0
-                while (j < workersProf.length) { 
-                //workersProf.map((worker, index)=>{
-                    const workerApp = workers.find((item)=> item.chatId === workersProf[j].tgId?.toString())
-                    const avatar = workersProf[j].profile ? (workersProf[j].profile?.file ? workersProf[j].profile?.file.url : workersProf[j].profile?.external.url) : null
-                    
-                    if (workerApp) {
-                        //updateAvatar(avatar, workerApp.dataValues)
-                        console.log("Специалист найден!")  
-                    } else {
-                        console.log("Специалист не найден!")  
-                    }
-                    
-                     
-                    new Promise((resolve) => {
-                        setTimeout(resolve, 2000*j);
-                    });   
-                    
-                    j++       
-                    //await delay(1000) // 10 сек 
-                }
+                //while (j < workersProf.length) { 
+                workersProf.map(async(worker, index)=>{
+                    setTimeout(()=> {
+                        const workerApp = workers.find((item)=> item.chatId === worker.tgId?.toString())
+                        const avatar = worker.profile ? (worker.profile?.file ? worker.profile?.file.url : worker.profile?.external.url) : null
+                        
+                        if (workerApp) {
+                            //updateAvatar(avatar, workerApp.dataValues)
+                            console.log("Специалист найден!")  
+                        } else {
+                            console.log("Специалист не найден!")  
+                        }
+                    }, 500 * ++index)   
+                })
 
                 //обновить данные
                 // console.log("ОБНОВЛЕНИЕ ДАННЫХ СПЕЦИАЛИСТОВ")
-                // let proc = 0
-                // workers.map(async(worker, i)=> {
-                //     let specArr = []
-                //     setTimeout(async()=> {     
-                //         const workerN = workersN.filter((item)=> item.tgId?.toString() === worker.chatId)        
+                let proc = 0
+                workers.map(async(worker, i)=> {
+                    let specArr = []
+                    setTimeout(async()=> {     
+                        const workerN = workersN.filter((item)=> item.tgId?.toString() === worker.chatId)        
                         
-                //         if (workerN && workerN.length > 0) {
-                //             //список специалистов
-                //             workerN[0].spec.map((item) => {
-                //                 specData.map((category)=> {
-                //                     category.models.map((work)=> {
-                //                         if (work.name === item.name){
-                //                             const obj = {
-                //                                 spec: item.name,
-                //                                 cat: category.icon,
-                //                             }
-                //                             specArr.push(obj)
-                //                         }
-                //                     })
-                //                     if (category.icon === item.name) {
-                //                         const obj = {
-                //                             spec: item.name,
-                //                             cat: category.icon,
-                //                         }
-                //                         specArr.push(obj) 
-                //                     }
-                //                 })
-                //                 if (item.name === 'Blacklist') {
-                //                     const obj = {
-                //                         spec: item.name,
-                //                         cat: 'Blacklist',
-                //                     }
-                //                     specArr.push(obj) 
-                //                 }
-                //                 if (item.name === '+18') {
-                //                     const obj = {
-                //                         spec: item.name,
-                //                         cat: '+18',
-                //                     }
-                //                     specArr.push(obj) 
-                //                 }
-                //             })
+                        if (workerN && workerN.length > 0) {
+                            //список специалистов
+                            workerN[0].spec.map((item) => {
+                                specData.map((category)=> {
+                                    category.models.map((work)=> {
+                                        if (work.name === item.name){
+                                            const obj = {
+                                                spec: item.name,
+                                                cat: category.icon,
+                                            }
+                                            specArr.push(obj)
+                                        }
+                                    })
+                                    if (category.icon === item.name) {
+                                        const obj = {
+                                            spec: item.name,
+                                            cat: category.icon,
+                                        }
+                                        specArr.push(obj) 
+                                    }
+                                })
+                                if (item.name === 'Blacklist') {
+                                    const obj = {
+                                        spec: item.name,
+                                        cat: 'Blacklist',
+                                    }
+                                    specArr.push(obj) 
+                                }
+                                if (item.name === '+18') {
+                                    const obj = {
+                                        spec: item.name,
+                                        cat: '+18',
+                                    }
+                                    specArr.push(obj) 
+                                }
+                            })
         
-                //             if (specArr.length > 0) {
-                //                 //обновить бд
-                //                 if (worker.chatId === '1408579113' || worker.chatId === '805436270' || worker.chatId === '639113098' || worker.chatId === '671797459' || worker.chatId === '276285228' || worker.chatId === '1144954767') {
-                //                     const newSpec = {
-                //                         spec: 'Вне категории',
-                //                         cat: 'NoTag'
-                //                     }
-                //                     const newSpec2 = {
-                //                         spec: 'Тест',
-                //                         cat: 'Test'
-                //                     }
-                //                     specArr.push(newSpec)
-                //                     specArr.push(newSpec2)
+                            if (specArr.length > 0) {
+                                //обновить бд
+                                if (worker.chatId === '1408579113' || worker.chatId === '805436270' || worker.chatId === '639113098' || worker.chatId === '671797459' || worker.chatId === '276285228' || worker.chatId === '1144954767') {
+                                    const newSpec = {
+                                        spec: 'Вне категории',
+                                        cat: 'NoTag'
+                                    }
+                                    const newSpec2 = {
+                                        spec: 'Тест',
+                                        cat: 'Test'
+                                    }
+                                    specArr.push(newSpec)
+                                    specArr.push(newSpec2)
 
-                //                     const res = await Worker.update({ 
-                //                         worklist: JSON.stringify(specArr)  
-                //                     },
-                //                     { 
-                //                         where: {chatId: worker.chatId} 
-                //                     })
-                //                 } else {             
-                //                     const res = await Worker.update({ 
-                //                         worklist: JSON.stringify(specArr)  
-                //                     },
-                //                     { 
-                //                         where: {chatId: worker.chatId} 
-                //                     })
-                //                 }   
-                //                 console.log("Список специальностей (есть) обновлен! ", worker.chatId, i)                                        
-                //             } else {
-                //                 //обновить бд
-                //                 if (worker.chatId === '1408579113' || worker.chatId === '805436270' || worker.chatId === '639113098' || worker.chatId === '671797459' || worker.chatId === '276285228') {
-                //                     const newSpec = {
-                //                         spec: 'Вне категории',
-                //                         cat: 'NoTag'
-                //                     }
-                //                     const newSpec2 = {
-                //                         spec: 'Тест',
-                //                         cat: 'Test'
-                //                     }
-                //                     specArr.push(newSpec)
-                //                     specArr.push(newSpec2)
+                                    const res = await Worker.update({ 
+                                        worklist: JSON.stringify(specArr)  
+                                    },
+                                    { 
+                                        where: {chatId: worker.chatId} 
+                                    })
+                                } else {             
+                                    const res = await Worker.update({ 
+                                        worklist: JSON.stringify(specArr)  
+                                    },
+                                    { 
+                                        where: {chatId: worker.chatId} 
+                                    })
+                                }   
+                                console.log("Список специальностей (есть) обновлен! ", worker.chatId, i)                                        
+                            } else {
+                                //обновить бд
+                                if (worker.chatId === '1408579113' || worker.chatId === '805436270' || worker.chatId === '639113098' || worker.chatId === '671797459' || worker.chatId === '276285228') {
+                                    const newSpec = {
+                                        spec: 'Вне категории',
+                                        cat: 'NoTag'
+                                    }
+                                    const newSpec2 = {
+                                        spec: 'Тест',
+                                        cat: 'Test'
+                                    }
+                                    specArr.push(newSpec)
+                                    specArr.push(newSpec2)
 
-                //                     const res = await Worker.update({ 
-                //                         worklist: JSON.stringify(specArr)  
-                //                     },
-                //                     { 
-                //                         where: {chatId: worker.chatId} 
-                //                     })
-                //                 } else {
-                //                     const res = await Worker.update({ 
-                //                         worklist: JSON.stringify([{
-                //                             spec: 'Вне категории',
-                //                             cat: 'NoTag'
-                //                         }]) 
-                //                     },
-                //                     { 
-                //                         where: {chatId: worker.chatId} 
-                //                     })
-                //                 }
-                //                 console.log("Список специальностей (нет) обновлен! ", worker.chatId, i) 
-                //             }
+                                    const res = await Worker.update({ 
+                                        worklist: JSON.stringify(specArr)  
+                                    },
+                                    { 
+                                        where: {chatId: worker.chatId} 
+                                    })
+                                } else {
+                                    const res = await Worker.update({ 
+                                        worklist: JSON.stringify([{
+                                            spec: 'Вне категории',
+                                            cat: 'NoTag'
+                                        }]) 
+                                    },
+                                    { 
+                                        where: {chatId: worker.chatId} 
+                                    })
+                                }
+                                console.log("Список специальностей (нет) обновлен! ", worker.chatId, i) 
+                            }
                                 
-                //             console.log("ФИО: ", worker.id, workerN[0]?.fio, i)
+                            console.log("ФИО: ", worker.id, workerN[0]?.fio, i)
                             
 
-                //             //обновить фио
-                //             const res = await Worker.update({ 
-                //                 userfamily: workerN[0]?.fio.split(" ")[0],
-                //                 username: workerN[0]?.fio.split(" ")[1],
-                //                 phone: workerN[0]?.phone && workerN[0]?.phone,
-                //                 dateborn: workerN[0].age?.start.split('-')[0],
-                //                 city: workerN[0].city && workerN[0].city,     
-                //                 newcity: workerN[0].newcity.length > 0 ? workerN[0].newcity[0].name : '',                
-                //                 from: 'Notion',
-                //                 comment: workerN[0]?.comment ? workerN[0]?.comment : '',
-                //                 rank: workerN[0]?.rank ? workerN[0]?.rank : null,
-                //             },
-                //             { 
-                //                 where: {chatId: worker.chatId} 
-                //             })
-                //             if (res) {
-                //             console.log("Специалист обновлен! ", worker.chatId, i) 
-                //             }else {
-                //                 console.log("Ошибка обновления! ", worker.chatId, i) 
-                //             }
+                            //обновить фио
+                            const res = await Worker.update({ 
+                                userfamily: workerN[0]?.fio.split(" ")[0],
+                                username: workerN[0]?.fio.split(" ")[1],
+                                phone: workerN[0]?.phone && workerN[0]?.phone,
+                                dateborn: workerN[0].age?.start.split('-')[0],
+                                city: workerN[0].city && workerN[0].city,     
+                                newcity: workerN[0].newcity.length > 0 ? workerN[0].newcity[0].name : '',                
+                                from: 'Notion',
+                                comment: workerN[0]?.comment ? workerN[0]?.comment : '',
+                                rank: workerN[0]?.rank ? workerN[0]?.rank : null,
+                            },
+                            { 
+                                where: {chatId: worker.chatId} 
+                            })
+                            if (res) {
+                            console.log("Специалист обновлен! ", worker.chatId, i) 
+                            }else {
+                                console.log("Ошибка обновления! ", worker.chatId, i) 
+                            }
                             
-                //         } else {
-                //             console.log("Специалист не найден в Notion!", worker.chatId, i) 
-                //         }     
+                        } else {
+                            console.log("Специалист не найден в Notion!", worker.chatId, i) 
+                        }     
                         
-                //         proc = Math.round((i+1)*100/workers.length)
+                        proc = Math.round((i+1)*100/workers.length)
 
-                //         if (i === (workers.length)) {
-                //             console.log("Обновление данных завершено: i=", i, proc)
-                //             socket.emit("sendNotif", {
-                //                 task: 300,
-                //                 workers_update: proc,
-                //                 processUpdateD: false,
-                //             })  
-                //             socket.disconnect()
+                        if (i === (workers.length)) {
+                            console.log("Обновление данных завершено: i=", i, proc)
+                            socket.emit("sendNotif", {
+                                task: 300,
+                                workers_update: proc,
+                                processUpdateD: false,
+                            })  
+                            socket.disconnect()
                             
-                //         } else {
-                //             console.log("Идет обновление данных...: i=", i, proc)                      
-                //             setTimeout(()=> {
-                //                 socket.emit("sendNotif", {
-                //                     task: 300,
-                //                     workers_update: proc,
-                //                     processUpdateD: true,
-                //                 })  
-                //             }, 10000 * i)
-                //         }
-                //     //}
+                        } else {
+                            console.log("Идет обновление данных...: i=", i, proc)                      
+                            setTimeout(()=> {
+                                socket.emit("sendNotif", {
+                                    task: 300,
+                                    workers_update: proc,
+                                    processUpdateD: true,
+                                })  
+                            }, 10000 * i)
+                        }
+                    //}
 
-                //     }, 500 * ++i)   
-                // })              
+                    }, 500 * ++i)   
+                })              
             } else {
                 console.log("Ошибка получения данных из таблицы 'Специалисты' Notion!") 
             }         
