@@ -1469,6 +1469,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		workers_update,
 		processUpdateD,
 		phone,
+		processDistrib,
 		telegram_id, 
 		srm_id, 
 		chat_link,
