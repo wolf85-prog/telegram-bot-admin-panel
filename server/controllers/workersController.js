@@ -165,6 +165,7 @@ class WorkersController {
 
                 //обновить аватар
                 let j = 0
+                let proc = 0
                 //while (j < workersProf.length) { 
                 workersProf.map(async(worker, index)=>{
                     setTimeout(()=> {
@@ -177,12 +178,34 @@ class WorkersController {
                         } else {
                             console.log("Специалист не найден!", index)  
                         }
+
+                        proc = Math.round((index+1)*100/workersProf.length)
+
+                        if (index === (workersProf.length)) {
+                            console.log("Обновление данных завершено: i=", index, proc)
+                            socket.emit("sendNotif", {
+                                task: 300,
+                                workers_update: proc,
+                                processUpdateD: false,
+                            })  
+                            socket.disconnect()
+                            
+                        } else {
+                            console.log("Идет обновление данных...: i=", index, proc)                      
+                            //setTimeout(()=> {
+                                socket.emit("sendNotif", {
+                                    task: 300,
+                                    workers_update: proc,
+                                    processUpdateD: true,
+                                })  
+                            //}, 10000 * i)
+                        }
                     }, 1000 * ++index)   
                 })
 
                 //обновить данные
                 console.log("ОБНОВЛЕНИЕ ДАННЫХ СПЕЦИАЛИСТОВ")
-                let proc = 0
+                
                 workers.map(async(worker, i)=> {
                     let specArr = []
                     setTimeout(async()=> {     
@@ -316,27 +339,7 @@ class WorkersController {
                             console.log("Специалист не найден в Notion!", worker.chatId, i) 
                         }     
                         
-                        proc = Math.round((i+1)*100/workers.length)
-
-                        if (i === (workers.length)) {
-                            console.log("Обновление данных завершено: i=", i, proc)
-                            socket.emit("sendNotif", {
-                                task: 300,
-                                workers_update: proc,
-                                processUpdateD: false,
-                            })  
-                            socket.disconnect()
-                            
-                        } else {
-                            console.log("Идет обновление данных...: i=", i, proc)                      
-                            setTimeout(()=> {
-                                socket.emit("sendNotif", {
-                                    task: 300,
-                                    workers_update: proc,
-                                    processUpdateD: true,
-                                })  
-                            }, 10000 * i)
-                        }
+                        
                     //}
 
                     }, 500 * ++i)   
