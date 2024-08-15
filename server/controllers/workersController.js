@@ -177,7 +177,7 @@ class WorkersController {
                         } else {
                             console.log("Специалист не найден!", index)  
                         }
-                    }, 500 * ++index)   
+                    }, 1000 * ++index)   
                 })
 
                 //обновить данные
@@ -307,7 +307,7 @@ class WorkersController {
                                 where: {chatId: worker.chatId} 
                             })
                             if (res) {
-                            console.log("Специалист обновлен! ", worker.chatId, i) 
+                                console.log("Специалист обновлен! ", worker.chatId, i) 
                             }else {
                                 console.log("Ошибка обновления! ", worker.chatId, i) 
                             }

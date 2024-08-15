@@ -65,7 +65,7 @@ module.exports = async function updateAvatar(avatar, worker) {
                         })
 
                         if (res) {
-                            console.log("Аватар обновлен! ", url) 
+                            console.log("Аватар обновлен! ", url, worker.id) 
                         }else {
                             console.log("Ошибка обновления! ", worker.chatId) 
                         }

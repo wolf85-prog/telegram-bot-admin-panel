@@ -934,21 +934,31 @@ const UsersProvider = ({ children }) => {
 		console.log("Ответ о процессе получен: ", dataAll)
 		const { process, data, interval, time } = dataAll
 
-		// if (process === '1') {
-		// 	setStatusProcess(data)
-		// 	setIntervalProcess(interval)
-		// 	setTimeProcess(time)
-		// }
-		// else if (process === '2') {
-		// 	setStatusProcess2(data)
-		// 	setIntervalProcess2(interval)
-		// 	setTimeProcess2(time)
-		// }
-		// else if (process === '3') {
-		// 	setStatusProcess3(data)
-		// 	setIntervalProcess3(interval)
-		// 	setTimeProcess3(time)
-		// }
+		if (process === '1') {
+			setStatusProcess(data)
+			setIntervalProcess(interval)
+			setTimeProcess(time)
+		}
+		else if (process === '2') {
+			setStatusProcess2(data)
+			setIntervalProcess2(interval)
+			setTimeProcess2(time)
+		}
+		else if (process === '3') {
+			setStatusProcess3(data)
+			setIntervalProcess3(interval)
+			setTimeProcess3(time)
+		}
+		else if (process === '4') {
+			setStatusProcess4(data)
+			setIntervalProcess4(interval)
+			setTimeProcess4(time)
+		}
+		else if (process === '5') {
+			setStatusProcess5(data)
+			setIntervalProcess5(interval)
+			setTimeProcess5(time)
+		}
 		
 	}
 
