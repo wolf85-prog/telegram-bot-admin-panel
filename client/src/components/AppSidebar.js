@@ -184,6 +184,37 @@ const AppSidebar = () => {
       onClick: ()=>handleLinkClick('https://t.me/ULEY_Assistant'),
       style: {cursor: 'pointer'},
     },
+    {
+      component: CNavTitle,
+      name: '',
+    },
+
+    {
+      component: CNavItem,
+      name: 'Менеджеры 2.0',
+      to: '/chat3',
+      icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
+      badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
+      style: {backgroundColor: '#0078d421', color: '#e55353', cursor: 'pointer'},
+    },
+    
+    {
+      component: CNavItem,
+      name: 'Рассылки',
+      to: '/distribution3',
+      icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+      style: {color: '#e55353'},
+    },
+    {
+      component: CNavItem,
+      name: 'Уведомления',
+      to: '/notifications3',
+      icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
+      badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
+      style: {color: '#e55353'},
+    },
+
+    
     
   ]
 
