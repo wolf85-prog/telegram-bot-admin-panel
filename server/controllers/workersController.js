@@ -210,8 +210,9 @@ class WorkersController {
                     let specArr = []
                     setTimeout(async()=> {     
                         const workerN = workersN.filter((item)=> item.tgId?.toString() === worker.chatId)        
-                        console.log("Специалист в ноушен найден!", i)
+                        
                         if (workerN && workerN.length > 0) {
+                            console.log("Специалист в ноушен найден!", i)
                             //список специалистов
                             workerN[0].spec.map((item) => {
                                 specData.map((category)=> {
