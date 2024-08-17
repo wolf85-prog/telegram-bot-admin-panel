@@ -16,16 +16,16 @@ import { newCountWMessage } from "src/http/adminAPI";
 
 const Contact = ({ contact, worker }) => {
 	//console.log("worker contact: ", worker)
-	const { setPersonW } = useContext(AccountContext);
+	const { setPersonR } = useContext(AccountContext);
 	const host = process.env.REACT_APP_API_URL
 	
 	//сделать пользователя непрочитанным
 	const { setUserWorkerAsUnread, setCountMessageWork } = useUsersContext();
-	const { userWorkers, setUserWorkers } = useUsersContext();
+	const { userRenthub, setUserRenthub } = useUsersContext();
 
 	//обработка нажатия на пользователя из списка
     const getUser = async () => {
-        setPersonW({
+        setPersonR({
             name: contact.name, 
             id: contact.chatId, 
 			avatar: contact.avatar
@@ -86,9 +86,9 @@ const Contact = ({ contact, worker }) => {
 				//console.log("obj: ", obj)
 
 				//сохранить сообщения в контексте пользователя
-				setUserWorkers((userWorkers) => {
-					let userIndex = userWorkers.findIndex((user) => user.chatId === contact.chatId.toString());
-					const usersCopy = JSON.parse(JSON.stringify(userWorkers));
+				setUserRenthub((userRenthub) => {
+					let userIndex = userRenthub.findIndex((user) => user.chatId === contact.chatId.toString());
+					const usersCopy = JSON.parse(JSON.stringify(userRenthub));
 					usersCopy[userIndex].messages = obj
 
 					return usersCopy;
