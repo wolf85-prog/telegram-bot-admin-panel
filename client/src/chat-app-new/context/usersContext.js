@@ -1693,6 +1693,23 @@ const delWMessageContext = (messageId, messageDate, chatId) => {
 }
 
 
+//отправить сообщение из админки renthub
+const addNewMessageR = (userId, message, type, textButton, convId, messageId, isBot) => {
+	console.log("isBot: ", isBot)
+
+	socket.emit("sendAdminSpec", { 
+		senderId: chatAdminId,
+		receiverId: userId,
+		text: message,
+		type: type,
+		buttons: textButton,
+		convId: convId,
+		messageId,
+		isBot: isBot,
+	})
+};
+
+
 //отправить номер процесса и данные
 const sendNumberProcess = (number, data, interval, time) => {
 	console.log("send: ", number, data, interval, time)
@@ -2114,6 +2131,7 @@ function isObjectEmpty(obj) {
 			workersAll,
 			setWorkersAll,
 			addNewMessage2,
+			addNewMessageR,
 			delWMessageContext,
 			countMessageWork,
 			setCountMessageWork,

@@ -10,15 +10,15 @@ import formatTime from "./../../../../chat-app-new/utils/formatTime";
 import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { $host } from './../../../../http/index'
-import { delWMessage, getWMessages2 } from "src/http/workerAPI";
+import { delRMessage, getRMessages2 } from "src/http/renthubAPI";
 import Dropdown from 'react-bootstrap/Dropdown';
 import imageIcon from "./../../../assets/images/sp-i-m-image-placeholder.svg";
 
 const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
-	const { personW } = useContext(AccountContext);
+	const { personR } = useContext(AccountContext);
 	
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
-	const tokenW = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
+	const tokenW = process.env.REACT_APP_TELEGRAM_API_TOKEN_RENTHUB
 
 	const [showImage, setShowImage] = useState([false])
 	const [loading, setLoading]= useState(false);
@@ -63,7 +63,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
 		console.log("array: ", allArr)
 
-		const newMess = await getWMessages2(convId, 20, allArr)
+		const newMess = await getRMessages2(convId, 20, allArr)
 		console.log("newMessages: ", newMess.length + allArr)
 
 		setAllArr(newMess.length + allArr)

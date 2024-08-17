@@ -35,7 +35,7 @@ const baseURL = process.env.REACT_APP_API_URL
 const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
 
 const Chat = () => {
-	const { userRenthub, addNewMessage2, conversations } = useUsersContext();
+	const { userRenthub, addNewMessageR, conversations } = useUsersContext();
 	const { personR } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
@@ -346,7 +346,7 @@ const Chat = () => {
 				}
 
 				//сохранить в контексте
-				addNewMessage2(user.chatId, mess, 'text', '', convs.id, sendToTelegram.data.result.message_id, null);
+				addNewMessageR(user.chatId, mess, 'text', '', convs.id, sendToTelegram.data.result.message_id, null);
 			} else {
 				message = {
 					senderId: chatAdminId, 
@@ -359,7 +359,7 @@ const Chat = () => {
 				}
 
 				//сохранить в контексте
-				addNewMessage2(user.chatId, host + image, 'image', '', convs.id, sendPhotoToTelegram.data.result.message_id, null);
+				addNewMessageR(user.chatId, host + image, 'image', '', convs.id, sendPhotoToTelegram.data.result.message_id, null);
 			}
 			console.log("message send: ", message);
 
@@ -428,7 +428,7 @@ const Chat = () => {
 		await newMessage(message)
 	
 		//сохранить в контексте
-		addNewMessage2(user.chatId, text, 'text', 'Согласен предоставить персональные данные', client.conversationId, sendToTelegram.data.result.message_id);
+		addNewMessageR(user.chatId, text, 'text', 'Согласен предоставить персональные данные', client.conversationId, sendToTelegram.data.result.message_id);
     }
 
 	//отправка сценария Правила
@@ -519,7 +519,7 @@ https://t.me/ULEY_Office_Bot
 		await newMessage(message)
 	
 		//сохранить в контексте
-		addNewMessage2(user.chatId, 'Сценарий "Первый проект"', 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
+		addNewMessageR(user.chatId, 'Сценарий "Первый проект"', 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
     
 	}
 
@@ -565,7 +565,7 @@ https://t.me/ULEY_Office_Bot
 		await newMessage(message)
 	
 		//сохранить в контексте
-		addNewMessage2(user.chatId, poster, 'image', '', client.conversationId, sendToTelegram.data.result.message_id);
+		addNewMessageR(user.chatId, poster, 'image', '', client.conversationId, sendToTelegram.data.result.message_id);
     
 	}
 
