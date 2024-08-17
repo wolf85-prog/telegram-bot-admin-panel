@@ -46,17 +46,17 @@ const Sidebar = () => {
 	},[userRenthub])
 
 	
-	useEffect(() => {
-		const arr = []
-		for (const item of userRenthub) {			
-			arr.push(item)
-			if (arr.length === CountWorkers)
-			  break;
-		}
-		const filteredData = userRenthub.filter(user=> (user.name+user.chatId+user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+	// useEffect(() => {
+	// 	const arr = []
+	// 	for (const item of userRenthub) {			
+	// 		arr.push(item)
+	// 		if (arr.length === CountWorkers)
+	// 		  break;
+	// 	}
+	// 	const filteredData = userRenthub.filter(user=> (user.name+user.chatId+user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
         
-		setContacts(text === '' ? arr : filteredData);      
-    }, [text]);
+	// 	setContacts(text === '' ? arr : filteredData);      
+    // }, [text]);
 
 
 	const onSelected = (index) => {
