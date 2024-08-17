@@ -192,11 +192,11 @@ route.post('/rconversation/add', newConversationR)
 route.get('/rconversation/get/:id', getConversationR)
 route.get('/rconversations/get', getConversationsR)
 
-route.get('/rmanager/get', getRmanagers)
-route.get('/rmanager/get/:id', getRmanager)
-route.patch('/rmanager/update/:id', editRmanager)
+route.get('/rmanagers/get', getRmanagers)
+route.get('/rmanagers/get/:id', getRmanager)
+route.patch('/rmanagers/update/:id', editRmanager)
 //route.get('/rmanager/block/:id', blockWorker)
-route.get('/rmanager/count/get/:count/:prev', getRManagerCount) //еще
+route.get('/rmanagers/count/get/:count/:prev', getRManagerCount) //еще
 
 
 module.exports = route
