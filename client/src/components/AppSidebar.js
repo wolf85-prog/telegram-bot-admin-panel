@@ -201,14 +201,14 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Рассылки',
-      to: '/distribution3',
+      to: '/distributionr',
       icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
       style: {color: '#e55353'},
     },
     {
       component: CNavItem,
       name: 'Уведомления',
-      to: '/notifications3',
+      to: '/managers',
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
       badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
       style: {color: '#e55353'},

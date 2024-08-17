@@ -16,6 +16,10 @@ const $host_worker = axios.create({
     baseURL: process.env.REACT_APP_WORKER_API_URL
 })
 
+const $host_renthub = axios.create({
+    baseURL: process.env.REACT_APP_RENTHUB_API_URL
+})
+
 const $host_call = axios.create({
     baseURL: process.env.REACT_APP_WEBAPP_CALL
 })

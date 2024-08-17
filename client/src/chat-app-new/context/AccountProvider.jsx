@@ -10,10 +10,10 @@ const AccountProvider = ({ children }) => {
     const [account, setAccount] = useState();
     const [person, setPerson] = useState({});
     const [personW, setPersonW] = useState({});
+    const [personR, setPersonR] = useState({});
     const [activeUsers, setActiveUsers]= useState([]);
     const [newMessageFlag, setNewMessageFlag] = useState(false);
 
-    //const socket = useRef(io("https://proj.uley.team:9000"))
     const socket = useRef();
 
     useEffect(()=>{
@@ -31,6 +31,8 @@ const AccountProvider = ({ children }) => {
             setPerson,
             personW,
             setPersonW,
+            personR, 
+            setPersonR,
             socket,
             activeUsers,
             setActiveUsers,

@@ -26,3 +26,9 @@ export const REGISTRATION_ROUTE = '/register'
 
 export const SOUNDSNOTIF_ROUTE = '/soundsnotif'
 export const FILEMANAGER_ROUTE = '/filemanager'
+
+export const MANAGERS_ROUTE = '/managers'
+export const DISTRIBUTIONR_ROUTE = '/distributionr'
+export const DISTRIBUTIONADDR_ROUTE = '/distributionr_add'
+export const DISTRIBUTIONEDITR_ROUTE = '/distributionr_edit'
+export const DISTRIBUTIONRPLANER_ROUTE = '/distributionr_planer'

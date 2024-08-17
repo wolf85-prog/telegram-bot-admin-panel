@@ -15,14 +15,15 @@ const Settings = React.lazy(() => import('./pages/Settings'))
 const DistributionW = React.lazy(() => import('./pages/DistributionW'))
 const Workers = React.lazy(() => import('./pages/Workers'))
 const Workers2 = React.lazy(() => import('./pages/Workers2'))
+const Managers = React.lazy(() => import('./pages/Managers'))
+const DistributionR = React.lazy(() => import('./pages/DistributionR'))
 
 const routes = [
   { path: '/', exact: true, name: 'Пункт управления / ' },
   { path: '/dashboard', name: 'Пункт управления / ', Component: Admin },
   { path: "/chat", name: 'Чаты', Component: Chats },
   { path: "/chat2", name: 'Чаты 2.0', Component: Chats2 },
-  { path: "/chatwork", name: 'Workhub', Component: ChatWorker },
-  { path: "/chat3", name: 'Проекты', Component: Chats3 },
+  { path: "/chatwork", name: 'Workhub', Component: ChatWorker }, 
   { path: '/distribution', name: 'Renthub / Рассылки', Component: Distribution },
   { path: '/distribution_add', name: 'Создать рассылку', Component: DistributionAdd },
   { path: '/reports', name: 'Отчеты', Component: Reports },
@@ -33,6 +34,9 @@ const routes = [
   { path: "/workers", name: 'Workhub / Уведомления', Component: Workers },
   { path: "/workers2", name: 'Workhub / Уведомления', Component: Workers2 },
   { path: '/dashboard2', name: 'Пункт управления / Renthub', Component: Admin2 },
+  { path: "/chat3", name: 'Менеджеры 2.0', Component: Chats3 },
+  { path: "/managers", name: 'Renthub / Уведомления', Component: Managers },
+  { path: '/distributionr', name: 'Renthub / Рассылки', Component: DistributionR },
 ]
 
 export default routes

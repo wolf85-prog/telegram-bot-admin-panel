@@ -9,17 +9,12 @@ import "./../chat-app-new/assets/css/index.css";
 import Home from "../chat-app-new/pages/Home";
 import Sidebar from "../chat-app-worker/components/Sidebar";
 import Chat from "../chat-app-worker/pages/Chat";
-import { useUsersContext } from "./../chat-app-new/context/usersContext"
 
 import { AccountContext } from "../chat-app-new/context/AccountProvider";
 
 const ChatsWorker = () => {
 
   const { personW } = useContext(AccountContext); 
-  //const { userWorkers, setUserWorkers} = useUsersContext();
-
-  //const [workers, setWorkers] = useState([]); //useState(contacts);
-  //const [userWorkers, setUserWorkers] = useState([]); //useState(contacts);
 
 	useEffect(() => {
 		document.body.classList.add("dark-theme");
