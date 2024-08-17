@@ -145,21 +145,6 @@ const Contact = ({ contact, worker }) => {
 					</>
 				}
 				
-				{
-                    worker.length !== 0 ?  
-                    ((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ? 
-                    <img src={avatarBlacklist} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
-                    : "")
-                    : ""
-                }
-                
-				{
-                    worker.length !== 0 ? 
-                    ((JSON.parse(worker[0].worklist)).find(item => item.spec === '+18') ?   
-                    <img src={block18} alt='' width={18} style={{position: 'absolute', top: '-5px', left: '32px', width: '23px'}}/>
-                    : "")
-                    : ""
-                }
 
 				
 			</div>
