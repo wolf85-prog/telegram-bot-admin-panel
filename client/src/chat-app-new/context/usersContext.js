@@ -1216,6 +1216,9 @@ const UsersProvider = ({ children }) => {
 		socket.on("getAdminSpec", fetchAdminSpec);	
 		socket.on("getDelAdminSpec", fetchDelAdminSpec);
 
+		socket.on("getAdminRent", fetchAdminRent);	
+		socket.on("getDelAdminRent", fetchDelAdminRent);
+
 		socket.on("getNotif", fetchNotifAdmin);
 
 		socket.on("getDistrib", fetchDistribution);
@@ -1667,6 +1670,101 @@ const fetchDelAdminSpec = (data) => {
 	});
 }
 
+
+//получить исходящее сообщение в админку workhub
+const fetchAdminRent = (data) => {
+	//console.log("Пришло сообщение в Админку: ", data)
+
+	if (data.text.startsWith('Заявка принята! Мы свяжемся с вами в ближайшее время.') && !data.text.includes('_reply_')) {
+		
+		//console.log("Добавился новый претендент: ")
+		//play sound
+		//audioPretendent.play();
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+			audioPretendent.volume = parseFloat(savedVolume)
+			audioPretendent.play();
+		}
+	}
+
+	setUserRenthub((userRenthub) => {
+		const { senderId, receiverId, text, type, buttons, messageId, isBot } = data;
+
+		//console.log("userWorkers: ", userWorkers)
+
+		let userIndex = userRenthub.findIndex((user) => user.chatId === receiverId.toString());
+		const usersCopy = JSON.parse(JSON.stringify(userRenthub));
+		//console.log("usersCopy: ", usersCopy)
+
+		const newMsgObject = {
+			date: new Date().toLocaleDateString(),
+			content: text,
+			image: type === 'image' ? true : false,
+			descript: buttons ? buttons : '',
+			sender: senderId,
+			time: new Date().toLocaleTimeString(),
+			status: 'delivered',
+			id: messageId,
+		};
+
+		const currentDate = new Date().toLocaleDateString()
+
+		//if (usersCopy[userIndex].messages[currentDate]) {
+		if (!isObjectEmpty(usersCopy[userIndex].messages)) {
+			if (usersCopy[userIndex].messages[currentDate]) {
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			} else {
+				usersCopy[userIndex].messages[currentDate] = [];
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			}
+		} else {
+			usersCopy[userIndex].messages[currentDate] = [];
+			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+		}
+		
+		const userObject = usersCopy[userIndex];
+		if (isBot) {
+			usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
+		} else {
+			usersCopy[userIndex] = { ...userObject, ['date']: new Date(), ['message']: newMsgObject.content};
+		}
+		
+
+		//сортировка
+		const userSort = [...usersCopy].sort((a, b) => {       
+			var dateA = new Date(a.date), dateB = new Date(b.date) 
+			return dateB-dateA  //сортировка по убывающей дате  
+		})
+
+		//console.log(userSort)
+
+		return userSort;
+	});
+}
+
+//получить исходящее сообщение в админку
+const fetchDelAdminRent = (data) => {
+	//console.log("Удаление сообщение в Админке: ", data)
+
+	setUserRenthub((userRenthub) => {
+		const { messageId, messageDate, chatId } = data;
+
+		let userIndex = userRenthub.findIndex((user) => user.chatId === chatId);
+		const usersCopy = JSON.parse(JSON.stringify(userRenthub));
+
+		const messageIndex = usersCopy[userIndex].messages[messageDate].map(el => el.id).lastIndexOf(messageId);
+		usersCopy[userIndex].messages[messageDate].splice(messageIndex, 1); 
+
+		const userObject = usersCopy[userIndex];
+		const userSort = [...usersCopy]
+
+		return userSort;
+	});
+}
+
 //отправить сообщение из админки workhub
 const addNewMessage2 = (userId, message, type, textButton, convId, messageId, isBot) => {
 	console.log("isBot: ", isBot)
@@ -1692,12 +1790,20 @@ const delWMessageContext = (messageId, messageDate, chatId) => {
 	})
 }
 
+const delRMessageContext = (messageId, messageDate, chatId) => {
+	socket.emit("delAdminRent", { 
+		messageId,
+		messageDate,
+		chatId,
+	})
+}
+
 
 //отправить сообщение из админки renthub
 const addNewMessageR = (userId, message, type, textButton, convId, messageId, isBot) => {
 	console.log("isBot: ", isBot)
 
-	socket.emit("sendAdminSpec", { 
+	socket.emit("sendAdminRent", { 
 		senderId: chatAdminId,
 		receiverId: userId,
 		text: message,
@@ -2133,6 +2239,7 @@ function isObjectEmpty(obj) {
 			addNewMessage2,
 			addNewMessageR,
 			delWMessageContext,
+			delRMessageContext,
 			countMessageWork,
 			setCountMessageWork,
 			distributionsWork, 

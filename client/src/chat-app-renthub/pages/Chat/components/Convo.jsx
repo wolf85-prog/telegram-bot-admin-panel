@@ -34,7 +34,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 	let replyMessage;
 	let array = []
 
-	const { delWMessageContext } = useUsersContext();
+	const { delRMessageContext } = useUsersContext();
 
 	useEffect(() => {
 		setDates(Object.keys(allMessages))  //['01/01/2023', 'Сегодня']
@@ -256,12 +256,12 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		console.log("message: ", message)
 
 		//удалить сообщение через сокет
-		delWMessageContext(message.id, message.date, message.chatId)
+		delRMessageContext(message.id, message.date, message.chatId)
 
 		//удалить сообщение в базе данных
-		await delWMessage(message.id)
+		await delRMessage(message.id)
 
-		const url_del_msg = `https://api.telegram.org/bot${tokenW}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
+		const url_del_msg = `https://api.telegram.org/bot${tokenW}/deleteMessage?chat_id=${personR.id}&message_id=${message.id}`
 
 		const delToTelegram = await $host.get(url_del_msg);
 
@@ -359,11 +359,11 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 												<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
 											</figure> 
 											: (
-											<figure style={{margin:showImage[msgIndex + personW.id] ? '0 0 3rem': '0 0 1rem', position: 'relative'}}>
-												{showImage[msgIndex + personW.id]  
+											<figure style={{margin:showImage[msgIndex + personR.id] ? '0 0 3rem': '0 0 1rem', position: 'relative'}}>
+												{showImage[msgIndex + personR.id]  
 												? <a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>	
 												: <div 
-													onClick={()=>handleClick(msgIndex + personW.id)}
+													onClick={()=>handleClick(msgIndex + personR.id)}
 													style={{
 														width: '100%', 
 														height: '100px', 
@@ -414,7 +414,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 											<Dropdown.Toggle as={CustomToggleBottom} id="dropdown-custom-components">											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenuBottom}>
-											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
+											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personR.id})}>Удалить</Dropdown.Item>
 											</Dropdown.Menu>
 										</Dropdown>	
 
@@ -471,7 +471,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 												<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
 												</Dropdown.Toggle>
 												<Dropdown.Menu as={CustomMenu}>
-												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
+												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personR.id})}>Удалить</Dropdown.Item>
 												</Dropdown.Menu>
 											</Dropdown>									
 									</p>
@@ -505,7 +505,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 												<Dropdown.Toggle as={CustomToggle2} id="dropdown-custom-components">											
 												</Dropdown.Toggle>
 												<Dropdown.Menu as={CustomMenu2}>
-												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
+												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personR.id})}>Удалить</Dropdown.Item>
 												</Dropdown.Menu>
 											</Dropdown>
 										</div>

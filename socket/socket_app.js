@@ -142,6 +142,30 @@ io.on("connection", (socket) => {
         })
     })
 
+
+    //send and get message
+    socket.on("sendAdminRent", ({senderId, receiverId, text, type, buttons, convId, messageId, isBot})=>{
+        io.emit("getAdminRent", {
+            senderId,
+            receiverId,
+            text,
+            type,
+            buttons,
+            convId,
+            messageId,
+            isBot,
+        })
+    })
+
+    //send and get message
+    socket.on("delAdminRent", ({messageId, messageDate, chatId})=>{
+        io.emit("getDelAdminRent", {
+            messageId,
+            messageDate,
+            chatId,
+        })
+    })
+
     // Notifications
     //------------------------------------------------------------------
     //send and get message in workers

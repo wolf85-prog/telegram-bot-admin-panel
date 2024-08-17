@@ -106,7 +106,7 @@ export const newRMessage = async (data) =>{
     }
 }
 
-export const delWMessage = async (id) =>{
+export const delRMessage = async (id) =>{
     try {
         await $host.delete(`api/rmessage/delete/${id}`); 
     } catch (error) {
