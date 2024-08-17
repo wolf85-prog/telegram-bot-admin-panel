@@ -143,6 +143,23 @@ io.on("connection", (socket) => {
     })
 
 
+    // Чат renthub
+//------------------------------------------------------------------
+    //send and get message in workers
+    socket.on("sendMessageRent", ({senderId, receiverId, text, type, convId, messageId, replyId, isBot})=>{
+        const user = getUser(receiverId)
+        io.emit("getMessageRent", {
+            senderId,
+            text,
+            type,
+            convId,
+            messageId,
+            replyId,
+            isBot, 
+        })
+    })
+
+
     //send and get message
     socket.on("sendAdminRent", ({senderId, receiverId, text, type, buttons, convId, messageId, isBot})=>{
         io.emit("getAdminRent", {
