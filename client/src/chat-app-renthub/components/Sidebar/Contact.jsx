@@ -10,7 +10,7 @@ import block18 from "./../../../assets/images/block18.png";
 
 import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 
-import { getWMessages2} from '../../../http/workerAPI'
+import { getRMessages2} from '../../../http/renthubAPI'
 
 import { newCountWMessage } from "src/http/adminAPI";
 
@@ -37,7 +37,7 @@ const Contact = ({ contact, worker }) => {
 
 		if (Object.keys(contact.messages).length === 0) {
 			console.log("Сообщения не загружены!")
-			const messages = await getWMessages2(contact.conversationId, 10, 0)
+			const messages = await getRMessages2(contact.conversationId, 10, 0)
 			//console.log("messages: ", messages)
 
 			const arrayMessage = []
