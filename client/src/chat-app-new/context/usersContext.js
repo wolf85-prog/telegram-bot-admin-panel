@@ -363,7 +363,7 @@ const UsersProvider = ({ children }) => {
 			all.map(async (user) => {
 				const newWorker = {
 				  id: user.id,
-				  userfamily: user.userfamily,
+				  userfamily: user.userfamily != null ? user.userfamily : '',
 				  username: user.username,
 				  phone: user.phone,
 				  dateborn: user.dateborn,
