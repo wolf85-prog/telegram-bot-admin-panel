@@ -23,16 +23,14 @@ const Chats3 = () => {
       <AppHeaderChat />
         <div className="body flex-grow-1 px-3">
 
-            <CContainer lg>
-                <Suspense fallback={<CSpinner color="primary" />}>                 
-                  
-                  <div className="app">
-
-                    <h5>Раздел находится в разработке</h5>
-                  </div>
-
-                </Suspense>
-            </CContainer>
+          <iframe 
+            width="950" 
+            style={{height: '90vh'}}
+            src="https://proj.uley.team:3002/chatwork" 
+            title="description" 
+            //onLoad={() => setLoadingIframe(false)} 
+            loading = "lazy">
+          </iframe>
 
         </div>
         <AppFooter />
