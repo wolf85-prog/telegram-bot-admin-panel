@@ -21,7 +21,7 @@ const Chats3 = () => {
       <AppSidebar />
       <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
       <AppHeaderChat />
-        <div className="body flex-grow-1 px-3">
+        <div className="body flex-grow-1 px-3" style={{textAlign: 'center'}}>
 
           <iframe 
             width="950" 
