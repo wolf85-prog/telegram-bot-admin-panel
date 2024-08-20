@@ -43,6 +43,8 @@ const Chat = () => {
 	let user = userWorkers.filter((user) => user.chatId === chatId.toString())[0];
 	let convs = conversations.find((conv) => conv.members[0] === chatId.toString());
 
+	let data2
+
 	const lastMsgRef = useRef(null);
 	const [showAttach, setShowAttach] = useState(false);
 	const [showEmojis, setShowEmojis] = useState(false);
@@ -287,7 +289,6 @@ const Chat = () => {
 			temp = temp.replace(/</g, '%3c'); 		 //экранирование <
 			
 			let sendToTelegram
-			let sendPhotoToTelegram
 
 			// const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`
 			// const sendToTelegram = await $host.get(url_send_msg);
@@ -311,7 +312,14 @@ const Chat = () => {
 					// } else {
 						const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personW.id}&document=${host+image}`
 						//console.log("url_send_doc: ", url_send_doc)
-						sendPhotoToTelegram = await $host.get(url_send_doc);
+						
+						const form = new FormData();
+						form.append("chat_id", personW.id); // добавление имени файла
+						form.append("document", file); // добавление файла
+						//const form = new FormData();
+						sendToTelegram = await $host.post(`https://api.telegram.org/bot${token_work}/sendDocument`, form, {headers: { 'Content-Type': 'multipart/form-data' },})
+
+						//sendPhotoToTelegram = await $host.get(url_send_doc);
 					//}		
 				} else if (fileType === 'image') {
 					// if (image.slice(-3) !== 'png' || image.slice(-3)!=='jpg' || image.slice(-3)!=='peg' || image.slice(-3) !== 'PNG' || image.slice(-3)!=='JPG' || image.slice(-3)!=='PEG') {
@@ -319,7 +327,7 @@ const Chat = () => {
 					// } else {
 						const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
 						//console.log("url_send_photo: ", url_send_photo)
-						sendPhotoToTelegram = await $host.get(url_send_photo);
+						sendToTelegram = await $host.get(url_send_photo);
 					//}		
 				}	
 			}
@@ -355,11 +363,11 @@ const Chat = () => {
 					type: "image",
 					text: host + image,
 					isBot: null,
-					messageId: sendPhotoToTelegram.data.result.message_id,
+					messageId: sendToTelegram.data.result.message_id,
 				}
 
 				//сохранить в контексте
-				addNewMessage2(user.chatId, host + image, 'image', '', convs.id, sendPhotoToTelegram.data.result.message_id, null);
+				addNewMessage2(user.chatId, host + image, 'image', '', convs.id, sendToTelegram.data.result.message_id, null);
 			}
 			console.log("message send: ", message);
 
