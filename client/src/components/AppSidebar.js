@@ -48,6 +48,11 @@ const AppSidebar = () => {
     // Open the link in a new tab with desired features (optional)
     window.open(url, '_blank', 'noopener,noreferrer');
   };
+
+  const handleLinkClick2 = (url) => {
+    // Open the link in a new tab with desired features (optional)
+    window.open(url, '_self', 'noopener,noreferrer');
+  };
   
   let navigation = []
 
@@ -193,7 +198,7 @@ const AppSidebar = () => {
       component: CNavLink,
       name: 'Менеджеры 2.0',
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '21px', marginLeft: '4px' }} />,
-      onClick: ()=>handleLinkClick('https://proj.uley.team:3002/chatwork'),
+      onClick: ()=>handleLinkClick2('https://proj.uley.team:3002/chatwork'),
       style: {cursor: 'pointer', backgroundColor: '#0078d421', color: '#e55353',},
     },
     
