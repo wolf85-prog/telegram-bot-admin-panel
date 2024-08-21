@@ -190,12 +190,11 @@ const AppSidebar = () => {
     },
 
     {
-      component: CNavItem,
+      component: CNavLink,
       name: 'Менеджеры 2.0',
-      to: '/chat3',
-      icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
-      badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
-      style: {backgroundColor: '#0078d421', color: '#e55353', cursor: 'pointer'},
+      icon: <img src={ChatIcon} style={{width: '21px', marginRight: '21px', marginLeft: '4px' }} />,
+      onClick: ()=>handleLinkClick('https://proj.uley.team:3002/chatwork'),
+      style: {cursor: 'pointer', backgroundColor: '#0078d421', color: '#e55353',},
     },
     
     {
