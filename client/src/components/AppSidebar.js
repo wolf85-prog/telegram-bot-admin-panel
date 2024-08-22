@@ -200,6 +200,7 @@ const AppSidebar = () => {
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '21px', marginLeft: '4px' }} />,
       onClick: ()=>handleLinkClick2('https://proj.uley.team:3002/chatwork'),
       style: {cursor: 'pointer', backgroundColor: '#0078d421', color: '#e55353',},
+      badge: countMessage ? {color: 'info', text: countMessage,} : "",
     },
     
     {
