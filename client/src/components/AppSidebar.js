@@ -30,11 +30,11 @@ const AppSidebar = () => {
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { countMessage, newProject, countProjects, countMessageWork, countPretendent, showGetMess } = useUsersContext();
+  const { countMessage, countMessageRent, countProjects, countMessageWork, countPretendent, showGetMess } = useUsersContext();
 
   const [count, setCount ] = useState(0);
   const [countMesW, setCountMesW ] = useState(0);
-  console.log("countMessage: ", countMessageWork)
+  //console.log("countMessage: ", countMessageWork)
 
 
   // useEffect(async() => {
@@ -200,7 +200,7 @@ const AppSidebar = () => {
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '21px', marginLeft: '4px' }} />,
       onClick: ()=>handleLinkClick2('https://proj.uley.team:3002/chatwork'),
       style: {cursor: 'pointer', backgroundColor: '#0078d421', color: '#e55353',},
-      badge: countMessage ? {color: 'info', text: countMessage,} : "",
+      badge: countMessageRent ? {color: 'info', text: countMessageRent,} : "",
     },
     
     {

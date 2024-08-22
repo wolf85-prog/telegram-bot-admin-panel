@@ -64,6 +64,7 @@ const UsersProvider = ({ children }) => {
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const [count, setCount] = useState(0)
 	const [countMessage, setCountMessage] = useState(0)
+	const [countMessageRent, setCountMessageRent] = useState(0)
 	
 	const [usersOnline, setUsersOnline] = useState([]);
 	const [distributions, setDistributions] = useState([]); 
@@ -992,6 +993,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
 		socket.on("getMessage", fetchMessageResponse);
 		socket.on("getMessageSpec", fetchMessageSpecResponse);
+		socket.on("getMessageRent", fetchMessageRentResponse);
 		
 		socket.on("getAdmin", fetchAdmin);	
 		socket.on("getDelAdmin", fetchDelAdmin);	
@@ -1475,6 +1477,21 @@ const delWMessageContext = (messageId, messageDate, chatId) => {
 		chatId,
 	})
 }
+
+
+//=======================================================================
+// 						Renthub
+//=======================================================================
+
+//получить сообщение из телеграмма
+const fetchMessageRentResponse = async(data) => {
+	//пришло новое сообщение
+	//const kol = await getCountMessage()
+	setCountMessageRent(count+1)
+	//const res = await newCountMessage(kol.managers + 1)
+	console.log("Пришло новое сообщение в renthub: ", count + 1)
+
+};
 
 
 //отправить номер процесса и данные
