@@ -34,7 +34,7 @@ const AppSidebar = () => {
 
   const [count, setCount ] = useState(0);
   const [countMesW, setCountMesW ] = useState(0);
-  //console.log("countMessage: ", countMessageWork)
+  console.log("countMessageRent: ", countMessageRent)
 
 
   // useEffect(async() => {
@@ -200,7 +200,7 @@ const AppSidebar = () => {
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '21px', marginLeft: '4px' }} />,
       onClick: ()=>handleLinkClick2('https://proj.uley.team:3002/chatwork'),
       style: {cursor: 'pointer', backgroundColor: '#0078d421', color: '#e55353',},
-      badge: countMessageRent ? {color: 'info', text: countMessageRent,} : "",
+      badge: countMessageRent > 0 ? {color: 'info', text: countMessageRent,} : '',
     },
     
     {

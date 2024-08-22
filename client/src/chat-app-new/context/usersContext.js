@@ -1899,6 +1899,8 @@ function isObjectEmpty(obj) {
 			count,
 			countMessage,
 			setCountMessage,
+			countMessageRent,
+			setCountMessageRent,
 			newProject,
 			setNewProject,
 			projects,
