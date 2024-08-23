@@ -68,7 +68,7 @@ const UsersProvider = ({ children }) => {
 	
 	const [usersOnline, setUsersOnline] = useState([]);
 	const [distributions, setDistributions] = useState([]); 
-	const [managers, setManagers]= useState([]);
+	const [managers, setManagers]= useState([]); // менеджеры (заказчики)
 	const [companys, setCompanys]= useState([]);
 	const [projects, setProjects] = useState([]); 
 	const [newProject, setNewProject]= useState(false);
