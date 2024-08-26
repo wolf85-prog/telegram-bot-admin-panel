@@ -1,0 +1,80 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "description": "CoreUI Free React Admin Template",
+  "homepage": ".",
+  "bugs": {
+    "url": "https://github.com/coreui/coreui-free-react-admin-template/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:coreui/coreui-free-react-admin-template.git"
+  },
+  "license": "MIT",
+  "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
+  "scripts": {
+    "start": "node dashboard-rent.js",
+    "build": "react-scripts build",
+    "dev": "react-scripts start",
+    "changelog": "auto-changelog --starting-version 4.4.0 --commit-limit false --hide-credit",
+    "eject": "react-scripts eject",
+    "test": "react-scripts test",
+    "test:cov": "npm test -- --coverage --watchAll=false",
+    "test:debug": "react-scripts --inspect-brk test --runInBand"
+  },
+  "keywords": [],
+  "dependencies": {
+    "@coreui/chartjs": "^3.0.0",
+    "@coreui/coreui": "^4.2.1",
+    "@coreui/icons": "^2.1.0",
+    "@coreui/icons-react": "^2.1.0",
+    "@coreui/react": "^4.3.1",
+    "@coreui/react-chartjs": "^2.1.0",
+    "@coreui/utils": "^1.3.1",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.1",
+    "axios": "^1.2.2",
+    "classnames": "^2.3.1",
+    "core-js": "^3.24.1",
+    "d3": "^7.8.5",
+    "dayjs": "^1.11.10",
+    "dotenv": "^16.4.5",
+    "emoji-picker-react": "^4.11.1",
+    "jwt-decode": "^3.1.2",
+    "mobx": "^6.7.0",
+    "mobx-react-lite": "^3.4.0",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-app-polyfill": "^3.0.0",
+    "react-bootstrap": "^2.7.2",
+    "react-data-table-component": "^7.5.3",
+    "react-dom": "^18.2.0",
+    "react-input-emoji": "^4.1.0",
+    "react-input-mask": "^2.0.4",
+    "react-multi-select-component": "^4.3.4",
+    "react-redux": "^8.0.2",
+    "react-router-dom": "^6.6.2",
+    "react-scripts": "5.0.1",
+    "redux": "4.2.0",
+    "simplebar-react": "^2.4.1",
+    "socket.io-client": "^4.5.4",
+    "use-sound": "^4.0.1",
+    "uuid": "^9.0.0",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.4.3",
+    "auto-changelog": "~2.4.0",
+    "react-scripts": "5.0.1",
+    "sass": "^1.54.4",
+    "web-vitals": "^2.1.4"
+  },
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6"
+  }
+}
