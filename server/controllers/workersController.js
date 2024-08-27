@@ -192,15 +192,15 @@ class WorkersController {
                             
                         } else {
                             console.log("Идет обновление данных...: i=", index, proc)                      
-                            //setTimeout(()=> {
+                            if (index % 3 === 0) {
                                 socket.emit("sendNotif", {
                                     task: 300,
                                     workers_update: proc,
                                     processUpdateD: true,
                                 })  
-                            //}, 10000 * i)
+                            }
                         }
-                    }, 1000 * ++index)   
+                    }, 1500 * ++index)   
                 })
 
                 //обновить данные
