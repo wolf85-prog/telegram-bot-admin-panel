@@ -132,7 +132,7 @@ const Sidebar = () => {
 				contacts.map((contact, ind) => (
 					contact.chatId !== chatAdminId &&
                     <>   
-						<Contact contact={contact} worker={workersAll.filter((item)=> item.chatId === contact.chatId)} />
+						<Contact key={ind} contact={contact} worker={workersAll.filter((item)=> item.chatId === contact.chatId)} />
 					</>
 				))
 				}
