@@ -11,6 +11,7 @@ const PORT = process.env.PORT
 const host_admin = process.env.HOST_ADMIN
 const host_admin2 = process.env.HOST_ADMIN2
 const host_admin3 = process.env.HOST_ADMIN3
+const host_local = process.env.HOST_LOCAL
 const host = process.env.HOST
 
 const app = express();
@@ -37,7 +38,7 @@ httpsServer.listen(PORT, () => {
 // Socket setup
 const io = socket(httpsServer, {
     cors: {
-        origin: [host_admin,host_admin2,host_admin3],
+        origin: [host_admin, host_admin2, host_admin3, host_local],
         optionsSuccessStatus: 200 // For legacy browser support
     }
 });
