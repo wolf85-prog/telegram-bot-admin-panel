@@ -206,6 +206,15 @@ io.on("connection", (socket) => {
             processDistrib,
         })
     })  
+
+    socket.on("sendNotifRent", ({task, managers_update, processUpdateD, processDistrib})=>{
+        io.emit("getNotifRent", {
+            task,
+            managers_update,
+            processUpdateD,
+            processDistrib,
+        })
+    }) 
     
     // Distribution
     //------------------------------------------------------------------
