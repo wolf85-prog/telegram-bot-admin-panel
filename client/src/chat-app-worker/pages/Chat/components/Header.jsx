@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect, useRef }  from "react";
 import Icon from "./../../../components/Icon";
 import OptionsBtn from "./../../../components/OptionsButton";
 import avatarDefault from "./../../../../chat-app-new/assets/images/no-avatar.png";
+import robot from "./../../../../chat-app-worker/assets/images/robot.png";
 import { 
 	CButton
   } from '@coreui/react'
@@ -75,6 +76,14 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 			</div>
 			<div className="chat__actions">
 				{clearFile ? <CButton color="danger" onClick={clickClearFile}>Очистить</CButton> : ''}
+
+				<button
+					className="chat__action"
+					aria-label="robot"
+					onClick={()=>console.log("click robot")}
+				>
+					<img className='star-icon' src={robot} width={25} alt='' />
+				</button>
 
 				<button
 					className="chat__action"
