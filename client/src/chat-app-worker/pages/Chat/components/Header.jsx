@@ -82,7 +82,7 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 					aria-label="robot"
 					onClick={()=>console.log("click robot")}
 				>
-					<img className='star-icon' src={robot} width={25} alt='' />
+					<img className='star-icon' src={robot} width={25} alt='' style={{verticalAlign: 'text-top'}} />
 				</button>
 
 				<button
