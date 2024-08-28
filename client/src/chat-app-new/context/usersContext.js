@@ -91,10 +91,7 @@ const UsersProvider = ({ children }) => {
 	   	const parsedUserRenthub = JSON.parse(savedUserRenthub);
 	   	return parsedUserRenthub || "";
 	}); 
-	const [rmanagers, setRmanagers] = useState([]); //100 последних менеджеров;
-	const [rmanagersAll, setRmanagersAll] = useState([]); //все менеджеры;
 
-	//const [countMessageWork, setCountMessageWork] = useState(0)
 	const [countMessageWork, setCountMessageWork] = useState(() => {
 		// getting stored value
 		const saved = localStorage.getItem("countMessageWork");
@@ -107,9 +104,6 @@ const UsersProvider = ({ children }) => {
 
 	const [conversations, setConversations] = useState([]); 
 	const [wuserbots, setWuserbots] = useState([]); 
-
-	const [rconversations, setRconversations] = useState([]); 
-	const [ruserbots, setRuserbots] = useState([]);
 
 	const [soundsNotif, setSoundsNotif] = useState([]); 
 
@@ -159,19 +153,16 @@ const UsersProvider = ({ children }) => {
 		const parsedItem = JSON.parse(savedItem);
 		return parsedItem || 1.0;
 	})
-	//const [soundMute, setSoundMute] = useState(false)
 	const [soundMute, setSoundMute] = useState(() => {
 		const savedItem = localStorage.getItem("soundMute");
 		const parsedItem = JSON.parse(savedItem);
 		return parsedItem || false;
 	})
 
-
 	const audioMessage = new Audio(soundMessage);
 	const audioMessageW = new Audio(boopSfx);
 	const audioProject = new Audio(soundProject);
 	const audioSmeta = new Audio(soundSmeta);
-
 
 	const audioNarush = new Audio(soundNarush)
 	const audioNarush2 = new Audio(soundNarush2)
@@ -183,7 +174,6 @@ const UsersProvider = ({ children }) => {
 	const audioCall = new Audio(soundCall)
 	const audioCall2 = new Audio(soundCall)
 
-	
 	const audio120 = new Audio(sound120);
 	const audio60 = new Audio(sound60);
 	const audio30 = new Audio(sound30);
@@ -218,16 +208,6 @@ const UsersProvider = ({ children }) => {
 
 //----------------------------------------------------------------------
 
-	// useEffect(() => {	
-	// 	const saveVolume = localStorage.getItem("soundVolume")
-	// 	if (saveVolume) {
-	// 		setSoundVolume(saveVolume);
-	// 	}
-	// 	//setSoundMute(localStorage.getItem("soundMute"));
-		
-	// }, []);
-
-
 	useEffect(() => {	
 		// storing input name
 		console.log("volume: ", soundVolume)
@@ -243,6 +223,12 @@ const UsersProvider = ({ children }) => {
 		// storing input name
 		localStorage.setItem("countMessageWork", countMessageWork);
 	}, [countMessageWork]);
+
+
+	useEffect(() => {	
+		// storing input name
+		localStorage.setItem("currentTask", JSON.stringify([]));
+	}, []);
 
 //---------get Userbots---------------------------------------------------
 	useEffect(() => {
@@ -691,37 +677,6 @@ const UsersProvider = ({ children }) => {
 		
 	// },[chatAdminId])
 	
-	//users
-	const _updateUserProp = (userId, prop, value) => {
-		setUsers((users) => {
-			const usersCopy = [...users];
-			let userIndex = users.findIndex((user) => user.chatId === userId);
-			const userObject = usersCopy[userIndex];
-			usersCopy[userIndex] = { ...userObject, [prop]: value };
-			return usersCopy;
-		});
-	};
-
-	//workhub
-	const _updateUserWorkerProp = (userId, prop, value) => {
-		setUserWorkers((userWorkers) => {
-			const usersCopy = [...userWorkers];
-			let userIndex = userWorkers.findIndex((user) => user.chatId === userId);
-			const userObject = usersCopy[userIndex];
-			usersCopy[userIndex] = { ...userObject, [prop]: value };
-			return usersCopy;
-		});
-	};
-
-	const setUserAsTyping = (data) => {
-		const { userId } = data;
-		_updateUserProp(userId, "typing", true);
-	};
-
-	const setUserAsNotTyping = (data) => {
-		const { userId } = data;
-		_updateUserProp(userId, "typing", false);
-	};
 //------------------------------------------------------------------------------------------
 
 	//получить сообщение из телеграмма
@@ -1019,6 +974,38 @@ const UsersProvider = ({ children }) => {
 
 	const setUserWorkerAsUnread = (userId) => {
 		_updateUserWorkerProp(userId, "unread", 0);
+	};
+
+	//users
+	const _updateUserProp = (userId, prop, value) => {
+		setUsers((users) => {
+			const usersCopy = [...users];
+			let userIndex = users.findIndex((user) => user.chatId === userId);
+			const userObject = usersCopy[userIndex];
+			usersCopy[userIndex] = { ...userObject, [prop]: value };
+			return usersCopy;
+		});
+	};
+
+	//workhub
+	const _updateUserWorkerProp = (userId, prop, value) => {
+		setUserWorkers((userWorkers) => {
+			const usersCopy = [...userWorkers];
+			let userIndex = userWorkers.findIndex((user) => user.chatId === userId);
+			const userObject = usersCopy[userIndex];
+			usersCopy[userIndex] = { ...userObject, [prop]: value };
+			return usersCopy;
+		});
+	};
+
+	const setUserAsTyping = (data) => {
+		const { userId } = data;
+		_updateUserProp(userId, "typing", true);
+	};
+
+	const setUserAsNotTyping = (data) => {
+		const { userId } = data;
+		_updateUserProp(userId, "typing", false);
 	};
 
 
