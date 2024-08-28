@@ -68,7 +68,7 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 			</div>
 
 			<div className="chat__contact-wrapper" onClick={openProfileSidebar}>
-				<h2 className="chat__contact-name"> {user?.name}</h2>
+				<h2 className="chat__contact-name"> {user?.name.split(' ')[0] === user?.name.split(' ')[1] ? user?.name.split(' ')[0] : user?.name}</h2>
 				<p className="chat__contact-desc">
 					{user.typing ? "печатает..." : "данные контакта"}
 				</p>

@@ -179,7 +179,7 @@ const Profile = ({ user, closeSidebar }) => {
 							: <img src={defaultAvatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />
 					}
 				</div>
-				<h2 className="profile__name" style={{textAlign: 'center'}}>{user.name}</h2>
+				<h2 className="profile__name" style={{textAlign: 'center'}}>{user?.name.split(' ')[0] === user?.name.split(' ')[1] ? user?.name.split(' ')[0] : user?.name}</h2>
 			</div>
 
 			<ul className="profile__sectionW profile__section--actions">	
