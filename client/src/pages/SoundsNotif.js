@@ -966,13 +966,13 @@ const SoundsNotif = () => {
                           <iframe width="650" height="600" src="https://proj.uley.team:8000/status" title="description" onLoad={() => setLoadingIframe(false)} loading = "lazy"></iframe>
                         </CCol>
                         <CCol md={6} style={{overflow: 'auto', transform: 'scale(0.9)', transformOrigin: 'top left'}}>
-                          {loadingIframe2 ? <p> Загрузка...</p> : null}
-                          <iframe width="650" height="600" src="https://proj.uley.team:8001/status" title="description" onLoad={() => setLoadingIframe2(false)} loading = "lazy"></iframe>
+                          {/* {loadingIframe2 ? <p> Загрузка...</p> : null}
+                          <iframe width="650" height="600" src="https://proj.uley.team:8001/status" title="description" onLoad={() => setLoadingIframe2(false)} loading = "lazy"></iframe> */}
                         </CCol>
                       </CRow>
                       <hr></hr>
                       <br/>
-                      <CRow>
+                      {/* <CRow>
                         <CCol md={6} style={{overflow: 'auto', transform: 'scale(0.9)', transformOrigin: 'top left'}}>
                           {loadingIframe3 ? <p> Загрузка...</p> : null}
                           <iframe width="650" height="600" src="https://proj.uley.team:8080/status" title="description" onLoad={() => setLoadingIframe3(false)} loading = "lazy"></iframe>
@@ -981,7 +981,7 @@ const SoundsNotif = () => {
                           {loadingIframe4 ? <p> Загрузка...</p> : null}
                           <iframe width="650" height="600" src="https://proj.uley.team:5000/status" title="description" onLoad={() => setLoadingIframe4(false)} loading = "lazy"></iframe>
                         </CCol>
-                      </CRow>
+                      </CRow> */}
                       
                     </CCardBody>
                   
