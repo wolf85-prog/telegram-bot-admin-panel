@@ -204,19 +204,21 @@ const AppSidebar = () => {
     },
     
     {
-      component: CNavItem,
+      component: CNavLink,
       name: 'Рассылки',
-      to: '/distributionr',
+      //to: '/distributionr',
+      onClick: ()=>handleLinkClick2('https://proj.uley.team:3002/distributionr'),
       icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
-      style: {color: '#e55353'},
+      style: {color: '#e55353', cursor: 'pointer',},
     },
     {
-      component: CNavItem,
+      component: CNavLink,
       name: 'Уведомления',
-      to: '/managers',
+      //to: '/managers',
+      onClick: ()=>handleLinkClick2('https://proj.uley.team:3002/managers'),
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
       badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
-      style: {color: '#e55353'},
+      style: {color: '#e55353', cursor: 'pointer',},
     },
 
     
