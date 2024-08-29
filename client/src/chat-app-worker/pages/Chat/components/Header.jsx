@@ -12,7 +12,7 @@ import { cilPhone } from '@coreui/icons'
 import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3';
 import ishodCall from './../../../../assets/sound/ishod.mp3';
 
-import { getSendCall } from './../../../../http/adminAPI';
+import { getSendCall, getSendCallRaut } from './../../../../http/adminAPI';
   
 const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, showCloseButton, clearFile, setClearFile, clickClearFile  }) => {
 
@@ -58,6 +58,18 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 		await getSendCall(id)
 	}
 
+	const clickToCallRaut = async(id) => {
+		// Button begins to shake
+		//setPress(true);
+		//console.log(id)
+        
+		// Buttons stops to shake after 2 seconds
+		//setTimeout(() => setPress(false), 200);
+
+		audioIshodCall.play();
+		await getSendCallRaut(id)
+	}
+
 	return (
 		<header className="headerB chat__header">
 			<div className="chat__avatar-wrapper" onClick={openProfileSidebar}>
@@ -80,7 +92,7 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 				<button
 					className="chat__action"
 					aria-label="robot"
-					onClick={()=>console.log("click robot")}
+					onClick={()=>clickToCallRaut(user?.id)}
 				>
 					<img className='star-icon' src={robot} width={25} alt='' style={{verticalAlign: 'text-top'}} />
 				</button>

@@ -610,6 +610,19 @@ export const getSendCall = async(tg_id)=>{
     }
 }
 
+//call
+export const getSendCallRaut = async(tg_id)=>{
+    try {
+        const response = await $host_call.post('/calls/wake', {
+            "tg_id": tg_id,
+        });
+        console.log("call raut: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getSendCallRaut api", error.message);
+    }
+}
+
 //------------------------------------------------------------------------------------------
 
 //update
