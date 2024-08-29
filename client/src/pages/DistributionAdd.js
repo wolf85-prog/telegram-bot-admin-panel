@@ -109,7 +109,8 @@ const DistributionAdd = () => {
   }
 
   const onChangeCheck = (e) => {
-    setSendToAdmin(e.target.value)
+    console.log(!sendToAdmin)
+    setSendToAdmin(!sendToAdmin)
   }
 
   {/* Отправка рассылки */}
