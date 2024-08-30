@@ -33,6 +33,7 @@ const port = process.env.PORT || 5000;
 const token = process.env.TELEGRAM_API_TOKEN_WORK
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const host = process.env.HOST
+const hostAdmin = process.env.REACT_APP_API_URL
 const webAppAddStavka = process.env.WEBAPP_STAVKA
 
 const $host = axios.create({
@@ -82,13 +83,18 @@ const start = async () => {
         httpsServer.listen(port, async() => {
             console.log('HTTPS Server Admin-panel running on port ' + port);
 
-            // Создание задания cron, которое запускается каждые 10 секунд
-            cron.schedule("50 13 * * *", function() { 
-                console.log("Запущена задача на каждый день в 16:45"); 
+            // Создание задания cron, которое запускается в нужное время
+            cron.schedule("7 14 * * *", async function() { 
+                //Запущена задача на каждый день в 03:00
+                console.log("Запуск обновления данных..."); 
+                await fetch(`${hostAdmin}/conversation/get/541480297`)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data) {
+                        console.log("OK")
+                    }                             
+                });
             });  
-            // cron.schedule("*/2 * * * *", function() { 
-            //     console.log("Запущена задача на каждые 2 минуты"); 
-            // });
                
         }); 
 
