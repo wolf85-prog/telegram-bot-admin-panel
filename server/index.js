@@ -83,12 +83,12 @@ const start = async () => {
             console.log('HTTPS Server Admin-panel running on port ' + port);
 
             // Создание задания cron, которое запускается каждые 10 секунд
-            cron.schedule("45 16 * * *", function() { 
+            cron.schedule("50 13 * * *", function() { 
                 console.log("Запущена задача на каждый день в 16:45"); 
             });  
-            cron.schedule("*/2 * * * *", function() { 
-                console.log("Запущена задача на каждые 2 минуты"); 
-            });
+            // cron.schedule("*/2 * * * *", function() { 
+            //     console.log("Запущена задача на каждые 2 минуты"); 
+            // });
                
         }); 
 
