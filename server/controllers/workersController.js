@@ -167,8 +167,8 @@ class WorkersController {
                 workersProf.map(async(worker, index)=>{
                     setTimeout(()=> {
                         const workerApp = workers.find((item)=> item.chatId === worker.tgId?.toString())
-                        const avatar = worker.profile ? (worker.profile?.file ? worker.profile?.file.url : worker.profile?.external.url) : null
-                        
+                        const avatar = worker.profile.files.length > 0 ? (worker.profile?.files[0].file ? worker.profile?.files[0].file.url : worker.profile?.files[0].external.url) : null
+                        //const avatar = notion[0].profile.files.length > 0 ? notion[0].profile.files[0].file.url : ''
                         if (workerApp) {
                             updateAvatar(avatar, workerApp.dataValues)
                             //console.log("Специалист найден!", index)  
