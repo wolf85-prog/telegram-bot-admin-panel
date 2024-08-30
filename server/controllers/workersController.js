@@ -155,9 +155,6 @@ class WorkersController {
             const workersN = await getWorkersNotion()
             console.log("workersN: ", workersN.length)  
 
-             
-
-
             //if (Object.keys(workersN).length !== 0) {
             if (workersN && workersN.length > 0) {
                 const workersProf = workersN.filter((item)=> item.profile && item.profile !== null)
@@ -174,9 +171,9 @@ class WorkersController {
                         
                         if (workerApp) {
                             updateAvatar(avatar, workerApp.dataValues)
-                            console.log("Специалист найден!", index)  
+                            //console.log("Специалист найден!", index)  
                         } else {
-                            console.log("Специалист не найден!", index)  
+                            console.log("Внимание! Специалист не найден!", index)  
                         }
 
                         proc = Math.round((index+1)*100/workersProf.length)
@@ -191,7 +188,7 @@ class WorkersController {
                             socket.disconnect()
                             
                         } else {
-                            console.log("Идет обновление данных...: i=", index, proc)                      
+                            console.log("Идет обновление аватарок...: i=", index, proc)                      
                             if (index % 20 === 0) {
                                 socket.emit("sendNotif", {
                                     task: 300,
@@ -212,7 +209,7 @@ class WorkersController {
                         const workerN = workersN.filter((item)=> item.tgId?.toString() === worker.chatId)        
                         
                         if (workerN && workerN.length > 0) {
-                            console.log("Специалист в ноушен найден!", i)
+                            console.log("Обновление данных...", i, Math.round((i+1)*100/workers.length))
                             //список специалистов
                             workerN[0].spec.map((item) => {
                                 specData.map((category)=> {
@@ -309,7 +306,7 @@ class WorkersController {
                                         where: {chatId: worker.chatId} 
                                     })
                                 }
-                                console.log("Список специальностей (нет) обновлен! ", worker.chatId, i) 
+                                //console.log("Список специальностей (нет) обновлен! ", worker.chatId, i) 
                             }
                                 
                             console.log("ФИО: ", worker.id, workerN[0]?.fio, i)
@@ -330,14 +327,14 @@ class WorkersController {
                             { 
                                 where: {chatId: worker.chatId} 
                             })
-                            if (res) {
-                                console.log("Специалист обновлен! ", worker.chatId, i) 
-                            }else {
-                                console.log("Ошибка обновления! ", worker.chatId, i) 
-                            }
+                            // if (res) {
+                            //     console.log("Специалист обновлен! ", worker.chatId, i) 
+                            // }else {
+                            //     console.log("Ошибка обновления! ", worker.chatId, i) 
+                            // }
                             
                         } else {
-                            console.log("Специалист не найден в Notion!", worker.chatId, i) 
+                            console.log("Внимание! Специалист не найден в Notion!", worker.chatId, i) 
                         }     
                         
                         

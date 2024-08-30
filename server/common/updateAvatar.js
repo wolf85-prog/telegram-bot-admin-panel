@@ -11,6 +11,7 @@ const host = process.env.HOST
 module.exports = async function updateAvatar(avatar, worker) {
     //обновление аватара
     if (avatar) {
+        console.log("-------------------------------------") 
         console.log("UPDATE avatar: ", avatar, worker.id) 
         try {
             //сохранить фото на сервере
