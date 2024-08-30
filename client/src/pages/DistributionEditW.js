@@ -112,7 +112,9 @@ const DistributionEditW = () => {
   const [categoryAll2, setCategoryAll2] = useState();
 
   const [selected, setSelected] = useState([]);
+  const [selectedCat, setSelectedCat] = useState([]);
   const [arrSelect, setArrSelect] = useState([]);
+  const [arrSelectAll, setArrSelectAll] = useState([]);
   const [arrLength, setArrLength] = useState(0);
   const [text, setText] = useState('');
   const [countChar, setCountChar] = useState(0);
@@ -162,6 +164,10 @@ const DistributionEditW = () => {
 
   const [showCheckTarget, setShowCheckTarget] = useState(true)
   
+  const [delWorkers, setDelWorkers] = useState([]);
+  const [delNotWorkers, setDelNotWorkers] = useState([]);
+
+
   const audio = new Audio(sendSound);
 
   const navigate = useNavigate();
@@ -169,6 +175,17 @@ const DistributionEditW = () => {
        navigate('/distributionw');
   } 
 
+  //get filter delete workers
+  useEffect(() => {
+    console.log("workersAll: ", workersAll)
+    //массив без удаленных пользователей
+    const arrDel = workersAll.filter(item => item.deleted !== true)
+    setDelWorkers(arrDel)
+
+    const arrNotDel = workersAll.filter(item => item.deleted === true)
+    setDelNotWorkers(arrNotDel)
+
+  }, [workersAll])
 
   //загрузка новых проектов
   useEffect(() => {
@@ -297,7 +314,7 @@ const DistributionEditW = () => {
       value: '0',
     }]
 
-    if (projects.length > 0) {
+    if (projects && projects.length > 0) {
       projects.map((project) => {
         if (project != null) {
           const d = new Date(project.datestart);
@@ -311,6 +328,11 @@ const DistributionEditW = () => {
           arrProjects.push(newObj)
         }    
       })
+
+      arrProjects.sort(function(a, b) {
+        return a.date - b.date;
+      })
+
       setContacts(arrProjects)    
     }  
   }, [projects]);
@@ -323,7 +345,7 @@ const DistributionEditW = () => {
       value: '0',
     }]
 
-    if (projects.length > 0) {
+    if (projects && projects.length > 0) {
       projects.map((project) => {
         if (project != null) {
           const newObj = {
@@ -332,6 +354,9 @@ const DistributionEditW = () => {
           }
           arrProjects.push(newObj)
         }
+      })
+      arrProjects.sort(function(a, b) {
+        return a.label - b.label;
       })
       setContacts2(arrProjects)
     }
@@ -485,11 +510,12 @@ const getCategoryFromNotion = async(projectId) => {
       setCategoryItem(arr2)
       
       //список специалистов с массивом специальностей (категорий)
-      workersAll.map((worker)=> {
+      delWorkers.map((worker)=> {
         JSON.parse(worker.worklist).map((work) => {
           arr_count.map((cat)=>{
-            //console.log("cat: ", work.cat)
-            if (work.cat === cat.title) {
+            //console.log("work: ", work.cat)
+            //console.log("cat: ", cat.title)
+            if (work.cat === cat.name) { //cat.name (латиница)
               arrSelect.push(worker.chatId)
             } 
           })
@@ -498,6 +524,7 @@ const getCategoryFromNotion = async(projectId) => {
       //выбрать уникальных специалистов
       const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
       setSelected(arr)
+      setSelectedCat(arr)
       console.log("selected 0: ", arr)     
     }
   } else {
@@ -580,7 +607,7 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
 
     let arr_temp = []
     //список специалистов с массивом специальностей (категорий)
-    workersAll.map((worker)=> {
+    delWorkers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=>{
           specData.map((category)=> {
@@ -597,7 +624,7 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
     //выбрать уникальных специалистов
     const arr = [...arr_temp].filter((el, ind) => ind === arr_temp.indexOf(el));
     setSelected(arr)
-
+    setSelectedCat(arr)
   } else {
     await getCategoryFromNotion(projectId)
   }
@@ -732,15 +759,32 @@ const onAddCategory = (e) => {
     console.log("categoryAll: ", arrTemp)
     console.log("arr: ", arrSelect)
     
-    workersAll.map((worker)=> {
-      JSON.parse(worker.worklist).map((work) => {
-        result.map((cat)=> {
-          if (work.cat === cat) {
-            arrSelect.push(worker.chatId)
-          } 
+    if (cat_name === 'All') {
+      delWorkers.map((worker)=> {
+        arrSelect.push(worker.chatId)
+        arrSelectAll.push(worker)
+      })
+      //console.log("arrSelect: ", arrSelect)
+    } else if (cat_name === 'Delete') {
+      console.log("Удаленные")
+      delNotWorkers.map((worker)=> {
+        arrSelect.push(worker.chatId)
+      })
+    } else {
+      delWorkers.map((worker)=> {
+        JSON.parse(worker.worklist).map((work) => {
+          result.map((cat)=> {
+            if (work.cat === cat) {
+              arrSelect.push(worker.chatId)
+              //console.log(worker)
+              arrSelectAll.push(worker)
+            } 
+          })
         })
       })
-    })
+      console.log("arrSelect: ", arrSelect)
+      //console.log("arrSelectAll: ", arrSelectAll)
+    } 
     
     //выбрать уникальных специалистов
     const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
@@ -782,7 +826,7 @@ const onAddCategory2 = (e) => {
     console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
-    workersAll.map((worker)=> {
+    delWorkers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
@@ -827,7 +871,7 @@ const onAddCategory3 = (e) => {
     console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
-    workersAll.map((worker)=> {
+    delWorkers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
@@ -870,7 +914,7 @@ const onAddCategory4 = (e) => {
     console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
-    workersAll.map((worker)=> {
+    delWorkers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
@@ -913,7 +957,7 @@ const onAddCategory5 = (e) => {
     console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
-    workersAll.map((worker)=> {
+    delWorkers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
@@ -956,7 +1000,7 @@ const onAddCategory6 = (e) => {
     console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
-    workersAll.map((worker)=> {
+    delWorkers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
@@ -999,7 +1043,7 @@ const onAddCategory7 = (e) => {
     console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
-    workersAll.map((worker)=> {
+    delWorkers.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
