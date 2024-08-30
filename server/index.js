@@ -81,6 +81,12 @@ const start = async () => {
         
         httpsServer.listen(port, async() => {
             console.log('HTTPS Server Admin-panel running on port ' + port);
+
+            // Создание задания cron, которое запускается каждые 10 секунд
+            cron.schedule("45 11 * * *", function() { 
+                console.log("Запущена задача на каждый день в 11:45"); 
+
+            });
                
         }); 
 
