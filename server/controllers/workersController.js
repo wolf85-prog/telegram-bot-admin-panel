@@ -192,7 +192,7 @@ class WorkersController {
                             
                         } else {
                             console.log("Идет обновление данных...: i=", index, proc)                      
-                            if (index % 10 === 0) {
+                            if (index % 20 === 0) {
                                 socket.emit("sendNotif", {
                                     task: 300,
                                     workers_update: proc,

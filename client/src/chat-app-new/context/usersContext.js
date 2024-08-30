@@ -889,11 +889,12 @@ const UsersProvider = ({ children }) => {
 
 	//получить рассылку
 	const fetchDistribution = async () => {
+		console.log("Обновление списка рассылок...")
 		let response = await getDistributionsW();
-		console.log("distributionW: ", response.length)
+		//console.log("distributionW: ", response.length)
 
 		let response2 = await getDistributionsWPlan();
-		console.log("distributionWPlan: ", response2.length)
+		//console.log("distributionWPlan: ", response2.length)
 
 		//сортировка
 		const messageSort = [...response].sort((a, b) => {       
