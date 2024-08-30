@@ -84,16 +84,21 @@ const start = async () => {
             console.log('HTTPS Server Admin-panel running on port ' + port);
 
             // Создание задания cron, которое запускается в нужное время
-            cron.schedule("10 14 * * *", async function() { 
+            cron.schedule("13 14 * * *", async function() { 
                 //Запущена задача на каждый день в 03:00
                 console.log("Запуск обновления данных..."); 
-                await fetch(`${hostAdmin}/api/conversation/get/541480297`)
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data) {
-                        console.log("OK")
-                    }                             
-                });
+                try {
+                    await fetch(`${hostAdmin}/api/conversation/get/541480297`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data) {
+                            console.log("OK", data)
+                        }                             
+                    });
+                } catch (error) {
+                   console.log(error.message) 
+                }
+                
             });  
                
         }); 
