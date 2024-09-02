@@ -1,4 +1,5 @@
 import React, { Suspense, useState, useEffect, useRef } from 'react'
+import { useSocketContext } from "./../chat-app-new/context/socketContext";
 import { Link } from 'react-router-dom'
 import { 
   CContainer, 
@@ -34,14 +35,15 @@ import deleteIcon from 'src/assets/images/delete.png'
 import editIcon from 'src/assets/images/pencil.png'
 import copyIcon from 'src/assets/images/copy.png'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
-import { delDistributionW, getDistributionsCountW, getPlan, newPlan } from 'src/http/adminAPI';
+import { delDistributionW, getDistributionsCountW, getPlan, newPlan, getDistributionsWPlan, getDistributionsW} from 'src/http/adminAPI';
 
 import MyModal from "../components/MyModal/MyModal";
 import Close from "../assets/images/close.svg"
 import arrowDown from '../assets/images/arrowDown.svg'
 
 const DistributionW = () => {
-  const { distributionsWork: messages, addNewDistrib, workersAll } = useUsersContext();
+  const socket = useSocketContext();
+  const { workersAll } = useUsersContext();
   const [distributionsWork, setDistributionsWork]= useState([]);
   const [userReceivers, setUserReceivers]= useState([]);
   const [users, setUsers]= useState([]);
@@ -73,6 +75,23 @@ const DistributionW = () => {
   //get Distribution
   useEffect(() => {
     const fetchData = async () => {
+
+      //1 все рассылки 20
+			let response = await getDistributionsCountW(10, distributionsWork.length);
+			let response2 = await getDistributionsWPlan();
+
+      //сортировка
+			const messageSort = [...response].sort((a, b) => {       
+				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+				return dateB-dateA  //сортировка по убывающей дате  
+			})
+
+			const messageSort2 = [...response2].sort((a, b) => {       
+				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+				return dateA-dateB  //сортировка по убывающей дате  
+			})
+
+			let messages = [...messageSort2, ...messageSort]
 
       const arrDitributions = []
       messages.map((distrib, index) => {
@@ -124,13 +143,44 @@ const DistributionW = () => {
 
     fetchData();
     
-  },[messages])
+  },[])
+
+  useEffect(() => {
+		socket.on("getDistrib", fetchDistribution);	
+	}, [socket]);
+
+  //получить рассылку
+	const fetchDistribution = async () => {
+		console.log("Обновление списка рассылок...")
+		let response = await getDistributionsW();
+		//console.log("distributionW: ", response.length)
+
+		let response2 = await getDistributionsWPlan();
+		//console.log("distributionWPlan: ", response2.length)
+
+		//сортировка
+		const messageSort = [...response].sort((a, b) => {       
+			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+			return dateB-dateA  //сортировка по убывающей дате  
+		})
+
+		const messageSort2 = [...response2].sort((a, b) => {       
+			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+			return dateA-dateB  //сортировка по убывающей дате  
+		})
+
+		let all = [...messageSort2, ...messageSort]
+
+		setDistributionsWork(all)
+	}
 
   //обновление списка рассылок
   useEffect(() => {
     const timer = setInterval(() => {
       //setSeconds(seconds => seconds + 5);
-      addNewDistrib(true)
+      socket.emit("sendDistrib", { 
+        task: true,
+      })
     }, 5000);
     
     // очистка интервала

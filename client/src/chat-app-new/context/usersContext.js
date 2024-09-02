@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import useSound from 'use-sound';
 
 import { useSocketContext } from "./socketContext";
 import { getAllMessages, getContacts, getConversation, getMessages } from '../../http/chatAPI'
@@ -7,12 +6,8 @@ import { getAllPretendent, getWContacts, getWConversation,
 	getWConversations, getWMessages, getWorkers, getWorker, getAllWMessages, 
 	getWMessagesCount, getWorkersCount} from '../../http/workerAPI'
 
-import { getRManagers, getRManager, getRManagerCount, newRMessage, getRContacts, getRConversation, 
-	getRConversations, getRMessages, getRenthub, getAllRMessages, 
-	getRMessagesCount } from '../../http/renthubAPI'
 
-import { getDistributions, 
-	getDistributionsW, 
+import { getDistributionsW, 
 	getDistributionsCountW,
 	getDistributionsWPlan,
 	getManagers, 
@@ -39,15 +34,11 @@ import sound60 from './../../assets/sound/60_minut_ULEY_new.mp3';
 import sound30 from './../../assets/sound/30_minut_ULEY_new.mp3';
 import sound15 from './../../assets/sound/15_minut_ULEY.mp3';
 import sound0 from './../../assets/sound/0_minut_ULEY_new.mp3';
-
 import sound5 from './../../assets/sound/5_minut_ULEY.mp3';
 import sound10 from './../../assets/sound/10_minut_ULEY.mp3';
-
 import soundNarush from './../../assets/sound/narush_ULEY.mp3';
 import soundNarush2 from './../../assets/sound/narush2_ULEY.mp3';
-
 import soundCall from './../../assets/sound/Skype.mp3';
-
 import sendSound from './../assets/sounds/sendmessage.mp3';
 import smsWorkhub from './../../chat-app-worker/assets/sounds/sms_iphone.mp3';
 import notifPretendent from './../../chat-app-worker/assets/sounds/pretendent2.mp3';
@@ -67,7 +58,6 @@ const UsersProvider = ({ children }) => {
 	const [countMessageRent, setCountMessageRent] = useState(0)
 	
 	const [usersOnline, setUsersOnline] = useState([]);
-	const [distributions, setDistributions] = useState([]); 
 	const [managers, setManagers]= useState([]); // менеджеры (заказчики)
 	const [companys, setCompanys]= useState([]);
 	const [projects, setProjects] = useState([]); 
@@ -100,7 +90,7 @@ const UsersProvider = ({ children }) => {
 	});
 
 
-	const [distributionsWork, setDistributionsWork] = useState([]); 
+	//const [distributionsWork, setDistributionsWork] = useState([]); 
 
 	const [conversations, setConversations] = useState([]); 
 	const [wuserbots, setWuserbots] = useState([]); 
@@ -572,35 +562,32 @@ const UsersProvider = ({ children }) => {
 //------------------------------------------------------------------------------------------
 
   	//get DistributionW
-  	useEffect(() => {
-    	const fetchData = async () => {
-			//let response = await getDistributionsW();
-			//1 все рассылки 20
-			let response = await getDistributionsCountW(10, distributionsWork.length);
-      		//console.log("distributionW: ", response.length)
+  	// useEffect(() => {
+    // 	const fetchData = async () => {
+	// 		//let response = await getDistributionsW();
+	// 		//1 все рассылки 20
+	// 		let response = await getDistributionsCountW(10, distributionsWork.length);
+	// 		let response2 = await getDistributionsWPlan();
 
-			let response2 = await getDistributionsWPlan();
-      		//console.log("distributionWPlan: ", response2.length)
+	// 		//сортировка
+	// 		const messageSort = [...response].sort((a, b) => {       
+	// 			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+	// 			return dateB-dateA  //сортировка по убывающей дате  
+	// 		})
 
-			//сортировка
-			const messageSort = [...response].sort((a, b) => {       
-				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-				return dateB-dateA  //сортировка по убывающей дате  
-			})
+	// 		const messageSort2 = [...response2].sort((a, b) => {       
+	// 			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+	// 			return dateA-dateB  //сортировка по убывающей дате  
+	// 		})
 
-			const messageSort2 = [...response2].sort((a, b) => {       
-				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-				return dateA-dateB  //сортировка по убывающей дате  
-			})
+	// 		let all = [...messageSort2, ...messageSort]
 
-			let all = [...messageSort2, ...messageSort]
+	// 		setDistributionsWork(all)
+	// 	}
 
-			setDistributionsWork(all)
-		}
+	//   	fetchData();
 
-	  	fetchData();
-
-	},[])
+	// },[])
 //------------------------------------------------------------------------------------------
 
 	//get Projects
@@ -887,30 +874,7 @@ const UsersProvider = ({ children }) => {
 		});
 	}
 
-	//получить рассылку
-	const fetchDistribution = async () => {
-		console.log("Обновление списка рассылок...")
-		let response = await getDistributionsW();
-		//console.log("distributionW: ", response.length)
-
-		let response2 = await getDistributionsWPlan();
-		//console.log("distributionWPlan: ", response2.length)
-
-		//сортировка
-		const messageSort = [...response].sort((a, b) => {       
-			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-			return dateB-dateA  //сортировка по убывающей дате  
-		})
-
-		const messageSort2 = [...response2].sort((a, b) => {       
-			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-			return dateA-dateB  //сортировка по убывающей дате  
-		})
-
-		let all = [...messageSort2, ...messageSort]
-
-		setDistributionsWork(all)
-	}
+	
 
 	//получить процесс
 	const fetchProcess = async (dataAll) => {
@@ -959,7 +923,7 @@ const UsersProvider = ({ children }) => {
 
 		socket.on("getNotif", fetchNotifAdmin);
 
-		socket.on("getDistrib", fetchDistribution);
+		//socket.on("getDistrib", fetchDistribution);
 
 		socket.on("getProcess", fetchProcess);
 
@@ -1048,14 +1012,6 @@ const UsersProvider = ({ children }) => {
 		usersCopy[userIndex].avatar = avatar;
 		setUsers(usersCopy);
 	}
-
-
-	//обновить список рассылки
-	const addNewDistrib = (task) => {
-		socket.emit("sendDistrib", { 
-			task,
-		})
-	};
 
 
 //=======================================================================
@@ -1880,8 +1836,6 @@ function isObjectEmpty(obj) {
 			addNewName,
 			addNewAvatar,
 			usersOnline,
-			// distributions, 
-			// setDistributions,
 			managers,
 			companys,
 			count,
@@ -1908,9 +1862,6 @@ function isObjectEmpty(obj) {
 			delWMessageContext,
 			countMessageWork,
 			setCountMessageWork,
-			distributionsWork, 
-			setDistributionsWork,
-			addNewDistrib,
 			newPretendent,
 			setNewPretendent,
 			countPretendent, 

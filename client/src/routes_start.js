@@ -53,12 +53,6 @@ const DistributionWPlaner = React.lazy(() => import('./pages/DistributionWPlaner
 const SoundsNotif = React.lazy(() => import('./pages/SoundsNotif'))
 const FileManager = React.lazy(() => import('./pages/FileManager'))
 
-const Managers = React.lazy(() => import('./pages/Managers'))
-const DistributionR = React.lazy(() => import('./pages/DistributionR'))
-// const DistributionAddR = React.lazy(() => import('./pages/DistributionAddR'))
-// const DistributionEditR = React.lazy(() => import('./pages/DistributionEditR'))
-// const DistributionRPlaner = React.lazy(() => import('./pages/DistributionRPlaner'))
-
 export const authRoutes = [
     { path: ADMIN_ROUTE, name: 'Панель управления', Component: Admin },
     { path: ADMIN_ROUTE2, name: 'Панель управления', Component: Admin2 },
@@ -82,7 +76,5 @@ export const authRoutes = [
     { path: DISTRIBUTIONWPLANER_ROUTE, name: 'Рассылки', Component: DistributionWPlaner },
     { path: SOUNDSNOTIF_ROUTE, name: 'Звуковые уведомления', Component: SoundsNotif },
     { path: FILEMANAGER_ROUTE, name: 'Файловый менеджер', Component: FileManager },
-    { path: MANAGERS_ROUTE, name: 'Менеджеры', Component: Managers },
-    { path: DISTRIBUTIONR_ROUTE, name: 'Рассылки', Component: DistributionR },
     { path: '/', name: 'Пункт управления', Component: Admin },
 ]

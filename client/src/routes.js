@@ -15,8 +15,6 @@ const Settings = React.lazy(() => import('./pages/Settings'))
 const DistributionW = React.lazy(() => import('./pages/DistributionW'))
 const Workers = React.lazy(() => import('./pages/Workers'))
 const Workers2 = React.lazy(() => import('./pages/Workers2'))
-const Managers = React.lazy(() => import('./pages/Managers'))
-const DistributionR = React.lazy(() => import('./pages/DistributionR'))
 
 const routes = [
   { path: '/', exact: true, name: 'Пункт управления / ' },
@@ -35,8 +33,6 @@ const routes = [
   { path: "/workers2", name: 'Workhub / Уведомления', Component: Workers2 },
   { path: '/dashboard2', name: 'Пункт управления / Renthub', Component: Admin2 },
   { path: "/chat3", name: 'Менеджеры 2.0', Component: Chats3 },
-  { path: "/managers", name: 'Renthub / Уведомления', Component: Managers },
-  { path: '/distributionr', name: 'Renthub / Рассылки', Component: DistributionR },
 ]
 
 export default routes
