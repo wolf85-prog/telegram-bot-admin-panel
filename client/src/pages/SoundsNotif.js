@@ -963,7 +963,7 @@ const SoundsNotif = () => {
                       <CRow>
                         <CCol md={6} style={{overflow: 'auto', transform: 'scale(0.9)', transformOrigin: 'top left'}}>
                           {loadingIframe ? <p> Загрузка...</p> : null}
-                          <object width="650" height="600" data="https://proj.uley.team:8000/status" title="description" onLoad={() => setLoadingIframe(false)} type="text/html" loading = "lazy"></object>
+                          <embed width="650" height="600" src="https://proj.uley.team:8000/status" title="description" ></embed>
                         </CCol>
                         <CCol md={6} style={{overflow: 'auto', transform: 'scale(0.9)', transformOrigin: 'top left'}}>
                           {/* {loadingIframe2 ? <p> Загрузка...</p> : null}

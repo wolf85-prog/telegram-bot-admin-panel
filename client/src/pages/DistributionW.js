@@ -152,11 +152,8 @@ const DistributionW = () => {
   //получить рассылку
 	const fetchDistribution = async () => {
 		console.log("Обновление списка рассылок...")
-		let response = await getDistributionsW();
-		//console.log("distributionW: ", response.length)
-
+		let response = await getDistributionsCountW(10, distributionsWork.length);
 		let response2 = await getDistributionsWPlan();
-		//console.log("distributionWPlan: ", response2.length)
 
 		//сортировка
 		const messageSort = [...response].sort((a, b) => {       
