@@ -77,24 +77,101 @@ const DistributionW = () => {
     const fetchData = async () => {
 
       //1 все рассылки 20
-			let response = await getDistributionsCountW(10, distributionsWork.length);
-			let response2 = await getDistributionsWPlan();
+			// let response = await getDistributionsCountW(10, distributionsWork.length);
+			// let response2 = await getDistributionsWPlan();
 
-      //сортировка
-			const messageSort = [...response].sort((a, b) => {       
-				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-				return dateB-dateA  //сортировка по убывающей дате  
-			})
+      // //сортировка
+			// const messageSort = [...response].sort((a, b) => {       
+			// 	var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+			// 	return dateB-dateA  //сортировка по убывающей дате  
+			// })
 
-			const messageSort2 = [...response2].sort((a, b) => {       
-				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-				return dateA-dateB  //сортировка по убывающей дате  
-			})
+			// const messageSort2 = [...response2].sort((a, b) => {       
+			// 	var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+			// 	return dateA-dateB  //сортировка по убывающей дате  
+			// })
 
-			let messages = [...messageSort2, ...messageSort]
+			// let messages = [...messageSort2, ...messageSort]
 
-      const arrDitributions = []
-      messages.map((distrib, index) => {
+      // const arrDitributions = []
+      // messages.map((distrib, index) => {
+      //   const d = new Date(distrib.datestart);
+			// 	const year = d.getFullYear();
+			// 	const month = String(d.getMonth()+1).padStart(2, "0");
+			// 	const day = String(d.getDate()).padStart(2, "0");
+			// 	const chas = d.getHours();
+			// 	const minut = String(d.getMinutes()).padStart(2, "0");
+			// 	const newDateMessage = `${day}.${month}.${year}`
+      //   const newTimeMessage = `${chas}:${minut}`
+
+      //   let space = /,/gi;
+
+      //   let deliv = distrib.delivered
+      //   //console.log("deliv: ", distrib.delivered)
+
+      //   const newDistribution = {
+      //     id: distrib.id,
+      //     text: distrib.text,
+      //     image: distrib.image !=='' ? distrib.image : '',
+      //     project: distrib.project,
+      //     projectId: distrib.projectId ? distrib.projectId : '',
+      //     receivers: distrib.receivers.replace(space, '<br/>'), //strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
+      //     categories: distrib.receivers,
+      //     count: distrib.count,
+      //     date: newDateMessage,
+      //     timestart: newTimeMessage,
+      //     datestart: distrib.datestart,
+      //     status: deliv ? "отправлено" : "запланировано",
+      //     uuid: distrib.uuid,
+      //     success: distrib.success,
+      //     report: distrib.report,
+      //     delivered: deliv,
+      //     users: distrib.users,
+      //     button: distrib.button,
+      //     stavka: distrib.stavka,
+      //     editButton: distrib.editButton,
+      //     target: distrib.target,
+			// 	}
+      //   arrDitributions.push(newDistribution)
+      // })
+
+      // //console.log("arrDitributions: ", arrDitributions)
+
+      // setDistributionsWork(arrDitributions) 
+
+      fetchDistribution()
+      setLoading(false)
+    }
+
+    fetchData();
+    
+  },[])
+
+  useEffect(() => {
+		socket.on("getDistrib", fetchDistribution);	
+	}, [socket]);
+
+  //получить рассылку
+	const fetchDistribution = async () => {
+		console.log("Обновление списка рассылок...")
+		let response = await getDistributionsCountW(10, distributionsWork.length);
+		let response2 = await getDistributionsWPlan();
+
+		//сортировка
+		const messageSort = [...response].sort((a, b) => {       
+			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+			return dateB-dateA  //сортировка по убывающей дате  
+		})
+
+		const messageSort2 = [...response2].sort((a, b) => {       
+			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+			return dateA-dateB  //сортировка по убывающей дате  
+		})
+
+		let all = [...messageSort2, ...messageSort]
+
+    const arrDitributions = []
+    all.map((distrib, index) => {
         const d = new Date(distrib.datestart);
 				const year = d.getFullYear();
 				const month = String(d.getMonth()+1).padStart(2, "0");
@@ -135,40 +212,7 @@ const DistributionW = () => {
         arrDitributions.push(newDistribution)
       })
 
-      //console.log("arrDitributions: ", arrDitributions)
-
-      setDistributionsWork(arrDitributions) 
-      setLoading(false)
-    }
-
-    fetchData();
-    
-  },[])
-
-  useEffect(() => {
-		socket.on("getDistrib", fetchDistribution);	
-	}, [socket]);
-
-  //получить рассылку
-	const fetchDistribution = async () => {
-		console.log("Обновление списка рассылок...")
-		let response = await getDistributionsCountW(10, distributionsWork.length);
-		let response2 = await getDistributionsWPlan();
-
-		//сортировка
-		const messageSort = [...response].sort((a, b) => {       
-			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-			return dateB-dateA  //сортировка по убывающей дате  
-		})
-
-		const messageSort2 = [...response2].sort((a, b) => {       
-			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-			return dateA-dateB  //сортировка по убывающей дате  
-		})
-
-		let all = [...messageSort2, ...messageSort]
-
-		setDistributionsWork(all)
+		setDistributionsWork(arrDitributions)
 	}
 
   //обновление списка рассылок
