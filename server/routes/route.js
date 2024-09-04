@@ -40,6 +40,8 @@ const { newPretendent, getPretendent, getPretendentId, getAllPretendent, getAllP
 
 const { newPlan, getPlan, addTimer } = require('../controllers/planController')
 
+const { getSpecialist } = require('../controllers/specialistController')
+
 //const { sendPoster } = require('../controllers/posterController')
 
 //const upload = require( "../utils/upload.js")
@@ -166,6 +168,10 @@ route.get('/sounds/narush', sendNarush)
 
 //-----------------Обновление данных профиля---------------------------------
 route.get('/workers/update/get', updateWorkers)
+
+
+//----------------- Специалисты ---------------------------------
+route.get('/specialist/get', getSpecialist)
 
 
 
