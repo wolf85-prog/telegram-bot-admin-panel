@@ -69,7 +69,27 @@ const Specialist = () => {
           fio: worker.fio,
           telegram: worker.chatId, 
           phone: worker.phone, 
+          phone2: worker.phone2,
+          spec: worker.specialization,
           city: worker.city, 
+          skill: worker.skill,
+          promo: worker.promoId, 
+          rank: worker.rank, 
+          merch: worker.merch,  
+          company: worker.company, 
+          comteg: worker.comteg, 
+          comteg2: worker.comteg2, 
+          comment: worker.comment, 
+          comment2: worker.comment2, 
+          age: worker.age, 
+          reyting: worker.reyting, 
+          inn: worker.inn, 
+          passport: worker.passport, 
+          profile: worker.profile, 
+          dogovor: worker.dogovor, 
+          samozanjatost: worker.samozanjatost, 
+          passportScan: worker.passportScan, 
+          email: worker.email, 
         }
         arrWorkers.push(newWorker)
 
@@ -109,109 +129,109 @@ const Specialist = () => {
                                       
                                 <CSpinner/> :
 
-                                <CTable align="middle" className="mb-0 border" hover responsive>
+                                <CTable align="middle" className="mb-0 border" hover responsive bordered>
                                   <CTableHead className='table-light'>
                                     <CTableRow>
-                                      <CTableHeaderCell className="text-center" style={{width: '370px'}}>ФИО</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{width: '200px'}}>Телеграм</CTableHeaderCell> 
-                                      <CTableHeaderCell className="text-center" style={{width: '300px'}}>Телефон</CTableHeaderCell> 
-                                      <CTableHeaderCell className="text-center" style={{width: '360px'}}>Специальность</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{width: '250px'}}>Телефон №2</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Город</CTableHeaderCell>                         
-                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Навык</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '250px'}}>Промокод</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Проекты</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Мерч</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Прокатные компании</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '250px'}}>Комтеги</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '250px'}}>Комтеги №2</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Комментарии</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Комментарии №2</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Год рождения</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Рейтинг</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>ИНН</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '250px'}}>Паспорт</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '250px'}}>Профиль</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '250px'}}>Договор</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '250px'}}>Самозанятость</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '250px'}}>Паспорт [скан]</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{width: '250px'}}>Почта</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>ФИО</CTableHeaderCell>  
+                                      <CTableHeaderCell className='widthSpace'>Телеграм</CTableHeaderCell> 
+                                      <CTableHeaderCell className='widthSpace'>Телефон</CTableHeaderCell> 
+                                      <CTableHeaderCell className='widthSpace'>Специальность</CTableHeaderCell>  
+                                      <CTableHeaderCell className='widthSpace'>Телефон №2</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Город</CTableHeaderCell>                         
+                                      <CTableHeaderCell className='widthSpace'>Навык</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Промокод</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Проекты</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Мерч</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Прокатные компании</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Комтеги</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Комтеги №2</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Комментарии</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Комментарии №2</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Год рождения</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Рейтинг</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>ИНН</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Паспорт</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Профиль</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Договор</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Самозанятость</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Паспорт [скан]</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Почта</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
                                   {spec.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
-                                        <CTableDataCell onClick={() => dispatch({ type: 'set', rigthbarShow: !rigthbarShow })} className="text-center" style={{cursor: 'pointer'}}>
+                                        <CTableDataCell onClick={() => dispatch({ type: 'set', rigthbarShow: !rigthbarShow })} className="text-center widthSpace" style={{cursor: 'pointer'}}>
                                           {item.fio}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
+                                        <CTableDataCell className="text-center widthSpace">
                                           {item.telegram}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
+                                         <CTableDataCell className="text-center widthSpace">
                                           {item.phone}
                                         </CTableDataCell>
                                         <CTableDataCell>
-                                          
+                                         {item.spec}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.phone}
                                         </CTableDataCell>
                                         <CTableDataCell>
                                           {item.city}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.skill}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.promo}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.rank}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.merch}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.company}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.comteg}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.comteg2}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.comment}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.comment2}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.age}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.reyting}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.inn}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.passport}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.profile}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.dogovor}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.samozanjatost}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.passportScan}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          
+                                        <CTableDataCell className="text-center widthSpace">
+                                        {item.email}
                                         </CTableDataCell>
 
                                       </CTableRow>
