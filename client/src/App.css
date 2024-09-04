@@ -29,6 +29,11 @@ td.widthSpace {
     width: 1%; /* Форсирует сужение ячейки */
 }
 
+th.widthSpace {
+    white-space: nowrap;
+    width: 1%; /* Форсирует сужение ячейки */
+}
+
 .thead{
     --cui-table-bg: #131c21;
     --cui-table-color: hsla(0,0%,100%,.87);
