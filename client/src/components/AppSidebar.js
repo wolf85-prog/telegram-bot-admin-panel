@@ -146,12 +146,6 @@ const AppSidebar = () => {
     },
     {
       component: CNavItem,
-      name: 'Специалисты 2.0',
-      to: '/specialist',
-      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-    },
-    {
-      component: CNavItem,
       name: 'Уведомления',
       to: '/workers',
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
@@ -226,7 +220,13 @@ const AppSidebar = () => {
       badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
       style: {color: '#e55353', cursor: 'pointer',},
     },
-
+    {
+      component: CNavItem,
+      name: 'Специалисты 2.0',
+      to: '/specialist',
+      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      style: {color: '#e55353',},
+    },
     
     
   ]
