@@ -138,6 +138,7 @@ const Workers = () => {
       
         //worklist
         const newWorker = {
+          id: worker.id,
           workerId: worker.workerId,
           date: newDate, 
           projectId: worker.projectId,
@@ -211,7 +212,7 @@ const Workers = () => {
                                     {spec.length > 0 && spec.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
                                         <CTableDataCell className="text-center">
-                                          {index+1}
+                                          {item.id}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
                                           {item.date}

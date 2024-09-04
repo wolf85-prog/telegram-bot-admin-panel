@@ -40,12 +40,6 @@ const { newPretendent, getPretendent, getPretendentId, getAllPretendent, getAllP
 
 const { newPlan, getPlan, addTimer } = require('../controllers/planController')
 
-
-const { getUsersRenthub, getUserRenthub, editUserRenthub} = require('../controllers/ruserbotController.js')
-const { newMessageR, delMessageR, getMessagesR, getMessagesR2, getAllMessagesR, getMessagesRCount } = require('../controllers/rmessageController.js')
-const { newConversationR, getConversationR, getConversationsR} = require('../controllers/rconversationController.js')
-const { getRmanagers, getRManagerCount, getRmanager, editRmanager } = require('../controllers/rmanagersController.js')
-
 //const { sendPoster } = require('../controllers/posterController')
 
 //const upload = require( "../utils/upload.js")
@@ -174,29 +168,6 @@ route.get('/sounds/narush', sendNarush)
 route.get('/workers/update/get', updateWorkers)
 
 
-
-
-//----------------RENTHUB--------------------------------
-route.get('/ruserbots/get', getUsersRenthub)
-route.get('/ruserbots/get/:id', getUserRenthub)
-route.patch('/ruserbots/update/:id', editUserRenthub)
-
-route.post('/rmessage/add', newMessageR)
-route.delete('/rmessage/delete/:id', delMessageR)
-route.get('/rmessage/get', getAllMessagesR)
-route.get('/rmessage/get/:id', getMessagesR)
-route.get('/rmessage/get/count/:count', getMessagesRCount)
-route.get('/rmessage2/get/:id/:count/:prev', getMessagesR2) //еще
-
-route.post('/rconversation/add', newConversationR)
-route.get('/rconversation/get/:id', getConversationR)
-route.get('/rconversations/get', getConversationsR)
-
-route.get('/rmanagers/get', getRmanagers)
-route.get('/rmanagers/get/:id', getRmanager)
-route.patch('/rmanagers/update/:id', editRmanager)
-//route.get('/rmanager/block/:id', blockWorker)
-route.get('/rmanagers/count/get/:count/:prev', getRManagerCount) //еще
 
 
 module.exports = route
