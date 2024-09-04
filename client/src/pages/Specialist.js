@@ -124,7 +124,9 @@ const Specialist = () => {
                                       <CTableHeaderCell className="text-center" style={{width: '100px'}}>Мерч</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{width: '100px'}}>Прокатные компании</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{width: '250px'}}>Комтеги</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{width: '250px'}}>Комтеги2</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{width: '100px'}}>Комментарии</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Комментарии2</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{width: '100px'}}>Год рождения</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{width: '100px'}}>Рейтинг</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{width: '100px'}}>ИНН</CTableHeaderCell>
@@ -159,6 +161,12 @@ const Specialist = () => {
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
 
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           
