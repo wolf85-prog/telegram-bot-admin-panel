@@ -254,7 +254,7 @@ const Specialist = () => {
         </div>
         <AppFooter />
       </div>
-      <AppRightbar />
+      {/* <AppRightbar /> */}
     </div>
   )
 }
