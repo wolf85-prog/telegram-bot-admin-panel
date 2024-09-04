@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useState } from 'react'
-import { AppSidebar, AppFooter, AppHeader } from '../components/index'
+import { AppSidebar, AppFooter, AppHeader, AppRightbar } from '../components/index'
 import DataTable, { createTheme } from 'react-data-table-component';
+import { useSelector, useDispatch } from 'react-redux'
 import { 
   CContainer, 
   CSpinner, 
@@ -21,9 +22,14 @@ import {
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
+import { getWorkers } from './../http/specAPI'
+
 
 //Workers.js
 const Specialist = () => {
+
+  const dispatch = useDispatch()
+  const sidebarShow = useSelector((state) => state.sidebarShow)
 
   const [loading, setLoading]= useState(true);
   const [text, setText]= useState("");
@@ -43,6 +49,37 @@ const Specialist = () => {
     const arrWorkers = []
 
     const fetchData = async () => {
+
+      let workers = await getWorkers()
+      console.log("specialist: ", workers)
+
+      workers.map(async (worker, i) => {
+
+        const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+        const d2 = new Date(d)
+
+        const month = String(d2.getMonth()+1).padStart(2, "0");
+        const day = String(d2.getDate()).padStart(2, "0");
+        const chas = d2.getHours();
+        const min = String(d2.getMinutes()).padStart(2, "0");
+        
+        const newDate = `${day}.${month} ${chas}:${min}`;
+
+        const newWorker = {
+          name: worker.name,
+          telegram: worker.chatId, 
+          phone: worker.phone, 
+          city: worker.city, 
+          // worklist: worklist, 
+          // rang: worker.rang, 
+          // comment: worker.comment, 
+          // phone: worker.phone, 
+          // accept: worker.accept,
+        }
+        arrWorkers.push(newWorker)
+
+        setSpec(arrWorkers) 
+      })  
 
       setLoading(false)
     }
@@ -82,7 +119,7 @@ const Specialist = () => {
                                     <CTableRow>
                                       <CTableHeaderCell className="text-center" style={{width: '370px'}}>Name</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{width: '200px'}}>Telegram</CTableHeaderCell> 
-                                      <CTableHeaderCell className="text-center" style={{width: '200px'}}>Phone</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{width: '300px'}}>Phone</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '360px'}}>Specialization</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{width: '250px'}}>Phone 2</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{width: '100px'}}>Город</CTableHeaderCell>                         
@@ -114,8 +151,26 @@ const Specialist = () => {
                                   <CTableBody>                                  
                                   {spec.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
+                                        <CTableDataCell onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })} className="text-center" style={{cursor: 'pointer'}}>
+                                          {item.name}
+                                        </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          {item.date}
+                                          {item.telegram}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          {item.phone}
+                                        </CTableDataCell>
+                                        <CTableDataCell>
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+
+                                        </CTableDataCell>
+                                        <CTableDataCell>
+                                          {item.city}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           
@@ -123,17 +178,65 @@ const Specialist = () => {
                                         <CTableDataCell className="text-center">
                                           
                                         </CTableDataCell>
-                                        <CTableDataCell style={{fontSize: '13px', textAlign: 'left'}}>
+                                        <CTableDataCell className="text-center">
                                           
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          {item.rang}
-                                        </CTableDataCell>
-                                        <CTableDataCell style={{fontSize: '13px', textAlign: 'left'}}>
                                           
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          <div>{item.phone}</div>
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          
                                         </CTableDataCell>
                                       </CTableRow>
                                       ))
@@ -151,6 +254,7 @@ const Specialist = () => {
         </div>
         <AppFooter />
       </div>
+      <AppRightbar />
     </div>
   )
 }

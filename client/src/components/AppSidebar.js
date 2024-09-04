@@ -233,9 +233,11 @@ const AppSidebar = () => {
 
   return (
     <CSidebar
+      className="border-end"
       position="fixed"
       unfoldable={unfoldable}
       visible={sidebarShow}
+      placement="start"
       onVisibleChange={(visible) => {
         dispatch({ type: 'set', sidebarShow: visible })
       }}
