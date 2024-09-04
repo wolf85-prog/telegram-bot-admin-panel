@@ -29,7 +29,7 @@ import { getWorkers } from './../http/specAPI'
 const Specialist = () => {
 
   const dispatch = useDispatch()
-  const sidebarShow = useSelector((state) => state.sidebarShow)
+  const rigthbarShow = useSelector((state) => state.rigthbarShow)
 
   const [loading, setLoading]= useState(true);
   const [text, setText]= useState("");
@@ -151,7 +151,7 @@ const Specialist = () => {
                                   <CTableBody>                                  
                                   {spec.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
-                                        <CTableDataCell onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })} className="text-center" style={{cursor: 'pointer'}}>
+                                        <CTableDataCell onClick={() => dispatch({ type: 'set', rigthbarShow: !rigthbarShow })} className="text-center" style={{cursor: 'pointer'}}>
                                           {item.name}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">

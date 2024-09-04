@@ -22,16 +22,16 @@ import CompIcon from 'src/assets/images/dashboard3.png'
 
 const AppRightbar = () => {
   const dispatch = useDispatch()
-  const sidebarShow = useSelector((state) => state.sidebarShow)
+  const rigthbarShow = useSelector((state) => state.rigthbarShow)
 
   return (
     <CSidebar
-      style={{}}
+      style={{right: '0'}}
       className="border-end"
       overlaid="true"
-      visible={sidebarShow}
+      visible={rigthbarShow}
       onVisibleChange={(visible) => {
-        dispatch({ type: 'set', sidebarShow: visible })
+        dispatch({ type: 'set', rigthbarShow: visible })
       }}
     >
 
