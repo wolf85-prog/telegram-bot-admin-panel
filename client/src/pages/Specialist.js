@@ -142,9 +142,9 @@ const Specialist = () => {
                                       <CTableHeaderCell className='widthSpace'>Промокод</CTableHeaderCell>
                                       <CTableHeaderCell className='widthSpace'>Проекты</CTableHeaderCell>
                                       <CTableHeaderCell className='widthSpace'>Мерч</CTableHeaderCell>
-                                      <CTableHeaderCell className='widthSpace'>Прокатные компании</CTableHeaderCell>
-                                      <CTableHeaderCell className='widthSpace'>Комтеги</CTableHeaderCell>
-                                      <CTableHeaderCell className='widthSpace'>Комтеги №2</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Прокатная компания</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Комтег</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Комтег №2</CTableHeaderCell>
                                       <CTableHeaderCell className='widthSpace'>Комментарии</CTableHeaderCell>
                                       <CTableHeaderCell className='widthSpace'>Комментарии №2</CTableHeaderCell>
                                       <CTableHeaderCell className='widthSpace'>Год рождения</CTableHeaderCell>
@@ -152,8 +152,8 @@ const Specialist = () => {
                                       <CTableHeaderCell className='widthSpace'>ИНН</CTableHeaderCell>
                                       <CTableHeaderCell className='widthSpace'>Паспорт</CTableHeaderCell>
                                       <CTableHeaderCell className='widthSpace'>Профиль</CTableHeaderCell>
-                                      <CTableHeaderCell className='widthSpace'>Договор</CTableHeaderCell>
-                                      <CTableHeaderCell className='widthSpace'>Самозанятость</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>Д</CTableHeaderCell>
+                                      <CTableHeaderCell className='widthSpace'>С</CTableHeaderCell>
                                       <CTableHeaderCell className='widthSpace'>Паспорт [скан]</CTableHeaderCell>
                                       <CTableHeaderCell className='widthSpace'>Почта</CTableHeaderCell>
                                     </CTableRow>
