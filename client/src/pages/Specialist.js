@@ -19,6 +19,10 @@ import {
   CCollapse,
   CButton, 
   CTooltip,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
@@ -34,6 +38,8 @@ const Specialist = () => {
   const [loading, setLoading]= useState(true);
   const [text, setText]= useState("");
   const [spec, setSpec] = useState([]); 
+  const [visibleXL, setVisibleXL] = useState(false)
+  const [modalWorker, setModalWorker] = useState({})
 
   //поиск
   // useEffect(() => {
@@ -103,6 +109,12 @@ const Specialist = () => {
     
   },[])
 
+  const clickFio = (worker)=> {
+    //console.log(worker)
+    setVisibleXL(true)
+    setModalWorker(worker)
+  }
+
 
   return (
     <div className='dark-theme'>
@@ -161,7 +173,7 @@ const Specialist = () => {
                                   <CTableBody>                                  
                                   {spec.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
-                                        <CTableDataCell onClick={() => dispatch({ type: 'set', rigthbarShow: !rigthbarShow })} className="text-center widthSpace" style={{cursor: 'pointer'}}>
+                                        <CTableDataCell onClick={()=>clickFio(item)} className="text-center widthSpace" style={{cursor: 'pointer'}}>
                                           {item.fio}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center widthSpace">
@@ -246,6 +258,39 @@ const Specialist = () => {
                     </CRow>
                   </Suspense>
             </CContainer>
+
+            <CModal
+              size="lg"
+              visible={visibleXL}
+              onClose={() => setVisibleXL(false)}
+              aria-labelledby="OptionalSizesExample1"
+            >
+              <CModalHeader>
+                <CModalTitle id="OptionalSizesExample1">Профиль специалиста</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+                  <div>
+                      <svg className="rounded me-2" width="214" height="214" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+                        <rect width="214px" height="214px" fill="#007aff"></rect> 
+                      </svg>
+                      <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px', left: '255px'}}>{modalWorker.fio}</span>
+                      <div style={{position: 'absolute', top: '50px', left: '255px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '525px'}}>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{modalWorker.city}</span>    
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{modalWorker.age}</span>
+                      </div>
+
+                      <div style={{position: 'absolute', top: '100px', left: '255px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '525px'}}>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{modalWorker.spec}</span>    
+                      </div>
+
+                      <div style={{position: 'absolute', top: '150px', left: '255px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '525px'}}>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{modalWorker.phone}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{modalWorker.phone2}</span>    
+                      </div>
+                      
+                    </div>
+              </CModalBody>
+            </CModal>
 
         </div>
         <AppFooter />
