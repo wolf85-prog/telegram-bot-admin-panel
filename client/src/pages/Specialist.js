@@ -272,7 +272,7 @@ const Specialist = () => {
                       <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
                         <rect width="250px" height="250px" fill="#007aff"></rect> 
                       </svg>
-                      <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '5px', left: '290px'}}>
+                      <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '5px', left: '275px'}}>
                         {modalWorker.fio}
                       </span>
                       <div style={{position: 'relative', height: '750px'}}>
