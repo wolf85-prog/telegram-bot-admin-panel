@@ -166,6 +166,9 @@ class DistributionController {
                 ],
                 offset: count > k ? count - k : 0,
                 //limit : 50,
+                where: {
+                    delivered: true
+                }
             })
             return res.status(200).json(distributions);
         } catch (error) {

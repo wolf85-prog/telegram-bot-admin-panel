@@ -77,8 +77,9 @@ const DistributionW = () => {
   //get Distribution
   useEffect(() => {
     const fetchData = async () => {
-      let response = await getDistributionsCountW(countDistrib, distributionsWork.length);
+      let response = await getDistributionsCountW(20, distributionsWork.length);
       let response2 = await getDistributionsWPlan();
+      //console.log("response2: ", response2)
 
       //сортировка
       const messageSort = [...response].sort((a, b) => {       
@@ -88,11 +89,13 @@ const DistributionW = () => {
 
       const messageSort2 = [...response2].sort((a, b) => {       
         var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-        return dateA-dateB  //сортировка по убывающей дате  
+        return dateA-dateB  //сортировка по возрастающей дате  
       })
+      //console.log("messageSort2: ", messageSort2)
+      //console.log("messageSort: ", messageSort)
 
       let all = [...messageSort2, ...messageSort]
-
+      //console.log("all: ", all)
       const arrDitributions = []
       all.map((distrib, index) => {
           const d = new Date(distrib.datestart);
@@ -135,13 +138,14 @@ const DistributionW = () => {
           arrDitributions.push(newDistribution)
       })
 
+      //console.log("arrDitributions: ", arrDitributions)
       setDistributionsWork(arrDitributions)
       setLoading(false)
     }
 
     fetchData();
     
-  },[countDistrib])
+  },[])
 
 
   //получить рассылку
