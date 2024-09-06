@@ -275,7 +275,11 @@ const Specialist = () => {
                       <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '5px', left: '275px'}}>
                         {modalWorker.fio}
                       </span>
-                      <div style={{position: 'relative', height: '750px'}}>
+                      <div style={{position: 'relative', height: '1080px'}}>
+                        <div style={{position: 'absolute', top: '30px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
+                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Город</p>
+                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Дата </p>   
+                        </div> 
                         <div style={{position: 'absolute', top: '50px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>
                           <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
                             {modalWorker.city}
@@ -285,12 +289,19 @@ const Specialist = () => {
                           </span>
                         </div>
 
+                        <div style={{position: 'absolute', top: '95px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '525px'}}>                          
+                          <p style={{fontSize: '12px', color: '#858282', width: '510px'}}>Специальность</p>  
+                        </div> 
                         <div style={{position: 'absolute', top: '115px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '525px'}}>     
                           <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '510px'}}>
                             {modalWorker.spec}
                           </span>    
                         </div>
 
+                        <div style={{position: 'absolute', top: '160px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
+                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Телефон</p>
+                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Телефон </p>   
+                        </div> 
                         <div style={{position: 'absolute', top: '180px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>
                           <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
                             {modalWorker.phone}
@@ -313,14 +324,15 @@ const Specialist = () => {
                           </span>    
                         </div>
 
-                        <div style={{position: 'absolute', top: '290px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
+                        <div style={{position: 'absolute', top: '290px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
+                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Рейтинг</p>
                           <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Промокод</p>
                           <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Проекты</p>   
                         </div>
 
                         <div style={{position: 'absolute', top: '310px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
                           <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.company}
+                            {modalWorker.reyting}
                           </span> 
                           <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
                             {modalWorker.promo}
@@ -330,9 +342,10 @@ const Specialist = () => {
                           </span>    
                         </div>
 
-                        <div style={{position: 'absolute', top: '355px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}></p>
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Рейтинг</p>   
+                        <div style={{position: 'absolute', top: '355px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
+                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Мерч</p> 
+                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Прокатная компания</p>
+                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>ИНН</p>   
                         </div>
                         <div style={{position: 'absolute', top: '375px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
                           <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
@@ -342,13 +355,14 @@ const Specialist = () => {
                             {modalWorker.company}
                           </span>
                           <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.reyting}
+                            {modalWorker.inn}
                           </span>    
                         </div>
 
-                        <div style={{position: 'absolute', top: '420px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}></p>
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>ИНН</p>   
+                        <div style={{position: 'absolute', top: '420px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
+                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Комтег</p>
+                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Комтег2</p>
+                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>email</p>   
                         </div>
                         <div style={{position: 'absolute', top: '440px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
                           <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
@@ -358,42 +372,51 @@ const Specialist = () => {
                             {modalWorker.comteg2}
                           </span>
                           <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.inn}
-                          </span>    
-                        </div>
-
-                        <div style={{position: 'absolute', top: '505px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.comment}
-                          </span> 
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.comment2}
-                          </span>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
                             {modalWorker.email}
                           </span>    
                         </div>
 
-                        <div style={{position: 'absolute', top: '575px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '770px', height: '100px'}}>
+                        <div style={{position: 'absolute', top: '485px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
+                          <p style={{fontSize: '12px', color: '#858282', width: '770px'}}>Комментарий</p>   
+                        </div>
+                        <div style={{position: 'absolute', top: '505px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
+                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '770px'}}>
+                            {modalWorker.comment}
+                          </span>     
+                        </div>
+
+                        <div style={{position: 'absolute', top: '550px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
+                          <p style={{fontSize: '12px', color: '#858282', width: '770px'}}>Комментарий</p>   
+                        </div>
+                        <div style={{position: 'absolute', top: '570px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
+                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '770px'}}>
+                            {modalWorker.comment2}
+                          </span>     
+                        </div>
+
+                        <div style={{position: 'absolute', top: '615px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
+                          <p style={{fontSize: '12px', color: '#858282', width: '770px'}}>Паспорт</p>   
+                        </div>
+                        <div style={{position: 'absolute', top: '635px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
+                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '770px', height: '350px', whiteSpace: 'pre-line'}}>
                             {modalWorker.passport}
                           </span>
                         </div>
 
 
-                        <div style={{position: 'absolute', top: '680px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Договор</p>
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Самозанятость</p> 
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Скан паспорта</p>   
+                        <div style={{position: 'absolute', top: '990px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
+                          <p style={{fontSize: '12px', color: '#858282', width: '50px'}}>Д</p>
+                          <p style={{fontSize: '12px', color: '#858282', width: '50px'}}>С</p> 
+                          <p style={{fontSize: '12px', color: '#858282', width: '650px'}}>Скан паспорта</p>   
                         </div>
-                        <div style={{position: 'absolute', top: '700px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
+                        <div style={{position: 'absolute', top: '1010px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
+                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '50px'}}>
                             {modalWorker.dogovor}
                           </span> 
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
+                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '50px'}}>
                             {modalWorker.samozanjatost}
                           </span>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px', overflow: 'hidden', textOverflow: 'ellipsis'}}>
+                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '650px', overflow: 'hidden', textOverflow: 'ellipsis'}}>
                             {modalWorker.passportScan}
                           </span>    
                         </div>
