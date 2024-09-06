@@ -42,6 +42,30 @@ const Specialist = () => {
   const [visibleXL, setVisibleXL] = useState(false)
   const [modalWorker, setModalWorker] = useState({})
 
+  const [fio, setFio] = useState('');
+  const [city, setCity] = useState('');
+  const [age, setAge] = useState('');
+  const [speclist, setSpeclist] = useState('');
+  const [phone, setPhone] = useState('');
+  const [phone2, setPhone2] = useState('');
+  const [telegram, setTelegram] = useState('');
+  const [skill, setSkill] = useState('');
+  const [reyting, setReyting] = useState('');
+  const [promo, setPromo] = useState('');
+  const [rank, setRank] = useState('');
+  const [merch, setMerch] = useState('');
+  const [company, setCompany] = useState('');
+  const [inn, setInn] = useState('');
+  const [comteg, setComteg] = useState('');
+  const [comteg2, setComteg2] = useState('');
+  const [email, setEmail] = useState('');
+  const [comment, setComment] = useState('');
+  const [comment2, setComment2] = useState('');
+  const [passport, setPassport] = useState('');
+  const [dogovor, setDogovor] = useState('');
+  const [samozanjatost, setSamozanjatost] = useState('');
+  const [passportScan, setPassportScan] = useState('');
+
   //поиск
   // useEffect(() => {
 	// 	const filteredData = pretendents.filter(user=> (user.project + user.workerFamily + user.workerName)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
@@ -114,6 +138,33 @@ const Specialist = () => {
     //console.log(worker)
     setVisibleXL(true)
     setModalWorker(worker)
+
+    setFio(worker.fio)
+    setCity(worker.city)
+    setAge(worker.age)
+    setSpeclist(worker.spec)
+    setPhone(worker.phone)
+    setPhone2(worker.phone2)
+    setTelegram(worker.telegram)
+    setSkill(worker.skill)
+
+    setReyting(worker.reyting)
+    setPromo(worker.promo)
+    setRank(worker.rank)
+    setMerch(worker.merch)
+    setCompany(worker.company)
+    setInn(worker.inn)
+    setComteg(worker.comteg)
+    setComteg2(worker.comteg2)
+    setEmail(worker.email)
+    setComment(worker.comment)
+    setComment2(worker.comment)
+
+    setPassport(worker.passport)
+    setDogovor(worker.dogovor)
+    setSamozanjatost(worker.samozanjatost)
+    setPassportScan(worker.passportScan)
+
   }
 
 
@@ -272,30 +323,35 @@ const Specialist = () => {
                       <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
                         <rect width="250px" height="250px" fill="#007aff"></rect> 
                       </svg>
-                      <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '5px', left: '275px'}}>
-                        {modalWorker.fio}
-                      </span>
+                      <div style={{position: 'absolute', top: '5px', left: '275px', color: '#fff', fontSize: '33px', zIndex: '100'}}>
+                        {/* <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '5px', left: '275px'}}> */}
+                        <div className="text-field">
+                          <input type="text" name="fio" id="fio" value={fio} onChange={(e) => setFio(e.target.value)} style={{backgroundColor: '#1d1f2b', border: '0', color: '#f3f3f3'}}></input>
+                        </div>
+                        {/* </span> */}
+                      </div>
+                      
                       <div style={{position: 'relative', height: '1080px'}}>
-                        <div style={{position: 'absolute', top: '30px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
+                        {/* <div style={{position: 'absolute', top: '30px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
                           <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Город</p>
                           <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Дата </p>   
-                        </div> 
+                        </div>  */}
                         <div style={{position: 'absolute', top: '50px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.city}
-                          </span>    
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.age}
-                          </span>
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} style={{width: '250px'}}/>
+                          </div>
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="age" id="age" value={age} onChange={(e) => setAge(e.target.value)} style={{width: '250px'}}/>
+                          </div>
                         </div>
 
-                        <div style={{position: 'absolute', top: '95px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '525px'}}>                          
+                        <div style={{position: 'absolute', top: '95px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
                           <p style={{fontSize: '12px', color: '#858282', width: '510px'}}>Специальность</p>  
                         </div> 
-                        <div style={{position: 'absolute', top: '115px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '525px'}}>     
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '510px'}}>
-                            {modalWorker.spec}
-                          </span>    
+                        <div style={{position: 'absolute', top: '115px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>     
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="speclist" id="speclist" value={speclist} onChange={(e) => setSpeclist(e.target.value)} style={{width: '510px'}}/>
+                          </div>   
                         </div>
 
                         <div style={{position: 'absolute', top: '160px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
@@ -303,12 +359,12 @@ const Specialist = () => {
                           <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Телефон </p>   
                         </div> 
                         <div style={{position: 'absolute', top: '180px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.phone}
-                          </span>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.phone2}
-                          </span>    
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/>
+                          </div>
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="phone2" id="phone2" value={phone2} onChange={(e) => setPhone2(e.target.value)} style={{width: '250px'}}/>
+                          </div>
                         </div>
 
                         <div style={{position: 'absolute', top: '225px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
@@ -316,12 +372,12 @@ const Specialist = () => {
                           <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Навык</p>   
                         </div>                       
                         <div style={{position: 'absolute', top: '245px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                        
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.telegram}
-                          </span>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.skill}
-                          </span>    
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="telegram" id="telegram" value={telegram} onChange={(e) => setTelegram(e.target.value)} style={{width: '250px'}}/>
+                          </div>
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="skill" id="skill" value={skill} onChange={(e) => setSkill(e.target.value)} style={{width: '250px'}}/>
+                          </div>  
                         </div>
 
                         <div style={{position: 'absolute', top: '290px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
@@ -331,15 +387,15 @@ const Specialist = () => {
                         </div>
 
                         <div style={{position: 'absolute', top: '310px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.reyting}
-                          </span> 
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.promo}
-                          </span>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.rank}
-                          </span>    
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '250px'}}/>
+                          </div> 
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="promo" id="promo" value={promo} onChange={(e) => setPromo(e.target.value)} style={{width: '250px'}}/>
+                          </div>
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '250px'}}/>
+                          </div>    
                         </div>
 
                         <div style={{position: 'absolute', top: '355px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
@@ -348,59 +404,59 @@ const Specialist = () => {
                           <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>ИНН</p>   
                         </div>
                         <div style={{position: 'absolute', top: '375px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.merch}
-                          </span> 
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.company}
-                          </span>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.inn}
-                          </span>    
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="merch" id="merch" value={merch} onChange={(e) => setMerch(e.target.value)} style={{width: '250px'}}/>
+                          </div> 
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="company" id="company" value={company} onChange={(e) => setCompany(e.target.value)} style={{width: '250px'}}/>
+                          </div> 
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="inn" id="inn" value={inn} onChange={(e) => setInn(e.target.value)} style={{width: '250px'}}/>
+                          </div>    
                         </div>
 
                         <div style={{position: 'absolute', top: '420px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
                           <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Комтег</p>
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Комтег2</p>
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>email</p>   
+                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Комтег №2</p>
+                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Email</p>   
                         </div>
                         <div style={{position: 'absolute', top: '440px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.comteg}
-                          </span> 
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.comteg2}
-                          </span>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '250px'}}>
-                            {modalWorker.email}
-                          </span>    
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="comteg" id="comteg" value={comteg} onChange={(e) => setComteg(e.target.value)} style={{width: '250px'}}/>
+                          </div> 
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="comteg2" id="comteg2" value={comteg2} onChange={(e) => setComteg2(e.target.value)} style={{width: '250px'}}/>
+                          </div> 
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '250px'}}/>
+                          </div>     
                         </div>
 
                         <div style={{position: 'absolute', top: '485px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
                           <p style={{fontSize: '12px', color: '#858282', width: '770px'}}>Комментарий</p>   
                         </div>
                         <div style={{position: 'absolute', top: '505px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '770px'}}>
-                            {modalWorker.comment}
-                          </span>     
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="comment" id="comment" value={comment} onChange={(e) => setComment(e.target.value)} style={{width: '770px'}}/>
+                          </div>     
                         </div>
 
                         <div style={{position: 'absolute', top: '550px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '770px'}}>Комментарий</p>   
+                          <p style={{fontSize: '12px', color: '#858282', width: '770px'}}>Комментарий №2</p>   
                         </div>
                         <div style={{position: 'absolute', top: '570px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '770px'}}>
-                            {modalWorker.comment2}
-                          </span>     
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '770px'}}/>
+                          </div>    
                         </div>
 
                         <div style={{position: 'absolute', top: '615px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
                           <p style={{fontSize: '12px', color: '#858282', width: '770px'}}>Паспорт</p>   
                         </div>
                         <div style={{position: 'absolute', top: '635px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '770px', height: '350px', whiteSpace: 'pre-line'}}>
-                            {modalWorker.passport}
-                          </span>
+                          <div className="text-field">
+                            <textarea className="text-field__input" type="text" name="passport" id="passport" value={passport} onChange={(e) => setPassport(e.target.value)} style={{width: '770px', height: '350px', whiteSpace: 'pre-line'}}/>
+                          </div> 
                         </div>
 
 
@@ -410,15 +466,15 @@ const Specialist = () => {
                           <p style={{fontSize: '12px', color: '#858282', width: '650px'}}>Скан паспорта</p>   
                         </div>
                         <div style={{position: 'absolute', top: '1010px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '50px'}}>
-                            {modalWorker.dogovor}
-                          </span> 
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '50px'}}>
-                            {modalWorker.samozanjatost}
-                          </span>
-                          <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', border: '1px solid #535252', borderRadius: '7px', padding: '5px 10px', width: '650px', overflow: 'hidden', textOverflow: 'ellipsis'}}>
-                            {modalWorker.passportScan}
-                          </span>    
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="dogovor" id="dogovor" value={dogovor} onChange={(e) => setDogovor(e.target.value)} style={{width: '50px'}}/>
+                          </div> 
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={samozanjatost} onChange={(e) => setSamozanjatost(e.target.value)} style={{width: '50px'}}/>
+                          </div> 
+                          <div className="text-field">
+                            <input className="text-field__input" type="text" name="passportScan" id="passportScan" value={passportScan} onChange={(e) => setPassportScan(e.target.value)} style={{width: '650px', overflow: 'hidden', textOverflow: 'ellipsis'}}/>
+                          </div> 
                         </div>
 
                       </div>
