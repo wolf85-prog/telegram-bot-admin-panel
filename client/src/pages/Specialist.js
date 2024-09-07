@@ -29,6 +29,15 @@ import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { getWorkers } from './../http/specAPI'
 
 import Close from "../assets/images/close.svg"
+import zamok from "../assets/images/замок.png"
+import zamok2 from "../assets/images/замок2.png"
+import addAvatar from "../assets/images/add_avatar.png"
+import Krestik from './../assets/images/krestik.png';
+import block18 from "./../assets/images/block18.png";
+import Trubka from "./../assets/images/trubka.png";
+import Tg from "./../assets/images/tg.png";
+
+import TagsInput from "./../components/TagsInput/TagsInput"
 
 //Workers.js
 const Specialist = () => {
@@ -41,11 +50,13 @@ const Specialist = () => {
   const [spec, setSpec] = useState([]); 
   const [visibleXL, setVisibleXL] = useState(false)
   const [modalWorker, setModalWorker] = useState({})
+  const [lock, setLock] = useState(true)
+  const [showProfile, setShowProfile] = useState(false)
 
   const [fio, setFio] = useState('');
   const [city, setCity] = useState('');
   const [age, setAge] = useState('');
-  const [speclist, setSpeclist] = useState('');
+  const [speclist, setSpeclist] = useState([]);
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
   const [telegram, setTelegram] = useState('');
@@ -65,6 +76,7 @@ const Specialist = () => {
   const [dogovor, setDogovor] = useState('');
   const [samozanjatost, setSamozanjatost] = useState('');
   const [passportScan, setPassportScan] = useState('');
+
 
   //поиск
   // useEffect(() => {
@@ -136,26 +148,27 @@ const Specialist = () => {
 
   const clickFio = (worker)=> {
     //console.log(worker)
-    setVisibleXL(true)
+    //setVisibleXL(true)
+    setShowProfile(true)
     setModalWorker(worker)
 
     setFio(worker.fio)
     setCity(worker.city)
     setAge(worker.age)
-    setSpeclist(worker.spec)
+    setSpeclist(worker.spec.split(','))
     setPhone(worker.phone)
     setPhone2(worker.phone2)
     setTelegram(worker.telegram)
-    setSkill(worker.skill)
+    setSkill(worker.skill.split(','))
 
     setReyting(worker.reyting)
     setPromo(worker.promo)
     setRank(worker.rank)
-    setMerch(worker.merch)
-    setCompany(worker.company)
+    setMerch(worker.merch.split(','))
+    setCompany(worker.company.split(','))
     setInn(worker.inn)
-    setComteg(worker.comteg)
-    setComteg2(worker.comteg2)
+    setComteg(worker.comteg.split(','))
+    setComteg2(worker.comteg2.split(','))
     setEmail(worker.email)
     setComment(worker.comment)
     setComment2(worker.comment)
@@ -189,7 +202,9 @@ const Specialist = () => {
                       <CCol style={{textAlign: 'center'}}>
                         <CCard className="mb-4"> 
                             <CCardBody>
-                              {loading ? 
+                              {!showProfile ?
+                              
+                              (loading ? 
                                       
                                 <CSpinner/> :
 
@@ -303,6 +318,193 @@ const Specialist = () => {
                                     }
                                 </CTableBody>                   
                                 </CTable>
+                              )
+                              :
+                              <div style={{position: 'relative', height: '870px', display: 'flex', flexDirection: 'row'}}>
+                                <div style={{display: 'flex', flexDirection: 'column', width: '250px'}}>
+                                  <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
+                                    <rect width="250px" height="250px" fill="#007aff" rx="40"></rect> 
+                                  </svg>
+
+                                  <div className="file-upload" style={{marginBottom: '15px'}}>
+                                    <img src={addAvatar} alt="upload" style={{position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
+                                    <input type="file" style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}/>
+                                  </div>
+
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="blacklist" id="blacklist" value='Blacklist' style={{width: '250px', color: 'red', fontSize: '22px'}}/>
+                                  </div> 
+
+                                  <label>Самозанятость</label>
+                                  <div style={{display: 'flex'}}>
+                                    <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '80%'}}/>
+                                    <div className="text-field" style={{marginLeft:'10px'}}>
+                                      <input className="text-field__input" type="text" name="dogovor" id="dogovor" value={dogovor} onChange={(e) => setDogovor(e.target.value)} style={{width: '50px'}}/>
+                                    </div>
+                                  </div> 
+                                  <label>Договор</label>
+                                  <div style={{display: 'flex'}}>
+                                    <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '80%'}}/>
+                                    <div className="text-field" style={{marginLeft:'10px'}}>
+                                      <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={samozanjatost} onChange={(e) => setSamozanjatost(e.target.value)} style={{width: '50px'}}/>
+                                    </div> 
+                                  </div> 
+                                  
+                                  <label>Паспорт</label>
+                                  <div className="text-field">
+                                    <textarea className="text-field__input" type="text" name="passport" id="passport" value={passport} onChange={(e) => setPassport(e.target.value)} style={{width: '250px', height: '350px', whiteSpace: 'pre-line', textAlign: 'left', fontSize: '16px'}}/>
+                                  </div> 
+                                  
+                                </div>
+                                  
+                                  
+                                  <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '19px', left: '260px'}}/>
+                                  {/* ФИО */}
+                                  <div style={{position: 'absolute', top: '5px', left: '290px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
+                                    <div className="text-field">
+                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e) => setFio(e.target.value)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3'}}></input>
+                                    </div>
+                                    <div>
+                                      <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={lock ? zamok : zamok2} onClick={()=>setLock(!lock)} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Close} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                    </div>
+                                  </div>
+{/* 2 */}
+                                <div style={{marginLeft: '50px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '290px'}}>
+                                  {/* Город */}
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} style={{width: '280px'}}/>
+                                  </div>
+
+                                  <label>Специальность</label>
+                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', marginBottom: '15px'}}>
+                                    <ul>
+                                      {speclist.map((item, index) => 
+                                        <li key={index+1}>{item}</li>
+                                      )}     
+                                    </ul>
+                                  </div>
+
+                                  <label>Компания</label>
+                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', height: '100px', marginBottom: '15px'}}>
+                                    <ul>
+                                      {company.map((item, index) => 
+                                        <li key={index+1}>{item}</li>
+                                      )}     
+                                    </ul>
+                                  </div>
+
+                                  <label>Комтеги</label>
+                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', height: '100px', marginBottom: '15px'}}>
+                                    <ul>
+                                      {comteg.map((item, index) => 
+                                        <li key={index+1}>{item}</li>
+                                      )}
+                                    </ul> 
+                                  </div>
+
+                                  <label>Комментарии</label>
+                                  <div className="text-field">
+                                    <textarea className="text-field__input" type="text" name="comment" id="comment" value={comment} onChange={(e) => setComment(e.target.value)} style={{width: '280px', height: '350px', whiteSpace: 'pre-line', borderRadius: '15px'}}/>
+                                  </div> 
+                                  
+                                </div>
+{/* 3 */}
+                                <div style={{marginLeft: '50px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '290px'}}>
+                                  <div style={{display: 'flex'}}>
+                                    <div className="text-field">
+                                      <input className="text-field__input" type="text" name="age" id="age" value='25' onChange={(e) => setAge(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                    </div>
+                                    <div className="text-field">
+                                      <input className="text-field__input" type="text" name="age" id="age" value={age} onChange={(e) => setAge(e.target.value)} style={{width: '80px', marginRight: '8px'}}/>
+                                    </div>
+                                    <div className="text-field">
+                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                    </div>
+                                    <div className="text-field">
+                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                    </div>
+                                    <div className="text-field">
+                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px', color: 'red'}}/>
+                                    </div>
+                                    <div className="text-field">
+                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', color: 'red'}}/>
+                                    </div>
+                                  </div>
+                                  <label>Навык</label>
+                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', width: '320px', height: '100px', marginBottom: '15px'}}>
+                                    <ul>
+                                      {skill.map((item, index) => 
+                                        <li key={index+1}>{item}</li>
+                                      )}     
+                                    </ul>
+                                  </div>
+
+                                  <label>Мерч</label>
+                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', width: '320px', height: '100px', marginBottom: '15px'}}>
+                                    <ul>
+                                      {merch.map((item, index) => 
+                                        <li key={index+1}>{item}</li>
+                                      )}     
+                                    </ul>
+                                  </div>
+
+                                  <label>Комтеги 2.0</label>
+                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', height: '100px', width: '320px', marginBottom: '15px'}}>
+                                    <ul>
+                                      {comteg2.map((item, index) => 
+                                        <li key={index+1}>{item}</li>
+                                      )}
+                                    </ul> 
+                                  </div>
+
+                                  <label>Комментарии 2.0</label>
+                                  <div className="text-field">
+                                    <textarea className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '320px', height: '350px', whiteSpace: 'pre-line', borderRadius: '15px'}}/>
+                                  </div> 
+                                </div>
+
+{/* 4 */}
+                                <div style={{marginLeft: '80px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '280px'}}>
+
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '280px'}}/>
+                                  </div> 
+
+                                  <label>Telegram</label>
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="telegram" id="telegram" value={telegram} onChange={(e) => setTelegram(e.target.value)} style={{width: '280px'}}/>
+                                  </div>
+
+                                  <label> </label>
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="email" id="email" value='@U.L.E.Y_T.E.A.M' onChange={(e) => setEmail(e.target.value)} style={{width: '280px'}}/>
+                                  </div> 
+
+                                  <label>ИНН</label>
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="inn" id="inn" value={inn} onChange={(e) => setInn(e.target.value)} style={{width: '280px'}}/>
+                                  </div> 
+
+                                  <label></label>
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '280px'}}/>
+                                  </div> 
+
+                                  <label>Промокод</label>
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="promo" id="promo" value={promo} onChange={(e) => setPromo(e.target.value)} style={{width: '280px'}}/>
+                                  </div>
+
+                                  <label></label>
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="passportScan" id="passportScan" value={passportScan} onChange={(e) => setPassportScan(e.target.value)} style={{width: '280px', overflow: 'hidden', textOverflow: 'ellipsis'}}/>
+                                  </div> 
+                                </div>
+
+                              </div>
                               }
                             </CCardBody>
                           </CCard>
@@ -323,6 +525,13 @@ const Specialist = () => {
                       <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
                         <rect width="250px" height="250px" fill="#007aff"></rect> 
                       </svg>
+
+                      <div className="file-upload">
+                        <img src={addAvatar} alt="upload" style={{position: 'absolute', top: '115px', left: '115px', cursor: 'pointer', width: '50px', height: '50px'}}/>
+                        <input type="file" style={{position: 'absolute', top: '130px', left: '70px', opacity: '0', zIndex: '100'}}/>
+                      </div>
+                      
+                      <img src={Krestik} width={30} alt='' style={{position: 'absolute', top: '20px', left: '235px'}}/>
                       <div style={{position: 'absolute', top: '5px', left: '275px', color: '#fff', fontSize: '33px', zIndex: '100'}}>
                         {/* <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '5px', left: '275px'}}> */}
                         <div className="text-field">
@@ -331,7 +540,7 @@ const Specialist = () => {
                         {/* </span> */}
                       </div>
                       
-                      <div style={{position: 'relative', height: '1080px'}}>
+                      <div style={{position: 'relative', height: '1100px'}}>
                         {/* <div style={{position: 'absolute', top: '30px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
                           <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Город</p>
                           <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Дата </p>   
@@ -350,13 +559,14 @@ const Specialist = () => {
                         </div> 
                         <div style={{position: 'absolute', top: '115px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>     
                           <div className="text-field">
-                            <input className="text-field__input" type="text" name="speclist" id="speclist" value={speclist} onChange={(e) => setSpeclist(e.target.value)} style={{width: '510px'}}/>
+                            {/* <input className="text-field__input" type="text" name="speclist" id="speclist" value={speclist} onChange={(e) => setSpeclist(e.target.value)} style={{width: '510px'}}/> */}
+                            <TagsInput className="text-field__input" style={{width: '510px'}} speclist={speclist} setSpeclist={setSpeclist}/>
                           </div>   
                         </div>
 
                         <div style={{position: 'absolute', top: '160px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Телефон</p>
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Телефон </p>   
+                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Телефон №1</p>
+                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Телефон №2</p>   
                         </div> 
                         <div style={{position: 'absolute', top: '180px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>
                           <div className="text-field">
@@ -477,11 +687,15 @@ const Specialist = () => {
                           </div> 
                         </div>
 
+                        <div style={{position: 'absolute', top: '1065px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'center', width: '770px'}}>
+                          <CButton color="success">Сохранить</CButton>
+                        </div>
+
                       </div>
 
-                      <img src={Close} onClick={()=>setVisibleXL(false)} style={{position: 'absolute', top: '15px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}/>
+                      <img src={lock ? zamok : zamok2} onClick={()=>setLock(!lock)} style={{position: 'absolute', top: '15px', right: '15px', cursor: 'pointer', width: '15px', height: '19px'}}/>
                   
-                    </div>
+                  </div>
               </CModalBody>
             </CModal>
 

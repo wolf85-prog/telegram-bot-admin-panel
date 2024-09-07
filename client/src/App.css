@@ -390,11 +390,12 @@ th.widthSpace {
     height: calc(2.25rem + 2px);
     padding: 0.375rem 0.75rem;
     font-family: inherit;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     line-height: 1.5;
+    text-align: center;
     color: #858585;
-    background-color: #1d1f2b;
+    background-color: transparent;
     background-clip: padding-box;
     border: 1px solid #535252;
     border-radius: 0.25rem;
