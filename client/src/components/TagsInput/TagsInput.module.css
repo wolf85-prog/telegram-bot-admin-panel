@@ -2,20 +2,22 @@
 .tagsInputContainer{
     border: 1px solid #535252;
     /* padding: .5em; */
-    border-radius: 7px;
-    width: min(80vw, 510px);
+    border-radius: .375rem;
+    width: 320px;
     /* margin-top: 1em; */
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: .5em;
+    min-height: 40px;
 }
 
 .tagItem{
-    background-color: rgb(218, 216, 216);
+    background-color: #148cd7;
     display: inline-block;
-    padding: .5em .75em;
+    padding: 2px 8px;
     border-radius: 20px;
+    font-size: 14px;
 }
 .tagItem .close{
     height: 20px;

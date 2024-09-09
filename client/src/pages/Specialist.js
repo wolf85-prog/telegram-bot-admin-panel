@@ -57,7 +57,7 @@ const Specialist = () => {
   const [showProfile, setShowProfile] = useState(false)
 
   const [fio, setFio] = useState('');
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState([]);
   const [age, setAge] = useState('');
   const [speclist, setSpeclist] = useState([]);
   const [phone, setPhone] = useState('');
@@ -156,7 +156,7 @@ const Specialist = () => {
     setModalWorker(worker)
 
     setFio(worker.fio)
-    setCity(worker.city)
+    setCity(worker.city.split(','))
     setAge(worker.age)
     setSpeclist(worker.spec.split(','))
     setPhone(worker.phone)
@@ -407,7 +407,8 @@ const Specialist = () => {
                                 <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                   {/* Город */}
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} style={{width: '320px'}}/>
+                                    <TagsInput className="text-field__input" style={{width: '510px'}} tags={city} setTags={setCity}/>
+                                    {/* <input className="text-field__input" type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} style={{width: '320px'}}/> */}
                                   </div>
 
                                   <label>Специальность</label>
@@ -577,14 +578,14 @@ const Specialist = () => {
                           <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Город</p>
                           <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Дата </p>   
                         </div>  */}
-                        <div style={{position: 'absolute', top: '50px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>
+                        {/* <div style={{position: 'absolute', top: '50px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>
                           <div className="text-field">
                             <input className="text-field__input" type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} style={{width: '250px'}}/>
                           </div>
                           <div className="text-field">
                             <input className="text-field__input" type="text" name="age" id="age" value={age} onChange={(e) => setAge(e.target.value)} style={{width: '250px'}}/>
                           </div>
-                        </div>
+                        </div> */}
 
                         <div style={{position: 'absolute', top: '95px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
                           <p style={{fontSize: '12px', color: '#858282', width: '510px'}}>Специальность</p>  
