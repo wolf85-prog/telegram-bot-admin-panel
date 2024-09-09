@@ -36,6 +36,9 @@ import Krestik from './../assets/images/krestik.png';
 import block18 from "./../assets/images/block18.png";
 import Trubka from "./../assets/images/trubka.png";
 import Tg from "./../assets/images/tg.png";
+import Star from "./../assets/images/star.png";
+import StarActive from "./../assets/images/star_activ.svg";
+import Disketa from "./../assets/images/disketa.png";
 
 import TagsInput from "./../components/TagsInput/TagsInput"
 
@@ -180,6 +183,9 @@ const Specialist = () => {
 
   }
 
+  const copyText = (text)=> {
+    window.prompt("", text);
+  }
 
   return (
     <div className='dark-theme'>
@@ -320,7 +326,7 @@ const Specialist = () => {
                                 </CTable>
                               )
                               :
-                              <div style={{position: 'relative', height: '870px', display: 'flex', flexDirection: 'row'}}>
+                              <div style={{position: 'relative', height: '930px', display: 'flex', flexDirection: 'row'}}>
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}}>
                                   <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
                                     <rect width="250px" height="250px" fill="#007aff" rx="40"></rect> 
@@ -331,29 +337,54 @@ const Specialist = () => {
                                     <input type="file" style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}/>
                                   </div>
 
-                                  <div className="text-field">
-                                    <input className="text-field__input" type="text" name="blacklist" id="blacklist" value='Blacklist' style={{width: '250px', color: 'red', fontSize: '22px'}}/>
-                                  </div> 
-
-                                  <label>Самозанятость</label>
-                                  <div style={{display: 'flex'}}>
-                                    <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '80%'}}/>
+                                  <div style={{width: '250px', display: 'flex', justifyContent: 'center', marginBottom: '10px'}}>
+                                    <div className="star-block">
+                                      <img className='star-icon' src={StarActive} alt='' /> 
+                                      <img className='star-icon' src={StarActive} alt='' />
+                                      <img className='star-icon' src={StarActive} alt='' />
+                                      <img className='star-icon' src={Star} alt='' />
+                                      <img className='star-icon' src={Star} alt='' />
+                                    </div>
+                                  </div>
+                                  
+                                  <label>В системе</label>
+                                  <div style={{display: 'flex', justifyContent: 'center'}}>
                                     <div className="text-field" style={{marginLeft:'10px'}}>
-                                      <input className="text-field__input" type="text" name="dogovor" id="dogovor" value={dogovor} onChange={(e) => setDogovor(e.target.value)} style={{width: '50px'}}/>
+                                      <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '250px'}}/>
                                     </div>
                                   </div> 
-                                  <label>Договор</label>
+
                                   <div style={{display: 'flex'}}>
-                                    <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '80%'}}/>
-                                    <div className="text-field" style={{marginLeft:'10px'}}>
-                                      <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={samozanjatost} onChange={(e) => setSamozanjatost(e.target.value)} style={{width: '50px'}}/>
+                                    <div>
+                                      <label>Самозанятость</label>
+                                      <div style={{display: 'flex'}}>
+                                        <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px'}}/>
+                                        <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
+                                          <input className="text-field__input" type="text" name="dogovor" id="dogovor" value={dogovor} onChange={(e) => setDogovor(e.target.value)} style={{width: '38px', padding: '0', fontSize: '20px'}}/>
+                                        </div>
+                                      </div> 
+                                    </div>
+                                    <div>
+                                      <label>Договор</label>
+                                      <div style={{display: 'flex'}}>
+                                        <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px'}}/>
+                                        <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
+                                          <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={samozanjatost} onChange={(e) => setSamozanjatost(e.target.value)} style={{width: '38px', padding: '0', fontSize: '20px'}}/>
+                                        </div> 
+                                      </div>
+                                    </div>
+                                    
+                                    
+                                  </div>
+
+                                   
+                                  <div style={{position:'relative'}}>
+                                    <label>Паспорт</label>
+                                    <div className="text-field">
+                                      <textarea className="text-field__input" type="text" name="passport" id="passport" value={passport} onChange={(e) => setPassport(e.target.value)} style={{width: '250px', height: '275px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'35px'}}/>
                                     </div> 
-                                  </div> 
-                                  
-                                  <label>Паспорт</label>
-                                  <div className="text-field">
-                                    <textarea className="text-field__input" type="text" name="passport" id="passport" value={passport} onChange={(e) => setPassport(e.target.value)} style={{width: '250px', height: '350px', whiteSpace: 'pre-line', textAlign: 'left', fontSize: '16px'}}/>
-                                  </div> 
+                                    <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(passport)}} alt="" style={{position: 'absolute', top: '40px', left: '205px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                                  </div>
                                   
                                 </div>
                                   
