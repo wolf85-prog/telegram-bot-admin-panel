@@ -360,7 +360,7 @@ const Specialist = () => {
                                       <div style={{display: 'flex'}}>
                                         <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px'}}/>
                                         <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
-                                          <input className="text-field__input" type="text" name="dogovor" id="dogovor" value={dogovor} onChange={(e) => setDogovor(e.target.value)} style={{width: '38px', padding: '0', fontSize: '20px'}}/>
+                                          <input className="text-field__input" type="text" name="dogovor" id="dogovor" value={dogovor} onChange={(e) => setDogovor(e.target.value)} style={{width: '40px', padding: '0', fontSize: '20px'}}/>
                                         </div>
                                       </div> 
                                     </div>
@@ -370,7 +370,7 @@ const Specialist = () => {
                                       <div style={{display: 'flex'}}>
                                         <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px'}}/>
                                         <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
-                                          <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={samozanjatost} onChange={(e) => setSamozanjatost(e.target.value)} style={{width: '38px', padding: '0', fontSize: '20px'}}/>
+                                          <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={samozanjatost} onChange={(e) => setSamozanjatost(e.target.value)} style={{width: '40px', padding: '0', fontSize: '20px'}}/>
                                         </div> 
                                       </div>
                                     </div>
@@ -390,9 +390,9 @@ const Specialist = () => {
                                 </div>
                                   
                                   
-                                  <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '19px', left: '260px'}}/>
+                                  <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '19px', left: '255px'}}/>
                                   {/* ФИО */}
-                                  <div style={{position: 'absolute', top: '5px', left: '290px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
+                                  <div style={{position: 'absolute', top: '5px', left: '285px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
                                       <input type="text" name="fio" id="fio" value={fio} onChange={(e) => setFio(e.target.value)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3'}}></input>
                                     </div>
@@ -404,14 +404,14 @@ const Specialist = () => {
                                     </div>
                                   </div>
 {/* 2 */}
-                                <div style={{marginLeft: '50px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '290px'}}>
+                                <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                   {/* Город */}
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} style={{width: '280px'}}/>
+                                    <input className="text-field__input" type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} style={{width: '320px'}}/>
                                   </div>
 
                                   <label>Специальность</label>
-                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', marginBottom: '15px'}}>
+                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', marginBottom: '15px', height: '100px'}}>
                                     <ul>
                                       {speclist.map((item, index) => 
                                         <li key={index+1}>{item}</li>
@@ -420,7 +420,7 @@ const Specialist = () => {
                                   </div>
 
                                   <label>Компания</label>
-                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', height: '100px', marginBottom: '15px'}}>
+                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', height: '100px', marginBottom: '15px', height: '100px'}}>
                                     <ul>
                                       {company.map((item, index) => 
                                         <li key={index+1}>{item}</li>
@@ -429,7 +429,7 @@ const Specialist = () => {
                                   </div>
 
                                   <label>Комтеги</label>
-                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', height: '100px', marginBottom: '15px'}}>
+                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', height: '100px', marginBottom: '15px', height: '100px'}}>
                                     <ul>
                                       {comteg.map((item, index) => 
                                         <li key={index+1}>{item}</li>
@@ -439,12 +439,12 @@ const Specialist = () => {
 
                                   <label>Комментарии</label>
                                   <div className="text-field">
-                                    <textarea className="text-field__input" type="text" name="comment" id="comment" value={comment} onChange={(e) => setComment(e.target.value)} style={{width: '280px', height: '350px', whiteSpace: 'pre-line', borderRadius: '15px'}}/>
+                                    <textarea className="text-field__input" type="text" name="comment" id="comment" value={comment} onChange={(e) => setComment(e.target.value)} style={{width: '320px', height: '350px', whiteSpace: 'pre-line', borderRadius: '35px'}}/>
                                   </div> 
                                   
                                 </div>
 {/* 3 */}
-                                <div style={{marginLeft: '50px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '290px'}}>
+                                <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                   <div style={{display: 'flex'}}>
                                     <div className="text-field">
                                       <input className="text-field__input" type="text" name="age" id="age" value='25' onChange={(e) => setAge(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
@@ -494,45 +494,45 @@ const Specialist = () => {
 
                                   <label>Комментарии 2.0</label>
                                   <div className="text-field">
-                                    <textarea className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '320px', height: '350px', whiteSpace: 'pre-line', borderRadius: '15px'}}/>
+                                    <textarea className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '25px'}}/>
                                   </div> 
                                 </div>
 
 {/* 4 */}
-                                <div style={{marginLeft: '80px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '280px'}}>
+                                <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '250px'}}>
 
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '280px'}}/>
+                                    <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
 
                                   <label>Telegram</label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="telegram" id="telegram" value={telegram} onChange={(e) => setTelegram(e.target.value)} style={{width: '280px'}}/>
+                                    <input className="text-field__input" type="text" name="telegram" id="telegram" value={telegram} onChange={(e) => setTelegram(e.target.value)} style={{width: '250px'}}/>
                                   </div>
 
                                   <label> </label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value='@U.L.E.Y_T.E.A.M' onChange={(e) => setEmail(e.target.value)} style={{width: '280px'}}/>
+                                    <input className="text-field__input" type="text" name="email" id="email" value='@U.L.E.Y_T.E.A.M' onChange={(e) => setEmail(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
 
                                   <label>ИНН</label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="inn" id="inn" value={inn} onChange={(e) => setInn(e.target.value)} style={{width: '280px'}}/>
+                                    <input className="text-field__input" type="text" name="inn" id="inn" value={inn} onChange={(e) => setInn(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
 
                                   <label></label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '280px'}}/>
+                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
 
                                   <label>Промокод</label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="promo" id="promo" value={promo} onChange={(e) => setPromo(e.target.value)} style={{width: '280px'}}/>
+                                    <input className="text-field__input" type="text" name="promo" id="promo" value={promo} onChange={(e) => setPromo(e.target.value)} style={{width: '250px'}}/>
                                   </div>
 
                                   <label></label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="passportScan" id="passportScan" value={passportScan} onChange={(e) => setPassportScan(e.target.value)} style={{width: '280px', overflow: 'hidden', textOverflow: 'ellipsis'}}/>
+                                    <input className="text-field__input" type="text" name="passportScan" id="passportScan" value={passportScan} onChange={(e) => setPassportScan(e.target.value)} style={{width: '250px', overflow: 'hidden', textOverflow: 'ellipsis'}}/>
                                   </div> 
                                 </div>
 
