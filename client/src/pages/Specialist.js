@@ -349,7 +349,7 @@ const Specialist = () => {
                                   
                                   <label>В системе</label>
                                   <div style={{display: 'flex', justifyContent: 'center'}}>
-                                    <div className="text-field" style={{marginLeft:'10px'}}>
+                                    <div className="text-field">
                                       <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '250px'}}/>
                                     </div>
                                   </div> 
@@ -364,6 +364,7 @@ const Specialist = () => {
                                         </div>
                                       </div> 
                                     </div>
+                                    <div style={{width: '15px'}}></div>
                                     <div>
                                       <label>Договор</label>
                                       <div style={{display: 'flex'}}>
