@@ -326,7 +326,7 @@ const Specialist = () => {
                                 </CTable>
                               )
                               :
-                              <div style={{position: 'relative', height: '930px', display: 'flex', flexDirection: 'row'}}>
+                              <div style={{position: 'relative', height: '790px', display: 'flex', flexDirection: 'row'}}>
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}}>
                                   <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
                                     <rect width="250px" height="250px" fill="#007aff" rx="40"></rect> 
