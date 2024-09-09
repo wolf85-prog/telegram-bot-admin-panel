@@ -358,7 +358,7 @@ const Specialist = () => {
                                     <div>
                                       <label>Самозанятость</label>
                                       <div style={{display: 'flex'}}>
-                                        <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px'}}/>
+                                        <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
                                         <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
                                           <input className="text-field__input" type="text" name="dogovor" id="dogovor" value={dogovor} onChange={(e) => setDogovor(e.target.value)} style={{width: '40px', padding: '0', fontSize: '20px'}}/>
                                         </div>
@@ -368,7 +368,7 @@ const Specialist = () => {
                                     <div>
                                       <label>Договор</label>
                                       <div style={{display: 'flex'}}>
-                                        <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px'}}/>
+                                        <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
                                         <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
                                           <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={samozanjatost} onChange={(e) => setSamozanjatost(e.target.value)} style={{width: '40px', padding: '0', fontSize: '20px'}}/>
                                         </div> 
@@ -382,7 +382,7 @@ const Specialist = () => {
                                   <div style={{position:'relative'}}>
                                     <label>Паспорт</label>
                                     <div className="text-field">
-                                      <textarea className="text-field__input" type="text" name="passport" id="passport" value={passport} onChange={(e) => setPassport(e.target.value)} style={{width: '250px', height: '275px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'35px'}}/>
+                                      <textarea className="text-field__input" type="text" name="passport" id="passport" value={passport} onChange={(e) => setPassport(e.target.value)} style={{width: '250px', height: '275px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'.375rem'}}/>
                                     </div> 
                                     <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(passport)}} alt="" style={{position: 'absolute', top: '40px', left: '205px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                                   </div>
@@ -411,7 +411,7 @@ const Specialist = () => {
                                   </div>
 
                                   <label>Специальность</label>
-                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', marginBottom: '15px', height: '100px'}}>
+                                  <div style={{border: '1px solid #464849', borderRadius: '.375rem', padding: '5px', textAlign: 'left', marginBottom: '15px', minHeight: '100px'}}>
                                     <ul>
                                       {speclist.map((item, index) => 
                                         <li key={index+1}>{item}</li>
@@ -420,7 +420,7 @@ const Specialist = () => {
                                   </div>
 
                                   <label>Компания</label>
-                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', height: '100px', marginBottom: '15px', height: '100px'}}>
+                                  <div style={{border: '1px solid #464849', borderRadius: '.375rem', padding: '5px', textAlign: 'left', minHeight: '100px', marginBottom: '15px'}}>
                                     <ul>
                                       {company.map((item, index) => 
                                         <li key={index+1}>{item}</li>
@@ -429,7 +429,7 @@ const Specialist = () => {
                                   </div>
 
                                   <label>Комтеги</label>
-                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', height: '100px', marginBottom: '15px', height: '100px'}}>
+                                  <div style={{border: '1px solid #464849', borderRadius: '.375rem', padding: '5px', textAlign: 'left', minHeight: '100px', marginBottom: '15px'}}>
                                     <ul>
                                       {comteg.map((item, index) => 
                                         <li key={index+1}>{item}</li>
@@ -439,7 +439,7 @@ const Specialist = () => {
 
                                   <label>Комментарии</label>
                                   <div className="text-field">
-                                    <textarea className="text-field__input" type="text" name="comment" id="comment" value={comment} onChange={(e) => setComment(e.target.value)} style={{width: '320px', height: '350px', whiteSpace: 'pre-line', borderRadius: '35px'}}/>
+                                    <textarea className="text-field__input" type="text" name="comment" id="comment" value={comment} onChange={(e) => setComment(e.target.value)} style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '.375rem'}}/>
                                   </div> 
                                   
                                 </div>
@@ -466,7 +466,7 @@ const Specialist = () => {
                                     </div>
                                   </div>
                                   <label>Навык</label>
-                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', width: '320px', height: '100px', marginBottom: '15px'}}>
+                                  <div style={{border: '1px solid #464849', borderRadius: '.375rem', padding: '5px', textAlign: 'left', width: '320px', minHeight: '100px', marginBottom: '15px'}}>
                                     <ul>
                                       {skill.map((item, index) => 
                                         <li key={index+1}>{item}</li>
@@ -475,7 +475,7 @@ const Specialist = () => {
                                   </div>
 
                                   <label>Мерч</label>
-                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', width: '320px', height: '100px', marginBottom: '15px'}}>
+                                  <div style={{border: '1px solid #464849', borderRadius: '.375rem', padding: '5px', textAlign: 'left', width: '320px', minHeight: '100px', marginBottom: '15px'}}>
                                     <ul>
                                       {merch.map((item, index) => 
                                         <li key={index+1}>{item}</li>
@@ -484,7 +484,7 @@ const Specialist = () => {
                                   </div>
 
                                   <label>Комтеги 2.0</label>
-                                  <div style={{border: '1px solid #464849', borderRadius: '15px', padding: '5px', textAlign: 'left', height: '100px', width: '320px', marginBottom: '15px'}}>
+                                  <div style={{border: '1px solid #464849', borderRadius: '.375rem', padding: '5px', textAlign: 'left', minHeight: '100px', width: '320px', marginBottom: '15px'}}>
                                     <ul>
                                       {comteg2.map((item, index) => 
                                         <li key={index+1}>{item}</li>
@@ -494,7 +494,7 @@ const Specialist = () => {
 
                                   <label>Комментарии 2.0</label>
                                   <div className="text-field">
-                                    <textarea className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '25px'}}/>
+                                    <textarea className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '.375rem'}}/>
                                   </div> 
                                 </div>
 
