@@ -135,7 +135,7 @@ const ProjectNew = sequelize.define('projectnew', {
 const Specialist = sequelize.define('specialist', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},  
     fio: {type: DataTypes.STRING},
-    chatId: {type: DataTypes.STRING, unique: true},
+    chatId: {type: DataTypes.STRING},
     phone: {type: DataTypes.STRING},
     phone2: {type: DataTypes.STRING},
     specialization: {type: DataTypes.STRING},  

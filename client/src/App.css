@@ -24,6 +24,26 @@
     color: #ffffff!important;
 } */
 
+.my-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+  
+th.my-th {
+    /* text-align: left; */
+    background: #2b3337;
+    position: sticky;
+    top: 0px;
+}
+  
+
+.scrooll-table {
+    overflow-y: auto;
+    height: 350px;
+    border: 1px solid #242c31;
+}
+
 td.widthSpace {
     white-space: nowrap;
     width: 1%; /* Форсирует сужение ячейки */
@@ -452,4 +472,6 @@ th.widthSpace {
   .star-icon {
     width: 30px;
   }
+
+  
   
