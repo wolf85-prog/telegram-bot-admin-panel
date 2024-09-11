@@ -153,7 +153,7 @@ const Specialist = sequelize.define('specialist', {
     reyting: {type: DataTypes.STRING},
     inn: {type: DataTypes.STRING}, 
     passport: {type: DataTypes.TEXT},
-    profile: {type: DataTypes.STRING},
+    profile: {type: DataTypes.TEXT},
     dogovor: {type: DataTypes.BOOLEAN}, 
     samozanjatost: {type: DataTypes.BOOLEAN},
     passportScan: {type: DataTypes.TEXT},
