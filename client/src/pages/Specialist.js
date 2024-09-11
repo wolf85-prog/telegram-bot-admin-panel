@@ -101,11 +101,11 @@ const Specialist = () => {
 
     const fetchData = async () => {
       const res = await getSpecialist()
-      console.log("specialistAll: ", res)
+      //console.log("specialistAll: ", res.length)
       setSpecialistAll(res)
 
       let workers = await getSpecCount(20, specialist.length)
-      console.log("specialist: ", workers)
+      //console.log("specialist: ", workers)
 
       workers.map(async (worker, i) => {
 
@@ -119,12 +119,17 @@ const Specialist = () => {
         
         const newDate = `${day}.${month} ${chas}:${min}`;
 
+        let str_spec = ''
+        worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
+          str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
+        })
+
         const newWorker = {
           fio: worker.fio,
           telegram: worker.chatId, 
           phone: worker.phone, 
           phone2: worker.phone2,
-          spec: worker.specialization,
+          spec: str_spec,
           city: worker.city, 
           skill: worker.skill,
           promo: worker.promoId, 
@@ -148,6 +153,7 @@ const Specialist = () => {
         arrWorkers.push(newWorker)
 
         //setSpec(arrWorkers) 
+        //console.log("arrWorkers: ", arrWorkers)
         setSpecialist(arrWorkers)
       })  
 
@@ -168,7 +174,8 @@ const Specialist = () => {
     setFio(worker.fio)
     setCity(worker.city.split(','))
     setAge(worker.age)
-    setSpeclist(worker.spec.split(','))
+    setSpeclist(worker.spec)
+
     setPhone(worker.phone)
     setPhone2(worker.phone2)
     setTelegram(worker.telegram)
@@ -215,15 +222,25 @@ const Specialist = () => {
         
         const newDate = `${day}.${month} ${chas}:${min}`;
 
+        let str_spec = ''
+        worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
+          str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
+        })
+
+        let str_skill = ''
+        worker.skill && JSON.parse(worker.skill).map((item, index)=> {
+          str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
+        })
+
 				const newWorker = {
           fio: worker.fio,
           telegram: worker.chatId, 
           phone: worker.phone, 
           phone2: worker.phone2,
-          spec: worker.specialization,
+          spec: str_spec,
           city: worker.city, 
-          skill: worker.skill,
-          promo: worker.promoId, 
+          skill: str_skill,
+          promo: worker.promoId === '0' ? '' : worker.promoId, 
           rank: worker.rank, 
           merch: worker.merch,  
           company: worker.company, 
@@ -284,7 +301,7 @@ const Specialist = () => {
                                   <CTable align="middle" className="mb-0 border my-table" hover bordered>
                                     <CTableHead className='table-light'>
                                       <CTableRow>
-                                        <CTableHeaderCell className='my-th widthSpace my-td'>№</CTableHeaderCell> 
+                                        <CTableHeaderCell className='my-th widthSpace'>№</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace'>ФИО</CTableHeaderCell>  
                                         <CTableHeaderCell className='my-th widthSpace'>Телеграм</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace'>Телефон</CTableHeaderCell> 
@@ -314,7 +331,7 @@ const Specialist = () => {
                                     <CTableBody>                                  
                                     {specialist.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index+1}>
-                                          <CTableDataCell className="text-center widthSpace my-td">
+                                          <CTableDataCell className="text-center widthSpace">
                                             {index+1}
                                           </CTableDataCell>
                                           <CTableDataCell onClick={()=>clickFio(item)} className="widthSpace" style={{cursor: 'pointer', textAlign: 'left'}}>
@@ -326,7 +343,7 @@ const Specialist = () => {
                                           <CTableDataCell className="text-center widthSpace">
                                             {item.phone}
                                           </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace" style={{textAlign: 'left'}}>
+                                          <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
                                           {item.spec}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
