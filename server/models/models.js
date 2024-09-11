@@ -141,7 +141,7 @@ const Specialist = sequelize.define('specialist', {
     specialization: {type: DataTypes.TEXT},  
     city: {type: DataTypes.STRING},
     skill: {type: DataTypes.TEXT},
-    promoId: {type: DataTypes.INTEGER}, 
+    promoId: {type: DataTypes.STRING}, 
     rank: {type: DataTypes.INTEGER}, 
     merch: {type: DataTypes.STRING},
     company: {type: DataTypes.STRING},
