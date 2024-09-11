@@ -30,7 +30,7 @@ class SpecialistController {
         }
     }
 
-    async getWorkersCount(req, res) {
+    async getSpecCount(req, res) {
         const kol = req.params.count
         const prev = req.params.prev
         try {

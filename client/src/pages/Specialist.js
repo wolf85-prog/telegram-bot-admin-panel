@@ -26,7 +26,7 @@ import {
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
-import { getWorkers } from './../http/specAPI'
+import { getSpecialist, getSpecCount } from './../http/specAPI'
 
 import Close from "../assets/images/close.svg"
 import zamok from "../assets/images/замок.png"
@@ -96,7 +96,7 @@ const Specialist = () => {
 
     const fetchData = async () => {
 
-      let workers = await getWorkers()
+      let workers = await getSpecCount(20, 0)
       console.log("specialist: ", workers)
 
       workers.map(async (worker, i) => {
