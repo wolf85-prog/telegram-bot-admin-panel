@@ -48,6 +48,8 @@ const Specialist = () => {
 
   const { specialist, setSpecialist } = useUsersContext();
 
+  const [specialistAll, setSpecialistAll] = useState([]);
+
   const dispatch = useDispatch()
   const rigthbarShow = useSelector((state) => state.rigthbarShow)
 
@@ -98,6 +100,9 @@ const Specialist = () => {
     const arrWorkers = []
 
     const fetchData = async () => {
+      const res = await getSpecialist()
+      console.log("specialistAll: ", res)
+      setSpecialistAll(res)
 
       let workers = await getSpecCount(20, specialist.length)
       console.log("specialist: ", workers)
@@ -267,7 +272,7 @@ const Specialist = () => {
                       <CCol style={{textAlign: 'center'}}>
                         <CCard className="mb-4"> 
                             <p style={{position: 'absolute', top: '-3px', left: '15px', fontSize: '14px', color: '#f3f3f3'}}>
-                              Всего: {specialist.length}
+                              Всего: {specialistAll.length}
                             </p>
                             <CCardBody>
                               {!showProfile ?
