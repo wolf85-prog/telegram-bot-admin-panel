@@ -301,7 +301,7 @@ const Specialist = () => {
                                           {item.spec}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.phone}
+                                          {item.phone2}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                             {item.city === 'null' ? '' : item.city}

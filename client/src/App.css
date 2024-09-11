@@ -45,12 +45,14 @@ th.my-th {
 }
 
 td.widthSpace {
-    white-space: nowrap;
+    white-space: nowrap; /* Текст не переносится */
+    overflow: hidden; /* Обрезаем всё за пределами блока */
+    text-overflow: ellipsis; /* Добавляем многоточие */
     width: 1%; /* Форсирует сужение ячейки */
 }
 
 th.widthSpace {
-    white-space: nowrap;
+    white-space: nowrap; /* Текст не переносится */
     width: 1%; /* Форсирует сужение ячейки */
 }
 
