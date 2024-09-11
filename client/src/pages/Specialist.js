@@ -124,6 +124,31 @@ const Specialist = () => {
           str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
         })
 
+        let str_skill = ''
+        worker.skill && JSON.parse(worker.skill).map((item, index)=> {
+          str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
+        })
+
+        let str_merch = ''
+        worker.skill && JSON.parse(worker.merch).map((item, index)=> {
+          str_merch = str_merch + item.name + (index+1 !== JSON.parse(worker.merch).length ? ', ' : '')
+        })
+
+        let str_komteg = ''
+        worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
+          str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
+        })
+
+        let str_komteg2 = ''
+        worker.comteg2 && JSON.parse(worker.comteg2).map((item, index)=> {
+          str_komteg2 = str_komteg2 + item.name + (index+1 !== JSON.parse(worker.comteg2).length ? ', ' : '')
+        })
+
+        let str_company = ''
+        worker.company && JSON.parse(worker.company).map((item, index)=> {
+          str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
+        })
+
         const newWorker = {
           fio: worker.fio,
           telegram: worker.chatId, 
@@ -131,13 +156,13 @@ const Specialist = () => {
           phone2: worker.phone2,
           spec: str_spec,
           city: worker.city, 
-          skill: worker.skill,
-          promo: worker.promoId, 
+          skill: str_skill,
+          promo: worker.promoId === '0' ? '' : worker.promoId, 
           rank: worker.rank, 
-          merch: worker.merch,  
-          company: worker.company, 
-          comteg: worker.comteg, 
-          comteg2: worker.comteg2, 
+          merch: str_merch,  
+          company: str_company, 
+          comteg: str_komteg, 
+          comteg2: str_komteg2, 
           comment: worker.comment, 
           comment2: worker.comment2, 
           age: worker.age, 
@@ -232,6 +257,26 @@ const Specialist = () => {
           str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
         })
 
+        let str_merch = ''
+        worker.skill && JSON.parse(worker.merch).map((item, index)=> {
+          str_merch = str_merch + item.name + (index+1 !== JSON.parse(worker.merch).length ? ', ' : '')
+        })
+
+        let str_komteg = ''
+        worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
+          str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
+        })
+
+        let str_komteg2 = ''
+        worker.comteg2 && JSON.parse(worker.comteg2).map((item, index)=> {
+          str_komteg2 = str_komteg2 + item.name + (index+1 !== JSON.parse(worker.comteg2).length ? ', ' : '')
+        })
+
+        let str_company = ''
+        worker.company && JSON.parse(worker.company).map((item, index)=> {
+          str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
+        })
+
 				const newWorker = {
           fio: worker.fio,
           telegram: worker.chatId, 
@@ -242,10 +287,10 @@ const Specialist = () => {
           skill: str_skill,
           promo: worker.promoId === '0' ? '' : worker.promoId, 
           rank: worker.rank, 
-          merch: worker.merch,  
-          company: worker.company, 
-          comteg: worker.comteg, 
-          comteg2: worker.comteg2, 
+          merch: str_merch,  
+          company: str_company, 
+          comteg: str_komteg, 
+          comteg2: str_komteg, 
           comment: worker.comment, 
           comment2: worker.comment2, 
           age: worker.age, 
