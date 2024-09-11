@@ -284,23 +284,23 @@ const Specialist = () => {
                                   <CTable align="middle" className="mb-0 border my-table" hover bordered>
                                     <CTableHead className='table-light'>
                                       <CTableRow>
-                                        <CTableHeaderCell className='my-th widthSpace'>№</CTableHeaderCell> 
+                                        <CTableHeaderCell className='my-th widthSpace my-td'>№</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace'>ФИО</CTableHeaderCell>  
                                         <CTableHeaderCell className='my-th widthSpace'>Телеграм</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace'>Телефон</CTableHeaderCell> 
-                                        <CTableHeaderCell className='my-th widthSpace'>Специальность</CTableHeaderCell>  
-                                        <CTableHeaderCell className='my-th widthSpace'>Телефон №2</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Город</CTableHeaderCell>                         
-                                        <CTableHeaderCell className='my-th widthSpace'>Навык</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Промокод</CTableHeaderCell>
+                                        <CTableHeaderCell className='my-th widthSpace'>Специальность</CTableHeaderCell> 
+                                        <CTableHeaderCell className='my-th widthSpace'>Город</CTableHeaderCell>   
+                                        <CTableHeaderCell className='my-th widthSpace'>Год рождения</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Проекты</CTableHeaderCell>
+                                        <CTableHeaderCell className='my-th widthSpace'>Телефон №2</CTableHeaderCell>                         
+                                        <CTableHeaderCell className='my-th widthSpace'>Навык</CTableHeaderCell>
+                                        <CTableHeaderCell className='my-th widthSpace'>Промокод</CTableHeaderCell>                                       
                                         <CTableHeaderCell className='my-th widthSpace'>Мерч</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Прокатная компания</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Комтег</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Комтег №2</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Комментарии</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Комментарии №2</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Год рождения</CTableHeaderCell>
+                                        <CTableHeaderCell className='my-th widthSpace'>Комментарии №2</CTableHeaderCell>                                        
                                         <CTableHeaderCell className='my-th widthSpace'>Рейтинг</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>ИНН</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Паспорт</CTableHeaderCell>
@@ -314,7 +314,7 @@ const Specialist = () => {
                                     <CTableBody>                                  
                                     {specialist.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index+1}>
-                                          <CTableDataCell className="text-center widthSpace">
+                                          <CTableDataCell className="text-center widthSpace my-td">
                                             {index+1}
                                           </CTableDataCell>
                                           <CTableDataCell onClick={()=>clickFio(item)} className="widthSpace" style={{cursor: 'pointer', textAlign: 'left'}}>
@@ -326,24 +326,27 @@ const Specialist = () => {
                                           <CTableDataCell className="text-center widthSpace">
                                             {item.phone}
                                           </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
+                                          <CTableDataCell className="text-center widthSpace" style={{textAlign: 'left'}}>
                                           {item.spec}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.phone2}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                             {item.city === 'null' ? '' : item.city}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.skill}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.promo}
+                                          {item.age}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.rank}
                                           </CTableDataCell>
+                                          <CTableDataCell className="text-center widthSpace">
+                                          {item.phone2}
+                                          </CTableDataCell> 
+                                          <CTableDataCell className="text-center widthSpace">
+                                          {item.skill}
+                                          </CTableDataCell>
+                                          <CTableDataCell className="text-center widthSpace">
+                                          {item.promo}
+                                          </CTableDataCell>                                         
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.merch}
                                           </CTableDataCell>
@@ -361,10 +364,7 @@ const Specialist = () => {
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.comment2}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.age}
-                                          </CTableDataCell>
+                                          </CTableDataCell>                                          
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.reyting}
                                           </CTableDataCell>

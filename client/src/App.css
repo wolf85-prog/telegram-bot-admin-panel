@@ -36,6 +36,13 @@ th.my-th {
     position: sticky;
     top: 0px;
 }
+
+td.my-td {
+    position: sticky;
+    left: 0;
+    min-width: 50px;
+    background-color: #131c21;
+}
   
 
 .scrooll-table {
