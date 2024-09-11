@@ -46,6 +46,8 @@ import TagsInput from "./../components/TagsInput/TagsInput"
 //Workers.js
 const Specialist = () => {
 
+  const { specialist, setSpecialist } = useUsersContext();
+
   const dispatch = useDispatch()
   const rigthbarShow = useSelector((state) => state.rigthbarShow)
 
@@ -97,7 +99,7 @@ const Specialist = () => {
 
     const fetchData = async () => {
 
-      let workers = await getSpecialist()
+      let workers = await getSpecCount(20, specialist.length)
       console.log("specialist: ", workers)
 
       workers.map(async (worker, i) => {
@@ -140,10 +142,12 @@ const Specialist = () => {
         }
         arrWorkers.push(newWorker)
 
-        setSpec(arrWorkers) 
+        //setSpec(arrWorkers) 
+        setSpecialist(arrWorkers)
       })  
 
       setLoading(false)
+      
     }
 
     fetchData();
@@ -189,40 +193,57 @@ const Specialist = () => {
   }
 
   const clickNext = async() => {
-
     //1 все специалисты
-		//let response = await getSpecialist();
-    //console.log("workers size: ", workers.length)
+		let response = await getSpecCount(20, specialist.length);
+    console.log("workers size: ", specialist.length)
 
-    // const arrayWorker = []
+    const arrayWorker = []
 		
-		// 	response.reverse().map(async (user) => {
-		// 		const newWorker = {
-		// 		  id: user.id,
-		// 		  userfamily: user.userfamily,
-		// 		  username: user.username,
-		// 		  phone: user.phone,
-		// 		  dateborn: user.dateborn,
-		// 		  city: user.city, 
-		// 		  companys: user.companys,
-		// 		  stag: user.stag,
-		// 		  worklist:  user.worklist,
-		// 		  chatId: user.chatId,
-		// 		  createDate: user.createdAt,
-		// 		  avatar: user.avatar,
-		// 		  from: user.from,
-		// 		  promoId: user.promoId,
-		// 		  block: user.block,
-		// 		  deleted: user.deleted,
-		// 		}
-		
-		// 		arrayWorker.push(newWorker)
-		// 	})    
+			response.reverse().map(async (worker) => {
+        const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+        const d2 = new Date(d)
 
-    //   console.log("Всего сейчас: ", arrayWorker.length)
+        const month = String(d2.getMonth()+1).padStart(2, "0");
+        const day = String(d2.getDate()).padStart(2, "0");
+        const chas = d2.getHours();
+        const min = String(d2.getMinutes()).padStart(2, "0");
+        
+        const newDate = `${day}.${month} ${chas}:${min}`;
+
+				const newWorker = {
+          fio: worker.fio,
+          telegram: worker.chatId, 
+          phone: worker.phone, 
+          phone2: worker.phone2,
+          spec: worker.specialization,
+          city: worker.city, 
+          skill: worker.skill,
+          promo: worker.promoId, 
+          rank: worker.rank, 
+          merch: worker.merch,  
+          company: worker.company, 
+          comteg: worker.comteg, 
+          comteg2: worker.comteg2, 
+          comment: worker.comment, 
+          comment2: worker.comment2, 
+          age: worker.age, 
+          reyting: worker.reyting, 
+          inn: worker.inn, 
+          passport: worker.passport, 
+          profile: worker.profile, 
+          dogovor: worker.dogovor ? '🟢' : '🔴', 
+          samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
+          passportScan: worker.passportScan, 
+          email: worker.email, 
+        }
+		
+				arrayWorker.push(newWorker)
+			})    
+
+      console.log("Всего сейчас: ", arrayWorker.length)
 			
-    //   setWorkers(arrayWorker)	
-    //   console.log("Ещё: ", arrayWorker.length)
+      setSpecialist(arrayWorker)	
+      console.log("Ещё: ", arrayWorker.length)
   }
 
   return (
@@ -234,7 +255,7 @@ const Specialist = () => {
 
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
-                    <h2>Специалисты</h2>
+                    {/* <h2>Специалисты</h2> */}
                     
                     <CRow className="mb-3">
                       <CCol sm={3} >
@@ -245,6 +266,9 @@ const Specialist = () => {
                     <CRow>
                       <CCol style={{textAlign: 'center'}}>
                         <CCard className="mb-4"> 
+                            <p style={{position: 'absolute', top: '-3px', left: '15px', fontSize: '14px', color: '#f3f3f3'}}>
+                              Всего: {specialist.length}
+                            </p>
                             <CCardBody>
                               {!showProfile ?
                               
@@ -256,7 +280,7 @@ const Specialist = () => {
                                     <CTableHead className='table-light'>
                                       <CTableRow>
                                         <CTableHeaderCell className='my-th widthSpace'>№</CTableHeaderCell> 
-                                        <CTableHeaderCell className='my-th'>ФИО</CTableHeaderCell>  
+                                        <CTableHeaderCell className='my-th widthSpace'>ФИО</CTableHeaderCell>  
                                         <CTableHeaderCell className='my-th widthSpace'>Телеграм</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace'>Телефон</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace'>Специальность</CTableHeaderCell>  
@@ -269,7 +293,7 @@ const Specialist = () => {
                                         <CTableHeaderCell className='my-th widthSpace'>Прокатная компания</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Комтег</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Комтег №2</CTableHeaderCell>
-                                        <CTableHeaderCell className='widthSpace'>Комментарии</CTableHeaderCell>
+                                        <CTableHeaderCell className='my-th widthSpace'>Комментарии</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Комментарии №2</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Год рождения</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Рейтинг</CTableHeaderCell>
@@ -283,7 +307,7 @@ const Specialist = () => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody>                                  
-                                    {spec.map((item, index) => (
+                                    {specialist.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index+1}>
                                           <CTableDataCell className="text-center widthSpace">
                                             {index+1}
@@ -363,11 +387,9 @@ const Specialist = () => {
 
                                         </CTableRow>
                                         ))
-                                      }
-                                  </CTableBody> 
-                                  {/* <div style={{display: 'flex', justifyContent: 'center' }}>
-                                    <img src={arrowDown} alt='' onClick={()=>clickNext()} style={{width: '50px', marginTop: '15px', cursor: 'pointer'}}></img>
-                                  </div>                   */}
+                                    }
+                                    
+                                  </CTableBody>                   
                                   </CTable>
                                 </div>
                                 
@@ -588,197 +610,15 @@ const Specialist = () => {
                               </div>
                               }
                             </CCardBody>
+
+                              <div style={{display: 'flex', justifyContent: 'center' }}>
+                                <img src={arrowDown} alt='' onClick={()=>clickNext()} style={{width: '50px', marginBottom: '15px', cursor: 'pointer'}}></img>
+                              </div> 
                           </CCard>
                         </CCol>
                     </CRow>
                   </Suspense>
             </CContainer>
-
-            <CModal
-              size="lg"
-              visible={visibleXL}
-              onClose={() => setVisibleXL(false)}
-              aria-labelledby="OptionalSizesExample1"
-            >
-              <CModalBody>
-                  
-                  <div>
-                      <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
-                        <rect width="250px" height="250px" fill="#007aff"></rect> 
-                      </svg>
-
-                      <div className="file-upload">
-                        <img src={addAvatar} alt="upload" style={{position: 'absolute', top: '115px', left: '115px', cursor: 'pointer', width: '50px', height: '50px'}}/>
-                        <input type="file" style={{position: 'absolute', top: '130px', left: '70px', opacity: '0', zIndex: '100'}}/>
-                      </div>
-                      
-                      <img src={Krestik} width={30} alt='' style={{position: 'absolute', top: '20px', left: '235px'}}/>
-                      <div style={{position: 'absolute', top: '5px', left: '275px', color: '#fff', fontSize: '33px', zIndex: '100'}}>
-                        {/* <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '5px', left: '275px'}}> */}
-                        <div className="text-field">
-                          <input type="text" name="fio" id="fio" value={fio} onChange={(e) => setFio(e.target.value)} style={{backgroundColor: '#1d1f2b', border: '0', color: '#f3f3f3'}}></input>
-                        </div>
-                        {/* </span> */}
-                      </div>
-                      
-                      <div style={{position: 'relative', height: '1100px'}}>
-                        {/* <div style={{position: 'absolute', top: '30px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Город</p>
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Дата </p>   
-                        </div>  */}
-                        {/* <div style={{position: 'absolute', top: '50px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} style={{width: '250px'}}/>
-                          </div>
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="age" id="age" value={age} onChange={(e) => setAge(e.target.value)} style={{width: '250px'}}/>
-                          </div>
-                        </div> */}
-
-                        <div style={{position: 'absolute', top: '95px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '510px'}}>Специальность</p>  
-                        </div> 
-                        <div style={{position: 'absolute', top: '115px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>     
-                          <div className="text-field">
-                            {/* <input className="text-field__input" type="text" name="speclist" id="speclist" value={speclist} onChange={(e) => setSpeclist(e.target.value)} style={{width: '510px'}}/> */}
-                            <TagsInput className="text-field__input" style={{width: '510px'}} speclist={speclist} setSpeclist={setSpeclist}/>
-                          </div>   
-                        </div>
-
-                        <div style={{position: 'absolute', top: '160px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Телефон №1</p>
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Телефон №2</p>   
-                        </div> 
-                        <div style={{position: 'absolute', top: '180px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/>
-                          </div>
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="phone2" id="phone2" value={phone2} onChange={(e) => setPhone2(e.target.value)} style={{width: '250px'}}/>
-                          </div>
-                        </div>
-
-                        <div style={{position: 'absolute', top: '225px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Telegram</p>
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Навык</p>   
-                        </div>                       
-                        <div style={{position: 'absolute', top: '245px', left: '260px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '510px'}}>                        
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="telegram" id="telegram" value={telegram} onChange={(e) => setTelegram(e.target.value)} style={{width: '250px'}}/>
-                          </div>
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="skill" id="skill" value={skill} onChange={(e) => setSkill(e.target.value)} style={{width: '250px'}}/>
-                          </div>  
-                        </div>
-
-                        <div style={{position: 'absolute', top: '290px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Рейтинг</p>
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Промокод</p>
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Проекты</p>   
-                        </div>
-
-                        <div style={{position: 'absolute', top: '310px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '250px'}}/>
-                          </div> 
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="promo" id="promo" value={promo} onChange={(e) => setPromo(e.target.value)} style={{width: '250px'}}/>
-                          </div>
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '250px'}}/>
-                          </div>    
-                        </div>
-
-                        <div style={{position: 'absolute', top: '355px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Мерч</p> 
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Прокатная компания</p>
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>ИНН</p>   
-                        </div>
-                        <div style={{position: 'absolute', top: '375px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="merch" id="merch" value={merch} onChange={(e) => setMerch(e.target.value)} style={{width: '250px'}}/>
-                          </div> 
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="company" id="company" value={company} onChange={(e) => setCompany(e.target.value)} style={{width: '250px'}}/>
-                          </div> 
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="inn" id="inn" value={inn} onChange={(e) => setInn(e.target.value)} style={{width: '250px'}}/>
-                          </div>    
-                        </div>
-
-                        <div style={{position: 'absolute', top: '420px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Комтег</p>
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Комтег №2</p>
-                          <p style={{fontSize: '12px', color: '#858282', width: '250px'}}>Email</p>   
-                        </div>
-                        <div style={{position: 'absolute', top: '440px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="comteg" id="comteg" value={comteg} onChange={(e) => setComteg(e.target.value)} style={{width: '250px'}}/>
-                          </div> 
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="comteg2" id="comteg2" value={comteg2} onChange={(e) => setComteg2(e.target.value)} style={{width: '250px'}}/>
-                          </div> 
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '250px'}}/>
-                          </div>     
-                        </div>
-
-                        <div style={{position: 'absolute', top: '485px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '770px'}}>Комментарий</p>   
-                        </div>
-                        <div style={{position: 'absolute', top: '505px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="comment" id="comment" value={comment} onChange={(e) => setComment(e.target.value)} style={{width: '770px'}}/>
-                          </div>     
-                        </div>
-
-                        <div style={{position: 'absolute', top: '550px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '770px'}}>Комментарий №2</p>   
-                        </div>
-                        <div style={{position: 'absolute', top: '570px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '770px'}}/>
-                          </div>    
-                        </div>
-
-                        <div style={{position: 'absolute', top: '615px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '770px'}}>Паспорт</p>   
-                        </div>
-                        <div style={{position: 'absolute', top: '635px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <div className="text-field">
-                            <textarea className="text-field__input" type="text" name="passport" id="passport" value={passport} onChange={(e) => setPassport(e.target.value)} style={{width: '770px', height: '350px', whiteSpace: 'pre-line'}}/>
-                          </div> 
-                        </div>
-
-
-                        <div style={{position: 'absolute', top: '990px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>                          
-                          <p style={{fontSize: '12px', color: '#858282', width: '50px'}}>Д</p>
-                          <p style={{fontSize: '12px', color: '#858282', width: '50px'}}>С</p> 
-                          <p style={{fontSize: '12px', color: '#858282', width: '650px'}}>Скан паспорта</p>   
-                        </div>
-                        <div style={{position: 'absolute', top: '1010px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '770px'}}>
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="dogovor" id="dogovor" value={dogovor} onChange={(e) => setDogovor(e.target.value)} style={{width: '50px'}}/>
-                          </div> 
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={samozanjatost} onChange={(e) => setSamozanjatost(e.target.value)} style={{width: '50px'}}/>
-                          </div> 
-                          <div className="text-field">
-                            <input className="text-field__input" type="text" name="passportScan" id="passportScan" value={passportScan} onChange={(e) => setPassportScan(e.target.value)} style={{width: '650px', overflow: 'hidden', textOverflow: 'ellipsis'}}/>
-                          </div> 
-                        </div>
-
-                        <div style={{position: 'absolute', top: '1065px', left: '0px', display: 'flex', flexDirection: 'row', justifyContent: 'center', width: '770px'}}>
-                          <CButton color="success">Сохранить</CButton>
-                        </div>
-
-                      </div>
-
-                      <img src={lock ? zamok : zamok2} onClick={()=>setLock(!lock)} style={{position: 'absolute', top: '15px', right: '15px', cursor: 'pointer', width: '15px', height: '19px'}}/>
-                  
-                  </div>
-              </CModalBody>
-            </CModal>
 
         </div>
         <AppFooter />

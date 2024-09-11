@@ -35,7 +35,7 @@ const routes = [
   { path: "/workers2", name: 'Workhub / Уведомления', Component: Workers2 },
   { path: '/dashboard2', name: 'Пункт управления / Renthub', Component: Admin2 },
   { path: "/chat3", name: 'Менеджеры 2.0', Component: Chats3 },
-  { path: "/specialist", name: 'Специалисты 2.0', Component: Specialist },
+  { path: "/specialist", name: 'Профиль', Component: Specialist },
 ]
 
 export default routes

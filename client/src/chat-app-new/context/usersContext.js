@@ -75,6 +75,7 @@ const UsersProvider = ({ children }) => {
 	}); 
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
 	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
+	const [specialist, setSpecialist] = useState([]); //все специалисты;
 
 	const [userRenthub, setUserRenthub] = useState( () => {
 		const savedUserRenthub = localStorage.getItem("userRenthub");
@@ -1858,6 +1859,8 @@ function isObjectEmpty(obj) {
 			setWorkers,
 			workersAll,
 			setWorkersAll,
+			specialist, 
+			setSpecialist,
 			addNewMessage2,
 			delWMessageContext,
 			countMessageWork,
