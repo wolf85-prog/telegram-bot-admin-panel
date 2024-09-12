@@ -49,9 +49,8 @@ const Specialist = () => {
   const { specialist, setSpecialist } = useUsersContext();
 
   const [specialistAll, setSpecialistAll] = useState([]);
-
-  const dispatch = useDispatch()
-  const rigthbarShow = useSelector((state) => state.rigthbarShow)
+  const [specialistCount, setSpecialistCount] = useState([]);
+  const [filterAll, setFilterAll] = useState([]);
 
   const [loading, setLoading]= useState(true);
   const [text, setText]= useState("");
@@ -90,9 +89,8 @@ const Specialist = () => {
 
   //поиск
   useEffect(() => {
-    //console.log("specialist", specialist)
 		const filteredData = specialistAll.filter(user=> (user.fio + user.telegram)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
-    setSpecialist(text === '' ? specialist : filteredData); 
+    setSpecialist(text === '' ? specialistCount : filteredData); 
     //console.log("specialist", specialist)
   }, [text]);
 
@@ -245,8 +243,8 @@ const Specialist = () => {
           var idA = a.id, idB = b.id 
           return idB-idA  //сортировка по возрастанию 
         })
+        setSpecialistCount(sortedWorker)
         setSpecialist(sortedWorker)
-        //setSpecialist(arrWorkers)
       })  
 
       setLoading(false)
@@ -353,6 +351,8 @@ const Specialist = () => {
         var fioA = a.id, fioB = b.id 
         return fioB-fioA  //сортировка по убыванию 
       })
+
+      //setSpecialistCount(sortedWorker)
       setSpecialist(sortedWorker)
     }
     
@@ -445,8 +445,7 @@ const Specialist = () => {
         return idB-idA  //сортировка по возрастанию 
       })
       setSpecialist(sortedWorker)
-      //setSpecialist(arrayWorker)	
-      //console.log("Ещё: ", arrayWorker.length)
+      setSpecialistCount(sortedWorker)
   }
 
   return (
@@ -531,7 +530,7 @@ const Specialist = () => {
                                           {item.spec ? (item.spec.length > 30 ? item.spec.substr(0, 30) + '...' : item.spec) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.city}
+                                          {item.city ? (item.city.length > 30 ? item.city.substr(0, 30) + '...' : item.city) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.age ? item.age.split('-')[0] : ''}
