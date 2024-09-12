@@ -333,7 +333,7 @@ const Specialist = () => {
                     <CRow>
                       <CCol style={{textAlign: 'center'}}>
                         <CCard className="mb-4"> 
-                            <p style={{position: 'absolute', top: '-3px', left: '15px', fontSize: '14px', color: '#f3f3f3'}}>
+                            <p style={{position: 'absolute', top: '-18px', right: '15px', fontSize: '14px', color: '#f3f3f3'}}>
                               Всего: {specialistAll.length}
                             </p>
                             <CCardBody>
