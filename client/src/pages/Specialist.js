@@ -85,12 +85,16 @@ const Specialist = () => {
   const [samozanjatost, setSamozanjatost] = useState('');
   const [passportScan, setPassportScan] = useState('');
 
+  const [countPress, setCountPress] = useState(0);
+  const [countPressTG, setCountPressTG] = useState(0);
 
   //поиск
-  // useEffect(() => {
-	// 	const filteredData = pretendents.filter(user=> (user.project + user.workerFamily + user.workerName)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
-  //   setSpec(text === '' ? pretendents : filteredData) 
-  // }, [text]);
+  useEffect(() => {
+    //console.log("specialist", specialist)
+		const filteredData = specialistAll.filter(user=> (user.fio + user.telegram)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+    setSpecialist(text === '' ? specialist : filteredData); 
+    //console.log("specialist", specialist)
+  }, [text]);
 
 
   //-----------------------------------------------------------------------------------------
@@ -100,23 +104,82 @@ const Specialist = () => {
     const arrWorkers = []
 
     const fetchData = async () => {
+      // 1 Все специалисты
       const res = await getSpecialist()
-      //console.log("specialistAll: ", res)
-      setSpecialistAll(res)
+      let arrAllWorkers = []
+      res.map(async (worker, i) => {
+        let str_spec = ''
+        worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
+          str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
+        })
 
+        let str_skill = ''
+        worker.skill && JSON.parse(worker.skill).map((item, index)=> {
+          str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
+        })
+
+        let str_merch = ''
+        worker.skill && JSON.parse(worker.merch).map((item, index)=> {
+          str_merch = str_merch + item.name + (index+1 !== JSON.parse(worker.merch).length ? ', ' : '')
+        })
+
+        let str_komteg = ''
+        worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
+          str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
+        })
+
+        let str_komteg2 = ''
+        worker.comteg2 && JSON.parse(worker.comteg2).map((item, index)=> {
+          str_komteg2 = str_komteg2 + item.name + (index+1 !== JSON.parse(worker.comteg2).length ? ', ' : '')
+        })
+
+        let str_company = ''
+        worker.company && JSON.parse(worker.company).map((item, index)=> {
+          str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
+        })
+        const newWorker = {
+          id: worker.id,
+          fio: worker.fio,
+          telegram: worker.chatId, 
+          phone: worker.phone, 
+          phone2: worker.phone2,
+          spec: str_spec,
+          city: worker.city, 
+          skill: str_skill,
+          promo: worker.promoId === '0' ? '' : worker.promoId, 
+          rank: worker.rank, 
+          merch: str_merch,  
+          company: str_company, 
+          comteg: str_komteg, 
+          comteg2: str_komteg2, 
+          comment: worker.comment, 
+          comment2: worker.comment2, 
+          age: worker.age, 
+          reyting: worker.reyting, 
+          inn: worker.inn, 
+          passport: worker.passport, 
+          profile: worker.profile, 
+          dogovor: worker.dogovor ? '🟢' : '🔴', 
+          samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
+          passportScan: worker.passportScan, 
+          email: worker.email, 
+        }
+        arrAllWorkers.push(newWorker)
+      }) 
+      console.log("specialistAll: ", res)
+      setSpecialistAll(arrAllWorkers)
+
+      // 2 специалисты 20 чел.
       let workers = await getSpecCount(20, specialist.length)
       console.log("specialist: ", workers)
 
       workers.map(async (worker, i) => {
-
         const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
         const d2 = new Date(d)
-
         const month = String(d2.getMonth()+1).padStart(2, "0");
         const day = String(d2.getDate()).padStart(2, "0");
         const chas = d2.getHours();
         const min = String(d2.getMinutes()).padStart(2, "0");
-        
         const newDate = `${day}.${month} ${chas}:${min}`;
 
         let str_spec = ''
@@ -150,6 +213,7 @@ const Specialist = () => {
         })
 
         const newWorker = {
+          id: worker.id,
           fio: worker.fio,
           telegram: worker.chatId, 
           phone: worker.phone, 
@@ -177,9 +241,12 @@ const Specialist = () => {
         }
         arrWorkers.push(newWorker)
 
-        //setSpec(arrWorkers) 
-        //console.log("arrWorkers: ", arrWorkers)
-        setSpecialist(arrWorkers)
+        const sortedWorker = [...arrWorkers].sort((a, b) => {       
+          var idA = a.id, idB = b.id 
+          return idB-idA  //сортировка по возрастанию 
+        })
+        setSpecialist(sortedWorker)
+        //setSpecialist(arrWorkers)
       })  
 
       setLoading(false)
@@ -229,6 +296,69 @@ const Specialist = () => {
     window.prompt("", text);
   }
 
+  //сортировка по ФИО
+  const onSortFio = () => {
+    setCountPress(countPress + 1)
+    
+    if (countPress + 1 >= 3) {
+      setCountPress(0)
+    }
+    console.log("check sort", countPress + 1)
+
+    if (countPress + 1 === 1) {
+      const sortedWorker = [...specialist].sort((a, b) => {       
+        var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
+        return (fioA < fioB) ? -1 : (fioA > fioB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSpecialist(sortedWorker)
+    } else if (countPress + 1 === 2) {
+      const sortedWorker = [...specialist].sort((a, b) => {       
+        var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
+        return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSpecialist(sortedWorker)
+    } else {
+      const sortedWorker = [...specialist].sort((a, b) => {       
+        var fioA = a.id, fioB = b.id 
+        return fioB-fioA  //сортировка по убыванию 
+      })
+      setSpecialist(sortedWorker)
+    }
+    
+  }
+
+  //сортировка по telegram
+  const onSortTG = () => {
+    setCountPressTG(countPressTG + 1)
+    
+    if (countPressTG + 1 >= 3) {
+      setCountPressTG(0)
+    }
+    console.log("check sort", countPressTG + 1)
+
+    if (countPressTG + 1 === 1) {
+      const sortedWorker = [...specialist].sort((a, b) => {       
+        var tgA = a.telegram, tgB = b.telegram 
+        return (tgA < tgB) ? -1 : (tgA > tgB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSpecialist(sortedWorker)
+    } else if (countPressTG + 1 === 2) {
+      const sortedWorker = [...specialist].sort((a, b) => {       
+        var tgA = a.telegram, tgB = b.telegram 
+        return (tgA > tgB) ? -1 : (tgA < tgB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSpecialist(sortedWorker)
+    } else {
+      const sortedWorker = [...specialist].sort((a, b) => {       
+        var fioA = a.id, fioB = b.id 
+        return fioB-fioA  //сортировка по убыванию 
+      })
+      setSpecialist(sortedWorker)
+    }
+    
+  }
+
+  //ЕЩЁ
   const clickNext = async() => {
     //1 все специалисты
 		let response = await getSpecCount(20, specialist.length);
@@ -278,6 +408,7 @@ const Specialist = () => {
         })
 
 				const newWorker = {
+          id: worker.id,
           fio: worker.fio,
           telegram: worker.chatId, 
           phone: worker.phone, 
@@ -307,10 +438,15 @@ const Specialist = () => {
 				arrayWorker.push(newWorker)
 			})    
 
-      console.log("Всего сейчас: ", arrayWorker.length)
+      //console.log("Всего сейчас: ", arrayWorker.length)
 			
-      setSpecialist(arrayWorker)	
-      console.log("Ещё: ", arrayWorker.length)
+      const sortedWorker = [...arrayWorker].sort((a, b) => {       
+        var idA = a.id, idB = b.id 
+        return idB-idA  //сортировка по возрастанию 
+      })
+      setSpecialist(sortedWorker)
+      //setSpecialist(arrayWorker)	
+      //console.log("Ещё: ", arrayWorker.length)
   }
 
   return (
@@ -344,12 +480,14 @@ const Specialist = () => {
                                 <CSpinner/> :
                                 <div className='scrooll-table'>
                                   <div className="table-head-content"></div>
+                                  <div className="table-head-content2"></div>
+                                  {/* <div className="table-col-content"></div> */}
                                   <CTable align="middle" className="mb-0 border my-table" hover bordered>
                                     <CTableHead className='table-light'>
                                       <CTableRow>
-                                        <CTableHeaderCell className='my-th widthSpace'>№</CTableHeaderCell> 
-                                        <CTableHeaderCell className='my-th widthSpace'>ФИО</CTableHeaderCell>  
-                                        <CTableHeaderCell className='my-th widthSpace'>Телеграм</CTableHeaderCell> 
+                                        <CTableHeaderCell className='myid-th widthSpace'>№</CTableHeaderCell> 
+                                        <CTableHeaderCell className='myfio-th widthSpace' onClick={onSortFio}>ФИО</CTableHeaderCell>  
+                                        <CTableHeaderCell className='my-th widthSpace' onClick={onSortTG}>Телеграм</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace'>Телефон</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace'>Специальность</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace'>Город</CTableHeaderCell>   
@@ -377,10 +515,10 @@ const Specialist = () => {
                                     <CTableBody >                                  
                                     {specialist.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index+1}>
-                                          <CTableDataCell className="text-center widthSpace">
+                                          <CTableDataCell className="text-center widthSpace my-td">
                                             {index+1}
                                           </CTableDataCell>
-                                          <CTableDataCell onClick={()=>clickFio(item)} className="widthSpace" style={{cursor: 'pointer', textAlign: 'left'}}>
+                                          <CTableDataCell onClick={()=>clickFio(item)} className="widthSpace myfio-td" style={{cursor: 'pointer', textAlign: 'left'}}>
                                           {item.fio ? (item.fio.length > 30 ? item.fio.substr(0, 30) + '...' : item.fio) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
@@ -390,13 +528,13 @@ const Specialist = () => {
                                             {item.phone}
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.spec ? (item.spec.length > 100 ? item.spec.substr(0, 100) + '...' : item.spec) : ''}
+                                          {item.spec ? (item.spec.length > 30 ? item.spec.substr(0, 30) + '...' : item.spec) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.city}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.age}
+                                          {item.age ? item.age.split('-')[0] : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.rank}
@@ -414,19 +552,19 @@ const Specialist = () => {
                                           {item.merch}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.company}
+                                          {item.company ? (item.company.length > 20 ? item.company.substr(0, 20) + '...' : item.company) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.comteg}
+                                          {item.comteg ? (item.comteg.length > 30 ? item.comteg.substr(0, 30) + '...' : item.comteg) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.comteg2}
+                                          {item.comteg2 ? (item.comteg2.length > 30 ? item.comteg2.substr(0, 30) + '...' : item.comteg2) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.comment ? (item.comment.length > 50 ? item.comment.substr(0, 50) + '...' : item.comment) : ''}
+                                          {item.comment ? (item.comment.length > 30 ? item.comment.substr(0, 30) + '...' : item.comment) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.comment2 ? (item.comment2.length > 50 ? item.comment2.substr(0, 50) + '...' : item.comment2) : ''}
+                                          {item.comment2 ? (item.comment2.length > 30 ? item.comment2.substr(0, 30) + '...' : item.comment2) : ''}
                                           </CTableDataCell>                                         
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.reyting}
@@ -435,10 +573,10 @@ const Specialist = () => {
                                           {item.inn}
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.passport ? (item.passport.length > 50 ? item.passport.substr(0, 50) + '...' : item.passport) : ''}
+                                          {item.passport ? (item.passport.length > 30 ? item.passport.substr(0, 30) + '...' : item.passport) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.profile ? (item.profile.length > 60 ? item.profile.substr(0, 60) + '...' : item.profile) : ''}
+                                          {item.profile ? (item.profile.length > 30 ? item.profile.substr(0, 30) + '...' : item.profile) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.dogovor}

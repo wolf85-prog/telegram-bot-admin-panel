@@ -35,6 +35,29 @@
     right: 16px;
     height: 40px;
     background: #2b3337;
+    z-index: 1;
+}
+
+.table-head-content2 {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 60px;
+  height: 40px;
+  background: #2b3337;
+  z-index: 2;
+}
+
+.table-col-content {
+  position: absolute;
+  top: 60px;
+  /* left: 0px; */
+  height: 555px;
+  background: #131c21;
+  z-index: 0;
+  width: 51px;
+  border-left: 1px solid #242c31;
+  border-right: 1px solid #242c31;
 }
   
   
@@ -43,13 +66,40 @@ th.my-th {
     background: #2b3337;
     position: sticky;
     top: 0px;
+    z-index: 1;
 }
+
+th.myid-th {
+  background: #2b3337;
+  position: sticky;
+  left: 0px;
+  top: 0px;
+  min-width: 50px;
+  z-index: 2;
+}
+
+th.myfio-th {
+  background: #2b3337;
+  position: sticky;
+  top: 0px;
+  min-width: 100px;
+  left: 50px;
+  z-index: 2;
+}
+
 
 td.my-td {
     position: sticky;
     left: 0;
-    min-width: 50px;
+    min-width: 40px;
     background-color: #131c21;
+}
+
+td.myfio-td {
+  position: sticky;
+  left: 50px;
+  /* min-width: 50px; */
+  background-color: #131c21;
 }
   
 
