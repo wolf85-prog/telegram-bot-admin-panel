@@ -101,11 +101,11 @@ const Specialist = () => {
 
     const fetchData = async () => {
       const res = await getSpecialist()
-      //console.log("specialistAll: ", res.length)
+      //console.log("specialistAll: ", res)
       setSpecialistAll(res)
 
       let workers = await getSpecCount(20, specialist.length)
-      //console.log("specialist: ", workers)
+      console.log("specialist: ", workers)
 
       workers.map(async (worker, i) => {
 
@@ -232,7 +232,7 @@ const Specialist = () => {
   const clickNext = async() => {
     //1 все специалисты
 		let response = await getSpecCount(20, specialist.length);
-    console.log("workers size: ", specialist.length)
+    //console.log("workers size: ", response)
 
     const arrayWorker = []
 		
@@ -343,6 +343,7 @@ const Specialist = () => {
                                       
                                 <CSpinner/> :
                                 <div className='scrooll-table'>
+                                  <div className="table-head-content"></div>
                                   <CTable align="middle" className="mb-0 border my-table" hover bordered>
                                     <CTableHead className='table-light'>
                                       <CTableRow>
@@ -373,7 +374,7 @@ const Specialist = () => {
                                         <CTableHeaderCell className='my-th widthSpace'>Почта</CTableHeaderCell>
                                       </CTableRow>
                                     </CTableHead>
-                                    <CTableBody>                                  
+                                    <CTableBody >                                  
                                     {specialist.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index+1}>
                                           <CTableDataCell className="text-center widthSpace">
@@ -389,7 +390,7 @@ const Specialist = () => {
                                             {item.phone}
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.spec}
+                                          {item.spec ? (item.spec.length > 100 ? item.spec.substr(0, 100) + '...' : item.spec) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.city}
@@ -421,23 +422,23 @@ const Specialist = () => {
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.comteg2}
                                           </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.comment}
+                                          <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
+                                          {item.comment ? (item.comment.length > 50 ? item.comment.substr(0, 50) + '...' : item.comment) : ''}
                                           </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.comment2}
-                                          </CTableDataCell>                                          
+                                          <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
+                                          {item.comment2 ? (item.comment2.length > 50 ? item.comment2.substr(0, 50) + '...' : item.comment2) : ''}
+                                          </CTableDataCell>                                         
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.reyting}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.inn}
                                           </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.passport}
+                                          <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
+                                          {item.passport ? (item.passport.length > 50 ? item.passport.substr(0, 50) + '...' : item.passport) : ''}
                                           </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.profile}
+                                          <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
+                                          {item.profile ? (item.profile.length > 60 ? item.profile.substr(0, 60) + '...' : item.profile) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.dogovor}
