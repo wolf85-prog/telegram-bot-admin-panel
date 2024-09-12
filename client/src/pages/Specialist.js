@@ -27,6 +27,7 @@ import {
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
 import { getSpecialist, getSpecCount } from './../http/specAPI'
+import { getWContacts} from '../http/workerAPI'
 
 import Close from "../assets/images/close.svg"
 import zamok from "../assets/images/замок.png"
@@ -47,10 +48,13 @@ import TagsInput from "./../components/TagsInput/TagsInput"
 const Specialist = () => {
 
   const { specialist, setSpecialist } = useUsersContext();
+  const { userWorkers: specusers } = useUsersContext();
 
   const [specialistAll, setSpecialistAll] = useState([]);
   const [specialistCount, setSpecialistCount] = useState([]);
   const [filterAll, setFilterAll] = useState([]);
+
+  const [userbots, setUserbots] = useState([]);
 
   const [loading, setLoading]= useState(true);
   const [text, setText]= useState("");
@@ -63,6 +67,7 @@ const Specialist = () => {
   const [fio, setFio] = useState('');
   const [city, setCity] = useState([]);
   const [age, setAge] = useState('');
+  const [age2, setAge2] = useState(0);
   const [speclist, setSpeclist] = useState([]);
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
@@ -83,6 +88,8 @@ const Specialist = () => {
   const [dogovor, setDogovor] = useState('');
   const [samozanjatost, setSamozanjatost] = useState('');
   const [passportScan, setPassportScan] = useState('');
+  const [nik, setNik] = useState('');
+  const [dateReg, setDateReg] = useState('');
 
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
@@ -247,6 +254,9 @@ const Specialist = () => {
         setSpecialist(sortedWorker)
       })  
 
+      let wuserbots = await getWContacts();
+      setUserbots(wuserbots)
+
       setLoading(false)
       
     }
@@ -256,38 +266,44 @@ const Specialist = () => {
   },[])
 
   const clickFio = (worker)=> {
-    //console.log(worker)
+    console.log(worker)
     //setVisibleXL(true)
     setShowProfile(true)
     setModalWorker(worker)
 
+    const currentYear = new Date().getFullYear()
+
     setFio(worker.fio)
-    setCity(worker.city.split(','))
-    setAge(worker.age)
-    setSpeclist(worker.spec)
+    setCity(worker.city ? worker.city.split(',') : [])
+    setAge(worker.age ? worker.age.split('-')[0] : '')
+    setAge2(parseInt(currentYear) - parseInt(worker.age ? worker.age.split('-')[0] : 0))
+
+    setSpeclist(worker.spec ? worker.spec.split(', ') : [])
 
     setPhone(worker.phone)
     setPhone2(worker.phone2)
     setTelegram(worker.telegram)
-    // setSkill(worker.skill.split(','))
+    setSkill(worker.skill ? worker.skill.split(', ') : [])
 
-    // setReyting(worker.reyting)
-    // setPromo(worker.promo)
-    // setRank(worker.rank)
-    // setMerch(worker.merch.split(','))
-    // setCompany(worker.company.split(','))
-    // setInn(worker.inn)
-    // setComteg(worker.comteg.split(','))
-    // setComteg2(worker.comteg2.split(','))
-    // setEmail(worker.email)
-    // setComment(worker.comment)
-    // setComment2(worker.comment)
+    setReyting(worker.reyting === null ? '' : worker.reyting)
+    setPromo(worker.promo)
+    setRank(worker.rank === null ? '' : worker.rank)
+    setMerch(worker.merch ? worker.merch.split(',') : [])
+    setCompany(worker.company ? worker.company.split(',') : [])
+    setInn(worker.inn === null ? '' : worker.inn)
+    setComteg(worker.comteg ? worker.comteg.split(',') : [])
+    setComteg2(worker.comteg2 ? worker.comteg2.split(',') : [])
+    setEmail(worker.email)
+    setComment(worker.comment === null ? '' : worker.comment)
+    setComment2(worker.comment2 === null ? '' : worker.comment2)
 
-    // setPassport(worker.passport)
-    // setDogovor(worker.dogovor)
-    // setSamozanjatost(worker.samozanjatost)
-    // setPassportScan(worker.passportScan)
-
+    setPassport(worker.passport)
+    setDogovor(worker.dogovor)
+    setSamozanjatost(worker.samozanjatost)
+    setPassportScan(worker.passportScan)
+    setNik(userbots.find((user) => user.chatId === worker.telegram)?.username)
+    setDateReg(userbots.find((user) => user.chatId === worker.telegram)?.createdAt)
+    console.log("user", userbots.find((user) => user.chatId === worker.telegram))
   }
 
   const copyText = (text)=> {
@@ -625,7 +641,7 @@ const Specialist = () => {
                                   <label>В системе</label>
                                   <div style={{display: 'flex', justifyContent: 'center'}}>
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '250px'}}/>
+                                      <input className="text-field__input" type="text" name="dateReg" id="dateReg" value={dateReg && dateReg.length >0 ? dateReg.split('-')[2].split('T')[0] + '.' + dateReg.split('-')[1] + '.' + dateReg.split('-')[0] : ''} style={{width: '250px'}}/>
                                     </div>
                                   </div> 
 
@@ -715,21 +731,23 @@ const Specialist = () => {
 
                                   <label>Комментарии</label>
                                   <div className="text-field">
-                                    <textarea className="text-field__input" type="text" name="comment" id="comment" value={comment} onChange={(e) => setComment(e.target.value)} style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '.375rem'}}/>
+                                    <textarea className="text-field__input" type="text" name="comment" id="comment" value={comment} onChange={(e) => setComment(e.target.value)} style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '.375rem', textAlign: 'left'}}/>
                                   </div> 
                                   
                                 </div>
 {/* 3 */}
                                 <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                   <div style={{display: 'flex'}}>
+                                    {/* возраст */}
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="age" id="age" value='25' onChange={(e) => setAge(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                      <input className="text-field__input" type="text" name="age" id="age" value={age2}  onChange={(e) => setAge2(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
+                                    {/* год рождения */}
                                     <div className="text-field">
                                       <input className="text-field__input" type="text" name="age" id="age" value={age} onChange={(e) => setAge(e.target.value)} style={{width: '80px', marginRight: '8px'}}/>
                                     </div>
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
                                     <div className="text-field">
                                       <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
@@ -770,13 +788,14 @@ const Specialist = () => {
 
                                   <label>Комментарии 2.0</label>
                                   <div className="text-field">
-                                    <textarea className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '.375rem'}}/>
+                                    <textarea className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '.375rem', textAlign: 'left'}}/>
                                   </div> 
                                 </div>
 
 {/* 4 */}
                                 <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '250px'}}>
 
+                                  {/* phone */}
                                   <div className="text-field">
                                     <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
@@ -786,9 +805,10 @@ const Specialist = () => {
                                     <input className="text-field__input" type="text" name="telegram" id="telegram" value={telegram} onChange={(e) => setTelegram(e.target.value)} style={{width: '250px'}}/>
                                   </div>
 
+                                  {/* ник */}
                                   <label> </label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value='@U.L.E.Y_T.E.A.M' onChange={(e) => setEmail(e.target.value)} style={{width: '250px'}}/>
+                                    <input className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
 
                                   <label>ИНН</label>
@@ -796,6 +816,7 @@ const Specialist = () => {
                                     <input className="text-field__input" type="text" name="inn" id="inn" value={inn} onChange={(e) => setInn(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
 
+                                  {/* email */}
                                   <label></label>
                                   <div className="text-field">
                                     <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '250px'}}/>
@@ -806,6 +827,7 @@ const Specialist = () => {
                                     <input className="text-field__input" type="text" name="promo" id="promo" value={promo} onChange={(e) => setPromo(e.target.value)} style={{width: '250px'}}/>
                                   </div>
 
+                                  {/* скан паспорта */}
                                   <label></label>
                                   <div className="text-field">
                                     <input className="text-field__input" type="text" name="passportScan" id="passportScan" value={passportScan} onChange={(e) => setPassportScan(e.target.value)} style={{width: '250px', overflow: 'hidden', textOverflow: 'ellipsis'}}/>
