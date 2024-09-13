@@ -568,6 +568,11 @@ const Specialist = () => {
 
     setTelegram(result);
   };
+
+  const changeSpec = () => {
+    setSpeclist()
+    setShowSpec(false)
+  }
   
 
   return (
@@ -825,7 +830,7 @@ const Specialist = () => {
                                     </ul>
                                     <div style={{display: showSpec ? 'block' : 'none'}} className='spec-style'>
                                       <ul>
-                                        <li onClick={()=>setShowSpec(false)}>Звук</li>
+                                        <li onClick={changeSpec}>Звук</li>
                                         <li onClick={()=>setShowSpec(false)}>Свет</li>
                                         <li onClick={()=>setShowSpec(false)}>Видео</li>
                                         <li onClick={()=>setShowSpec(false)}>Item 4</li>
