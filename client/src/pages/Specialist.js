@@ -252,12 +252,20 @@ const Specialist = () => {
         }
         arrWorkers.push(newWorker)
 
-        const sortedWorker = [...arrWorkers].sort((a, b) => {       
-          var idA = a.id, idB = b.id 
-          return idB-idA  //сортировка по возрастанию 
-        })
-        setSpecialistCount(sortedWorker)
-        setSpecialist(sortedWorker)
+        //если элемент массива последний
+				if (i === workers.length-1) {
+          const sortedWorker = [...arrWorkers].sort((a, b) => {       
+            var idA = a.id, idB = b.id 
+            return idB-idA  //сортировка по возрастанию 
+          })
+
+					setSpecialistCount(sortedWorker)
+          setSpecialist(sortedWorker)
+					
+					//сохранить кэш
+					localStorage.setItem("specialist", JSON.stringify(sortedWorker));
+				}
+
       })  
 
       let wuserbots = await getWContacts();
@@ -520,14 +528,19 @@ const Specialist = () => {
   const addCity = (e) => { 
     var cit = e.target.value
     console.log(cit)
+    let arr = []
     setVisibleSm(false)
+    
     if (cit === '1') {
-      const arr = city.push('Москва')
-      console.log("arr: ", arr)
+      arr.push('Москва')
       setCity(arr)
-    } else if (cit === '2') {
-      const arr = city.push('Санкт-Петербург')
-      console.log("arr: ", arr)
+    } 
+    else if (cit === '2') {
+      arr.push('Санкт-Петербург')
+      setCity(arr)
+    } 
+    else if (cit === '3') {
+      arr.push('Майкоп')
       setCity(arr)
     }
   }
@@ -777,8 +790,8 @@ const Specialist = () => {
                                 <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                   {/* Город */}
                                   <div className="text-field" onClick={()=>setVisibleSm(true)}>
-                                    <TagsInput className="text-field__input"  style={{width: '510px'}}  tags={city}/>
-                                    {/* <input className="text-field__input" type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} style={{width: '320px'}}/> */}
+                                    {/*<TagsInput className="text-field__input"  style={{width: '510px'}}  tags={city}/>*/}
+                                    <input className="text-field__input" type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} style={{width: '320px'}}/> 
                                   </div>
 
                                   <label>Специальность</label>

@@ -5,7 +5,7 @@
     right: 0;
     left: 0;
     display: none;
-    background: rgba(26,24,24, 0.88);  
+    background: rgba(12,12,12, 0.92);  
     z-index: 101;
     animation: showModal 0.25s linear forwards;
     /* animation-delay: 1s; */
@@ -13,7 +13,7 @@
 
 .myModalContent {
     padding: 25px;
-    background: #272727;
+    background: #010101;
     border-radius: 16px;
     min-width: 200px;
     color: #fff;
