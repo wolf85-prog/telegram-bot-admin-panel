@@ -23,6 +23,7 @@ import {
   CModalHeader,
   CModalTitle,
   CModalBody,
+  CFormSelect,
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
@@ -43,6 +44,9 @@ import Disketa from "./../assets/images/disketa.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 
 import TagsInput from "./../components/TagsInput/TagsInput"
+import MyModalSmall from 'src/components/MyModalSmall/MyModalSmall';
+import MyModal from 'src/components/MyModal/MyModal';
+import { array } from 'prop-types';
 
 //Workers.js
 const Specialist = () => {
@@ -59,9 +63,8 @@ const Specialist = () => {
   const [loading, setLoading]= useState(true);
   const [text, setText]= useState("");
   const [spec, setSpec] = useState([]); 
-  const [visibleXL, setVisibleXL] = useState(false)
+  const [visibleSm, setVisibleSm] = useState(false)
   const [modalWorker, setModalWorker] = useState({})
-  const [lock, setLock] = useState(true)
   const [showProfile, setShowProfile] = useState(false)
 
   const [fio, setFio] = useState('');
@@ -93,6 +96,9 @@ const Specialist = () => {
 
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
+  const [countPressCity, setCountPressCity] = useState(0);
+
+  const [blockProfile, setBlockProfile] = useState(true)
 
   //поиск
   useEffect(() => {
@@ -374,6 +380,39 @@ const Specialist = () => {
     
   }
 
+  //сортировка по Городу
+  const onSortCity = () => {
+    setCountPressCity(countPressCity + 1)
+    
+    if (countPressCity + 1 >= 3) {
+      setCountPressCity(0)
+    }
+    //console.log("check sort", countPressTG + 1)
+
+    if (countPressCity + 1 === 1) {
+      const sortedWorker = [...specialist].sort((a, b) => {       
+        var cityA = a.city, cityB = b.city
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSpecialist(sortedWorker)
+    } else if (countPressCity + 1 === 2) {
+      const sortedWorker = [...specialist].sort((a, b) => {       
+        var cityA = a.city, cityB = b.city
+        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSpecialist(sortedWorker)
+    } else {
+      const sortedWorker = [...specialist].sort((a, b) => {       
+        var idA = a.id, idB = b.id 
+        return idB-idA  //сортировка по убыванию 
+      })
+
+      //setSpecialistCount(sortedWorker)
+      setSpecialist(sortedWorker)
+    }
+    
+  }
+
   //ЕЩЁ
   const clickNext = async() => {
     //1 все специалисты
@@ -464,6 +503,46 @@ const Specialist = () => {
       setSpecialistCount(sortedWorker)
   }
 
+  const saveData = (e, id) => {
+    setFio(e.target.value)
+    //setId(id)
+
+  }
+
+  const closeProfile = () => { 
+    setShowProfile(false)
+  }
+
+  const blockedProfile = () => { 
+    setBlockProfile(!blockProfile)
+  }
+
+  const addCity = (e) => { 
+    var cit = e.target.value
+    console.log(cit)
+    setVisibleSm(false)
+    if (cit === '1') {
+      const arr = city.push('Москва')
+      console.log("arr: ", arr)
+      setCity(arr)
+    } else if (cit === '2') {
+      const arr = city.push('Санкт-Петербург')
+      console.log("arr: ", arr)
+      setCity(arr)
+    }
+  }
+
+  useEffect(() => {
+    console.log("city: ", city)
+    // try {
+    //   Specialist.update({fio: fio}, {where: {id: 1}})
+
+    //   return res.status(200).json("Projects has been sent successfully");
+    // } catch (error) {
+    //     return res.status(500).json(error.message);
+    // }
+  }, [city]);
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -505,7 +584,7 @@ const Specialist = () => {
                                         <CTableHeaderCell className='my-th widthSpace' onClick={onSortTG}>Телеграм</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace'>Телефон</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace'>Специальность</CTableHeaderCell> 
-                                        <CTableHeaderCell className='my-th widthSpace'>Город</CTableHeaderCell>   
+                                        <CTableHeaderCell className='my-th widthSpace' onClick={onSortCity}>Город</CTableHeaderCell>   
                                         <CTableHeaderCell className='my-th widthSpace'>Год рождения</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Проекты</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Телефон №2</CTableHeaderCell>                         
@@ -685,20 +764,20 @@ const Specialist = () => {
                                   {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '285px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
-                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e) => setFio(e.target.value)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3'}}></input>
+                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>saveData(e)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
                                     <div>
                                       <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={lock ? zamok : zamok2} onClick={()=>setLock(!lock)} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Close} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Close} onClick={closeProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
                                     </div>
                                   </div>
 {/* 2 */}
                                 <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                   {/* Город */}
-                                  <div className="text-field">
-                                    <TagsInput className="text-field__input" style={{width: '510px'}} tags={city} setTags={setCity}/>
+                                  <div className="text-field" onClick={()=>setVisibleSm(true)}>
+                                    <TagsInput className="text-field__input"  style={{width: '510px'}}  tags={city}/>
                                     {/* <input className="text-field__input" type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} style={{width: '320px'}}/> */}
                                   </div>
 
@@ -846,7 +925,23 @@ const Specialist = () => {
                     </CRow>
                   </Suspense>
             </CContainer>
-
+            <MyModalSmall
+              size="sm"
+              visible={visibleSm}
+              setVisible={setVisibleSm}
+              onClose={() => setVisibleSm(false)}
+            >
+              <CFormSelect 
+                aria-label="Default select example"
+                options={[
+                  'Выбрать город',
+                  { label: 'Москва', value: '1' },
+                  { label: 'Санкт-Петербург', value: '2' },
+                  { label: 'Майкоп', value: '3'}
+                ]}
+                onChange={addCity}
+              />
+            </MyModalSmall>
         </div>
         <AppFooter />
       </div>

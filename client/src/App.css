@@ -67,6 +67,7 @@ th.my-th {
     position: sticky;
     top: 0px;
     z-index: 1;
+    cursor: pointer;
 }
 
 th.myid-th {

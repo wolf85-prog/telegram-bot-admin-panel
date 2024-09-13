@@ -19,7 +19,7 @@
     color: #fff;
     position: relative;
     z-index: 101;
-    height: 170px;
+    height: auto;
 }
 
 .myModal.active {
