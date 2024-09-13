@@ -49,6 +49,10 @@ import MyModalSmall from 'src/components/MyModalSmall/MyModalSmall';
 import MyModal from 'src/components/MyModal/MyModal';
 import { array } from 'prop-types';
 
+import MySelect from 'src/components/Select/Select';
+import MyDropdown from 'src/components/Dropdown/Dropdown';
+import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
+
 //Workers.js
 const Specialist = () => {
 
@@ -67,6 +71,7 @@ const Specialist = () => {
   const [visibleSm, setVisibleSm] = useState(false)
   const [modalWorker, setModalWorker] = useState({})
   const [showProfile, setShowProfile] = useState(false)
+  const [showSpec, setShowSpec] = useState(false)
 
   const [fio, setFio] = useState('');
   const [city, setCity] = useState([]);
@@ -798,29 +803,34 @@ const Specialist = () => {
 {/* 2 */}
                                 <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                   {/* Город */}
-                                  <div className="text-field" onClick={()=>setVisibleSm(true)}>
-                                    <CFormSelect 
-                                      aria-label="Default select example"
-                                      style={{backgroundColor: '#131c21'}}
-                                      options={[
-                                        '',
-                                        { label: 'Москва', value: '1' },
-                                        { label: 'Санкт-Петербург', value: '2' },
-                                        { label: 'Майкоп', value: '3'}
-                                      ]}
-                                      onChange={addCity}
-                                    />
-                                    {/*<TagsInput className="text-field__input"  style={{width: '510px'}}  tags={city}/>*/}
-                                    {/* <input className="text-field__input" type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} style={{width: '320px'}}/>  */}
+                                  <div className="text-field"> 
+                                      <MyDropdown
+                                        style={{backgroundColor: '#131c21'}}
+                                        options={[
+                                          '',
+                                          { label: 'Москва', value: '1' },
+                                          { label: 'Санкт-Петербург', value: '2' },
+                                          { label: 'Майкоп', value: '3'}
+                                        ]}
+                                        onChange={addCity}
+                                      />
                                   </div>
 
                                   <label>Специальность</label>
                                   <div style={{border: '1px solid #464849', borderRadius: '.375rem', padding: '5px', textAlign: 'left', marginBottom: '15px', minHeight: '100px'}}>
                                     <ul>
                                       {speclist.map((item, index) => 
-                                        <li key={index+1}>{item}</li>
+                                        <li key={index+1} onClick={()=>setShowSpec(true)}>{item}</li>
                                       )}     
                                     </ul>
+                                    <div style={{display: showSpec ? 'block' : 'none'}} className='spec-style'>
+                                      <ul>
+                                        <li onClick={()=>setShowSpec(false)}>Звук</li>
+                                        <li onClick={()=>setShowSpec(false)}>Свет</li>
+                                        <li onClick={()=>setShowSpec(false)}>Видео</li>
+                                        <li onClick={()=>setShowSpec(false)}>Item 4</li>
+                                      </ul>
+                                    </div>
                                   </div>
 
                                   <label>Компания</label>

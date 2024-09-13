@@ -8,10 +8,10 @@ const Select = ({menuShow, setMenuShow, selected}) => {
             className={`${cl.select} ${menuShow && cl.selectClicked}`}
             onClick={()=> setMenuShow(!menuShow)}
         >
-            <span className={cl.select}>
+            <span>
                 {selected}
             </span>
-            <div className={`${cl.caret} ${menuShow && cl.caretRotate}`}></div>
+            {/* <div className={`${cl.caret} ${menuShow && cl.caretRotate}`}></div> */}
         </div>
     );
 };

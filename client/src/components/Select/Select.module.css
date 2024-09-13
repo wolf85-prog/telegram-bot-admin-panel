@@ -1,36 +1,25 @@
 .select {
-    background: #2a2f3b;
+    background: #131c21;;
     color: #fff;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    border: 2px #2a2f3b solid;
+    border: 1px #464849 solid;
     border-radius: 0.5em;
-    padding: 1em;
+    padding: 15px;
     cursor: pointer;
     transition: background 0.3s;
+    height: 40px;
 }
 
 .selectClicked {
     border: 2px #26489a solid;
-    box-shadow: 0 0 0.8em #26489a;
+    /* box-shadow: 0 0 0.8em #26489a; */
 }
 
 .select hover {
     background: #323741;
 }
 
-.caret {
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 6px solid #fff;
-    transition: 0.3s;
-}
-
-.caretRotate {
-    transform: rotate(180deg);
-}
 
 
