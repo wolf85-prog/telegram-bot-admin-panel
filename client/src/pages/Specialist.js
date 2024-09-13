@@ -2,6 +2,7 @@ import React, { Suspense, useEffect, useState } from 'react'
 import { AppSidebar, AppFooter, AppHeader, AppRightbar } from '../components/index'
 import DataTable, { createTheme } from 'react-data-table-component';
 import { useSelector, useDispatch } from 'react-redux'
+import InputMask from 'react-input-mask';
 import { 
   CContainer, 
   CSpinner, 
@@ -529,7 +530,7 @@ const Specialist = () => {
     var cit = e.target.value
     console.log(cit)
     let arr = []
-    setVisibleSm(false)
+    //setVisibleSm(false)
     
     if (cit === '1') {
       arr.push('Москва')
@@ -555,6 +556,14 @@ const Specialist = () => {
     //     return res.status(500).json(error.message);
     // }
   }, [city]);
+
+
+  const handleTg = event => {
+    const result = event.target.value.replace(/\D/g, '');
+
+    setTelegram(result);
+  };
+  
 
   return (
     <div className='dark-theme'>
@@ -790,8 +799,19 @@ const Specialist = () => {
                                 <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                   {/* Город */}
                                   <div className="text-field" onClick={()=>setVisibleSm(true)}>
+                                    <CFormSelect 
+                                      aria-label="Default select example"
+                                      style={{backgroundColor: '#131c21'}}
+                                      options={[
+                                        '',
+                                        { label: 'Москва', value: '1' },
+                                        { label: 'Санкт-Петербург', value: '2' },
+                                        { label: 'Майкоп', value: '3'}
+                                      ]}
+                                      onChange={addCity}
+                                    />
                                     {/*<TagsInput className="text-field__input"  style={{width: '510px'}}  tags={city}/>*/}
-                                    <input className="text-field__input" type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} style={{width: '320px'}}/> 
+                                    {/* <input className="text-field__input" type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} style={{width: '320px'}}/>  */}
                                   </div>
 
                                   <label>Специальность</label>
@@ -889,12 +909,35 @@ const Specialist = () => {
 
                                   {/* phone */}
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/>
+                                    {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
+                                    <InputMask
+                                        className="text-field__input" 
+                                        style={{width: '250px'}}
+                                        type="text" 
+                                        name="phone" 
+                                        id="phone"
+                                        mask="+7 (999) 999-99-99"
+                                        disabled={!blockProfile}
+                                        maskChar=""
+                                        onChange={(e) => setPhone(e.target.value)} 
+                                        value={phone}
+                                        placeholder=''
+                                    >
+                                    </InputMask>
                                   </div> 
 
                                   <label>Telegram</label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="telegram" id="telegram" value={telegram} onChange={(e) => setTelegram(e.target.value)} style={{width: '250px'}}/>
+                                    <input 
+                                      className="text-field__input" 
+                                      type="text" 
+                                      pattern="[0-9]*"
+                                      name="telegram" 
+                                      id="telegram" 
+                                      value={telegram} 
+                                      onChange={handleTg} 
+                                      style={{width: '250px'}}
+                                    />
                                   </div>
 
                                   {/* ник */}
@@ -938,23 +981,6 @@ const Specialist = () => {
                     </CRow>
                   </Suspense>
             </CContainer>
-            <MyModalSmall
-              size="sm"
-              visible={visibleSm}
-              setVisible={setVisibleSm}
-              onClose={() => setVisibleSm(false)}
-            >
-              <CFormSelect 
-                aria-label="Default select example"
-                options={[
-                  'Выбрать город',
-                  { label: 'Москва', value: '1' },
-                  { label: 'Санкт-Петербург', value: '2' },
-                  { label: 'Майкоп', value: '3'}
-                ]}
-                onChange={addCity}
-              />
-            </MyModalSmall>
         </div>
         <AppFooter />
       </div>
