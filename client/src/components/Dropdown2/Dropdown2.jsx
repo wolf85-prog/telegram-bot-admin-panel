@@ -31,12 +31,12 @@ const Dropdown2 = ({options, tags, setTags}) => {
 
     const specList = tags.map((item, i) =>
         <li key={i} onMouseOver={()=>setShowClose(true)} onMouseOut={()=>setShowClose(false)}>
-            {item} <img src={Close} onClick={(e) => removeTag(i, e)} width={15} alt='' style={{visibility: showClose ? 'visible' : 'hidden', marginLeft: '15px', cursor: 'pointer'}}></img>
+            {item} <img src={Close} onClick={(e) => removeTag(i, e)} width={15} alt='' className={drp.close} style={{visibility: showClose ? 'visible' : 'hidden'}}></img>
         </li>
     )
 
     const dropdownList = options.map((option, i) =>
-        <li key={i} onClick={selectOption}>{option.label}</li>
+        <li key={i} onClick={selectOption}>{option.name}</li>
     )
 
     const wrapperRef = useRef(null);

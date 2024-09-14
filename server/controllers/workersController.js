@@ -125,6 +125,7 @@ class WorkersController {
         }
     }
 
+
     // Define a sleep function that returns a promise
 //------------------------------------------------------------
 //        обновление аватарок

@@ -586,9 +586,9 @@ th.widthSpace {
   .spec-style {
     border: 1px solid rgb(70 72 73);
     background-color: rgb(19, 28, 33);
-    position: absolute;
+    /* position: absolute;
     top: 260px;
-    left: 291px;
+    left: 291px; */
     border-radius: 10px;
     width: 320px;
   }

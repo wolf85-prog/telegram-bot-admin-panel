@@ -62,6 +62,32 @@ class SpecialistController {
         }
     }
 
+    async editSpecialist(req, res) { 
+        const {id} = req.params      
+        try {    
+            let exist=await Specialist.findOne( {where: {id: id}} )
+            
+            if(!exist){
+                res.status(500).json({msg: "user not exist"});
+                return;
+            }
+
+            const {fio, city, age, speclist} = req.body
+
+            const newUser = await Specialist.update(
+                { 
+                    fio, 
+                    city,
+                    age,
+                    specialization: speclist
+                },
+                { where: {id: id} })
+            return res.status(200).json(newUser);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
 }
 
 module.exports = new SpecialistController()

@@ -74,3 +74,12 @@
     display: block;
     opacity: 1;
 }
+
+.close {
+    position: absolute;
+    right: 8px;
+    /* top: 10px; */
+    margin-left: 15px;
+    margin-top: 5px;
+    cursor: pointer;
+}

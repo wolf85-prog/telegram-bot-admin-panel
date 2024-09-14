@@ -28,7 +28,7 @@ import {
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
-import { getSpecialist, getSpecCount } from './../http/specAPI'
+import { getSpecialist, getSpecCount, editSpecialist } from './../http/specAPI'
 import { getWContacts} from '../http/workerAPI'
 
 import Close from "../assets/images/close.svg"
@@ -48,6 +48,8 @@ import { array } from 'prop-types';
 
 import MyDropdown from 'src/components/Dropdown/Dropdown';
 import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
+import specData from 'src/data/specData';
+import specOnlyData from 'src/data/specOnlyData';
 
 //Workers.js
 const Specialist = () => {
@@ -68,10 +70,13 @@ const Specialist = () => {
   const [modalWorker, setModalWorker] = useState({})
   const [showProfile, setShowProfile] = useState(false)
   const [showSpec, setShowSpec] = useState(false)
+  const [showClose, setShowClose] = useState(false)
 
   const [showSave, setShowSave] = useState(false)
   const [showSave2, setShowSave2] = useState(false)
+  const [showSave3, setShowSave3] = useState(false)
 
+  const [id, setId] = useState('');
   const [fio, setFio] = useState('');
   const [city, setCity] = useState([]);
   const [age, setAge] = useState('');
@@ -292,6 +297,7 @@ const Specialist = () => {
 
     const currentYear = new Date().getFullYear()
 
+    setId(worker.id)
     setFio(worker.fio)
     setCity(worker.city ? worker.city.split(',') : [])
     setAge(worker.age ? worker.age.split('-')[0] : '')
@@ -516,14 +522,41 @@ const Specialist = () => {
       setSpecialistCount(sortedWorker)
   }
 
-  const saveData = (e, id) => {
-    setFio(e.target.value)
-    //setId(id)
-
-  }
-
   const closeProfile = () => { 
     setShowProfile(false)
+    setShowClose(false)
+  }
+
+  const saveProfile = async(id) => { 
+    setShowClose(true)
+    console.log(id)
+
+    let specArr = []
+
+    speclist.map((item) => {
+      specData.map((category)=> {
+          category.models.map((work)=> {
+              if (work.name === item){
+                  const obj = {
+                      spec: item,
+                      cat: category.icon,
+                  }
+                  specArr.push(obj)
+              }
+          })
+      })
+    })
+
+    const saveData = {
+      fio: fio,
+      city: city[0],
+      age: age+'-01-01',
+      speclist: JSON.stringify(specArr)
+    }
+    console.log(saveData)
+
+    //сохранить изменения в базе
+    //await editSpecialist(saveDate, id)
   }
 
   const blockedProfile = () => { 
@@ -552,13 +585,7 @@ const Specialist = () => {
 
   useEffect(() => {
     console.log("city: ", city)
-    // try {
-    //   Specialist.update({fio: fio}, {where: {id: 1}})
 
-    //   return res.status(200).json("Projects has been sent successfully");
-    // } catch (error) {
-    //     return res.status(500).json(error.message);
-    // }
   }, [city]);
 
 
@@ -805,13 +832,14 @@ const Specialist = () => {
                                   {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '285px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
-                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>saveData(e)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
+                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
-                                    <div>
+                                    <div style={{display: 'flex'}}>
                                       <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Close} onClick={closeProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'none', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                     </div>
                                   </div>
 {/* 2 */}
@@ -835,14 +863,7 @@ const Specialist = () => {
                                       <MyDropdown2
                                         tags={speclist}
                                         setTags={setSpeclist}
-                                        options={[
-                                          { label: 'Звукорежиссер', value: '1' },
-                                          { label: 'Системный инженер', value: '2' },
-                                          { label: 'RF-Менеджер', value: '3'},
-                                          { label: 'Backline', value: '4'},
-                                          { label: 'Roadie', value: '5'},
-                                          { label: 'Техник по звуку', value: '6'},
-                                        ]}
+                                        options={specOnlyData}
                                         onChange={changeSpec}
                                       />
                                   </div>
@@ -853,9 +874,9 @@ const Specialist = () => {
                                         tags={company}
                                         setTags={setCompany}
                                         options={[
-                                          { label: 'Компания 1', value: '1' },
-                                          { label: 'Компания 2', value: '2' },
-                                          { label: 'Компания 3', value: '3'},
+                                          { name: 'Компания 1', value: '1' },
+                                          { name: 'Компания 2', value: '2' },
+                                          { name: 'Компания 3', value: '3'},
                                         ]}
                                         onChange={changeSpec}
                                       />
@@ -867,9 +888,9 @@ const Specialist = () => {
                                         tags={comteg}
                                         setTags={setComteg}
                                         options={[
-                                          { label: 'Тег 1', value: '1' },
-                                          { label: 'Тег 2', value: '2' },
-                                          { label: 'Тег 3', value: '3'},
+                                          { name: 'Тег 1', value: '1' },
+                                          { name: 'Тег 2', value: '2' },
+                                          { name: 'Тег 3', value: '3'},
                                         ]}
                                         onChange={changeSpec}
                                       />
@@ -877,7 +898,13 @@ const Specialist = () => {
 
                                   <label>Комментарии</label>
                                   <div className="text-field">
-                                    <textarea className="text-field__input" type="text" name="comment" id="comment" value={comment} onChange={(e) => setComment(e.target.value)} style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '.375rem', textAlign: 'left'}}/>
+                                    <textarea 
+                                      className="text-field__input" 
+                                      type="text" 
+                                      name="comment" 
+                                      id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
+                                      style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '.375rem', textAlign: 'left'}}
+                                    />
                                   </div> 
                                   
                                 </div>
@@ -892,15 +919,19 @@ const Specialist = () => {
                                     <div className="text-field">
                                       <input className="text-field__input" type="text" name="age" id="age" value={age} onChange={(e) => setAge(e.target.value)} style={{width: '80px', marginRight: '8px'}}/>
                                     </div>
+                                    {/* проекты за месяц */}
                                     <div className="text-field">
                                       <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
+                                    {/* проекты всего */}
                                     <div className="text-field">
                                       <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
+                                    {/* опоздания */}
                                     <div className="text-field">
                                       <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px', color: 'red'}}/>
                                     </div>
+                                    {/* невыходы */}
                                     <div className="text-field">
                                       <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', color: 'red'}}/>
                                     </div>
@@ -912,9 +943,9 @@ const Specialist = () => {
                                         tags={skill}
                                         setTags={setSkill}
                                         options={[
-                                          { label: 'Навык 1', value: '1' },
-                                          { label: 'Навык 2', value: '2' },
-                                          { label: 'Навык 3', value: '3'},
+                                          { name: 'Навык 1', value: '1' },
+                                          { name: 'Навык 2', value: '2' },
+                                          { name: 'Навык 3', value: '3'},
                                         ]}
                                         onChange={changeSpec}
                                       />
@@ -926,9 +957,9 @@ const Specialist = () => {
                                         tags={merch}
                                         setTags={setMerch}
                                         options={[
-                                          { label: 'Кепка', value: '1' },
-                                          { label: 'Футболка', value: '2' },
-                                          { label: 'Куртка', value: '3'},
+                                          { name: 'Кепка', value: '1' },
+                                          { name: 'Футболка', value: '2' },
+                                          { name: 'Куртка', value: '3'},
                                         ]}
                                         onChange={changeSpec}
                                       />
@@ -940,9 +971,9 @@ const Specialist = () => {
                                         tags={comteg2}
                                         setTags={setComteg2}
                                         options={[
-                                          { label: 'Тег 1', value: '1' },
-                                          { label: 'Тег 2', value: '2' },
-                                          { label: 'Тег 3', value: '3'},
+                                          { name: 'Тег 1', value: '1' },
+                                          { name: 'Тег 2', value: '2' },
+                                          { name: 'Тег 3', value: '3'},
                                         ]}
                                         onChange={changeSpec}
                                       />
@@ -963,7 +994,7 @@ const Specialist = () => {
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(phone)}} 
                                       alt="" 
-                                      style={{visibility: showSave ? 'visible' : 'hidden', position: 'absolute', top: '10px', left: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                      style={{visibility: showSave ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                     />
                                     {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                     <InputMask
@@ -989,7 +1020,7 @@ const Specialist = () => {
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(telegram)}} 
                                       alt="" 
-                                      style={{visibility: showSave2 ? 'visible' : 'hidden', position: 'absolute', top: '10px', left: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                      style={{visibility: showSave2 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                     />
                                     <input 
                                       className="text-field__input" 
@@ -1005,7 +1036,13 @@ const Specialist = () => {
 
                                   {/* ник */}
                                   <label> </label>
-                                  <div className="text-field">
+                                  <div className="text-field" onMouseOver={()=>setShowSave3(true)} onMouseOut={()=>setShowSave3(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(nik)}} 
+                                      alt="" 
+                                      style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                    />
                                     <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
 
@@ -1047,6 +1084,32 @@ const Specialist = () => {
                                   <div className="text-field">
                                     <input className="text-field__input" type="text" name="passportScan" id="passportScan" value={passportScan} onChange={(e) => setPassportScan(e.target.value)} style={{width: '250px', overflow: 'hidden', textOverflow: 'ellipsis'}}/>
                                   </div> 
+
+                                  <label>Проекты</label>
+                                  <div className="text-field">
+                                    {/* <textarea 
+                                      className="text-field__input" 
+                                      type="text" 
+                                      name="comment" 
+                                      id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
+                                      style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '.375rem', textAlign: 'left'}}
+                                    /> */}
+                                    <ul className='spec-style' style={{width: '250px', height: '190px', whiteSpace: 'pre-line', borderRadius: '.375rem', textAlign: 'left'}}>
+                                    {/* { 
+                                       tags.map((item, i) =>*/}
+                                        <li>
+                                          01.01.2024 | Проект №1
+                                        </li>
+                                        <li>
+                                          01.01.2024 | Проект №2
+                                        </li>
+                                        <li>
+                                          01.01.2024 | Проект №3
+                                        </li>
+                                       {/* )
+                                    } */}
+                                    </ul>
+                                  </div> 
                                 </div>
 
                               </div>
@@ -1054,7 +1117,7 @@ const Specialist = () => {
                             </CCardBody>
 
                               <div style={{display: 'flex', justifyContent: 'center' }}>
-                                <img src={arrowDown} alt='' onClick={()=>clickNext()} style={{width: '50px', marginBottom: '15px', cursor: 'pointer'}}></img>
+                                <img src={arrowDown} alt='' onClick={()=>clickNext()} style={{display: !showProfile ? 'block' : 'none', width: '50px', marginBottom: '15px', cursor: 'pointer'}}></img>
                               </div> 
                           </CCard>
                         </CCol>

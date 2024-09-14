@@ -17,3 +17,11 @@ export const getSpecCount = async (count, prev) =>{
         console.log("error while calling getWorkers api", error.message);
     }
 }
+
+export const editSpecialist = async (data, id) =>{
+    try {
+        await $host.patch(`api/specialist/update/${id}`, data); 
+    } catch (error) {
+        console.log("error while calling editSpecialist api",error.message);
+    }
+}
