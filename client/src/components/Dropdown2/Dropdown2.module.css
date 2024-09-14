@@ -2,6 +2,18 @@
     box-sizing: border-box;
 }
 
+.speclist {
+    border: 1px solid rgb(70 72 73);
+    background-color: rgb(19, 28, 33);
+    border-radius: 10px;
+    width: 320px;
+    min-height: 100px;
+    overflow-y: auto;
+    text-align: left;
+    height: 100px;
+    margin-bottom: 0;
+  }
+
 .menu {
     list-style: none;
     padding: 0.2em 0.5em;
@@ -11,16 +23,17 @@
     border-radius: 0.5em;
     color: #9fa5b5;
     position: absolute;
-    left: 39%;
+    left: 450px;
+    top: 260px;
     width: 320px;
     transform: translateX(-50%);
     opacity: 0;
     display: none;
     transition: 0.2s;
     z-index: 1;
-    max-height: 140px;
-    overflow-y: scroll;
-    height: 140px;
+    max-height: 190px;
+    overflow-y: auto;
+    height: 190px;
 }
 
 .menu li {

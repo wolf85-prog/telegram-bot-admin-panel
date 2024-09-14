@@ -2,16 +2,22 @@ import React, {useState} from 'react';
 import Select from '../Select/Select'
 import drp from './Dropdown2.module.css'
 
-const Dropdown = ({options}) => {
+const Dropdown2 = ({options, speclist, setSpeclist}) => {
     const [menuShow, setMenuShow] = useState(false)
     const [selected, setSelected] = useState(options[0])
 
-    //console.log(options)
+    //console.log(spec)
 
     const selectOption = e => {
-        setSelected(e.target.innerText)
+        speclist.push(e.target.innerText)
+        setSpeclist(speclist)
+        console.log("spec: ", speclist)
         setMenuShow(!menuShow)
     }
+
+    const specList = speclist.map((item, i) =>
+        <li key={i}>{item}</li>
+    )
 
     const dropdownList = options.map((option, i) =>
         <li key={i} onClick={selectOption}>{option.label}</li>
@@ -19,16 +25,15 @@ const Dropdown = ({options}) => {
 
     return (
         <div className={drp.dropdown}>
-            <Select
-                menuShow={menuShow}
-                setMenuShow={setMenuShow}
-                selected={selected}
-            />
-            <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`}>
+            <ul onClick={()=>setMenuShow(true)} className={`${drp.speclist}`}>
+                {specList}
+            </ul>
+
+            <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`} style={{display: menuShow ? 'block' : 'none'}}>
                 {dropdownList}
             </ul>
         </div>
     );
 };
 
-export default Dropdown;
+export default Dropdown2;

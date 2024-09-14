@@ -562,7 +562,7 @@ th.widthSpace {
 
   .text-field__input:disabled,
   .text-field__input[readonly] {
-    background-color: #f5f5f5;
+    background-color: #131c21;
     opacity: 1;
   }
 

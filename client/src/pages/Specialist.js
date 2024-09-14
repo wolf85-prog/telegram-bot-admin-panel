@@ -569,8 +569,9 @@ const Specialist = () => {
     setTelegram(result);
   };
 
-  const changeSpec = () => {
-    setSpeclist()
+  const changeSpec = (e) => {
+    console.log(e.target.innerText)
+    setSpeclist([...specialist, e.target.innerText])
     setShowSpec(false)
   }
   
@@ -752,7 +753,7 @@ const Specialist = () => {
                                   <label>В системе</label>
                                   <div style={{display: 'flex', justifyContent: 'center'}}>
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="dateReg" id="dateReg" value={dateReg && dateReg.length >0 ? dateReg.split('-')[2].split('T')[0] + '.' + dateReg.split('-')[1] + '.' + dateReg.split('-')[0] : ''} style={{width: '250px'}}/>
+                                      <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" value={dateReg && dateReg.length >0 ? dateReg.split('-')[2].split('T')[0] + '.' + dateReg.split('-')[1] + '.' + dateReg.split('-')[0] : ''} style={{width: '250px'}}/>
                                     </div>
                                   </div> 
 
@@ -822,20 +823,20 @@ const Specialist = () => {
                                   </div>
 
                                   <label>Специальность</label>
-                                  <div style={{border: '1px solid #464849', borderRadius: '.375rem', padding: '5px', textAlign: 'left', marginBottom: '15px', minHeight: '100px'}}>
-                                    <ul>
-                                      {speclist.map((item, index) => 
-                                        <li key={index+1} onClick={()=>setShowSpec(true)}>{item}</li>
-                                      )}     
-                                    </ul>
-                                    <div style={{display: showSpec ? 'block' : 'none'}} className='spec-style'>
-                                      <ul>
-                                        <li onClick={changeSpec}>Звук</li>
-                                        <li onClick={()=>setShowSpec(false)}>Свет</li>
-                                        <li onClick={()=>setShowSpec(false)}>Видео</li>
-                                        <li onClick={()=>setShowSpec(false)}>Item 4</li>
-                                      </ul>
-                                    </div>
+                                  <div className="text-field"> 
+                                      <MyDropdown2
+                                        speclist={speclist}
+                                        setSpeclist={setSpeclist}
+                                        options={[
+                                          { label: 'Звукорежиссер', value: '1' },
+                                          { label: 'Системный инженер', value: '2' },
+                                          { label: 'RF-Менеджер', value: '3'},
+                                          { label: 'Backline', value: '4'},
+                                          { label: 'Roadie', value: '5'},
+                                          { label: 'Техник по звуку', value: '6'},
+                                        ]}
+                                        onChange={changeSpec}
+                                      />
                                   </div>
 
                                   <label>Компания</label>
@@ -867,7 +868,7 @@ const Specialist = () => {
                                   <div style={{display: 'flex'}}>
                                     {/* возраст */}
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="age" id="age" value={age2}  onChange={(e) => setAge2(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                      <input disabled className="text-field__input" type="text" name="age" id="age" value={age2}  onChange={(e) => setAge2(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
                                     {/* год рождения */}
                                     <div className="text-field">

@@ -6,21 +6,21 @@
     list-style: none;
     padding: 0.2em 0.5em;
     background: #131c21;
-    border: 1px #464849 solid;
+    border: 1px #2d2e38 solid;
     box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
-    border-radius: 0.5em;
+    border-radius: 6px;
     color: #9fa5b5;
     position: absolute;
-    left: 39%;
+    left: 450px;
     width: 320px;
     transform: translateX(-50%);
     opacity: 0;
     display: none;
     transition: 0.2s;
     z-index: 1;
-    max-height: 140px;
-    overflow-y: scroll;
-    height: 140px;
+    max-height: 190px;
+    overflow-y: auto;
+    height: 190px;
 }
 
 .menu li {

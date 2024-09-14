@@ -552,42 +552,31 @@ const UsersProvider = ({ children }) => {
 //------------------------------------------------------------------------------------------
 
 	//get Managers
-	useEffect(() => {
-    	const fetchData = async () => {
-			let response = await getManagers();
-      		console.log("managers context: ", response.length)
+	// useEffect(() => {
+    // 	const fetchData = async () => {
+	// 		let response = await getManagers();
+    //   		console.log("managers context: ", response.length)
 
-			setManagers(response)
-		}
+	// 		setManagers(response)
+	// 	}
 
-	  	fetchData();
+	//   	fetchData();
 
-	},[])
+	// },[])
+
 
 //------------------------------------------------------------------------------------------
 
-  	//get DistributionW
-  	// useEffect(() => {
+	//get Projects
+	// useEffect(() => {
     // 	const fetchData = async () => {
-	// 		//let response = await getDistributionsW();
-	// 		//1 все рассылки 20
-	// 		let response = await getDistributionsCountW(10, distributionsWork.length);
-	// 		let response2 = await getDistributionsWPlan();
+	// 		let projects = await getProjectsApi();
+	// 		//console.log("projects size: ", projects.length)
 
-	// 		//сортировка
-	// 		const messageSort = [...response].sort((a, b) => {       
-	// 			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-	// 			return dateB-dateA  //сортировка по убывающей дате  
-	// 		})
+	// 		setProjects(projects)
 
-	// 		const messageSort2 = [...response2].sort((a, b) => {       
-	// 			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-	// 			return dateA-dateB  //сортировка по убывающей дате  
-	// 		})
-
-	// 		let all = [...messageSort2, ...messageSort]
-
-	// 		setDistributionsWork(all)
+	// 		//сохранить кэш
+	// 		localStorage.setItem("projects", JSON.stringify(projects));
 	// 	}
 
 	//   	fetchData();
@@ -595,35 +584,18 @@ const UsersProvider = ({ children }) => {
 	// },[])
 //------------------------------------------------------------------------------------------
 
-	//get Projects
-	useEffect(() => {
-    	const fetchData = async () => {
-			let projects = await getProjectsApi();
-			//console.log("projects size: ", projects.length)
-
-			setProjects(projects)
-
-			//сохранить кэш
-			localStorage.setItem("projects", JSON.stringify(projects));
-		}
-
-	  	fetchData();
-
-	},[])
-//------------------------------------------------------------------------------------------
-
 	//get Companys
-	useEffect(() => {
-    	const fetchData = async () => {
-			let companys = await getCompanys();
-			//console.log("companys size: ", companys.length)
+	// useEffect(() => {
+    // 	const fetchData = async () => {
+	// 		let companys = await getCompanys();
+	// 		//console.log("companys size: ", companys.length)
 
-			setCompanys(companys)
-		}
+	// 		setCompanys(companys)
+	// 	}
 
-	  	fetchData();
+	//   	fetchData();
 
-	},[])
+	// },[])
 
 //------------------------------------------------------------------------------------------
 	//звонок по телефону
