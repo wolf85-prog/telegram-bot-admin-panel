@@ -36,7 +36,7 @@ const Dropdown2 = ({options, tags, setTags}) => {
     )
 
     const dropdownList = options.map((option, i) =>
-        <li key={i} onClick={selectOption}>{option.name}</li>
+        <li key={i} onClick={selectOption}>{option.label}</li>
     )
 
     const wrapperRef = useRef(null);

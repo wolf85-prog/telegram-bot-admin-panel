@@ -556,7 +556,7 @@ const Specialist = () => {
     console.log(saveData)
 
     //сохранить изменения в базе
-    //await editSpecialist(saveDate, id)
+    await editSpecialist(saveData, id)
   }
 
   const blockedProfile = () => { 
@@ -874,9 +874,9 @@ const Specialist = () => {
                                         tags={company}
                                         setTags={setCompany}
                                         options={[
-                                          { name: 'Компания 1', value: '1' },
-                                          { name: 'Компания 2', value: '2' },
-                                          { name: 'Компания 3', value: '3'},
+                                          { label: 'Компания 1', value: '1' },
+                                          { label: 'Компания 2', value: '2' },
+                                          { label: 'Компания 3', value: '3'},
                                         ]}
                                         onChange={changeSpec}
                                       />
@@ -888,9 +888,9 @@ const Specialist = () => {
                                         tags={comteg}
                                         setTags={setComteg}
                                         options={[
-                                          { name: 'Тег 1', value: '1' },
-                                          { name: 'Тег 2', value: '2' },
-                                          { name: 'Тег 3', value: '3'},
+                                          { label: 'Тег 1', value: '1' },
+                                          { label: 'Тег 2', value: '2' },
+                                          { label: 'Тег 3', value: '3'},
                                         ]}
                                         onChange={changeSpec}
                                       />
@@ -943,9 +943,9 @@ const Specialist = () => {
                                         tags={skill}
                                         setTags={setSkill}
                                         options={[
-                                          { name: 'Навык 1', value: '1' },
-                                          { name: 'Навык 2', value: '2' },
-                                          { name: 'Навык 3', value: '3'},
+                                          { label: 'Навык 1', value: '1' },
+                                          { label: 'Навык 2', value: '2' },
+                                          { label: 'Навык 3', value: '3'},
                                         ]}
                                         onChange={changeSpec}
                                       />
@@ -957,9 +957,9 @@ const Specialist = () => {
                                         tags={merch}
                                         setTags={setMerch}
                                         options={[
-                                          { name: 'Кепка', value: '1' },
-                                          { name: 'Футболка', value: '2' },
-                                          { name: 'Куртка', value: '3'},
+                                          { label: 'Кепка', value: '1' },
+                                          { label: 'Футболка', value: '2' },
+                                          { label: 'Куртка', value: '3'},
                                         ]}
                                         onChange={changeSpec}
                                       />
@@ -971,9 +971,9 @@ const Specialist = () => {
                                         tags={comteg2}
                                         setTags={setComteg2}
                                         options={[
-                                          { name: 'Тег 1', value: '1' },
-                                          { name: 'Тег 2', value: '2' },
-                                          { name: 'Тег 3', value: '3'},
+                                          { label: 'Тег 1', value: '1' },
+                                          { label: 'Тег 2', value: '2' },
+                                          { label: 'Тег 3', value: '3'},
                                         ]}
                                         onChange={changeSpec}
                                       />
