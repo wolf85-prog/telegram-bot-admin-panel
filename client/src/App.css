@@ -505,6 +505,7 @@ th.widthSpace {
 /* text-field */
 .text-field {
     margin-bottom: 18px;
+    position: relative;
 }
 
   .text-field__label {

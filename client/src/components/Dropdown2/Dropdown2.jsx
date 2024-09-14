@@ -1,31 +1,68 @@
-import React, {useState} from 'react';
-import Select from '../Select/Select'
+import React, {useState, useRef, useEffect} from 'react';
 import drp from './Dropdown2.module.css'
+import Close from "../../assets/images/close.svg"
 
-const Dropdown2 = ({options, speclist, setSpeclist}) => {
+const Dropdown2 = ({options, tags, setTags}) => {
     const [menuShow, setMenuShow] = useState(false)
     const [selected, setSelected] = useState(options[0])
+    const [showClose, setShowClose] = useState(false)
 
     //console.log(spec)
 
     const selectOption = e => {
-        speclist.push(e.target.innerText)
-        setSpeclist(speclist)
-        console.log("spec: ", speclist)
+        
+        const res = tags.find(item => item === e.target.innerText)
+        if (!res) {
+            tags.push(e.target.innerText)
+            setTags(tags) 
+        } else {
+            console.log('Специальность уже существует!')
+        }
+        
+        //console.log("spec: ", tags)
         setMenuShow(!menuShow)
     }
 
-    const specList = speclist.map((item, i) =>
-        <li key={i}>{item}</li>
+    function removeTag(index, e){
+        e.stopPropagation();
+        setTags(tags.filter((el, i) => i !== index))
+    }
+
+
+    const specList = tags.map((item, i) =>
+        <li key={i} onMouseOver={()=>setShowClose(true)} onMouseOut={()=>setShowClose(false)}>
+            {item} <img src={Close} onClick={(e) => removeTag(i, e)} width={15} alt='' style={{visibility: showClose ? 'visible' : 'hidden', marginLeft: '15px', cursor: 'pointer'}}></img>
+        </li>
     )
 
     const dropdownList = options.map((option, i) =>
         <li key={i} onClick={selectOption}>{option.label}</li>
     )
 
+    const wrapperRef = useRef(null);
+
+    useEffect(() => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+          if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+            //alert("You clicked outside of me!");
+            setMenuShow(false)
+            event.stopPropagation();
+          }
+        }
+        // Bind the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          // Unbind the event listener on clean up
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [wrapperRef ]);
+
     return (
-        <div className={drp.dropdown}>
-            <ul onClick={()=>setMenuShow(true)} className={`${drp.speclist}`}>
+        <div className={drp.dropdown} ref={wrapperRef}>
+            <ul onClick={()=>setMenuShow(!menuShow)} className={`${drp.speclist}`}>
                 {specList}
             </ul>
 

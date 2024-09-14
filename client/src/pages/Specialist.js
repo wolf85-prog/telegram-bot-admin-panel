@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState, useRef } from 'react'
 import { AppSidebar, AppFooter, AppHeader, AppRightbar } from '../components/index'
 import DataTable, { createTheme } from 'react-data-table-component';
 import { useSelector, useDispatch } from 'react-redux'
@@ -44,12 +44,8 @@ import StarActive from "./../assets/images/star_activ.svg";
 import Disketa from "./../assets/images/disketa.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 
-import TagsInput from "./../components/TagsInput/TagsInput"
-import MyModalSmall from 'src/components/MyModalSmall/MyModalSmall';
-import MyModal from 'src/components/MyModal/MyModal';
 import { array } from 'prop-types';
 
-import MySelect from 'src/components/Select/Select';
 import MyDropdown from 'src/components/Dropdown/Dropdown';
 import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
 
@@ -72,6 +68,9 @@ const Specialist = () => {
   const [modalWorker, setModalWorker] = useState({})
   const [showProfile, setShowProfile] = useState(false)
   const [showSpec, setShowSpec] = useState(false)
+
+  const [showSave, setShowSave] = useState(false)
+  const [showSave2, setShowSave2] = useState(false)
 
   const [fio, setFio] = useState('');
   const [city, setCity] = useState([]);
@@ -565,8 +564,17 @@ const Specialist = () => {
 
   const handleTg = event => {
     const result = event.target.value.replace(/\D/g, '');
-
     setTelegram(result);
+  };
+
+  const handleInn = event => {
+    const result = event.target.value.replace(/\D/g, '');
+    setInn(result);
+  };
+
+  const handlePromo = event => {
+    const result = event.target.value.replace(/\D/g, '');
+    setPromo(result);
   };
 
   const changeSpec = (e) => {
@@ -574,7 +582,7 @@ const Specialist = () => {
     setSpeclist([...specialist, e.target.innerText])
     setShowSpec(false)
   }
-  
+
 
   return (
     <div className='dark-theme'>
@@ -825,8 +833,8 @@ const Specialist = () => {
                                   <label>Специальность</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
-                                        speclist={speclist}
-                                        setSpeclist={setSpeclist}
+                                        tags={speclist}
+                                        setTags={setSpeclist}
                                         options={[
                                           { label: 'Звукорежиссер', value: '1' },
                                           { label: 'Системный инженер', value: '2' },
@@ -840,21 +848,31 @@ const Specialist = () => {
                                   </div>
 
                                   <label>Компания</label>
-                                  <div style={{border: '1px solid #464849', borderRadius: '.375rem', padding: '5px', textAlign: 'left', minHeight: '100px', marginBottom: '15px'}}>
-                                    <ul>
-                                      {company.map((item, index) => 
-                                        <li key={index+1}>{item}</li>
-                                      )}     
-                                    </ul>
+                                  <div className="text-field"> 
+                                      <MyDropdown2
+                                        tags={company}
+                                        setTags={setCompany}
+                                        options={[
+                                          { label: 'Компания 1', value: '1' },
+                                          { label: 'Компания 2', value: '2' },
+                                          { label: 'Компания 3', value: '3'},
+                                        ]}
+                                        onChange={changeSpec}
+                                      />
                                   </div>
 
                                   <label>Комтеги</label>
-                                  <div style={{border: '1px solid #464849', borderRadius: '.375rem', padding: '5px', textAlign: 'left', minHeight: '100px', marginBottom: '15px'}}>
-                                    <ul>
-                                      {comteg.map((item, index) => 
-                                        <li key={index+1}>{item}</li>
-                                      )}
-                                    </ul> 
+                                  <div className="text-field"> 
+                                      <MyDropdown2
+                                        tags={comteg}
+                                        setTags={setComteg}
+                                        options={[
+                                          { label: 'Тег 1', value: '1' },
+                                          { label: 'Тег 2', value: '2' },
+                                          { label: 'Тег 3', value: '3'},
+                                        ]}
+                                        onChange={changeSpec}
+                                      />
                                   </div>
 
                                   <label>Комментарии</label>
@@ -887,31 +905,47 @@ const Specialist = () => {
                                       <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', color: 'red'}}/>
                                     </div>
                                   </div>
+                                  
                                   <label>Навык</label>
-                                  <div style={{border: '1px solid #464849', borderRadius: '.375rem', padding: '5px', textAlign: 'left', width: '320px', minHeight: '100px', marginBottom: '15px'}}>
-                                    <ul>
-                                      {skill.map((item, index) => 
-                                        <li key={index+1}>{item}</li>
-                                      )}     
-                                    </ul>
+                                  <div className="text-field"> 
+                                      <MyDropdown2
+                                        tags={skill}
+                                        setTags={setSkill}
+                                        options={[
+                                          { label: 'Навык 1', value: '1' },
+                                          { label: 'Навык 2', value: '2' },
+                                          { label: 'Навык 3', value: '3'},
+                                        ]}
+                                        onChange={changeSpec}
+                                      />
                                   </div>
 
                                   <label>Мерч</label>
-                                  <div style={{border: '1px solid #464849', borderRadius: '.375rem', padding: '5px', textAlign: 'left', width: '320px', minHeight: '100px', marginBottom: '15px'}}>
-                                    <ul>
-                                      {merch.map((item, index) => 
-                                        <li key={index+1}>{item}</li>
-                                      )}     
-                                    </ul>
+                                  <div className="text-field"> 
+                                      <MyDropdown2
+                                        tags={merch}
+                                        setTags={setMerch}
+                                        options={[
+                                          { label: 'Кепка', value: '1' },
+                                          { label: 'Футболка', value: '2' },
+                                          { label: 'Куртка', value: '3'},
+                                        ]}
+                                        onChange={changeSpec}
+                                      />
                                   </div>
 
                                   <label>Комтеги 2.0</label>
-                                  <div style={{border: '1px solid #464849', borderRadius: '.375rem', padding: '5px', textAlign: 'left', minHeight: '100px', width: '320px', marginBottom: '15px'}}>
-                                    <ul>
-                                      {comteg2.map((item, index) => 
-                                        <li key={index+1}>{item}</li>
-                                      )}
-                                    </ul> 
+                                  <div className="text-field"> 
+                                      <MyDropdown2
+                                        tags={comteg2}
+                                        setTags={setComteg2}
+                                        options={[
+                                          { label: 'Тег 1', value: '1' },
+                                          { label: 'Тег 2', value: '2' },
+                                          { label: 'Тег 3', value: '3'},
+                                        ]}
+                                        onChange={changeSpec}
+                                      />
                                   </div>
 
                                   <label>Комментарии 2.0</label>
@@ -924,7 +958,13 @@ const Specialist = () => {
                                 <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '250px'}}>
 
                                   {/* phone */}
-                                  <div className="text-field">
+                                  <div className="text-field" onMouseOver={()=>setShowSave(true)} onMouseOut={()=>setShowSave(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(phone)}} 
+                                      alt="" 
+                                      style={{visibility: showSave ? 'visible' : 'hidden', position: 'absolute', top: '10px', left: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                    />
                                     {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                     <InputMask
                                         className="text-field__input" 
@@ -940,10 +980,17 @@ const Specialist = () => {
                                         placeholder=''
                                     >
                                     </InputMask>
+                                    
                                   </div> 
 
                                   <label>Telegram</label>
-                                  <div className="text-field">
+                                  <div className="text-field" onMouseOver={()=>setShowSave2(true)} onMouseOut={()=>setShowSave2(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(telegram)}} 
+                                      alt="" 
+                                      style={{visibility: showSave2 ? 'visible' : 'hidden', position: 'absolute', top: '10px', left: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                    />
                                     <input 
                                       className="text-field__input" 
                                       type="text" 
@@ -959,12 +1006,20 @@ const Specialist = () => {
                                   {/* ник */}
                                   <label> </label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
+                                    <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
 
                                   <label>ИНН</label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="inn" id="inn" value={inn} onChange={(e) => setInn(e.target.value)} style={{width: '250px'}}/>
+                                    <input 
+                                      className="text-field__input" 
+                                      type="text" 
+                                      name="inn" 
+                                      id="inn" 
+                                      value={inn} 
+                                      onChange={handleInn} 
+                                      style={{width: '250px'}}
+                                    />
                                   </div> 
 
                                   {/* email */}
@@ -975,7 +1030,16 @@ const Specialist = () => {
 
                                   <label>Промокод</label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="promo" id="promo" value={promo} onChange={(e) => setPromo(e.target.value)} style={{width: '250px'}}/>
+                                    <input 
+                                      className="text-field__input" 
+                                      type="text" 
+                                      name="promo" 
+                                      id="promo" 
+                                      value={promo} 
+                                      onChange={handlePromo} 
+                                      style={{width: '250px'}}
+                                      pattern="[0-9]*"
+                                    />
                                   </div>
 
                                   {/* скан паспорта */}
