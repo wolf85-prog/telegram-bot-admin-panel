@@ -88,11 +88,11 @@ class SpecialistController {
         }
     }
 
-    async getWorker(req, res) {
+    async getSpecialist(req, res) {
         const {id} = req.params
         try {
-            const workers = await Specialist.findOne({where: {chatId: id}})
-            return res.status(200).json(workers);
+            const worker = await Specialist.findOne({where: {chatId: id}})
+            return res.status(200).json(worker);
         } catch (err) {
             return res.status(500).json(err);
         }
