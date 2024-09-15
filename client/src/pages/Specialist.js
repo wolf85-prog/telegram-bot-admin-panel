@@ -25,6 +25,11 @@ import {
   CModalTitle,
   CModalBody,
   CFormSelect,
+  CToast, 
+  CToastBody,
+  CToastClose,
+  CToaster,
+
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
@@ -110,6 +115,20 @@ const Specialist = () => {
 
   const [blockProfile, setBlockProfile] = useState(true)
 
+
+  const [toast, addToast] = useState(0)
+  const toaster = useRef()
+
+  const exampleToast = (
+    <CToast autohide={true} visible={true} color="success" className="text-white align-items-center">
+      <div className="d-flex">
+        <CToastBody>Данные успешно сохранены!</CToastBody>
+        <CToastClose className="me-2 m-auto" white />
+      </div>
+    </CToast>
+  )
+
+
   //поиск
   useEffect(() => {
 		const filteredData = specialistAll.filter(user=> (user.fio + user.telegram)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
@@ -158,6 +177,17 @@ const Specialist = () => {
         worker.company && JSON.parse(worker.company).map((item, index)=> {
           str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
         })
+
+        let str_comment = ''
+        worker.comment && JSON.parse(worker.comment).map((item, index)=> {
+          str_comment = str_comment + item.content + (index+1 !== JSON.parse(worker.comment).length ? ', ' : '')
+        })
+
+        let str_comment2 = ''
+        worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
+          str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? ', ' : '')
+        })
+
         const newWorker = {
           id: worker.id,
           fio: worker.fio,
@@ -173,8 +203,8 @@ const Specialist = () => {
           company: str_company, 
           comteg: str_komteg, 
           comteg2: str_komteg2, 
-          comment: worker.comment, 
-          comment2: worker.comment2, 
+          comment: str_comment, 
+          comment2: str_comment2, 
           age: worker.age, 
           reyting: worker.reyting, 
           inn: worker.inn, 
@@ -233,6 +263,16 @@ const Specialist = () => {
           str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
         })
 
+        let str_comment = ''
+        worker.comment && JSON.parse(worker.comment).map((item, index)=> {
+          str_comment = str_comment + item.content + (index+1 !== JSON.parse(worker.comment).length ? ', ' : '')
+        })
+
+        let str_comment2 = ''
+        worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
+          str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? ', ' : '')
+        })
+
         const newWorker = {
           id: worker.id,
           fio: worker.fio,
@@ -248,8 +288,8 @@ const Specialist = () => {
           company: str_company, 
           comteg: str_komteg, 
           comteg2: str_komteg2, 
-          comment: worker.comment, 
-          comment2: worker.comment2, 
+          comment: str_comment, 
+          comment2: str_comment2, 
           age: worker.age, 
           reyting: worker.reyting, 
           inn: worker.inn, 
@@ -481,6 +521,17 @@ const Specialist = () => {
           str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
         })
 
+        let str_comment = ''
+        worker.comment && JSON.parse(worker.comment).map((item, index)=> {
+          str_comment = str_comment + item.content + (index+1 !== JSON.parse(worker.comment).length ? ', ' : '')
+        })
+
+        let str_comment2 = ''
+        worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
+          str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? ', ' : '')
+        })
+        
+
 				const newWorker = {
           id: worker.id,
           fio: worker.fio,
@@ -496,8 +547,8 @@ const Specialist = () => {
           company: str_company, 
           comteg: str_komteg, 
           comteg2: str_komteg, 
-          comment: worker.comment, 
-          comment2: worker.comment2, 
+          comment: str_comment, 
+          comment2: str_comment2, 
           age: worker.age, 
           reyting: worker.reyting, 
           inn: worker.inn, 
@@ -555,8 +606,12 @@ const Specialist = () => {
     }
     console.log(saveData)
 
+
+
     //сохранить изменения в базе
-    await editSpecialist(saveData, id)
+    //await editSpecialist(saveData, id)
+
+    addToast(exampleToast) //ваши данные сохранены
   }
 
   const blockedProfile = () => { 
@@ -621,7 +676,7 @@ const Specialist = () => {
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
                     {/* <h2>Специалисты</h2> */}
-                    
+                    <CToaster ref={toaster} push={toast} placement="top-end" /> 
                     <CRow className="mb-3">
                       <CCol sm={3} >
                         <CFormInput placeholder="Поиск..." onChange={(e)=>setText(e.target.value)} aria-label="spec"/>
@@ -839,7 +894,7 @@ const Specialist = () => {
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'none', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                      <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                     </div>
                                   </div>
 {/* 2 */}
@@ -854,6 +909,8 @@ const Specialist = () => {
                                           { label: 'Санкт-Петербург', value: '2' },
                                           { label: 'Майкоп', value: '3'}
                                         ]}
+                                        selected={city}
+                                        setSelected={setCity}
                                         onChange={addCity}
                                       />
                                   </div>

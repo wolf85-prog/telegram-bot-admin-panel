@@ -2,9 +2,9 @@ import React, {useState, useRef, useEffect} from 'react';
 import Select from '../Select/Select'
 import drp from './Dropdown.module.css'
 
-const Dropdown = ({options}) => {
+const Dropdown = ({options, selected, setSelected}) => {
     const [menuShow, setMenuShow] = useState(false)
-    const [selected, setSelected] = useState(options[0])
+    // const [selected, setSelected] = useState(options[0])
 
     //console.log(options)
 
