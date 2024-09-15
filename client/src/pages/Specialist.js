@@ -59,10 +59,9 @@ import specOnlyData from 'src/data/specOnlyData';
 //Workers.js
 const Specialist = () => {
 
-  const { specialist, setSpecialist } = useUsersContext();
-  const { userWorkers: specusers } = useUsersContext();
+  const { specialist, setSpecialist, specialistAll, setSpecialistAll } = useUsersContext();
+  //const { userWorkers: specusers } = useUsersContext();
 
-  const [specialistAll, setSpecialistAll] = useState([]);
   const [specialistCount, setSpecialistCount] = useState([]);
   const [filterAll, setFilterAll] = useState([]);
 
@@ -137,92 +136,15 @@ const Specialist = () => {
   }, [text]);
 
 
-  //-----------------------------------------------------------------------------------------
-  //			get specialist
-  //-----------------------------------------------------------------------------------------
-  useEffect(() => {
-    const arrWorkers = []
+  useEffect(()=> {
 
-    const fetchData = async () => {
-      // 1 Все специалисты
-      const res = await getSpecialist()
-      let arrAllWorkers = []
-      res.map(async (worker, i) => {
-        let str_spec = ''
-        worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
-          str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
-        })
-
-        let str_skill = ''
-        worker.skill && JSON.parse(worker.skill).map((item, index)=> {
-          str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
-        })
-
-        let str_merch = ''
-        worker.skill && JSON.parse(worker.merch).map((item, index)=> {
-          str_merch = str_merch + item.name + (index+1 !== JSON.parse(worker.merch).length ? ', ' : '')
-        })
-
-        let str_komteg = ''
-        worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
-          str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
-        })
-
-        let str_komteg2 = ''
-        worker.comteg2 && JSON.parse(worker.comteg2).map((item, index)=> {
-          str_komteg2 = str_komteg2 + item.name + (index+1 !== JSON.parse(worker.comteg2).length ? ', ' : '')
-        })
-
-        let str_company = ''
-        worker.company && JSON.parse(worker.company).map((item, index)=> {
-          str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
-        })
-
-        let str_comment = ''
-        worker.comment && JSON.parse(worker.comment).map((item, index)=> {
-          str_comment = str_comment + item.content + (index+1 !== JSON.parse(worker.comment).length ? ', ' : '')
-        })
-
-        let str_comment2 = ''
-        worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
-          str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? ', ' : '')
-        })
-
-        const newWorker = {
-          id: worker.id,
-          fio: worker.fio,
-          telegram: worker.chatId, 
-          phone: worker.phone, 
-          phone2: worker.phone2,
-          spec: str_spec,
-          city: worker.city, 
-          skill: str_skill,
-          promo: worker.promoId === '0' ? '' : worker.promoId, 
-          rank: worker.rank, 
-          merch: str_merch,  
-          company: str_company, 
-          comteg: str_komteg, 
-          comteg2: str_komteg2, 
-          comment: str_comment, 
-          comment2: str_comment2, 
-          age: worker.age, 
-          reyting: worker.reyting, 
-          inn: worker.inn, 
-          passport: worker.passport, 
-          profile: worker.profile, 
-          dogovor: worker.dogovor ? '🟢' : '🔴', 
-          samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
-          passportScan: worker.passportScan, 
-          email: worker.email, 
-        }
-        arrAllWorkers.push(newWorker)
-      }) 
-      console.log("specialistAll: ", res)
-      setSpecialistAll(arrAllWorkers)
+    const fetchData = async() => {
 
       // 2 специалисты 20 чел.
       let workers = await getSpecCount(20, specialist.length)
       console.log("specialist: ", workers)
+
+      let arrWorkers = []
 
       workers.map(async (worker, i) => {
         const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
@@ -322,12 +244,11 @@ const Specialist = () => {
       setUserbots(wuserbots)
 
       setLoading(false)
-      
     }
+    fetchData()
+  }, [])
 
-    fetchData();
-    
-  },[])
+  
 
   const clickFio = (worker)=> {
     console.log(worker)
@@ -606,10 +527,20 @@ const Specialist = () => {
     }
     console.log(saveData)
 
+    setSpecialist((specialist) => {	
 
+			let userIndex = specialist.findIndex((spec) => spec.id === id);
+			const usersCopy = JSON.parse(JSON.stringify(specialist));
+
+      const userObject = usersCopy[userIndex];
+			usersCopy[userIndex] = { ...userObject, fio: fio, city: city[0], age: age+'-01-01', speclist: JSON.stringify(specArr)};
+
+
+			return usersCopy;
+    });
 
     //сохранить изменения в базе
-    //await editSpecialist(saveData, id)
+    await editSpecialist(saveData, id)
 
     addToast(exampleToast) //ваши данные сохранены
   }

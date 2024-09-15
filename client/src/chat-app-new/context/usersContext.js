@@ -6,6 +6,8 @@ import { getAllPretendent, getWContacts, getWConversation,
 	getWConversations, getWMessages, getWorkers, getWorker, getAllWMessages, 
 	getWMessagesCount, getWorkersCount} from '../../http/workerAPI'
 
+import { getSpecialist, getSpecCount, editSpecialist } from './../../http/specAPI'
+
 
 import { getDistributionsW, 
 	getDistributionsCountW,
@@ -56,7 +58,8 @@ const UsersProvider = ({ children }) => {
 	const [count, setCount] = useState(0)
 	const [countMessage, setCountMessage] = useState(0)
 	const [countMessageRent, setCountMessageRent] = useState(0)
-	
+
+	const [specialistAll, setSpecialistAll] = useState([]);
 	const [usersOnline, setUsersOnline] = useState([]);
 	const [managers, setManagers]= useState([]); // менеджеры (заказчики)
 	const [companys, setCompanys]= useState([]);
@@ -548,6 +551,97 @@ const UsersProvider = ({ children }) => {
 		fetchUserWorkerData();
 		
 	},[])
+
+
+//-----------------------------------------------------------------------------------------
+//			get specialist
+//-----------------------------------------------------------------------------------------
+  useEffect(() => {
+    const arrWorkers = []
+
+    const fetchData = async () => {
+      // 1 Все специалисты
+      const res = await getSpecialist()
+      let arrAllWorkers = []
+      res.map(async (worker, i) => {
+        let str_spec = ''
+        worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
+          str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
+        })
+
+        let str_skill = ''
+        worker.skill && JSON.parse(worker.skill).map((item, index)=> {
+          str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
+        })
+
+        let str_merch = ''
+        worker.skill && JSON.parse(worker.merch).map((item, index)=> {
+          str_merch = str_merch + item.name + (index+1 !== JSON.parse(worker.merch).length ? ', ' : '')
+        })
+
+        let str_komteg = ''
+        worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
+          str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
+        })
+
+        let str_komteg2 = ''
+        worker.comteg2 && JSON.parse(worker.comteg2).map((item, index)=> {
+          str_komteg2 = str_komteg2 + item.name + (index+1 !== JSON.parse(worker.comteg2).length ? ', ' : '')
+        })
+
+        let str_company = ''
+        worker.company && JSON.parse(worker.company).map((item, index)=> {
+          str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
+        })
+
+        let str_comment = ''
+        worker.comment && JSON.parse(worker.comment).map((item, index)=> {
+          str_comment = str_comment + item.content + (index+1 !== JSON.parse(worker.comment).length ? ', ' : '')
+        })
+
+        let str_comment2 = ''
+        worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
+          str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? ', ' : '')
+        })
+
+        const newWorker = {
+          id: worker.id,
+          fio: worker.fio,
+          telegram: worker.chatId, 
+          phone: worker.phone, 
+          phone2: worker.phone2,
+          spec: str_spec,
+          city: worker.city, 
+          skill: str_skill,
+          promo: worker.promoId === '0' ? '' : worker.promoId, 
+          rank: worker.rank, 
+          merch: str_merch,  
+          company: str_company, 
+          comteg: str_komteg, 
+          comteg2: str_komteg2, 
+          comment: str_comment, 
+          comment2: str_comment2, 
+          age: worker.age, 
+          reyting: worker.reyting, 
+          inn: worker.inn, 
+          passport: worker.passport, 
+          profile: worker.profile, 
+          dogovor: worker.dogovor ? '🟢' : '🔴', 
+          samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
+          passportScan: worker.passportScan, 
+          email: worker.email, 
+        }
+        arrAllWorkers.push(newWorker)
+      }) 
+      //console.log("specialistAll: ", res)
+      setSpecialistAll(arrAllWorkers)
+      
+    }
+
+    fetchData();
+    
+  },[])
+
 	
 //------------------------------------------------------------------------------------------
 
@@ -1837,6 +1931,8 @@ function isObjectEmpty(obj) {
 			setWorkersAll,
 			specialist, 
 			setSpecialist,
+			specialistAll,
+			setSpecialistAll,
 			addNewMessage2,
 			delWMessageContext,
 			countMessageWork,
