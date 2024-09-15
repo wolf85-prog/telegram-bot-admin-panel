@@ -88,7 +88,7 @@ class SpecialistController {
         }
     }
 
-    async getSpecialist(req, res) {
+    async getSpecialistId(req, res) {
         const {id} = req.params
         try {
             const worker = await Specialist.findOne({where: {chatId: id.toString()}})
