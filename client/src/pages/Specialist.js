@@ -814,7 +814,7 @@ const Specialist = () => {
                                 </div>
                                   
                                   
-                                  <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '19px', left: '255px'}}/>
+                                  {/* <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '19px', left: '255px'}}/> */}
                                   {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '285px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">

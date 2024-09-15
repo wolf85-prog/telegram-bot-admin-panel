@@ -88,6 +88,16 @@ class SpecialistController {
         }
     }
 
+    async getWorker(req, res) {
+        const {id} = req.params
+        try {
+            const workers = await Specialist.findOne({where: {chatId: id}})
+            return res.status(200).json(workers);
+        } catch (err) {
+            return res.status(500).json(err);
+        }
+    }
+
 }
 
 module.exports = new SpecialistController()
