@@ -689,7 +689,7 @@ const Specialist = () => {
       cat: 'Blacklist'
     }
 
-    setSpeclist()
+    //setSpeclist()
   }
   
 
