@@ -286,8 +286,8 @@ const Specialist = () => {
     setComteg(worker.comteg ? worker.comteg.split(',') : [])
     setComteg2(worker.comteg2 ? worker.comteg2.split(',') : [])
     setEmail(worker.email)
-    setComment(worker.comment === null ? '' : worker.comment)
-    setComment2(worker.comment2 === null ? '' : worker.comment2)
+    setComment(worker.comment ? worker.comment.split(',') : [])
+    setComment2(worker.comment2 ? worker.comment2.split(',') : [])
     setProfile(worker.profile)
 
     setPassport(worker.passport)
@@ -521,7 +521,7 @@ const Specialist = () => {
                       spec: item,
                       cat: category.icon,
                   }
-                  strSpec = strSpec + ' ' + item
+                  strSpec = strSpec + ', ' + item
                   specArr.push(obj)
               }
           })
@@ -534,7 +534,7 @@ const Specialist = () => {
       const obj = {
         name: item,
       }
-      strSkill = strSkill + ' ' + item
+      strSkill = strSkill + ', ' + item
       skillArr.push(obj)
     })
 
@@ -544,7 +544,7 @@ const Specialist = () => {
       const obj = {
         name: item,
       }
-      strCompany = strCompany + ' ' + item
+      strCompany = strCompany + ', ' + item
       companyArr.push(obj)
     })
 
@@ -554,7 +554,7 @@ const Specialist = () => {
       const obj = {
         name: item,
       }
-      strMerch = strMerch + ' ' + item
+      strMerch = strMerch + ', ' + item
       merchArr.push(obj)
     })
 
@@ -564,7 +564,7 @@ const Specialist = () => {
       const obj = {
         name: item,
       }
-      strComteg = strComteg + ' ' + item
+      strComteg = strComteg + ', ' + item
       comtegArr.push(obj)
     })
 
@@ -574,7 +574,7 @@ const Specialist = () => {
       const obj = {
         name: item,
       }
-      strComteg2 = strComteg2 + ' ' + item
+      strComteg2 = strComteg2 + ', ' + item
       comtegArr2.push(obj)
     })
 
@@ -584,7 +584,7 @@ const Specialist = () => {
       const obj = {
         name: item,
       }
-      strComment = strComment + ' ' + item
+      strComment = strComment + ', ' + item
       commentArr.push(obj)
     })
 
@@ -594,7 +594,7 @@ const Specialist = () => {
       const obj = {
         name: item,
       }
-      strComment2 = strComment2 + ' ' + item
+      strComment2 = strComment2 + ', ' + item
       commentArr2.push(obj)
     })
 
@@ -630,7 +630,7 @@ const Specialist = () => {
         fio, 
         phone, 
         city: city, 
-        age: age+'-01-01', 
+        age: age ? age+'-01-01' : '', 
         speclist: strSpec,
         company: strCompany,
         skill: strSkill,
