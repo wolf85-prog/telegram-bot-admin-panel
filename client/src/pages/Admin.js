@@ -222,18 +222,18 @@ useEffect(() => {
 
       let messages = await getAllMessages()
 
-      const managers = [...zakazchiki];
+      //const managers = [...zakazchiki];
       //console.log("zakazchiki: ", zakazchiki)
 
       clients.map((client, index) => {
         
-        let userIndex = zakazchiki?.findIndex((manager) => manager.tgID === client.chatId);  
-        const userObject = managers[userIndex];
+        // let userIndex = zakazchiki?.findIndex((manager) => manager.tgID === client.chatId);  
+        // const userObject = managers[userIndex];
 
-        let userObject2 = comps.find((company) => company.managers.find(man => man.id ===  userObject?.id)) //company.managers.map((manager) => manager.id === userObject?.id));  
+        //let userObject2 = comps.find((company) => company.managers.find(man => man.id ===  userObject?.id)) //company.managers.map((manager) => manager.id === userObject?.id));  
 
-        const companyName = userObject2?.title
-        const companyCity = userObject2?.city ? userObject2?.city : ''
+        // const companyName = userObject2?.title
+        // const companyCity = userObject2?.city ? userObject2?.city : ''
 
         const lastDate = client.date ? client.date.split('T') : ''
         const d = new Date(lastDate[0]);
@@ -262,9 +262,9 @@ useEffect(() => {
             registered: '01.01.2023',
           },
           TG_ID: client.chatId,
-          city: companyCity,
-          company: companyName ? companyName : '',
-          phone: userObject?.phone,
+          //city: companyCity,
+          //company: companyName ? companyName : '',
+          // phone: userObject?.phone,
           usage: {
             value: Math.round(messagesUsers.length * 100 / (allMessages - fromAdmin.length)), 
             period: '01.04.2023 - ' + newDateActivity,
@@ -284,9 +284,9 @@ useEffect(() => {
           },
           createDate: client.createdAt,
           TG_ID: client.chatId,
-          city: companyCity,
-          company: companyName ? companyName : '',
-          phone: userObject?.phone,
+          //city: companyCity,
+          //company: companyName ? companyName : '',
+          // phone: userObject?.phone,
         }
 
         arrClients2.push(newObj2)
@@ -1598,10 +1598,10 @@ useEffect(() => {
                                       </div>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
-                                      {item.company ? <div>{item.company}</div> : ''}
+                                      {/* {item.company ? <div>{item.company}</div> : ''} */}
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
-                                      <div>{item.phone}</div>
+                                      {/* <div>{item.phone}</div> */}
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
                                       <div>{item.city}</div>
