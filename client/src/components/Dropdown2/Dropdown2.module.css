@@ -13,6 +13,7 @@
     height: 100px;
     margin-bottom: 0;
     cursor: pointer;
+    padding-top: 5px;
   }
 
 .menu {
@@ -38,7 +39,7 @@
 }
 
 .menu li {
-    padding: 0.7em 0.5em;
+    padding: 0.1em 0.5em;
     margin: 0.3em 0;
     border-radius: 0.5em;
     cursor: pointer;
@@ -77,9 +78,7 @@
 
 .close {
     position: absolute;
-    right: 8px;
-    /* top: 10px; */
-    margin-left: 15px;
-    margin-top: 5px;
+    right: 12px; 
+    top: -15px;
     cursor: pointer;
 }

@@ -53,8 +53,10 @@ import { array } from 'prop-types';
 
 import MyDropdown from 'src/components/Dropdown/Dropdown';
 import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
+
 import specData from 'src/data/specData';
 import specOnlyData from 'src/data/specOnlyData';
+import comtegs from 'src/data/comtegs';
 
 //Workers.js
 const Specialist = () => {
@@ -75,6 +77,7 @@ const Specialist = () => {
   const [showProfile, setShowProfile] = useState(false)
   const [showSpec, setShowSpec] = useState(false)
   const [showClose, setShowClose] = useState(false)
+  const [showUpload, setShowUpload] = useState(false)
 
   const [showSave, setShowSave] = useState(false)
   const [showSave2, setShowSave2] = useState(false)
@@ -807,7 +810,7 @@ const Specialist = () => {
                               )
                               :
                               <div style={{position: 'relative', height: '790px', display: 'flex', flexDirection: 'row'}}>
-                                <div style={{display: 'flex', flexDirection: 'column', width: '250px'}}>
+                                <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {profile ? 
                                   <img src={profile} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={250} height={250}/>
                                   :
@@ -816,7 +819,7 @@ const Specialist = () => {
                                   </svg>
                                   }
                                   <div className="file-upload" style={{marginBottom: '15px'}}>
-                                    <img src={addAvatar} alt="upload" style={{position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
+                                    <img src={addAvatar} alt="upload" style={{display: showUpload ? 'block' : 'none', position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
                                     <input type="file" style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}/>
                                   </div>
 
@@ -934,11 +937,7 @@ const Specialist = () => {
                                       <MyDropdown2
                                         tags={comteg}
                                         setTags={setComteg}
-                                        options={[
-                                          { label: 'Тег 1', value: '1' },
-                                          { label: 'Тег 2', value: '2' },
-                                          { label: 'Тег 3', value: '3'},
-                                        ]}
+                                        options={comtegs}
                                         onChange={changeSpec}
                                       />
                                   </div>
@@ -1017,11 +1016,7 @@ const Specialist = () => {
                                       <MyDropdown2
                                         tags={comteg2}
                                         setTags={setComteg2}
-                                        options={[
-                                          { label: 'Тег 1', value: '1' },
-                                          { label: 'Тег 2', value: '2' },
-                                          { label: 'Тег 3', value: '3'},
-                                        ]}
+                                        options={comtegs}
                                         onChange={changeSpec}
                                       />
                                   </div>

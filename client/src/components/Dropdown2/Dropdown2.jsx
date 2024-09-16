@@ -31,7 +31,7 @@ const Dropdown2 = ({options, tags, setTags}) => {
 
     const specList = tags.map((item, i) =>
         <li key={i} onMouseOver={()=>setShowClose(true)} onMouseOut={()=>setShowClose(false)}>
-            {item} <img src={Close} onClick={(e) => removeTag(i, e)} width={15} alt='' className={drp.close} style={{visibility: showClose ? 'visible' : 'hidden'}}></img>
+            {item} <div style={{position: 'relative'}}><img src={Close} onClick={(e) => removeTag(i, e)} width={15} alt='' className={drp.close} style={{visibility: showClose ? 'visible' : 'hidden'}}></img></div>
         </li>
     )
 
