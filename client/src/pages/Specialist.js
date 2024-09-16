@@ -595,6 +595,7 @@ const Specialist = () => {
       chatId: telegram,
       inn,
       email,
+      promo,
       passport
     }
     console.log(saveData)
@@ -621,6 +622,7 @@ const Specialist = () => {
         chatId: telegram,
         inn,
         email,
+        promo,
         passport
       };
 
@@ -1154,15 +1156,6 @@ const Specialist = () => {
 
                                   <label>ИНН</label>
                                   <div className="text-field">
-                                    {/* <input 
-                                      className="text-field__input" 
-                                      type="text" 
-                                      name="inn" 
-                                      id="inn" 
-                                      value={inn} 
-                                      onChange={handleInn} 
-                                      style={{width: '250px'}}
-                                    /> */}
                                     <InputMask
                                         className="text-field__input" 
                                         style={{width: '250px'}}

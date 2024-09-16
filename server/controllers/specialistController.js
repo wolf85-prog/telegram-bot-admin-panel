@@ -88,6 +88,7 @@ class SpecialistController {
                 chatId,
                 inn,
                 email,
+                promo,
                 passport
             } = req.body
 
@@ -108,6 +109,7 @@ class SpecialistController {
                     chatId,
                     inn,
                     email,
+                    promoId: promo,
                     passport
                 },
                 { where: {id: id} })
