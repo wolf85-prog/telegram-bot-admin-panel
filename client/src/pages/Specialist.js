@@ -117,7 +117,9 @@ const Specialist = () => {
   const [countPressCity, setCountPressCity] = useState(0);
 
   const [blockProfile, setBlockProfile] = useState(true)
-
+  const [showBlacklist, setShowBlacklist] = useState(false)
+  const [showMenu1, setShowMenu1] = useState(false)
+  const [showMenu2, setShowMenu2] = useState(false)
 
   const [toast, addToast] = useState(0)
   const toaster = useRef()
@@ -592,7 +594,24 @@ const Specialist = () => {
 			const usersCopy = JSON.parse(JSON.stringify(specialist));
 
       const userObject = usersCopy[userIndex];
-			usersCopy[userIndex] = { ...userObject, fio: fio, city: city[0], age: age+'-01-01', speclist: JSON.stringify(specArr)};
+			usersCopy[userIndex] = { ...userObject, 
+        fio, 
+        phone, 
+        city: city[0], 
+        age: age+'-01-01', 
+        speclist: JSON.stringify(specArr),
+        company: JSON.stringify(companyArr),
+        skill: JSON.stringify(skillArr),
+        merch: JSON.stringify(merchArr),
+        comteg: JSON.stringify(comtegArr),
+        comteg2: JSON.stringify(comtegArr2),
+        comment,
+        comment2,
+        chatId: telegram,
+        inn,
+        email,
+        passport
+      };
 
 
 			return usersCopy;
@@ -654,6 +673,25 @@ const Specialist = () => {
     setSpeclist([...specialist, e.target.innerText])
     setShowSpec(false)
   }
+
+  const onChangeReyting = () => {
+    setShowBlacklist(false)
+    setShowMenu2(false)
+  }
+
+  const onChangeBlacklist = () => {
+    setShowBlacklist(true)
+    setShowMenu1(false)
+
+    //добавить в список специальностей Blacklist
+    const newObj = {
+      spec: 'Blacklist',
+      cat: 'Blacklist'
+    }
+
+    setSpeclist()
+  }
+  
 
 
   return (
@@ -823,15 +861,30 @@ const Specialist = () => {
                                     <input type="file" style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}/>
                                   </div>
 
-                                  <div style={{width: '250px', display: 'flex', justifyContent: 'center', marginBottom: '10px'}}>
-                                    <div className="star-block">
-                                      <img className='star-icon' src={StarActive} alt='' /> 
-                                      <img className='star-icon' src={StarActive} alt='' />
-                                      <img className='star-icon' src={StarActive} alt='' />
-                                      <img className='star-icon' src={Star} alt='' />
-                                      <img className='star-icon' src={Star} alt='' />
-                                    </div>
+                                  <div className="dropdown">
+                                      <div style={{width: '250px', display: 'flex', justifyContent: 'center', marginBottom: '10px'}}>
+                                        {showBlacklist ?
+                                        <span onClick={()=>setShowMenu2(true)}>Blacklist</span>
+                                        :<div className="star-block" onClick={()=>setShowMenu1(true)}>
+                                          <img className='star-icon' src={StarActive} alt='' /> 
+                                          <img className='star-icon' src={StarActive} alt='' />
+                                          <img className='star-icon' src={StarActive} alt='' />
+                                          <img className='star-icon' src={Star} alt='' />
+                                          <img className='star-icon' src={Star} alt='' />
+                                        </div>
+                                        }
+                                      </div>
+                                      <div className="dropdown-content" style={{display: showMenu1 ? 'block' : 'none'}}>
+                                          <span>Изменить рейтинг</span>
+                                          <span onClick={onChangeBlacklist}>Blacklist</span>
+                                      </div>
+                                      <div className="dropdown-content" style={{display: showMenu2 ? 'block' : 'none'}}>
+                                          <span>Изменить рейтинг</span>
+                                          <span onClick={onChangeReyting}>Рейтинг</span>
+                                      </div>
                                   </div>
+
+                                  
                                   
                                   <label>В системе</label>
                                   <div style={{display: 'flex', justifyContent: 'center'}}>

@@ -592,5 +592,38 @@ th.widthSpace {
     border-radius: 10px;
     width: 320px;
   }
+
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #131c21;
+    min-width: 250px;
+    z-index: 10;
+    border: 1px solid #393d40;
+    border-radius: 6px;
+  }
+
+  .dropdown-content span {
+    color: white;
+    padding: 5px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .dropdown-content span:hover {
+    background-color: #182025;
+  }
+
+  /* .dropdown:hover .dropdown-content {
+    display: block;
+  } */
   
   
