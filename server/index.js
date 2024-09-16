@@ -83,16 +83,16 @@ const start = async () => {
             console.log('HTTPS Server Admin-panel running on port ' + port);
 
             // Создание задания cron, которое запускается в нужное время
-            cron.schedule("0 3 * * *", async function() { 
-                //Запущена задача на каждый день в 03:00
-                console.log("Запуск обновления данных..."); 
-                try {
-                    //обновление данных специалистов
-                    await fetch(`${hostAdmin}api/workers/update/get`)
-                } catch (error) {
-                   console.log(error.message) 
-                }      
-            });  
+            // cron.schedule("0 3 * * *", async function() { 
+            //     //Запущена задача на каждый день в 03:00
+            //     console.log("Запуск обновления данных..."); 
+            //     try {
+            //         //обновление данных специалистов
+            //         await fetch(`${hostAdmin}api/workers/update/get`)
+            //     } catch (error) {
+            //        console.log(error.message) 
+            //     }      
+            // });  
                
         }); 
 
