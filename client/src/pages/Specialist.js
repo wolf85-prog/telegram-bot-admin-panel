@@ -107,6 +107,7 @@ const Specialist = () => {
   const [passportScan, setPassportScan] = useState('');
   const [nik, setNik] = useState('');
   const [dateReg, setDateReg] = useState('');
+  const [profile, setProfile] = useState('');
 
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
@@ -282,6 +283,7 @@ const Specialist = () => {
     setEmail(worker.email)
     setComment(worker.comment === null ? '' : worker.comment)
     setComment2(worker.comment2 === null ? '' : worker.comment2)
+    setProfile(worker.profile)
 
     setPassport(worker.passport)
     setDogovor(worker.dogovor)
@@ -499,6 +501,7 @@ const Specialist = () => {
     setShowClose(false)
   }
 
+  //сохранить профиль
   const saveProfile = async(id) => { 
     setShowClose(true)
     console.log(id)
@@ -519,28 +522,81 @@ const Specialist = () => {
       })
     })
 
+    let skillArr = []
+    skill.map((item)=> {
+      const obj = {
+        name: item,
+      }
+      skillArr.push(obj)
+    })
+
+    let companyArr = []
+    company.map((item)=> {
+      const obj = {
+        name: item,
+      }
+      companyArr.push(obj)
+    })
+
+    let merchArr = []
+    merch.map((item)=> {
+      const obj = {
+        name: item,
+      }
+      merchArr.push(obj)
+    })
+
+    let comtegArr = []
+    comteg.map((item)=> {
+      const obj = {
+        name: item,
+      }
+      comtegArr.push(obj)
+    })
+
+    let comtegArr2 = []
+    comteg2.map((item)=> {
+      const obj = {
+        name: item,
+      }
+      comtegArr2.push(obj)
+    })
+
+
     const saveData = {
-      fio: fio,
+      fio,
+      phone,
       city: city[0],
       age: age+'-01-01',
-      speclist: JSON.stringify(specArr)
+      speclist: JSON.stringify(specArr),
+      company: JSON.stringify(companyArr),
+      skill: JSON.stringify(skillArr),
+      merch: JSON.stringify(merchArr),
+      comteg: JSON.stringify(comtegArr),
+      comteg2: JSON.stringify(comtegArr2),
+      comment,
+      comment2,
+      chatId: telegram,
+      inn,
+      email,
+      passport
     }
     console.log(saveData)
 
-    setSpecialist((specialist) => {	
+    // setSpecialist((specialist) => {	
 
-			let userIndex = specialist.findIndex((spec) => spec.id === id);
-			const usersCopy = JSON.parse(JSON.stringify(specialist));
+		// 	let userIndex = specialist.findIndex((spec) => spec.id === id);
+		// 	const usersCopy = JSON.parse(JSON.stringify(specialist));
 
-      const userObject = usersCopy[userIndex];
-			usersCopy[userIndex] = { ...userObject, fio: fio, city: city[0], age: age+'-01-01', speclist: JSON.stringify(specArr)};
+    //   const userObject = usersCopy[userIndex];
+		// 	usersCopy[userIndex] = { ...userObject, fio: fio, city: city[0], age: age+'-01-01', speclist: JSON.stringify(specArr)};
 
 
-			return usersCopy;
-    });
+		// 	return usersCopy;
+    // });
 
     //сохранить изменения в базе
-    await editSpecialist(saveData, id)
+    //await editSpecialist(saveData, id)
 
     addToast(exampleToast) //ваши данные сохранены
   }
@@ -752,10 +808,13 @@ const Specialist = () => {
                               :
                               <div style={{position: 'relative', height: '790px', display: 'flex', flexDirection: 'row'}}>
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}}>
+                                  {profile ? 
+                                  <img src={profile} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={250} height={250}/>
+                                  :
                                   <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
                                     <rect width="250px" height="250px" fill="#007aff" rx="40"></rect> 
                                   </svg>
-
+                                  }
                                   <div className="file-upload" style={{marginBottom: '15px'}}>
                                     <img src={addAvatar} alt="upload" style={{position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
                                     <input type="file" style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}/>
@@ -1036,7 +1095,7 @@ const Specialist = () => {
 
                                   <label>ИНН</label>
                                   <div className="text-field">
-                                    <input 
+                                    {/* <input 
                                       className="text-field__input" 
                                       type="text" 
                                       name="inn" 
@@ -1044,7 +1103,20 @@ const Specialist = () => {
                                       value={inn} 
                                       onChange={handleInn} 
                                       style={{width: '250px'}}
-                                    />
+                                    /> */}
+                                    <InputMask
+                                        className="text-field__input" 
+                                        style={{width: '250px'}}
+                                        type="text" 
+                                        name="inn" 
+                                        id="inn"
+                                        mask="9999-999999-99"
+                                        maskChar=""
+                                        onChange={(e) => setInn(e.target.value)} 
+                                        value={inn}
+                                        placeholder=''
+                                    >
+                                    </InputMask>
                                   </div> 
 
                                   {/* email */}
@@ -1075,13 +1147,6 @@ const Specialist = () => {
 
                                   <label>Проекты</label>
                                   <div className="text-field">
-                                    {/* <textarea 
-                                      className="text-field__input" 
-                                      type="text" 
-                                      name="comment" 
-                                      id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '.375rem', textAlign: 'left'}}
-                                    /> */}
                                     <ul className='spec-style' style={{width: '250px', height: '190px', whiteSpace: 'pre-line', borderRadius: '.375rem', textAlign: 'left'}}>
                                     {/* { 
                                        tags.map((item, i) =>*/}
