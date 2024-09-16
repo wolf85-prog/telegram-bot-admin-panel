@@ -78,13 +78,13 @@ const UsersProvider = ({ children }) => {
 	}); 
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
 	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
-	// const [specialist, setSpecialist] =  useState( () => {
-	// 	const savedUserWorkers = localStorage.getItem("specialist");
-	//    	const parsedUserWorkers = JSON.parse(savedUserWorkers);
-	//    	return parsedUserWorkers || "";
-	// });  //все специалисты;
+	const [specialist, setSpecialist] =  useState( () => {
+		const savedUserWorkers = localStorage.getItem("specialist");
+	   	const parsedUserWorkers = JSON.parse(savedUserWorkers);
+	   	return parsedUserWorkers || "";
+	});  //все специалисты;
 
-	const [specialist, setSpecialist] =  useState([])
+	// const [specialist, setSpecialist] =  useState([])
 
 	const [userRenthub, setUserRenthub] = useState( () => {
 		const savedUserRenthub = localStorage.getItem("userRenthub");
