@@ -583,20 +583,20 @@ const Specialist = () => {
     }
     console.log(saveData)
 
-    // setSpecialist((specialist) => {	
+    setSpecialist((specialist) => {	
 
-		// 	let userIndex = specialist.findIndex((spec) => spec.id === id);
-		// 	const usersCopy = JSON.parse(JSON.stringify(specialist));
+			let userIndex = specialist.findIndex((spec) => spec.id === id);
+			const usersCopy = JSON.parse(JSON.stringify(specialist));
 
-    //   const userObject = usersCopy[userIndex];
-		// 	usersCopy[userIndex] = { ...userObject, fio: fio, city: city[0], age: age+'-01-01', speclist: JSON.stringify(specArr)};
+      const userObject = usersCopy[userIndex];
+			usersCopy[userIndex] = { ...userObject, fio: fio, city: city[0], age: age+'-01-01', speclist: JSON.stringify(specArr)};
 
 
-		// 	return usersCopy;
-    // });
+			return usersCopy;
+    });
 
     //сохранить изменения в базе
-    //await editSpecialist(saveData, id)
+    await editSpecialist(saveData, id)
 
     addToast(exampleToast) //ваши данные сохранены
   }
