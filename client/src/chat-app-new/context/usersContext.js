@@ -575,7 +575,7 @@ const UsersProvider = ({ children }) => {
         })
 
         let str_merch = ''
-        worker.skill && JSON.parse(worker.merch).map((item, index)=> {
+        worker.merch && JSON.parse(worker.merch).map((item, index)=> {
           str_merch = str_merch + item.name + (index+1 !== JSON.parse(worker.merch).length ? ', ' : '')
         })
 

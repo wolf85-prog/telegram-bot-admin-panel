@@ -172,7 +172,7 @@ const Specialist = () => {
         })
 
         let str_merch = ''
-        worker.skill && JSON.parse(worker.merch).map((item, index)=> {
+        worker.merch && JSON.parse(worker.merch).map((item, index)=> {
           str_merch = str_merch + item.name + (index+1 !== JSON.parse(worker.merch).length ? ', ' : '')
         })
 
@@ -512,7 +512,7 @@ const Specialist = () => {
     console.log(id)
 
     let specArr = []
-
+    let strSpec = ''
     speclist.map((item) => {
       specData.map((category)=> {
           category.models.map((work)=> {
@@ -521,6 +521,7 @@ const Specialist = () => {
                       spec: item,
                       cat: category.icon,
                   }
+                  strSpec = strSpec + ' ' + item
                   specArr.push(obj)
               }
           })
@@ -528,42 +529,52 @@ const Specialist = () => {
     })
 
     let skillArr = []
+    let strSkill = ''
     skill.map((item)=> {
       const obj = {
         name: item,
       }
+      strSkill = strSkill + ' ' + item
       skillArr.push(obj)
     })
 
     let companyArr = []
+    let strCompany = ''
     company.map((item)=> {
       const obj = {
         name: item,
       }
+      strCompany = strCompany + ' ' + item
       companyArr.push(obj)
     })
 
     let merchArr = []
+    let strMerch = ''
     merch.map((item)=> {
       const obj = {
         name: item,
       }
+      strMerch = strMerch + ' ' + item
       merchArr.push(obj)
     })
 
     let comtegArr = []
+    let strComteg = ''
     comteg.map((item)=> {
       const obj = {
         name: item,
       }
+      strComteg = strComteg + ' ' + item
       comtegArr.push(obj)
     })
 
     let comtegArr2 = []
+    let strComteg2 = ''
     comteg2.map((item)=> {
       const obj = {
         name: item,
       }
+      strComteg2 = strComteg2 + ' ' + item
       comtegArr2.push(obj)
     })
 
@@ -599,12 +610,12 @@ const Specialist = () => {
         phone, 
         city: city[0], 
         age: age+'-01-01', 
-        speclist: JSON.stringify(specArr),
-        company: JSON.stringify(companyArr),
-        skill: JSON.stringify(skillArr),
-        merch: JSON.stringify(merchArr),
-        comteg: JSON.stringify(comtegArr),
-        comteg2: JSON.stringify(comtegArr2),
+        speclist: strSpec,
+        company: strCompany,
+        skill: strSkill,
+        merch: strMerch,
+        comteg: strComteg,
+        comteg2: strComteg2,
         comment,
         comment2,
         chatId: telegram,
