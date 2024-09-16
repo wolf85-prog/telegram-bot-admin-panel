@@ -72,14 +72,43 @@ class SpecialistController {
                 return;
             }
 
-            const {fio, city, age, speclist} = req.body
+            const {
+                fio, 
+                phone, 
+                city, 
+                age, 
+                speclist,
+                company,
+                skill,
+                merch,
+                comteg,
+                comteg2,
+                comment,
+                comment2,
+                chatId,
+                inn,
+                email,
+                passport
+            } = req.body
 
             const newUser = await Specialist.update(
                 { 
                     fio, 
+                    phone, 
                     city,
                     age,
-                    specialization: speclist
+                    specialization: speclist,
+                    company,
+                    skill,
+                    merch,
+                    comteg,
+                    comteg2,
+                    comment,
+                    comment2,
+                    chatId,
+                    inn,
+                    email,
+                    passport
                 },
                 { where: {id: id} })
             return res.status(200).json(newUser);
