@@ -578,6 +578,26 @@ const Specialist = () => {
       comtegArr2.push(obj)
     })
 
+    let commentArr = []
+    let strComment = ''
+    comment.map((item)=> {
+      const obj = {
+        name: item,
+      }
+      strComment = strComment + ' ' + item
+      commentArr.push(obj)
+    })
+
+    let commentArr2 = []
+    let strComment2 = ''
+    comment2.map((item)=> {
+      const obj = {
+        name: item,
+      }
+      strComment2 = strComment2 + ' ' + item
+      commentArr2.push(obj)
+    })
+
 
     const saveData = {
       fio,
@@ -590,8 +610,8 @@ const Specialist = () => {
       merch: JSON.stringify(merchArr),
       comteg: JSON.stringify(comtegArr),
       comteg2: JSON.stringify(comtegArr2),
-      comment,
-      comment2,
+      comment: JSON.stringify(commentArr),
+      comment2: JSON.stringify(commentArr2),
       chatId: telegram,
       inn,
       email,
@@ -617,8 +637,8 @@ const Specialist = () => {
         merch: strMerch,
         comteg: strComteg,
         comteg2: strComteg2,
-        comment,
-        comment2,
+        comment: strComment,
+        comment2: strComment2,
         chatId: telegram,
         inn,
         email,
