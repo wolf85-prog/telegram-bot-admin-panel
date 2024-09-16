@@ -608,7 +608,7 @@ const Specialist = () => {
 			usersCopy[userIndex] = { ...userObject, 
         fio, 
         phone, 
-        city: city[0], 
+        city: city, 
         age: age+'-01-01', 
         speclist: strSpec,
         company: strCompany,
