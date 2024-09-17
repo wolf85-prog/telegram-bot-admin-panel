@@ -1236,9 +1236,9 @@ const onChangeSelectCity = (e) => {
   //===================================================================
   {/* Запланировать рассылку */}
   const onPlanerShow = async(label, proj, text, cats, count, poster, uuidDistrib) => {
-    setVisibleModal(!visibleModal)
+    //setVisibleModal(!visibleModal)
 
-    if (selected.length !== 0 && proj || selected.length !== 0 && text) {
+    if (selected.length !== 0 && image || selected.length !== 0 && text) {
       navigate('/distributionw_planer', {
         state: {
           labelProj: label,
@@ -1275,7 +1275,7 @@ const onChangeSelectCity = (e) => {
 
     let countSuccess = 0
 
-    if (selected.length !== 0 && file || selected.length !== 0 && text) {
+    //if (selected.length !== 0 && file || selected.length !== 0 && text) {
       audio.play();
 
       const d = new Date();
@@ -1329,10 +1329,10 @@ const onChangeSelectCity = (e) => {
 
       //setTimeout(() => navigate('/distributionw'), 1000);
 
-    }
-    else {
-      setVisibleModal(!visibleModal)
-    }
+    //}
+    // else {
+    //   setVisibleModal(!visibleModal)
+    // }
   
   }
 
