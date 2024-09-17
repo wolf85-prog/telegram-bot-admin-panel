@@ -578,25 +578,23 @@ const Specialist = () => {
       comtegArr2.push(obj)
     })
 
+    //комментарии 1
     let commentArr = []
     let strComment = ''
-    comment.map((item)=> {
-      const obj = {
-        name: item,
-      }
-      strComment = strComment + ', ' + item
-      commentArr.push(obj)
-    })
+    const obj1 = {
+       content: comment,
+    }
+    strComment = comment
+    commentArr.push(obj1)
 
+    //комментарии 2
     let commentArr2 = []
     let strComment2 = ''
-    comment2.map((item)=> {
-      const obj = {
-        name: item,
-      }
-      strComment2 = strComment2 + ', ' + item
-      commentArr2.push(obj)
-    })
+    const obj2 = {
+       content: comment2,
+    }
+    strComment2 = comment2
+    commentArr2.push(obj2)
 
 
     const saveData = {
