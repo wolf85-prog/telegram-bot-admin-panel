@@ -57,6 +57,7 @@ import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
 import specData from 'src/data/specData';
 import specOnlyData from 'src/data/specOnlyData';
 import comtegs from 'src/data/comtegs';
+import skills from 'src/data/skills';
 
 //Workers.js
 const Specialist = () => {
@@ -1072,11 +1073,7 @@ const Specialist = () => {
                                       <MyDropdown2
                                         tags={skill}
                                         setTags={setSkill}
-                                        options={[
-                                          { label: 'Навык 1', value: '1' },
-                                          { label: 'Навык 2', value: '2' },
-                                          { label: 'Навык 3', value: '3'},
-                                        ]}
+                                        options={skills}
                                         onChange={changeSpec}
                                       />
                                   </div>
