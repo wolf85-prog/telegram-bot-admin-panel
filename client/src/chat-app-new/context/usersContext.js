@@ -344,25 +344,27 @@ const UsersProvider = ({ children }) => {
 			//console.log("userWorkers: ", userWorkers)
 		
 			//0 все специалисты
-			let all = await getWorkers()
+			//let all = await getWorkers()
+			let all = await getSpecialist()
+			console.log("specialist all: ", all)
 			const arrayWorkerAll = []
 		
 			all.map(async (user) => {
 				const newWorker = {
 				  id: user.id,
-				  userfamily: user.userfamily != null ? user.userfamily : '',
-				  username: user.username,
+				  userfamily: user.fio, //user.userfamily != null ? user.userfamily : '',
+				  username: '',//user.username,
 				  phone: user.phone,
-				  dateborn: user.dateborn,
+				  dateborn: user.age,
 				  city: user.city, 
-				  newcity: user.newcity, 
-				  companys: user.companys,
-				  stag: user.stag,
-				  worklist:  user.worklist,
+				  //newcity: user.newcity, 
+				  companys: user.company,
+				  //stag: user.stag,
+				  worklist:  user.specialization,
 				  chatId: user.chatId,
 				  createDate: user.createdAt,
-				  avatar: user.avatar,
-				  from: user.from,
+				  avatar: user.profile,
+				  //from: user.from,
 				  promoId: user.promoId,
 				  block: user.block,
 				  deleted: user.deleted,
@@ -374,30 +376,31 @@ const UsersProvider = ({ children }) => {
 			setWorkersAll(arrayWorkerAll)
 
 			//1 все специалисты 100
-			let response = await getWorkersCount(100, workers.length);
-			console.log("workers size: ", response.length)
+			//let response = await getWorkersCount(100, workers.length);
+			let response = await getSpecCount(100, specialist.length);
+			console.log("specialist size: ", response.length)
 		
 			const arrayWorker = []
 		
 			response.reverse().map(async (user) => {
 				const newWorker = {
-				  id: user.id,
-				  userfamily: user.userfamily,
-				  username: user.username,
-				  phone: user.phone,
-				  dateborn: user.dateborn,
-				  city: user.city, 
-				  newcity: user.newcity, 
-				  companys: user.companys,
-				  stag: user.stag,
-				  worklist:  user.worklist,
-				  chatId: user.chatId,
-				  createDate: user.createdAt,
-				  avatar: user.avatar,
-				  from: user.from,
-				  promoId: user.promoId,
-				  block: user.block,
-				  deleted: user.deleted,
+					id: user.id,
+					userfamily: user.fio, //user.userfamily != null ? user.userfamily : '',
+					username: '',//user.username,
+					phone: user.phone,
+					dateborn: user.age,
+					city: user.city, 
+					//newcity: user.newcity, 
+					companys: user.company,
+					//stag: user.stag,
+					worklist:  user.specialization,
+					chatId: user.chatId,
+					createDate: user.createdAt,
+					avatar: user.profile,
+					//from: user.from,
+					promoId: user.promoId,
+					block: user.block,
+					deleted: user.deleted,
 				}
 		
 				arrayWorker.push(newWorker)
@@ -512,11 +515,11 @@ const UsersProvider = ({ children }) => {
 						username: userbot.username ? userbot.username : '', // user.username ? user.username : '',
 						name: worker?.userfamily + " " + worker?.username, //notion[0]?.fio ? notion[0]?.fio : '',
 						city: worker?.city, //notion[0]?.city ? notion[0]?.city : '',
-						newcity: worker?.newcity,
+						//newcity: worker?.newcity,
 						phone: worker?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
 						age: worker?.dateborn, //notion[0]?.age ? notion[0]?.age : "",
 						chatId: worker?.chatId,
-						avatar: worker?.avatar ? worker?.avatar : '', //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
+						avatar: worker?.profile ? worker?.profile : '', //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
 						conversationId: conversationId ? conversationId : 0,
 						block: userbot.block ? userbot.block : '',
 						blockw: worker?.block,

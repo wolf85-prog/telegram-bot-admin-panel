@@ -5,7 +5,7 @@ export const getSpecialist = async () =>{
        let response = await $host.get('api/specialist/get');
        return response.data;
     } catch (error) {
-        console.log("error while calling getWorkers api", error.message);
+        console.log("error while calling getSpecialist api", error.message);
     }
 }
 
@@ -14,7 +14,7 @@ export const getSpecCount = async (count, prev) =>{
        let response = await $host.get(`api/specialist/count/get/${count}/${prev}`);
        return response.data;
     } catch (error) {
-        console.log("error while calling getWorkers api", error.message);
+        console.log("error while calling getSpecCount api", error.message);
     }
 }
 

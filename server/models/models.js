@@ -158,6 +158,9 @@ const Specialist = sequelize.define('specialist', {
     samozanjatost: {type: DataTypes.BOOLEAN},
     passportScan: {type: DataTypes.TEXT},
     email: {type: DataTypes.STRING},  
+    block: {type: DataTypes.BOOLEAN},
+    deleted: {type: DataTypes.BOOLEAN},
+    great: {type: DataTypes.BOOLEAN}, //hello
 })
 
 
