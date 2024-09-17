@@ -286,8 +286,8 @@ const Specialist = () => {
     setComteg(worker.comteg ? worker.comteg.split(',') : [])
     setComteg2(worker.comteg2 ? worker.comteg2.split(',') : [])
     setEmail(worker.email)
-    setComment(worker.comment ? worker.comment.split(',') : [])
-    setComment2(worker.comment2 ? worker.comment2.split(',') : [])
+    setComment(worker.comment)
+    setComment2(worker.comment2)
     setProfile(worker.profile)
 
     setPassport(worker.passport)
