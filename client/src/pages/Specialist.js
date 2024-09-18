@@ -955,7 +955,7 @@ const Specialist = () => {
                                   <div style={{position:'relative'}}>
                                     <label>Паспорт</label>
                                     <div className="text-field">
-                                      <textarea className="text-field__input" type="text" name="passport" id="passport" value={passport} onChange={(e) => setPassport(e.target.value)} style={{width: '250px', height: '275px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'.375rem'}}/>
+                                      <textarea className="text-field__input" type="text" name="passport" id="passport" value={passport} onChange={(e) => setPassport(e.target.value)} style={{width: '250px', height: '295px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'6px'}}/>
                                     </div> 
                                     <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(passport)}} alt="" style={{position: 'absolute', top: '40px', left: '205px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                                   </div>
@@ -1032,7 +1032,7 @@ const Specialist = () => {
                                       type="text" 
                                       name="comment" 
                                       id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '.375rem', textAlign: 'left'}}
+                                      style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
                                     />
                                   </div> 
                                   
@@ -1098,7 +1098,7 @@ const Specialist = () => {
 
                                   <label>Комментарии 2.0</label>
                                   <div className="text-field">
-                                    <textarea className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '.375rem', textAlign: 'left'}}/>
+                                    <textarea className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
                                   </div> 
                                 </div>
 
@@ -1208,20 +1208,8 @@ const Specialist = () => {
 
                                   <label>Проекты</label>
                                   <div className="text-field">
-                                    <ul className='spec-style' style={{width: '250px', height: '190px', whiteSpace: 'pre-line', borderRadius: '.375rem', textAlign: 'left'}}>
-                                    {/* { 
-                                       tags.map((item, i) =>*/}
-                                        <li>
-                                          01.01.2024 | Проект №1
-                                        </li>
-                                        <li>
-                                          01.01.2024 | Проект №2
-                                        </li>
-                                        <li>
-                                          01.01.2024 | Проект №3
-                                        </li>
-                                       {/* )
-                                    } */}
+                                    <ul className='spec-style' style={{width: '250px', height: '190px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    
                                     </ul>
                                   </div> 
                                 </div>

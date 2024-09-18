@@ -14,8 +14,17 @@
     margin-bottom: 0;
     cursor: pointer;
     padding-top: 5px;
-    list-style-type: disc;
+    /* list-style-type: disc; */
   }
+
+.speclist ul {
+    padding-left: 40px;
+    list-style-type: disc;
+}
+
+.speclist li {
+
+}
 
 .menu {
     list-style: none;
@@ -45,6 +54,7 @@
     border-radius: 0.5em;
     cursor: pointer;
     text-align: left;
+    /* padding-left: 40px; */
 }
 
 .menu li hover {

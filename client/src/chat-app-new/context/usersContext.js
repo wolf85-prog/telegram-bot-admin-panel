@@ -519,7 +519,7 @@ const UsersProvider = ({ children }) => {
 						phone: worker?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
 						age: worker?.dateborn, //notion[0]?.age ? notion[0]?.age : "",
 						chatId: worker?.chatId,
-						avatar: worker?.profile ? worker?.profile : '', //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
+						avatar: worker?.avatar, //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
 						conversationId: conversationId ? conversationId : 0,
 						block: userbot.block ? userbot.block : '',
 						blockw: worker?.block,
@@ -530,10 +530,11 @@ const UsersProvider = ({ children }) => {
 						date: dateMessage,
 						messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
 					}
-					//console.log(newUser)
+					console.log(newUser)
 					arrayContact.push(newUser)
 				}		
-						
+				
+				//console.log(arrayContact)
 			
 				//если элемент массива последний
 				if (index === convers.length-1) {

@@ -15,7 +15,7 @@ import { getWMessages2} from '../../../http/workerAPI'
 import { newCountWMessage } from "src/http/adminAPI";
 
 const Contact = ({ contact, worker }) => {
-	//console.log("worker contact: ", worker)
+	//console.log("worker contact: ", contact)
 	const { setPersonW } = useContext(AccountContext);
 	const host = process.env.REACT_APP_API_URL
 	
