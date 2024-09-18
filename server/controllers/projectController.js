@@ -16,6 +16,7 @@ class ProjectController {
             return res.status(500).json(error.message);
         }
     }
+    
 
     async getProjectsId(req, res) {
         const {id} = req.params
@@ -29,10 +30,17 @@ class ProjectController {
 
     async getProjectNew(req, res) {
         try {
+            const daysAgo10 = new Date(new Date().setDate(new Date().getDate() - 10));
+
             const projects = await ProjectNew.findAll({
                 order: [
                     ['id', 'DESC'],
                 ],
+                where: {
+                    datestart: {
+                        [Op.gte]: daysAgo10
+                    }
+                }
             })
             return res.status(200).json(projects);
         } catch (error) {
