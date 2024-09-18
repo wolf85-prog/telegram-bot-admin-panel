@@ -6,8 +6,8 @@
     list-style: none;
     padding: 0.2em 0.5em;
     background: #131c21;
-    border: 1px #2d2e38 solid;
     box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
+    border: 1px solid #2d2e38;
     border-radius: 6px;
     color: #9fa5b5;
     position: absolute;
@@ -45,7 +45,7 @@
 
 .menu::-webkit-scrollbar-thumb {
     background: #555;
-    border-radius: 10px;
+    border-radius: 6px;
 }
 
 .menu::-webkit-scrollbar-thumb hover {

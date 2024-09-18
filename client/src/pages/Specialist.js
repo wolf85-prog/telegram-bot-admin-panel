@@ -58,6 +58,8 @@ import specData from 'src/data/specData';
 import specOnlyData from 'src/data/specOnlyData';
 import comtegs from 'src/data/comtegs';
 import skills from 'src/data/skills';
+import merchData from 'src/data/merchData';
+import companys from 'src/data/companys';
 
 //Workers.js
 const Specialist = () => {
@@ -1008,11 +1010,7 @@ const Specialist = () => {
                                       <MyDropdown2
                                         tags={company}
                                         setTags={setCompany}
-                                        options={[
-                                          { label: 'Компания 1', value: '1' },
-                                          { label: 'Компания 2', value: '2' },
-                                          { label: 'Компания 3', value: '3'},
-                                        ]}
+                                        options={companys}
                                         onChange={changeSpec}
                                       />
                                   </div>
@@ -1083,11 +1081,7 @@ const Specialist = () => {
                                       <MyDropdown2
                                         tags={merch}
                                         setTags={setMerch}
-                                        options={[
-                                          { label: 'Кепка', value: '1' },
-                                          { label: 'Футболка', value: '2' },
-                                          { label: 'Куртка', value: '3'},
-                                        ]}
+                                        options={merchData}
                                         onChange={changeSpec}
                                       />
                                   </div>

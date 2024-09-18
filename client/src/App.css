@@ -527,8 +527,8 @@ th.widthSpace {
     color: #ffffff;
     background-color: transparent;
     background-clip: padding-box;
-    border: 1px solid #535252;
-    border-radius: 0.25rem;
+    border: 1px solid #2d2e38;
+    border-radius: 6px;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
 
@@ -543,8 +543,8 @@ th.widthSpace {
     color: #858585;
     background-color: #1d1f2b;
     background-clip: padding-box;
-    border: 1px solid #535252;
-    border-radius: 0.25rem;
+    border: 1px solid #2d2e38;
+    border-radius: 6px;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
 
@@ -584,12 +584,12 @@ th.widthSpace {
 
 
   .spec-style {
-    border: 1px solid rgb(70 72 73);
     background-color: rgb(19, 28, 33);
     /* position: absolute;
     top: 260px;
     left: 291px; */
-    border-radius: 10px;
+    border: 1px solid #2d2e38;
+    border-radius: 6px;
     width: 320px;
   }
 
@@ -605,7 +605,7 @@ th.widthSpace {
     background-color: #131c21;
     min-width: 250px;
     z-index: 10;
-    border: 1px solid #393d40;
+    border: 1px solid #2d2e38;
     border-radius: 6px;
   }
 

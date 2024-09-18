@@ -3,9 +3,9 @@
 }
 
 .speclist {
-    border: 1px solid rgb(70 72 73);
+    border: 1px solid #2d2e38;
+    border-radius: 6px;
     background-color: rgb(19, 28, 33);
-    border-radius: 10px;
     width: 320px;
     min-height: 100px;
     overflow-y: auto;
@@ -21,9 +21,9 @@
     list-style: none;
     padding: 0.2em 0.5em;
     background: #131c21;
-    border: 1px #464849 solid;
     box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
-    border-radius: 0.5em;
+    border: 1px solid #2d2e38;
+    border-radius: 6px;
     color: #9fa5b5;
     position: absolute;
     left: 160px;
