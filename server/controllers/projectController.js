@@ -1,6 +1,7 @@
 const Project = require('../models/Project')
 const ApiError = require('../error/ApiError')
 const {ProjectNew} = require('../models/models');
+const { Op } = require('sequelize')
 
 class ProjectController {
 
@@ -32,7 +33,7 @@ class ProjectController {
         try {
             const daysAgo10 = new Date(new Date().setDate(new Date().getDate() - 10));
 
-            const projects = await ProjectNew.findAll({
+            const projects = await Project.findAll({
                 order: [
                     ['id', 'DESC'],
                 ],
