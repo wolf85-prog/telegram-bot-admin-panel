@@ -47,6 +47,7 @@ import {
   getProjectNewUpdate,
   getProjectNewDel,  
   getProjectCash,
+  getProjectsApi,
 } from '../http/adminAPI';
 
 import { uploadFile, delMessage, distribFile } from '../http/chatAPI';
@@ -175,20 +176,20 @@ const DistributionAddW = () => {
 
 //-----------------------------------------------------------------------------------
   //загрузка новых проектов
-  // useEffect(() => {
-  //   const fetchData = async () => {
+  useEffect(() => {
+    const fetchData = async () => {
 
-  //     let projects = await getProjectNewCash();
-  //     console.log("Загрузка проектов из БД ...")
-  //     console.log("projects planer: ", projects)
-  //     console.log("clients: ", clients)
+      let projects = await getProjectsApi() //getProjectNewCash();
+      console.log("Загрузка проектов из БД ...")
+      console.log("projects planer: ", projects)
+      console.log("clients: ", clients)
 
-  //     setProjects(projects)
-  //     setLoaderStart(false)  
-  //   }
+      setProjects(projects)
+      setLoaderStart(false)  
+    }
 
-  //   fetchData();  
-  // },[])
+    fetchData();  
+  },[])
 
   //--------------------------------------------------------------
 
@@ -458,7 +459,7 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
   setLabelName(obj)
 
 
-  await getCategoryFromNotion(projectId)
+  //await getCategoryFromNotion(projectId)
 
   setShowCity(true)
 
@@ -555,6 +556,7 @@ const onChangeSelectProject = async(e) => {
   // setShowCity(false)
   
   //обработка проекта (поиск категорий)
+  console.log(e.target.value)
   onHandlingProject(e.target.value, false) 
 }
 
@@ -1402,7 +1404,7 @@ const onChangeSelectCity = (e) => {
                                         onChange={onChangeSelectProject}
                                         options={contacts}
                                         value={valueProject}
-                                        onClick={clickProjects}
+                                        // onClick={clickProjects}
                                       />
                                       
                                       {/* <Dropdown options={contacts}/>   */}
@@ -1414,7 +1416,7 @@ const onChangeSelectCity = (e) => {
                                         onChange={onChangeSelectProject}
                                         options={contacts2}
                                         value={valueProject}
-                                        onClick={clickProjects}
+                                        // onClick={clickProjects}
                                       />
 
                                       {/* <br/> */}
