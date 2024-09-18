@@ -455,7 +455,7 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
   
   console.log("contacts: ", contacts)
 
-  const obj = contacts.find((item)=>item.value === projectId)
+  const obj = contacts.find((item)=>item.value.toString() === projectId.toString())
   console.log("obj: ", obj)
   setLabelName(obj)
 
