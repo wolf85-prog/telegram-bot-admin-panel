@@ -16,7 +16,7 @@ const Profile = ({ user }) => {
 	const [showEdit, setShowEdit] = useState(false)
 	const input = React.useRef();
 
-	const host = process.env.REACT_APP_API_URL
+	const host = process.env.REACT_APP_HOST
 
 	useEffect(() => {
 		setImg(`${host}${user.avatar}`)
