@@ -594,12 +594,12 @@ th.widthSpace {
   }
 
 
-  .dropdown {
+  .menu-reyting {
     position: relative;
     display: inline-block;
   }
   
-  .dropdown-content {
+  .menu-content {
     display: none;
     position: absolute;
     background-color: #131c21;
@@ -609,7 +609,7 @@ th.widthSpace {
     border-radius: 6px;
   }
 
-  .dropdown-content span {
+  .menu-content span {
     color: white;
     padding: 5px 16px;
     text-decoration: none;
@@ -618,7 +618,7 @@ th.widthSpace {
     text-align: left;
   }
 
-  .dropdown-content span:hover {
+  .menu-content span:hover {
     background-color: #182025;
   }
 

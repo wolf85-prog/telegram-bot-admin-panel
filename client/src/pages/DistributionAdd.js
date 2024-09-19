@@ -56,6 +56,7 @@ const DistributionAdd = () => {
 
   useEffect(() => {
     const arrClients = []
+    //console.log("users: ", clients)
     
     clients.map((client) => {
       const newObj = {
@@ -64,6 +65,8 @@ const DistributionAdd = () => {
       }
       arrClients.push(newObj)
     })
+
+    console.log("users: ", arrClients)
     setContacts(arrClients)      
   }, [clients]);
 

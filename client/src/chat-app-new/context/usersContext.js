@@ -238,7 +238,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			let response = await getContacts();
-			//console.log("contacts: ", response)
+			console.log("contacts: ", response)
 
 			const arrayContact = []
 
@@ -534,7 +534,7 @@ const UsersProvider = ({ children }) => {
 						date: dateMessage,
 						messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
 					}
-					console.log(newUser)
+					//console.log(newUser)
 					arrayContact.push(newUser)
 				}		
 				

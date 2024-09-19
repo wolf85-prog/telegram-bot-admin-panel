@@ -895,7 +895,7 @@ const Specialist = () => {
                                     <input type="file" style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}/>
                                   </div>
 
-                                  <div className="dropdown">
+                                  <div className="menu-reyting">
                                       <div style={{width: '250px', display: 'flex', justifyContent: 'center', marginBottom: '10px'}}>
                                         {showBlacklist ?
                                         <span onClick={()=>setShowMenu2(true)}>Blacklist</span>
@@ -908,11 +908,11 @@ const Specialist = () => {
                                         </div>
                                         }
                                       </div>
-                                      <div className="dropdown-content" style={{display: showMenu1 ? 'block' : 'none'}}>
+                                      <div className="menu-content" style={{display: showMenu1 ? 'block' : 'none'}}>
                                           <span>Изменить рейтинг</span>
                                           <span onClick={onChangeBlacklist}>Blacklist</span>
                                       </div>
-                                      <div className="dropdown-content" style={{display: showMenu2 ? 'block' : 'none'}}>
+                                      <div className="menu-content" style={{display: showMenu2 ? 'block' : 'none'}}>
                                           <span>Изменить рейтинг</span>
                                           <span onClick={onChangeReyting}>Рейтинг</span>
                                       </div>
