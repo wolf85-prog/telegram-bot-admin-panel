@@ -52,7 +52,11 @@ const useUsersContext = () => useContext(UsersContext);
 
 const UsersProvider = ({ children }) => {
 	const socket = useSocketContext();
-	const [users, setUsers] = useState([]); //useState(contacts);	
+	const [users, setUsers] = useState( () => {
+		const savedUsers = localStorage.getItem("users");
+	   	const parsedUsers = JSON.parse(savedUsers);
+	   	return parsedUsers || "";
+	});  //useState(contacts);	
 	const [contacts, setContacts] = useState([]); //useState(contacts);
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const [count, setCount] = useState(0)
