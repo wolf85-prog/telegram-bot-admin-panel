@@ -35,6 +35,7 @@ import { useUsersContext } from "../chat-app-new/context/usersContext";
 
 import { getSpecialist, getSpecCount, editSpecialist } from './../http/specAPI'
 import { getWContacts} from '../http/workerAPI'
+import { uploadFile } from '../http/chatAPI';
 
 import Close from "../assets/images/close.svg"
 import zamok from "../assets/images/замок.png"
@@ -123,6 +124,12 @@ const Specialist = () => {
   const [showBlacklist, setShowBlacklist] = useState(false)
   const [showMenu1, setShowMenu1] = useState(false)
   const [showMenu2, setShowMenu2] = useState(false)
+
+  const [file, setFile] = useState(0);
+  const [filePreview, setFilePreview] = useState();
+  const [image, setImage]= useState("");
+
+  const host = process.env.REACT_APP_HOST
 
   const [toast, addToast] = useState(0)
   const toaster = useRef()
@@ -257,6 +264,27 @@ const Specialist = () => {
     fetchData()
   }, [])
 
+  useEffect(() => {
+    const getImage = async () => {
+        if (file) {
+          //setShowUpload(true)
+          console.log("file:", file)
+          const data = new FormData();
+          data.append("name", file.name);
+          data.append("photo", file);
+          
+          let response = await uploadFile(data) //distribFile(data) // uploadFile(data)
+          console.log("response: ", response.data.path)
+
+          setImage(response.data.path.split('.team')[1]);
+          //сообщение с ссылкой на файл
+          console.log("Путь к файлу: ", host + response.data.path.split('.team')[1])
+          //setValue(host + response.data.path)
+          //setPoster(host + response.data.path.split('.team')[1])
+        }
+    }
+    getImage();
+  }, [file])
   
 
   const clickFio = (worker)=> {
@@ -727,6 +755,13 @@ const Specialist = () => {
   }
   
 
+  {/* Добавление файла */}
+  const onFileChange = (e) => {
+    //console.log("file change: ", e.target.files[0])
+    setFile(e.target.files[0]);
+    setFilePreview(URL.createObjectURL(e.target.files[0]));
+  }
+
 
   return (
     <div className='dark-theme'>
@@ -883,16 +918,28 @@ const Specialist = () => {
                               :
                               <div style={{position: 'relative', height: '790px', display: 'flex', flexDirection: 'row'}}>
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
-                                  {profile ? 
-                                  <img src={profile} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={250} height={250}/>
+                                  {filePreview ? 
+                                  <img src={filePreview} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={250} height={250}/>
                                   :
+                                  (
+                                    profile ? 
+                                  <img src={profile} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
+                                  : 
                                   <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
                                     <rect width="250px" height="250px" fill="#007aff" rx="40"></rect> 
                                   </svg>
+                                  )
                                   }
                                   <div className="file-upload" style={{marginBottom: '15px'}}>
                                     <img src={addAvatar} alt="upload" style={{display: showUpload ? 'block' : 'none', position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
-                                    <input type="file" style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}/>
+                                    <input 
+                                      type="file"
+                                      id="formFile" 
+                                      accept="image/*,image/jpeg" 
+                                      name="photo"
+                                      onChange={(e) => onFileChange(e)}
+                                      style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}
+                                    />
                                   </div>
 
                                   <div className="menu-reyting">
