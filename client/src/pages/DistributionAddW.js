@@ -662,7 +662,8 @@ const onAddCategory = (e) => {
     const result2 = [...arrTemp]
     console.log("result: ", arrCategory)
     console.log("categoryAll: ", arrTemp)
-    console.log("deleted: ", delWorkers)
+    console.log("no deleted: ", delWorkers)
+    console.log("deleted: ", delNotWorkers)
 
     if (cat_name === 'All') {
       delWorkers.map((worker)=> {
@@ -671,7 +672,7 @@ const onAddCategory = (e) => {
       })
       //console.log("arrSelect: ", arrSelect)
     } else if (cat_name === 'Delete') {
-      console.log("Удаленные")
+      console.log("Удаленные", delNotWorkers.length)
       delNotWorkers.map((worker)=> {
         arrSelect.push(worker.chatId)
       })
@@ -694,33 +695,36 @@ const onAddCategory = (e) => {
     //выбрать уникальных специалистов
     const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     //const arr2 = [...arrSelectAll].filter((el, ind) => ind === arrSelectAll.indexOf(el));
+    setSelected(arr)
+    setSelectedCat(arr)
+    setLoaderCount(false)
 
     //выбрать специалистов без блокировки
     let arrNew = []
     //let arrNew2 = []
 
     //Фильтрация по заблокировавшим рассылки
-    arr.map(async(item, index)=>{
-      const newObj = {
-        projectId: proj, 
-        receiverId: item
-      }
-      const res = await getPretendent(newObj)
+    // arr.map(async(item, index)=>{
+    //   const newObj = {
+    //     projectId: proj, 
+    //     receiverId: item
+    //   }
+    //   const res = await getPretendent(newObj)
 
-      if (res && res.blockDistrib === true) {
-        console.log("res: ", res)
-      } else {
-        //console.log("item: ", item)
-        arrNew.push(item.toString())
-      }
+    //   if (res && res.blockDistrib === true) {
+    //     console.log("res: ", res)
+    //   } else {
+    //     //console.log("item: ", item)
+    //     arrNew.push(item.toString())
+    //   }
 
-      if (index === arr.length-1) {
-        setSelected(arrNew)
-        setSelectedCat(arrNew)
-        console.log("selected: ", arrNew, index)
-        setLoaderCount(false)
-      }
-    })
+    //   if (index === arr.length-1) {
+    //     setSelected(arrNew)
+    //     setSelectedCat(arrNew)
+    //     console.log("selected: ", arrNew, index)
+    //     setLoaderCount(false)
+    //   }
+    // })
     
   }
   

@@ -541,6 +541,8 @@ const Specialist = () => {
     setShowProfile(false)
     setShowClose(false)
     setShowSearch(true)
+
+    setFilePreview('')
   }
 
   //сохранить профиль
