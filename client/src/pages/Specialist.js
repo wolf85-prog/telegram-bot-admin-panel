@@ -957,7 +957,7 @@ const Specialist = () => {
                                   :
                                   (
                                     profile ? 
-                                  <img src={profile} width='240px' alt='poster' style={{borderRadius: '7px'}}/>
+                                  <img src={profile} width='250px' height='250px' alt='poster' style={{borderRadius: '7px', marginBottom: '5px'}}/>
                                   : 
                                   <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
                                     <rect width="250px" height="250px" fill="#007aff" rx="40"></rect> 
@@ -1036,7 +1036,7 @@ const Specialist = () => {
                                   <div style={{position:'relative'}}>
                                     <label>Паспорт</label>
                                     <div className="text-field">
-                                      <textarea className="text-field__input" type="text" name="passport" id="passport" value={passport} onChange={(e) => setPassport(e.target.value)} style={{width: '250px', height: '295px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'6px'}}/>
+                                      <textarea className="text-field__input" type="text" name="passport" id="passport" value={passport} onChange={(e) => setPassport(e.target.value)} style={{width: '250px', height: '270px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'6px'}}/>
                                     </div> 
                                     <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(passport)}} alt="" style={{position: 'absolute', top: '40px', left: '205px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                                   </div>
@@ -1108,7 +1108,7 @@ const Specialist = () => {
                                       type="text" 
                                       name="comment" 
                                       id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{width: '320px', height: '180px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                      style={{width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
                                     />
                                   </div> 
                                   
@@ -1174,7 +1174,7 @@ const Specialist = () => {
 
                                   <label>Комментарии 2.0</label>
                                   <div className="text-field">
-                                    <textarea className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '320px', height: '180px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
+                                    <textarea className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
                                   </div> 
                                 </div>
 
@@ -1284,7 +1284,7 @@ const Specialist = () => {
 
                                   <label>Проекты</label>
                                   <div className="text-field">
-                                    <ul className='spec-style' style={{width: '250px', height: '180px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
