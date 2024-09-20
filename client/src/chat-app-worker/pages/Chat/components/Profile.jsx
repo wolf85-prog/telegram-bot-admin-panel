@@ -35,9 +35,11 @@ const Profile = ({ user, closeSidebar }) => {
 	const [worker, setWorker] = useState("")
 	const [avatar, setAvatar] = useState("")
 	const [form, setForm] = useState(false)
+
 	const { addNewName, addNewAvatar } = useUsersContext();
-	const { userWorkers } = useUsersContext();
+	const { userWorkers, workersAll } = useUsersContext();
 	const { addNewMessage2 } = useUsersContext();
+
 	const { setPersonW } = useContext(AccountContext);
 	const [img, setImg] = useState(null)
 	const [showEdit, setShowEdit] = useState(false)
@@ -68,10 +70,12 @@ const Profile = ({ user, closeSidebar }) => {
 
 		//получить данные из ноушена по телеграм id
 		const fetchData = async () => {
-			//console.log("user: ", user)
-			const fio_notion = await getWorkerNotionId(user.chatId)
-			//console.log("worker: ", fio_notion[0])
-			setWorker(fio_notion[0])
+			console.log("user: ", user)
+			console.log("specialist: ", workersAll)
+			const fio_notion = workersAll.find(item=>item.chatId === user.chatId) //await getWorkerNotionId(user.chatId)
+			console.log("worker: ", fio_notion)
+			
+			setWorker(fio_notion)
 
 			//const avatars = await getWorkerChildrenId(fio_notion[0]?.id)
 			//const avatars = await getWorker(user.chatId)
@@ -204,7 +208,7 @@ const Profile = ({ user, closeSidebar }) => {
 						</span>
 						<span className="profile__action-text--top profile__notion">
 						{user ? 
-							(user.newcity !== '' ? user.newcity : "—")
+							(user.city !== '' ? user.city : "—")
 							: "—"}
 						</span>	
 					</p>
@@ -217,7 +221,7 @@ const Profile = ({ user, closeSidebar }) => {
 						</span>
 						<span className="profile__action-text--top profile__notion">
 							{user ? 
-							(user.age !== '' ? user.age : "—")
+							(user.age ? user.age.split('-')[2] +'.'+user.age.split('-')[1]+'.'+user.age.split('-')[0] : "—")
 							: "—"}
 						</span>
 					</p>
@@ -243,7 +247,7 @@ const Profile = ({ user, closeSidebar }) => {
 						</span>
 						<span className="profile__action-text--top" style={{textAlign: 'right'}}>
 							{/* {worker.spec?.map((item)=>item.name).join('')} */}
-							<table className="table-noborder">{worker ? worker.spec?.map((worker, index) => <tr key={index}><td>{worker.name}</td></tr> ) : '—'}</table>
+							<table className="table-noborder">{worker ? JSON.parse(worker.worklist)?.map((worker, index) => <tr key={index}><td>{worker.spec}</td></tr> ) : '—'}</table>
 						</span>	
 					</p>
 				</li>

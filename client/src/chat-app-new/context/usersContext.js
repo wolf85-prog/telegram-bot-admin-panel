@@ -81,14 +81,14 @@ const UsersProvider = ({ children }) => {
 	   	return parsedUserWorkers || "";
 	}); 
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
-	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
-	const [specialist, setSpecialist] =  useState( () => {
+	//const [workersAll, setWorkersAll] = useState([]); //все специалисты;
+	const [workersAll, setWorkersAll] =  useState( () => {
 		const savedUserWorkers = localStorage.getItem("specialist");
 	   	const parsedUserWorkers = JSON.parse(savedUserWorkers);
 	   	return parsedUserWorkers || "";
 	});  //все специалисты;
 
-	// const [specialist, setSpecialist] =  useState([])
+	const [specialist, setSpecialist] =  useState([])
 
 	const [userRenthub, setUserRenthub] = useState( () => {
 		const savedUserRenthub = localStorage.getItem("userRenthub");
@@ -378,6 +378,9 @@ const UsersProvider = ({ children }) => {
 			})
 		
 			setWorkersAll(arrayWorkerAll)
+
+			//сохранить кэш
+			localStorage.setItem("specialist", JSON.stringify(arrayWorkerAll));
 
 			//1 все специалисты 100
 			//let response = await getWorkersCount(100, workers.length);

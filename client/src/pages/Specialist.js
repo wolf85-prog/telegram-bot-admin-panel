@@ -37,7 +37,7 @@ import { getSpecialist, getSpecCount, editSpecialist } from './../http/specAPI'
 import { getWContacts} from '../http/workerAPI'
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
 
-import Close from "../assets/images/close.svg"
+import Close from "../assets/images/clear.svg"
 import zamok from "../assets/images/замок.png"
 import zamok2 from "../assets/images/замок2.png"
 import addAvatar from "../assets/images/add_avatar.png"
@@ -61,6 +61,7 @@ import comtegs from 'src/data/comtegs';
 import skills from 'src/data/skills';
 import merchData from 'src/data/merchData';
 import companys from 'src/data/companys';
+import cities from 'src/data/cities';
 
 //Workers.js
 const Specialist = () => {
@@ -259,10 +260,12 @@ const Specialist = () => {
 
       })  
 
+      setLoading(false)
+
       let wuserbots = await getWContacts();
       setUserbots(wuserbots)
 
-      setLoading(false)
+      
     }
     fetchData()
   }, [])
@@ -297,6 +300,7 @@ const Specialist = () => {
     setShowProfile(true)
     setModalWorker(worker)
     setShowSearch(false)
+    setShowClear(false)
 
     const currentYear = new Date().getFullYear()
 
@@ -542,6 +546,7 @@ const Specialist = () => {
     setShowClose(false)
     setShowSearch(true)
 
+    setShowClear(true)
     setFilePreview('')
   }
 
@@ -699,25 +704,25 @@ const Specialist = () => {
     setBlockProfile(!blockProfile)
   }
 
-  const addCity = (e) => { 
-    var cit = e.target.value
-    console.log(cit)
-    let arr = []
-    //setVisibleSm(false)
+  // const addCity = (e) => { 
+  //   var cit = e.target.value
+  //   console.log(cit)
+  //   let arr = []
+  //   //setVisibleSm(false)
     
-    if (cit === '1') {
-      arr.push('Москва')
-      setCity(arr)
-    } 
-    else if (cit === '2') {
-      arr.push('Санкт-Петербург')
-      setCity(arr)
-    } 
-    else if (cit === '3') {
-      arr.push('Майкоп')
-      setCity(arr)
-    }
-  }
+  //   if (cit === '1') {
+  //     arr.push('Москва')
+  //     setCity(arr)
+  //   } 
+  //   else if (cit === '2') {
+  //     arr.push('Санкт-Петербург')
+  //     setCity(arr)
+  //   } 
+  //   else if (cit === '3') {
+  //     arr.push('Майкоп')
+  //     setCity(arr)
+  //   }
+  // }
 
   useEffect(() => {
     console.log("city: ", city)
@@ -761,13 +766,15 @@ const Specialist = () => {
       cat: 'Blacklist'
     }
 
-    //setSpeclist()
+    speclist.push(newObj)
+    console.log("speclist: ", speclist)
+
+    setSpeclist(speclist)
   }
   
 
   {/* Добавление файла */}
   const onFileChange = (e) => {
-    console.log("file change: ", e.target.files[0], URL.createObjectURL(e.target.files[0]))
     setFile(e.target.files[0]);
     setFilePreview(URL.createObjectURL(e.target.files[0]));
   }
@@ -803,7 +810,7 @@ const Specialist = () => {
                           style={{display: showSearch ? 'block' : 'none'}}
                         >   
                         </CFormInput>
-                        <img src={Close} alt='' onClick={clearSearch} width={15} style={{display: showClear ? 'block' : 'none', position: 'absolute', top: '12px', left: '230px'}}/>
+                        <img src={Close} alt='' onClick={clearSearch} width={10} style={{display: showClear ? 'block' : 'none', position: 'absolute', top: '15px', right: '20px'}}/>
                       </CCol>
                     </CRow>
 
@@ -1057,15 +1064,10 @@ const Specialist = () => {
                                   <div className="text-field"> 
                                       <MyDropdown
                                         style={{backgroundColor: '#131c21'}}
-                                        options={[
-                                          '',
-                                          { label: 'Москва', value: '1' },
-                                          { label: 'Санкт-Петербург', value: '2' },
-                                          { label: 'Майкоп', value: '3'}
-                                        ]}
+                                        options={cities}
                                         selected={city}
                                         setSelected={setCity}
-                                        onChange={addCity}
+                                        // onChange={addCity}
                                       />
                                   </div>
 
@@ -1106,7 +1108,7 @@ const Specialist = () => {
                                       type="text" 
                                       name="comment" 
                                       id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                      style={{width: '320px', height: '180px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
                                     />
                                   </div> 
                                   
@@ -1172,7 +1174,7 @@ const Specialist = () => {
 
                                   <label>Комментарии 2.0</label>
                                   <div className="text-field">
-                                    <textarea className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '320px', height: '190px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
+                                    <textarea className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '320px', height: '180px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
                                   </div> 
                                 </div>
 
@@ -1282,7 +1284,7 @@ const Specialist = () => {
 
                                   <label>Проекты</label>
                                   <div className="text-field">
-                                    <ul className='spec-style' style={{width: '250px', height: '190px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '250px', height: '180px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
