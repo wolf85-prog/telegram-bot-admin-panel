@@ -35,7 +35,7 @@ import { useUsersContext } from "../chat-app-new/context/usersContext";
 
 import { getSpecialist, getSpecCount, editSpecialist } from './../http/specAPI'
 import { getWContacts} from '../http/workerAPI'
-import { uploadFile } from '../http/chatAPI';
+import { uploadAvatar, uploadFile } from '../http/chatAPI';
 
 import Close from "../assets/images/close.svg"
 import zamok from "../assets/images/замок.png"
@@ -82,6 +82,8 @@ const Specialist = () => {
   const [showSpec, setShowSpec] = useState(false)
   const [showClose, setShowClose] = useState(false)
   const [showUpload, setShowUpload] = useState(false)
+  const [showSearch, setShowSearch] = useState(true)
+  const [showClear, setShowClear] = useState(false)
 
   const [showSave, setShowSave] = useState(false)
   const [showSave2, setShowSave2] = useState(false)
@@ -149,6 +151,7 @@ const Specialist = () => {
 		const filteredData = specialistAll.filter(user=> (user.fio + user.telegram)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setSpecialist(text === '' ? specialistCount : filteredData); 
     //console.log("specialist", specialist)
+    setShowClear(text === '' ? false : true)
   }, [text]);
 
 
@@ -271,14 +274,15 @@ const Specialist = () => {
           console.log("file:", file)
           const data = new FormData();
           data.append("name", file.name);
-          data.append("photo", file);
+          data.append("avatar", file);
           
-          let response = await uploadFile(data) //distribFile(data) // uploadFile(data)
+          let response = await uploadAvatar(data) //distribFile(data) // uploadFile(data)
           console.log("response: ", response.data.path)
 
           setImage(response.data.path.split('.team')[1]);
           //сообщение с ссылкой на файл
           console.log("Путь к файлу: ", host + response.data.path.split('.team')[1])
+          setProfile(host + response.data.path.split('.team')[1])
           //setValue(host + response.data.path)
           //setPoster(host + response.data.path.split('.team')[1])
         }
@@ -292,6 +296,7 @@ const Specialist = () => {
     //setVisibleXL(true)
     setShowProfile(true)
     setModalWorker(worker)
+    setShowSearch(false)
 
     const currentYear = new Date().getFullYear()
 
@@ -535,6 +540,7 @@ const Specialist = () => {
   const closeProfile = () => { 
     setShowProfile(false)
     setShowClose(false)
+    setShowSearch(true)
   }
 
   //сохранить профиль
@@ -642,6 +648,7 @@ const Specialist = () => {
       comment: JSON.stringify(commentArr),
       comment2: JSON.stringify(commentArr2),
       chatId: telegram,
+      profile,
       inn,
       email,
       promo,
@@ -669,6 +676,7 @@ const Specialist = () => {
         comment: strComment,
         comment2: strComment2,
         chatId: telegram,
+        profile,
         inn,
         email,
         promo,
@@ -757,9 +765,18 @@ const Specialist = () => {
 
   {/* Добавление файла */}
   const onFileChange = (e) => {
-    //console.log("file change: ", e.target.files[0])
+    console.log("file change: ", e.target.files[0], URL.createObjectURL(e.target.files[0]))
     setFile(e.target.files[0]);
     setFilePreview(URL.createObjectURL(e.target.files[0]));
+  }
+
+  const clickSearch = (e) => {
+    setShowClear(true)
+    setText(e.target.value)
+  }
+
+  const clearSearch = () => {
+    setText('')
   }
 
 
@@ -775,8 +792,16 @@ const Specialist = () => {
                     {/* <h2>Специалисты</h2> */}
                     <CToaster ref={toaster} push={toast} placement="top-end" /> 
                     <CRow className="mb-3">
-                      <CCol sm={3} >
-                        <CFormInput placeholder="Поиск..." onChange={(e)=>setText(e.target.value)} aria-label="spec"/>
+                      <CCol sm={3} style={{position: 'relative'}}>
+                        <CFormInput 
+                          placeholder="Поиск..." 
+                          onChange={(e)=>clickSearch(e)} 
+                          aria-label="spec"
+                          value={text}
+                          style={{display: showSearch ? 'block' : 'none'}}
+                        >   
+                        </CFormInput>
+                        <img src={Close} alt='' onClick={clearSearch} width={15} style={{display: showClear ? 'block' : 'none', position: 'absolute', top: '12px', left: '230px'}}/>
                       </CCol>
                     </CRow>
 

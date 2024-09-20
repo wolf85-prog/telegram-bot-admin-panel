@@ -140,3 +140,17 @@ export const distribFile = async (data) =>{
         
     }
 }
+
+//avatar files
+export const uploadAvatar = async (data) =>{
+    try {
+        return await $host.post(`api/file/avatar`, data, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        });
+    } catch (error) {
+        console.log("error while calling uploadAvatar api",error.message);
+        
+    }
+}

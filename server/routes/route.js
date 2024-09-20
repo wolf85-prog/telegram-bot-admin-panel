@@ -48,6 +48,7 @@ const { getSpecialist, getSpecCount, editSpecialist, getSpecialistId } = require
 //const upload = multer({dest:"uploads"});
 const upload = require('../middleware/file')
 const uploadDistrib = require('../middleware/fileDistrib') //папка для файлов в рассылках
+const uploadAvatar = require('../middleware/fileAvatar')
 
 route.post('/user/registration', userController.registration)
 route.post('/user/login', userController.login)
@@ -121,6 +122,7 @@ route.post('/projectnew/del', getProjectNewDel)
 
 route.post("/file/upload", upload.single("photo"), uploadFile);
 route.post("/file/distrib", uploadDistrib.single("photo"), uploadFile);
+route.post("/file/avatar", uploadAvatar.single("avatar"), uploadFile);
 route.get("/file/:filename", getImage);
 
 
