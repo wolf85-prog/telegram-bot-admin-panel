@@ -862,7 +862,7 @@ const Specialist = () => {
                                     </CTableHead>
                                     <CTableBody >                                  
                                     {specialist.map((item, index) => (
-                                        <CTableRow v-for="item in tableItems" key={index+1}>
+                                        <CTableRow v-for="item in tableItems" key={index+1} style={{lineHeight: '14px'}}>
                                           <CTableDataCell className="text-center widthSpace my-td">
                                             {index+1}
                                           </CTableDataCell>
@@ -950,7 +950,7 @@ const Specialist = () => {
                                 
                               )
                               :
-                              <div style={{position: 'relative', height: '790px', display: 'flex', flexDirection: 'row'}}>
+                              <div style={{position: 'relative', height: '765px', display: 'flex', flexDirection: 'row'}}>
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
                                   <img src={filePreview} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={250} height={250}/>
@@ -1035,7 +1035,7 @@ const Specialist = () => {
                                    
                                   <div style={{position:'relative'}}>
                                     <label>Паспорт</label>
-                                    <div className="text-field">
+                                    <div className="text-field" style={{marginBottom: '0px'}}>
                                       <textarea className="text-field__input" type="text" name="passport" id="passport" value={passport} onChange={(e) => setPassport(e.target.value)} style={{width: '250px', height: '270px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'6px'}}/>
                                     </div> 
                                     <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(passport)}} alt="" style={{position: 'absolute', top: '40px', left: '205px', cursor: 'pointer', width: '25px', height: '25px'}}/>
@@ -1102,7 +1102,7 @@ const Specialist = () => {
                                   </div>
 
                                   <label>Комментарии</label>
-                                  <div className="text-field">
+                                  <div className="text-field" style={{marginBottom: '0px'}}>
                                     <textarea 
                                       className="text-field__input" 
                                       type="text" 
@@ -1173,7 +1173,7 @@ const Specialist = () => {
                                   </div>
 
                                   <label>Комментарии 2.0</label>
-                                  <div className="text-field">
+                                  <div className="text-field" style={{marginBottom: '0px'}}>
                                     <textarea className="text-field__input" type="text" name="comment2" id="comment2" value={comment2} onChange={(e) => setComment2(e.target.value)} style={{width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
                                   </div> 
                                 </div>
@@ -1283,7 +1283,7 @@ const Specialist = () => {
                                   </div> 
 
                                   <label>Проекты</label>
-                                  <div className="text-field">
+                                  <div className="text-field" style={{marginBottom: '0px'}}>
                                     <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
