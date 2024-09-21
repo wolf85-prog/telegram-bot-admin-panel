@@ -33,7 +33,7 @@ import {
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
-import { getSpecialist, getSpecCount, editSpecialist } from './../http/specAPI'
+import { getSpecialist, getSpecCount, editSpecialist, addSpecialist } from './../http/specAPI'
 import { getWContacts} from '../http/workerAPI'
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
 
@@ -66,7 +66,7 @@ import cities from 'src/data/cities';
 //Workers.js
 const Specialist = () => {
 
-  const { specialist, setSpecialist, specialistAll, setSpecialistAll } = useUsersContext();
+  const { specialist, setSpecialist, specialistAll, setSpecialistAll, addNewSpecialist } = useUsersContext();
   //const { userWorkers: specusers } = useUsersContext();
 
   const [specialistCount, setSpecialistCount] = useState([]);
@@ -298,45 +298,10 @@ const Specialist = () => {
     getImage();
   }, [file])
   
-  const clickAdd = ()=> {
-    setShowProfile(true)
-    //setModalWorker(worker)
-    setShowSearch(false)
-    setShowClear(false)
-
-    setId(1)
-    setFio("")
-    setCity([])
-    setAge('')
-    setAge2('')
-
-    setSpeclist([])
-
-    setPhone("")
-    setPhone2("")
-    setTelegram("")
-    setSkill([])
-
-    setReyting('')
-    setPromo('')
-    setRank('')
-    setMerch([])
-    setCompany([])
-    setInn('')
-    setComteg([])
-    setComteg2([])
-    setEmail('')
-    setComment('')
-    setComment2('')
-    setProfile('')
-
-    setPassport('')
-    setDogovor('🔴')
-    setSamozanjatost('🔴')
-    setPassportScan('')
-    setNik('')
-    setDateReg('')
-    //console.log("user", userbots.find((user) => user.chatId === worker.telegram))
+  const clickAdd = async()=> {
+    const res = await addSpecialist()
+    console.log("res: ", res)
+    await addNewSpecialist(res.id, 'ФИО')
   }
 
   const clickFio = (worker)=> {

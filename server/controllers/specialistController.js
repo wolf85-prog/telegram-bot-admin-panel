@@ -131,6 +131,18 @@ class SpecialistController {
         }
     }
 
+    async addSpecialist(req, res) {       
+        try {    
+
+            //const {fio} = req.body
+
+            const newUser = await Specialist.create({fio: 'ФИО'})
+            return res.status(200).json(newUser);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
 }
 
 module.exports = new SpecialistController()

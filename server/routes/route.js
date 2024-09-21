@@ -40,7 +40,7 @@ const { newPretendent, getPretendent, getPretendentId, getAllPretendent, getAllP
 
 const { newPlan, getPlan, addTimer } = require('../controllers/planController')
 
-const { getSpecialist, getSpecCount, editSpecialist, getSpecialistId } = require('../controllers/specialistController')
+const { getSpecialist, getSpecCount, editSpecialist, getSpecialistId, addSpecialist } = require('../controllers/specialistController')
 
 //const { sendPoster } = require('../controllers/posterController')
 
@@ -177,6 +177,7 @@ route.get('/specialist/get', getSpecialist)
 route.get('/specialist/count/get/:count/:prev', getSpecCount) //еще
 route.patch('/specialist/update/:id', editSpecialist)
 route.get("/specialist/:id", getSpecialistId);
+route.post("/specialist/add", addSpecialist);
 
 
 

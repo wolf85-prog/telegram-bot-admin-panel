@@ -25,3 +25,11 @@ export const editSpecialist = async (data, id) =>{
         console.log("error while calling editSpecialist api",error.message);
     }
 }
+
+export const addSpecialist = async (data, id) =>{
+    try {
+        await $host.post(`api/specialist/add`, data); 
+    } catch (error) {
+        console.log("error while calling addSpecialist api",error.message);
+    }
+}

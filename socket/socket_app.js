@@ -235,6 +235,15 @@ io.on("connection", (socket) => {
     })  
 
 
+    //send and get message in workers
+    socket.on("sendSpecialist", ({id, fio})=>{
+        io.emit("getSpecialist", {
+            id,
+            fio,
+        })
+    })  
+
+
     // Process
     //------------------------------------------------------------------
     //send and get process

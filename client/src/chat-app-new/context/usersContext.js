@@ -993,6 +993,26 @@ const UsersProvider = ({ children }) => {
 		
 	}
 
+	//получить всех специалистов
+	const fetchSpecialist = (data) => {
+
+		setSpecialist((specialist) => {	
+
+			const {id, fio} = data
+
+			let userIndex = specialist.findIndex((spec) => spec.id === id);
+			const usersCopy = JSON.parse(JSON.stringify(specialist));
+
+			const userObject = usersCopy[userIndex];
+			usersCopy[userIndex] = { ...userObject, 
+				id,
+				fio, 
+			};
+
+			return usersCopy;
+		});
+	}
+
 //------------------------------------------------------------------------------------
 	useEffect(() => {
 		socket.on("getMessage", fetchMessageResponse);
@@ -1010,6 +1030,8 @@ const UsersProvider = ({ children }) => {
 		//socket.on("getDistrib", fetchDistribution);
 
 		socket.on("getProcess", fetchProcess);
+
+		socket.on("getSpecialist", fetchSpecialist);	
 
 		socket.on("start_typing", setUserAsTyping);
 		socket.on("stop_typing", setUserAsNotTyping);
@@ -1095,6 +1117,13 @@ const UsersProvider = ({ children }) => {
 		const usersCopy = [...users];
 		usersCopy[userIndex].avatar = avatar;
 		setUsers(usersCopy);
+	}
+
+	const addNewSpecialist = (id, fio) => {
+		socket.emit("sendSpecialist", { 
+			id,
+			fio,
+		})
 	}
 
 
@@ -2012,6 +2041,7 @@ function isObjectEmpty(obj) {
 			setTimeProcess3,
 			setTimeProcess4,
 			setTimeProcess5,
+			addNewSpecialist,
 		}}>
 			{children}
 		</UsersContext.Provider>
