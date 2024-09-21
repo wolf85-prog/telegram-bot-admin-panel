@@ -122,6 +122,15 @@ th.widthSpace {
     width: 1%; /* Форсирует сужение ячейки */
 }
 
+th.widthPhone {
+  min-width: 150px;
+}
+
+th.widthTg {
+  min-width: 110px;
+}
+
+
 .fixed-table-container {
     width: 100%;
     height: 200px;
@@ -622,8 +631,82 @@ th.widthSpace {
     background-color: #182025;
   }
 
-  /* .dropdown:hover .dropdown-content {
+  .menu-content {
+    display: none;
+    position: absolute;
+    background-color: #131c21;
+    min-width: 250px;
+    z-index: 10;
+    border: 1px solid #2d2e38;
+    border-radius: 6px;
+  }
+
+
+  .menu-content-block {
+    opacity: 0;
+    position: absolute;
+    top: 10px;
+    min-width: 100px;
+    left: 130px;
+    background-color: #131c21;
+    z-index: 10;
+    border: 1px solid #2d2e38;
+    border-radius: 6px;
+  }
+
+  .menu-content-block:hover {
+    opacity: 1;
+    position: absolute;
+    top: 10px;
+    min-width: 100px;
+    left: 130px;
+    background-color: #131c21;
+    z-index: 10;
+    border: 1px solid #2d2e38;
+    border-radius: 6px;
+  }
+
+  .menu-content-block span {
+    color: white;
+    padding: 5px 16px;
+    text-decoration: none;
     display: block;
-  } */
+    font-size: 16px;
+    text-align: left;
+  }
+
+
+  .menu-content-krest {
+    opacity: 0;
+    position: absolute;
+    top: 200px;
+    min-width: 100px;
+    left: 130px;
+    background-color: #131c21;
+    z-index: 10;
+    border: 1px solid #2d2e38;
+    border-radius: 6px;
+  }
+
+  .menu-content-krest:hover {
+    opacity: 1;
+    position: absolute;
+    top: 200px;
+    min-width: 100px;
+    left: 130px;
+    background-color: #131c21;
+    z-index: 10;
+    border: 1px solid #2d2e38;
+    border-radius: 6px;
+  }
+
+  .menu-content-krest span {
+    color: white;
+    padding: 5px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    text-align: left;
+  }
   
   

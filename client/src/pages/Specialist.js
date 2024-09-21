@@ -85,7 +85,12 @@ const Specialist = () => {
   const [showUpload, setShowUpload] = useState(false)
   const [showSearch, setShowSearch] = useState(true)
   const [showClear, setShowClear] = useState(false)
+  const [showMenuBlock18, setShowMenuBlock18] = useState(false)
+  const [showBlock18, setShowBlock18] = useState(false)
+  const [showMenuKrest, setShowMenuKrest] = useState(false)
+  const [showKrest, setShowKrest] = useState(false)
 
+  
   const [showSave, setShowSave] = useState(false)
   const [showSave2, setShowSave2] = useState(false)
   const [showSave3, setShowSave3] = useState(false)
@@ -149,7 +154,7 @@ const Specialist = () => {
 
   //поиск
   useEffect(() => {
-		const filteredData = specialistAll.filter(user=> (user.fio + user.telegram)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+		const filteredData = specialistAll.filter(user=> (user.fio + user.telegram + user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setSpecialist(text === '' ? specialistCount : filteredData); 
     //console.log("specialist", specialist)
     setShowClear(text === '' ? false : true)
@@ -308,7 +313,7 @@ const Specialist = () => {
     setFio(worker.fio)
     setCity(worker.city ? worker.city.split(',') : [])
     setAge(worker.age ? worker.age.split('-')[0] : '')
-    setAge2(parseInt(currentYear) - parseInt(worker.age ? worker.age.split('-')[0] : 0))
+    setAge2(worker.age ? parseInt(currentYear) - parseInt(worker.age ? worker.age.split('-')[0] : 0) : '')
 
     setSpeclist(worker.spec ? worker.spec.split(', ') : [])
 
@@ -761,17 +766,21 @@ const Specialist = () => {
     setShowMenu1(false)
 
     //добавить в список специальностей Blacklist
-    const newObj = {
-      spec: 'Blacklist',
-      cat: 'Blacklist'
-    }
-
-    speclist.push(newObj)
+    speclist.push('Blacklist')
     console.log("speclist: ", speclist)
 
     setSpeclist(speclist)
   }
-  
+
+  const onChangeBlock18 = () => {
+    setShowBlock18(!showBlock18)
+    setShowMenuBlock18(false)
+  }  
+
+  const onChangeKrest = () => {
+    setShowKrest(!showKrest)
+    setShowMenuKrest(false)
+  } 
 
   {/* Добавление файла */}
   const onFileChange = (e) => {
@@ -835,11 +844,11 @@ const Specialist = () => {
                                       <CTableRow>
                                         <CTableHeaderCell className='myid-th widthSpace'>№</CTableHeaderCell> 
                                         <CTableHeaderCell className='myfio-th widthSpace' onClick={onSortFio}>ФИО</CTableHeaderCell>  
-                                        <CTableHeaderCell className='my-th widthSpace' onClick={onSortTG}>Телеграм</CTableHeaderCell> 
-                                        <CTableHeaderCell className='my-th widthSpace'>Телефон</CTableHeaderCell> 
+                                        <CTableHeaderCell className='my-th widthTg' onClick={onSortTG}>Телеграм</CTableHeaderCell> 
+                                        <CTableHeaderCell className='my-th widthPhone'>Телефон</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace'>Специальность</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace' onClick={onSortCity}>Город</CTableHeaderCell>   
-                                        <CTableHeaderCell className='my-th widthSpace'>Год рождения</CTableHeaderCell>
+                                        <CTableHeaderCell className='my-th widthSpace'>Год</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Проекты</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Телефон №2</CTableHeaderCell>                         
                                         <CTableHeaderCell className='my-th widthSpace'>Навык</CTableHeaderCell>
@@ -872,7 +881,7 @@ const Specialist = () => {
                                           <CTableDataCell className="text-center widthSpace">
                                             {item.telegram}
                                           </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
+                                          <CTableDataCell className="text-center">
                                             {item.phone}
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
@@ -979,8 +988,8 @@ const Specialist = () => {
                                   <div className="menu-reyting">
                                       <div style={{width: '250px', display: 'flex', justifyContent: 'center', marginBottom: '10px'}}>
                                         {showBlacklist ?
-                                        <span onClick={()=>setShowMenu2(true)}>Blacklist</span>
-                                        :<div className="star-block" onClick={()=>setShowMenu1(true)}>
+                                        <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red'}}>Blacklist</span>
+                                        :<div className="star-block" style={{cursor: 'pointer'}} onClick={()=>setShowMenu1(true)}>
                                           <img className='star-icon' src={StarActive} alt='' /> 
                                           <img className='star-icon' src={StarActive} alt='' />
                                           <img className='star-icon' src={StarActive} alt='' />
@@ -991,11 +1000,11 @@ const Specialist = () => {
                                       </div>
                                       <div className="menu-content" style={{display: showMenu1 ? 'block' : 'none'}}>
                                           <span>Изменить рейтинг</span>
-                                          <span onClick={onChangeBlacklist}>Blacklist</span>
+                                          <span onClick={onChangeBlacklist} style={{cursor: 'pointer'}}>Blacklist</span>
                                       </div>
                                       <div className="menu-content" style={{display: showMenu2 ? 'block' : 'none'}}>
                                           <span>Изменить рейтинг</span>
-                                          <span onClick={onChangeReyting}>Рейтинг</span>
+                                          <span onClick={onChangeReyting} style={{cursor: 'pointer'}}>Рейтинг</span>
                                       </div>
                                   </div>
 
@@ -1042,9 +1051,16 @@ const Specialist = () => {
                                   </div>
                                   
                                 </div>
+                                  <img src={block18} className="block-img"  width={50} alt='' style={{position: 'absolute', top: '0px', left: '195px', opacity: showBlock18 ? '1' : '0' }}/>                                 
+                                  <div className="menu-content-block">
+                                    <span onClick={onChangeBlock18} style={{cursor: 'pointer'}}>{showBlock18 ? 'Убрать' : 'Добавить'} 18+</span>
+                                  </div>
                                   
-                                  
-                                  {/* <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '19px', left: '255px'}}/> */}
+                                  <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '215px', left: '215px', opacity: showKrest ? '1' : '0' }}/>
+                                  <div className="menu-content-krest">
+                                    <span onClick={onChangeKrest} style={{cursor: 'pointer'}}>{showKrest ? 'Убрать' : 'Добавить'}</span>
+                                  </div>
+
                                   {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '285px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
