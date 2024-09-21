@@ -31,6 +31,7 @@ import {
   CToaster,
 
 } from '@coreui/react'
+import Icon from "./../chat-app-worker/components/Icon";
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
 import { getSpecialist, getSpecCount, editSpecialist, addSpecialist } from './../http/specAPI'
@@ -1084,6 +1085,7 @@ const Specialist = () => {
                                       <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
                                     <div style={{display: 'flex'}}>
+                                      <Icon id="delete" className="profile__danger-icon" />
                                       <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
