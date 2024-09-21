@@ -42,7 +42,7 @@ import zamok from "../assets/images/замок.png"
 import zamok2 from "../assets/images/замок2.png"
 import addAvatar from "../assets/images/add_avatar.png"
 import Krestik from './../assets/images/krestik.png';
-import block18 from "./../assets/images/block18.png";
+import imgBlock18 from "./../assets/images/block18.png";
 import Trubka from "./../assets/images/trubka.png";
 import Tg from "./../assets/images/tg.png";
 import Star from "./../assets/images/star.png";
@@ -777,7 +777,7 @@ const Specialist = () => {
   const onChangeBlock18 = () => {
     setShowBlock18(!showBlock18)
     setShowMenuBlock18(false)
-    setBlock18(!showBlock18)
+    setBlock18(!block18)
   }  
 
   const onChangeKrest = () => {
@@ -996,10 +996,10 @@ const Specialist = () => {
                                   </div>
 
                                   <div className="menu-reyting">
-                                      <div style={{width: '250px', display: 'flex', justifyContent: 'center', marginBottom: '3px'}}>
+                                      <div style={{width: '250px', display: 'flex', justifyContent: 'center'}}>
                                         {showBlacklist ?
-                                        <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '18px', fontWeight: '700'}}>Blacklist</span>
-                                        :<div className="star-block" style={{cursor: 'pointer'}} onClick={()=>setShowMenu1(true)}>
+                                        <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '18px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
+                                        :<div className="star-block" style={{cursor: 'pointer', marginBottom: '8px'}} onClick={()=>setShowMenu1(true)}>
                                           <img className='star-icon' src={StarActive} alt='' /> 
                                           <img className='star-icon' src={StarActive} alt='' />
                                           <img className='star-icon' src={StarActive} alt='' />
@@ -1061,7 +1061,7 @@ const Specialist = () => {
                                   </div>
                                   
                                 </div>
-                                  <img src={block18} className="block-img"  width={50} alt='' style={{position: 'absolute', top: '0px', left: '195px', opacity: showBlock18 ? '1' : '0' }}/>                                 
+                                  <img src={imgBlock18} className="block-img"  width={50} alt='' style={{position: 'absolute', top: '0px', left: '195px', opacity: block18 ? '1' : '0' }}/>                                 
                                   <div className="menu-content-block">
                                     <span onClick={onChangeBlock18} style={{cursor: 'pointer'}}>{block18 ? 'Убрать' : 'Добавить'} 18+</span>
                                   </div>
