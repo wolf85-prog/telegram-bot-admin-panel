@@ -161,6 +161,7 @@ const Specialist = sequelize.define('specialist', {
     block: {type: DataTypes.BOOLEAN},
     deleted: {type: DataTypes.BOOLEAN},
     great: {type: DataTypes.BOOLEAN}, //hello
+    block18: {type: DataTypes.BOOLEAN},
 })
 
 
