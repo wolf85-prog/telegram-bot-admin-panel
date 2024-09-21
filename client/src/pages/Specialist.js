@@ -592,6 +592,13 @@ const Specialist = () => {
               }
           })
       })
+      if (item === 'Blacklist') {
+        const obj = {
+            spec: item,
+            cat: 'Blacklist',
+        }
+        specArr.push(obj) 
+      }
     })
 
     let skillArr = []
