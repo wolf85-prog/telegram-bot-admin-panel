@@ -112,7 +112,9 @@ class SpecialistController {
                     inn,
                     email,
                     promoId: promo,
-                    passport
+                    passport,
+                    block,
+                    block18
                 },
                 { where: {id: id} })
             return res.status(200).json(newUser);
