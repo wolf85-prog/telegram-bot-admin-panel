@@ -87,6 +87,8 @@ const Specialist = () => {
   const [showClear, setShowClear] = useState(false)
   const [showMenuBlock18, setShowMenuBlock18] = useState(false)
   const [showBlock18, setShowBlock18] = useState(false)
+  const [block18, setBlock18] = useState(false)
+  const [block, setBlock] = useState(false)
   const [showMenuKrest, setShowMenuKrest] = useState(false)
   const [showKrest, setShowKrest] = useState(false)
 
@@ -350,6 +352,12 @@ const Specialist = () => {
     setPassportScan(worker.passportScan)
     setNik(userbots.find((user) => user.chatId === worker.telegram)?.username)
     setDateReg(userbots.find((user) => user.chatId === worker.telegram)?.createdAt)
+
+    setBlock(worker.block)
+    setBlock18(worker.block18)
+
+    setShowKrest(worker.block)
+    setShowBlock18(worker.block18)
     console.log("user", userbots.find((user) => user.chatId === worker.telegram))
   }
 
@@ -673,7 +681,9 @@ const Specialist = () => {
       inn,
       email,
       promo,
-      passport
+      passport,
+      block,
+      block18
     }
     console.log(saveData)
 
@@ -718,25 +728,6 @@ const Specialist = () => {
     setBlockProfile(!blockProfile)
   }
 
-  // const addCity = (e) => { 
-  //   var cit = e.target.value
-  //   console.log(cit)
-  //   let arr = []
-  //   //setVisibleSm(false)
-    
-  //   if (cit === '1') {
-  //     arr.push('Москва')
-  //     setCity(arr)
-  //   } 
-  //   else if (cit === '2') {
-  //     arr.push('Санкт-Петербург')
-  //     setCity(arr)
-  //   } 
-  //   else if (cit === '3') {
-  //     arr.push('Майкоп')
-  //     setCity(arr)
-  //   }
-  // }
 
   useEffect(() => {
     console.log("city: ", city)
@@ -784,6 +775,7 @@ const Specialist = () => {
   const onChangeBlock18 = () => {
     setShowBlock18(!showBlock18)
     setShowMenuBlock18(false)
+    setBlock18(!showBlock18)
   }  
 
   const onChangeKrest = () => {
