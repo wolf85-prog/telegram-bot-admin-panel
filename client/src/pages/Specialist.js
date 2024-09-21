@@ -298,6 +298,46 @@ const Specialist = () => {
     getImage();
   }, [file])
   
+  const clickAdd = ()=> {
+    setShowProfile(true)
+    //setModalWorker(worker)
+    setShowSearch(false)
+    setShowClear(false)
+
+    setId(1)
+    setFio("")
+    setCity([])
+    setAge('')
+    setAge2('')
+
+    setSpeclist([])
+
+    setPhone("")
+    setPhone2("")
+    setTelegram("")
+    setSkill([])
+
+    setReyting('')
+    setPromo('')
+    setRank('')
+    setMerch([])
+    setCompany([])
+    setInn('')
+    setComteg([])
+    setComteg2([])
+    setEmail('')
+    setComment('')
+    setComment2('')
+    setProfile('')
+
+    setPassport('')
+    setDogovor('🔴')
+    setSamozanjatost('🔴')
+    setPassportScan('')
+    setNik('')
+    setDateReg('')
+    //console.log("user", userbots.find((user) => user.chatId === worker.telegram))
+  }
 
   const clickFio = (worker)=> {
     console.log(worker)
@@ -821,6 +861,12 @@ const Specialist = () => {
                         </CFormInput>
                         <img src={Close} alt='' onClick={clearSearch} width={10} style={{display: showClear ? 'block' : 'none', position: 'absolute', top: '15px', right: '20px'}}/>
                       </CCol>
+                      <CCol>
+                        <CButton onClick={clickAdd} className='uley_add_user' style={{display: showSearch ? 'block' : 'none'}}>
+                          <span style={{position: 'absolute', top: '-12px', left: '6px', fontSize: '36px', color: '#2d2e38'}}>
+                          +</span>
+                        </CButton>
+                      </CCol>
                     </CRow>
 
                     <CRow>
@@ -986,9 +1032,9 @@ const Specialist = () => {
                                   </div>
 
                                   <div className="menu-reyting">
-                                      <div style={{width: '250px', display: 'flex', justifyContent: 'center', marginBottom: '10px'}}>
+                                      <div style={{width: '250px', display: 'flex', justifyContent: 'center', marginBottom: '3px'}}>
                                         {showBlacklist ?
-                                        <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red'}}>Blacklist</span>
+                                        <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '18px', fontWeight: '700'}}>Blacklist</span>
                                         :<div className="star-block" style={{cursor: 'pointer'}} onClick={()=>setShowMenu1(true)}>
                                           <img className='star-icon' src={StarActive} alt='' /> 
                                           <img className='star-icon' src={StarActive} alt='' />
@@ -1131,6 +1177,9 @@ const Specialist = () => {
                                 </div>
 {/* 3 */}
                                 <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
+                                  <div className="uley-line" style={{left: '670px', width: '70px'}}></div>
+                                  <div className="uley-line" style={{left: '805px', width: '50px'}}></div>
+                                  <div className="uley-line" style={{left: '900px', width: '50px'}}></div>
                                   <div style={{display: 'flex'}}>
                                     {/* возраст */}
                                     <div className="text-field">
