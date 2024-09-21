@@ -26,7 +26,7 @@ export const editSpecialist = async (data, id) =>{
     }
 }
 
-export const addSpecialist = async (data, id) =>{
+export const addSpecialist = async (data) =>{
     try {
         await $host.post(`api/specialist/add`, data); 
     } catch (error) {
