@@ -666,6 +666,7 @@ const Specialist = () => {
     const saveData = {
       fio,
       phone,
+      chatId: telegram,
       city: city[0],
       age: age+'-01-01',
       speclist: JSON.stringify(specArr),
@@ -676,7 +677,6 @@ const Specialist = () => {
       comteg2: JSON.stringify(comtegArr2),
       comment: JSON.stringify(commentArr),
       comment2: JSON.stringify(commentArr2),
-      chatId: telegram,
       profile,
       inn,
       email,
@@ -711,7 +711,9 @@ const Specialist = () => {
         inn,
         email,
         promo,
-        passport
+        passport,
+        block,
+        block18,
       };
 
 
@@ -781,6 +783,7 @@ const Specialist = () => {
   const onChangeKrest = () => {
     setShowKrest(!showKrest)
     setShowMenuKrest(false)
+    setBlock(!block)
   } 
 
   {/* Добавление файла */}
@@ -1060,12 +1063,12 @@ const Specialist = () => {
                                 </div>
                                   <img src={block18} className="block-img"  width={50} alt='' style={{position: 'absolute', top: '0px', left: '195px', opacity: showBlock18 ? '1' : '0' }}/>                                 
                                   <div className="menu-content-block">
-                                    <span onClick={onChangeBlock18} style={{cursor: 'pointer'}}>{showBlock18 ? 'Убрать' : 'Добавить'} 18+</span>
+                                    <span onClick={onChangeBlock18} style={{cursor: 'pointer'}}>{block18 ? 'Убрать' : 'Добавить'} 18+</span>
                                   </div>
                                   
                                   <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '215px', left: '215px', opacity: showKrest ? '1' : '0' }}/>
                                   <div className="menu-content-krest">
-                                    <span onClick={onChangeKrest} style={{cursor: 'pointer'}}>{showKrest ? 'Убрать' : 'Добавить'}</span>
+                                    <span onClick={onChangeKrest} style={{cursor: 'pointer'}}>{block ? 'Убрать' : 'Добавить'}</span>
                                   </div>
 
                                   {/* ФИО */}
