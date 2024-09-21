@@ -299,9 +299,13 @@ const Specialist = () => {
   }, [file])
   
   const clickAdd = async()=> {
-    const res = await addSpecialist()
+    const data = {
+      fio: 'ФИО',
+    }
+    const res = await addSpecialist(data)
+
     console.log("res: ", res)
-    await addNewSpecialist(res.id, 'ФИО')
+    //await addNewSpecialist(res.id, 'ФИО')
   }
 
   const clickFio = (worker)=> {

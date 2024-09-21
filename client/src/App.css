@@ -734,6 +734,7 @@ th.widthTg {
     text-align: center;
     vertical-align: text-top;
     position: relative;
+    margin-left: -15px;
   }
   
   
