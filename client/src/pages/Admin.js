@@ -176,7 +176,7 @@ const Admin = () => {
     setNewWorkers(arr1)
 
     //массив удаленных пользователей
-    const arrDel = workersAll.filter(item => item.deleted === true)
+    const arrDel = workersAll.filter(item => item.deleted === true && item.chatId !== null)
     setDelWorkers(arrDel)
     setSortDelWorkers(arrDel)
 

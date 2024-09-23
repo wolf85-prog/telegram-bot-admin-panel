@@ -261,6 +261,8 @@ const Specialist = () => {
           samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
           passportScan: worker.passportScan, 
           email: worker.email, 
+          block: worker.block,
+          block18: worker.block18,
         }
         arrWorkers.push(newWorker)
 
@@ -788,6 +790,12 @@ const Specialist = () => {
   const onChangeReyting = () => {
     setShowBlacklist(false)
     setShowMenu2(false)
+
+    //убрать из списка специальностей Blacklist
+    const res = speclist.filter(item=>item !== 'Blacklist')
+    console.log("speclist: ", speclist)
+
+    setSpeclist(res)
   }
 
   const onChangeBlacklist = () => {
@@ -1115,13 +1123,13 @@ const Specialist = () => {
                                     <span onClick={onChangeBlock18} style={{cursor: 'pointer'}}>{block18 ? 'Убрать' : 'Добавить'} 18+</span>
                                   </div>
                                   
-                                  <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '215px', left: '215px', opacity: showKrest ? '1' : '0' }}/>
+                                  <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '215px', left: '215px', opacity: block ? '1' : '0' }}/>
                                   <div className="menu-content-krest">
                                     <span onClick={onChangeKrest} style={{cursor: 'pointer'}}>{block ? 'Убрать' : 'Добавить'}</span>
                                   </div>
 
                                   {/* ФИО */}
-                                  <div style={{position: 'absolute', top: '5px', left: '285px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
+                                  <div style={{position: 'absolute', top: '5px', left: '288px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
                                       <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
