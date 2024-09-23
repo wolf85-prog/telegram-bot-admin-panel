@@ -106,7 +106,6 @@ class SpecialistController {
                     city,
                     skill,
                     promoId: promo,
-                    rank,
                     merch,
                     company,
                     comteg,
