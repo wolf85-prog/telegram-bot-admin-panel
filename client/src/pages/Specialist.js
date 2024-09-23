@@ -320,7 +320,10 @@ const Specialist = () => {
     const res = await addSpecialist(data)
 
     console.log("res: ", res)
-    await addNewSpecialist(res.id, 'ФИО')
+    if (res) {
+      await addNewSpecialist(res?.id, res?.fio)
+    }
+    
   }
 
   const clickFio = (worker)=> {
