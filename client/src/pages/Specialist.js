@@ -894,6 +894,7 @@ const Specialist = () => {
                                 <div className='scrooll-table'>
                                   <div className="table-head-content"></div>
                                   <div className="table-head-content2"></div>
+                                  <div className="table-head-content3"></div>
                                   {/* <div className="table-col-content"></div> */}
                                   <CTable align="middle" className="mb-0 border my-table" hover bordered>
                                     <CTableHead className='table-light'>

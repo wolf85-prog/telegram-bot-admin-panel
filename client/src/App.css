@@ -40,9 +40,18 @@
 
 .table-head-content2 {
   position: absolute;
+  top: 58px;
+  left: 16px;
+  width: 55px;
+  height: 550px;
+  background: #131c21;
+  z-index: 0;
+}
+.table-head-content3 {
+  position: absolute;
   top: 16px;
   left: 16px;
-  width: 60px;
+  width: 55px;
   height: 40px;
   background: #2b3337;
   z-index: 2;
