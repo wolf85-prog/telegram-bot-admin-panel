@@ -692,8 +692,8 @@ const Specialist = () => {
       fio,
       phone,
       chatId: telegram,
-      city: city[0],
-      age: age+'-01-01',
+      city: city,
+      age: age ? age+'-01-01' : '', 
       speclist: JSON.stringify(specArr),
       company: JSON.stringify(companyArr),
       skill: JSON.stringify(skillArr),
@@ -906,7 +906,7 @@ const Specialist = () => {
                                         <CTableHeaderCell className='my-th widthSpace' onClick={onSortCity}>Город</CTableHeaderCell>   
                                         <CTableHeaderCell className='my-th widthSpace'>Год</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Проекты</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Телефон №2</CTableHeaderCell>                         
+                                        <CTableHeaderCell className='my-th widthPhone'>Телефон №2</CTableHeaderCell>                         
                                         <CTableHeaderCell className='my-th widthSpace'>Навык</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Промокод</CTableHeaderCell>                                       
                                         <CTableHeaderCell className='my-th widthSpace'>Мерч</CTableHeaderCell>
@@ -1029,7 +1029,7 @@ const Specialist = () => {
                                   </svg>
                                   )
                                   }
-                                  <div className="file-upload" style={{marginBottom: '15px'}}>
+                                  <div className="file-upload" style={{marginBottom: '8px'}}>
                                     <img src={addAvatar} alt="upload" style={{display: showUpload ? 'block' : 'none', position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
                                     <input 
                                       type="file"
@@ -1044,7 +1044,7 @@ const Specialist = () => {
                                   <div className="menu-reyting">
                                       <div style={{width: '250px', display: 'flex', justifyContent: 'center'}}>
                                         {showBlacklist ?
-                                        <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '18px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
+                                        <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '24px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
                                         :<div className="star-block" style={{cursor: 'pointer', marginBottom: '8px'}} onClick={()=>setShowMenu1(true)}>
                                           <img className='star-icon' src={StarActive} alt='' /> 
                                           <img className='star-icon' src={StarActive} alt='' />
@@ -1194,7 +1194,7 @@ const Specialist = () => {
                                   <div style={{display: 'flex'}}>
                                     {/* возраст */}
                                     <div className="text-field">
-                                      <input disabled className="text-field__input" type="text" name="age" id="age" value={age2}  onChange={(e) => setAge2(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                      <input disabled className="text-field__input" type="text" name="age2" id="age2" value={age2}  onChange={(e) => setAge2(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
                                     {/* год рождения */}
                                     <div className="text-field">
