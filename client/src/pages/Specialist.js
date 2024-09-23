@@ -24,6 +24,7 @@ import {
   CModalHeader,
   CModalTitle,
   CModalBody,
+  CModalFooter,
   CFormSelect,
   CToast, 
   CToastBody,
@@ -34,7 +35,7 @@ import {
 import Icon from "./../chat-app-worker/components/Icon";
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
-import { getSpecialist, getSpecCount, editSpecialist, addSpecialist } from './../http/specAPI'
+import { getSpecialist, getSpecCount, editSpecialist, addSpecialist, deleteSpecialist } from './../http/specAPI'
 import { getWContacts} from '../http/workerAPI'
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
 
@@ -136,6 +137,8 @@ const Specialist = () => {
   const [showMenu1, setShowMenu1] = useState(false)
   const [showMenu2, setShowMenu2] = useState(false)
 
+  const [visibleDelete, setVisibleDelete] = useState(false)
+
   const [file, setFile] = useState(0);
   const [filePreview, setFilePreview] = useState();
   const [image, setImage]= useState("");
@@ -149,6 +152,15 @@ const Specialist = () => {
     <CToast autohide={true} visible={true} color="success" className="text-white align-items-center">
       <div className="d-flex">
         <CToastBody>Данные успешно сохранены!</CToastBody>
+        <CToastClose className="me-2 m-auto" white />
+      </div>
+    </CToast>
+  )
+
+  const deleteToast = (
+    <CToast autohide={true} visible={true} color="success" className="text-white align-items-center">
+      <div className="d-flex">
+        <CToastBody>Данные успешно удалены!</CToastBody>
         <CToastClose className="me-2 m-auto" white />
       </div>
     </CToast>
@@ -573,6 +585,8 @@ const Specialist = () => {
     setFilePreview('')
   }
 
+  
+
   //сохранить профиль
   const saveProfile = async(id) => { 
     setShowClose(true)
@@ -807,6 +821,21 @@ const Specialist = () => {
 
   const clearSearch = () => {
     setText('')
+  }
+
+  const clickDelete = (id) => {
+    console.log(id)
+
+    setVisibleDelete(!visibleDelete)
+
+  }
+
+  const deleteProfile = async(id) => {
+    console.log(id)
+    setVisibleDelete(false)
+
+    await deleteSpecialist(id)
+    addToast(deleteToast) //ваши данные сохранены
   }
 
 
@@ -1085,7 +1114,7 @@ const Specialist = () => {
                                       <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
                                     <div style={{display: 'flex'}}>
-                                      <Icon id="delete" className="profile__danger-icon" />
+                                      <Icon id="delete" onClick={()=>clickDelete(id)} />
                                       <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
@@ -1338,6 +1367,26 @@ const Specialist = () => {
                           </CCard>
                         </CCol>
                     </CRow>
+
+                    <CModal
+                      backdrop="static"
+                      visible={visibleDelete}
+                      onClose={() => setVisibleDelete(false)}
+                      aria-labelledby="StaticBackdropExampleLabel"
+                    >
+                      <CModalHeader>
+                        <CModalTitle id="StaticBackdropExampleLabel">Предупреждение</CModalTitle>
+                      </CModalHeader>
+                      <CModalBody>
+                        Пользователь будет удален из базы!
+                      </CModalBody>
+                      <CModalFooter>
+                        <CButton color="secondary" onClick={() => setVisibleDelete(false)}>
+                          Отмена
+                        </CButton>
+                        <CButton color="primary" onClick={()=>deleteProfile(id)}>Удалить</CButton>
+                      </CModalFooter>
+                    </CModal>
                   </Suspense>
             </CContainer>
         </div>

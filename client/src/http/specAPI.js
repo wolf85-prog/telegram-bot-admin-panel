@@ -33,3 +33,11 @@ export const addSpecialist = async (data) =>{
         console.log("error while calling addSpecialist api",error.message);
     }
 }
+
+export const deleteSpecialist = async (id) =>{
+    try {
+        await $host.get(`api/specialist/delete/${id}`); 
+    } catch (error) {
+        console.log("error while calling deleteSpecialist api",error.message);
+    }
+}

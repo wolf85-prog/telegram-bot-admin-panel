@@ -1729,11 +1729,11 @@ useEffect(() => {
                                           <CCollapse visible={showTable[index]}>
                                             <table>
                                               <tbody>
-                                                {item.worklist !== '' ? (JSON.parse(item.worklist)).map((spec, index)=>( 
+                                                {/* {item.worklist !== '' ? (JSON.parse(item.worklist)).map((spec, index)=>( 
                                                     <tr key={index}>
                                                       <td>{spec.spec !== '' ? "- " + spec.spec : ''}</td>
                                                     </tr>          
-                                                )) : ""}
+                                                )) : ""} */}
                                               </tbody> 
                                             </table>
                                           </CCollapse>

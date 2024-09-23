@@ -145,6 +145,18 @@ class SpecialistController {
         }
     }
 
+    async deleteSpecialist(req, res) {      
+        const {id} = req.params 
+        try {              
+            await Specialist.destroy({
+                where: { id: String(id) },
+            })
+            return res.status(200).json("Данные успешно удалены!");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
 }
 
 module.exports = new SpecialistController()
