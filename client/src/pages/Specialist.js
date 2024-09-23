@@ -338,7 +338,7 @@ const Specialist = () => {
 
     setId(worker.id)
     setFio(worker.fio)
-    setCity(worker.city ? worker.city.split(',') : [])
+    setCity(worker.city ? worker.city : '')
     setAge(worker.age ? worker.age.split('-')[0] : '')
     setAge2(worker.age ? parseInt(currentYear) - parseInt(worker.age ? worker.age.split('-')[0] : 0) : '')
 
