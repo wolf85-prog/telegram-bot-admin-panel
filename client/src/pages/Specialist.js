@@ -320,7 +320,7 @@ const Specialist = () => {
     const res = await addSpecialist(data)
 
     console.log("res: ", res)
-    //await addNewSpecialist(res.id, 'ФИО')
+    await addNewSpecialist(res.id, 'ФИО')
   }
 
   const clickFio = (worker)=> {
@@ -830,12 +830,18 @@ const Specialist = () => {
 
   }
 
+
+  //удаление специалиста
   const deleteProfile = async(id) => {
     console.log(id)
     setVisibleDelete(false)
 
     await deleteSpecialist(id)
     addToast(deleteToast) //ваши данные сохранены
+
+    setSpecialist([...specialist].filter(item=>item.id !== id))
+
+    setShowProfile(false)
   }
 
 
