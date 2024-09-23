@@ -90,7 +90,9 @@ class SpecialistController {
                 inn,
                 email,
                 promo,
-                passport
+                passport,
+                block,
+                block18
             } = req.body
 
             const newUser = await Specialist.update(
@@ -113,7 +115,7 @@ class SpecialistController {
                     email,
                     promoId: promo,
                     passport,
-                    block,
+                    blockW: block,
                     block18
                 },
                 { where: {id: id} })
