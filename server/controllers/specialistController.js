@@ -141,7 +141,7 @@ class SpecialistController {
         try {    
 
             const {fio} = req.body
-
+            
             const currentMonth = new Date().getMonth() + 1
             let urlAvatar = ''
             
@@ -180,7 +180,7 @@ class SpecialistController {
             else if (currentMonth === 12) {
                 //декабрь
                 urlAvatar = 'https://proj.uley.team/upload/2024-06-06T07:54:44.499Z.jpg'
-            }
+            } 
 
             const newUser = await Specialist.create({fio, profile: urlAvatar})
             return res.status(200).json(newUser);

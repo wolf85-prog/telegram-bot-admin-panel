@@ -313,7 +313,8 @@ const Specialist = () => {
     getImage();
   }, [file])
   
-  const clickAdd = async()=> {
+  const clickAdd = async()=> {   
+
     const data = {
       fio: 'ФИО',
     }
@@ -322,8 +323,8 @@ const Specialist = () => {
     console.log("res: ", res)
     if (res) {
       await addNewSpecialist(res?.id, res?.fio)
+      setSpecialist([...specialist].push({id: res?.id, fio: 'ФИО', profile: res?.profile}))
     }
-    
   }
 
   const clickFio = (worker)=> {
