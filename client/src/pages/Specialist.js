@@ -344,6 +344,8 @@ const Specialist = () => {
 
     setSpeclist(worker.spec ? worker.spec.split(', ') : [])
 
+    setShowBlacklist(worker.spec.includes('Blacklist'))
+
     setPhone(worker.phone)
     setPhone2(worker.phone2)
     setTelegram(worker.telegram)
