@@ -1000,14 +1000,44 @@ const UsersProvider = ({ children }) => {
 
 			const {id, fio} = data
 
-			let userIndex = specialist.findIndex((spec) => spec.id === id);
-			const usersCopy = JSON.parse(JSON.stringify(specialist));
+			const usersCopy = [...specialist];
 
-			const userObject = usersCopy[userIndex];
-			usersCopy[userIndex] = { ...userObject, 
-				id,
-				fio, 
-			};
+			const newWorker = {
+				id: id,
+				fio: fio,
+				telegram: "", 
+				phone: "", 
+				phone2: "",
+				spec: "",
+				city: "", 
+				skill: "",
+				promo: "", 
+				rank: "", 
+				merch: "",  
+				company: "",  
+				comteg: "", 
+				comteg2: "",  
+				comment: "", 
+				comment2: "", 
+				age: "", 
+				reyting: "", 
+				inn: "", 
+				passport: "", 
+				profile: "", 
+				dogovor: '🔴', 
+				samozanjatost: '🔴', 
+				passportScan: "",  
+				email: "",
+			  }
+			  usersCopy.push(newWorker)
+	  
+			  //если элемент массива последний
+				// if (i === workers.length-1) {
+				// const sortedWorker = [...arrWorkers].sort((a, b) => {       
+				//   var idA = a.id, idB = b.id 
+				//   return idB-idA  //сортировка по возрастанию 
+				// })
+	  
 
 			return usersCopy;
 		});
