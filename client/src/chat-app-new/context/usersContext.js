@@ -998,7 +998,7 @@ const UsersProvider = ({ children }) => {
 
 		setSpecialist((specialist) => {	
 
-			const {id, fio} = data
+			const {id, fio, profile} = data
 
 			const usersCopy = [...specialist];
 
@@ -1023,23 +1023,22 @@ const UsersProvider = ({ children }) => {
 				reyting: "", 
 				inn: "", 
 				passport: "", 
-				profile: "", 
+				profile: profile, 
 				dogovor: '🔴', 
 				samozanjatost: '🔴', 
 				passportScan: "",  
 				email: "",
-			  }
-			  usersCopy.push(newWorker)
+			}
+			usersCopy.push(newWorker)
 	  
 			  //если элемент массива последний
-				// if (i === workers.length-1) {
-				// const sortedWorker = [...arrWorkers].sort((a, b) => {       
-				//   var idA = a.id, idB = b.id 
-				//   return idB-idA  //сортировка по возрастанию 
-				// })
+			const sortedWorker = [...usersCopy].sort((a, b) => {       
+				var idA = a.id, idB = b.id 
+				return idA-idB  //сортировка по возрастанию 
+			})
 	  
 
-			return usersCopy;
+			return sortedWorker;
 		});
 	}
 
@@ -1149,10 +1148,11 @@ const UsersProvider = ({ children }) => {
 		setUsers(usersCopy);
 	}
 
-	const addNewSpecialist = (id, fio) => {
+	const addNewSpecialist = (id, fio, profile) => {
 		socket.emit("sendSpecialist", { 
 			id,
 			fio,
+			profile,
 		})
 	}
 

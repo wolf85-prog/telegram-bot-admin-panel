@@ -322,9 +322,7 @@ const Specialist = () => {
 
     console.log("res: ", res)
     if (res) {
-      await addNewSpecialist(res?.id, res?.fio)
-      //const usersCopy = { ...specialist, id: res?.id, fio: 'ФИО', profile: res?.profile};
-      //setSpecialist(usersCopy)
+      await addNewSpecialist(res?.id, res?.fio, res?.profile)
     }
   }
 

@@ -236,10 +236,11 @@ io.on("connection", (socket) => {
 
 
     //send and get message in workers
-    socket.on("sendSpecialist", ({id, fio})=>{
+    socket.on("sendSpecialist", ({id, fio, profile})=>{
         io.emit("getSpecialist", {
             id,
             fio,
+            profile,
         })
     })  
 
