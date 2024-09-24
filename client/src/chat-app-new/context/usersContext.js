@@ -620,10 +620,10 @@ const UsersProvider = ({ children }) => {
         const newWorker = {
           id: worker.id,
           fio: worker.fio,
-          telegram: worker.chatId, 
+          chatId: worker.chatId, 
           phone: worker.phone, 
           phone2: worker.phone2,
-          spec: str_spec,
+          speclist: str_spec,
           city: worker.city, 
           skill: str_skill,
           promo: worker.promoId === '0' ? '' : worker.promoId, 
@@ -643,6 +643,8 @@ const UsersProvider = ({ children }) => {
           samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
           passportScan: worker.passportScan, 
           email: worker.email, 
+		  block: worker.block,
+          block18: worker.block18,
         }
         arrAllWorkers.push(newWorker)
       }) 
