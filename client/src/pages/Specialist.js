@@ -238,7 +238,7 @@ const Specialist = () => {
         const newWorker = {
           id: worker.id,
           fio: worker.fio,
-          telegram: worker.chatId, 
+          chatId: worker.chatId, 
           phone: worker.phone, 
           phone2: worker.phone2,
           speclist: str_spec,
