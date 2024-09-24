@@ -285,6 +285,7 @@ const Specialist = () => {
       setLoading(false)
 
       let wuserbots = await getWContacts();
+      console.log("wuserbots: ", wuserbots)
       setUserbots(wuserbots)
 
       
@@ -329,7 +330,7 @@ const Specialist = () => {
   }
 
   const clickFio = (worker)=> {
-    console.log(worker)
+    console.log("worker: ", worker)
     //setVisibleXL(true)
     setShowProfile(true)
     setModalWorker(worker)
@@ -370,15 +371,15 @@ const Specialist = () => {
     setDogovor(worker.dogovor)
     setSamozanjatost(worker.samozanjatost)
     setPassportScan(worker.passportScan)
-    setNik(userbots.find((user) => user.chatId === worker.telegram)?.username)
-    setDateReg(userbots.find((user) => user.chatId === worker.telegram)?.createdAt)
+    setNik(userbots.find((user) => user.chatId.toString() === worker.chatId.toString())?.username)
+    setDateReg(userbots.find((user) => user.chatId.toString() === worker.chatId.toString())?.createdAt)
 
     setBlock(worker.block)
     setBlock18(worker.block18)
 
     setShowKrest(worker.block)
     setShowBlock18(worker.block18)
-    console.log("user", userbots.find((user) => user.chatId === worker.telegram))
+    console.log("user", userbots.find((user) => user.chatId === worker.chatId))
   }
 
   const copyText = (text)=> {

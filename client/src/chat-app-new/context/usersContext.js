@@ -575,6 +575,7 @@ const UsersProvider = ({ children }) => {
     const fetchData = async () => {
       // 1 Все специалисты
       const res = await getSpecialist()
+	  console.log("getSpecialist: ", res)
       let arrAllWorkers = []
       res.map(async (worker, i) => {
         let str_spec = ''
