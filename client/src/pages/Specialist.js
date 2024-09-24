@@ -374,10 +374,10 @@ const Specialist = () => {
     setNik(userbots.find((user) => user.chatId.toString() === worker.chatId.toString())?.username)
     setDateReg(userbots.find((user) => user.chatId.toString() === worker.chatId.toString())?.createdAt)
 
-    setBlock(worker.block)
+    setBlock(worker.blockW)
     setBlock18(worker.block18)
 
-    setShowKrest(worker.block)
+    setShowKrest(worker.blockW)
     setShowBlock18(worker.block18)
     console.log("user", userbots.find((user) => user.chatId === worker.chatId))
   }
@@ -714,7 +714,7 @@ const Specialist = () => {
       email,
       promo,
       passport,
-      block,
+      blockW: block,
       block18
     }
     console.log(saveData)
@@ -744,7 +744,7 @@ const Specialist = () => {
         email,
         promo,
         passport,
-        block,
+        blockW: block,
         block18,
       };
 
