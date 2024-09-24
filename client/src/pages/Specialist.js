@@ -350,7 +350,7 @@ const Specialist = () => {
 
     setPhone(worker.phone)
     setPhone2(worker.phone2)
-    setTelegram(worker.telegram)
+    setTelegram(worker.chatId)
     setSkill(worker.skill ? worker.skill.split(', ') : [])
 
     setReyting(worker.reyting === null ? '' : worker.reyting)

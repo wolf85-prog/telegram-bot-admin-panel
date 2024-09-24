@@ -385,7 +385,7 @@ const UsersProvider = ({ children }) => {
 			//1 все специалисты 100
 			//let response = await getWorkersCount(100, workers.length);
 			let response = await getSpecCount(100, specialist.length);
-			console.log("specialist size: ", response.length)
+			console.log("specialist 100: ", response)
 		
 			const arrayWorker = []
 		
