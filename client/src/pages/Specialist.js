@@ -605,7 +605,7 @@ const Specialist = () => {
     let specArr = []
     let strSpec = ''
 
-    speclist.map((item) => {
+    speclist.map((item, index) => {
       specData.map((category)=> {
           category.models.map((work)=> {
               if (work.name === item){
@@ -613,7 +613,7 @@ const Specialist = () => {
                       spec: item,
                       cat: category.icon,
                   }
-                  strSpec = strSpec + item + ', '
+                  strSpec = strSpec + item + (index+1 !== speclist.length ? ', ' : '')
                   specArr.push(obj)
               }
           })
@@ -623,58 +623,58 @@ const Specialist = () => {
             spec: item,
             cat: 'Blacklist',
         }
-        strSpec = strSpec + item + ', '
+        strSpec = strSpec + item + (index+1 !== speclist.length ? ', ' : '')
         specArr.push(obj) 
       }
     })
 
     let skillArr = []
     let strSkill = ''
-    skill.map((item)=> {
+    skill.map((item, index)=> {
       const obj = {
         name: item,
       }
-      strSkill = strSkill + item + ', '
+      strSkill = strSkill + item + (index+1 !== skill.length ? ', ' : '')
       skillArr.push(obj)
     })
 
     let companyArr = []
     let strCompany = ''
-    company.map((item)=> {
+    company.map((item, index)=> {
       const obj = {
         name: item,
       }
-      strCompany = strCompany + item + ', '
+      strCompany = strCompany + item + (index+1 !== company.length ? ', ' : '')
       companyArr.push(obj)
     })
 
     let merchArr = []
     let strMerch = ''
-    merch.map((item)=> {
+    merch.map((item, index)=> {
       const obj = {
         name: item,
       }
-      strMerch = strMerch + item + ', '
+      strMerch = strMerch + item + (index+1 !== merch.length ? ', ' : '')
       merchArr.push(obj)
     })
 
     let comtegArr = []
     let strComteg = ''
-    comteg.map((item)=> {
+    comteg.map((item, index)=> {
       const obj = {
         name: item,
       }
-      strComteg = strComteg + item + ', '
+      strComteg = strComteg + item + (index+1 !== comteg.length ? ', ' : '')
       comtegArr.push(obj)
     })
 
     let comtegArr2 = []
     let strComteg2 = ''
-    comteg2.map((item)=> {
+    comteg2.map((item, index)=> {
       const obj = {
         name: item,
       }
-      strComteg2 = strComteg2 + item + ', '
+      strComteg2 = strComteg2 + item + (index+1 !== comteg2.length ? ', ' : '')
       comtegArr2.push(obj)
     })
 
