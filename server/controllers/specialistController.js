@@ -1,5 +1,6 @@
 const {Worker, Specialist} = require('../models/models')
 const ApiError = require('../error/ApiError')
+const { Op } = require('sequelize')
 
 require("dotenv").config();
 
