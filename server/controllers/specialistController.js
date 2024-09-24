@@ -23,6 +23,11 @@ class SpecialistController {
                 order: [
                     ['id', 'DESC'], //DESC, ASC
                 ],
+                where: {
+                    chatId: {
+                        [Op.ne]: null
+                    }
+                }
             })
             return res.status(200).json(workers);
         } catch (error) {
@@ -196,6 +201,16 @@ class SpecialistController {
                 where: { id: String(id) },
             })
             return res.status(200).json("Данные успешно удалены!");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    async getSpecCountAll(req, res) {
+        try {
+            const count = await Specialist.count();
+
+            return res.status(200).json(count);
         } catch (error) {
             return res.status(500).json(error.message);
         }

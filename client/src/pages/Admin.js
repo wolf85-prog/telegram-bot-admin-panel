@@ -173,7 +173,7 @@ const Admin = () => {
     const currentMonth = currentDate.getMonth()
 
     //массив новых пользователей за текущий месяц
-    const arr1 = workersAll.filter(item => new Date(item.createDate).getMonth() === currentMonth)
+    const arr1 = workersAll.filter(item => new Date(item.createDate).getMonth() === currentMonth && item.chatId !== null)
     setNewWorkers(arr1)
 
     //массив удаленных пользователей
@@ -220,6 +220,7 @@ useEffect(() => {
       //console.log("workers (admin): ", workers.length)
       setLoading2(false)
       setLoading3(false)
+      setLoading4(false)
 
       let messages = await getAllMessages()
 
@@ -293,7 +294,7 @@ useEffect(() => {
         arrClients2.push(newObj2)
       })
 
-      const filteredClients = [...arrClients].filter((el) => el.TG_ID !== chatAdminId && el.TG_ID !== ''); //без админского пользователя  
+      const filteredClients = [...arrClients].filter((el) => el.TG_ID !== chatAdminId || el.TG_ID !== null); //без админского пользователя  
       const clientSort = [...filteredClients].sort((a, b) => {       
         return b.usage.value-a.usage.value  //сортировка по убывающей активности  
       }) 
