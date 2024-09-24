@@ -631,7 +631,7 @@ const Specialist = () => {
       const obj = {
         name: item,
       }
-      strSkill = strSkill + ', ' + item
+      strSkill = strSkill + item + ', '
       skillArr.push(obj)
     })
 
@@ -641,7 +641,7 @@ const Specialist = () => {
       const obj = {
         name: item,
       }
-      strCompany = strCompany + ', ' + item
+      strCompany = strCompany + item + ', '
       companyArr.push(obj)
     })
 
@@ -651,7 +651,7 @@ const Specialist = () => {
       const obj = {
         name: item,
       }
-      strMerch = strMerch + ', ' + item
+      strMerch = strMerch + item + ', '
       merchArr.push(obj)
     })
 
@@ -661,7 +661,7 @@ const Specialist = () => {
       const obj = {
         name: item,
       }
-      strComteg = strComteg + ', ' + item
+      strComteg = strComteg + item + ', '
       comtegArr.push(obj)
     })
 
@@ -671,7 +671,7 @@ const Specialist = () => {
       const obj = {
         name: item,
       }
-      strComteg2 = strComteg2 + ', ' + item
+      strComteg2 = strComteg2 + item + ', '
       comtegArr2.push(obj)
     })
 
