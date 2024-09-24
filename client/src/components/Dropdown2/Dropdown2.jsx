@@ -30,9 +30,11 @@ const Dropdown2 = ({options, tags, setTags}) => {
 
 
     const specList = tags.map((item, i) =>
-        <li key={i} onMouseOver={()=>setShowClose(true)} onMouseOut={()=>setShowClose(false)}>
-            {item} <div style={{position: 'relative'}}><img src={Close} onClick={(e) => removeTag(i, e)} width={15} alt='' className={drp.close} style={{visibility: showClose ? 'visible' : 'hidden'}}></img></div>
-        </li>
+       // if (item !== 'Blacklist') {
+            <li key={i} onMouseOver={()=>setShowClose(true)} onMouseOut={()=>setShowClose(false)}>
+                {item} <div style={{position: 'relative'}}><img src={Close} onClick={(e) => removeTag(i, e)} width={15} alt='' className={drp.close} style={{visibility: showClose ? 'visible' : 'hidden'}}></img></div>
+            </li>
+       // }
     )
 
     const dropdownList = options.map((option, i) =>

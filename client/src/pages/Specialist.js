@@ -78,7 +78,7 @@ const Specialist = () => {
 
   const [loading, setLoading]= useState(true);
   const [text, setText]= useState("");
-  const [spec, setSpec] = useState([]); 
+  //const [spec, setSpec] = useState([]); 
   const [visibleSm, setVisibleSm] = useState(false)
   const [modalWorker, setModalWorker] = useState({})
   const [showProfile, setShowProfile] = useState(false)
@@ -101,7 +101,7 @@ const Specialist = () => {
 
   const [id, setId] = useState('');
   const [fio, setFio] = useState('');
-  const [city, setCity] = useState([]);
+  const [city, setCity] = useState('');
   const [age, setAge] = useState('');
   const [age2, setAge2] = useState(0);
   const [speclist, setSpeclist] = useState([]);
@@ -241,7 +241,7 @@ const Specialist = () => {
           telegram: worker.chatId, 
           phone: worker.phone, 
           phone2: worker.phone2,
-          spec: str_spec,
+          speclist: str_spec,
           city: worker.city, 
           skill: str_skill,
           promo: worker.promoId === '0' ? '' : worker.promoId, 
@@ -344,9 +344,9 @@ const Specialist = () => {
     setAge(worker.age ? worker.age.split('-')[0] : '')
     setAge2(worker.age ? parseInt(currentYear) - parseInt(worker.age ? worker.age.split('-')[0] : 0) : '')
 
-    setSpeclist(worker.spec ? worker.spec.split(', ') : [])
+    setSpeclist(worker.speclist ? worker.speclist.split(', ') : [])
 
-    setShowBlacklist(worker.spec.includes('Blacklist'))
+    setShowBlacklist(worker.speclist.includes('Blacklist'))
 
     setPhone(worker.phone)
     setPhone2(worker.phone2)
@@ -503,7 +503,7 @@ const Specialist = () => {
 
         let str_spec = ''
         worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
-          str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
+          str_spec = str_spec + item.speclist + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
         })
 
         let str_skill = ''
@@ -548,7 +548,7 @@ const Specialist = () => {
           telegram: worker.chatId, 
           phone: worker.phone, 
           phone2: worker.phone2,
-          spec: str_spec,
+          speclist: str_spec,
           city: worker.city, 
           skill: str_skill,
           promo: worker.promoId === '0' ? '' : worker.promoId, 
@@ -610,7 +610,7 @@ const Specialist = () => {
                       spec: item,
                       cat: category.icon,
                   }
-                  strSpec = strSpec + ', ' + item
+                  strSpec = strSpec + item + ', '
                   specArr.push(obj)
               }
           })
@@ -620,6 +620,7 @@ const Specialist = () => {
             spec: item,
             cat: 'Blacklist',
         }
+        strSpec = strSpec + item + ', '
         specArr.push(obj) 
       }
     })
@@ -795,7 +796,7 @@ const Specialist = () => {
 
     //убрать из списка специальностей Blacklist
     const res = speclist.filter(item=>item !== 'Blacklist')
-    console.log("speclist: ", speclist)
+    console.log("speclist: ", res)
 
     setSpeclist(res)
   }
@@ -954,7 +955,7 @@ const Specialist = () => {
                                             {item.phone}
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.spec ? (item.spec.length > 30 ? item.spec.substr(0, 30) + '...' : item.spec) : ''}
+                                          {item.speclist ? (item.speclist.length > 30 ? item.speclist.substr(0, 30) + '...' : item.speclist) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.city ? (item.city.length > 30 ? item.city.substr(0, 30) + '...' : item.city) : ''}
@@ -1160,7 +1161,7 @@ const Specialist = () => {
                                   <label>Специальность</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
-                                        tags={speclist}
+                                        tags={speclist.filter(item=>item !== 'Blacklist')}
                                         setTags={setSpeclist}
                                         options={specOnlyData}
                                         onChange={changeSpec}
