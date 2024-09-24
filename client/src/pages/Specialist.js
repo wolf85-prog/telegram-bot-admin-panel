@@ -601,6 +601,7 @@ const Specialist = () => {
 
     let specArr = []
     let strSpec = ''
+
     speclist.map((item) => {
       specData.map((category)=> {
           category.models.map((work)=> {
@@ -745,6 +746,7 @@ const Specialist = () => {
         block18,
       };
 
+      console.log("update user: ", usersCopy[userIndex])
 
 			return usersCopy;
     });
