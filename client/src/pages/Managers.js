@@ -44,6 +44,13 @@ import StarActive from "./../assets/images/star_activ.svg";
 import Disketa from "./../assets/images/disketa.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 
+import MyDropdown from 'src/components/Dropdown/Dropdown';
+import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
+
+import comtegs from 'src/data/comtegs';
+import companys from 'src/data/companys';
+import cities from 'src/data/cities';
+
 //Workers.js
 const Managers = () => {
 
@@ -91,7 +98,7 @@ const Managers = () => {
   const [merch, setMerch] = useState('');
   const [company, setCompany] = useState('');
   const [inn, setInn] = useState('');
-  const [comteg, setComteg] = useState('');
+  const [comteg, setComteg] = useState([]);
   const [comteg2, setComteg2] = useState('');
   const [email, setEmail] = useState('');
   const [comment, setComment] = useState('');
@@ -159,6 +166,11 @@ const Managers = () => {
   }, [])
 
   const clickAdd = async()=> {   
+
+    setShowProfile(true)
+    //setModalWorker(worker)
+    setShowSearch(false)
+    setShowClear(false)
 
     const data = {
       fio: 'ФИО',
@@ -274,6 +286,28 @@ const Managers = () => {
       
   }
 
+  const onChangeReyting = () => {
+    setShowBlacklist(false)
+    setShowMenu2(false)
+
+    //убрать из списка специальностей Blacklist
+    //const res = speclist.filter(item=>item !== 'Blacklist')
+    //console.log("speclist: ", res)
+
+    //setSpeclist(res)
+  }
+
+  const onChangeBlacklist = () => {
+    setShowBlacklist(true)
+    setShowMenu1(false)
+
+    //добавить в список специальностей Blacklist
+    // speclist.push('Blacklist')
+    // console.log("speclist: ", speclist)
+
+    // setSpeclist(speclist)
+  }
+
   {/* Добавление файла */}
   const onFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -304,9 +338,40 @@ const Managers = () => {
 
     //await deleteSpecialist(id)
     addToast(deleteToast) //ваши данные сохранены
-
-    
+  
   }
+
+  //сохранить профиль
+  const saveProfile = async(id) => { 
+      setShowClose(true)
+      console.log(id)
+  
+      let specArr = []
+      let strSpec = ''
+
+  
+  
+      addToast(exampleToast) //ваши данные сохранены
+  }
+  
+  const blockedProfile = () => { 
+      setBlockProfile(!blockProfile)
+  }
+
+  const closeProfile = () => { 
+    setShowProfile(false)
+    setShowClose(false)
+    setShowSearch(true)
+
+    setShowClear(true)
+    setFilePreview('')
+  }
+
+  const onChangeKrest = () => {
+    setShowKrest(!showKrest)
+    setShowMenuKrest(false)
+    setBlock(!block)
+  } 
 
   return (
     <div className='dark-theme'>
@@ -362,27 +427,22 @@ const Managers = () => {
                                         <CTableHeaderCell className='myid-th widthSpace'>№</CTableHeaderCell> 
                                         <CTableHeaderCell className='myfio-th widthSpace' onClick={onSortFio}>ФИО</CTableHeaderCell>  
                                         <CTableHeaderCell className='my-th widthTg' onClick={onSortTG}>Телеграм</CTableHeaderCell> 
+                                        <CTableHeaderCell className='my-th widthSpace' onClick={onSortCity}>Город</CTableHeaderCell>                                           
+                                        <CTableHeaderCell className='my-th widthSpace'>Компания</CTableHeaderCell>
+                                        <CTableHeaderCell className='my-th widthSpace'>Должность</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthPhone'>Телефон</CTableHeaderCell> 
-                                        <CTableHeaderCell className='my-th widthSpace'>Специальность</CTableHeaderCell> 
-                                        <CTableHeaderCell className='my-th widthSpace' onClick={onSortCity}>Город</CTableHeaderCell>   
-                                        <CTableHeaderCell className='my-th widthSpace'>Год</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Проекты</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthPhone'>Телефон №2</CTableHeaderCell>                         
-                                        <CTableHeaderCell className='my-th widthSpace'>Навык</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Промокод</CTableHeaderCell>                                       
-                                        <CTableHeaderCell className='my-th widthSpace'>Мерч</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Прокатная компания</CTableHeaderCell>
+                                        <CTableHeaderCell className='my-th widthPhone'>Телефон №2</CTableHeaderCell> 
+                                        
+                                        <CTableHeaderCell className='my-th widthSpace'>Проекты</CTableHeaderCell>                         
+
                                         <CTableHeaderCell className='my-th widthSpace'>Комтег</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Комтег №2</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Комментарии</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Комментарии №2</CTableHeaderCell>                                        
-                                        <CTableHeaderCell className='my-th widthSpace'>Рейтинг</CTableHeaderCell>
+                                        <CTableHeaderCell className='my-th widthSpace'>Комментарии</CTableHeaderCell>                     
+                                        <CTableHeaderCell className='my-th widthSpace'>Офис</CTableHeaderCell>
+                                        <CTableHeaderCell className='my-th widthSpace'>Склад</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>ИНН</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Паспорт</CTableHeaderCell>
+                                        <CTableHeaderCell className='my-th widthSpace'>Сфера деятельности</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Профиль</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Д</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>С</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Паспорт [скан]</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Почта</CTableHeaderCell>
                                       </CTableRow>
                                     </CTableHead>
@@ -398,48 +458,35 @@ const Managers = () => {
                                           <CTableDataCell className="text-center widthSpace">
                                             {item.chatId}
                                           </CTableDataCell>
-                                          <CTableDataCell className="text-center">
-                                            {item.phone}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.speclist ? (item.speclist.length > 30 ? item.speclist.substr(0, 30) + '...' : item.speclist) : ''}
-                                          </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.city ? (item.city.length > 30 ? item.city.substr(0, 30) + '...' : item.city) : ''}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.age ? item.age.split('-')[0] : ''}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.rank}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.phone2}
-                                          </CTableDataCell> 
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.skill}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.promo}
-                                          </CTableDataCell>                                         
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.merch}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.company ? (item.company.length > 20 ? item.company.substr(0, 20) + '...' : item.company) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.comteg ? (item.comteg.length > 30 ? item.comteg.substr(0, 30) + '...' : item.comteg) : ''}
+                                          
                                           </CTableDataCell>
+                                          <CTableDataCell className="text-center">
+                                            {item.phone}
+                                          </CTableDataCell>
+                                          <CTableDataCell className="text-center">
+                                            {item.phone2}
+                                          </CTableDataCell>
+                                          
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.comteg2 ? (item.comteg2.length > 30 ? item.comteg2.substr(0, 30) + '...' : item.comteg2) : ''}
+                                          {item.rank}
+                                          </CTableDataCell>
+                                          
+                                          <CTableDataCell className="text-center widthSpace">
+                                          {item.comteg ? (item.comteg.length > 30 ? item.comteg.substr(0, 30) + '...' : item.comteg) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
                                           {item.comment ? (item.comment.length > 30 ? item.comment.substr(0, 30) + '...' : item.comment) : ''}
+                                          </CTableDataCell>                                        
+                                          <CTableDataCell className="text-center widthSpace">
+                                          {item.reyting}
                                           </CTableDataCell>
-                                          <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.comment2 ? (item.comment2.length > 30 ? item.comment2.substr(0, 30) + '...' : item.comment2) : ''}
-                                          </CTableDataCell>                                         
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.reyting}
                                           </CTableDataCell>
@@ -455,12 +502,7 @@ const Managers = () => {
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.dogovor}
                                           </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.samozanjatost}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.passportScan}
-                                          </CTableDataCell>
+
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.email}
                                           </CTableDataCell>
@@ -477,6 +519,7 @@ const Managers = () => {
                               )
                               :
                               <div style={{position: 'relative', height: '765px', display: 'flex', flexDirection: 'row'}}>
+{/* 1 */}                               
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
                                   <img src={filePreview} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={250} height={250}/>
@@ -490,8 +533,319 @@ const Managers = () => {
                                   </svg>
                                   )
                                   }
+                                  <div className="file-upload" style={{marginBottom: '8px'}}>
+                                    <img src={addAvatar} alt="upload" style={{display: showUpload ? 'block' : 'none', position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
+                                    <input 
+                                      type="file"
+                                      id="formFile" 
+                                      accept="image/*,image/jpeg" 
+                                      name="photo"
+                                      onChange={(e) => onFileChange(e)}
+                                      style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}
+                                    />
+                                  </div>
+
+                                  <div className="menu-reyting">
+                                      <div style={{width: '250px', display: 'flex', justifyContent: 'center'}}>
+                                        {showBlacklist ?
+                                        <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '24px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
+                                        :<div className="star-block" style={{cursor: 'pointer', marginBottom: '8px'}} onClick={()=>setShowMenu1(true)}>
+                                          <img className='star-icon' src={StarActive} alt='' /> 
+                                          <img className='star-icon' src={StarActive} alt='' />
+                                          <img className='star-icon' src={StarActive} alt='' />
+                                          <img className='star-icon' src={Star} alt='' />
+                                          <img className='star-icon' src={Star} alt='' />
+                                        </div>
+                                        }
+                                      </div>
+                                      <div className="menu-content" style={{display: showMenu1 ? 'block' : 'none'}}>
+                                          <span>Изменить рейтинг</span>
+                                          <span onClick={onChangeBlacklist} style={{cursor: 'pointer'}}>Blacklist</span>
+                                      </div>
+                                      <div className="menu-content" style={{display: showMenu2 ? 'block' : 'none'}}>
+                                          <span>Изменить рейтинг</span>
+                                          <span onClick={onChangeReyting} style={{cursor: 'pointer'}}>Рейтинг</span>
+                                      </div>
+                                  </div>
+
+                                  <label>В системе</label>
+                                  <div style={{display: 'flex', justifyContent: 'center'}}>
+                                    <div className="text-field">
+                                      <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" value={dateReg && dateReg.length >0 ? dateReg.split('-')[2].split('T')[0] + '.' + dateReg.split('-')[1] + '.' + dateReg.split('-')[0] : ''} style={{width: '250px'}}/>
+                                    </div>
+                                  </div> 
+
+
+                                  <label>ИНН</label>
+                                  <div className="text-field">
+                                    <InputMask
+                                        className="text-field__input" 
+                                        style={{width: '250px'}}
+                                        type="text" 
+                                        name="inn" 
+                                        id="inn"
+                                        mask="9999-999999-99"
+                                        maskChar=""
+                                        onChange={(e) => setInn(e.target.value)} 
+                                        value={inn}
+                                        placeholder=''
+                                    >
+                                    </InputMask>
+                                  </div> 
+
+                                  <div>  
+                                    <div>
+                                      <label>Договор</label>
+                                      <div style={{display: 'flex'}}>
+                                        <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
+                                        <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
+                                          <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={samozanjatost} onChange={(e) => setSamozanjatost(e.target.value)} style={{width: '40px', padding: '0', fontSize: '20px'}}/>
+                                        </div> 
+                                      </div>
+                                    </div>  
+                                  </div>
+                                  
+                                  <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '215px', left: '215px', opacity: block ? '1' : '0' }}/>
+                                  <div className="menu-content-krest">
+                                    <span onClick={onChangeKrest} style={{cursor: 'pointer'}}>{block ? 'Убрать' : 'Добавить'}</span>
+                                  </div>
+
+                                  {/* ФИО */}
+                                  <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
+                                    <div className="text-field">
+                                      <input type="text" name="fio" id="fio" value='ФИО' onChange={(e)=>setFio(e.target.value)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
+                                    </div>
+                                    <div style={{display: 'flex'}}>
+                                      <Icon id="delete" onClick={()=>clickDelete(id)} />
+                                      <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                    </div>
+                                  </div>
+
+                                  {/* 2 */}
+                                
 
                                 </div>
+
+{/* 2 */}
+                                <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
+                                  {/* Город */}
+                                  <div className="text-field"> 
+                                      <MyDropdown
+                                        style={{backgroundColor: '#131c21'}}
+                                        options={cities}
+                                        selected={city}
+                                        setSelected={setCity}
+                                        // onChange={addCity}
+                                      />
+                                  </div>
+
+                                  <label>Компания</label>
+                                  <div className="text-field"> 
+                                      <MyDropdown
+                                        style={{backgroundColor: '#131c21'}}
+                                        options={cities}
+                                        selected={city}
+                                        setSelected={setCity}
+                                        // onChange={addCity}
+                                      />
+                                  </div>
+
+                                  <label>Должность</label>
+                                  <div className="text-field"> 
+                                      <MyDropdown
+                                        style={{backgroundColor: '#131c21'}}
+                                        options={cities}
+                                        selected={city}
+                                        setSelected={setCity}
+                                        // onChange={addCity}
+                                      />
+                                  </div>
+
+                                  {/* email */}
+                                  <label>Почта</label>
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                                  </div> 
+
+                                  <label>Сфера деятельности</label>
+                                  <div className="text-field" style={{marginBottom: '0px'}}>
+                                    <textarea 
+                                      className="text-field__input" 
+                                      type="text" 
+                                      name="comment" 
+                                      id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
+                                      style={{width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                    />
+                                  </div> 
+
+                                  <label>Комтеги</label>
+                                  <div className="text-field"> 
+                                      <MyDropdown2
+                                        tags={comteg}
+                                        setTags={setComteg}
+                                        options={comtegs}
+                                      />
+                                  </div>
+                                  
+                                </div>
+
+{/* 3 */}
+<div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
+                                  <div className="uley-line" style={{left: '670px', width: '70px'}}></div>
+                                  <div className="uley-line" style={{left: '805px', width: '50px'}}></div>
+                                  <div className="uley-line" style={{left: '900px', width: '50px'}}></div>
+                                  <div style={{display: 'flex'}}>
+                                    
+                                    {/* проекты за месяц */}
+                                    <div className="text-field">
+                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                    </div>
+                                    {/* проекты всего */}
+                                    <div className="text-field">
+                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                    </div>
+
+                                    {/* phone */}
+                                    <div className="text-field" onMouseOver={()=>setShowSave(true)} onMouseOut={()=>setShowSave(false)}>
+                                      <img 
+                                        src={Disketa} 
+                                        onClick={()=>{navigator.clipboard.writeText(phone)}} 
+                                        alt="" 
+                                        style={{visibility: showSave ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                      />
+                                      {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
+                                      <InputMask
+                                          className="text-field__input" 
+                                          style={{width: '250px'}}
+                                          type="text" 
+                                          name="phone" 
+                                          id="phone"
+                                          mask="+7 (999) 999-99-99"
+                                          disabled={!blockProfile}
+                                          maskChar=""
+                                          onChange={(e) => setPhone(e.target.value)} 
+                                          value={phone}
+                                          placeholder=''
+                                      >
+                                      </InputMask>
+                                      
+                                    </div> 
+
+                                  </div>
+                                  <div style={{display: 'flex'}}>
+                                    
+                                    {/* проекты за месяц */}
+                                    <div className="text-field">
+                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                    </div>
+                                    {/* проекты всего */}
+                                    <div className="text-field">
+                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                    </div>
+
+                                    {/* phone */}
+                                    <div className="text-field" onMouseOver={()=>setShowSave(true)} onMouseOut={()=>setShowSave(false)}>
+                                      <img 
+                                        src={Disketa} 
+                                        onClick={()=>{navigator.clipboard.writeText(phone)}} 
+                                        alt="" 
+                                        style={{visibility: showSave ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                      />
+                                      {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
+                                      <InputMask
+                                          className="text-field__input" 
+                                          style={{width: '250px'}}
+                                          type="text" 
+                                          name="phone" 
+                                          id="phone"
+                                          mask="+7 (999) 999-99-99"
+                                          disabled={!blockProfile}
+                                          maskChar=""
+                                          onChange={(e) => setPhone(e.target.value)} 
+                                          value={phone}
+                                          placeholder=''
+                                      >
+                                      </InputMask>
+                                      
+                                    </div> 
+
+                                  </div>
+                                  
+                                  {/*  */}
+                                  <label>Офис</label>
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                                  </div> 
+
+                                  {/*  */}
+                                  <label>Склад</label>
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                                  </div> 
+
+                                  <label>Комментарии</label>
+                                  <div className="text-field" style={{marginBottom: '0px'}}>
+                                    <textarea 
+                                      className="text-field__input" 
+                                      type="text" 
+                                      name="comment" 
+                                      id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
+                                      style={{width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                    />
+                                  </div> 
+
+
+                                </div>
+
+{/* 4 */}
+                                <div style={{marginLeft: '40px', marginTop: '56px', display: 'flex', flexDirection: 'column', width: '250px'}}>
+
+                                  <label>Telegram</label>
+                                  <div className="text-field" onMouseOver={()=>setShowSave2(true)} onMouseOut={()=>setShowSave2(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(telegram)}} 
+                                      alt="" 
+                                      style={{visibility: showSave2 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                    />
+                                    <input 
+                                      className="text-field__input" 
+                                      type="text" 
+                                      pattern="[0-9]*"
+                                      name="telegram" 
+                                      id="telegram" 
+                                      value={telegram} 
+                                      //onChange={handleTg} 
+                                      style={{width: '250px'}}
+                                    />
+                                  </div>
+
+                                  {/* ник */}
+                                  <label> </label>
+                                  <div className="text-field" onMouseOver={()=>setShowSave3(true)} onMouseOut={()=>setShowSave3(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(nik)}} 
+                                      alt="" 
+                                      style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                    />
+                                    <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
+                                  </div> 
+
+
+                                  <label>Проекты</label>
+                                  <div className="text-field" style={{marginBottom: '0px'}}>
+                                    <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    
+                                    </ul>
+                                  </div> 
+                                </div>
+
+
                               </div>
                               }
                             </CCardBody>

@@ -1177,7 +1177,7 @@ const Specialist = () => {
                                         tags={company}
                                         setTags={setCompany}
                                         options={companys}
-                                        onChange={changeSpec}
+                                        //onChange={changeSpec}
                                       />
                                   </div>
 
@@ -1187,7 +1187,7 @@ const Specialist = () => {
                                         tags={comteg}
                                         setTags={setComteg}
                                         options={comtegs}
-                                        onChange={changeSpec}
+                                        //onChange={changeSpec}
                                       />
                                   </div>
 
