@@ -949,7 +949,7 @@ const Specialist = () => {
                                           {item.fio ? (item.fio.length > 30 ? item.fio.substr(0, 30) + '...' : item.fio) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                            {item.telegram}
+                                            {item.chatId}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center">
                                             {item.phone}
