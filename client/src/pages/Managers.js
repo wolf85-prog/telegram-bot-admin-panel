@@ -39,7 +39,7 @@ const Managers = () => {
 
           <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
-                  <h2>Уведомления</h2>
+                  <h2>Менеджеры</h2>
                   <h5>Раздел находится в разработке</h5>
 
                   

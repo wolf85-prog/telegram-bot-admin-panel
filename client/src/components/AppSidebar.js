@@ -95,12 +95,19 @@ const AppSidebar = () => {
       icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
     },
     {
-      component: CNavLink,
+      // component: CNavLink,
+      // name: 'Профиль',
+      // //href: 'https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893',
+      // icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      // onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893'),
+      // style: {cursor: 'pointer'},
+
+      component: CNavItem,
       name: 'Профиль',
-      //href: 'https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893',
+      to: '/managers',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-      onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893'),
-      style: {cursor: 'pointer'},
+      //onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/b1b7c39c50a7497da828d7e568f062de?v=5f8ceffc7f7340f4ba5aa3739457f1e7'),
+      //style: {color: '#e55353',},
     },
     {
       component: CNavItem,

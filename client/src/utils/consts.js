@@ -28,3 +28,4 @@ export const SOUNDSNOTIF_ROUTE = '/soundsnotif'
 export const FILEMANAGER_ROUTE = '/filemanager'
 
 export const SPECIALIST_ROUTE = '/specialist'
+export const MANAGERS_ROUTE = '/managers'

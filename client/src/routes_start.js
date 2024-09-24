@@ -23,6 +23,7 @@ import {
     SOUNDSNOTIF_ROUTE,
     FILEMANAGER_ROUTE,
     SPECIALIST_ROUTE,
+    MANAGERS_ROUTE,
 } from "./utils/consts";
 
 const Chats = React.lazy(() => import('./pages/Chats'))
@@ -50,6 +51,7 @@ const SoundsNotif = React.lazy(() => import('./pages/SoundsNotif'))
 const FileManager = React.lazy(() => import('./pages/FileManager'))
 
 const Specialist = React.lazy(() => import('./pages/Specialist'))
+const Managers = React.lazy(() => import('./pages/Managers'))
 
 export const authRoutes = [
     { path: ADMIN_ROUTE, name: 'Панель управления', Component: Admin },
@@ -75,5 +77,6 @@ export const authRoutes = [
     { path: SOUNDSNOTIF_ROUTE, name: 'Звуковые уведомления', Component: SoundsNotif },
     { path: FILEMANAGER_ROUTE, name: 'Файловый менеджер', Component: FileManager },
     { path: SPECIALIST_ROUTE, name: 'Специалисты', Component: Specialist },
+    { path: MANAGERS_ROUTE, name: 'Менеджеры', Component: Managers },
     { path: '/', name: 'Пункт управления', Component: Admin },
 ]

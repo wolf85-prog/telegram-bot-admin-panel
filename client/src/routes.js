@@ -17,6 +17,7 @@ const Workers = React.lazy(() => import('./pages/Workers'))
 const Workers2 = React.lazy(() => import('./pages/Workers2'))
 
 const Specialist = React.lazy(() => import('./pages/Specialist'))
+const Managers = React.lazy(() => import('./pages/Managers'))
 
 const routes = [
   { path: '/', exact: true, name: 'Пункт управления / ' },
@@ -36,6 +37,7 @@ const routes = [
   { path: '/dashboard2', name: 'Пункт управления / Renthub', Component: Admin2 },
   { path: "/chat3", name: 'Менеджеры 2.0', Component: Chats3 },
   { path: "/specialist", name: 'Профиль', Component: Specialist },
+  { path: "/managers", name: 'Профиль', Component: Managers },
 ]
 
 export default routes
