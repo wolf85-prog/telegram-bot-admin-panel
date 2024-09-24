@@ -504,7 +504,7 @@ const Specialist = () => {
 
         let str_spec = ''
         worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
-          str_spec = str_spec + item.speclist + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
+          str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
         })
 
         let str_skill = ''
@@ -546,7 +546,7 @@ const Specialist = () => {
 				const newWorker = {
           id: worker.id,
           fio: worker.fio,
-          telegram: worker.chatId, 
+          chatId: worker.chatId, 
           phone: worker.phone, 
           phone2: worker.phone2,
           speclist: str_spec,
@@ -569,6 +569,8 @@ const Specialist = () => {
           samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
           passportScan: worker.passportScan, 
           email: worker.email, 
+          block: worker.block,
+          block18: worker.block18,
         }
 		
 				arrayWorker.push(newWorker)
