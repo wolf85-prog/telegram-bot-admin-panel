@@ -167,6 +167,7 @@ const Admin = () => {
   //get filter workers
   useEffect(() => {
     //setSortWorkers(workers)
+    console.log("workersAll: ", workersAll)
 
     const currentDate = new Date()
     const currentMonth = currentDate.getMonth()
@@ -292,7 +293,7 @@ useEffect(() => {
         arrClients2.push(newObj2)
       })
 
-      const filteredClients = [...arrClients].filter((el) => el.TG_ID !== chatAdminId); //без админского пользователя  
+      const filteredClients = [...arrClients].filter((el) => el.TG_ID !== chatAdminId && el.TG_ID !== ''); //без админского пользователя  
       const clientSort = [...filteredClients].sort((a, b) => {       
         return b.usage.value-a.usage.value  //сортировка по убывающей активности  
       }) 
@@ -301,9 +302,9 @@ useEffect(() => {
 
 
 
-      const filteredClients2 = [...arrClients2].filter((el) => el.TG_ID !== chatAdminId); //без админского пользователя  
-      console.log("filteredClients2: ", filteredClients2)
-      setContacts2(filteredClients2)
+      // const filteredClients2 = [...arrClients2].filter((el) => el.TG_ID !== chatAdminId && el.TG_ID !== ''); //без админского пользователя  
+      // console.log("filteredClients2: ", filteredClients2)
+      // setContacts2(filteredClients2)
       
       setTimeout(() => {
         setLoading(false)
