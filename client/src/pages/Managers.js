@@ -50,6 +50,9 @@ import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
 import comtegs from 'src/data/comtegs';
 import companys from 'src/data/companys';
 import cities from 'src/data/cities';
+import dolgnost from 'src/data/dolgnost';
+import sfera from 'src/data/sfera';
+import companyData from 'src/data/companyData';
 
 //Workers.js
 const Managers = () => {
@@ -518,7 +521,7 @@ const Managers = () => {
                                 
                               )
                               :
-                              <div style={{position: 'relative', height: '765px', display: 'flex', flexDirection: 'row'}}>
+                              <div style={{position: 'relative', height: '665px', display: 'flex', flexDirection: 'row'}}>
 {/* 1 */}                               
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
@@ -647,7 +650,7 @@ const Managers = () => {
                                   <div className="text-field"> 
                                       <MyDropdown
                                         style={{backgroundColor: '#131c21'}}
-                                        options={cities}
+                                        options={companyData}
                                         selected={city}
                                         setSelected={setCity}
                                         // onChange={addCity}
@@ -658,7 +661,7 @@ const Managers = () => {
                                   <div className="text-field"> 
                                       <MyDropdown
                                         style={{backgroundColor: '#131c21'}}
-                                        options={cities}
+                                        options={dolgnost}
                                         selected={city}
                                         setSelected={setCity}
                                         // onChange={addCity}
@@ -672,15 +675,13 @@ const Managers = () => {
                                   </div> 
 
                                   <label>Сфера деятельности</label>
-                                  <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <textarea 
-                                      className="text-field__input" 
-                                      type="text" 
-                                      name="comment" 
-                                      id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
-                                    />
-                                  </div> 
+                                  <div className="text-field"> 
+                                      <MyDropdown2
+                                        tags={comteg}
+                                        setTags={setComteg}
+                                        options={sfera}
+                                      />
+                                  </div>
 
                                   <label>Комтеги</label>
                                   <div className="text-field"> 
@@ -695,10 +696,8 @@ const Managers = () => {
 
 {/* 3 */}
 <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
-                                  <div className="uley-line" style={{left: '670px', width: '70px'}}></div>
-                                  <div className="uley-line" style={{left: '805px', width: '50px'}}></div>
-                                  <div className="uley-line" style={{left: '900px', width: '50px'}}></div>
-                                  <div style={{display: 'flex'}}>
+                                  <div className="uley-line" style={{left: '670px', width: '50px'}}></div>
+                                  <div style={{display: 'flex', marginBottom: '24px'}}>
                                     
                                     {/* проекты за месяц */}
                                     <div className="text-field">
@@ -720,7 +719,7 @@ const Managers = () => {
                                       {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                       <InputMask
                                           className="text-field__input" 
-                                          style={{width: '250px'}}
+                                          style={{width: '225px'}}
                                           type="text" 
                                           name="phone" 
                                           id="phone"
@@ -736,10 +735,11 @@ const Managers = () => {
                                     </div> 
 
                                   </div>
-                                  <div style={{display: 'flex'}}>
-                                    
+
+                                  <div className="uley-line" style={{left: '670px', top: '151px', width: '50px'}}></div>
+                                  <div style={{display: 'flex'}}>                                   
                                     {/* проекты за месяц */}
-                                    <div className="text-field">
+                                    <div className="text-field" >
                                       <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
                                     {/* проекты всего */}
@@ -758,7 +758,7 @@ const Managers = () => {
                                       {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                       <InputMask
                                           className="text-field__input" 
-                                          style={{width: '250px'}}
+                                          style={{width: '225px'}}
                                           type="text" 
                                           name="phone" 
                                           id="phone"
@@ -794,7 +794,7 @@ const Managers = () => {
                                       type="text" 
                                       name="comment" 
                                       id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                      style={{width: '320px', height: '246px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
                                     />
                                   </div> 
 
@@ -805,7 +805,7 @@ const Managers = () => {
                                 <div style={{marginLeft: '40px', marginTop: '56px', display: 'flex', flexDirection: 'column', width: '250px'}}>
 
                                   <label>Telegram</label>
-                                  <div className="text-field" onMouseOver={()=>setShowSave2(true)} onMouseOut={()=>setShowSave2(false)}>
+                                  <div className="text-field" onMouseOver={()=>setShowSave2(true)} onMouseOut={()=>setShowSave2(false)} style={{marginBottom: '44px'}}>
                                     <img 
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(telegram)}} 
@@ -839,7 +839,7 @@ const Managers = () => {
 
                                   <label>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '250px', height: '415px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
