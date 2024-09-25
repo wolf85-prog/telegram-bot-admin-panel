@@ -50,8 +50,8 @@ import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
 import comtegs from 'src/data/comtegs';
 import companys from 'src/data/companys';
 import cities from 'src/data/cities';
-import dolgnost from 'src/data/dolgnost';
-import sfera from 'src/data/sfera';
+import dolgnostData from 'src/data/dolgnost';
+import sferaData from 'src/data/sfera';
 import companyData from 'src/data/companyData';
 
 //Workers.js
@@ -81,8 +81,9 @@ const Managers = () => {
   const [showKrest, setShowKrest] = useState(false)
 
   
-  const [showSave, setShowSave] = useState(false)
-  const [showSave2, setShowSave2] = useState(false)
+  const [showSavePhone1, setShowSavePhone1] = useState(false)
+  const [showSavePhone2, setShowSavePhone2] = useState(false)
+  const [showSaveTg, setShowSaveTg] = useState(false)
   const [showSave3, setShowSave3] = useState(false)
 
   const [id, setId] = useState('');
@@ -94,22 +95,18 @@ const Managers = () => {
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
   const [telegram, setTelegram] = useState('');
-  const [skill, setSkill] = useState('');
   const [reyting, setReyting] = useState('');
-  const [promo, setPromo] = useState('');
   const [rank, setRank] = useState('');
-  const [merch, setMerch] = useState('');
   const [company, setCompany] = useState('');
   const [inn, setInn] = useState('');
   const [comteg, setComteg] = useState([]);
-  const [comteg2, setComteg2] = useState('');
+  const [sfera, setSfera] = useState([]);
+  const [dolgnost, setDolgnost] = useState('');
+
   const [email, setEmail] = useState('');
   const [comment, setComment] = useState('');
-  const [comment2, setComment2] = useState('');
-  const [passport, setPassport] = useState('');
   const [dogovor, setDogovor] = useState('');
   const [samozanjatost, setSamozanjatost] = useState('');
-  const [passportScan, setPassportScan] = useState('');
   const [nik, setNik] = useState('');
   const [dateReg, setDateReg] = useState('');
   const [profile, setProfile] = useState('');
@@ -651,8 +648,8 @@ const Managers = () => {
                                       <MyDropdown
                                         style={{backgroundColor: '#131c21'}}
                                         options={companyData}
-                                        selected={city}
-                                        setSelected={setCity}
+                                        selected={company}
+                                        setSelected={setCompany}
                                         // onChange={addCity}
                                       />
                                   </div>
@@ -661,9 +658,9 @@ const Managers = () => {
                                   <div className="text-field"> 
                                       <MyDropdown
                                         style={{backgroundColor: '#131c21'}}
-                                        options={dolgnost}
-                                        selected={city}
-                                        setSelected={setCity}
+                                        options={dolgnostData}
+                                        selected={dolgnost}
+                                        setSelected={setDolgnost}
                                         // onChange={addCity}
                                       />
                                   </div>
@@ -677,9 +674,9 @@ const Managers = () => {
                                   <label>Сфера деятельности</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
-                                        tags={comteg}
-                                        setTags={setComteg}
-                                        options={sfera}
+                                        tags={sfera}
+                                        setTags={setSfera}
+                                        options={sferaData}
                                       />
                                   </div>
 
@@ -708,13 +705,13 @@ const Managers = () => {
                                       <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
 
-                                    {/* phone */}
-                                    <div className="text-field" onMouseOver={()=>setShowSave(true)} onMouseOut={()=>setShowSave(false)}>
+                                    {/* phone1 */}
+                                    <div className="text-field" onMouseOver={()=>showSavePhone1(true)} onMouseOut={()=>showSavePhone1(false)}>
                                       <img 
                                         src={Disketa} 
                                         onClick={()=>{navigator.clipboard.writeText(phone)}} 
                                         alt="" 
-                                        style={{visibility: showSave ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                        style={{visibility: showSavePhone1 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                       />
                                       {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                       <InputMask
@@ -747,26 +744,26 @@ const Managers = () => {
                                       <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
 
-                                    {/* phone */}
-                                    <div className="text-field" onMouseOver={()=>setShowSave(true)} onMouseOut={()=>setShowSave(false)}>
+                                    {/* phone2 */}
+                                    <div className="text-field" onMouseOver={()=>showSavePhone2(true)} onMouseOut={()=>showSavePhone2(false)}>
                                       <img 
                                         src={Disketa} 
-                                        onClick={()=>{navigator.clipboard.writeText(phone)}} 
+                                        onClick={()=>{navigator.clipboard.writeText(phone2)}} 
                                         alt="" 
-                                        style={{visibility: showSave ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                        style={{visibility: showSavePhone2 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                       />
                                       {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                       <InputMask
                                           className="text-field__input" 
                                           style={{width: '225px'}}
                                           type="text" 
-                                          name="phone" 
-                                          id="phone"
+                                          name="phone2" 
+                                          id="phone2"
                                           mask="+7 (999) 999-99-99"
                                           disabled={!blockProfile}
                                           maskChar=""
-                                          onChange={(e) => setPhone(e.target.value)} 
-                                          value={phone}
+                                          onChange={(e) => setPhone2(e.target.value)} 
+                                          value={phone2}
                                           placeholder=''
                                       >
                                       </InputMask>
@@ -805,12 +802,12 @@ const Managers = () => {
                                 <div style={{marginLeft: '40px', marginTop: '56px', display: 'flex', flexDirection: 'column', width: '250px'}}>
 
                                   <label>Telegram</label>
-                                  <div className="text-field" onMouseOver={()=>setShowSave2(true)} onMouseOut={()=>setShowSave2(false)} style={{marginBottom: '44px'}}>
+                                  <div className="text-field" onMouseOver={()=>setShowSaveTg(true)} onMouseOut={()=>setShowSaveTg(false)} style={{marginBottom: '44px'}}>
                                     <img 
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(telegram)}} 
                                       alt="" 
-                                      style={{visibility: showSave2 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                      style={{visibility: showSaveTg ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                     />
                                     <input 
                                       className="text-field__input" 
