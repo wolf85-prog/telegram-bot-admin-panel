@@ -174,6 +174,7 @@ route.get('/workers/update/get', updateWorkers)
 
 //----------------- Специалисты ---------------------------------
 route.get('/specialist/get', getSpecialist)
+route.get("/specialist/:id", getSpecialistId);
 route.get('/specialist/count/get/:count/:prev', getSpecCount) //еще
 route.patch('/specialist/update/:id', editSpecialist)
 route.get("/specialist/delete/:id", deleteSpecialist);
