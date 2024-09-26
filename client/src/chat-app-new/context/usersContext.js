@@ -1982,7 +1982,6 @@ function isObjectEmpty(obj) {
 			addNewName,
 			addNewAvatar,
 			usersOnline,
-			managers,
 			companys,
 			count,
 			countMessage,
@@ -2075,6 +2074,8 @@ function isObjectEmpty(obj) {
 			setTimeProcess4,
 			setTimeProcess5,
 			addNewSpecialist,
+			managers, 
+			setManagers,
 		}}>
 			{children}
 		</UsersContext.Provider>

@@ -1713,7 +1713,7 @@ useEffect(() => {
                                   </CTableHead>
                                   <CTableBody>                                  
                                     {workers.map((item, index) => (
-                                      <CTableRow v-for="item in tableItems" key={index}>
+                                      <CTableRow v-for="item in tableItems" key={index} style={{lineHeight: '14px'}}>
                                         <CTableDataCell className="text-center">
                                           {String(new Date(item.createDate).getDate()).padStart(2, "0")+ "."+ String(new Date(item.createDate).getMonth()+1).padStart(2, "0") + "." +new Date(item.createDate).getFullYear()}
                                         </CTableDataCell>

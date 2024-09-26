@@ -63,14 +63,17 @@ const Managers = () => {
 
   const { setCountPretendent, pretendents, setPretendents, managers, setManagers } = useUsersContext();
 
-  const [projects, setProjects] = useState([]); 
+  const [managerCount, setManagerCount] = useState([]);
+
+  const [projects, setProjects] = useState(''); 
   const [userbots, setUserbots] = useState([]);
 
   const [loading, setLoading]= useState(true);
+  const [loading2, setLoading2]= useState(false);
   const [text, setText]= useState("");
   //const [spec, setSpec] = useState([]); 
   const [visibleSm, setVisibleSm] = useState(false)
-  const [modalWorker, setModalWorker] = useState({})
+  const [modalUser, setModalUser] = useState({})
   const [showProfile, setShowProfile] = useState(false)
   const [showSpec, setShowSpec] = useState(false)
   const [showClose, setShowClose] = useState(false)
@@ -174,101 +177,72 @@ const Managers = () => {
 
       let arrManagers = []
 
-      // workers.map(async (worker, i) => {
-      //   const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
-      //   const d2 = new Date(d)
-      //   const month = String(d2.getMonth()+1).padStart(2, "0");
-      //   const day = String(d2.getDate()).padStart(2, "0");
-      //   const chas = d2.getHours();
-      //   const min = String(d2.getMinutes()).padStart(2, "0");
-      //   const newDate = `${day}.${month} ${chas}:${min}`;
+      users.map(async (user, i) => {
+        const d = new Date(user.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+        const d2 = new Date(d)
+        const month = String(d2.getMonth()+1).padStart(2, "0");
+        const day = String(d2.getDate()).padStart(2, "0");
+        const chas = d2.getHours();
+        const min = String(d2.getMinutes()).padStart(2, "0");
+        const newDate = `${day}.${month} ${chas}:${min}`;
 
-      //   let str_spec = ''
-      //   worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
-      //     str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
-      //   })
+        let str_sfera = ''
+        user.sfera && JSON.parse(user.sfera).map((item, index)=> {
+          str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
+        })
 
-      //   let str_skill = ''
-      //   worker.skill && JSON.parse(worker.skill).map((item, index)=> {
-      //     str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
-      //   })
+        let str_komteg = ''
+        user.comteg && JSON.parse(user.comteg).map((item, index)=> {
+          str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
+        })
 
-      //   let str_merch = ''
-      //   worker.merch && JSON.parse(worker.merch).map((item, index)=> {
-      //     str_merch = str_merch + item.name + (index+1 !== JSON.parse(worker.merch).length ? ', ' : '')
-      //   })
+        let str_company = ''
+        // user.company && JSON.parse(user.company).map((item, index)=> {
+        //   str_company = str_company + item.name + (index+1 !== JSON.parse(user.company).length ? ', ' : '')
+        // })
 
-      //   let str_komteg = ''
-      //   worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
-      //     str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
-      //   })
+        let str_comment = ''
+        user.comment && JSON.parse(user.comment).map((item, index)=> {
+          str_comment = str_comment + item.content + (index+1 !== JSON.parse(user.comment).length ? ', ' : '')
+        })
 
-      //   let str_komteg2 = ''
-      //   worker.comteg2 && JSON.parse(worker.comteg2).map((item, index)=> {
-      //     str_komteg2 = str_komteg2 + item.name + (index+1 !== JSON.parse(worker.comteg2).length ? ', ' : '')
-      //   })
 
-      //   let str_company = ''
-      //   worker.company && JSON.parse(worker.company).map((item, index)=> {
-      //     str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
-      //   })
+        const newUser = {
+          id: user.id,
+          fio: user.fio,
+          chatId: user.chatId, 
+          phone: user.phone, 
+          phone2: user.phone2,
+          city: user.city, 
+          sfera: str_sfera,
+          dolgnost: user.dolgnost,
+          company: str_company, 
+          comteg: str_komteg, 
+          comment: str_comment, 
+          inn: user.inn, 
+          profile: user.profile, 
+          dogovor: user.dogovor ? '🟢' : '🔴', 
+          email: user.email, 
+          projects: user.projects,
+          block: user.block,
+        }
+        arrManagers.push(newUser)
 
-      //   let str_comment = ''
-      //   worker.comment && JSON.parse(worker.comment).map((item, index)=> {
-      //     str_comment = str_comment + item.content + (index+1 !== JSON.parse(worker.comment).length ? ', ' : '')
-      //   })
+        //если элемент массива последний
+				if (i === users.length-1) {
+          const sortedUser = [...arrManagers].sort((a, b) => {       
+            var idA = a.id, idB = b.id 
+            return idB-idA  //сортировка по возрастанию 
+          })
 
-      //   let str_comment2 = ''
-      //   worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
-      //     str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? ', ' : '')
-      //   })
-
-      //   const newWorker = {
-      //     id: worker.id,
-      //     fio: worker.fio,
-      //     chatId: worker.chatId, 
-      //     phone: worker.phone, 
-      //     phone2: worker.phone2,
-      //     speclist: str_spec,
-      //     city: worker.city, 
-      //     skill: str_skill,
-      //     promo: worker.promoId === '0' ? '' : worker.promoId, 
-      //     rank: worker.rank, 
-      //     merch: str_merch,  
-      //     company: str_company, 
-      //     comteg: str_komteg, 
-      //     comteg2: str_komteg2, 
-      //     comment: str_comment, 
-      //     comment2: str_comment2, 
-      //     age: worker.age, 
-      //     reyting: worker.reyting, 
-      //     inn: worker.inn, 
-      //     passport: worker.passport, 
-      //     profile: worker.profile, 
-      //     dogovor: worker.dogovor ? '🟢' : '🔴', 
-      //     samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
-      //     passportScan: worker.passportScan, 
-      //     email: worker.email, 
-      //     block: worker.block,
-      //     block18: worker.block18,
-      //   }
-      //   arrWorkers.push(newWorker)
-
-      //   //если элемент массива последний
-			// 	if (i === workers.length-1) {
-      //     const sortedWorker = [...arrWorkers].sort((a, b) => {       
-      //       var idA = a.id, idB = b.id 
-      //       return idB-idA  //сортировка по возрастанию 
-      //     })
-
-			// 		setSpecialistCount(sortedWorker)
-      //     setSpecialist(sortedWorker)
+					setManagerCount(sortedUser)
+          setManagers(sortedUser)
 					
-			// 		//сохранить кэш
-			// 		localStorage.setItem("specialist", JSON.stringify(sortedWorker));
-			// 	}
+					//сохранить кэш
+					//localStorage.setItem("specialist", JSON.stringify(sortedUser));
+				}
 
-      // })  
+      })  
 
       setLoading(false)
 
@@ -396,10 +370,129 @@ const Managers = () => {
     
   }
 
-  //ЕЩЁ
-  const clickNext = async() => {
-      //1 все специалисты
+//ЕЩЁ
+const clickNext = async() => {
+  setLoading2(true)
+
+  //1 все специалисты
+  let response = await getManagerCount(20, managers.length);
+  //console.log("workers size: ", response)
+
+  const arrManagers = []
+  
+    response.reverse().map(async (user, i) => {
+      const d = new Date(user.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+      const d2 = new Date(d)
+
+      const month = String(d2.getMonth()+1).padStart(2, "0");
+      const day = String(d2.getDate()).padStart(2, "0");
+      const chas = d2.getHours();
+      const min = String(d2.getMinutes()).padStart(2, "0");
       
+      const newDate = `${day}.${month} ${chas}:${min}`;
+
+      let str_sfera = ''
+      user.sfera && JSON.parse(user.sfera).map((item, index)=> {
+        str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
+      })
+
+      let str_komteg = ''
+      user.comteg && JSON.parse(user.comteg).map((item, index)=> {
+        str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
+      })
+
+      let str_company = ''
+      // user.company && JSON.parse(user.company).map((item, index)=> {
+      //   str_company = str_company + item.name + (index+1 !== JSON.parse(user.company).length ? ', ' : '')
+      // })
+
+      let str_comment = ''
+      user.comment && JSON.parse(user.comment).map((item, index)=> {
+        str_comment = str_comment + item.content + (index+1 !== JSON.parse(user.comment).length ? ', ' : '')
+      })      
+      
+
+      const newUser = {
+        id: user.id,
+        fio: user.fio,
+        chatId: user.chatId, 
+        phone: user.phone, 
+        phone2: user.phone2,
+        city: user.city, 
+        sfera: str_sfera,
+        dolgnost: user.dolgnost,
+        company: str_company, 
+        comteg: str_komteg, 
+        comment: str_comment, 
+        inn: user.inn, 
+        profile: user.profile, 
+        dogovor: user.dogovor ? '🟢' : '🔴', 
+        email: user.email, 
+        projects: user.projects,
+        block: user.block,
+      }
+      arrManagers.push(newUser)
+
+       //если элемент массива последний
+      if (i === response.length-1) {
+        const sortedUser = [...arrManagers].sort((a, b) => {       
+          var idA = a.id, idB = b.id 
+          return idB-idA  //сортировка по возрастанию 
+        })
+
+        setManagerCount(sortedUser)
+        setManagers(sortedUser)
+        
+        //сохранить кэш
+        //localStorage.setItem("specialist", JSON.stringify(sortedUser));
+
+        setLoading2(false)
+      }
+    })    
+    
+}
+
+
+  const clickFio = (user)=> {
+    console.log("user: ", user)
+
+    setShowProfile(true)
+    setModalUser(user)
+    setShowSearch(false)
+    setShowClear(false)
+
+    const currentYear = new Date().getFullYear()
+
+    setId(user.id)
+    setFio(user.fio)
+    setCity(user.city ? user.city : '')
+    // setAge(worker.age ? worker.age.split('-')[0] : '')
+    // setAge2(worker.age ? parseInt(currentYear) - parseInt(worker.age ? worker.age.split('-')[0] : 0) : '')
+
+    // setSpeclist(worker.speclist ? worker.speclist.split(', ') : [])
+
+    // setShowBlacklist(worker.speclist.includes('Blacklist'))
+
+    setPhone(user.phone)
+    setPhone2(user.phone2)
+    setTelegram(user.chatId)
+
+    setProjects(user.projects)
+    // setCompany(worker.company ? worker.company.split(',') : [])
+    setInn(user.inn === null ? '' : user.inn)
+    setComteg(user.comteg ? user.comteg.split(',') : [])
+    setEmail(user.email)
+    setComment(user.comment)
+    setProfile(user.profile)
+
+    setDogovor(user.dogovor)
+
+    // setNik(userbots.find((user) => user.chatId.toString() === worker.chatId.toString())?.username)
+    // setDateReg(userbots.find((user) => user.chatId.toString() === worker.chatId.toString())?.createdAt)
+
+    setBlock(user.blockW)
+
+    // console.log("user", userbots.find((user) => user.chatId === worker.chatId))
   }
 
   const onChangeReyting = () => {
@@ -563,7 +656,7 @@ const Managers = () => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody >                                  
-                                    {/* {specialist.map((item, index) => (
+                                    {managers.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index+1} style={{lineHeight: '14px'}}>
                                           <CTableDataCell className="text-center widthSpace my-td">
                                             {index+1}
@@ -591,7 +684,7 @@ const Managers = () => {
                                           </CTableDataCell>
                                           
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.rank}
+                                          {item.projects}
                                           </CTableDataCell>
                                           
                                           <CTableDataCell className="text-center widthSpace">
@@ -601,16 +694,16 @@ const Managers = () => {
                                           {item.comment ? (item.comment.length > 30 ? item.comment.substr(0, 30) + '...' : item.comment) : ''}
                                           </CTableDataCell>                                        
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.reyting}
+
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.reyting}
+
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.inn}
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.passport ? (item.passport.length > 30 ? item.passport.substr(0, 30) + '...' : item.passport) : ''}
+                                          
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
                                           {item.profile ? (item.profile.length > 30 ? item.profile.substr(0, 30) + '...' : item.profile) : ''}
@@ -625,7 +718,7 @@ const Managers = () => {
 
                                         </CTableRow>
                                         ))
-                                    } */}
+                                    }
                                     
                                   </CTableBody>                   
                                   </CTable>
@@ -729,7 +822,7 @@ const Managers = () => {
                                   {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
-                                      <input type="text" name="fio" id="fio" value='ФИО' onChange={(e)=>setFio(e.target.value)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
+                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
                                     <div style={{display: 'flex'}}>
                                       <Icon id="delete" onClick={()=>clickDelete(id)} />
@@ -853,11 +946,11 @@ const Managers = () => {
                                   <div style={{display: 'flex'}}>                                   
                                     {/* проекты за месяц */}
                                     <div className="text-field" >
-                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                      <input className="text-field__input" type="text" name="projects" id="projects" value={projects} style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
                                     {/* проекты всего */}
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                      <input className="text-field__input" type="text" name="projects" id="projects" value={projects} style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
 
                                     {/* phone2 */}
