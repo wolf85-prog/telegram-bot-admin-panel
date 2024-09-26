@@ -164,6 +164,28 @@ const Specialist = sequelize.define('specialist', {
     block18: {type: DataTypes.BOOLEAN},
 })
 
+const Manager = sequelize.define('manager', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    chatId: {type: DataTypes.STRING, unique: true}, // telegram id
+    fio: {type: DataTypes.STRING}, //фио менеджера
+    phone: {type: DataTypes.STRING}, //телефон менеджера
+    phone2: {type: DataTypes.STRING}, //телефон менеджера
+    city: {type: DataTypes.STRING},
+    dolgnost: {type: DataTypes.STRING},
+    sfera: {type: DataTypes.TEXT}, 
+    projects: {type: DataTypes.STRING}, 
+    email: {type: DataTypes.STRING}, //почта менеджера
+    inn: {type: DataTypes.STRING}, //инн менеджера
+    comteg: {type: DataTypes.TEXT},
+    comment: {type: DataTypes.TEXT}, 
+    profile: {type: DataTypes.TEXT},
+    dogovor: {type: DataTypes.BOOLEAN}, 
+    block: {type: DataTypes.BOOLEAN},
+    deleted: {type: DataTypes.BOOLEAN},
+    great: {type: DataTypes.BOOLEAN}, //hello
+    companyId: {type: DataTypes.STRING}, // id заказчика
+})
+
 
 module.exports = {
     User, 
@@ -180,4 +202,5 @@ module.exports = {
     CountMessage,
     ProjectNew,
     Specialist,
+    Manager,
 }

@@ -54,10 +54,14 @@ import dolgnostData from 'src/data/dolgnost';
 import sferaData from 'src/data/sfera';
 import companyData from 'src/data/companyData';
 
+import { getManager, getManagerCount, editManager, addManager, deleteManager } from './../http/managerAPI'
+import { getWContacts} from '../http/workerAPI'
+import { uploadAvatar, uploadFile } from '../http/chatAPI';
+
 //Workers.js
 const Managers = () => {
 
-  const { setCountPretendent, pretendents, setPretendents } = useUsersContext();
+  const { setCountPretendent, pretendents, setPretendents, managers, setManagers } = useUsersContext();
 
   const [projects, setProjects] = useState([]); 
   const [userbots, setUserbots] = useState([]);
@@ -162,7 +166,119 @@ const Managers = () => {
   //			get managers
   //-----------------------------------------------------------------------------------------
   useEffect(()=> {
-    setLoading(false)
+    const fetchData = async() => {
+
+      // 2 специалисты 20 чел.
+      let users = await getManagerCount(20, managers.length)
+      console.log("managers: ", users)
+
+      let arrManagers = []
+
+      // workers.map(async (worker, i) => {
+      //   const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+      //   const d2 = new Date(d)
+      //   const month = String(d2.getMonth()+1).padStart(2, "0");
+      //   const day = String(d2.getDate()).padStart(2, "0");
+      //   const chas = d2.getHours();
+      //   const min = String(d2.getMinutes()).padStart(2, "0");
+      //   const newDate = `${day}.${month} ${chas}:${min}`;
+
+      //   let str_spec = ''
+      //   worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
+      //     str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
+      //   })
+
+      //   let str_skill = ''
+      //   worker.skill && JSON.parse(worker.skill).map((item, index)=> {
+      //     str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
+      //   })
+
+      //   let str_merch = ''
+      //   worker.merch && JSON.parse(worker.merch).map((item, index)=> {
+      //     str_merch = str_merch + item.name + (index+1 !== JSON.parse(worker.merch).length ? ', ' : '')
+      //   })
+
+      //   let str_komteg = ''
+      //   worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
+      //     str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
+      //   })
+
+      //   let str_komteg2 = ''
+      //   worker.comteg2 && JSON.parse(worker.comteg2).map((item, index)=> {
+      //     str_komteg2 = str_komteg2 + item.name + (index+1 !== JSON.parse(worker.comteg2).length ? ', ' : '')
+      //   })
+
+      //   let str_company = ''
+      //   worker.company && JSON.parse(worker.company).map((item, index)=> {
+      //     str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
+      //   })
+
+      //   let str_comment = ''
+      //   worker.comment && JSON.parse(worker.comment).map((item, index)=> {
+      //     str_comment = str_comment + item.content + (index+1 !== JSON.parse(worker.comment).length ? ', ' : '')
+      //   })
+
+      //   let str_comment2 = ''
+      //   worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
+      //     str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? ', ' : '')
+      //   })
+
+      //   const newWorker = {
+      //     id: worker.id,
+      //     fio: worker.fio,
+      //     chatId: worker.chatId, 
+      //     phone: worker.phone, 
+      //     phone2: worker.phone2,
+      //     speclist: str_spec,
+      //     city: worker.city, 
+      //     skill: str_skill,
+      //     promo: worker.promoId === '0' ? '' : worker.promoId, 
+      //     rank: worker.rank, 
+      //     merch: str_merch,  
+      //     company: str_company, 
+      //     comteg: str_komteg, 
+      //     comteg2: str_komteg2, 
+      //     comment: str_comment, 
+      //     comment2: str_comment2, 
+      //     age: worker.age, 
+      //     reyting: worker.reyting, 
+      //     inn: worker.inn, 
+      //     passport: worker.passport, 
+      //     profile: worker.profile, 
+      //     dogovor: worker.dogovor ? '🟢' : '🔴', 
+      //     samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
+      //     passportScan: worker.passportScan, 
+      //     email: worker.email, 
+      //     block: worker.block,
+      //     block18: worker.block18,
+      //   }
+      //   arrWorkers.push(newWorker)
+
+      //   //если элемент массива последний
+			// 	if (i === workers.length-1) {
+      //     const sortedWorker = [...arrWorkers].sort((a, b) => {       
+      //       var idA = a.id, idB = b.id 
+      //       return idB-idA  //сортировка по возрастанию 
+      //     })
+
+			// 		setSpecialistCount(sortedWorker)
+      //     setSpecialist(sortedWorker)
+					
+			// 		//сохранить кэш
+			// 		localStorage.setItem("specialist", JSON.stringify(sortedWorker));
+			// 	}
+
+      // })  
+
+      setLoading(false)
+
+      // let wuserbots = await getWContacts();
+      // console.log("wuserbots: ", wuserbots)
+      // setUserbots(wuserbots)
+
+      
+    }
+    fetchData()
   }, [])
 
   const clickAdd = async()=> {   

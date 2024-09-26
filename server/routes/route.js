@@ -42,6 +42,8 @@ const { newPlan, getPlan, addTimer } = require('../controllers/planController')
 
 const { getSpecialist, getSpecCount, editSpecialist, getSpecialistId, addSpecialist, deleteSpecialist, getSpecCountAll } = require('../controllers/specialistController')
 
+const { getManagers, getManagerCount, editManager, getManagerId, addManager, deleteManager, getManagerCountAll } = require('../controllers/managersController')
+
 //const { sendPoster } = require('../controllers/posterController')
 
 //const upload = require( "../utils/upload.js")
@@ -182,6 +184,16 @@ route.post("/specialist/add", addSpecialist);
 route.get("/specialist/delete/:id", deleteSpecialist);
 route.get("/specialist/count/get", getSpecCountAll);
 
+
+//----------------- Менеджеры ---------------------------------
+route.get('/managers/get', getManagers)
+route.get("/managers/:id", getManagersId);
+route.get('/managers/count/get/:count/:prev', getManagerCount) //еще
+route.patch('/managers/update/:id', editManager)
+route.get("/managers/delete/:id", deleteManager);
+route.post("/managers/add", addManager);
+route.get("/managers/delete/:id", deleteManager);
+route.get("/managers/count/get", getManagerCountAll);
 
 
 module.exports = route
