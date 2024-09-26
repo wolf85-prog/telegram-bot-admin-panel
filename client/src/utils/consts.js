@@ -29,3 +29,4 @@ export const FILEMANAGER_ROUTE = '/filemanager'
 
 export const SPECIALIST_ROUTE = '/specialist'
 export const MANAGERS_ROUTE = '/managers'
+export const COMPANYS_ROUTE = '/companys'

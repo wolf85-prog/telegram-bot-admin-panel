@@ -24,6 +24,7 @@ import {
     FILEMANAGER_ROUTE,
     SPECIALIST_ROUTE,
     MANAGERS_ROUTE,
+    COMPANYS_ROUTE,
 } from "./utils/consts";
 
 const Chats = React.lazy(() => import('./pages/Chats'))
@@ -52,6 +53,7 @@ const FileManager = React.lazy(() => import('./pages/FileManager'))
 
 const Specialist = React.lazy(() => import('./pages/Specialist'))
 const Managers = React.lazy(() => import('./pages/Managers'))
+const Companys = React.lazy(() => import('./pages/Companys'))
 
 export const authRoutes = [
     { path: ADMIN_ROUTE, name: 'Панель управления', Component: Admin },
@@ -78,5 +80,6 @@ export const authRoutes = [
     { path: FILEMANAGER_ROUTE, name: 'Файловый менеджер', Component: FileManager },
     { path: SPECIALIST_ROUTE, name: 'Специалисты', Component: Specialist },
     { path: MANAGERS_ROUTE, name: 'Менеджеры', Component: Managers },
+    { path: COMPANYS_ROUTE, name: 'Компании', Component: Companys },
     { path: '/', name: 'Пункт управления', Component: Admin },
 ]

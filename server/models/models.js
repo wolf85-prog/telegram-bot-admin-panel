@@ -189,6 +189,13 @@ const Manager = sequelize.define('manager', {
 const Company = sequelize.define('company', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
     title: {type: DataTypes.STRING}, //
+    city: {type: DataTypes.STRING},
+    office: {type: DataTypes.STRING},
+    sklad: {type: DataTypes.STRING},
+    comment: {type: DataTypes.TEXT},
+    projects: {type: DataTypes.TEXT},
+    managers: {type: DataTypes.TEXT},
+    dogovor: {type: DataTypes.STRING}, 
 })
 
 
@@ -208,4 +215,5 @@ module.exports = {
     ProjectNew,
     Specialist,
     Manager,
+    Company,
 }
