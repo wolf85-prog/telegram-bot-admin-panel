@@ -677,7 +677,7 @@ const Companys = () => {
                                   </div>
 
                                   <label>Реквизиты</label>
-                                  <CButton className='uley_add_user'>
+                                  <CButton className='uley_add_user' style={{width: '250px', marginLeft: '6px'}}>
                                     <span style={{verticalAlign: 'super', fontSize: '20px', color: '#fff'}}>
                                       Реквизиты
                                     </span>
