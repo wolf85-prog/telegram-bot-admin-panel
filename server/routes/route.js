@@ -187,7 +187,7 @@ route.get("/specialist/count/get", getSpecCountAll);
 
 //----------------- Менеджеры ---------------------------------
 route.get('/managers/get', getManagers)
-route.get("/managers/:id", getManagersId);
+route.get("/managers/:id", getManagerId);
 route.get('/managers/count/get/:count/:prev', getManagerCount) //еще
 route.patch('/managers/update/:id', editManager)
 route.get("/managers/delete/:id", deleteManager);
