@@ -186,6 +186,11 @@ const Manager = sequelize.define('manager', {
     companyId: {type: DataTypes.STRING}, // id заказчика
 })
 
+const Company = sequelize.define('company', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    title: {type: DataTypes.STRING}, //
+})
+
 
 module.exports = {
     User, 

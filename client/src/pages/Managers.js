@@ -174,6 +174,7 @@ const Managers = () => {
       // 2 специалисты 20 чел.
       let users = await getManagerCount(20, managers.length)
       console.log("managers: ", users)
+      console.log("count: ", managersCount)
 
       let arrManagers = []
 
@@ -617,7 +618,7 @@ const clickNext = async() => {
                       <CCol style={{textAlign: 'center'}}>
                         <CCard className="mb-4"> 
                             <p style={{position: 'absolute', top: '-18px', right: '15px', fontSize: '14px', color: '#f3f3f3'}}>
-                              Всего: {managersCount.length}
+                              Всего: {managersCount}
                             </p>
                             <CCardBody>
                               {!showProfile ?
