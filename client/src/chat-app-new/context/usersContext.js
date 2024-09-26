@@ -44,6 +44,7 @@ import soundCall from './../../assets/sound/Skype.mp3';
 import sendSound from './../assets/sounds/sendmessage.mp3';
 import smsWorkhub from './../../chat-app-worker/assets/sounds/sms_iphone.mp3';
 import notifPretendent from './../../chat-app-worker/assets/sounds/pretendent2.mp3';
+import { getManagerCountAll } from "src/http/managerAPI";
 
 
 const UsersContext = createContext();
@@ -89,6 +90,8 @@ const UsersProvider = ({ children }) => {
 	});  //все специалисты;
 
 	const [specialist, setSpecialist] =  useState([])
+
+	const [managersCount, setManagersCount] = useState(0)
 
 	const [userRenthub, setUserRenthub] = useState( () => {
 		const savedUserRenthub = localStorage.getItem("userRenthub");
@@ -338,6 +341,26 @@ const UsersProvider = ({ children }) => {
 
 	}, [])
 
+
+//---------get Managers----------------------------------------------------
+
+useEffect(() => {
+	//---------get UserManagers-----------------------------------------
+	const fetchUserManagerData = async () => {
+		//console.log("userWorkers: ", userWorkers)
+	
+		//0 все специалисты
+		//let all = await getWorkers()
+		let all = await getManagerCountAll()
+		console.log("specialist all: ", all)
+
+		setManagersCount(all)
+	}
+	
+	//все менеджеры
+	fetchUserManagerData();
+	
+},[])
 
 	
 //---------get Workers----------------------------------------------------
@@ -2076,6 +2099,7 @@ function isObjectEmpty(obj) {
 			addNewSpecialist,
 			managers, 
 			setManagers,
+			managersCount,
 		}}>
 			{children}
 		</UsersContext.Provider>

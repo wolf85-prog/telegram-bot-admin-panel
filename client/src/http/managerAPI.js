@@ -42,3 +42,12 @@ export const deleteManager = async (id) =>{
         console.log("error while calling deleteManager api",error.message);
     }
 }
+
+
+export const getManagerCountAll = async () =>{
+    try {
+        await $host.get(`api/managers/count/get`); 
+    } catch (error) {
+        console.log("error while calling getManagerCountAll api",error.message);
+    }
+}

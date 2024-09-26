@@ -61,7 +61,7 @@ import { uploadAvatar, uploadFile } from '../http/chatAPI';
 //Workers.js
 const Managers = () => {
 
-  const { setCountPretendent, pretendents, setPretendents, managers, setManagers } = useUsersContext();
+  const { setCountPretendent, pretendents, setPretendents, managers, setManagers, managersCount } = useUsersContext();
 
   const [managerCount, setManagerCount] = useState([]);
 
@@ -617,7 +617,7 @@ const clickNext = async() => {
                       <CCol style={{textAlign: 'center'}}>
                         <CCard className="mb-4"> 
                             <p style={{position: 'absolute', top: '-18px', right: '15px', fontSize: '14px', color: '#f3f3f3'}}>
-                              Всего: 
+                              Всего: {managersCount.length}
                             </p>
                             <CCardBody>
                               {!showProfile ?
