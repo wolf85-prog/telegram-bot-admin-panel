@@ -86,17 +86,15 @@ const Companys = () => {
   const [showKrest, setShowKrest] = useState(false)
 
   
-  const [showSavePhone1, setShowSavePhone1] = useState(false)
-  const [showSavePhone2, setShowSavePhone2] = useState(false)
-  const [showSaveTg, setShowSaveTg] = useState(false)
+  const [showSavePhone, setShowSavePhone] = useState(false)
+  const [showSaveFio, setShowSaveFio] = useState(false)
   const [showSave3, setShowSave3] = useState(false)
+  const [showSaveOffice, setShowSaveOffice] = useState(false)
+  const [showSaveSklad, setShowSaveSklad] = useState(false)
 
   const [id, setId] = useState('');
   const [fio, setFio] = useState('');
   const [city, setCity] = useState('');
-  const [age, setAge] = useState('');
-  const [age2, setAge2] = useState(0);
-  const [speclist, setSpeclist] = useState([]);
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
   const [telegram, setTelegram] = useState('');
@@ -107,6 +105,8 @@ const Companys = () => {
   const [comteg, setComteg] = useState([]);
   const [sfera, setSfera] = useState([]);
   const [dolgnost, setDolgnost] = useState('');
+  const [office, setOffice] = useState('');
+  const [sklad, setSklad] = useState('');
 
   const [email, setEmail] = useState('');
   const [comment, setComment] = useState('');
@@ -627,7 +627,7 @@ const Companys = () => {
                                 
                               )
                               :
-                              <div style={{position: 'relative', height: '576px', display: 'flex', flexDirection: 'row'}}>
+                              <div style={{position: 'relative', height: '456px', display: 'flex', flexDirection: 'row'}}>
 {/* 1 */}                               
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
@@ -678,7 +678,7 @@ const Companys = () => {
                                   </div>
 
                                   <label>Реквизиты</label>
-                                  <CButton className='uley_add_user' style={{width: '250px', marginLeft: '6px'}}>
+                                  <CButton className='uley_add_user' style={{width: '250px', height: '40px', marginLeft: '6px'}}>
                                     <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Реквизиты
                                     </span>
@@ -722,33 +722,44 @@ const Companys = () => {
 
                                   {/*  */}
                                   <label>Офис</label>
-                                  <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                                  <div className="text-field" onMouseOver={()=>setShowSaveOffice(true)} onMouseOut={()=>setShowSaveOffice(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(phone2)}} 
+                                      alt="" 
+                                      style={{visibility: showSaveOffice ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                    />
+                                    <input className="text-field__input" type="text" name="office" id="office" value={office} onChange={(e) => setOffice(e.target.value)}/>
                                   </div> 
 
                                   {/*  */}
                                   <label>Склад</label>
-                                  <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                                  <div className="text-field" onMouseOver={()=>setShowSaveSklad(true)} onMouseOut={()=>setShowSaveSklad(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(phone2)}} 
+                                      alt="" 
+                                      style={{visibility: showSaveSklad ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                    />
+                                    <input className="text-field__input" type="text" name="sklad" id="sklad" value={sklad} onChange={(e) => setSklad(e.target.value)}/>
                                   </div> 
 
-                                  {/* ФИО */}
-                                  <label>ФИО</label>
-                                  <CButton className='uley_add_user' style={{width: '300px', marginLeft: '6px'}}>
+                                  {/* Менеджеры */}
+                                  <label>Менеджеры</label>
+                                  <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '6px', marginBottom: '17px'}}>
                                     <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
-                                      Менеджер
+                                      Менеджеры
                                     </span>
                                   </CButton>
 
-                                  <div style={{marginTop: '221px'}}>
-                                    {/* Договор */}
-                                    <label>Договор</label>
-                                    <CButton className='uley_add_user' style={{width: '300px', marginLeft: '6px'}}>
-                                      <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
-                                        Договор
-                                      </span>
-                                    </CButton> 
-                                  </div>
+                                  {/* Договор */}
+                                  <label>Договор</label>
+                                  <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '6px'}}>
+                                    <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                      Договор
+                                    </span>
+                                  </CButton> 
+                                    
                                   
                                 </div>
 
@@ -779,9 +790,14 @@ const Companys = () => {
                                   
                                   {/*  */}
                                   <label>Сфера деятельности</label>
-                                  <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                                  </div> 
+                                  <div className="text-field"> 
+                                      <MyDropdown3
+                                        tags={sfera}
+                                        setTags={setSfera}
+                                        options={sferaData}
+                                        style={{minHeight: '40px !important'}}
+                                      />
+                                  </div>
 
                                   <label>Комтеги</label>
                                   <div className="text-field"> 
@@ -800,7 +816,7 @@ const Companys = () => {
                                       type="text" 
                                       name="comment" 
                                       id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{resize: 'none', width: '300px', height: '243px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                      style={{resize: 'none', width: '300px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
                                     />
                                   </div> 
 
@@ -811,61 +827,61 @@ const Companys = () => {
                                 <div style={{marginLeft: '37px', marginTop: '56px', display: 'flex', flexDirection: 'column', width: '300px'}}>
 
                                   <label>Бухгалтерия</label>
-                                  <div className="text-field" onMouseOver={()=>setShowSaveTg(true)} onMouseOut={()=>setShowSaveTg(false)} style={{marginBottom: '44px'}}>
+                                  <div className="text-field" onMouseOver={()=>setShowSaveFio(true)} onMouseOut={()=>setShowSaveFio(false)} style={{marginBottom: '44px'}}>
                                     <img 
                                       src={Disketa} 
-                                      onClick={()=>{navigator.clipboard.writeText(telegram)}} 
+                                      onClick={()=>{navigator.clipboard.writeText(fio)}} 
                                       alt="" 
-                                      style={{visibility: showSaveTg ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                      style={{visibility: showSaveFio ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                     />
                                     <input 
                                       className="text-field__input" 
                                       type="text" 
                                       pattern="[0-9]*"
-                                      name="telegram" 
-                                      id="telegram" 
-                                      value={telegram} 
+                                      name="fio" 
+                                      id="fio" 
+                                      // value={telegram} 
                                       //onChange={handleTg} 
                                       style={{width: '300px'}}
                                     />
                                   </div>
 
-                                  {/* phone2 */}
-                                  <div className="text-field" onMouseOver={()=>showSavePhone2(true)} onMouseOut={()=>showSavePhone2(false)} style={{marginBottom: '44px'}}>
+                                  {/* phone */}
+                                  <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} style={{marginBottom: '44px'}}>
                                       <img 
                                         src={Disketa} 
-                                        onClick={()=>{navigator.clipboard.writeText(phone2)}} 
+                                        onClick={()=>{navigator.clipboard.writeText(phone)}} 
                                         alt="" 
-                                        style={{visibility: showSavePhone2 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                        style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                       />
                                       {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                       <InputMask
                                           className="text-field__input" 
                                           style={{width: '300px'}}
                                           type="text" 
-                                          name="phone2" 
-                                          id="phone2"
+                                          name="phone" 
+                                          id="phone"
                                           mask="+7 (999) 999-99-99"
                                           disabled={!blockProfile}
                                           maskChar=""
-                                          onChange={(e) => setPhone2(e.target.value)} 
-                                          value={phone2}
+                                          onChange={(e) => setPhone(e.target.value)} 
+                                          value={phone}
                                           placeholder=''
                                       >
                                       </InputMask>
                                       
                                   </div> 
 
-                                  {/* ник */}
+                                  {/* email */}
                                   <label> </label>
                                   <div className="text-field" onMouseOver={()=>setShowSave3(true)} onMouseOut={()=>setShowSave3(false)}>
                                     <img 
                                       src={Disketa} 
-                                      onClick={()=>{navigator.clipboard.writeText(nik)}} 
+                                      onClick={()=>{navigator.clipboard.writeText(email)}} 
                                       alt="" 
                                       style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                     />
-                                    <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '300px'}}/>
+                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '300px'}}/>
                                   </div> 
 
                                   
@@ -873,7 +889,7 @@ const Companys = () => {
 
                                   <label>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '300px', height: '245px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '300px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
