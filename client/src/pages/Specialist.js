@@ -863,6 +863,14 @@ const Specialist = () => {
     setShowProfile(false)
   }
 
+  const addCity = (e) => {
+    //console.log(e.target.value)
+    const city = cities.find(item=> parseInt(item.value) === parseInt(e.target.value))
+    //console.log(city.label)
+    setCity(city.label)
+
+  }
+
 
   return (
     <div className='dark-theme'>
@@ -1159,12 +1167,18 @@ const Specialist = () => {
                                 <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                   {/* Город */}
                                   <div className="text-field"> 
-                                      <MyDropdown
+                                      {/* <MyDropdown
                                         style={{backgroundColor: '#131c21'}}
                                         options={cities}
                                         selected={city}
                                         setSelected={setCity}
                                         // onChange={addCity}
+                                      /> */}
+                                      <CFormSelect 
+                                        aria-label="Default select example"
+                                        style={{backgroundColor: '#131c21'}}
+                                        options={cities}
+                                        onChange={(e)=>addCity(e)}
                                       />
                                   </div>
 

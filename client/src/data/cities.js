@@ -1,6 +1,6 @@
 
 const cities = [
-            {name: 'Выбрать...', label: 'Выбрать...',},
+            {name: 'Выбрать...', label: '',},
             {value: 1, label: "Москва ",},
             {value: 2, label: "Санкт-Петербург"},
             
