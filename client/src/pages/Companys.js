@@ -95,7 +95,7 @@ const Companys = () => {
   const [id, setId] = useState('');
   const [fio, setFio] = useState('ФИО');
   const [city, setCity] = useState('');
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useState('+7 (999) 999-99-99');
   const [phone2, setPhone2] = useState('');
   const [telegram, setTelegram] = useState('');
   const [reyting, setReyting] = useState('');
@@ -124,6 +124,7 @@ const Companys = () => {
   const [showBlacklist, setShowBlacklist] = useState(false)
   const [showMenu1, setShowMenu1] = useState(false)
   const [showMenu2, setShowMenu2] = useState(false)
+  const [showManagers, setShowManagers] = useState(false)
 
   const [visibleDelete, setVisibleDelete] = useState(false)
 
@@ -627,7 +628,7 @@ const Companys = () => {
                                 
                               )
                               :
-                              <div style={{position: 'relative', height: '456px', display: 'flex', flexDirection: 'row'}}>
+                              <div style={{position: 'relative', height: showManagers ? 'auto' : '456px', display: 'flex', flexDirection: 'row'}}>
 {/* 1 */}                               
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
@@ -746,15 +747,62 @@ const Companys = () => {
 
                                   {/* Менеджеры */}
                                   <label>Менеджеры</label>
-                                  <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '6px', marginBottom: '17px'}}>
+                                  <CButton onClick={()=>setShowManagers(!showManagers)} className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0', marginBottom: '20px'}}>
                                     <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Менеджеры
                                     </span>
                                   </CButton>
 
+                                  <div style={{display: showManagers ? 'block' : 'none'}}>
+                                    <div className="text-field">
+                                      <input 
+                                        className="text-field__input" 
+                                        type="text" 
+                                        name="fio" 
+                                        id="fio" 
+                                        value={fio} 
+                                        onChange={(e)=>setFio(e.target.value)} 
+                                        style={{width: '300px'}}
+                                      />
+                                    </div>
+                                    <div className="text-field">
+                                      <input 
+                                        className="text-field__input" 
+                                        type="text" 
+                                        name="fio" 
+                                        id="fio" 
+                                        value={fio} 
+                                        onChange={(e)=>setFio(e.target.value)} 
+                                        style={{width: '300px'}}
+                                      />
+                                    </div>
+                                    <div className="text-field">
+                                      <input 
+                                        className="text-field__input" 
+                                        type="text" 
+                                        name="fio" 
+                                        id="fio" 
+                                        value={fio} 
+                                        onChange={(e)=>setFio(e.target.value)} 
+                                        style={{width: '300px'}}
+                                      />
+                                    </div>
+                                    <div className="text-field">
+                                      <input 
+                                        className="text-field__input" 
+                                        type="text" 
+                                        name="fio" 
+                                        id="fio" 
+                                        value={fio} 
+                                        onChange={(e)=>setFio(e.target.value)} 
+                                        style={{width: '300px'}}
+                                      />
+                                    </div>
+                                  </div>
+
                                   {/* Договор */}
                                   <label>Договор</label>
-                                  <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '6px'}}>
+                                  <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0'}}>
                                     <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Договор
                                     </span>
@@ -790,13 +838,145 @@ const Companys = () => {
                                   
                                   {/*  */}
                                   <label>Сфера деятельности</label>
-                                  <div className="text-field"> 
+                                  <div className="text-field" style={{marginBottom: showManagers ? '188px' : '20px'}}> 
                                       <MyDropdown3
                                         tags={sfera}
                                         setTags={setSfera}
                                         options={sferaData}
                                         style={{minHeight: '40px !important'}}
                                       />
+                                  </div>
+
+                                  {/*Должность и телефон менеджера  */}
+                                  <div style={{display: showManagers ? 'block' : 'none'}}>
+                                    <div className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
+                                      <div>
+                                      {/* <label>Должность</label> */}
+                                        <div className="text-field">
+                                          <input className="text-field__input" type="text" name="email" id="email" value="Менеджер" style={{width: '130px'}}/>
+                                        </div> 
+                                      </div>
+                                      {/* phone */}
+                                      <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} style={{marginBottom: '44px'}}>
+                                          <img 
+                                            src={Disketa} 
+                                            onClick={()=>{navigator.clipboard.writeText(phone)}} 
+                                            alt="" 
+                                            style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                          />
+                                          {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
+                                          <InputMask
+                                              className="text-field__input" 
+                                              style={{width: '150px'}}
+                                              type="text" 
+                                              name="phone" 
+                                              id="phone"
+                                              mask="+7 (999) 999-99-99"
+                                              disabled={!blockProfile}
+                                              maskChar=""
+                                              onChange={(e) => setPhone(e.target.value)} 
+                                              value={phone}
+                                              placeholder=''
+                                          >
+                                          </InputMask>    
+                                      </div> 
+                                    </div>
+                                    <div className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
+                                      <div>
+                                      {/* <label>Должность</label> */}
+                                        <div className="text-field">
+                                          <input className="text-field__input" type="text" name="email" id="email" value="Менеджер" style={{width: '130px'}}/>
+                                        </div> 
+                                      </div>
+                                      {/* phone */}
+                                      <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} style={{marginBottom: '44px'}}>
+                                          <img 
+                                            src={Disketa} 
+                                            onClick={()=>{navigator.clipboard.writeText(phone)}} 
+                                            alt="" 
+                                            style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                          />
+                                          {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
+                                          <InputMask
+                                              className="text-field__input" 
+                                              style={{width: '150px'}}
+                                              type="text" 
+                                              name="phone" 
+                                              id="phone"
+                                              mask="+7 (999) 999-99-99"
+                                              disabled={!blockProfile}
+                                              maskChar=""
+                                              onChange={(e) => setPhone(e.target.value)} 
+                                              value={phone}
+                                              placeholder=''
+                                          >
+                                          </InputMask>    
+                                      </div> 
+                                    </div>
+                                    <div className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
+                                      <div>
+                                      {/* <label>Должность</label> */}
+                                        <div className="text-field">
+                                          <input className="text-field__input" type="text" name="email" id="email" value="Менеджер" style={{width: '130px'}}/>
+                                        </div> 
+                                      </div>
+                                      {/* phone */}
+                                      <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} style={{marginBottom: '44px'}}>
+                                          <img 
+                                            src={Disketa} 
+                                            onClick={()=>{navigator.clipboard.writeText(phone)}} 
+                                            alt="" 
+                                            style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                          />
+                                          {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
+                                          <InputMask
+                                              className="text-field__input" 
+                                              style={{width: '150px'}}
+                                              type="text" 
+                                              name="phone" 
+                                              id="phone"
+                                              mask="+7 (999) 999-99-99"
+                                              disabled={!blockProfile}
+                                              maskChar=""
+                                              onChange={(e) => setPhone(e.target.value)} 
+                                              value={phone}
+                                              placeholder=''
+                                          >
+                                          </InputMask>    
+                                      </div> 
+                                    </div>
+                                    <div className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
+                                      <div>
+                                      {/* <label>Должность</label> */}
+                                        <div className="text-field">
+                                          <input className="text-field__input" type="text" name="email" id="email" value="Менеджер" style={{width: '130px'}}/>
+                                        </div> 
+                                      </div>
+                                      {/* phone */}
+                                      <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} style={{marginBottom: '44px'}}>
+                                          <img 
+                                            src={Disketa} 
+                                            onClick={()=>{navigator.clipboard.writeText(phone)}} 
+                                            alt="" 
+                                            style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                          />
+                                          {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
+                                          <InputMask
+                                              className="text-field__input" 
+                                              style={{width: '150px'}}
+                                              type="text" 
+                                              name="phone" 
+                                              id="phone"
+                                              mask="+7 (999) 999-99-99"
+                                              disabled={!blockProfile}
+                                              maskChar=""
+                                              onChange={(e) => setPhone(e.target.value)} 
+                                              value={phone}
+                                              placeholder=''
+                                          >
+                                          </InputMask>    
+                                      </div> 
+                                    </div>
                                   </div>
 
                                   <label>Комтеги</label>
@@ -867,8 +1047,7 @@ const Companys = () => {
                                           value={phone}
                                           placeholder=''
                                       >
-                                      </InputMask>
-                                      
+                                      </InputMask>    
                                   </div> 
 
                                   {/* email */}
@@ -888,7 +1067,7 @@ const Companys = () => {
 
                                   <label>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '300px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '300px', height: showManagers ? '533px' : '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
