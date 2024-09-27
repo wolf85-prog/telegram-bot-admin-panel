@@ -93,7 +93,8 @@ const Specialist = () => {
   const [block, setBlock] = useState(false)
   const [showMenuKrest, setShowMenuKrest] = useState(false)
   const [showKrest, setShowKrest] = useState(false)
-
+  
+  const [cityValue, setCityValue] = useState(0)
   
   const [showSave, setShowSave] = useState(false)
   const [showSave2, setShowSave2] = useState(false)
@@ -336,6 +337,10 @@ const Specialist = () => {
     setModalWorker(worker)
     setShowSearch(false)
     setShowClear(false)
+
+    const Val = cities.find(item=> item.label === worker.city)
+    setCityValue(Val.value)
+    console.log(worker.city, Val.value)
 
     const currentYear = new Date().getFullYear()
 
@@ -768,6 +773,7 @@ const Specialist = () => {
 
   useEffect(() => {
     console.log("city: ", city)
+    
 
   }, [city]);
 
@@ -868,7 +874,7 @@ const Specialist = () => {
     const city = cities.find(item=> parseInt(item.value) === parseInt(e.target.value))
     //console.log(city.label)
     setCity(city.label)
-
+    setCityValue(e.target.value)
   }
 
 
@@ -1178,6 +1184,7 @@ const Specialist = () => {
                                         aria-label="Default select example"
                                         style={{backgroundColor: '#131c21'}}
                                         options={cities}
+                                        value={cityValue}
                                         onChange={(e)=>addCity(e)}
                                       />
                                   </div>
