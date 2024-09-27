@@ -46,6 +46,7 @@ import arrowDown from 'src/assets/images/arrowDown.svg'
 
 import MyDropdown from 'src/components/Dropdown/Dropdown';
 import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
+import MyDropdown3 from 'src/components/Dropdown3/Dropdown3';
 
 import comtegs from 'src/data/comtegs';
 import companys from 'src/data/companys';
@@ -626,7 +627,7 @@ const Companys = () => {
                                 
                               )
                               :
-                              <div style={{position: 'relative', height: '660px', display: 'flex', flexDirection: 'row'}}>
+                              <div style={{position: 'relative', height: '576px', display: 'flex', flexDirection: 'row'}}>
 {/* 1 */}                               
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
@@ -653,7 +654,7 @@ const Companys = () => {
                                     />
                                   </div>
 
-                                  <div className="menu-reyting">
+                                  <div className="menu-reyting" style={{marginBottom: '20px'}}>
                                       <div style={{width: '250px', display: 'flex', justifyContent: 'center'}}>
                                         {showBlacklist ?
                                         <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '24px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
@@ -678,7 +679,7 @@ const Companys = () => {
 
                                   <label>Реквизиты</label>
                                   <CButton className='uley_add_user' style={{width: '250px', marginLeft: '6px'}}>
-                                    <span style={{verticalAlign: 'super', fontSize: '20px', color: '#fff'}}>
+                                    <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Реквизиты
                                     </span>
                                   </CButton>
@@ -704,14 +705,10 @@ const Companys = () => {
                                       <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                     </div>
                                   </div>
-
-                                  {/* 2 */}
-                                
-
                                 </div>
 
 {/* 2 */}
-                                <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
+                                <div style={{marginLeft: '37px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '300px'}}>
                                   {/* Город */}
                                   <div className="text-field"> 
                                       <MyDropdown
@@ -737,24 +734,29 @@ const Companys = () => {
 
                                   {/* ФИО */}
                                   <label>ФИО</label>
-                                  <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                                  </div> 
+                                  <CButton className='uley_add_user' style={{width: '300px', marginLeft: '6px'}}>
+                                    <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                      Менеджер
+                                    </span>
+                                  </CButton>
 
-                                  {/* Договор */}
-                                  <label>Договор</label>
-                                  <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                                  </div> 
-
-                                
+                                  <div style={{marginTop: '221px'}}>
+                                    {/* Договор */}
+                                    <label>Договор</label>
+                                    <CButton className='uley_add_user' style={{width: '300px', marginLeft: '6px'}}>
+                                      <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                        Договор
+                                      </span>
+                                    </CButton> 
+                                  </div>
                                   
                                 </div>
 
 {/* 3 */}
-<div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
-                                  <div className="uley-line" style={{left: '670px', width: '90px'}}></div>
-                                  <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '24px'}}>
+                                <div style={{marginLeft: '37px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '300px'}}>
+                                  <div className="uley-line" style={{left: '645px', width: '85px'}}></div>
+                                  <div className="uley-line" style={{left: '810px', width: '85px'}}></div>
+                                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                     
                                     {/* проекты за месяц */}
                                     <div className="text-field">
@@ -783,10 +785,11 @@ const Companys = () => {
 
                                   <label>Комтеги</label>
                                   <div className="text-field"> 
-                                      <MyDropdown2
+                                      <MyDropdown3
                                         tags={comteg}
                                         setTags={setComteg}
                                         options={comtegs}
+                                        style={{minHeight: '40px !important'}}
                                       />
                                   </div>
 
@@ -797,7 +800,7 @@ const Companys = () => {
                                       type="text" 
                                       name="comment" 
                                       id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{resize: 'none', width: '320px', height: '243px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                      style={{resize: 'none', width: '300px', height: '243px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
                                     />
                                   </div> 
 
@@ -805,7 +808,7 @@ const Companys = () => {
                                 </div>
 
 {/* 4 */}
-                                <div style={{marginLeft: '40px', marginTop: '56px', display: 'flex', flexDirection: 'column', width: '250px'}}>
+                                <div style={{marginLeft: '37px', marginTop: '56px', display: 'flex', flexDirection: 'column', width: '300px'}}>
 
                                   <label>Бухгалтерия</label>
                                   <div className="text-field" onMouseOver={()=>setShowSaveTg(true)} onMouseOut={()=>setShowSaveTg(false)} style={{marginBottom: '44px'}}>
@@ -823,12 +826,12 @@ const Companys = () => {
                                       id="telegram" 
                                       value={telegram} 
                                       //onChange={handleTg} 
-                                      style={{width: '250px'}}
+                                      style={{width: '300px'}}
                                     />
                                   </div>
 
                                   {/* phone2 */}
-                                  <div className="text-field" onMouseOver={()=>showSavePhone2(true)} onMouseOut={()=>showSavePhone2(false)}>
+                                  <div className="text-field" onMouseOver={()=>showSavePhone2(true)} onMouseOut={()=>showSavePhone2(false)} style={{marginBottom: '44px'}}>
                                       <img 
                                         src={Disketa} 
                                         onClick={()=>{navigator.clipboard.writeText(phone2)}} 
@@ -838,7 +841,7 @@ const Companys = () => {
                                       {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                       <InputMask
                                           className="text-field__input" 
-                                          style={{width: '250px'}}
+                                          style={{width: '300px'}}
                                           type="text" 
                                           name="phone2" 
                                           id="phone2"
@@ -862,7 +865,7 @@ const Companys = () => {
                                       alt="" 
                                       style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                     />
-                                    <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
+                                    <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '300px'}}/>
                                   </div> 
 
                                   
@@ -870,7 +873,7 @@ const Companys = () => {
 
                                   <label>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '250px', height: '353px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '300px', height: '245px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
