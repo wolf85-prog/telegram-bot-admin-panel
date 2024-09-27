@@ -93,7 +93,7 @@ const Companys = () => {
   const [showSaveSklad, setShowSaveSklad] = useState(false)
 
   const [id, setId] = useState('');
-  const [fio, setFio] = useState('');
+  const [fio, setFio] = useState('ФИО');
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
@@ -837,11 +837,10 @@ const Companys = () => {
                                     <input 
                                       className="text-field__input" 
                                       type="text" 
-                                      pattern="[0-9]*"
                                       name="fio" 
                                       id="fio" 
-                                      // value={telegram} 
-                                      //onChange={handleTg} 
+                                      value={fio} 
+                                      onChange={(e)=>setFio(e.target.value)} 
                                       style={{width: '300px'}}
                                     />
                                   </div>
