@@ -198,6 +198,12 @@ const Companys = () => {
           str_comment = str_comment + item.content + (index+1 !== JSON.parse(user.comment).length ? ', ' : '')
         })
 
+        let str_manager = ''
+        user.managers && JSON.parse(user.managers).map((item, index)=> {
+          const fioManager = managersDB.find(item2 => item2.GUID === item.name)
+          str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+        })
+
 
         const newUser = {
           id: user.id,
@@ -206,6 +212,7 @@ const Companys = () => {
           office: user.office,
           sklad: user.sklad,
           comment: str_comment,
+          managers: str_manager,
         }
         arrCompanys.push(newUser)
 
@@ -358,6 +365,9 @@ const Companys = () => {
     //1 все специалисты
     let response = await getCompanyCount(20, companys.length);
     //console.log("workers size: ", response)
+
+    let managersDB = await getManager()
+      //console.log("managersDB: ", managersDB)
   
     const arrCompanys = []
     
@@ -377,6 +387,11 @@ const Companys = () => {
           str_comment = str_comment + item.content + (index+1 !== JSON.parse(user.comment).length ? ', ' : '')
         })
 
+        let str_manager = ''
+        user.managers && JSON.parse(user.managers).map((item, index)=> {
+          const fioManager = managersDB.find(item2 => item2.GUID === item.name)
+          str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+        })
 
         const newUser = {
           id: user.id,
@@ -385,6 +400,7 @@ const Companys = () => {
           office: user.office,
           sklad: user.sklad,
           comment: str_comment,
+          managers: str_manager,
         }
         arrCompanys.push(newUser)
 
@@ -509,6 +525,7 @@ const Companys = () => {
     setCity(user.city ? user.city : '')
     setOffice(user.office ? user.office : '')
     setSklad(user.sklad ? user.sklad : '')
+    setManagers(user.managers ? user.managers.split(', ') : [])
 
     // setPhone(user.phone)
 
@@ -600,7 +617,7 @@ const Companys = () => {
                                             {item.title ? (item.title.length > 30 ? item.title.substr(0, 30) + '...' : item.title) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-
+                                          {item.managers}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                             {item.city ? (item.city.length > 20 ? item.city.substr(0, 20) + '...' : item.city) : ''}
@@ -769,17 +786,19 @@ const Companys = () => {
                                   </CButton>
 
                                   <div style={{display: showManagers ? 'block' : 'none'}}>
-                                    <div className="text-field">
-                                      <input 
+                                    {managers.map((item, index) => (
+                                    <div className="text-field" key={index}>
+                                      <input  
                                         className="text-field__input" 
                                         type="text" 
                                         name="managers" 
                                         id="managers" 
-                                        value={managers} 
+                                        value={item} 
                                         onChange={(e)=>setManagers(e.target.value)} 
                                         style={{width: '300px'}}
                                       />
-                                    </div>
+                                    </div>)
+                                    )}
                                     {/* <div className="text-field">
                                       <input 
                                         className="text-field__input" 
@@ -864,7 +883,8 @@ const Companys = () => {
 
                                   {/*Должность и телефон менеджера  */}
                                   <div style={{display: showManagers ? 'block' : 'none'}}>
-                                    <div className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
+                                  {managers.map((item, index) => (
+                                    <div key={index} className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
                                       <div>
                                       {/* <label>Должность</label> */}
                                         <div className="text-field">
@@ -896,6 +916,7 @@ const Companys = () => {
                                           </InputMask>    
                                       </div> 
                                     </div>
+                                  ))}
                                     {/* <div className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
                                       <div>
                                         <div className="text-field">
