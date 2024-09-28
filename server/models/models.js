@@ -195,7 +195,11 @@ const Company = sequelize.define('company', {
     comment: {type: DataTypes.TEXT},
     projects: {type: DataTypes.TEXT},
     managers: {type: DataTypes.TEXT},
-    dogovor: {type: DataTypes.STRING}, 
+    dogovorDate: {type: DataTypes.STRING}, 
+    dogovorNumber: {type: DataTypes.STRING}, 
+    bugalterFio: {type: DataTypes.STRING}, 
+    bugalterEmail: {type: DataTypes.STRING},
+    bugalterPhone: {type: DataTypes.STRING},  
 })
 
 
