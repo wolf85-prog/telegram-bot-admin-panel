@@ -44,6 +44,8 @@ const { getSpecialist, getSpecCount, editSpecialist, getSpecialistId, addSpecial
 
 const { getManagers, getManagerCount, editManager, getManagerId, addManager, deleteManager, getManagerCountAll } = require('../controllers/managersController')
 
+const { getCompanys, getCompanyCount, editCompany, getCompanyId, addCompany, deleteCompany, getCompanyCountAll } = require('../controllers/companysController')
+
 //const { sendPoster } = require('../controllers/posterController')
 
 //const upload = require( "../utils/upload.js")
@@ -181,7 +183,6 @@ route.get('/specialist/count/get/:count/:prev', getSpecCount) //еще
 route.patch('/specialist/update/:id', editSpecialist)
 route.get("/specialist/delete/:id", deleteSpecialist);
 route.post("/specialist/add", addSpecialist);
-route.get("/specialist/delete/:id", deleteSpecialist);
 route.get("/specialist/count/get", getSpecCountAll);
 
 
@@ -192,8 +193,16 @@ route.get('/managers/count/get/:count/:prev', getManagerCount) //еще
 route.patch('/managers/update/:id', editManager)
 route.get("/managers/delete/:id", deleteManager);
 route.post("/managers/add", addManager);
-route.get("/managers/delete/:id", deleteManager);
 route.get("/managers/count/get", getManagerCountAll);
+
+//----------------- Компании ---------------------------------
+route.get('/companys/get', getCompanys)
+route.get("/companys/:id", getCompanyId);
+route.get('/companys/count/get/:count/:prev', getCompanyCount) //еще
+route.patch('/companys/update/:id', editCompany)
+route.get("/companys/delete/:id", deleteCompany);
+route.post("/companys/add", addCompany);
+route.get("/companys/count/get", getCompanyCountAll);
 
 
 module.exports = route
