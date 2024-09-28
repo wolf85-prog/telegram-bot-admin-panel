@@ -366,14 +366,12 @@ useEffect(() => {
 useEffect(() => {
 	//---------get UserManagers-----------------------------------------
 	const fetchCompanysData = async () => {
-		//console.log("userWorkers: ", userWorkers)
-	
-		//0 все специалисты
-		//let all = await getWorkers()
+
 		let all = await getCompanyCountAll()
 		console.log("companys all: ", all)
-
-		setCompanysCount(all)
+		if (all) {
+			setCompanysCount(all)
+		}
 	}
 	
 	//все менеджеры

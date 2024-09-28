@@ -169,7 +169,7 @@ const Companys = () => {
     })
 
     setSortedCities(sorted)
-    
+
     const fetchData = async() => {
 
       // 2 специалисты 20 чел.
@@ -501,8 +501,10 @@ const Companys = () => {
     const currentYear = new Date().getFullYear()
 
     setId(user.id)
-    setTitle(user.title)
+    setTitle(user.title ? user.title : '')
     setCity(user.city ? user.city : '')
+    setOffice(user.office ? user.office : '')
+    setSklad(user.sklad ? user.sklad : '')
 
     // setPhone(user.phone)
 
@@ -597,13 +599,13 @@ const Companys = () => {
 
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.city ? (item.city.length > 30 ? item.city.substr(0, 30) + '...' : item.city) : ''}
+                                            {item.city ? (item.city.length > 20 ? item.city.substr(0, 20) + '...' : item.city) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          
+                                            {item.office ? (item.office.length > 30 ? item.office.substr(0, 30) + '...' : item.office) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          
+                                            {item.sklad ? (item.sklad.length > 30 ? item.sklad.substr(0, 30) + '...' : item.sklad) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center">
 
