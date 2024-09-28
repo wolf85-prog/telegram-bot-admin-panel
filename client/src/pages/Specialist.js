@@ -340,7 +340,7 @@ const Specialist = () => {
 
     const Val = cities.find(item=> item.label === worker.city)
     setCityValue(Val.value)
-    console.log(worker.city, Val.value)
+    console.log(worker.city, Val)
 
     const currentYear = new Date().getFullYear()
 
@@ -598,6 +598,7 @@ const Specialist = () => {
 
     setShowClear(true)
     setFilePreview('')
+    setCityValue(0)
   }
 
   
@@ -772,10 +773,10 @@ const Specialist = () => {
 
 
   useEffect(() => {
-    console.log("city: ", city)
+    console.log("city: ", cityValue)
     
 
-  }, [city]);
+  }, [city, cityValue]);
 
 
   const handleTg = event => {
