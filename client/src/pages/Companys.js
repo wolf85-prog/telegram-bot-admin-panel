@@ -63,7 +63,7 @@ import { uploadAvatar, uploadFile } from '../http/chatAPI';
 const Companys = () => {
 
   const { companys, setCompanys, companysCount } = useUsersContext();
-
+  const [sortedCities, setSortedCities] = useState([])
   const [projects, setProjects] = useState([]); 
   const [userbots, setUserbots] = useState([]);
 
@@ -93,24 +93,19 @@ const Companys = () => {
   const [showSaveSklad, setShowSaveSklad] = useState(false)
 
   const [id, setId] = useState('');
-  const [fio, setFio] = useState('ФИО');
+  const [title, setTitle] = useState('Название компании');
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('+7 (999) 999-99-99');
-  const [phone2, setPhone2] = useState('');
-  const [telegram, setTelegram] = useState('');
-  const [reyting, setReyting] = useState('');
-  const [rank, setRank] = useState('');
-  const [company, setCompany] = useState('');
-  const [inn, setInn] = useState('');
-  const [comteg, setComteg] = useState([]);
-  const [sfera, setSfera] = useState([]);
-  const [dolgnost, setDolgnost] = useState('');
+  const [managers, setManagers] = useState([]);
   const [office, setOffice] = useState('');
   const [sklad, setSklad] = useState('');
 
+  const [bugalterFio, setBugalterFio] = useState('')
+
   const [email, setEmail] = useState('');
   const [comment, setComment] = useState('');
-  const [dogovor, setDogovor] = useState('');
+  const [comteg, setComteg] = useState([]);
+  const [sfera, setSfera] = useState([]);
   const [samozanjatost, setSamozanjatost] = useState('');
   const [nik, setNik] = useState('');
   const [dateReg, setDateReg] = useState('');
@@ -168,6 +163,13 @@ const Companys = () => {
   //			get managers
   //-----------------------------------------------------------------------------------------
   useEffect(()=> {
+    const sorted = [...cities].sort((a, b) => {       
+      var cityA = a.label, cityB = b.label
+      return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+    })
+
+    setSortedCities(sorted)
+    
     const fetchData = async() => {
 
       // 2 специалисты 20 чел.
@@ -186,20 +188,6 @@ const Companys = () => {
         const min = String(d2.getMinutes()).padStart(2, "0");
         const newDate = `${day}.${month} ${chas}:${min}`;
 
-        // let str_sfera = ''
-        // user.sfera && JSON.parse(user.sfera).map((item, index)=> {
-        //   str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
-        // })
-
-        // let str_komteg = ''
-        // user.comteg && JSON.parse(user.comteg).map((item, index)=> {
-        //   str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
-        // })
-
-        //let str_company = ''
-        // user.company && JSON.parse(user.company).map((item, index)=> {
-        //   str_company = str_company + item.name + (index+1 !== JSON.parse(user.company).length ? ', ' : '')
-        // })
 
         let str_comment = ''
         user.comment && JSON.parse(user.comment).map((item, index)=> {
@@ -361,7 +349,57 @@ const Companys = () => {
 
   //ЕЩЁ
   const clickNext = async() => {
-      //1 все специалисты
+    //setLoading(true)
+  
+    //1 все специалисты
+    let response = await getCompanyCount(20, companys.length);
+    //console.log("workers size: ", response)
+  
+    const arrCompanys = []
+    
+      response.reverse().map(async (user, i) => {
+        const d = new Date(user.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+        const d2 = new Date(d)
+  
+        const month = String(d2.getMonth()+1).padStart(2, "0");
+        const day = String(d2.getDate()).padStart(2, "0");
+        const chas = d2.getHours();
+        const min = String(d2.getMinutes()).padStart(2, "0");
+        
+        const newDate = `${day}.${month} ${chas}:${min}`;
+  
+        let str_comment = ''
+        user.comment && JSON.parse(user.comment).map((item, index)=> {
+          str_comment = str_comment + item.content + (index+1 !== JSON.parse(user.comment).length ? ', ' : '')
+        })
+
+
+        const newUser = {
+          id: user.id,
+          title: user.title,
+          city: user.city,
+          office: user.office,
+          sklad: user.sklad,
+          comment: str_comment,
+        }
+        arrCompanys.push(newUser)
+
+        //если элемент массива последний
+				if (i === response.length-1) {
+          const sortedUser = [...arrCompanys].sort((a, b) => {       
+            var idA = a.id, idB = b.id 
+            return idB-idA  //сортировка по возрастанию 
+          })
+
+					//setCompanyCount(sortedUser)
+          setCompanys(sortedUser)
+          
+          //сохранить кэш
+          //localStorage.setItem("specialist", JSON.stringify(sortedUser));
+  
+          setLoading(false)
+        }
+      })    
       
   }
 
@@ -452,6 +490,35 @@ const Companys = () => {
     setBlock(!block)
   } 
 
+  const clickTitle = (user)=> {
+    console.log("user: ", user)
+
+    setShowProfile(true)
+    //setModalUser(user)
+    setShowSearch(false)
+    setShowClear(false)
+
+    const currentYear = new Date().getFullYear()
+
+    setId(user.id)
+    setTitle(user.title)
+    setCity(user.city ? user.city : '')
+
+    // setPhone(user.phone)
+
+    // setProjects(user.projects)
+    // setInn(user.inn === null ? '' : user.inn)
+    // setComteg(user.comteg ? user.comteg.split(',') : [])
+    // setEmail(user.email)
+    // setComment(user.comment)
+    // setProfile(user.profile)
+
+    // setDogovor(user.dogovor)
+    // setBlock(user.blockW)
+
+    // console.log("user", userbots.find((user) => user.chatId === worker.chatId))
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -523,8 +590,8 @@ const Companys = () => {
                                           <CTableDataCell className="text-center widthSpace my-td">
                                             {index+1}
                                           </CTableDataCell>
-                                          <CTableDataCell className="widthSpace myfio-td" style={{cursor: 'pointer', textAlign: 'left'}}>
-                                          {item.title ? (item.title.length > 30 ? item.title.substr(0, 30) + '...' : item.title) : ''}
+                                          <CTableDataCell onClick={()=>clickTitle(item)} className="widthSpace myfio-td" style={{cursor: 'pointer', textAlign: 'left'}}>
+                                            {item.title ? (item.title.length > 30 ? item.title.substr(0, 30) + '...' : item.title) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
 
@@ -541,43 +608,24 @@ const Companys = () => {
                                           <CTableDataCell className="text-center">
 
                                           </CTableDataCell>
-                                          <CTableDataCell className="text-center">
-
-                                          </CTableDataCell>
-                                          
-                                          <CTableDataCell className="text-center widthSpace">
-
-                                          </CTableDataCell>
-                                          
-                                          <CTableDataCell className="text-center widthSpace">
-                                          
-                                          </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.comment ? (item.comment.length > 30 ? item.comment.substr(0, 30) + '...' : item.comment) : ''}
-                                          </CTableDataCell>                                        
+                                            {item.comment ? (item.comment.length > 30 ? item.comment.substr(0, 30) + '...' : item.comment) : ''}
+                                          </CTableDataCell>   
+                                          
                                           <CTableDataCell className="text-center widthSpace">
 
                                           </CTableDataCell>
+                                          
                                           <CTableDataCell className="text-center widthSpace">
-
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-
-                                          </CTableDataCell>
-                                          <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
                                           
                                           </CTableDataCell>
-                                          <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          
+                                                                               
+                                          <CTableDataCell className="text-center widthSpace">
+
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
 
                                           </CTableDataCell>
-
-                                          <CTableDataCell className="text-center widthSpace">
-
-                                          </CTableDataCell>
-
                                         </CTableRow>
                                         ))
                                     }
@@ -656,7 +704,7 @@ const Companys = () => {
                                   {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
-                                      <input type="text" name="fio" id="fio" value='Название компании' onChange={(e)=>setFio(e.target.value)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
+                                      <input type="text" name="title" id="title" value={title} onChange={(e)=>setTitle(e.target.value)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
                                     <div style={{display: 'flex'}}>
                                       <Icon id="delete" onClick={()=>clickDelete(id)} />
@@ -687,7 +735,7 @@ const Companys = () => {
                                   <div className="text-field" onMouseOver={()=>setShowSaveOffice(true)} onMouseOut={()=>setShowSaveOffice(false)}>
                                     <img 
                                       src={Disketa} 
-                                      onClick={()=>{navigator.clipboard.writeText(phone2)}} 
+                                      onClick={()=>{navigator.clipboard.writeText(office)}} 
                                       alt="" 
                                       style={{visibility: showSaveOffice ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                     />
@@ -699,7 +747,7 @@ const Companys = () => {
                                   <div className="text-field" onMouseOver={()=>setShowSaveSklad(true)} onMouseOut={()=>setShowSaveSklad(false)}>
                                     <img 
                                       src={Disketa} 
-                                      onClick={()=>{navigator.clipboard.writeText(phone2)}} 
+                                      onClick={()=>{navigator.clipboard.writeText(sklad)}} 
                                       alt="" 
                                       style={{visibility: showSaveSklad ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                     />
@@ -719,14 +767,14 @@ const Companys = () => {
                                       <input 
                                         className="text-field__input" 
                                         type="text" 
-                                        name="fio" 
-                                        id="fio" 
-                                        value={fio} 
-                                        onChange={(e)=>setFio(e.target.value)} 
+                                        name="managers" 
+                                        id="managers" 
+                                        value={managers} 
+                                        onChange={(e)=>setManagers(e.target.value)} 
                                         style={{width: '300px'}}
                                       />
                                     </div>
-                                    <div className="text-field">
+                                    {/* <div className="text-field">
                                       <input 
                                         className="text-field__input" 
                                         type="text" 
@@ -758,7 +806,7 @@ const Companys = () => {
                                         onChange={(e)=>setFio(e.target.value)} 
                                         style={{width: '300px'}}
                                       />
-                                    </div>
+                                    </div> */}
                                   </div>
 
                                   {/* Договор */}
@@ -780,20 +828,20 @@ const Companys = () => {
                                     
                                     {/* проекты за месяц */}
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value='' style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
                                     {/* проекты всего */}
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                      <input className="text-field__input" type="text" name="rank" id="rank" value='' style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
 
                                     {/* проекты за месяц */}
                                     <div className="text-field" >
-                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value='' style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
                                     {/* проекты всего */}
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                      <input className="text-field__input" type="text" name="rank" id="rank" value='' style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
                                   </div>
                                   
@@ -842,14 +890,12 @@ const Companys = () => {
                                           </InputMask>    
                                       </div> 
                                     </div>
-                                    <div className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
+                                    {/* <div className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
                                       <div>
-                                      {/* <label>Должность</label> */}
                                         <div className="text-field">
                                           <input className="text-field__input" type="text" name="email" id="email" value="Менеджер" style={{width: '130px'}}/>
                                         </div> 
                                       </div>
-                                      {/* phone */}
                                       <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} style={{marginBottom: '44px'}}>
                                           <img 
                                             src={Disketa} 
@@ -857,7 +903,6 @@ const Companys = () => {
                                             alt="" 
                                             style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                           />
-                                          {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                           <InputMask
                                               className="text-field__input" 
                                               style={{width: '150px'}}
@@ -876,12 +921,10 @@ const Companys = () => {
                                     </div>
                                     <div className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
                                       <div>
-                                      {/* <label>Должность</label> */}
                                         <div className="text-field">
                                           <input className="text-field__input" type="text" name="email" id="email" value="Менеджер" style={{width: '130px'}}/>
                                         </div> 
                                       </div>
-                                      {/* phone */}
                                       <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} style={{marginBottom: '44px'}}>
                                           <img 
                                             src={Disketa} 
@@ -889,7 +932,6 @@ const Companys = () => {
                                             alt="" 
                                             style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                           />
-                                          {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                           <InputMask
                                               className="text-field__input" 
                                               style={{width: '150px'}}
@@ -908,12 +950,10 @@ const Companys = () => {
                                     </div>
                                     <div className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
                                       <div>
-                                      {/* <label>Должность</label> */}
                                         <div className="text-field">
                                           <input className="text-field__input" type="text" name="email" id="email" value="Менеджер" style={{width: '130px'}}/>
                                         </div> 
                                       </div>
-                                      {/* phone */}
                                       <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} style={{marginBottom: '44px'}}>
                                           <img 
                                             src={Disketa} 
@@ -921,7 +961,6 @@ const Companys = () => {
                                             alt="" 
                                             style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                           />
-                                          {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                           <InputMask
                                               className="text-field__input" 
                                               style={{width: '150px'}}
@@ -937,7 +976,7 @@ const Companys = () => {
                                           >
                                           </InputMask>    
                                       </div> 
-                                    </div>
+                                    </div> */}
                                   </div>
 
                                   <label>Комтеги</label>
@@ -971,17 +1010,17 @@ const Companys = () => {
                                   <div className="text-field" onMouseOver={()=>setShowSaveFio(true)} onMouseOut={()=>setShowSaveFio(false)} style={{marginBottom: '44px'}}>
                                     <img 
                                       src={Disketa} 
-                                      onClick={()=>{navigator.clipboard.writeText(fio)}} 
+                                      onClick={()=>{navigator.clipboard.writeText(bugalterFio)}} 
                                       alt="" 
                                       style={{visibility: showSaveFio ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                     />
                                     <input 
                                       className="text-field__input" 
                                       type="text" 
-                                      name="fio" 
-                                      id="fio" 
-                                      value={fio} 
-                                      onChange={(e)=>setFio(e.target.value)} 
+                                      name="bugalterFio" 
+                                      id="bugalterFio" 
+                                      value={bugalterFio} 
+                                      onChange={(e)=>setBugalterFio(e.target.value)} 
                                       style={{width: '300px'}}
                                     />
                                   </div>

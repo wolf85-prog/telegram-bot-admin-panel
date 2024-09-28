@@ -62,7 +62,7 @@ import { uploadAvatar, uploadFile } from '../http/chatAPI';
 const Managers = () => {
 
   const { setCountPretendent, pretendents, setPretendents, managers, setManagers, managersCount } = useUsersContext();
-
+  const [sortedCities, setSortedCities] = useState([])
   const [managerCount, setManagerCount] = useState([]);
 
   const [projects, setProjects] = useState(''); 
@@ -169,6 +169,13 @@ const Managers = () => {
   //			get managers
   //-----------------------------------------------------------------------------------------
   useEffect(()=> {
+    const sorted = [...cities].sort((a, b) => {       
+      var cityA = a.label, cityB = b.label
+      return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+    })
+
+    setSortedCities(sorted)
+    
     const fetchData = async() => {
 
       // 2 специалисты 20 чел.

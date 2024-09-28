@@ -148,6 +148,7 @@ const Specialist = () => {
 
   const [toast, addToast] = useState(0)
   const toaster = useRef()
+  const [sortedCities, setSortedCities] = useState([])
 
   const exampleToast = (
     <CToast autohide={true} visible={true} color="success" className="text-white align-items-center">
@@ -178,6 +179,13 @@ const Specialist = () => {
 
 
   useEffect(()=> {
+
+    const sorted = [...cities].sort((a, b) => {       
+      var cityA = a.label, cityB = b.label
+      return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+    })
+
+    setSortedCities(sorted)
 
     const fetchData = async() => {
 
@@ -1184,7 +1192,7 @@ const Specialist = () => {
                                       <CFormSelect 
                                         aria-label="Default select example"
                                         style={{backgroundColor: '#131c21'}}
-                                        options={cities}
+                                        options={sortedCities}
                                         value={cityValue}
                                         onChange={(e)=>addCity(e)}
                                       />

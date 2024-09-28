@@ -45,7 +45,7 @@ import sendSound from './../assets/sounds/sendmessage.mp3';
 import smsWorkhub from './../../chat-app-worker/assets/sounds/sms_iphone.mp3';
 import notifPretendent from './../../chat-app-worker/assets/sounds/pretendent2.mp3';
 import { getManagerCountAll } from "src/http/managerAPI";
-
+import { getCompanyCountAll } from "src/http/companyAPI";
 
 const UsersContext = createContext();
 
@@ -360,6 +360,24 @@ useEffect(() => {
 	
 	//все менеджеры
 	fetchUserManagerData();
+	
+},[])
+
+useEffect(() => {
+	//---------get UserManagers-----------------------------------------
+	const fetchCompanysData = async () => {
+		//console.log("userWorkers: ", userWorkers)
+	
+		//0 все специалисты
+		//let all = await getWorkers()
+		let all = await getCompanyCountAll()
+		console.log("companys all: ", all)
+
+		setCompanysCount(all)
+	}
+	
+	//все менеджеры
+	fetchCompanysData();
 	
 },[])
 
