@@ -20,17 +20,12 @@ class CompanysController {
 
     async getCompanys(req, res) {
         try {
-            const workers = await Company.findAll({
+            const company = await Company.findAll({
                 order: [
                     ['id', 'DESC'], //DESC, ASC
                 ],
-                where: {
-                    chatId: {
-                        [Op.ne]: null
-                    }
-                }
             })
-            return res.status(200).json(workers);
+            return res.status(200).json(company);
         } catch (error) {
             return res.status(500).json(error.message);
         }
@@ -127,7 +122,7 @@ class CompanysController {
     async getCompanyId(req, res) {
         const {id} = req.params
         try {
-            const manager = await Company.findOne({where: {chatId: id.toString()}})
+            const manager = await Company.findOne({where: {id: String(id)}})
             return res.status(200).json(manager);
         } catch (err) {
             return res.status(500).json(err);
