@@ -58,6 +58,7 @@ import companyData from 'src/data/companyData';
 import { getCompany, getCompanyCount, editCompany, addCompany, deleteCompany } from '../http/companyAPI'
 import { getWContacts} from '../http/workerAPI'
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
+import { getManager } from 'src/http/managerAPI';
 
 //Workers.js
 const Companys = () => {
@@ -176,6 +177,9 @@ const Companys = () => {
       let company = await getCompanyCount(20, companys.length)
       console.log("companys: ", company)
       console.log("count: ", companysCount)
+
+      let managersDB = await getManager()
+      console.log("managersDB: ", managersDB)
 
       let arrCompanys = []
 

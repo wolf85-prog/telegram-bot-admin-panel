@@ -184,6 +184,7 @@ const Manager = sequelize.define('manager', {
     deleted: {type: DataTypes.BOOLEAN},
     great: {type: DataTypes.BOOLEAN}, //hello
     companyId: {type: DataTypes.STRING}, // id заказчика
+    GUID: {type: DataTypes.STRING}, 
 })
 
 const Company = sequelize.define('company', {
@@ -200,6 +201,7 @@ const Company = sequelize.define('company', {
     bugalterFio: {type: DataTypes.STRING}, 
     bugalterEmail: {type: DataTypes.STRING},
     bugalterPhone: {type: DataTypes.STRING},  
+    GUID: {type: DataTypes.STRING}, 
 })
 
 
