@@ -90,8 +90,9 @@ const UsersProvider = ({ children }) => {
 	});  //все специалисты;
 
 	const [specialist, setSpecialist] =  useState([])
-
 	const [managersCount, setManagersCount] = useState(0)
+	const [companysCount, setCompanysCount] = useState(0)
+
 
 	const [userRenthub, setUserRenthub] = useState( () => {
 		const savedUserRenthub = localStorage.getItem("userRenthub");
@@ -2100,6 +2101,9 @@ function isObjectEmpty(obj) {
 			managers, 
 			setManagers,
 			managersCount,
+			companysCount,
+			companys,
+			setCompanys,
 		}}>
 			{children}
 		</UsersContext.Provider>

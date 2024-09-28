@@ -55,14 +55,14 @@ import dolgnostData from 'src/data/dolgnost';
 import sferaData from 'src/data/sfera';
 import companyData from 'src/data/companyData';
 
-import { getManager, getManagerCount, editManager, addManager, deleteManager } from '../http/managerAPI'
+import { getCompany, getCompanyCount, editCompany, addCompany, deleteCompany } from '../http/companyAPI'
 import { getWContacts} from '../http/workerAPI'
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
 
 //Workers.js
 const Companys = () => {
 
-  const { setCountPretendent, pretendents, setPretendents, managers, setManagers } = useUsersContext();
+  const { companys, setCompanys, companysCount } = useUsersContext();
 
   const [projects, setProjects] = useState([]); 
   const [userbots, setUserbots] = useState([]);
@@ -171,106 +171,67 @@ const Companys = () => {
     const fetchData = async() => {
 
       // 2 специалисты 20 чел.
-      //let users = await getManagerCount(20, managers.length)
-      //console.log("managers: ", users)
+      let company = await getCompanyCount(20, companys.length)
+      console.log("companys: ", company)
+      console.log("count: ", companysCount)
 
-      //let arrManagers = []
+      let arrCompanys = []
 
-      // workers.map(async (worker, i) => {
-      //   const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
-      //   const d2 = new Date(d)
-      //   const month = String(d2.getMonth()+1).padStart(2, "0");
-      //   const day = String(d2.getDate()).padStart(2, "0");
-      //   const chas = d2.getHours();
-      //   const min = String(d2.getMinutes()).padStart(2, "0");
-      //   const newDate = `${day}.${month} ${chas}:${min}`;
+      company.map(async (user, i) => {
+        const d = new Date(user.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+        const d2 = new Date(d)
+        const month = String(d2.getMonth()+1).padStart(2, "0");
+        const day = String(d2.getDate()).padStart(2, "0");
+        const chas = d2.getHours();
+        const min = String(d2.getMinutes()).padStart(2, "0");
+        const newDate = `${day}.${month} ${chas}:${min}`;
 
-      //   let str_spec = ''
-      //   worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
-      //     str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
-      //   })
+        // let str_sfera = ''
+        // user.sfera && JSON.parse(user.sfera).map((item, index)=> {
+        //   str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
+        // })
 
-      //   let str_skill = ''
-      //   worker.skill && JSON.parse(worker.skill).map((item, index)=> {
-      //     str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
-      //   })
+        // let str_komteg = ''
+        // user.comteg && JSON.parse(user.comteg).map((item, index)=> {
+        //   str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
+        // })
 
-      //   let str_merch = ''
-      //   worker.merch && JSON.parse(worker.merch).map((item, index)=> {
-      //     str_merch = str_merch + item.name + (index+1 !== JSON.parse(worker.merch).length ? ', ' : '')
-      //   })
+        //let str_company = ''
+        // user.company && JSON.parse(user.company).map((item, index)=> {
+        //   str_company = str_company + item.name + (index+1 !== JSON.parse(user.company).length ? ', ' : '')
+        // })
 
-      //   let str_komteg = ''
-      //   worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
-      //     str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
-      //   })
+        let str_comment = ''
+        user.comment && JSON.parse(user.comment).map((item, index)=> {
+          str_comment = str_comment + item.content + (index+1 !== JSON.parse(user.comment).length ? ', ' : '')
+        })
 
-      //   let str_komteg2 = ''
-      //   worker.comteg2 && JSON.parse(worker.comteg2).map((item, index)=> {
-      //     str_komteg2 = str_komteg2 + item.name + (index+1 !== JSON.parse(worker.comteg2).length ? ', ' : '')
-      //   })
 
-      //   let str_company = ''
-      //   worker.company && JSON.parse(worker.company).map((item, index)=> {
-      //     str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
-      //   })
+        const newUser = {
+          id: user.id,
+          title: user.title,
+          city: user.city,
+          office: user.office,
+          sklad: user.sklad,
+          comment: str_comment,
+        }
+        arrCompanys.push(newUser)
 
-      //   let str_comment = ''
-      //   worker.comment && JSON.parse(worker.comment).map((item, index)=> {
-      //     str_comment = str_comment + item.content + (index+1 !== JSON.parse(worker.comment).length ? ', ' : '')
-      //   })
+        //если элемент массива последний
+				if (i === company.length-1) {
+          const sortedUser = [...arrCompanys].sort((a, b) => {       
+            var idA = a.id, idB = b.id 
+            return idB-idA  //сортировка по возрастанию 
+          })
 
-      //   let str_comment2 = ''
-      //   worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
-      //     str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? ', ' : '')
-      //   })
-
-      //   const newWorker = {
-      //     id: worker.id,
-      //     fio: worker.fio,
-      //     chatId: worker.chatId, 
-      //     phone: worker.phone, 
-      //     phone2: worker.phone2,
-      //     speclist: str_spec,
-      //     city: worker.city, 
-      //     skill: str_skill,
-      //     promo: worker.promoId === '0' ? '' : worker.promoId, 
-      //     rank: worker.rank, 
-      //     merch: str_merch,  
-      //     company: str_company, 
-      //     comteg: str_komteg, 
-      //     comteg2: str_komteg2, 
-      //     comment: str_comment, 
-      //     comment2: str_comment2, 
-      //     age: worker.age, 
-      //     reyting: worker.reyting, 
-      //     inn: worker.inn, 
-      //     passport: worker.passport, 
-      //     profile: worker.profile, 
-      //     dogovor: worker.dogovor ? '🟢' : '🔴', 
-      //     samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
-      //     passportScan: worker.passportScan, 
-      //     email: worker.email, 
-      //     block: worker.block,
-      //     block18: worker.block18,
-      //   }
-      //   arrWorkers.push(newWorker)
-
-      //   //если элемент массива последний
-			// 	if (i === workers.length-1) {
-      //     const sortedWorker = [...arrWorkers].sort((a, b) => {       
-      //       var idA = a.id, idB = b.id 
-      //       return idB-idA  //сортировка по возрастанию 
-      //     })
-
-			// 		setSpecialistCount(sortedWorker)
-      //     setSpecialist(sortedWorker)
+					//setCompanyCount(sortedUser)
+          setCompanys(sortedUser)
 					
-			// 		//сохранить кэш
-			// 		localStorage.setItem("specialist", JSON.stringify(sortedWorker));
-			// 	}
+					//сохранить кэш
+					//localStorage.setItem("specialist", JSON.stringify(sortedUser));
+				}
 
-      // })  
+      })   
 
       setLoading(false)
 
@@ -526,7 +487,7 @@ const Companys = () => {
                       <CCol style={{textAlign: 'center'}}>
                         <CCard className="mb-4"> 
                             <p style={{position: 'absolute', top: '-18px', right: '15px', fontSize: '14px', color: '#f3f3f3'}}>
-                              Всего: 
+                              Всего: {companysCount}
                             </p>
                             <CCardBody>
                               {!showProfile ?
@@ -557,69 +518,69 @@ const Companys = () => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody >                                  
-                                    {/* {specialist.map((item, index) => (
+                                    {companys.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index+1} style={{lineHeight: '14px'}}>
                                           <CTableDataCell className="text-center widthSpace my-td">
                                             {index+1}
                                           </CTableDataCell>
-                                          <CTableDataCell onClick={()=>clickFio(item)} className="widthSpace myfio-td" style={{cursor: 'pointer', textAlign: 'left'}}>
-                                          {item.fio ? (item.fio.length > 30 ? item.fio.substr(0, 30) + '...' : item.fio) : ''}
+                                          <CTableDataCell className="widthSpace myfio-td" style={{cursor: 'pointer', textAlign: 'left'}}>
+                                          {item.title ? (item.title.length > 30 ? item.title.substr(0, 30) + '...' : item.title) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                            {item.chatId}
+
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.city ? (item.city.length > 30 ? item.city.substr(0, 30) + '...' : item.city) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.company ? (item.company.length > 20 ? item.company.substr(0, 20) + '...' : item.company) : ''}
+                                          
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center">
-                                            {item.phone}
+
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center">
-                                            {item.phone2}
+
                                           </CTableDataCell>
                                           
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.rank}
+
                                           </CTableDataCell>
                                           
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.comteg ? (item.comteg.length > 30 ? item.comteg.substr(0, 30) + '...' : item.comteg) : ''}
+                                          
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
                                           {item.comment ? (item.comment.length > 30 ? item.comment.substr(0, 30) + '...' : item.comment) : ''}
                                           </CTableDataCell>                                        
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.reyting}
+
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.reyting}
+
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.inn}
+
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.passport ? (item.passport.length > 30 ? item.passport.substr(0, 30) + '...' : item.passport) : ''}
+                                          
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.profile ? (item.profile.length > 30 ? item.profile.substr(0, 30) + '...' : item.profile) : ''}
+                                          
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.dogovor}
+
                                           </CTableDataCell>
 
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.email}
+
                                           </CTableDataCell>
 
                                         </CTableRow>
                                         ))
-                                    } */}
+                                    }
                                     
                                   </CTableBody>                   
                                   </CTable>
