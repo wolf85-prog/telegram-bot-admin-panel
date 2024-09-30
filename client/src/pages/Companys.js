@@ -99,6 +99,7 @@ const Companys = () => {
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('+7 (999) 999-99-99');
   const [managers, setManagers] = useState([]);
+  const [managersObj, setManagersObj] = useState([]);
   const [managersData, setManagersData] = useState([])
   const [office, setOffice] = useState('');
   const [sklad, setSklad] = useState('');
@@ -212,10 +213,12 @@ const Companys = () => {
         })
 
         let str_manager = ''
+        let str_manager2 = ''
         user.managers && JSON.parse(user.managers).map((item, index)=> {
           const fioManager = managersDB.find(item2 => item2.GUID === item.name)
           if (fioManager) {
             str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+            str_manager2 = str_manager2 + JSON.stringify(fioManager) + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
           }
         })
 
@@ -228,6 +231,7 @@ const Companys = () => {
           sklad: user.sklad,
           comment: str_comment,
           managers: str_manager,
+          managersObj: str_manager2,
         }
         arrCompanys.push(newUser)
 
@@ -403,10 +407,12 @@ const Companys = () => {
         })
 
         let str_manager = ''
+        let str_manager2 = ''
         user.managers && JSON.parse(user.managers).map((item, index)=> {
           const fioManager = managersDB.find(item2 => item2.GUID === item.name)
           if (fioManager) {
             str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+            str_manager2 = str_manager2 + JSON.stringify(fioManager) + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
           }
         })
 
@@ -418,6 +424,7 @@ const Companys = () => {
           sklad: user.sklad,
           comment: str_comment,
           managers: str_manager,
+          managersObj: str_manager2,
         }
         arrCompanys.push(newUser)
 
@@ -544,6 +551,7 @@ const Companys = () => {
     setOffice(user.office ? user.office : '')
     setSklad(user.sklad ? user.sklad : '')
     setManagers(user.managers ? user.managers.split(', ') : [])
+    setManagersObj(user.managersObj ? user.managersObj.split(', ') : [])
 
     // setPhone(user.phone)
 
@@ -560,9 +568,13 @@ const Companys = () => {
     // console.log("user", userbots.find((user) => user.chatId === worker.chatId))
   }
 
-  const onChangeCity = (e) => {
+  const onChangeManager = (e) => {
     console.log(e.target.value)
-    setCity(e.target.value)    
+    //setCity(e.target.value)    
+  }
+
+  const addManager = () => {
+
   }
 
   return (
@@ -809,7 +821,7 @@ const Companys = () => {
                                   </CButton>
 
                                   <div style={{display: showManagers ? 'block' : 'none'}}>
-                                    {managers.map((item, index) => (
+                                    {managersObj.map((item, index) => (
                                     <div className="text-field" key={index}>
                                       {/* <input  
                                         className="text-field__input" 
@@ -846,15 +858,16 @@ const Companys = () => {
                                         id="custom-input-demo"
                                         options={managersData}
                                         style={{width: '100%', padding: '0'}}
-                                        onInputChange={onChangeCity}
+                                        isOptionEqualToValue={(option, value) => option.value === value.value}
+                                        onInputChange={onChangeManager}
                                         //onInputChange={(e)=>console.log(e.target.value)}
                                         // onChange={(event, newValue) => {
                                         //     if (newValue && newValue.length) {
                                         //         setCity(newValue);
                                         //     }  
                                         // }}
-                                        value={item} 
-                                        inputValue={item}
+                                        value={JSON.parse(item).fio} 
+                                        inputValue={JSON.parse(item).fio}
                                         renderInput={(params) => (
                                         <div ref={params.InputProps.ref} style={{position: 'relative'}}>
                                             <input 
@@ -869,39 +882,6 @@ const Companys = () => {
                                       />
                                     </div>)
                                     )}
-                                    {/* <div className="text-field">
-                                      <input 
-                                        className="text-field__input" 
-                                        type="text" 
-                                        name="fio" 
-                                        id="fio" 
-                                        value={fio} 
-                                        onChange={(e)=>setFio(e.target.value)} 
-                                        style={{width: '300px'}}
-                                      />
-                                    </div>
-                                    <div className="text-field">
-                                      <input 
-                                        className="text-field__input" 
-                                        type="text" 
-                                        name="fio" 
-                                        id="fio" 
-                                        value={fio} 
-                                        onChange={(e)=>setFio(e.target.value)} 
-                                        style={{width: '300px'}}
-                                      />
-                                    </div>
-                                    <div className="text-field">
-                                      <input 
-                                        className="text-field__input" 
-                                        type="text" 
-                                        name="fio" 
-                                        id="fio" 
-                                        value={fio} 
-                                        onChange={(e)=>setFio(e.target.value)} 
-                                        style={{width: '300px'}}
-                                      />
-                                    </div> */}
                                   </div>
 
                                   {/* Договор */}
@@ -951,8 +931,9 @@ const Companys = () => {
                                       />
                                   </div>
 
+                                  {/* добавить менеджера */}
                                   <div style={{textAlign: 'left', display: showManagers ? 'block' : 'none'}}>
-                                    <CButton onClick={clickAdd} className='uley_add_user' style={{marginBottom: '20px', marginLeft: '0'}}>
+                                    <CButton onClick={addManager} className='uley_add_user' style={{marginBottom: '20px', marginLeft: '0'}}>
                                       <span style={{position: 'absolute', top: '-12px', left: '6px', fontSize: '36px', color: '#2d2e38'}}>
                                       +</span>
                                     </CButton>
@@ -960,12 +941,12 @@ const Companys = () => {
 
                                   {/*Должность и телефон менеджера  */}
                                   <div style={{display: showManagers ? 'block' : 'none'}}>
-                                  {managers.map((item, index) => (
+                                  {managersObj.map((item, index) => (
                                     <div key={index} className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
                                       <div>
                                       {/* <label>Должность</label> */}
                                         <div className="text-field">
-                                          <input className="text-field__input" type="text" name="email" id="email" value="Менеджер" style={{width: '130px'}}/>
+                                          <input className="text-field__input" type="text" name="email" id="email" value={JSON.parse(item).dolgnost} style={{width: '130px'}}/>
                                         </div> 
                                       </div>
                                       {/* phone */}
@@ -981,100 +962,13 @@ const Companys = () => {
                                               disabled={!blockProfile}
                                               maskChar=""
                                               onChange={(e) => setPhone(e.target.value)} 
-                                              value={phone}
+                                              value={JSON.parse(item).phone}
                                               placeholder=''
                                           >
                                           </InputMask>    
                                       </div> 
                                     </div>
                                   ))}
-                                    {/* <div className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
-                                      <div>
-                                        <div className="text-field">
-                                          <input className="text-field__input" type="text" name="email" id="email" value="Менеджер" style={{width: '130px'}}/>
-                                        </div> 
-                                      </div>
-                                      <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} style={{marginBottom: '44px'}}>
-                                          <img 
-                                            src={Disketa} 
-                                            onClick={()=>{navigator.clipboard.writeText(phone)}} 
-                                            alt="" 
-                                            style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
-                                          />
-                                          <InputMask
-                                              className="text-field__input" 
-                                              style={{width: '150px'}}
-                                              type="text" 
-                                              name="phone" 
-                                              id="phone"
-                                              mask="+7 (999) 999-99-99"
-                                              disabled={!blockProfile}
-                                              maskChar=""
-                                              onChange={(e) => setPhone(e.target.value)} 
-                                              value={phone}
-                                              placeholder=''
-                                          >
-                                          </InputMask>    
-                                      </div> 
-                                    </div>
-                                    <div className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
-                                      <div>
-                                        <div className="text-field">
-                                          <input className="text-field__input" type="text" name="email" id="email" value="Менеджер" style={{width: '130px'}}/>
-                                        </div> 
-                                      </div>
-                                      <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} style={{marginBottom: '44px'}}>
-                                          <img 
-                                            src={Disketa} 
-                                            onClick={()=>{navigator.clipboard.writeText(phone)}} 
-                                            alt="" 
-                                            style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
-                                          />
-                                          <InputMask
-                                              className="text-field__input" 
-                                              style={{width: '150px'}}
-                                              type="text" 
-                                              name="phone" 
-                                              id="phone"
-                                              mask="+7 (999) 999-99-99"
-                                              disabled={!blockProfile}
-                                              maskChar=""
-                                              onChange={(e) => setPhone(e.target.value)} 
-                                              value={phone}
-                                              placeholder=''
-                                          >
-                                          </InputMask>    
-                                      </div> 
-                                    </div>
-                                    <div className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
-                                      <div>
-                                        <div className="text-field">
-                                          <input className="text-field__input" type="text" name="email" id="email" value="Менеджер" style={{width: '130px'}}/>
-                                        </div> 
-                                      </div>
-                                      <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} style={{marginBottom: '44px'}}>
-                                          <img 
-                                            src={Disketa} 
-                                            onClick={()=>{navigator.clipboard.writeText(phone)}} 
-                                            alt="" 
-                                            style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
-                                          />
-                                          <InputMask
-                                              className="text-field__input" 
-                                              style={{width: '150px'}}
-                                              type="text" 
-                                              name="phone" 
-                                              id="phone"
-                                              mask="+7 (999) 999-99-99"
-                                              disabled={!blockProfile}
-                                              maskChar=""
-                                              onChange={(e) => setPhone(e.target.value)} 
-                                              value={phone}
-                                              placeholder=''
-                                          >
-                                          </InputMask>    
-                                      </div> 
-                                    </div> */}
                                   </div>
 
                                   <label>Комтеги</label>

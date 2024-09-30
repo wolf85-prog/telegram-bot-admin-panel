@@ -888,24 +888,25 @@ const clickNext = async() => {
                                         sx={{
                                             display: 'inline-block',
                                             '& input': {zIndex: '25',
-                                                width: '100%',
-                                                height: '40px',
-                                                padding: '5px 4px',
-                                                fontFamily: 'inherit',
-                                                fontSize: '14px',
-                                                fontWeight: '700',
-                                                lineHeight: '1.5',
-                                                textAlign: 'center',
-                                                color: '#ffffff',
-                                                backgroundColor: 'transparent',
+                                              width: '100%',
+                                              border: 'none',
+                                              height: '40px',
+                                              padding: '5px 4px',
+                                              fontFamily: 'inherit',
+                                              fontSize: '14px',
+                                              fontWeight: '700',
+                                              lineHeight: '1.5',
+                                              textAlign: 'center',
+                                              color: '#ffffff',
+                                              backgroundColor: 'transparent',
                                             }
                                         }}
                                         className="text-field__input" 
                                         openOnFocus
                                         id="custom-input-demo"
                                         options={companysData}
-                                        style={{width: '100%'}}
-                                        onInputChange={onChangeCompany}
+                                        style={{width: '100%', padding: '0'}}
+                                        onInputChange={(e)=>onChangeCompany(e)}
                                         //onInputChange={(e)=>console.log(e.target.value)}
                                         onChange={(event, newValue) => {
                                             if (newValue && newValue.length) {
