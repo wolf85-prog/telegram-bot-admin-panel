@@ -519,6 +519,7 @@ const Companys = () => {
 
     setShowClear(true)
     setFilePreview('')
+    setShowManagers(false)
   }
 
   const onChangeKrest = () => {
@@ -639,7 +640,7 @@ const Companys = () => {
                                             {item.title ? (item.title.length > 30 ? item.title.substr(0, 30) + '...' : item.title) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                            {item.city ? (item.city.length > 20 ? item.city.substr(0, 20) + '...' : item.city) : ''}
+                                            {item.city ? (item.city.length > 15 ? item.city.substr(0, 15) + '...' : item.city) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.managers ? (item.managers.length > 30 ? item.managers.substr(0, 30) + '...' : item.managers) : ''}
@@ -824,13 +825,7 @@ const Companys = () => {
                                             display: 'inline-block',
                                             '& input': {zIndex: '25',
                                                 width: '100%',
-                                                // margin: '0 0',
-                                                // border: 'none',
-                                                // height: '43px',
-                                                // padding: '0 20px',
-                                                // color: '#fff',
-                                                // borderRadius: '30px',
-                                                // marginBottom: '20px',
+                                                border: 'none',
                                                 height: '40px',
                                                 padding: '5px 4px',
                                                 fontFamily: 'inherit',
@@ -838,7 +833,6 @@ const Companys = () => {
                                                 fontWeight: '700',
                                                 lineHeight: '1.5',
                                                 textAlign: 'center',
-                                                /* color: #858585; */
                                                 color: '#ffffff',
                                                 backgroundColor: 'transparent',
                                                 // backgroundClip: 'padding-box',
@@ -851,7 +845,7 @@ const Companys = () => {
                                         openOnFocus
                                         id="custom-input-demo"
                                         options={managersData}
-                                        style={{width: '100%'}}
+                                        style={{width: '100%', padding: '0'}}
                                         onInputChange={onChangeCity}
                                         //onInputChange={(e)=>console.log(e.target.value)}
                                         // onChange={(event, newValue) => {
@@ -859,8 +853,8 @@ const Companys = () => {
                                         //         setCity(newValue);
                                         //     }  
                                         // }}
-                                        value={city}
-                                        inputValue={city}
+                                        value={item} 
+                                        inputValue={item}
                                         renderInput={(params) => (
                                         <div ref={params.InputProps.ref} style={{position: 'relative'}}>
                                             <input 
@@ -948,7 +942,7 @@ const Companys = () => {
                                   
                                   {/*  */}
                                   <label>Сфера деятельности</label>
-                                  <div className="text-field" style={{marginBottom: showManagers ? '188px' : '20px'}}> 
+                                  <div className="text-field" style={{marginBottom: showManagers ? '130px' : '20px'}}> 
                                       <MyDropdown3
                                         tags={sfera}
                                         setTags={setSfera}
@@ -956,6 +950,13 @@ const Companys = () => {
                                         style={{minHeight: '40px !important'}}
                                       />
                                   </div>
+
+                                  <div style={{textAlign: 'left', display: showManagers ? 'block' : 'none'}}>
+                                    <CButton onClick={clickAdd} className='uley_add_user' style={{marginBottom: '20px', marginLeft: '0'}}>
+                                      <span style={{position: 'absolute', top: '-12px', left: '6px', fontSize: '36px', color: '#2d2e38'}}>
+                                      +</span>
+                                    </CButton>
+                                  </div>                                 
 
                                   {/*Должность и телефон менеджера  */}
                                   <div style={{display: showManagers ? 'block' : 'none'}}>
@@ -968,13 +969,7 @@ const Companys = () => {
                                         </div> 
                                       </div>
                                       {/* phone */}
-                                      <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} style={{marginBottom: '44px'}}>
-                                          <img 
-                                            src={Disketa} 
-                                            onClick={()=>{navigator.clipboard.writeText(phone)}} 
-                                            alt="" 
-                                            style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
-                                          />
+                                      <div className="text-field"  style={{marginBottom: '44px'}}>
                                           {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                           <InputMask
                                               className="text-field__input" 

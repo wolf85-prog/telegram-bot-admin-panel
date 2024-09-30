@@ -347,8 +347,10 @@ const Specialist = () => {
     setShowClear(false)
 
     const Val = cities.find(item=> item.label === worker.city)
-    setCityValue(Val.value)
-    console.log(worker.city, Val)
+    if (Val) {
+      setCityValue(Val.value)
+      console.log(worker.city, Val)
+    }   
 
     const currentYear = new Date().getFullYear()
 
