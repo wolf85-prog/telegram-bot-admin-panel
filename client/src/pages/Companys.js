@@ -617,8 +617,8 @@ const Companys = () => {
                                       <CTableRow>
                                         <CTableHeaderCell className='myid-th widthSpace'>№</CTableHeaderCell> 
                                         <CTableHeaderCell className='myfio-th widthSpace'>Название компании</CTableHeaderCell>  
-                                        <CTableHeaderCell className='my-th widthSpace'>Менеджеры</CTableHeaderCell> 
-                                        <CTableHeaderCell className='my-th widthSpace'>Город</CTableHeaderCell>                                           
+                                        <CTableHeaderCell className='my-th widthSpace'>Город</CTableHeaderCell>  
+                                        <CTableHeaderCell className='my-th widthSpace'>Менеджеры</CTableHeaderCell>                                           
                                         <CTableHeaderCell className='my-th widthSpace'>Адрес офиса</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Адрес склада</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthPhone'>Проекты</CTableHeaderCell> 
@@ -639,11 +639,11 @@ const Companys = () => {
                                             {item.title ? (item.title.length > 30 ? item.title.substr(0, 30) + '...' : item.title) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.managers}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
                                             {item.city ? (item.city.length > 20 ? item.city.substr(0, 20) + '...' : item.city) : ''}
                                           </CTableDataCell>
+                                          <CTableDataCell className="text-center widthSpace">
+                                          {item.managers ? (item.managers.length > 30 ? item.managers.substr(0, 30) + '...' : item.managers) : ''}
+                                          </CTableDataCell>   
                                           <CTableDataCell className="text-center widthSpace">
                                             {item.office ? (item.office.length > 30 ? item.office.substr(0, 30) + '...' : item.office) : ''}
                                           </CTableDataCell>
