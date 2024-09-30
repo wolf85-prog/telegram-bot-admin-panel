@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useState, useRef } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import InputMask from 'react-input-mask';
+import Autocomplete from '@mui/material/Autocomplete';
 import { 
   CContainer, 
   CSpinner, 
@@ -55,7 +56,7 @@ import sferaData from 'src/data/sfera';
 import companyData from 'src/data/companyData';
 
 import { getManager, getManagerCount, editManager, addManager, deleteManager } from './../http/managerAPI'
-import { getWContacts} from '../http/workerAPI'
+import { getCompany} from '../http/companyAPI'
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
 
 //Workers.js
@@ -64,6 +65,7 @@ const Managers = () => {
   const { managers, setManagers, managersCount, managersAll, setManagersAll } = useUsersContext();
   const [sortedCities, setSortedCities] = useState([])
   const [managerCount, setManagerCount] = useState([]);
+  const [companysData, setCompanysData] = useState([]);
 
   const [projects, setProjects] = useState(''); 
   const [userbots, setUserbots] = useState([]);
@@ -185,6 +187,17 @@ const Managers = () => {
       let users = await getManagerCount(20, 0)
       console.log("managers: ", users)
       console.log("count: ", managersCount)
+
+      let arrCompanys = []
+      let companysDB = await getCompany()
+      companysDB.map((item, index)=> {
+        const obj = {
+          value: index,
+          label: item.title,
+        }
+        arrCompanys.push(obj)
+      })
+      setCompanysData(arrCompanys)
 
       let arrManagers = []
 
@@ -593,6 +606,12 @@ const clickNext = async() => {
     setBlock(!block)
   } 
 
+
+  const onChangeCompany = (e) => {
+    console.log(e.target.value)
+    setCompany(e.target.value)    
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -865,12 +884,45 @@ const clickNext = async() => {
 
                                   <label>Компания</label>
                                   <div className="text-field"> 
-                                      <MyDropdown
-                                        style={{backgroundColor: '#131c21'}}
-                                        options={companyData}
-                                        selected={company}
-                                        setSelected={setCompany}
-                                        // onChange={addCity}
+                                  <Autocomplete
+                                        sx={{
+                                            display: 'inline-block',
+                                            '& input': {zIndex: '25',
+                                                width: '100%',
+                                                height: '40px',
+                                                padding: '5px 4px',
+                                                fontFamily: 'inherit',
+                                                fontSize: '14px',
+                                                fontWeight: '700',
+                                                lineHeight: '1.5',
+                                                textAlign: 'center',
+                                                color: '#ffffff',
+                                                backgroundColor: 'transparent',
+                                            }
+                                        }}
+                                        className="text-field__input" 
+                                        openOnFocus
+                                        id="custom-input-demo"
+                                        options={companysData}
+                                        style={{width: '100%'}}
+                                        onInputChange={onChangeCompany}
+                                        //onInputChange={(e)=>console.log(e.target.value)}
+                                        onChange={(event, newValue) => {
+                                            if (newValue && newValue.length) {
+                                                setCompany(newValue);
+                                            }  
+                                        }}
+                                        value={company}
+                                        inputValue={company}
+                                        renderInput={(params) => (
+                                        <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                            <input 
+                                                className="text-field__input" 
+                                                type="text" {...params.inputProps} 
+                                                placeholder=''
+                                            />
+                                        </div>
+                                        )}
                                       />
                                   </div>
 

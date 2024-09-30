@@ -872,7 +872,7 @@ const Companys = () => {
                                             />
                                         </div>
                                         )}
-                                    />
+                                      />
                                     </div>)
                                     )}
                                     {/* <div className="text-field">
