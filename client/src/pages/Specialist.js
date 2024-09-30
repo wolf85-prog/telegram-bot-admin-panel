@@ -171,7 +171,7 @@ const Specialist = () => {
 
   //поиск
   useEffect(() => {
-		const filteredData = specialistAll.filter(user=> (user.fio + user.telegram + user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+		const filteredData = specialistAll.filter(user=> (user.fio + user.chatId + user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setSpecialist(text === '' ? specialistCount : filteredData); 
     //console.log("specialist", specialist)
     setShowClear(text === '' ? false : true)

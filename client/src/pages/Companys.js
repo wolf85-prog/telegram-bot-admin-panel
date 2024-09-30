@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useState, useRef } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import InputMask from 'react-input-mask';
+import Autocomplete from '@mui/material/Autocomplete';
 import { 
   CContainer, 
   CSpinner, 
@@ -63,9 +64,9 @@ import { getManager } from 'src/http/managerAPI';
 //Workers.js
 const Companys = () => {
 
-  const { companys, setCompanys, companysCount } = useUsersContext();
+  const { companys, setCompanys, companysCount, managersAll, setManagersAll } = useUsersContext();
   const [sortedCities, setSortedCities] = useState([])
-  const [projects, setProjects] = useState([]); 
+  const [companyCount, setCompanyCount] = useState([]); 
   const [userbots, setUserbots] = useState([]);
 
   const [loading, setLoading]= useState(true);
@@ -98,6 +99,7 @@ const Companys = () => {
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('+7 (999) 999-99-99');
   const [managers, setManagers] = useState([]);
+  const [managersData, setManagersData] = useState([])
   const [office, setOffice] = useState('');
   const [sklad, setSklad] = useState('');
 
@@ -153,10 +155,12 @@ const Companys = () => {
 
 
   //поиск
-  // useEffect(() => {
-	// 	const filteredData = pretendents.filter(user=> (user.project + user.workerFamily + user.workerName)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
-  //   setSpec(text === '' ? pretendents : filteredData) 
-  // }, [text]);
+  useEffect(() => {
+		const filteredData = companys.filter(user=> (user.title)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+    setCompanys(text === '' ? companyCount : filteredData); 
+    //console.log("specialist", specialist)
+    setShowClear(text === '' ? false : true)
+  }, [text]);
 
 
 
@@ -174,12 +178,21 @@ const Companys = () => {
     const fetchData = async() => {
 
       // 2 специалисты 20 чел.
-      let company = await getCompanyCount(20, companys.length)
+      let company = await getCompanyCount(20, 0)
       console.log("companys: ", company)
       console.log("count: ", companysCount)
 
+      let arrManagers = []
       let managersDB = await getManager()
-      console.log("managersDB: ", managersDB)
+      managersDB.map((item, index)=> {
+        const obj = {
+          value: index,
+          label: item.fio,
+        }
+        arrManagers.push(obj)
+      })
+      setManagersData(arrManagers)
+      console.log("managersDB: ", arrManagers)
 
       let arrCompanys = []
 
@@ -201,7 +214,9 @@ const Companys = () => {
         let str_manager = ''
         user.managers && JSON.parse(user.managers).map((item, index)=> {
           const fioManager = managersDB.find(item2 => item2.GUID === item.name)
-          str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+          if (fioManager) {
+            str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+          }
         })
 
 
@@ -223,7 +238,7 @@ const Companys = () => {
             return idB-idA  //сортировка по возрастанию 
           })
 
-					//setCompanyCount(sortedUser)
+					setCompanyCount(sortedUser)
           setCompanys(sortedUser)
 					
 					//сохранить кэш
@@ -390,7 +405,9 @@ const Companys = () => {
         let str_manager = ''
         user.managers && JSON.parse(user.managers).map((item, index)=> {
           const fioManager = managersDB.find(item2 => item2.GUID === item.name)
-          str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+          if (fioManager) {
+            str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+          }
         })
 
         const newUser = {
@@ -540,6 +557,11 @@ const Companys = () => {
     // setBlock(user.blockW)
 
     // console.log("user", userbots.find((user) => user.chatId === worker.chatId))
+  }
+
+  const onChangeCity = (e) => {
+    console.log(e.target.value)
+    setCity(e.target.value)    
   }
 
   return (
@@ -788,7 +810,7 @@ const Companys = () => {
                                   <div style={{display: showManagers ? 'block' : 'none'}}>
                                     {managers.map((item, index) => (
                                     <div className="text-field" key={index}>
-                                      <input  
+                                      {/* <input  
                                         className="text-field__input" 
                                         type="text" 
                                         name="managers" 
@@ -796,7 +818,61 @@ const Companys = () => {
                                         value={item} 
                                         onChange={(e)=>setManagers(e.target.value)} 
                                         style={{width: '300px'}}
-                                      />
+                                      /> */}
+                                      <Autocomplete
+                                        sx={{
+                                            display: 'inline-block',
+                                            '& input': {zIndex: '25',
+                                                width: '100%',
+                                                // margin: '0 0',
+                                                // border: 'none',
+                                                // height: '43px',
+                                                // padding: '0 20px',
+                                                // color: '#fff',
+                                                // borderRadius: '30px',
+                                                // marginBottom: '20px',
+                                                height: '40px',
+                                                padding: '5px 4px',
+                                                fontFamily: 'inherit',
+                                                fontSize: '14px',
+                                                fontWeight: '700',
+                                                lineHeight: '1.5',
+                                                textAlign: 'center',
+                                                /* color: #858585; */
+                                                color: '#ffffff',
+                                                backgroundColor: 'transparent',
+                                                // backgroundClip: 'padding-box',
+                                                // border: '1px solid #2d2e38',
+                                                // borderRadius: '6px',
+                                                // transition: 'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
+                                            }
+                                        }}
+                                        className="text-field__input" 
+                                        openOnFocus
+                                        id="custom-input-demo"
+                                        options={managersData}
+                                        style={{width: '100%'}}
+                                        onInputChange={onChangeCity}
+                                        //onInputChange={(e)=>console.log(e.target.value)}
+                                        // onChange={(event, newValue) => {
+                                        //     if (newValue && newValue.length) {
+                                        //         setCity(newValue);
+                                        //     }  
+                                        // }}
+                                        value={city}
+                                        inputValue={city}
+                                        renderInput={(params) => (
+                                        <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                            <input 
+                                                className="text-field__input" 
+                                                type="text" {...params.inputProps} 
+                                                placeholder='ФИО'
+                                                //onChange={onChangeCity}
+                                                // value={city}
+                                            />
+                                        </div>
+                                        )}
+                                    />
                                     </div>)
                                     )}
                                     {/* <div className="text-field">

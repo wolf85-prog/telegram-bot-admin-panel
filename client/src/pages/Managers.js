@@ -61,7 +61,7 @@ import { uploadAvatar, uploadFile } from '../http/chatAPI';
 //Workers.js
 const Managers = () => {
 
-  const { setCountPretendent, pretendents, setPretendents, managers, setManagers, managersCount } = useUsersContext();
+  const { managers, setManagers, managersCount, managersAll, setManagersAll } = useUsersContext();
   const [sortedCities, setSortedCities] = useState([])
   const [managerCount, setManagerCount] = useState([]);
 
@@ -158,10 +158,13 @@ const Managers = () => {
 
 
   //поиск
-  // useEffect(() => {
-	// 	const filteredData = pretendents.filter(user=> (user.project + user.workerFamily + user.workerName)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
-  //   setSpec(text === '' ? pretendents : filteredData) 
-  // }, [text]);
+  //поиск
+  useEffect(() => {
+		const filteredData = managersAll.filter(user=> (user.fio)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+    setManagers(text === '' ? managerCount : filteredData); 
+    //console.log("specialist", specialist)
+    setShowClear(text === '' ? false : true)
+  }, [text]);
 
 
 
@@ -179,7 +182,7 @@ const Managers = () => {
     const fetchData = async() => {
 
       // 2 специалисты 20 чел.
-      let users = await getManagerCount(20, managers.length)
+      let users = await getManagerCount(20, 0)
       console.log("managers: ", users)
       console.log("count: ", managersCount)
 

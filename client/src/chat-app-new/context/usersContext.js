@@ -7,14 +7,14 @@ import { getAllPretendent, getWContacts, getWConversation,
 	getWMessagesCount, getWorkersCount} from '../../http/workerAPI'
 
 import { getSpecialist, getSpecCount, editSpecialist } from './../../http/specAPI'
-
+import { getManager } from './../../http/managerAPI'
+import { getCompany } from './../../http/companyAPI'
 
 import { getDistributionsW, 
 	getDistributionsCountW,
 	getDistributionsWPlan,
-	getManagers, 
 	getProjectsApi, 
-	getCompanys,
+	//getCompanys,
 	newCountMessage,
 	newCountMessagePretendent,
 	newCountWMessage,
@@ -65,6 +65,7 @@ const UsersProvider = ({ children }) => {
 	const [countMessageRent, setCountMessageRent] = useState(0)
 
 	const [specialistAll, setSpecialistAll] = useState([]);
+	const [managersAll, setManagersAll]= useState([]); // менеджеры (заказчики)
 	const [usersOnline, setUsersOnline] = useState([]);
 	const [managers, setManagers]= useState([]); // менеджеры (заказчики)
 	const [companys, setCompanys]= useState([]);
@@ -348,12 +349,10 @@ const UsersProvider = ({ children }) => {
 useEffect(() => {
 	//---------get UserManagers-----------------------------------------
 	const fetchUserManagerData = async () => {
-		//console.log("userWorkers: ", userWorkers)
 	
 		//0 все специалисты
-		//let all = await getWorkers()
 		let all = await getManagerCountAll()
-		console.log("specialist all: ", all)
+		console.log("managers all: ", all)
 
 		setManagersCount(all)
 	}
@@ -462,12 +461,12 @@ useEffect(() => {
 
 			//3 все беседы (conversations)
 			let convers = await getWConversations()
-			console.log("conversations: ", convers.length)
+			//console.log("conversations: ", convers.length)
 			setConversations(convers)
 
 			//4 все сообщения бота
 			let messagesAll = await getWMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
-			console.log("messagesAll: ", messagesAll.length)
+			//console.log("messagesAll: ", messagesAll.length)
 
 			let count = 0
 			convers.forEach(async (user, index) => {
@@ -702,17 +701,31 @@ useEffect(() => {
 //------------------------------------------------------------------------------------------
 
 	//get Managers
-	// useEffect(() => {
-    // 	const fetchData = async () => {
-	// 		let response = await getManagers();
-    //   		console.log("managers context: ", response.length)
+	useEffect(() => {
+    	const fetchData = async () => {
+			let response = await getManager();
+      		console.log("managers context: ", response.length)
 
-	// 		setManagers(response)
-	// 	}
+			setManagersAll(response)
+		}
 
-	//   	fetchData();
+	  	fetchData();
 
-	// },[])
+	},[])
+
+
+	//get Companys
+	useEffect(() => {
+    	const fetchData = async () => {
+			let response = await getCompany();
+      		console.log("companys context: ", response.length)
+
+			setCompanys(response)
+		}
+
+	  	fetchData();
+
+	},[])
 
 
 //------------------------------------------------------------------------------------------
@@ -2120,6 +2133,8 @@ function isObjectEmpty(obj) {
 			companysCount,
 			companys,
 			setCompanys,
+			managersAll, 
+			setManagersAll
 		}}>
 			{children}
 		</UsersContext.Provider>

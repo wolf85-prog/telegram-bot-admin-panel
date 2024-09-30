@@ -46,7 +46,8 @@ export const deleteCompany = async (id) =>{
 
 export const getCompanyCountAll = async () =>{
     try {
-        await $host.get(`api/companys/count/get`); 
+        let response = await $host.get(`api/companys/count/get`); 
+        return response.data; 
     } catch (error) {
         console.log("error while calling getCompanyCountAll api",error.message);
     }

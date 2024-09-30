@@ -46,7 +46,8 @@ export const deleteManager = async (id) =>{
 
 export const getManagerCountAll = async () =>{
     try {
-        await $host.get(`api/managers/count/get`); 
+        let response = await $host.get(`api/managers/count/get`);
+        return response.data; 
     } catch (error) {
         console.log("error while calling getManagerCountAll api",error.message);
     }
