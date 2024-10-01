@@ -191,11 +191,7 @@ const Managers = () => {
       let arrCompanys = []
       let companysDB = await getCompany()
       companysDB.map((item, index)=> {
-        const obj = {
-          value: index,
-          label: item.title,
-        }
-        arrCompanys.push(obj)
+        arrCompanys.push(item.title)
       })
       setCompanysData(arrCompanys)
 

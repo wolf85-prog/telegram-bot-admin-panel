@@ -186,11 +186,7 @@ const Companys = () => {
       let arrManagers = []
       let managersDB = await getManager()
       managersDB.map((item, index)=> {
-        const obj = {
-          value: index,
-          label: item.fio,
-        }
-        arrManagers.push(obj)
+        arrManagers.push(item.fio)
       })
       setManagersData(arrManagers)
       console.log("managersDB: ", arrManagers)
@@ -585,9 +581,10 @@ const Companys = () => {
     // console.log("user", userbots.find((user) => user.chatId === worker.chatId))
   }
 
-  const onChangeManager = (e) => {
-    console.log(e.target.value)
-    //setCity(e.target.value)    
+  const onChangeManager = (item) => {
+    console.log(item)
+    //setCity(e.target.value)
+    setManagersObj(managersObj)    
   }
 
   //добавить менеджера
@@ -880,13 +877,13 @@ const Companys = () => {
                                         options={managersData}
                                         style={{width: '100%', padding: '0'}}
                                         isOptionEqualToValue={(option, value) => option.value === value.value}
-                                        onInputChange={onChangeManager}
+                                        onInputChange={()=>onChangeManager(item)}
                                         //onInputChange={(e)=>console.log(e.target.value)}
-                                        // onChange={(event, newValue) => {
-                                        //     if (newValue && newValue.length) {
-                                        //         setCity(newValue);
-                                        //     }  
-                                        // }}
+                                        onChange={(event, newValue) => {
+                                            if (newValue && newValue.length) {
+                                                setCity(newValue);
+                                            }  
+                                        }}
                                         value={item ? JSON.parse(item).fio : ''} 
                                         inputValue={item ? JSON.parse(item).fio : ''}
                                         renderInput={(params) => (
