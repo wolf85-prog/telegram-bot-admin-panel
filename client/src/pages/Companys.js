@@ -978,7 +978,7 @@ const Companys = () => {
                                             style={{backgroundColor: '#131c21', width: '130px'}}
                                             options={dolgnostData}
                                             selected={JSON.parse(item).dolgnost}
-                                            //setSelected={}
+                                            setSelected={setManagersObj}
                                             // onChange={addCity}
                                           />
                                         </div> 
