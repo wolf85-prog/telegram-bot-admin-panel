@@ -881,7 +881,16 @@ const Companys = () => {
                                         //onInputChange={(e)=>console.log(e.target.value)}
                                         onChange={(event, newValue) => {
                                             if (newValue && newValue.length) {
-                                                setCity(newValue);
+                                                //setCity(newValue);
+                                                setManagersObj((users) => {                                           
+                                                  let userIndex = users.findIndex((user) => JSON.parse(user).fio === JSON.parse(item).fio);
+                                                  const usersCopy = JSON.parse(JSON.stringify(users));			
+                                            	                                           
+                                                  const userObject = usersCopy[userIndex];
+                                                  usersCopy[userIndex] = JSON.stringify({ ...userObject, ['fio']: newValue});
+                                            
+                                                  return usersCopy;
+                                                });
                                             }  
                                         }}
                                         value={item ? JSON.parse(item).fio : ''} 
