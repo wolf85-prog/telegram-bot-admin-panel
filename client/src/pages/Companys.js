@@ -64,7 +64,7 @@ import { getManager } from 'src/http/managerAPI';
 //Workers.js
 const Companys = () => {
 
-  const { companys, setCompanys, companysCount, managersAll, setManagersAll } = useUsersContext();
+  const { companys, setCompanys, companysAll, companysCount, managersAll, setManagersAll } = useUsersContext();
   const [sortedCities, setSortedCities] = useState([])
   const [companyCount, setCompanyCount] = useState([]); 
   const [userbots, setUserbots] = useState([]);
@@ -157,7 +157,7 @@ const Companys = () => {
 
   //поиск
   useEffect(() => {
-		const filteredData = companys.filter(user=> (user.title)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+		const filteredData = companysAll.filter(user=> (user.title)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setCompanys(text === '' ? companyCount : filteredData); 
     //console.log("specialist", specialist)
     setShowClear(text === '' ? false : true)
@@ -264,20 +264,35 @@ const Companys = () => {
 
   const clickAdd = async()=> {   
 
-    setShowProfile(true)
+    //setShowProfile(true)
     //setModalWorker(worker)
-    setShowSearch(false)
-    setShowClear(false)
+    //setShowSearch(false)
+    //setShowClear(false)
 
     const data = {
-      fio: 'ФИО',
+      title: 'Новая компания',
     }
-    // const res = await addSpecialist(data)
+    const res = await addCompany(data)
 
-    // console.log("res: ", res)
+    //контекст
     // if (res) {
     //   await addNewSpecialist(res?.id, res?.fio, res?.profile)
     // }
+
+    companys.push({
+      id: res?.id, 
+      title: res?.fio, 
+      managers: '',  
+      comment: '',
+
+    })
+
+    const sortedUser = [...companys].sort((a, b) => {       
+      var idA = a.id, idB = b.id 
+      return idB-idA  //сортировка по возрастанию 
+    })
+
+    setCompanys(sortedUser)
   }
   
   //сортировка по ФИО
@@ -630,7 +645,7 @@ const Companys = () => {
                                       <CTableRow>
                                         <CTableHeaderCell className='myid-th widthSpace'>№</CTableHeaderCell> 
                                         <CTableHeaderCell className='myfio-th widthSpace'>Название компании</CTableHeaderCell>  
-                                        <CTableHeaderCell className='my-th widthSpace'>Город</CTableHeaderCell>  
+                                        <CTableHeaderCell className='my-th widthCity'>Город</CTableHeaderCell>  
                                         <CTableHeaderCell className='my-th widthSpace'>Менеджеры</CTableHeaderCell>                                           
                                         <CTableHeaderCell className='my-th widthSpace'>Адрес офиса</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Адрес склада</CTableHeaderCell>

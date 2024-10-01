@@ -139,6 +139,10 @@ th.widthTg {
   min-width: 110px;
 }
 
+th.widthCity {
+  min-width: 130px;
+}
+
 
 .fixed-table-container {
     width: 100%;

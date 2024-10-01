@@ -34,7 +34,7 @@ const AppSidebar = () => {
 
   const [count, setCount ] = useState(0);
   const [countMesW, setCountMesW ] = useState(0);
-  console.log("countMessageRent: ", countMessageRent)
+  //console.log("countMessageRent: ", countMessageRent)
 
 
   // useEffect(async() => {

@@ -162,7 +162,7 @@ const Managers = () => {
   //поиск
   //поиск
   useEffect(() => {
-		const filteredData = managersAll.filter(user=> (user.fio)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+		const filteredData = managersAll.filter(user=> (user.fio + user.chatId + user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setManagers(text === '' ? managerCount : filteredData); 
     //console.log("specialist", specialist)
     setShowClear(text === '' ? false : true)
@@ -281,20 +281,37 @@ const Managers = () => {
 
   const clickAdd = async()=> {   
 
-    setShowProfile(true)
+    //setShowProfile(true)
     //setModalWorker(worker)
-    setShowSearch(false)
-    setShowClear(false)
+    //setShowSearch(false)
+    //setShowClear(false)
 
     const data = {
       fio: 'ФИО',
     }
-    // const res = await addSpecialist(data)
+    const res = await addManager(data)
 
-    // console.log("res: ", res)
+    //контекст
     // if (res) {
     //   await addNewSpecialist(res?.id, res?.fio, res?.profile)
     // }
+
+    managers.push({
+      id: res?.id, 
+      fio: res?.fio, 
+      sfera: '',
+      company: '', 
+      comteg: '',  
+      comment: '',
+
+    })
+
+    const sortedUser = [...managers].sort((a, b) => {       
+      var idA = a.id, idB = b.id 
+      return idB-idA  //сортировка по возрастанию 
+    })
+
+    setManagers(sortedUser)
   }
   
   //сортировка по ФИО

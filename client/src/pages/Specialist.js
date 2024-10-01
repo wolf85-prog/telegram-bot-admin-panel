@@ -332,10 +332,31 @@ const Specialist = () => {
     }
     const res = await addSpecialist(data)
 
-    console.log("res: ", res)
-    if (res) {
-      await addNewSpecialist(res?.id, res?.fio, res?.profile)
-    }
+    // console.log("res: ", res)
+    // if (res) {
+    //   await addNewSpecialist(res?.id, res?.fio, res?.profile)
+    // }
+
+    specialist.push(
+      {
+        id: res?.id, 
+        fio: res?.fio, 
+        speclist: '',
+        skill: '',
+        merch: '',  
+        company: '', 
+        comteg: '', 
+        comteg2: '', 
+        comment: '', 
+        comment2: '', 
+    })
+
+    const sortedUser = [...specialist].sort((a, b) => {       
+      var idA = a.id, idB = b.id 
+      return idB-idA  //сортировка по возрастанию 
+    })
+
+    setSpecialist(sortedUser)
   }
 
   const clickFio = (worker)=> {
@@ -386,8 +407,12 @@ const Specialist = () => {
     setDogovor(worker.dogovor)
     setSamozanjatost(worker.samozanjatost)
     setPassportScan(worker.passportScan)
-    setNik(userbots.find((user) => user.chatId.toString() === worker.chatId.toString())?.username)
-    setDateReg(userbots.find((user) => user.chatId.toString() === worker.chatId.toString())?.createdAt)
+    
+    if (userbots) {
+      setNik(userbots.find((user) => user.chatId?.toString() === worker.chatId?.toString())?.username)
+      setDateReg(userbots.find((user) => user.chatId?.toString() === worker.chatId?.toString())?.createdAt)
+    }
+    
 
     setBlock(worker.blockW)
     setBlock18(worker.block18)

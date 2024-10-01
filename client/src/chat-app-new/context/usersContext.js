@@ -66,6 +66,7 @@ const UsersProvider = ({ children }) => {
 
 	const [specialistAll, setSpecialistAll] = useState([]);
 	const [managersAll, setManagersAll]= useState([]); // менеджеры (заказчики)
+	const [companysAll, setCompanysAll]= useState([]); // менеджеры (заказчики)
 	const [usersOnline, setUsersOnline] = useState([]);
 	const [managers, setManagers]= useState([]); // менеджеры (заказчики)
 	const [companys, setCompanys]= useState([]);
@@ -456,7 +457,7 @@ useEffect(() => {
 		
 			//2 все пользователи бота
 			let wuserbots = await getWContacts();
-			console.log("wuserbots size: ", wuserbots.length)
+			//console.log("wuserbots size: ", wuserbots.length)
 			const arrayContact = []
 
 			//3 все беседы (conversations)
@@ -589,7 +590,7 @@ useEffect(() => {
 						return dateB-dateA  //сортировка по убывающей дате  
 					})
 
-					console.log("sortedClients: ", sortedClients.length)
+					//console.log("sortedClients: ", sortedClients.length)
 		
 					setUserWorkers(sortedClients)
 
@@ -717,10 +718,80 @@ useEffect(() => {
 	//get Companys
 	useEffect(() => {
     	const fetchData = async () => {
-			let response = await getCompany();
-      		console.log("companys context: ", response.length)
+			let company = await getCompany();
+      		console.log("companys context: ", company)
 
-			setCompanys(response)
+			  let arrManagers = []
+			  let managersDB = await getManager()
+			  
+			  managersDB.map((item, index)=> {
+				const obj = {
+				  value: index,
+				  label: item.fio,
+				}
+				arrManagers.push(obj)
+			  })
+
+			  //setManagersData(arrManagers)
+			  //console.log("managersDB: ", arrManagers)
+		
+			  let arrCompanys = []
+		
+			  company.map(async (user, i) => {
+				const d = new Date(user.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+				const d2 = new Date(d)
+				const month = String(d2.getMonth()+1).padStart(2, "0");
+				const day = String(d2.getDate()).padStart(2, "0");
+				const chas = d2.getHours();
+				const min = String(d2.getMinutes()).padStart(2, "0");
+				const newDate = `${day}.${month} ${chas}:${min}`;
+		
+		
+				let str_comment = ''
+				user.comment && JSON.parse(user.comment).map((item, index)=> {
+				  str_comment = str_comment + item.content + (index+1 !== JSON.parse(user.comment).length ? ', ' : '')
+				})
+		
+				let str_manager = ''
+				let str_manager2 = ''
+				user.managers && JSON.parse(user.managers).map((item, index)=> {
+				  const fioManager = managersDB.find(item2 => item2.GUID === item.name)
+				  if (fioManager) {
+					str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+					str_manager2 = str_manager2 + JSON.stringify(fioManager) + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+				  }
+				})
+		
+		
+				const newUser = {
+				  id: user.id,
+				  title: user.title,
+				  city: user.city,
+				  office: user.office,
+				  sklad: user.sklad,
+				  comment: str_comment,
+				  managers: str_manager,
+				  managersObj: str_manager2,
+				}
+				arrCompanys.push(newUser)
+		
+				//если элемент массива последний
+				if (i === company.length-1) {
+					const sortedUser = [...arrCompanys].sort((a, b) => {       
+						var idA = a.id, idB = b.id 
+						return idB-idA  //сортировка по возрастанию 
+					})
+		
+					setCompanysAll(sortedUser)
+				  	//setCompanys(sortedUser)
+							
+					//сохранить кэш
+					//localStorage.setItem("specialist", JSON.stringify(sortedUser));
+				}
+		
+			  })
+
+			//setCompanysAll(response)
 		}
 
 	  	fetchData();
@@ -2134,7 +2205,9 @@ function isObjectEmpty(obj) {
 			companys,
 			setCompanys,
 			managersAll, 
-			setManagersAll
+			setManagersAll,
+			companysAll,
+			setCompanysAll
 		}}>
 			{children}
 		</UsersContext.Provider>
