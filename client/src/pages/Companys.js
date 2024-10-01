@@ -219,6 +219,9 @@ const Companys = () => {
           if (fioManager) {
             str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
             str_manager2 = str_manager2 + JSON.stringify(fioManager) + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+          } else {
+            str_manager = str_manager + 'ФИО' + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+            str_manager2 = str_manager2 + JSON.stringify({fio: 'ФИО', dolgnost: 'менеджер', phone: ''}) + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
           }
         })
 
@@ -273,6 +276,7 @@ const Companys = () => {
       title: 'Новая компания',
     }
     const res = await addCompany(data)
+    console.log("res: ", res)
 
     //контекст
     // if (res) {
@@ -550,6 +554,7 @@ const Companys = () => {
     setBlock(!block)
   } 
 
+  //открыть компанию
   const clickTitle = (user)=> {
     console.log("user: ", user)
 
@@ -569,17 +574,14 @@ const Companys = () => {
     setManagersObj(user.managersObj ? user.managersObj.split(', ') : [])
 
     // setPhone(user.phone)
-
     // setProjects(user.projects)
     // setInn(user.inn === null ? '' : user.inn)
     // setComteg(user.comteg ? user.comteg.split(',') : [])
     // setEmail(user.email)
     // setComment(user.comment)
     // setProfile(user.profile)
-
     // setDogovor(user.dogovor)
     // setBlock(user.blockW)
-
     // console.log("user", userbots.find((user) => user.chatId === worker.chatId))
   }
 
@@ -588,11 +590,12 @@ const Companys = () => {
     //setCity(e.target.value)    
   }
 
-  const addManager = (managers) => {
-    const obj = {id: 735, chatId: '', fio: '', }
-    managers.push(JSON.stringify(obj))
-    console.log(managers)
-    setManagersObj(managers)
+  //добавить менеджера
+  const addManager = () => {
+    const obj = {id: '', chatId: '', fio: '', }
+    managersObj.push(JSON.stringify(obj))
+    console.log(managersObj)
+    setManagersObj(managersObj)
   }
 
   return (
@@ -884,8 +887,8 @@ const Companys = () => {
                                         //         setCity(newValue);
                                         //     }  
                                         // }}
-                                        value={JSON.parse(item).fio} 
-                                        inputValue={JSON.parse(item).fio}
+                                        value={item ? JSON.parse(item).fio : ''} 
+                                        inputValue={item ? JSON.parse(item).fio : ''}
                                         renderInput={(params) => (
                                         <div ref={params.InputProps.ref} style={{position: 'relative'}}>
                                             <input 
@@ -951,7 +954,7 @@ const Companys = () => {
 
                                   {/* добавить менеджера */}
                                   <div style={{textAlign: 'left', display: showManagers ? 'block' : 'none'}}>
-                                    <CButton onClick={()=>addManager(managersObj)} className='uley_add_user' style={{marginBottom: '20px', marginLeft: '0'}}>
+                                    <CButton onClick={()=>addManager()} className='uley_add_user' style={{marginBottom: '20px', marginLeft: '0'}}>
                                       <span style={{position: 'absolute', top: '-12px', left: '6px', fontSize: '36px', color: '#2d2e38'}}>
                                       +</span>
                                     </CButton>
