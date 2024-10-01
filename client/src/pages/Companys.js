@@ -588,8 +588,11 @@ const Companys = () => {
     //setCity(e.target.value)    
   }
 
-  const addManager = () => {
-
+  const addManager = (managers) => {
+    const obj = {id: 735, chatId: '', fio: '', }
+    managers.push(JSON.stringify(obj))
+    console.log(managers)
+    setManagersObj(managers)
   }
 
   return (
@@ -948,7 +951,7 @@ const Companys = () => {
 
                                   {/* добавить менеджера */}
                                   <div style={{textAlign: 'left', display: showManagers ? 'block' : 'none'}}>
-                                    <CButton onClick={addManager} className='uley_add_user' style={{marginBottom: '20px', marginLeft: '0'}}>
+                                    <CButton onClick={()=>addManager(managersObj)} className='uley_add_user' style={{marginBottom: '20px', marginLeft: '0'}}>
                                       <span style={{position: 'absolute', top: '-12px', left: '6px', fontSize: '36px', color: '#2d2e38'}}>
                                       +</span>
                                     </CButton>
