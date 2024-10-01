@@ -973,7 +973,14 @@ const Companys = () => {
                                       <div>
                                       {/* <label>Должность</label> */}
                                         <div className="text-field">
-                                          <input className="text-field__input" type="text" name="email" id="email" value={JSON.parse(item).dolgnost} style={{width: '130px'}}/>
+                                          {/* <input className="text-field__input" type="text" name="email" id="email" value={JSON.parse(item).dolgnost} style={{width: '130px'}}/> */}
+                                          <MyDropdown
+                                            style={{backgroundColor: '#131c21', width: '130px'}}
+                                            options={dolgnostData}
+                                            selected={JSON.parse(item).dolgnost}
+                                            //setSelected={}
+                                            // onChange={addCity}
+                                          />
                                         </div> 
                                       </div>
                                       {/* phone */}
