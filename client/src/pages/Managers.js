@@ -314,25 +314,25 @@ const Managers = () => {
     }
     console.log("check sort", countPress + 1)
 
-    // if (countPress + 1 === 1) {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
-    //     return (fioA < fioB) ? -1 : (fioA > fioB) ? 1 : 0;  //сортировка по возрастанию 
-    //   })
-    //   setSpecialist(sortedWorker)
-    // } else if (countPress + 1 === 2) {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
-    //     return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
-    //   })
-    //   setSpecialist(sortedWorker)
-    // } else {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var fioA = a.id, fioB = b.id 
-    //     return fioB-fioA  //сортировка по убыванию 
-    //   })
-    //   setSpecialist(sortedWorker)
-    //}
+    if (countPress + 1 === 1) {
+      const sortedWorker = [...managers].sort((a, b) => {       
+        var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
+        return (fioA < fioB) ? -1 : (fioA > fioB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setManagers(sortedWorker)
+    } else if (countPress + 1 === 2) {
+      const sortedWorker = [...managers].sort((a, b) => {       
+        var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
+        return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setManagers(sortedWorker)
+    } else {
+      const sortedWorker = [...managers].sort((a, b) => {       
+        var fioA = a.id, fioB = b.id 
+        return fioB-fioA  //сортировка по убыванию 
+      })
+      setManagers(sortedWorker)
+    }
     
   }
 
@@ -345,27 +345,27 @@ const Managers = () => {
     }
     console.log("check sort", countPressTG + 1)
 
-    // if (countPressTG + 1 === 1) {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var tgA = a.telegram, tgB = b.telegram 
-    //     return (tgA < tgB) ? -1 : (tgA > tgB) ? 1 : 0;  //сортировка по возрастанию 
-    //   })
-    //   setSpecialist(sortedWorker)
-    // } else if (countPressTG + 1 === 2) {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var tgA = a.telegram, tgB = b.telegram 
-    //     return (tgA > tgB) ? -1 : (tgA < tgB) ? 1 : 0;  //сортировка по возрастанию 
-    //   })
-    //   setSpecialist(sortedWorker)
-    // } else {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var fioA = a.id, fioB = b.id 
-    //     return fioB-fioA  //сортировка по убыванию 
-    //   })
+    if (countPressTG + 1 === 1) {
+      const sortedWorker = [...managers].sort((a, b) => {       
+        var tgA = a.telegram, tgB = b.telegram 
+        return (tgA < tgB) ? -1 : (tgA > tgB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setManagers(sortedWorker)
+    } else if (countPressTG + 1 === 2) {
+      const sortedWorker = [...managers].sort((a, b) => {       
+        var tgA = a.telegram, tgB = b.telegram 
+        return (tgA > tgB) ? -1 : (tgA < tgB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setManagers(sortedWorker)
+    } else {
+      const sortedWorker = [...managers].sort((a, b) => {       
+        var fioA = a.id, fioB = b.id 
+        return fioB-fioA  //сортировка по убыванию 
+      })
 
-    //   //setSpecialistCount(sortedWorker)
-    //   setSpecialist(sortedWorker)
-    //}
+      //setManagerCount(sortedWorker)
+      setManagers(sortedWorker)
+    }
     
   }
 
@@ -378,27 +378,27 @@ const Managers = () => {
     }
     //console.log("check sort", countPressTG + 1)
 
-    // if (countPressCity + 1 === 1) {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var cityA = a.city, cityB = b.city
-    //     return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
-    //   })
-    //   setSpecialist(sortedWorker)
-    // } else if (countPressCity + 1 === 2) {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var cityA = a.city, cityB = b.city
-    //     return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
-    //   })
-    //   setSpecialist(sortedWorker)
-    // } else {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var idA = a.id, idB = b.id 
-    //     return idB-idA  //сортировка по убыванию 
-    //   })
+    if (countPressCity + 1 === 1) {
+      const sortedWorker = [...managers].sort((a, b) => {       
+        var cityA = a.city, cityB = b.city
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setManagers(sortedWorker)
+    } else if (countPressCity + 1 === 2) {
+      const sortedWorker = [...managers].sort((a, b) => {       
+        var cityA = a.city, cityB = b.city
+        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setManagers(sortedWorker)
+    } else {
+      const sortedWorker = [...companys].sort((a, b) => {       
+        var idA = a.id, idB = b.id 
+        return idB-idA  //сортировка по убыванию 
+      })
 
-    //   //setSpecialistCount(sortedWorker)
-    //   setSpecialist(sortedWorker)
-    //}
+      //setManagerCount(sortedWorker)
+      setManagers(sortedWorker)
+    }
     
   }
 
