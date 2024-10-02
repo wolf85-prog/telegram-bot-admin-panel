@@ -67,6 +67,8 @@ const Managers = () => {
   const [managerCount, setManagerCount] = useState([]);
   const [companysData, setCompanysData] = useState([]);
 
+  const [companyName, setCompanyName] = useState('');
+
   const [projects, setProjects] = useState(''); 
   const [userbots, setUserbots] = useState([]);
 
@@ -690,10 +692,10 @@ const clickNext = async() => {
 
 
   const onChangeCompany = (e) => {
-    console.log(e.target.value)
-    setCompany(e.target.value) 
+    console.log(e)
     const comp = companysAll.find(item=> item.title === e.target.value)
     if (comp) {
+      setCompany(comp.id) 
       setInn(comp.inn) 
     }
       
@@ -793,7 +795,7 @@ const clickNext = async() => {
                                           {item.city ? (item.city.length > 30 ? item.city.substr(0, 30) + '...' : item.city) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.company ? (item.company.length > 20 ? item.company.substr(0, 20) + '...' : item.company) : ''}
+                                          {item.companyName ? (item.companyName.length > 20 ? item.companyName.substr(0, 20) + '...' : item.companyName) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                             {item.dolgnost}
@@ -998,20 +1000,22 @@ const clickNext = async() => {
                                         id="custom-input-demo"
                                         options={companysData}
                                         style={{width: '100%', padding: '0'}}
-                                        onInputChange={(e)=>onChangeCompany(e)}
+                                        //onInputChange={(e)=>onChangeCompany(e)}
                                         //onInputChange={(e)=>console.log(e.target.value)}
                                         onChange={(event, newValue) => {
                                             if (newValue && newValue.length) {
-                                                setCompany(newValue);
+                                                
                                                 const comp = companysAll.find(item=> item.title === newValue)
                                                 console.log("comp: ", comp)
                                                 if (comp) {
+                                                  setCompanyName(comp.title)
+                                                  setCompany(comp.id);
                                                   setInn(comp.inn) 
                                                 }
                                             }  
                                         }}
-                                        value={company}
-                                        inputValue={company}
+                                        value={companyName}
+                                        inputValue={companyName}
                                         renderInput={(params) => (
                                         <div ref={params.InputProps.ref} style={{position: 'relative'}}>
                                             <input 

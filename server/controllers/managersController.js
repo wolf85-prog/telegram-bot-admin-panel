@@ -104,7 +104,7 @@ class ManagersController {
                     skill,
                     promoId: promo,
                     merch,
-                    company,
+                    companyId: company,
                     comteg,
                     comteg2,
                     comment,
