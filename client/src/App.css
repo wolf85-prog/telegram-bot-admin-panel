@@ -92,7 +92,7 @@ th.myfio-th {
   background: #2b3337;
   position: sticky;
   top: 0px;
-  min-width: 100px;
+  min-width: 250px;
   left: 50px;
   z-index: 2;
 }
@@ -131,6 +131,12 @@ th.widthSpace {
     width: 1%; /* Форсирует сужение ячейки */
 }
 
+th.widthFio {
+  /* min-width: 250px;
+  max-width: 250px; */
+  width: 250px;
+}
+
 th.widthPhone {
   min-width: 170px;
 }
@@ -140,7 +146,11 @@ th.widthTg {
 }
 
 th.widthCity {
-  min-width: 130px;
+  width: 130px;
+}
+
+th.widthCompany {
+  width: 130px;
 }
 
 

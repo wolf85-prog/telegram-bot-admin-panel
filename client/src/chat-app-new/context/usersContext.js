@@ -390,7 +390,7 @@ useEffect(() => {
 			//0 все специалисты
 			//let all = await getWorkers()
 			let all = await getSpecialist()
-			console.log("specialist all: ", all)
+			//console.log("specialist all: ", all)
 			const arrayWorkerAll = []
 		
 			all.map(async (user) => {
@@ -425,7 +425,7 @@ useEffect(() => {
 			//1 все специалисты 100
 			//let response = await getWorkersCount(100, workers.length);
 			let response = await getSpecCount(100, specialist.length);
-			console.log("specialist 100: ", response)
+			//console.log("specialist 100: ", response)
 		
 			const arrayWorker = []
 		
@@ -615,7 +615,7 @@ useEffect(() => {
     const fetchData = async () => {
       // 1 Все специалисты
       const res = await getSpecialist()
-	  console.log("getSpecialist: ", res)
+	  //console.log("getSpecialist: ", res)
       let arrAllWorkers = []
       res.map(async (worker, i) => {
         let str_spec = ''
@@ -773,6 +773,7 @@ useEffect(() => {
 				  managers: str_manager,
 				  managersObj: str_manager2,
 				  inn: user.inn,
+				  GUID: user.GUID,
 				}
 				arrCompanys.push(newUser)
 		

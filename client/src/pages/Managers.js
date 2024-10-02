@@ -213,16 +213,16 @@ const Managers = () => {
           str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
         })
 
-        let str_company = ''
-        // user.company && JSON.parse(user.company).map((item, index)=> {
-        //   str_company = str_company + item.name + (index+1 !== JSON.parse(user.company).length ? ', ' : '')
-        // })
-
         let str_comment = ''
         user.comment && JSON.parse(user.comment).map((item, index)=> {
           str_comment = str_comment + item.content + (index+1 !== JSON.parse(user.comment).length ? ', ' : '')
         })
 
+        let str_company = ''
+        const comp = companysAll.find(item=> item.id === user.companyId || item.GUID === user.companyId)
+        if (comp) {
+          str_company = comp.title
+        }
 
         const newUser = {
           id: user.id,
@@ -436,9 +436,10 @@ const clickNext = async() => {
       })
 
       let str_company = ''
-      // user.company && JSON.parse(user.company).map((item, index)=> {
-      //   str_company = str_company + item.name + (index+1 !== JSON.parse(user.company).length ? ', ' : '')
-      // })
+      const comp = companysAll.find(item=> item.id === user.companyId || item.GUID === user.companyId)
+      if (comp) {
+        str_company = comp.title
+      }
 
       let str_comment = ''
       user.comment && JSON.parse(user.comment).map((item, index)=> {
@@ -500,6 +501,7 @@ const clickNext = async() => {
     setId(user.id)
     setFio(user.fio)
     setCity(user.city ? user.city : '')
+    setCompany(user.company)
     // setAge(worker.age ? worker.age.split('-')[0] : '')
     // setAge2(worker.age ? parseInt(currentYear) - parseInt(worker.age ? worker.age.split('-')[0] : 0) : '')
 
@@ -585,7 +587,7 @@ const clickNext = async() => {
   }
 
   //сохранить профиль
-  const saveProfile = async(id) => { 
+  const saveProfile = async(id, companyId) => { 
       setShowClose(true)
       console.log(id)
 
@@ -619,6 +621,12 @@ const clickNext = async() => {
       strComment = comment
       commentArr.push(obj1)
 
+      let str_company = ''
+      const comp = companysAll.find(item=> item.id === companyId)
+      if (comp) {
+        str_company = comp.title
+      }
+
       const saveData = {
         fio,
         chatId: telegram,
@@ -649,7 +657,7 @@ const clickNext = async() => {
           city: city, 
           sfera: strSfera,
           dolgnost: dolgnost,
-          company,
+          company: str_company,
           comteg: strComteg,
           comment: strComment,   
           profile,
@@ -758,16 +766,14 @@ const clickNext = async() => {
                                     <CTableHead className='table-light'>
                                       <CTableRow>
                                         <CTableHeaderCell className='myid-th widthSpace'>№</CTableHeaderCell> 
-                                        <CTableHeaderCell className='myfio-th widthSpace' onClick={onSortFio}>ФИО</CTableHeaderCell>  
+                                        <CTableHeaderCell className='myfio-th widthFio' onClick={onSortFio}>ФИО</CTableHeaderCell>  
                                         <CTableHeaderCell className='my-th widthTg' onClick={onSortTG}>Телеграм</CTableHeaderCell> 
-                                        <CTableHeaderCell className='my-th widthSpace' onClick={onSortCity}>Город</CTableHeaderCell>                                           
-                                        <CTableHeaderCell className='my-th widthSpace'>Компания</CTableHeaderCell>
+                                        <CTableHeaderCell className='my-th widthCity' onClick={onSortCity}>Город</CTableHeaderCell>                                           
+                                        <CTableHeaderCell className='my-th widthCompany'>Компания</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Должность</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthPhone'>Телефон</CTableHeaderCell> 
-                                        <CTableHeaderCell className='my-th widthPhone'>Телефон №2</CTableHeaderCell> 
-                                        
+                                        <CTableHeaderCell className='my-th widthPhone'>Телефон №2</CTableHeaderCell>                                        
                                         <CTableHeaderCell className='my-th widthSpace'>Проекты</CTableHeaderCell>                         
-
                                         <CTableHeaderCell className='my-th widthSpace'>Комтег</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Комментарии</CTableHeaderCell>                     
                                         <CTableHeaderCell className='my-th widthSpace'>Офис</CTableHeaderCell>
@@ -795,7 +801,7 @@ const clickNext = async() => {
                                           {item.city ? (item.city.length > 30 ? item.city.substr(0, 30) + '...' : item.city) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.companyName ? (item.companyName.length > 20 ? item.companyName.substr(0, 20) + '...' : item.companyName) : ''}
+                                          {item.company ? (item.company.length > 20 ? item.company.substr(0, 20) + '...' : item.company) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                             {item.dolgnost}
@@ -953,7 +959,7 @@ const clickNext = async() => {
                                       <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Disketa} onClick={()=>saveProfile(id, company)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                     </div>
                                   </div>
