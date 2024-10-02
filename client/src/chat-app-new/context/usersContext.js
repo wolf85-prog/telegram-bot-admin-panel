@@ -772,6 +772,7 @@ useEffect(() => {
 				  comment: str_comment,
 				  managers: str_manager,
 				  managersObj: str_manager2,
+				  inn: user.inn,
 				}
 				arrCompanys.push(newUser)
 		

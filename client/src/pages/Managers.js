@@ -62,7 +62,7 @@ import { uploadAvatar, uploadFile } from '../http/chatAPI';
 //Workers.js
 const Managers = () => {
 
-  const { managers, setManagers, managersCount, managersAll, setManagersAll } = useUsersContext();
+  const { managers, setManagers, managersCount, managersAll, setManagersAll, companysAll } = useUsersContext();
   const [sortedCities, setSortedCities] = useState([])
   const [managerCount, setManagerCount] = useState([]);
   const [companysData, setCompanysData] = useState([]);
@@ -98,24 +98,19 @@ const Managers = () => {
   const [id, setId] = useState('');
   const [fio, setFio] = useState('');
   const [city, setCity] = useState('');
-  const [age, setAge] = useState('');
-  const [age2, setAge2] = useState(0);
-  const [speclist, setSpeclist] = useState([]);
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
   const [telegram, setTelegram] = useState('');
   const [reyting, setReyting] = useState('');
   const [rank, setRank] = useState('');
   const [company, setCompany] = useState('');
-  const [inn, setInn] = useState('');
   const [comteg, setComteg] = useState([]);
   const [sfera, setSfera] = useState([]);
   const [dolgnost, setDolgnost] = useState('');
-
+  const [inn, setInn] = useState('');
   const [email, setEmail] = useState('');
   const [comment, setComment] = useState('');
   const [dogovor, setDogovor] = useState('');
-  const [samozanjatost, setSamozanjatost] = useState('');
   const [nik, setNik] = useState('');
   const [dateReg, setDateReg] = useState('');
   const [profile, setProfile] = useState('');
@@ -591,13 +586,87 @@ const clickNext = async() => {
   const saveProfile = async(id) => { 
       setShowClose(true)
       console.log(id)
-  
-      let specArr = []
-      let strSpec = ''
 
+      let sferaArr = []
+      let strSfera = ''
+      sfera.map((item, index)=> {
+        const obj = {
+          name: item,
+        }
+        strSfera = strSfera + item + (index+1 !== sfera.length ? ', ' : '')
+        sferaArr.push(obj)
+      })
+
+
+      let comtegArr = []
+      let strComteg = ''
+      comteg.map((item, index)=> {
+        const obj = {
+          name: item,
+        }
+        strComteg = strComteg + item + (index+1 !== comteg.length ? ', ' : '')
+        comtegArr.push(obj)
+      })
+
+      //комментарии 1
+      let commentArr = []
+      let strComment = ''
+      const obj1 = {
+        content: comment,
+      }
+      strComment = comment
+      commentArr.push(obj1)
+
+      const saveData = {
+        fio,
+        chatId: telegram,
+        phone, 
+        phone2,
+        city, 
+        sfera: JSON.stringify(sferaArr),
+        dolgnost: dolgnost,
+        company,
+        comteg: JSON.stringify(comtegArr),
+        comment: JSON.stringify(commentArr), 
+        profile, 
+        dogovor: dogovor ? '🟢' : '🔴', 
+        email: email, 
+      }
+      console.log(saveData)
   
+      setManagers((man) => {	 
+        let userIndex = man.findIndex((item) => item.id === id);
+        const usersCopy = JSON.parse(JSON.stringify(man));
+  
+        const userObject = usersCopy[userIndex];
+        usersCopy[userIndex] = { ...userObject, 
+          fio, 
+          chatId: telegram,
+          phone, 
+          phone2,
+          city: city, 
+          sfera: strSfera,
+          dolgnost: dolgnost,
+          company,
+          comteg: strComteg,
+          comment: strComment,   
+          profile,
+          email,
+        };
+  
+        console.log("update user: ", usersCopy[userIndex])
+  
+        return usersCopy;
+      });
+  
+      //сохранить изменения в базе
+      await editManager(saveData, id)
   
       addToast(exampleToast) //ваши данные сохранены
+
+      setTimeout(()=> {
+        closeProfile()
+      }, 2000)
   }
   
   const blockedProfile = () => { 
@@ -622,8 +691,18 @@ const clickNext = async() => {
 
   const onChangeCompany = (e) => {
     console.log(e.target.value)
-    setCompany(e.target.value)    
+    setCompany(e.target.value) 
+    const comp = companysAll.find(item=> item.title === e.target.value)
+    if (comp) {
+      setInn(comp.inn) 
+    }
+      
   }
+  
+  const handleTg = event => {
+    const result = event.target.value.replace(/\D/g, '');
+    setTelegram(result);
+  };
 
   return (
     <div className='dark-theme'>
@@ -717,7 +796,7 @@ const clickNext = async() => {
                                           {item.company ? (item.company.length > 20 ? item.company.substr(0, 20) + '...' : item.company) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          
+                                            {item.dolgnost}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center">
                                             {item.phone}
@@ -746,7 +825,7 @@ const clickNext = async() => {
                                           {item.inn}
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          
+                                            {item.sfera ? (item.sfera.length > 30 ? item.sfera.substr(0, 30) + '...' : item.sfera) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
                                           {item.profile ? (item.profile.length > 30 ? item.profile.substr(0, 30) + '...' : item.profile) : ''}
@@ -838,7 +917,7 @@ const clickNext = async() => {
                                         id="inn"
                                         mask="9999-999999-99"
                                         maskChar=""
-                                        onChange={(e) => setInn(e.target.value)} 
+                                        //onChange={(e) => setInn(e.target.value)} 
                                         value={inn}
                                         placeholder=''
                                     >
@@ -849,9 +928,9 @@ const clickNext = async() => {
                                     <div>
                                       <label>Договор</label>
                                       <div style={{display: 'flex'}}>
-                                        <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
+                                        <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setDogovor(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
                                         <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
-                                          <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={samozanjatost} onChange={(e) => setSamozanjatost(e.target.value)} style={{width: '40px', padding: '0', fontSize: '20px'}}/>
+                                          <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={dogovor} onChange={(e) => setDogovor(e.target.value)} style={{width: '40px', padding: '0', fontSize: '20px'}}/>
                                         </div> 
                                       </div>
                                     </div>  
@@ -924,6 +1003,11 @@ const clickNext = async() => {
                                         onChange={(event, newValue) => {
                                             if (newValue && newValue.length) {
                                                 setCompany(newValue);
+                                                const comp = companysAll.find(item=> item.title === newValue)
+                                                console.log("comp: ", comp)
+                                                if (comp) {
+                                                  setInn(comp.inn) 
+                                                }
                                             }  
                                         }}
                                         value={company}
@@ -1102,7 +1186,7 @@ const clickNext = async() => {
                                       name="telegram" 
                                       id="telegram" 
                                       value={telegram} 
-                                      //onChange={handleTg} 
+                                      onChange={handleTg} 
                                       style={{width: '250px'}}
                                     />
                                   </div>

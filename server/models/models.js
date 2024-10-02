@@ -175,7 +175,7 @@ const Manager = sequelize.define('manager', {
     sfera: {type: DataTypes.TEXT}, 
     projects: {type: DataTypes.STRING}, 
     email: {type: DataTypes.STRING}, //почта менеджера
-    inn: {type: DataTypes.STRING}, //инн менеджера
+    inn: {type: DataTypes.STRING}, //инн компании
     comteg: {type: DataTypes.TEXT},
     comment: {type: DataTypes.TEXT}, 
     profile: {type: DataTypes.TEXT},
@@ -202,6 +202,7 @@ const Company = sequelize.define('company', {
     bugalterEmail: {type: DataTypes.STRING},
     bugalterPhone: {type: DataTypes.STRING},  
     GUID: {type: DataTypes.STRING}, 
+    inn: {type: DataTypes.STRING}, //инн компании
 })
 
 

@@ -973,33 +973,12 @@ const Companys = () => {
                                       <div>
                                       {/* <label>Должность</label> */}
                                         <div className="text-field">
-                                          {/* <input className="text-field__input" type="text" name="email" id="email" value={JSON.parse(item).dolgnost} style={{width: '130px'}}/> */}
-                                          <MyDropdown
-                                            style={{backgroundColor: '#131c21', width: '130px'}}
-                                            options={dolgnostData}
-                                            selected={JSON.parse(item).dolgnost}
-                                            setSelected={setManagersObj}
-                                            // onChange={addCity}
-                                          />
+                                          <input className="text-field__input" type="text" name="email" id="email" value={JSON.parse(item).dolgnost} style={{width: '130px'}}/>
                                         </div> 
                                       </div>
                                       {/* phone */}
                                       <div className="text-field"  style={{marginBottom: '44px'}}>
-                                          {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
-                                          <InputMask
-                                              className="text-field__input" 
-                                              style={{width: '150px'}}
-                                              type="text" 
-                                              name="phone" 
-                                              id="phone"
-                                              mask="+7 (999) 999-99-99"
-                                              disabled={!blockProfile}
-                                              maskChar=""
-                                              onChange={(e) => setPhone(e.target.value)} 
-                                              value={JSON.parse(item).phone}
-                                              placeholder=''
-                                          >
-                                          </InputMask>    
+                                        <input className="text-field__input" type="text" name="phone" id="phone" value={JSON.parse(item).phone} onChange={(e) => setPhone(e.target.value)} style={{width: '150px'}}/>  
                                       </div> 
                                     </div>
                                   ))}
