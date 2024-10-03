@@ -311,6 +311,7 @@ const Managers = () => {
           block: user.block,
         }
         arrManagers.push(newUser)
+        console.log(newUser)
 
         //если элемент массива последний
 				if (i === users.length-1) {

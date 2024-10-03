@@ -66,10 +66,17 @@ const UsersProvider = ({ children }) => {
 
 	const [specialistAll, setSpecialistAll] = useState([]);
 	const [managersAll, setManagersAll]= useState([]); // менеджеры (заказчики)
-	const [companysAll, setCompanysAll]= useState([]); // менеджеры (заказчики)
+	//const [companysAll, setCompanysAll]= useState([]); // менеджеры (заказчики)
 	const [usersOnline, setUsersOnline] = useState([]);
 	const [managers, setManagers]= useState([]); // менеджеры (заказчики)
+
 	const [companys, setCompanys]= useState([]);
+	const [companysAll, setCompanysAll] =  useState( () => {
+		const savedUserWorkers = localStorage.getItem("companys");
+	   	const parsedUserWorkers = JSON.parse(savedUserWorkers);
+	   	return parsedUserWorkers || "";
+	});  //все компании;
+
 	const [projects, setProjects] = useState([]); 
 	const [newProject, setNewProject]= useState(false);
 	const [countProjects, setCountProjects] = useState(0)
@@ -788,7 +795,7 @@ useEffect(() => {
 				  	//setCompanys(sortedUser)
 							
 					//сохранить кэш
-					//localStorage.setItem("specialist", JSON.stringify(sortedUser));
+					localStorage.setItem("companys", JSON.stringify(sortedUser));
 				}
 		
 			  })
