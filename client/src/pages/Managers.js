@@ -592,6 +592,7 @@ const clickNext = async() => {
     setOffice(user.office)
     setSklad(user.sklad)
     setBlock(user.block)
+    setShowBlacklist(user.sfera.includes('Blacklist'))
 
     if (userbots) {
       setNik(userbots.find((item) => user.chatId?.toString() === user.chatId?.toString())?.username)
