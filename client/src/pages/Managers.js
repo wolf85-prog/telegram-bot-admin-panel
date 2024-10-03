@@ -659,6 +659,7 @@ const clickNext = async() => {
         profile, 
         dogovor: dogovor ? '🟢' : '🔴', 
         email: email, 
+        block,
       }
       console.log(saveData)
   
@@ -677,7 +678,8 @@ const clickNext = async() => {
           dolgnost: dolgnost,
           company: str_company,
           comteg: strComteg,
-          comment: strComment,   
+          comment: strComment,  
+          block, 
           profile,
           email,
         };
