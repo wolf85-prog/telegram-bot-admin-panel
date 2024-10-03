@@ -1099,7 +1099,7 @@ const clickNext = async() => {
                                     </div>
 
                                     {/* phone1 */}
-                                    <div className="text-field" onMouseOver={()=>showSavePhone1(true)} onMouseOut={()=>showSavePhone1(false)}>
+                                    <div className="text-field" onMouseOver={()=>setShowSavePhone1(true)} onMouseOut={()=>setShowSavePhone1(false)}>
                                       <img 
                                         src={Disketa} 
                                         onClick={()=>{navigator.clipboard.writeText(phone)}} 
@@ -1138,7 +1138,7 @@ const clickNext = async() => {
                                     </div>
 
                                     {/* phone2 */}
-                                    <div className="text-field" onMouseOver={()=>showSavePhone2(true)} onMouseOut={()=>showSavePhone2(false)}>
+                                    <div className="text-field" onMouseOver={()=>setShowSavePhone2(true)} onMouseOut={()=>setShowSavePhone2(false)}>
                                       <img 
                                         src={Disketa} 
                                         onClick={()=>{navigator.clipboard.writeText(phone2)}} 
