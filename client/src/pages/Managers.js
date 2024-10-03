@@ -554,10 +554,10 @@ const clickNext = async() => {
     setShowMenu2(false)
 
     //убрать из списка специальностей Blacklist
-    //const res = speclist.filter(item=>item !== 'Blacklist')
-    //console.log("speclist: ", res)
+    const res = sfera.filter(item=>item !== 'Blacklist')
+    console.log("sfera: ", res)
 
-    //setSpeclist(res)
+    setSfera(res)
   }
 
   const onChangeBlacklist = () => {
@@ -565,10 +565,10 @@ const clickNext = async() => {
     setShowMenu1(false)
 
     //добавить в список специальностей Blacklist
-    // speclist.push('Blacklist')
-    // console.log("speclist: ", speclist)
+    sfera.push('Blacklist')
+    console.log("sfera: ", sfera)
 
-    // setSpeclist(speclist)
+    setSfera(sfera)
   }
 
   {/* Добавление файла */}
@@ -663,6 +663,7 @@ const clickNext = async() => {
       }
       console.log(saveData)
   
+      //сохранить в контексте
       setManagers((man) => {	 
         let userIndex = man.findIndex((item) => item.id === id);
         const usersCopy = JSON.parse(JSON.stringify(man));
@@ -1069,7 +1070,7 @@ const clickNext = async() => {
                                   <label>Сфера деятельности</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
-                                        tags={sfera}
+                                        tags={sfera.filter(item=>item !== 'Blacklist')}
                                         setTags={setSfera}
                                         options={sferaData}
                                       />
