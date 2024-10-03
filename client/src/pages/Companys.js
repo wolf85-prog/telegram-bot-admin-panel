@@ -52,7 +52,7 @@ import MyDropdown3 from 'src/components/Dropdown3/Dropdown3';
 import comtegs from 'src/data/comtegs';
 import companys from 'src/data/companys';
 import cities from 'src/data/cities';
-import dolgnostData from 'src/data/dolgnost';
+import dolgnostData from 'src/data/dolgnostData';
 import sferaData from 'src/data/sfera';
 import companyData from 'src/data/companyData';
 

@@ -51,7 +51,7 @@ import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
 import comtegs from 'src/data/comtegs';
 import companys from 'src/data/companys';
 import cities from 'src/data/cities';
-import dolgnostData from 'src/data/dolgnost';
+import dolgnostData from 'src/data/dolgnostData';
 import sferaData from 'src/data/sfera';
 import companyData from 'src/data/companyData';
 
@@ -272,7 +272,7 @@ const Managers = () => {
       setLoading(false)
 
       let wuserbots = await getContacts();
-      console.log("wuserbots: ", wuserbots)
+      //console.log("wuserbots: ", wuserbots)
       setUserbots(wuserbots)
 
       
@@ -511,18 +511,10 @@ const clickNext = async() => {
     setCity(user.city ? user.city : '')
     setCompany(user.company)
     setCompanyName(user.company)
-   
-    // setAge(worker.age ? worker.age.split('-')[0] : '')
-    // setAge2(worker.age ? parseInt(currentYear) - parseInt(worker.age ? worker.age.split('-')[0] : 0) : '')
-
-    // setSpeclist(worker.speclist ? worker.speclist.split(', ') : [])
-
-    // setShowBlacklist(worker.speclist.includes('Blacklist'))
-
+    setDolgnost(user.dolgnost)
     setPhone(user.phone)
     setPhone2(user.phone2)
     setTelegram(user.chatId)
-
     setProjects(user.projects)
     // setCompany(worker.company ? worker.company.split(',') : [])
     setInn(user.inn === null ? '' : user.inn)
@@ -530,23 +522,15 @@ const clickNext = async() => {
     setEmail(user.email)
     setComment(user.comment)
     setProfile(user.profile)
-
     setDogovor(user.dogovor)
-
     setOffice(user.office)
     setSklad(user.sklad)
-
-    // setNik(userbots.find((user) => user.chatId.toString() === worker.chatId.toString())?.username)
-    // setDateReg(userbots.find((user) => user.chatId.toString() === worker.chatId.toString())?.createdAt)
-
     setBlock(user.block)
 
     if (userbots) {
       setNik(userbots.find((item) => user.chatId?.toString() === user.chatId?.toString())?.username)
       setDateReg(userbots.find((item) => user.chatId?.toString() === user.chatId?.toString())?.createdAt)
     }
-
-    // console.log("user", userbots.find((user) => user.chatId === worker.chatId))
   }
 
   const onChangeReyting = () => {
@@ -605,7 +589,7 @@ const clickNext = async() => {
   }
 
   //сохранить профиль
-  const saveProfile = async(id, companyId) => { 
+  const saveProfile = async(id) => { 
       setShowClose(true)
       console.log(id)
 
@@ -640,7 +624,7 @@ const clickNext = async() => {
       commentArr.push(obj1)
 
       let str_company = ''
-      const comp = companysAll.find(item=> parseInt(item.id) === parseInt(companyId))
+      const comp = companysAll.find(item=> parseInt(item.id) === parseInt(company))
       if (comp) {
         str_company = comp.title
       }
@@ -653,7 +637,7 @@ const clickNext = async() => {
         city, 
         sfera: JSON.stringify(sferaArr),
         dolgnost: dolgnost,
-        company: companyId,
+        company,
         comteg: JSON.stringify(comtegArr),
         comment: JSON.stringify(commentArr), 
         profile, 
@@ -975,7 +959,7 @@ const clickNext = async() => {
                                       <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Disketa} onClick={()=>saveProfile(id, company)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                     </div>
                                   </div>
@@ -991,7 +975,7 @@ const clickNext = async() => {
                                   <div className="text-field"> 
                                       <MyDropdown
                                         style={{backgroundColor: '#131c21'}}
-                                        options={cities}
+                                        options={sortedCities}
                                         selected={city}
                                         setSelected={setCity}
                                         // onChange={addCity}
