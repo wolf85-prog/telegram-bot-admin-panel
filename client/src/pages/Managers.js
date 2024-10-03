@@ -163,7 +163,63 @@ const Managers = () => {
   //поиск
   useEffect(() => {
 		const filteredData = managersAll.filter(user=> (user.fio + user.chatId + user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
-    setManagers(text === '' ? managerCount : filteredData); 
+    
+    filteredData.map(async (user, i) => {
+
+      let str_sfera = ''
+      user.sfera && JSON.parse(user.sfera).map((item, index)=> {
+        str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
+      })
+
+      let str_komteg = ''
+      user.comteg && JSON.parse(user.comteg).map((item, index)=> {
+        str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
+      })
+
+      let str_comment = ''
+      user.comment && JSON.parse(user.comment).map((item, index)=> {
+        str_comment = str_comment + item.content + (index+1 !== JSON.parse(user.comment).length ? ', ' : '')
+      })
+
+      let str_company = ''
+      let str_company_name = ''
+      const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.companyId))
+      if (comp) {
+        str_company = comp.id
+        str_company_name = comp.title
+      }
+
+      let arr = []
+
+      const newUser = {
+        id: user.id,
+        fio: user.fio,
+        chatId: user.chatId, 
+        phone: user.phone, 
+        phone2: user.phone2,
+        city: user.city, 
+        sfera: str_sfera,
+        dolgnost: user.dolgnost,
+        company: str_company, 
+        companyName: str_company_name,
+        comteg: str_komteg, 
+        comment: str_comment, 
+        inn: user.inn, 
+        profile: user.profile, 
+        dogovor: user.dogovor ? '🟢' : '🔴', 
+        email: user.email, 
+        projects: user.projects,
+        block: user.block,
+      }
+      arr.push(newUser)
+
+      //если элемент массива последний
+      if (i === filteredData.length-1) {
+        setManagers(text === '' ? managerCount : arr)
+      }
+    })  
+    
+    //setManagers(text === '' ? managerCount : filteredData); 
     //console.log("specialist", specialist)
     setShowClear(text === '' ? false : true)
   }, [text]);
@@ -227,9 +283,11 @@ const Managers = () => {
         })
 
         let str_company = ''
+        let str_company_name = ''
         const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.companyId))
         if (comp) {
-          str_company = comp.title
+          str_company = comp.id
+          str_company_name = comp.title
         }
 
         const newUser = {
@@ -242,6 +300,7 @@ const Managers = () => {
           sfera: str_sfera,
           dolgnost: user.dolgnost,
           company: str_company, 
+          companyName: str_company_name,
           comteg: str_komteg, 
           comment: str_comment, 
           inn: user.inn, 
@@ -446,9 +505,11 @@ const clickNext = async() => {
       })
 
       let str_company = ''
+      let str_company_name = ''
       const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.companyId))
       if (comp) {
-        str_company = comp.title
+        str_company = comp.id
+        str_company_name = comp.title
       }
 
       let str_comment = ''
@@ -467,6 +528,7 @@ const clickNext = async() => {
         sfera: str_sfera,
         dolgnost: user.dolgnost,
         company: str_company, 
+        companyName: str_company_name,
         comteg: str_komteg, 
         comment: str_comment, 
         inn: user.inn, 
@@ -512,8 +574,9 @@ const clickNext = async() => {
     setFio(user.fio)
     setCity(user.city ? user.city : '')
     setCompany(user.company)
-    setCompanyName(user.company)
+    setCompanyName(user.companyName)
     setDolgnost(user.dolgnost)
+    setSfera(user.sfera ? user.sfera.split(',') : [])
     setPhone(user.phone)
     setPhone2(user.phone2)
     setTelegram(user.chatId)
@@ -626,9 +689,11 @@ const clickNext = async() => {
       commentArr.push(obj1)
 
       let str_company = ''
+      let str_company_name = ''
       const comp = companysAll.find(item=> parseInt(item.id) === parseInt(company))
       if (comp) {
-        str_company = comp.title
+        str_company = comp.id
+        str_company_name = comp.title
       }
 
       const saveData = {
@@ -639,7 +704,7 @@ const clickNext = async() => {
         city, 
         sfera: JSON.stringify(sferaArr),
         dolgnost: dolgnost,
-        company,
+        company: str_company,
         comteg: JSON.stringify(comtegArr),
         comment: JSON.stringify(commentArr), 
         profile, 
@@ -664,6 +729,7 @@ const clickNext = async() => {
           sfera: strSfera,
           dolgnost: dolgnost,
           company: str_company,
+          companyName: str_company_name,
           comteg: strComteg,
           comment: strComment,  
           block, 
@@ -802,7 +868,7 @@ const clickNext = async() => {
                                           {item.city ? (item.city.length > 30 ? item.city.substr(0, 30) + '...' : item.city) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.company ? (item.company.length > 20 ? item.company.substr(0, 20) + '...' : item.company) : ''}
+                                          {item.companyName ? (item.companyName.length > 20 ? item.companyName.substr(0, 20) + '...' : item.companyName) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                             {item.dolgnost}
