@@ -58,6 +58,7 @@ import companyData from 'src/data/companyData';
 import { getManager, getManagerCount, editManager, addManager, deleteManager } from './../http/managerAPI'
 import { getCompany} from '../http/companyAPI'
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
+import { getContacts } from '../http/chatAPI'
 
 //Workers.js
 const Managers = () => {
@@ -116,6 +117,8 @@ const Managers = () => {
   const [nik, setNik] = useState('');
   const [dateReg, setDateReg] = useState('');
   const [profile, setProfile] = useState('');
+  const [office, setOffice] = useState('');
+  const [sklad, setSklad] = useState('');
 
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
@@ -190,7 +193,12 @@ const Managers = () => {
       companysDB.map((item, index)=> {
         arrCompanys.push(item.title)
       })
-      setCompanysData(arrCompanys)
+      const sortedComp = [...arrCompanys].sort((a, b) => {       
+        var cityA = a, cityB = b
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+
+      setCompanysData(sortedComp)
 
       let arrManagers = []
 
@@ -219,7 +227,7 @@ const Managers = () => {
         })
 
         let str_company = ''
-        const comp = companysAll.find(item=> item.id === user.companyId || item.GUID === user.companyId)
+        const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.companyId))
         if (comp) {
           str_company = comp.title
         }
@@ -263,9 +271,9 @@ const Managers = () => {
 
       setLoading(false)
 
-      // let wuserbots = await getWContacts();
-      // console.log("wuserbots: ", wuserbots)
-      // setUserbots(wuserbots)
+      let wuserbots = await getContacts();
+      console.log("wuserbots: ", wuserbots)
+      setUserbots(wuserbots)
 
       
     }
@@ -436,7 +444,7 @@ const clickNext = async() => {
       })
 
       let str_company = ''
-      const comp = companysAll.find(item=> item.id === user.companyId || item.GUID === user.companyId)
+      const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.companyId))
       if (comp) {
         str_company = comp.title
       }
@@ -502,6 +510,8 @@ const clickNext = async() => {
     setFio(user.fio)
     setCity(user.city ? user.city : '')
     setCompany(user.company)
+    setCompanyName(user.company)
+   
     // setAge(worker.age ? worker.age.split('-')[0] : '')
     // setAge2(worker.age ? parseInt(currentYear) - parseInt(worker.age ? worker.age.split('-')[0] : 0) : '')
 
@@ -523,10 +533,18 @@ const clickNext = async() => {
 
     setDogovor(user.dogovor)
 
+    setOffice(user.office)
+    setSklad(user.sklad)
+
     // setNik(userbots.find((user) => user.chatId.toString() === worker.chatId.toString())?.username)
     // setDateReg(userbots.find((user) => user.chatId.toString() === worker.chatId.toString())?.createdAt)
 
-    setBlock(user.blockW)
+    setBlock(user.block)
+
+    if (userbots) {
+      setNik(userbots.find((item) => user.chatId?.toString() === user.chatId?.toString())?.username)
+      setDateReg(userbots.find((item) => user.chatId?.toString() === user.chatId?.toString())?.createdAt)
+    }
 
     // console.log("user", userbots.find((user) => user.chatId === worker.chatId))
   }
@@ -622,7 +640,7 @@ const clickNext = async() => {
       commentArr.push(obj1)
 
       let str_company = ''
-      const comp = companysAll.find(item=> item.id === companyId)
+      const comp = companysAll.find(item=> parseInt(item.id) === parseInt(companyId))
       if (comp) {
         str_company = comp.title
       }
@@ -635,7 +653,7 @@ const clickNext = async() => {
         city, 
         sfera: JSON.stringify(sferaArr),
         dolgnost: dolgnost,
-        company,
+        company: companyId,
         comteg: JSON.stringify(comtegArr),
         comment: JSON.stringify(commentArr), 
         profile, 
@@ -700,13 +718,7 @@ const clickNext = async() => {
 
 
   const onChangeCompany = (e) => {
-    console.log(e)
-    const comp = companysAll.find(item=> item.title === e.target.value)
-    if (comp) {
-      setCompany(comp.id) 
-      setInn(comp.inn) 
-    }
-      
+    setCompanyName(e.target.value)     
   }
   
   const handleTg = event => {
@@ -918,6 +930,7 @@ const clickNext = async() => {
                                   <label>ИНН</label>
                                   <div className="text-field">
                                     <InputMask
+                                        disabled
                                         className="text-field__input" 
                                         style={{width: '250px'}}
                                         type="text" 
@@ -1006,7 +1019,7 @@ const clickNext = async() => {
                                         id="custom-input-demo"
                                         options={companysData}
                                         style={{width: '100%', padding: '0'}}
-                                        //onInputChange={(e)=>onChangeCompany(e)}
+                                        onInputChange={(e)=>onChangeCompany(e)}
                                         //onInputChange={(e)=>console.log(e.target.value)}
                                         onChange={(event, newValue) => {
                                             if (newValue && newValue.length) {
@@ -1078,11 +1091,11 @@ const clickNext = async() => {
                                     
                                     {/* проекты за месяц */}
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                      <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
                                     {/* проекты всего */}
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                      <input disabled className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
 
                                     {/* phone1 */}
@@ -1117,11 +1130,11 @@ const clickNext = async() => {
                                   <div style={{display: 'flex'}}>                                   
                                     {/* проекты за месяц */}
                                     <div className="text-field" >
-                                      <input className="text-field__input" type="text" name="projects" id="projects" value={projects} style={{width: '40px', marginRight: '8px'}}/>
+                                      <input disabled className="text-field__input" type="text" name="projects" id="projects" value={projects} style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
                                     {/* проекты всего */}
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="projects" id="projects" value={projects} style={{width: '40px', marginRight: '8px'}}/>
+                                      <input disabled className="text-field__input" type="text" name="projects" id="projects" value={projects} style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
 
                                     {/* phone2 */}
@@ -1155,13 +1168,13 @@ const clickNext = async() => {
                                   {/*  */}
                                   <label>Офис</label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                                    <input disabled className="text-field__input" type="text" name="office" id="office" value={office}/>
                                   </div> 
 
                                   {/*  */}
                                   <label>Склад</label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                                    <input disabled className="text-field__input" type="text" name="sklad" id="sklad" value={sklad} />
                                   </div> 
 
                                   <label>Комментарии</label>
@@ -1210,7 +1223,7 @@ const clickNext = async() => {
                                       alt="" 
                                       style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                     />
-                                    <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
+                                    <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} style={{width: '250px'}}/>
                                   </div> 
 
 
