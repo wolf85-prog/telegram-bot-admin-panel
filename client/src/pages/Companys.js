@@ -799,7 +799,7 @@ const Companys = () => {
                                   <div className="text-field"> 
                                       <MyDropdown
                                         style={{backgroundColor: '#131c21'}}
-                                        options={cities}
+                                        options={sortedCities}
                                         selected={city}
                                         setSelected={setCity}
                                         // onChange={addCity}
