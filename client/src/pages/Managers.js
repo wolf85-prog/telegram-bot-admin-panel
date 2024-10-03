@@ -260,6 +260,8 @@ const Managers = () => {
             return idB-idA  //сортировка по возрастанию 
           })
 
+          console.log("sortedUser: ", sortedUser)
+
 					setManagerCount(sortedUser)
           setManagers(sortedUser)
 					
