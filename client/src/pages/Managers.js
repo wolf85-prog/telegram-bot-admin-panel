@@ -335,7 +335,7 @@ const Managers = () => {
       setLoading(false)
 
       let wuserbots = await getContacts();
-      //console.log("wuserbots: ", wuserbots)
+      console.log("cuserbots: ", wuserbots)
       setUserbots(wuserbots)
 
       
@@ -596,8 +596,8 @@ const clickNext = async() => {
     setShowBlacklist(user.sfera.includes('Blacklist'))
 
     if (userbots) {
-      setNik(userbots.find((item) => user.chatId?.toString() === user.chatId?.toString())?.username)
-      setDateReg(userbots.find((item) => user.chatId?.toString() === user.chatId?.toString())?.createdAt)
+      setNik(userbots.find((item) => item.chatId?.toString() === user.chatId?.toString())?.username)
+      setDateReg(userbots.find((item) => item.chatId?.toString() === user.chatId?.toString())?.createdAt)
     }
   }
 

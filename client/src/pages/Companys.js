@@ -59,6 +59,7 @@ import companyData from 'src/data/companyData';
 import { getCompany, getCompanyCount, editCompany, addCompany, deleteCompany } from '../http/companyAPI'
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
 import { getManager } from 'src/http/managerAPI';
+import { CollectionsOutlined } from '@mui/icons-material';
 
 //Workers.js
 const Companys = () => {
@@ -632,6 +633,15 @@ const Companys = () => {
     ])
   }
 
+  //удалить менеджера
+  const deleteManager = (item) => {
+    setManagersObj(
+      managersObj.filter(a =>
+        a.id !== item.id
+      )
+    );
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -878,16 +888,7 @@ const Companys = () => {
 
                                   <div style={{display: showManagers ? 'block' : 'none'}}>
                                     {managersObj.map((item, index) => (
-                                    <div className="text-field" key={index}>
-                                      {/* <input  
-                                        className="text-field__input" 
-                                        type="text" 
-                                        name="managers" 
-                                        id="managers" 
-                                        value={item} 
-                                        onChange={(e)=>setManagers(e.target.value)} 
-                                        style={{width: '300px'}}
-                                      /> */}
+                                    <div className="text-field" key={index} style={{position: 'relative'}}>
                                       <Autocomplete
                                         sx={{
                                             display: 'inline-block',
@@ -902,11 +903,7 @@ const Companys = () => {
                                                 lineHeight: '1.5',
                                                 textAlign: 'center',
                                                 color: '#ffffff',
-                                                backgroundColor: 'transparent',
-                                                // backgroundClip: 'padding-box',
-                                                // border: '1px solid #2d2e38',
-                                                // borderRadius: '6px',
-                                                // transition: 'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
+                                                backgroundColor: 'transparent', 
                                             }
                                         }}
                                         className="text-field__input" 
@@ -916,17 +913,13 @@ const Companys = () => {
                                         style={{width: '100%', padding: '0'}}
                                         isOptionEqualToValue={(option, value) => option.value === value.value}
                                         onInputChange={(e)=>onChangeManager(e, index)}
-                                        //onInputChange={(e)=>console.log(e.target.value)}
                                         onChange={(event, newValue) => {
                                             if (newValue && newValue.length) {
-                                                //setCity(newValue);
-                                                setManagersObj((users) => {                                           
-                                                  //let userIndex = users.findIndex((user) => JSON.parse(user).fio === JSON.parse(item).fio);
-                                                  const usersCopy = JSON.parse(JSON.stringify(users));			
-                                            	                                           
+                                                setManagersObj((users) => {                                                                                        
+                                                  const usersCopy = JSON.parse(JSON.stringify(users));			                                         
                                                   const userObject = usersCopy[index];
-                                                  usersCopy[index] = JSON.stringify({ ...userObject, ['fio']: newValue});
-                                            
+                                                  usersCopy[index] = JSON.stringify({ ...userObject, ['fio']: newValue});                                           
+                                                  console.log(usersCopy)
                                                   return usersCopy;
                                                 });
                                             }  
@@ -943,6 +936,7 @@ const Companys = () => {
                                         </div>
                                         )}
                                       />
+                                      <img src={Close} onClick={()=> deleteManager(item)} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px',  cursor: 'pointer'}}></img>
                                     </div>)
                                     )}
                                   </div>
@@ -985,7 +979,7 @@ const Companys = () => {
                                   
                                   {/*  */}
                                   <label>Сфера деятельности</label>
-                                  <div className="text-field" style={{marginBottom: showManagers ? '130px' : '20px'}}> 
+                                  <div className="text-field" style={{marginBottom: showManagers ? '129px' : '20px'}}> 
                                       <MyDropdown3
                                         tags={sfera}
                                         setTags={setSfera}
