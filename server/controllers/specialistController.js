@@ -98,7 +98,7 @@ class SpecialistController {
                 email,
                 promo,
                 passport,
-                block,
+                blockW,
                 block18
             } = req.body
 
@@ -123,7 +123,7 @@ class SpecialistController {
                     passport,
                     profile,
                     email,
-                    blockW: block,
+                    blockW,
                     block18
                 },
                 { where: {id: id} })

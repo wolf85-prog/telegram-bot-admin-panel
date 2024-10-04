@@ -90,7 +90,7 @@ const Specialist = () => {
   const [showMenuBlock18, setShowMenuBlock18] = useState(false)
   const [showBlock18, setShowBlock18] = useState(false)
   const [block18, setBlock18] = useState(false)
-  const [block, setBlock] = useState(false)
+  const [blockW, setBlockW] = useState(false)
   const [showMenuKrest, setShowMenuKrest] = useState(false)
   const [showKrest, setShowKrest] = useState(false)
   
@@ -270,7 +270,7 @@ const Specialist = () => {
           samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
           passportScan: worker.passportScan, 
           email: worker.email, 
-          block: worker.block,
+          blockW: worker.blockW,
           block18: worker.block18,
         }
         arrWorkers.push(newWorker)
@@ -414,10 +414,10 @@ const Specialist = () => {
     }
     
 
-    setBlock(worker.block)
+    setBlockW(worker.blockW)
     setBlock18(worker.block18)
 
-    setShowKrest(worker.block)
+    setShowKrest(worker.blockW)
     setShowBlock18(worker.block18)
     console.log("user", userbots.find((user) => user.chatId === worker.chatId))
   }
@@ -609,7 +609,7 @@ const Specialist = () => {
           samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
           passportScan: worker.passportScan, 
           email: worker.email, 
-          block: worker.block,
+          blockW: worker.blockW,
           block18: worker.block18,
         }
 		
@@ -757,7 +757,7 @@ const Specialist = () => {
       email,
       promo,
       passport,
-      block,
+      blockW,
       block18
     }
     console.log(saveData)
@@ -787,7 +787,7 @@ const Specialist = () => {
         email,
         promo,
         passport,
-        block,
+        blockW,
         block18,
       };
 
@@ -866,7 +866,7 @@ const Specialist = () => {
   const onChangeKrest = () => {
     setShowKrest(!showKrest)
     setShowMenuKrest(false)
-    setBlock(!block)
+    setBlockW(!blockW)
   } 
 
   {/* Добавление файла */}
@@ -1186,9 +1186,9 @@ const Specialist = () => {
                                     <span onClick={onChangeBlock18} style={{cursor: 'pointer'}}>{block18 ? 'Убрать' : 'Добавить'} 18+</span>
                                   </div>
                                   
-                                  <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '215px', left: '215px', opacity: block ? '1' : '0' }}/>
+                                  <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '215px', left: '215px', opacity: blockW ? '1' : '0' }}/>
                                   <div className="menu-content-krest">
-                                    <span onClick={onChangeKrest} style={{cursor: 'pointer'}}>{block ? 'Убрать' : 'Добавить'}</span>
+                                    <span onClick={onChangeKrest} style={{cursor: 'pointer'}}>{blockW ? 'Убрать' : 'Добавить'}</span>
                                   </div>
 
                                   {/* ФИО */}

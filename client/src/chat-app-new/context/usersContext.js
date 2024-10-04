@@ -691,7 +691,7 @@ useEffect(() => {
           samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
           passportScan: worker.passportScan, 
           email: worker.email, 
-		  block: worker.block,
+		  blockW: worker.blockW,
           block18: worker.block18,
         }
         arrAllWorkers.push(newWorker)
