@@ -478,7 +478,7 @@ const Companys = () => {
   //сохранить профиль
   const saveProfile = async(id) => { 
       setShowClose(true)
-      console.log(id)
+      console.log(managersObj)
   
   
       let managersArr = []
@@ -921,11 +921,11 @@ const Companys = () => {
                                             if (newValue && newValue.length) {
                                                 //setCity(newValue);
                                                 setManagersObj((users) => {                                           
-                                                  let userIndex = users.findIndex((user) => JSON.parse(user).fio === JSON.parse(item).fio);
+                                                  //let userIndex = users.findIndex((user) => JSON.parse(user).fio === JSON.parse(item).fio);
                                                   const usersCopy = JSON.parse(JSON.stringify(users));			
                                             	                                           
-                                                  const userObject = usersCopy[userIndex];
-                                                  usersCopy[userIndex] = JSON.stringify({ ...userObject, ['fio']: newValue});
+                                                  const userObject = usersCopy[index];
+                                                  usersCopy[index] = JSON.stringify({ ...userObject, ['fio']: newValue});
                                             
                                                   return usersCopy;
                                                 });
