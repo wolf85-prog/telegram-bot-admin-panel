@@ -608,16 +608,14 @@ const Companys = () => {
     // console.log("user", userbots.find((user) => user.chatId === worker.chatId))
   }
 
-  const onChangeManager = (e, item) => {
-    //console.log(item)
-    //setCity(e.target.value)
-    //setManagersObj(managersObj) 
+  const onChangeManager = (e, index) => {
+    console.log(e.target.value)
+
     setManagersObj((users) => {                                           
-      let userIndex = users.findIndex((user) => JSON.parse(user).fio === JSON.parse(item).fio);
       const usersCopy = JSON.parse(JSON.stringify(users));			
                                              
-      const userObject = usersCopy[userIndex];
-      usersCopy[userIndex] = JSON.stringify({ ...userObject, ['fio']: e.target.value});
+      const userObject = usersCopy[index];
+      usersCopy[index] = JSON.stringify({ ...userObject, ['fio']: e.target.value});
 
       return usersCopy;
     });   
@@ -917,7 +915,7 @@ const Companys = () => {
                                         options={managersData}
                                         style={{width: '100%', padding: '0'}}
                                         isOptionEqualToValue={(option, value) => option.value === value.value}
-                                        onInputChange={(e)=>onChangeManager(e, item)}
+                                        onInputChange={(e)=>onChangeManager(e, index)}
                                         //onInputChange={(e)=>console.log(e.target.value)}
                                         onChange={(event, newValue) => {
                                             if (newValue && newValue.length) {
