@@ -42,6 +42,7 @@ import {
   getProjectNewDate, 
   editDistributionWAll, 
   getProjectNewCash,
+  getProjectsNewApi
 } from '../http/adminAPI';
 
 import { uploadFile } from '../http/chatAPI';
@@ -193,7 +194,7 @@ const DistributionEditW = () => {
   useEffect(() => {
     const fetchData = async () => {
 
-      let projects = await getProjectNewCash();
+      let projects = await getProjectsNewApi();
       console.log("Загрузка проектов из БД ...")
       console.log("projects planer: ", projects)
       console.log("clients: ", clients)

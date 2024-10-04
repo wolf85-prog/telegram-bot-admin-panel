@@ -100,6 +100,7 @@ const Companys = () => {
   const [managers, setManagers] = useState([]);
   const [managersObj, setManagersObj] = useState([]);
   const [managersData, setManagersData] = useState([])
+  const [managerName, setManagerName] = useState('')
   const [office, setOffice] = useState('');
   const [sklad, setSklad] = useState('');
 
@@ -126,7 +127,7 @@ const Companys = () => {
   const [showBlacklist, setShowBlacklist] = useState(false)
   const [showMenu1, setShowMenu1] = useState(false)
   const [showMenu2, setShowMenu2] = useState(false)
-  const [showManagers, setShowManagers] = useState(true)
+  const [showManagers, setShowManagers] = useState(false)
   const [showClearCity, setShowClearCity] = useState(false)
 
   const [visibleDelete, setVisibleDelete] = useState(false)
@@ -607,10 +608,19 @@ const Companys = () => {
     // console.log("user", userbots.find((user) => user.chatId === worker.chatId))
   }
 
-  const onChangeManager = (item) => {
-    console.log(item)
+  const onChangeManager = (e, item) => {
+    //console.log(item)
     //setCity(e.target.value)
-    setManagersObj(managersObj)    
+    //setManagersObj(managersObj) 
+    setManagersObj((users) => {                                           
+      let userIndex = users.findIndex((user) => JSON.parse(user).fio === JSON.parse(item).fio);
+      const usersCopy = JSON.parse(JSON.stringify(users));			
+                                             
+      const userObject = usersCopy[userIndex];
+      usersCopy[userIndex] = JSON.stringify({ ...userObject, ['fio']: e.target.value});
+
+      return usersCopy;
+    });   
   }
 
   //добавить менеджера
@@ -907,7 +917,7 @@ const Companys = () => {
                                         options={managersData}
                                         style={{width: '100%', padding: '0'}}
                                         isOptionEqualToValue={(option, value) => option.value === value.value}
-                                        onInputChange={()=>onChangeManager(item)}
+                                        onInputChange={(e)=>onChangeManager(e, item)}
                                         //onInputChange={(e)=>console.log(e.target.value)}
                                         onChange={(event, newValue) => {
                                             if (newValue && newValue.length) {
@@ -931,8 +941,6 @@ const Companys = () => {
                                                 className="text-field__input" 
                                                 type="text" {...params.inputProps} 
                                                 placeholder='ФИО'
-                                                //onChange={onChangeCity}
-                                                // value={city}
                                             />
                                         </div>
                                         )}

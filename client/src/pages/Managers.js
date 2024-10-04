@@ -1080,6 +1080,7 @@ const clickNext = async() => {
                                         style={{width: '100%', padding: '0'}}
                                         onInputChange={(e)=>onChangeCompany(e)}
                                         //onInputChange={(e)=>console.log(e.target.value)}
+                                        isOptionEqualToValue={(option, value) => option.value === value.value}
                                         onChange={(event, newValue) => {
                                             if (newValue && newValue.length) {
                                                 
