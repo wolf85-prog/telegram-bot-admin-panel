@@ -414,10 +414,10 @@ const Specialist = () => {
     }
     
 
-    setBlock(worker.blockW)
+    setBlock(worker.block)
     setBlock18(worker.block18)
 
-    setShowKrest(worker.blockW)
+    setShowKrest(worker.block)
     setShowBlock18(worker.block18)
     console.log("user", userbots.find((user) => user.chatId === worker.chatId))
   }
@@ -757,7 +757,7 @@ const Specialist = () => {
       email,
       promo,
       passport,
-      blockW: block,
+      block,
       block18
     }
     console.log(saveData)
@@ -787,7 +787,7 @@ const Specialist = () => {
         email,
         promo,
         passport,
-        blockW: block,
+        block,
         block18,
       };
 
