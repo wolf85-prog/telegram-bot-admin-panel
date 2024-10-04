@@ -5,207 +5,115 @@ const cities = [
             {value: 2, label: "Санкт-Петербург"},
             
             {value: 3, label: 'Майкоп'},
-
             {value: 4, label: "Горно-Алтайск", },
             {value: 5, label: "Благовещенск",},
-
             {value: 6, label: "Архангельск",  },
-
             {value: 7, label: "Астрахань",  },
-
             {value: 8, label: "Барнаул",  },
-
             {value: 9, label: "Уфа",  },
-
             {value: 10, label: "Белгород",  },
-
             {value: 11, label: "Брянск",  },
-
             {value: 12, label: "Улан-Удэ",  },
-
             {value: 13, label: "Владимир",  },
             {value: 14, label: "Муром",  },
             {value: 15, label: "Суздаль",  },
-
             {value: 16, label: "Волгоград", },
-
             {value: 17, label: "Вологда", },
             {value: 18, label: "Череповец", },
-
             {value: 19, label: "Воронеж", },
-
             {value: 20, label: "Гомель", },
-
             {value: 21, label: "Махачкала", },
-
             {value: 22, label: "Биробиджан", },
-
             {value: 23, label: "Чита", },
-
             {value: 24, label: "Магас", },
-
             {value: 25, label: "Иваново", },
-
             {value: 26, label: "Иркутск", },
-
             {value: 27, label: "Нальчик", },
-
             {value: 28, label: "Элиста", },
-
             {value: 29, label: "Черкесск", },
-
-            {value: 30, label: "Петрозаводск", },
-
+            {value: 30, label: "Якутск", },
             {value: 31, label: "Сыктывкар", },
             {value: 32, label: "Петрозаводск", },
-
             {value: 33, label: "Евпатория", },
             {value: 34, label: "Керчь", },
             {value: 35, label: "Феодосия", },
             {value: 36, label: "Ялта", },
             {value: 37, label: "Симферополь", },
             {value: 38, label: "Севастополь", },
-
             {value: 39, label: "Петропавловск-Камчатский", },
-
             {value: 40, label: "Анапа", },
             {value: 41, label: "Краснодар", },
             {value: 42, label: "Геленджик", },
             {value: 43, label: "Новороссийск", },
             {value: 44, label: "Сочи", },
-
             {value: 45, label: "Красноярск", },
             {value: 46, label: "Норильск", },
-            {value: 47, label: "Таганрог", },
-
+            {value: 47, label: "Салехард", },
             {value: 48, label: "Калининград ", },
-
             {value: 49, label: "Калуга", },
-
             {value: 50, label: "Кемерово", },
-
             {value: 51, label: "Киров", },
-
             {value: 52, label: "Кострома", },
-
-
             {value: 53, label: "Курган", },
-
-            {value: 54, label: "Курск", },
-            
-            {value: 55, label: "Санкт-Петербург", },
+            {value: 54, label: "Курск", },           
             {value: 56, label: "Выборг", },
             {value: 57, label: "Гатчина", },
-
             {value: 58, label: "Елец", },
-            {value: 59, label: "Липецк", },
-            
-            {value: 60, label: "Луганск", },
-            
-            {value: 61, label: "Йошкар-Ола", },
-            
-            {value: 62, label: "Саранск", },
-            
+            {value: 59, label: "Липецк", },            
+            {value: 60, label: "Луганск", },            
+            {value: 61, label: "Йошкар-Ола", },           
+            {value: 62, label: "Саранск", },            
             {value: 63, label: "Магадан", },
-            
-            // {value: 106, label: "Московская обл.",},
-            // {value: 107, label: "Москва", },
-            
-
-            {value: 64, label: "Мурманск", },
-            
-            {value: 65, label: "Минск", },
-            
-            {value: 66, label: "Нижний Новгород", },
-            
+            {value: 64, label: "Мурманск", },           
+            {value: 65, label: "Минск", },            
+            {value: 66, label: "Нижний Новгород", },           
             {value: 67, label: "Валдай", },
-            {value: 68, label: "Великий Новгород", },
-            
+            {value: 68, label: "Великий Новгород", },           
             {value: 69, label: "Новосибирск", },
-
             {value: 70, label: "Нарьян-Мар", },
-
-            {value: 71, label: "Омск", },
-            
-            {value: 72, label: "Оренбург", },
-            
+            {value: 71, label: "Омск", },            
+            {value: 72, label: "Оренбург", },          
             {value: 73, label: "Орел", },
-
             {value: 74, label: "Пермь", },
             {value: 75, label: "Соликамск", },
-
             {value: 76, label: "Владивосток", },
-
             {value: 77, label: "Пенза", },
-
             {value: 78, label: "Псков", },
-
-
             {value: 79, label: "Ростов-на-Дону", },
-            {value: 80, label: "Таганрог", },
-            
+            {value: 80, label: "Таганрог", },            
             {value: 81, label: "Рязань", },
-
             {value: 82, label: "Владикавказ", },
-
             {value: 83, label: "Кисловодск", },
             {value: 84, label: "Пятигорск", },
             {value: 85, label: "Ставрополь", },
-
             {value: 86, label: "Самара", },
             {value: 87, label: "Тольятти", },
-
             {value: 88, label: "Саратов", },
-
             {value: 89, label: "Южно-Сахалинск", },
-
             {value: 90, label: "Екатеринбург", },
             {value: 91, label: "Нижний Тагил", },
-
             {value: 92, label: "Смоленск", },
-
             {value: 93, label: "Казань", },
             {value: 94, label: "Набережные Челны", },
-
             {value: 95, label: "Кызыл", },
-
             {value: 96, label: "Тамбов", },
-
             {value: 97, label: "Тверь", },
             {value: 98, label: "Ржев", },
-
             {value: 99, label: "Томск", },
-
             {value: 100, label: "Тула", },
-
             {value: 101, label: "Тюмень", },
-
             {value: 102, label: "Ижевск", },
-
             {value: 103, label: "Ульяновск", },
-
             {value: 104, label: "Абакан", },
-
             {value: 105, label: "Хабаровск", },
-
             {value: 106, label: "Ханты-Мансийск", },
-
             {value: 107, label: "Грозный", },
-
             {value: 108, label: "Чебоксары", },
-
             {value: 109, label: "Челябинск", },
-
             {value: 110, label: "Анадырь", },
-
             {value: 111, label: "Ростов Великий", },
             {value: 112, label: "Рыбинск", },
             {value: 113, label: "Ярославль", },
-
-            {value: 114, label: "Салехард", },
-
-            {value: 115, label: "Якутск", },
-
 ];
 
 export default cities;

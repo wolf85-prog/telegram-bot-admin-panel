@@ -34,9 +34,9 @@
     border-radius: 6px;
     color: #9fa5b5;
     position: absolute;
-    left: 160px;
-    top: 100px;
-    width: 320px;
+    left: 150px;
+    top: 40px;
+    width: 300px;
     transform: translateX(-50%);
     opacity: 0;
     display: none;

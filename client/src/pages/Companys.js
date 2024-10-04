@@ -126,7 +126,8 @@ const Companys = () => {
   const [showBlacklist, setShowBlacklist] = useState(false)
   const [showMenu1, setShowMenu1] = useState(false)
   const [showMenu2, setShowMenu2] = useState(false)
-  const [showManagers, setShowManagers] = useState(false)
+  const [showManagers, setShowManagers] = useState(true)
+  const [showClearCity, setShowClearCity] = useState(false)
 
   const [visibleDelete, setVisibleDelete] = useState(false)
 
@@ -549,6 +550,10 @@ const Companys = () => {
       await editCompany(saveData, id)
   
       addToast(exampleToast) //ваши данные сохранены
+
+      setTimeout(()=> {
+        closeProfile()
+      }, 2000)
   }
   
   const blockedProfile = () => { 
@@ -610,10 +615,13 @@ const Companys = () => {
 
   //добавить менеджера
   const addManager = () => {
-    const obj = {id: '', chatId: '', fio: '', }
-    managersObj.push(JSON.stringify(obj))
+    
     console.log(managersObj)
-    setManagersObj(managersObj)
+    const obj = {id: '', chatId: '', fio: '', }
+    setManagersObj([ // with a new array
+      ...managersObj, // that contains all the old items
+      JSON.stringify(obj) // and one new item at the end
+    ])
   }
 
   return (
@@ -817,7 +825,7 @@ const Companys = () => {
 {/* 2 */}
                                 <div style={{marginLeft: '37px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '300px'}}>
                                   {/* Город */}
-                                  <div className="text-field"> 
+                                  <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}>                                     
                                       <MyDropdown
                                         style={{backgroundColor: '#131c21'}}
                                         options={sortedCities}
@@ -825,6 +833,7 @@ const Companys = () => {
                                         setSelected={setCity}
                                         // onChange={addCity}
                                       />
+                                      <img src={Close} onClick={() => setCity('')} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px', visibility: showClearCity ? 'visible' : 'hidden', cursor: 'pointer'}}></img>
                                   </div>
 
                                   {/*  */}
@@ -979,7 +988,7 @@ const Companys = () => {
                                       />
                                   </div>
 
-                                  {/* добавить менеджера */}
+                                  {/* + добавить менеджера */}
                                   <div style={{textAlign: 'left', display: showManagers ? 'block' : 'none'}}>
                                     <CButton onClick={()=>addManager()} className='uley_add_user' style={{marginBottom: '20px', marginLeft: '0'}}>
                                       <span style={{position: 'absolute', top: '-12px', left: '6px', fontSize: '36px', color: '#2d2e38'}}>

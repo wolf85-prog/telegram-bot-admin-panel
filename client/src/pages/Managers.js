@@ -128,6 +128,7 @@ const Managers = () => {
   const [showBlacklist, setShowBlacklist] = useState(false)
   const [showMenu1, setShowMenu1] = useState(false)
   const [showMenu2, setShowMenu2] = useState(false)
+  const [showClearCity, setShowClearCity] = useState(false)
 
   const [visibleDelete, setVisibleDelete] = useState(false)
 
@@ -1042,7 +1043,7 @@ const clickNext = async() => {
 {/* 2 */}
                                 <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                   {/* Город */}
-                                  <div className="text-field"> 
+                                  <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}>                                     
                                       <MyDropdown
                                         style={{backgroundColor: '#131c21'}}
                                         options={sortedCities}
@@ -1050,6 +1051,7 @@ const clickNext = async() => {
                                         setSelected={setCity}
                                         // onChange={addCity}
                                       />
+                                      <img src={Close} onClick={() => setCity('')} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px', visibility: showClearCity ? 'visible' : 'hidden', cursor: 'pointer'}}></img>
                                   </div>
 
                                   <label>Компания</label>
