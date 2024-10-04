@@ -57,7 +57,6 @@ import sferaData from 'src/data/sfera';
 import companyData from 'src/data/companyData';
 
 import { getCompany, getCompanyCount, editCompany, addCompany, deleteCompany } from '../http/companyAPI'
-import { getWContacts} from '../http/workerAPI'
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
 import { getManager } from 'src/http/managerAPI';
 
@@ -105,15 +104,19 @@ const Companys = () => {
   const [sklad, setSklad] = useState('');
 
   const [bugalterFio, setBugalterFio] = useState('')
+  const [bugalterEmail, setBugalterEmail] = useState('')
+  const [bugalterPhone, setBugalterPhone] = useState('')
 
   const [email, setEmail] = useState('');
   const [comment, setComment] = useState('');
   const [comteg, setComteg] = useState([]);
   const [sfera, setSfera] = useState([]);
-  const [samozanjatost, setSamozanjatost] = useState('');
-  const [nik, setNik] = useState('');
+  const [dogovorDate, setDogovorDate] = useState('');
+  const [dogovorNumber, setDogovorNumber] = useState('');
   const [dateReg, setDateReg] = useState('');
   const [profile, setProfile] = useState('');
+  const [projects, setProjects] = useState('');
+  const [inn, setInn] = useState('');
 
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
@@ -189,7 +192,7 @@ const Companys = () => {
         arrManagers.push(item.fio)
       })
       setManagersData(arrManagers)
-      console.log("managersDB: ", arrManagers)
+      //console.log("managersDB: ", arrManagers)
 
       let arrCompanys = []
 
@@ -244,29 +247,16 @@ const Companys = () => {
 					setCompanyCount(sortedUser)
           setCompanys(sortedUser)
 					
-					//сохранить кэш
-					//localStorage.setItem("specialist", JSON.stringify(sortedUser));
 				}
 
       })   
 
       setLoading(false)
-
-      // let wuserbots = await getWContacts();
-      // console.log("wuserbots: ", wuserbots)
-      // setUserbots(wuserbots)
-
-      
     }
     fetchData()
   }, [])
 
   const clickAdd = async()=> {   
-
-    //setShowProfile(true)
-    //setModalWorker(worker)
-    //setShowSearch(false)
-    //setShowClear(false)
 
     const data = {
       title: 'Новая компания',
@@ -296,7 +286,7 @@ const Companys = () => {
   }
   
   //сортировка по ФИО
-  const onSortFio = () => {
+  const onSortTitle = () => {
     setCountPress(countPress + 1)
     
     if (countPress + 1 >= 3) {
@@ -304,60 +294,28 @@ const Companys = () => {
     }
     console.log("check sort", countPress + 1)
 
-    // if (countPress + 1 === 1) {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
-    //     return (fioA < fioB) ? -1 : (fioA > fioB) ? 1 : 0;  //сортировка по возрастанию 
-    //   })
-    //   setSpecialist(sortedWorker)
-    // } else if (countPress + 1 === 2) {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
-    //     return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
-    //   })
-    //   setSpecialist(sortedWorker)
-    // } else {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var fioA = a.id, fioB = b.id 
-    //     return fioB-fioA  //сортировка по убыванию 
-    //   })
-    //   setSpecialist(sortedWorker)
-    //}
-    
-  }
-
-  //сортировка по telegram
-  const onSortTG = () => {
-    setCountPressTG(countPressTG + 1)
-    
-    if (countPressTG + 1 >= 3) {
-      setCountPressTG(0)
+    if (countPress + 1 === 1) {
+      const sortedWorker = [...companys].sort((a, b) => {       
+        var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
+        return (fioA < fioB) ? -1 : (fioA > fioB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setCompanys(sortedWorker)
+    } else if (countPress + 1 === 2) {
+      const sortedWorker = [...companys].sort((a, b) => {       
+        var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
+        return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setCompanys(sortedWorker)
+    } else {
+      const sortedWorker = [...companys].sort((a, b) => {       
+        var fioA = a.id, fioB = b.id 
+        return fioB-fioA  //сортировка по убыванию 
+      })
+      setCompanys(sortedWorker)
     }
-    console.log("check sort", countPressTG + 1)
-
-    // if (countPressTG + 1 === 1) {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var tgA = a.telegram, tgB = b.telegram 
-    //     return (tgA < tgB) ? -1 : (tgA > tgB) ? 1 : 0;  //сортировка по возрастанию 
-    //   })
-    //   setSpecialist(sortedWorker)
-    // } else if (countPressTG + 1 === 2) {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var tgA = a.telegram, tgB = b.telegram 
-    //     return (tgA > tgB) ? -1 : (tgA < tgB) ? 1 : 0;  //сортировка по возрастанию 
-    //   })
-    //   setSpecialist(sortedWorker)
-    // } else {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var fioA = a.id, fioB = b.id 
-    //     return fioB-fioA  //сортировка по убыванию 
-    //   })
-
-    //   //setSpecialistCount(sortedWorker)
-    //   setSpecialist(sortedWorker)
-    //}
     
   }
+
 
   //сортировка по Городу
   const onSortCity = () => {
@@ -366,29 +324,28 @@ const Companys = () => {
     if (countPressCity + 1 >= 3) {
       setCountPressCity(0)
     }
-    //console.log("check sort", countPressTG + 1)
+    console.log("check sort", countPressTG + 1)
 
-    // if (countPressCity + 1 === 1) {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var cityA = a.city, cityB = b.city
-    //     return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
-    //   })
-    //   setSpecialist(sortedWorker)
-    // } else if (countPressCity + 1 === 2) {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var cityA = a.city, cityB = b.city
-    //     return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
-    //   })
-    //   setSpecialist(sortedWorker)
-    // } else {
-    //   const sortedWorker = [...specialist].sort((a, b) => {       
-    //     var idA = a.id, idB = b.id 
-    //     return idB-idA  //сортировка по убыванию 
-    //   })
+    if (countPressCity + 1 === 1) {
+      const sortedWorker = [...companys].sort((a, b) => {       
+        var cityA = a.city, cityB = b.city
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setCompanys(sortedWorker)
+    } else if (countPressCity + 1 === 2) {
+      const sortedWorker = [...companys].sort((a, b) => {       
+        var cityA = a.city, cityB = b.city
+        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setCompanys(sortedWorker)
+    } else {
+      const sortedWorker = [...companys].sort((a, b) => {       
+        var idA = a.id, idB = b.id 
+        return idB-idA  //сортировка по убыванию 
+      })
 
-    //   //setSpecialistCount(sortedWorker)
-    //   setSpecialist(sortedWorker)
-    //}
+      setCompanys(sortedWorker)
+    }
     
   }
 
@@ -450,7 +407,6 @@ const Companys = () => {
             return idB-idA  //сортировка по возрастанию 
           })
 
-					//setCompanyCount(sortedUser)
           setCompanys(sortedUser)
           
           //сохранить кэш
@@ -522,10 +478,75 @@ const Companys = () => {
       setShowClose(true)
       console.log(id)
   
-      let specArr = []
-      let strSpec = ''
+  
+      let managersArr = []
+      let strManagers = ''
+      managers.map((item, index)=> {
+        const obj = {
+          name: item,
+        }
+        strManagers = strManagers + item + (index+1 !== managers.length ? ', ' : '')
+        managersArr.push(obj)
+      })
+  
+  
+      //комментарии 
+      let commentArr = []
+      let strComment = ''
+      const obj1 = {
+         content: comment,
+      }
+      strComment = comment
+      commentArr.push(obj1)
 
   
+      const saveData = {   
+        title, 
+        city,
+        office,
+        sklad,
+        comment: JSON.stringify(commentArr),
+        //projects: JSON.stringify(projectsArr),
+        managers: JSON.stringify(managersArr),
+        dogovorDate, 
+        dogovorNumber, 
+        bugalterFio, 
+        bugalterEmail,
+        bugalterPhone,  
+        inn, //инн компании
+        profile,
+      }
+      console.log(saveData)
+  
+      setCompanys((companys) => {	
+  
+        let userIndex = companys.findIndex((comp) => comp.id === id);
+        const usersCopy = JSON.parse(JSON.stringify(companys));
+  
+        const userObject = usersCopy[userIndex];
+        usersCopy[userIndex] = { ...userObject, 
+          title, 
+          city,
+          office,
+          sklad,
+          comment,
+          projects,
+          managers,
+          dogovorDate, 
+          dogovorNumber, 
+          bugalterFio, 
+          bugalterEmail,
+          bugalterPhone,  
+          inn, //инн компании
+        };
+  
+        console.log("update user: ", usersCopy[userIndex])
+  
+        return usersCopy;
+      });
+  
+      //сохранить изменения в базе
+      await editCompany(saveData, id)
   
       addToast(exampleToast) //ваши данные сохранены
   }

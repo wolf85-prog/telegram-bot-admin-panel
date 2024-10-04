@@ -65,52 +65,37 @@ class CompanysController {
             }
 
             const {
-                fio, 
-                chatId,
-                phone,
-                phone2, 
-                city, 
-                age, 
-                speclist,
-                company,
-                skill,
-                merch,
-                comteg,
-                comteg2,
+                title, 
+                city,
+                office,
+                sklad,
                 comment,
-                comment2,
-                profile,
-                inn,
-                email,
-                promo,
-                passport,
-                block,
-                block18
+                projects,
+                managers,
+                dogovorDate, 
+                dogovorNumber, 
+                bugalterFio, 
+                bugalterEmail,
+                bugalterPhone,  
+                inn, //инн компании
+
             } = req.body
 
             const newUser = await Company.update(
                 { 
-                    fio, 
-                    chatId,
-                    phone, 
-                    phone2, 
-                    specialization: speclist,
+                    title, 
                     city,
-                    skill,
-                    promoId: promo,
-                    merch,
-                    company,
-                    comteg,
-                    comteg2,
+                    office,
+                    sklad,
                     comment,
-                    comment2,
-                    age,
-                    inn,
-                    passport,
-                    profile,
-                    email,
-                    blockW: block,
-                    block18
+                    projects,
+                    managers,
+                    dogovorDate, 
+                    dogovorNumber, 
+                    bugalterFio, 
+                    bugalterEmail,
+                    bugalterPhone,  
+                    inn, //инн компании
                 },
                 { where: {id: id} })
             return res.status(200).json(newUser);
