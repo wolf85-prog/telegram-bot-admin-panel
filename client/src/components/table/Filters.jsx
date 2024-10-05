@@ -16,6 +16,7 @@ import {
   CDropdownToggle,
   CDropdownItem,
   CDropdownMenu,
+  CButton,
 } from '@coreui/react'
 
 import 'react-datepicker/dist/react-datepicker.css'
@@ -52,6 +53,14 @@ const periodList = [
   { value: 'Месяц [Т]', label: 'Месяц [Т]' },
   { value: 'Месяц [П]', label: 'Месяц [П]' },
   { value: 'Год', label: 'Год' },
+]
+
+const manthList = [
+  { value: 'Январь', label: 'Январь' },
+  { value: 'Февраль', label: 'Февраль' },
+  { value: 'Март', label: 'Март' },
+  { value: 'Апрель', label: 'Апрель' },
+  { value: 'Май', label: 'Май' },
 ]
 
 const filters = {
@@ -137,7 +146,43 @@ export default function Filters({ columnFilters, setColumnFilters }) {
 
         <CCol className="align-self-center">
           <CRow lg={{ gutter: 1 }}>
-            <CCol lg={6}>
+
+          <CCol lg={4} style={{ display: 'flex' }} className="align-self-center">
+          {/* <Select
+            className="uley_react_select"
+            options={options}
+            onChange={handleChangeFilterType}
+            defaultValue={filterType}
+            classNamePrefix="custom-select_1"
+            autoFocus="true"
+          /> */}
+          {/* <Select
+            className="uley_react_select"
+            onChange={handleFilterChange}
+            options={filter}
+            defaultValue={filter[0]}
+            classNamePrefix="custom-select_2"
+          /> */}
+
+            <CButton className='uley_add_user' style={{marginRight: '10px', padding: '18px'}}>
+              <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-14px', left: '11px'}}>
+              -</span>
+            </CButton>
+          
+            <Select
+              className="uley_react_select"
+              options={manthList}
+              defaultValue={manthList[0]}
+              classNamePrefix="custom-select_3"
+            />
+
+            <CButton className='uley_add_user' style={{marginLeft: '0px', padding: '18px'}}>
+              <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-13px', left: '6px'}}>
+              +</span>
+            </CButton>
+          </CCol>
+
+            {/* <CCol lg={6}>
               <DatePicker
                 className="uley-datepicker-control text-center"
                 style={{ height: '28px', width: '30px' }}
@@ -162,7 +207,7 @@ export default function Filters({ columnFilters, setColumnFilters }) {
                 minDate={startDate}
                 dateFormat="dd.MM.yyyy"
               />
-            </CCol>
+            </CCol> */}
           </CRow>
         </CCol>
 
