@@ -762,7 +762,7 @@ useEffect(() => {
 				let str_manager = ''
 				let str_manager2 = ''
 				user.managers && JSON.parse(user.managers).map((item, index)=> {
-				  const fioManager = managersDB.find(item2 => item2.GUID === item.name || item2.id === item.name)
+				  const fioManager = managersDB.find(item2 => item2.id === item.name)
 				  if (fioManager) {
 					str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
 					str_manager2 = str_manager2 + JSON.stringify(fioManager) + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
