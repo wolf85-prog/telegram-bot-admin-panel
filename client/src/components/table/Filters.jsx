@@ -96,6 +96,13 @@ const manthList = [
   { value: 'Март', label: 'Март' },
   { value: 'Апрель', label: 'Апрель' },
   { value: 'Май', label: 'Май' },
+  { value: 'Июнь', label: 'Июнь' },
+  { value: 'Июль', label: 'Июль' },
+  { value: 'Август', label: 'Август' },
+  { value: 'Сентябрь', label: 'Сентябрь' },
+  { value: 'Октябрь', label: 'Октябрь' },
+  { value: 'Ноябрь', label: 'Ноябрь' },
+  { value: 'Декабрь', label: 'Декабрь' },
 ]
 
 const filters = {
@@ -163,11 +170,11 @@ export default function Filters({ columnFilters, setColumnFilters }) {
                 classNamePrefix="custom-select_1"
                 autoFocus="true"
               />
-              <CCloseButton
+              {/* <CCloseButton
                 className="uley_select_reset"
                 style={{ height: '28px', width: '28px',marginRight: '15px' }}
                 onClick={() => setColumnFilters([])}
-              />
+              /> */}
               <input className="form-control" style={{background: 'transparent', width: '150px', marginRight: '25px'}} placeholder='Поиск'></input>
               
               <CButton className='uley_add_user' style={{marginRight: '10px', padding: '18px'}}>
