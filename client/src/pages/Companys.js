@@ -479,7 +479,7 @@ const Companys = () => {
   //сохранить профиль
   const saveProfile = async(id) => { 
       setShowClose(true)
-      console.log(managersObj)
+      console.log("managersObj: ", managersObj)
   
   
       let managersArr = []
@@ -491,6 +491,17 @@ const Companys = () => {
         strManagers = strManagers + item + (index+1 !== managers.length ? ', ' : '')
         managersArr.push(obj)
       })
+
+      let managersObjArr = []
+      let strManagersObj = ''
+      managersObj.map((item, index)=> {
+        const obj = {
+          name: JSON.parse(item).id,
+        }
+        strManagersObj = strManagersObj + JSON.parse(item).fio + (index+1 !== managersObj.length ? ', ' : '')
+        managersObjArr.push(obj)
+      })
+      console.log(managersObjArr)
   
   
       //комментарии 
@@ -510,7 +521,7 @@ const Companys = () => {
         sklad,
         comment: JSON.stringify(commentArr),
         //projects: JSON.stringify(projectsArr),
-        managers: JSON.stringify(managersArr),
+        managers: JSON.stringify(managersObjArr),
         dogovorDate, 
         dogovorNumber, 
         bugalterFio, 
@@ -519,7 +530,7 @@ const Companys = () => {
         inn, //инн компании
         profile,
       }
-      console.log(saveData)
+      console.log("saveData: ", saveData)
   
       setCompanys((companys) => {	
   
@@ -534,7 +545,7 @@ const Companys = () => {
           sklad,
           comment,
           projects,
-          managers,
+          managers: strManagersObj,
           dogovorDate, 
           dogovorNumber, 
           bugalterFio, 
@@ -597,40 +608,40 @@ const Companys = () => {
     setManagers(user.managers ? user.managers.split(', ') : [])
     setManagersObj(user.managersObj ? user.managersObj.split(', ') : [])
 
-    // setPhone(user.phone)
-    // setProjects(user.projects)
-    // setInn(user.inn === null ? '' : user.inn)
-    // setComteg(user.comteg ? user.comteg.split(',') : [])
-    // setEmail(user.email)
-    // setComment(user.comment)
-    // setProfile(user.profile)
-    // setDogovor(user.dogovor)
-    // setBlock(user.blockW)
-    // console.log("user", userbots.find((user) => user.chatId === worker.chatId))
+    //console.log(user.managers ? user.managers.split(', ') : [])
+    //console.log(user.managersObj ? user.managersObj.split(', ') : [])
+
   }
 
   const onChangeManager = (e, index) => {
-    console.log(e.target.value)
+    console.log(e.target.value, index)
 
-    setManagersObj((users) => {                                           
-      const usersCopy = JSON.parse(JSON.stringify(users));			
-                                             
-      const userObject = usersCopy[index];
-      usersCopy[index] = JSON.stringify({ ...userObject, ['fio']: e.target.value});
-
+    setManagersObj((managersObj) => {                                           
+      const usersCopy = JSON.parse(JSON.stringify(managersObj));			
+      const userObject = JSON.parse(usersCopy[index]);
+      usersCopy[index] = JSON.stringify({ ...userObject, fio: e.target.value});		
+      //console.log(usersCopy) 
       return usersCopy;
     });   
   }
 
+  useEffect(()=> {
+    console.log("managersObj: ", managersObj)
+  }, [managersObj])
+
   //добавить менеджера
   const addManager = () => {
     
-    console.log(managersObj)
+    //console.log("managersObj: ", managersObj)
     const obj = {id: '', chatId: '', fio: '', }
     setManagersObj([ // with a new array
       ...managersObj, // that contains all the old items
       JSON.stringify(obj) // and one new item at the end
     ])
+    // console.log([ // with a new array
+    //   ...managersObj, // that contains all the old items
+    //   JSON.stringify(obj) // and one new item at the end
+    // ])
   }
 
   //удалить менеджера
@@ -915,10 +926,11 @@ const Companys = () => {
                                         onInputChange={(e)=>onChangeManager(e, index)}
                                         onChange={(event, newValue) => {
                                             if (newValue && newValue.length) {
-                                                setManagersObj((users) => {                                                                                        
-                                                  const usersCopy = JSON.parse(JSON.stringify(users));			                                         
-                                                  const userObject = usersCopy[index];
-                                                  usersCopy[index] = JSON.stringify({ ...userObject, ['fio']: newValue});                                           
+                                                setManagersObj((managersObj) => { 
+                                                  const usersCopy = JSON.parse(JSON.stringify(managersObj));			
+                                                  const userObject = JSON.parse(usersCopy[index]);
+                                                  const managerId = managersAll.find(a=>a.fio === newValue)
+                                                  usersCopy[index] = JSON.stringify({ ...userObject, id:managerId.id, fio: newValue});	                       
                                                   console.log(usersCopy)
                                                   return usersCopy;
                                                 });
