@@ -89,7 +89,7 @@ const Projects = () => {
 
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
-                    <h2>Проекты</h2>
+                    {/* <h2>Проекты</h2> */}
                     <CRow className="mt-2">
                       <CCol xs>
                         <CCard className="mb-4">
@@ -108,10 +108,10 @@ const Projects = () => {
 
                               <Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} /> 
                             </div>*/}
-                            
+
                             <Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} />
 
-                            <CTable align="middle" className="mb-0 border" hover responsive>
+                            <CTable align="middle" className="mb-0 border" hover responsive style={{borderRadius: '6px'}}>
                               <CTableHead className="text-center" color="light">
                                 {table.getHeaderGroups().map((headerGroup) => {
                                   return (

@@ -86,18 +86,25 @@ export default function Filters({ columnFilters, setColumnFilters }) {
     <>
       <CRow lg={{ gutter: 0 }} className="mb-1 ">
         <CCol className="align-self-center">
-          <ul>
+          <ul className="markers" style={{paddingLeft: '20px'}}>
             <li><span className='title-label'>Всего: </span>{'0'}</li>
             <li><span className='title-label'>В эфире: </span>{'0'}</li>
+            
           </ul>
         </CCol>
         <CCol className="align-self-center">
-          <ul>
-            <li><span className='title-label'>Готов: </span>{'0'}</li>
+          <ul className="markers" style={{paddingLeft: '20px'}}> 
             <li><span className='title-label'>В обработке: </span>{'0'}</li>
+            <li><span className='title-label'>Готов: </span>{'0'}</li>
           </ul>
         </CCol>
-        <CCol lg={4} style={{ display: 'flex' }} className="align-self-center">
+        <CCol className="align-self-center">
+          <ul className="markers" style={{paddingLeft: '20px'}}>
+            <li><span className='title-label'>Завершен: </span>{'0'}</li>
+            <li><span className='title-label'>Отменен: </span>{'0'}</li>
+          </ul>
+        </CCol>
+        <CCol lg={3} style={{ display: 'flex' }} className="align-self-center">
           {/* <Select
             className="uley_react_select"
             options={options}
@@ -130,10 +137,10 @@ export default function Filters({ columnFilters, setColumnFilters }) {
 
         <CCol className="align-self-center">
           <CRow lg={{ gutter: 1 }}>
-            <CCol lg={5}>
+            <CCol lg={6}>
               <DatePicker
                 className="uley-datepicker-control text-center"
-                style={{ height: '28px', width: '40px' }}
+                style={{ height: '28px', width: '30px' }}
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 selectsStart
@@ -143,9 +150,10 @@ export default function Filters({ columnFilters, setColumnFilters }) {
               />
             </CCol>
 
-            <CCol lg={5}>
+            <CCol lg={6}>
               <DatePicker
                 className="uley-datepicker-control text-center"
+                style={{ height: '28px', width: '30px' }}
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
                 selectsEnd
