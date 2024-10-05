@@ -153,22 +153,8 @@ export default function Filters({ columnFilters, setColumnFilters }) {
             <li><span className='title-label'>Отменен: </span>{'0'}</li>
           </ul>
         </CCol>
-        <CCol className="align-self-center" lg={2} style={{ display: 'flex' }} >
-          
-          
-          {/* <CCloseButton
-            className="uley_select_reset"
-            style={{ height: '28px', width: '28px' }}
-            onClick={() => setColumnFilters([])}
-          /> */}
-
-        </CCol>
-
-        {/* <CCol className="align-self-center" lg={1} >
-            <input className="form-control" style={{background: 'transparent'}} placeholder='Поиск'></input>
-        </CCol> */}
         
-        <CCol className="align-self-center" lg={6} style={{ display: 'flex', justifyContent: 'flex-end'}} >
+        <CCol className="align-self-center" lg={8} style={{ display: 'flex', justifyContent: 'flex-end'}} >
             <Select
                 className="uley_react_select"
                 options={options}
@@ -177,7 +163,13 @@ export default function Filters({ columnFilters, setColumnFilters }) {
                 classNamePrefix="custom-select_1"
                 autoFocus="true"
               />
+              <CCloseButton
+                className="uley_select_reset"
+                style={{ height: '28px', width: '28px',marginRight: '15px' }}
+                onClick={() => setColumnFilters([])}
+              />
               <input className="form-control" style={{background: 'transparent', width: '150px', marginRight: '25px'}} placeholder='Поиск'></input>
+              
               <CButton className='uley_add_user' style={{marginRight: '10px', padding: '18px'}}>
                 <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-14px', left: '11px'}}>
                 -</span>
