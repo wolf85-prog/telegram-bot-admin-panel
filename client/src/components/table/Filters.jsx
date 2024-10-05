@@ -22,9 +22,12 @@ import {
 import 'react-datepicker/dist/react-datepicker.css'
 
 const options = [
+  { value: 'project', label: 'Проект' },
+  { value: 'ID', label: 'ID' },
+  { value: 'status', label: 'Статус проекта' },
   { value: 'company', label: 'Компания' },
   { value: 'manager', label: 'Менеджер' },
-  { value: 'project', label: 'Проект' },
+  { value: 'city', label: 'Город' },
 ]
 
 const projList = [
@@ -150,59 +153,30 @@ export default function Filters({ columnFilters, setColumnFilters }) {
             <li><span className='title-label'>Отменен: </span>{'0'}</li>
           </ul>
         </CCol>
-        <CCol className="align-self-center" lg={4} style={{ display: 'flex' }} >
-          {/* <Select
-            className="uley_react_select"
-            options={options}
-            onChange={handleChangeFilterType}
-            defaultValue={filterType}
-            classNamePrefix="custom-select_1"
-            autoFocus="true"
-          /> */}
-          {/* <Select
-            className="uley_react_select"
-            onChange={handleFilterChange}
-            options={projectList}
-            defaultValue={projectList[0]}
-            classNamePrefix="custom-select_2"
-          />
-          <Select
-            className="uley_react_select"
-            onChange={handleFilterChange}
-            options={filter2}
-            defaultValue={filter2[0]}
-            classNamePrefix="custom-select_2"
-          /> */}
-          {/* <Select
-            className="uley_react_select"
-            onChange={handleFilterChange}
-            options={managerList}
-            defaultValue={managerList[0]}
-            classNamePrefix="custom-select_2"
-          /> */}
+        <CCol className="align-self-center" lg={2} style={{ display: 'flex' }} >
           
-
+          
           {/* <CCloseButton
             className="uley_select_reset"
             style={{ height: '28px', width: '28px' }}
             onClick={() => setColumnFilters([])}
           /> */}
 
-          <input className="form-control" style={{background: 'transparent', width: '15%', marginRight: '10px'}} placeholder='Проект'></input>
-          <input className="form-control" style={{background: 'transparent', width: '15%', marginRight: '10px'}} placeholder='ID'></input>
-          <input className="form-control" style={{background: 'transparent', width: '15%', marginRight: '10px'}} placeholder='Статус'></input>
-          <input className="form-control" style={{background: 'transparent', width: '15%', marginRight: '10px'}} placeholder='Компания'></input>
-          <input className="form-control" style={{background: 'transparent', width: '15%', marginRight: '10px'}} placeholder='Менеджер'></input>
-          <input className="form-control" style={{background: 'transparent', width: '15%', marginRight: '10px'}} placeholder='Город'></input>
-
-         
         </CCol>
 
         {/* <CCol className="align-self-center" lg={1} >
             <input className="form-control" style={{background: 'transparent'}} placeholder='Поиск'></input>
         </CCol> */}
         
-        <CCol className="align-self-center" lg={4} style={{ display: 'flex', justifyContent: 'flex-end'}} >
+        <CCol className="align-self-center" lg={6} style={{ display: 'flex', justifyContent: 'flex-end'}} >
+            <Select
+                className="uley_react_select"
+                options={options}
+                onChange={handleChangeFilterType}
+                defaultValue={filterType}
+                classNamePrefix="custom-select_1"
+                autoFocus="true"
+              />
               <input className="form-control" style={{background: 'transparent', width: '150px', marginRight: '25px'}} placeholder='Поиск'></input>
               <CButton className='uley_add_user' style={{marginRight: '10px', padding: '18px'}}>
                 <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-14px', left: '11px'}}>
