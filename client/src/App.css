@@ -759,5 +759,9 @@ th.widthCompany {
     position: relative;
     margin-left: -15px;
   }
+
+  .title-label {
+    color: #777777;
+  }
   
   

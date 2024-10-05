@@ -617,10 +617,11 @@ const clickNext = async() => {
     setShowMenu1(false)
 
     //добавить в список специальностей Blacklist
-    sfera.push('Blacklist')
-    console.log("sfera: ", sfera)
+    const arr = [...sfera]
+    arr.push('Blacklist')
+    //console.log("sfera: ", sfera)
 
-    setSfera(sfera)
+    setSfera(arr)
   }
 
   {/* Добавление файла */}

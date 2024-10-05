@@ -181,11 +181,24 @@ const Specialist = () => {
 
   useEffect(()=> {
 
-    const sorted = [...cities].sort((a, b) => {       
-      var cityA = a.label, cityB = b.label
-      return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+    const sorted = [...cities].sort((a, b) => {  
+      if (a.label == 'none') return -1;
+      if (b.label == 'none') return 1;   
+
+      if (a.label < b.label)
+        return -1;
+      if (a.label > b.label)
+          return 1;
+      return 0;
     })
 
+    // sorted.unshift(
+    //   {value: 0, label: '',},
+    //   {value: 1, label: "Москва",},
+    //   {value: 2, label: "Санкт-Петербург"},
+    // );
+
+    console.log("cities: ", sorted)
     setSortedCities(sorted)
 
     const fetchData = async() => {
@@ -273,6 +286,7 @@ const Specialist = () => {
           email: worker.email, 
           blockW: worker.blockW,
           block18: worker.block18,
+          createdAt: worker.createdAt,
         }
         arrWorkers.push(newWorker)
 
@@ -411,9 +425,10 @@ const Specialist = () => {
     
     if (userbots) {
       setNik(userbots.find((user) => user.chatId?.toString() === worker.chatId?.toString())?.username)
-      setDateReg(userbots.find((user) => user.chatId?.toString() === worker.chatId?.toString())?.createdAt)
+      //setDateReg(userbots.find((user) => user.chatId?.toString() === worker.chatId?.toString())?.createdAt)
+      //setDateReg(worker.createdAt)
     }
-    
+    setDateReg(worker.createdAt)
 
     setBlockW(worker.blockW)
     setBlock18(worker.block18)
@@ -612,6 +627,7 @@ const Specialist = () => {
           email: worker.email, 
           blockW: worker.blockW,
           block18: worker.block18,
+          createdAt: worker.createdAt,
         }
 		
 				arrayWorker.push(newWorker)
@@ -914,6 +930,11 @@ const Specialist = () => {
     setCityValue(e.target.value)
   }
 
+  const clearCity = () => {
+    setCity('')
+    setCityValue(0)
+  }
+
 
   return (
     <div className='dark-theme'>
@@ -1134,7 +1155,7 @@ const Specialist = () => {
 
                                   
                                   
-                                  <label>В системе</label>
+                                  <label className='title-label'>В системе</label>
                                   <div style={{display: 'flex', justifyContent: 'center'}}>
                                     <div className="text-field">
                                       <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" value={dateReg && dateReg.length >0 ? dateReg.split('-')[2].split('T')[0] + '.' + dateReg.split('-')[1] + '.' + dateReg.split('-')[0] : ''} style={{width: '250px'}}/>
@@ -1143,7 +1164,7 @@ const Specialist = () => {
 
                                   <div style={{display: 'flex'}}>
                                     <div>
-                                      <label>Самозанятость</label>
+                                      <label className='title-label'>Самозанятость</label>
                                       <div style={{display: 'flex'}}>
                                         <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
                                         <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
@@ -1153,7 +1174,7 @@ const Specialist = () => {
                                     </div>
                                     <div style={{width: '15px'}}></div>
                                     <div>
-                                      <label>Договор</label>
+                                      <label className='title-label'>Договор</label>
                                       <div style={{display: 'flex'}}>
                                         <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
                                         <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
@@ -1167,7 +1188,7 @@ const Specialist = () => {
 
                                    
                                   <div style={{position:'relative'}}>
-                                    <label>Паспорт</label>
+                                    <label className='title-label'>Паспорт</label>
                                     <div className="text-field" style={{marginBottom: '0px'}}>
                                       <textarea 
                                         className="text-field__input" 
@@ -1224,10 +1245,10 @@ const Specialist = () => {
                                         value={cityValue}
                                         onChange={(e)=>addCity(e)}
                                       />
-                                      <img src={Close} onClick={() => setCity('')} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px', visibility: showClearCity ? 'visible' : 'hidden', cursor: 'pointer'}}></img>
+                                      <img src={Close} onClick={clearCity} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px', visibility: showClearCity ? 'visible' : 'hidden', cursor: 'pointer'}}></img>
                                   </div>
 
-                                  <label>Специальность</label>
+                                  <label className='title-label'>Специальность</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
                                         tags={speclist.filter(item=>item !== 'Blacklist')}
@@ -1237,7 +1258,7 @@ const Specialist = () => {
                                       />
                                   </div>
 
-                                  <label>Компания</label>
+                                  <label className='title-label'>Компания</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
                                         tags={company}
@@ -1247,7 +1268,7 @@ const Specialist = () => {
                                       />
                                   </div>
 
-                                  <label>Комтеги</label>
+                                  <label className='title-label'>Комтеги</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
                                         tags={comteg}
@@ -1257,7 +1278,7 @@ const Specialist = () => {
                                       />
                                   </div>
 
-                                  <label>Комментарии</label>
+                                  <label className='title-label'>Комментарии</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
                                     <textarea 
                                       className="text-field__input" 
@@ -1301,7 +1322,7 @@ const Specialist = () => {
                                     </div>
                                   </div>
                                   
-                                  <label>Навык</label>
+                                  <label className='title-label'>Навык</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
                                         tags={skill}
@@ -1311,7 +1332,7 @@ const Specialist = () => {
                                       />
                                   </div>
 
-                                  <label>Мерч</label>
+                                  <label className='title-label'>Мерч</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
                                         tags={merch}
@@ -1321,7 +1342,7 @@ const Specialist = () => {
                                       />
                                   </div>
 
-                                  <label>Комтеги 2.0</label>
+                                  <label className='title-label'>Комтеги 2.0</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
                                         tags={comteg2}
@@ -1331,7 +1352,7 @@ const Specialist = () => {
                                       />
                                   </div>
 
-                                  <label>Комментарии 2.0</label>
+                                  <label className='title-label'>Комментарии 2.0</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
                                     <textarea 
                                       className="text-field__input" 
@@ -1372,7 +1393,7 @@ const Specialist = () => {
                                     
                                   </div> 
 
-                                  <label>Telegram</label>
+                                  <label className='title-label'>Telegram</label>
                                   <div className="text-field" onMouseOver={()=>setShowSave2(true)} onMouseOut={()=>setShowSave2(false)}>
                                     <img 
                                       src={Disketa} 
@@ -1404,7 +1425,7 @@ const Specialist = () => {
                                     <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
 
-                                  <label>ИНН</label>
+                                  <label className='title-label'>ИНН</label>
                                   <div className="text-field">
                                     <InputMask
                                         className="text-field__input" 
@@ -1427,7 +1448,7 @@ const Specialist = () => {
                                     <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
 
-                                  <label>Промокод</label>
+                                  <label className='title-label'>Промокод</label>
                                   <div className="text-field">
                                     <input 
                                       className="text-field__input" 
@@ -1447,7 +1468,7 @@ const Specialist = () => {
                                     <input className="text-field__input" type="text" name="passportScan" id="passportScan" value={passportScan} onChange={(e) => setPassportScan(e.target.value)} style={{width: '250px', overflow: 'hidden', textOverflow: 'ellipsis'}}/>
                                   </div> 
 
-                                  <label>Проекты</label>
+                                  <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
                                     <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     

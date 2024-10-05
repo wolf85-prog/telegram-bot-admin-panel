@@ -180,6 +180,11 @@ const Companys = () => {
       return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
     })
 
+    sorted.unshift(
+      {value: 1, label: "Москва",},
+      {value: 2, label: "Санкт-Петербург"},
+    );
+
     setSortedCities(sorted)
 
     const fetchData = async() => {
@@ -626,7 +631,7 @@ const Companys = () => {
   }
 
   useEffect(()=> {
-    console.log("managersObj: ", managersObj)
+    //console.log("managersObj: ", managersObj)
   }, [managersObj])
 
   //добавить менеджера
@@ -931,7 +936,7 @@ const Companys = () => {
                                                   const userObject = JSON.parse(usersCopy[index]);
                                                   const managerId = managersAll.find(a=>a.fio === newValue)
                                                   usersCopy[index] = JSON.stringify({ ...userObject, id:managerId.id, fio: newValue});	                       
-                                                  console.log(usersCopy)
+                                                  //console.log(usersCopy)
                                                   return usersCopy;
                                                 });
                                             }  
