@@ -96,7 +96,21 @@ const Projects = () => {
                           {/* <CCardHeader>Сметы</CCardHeader> */}
 
                           <CCardBody>
+                            {/* <div style={{display: 'flex'}}>
+                              <ul>
+                                <li><span className='title-label'>Всего: </span>{'0'}</li>
+                                <li><span className='title-label'>В эфире: </span>{'0'}</li>
+                              </ul>
+                              <ul>
+                                <li><span className='title-label'>Готов: </span>{'0'}</li>
+                                <li><span className='title-label'>В обработке: </span>{'0'}</li>
+                              </ul>
+
+                              <Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} /> 
+                            </div>*/}
+                            
                             <Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} />
+
                             <CTable align="middle" className="mb-0 border" hover responsive>
                               <CTableHead className="text-center" color="light">
                                 {table.getHeaderGroups().map((headerGroup) => {

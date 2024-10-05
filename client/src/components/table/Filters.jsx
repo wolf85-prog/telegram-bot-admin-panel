@@ -85,22 +85,35 @@ export default function Filters({ columnFilters, setColumnFilters }) {
   return (
     <>
       <CRow lg={{ gutter: 0 }} className="mb-1 ">
-        <CCol lg={6} style={{ display: 'flex' }} className="align-self-center">
-          <Select
+        <CCol className="align-self-center">
+          <ul>
+            <li><span className='title-label'>Всего: </span>{'0'}</li>
+            <li><span className='title-label'>В эфире: </span>{'0'}</li>
+          </ul>
+        </CCol>
+        <CCol className="align-self-center">
+          <ul>
+            <li><span className='title-label'>Готов: </span>{'0'}</li>
+            <li><span className='title-label'>В обработке: </span>{'0'}</li>
+          </ul>
+        </CCol>
+        <CCol lg={4} style={{ display: 'flex' }} className="align-self-center">
+          {/* <Select
             className="uley_react_select"
             options={options}
             onChange={handleChangeFilterType}
             defaultValue={filterType}
             classNamePrefix="custom-select_1"
             autoFocus="true"
-          />
-          <Select
+          /> */}
+          {/* <Select
             className="uley_react_select"
             onChange={handleFilterChange}
             options={filter}
             defaultValue={filter[0]}
             classNamePrefix="custom-select_2"
-          />
+          /> */}
+          
           <Select
             className="uley_react_select"
             options={periodList}
@@ -145,23 +158,11 @@ export default function Filters({ columnFilters, setColumnFilters }) {
           </CRow>
         </CCol>
 
-        <CCol className="align-self-center">
+        {/* <CCol className="align-self-center">
           <CRow>
-            <CCol className="align-self-center text-end">Генератор смет</CCol>
-            <CCol
-              style={{
-                maxWidth: '10px',
-                height: ' 30px',
-                alignSelf: 'center',
-              }}
-              className="uley-smeta-generate-line"
-            ></CCol>
-            <CCol lg="auto">
-              <CFormCheck id="flexCheckDefault" label="Компания" />
-              <CFormCheck id="flexCheckDefault1" label="Специалист" />
-            </CCol>
+
           </CRow>
-        </CCol>
+        </CCol> */}
       </CRow>
       {/* <CRow lg={{ gutter: 1 }} className="mb-1 mt-1">
         <CCol lg={1}>
