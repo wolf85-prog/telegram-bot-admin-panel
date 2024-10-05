@@ -35,18 +35,50 @@ const projList = [
   { value: 'Проект №5', label: '23.06 | Проект №5' },
 ]
 const managerList = [
+  { value: 'Менеджер', label: 'Менеджер' },
   { value: 'Захаров М. Н.', label: 'Захаров М. Н.' },
   { value: 'Рогов А. Е.', label: 'Рогов А. Е.' },
   { value: 'Игнатов А. П.', label: 'Игнатов А. П.' },
   { value: 'Никитина А. И.', label: 'Никитина А. И.' },
 ]
+const projectList = [
+  { value: 'Проект', label: 'Проект' },
+  { value: 'Проект', label: 'Проект' },
+  { value: 'Проект', label: 'Проект' },
+  { value: 'Проект', label: 'Проект' },
+  { value: 'Проект', label: 'Проект' },
+]
+const idList = [
+  { value: 'ID', label: 'ID' },
+  { value: 'ID', label: 'ID' },
+  { value: 'ID', label: 'ID' },
+  { value: 'ID', label: 'ID' },
+  { value: 'ID', label: 'ID' },
+]
+const statusList = [
+  { value: 'Статус', label: 'Статус' },
+  { value: 'Статус', label: 'Статус' },
+  { value: 'Статус', label: 'Статус' },
+  { value: 'Статус', label: 'Статус' },
+  { value: 'Статус', label: 'Статус' },
+]
 const companyList = [
-  { value: 'Компания 1', label: 'Компания 1' },
+  { value: 'Компания', label: 'Компания' },
   { value: 'Компания 2', label: 'Компания 2' },
   { value: 'Компания 3', label: 'Компания 3' },
   { value: 'Компания 4', label: 'Компания 4' },
   { value: 'Компания 5', label: 'Компания 5' },
 ]
+
+const cityList = [
+  { value: 'Город', label: 'Город' },
+  { value: 'Город 2', label: 'Город 2' },
+  { value: 'Город 3', label: 'Город 3' },
+  { value: 'Город 4', label: 'Город 4' },
+  { value: 'Город 5', label: 'Город 5' },
+]
+
+
 const periodList = [
   { value: 'Сутки', label: 'Сутки' },
   { value: 'Неделя', label: 'Неделя' },
@@ -75,11 +107,16 @@ export default function Filters({ columnFilters, setColumnFilters }) {
   const [endDate, setEndDate] = useState(new Date())
 
   const [filterType, setFilterType] = useState(options[0])
-  const [filter, setFilter] = useState(companyList)
+  const [filter1, setFilter1] = useState(projectList)
+  const [filter2, setFilter2] = useState(idList)
+  const [filter3, setFilter3] = useState(managerList)
+  const [filter4, setFilter4] = useState(companyList)
+  const [filter5, setFilter5] = useState(statusList)
+  const [filter6, setFilter6] = useState(cityList)
 
   const handleChangeFilterType = (selectedOption) => {
     setFilterType(selectedOption)
-    setFilter(filters[selectedOption.value])
+    //setFilter1(filters[selectedOption.value])
   }
 
   useEffect(() => {}, [columnFilters])
@@ -94,26 +131,26 @@ export default function Filters({ columnFilters, setColumnFilters }) {
   return (
     <>
       <CRow lg={{ gutter: 0 }} className="mb-1 ">
-        <CCol className="align-self-center">
+        <CCol className="align-self-center" lg={2} style={{width: '140px'}}>
           <ul className="markers" style={{paddingLeft: '20px'}}>
             <li><span className='title-label'>Всего: </span>{'0'}</li>
             <li><span className='title-label'>В эфире: </span>{'0'}</li>
             
           </ul>
         </CCol>
-        <CCol className="align-self-center">
+        <CCol className="align-self-center" lg={2} style={{width: '140px'}}>
           <ul className="markers" style={{paddingLeft: '20px'}}> 
             <li><span className='title-label'>В обработке: </span>{'0'}</li>
             <li><span className='title-label'>Готов: </span>{'0'}</li>
           </ul>
         </CCol>
-        <CCol className="align-self-center">
+        <CCol className="align-self-center" lg={2} style={{width: '140px'}}>
           <ul className="markers" style={{paddingLeft: '20px'}}>
             <li><span className='title-label'>Завершен: </span>{'0'}</li>
             <li><span className='title-label'>Отменен: </span>{'0'}</li>
           </ul>
         </CCol>
-        <CCol lg={3} style={{ display: 'flex' }} className="align-self-center">
+        <CCol className="align-self-center" lg={4} style={{ display: 'flex' }} >
           {/* <Select
             className="uley_react_select"
             options={options}
@@ -125,106 +162,67 @@ export default function Filters({ columnFilters, setColumnFilters }) {
           {/* <Select
             className="uley_react_select"
             onChange={handleFilterChange}
-            options={filter}
-            defaultValue={filter[0]}
+            options={projectList}
+            defaultValue={projectList[0]}
+            classNamePrefix="custom-select_2"
+          />
+          <Select
+            className="uley_react_select"
+            onChange={handleFilterChange}
+            options={filter2}
+            defaultValue={filter2[0]}
+            classNamePrefix="custom-select_2"
+          /> */}
+          {/* <Select
+            className="uley_react_select"
+            onChange={handleFilterChange}
+            options={managerList}
+            defaultValue={managerList[0]}
             classNamePrefix="custom-select_2"
           /> */}
           
-          <Select
-            className="uley_react_select"
-            options={periodList}
-            defaultValue={periodList[0]}
-            classNamePrefix="custom-select_3"
-          />
 
-          <CCloseButton
+          {/* <CCloseButton
             className="uley_select_reset"
             style={{ height: '28px', width: '28px' }}
             onClick={() => setColumnFilters([])}
-          />
-        </CCol>
-
-        <CCol className="align-self-center">
-          <CRow lg={{ gutter: 1 }}>
-
-          <CCol lg={4} style={{ display: 'flex' }} className="align-self-center">
-          {/* <Select
-            className="uley_react_select"
-            options={options}
-            onChange={handleChangeFilterType}
-            defaultValue={filterType}
-            classNamePrefix="custom-select_1"
-            autoFocus="true"
-          /> */}
-          {/* <Select
-            className="uley_react_select"
-            onChange={handleFilterChange}
-            options={filter}
-            defaultValue={filter[0]}
-            classNamePrefix="custom-select_2"
           /> */}
 
-            <CButton className='uley_add_user' style={{marginRight: '10px', padding: '18px'}}>
-              <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-14px', left: '11px'}}>
-              -</span>
-            </CButton>
-          
-            <Select
-              className="uley_react_select"
-              options={manthList}
-              defaultValue={manthList[0]}
-              classNamePrefix="custom-select_3"
-            />
+          <input className="form-control" style={{background: 'transparent', width: '15%', marginRight: '10px'}} placeholder='Проект'></input>
+          <input className="form-control" style={{background: 'transparent', width: '15%', marginRight: '10px'}} placeholder='ID'></input>
+          <input className="form-control" style={{background: 'transparent', width: '15%', marginRight: '10px'}} placeholder='Статус'></input>
+          <input className="form-control" style={{background: 'transparent', width: '15%', marginRight: '10px'}} placeholder='Компания'></input>
+          <input className="form-control" style={{background: 'transparent', width: '15%', marginRight: '10px'}} placeholder='Менеджер'></input>
+          <input className="form-control" style={{background: 'transparent', width: '15%', marginRight: '10px'}} placeholder='Город'></input>
 
-            <CButton className='uley_add_user' style={{marginLeft: '0px', padding: '18px'}}>
-              <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-13px', left: '6px'}}>
-              +</span>
-            </CButton>
-          </CCol>
-
-            {/* <CCol lg={6}>
-              <DatePicker
-                className="uley-datepicker-control text-center"
-                style={{ height: '28px', width: '30px' }}
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                selectsStart
-                startDate={startDate}
-                endDate={endDate}
-                dateFormat="dd.MM.yyyy"
-              />
-            </CCol>
-
-            <CCol lg={6}>
-              <DatePicker
-                className="uley-datepicker-control text-center"
-                style={{ height: '28px', width: '30px' }}
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-                selectsEnd
-                startDate={startDate}
-                endDate={endDate}
-                minDate={startDate}
-                dateFormat="dd.MM.yyyy"
-              />
-            </CCol> */}
-          </CRow>
+         
         </CCol>
 
-        {/* <CCol className="align-self-center">
-          <CRow>
-
-          </CRow>
+        {/* <CCol className="align-self-center" lg={1} >
+            <input className="form-control" style={{background: 'transparent'}} placeholder='Поиск'></input>
         </CCol> */}
+        
+        <CCol className="align-self-center" lg={4} style={{ display: 'flex', justifyContent: 'flex-end'}} >
+              <input className="form-control" style={{background: 'transparent', width: '150px', marginRight: '25px'}} placeholder='Поиск'></input>
+              <CButton className='uley_add_user' style={{marginRight: '10px', padding: '18px'}}>
+                <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-14px', left: '11px'}}>
+                -</span>
+              </CButton>
+            
+              <Select
+                className="uley_react_select"
+                options={manthList}
+                defaultValue={manthList[0]}
+                classNamePrefix="custom-select_3"
+              />
+
+              <CButton className='uley_add_user' style={{marginLeft: '0px', padding: '18px'}}>
+                <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-13px', left: '6px'}}>
+                +</span>
+              </CButton>
+        </CCol>
+
       </CRow>
-      {/* <CRow lg={{ gutter: 1 }} className="mb-1 mt-1">
-        <CCol lg={1}>
-          <input className="form-control"></input>
-        </CCol>
-        <CCol lg={1}>
-          <input className="form-control"></input>
-        </CCol>
-      </CRow> */}
     </>
   )
 }
