@@ -272,6 +272,7 @@ const Managers = () => {
         user.sfera && JSON.parse(user.sfera).map((item, index)=> {
           str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
         })
+        console.log(str_sfera)
 
         let str_komteg = ''
         user.comteg && JSON.parse(user.comteg).map((item, index)=> {
@@ -500,6 +501,7 @@ const clickNext = async() => {
       user.sfera && JSON.parse(user.sfera).map((item, index)=> {
         str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
       })
+      console.log(str_sfera)
 
       let str_komteg = ''
       user.comteg && JSON.parse(user.comteg).map((item, index)=> {

@@ -165,19 +165,18 @@ const AppSidebar = () => {
     },
 
     {
-      component: CNavLink,
+      component: CNavItem,
       name: 'Проекты',
-      // href: 'https://www.notion.so/amusienko/0e317603bca24676ac25616243e10ab4?v=d61a947d60834e3eafcc2dba4b46cb96',
+      to: '/projects',
       icon: <img src={ProjIcon} style={{width: '25px', marginRight: '18px', marginLeft: '4px'}} />,
-      style: {backgroundColor: '#0078d421', cursor: 'pointer'},
-      onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/0e317603bca24676ac25616243e10ab4?v=d61a947d60834e3eafcc2dba4b46cb96'),
+      style: {color: '#e55353',},
     },
     {
       component: CNavLink,
       name: 'В эфире',
       //href: 'https://www.notion.so/amusienko/On-Air-fc187957a95a4814ac365d6ce6188585',
       icon: <CIcon icon={cilMicrophone} customClassName="nav-icon" />,
-      onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/On-Air-fc187957a95a4814ac365d6ce6188585'),
+      //onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/On-Air-fc187957a95a4814ac365d6ce6188585'),
       style: {cursor: 'pointer'},
     },
     {
@@ -185,7 +184,7 @@ const AppSidebar = () => {
       name: 'Площадки',
       //href: 'https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-      onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be'),
+      //onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be'),
       style: {cursor: 'pointer'},
     },
     {
