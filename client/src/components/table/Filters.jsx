@@ -115,7 +115,7 @@ const filters = {
   period: periodList,
 }
 
-export default function Filters({ columnFilters, setColumnFilters }) {
+export default function Filters({ columnFilters, setColumnFilters, setShowTable, showTable }) {
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
 
@@ -183,7 +183,7 @@ export default function Filters({ columnFilters, setColumnFilters }) {
                 onClick={() => setColumnFilters([])}
               />
 
-              <CButton className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
+              <CButton onClick={()=>setShowTable(!showTable)} className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
                 <span style={{position: 'absolute', top: '-4px', left: '5px'}}>
                   <img src={ChangeSloy} alt='' width={25} />
                 </span>

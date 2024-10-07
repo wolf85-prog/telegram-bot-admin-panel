@@ -70,6 +70,7 @@
     &__option {
       cursor: pointer !important;
       height: 30px;
+      text-align: center;
       &--is-focused {
         background-color: lighten(#1f282c, 10%) !important;
       }

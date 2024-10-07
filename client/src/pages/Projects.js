@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useState } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import { 
   CContainer, 
@@ -30,9 +30,12 @@ import {
 import { useTableData } from 'src/components/table/useTableData'
 import TableHeader from 'src/components/table/TableHeader'
 import Filters from 'src/components/table/Filters'
+import Calendar from 'src/components/Calendar/Calendar'
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters } = useTableData()
+
+  const [showTable, setShowTable] = useState(false)
 
   const table = useReactTable({
     defaultColumn: {
@@ -84,72 +87,64 @@ const Projects = () => {
                           {/* <CCardHeader>Сметы</CCardHeader> */}
 
                           <CCardBody>
-                            {/* <div style={{display: 'flex'}}>
-                              <ul>
-                                <li><span className='title-label'>Всего: </span>{'0'}</li>
-                                <li><span className='title-label'>В эфире: </span>{'0'}</li>
-                              </ul>
-                              <ul>
-                                <li><span className='title-label'>Готов: </span>{'0'}</li>
-                                <li><span className='title-label'>В обработке: </span>{'0'}</li>
-                              </ul>
+                            <Filters setShowTable={setShowTable} showTable={showTable} columnFilters={columnFilters} setColumnFilters={setColumnFilters} />
+                            {
+                              showTable ? 
+                              <CTable align="middle" className="mb-0 border" hover responsive style={{borderRadius: '6px'}}>
+                                <CTableHead className="text-center" color="light">
+                                  {table.getHeaderGroups().map((headerGroup) => {
+                                    return (
+                                      <CTableRow key={headerGroup.id}>
+                                        {headerGroup.headers.map((header, index) => {
+                                          return (
+                                            <TableHeader
+                                              header={header}
+                                              key={index}
+                                              //
+                                            />
+                                          )
+                                        })}
+                                      </CTableRow>
+                                    )
+                                  })}
+                                </CTableHead>
+                                <CTableBody>
+                                  {table.getRowModel().rows.map((row, index) => {
+                                    return (
+                                      <CTableRow className="text-center" key={index}>
+                                        {row.getVisibleCells().map((cell, index) => {
+                                          return (
+                                            <CTableDataCell key={index}> 
+                                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </CTableDataCell>
+                                          )
+                                        })}
+                                      </CTableRow>
+                                    )
+                                  })}
+                                </CTableBody>
+                                <CTableFoot>
+                                  {table.getFooterGroups().map((footerGroup, index) => {
+                                    return (
+                                      <CTableRow key={index}>
+                                        {footerGroup.headers.map((footer, index) => {
+                                          return (
+                                            <CTableHeaderCell className="text-center" key={index}>
+                                              {footer.isPlaceholder
+                                                ? null
+                                                : flexRender(footer.column.columnDef.footer, footer.getContext())}
+                                            </CTableHeaderCell>
+                                          )
+                                        })}
+                                      </CTableRow>
+                                    )
+                                  })}
+                                </CTableFoot>
+                              </CTable>
+                              :
+                              <Calendar />
+                            }
 
-                              <Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} /> 
-                            </div>*/}
-
-                            <Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} />
-
-                            <CTable align="middle" className="mb-0 border" hover responsive style={{borderRadius: '6px'}}>
-                              <CTableHead className="text-center" color="light">
-                                {table.getHeaderGroups().map((headerGroup) => {
-                                  return (
-                                    <CTableRow key={headerGroup.id}>
-                                      {headerGroup.headers.map((header, index) => {
-                                        return (
-                                          <TableHeader
-                                            header={header}
-                                            key={index}
-                                            //
-                                          />
-                                        )
-                                      })}
-                                    </CTableRow>
-                                  )
-                                })}
-                              </CTableHead>
-                              <CTableBody>
-                                {table.getRowModel().rows.map((row, index) => {
-                                  return (
-                                    <CTableRow className="text-center" key={index}>
-                                      {row.getVisibleCells().map((cell, index) => {
-                                        return (
-                                          <CTableDataCell key={index}> 
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                          </CTableDataCell>
-                                        )
-                                      })}
-                                    </CTableRow>
-                                  )
-                                })}
-                              </CTableBody>
-                              <CTableFoot>
-                                {table.getFooterGroups().map((footerGroup, index) => {
-                                  return (
-                                    <CTableRow key={index}>
-                                      {footerGroup.headers.map((footer, index) => {
-                                        return (
-                                          <CTableHeaderCell className="text-center" key={index}>
-                                            {footer.isPlaceholder
-                                              ? null
-                                              : flexRender(footer.column.columnDef.footer, footer.getContext())}
-                                          </CTableHeaderCell>
-                                        )
-                                      })}
-                                    </CTableRow>
-                                  )
-                                })}
-                              </CTableFoot>
-                            </CTable>
                           </CCardBody>
                         </CCard>
                       </CCol>

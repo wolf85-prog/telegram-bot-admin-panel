@@ -1,0 +1,43 @@
+.frame {
+  width: 100%;
+}
+  
+.calendar-header {
+ font-size: 18px;
+  font-weight: bold;
+  padding: 10px 10px 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #131c21;   
+}
+
+
+.body {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;  
+    height: 645px; 
+}
+
+.day-header {
+    width: 14.2%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;  
+    border: none;  
+    margin-bottom: 0;
+}
+
+.day {
+    width: 14.2%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;  
+    border: 1px solid #1f282d;  
+    margin-bottom: 20px;
+}
+  
