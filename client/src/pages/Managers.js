@@ -166,7 +166,7 @@ const Managers = () => {
     
     setManagers(text === '' ? managerCount : filteredData); 
 
-    setManagersCount(text === '' ? managerCount.length : filteredData.length)
+    setManagersCount(text === '' ? managersAll.length : filteredData.length)
     //console.log("specialist", specialist)
     setShowClear(text === '' ? false : true)
   }, [text]);

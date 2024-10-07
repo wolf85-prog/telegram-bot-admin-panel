@@ -45,7 +45,6 @@
     }
     &__single-value {
       color: #e4e5e5 !important;
-      height: 30px;
     }
   
     &__indicators {
@@ -67,9 +66,10 @@
         width: 0;
       }
     }
-  
+
     &__option {
       cursor: pointer !important;
+      height: 30px;
       &--is-focused {
         background-color: lighten(#1f282c, 10%) !important;
       }
@@ -98,7 +98,7 @@
     }
     &__option {
       cursor: pointer !important;
-      height: 35px;
+      height: 30px;
       &--is-focused {
         background-color: lighten(#1f282c, 10%) !important;
       }

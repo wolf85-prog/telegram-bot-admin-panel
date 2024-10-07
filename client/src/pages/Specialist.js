@@ -68,7 +68,7 @@ import cities from 'src/data/cities';
 //Workers.js
 const Specialist = () => {
 
-  const { specialist, setSpecialist, specialistAll, setSpecialistAll, addNewSpecialist } = useUsersContext();
+  const { specialist, setSpecialist, specialistAll, setSpecialistAll, specialistsCount, setSpecialistsCount, addNewSpecialist } = useUsersContext();
   //const { userWorkers: specusers } = useUsersContext();
 
   const [specialistCount, setSpecialistCount] = useState([]);
@@ -174,6 +174,8 @@ const Specialist = () => {
   useEffect(() => {
 		const filteredData = specialistAll.filter(user=> (user.fio + user.chatId + user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setSpecialist(text === '' ? specialistCount : filteredData); 
+
+    setSpecialistsCount(text === '' ? specialistAll.length : filteredData.length)
     //console.log("specialist", specialist)
     setShowClear(text === '' ? false : true)
   }, [text]);
@@ -971,7 +973,7 @@ const Specialist = () => {
                       <CCol style={{textAlign: 'center'}}>
                         <CCard className="mb-4"> 
                             <p style={{position: 'absolute', top: '-18px', right: '15px', fontSize: '14px', color: '#f3f3f3'}}>
-                              Всего: {specialistAll.length}
+                              Всего: {specialistsCount}
                             </p>
                             <CCardBody>
                               {!showProfile ?

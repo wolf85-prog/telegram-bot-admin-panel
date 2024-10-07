@@ -99,6 +99,8 @@ const UsersProvider = ({ children }) => {
 	});  //все специалисты;
 
 	const [specialist, setSpecialist] =  useState([])
+
+	const [specialistsCount, setSpecialistsCount] = useState(0)
 	const [managersCount, setManagersCount] = useState(0)
 	const [companysCount, setCompanysCount] = useState(0)
 
@@ -351,6 +353,23 @@ const UsersProvider = ({ children }) => {
 
 	}, [])
 
+//---------get Specialist----------------------------------------------------
+
+useEffect(() => {
+	//---------get UserSpecialist-----------------------------------------
+	const fetchUserSpecData = async () => {
+	
+		//0 все специалисты
+		let all = await getManagerCountAll()
+		console.log("specialist all: ", all)
+
+		setManagersCount(all)
+	}
+	
+	//все специалисты
+	fetchUserSpecData();
+	
+},[])
 
 //---------get Managers----------------------------------------------------
 
@@ -2283,7 +2302,9 @@ function isObjectEmpty(obj) {
 			managersAll, 
 			setManagersAll,
 			companysAll,
-			setCompanysAll
+			setCompanysAll,
+			specialistsCount, 
+			setSpecialistsCount,
 		}}>
 			{children}
 		</UsersContext.Provider>

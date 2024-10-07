@@ -157,7 +157,7 @@ const Companys = () => {
 		const filteredData = companysAll.filter(user=> (user.title)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setCompanys(text === '' ? companyCount : filteredData); 
 
-    setCompanysCount(text === '' ? companyCount.length : filteredData.length)
+    setCompanysCount(text === '' ? companysAll.length : filteredData.length)
     //console.log("specialist", specialist)
     setShowClear(text === '' ? false : true)
   }, [text]);
