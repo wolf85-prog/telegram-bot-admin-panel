@@ -144,15 +144,15 @@ export default function Filters({ columnFilters, setColumnFilters }) {
   return (
     <>
       <CRow lg={{ gutter: 0 }} className="mb-1 ">
-        <CCol className="align-self-center" style={{maxWidth: '110px'}}>
-          <ul className="markers" style={{paddingLeft: '0'}}>
+        <CCol className="align-self-center" style={{maxWidth: '130px'}}>
+          <ul className="markers" style={{paddingLeft: '20px', listStyle: 'disc'}}>
             <li><span className='title-label'>Проекты: </span>{'0'}</li>
             <li><span className='title-label'>Часы: </span>{'0'}</li>
             
           </ul>
         </CCol>
-        <CCol className="align-self-center" style={{maxWidth: '110px'}}>
-          <ul className="markers" style={{paddingLeft: '0'}}> 
+        <CCol className="align-self-center" style={{maxWidth: '130px'}}>
+          <ul className="markers" style={{paddingLeft: '20px', listStyle: 'disc'}}> 
             <li><span className='title-label'>В эфире: </span>{'0'}</li>
             <li><span className='title-label'>В обработке: </span>{'0'}</li>
           </ul>
