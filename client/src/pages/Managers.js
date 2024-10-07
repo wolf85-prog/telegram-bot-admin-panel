@@ -1091,8 +1091,10 @@ const clickNext = async() => {
                                                 console.log("comp: ", comp)
                                                 if (comp) {
                                                   setCompanyName(comp.title)
-                                                  setCompany(comp.id);
+                                                  setCompany(comp.id)
                                                   setInn(comp.inn) 
+                                                  setSklad(comp.sklad)
+                                                  setOffice(comp.office)
                                                 }
                                             }  
                                         }}
