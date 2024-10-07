@@ -79,6 +79,8 @@ class CompanysController {
                 bugalterPhone,  
                 inn, //инн компании
                 profile,
+                sfera,
+                comteg,
             } = req.body
 
             const newUser = await Company.update(
@@ -97,6 +99,8 @@ class CompanysController {
                     bugalterPhone,  
                     inn, //инн компании
                     profile,
+                    sfera,
+                    comteg,
                 },
                 { where: {id: id} })
             return res.status(200).json(newUser);

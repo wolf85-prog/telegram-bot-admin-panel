@@ -242,6 +242,11 @@ const Companys = () => {
           comment: str_comment,
           managers: str_manager,
           managersObj: str_manager2,
+          bugalterFio, 
+          bugalterEmail,
+          bugalterPhone,
+          profile,
+
         }
         arrCompanys.push(newUser)
 
@@ -405,6 +410,10 @@ const Companys = () => {
           comment: str_comment,
           managers: str_manager,
           managersObj: str_manager2,
+          bugalterFio, 
+          bugalterEmail,
+          bugalterPhone,
+          profile,
         }
         arrCompanys.push(newUser)
 
@@ -557,6 +566,7 @@ const Companys = () => {
           bugalterEmail,
           bugalterPhone,  
           inn, //инн компании
+          profile,
         };
   
         console.log("update user: ", usersCopy[userIndex])
@@ -612,10 +622,10 @@ const Companys = () => {
     setSklad(user.sklad ? user.sklad : '')
     setManagers(user.managers ? user.managers.split(', ') : [])
     setManagersObj(user.managersObj ? user.managersObj.split(', ') : [])
-
-    //console.log(user.managers ? user.managers.split(', ') : [])
-    //console.log(user.managersObj ? user.managersObj.split(', ') : [])
-
+    setBugalterFio(user.bugalterFio ? user.bugalterFio : '')
+    setBugalterEmail(user.bugalterEmail ? user.bugalterEmail : '')
+    setBugalterPhone(user.bugalterPhone ? user.bugalterPhone : '')
+    setProfile(user.profile)
   }
 
   const onChangeManager = (e, index) => {

@@ -204,6 +204,8 @@ const Company = sequelize.define('company', {
     GUID: {type: DataTypes.STRING}, 
     inn: {type: DataTypes.STRING}, //инн компании
     profile: {type: DataTypes.STRING},
+    sfera: {type: DataTypes.TEXT},
+    comteg: {type: DataTypes.TEXT},
 })
 
 
