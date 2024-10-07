@@ -203,6 +203,7 @@ const Company = sequelize.define('company', {
     bugalterPhone: {type: DataTypes.STRING},  
     GUID: {type: DataTypes.STRING}, 
     inn: {type: DataTypes.STRING}, //инн компании
+    profile: {type: DataTypes.STRING},
 })
 
 
