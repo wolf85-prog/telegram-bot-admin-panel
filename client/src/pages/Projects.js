@@ -16,16 +16,6 @@ import {
   CTableFoot,
   CTableHead,
   CTableHeaderCell,
-  CModal,
-  CModalHeader,
-  CModalTitle,
-  CModalBody,
-  CModalFooter,
-  CFormSelect,
-  CToast, 
-  CToastBody,
-  CToastClose,
-  CToaster,
 
 } from '@coreui/react'
 import {
@@ -40,8 +30,6 @@ import {
 import { useTableData } from 'src/components/table/useTableData'
 import TableHeader from 'src/components/table/TableHeader'
 import Filters from 'src/components/table/Filters'
-
-
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters } = useTableData()

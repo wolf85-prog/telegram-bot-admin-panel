@@ -5,6 +5,8 @@ import { cilList, cilShieldAlt } from '@coreui/icons'
 import DatePicker from 'react-datepicker'
 import Select from 'react-select'
 
+import ChangeSloy from "./../../assets/images/change_sloy.png";
+
 import {
   CCloseButton,
   CFormInput,
@@ -24,9 +26,10 @@ import 'react-datepicker/dist/react-datepicker.css'
 const options = [
   { value: 'project', label: 'Проект' },
   { value: 'ID', label: 'ID' },
-  { value: 'status', label: 'Статус проекта' },
   { value: 'company', label: 'Компания' },
-  { value: 'manager', label: 'Менеджер' },
+  { value: 'manager', label: 'Менеджер' },  
+  { value: 'specialist', label: 'Специалист' },
+  { value: 'status', label: 'Статус' },
   { value: 'city', label: 'Город' },
 ]
 
@@ -117,7 +120,7 @@ export default function Filters({ columnFilters, setColumnFilters }) {
   const [endDate, setEndDate] = useState(new Date())
 
   const [filterType, setFilterType] = useState(options[0])
-  const [filter1, setFilter1] = useState(projectList)
+  const [filter, setFilter] = useState(projList)
   const [filter2, setFilter2] = useState(idList)
   const [filter3, setFilter3] = useState(managerList)
   const [filter4, setFilter4] = useState(companyList)
@@ -126,7 +129,7 @@ export default function Filters({ columnFilters, setColumnFilters }) {
 
   const handleChangeFilterType = (selectedOption) => {
     setFilterType(selectedOption)
-    //setFilter1(filters[selectedOption.value])
+    setFilter(filters[selectedOption.value])
   }
 
   useEffect(() => {}, [columnFilters])
@@ -141,43 +144,52 @@ export default function Filters({ columnFilters, setColumnFilters }) {
   return (
     <>
       <CRow lg={{ gutter: 0 }} className="mb-1 ">
-        <CCol className="align-self-center" lg={2} style={{width: '140px'}}>
-          <ul className="markers" style={{paddingLeft: '20px'}}>
-            <li><span className='title-label'>Всего: </span>{'0'}</li>
-            <li><span className='title-label'>В эфире: </span>{'0'}</li>
+        <CCol className="align-self-center" style={{maxWidth: '110px'}}>
+          <ul className="markers" style={{paddingLeft: '0'}}>
+            <li><span className='title-label'>Проекты: </span>{'0'}</li>
+            <li><span className='title-label'>Часы: </span>{'0'}</li>
             
           </ul>
         </CCol>
-        <CCol className="align-self-center" lg={2} style={{width: '140px'}}>
-          <ul className="markers" style={{paddingLeft: '20px'}}> 
+        <CCol className="align-self-center" style={{maxWidth: '110px'}}>
+          <ul className="markers" style={{paddingLeft: '0'}}> 
+            <li><span className='title-label'>В эфире: </span>{'0'}</li>
             <li><span className='title-label'>В обработке: </span>{'0'}</li>
-            <li><span className='title-label'>Готов: </span>{'0'}</li>
-          </ul>
-        </CCol>
-        <CCol className="align-self-center" lg={2} style={{width: '140px'}}>
-          <ul className="markers" style={{paddingLeft: '20px'}}>
-            <li><span className='title-label'>Завершен: </span>{'0'}</li>
-            <li><span className='title-label'>Отменен: </span>{'0'}</li>
           </ul>
         </CCol>
         
-        <CCol className="align-self-center" lg={8} style={{ display: 'flex', justifyContent: 'flex-end'}} >
-            <Select
+        <CCol className="align-self-center" style={{ display: 'flex', justifyContent: 'flex-end'}} >
+              <Select
                 className="uley_react_select"
                 options={options}
                 onChange={handleChangeFilterType}
                 defaultValue={filterType}
-                classNamePrefix="custom-select_1"
+                classNamePrefix="custom-select_3"
                 autoFocus="true"
               />
-              {/* <CCloseButton
-                className="uley_select_reset"
-                style={{ height: '28px', width: '28px',marginRight: '15px' }}
-                onClick={() => setColumnFilters([])}
-              /> */}
-              <input className="form-control" style={{background: 'transparent', width: '150px', marginRight: '25px'}} placeholder='Поиск'></input>
+              <Select
+                className="uley_react_select"
+                onChange={handleFilterChange}
+                options={filter}
+                defaultValue={filter[0]}
+                classNamePrefix="custom-select_2"
+              />
+              <input className="form-control" style={{background: 'transparent', width: '110px', marginRight: '15px'}} placeholder='01.01.2024'></input>
+              <input className="form-control" style={{background: 'transparent', width: '150px', marginRight: '15px'}} placeholder='Поиск'></input>
               
-              <CButton className='uley_add_user' style={{marginRight: '10px', padding: '18px'}}>
+              <CCloseButton
+                className="uley_select_reset"
+                style={{ height: '28px', width: '28px',marginRight: '15px', marginLeft: '0' }}
+                onClick={() => setColumnFilters([])}
+              />
+
+              <CButton className='uley_add_user uley_select_reset' style={{marginRight: '15px', padding: '18px', marginLeft: '0'}}>
+                <span style={{position: 'absolute', top: '-4px', left: '5px'}}>
+                  <img src={ChangeSloy} alt='' width={25} />
+                </span>
+              </CButton>
+              
+              <CButton className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
                 <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-14px', left: '11px'}}>
                 -</span>
               </CButton>
@@ -189,7 +201,7 @@ export default function Filters({ columnFilters, setColumnFilters }) {
                 classNamePrefix="custom-select_3"
               />
 
-              <CButton className='uley_add_user' style={{marginLeft: '0px', padding: '18px'}}>
+              <CButton className='uley_add_user uley_select_reset' style={{marginLeft: '0px', padding: '18px'}}>
                 <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-13px', left: '6px'}}>
                 +</span>
               </CButton>
