@@ -1216,7 +1216,7 @@ const Specialist = () => {
                                   {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
-                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
+                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
                                     <div style={{display: 'flex'}}>
                                       <Icon id="delete" onClick={()=>clickDelete(id)} />
@@ -1228,8 +1228,9 @@ const Specialist = () => {
                                     </div>
                                   </div>
 {/* 2 */}
-                                <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
+                                <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '320px', position: 'relative'}}>
                                   {/* Город */}
+                                  <label className='title-label' style={{position: 'absolute', top: '-25px', left: '140px'}}>Город</label>
                                   <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}> 
                                       {/* <MyDropdown
                                         style={{backgroundColor: '#131c21'}}
@@ -1291,10 +1292,10 @@ const Specialist = () => {
                                   
                                 </div>
 {/* 3 */}
-                                <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
-                                  <div className="uley-line" style={{left: '670px', width: '70px'}}></div>
-                                  <div className="uley-line" style={{left: '805px', width: '50px'}}></div>
-                                  <div className="uley-line" style={{left: '900px', width: '50px'}}></div>
+                                <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '320px'}}>
+                                  <div className="uley-line" style={{left: '670px', top: '60px', width: '70px'}}></div>
+                                  <div className="uley-line" style={{left: '805px', top: '60px', width: '50px'}}></div>
+                                  <div className="uley-line" style={{left: '900px', top: '60px', width: '50px'}}></div>
                                   <div style={{display: 'flex'}}>
                                     {/* возраст */}
                                     <div className="text-field">
@@ -1365,9 +1366,10 @@ const Specialist = () => {
                                 </div>
 
 {/* 4 */}
-                                <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '250px'}}>
+                                <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '250px', position: 'relative'}}>
 
                                   {/* phone */}
+                                  <label className='title-label' style={{position: 'absolute', top: '-25px', left: '90px'}}>Телефон</label>
                                   <div className="text-field" onMouseOver={()=>setShowSave(true)} onMouseOut={()=>setShowSave(false)}>
                                     <img 
                                       src={Disketa} 
