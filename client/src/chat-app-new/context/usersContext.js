@@ -473,7 +473,7 @@ useEffect(() => {
 			setConversations(convers)
 
 			//4 все сообщения бота
-			let messagesAll = await getWMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
+			let messagesAll = await getWMessagesCount(2000) //getWMessagesCount(1000) //getAllWMessages()
 			//console.log("messagesAll: ", messagesAll.length)
 
 			let count = 0
@@ -622,7 +622,7 @@ useEffect(() => {
     const fetchData = async () => {
       // 1 Все специалисты
       const res = await getSpecialist()
-	  //console.log("getSpecialist: ", res)
+
       let arrAllWorkers = []
       res.map(async (worker, i) => {
         let str_spec = ''
@@ -705,24 +705,75 @@ useEffect(() => {
     
   },[])
 
-	
-//------------------------------------------------------------------------------------------
 
-	//get Managers
+//------------------------------------------------------------------------------------------
+//get Managers
+//------------------------------------------------------------------------------------------		
 	useEffect(() => {
     	const fetchData = async () => {
 			let response = await getManager();
       		console.log("managers context: ", response.length)
 
-			setManagersAll(response)
+			let arr = []
+			response.map(async (user, i) => {
+
+				let str_sfera = ''
+				user.sfera && JSON.parse(user.sfera).map((item, index)=> {
+				  str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
+				})
+		  
+				let str_komteg = ''
+				user.comteg && JSON.parse(user.comteg).map((item, index)=> {
+				  str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
+				})
+		  
+				let str_comment = ''
+				user.comment && JSON.parse(user.comment).map((item, index)=> {
+				  str_comment = str_comment + item.content + (index+1 !== JSON.parse(user.comment).length ? ', ' : '')
+				})
+		  
+				let str_company = ''
+				let str_company_name = ''
+				const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.companyId))
+				if (comp) {
+				  str_company = comp.id
+				  str_company_name = comp.title
+				}
+		  
+				const newUser = {
+				  id: user.id,
+				  fio: user.fio,
+				  chatId: user.chatId, 
+				  phone: user.phone, 
+				  phone2: user.phone2,
+				  city: user.city, 
+				  sfera: str_sfera,
+				  dolgnost: user.dolgnost,
+				  company: str_company, 
+				  companyName: str_company_name,
+				  comteg: str_komteg, 
+				  comment: str_comment, 
+				  inn: user.inn, 
+				  profile: user.profile, 
+				  dogovor: user.dogovor ? '🟢' : '🔴', 
+				  email: user.email, 
+				  projects: user.projects,
+				  block: user.block,
+				}
+				arr.push(newUser)
+
+			  }) 
+
+			setManagersAll(arr)
 		}
 
 	  	fetchData();
 
 	},[])
 
-
-	//get Companys
+//------------------------------------------------------------------------------------------
+// get Companys
+//------------------------------------------------------------------------------------------	
 	useEffect(() => {
     	const fetchData = async () => {
 			let company = await getCompany();
@@ -2224,7 +2275,9 @@ function isObjectEmpty(obj) {
 			managers, 
 			setManagers,
 			managersCount,
+			setManagersCount,
 			companysCount,
+			setCompanysCount,
 			companys,
 			setCompanys,
 			managersAll, 

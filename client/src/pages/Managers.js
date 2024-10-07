@@ -63,7 +63,7 @@ import { getContacts } from '../http/chatAPI'
 //Workers.js
 const Managers = () => {
 
-  const { managers, setManagers, managersCount, managersAll, setManagersAll, companysAll } = useUsersContext();
+  const { managers, setManagers, managersCount, setManagersCount, managersAll, setManagersAll, companysAll } = useUsersContext();
   const [sortedCities, setSortedCities] = useState([])
   const [managerCount, setManagerCount] = useState([]);
   const [companysData, setCompanysData] = useState([]);
@@ -161,66 +161,12 @@ const Managers = () => {
 
 
   //поиск
-  //поиск
   useEffect(() => {
 		const filteredData = managersAll.filter(user=> (user.fio + user.chatId + user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
     
-    filteredData.map(async (user, i) => {
+    setManagers(text === '' ? managerCount : filteredData); 
 
-      let str_sfera = ''
-      user.sfera && JSON.parse(user.sfera).map((item, index)=> {
-        str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
-      })
-
-      let str_komteg = ''
-      user.comteg && JSON.parse(user.comteg).map((item, index)=> {
-        str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
-      })
-
-      let str_comment = ''
-      user.comment && JSON.parse(user.comment).map((item, index)=> {
-        str_comment = str_comment + item.content + (index+1 !== JSON.parse(user.comment).length ? ', ' : '')
-      })
-
-      let str_company = ''
-      let str_company_name = ''
-      const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.companyId))
-      if (comp) {
-        str_company = comp.id
-        str_company_name = comp.title
-      }
-
-      let arr = []
-
-      const newUser = {
-        id: user.id,
-        fio: user.fio,
-        chatId: user.chatId, 
-        phone: user.phone, 
-        phone2: user.phone2,
-        city: user.city, 
-        sfera: str_sfera,
-        dolgnost: user.dolgnost,
-        company: str_company, 
-        companyName: str_company_name,
-        comteg: str_komteg, 
-        comment: str_comment, 
-        inn: user.inn, 
-        profile: user.profile, 
-        dogovor: user.dogovor ? '🟢' : '🔴', 
-        email: user.email, 
-        projects: user.projects,
-        block: user.block,
-      }
-      arr.push(newUser)
-
-      //если элемент массива последний
-      if (i === filteredData.length-1) {
-        setManagers(text === '' ? managerCount : arr)
-      }
-    })  
-    
-    //setManagers(text === '' ? managerCount : filteredData); 
+    setManagersCount(text === '' ? managerCount.length : filteredData.length)
     //console.log("specialist", specialist)
     setShowClear(text === '' ? false : true)
   }, [text]);

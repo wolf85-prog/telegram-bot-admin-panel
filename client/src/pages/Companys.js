@@ -57,31 +57,23 @@ import sferaData from 'src/data/sfera';
 import companyData from 'src/data/companyData';
 
 import { getCompany, getCompanyCount, editCompany, addCompany, deleteCompany, uploadAvatar } from '../http/companyAPI'
-import { getManager } from 'src/http/managerAPI';
+import { getManager, editManager } from 'src/http/managerAPI';
 import { CollectionsOutlined } from '@mui/icons-material';
 
 //Workers.js
 const Companys = () => {
 
-  const { companys, setCompanys, companysAll, companysCount, managersAll, setManagersAll } = useUsersContext();
+  const { companys, setCompanys, companysAll, companysCount, setCompanysCount, managersAll, setManagersAll } = useUsersContext();
   const [sortedCities, setSortedCities] = useState([])
   const [companyCount, setCompanyCount] = useState([]); 
-  const [userbots, setUserbots] = useState([]);
 
   const [loading, setLoading]= useState(true);
   const [text, setText]= useState("");
-  //const [spec, setSpec] = useState([]); 
-  const [visibleSm, setVisibleSm] = useState(false)
-  const [modalWorker, setModalWorker] = useState({})
   const [showProfile, setShowProfile] = useState(false)
-  const [showSpec, setShowSpec] = useState(false)
   const [showClose, setShowClose] = useState(false)
   const [showUpload, setShowUpload] = useState(false)
   const [showSearch, setShowSearch] = useState(true)
   const [showClear, setShowClear] = useState(false)
-  const [showMenuBlock18, setShowMenuBlock18] = useState(false)
-  const [showBlock18, setShowBlock18] = useState(false)
-  const [block18, setBlock18] = useState(false)
   const [block, setBlock] = useState(false)
   const [showMenuKrest, setShowMenuKrest] = useState(false)
   const [showKrest, setShowKrest] = useState(false)
@@ -164,6 +156,8 @@ const Companys = () => {
   useEffect(() => {
 		const filteredData = companysAll.filter(user=> (user.title)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setCompanys(text === '' ? companyCount : filteredData); 
+
+    setCompanysCount(text === '' ? companyCount.length : filteredData.length)
     //console.log("specialist", specialist)
     setShowClear(text === '' ? false : true)
   }, [text]);
@@ -559,12 +553,21 @@ const Companys = () => {
 
       let managersObjArr = []
       let strManagersObj = ''
-      managersObj.map((item, index)=> {
+      managersObj.map(async(item, index)=> {
         const obj = {
           name: JSON.parse(item).id,
         }
         strManagersObj = strManagersObj + JSON.parse(item).fio + (index+1 !== managersObj.length ? ', ' : '')
         managersObjArr.push(obj)
+
+        const saveData = {
+          company: JSON.parse(item).companyId,
+        }
+
+        console.log("saveCompany: ", saveData)
+
+        //сохранить изменения в базе
+        await editManager(saveData, JSON.parse(item).id)
       })
       console.log(managersObjArr)
   
@@ -631,6 +634,9 @@ const Companys = () => {
   
       //сохранить изменения в базе
       await editCompany(saveData, id)
+
+      //сохранить изменения в базе
+      //await editManager(saveData, id)
   
       addToast(exampleToast) //ваши данные сохранены
 
@@ -707,7 +713,7 @@ const Companys = () => {
   const addManager = () => {
     
     //console.log("managersObj: ", managersObj)
-    const obj = {id: '', chatId: '', fio: '', }
+    const obj = {id: '', chatId: '', fio: '', companyId: ''}
     setManagersObj([ // with a new array
       ...managersObj, // that contains all the old items
       JSON.stringify(obj) // and one new item at the end
@@ -895,7 +901,7 @@ const Companys = () => {
                                       </div>
                                   </div>
 
-                                  <label>Реквизиты</label>
+                                  <label className='title-label'>Реквизиты</label>
                                   <CButton className='uley_add_user' style={{width: '250px', height: '40px', marginLeft: '6px'}}>
                                     <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Реквизиты
@@ -940,7 +946,7 @@ const Companys = () => {
                                   </div>
 
                                   {/*  */}
-                                  <label>Офис</label>
+                                  <label className='title-label'>Офис</label>
                                   <div className="text-field" onMouseOver={()=>setShowSaveOffice(true)} onMouseOut={()=>setShowSaveOffice(false)}>
                                     <img 
                                       src={Disketa} 
@@ -952,7 +958,7 @@ const Companys = () => {
                                   </div> 
 
                                   {/*  */}
-                                  <label>Склад</label>
+                                  <label className='title-label'>Склад</label>
                                   <div className="text-field" onMouseOver={()=>setShowSaveSklad(true)} onMouseOut={()=>setShowSaveSklad(false)}>
                                     <img 
                                       src={Disketa} 
@@ -964,7 +970,7 @@ const Companys = () => {
                                   </div> 
 
                                   {/* Менеджеры */}
-                                  <label>Менеджеры</label>
+                                  <label className='title-label'>Менеджеры</label>
                                   <CButton onClick={()=>setShowManagers(!showManagers)} className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0', marginBottom: '20px'}}>
                                     <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Менеджеры
@@ -1004,7 +1010,7 @@ const Companys = () => {
                                                   const usersCopy = JSON.parse(JSON.stringify(managersObj));			
                                                   const userObject = JSON.parse(usersCopy[index]);
                                                   const managerId = managersAll.find(a=>a.fio === newValue)
-                                                  usersCopy[index] = JSON.stringify({ ...userObject, id:managerId.id, fio: newValue});	                       
+                                                  usersCopy[index] = JSON.stringify({ ...userObject, id:managerId.id, fio: newValue, companyId: id});	                       
                                                   //console.log(usersCopy)
                                                   return usersCopy;
                                                 });
@@ -1028,7 +1034,7 @@ const Companys = () => {
                                   </div>
 
                                   {/* Договор */}
-                                  <label>Договор</label>
+                                  <label className='title-label'>Договор</label>
                                   <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0'}}>
                                     <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Договор
@@ -1064,7 +1070,7 @@ const Companys = () => {
                                   </div>
                                   
                                   {/*  */}
-                                  <label>Сфера деятельности</label>
+                                  <label className='title-label'>Сфера деятельности</label>
                                   <div className="text-field" style={{marginBottom: showManagers ? '129px' : '20px'}}> 
                                       <MyDropdown3
                                         tags={[...sfera].filter(item=> item !== 'Blacklist')}
@@ -1100,7 +1106,7 @@ const Companys = () => {
                                   ))}
                                   </div>
 
-                                  <label>Комтеги</label>
+                                  <label className='title-label'>Комтеги</label>
                                   <div className="text-field"> 
                                       <MyDropdown3
                                         tags={comteg}
@@ -1110,7 +1116,7 @@ const Companys = () => {
                                       />
                                   </div>
 
-                                  <label>Комментарии</label>
+                                  <label className='title-label'>Комментарии</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
                                     <textarea 
                                       className="text-field__input" 
@@ -1127,7 +1133,7 @@ const Companys = () => {
 {/* 4 */}
                                 <div style={{marginLeft: '37px', marginTop: '56px', display: 'flex', flexDirection: 'column', width: '300px'}}>
 
-                                  <label>Бухгалтерия</label>
+                                  <label className='title-label'>Бухгалтерия</label>
                                   <div className="text-field" onMouseOver={()=>setShowSaveFio(true)} onMouseOut={()=>setShowSaveFio(false)} style={{marginBottom: '44px'}}>
                                     <img 
                                       src={Disketa} 
@@ -1186,7 +1192,7 @@ const Companys = () => {
                                   
 
 
-                                  <label>Проекты</label>
+                                  <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
                                     <ul className='spec-style' style={{width: '300px', height: showManagers ? '533px' : '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
