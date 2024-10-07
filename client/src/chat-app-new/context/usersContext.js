@@ -753,6 +753,15 @@ useEffect(() => {
 				const min = String(d2.getMinutes()).padStart(2, "0");
 				const newDate = `${day}.${month} ${chas}:${min}`;
 		
+				let str_sfera = ''
+				user.sfera && JSON.parse(user.sfera).map((item, index)=> {
+				str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
+				})
+
+				let str_comteg = ''
+				user.comteg && JSON.parse(user.comteg).map((item, index)=> {
+				str_comteg = str_comteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
+				})
 		
 				let str_comment = ''
 				user.comment && JSON.parse(user.comment).map((item, index)=> {
@@ -767,8 +776,7 @@ useEffect(() => {
 					str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
 					str_manager2 = str_manager2 + JSON.stringify(fioManager) + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
 				  }
-				})
-		
+				})		
 		
 				const newUser = {
 				  id: user.id,
@@ -780,7 +788,13 @@ useEffect(() => {
 				  managers: str_manager,
 				  managersObj: str_manager2,
 				  inn: user.inn,
-				  GUID: user.GUID,
+				  //GUID: user.GUID,
+				  bugalterFio: user.bugalterFio, 
+				  bugalterEmail: user.bugalterEmail,
+				  bugalterPhone: user.bugalterPhone,
+				  profile: user.profile,
+				  sfera: str_sfera,
+				  comteg: str_comteg,
 				}
 				arrCompanys.push(newUser)
 		

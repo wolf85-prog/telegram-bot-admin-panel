@@ -595,7 +595,7 @@ const clickNext = async() => {
     setOffice(user.office)
     setSklad(user.sklad)
     setBlock(user.block)
-    setShowBlacklist(user.sfera.includes('Blacklist'))
+    setShowBlacklist(user.sfera ? user.sfera.includes('Blacklist') : false)
 
     if (userbots) {
       setNik(userbots.find((item) => item.chatId?.toString() === user.chatId?.toString())?.username)
@@ -951,7 +951,7 @@ const clickNext = async() => {
                                       type="file"
                                       id="formFile" 
                                       accept="image/*,image/jpeg" 
-                                      name="photo"
+                                      name="avatar"
                                       onChange={(e) => onFileChange(e)}
                                       style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}
                                     />
@@ -980,7 +980,7 @@ const clickNext = async() => {
                                       </div>
                                   </div>
 
-                                  <label>В системе</label>
+                                  <label className='title-label'>В системе</label>
                                   <div style={{display: 'flex', justifyContent: 'center'}}>
                                     <div className="text-field">
                                       <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" value={dateReg && dateReg.length >0 ? dateReg.split('-')[2].split('T')[0] + '.' + dateReg.split('-')[1] + '.' + dateReg.split('-')[0] : ''} style={{width: '250px'}}/>
@@ -988,7 +988,7 @@ const clickNext = async() => {
                                   </div> 
 
 
-                                  <label>ИНН</label>
+                                  <label className='title-label'>ИНН</label>
                                   <div className="text-field">
                                     <InputMask
                                         disabled
@@ -1008,7 +1008,7 @@ const clickNext = async() => {
 
                                   <div>  
                                     <div>
-                                      <label>Договор</label>
+                                      <label className='title-label'>Договор</label>
                                       <div style={{display: 'flex'}}>
                                         <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setDogovor(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
                                         <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
@@ -1057,7 +1057,7 @@ const clickNext = async() => {
                                       <img src={Close} onClick={() => setCity('')} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px', visibility: showClearCity ? 'visible' : 'hidden', cursor: 'pointer'}}></img>
                                   </div>
 
-                                  <label>Компания</label>
+                                  <label className='title-label'>Компания</label>
                                   <div className="text-field"> 
                                   <Autocomplete
                                         sx={{
@@ -1110,7 +1110,7 @@ const clickNext = async() => {
                                       />
                                   </div>
 
-                                  <label>Должность</label>
+                                  <label className='title-label'>Должность</label>
                                   <div className="text-field"> 
                                       <MyDropdown
                                         style={{backgroundColor: '#131c21'}}
@@ -1122,12 +1122,12 @@ const clickNext = async() => {
                                   </div>
 
                                   {/* email */}
-                                  <label>Почта</label>
+                                  <label className='title-label'>Почта</label>
                                   <div className="text-field">
                                     <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                                   </div> 
 
-                                  <label>Сфера деятельности</label>
+                                  <label className='title-label'>Сфера деятельности</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
                                         tags={sfera.filter(item=>item !== 'Blacklist')}
@@ -1136,7 +1136,7 @@ const clickNext = async() => {
                                       />
                                   </div>
 
-                                  <label>Комтеги</label>
+                                  <label className='title-label'>Комтеги</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
                                         tags={comteg}
@@ -1229,18 +1229,18 @@ const clickNext = async() => {
                                   </div>
                                   
                                   {/*  */}
-                                  <label>Офис</label>
+                                  <label className='title-label'>Офис</label>
                                   <div className="text-field">
                                     <input disabled className="text-field__input" type="text" name="office" id="office" value={office}/>
                                   </div> 
 
                                   {/*  */}
-                                  <label>Склад</label>
+                                  <label className='title-label'>Склад</label>
                                   <div className="text-field">
                                     <input disabled className="text-field__input" type="text" name="sklad" id="sklad" value={sklad} />
                                   </div> 
 
-                                  <label>Комментарии</label>
+                                  <label className='title-label'>Комментарии</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
                                     <textarea 
                                       className="text-field__input" 
@@ -1257,7 +1257,7 @@ const clickNext = async() => {
 {/* 4 */}
                                 <div style={{marginLeft: '40px', marginTop: '56px', display: 'flex', flexDirection: 'column', width: '250px'}}>
 
-                                  <label>Telegram</label>
+                                  <label className='title-label'>Telegram</label>
                                   <div className="text-field" onMouseOver={()=>setShowSaveTg(true)} onMouseOut={()=>setShowSaveTg(false)} style={{marginBottom: '44px'}}>
                                     <img 
                                       src={Disketa} 
@@ -1290,7 +1290,7 @@ const clickNext = async() => {
                                   </div> 
 
 
-                                  <label>Проекты</label>
+                                  <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
                                     <ul className='spec-style' style={{width: '250px', height: '415px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     

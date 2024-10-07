@@ -56,8 +56,7 @@ import dolgnostData from 'src/data/dolgnostData';
 import sferaData from 'src/data/sfera';
 import companyData from 'src/data/companyData';
 
-import { getCompany, getCompanyCount, editCompany, addCompany, deleteCompany } from '../http/companyAPI'
-import { uploadAvatar, uploadFile } from '../http/chatAPI';
+import { getCompany, getCompanyCount, editCompany, addCompany, deleteCompany, uploadAvatar } from '../http/companyAPI'
 import { getManager } from 'src/http/managerAPI';
 import { CollectionsOutlined } from '@mui/icons-material';
 
@@ -213,6 +212,15 @@ const Companys = () => {
         const min = String(d2.getMinutes()).padStart(2, "0");
         const newDate = `${day}.${month} ${chas}:${min}`;
 
+        let str_sfera = ''
+        user.sfera && JSON.parse(user.sfera).map((item, index)=> {
+          str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
+        })
+
+        let str_comteg = ''
+        user.comteg && JSON.parse(user.comteg).map((item, index)=> {
+          str_comteg = str_comteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
+        })
 
         let str_comment = ''
         user.comment && JSON.parse(user.comment).map((item, index)=> {
@@ -232,7 +240,6 @@ const Companys = () => {
           }
         })
 
-
         const newUser = {
           id: user.id,
           title: user.title,
@@ -242,10 +249,12 @@ const Companys = () => {
           comment: str_comment,
           managers: str_manager,
           managersObj: str_manager2,
-          bugalterFio, 
-          bugalterEmail,
-          bugalterPhone,
-          profile,
+          bugalterFio: user.bugalterFio, 
+          bugalterEmail: user.bugalterEmail,
+          bugalterPhone: user.bugalterPhone,
+          profile: user.profile,
+          sfera: str_sfera,
+          comteg: str_comteg,
 
         }
         arrCompanys.push(newUser)
@@ -440,10 +449,10 @@ const Companys = () => {
     setShowMenu2(false)
 
     //убрать из списка специальностей Blacklist
-    //const res = speclist.filter(item=>item !== 'Blacklist')
-    //console.log("speclist: ", res)
+    const res = sfera.filter(item=>item !== 'Blacklist')
+    console.log("sfera: ", res)
 
-    //setSpeclist(res)
+    setSfera(res)
   }
 
   const onChangeBlacklist = () => {
@@ -451,11 +460,34 @@ const Companys = () => {
     setShowMenu1(false)
 
     //добавить в список специальностей Blacklist
-    // speclist.push('Blacklist')
-    // console.log("speclist: ", speclist)
 
-    // setSpeclist(speclist)
+    const arr = [...sfera]
+    arr.push('Blacklist')
+    console.log("sfera: ", arr)
+
+    setSfera(arr)
   }
+//------ загрузить аватар-------------
+  useEffect(() => {
+    const getImage = async () => {
+        if (file) {
+          setShowUpload(true)
+          //console.log("file:", file)
+          const data = new FormData();
+          data.append("name", file.name);
+          data.append("avatar", file);
+          
+          let response = await uploadAvatar(data) //distribFile(data) // uploadFile(data)
+
+          setImage(response.data.path.split('.team')[1]);
+          //сообщение с ссылкой на файл
+          console.log("Путь к файлу: ", host + response.data.path.split('.team')[1])
+          setProfile(host + response.data.path.split('.team')[1])
+          //setShowUpload(false)
+        }
+    }
+    getImage();
+  }, [file])
 
   {/* Добавление файла */}
   const onFileChange = (e) => {
@@ -495,6 +527,25 @@ const Companys = () => {
       setShowClose(true)
       console.log("managersObj: ", managersObj)
   
+      let sferaArr = []
+      let strSfera = ''
+      sfera.map((item, index)=> {
+        const obj = {
+          name: item,
+        }
+        strSfera = strSfera + item + (index+1 !== sfera.length ? ', ' : '')
+        sferaArr.push(obj)
+      })
+
+      let comtegArr = []
+      let strComteg = ''
+      comteg.map((item, index)=> {
+        const obj = {
+          name: item,
+        }
+        strComteg = strComteg + item + (index+1 !== comteg.length ? ', ' : '')
+        comtegArr.push(obj)
+      })
   
       let managersArr = []
       let strManagers = ''
@@ -543,6 +594,8 @@ const Companys = () => {
         bugalterPhone,  
         inn, //инн компании
         profile,
+        sfera: JSON.stringify(sferaArr),
+        comteg: JSON.stringify(comtegArr),
       }
       console.log("saveData: ", saveData)
   
@@ -567,6 +620,8 @@ const Companys = () => {
           bugalterPhone,  
           inn, //инн компании
           profile,
+          sfera: strSfera,
+          comteg: strComteg,
         };
   
         console.log("update user: ", usersCopy[userIndex])
@@ -626,6 +681,10 @@ const Companys = () => {
     setBugalterEmail(user.bugalterEmail ? user.bugalterEmail : '')
     setBugalterPhone(user.bugalterPhone ? user.bugalterPhone : '')
     setProfile(user.profile)
+    setSfera(user.sfera ? user.sfera.split(', ') : [])
+    setComteg(user.comteg ? user.comteg.split(', ') : [])
+    setComment(user.comment)
+    setShowBlacklist(user.sfera ? user.sfera.includes('Blacklist') : false)
   }
 
   const onChangeManager = (e, index) => {
@@ -807,7 +866,7 @@ const Companys = () => {
                                       type="file"
                                       id="formFile" 
                                       accept="image/*,image/jpeg" 
-                                      name="photo"
+                                      name="avatar"
                                       onChange={(e) => onFileChange(e)}
                                       style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}
                                     />
@@ -1008,7 +1067,7 @@ const Companys = () => {
                                   <label>Сфера деятельности</label>
                                   <div className="text-field" style={{marginBottom: showManagers ? '129px' : '20px'}}> 
                                       <MyDropdown3
-                                        tags={sfera}
+                                        tags={[...sfera].filter(item=> item !== 'Blacklist')}
                                         setTags={setSfera}
                                         options={sferaData}
                                         style={{minHeight: '40px !important'}}
@@ -1105,8 +1164,8 @@ const Companys = () => {
                                           mask="+7 (999) 999-99-99"
                                           disabled={!blockProfile}
                                           maskChar=""
-                                          onChange={(e) => setPhone(e.target.value)} 
-                                          value={phone}
+                                          onChange={(e) => setBugalterPhone(e.target.value)} 
+                                          value={bugalterPhone}
                                           placeholder=''
                                       >
                                       </InputMask>    
@@ -1121,7 +1180,7 @@ const Companys = () => {
                                       alt="" 
                                       style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                     />
-                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '300px'}}/>
+                                    <input className="text-field__input" type="text" name="email" id="email" value={bugalterEmail} onChange={(e) => setBugalterEmail(e.target.value)} style={{width: '300px'}}/>
                                   </div> 
 
                                   

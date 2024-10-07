@@ -52,3 +52,17 @@ export const getCompanyCountAll = async () =>{
         console.log("error while calling getCompanyCountAll api",error.message);
     }
 }
+
+//file
+export const uploadAvatar = async (data) =>{
+    try {
+        return await $host.post(`api/file/avatar`, data, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        });
+    } catch (error) {
+        console.log("error while calling uploadFile api",error.message);
+        
+    }
+}
