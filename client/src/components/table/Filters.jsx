@@ -174,16 +174,16 @@ export default function Filters({ columnFilters, setColumnFilters }) {
                 defaultValue={filter[0]}
                 classNamePrefix="custom-select_2"
               />
-              <input className="form-control" style={{background: 'transparent', width: '110px', marginRight: '15px'}} placeholder='01.01.2024'></input>
-              <input className="form-control" style={{background: 'transparent', width: '150px', marginRight: '15px'}} placeholder='Поиск'></input>
+              <input className="form-control" style={{background: 'transparent', width: '110px', marginRight: '10px'}} placeholder='01.01.2024'></input>
+              <input className="form-control" style={{background: 'transparent', width: '150px', marginRight: '10px'}} placeholder='Поиск'></input>
               
               <CCloseButton
                 className="uley_select_reset"
-                style={{ height: '28px', width: '28px',marginRight: '15px', marginLeft: '0' }}
+                style={{ height: '28px', width: '28px',marginRight: '10px', marginLeft: '0' }}
                 onClick={() => setColumnFilters([])}
               />
 
-              <CButton className='uley_add_user uley_select_reset' style={{marginRight: '15px', padding: '18px', marginLeft: '0'}}>
+              <CButton className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
                 <span style={{position: 'absolute', top: '-4px', left: '5px'}}>
                   <img src={ChangeSloy} alt='' width={25} />
                 </span>
