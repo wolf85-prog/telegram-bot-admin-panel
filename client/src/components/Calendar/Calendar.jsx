@@ -16,12 +16,40 @@ export default function Calendar() {
     const [month, setMonth] = useState(date.getMonth());
     const [year, setYear] = useState(date.getFullYear());
     const [startDay, setStartDay] = useState(getStartDayOfMonth(date));
+    const [currentDays, setCurrentDays] = useState([]);
 
     useEffect(() => {
         setDay(date.getDate());
         setMonth(date.getMonth());
         setYear(date.getFullYear());
         setStartDay(getStartDayOfMonth(date));
+
+        const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+        const weekdayOfFirstDay = firstDayOfMonth.getDay();
+        
+        let arr = []
+        for (let day = 0; day < 35; day++) {
+        if (day === 0 && weekdayOfFirstDay === 0) {
+            firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 7);
+        } else if (day === 0) {
+            firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (day - weekdayOfFirstDay));
+        } else {
+            firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
+        }
+    
+        let calendarDay = {
+            currentMonth: (firstDayOfMonth.getMonth() === date.getMonth()),
+            date: (new Date(firstDayOfMonth)),
+            month: firstDayOfMonth.getMonth(),
+            number: firstDayOfMonth.getDate(),
+            selected: (firstDayOfMonth.toDateString() === date.toDateString()),
+            year: firstDayOfMonth.getFullYear()
+        }
+    
+        arr.push(calendarDay);
+        setCurrentDays(arr)
+        //console.log(currentDays)
+        }
     }, [date]);
 
     function getStartDayOfMonth(date) {
@@ -34,6 +62,9 @@ export default function Calendar() {
 
     const days = isLeapYear(date.getFullYear()) ? DAYS_LEAP : DAYS;
 
+
+
+    
   return (
     <div className='frame'>
         {/* <div className='calendar-header'>
@@ -50,22 +81,15 @@ export default function Calendar() {
                     <strong>{d}</strong>
                 </div>
             ))}
-            {Array(days[month] + (startDay - 1))
-                .fill(null)
-                .map((_, index) => {
-                const d = index - (startDay - 2);
-                return (
-                    <div
-                        className='day'
-                        key={index}
-                        // isToday={d === today.getDate()}
-                        // isSelected={d === day}
-                        onClick={() => setDate(new Date(year, month, d))}
-                        >
-                        {d > 0 ? d : ''}
-                    </div>
-                );
-            })}
+            {
+                currentDays.map((day, index) => {
+                    return (
+                        <div key={index} className="day">
+                            <p className='date-day'>{String(day.number).padStart(2, "0") + '.'+ String(day.month+1).padStart(2, "0")}</p>
+                        </div>
+                    )
+                })
+            }
         </div>
     </div>
   );

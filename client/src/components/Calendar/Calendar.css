@@ -16,7 +16,6 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;  
-    height: 645px; 
 }
 
 .day-header {
@@ -39,5 +38,14 @@
     cursor: pointer;  
     border: 1px solid #1f282d;  
     margin-bottom: 20px;
+    position: relative;
+}
+
+.date-day {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  color: #777777;
+  font-size: 16px;
 }
   
