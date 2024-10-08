@@ -25,6 +25,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 const options = [
   { value: 'project', label: 'Проект' },
+  { value: 'date', label: 'Дата' },
   { value: 'ID', label: 'ID' },
   { value: 'company', label: 'Компания' },
   { value: 'manager', label: 'Менеджер' },  
@@ -145,14 +146,19 @@ export default function Filters({ columnFilters, setColumnFilters, setShowTable,
     <>
       <CRow lg={{ gutter: 0 }} className="mb-1 ">
         <CCol className="align-self-center" style={{maxWidth: '140px'}}>
-          <ul className="markers" style={{paddingLeft: '20px', listStyle: 'disc'}}>
+          <div className="filter-line" style={{left: '24px', width: '10px'}}></div>
+          {/* <div className="filter-line" style={{left: '805px', top: '60px', width: '50px'}}></div>
+          <div className="uley-line" style={{left: '900px', top: '60px', width: '50px'}}></div> */}
+
+          <ul className="markers" style={{paddingLeft: '20px', listStyle: 'none'}}>
             <li><span className='title-label'>Проекты: </span>{'100'}</li>
             <li><span className='title-label'>Часы: </span>{'1000'}</li>
             
           </ul>
         </CCol>
-        <CCol className="align-self-center" style={{maxWidth: '155px'}}>
-          <ul className="markers" style={{paddingLeft: '20px', listStyle: 'disc'}}> 
+        <CCol className="align-self-center" style={{maxWidth: '155px', position: 'relative'}}>
+          <div className="filter-line" style={{left: '8px', top: '11px', width: '10px'}}></div>
+          <ul className="markers" style={{paddingLeft: '20px', listStyle: 'none'}}> 
             <li><span className='title-label'>В эфире: </span>{'10'}</li>
             <li><span className='title-label'>В обработке: </span>{'10'}</li>
           </ul>
@@ -174,7 +180,13 @@ export default function Filters({ columnFilters, setColumnFilters, setShowTable,
                 defaultValue={filter[0]}
                 classNamePrefix="custom-select_2"
               />
-              <input className="form-control" style={{background: 'transparent', width: '110px', marginRight: '10px'}} placeholder='01.01.2024'></input>
+
+              <CButton onClick={()=>setShowTable(!showTable)} className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
+                <span style={{position: 'absolute', top: '-4px', left: '5px'}}>
+                  <img src={ChangeSloy} alt='' width={25} />
+                </span>
+              </CButton>
+
               <input className="form-control" style={{background: 'transparent', width: '150px', marginRight: '10px'}} placeholder='Поиск'></input>
               
               <CCloseButton
@@ -182,12 +194,6 @@ export default function Filters({ columnFilters, setColumnFilters, setShowTable,
                 style={{ height: '28px', width: '28px',marginRight: '10px', marginLeft: '0' }}
                 onClick={() => setColumnFilters([])}
               />
-
-              <CButton onClick={()=>setShowTable(!showTable)} className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
-                <span style={{position: 'absolute', top: '-4px', left: '5px'}}>
-                  <img src={ChangeSloy} alt='' width={25} />
-                </span>
-              </CButton>
               
               <CButton className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
                 <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-14px', left: '11px'}}>

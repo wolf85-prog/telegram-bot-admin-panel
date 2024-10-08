@@ -70,6 +70,7 @@
     &__option {
       cursor: pointer !important;
       height: 30px;
+      line-height: 12px;
       text-align: center;
       &--is-focused {
         background-color: lighten(#1f282c, 10%) !important;
@@ -96,6 +97,7 @@
       background-color: #1f282c !important;
       width: 115px !important;
       text-align: center !important;
+      
     }
     &__option {
       cursor: pointer !important;
@@ -103,6 +105,7 @@
       &--is-focused {
         background-color: lighten(#1f282c, 10%) !important;
       }
+      line-height: 12px;
     }
   }
   .uley_select_reset {
@@ -263,6 +266,17 @@
     line-height: 0.5;
     width: 190px;
     text-align: center;
+  }
+
+  .filter-line {
+    height: 28px;
+    position: absolute;
+    top: 27px;
+    
+    border-bottom: 1px solid #2d2e38;
+    border-left: 1px solid #2d2e38;
+    border-top: 1px solid #2d2e38;
+    padding: 0;
   }
   
   // .uley_hour_input {

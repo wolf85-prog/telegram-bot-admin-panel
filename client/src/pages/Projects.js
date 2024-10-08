@@ -30,10 +30,13 @@ import {
 import { useTableData } from 'src/components/table/useTableData'
 import TableHeader from 'src/components/table/TableHeader'
 import Filters from 'src/components/table/Filters'
-import Calendar from 'src/components/Calendar/Calendar'
+// import Calendar from 'src/components/Calendar/Calendar_old'
+import Calendar from "src/components/Calendar2/Calendar";
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters } = useTableData()
+
+  const [yearAndMonth, setYearAndMonth] = useState([2024, 10]);
 
   const [showTable, setShowTable] = useState(false)
 
