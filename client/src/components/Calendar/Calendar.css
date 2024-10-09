@@ -48,4 +48,17 @@
   color: #777777;
   font-size: 16px;
 }
+
+.joinBtn {
+  cursor: pointer;
+  margin-left: 0px; 
+  padding: 18px; 
+  position: absolute ;
+  bottom: 5px; 
+  right: 5px;
+}
+
+.joinBtn:hover {
+  background-color: rgb(78, 77, 76);
+}
   

@@ -1,5 +1,9 @@
 import { React, useEffect, useState } from 'react'
 
+import {
+    CButton,
+  } from '@coreui/react'
+
 import './Calendar.css'
 
 
@@ -86,6 +90,10 @@ export default function Calendar() {
                     return (
                         <div key={index} className="day">
                             <p className='date-day'>{String(day.number).padStart(2, "0") + '.'+ String(day.month+1).padStart(2, "0")}</p>
+                            <CButton className='uley_add_user uley_select_reset joinBtn' style={{display: 'block', height: '26px', width: '26px'}}>
+                                <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
+                                +</span>
+                            </CButton>
                         </div>
                     )
                 })
