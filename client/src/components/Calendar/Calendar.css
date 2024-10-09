@@ -52,7 +52,7 @@
 .joinBtn {
   cursor: pointer;
   margin-left: 0px; 
-  padding: 18px; 
+  padding: 0; 
   position: absolute ;
   bottom: 5px; 
   right: 5px;

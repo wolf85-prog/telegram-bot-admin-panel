@@ -7,6 +7,8 @@ import Select from 'react-select'
 
 import ChangeSloy from "./../../assets/images/change_sloy.png";
 
+import { useUsersContext } from "../../chat-app-new/context/usersContext";
+
 import {
   CCloseButton,
   CFormInput,
@@ -117,6 +119,7 @@ const filters = {
 }
 
 export default function Filters({ columnFilters, setColumnFilters, setShowTable, showTable }) {
+  const { MONTHS, date, setDate, day, setDay, month, setMonth, year, setYear, startDay, setStartDay, currentDays } = useUsersContext();
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
 
@@ -195,7 +198,7 @@ export default function Filters({ columnFilters, setColumnFilters, setShowTable,
                 onClick={() => setColumnFilters([])}
               />
               
-              <CButton className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
+              <CButton onClick={() => setDate(new Date(year, month - 1, day))} className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
                 <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-14px', left: '11px'}}>
                 -</span>
               </CButton>
@@ -203,11 +206,12 @@ export default function Filters({ columnFilters, setColumnFilters, setShowTable,
               <Select
                 className="uley_react_select"
                 options={manthList}
-                defaultValue={manthList[0]}
+                // defaultValue={manthList[0]}
+                value={MONTHS[month]}
                 classNamePrefix="custom-select_3"
               />
 
-              <CButton className='uley_add_user uley_select_reset' style={{marginLeft: '0px', padding: '18px'}}>
+              <CButton onClick={() => setDate(new Date(year, month + 1, day))} className='uley_add_user uley_select_reset' style={{marginLeft: '0px', padding: '18px'}}>
                 <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-13px', left: '6px'}}>
                 +</span>
               </CButton>

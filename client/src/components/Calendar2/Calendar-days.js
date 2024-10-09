@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 
 function CalendarDays(props) {
+    
     const firstDayOfMonth = new Date(props.day.getFullYear(), props.day.getMonth(), 1);
     const weekdayOfFirstDay = firstDayOfMonth.getDay();
     let currentDays = [];
