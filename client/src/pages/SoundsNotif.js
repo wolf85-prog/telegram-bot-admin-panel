@@ -293,7 +293,7 @@ const SoundsNotif = () => {
   ]
 
   useEffect(() => {
-    const savedItem = localStorage.getItem("processAll");   
+    //const savedItem = localStorage.getItem("processAll");   
 
     // if (savedItem) {
     //   const parseItem = JSON.parse(savedItem);
@@ -629,7 +629,7 @@ const SoundsNotif = () => {
   const fetchAllProcess = (ind, on) => {
     processAll[ind].status = on
     setProcessAll(processAll)
-    localStorage.setItem("processAll", JSON.stringify(processAll));
+    //localStorage.setItem("processAll", JSON.stringify(processAll));
 
     setTimeout(()=>setLoadStatus(false), 3000)
     
@@ -675,7 +675,7 @@ const SoundsNotif = () => {
 
     processAll[ind].interval = val
     setProcessAll(processAll)
-    localStorage.setItem("processAll", JSON.stringify(processAll));
+    //localStorage.setItem("processAll", JSON.stringify(processAll));
 
     //отправить сокет
     sendNumberProcess(ind, true, val, 'S')

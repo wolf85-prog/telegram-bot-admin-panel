@@ -1323,7 +1323,7 @@ const onChangeSelectCity = (e) => {
       setShowSend(false)
 
       //обновить список рассылок
-      addNewDistrib(true)
+      //addNewDistrib(true)
 
       setSelected([])
       setText('')
@@ -1334,7 +1334,7 @@ const onChangeSelectCity = (e) => {
 
       setValueSelect(0)
 
-      //setTimeout(() => navigate('/distributionw'), 1000);
+      setTimeout(() => navigate('/distributionw'), 1000);
 
     //}
     // else {
