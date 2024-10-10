@@ -30,36 +30,47 @@ export default function Calendar() {
         setMonth(date.getMonth());
         setYear(date.getFullYear());
         setStartDay(getStartDayOfMonth(date));
+        //console.log(getStartDayOfMonth(date), date)
 
         const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-        const weekdayOfFirstDay = firstDayOfMonth.getDay()-1;
-        console.log(weekdayOfFirstDay)
+        const weekdayOfFirstDay = firstDayOfMonth.getUTCDay();
+
+        //console.log("день недели первого дня: ", weekdayOfFirstDay)
         
         let arr = []
-        for (let day = 0; day < 42; day++) {
-        if (day === 0 && weekdayOfFirstDay === 0) {
-            firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 7);
-        } else if (day === 0) {
-            firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (day - weekdayOfFirstDay));
+        let countDay = 35
+        if (weekdayOfFirstDay > 5 ) {
+            countDay = 42
         } else {
-            firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
+            countDay = 35
         }
-    
-        let calendarDay = {
-            currentMonth: (firstDayOfMonth.getMonth() === date.getMonth()),
-            date: (new Date(firstDayOfMonth)),
-            month: firstDayOfMonth.getMonth(),
-            number: firstDayOfMonth.getDate(),
-            selected: (firstDayOfMonth.toDateString() === date.toDateString()),
-            year: firstDayOfMonth.getFullYear()
-        }
-    
-        arr.push(calendarDay);
-        setCurrentDays(arr)
-        //console.log(currentDays)
+        for (let day = 0; day < countDay; day++) {
+            if (day === 0 && weekdayOfFirstDay === 0) {
+                firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 7);
+                console.log("0")
+            } else if (day === 0) {
+                firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (day - weekdayOfFirstDay));
+                console.log("1")
+            } else {
+                firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
+                console.log("2")
+            }
+        
+            let calendarDay = {
+                currentMonth: (firstDayOfMonth.getMonth() === date.getMonth()),
+                date: (new Date(firstDayOfMonth)),
+                month: firstDayOfMonth.getMonth(),
+                number: firstDayOfMonth.getDate(),
+                selected: (firstDayOfMonth.toDateString() === date.toDateString()),
+                year: firstDayOfMonth.getFullYear()
+            }
+        
+            arr.push(calendarDay);
+            setCurrentDays(arr)
+            //console.log(currentDays)
         }
     }, [date]);
-
+//----------------------------------------------------------------------
     function getStartDayOfMonth(date) {
         return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
     }
