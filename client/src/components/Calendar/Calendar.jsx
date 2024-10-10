@@ -32,10 +32,11 @@ export default function Calendar() {
         setStartDay(getStartDayOfMonth(date));
 
         const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-        const weekdayOfFirstDay = firstDayOfMonth.getDay();
+        const weekdayOfFirstDay = firstDayOfMonth.getDay()-1;
+        console.log(weekdayOfFirstDay)
         
         let arr = []
-        for (let day = 0; day < 35; day++) {
+        for (let day = 0; day < 42; day++) {
         if (day === 0 && weekdayOfFirstDay === 0) {
             firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 7);
         } else if (day === 0) {

@@ -1729,7 +1729,7 @@ useEffect(() => {
                                         <CTableDataCell style={{textAlign: 'left'}}>
                                           <div onClick={()=>handleClick(index)} style={{cursor: 'pointer', textAlign: 'center'}}>{!showTable[index] ? 'Посмотреть' : <br/>}</div>
                                           <CCollapse visible={showTable[index]}>
-                                            <table>
+                                            {/* <table>
                                               <tbody>
                                                 {item.worklist !== '' ? (JSON.parse(item.worklist)).map((spec, index)=>( 
                                                     <tr key={index}>
@@ -1737,7 +1737,7 @@ useEffect(() => {
                                                     </tr>          
                                                 )) : ""}
                                               </tbody> 
-                                            </table>
+                                            </table> */}
                                           </CCollapse>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>

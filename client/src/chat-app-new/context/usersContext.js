@@ -403,7 +403,7 @@ const UsersProvider = ({ children }) => {
 					setUsers(sortedClients)
 					
 					//сохранить кэш
-					localStorage.setItem("users", JSON.stringify(sortedClients));
+					//localStorage.setItem("users", JSON.stringify(sortedClients));
 				}
 			})
 	}
