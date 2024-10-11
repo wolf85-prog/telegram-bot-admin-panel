@@ -52,6 +52,14 @@
   font-size: 16px;
 }
 
+.time-project {
+  position: absolute;
+  bottom: -15px;
+  right: 10px;
+  color: #777777;
+  font-size: 16px;
+}
+
 .joinBtn {
   cursor: pointer;
   margin-left: 0px; 
@@ -63,5 +71,19 @@
 
 .joinBtn:hover {
   background-color: rgb(78, 77, 76);
+}
+
+.viewProject {
+  width: 180px;
+  height: 100px;
+  border-radius: 6px;
+  border: 1px solid #1555f5;
+  text-align: center;
+  padding-top: 26px;
+}
+
+.viewStatus {
+  color: #1555f5;
+  font-size: 14px;
 }
   

@@ -41,6 +41,8 @@ export default function Calendar() {
     const [currentDays, setCurrentDays] = useState([]);
     const [showButtonAdd, setShowButtonAdd] = useState([])
 
+    const [project, setProject] = useState([])
+
     useEffect(() => {
         setDay(date.getDate());
         setMonth(date.getMonth());
@@ -121,6 +123,12 @@ export default function Calendar() {
         setDate(new Date(year, index, day))
     }
 
+    const addNewProject = (item) => {
+        let arr = [...project]
+        arr[item] = true
+        setProject(arr)
+    }
+
     
   return (
     <div className='frame'>
@@ -156,12 +164,23 @@ export default function Calendar() {
             {
                 currentDays.map((day, index) => {
                     return (
-                        <div key={index} className="day" onMouseOver={()=>overDay(index)} onMouseOut={()=>outDay(index)}>
-                            <p className='date-day'>{String(day.number).padStart(2, "0") + '.'+ String(day.month+1).padStart(2, "0")}</p>
-                            <CButton className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
+                        <div key={index} className='day' onMouseOver={()=>overDay(index)} onMouseOut={()=>outDay(index)}>
+                            <p className='date-day' style={{color: project[index] ? '#1555f5' : ''}}>{String(day.number).padStart(2, "0") + '.'+ String(day.month+1).padStart(2, "0")}</p>
+                            <CButton onClick={()=>addNewProject(index)} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                 <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                 +</span>
                             </CButton>
+
+                            {project[index] ? 
+                                <div className='viewProject'>
+                                    <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>
+                                    <p style={{fontSize: '14px', marginBottom: '3px', color: '#777777'}}>Компания</p>
+                                    <p className='viewStatus'>Новый</p>
+
+                                    <p className='time-project' style={{color: project[index] ? '#1555f5' : ''}}>09:00</p>
+                                </div>
+                             : <></>
+                            }
                         </div>
                     )
                 })
