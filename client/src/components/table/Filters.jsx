@@ -194,11 +194,11 @@ export default function Filters({ columnFilters, setColumnFilters, setShowTable,
               
               <CCloseButton
                 className="uley_select_reset"
-                style={{ height: '28px', width: '28px',marginRight: '10px', marginLeft: '0' }}
+                style={{ height: '28px', width: '28px',marginRight: '250px', marginLeft: '0' }}
                 onClick={() => setColumnFilters([])}
               />
               
-              <CButton onClick={() => setDate(new Date(year, month - 1, day))} className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
+              {/* <CButton onClick={() => setDate(new Date(year, month - 1, day))} className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
                 <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-14px', left: '11px'}}>
                 -</span>
               </CButton>
@@ -214,7 +214,7 @@ export default function Filters({ columnFilters, setColumnFilters, setShowTable,
               <CButton onClick={() => setDate(new Date(year, month + 1, day))} className='uley_add_user uley_select_reset' style={{marginLeft: '0px', padding: '18px'}}>
                 <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-13px', left: '6px'}}>
                 +</span>
-              </CButton>
+              </CButton> */}
         </CCol>
 
       </CRow>

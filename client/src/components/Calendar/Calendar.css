@@ -8,7 +8,10 @@
   padding: 10px 10px 5px 10px;
   display: flex;
   justify-content: space-between;
-  background-color: #131c21;   
+  background-color: #131c21;  
+  position: absolute;
+  top: 19px;
+  right: 15px; 
 }
 
 
