@@ -33,15 +33,30 @@ import Filters from 'src/components/table/Filters'
 // import Calendar from 'src/components/Calendar/Calendar_old'
 import Calendar from "src/components/Calendar/Calendar";
 import Calendar2 from "src/components/Calendar3/Calendar2";
+
 import Close from "../assets/images/clear.svg"
+import zamok from "../assets/images/замок.png"
+import zamok2 from "../assets/images/замок2.png"
+import addAvatar from "../assets/images/add_avatar.png"
+import Krestik from './../assets/images/krestik.png';
+import imgBlock18 from "./../assets/images/block18.png";
+import Trubka from "./../assets/images/trubka.png";
+import Tg from "./../assets/images/tg.png";
+import Star from "./../assets/images/star.png";
+import StarActive from "./../assets/images/star_activ.svg";
+import Disketa from "./../assets/images/disketa.png";
+import arrowDown from 'src/assets/images/arrowDown.svg'
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters } = useTableData()
 
   const [yearAndMonth, setYearAndMonth] = useState([2024, 10]);
 
-  const [showTable, setShowTable] = useState(false)
+  const [showTable, setShowTable] = useState(true)
   const [showSidebar, setShowSidebar] = useState(false)
+  const [showCalendar, setShowCalendar] = useState(false)
+  const [showCalendar2, setShowCalendar2] = useState(false)
+  const [showProject, setShowProject] = useState(false)
 
   const table = useReactTable({
     defaultColumn: {
@@ -77,6 +92,11 @@ const Projects = () => {
     getRowCanExpand: () => true,
   })
 
+  const closeProfile = () => {
+    setShowProject(false)
+    setShowCalendar(true)
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -93,63 +113,126 @@ const Projects = () => {
                           {/* <CCardHeader>Сметы</CCardHeader> */}
 
                           <CCardBody style={{padding: '12px'}}>
-                            <Filters setShowTable={setShowTable} showTable={showTable} columnFilters={columnFilters} setColumnFilters={setColumnFilters} />
+                            {!showProject ? <Filters setShowTable={setShowTable} showTable={showTable} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} columnFilters={columnFilters} setColumnFilters={setColumnFilters} /> : '' }
                             {
                               showTable ? 
-                              // <CTable align="middle" className="mb-0 border" hover responsive style={{borderRadius: '6px'}}>
-                              //   <CTableHead className="text-center" color="light">
-                              //     {table.getHeaderGroups().map((headerGroup) => {
-                              //       return (
-                              //         <CTableRow key={headerGroup.id}>
-                              //           {headerGroup.headers.map((header, index) => {
-                              //             return (
-                              //               <TableHeader
-                              //                 header={header}
-                              //                 key={index}
-                              //                 //
-                              //               />
-                              //             )
-                              //           })}
-                              //         </CTableRow>
-                              //       )
-                              //     })}
-                              //   </CTableHead>
-                              //   <CTableBody>
-                              //     {table.getRowModel().rows.map((row, index) => {
-                              //       return (
-                              //         <CTableRow className="text-center" key={index}>
-                              //           {row.getVisibleCells().map((cell, index) => {
-                              //             return (
-                              //               <CTableDataCell key={index}> 
-                              //                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                              //               </CTableDataCell>
-                              //             )
-                              //           })}
-                              //         </CTableRow>
-                              //       )
-                              //     })}
-                              //   </CTableBody>
-                              //   <CTableFoot>
-                              //     {table.getFooterGroups().map((footerGroup, index) => {
-                              //       return (
-                              //         <CTableRow key={index}>
-                              //           {footerGroup.headers.map((footer, index) => {
-                              //             return (
-                              //               <CTableHeaderCell className="text-center" key={index}>
-                              //                 {footer.isPlaceholder
-                              //                   ? null
-                              //                   : flexRender(footer.column.columnDef.footer, footer.getContext())}
-                              //               </CTableHeaderCell>
-                              //             )
-                              //           })}
-                              //         </CTableRow>
-                              //       )
-                              //     })}
-                              //   </CTableFoot>
-                              // </CTable>
-                              <Calendar2 showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
-                              :
-                              <Calendar showSidebar={showSidebar} setShowSidebar={setShowSidebar}/>
+                              <CTable align="middle" className="mb-0 border" hover responsive style={{borderRadius: '6px'}}>
+                                <CTableHead className="text-center" color="light">
+                                  {table.getHeaderGroups().map((headerGroup) => {
+                                    return (
+                                      <CTableRow key={headerGroup.id}>
+                                        {headerGroup.headers.map((header, index) => {
+                                          return (
+                                            <TableHeader
+                                              header={header}
+                                              key={index}
+                                              //
+                                            />
+                                          )
+                                        })}
+                                      </CTableRow>
+                                    )
+                                  })}
+                                </CTableHead>
+                                <CTableBody>
+                                  {table.getRowModel().rows.map((row, index) => {
+                                    return (
+                                      <CTableRow className="text-center" key={index}>
+                                        {row.getVisibleCells().map((cell, index) => {
+                                          return (
+                                            <CTableDataCell key={index}> 
+                                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </CTableDataCell>
+                                          )
+                                        })}
+                                      </CTableRow>
+                                    )
+                                  })}
+                                </CTableBody>
+                                <CTableFoot>
+                                  {table.getFooterGroups().map((footerGroup, index) => {
+                                    return (
+                                      <CTableRow key={index}>
+                                        {footerGroup.headers.map((footer, index) => {
+                                          return (
+                                            <CTableHeaderCell className="text-center" key={index}>
+                                              {footer.isPlaceholder
+                                                ? null
+                                                : flexRender(footer.column.columnDef.footer, footer.getContext())}
+                                            </CTableHeaderCell>
+                                          )
+                                        })}
+                                      </CTableRow>
+                                    )
+                                  })}
+                                </CTableFoot>
+                              </CTable>
+                              :(showCalendar ? 
+                                <Calendar2 showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2}/>
+                                :
+                                (showCalendar2 ?
+                                  <Calendar showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2}/>
+                                  : 
+                                  (showProject ? 
+                                    <div style={{position: 'relative', height: '660px', display: 'flex', flexDirection: 'row', marginTop: '35px'}}>
+                                    {/* 1 */}                               
+                                          <div style={{display: 'flex', flexDirection: 'column', width: '250px'}}>
+                                            
+                                            <label className='title-label'>ID</label>
+                                              <div className="text-field">
+                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '100px'}}/>
+                                              </div>
+                                              <div className="text-field">
+                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '100px'}}/>
+                                              </div>
+                                              <div className="text-field">
+                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '100px'}}/>
+                                              </div>
+                                    
+                                                                      {/* ФИО */}
+                                                                      <div style={{position: 'absolute', top: '-25px', right: '25px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'flex-end', width: '-webkit-fill-available'}}>   
+                                                                        <div style={{display: 'flex'}}>
+                                                                          <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                                                          <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                                                          <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                                                          <img src={Disketa}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                                                          <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                                                        </div>
+                                                                      </div>
+                                    
+                                                                      {/* 2 */}
+                                                                    
+                                    
+                                        </div>
+
+                                        <div>
+                                          <label className='title-label'>Проект</label>
+                                              <div className="text-field">
+                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                              </div>
+
+                                        </div>
+
+                                        <div>
+                                          <label className='title-label'>Менеджер</label>
+                                              <div className="text-field">
+                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                              </div>
+
+                                        </div>
+
+                                        <div>
+                                          <label className='title-label'>Телефон</label>
+                                              <div className="text-field">
+                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                              </div>
+
+                                        </div>
+
+                                    </div>
+                                  :'')
+                                )
+                              )
                             }
 
                           </CCardBody>

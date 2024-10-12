@@ -118,7 +118,7 @@ const filters = {
   period: periodList,
 }
 
-export default function Filters({ columnFilters, setColumnFilters, setShowTable, showTable }) {
+export default function Filters({ columnFilters, setColumnFilters, setShowTable, showTable, setShowCalendar, setShowCalendar2 }) {
   const { MONTHS, date, setDate, day, setDay, month, setMonth, year, setYear, startDay, setStartDay, currentDays } = useUsersContext();
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
@@ -130,6 +130,8 @@ export default function Filters({ columnFilters, setColumnFilters, setShowTable,
   const [filter4, setFilter4] = useState(companyList)
   const [filter5, setFilter5] = useState(statusList)
   const [filter6, setFilter6] = useState(cityList)
+
+  const [countPress, setCountPress] = useState(0);
 
   const handleChangeFilterType = (selectedOption) => {
     setFilterType(selectedOption)
@@ -143,6 +145,29 @@ export default function Filters({ columnFilters, setColumnFilters, setShowTable,
     //   prev.filter((f) => f.id !== filterType.value).concat({ id: filterType, value: tt }),
     // )
     setColumnFilters([{ id: filterType.value, value: tt.value }])
+  }
+
+  const clickChange = () => {
+    setCountPress(countPress + 1)
+    
+    if (countPress + 1 >= 3) {
+      setCountPress(0)
+    }
+
+    if (countPress + 1 === 1) {
+      setShowTable(false)
+      setShowCalendar(true)
+      setShowCalendar2(false)
+    } else if (countPress + 1 === 2) {
+      setShowTable(false)
+      setShowCalendar(false)
+      setShowCalendar2(true)
+    } else if (countPress + 1 === 3) {
+      setShowTable(true)
+      setShowCalendar(false)
+      setShowCalendar2(false)
+    } 
+    
   }
 
   return (
@@ -184,7 +209,7 @@ export default function Filters({ columnFilters, setColumnFilters, setShowTable,
                 classNamePrefix="custom-select_2"
               />
 
-              <CButton onClick={()=>setShowTable(!showTable)} className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
+              <CButton onClick={()=>clickChange()} className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
                 <span style={{position: 'absolute', top: '-4px', left: '5px'}}>
                   <img src={ChangeSloy} alt='' width={25} />
                 </span>

@@ -9,7 +9,7 @@ import Select from 'react-select'
 
 import { useUsersContext } from "../../chat-app-new/context/usersContext";
 
-export default function Calendar({showSidebar, setShowSidebar}) {
+export default function Calendar({showSidebar, setShowSidebar, setShowProject, setShowCalendar, setShowCalendar2}) {
     //const { MONTHS, date, setDate, day, setDay, month, setMonth, year, setYear, startDay, setStartDay, currentDays, DAYS_OF_THE_WEEK } = useUsersContext();
     // const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     // const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -143,6 +143,12 @@ export default function Calendar({showSidebar, setShowSidebar}) {
         setShowProject2(arr2)
     }
 
+    const openProject =(item) => {
+        setShowProject(true)
+        setShowCalendar(false)
+        setShowCalendar2(false)
+    }
+
     
   return (
     <div className='frame'>
@@ -186,7 +192,7 @@ export default function Calendar({showSidebar, setShowSidebar}) {
                             </CButton>
 
                             {project[index] ? 
-                                <div className='viewProject' >
+                                <div className='viewProject' onClick={()=>openProject(index)}>
                                     <CButton onClick={()=>addNewProject2(index)} className='uley_add_user uley_select_reset joinBtn' style={{position: 'absolute', top: '-55px', height: '26px', width: '26px'}}>
                                         <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-9px', left: '4px'}}>
                                         +</span>

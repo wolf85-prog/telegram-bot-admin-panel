@@ -9,7 +9,7 @@ import Select from 'react-select'
 
 import { useUsersContext } from "../../chat-app-new/context/usersContext";
 
-export default function Calendar2({showSidebar, setShowSidebar}) {
+export default function Calendar2({showSidebar, setShowSidebar, setShowProject, setShowCalendar, setShowCalendar2}) {
     //const { MONTHS, date, setDate, day, setDay, month, setMonth, year, setYear, startDay, setStartDay, currentDays, DAYS_OF_THE_WEEK } = useUsersContext();
     const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -146,6 +146,9 @@ export default function Calendar2({showSidebar, setShowSidebar}) {
         setDate(new Date(year, index, day))
     }
 
+    const openProject =(item) => {
+        setShowProject(true)
+    }
     
   return (
     <div className='frame'>
