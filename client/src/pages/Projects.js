@@ -33,6 +33,7 @@ import Filters from 'src/components/table/Filters'
 // import Calendar from 'src/components/Calendar/Calendar_old'
 import Calendar from "src/components/Calendar/Calendar";
 import Calendar2 from "src/components/Calendar3/Calendar2";
+import Close from "../assets/images/clear.svg"
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters } = useTableData()
@@ -40,6 +41,7 @@ const Projects = () => {
   const [yearAndMonth, setYearAndMonth] = useState([2024, 10]);
 
   const [showTable, setShowTable] = useState(false)
+  const [showSidebar, setShowSidebar] = useState(false)
 
   const table = useReactTable({
     defaultColumn: {
@@ -145,9 +147,9 @@ const Projects = () => {
                               //     })}
                               //   </CTableFoot>
                               // </CTable>
-                              <Calendar2 />
+                              <Calendar2 showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
                               :
-                              <Calendar />
+                              <Calendar showSidebar={showSidebar} setShowSidebar={setShowSidebar}/>
                             }
 
                           </CCardBody>
@@ -156,6 +158,25 @@ const Projects = () => {
                     </CRow>
                 </Suspense>
             </CContainer>
+
+            <div style={{
+                display: showSidebar ? 'block' : 'none',
+                position: 'fixed',
+                right: '0px',
+                top: '0px',
+                height: '100vh',
+                background: '#10171a'
+              }}>
+
+              <div>
+                <img src={Close} onClick={()=>setShowSidebar(false)} style={{position: 'absolute', top: '130px', right: '15px'}}/>
+              </div>
+
+              <div style={{width: '20rem'}}>
+
+              </div>
+
+            </div>
 
         </div>
         <AppFooter />

@@ -149,11 +149,11 @@ export default function Filters({ columnFilters, setColumnFilters, setShowTable,
     <>
       <CRow lg={{ gutter: 0 }} className="mb-1 ">
         <CCol className="align-self-center" style={{maxWidth: '140px'}}>
-          <div className="filter-line" style={{left: '24px', width: '10px'}}></div>
+          <div className="filter-line" style={{left: '12px', width: '10px'}}></div>
           {/* <div className="filter-line" style={{left: '805px', top: '60px', width: '50px'}}></div>
           <div className="uley-line" style={{left: '900px', top: '60px', width: '50px'}}></div> */}
 
-          <ul className="markers" style={{paddingLeft: '20px', listStyle: 'none'}}>
+          <ul className="markers" style={{paddingLeft: '14px', listStyle: 'none'}}>
             <li><span className='title-label'>Проекты: </span>{'100'}</li>
             <li><span className='title-label'>Часы: </span>{'1000'}</li>
             
@@ -167,7 +167,7 @@ export default function Filters({ columnFilters, setColumnFilters, setShowTable,
           </ul>
         </CCol>
         
-        <CCol className="align-self-center" style={{ display: 'flex', justifyContent: 'flex-end'}} >
+        <CCol className="align-self-center" style={{ display: 'flex', justifyContent: 'flex-end', position: 'absolute', top: '12px', right: '10px'}} >
               <Select
                 className="uley_react_select"
                 options={options}
