@@ -90,7 +90,7 @@ const Projects = () => {
                         <CCard className="mb-4">
                           {/* <CCardHeader>Сметы</CCardHeader> */}
 
-                          <CCardBody>
+                          <CCardBody style={{padding: '12px'}}>
                             <Filters setShowTable={setShowTable} showTable={showTable} columnFilters={columnFilters} setColumnFilters={setColumnFilters} />
                             {
                               showTable ? 

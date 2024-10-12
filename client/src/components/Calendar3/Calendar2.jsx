@@ -167,9 +167,8 @@ export default function Calendar2() {
                 +</span>
             </CButton>
         </div>
-        <table>
+        <table className='frame'>
             <tr>
-                <th className='table-header'></th>
                 <th className='table-header'>1</th>
                 <th className='table-header'>2</th>
                 <th className='table-header'>3</th>
@@ -183,7 +182,6 @@ export default function Calendar2() {
                 if (index !== 0) {
                     return (
                         <><tr key={index}>
-                            <td>{String(d).padStart(2, "0")}</td>
                             <td className='day2' onMouseOver={()=>overDay(index, 1)} onMouseOut={()=>outDay(index, 1)}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                 <CButton className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
