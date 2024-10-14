@@ -118,7 +118,7 @@ const filters = {
   period: periodList,
 }
 
-export default function Filters({ columnFilters, setColumnFilters, setShowTable, showTable, setShowCalendar, setShowCalendar2 }) {
+export default function Filters({ columnFilters, setColumnFilters, setShowCalendar, setShowCalendar2 }) {
   const { MONTHS, date, setDate, day, setDay, month, setMonth, year, setYear, startDay, setStartDay, currentDays } = useUsersContext();
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
@@ -150,21 +150,15 @@ export default function Filters({ columnFilters, setColumnFilters, setShowTable,
   const clickChange = () => {
     setCountPress(countPress + 1)
     
-    if (countPress + 1 >= 3) {
+    if (countPress + 1 >= 2) {
       setCountPress(0)
     }
 
     if (countPress + 1 === 1) {
-      setShowTable(false)
-      setShowCalendar(true)
-      setShowCalendar2(false)
-    } else if (countPress + 1 === 2) {
-      setShowTable(false)
       setShowCalendar(false)
       setShowCalendar2(true)
-    } else if (countPress + 1 === 3) {
-      setShowTable(true)
-      setShowCalendar(false)
+    } else if (countPress + 1 === 2) {
+      setShowCalendar(true)
       setShowCalendar2(false)
     } 
     

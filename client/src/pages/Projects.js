@@ -52,9 +52,8 @@ const Projects = () => {
 
   const [yearAndMonth, setYearAndMonth] = useState([2024, 10]);
 
-  const [showTable, setShowTable] = useState(true)
   const [showSidebar, setShowSidebar] = useState(false)
-  const [showCalendar, setShowCalendar] = useState(false)
+  const [showCalendar, setShowCalendar] = useState(true)
   const [showCalendar2, setShowCalendar2] = useState(false)
   const [showProject, setShowProject] = useState(false)
 
@@ -113,65 +112,13 @@ const Projects = () => {
                           {/* <CCardHeader>Сметы</CCardHeader> */}
 
                           <CCardBody style={{padding: '12px'}}>
-                            {!showProject ? <Filters setShowTable={setShowTable} showTable={showTable} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} columnFilters={columnFilters} setColumnFilters={setColumnFilters} /> : '' }
+                            {!showProject ? <Filters setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} columnFilters={columnFilters} setColumnFilters={setColumnFilters} /> : '' }
                             {
-                              showTable ? 
-                              <CTable align="middle" className="mb-0 border" hover responsive style={{borderRadius: '6px'}}>
-                                <CTableHead className="text-center" color="light">
-                                  {table.getHeaderGroups().map((headerGroup) => {
-                                    return (
-                                      <CTableRow key={headerGroup.id}>
-                                        {headerGroup.headers.map((header, index) => {
-                                          return (
-                                            <TableHeader
-                                              header={header}
-                                              key={index}
-                                              //
-                                            />
-                                          )
-                                        })}
-                                      </CTableRow>
-                                    )
-                                  })}
-                                </CTableHead>
-                                <CTableBody>
-                                  {table.getRowModel().rows.map((row, index) => {
-                                    return (
-                                      <CTableRow className="text-center" key={index}>
-                                        {row.getVisibleCells().map((cell, index) => {
-                                          return (
-                                            <CTableDataCell key={index}> 
-                                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                            </CTableDataCell>
-                                          )
-                                        })}
-                                      </CTableRow>
-                                    )
-                                  })}
-                                </CTableBody>
-                                <CTableFoot>
-                                  {table.getFooterGroups().map((footerGroup, index) => {
-                                    return (
-                                      <CTableRow key={index}>
-                                        {footerGroup.headers.map((footer, index) => {
-                                          return (
-                                            <CTableHeaderCell className="text-center" key={index}>
-                                              {footer.isPlaceholder
-                                                ? null
-                                                : flexRender(footer.column.columnDef.footer, footer.getContext())}
-                                            </CTableHeaderCell>
-                                          )
-                                        })}
-                                      </CTableRow>
-                                    )
-                                  })}
-                                </CTableFoot>
-                              </CTable>
-                              :(showCalendar ? 
-                                <Calendar2 showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2}/>
+                              showCalendar ? 
+                                <Calendar showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2}/>
                                 :
                                 (showCalendar2 ?
-                                  <Calendar showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2}/>
+                                  <Calendar2 showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2}/>
                                   : 
                                   (showProject ? 
                                     <div style={{position: 'relative', height: '660px', display: 'flex', flexDirection: 'row', marginTop: '35px'}}>
@@ -232,7 +179,7 @@ const Projects = () => {
                                     </div>
                                   :'')
                                 )
-                              )
+                              
                             }
 
                           </CCardBody>

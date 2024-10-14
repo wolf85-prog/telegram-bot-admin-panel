@@ -1731,7 +1731,7 @@ useEffect(() => {
                                           <CCollapse visible={showTable[index]}>
                                             <table>
                                               <tbody>
-                                                {item.worklist !== '' && JSON.parse(item.worklist).length > 0 ? (JSON.parse(item.worklist)).map((spec, index)=>( 
+                                                {item.worklist !== null && JSON.parse(item.worklist).length > 0 ? (JSON.parse(item.worklist)).map((spec, index)=>( 
                                                     <tr key={index}>
                                                       <td>{spec.spec !== '' ? "- " + spec.spec : ''}</td>
                                                     </tr>          
