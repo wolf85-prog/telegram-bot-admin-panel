@@ -128,59 +128,211 @@ const Projects = () => {
                                   : 
                                   (showProject ? 
                                     <div style={{position: 'relative', height: '660px', display: 'flex', flexDirection: 'row', marginTop: '35px'}}>
+                                              <div style={{position: 'absolute', top: '-40px', left: '0px'}}>
+                                                <label className='title-label'>ID</label>
+                                                <div className="text-field">
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '50px', marginRight: '25px'}}/>
+                                                </div>
+                                              </div>
+                                              
+                                              <div style={{position: 'absolute', top: '-25px', right: '25px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'flex-end', width: '-webkit-fill-available'}}>   
+                                                <div style={{display: 'flex'}}>
+                                                  <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                                  <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                                  <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                                  <img src={Disketa}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                                  <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                                </div>
+                                              </div>
                                     {/* 1 */}                               
-                                          <div style={{display: 'flex', flexDirection: 'column', width: '250px'}}>
+                                          <div style={{display: 'flex', flexDirection: 'column', width: '250px', textAlign: 'center', marginTop: '20px'}}>
                                             
-                                            <label className='title-label'>ID</label>
-                                              <div className="text-field">
-                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '100px'}}/>
+                                              <label className='title-label'></label>
+                                              <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '25px', width: '230px'}}>
+                                                <div className="text-field">
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '100px'}}/>
+                                                </div>
+                                                <div className="text-field">
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '100px'}}/>
+                                                </div>
                                               </div>
-                                              <div className="text-field">
-                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '100px'}}/>
+
+                                              <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '25px', width: '230px'}}>
+                                                <div className="text-field">
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '100px'}}/>
+                                                </div>
+                                                <div className="text-field">
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '100px'}}/>
+                                                </div>
                                               </div>
+
+                                              <label className='title-label'>Статус</label>
                                               <div className="text-field">
-                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '100px'}}/>
+                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '25px'}}/>
                                               </div>
-                                    
-                                                                      {/* ФИО */}
-                                                                      <div style={{position: 'absolute', top: '-25px', right: '25px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'flex-end', width: '-webkit-fill-available'}}>   
-                                                                        <div style={{display: 'flex'}}>
-                                                                          <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                                                          <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                                                          <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                                                          <img src={Disketa}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                                                          <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
-                                                                        </div>
-                                                                      </div>
-                                    
-                                                                      {/* 2 */}
-                                                                    
-                                    
+
+                                              
+                                              <label className='title-label'>Специфика</label>
+                                              <div className="text-field">
+                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '25px'}}/>
+                                              </div>
+
+                                              <label className='title-label'>Комментарии</label>
+                                              <div className="text-field" style={{marginBottom: '0px'}}>
+                                                <textarea 
+                                                  className="text-field__input" 
+                                                  type="text" 
+                                                  name="comment" 
+                                                  id="comment"
+                                                  style={{resize: 'none', width: '230px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                                />
+                                              </div> 
                                         </div>
 
-                                        <div>
+                                        {/* 2 */}   
+
+                                        <div style={{textAlign: 'center', marginTop: '20px'}}>
                                           <label className='title-label'>Проект</label>
-                                              <div className="text-field">
-                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
-                                              </div>
+                                          <div className="text-field">
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                          </div>
 
+                                          <label className='title-label'>Компания</label>
+                                          <div className="text-field">
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                          </div>
+
+                                          <label className='title-label'>Город</label>
+                                          <div className="text-field">
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                          </div>
+
+                                          <label className='title-label'>Локация</label>
+                                          <div className="text-field">
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                          </div>
+
+                                          <label className='title-label'>Адрес</label>
+                                          <div className="text-field" style={{marginBottom: '0px'}}>
+                                            <textarea 
+                                              className="text-field__input" 
+                                              type="text" 
+                                              name="comment" 
+                                              id="comment"
+                                              style={{resize: 'none', width: '250px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                            />
+                                          </div> 
                                         </div>
 
-                                        <div>
+                                        <div style={{textAlign: 'center', marginTop: '20px'}}>
                                           <label className='title-label'>Менеджер</label>
-                                              <div className="text-field">
-                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
-                                              </div>
+                                          <div className="text-field">
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                          </div>
 
+                                          <label className='title-label'>Старший</label>
+                                          <div className="text-field">
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                          </div>
+
+                                          <label className='title-label'>Техническое Задание</label>
+                                          <div className="text-field" style={{marginBottom: '0px'}}>
+                                            <textarea 
+                                              className="text-field__input" 
+                                              type="text" 
+                                              name="comment" 
+                                              id="comment"
+                                              style={{resize: 'none', width: '250px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginBottom: '20px'}}
+                                            />
+                                          </div> 
+
+                                          <label className='title-label' style={{marginTop: '44px'}}>Техническое Задание</label>
+
+                                          <div  style={{display: 'flex', flexDirection: 'row'}}>
+                                            <div>
+                                              <div style={{display: 'flex'}}>
+                                                <div className="text-field" style={{marginBottom: '0px'}}>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                </div>
+                                                <div className="text-field" style={{marginBottom: '0px'}}>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                </div>
+                                              </div>
+                                              <div style={{display: 'flex'}}>
+                                                <div className="text-field" style={{marginBottom: '0px'}}>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                </div>
+                                                <div className="text-field" style={{marginBottom: '0px'}}>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
                                         </div>
 
-                                        <div>
+                                        <div style={{textAlign: 'center', marginTop: '20px'}}>
                                           <label className='title-label'>Телефон</label>
-                                              <div className="text-field">
-                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
-                                              </div>
+                                          <div className="text-field">
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                          </div>
 
+                                          <label className='title-label'> </label>
+                                          <div className="text-field">
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                          </div>
+
+                                          <div style={{textAlign: 'left', display: 'flex', flexDirection: 'column'}}>
+                                            <label className='title-label' style={{marginTop: '15px'}}>Предварительная смета</label>
+
+                                            <label className='title-label' style={{marginTop: '25px'}}>Финальная смета</label>
+
+                                            <label className='title-label' style={{marginTop: '25px'}}>Постер</label>
+                                          </div>
+
+                                          <div style={{marginTop: '98px', marginLeft: '5px'}}>
+                                              <div style={{display: 'flex'}}>
+                                                <div className="text-field" style={{marginBottom: '0px'}}>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                </div>
+                                                <div className="text-field" style={{marginBottom: '0px'}}>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                </div>
+                                              </div>
+                                              <div style={{display: 'flex'}}>
+                                                <div className="text-field" style={{marginBottom: '0px'}}>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                </div>
+                                                <div className="text-field" style={{marginBottom: '0px'}}>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                </div>
+                                              </div>
+                                          </div>
                                         </div>
+
+                                        <div style={{textAlign: 'center', marginTop: '20px'}}>
+                                          {/* <label className='title-label'> </label> */}
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '24px'}}>
+                                            <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
+                                          </div>
+
+                                          {/* <label className='title-label'> </label> */}
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '44px'}}>
+                                            <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
+                                          </div>
+
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '40px', marginBottom: '0'}}>
+                                            🟢
+                                          </div>
+
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginBottom: '0'}}>
+                                            🟢
+                                          </div>
+
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginBottom: '0'}}>
+                                            🟢
+                                          </div>
+                                        </div>
+                                        
 
                                     </div>
                                   :'')
