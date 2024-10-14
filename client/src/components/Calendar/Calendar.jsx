@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react'
+import { React, useEffect, useState, useRef } from 'react'
 
 import {
     CButton,
@@ -9,7 +9,7 @@ import Select from 'react-select'
 
 import { useUsersContext } from "../../chat-app-new/context/usersContext";
 
-export default function Calendar({showSidebar, setShowSidebar, setShowProject, setShowCalendar, setShowCalendar2}) {
+export default function Calendar({setHeight, showSidebar, setShowSidebar, setShowProject, setShowCalendar, setShowCalendar2}) {
     //const { MONTHS, date, setDate, day, setDay, month, setMonth, year, setYear, startDay, setStartDay, currentDays, DAYS_OF_THE_WEEK } = useUsersContext();
     // const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     // const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -44,6 +44,13 @@ export default function Calendar({showSidebar, setShowSidebar, setShowProject, s
     const [project, setProject] = useState([])
     const [project2, setProject2] = useState([])
     const [showProject2, setShowProject2] = useState([])
+
+    const ref = useRef(null)
+
+    useEffect(() => {
+        console.log(ref.current.clientHeight)
+        setHeight(ref.current.clientHeight + 93)
+    })
 
     useEffect(() => {
         setDay(date.getDate());
@@ -151,7 +158,7 @@ export default function Calendar({showSidebar, setShowSidebar, setShowProject, s
 
     
   return (
-    <div className='frame'>
+    <div className='frame'  ref={ref}>
         <div className='calendar-header'>
             <CButton onClick={prevMonth} className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
                 <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-14px', left: '11px'}}>
@@ -225,7 +232,18 @@ export default function Calendar({showSidebar, setShowSidebar, setShowProject, s
                 })
             }
         </div>
-        <p onClick={()=>setShowSidebar(true)} style={{position: 'absolute', top: '50%', right: '2px'}}>^</p>
+
+        <div onClick={()=>setShowSidebar(true)} style={{cursor: 'pointer', position: 'absolute', top: '50%', right: '2px'}}>
+            <div style={{borderTop: '1px solid #f3f3f3', width: '5px'}}></div>
+            <div style={{borderTop: '1px solid #f3f3f3', width: '5px', marginTop: '15px'}}></div>
+            <div style={{borderTop: '1px solid #f3f3f3', width: '5px', marginTop: '15px'}}></div>
+            <div style={{borderTop: '1px solid #f3f3f3', width: '5px', marginTop: '15px'}}></div>
+            <div style={{borderTop: '1px solid #f3f3f3', width: '5px', marginTop: '15px'}}></div>
+            <div style={{borderLeft: '1px solid #f3f3f3', height: '65px', marginTop: '-65px'}}></div>
+        </div>
+        {/* <p onClick={()=>setShowSidebar(true)} style={{cursor: 'pointer', position: 'absolute', top: '50%', right: '2px'}}>
+            E
+        </p> */}
     </div>
   );
 }

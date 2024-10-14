@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react'
+import React, { Suspense, useState, useEffect } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import { 
   CContainer, 
@@ -57,6 +57,8 @@ const Projects = () => {
   const [showCalendar2, setShowCalendar2] = useState(false)
   const [showProject, setShowProject] = useState(false)
 
+  const [height, setHeight] = useState(600)
+
   const table = useReactTable({
     defaultColumn: {
       size: 200, //starting column size
@@ -96,6 +98,10 @@ const Projects = () => {
     setShowCalendar(true)
   }
 
+  useEffect(()=> {
+    console.log("height: ", height)
+  }, [height])
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -111,14 +117,14 @@ const Projects = () => {
                         <CCard className="mb-4">
                           {/* <CCardHeader>Сметы</CCardHeader> */}
 
-                          <CCardBody style={{padding: '12px'}}>
+                          <CCardBody style={{padding: '12px', height: `${height}px`}}>
                             {!showProject ? <Filters setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} columnFilters={columnFilters} setColumnFilters={setColumnFilters} /> : '' }
                             {
                               showCalendar ? 
-                                <Calendar showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2}/>
+                                <Calendar showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
                                 :
                                 (showCalendar2 ?
-                                  <Calendar2 showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2}/>
+                                  <Calendar2 showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
                                   : 
                                   (showProject ? 
                                     <div style={{position: 'relative', height: '660px', display: 'flex', flexDirection: 'row', marginTop: '35px'}}>
@@ -181,6 +187,25 @@ const Projects = () => {
                                 )
                               
                             }
+                            {/* Сайдбар с комментариями */}
+                            <div style={{
+                                display: showSidebar ? 'block' : 'none',
+                                position: 'absolute',
+                                right: '0px',
+                                top: '120px',
+                                height: '580px',
+                                background: '#10171a'
+                              }}>
+
+                              <div>
+                                <img src={Close} onClick={()=>setShowSidebar(false)} style={{position: 'absolute', top: '15px', right: '15px'}}/>
+                              </div>
+
+                              <div style={{width: '20rem'}}>
+
+                              </div>
+
+                            </div>
 
                           </CCardBody>
                         </CCard>
@@ -189,24 +214,7 @@ const Projects = () => {
                 </Suspense>
             </CContainer>
 
-            <div style={{
-                display: showSidebar ? 'block' : 'none',
-                position: 'fixed',
-                right: '0px',
-                top: '0px',
-                height: '100vh',
-                background: '#10171a'
-              }}>
-
-              <div>
-                <img src={Close} onClick={()=>setShowSidebar(false)} style={{position: 'absolute', top: '130px', right: '15px'}}/>
-              </div>
-
-              <div style={{width: '20rem'}}>
-
-              </div>
-
-            </div>
+            
 
         </div>
         <AppFooter />

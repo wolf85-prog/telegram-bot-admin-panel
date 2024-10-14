@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react'
+import { React, useEffect, useState, useRef  } from 'react'
 
 import {
     CButton,
@@ -9,11 +9,10 @@ import Select from 'react-select'
 
 import { useUsersContext } from "../../chat-app-new/context/usersContext";
 
-export default function Calendar2({showSidebar, setShowSidebar, setShowProject, setShowCalendar, setShowCalendar2}) {
+export default function Calendar2({setHeight, showSidebar, setShowSidebar, setShowProject, setShowCalendar, setShowCalendar2}) {
     //const { MONTHS, date, setDate, day, setDay, month, setMonth, year, setYear, startDay, setStartDay, currentDays, DAYS_OF_THE_WEEK } = useUsersContext();
     const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    const DAYS_OF_THE_WEEK = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
     const MONTHS = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
     const manthList = [
         { value: 'Январь', label: 'Январь' },
@@ -44,6 +43,14 @@ export default function Calendar2({showSidebar, setShowSidebar, setShowProject, 
     const [showButtonAdd5, setShowButtonAdd5] = useState([])
     const [showButtonAdd6, setShowButtonAdd6] = useState([])
     const [showButtonAdd7, setShowButtonAdd7] = useState([])
+
+    
+    const ref = useRef(null)
+
+    useEffect(() => {
+        console.log(ref.current.clientHeight)
+        setHeight(ref.current.clientHeight + 74)
+    })
 
     useEffect(() => {
         console.log(today)
@@ -151,7 +158,7 @@ export default function Calendar2({showSidebar, setShowSidebar, setShowProject, 
     }
     
   return (
-    <div className='frame'>
+    <div className='frame2' ref={ref}>
         <div className='calendar-header'>
             <CButton onClick={prevMonth} className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
                 <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-14px', left: '11px'}}>
@@ -170,7 +177,7 @@ export default function Calendar2({showSidebar, setShowSidebar, setShowProject, 
                 +</span>
             </CButton>
         </div>
-        <table className='frame'>
+        <table className='frame2'>
             <tr>
                 <th className='table-header'>1</th>
                 <th className='table-header'>2</th>

@@ -1,4 +1,4 @@
-.frame {
+.frame2 {
   width: 100%;
 }
   
@@ -24,7 +24,7 @@
   flex-direction: column; 
 }
 
-.day-header {
+.day-header2 {
     width: 14.2%;
     height: 40px;
     display: flex;
