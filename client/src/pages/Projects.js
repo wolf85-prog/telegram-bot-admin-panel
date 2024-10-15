@@ -129,7 +129,7 @@ const Projects = () => {
                                   (showProject ? 
                                     <div style={{position: 'relative', height: '660px', display: 'flex', flexDirection: 'row', marginTop: '35px'}}>
                                               <div style={{position: 'absolute', top: '-40px', left: '0px'}}>
-                                                <label className='title-label'>ID</label>
+                                                <label className='title-label' style={{marginLeft: '18px'}}>ID</label>
                                                 <div className="text-field">
                                                   <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '50px', marginRight: '25px'}}/>
                                                 </div>
@@ -145,24 +145,24 @@ const Projects = () => {
                                                 </div>
                                               </div>
                                     {/* 1 */}                               
-                                          <div style={{display: 'flex', flexDirection: 'column', width: '250px', textAlign: 'center', marginTop: '20px'}}>
+                                          <div style={{display: 'flex', flexDirection: 'column', width: '245px', textAlign: 'center', marginTop: '18px'}}>
                                             
                                               <label className='title-label'></label>
                                               <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '25px', width: '230px'}}>
                                                 <div className="text-field">
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '100px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg" id="dateReg" style={{width: '120px'}}/>
                                                 </div>
                                                 <div className="text-field">
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '100px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" value='00:00' name="dateReg2" id="dateReg2" style={{width: '90px'}}/>
                                                 </div>
                                               </div>
 
                                               <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '25px', width: '230px'}}>
                                                 <div className="text-field">
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '100px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg3" id="dateReg3" style={{width: '120px'}}/>
                                                 </div>
                                                 <div className="text-field">
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '100px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" value='00:00' name="dateReg4" id="dateReg4" style={{width: '90px'}}/>
                                                 </div>
                                               </div>
 
@@ -190,26 +190,25 @@ const Projects = () => {
                                         </div>
 
                                         {/* 2 */}   
-
-                                        <div style={{textAlign: 'center', marginTop: '20px'}}>
+                                        <div style={{textAlign: 'center', marginTop: '20px', width: '335px'}}>
                                           <label className='title-label'>Проект</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px', marginRight: '25px'}}/>
                                           </div>
 
                                           <label className='title-label'>Компания</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px', marginRight: '25px'}}/>
                                           </div>
 
                                           <label className='title-label'>Город</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px', marginRight: '25px'}}/>
                                           </div>
 
                                           <label className='title-label'>Локация</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px', marginRight: '25px'}}/>
                                           </div>
 
                                           <label className='title-label'>Адрес</label>
@@ -219,20 +218,21 @@ const Projects = () => {
                                               type="text" 
                                               name="comment" 
                                               id="comment"
-                                              style={{resize: 'none', width: '250px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                              style={{resize: 'none', width: '320px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
                                             />
                                           </div> 
                                         </div>
 
+                                        {/* 3 */}   
                                         <div style={{textAlign: 'center', marginTop: '20px'}}>
                                           <label className='title-label'>Менеджер</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px', marginRight: '15px'}}/>
                                           </div>
 
                                           <label className='title-label'>Старший</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px', marginRight: '15px'}}/>
                                           </div>
 
                                           <label className='title-label'>Техническое Задание</label>
@@ -242,7 +242,7 @@ const Projects = () => {
                                               type="text" 
                                               name="comment" 
                                               id="comment"
-                                              style={{resize: 'none', width: '250px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginBottom: '20px'}}
+                                              style={{resize: 'none', width: '320px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginBottom: '20px'}}
                                             />
                                           </div> 
 
@@ -252,33 +252,34 @@ const Projects = () => {
                                             <div>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                               </div>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                               </div>
                                             </div>
                                           </div>
                                         </div>
 
+                                        {/* 4 */}   
                                         <div style={{textAlign: 'center', marginTop: '20px'}}>
                                           <label className='title-label'>Телефон</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '300px', marginRight: '15px'}}/>
                                           </div>
 
                                           <label className='title-label'> </label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '250px', marginRight: '25px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '300px', marginRight: '15px'}}/>
                                           </div>
 
                                           <div style={{textAlign: 'left', display: 'flex', flexDirection: 'column'}}>
@@ -289,26 +290,27 @@ const Projects = () => {
                                             <label className='title-label' style={{marginTop: '25px'}}>Постер</label>
                                           </div>
 
-                                          <div style={{marginTop: '98px', marginLeft: '5px'}}>
+                                          <div style={{marginTop: '98px', marginLeft: '-15px'}}>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                               </div>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '150px', marginRight: '0px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                               </div>
                                           </div>
                                         </div>
 
+                                        {/* 5 */}   
                                         <div style={{textAlign: 'center', marginTop: '20px'}}>
                                           {/* <label className='title-label'> </label> */}
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '24px'}}>
