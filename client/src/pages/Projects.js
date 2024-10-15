@@ -135,7 +135,7 @@ const Projects = () => {
                                                 </div>
                                               </div>
                                               
-                                              <div style={{position: 'absolute', top: '-25px', right: '25px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'flex-end', width: '-webkit-fill-available'}}>   
+                                              <div style={{position: 'absolute', top: '-25px', right: '4px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'flex-end', width: '-webkit-fill-available'}}>   
                                                 <div style={{display: 'flex'}}>
                                                   <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                                   <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
@@ -145,7 +145,7 @@ const Projects = () => {
                                                 </div>
                                               </div>
                                     {/* 1 */}                               
-                                          <div style={{display: 'flex', flexDirection: 'column', width: '245px', textAlign: 'center', marginTop: '18px'}}>
+                                          <div style={{display: 'flex', flexDirection: 'column', width: '230px', textAlign: 'center', marginTop: '18px', marginRight: '40px'}}>
                                             
                                               <label className='title-label'></label>
                                               <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '25px', width: '230px'}}>
@@ -153,7 +153,7 @@ const Projects = () => {
                                                   <input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg" id="dateReg" style={{width: '120px'}}/>
                                                 </div>
                                                 <div className="text-field">
-                                                  <input disabled={true} className="text-field__input" type="text" value='00:00' name="dateReg2" id="dateReg2" style={{width: '90px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" value='00:00' name="dateReg2" id="dateReg2" style={{width: '90px',}}/>
                                                 </div>
                                               </div>
 
@@ -168,13 +168,13 @@ const Projects = () => {
 
                                               <label className='title-label'>Статус</label>
                                               <div className="text-field">
-                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '25px'}}/>
+                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '40px'}}/>
                                               </div>
 
                                               
                                               <label className='title-label'>Специфика</label>
                                               <div className="text-field">
-                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '25px'}}/>
+                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '40px'}}/>
                                               </div>
 
                                               <label className='title-label'>Комментарии</label>
@@ -184,31 +184,31 @@ const Projects = () => {
                                                   type="text" 
                                                   name="comment" 
                                                   id="comment"
-                                                  style={{resize: 'none', width: '230px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                                  style={{resize: 'none', width: '230px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginRight: '40px'}}
                                                 />
                                               </div> 
                                         </div>
 
                                         {/* 2 */}   
-                                        <div style={{textAlign: 'center', marginTop: '20px', width: '335px'}}>
+                                        <div style={{textAlign: 'center', marginTop: '20px', width: '320px', marginRight: '40px'}}>
                                           <label className='title-label'>Проект</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px', marginRight: '25px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/>
                                           </div>
 
                                           <label className='title-label'>Компания</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px', marginRight: '25px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/>
                                           </div>
 
                                           <label className='title-label'>Город</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px', marginRight: '25px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/>
                                           </div>
 
                                           <label className='title-label'>Локация</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px', marginRight: '25px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/>
                                           </div>
 
                                           <label className='title-label'>Адрес</label>
@@ -224,15 +224,15 @@ const Projects = () => {
                                         </div>
 
                                         {/* 3 */}   
-                                        <div style={{textAlign: 'center', marginTop: '20px'}}>
+                                        <div style={{textAlign: 'center', marginTop: '20px', width: '320px', marginRight: '40px'}}>
                                           <label className='title-label'>Менеджер</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px', marginRight: '15px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/>
                                           </div>
 
                                           <label className='title-label'>Старший</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px', marginRight: '15px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/>
                                           </div>
 
                                           <label className='title-label'>Техническое Задание</label>
@@ -271,15 +271,15 @@ const Projects = () => {
                                         </div>
 
                                         {/* 4 */}   
-                                        <div style={{textAlign: 'center', marginTop: '20px'}}>
+                                        <div style={{textAlign: 'center', marginTop: '20px', width: '230px',marginRight: '10px'}}>
                                           <label className='title-label'>Телефон</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '300px', marginRight: '15px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/>
                                           </div>
 
                                           <label className='title-label'> </label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '300px', marginRight: '15px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/>
                                           </div>
 
                                           <div style={{textAlign: 'left', display: 'flex', flexDirection: 'column'}}>
@@ -290,7 +290,7 @@ const Projects = () => {
                                             <label className='title-label' style={{marginTop: '25px'}}>Постер</label>
                                           </div>
 
-                                          <div style={{marginTop: '98px', marginLeft: '-15px'}}>
+                                          <div style={{marginTop: '98px', marginLeft: '-40px'}}>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
                                                   <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
