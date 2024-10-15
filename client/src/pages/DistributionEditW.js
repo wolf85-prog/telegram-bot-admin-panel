@@ -570,12 +570,14 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
         arrProjects.push(newObj)
       }    
     })
-    const obj = arrProjects.find((item1)=>item1.value === projectId)
+    //console.log("arrProjects: ", arrProjects)
+    const obj = arrProjects.find((item1)=>item1.value.toString() === projectId.toString())
     console.log("objSave: ", obj)
     setLabelName(obj)
 
   } else {
-    const obj = contacts.find((item)=>item.value === projectId)
+    //console.log("contacts: ", contacts)
+    const obj = contacts.find((item)=>item.value.toString() === projectId.toString())
     console.log("obj: ", obj)
     setLabelName(obj)
   }
