@@ -26,6 +26,9 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import Autocomplete from '@mui/material/Autocomplete';
+
+import { useUsersContext } from "../chat-app-new/context/usersContext";
 
 import { useTableData } from 'src/components/table/useTableData'
 import TableHeader from 'src/components/table/TableHeader'
@@ -33,6 +36,8 @@ import Filters from 'src/components/table/Filters'
 // import Calendar from 'src/components/Calendar/Calendar_old'
 import Calendar from "src/components/Calendar/Calendar";
 import Calendar2 from "src/components/Calendar3/Calendar2";
+
+import MyDropdown from 'src/components/Dropdown/Dropdown';
 
 import Close from "../assets/images/clear.svg"
 import zamok from "../assets/images/замок.png"
@@ -47,8 +52,12 @@ import StarActive from "./../assets/images/star_activ.svg";
 import Disketa from "./../assets/images/disketa.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 
+import statusData from 'src/data/statusData';
+import cities from 'src/data/cities';
+
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters } = useTableData()
+  const { companysAll } = useUsersContext();
 
   const [yearAndMonth, setYearAndMonth] = useState([2024, 10]);
 
@@ -58,6 +67,14 @@ const Projects = () => {
   const [showProject, setShowProject] = useState(false)
 
   const [height, setHeight] = useState(600)
+
+  const [id, setId] = useState('');
+  const [projectName, setProjectName] = useState('');
+  const [city, setCity] = useState('');
+  const [statusProject, setStatusProject] = useState('');
+  const [company, setCompany] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [companysData, setCompanysData] = useState([]);
 
   const table = useReactTable({
     defaultColumn: {
@@ -93,6 +110,20 @@ const Projects = () => {
     getRowCanExpand: () => true,
   })
 
+
+  useEffect(()=> {
+    let arrCompanys = []
+    companysAll.map((item, index)=> {
+      arrCompanys.push(item.title)
+    })
+    const sortedComp = [...arrCompanys].sort((a, b) => {       
+      var cityA = a, cityB = b
+      return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+    })
+
+    setCompanysData(sortedComp)
+}, [])
+
   const closeProfile = () => {
     setShowProject(false)
     setShowCalendar(true)
@@ -101,6 +132,22 @@ const Projects = () => {
   useEffect(()=> {
     console.log("height: ", height)
   }, [height])
+
+
+  const openProject =(item) => {
+    console.log("item: ", item)
+
+    setShowProject(true)
+    setShowCalendar(false)
+    setShowCalendar2(false)
+
+    setId(item)
+    setProjectName('Новый проект')
+  }
+
+  const onChangeCompany = (e) => {
+    setCompanyName(e.target.value)     
+  }
 
   return (
     <div className='dark-theme'>
@@ -121,17 +168,16 @@ const Projects = () => {
                             {!showProject ? <Filters setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} columnFilters={columnFilters} setColumnFilters={setColumnFilters} /> : '' }
                             {
                               showCalendar ? 
-                                <Calendar showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
+                                <Calendar openProject={openProject} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
                                 :
                                 (showCalendar2 ?
                                   <Calendar2 showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
                                   : 
                                   (showProject ? 
-                                    <div style={{position: 'relative', height: '660px', display: 'flex', flexDirection: 'row', marginTop: '35px'}}>
-                                              <div style={{position: 'absolute', top: '-40px', left: '0px'}}>
-                                                <label className='title-label' style={{marginLeft: '18px'}}>ID</label>
+                                    <div style={{position: 'relative', height: '494px', display: 'flex', flexDirection: 'row', marginTop: '35px'}}>
+                                              <div style={{position: 'absolute', top: '-34px', left: '0px'}}>
                                                 <div className="text-field">
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '50px', marginRight: '25px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" name="projectId" id="projectId" value={id} style={{width: '50px', marginRight: '25px'}}/>
                                                 </div>
                                               </div>
                                               
@@ -144,8 +190,8 @@ const Projects = () => {
                                                   <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                                 </div>
                                               </div>
-                                    {/* 1 */}                               
-                                          <div style={{display: 'flex', flexDirection: 'column', width: '230px', textAlign: 'center', marginTop: '18px', marginRight: '40px'}}>
+                                          {/* 1 */}                               
+                                          <div style={{display: 'flex', flexDirection: 'column', width: '230px', textAlign: 'center', marginTop: '8px', marginRight: '40px'}}>
                                             
                                               <label className='title-label'></label>
                                               <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '25px', width: '230px'}}>
@@ -168,7 +214,14 @@ const Projects = () => {
 
                                               <label className='title-label'>Статус</label>
                                               <div className="text-field">
-                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '40px'}}/>
+                                                <MyDropdown
+                                                  style={{backgroundColor: '#131c21'}}
+                                                  options={statusData}
+                                                  selected={statusProject}
+                                                  setSelected={setStatusProject}
+                                                  // onChange={addCity}
+                                                />
+                                                {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '40px'}}/> */}
                                               </div>
 
                                               
@@ -190,20 +243,78 @@ const Projects = () => {
                                         </div>
 
                                         {/* 2 */}   
-                                        <div style={{textAlign: 'center', marginTop: '20px', width: '320px', marginRight: '40px'}}>
+                                        <div style={{textAlign: 'center', marginTop: '10px', width: '320px', marginRight: '40px'}}>
                                           <label className='title-label'>Проект</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/>
+                                            <input disabled={true} className="text-field__input" type="text" name="projectName" id="projectName" value={projectName} style={{width: '320px'}}/>
                                           </div>
 
                                           <label className='title-label'>Компания</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/>
+                                            {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
+                                            <Autocomplete
+                                              sx={{
+                                                  display: 'inline-block',
+                                                  '& input': {zIndex: '25',
+                                                    width: '100%',
+                                                    border: 'none',
+                                                    height: '40px',
+                                                    padding: '5px 4px',
+                                                    fontFamily: 'inherit',
+                                                    fontSize: '14px',
+                                                    fontWeight: '700',
+                                                    lineHeight: '1.5',
+                                                    textAlign: 'center',
+                                                    color: '#ffffff',
+                                                    backgroundColor: 'transparent',
+                                                  }
+                                              }}
+                                              className="text-field__input" 
+                                              openOnFocus
+                                              id="custom-input-demo"
+                                              options={companysData}
+                                              style={{width: '100%', padding: '0'}}
+                                              onInputChange={(e)=>onChangeCompany(e)}
+                                              //onInputChange={(e)=>console.log(e.target.value)}
+                                              isOptionEqualToValue={(option, value) => option.value === value.value}
+                                              onChange={(event, newValue) => {
+                                                  if (newValue && newValue.length) {
+                                                      
+                                                      const comp = companysAll.find(item=> item.title === newValue)
+                                                      console.log("comp: ", comp)
+                                                      if (comp) {
+                                                        setCompanyName(comp.title)
+                                                        setCompany(comp.id)
+                                                        // setInn(comp.inn) 
+                                                        // setSklad(comp.sklad)
+                                                        // setOffice(comp.office)
+                                                      }
+                                                  }  
+                                              }}
+                                              value={companyName}
+                                              inputValue={companyName}
+                                              renderInput={(params) => (
+                                              <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                                  <input 
+                                                      className="text-field__input" 
+                                                      type="text" {...params.inputProps} 
+                                                      placeholder=''
+                                                  />
+                                              </div>
+                                              )}
+                                            />
                                           </div>
 
                                           <label className='title-label'>Город</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/>
+                                            <MyDropdown
+                                                  style={{backgroundColor: '#131c21'}}
+                                                  options={cities}
+                                                  selected={city}
+                                                  setSelected={setCity}
+                                                  // onChange={addCity}
+                                                />
+                                            {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
                                           </div>
 
                                           <label className='title-label'>Локация</label>
@@ -224,7 +335,7 @@ const Projects = () => {
                                         </div>
 
                                         {/* 3 */}   
-                                        <div style={{textAlign: 'center', marginTop: '20px', width: '320px', marginRight: '40px'}}>
+                                        <div style={{textAlign: 'center', marginTop: '10px', width: '320px', marginRight: '40px'}}>
                                           <label className='title-label'>Менеджер</label>
                                           <div className="text-field">
                                             <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/>
@@ -246,9 +357,9 @@ const Projects = () => {
                                             />
                                           </div> 
 
-                                          <label className='title-label' style={{marginTop: '44px'}}>Техническое Задание</label>
+                                          <label className='title-label' style={{marginTop: '44px', position: 'absolute', top: '345px', right: '250px'}}>Техническое Задание</label>
 
-                                          <div  style={{display: 'flex', flexDirection: 'row'}}>
+                                          <div  style={{display: 'flex', flexDirection: 'row', marginTop: '88px'}}>
                                             <div>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
@@ -271,7 +382,7 @@ const Projects = () => {
                                         </div>
 
                                         {/* 4 */}   
-                                        <div style={{textAlign: 'center', marginTop: '20px', width: '230px',marginRight: '10px'}}>
+                                        <div style={{textAlign: 'center', marginTop: '10px', width: '230px',marginRight: '10px'}}>
                                           <label className='title-label'>Телефон</label>
                                           <div className="text-field">
                                             <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/>
@@ -311,7 +422,7 @@ const Projects = () => {
                                         </div>
 
                                         {/* 5 */}   
-                                        <div style={{textAlign: 'center', marginTop: '20px'}}>
+                                        <div style={{textAlign: 'center', marginTop: '10px'}}>
                                           {/* <label className='title-label'> </label> */}
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '24px'}}>
                                             <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
@@ -323,15 +434,15 @@ const Projects = () => {
                                           </div>
 
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '40px', marginBottom: '0'}}>
-                                            🟢
+                                            🟩
                                           </div>
 
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginBottom: '0'}}>
-                                            🟢
+                                            🟥
                                           </div>
 
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginBottom: '0'}}>
-                                            🟢
+                                            🟦
                                           </div>
                                         </div>
                                         
