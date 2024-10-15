@@ -125,6 +125,7 @@ const Projects = () => {
 
     setCompanysData(sortedComp)
 
+    let arrManagers = []
     managersAll.map((item, index)=> {
       arrManagers.push(item.fio)
     })
@@ -154,6 +155,18 @@ const Projects = () => {
 
   const onChangeCompany = (e) => {
     setCompanyName(e.target.value)     
+  }
+
+  const onChangeManager = (e, index) => {
+    console.log(e.target.value, index)
+
+    // setManagersObj((managersObj) => {                                           
+    //   const usersCopy = JSON.parse(JSON.stringify(managersObj));			
+    //   const userObject = JSON.parse(usersCopy[index]);
+    //   usersCopy[index] = JSON.stringify({ ...userObject, fio: e.target.value});		
+    //   //console.log(usersCopy) 
+    //   return usersCopy;
+    // });   
   }
 
   return (
@@ -369,7 +382,7 @@ const Projects = () => {
                                               options={managersData}
                                               style={{width: '100%', padding: '0'}}
                                               isOptionEqualToValue={(option, value) => option.value === value.value}
-                                              onInputChange={(e)=>onChangeManager(e, index)}
+                                              onInputChange={(e)=>onChangeManager(e)}
                                               onChange={(event, newValue) => {
                                                   // if (newValue && newValue.length) {
                                                   //     setManagersObj((managersObj) => { 
@@ -382,8 +395,8 @@ const Projects = () => {
                                                   //     });
                                                   // }  
                                               }}
-                                              value={item ? JSON.parse(item).fio : ''} 
-                                              inputValue={item ? JSON.parse(item).fio : ''}
+                                              //value={item ? JSON.parse(item).fio : ''} 
+                                              //inputValue={item ? JSON.parse(item).fio : ''}
                                               renderInput={(params) => (
                                               <div ref={params.InputProps.ref} style={{position: 'relative'}}>
                                                   <input 
@@ -398,7 +411,55 @@ const Projects = () => {
 
                                           <label className='title-label'>Старший</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/>
+                                            {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
+                                            <Autocomplete
+                                              sx={{
+                                                  display: 'inline-block',
+                                                  '& input': {zIndex: '25',
+                                                      width: '100%',
+                                                      border: 'none',
+                                                      height: '40px',
+                                                      padding: '5px 4px',
+                                                      fontFamily: 'inherit',
+                                                      fontSize: '14px',
+                                                      fontWeight: '700',
+                                                      lineHeight: '1.5',
+                                                      textAlign: 'center',
+                                                      color: '#ffffff',
+                                                      backgroundColor: 'transparent', 
+                                                  }
+                                              }}
+                                              className="text-field__input" 
+                                              openOnFocus
+                                              id="custom-input-demo"
+                                              options={managersData}
+                                              style={{width: '100%', padding: '0'}}
+                                              isOptionEqualToValue={(option, value) => option.value === value.value}
+                                              onInputChange={(e)=>onChangeManager(e)}
+                                              onChange={(event, newValue) => {
+                                                  // if (newValue && newValue.length) {
+                                                  //     setManagersObj((managersObj) => { 
+                                                  //       const usersCopy = JSON.parse(JSON.stringify(managersObj));			
+                                                  //       const userObject = JSON.parse(usersCopy[index]);
+                                                  //       const managerId = managersAll.find(a=>a.fio === newValue)
+                                                  //       usersCopy[index] = JSON.stringify({ ...userObject, id:managerId.id, fio: newValue, companyId: id});	                       
+                                                  //       //console.log(usersCopy)
+                                                  //       return usersCopy;
+                                                  //     });
+                                                  // }  
+                                              }}
+                                              //value={item ? JSON.parse(item).fio : ''} 
+                                              //inputValue={item ? JSON.parse(item).fio : ''}
+                                              renderInput={(params) => (
+                                              <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                                  <input 
+                                                      className="text-field__input" 
+                                                      type="text" {...params.inputProps} 
+                                                      placeholder='ФИО'
+                                                  />
+                                              </div>
+                                              )}
+                                            />
                                           </div>
 
                                           <label className='title-label'>Техническое Задание</label>
