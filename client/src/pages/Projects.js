@@ -18,6 +18,7 @@ import {
   CTableHeaderCell,
 
 } from '@coreui/react'
+import InputMask from 'react-input-mask';
 import {
   flexRender,
   getCoreRowModel,
@@ -77,6 +78,9 @@ const Projects = () => {
   const [companysData, setCompanysData] = useState([]);
 
   const [managersData, setManagersData] = useState([]);
+
+  const [phone, setPhone] = useState('');
+  const [phone2, setPhone2] = useState('');
 
   const table = useReactTable({
     defaultColumn: {
@@ -501,12 +505,40 @@ const Projects = () => {
                                         <div style={{textAlign: 'center', marginTop: '10px', width: '230px',marginRight: '10px'}}>
                                           <label className='title-label'>Телефон</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/>
+                                            {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
+                                            <InputMask
+                                                className="text-field__input" 
+                                                style={{width: '230px', marginRight: '10px'}}
+                                                type="text" 
+                                                name="phone" 
+                                                id="phone"
+                                                mask="+7 (999) 999-99-99"
+                                                disabled={false}
+                                                maskChar=""
+                                                onChange={(e) => setPhone(e.target.value)} 
+                                                value={phone}
+                                                placeholder=''
+                                            >
+                                            </InputMask>
                                           </div>
 
                                           <label className='title-label'> </label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/>
+                                            {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
+                                            <InputMask
+                                                className="text-field__input" 
+                                                style={{width: '230px', marginRight: '10px'}}
+                                                type="text" 
+                                                name="phone2" 
+                                                id="phone2"
+                                                mask="+7 (999) 999-99-99"
+                                                disabled={false}
+                                                maskChar=""
+                                                onChange={(e) => setPhone2(e.target.value)} 
+                                                value={phone2}
+                                                placeholder=''
+                                            >
+                                            </InputMask>
                                           </div>
 
                                           <div style={{textAlign: 'left', display: 'flex', flexDirection: 'column'}}>
