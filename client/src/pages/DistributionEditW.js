@@ -1416,7 +1416,7 @@ const onSaveText = async() => {
       //setShowSend(false)
 
       //обновить список рассылок
-      addNewDistrib(true)
+      //addNewDistrib(true)
 
       setSelected([])
       setText('')
