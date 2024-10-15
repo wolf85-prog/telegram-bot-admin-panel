@@ -153,6 +153,8 @@ const Projects = () => {
     setShowCalendar(false)
     setShowCalendar2(false)
 
+    setStatusProject('Новый')
+
     setId(item)
     setProjectName('Новый проект')
 
