@@ -155,6 +155,9 @@ const Projects = () => {
 
     setId(item)
     setProjectName('Новый проект')
+
+
+    setHeight(553)
   }
 
   const onChangeCompany = (e) => {
