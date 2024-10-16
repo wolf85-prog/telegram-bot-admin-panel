@@ -39,6 +39,7 @@ import Calendar from "src/components/Calendar/Calendar";
 import Calendar2 from "src/components/Calendar3/Calendar2";
 
 import MyDropdown from 'src/components/Dropdown/Dropdown';
+import MyDropdown4 from 'src/components/Dropdown4/Dropdown4';
 
 import Close from "../assets/images/clear.svg"
 import zamok from "../assets/images/замок.png"
@@ -81,6 +82,11 @@ const Projects = () => {
 
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
+
+  const [teh, setTeh] = useState('');
+  const [teh2, setTeh2] = useState('');
+  const [teh3, setTeh3] = useState('');
+  const [teh4, setTeh4] = useState('');
 
   const table = useReactTable({
     defaultColumn: {
@@ -243,7 +249,7 @@ const Projects = () => {
 
                                               <label className='title-label'>Статус</label>
                                               <div className="text-field">
-                                                <MyDropdown
+                                                <MyDropdown4
                                                   style={{backgroundColor: '#131c21'}}
                                                   options={statusData}
                                                   selected={statusProject}
@@ -488,18 +494,18 @@ const Projects = () => {
                                             <div>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                               </div>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                               </div>
                                             </div>
@@ -518,9 +524,9 @@ const Projects = () => {
                                                 name="phone" 
                                                 id="phone"
                                                 mask="+7 (999) 999-99-99"
-                                                disabled={false}
+                                                disabled={true}
                                                 maskChar=""
-                                                onChange={(e) => setPhone(e.target.value)} 
+                                                // onChange={(e) => setPhone(e.target.value)} 
                                                 value={phone}
                                                 placeholder=''
                                             >
@@ -537,9 +543,9 @@ const Projects = () => {
                                                 name="phone2" 
                                                 id="phone2"
                                                 mask="+7 (999) 999-99-99"
-                                                disabled={false}
+                                                disabled={true}
                                                 maskChar=""
-                                                onChange={(e) => setPhone2(e.target.value)} 
+                                                // onChange={(e) => setPhone2(e.target.value)} 
                                                 value={phone2}
                                                 placeholder=''
                                             >
@@ -557,18 +563,18 @@ const Projects = () => {
                                           <div style={{marginTop: '98px', marginLeft: '-40px'}}>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="teh" id="teh" onChange={(e)=>setTeh(e.target.value)} value={teh} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="teh2" id="teh2" onChange={(e)=>setTeh2(e.target.value)} value={teh2} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                               </div>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="teh3" id="teh3" onChange={(e)=>setTeh3(e.target.value)} value={teh3} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="teh4" id="teh4" onChange={(e)=>setTeh4(e.target.value)} value={teh4} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                               </div>
                                           </div>
