@@ -65,6 +65,7 @@ import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
 import Disketa from "./../assets/images/disketa.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
+import threeDots from 'src/assets/images/threeDots.svg'
 
 import statusData from 'src/data/statusData';
 import cities from 'src/data/cities';
@@ -105,6 +106,9 @@ const Projects = () => {
   const [visibleDelete, setVisibleDelete] = useState(false)
   const [visibleA, setVisibleA] = useState(false)
   const [visibleB, setVisibleB] = useState(false)
+
+  const [showMainTable, setShowMainTable] = useState(false)
+  const [showPretendentTable, setShowPretendentTable] = useState(false)
 
   const table = useReactTable({
     defaultColumn: {
@@ -163,6 +167,8 @@ const Projects = () => {
   const closeProfile = () => {
     setShowProject(false)
     setShowCalendar(true)
+    setShowMainTable(false)
+    setShowPretendentTable(false)
   }
 
   useEffect(()=> {
@@ -182,8 +188,10 @@ const Projects = () => {
     setId(item)
     setProjectName('Новый проект')
 
-
     setHeight(509)
+
+    setShowMainTable(true)
+    setShowPretendentTable(true)
   }
 
   const onChangeCompany = (e) => {
@@ -694,7 +702,7 @@ const Projects = () => {
                         </CCard>
 
                         
-                        <CCard className="mb-4">
+                        <CCard className="mb-4" style={{display: showMainTable ? 'block' : 'none'}}>
                           <CCardHeader onClick={() => setVisibleA(!visibleA)}>Основной состав</CCardHeader>
                           <CCollapse visible={visibleA}>
                             <CCardBody>
@@ -719,7 +727,7 @@ const Projects = () => {
                               <CTableBody>
                                 {table.getRowModel().rows.map((row, index) => {
                                   return (
-                                    <CTableRow className="text-center" key={index}>
+                                    <CTableRow className="text-center" key={index} style={{lineHeight: '14px'}}>
                                       {row.getVisibleCells().map((cell, index) => {
                                         return (
                                           <CTableDataCell key={index}>
@@ -734,7 +742,7 @@ const Projects = () => {
                               <CTableFoot>
                                 {table.getFooterGroups().map((footerGroup, index) => {
                                   return (
-                                    <CTableRow key={index}>
+                                    <CTableRow key={index} style={{lineHeight: '14px'}}>
                                       {footerGroup.headers.map((footer, index) => {
                                         return (
                                           <CTableHeaderCell className="text-center" key={index}>
@@ -753,7 +761,7 @@ const Projects = () => {
                           </CCollapse>
                         </CCard>
 
-                        <CCard className="mb-4">
+                        <CCard className="mb-4" style={{display: showPretendentTable ? 'block' : 'none'}}>
                           <CCardHeader onClick={() => setVisibleB(!visibleB)}>Претенденты</CCardHeader>
                           <CCollapse visible={visibleB}>
                             <CCardBody>
@@ -778,7 +786,7 @@ const Projects = () => {
                               <CTableBody>
                                 {table.getRowModel().rows.map((row, index) => {
                                   return (
-                                    <CTableRow className="text-center" key={index}>
+                                    <CTableRow className="text-center" key={index} style={{lineHeight: '14px'}}>
                                       {row.getVisibleCells().map((cell, index) => {
                                         return (
                                           <CTableDataCell key={index}>
@@ -793,7 +801,7 @@ const Projects = () => {
                               <CTableFoot>
                                 {table.getFooterGroups().map((footerGroup, index) => {
                                   return (
-                                    <CTableRow key={index}>
+                                    <CTableRow key={index} style={{lineHeight: '14px'}}>
                                       {footerGroup.headers.map((footer, index) => {
                                         return (
                                           <CTableHeaderCell className="text-center" key={index}>
