@@ -36,9 +36,9 @@ export const useTableData = () => {
         header: 'Дата',
         size: 95,
       }),
-      columnHelper.accessor('project', {
-        id: 'project',
-        header: 'Проект',
+      columnHelper.accessor('vid', {
+        id: 'vid',
+        header: 'Вид работ',
         size: 300,
         minSize: 150,
         cell: (value) => (
@@ -50,9 +50,9 @@ export const useTableData = () => {
           return value.includes(row.getValue(id))
         },
       }),
-      columnHelper.accessor('company', {
-        id: 'company',
-        header: 'Компания',
+      columnHelper.accessor('manager', {
+        id: 'fio',
+        header: 'ФИО',
         size: 300,
         minSize: 150,
         filterFn: (row, id, value) => {
@@ -60,9 +60,9 @@ export const useTableData = () => {
         },
       }),
 
-      columnHelper.accessor('manager', {
-        id: 'manager',
-        header: 'Менеджер',
+      columnHelper.accessor('specialnost', {
+        id: 'specialnost',
+        header: 'Специальность',
         size: 300,
         minSize: 150,
         filterFn: (row, id, value) => {
@@ -71,8 +71,8 @@ export const useTableData = () => {
       }),
 
       columnHelper.accessor('hours', {
-        id: 'hours',
-        header: 'Часы',
+        id: 'stavka',
+        header: 'Ставка',
         size: 57,
         footer: ({ table }) =>
           table.getFilteredRowModel().rows.reduce((acc, val) => {
@@ -80,16 +80,16 @@ export const useTableData = () => {
             return acc
           }, 0),
       }),
-      columnHelper.accessor('payment', {
-        id: 'payment',
-        header: 'Цена',
+      columnHelper.accessor('comteg', {
+        id: 'comteg',
+        header: 'Комтег',
         size: 100,
         cell: '',
 
       }),
-      columnHelper.accessor('status', {
-        id: 'status',
-        header: 'Статус',
+      columnHelper.accessor('comment', {
+        id: 'comment',
+        header: 'Комментарий',
         size: 50,
         // cell: StatusCell,
         cell: (value) => {

@@ -16,8 +16,18 @@ import {
   CTableFoot,
   CTableHead,
   CTableHeaderCell,
-
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
+  CCardHeader,
+  CCardTitle,
+  CCardText,
+  CCollapse,
 } from '@coreui/react'
+
+import Icon from "./../chat-app-worker/components/Icon";
 import InputMask from 'react-input-mask';
 import {
   flexRender,
@@ -28,6 +38,8 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import Autocomplete from '@mui/material/Autocomplete';
+
+import DatePicker from "react-datepicker";
 
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
@@ -72,6 +84,8 @@ const Projects = () => {
 
   const [id, setId] = useState('');
   const [projectName, setProjectName] = useState('');
+  const [startDate, setStartDate] = useState(new Date())
+  const [endDate, setEndDate] = useState(new Date())
   const [city, setCity] = useState('');
   const [statusProject, setStatusProject] = useState('');
   const [company, setCompany] = useState('');
@@ -87,6 +101,10 @@ const Projects = () => {
   const [teh2, setTeh2] = useState('');
   const [teh3, setTeh3] = useState('');
   const [teh4, setTeh4] = useState('');
+
+  const [visibleDelete, setVisibleDelete] = useState(false)
+  const [visibleA, setVisibleA] = useState(false)
+  const [visibleB, setVisibleB] = useState(false)
 
   const table = useReactTable({
     defaultColumn: {
@@ -165,7 +183,7 @@ const Projects = () => {
     setProjectName('Новый проект')
 
 
-    setHeight(553)
+    setHeight(509)
   }
 
   const onChangeCompany = (e) => {
@@ -182,6 +200,26 @@ const Projects = () => {
     //   //console.log(usersCopy) 
     //   return usersCopy;
     // });   
+  }
+
+  const clickDelete = (id) => {
+    console.log(id)
+
+    setVisibleDelete(!visibleDelete)
+
+  }
+
+  //удаление специалиста
+  const deleteProfile = async(id) => {
+    console.log(id)
+    setVisibleDelete(false)
+
+    // await deleteSpecialist(id)
+    // addToast(deleteToast) //ваши данные сохранены
+
+    // setSpecialist([...specialist].filter(item=>item.id !== id))
+
+    //setShowProfile(false)
   }
 
   return (
@@ -212,12 +250,13 @@ const Projects = () => {
                                     <div style={{position: 'relative', height: '494px', display: 'flex', flexDirection: 'row', marginTop: '35px'}}>
                                               <div style={{position: 'absolute', top: '-34px', left: '0px'}}>
                                                 <div className="text-field">
-                                                  <input disabled={true} className="text-field__input" type="text" name="projectId" id="projectId" value={id} style={{width: '50px', marginRight: '25px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" name="projectId" id="projectId" value={id} style={{width: '120px', marginRight: '25px'}}/>
                                                 </div>
                                               </div>
                                               
                                               <div style={{position: 'absolute', top: '-25px', right: '4px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'flex-end', width: '-webkit-fill-available'}}>   
                                                 <div style={{display: 'flex'}}>
+                                                  <Icon id="delete" onClick={()=>clickDelete(id)} />
                                                   <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                                   <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                                   <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
@@ -231,19 +270,39 @@ const Projects = () => {
                                               <label className='title-label'></label>
                                               <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '25px', width: '230px'}}>
                                                 <div className="text-field">
-                                                  <input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg" id="dateReg" style={{width: '120px'}}/>
+                                                  {/*<input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg" id="dateReg" style={{width: '120px'}}/>*/}
+                                                  <DatePicker
+                                                    className="uley-datepicker-control text-center"
+                                                    style={{ height: '40px', width: '120px' }}
+                                                    selected={startDate}
+                                                    onChange={(date) => setStartDate(date)}
+                                                    selectsStart
+                                                    startDate={startDate}
+                                                    endDate={endDate}
+                                                    dateFormat="dd.MM.yyyy"
+                                                  />
                                                 </div>
                                                 <div className="text-field">
-                                                  <input disabled={true} className="text-field__input" type="text" value='00:00' name="dateReg2" id="dateReg2" style={{width: '90px',}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" value='00:00' name="dateReg2" id="dateReg2" style={{width: '90px',}}/>
                                                 </div>
                                               </div>
 
                                               <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '25px', width: '230px'}}>
                                                 <div className="text-field">
-                                                  <input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg3" id="dateReg3" style={{width: '120px'}}/>
+                                                  {/* <input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg3" id="dateReg3" style={{width: '120px'}}/> */}
+                                                  <DatePicker
+                                                    className="uley-datepicker-control text-center"
+                                                    style={{ height: '40px', width: '120px' }}
+                                                    selected={startDate}
+                                                    onChange={(date) => setStartDate(date)}
+                                                    selectsStart
+                                                    startDate={startDate}
+                                                    endDate={endDate}
+                                                    dateFormat="dd.MM.yyyy"
+                                                  />
                                                 </div>
                                                 <div className="text-field">
-                                                  <input disabled={true} className="text-field__input" type="text" value='00:00' name="dateReg4" id="dateReg4" style={{width: '90px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" value='00:00' name="dateReg4" id="dateReg4" style={{width: '90px'}}/>
                                                 </div>
                                               </div>
 
@@ -272,7 +331,7 @@ const Projects = () => {
                                                   type="text" 
                                                   name="comment" 
                                                   id="comment"
-                                                  style={{resize: 'none', width: '230px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginRight: '40px'}}
+                                                  style={{resize: 'none', width: '230px', height: '80px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginRight: '40px'}}
                                                 />
                                               </div> 
                                         </div>
@@ -364,7 +423,7 @@ const Projects = () => {
                                               type="text" 
                                               name="comment" 
                                               id="comment"
-                                              style={{resize: 'none', width: '320px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                              style={{resize: 'none', width: '320px', height: '80px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
                                             />
                                           </div> 
                                         </div>
@@ -488,9 +547,9 @@ const Projects = () => {
                                             />
                                           </div> 
 
-                                          <label className='title-label' style={{marginTop: '44px', position: 'absolute', top: '345px', right: '250px'}}>Техническое Задание</label>
+                                          <label className='title-label' style={{marginTop: '44px', position: 'absolute', top: '300px', right: '250px'}}>Техническое Задание</label>
 
-                                          <div  style={{display: 'flex', flexDirection: 'row', marginTop: '88px'}}>
+                                          <div  style={{display: 'flex', flexDirection: 'row', marginTop: '45px'}}>
                                             <div>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
@@ -552,15 +611,15 @@ const Projects = () => {
                                             </InputMask>
                                           </div>
 
-                                          <div style={{textAlign: 'left', display: 'flex', flexDirection: 'column'}}>
+                                          <div style={{textAlign: 'left', display: 'flex', flexDirection: 'column', marginTop: '33px'}}>
                                             <label className='title-label' style={{marginTop: '15px'}}>Предварительная смета</label>
 
-                                            <label className='title-label' style={{marginTop: '25px'}}>Финальная смета</label>
+                                            <label className='title-label' style={{marginTop: '15px'}}>Финальная смета</label>
 
-                                            <label className='title-label' style={{marginTop: '25px'}}>Постер</label>
+                                            <label className='title-label' style={{marginTop: '15px'}}>Постер</label>
                                           </div>
 
-                                          <div style={{marginTop: '98px', marginLeft: '-40px'}}>
+                                          <div style={{marginTop: '62px', marginLeft: '-40px'}}>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
                                                   <input disabled={false} className="text-field__input" type="text" name="teh" id="teh" onChange={(e)=>setTeh(e.target.value)} value={teh} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
@@ -592,15 +651,15 @@ const Projects = () => {
                                             <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
 
-                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '40px', marginBottom: '0'}}>
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '9px', marginTop: '40px', marginBottom: '0'}}>
                                             🟩
                                           </div>
 
-                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginBottom: '0'}}>
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '9px', marginBottom: '0'}}>
                                             🟥
                                           </div>
 
-                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginBottom: '0'}}>
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '9px', marginBottom: '0'}}>
                                             🟦
                                           </div>
                                         </div>
@@ -633,8 +692,148 @@ const Projects = () => {
 
                           </CCardBody>
                         </CCard>
+
+                        
+                        <CCard className="mb-4">
+                          <CCardHeader onClick={() => setVisibleA(!visibleA)}>Основной состав</CCardHeader>
+                          <CCollapse visible={visibleA}>
+                            <CCardBody>
+                            <CTable align="middle" className="mb-0 border" hover responsive>
+                              <CTableHead className="text-center" color="light">
+                                {table.getHeaderGroups().map((headerGroup, index) => {
+                                  return (
+                                    <CTableRow key={headerGroup.id}>
+                                      {headerGroup.headers.map((header, index) => {
+                                        return (
+                                          <TableHeader
+                                            key={index}
+                                            header={header}
+                                            //
+                                          />
+                                        )
+                                      })}
+                                    </CTableRow>
+                                  )
+                                })}
+                              </CTableHead>
+                              <CTableBody>
+                                {table.getRowModel().rows.map((row, index) => {
+                                  return (
+                                    <CTableRow className="text-center" key={index}>
+                                      {row.getVisibleCells().map((cell, index) => {
+                                        return (
+                                          <CTableDataCell key={index}>
+                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                          </CTableDataCell>
+                                        )
+                                      })}
+                                    </CTableRow>
+                                  )
+                                })}
+                              </CTableBody>
+                              <CTableFoot>
+                                {table.getFooterGroups().map((footerGroup, index) => {
+                                  return (
+                                    <CTableRow key={index}>
+                                      {footerGroup.headers.map((footer, index) => {
+                                        return (
+                                          <CTableHeaderCell className="text-center" key={index}>
+                                            {footer.isPlaceholder
+                                              ? null
+                                              : flexRender(footer.column.columnDef.footer, footer.getContext())}
+                                          </CTableHeaderCell>
+                                        )
+                                      })}
+                                    </CTableRow>
+                                  )
+                                })}
+                              </CTableFoot>
+                            </CTable>
+                            </CCardBody>
+                          </CCollapse>
+                        </CCard>
+
+                        <CCard className="mb-4">
+                          <CCardHeader onClick={() => setVisibleB(!visibleB)}>Претенденты</CCardHeader>
+                          <CCollapse visible={visibleB}>
+                            <CCardBody>
+                            <CTable align="middle" className="mb-0 border" hover responsive>
+                              <CTableHead className="text-center" color="light">
+                                {table.getHeaderGroups().map((headerGroup, index) => {
+                                  return (
+                                    <CTableRow key={headerGroup.id}>
+                                      {headerGroup.headers.map((header, index) => {
+                                        return (
+                                          <TableHeader
+                                            key={index}
+                                            header={header}
+                                            //
+                                          />
+                                        )
+                                      })}
+                                    </CTableRow>
+                                  )
+                                })}
+                              </CTableHead>
+                              <CTableBody>
+                                {table.getRowModel().rows.map((row, index) => {
+                                  return (
+                                    <CTableRow className="text-center" key={index}>
+                                      {row.getVisibleCells().map((cell, index) => {
+                                        return (
+                                          <CTableDataCell key={index}>
+                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                          </CTableDataCell>
+                                        )
+                                      })}
+                                    </CTableRow>
+                                  )
+                                })}
+                              </CTableBody>
+                              <CTableFoot>
+                                {table.getFooterGroups().map((footerGroup, index) => {
+                                  return (
+                                    <CTableRow key={index}>
+                                      {footerGroup.headers.map((footer, index) => {
+                                        return (
+                                          <CTableHeaderCell className="text-center" key={index}>
+                                            {footer.isPlaceholder
+                                              ? null
+                                              : flexRender(footer.column.columnDef.footer, footer.getContext())}
+                                          </CTableHeaderCell>
+                                        )
+                                      })}
+                                    </CTableRow>
+                                  )
+                                })}
+                              </CTableFoot>
+                            </CTable>
+                            </CCardBody>
+                          </CCollapse>
+                        </CCard>
+
                       </CCol>
                     </CRow>
+
+                    <CModal
+                      backdrop="static"
+                      visible={visibleDelete}
+                      onClose={() => setVisibleDelete(false)}
+                      aria-labelledby="StaticBackdropExampleLabel"
+                    >
+                      <CModalHeader>
+                        <CModalTitle id="StaticBackdropExampleLabel">Предупреждение</CModalTitle>
+                      </CModalHeader>
+                      <CModalBody>
+                        Проект будет удален из базы!
+                      </CModalBody>
+                      <CModalFooter>
+                        <CButton color="secondary" onClick={() => setVisibleDelete(false)}>
+                          Отмена
+                        </CButton>
+                        <CButton color="primary" onClick={()=>deleteProfile(id)}>Удалить</CButton>
+                      </CModalFooter>
+                    </CModal>
                 </Suspense>
             </CContainer>
 
