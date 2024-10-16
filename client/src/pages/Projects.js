@@ -65,7 +65,7 @@ import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
 import Disketa from "./../assets/images/disketa.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
-import threeDots from 'src/assets/images/threeDots.svg'
+import threeDots from 'src/assets/images/three-dots.svg'
 
 import statusData from 'src/data/statusData';
 import cities from 'src/data/cities';
