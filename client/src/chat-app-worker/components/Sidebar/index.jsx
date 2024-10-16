@@ -15,7 +15,7 @@ const Sidebar = () => {
 	const [text, setText]= useState("");
 	const [loading, setLoading]= useState(true);
 
-	const CountWorkers = 150
+	const CountWorkers = 50
 
 	const navigate = useNavigate()
 

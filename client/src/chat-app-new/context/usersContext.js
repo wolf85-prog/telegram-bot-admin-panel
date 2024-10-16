@@ -420,7 +420,7 @@ useEffect(() => {
 	
 		//0 все специалисты
 		let all = await getManagerCountAll()
-		console.log("specialist all: ", all)
+		//console.log("specialist all: ", all)
 
 		setManagersCount(all)
 	}
@@ -510,7 +510,7 @@ useEffect(() => {
 			//1 все специалисты 100
 			//let response = await getWorkersCount(100, workers.length);
 			let response = await getSpecCount(100, specialist.length);
-			console.log("specialist 100: ", response)
+			//console.log("specialist 100: ", response)
 		
 			const arrayWorker = []
 		
@@ -551,7 +551,7 @@ useEffect(() => {
 			setConversations(convers)
 
 			//4 все сообщения бота
-			let messagesAll = await getWMessagesCount(2000) //getWMessagesCount(1000) //getAllWMessages()
+			let messagesAll = await getWMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
 			//console.log("messagesAll: ", messagesAll.length)
 
 			let count = 0
@@ -1443,7 +1443,7 @@ useEffect(() => {
 //получить сообщение из телеграмма WorkersBot
 const fetchMessageSpecResponse = async(data) => {
 	
-	console.log("Получено сообзщение от специалиста: ", data)
+	console.log("Получено сообщение от специалиста: ", data)
 	const { isBot} = data;
 
 	let arrWorkers = []
