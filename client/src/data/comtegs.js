@@ -4,25 +4,25 @@ const comtegs = [
       label: 'Опоздание',
       name: 'Опоздание',
       value: '1',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Невыход',
       name: 'Невыход',
       value: '2',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Нарушение субординации',
       name: 'Нарушение субординации',
       value: '3',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Неадекватное поведение',
       name: 'Неадекватное поведение',
       value: '4',
-      color: 'blue'
+      color: '#1E90FF'
     },
 
 
@@ -55,25 +55,25 @@ const comtegs = [
       label: 'Фальшстарт',
       name: 'Фальшстарт',
       value: '9',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Реабилитация',
       name: 'Реабилитация',
       value: '10',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Невыход * *',
       name: 'Невыход * *',
       value: '11',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Невыход * * *',
       name: 'Невыход * * *',
       value: '12',
-      color: 'blue'
+      color: '#1E90FF'
     },
 
     {
@@ -106,25 +106,25 @@ const comtegs = [
       label: 'Повышенная ставка',
       name: 'Повышенная ставка',
       value: '17',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Компенсация',
       name: 'Компенсация',
       value: '18',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Премия',
       name: 'Премия',
       value: '19',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Герой дня',
       name: 'Герой дня',
       value: '20',
-      color: 'blue'
+      color: '#1E90FF'
 
 
     },

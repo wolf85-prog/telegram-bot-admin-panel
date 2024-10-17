@@ -1,8 +1,8 @@
 import React, {useState, useRef, useEffect} from 'react';
-import Select from '../Select/Select'
-import drp from './Dropdown4.module.css'
+import Select2 from '../Select2/Select2'
+import drp from './Dropdown5.module.css'
 
-const Dropdown4 = ({options, selected, setSelected}) => {
+const Dropdown5 = ({options, selected, setSelected}) => {
     const [menuShow, setMenuShow] = useState(false)
     // const [selected, setSelected] = useState(options[0])
 
@@ -40,10 +40,11 @@ const Dropdown4 = ({options, selected, setSelected}) => {
 
     return (
         <div className={drp.dropdown} ref={wrapperRef}>
-            <Select
+            <Select2
                 menuShow={menuShow}
                 setMenuShow={setMenuShow}
                 selected={selected}
+                style={{border: 'none!important'}}
             />
             <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`} style={{listStyle: 'disc', padding: '0.2em 2.0em'}}>
                 {dropdownList}
@@ -52,4 +53,4 @@ const Dropdown4 = ({options, selected, setSelected}) => {
     );
 };
 
-export default Dropdown4;
+export default Dropdown5;

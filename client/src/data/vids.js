@@ -4,25 +4,25 @@ const vids = [
       label: 'Погрузка',
       name: 'Погрузка',
       value: '1',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Монтаж',
       name: 'Монтаж',
       value: '2',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Дежурство',
       name: 'Дежурство',
       value: '3',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Мероприятие',
       name: 'Мероприятие',
       value: '4',
-      color: 'blue'
+      color: '#1E90FF'
     },
 
 
@@ -55,25 +55,25 @@ const vids = [
       label: 'Тесты / Чеки',
       name: 'Тесты / Чеки',
       value: '9',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Съемки',
       name: 'Съемки',
       value: '10',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Эфир',
       name: 'Эфир',
       value: '11',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Работы на складе',
       name: 'Работы на складе',
       value: '12',
-      color: 'blue'
+      color: '#1E90FF'
     },
 
     {
@@ -106,19 +106,19 @@ const vids = [
       label: 'Сборы',
       name: 'Сборы',
       value: '17',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Отмена',
       name: 'Отмена',
       value: '18',
-      color: 'blue'
+      color: '#1E90FF'
     },
     {
       label: 'Постоянная работа',
       name: 'Постоянная работа',
       value: '19',
-      color: 'blue'
+      color: '#1E90FF'
     },
 ]
 

@@ -10,7 +10,14 @@ import estimates from '../../data/data'
 export const useTableData = () => {
   const [data, setData] = useState(estimates)
   const [columnFilters, setColumnFilters] = useState()
+  const [active, setActive] = useState(false)
   const columnHelper = createColumnHelper()
+
+  function handleActive() {
+    console.log(active)
+    setActive(!active)
+  }
+
   const columns = useMemo(
     () => [
       columnHelper.display({
@@ -102,5 +109,5 @@ export const useTableData = () => {
     [],
   )
 
-  return { columns, data, setData, columnFilters, setColumnFilters }
+  return { columns, data, setData, columnFilters, setColumnFilters, handleActive }
 }

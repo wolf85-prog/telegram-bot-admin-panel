@@ -68,7 +68,7 @@ const Dropdown2 = ({options, tags, setTags}) => {
                 {specList}
             </ul>
 
-            <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`} style={{display: menuShow ? 'block' : 'none', listStyle: 'disc', padding: '0.2em 2.5em'}}>
+            <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`} style={{display: menuShow ? 'block' : 'none', listStyle: 'disc', padding: '0.2em 2.0em'}}>
                 {dropdownList}
             </ul>
         </div>

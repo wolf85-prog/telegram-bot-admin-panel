@@ -764,5 +764,25 @@ th.widthCompany {
     color: #777777;
   }
 
+
+  .parent-element {
+    text-align: center;
+  } 
+
+  .hidden-element {
+      visibility: hidden;
+  }
+
+  .parent-element:hover 
+  .hidden-element {
+      visibility: visible;
+  }
+
+
+  .list-unstyled ul li:hover a {
+    background-color: #413c40;
+    color: white; 
+  }
+
   
   
