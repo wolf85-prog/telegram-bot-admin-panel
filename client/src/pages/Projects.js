@@ -70,6 +70,7 @@ import threeDots from 'src/assets/images/three-dots.svg'
 
 import statusData from 'src/data/statusData';
 import cities from 'src/data/cities';
+import specifikaData from 'src/data/specifikaData';
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters } = useTableData()
@@ -90,6 +91,7 @@ const Projects = () => {
   const [endDate, setEndDate] = useState(new Date())
   const [city, setCity] = useState('');
   const [statusProject, setStatusProject] = useState('');
+  const [specifikaProject, setSpecifikaProject] = useState('');
   const [company, setCompany] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [companysData, setCompanysData] = useState([]);
@@ -110,6 +112,7 @@ const Projects = () => {
 
   const [showMainTable, setShowMainTable] = useState(false)
   const [showPretendentTable, setShowPretendentTable] = useState(false)
+  const [showDots, setShowDots] = useState(false)
 
   const table = useReactTable({
     defaultColumn: {
@@ -330,7 +333,14 @@ const Projects = () => {
                                               
                                               <label className='title-label'>Специфика</label>
                                               <div className="text-field">
-                                                <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '40px'}}/>
+                                                <MyDropdown4
+                                                  style={{backgroundColor: '#131c21'}}
+                                                  options={specifikaData}
+                                                  selected={specifikaProject}
+                                                  setSelected={setSpecifikaProject}
+                                                  // onChange={addCity}
+                                                />
+                                                {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '40px'}}/> */}
                                               </div>
 
                                               <label className='title-label'>Комментарии</label>
@@ -710,12 +720,18 @@ const Projects = () => {
                               <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '14px'}}>
                                 <CTableHead className="text-center" color="light">
                                   <CTableRow>
+                                    <CTableHeaderCell className="text-center" style={{width: '10px'}}>
+                                      
+                                    </CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{width: '40px'}}>
-                                      <CFormCheck />
+                                      <CFormCheck style={{background: '#7f7d7d'}}/>
                                     </CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{width: '90px'}}>Дата</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{width: '120px'}}>Вид работ</CTableHeaderCell>  
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '240px'}}>ФИО</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{width: '40px'}}>
+                                      
+                                    </CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{width: '140px'}}>Дата</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{width: '90px'}}>Вид работ</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '220px'}}>ФИО</CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" >Специальность</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Ставка</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>С</CTableHeaderCell>
@@ -727,42 +743,48 @@ const Projects = () => {
                                   </CTableRow>
                                 </CTableHead>
                                 <CTableBody>                                  
-                                  <CTableRow v-for="item in tableItems" style={{lineHeight: '14px'}}>
+                                  <CTableRow v-for="item in tableItems" style={{lineHeight: '14px', background: '#181924'}}>
                                     <CTableDataCell className="text-center">
-                                      
+                                      <img src={threeDots} alt='' onClick={()=>console.log("sdfsd")}  width={20} style={{ cursor: 'pointer'}}/>
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      <CFormCheck style={{background: 'transparent'}}/>
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      ❌ 
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      01.01.2024 | 00:00
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center">
-                                      01.01.2024
-                                    </CTableDataCell>  
-                                    <CTableDataCell className="text-center">
-                                      
+                                      Монтаж
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
-                                      
+                                      Иванов Иван Иванович
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                      
+                                      Звукорежессер
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                      
+                                      №1
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                      
+                                      🟩
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                      
+                                      🟩
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                      
+                                      Опоздание
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
-                                      
+                                      Тест
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                      
+                                      ✅
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                      
+                                      ✅
                                     </CTableDataCell>           
                                   </CTableRow>
                                 </CTableBody>                   

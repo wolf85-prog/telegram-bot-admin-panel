@@ -38,7 +38,7 @@ const Dropdown2 = ({options, tags, setTags}) => {
     )
 
     const dropdownList = options.map((option, i) =>
-        <li key={i} onClick={selectOption}>{option.label}</li>
+        <li key={i} onClick={selectOption} style={{color: `${option.color}`}}>{option.label}</li>
     )
 
     const wrapperRef = useRef(null);
@@ -68,7 +68,7 @@ const Dropdown2 = ({options, tags, setTags}) => {
                 {specList}
             </ul>
 
-            <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`} style={{display: menuShow ? 'block' : 'none'}}>
+            <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`} style={{display: menuShow ? 'block' : 'none', listStyle: 'disc', padding: '0.2em 2.5em'}}>
                 {dropdownList}
             </ul>
         </div>
