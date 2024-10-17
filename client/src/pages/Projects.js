@@ -706,57 +706,64 @@ const Projects = () => {
                           <CCardHeader onClick={() => setVisibleA(!visibleA)}>Основной состав</CCardHeader>
                           <CCollapse visible={visibleA}>
                             <CCardBody>
-                            <CTable align="middle" className="mb-0 border" hover responsive>
-                              <CTableHead className="text-center" color="light">
-                                {table.getHeaderGroups().map((headerGroup, index) => {
-                                  return (
-                                    <CTableRow key={headerGroup.id}>
-                                      {headerGroup.headers.map((header, index) => {
-                                        return (
-                                          <TableHeader
-                                            key={index}
-                                            header={header}
-                                            //
-                                          />
-                                        )
-                                      })}
-                                    </CTableRow>
-                                  )
-                                })}
-                              </CTableHead>
-                              <CTableBody>
-                                {table.getRowModel().rows.map((row, index) => {
-                                  return (
-                                    <CTableRow className="text-center" key={index} style={{lineHeight: '14px'}}>
-                                      {row.getVisibleCells().map((cell, index) => {
-                                        return (
-                                          <CTableDataCell key={index}>
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                          </CTableDataCell>
-                                        )
-                                      })}
-                                    </CTableRow>
-                                  )
-                                })}
-                              </CTableBody>
-                              <CTableFoot>
-                                {table.getFooterGroups().map((footerGroup, index) => {
-                                  return (
-                                    <CTableRow key={index} style={{lineHeight: '14px'}}>
-                                      {footerGroup.headers.map((footer, index) => {
-                                        return (
-                                          <CTableHeaderCell className="text-center" key={index}>
-                                            {footer.isPlaceholder
-                                              ? null
-                                              : flexRender(footer.column.columnDef.footer, footer.getContext())}
-                                          </CTableHeaderCell>
-                                        )
-                                      })}
-                                    </CTableRow>
-                                  )
-                                })}
-                              </CTableFoot>
-                            </CTable>
+                              <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '14px'}}>
+                                <CTableHead className="text-center" color="light">
+                                  <CTableRow>
+                                    <CTableHeaderCell className="text-center" style={{width: '40px'}}></CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{width: '90px'}}>Дата</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{width: '120px'}}>Вид работ</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '240px'}}>ФИО</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" >Специальность</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Ставка</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>С</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Д</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '130px'}}>Комтег</CTableHeaderCell>                         
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Комментарий</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Мерч</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Такси</CTableHeaderCell>
+                                  </CTableRow>
+                                </CTableHead>
+                                <CTableBody>                                  
+                                  <CTableRow v-for="item in tableItems" style={{lineHeight: '14px'}}>
+                                    <CTableDataCell className="text-center">
+                                      
+                                    </CTableDataCell>  
+                                    <CTableDataCell className="text-center">
+                                      01.01.2024
+                                    </CTableDataCell>  
+                                    <CTableDataCell className="text-center">
+                                      
+                                    </CTableDataCell>   
+                                    <CTableDataCell className="text-center">
+                                      
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      
+                                    </CTableDataCell>   
+                                    <CTableDataCell className="text-center">
+                                      
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      
+                                    </CTableDataCell>           
+                                  </CTableRow>
+                                </CTableBody>                   
+                              </CTable>
                             </CCardBody>
                           </CCollapse>
                         </CCard>
