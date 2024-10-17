@@ -2212,7 +2212,7 @@ const fetchNotifAdmin = async (dataAll) => {
             projects, 
             specialities, 
             comtags,
-			avatar: worker.avatar,
+			avatar: worker.profile,
 		})
 
 
