@@ -25,6 +25,7 @@ import {
   CCardTitle,
   CCardText,
   CCollapse,
+  CFormCheck,
 } from '@coreui/react'
 
 import Icon from "./../chat-app-worker/components/Icon";
@@ -709,7 +710,9 @@ const Projects = () => {
                               <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '14px'}}>
                                 <CTableHead className="text-center" color="light">
                                   <CTableRow>
-                                    <CTableHeaderCell className="text-center" style={{width: '40px'}}></CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{width: '40px'}}>
+                                      <CFormCheck />
+                                    </CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{width: '90px'}}>Дата</CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{width: '120px'}}>Вид работ</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '240px'}}>ФИО</CTableHeaderCell> 
@@ -717,7 +720,7 @@ const Projects = () => {
                                     <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Ставка</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>С</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Д</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '130px'}}>Комтег</CTableHeaderCell>                         
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '100px'}}>Комтег</CTableHeaderCell>                         
                                     <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Комментарий</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Мерч</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Такси</CTableHeaderCell>
