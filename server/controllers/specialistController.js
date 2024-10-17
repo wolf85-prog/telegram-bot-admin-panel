@@ -217,6 +217,30 @@ class SpecialistController {
         }
     }
 
+    async getSpecialistPhone(req, res) {
+        const {id} = req.params
+        try {
+            const worker = await Specialist.findOne({where: {$or: [
+                {
+                    phone: 
+                    {
+                        $eq: id.toString()
+                    }
+                }, 
+                {
+                    phone2: 
+                    {
+                        $eq: id.toString()
+                    }
+                },
+            ]
+            }})
+            return res.status(200).json(worker);
+        } catch (err) {
+            return res.status(500).json(err);
+        }
+    }
+
 }
 
 module.exports = new SpecialistController()
