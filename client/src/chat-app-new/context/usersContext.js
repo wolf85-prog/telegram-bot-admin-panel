@@ -6,7 +6,7 @@ import { getAllPretendent, getWContacts, getWConversation,
 	getWConversations, getWMessages, getWorkers, getWorker, getAllWMessages, 
 	getWMessagesCount, getWorkersCount} from '../../http/workerAPI'
 
-import { getSpecialist, getSpecCount, editSpecialist } from './../../http/specAPI'
+import { getSpecialist, getSpecCount, editSpecialist, getSpecialistId } from './../../http/specAPI'
 import { getManager } from './../../http/managerAPI'
 import { getCompany } from './../../http/companyAPI'
 
@@ -2201,7 +2201,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		setShowCallCard(true)
 
 
-		const worker = await getWorker(tg_id)
+		const worker = await getSpecialistId(tg_id)
 		//console.log("avatar: ", avatar)
 		setWorkerCall({
 			tg_id,
