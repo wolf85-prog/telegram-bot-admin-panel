@@ -1461,52 +1461,52 @@ const fetchMessageSpecResponse = async(data) => {
 		console.log("Пришло новый претендент: ", count + 1)
 
 		//get all pretendent
-		let pretendents = await getAllPretendent();
+		//let pretendents = await getAllPretendent();
 
-		let workers = await getWorkers()
-      	let projects = await getProjects3();
+		//let workers = await getWorkers()
+      	//let projects = await getProjects3();
       	//setProjects(projects) 
 
-		pretendents.map(async (worker, i) => {
+		// pretendents.map(async (worker, i) => {
 
-			let userObject = projects.find((proj) => proj.id === worker.projectId);  
-			const projectName = userObject?.name
+		// 	let userObject = projects.find((proj) => proj.id === worker.projectId);  
+		// 	const projectName = userObject?.name
 
-			let userObject2 = workers.find((item) => item.chatId === worker.receiverId);  
-			const workerName = userObject2?.userfamily + " "+ userObject2?.username
+		// 	let userObject2 = workers.find((item) => item.chatId === worker.receiverId);  
+		// 	const workerName = userObject2?.userfamily + " "+ userObject2?.username
 	
-			const worklist = userObject2?.worklist ? JSON.parse(userObject2?.worklist) : ''
-			const rang = userObject2?.rank ? userObject2?.rank : ''
-			const comment = userObject2?.comment ? userObject2?.comment : ''
-			const phone = userObject2?.phone
+		// 	const worklist = userObject2?.worklist ? JSON.parse(userObject2?.worklist) : ''
+		// 	const rang = userObject2?.rank ? userObject2?.rank : ''
+		// 	const comment = userObject2?.comment ? userObject2?.comment : ''
+		// 	const phone = userObject2?.phone
 
-			const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
-			const d2 = new Date(d)
+		// 	const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+		// 	const d2 = new Date(d)
 
-			const month = String(d2.getMonth()+1).padStart(2, "0");
-			const day = String(d2.getDate()).padStart(2, "0");
-			const chas = d2.getHours();
-			const min = String(d2.getMinutes()).padStart(2, "0");
+		// 	const month = String(d2.getMonth()+1).padStart(2, "0");
+		// 	const day = String(d2.getDate()).padStart(2, "0");
+		// 	const chas = d2.getHours();
+		// 	const min = String(d2.getMinutes()).padStart(2, "0");
 			
-			const newDate = `${day}.${month} ${chas}:${min}`;
+		// 	const newDate = `${day}.${month} ${chas}:${min}`;
 		
-			//worklist
-			const newWorker = {
-				date: newDate, //newDate,
-				project: projectName,
-				//worker: workerName, 
-				workerFamily: userObject2?.userfamily,
-				workerName: userObject2?.username,
-				worklist: worklist, //workNotions[0].spec,
-				rang: rang, //workNotions[0]?.rank,
-				comment: comment, //workNotions[0]?.comment,
-				phone: phone, //workNotions[0]?.phone,
-				accept: worker.accept,
-			}
-			arrWorkers.push(newWorker)
+		// 	//worklist
+		// 	const newWorker = {
+		// 		date: newDate, //newDate,
+		// 		project: projectName,
+		// 		//worker: workerName, 
+		// 		workerFamily: userObject2?.userfamily,
+		// 		workerName: userObject2?.username,
+		// 		worklist: worklist, //workNotions[0].spec,
+		// 		rang: rang, //workNotions[0]?.rank,
+		// 		comment: comment, //workNotions[0]?.comment,
+		// 		phone: phone, //workNotions[0]?.phone,
+		// 		accept: worker.accept,
+		// 	}
+		// 	arrWorkers.push(newWorker)
 
-			setPretendents(arrWorkers) 
-		})
+		// 	setPretendents(arrWorkers) 
+		// })
 
 		//setPretendents(pretendents)
 	}
