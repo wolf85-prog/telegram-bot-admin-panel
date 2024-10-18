@@ -185,6 +185,7 @@ route.get("/specialist/delete/:id", deleteSpecialist);
 route.post("/specialist/add", addSpecialist);
 route.get("/specialist/count/get", getSpecCountAll);
 route.get("/specialist/phone/:id", getSpecialistPhone);
+route.get("/specialist/chat/:id", getWorker);
 
 
 //----------------- Менеджеры ---------------------------------
@@ -195,6 +196,7 @@ route.patch('/managers/update/:id', editManager)
 route.get("/managers/delete/:id", deleteManager);
 route.post("/managers/add", addManager);
 route.get("/managers/count/get", getManagerCountAll);
+route.get("/managers/chat/:id", getManagerId);
 
 //----------------- Компании ---------------------------------
 route.get('/companys/get', getCompanys)

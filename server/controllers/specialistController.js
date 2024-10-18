@@ -58,16 +58,6 @@ class SpecialistController {
         }
     }
 
-    async getWorker(req, res) {
-        const {id} = req.params
-        try {
-            const workers = await Specialist.findOne({where: {chatId: id}})
-            return res.status(200).json(workers);
-        } catch (err) {
-            return res.status(500).json(err);
-        }
-    }
-
     async editSpecialist(req, res) { 
         const {id} = req.params      
         try {    
@@ -138,6 +128,16 @@ class SpecialistController {
         try {
             const worker = await Specialist.findOne({where: {id: id.toString()}})
             return res.status(200).json(worker);
+        } catch (err) {
+            return res.status(500).json(err);
+        }
+    }
+
+    async getWorker(req, res) {
+        const {id} = req.params
+        try {
+            const workers = await Specialist.findOne({where: {chatId: id}})
+            return res.status(200).json(workers);
         } catch (err) {
             return res.status(500).json(err);
         }
