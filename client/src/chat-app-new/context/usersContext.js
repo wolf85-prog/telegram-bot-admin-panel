@@ -2197,9 +2197,7 @@ const fetchNotifAdmin = async (dataAll) => {
 	}
 	//звонок специалиста
 	else if (task === 200) {
-		console.log("fio: ", fio)
-		setShowCallCard(true)
-
+		//console.log("fio: ", fio)
 
 		const worker = await getSpecialistId(tg_id)
 		console.log("worker: ", worker)
@@ -2215,6 +2213,7 @@ const fetchNotifAdmin = async (dataAll) => {
 			avatar: worker?.profile,
 		})
 
+		setShowCallCard(true)
 
 		setCallIndex(2)
 		setCallIndex2(1)

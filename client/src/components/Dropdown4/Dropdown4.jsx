@@ -2,11 +2,15 @@ import React, {useState, useRef, useEffect} from 'react';
 import Select from '../Select/Select'
 import drp from './Dropdown4.module.css'
 
-const Dropdown4 = ({options, selected, setSelected}) => {
+const Dropdown4 = ({options, selected, setSelected, placeholder}) => {
     const [menuShow, setMenuShow] = useState(false)
     // const [selected, setSelected] = useState(options[0])
 
     //console.log(options)
+
+    useEffect(()=> {
+      setSelected(selected ? selected : placeholder)
+    },[])
 
     const selectOption = e => {
         setSelected(e.target.innerText)
@@ -14,7 +18,10 @@ const Dropdown4 = ({options, selected, setSelected}) => {
     }
 
     const dropdownList = options.map((option, i) =>
+        <>
         <li key={i} onClick={selectOption} style={{color: `${option.color}`}}>{option.label}</li>
+        {option.divide ? <hr /> : ''}
+        </>
     )
 
     const wrapperRef = useRef(null);

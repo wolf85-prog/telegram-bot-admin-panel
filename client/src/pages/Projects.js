@@ -389,6 +389,7 @@ const Projects = () => {
                                                   options={specifikaData}
                                                   selected={specifikaProject}
                                                   setSelected={setSpecifikaProject}
+                                                  placeholder='Выбери специфику'
                                                   // onChange={addCity}
                                                 />
                                                 {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '40px'}}/> */}
@@ -768,29 +769,29 @@ const Projects = () => {
                           <CCardHeader onClick={() => setVisibleA(!visibleA)}>Основной состав</CCardHeader>
                           <CCollapse visible={visibleA}>
                             <CCardBody>
-                              <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '14px',overflow: 'hidden', width: '1262px', borderRadius: '5px' }}>
+                              <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '14px',overflow: 'hidden', width: '1362px', borderRadius: '5px' }}>
                                 <CTableHead className="text-center" color="light">
                                   <CTableRow>
                                     {/* <CTableHeaderCell className="text-center" style={{width: '1px'}}>
                                       
                                     </CTableHeaderCell> */}
-                                    <CTableHeaderCell className="text-center" style={{width: '60px'}}>
+                                    <CTableHeaderCell className="text-center" style={{width: '50px'}}>
                                       {/* <CFormCheck style={{background: '#7f7d7d'}}/> */}
                                       <CFormCheck
                                         checked={table.getIsAllRowsSelected()}
                                         onChange={table.getToggleAllRowsSelectedHandler()}
                                       />
                                     </CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{width: '40px'}}>
+                                    <CTableHeaderCell className="text-center" style={{width: '20px'}}>
                                       
                                     </CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{width: '140px'}}>Дата</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{width: '90px'}}>Вид работ</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '140px'}}>Вид работ</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '220px'}}>ФИО</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" >Специальность</CTableHeaderCell>  
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Ставка</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>С</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Д</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Специальность</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '40px'}}>Ставка</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>С</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Д</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '100px'}}>Комтег</CTableHeaderCell>                         
                                     <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Комментарий</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Мерч</CTableHeaderCell>
