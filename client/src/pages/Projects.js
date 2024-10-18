@@ -79,7 +79,7 @@ import comtegs from 'src/data/comtegs';
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
-  const { companysAll, managersAll } = useUsersContext();
+  const { companysAll, managersAll, workersAll } = useUsersContext();
 
   const [yearAndMonth, setYearAndMonth] = useState([2024, 10]);
 
@@ -97,11 +97,14 @@ const Projects = () => {
   const [city, setCity] = useState('');
   const [statusProject, setStatusProject] = useState('');
   const [specifikaProject, setSpecifikaProject] = useState('');
+  const [vidProject, setVidProject] = useState('');
   const [company, setCompany] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [companysData, setCompanysData] = useState([]);
 
   const [managersData, setManagersData] = useState([]);
+  const [workersData, setWorkersData] = useState([]);
+  const [specialistName, setSpecialistName] = useState('');
 
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
@@ -157,6 +160,7 @@ const Projects = () => {
 
 
   useEffect(()=> {
+    //1
     let arrCompanys = []
     companysAll.map((item, index)=> {
       arrCompanys.push(item.title)
@@ -168,11 +172,20 @@ const Projects = () => {
 
     setCompanysData(sortedComp)
 
+    //2
     let arrManagers = []
     managersAll.map((item, index)=> {
       arrManagers.push(item.fio)
     })
     setManagersData(arrManagers)
+
+    //3
+    let arrWorkers = []
+    console.log("workersAll: ", workersAll)
+    workersAll.map((item, index)=> {
+      arrWorkers.push(item.userfamily + ' ' + item.username)
+    })
+    setWorkersData(arrWorkers)
 }, [])
 
   const closeProfile = () => {
@@ -768,22 +781,18 @@ const Projects = () => {
                         <CCard className="mb-4" style={{display: showMainTable ? 'block' : 'none'}}>
                           <CCardHeader onClick={() => setVisibleA(!visibleA)}>Основной состав</CCardHeader>
                           <CCollapse visible={visibleA}>
-                            <CCardBody>
+                            <CCardBody style={{padding: '12px'}}>
                               <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '14px',overflow: 'hidden', width: '1362px', borderRadius: '5px' }}>
                                 <CTableHead className="text-center" color="light">
                                   <CTableRow>
-                                    {/* <CTableHeaderCell className="text-center" style={{width: '1px'}}>
-                                      
-                                    </CTableHeaderCell> */}
                                     <CTableHeaderCell className="text-center" style={{width: '50px'}}>
-                                      {/* <CFormCheck style={{background: '#7f7d7d'}}/> */}
                                       <CFormCheck
                                         checked={table.getIsAllRowsSelected()}
                                         onChange={table.getToggleAllRowsSelectedHandler()}
+                                        style={{backgroundColor: '#181924'}}
                                       />
                                     </CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{width: '20px'}}>
-                                      
+                                    <CTableHeaderCell className="text-center" style={{width: '20px'}}>      
                                     </CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{width: '140px'}}>Дата</CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '140px'}}>Вид работ</CTableHeaderCell>  
@@ -813,7 +822,7 @@ const Projects = () => {
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
-                                      <CFormCheck />
+                                      <CFormCheck style={{backgroundColor: '#181924'}} />
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       ❌ 
@@ -825,13 +834,53 @@ const Projects = () => {
                                       <MyDropdown5
                                         style={{backgroundColor: 'transparent'}}
                                         options={vids}
-                                        selected={specifikaProject}
-                                        setSelected={setSpecifikaProject}
+                                        selected={vidProject}
+                                        setSelected={setVidProject}
                                         // onChange={addCity}
                                       />
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
-                                      Иванов Иван Иванович
+                                      <Autocomplete
+                                        sx={{
+                                                  display: 'inline-block',
+                                                  '& input': {zIndex: '25',
+                                                    width: '100%',
+                                                    border: 'none',
+                                                    height: '40px',
+                                                    padding: '5px 4px',
+                                                    fontFamily: 'inherit',
+                                                    fontSize: '14px',
+                                                    fontWeight: '700',
+                                                    lineHeight: '1.5',
+                                                    textAlign: 'center',
+                                                    color: '#ffffff',
+                                                    backgroundColor: 'transparent',
+                                                  }
+                                            }}
+                                            // className="text-field__input" 
+                                            openOnFocus
+                                            id="custom-input-demo"
+                                            options={workersData}
+                                            style={{width: '100%', padding: '0'}}
+                                            //onInputChange={(e)=>onChangeWorker(e)}
+                                            //onInputChange={(e)=>console.log(e.target.value)}
+                                            //isOptionEqualToValue={(option, value) => option.value === value.value}
+                                            onChange={(event, newValue) => {
+  
+                                            }}
+                                            value={specialistName}
+                                            inputValue={specialistName}
+                                            renderInput={(params) => (
+                                            <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                              <input 
+                                                style={{border: 'none', height: '20px'}}
+                                                // className="text-field__input" 
+                                                type="text" {...params.inputProps} 
+                                                placeholder=''
+                                              />
+                                            </div>
+                                            )}
+                                      />
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       Звукорежессер
@@ -880,7 +929,7 @@ const Projects = () => {
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>   
-                                      <CFormCheck  />
+                                      <CFormCheck  style={{backgroundColor: '#181924'}}/>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       ❌ 
@@ -897,7 +946,47 @@ const Projects = () => {
                                       />
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
-                                      Иванов Иван Иванович
+                                      <Autocomplete
+                                        sx={{
+                                                  display: 'inline-block',
+                                                  '& input': {zIndex: '25',
+                                                    width: '100%',
+                                                    border: 'none',
+                                                    height: '40px',
+                                                    padding: '5px 4px',
+                                                    fontFamily: 'inherit',
+                                                    fontSize: '14px',
+                                                    fontWeight: '700',
+                                                    lineHeight: '1.5',
+                                                    textAlign: 'center',
+                                                    color: '#ffffff',
+                                                    backgroundColor: 'transparent',
+                                                  }
+                                            }}
+                                            className="text-field__input" 
+                                            openOnFocus
+                                            id="custom-input-demo"
+                                            options={workersData}
+                                            style={{width: '100%', padding: '0'}}
+                                            //onInputChange={(e)=>onChangeWorker(e)}
+                                            //onInputChange={(e)=>console.log(e.target.value)}
+                                            //isOptionEqualToValue={(option, value) => option.value === value.value}
+                                            onChange={(event, newValue) => {
+  
+                                            }}
+                                            value={specialistName}
+                                            inputValue={specialistName}
+                                            renderInput={(params) => (
+                                            <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                              <input 
+                                                style={{border: 'none', height: '20px'}}
+                                                className="text-field__input" 
+                                                type="text" {...params.inputProps} 
+                                                placeholder=''
+                                              />
+                                            </div>
+                                            )}
+                                      />
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       Звукорежессер
@@ -938,7 +1027,7 @@ const Projects = () => {
                         <CCard className="mb-4" style={{display: showPretendentTable ? 'block' : 'none'}}>
                           <CCardHeader onClick={() => setVisibleB(!visibleB)}>Претенденты</CCardHeader>
                           <CCollapse visible={visibleB}>
-                            <CCardBody>
+                            <CCardBody style={{padding: '12px'}}>
                               <CTable
                                 style={{ overflow: 'hidden', width: '1262px', borderRadius: '5px' }}
                                 align="middle"
