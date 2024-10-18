@@ -1,5 +1,6 @@
 .dropdown {
     box-sizing: border-box;
+    position: relative;
 }
 
 .menu {
