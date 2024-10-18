@@ -2197,12 +2197,12 @@ const fetchNotifAdmin = async (dataAll) => {
 	}
 	//звонок специалиста
 	else if (task === 200) {
-		//console.log("fio: ", data)
+		console.log("fio: ", fio)
 		setShowCallCard(true)
 
 
 		const worker = await getSpecialistId(tg_id)
-		//console.log("avatar: ", avatar)
+		console.log("worker: ", worker)
 		setWorkerCall({
 			tg_id,
 			fio,
@@ -2212,7 +2212,7 @@ const fetchNotifAdmin = async (dataAll) => {
             projects, 
             specialities, 
             comtags,
-			avatar: worker.profile,
+			avatar: worker?.dataValues.profile,
 		})
 
 
