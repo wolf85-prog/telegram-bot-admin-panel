@@ -2,11 +2,15 @@ import React, {useState, useRef, useEffect} from 'react';
 import Select2 from '../Select2/Select2'
 import drp from './Dropdown5.module.css'
 
-const Dropdown5 = ({options, selected, setSelected}) => {
+const Dropdown5 = ({options, selected, setSelected, placeholder}) => {
     const [menuShow, setMenuShow] = useState(false)
     // const [selected, setSelected] = useState(options[0])
 
     //console.log(options)
+
+    useEffect(()=> {
+      setSelected(selected ? selected : placeholder)
+    }, [])
 
     const selectOption = e => {
         setSelected(e.target.innerText)

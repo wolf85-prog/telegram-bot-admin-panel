@@ -106,6 +106,8 @@ const Projects = () => {
   const [workersData, setWorkersData] = useState([]);
   const [specialistName, setSpecialistName] = useState('');
 
+  const [fio, setFio] = useState('');
+
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
 
@@ -298,6 +300,14 @@ const Projects = () => {
 
   CustomMenu.displayName = "Edit";
 
+
+
+  const changeWorker = async(e) => {
+    //console.log(id)
+
+    setSpecialistName(e.target.value)
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -463,6 +473,7 @@ const Projects = () => {
                                                       if (comp) {
                                                         setCompanyName(comp.title)
                                                         setCompany(comp.id)
+                                                        setPhone()
                                                         // setInn(comp.inn) 
                                                         // setSklad(comp.sklad)
                                                         // setOffice(comp.office)
@@ -542,16 +553,13 @@ const Projects = () => {
                                               isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onInputChange={(e)=>onChangeManager(e)}
                                               onChange={(event, newValue) => {
-                                                  // if (newValue && newValue.length) {
-                                                  //     setManagersObj((managersObj) => { 
-                                                  //       const usersCopy = JSON.parse(JSON.stringify(managersObj));			
-                                                  //       const userObject = JSON.parse(usersCopy[index]);
-                                                  //       const managerId = managersAll.find(a=>a.fio === newValue)
-                                                  //       usersCopy[index] = JSON.stringify({ ...userObject, id:managerId.id, fio: newValue, companyId: id});	                       
-                                                  //       //console.log(usersCopy)
-                                                  //       return usersCopy;
-                                                  //     });
-                                                  // }  
+                                                if (newValue && newValue.length) {                                                      
+                                                  const comp = managersAll.find(item=> item.fio === newValue)
+                                                  console.log("comp: ", comp)
+                                                  if (comp) {
+                                                    setPhone(comp.fio)
+                                                  }
+                                                } 
                                               }}
                                               //value={item ? JSON.parse(item).fio : ''} 
                                               //inputValue={item ? JSON.parse(item).fio : ''}
@@ -785,19 +793,17 @@ const Projects = () => {
                               <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '14px',overflow: 'hidden', width: '1362px', borderRadius: '5px' }}>
                                 <CTableHead className="text-center" color="light">
                                   <CTableRow>
-                                    <CTableHeaderCell className="text-center" style={{width: '50px'}}>
+                                    <CTableHeaderCell className="text-center" style={{width: '70px'}}>
                                       <CFormCheck
                                         checked={table.getIsAllRowsSelected()}
                                         onChange={table.getToggleAllRowsSelectedHandler()}
                                         style={{backgroundColor: '#181924'}}
                                       />
                                     </CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{width: '20px'}}>      
-                                    </CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{width: '140px'}}>Дата</CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '140px'}}>Вид работ</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '220px'}}>ФИО</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Специальность</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>Специальность</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '40px'}}>Ставка</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>С</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Д</CTableHeaderCell>
@@ -809,9 +815,8 @@ const Projects = () => {
                                 </CTableHead>
                                 <CTableBody>                                  
                                   <CTableRow v-for="item in tableItems" style={{lineHeight: '14px', background: '#181924'}}>
-                                    <CTableDataCell className="text-center">
-                                      <div className="parent-element" style={{position: 'absolute', left: '20px'}}>
-                                        {/* <img src={threeDots} className='hidden-element' alt='' onClick={()=>console.log("sdfsd")}  width={15} style={{ cursor: 'pointer'}}/> */}
+                                    <CTableDataCell className="text-center" style={{position: 'relative'}}>
+                                      <div className="parent-element" style={{position: 'absolute', left: '10px', top: '10px'}}>
                                         <Dropdown>
                                           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
                                           </Dropdown.Toggle>
@@ -822,10 +827,8 @@ const Projects = () => {
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
-                                      <CFormCheck style={{backgroundColor: '#181924'}} />
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      ❌ 
+                                      <CFormCheck style={{backgroundColor: '#181924', margin: '0px 5px', position: 'absolute', left: '23px', top: '10px'}} />
+                                      <span style={{position: 'absolute', left: '52px', top: '11px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       01.01.2024 | 00:00
@@ -837,6 +840,7 @@ const Projects = () => {
                                         selected={vidProject}
                                         setSelected={setVidProject}
                                         // onChange={addCity}
+                                        placeholder='—'
                                       />
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
@@ -857,16 +861,16 @@ const Projects = () => {
                                                     backgroundColor: 'transparent',
                                                   }
                                             }}
-                                            // className="text-field__input" 
                                             openOnFocus
                                             id="custom-input-demo"
                                             options={workersData}
                                             style={{width: '100%', padding: '0'}}
-                                            //onInputChange={(e)=>onChangeWorker(e)}
+                                            onInputChange={(e)=>changeWorker(e)}
                                             //onInputChange={(e)=>console.log(e.target.value)}
                                             //isOptionEqualToValue={(option, value) => option.value === value.value}
                                             onChange={(event, newValue) => {
-  
+                                                console.log(newValue)
+                                                setSpecialistName(newValue)
                                             }}
                                             value={specialistName}
                                             inputValue={specialistName}
@@ -874,117 +878,10 @@ const Projects = () => {
                                             <div ref={params.InputProps.ref} style={{position: 'relative'}}>
                                               <input 
                                                 style={{border: 'none', height: '20px'}}
-                                                // className="text-field__input" 
                                                 type="text" {...params.inputProps} 
                                                 placeholder=''
                                               />
-                                            </div>
-                                            )}
-                                      />
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      Звукорежессер
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      №1
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      🟩
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      🟩
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      <MyDropdown5
-                                        options={comtegs}
-                                        selected={comteg}
-                                        setSelected={setComteg}
-                                        // onChange={addCity}
-                                      />
-                                    </CTableDataCell>   
-                                    <CTableDataCell className="text-center">
-                                      Тест
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      ✅
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      ✅
-                                    </CTableDataCell>           
-                                  </CTableRow>
-                                  <CTableRow v-for="item in tableItems" style={{lineHeight: '14px', background: '#181924'}}>
-                                    {/* <CTableDataCell className="text-center parent-element">
-                                      <img src={threeDots} className='hidden-element' alt='' onClick={()=>console.log("sdfsd")}  width={15} style={{ cursor: 'pointer'}}/>
-                                    </CTableDataCell>  */}
-                                    <CTableDataCell className="text-center">
-                                      <div className="parent-element" style={{position: 'absolute', left: '20px'}}>
-                                        {/* <img src={threeDots} className='hidden-element' alt='' onClick={()=>console.log("sdfsd")}  width={15} style={{ cursor: 'pointer'}}/> */}
-                                        <Dropdown>
-                                          <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
-                                          </Dropdown.Toggle>
-                                          <Dropdown.Menu as={CustomMenu}>
-                                          <Dropdown.Item>Дублировать</Dropdown.Item>
-                                          <Dropdown.Item>Добавить</Dropdown.Item>
-                                          <Dropdown.Item>Удалить</Dropdown.Item>
-                                          </Dropdown.Menu>
-                                        </Dropdown>
-                                      </div>   
-                                      <CFormCheck  style={{backgroundColor: '#181924'}}/>
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      ❌ 
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      01.01.2024 | 00:00
-                                    </CTableDataCell>  
-                                    <CTableDataCell className="text-center">
-                                      <MyDropdown5
-                                        options={vids}
-                                        selected={specifikaProject}
-                                        setSelected={setSpecifikaProject}
-                                        // onChange={addCity}
-                                      />
-                                    </CTableDataCell>   
-                                    <CTableDataCell className="text-center">
-                                      <Autocomplete
-                                        sx={{
-                                                  display: 'inline-block',
-                                                  '& input': {zIndex: '25',
-                                                    width: '100%',
-                                                    border: 'none',
-                                                    height: '40px',
-                                                    padding: '5px 4px',
-                                                    fontFamily: 'inherit',
-                                                    fontSize: '14px',
-                                                    fontWeight: '700',
-                                                    lineHeight: '1.5',
-                                                    textAlign: 'center',
-                                                    color: '#ffffff',
-                                                    backgroundColor: 'transparent',
-                                                  }
-                                            }}
-                                            className="text-field__input" 
-                                            openOnFocus
-                                            id="custom-input-demo"
-                                            options={workersData}
-                                            style={{width: '100%', padding: '0'}}
-                                            //onInputChange={(e)=>onChangeWorker(e)}
-                                            //onInputChange={(e)=>console.log(e.target.value)}
-                                            //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                            onChange={(event, newValue) => {
-  
-                                            }}
-                                            value={specialistName}
-                                            inputValue={specialistName}
-                                            renderInput={(params) => (
-                                            <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                              <input 
-                                                style={{border: 'none', height: '20px'}}
-                                                className="text-field__input" 
-                                                type="text" {...params.inputProps} 
-                                                placeholder=''
-                                              />
-                                            </div>
+                                            </div> 
                                             )}
                                       />
                                     </CTableDataCell> 
