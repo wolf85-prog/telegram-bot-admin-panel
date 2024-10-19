@@ -56,6 +56,7 @@ import Calendar2 from "src/components/Calendar3/Calendar2";
 import MyDropdown from 'src/components/Dropdown/Dropdown';
 import MyDropdown4 from 'src/components/Dropdown4/Dropdown4';
 import MyDropdown5 from 'src/components/Dropdown5/Dropdown5';
+import MyDropdown6 from 'src/components/Dropdown6/Dropdown6';
 
 
 import Close from "../assets/images/clear.svg"
@@ -568,7 +569,7 @@ const Projects = () => {
                                                   const comp = managersAll.find(item=> item.fio === newValue)
                                                   console.log("comp: ", comp)
                                                   if (comp) {
-                                                    setPhone(comp.fio)
+                                                    setPhone(comp.phone)
                                                   }
                                                 } 
                                               }}
@@ -855,50 +856,10 @@ const Projects = () => {
                                       />
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
-                                      {/* <Autocomplete
-                                        sx={{
-                                                  display: 'inline-block',
-                                                  '& input': {zIndex: '25',
-                                                    width: '100%',
-                                                    border: 'none',
-                                                    height: '40px',
-                                                    padding: '5px 4px',
-                                                    fontFamily: 'inherit',
-                                                    fontSize: '14px',
-                                                    fontWeight: '700',
-                                                    lineHeight: '1.5',
-                                                    textAlign: 'center',
-                                                    color: '#ffffff',
-                                                    backgroundColor: 'transparent',
-                                                  }
-                                            }}
-                                            openOnFocus
-                                            id="custom-input-demo"
-                                            options={workersData}
-                                            style={{width: '100%', padding: '0'}}
-                                            onInputChange={(e)=>changeWorker(e)}
-                                            //onInputChange={(e)=>console.log(e.target.value)}
-                                            //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                            onChange={(event, newValue) => {
-                                                console.log(newValue)
-                                                setSpecialistName(newValue)
-                                            }}
-                                            value={specialistName}
-                                            inputValue={specialistName}
-                                            renderInput={(params) => (
-                                            <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                              <input 
-                                                style={{border: 'none', height: '20px'}}
-                                                type="text" {...params.inputProps} 
-                                                placeholder=''
-                                              />
-                                            </div> 
-                                            )}
-                                      /> */}
-                                      <MyDropdown5
+                                      <MyDropdown6
                                         options={workersData}
-                                        selected={vidProject}
-                                        setSelected={setVidProject}
+                                        selected={specialistName}
+                                        setSelected={setSpecialistName}
                                         // onChange={addCity}
                                         placeholder='—'
                                       />

@@ -790,7 +790,7 @@ useEffect(() => {
 	useEffect(() => {
     	const fetchData = async () => {
 			let response = await getManager();
-      		console.log("managers context: ", response.length)
+      		console.log("managers context: ", response)
 
 			let arr = []
 			response.map(async (user, i) => {
