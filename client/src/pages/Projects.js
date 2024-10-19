@@ -797,7 +797,7 @@ const Projects = () => {
                                       <CFormCheck
                                         checked={table.getIsAllRowsSelected()}
                                         onChange={table.getToggleAllRowsSelectedHandler()}
-                                        style={{backgroundColor: '#181924'}}
+                                        style={{backgroundColor: '#181924', border: '1px solid #121212'}}
                                       />
                                     </CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{width: '140px'}}>Дата</CTableHeaderCell> 
@@ -814,7 +814,7 @@ const Projects = () => {
                                   </CTableRow>
                                 </CTableHead>
                                 <CTableBody>                                  
-                                  <CTableRow v-for="item in tableItems" style={{lineHeight: '14px', background: '#181924'}}>
+                                  <CTableRow v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                     <CTableDataCell className="text-center" style={{position: 'relative'}}>
                                       <div className="parent-element" style={{position: 'absolute', left: '10px', top: '10px'}}>
                                         <Dropdown>
@@ -827,7 +827,7 @@ const Projects = () => {
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
-                                      <CFormCheck style={{backgroundColor: '#181924', margin: '0px 5px', position: 'absolute', left: '23px', top: '10px'}} />
+                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '23px', top: '10px'}} />
                                       <span style={{position: 'absolute', left: '52px', top: '11px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
