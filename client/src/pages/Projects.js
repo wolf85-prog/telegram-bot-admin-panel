@@ -131,6 +131,8 @@ const Projects = () => {
   const [showPretendentTable, setShowPretendentTable] = useState(false)
   const [showDots, setShowDots] = useState(false)
 
+  const [playPoster, setPlayPoster] = useState(false)
+
   const table = useReactTable({
     defaultColumn: {
       size: 200, //starting column size
@@ -370,8 +372,8 @@ const Projects = () => {
                                                 <div className="text-field">
                                                   {/*<input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg" id="dateReg" style={{width: '120px'}}/>*/}
                                                   <DatePicker
-                                                    className="uley-datepicker-control text-center"
-                                                    style={{ height: '40px', width: '120px' }}
+                                                    className="uley-datepicker-control text-center text-field__input"
+                                                    style={{ height: '40px', width: '120px'}}
                                                     selected={startDate}
                                                     onChange={(date) => setStartDate(date)}
                                                     selectsStart
@@ -389,8 +391,8 @@ const Projects = () => {
                                                 <div className="text-field">
                                                   {/* <input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg3" id="dateReg3" style={{width: '120px'}}/> */}
                                                   <DatePicker
-                                                    className="uley-datepicker-control text-center"
-                                                    style={{ height: '40px', width: '120px' }}
+                                                    className="uley-datepicker-control text-center text-field__input"
+                                                    style={{ height: '40px', width: '120px'}}
                                                     selected={startDate}
                                                     onChange={(date) => setStartDate(date)}
                                                     selectsStart
@@ -615,16 +617,13 @@ const Projects = () => {
                                               isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onInputChange={(e)=>onChangeManager(e)}
                                               onChange={(event, newValue) => {
-                                                  // if (newValue && newValue.length) {
-                                                  //     setManagersObj((managersObj) => { 
-                                                  //       const usersCopy = JSON.parse(JSON.stringify(managersObj));			
-                                                  //       const userObject = JSON.parse(usersCopy[index]);
-                                                  //       const managerId = managersAll.find(a=>a.fio === newValue)
-                                                  //       usersCopy[index] = JSON.stringify({ ...userObject, id:managerId.id, fio: newValue, companyId: id});	                       
-                                                  //       //console.log(usersCopy)
-                                                  //       return usersCopy;
-                                                  //     });
-                                                  // }  
+                                                if (newValue && newValue.length) {                                                      
+                                                  const comp = managersAll.find(item=> item.fio === newValue)
+                                                  console.log("comp: ", comp)
+                                                  if (comp) {
+                                                    setPhone2(comp.phone)
+                                                  }
+                                                }  
                                               }}
                                               //value={item ? JSON.parse(item).fio : ''} 
                                               //inputValue={item ? JSON.parse(item).fio : ''}
@@ -651,7 +650,7 @@ const Projects = () => {
                                             />
                                           </div> 
 
-                                          <label className='title-label' style={{marginTop: '44px', position: 'absolute', top: '300px', right: '250px'}}>Техническое Задание</label>
+                                          <label className='title-label' style={{marginTop: '44px', position: 'absolute', top: '300px', right: '240px'}}>Техническое Задание</label>
 
                                           <div  style={{display: 'flex', flexDirection: 'row', marginTop: '45px'}}>
                                             <div>
@@ -763,8 +762,8 @@ const Projects = () => {
                                             🟥
                                           </div>
 
-                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px'}}>
-                                            🟦
+                                          <div onClick={()=>setPlayPoster(!playPoster)} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', color: 'blue'}}>
+                                            {playPoster ? '▷' : '🟦'}
                                           </div>
                                         </div>
                                         
@@ -802,21 +801,21 @@ const Projects = () => {
                           <CCardHeader onClick={() => setVisibleA(!visibleA)}>Основной состав</CCardHeader>
                           <CCollapse visible={visibleA}>
                             <CCardBody style={{padding: '12px'}}>
-                              <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '14px',overflow: 'hidden', width: '1362px', borderRadius: '5px' }}>
+                              <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1412px', borderRadius: '5px' }}>
                                 <CTableHead className="text-center" color="light">
                                   <CTableRow>
-                                    <CTableHeaderCell className="text-center" style={{width: '70px'}}>
+                                    <CTableHeaderCell className="text-center" style={{width: '60px'}}>
                                       <CFormCheck
                                         checked={table.getIsAllRowsSelected()}
                                         onChange={table.getToggleAllRowsSelectedHandler()}
                                         style={{backgroundColor: '#181924', border: '1px solid #121212'}}
                                       />
                                     </CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{width: '140px'}}>Дата</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '140px'}}>Вид работ</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{width: '160px'}}>Дата</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Вид работ</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '220px'}}>ФИО</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}></CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>Специальность</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Специальность</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '40px'}}>Ставка</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>С</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Д</CTableHeaderCell>
@@ -829,7 +828,7 @@ const Projects = () => {
                                 <CTableBody>                                  
                                   <CTableRow v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                     <CTableDataCell className="text-center" style={{position: 'relative'}}>
-                                      <div className="parent-element" style={{position: 'absolute', left: '10px', top: '6px'}}>
+                                      <div className="parent-element" style={{position: 'absolute', left: '6px', top: '6px'}}>
                                         <Dropdown>
                                           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
                                           </Dropdown.Toggle>
@@ -840,8 +839,8 @@ const Projects = () => {
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
-                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '23px', top: '8px'}} />
-                                      <span style={{position: 'absolute', left: '52px', top: '8px'}}>❌</span>
+                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '17px', top: '8px'}} />
+                                      <span style={{position: 'absolute', left: '44px', top: '8px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       01.01.2024 | 00:00
@@ -867,11 +866,12 @@ const Projects = () => {
                                     <CTableDataCell className="text-center">
                                       <img src={Trubka} alt='' style={{cursor: 'pointer', width: '10px', height: '10px'}}/>
                                     </CTableDataCell>
-                                    <CTableDataCell className="text-center">
+                                    <CTableDataCell className="text-center widthSpace">
                                       <MyDropdown5
                                         options={specOnlyData2}
                                         selected={spec}
                                         setSelected={setSpec}
+                                        style={{width: '400px'}}
                                         // onChange={addCity}
                                       />
                                     </CTableDataCell> 
@@ -910,7 +910,7 @@ const Projects = () => {
                                   </CTableRow>
                                   <CTableRow v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                     <CTableDataCell className="text-center" style={{position: 'relative'}}>
-                                      <div className="parent-element" style={{position: 'absolute', left: '10px', top: '6px'}}>
+                                      <div className="parent-element" style={{position: 'absolute', left: '6px', top: '6px'}}>
                                         <Dropdown>
                                           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
                                           </Dropdown.Toggle>
@@ -921,8 +921,8 @@ const Projects = () => {
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
-                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '23px', top: '8px'}} />
-                                      <span style={{position: 'absolute', left: '52px', top: '8px'}}>❌</span>
+                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '17px', top: '8px'}} />
+                                      <span style={{position: 'absolute', left: '44px', top: '8px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       01.01.2024 | 00:00
@@ -987,6 +987,7 @@ const Projects = () => {
                                         options={specOnlyData2}
                                         selected={spec}
                                         setSelected={setSpec}
+                                        style={{width: '400px'}}
                                         // onChange={addCity}
                                       />
                                     </CTableDataCell> 
