@@ -801,7 +801,7 @@ const Projects = () => {
                           <CCardHeader onClick={() => setVisibleA(!visibleA)}>Специалисты</CCardHeader>
                           <CCollapse visible={visibleA}>
                             <CCardBody style={{padding: '12px'}}>
-                              <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1412px', borderRadius: '5px' }}>
+                              <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1592px', borderRadius: '5px' }}>
                                 <CTableHead className="text-center" color="light">
                                   <CTableRow>
                                     <CTableHeaderCell className="text-center" style={{width: '60px'}}>
@@ -812,14 +812,14 @@ const Projects = () => {
                                       />
                                     </CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{width: '160px'}}>Дата</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Вид работ</CTableHeaderCell>  
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '220px'}}>ФИО</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Вид работ</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>ФИО</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}></CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Специальность</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '40px'}}>Ставка</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>С</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Д</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '100px'}}>Комтег</CTableHeaderCell>                         
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Комтег</CTableHeaderCell>                         
                                     <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Комментарий</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Мерч</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Такси</CTableHeaderCell>
@@ -828,18 +828,19 @@ const Projects = () => {
                                 <CTableBody>                                  
                                   <CTableRow v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                     <CTableDataCell className="text-center" style={{position: 'relative'}}>
-                                      <div className="parent-element" style={{position: 'absolute', left: '6px', top: '6px'}}>
+                                      <div className="parent-element" style={{position: 'absolute', left: '3px', top: '6px'}}>
                                         <Dropdown>
                                           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
                                           </Dropdown.Toggle>
                                           <Dropdown.Menu as={CustomMenu}> 
                                           <Dropdown.Item>Добавить</Dropdown.Item>
                                           <Dropdown.Item>Дублировать</Dropdown.Item>
-                                          <Dropdown.Item>Разделитель</Dropdown.Item>
+                                          <Dropdown.Item></Dropdown.Item>
+                                          <Dropdown.Item>Удалить</Dropdown.Item>
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
-                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '17px', top: '8px'}} />
+                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '17px', top: '7px'}} />
                                       <span style={{position: 'absolute', left: '44px', top: '8px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
@@ -880,7 +881,7 @@ const Projects = () => {
                                         options={[{label: "№1", value: '1'}, {label: "№2", value: '2'}, {label: "№3", value: '3'}, {label: "№4", value: '4'}, {label: "№5", value: '5'}, {label: "№6", value: '6'}, {label: "№7", value: '7'}, {label: "№8", value: '8'}]}
                                         selected={stavka}
                                         setSelected={setStavka}
-                                        style={{width: '100px'}}
+                                        style={{width: '130px'}}
                                         // onChange={addCity}
                                       />
                                     </CTableDataCell> 
@@ -896,6 +897,7 @@ const Projects = () => {
                                         selected={comteg}
                                         setSelected={setComteg}
                                         // onChange={addCity}
+                                        style={{width: '200px'}}
                                       />
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
