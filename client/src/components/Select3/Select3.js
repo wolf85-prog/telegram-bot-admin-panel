@@ -1,7 +1,7 @@
 import React from 'react';
-import cl from './Select2.module.css'
+import cl from './Select3.module.css'
 
-const Select2 = ({menuShow, setMenuShow, selected}) => {
+const Select3 = ({menuShow, setMenuShow, selected}) => {
 
     return (
         <div 
@@ -16,4 +16,4 @@ const Select2 = ({menuShow, setMenuShow, selected}) => {
     );
 };
 
-export default Select2;
+export default Select3;

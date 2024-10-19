@@ -3,8 +3,8 @@
 }
 
 .menu {
-    list-style: none;
-    padding: 0.2em 0.5em;
+    list-style: disc;
+    padding: 0.2em 2.0em;
     background: #131c21;
     box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
     border: 1px solid #2d2e38;

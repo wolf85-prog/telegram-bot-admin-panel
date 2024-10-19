@@ -76,6 +76,7 @@ import cities from 'src/data/cities';
 import specifikaData from 'src/data/specifikaData';
 import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
+import specOnlyData2 from 'src/data/specOnlyData2';
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
@@ -95,9 +96,9 @@ const Projects = () => {
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
   const [city, setCity] = useState('');
-  const [statusProject, setStatusProject] = useState('');
+  const [statusProject, setStatusProject] = useState({name: '', color: ''});
   const [specifikaProject, setSpecifikaProject] = useState('');
-  const [vidProject, setVidProject] = useState('');
+  const [vidProject, setVidProject] = useState({name: '', color: ''});
   const [company, setCompany] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [companysData, setCompanysData] = useState([]);
@@ -117,6 +118,8 @@ const Projects = () => {
   const [teh4, setTeh4] = useState('');
 
   const [comteg, setComteg] = useState('');
+  const [spec, setSpec] = useState('');
+  const [stavka, setStavka] = useState('');
 
   const [visibleDelete, setVisibleDelete] = useState(false)
   const [visibleA, setVisibleA] = useState(false)
@@ -209,7 +212,7 @@ const Projects = () => {
     setShowCalendar(false)
     setShowCalendar2(false)
 
-    setStatusProject('Новый')
+    setStatusProject({name: 'Новый', color: '#1E90FF'})
 
     setId(item)
     setProjectName('Новый проект')
@@ -283,7 +286,7 @@ const Projects = () => {
 		  return (
 			<div
 			  ref={ref}
-			  style={{backgroundColor: '#20272b', left: '5px', borderRadius: '6px', padding: '0 0 0 0', fontSize: '14px', top: '10px', minWidth:'50px'}}
+			  style={{backgroundColor: '#20272b', left: '5px', borderRadius: '6px', padding: '0 0 0 0', fontSize: '14px', top: '-45px', minWidth:'50px'}}
 			  className={className}
 			  aria-labelledby={labeledBy}
 			>
@@ -706,12 +709,12 @@ const Projects = () => {
                                           <div style={{textAlign: 'left', display: 'flex', flexDirection: 'column', marginTop: '33px'}}>
                                             <label className='title-label' style={{marginTop: '15px'}}>Предварительная смета</label>
 
-                                            <label className='title-label' style={{marginTop: '15px'}}>Финальная смета</label>
+                                            <label className='title-label' style={{marginTop: '20px'}}>Финальная смета</label>
 
-                                            <label className='title-label' style={{marginTop: '15px'}}>Постер</label>
+                                            <label className='title-label' style={{marginTop: '20px'}}>Постер</label>
                                           </div>
 
-                                          <div style={{marginTop: '62px', marginLeft: '-40px'}}>
+                                          <div style={{marginTop: '52px', marginLeft: '-40px'}}>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
                                                   <input disabled={false} className="text-field__input" type="text" name="teh" id="teh" onChange={(e)=>setTeh(e.target.value)} value={teh} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
@@ -743,15 +746,15 @@ const Projects = () => {
                                             <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
 
-                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '9px', marginTop: '40px', marginBottom: '0'}}>
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', marginTop: '40px'}}>
                                             🟩
                                           </div>
 
-                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '9px', marginBottom: '0'}}>
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px'}}>
                                             🟥
                                           </div>
 
-                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '9px', marginBottom: '0'}}>
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px'}}>
                                             🟦
                                           </div>
                                         </div>
@@ -802,7 +805,8 @@ const Projects = () => {
                                     </CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{width: '140px'}}>Дата</CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '140px'}}>Вид работ</CTableHeaderCell>  
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '220px'}}>ФИО</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '220px'}}>ФИО</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}></CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>Специальность</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '40px'}}>Ставка</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>С</CTableHeaderCell>
@@ -816,26 +820,25 @@ const Projects = () => {
                                 <CTableBody>                                  
                                   <CTableRow v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                     <CTableDataCell className="text-center" style={{position: 'relative'}}>
-                                      <div className="parent-element" style={{position: 'absolute', left: '10px', top: '10px'}}>
+                                      <div className="parent-element" style={{position: 'absolute', left: '10px', top: '6px'}}>
                                         <Dropdown>
                                           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
                                           </Dropdown.Toggle>
-                                          <Dropdown.Menu as={CustomMenu}>
-                                          <Dropdown.Item>Дублировать</Dropdown.Item>
+                                          <Dropdown.Menu as={CustomMenu}> 
                                           <Dropdown.Item>Добавить</Dropdown.Item>
-                                          <Dropdown.Item>Удалить</Dropdown.Item>
+                                          <Dropdown.Item>Дублировать</Dropdown.Item>
+                                          <Dropdown.Item>Разделитель</Dropdown.Item>
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
-                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '23px', top: '10px'}} />
-                                      <span style={{position: 'absolute', left: '52px', top: '11px'}}>❌</span>
+                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '23px', top: '8px'}} />
+                                      <span style={{position: 'absolute', left: '52px', top: '8px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       01.01.2024 | 00:00
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center">
                                       <MyDropdown5
-                                        style={{backgroundColor: 'transparent'}}
                                         options={vids}
                                         selected={vidProject}
                                         setSelected={setVidProject}
@@ -844,7 +847,7 @@ const Projects = () => {
                                       />
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
-                                      <Autocomplete
+                                      {/* <Autocomplete
                                         sx={{
                                                   display: 'inline-block',
                                                   '& input': {zIndex: '25',
@@ -883,10 +886,133 @@ const Projects = () => {
                                               />
                                             </div> 
                                             )}
+                                      /> */}
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      <img src={Trubka} alt='' style={{cursor: 'pointer', width: '10px', height: '10px'}}/>
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                      <MyDropdown5
+                                        options={specOnlyData2}
+                                        selected={spec}
+                                        setSelected={setSpec}
+                                        // onChange={addCity}
                                       />
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                      Звукорежессер
+                                      <MyDropdown5
+                                        options={[{label: "№1", value: '1'}, {label: "№2", value: '2'}, {label: "№3", value: '3'}, {label: "№4", value: '4'}, {label: "№5", value: '5'}, {label: "№6", value: '6'}, {label: "№7", value: '7'}, {label: "№8", value: '8'}]}
+                                        selected={stavka}
+                                        setSelected={setStavka}
+                                        style={{width: '100px'}}
+                                        // onChange={addCity}
+                                      />
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      🟩
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      🟩
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      <MyDropdown5
+                                        options={comtegs}
+                                        selected={comteg}
+                                        setSelected={setComteg}
+                                        // onChange={addCity}
+                                      />
+                                    </CTableDataCell>   
+                                    <CTableDataCell className="text-center">
+                                      Тест
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      ✅
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      ✅
+                                    </CTableDataCell>           
+                                  </CTableRow>
+                                  <CTableRow v-for="item in tableItems" style={{lineHeight: '14px'}}>
+                                    <CTableDataCell className="text-center" style={{position: 'relative'}}>
+                                      <div className="parent-element" style={{position: 'absolute', left: '10px', top: '6px'}}>
+                                        <Dropdown>
+                                          <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
+                                          </Dropdown.Toggle>
+                                          <Dropdown.Menu as={CustomMenu}>
+                                          <Dropdown.Item>Дублировать</Dropdown.Item>
+                                          <Dropdown.Item>Добавить</Dropdown.Item>
+                                          <Dropdown.Item>Удалить</Dropdown.Item>
+                                          </Dropdown.Menu>
+                                        </Dropdown>
+                                      </div>                                     
+                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '23px', top: '8px'}} />
+                                      <span style={{position: 'absolute', left: '52px', top: '8px'}}>❌</span>
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      01.01.2024 | 00:00
+                                    </CTableDataCell>  
+                                    <CTableDataCell className="text-center">
+                                      <MyDropdown5
+                                        style={{backgroundColor: 'transparent'}}
+                                        options={vids}
+                                        selected={vidProject}
+                                        setSelected={setVidProject}
+                                        // onChange={addCity}
+                                        placeholder='—'
+                                      />
+                                    </CTableDataCell>   
+                                    <CTableDataCell className="text-center">
+                                      {/* <Autocomplete
+                                        sx={{
+                                                  display: 'inline-block',
+                                                  '& input': {zIndex: '25',
+                                                    width: '100%',
+                                                    border: 'none',
+                                                    height: '40px',
+                                                    padding: '5px 4px',
+                                                    fontFamily: 'inherit',
+                                                    fontSize: '14px',
+                                                    fontWeight: '700',
+                                                    lineHeight: '1.5',
+                                                    textAlign: 'center',
+                                                    color: '#ffffff',
+                                                    backgroundColor: 'transparent',
+                                                  }
+                                            }}
+                                            openOnFocus
+                                            id="custom-input-demo"
+                                            options={workersData}
+                                            style={{width: '100%', padding: '0'}}
+                                            onInputChange={(e)=>changeWorker(e)}
+                                            //onInputChange={(e)=>console.log(e.target.value)}
+                                            //isOptionEqualToValue={(option, value) => option.value === value.value}
+                                            onChange={(event, newValue) => {
+                                                console.log(newValue)
+                                                setSpecialistName(newValue)
+                                            }}
+                                            value={specialistName}
+                                            inputValue={specialistName}
+                                            renderInput={(params) => (
+                                            <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                              <input 
+                                                style={{border: 'none', height: '20px'}}
+                                                type="text" {...params.inputProps} 
+                                                placeholder=''
+                                              />
+                                            </div> 
+                                            )}
+                                      /> */}
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      <img src={Trubka} alt='' style={{cursor: 'pointer', width: '10px', height: '10px'}}/>
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                      <MyDropdown5
+                                        options={specOnlyData2}
+                                        selected={spec}
+                                        setSelected={setSpec}
+                                        // onChange={addCity}
+                                      />
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       №1

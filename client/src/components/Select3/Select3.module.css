@@ -1,20 +1,19 @@
 .select {
-    /* background: #131c21; */
-    background: transparent;
+    background: #131c21;
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: none;
+    border: 1px #2d2e38 solid;
     border-radius: 6px;
-    padding: 0;
+    padding: 15px;
     cursor: pointer;
     transition: background 0.3s;
-    height: 10px;
+    height: 40px;
 }
 
 .selectClicked {
-    /* border: 2px #26489a solid; */
+    border: 2px #26489a solid;
     /* box-shadow: 0 0 0.8em #26489a; */
 }
 

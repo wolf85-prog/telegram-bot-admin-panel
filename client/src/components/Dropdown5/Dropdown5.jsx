@@ -2,23 +2,23 @@ import React, {useState, useRef, useEffect} from 'react';
 import Select2 from '../Select2/Select2'
 import drp from './Dropdown5.module.css'
 
-const Dropdown5 = ({options, selected, setSelected, placeholder}) => {
+const Dropdown5 = ({options, selected, setSelected, placeholder, style}) => {
     const [menuShow, setMenuShow] = useState(false)
     // const [selected, setSelected] = useState(options[0])
 
     //console.log(options)
 
     useEffect(()=> {
-      setSelected(selected ? selected : placeholder)
+      setSelected(selected ? {name: selected.name, color: selected.color} : {name: placeholder, color: '#f3f3f3'})
     }, [])
 
-    const selectOption = e => {
-        setSelected(e.target.innerText)
+    const selectOption = (e, color) => {
+        setSelected({name: e.target.innerText, color: color})
         setMenuShow(!menuShow)
     }
 
     const dropdownList = options.map((option, i) =>
-        <li key={i} onClick={selectOption} style={{color: `${option.color}`}}>{option.label}</li>
+        <li key={i} onClick={(e)=>selectOption(e, option.color)} style={{color: `${option.color}`}}>{option.label}</li>
     )
 
     const wrapperRef = useRef(null);
@@ -48,9 +48,9 @@ const Dropdown5 = ({options, selected, setSelected, placeholder}) => {
                 menuShow={menuShow}
                 setMenuShow={setMenuShow}
                 selected={selected}
-                style={{border: 'none!important'}}
+                style={{border: 'none!important', color: ``}}
             />
-            <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`} style={{listStyle: 'disc', padding: '0.2em 2.0em'}}>
+            <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`} style={style}>
                 {dropdownList}
             </ul>
         </div>
