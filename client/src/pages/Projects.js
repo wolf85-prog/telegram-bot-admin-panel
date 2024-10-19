@@ -798,7 +798,7 @@ const Projects = () => {
 
                         
                         <CCard className="mb-4" style={{display: showMainTable ? 'block' : 'none'}}>
-                          <CCardHeader onClick={() => setVisibleA(!visibleA)}>Основной состав</CCardHeader>
+                          <CCardHeader onClick={() => setVisibleA(!visibleA)}>Специалисты</CCardHeader>
                           <CCollapse visible={visibleA}>
                             <CCardBody style={{padding: '12px'}}>
                               <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1412px', borderRadius: '5px' }}>
