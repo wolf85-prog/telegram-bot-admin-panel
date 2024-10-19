@@ -42,6 +42,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 import DatePicker from "react-datepicker";
 import Dropdown from 'react-bootstrap/Dropdown';
+import Form from 'react-bootstrap/Form';
 
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
@@ -186,10 +187,15 @@ const Projects = () => {
 
     //3
     let arrWorkers = []
-    console.log("workersAll: ", workersAll)
+    //console.log("workersAll: ", workersAll)
     workersAll.map((item, index)=> {
-      arrWorkers.push(item.userfamily + ' ' + item.username)
+      const obj = {
+        label: item.userfamily + ' ' + item.username,
+        value: index
+      }
+      arrWorkers.push(obj)
     })
+    //console.log("arrWorkers: ", arrWorkers)
     setWorkersData(arrWorkers)
 }, [])
 
@@ -310,6 +316,8 @@ const Projects = () => {
 
     setSpecialistName(e.target.value)
   }
+
+
 
   return (
     <div className='dark-theme'>
@@ -887,6 +895,13 @@ const Projects = () => {
                                             </div> 
                                             )}
                                       /> */}
+                                      <MyDropdown5
+                                        options={workersData}
+                                        selected={vidProject}
+                                        setSelected={setVidProject}
+                                        // onChange={addCity}
+                                        placeholder='—'
+                                      />
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       <img src={Trubka} alt='' style={{cursor: 'pointer', width: '10px', height: '10px'}}/>
