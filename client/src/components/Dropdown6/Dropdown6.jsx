@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
-import Select2 from '../Select2/Select2'
+import Select4 from '../Select4/Select4'
 import drp from './Dropdown6.module.css'
 import { 
   CFormInput,
@@ -57,20 +57,14 @@ const Dropdown6 = ({options, selected, setSelected, placeholder, style}) => {
 
     return (
         <div className={drp.dropdown} ref={wrapperRef}>
-            <Select2
+            <Select4
                 menuShow={menuShow}
                 setMenuShow={setMenuShow}
                 selected={selected}
+                setSelected={setSelected}
                 style={{border: 'none!important', color: ``}}
             />
             <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`} style={style}>
-              <CFormInput 
-                type="text" 
-                placeholder="Введите ФИО..."
-                value={text}
-                onChange={(e)=>setText(e.target.value)}
-                style={{marginTop: '10px', height: '30px', fontSize: '16px'}}
-              />
                 {dropdownList}
             </ul>
         </div>

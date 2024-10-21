@@ -835,7 +835,8 @@ const Projects = () => {
                                           <Dropdown.Menu as={CustomMenu}> 
                                           <Dropdown.Item>Добавить</Dropdown.Item>
                                           <Dropdown.Item>Дублировать</Dropdown.Item>
-                                          <Dropdown.Item></Dropdown.Item>
+                                          <Dropdown.Divider />
+                                          {/* <Dropdown.Item></Dropdown.Item> */}
                                           <Dropdown.Item>Удалить</Dropdown.Item>
                                           </Dropdown.Menu>
                                         </Dropdown>
@@ -862,6 +863,7 @@ const Projects = () => {
                                         setSelected={setSpecialistName}
                                         // onChange={addCity}
                                         placeholder='—'
+                                        style={{width: '370px'}}
                                       />
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
@@ -897,7 +899,7 @@ const Projects = () => {
                                         selected={comteg}
                                         setSelected={setComteg}
                                         // onChange={addCity}
-                                        style={{width: '200px'}}
+                                        style={{width: '300px'}}
                                       />
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
@@ -919,6 +921,7 @@ const Projects = () => {
                                           <Dropdown.Menu as={CustomMenu}>
                                           <Dropdown.Item>Дублировать</Dropdown.Item>
                                           <Dropdown.Item>Добавить</Dropdown.Item>
+                                          {/* <Dropdown.Item></Dropdown.Item> */}
                                           <Dropdown.Item>Удалить</Dropdown.Item>
                                           </Dropdown.Menu>
                                         </Dropdown>
