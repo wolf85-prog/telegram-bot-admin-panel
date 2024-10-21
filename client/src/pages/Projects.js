@@ -92,7 +92,7 @@ const Projects = () => {
   const [yearAndMonth, setYearAndMonth] = useState([2024, 10]);
 
   const [showSidebar, setShowSidebar] = useState(false)
-  const [showCalendar, setShowCalendar] = useState(true)
+  const [showCalendar, setShowCalendar] = useState(false)
   const [showCalendar2, setShowCalendar2] = useState(true)
   const [showProject, setShowProject] = useState(false)
 
@@ -347,7 +347,7 @@ const Projects = () => {
                             {
                               showCalendar ? 
                                 // <Calendar openProject={openProject} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
-                                <h2>Раздел находится в разработке</h2>
+                                <h2 style={{marginTop: '25%', textAlign: 'center'}}>Раздел находится в разработке</h2>
                                 :
                                 (showCalendar2 ?
                                   <Calendar2 openProject={openProject} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
@@ -1025,9 +1025,11 @@ const Projects = () => {
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>ФИО</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}></CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Специальность</CTableHeaderCell>  
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '40px'}}>Ранг</CTableHeaderCell>                       
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '40px'}}>Проекты</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Комтег</CTableHeaderCell>                      
                                     <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Комментарий</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Телефон</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>С</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Д</CTableHeaderCell>
                                   </CTableRow>
                                 </CTableHead>
                                 <CTableBody>                                  
