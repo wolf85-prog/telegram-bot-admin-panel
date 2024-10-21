@@ -251,7 +251,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                     +</span>
                                 </CButton>
                                 {project[index] ? 
-                                    <div className='viewProject' onClick={()=>openProject(index, 1)}>
+                                    <div className='view-project' onClick={()=>openProject(index, 1)}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                         <p className='viewStatus'>Новый</p>
 
@@ -267,7 +267,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                     +</span>
                                 </CButton>
                                 {project2[index] ? 
-                                    <div className='viewProject' onClick={()=>openProject(index, 2)}>
+                                    <div className='view-project' onClick={()=>openProject(index, 2)}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                         <p className='viewStatus'>Новый</p>
 
@@ -283,7 +283,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                     +</span>
                                 </CButton>
                                 {project3[index] ? 
-                                    <div className='viewProject' onClick={()=>openProject(index, 3)}>
+                                    <div className='view-project' onClick={()=>openProject(index, 3)}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                         <p className='viewStatus'>Новый</p>
 
@@ -299,7 +299,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                     +</span>
                                 </CButton>
                                 {project4[index] ? 
-                                    <div className='viewProject' onClick={()=>openProject(index, 4)}>
+                                    <div className='view-project' onClick={()=>openProject(index, 4)}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                         <p className='viewStatus'>Новый</p>
 
@@ -315,7 +315,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                     +</span>
                                 </CButton>
                                 {project5[index] ? 
-                                    <div className='viewProject' onClick={()=>openProject(index, 5)}>
+                                    <div className='view-project' onClick={()=>openProject(index, 5)}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                         <p className='viewStatus'>Новый</p>
 
@@ -331,7 +331,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                     +</span>
                                 </CButton>
                                 {project6[index] ? 
-                                    <div className='viewProject' onClick={()=>openProject(index, 6)}>
+                                    <div className='view-project' onClick={()=>openProject(index, 6)}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                         <p className='viewStatus'>Новый</p>
 
@@ -347,7 +347,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                     +</span>
                                 </CButton>
                                 {project7[index] ? 
-                                    <div className='viewProject' onClick={()=>openProject(index, 7)}>
+                                    <div className='view-project' onClick={()=>openProject(index, 7)}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                         <p className='viewStatus'>Новый</p>
 

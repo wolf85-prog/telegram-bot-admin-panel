@@ -1010,60 +1010,87 @@ const Projects = () => {
                           <CCardHeader onClick={() => setVisibleB(!visibleB)}>Претенденты</CCardHeader>
                           <CCollapse visible={visibleB}>
                             <CCardBody style={{padding: '12px'}}>
-                              <CTable
-                                style={{ overflow: 'hidden', width: '1262px', borderRadius: '5px' }}
-                                align="middle"
-                                className="mb-0 border"
-                                hover
-                                responsive
-                              >
+                            <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1392px', borderRadius: '5px' }}>
                                 <CTableHead className="text-center" color="light">
-                                  {table.getHeaderGroups().map((headerGroup) => {
-                                    return (
-                                      <CTableRow key={headerGroup.id}>
-                                        {headerGroup.headers.map((header, index) => {
-                                          return (
-                                            <TableHeader
-                                            key={index}
-                                              header={header}
-                                              //
-                                            />
-                                          )
-                                        })}
-                                      </CTableRow>
-                                    )
-                                  })}
+                                  <CTableRow>
+                                    <CTableHeaderCell className="text-center" style={{width: '61px'}}>
+                                      <CFormCheck
+                                        checked={table.getIsAllRowsSelected()}
+                                        onChange={table.getToggleAllRowsSelectedHandler()}
+                                        style={{backgroundColor: '#181924', border: '1px solid #121212'}}
+                                      />
+                                    </CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{width: '160px'}}>Дата</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Статус</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>ФИО</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}></CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Специальность</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '40px'}}>Ранг</CTableHeaderCell>                       
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Комментарий</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Телефон</CTableHeaderCell>
+                                  </CTableRow>
                                 </CTableHead>
-                                <CTableBody>
-                                  {table.getRowModel().rows.map((row, index) => {
-                                    return (
-                                      <CTableRow
-                                        key={index}
-                                        style={{ position: 'relative' }}
-                                        onMouseEnter={handleActive}
-                                        onMouseLeave={handleActive}
-                                        className="text-center"
-                                      >
-                                        {row.getVisibleCells().map((cell, index) => {
-                                          return (
-                                            <CTableDataCell
-                                              key={index}
-                                              style={{
-                                                height: '30px',
-                                                minHeight: '30px',
-                                                maxHeight: '30px',
-                                                padding: '0',
-                                                //   padding: '0.4rem 0.4rem',
-                                              }}
-                                            >
-                                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                            </CTableDataCell>
-                                          )
-                                        })}
-                                      </CTableRow>
-                                    )
-                                  })}
-                                </CTableBody>
+                                <CTableBody>                                  
+                                  <CTableRow v-for="item in tableItems" style={{lineHeight: '14px'}}>
+                                    <CTableDataCell className="text-center" style={{position: 'relative'}}>
+                                      <div className="parent-element" style={{position: 'absolute', left: '2px', top: '6px'}}>
+                                        <Dropdown>
+                                          <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
+                                          </Dropdown.Toggle>
+                                          <Dropdown.Menu as={CustomMenu}> 
+                                          <Dropdown.Item>Добавить</Dropdown.Item>
+                                          <Dropdown.Item>Дублировать</Dropdown.Item>
+                                          <Dropdown.Item>Разделитель</Dropdown.Item>
+                                          <Dropdown.Item>Удалить</Dropdown.Item>
+                                          </Dropdown.Menu>
+                                        </Dropdown>
+                                      </div>                                     
+                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} />
+                                      <span style={{position: 'absolute', left: '43px', top: '8px'}}>❌</span>
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      01.01.2024 | 00:00
+                                    </CTableDataCell>  
+                                    <CTableDataCell className="text-center">
+                                      <MyDropdown5
+                                        options={vids}
+                                        selected={vidProject}
+                                        setSelected={setVidProject}
+                                        // onChange={addCity}
+                                        placeholder='—'
+                                      />
+                                    </CTableDataCell>   
+                                    <CTableDataCell className="text-center">
+                                      <MyDropdown6
+                                        options={workersData}
+                                        selected={specialistName}
+                                        setSelected={setSpecialistName}
+                                        placeholder=''
+                                        style={{width: '370px'}}
+                                      />
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
+                                      <img src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center widthSpace">
+                                      <MyDropdown5
+                                        options={specOnlyData2}
+                                        selected={spec}
+                                        setSelected={setSpec}
+                                        style={{width: '400px'}}
+                                        // onChange={addCity}
+                                      />
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      
+                                    </CTableDataCell>    
+                                    <CTableDataCell className="text-center">
+                                      Тест
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                    </CTableDataCell>           
+                                  </CTableRow>
+                                </CTableBody>                   
                               </CTable>
                             </CCardBody>
                           </CCollapse>
