@@ -15,15 +15,15 @@ const Dropdown6 = ({options, selected, setSelected, placeholder, style}) => {
 
     useEffect(()=> {
       setSelected(selected ? {name: selected.name, color: selected.color} : {name: placeholder, color: '#f3f3f3'})
-      const arr = options.slice(0, 3)
+      const arr = options.slice(0, 15)
       setFilterOptions(arr)
     }, [])
 
     useEffect(()=> {
-      //setSelected(selected ? {name: selected.name, color: selected.color} : {name: placeholder, color: '#f3f3f3'})
-      const arr = [...options].filter(item=> item.label?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()))
-      setFilterOptions(text === '' ? options : arr)
-    }, [text])
+      console.log("selected: ", selected)
+      const arr = options.filter(item=> item.label?.includes(selected))
+      setFilterOptions(selected.name === '' ? options : arr)
+    }, [selected])
 
     const selectOption = (e, color) => {
         setSelected({name: e.target.innerText, color: color})

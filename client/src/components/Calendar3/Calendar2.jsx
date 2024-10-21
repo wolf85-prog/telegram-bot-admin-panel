@@ -277,7 +277,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                     +</span>
                                 </CButton>
                                 {project3[index] ? 
-                                    <div className='viewProject' onClick={()=>console.log(index, 3)}>
+                                    <div className='viewProject' onClick={()=>openProject(index, 3)}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                         <p className='viewStatus'>Новый</p>
 

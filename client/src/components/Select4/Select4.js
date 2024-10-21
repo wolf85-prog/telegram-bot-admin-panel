@@ -13,10 +13,10 @@ const Select4 = ({menuShow, setMenuShow, selected, setSelected}) => {
         >
             <CFormInput 
                 type="text" 
-                placeholder="Введите ФИО..."
+                placeholder=""
                 value={selected.name && selected.name.length > 25 ? selected.name.substr(0, 25) + '...' : selected.name}
                 onChange={(e)=>setSelected(e.target.value)}
-                style={{marginTop: '10px', height: '30px', fontSize: '16px', background: 'transparent', border: 'none'}}
+                style={{height: '30px', fontSize: '16px', background: 'transparent', border: 'none', boxShadow: 'none', textAlign: 'center'}}
             />
         </div>
     );
