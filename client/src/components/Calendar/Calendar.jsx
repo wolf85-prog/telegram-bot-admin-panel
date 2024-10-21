@@ -198,12 +198,7 @@ export default function Calendar({openProject, setHeight, showSidebar, setShowSi
 
                             {project[index] ? 
                                 <div className='viewProject' onClick={()=>openProject(index)}>
-                                    {/* <CButton onClick={()=>addNewProject2(index)} className='uley_add_user uley_select_reset joinBtn' style={{position: 'absolute', top: '-55px', height: '26px', width: '26px'}}>
-                                        <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-9px', left: '4px'}}>
-                                        +</span>
-                                    </CButton> */}
-                                    <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>
-                                    {/* <p style={{fontSize: '14px', marginBottom: '3px', color: '#777777'}}>Компания</p> */}
+                                    <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                     <p className='viewStatus'>Новый</p>
 
                                     <p className='time-project' style={{color: project[index] ? '#1555f5' : ''}}>09:00</p>

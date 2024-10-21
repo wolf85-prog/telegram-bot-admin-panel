@@ -9,7 +9,7 @@ import Select from 'react-select'
 
 import { useUsersContext } from "../../chat-app-new/context/usersContext";
 
-export default function Calendar2({setHeight, showSidebar, setShowSidebar, setShowProject, setShowCalendar, setShowCalendar2}) {
+export default function Calendar2({openProject, setHeight, showSidebar, setShowSidebar, setShowProject, setShowCalendar, setShowCalendar2}) {
     //const { MONTHS, date, setDate, day, setDay, month, setMonth, year, setYear, startDay, setStartDay, currentDays, DAYS_OF_THE_WEEK } = useUsersContext();
     const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -44,7 +44,14 @@ export default function Calendar2({setHeight, showSidebar, setShowSidebar, setSh
     const [showButtonAdd6, setShowButtonAdd6] = useState([])
     const [showButtonAdd7, setShowButtonAdd7] = useState([])
 
-    
+    const [project, setProject] = useState([])
+    const [project2, setProject2] = useState([])
+    const [project3, setProject3] = useState([])
+    const [project4, setProject4] = useState([])
+    const [project5, setProject5] = useState([])
+    const [project6, setProject6] = useState([])
+    const [project7, setProject7] = useState([])
+
     const ref = useRef(null)
 
     useEffect(() => {
@@ -153,8 +160,47 @@ export default function Calendar2({setHeight, showSidebar, setShowSidebar, setSh
         setDate(new Date(year, index, day))
     }
 
-    const openProject =(item) => {
-        setShowProject(true)
+    // const openProject =(item) => {
+    //     setShowProject(true)
+    // }
+
+    const addNewProject = (item, day) => {
+        if (day === 1) {
+            let arr = [...project]
+            arr[item] = true
+            setProject(arr)
+        } else 
+        if (day === 2) {
+            let arr = [...project2]
+            arr[item] = true
+            setProject2(arr)
+        } else 
+        if (day === 3) {
+            let arr = [...project3]
+            arr[item] = true
+            setProject3(arr)
+        } else 
+        if (day === 4) {
+            let arr = [...project4]
+            arr[item] = true
+            setProject4(arr)
+        } else 
+        if (day === 5) {
+            let arr = [...project5]
+            arr[item] = true
+            setProject5(arr)
+        } else 
+        if (day === 6) {
+            let arr = [...project6]
+            arr[item] = true
+            setProject6(arr)
+        } else 
+        if (day === 7) {
+            let arr = [...project7]
+            arr[item] = true
+            setProject7(arr)
+        }
+        
     }
     
   return (
@@ -194,52 +240,115 @@ export default function Calendar2({setHeight, showSidebar, setShowSidebar, setSh
                         <><tr key={index}>
                             <td className='day2' onMouseOver={()=>overDay(index, 1)} onMouseOut={()=>outDay(index, 1)}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                <CButton className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
+                                <CButton onClick={()=>addNewProject(index, 1)} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
+                                {project[index] ? 
+                                    <div className='viewProject' onClick={()=>openProject(index, 1)}>
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
+                                        <p className='viewStatus'>Новый</p>
+
+                                        <p className='time-project' style={{color: project[index] ? '#1555f5' : ''}}>09:00</p>
+                                    </div>
+                                    : <></>
+                                }
                             </td>
                             <td className='day2' onMouseOver={()=>overDay(index, 2)} onMouseOut={()=>outDay(index, 2)}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                <CButton className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd2[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
+                                <CButton onClick={()=>addNewProject(index, 2)} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd2[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
+                                {project2[index] ? 
+                                    <div className='viewProject' onClick={()=>openProject(index, 2)}>
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
+                                        <p className='viewStatus'>Новый</p>
+
+                                        <p className='time-project' style={{color: project2[index] ? '#1555f5' : ''}}>09:00</p>
+                                    </div>
+                                    : <></>
+                                }
                             </td>
                             <td className='day2' onMouseOver={()=>overDay(index, 3)} onMouseOut={()=>outDay(index, 3)}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                <CButton className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd3[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
+                                <CButton onClick={()=>addNewProject(index, 3)} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd3[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
+                                {project3[index] ? 
+                                    <div className='viewProject' onClick={()=>console.log(index, 3)}>
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
+                                        <p className='viewStatus'>Новый</p>
+
+                                        <p className='time-project' style={{color: project3[index] ? '#1555f5' : ''}}>09:00</p>
+                                    </div>
+                                    : <></>
+                                }
                             </td>
                             <td className='day2' onMouseOver={()=>overDay(index, 4)} onMouseOut={()=>outDay(index, 4)}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                <CButton className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd4[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
+                                <CButton onClick={()=>addNewProject(index, 4)} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd4[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
+                                {project4[index] ? 
+                                    <div className='viewProject' onClick={()=>openProject(index, 4)}>
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
+                                        <p className='viewStatus'>Новый</p>
+
+                                        <p className='time-project' style={{color: project4[index] ? '#1555f5' : ''}}>09:00</p>
+                                    </div>
+                                    : <></>
+                                }
                             </td>
                             <td className='day2' onMouseOver={()=>overDay(index, 5)} onMouseOut={()=>outDay(index, 5)}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                <CButton className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd5[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
+                                <CButton onClick={()=>addNewProject(index, 5)} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd5[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
+                                {project5[index] ? 
+                                    <div className='viewProject' onClick={()=>openProject(index, 5)}>
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
+                                        <p className='viewStatus'>Новый</p>
+
+                                        <p className='time-project' style={{color: project5[index] ? '#1555f5' : ''}}>09:00</p>
+                                    </div>
+                                    : <></>
+                                }
                             </td>
                             <td className='day2' onMouseOver={()=>overDay(index, 6)} onMouseOut={()=>outDay(index, 6)}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                <CButton className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd6[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
+                                <CButton onClick={()=>addNewProject(index, 6)} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd6[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
+                                {project6[index] ? 
+                                    <div className='viewProject' onClick={()=>openProject(index, 6)}>
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
+                                        <p className='viewStatus'>Новый</p>
+
+                                        <p className='time-project' style={{color: project6[index] ? '#1555f5' : ''}}>09:00</p>
+                                    </div>
+                                    : <></>
+                                }
                             </td>
                             <td className='day2' onMouseOver={()=>overDay(index, 7)} onMouseOut={()=>outDay(index, 7)}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                <CButton className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd7[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
+                                <CButton onClick={()=>addNewProject(index, 7)} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd7[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
+                                {project7[index] ? 
+                                    <div className='viewProject' onClick={()=>openProject(index, 7)}>
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
+                                        <p className='viewStatus'>Новый</p>
+
+                                        <p className='time-project' style={{color: project7[index] ? '#1555f5' : ''}}>09:00</p>
+                                    </div>
+                                    : <></>
+                                }
                             </td>
 
                         </tr>

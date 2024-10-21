@@ -88,7 +88,7 @@ const Projects = () => {
 
   const [showSidebar, setShowSidebar] = useState(false)
   const [showCalendar, setShowCalendar] = useState(true)
-  const [showCalendar2, setShowCalendar2] = useState(false)
+  const [showCalendar2, setShowCalendar2] = useState(true)
   const [showProject, setShowProject] = useState(false)
 
   const [height, setHeight] = useState(600)
@@ -204,7 +204,7 @@ const Projects = () => {
 
   const closeProfile = () => {
     setShowProject(false)
-    setShowCalendar(true)
+    setShowCalendar2(true)
     setShowMainTable(false)
     setShowPretendentTable(false)
   }
@@ -214,8 +214,8 @@ const Projects = () => {
   }, [height])
 
 
-  const openProject =(item) => {
-    console.log("item: ", item)
+  const openProject =(item, day) => {
+    console.log("item: ", item, day)
 
     setShowProject(true)
     setShowCalendar(false)
@@ -340,11 +340,11 @@ const Projects = () => {
                           <CCardBody style={{padding: '12px', height: `${height}px`}}>
                             {!showProject ? <Filters setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} columnFilters={columnFilters} setColumnFilters={setColumnFilters} /> : '' }
                             {
-                              showCalendar ? 
-                                <Calendar openProject={openProject} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
-                                :
+                              // showCalendar ? 
+                              //   <Calendar openProject={openProject} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
+                              //   :
                                 (showCalendar2 ?
-                                  <Calendar2 showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
+                                  <Calendar2 openProject={openProject} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
                                   : 
                                   (showProject ? 
                                     <div style={{position: 'relative', height: '494px', display: 'flex', flexDirection: 'row', marginTop: '35px'}}>
