@@ -833,7 +833,7 @@ const Projects = () => {
                                 <CTableBody>                                  
                                   <CTableRow v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                     <CTableDataCell className="text-center" style={{position: 'relative'}}>
-                                      <div className="parent-element" style={{position: 'absolute', left: '3px', top: '6px'}}>
+                                      <div className="parent-element" style={{position: 'absolute', left: '2px', top: '6px'}}>
                                         <Dropdown>
                                           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
                                           </Dropdown.Toggle>
@@ -846,8 +846,8 @@ const Projects = () => {
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
-                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '17px', top: '7px'}} />
-                                      <span style={{position: 'absolute', left: '44px', top: '8px'}}>❌</span>
+                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '14px', top: '7px'}} />
+                                      <span style={{position: 'absolute', left: '41px', top: '8px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       01.01.2024 | 00:00
@@ -918,7 +918,7 @@ const Projects = () => {
                                   </CTableRow>
                                   <CTableRow v-for="item in tableItems" style={{lineHeight: '14px', padding: '0px'}}>
                                     <CTableDataCell className="text-center" style={{position: 'relative'}}>
-                                      <div className="parent-element" style={{position: 'absolute', left: '3px', top: '6px'}}>
+                                      <div className="parent-element" style={{position: 'absolute', left: '2px', top: '6px'}}>
                                         <Dropdown>
                                           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
                                           </Dropdown.Toggle>
@@ -931,8 +931,8 @@ const Projects = () => {
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
-                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '17px', top: '7px'}} />
-                                      <span style={{position: 'absolute', left: '44px', top: '8px'}}>❌</span>
+                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '14px', top: '7px'}} />
+                                      <span style={{position: 'absolute', left: '41px', top: '8px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       01.01.2024 | 00:00
