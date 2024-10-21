@@ -353,6 +353,9 @@ const Chat = () => {
 					messageId: sendToTelegram.data.result.message_id,
 				}
 
+				//сохранение сообщения в базе данных
+				await newMessage(message)	
+
 				//сохранить в контексте
 				addNewMessage2(user.chatId, mess, 'text', '', convs.id, sendToTelegram.data.result.message_id, null);
 			} else {
@@ -366,13 +369,15 @@ const Chat = () => {
 					messageId: sendToTelegram.data.result.message_id,
 				}
 
+				//сохранение сообщения в базе данных
+				await newMessage(message)	
+
 				//сохранить в контексте
 				addNewMessage2(user.chatId, host + image, 'image', '', convs.id, sendToTelegram.data.result.message_id, null);
 			}
 			console.log("message send: ", message);
 
-			//сохранение сообщения в базе данных
-			await newMessage(message)	
+			
 		}
 	}
 
