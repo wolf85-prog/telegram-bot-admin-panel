@@ -169,11 +169,17 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
             let arr = [...project]
             arr[item] = true
             setProject(arr)
+
+            
         } else 
         if (day === 2) {
             let arr = [...project2]
             arr[item] = true
             setProject2(arr)
+
+            let arr2 = []
+            arr2[item] = false
+            setShowButtonAdd2(arr2)
         } else 
         if (day === 3) {
             let arr = [...project3]
