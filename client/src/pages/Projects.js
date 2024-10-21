@@ -345,9 +345,10 @@ const Projects = () => {
                           <CCardBody style={{padding: '12px', height: `${height}px`}}>
                             {!showProject ? <Filters setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} columnFilters={columnFilters} setColumnFilters={setColumnFilters} /> : '' }
                             {
-                              // showCalendar ? 
-                              //   <Calendar openProject={openProject} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
-                              //   :
+                              showCalendar ? 
+                                // <Calendar openProject={openProject} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
+                                <h2>Раздел находится в разработке</h2>
+                                :
                                 (showCalendar2 ?
                                   <Calendar2 openProject={openProject} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
                                   : 
@@ -760,7 +761,7 @@ const Projects = () => {
                                           </div>
 
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', marginTop: '40px'}}>
-                                            <img src={btnGreen} alt='' width={25} style={{marginBottom: '7px'}}/>
+                                            🟥
                                           </div>
 
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px'}}>
@@ -809,7 +810,7 @@ const Projects = () => {
                               <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1592px', borderRadius: '5px' }}>
                                 <CTableHead className="text-center" color="light">
                                   <CTableRow>
-                                    <CTableHeaderCell className="text-center" style={{width: '60px'}}>
+                                    <CTableHeaderCell className="text-center" style={{width: '61px'}}>
                                       <CFormCheck
                                         checked={table.getIsAllRowsSelected()}
                                         onChange={table.getToggleAllRowsSelectedHandler()}
@@ -840,14 +841,13 @@ const Projects = () => {
                                           <Dropdown.Menu as={CustomMenu}> 
                                           <Dropdown.Item>Добавить</Dropdown.Item>
                                           <Dropdown.Item>Дублировать</Dropdown.Item>
-                                          <Dropdown.Divider />
-                                          {/* <Dropdown.Item></Dropdown.Item> */}
+                                          <Dropdown.Item>Разделитель</Dropdown.Item>
                                           <Dropdown.Item>Удалить</Dropdown.Item>
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
-                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '14px', top: '7px'}} />
-                                      <span style={{position: 'absolute', left: '41px', top: '8px'}}>❌</span>
+                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} />
+                                      <span style={{position: 'absolute', left: '43px', top: '8px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       01.01.2024 | 00:00
@@ -925,14 +925,13 @@ const Projects = () => {
                                           <Dropdown.Menu as={CustomMenu}> 
                                           <Dropdown.Item>Добавить</Dropdown.Item>
                                           <Dropdown.Item>Дублировать</Dropdown.Item>
-                                          <Dropdown.Divider />
-                                          {/* <Dropdown.Item></Dropdown.Item> */}
+                                          <Dropdown.Item>Разделитель</Dropdown.Item>
                                           <Dropdown.Item>Удалить</Dropdown.Item>
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
-                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '14px', top: '7px'}} />
-                                      <span style={{position: 'absolute', left: '41px', top: '8px'}}>❌</span>
+                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} />
+                                      <span style={{position: 'absolute', left: '43px', top: '8px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       01.01.2024 | 00:00
