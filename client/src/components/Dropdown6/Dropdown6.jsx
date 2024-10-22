@@ -14,14 +14,14 @@ const Dropdown6 = ({options, selected, setSelected, placeholder, style}) => {
     //console.log(options)
 
     useEffect(()=> {
-      setSelected(selected ? {name: selected.name, color: selected.color} : {name: placeholder, color: '#f3f3f3'})
+      //setSelected(selected ? selected : placeholder)
       const arr = options.slice(0, 15)
-      setFilterOptions(arr)
+      setFilterOptions(options)
     }, [])
 
     useEffect(()=> {
       console.log("selected: ", selected)
-      const arr = options.filter(item=> item.label?.includes(selected))
+      const arr = options.filter(item=> item.label?.toLowerCase().includes(selected?.toLowerCase()))
       setFilterOptions(selected.name === '' ? options : arr)
     }, [selected])
 

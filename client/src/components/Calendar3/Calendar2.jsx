@@ -107,20 +107,35 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
     const overDay = (index, td) => {
         let arr = []
         arr[index] = true
+
         if (td === 1) {
-            setShowButtonAdd(arr)
+            if (!project[index]) {
+                setShowButtonAdd(arr)
+            }           
         } else if (td === 2) {
-            setShowButtonAdd2(arr) 
+            if (!project2[index]) {
+                setShowButtonAdd2(arr)
+            } 
         } else if (td === 3) {
-            setShowButtonAdd3(arr) 
+            if (!project3[index]) {
+                setShowButtonAdd3(arr)
+            } 
         } else if (td === 4) {
-            setShowButtonAdd4(arr) 
+            if (!project4[index]) {
+                setShowButtonAdd4(arr)
+            } 
         } else if (td === 5) {
-            setShowButtonAdd5(arr) 
+            if (!project5[index]) {
+                setShowButtonAdd5(arr)
+            }  
         } else if (td === 6) {
-            setShowButtonAdd6(arr) 
+            if (!project6[index]) {
+                setShowButtonAdd6(arr)
+            }  
         } else if (td === 7) {
-            setShowButtonAdd7(arr) 
+            if (!project7[index]) {
+                setShowButtonAdd7(arr)
+            }  
         }
     }
 
@@ -170,7 +185,9 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
             arr[item] = true
             setProject(arr)
 
-            
+            let arr2 = []
+            arr2[item] = false
+            setShowButtonAdd(arr2)
         } else 
         if (day === 2) {
             let arr = [...project2]
@@ -185,26 +202,46 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
             let arr = [...project3]
             arr[item] = true
             setProject3(arr)
+
+            let arr2 = []
+            arr2[item] = false
+            setShowButtonAdd3(arr2)
         } else 
         if (day === 4) {
             let arr = [...project4]
             arr[item] = true
             setProject4(arr)
+
+            let arr2 = []
+            arr2[item] = false
+            setShowButtonAdd4(arr2)
         } else 
         if (day === 5) {
             let arr = [...project5]
             arr[item] = true
             setProject5(arr)
+
+            let arr2 = []
+            arr2[item] = false
+            setShowButtonAdd5(arr2)
         } else 
         if (day === 6) {
             let arr = [...project6]
             arr[item] = true
             setProject6(arr)
+
+            let arr2 = []
+            arr2[item] = false
+            setShowButtonAdd6(arr2)
         } else 
         if (day === 7) {
             let arr = [...project7]
             arr[item] = true
             setProject7(arr)
+
+            let arr2 = []
+            arr2[item] = false
+            setShowButtonAdd7(arr2)
         }
         
     }
@@ -251,12 +288,13 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                     +</span>
                                 </CButton>
                                 {project[index] ? 
+                                    <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 1)}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                         <p className='viewStatus'>Новый</p>
 
-                                        <p className='time-project' style={{color: project[index] ? '#1555f5' : ''}}>09:00</p>
-                                    </div>
+                                        <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
+                                    </div></>
                                     : <></>
                                 }
                             </td>
@@ -267,12 +305,13 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                     +</span>
                                 </CButton>
                                 {project2[index] ? 
+                                    <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 2)}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                         <p className='viewStatus'>Новый</p>
 
-                                        <p className='time-project' style={{color: project2[index] ? '#1555f5' : ''}}>09:00</p>
-                                    </div>
+                                        <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
+                                    </div></>
                                     : <></>
                                 }
                             </td>
@@ -283,12 +322,13 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                     +</span>
                                 </CButton>
                                 {project3[index] ? 
+                                    <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 3)}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                         <p className='viewStatus'>Новый</p>
 
-                                        <p className='time-project' style={{color: project3[index] ? '#1555f5' : ''}}>09:00</p>
-                                    </div>
+                                        <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
+                                    </div></>
                                     : <></>
                                 }
                             </td>
@@ -299,12 +339,13 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                     +</span>
                                 </CButton>
                                 {project4[index] ? 
+                                    <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 4)}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                         <p className='viewStatus'>Новый</p>
 
-                                        <p className='time-project' style={{color: project4[index] ? '#1555f5' : ''}}>09:00</p>
-                                    </div>
+                                        <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
+                                    </div></>
                                     : <></>
                                 }
                             </td>
@@ -315,12 +356,13 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                     +</span>
                                 </CButton>
                                 {project5[index] ? 
+                                    <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 5)}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                         <p className='viewStatus'>Новый</p>
 
-                                        <p className='time-project' style={{color: project5[index] ? '#1555f5' : ''}}>09:00</p>
-                                    </div>
+                                        <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
+                                    </div></>
                                     : <></>
                                 }
                             </td>
@@ -330,13 +372,14 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
-                                {project6[index] ? 
+                                {project6[index] ?
+                                    <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 6)}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                         <p className='viewStatus'>Новый</p>
 
-                                        <p className='time-project' style={{color: project6[index] ? '#1555f5' : ''}}>09:00</p>
-                                    </div>
+                                        <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
+                                    </div></>
                                     : <></>
                                 }
                             </td>
@@ -347,12 +390,13 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                     +</span>
                                 </CButton>
                                 {project7[index] ? 
+                                    <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 7)}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
                                         <p className='viewStatus'>Новый</p>
 
-                                        <p className='time-project' style={{color: project7[index] ? '#1555f5' : ''}}>09:00</p>
-                                    </div>
+                                        <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
+                                    </div></>
                                     : <></>
                                 }
                             </td>

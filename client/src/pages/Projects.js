@@ -127,6 +127,7 @@ const Projects = () => {
   const [comteg, setComteg] = useState('');
   const [spec, setSpec] = useState('');
   const [stavka, setStavka] = useState('');
+  const [statusPretendent, setStatusPretendent] = useState('');
 
   const [visibleDelete, setVisibleDelete] = useState(false)
   const [visibleA, setVisibleA] = useState(false)
@@ -230,6 +231,7 @@ const Projects = () => {
 
     setId(item)
     setProjectName('Новый проект')
+    setStavka({label: "№1", name: "№1"})
 
     setHeight(509)
 
@@ -834,7 +836,7 @@ const Projects = () => {
                                 <CTableBody>                                  
                                   <CTableRow v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                     <CTableDataCell className="text-center" style={{position: 'relative'}}>
-                                      <div className="parent-element" style={{position: 'absolute', left: '2px', top: '6px'}}>
+                                      <div className="parent-element" style={{position: 'absolute', left: '3px', top: '6px'}}>
                                         <Dropdown>
                                           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
                                           </Dropdown.Toggle>
@@ -847,7 +849,7 @@ const Projects = () => {
                                         </Dropdown>
                                       </div>                                     
                                       <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} />
-                                      <span style={{position: 'absolute', left: '43px', top: '8px'}}>❌</span>
+                                      <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       01.01.2024 | 00:00
@@ -884,7 +886,7 @@ const Projects = () => {
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       <MyDropdown5
-                                        options={[{label: "№1", value: '1'}, {label: "№2", value: '2'}, {label: "№3", value: '3'}, {label: "№4", value: '4'}, {label: "№5", value: '5'}, {label: "№6", value: '6'}, {label: "№7", value: '7'}, {label: "№8", value: '8'}]}
+                                        options={[{label: "№1", name: '№1'}, {label: "№2", name: '№2'}, {label: "№3", name: '№3'}, {label: "№4", name: '№4'}, {label: "№5", name: '№5'}, {label: "№6", name: '№6'}, {label: "№7", value: '7'}, {label: "№8", value: '8'}]}
                                         selected={stavka}
                                         setSelected={setStavka}
                                         style={{width: '130px'}}
@@ -918,7 +920,7 @@ const Projects = () => {
                                   </CTableRow>
                                   <CTableRow v-for="item in tableItems" style={{lineHeight: '14px', padding: '0px'}}>
                                     <CTableDataCell className="text-center" style={{position: 'relative'}}>
-                                      <div className="parent-element" style={{position: 'absolute', left: '2px', top: '6px'}}>
+                                      <div className="parent-element" style={{position: 'absolute', left: '3px', top: '6px'}}>
                                         <Dropdown>
                                           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
                                           </Dropdown.Toggle>
@@ -931,7 +933,7 @@ const Projects = () => {
                                         </Dropdown>
                                       </div>                                     
                                       <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} />
-                                      <span style={{position: 'absolute', left: '43px', top: '8px'}}>❌</span>
+                                      <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       01.01.2024 | 00:00
@@ -968,7 +970,7 @@ const Projects = () => {
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       <MyDropdown5
-                                        options={[{label: "№1", value: '1'}, {label: "№2", value: '2'}, {label: "№3", value: '3'}, {label: "№4", value: '4'}, {label: "№5", value: '5'}, {label: "№6", value: '6'}, {label: "№7", value: '7'}, {label: "№8", value: '8'}]}
+                                        options={[{label: "№1", name: '№1'}, {label: "№2", name: '№2'}, {label: "№3", name: '№3'}, {label: "№4", name: '№4'}, {label: "№5", name: '№5'}, {label: "№6", name: '№6'}, {label: "№7", value: '7'}, {label: "№8", value: '8'}]}
                                         selected={stavka}
                                         setSelected={setStavka}
                                         style={{width: '130px'}}
@@ -1010,7 +1012,7 @@ const Projects = () => {
                           <CCardHeader onClick={() => setVisibleB(!visibleB)}>Претенденты</CCardHeader>
                           <CCollapse visible={visibleB}>
                             <CCardBody style={{padding: '12px'}}>
-                            <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1392px', borderRadius: '5px' }}>
+                            <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1592px', borderRadius: '5px' }}>
                                 <CTableHead className="text-center" color="light">
                                   <CTableRow>
                                     <CTableHeaderCell className="text-center" style={{width: '61px'}}>
@@ -1048,18 +1050,19 @@ const Projects = () => {
                                         </Dropdown>
                                       </div>                                     
                                       <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} />
-                                      <span style={{position: 'absolute', left: '43px', top: '8px'}}>❌</span>
+                                      <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       01.01.2024 | 00:00
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center">
                                       <MyDropdown5
-                                        options={vids}
-                                        selected={vidProject}
-                                        setSelected={setVidProject}
+                                        options={[{label: "В Проект", name: 'В Проект'}, {label: "Отказано", name: 'Отказано'}, {label: "0.00", name: '0.00'}, {label: "Передумал", name: 'Передумал'}]}
+                                        selected={statusPretendent}
+                                        setSelected={setStatusPretendent}
                                         // onChange={addCity}
                                         placeholder='—'
+                                        styles={{height: '100px'}}
                                       />
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
@@ -1084,12 +1087,25 @@ const Projects = () => {
                                       />
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                      
+                                      001 | 010
+                                    </CTableDataCell>  
+                                    <CTableDataCell className="text-center">
+                                      <MyDropdown5
+                                        options={comtegs}
+                                        selected={comteg}
+                                        setSelected={setComteg}
+                                        // onChange={addCity}
+                                        style={{width: '300px'}}
+                                      />
                                     </CTableDataCell>    
                                     <CTableDataCell className="text-center">
                                       Тест
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
+                                      🟩
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      🟩
                                     </CTableDataCell>           
                                   </CTableRow>
                                 </CTableBody>                   
