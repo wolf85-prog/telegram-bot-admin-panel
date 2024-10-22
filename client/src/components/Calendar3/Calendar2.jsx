@@ -53,6 +53,8 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
     const [project6, setProject6] = useState([])
     const [project7, setProject7] = useState([])
 
+    const [projectName, setProjectName] = useState('')
+
     const ref = useRef(null)
 
     useEffect(() => {
@@ -178,9 +180,11 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
 
 
     const addNewProject = async(item, day) => {
-        
+
+        const projectTitle = 'Новый проект'
+
         const res = await addProject({
-            name: 'Новый проект', 
+            name: projectTitle, 
             datestart: '', 
             dateend: '', 
             crmID: '', 
@@ -191,6 +195,8 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
             spec: '', 
             geo: ''
         })
+
+        setProjectName(projectTitle)
 
         if (day === 1) {
             let arr = [...project]
@@ -302,7 +308,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                 {project[index] ? 
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 1)}>
-                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName}</p>   
                                         <p className='viewStatus'>Новый</p>
 
                                         <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
@@ -319,7 +325,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                 {project2[index] ? 
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 2)}>
-                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName}</p>   
                                         <p className='viewStatus'>Новый</p>
 
                                         <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
@@ -336,7 +342,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                 {project3[index] ? 
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 3)}>
-                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName}</p>   
                                         <p className='viewStatus'>Новый</p>
 
                                         <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
@@ -353,7 +359,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                 {project4[index] ? 
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 4)}>
-                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName}</p>   
                                         <p className='viewStatus'>Новый</p>
 
                                         <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
@@ -370,7 +376,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                 {project5[index] ? 
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 5)}>
-                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName}</p>   
                                         <p className='viewStatus'>Новый</p>
 
                                         <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
@@ -387,7 +393,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                 {project6[index] ?
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 6)}>
-                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName}</p>   
                                         <p className='viewStatus'>Новый</p>
 
                                         <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
@@ -404,7 +410,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
                                 {project7[index] ? 
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 7)}>
-                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>Проект</p>   
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName}</p>   
                                         <p className='viewStatus'>Новый</p>
 
                                         <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
