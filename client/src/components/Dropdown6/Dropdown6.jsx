@@ -26,7 +26,7 @@ const Dropdown6 = ({options, selected, setSelected, placeholder, style}) => {
     }, [selected])
 
     const selectOption = (e, color) => {
-        setSelected({name: e.target.innerText, color: color})
+        setSelected(e.target.innerText)
         setMenuShow(!menuShow)
     }
 
