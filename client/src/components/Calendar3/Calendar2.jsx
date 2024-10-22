@@ -8,6 +8,7 @@ import './Calendar2.css'
 import Select from 'react-select'
 
 import { useUsersContext } from "../../chat-app-new/context/usersContext";
+import { addProject } from '../../http/projectAPI'
 
 export default function Calendar2({openProject, setHeight, showSidebar, setShowSidebar, setShowProject, setShowCalendar, setShowCalendar2}) {
     //const { MONTHS, date, setDate, day, setDay, month, setMonth, year, setYear, startDay, setStartDay, currentDays, DAYS_OF_THE_WEEK } = useUsersContext();
@@ -175,11 +176,22 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
         setDate(new Date(year, index, day))
     }
 
-    // const openProject =(item) => {
-    //     setShowProject(true)
-    // }
 
-    const addNewProject = (item, day) => {
+    const addNewProject = async(item, day) => {
+        
+        const res = await addProject({
+            name: 'Новый проект', 
+            datestart: '', 
+            dateend: '', 
+            crmID: '', 
+            teh: '', 
+            managerId: '', 
+            companyId: '', 
+            chatId: '', 
+            spec: '', 
+            geo: ''
+        })
+
         if (day === 1) {
             let arr = [...project]
             arr[item] = true

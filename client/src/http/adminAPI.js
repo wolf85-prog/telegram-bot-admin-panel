@@ -253,7 +253,7 @@ export const getProjectsApi = async () =>{
 
 export const getProjectsNewApi = async () =>{
     try {
-       let response = await $host.get('api/projectnew/get');
+       let response = await $host.get('api/projects/new/get');
        return response.data;
     } catch (error) {
         console.log("error while calling getProjectsApi api", error.message);

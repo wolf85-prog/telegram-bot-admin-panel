@@ -49,6 +49,20 @@ class ProjectController {
         }
     }
 
+
+    async getProjectsAll(req, res) {
+        try {
+            const projects = await ProjectNew.findAll({
+                order: [
+                    ['id', 'DESC'],
+                ],
+            })
+            return res.status(200).json(projects);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
     async getProjectNewId(req, res) {
         const {id} = req.params
         try {

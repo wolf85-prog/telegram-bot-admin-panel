@@ -468,61 +468,59 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
 
 const clickProjects = async() => {
   const fetchData = async () => {
-    let projects2 = await getProjectNewCash();
-    let projects3 = await getProjectCash();
-    //console.log("projects3: ", projects3)
-    setProjects(projects2)
+    // let projects2 = await getProjectNewCash();
+    // let projects3 = await getProjectCash();
+    // //console.log("projects3: ", projects3)
+    // setProjects(projects2)
 
-    console.log("Загрузка проектов из БД ...")
-    try {  
-        //notion
-        const projects = await getProjectNewDate()
-        console.log("projects: ", projects)  
+    // console.log("Загрузка проектов из БД ...")
+    // try {  
+    //     //notion
+    //     const projects = await getProjectNewDate()
+    //     console.log("projects: ", projects)  
 
-        const projectsNew = await getProjectNew()
-        console.log("projectsNew: ", projectsNew)
+    //     const projectsNew = await getProjectNew()
+    //     console.log("projectsNew: ", projectsNew)
 
         //добавление новых проектов
-        if (projects && projects.length > 0) {
-            projects.map(async(project)=> {
-                const id = project.id
+        // if (projects && projects.length > 0) {
+        //     projects.map(async(project)=> {
+        //         const id = project.id
                 
-                let exist = await getProjectNewId(id)
-                const projCashDate = projects3.find((item)=>item.id === id)
-                //console.log("projCashDate: ", projCashDate)
+        //         let exist = await getProjectNewId(id)
+        //         const projCashDate = projects3.find((item)=>item.id === id)
+        //         //console.log("projCashDate: ", projCashDate)
                 
-                if(!exist){
-                    await getProjectNewCreate({
-                      id: project.id, 
-                      name: project.name, 
-                      datestart: projCashDate.dateStart, //project.datestart, 
-                      crmID: project.crmID, 
-                      dateend: projCashDate.dateEnd !== null ? projCashDate.dateEnd : projCashDate.dateStart, //project.datestart, 
-                    })
-                } else {
-                    await getProjectNewUpdate({name: project.name, id: project.id})    
-                    console.log("Проект в кеше обновлен!")   
-                }   
-            })
+        //         if(!exist){
+        //             await getProjectNewCreate({
+        //               id: project.id, 
+        //               name: project.name, 
+        //               datestart: projCashDate.dateStart, //project.datestart, 
+        //               crmID: project.crmID, 
+        //               dateend: projCashDate.dateEnd !== null ? projCashDate.dateEnd : projCashDate.dateStart, //project.datestart, 
+        //             })
+        //         } else {
+        //             await getProjectNewUpdate({name: project.name, id: project.id})    
+        //             console.log("Проект в кеше обновлен!")   
+        //         }   
+        //     })
 
-            //удаление старых проектов
-            projectsNew.map(async(project, index)=> {
-                const projectOld = projects.find(item => item.id === project.id)
-                //console.log("projectOld: ", projectOld)
-                if (projectOld === undefined) {
-                    await getProjectNewDel({
-                            id: project.id,
-                        })
-                    console.log("Удаленный проект: ", index)
-                }
-            })
-        }  
+        //     //удаление старых проектов
+        //     projectsNew.map(async(project, index)=> {
+        //         const projectOld = projects.find(item => item.id === project.id)
+        //         //console.log("projectOld: ", projectOld)
+        //         if (projectOld === undefined) {
+        //             await getProjectNewDel({
+        //                     id: project.id,
+        //                 })
+        //             console.log("Удаленный проект: ", index)
+        //         }
+        //     })
+        // }  
 
-    } catch (error) {
-        console.error(error.message)
-    }
-
-    
+    // } catch (error) {
+    //     console.error(error.message)
+    // }
   }
 
   fetchData();
