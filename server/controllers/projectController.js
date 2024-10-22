@@ -81,7 +81,7 @@ class ProjectController {
 
 
     async getProjectNewCreate(req, res) {
-        const {id, name, datestart, dateend, crmID, teh, 
+        const {id, name, datestart, dateend, teh, 
             managerId, companyId, chatId, spec, geo} = req.body
         try {
             const project = await ProjectNew.create({ 
@@ -89,7 +89,6 @@ class ProjectController {
                 name, 
                 dateStart: datestart, 
                 dateEnd: dateend, 
-                crmID, 
                 teh,
                 managerId,
                 companyId,

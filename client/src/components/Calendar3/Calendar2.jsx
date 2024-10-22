@@ -196,6 +196,8 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
             geo: ''
         })
 
+        console.log("res: ", res)
+
         setProjectName(projectTitle)
 
         if (day === 1) {
