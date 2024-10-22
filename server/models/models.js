@@ -55,14 +55,13 @@ const ProjectNew = sequelize.define('projectnew', {
     name: {type: DataTypes.STRING},  //название проекта
     dateStart: {type: DataTypes.STRING},  //дата начала проекта
     dateEnd: {type: DataTypes.STRING},  //дата окончания проекта
-    spec: {type: DataTypes.STRING},
-    equipment: {type: DataTypes.STRING},
     teh: {type: DataTypes.STRING},
     geo: {type: DataTypes.STRING},
     managerId: {type: DataTypes.STRING},
     companyId: {type: DataTypes.STRING},
-    projectId: {type: DataTypes.STRING},
     chatId: {type: DataTypes.STRING},
+    spec: {type: DataTypes.STRING},
+    equipment: {type: DataTypes.STRING},
 })
 
 const Distribution = sequelize.define('distribution', {
