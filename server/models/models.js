@@ -49,6 +49,22 @@ const Project = sequelize.define('project', {
     chatId: {type: DataTypes.STRING},
 })
 
+const ProjectNew = sequelize.define('projectnew', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    crmID: {type: DataTypes.STRING},
+    name: {type: DataTypes.STRING},  //название проекта
+    dateStart: {type: DataTypes.STRING},  //дата начала проекта
+    dateEnd: {type: DataTypes.STRING},  //дата окончания проекта
+    spec: {type: DataTypes.STRING},
+    equipment: {type: DataTypes.STRING},
+    teh: {type: DataTypes.STRING},
+    geo: {type: DataTypes.STRING},
+    managerId: {type: DataTypes.STRING},
+    companyId: {type: DataTypes.STRING},
+    projectId: {type: DataTypes.STRING},
+    chatId: {type: DataTypes.STRING},
+})
+
 const Distribution = sequelize.define('distribution', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
     name: {type: DataTypes.STRING},  //название рассылки
@@ -123,13 +139,6 @@ const CountMessage = sequelize.define('countmessage', {
     projects: {type: DataTypes.INTEGER},
     workers: {type: DataTypes.INTEGER},
     pretendents: {type: DataTypes.INTEGER},
-})
-
-const ProjectNew = sequelize.define('projectnew', {
-    id: {type: DataTypes.STRING, primaryKey: true}, // id проекта
-    name: {type: DataTypes.STRING},  //название проекта
-    datestart: {type: DataTypes.STRING}, //начало
-    crmID: {type: DataTypes.STRING},
 })
 
 const Specialist = sequelize.define('specialist', {
