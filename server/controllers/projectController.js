@@ -67,15 +67,23 @@ class ProjectController {
 
 
     async getProjectNewCreate(req, res) {
-        const {id, name, datestart, crmID} = req.body
+        const {id, name, datestart, dateend, crmID, teh, 
+            managerId, companyId, chatId, spec, geo} = req.body
         try {
-            const projects = await ProjectNew.create({ 
-                id: id, 
-                name: name, 
-                datestart: datestart, 
-                crmID: crmID, 
+            const project = await ProjectNew.create({ 
+                id, 
+                name, 
+                dateStart: datestart, 
+                dateEnd: dateend, 
+                crmID, 
+                teh,
+                managerId,
+                companyId,
+                chatId,
+                spec,
+                geo,
             })
-            return res.status(200).json(projects);
+            return res.status(200).json(project);
         } catch (error) {
             return res.status(500).json(error.message);
         }
