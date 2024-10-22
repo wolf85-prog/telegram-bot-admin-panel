@@ -25,13 +25,13 @@ const Dropdown6 = ({options, selected, setSelected, placeholder, style}) => {
       setFilterOptions(selected.name === '' ? options : arr)
     }, [selected])
 
-    const selectOption = (e, color) => {
+    const selectOption = (e) => {
         setSelected(e.target.innerText)
         setMenuShow(!menuShow)
     }
 
     const dropdownList = filterOptions.map((option, i) =>
-        <li key={i} onClick={(e)=>selectOption(e, option.color)} style={{color: `${option.color}`}}>{option.label}</li>
+        <li key={i} onClick={(e)=>selectOption(e)}>{option.label}</li>
     )
 
     const wrapperRef = useRef(null);

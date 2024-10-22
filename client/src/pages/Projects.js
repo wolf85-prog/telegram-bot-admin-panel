@@ -1012,7 +1012,7 @@ const Projects = () => {
                           <CCardHeader onClick={() => setVisibleB(!visibleB)}>Претенденты</CCardHeader>
                           <CCollapse visible={visibleB}>
                             <CCardBody style={{padding: '12px'}}>
-                            <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1592px', borderRadius: '5px' }}>
+                            <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1471px', borderRadius: '5px' }}>
                                 <CTableHead className="text-center" color="light">
                                   <CTableRow>
                                     <CTableHeaderCell className="text-center" style={{width: '61px'}}>
@@ -1062,17 +1062,11 @@ const Projects = () => {
                                         setSelected={setStatusPretendent}
                                         // onChange={addCity}
                                         placeholder='—'
-                                        styles={{height: '100px'}}
+                                        style={{height: '105px'}}
                                       />
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
-                                      <MyDropdown6
-                                        options={workersData}
-                                        selected={specialistName}
-                                        setSelected={setSpecialistName}
-                                        placeholder=''
-                                        style={{width: '370px'}}
-                                      />
+                                      Иванов Иван Иванович
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                       <img src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
