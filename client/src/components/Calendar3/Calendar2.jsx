@@ -187,7 +187,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
             name: projectTitle, 
             datestart: '', 
             dateend: '', 
-            crmID: '', 
+            //crmID: '', 
             teh: '', 
             managerId: '', 
             companyId: '', 
