@@ -1,5 +1,5 @@
 const sequelize = require('../db')
-const {DataTypes} = require('sequelize')
+const {literal, DataTypes} = require('sequelize')
 
 const User = sequelize.define('user', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -51,7 +51,7 @@ const Project = sequelize.define('project', {
 
 const ProjectNew = sequelize.define('projectnew', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    crmID: {type: DataTypes.INTEGER, autoIncrement: true},
+    crmID: {type: DataTypes.INTEGER, defaultValue: literal("nextval(1000)"),},
     name: {type: DataTypes.STRING},  //название проекта
     dateStart: {type: DataTypes.STRING},  //дата начала проекта
     dateEnd: {type: DataTypes.STRING},  //дата окончания проекта
