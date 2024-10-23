@@ -103,12 +103,11 @@ class ProjectController {
                 spec,
                 geo,
                 equipment,
-                index,
             }
-            console.log(obj)
+            //console.log(obj)
 
-            //const project = await ProjectNew.create(obj)
-            //return res.status(200).json(project);
+            const project = await ProjectNew.create(obj)
+            return res.status(200).json(project);
         } catch (error) {
             return res.status(500).json(error.message);
         }
