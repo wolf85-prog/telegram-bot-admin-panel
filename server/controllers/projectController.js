@@ -83,7 +83,7 @@ class ProjectController {
 
     async getProjectNewCreate(req, res) {
         const {name, datestart, dateend, teh, 
-            managerId, companyId, chatId, spec, geo, equipment} = req.body
+            managerId, companyId, chatId, spec, geo, equipment, index} = req.body
 
         
         
@@ -93,21 +93,21 @@ class ProjectController {
                 // тип запроса - выборка
                 type: QueryTypes.SELECT,
               })
-            console.log("generateId: ", generateId)
-            // const project = await ProjectNew.create({ 
-            //     name, 
-            //     crmId: generateId,
-            //     dateStart: datestart, 
-            //     dateEnd: dateend, 
-            //     teh,
-            //     managerId,
-            //     companyId,
-            //     chatId,
-            //     spec,
-            //     geo,
-            //     equipment,
-            // })
-            return generateId;
+            //console.log("generateId: ", generateId)
+            const project = await ProjectNew.create({ 
+                name, 
+                crmId: generateId[index].generate_series,
+                dateStart: datestart, 
+                dateEnd: dateend, 
+                teh,
+                managerId,
+                companyId,
+                chatId,
+                spec,
+                geo,
+                equipment,
+            })
+            return res.status(200).json(project);
         } catch (error) {
             return res.status(500).json(error.message);
         }
