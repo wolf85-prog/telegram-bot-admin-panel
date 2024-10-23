@@ -40,6 +40,12 @@ import {
 } from '@tanstack/react-table'
 import Autocomplete from '@mui/material/Autocomplete';
 
+import dayjs from 'dayjs';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DesktopDateTimePicker } from '@mui/x-date-pickers/DesktopDateTimePicker';
+
 import DatePicker from "react-datepicker";
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
@@ -85,6 +91,8 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
+import { getProjects } from '../http/projectAPI'
+
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
   const { companysAll, managersAll, workersAll } = useUsersContext();
@@ -97,6 +105,8 @@ const Projects = () => {
   const [showProject, setShowProject] = useState(false)
 
   const [height, setHeight] = useState(600)
+
+  const [projects, setProjects] = useState([]);
 
   const [id, setId] = useState('');
   const [projectName, setProjectName] = useState('');
@@ -206,6 +216,16 @@ const Projects = () => {
     })
     console.log("arrWorkers: ", arrWorkers)
     setWorkersData(arrWorkers)
+
+    //4
+    const fetchData = async() => {
+      const projs = await getProjects()
+      console.log("projs: ", projs)
+      setProjects(projs)
+    }
+
+    fetchData()
+    
 }, [])
 
   const closeProfile = () => {
@@ -352,7 +372,7 @@ const Projects = () => {
                                 <h2 style={{marginTop: '25%', textAlign: 'center'}}>Раздел находится в разработке</h2>
                                 :
                                 (showCalendar2 ?
-                                  <Calendar2 openProject={openProject} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
+                                  <Calendar2 openProject={openProject} projects={projects} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
                                   : 
                                   (showProject ? 
                                     <div style={{position: 'relative', height: '494px', display: 'flex', flexDirection: 'row', marginTop: '35px'}}>
@@ -852,6 +872,9 @@ const Projects = () => {
                                       <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
+                                      {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DesktopDateTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
+                                      </LocalizationProvider> */}
                                       01.01.2024 | 00:00
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center">

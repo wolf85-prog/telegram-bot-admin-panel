@@ -10,7 +10,7 @@ import Select from 'react-select'
 import { useUsersContext } from "../../chat-app-new/context/usersContext";
 import { addProject } from '../../http/projectAPI'
 
-export default function Calendar2({openProject, setHeight, showSidebar, setShowSidebar, setShowProject, setShowCalendar, setShowCalendar2}) {
+export default function Calendar2({projects, openProject, setHeight, showSidebar, setShowSidebar, setShowProject, setShowCalendar, setShowCalendar2}) {
     //const { MONTHS, date, setDate, day, setDay, month, setMonth, year, setYear, startDay, setStartDay, currentDays, DAYS_OF_THE_WEEK } = useUsersContext();
     const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -181,31 +181,30 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
 
     const addNewProject = async(item, number, day) => {
 
-        //console.log(day)
+        console.log(day)
+
+        day.setHours(day.getHours() + 12);
 
         const projectTitle = 'Новый проект'
 
-        //let indCrm = Array(1000, 10000).indexOf(2000, 0)
-        console.log("indCrm: ", new Array(1000, 10000))
+        const res = await addProject({
+            name: projectTitle, 
+            datestart: day, 
+            dateend: day, 
+            teh: '', 
+            managerId: '210', 
+            companyId: '21', 
+            chatId: '1775583141', 
+            spec: '', 
+            geo: '',
+            index: 1,
+        })
 
-        // const res = await addProject({
-        //     name: projectTitle, 
-        //     datestart: day, 
-        //     dateend: day, 
-        //     teh: '', 
-        //     managerId: '210', 
-        //     companyId: '21', 
-        //     chatId: '1775583141', 
-        //     spec: '', 
-        //     geo: '',
-        //     index: 3,
-        // })
-
-        //console.log("res: ", res)
+        console.log("res: ", res)
 
         setProjectName(projectTitle)
 
-        if (day === 1) {
+        if (number === 1) {
             let arr = [...project]
             arr[item] = true
             setProject(arr)
@@ -214,7 +213,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
             arr2[item] = false
             setShowButtonAdd(arr2)
         } else 
-        if (day === 2) {
+        if (number === 2) {
             let arr = [...project2]
             arr[item] = true
             setProject2(arr)
@@ -223,7 +222,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
             arr2[item] = false
             setShowButtonAdd2(arr2)
         } else 
-        if (day === 3) {
+        if (number === 3) {
             let arr = [...project3]
             arr[item] = true
             setProject3(arr)
@@ -232,7 +231,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
             arr2[item] = false
             setShowButtonAdd3(arr2)
         } else 
-        if (day === 4) {
+        if (number === 4) {
             let arr = [...project4]
             arr[item] = true
             setProject4(arr)
@@ -241,7 +240,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
             arr2[item] = false
             setShowButtonAdd4(arr2)
         } else 
-        if (day === 5) {
+        if (number === 5) {
             let arr = [...project5]
             arr[item] = true
             setProject5(arr)
@@ -250,7 +249,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
             arr2[item] = false
             setShowButtonAdd5(arr2)
         } else 
-        if (day === 6) {
+        if (number === 6) {
             let arr = [...project6]
             arr[item] = true
             setProject6(arr)
@@ -259,7 +258,7 @@ export default function Calendar2({openProject, setHeight, showSidebar, setShowS
             arr2[item] = false
             setShowButtonAdd6(arr2)
         } else 
-        if (day === 7) {
+        if (number === 7) {
             let arr = [...project7]
             arr[item] = true
             setProject7(arr)
