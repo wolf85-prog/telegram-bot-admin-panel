@@ -91,19 +91,19 @@ class ProjectController {
           })
         
         try {
-            const project = await ProjectNew.create({ 
-                name, 
-                crmId: generateId,
-                dateStart: datestart, 
-                dateEnd: dateend, 
-                teh,
-                managerId,
-                companyId,
-                chatId,
-                spec,
-                geo,
-                equipment,
-            })
+            // const project = await ProjectNew.create({ 
+            //     name, 
+            //     crmId: generateId,
+            //     dateStart: datestart, 
+            //     dateEnd: dateend, 
+            //     teh,
+            //     managerId,
+            //     companyId,
+            //     chatId,
+            //     spec,
+            //     geo,
+            //     equipment,
+            // })
             return generateId;
         } catch (error) {
             return res.status(500).json(error.message);
