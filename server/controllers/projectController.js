@@ -83,9 +83,9 @@ class ProjectController {
 
     async getProjectNewCreate(req, res) {
         const {name, datestart, dateend, teh, 
-            managerId, companyId, chatId, spec, geo} = req.body
+            managerId, companyId, chatId, spec, geo, equipment} = req.body
 
-        const crmId = await sequelize.query('SELECT generate_series(1000,10000,1)', {
+        const generateId = await sequelize.query('SELECT generate_series(1000,10000,1)', {
             // тип запроса - выборка
             type: QueryTypes.SELECT,
           })
@@ -93,7 +93,7 @@ class ProjectController {
         try {
             const project = await ProjectNew.create({ 
                 name, 
-                crmId,
+                crmId: generateId,
                 dateStart: datestart, 
                 dateEnd: dateend, 
                 teh,
@@ -102,8 +102,9 @@ class ProjectController {
                 chatId,
                 spec,
                 geo,
+                equipment,
             })
-            return res.status(200).json(project);
+            return generateId;
         } catch (error) {
             return res.status(500).json(error.message);
         }
