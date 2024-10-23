@@ -92,11 +92,9 @@ class ProjectController {
               })
 
               const generateId = generate[index].generate_series
-
-              console.log("generateId: ", generateId)
             
               const obj = {                
-                crmId: generateId.toString(),
+                crmID: generateId.toString(),
                 name,
                 dateStart: datestart, 
                 dateEnd: dateend, 
@@ -108,7 +106,6 @@ class ProjectController {
                 spec,  
                 equipment,
             }
-            console.log(obj)
 
             const project = await ProjectNew.create(obj)
             return res.status(200).json(project);
