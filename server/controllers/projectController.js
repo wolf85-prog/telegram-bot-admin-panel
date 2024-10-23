@@ -1,7 +1,7 @@
 const Project = require('../models/Project')
 const ApiError = require('../error/ApiError')
 const {ProjectNew} = require('../models/models');
-const { Op } = require('sequelize')
+const { Op, QueryTypes  } = require('sequelize')
 
 class ProjectController {
 
@@ -81,8 +81,14 @@ class ProjectController {
 
 
     async getProjectNewCreate(req, res) {
-        const {name, crmId, datestart, dateend, teh, 
+        const {name, datestart, dateend, teh, 
             managerId, companyId, chatId, spec, geo} = req.body
+
+        const crmId = await sequelize.query('SELECT generate_series(1000,10000,1)', {
+            // тип запроса - выборка
+            type: QueryTypes.SELECT,
+          })
+        
         try {
             const project = await ProjectNew.create({ 
                 name, 
