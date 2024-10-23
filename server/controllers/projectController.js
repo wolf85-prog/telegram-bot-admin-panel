@@ -90,6 +90,8 @@ class ProjectController {
                 // тип запроса - выборка
                 type: QueryTypes.SELECT,
               })
+
+              console.log("generateId: ", generateId[index].generate_series, index)
             
               const obj = { 
                 name, 
