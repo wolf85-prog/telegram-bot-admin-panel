@@ -96,7 +96,7 @@ class ProjectController {
               console.log("generateId: ", generateId)
             
               const obj = {                
-                crmId: generateId,
+                crmId: generateId.toString(),
                 name,
                 dateStart: datestart, 
                 dateEnd: dateend, 
