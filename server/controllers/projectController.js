@@ -85,12 +85,15 @@ class ProjectController {
         const {name, datestart, dateend, teh, 
             managerId, companyId, chatId, spec, geo, equipment} = req.body
 
-        const generateId = await sequelize.query('SELECT generate_series(1000,10000,1)', {
-            // тип запроса - выборка
-            type: QueryTypes.SELECT,
-          })
+        
         
         try {
+
+            const generateId = await sequelize.query('SELECT generate_series(1000,10000,1)', {
+                // тип запроса - выборка
+                type: QueryTypes.SELECT,
+              })
+            console.log("generateId: ", generateId)
             // const project = await ProjectNew.create({ 
             //     name, 
             //     crmId: generateId,
