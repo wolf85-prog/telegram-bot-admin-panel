@@ -85,16 +85,13 @@ class ProjectController {
         const {name, datestart, dateend, teh, 
             managerId, companyId, chatId, spec, geo, equipment, index} = req.body
 
-        
-        
         try {
-
             const generateId = await sequelize.query('SELECT generate_series(1000,10000,1)', {
                 // тип запроса - выборка
                 type: QueryTypes.SELECT,
               })
-            //console.log("generateId: ", generateId)
-            const project = await ProjectNew.create({ 
+            
+              const obj = { 
                 name, 
                 crmId: generateId[index].generate_series,
                 dateStart: datestart, 
@@ -106,8 +103,12 @@ class ProjectController {
                 spec,
                 geo,
                 equipment,
-            })
-            return res.status(200).json(project);
+                index,
+            }
+            console.log(obj)
+
+            //const project = await ProjectNew.create(obj)
+            //return res.status(200).json(project);
         } catch (error) {
             return res.status(500).json(error.message);
         }
