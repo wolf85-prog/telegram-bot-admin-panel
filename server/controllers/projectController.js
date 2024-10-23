@@ -1,6 +1,7 @@
 const Project = require('../models/Project')
 const ApiError = require('../error/ApiError')
 const {ProjectNew} = require('../models/models');
+const sequelize = require('../db')
 const { Op, QueryTypes  } = require('sequelize')
 
 class ProjectController {
