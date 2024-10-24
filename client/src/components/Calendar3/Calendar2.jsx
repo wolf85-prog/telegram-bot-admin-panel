@@ -62,20 +62,22 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
 
         Array(days[month] + (startDay - 1)).fill(null).map((_, index) => {
 
-            if (index !== 0) {
+            //if (index !== 0) {
                 const d = index - (startDay - 2);
                 
-                if (new Date(2024, month, d).setHours(new Date(2024, month, d).getHours() + 9) === new Date(projects[0]?.dateStart).setHours(new Date(projects[0]?.dateStart).getHours() - 3)) {
-                    // console.log("d: ", 
-                    //     new Date(2024, month, d).setHours(new Date(2024, month, d).getHours() + 9),
-                    //     new Date(projects[0]?.dateStart).setHours(new Date(projects[0]?.dateStart).getHours() - 3)
-                    // )
-
-                    let arr = []
-                    arr[index] = true
-                    setProject(arr)
-                }
-            }
+                projects.map((item, ind)=> {
+                    if (new Date(2024, month, d).setHours(new Date(2024, month, d).getHours() + 9) === new Date(item?.dateStart).setHours(new Date(item?.dateStart).getHours() - 3)) {
+                        console.log("d: ", ind,
+                            new Date(2024, month, d).setHours(new Date(2024, month, d).getHours() + 9),
+                            new Date(item.dateStart).setHours(new Date(item?.dateStart).getHours() - 3)
+                        )
+    
+                        let arr = [...project]
+                        arr[index] = true
+                        setProject(arr)
+                    }
+                })
+            //}
         })
 
 
@@ -211,9 +213,9 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
 
         console.log(day)
 
-        day.setHours(day.getHours() + 12);
+        day.setHours(day.getHours() + 3); //00:00
 
-        const projectTitle = 'Новый проект'
+        const projectTitle = 'Название проекта'
 
         const res = await addProject({
             name: projectTitle, 
