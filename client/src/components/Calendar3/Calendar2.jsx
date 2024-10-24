@@ -305,6 +305,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             arr[item] = true
             setProject(arr)
 
+            let nameProj = []
+            nameProj[item] = projectTitle
+            setProjectName(nameProj)
+
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd(arr2)
@@ -313,6 +317,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             let arr = [...project2]
             arr[item] = true
             setProject2(arr)
+
+            let nameProj = []
+            nameProj[item] = projectTitle
+            setProjectName2(nameProj)
 
             let arr2 = []
             arr2[item] = false
@@ -323,6 +331,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             arr[item] = true
             setProject3(arr)
 
+            let nameProj = []
+            nameProj[item] = projectTitle
+            setProjectName3(nameProj)
+
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd3(arr2)
@@ -331,6 +343,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             let arr = [...project4]
             arr[item] = true
             setProject4(arr)
+
+            let nameProj = []
+            nameProj[item] = projectTitle
+            setProjectName4(nameProj)
 
             let arr2 = []
             arr2[item] = false
@@ -341,6 +357,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             arr[item] = true
             setProject5(arr)
 
+            let nameProj = []
+            nameProj[item] = projectTitle
+            setProjectName5(nameProj)
+
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd5(arr2)
@@ -350,6 +370,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             arr[item] = true
             setProject6(arr)
 
+            let nameProj = []
+            nameProj[item] = projectTitle
+            setProjectName6(nameProj)
+
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd6(arr2)
@@ -358,6 +382,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             let arr = [...project7]
             arr[item] = true
             setProject7(arr)
+
+            let nameProj = []
+            nameProj[item] = projectTitle
+            setProjectName7(nameProj)
 
             let arr2 = []
             arr2[item] = false
