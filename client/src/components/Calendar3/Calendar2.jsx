@@ -58,6 +58,31 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
     const ref = useRef(null)
 
     useEffect(() => {
+        console.log("projects: ", projects)
+
+        Array(days[month] + (startDay - 1)).fill(null).map((_, index) => {
+
+            if (index !== 0) {
+                const d = index - (startDay - 2);
+                
+                if (new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours() + 9)) === new Date(new Date(projects[0]?.dateStart).setHours(new Date(projects[0]?.dateStart).getHours() - 3))) {
+                    console.log("d: ", 
+                        new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours() + 9))
+                    )
+                }
+            }
+        })
+
+
+
+        // let arr = [...project]
+        // arr[item] = true
+        // setProject(arr)
+
+
+    }, [])
+
+    useEffect(() => {
         //console.log(ref.current.clientHeight)
         setHeight(ref.current.clientHeight + 74)
     })
