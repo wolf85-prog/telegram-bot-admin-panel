@@ -413,7 +413,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName[index]}</p>   
                                         <p className='viewStatus'>Новый</p>
 
-                                        <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
+                                        <p className='time-project' style={{color: '#1555f5'}}>00:00</p>
                                     </div></>
                                     : <></>
                                 }
@@ -430,7 +430,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName2[index]}</p>   
                                         <p className='viewStatus'>Новый</p>
 
-                                        <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
+                                        <p className='time-project' style={{color: '#1555f5'}}>00:00</p>
                                     </div></>
                                     : <></>
                                 }
@@ -447,7 +447,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName3[index]}</p>   
                                         <p className='viewStatus'>Новый</p>
 
-                                        <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
+                                        <p className='time-project' style={{color: '#1555f5'}}>00:00</p>
                                     </div></>
                                     : <></>
                                 }
@@ -464,7 +464,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName4[index]}</p>   
                                         <p className='viewStatus'>Новый</p>
 
-                                        <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
+                                        <p className='time-project' style={{color: '#1555f5'}}>00:00</p>
                                     </div></>
                                     : <></>
                                 }
@@ -481,7 +481,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName5[index]}</p>   
                                         <p className='viewStatus'>Новый</p>
 
-                                        <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
+                                        <p className='time-project' style={{color: '#1555f5'}}>00:00</p>
                                     </div></>
                                     : <></>
                                 }
@@ -498,7 +498,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName6[index]}</p>   
                                         <p className='viewStatus'>Новый</p>
 
-                                        <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
+                                        <p className='time-project' style={{color: '#1555f5'}}>00:00</p>
                                     </div></>
                                     : <></>
                                 }
@@ -515,7 +515,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName7[index]}</p>   
                                         <p className='viewStatus'>Новый</p>
 
-                                        <p className='time-project' style={{color: '#1555f5'}}>09:00</p>
+                                        <p className='time-project' style={{color: '#1555f5'}}>00:00</p>
                                     </div></>
                                     : <></>
                                 }
