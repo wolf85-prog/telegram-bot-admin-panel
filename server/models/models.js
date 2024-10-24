@@ -62,6 +62,7 @@ const ProjectNew = sequelize.define('projectnew', {
     chatId: {type: DataTypes.STRING},
     spec: {type: DataTypes.STRING},
     equipment: {type: DataTypes.STRING},
+    number: {type: DataTypes.INTEGER},
 })
 
 const Distribution = sequelize.define('distribution', {

@@ -60,24 +60,23 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
     useEffect(() => {
         console.log("projects: ", projects)
 
-        Array(days[month] + (startDay - 1)).fill(null).map((_, index) => {
+        let arr = []
 
-            //if (index !== 0) {
-                const d = index - (startDay - 2);
+        Array(days[month] + (startDay - 1)).fill(null).map((_, index) => {
+            const d = index - (startDay - 2);
                 
-                projects.map((item, ind)=> {
-                    if (new Date(2024, month, d).setHours(new Date(2024, month, d).getHours() + 9) === new Date(item?.dateStart).setHours(new Date(item?.dateStart).getHours() - 3)) {
-                        console.log("d: ", ind,
-                            new Date(2024, month, d).setHours(new Date(2024, month, d).getHours() + 9),
-                            new Date(item.dateStart).setHours(new Date(item?.dateStart).getHours() - 3)
-                        )
-    
-                        let arr = [...project]
-                        arr[index] = true
-                        setProject(arr)
-                    }
-                })
-            //}
+            projects.map((item, ind)=> {
+                if (new Date(2024, month, d).setHours(new Date(2024, month, d).getHours() + 9) === new Date(item?.dateStart).setHours(new Date(item?.dateStart).getHours() - 3)) {
+                    console.log("d: ", ind,
+                        new Date(2024, month, d).setHours(new Date(2024, month, d).getHours() + 9),
+                        new Date(item.dateStart).setHours(new Date(item?.dateStart).getHours() - 3)
+                    )
+
+                    arr[index] = true
+                }
+            })
+
+            setProject(arr)     
         })
 
 
@@ -85,7 +84,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
         
 
 
-    }, [])
+    }, [projects])
 
     useEffect(() => {
         //console.log(ref.current.clientHeight)
@@ -228,6 +227,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             spec: '', 
             geo: '',
             index: 1,
+            number: number,
         })
 
         console.log("res: ", res)
