@@ -123,7 +123,7 @@ route.get('/projectnew/get', getProjectsAll)
 route.get('/projectnew/get/:id', getProjectNewId)
 route.post('/projectnew/add', getProjectNewCreate)
 route.post('/projectnew/update', getProjectNewUpdate)
-route.post('/projectnew/delete/:id', getProjectNewDel)
+route.get('/projectnew/delete/:id', getProjectNewDel)
 
 route.post("/file/upload", upload.single("photo"), uploadFile);
 route.post("/file/distrib", uploadDistrib.single("photo"), uploadFile);
