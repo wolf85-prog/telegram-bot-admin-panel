@@ -118,8 +118,15 @@ class ProjectController {
     async getProjectNewUpdate(req, res) {
         const {id} = req.params 
         const {name} = req.body
-        
+
         try {
+            let exist=await ProjectNew.findOne( {where: {id: id}} )
+            
+            if(!exist){
+                res.status(500).json({msg: "project not exist"});
+                return;
+            }
+
             const projects = await ProjectNew.update(
                 {
                     name: name
