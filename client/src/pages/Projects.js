@@ -232,6 +232,7 @@ const savePorject = async(id) => {
 
   const saveData = {
     name: projectName,
+    status: statusProject,
   }
   console.log(saveData)
 
@@ -249,6 +250,7 @@ const savePorject = async(id) => {
     const userObject = usersCopy[userIndex];
     usersCopy[userIndex] = { ...userObject, 
       name: projectName, 
+      status: statusProject.name
     };
 
     console.log("update user: ", usersCopy)
