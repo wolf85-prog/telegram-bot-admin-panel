@@ -238,9 +238,12 @@ const savePorject = async(id) => {
   //сохранить изменения в базе
   await editProject(saveData, id)
 
+  console.log("id: ", id)
+
   setProjects((projects) => {	
 
     let userIndex = projects.findIndex((item) => item.id === id);
+    console.log(userIndex)
     const usersCopy = JSON.parse(JSON.stringify(projects));
 
     const userObject = usersCopy[userIndex];
@@ -248,7 +251,7 @@ const savePorject = async(id) => {
       name: projectName, 
     };
 
-    console.log("update user: ", usersCopy[userIndex])
+    console.log("update user: ", usersCopy)
 
     return usersCopy;
   });
@@ -423,7 +426,7 @@ const savePorject = async(id) => {
                                                   <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                                   <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                                   <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                                  <img src={Disketa} onClick={savePorject} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                                  <img src={Disketa} onClick={()=>savePorject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                                   <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                                 </div>
                                               </div>
