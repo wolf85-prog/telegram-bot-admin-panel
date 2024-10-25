@@ -53,14 +53,19 @@ const ProjectNew = sequelize.define('projectnew', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     crmID: {type: DataTypes.STRING},
     name: {type: DataTypes.STRING},  //название проекта
+    status: {type: DataTypes.STRING},
+    specifika: {type: DataTypes.STRING},
+    city: {type: DataTypes.STRING},
     dateStart: {type: DataTypes.STRING},  //дата начала проекта
     dateEnd: {type: DataTypes.STRING},  //дата окончания проекта
     teh: {type: DataTypes.STRING},
     geo: {type: DataTypes.STRING},
     managerId: {type: DataTypes.STRING},
+    managerId2: {type: DataTypes.STRING},
     companyId: {type: DataTypes.STRING},
     chatId: {type: DataTypes.STRING},
     spec: {type: DataTypes.STRING},
+    comment: {type: DataTypes.TEXT},
     equipment: {type: DataTypes.STRING},
     number: {type: DataTypes.INTEGER},
 })
