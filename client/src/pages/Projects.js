@@ -232,7 +232,7 @@ const savePorject = async(id) => {
 
   const saveData = {
     name: projectName,
-    status: statusProject,
+    status: statusProject.name,
   }
   console.log(saveData)
 
