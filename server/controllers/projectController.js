@@ -133,7 +133,7 @@ class ProjectController {
     }
 
     async getProjectNewDel(req, res) {
-        const {id} = req.body
+        const {id} = req.params
         try {
             const projects = await ProjectNew.destroy({
                 where: {

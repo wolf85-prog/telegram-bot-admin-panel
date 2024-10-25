@@ -61,6 +61,14 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
     const [projectName6, setProjectName6] = useState([])
     const [projectName7, setProjectName7] = useState([])
 
+    const [projectId, setProjectId] = useState([])
+    const [projectId2, setProjectId2] = useState([])
+    const [projectId3, setProjectId3] = useState([])
+    const [projectId4, setProjectId4] = useState([])
+    const [projectId5, setProjectId5] = useState([])
+    const [projectId6, setProjectId6] = useState([])
+    const [projectId7, setProjectId7] = useState([])
+
     const ref = useRef(null)
 
     useEffect(() => {
@@ -82,57 +90,80 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
         let nameProj6 = []
         let nameProj7 = []
 
+        let idProj = [] 
+        let idProj2 = []
+        let idProj3 = []
+        let idProj4 = []
+        let idProj5 = []
+        let idProj6 = []
+        let idProj7 = []
+
         Array(days[month] + (startDay - 1)).fill(null).map((_, index) => {
             const d = index - (startDay - 2);
                 
             projects.map((item, ind)=> {
-                if (new Date(2024, month, d).setHours(new Date(2024, month, d).getHours() + 9) === new Date(item?.dateStart).setHours(new Date(item?.dateStart).getHours() - 3)) {
-                    console.log("d: ", ind,
-                        new Date(2024, month, d).setHours(new Date(2024, month, d).getHours() + 9),
-                        new Date(item.dateStart).setHours(new Date(item?.dateStart).getHours() - 3)
-                    )
-
-                    
+                if (new Date(2024, month, d).getTime() === new Date(item?.dateStart).setHours(new Date(item?.dateStart).getHours() - 3)) {
+                    // console.log("d: ", ind,
+                    //     new Date(2024, month, d).getTime(),
+                    //     new Date(item.dateStart).setHours(new Date(item?.dateStart).getHours() - 3)
+                    // )  
 
                     if (item.number === 1) {
                        arr[index] = true 
                        nameProj[index] = item.name
                        setProjectName(nameProj)
+
+                       idProj[index] = item.id
+                       setProjectId(idProj)
                     } else 
                     if (item.number === 2) {
                         arr2[index] = true 
                         nameProj2[index] = item.name
                         setProjectName2(nameProj2)
+
+                        idProj2[index] = item.id
+                        setProjectId2(idProj2)
                     } else 
                     if (item.number === 3) {
                         arr3[index] = true 
                         nameProj3[index] = item.name
                         setProjectName3(nameProj3)
+
+                        idProj3[index] = item.id
+                        setProjectId3(idProj3)
                     } else 
                     if (item.number === 4) {
                         arr4[index] = true 
                         nameProj4[index] = item.name
                         setProjectName4(nameProj4)
+
+                        idProj4[index] = item.id
+                        setProjectId4(idProj4)
                     } else 
                     if (item.number === 5) {
                         arr5[index] = true 
                         nameProj5[index] = item.name
-                       setProjectName5(nameProj5)
+                        setProjectName5(nameProj5)
+
+                        idProj5[index] = item.id
+                        setProjectId5(idProj5)
                     } else 
                     if (item.number === 6) {
                         arr6[index] = true 
                         nameProj6[index] = item.name
                         setProjectName6(nameProj6)
+
+                        idProj6[index] = item.id
+                        setProjectId6(idProj6)
                     } else 
                     if (item.number === 7) {
                         arr7[index] = true 
                         nameProj7[index] = item.name
                         setProjectName7(nameProj7)
-                    } 
 
-                    console.log("arr: ", arr)
-                    console.log("arr2: ", arr2)
-                    
+                        idProj7[index] = item.id
+                        setProjectId7(idProj7)
+                    }                 
                 }
             })
 
@@ -144,11 +175,6 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             setProject6(arr6) 
             setProject7(arr7) 
         })
-
-
-
-        
-
 
     }, [projects])
 
@@ -437,7 +463,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                 </CButton>
                                 {project[index] ? 
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                    <div className='view-project' onClick={()=>openProject(index, 1)}>
+                                    <div className='view-project' onClick={()=>openProject(index, 1, projectId[index], projectName[index])}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName[index]}</p>   
                                         <p className='viewStatus'>Новый</p>
 
@@ -454,7 +480,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                 </CButton>
                                 {project2[index] ? 
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                    <div className='view-project' onClick={()=>openProject(index, 2)}>
+                                    <div className='view-project' onClick={()=>openProject(index, 2, projectId2[index], projectName2[index])}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName2[index]}</p>   
                                         <p className='viewStatus'>Новый</p>
 
@@ -465,13 +491,13 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                             </td>
                             <td className='day2' onMouseOver={()=>overDay(index, 3, new Date(2024, month, d))} onMouseOut={()=>outDay(index, 3)}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                <CButton onClick={()=>addNewProject(index, 3)} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd3[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
+                                <CButton onClick={()=>addNewProject(index, 3, new Date(2024, month, d))} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd3[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
                                 {project3[index] ? 
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                    <div className='view-project' onClick={()=>openProject(index, 3)}>
+                                    <div className='view-project' onClick={()=>openProject(index, 3, projectId3[index], projectName3[index])}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName3[index]}</p>   
                                         <p className='viewStatus'>Новый</p>
 
@@ -488,7 +514,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                 </CButton>
                                 {project4[index] ? 
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                    <div className='view-project' onClick={()=>openProject(index, 4)}>
+                                    <div className='view-project' onClick={()=>openProject(index, 4, projectId4[index], projectName4[index])}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName4[index]}</p>   
                                         <p className='viewStatus'>Новый</p>
 
@@ -505,7 +531,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                 </CButton>
                                 {project5[index] ? 
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                    <div className='view-project' onClick={()=>openProject(index, 5)}>
+                                    <div className='view-project' onClick={()=>openProject(index, 5, projectId5[index], projectName5[index])}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName5[index]}</p>   
                                         <p className='viewStatus'>Новый</p>
 
@@ -522,7 +548,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                 </CButton>
                                 {project6[index] ?
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                    <div className='view-project' onClick={()=>openProject(index, 6)}>
+                                    <div className='view-project' onClick={()=>openProject(index, 6, projectId6[index], projectName6[index])}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName6[index]}</p>   
                                         <p className='viewStatus'>Новый</p>
 
@@ -539,7 +565,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                 </CButton>
                                 {project7[index] ? 
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                    <div className='view-project' onClick={()=>openProject(index, 7)}>
+                                    <div className='view-project' onClick={()=>openProject(index, 7, projectId7[index], projectName6[index])}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName7[index]}</p>   
                                         <p className='viewStatus'>Новый</p>
 

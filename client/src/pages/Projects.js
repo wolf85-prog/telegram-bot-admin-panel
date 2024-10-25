@@ -91,7 +91,7 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
-import { getProjects } from '../http/projectAPI'
+import { getProjects, deleteProject } from '../http/projectAPI'
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
@@ -240,7 +240,7 @@ const Projects = () => {
   }, [height])
 
 
-  const openProject =(item, day) => {
+  const openProject =(item, day, id, name) => {
     console.log("item: ", item, day)
 
     setShowProject(true)
@@ -249,8 +249,8 @@ const Projects = () => {
 
     setStatusProject({name: 'Новый', color: '#1E90FF'})
 
-    setId(item)
-    setProjectName('Новый проект')
+    setId(id)
+    setProjectName(name)
     setStavka({label: "№1", name: "№1"})
 
     setHeight(509)
@@ -287,12 +287,16 @@ const Projects = () => {
     console.log(id)
     setVisibleDelete(false)
 
-    // await deleteSpecialist(id)
-    // addToast(deleteToast) //ваши данные сохранены
+    //удаление проекта из БД
+    await deleteProject(id)
 
-    // setSpecialist([...specialist].filter(item=>item.id !== id))
+    //addToast(deleteToast) //ваши данные сохранены
 
-    //setShowProfile(false)
+    //setSpecialist([...specialist].filter(item=>item.id !== id))
+
+    setShowProject(false)
+    setShowCalendar(false)
+    setShowCalendar2(true)
   }
 
 
