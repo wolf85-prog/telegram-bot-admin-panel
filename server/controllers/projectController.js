@@ -116,7 +116,9 @@ class ProjectController {
     }
 
     async getProjectNewUpdate(req, res) {
-        const {id, name} = req.body
+        const {id} = req.params 
+        const {name} = req.body
+        
         try {
             const projects = await ProjectNew.update(
                 {

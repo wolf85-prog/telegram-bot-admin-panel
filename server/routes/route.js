@@ -122,7 +122,7 @@ route.get('/projects/new/get', getProjectNew)
 route.get('/projectnew/get', getProjectsAll)
 route.get('/projectnew/get/:id', getProjectNewId)
 route.post('/projectnew/add', getProjectNewCreate)
-route.post('/projectnew/update', getProjectNewUpdate)
+route.patch('/projectnew/update/:id', getProjectNewUpdate)
 route.get('/projectnew/delete/:id', getProjectNewDel)
 
 route.post("/file/upload", upload.single("photo"), uploadFile);

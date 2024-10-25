@@ -91,7 +91,7 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
-import { getProjects, deleteProject } from '../http/projectAPI'
+import { getProjects, deleteProject, editProject } from '../http/projectAPI'
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
@@ -228,6 +228,22 @@ const Projects = () => {
     
 }, [])
 
+const savePorject = async(id) => {
+
+  const saveData = {
+    name: projectName,
+  }
+  console.log(saveData)
+
+  //сохранить изменения в базе
+  await editProject(saveData, id)
+
+  setShowProject(false)
+  setShowCalendar2(true)
+  setShowMainTable(false)
+  setShowPretendentTable(false)
+}
+
   const closeProfile = () => {
     setShowProject(false)
     setShowCalendar2(true)
@@ -292,7 +308,7 @@ const Projects = () => {
 
     //addToast(deleteToast) //ваши данные сохранены
 
-    //setSpecialist([...specialist].filter(item=>item.id !== id))
+    setProjects([...projects].filter(item=>item.id !== id))
 
     setShowProject(false)
     setShowCalendar(false)
@@ -392,7 +408,7 @@ const Projects = () => {
                                                   <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                                   <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                                   <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                                  <img src={Disketa}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                                  <img src={Disketa} onClick={savePorject} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                                   <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                                 </div>
                                               </div>
@@ -480,7 +496,7 @@ const Projects = () => {
                                         <div style={{textAlign: 'center', marginTop: '10px', width: '320px', marginRight: '40px'}}>
                                           <label className='title-label'>Проект</label>
                                           <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="projectName" id="projectName" value={projectName} style={{width: '320px'}}/>
+                                            <input disabled={false} className="text-field__input" type="text" name="projectName" id="projectName" value={projectName} onChange={(e)=>setProjectName(e.target.value)} style={{width: '320px'}}/>
                                           </div>
 
                                           <label className='title-label'>Компания</label>
