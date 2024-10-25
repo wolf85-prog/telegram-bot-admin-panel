@@ -61,6 +61,14 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
     const [projectName6, setProjectName6] = useState([])
     const [projectName7, setProjectName7] = useState([])
 
+    const [projectStatus, setProjectStatus] = useState([])
+    const [projectStatus2, setProjectStatus2] = useState([])
+    const [projectStatus3, setProjectStatus3] = useState([])
+    const [projectStatus4, setProjectStatus4] = useState([])
+    const [projectStatus5, setProjectStatus5] = useState([])
+    const [projectStatus6, setProjectStatus6] = useState([])
+    const [projectStatus7, setProjectStatus7] = useState([])
+
     const [projectId, setProjectId] = useState([])
     const [projectId2, setProjectId2] = useState([])
     const [projectId3, setProjectId3] = useState([])
@@ -90,6 +98,14 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
         let nameProj6 = []
         let nameProj7 = []
 
+        let statusProj = [] 
+        let statusProj2 = []
+        let statusProj3 = []
+        let statusProj4 = []
+        let statusProj5 = []
+        let statusProj6 = []
+        let statusProj7 = []
+
         let idProj = [] 
         let idProj2 = []
         let idProj3 = []
@@ -113,6 +129,9 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                        nameProj[index] = item.name
                        setProjectName(nameProj)
 
+                       statusProj[index] = item.status 
+                       setProjectStatus(statusProj)
+
                        idProj[index] = item.id
                        setProjectId(idProj)
                     } else 
@@ -120,6 +139,9 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                         arr2[index] = true 
                         nameProj2[index] = item.name
                         setProjectName2(nameProj2)
+
+                        statusProj2[index] = item.status 
+                        setProjectStatus2(statusProj2)
 
                         idProj2[index] = item.id
                         setProjectId2(idProj2)
@@ -129,6 +151,9 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                         nameProj3[index] = item.name
                         setProjectName3(nameProj3)
 
+                        statusProj3[index] = item.status 
+                        setProjectStatus3(statusProj3)
+
                         idProj3[index] = item.id
                         setProjectId3(idProj3)
                     } else 
@@ -136,6 +161,9 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                         arr4[index] = true 
                         nameProj4[index] = item.name
                         setProjectName4(nameProj4)
+
+                        statusProj4[index] = item.status 
+                        setProjectStatus4(statusProj4)
 
                         idProj4[index] = item.id
                         setProjectId4(idProj4)
@@ -145,6 +173,9 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                         nameProj5[index] = item.name
                         setProjectName5(nameProj5)
 
+                        statusProj5[index] = item.status 
+                        setProjectStatus5(statusProj5)
+
                         idProj5[index] = item.id
                         setProjectId5(idProj5)
                     } else 
@@ -153,6 +184,9 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                         nameProj6[index] = item.name
                         setProjectName6(nameProj6)
 
+                        statusProj6[index] = item.status 
+                        setProjectStatus6(statusProj6)
+
                         idProj6[index] = item.id
                         setProjectId6(idProj6)
                     } else 
@@ -160,6 +194,9 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                         arr7[index] = true 
                         nameProj7[index] = item.name
                         setProjectName7(nameProj7)
+
+                        statusProj7[index] = item.status 
+                        setProjectStatus7(statusProj7)
 
                         idProj7[index] = item.id
                         setProjectId7(idProj7)
@@ -307,9 +344,11 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
         day.setHours(day.getHours() + 3); //00:00
 
         const projectTitle = 'Название проекта'
+        const projectStatus = 'Новый'
 
         const res = await addProject({
             name: projectTitle, 
+            status: projectStatus,
             datestart: day, 
             dateend: day, 
             teh: '', 
@@ -335,6 +374,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             nameProj[item] = projectTitle
             setProjectName(nameProj)
 
+            let statusProj = []
+            statusProj[item] = projectStatus
+            setProjectStatus(statusProj)
+
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd(arr2)
@@ -347,6 +390,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             let nameProj = []
             nameProj[item] = projectTitle
             setProjectName2(nameProj)
+
+            let statusProj2 = []
+            statusProj2[item] = projectStatus
+            setProjectStatus2(statusProj2)
 
             let arr2 = []
             arr2[item] = false
@@ -361,6 +408,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             nameProj[item] = projectTitle
             setProjectName3(nameProj)
 
+            let statusProj3 = []
+            statusProj3[item] = projectStatus
+            setProjectStatus3(statusProj3)
+
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd3(arr2)
@@ -373,6 +424,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             let nameProj = []
             nameProj[item] = projectTitle
             setProjectName4(nameProj)
+
+            let statusProj4 = []
+            statusProj4[item] = projectStatus
+            setProjectStatus4(statusProj4)
 
             let arr2 = []
             arr2[item] = false
@@ -387,6 +442,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             nameProj[item] = projectTitle
             setProjectName5(nameProj)
 
+            let statusProj5 = []
+            statusProj5[item] = projectStatus
+            setProjectStatus5(statusProj5)
+
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd5(arr2)
@@ -400,6 +459,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             nameProj[item] = projectTitle
             setProjectName6(nameProj)
 
+            let statusProj6 = []
+            statusProj6[item] = projectStatus
+            setProjectStatus6(statusProj6)
+
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd6(arr2)
@@ -412,6 +475,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             let nameProj = []
             nameProj[item] = projectTitle
             setProjectName7(nameProj)
+
+            let statusProj7 = []
+            statusProj7[item] = projectStatus
+            setProjectStatus7(statusProj7)
 
             let arr2 = []
             arr2[item] = false
@@ -465,7 +532,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 1, projectId[index], projectName[index])}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName[index]}</p>   
-                                        <p className='viewStatus'>Новый</p>
+                                        <p className='viewStatus'>{projectStatus[index]}</p>
 
                                         <p className='time-project' style={{color: '#1555f5'}}>00:00</p>
                                     </div></>
@@ -482,7 +549,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 2, projectId2[index], projectName2[index])}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName2[index]}</p>   
-                                        <p className='viewStatus'>Новый</p>
+                                        <p className='viewStatus'>{projectStatus2[index]}</p>
 
                                         <p className='time-project' style={{color: '#1555f5'}}>00:00</p>
                                     </div></>
@@ -499,7 +566,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 3, projectId3[index], projectName3[index])}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName3[index]}</p>   
-                                        <p className='viewStatus'>Новый</p>
+                                        <p className='viewStatus'>{projectStatus3[index]}</p>
 
                                         <p className='time-project' style={{color: '#1555f5'}}>00:00</p>
                                     </div></>
@@ -516,7 +583,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 4, projectId4[index], projectName4[index])}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName4[index]}</p>   
-                                        <p className='viewStatus'>Новый</p>
+                                        <p className='viewStatus'>{projectStatus4[index]}</p>
 
                                         <p className='time-project' style={{color: '#1555f5'}}>00:00</p>
                                     </div></>
@@ -533,7 +600,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 5, projectId5[index], projectName5[index])}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName5[index]}</p>   
-                                        <p className='viewStatus'>Новый</p>
+                                        <p className='viewStatus'>{projectStatus5[index]}</p>
 
                                         <p className='time-project' style={{color: '#1555f5'}}>00:00</p>
                                     </div></>
@@ -550,7 +617,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 6, projectId6[index], projectName6[index])}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName6[index]}</p>   
-                                        <p className='viewStatus'>Новый</p>
+                                        <p className='viewStatus'>{projectStatus6[index]}</p>
 
                                         <p className='time-project' style={{color: '#1555f5'}}>00:00</p>
                                     </div></>
@@ -567,7 +634,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                     <><p className='date-proj-day2'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' onClick={()=>openProject(index, 7, projectId7[index], projectName6[index])}>
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName7[index]}</p>   
-                                        <p className='viewStatus'>Новый</p>
+                                        <p className='viewStatus'>{projectStatus7[index]}</p>
 
                                         <p className='time-project' style={{color: '#1555f5'}}>00:00</p>
                                     </div></>
