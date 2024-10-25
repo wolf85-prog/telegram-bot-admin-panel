@@ -238,6 +238,21 @@ const savePorject = async(id) => {
   //сохранить изменения в базе
   await editProject(saveData, id)
 
+  setProjects((projects) => {	
+
+    let userIndex = projects.findIndex((item) => item.id === id);
+    const usersCopy = JSON.parse(JSON.stringify(projects));
+
+    const userObject = usersCopy[userIndex];
+    usersCopy[userIndex] = { ...userObject, 
+      name: projectName, 
+    };
+
+    console.log("update user: ", usersCopy[userIndex])
+
+    return usersCopy;
+  });
+
   setShowProject(false)
   setShowCalendar2(true)
   setShowMainTable(false)
