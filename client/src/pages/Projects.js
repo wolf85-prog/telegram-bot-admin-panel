@@ -112,6 +112,8 @@ const Projects = () => {
   const [projectName, setProjectName] = useState('');
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
+  const [startTime, setStartTime] = useState('00:00')
+  const [endTime, setEndTime] = useState('00:00')
   const [city, setCity] = useState('');
   const [statusProject, setStatusProject] = useState({name: '', color: ''});
   const [specifikaProject, setSpecifikaProject] = useState('');
@@ -230,9 +232,14 @@ const Projects = () => {
 
 const savePorject = async(id) => {
 
+  const month = String(startDate.getMonth()+1).padStart(2, "0");
+  const day = String(startDate.getDate()).padStart(2, "0");
+
   const saveData = {
     name: projectName,
     status: statusProject.name,
+    datestart: `${startDate.getFullYear()}-${month}-${day}T${startTime}`,
+    dateend: `${startDate.getFullYear()}-${month}-${day}T${startTime}`,
   }
   console.log(saveData)
 
@@ -243,6 +250,9 @@ const savePorject = async(id) => {
 
   setProjects((projects) => {	
 
+    const month = String(startDate.getMonth()+1).padStart(2, "0");
+    const day = String(startDate.getDate()).padStart(2, "0");
+
     let userIndex = projects.findIndex((item) => item.id === id);
     console.log(userIndex)
     const usersCopy = JSON.parse(JSON.stringify(projects));
@@ -250,7 +260,8 @@ const savePorject = async(id) => {
     const userObject = usersCopy[userIndex];
     usersCopy[userIndex] = { ...userObject, 
       name: projectName, 
-      status: statusProject.name
+      status: statusProject.name,
+      dateStart: `${startDate.getFullYear()}-${month}-${day}T${startTime}`
     };
 
     console.log("update user: ", usersCopy)
@@ -276,17 +287,18 @@ const savePorject = async(id) => {
   }, [height])
 
 
-  const openProject =(item, day, id, name) => {
-    console.log("item: ", item, day)
+  const openProject =(month, item, number, id, name, status) => {
+    console.log("item: ", month+1, item, number)
 
     setShowProject(true)
     setShowCalendar(false)
     setShowCalendar2(false)
 
-    setStatusProject({name: 'Новый', color: '#1E90FF'})
+    setStatusProject({name: status, color: statusData.find((stat)=> stat.label === status)?.color})
 
     setId(id)
     setProjectName(name)
+    setStartDate(new Date(2024, month, item))
     setStavka({label: "№1", name: "№1"})
 
     setHeight(509)
@@ -451,7 +463,7 @@ const savePorject = async(id) => {
                                                   />
                                                 </div>
                                                 <div className="text-field">
-                                                  <input disabled={false} className="text-field__input" type="text" value='00:00' name="dateReg2" id="dateReg2" style={{width: '90px',}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" value={startTime} onChange={(e)=>setStartTime(e.target.value)} name="dateReg2" id="dateReg2" style={{width: '90px',}}/>
                                                 </div>
                                               </div>
 
@@ -470,7 +482,7 @@ const savePorject = async(id) => {
                                                   />
                                                 </div>
                                                 <div className="text-field">
-                                                  <input disabled={false} className="text-field__input" type="text" value='00:00' name="dateReg4" id="dateReg4" style={{width: '90px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" value={endTime} onChange={(e)=>setEndTime(e.target.value)} name="dateReg4" id="dateReg4" style={{width: '90px'}}/>
                                                 </div>
                                               </div>
 
