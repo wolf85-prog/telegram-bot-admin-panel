@@ -83,7 +83,7 @@
   /* width: 14.2%; */
   height: 100px;
   border-radius: 6px;
-  border: 1px solid #1555f5;
+  /* border: 1px solid #1555f5; */
   text-align: center;
   padding-top: 26px;
 }
@@ -92,7 +92,7 @@
   position: absolute;
   top: 0px;
   left: 5px;
-  color: #1555f5;
+  /* color: #1555f5; */
   font-size: 16px;
   z-index: 11;
 }
