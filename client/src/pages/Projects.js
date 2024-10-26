@@ -287,7 +287,7 @@ const savePorject = async(id) => {
   }, [height])
 
 
-  const openProject =(month, item, number, id, name, status) => {
+  const openProject =(month, item, number, id, name, status, time) => {
     console.log("item: ", month+1, item, number)
 
     setShowProject(true)
@@ -299,6 +299,7 @@ const savePorject = async(id) => {
     setId(id)
     setProjectName(name)
     setStartDate(new Date(2024, month, item))
+    setStartTime(time)
     setStavka({label: "№1", name: "№1"})
 
     setHeight(509)
