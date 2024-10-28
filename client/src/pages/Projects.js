@@ -116,7 +116,7 @@ const Projects = () => {
   const [endTime, setEndTime] = useState('00:00')
   const [city, setCity] = useState('');
   const [statusProject, setStatusProject] = useState({name: '', color: ''});
-  const [specifikaProject, setSpecifikaProject] = useState('');
+  const [specifikaProject, setSpecifikaProject] = useState({name: '', color: ''});
   const [vidProject, setVidProject] = useState({name: '', color: ''});
   const [company, setCompany] = useState('');
   const [companyName, setCompanyName] = useState('');
@@ -249,23 +249,26 @@ const Projects = () => {
   }, [height])
 
 
-  const openProject =(month, item, number, id, name, status, time) => {
-    console.log("item: ", month+1, item, number)
+  const openProject =(month, item, number, id, name, status, time, specifika, city, comment) => {
+    console.log("item: ", month+1, item, number, specifika)
 
     setShowProject(true)
     setShowCalendar(false)
     setShowCalendar2(false)
 
     setStatusProject({name: status, color: statusData.find((stat)=> stat.label === status)?.color})
+    setSpecifikaProject({name: specifika, color: specifikaData.find((stat)=> stat.label === specifika)?.color})
 
     setId(id)
     setProjectName(name)
     setStartDate(new Date(2024, month, item))
-    setStartTime(time)
-    setStavka({label: "№1", name: "№1"})
+    setStartTime(time) 
+    setCity(city)
+    setComment(comment) 
 
     setHeight(509)
 
+    setStavka({label: "№1", name: "№1"})
     setShowMainTable(true)
     setShowPretendentTable(true)
   }
@@ -391,7 +394,6 @@ const Projects = () => {
     console.log("id: ", id)
   
     setProjects((projects) => {	
-  
       const month = String(startDate.getMonth()+1).padStart(2, "0");
       const day = String(startDate.getDate()).padStart(2, "0");
   
@@ -403,6 +405,7 @@ const Projects = () => {
       usersCopy[userIndex] = { ...userObject, 
         name: projectName, 
         status: statusProject.name,
+        specifika: specifikaProject.name,
         dateStart: `${startDate.getFullYear()}-${month}-${day}T${startTime}`,
         dateEnd: `${endDate.getFullYear()}-${month2}-${day2}T${endTime}`
       };

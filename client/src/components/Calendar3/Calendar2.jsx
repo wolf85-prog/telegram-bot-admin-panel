@@ -203,6 +203,14 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
         let tehProj6 = []
         let tehProj7 = []
 
+        let specifProj = [] 
+        let specifProj2 = []
+        let specifProj3 = []
+        let specifProj4 = []
+        let specifProj5 = []
+        let specifProj6 = []
+        let specifProj7 = []
+
         let idProj = [] 
         let idProj2 = []
         let idProj3 = []
@@ -215,11 +223,11 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             const d = index - (startDay - 2);
                 
             projects.map((item, ind)=> {
-                if (new Date(2024, month, d).toISOString().split('T')[0] === item?.dateStart.split('T')[0]) {
-                    // console.log("d: ", ind,
-                    //     new Date(2024, month, d),
-                    //     new Date(new Date(item.dateStart).setHours(new Date(item?.dateStart).getHours()))
-                    // )  
+                if (new Date(new Date(2024, month, d).setHours(new Date(item?.dateStart).getHours()+3)).toISOString().split('T')[0] === item?.dateStart.split('T')[0]) {
+                    console.log("d: ", ind,
+                        new Date(2024, month, d).toISOString(),
+                        item?.dateStart //.setHours(new Date(item?.dateStart).getHours()))
+                    )  
 
                     //console.log("color: ", statusData.find((stat)=> stat.label === item.status)?.color )
 
@@ -238,6 +246,16 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                        timeProj[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
                        setProjectTime(timeProj)
 
+
+                       cityProj[index] = item.city 
+                       setProjectCity(cityProj)
+
+                       commentProj[index] = item.comment
+                       setProjectComment(commentProj)
+
+                       specifProj[index] = item.specifika
+                       setProjectSpecifika(specifProj)
+
                        idProj[index] = item.id
                        setProjectId(idProj)
                     } else 
@@ -254,6 +272,15 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
 
                         timeProj2[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
                         setProjectTime2(timeProj2)
+
+                        cityProj2[index] = item.city 
+                        setProjectCity2(cityProj2)
+
+                        commentProj2[index] = item.comment
+                        setProjectComment2(commentProj2)
+
+                        specifProj2[index] = item.specifika
+                        setProjectSpecifika2(specifProj2)
 
                         idProj2[index] = item.id
                         setProjectId2(idProj2)
@@ -272,6 +299,15 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                         timeProj3[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
                         setProjectTime3(timeProj3)
 
+                        cityProj3[index] = item.city 
+                        setProjectCity3(cityProj3)
+
+                        commentProj3[index] = item.comment
+                        setProjectComment3(commentProj3)
+
+                        specifProj3[index] = item.specifika
+                        setProjectSpecifika3(specifProj3)
+
                         idProj3[index] = item.id
                         setProjectId3(idProj3)
                     } else 
@@ -288,6 +324,15 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
 
                         timeProj4[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
                         setProjectTime4(timeProj4)
+
+                        cityProj4[index] = item.city 
+                        setProjectCity4(cityProj4)
+
+                        commentProj4[index] = item.comment
+                        setProjectComment4(commentProj4)
+
+                        specifProj4[index] = item.specifika
+                        setProjectSpecifika4(specifProj4)
 
                         idProj4[index] = item.id
                         setProjectId4(idProj4)
@@ -306,6 +351,15 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                         timeProj5[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
                         setProjectTime5(timeProj5)
 
+                        cityProj5[index] = item.city 
+                        setProjectCity5(cityProj5)
+
+                        commentProj5[index] = item.comment
+                        setProjectComment5(commentProj5)
+
+                        specifProj5[index] = item.specifika
+                        setProjectSpecifika5(specifProj5)
+
                         idProj5[index] = item.id
                         setProjectId5(idProj5)
                     } else 
@@ -323,6 +377,15 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                         timeProj6[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
                         setProjectTime6(timeProj6)
 
+                        cityProj6[index] = item.city 
+                        setProjectCity6(cityProj6)
+
+                        commentProj6[index] = item.comment
+                        setProjectComment6(commentProj6)
+
+                        specifProj6[index] = item.specifika
+                        setProjectSpecifika6(specifProj6)
+
                         idProj6[index] = item.id
                         setProjectId6(idProj6)
                     } else 
@@ -339,6 +402,15 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
 
                         timeProj7[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
                         setProjectTime7(timeProj7)
+
+                        cityProj7[index] = item.city 
+                        setProjectCity7(cityProj7)
+
+                        commentProj7[index] = item.comment
+                        setProjectComment7(commentProj7)
+
+                        specifProj7[index] = item.specifika
+                        setProjectSpecifika7(specifProj7)
 
                         idProj7[index] = item.id
                         setProjectId7(idProj7)
@@ -515,141 +587,141 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             arr[item] = true
             setProject(arr)
 
-            let nameProj = []
+            let nameProj = [...projectName]
             nameProj[item] = projectTitle
             setProjectName(nameProj)
 
-            let statusProj = []
+            let statusProj = [...projectStatus]
             statusProj[item] = projectStatus
             setProjectStatus(statusProj)
 
-            let colorProj = []
+            let colorProj = [...projectColor]
             colorProj[item] = projectColor
             setProjectColor(colorProj)
 
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd(arr2)
-        } else 
+        } 
         if (number === 2) {
             let arr = [...project2]
             arr[item] = true
             setProject2(arr)
 
-            let nameProj = []
+            let nameProj = [...projectName2]
             nameProj[item] = projectTitle
             setProjectName2(nameProj)
 
-            let statusProj2 = []
+            let statusProj2 = [...projectStatus2]
             statusProj2[item] = projectStatus
             setProjectStatus2(statusProj2)
 
-            let colorProj2 = []
+            let colorProj2 = [...projectColor2]
             colorProj2[item] = projectColor
             setProjectColor2(colorProj2)
 
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd2(arr2)
-        } else 
+        } 
         if (number === 3) {
             let arr = [...project3]
             arr[item] = true
             setProject3(arr)
 
-            let nameProj = []
+            let nameProj = [...projectName3]
             nameProj[item] = projectTitle
             setProjectName3(nameProj)
 
-            let statusProj3 = []
+            let statusProj3 = [...projectStatus3]
             statusProj3[item] = projectStatus
             setProjectStatus3(statusProj3)
 
-            let colorProj3 = []
+            let colorProj3 = [...projectColor3]
             colorProj3[item] = projectColor
             setProjectColor3(colorProj3)
 
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd3(arr2)
-        } else 
+        } 
         if (number === 4) {
             let arr = [...project4]
             arr[item] = true
             setProject4(arr)
 
-            let nameProj = []
+            let nameProj = [...projectName4]
             nameProj[item] = projectTitle
             setProjectName4(nameProj)
 
-            let statusProj4 = []
+            let statusProj4 = [...projectStatus4]
             statusProj4[item] = projectStatus
             setProjectStatus4(statusProj4)
 
-            let colorProj4 = []
+            let colorProj4 = [...projectColor4]
             colorProj4[item] = projectColor
             setProjectColor4(colorProj4)
 
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd4(arr2)
-        } else 
+        }
         if (number === 5) {
             let arr = [...project5]
             arr[item] = true
             setProject5(arr)
 
-            let nameProj = []
+            let nameProj = [...projectName5]
             nameProj[item] = projectTitle
             setProjectName5(nameProj)
 
-            let statusProj5 = []
+            let statusProj5 = [...projectStatus5]
             statusProj5[item] = projectStatus
             setProjectStatus5(statusProj5)
 
-            let colorProj5 = []
+            let colorProj5 = [...projectColor5]
             colorProj5[item] = projectColor
             setProjectColor5(colorProj5)
 
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd5(arr2)
-        } else 
+        } 
         if (number === 6) {
             let arr = [...project6]
             arr[item] = true
             setProject6(arr)
 
-            let nameProj = []
+            let nameProj = [...projectName6]
             nameProj[item] = projectTitle
             setProjectName6(nameProj)
 
-            let statusProj6 = []
+            let statusProj6 = [...projectStatus6]
             statusProj6[item] = projectStatus
             setProjectStatus6(statusProj6)
 
-            let colorProj6 = []
+            let colorProj6 = [...projectColor6]
             colorProj6[item] = projectColor
             setProjectColor6(colorProj6)
 
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd6(arr2)
-        } else 
+        } 
         if (number === 7) {
             let arr = [...project7]
             arr[item] = true
             setProject7(arr)
 
-            let nameProj = []
+            let nameProj = [...projectName7]
             nameProj[item] = projectTitle
             setProjectName7(nameProj)
 
-            let statusProj7 = []
+            let statusProj7 = [...projectStatus7]
             statusProj7[item] = projectStatus
             setProjectStatus7(statusProj7)
 
-            let colorProj7 = []
+            let colorProj7 = [...projectColor7]
             colorProj7[item] = projectColor
             setProjectColor7(colorProj7)
 
@@ -703,7 +775,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                 </CButton>
                                 {project[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                    <div className='view-project' onClick={()=>openProject(month, index, 1, projectId[index], projectName[index], projectStatus[index], projectTime[index])} style={{border: `1px solid ${projectColor[index]}`}}>
+                                    <div className='view-project' 
+                                        onClick={()=>openProject(month, index, 1, projectId[index], projectName[index], projectStatus[index], projectTime[index], projectSpecifika[index], projectCity[index], projectComment[index])} 
+                                        style={{border: `1px solid ${projectColor[index]}`}}
+                                    >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName[index]}</p>   
                                         <p className='viewStatus' style={{color: `${projectColor[index]}`}}>{projectStatus[index]}</p>
 
@@ -720,7 +795,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                 </CButton>
                                 {project2[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor2[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                    <div className='view-project' onClick={()=>openProject(month, index, 2, projectId2[index], projectName2[index], projectStatus2[index], projectTime2[index])} style={{border: `1px solid ${projectColor2[index]}`}}>
+                                    <div className='view-project' 
+                                        onClick={()=>openProject(month, index, 2, projectId2[index], projectName2[index], projectStatus2[index], projectTime2[index], projectSpecifika2[index], projectCity2[index], projectComment2[index])} 
+                                        style={{border: `1px solid ${projectColor2[index]}`}}
+                                    >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName2[index]}</p>   
                                         <p className='viewStatus' style={{color: `${projectColor2[index]}`}}>{projectStatus2[index]}</p>
 
@@ -757,7 +835,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                 </CButton>
                                 {project4[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor4[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                    <div className='view-project' onClick={()=>openProject(month, index, 4, projectId4[index], projectName4[index], projectStatus4[index], projectTime4[index])} style={{border: `1px solid ${projectColor4[index]}`}}>
+                                    <div className='view-project' 
+                                        onClick={()=>openProject(month, index, 4, projectId4[index], projectName4[index], projectStatus4[index], projectTime4[index], projectSpecifika4[index], projectCity4[index], projectComment4[index])} 
+                                        style={{border: `1px solid ${projectColor4[index]}`}}
+                                    >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName4[index]}</p>   
                                         <p className='viewStatus' style={{color: `${projectColor4[index]}`}}>{projectStatus4[index]}</p>
 
@@ -774,7 +855,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                 </CButton>
                                 {project5[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor5[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                    <div className='view-project' onClick={()=>openProject(month, index, 5, projectId5[index], projectName5[index], projectStatus5[index], projectTime5[index])} style={{border: `1px solid ${projectColor5[index]}`}}>
+                                    <div className='view-project' 
+                                        onClick={()=>openProject(month, index, 5, projectId5[index], projectName5[index], projectStatus5[index], projectTime5[index], projectSpecifika5[index], projectCity5[index], projectComment5[index])} 
+                                        style={{border: `1px solid ${projectColor5[index]}`}}
+                                    >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName5[index]}</p>   
                                         <p className='viewStatus' style={{color: `${projectColor5[index]}`}}>{projectStatus5[index]}</p>
 
@@ -791,7 +875,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                 </CButton>
                                 {project6[index] ?
                                     <><p className='date-proj-day2' style={{color: `${projectColor6[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                    <div className='view-project' onClick={()=>openProject(month, index, 6, projectId6[index], projectName6[index], projectStatus6[index], projectTime6[index])} style={{border: `1px solid ${projectColor6[index]}`}}>
+                                    <div className='view-project' 
+                                        onClick={()=>openProject(month, index, 6, projectId6[index], projectName6[index], projectStatus6[index], projectTime6[index], projectSpecifika6[index], projectCity6[index], projectComment6[index])} 
+                                        style={{border: `1px solid ${projectColor6[index]}`}}
+                                    >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName6[index]}</p>   
                                         <p className='viewStatus' style={{color: `${projectColor6[index]}`}}>{projectStatus6[index]}</p>
 
@@ -808,7 +895,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                 </CButton>
                                 {project7[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor7[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                    <div className='view-project' onClick={()=>openProject(month, index, 7, projectId7[index], projectName6[index], projectStatus7[index], projectTime7[index])} style={{border: `1px solid ${projectColor7[index]}`}}>
+                                    <div className='view-project' 
+                                        onClick={()=>openProject(month, index, 7, projectId7[index], projectName7[index], projectStatus7[index], projectTime7[index], projectSpecifika7[index], projectCity7[index], projectComment7[index])} 
+                                        style={{border: `1px solid ${projectColor7[index]}`}}
+                                    >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName7[index]}</p>   
                                         <p className='viewStatus' style={{color: `${projectColor7[index]}`}}>{projectStatus7[index]}</p>
 
