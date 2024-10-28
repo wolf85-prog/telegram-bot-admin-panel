@@ -136,27 +136,8 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
 
     const ref = useRef(null)
 
-    function filterArr(data, key) {
-
-        data.forEach(element => {
-            
-            let countedData = data.filter((el) => {
-                return el[key] == element[key]
-            }).length;
-
-            console.log(element[key] + ": " + countedData);
-        });
-
-        data = data.filter((item, index, self) => self.findIndex( t => t[key] === item[key] && item[key] != null) === index )
-        //console.log(data);
-
-        return data;
-    }
-
     useEffect(() => {
         console.log("projects: ", projects)
-
-        let count = []
 
         let arr = [] 
         let arr2 = []
@@ -238,37 +219,16 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
         let idProj6 = []
         let idProj7 = []
 
-        let countedData
-
         Array(days[month] + (startDay - 1)).fill(null).map((_, index) => {
             const d = index - (startDay - 2);
-            count[index] = 0
-
-            for(let i = 0; i < projects.length - 1; i++){
-                // if (projects[i].dateStart.split('T')[0] === projects[i + 1].dateStart.split('T')[0]) {
-                //     counts = counts + 1
-                //     //console.log("!!! ", projects[i].dateStart.split('T')[0], projects[i+1].dateStart.split('T')[0])
-                // }
-                countedData = projects.filter((el) => {
-                    return el.dateStart.split('T')[0] === projects[i].dateStart.split('T')[0]
-                }).length;
-
-                //count[index] = countedData
-            }
-
-
-            console.log("count: ", index, countedData)
                 
             projects.map((item, ind)=> {
-
-                if (new Date(new Date(2024, month, d).setHours(new Date(item?.dateStart).getHours()+3)).toISOString().split('T')[0] === item?.dateStart.split('T')[0]) {
-                    // console.log("d: ", ind,
-                    //     new Date(2024, month, d).toISOString(),
-                    //     item?.dateStart //.setHours(new Date(item?.dateStart).getHours()))
-                    // )  
-
-                    //console.log("color: ", statusData.find((stat)=> stat.label === item.status)?.color )
-
+                if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() >= new Date(item?.dateStart).getTime()) && 
+                (new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() <= new Date(item?.dateEnd).getTime()) ) {
+                    console.log("d: ", ind,
+                        new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime(),
+                        new Date(item?.dateEnd).getTime() //.setHours(new Date(item?.dateStart).getHours()))
+                    )  
 
                     if (!nameProj[index]) {
                        arr[index] = true 
