@@ -86,6 +86,46 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
     const [projectTime6, setProjectTime6] = useState([])
     const [projectTime7, setProjectTime7] = useState([])
 
+    const [projectSpecifika, setProjectSpecifika] = useState([])
+    const [projectSpecifika2, setProjectSpecifika2] = useState([])
+    const [projectSpecifika3, setProjectSpecifika3] = useState([])
+    const [projectSpecifika4, setProjectSpecifika4] = useState([])
+    const [projectSpecifika5, setProjectSpecifika5] = useState([])
+    const [projectSpecifika6, setProjectSpecifika6] = useState([])
+    const [projectSpecifika7, setProjectSpecifika7] = useState([])
+
+    const [projectComment, setProjectComment] = useState([])
+    const [projectComment2, setProjectComment2] = useState([])
+    const [projectComment3, setProjectComment3] = useState([])
+    const [projectComment4, setProjectComment4] = useState([])
+    const [projectComment5, setProjectComment5] = useState([])
+    const [projectComment6, setProjectComment6] = useState([])
+    const [projectComment7, setProjectComment7] = useState([])
+
+    const [projectCity, setProjectCity] = useState([])
+    const [projectCity2, setProjectCity2] = useState([])
+    const [projectCity3, setProjectCity3] = useState([])
+    const [projectCity4, setProjectCity4] = useState([])
+    const [projectCity5, setProjectCity5] = useState([])
+    const [projectCity6, setProjectCity6] = useState([])
+    const [projectCity7, setProjectCity7] = useState([])
+
+    const [projectTehText, setProjectTehText] = useState([])
+    const [projectTehText2, setProjectTehText2] = useState([])
+    const [projectTehText3, setProjectTehText3] = useState([])
+    const [projectTehText4, setProjectTehText4] = useState([])
+    const [projectTehText5, setProjectTehText5] = useState([])
+    const [projectTehText6, setProjectTehText6] = useState([])
+    const [projectTehText7, setProjectTehText7] = useState([])
+
+    const [projectCompanyId, setProjectCompanyId] = useState([])
+    const [projectCompanyId2, setProjectCompanyId2] = useState([])
+    const [projectCompanyId3, setProjectCompanyId3] = useState([])
+    const [projectCompanyId4, setProjectCompanyId4] = useState([])
+    const [projectCompanyId5, setProjectCompanyId5] = useState([])
+    const [projectCompanyId6, setProjectCompanyId6] = useState([])
+    const [projectCompanyId7, setProjectCompanyId7] = useState([])
+
     const [projectId, setProjectId] = useState([])
     const [projectId2, setProjectId2] = useState([])
     const [projectId3, setProjectId3] = useState([])
@@ -139,6 +179,30 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
         let timeProj6 = []
         let timeProj7 = []
 
+        let cityProj = [] 
+        let cityProj2 = []
+        let cityProj3 = []
+        let cityProj4 = []
+        let cityProj5 = []
+        let cityProj6 = []
+        let cityProj7 = []
+
+        let commentProj = [] 
+        let commentProj2 = []
+        let commentProj3 = []
+        let commentProj4 = []
+        let commentProj5 = []
+        let commentProj6 = []
+        let commentProj7 = []
+
+        let tehProj = [] 
+        let tehProj2 = []
+        let tehProj3 = []
+        let tehProj4 = []
+        let tehProj5 = []
+        let tehProj6 = []
+        let tehProj7 = []
+
         let idProj = [] 
         let idProj2 = []
         let idProj3 = []
@@ -170,7 +234,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                        colorProj[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                        setProjectColor(colorProj)
 
-                       console.log("timeProj: ", item)
+                       //console.log("timeProj: ", item)
                        timeProj[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
                        setProjectTime(timeProj)
 
@@ -673,7 +737,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                                 </CButton>
                                 {project3[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor3[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
-                                    <div className='view-project' onClick={()=>openProject(month, index, 3, projectId3[index], projectName3[index], projectStatus3[index], projectTime3[index])} style={{border: `1px solid ${projectColor3[index]}`}}>
+                                    <div className='view-project' 
+                                        onClick={()=>openProject(month, index, 3, projectId3[index], projectName3[index], projectStatus3[index], projectTime3[index], projectSpecifika3[index])} 
+                                        style={{border: `1px solid ${projectColor3[index]}`}}
+                                    >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName3[index]}</p>   
                                         <p className='viewStatus' style={{color: `${projectColor3[index]}`}}>{projectStatus3[index]}</p>
 

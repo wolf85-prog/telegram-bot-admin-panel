@@ -136,6 +136,11 @@ const Projects = () => {
   const [teh3, setTeh3] = useState('');
   const [teh4, setTeh4] = useState('');
 
+
+  const [tehText, setTehText] = useState('');
+  const [address, setAddress] = useState('');
+  const [geo, setGeo] = useState('');
+  const [comment, setComment] = useState('');
   const [comteg, setComteg] = useState('');
   const [spec, setSpec] = useState('');
   const [stavka, setStavka] = useState('');
@@ -230,50 +235,7 @@ const Projects = () => {
     
 }, [])
 
-const savePorject = async(id) => {
 
-  const month = String(startDate.getMonth()+1).padStart(2, "0");
-  const day = String(startDate.getDate()).padStart(2, "0");
-
-  const saveData = {
-    name: projectName,
-    status: statusProject.name,
-    datestart: `${startDate.getFullYear()}-${month}-${day}T${startTime}`,
-    dateend: `${startDate.getFullYear()}-${month}-${day}T${startTime}`,
-  }
-  console.log(saveData)
-
-  //сохранить изменения в базе
-  await editProject(saveData, id)
-
-  console.log("id: ", id)
-
-  setProjects((projects) => {	
-
-    const month = String(startDate.getMonth()+1).padStart(2, "0");
-    const day = String(startDate.getDate()).padStart(2, "0");
-
-    let userIndex = projects.findIndex((item) => item.id === id);
-    console.log(userIndex)
-    const usersCopy = JSON.parse(JSON.stringify(projects));
-
-    const userObject = usersCopy[userIndex];
-    usersCopy[userIndex] = { ...userObject, 
-      name: projectName, 
-      status: statusProject.name,
-      dateStart: `${startDate.getFullYear()}-${month}-${day}T${startTime}`
-    };
-
-    console.log("update user: ", usersCopy)
-
-    return usersCopy;
-  });
-
-  setShowProject(false)
-  setShowCalendar2(true)
-  setShowMainTable(false)
-  setShowPretendentTable(false)
-}
 
   const closeProfile = () => {
     setShowProject(false)
@@ -392,8 +354,6 @@ const savePorject = async(id) => {
 
   CustomMenu.displayName = "Edit";
 
-
-
   const changeWorker = async(e) => {
     //console.log(id)
 
@@ -401,6 +361,62 @@ const savePorject = async(id) => {
   }
 
 
+  const savePorject = async(id) => {
+
+    const month = String(startDate.getMonth()+1).padStart(2, "0");
+    const day = String(startDate.getDate()).padStart(2, "0");
+
+    const month2 = String(endDate.getMonth()+1).padStart(2, "0");
+    const day2 = String(endDate.getDate()).padStart(2, "0");
+  
+    const saveData = {
+      name: projectName,
+      status: statusProject.name,
+      datestart: `${startDate.getFullYear()}-${month}-${day}T${startTime}`,
+      dateend: `${endDate.getFullYear()}-${month2}-${day2}T${endTime}`,
+      teh: tehText, 
+      geo, 
+      // managerId, 
+      // managerId2, 
+      // companyId, 
+      comment, 
+      specifika: specifikaProject.name, 
+      city,
+    }
+    console.log(saveData)
+  
+    //сохранить изменения в базе
+    await editProject(saveData, id)
+  
+    console.log("id: ", id)
+  
+    setProjects((projects) => {	
+  
+      const month = String(startDate.getMonth()+1).padStart(2, "0");
+      const day = String(startDate.getDate()).padStart(2, "0");
+  
+      let userIndex = projects.findIndex((item) => item.id === id);
+      console.log(userIndex)
+      const usersCopy = JSON.parse(JSON.stringify(projects));
+  
+      const userObject = usersCopy[userIndex];
+      usersCopy[userIndex] = { ...userObject, 
+        name: projectName, 
+        status: statusProject.name,
+        dateStart: `${startDate.getFullYear()}-${month}-${day}T${startTime}`,
+        dateEnd: `${endDate.getFullYear()}-${month2}-${day2}T${endTime}`
+      };
+  
+      console.log("update user: ", usersCopy)
+  
+      return usersCopy;
+    });
+  
+    setShowProject(false)
+    setShowCalendar2(true)
+    setShowMainTable(false)
+    setShowPretendentTable(false)
+  }
 
   return (
     <div className='dark-theme'>
@@ -458,8 +474,7 @@ const savePorject = async(id) => {
                                                     selected={startDate}
                                                     onChange={(date) => setStartDate(date)}
                                                     selectsStart
-                                                    startDate={startDate}
-                                                    endDate={endDate}
+                                                    //startDate={startDate}
                                                     dateFormat="dd.MM.yyyy"
                                                   />
                                                 </div>
@@ -474,11 +489,10 @@ const savePorject = async(id) => {
                                                   <DatePicker
                                                     className="uley-datepicker-control text-center text-field__input"
                                                     style={{ height: '40px', width: '120px'}}
-                                                    selected={startDate}
-                                                    onChange={(date) => setStartDate(date)}
+                                                    selected={endDate}
+                                                    onChange={(date) => setEndDate(date)}
                                                     selectsStart
-                                                    startDate={startDate}
-                                                    endDate={endDate}
+                                                    //endDate={endDate}
                                                     dateFormat="dd.MM.yyyy"
                                                   />
                                                 </div>
@@ -521,6 +535,8 @@ const savePorject = async(id) => {
                                                   name="comment" 
                                                   id="comment"
                                                   style={{resize: 'none', width: '230px', height: '80px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginRight: '40px'}}
+                                                  value={comment}
+                                                  onChange={(e)=>setComment(e.target.value)}
                                                 />
                                               </div> 
                                         </div>
@@ -727,6 +743,8 @@ const savePorject = async(id) => {
                                               type="text" 
                                               name="comment" 
                                               id="comment"
+                                              value={tehText}
+                                              onChange={(e)=>setTehText(e.target.value)}
                                               style={{resize: 'none', width: '320px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginBottom: '20px'}}
                                             />
                                           </div> 
