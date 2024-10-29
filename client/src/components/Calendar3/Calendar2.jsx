@@ -239,16 +239,17 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             const d = index - (startDay - 2);
                 
             projects.map((item, ind)=> {
-                if (new Date(item?.dateStart).getTime() === new Date(item?.dateEnd).getTime()) {
-                    // console.log("d: ", ind,
-                    //     new Date(new Date(item?.dateStart).setHours(new Date(item?.dateStart).getHours()+3)).toISOString(),
-                    //     new Date(new Date(item?.dateEnd).setHours(new Date(item?.dateEnd).getHours()+3)).toISOString(), //.setHours(new Date(item?.dateStart).getHours()))
+                if (new Date(item?.dateStart.split('T')[0]).toISOString() === new Date(item?.dateEnd.split('T')[0]).toISOString() || 
+                    new Date(item?.dateStart.split('T')[0]).getTime() > new Date(item?.dateEnd.split('T')[0]).getTime()) {
+                    // console.log("d==: ", ind,
+                    //     new Date(item?.dateStart.split('T')[0]).toISOString(),
+                    //     new Date(item?.dateEnd.split('T')[0]).toISOString(), //.setHours(new Date(item?.dateStart).getHours()))
                     // ) 
-                    if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() === new Date(item?.dateStart).getTime()) ) {
-                        // console.log("d: ", ind,
-                        //     new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)),
-                        //     new Date(item?.dateEnd) //.setHours(new Date(item?.dateStart).getHours()))
-                        // )  
+                    if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).toISOString() === new Date(item?.dateStart.split('T')[0]).toISOString()) ) {
+                        console.log("d: ", ind,
+                            new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).toISOString(),
+                            new Date(item?.dateEnd.split('T')[0]).toISOString() //.setHours(new Date(item?.dateStart).getHours()))
+                        )  
 
                         if (!nameProj[index]) {
                         arr[index] = true 
@@ -458,8 +459,8 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                     }
 
                 } else {
-                    if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() >= new Date(item?.dateStart).getTime()) && 
-                        (new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() <= new Date(item?.dateEnd).getTime()) ) {
+                    if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() >= new Date(item?.dateStart.split('T')[0]).getTime()) && 
+                        (new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() <= new Date(item?.dateEnd.split('T')[0]).getTime()) ) {
 
                         if (!nameProj[index]) {
                         arr[index] = true 
