@@ -252,10 +252,8 @@ const Projects = () => {
   const openProject = async(month, item, number, id, name, end, status, timeStart, specifika, city, comment) => {
     console.log("item: ", month+1, item, number, specifika, end)
 
-
     const resProj = await getProjectId(id)
     console.log("resProj: ", resProj)
-
 
     setShowProject(true)
     setShowCalendar(false)
@@ -269,8 +267,7 @@ const Projects = () => {
     setStartDate(resProj ? resProj.dateStart : new Date().toISOString())
     setEndDate(resProj.dateEnd)
     setStartTime(timeStart) 
-    setEndTime(end?.split('T')[1]?.slice(0, 5))
-
+    //setEndTime(end?.split('T')[1]?.slice(0, 5))
 
     setCity(city)
     setComment(comment) 
@@ -283,6 +280,67 @@ const Projects = () => {
       setHeight(509)
     }, 200)
     
+  }
+
+  const savePorject = async(id) => {
+
+    console.log("start: ", startDate)
+    console.log("end: ", endDate)
+
+    const month = String(new Date(startDate).getMonth()+1).padStart(2, "0");
+    const day = String(new Date(startDate).getDate()).padStart(2, "0");
+
+    const month2 = String(new Date(endDate).getMonth()+1).padStart(2, "0");
+    const day2 = String(new Date(endDate).getDate()).padStart(2, "0");
+  
+    const saveData = {
+      name: projectName,
+      status: statusProject.name,
+      datestart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}:00.000Z`,
+      dateend: `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}:00.000Z`,
+      teh: tehText, 
+      geo, 
+      // managerId, 
+      // managerId2, 
+      // companyId, 
+      comment, 
+      specifika: specifikaProject.name, 
+      city,
+    }
+    console.log(saveData)
+  
+    //сохранить изменения в базе
+    await editProject(saveData, id)
+  
+    console.log("id: ", id)
+  
+    setProjects((projects) => {	
+      const month = String(new Date(startDate).getMonth()+1).padStart(2, "0");
+      const day = String(new Date(startDate).getDate()).padStart(2, "0");
+  
+      let userIndex = projects.findIndex((item) => item.id === id);
+      console.log(userIndex)
+      const usersCopy = JSON.parse(JSON.stringify(projects));
+  
+      const userObject = usersCopy[userIndex];
+      usersCopy[userIndex] = { ...userObject, 
+        id: id,
+        name: projectName, 
+        status: statusProject.name,
+        specifika: specifikaProject.name,
+        dateStart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}:00.000Z`,
+        dateEnd: `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}:00.000Z`
+      };
+  
+      console.log("update user: ", usersCopy)
+  
+      return usersCopy;
+    });
+  
+    setShowProject(false)
+    setShowCalendar2(true)
+    setShowMainTable(false)
+    setShowPretendentTable(false)
   }
 
   const onChangeCompany = (e) => {
@@ -375,68 +433,6 @@ const Projects = () => {
     setSpecialistName(e.target.value)
   }
 
-
-  const savePorject = async(id) => {
-
-    console.log("start: ", startDate)
-    console.log("end: ", endDate)
-
-    const month = String(new Date(startDate).getMonth()+1).padStart(2, "0");
-    const day = String(new Date(startDate).getDate()).padStart(2, "0");
-
-    const month2 = String(new Date(endDate).getMonth()+1).padStart(2, "0");
-    const day2 = String(new Date(endDate).getDate()).padStart(2, "0");
-  
-    const saveData = {
-      name: projectName,
-      status: statusProject.name,
-      datestart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}`,
-      dateend: `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}`,
-      teh: tehText, 
-      geo, 
-      // managerId, 
-      // managerId2, 
-      // companyId, 
-      comment, 
-      specifika: specifikaProject.name, 
-      city,
-    }
-    console.log(saveData)
-  
-    //сохранить изменения в базе
-    await editProject(saveData, id)
-  
-    console.log("id: ", id)
-  
-    setProjects((projects) => {	
-      const month = String(new Date(startDate).getMonth()+1).padStart(2, "0");
-      const day = String(new Date(startDate).getDate()).padStart(2, "0");
-  
-      let userIndex = projects.findIndex((item) => item.id === id);
-      console.log(userIndex)
-      const usersCopy = JSON.parse(JSON.stringify(projects));
-  
-      const userObject = usersCopy[userIndex];
-      usersCopy[userIndex] = { ...userObject, 
-        id: id,
-        name: projectName, 
-        status: statusProject.name,
-        specifika: specifikaProject.name,
-        dateStart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}`,
-        dateEnd: `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}`
-      };
-  
-      console.log("update user: ", usersCopy)
-  
-      return usersCopy;
-    });
-  
-    setShowProject(false)
-    setShowCalendar2(true)
-    setShowMainTable(false)
-    setShowPretendentTable(false)
-  }
-
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -460,7 +456,7 @@ const Projects = () => {
                                 <h2 style={{marginTop: '25%', textAlign: 'center'}}>Раздел находится в разработке</h2>
                                 :
                                 (showCalendar2 ?
-                                  <Calendar2 openProject={openProject} projects={projects} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
+                                  <Calendar2 openProject={openProject} projects={projects} setProjects={setProjects} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
                                   : 
                                   (showProject ? 
                                     <div style={{position: 'relative', height: '494px', display: 'flex', flexDirection: 'row', marginTop: '35px'}}>

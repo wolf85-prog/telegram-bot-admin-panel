@@ -11,7 +11,7 @@ import { useUsersContext } from "../../chat-app-new/context/usersContext";
 import { addProject } from '../../http/projectAPI'
 import statusData from 'src/data/statusData';
 
-export default function Calendar2({projects, openProject, setHeight, showSidebar, setShowSidebar, setShowProject, setShowCalendar, setShowCalendar2}) {
+export default function Calendar2({projects, setProjects, openProject, setHeight, showSidebar, setShowSidebar, setShowProject, setShowCalendar, setShowCalendar2}) {
     //const { MONTHS, date, setDate, day, setDay, month, setMonth, year, setYear, startDay, setStartDay, currentDays, DAYS_OF_THE_WEEK } = useUsersContext();
     const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -239,219 +239,436 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             const d = index - (startDay - 2);
                 
             projects.map((item, ind)=> {
-                if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() >= new Date(item?.dateStart).getTime()) && 
-                (new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() <= new Date(item?.dateEnd).getTime()) ) {
+                if (new Date(item?.dateStart).getTime() === new Date(item?.dateEnd).getTime()) {
                     // console.log("d: ", ind,
-                    //     new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)),
-                    //     new Date(item?.dateEnd) //.setHours(new Date(item?.dateStart).getHours()))
-                    // )  
+                    //     new Date(new Date(item?.dateStart).setHours(new Date(item?.dateStart).getHours()+3)).toISOString(),
+                    //     new Date(new Date(item?.dateEnd).setHours(new Date(item?.dateEnd).getHours()+3)).toISOString(), //.setHours(new Date(item?.dateStart).getHours()))
+                    // ) 
+                    if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() === new Date(item?.dateStart).getTime()) ) {
+                        // console.log("d: ", ind,
+                        //     new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)),
+                        //     new Date(item?.dateEnd) //.setHours(new Date(item?.dateStart).getHours()))
+                        // )  
 
-                    if (!nameProj[index]) {
-                       arr[index] = true 
-                       nameProj[index] = item.name
-                       setProjectName(nameProj)
+                        if (!nameProj[index]) {
+                        arr[index] = true 
+                        nameProj[index] = item.name
+                        setProjectName(nameProj)
 
-                       endProj[index] = item.dateEnd 
-                       setProjectEnd(endProj)
+                        endProj[index] = item.dateEnd 
+                        setProjectEnd(endProj)
 
-                       statusProj[index] = item.status 
-                       setProjectStatus(statusProj)
+                        statusProj[index] = item.status 
+                        setProjectStatus(statusProj)
 
-                       colorProj[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                       setProjectColor(colorProj)
+                        colorProj[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                        setProjectColor(colorProj)
 
-                       //console.log("timeProj: ", item)
-                       timeProj[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                       setProjectTime(timeProj)
+                        //console.log("timeProj: ", item)
+                        timeProj[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                        setProjectTime(timeProj)
 
 
-                       cityProj[index] = item.city 
-                       setProjectCity(cityProj)
+                        cityProj[index] = item.city 
+                        setProjectCity(cityProj)
 
-                       commentProj[index] = item.comment
-                       setProjectComment(commentProj)
+                        commentProj[index] = item.comment
+                        setProjectComment(commentProj)
 
-                       specifProj[index] = item.specifika
-                       setProjectSpecifika(specifProj)
+                        specifProj[index] = item.specifika
+                        setProjectSpecifika(specifProj)
 
-                       idProj[index] = item.id
-                       setProjectId(idProj)
-                    } 
-                    else if (!nameProj2[index]) {
-                        arr2[index] = true 
-                        nameProj2[index] = item.name
-                        setProjectName2(nameProj2)
+                        idProj[index] = item.id
+                        setProjectId(idProj)
+                        } 
+                        else if (!nameProj2[index]) {
+                            arr2[index] = true 
+                            nameProj2[index] = item.name
+                            setProjectName2(nameProj2)
 
-                        endProj2[index] = item.dateEnd 
-                        setProjectEnd2(endProj2)
+                            endProj2[index] = item.dateEnd 
+                            setProjectEnd2(endProj2)
 
-                        statusProj2[index] = item.status 
-                        setProjectStatus2(statusProj2)
+                            statusProj2[index] = item.status 
+                            setProjectStatus2(statusProj2)
 
-                        colorProj2[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                        setProjectColor2(colorProj2)
+                            colorProj2[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                            setProjectColor2(colorProj2)
 
-                        timeProj2[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                        setProjectTime2(timeProj2)
+                            timeProj2[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                            setProjectTime2(timeProj2)
 
-                        cityProj2[index] = item.city 
-                        setProjectCity2(cityProj2)
+                            cityProj2[index] = item.city 
+                            setProjectCity2(cityProj2)
 
-                        commentProj2[index] = item.comment
-                        setProjectComment2(commentProj2)
+                            commentProj2[index] = item.comment
+                            setProjectComment2(commentProj2)
 
-                        specifProj2[index] = item.specifika
-                        setProjectSpecifika2(specifProj2)
+                            specifProj2[index] = item.specifika
+                            setProjectSpecifika2(specifProj2)
 
-                        idProj2[index] = item.id
-                        setProjectId2(idProj2)
-                    } 
-                    else if (!nameProj3[index]) {
-                        arr3[index] = true 
-                        nameProj3[index] = item.name
-                        setProjectName3(nameProj3)
+                            idProj2[index] = item.id
+                            setProjectId2(idProj2)
+                        } 
+                        else if (!nameProj3[index]) {
+                            arr3[index] = true 
+                            nameProj3[index] = item.name
+                            setProjectName3(nameProj3)
 
-                        endProj3[index] = item.dateEnd 
-                        setProjectEnd3(endProj3)
+                            endProj3[index] = item.dateEnd 
+                            setProjectEnd3(endProj3)
 
-                        statusProj3[index] = item.status 
-                        setProjectStatus3(statusProj3)
+                            statusProj3[index] = item.status 
+                            setProjectStatus3(statusProj3)
 
-                        colorProj3[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                        setProjectColor3(colorProj3)
+                            colorProj3[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                            setProjectColor3(colorProj3)
 
-                        timeProj3[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                        setProjectTime3(timeProj3)
+                            timeProj3[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                            setProjectTime3(timeProj3)
 
-                        cityProj3[index] = item.city 
-                        setProjectCity3(cityProj3)
+                            cityProj3[index] = item.city 
+                            setProjectCity3(cityProj3)
 
-                        commentProj3[index] = item.comment
-                        setProjectComment3(commentProj3)
+                            commentProj3[index] = item.comment
+                            setProjectComment3(commentProj3)
 
-                        specifProj3[index] = item.specifika
-                        setProjectSpecifika3(specifProj3)
+                            specifProj3[index] = item.specifika
+                            setProjectSpecifika3(specifProj3)
 
-                        idProj3[index] = item.id
-                        setProjectId3(idProj3)
-                    } 
-                    else if (!nameProj4[index]) { 
-                        arr4[index] = true 
-                        nameProj4[index] = item.name
-                        setProjectName4(nameProj4)
+                            idProj3[index] = item.id
+                            setProjectId3(idProj3)
+                        } 
+                        else if (!nameProj4[index]) { 
+                            arr4[index] = true 
+                            nameProj4[index] = item.name
+                            setProjectName4(nameProj4)
 
-                        endProj4[index] = item.dateEnd 
-                        setProjectEnd4(endProj4)
+                            endProj4[index] = item.dateEnd 
+                            setProjectEnd4(endProj4)
 
-                        statusProj4[index] = item.status 
-                        setProjectStatus4(statusProj4)
+                            statusProj4[index] = item.status 
+                            setProjectStatus4(statusProj4)
 
-                        colorProj4[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                        setProjectColor4(colorProj4)
+                            colorProj4[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                            setProjectColor4(colorProj4)
 
-                        timeProj4[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                        setProjectTime4(timeProj4)
+                            timeProj4[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                            setProjectTime4(timeProj4)
 
-                        cityProj4[index] = item.city 
-                        setProjectCity4(cityProj4)
+                            cityProj4[index] = item.city 
+                            setProjectCity4(cityProj4)
 
-                        commentProj4[index] = item.comment
-                        setProjectComment4(commentProj4)
+                            commentProj4[index] = item.comment
+                            setProjectComment4(commentProj4)
 
-                        specifProj4[index] = item.specifika
-                        setProjectSpecifika4(specifProj4)
+                            specifProj4[index] = item.specifika
+                            setProjectSpecifika4(specifProj4)
 
-                        idProj4[index] = item.id
-                        setProjectId4(idProj4)
-                    } 
-                    else if (!nameProj5[index]) {
-                        arr5[index] = true 
-                        nameProj5[index] = item.name
-                        setProjectName5(nameProj5)
+                            idProj4[index] = item.id
+                            setProjectId4(idProj4)
+                        } 
+                        else if (!nameProj5[index]) {
+                            arr5[index] = true 
+                            nameProj5[index] = item.name
+                            setProjectName5(nameProj5)
 
-                        endProj5[index] = item.dateEnd 
-                        setProjectEnd5(endProj5)
+                            endProj5[index] = item.dateEnd 
+                            setProjectEnd5(endProj5)
 
-                        statusProj5[index] = item.status 
-                        setProjectStatus5(statusProj5)
+                            statusProj5[index] = item.status 
+                            setProjectStatus5(statusProj5)
 
-                        colorProj5[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                        setProjectColor5(colorProj5)
+                            colorProj5[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                            setProjectColor5(colorProj5)
 
-                        timeProj5[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                        setProjectTime5(timeProj5)
+                            timeProj5[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                            setProjectTime5(timeProj5)
 
-                        cityProj5[index] = item.city 
-                        setProjectCity5(cityProj5)
+                            cityProj5[index] = item.city 
+                            setProjectCity5(cityProj5)
 
-                        commentProj5[index] = item.comment
-                        setProjectComment5(commentProj5)
+                            commentProj5[index] = item.comment
+                            setProjectComment5(commentProj5)
 
-                        specifProj5[index] = item.specifika
-                        setProjectSpecifika5(specifProj5)
+                            specifProj5[index] = item.specifika
+                            setProjectSpecifika5(specifProj5)
 
-                        idProj5[index] = item.id
-                        setProjectId5(idProj5)
-                    }  
-                    else if (!nameProj6[index]) {
-                        arr6[index] = true 
-                        nameProj6[index] = item.name
-                        setProjectName6(nameProj6)
+                            idProj5[index] = item.id
+                            setProjectId5(idProj5)
+                        }  
+                        else if (!nameProj6[index]) {
+                            arr6[index] = true 
+                            nameProj6[index] = item.name
+                            setProjectName6(nameProj6)
 
-                        endProj6[index] = item.dateEnd 
-                        setProjectEnd6(endProj6)
+                            endProj6[index] = item.dateEnd 
+                            setProjectEnd6(endProj6)
 
-                        statusProj6[index] = item.status 
-                        setProjectStatus6(statusProj6)
+                            statusProj6[index] = item.status 
+                            setProjectStatus6(statusProj6)
 
-                        colorProj6[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                        setProjectColor6(colorProj6)
+                            colorProj6[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                            setProjectColor6(colorProj6)
 
-                        timeProj6[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                        setProjectTime6(timeProj6)
+                            timeProj6[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                            setProjectTime6(timeProj6)
 
-                        cityProj6[index] = item.city 
-                        setProjectCity6(cityProj6)
+                            cityProj6[index] = item.city 
+                            setProjectCity6(cityProj6)
 
-                        commentProj6[index] = item.comment
-                        setProjectComment6(commentProj6)
+                            commentProj6[index] = item.comment
+                            setProjectComment6(commentProj6)
 
-                        specifProj6[index] = item.specifika
-                        setProjectSpecifika6(specifProj6)
+                            specifProj6[index] = item.specifika
+                            setProjectSpecifika6(specifProj6)
 
-                        idProj6[index] = item.id
-                        setProjectId6(idProj6)
-                    } 
-                    else if (!nameProj7[index]) {
-                        arr7[index] = true 
-                        nameProj7[index] = item.name
-                        setProjectName7(nameProj7)
+                            idProj6[index] = item.id
+                            setProjectId6(idProj6)
+                        } 
+                        else if (!nameProj7[index]) {
+                            arr7[index] = true 
+                            nameProj7[index] = item.name
+                            setProjectName7(nameProj7)
 
-                        endProj7[index] = item.dateEnd 
-                        setProjectEnd7(endProj7)
+                            endProj7[index] = item.dateEnd 
+                            setProjectEnd7(endProj7)
 
-                        statusProj7[index] = item.status 
-                        setProjectStatus7(statusProj7)
+                            statusProj7[index] = item.status 
+                            setProjectStatus7(statusProj7)
 
-                        colorProj7[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                        setProjectColor7(colorProj7)
+                            colorProj7[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                            setProjectColor7(colorProj7)
 
-                        timeProj7[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                        setProjectTime7(timeProj7)
+                            timeProj7[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                            setProjectTime7(timeProj7)
 
-                        cityProj7[index] = item.city 
-                        setProjectCity7(cityProj7)
+                            cityProj7[index] = item.city 
+                            setProjectCity7(cityProj7)
 
-                        commentProj7[index] = item.comment
-                        setProjectComment7(commentProj7)
+                            commentProj7[index] = item.comment
+                            setProjectComment7(commentProj7)
 
-                        specifProj7[index] = item.specifika
-                        setProjectSpecifika7(specifProj7)
+                            specifProj7[index] = item.specifika
+                            setProjectSpecifika7(specifProj7)
 
-                        idProj7[index] = item.id
-                        setProjectId7(idProj7)
-                    }                 
+                            idProj7[index] = item.id
+                            setProjectId7(idProj7)
+                        }                 
+                    }
+
+                } else {
+                    if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() >= new Date(item?.dateStart).getTime()) && 
+                        (new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() <= new Date(item?.dateEnd).getTime()) ) {
+
+                        if (!nameProj[index]) {
+                        arr[index] = true 
+                        nameProj[index] = item.name
+                        setProjectName(nameProj)
+
+                        endProj[index] = item.dateEnd 
+                        setProjectEnd(endProj)
+
+                        statusProj[index] = item.status 
+                        setProjectStatus(statusProj)
+
+                        colorProj[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                        setProjectColor(colorProj)
+
+                        //console.log("timeProj: ", item)
+                        timeProj[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                        setProjectTime(timeProj)
+
+
+                        cityProj[index] = item.city 
+                        setProjectCity(cityProj)
+
+                        commentProj[index] = item.comment
+                        setProjectComment(commentProj)
+
+                        specifProj[index] = item.specifika
+                        setProjectSpecifika(specifProj)
+
+                        idProj[index] = item.id
+                        setProjectId(idProj)
+                        } 
+                        else if (!nameProj2[index]) {
+                            arr2[index] = true 
+                            nameProj2[index] = item.name
+                            setProjectName2(nameProj2)
+
+                            endProj2[index] = item.dateEnd 
+                            setProjectEnd2(endProj2)
+
+                            statusProj2[index] = item.status 
+                            setProjectStatus2(statusProj2)
+
+                            colorProj2[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                            setProjectColor2(colorProj2)
+
+                            timeProj2[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                            setProjectTime2(timeProj2)
+
+                            cityProj2[index] = item.city 
+                            setProjectCity2(cityProj2)
+
+                            commentProj2[index] = item.comment
+                            setProjectComment2(commentProj2)
+
+                            specifProj2[index] = item.specifika
+                            setProjectSpecifika2(specifProj2)
+
+                            idProj2[index] = item.id
+                            setProjectId2(idProj2)
+                        } 
+                        else if (!nameProj3[index]) {
+                            arr3[index] = true 
+                            nameProj3[index] = item.name
+                            setProjectName3(nameProj3)
+
+                            endProj3[index] = item.dateEnd 
+                            setProjectEnd3(endProj3)
+
+                            statusProj3[index] = item.status 
+                            setProjectStatus3(statusProj3)
+
+                            colorProj3[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                            setProjectColor3(colorProj3)
+
+                            timeProj3[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                            setProjectTime3(timeProj3)
+
+                            cityProj3[index] = item.city 
+                            setProjectCity3(cityProj3)
+
+                            commentProj3[index] = item.comment
+                            setProjectComment3(commentProj3)
+
+                            specifProj3[index] = item.specifika
+                            setProjectSpecifika3(specifProj3)
+
+                            idProj3[index] = item.id
+                            setProjectId3(idProj3)
+                        } 
+                        else if (!nameProj4[index]) { 
+                            arr4[index] = true 
+                            nameProj4[index] = item.name
+                            setProjectName4(nameProj4)
+
+                            endProj4[index] = item.dateEnd 
+                            setProjectEnd4(endProj4)
+
+                            statusProj4[index] = item.status 
+                            setProjectStatus4(statusProj4)
+
+                            colorProj4[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                            setProjectColor4(colorProj4)
+
+                            timeProj4[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                            setProjectTime4(timeProj4)
+
+                            cityProj4[index] = item.city 
+                            setProjectCity4(cityProj4)
+
+                            commentProj4[index] = item.comment
+                            setProjectComment4(commentProj4)
+
+                            specifProj4[index] = item.specifika
+                            setProjectSpecifika4(specifProj4)
+
+                            idProj4[index] = item.id
+                            setProjectId4(idProj4)
+                        } 
+                        else if (!nameProj5[index]) {
+                            arr5[index] = true 
+                            nameProj5[index] = item.name
+                            setProjectName5(nameProj5)
+
+                            endProj5[index] = item.dateEnd 
+                            setProjectEnd5(endProj5)
+
+                            statusProj5[index] = item.status 
+                            setProjectStatus5(statusProj5)
+
+                            colorProj5[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                            setProjectColor5(colorProj5)
+
+                            timeProj5[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                            setProjectTime5(timeProj5)
+
+                            cityProj5[index] = item.city 
+                            setProjectCity5(cityProj5)
+
+                            commentProj5[index] = item.comment
+                            setProjectComment5(commentProj5)
+
+                            specifProj5[index] = item.specifika
+                            setProjectSpecifika5(specifProj5)
+
+                            idProj5[index] = item.id
+                            setProjectId5(idProj5)
+                        }  
+                        else if (!nameProj6[index]) {
+                            arr6[index] = true 
+                            nameProj6[index] = item.name
+                            setProjectName6(nameProj6)
+
+                            endProj6[index] = item.dateEnd 
+                            setProjectEnd6(endProj6)
+
+                            statusProj6[index] = item.status 
+                            setProjectStatus6(statusProj6)
+
+                            colorProj6[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                            setProjectColor6(colorProj6)
+
+                            timeProj6[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                            setProjectTime6(timeProj6)
+
+                            cityProj6[index] = item.city 
+                            setProjectCity6(cityProj6)
+
+                            commentProj6[index] = item.comment
+                            setProjectComment6(commentProj6)
+
+                            specifProj6[index] = item.specifika
+                            setProjectSpecifika6(specifProj6)
+
+                            idProj6[index] = item.id
+                            setProjectId6(idProj6)
+                        } 
+                        else if (!nameProj7[index]) {
+                            arr7[index] = true 
+                            nameProj7[index] = item.name
+                            setProjectName7(nameProj7)
+
+                            endProj7[index] = item.dateEnd 
+                            setProjectEnd7(endProj7)
+
+                            statusProj7[index] = item.status 
+                            setProjectStatus7(statusProj7)
+
+                            colorProj7[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                            setProjectColor7(colorProj7)
+
+                            timeProj7[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                            setProjectTime7(timeProj7)
+
+                            cityProj7[index] = item.city 
+                            setProjectCity7(cityProj7)
+
+                            commentProj7[index] = item.comment
+                            setProjectComment7(commentProj7)
+
+                            specifProj7[index] = item.specifika
+                            setProjectSpecifika7(specifProj7)
+
+                            idProj7[index] = item.id
+                            setProjectId7(idProj7)
+                        }                 
+                    }
                 }
+                
             })
             
 
@@ -465,6 +682,290 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
         })
 
     }, [projects])
+
+
+    // Создание проекта
+    const addNewProject = async(item, number, day) => {
+        console.log("day: ", day)
+
+        day.setHours(day.getHours() + 3); //00:00
+
+        const projectTitle = 'Название проекта'
+        const projectStatus = 'Новый'
+        const projectColor = '#1E90FF'
+
+        const data = {
+            name: projectTitle, 
+            status: projectStatus,
+            specifika: '',
+            city: '',
+            datestart: day, 
+            dateend: day, //new Date(endDay.setDate(endDay.getDate() + 1)).toISOString(), 
+            teh: '', 
+            managerId: '210', 
+            companyId: '21', 
+            chatId: '1775583141', 
+            spec: '', 
+            geo: '',
+            index: 1,
+            number: number,
+        }
+
+        //добавить проект в базу данных
+        const res = await addProject(data)
+
+        console.log("res: ", res)
+
+        //setProjectName(projectTitle)
+
+        if (number === 1) {
+            let arr = [...project]
+            arr[item] = true
+            setProject(arr)
+
+            let nameProj = [...projectName]
+            nameProj[item] = projectTitle
+            setProjectName(nameProj)
+
+            let statusProj = [...projectStatus]
+            statusProj[item] = projectStatus
+            setProjectStatus(statusProj)
+
+            let colorProj = [...projectColor]
+            colorProj[item] = projectColor
+            setProjectColor(colorProj)
+
+            let idProj = [...projectId]
+            idProj[item] = res?.id
+            setProjectId(idProj)
+
+            // let endDay = new Date(day.getTime());
+            // let endProj = [...projectEnd]
+            // endProj[item] =  endDay //new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
+            // setProjectEnd(endProj)
+
+            let timeProj = []
+            timeProj[item] = "00:00" 
+            setProjectTime(timeProj)
+
+            let arr2 = []
+            arr2[item] = false
+            setShowButtonAdd(arr2)
+        } 
+        if (number === 2) {
+            let arr = [...project2]
+            arr[item] = true
+            setProject2(arr)
+
+            let nameProj = [...projectName2]
+            nameProj[item] = projectTitle
+            setProjectName2(nameProj)
+
+            let statusProj2 = [...projectStatus2]
+            statusProj2[item] = projectStatus
+            setProjectStatus2(statusProj2)
+
+            let colorProj2 = [...projectColor2]
+            colorProj2[item] = projectColor
+            setProjectColor2(colorProj2)
+
+            let idProj = [...projectId2]
+            idProj[item] = res?.id
+            setProjectId2(idProj)
+
+            // let endDay = new Date(day.getTime());
+            // let endProj = [...projectEnd2]
+            // endProj[item] =  endDay //new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
+            // setProjectEnd2(endProj)
+
+            let timeProj = []
+            timeProj[item] = "00:00" 
+            setProjectTime2(timeProj)
+
+            let arr2 = []
+            arr2[item] = false
+            setShowButtonAdd2(arr2)
+        } 
+        if (number === 3) {
+            let arr = [...project3]
+            arr[item] = true
+            setProject3(arr)
+
+            let nameProj = [...projectName3]
+            nameProj[item] = projectTitle
+            setProjectName3(nameProj)
+
+            let statusProj3 = [...projectStatus3]
+            statusProj3[item] = projectStatus
+            setProjectStatus3(statusProj3)
+
+            let colorProj3 = [...projectColor3]
+            colorProj3[item] = projectColor
+            setProjectColor3(colorProj3)
+
+            let idProj = [...projectId3]
+            idProj[item] = res?.id
+            setProjectId3(idProj)
+
+            // let endDay = new Date(day.getTime());
+            // let endProj = [...projectEnd3]
+            // endProj[item] = endDay // new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
+            // setProjectEnd3(endProj)
+
+            let timeProj = []
+            timeProj[item] = "00:00" 
+            setProjectTime3(timeProj)
+
+            let arr2 = []
+            arr2[item] = false
+            setShowButtonAdd3(arr2)
+        } 
+        if (number === 4) {
+            let arr = [...project4]
+            arr[item] = true
+            setProject4(arr)
+
+            let nameProj = [...projectName4]
+            nameProj[item] = projectTitle
+            setProjectName4(nameProj)
+
+            let statusProj4 = [...projectStatus4]
+            statusProj4[item] = projectStatus
+            setProjectStatus4(statusProj4)
+
+            let colorProj4 = [...projectColor4]
+            colorProj4[item] = projectColor
+            setProjectColor4(colorProj4)
+
+            let idProj = [...projectId4]
+            idProj[item] = res?.id
+            setProjectId4(idProj)
+
+            // let endDay = new Date(day.getTime());
+            // let endProj = [...projectEnd4]
+            // endProj[item] = endDay // new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
+            // setProjectEnd4(endProj)
+
+            let timeProj = []
+            timeProj[item] = "00:00" 
+            setProjectTime4(timeProj)
+
+            let arr2 = []
+            arr2[item] = false
+            setShowButtonAdd4(arr2)
+        }
+        if (number === 5) {
+            let arr = [...project5]
+            arr[item] = true
+            setProject5(arr)
+
+            let nameProj = [...projectName5]
+            nameProj[item] = projectTitle
+            setProjectName5(nameProj)
+
+            let statusProj5 = [...projectStatus5]
+            statusProj5[item] = projectStatus
+            setProjectStatus5(statusProj5)
+
+            let colorProj5 = [...projectColor5]
+            colorProj5[item] = projectColor
+            setProjectColor5(colorProj5)
+
+            let idProj = [...projectId5]
+            idProj[item] = res?.id
+            setProjectId5(idProj)
+
+            // let endDay = new Date(day.getTime());
+            // let endProj = [...projectEnd5]
+            // endProj[item] = endDay // new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
+            // setProjectEnd5(endProj)
+
+            let timeProj = []
+            timeProj[item] = "00:00" 
+            setProjectTime5(timeProj)
+
+            let arr2 = []
+            arr2[item] = false
+            setShowButtonAdd5(arr2)
+        } 
+        if (number === 6) {
+            let arr = [...project6]
+            arr[item] = true
+            setProject6(arr)
+
+            let nameProj = [...projectName6]
+            nameProj[item] = projectTitle
+            setProjectName6(nameProj)
+
+            let statusProj6 = [...projectStatus6]
+            statusProj6[item] = projectStatus
+            setProjectStatus6(statusProj6)
+
+            let colorProj6 = [...projectColor6]
+            colorProj6[item] = projectColor
+            setProjectColor6(colorProj6)
+
+            let idProj = [...projectId6]
+            idProj[item] = res?.id
+            setProjectId6(idProj)
+
+            // let endDay = new Date(day.getTime());
+            // let endProj = [...projectEnd6]
+            // endProj[item] = endDay // new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
+            // setProjectEnd6(endProj)
+
+            let timeProj = []
+            timeProj[item] = "00:00" 
+            setProjectTime6(timeProj)
+
+            let arr2 = []
+            arr2[item] = false
+            setShowButtonAdd6(arr2)
+        } 
+        if (number === 7) {
+            let arr = [...project7]
+            arr[item] = true
+            setProject7(arr)
+
+            let nameProj = [...projectName7]
+            nameProj[item] = projectTitle
+            setProjectName7(nameProj)
+
+            let statusProj7 = [...projectStatus7]
+            statusProj7[item] = projectStatus
+            setProjectStatus7(statusProj7)
+
+            let colorProj7 = [...projectColor7]
+            colorProj7[item] = projectColor
+            setProjectColor7(colorProj7)
+
+            let idProj = [...projectId7]
+            idProj[item] = res?.id
+            setProjectId7(idProj)
+
+            // let endDay = new Date(day.getTime());
+            // let endProj = [...projectEnd7]
+            // endProj[item] = endDay // new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
+            // setProjectEnd7(endProj)
+
+            let timeProj = []
+            timeProj[item] = "00:00" 
+            setProjectTime7(timeProj)
+
+            let arr2 = []
+            arr2[item] = false
+            setShowButtonAdd7(arr2)
+        }
+
+        setProjects((projects) => {	
+            const usersCopy = JSON.parse(JSON.stringify(projects));
+            usersCopy.push(res)
+
+            return usersCopy;
+        });
+        
+    }
+
 
     useEffect(() => {
         //console.log(ref.current.clientHeight)
@@ -585,282 +1086,6 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
         //console.log(manthList.findIndex(el => el.value === selectedOption.value)); 
         let index = manthList.findIndex(el => el.value === selectedOption.value)
         setDate(new Date(year, index, day))
-    }
-
-// Создание проекта
-    const addNewProject = async(item, number, day) => {
-
-        console.log("day: ", day)
-
-        day.setHours(day.getHours() + 3); //00:00
-        //const endDay = day
-        //let endDay = new Date(day.getTime());
-
-
-        const projectTitle = 'Название проекта'
-        const projectStatus = 'Новый'
-        const projectColor = '#1E90FF'
-
-        const res = await addProject({
-            name: projectTitle, 
-            status: projectStatus,
-            specifika: '',
-            city: '',
-            datestart: day, 
-            dateend: day, //new Date(endDay.setDate(endDay.getDate() + 1)).toISOString(), 
-            teh: '', 
-            managerId: '210', 
-            companyId: '21', 
-            chatId: '1775583141', 
-            spec: '', 
-            geo: '',
-            index: 1,
-            number: number,
-        })
-
-        console.log("res: ", res)
-
-        //setProjectName(projectTitle)
-
-        if (number === 1) {
-            let arr = [...project]
-            arr[item] = true
-            setProject(arr)
-
-            let nameProj = [...projectName]
-            nameProj[item] = projectTitle
-            setProjectName(nameProj)
-
-            let statusProj = [...projectStatus]
-            statusProj[item] = projectStatus
-            setProjectStatus(statusProj)
-
-            let colorProj = [...projectColor]
-            colorProj[item] = projectColor
-            setProjectColor(colorProj)
-
-            let idProj = [...projectId]
-            idProj[item] = res?.id
-            setProjectId(idProj)
-
-            let endDay = new Date(day.getTime());
-            let endProj = [...projectEnd]
-            endProj[item] =  endDay //new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
-            setProjectEnd(endProj)
-
-            let timeProj = []
-            timeProj[item] = "00:00" 
-            setProjectTime(timeProj)
-
-            let arr2 = []
-            arr2[item] = false
-            setShowButtonAdd(arr2)
-        } 
-        if (number === 2) {
-            let arr = [...project2]
-            arr[item] = true
-            setProject2(arr)
-
-            let nameProj = [...projectName2]
-            nameProj[item] = projectTitle
-            setProjectName2(nameProj)
-
-            let statusProj2 = [...projectStatus2]
-            statusProj2[item] = projectStatus
-            setProjectStatus2(statusProj2)
-
-            let colorProj2 = [...projectColor2]
-            colorProj2[item] = projectColor
-            setProjectColor2(colorProj2)
-
-            let idProj = [...projectId2]
-            idProj[item] = res?.id
-            setProjectId2(idProj)
-
-            let endDay = new Date(day.getTime());
-            let endProj = [...projectEnd2]
-            endProj[item] =  new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
-            setProjectEnd2(endProj)
-
-            let timeProj = []
-            timeProj[item] = "00:00" 
-            setProjectTime2(timeProj)
-
-            let arr2 = []
-            arr2[item] = false
-            setShowButtonAdd2(arr2)
-        } 
-        if (number === 3) {
-            let arr = [...project3]
-            arr[item] = true
-            setProject3(arr)
-
-            let nameProj = [...projectName3]
-            nameProj[item] = projectTitle
-            setProjectName3(nameProj)
-
-            let statusProj3 = [...projectStatus3]
-            statusProj3[item] = projectStatus
-            setProjectStatus3(statusProj3)
-
-            let colorProj3 = [...projectColor3]
-            colorProj3[item] = projectColor
-            setProjectColor3(colorProj3)
-
-            let idProj = [...projectId3]
-            idProj[item] = res?.id
-            setProjectId3(idProj)
-
-            let endDay = new Date(day.getTime());
-            let endProj = [...projectEnd3]
-            endProj[item] =  new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
-            setProjectEnd3(endProj)
-
-            let timeProj = []
-            timeProj[item] = "00:00" 
-            setProjectTime3(timeProj)
-
-            let arr2 = []
-            arr2[item] = false
-            setShowButtonAdd3(arr2)
-        } 
-        if (number === 4) {
-            let arr = [...project4]
-            arr[item] = true
-            setProject4(arr)
-
-            let nameProj = [...projectName4]
-            nameProj[item] = projectTitle
-            setProjectName4(nameProj)
-
-            let statusProj4 = [...projectStatus4]
-            statusProj4[item] = projectStatus
-            setProjectStatus4(statusProj4)
-
-            let colorProj4 = [...projectColor4]
-            colorProj4[item] = projectColor
-            setProjectColor4(colorProj4)
-
-            let idProj = [...projectId4]
-            idProj[item] = res?.id
-            setProjectId4(idProj)
-
-            let endDay = new Date(day.getTime());
-            let endProj = [...projectEnd4]
-            endProj[item] =  new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
-            setProjectEnd4(endProj)
-
-            let timeProj = []
-            timeProj[item] = "00:00" 
-            setProjectTime4(timeProj)
-
-            let arr2 = []
-            arr2[item] = false
-            setShowButtonAdd4(arr2)
-        }
-        if (number === 5) {
-            let arr = [...project5]
-            arr[item] = true
-            setProject5(arr)
-
-            let nameProj = [...projectName5]
-            nameProj[item] = projectTitle
-            setProjectName5(nameProj)
-
-            let statusProj5 = [...projectStatus5]
-            statusProj5[item] = projectStatus
-            setProjectStatus5(statusProj5)
-
-            let colorProj5 = [...projectColor5]
-            colorProj5[item] = projectColor
-            setProjectColor5(colorProj5)
-
-            let idProj = [...projectId5]
-            idProj[item] = res?.id
-            setProjectId5(idProj)
-
-            let endDay = new Date(day.getTime());
-            let endProj = [...projectEnd5]
-            endProj[item] =  new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
-            setProjectEnd5(endProj)
-
-            let timeProj = []
-            timeProj[item] = "00:00" 
-            setProjectTime5(timeProj)
-
-            let arr2 = []
-            arr2[item] = false
-            setShowButtonAdd5(arr2)
-        } 
-        if (number === 6) {
-            let arr = [...project6]
-            arr[item] = true
-            setProject6(arr)
-
-            let nameProj = [...projectName6]
-            nameProj[item] = projectTitle
-            setProjectName6(nameProj)
-
-            let statusProj6 = [...projectStatus6]
-            statusProj6[item] = projectStatus
-            setProjectStatus6(statusProj6)
-
-            let colorProj6 = [...projectColor6]
-            colorProj6[item] = projectColor
-            setProjectColor6(colorProj6)
-
-            let idProj = [...projectId6]
-            idProj[item] = res?.id
-            setProjectId6(idProj)
-
-            let endDay = new Date(day.getTime());
-            let endProj = [...projectEnd6]
-            endProj[item] =  new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
-            setProjectEnd6(endProj)
-
-            let timeProj = []
-            timeProj[item] = "00:00" 
-            setProjectTime6(timeProj)
-
-            let arr2 = []
-            arr2[item] = false
-            setShowButtonAdd6(arr2)
-        } 
-        if (number === 7) {
-            let arr = [...project7]
-            arr[item] = true
-            setProject7(arr)
-
-            let nameProj = [...projectName7]
-            nameProj[item] = projectTitle
-            setProjectName7(nameProj)
-
-            let statusProj7 = [...projectStatus7]
-            statusProj7[item] = projectStatus
-            setProjectStatus7(statusProj7)
-
-            let colorProj7 = [...projectColor7]
-            colorProj7[item] = projectColor
-            setProjectColor7(colorProj7)
-
-            let idProj = [...projectId7]
-            idProj[item] = res?.id
-            setProjectId7(idProj)
-
-            let endDay = new Date(day.getTime());
-            let endProj = [...projectEnd7]
-            endProj[item] =  new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
-            setProjectEnd7(endProj)
-
-            let timeProj = []
-            timeProj[item] = "00:00" 
-            setProjectTime7(timeProj)
-
-            let arr2 = []
-            arr2[item] = false
-            setShowButtonAdd7(arr2)
-        }
-        
     }
     
   return (
