@@ -592,6 +592,9 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
         console.log("day: ", day)
 
         day.setHours(day.getHours() + 3); //00:00
+        //const endDay = day
+        let endDay = new Date(day.getTime());
+
 
         const projectTitle = 'Название проекта'
         const projectStatus = 'Новый'
@@ -603,7 +606,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             specifika: '',
             city: '',
             datestart: day, 
-            dateend: day, 
+            dateend: new Date(endDay.setDate(endDay.getDate() + 1)).toISOString(), 
             teh: '', 
             managerId: '210', 
             companyId: '21', 
@@ -635,6 +638,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             colorProj[item] = projectColor
             setProjectColor(colorProj)
 
+            let idProj = [...projectId]
+            idProj[item] = res?.id
+            setProjectId(idProj)
+
             // let endProj = [...e]
             // endProj[item] =  day
             // setProjectEnd(endProj)
@@ -663,6 +670,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             colorProj2[item] = projectColor
             setProjectColor2(colorProj2)
 
+            let idProj = [...projectId2]
+            idProj[item] = res?.id
+            setProjectId2(idProj)
+
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd2(arr2)
@@ -683,6 +694,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             let colorProj3 = [...projectColor3]
             colorProj3[item] = projectColor
             setProjectColor3(colorProj3)
+
+            let idProj = [...projectId3]
+            idProj[item] = res?.id
+            setProjectId3(idProj)
 
             let arr2 = []
             arr2[item] = false
@@ -705,6 +720,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             colorProj4[item] = projectColor
             setProjectColor4(colorProj4)
 
+            let idProj = [...projectId4]
+            idProj[item] = res?.id
+            setProjectId4(idProj)
+
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd4(arr2)
@@ -725,6 +744,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             let colorProj5 = [...projectColor5]
             colorProj5[item] = projectColor
             setProjectColor5(colorProj5)
+
+            let idProj = [...projectId5]
+            idProj[item] = res?.id
+            setProjectId5(idProj)
 
             let arr2 = []
             arr2[item] = false
@@ -747,6 +770,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             colorProj6[item] = projectColor
             setProjectColor6(colorProj6)
 
+            let idProj = [...projectId6]
+            idProj[item] = res?.id
+            setProjectId6(idProj)
+
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd6(arr2)
@@ -767,6 +794,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             let colorProj7 = [...projectColor7]
             colorProj7[item] = projectColor
             setProjectColor7(colorProj7)
+
+            let idProj = [...projectId7]
+            idProj[item] = res?.id
+            setProjectId7(idProj)
 
             let arr2 = []
             arr2[item] = false

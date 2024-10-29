@@ -264,10 +264,10 @@ const Projects = () => {
 
     setId(id)
     setProjectName(name)
-    setStartDate(resProj.dateStart)
+    setStartDate(resProj ? resProj.dateStart : new Date().toISOString())
     setEndDate(new Date(end))
     setStartTime(timeStart) 
-    setEndTime(end.split('T')[1])
+    setEndTime(end.split('T')[1]?.slice(0, 5))
     setCity(city)
     setComment(comment) 
 
