@@ -7,6 +7,7 @@ const Select3 = ({menuShow, setMenuShow, selected}) => {
         <div 
             className={`${cl.select} ${menuShow && cl.selectClicked}`}
             onClick={()=> setMenuShow(!menuShow)}
+            style={{borderColor: `${selected.color}`}}
         >
             <span style={{color: `${selected.color}`}}>
                 {selected.name}

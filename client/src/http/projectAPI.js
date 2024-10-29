@@ -45,7 +45,7 @@ export const deleteProject = async (id) =>{
 
 export const getProjectId = async (id) =>{
     try {
-       let response = await $host.get(`api/projectnew/${id}`);
+       let response = await $host.get(`api/projectnew/get/${id}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getProjectId api", error.message);

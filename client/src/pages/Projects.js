@@ -91,7 +91,7 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
-import { getProjects, deleteProject, editProject } from '../http/projectAPI'
+import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
@@ -249,8 +249,11 @@ const Projects = () => {
   }, [height])
 
 
-  const openProject =(month, item, number, id, name, status, time, specifika, city, comment) => {
-    console.log("item: ", month+1, item, number, specifika)
+  const openProject = async(month, item, number, id, name, end, status, timeStart, specifika, city, comment) => {
+    console.log("item: ", month+1, item, number, specifika, end)
+
+    const resProj = await getProjectId(id)
+    console.log("resProj: ", resProj)
 
     setShowProject(true)
     setShowCalendar(false)
@@ -261,8 +264,10 @@ const Projects = () => {
 
     setId(id)
     setProjectName(name)
-    setStartDate(new Date(2024, month, item))
-    setStartTime(time) 
+    setStartDate(resProj.dateStart)
+    setEndDate(new Date(end))
+    setStartTime(timeStart) 
+    setEndTime(end.split('T')[1])
     setCity(city)
     setComment(comment) 
 
@@ -366,6 +371,9 @@ const Projects = () => {
 
   const savePorject = async(id) => {
 
+    console.log("start: ", startDate)
+    console.log("end: ", endDate)
+
     const month = String(startDate.getMonth()+1).padStart(2, "0");
     const day = String(startDate.getDate()).padStart(2, "0");
 
@@ -403,6 +411,7 @@ const Projects = () => {
   
       const userObject = usersCopy[userIndex];
       usersCopy[userIndex] = { ...userObject, 
+        id: id,
         name: projectName, 
         status: statusProject.name,
         specifika: specifikaProject.name,

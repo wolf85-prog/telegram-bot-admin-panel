@@ -69,9 +69,6 @@ class ProjectController {
         try {
             const projects = await ProjectNew.findOne({
                 where: {id},
-                order: [
-                    ['id', 'DESC'],
-                ],
             })
             return res.status(200).json(projects);
         } catch (error) {
