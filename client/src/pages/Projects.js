@@ -252,8 +252,10 @@ const Projects = () => {
   const openProject = async(month, item, number, id, name, end, status, timeStart, specifika, city, comment) => {
     console.log("item: ", month+1, item, number, specifika, end)
 
+
     const resProj = await getProjectId(id)
     console.log("resProj: ", resProj)
+
 
     setShowProject(true)
     setShowCalendar(false)
@@ -265,17 +267,22 @@ const Projects = () => {
     setId(id)
     setProjectName(name)
     setStartDate(resProj ? resProj.dateStart : new Date().toISOString())
-    setEndDate(new Date(end))
+    setEndDate(resProj.dateEnd)
     setStartTime(timeStart) 
-    setEndTime(end.split('T')[1]?.slice(0, 5))
+    setEndTime(end?.split('T')[1]?.slice(0, 5))
+
+
     setCity(city)
     setComment(comment) 
-
-    setHeight(509)
 
     setStavka({label: "№1", name: "№1"})
     setShowMainTable(true)
     setShowPretendentTable(true)
+
+    setTimeout(()=> {
+      setHeight(509)
+    }, 200)
+    
   }
 
   const onChangeCompany = (e) => {
@@ -374,17 +381,17 @@ const Projects = () => {
     console.log("start: ", startDate)
     console.log("end: ", endDate)
 
-    const month = String(startDate.getMonth()+1).padStart(2, "0");
-    const day = String(startDate.getDate()).padStart(2, "0");
+    const month = String(new Date(startDate).getMonth()+1).padStart(2, "0");
+    const day = String(new Date(startDate).getDate()).padStart(2, "0");
 
-    const month2 = String(endDate.getMonth()+1).padStart(2, "0");
-    const day2 = String(endDate.getDate()).padStart(2, "0");
+    const month2 = String(new Date(endDate).getMonth()+1).padStart(2, "0");
+    const day2 = String(new Date(endDate).getDate()).padStart(2, "0");
   
     const saveData = {
       name: projectName,
       status: statusProject.name,
-      datestart: `${startDate.getFullYear()}-${month}-${day}T${startTime}`,
-      dateend: `${endDate.getFullYear()}-${month2}-${day2}T${endTime}`,
+      datestart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}`,
+      dateend: `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}`,
       teh: tehText, 
       geo, 
       // managerId, 
@@ -402,8 +409,8 @@ const Projects = () => {
     console.log("id: ", id)
   
     setProjects((projects) => {	
-      const month = String(startDate.getMonth()+1).padStart(2, "0");
-      const day = String(startDate.getDate()).padStart(2, "0");
+      const month = String(new Date(startDate).getMonth()+1).padStart(2, "0");
+      const day = String(new Date(startDate).getDate()).padStart(2, "0");
   
       let userIndex = projects.findIndex((item) => item.id === id);
       console.log(userIndex)
@@ -415,8 +422,8 @@ const Projects = () => {
         name: projectName, 
         status: statusProject.name,
         specifika: specifikaProject.name,
-        dateStart: `${startDate.getFullYear()}-${month}-${day}T${startTime}`,
-        dateEnd: `${endDate.getFullYear()}-${month2}-${day2}T${endTime}`
+        dateStart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}`,
+        dateEnd: `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}`
       };
   
       console.log("update user: ", usersCopy)

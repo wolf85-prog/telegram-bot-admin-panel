@@ -241,10 +241,10 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             projects.map((item, ind)=> {
                 if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() >= new Date(item?.dateStart).getTime()) && 
                 (new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() <= new Date(item?.dateEnd).getTime()) ) {
-                    console.log("d: ", ind,
-                        new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)),
-                        new Date(item?.dateEnd) //.setHours(new Date(item?.dateStart).getHours()))
-                    )  
+                    // console.log("d: ", ind,
+                    //     new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)),
+                    //     new Date(item?.dateEnd) //.setHours(new Date(item?.dateStart).getHours()))
+                    // )  
 
                     if (!nameProj[index]) {
                        arr[index] = true 
@@ -453,6 +453,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
                     }                 
                 }
             })
+            
 
             setProject(arr)     
             setProject2(arr2) 
@@ -593,7 +594,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
 
         day.setHours(day.getHours() + 3); //00:00
         //const endDay = day
-        let endDay = new Date(day.getTime());
+        //let endDay = new Date(day.getTime());
 
 
         const projectTitle = 'Название проекта'
@@ -606,7 +607,7 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             specifika: '',
             city: '',
             datestart: day, 
-            dateend: new Date(endDay.setDate(endDay.getDate() + 1)).toISOString(), 
+            dateend: day, //new Date(endDay.setDate(endDay.getDate() + 1)).toISOString(), 
             teh: '', 
             managerId: '210', 
             companyId: '21', 
@@ -642,12 +643,14 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             idProj[item] = res?.id
             setProjectId(idProj)
 
-            // let endProj = [...e]
-            // endProj[item] =  day
-            // setProjectEnd(endProj)
+            let endDay = new Date(day.getTime());
+            let endProj = [...projectEnd]
+            endProj[item] =  endDay //new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
+            setProjectEnd(endProj)
 
-            // let timeProj[index] = "00:00" 
-            // setProjectTime(timeProj)
+            let timeProj = []
+            timeProj[item] = "00:00" 
+            setProjectTime(timeProj)
 
             let arr2 = []
             arr2[item] = false
@@ -674,6 +677,15 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             idProj[item] = res?.id
             setProjectId2(idProj)
 
+            let endDay = new Date(day.getTime());
+            let endProj = [...projectEnd2]
+            endProj[item] =  new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
+            setProjectEnd2(endProj)
+
+            let timeProj = []
+            timeProj[item] = "00:00" 
+            setProjectTime2(timeProj)
+
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd2(arr2)
@@ -698,6 +710,15 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             let idProj = [...projectId3]
             idProj[item] = res?.id
             setProjectId3(idProj)
+
+            let endDay = new Date(day.getTime());
+            let endProj = [...projectEnd3]
+            endProj[item] =  new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
+            setProjectEnd3(endProj)
+
+            let timeProj = []
+            timeProj[item] = "00:00" 
+            setProjectTime3(timeProj)
 
             let arr2 = []
             arr2[item] = false
@@ -724,6 +745,15 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             idProj[item] = res?.id
             setProjectId4(idProj)
 
+            let endDay = new Date(day.getTime());
+            let endProj = [...projectEnd4]
+            endProj[item] =  new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
+            setProjectEnd4(endProj)
+
+            let timeProj = []
+            timeProj[item] = "00:00" 
+            setProjectTime4(timeProj)
+
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd4(arr2)
@@ -748,6 +778,15 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             let idProj = [...projectId5]
             idProj[item] = res?.id
             setProjectId5(idProj)
+
+            let endDay = new Date(day.getTime());
+            let endProj = [...projectEnd5]
+            endProj[item] =  new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
+            setProjectEnd5(endProj)
+
+            let timeProj = []
+            timeProj[item] = "00:00" 
+            setProjectTime5(timeProj)
 
             let arr2 = []
             arr2[item] = false
@@ -774,6 +813,15 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             idProj[item] = res?.id
             setProjectId6(idProj)
 
+            let endDay = new Date(day.getTime());
+            let endProj = [...projectEnd6]
+            endProj[item] =  new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
+            setProjectEnd6(endProj)
+
+            let timeProj = []
+            timeProj[item] = "00:00" 
+            setProjectTime6(timeProj)
+
             let arr2 = []
             arr2[item] = false
             setShowButtonAdd6(arr2)
@@ -798,6 +846,15 @@ export default function Calendar2({projects, openProject, setHeight, showSidebar
             let idProj = [...projectId7]
             idProj[item] = res?.id
             setProjectId7(idProj)
+
+            let endDay = new Date(day.getTime());
+            let endProj = [...projectEnd7]
+            endProj[item] =  new Date(endDay.setDate(endDay.getDate() + 1)).toISOString() 
+            setProjectEnd7(endProj)
+
+            let timeProj = []
+            timeProj[item] = "00:00" 
+            setProjectTime7(timeProj)
 
             let arr2 = []
             arr2[item] = false
