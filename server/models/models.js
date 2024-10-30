@@ -68,6 +68,10 @@ const ProjectNew = sequelize.define('projectnew', {
     comment: {type: DataTypes.TEXT},
     equipment: {type: DataTypes.STRING},
     number: {type: DataTypes.INTEGER},
+    teh1: {type: DataTypes.STRING},
+    teh2: {type: DataTypes.STRING},
+    teh3: {type: DataTypes.STRING},
+    teh4: {type: DataTypes.STRING},
 })
 
 const Distribution = sequelize.define('distribution', {

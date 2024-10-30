@@ -238,7 +238,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
         Array(days[month] + (startDay - 1)).fill(null).map((_, index) => {
             const d = index - (startDay - 2);
 
-            console.log("month: ", month, d)
+            //console.log("month: ", month, d)
                 
             projects.map((item, ind)=> {
                 if (new Date(item?.dateStart.split('T')[0]).toISOString() === new Date(item?.dateEnd.split('T')[0]).toISOString() || 
@@ -248,10 +248,10 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                     //     new Date(item?.dateEnd.split('T')[0]).toISOString(), //.setHours(new Date(item?.dateStart).getHours()))
                     // ) 
                     if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).toISOString() === new Date(item?.dateStart.split('T')[0]).toISOString()) ) {
-                        console.log("d: ", ind,
-                            new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).toISOString(),
-                            new Date(item?.dateEnd.split('T')[0]).toISOString() //.setHours(new Date(item?.dateStart).getHours()))
-                        )  
+                        // console.log("d: ", ind,
+                        //     new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).toISOString(),
+                        //     new Date(item?.dateEnd.split('T')[0]).toISOString() //.setHours(new Date(item?.dateStart).getHours()))
+                        // )  
 
                         if (!nameProj[index]) {
                         arr[index] = true 
