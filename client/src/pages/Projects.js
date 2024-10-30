@@ -122,6 +122,8 @@ const Projects = () => {
   const [companyName, setCompanyName] = useState('');
   const [companysData, setCompanysData] = useState([]);
 
+  const [managerName, setManagerName] = useState('');
+
   const [managersData, setManagersData] = useState([]);
   const [workersData, setWorkersData] = useState([]);
   const [specialistName, setSpecialistName] = useState('');
@@ -228,7 +230,15 @@ const Projects = () => {
     const fetchData = async() => {
       const projs = await getProjects()
       console.log("projs: ", projs)
-      setProjects(projs)
+      const sortProj = [...projs].sort((a, b) => {  
+        if (a.dateStart < b.dateStart)
+          return -1;
+        if (a.dateStart > b.dateStart)
+            return 1;
+        return 0;
+      })
+
+      setProjects(sortProj)
     }
 
     fetchData()
@@ -251,6 +261,7 @@ const Projects = () => {
 
   const openProject = async(month, item, number, id, name, end, status, timeStart, specifika, city, comment) => {
     console.log("item: ", month+1, item, number, specifika, end)
+    console.log("comment: ", comment)
 
     const resProj = await getProjectId(id)
     console.log("resProj: ", resProj)
@@ -687,8 +698,8 @@ const Projects = () => {
                                                   }
                                                 } 
                                               }}
-                                              //value={item ? JSON.parse(item).fio : ''} 
-                                              //inputValue={item ? JSON.parse(item).fio : ''}
+                                              value={managerName} 
+                                              inputValue={managerName}
                                               renderInput={(params) => (
                                               <div ref={params.InputProps.ref} style={{position: 'relative'}}>
                                                   <input 

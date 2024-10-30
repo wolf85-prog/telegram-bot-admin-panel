@@ -237,6 +237,8 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
         Array(days[month] + (startDay - 1)).fill(null).map((_, index) => {
             const d = index - (startDay - 2);
+
+            console.log("month: ", month)
                 
             projects.map((item, ind)=> {
                 if (new Date(item?.dateStart.split('T')[0]).toISOString() === new Date(item?.dateEnd.split('T')[0]).toISOString() || 
@@ -682,7 +684,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             setProject7(arr7) 
         })
 
-    }, [projects])
+    }, [projects, month])
 
 
     // Создание проекта
@@ -1076,6 +1078,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
     const nextMonth = () => {
         setDate(new Date(year, month + 1, day))
+        setMonth(month + 1)
     }
 
     const prevMonth = () => {
@@ -1090,7 +1093,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
     }
     
   return (
-    <div className='frame2' ref={ref}>
+    <div className='frame2' ref={ref} style={{overflow: 'scroll', height: '640px'}}>
         <div className='calendar-header'>
             <CButton onClick={prevMonth} className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
                 <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-14px', left: '11px'}}>
@@ -1110,7 +1113,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             </CButton>
         </div>
         <table className='frame2'>
-            <tr>
+            <tr style={{position: 'sticky', top: '0px', backgroundColor: '#131c21', zIndex: '100'}}>
                 <th className='table-header'>1</th>
                 <th className='table-header'>2</th>
                 <th className='table-header'>3</th>
@@ -1121,10 +1124,12 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             </tr>
             {Array(days[month] + (startDay - 1)).fill(null).map((_, index) => {
                 const d = index - (startDay - 2);
+                const isWeekend = new Date(2024, month, d) 
+                //console.log("isWeekend: ", isWeekend.toISOString(), isWeekend.getDay())
                 if (index !== 0) {
                     return (
                         <><tr key={index}>
-                            <td className='day2' onMouseOver={()=>overDay(index, 1)} onMouseOut={()=>outDay(index, 1)}>
+                            <td className='day2' onMouseOver={()=>overDay(index, 1)} onMouseOut={()=>outDay(index, 1)} style={{backgroundColor: isWeekend.getDay() == 6 || isWeekend.getDay() == 0 ? '#11171a' : ''}}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                 <CButton onClick={()=>addNewProject(index, 1, new Date(2024, month, d))} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
@@ -1144,7 +1149,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                     : <></>
                                 }
                             </td>
-                            <td className='day2' onMouseOver={()=>overDay(index, 2)} onMouseOut={()=>outDay(index, 2)}>
+                            <td className='day2' onMouseOver={()=>overDay(index, 2)} onMouseOut={()=>outDay(index, 2)} style={{backgroundColor: isWeekend.getDay() == 6 || isWeekend.getDay() == 0 ? '#11171a' : ''}}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                 <CButton onClick={()=>addNewProject(index, 2, new Date(2024, month, d))} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd2[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
@@ -1164,7 +1169,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                     : <></>
                                 }
                             </td>
-                            <td className='day2' onMouseOver={()=>overDay(index, 3, new Date(2024, month, d))} onMouseOut={()=>outDay(index, 3)}>
+                            <td className='day2' onMouseOver={()=>overDay(index, 3)} onMouseOut={()=>outDay(index, 3)} style={{backgroundColor: isWeekend.getDay() == 6 || isWeekend.getDay() == 0 ? '#11171a' : ''}}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                 <CButton onClick={()=>addNewProject(index, 3, new Date(2024, month, d))} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd3[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
@@ -1184,7 +1189,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                     : <></>
                                 }
                             </td>
-                            <td className='day2' onMouseOver={()=>overDay(index, 4)} onMouseOut={()=>outDay(index, 4)}>
+                            <td className='day2' onMouseOver={()=>overDay(index, 4)} onMouseOut={()=>outDay(index, 4)} style={{backgroundColor: isWeekend.getDay() == 6 || isWeekend.getDay() == 0 ? '#11171a' : ''}}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                 <CButton onClick={()=>addNewProject(index, 4, new Date(2024, month, d))} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd4[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
@@ -1204,7 +1209,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                     : <></>
                                 }
                             </td>
-                            <td className='day2' onMouseOver={()=>overDay(index, 5)} onMouseOut={()=>outDay(index, 5)}>
+                            <td className='day2' onMouseOver={()=>overDay(index, 5)} onMouseOut={()=>outDay(index, 5)} style={{backgroundColor: isWeekend.getDay() == 6 || isWeekend.getDay() == 0 ? '#11171a' : ''}}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                 <CButton onClick={()=>addNewProject(index, 5, new Date(2024, month, d))} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd5[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
@@ -1224,7 +1229,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                     : <></>
                                 }
                             </td>
-                            <td className='day2' onMouseOver={()=>overDay(index, 6)} onMouseOut={()=>outDay(index, 6)}>
+                            <td className='day2' onMouseOver={()=>overDay(index, 6)} onMouseOut={()=>outDay(index, 6)} style={{backgroundColor: isWeekend.getDay() == 6 || isWeekend.getDay() == 0 ? '#11171a' : ''}}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                 <CButton onClick={()=>addNewProject(index, 6, new Date(2024, month, d))} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd6[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
@@ -1244,7 +1249,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                     : <></>
                                 }
                             </td>
-                            <td className='day2' onMouseOver={()=>overDay(index, 7)} onMouseOut={()=>outDay(index, 7)}>
+                            <td className='day2' onMouseOver={()=>overDay(index, 7)} onMouseOut={()=>outDay(index, 7)} style={{backgroundColor: isWeekend.getDay() == 6 || isWeekend.getDay() == 0 ? '#11171a' : ''}}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                 <CButton onClick={()=>addNewProject(index, 7, new Date(2024, month, d))} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd7[index] ? 'block' : 'none', height: '26px', width: '26px'}}>
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
