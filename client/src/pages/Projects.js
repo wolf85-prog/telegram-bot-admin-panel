@@ -123,10 +123,15 @@ const Projects = () => {
   const [companysData, setCompanysData] = useState([]);
 
   const [managerName, setManagerName] = useState('');
+  const [managerName2, setManagerName2] = useState('');
 
   const [managersData, setManagersData] = useState([]);
   const [workersData, setWorkersData] = useState([]);
   const [specialistName, setSpecialistName] = useState('');
+
+  const [managerId, setManagerId] = useState(0);
+  const [managerId2, setManagerId2] = useState(0);
+  const [companyId, setCompanyId] = useState(0);
 
   const [fio, setFio] = useState('');
 
@@ -264,7 +269,9 @@ const Projects = () => {
   }, [height])
 
 
-  const openProject = async(month, item, number, id, name, end, status, timeStart, specifika, city, comment) => {
+  const openProject = async(month, item, number, id, name, 
+    end, status, timeStart, specifika, city, comment) => {
+
     console.log("item: ", month+1, item, number, specifika, end)
     console.log("comment: ", comment)
 
@@ -285,8 +292,27 @@ const Projects = () => {
     setStartTime(timeStart) 
     //setEndTime(end?.split('T')[1]?.slice(0, 5))
 
+    const compTitle = companysAll.find(item=> item.id.toString() === resProj.companyId)
+    setCompanyName(compTitle.title)
+
+    const managerFio = managersAll.find(item=> item.id.toString() === resProj.managerId)
+    setManagerName(managerFio.fio)
+
+    const managerFio2 = managersAll.find(item=> item.id.toString() === resProj.managerId2)
+    setManagerName2(managerFio2.fio)
+
     setCity(city)
     setComment(comment) 
+
+    setTehText(resProj.teh)
+    setTeh1(resProj.teh1)
+    setTeh2(resProj.teh2)
+    setTeh3(resProj.teh3)
+    setTeh4(resProj.teh4)
+    setTeh5(resProj.teh5)
+    setTeh6(resProj.teh6)
+    setTeh7(resProj.teh7)
+    setTeh8(resProj.teh8)
 
     setStavka({label: "№1", name: "№1"})
     setShowMainTable(true)
@@ -302,6 +328,9 @@ const Projects = () => {
 
     console.log("start: ", startDate)
     console.log("end: ", endDate)
+    console.log("managerId: ", managersAll.find(item=> item.fio === managerName).id)
+    console.log("managerId2: ", managersAll.find(item=> item.fio === managerName).id)
+    console.log("companyId: ", companysAll.find(item=> item.title === companyName).id)
 
     const month = String(new Date(startDate).getMonth()+1).padStart(2, "0");
     const day = String(new Date(startDate).getDate()).padStart(2, "0");
@@ -315,10 +344,18 @@ const Projects = () => {
       datestart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}:00.000Z`,
       dateend: `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}:00.000Z`,
       teh: tehText, 
+      teh1,
+      teh2,
+      teh3,
+      teh4,
+      teh5,
+      teh6,
+      teh7,
+      teh8,
       geo, 
-      // managerId, 
-      // managerId2, 
-      // companyId, 
+      managerId: managersAll.find(item=> item.fio === managerName).id, 
+      managerId2: managersAll.find(item=> item.fio === managerName2).id,
+      companyId: companysAll.find(item=> item.title === companyName).id, 
       comment, 
       specifika: specifikaProject.name, 
       city,
@@ -326,9 +363,9 @@ const Projects = () => {
     console.log(saveData)
   
     //сохранить изменения в базе
-    await editProject(saveData, id)
+    const resSave = await editProject(saveData, id)
   
-    console.log("id: ", id)
+    console.log("resSave: ", resSave)
   
     setProjects((projects) => {	
       const month = String(new Date(startDate).getMonth()+1).padStart(2, "0");
@@ -365,6 +402,8 @@ const Projects = () => {
 
   const onChangeManager = (e, index) => {
     console.log(e.target.value, index)
+
+    //setManagerName(e.target.value)
 
     // setManagersObj((managersObj) => {                                           
     //   const usersCopy = JSON.parse(JSON.stringify(managersObj));			
@@ -700,6 +739,7 @@ const Projects = () => {
                                                   console.log("comp: ", comp)
                                                   if (comp) {
                                                     setPhone(comp.phone)
+                                                    setManagerName(comp.fio)
                                                   }
                                                 } 
                                               }}
@@ -750,11 +790,12 @@ const Projects = () => {
                                                   console.log("comp: ", comp)
                                                   if (comp) {
                                                     setPhone2(comp.phone)
+                                                    setManagerName2(comp.fio)
                                                   }
                                                 }  
                                               }}
-                                              //value={item ? JSON.parse(item).fio : ''} 
-                                              //inputValue={item ? JSON.parse(item).fio : ''}
+                                              value={managerName2} 
+                                              inputValue={managerName2}
                                               renderInput={(params) => (
                                               <div ref={params.InputProps.ref} style={{position: 'relative'}}>
                                                   <input 
