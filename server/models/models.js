@@ -72,6 +72,10 @@ const ProjectNew = sequelize.define('projectnew', {
     teh2: {type: DataTypes.STRING},
     teh3: {type: DataTypes.STRING},
     teh4: {type: DataTypes.STRING},
+    teh5: {type: DataTypes.STRING},
+    teh6: {type: DataTypes.STRING},
+    teh7: {type: DataTypes.STRING},
+    teh8: {type: DataTypes.STRING},
 })
 
 const Distribution = sequelize.define('distribution', {
