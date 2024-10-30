@@ -118,7 +118,8 @@ class ProjectController {
 
     async getProjectNewUpdate(req, res) {
         const {id} = req.params 
-        const {name, status, datestart, dateend, teh, geo, managerId, managerId2, companyId, comment, specifika, city} = req.body
+        const {name, status, datestart, dateend, teh, geo, managerId, managerId2, companyId, 
+            comment, specifika, city, teh1, teh2, teh3, teh4, teh5, teh6, teh7, teh8} = req.body
 
         try {
             let exist=await ProjectNew.findOne( {where: {id: id}} )
@@ -137,6 +138,14 @@ class ProjectController {
                     dateStart: datestart, 
                     dateEnd: dateend, 
                     teh,
+                    teh1,
+                    teh2,
+                    teh3,
+                    teh4,
+                    teh5,
+                    teh6,
+                    teh7,
+                    teh8,
                     geo,
                     managerId,
                     managerId2,

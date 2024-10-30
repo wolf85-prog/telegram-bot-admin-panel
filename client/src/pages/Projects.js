@@ -134,9 +134,14 @@ const Projects = () => {
   const [phone2, setPhone2] = useState('');
 
   const [teh, setTeh] = useState('');
+  const [teh1, setTeh1] = useState('');
   const [teh2, setTeh2] = useState('');
   const [teh3, setTeh3] = useState('');
   const [teh4, setTeh4] = useState('');
+  const [teh5, setTeh5] = useState('');
+  const [teh6, setTeh6] = useState('');
+  const [teh7, setTeh7] = useState('');
+  const [teh8, setTeh8] = useState('');
 
 
   const [tehText, setTehText] = useState('');
@@ -781,18 +786,18 @@ const Projects = () => {
                                             <div>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={false} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="teh1" id="teh1" value={teh1} onChange={(e)=>setTeh1(e.target.value)} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={false} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="teh2" id="teh2" value={teh2} onChange={(e)=>setTeh2(e.target.value)} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                               </div>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={false} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="teh3" id="teh3" value={teh3} onChange={(e)=>setTeh3(e.target.value)} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={false} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="teh4" id="teh4" value={teh4} onChange={(e)=>setTeh4(e.target.value)} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                               </div>
                                             </div>
@@ -850,18 +855,18 @@ const Projects = () => {
                                           <div style={{marginTop: '52px', marginLeft: '-40px'}}>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={false} className="text-field__input" type="text" name="teh" id="teh" onChange={(e)=>setTeh(e.target.value)} value={teh} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="teh5" id="teh5" value={teh5} onChange={(e)=>setTeh5(e.target.value)} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={false} className="text-field__input" type="text" name="teh2" id="teh2" onChange={(e)=>setTeh2(e.target.value)} value={teh2} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="teh6" id="teh6" value={teh6} onChange={(e)=>setTeh6(e.target.value)} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                               </div>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={false} className="text-field__input" type="text" name="teh3" id="teh3" onChange={(e)=>setTeh3(e.target.value)} value={teh3} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="teh7" id="teh7" value={teh7} onChange={(e)=>setTeh7(e.target.value)} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
-                                                  <input disabled={false} className="text-field__input" type="text" name="teh4" id="teh4" onChange={(e)=>setTeh4(e.target.value)} value={teh4} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
+                                                  <input disabled={false} className="text-field__input" type="text" name="teh8" id="teh8" value={teh8} onChange={(e)=>setTeh8(e.target.value)} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                               </div>
                                           </div>
