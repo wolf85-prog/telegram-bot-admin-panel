@@ -238,7 +238,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
         Array(days[month] + (startDay - 1)).fill(null).map((_, index) => {
             const d = index - (startDay - 2);
 
-            console.log("month: ", month)
+            console.log("month: ", month, d)
                 
             projects.map((item, ind)=> {
                 if (new Date(item?.dateStart.split('T')[0]).toISOString() === new Date(item?.dateEnd.split('T')[0]).toISOString() || 
@@ -1126,7 +1126,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                 const d = index - (startDay - 2);
                 const isWeekend = new Date(2024, month, d) 
                 //console.log("index: ", index, startDay, d)
-                
+
                 if (d > 0) {
                     return (
                         <><tr key={index}>
