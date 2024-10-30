@@ -58,7 +58,7 @@ const ProjectNew = sequelize.define('projectnew', {
     city: {type: DataTypes.STRING},
     dateStart: {type: DataTypes.STRING},  //дата начала проекта
     dateEnd: {type: DataTypes.STRING},  //дата окончания проекта
-    teh: {type: DataTypes.STRING},
+    teh: {type: DataTypes.TEXT},
     geo: {type: DataTypes.STRING},
     managerId: {type: DataTypes.STRING},
     managerId2: {type: DataTypes.STRING},
