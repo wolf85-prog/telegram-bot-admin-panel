@@ -1011,7 +1011,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
     }, [date]);
 
     function getStartDayOfMonth(date) {
-        return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+        return new Date(date.getFullYear(), date.getMonth(), 0).getDay();
     }
 
     function isLeapYear(year) {
@@ -1123,7 +1123,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                 <th className='table-header'>7</th>
             </tr>
             {Array(days[month] + (startDay - 1)).fill(null).map((_, index) => {
-                const d = index - (startDay - 1);
+                const d = index - (startDay - 2);
                 const isWeekend = new Date(2024, month, d) 
                 //console.log("index: ", index, startDay, d)
                 
