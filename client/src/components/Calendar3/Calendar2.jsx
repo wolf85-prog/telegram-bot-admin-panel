@@ -1123,10 +1123,11 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                 <th className='table-header'>7</th>
             </tr>
             {Array(days[month] + (startDay - 1)).fill(null).map((_, index) => {
-                const d = index - (startDay - 2);
+                const d = index - (startDay - 1);
                 const isWeekend = new Date(2024, month, d) 
-                //console.log("isWeekend: ", isWeekend.toISOString(), isWeekend.getDay())
-                if (index !== 0) {
+                //console.log("index: ", index, startDay, d)
+                
+                if (d > 0) {
                     return (
                         <><tr key={index}>
                             <td className='day2' onMouseOver={()=>overDay(index, 1)} onMouseOut={()=>outDay(index, 1)} style={{backgroundColor: isWeekend.getDay() == 6 || isWeekend.getDay() == 0 ? '#11171a' : ''}}>
