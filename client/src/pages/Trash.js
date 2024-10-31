@@ -202,12 +202,9 @@ const onChangeManager = (e, index) => {
                         {!showProject ? <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1250px', borderRadius: '5px' }}>
                           <CTableHead className="text-center" color="light">
                                   <CTableRow>
-                                    <CTableHeaderCell className="text-center" style={{width: '61px'}}>
-                                      id
-                                    </CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{width: '160px'}}>Проект</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Статус</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Дата</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{width: '61px'}}>ID</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{width: '160px'}}>Проект</CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Город</CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Специфика</CTableHeaderCell>                      
                                     <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Комментарий</CTableHeaderCell>
@@ -217,17 +214,14 @@ const onChangeManager = (e, index) => {
                                 { projects.map((item, index)=> (
                                     <CTableRow key={item.id} v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                       <CTableDataCell className="text-center" style={{position: 'relative'}}>
-                                        {item.id}                         
+                                        {item.dateStart?.split('T')[0]}                        
                                       </CTableDataCell> 
+                                      <CTableDataCell className="text-center">
+                                        {item.id} 
+                                      </CTableDataCell>
                                       <CTableDataCell onClick={()=>openProject(item.id)} className="text-center" style={{cursor: 'pointer'}}>
                                         {item.name} 
-                                      </CTableDataCell>  
-                                      <CTableDataCell className="text-center">
-                                      {item.status}
-                                      </CTableDataCell>   
-                                      <CTableDataCell className="text-center">
-                                        {item.dateStart?.split('T')[0]}
-                                      </CTableDataCell> 
+                                      </CTableDataCell>     
                                       <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                        {item.city}
                                       </CTableDataCell>

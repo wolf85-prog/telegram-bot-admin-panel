@@ -243,7 +243,7 @@ const clickSearch = (e) => {
 
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
-                    <h2>Площадки</h2>
+                    {/* <h2>Площадки</h2> */}
                     <CCard className="mb-4">
                       <CCardBody style={{padding: '12px'}}>
                         {!showProject ? <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1250px', borderRadius: '5px' }}>
