@@ -9,6 +9,15 @@ export const getProjects = async () =>{
     }
 }
 
+export const getProjectsDel = async () =>{
+    try {
+       let response = await $host.get('api/projectnew/delete/get');
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectsDel api", error.message);
+    }
+}
+
 export const getProjectCount = async (count, prev) =>{
     try {
        let response = await $host.get(`api/projectnew/count/get/${count}/${prev}`);

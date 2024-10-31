@@ -129,16 +129,10 @@ const Projects = () => {
   const [workersData, setWorkersData] = useState([]);
   const [specialistName, setSpecialistName] = useState('');
 
-  const [managerId, setManagerId] = useState(0);
-  const [managerId2, setManagerId2] = useState(0);
-  const [companyId, setCompanyId] = useState(0);
-
-  const [fio, setFio] = useState('');
 
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
 
-  const [teh, setTeh] = useState('');
   const [teh1, setTeh1] = useState('');
   const [teh2, setTeh2] = useState('');
   const [teh3, setTeh3] = useState('');
@@ -147,12 +141,11 @@ const Projects = () => {
   const [teh6, setTeh6] = useState('');
   const [teh7, setTeh7] = useState('');
   const [teh8, setTeh8] = useState('');
-
-
   const [tehText, setTehText] = useState('');
   const [address, setAddress] = useState('');
   const [geo, setGeo] = useState('');
   const [comment, setComment] = useState('');
+  
   const [comteg, setComteg] = useState('');
   const [spec, setSpec] = useState('');
   const [stavka, setStavka] = useState('');
