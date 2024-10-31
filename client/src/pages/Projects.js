@@ -433,7 +433,7 @@ const Projects = () => {
     const data = {
       deleted: true
     }
-    await editProject(id, data)
+    await editProject(data, id)
 
     //addToast(deleteToast) //ваши данные сохранены
 

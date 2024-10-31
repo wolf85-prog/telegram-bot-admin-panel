@@ -57,6 +57,9 @@ class ProjectController {
                 order: [
                     ['id', 'DESC'],
                 ],
+                where: {
+                    deleted: null,
+                }
             })
             return res.status(200).json(projects);
         } catch (error) {
