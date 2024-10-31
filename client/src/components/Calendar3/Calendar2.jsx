@@ -705,8 +705,8 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             datestart: day, 
             dateend: day, //new Date(endDay.setDate(endDay.getDate() + 1)).toISOString(), 
             teh: '', 
-            managerId: '210', 
-            companyId: '21', 
+            managerId: '', 
+            companyId: '', 
             chatId: '1775583141', 
             spec: '', 
             geo: '',
@@ -1139,7 +1139,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 {project[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
-                                        onClick={()=>openProject(month, index, 1, projectId[index], projectName[index], projectEnd[index], projectStatus[index], projectTime[index], projectSpecifika[index], projectCity[index], projectComment[index])} 
+                                        onClick={()=>openProject(month, index, 1, projectId[index], projectName[index], projectEnd[index], projectStatus[index], projectTime[index], projectSpecifika[index])} 
                                         style={{border: `1px solid ${projectColor[index]}`}}
                                     >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName[index]}</p>   
@@ -1159,7 +1159,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 {project2[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor2[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
-                                        onClick={()=>openProject(month, index, 2, projectId2[index], projectName2[index], projectEnd2[index], projectStatus2[index], projectTime2[index], projectSpecifika2[index], projectCity2[index], projectComment2[index])} 
+                                        onClick={()=>openProject(month, index, 2, projectId2[index], projectName2[index], projectEnd2[index], projectStatus2[index], projectTime2[index], projectSpecifika2[index])} 
                                         style={{border: `1px solid ${projectColor2[index]}`}}
                                     >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName2[index]}</p>   
@@ -1199,7 +1199,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 {project4[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor4[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
-                                        onClick={()=>openProject(month, index, 4, projectId4[index], projectName4[index], projectEnd4[index], projectStatus4[index], projectTime4[index], projectSpecifika4[index], projectCity4[index], projectComment4[index])} 
+                                        onClick={()=>openProject(month, index, 4, projectId4[index], projectName4[index], projectEnd4[index], projectStatus4[index], projectTime4[index], projectSpecifika4[index])} 
                                         style={{border: `1px solid ${projectColor4[index]}`}}
                                     >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName4[index]}</p>   
@@ -1219,7 +1219,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 {project5[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor5[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
-                                        onClick={()=>openProject(month, index, 5, projectId5[index], projectName5[index], projectEnd5[index], projectStatus5[index], projectTime5[index], projectSpecifika5[index], projectCity5[index], projectComment5[index])} 
+                                        onClick={()=>openProject(month, index, 5, projectId5[index], projectName5[index], projectEnd5[index], projectStatus5[index], projectTime5[index], projectSpecifika5[index])} 
                                         style={{border: `1px solid ${projectColor5[index]}`}}
                                     >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName5[index]}</p>   
@@ -1239,7 +1239,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 {project6[index] ?
                                     <><p className='date-proj-day2' style={{color: `${projectColor6[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
-                                        onClick={()=>openProject(month, index, 6, projectId6[index], projectName6[index], projectEnd6[index], projectStatus6[index], projectTime6[index], projectSpecifika6[index], projectCity6[index], projectComment6[index])} 
+                                        onClick={()=>openProject(month, index, 6, projectId6[index], projectName6[index], projectEnd6[index], projectStatus6[index], projectTime6[index], projectSpecifika6[index])} 
                                         style={{border: `1px solid ${projectColor6[index]}`}}
                                     >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName6[index]}</p>   
@@ -1259,7 +1259,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 {project7[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor7[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
-                                        onClick={()=>openProject(month, index, 7, projectId7[index], projectName7[index], projectEnd7[index], projectStatus7[index], projectTime7[index], projectSpecifika7[index], projectCity7[index], projectComment7[index])} 
+                                        onClick={()=>openProject(month, index, 7, projectId7[index], projectName7[index], projectEnd7[index], projectStatus7[index], projectTime7[index], projectSpecifika7[index])} 
                                         style={{border: `1px solid ${projectColor7[index]}`}}
                                     >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName7[index]}</p>   

@@ -270,10 +270,9 @@ const Projects = () => {
 
 
   const openProject = async(month, item, number, id, name, 
-    end, status, timeStart, specifika, city, comment) => {
+    end, status, timeStart, specifika) => {
 
     console.log("item: ", month+1, item, number, specifika, end)
-    console.log("comment: ", comment)
 
     const resProj = await getProjectId(id)
     console.log("resProj: ", resProj)
@@ -293,16 +292,16 @@ const Projects = () => {
     //setEndTime(end?.split('T')[1]?.slice(0, 5))
 
     const compTitle = companysAll.find(item=> item.id.toString() === resProj.companyId)
-    setCompanyName(compTitle.title)
+    setCompanyName(compTitle?.title)
 
     const managerFio = managersAll.find(item=> item.id.toString() === resProj.managerId)
-    setManagerName(managerFio.fio)
+    setManagerName(managerFio?.fio)
 
     const managerFio2 = managersAll.find(item=> item.id.toString() === resProj.managerId2)
-    setManagerName2(managerFio2.fio)
+    setManagerName2(managerFio2?.fio)
 
-    setCity(city)
-    setComment(comment) 
+    setCity(resProj.city)
+    setComment(resProj.comment) 
 
     setTehText(resProj.teh)
     setTeh1(resProj.teh1)
@@ -328,9 +327,9 @@ const Projects = () => {
 
     console.log("start: ", startDate)
     console.log("end: ", endDate)
-    console.log("managerId: ", managersAll.find(item=> item.fio === managerName).id)
-    console.log("managerId2: ", managersAll.find(item=> item.fio === managerName).id)
-    console.log("companyId: ", companysAll.find(item=> item.title === companyName).id)
+    console.log("managerId: ", managersAll.find(item=> item.fio === managerName)?.id)
+    console.log("managerId2: ", managersAll.find(item=> item.fio === managerName)?.id)
+    console.log("companyId: ", companysAll.find(item=> item.title === companyName)?.id)
 
     const month = String(new Date(startDate).getMonth()+1).padStart(2, "0");
     const day = String(new Date(startDate).getDate()).padStart(2, "0");
@@ -353,9 +352,9 @@ const Projects = () => {
       teh7,
       teh8,
       geo, 
-      managerId: managersAll.find(item=> item.fio === managerName).id, 
-      managerId2: managersAll.find(item=> item.fio === managerName2).id,
-      companyId: companysAll.find(item=> item.title === companyName).id, 
+      managerId: managersAll.find(item=> item.fio === managerName)?.id, 
+      managerId2: managersAll.find(item=> item.fio === managerName2)?.id,
+      companyId: companysAll.find(item=> item.title === companyName)?.id, 
       comment, 
       specifika: specifikaProject.name, 
       city,
@@ -427,7 +426,14 @@ const Projects = () => {
     setVisibleDelete(false)
 
     //удаление проекта из БД
-    await deleteProject(id)
+    //await deleteProject(id)
+
+
+    //перемещение в корзину
+    const data = {
+      deleted: true
+    }
+    await editProject(id, data)
 
     //addToast(deleteToast) //ваши данные сохранены
 
