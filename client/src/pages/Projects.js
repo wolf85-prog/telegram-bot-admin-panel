@@ -290,8 +290,22 @@ const Projects = () => {
     const managerFio = managersAll.find(item=> item.id.toString() === resProj.managerId)
     setManagerName(managerFio?.fio)
 
+    const comp = managersAll.find(item=> item.fio === managerFio?.fio)
+    if (comp) {
+      setPhone(comp.phone)
+    } else {
+      setPhone('')
+    }
+
     const managerFio2 = managersAll.find(item=> item.id.toString() === resProj.managerId2)
     setManagerName2(managerFio2?.fio)
+
+    const comp2 = managersAll.find(item=> item.fio === managerFio2?.fio)
+    if (comp2) {
+      setPhone2(comp2.phone2)
+    } else {
+      setPhone2('')
+    }
 
     setCity(resProj.city)
     setComment(resProj.comment) 

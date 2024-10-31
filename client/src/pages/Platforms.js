@@ -102,7 +102,7 @@ const Platforms = () => {
   const [showSave3, setShowSave3] = useState(false)
 
   const [id, setId] = useState('');
-  const [fio, setFio] = useState('');
+  const [title, setTitle] = useState('');
   const [city, setCity] = useState('');
   const [age, setAge] = useState('');
   const [age2, setAge2] = useState(0);
@@ -175,24 +175,12 @@ const openProject = async(id) => {
 
   setShowProject(true)
   setId(id)
-
+  setTitle('Новая площадка')
 
   setTimeout(()=> {
     setHeight(509)
   }, 200)
   
-}
-
-const recoveryProject = async() => {
-  const data = {
-    deleted: null
-  }
-  //сохранить изменения в базе
-  const resSave = await editProject(data, id)
-
-  setProjects([...projects].filter(item=>item.id !== id))
-
-  setShowProject(false)
 }
 
 
@@ -362,7 +350,7 @@ const clickSearch = (e) => {
                                   {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
-                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
+                                      <input type="text" name="title" id="title" value={title} onChange={(e)=>setTitle(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
                                     <div style={{display: 'flex'}}>
                                       <Icon id="delete" />
@@ -374,149 +362,80 @@ const clickSearch = (e) => {
                                     </div>
                                   </div>
 {/* 2 */}
-                                <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '320px', position: 'relative'}}>
-                                  {/* Город */}
-                                  <label className='title-label' style={{position: 'absolute', top: '-25px', left: '140px'}}>Город</label>
-                                  <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}> 
-                                      {/* <MyDropdown
-                                        style={{backgroundColor: '#131c21'}}
-                                        options={cities}
-                                        selected={city}
-                                        setSelected={setCity}
-                                        // onChange={addCity}
-                                      /> */}
-                                      <CFormSelect 
-                                        aria-label="Default select example"
-                                        style={{backgroundColor: '#131c21'}}
-                                        options={cities}
-                                        // value={cityValue}
-                                        // onChange={(e)=>addCity(e)}
-                                      />
-                                      <img src={Close} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px', visibility: showClearCity ? 'visible' : 'hidden', cursor: 'pointer'}}></img>
-                                  </div>
-
-                                  <label className='title-label'>Специальность</label>
-                                  <div className="text-field"> 
-                                      {/* <MyDropdown2
-                                        tags={speclist.filter(item=>item !== 'Blacklist')}
-                                        setTags={setSpeclist}
-                                        options={specOnlyData}
-                                        //onChange={changeSpec}
-                                      /> */}
-                                  </div>
-
-                                  <label className='title-label'>Компания</label>
-                                  <div className="text-field"> 
-                                      {/* <MyDropdown2
-                                        tags={company}
-                                        setTags={setCompany}
-                                        options={companys}
-                                        //onChange={changeSpec}
-                                      /> */}
-                                  </div>
-
-                                  <label className='title-label'>Комтеги</label>
-                                  <div className="text-field"> 
-                                      {/* <MyDropdown2
-                                        tags={comteg}
-                                        setTags={setComteg}
-                                        options={comtegs}
-                                        //onChange={changeSpec}
-                                      /> */}
-                                  </div>
-
-                                  <label className='title-label'>Комментарии</label>
-                                  <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <textarea 
-                                      className="text-field__input" 
-                                      type="text" 
-                                      name="comment" 
-                                      id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{resize: 'none', width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
-                                    />
-                                  </div> 
-                                  
-                                </div>
-{/* 3 */}
-                                <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '320px'}}>
-                                  <div className="uley-line" style={{left: '670px', top: '60px', width: '70px'}}></div>
-                                  <div className="uley-line" style={{left: '805px', top: '60px', width: '50px'}}></div>
-                                  <div className="uley-line" style={{left: '900px', top: '60px', width: '50px'}}></div>
+                                <div style={{ textAlign: 'center', marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '650px', position: 'relative'}}>
                                   <div style={{display: 'flex'}}>
-                                    {/* возраст */}
-                                    <div className="text-field">
-                                      <input disabled className="text-field__input" type="text" name="age2" id="age2" value={age2}  onChange={(e) => setAge2(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                    {/* Город */}
+                                    <label className='title-label' style={{position: 'absolute', top: '-25px', left: '100px'}}>Город</label>
+                                    <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative', marginRight: '40px'}}> 
+                                        <CFormSelect 
+                                          aria-label="Default select example"
+                                          style={{backgroundColor: '#131c21'}}
+                                          options={cities}
+                                          // value={cityValue}
+                                          // onChange={(e)=>addCity(e)}
+                                        />
+                                        <img src={Close} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px', visibility: showClearCity ? 'visible' : 'hidden', cursor: 'pointer'}}></img>
                                     </div>
-                                    {/* год рождения */}
-                                    <div className="text-field">
-                                      <input className="text-field__input" type="text" name="age" id="age" value={age} onChange={(e) => setAge(e.target.value)} style={{width: '80px', marginRight: '8px'}}/>
-                                    </div>
-                                    {/* проекты за месяц */}
-                                    <div className="text-field">
-                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
-                                    </div>
-                                    {/* проекты всего */}
-                                    <div className="text-field">
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
-                                    </div>
-                                    {/* опоздания */}
-                                    <div className="text-field">
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px', color: 'red'}}/>
-                                    </div>
-                                    {/* невыходы */}
-                                    <div className="text-field">
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', color: 'red'}}/>
-                                    </div>
+
+                                    <div className="text-field" style={{marginRight: '40px'}}>
+                                      <input disabled className="text-field__input" type="text" />
+                                    </div> 
+
+                                    <div className="text-field" >
+                                      <input disabled className="text-field__input" type="text" />
+                                    </div> 
                                   </div>
                                   
-                                  <label className='title-label'>Навык</label>
-                                  <div className="text-field"> 
-                                      {/* <MyDropdown2
-                                        tags={skill}
-                                        setTags={setSkill}
-                                        options={skills}
-                                        onChange={changeSpec}
-                                      /> */}
-                                  </div>
+                                  
 
-                                  <label className='title-label'>Мерч</label>
-                                  <div className="text-field"> 
-                                      {/* <MyDropdown2
-                                        tags={merch}
-                                        setTags={setMerch}
-                                        options={merchData}
-                                        onChange={changeSpec}
-                                      /> */}
-                                  </div>
-
-                                  <label className='title-label'>Комтеги 2.0</label>
-                                  <div className="text-field"> 
-                                      {/* <MyDropdown2
-                                        tags={comteg2}
-                                        setTags={setComteg2}
-                                        options={comtegs}
-                                        onChange={changeSpec}
-                                      /> */}
-                                  </div>
-
-                                  <label className='title-label'>Комментарии 2.0</label>
-                                  <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <textarea 
-                                      className="text-field__input" 
-                                      type="text" 
-                                      name="comment2" 
-                                      id="comment2" 
-                                      value={comment2} onChange={(e) => setComment2(e.target.value)} 
-                                      style={{resize: 'none', width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
+                                  <label className='title-label'>Адрес</label>
+                                  <div className="text-field">
+                                    <input disabled className="text-field__input" type="text" />
                                   </div> 
+
+                                  <label className='title-label'>Как добраться</label>
+                                  <div className="text-field">
+                                    <input disabled className="text-field__input" type="text" />
+                                  </div> 
+
+                                  <div style={{display: 'flex'}}>
+                                    <div style={{ display: 'flex', flexDirection: 'column', width: '280px', marginRight: '40px'}}>
+                                      <label className='title-label'>Ссылка на карту</label>
+                                      <div className="text-field">
+                                        <input disabled className="text-field__input" type="text" />
+                                      </div> 
+
+                                      <label className='title-label'>Карта</label>
+                                      <div className="text-field">
+                                        <input disabled className="text-field__input" type="text" />
+                                      </div> 
+                                    </div>
+
+                                    <div>
+                                      <label className='title-label'>Комментарии</label>
+                                      <div className="text-field" style={{marginBottom: '0px'}}>
+                                        <textarea 
+                                          className="text-field__input" 
+                                          type="text" 
+                                          name="comment2" 
+                                          id="comment2" 
+                                          value={comment2} onChange={(e) => setComment2(e.target.value)} 
+                                          style={{resize: 'none', width: '250px', height: '125px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
+                                      </div> 
+                                    </div>
+                                    
+                                  </div>
+
+                                  
+
                                 </div>
 
 {/* 4 */}
-                                <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '250px', position: 'relative'}}>
+                                <div style={{ textAlign: 'center', marginLeft: '40px', marginTop: '50px', display: 'flex', flexDirection: 'column', width: '250px', position: 'relative'}}>
 
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '250px', height: '370px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 

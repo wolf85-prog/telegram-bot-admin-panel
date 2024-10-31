@@ -967,7 +967,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                 return usersCopy;
             });
-        }, 600000)
+        }, 10000)
         
         
     }
