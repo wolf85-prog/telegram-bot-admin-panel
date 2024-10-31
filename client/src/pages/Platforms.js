@@ -1,0 +1,539 @@
+import React, { Suspense, useState, useEffect } from 'react'
+import { 
+  CContainer, 
+  CSpinner, 
+  CCol,
+  CRow,
+  CFormInput,
+  CTable,
+  CTableBody,
+  CTableDataCell,
+  CTableHead,
+  CTableHeaderCell,
+  CTableRow,
+  CCard,
+  CCardBody,
+  CCollapse,
+  CButton, 
+  CTooltip,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
+  CFormSelect,
+  CToast, 
+  CToastBody,
+  CToastClose,
+  CToaster,
+ } from '@coreui/react'
+ import Icon from "./../chat-app-worker/components/Icon";
+import { AppSidebar, AppFooter, AppHeader } from '../components/index'
+
+import { useUsersContext } from "../chat-app-new/context/usersContext";
+
+import Autocomplete from '@mui/material/Autocomplete';
+import DatePicker from "react-datepicker";
+import Dropdown from 'react-bootstrap/Dropdown';
+import InputMask from 'react-input-mask';
+
+import MyDropdown from 'src/components/Dropdown/Dropdown';
+import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
+import MyDropdown4 from 'src/components/Dropdown4/Dropdown4';
+import MyDropdown5 from 'src/components/Dropdown5/Dropdown5';
+import MyDropdown6 from 'src/components/Dropdown6/Dropdown6';
+
+import Close from "../assets/images/clear.svg"
+import zamok from "../assets/images/замок.png"
+import zamok2 from "../assets/images/замок2.png"
+import addAvatar from "../assets/images/add_avatar.png"
+import Krestik from './../assets/images/krestik.png';
+import imgBlock18 from "./../assets/images/block18.png";
+import Trubka from "./../assets/images/trubka.png";
+import Tg from "./../assets/images/tg.png";
+import Star from "./../assets/images/star.png";
+import StarActive from "./../assets/images/star_activ.svg";
+import Disketa from "./../assets/images/disketa.png";
+import arrowDown from 'src/assets/images/arrowDown.svg'
+import threeDots from 'src/assets/images/three-dots.svg'
+
+import btnBlue from 'src/assets/images/button_blue.png'
+import btnRed from 'src/assets/images/button_red.png'
+import btnGreen from 'src/assets/images/button_green.jpg'
+import btnYellow from 'src/assets/images/button_yellow.jpg'
+
+import statusData from 'src/data/statusData';
+import cities from 'src/data/cities';
+import specifikaData from 'src/data/specifikaData';
+import vids from 'src/data/vids';
+import comtegs from 'src/data/comtegs';
+import specOnlyData2 from 'src/data/specOnlyData2';
+
+import { getProjectsDel, getProjectId, editProject } from '../http/projectAPI'
+
+const Platforms = () => {
+  const { companysAll, managersAll, workersAll } = useUsersContext();
+
+  const [projects, setProjects] = useState([])
+  const [showProject, setShowProject] = useState(false)
+
+  const [loading, setLoading]= useState(true);
+  const [text, setText]= useState("");
+  //const [spec, setSpec] = useState([]); 
+  const [visibleSm, setVisibleSm] = useState(false)
+  const [modalWorker, setModalWorker] = useState({})
+  const [showProfile, setShowProfile] = useState(false)
+  const [showSpec, setShowSpec] = useState(false)
+  const [showClose, setShowClose] = useState(false)
+  const [showUpload, setShowUpload] = useState(false)
+  const [showSearch, setShowSearch] = useState(true)
+  const [showClear, setShowClear] = useState(false)
+  const [showMenuBlock18, setShowMenuBlock18] = useState(false)
+  const [showBlock18, setShowBlock18] = useState(false)
+  const [block18, setBlock18] = useState(false)
+  const [blockW, setBlockW] = useState(false)
+  const [showMenuKrest, setShowMenuKrest] = useState(false)
+  const [showKrest, setShowKrest] = useState(false)
+  
+  const [cityValue, setCityValue] = useState(0)
+  
+  const [showSave, setShowSave] = useState(false)
+  const [showSave2, setShowSave2] = useState(false)
+  const [showSave3, setShowSave3] = useState(false)
+
+  const [id, setId] = useState('');
+  const [fio, setFio] = useState('');
+  const [city, setCity] = useState('');
+  const [age, setAge] = useState('');
+  const [age2, setAge2] = useState(0);
+  const [speclist, setSpeclist] = useState([]);
+  const [phone, setPhone] = useState('');
+  const [phone2, setPhone2] = useState('');
+  const [telegram, setTelegram] = useState('');
+  const [skill, setSkill] = useState('');
+  const [reyting, setReyting] = useState('');
+  const [promo, setPromo] = useState('');
+  const [rank, setRank] = useState('');
+  const [merch, setMerch] = useState('');
+  const [company, setCompany] = useState('');
+  const [inn, setInn] = useState('');
+  const [comteg, setComteg] = useState('');
+  const [comteg2, setComteg2] = useState('');
+  const [email, setEmail] = useState('');
+  const [comment, setComment] = useState('');
+  const [comment2, setComment2] = useState('');
+  const [passport, setPassport] = useState('');
+  const [dogovor, setDogovor] = useState('');
+  const [samozanjatost, setSamozanjatost] = useState('');
+  const [passportScan, setPassportScan] = useState('');
+  const [nik, setNik] = useState('');
+  const [dateReg, setDateReg] = useState('');
+  const [profile, setProfile] = useState('');
+
+  const [countPress, setCountPress] = useState(0);
+  const [countPressTG, setCountPressTG] = useState(0);
+  const [countPressCity, setCountPressCity] = useState(0);
+
+  const [blockProfile, setBlockProfile] = useState(true)
+  const [showBlacklist, setShowBlacklist] = useState(false)
+  const [showMenu1, setShowMenu1] = useState(false)
+  const [showMenu2, setShowMenu2] = useState(false)
+  const [showClearCity, setShowClearCity] = useState(false)
+
+  const [visibleDelete, setVisibleDelete] = useState(false)
+
+  const [file, setFile] = useState(0);
+  const [filePreview, setFilePreview] = useState('');
+  const [image, setImage]= useState("");
+
+  const [height, setHeight] = useState(600)
+
+  useEffect(()=> {
+    //1
+    const fetchData = async() => {
+      const projs = await getProjectsDel()
+      console.log("projsDel: ", projs)
+
+      // const sortProj = [...projs].sort((a, b) => {  
+      //   if (a.dateStart < b.dateStart)
+      //     return -1;
+      //   if (a.dateStart > b.dateStart)
+      //       return 1;
+      //   return 0;
+      // })
+
+      setProjects(projs)
+    }
+
+    fetchData()
+    
+}, [])
+
+const openProject = async(id) => {
+
+  console.log("id: ", id)
+
+  setShowProject(true)
+  setId(id)
+
+
+  setTimeout(()=> {
+    setHeight(509)
+  }, 200)
+  
+}
+
+const recoveryProject = async() => {
+  const data = {
+    deleted: null
+  }
+  //сохранить изменения в базе
+  const resSave = await editProject(data, id)
+
+  setProjects([...projects].filter(item=>item.id !== id))
+
+  setShowProject(false)
+}
+
+
+const closeProfile = () => {
+  setShowProject(false)
+}
+
+const onChangeReyting = () => {
+  setShowBlacklist(false)
+  setShowMenu2(false)
+
+  //убрать из списка специальностей Blacklist
+  const res = speclist.filter(item=>item !== 'Blacklist')
+  console.log("speclist: ", res)
+
+  setSpeclist(res)
+}
+
+const onChangeBlacklist = () => {
+  setShowBlacklist(true)
+  setShowMenu1(false)
+
+  //добавить в список специальностей Blacklist
+  speclist.push('Blacklist')
+  console.log("speclist: ", speclist)
+
+  setSpeclist(speclist)
+}
+
+const onChangeBlock18 = () => {
+  setShowBlock18(!showBlock18)
+  setShowMenuBlock18(false)
+  setBlock18(!block18)
+}  
+
+const onChangeKrest = () => {
+  setShowKrest(!showKrest)
+  setShowMenuKrest(false)
+  setBlockW(!blockW)
+} 
+
+{/* Добавление файла */}
+const onFileChange = (e) => {
+  setFile(e.target.files[0]);
+  setFilePreview(URL.createObjectURL(e.target.files[0]));
+}
+
+const clickSearch = (e) => {
+  setShowClear(true)
+  setText(e.target.value)
+}
+
+
+  return (
+    <div className='dark-theme'>
+      <AppSidebar />
+      <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
+        <AppHeader />
+        <div className="body flex-grow-1 px-3">
+
+            <CContainer lg>
+                <Suspense fallback={<CSpinner color="primary" />}>
+                    <h2>Площадки</h2>
+                    <CCard className="mb-4">
+                      <CCardBody style={{padding: '12px'}}>
+                        {!showProject ? <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1250px', borderRadius: '5px' }}>
+                          <CTableHead className="text-center" color="light">
+                                  <CTableRow>
+                                    <CTableHeaderCell className="text-center" style={{width: '61px'}}>
+                                      id
+                                    </CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{width: '160px'}}>Проект</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Статус</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Дата</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Город</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Специфика</CTableHeaderCell>                      
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Комментарий</CTableHeaderCell>
+                                  </CTableRow>
+                                </CTableHead>      
+                                <CTableBody> 
+                                {/* { projects.map((item, index)=> ( */}
+                                    <CTableRow  v-for="item in tableItems" style={{lineHeight: '14px'}}>
+                                      <CTableDataCell className="text-center" style={{position: 'relative'}}>
+                                        1                        
+                                      </CTableDataCell> 
+                                      <CTableDataCell onClick={()=>openProject(1)} className="text-center" style={{cursor: 'pointer'}}>
+                                        Тест 
+                                      </CTableDataCell>  
+                                      <CTableDataCell className="text-center">
+                                      
+                                      </CTableDataCell>   
+                                      <CTableDataCell className="text-center">
+                                        
+                                      </CTableDataCell> 
+                                      <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
+                                       
+                                      </CTableDataCell>
+                                      <CTableDataCell className="text-center widthSpace">
+                                        
+                                      </CTableDataCell>   
+                                      <CTableDataCell className="text-center">
+                                        
+                                      </CTableDataCell>            
+                                    </CTableRow>
+                                  {/* ))
+                                }  */}
+                                </CTableBody>                   
+                        </CTable> 
+                        :
+<div style={{position: 'relative', height: '765px', display: 'flex', flexDirection: 'row'}}>
+                                <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
+                                  {
+                                    profile ? 
+                                  <img src={profile} width='250px' height='250px' alt='poster' style={{borderRadius: '7px', marginBottom: '5px'}}/>
+                                  : 
+                                  <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
+                                    <rect width="250px" height="250px" fill="#007aff" rx="40"></rect> 
+                                  </svg>
+                                  
+                                  }
+                                  <div className="file-upload" style={{marginBottom: '8px'}}>
+                                    <img src={addAvatar} alt="upload" style={{display: showUpload ? 'block' : 'none', position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
+                                    <input 
+                                      type="file"
+                                      id="formFile" 
+                                      accept="image/*,image/jpeg" 
+                                      name="photo"
+                                      onChange={(e) => onFileChange(e)}
+                                      style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}
+                                    />
+                                  </div>
+
+                                  <div className="menu-reyting">
+                                      <div style={{width: '250px', display: 'flex', justifyContent: 'center'}}>
+                                        {showBlacklist ?
+                                        <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '24px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
+                                        :<div className="star-block" style={{cursor: 'pointer', marginBottom: '8px'}} onClick={()=>setShowMenu1(true)}>
+                                          <img className='star-icon' src={StarActive} alt='' /> 
+                                          <img className='star-icon' src={StarActive} alt='' />
+                                          <img className='star-icon' src={StarActive} alt='' />
+                                          <img className='star-icon' src={Star} alt='' />
+                                          <img className='star-icon' src={Star} alt='' />
+                                        </div>
+                                        }
+                                      </div>
+                                      <div className="menu-content" style={{display: showMenu1 ? 'block' : 'none'}}>
+                                          <span>Изменить рейтинг</span>
+                                          <span onClick={onChangeBlacklist} style={{cursor: 'pointer'}}>Blacklist</span>
+                                      </div>
+                                      <div className="menu-content" style={{display: showMenu2 ? 'block' : 'none'}}>
+                                          <span>Изменить рейтинг</span>
+                                          <span onClick={onChangeReyting} style={{cursor: 'pointer'}}>Рейтинг</span>
+                                      </div>
+                                  </div>
+                                  
+                                </div>
+                                  <img src={imgBlock18} className="block-img"  width={50} alt='' style={{position: 'absolute', top: '0px', left: '195px', opacity: block18 ? '1' : '0' }}/>                                 
+                                  <div className="menu-content-block">
+                                    <span onClick={onChangeBlock18} style={{cursor: 'pointer'}}>{block18 ? 'Убрать' : 'Добавить'} 18+</span>
+                                  </div>
+                                  
+                                  <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '215px', left: '215px', opacity: blockW ? '1' : '0' }}/>
+                                  <div className="menu-content-krest">
+                                    <span onClick={onChangeKrest} style={{cursor: 'pointer'}}>{blockW ? 'Убрать' : 'Добавить'}</span>
+                                  </div>
+
+                                  {/* ФИО */}
+                                  <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
+                                    <div className="text-field">
+                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
+                                    </div>
+                                    <div style={{display: 'flex'}}>
+                                      <Icon id="delete" />
+                                      <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Tg} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={blockProfile ? zamok : zamok2} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Disketa}style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                    </div>
+                                  </div>
+{/* 2 */}
+                                <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '320px', position: 'relative'}}>
+                                  {/* Город */}
+                                  <label className='title-label' style={{position: 'absolute', top: '-25px', left: '140px'}}>Город</label>
+                                  <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}> 
+                                      {/* <MyDropdown
+                                        style={{backgroundColor: '#131c21'}}
+                                        options={cities}
+                                        selected={city}
+                                        setSelected={setCity}
+                                        // onChange={addCity}
+                                      /> */}
+                                      <CFormSelect 
+                                        aria-label="Default select example"
+                                        style={{backgroundColor: '#131c21'}}
+                                        options={cities}
+                                        // value={cityValue}
+                                        // onChange={(e)=>addCity(e)}
+                                      />
+                                      <img src={Close} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px', visibility: showClearCity ? 'visible' : 'hidden', cursor: 'pointer'}}></img>
+                                  </div>
+
+                                  <label className='title-label'>Специальность</label>
+                                  <div className="text-field"> 
+                                      {/* <MyDropdown2
+                                        tags={speclist.filter(item=>item !== 'Blacklist')}
+                                        setTags={setSpeclist}
+                                        options={specOnlyData}
+                                        //onChange={changeSpec}
+                                      /> */}
+                                  </div>
+
+                                  <label className='title-label'>Компания</label>
+                                  <div className="text-field"> 
+                                      {/* <MyDropdown2
+                                        tags={company}
+                                        setTags={setCompany}
+                                        options={companys}
+                                        //onChange={changeSpec}
+                                      /> */}
+                                  </div>
+
+                                  <label className='title-label'>Комтеги</label>
+                                  <div className="text-field"> 
+                                      {/* <MyDropdown2
+                                        tags={comteg}
+                                        setTags={setComteg}
+                                        options={comtegs}
+                                        //onChange={changeSpec}
+                                      /> */}
+                                  </div>
+
+                                  <label className='title-label'>Комментарии</label>
+                                  <div className="text-field" style={{marginBottom: '0px'}}>
+                                    <textarea 
+                                      className="text-field__input" 
+                                      type="text" 
+                                      name="comment" 
+                                      id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
+                                      style={{resize: 'none', width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                    />
+                                  </div> 
+                                  
+                                </div>
+{/* 3 */}
+                                <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '320px'}}>
+                                  <div className="uley-line" style={{left: '670px', top: '60px', width: '70px'}}></div>
+                                  <div className="uley-line" style={{left: '805px', top: '60px', width: '50px'}}></div>
+                                  <div className="uley-line" style={{left: '900px', top: '60px', width: '50px'}}></div>
+                                  <div style={{display: 'flex'}}>
+                                    {/* возраст */}
+                                    <div className="text-field">
+                                      <input disabled className="text-field__input" type="text" name="age2" id="age2" value={age2}  onChange={(e) => setAge2(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                    </div>
+                                    {/* год рождения */}
+                                    <div className="text-field">
+                                      <input className="text-field__input" type="text" name="age" id="age" value={age} onChange={(e) => setAge(e.target.value)} style={{width: '80px', marginRight: '8px'}}/>
+                                    </div>
+                                    {/* проекты за месяц */}
+                                    <div className="text-field">
+                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                    </div>
+                                    {/* проекты всего */}
+                                    <div className="text-field">
+                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                    </div>
+                                    {/* опоздания */}
+                                    <div className="text-field">
+                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px', color: 'red'}}/>
+                                    </div>
+                                    {/* невыходы */}
+                                    <div className="text-field">
+                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', color: 'red'}}/>
+                                    </div>
+                                  </div>
+                                  
+                                  <label className='title-label'>Навык</label>
+                                  <div className="text-field"> 
+                                      {/* <MyDropdown2
+                                        tags={skill}
+                                        setTags={setSkill}
+                                        options={skills}
+                                        onChange={changeSpec}
+                                      /> */}
+                                  </div>
+
+                                  <label className='title-label'>Мерч</label>
+                                  <div className="text-field"> 
+                                      {/* <MyDropdown2
+                                        tags={merch}
+                                        setTags={setMerch}
+                                        options={merchData}
+                                        onChange={changeSpec}
+                                      /> */}
+                                  </div>
+
+                                  <label className='title-label'>Комтеги 2.0</label>
+                                  <div className="text-field"> 
+                                      {/* <MyDropdown2
+                                        tags={comteg2}
+                                        setTags={setComteg2}
+                                        options={comtegs}
+                                        onChange={changeSpec}
+                                      /> */}
+                                  </div>
+
+                                  <label className='title-label'>Комментарии 2.0</label>
+                                  <div className="text-field" style={{marginBottom: '0px'}}>
+                                    <textarea 
+                                      className="text-field__input" 
+                                      type="text" 
+                                      name="comment2" 
+                                      id="comment2" 
+                                      value={comment2} onChange={(e) => setComment2(e.target.value)} 
+                                      style={{resize: 'none', width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
+                                  </div> 
+                                </div>
+
+{/* 4 */}
+                                <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '250px', position: 'relative'}}>
+
+                                  <label className='title-label'>Проекты</label>
+                                  <div className="text-field" style={{marginBottom: '0px'}}>
+                                    <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    
+                                    </ul>
+                                  </div> 
+                                </div>
+
+                              </div>
+                        }  
+                      </CCardBody>
+                    </CCard>
+                </Suspense>
+            </CContainer>
+
+        </div>
+        <AppFooter />
+      </div>
+    </div>
+  )
+}
+
+export default Platforms

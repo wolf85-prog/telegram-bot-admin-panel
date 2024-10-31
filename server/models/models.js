@@ -232,6 +232,13 @@ const Company = sequelize.define('company', {
 })
 
 
+const Platform = sequelize.define('platform', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    title: {type: DataTypes.STRING}, //
+    address: {type: DataTypes.STRING}, //
+})
+
+
 module.exports = {
     User, 
     UserBot, 
@@ -249,4 +256,5 @@ module.exports = {
     Specialist,
     Manager,
     Company,
+    Platform,
 }

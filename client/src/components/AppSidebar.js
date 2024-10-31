@@ -182,6 +182,7 @@ const AppSidebar = () => {
     {
       component: CNavLink,
       name: 'Площадки',
+      to: '/platforms',
       //href: 'https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       //onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be'),
