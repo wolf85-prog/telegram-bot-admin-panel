@@ -40,7 +40,7 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
-import { getProjectsDel, getProjectId } from '../http/projectAPI'
+import { getProjectsDel, getProjectId, editProject } from '../http/projectAPI'
 
 const Trash = () => {
   const { companysAll, managersAll, workersAll } = useUsersContext();
@@ -162,6 +162,18 @@ const openProject = async(id) => {
   
 }
 
+const recoveryProject = async() => {
+  const data = {
+    deleted: null
+  }
+  //сохранить изменения в базе
+  const resSave = await editProject(data, id)
+
+  setProjects([...projects].filter(item=>item.id !== id))
+
+  setShowProject(false)
+}
+
 
 const closeProfile = () => {
   setShowProject(false)
@@ -187,7 +199,7 @@ const onChangeManager = (e, index) => {
                     <h2>Корзина</h2>
                     <CCard className="mb-4">
                       <CCardBody style={{padding: '12px'}}>
-                        {!showProject ? <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1471px', borderRadius: '5px' }}>
+                        {!showProject ? <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1250px', borderRadius: '5px' }}>
                           <CTableHead className="text-center" color="light">
                                   <CTableRow>
                                     <CTableHeaderCell className="text-center" style={{width: '61px'}}>
@@ -197,9 +209,7 @@ const onChangeManager = (e, index) => {
                                     <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Статус</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Дата</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Город</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Специфика</CTableHeaderCell>  
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '40px'}}>Проекты</CTableHeaderCell>  
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Комтег</CTableHeaderCell>                      
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Специфика</CTableHeaderCell>                      
                                     <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Комментарий</CTableHeaderCell>
                                   </CTableRow>
                                 </CTableHead>      
@@ -223,15 +233,9 @@ const onChangeManager = (e, index) => {
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center widthSpace">
                                         {item.specifika}
-                                      </CTableDataCell> 
+                                      </CTableDataCell>   
                                       <CTableDataCell className="text-center">
-
-                                      </CTableDataCell>  
-                                      <CTableDataCell className="text-center">
-                                        
-                                      </CTableDataCell>    
-                                      <CTableDataCell className="text-center">
-
+                                        {item.comment}
                                       </CTableDataCell>            
                                     </CTableRow>
                                   ))
@@ -248,7 +252,7 @@ const onChangeManager = (e, index) => {
                                               
                                               <div style={{position: 'absolute', top: '-25px', right: '4px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'flex-end', width: '-webkit-fill-available'}}>   
                                                 <div style={{display: 'flex'}}>
-                                                  <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                                  <img src={Disketa} onClick={recoveryProject} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                                   <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                                   <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                                   <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
