@@ -29,7 +29,8 @@ const { newDistribution,
     editDistribWAll,
 } = require('../controllers/distributionController')
 const { getReports, getReportsId, getSoundNotif, delSoundNotif} = require('../controllers/reportController')
-const { getProjects, getProjectsId, getProjectNew, getProjectsAll, getProjectNewId, getProjectNewCreate, getProjectNewUpdate, getProjectNewDel } = require('../controllers/projectController')
+const { getProjects, getProjectsId, getProjectNew, getProjectsAll, getProjectsDelete, getProjectNewId, 
+    getProjectNewCreate, getProjectNewUpdate, getProjectNewDel } = require('../controllers/projectController')
 const { uploadFile, getImage, sendNarush } = require( "../controllers/fileController.js")
 
 const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers/wuserbotController')
@@ -120,6 +121,7 @@ route.get('/projects/get/:id', getProjectsId)
 route.get('/projects/new/get', getProjectNew)
 
 route.get('/projectnew/get', getProjectsAll)
+route.get('/projectnew/delete/get', getProjectsDelete)
 route.get('/projectnew/get/:id', getProjectNewId)
 route.post('/projectnew/add', getProjectNewCreate)
 route.patch('/projectnew/update/:id', getProjectNewUpdate)
