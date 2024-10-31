@@ -514,7 +514,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               content="Удаленные проекты"
               placement="bottom"
             >
-              <CNavLink href="#" style={{position: 'relative'}}>
+              <CNavLink href="/trash" style={{position: 'relative'}}>
                 <img src={Delete} onMouseOver={e => (e.currentTarget.src = Delete2)} onMouseOut={e => (e.currentTarget.src = Delete)} style={{width: '18px', paddingBottom: '5px'}}/>               
               </CNavLink>
             </CTooltip>

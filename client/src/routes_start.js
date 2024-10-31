@@ -26,6 +26,7 @@ import {
     MANAGERS_ROUTE,
     COMPANYS_ROUTE,
     PROJECTS_ROUTE,
+    TRASH_ROUTE,
 } from "./utils/consts";
 
 const Chats = React.lazy(() => import('./pages/Chats'))
@@ -56,6 +57,7 @@ const Specialist = React.lazy(() => import('./pages/Specialist'))
 const Managers = React.lazy(() => import('./pages/Managers'))
 const Companys = React.lazy(() => import('./pages/Companys'))
 const Projects = React.lazy(() => import('./pages/Projects'))
+const Trash = React.lazy(() => import('./pages/Trash'))
 
 export const authRoutes = [
     { path: ADMIN_ROUTE, name: 'Панель управления', Component: Admin },
@@ -84,5 +86,6 @@ export const authRoutes = [
     { path: MANAGERS_ROUTE, name: 'Менеджеры', Component: Managers },
     { path: COMPANYS_ROUTE, name: 'Компании', Component: Companys },
     { path: PROJECTS_ROUTE, name: 'Проекты', Component: Projects },
+    { path: TRASH_ROUTE, name: 'Корзина', Component: Trash },
     { path: '/', name: 'Пункт управления', Component: Admin },
 ]
