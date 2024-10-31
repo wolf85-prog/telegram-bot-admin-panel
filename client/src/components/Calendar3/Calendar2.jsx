@@ -237,8 +237,6 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
         Array(days[month] + (startDay - 1)).fill(null).map((_, index) => {
             const d = index - (startDay - 2);
-
-            //console.log("month: ", month, d)
                 
             projects.map((item, ind)=> {
                 if (new Date(item?.dateStart.split('T')[0]).toISOString() === new Date(item?.dateEnd.split('T')[0]).toISOString() || 
@@ -670,8 +668,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                             setProjectId7(idProj7)
                         }                 
                     }
-                }
-                
+                }            
             })
             
 
@@ -685,6 +682,8 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
         })
 
     }, [projects, month])
+
+
 
 
     // Создание проекта
@@ -960,12 +959,16 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             setShowButtonAdd7(arr2)
         }
 
-        setProjects((projects) => {	
-            const usersCopy = JSON.parse(JSON.stringify(projects));
-            usersCopy.push(res)
 
-            return usersCopy;
-        });
+        setTimeout(()=> {
+            setProjects((projects) => {	
+                const usersCopy = JSON.parse(JSON.stringify(projects));
+                usersCopy.push(res)
+
+                return usersCopy;
+            });
+        }, 600000)
+        
         
     }
 
@@ -973,6 +976,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
     useEffect(() => {
         //console.log(ref.current.clientHeight)
         setHeight(ref.current.clientHeight + 74)
+        
     })
 
     useEffect(() => {
