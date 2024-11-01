@@ -47,6 +47,8 @@ const { getManagers, getManagerCount, editManager, getManagerId, addManager, del
 
 const { getCompanys, getCompanyCount, editCompany, getCompanyId, addCompany, deleteCompany, getCompanyCountAll } = require('../controllers/companysController')
 
+const { getPlatforms, getPlatformCount, editPlatform, getPlatformId, addPlatform, deletePlatform, getPlatformCountAll } = require('../controllers/platformsController')
+
 //const { sendPoster } = require('../controllers/posterController')
 
 //const upload = require( "../utils/upload.js")
@@ -209,6 +211,16 @@ route.patch('/companys/update/:id', editCompany)
 route.get("/companys/delete/:id", deleteCompany);
 route.post("/companys/add", addCompany);
 route.get("/companys/count/get", getCompanyCountAll);
+
+//----------------- Площадки ---------------------------------
+route.get('/platforms/get', getPlatforms)
+route.get("/platforms/:id", getPlatformId);
+route.get('/platforms/count/get/:count/:prev', getPlatformCount) //еще
+route.patch('/platforms/update/:id', editPlatform)
+route.get("/platforms/delete/:id", deletePlatform);
+route.post("/platforms/add", addPlatform);
+route.get("/platforms/count/get", getPlatformCountAll);
+
 
 
 module.exports = route
