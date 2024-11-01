@@ -202,7 +202,7 @@ const onChangeManager = (e, index) => {
                         {!showProject ? <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1250px', borderRadius: '5px' }}>
                           <CTableHead className="text-center" color="light">
                                   <CTableRow>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Дата</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '100px'}}>Дата</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{width: '61px'}}>ID</CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{width: '160px'}}>Проект</CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Город</CTableHeaderCell> 
@@ -214,7 +214,7 @@ const onChangeManager = (e, index) => {
                                 { projects.map((item, index)=> (
                                     <CTableRow key={item.id} v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                       <CTableDataCell className="text-center" style={{position: 'relative'}}>
-                                        {item.dateStart?.split('T')[0]}                        
+                                        {new Date(item.dateStart)?.toLocaleString().split(',')[0]}                        
                                       </CTableDataCell> 
                                       <CTableDataCell className="text-center">
                                         {item.id} 

@@ -1741,7 +1741,7 @@ useEffect(() => {
                                           </CCollapse>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 ? 'red' : ''}}>
-                                          {item.dateborn ? item.dateborn : ''}
+                                          {item.dateborn ? new Date(item.dateborn).toLocaleString().split(',')[0] : ''}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div>{item.phone ? item.phone : ''}</div>

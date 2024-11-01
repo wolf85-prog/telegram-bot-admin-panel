@@ -177,12 +177,15 @@ const Managers = () => {
   //			get managers
   //-----------------------------------------------------------------------------------------
   useEffect(()=> {
-    const sorted = [...cities].sort((a, b) => {       
+    // сортировка городов
+    const one = [...cities].slice(0, 4)
+    const city = [...cities].slice(5)
+    const sorted = city.sort((a, b) => {       
       var cityA = a.label, cityB = b.label
       return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
     })
-
-    setSortedCities(sorted)
+    const newSorted = [...one, ...city]
+    setSortedCities(newSorted)
     
     const fetchData = async() => {
 

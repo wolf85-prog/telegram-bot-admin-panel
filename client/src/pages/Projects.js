@@ -161,6 +161,8 @@ const Projects = () => {
 
   const [playPoster, setPlayPoster] = useState(false)
 
+  const [sortedCities, setSortedCities] = useState([])
+
   const table = useReactTable({
     defaultColumn: {
       size: 200, //starting column size
@@ -197,6 +199,16 @@ const Projects = () => {
 
 
   useEffect(()=> {
+    // сортировка городов
+    const one = [...cities].slice(0, 4)
+    const city = [...cities].slice(5)
+    const sorted = city.sort((a, b) => {       
+      var cityA = a.label, cityB = b.label
+      return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+    })
+    const newSorted = [...one, ...city]
+    setSortedCities(newSorted)
+
     //1
     let arrCompanys = []
     companysAll.map((item, index)=> {
@@ -692,7 +704,7 @@ const Projects = () => {
                                           <div className="text-field">
                                             <MyDropdown
                                                   style={{backgroundColor: '#131c21'}}
-                                                  options={cities}
+                                                  options={sortedCities}
                                                   selected={city}
                                                   setSelected={setCity}
                                                   // onChange={addCity}

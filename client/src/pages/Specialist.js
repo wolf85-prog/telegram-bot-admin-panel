@@ -183,25 +183,15 @@ const Specialist = () => {
 
   useEffect(()=> {
 
-    const sorted = [...cities].sort((a, b) => {  
-      if (a.label == 'none') return -1;
-      if (b.label == 'none') return 1;   
-
-      if (a.label < b.label)
-        return -1;
-      if (a.label > b.label)
-          return 1;
-      return 0;
+    // сортировка городов
+    const one = [...cities].slice(0, 4)
+    const city = [...cities].slice(5)
+    const sorted = city.sort((a, b) => {       
+      var cityA = a.label, cityB = b.label
+      return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
     })
-
-    // sorted.unshift(
-    //   {value: 0, label: '',},
-    //   {value: 1, label: "Москва",},
-    //   {value: 2, label: "Санкт-Петербург"},
-    // );
-
-    console.log("cities: ", sorted)
-    setSortedCities(sorted)
+    const newSorted = [...one, ...city]
+    setSortedCities(newSorted)
 
     const fetchData = async() => {
 
