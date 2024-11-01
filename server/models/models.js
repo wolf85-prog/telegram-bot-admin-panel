@@ -239,7 +239,7 @@ const Platform = sequelize.define('platform', {
     address: {type: DataTypes.STRING}, //
     track: {type: DataTypes.STRING}, //
     url: {type: DataTypes.STRING}, //
-    carta: {type: DataTypes.STRING}, //
+    karta: {type: DataTypes.STRING}, //
 })
 
 
