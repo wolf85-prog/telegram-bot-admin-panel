@@ -70,6 +70,7 @@ import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
 import { getProjectsDel, getProjectId, editProject } from '../http/projectAPI'
+import { useAsyncError } from 'react-router-dom';
 
 const Platforms = () => {
   const { companysAll, managersAll, workersAll } = useUsersContext();
@@ -101,6 +102,10 @@ const Platforms = () => {
   const [showSave2, setShowSave2] = useState(false)
   const [showSave3, setShowSave3] = useState(false)
 
+  const [showSaveAddress, setShowSaveAddress] = useState(false)
+  const [showSaveTrack, setShowSaveTrack] = useState(false)
+  const [showSaveUrl, setShowSaveUrl] = useState(false)
+
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [city, setCity] = useState('');
@@ -129,6 +134,9 @@ const Platforms = () => {
   const [nik, setNik] = useState('');
   const [dateReg, setDateReg] = useState('');
   const [profile, setProfile] = useState('');
+  const [address, setAddress] = useState('');
+  const [track, setTrack] = useState('');
+  const [url, setUrl] = useState('');
 
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
@@ -147,8 +155,19 @@ const Platforms = () => {
   const [image, setImage]= useState("");
 
   const [height, setHeight] = useState(600)
+  const [sortedCities, setSortedCities] = useState([])
 
   useEffect(()=> {
+    // сортировка городов
+    const one = [...cities].slice(0, 4)
+    const city = [...cities].slice(5)
+    const sorted = city.sort((a, b) => {       
+      var cityA = a.label, cityB = b.label
+      return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+    })
+    const newSorted = [...one, ...city]
+    setSortedCities(newSorted)
+
     //1
     const fetchData = async() => {
       const projs = await getProjectsDel()
@@ -246,7 +265,7 @@ const clickSearch = (e) => {
                     {/* <h2>Площадки</h2> */}
                     <CCard className="mb-4">
                       <CCardBody style={{padding: '12px'}}>
-                        {!showProject ? <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1250px', borderRadius: '5px' }}>
+                        {!showProject ? <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1300px', borderRadius: '5px' }}>
                           <CTableHead className="text-center" color="light">
                                   <CTableRow>
                                     <CTableHeaderCell className="text-center" style={{width: '61px'}}>
@@ -290,7 +309,7 @@ const clickSearch = (e) => {
                                 </CTableBody>                   
                         </CTable> 
                         :
-<div style={{position: 'relative', height: '765px', display: 'flex', flexDirection: 'row'}}>
+                        <div style={{position: 'relative', height: '448px', display: 'flex', flexDirection: 'row'}}>
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {
                                     profile ? 
@@ -361,16 +380,16 @@ const clickSearch = (e) => {
                                       <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                     </div>
                                   </div>
-{/* 2 */}
-                                <div style={{ textAlign: 'center', marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '650px', position: 'relative'}}>
-                                  <div style={{display: 'flex'}}>
+                                      {/* 2 */}
+                                <div style={{ textAlign: 'center', marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '100%', position: 'relative'}}>
+                                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                     {/* Город */}
                                     <label className='title-label' style={{position: 'absolute', top: '-25px', left: '100px'}}>Город</label>
                                     <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative', marginRight: '40px'}}> 
                                         <CFormSelect 
                                           aria-label="Default select example"
                                           style={{backgroundColor: '#131c21'}}
-                                          options={cities}
+                                          options={sortedCities}
                                           // value={cityValue}
                                           // onChange={(e)=>addCity(e)}
                                         />
@@ -389,20 +408,38 @@ const clickSearch = (e) => {
                                   
 
                                   <label className='title-label'>Адрес</label>
-                                  <div className="text-field">
-                                    <input disabled className="text-field__input" type="text" />
+                                  <div className="text-field" onMouseOver={()=>setShowSaveAddress(true)} onMouseOut={()=>setShowSaveAddress(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(address)}} 
+                                      alt="" 
+                                      style={{visibility: showSaveAddress ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                    />
+                                    <input disabled={false} className="text-field__input" type="text" name="address" id="address" value={address} onChange={(e)=>setAddress(e.target.value)} />
                                   </div> 
 
                                   <label className='title-label'>Как добраться</label>
-                                  <div className="text-field">
-                                    <input disabled className="text-field__input" type="text" />
+                                  <div className="text-field" onMouseOver={()=>setShowSaveTrack(true)} onMouseOut={()=>setShowSaveTrack(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(track)}} 
+                                      alt="" 
+                                      style={{visibility: showSaveTrack ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                    />
+                                    <input disabled={false} className="text-field__input" type="text" name="track" id="track" value={track} onChange={(e)=>setTrack(e.target.value)}/>
                                   </div> 
 
-                                  <div style={{display: 'flex'}}>
-                                    <div style={{ display: 'flex', flexDirection: 'column', width: '280px', marginRight: '40px'}}>
+                                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                    <div style={{ display: 'flex', flexDirection: 'column', width: '50%', marginRight: '40px'}}>
                                       <label className='title-label'>Ссылка на карту</label>
-                                      <div className="text-field">
-                                        <input disabled className="text-field__input" type="text" />
+                                      <div className="text-field" onMouseOver={()=>setShowSaveUrl(true)} onMouseOut={()=>setShowSaveUrl(false)}>
+                                        <img 
+                                          src={Disketa} 
+                                          onClick={()=>{navigator.clipboard.writeText(url)}} 
+                                          alt="" 
+                                          style={{visibility: showSaveUrl ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                        />
+                                        <input disabled={false} className="text-field__input" type="text" name="url" id="url" value={url} onChange={(e)=>setUrl(e.target.value)}/>
                                       </div> 
 
                                       <label className='title-label'>Карта</label>
@@ -411,7 +448,7 @@ const clickSearch = (e) => {
                                       </div> 
                                     </div>
 
-                                    <div>
+                                    <div style={{width: '50%'}}>
                                       <label className='title-label'>Комментарии</label>
                                       <div className="text-field" style={{marginBottom: '0px'}}>
                                         <textarea 
@@ -420,7 +457,7 @@ const clickSearch = (e) => {
                                           name="comment2" 
                                           id="comment2" 
                                           value={comment2} onChange={(e) => setComment2(e.target.value)} 
-                                          style={{resize: 'none', width: '250px', height: '125px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
+                                          style={{resize: 'none', height: '125px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
                                       </div> 
                                     </div>
                                     
@@ -435,7 +472,7 @@ const clickSearch = (e) => {
 
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '250px', height: '370px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '250px', height: '374px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
