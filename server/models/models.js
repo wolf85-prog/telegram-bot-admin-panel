@@ -235,7 +235,11 @@ const Company = sequelize.define('company', {
 const Platform = sequelize.define('platform', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
     title: {type: DataTypes.STRING}, //
+    city: {type: DataTypes.STRING}, //
     address: {type: DataTypes.STRING}, //
+    track: {type: DataTypes.STRING}, //
+    url: {type: DataTypes.STRING}, //
+    carta: {type: DataTypes.STRING}, //
 })
 
 
