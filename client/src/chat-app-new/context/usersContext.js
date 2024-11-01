@@ -9,6 +9,7 @@ import { getAllPretendent, getWContacts, getWConversation,
 import { getSpecialist, getSpecCount, editSpecialist, getSpecialistId } from './../../http/specAPI'
 import { getManager } from './../../http/managerAPI'
 import { getCompany } from './../../http/companyAPI'
+import { getPlatforms } from './../../http/platformAPI'
 
 import { getDistributionsW, 
 	getDistributionsCountW,
@@ -76,6 +77,8 @@ const UsersProvider = ({ children }) => {
 	   	const parsedUserWorkers = JSON.parse(savedUserWorkers);
 	   	return parsedUserWorkers || "";
 	});  //все компании;
+
+	const [platformsAll, setPlatformsAll] = useState([])
 
 	const [projects, setProjects] = useState([]); 
 	const [newProject, setNewProject]= useState(false);
@@ -949,6 +952,52 @@ useEffect(() => {
 	  	fetchData();
 
 	},[])
+
+//------------------------------------------------------------------------------------------
+// get Platforms
+//------------------------------------------------------------------------------------------	
+useEffect(() => {
+	const fetchData = async () => {
+		let platforms = await getPlatforms();
+		  console.log("platforms context: ", platforms)
+	
+		  let arrCompanys = []
+	
+		  platforms.map(async (user, i) => {
+	
+			const newUser = {
+			  id: user.id,
+			  title: user.title,
+			  city: user.city,
+			  address: user.address,
+			  track: user.track, //
+			  url: user.url,
+			  karta: user.karta,
+			}
+			arrCompanys.push(newUser)
+	
+			//если элемент массива последний
+			if (i === platforms.length-1) {
+				const sortedUser = [...arrCompanys].sort((a, b) => {       
+					var idA = a.id, idB = b.id 
+					return idB-idA  //сортировка по возрастанию 
+				})
+	
+				setPlatformsAll(sortedUser)
+				  //setCompanys(sortedUser)
+						
+				//сохранить кэш
+				//localStorage.setItem("companys", JSON.stringify(sortedUser));
+			}
+	
+		  })
+
+		//setCompanysAll(response)
+	}
+
+	  fetchData();
+
+},[])
 
 
 //------------------------------------------------------------------------------------------
@@ -2361,6 +2410,7 @@ function isObjectEmpty(obj) {
 			setManagersAll,
 			companysAll,
 			setCompanysAll,
+			platformsAll,
 			specialistsCount, 
 			setSpecialistsCount,
 			date, 

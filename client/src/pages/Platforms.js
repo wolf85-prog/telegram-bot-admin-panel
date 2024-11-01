@@ -73,7 +73,7 @@ import { getProjectsDel, getProjectId, editProject } from '../http/projectAPI'
 import { useAsyncError } from 'react-router-dom';
 
 const Platforms = () => {
-  const { companysAll, managersAll, workersAll } = useUsersContext();
+  const { companysAll, managersAll, workersAll, platformsAll } = useUsersContext();
 
   const [projects, setProjects] = useState([])
   const [showProject, setShowProject] = useState(false)
@@ -269,43 +269,43 @@ const clickSearch = (e) => {
                           <CTableHead className="text-center" color="light">
                                   <CTableRow>
                                     <CTableHeaderCell className="text-center" style={{width: '61px'}}>
-                                      id
+                                      ID
                                     </CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{width: '160px'}}>Проект</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Статус</CTableHeaderCell>  
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Дата</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Город</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Специфика</CTableHeaderCell>                      
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Комментарий</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{width: '160px'}}>Название</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Город</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Адрес</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Как добраться</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Ссылка</CTableHeaderCell>                      
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Карта</CTableHeaderCell>
                                   </CTableRow>
                                 </CTableHead>      
                                 <CTableBody> 
-                                {/* { projects.map((item, index)=> ( */}
-                                    <CTableRow  v-for="item in tableItems" style={{lineHeight: '14px'}}>
+                                { platformsAll.map((item, index)=> ( 
+                                    <CTableRow key={item.id}  v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                       <CTableDataCell className="text-center" style={{position: 'relative'}}>
-                                        1                        
+                                        {item.id}                        
                                       </CTableDataCell> 
                                       <CTableDataCell onClick={()=>openProject(1)} className="text-center" style={{cursor: 'pointer'}}>
-                                        Тест 
+                                        {item.title}  
                                       </CTableDataCell>  
                                       <CTableDataCell className="text-center">
-                                      
+                                        {item.city} 
                                       </CTableDataCell>   
                                       <CTableDataCell className="text-center">
-                                        
+                                        {item.address} 
                                       </CTableDataCell> 
                                       <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                       
+                                        {item.track} 
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center widthSpace">
-                                        
+                                        {item.url} 
                                       </CTableDataCell>   
                                       <CTableDataCell className="text-center">
-                                        
+                                        {item.karta} 
                                       </CTableDataCell>            
                                     </CTableRow>
-                                  {/* ))
-                                }  */}
+                                  ))
+                                }  
                                 </CTableBody>                   
                         </CTable> 
                         :
