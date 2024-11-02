@@ -541,7 +541,7 @@ const Projects = () => {
   const changeAddSpec = async (eventkey) => {
 		console.log("spec: ", eventkey)
 
-    if (eventkey.split(' ')[0] === '1') {
+    if (eventkey.split(' ')[0] === '1' || eventkey==='1') {
       //добавить строку в основной состав
 		  addMainspec({projectId: id})
       const arrayCopy = JSON.parse(JSON.stringify(mainspec));
