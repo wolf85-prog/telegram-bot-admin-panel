@@ -69,10 +69,10 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
-import { getProjectsDel, getPlatformId, editProject } from '../http/projectAPI'
+import { getProjectsDel, editProject } from '../http/projectAPI'
 import { useAsyncError } from 'react-router-dom';
 import Filters from 'src/components/table/Filters2'
-import { getPlatforms } from 'src/http/platformAPI';
+import { getPlatforms, getPlatformId } from 'src/http/platformAPI';
 
 const Platforms = () => {
   const { companysAll, managersAll, workersAll, platformsAll } = useUsersContext();
@@ -203,7 +203,7 @@ const openPlatform = async(id) => {
   setShowProject(true)
   setId(id)
   setTitle(resPlatform.title)
-  set
+  //set
 
   setTimeout(()=> {
     setHeight(509)
