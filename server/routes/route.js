@@ -49,6 +49,8 @@ const { getCompanys, getCompanyCount, editCompany, getCompanyId, addCompany, del
 
 const { getPlatforms, getPlatformCount, editPlatform, getPlatformId, addPlatform, deletePlatform, getPlatformCountAll } = require('../controllers/platformsController')
 
+const { getMainSpecProject, getMainSpecId, editMainspec, deleteMainspec, addMainspec, getMainspecCountAll } = require('../controllers/mainspecController')
+
 //const { sendPoster } = require('../controllers/posterController')
 
 //const upload = require( "../utils/upload.js")
@@ -221,6 +223,13 @@ route.get("/platforms/delete/:id", deletePlatform);
 route.post("/platforms/add", addPlatform);
 route.get("/platforms/count/get", getPlatformCountAll);
 
-
+//----------------- Основной состав (специалисты) ---------------------------------
+route.get('/mainspec/project/get/:id', getMainSpecProject)
+route.get("/mainspec/:id", getMainSpecId);
+//route.get('/mainspec/count/get/:count/:prev', getMainspecCount) //еще
+route.patch('/mainspec/update/:id', editMainspec)
+route.get("/mainspec/delete/:id", deleteMainspec);
+route.post("/mainspec/add", addMainspec);
+route.get("/mainspec/count/get", getMainspecCountAll);
 
 module.exports = route
