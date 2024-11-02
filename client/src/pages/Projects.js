@@ -95,9 +95,7 @@ import { getProjects, deleteProject, editProject, getProjectId } from '../http/p
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
-  const { companysAll, managersAll, workersAll } = useUsersContext();
-
-  const [yearAndMonth, setYearAndMonth] = useState([2024, 10]);
+  const { companysAll, managersAll, workersAll, platformsAll } = useUsersContext();
 
   const [showSidebar, setShowSidebar] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
@@ -129,6 +127,8 @@ const Projects = () => {
   const [workersData, setWorkersData] = useState([]);
   const [specialistName, setSpecialistName] = useState('');
 
+  const [locationProject, setLocationProject] = useState('');
+  const [platformsData, setPlatformsData] = useState([]);
 
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
@@ -246,6 +246,18 @@ const Projects = () => {
     setWorkersData(arrWorkers)
 
     //4
+    let arrPlatfroms = []
+    platformsAll.map((item, index)=> {
+      arrPlatfroms.push(item.title)
+    })
+    const sortedPlat = [...arrPlatfroms].sort((a, b) => {       
+      var cityA = a.toLowerCase(), cityB = b.toLowerCase()
+      return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+    })
+
+    setPlatformsData(sortedPlat)
+
+    //5
     const fetchData = async() => {
       const projs = await getProjects()
       console.log("projs: ", projs)
@@ -323,6 +335,14 @@ const Projects = () => {
       setPhone2('')
     }
 
+    setLocationProject(resProj.geo)
+    const loc = platformsAll.find(item=> item.title === resProj?.geo)
+    if (loc) {
+      setAddress(loc.address)
+    } else {
+      setAddress('')
+    }
+
     setCity(resProj.city)
     setComment(resProj.comment) 
 
@@ -374,7 +394,7 @@ const Projects = () => {
       teh6,
       teh7,
       teh8,
-      geo, 
+      geo: locationProject, 
       managerId: managersAll.find(item=> item.fio === managerName)?.id, 
       managerId2: managersAll.find(item=> item.fio === managerName2)?.id,
       companyId: companysAll.find(item=> item.title === companyName)?.id, 
@@ -756,8 +776,56 @@ const Projects = () => {
                                           </div>
 
                                           <label className='title-label'>Локация</label>
-                                          <div className="text-field">
-                                            <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/>
+                                          <div className="text-field" style={{width: '320px'}}>
+                                            {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
+                                            <Autocomplete
+                                              sx={{
+                                                  display: 'inline-block',
+                                                  '& input': {zIndex: '25',
+                                                    width: '100%',
+                                                    border: 'none',
+                                                    height: '40px',
+                                                    padding: '5px 4px',
+                                                    fontFamily: 'inherit',
+                                                    fontSize: '14px',
+                                                    fontWeight: '700',
+                                                    lineHeight: '1.5',
+                                                    textAlign: 'center',
+                                                    color: '#ffffff',
+                                                    backgroundColor: 'transparent',
+                                                  }
+                                              }}
+                                              className="text-field__input" 
+                                              openOnFocus
+                                              id="custom-input-demo"
+                                              options={platformsData}
+                                              style={{width: '100%', padding: '0'}}
+                                              onInputChange={(e)=>setLocationProject(e.target.value)}
+                                              //onInputChange={(e)=>console.log(e.target.value)}
+                                              isOptionEqualToValue={(option, value) => option.value === value.value}
+                                              onChange={(event, newValue) => {
+                                                  if (newValue && newValue.length) {
+                                                      setLocationProject(newValue)
+                                                      
+                                                      const loc = platformsAll.find(item=> item.title === newValue)
+                                                      console.log("loc: ", loc)
+                                                      if (loc) {
+                                                        setAddress(loc.address)
+                                                      }
+                                                  }  
+                                              }}
+                                              value={locationProject}
+                                              inputValue={locationProject}
+                                              renderInput={(params) => (
+                                              <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                                  <input 
+                                                      className="text-field__input" 
+                                                      type="text" {...params.inputProps} 
+                                                      placeholder=''
+                                                  />
+                                              </div>
+                                              )}
+                                            />
                                           </div>
 
                                           <label className='title-label'>Адрес</label>
@@ -765,8 +833,9 @@ const Projects = () => {
                                             <textarea 
                                               className="text-field__input" 
                                               type="text" 
-                                              name="comment" 
-                                              id="comment"
+                                              name="address" 
+                                              id="address"
+                                              value={address}
                                               style={{resize: 'none', width: '320px', height: '80px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
                                             />
                                           </div> 
