@@ -239,259 +239,469 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             const d = index - (startDay - 2);
                 
             projects.map((item, ind)=> {
-                if (new Date(item?.dateStart.split('T')[0]).toISOString() === new Date(item?.dateEnd?.split('T')[0]).toISOString() || 
-                    new Date(item?.dateStart.split('T')[0]).getTime() > new Date(item?.dateEnd?.split('T')[0]).getTime()) {
-                    // console.log("d==: ", ind,
-                    //     new Date(item?.dateStart.split('T')[0]).toISOString(),
-                    //     new Date(item?.dateEnd.split('T')[0]).toISOString(), //.setHours(new Date(item?.dateStart).getHours()))
-                    // ) 
-                    if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).toISOString() === new Date(item?.dateStart.split('T')[0]).toISOString()) ) {
-                        // console.log("d: ", ind,
-                        //     new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).toISOString(),
-                        //     new Date(item?.dateEnd.split('T')[0]).toISOString() //.setHours(new Date(item?.dateStart).getHours()))
-                        // )  
+                if (item?.dateEnd) {
+                    if (new Date(item?.dateStart.split('T')[0]).toISOString() === new Date(item?.dateEnd?.split('T')[0]).toISOString() || 
+                        new Date(item?.dateStart.split('T')[0]).getTime() > new Date(item?.dateEnd?.split('T')[0]).getTime()) {
+                        // console.log("d==: ", ind,
+                        //     new Date(item?.dateStart.split('T')[0]).toISOString(),
+                        //     new Date(item?.dateEnd.split('T')[0]).toISOString(), //.setHours(new Date(item?.dateStart).getHours()))
+                        // ) 
+                        if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).toISOString() === new Date(item?.dateStart.split('T')[0]).toISOString()) ) {
+                            // console.log("d: ", ind,
+                            //     new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).toISOString(),
+                            //     new Date(item?.dateEnd.split('T')[0]).toISOString() //.setHours(new Date(item?.dateStart).getHours()))
+                            // )  
 
-                        if (!nameProj[index]) {
-                        arr[index] = true 
-                        nameProj[index] = item.name
-                        setProjectName(nameProj)
+                            if (!nameProj[index]) {
+                            arr[index] = true 
+                            nameProj[index] = item.name
+                            setProjectName(nameProj)
 
-                        endProj[index] = item.dateEnd 
-                        setProjectEnd(endProj)
+                            endProj[index] = item.dateEnd 
+                            setProjectEnd(endProj)
 
-                        statusProj[index] = item.status 
-                        setProjectStatus(statusProj)
+                            statusProj[index] = item.status 
+                            setProjectStatus(statusProj)
 
-                        colorProj[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                        setProjectColor(colorProj)
+                            colorProj[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                            setProjectColor(colorProj)
 
-                        //console.log("timeProj: ", item)
-                        timeProj[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                        setProjectTime(timeProj)
+                            //console.log("timeProj: ", item)
+                            timeProj[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                            setProjectTime(timeProj)
 
 
-                        cityProj[index] = item.city 
-                        setProjectCity(cityProj)
+                            cityProj[index] = item.city 
+                            setProjectCity(cityProj)
 
-                        commentProj[index] = item.comment
-                        setProjectComment(commentProj)
+                            commentProj[index] = item.comment
+                            setProjectComment(commentProj)
 
-                        specifProj[index] = item.specifika
-                        setProjectSpecifika(specifProj)
+                            specifProj[index] = item.specifika
+                            setProjectSpecifika(specifProj)
 
-                        idProj[index] = item.id
-                        setProjectId(idProj)
-                        } 
-                        else if (!nameProj2[index]) {
-                            arr2[index] = true 
-                            nameProj2[index] = item.name
-                            setProjectName2(nameProj2)
+                            idProj[index] = item.id
+                            setProjectId(idProj)
+                            } 
+                            else if (!nameProj2[index]) {
+                                arr2[index] = true 
+                                nameProj2[index] = item.name
+                                setProjectName2(nameProj2)
 
-                            endProj2[index] = item.dateEnd 
-                            setProjectEnd2(endProj2)
+                                endProj2[index] = item.dateEnd 
+                                setProjectEnd2(endProj2)
 
-                            statusProj2[index] = item.status 
-                            setProjectStatus2(statusProj2)
+                                statusProj2[index] = item.status 
+                                setProjectStatus2(statusProj2)
 
-                            colorProj2[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                            setProjectColor2(colorProj2)
+                                colorProj2[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                                setProjectColor2(colorProj2)
 
-                            timeProj2[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                            setProjectTime2(timeProj2)
+                                timeProj2[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                                setProjectTime2(timeProj2)
 
-                            cityProj2[index] = item.city 
-                            setProjectCity2(cityProj2)
+                                cityProj2[index] = item.city 
+                                setProjectCity2(cityProj2)
 
-                            commentProj2[index] = item.comment
-                            setProjectComment2(commentProj2)
+                                commentProj2[index] = item.comment
+                                setProjectComment2(commentProj2)
 
-                            specifProj2[index] = item.specifika
-                            setProjectSpecifika2(specifProj2)
+                                specifProj2[index] = item.specifika
+                                setProjectSpecifika2(specifProj2)
 
-                            idProj2[index] = item.id
-                            setProjectId2(idProj2)
-                        } 
-                        else if (!nameProj3[index]) {
-                            arr3[index] = true 
-                            nameProj3[index] = item.name
-                            setProjectName3(nameProj3)
+                                idProj2[index] = item.id
+                                setProjectId2(idProj2)
+                            } 
+                            else if (!nameProj3[index]) {
+                                arr3[index] = true 
+                                nameProj3[index] = item.name
+                                setProjectName3(nameProj3)
 
-                            endProj3[index] = item.dateEnd 
-                            setProjectEnd3(endProj3)
+                                endProj3[index] = item.dateEnd 
+                                setProjectEnd3(endProj3)
 
-                            statusProj3[index] = item.status 
-                            setProjectStatus3(statusProj3)
+                                statusProj3[index] = item.status 
+                                setProjectStatus3(statusProj3)
 
-                            colorProj3[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                            setProjectColor3(colorProj3)
+                                colorProj3[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                                setProjectColor3(colorProj3)
 
-                            timeProj3[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                            setProjectTime3(timeProj3)
+                                timeProj3[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                                setProjectTime3(timeProj3)
 
-                            cityProj3[index] = item.city 
-                            setProjectCity3(cityProj3)
+                                cityProj3[index] = item.city 
+                                setProjectCity3(cityProj3)
 
-                            commentProj3[index] = item.comment
-                            setProjectComment3(commentProj3)
+                                commentProj3[index] = item.comment
+                                setProjectComment3(commentProj3)
 
-                            specifProj3[index] = item.specifika
-                            setProjectSpecifika3(specifProj3)
+                                specifProj3[index] = item.specifika
+                                setProjectSpecifika3(specifProj3)
 
-                            idProj3[index] = item.id
-                            setProjectId3(idProj3)
-                        } 
-                        else if (!nameProj4[index]) { 
-                            arr4[index] = true 
-                            nameProj4[index] = item.name
-                            setProjectName4(nameProj4)
+                                idProj3[index] = item.id
+                                setProjectId3(idProj3)
+                            } 
+                            else if (!nameProj4[index]) { 
+                                arr4[index] = true 
+                                nameProj4[index] = item.name
+                                setProjectName4(nameProj4)
 
-                            endProj4[index] = item.dateEnd 
-                            setProjectEnd4(endProj4)
+                                endProj4[index] = item.dateEnd 
+                                setProjectEnd4(endProj4)
 
-                            statusProj4[index] = item.status 
-                            setProjectStatus4(statusProj4)
+                                statusProj4[index] = item.status 
+                                setProjectStatus4(statusProj4)
 
-                            colorProj4[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                            setProjectColor4(colorProj4)
+                                colorProj4[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                                setProjectColor4(colorProj4)
 
-                            timeProj4[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                            setProjectTime4(timeProj4)
+                                timeProj4[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                                setProjectTime4(timeProj4)
 
-                            cityProj4[index] = item.city 
-                            setProjectCity4(cityProj4)
+                                cityProj4[index] = item.city 
+                                setProjectCity4(cityProj4)
 
-                            commentProj4[index] = item.comment
-                            setProjectComment4(commentProj4)
+                                commentProj4[index] = item.comment
+                                setProjectComment4(commentProj4)
 
-                            specifProj4[index] = item.specifika
-                            setProjectSpecifika4(specifProj4)
+                                specifProj4[index] = item.specifika
+                                setProjectSpecifika4(specifProj4)
 
-                            idProj4[index] = item.id
-                            setProjectId4(idProj4)
-                        } 
-                        else if (!nameProj5[index]) {
-                            arr5[index] = true 
-                            nameProj5[index] = item.name
-                            setProjectName5(nameProj5)
+                                idProj4[index] = item.id
+                                setProjectId4(idProj4)
+                            } 
+                            else if (!nameProj5[index]) {
+                                arr5[index] = true 
+                                nameProj5[index] = item.name
+                                setProjectName5(nameProj5)
 
-                            endProj5[index] = item.dateEnd 
-                            setProjectEnd5(endProj5)
+                                endProj5[index] = item.dateEnd 
+                                setProjectEnd5(endProj5)
 
-                            statusProj5[index] = item.status 
-                            setProjectStatus5(statusProj5)
+                                statusProj5[index] = item.status 
+                                setProjectStatus5(statusProj5)
 
-                            colorProj5[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                            setProjectColor5(colorProj5)
+                                colorProj5[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                                setProjectColor5(colorProj5)
 
-                            timeProj5[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                            setProjectTime5(timeProj5)
+                                timeProj5[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                                setProjectTime5(timeProj5)
 
-                            cityProj5[index] = item.city 
-                            setProjectCity5(cityProj5)
+                                cityProj5[index] = item.city 
+                                setProjectCity5(cityProj5)
 
-                            commentProj5[index] = item.comment
-                            setProjectComment5(commentProj5)
+                                commentProj5[index] = item.comment
+                                setProjectComment5(commentProj5)
 
-                            specifProj5[index] = item.specifika
-                            setProjectSpecifika5(specifProj5)
+                                specifProj5[index] = item.specifika
+                                setProjectSpecifika5(specifProj5)
 
-                            idProj5[index] = item.id
-                            setProjectId5(idProj5)
-                        }  
-                        else if (!nameProj6[index]) {
-                            arr6[index] = true 
-                            nameProj6[index] = item.name
-                            setProjectName6(nameProj6)
+                                idProj5[index] = item.id
+                                setProjectId5(idProj5)
+                            }  
+                            else if (!nameProj6[index]) {
+                                arr6[index] = true 
+                                nameProj6[index] = item.name
+                                setProjectName6(nameProj6)
 
-                            endProj6[index] = item.dateEnd 
-                            setProjectEnd6(endProj6)
+                                endProj6[index] = item.dateEnd 
+                                setProjectEnd6(endProj6)
 
-                            statusProj6[index] = item.status 
-                            setProjectStatus6(statusProj6)
+                                statusProj6[index] = item.status 
+                                setProjectStatus6(statusProj6)
 
-                            colorProj6[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                            setProjectColor6(colorProj6)
+                                colorProj6[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                                setProjectColor6(colorProj6)
 
-                            timeProj6[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                            setProjectTime6(timeProj6)
+                                timeProj6[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                                setProjectTime6(timeProj6)
 
-                            cityProj6[index] = item.city 
-                            setProjectCity6(cityProj6)
+                                cityProj6[index] = item.city 
+                                setProjectCity6(cityProj6)
 
-                            commentProj6[index] = item.comment
-                            setProjectComment6(commentProj6)
+                                commentProj6[index] = item.comment
+                                setProjectComment6(commentProj6)
 
-                            specifProj6[index] = item.specifika
-                            setProjectSpecifika6(specifProj6)
+                                specifProj6[index] = item.specifika
+                                setProjectSpecifika6(specifProj6)
 
-                            idProj6[index] = item.id
-                            setProjectId6(idProj6)
-                        } 
-                        else if (!nameProj7[index]) {
-                            arr7[index] = true 
-                            nameProj7[index] = item.name
-                            setProjectName7(nameProj7)
+                                idProj6[index] = item.id
+                                setProjectId6(idProj6)
+                            } 
+                            else if (!nameProj7[index]) {
+                                arr7[index] = true 
+                                nameProj7[index] = item.name
+                                setProjectName7(nameProj7)
 
-                            endProj7[index] = item.dateEnd 
-                            setProjectEnd7(endProj7)
+                                endProj7[index] = item.dateEnd 
+                                setProjectEnd7(endProj7)
 
-                            statusProj7[index] = item.status 
-                            setProjectStatus7(statusProj7)
+                                statusProj7[index] = item.status 
+                                setProjectStatus7(statusProj7)
 
-                            colorProj7[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                            setProjectColor7(colorProj7)
+                                colorProj7[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                                setProjectColor7(colorProj7)
 
-                            timeProj7[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                            setProjectTime7(timeProj7)
+                                timeProj7[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                                setProjectTime7(timeProj7)
 
-                            cityProj7[index] = item.city 
-                            setProjectCity7(cityProj7)
+                                cityProj7[index] = item.city 
+                                setProjectCity7(cityProj7)
 
-                            commentProj7[index] = item.comment
-                            setProjectComment7(commentProj7)
+                                commentProj7[index] = item.comment
+                                setProjectComment7(commentProj7)
 
-                            specifProj7[index] = item.specifika
-                            setProjectSpecifika7(specifProj7)
+                                specifProj7[index] = item.specifika
+                                setProjectSpecifika7(specifProj7)
 
-                            idProj7[index] = item.id
-                            setProjectId7(idProj7)
-                        }                 
-                    }
+                                idProj7[index] = item.id
+                                setProjectId7(idProj7)
+                            }                 
+                        }
 
+                    } else {
+                        if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() >= new Date(item?.dateStart.split('T')[0]).getTime()) && 
+                            (new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() <= new Date(item?.dateEnd?.split('T')[0]).getTime()) ) {
+
+                            if (!nameProj[index]) {
+                            arr[index] = true 
+                            nameProj[index] = item.name
+                            setProjectName(nameProj)
+
+                            endProj[index] = item.dateEnd 
+                            setProjectEnd(endProj)
+
+                            statusProj[index] = item.status 
+                            setProjectStatus(statusProj)
+
+                            colorProj[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                            setProjectColor(colorProj)
+
+                            //console.log("timeProj: ", item)
+                            timeProj[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                            setProjectTime(timeProj)
+
+
+                            cityProj[index] = item.city 
+                            setProjectCity(cityProj)
+
+                            commentProj[index] = item.comment
+                            setProjectComment(commentProj)
+
+                            specifProj[index] = item.specifika
+                            setProjectSpecifika(specifProj)
+
+                            idProj[index] = item.id
+                            setProjectId(idProj)
+                            } 
+                            else if (!nameProj2[index]) {
+                                arr2[index] = true 
+                                nameProj2[index] = item.name
+                                setProjectName2(nameProj2)
+
+                                endProj2[index] = item.dateEnd 
+                                setProjectEnd2(endProj2)
+
+                                statusProj2[index] = item.status 
+                                setProjectStatus2(statusProj2)
+
+                                colorProj2[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                                setProjectColor2(colorProj2)
+
+                                timeProj2[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                                setProjectTime2(timeProj2)
+
+                                cityProj2[index] = item.city 
+                                setProjectCity2(cityProj2)
+
+                                commentProj2[index] = item.comment
+                                setProjectComment2(commentProj2)
+
+                                specifProj2[index] = item.specifika
+                                setProjectSpecifika2(specifProj2)
+
+                                idProj2[index] = item.id
+                                setProjectId2(idProj2)
+                            } 
+                            else if (!nameProj3[index]) {
+                                arr3[index] = true 
+                                nameProj3[index] = item.name
+                                setProjectName3(nameProj3)
+
+                                endProj3[index] = item.dateEnd 
+                                setProjectEnd3(endProj3)
+
+                                statusProj3[index] = item.status 
+                                setProjectStatus3(statusProj3)
+
+                                colorProj3[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                                setProjectColor3(colorProj3)
+
+                                timeProj3[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                                setProjectTime3(timeProj3)
+
+                                cityProj3[index] = item.city 
+                                setProjectCity3(cityProj3)
+
+                                commentProj3[index] = item.comment
+                                setProjectComment3(commentProj3)
+
+                                specifProj3[index] = item.specifika
+                                setProjectSpecifika3(specifProj3)
+
+                                idProj3[index] = item.id
+                                setProjectId3(idProj3)
+                            } 
+                            else if (!nameProj4[index]) { 
+                                arr4[index] = true 
+                                nameProj4[index] = item.name
+                                setProjectName4(nameProj4)
+
+                                endProj4[index] = item.dateEnd 
+                                setProjectEnd4(endProj4)
+
+                                statusProj4[index] = item.status 
+                                setProjectStatus4(statusProj4)
+
+                                colorProj4[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                                setProjectColor4(colorProj4)
+
+                                timeProj4[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                                setProjectTime4(timeProj4)
+
+                                cityProj4[index] = item.city 
+                                setProjectCity4(cityProj4)
+
+                                commentProj4[index] = item.comment
+                                setProjectComment4(commentProj4)
+
+                                specifProj4[index] = item.specifika
+                                setProjectSpecifika4(specifProj4)
+
+                                idProj4[index] = item.id
+                                setProjectId4(idProj4)
+                            } 
+                            else if (!nameProj5[index]) {
+                                arr5[index] = true 
+                                nameProj5[index] = item.name
+                                setProjectName5(nameProj5)
+
+                                endProj5[index] = item.dateEnd 
+                                setProjectEnd5(endProj5)
+
+                                statusProj5[index] = item.status 
+                                setProjectStatus5(statusProj5)
+
+                                colorProj5[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                                setProjectColor5(colorProj5)
+
+                                timeProj5[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                                setProjectTime5(timeProj5)
+
+                                cityProj5[index] = item.city 
+                                setProjectCity5(cityProj5)
+
+                                commentProj5[index] = item.comment
+                                setProjectComment5(commentProj5)
+
+                                specifProj5[index] = item.specifika
+                                setProjectSpecifika5(specifProj5)
+
+                                idProj5[index] = item.id
+                                setProjectId5(idProj5)
+                            }  
+                            else if (!nameProj6[index]) {
+                                arr6[index] = true 
+                                nameProj6[index] = item.name
+                                setProjectName6(nameProj6)
+
+                                endProj6[index] = item.dateEnd 
+                                setProjectEnd6(endProj6)
+
+                                statusProj6[index] = item.status 
+                                setProjectStatus6(statusProj6)
+
+                                colorProj6[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                                setProjectColor6(colorProj6)
+
+                                timeProj6[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                                setProjectTime6(timeProj6)
+
+                                cityProj6[index] = item.city 
+                                setProjectCity6(cityProj6)
+
+                                commentProj6[index] = item.comment
+                                setProjectComment6(commentProj6)
+
+                                specifProj6[index] = item.specifika
+                                setProjectSpecifika6(specifProj6)
+
+                                idProj6[index] = item.id
+                                setProjectId6(idProj6)
+                            } 
+                            else if (!nameProj7[index]) {
+                                arr7[index] = true 
+                                nameProj7[index] = item.name
+                                setProjectName7(nameProj7)
+
+                                endProj7[index] = item.dateEnd 
+                                setProjectEnd7(endProj7)
+
+                                statusProj7[index] = item.status 
+                                setProjectStatus7(statusProj7)
+
+                                colorProj7[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                                setProjectColor7(colorProj7)
+
+                                timeProj7[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                                setProjectTime7(timeProj7)
+
+                                cityProj7[index] = item.city 
+                                setProjectCity7(cityProj7)
+
+                                commentProj7[index] = item.comment
+                                setProjectComment7(commentProj7)
+
+                                specifProj7[index] = item.specifika
+                                setProjectSpecifika7(specifProj7)
+
+                                idProj7[index] = item.id
+                                setProjectId7(idProj7)
+                            }                 
+                        }
+                    } 
                 } else {
-                    if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() >= new Date(item?.dateStart.split('T')[0]).getTime()) && 
-                        (new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() <= new Date(item?.dateEnd?.split('T')[0]).getTime()) ) {
-
+                    if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).toISOString() === new Date(item?.dateStart.split('T')[0]).toISOString()) ) {
                         if (!nameProj[index]) {
-                        arr[index] = true 
-                        nameProj[index] = item.name
-                        setProjectName(nameProj)
+                            arr[index] = true 
+                            nameProj[index] = item.name
+                            setProjectName(nameProj)
 
-                        endProj[index] = item.dateEnd 
-                        setProjectEnd(endProj)
+                            endProj[index] = item.dateEnd 
+                            setProjectEnd(endProj)
 
-                        statusProj[index] = item.status 
-                        setProjectStatus(statusProj)
+                            statusProj[index] = item.status 
+                            setProjectStatus(statusProj)
 
-                        colorProj[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                        setProjectColor(colorProj)
+                            colorProj[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                            setProjectColor(colorProj)
 
-                        //console.log("timeProj: ", item)
-                        timeProj[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                        setProjectTime(timeProj)
+                            //console.log("timeProj: ", item)
+                            timeProj[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                            setProjectTime(timeProj)
 
 
-                        cityProj[index] = item.city 
-                        setProjectCity(cityProj)
+                            cityProj[index] = item.city 
+                            setProjectCity(cityProj)
 
-                        commentProj[index] = item.comment
-                        setProjectComment(commentProj)
+                            commentProj[index] = item.comment
+                            setProjectComment(commentProj)
 
-                        specifProj[index] = item.specifika
-                        setProjectSpecifika(specifProj)
+                            specifProj[index] = item.specifika
+                            setProjectSpecifika(specifProj)
 
-                        idProj[index] = item.id
-                        setProjectId(idProj)
+                            idProj[index] = item.id
+                            setProjectId(idProj)
                         } 
                         else if (!nameProj2[index]) {
                             arr2[index] = true 
@@ -668,7 +878,8 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                             setProjectId7(idProj7)
                         }                 
                     }
-                }            
+                }
+                           
             })
             
 
