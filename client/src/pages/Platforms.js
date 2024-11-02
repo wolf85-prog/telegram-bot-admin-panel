@@ -511,11 +511,11 @@ const clickSearch = (e) => {
                                 </div>
 
 {/* 4 */}
-                                <div style={{ textAlign: 'center', marginLeft: '40px', marginTop: '50px', display: 'flex', flexDirection: 'column', width: '250px', position: 'relative'}}>
+                                <div style={{ textAlign: 'center', marginLeft: '40px', marginTop: '46px', display: 'flex', flexDirection: 'column', width: '250px', position: 'relative'}}>
 
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '250px', height: '374px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '250px', height: '378px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
