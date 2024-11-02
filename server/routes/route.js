@@ -47,7 +47,7 @@ const { getManagers, getManagerCount, editManager, getManagerId, addManager, del
 
 const { getCompanys, getCompanyCount, editCompany, getCompanyId, addCompany, deleteCompany, getCompanyCountAll } = require('../controllers/companysController')
 
-const { getPlatforms, getPlatformCount, editPlatform, getPlatformId, addPlatform, deletePlatform, getPlatformCountAll } = require('../controllers/platformsController')
+const { getPlatforms, getPlatformId, getPlatformCount, editPlatform, getPlatformId, addPlatform, deletePlatform, getPlatformCountAll } = require('../controllers/platformsController')
 
 //const { sendPoster } = require('../controllers/posterController')
 

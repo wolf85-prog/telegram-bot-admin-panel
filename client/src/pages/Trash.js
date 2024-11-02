@@ -41,7 +41,7 @@ import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
 import { getProjectsDel, getProjectId, editProject } from '../http/projectAPI'
-import Filters from 'src/components/table/Filters'
+import Filters from 'src/components/table/Filters2'
 
 const Trash = () => {
   const { companysAll, managersAll, workersAll } = useUsersContext();

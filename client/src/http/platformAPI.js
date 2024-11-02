@@ -9,6 +9,15 @@ export const getPlatforms = async () =>{
     }
 }
 
+export const getPlatformId = async (id) =>{
+    try {
+       let response = await $host.get(`api/platforms/get/${id}`);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectId api", error.message);
+    }
+}
+
 export const getPlatformCount = async (count, prev) =>{
     try {
        let response = await $host.get(`api/platforms/count/get/${count}/${prev}`);

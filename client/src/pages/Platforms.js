@@ -69,9 +69,10 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
-import { getProjectsDel, getProjectId, editProject } from '../http/projectAPI'
+import { getProjectsDel, getPlatformId, editProject } from '../http/projectAPI'
 import { useAsyncError } from 'react-router-dom';
-import Filters from 'src/components/table/Filters'
+import Filters from 'src/components/table/Filters2'
+import { getPlatforms } from 'src/http/platformAPI';
 
 const Platforms = () => {
   const { companysAll, managersAll, workersAll, platformsAll } = useUsersContext();
@@ -193,13 +194,16 @@ const Platforms = () => {
     
 }, [])
 
-const openProject = async(id) => {
-
+const openPlatform = async(id) => {
   console.log("id: ", id)
+
+  const resPlatform = await getPlatformId(id)
+  console.log("resPlatform: ", resPlatform)
 
   setShowProject(true)
   setId(id)
-  setTitle('Новая площадка')
+  setTitle(resPlatform.title)
+  set
 
   setTimeout(()=> {
     setHeight(509)
@@ -269,6 +273,9 @@ const clickSearch = (e) => {
                 <Suspense fallback={<CSpinner color="primary" />}>
                     {/* <h2>Площадки</h2> */}
                     <CCard className="mb-4">
+                      <p style={{position: 'absolute', top: '-18px', right: '15px', fontSize: '14px', color: '#f3f3f3'}}>
+                        Всего: {platformsAll.length}
+                      </p>
                       <CCardBody style={{padding: '12px'}}>
                         {!showProject ? <Filters /> : '' }
                         {!showProject ? <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1400px', borderRadius: '5px' }}>
@@ -289,7 +296,7 @@ const clickSearch = (e) => {
                                       <CTableDataCell className="text-center" style={{position: 'relative'}}>
                                         {index+1}                        
                                       </CTableDataCell> 
-                                      <CTableDataCell onClick={()=>openProject(1)} className="text-center" style={{cursor: 'pointer'}}>
+                                      <CTableDataCell onClick={()=>openPlatform(item.id)} className="text-center" style={{cursor: 'pointer'}}>
                                         {item.title && item.title.length > 25 ? item.title.substr(0, 25) + '...' : item.title}  
                                       </CTableDataCell>  
                                       <CTableDataCell className="text-center">
