@@ -175,22 +175,15 @@ const Platforms = () => {
     setSortedCities(newSorted)
 
     //1
-    const fetchData = async() => {
-      const projs = await getProjectsDel()
-      console.log("projsDel: ", projs)
+    // const fetchData = async() => {
+    //   const projs = await getProjectsDel()
+    //   console.log("projsDel: ", projs)
 
-      // const sortProj = [...projs].sort((a, b) => {  
-      //   if (a.dateStart < b.dateStart)
-      //     return -1;
-      //   if (a.dateStart > b.dateStart)
-      //       return 1;
-      //   return 0;
-      // })
 
-      setProjects(projs)
-    }
+    //   setProjects(projs)
+    // }
 
-    fetchData()
+    // fetchData()
     
 }, [])
 
@@ -201,9 +194,17 @@ const openPlatform = async(id) => {
   console.log("resPlatform: ", resPlatform)
 
   setShowProject(true)
-  setId(id)
-  setTitle(resPlatform.title)
-  //set
+  //setId(id)
+
+  if (resPlatform) {
+    setTitle(resPlatform.title)
+    setCity(resPlatform.city !== null ? resPlatform.city : '')
+    setAddress(resPlatform.address)
+    setTrack(resPlatform.track)
+    setUrl(resPlatform.url)
+  }
+  
+  
 
   setTimeout(()=> {
     setHeight(509)
@@ -396,7 +397,7 @@ const clickSearch = (e) => {
                                   <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                     {/* Город */}
                                     <label className='title-label' style={{position: 'absolute', top: '-25px', left: '100px'}}>Город</label>
-                                    <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative', marginRight: '40px'}}> 
+                                    <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative', marginRight: '40px', width: '250px'}}> 
                                         {/* <CFormSelect 
                                           aria-label="Default select example"
                                           style={{backgroundColor: '#131c21'}}
