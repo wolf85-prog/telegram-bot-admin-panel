@@ -979,12 +979,20 @@ useEffect(() => {
 			//если элемент массива последний
 			if (i === platforms.length-1) {
 				const sortedUser = [...arrCompanys].sort((a, b) => {       
-					var idA = a.id, idB = b.id 
-					return idB-idA  //сортировка по возрастанию 
+					let titleA = a.title 
+					let titleB = b.title
+					// return titleB-titleA  //сортировка по возрастанию 
+					if (titleA.toLowerCase() < titleB.toLowerCase()) {
+						return -1;
+					}
+					if (titleA.toLowerCase() > titleB.toLowerCase()) {
+						return 1;
+					}
+					return 0;
 				})
+				console.log("sortedUser: ", sortedUser)
 	
 				setPlatformsAll(sortedUser)
-				  //setCompanys(sortedUser)
 						
 				//сохранить кэш
 				//localStorage.setItem("companys", JSON.stringify(sortedUser));

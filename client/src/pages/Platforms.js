@@ -71,6 +71,7 @@ import specOnlyData2 from 'src/data/specOnlyData2';
 
 import { getProjectsDel, getProjectId, editProject } from '../http/projectAPI'
 import { useAsyncError } from 'react-router-dom';
+import Filters from 'src/components/table/Filters'
 
 const Platforms = () => {
   const { companysAll, managersAll, workersAll, platformsAll } = useUsersContext();
@@ -159,10 +160,14 @@ const Platforms = () => {
 
   useEffect(()=> {
     // сортировка городов
-    const one = [...cities].slice(0, 4)
-    const city = [...cities].slice(5)
+    const newCities = cities.map((item)=> { 
+      const newArr = item.label
+      return newArr
+    })
+    const one = [...newCities].slice(0, 4)
+    const city = [...newCities].slice(5)
     const sorted = city.sort((a, b) => {       
-      var cityA = a.label, cityB = b.label
+      var cityA = a, cityB = b
       return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
     })
     const newSorted = [...one, ...city]
@@ -265,16 +270,15 @@ const clickSearch = (e) => {
                     {/* <h2>Площадки</h2> */}
                     <CCard className="mb-4">
                       <CCardBody style={{padding: '12px'}}>
-                        {!showProject ? <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1300px', borderRadius: '5px' }}>
+                        {!showProject ? <Filters /> : '' }
+                        {!showProject ? <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1400px', borderRadius: '5px' }}>
                           <CTableHead className="text-center" color="light">
                                   <CTableRow>
-                                    <CTableHeaderCell className="text-center" style={{width: '61px'}}>
-                                      ID
-                                    </CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{width: '160px'}}>Название</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{width: '61px'}}>№</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{width: '270px'}}>Название</CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Город</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Адрес</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Как добраться</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Как добраться</CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Ссылка</CTableHeaderCell>                      
                                     <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Карта</CTableHeaderCell>
                                   </CTableRow>
@@ -283,22 +287,22 @@ const clickSearch = (e) => {
                                 { platformsAll.map((item, index)=> ( 
                                     <CTableRow key={item.id}  v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                       <CTableDataCell className="text-center" style={{position: 'relative'}}>
-                                        {item.id}                        
+                                        {index+1}                        
                                       </CTableDataCell> 
                                       <CTableDataCell onClick={()=>openProject(1)} className="text-center" style={{cursor: 'pointer'}}>
-                                        {item.title}  
+                                        {item.title && item.title.length > 25 ? item.title.substr(0, 25) + '...' : item.title}  
                                       </CTableDataCell>  
                                       <CTableDataCell className="text-center">
                                         {item.city} 
                                       </CTableDataCell>   
                                       <CTableDataCell className="text-center">
-                                        {item.address} 
+                                        {item.address && item.address.length > 25 ? item.address.substr(0, 25) + '...' : item.address} 
                                       </CTableDataCell> 
                                       <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                        {item.track} 
+                                        {item.track && item.track.length > 25 ? item.track.substr(0, 25) + '...' : item.track} 
                                       </CTableDataCell>
                                       <CTableDataCell className="text-center widthSpace">
-                                        {item.url} 
+                                        {item.url && item.url.length > 20 ? item.url.substr(0, 20) + '...' : item.url} 
                                       </CTableDataCell>   
                                       <CTableDataCell className="text-center">
                                         {item.karta} 
@@ -386,14 +390,53 @@ const clickSearch = (e) => {
                                     {/* Город */}
                                     <label className='title-label' style={{position: 'absolute', top: '-25px', left: '100px'}}>Город</label>
                                     <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative', marginRight: '40px'}}> 
-                                        <CFormSelect 
+                                        {/* <CFormSelect 
                                           aria-label="Default select example"
                                           style={{backgroundColor: '#131c21'}}
                                           options={sortedCities}
-                                          // value={cityValue}
-                                          // onChange={(e)=>addCity(e)}
                                         />
-                                        <img src={Close} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px', visibility: showClearCity ? 'visible' : 'hidden', cursor: 'pointer'}}></img>
+                                        <img src={Close} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px', visibility: showClearCity ? 'visible' : 'hidden', cursor: 'pointer'}}></img> */}
+                                        <Autocomplete
+                                              sx={{
+                                                  display: 'inline-block',
+                                                  '& input': {zIndex: '25',
+                                                      width: '100%',
+                                                      border: 'none',
+                                                      height: '40px',
+                                                      padding: '5px 4px',
+                                                      fontFamily: 'inherit',
+                                                      fontSize: '14px',
+                                                      fontWeight: '700',
+                                                      lineHeight: '1.5',
+                                                      textAlign: 'center',
+                                                      color: '#ffffff',
+                                                      backgroundColor: 'transparent', 
+                                                  }
+                                              }}
+                                              className="text-field__input" 
+                                              openOnFocus
+                                              id="custom-input-demo"
+                                              options={sortedCities}
+                                              style={{width: '100%', padding: '0'}}
+                                              isOptionEqualToValue={(option, value) => option.value === value.value}
+                                              onInputChange={(e)=>setCity(e.target.value)}
+                                              onChange={(event, newValue) => {
+                                                if (newValue && newValue.length) {                                                      
+                                                  setCity(newValue)
+                                                }  
+                                              }}
+                                              value={city} 
+                                              inputValue={city}
+                                              renderInput={(params) => (
+                                              <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                                  <input 
+                                                      className="text-field__input" 
+                                                      type="text" {...params.inputProps} 
+                                                      placeholder=''
+                                                  />
+                                              </div>
+                                              )}
+                                        />
                                     </div>
 
                                     <div className="text-field" style={{marginRight: '40px'}}>

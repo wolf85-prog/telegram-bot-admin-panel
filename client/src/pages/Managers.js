@@ -178,10 +178,14 @@ const Managers = () => {
   //-----------------------------------------------------------------------------------------
   useEffect(()=> {
     // сортировка городов
-    const one = [...cities].slice(0, 4)
-    const city = [...cities].slice(5)
+    const newCities = cities.map((item)=> { 
+      const newArr = item.label
+      return newArr
+    })
+    const one = [...newCities].slice(0, 4)
+    const city = [...newCities].slice(5)
     const sorted = city.sort((a, b) => {       
-      var cityA = a.label, cityB = b.label
+      var cityA = a, cityB = b
       return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
     })
     const newSorted = [...one, ...city]
@@ -996,12 +1000,53 @@ const clickNext = async() => {
                                 <div style={{marginLeft: '40px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                   {/* Город */}
                                   <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}>                                     
-                                      <MyDropdown
+                                      {/* <MyDropdown
                                         style={{backgroundColor: '#131c21'}}
                                         options={sortedCities}
                                         selected={city}
                                         setSelected={setCity}
                                         // onChange={addCity}
+                                      /> */}
+                                      <Autocomplete
+                                              sx={{
+                                                  display: 'inline-block',
+                                                  '& input': {zIndex: '25',
+                                                      width: '100%',
+                                                      border: 'none',
+                                                      height: '40px',
+                                                      padding: '5px 4px',
+                                                      fontFamily: 'inherit',
+                                                      fontSize: '14px',
+                                                      fontWeight: '700',
+                                                      lineHeight: '1.5',
+                                                      textAlign: 'center',
+                                                      color: '#ffffff',
+                                                      backgroundColor: 'transparent', 
+                                                  }
+                                              }}
+                                              className="text-field__input" 
+                                              openOnFocus
+                                              id="custom-input-demo"
+                                              options={sortedCities}
+                                              style={{width: '100%', padding: '0'}}
+                                              isOptionEqualToValue={(option, value) => option.value === value.value}
+                                              onInputChange={(e)=>setCity(e.target.value)}
+                                              onChange={(event, newValue) => {
+                                                if (newValue && newValue.length) {                                                      
+                                                  setCity(newValue)
+                                                }  
+                                              }}
+                                              value={city} 
+                                              inputValue={city}
+                                              renderInput={(params) => (
+                                              <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                                  <input 
+                                                      className="text-field__input" 
+                                                      type="text" {...params.inputProps} 
+                                                      placeholder=''
+                                                  />
+                                              </div>
+                                              )}
                                       />
                                       <img src={Close} onClick={() => setCity('')} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px', visibility: showClearCity ? 'visible' : 'hidden', cursor: 'pointer'}}></img>
                                   </div>

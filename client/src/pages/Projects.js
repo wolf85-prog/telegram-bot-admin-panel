@@ -200,10 +200,14 @@ const Projects = () => {
 
   useEffect(()=> {
     // сортировка городов
-    const one = [...cities].slice(0, 4)
-    const city = [...cities].slice(5)
+    const newCities = cities.map((item)=> { 
+      const newArr = item.label
+      return newArr
+    })
+    const one = [...newCities].slice(0, 4)
+    const city = [...newCities].slice(5)
     const sorted = city.sort((a, b) => {       
-      var cityA = a.label, cityB = b.label
+      var cityA = a, cityB = b
       return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
     })
     const newSorted = [...one, ...city]
@@ -702,14 +706,53 @@ const Projects = () => {
 
                                           <label className='title-label'>Город</label>
                                           <div className="text-field">
-                                            <MyDropdown
-                                                  style={{backgroundColor: '#131c21'}}
-                                                  options={sortedCities}
-                                                  selected={city}
-                                                  setSelected={setCity}
-                                                  // onChange={addCity}
-                                                />
-                                            {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
+                                            {/* <MyDropdown
+                                              style={{backgroundColor: '#131c21'}}
+                                              options={sortedCities}
+                                              selected={city}
+                                              setSelected={setCity}
+                                            /> */}
+                                            <Autocomplete
+                                              sx={{
+                                                  display: 'inline-block',
+                                                  '& input': {zIndex: '25',
+                                                      width: '100%',
+                                                      border: 'none',
+                                                      height: '40px',
+                                                      padding: '5px 4px',
+                                                      fontFamily: 'inherit',
+                                                      fontSize: '14px',
+                                                      fontWeight: '700',
+                                                      lineHeight: '1.5',
+                                                      textAlign: 'center',
+                                                      color: '#ffffff',
+                                                      backgroundColor: 'transparent', 
+                                                  }
+                                              }}
+                                              className="text-field__input" 
+                                              openOnFocus
+                                              id="custom-input-demo"
+                                              options={sortedCities}
+                                              style={{width: '100%', padding: '0'}}
+                                              isOptionEqualToValue={(option, value) => option.value === value.value}
+                                              onInputChange={(e)=>setCity(e.target.value)}
+                                              onChange={(event, newValue) => {
+                                                if (newValue && newValue.length) {                                                      
+                                                  setCity(newValue)
+                                                }  
+                                              }}
+                                              value={city} 
+                                              inputValue={city}
+                                              renderInput={(params) => (
+                                              <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                                  <input 
+                                                      className="text-field__input" 
+                                                      type="text" {...params.inputProps} 
+                                                      placeholder=''
+                                                  />
+                                              </div>
+                                              )}
+                                            />
                                           </div>
 
                                           <label className='title-label'>Локация</label>
