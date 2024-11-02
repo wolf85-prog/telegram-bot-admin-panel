@@ -239,8 +239,8 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             const d = index - (startDay - 2);
                 
             projects.map((item, ind)=> {
-                if (new Date(item?.dateStart.split('T')[0]).toISOString() === new Date(item?.dateEnd.split('T')[0]).toISOString() || 
-                    new Date(item?.dateStart.split('T')[0]).getTime() > new Date(item?.dateEnd.split('T')[0]).getTime()) {
+                if (new Date(item?.dateStart.split('T')[0]).toISOString() === new Date(item?.dateEnd?.split('T')[0]).toISOString() || 
+                    new Date(item?.dateStart.split('T')[0]).getTime() > new Date(item?.dateEnd?.split('T')[0]).getTime()) {
                     // console.log("d==: ", ind,
                     //     new Date(item?.dateStart.split('T')[0]).toISOString(),
                     //     new Date(item?.dateEnd.split('T')[0]).toISOString(), //.setHours(new Date(item?.dateStart).getHours()))
@@ -460,7 +460,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                 } else {
                     if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() >= new Date(item?.dateStart.split('T')[0]).getTime()) && 
-                        (new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() <= new Date(item?.dateEnd.split('T')[0]).getTime()) ) {
+                        (new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() <= new Date(item?.dateEnd?.split('T')[0]).getTime()) ) {
 
                         if (!nameProj[index]) {
                         arr[index] = true 
@@ -702,7 +702,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             specifika: '',
             city: '',
             datestart: day, 
-            dateend: day, //new Date(endDay.setDate(endDay.getDate() + 1)).toISOString(), 
+            dateend: null, //new Date(endDay.setDate(endDay.getDate() + 1)).toISOString(), 
             teh: '', 
             managerId: '', 
             companyId: '', 

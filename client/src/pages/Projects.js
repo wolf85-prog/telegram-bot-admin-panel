@@ -111,9 +111,9 @@ const Projects = () => {
   const [id, setId] = useState('');
   const [projectName, setProjectName] = useState('');
   const [startDate, setStartDate] = useState(new Date())
-  const [endDate, setEndDate] = useState(new Date())
+  const [endDate, setEndDate] = useState('')
   const [startTime, setStartTime] = useState('00:00')
-  const [endTime, setEndTime] = useState('00:00')
+  const [endTime, setEndTime] = useState('')
   const [city, setCity] = useState('');
   const [statusProject, setStatusProject] = useState({name: '', color: ''});
   const [specifikaProject, setSpecifikaProject] = useState({name: '', color: ''});
@@ -346,7 +346,7 @@ const Projects = () => {
     
   }
 
-  const savePorject = async(id) => {
+  const saveProject = async(id) => {
 
     console.log("start: ", startDate)
     console.log("end: ", endDate)
@@ -556,7 +556,7 @@ const Projects = () => {
                                                   <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                                   <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                                   <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                                  <img src={Disketa} onClick={()=>savePorject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                                  <img src={Disketa} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                                   <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                                 </div>
                                               </div>
