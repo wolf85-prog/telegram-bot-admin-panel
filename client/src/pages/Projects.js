@@ -92,6 +92,7 @@ import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
+import { addMainspec, deleteMainspec, getMainSpecProject } from '../http/mainspecAPI'
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
