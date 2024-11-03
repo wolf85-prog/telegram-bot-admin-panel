@@ -391,7 +391,7 @@ const Projects = () => {
       name: projectName,
       status: statusProject.name,
       datestart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}:00.000Z`,
-      dateend: `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}:00.000Z`,
+      dateend: endDate ? `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}:00.000Z` : '',
       teh: tehText, 
       teh1,
       teh2,
@@ -431,7 +431,7 @@ const Projects = () => {
         status: statusProject.name,
         specifika: specifikaProject.name,
         dateStart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}:00.000Z`,
-        dateEnd: `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}:00.000Z`
+        dateEnd: endDate ? `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}:00.000Z` : '',
       };
   
       console.log("update user: ", usersCopy)
