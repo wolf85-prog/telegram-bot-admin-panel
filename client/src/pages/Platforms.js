@@ -271,7 +271,7 @@ const openPlatform = (resPlatform) => {
   }
   console.log("saveData: ", saveData)
 
-  setPlatformsAll((platformsAll) => {	
+  setPlatforms((platforms) => {	
   
     let userIndex = platformsAll.findIndex((plat) => plat.id === id);
     const usersCopy = JSON.parse(JSON.stringify(platformsAll));
