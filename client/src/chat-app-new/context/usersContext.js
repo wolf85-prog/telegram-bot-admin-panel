@@ -2419,6 +2419,7 @@ function isObjectEmpty(obj) {
 			companysAll,
 			setCompanysAll,
 			platformsAll,
+			setPlatformsAll,
 			specialistsCount, 
 			setSpecialistsCount,
 			date, 

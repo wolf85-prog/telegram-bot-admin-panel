@@ -72,10 +72,10 @@ import specOnlyData2 from 'src/data/specOnlyData2';
 import { getProjectsDel, editProject } from '../http/projectAPI'
 import { useAsyncError } from 'react-router-dom';
 import Filters from 'src/components/table/Filters2'
-import { getPlatforms, getPlatformId } from 'src/http/platformAPI';
+import { getPlatforms, getPlatformId, editPlatform } from 'src/http/platformAPI';
 
 const Platforms = () => {
-  const { companysAll, managersAll, workersAll, platformsAll } = useUsersContext();
+  const { companysAll, managersAll, workersAll, platformsAll, setPlatformsAll } = useUsersContext();
 
   const [projects, setProjects] = useState([])
   const [showProject, setShowProject] = useState(false)
@@ -213,6 +213,53 @@ const openPlatform = async(id) => {
 }
 
 
+ //сохранить профиль
+ const savePlatforma = async(id) => { 
+
+  const saveData = {   
+    title, 
+    city,
+    address,
+    track,
+    url,
+    comment,
+  }
+  console.log("saveData: ", saveData)
+
+  setPlatformsAll((platformsAll) => {	
+  
+    let userIndex = platformsAll.findIndex((plat) => plat.id === id);
+    const usersCopy = JSON.parse(JSON.stringify(platformsAll));
+
+    const userObject = usersCopy[userIndex];
+    usersCopy[userIndex] = { ...userObject, 
+      title, 
+      city,
+      address,
+      track,
+      url,
+      comment,
+    };
+
+    console.log("update user: ", usersCopy[userIndex])
+
+    return usersCopy;
+  });
+
+  //сохранить изменения в базе
+  await editPlatform(saveData, id)
+
+
+  addToast(exampleToast) //ваши данные сохранены
+
+  setTimeout(()=> {
+    //closeProfile()
+    setShowProject(false)
+  }, 2000)
+ 
+}
+
+
 const closeProfile = () => {
   setShowProject(false)
 }
@@ -297,7 +344,7 @@ const clickSearch = (e) => {
                                       <CTableDataCell className="text-center" style={{position: 'relative'}}>
                                         {index+1}                        
                                       </CTableDataCell> 
-                                      <CTableDataCell onClick={()=>openPlatform(item.id)} className="text-center" style={{cursor: 'pointer'}}>
+                                      <CTableDataCell onClick={()=>openPlatform(item.id)} style={{cursor: 'pointer'}}>
                                         {item.title && item.title.length > 25 ? item.title.substr(0, 25) + '...' : item.title}  
                                       </CTableDataCell>  
                                       <CTableDataCell className="text-center">
@@ -388,7 +435,7 @@ const clickSearch = (e) => {
                                       <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={blockProfile ? zamok : zamok2} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Disketa}style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Disketa} onClick={()=>savePlatforma(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                     </div>
                                   </div>

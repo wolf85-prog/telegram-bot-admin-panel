@@ -67,40 +67,20 @@ class PlatformsController {
             const {
                 title, 
                 city,
-                office,
-                sklad,
+                address,
+                track,
+                url,
                 comment,
-                projects,
-                managers,
-                dogovorDate, 
-                dogovorNumber, 
-                bugalterFio, 
-                bugalterEmail,
-                bugalterPhone,  
-                inn, //инн компании
-                profile,
-                sfera,
-                comteg,
             } = req.body
 
             const newUser = await Platform.update(
                 { 
                     title, 
                     city,
-                    office,
-                    sklad,
-                    comment,
-                    projects,
-                    managers,
-                    dogovorDate, 
-                    dogovorNumber, 
-                    bugalterFio, 
-                    bugalterEmail,
-                    bugalterPhone,  
-                    inn, //инн компании
-                    profile,
-                    sfera,
-                    comteg,
+                    address,
+                    track,
+                    url,
+                    comment,   
                 },
                 { where: {id: id} })
             return res.status(200).json(newUser);
