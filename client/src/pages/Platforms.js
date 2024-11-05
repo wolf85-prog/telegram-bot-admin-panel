@@ -125,6 +125,7 @@ const Platforms = () => {
   const [showClearCity, setShowClearCity] = useState(false)
 
   const [visibleDelete, setVisibleDelete] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   const [file, setFile] = useState(0);
   const [filePreview, setFilePreview] = useState('');
@@ -132,6 +133,10 @@ const Platforms = () => {
 
   const [height, setHeight] = useState(600)
   const [sortedCities, setSortedCities] = useState([])
+
+  const [countPress, setCountPress] = useState(0);
+  const [countPressAddress, setCountPressAddress] = useState(0);
+  const [countPressCity, setCountPressCity] = useState(0);
 
 
     //поиск
@@ -179,6 +184,7 @@ const Platforms = () => {
 
 
         const newPlatform = {
+          id: platform.id,
           title: platform.title,
           city: platform.city,  
           address: platform.address,
@@ -225,16 +231,14 @@ const Platforms = () => {
 }, [])
 
 const openPlatform = (resPlatform) => {
-  console.log("id: ", resPlatform)
-
-  //const resPlatform = await getPlatformId(id)
-  //console.log("resPlatform: ", resPlatform)
+  console.log("resPlatform: ", resPlatform)
+  console.log("id: ", resPlatform.id)
 
   setShowProfile(true)
   setShowSearch(false)
   setShowClear(false)
 
-  setId(id)
+  setId(resPlatform.id)
 
   if (resPlatform) {
     setTitle(resPlatform.title)
@@ -290,13 +294,14 @@ const openPlatform = (resPlatform) => {
   //сохранить изменения в базе
   await editPlatform(saveData, id)
 
-
+  //Toast
+  setShowModal(true)
   //addToast(exampleToast) //ваши данные сохранены
 
   setTimeout(()=> {
-    //closeProfile()
-    setShowProject(false)
-  }, 2000)
+    setShowModal(false)
+    closeProfile()
+  }, 500)
  
 }
 
@@ -443,6 +448,103 @@ const clickNext = async() => {
 }
 
 
+//сортировка по ФИО
+const onSortTitle = () => {
+  setCountPress(countPress + 1)
+  
+  if (countPress + 1 >= 3) {
+    setCountPress(0)
+  }
+  console.log("check sort", countPress + 1)
+
+  if (countPress + 1 === 1) {
+    const sortedWorker = [...platforms].sort((a, b) => {       
+      var fioA = a.title.toUpperCase(), fioB = b.title.toUpperCase(); 
+      return (fioA < fioB) ? -1 : (fioA > fioB) ? 1 : 0;  //сортировка по возрастанию 
+    })
+    setPlatforms(sortedWorker)
+  } else if (countPress + 1 === 2) {
+    const sortedWorker = [...platforms].sort((a, b) => {       
+      var fioA = a.title.toUpperCase(), fioB = b.title.toUpperCase(); 
+      return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
+    })
+    setPlatforms(sortedWorker)
+  } else {
+    const sortedWorker = [...platforms].sort((a, b) => {       
+      var fioA = a.id, fioB = b.id 
+      return fioB-fioA  //сортировка по убыванию 
+    })
+    setPlatforms(sortedWorker)
+  }
+  
+}
+
+//сортировка по Городу
+const onSortCity = () => {
+  setCountPressCity(countPressCity + 1)
+  
+  if (countPressCity + 1 >= 3) {
+    setCountPressCity(0)
+  }
+  //console.log("check sort", countPressTG + 1)
+
+  if (countPressCity + 1 === 1) {
+    const sortedWorker = [...platforms].sort((a, b) => {       
+      var cityA = a.city, cityB = b.city
+      return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+    })
+    setPlatforms(sortedWorker)
+  } else if (countPressCity + 1 === 2) {
+    const sortedWorker = [...platforms].sort((a, b) => {       
+      var cityA = a.city, cityB = b.city
+      return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+    })
+    setPlatforms(sortedWorker)
+  } else {
+    const sortedWorker = [...platforms].sort((a, b) => {       
+      var idA = a.id, idB = b.id 
+      return idB-idA  //сортировка по убыванию 
+    })
+
+    //setSpecialistCount(sortedWorker)
+    setPlatforms(sortedWorker)
+  }
+  
+}
+
+//сортировка по адресу
+const onSortAddress = () => {
+  setCountPressAddress(countPressAddress + 1)
+  
+  if (countPressAddress + 1 >= 3) {
+    setCountPressAddress(0)
+  }
+  //console.log("check sort", countPressTG + 1)
+
+  if (countPressAddress + 1 === 1) {
+    const sortedWorker = [...platforms].sort((a, b) => {       
+      var cityA = a.address, cityB = b.address
+      return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+    })
+    setPlatforms(sortedWorker)
+  } else if (countPressAddress + 1 === 2) {
+    const sortedWorker = [...platforms].sort((a, b) => {       
+      var cityA = a.address, cityB = b.address
+      return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+    })
+    setPlatforms(sortedWorker)
+  } else {
+    const sortedWorker = [...platforms].sort((a, b) => {       
+      var idA = a.id, idB = b.id 
+      return idB-idA  //сортировка по убыванию 
+    })
+
+    //setSpecialistCount(sortedWorker)
+    setPlatforms(sortedWorker)
+  }
+  
+}
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -486,9 +588,9 @@ const clickNext = async() => {
                             <CTableHead className="text-center" color="light">
                                     <CTableRow>
                                       <CTableHeaderCell className="text-center" style={{width: '61px'}}>№</CTableHeaderCell> 
-                                      <CTableHeaderCell className="text-center" style={{width: '270px'}}>Название</CTableHeaderCell> 
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Город</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Адрес</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{width: '270px', cursor: 'pointer'}} onClick={onSortTitle}>Название</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '150px', cursor: 'pointer'}} onClick={onSortCity}>Город</CTableHeaderCell>  
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '250px', cursor: 'pointer'}} onClick={onSortAddress}>Адрес</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{minWidth: '265px'}}>Как добраться</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Ссылка</CTableHeaderCell>                      
                                       <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Карта</CTableHeaderCell>
@@ -741,6 +843,17 @@ const clickNext = async() => {
                         <img src={arrowDown} alt='' onClick={()=>clickNext()} style={{display: !showProfile ? 'block' : 'none', width: '50px', marginBottom: '15px', cursor: 'pointer'}}></img>
                       </div> 
                     </CCard>
+
+                    <CModal
+                      alignment="center"
+                      visible={showModal}
+                      onClose={() => setShowModal(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '15px'}}>
+                        Данные успешно сохранены!
+                      </CModalBody>
+                    </CModal>
                 </Suspense>
             </CContainer>
 
