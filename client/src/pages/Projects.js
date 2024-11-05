@@ -1296,7 +1296,7 @@ const Projects = () => {
                                       </LocalizationProvider> */}
                                       {/* {item.createdAt} */}
                                     </CTableDataCell>  
-                                    <CTableDataCell className="text-center">
+                                    <CTableDataCell className="text-center" style={{height: '26px'}}>
                                       {item.id === '-1' ?
                                       <></> 
                                       :
