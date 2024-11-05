@@ -78,6 +78,7 @@ const UsersProvider = ({ children }) => {
 	   	return parsedUserWorkers || "";
 	});  //все компании;
 
+	const [platforms, setPlatforms] = useState([])
 	const [platformsAll, setPlatformsAll] = useState([])
 
 	const [projects, setProjects] = useState([]); 
@@ -2417,6 +2418,8 @@ function isObjectEmpty(obj) {
 			managersAll, 
 			setManagersAll,
 			companysAll,
+			platforms, 
+			setPlatforms,
 			setCompanysAll,
 			platformsAll,
 			setPlatformsAll,

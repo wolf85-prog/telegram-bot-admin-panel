@@ -31,7 +31,7 @@ export const editPlatform = async (data, id) =>{
     try {
         await $host.patch(`api/platforms/update/${id}`, data); 
     } catch (error) {
-        console.log("error while calling editCompany api",error.message);
+        console.log("error while calling editPlatform api",error.message);
     }
 }
 

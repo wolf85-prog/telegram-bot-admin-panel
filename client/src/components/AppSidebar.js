@@ -107,7 +107,7 @@ const AppSidebar = () => {
       to: '/managers',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       //onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/b1b7c39c50a7497da828d7e568f062de?v=5f8ceffc7f7340f4ba5aa3739457f1e7'),
-      style: {color: '#e55353',},
+      //style: {color: '#e55353',},
     },
     {
       component: CNavItem,
@@ -169,7 +169,7 @@ const AppSidebar = () => {
       name: 'Проекты',
       to: '/projects',
       icon: <img src={ProjIcon} style={{width: '25px', marginRight: '18px', marginLeft: '4px'}} />,
-      style: {color: '#e55353',},
+      // style: {color: '#e55353',},
     },
     {
       component: CNavLink,
@@ -194,7 +194,7 @@ const AppSidebar = () => {
       to: '/companys',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       //onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/b1b7c39c50a7497da828d7e568f062de?v=5f8ceffc7f7340f4ba5aa3739457f1e7'),
-      style: {color: '#e55353',},
+      //style: {color: '#e55353',},
     },
     {
       component: CNavLink,

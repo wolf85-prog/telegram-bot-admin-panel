@@ -72,10 +72,12 @@ import specOnlyData2 from 'src/data/specOnlyData2';
 import { getProjectsDel, editProject } from '../http/projectAPI'
 import { useAsyncError } from 'react-router-dom';
 import Filters from 'src/components/table/Filters2'
-import { getPlatforms, getPlatformId, editPlatform } from 'src/http/platformAPI';
+import { getPlatforms, getPlatformId, editPlatform, getPlatformCount } from 'src/http/platformAPI';
 
 const Platforms = () => {
-  const { companysAll, managersAll, workersAll, platformsAll, setPlatformsAll } = useUsersContext();
+  const { platforms, setPlatforms, platformsAll, setPlatformsAll } = useUsersContext();
+
+  const [platformCount, setPlatformCount] = useState([]);
 
   const [projects, setProjects] = useState([])
   const [showProject, setShowProject] = useState(false)
@@ -111,38 +113,10 @@ const Platforms = () => {
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [city, setCity] = useState('');
-  const [age, setAge] = useState('');
-  const [age2, setAge2] = useState(0);
-  const [speclist, setSpeclist] = useState([]);
-  const [phone, setPhone] = useState('');
-  const [phone2, setPhone2] = useState('');
-  const [telegram, setTelegram] = useState('');
-  const [skill, setSkill] = useState('');
-  const [reyting, setReyting] = useState('');
-  const [promo, setPromo] = useState('');
-  const [rank, setRank] = useState('');
-  const [merch, setMerch] = useState('');
-  const [company, setCompany] = useState('');
-  const [inn, setInn] = useState('');
-  const [comteg, setComteg] = useState('');
-  const [comteg2, setComteg2] = useState('');
-  const [email, setEmail] = useState('');
-  const [comment, setComment] = useState('');
-  const [comment2, setComment2] = useState('');
-  const [passport, setPassport] = useState('');
-  const [dogovor, setDogovor] = useState('');
-  const [samozanjatost, setSamozanjatost] = useState('');
-  const [passportScan, setPassportScan] = useState('');
-  const [nik, setNik] = useState('');
-  const [dateReg, setDateReg] = useState('');
-  const [profile, setProfile] = useState('');
   const [address, setAddress] = useState('');
   const [track, setTrack] = useState('');
   const [url, setUrl] = useState('');
-
-  const [countPress, setCountPress] = useState(0);
-  const [countPressTG, setCountPressTG] = useState(0);
-  const [countPressCity, setCountPressCity] = useState(0);
+  const [comment, setComment] = useState('');
 
   const [blockProfile, setBlockProfile] = useState(true)
   const [showBlacklist, setShowBlacklist] = useState(false)
@@ -158,6 +132,17 @@ const Platforms = () => {
 
   const [height, setHeight] = useState(600)
   const [sortedCities, setSortedCities] = useState([])
+
+
+    //поиск
+  useEffect(() => {
+    const filteredData = platformsAll.filter(user=> (user.title)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+    setPlatforms(text === '' ? platformCount : filteredData); 
+  
+    //setSpecialistsCount(text === '' ? specialistAll.length : filteredData.length)
+    //console.log("specialist", specialist)
+    setShowClear(text === '' ? false : true)
+  }, [text]);
 
   useEffect(()=> {
     // сортировка городов
@@ -175,26 +160,81 @@ const Platforms = () => {
     setSortedCities(newSorted)
 
     //1
-    // const fetchData = async() => {
-    //   const projs = await getProjectsDel()
-    //   console.log("projsDel: ", projs)
+    const fetchData = async() => {
+
+      // 2 специалисты 20 чел.
+      let response = await getPlatformCount(20, platforms.length)
+      console.log("platforms: ", response)
+
+      let arrWorkers = []
+
+      response.map(async (platform, i) => {
+        const d = new Date(platform.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+        const d2 = new Date(d)
+        const month = String(d2.getMonth()+1).padStart(2, "0");
+        const day = String(d2.getDate()).padStart(2, "0");
+        const chas = d2.getHours();
+        const min = String(d2.getMinutes()).padStart(2, "0");
+        const newDate = `${day}.${month} ${chas}:${min}`;
 
 
-    //   setProjects(projs)
-    // }
+        const newPlatform = {
+          title: platform.title,
+          city: platform.city,  
+          address: platform.address,
+          track: platform.track,
+          url: platform.url,
+          comment: platform.comment, 
+          createdAt: platform.createdAt,
+        }
+        arrWorkers.push(newPlatform)
 
-    // fetchData()
+        //если элемент массива последний
+				if (i === response.length-1) {
+          const sortedWorker = [...arrWorkers].sort((a, b) => {           
+              let titleA = a.title 
+              let titleB = b.title
+              // return titleB-titleA  //сортировка по возрастанию 
+              if (titleA.toLowerCase() < titleB.toLowerCase()) {
+                return -1;
+              }
+              if (titleA.toLowerCase() > titleB.toLowerCase()) {
+                return 1;
+              }
+              return 0;
+          })
+
+					setPlatformCount(sortedWorker)
+          setPlatforms(sortedWorker)
+					
+					//сохранить кэш
+					//localStorage.setItem("specialist", JSON.stringify(sortedWorker));
+				}
+
+      })  
+
+      setLoading(false)
+
+      // let wuserbots = await getWContacts();
+      // console.log("wuserbots: ", wuserbots)
+      // setUserbots(wuserbots) 
+    }
+
+    fetchData()
     
 }, [])
 
-const openPlatform = async(id) => {
-  console.log("id: ", id)
+const openPlatform = (resPlatform) => {
+  console.log("id: ", resPlatform)
 
-  const resPlatform = await getPlatformId(id)
-  console.log("resPlatform: ", resPlatform)
+  //const resPlatform = await getPlatformId(id)
+  //console.log("resPlatform: ", resPlatform)
 
-  setShowProject(true)
-  //setId(id)
+  setShowProfile(true)
+  setShowSearch(false)
+  setShowClear(false)
+
+  setId(id)
 
   if (resPlatform) {
     setTitle(resPlatform.title)
@@ -214,7 +254,8 @@ const openPlatform = async(id) => {
 
 
  //сохранить профиль
- const savePlatforma = async(id) => { 
+ const savePlatforma = async() => { 
+  console.log("id: ", id)
 
   const saveData = {   
     title, 
@@ -250,7 +291,7 @@ const openPlatform = async(id) => {
   await editPlatform(saveData, id)
 
 
-  addToast(exampleToast) //ваши данные сохранены
+  //addToast(exampleToast) //ваши данные сохранены
 
   setTimeout(()=> {
     //closeProfile()
@@ -261,7 +302,13 @@ const openPlatform = async(id) => {
 
 
 const closeProfile = () => {
-  setShowProject(false)
+  setShowProfile(false)
+  setShowClose(false)
+  setShowSearch(true)
+
+  setShowClear(true)
+  //setFilePreview('')
+  //setCityValue(0)
 }
 
 const onChangeReyting = () => {
@@ -269,10 +316,10 @@ const onChangeReyting = () => {
   setShowMenu2(false)
 
   //убрать из списка специальностей Blacklist
-  const res = speclist.filter(item=>item !== 'Blacklist')
-  console.log("speclist: ", res)
+  // const res = speclist.filter(item=>item !== 'Blacklist')
+  // console.log("speclist: ", res)
 
-  setSpeclist(res)
+  // setSpeclist(res)
 }
 
 const onChangeBlacklist = () => {
@@ -280,10 +327,10 @@ const onChangeBlacklist = () => {
   setShowMenu1(false)
 
   //добавить в список специальностей Blacklist
-  speclist.push('Blacklist')
-  console.log("speclist: ", speclist)
+  // speclist.push('Blacklist')
+  // console.log("speclist: ", speclist)
 
-  setSpeclist(speclist)
+  // setSpeclist(speclist)
 }
 
 const onChangeBlock18 = () => {
@@ -309,6 +356,92 @@ const clickSearch = (e) => {
   setText(e.target.value)
 }
 
+const clearSearch = () => {
+  setText('')
+}
+
+const clickAdd = async()=> {   
+
+  const data = {
+    fio: 'ФИО',
+  }
+  //const res = await addSpecialist(data)
+
+
+  // specialist.push(
+  //   {
+  //     id: res?.id, 
+  //     fio: res?.fio, 
+  //     speclist: '',
+  //     skill: '',
+  //     merch: '',  
+  //     company: '', 
+  //     comteg: '', 
+  //     comteg2: '', 
+  //     comment: '', 
+  //     comment2: '', 
+  // })
+
+  // const sortedUser = [...specialist].sort((a, b) => {       
+  //   var idA = a.id, idB = b.id 
+  //   return idB-idA  //сортировка по возрастанию 
+  // })
+
+  // setSpecialist(sortedUser)
+}
+
+//ЕЩЁ
+const clickNext = async() => {
+  //1 все платформы
+  let response = await getPlatformCount(20, platforms.length);
+  console.log("platforms size: ", response)
+
+  const arrayWorker = []
+  
+    response.reverse().map(async (platform) => {
+      const d = new Date(platform.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+      const d2 = new Date(d)
+
+      const month = String(d2.getMonth()+1).padStart(2, "0");
+      const day = String(d2.getDate()).padStart(2, "0");
+      const chas = d2.getHours();
+      const min = String(d2.getMinutes()).padStart(2, "0");
+      
+      const newDate = `${day}.${month} ${chas}:${min}`; 
+
+      const newPlatform = {
+        id: platform.id,
+        title: platform.title,
+        city: platform.city,  
+        address: platform.address,
+        track: platform.track,
+        url: platform.url,
+        comment: platform.comment, 
+        createdAt: platform.createdAt,
+      }
+  
+      arrayWorker.push(newPlatform)
+    })    
+
+    
+    const sortedWorker = [...arrayWorker].sort((a, b) => {       
+      let titleA = a.title 
+			let titleB = b.title
+			// return titleB-titleA  //сортировка по возрастанию 
+			if (titleA.toLowerCase() < titleB.toLowerCase()) {
+				return -1;
+			}
+			if (titleA.toLowerCase() > titleB.toLowerCase()) {
+				return 1;
+			}
+			return 0;
+    })
+    
+    setPlatforms(sortedWorker)
+
+    setPlatformCount(sortedWorker)
+}
+
 
   return (
     <div className='dark-theme'>
@@ -320,65 +453,89 @@ const clickSearch = (e) => {
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
                     {/* <h2>Площадки</h2> */}
+                    <CRow className="mb-3">
+                      <CCol sm={3} style={{position: 'relative'}}>
+                        <CFormInput 
+                          placeholder="Поиск..." 
+                          onChange={(e)=>clickSearch(e)} 
+                          aria-label="spec"
+                          value={text}
+                          style={{display: showSearch ? 'block' : 'none'}}
+                        >   
+                        </CFormInput>
+                        <img src={Close} alt='' onClick={clearSearch} width={10} style={{display: showClear ? 'block' : 'none', position: 'absolute', top: '15px', right: '20px'}}/>
+                      </CCol>
+                      <CCol>
+                        <CButton onClick={clickAdd} className='uley_add_user' style={{display: showSearch ? 'block' : 'none'}}>
+                          <span style={{position: 'absolute', top: '-12px', left: '6px', fontSize: '36px', color: '#2d2e38'}}>
+                          +</span>
+                        </CButton>
+                      </CCol>
+                    </CRow>
                     <CCard className="mb-4">
                       <p style={{position: 'absolute', top: '-18px', right: '15px', fontSize: '14px', color: '#f3f3f3'}}>
                         Всего: {platformsAll.length}
                       </p>
                       <CCardBody style={{padding: '12px'}}>
-                        {!showProject ? <Filters /> : '' }
-                        {!showProject ? <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1400px', borderRadius: '5px' }}>
-                          <CTableHead className="text-center" color="light">
-                                  <CTableRow>
-                                    <CTableHeaderCell className="text-center" style={{width: '61px'}}>№</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{width: '270px'}}>Название</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Город</CTableHeaderCell>  
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Адрес</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Как добраться</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Ссылка</CTableHeaderCell>                      
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Карта</CTableHeaderCell>
-                                  </CTableRow>
-                                </CTableHead>      
-                                <CTableBody> 
-                                { platformsAll.map((item, index)=> ( 
-                                    <CTableRow key={item.id}  v-for="item in tableItems" style={{lineHeight: '14px'}}>
-                                      <CTableDataCell className="text-center" style={{position: 'relative'}}>
-                                        {index+1}                        
-                                      </CTableDataCell> 
-                                      <CTableDataCell onClick={()=>openPlatform(item.id)} style={{cursor: 'pointer'}}>
-                                        {item.title && item.title.length > 25 ? item.title.substr(0, 25) + '...' : item.title}  
-                                      </CTableDataCell>  
-                                      <CTableDataCell className="text-center">
-                                        {item.city} 
-                                      </CTableDataCell>   
-                                      <CTableDataCell className="text-center">
-                                        {item.address && item.address.length > 25 ? item.address.substr(0, 25) + '...' : item.address} 
-                                      </CTableDataCell> 
-                                      <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                        {item.track && item.track.length > 25 ? item.track.substr(0, 25) + '...' : item.track} 
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center widthSpace">
-                                        {item.url && item.url.length > 20 ? item.url.substr(0, 20) + '...' : item.url} 
-                                      </CTableDataCell>   
-                                      <CTableDataCell className="text-center">
-                                        {item.karta} 
-                                      </CTableDataCell>            
+                        {/* {!showProject ? <Filters /> : '' } */}
+                        {!showProfile ? 
+                        
+                        (loading ?                                      
+                          <CSpinner/> :
+                          <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1400px', borderRadius: '5px' }}>
+                            <CTableHead className="text-center" color="light">
+                                    <CTableRow>
+                                      <CTableHeaderCell className="text-center" style={{width: '61px'}}>№</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{width: '270px'}}>Название</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Город</CTableHeaderCell>  
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Адрес</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '265px'}}>Как добраться</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Ссылка</CTableHeaderCell>                      
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Карта</CTableHeaderCell>
                                     </CTableRow>
-                                  ))
-                                }  
-                                </CTableBody>                   
-                        </CTable> 
+                                  </CTableHead>      
+                                  <CTableBody> 
+                                  { platforms.map((item, index)=> ( 
+                                      <CTableRow key={item.id}  v-for="item in tableItems" style={{lineHeight: '14px'}}>
+                                        <CTableDataCell className="text-center" style={{position: 'relative'}}>
+                                          {index+1}                        
+                                        </CTableDataCell> 
+                                        <CTableDataCell onClick={()=>openPlatform(item)} style={{cursor: 'pointer'}}>
+                                          {item.title && item.title.length > 25 ? item.title.substr(0, 25) + '...' : item.title}  
+                                        </CTableDataCell>  
+                                        <CTableDataCell className="text-center">
+                                          {item.city} 
+                                        </CTableDataCell>   
+                                        <CTableDataCell className="text-center">
+                                          {item.address && item.address.length > 25 ? item.address.substr(0, 25) + '...' : item.address} 
+                                        </CTableDataCell> 
+                                        <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
+                                          {item.track && item.track.length > 25 ? item.track.substr(0, 25) + '...' : item.track} 
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center widthSpace">
+                                          {item.url && item.url.length > 20 ? item.url.substr(0, 20) + '...' : item.url} 
+                                        </CTableDataCell>   
+                                        <CTableDataCell className="text-center">
+                                          {item.karta} 
+                                        </CTableDataCell>            
+                                      </CTableRow>
+                                    ))
+                                  }  
+                                  </CTableBody>                   
+                          </CTable> 
+                        )
                         :
                         <div style={{position: 'relative', height: '448px', display: 'flex', flexDirection: 'row'}}>
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
-                                  {
+                                  {/* {
                                     profile ? 
                                   <img src={profile} width='250px' height='250px' alt='poster' style={{borderRadius: '7px', marginBottom: '5px'}}/>
-                                  : 
+                                  :  */}
                                   <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
                                     <rect width="250px" height="250px" fill="#007aff" rx="40"></rect> 
                                   </svg>
                                   
-                                  }
+                                  {/* } */}
                                   <div className="file-upload" style={{marginBottom: '8px'}}>
                                     <img src={addAvatar} alt="upload" style={{display: showUpload ? 'block' : 'none', position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
                                     <input 
@@ -435,7 +592,7 @@ const clickSearch = (e) => {
                                       <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={blockProfile ? zamok : zamok2} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Disketa} onClick={()=>savePlatforma(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Disketa} onClick={savePlatforma} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                     </div>
                                   </div>
@@ -554,7 +711,7 @@ const clickSearch = (e) => {
                                           type="text" 
                                           name="comment2" 
                                           id="comment2" 
-                                          value={comment2} onChange={(e) => setComment2(e.target.value)} 
+                                          value={comment} onChange={(e) => setComment(e.target.value)} 
                                           style={{resize: 'none', height: '125px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
                                       </div> 
                                     </div>
@@ -576,9 +733,13 @@ const clickSearch = (e) => {
                                   </div> 
                                 </div>
 
-                              </div>
+                        </div>
                         }  
                       </CCardBody>
+
+                      <div style={{display: 'flex', justifyContent: 'center' }}>
+                        <img src={arrowDown} alt='' onClick={()=>clickNext()} style={{display: !showProfile ? 'block' : 'none', width: '50px', marginBottom: '15px', cursor: 'pointer'}}></img>
+                      </div> 
                     </CCard>
                 </Suspense>
             </CContainer>

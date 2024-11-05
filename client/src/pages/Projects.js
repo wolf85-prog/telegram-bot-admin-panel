@@ -521,7 +521,7 @@ const Projects = () => {
 		  return (
 			<div
 			  ref={ref}
-			  style={{backgroundColor: '#20272b', left: '5px', borderRadius: '6px', padding: '0 0 0 0', fontSize: '14px', top: '-45px', minWidth:'50px'}}
+			  style={{backgroundColor: '#20272b', left: '5px', borderRadius: '6px', padding: '0 0 0 0', fontSize: '14px', top: '-65px', minWidth:'50px'}}
 			  className={className}
 			  aria-labelledby={labeledBy}
 			>
@@ -1192,7 +1192,7 @@ const Projects = () => {
                                 <CTableRow v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                     <CTableDataCell className="text-center" style={{position: 'relative'}}>
                                       <div className="parent-element" style={{position: 'absolute', left: '3px', top: '6px'}}>
-                                        <Dropdown onSelect={changeAddSpec}>
+                                        <Dropdown onSelect={changeAddSpec} style={{position: 'fixed', zIndex: '100'}}> 
                                           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
                                           </Dropdown.Toggle>
                                           <Dropdown.Menu as={CustomMenu}> 
@@ -1271,26 +1271,26 @@ const Projects = () => {
                                   {mainspec.map((item, index)=> (
                                     <CTableRow key={item.id} v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                     <CTableDataCell className="text-center" style={{position: 'relative'}}>
-                                      <div className="parent-element" style={{position: 'absolute', left: '3px', top: '6px'}}>
+                                      <div className="parent-element" style={{position: 'absolute', left: '3px', top: '5px'}}>
                                         <Dropdown onSelect={changeAddSpec}>
                                           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
                                           </Dropdown.Toggle>
                                           <Dropdown.Menu as={CustomMenu}> 
-                                          <Dropdown.Item eventKey={1}>Добавить</Dropdown.Item>
+                                          <Dropdown.Item eventKey={`1 ${item.id}`}>Добавить</Dropdown.Item>
                                           <Dropdown.Item eventKey={2}>Дублировать</Dropdown.Item>
                                           <Dropdown.Item eventKey={3}>Разделитель</Dropdown.Item>
                                           <Dropdown.Item eventKey={`4 ${item.id}`}>Удалить</Dropdown.Item>
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
-                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} />
-                                      {/* <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span> */}
+                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '5px'}} />
+                                      <span style={{position: 'absolute', left: '45px', top: '6px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DesktopDateTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
                                       </LocalizationProvider> */}
-                                      {item.createdAt}
+                                      {/* {item.createdAt} */}
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center">
                                       <MyDropdown5
