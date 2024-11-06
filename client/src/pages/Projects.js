@@ -1201,7 +1201,7 @@ const Projects = () => {
                                 </CTableHead>
                                 <CTableBody>  
                                 <CTableRow v-for="item in tableItems" style={{lineHeight: '14px'}}>
-                                    <CTableDataCell className="text-center" style={{position: 'relative'}}>
+                                    <CTableDataCell className="text-center" style={{position: 'relative', height: '30px'}}>
                                       <div className="parent-element" style={{position: 'absolute', left: '3px', top: '6px'}}>
                                         <Dropdown onSelect={changeAddSpec}> 
                                           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
@@ -1281,7 +1281,7 @@ const Projects = () => {
                                   
                                   {mainspec.map((item, index)=> (
                                     <CTableRow key={item.id} v-for="item in tableItems" style={{lineHeight: '14px'}}>
-                                    <CTableDataCell className="text-center" style={{position: 'relative'}}>
+                                    <CTableDataCell className="text-center" style={{position: 'relative', height: '30px'}}>
                                       <div className="parent-element" style={{position: 'absolute', left: '3px', top: '5px'}}>
                                         <Dropdown onSelect={changeAddSpec}>
                                           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
