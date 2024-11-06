@@ -117,6 +117,7 @@ const Projects = () => {
   const [statusProject, setStatusProject] = useState({name: '', color: ''});
   const [specifikaProject, setSpecifikaProject] = useState({name: '', color: ''});
   const [vidProject, setVidProject] = useState({name: '', color: ''});
+  const [vidProject2, setVidProject2] = useState([]);
   const [company, setCompany] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [companysData, setCompanysData] = useState([]);
@@ -1224,6 +1225,8 @@ const Projects = () => {
                                         options={vids}
                                         selected={vidProject}
                                         setSelected={setVidProject}
+                                        selected2={vidProject2}
+                                        setSelected2={setVidProject2}
                                         // onChange={addCity}
                                         placeholder='—'
                                       />

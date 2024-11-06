@@ -5,7 +5,7 @@ import {
   CFormInput,
 } from '@coreui/react'
 
-const Dropdown5 = ({options, selected, setSelected, placeholder, style}) => {
+const Dropdown5 = ({options, selected, setSelected, selected2, setSelected2, placeholder, style}) => {
     const [menuShow, setMenuShow] = useState(false)
 
     useEffect(()=> {
