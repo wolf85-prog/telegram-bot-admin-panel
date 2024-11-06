@@ -489,14 +489,16 @@ const onSortCity = () => {
   //console.log("check sort", countPressTG + 1)
 
   if (countPressCity + 1 === 1) {
-    const sortedWorker = [...platforms].sort((a, b) => {       
-      var cityA = a.city, cityB = b.city
+    const sortedWorker = [...platforms].sort((a, b) => {      
+      var cityA = a.city ? a.city.toUpperCase() : ''
+      var cityB = b.city ? b.city.toUpperCase() : ''
       return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
     })
     setPlatforms(sortedWorker)
   } else if (countPressCity + 1 === 2) {
     const sortedWorker = [...platforms].sort((a, b) => {       
-      var cityA = a.city, cityB = b.city
+      var cityA = a.city ? a.city.toUpperCase() : ''
+      var cityB = b.city ? b.city.toUpperCase() : ''
       return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
     })
     setPlatforms(sortedWorker)
