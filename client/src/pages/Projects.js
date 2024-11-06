@@ -596,6 +596,13 @@ const Projects = () => {
     }
 	}
 
+  useEffect(()=> {
+    if (endDate !== '' && endDate !== null) {
+      setEndTime('00:00')
+    }
+    
+  }, [endDate])
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
