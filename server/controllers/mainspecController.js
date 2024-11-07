@@ -47,12 +47,12 @@ class MainspecController {
             }
 
             const {
-                specIs, 
+                date, 
             } = req.body
 
             const newUser = await MainSpec.update(
                 { 
-                    specIs, 
+                    date, 
                 },
                 { where: {id: id} })
             return res.status(200).json(newUser);

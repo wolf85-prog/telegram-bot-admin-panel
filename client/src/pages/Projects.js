@@ -92,7 +92,7 @@ import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
-import { addMainspec, deleteMainspec, getMainSpecProject } from '../http/mainspecAPI'
+import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject } from '../http/mainspecAPI'
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
@@ -166,6 +166,8 @@ const Projects = () => {
   const [sortedCities, setSortedCities] = useState([])
 
   const [mainspec, setMainspec] = useState([])
+  const [dateProject, setDateProject] = useState([]);
+  const [timeProject, setTimeProject] = useState([]);
 
   const table = useReactTable({
     defaultColumn: {
@@ -368,6 +370,9 @@ const Projects = () => {
     setShowMainTable(true)
     setShowPretendentTable(true)
 
+    setDateProject([])
+    setTimeProject([])
+
     setTimeout(()=> {
       setHeight(509)
     }, 200)
@@ -413,9 +418,17 @@ const Projects = () => {
     console.log(saveData)
   
     //сохранить изменения в базе
-    const resSave = await editProject(saveData, id)
-  
+    const resSave = await editProject(saveData, id) 
     console.log("resSave: ", resSave)
+
+    console.log("mainSpec: ", mainspec)
+    console.log("dateProject: ", dateProject)
+    mainspec.map((item, index)=> {
+      setTimeout(async()=> {
+        await editMainspec({date: dateProject[index] + 'T' + timeProject[index]}, item.id)
+      }, 500)
+    })
+    //const resTable = await editMainspec({date: dateProject + 'T' + timeProject})
   
     setProjects((projects) => {	
       const month = String(new Date(startDate).getMonth()+1).padStart(2, "0");
@@ -603,6 +616,25 @@ const Projects = () => {
     }
     
   }, [endDate])
+
+
+  const changeDateProject=(e, index)=> {
+    console.log(e.target.value)
+    let arr = []
+    arr = [...dateProject]
+    arr[index] = e.target.value
+    console.log("dateProject: ", dateProject)
+    setDateProject(arr)
+  }
+
+  const changeTimeProject=(e, index)=> {
+    console.log(e.target.value, index)
+    let arr = []
+    arr = [...timeProject]
+    arr[index] = e.target.value
+    console.log("timeProject: ", timeProject)
+    setTimeProject(arr)
+  }
 
   return (
     <div className='dark-theme'>
@@ -1186,7 +1218,7 @@ const Projects = () => {
                                         style={{backgroundColor: '#181924', border: '1px solid #121212'}}
                                       />
                                     </CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{width: '160px'}}>Дата</CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{width: '180px'}}>Дата</CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Вид работ</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>ФИО</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}></CTableHeaderCell> 
@@ -1215,10 +1247,36 @@ const Projects = () => {
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
-                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '5px'}} />
+                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} />
                                       {/* <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span> */}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
+                                    <div style={{display: 'flex'}}>
+                                        <InputMask 
+                                          mask="99.99.9999"
+                                          value={dateProject[0]}
+                                          onChange={(e)=>changeDateProject(e, 0)}>
+                                          {(inputProps) => <CFormInput 
+                                                            {...inputProps} 
+                                                            placeholder="01.01.2024" 
+                                                            disableUnderline
+                                                            aria-label="sm input example"
+                                                            style={{backgroundColor: 'transparent', height: '14px', textAlign: 'center', border: 'none', width: '100px'}} 
+                                                          />}
+                                        </InputMask>
+                                        <InputMask 
+                                          mask="99:99"
+                                          value={timeProject[0]}
+                                          onChange={(e)=>changeTimeProject(e, 0)}>
+                                          {(inputProps) => <CFormInput 
+                                                            {...inputProps} 
+                                                            placeholder="00:00" 
+                                                            disableUnderline
+                                                            aria-label="sm input example"
+                                                            style={{backgroundColor: 'transparent', height: '14px', textAlign: 'center', border: 'none', width: '40px', padding: '5px 0px'}} 
+                                                          />}
+                                        </InputMask>
+                                      </div>
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center">
                                       <MyDropdown5
@@ -1285,7 +1343,7 @@ const Projects = () => {
                                   {mainspec.map((item, index)=> (
                                     <CTableRow key={item.id} v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                     <CTableDataCell className="text-center" style={{position: 'relative', height: '30px'}}>
-                                      <div className="parent-element" style={{position: 'absolute', left: '3px', top: '5px'}}>
+                                      <div className="parent-element" style={{position: 'absolute', left: '3px', top: '6px'}}>
                                         <Dropdown onSelect={changeAddSpec}>
                                           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
                                           </Dropdown.Toggle>
@@ -1297,14 +1355,37 @@ const Projects = () => {
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
-                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '5px'}} />
-                                      {item.id === '-1' ? '' : <span style={{position: 'absolute', left: '45px', top: '6px'}}>❌</span>}
+                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} />
+                                      {item.id === '-1' ? '' : <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span>}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                      {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                        <DesktopDateTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
-                                      </LocalizationProvider> */}
-                                      {/* {item.createdAt} */}
+                                      <div style={{display: 'flex'}}>
+                                        <InputMask 
+                                          mask="99.99.9999"
+                                          value={dateProject[index+1]}
+                                          onChange={(e)=>changeDateProject(e, index+1)}>
+                                          {(inputProps) => <CFormInput 
+                                                            {...inputProps} 
+                                                            placeholder="01.01.2024" 
+                                                            disableUnderline
+                                                            aria-label="sm input example"
+                                                            style={{backgroundColor: 'transparent', height: '14px', textAlign: 'center', border: 'none', width: '100px'}} 
+                                                          />}
+                                        </InputMask>
+                                        <InputMask 
+                                          mask="99:99"
+                                          value={timeProject[index+1]}
+                                          onChange={(e)=>changeTimeProject(e, index+1)}>
+                                          {(inputProps) => <CFormInput 
+                                                            {...inputProps} 
+                                                            placeholder="00:00" 
+                                                            disableUnderline
+                                                            aria-label="sm input example"
+                                                            style={{backgroundColor: 'transparent', height: '14px', textAlign: 'center', border: 'none', width: '40px', padding: '5px 0px'}} 
+                                                          />}
+                                        </InputMask>
+                                      </div>
+                                      
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center" style={{height: '26px'}}>
                                       {item.id === '-1' ?
