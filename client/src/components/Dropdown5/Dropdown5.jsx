@@ -9,18 +9,19 @@ const Dropdown5 = ({options, selected, setSelected, index, placeholder, style}) 
     const [menuShow, setMenuShow] = useState(false)
 
     useEffect(()=> {
-      //setSelected(selected ? {name: selected.name, color: selected.color} : {name: placeholder, color: '#f3f3f3'})
-      let arr = []
-      arr[index] = selected ? {name: selected[index]?.name, color: selected[index]?.color} : {name: placeholder, color: '#f3f3f3'}
-
-      setSelected(arr)
+      console.log("selected: ", selected, index)
+      setSelected(selected ? {name: selected[index]?.name, color: selected[index]?.color} : {name: placeholder, color: '#f3f3f3'})
+      // let arr = []
+      // arr[index] = selected ? {name: selected[index]?.name, color: selected[index]?.color} : {name: placeholder, color: '#f3f3f3'}
+      // console.log("arr: ", arr[index])
+      // setSelected(arr)
     }, [])
 
     const selectOption = (e, color) => {
-        let arr = []
-        arr[index] = {name: e.target.innerText, color: color}
-        //setSelected({name: e.target.innerText, color: color})
-        setSelected(arr)
+        console.log("selected: ", {name: e.target.innerText, color: color})
+        // let arr = []
+        // arr[index] = {name: e.target.innerText, color: color}
+        setSelected({name: e.target.innerText, color: color})
         setMenuShow(!menuShow)
     }
 
@@ -54,7 +55,7 @@ const Dropdown5 = ({options, selected, setSelected, index, placeholder, style}) 
             <Select2
                 menuShow={menuShow}
                 setMenuShow={setMenuShow}
-                selected={selected ? selected[index] : ''}
+                selected={selected ? selected : ''}
                 style={{border: 'none!important', color: ``}}
             />
             <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`} style={style}>
