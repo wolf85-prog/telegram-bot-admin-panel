@@ -166,6 +166,7 @@ const Projects = () => {
   const [sortedCities, setSortedCities] = useState([])
 
   const [mainspec, setMainspec] = useState([])
+  const [mainspec2, setMainspec2] = useState([])
   const [dateProject, setDateProject] = useState([]);
   const [timeProject, setTimeProject] = useState([]);
 
@@ -295,16 +296,24 @@ const Projects = () => {
     console.log("height: ", height)
   }, [height])
 
+  useEffect(()=> {
+    console.log("Mainspec: ", mainspec)
+    //setMainspec(mainspec2)
+  }, [mainspec])
+
 
   const openProject = async(month, item, number, id, name, 
     end, status, timeStart, specifika) => {
+
+
 
     console.log("item: ", month+1, item, number, specifika, end)
 
     const resProj = await getProjectId(id)
     console.log("resProj: ", resProj)
 
-    const resMain = await getMainSpecProject(id)
+    let resMain
+    resMain = await getMainSpecProject(id)
     console.log("resMain: ", resMain)
 
     if (resMain.length > 0) {
@@ -322,10 +331,15 @@ const Projects = () => {
         taxi: null,
         vidWork: null})
       
-        console.log("resAdd: ", resAdd)
-      
-        setMainspec(resAdd)
+        console.log("resAdd: ", resAdd)  
+
+        let arr = []
+        setMainspec(
+          [...arr, resAdd]
+        );
     }
+
+    //setMainspec(resMain)
 
     setShowProject(true)
     setShowCalendar(false)
@@ -1353,7 +1367,7 @@ const Projects = () => {
                                       </CTableDataCell>           
                                   </CTableRow>                                
                                   */}
-                                { mainspec && mainspec.length > 0 ?
+                                { mainspec.length > 0 ?
                                  mainspec.map((item, index)=> (
                                     <CTableRow key={item.id} v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                     <CTableDataCell className="text-center" style={{position: 'relative', height: '30px'}}>

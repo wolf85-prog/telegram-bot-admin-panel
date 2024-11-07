@@ -9,11 +9,10 @@ const Dropdown5 = ({options, selected, setSelected, index, placeholder, style}) 
     const [menuShow, setMenuShow] = useState(false)
 
     useEffect(()=> {
-      //console.log("selected2: ", selected2)
       //setSelected(selected ? {name: selected.name, color: selected.color} : {name: placeholder, color: '#f3f3f3'})
       let arr = []
       arr[index] = selected ? {name: selected[index]?.name, color: selected[index]?.color} : {name: placeholder, color: '#f3f3f3'}
-      console.log("arr: ", arr)
+
       setSelected(arr)
     }, [])
 
