@@ -5,15 +5,23 @@ import {
   CFormInput,
 } from '@coreui/react'
 
-const Dropdown5 = ({options, selected, setSelected, selected2, setSelected2, placeholder, style}) => {
+const Dropdown5 = ({options, selected, setSelected, index, placeholder, style}) => {
     const [menuShow, setMenuShow] = useState(false)
 
     useEffect(()=> {
-      setSelected(selected ? {name: selected.name, color: selected.color} : {name: placeholder, color: '#f3f3f3'})
+      //console.log("selected2: ", selected2)
+      //setSelected(selected ? {name: selected.name, color: selected.color} : {name: placeholder, color: '#f3f3f3'})
+      let arr = []
+      arr[index] = selected ? {name: selected[index]?.name, color: selected[index]?.color} : {name: placeholder, color: '#f3f3f3'}
+      console.log("arr: ", arr)
+      setSelected(arr)
     }, [])
 
     const selectOption = (e, color) => {
-        setSelected({name: e.target.innerText, color: color})
+        let arr = []
+        arr[index] = {name: e.target.innerText, color: color}
+        //setSelected({name: e.target.innerText, color: color})
+        setSelected(arr)
         setMenuShow(!menuShow)
     }
 
@@ -47,7 +55,7 @@ const Dropdown5 = ({options, selected, setSelected, selected2, setSelected2, pla
             <Select2
                 menuShow={menuShow}
                 setMenuShow={setMenuShow}
-                selected={selected}
+                selected={selected ? selected[index] : ''}
                 style={{border: 'none!important', color: ``}}
             />
             <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`} style={style}>

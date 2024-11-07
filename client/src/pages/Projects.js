@@ -116,7 +116,7 @@ const Projects = () => {
   const [city, setCity] = useState('');
   const [statusProject, setStatusProject] = useState({name: '', color: ''});
   const [specifikaProject, setSpecifikaProject] = useState({name: '', color: ''});
-  const [vidProject, setVidProject] = useState({name: '', color: ''});
+  const [vidProject, setVidProject] = useState([]);
   const [vidProject2, setVidProject2] = useState([]);
   const [company, setCompany] = useState('');
   const [companyName, setCompanyName] = useState('');
@@ -1312,8 +1312,11 @@ const Projects = () => {
                                       :
                                       <MyDropdown5
                                         options={vids}
-                                        selected={vidProject}
+                                        selected={vidProject[index]}
                                         setSelected={setVidProject}
+                                        // selected2={vidProject2}
+                                        // setSelected2={setVidProject2}
+                                        index={index}
                                         placeholder='—'
                                       />
                                       }
