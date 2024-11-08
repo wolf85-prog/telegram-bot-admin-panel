@@ -724,6 +724,15 @@ const Projects = () => {
     setTimeProject(arr)
   }
 
+  const changeCommentMain=(e, index)=> {
+    console.log(e.target.value, index)
+    let arr = []
+    arr = [...commentMain]
+    arr[index] = e.target.value
+    console.log("commentMain: ", commentMain)
+    setCommentMain(arr)
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -1321,107 +1330,6 @@ const Projects = () => {
                                   </CTableRow>
                                 </CTableHead>
                                 <CTableBody> 
-                                  {/* <CTableRow v-for="item in tableItems" style={{lineHeight: '14px'}}>
-                                      <CTableDataCell className="text-center" style={{position: 'relative', height: '30px'}}>
-                                        <div className="parent-element" style={{position: 'absolute', left: '3px', top: '6px'}}>
-                                          <Dropdown onSelect={changeAddSpec}> 
-                                            <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
-                                            </Dropdown.Toggle>
-                                            <Dropdown.Menu as={CustomMenu}> 
-                                            <Dropdown.Item eventKey={1}>Добавить</Dropdown.Item>
-                                            <Dropdown.Item eventKey={2}>Дублировать</Dropdown.Item>
-                                            <Dropdown.Item eventKey={3}>Разделитель</Dropdown.Item>
-                                            <Dropdown.Item eventKey={4}>Удалить</Dropdown.Item>
-                                            </Dropdown.Menu>
-                                          </Dropdown>
-                                        </div>                                     
-                                        <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} />
-                                        
-                                      </CTableDataCell> 
-                                      <CTableDataCell className="text-center">
-                                      <div style={{display: 'flex'}}>
-                                          <InputMask 
-                                            mask="99.99.9999"
-                                            value={dateProject[0]}
-                                            onChange={(e)=>changeDateProject(e, 0)}>
-                                            {(inputProps) => <CFormInput 
-                                                              {...inputProps} 
-                                                              placeholder="01.01.2024" 
-                                                              disableUnderline
-                                                              aria-label="sm input example"
-                                                              style={{backgroundColor: 'transparent', height: '14px', textAlign: 'center', border: 'none', width: '100px'}} 
-                                                            />}
-                                          </InputMask>
-                                          <InputMask 
-                                            mask="99:99"
-                                            value={timeProject[0]}
-                                            onChange={(e)=>changeTimeProject(e, 0)}>
-                                            {(inputProps) => <CFormInput 
-                                                              {...inputProps} 
-                                                              placeholder="00:00" 
-                                                              disableUnderline
-                                                              aria-label="sm input example"
-                                                              style={{backgroundColor: 'transparent', height: '14px', textAlign: 'center', border: 'none', width: '40px', padding: '5px 0px'}} 
-                                                            />}
-                                          </InputMask>
-                                        </div>
-                                      </CTableDataCell>  
-                                      <CTableDataCell className="text-center">
-                                        <MyDropdown5
-                                          options={vids}
-                                          selected={vidProject}
-                                          setSelected={setVidProject}
-                                          selected2={vidProject2}
-                                          setSelected2={setVidProject2}
-                                          // onChange={addCity}
-                                          placeholder='—'
-                                        />
-                                      </CTableDataCell>   
-                                      <CTableDataCell className="text-center">
-                                        <MyDropdown6
-                                          options={workersData}
-                                          selected={specialistName}
-                                          setSelected={setSpecialistName}
-                                          placeholder=''
-                                          style={{width: '370px'}}
-                                        />
-                                      </CTableDataCell> 
-                                      <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                        
-                                      </CTableDataCell>
-                                      <CTableDataCell className="text-center widthSpace">
-                                        <MyDropdown5
-                                          options={specOnlyData2}
-                                          selected={spec}
-                                          setSelected={setSpec}
-                                          style={{width: '400px'}}
-                                          // onChange={addCity}
-                                        />
-                                      </CTableDataCell> 
-                                      <CTableDataCell className="text-center">
-                                        
-                                      </CTableDataCell> 
-                                      <CTableDataCell className="text-center">
-                                      </CTableDataCell> 
-                                      <CTableDataCell className="text-center">
-                                      </CTableDataCell> 
-                                      <CTableDataCell className="text-center">
-                                        <MyDropdown5
-                                          options={comtegs}
-                                          selected={comteg}
-                                          setSelected={setComteg}
-                                          // onChange={addCity}
-                                          style={{width: '300px'}}
-                                        />
-                                      </CTableDataCell>   
-                                      <CTableDataCell className="text-center">
-                                      </CTableDataCell> 
-                                      <CTableDataCell className="text-center">
-                                      </CTableDataCell> 
-                                      <CTableDataCell className="text-center">
-                                      </CTableDataCell>           
-                                  </CTableRow>                                
-                                  */}
                                 { mainspec.length > 0 ?
                                  mainspec.map((item, index)=> (
                                     <CTableRow key={item.id} v-for="item in tableItems" style={{lineHeight: '14px'}}>
@@ -1445,11 +1353,11 @@ const Projects = () => {
                                       <div style={{display: 'flex'}}>
                                         <InputMask 
                                           mask="99.99.9999"
-                                          value={dateProject[index+1]}
-                                          onChange={(e)=>changeDateProject(e, index+1)}>
+                                          value={dateProject[index]}
+                                          onChange={(e)=>changeDateProject(e, index)}>
                                           {(inputProps) => <CFormInput 
                                                             {...inputProps} 
-                                                            placeholder="01.01.2024" 
+                                                            placeholder="" 
                                                             disableUnderline
                                                             aria-label="sm input example"
                                                             style={{backgroundColor: 'transparent', height: '14px', textAlign: 'center', border: 'none', width: '100px'}} 
@@ -1457,11 +1365,11 @@ const Projects = () => {
                                         </InputMask>
                                         <InputMask 
                                           mask="99:99"
-                                          value={timeProject[index+1]}
-                                          onChange={(e)=>changeTimeProject(e, index+1)}>
+                                          value={timeProject[index]}
+                                          onChange={(e)=>changeTimeProject(e, index)}>
                                           {(inputProps) => <CFormInput 
                                                             {...inputProps} 
-                                                            placeholder="00:00" 
+                                                            placeholder="" 
                                                             disableUnderline
                                                             aria-label="sm input example"
                                                             style={{backgroundColor: 'transparent', height: '14px', textAlign: 'center', border: 'none', width: '40px', padding: '5px 0px'}} 
@@ -1552,7 +1460,7 @@ const Projects = () => {
                                       <input
                                         name='commentMain'
                                         value={commentMain[index]}
-                                        onChange={(e)=>setCommentMain([...commentMain, e.target.value])}
+                                        onChange={(e)=>changeCommentMain(e, index)}
                                         style={{backgroundColor: 'transparent', height: '15px', textAlign: 'center', border: 'none', width: '140px', padding: '5px 0px', color: '#f3f3f3', fontSize: '14px'}} 
                                       ></input>
                                     </CTableDataCell> 
