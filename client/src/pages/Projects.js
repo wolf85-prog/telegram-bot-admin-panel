@@ -301,10 +301,9 @@ const Projects = () => {
   }, [mainspec])
 
 
+// Открыть проект  
   const openProject = async(month, item, number, id, name, 
     end, status, timeStart, specifika) => {
-
-
 
     console.log("item: ", month+1, item, number, specifika, end)
 
@@ -314,9 +313,21 @@ const Projects = () => {
     let resMain
     resMain = await getMainSpecProject(id)
     console.log("resMain: ", resMain)
+    
 
     if (resMain.length > 0) {
       setMainspec(resMain)
+
+      let arr = []
+      resMain.map((item)=>{
+        const obj = {
+          name: item.vidWork,
+          color: ''
+        }
+        arr.push(obj)
+      })
+      setVidProject(arr)
+
     } else {
       const resAdd = await addMainspec({
         comment: null,
@@ -336,9 +347,9 @@ const Projects = () => {
         setMainspec(
           [...arr, resAdd]
         );
+        setVidProject([...arr, {name: '', color: ''}])
     }
 
-    //setMainspec(resMain)
 
     setShowProject(true)
     setShowCalendar(false)
@@ -411,6 +422,7 @@ const Projects = () => {
     
   }
 
+  //сохранить проект
   const saveProject = async(id) => {
 
     console.log("start: ", startDate)
@@ -457,7 +469,11 @@ const Projects = () => {
     console.log("dateProject: ", dateProject)
     mainspec.map((item, index)=> {
       setTimeout(async()=> {
-        await editMainspec({date: dateProject[index+1] + 'T' + timeProject[index+1]}, item.id)
+        await editMainspec(
+          {
+            date: dateProject[index] + 'T' + timeProject[index],
+            vidWork: vidProject[index].name,
+          }, item.id)
       }, 500)
     })
     //const resTable = await editMainspec({date: dateProject + 'T' + timeProject})
