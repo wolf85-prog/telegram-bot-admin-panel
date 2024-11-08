@@ -126,7 +126,7 @@ const Projects = () => {
 
   const [managersData, setManagersData] = useState([]);
   const [workersData, setWorkersData] = useState([]);
-  const [specialistName, setSpecialistName] = useState('');
+  const [specialistName, setSpecialistName] = useState([]);
 
   const [locationProject, setLocationProject] = useState('');
   const [platformsData, setPlatformsData] = useState([]);
@@ -398,7 +398,7 @@ const Projects = () => {
     setTeh7(resProj.teh7)
     setTeh8(resProj.teh8)
 
-    setStavka({label: "№1", name: "№1"})
+    //setStavka({label: "№1", name: "№1"})
     setShowMainTable(true)
     setShowPretendentTable(true)
 
@@ -1433,8 +1433,10 @@ const Projects = () => {
                                       <></> 
                                       :<MyDropdown6
                                         options={workersData}
-                                        selected={specialistName}
+                                        selected={specialistName[index]}
+                                        array={specialistName}
                                         setSelected={setSpecialistName}
+                                        index={index}
                                         placeholder=''
                                         style={{width: '370px'}}
                                       />
@@ -1461,10 +1463,10 @@ const Projects = () => {
                                     {item.id === '-1' ?
                                       <></> 
                                       :<MyDropdown5
-                                        options={[{label: "№1", name: '№1'}, {label: "№2", name: '№2'}, {label: "№3", name: '№3'}, {label: "№4", name: '№4'}, {label: "№5", name: '№5'}, {label: "№6", name: '№6'}, {label: "№7", value: '7'}, {label: "№8", value: '8'}]}
+                                        options={[{value: 1, label: "№1", name: '№1', color: ''}, {value: 2, label: "№2", name: '№2', color: ''}, {value: 3, label: "№3", name: '№3', color: ''}, {value: 4, label: "№4", name: '№4', color: ''}, {value: 5, label: "№5", name: '№5', color: ''}, {value: 6, label: "№6", name: '№6', color: ''}, {value: 7, label: "№7", value: '7', color: ''}, {value: 8, label: "№8", value: '8', color: ''}]}
                                         selected={stavka[index]}
-                                        setSelected={setStavka}
                                         array={stavka}
+                                        setSelected={setStavka} 
                                         index={index}
                                         style={{width: '130px'}}
                                         // onChange={addCity}
