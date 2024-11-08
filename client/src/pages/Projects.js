@@ -116,8 +116,7 @@ const Projects = () => {
   const [city, setCity] = useState('');
   const [statusProject, setStatusProject] = useState({name: '', color: ''});
   const [specifikaProject, setSpecifikaProject] = useState({name: '', color: ''});
-  const [vidProject, setVidProject] = useState([{name: '1', color: ''}, {name: '2', color: ''}]);
-  const [vidProject2, setVidProject2] = useState([]);
+  const [vidProject, setVidProject] = useState([]);
   const [company, setCompany] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [companysData, setCompanysData] = useState([]);
@@ -148,9 +147,9 @@ const Projects = () => {
   const [geo, setGeo] = useState('');
   const [comment, setComment] = useState('');
   
-  const [comteg, setComteg] = useState('');
-  const [spec, setSpec] = useState('');
-  const [stavka, setStavka] = useState('');
+  const [comteg, setComteg] = useState([]);
+  const [spec, setSpec] = useState([]);
+  const [stavka, setStavka] = useState([]);
   const [statusPretendent, setStatusPretendent] = useState('');
 
   const [visibleDelete, setVisibleDelete] = useState(false)
@@ -1421,7 +1420,8 @@ const Projects = () => {
                                       :
                                       <MyDropdown5
                                         options={vids}
-                                        selected={{name: index, color: ''}}
+                                        selected={vidProject[index]}
+                                        array={vidProject}
                                         setSelected={setVidProject}
                                         index={index}
                                         placeholder='—'
@@ -1448,8 +1448,10 @@ const Projects = () => {
                                       <></> 
                                       :<MyDropdown5
                                         options={specOnlyData2}
-                                        selected={spec}
+                                        selected={spec[index]}
+                                        array={spec}
                                         setSelected={setSpec}
+                                        index={index}
                                         style={{width: '400px'}}
                                         // onChange={addCity}
                                       />
@@ -1460,8 +1462,10 @@ const Projects = () => {
                                       <></> 
                                       :<MyDropdown5
                                         options={[{label: "№1", name: '№1'}, {label: "№2", name: '№2'}, {label: "№3", name: '№3'}, {label: "№4", name: '№4'}, {label: "№5", name: '№5'}, {label: "№6", name: '№6'}, {label: "№7", value: '7'}, {label: "№8", value: '8'}]}
-                                        selected={stavka}
+                                        selected={stavka[index]}
                                         setSelected={setStavka}
+                                        array={stavka}
+                                        index={index}
                                         style={{width: '130px'}}
                                         // onChange={addCity}
                                       />
@@ -1478,9 +1482,10 @@ const Projects = () => {
                                       <></> 
                                       :<MyDropdown5
                                         options={comtegs}
-                                        selected={comteg}
+                                        selected={comteg[index]}
                                         setSelected={setComteg}
-                                        // onChange={addCity}
+                                        array={comteg}
+                                        index={index}
                                         style={{width: '300px'}}
                                       />
                                     }

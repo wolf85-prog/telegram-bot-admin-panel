@@ -5,23 +5,20 @@ import {
   CFormInput,
 } from '@coreui/react'
 
-const Dropdown5 = ({options, selected, setSelected, index, placeholder, style}) => {
+const Dropdown5 = ({options, selected, setSelected, array, index, placeholder, style}) => {
     const [menuShow, setMenuShow] = useState(false)
 
     useEffect(()=> {
-      console.log("selected: ", selected, index)
-      setSelected(selected ? {name: selected[index]?.name, color: selected[index]?.color} : {name: placeholder, color: '#f3f3f3'})
-      // let arr = []
-      // arr[index] = selected ? {name: selected[index]?.name, color: selected[index]?.color} : {name: placeholder, color: '#f3f3f3'}
-      // console.log("arr: ", arr[index])
-      // setSelected(arr)
+      //console.log("selected: ", selected, index)
     }, [])
 
     const selectOption = (e, color) => {
         console.log("selected: ", {name: e.target.innerText, color: color})
-        // let arr = []
-        // arr[index] = {name: e.target.innerText, color: color}
-        setSelected({name: e.target.innerText, color: color})
+        let arr = [...array]
+        arr[index] = {name: e.target.innerText, color: color}
+        console.log("arr: ", arr)
+        setSelected(arr)
+        //setSelected({name: e.target.innerText, color: color})
         setMenuShow(!menuShow)
     }
 
