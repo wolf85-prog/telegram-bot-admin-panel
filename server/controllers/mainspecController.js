@@ -53,6 +53,7 @@ class MainspecController {
                 specialization,
                 stavka,
                 comteg,
+                comment,
             } = req.body
 
             const newUser = await MainSpec.update(
@@ -63,6 +64,7 @@ class MainspecController {
                     specialization,
                     stavka,
                     comteg,
+                    comment,
                 },
                 { where: {id: id} })
             return res.status(200).json(newUser);

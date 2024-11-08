@@ -159,6 +159,7 @@ const Projects = () => {
   const [showMainTable, setShowMainTable] = useState(false)
   const [showPretendentTable, setShowPretendentTable] = useState(false)
   const [showDots, setShowDots] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   const [playPoster, setPlayPoster] = useState(false)
 
@@ -166,8 +167,9 @@ const Projects = () => {
 
   const [mainspec, setMainspec] = useState([])
   const [mainspec2, setMainspec2] = useState([])
-  const [dateProject, setDateProject] = useState([]);
-  const [timeProject, setTimeProject] = useState([]);
+  const [dateProject, setDateProject] = useState([])
+  const [timeProject, setTimeProject] = useState([])
+  const [commentMain, setCommentMain] = useState([])
 
   const table = useReactTable({
     defaultColumn: {
@@ -283,14 +285,6 @@ const Projects = () => {
 }, [])
 
 
-
-  const closeProfile = () => {
-    setShowProject(false)
-    setShowCalendar2(true)
-    setShowMainTable(false)
-    setShowPretendentTable(false)
-  }
-
   useEffect(()=> {
     console.log("height: ", height)
   }, [height])
@@ -319,14 +313,44 @@ const Projects = () => {
       setMainspec(resMain)
 
       let arr = []
+      let arr1 = []
+      let arr2 = []
+      let arr3 = []
+      let arr4 = []
+
       resMain.map((item)=>{
         const obj = {
           name: item.vidWork,
           color: ''
         }
         arr.push(obj)
+
+        const obj1 = {
+          name: item.specialization,
+          color: ''
+        }
+        arr1.push(obj1)
+
+        const obj2 = {
+          name: item.stavka,
+          color: ''
+        }
+        arr2.push(obj2)
+
+        const obj3 = {
+          name: item.comteg,
+          color: ''
+        }
+        arr3.push(obj3)
+
+        arr4.push(item.specId)
       })
+
       setVidProject(arr)
+      setSpec(arr1)
+      setStavka(arr2)
+      setComteg(arr3)
+      setSpecialistName(arr4)
 
     } else {
       const resAdd = await addMainspec({
@@ -425,6 +449,9 @@ const Projects = () => {
   //сохранить проект
   const saveProject = async(id) => {
 
+    //Toast
+    setShowModal(true)
+
     console.log("start: ", startDate)
     console.log("end: ", endDate)
     console.log("managerId: ", managersAll.find(item=> item.fio === managerName)?.id)
@@ -473,6 +500,11 @@ const Projects = () => {
           {
             date: dateProject[index] + 'T' + timeProject[index],
             vidWork: vidProject[index].name,
+            specId: specialistName[index],
+            specialization: spec[index].name,
+            stavka: stavka[index].name,
+            comteg: comteg[index].name,
+            comment: commentMain[index]
           }, item.id)
       }, 500)
     })
@@ -500,7 +532,15 @@ const Projects = () => {
   
       return usersCopy;
     });
-  
+
+
+    setTimeout(()=> {
+      setShowModal(false)
+      closeProfile()
+    }, 500)
+  }
+
+  const closeProfile = () => {
     setShowProject(false)
     setShowCalendar2(true)
     setShowMainTable(false)
@@ -1509,7 +1549,12 @@ const Projects = () => {
                                     }
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
-                                      
+                                      <input
+                                        name='commentMain'
+                                        value={commentMain[index]}
+                                        onChange={(e)=>setCommentMain([...commentMain, e.target.value])}
+                                        style={{backgroundColor: 'transparent', height: '15px', textAlign: 'center', border: 'none', width: '140px', padding: '5px 0px', color: '#f3f3f3', fontSize: '14px'}} 
+                                      ></input>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       {/* ✅ */}
@@ -1629,6 +1674,17 @@ const Projects = () => {
 
                       </CCol>
                     </CRow>
+
+                    <CModal
+                      alignment="center"
+                      visible={showModal}
+                      onClose={() => setShowModal(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '15px'}}>
+                        Идёт сохранение данных...
+                      </CModalBody>
+                    </CModal>
 
                     <CModal
                       backdrop="static"
