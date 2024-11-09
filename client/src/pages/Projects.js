@@ -92,7 +92,7 @@ import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
-import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject } from '../http/mainspecAPI'
+import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId } from '../http/mainspecAPI'
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
@@ -317,6 +317,8 @@ const Projects = () => {
       let arr2 = []
       let arr3 = []
       let arr4 = []
+      let arr5 = []
+      let arr6 = []
 
       resMain.map((item)=>{
         const obj = {
@@ -344,16 +346,22 @@ const Projects = () => {
         arr3.push(obj3)
 
         arr4.push(item.specId)
+
+        arr5.push(item.date?.split('T')[0])
+        arr6.push(item.date?.split('T')[1])
       })
 
+      
       setVidProject(arr)
       setSpec(arr1)
       setStavka(arr2)
       setComteg(arr3)
       setSpecialistName(arr4)
+      setDateProject(arr5)
+      setTimeProject(arr6)
 
     } else {
-      const resAdd = await addMainspec({
+      const data = {
         comment: null,
         comteg: null,
         date: null,
@@ -363,15 +371,25 @@ const Projects = () => {
         specialization: null,
         stavka: null,
         taxi: null,
-        vidWork: null})
+        vidWork: null,
+      }
+      const resAdd1 = await addMainspec(data)
+      const resAdd2 = await addMainspec(data)
+      const resAdd3 = await addMainspec(data)
+      const resAdd4 = await addMainspec(data)
       
-        console.log("resAdd: ", resAdd)  
+        console.log("resAdd: ", resAdd1)  
 
         let arr = []
         setMainspec(
-          [...arr, resAdd]
+          [...arr, resAdd1, resAdd2, resAdd3, resAdd4]
         );
-        setVidProject([...arr, {name: '', color: ''}])
+      setVidProject([...arr, 
+        {name: '', color: ''}, 
+        {name: '', color: ''}, 
+        {name: '', color: ''}, 
+        {name: '', color: ''}
+      ])
     }
 
 
@@ -437,8 +455,8 @@ const Projects = () => {
     setShowMainTable(true)
     setShowPretendentTable(true)
 
-    setDateProject([])
-    setTimeProject([])
+    //setDateProject([])
+    //setTimeProject([])
 
     setTimeout(()=> {
       setHeight(509)
@@ -506,7 +524,7 @@ const Projects = () => {
             comteg: comteg[index].name,
             comment: commentMain[index]
           }, item.id)
-      }, 500)
+      }, 500 * ++index)
     })
     //const resTable = await editMainspec({date: dateProject + 'T' + timeProject})
   
@@ -666,16 +684,101 @@ const Projects = () => {
       console.log("arrayCopy: ", arrayCopy)
       setMainspec(arrayCopy)
     } else
-    //дублировать
-    if (eventkey.split(' ')[0] === '2') {
 
-    } else
-    //добавить разделитель
-    if (eventkey.split(' ')[0] === '3' || eventkey==='3') {
+    //дублировать
+    if (eventkey.split(' ')[0] === '2' || eventkey==='2') {
+      const resBubl = await getMainSpecId(eventkey.split(' ')[1])
+      console.log("resBubl: ", resBubl)
+      //добавить строку в основной состав
+		  const resAdd = await addMainspec({
+        projectId: resBubl.projectId, 
+        date: resBubl.date,
+        specId: resBubl.specId,
+        vidWork: resBubl.vidWork,
+        specialization: resBubl.specialization,
+        stavka: resBubl.stavka,
+        taxi: resBubl.taxi,
+        merch: resBubl.merch,
+        comment: resBubl.comment,
+        comteg: resBubl.comteg,
+      })
+
       const arrayCopy = JSON.parse(JSON.stringify(mainspec));
       
       arrayCopy.push({
-        id: '-1',
+        id: resAdd.id,
+        date: resBubl.date,
+        specId: resBubl.specId,
+        vidWork: resBubl.vidWork,
+        specialization: resBubl.specialization,
+        stavka: resBubl.stavka,
+        taxi: resBubl.taxi,
+        merch: resBubl.merch,
+        comment: resBubl.comment,
+        comteg: resBubl.comteg,
+      })
+      console.log("arrayCopy: ", arrayCopy)
+      setMainspec(arrayCopy)
+
+      let arr = []
+      let arr1 = []
+      let arr2 = []
+      let arr3 = []
+      let arr4 = []
+      let arr5 = []
+      let arr6 = []
+
+      arrayCopy.map((item)=>{
+        const obj = {
+          name: item.vidWork,
+          color: ''
+        }
+        arr.push(obj)
+
+        const obj1 = {
+          name: item.specialization,
+          color: ''
+        }
+        arr1.push(obj1)
+
+        const obj2 = {
+          name: item.stavka,
+          color: ''
+        }
+        arr2.push(obj2)
+
+        const obj3 = {
+          name: item.comteg,
+          color: ''
+        }
+        arr3.push(obj3)
+
+        arr4.push(item.specId)
+
+        arr5.push(item.date?.split('T')[0])
+        arr6.push(item.date?.split('T')[1])
+      })
+
+      
+      setVidProject(arr)
+      setSpec(arr1)
+      setStavka(arr2)
+      setComteg(arr3)
+      setSpecialistName(arr4)
+      setDateProject(arr5)
+      setTimeProject(arr6)
+    } else
+
+    //добавить разделитель
+    if (eventkey.split(' ')[0] === '3' || eventkey==='3') {
+      //добавить строку в основной состав
+		  const resAdd = await addMainspec({projectId: id, hr: true})
+      console.log("resAdd: ", resAdd.id)
+
+      const arrayCopy = JSON.parse(JSON.stringify(mainspec));
+      
+      arrayCopy.push({
+        id: resAdd.id,
         date: '',
         specId: '', 
         vidWork: '', 
@@ -686,15 +789,17 @@ const Projects = () => {
         taxi: '',
         merch: '',
         projectId: '',
+        hr: true,
       })
       console.log("arrayCopy: ", arrayCopy)
       setMainspec(arrayCopy)
     } else
+
     //удалить
     if (eventkey.split(' ')[0] === '4') {
       console.log(eventkey.split(' ')[1])
       setMainspec([...mainspec].filter(item=>item.id !== parseInt(eventkey.split(' ')[1])))
-      //deleteMainspec(eventkey.split(' ')[1])
+      deleteMainspec(eventkey.split(' ')[1])
     }
 	}
 
@@ -1340,17 +1445,17 @@ const Projects = () => {
                                           </Dropdown.Toggle>
                                           <Dropdown.Menu as={CustomMenu}> 
                                           <Dropdown.Item eventKey={`1 ${item.id}`}>Добавить</Dropdown.Item>
-                                          <Dropdown.Item eventKey={2}>Дублировать</Dropdown.Item>
-                                          <Dropdown.Item eventKey={3}>Разделитель</Dropdown.Item>
+                                          <Dropdown.Item eventKey={`2 ${item.id}`}>Дублировать</Dropdown.Item>
+                                          <Dropdown.Item eventKey={`3 ${item.id}`}>Разделитель</Dropdown.Item>
                                           <Dropdown.Item eventKey={`4 ${item.id}`}>Удалить</Dropdown.Item>
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
                                       <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} />
-                                      {item.id === '-1' ? '' : <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span>}
+                                      {item.hr ? '' : <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span>}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                      {item.id === '-1' ?
+                                      {item.hr ?
                                       <></>
                                       :<div style={{display: 'flex'}}>
                                         <InputMask 
@@ -1381,7 +1486,7 @@ const Projects = () => {
                                     } 
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center" style={{height: '26px'}}>
-                                      {item.id === '-1' ?
+                                      {item.hr ?
                                       <></> 
                                       :
                                       <MyDropdown5
@@ -1395,7 +1500,7 @@ const Projects = () => {
                                       }
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
-                                    {item.id === '-1' ?
+                                    {item.hr ?
                                       <></> 
                                       :<MyDropdown6
                                         options={workersData}
@@ -1412,7 +1517,7 @@ const Projects = () => {
                                       {/* <img src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/> */}
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
-                                    {item.id === '-1' ?
+                                    {item.hr ?
                                       <></> 
                                       :<MyDropdown5
                                         options={specOnlyData2}
@@ -1426,7 +1531,7 @@ const Projects = () => {
                                     }
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                    {item.id === '-1' ?
+                                    {item.hr ?
                                       <></> 
                                       :<MyDropdown5
                                         options={[{value: 1, label: "№1", name: '№1', color: ''}, {value: 2, label: "№2", name: '№2', color: ''}, {value: 3, label: "№3", name: '№3', color: ''}, {value: 4, label: "№4", name: '№4', color: ''}, {value: 5, label: "№5", name: '№5', color: ''}, {value: 6, label: "№6", name: '№6', color: ''}, {value: 7, label: "№7", value: '7', color: ''}, {value: 8, label: "№8", value: '8', color: ''}]}
@@ -1446,7 +1551,7 @@ const Projects = () => {
                                       {/* 🟩 */}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                    {item.id === '-1' ?
+                                    {item.hr ?
                                       <></> 
                                       :<MyDropdown5
                                         options={comtegs}
@@ -1459,7 +1564,7 @@ const Projects = () => {
                                     }
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
-                                      {item.id === '-1' ?
+                                      {item.hr ?
                                       <></>
                                       :<input
                                         name='commentMain'
