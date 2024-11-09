@@ -1350,7 +1350,9 @@ const Projects = () => {
                                       {item.id === '-1' ? '' : <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span>}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                      <div style={{display: 'flex'}}>
+                                      {item.id === '-1' ?
+                                      <></>
+                                      :<div style={{display: 'flex'}}>
                                         <InputMask 
                                           mask="99.99.9999"
                                           value={dateProject[index]}
@@ -1376,7 +1378,7 @@ const Projects = () => {
                                                           />}
                                         </InputMask>
                                       </div>
-                                      
+                                    } 
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center" style={{height: '26px'}}>
                                       {item.id === '-1' ?
@@ -1457,12 +1459,15 @@ const Projects = () => {
                                     }
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
-                                      <input
+                                      {item.id === '-1' ?
+                                      <></>
+                                      :<input
                                         name='commentMain'
                                         value={commentMain[index]}
                                         onChange={(e)=>changeCommentMain(e, index)}
                                         style={{backgroundColor: 'transparent', height: '15px', textAlign: 'center', border: 'none', width: '140px', padding: '5px 0px', color: '#f3f3f3', fontSize: '14px'}} 
                                       ></input>
+                                      }
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       {/* ✅ */}

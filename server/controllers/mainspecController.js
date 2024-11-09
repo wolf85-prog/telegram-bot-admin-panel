@@ -23,7 +23,7 @@ class MainspecController {
         try {
             const workers = await MainSpec.findAll({
                 order: [
-                    ['id', 'DESC'], //DESC, ASC
+                    ['number', 'DESC'], //DESC, ASC
                 ],
                 where: {
                     projectId: id
@@ -54,6 +54,8 @@ class MainspecController {
                 stavka,
                 comteg,
                 comment,
+                hr,
+                number,
             } = req.body
 
             const newUser = await MainSpec.update(
@@ -65,6 +67,8 @@ class MainspecController {
                     stavka,
                     comteg,
                     comment,
+                    hr,
+                    number,
                 },
                 { where: {id: id} })
             return res.status(200).json(newUser);
@@ -86,9 +90,9 @@ class MainspecController {
 
     async addMainspec(req, res) {       
         try {    
-            const {projectId} = req.body
+            const {projectId, hr, number} = req.body
 
-            const newUser = await MainSpec.create({projectId})
+            const newUser = await MainSpec.create({projectId, hr, number})
             return res.status(200).json(newUser);
         } catch (error) {
             return res.status(500).json(error.message);

@@ -254,6 +254,8 @@ const MainSpec = sequelize.define('mainspec', {
     merch: {type: DataTypes.STRING},
     taxi: {type: DataTypes.STRING},
     projectId: {type: DataTypes.STRING},
+    hr: {type: DataTypes.BOOLEAN},
+    number: {type: DataTypes.INTEGER}
 })
 
 
