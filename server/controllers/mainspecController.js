@@ -90,9 +90,31 @@ class MainspecController {
 
     async addMainspec(req, res) {       
         try {    
-            const {projectId, hr, number} = req.body
+            const {projectId, hr, number, 
+                date,
+                specId,
+                vidWork,
+                specialization,
+                stavka,
+                taxi,
+                merch,
+                comment,
+                comteg,} = req.body
 
-            const newUser = await MainSpec.create({projectId, hr, number})
+            const newUser = await MainSpec.create({
+                projectId, 
+                hr, 
+                number,
+                date,
+                specId,
+                vidWork,
+                specialization,
+                stavka,
+                taxi,
+                merch,
+                comment,
+                comteg,
+            })
             return res.status(200).json(newUser);
         } catch (error) {
             return res.status(500).json(error.message);
