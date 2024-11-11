@@ -348,9 +348,11 @@ const Projects = () => {
         arr4.push(item.specId)
 
         arr5.push(item.date?.split('T')[0])
+        //console.log("arr5: ", arr5)
         arr6.push(item.date?.split('T')[1])
       })
 
+      //console.log("arr5: ", arr5)
       
       setVidProject(arr)
       setSpec(arr1)
@@ -372,11 +374,16 @@ const Projects = () => {
         stavka: null,
         taxi: null,
         vidWork: null,
+        number: 1,
       }
-      const resAdd1 = await addMainspec(data)
-      const resAdd2 = await addMainspec(data)
-      const resAdd3 = await addMainspec(data)
-      const resAdd4 = await addMainspec(data)
+
+      const startDate = new Date(resProj.dateStart.split('T')[0]).toLocaleString().split(',')[0]
+      const startTime = resProj.dateStart.split('T')[1]
+
+      const resAdd1 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 1})
+      const resAdd2 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 2})
+      const resAdd3 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 3})
+      const resAdd4 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 4})
       
         console.log("resAdd: ", resAdd1)  
 
@@ -389,7 +396,10 @@ const Projects = () => {
         {name: '', color: ''}, 
         {name: '', color: ''}, 
         {name: '', color: ''}
-      ])
+      ]) 
+
+      setDateProject([startDate, startDate, startDate, startDate])
+      setTimeProject([startTime, startTime, startTime, startTime])
     }
 
 
@@ -516,7 +526,7 @@ const Projects = () => {
       setTimeout(async()=> {
         await editMainspec(
           {
-            date: dateProject[index] + 'T' + timeProject[index],
+            date: dateProject[index] ? dateProject[index] + 'T' + timeProject[index] : null,
             vidWork: vidProject[index].name,
             specId: specialistName[index],
             specialization: spec[index].name,
@@ -663,12 +673,12 @@ const Projects = () => {
 
     if (eventkey.split(' ')[0] === '1' || eventkey==='1') {
       //добавить строку в основной состав
-		  const resAdd = await addMainspec({projectId: id})
+		  const resAdd = await addMainspec({projectId: id, number: parseInt(eventkey.split(' ')[2])+1})
       console.log("resAdd: ", resAdd.id)
 
       const arrayCopy = JSON.parse(JSON.stringify(mainspec));
-      
-      arrayCopy.push({
+      //readyArray.splice(2, 0, 60);
+      arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
         id: resAdd.id,
         date: '',
         specId: '', 
@@ -680,9 +690,18 @@ const Projects = () => {
         taxi: '',
         merch: '',
         projectId: id,
+        number: parseInt(eventkey.split(' ')[2])+1,
       })
       console.log("arrayCopy: ", arrayCopy)
       setMainspec(arrayCopy)
+
+      setVidProject([])
+      setSpec([])
+      setStavka([])
+      setComteg([])
+      setSpecialistName([])
+      setDateProject([])
+      setTimeProject([])
     } else
 
     //дублировать
@@ -1444,10 +1463,10 @@ const Projects = () => {
                                           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
                                           </Dropdown.Toggle>
                                           <Dropdown.Menu as={CustomMenu}> 
-                                          <Dropdown.Item eventKey={`1 ${item.id}`}>Добавить</Dropdown.Item>
-                                          <Dropdown.Item eventKey={`2 ${item.id}`}>Дублировать</Dropdown.Item>
-                                          <Dropdown.Item eventKey={`3 ${item.id}`}>Разделитель</Dropdown.Item>
-                                          <Dropdown.Item eventKey={`4 ${item.id}`}>Удалить</Dropdown.Item>
+                                          <Dropdown.Item eventKey={`1 ${item.id} ${index}`}>Добавить</Dropdown.Item>
+                                          <Dropdown.Item eventKey={`2 ${item.id} ${index}`}>Дублировать</Dropdown.Item>
+                                          <Dropdown.Item eventKey={`3 ${item.id} ${index}`}>Разделитель</Dropdown.Item>
+                                          <Dropdown.Item eventKey={`4 ${item.id} ${index}`}>Удалить</Dropdown.Item>
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>                                     
@@ -1460,7 +1479,7 @@ const Projects = () => {
                                       :<div style={{display: 'flex'}}>
                                         <InputMask 
                                           mask="99.99.9999"
-                                          value={dateProject[index]}
+                                          value={dateProject[index] !== 'undefined' ? dateProject[index] : ''}
                                           onChange={(e)=>changeDateProject(e, index)}>
                                           {(inputProps) => <CFormInput 
                                                             {...inputProps} 
