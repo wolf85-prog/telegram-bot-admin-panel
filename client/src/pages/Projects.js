@@ -524,8 +524,8 @@ const Projects = () => {
     console.log("dateProject: ", dateProject)
     let arr = []
     let arr2 = []
-    mainspec.map((item, index)=> {
-      setTimeout(async()=> {
+    mainspec.map(async(item, index)=> {
+      //setTimeout(async()=> {
         await editMainspec(
           {
             date: dateProject[index] ? dateProject[index] + 'T' + timeProject[index] : null,
@@ -539,14 +539,15 @@ const Projects = () => {
           }, item.id
         )
 
-        arr.push(dateProject[index])
-        arr2.push(timeProject[index])
+        // arr.push(dateProject[index])
+        // arr2.push(timeProject[index])
 
 
-        setDateProject(arr)
-        setTimeProject(arr2)
-      }, 500 * ++index)
+        // setDateProject(arr)
+        // setTimeProject(arr2)
+      //}, 500 * ++index)
     })
+
     //const resTable = await editMainspec({date: dateProject + 'T' + timeProject})
   
     setProjects((projects) => {	
@@ -842,11 +843,12 @@ const Projects = () => {
 
 
   const changeDateProject=(e, index)=> {
-    console.log(e.target.value)
+    console.log("change Date: ", index)
     let arr = []
     arr = [...dateProject]
+    console.log("arr: ", arr)
     arr[index] = e.target.value
-    console.log("dateProject: ", dateProject)
+    //console.log("dateProject: ", dateProject)
     setDateProject(arr)
   }
 
@@ -855,7 +857,7 @@ const Projects = () => {
     let arr = []
     arr = [...timeProject]
     arr[index] = e.target.value
-    console.log("timeProject: ", timeProject)
+    //console.log("timeProject: ", timeProject)
     setTimeProject(arr)
   }
 
