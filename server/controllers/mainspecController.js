@@ -23,7 +23,7 @@ class MainspecController {
         try {
             const workers = await MainSpec.findAll({
                 order: [
-                    ['number', 'DESC'], //DESC, ASC
+                    ['number', 'ASC'], //DESC, ASC
                 ],
                 where: {
                     projectId: id

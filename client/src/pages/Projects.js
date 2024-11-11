@@ -378,19 +378,19 @@ const Projects = () => {
       }
 
       const startDate = new Date(resProj.dateStart.split('T')[0]).toLocaleString().split(',')[0]
-      const startTime = resProj.dateStart.split('T')[1]
+      const startTime = resProj.dateStart.split('T')[1].slice(0,5)
 
       const resAdd1 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 1})
       const resAdd2 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 2})
       const resAdd3 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 3})
       const resAdd4 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 4})
       
-        console.log("resAdd: ", resAdd1)  
+      console.log("resAdd: ", resAdd1)  
 
-        let arr = []
-        setMainspec(
-          [...arr, resAdd1, resAdd2, resAdd3, resAdd4]
-        );
+      let arr = []
+      setMainspec(
+        [...arr, resAdd1, resAdd2, resAdd3, resAdd4]
+      );
       setVidProject([...arr, 
         {name: '', color: ''}, 
         {name: '', color: ''}, 
@@ -522,6 +522,8 @@ const Projects = () => {
 
     console.log("mainSpec: ", mainspec)
     console.log("dateProject: ", dateProject)
+    let arr = []
+    let arr2 = []
     mainspec.map((item, index)=> {
       setTimeout(async()=> {
         await editMainspec(
@@ -534,7 +536,15 @@ const Projects = () => {
             comteg: comteg[index].name,
             comment: commentMain[index],
             number: index+1,
-          }, item.id)
+          }, item.id
+        )
+
+        arr.push(dateProject[index])
+        arr2.push(timeProject[index])
+
+
+        setDateProject(arr)
+        setTimeProject(arr2)
       }, 500 * ++index)
     })
     //const resTable = await editMainspec({date: dateProject + 'T' + timeProject})
