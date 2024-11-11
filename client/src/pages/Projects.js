@@ -532,7 +532,8 @@ const Projects = () => {
             specialization: spec[index].name,
             stavka: stavka[index].name,
             comteg: comteg[index].name,
-            comment: commentMain[index]
+            comment: commentMain[index],
+            number: index+1,
           }, item.id)
       }, 500 * ++index)
     })
@@ -690,7 +691,7 @@ const Projects = () => {
         taxi: '',
         merch: '',
         projectId: id,
-        number: parseInt(eventkey.split(' ')[2])+1,
+        //number: parseInt(eventkey.split(' ')[2])+1,
       })
       console.log("arrayCopy: ", arrayCopy)
       setMainspec(arrayCopy)
