@@ -754,7 +754,7 @@ const Projects = () => {
 
       const arrayCopy = JSON.parse(JSON.stringify(mainspec));
       
-      arrayCopy.push({
+      arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
         id: resAdd.id,
         date: resBubl.date,
         specId: resBubl.specId,
@@ -826,7 +826,7 @@ const Projects = () => {
 
       const arrayCopy = JSON.parse(JSON.stringify(mainspec));
       
-      arrayCopy.push({
+      arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
         id: resAdd.id,
         date: '',
         specId: '', 
