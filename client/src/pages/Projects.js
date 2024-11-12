@@ -410,9 +410,6 @@ const Projects = () => {
     }
 
 
-    setShowProject(true)
-    setShowCalendar(false)
-    setShowCalendar2(false)
 
     setStatusProject({name: status, color: statusData.find((stat)=> stat.label === status)?.color})
     setSpecifikaProject({name: specifika, color: specifikaData.find((stat)=> stat.label === specifika)?.color})
@@ -468,12 +465,14 @@ const Projects = () => {
     setTeh7(resProj.teh7)
     setTeh8(resProj.teh8)
 
-    //setStavka({label: "№1", name: "№1"})
+    setShowProject(true)
+    setShowCalendar(false)
+    setShowCalendar2(false)
+    setVisibleA(true)
+    setVisibleB(true)
     setShowMainTable(true)
     setShowPretendentTable(true)
 
-    //setDateProject([])
-    //setTimeProject([])
 
     setTimeout(()=> {
       setHeight(509)
@@ -717,14 +716,14 @@ const Projects = () => {
       console.log("arrayCopy: ", arrayCopy)
       setMainspec(arrayCopy)
 
-      setVidProject([])
-      setSpec([])
+      //setVidProject([])
+      //setSpec([])
       let arr = [...stavka]
       let index = parseInt(eventkey.split(' ')[2])+1
       arr[index] = {value: 1, label: "№1", name: '№1', color: ''}
       setStavka(arr)
-      setComteg([])
-      setSpecialistName([])
+      //setComteg([])
+      //setSpecialistName([])
 
       let arr2 = [...dateProject]
       let arr3 = [...timeProject]
@@ -750,6 +749,7 @@ const Projects = () => {
         merch: resBubl.merch,
         comment: resBubl.comment,
         comteg: resBubl.comteg,
+        number: parseInt(eventkey.split(' ')[2])+1,
       })
 
       const arrayCopy = JSON.parse(JSON.stringify(mainspec));
@@ -821,7 +821,7 @@ const Projects = () => {
     //добавить разделитель
     if (eventkey.split(' ')[0] === '3' || eventkey==='3') {
       //добавить строку в основной состав
-		  const resAdd = await addMainspec({projectId: id, hr: true})
+		  const resAdd = await addMainspec({projectId: id, hr: true, number: parseInt(eventkey.split(' ')[2])+1})
       console.log("resAdd: ", resAdd.id)
 
       const arrayCopy = JSON.parse(JSON.stringify(mainspec));
