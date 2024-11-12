@@ -1564,9 +1564,9 @@ const Projects = () => {
                                       :
                                       <MyDropdown5
                                         options={vids}
-                                        selected={vidProject[index]}
-                                        array={vidProject}
-                                        setSelected={setVidProject}
+                                        selected={item.vidWork}
+                                        array={mainspec}
+                                        setSelected={setMainspec}
                                         index={index}
                                         placeholder='—'
                                       />
