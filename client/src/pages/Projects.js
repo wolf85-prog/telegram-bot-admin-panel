@@ -717,13 +717,33 @@ const Projects = () => {
       setMainspec(arrayCopy)
 
       //setVidProject([])
+      let arr1 = [...vidProject]
+      let index1 = parseInt(eventkey.split(' ')[2])+1
+      arr1[index1] = ""
+      setVidProject(arr1)
+
       //setSpec([])
+      let arr11 = [...spec]
+      let index11 = parseInt(eventkey.split(' ')[2])+1
+      arr11[index11] = ""
+      setSpec(arr11)
+
       let arr = [...stavka]
       let index = parseInt(eventkey.split(' ')[2])+1
       arr[index] = {value: 1, label: "№1", name: '№1', color: ''}
       setStavka(arr)
+
       //setComteg([])
+      let arr111 = [...comteg]
+      let index111 = parseInt(eventkey.split(' ')[2])+1
+      arr111[index111] = ""
+      setComteg(arr111)
+
       //setSpecialistName([])
+      let arr1111 = [...specialistName]
+      let index1111 = parseInt(eventkey.split(' ')[2])+1
+      arr1111[index1111] = ""
+      setSpecialistName(arr1111)
 
       let arr2 = [...dateProject]
       let arr3 = [...timeProject]
@@ -846,7 +866,7 @@ const Projects = () => {
 
     //удалить
     if (eventkey.split(' ')[0] === '4') {
-      console.log(eventkey.split(' ')[1])
+      console.log("index: ", eventkey.split(' ')[1])
       setMainspec([...mainspec].filter(item=>item.id !== parseInt(eventkey.split(' ')[1])))
       deleteMainspec(eventkey.split(' ')[1])
     }
@@ -1529,7 +1549,7 @@ const Projects = () => {
                                                             placeholder="" 
                                                             disableUnderline
                                                             aria-label="sm input example"
-                                                            style={{backgroundColor: 'transparent', height: '14px', textAlign: 'center', border: 'none', width: '40px', padding: '5px 0px'}} 
+                                                            style={{backgroundColor: 'transparent', height: '14px', border: 'none', width: '50px', padding: '5px 0px'}} 
                                                           />}
                                         </InputMask>
                                       </div>
