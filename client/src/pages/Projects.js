@@ -688,16 +688,21 @@ const Projects = () => {
   const changeAddSpec = async (eventkey) => {
 		console.log("spec: ", eventkey)
 
+    //Добавить
     if (eventkey.split(' ')[0] === '1' || eventkey==='1') {
+      const resProj = await getProjectId(id)
+      const startDate = new Date(resProj.dateStart.split('T')[0]).toLocaleString().split(',')[0]
+      const startTime = resProj.dateStart.split('T')[1].slice(0,5)
+
       //добавить строку в основной состав
-		  const resAdd = await addMainspec({projectId: id, number: parseInt(eventkey.split(' ')[2])+1})
+		  const resAdd = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: parseInt(eventkey.split(' ')[2])+1, stavka: "№1"})
       console.log("resAdd: ", resAdd.id)
 
       const arrayCopy = JSON.parse(JSON.stringify(mainspec));
       //readyArray.splice(2, 0, 60);
       arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
         id: resAdd.id,
-        date: '',
+        date: startDate+'T'+startTime,
         specId: '', 
         vidWork: '', 
         specialization: '', 
@@ -720,8 +725,13 @@ const Projects = () => {
       setStavka(arr)
       setComteg([])
       setSpecialistName([])
-      setDateProject([])
-      setTimeProject([])
+
+      let arr2 = [...dateProject]
+      let arr3 = [...timeProject]
+      arr2[index] = startDate
+      arr3[index] = startTime
+      setDateProject(arr2)
+      setTimeProject(arr3)
     } else
 
     //дублировать
