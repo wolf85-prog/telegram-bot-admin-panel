@@ -363,6 +363,7 @@ const Projects = () => {
       setTimeProject(arr6)
 
     } else {
+      //новый состав специалистов
       const data = {
         comment: null,
         comteg: null,
@@ -391,22 +392,24 @@ const Projects = () => {
       setMainspec(
         [...arr, resAdd1, resAdd2, resAdd3, resAdd4]
       );
-      setVidProject([...arr, 
-        {name: '', color: ''}, 
-        {name: '', color: ''}, 
-        {name: '', color: ''}, 
-        {name: '', color: ''}
-      ]) 
+      //console.log("mainspec: ", [...arr, resAdd1, resAdd2, resAdd3, resAdd4])
 
-      setDateProject([startDate, startDate, startDate, startDate])
-      setTimeProject([startTime, startTime, startTime, startTime])
+      // setVidProject([...arr, 
+      //   {name: '', color: ''}, 
+      //   {name: '', color: ''}, 
+      //   {name: '', color: ''}, 
+      //   {name: '', color: ''}
+      // ]) 
 
-      setStavka([...stavka, 
-        "№1", 
-        "№1", 
-        "№1",
-        "№1",
-      ])
+      // setDateProject([startDate, startDate, startDate, startDate])
+      // setTimeProject([startTime, startTime, startTime, startTime])
+
+      // setStavka([...stavka, 
+      //   "№1", 
+      //   "№1", 
+      //   "№1",
+      //   "№1",
+      // ])
     }
 
 
@@ -1530,7 +1533,7 @@ const Projects = () => {
                                       :<div style={{display: 'flex'}}>
                                         <InputMask 
                                           mask="99.99.9999"
-                                          value={dateProject[index] !== 'undefined' ? dateProject[index] : ''}
+                                          value={item.date !== 'undefined' ? item.date.split('T')[0] : ''}
                                           onChange={(e)=>changeDateProject(e, index)}>
                                           {(inputProps) => <CFormInput 
                                                             {...inputProps} 
@@ -1542,7 +1545,7 @@ const Projects = () => {
                                         </InputMask>
                                         <InputMask 
                                           mask="99:99"
-                                          value={timeProject[index]}
+                                          value={item.date !== 'undefined' ? item.date.split('T')[1] : ''}
                                           onChange={(e)=>changeTimeProject(e, index)}>
                                           {(inputProps) => <CFormInput 
                                                             {...inputProps} 
