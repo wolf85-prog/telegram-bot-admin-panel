@@ -689,7 +689,7 @@ const Projects = () => {
         specialization: '', 
         comteg: '',
         comment: '',
-        stavka: "№1",
+        stavka: JSON.stringify({label: '№1', name: '№1'}),
         taxi: '',
         merch: '',
         projectId: id,
