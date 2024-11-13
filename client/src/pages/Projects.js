@@ -363,15 +363,14 @@ const Projects = () => {
       const data = {
         comment: null,
         comteg: null,
-        date: null,
+        date: startDate+'T'+startTime,
         merch: null,
         projectId: id,
         specId: null,
         specialization: null,
-        stavka: "№1",
+        stavka: JSON.stringify({label: '№1', name: '№1'}),
         taxi: null,
         vidWork: null,
-        number: 1,
       }
 
       const startDate = new Date(resProj.dateStart.split('T')[0]).toLocaleString().split(',')[0]
@@ -386,7 +385,7 @@ const Projects = () => {
 
       let arr = []
       setMainspec(
-        [...arr, resAdd1, resAdd2, resAdd3, resAdd4]
+        [...arr, data, data, data, data]
       );
     }
 
