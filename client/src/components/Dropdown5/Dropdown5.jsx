@@ -5,8 +5,9 @@ import {
   CFormInput,
 } from '@coreui/react'
 
-const Dropdown5 = ({options, selected, setSelected, array, index, placeholder, style}) => {
+const Dropdown5 = ({options, selected, setSelected, array, index, element, placeholder, style}) => {
     const [menuShow, setMenuShow] = useState(false)
+    const [arrSelect, setArrSelect] = useState({})
 
     useEffect(()=> {
       //console.log("selected: ", selected, index)
@@ -14,9 +15,16 @@ const Dropdown5 = ({options, selected, setSelected, array, index, placeholder, s
 
     const selectOption = (e, color) => {
         //console.log("selected: ", {name: e.target.innerText, color: color})
+        
         let arr = JSON.parse(JSON.stringify(array));
-        arr[index] = {name: e.target.innerText, color: color}
+        const userObject = arr[index];
+			  arr[index] = { ...userObject, [element]: JSON.stringify({name: e.target.innerText, color: color})};
+
+        //arr[index] = {name: e.target.innerText, color: color}
+        console.log("arr: ", arr)
         setSelected(arr)
+
+        setArrSelect(arr[index])
         //setSelected({name: e.target.innerText, color: color})
         setMenuShow(!menuShow)
     }
@@ -51,7 +59,9 @@ const Dropdown5 = ({options, selected, setSelected, array, index, placeholder, s
             <Select2
                 menuShow={menuShow}
                 setMenuShow={setMenuShow}
-                selected={selected ? selected : ''}
+                selected={arrSelect ? arrSelect : ''}
+                index={index}
+                el={element}
                 style={{border: 'none!important', color: ``}}
             />
             <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`} style={style}>

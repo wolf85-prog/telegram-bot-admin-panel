@@ -1533,7 +1533,7 @@ const Projects = () => {
                                       :<div style={{display: 'flex'}}>
                                         <InputMask 
                                           mask="99.99.9999"
-                                          value={item.date !== 'undefined' ? item.date.split('T')[0] : ''}
+                                          value={item.date !== 'undefined' ? item.date?.split('T')[0] : ''}
                                           onChange={(e)=>changeDateProject(e, index)}>
                                           {(inputProps) => <CFormInput 
                                                             {...inputProps} 
@@ -1545,7 +1545,7 @@ const Projects = () => {
                                         </InputMask>
                                         <InputMask 
                                           mask="99:99"
-                                          value={item.date !== 'undefined' ? item.date.split('T')[1] : ''}
+                                          value={item.date !== 'undefined' ? item.date?.split('T')[1] : ''}
                                           onChange={(e)=>changeTimeProject(e, index)}>
                                           {(inputProps) => <CFormInput 
                                                             {...inputProps} 
@@ -1568,6 +1568,7 @@ const Projects = () => {
                                         array={mainspec}
                                         setSelected={setMainspec}
                                         index={index}
+                                        element={'vidWork'}
                                         placeholder='—'
                                       />
                                       }
@@ -1594,17 +1595,16 @@ const Projects = () => {
                                       <></> 
                                       :<MyDropdown5
                                         options={specOnlyData2}
-                                        selected={spec[index]}
-                                        array={spec}
-                                        setSelected={setSpec}
+                                        selected={item.specId}
+                                        array={mainspec}
+                                        setSelected={setMainspec}
                                         index={index}
-                                        style={{width: '400px'}}
-                                        // onChange={addCity}
+                                        element={'specId'}
                                       />
                                     }
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                    {item.hr ?
+                                    {/* {item.hr ?
                                       <></> 
                                       :<MyDropdown5
                                         options={[{value: 1, label: "№1", name: '№1', color: ''}, {value: 2, label: "№2", name: '№2', color: ''}, {value: 3, label: "№3", name: '№3', color: ''}, {value: 4, label: "№4", name: '№4', color: ''}, {value: 5, label: "№5", name: '№5', color: ''}, {value: 6, label: "№6", name: '№6', color: ''}, {value: 7, label: "№7", value: '7', color: ''}, {value: 8, label: "№8", value: '8', color: ''}]}
@@ -1615,7 +1615,7 @@ const Projects = () => {
                                         style={{width: '130px'}}
                                         // onChange={addCity}
                                       />
-                                    }
+                                    } */}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       {/* 🟩 */}
@@ -1624,7 +1624,7 @@ const Projects = () => {
                                       {/* 🟩 */}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                    {item.hr ?
+                                    {/* {item.hr ?
                                       <></> 
                                       :<MyDropdown5
                                         options={comtegs}
@@ -1634,7 +1634,7 @@ const Projects = () => {
                                         index={index}
                                         style={{width: '300px'}}
                                       />
-                                    }
+                                    } */}
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
                                       {item.hr ?

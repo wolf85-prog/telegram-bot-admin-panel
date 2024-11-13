@@ -1,18 +1,24 @@
-import React from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import cl from './Select2.module.css'
 import { 
     CFormInput,
   } from '@coreui/react'
 
-const Select2 = ({menuShow, setMenuShow, selected}) => {
+const Select2 = ({menuShow, setMenuShow, selected, index, el}) => {
+    const [element, setElement] = useState()
+    
+    useEffect(()=> {
+        setElement(selected[el] ? JSON.parse(selected[el]) : '')
+        console.log("element: ", selected[el] ? JSON.parse(selected[el]) : '')
+    }, [selected])
 
     return (
         <div 
             className={`${cl.select} ${menuShow && cl.selectClicked}`}
             onClick={()=> setMenuShow(!menuShow)}
         >
-            <span style={{color: `${selected?.color}`}}>
-                {selected?.name && selected?.name.length > 25 ? selected?.name.substr(0, 25) + '...' : selected?.name}
+            <span style={{color: `${element?.color}`}}>
+                {element?.name && element?.name.length > 25 ? element?.name.substr(0, 25) + '...' : element?.name}
             </span>
 
         </div>
