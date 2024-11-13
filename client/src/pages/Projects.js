@@ -689,7 +689,7 @@ const Projects = () => {
         specialization: '', 
         comteg: '',
         comment: '',
-        stavka: {label: "№1", name: "№1"},
+        stavka: "№1",
         taxi: '',
         merch: '',
         projectId: id,

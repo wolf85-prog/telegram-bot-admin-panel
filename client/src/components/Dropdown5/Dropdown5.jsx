@@ -19,15 +19,9 @@ const Dropdown5 = ({options, selected, setSelected, index, element, placeholder,
         let arr = JSON.parse(JSON.stringify(selected));
         const userObject = arr[index];
 			  arr[index] = { ...userObject, [element]: JSON.stringify({name: e.target.innerText, color: color})};
-
-        //arr[index] = {name: e.target.innerText, color: color}
+        
         console.log("arr: ", arr)
-        
-        
-        //setSelected(arr[index])
-
-        //setArrSelect(arr[index])
-        setSelected({name: e.target.innerText, color: color})
+        setSelected(arr)
 
         setMenuShow(!menuShow)
     }
