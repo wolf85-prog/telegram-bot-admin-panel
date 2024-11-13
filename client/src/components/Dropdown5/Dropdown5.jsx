@@ -5,39 +5,30 @@ import {
   CFormInput,
 } from '@coreui/react'
 
-const Dropdown5 = ({options, selected, setSelected, array, index, element, setValue, placeholder, style}) => {
+const Dropdown5 = ({options, selected, setSelected, index, element, placeholder, style}) => {
     const [menuShow, setMenuShow] = useState(false)
     const [arrSelect, setArrSelect] = useState({})
 
     useEffect(()=> {
-      console.log("selected: ", selected, index)
-      //setArrSelect(selected)
-
-      // let arr = JSON.parse(JSON.stringify(array));
-      // const userObject = arr[index];
-			// arr[index] = { ...userObject, [element]: JSON.stringify(selected)};
-
-      // //arr[index] = {name: e.target.innerText, color: color}
-      // console.log("arr: ", arr)
-      // setSelected(arr)
-
-      // setArrSelect(arr[index])
-    }, [])
+      //console.log("selected2: ", selected, index)
+    }, [selected])
 
     const selectOption = (e, color) => {
         //console.log("selected: ", {name: e.target.innerText, color: color})
         
-        let arr = JSON.parse(JSON.stringify(array));
+        let arr = JSON.parse(JSON.stringify(selected));
         const userObject = arr[index];
 			  arr[index] = { ...userObject, [element]: JSON.stringify({name: e.target.innerText, color: color})};
 
         //arr[index] = {name: e.target.innerText, color: color}
         console.log("arr: ", arr)
-        //setSelected(arr)
+        
+        
+        //setSelected(arr[index])
 
-        setArrSelect(arr[index])
-        //setSelected({name: e.target.innerText, color: color})
-        //setValue(arr)
+        //setArrSelect(arr[index])
+        setSelected({name: e.target.innerText, color: color})
+
         setMenuShow(!menuShow)
     }
 
@@ -71,8 +62,7 @@ const Dropdown5 = ({options, selected, setSelected, array, index, element, setVa
             <Select2
                 menuShow={menuShow}
                 setMenuShow={setMenuShow}
-                value={selected}
-                selected={arrSelect ? arrSelect : ''}
+                selected={selected ? selected[index] : ''}
                 index={index}
                 el={element}
                 style={{border: 'none!important', color: ``}}

@@ -309,54 +309,54 @@ const Projects = () => {
     
 
     if (resMain.length > 0) {
-      setMainspec(resMain)
-
       let arr = []
-      let arr1 = []
-      let arr2 = []
-      let arr3 = []
-      let arr4 = []
-      let arr5 = []
-      let arr6 = []
 
       resMain.map((item)=>{
         const obj = {
           name: item.vidWork,
           color: ''
         }
-        arr.push(obj)
 
         const obj1 = {
           name: item.specialization,
           color: ''
         }
-        arr1.push(obj1)
 
         const obj2 = {
           name: item.stavka,
           color: ''
         }
-        arr2.push(obj2)
 
         const obj3 = {
           name: item.comteg,
           color: ''
         }
-        arr3.push(obj3)
 
-        arr4.push(item.specId)
+        const newObj = {
+          date: item.date,
+          specId: item.specId,
+          vidWork: JSON.stringify(obj),
+          specialization: JSON.stringify(obj1),
+          comteg: JSON.stringify(obj3),
+          comment: item.comment,
+          stavka: JSON.stringify(obj2),   
+          numder: item.number,     
+        }
 
-        arr5.push(item.date?.split('T')[0])
-        arr6.push(item.date?.split('T')[1])
+        arr.push(newObj)
       })
+
+      console.log("new mainarr: ", arr)
+
+      setMainspec(arr)
       
-      setVidProject(arr)
-      setSpec(arr1)
-      setStavka(arr2)
-      setComteg(arr3)
-      setSpecialistName(arr4)
-      setDateProject(arr5)
-      setTimeProject(arr6)
+      // setVidProject(arr)
+      // setSpec(arr1)
+      // setStavka(arr2)
+      // setComteg(arr3)
+      // setSpecialistName(arr4)
+      // setDateProject(arr5)
+      // setTimeProject(arr6)
 
     } else {
       //новый состав специалистов
@@ -524,7 +524,7 @@ const Projects = () => {
             // comteg: comteg[index].name,
             // comment: commentMain[index],
             date: item.date,
-            vidWork: item.vidWork,
+            vidWork: item.vidWork?.name,
             specId: item.specId,
             specialization: item.specialization,
             stavka: item.stavka,
@@ -1508,10 +1508,8 @@ const Projects = () => {
                                       :
                                       <MyDropdown5
                                         options={vids}
-                                        selected={item.vidWork}
-                                        array={mainspec}
+                                        selected={mainspec}
                                         setSelected={setMainspec}
-                                        setValue={setMainspec}
                                         index={index}
                                         element={'vidWork'}
                                         placeholder='—'
@@ -1523,8 +1521,7 @@ const Projects = () => {
                                       <></> 
                                       :<MyDropdown6
                                         options={workersData}
-                                        selected={item.specId}
-                                        array={mainspec}
+                                        selected={mainspec}
                                         setSelected={setMainspec}
                                         index={index}
                                         element={'specId'}
@@ -1541,11 +1538,10 @@ const Projects = () => {
                                       <></> 
                                       :<MyDropdown5
                                         options={specOnlyData2}
-                                        selected={item.specId}
-                                        array={mainspec}
+                                        selected={mainspec}
                                         setSelected={setMainspec}
                                         index={index}
-                                        element={'specId'}
+                                        element={'specialization'}
                                       />
                                     }
                                     </CTableDataCell> 
@@ -1554,8 +1550,7 @@ const Projects = () => {
                                       <></> 
                                       :<MyDropdown5
                                         options={[{value: 1, label: "№1", name: '№1', color: ''}, {value: 2, label: "№2", name: '№2', color: ''}, {value: 3, label: "№3", name: '№3', color: ''}, {value: 4, label: "№4", name: '№4', color: ''}, {value: 5, label: "№5", name: '№5', color: ''}, {value: 6, label: "№6", name: '№6', color: ''}, {value: 7, label: "№7", value: '7', color: ''}, {value: 8, label: "№8", value: '8', color: ''}]}
-                                        selected={item.stavka}
-                                        array={mainspec}
+                                        selected={mainspec}
                                         setSelected={setMainspec}
                                         index={index}
                                         element={'stavka'}
@@ -1574,8 +1569,7 @@ const Projects = () => {
                                       <></> 
                                       :<MyDropdown5
                                         options={comtegs}
-                                        selected={item.comteg}
-                                        array={mainspec}
+                                        selected={mainspec}
                                         setSelected={setMainspec}
                                         index={index}
                                         element={'comteg'}
@@ -1599,6 +1593,7 @@ const Projects = () => {
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       {/* ✅ */}
+                                      {item.numder}
                                     </CTableDataCell>           
                                     </CTableRow>
                                   ))

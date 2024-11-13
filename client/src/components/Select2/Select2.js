@@ -4,17 +4,13 @@ import {
     CFormInput,
   } from '@coreui/react'
 
-const Select2 = ({menuShow, setMenuShow, selected, index, el, value}) => {
+const Select2 = ({menuShow, setMenuShow, selected, el}) => {
     const [element, setElement] = useState()
     
     useEffect(()=> {
-        setElement(selected[el] ? JSON.parse(selected[el]) : '')
-        console.log("element: ", selected[el] ? JSON.parse(selected[el]) : '')
+        setElement(selected?.[el] !== undefined && selected?.[el] !== '' ? JSON.parse(selected?.[el]) : '')
+        //console.log("element: ", selected?.vidWork !== undefined && selected?.vidWork !== '' ? JSON.parse(selected?.vidWork) : '')
     }, [selected])
-
-    useEffect(()=> {
-        setElement(value)
-    }, [value])
 
     return (
         <div 
