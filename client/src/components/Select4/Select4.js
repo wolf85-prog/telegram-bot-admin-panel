@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import cl from './Select4.module.css'
 import { 
     CFormInput,
   } from '@coreui/react'
 
-const Select4 = ({menuShow, setMenuShow, selected, setSelected}) => {
+const Select4 = ({menuShow, setMenuShow, selected, el, setSelected}) => {
+    const [element, setElement] = useState()
+    
+    useEffect(()=> {
+        setElement(selected[el])
+        console.log("element: ", selected[el])
+    }, [selected])
 
     return (
         <div 
@@ -14,7 +20,7 @@ const Select4 = ({menuShow, setMenuShow, selected, setSelected}) => {
             <CFormInput 
                 type="text" 
                 placeholder=""
-                value={selected && selected.length > 25 ? selected.substr(0, 25) + '...' : selected}
+                value={element && element.length > 25 ? element.substr(0, 25) + '...' : element}
                 onChange={(e)=>setSelected(e.target.value)}
                 style={{height: '30px', fontSize: '16px', background: 'transparent', border: 'none', boxShadow: 'none', textAlign: 'center'}}
             />

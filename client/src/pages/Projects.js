@@ -166,7 +166,6 @@ const Projects = () => {
   const [sortedCities, setSortedCities] = useState([])
 
   const [mainspec, setMainspec] = useState([])
-  const [mainspec2, setMainspec2] = useState([])
   const [dateProject, setDateProject] = useState([])
   const [timeProject, setTimeProject] = useState([])
   const [commentMain, setCommentMain] = useState([])
@@ -348,11 +347,8 @@ const Projects = () => {
         arr4.push(item.specId)
 
         arr5.push(item.date?.split('T')[0])
-        //console.log("arr5: ", arr5)
         arr6.push(item.date?.split('T')[1])
       })
-
-      //console.log("arr5: ", arr5)
       
       setVidProject(arr)
       setSpec(arr1)
@@ -392,24 +388,6 @@ const Projects = () => {
       setMainspec(
         [...arr, resAdd1, resAdd2, resAdd3, resAdd4]
       );
-      //console.log("mainspec: ", [...arr, resAdd1, resAdd2, resAdd3, resAdd4])
-
-      // setVidProject([...arr, 
-      //   {name: '', color: ''}, 
-      //   {name: '', color: ''}, 
-      //   {name: '', color: ''}, 
-      //   {name: '', color: ''}
-      // ]) 
-
-      // setDateProject([startDate, startDate, startDate, startDate])
-      // setTimeProject([startTime, startTime, startTime, startTime])
-
-      // setStavka([...stavka, 
-      //   "№1", 
-      //   "№1", 
-      //   "№1",
-      //   "№1",
-      // ])
     }
 
 
@@ -530,30 +508,31 @@ const Projects = () => {
     console.log("resSave: ", resSave)
 
     console.log("mainSpec: ", mainspec)
-    console.log("dateProject: ", dateProject)
+    //console.log("dateProject: ", dateProject)
     let arr = []
     let arr2 = []
+
     mainspec.map(async(item, index)=> {
       //setTimeout(async()=> {
         await editMainspec(
           {
-            date: dateProject[index] ? dateProject[index] + 'T' + timeProject[index] : null,
-            vidWork: vidProject[index].name,
-            specId: specialistName[index],
-            specialization: spec[index].name,
-            stavka: stavka[index].name,
-            comteg: comteg[index].name,
-            comment: commentMain[index],
+            // date: dateProject[index] ? dateProject[index] + 'T' + timeProject[index] : null,
+            // vidWork: vidProject[index].name,
+            // specId: specialistName[index],
+            // specialization: spec[index].name,
+            // stavka: stavka[index].name,
+            // comteg: comteg[index].name,
+            // comment: commentMain[index],
+            date: item.date,
+            vidWork: item.vidWork,
+            specId: item.specId,
+            specialization: item.specialization,
+            stavka: item.stavka,
+            comteg: item.comteg,
+            comment: item.comment,
             number: index+1,
           }, item.id
         )
-
-        // arr.push(dateProject[index])
-        // arr2.push(timeProject[index])
-
-
-        // setDateProject(arr)
-        // setTimeProject(arr2)
       //}, 500 * ++index)
     })
 
@@ -710,50 +689,15 @@ const Projects = () => {
         specialization: '', 
         comteg: '',
         comment: '',
-        stavka: '',
+        stavka: {label: "№1", name: "№1"},
         taxi: '',
         merch: '',
         projectId: id,
-        //number: parseInt(eventkey.split(' ')[2])+1,
+        number: parseInt(eventkey.split(' ')[2])+1,
       })
       console.log("arrayCopy: ", arrayCopy)
       setMainspec(arrayCopy)
 
-      //setVidProject([])
-      let arr1 = [...vidProject]
-      let index1 = parseInt(eventkey.split(' ')[2])+1
-      arr1[index1] = ""
-      setVidProject(arr1)
-
-      //setSpec([])
-      let arr11 = [...spec]
-      let index11 = parseInt(eventkey.split(' ')[2])+1
-      arr11[index11] = ""
-      setSpec(arr11)
-
-      let arr = [...stavka]
-      let index = parseInt(eventkey.split(' ')[2])+1
-      arr[index] = {value: 1, label: "№1", name: '№1', color: ''}
-      setStavka(arr)
-
-      //setComteg([])
-      let arr111 = [...comteg]
-      let index111 = parseInt(eventkey.split(' ')[2])+1
-      arr111[index111] = ""
-      setComteg(arr111)
-
-      //setSpecialistName([])
-      let arr1111 = [...specialistName]
-      let index1111 = parseInt(eventkey.split(' ')[2])+1
-      arr1111[index1111] = ""
-      setSpecialistName(arr1111)
-
-      let arr2 = [...dateProject]
-      let arr3 = [...timeProject]
-      arr2[index] = startDate
-      arr3[index] = startTime
-      setDateProject(arr2)
-      setTimeProject(arr3)
     } else
 
     //дублировать
@@ -1567,6 +1511,7 @@ const Projects = () => {
                                         selected={item.vidWork}
                                         array={mainspec}
                                         setSelected={setMainspec}
+                                        setValue={setMainspec}
                                         index={index}
                                         element={'vidWork'}
                                         placeholder='—'
@@ -1578,10 +1523,11 @@ const Projects = () => {
                                       <></> 
                                       :<MyDropdown6
                                         options={workersData}
-                                        selected={specialistName[index]}
-                                        array={specialistName}
-                                        setSelected={setSpecialistName}
+                                        selected={item.specId}
+                                        array={mainspec}
+                                        setSelected={setMainspec}
                                         index={index}
+                                        element={'specId'}
                                         placeholder=''
                                         style={{width: '370px'}}
                                       />
@@ -1604,18 +1550,18 @@ const Projects = () => {
                                     }
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                    {/* {item.hr ?
+                                    {item.hr ?
                                       <></> 
                                       :<MyDropdown5
                                         options={[{value: 1, label: "№1", name: '№1', color: ''}, {value: 2, label: "№2", name: '№2', color: ''}, {value: 3, label: "№3", name: '№3', color: ''}, {value: 4, label: "№4", name: '№4', color: ''}, {value: 5, label: "№5", name: '№5', color: ''}, {value: 6, label: "№6", name: '№6', color: ''}, {value: 7, label: "№7", value: '7', color: ''}, {value: 8, label: "№8", value: '8', color: ''}]}
-                                        selected={stavka[index]}
-                                        array={stavka}
-                                        setSelected={setStavka} 
+                                        selected={item.stavka}
+                                        array={mainspec}
+                                        setSelected={setMainspec}
                                         index={index}
+                                        element={'stavka'}
                                         style={{width: '130px'}}
-                                        // onChange={addCity}
                                       />
-                                    } */}
+                                    }
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       {/* 🟩 */}
@@ -1624,17 +1570,18 @@ const Projects = () => {
                                       {/* 🟩 */}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                    {/* {item.hr ?
+                                    {item.hr ?
                                       <></> 
                                       :<MyDropdown5
                                         options={comtegs}
-                                        selected={comteg[index]}
-                                        setSelected={setComteg}
-                                        array={comteg}
+                                        selected={item.comteg}
+                                        array={mainspec}
+                                        setSelected={setMainspec}
                                         index={index}
+                                        element={'comteg'}
                                         style={{width: '300px'}}
                                       />
-                                    } */}
+                                    }
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
                                       {item.hr ?
