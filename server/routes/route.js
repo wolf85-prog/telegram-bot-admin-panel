@@ -51,7 +51,7 @@ const { getPlatforms, getPlatformCount, editPlatform, getPlatformId, addPlatform
 
 const { getMainSpecProject, getMainSpecId, editMainspec, deleteMainspec, addMainspec, getMainspecCountAll } = require('../controllers/mainspecController')
 
-const { getCrmID } = require('../controllers/crmIDController')
+const { addCrmID, getCrmID } = require('../controllers/crmIDController')
 
 //const upload = require( "../utils/upload.js")
 //const upload = multer({dest:"uploads"});
@@ -232,6 +232,7 @@ route.get("/mainspec/delete/:id", deleteMainspec);
 route.post("/mainspec/add", addMainspec);
 route.get("/mainspec/count/get", getMainspecCountAll);
 
+route.get("/crmid/add", addCrmID);
 route.get("/crmid/get", getCrmID);
 
 module.exports = route
