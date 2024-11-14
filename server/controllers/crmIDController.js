@@ -23,10 +23,10 @@ class crmIDController {
 
             const crm = await sequelize.query("SELECT nextval('crm4_id')");
 
-            const res = crm[0][0].nextval
+            const resid = crm[0][0].nextval
             
 
-            return res.status(200).json(res);
+            return res.status(200).json(resid);
         } catch (error) {
             return res.status(500).json(error.message);
         }
