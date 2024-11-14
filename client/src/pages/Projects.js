@@ -796,6 +796,31 @@ const Projects = () => {
     setCommentMain(arr)
   }
 
+
+  const handleChange=(e)=> {
+    const {name, checked} = e.target
+
+    if (name ==='allselect') {
+      const checkedvalue = mainspec.map((user)=>{ return {...user, isChecked: checked}})
+      console.log(checkedvalue)
+      setMainspec(checkedvalue)
+    } else {
+      const checkedvalue = mainspec.map((user)=>
+      user.id === name ? {...user, isChecked: checked} : user)
+      console.log(checkedvalue)
+      setMainspec(checkedvalue)
+    }
+  }
+
+  const handleAllDelete =()=> {
+    const checkedinputvalue=[]
+    for(let i=0; i<mainspec.length; i++) {
+      if (mainspec[i].isChecked === true) {
+        checkedinputvalue.push(mainspec[i].id)
+      }
+    }
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -1371,10 +1396,11 @@ const Projects = () => {
                               <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1592px', borderRadius: '5px' }}>
                                 <CTableHead className="text-center" color="light">
                                   <CTableRow>
-                                    <CTableHeaderCell className="text-center" style={{width: '61px'}}>
+                                    <CTableHeaderCell className="text-center" style={{width: '56px'}}>
                                       <CFormCheck
-                                        checked={table.getIsAllRowsSelected()}
-                                        onChange={table.getToggleAllRowsSelectedHandler()}
+                                        name="allselect"
+                                        checked={!mainspec.some((user)=>user?.isChecked !== true)}
+                                        onChange={handleChange}
                                         style={{backgroundColor: '#181924', border: '1px solid #121212'}}
                                       />
                                     </CTableHeaderCell> 
@@ -1408,8 +1434,15 @@ const Projects = () => {
                                           <Dropdown.Item eventKey={`4 ${item.id} ${index}`}>Удалить</Dropdown.Item>
                                           </Dropdown.Menu>
                                         </Dropdown>
-                                      </div>                                     
-                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} />
+                                      </div>  
+
+                                      <CFormCheck 
+                                        name={item.id}
+                                        checked={item?.isChecked || false}
+                                        onChange={handleChange}
+                                        style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} 
+                                      />
+                                      
                                       {item.hr ? '' : <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span>}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
@@ -1555,8 +1588,6 @@ const Projects = () => {
                                   <CTableRow>
                                     <CTableHeaderCell className="text-center" style={{width: '61px'}}>
                                       <CFormCheck
-                                        checked={table.getIsAllRowsSelected()}
-                                        onChange={table.getToggleAllRowsSelectedHandler()}
                                         style={{backgroundColor: '#181924', border: '1px solid #121212'}}
                                       />
                                     </CTableHeaderCell> 
@@ -1586,8 +1617,13 @@ const Projects = () => {
                                           <Dropdown.Item>Удалить</Dropdown.Item>
                                           </Dropdown.Menu>
                                         </Dropdown>
-                                      </div>                                     
-                                      <CFormCheck style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} />
+                                      </div>
+
+                                      <CFormCheck 
+                                        style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} 
+                                        
+                                      />
+                                      
                                       <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
