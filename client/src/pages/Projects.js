@@ -341,7 +341,8 @@ const Projects = () => {
           comteg: JSON.stringify(obj3),
           comment: item.comment,
           stavka: JSON.stringify(obj2),   
-          numder: item.number,     
+          numder: item.number, 
+          hr: item.hr,    
         }
 
         arr.push(newObj)
@@ -813,22 +814,20 @@ const Projects = () => {
 
 
   const changeDateProject=(e, index)=> {
-    console.log("change Date: ", index)
+    console.log("change Date: ", index, e.target.value+'T'+'00:00')
     let arr = []
-    arr = [...dateProject]
-    console.log("arr: ", arr)
-    arr[index] = e.target.value
-    //console.log("dateProject: ", dateProject)
-    setDateProject(arr)
+    arr = [...mainspec]
+    // console.log("arr: ", arr)
+    arr[index].date = e.target.value+'T' + arr[index].date.split('T')[1]
+    setMainspec(arr)
   }
 
   const changeTimeProject=(e, index)=> {
-    console.log(e.target.value, index)
+    //console.log(e.target.value, index)
     let arr = []
-    arr = [...timeProject]
-    arr[index] = e.target.value
-    //console.log("timeProject: ", timeProject)
-    setTimeProject(arr)
+    arr = [...mainspec]
+    arr[index].date = arr[index].date.split('T')[0] + 'T'+ e.target.value
+    setMainspec(arr)
   }
 
   const changeCommentMain=(e, index)=> {
@@ -1469,7 +1468,7 @@ const Projects = () => {
                                                             placeholder="" 
                                                             disableUnderline
                                                             aria-label="sm input example"
-                                                            style={{backgroundColor: 'transparent', height: '14px', textAlign: 'center', border: 'none', width: '100px'}} 
+                                                            style={{backgroundColor: 'transparent', height: '14px', textAlign: 'center', border: 'none', borderRadius: '5px', width: '100px'}} 
                                                           />}
                                         </InputMask>
                                         <InputMask 
@@ -1481,7 +1480,7 @@ const Projects = () => {
                                                             placeholder="" 
                                                             disableUnderline
                                                             aria-label="sm input example"
-                                                            style={{backgroundColor: 'transparent', height: '14px', border: 'none', width: '50px', padding: '5px 0px'}} 
+                                                            style={{backgroundColor: 'transparent', height: '14px', border: 'none', borderRadius: '5px', width: '50px', padding: '5px 0px'}} 
                                                           />}
                                         </InputMask>
                                       </div>
