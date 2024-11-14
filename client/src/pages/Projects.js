@@ -333,6 +333,7 @@ const Projects = () => {
         }
 
         const newObj = {
+          id: item.id,
           date: item.date,
           specId: item.specId,
           vidWork: JSON.stringify(obj),
@@ -349,28 +350,20 @@ const Projects = () => {
       console.log("new mainarr: ", arr)
 
       setMainspec(arr)
-      
-      // setVidProject(arr)
-      // setSpec(arr1)
-      // setStavka(arr2)
-      // setComteg(arr3)
-      // setSpecialistName(arr4)
-      // setDateProject(arr5)
-      // setTimeProject(arr6)
 
     } else {
       //новый состав специалистов
       const data = {
-        comment: null,
-        comteg: null,
         date: startDate+'T'+startTime,
-        merch: null,
-        projectId: id,
+        vidWork: null,
         specId: null,
         specialization: null,
         stavka: JSON.stringify({label: '№1', name: '№1'}),
+        comment: null,
+        comteg: null,
         taxi: null,
-        vidWork: null,
+        merch: null,
+        projectId: id,    
       }
 
       const startDate = new Date(resProj.dateStart.split('T')[0]).toLocaleString().split(',')[0]
@@ -385,7 +378,7 @@ const Projects = () => {
 
       let arr = []
       setMainspec(
-        [...arr, data, data, data, data]
+        [...arr, resAdd1, resAdd2, resAdd3, resAdd4]
       );
     }
 
@@ -515,19 +508,12 @@ const Projects = () => {
       //setTimeout(async()=> {
         await editMainspec(
           {
-            // date: dateProject[index] ? dateProject[index] + 'T' + timeProject[index] : null,
-            // vidWork: vidProject[index].name,
-            // specId: specialistName[index],
-            // specialization: spec[index].name,
-            // stavka: stavka[index].name,
-            // comteg: comteg[index].name,
-            // comment: commentMain[index],
             date: item.date,
-            vidWork: item.vidWork?.name,
+            vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
             specId: item.specId,
-            specialization: item.specialization,
-            stavka: item.stavka,
-            comteg: item.comteg,
+            specialization: item.specialization ? JSON.parse(item.specialization).name : '',
+            stavka: item.stavka ? JSON.parse(item.stavka).name : '',
+            comteg: item.comteg ? JSON.parse(item.comteg).name : '',
             comment: item.comment,
             number: index+1,
           }, item.id

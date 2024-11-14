@@ -9,7 +9,7 @@ const Select4 = ({menuShow, setMenuShow, selected, el, setSelected}) => {
     
     useEffect(()=> {
         setElement(selected[el])
-        console.log("element: ", selected[el])
+        console.log("element4: ", selected[el])
     }, [selected])
 
     return (
