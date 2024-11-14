@@ -341,7 +341,8 @@ const Projects = () => {
           comteg: JSON.stringify(obj3),
           comment: item.comment,
           stavka: JSON.stringify(obj2),   
-          numder: item.number,     
+          numder: item.number, 
+          hr: item.hr,    
         }
 
         arr.push(newObj)
@@ -688,6 +689,7 @@ const Projects = () => {
     //дублировать
     if (eventkey.split(' ')[0] === '2' || eventkey==='2') {
       const resBubl = await getMainSpecId(eventkey.split(' ')[1])
+
       console.log("resBubl: ", resBubl)
       //добавить строку в основной состав
 		  const resAdd = await addMainspec({
@@ -708,66 +710,22 @@ const Projects = () => {
       
       arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
         id: resAdd.id,
-        date: resBubl.date,
-        specId: resBubl.specId,
-        vidWork: resBubl.vidWork,
-        specialization: resBubl.specialization,
-        stavka: resBubl.stavka,
-        taxi: resBubl.taxi,
-        merch: resBubl.merch,
-        comment: resBubl.comment,
-        comteg: resBubl.comteg,
+        date: resAdd.date,
+        specId: resAdd.specId,
+        vidWork: JSON.stringify({name: resAdd.vidWork, color: ''}),
+        specialization: resAdd.specialization,
+        stavka: JSON.stringify({name: resAdd.stavka, color: ''}),
+        taxi: resAdd.number,
+        merch: resAdd.merch,
+        comment: resAdd.comment,
+        comteg: JSON.stringify({name: resAdd.comteg, color: ''}),
+        hr: resAdd.hr,
       })
       console.log("arrayCopy: ", arrayCopy)
+
       setMainspec(arrayCopy)
 
-      let arr = []
-      let arr1 = []
-      let arr2 = []
-      let arr3 = []
-      let arr4 = []
-      let arr5 = []
-      let arr6 = []
 
-      arrayCopy.map((item)=>{
-        const obj = {
-          name: item.vidWork,
-          color: ''
-        }
-        arr.push(obj)
-
-        const obj1 = {
-          name: item.specialization,
-          color: ''
-        }
-        arr1.push(obj1)
-
-        const obj2 = {
-          name: item.stavka,
-          color: ''
-        }
-        arr2.push(obj2)
-
-        const obj3 = {
-          name: item.comteg,
-          color: ''
-        }
-        arr3.push(obj3)
-
-        arr4.push(item.specId)
-
-        arr5.push(item.date?.split('T')[0])
-        arr6.push(item.date?.split('T')[1])
-      })
-
-      
-      setVidProject(arr)
-      setSpec(arr1)
-      setStavka(arr2)
-      setComteg(arr3)
-      setSpecialistName(arr4)
-      setDateProject(arr5)
-      setTimeProject(arr6)
     } else
 
     //добавить разделитель
@@ -813,22 +771,20 @@ const Projects = () => {
 
 
   const changeDateProject=(e, index)=> {
-    console.log("change Date: ", index)
+    console.log("change Date: ", index, e.target.value+'T'+'00:00')
     let arr = []
-    arr = [...dateProject]
-    console.log("arr: ", arr)
-    arr[index] = e.target.value
-    //console.log("dateProject: ", dateProject)
-    setDateProject(arr)
+    arr = [...mainspec]
+    // console.log("arr: ", arr)
+    arr[index].date = e.target.value+'T' + arr[index].date.split('T')[1]
+    setMainspec(arr)
   }
 
   const changeTimeProject=(e, index)=> {
-    console.log(e.target.value, index)
+    //console.log(e.target.value, index)
     let arr = []
-    arr = [...timeProject]
-    arr[index] = e.target.value
-    //console.log("timeProject: ", timeProject)
-    setTimeProject(arr)
+    arr = [...mainspec]
+    arr[index].date = arr[index].date.split('T')[0] + 'T'+ e.target.value
+    setMainspec(arr)
   }
 
   const changeCommentMain=(e, index)=> {
@@ -1469,7 +1425,7 @@ const Projects = () => {
                                                             placeholder="" 
                                                             disableUnderline
                                                             aria-label="sm input example"
-                                                            style={{backgroundColor: 'transparent', height: '14px', textAlign: 'center', border: 'none', width: '100px'}} 
+                                                            style={{backgroundColor: 'transparent', height: '14px', textAlign: 'center', border: 'none', borderRadius: '5px', width: '100px'}} 
                                                           />}
                                         </InputMask>
                                         <InputMask 
@@ -1481,7 +1437,7 @@ const Projects = () => {
                                                             placeholder="" 
                                                             disableUnderline
                                                             aria-label="sm input example"
-                                                            style={{backgroundColor: 'transparent', height: '14px', border: 'none', width: '50px', padding: '5px 0px'}} 
+                                                            style={{backgroundColor: 'transparent', height: '14px', border: 'none', borderRadius: '5px', width: '50px', padding: '5px 0px'}} 
                                                           />}
                                         </InputMask>
                                       </div>
