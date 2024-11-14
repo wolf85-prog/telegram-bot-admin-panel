@@ -21,9 +21,7 @@ class crmIDController {
 
         try {     
 
-            const crm = await sequelize.query('SELECT nextval("crm4_id")', {
-                type: QueryTypes.SELECT,
-            });
+            const crm = await sequelize.query("SELECT nextval('crm4_id')");
             
 
             return res.status(200).json(crm);
