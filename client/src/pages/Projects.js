@@ -689,6 +689,7 @@ const Projects = () => {
     //дублировать
     if (eventkey.split(' ')[0] === '2' || eventkey==='2') {
       const resBubl = await getMainSpecId(eventkey.split(' ')[1])
+
       console.log("resBubl: ", resBubl)
       //добавить строку в основной состав
 		  const resAdd = await addMainspec({
@@ -709,66 +710,22 @@ const Projects = () => {
       
       arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
         id: resAdd.id,
-        date: resBubl.date,
-        specId: resBubl.specId,
-        vidWork: resBubl.vidWork,
-        specialization: resBubl.specialization,
-        stavka: resBubl.stavka,
-        taxi: resBubl.taxi,
-        merch: resBubl.merch,
-        comment: resBubl.comment,
-        comteg: resBubl.comteg,
+        date: resAdd.date,
+        specId: resAdd.specId,
+        vidWork: JSON.stringify({name: resAdd.vidWork, color: ''}),
+        specialization: resAdd.specialization,
+        stavka: JSON.stringify({name: resAdd.stavka, color: ''}),
+        taxi: resAdd.number,
+        merch: resAdd.merch,
+        comment: resAdd.comment,
+        comteg: JSON.stringify({name: resAdd.comteg, color: ''}),
+        hr: resAdd.hr,
       })
       console.log("arrayCopy: ", arrayCopy)
+
       setMainspec(arrayCopy)
 
-      let arr = []
-      let arr1 = []
-      let arr2 = []
-      let arr3 = []
-      let arr4 = []
-      let arr5 = []
-      let arr6 = []
 
-      arrayCopy.map((item)=>{
-        const obj = {
-          name: item.vidWork,
-          color: ''
-        }
-        arr.push(obj)
-
-        const obj1 = {
-          name: item.specialization,
-          color: ''
-        }
-        arr1.push(obj1)
-
-        const obj2 = {
-          name: item.stavka,
-          color: ''
-        }
-        arr2.push(obj2)
-
-        const obj3 = {
-          name: item.comteg,
-          color: ''
-        }
-        arr3.push(obj3)
-
-        arr4.push(item.specId)
-
-        arr5.push(item.date?.split('T')[0])
-        arr6.push(item.date?.split('T')[1])
-      })
-
-      
-      setVidProject(arr)
-      setSpec(arr1)
-      setStavka(arr2)
-      setComteg(arr3)
-      setSpecialistName(arr4)
-      setDateProject(arr5)
-      setTimeProject(arr6)
     } else
 
     //добавить разделитель
