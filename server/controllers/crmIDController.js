@@ -8,11 +8,11 @@ class crmIDController {
 
         try {     
             
-            await sequelize.query('CREATE SEQUENCE IF NOT EXISTS crm3_id INCREMENT BY 5000');
+            const crm = await sequelize.query('CREATE SEQUENCE IF NOT EXISTS crm3_id INCREMENT BY 5000');
 
-            const crm = await sequelize.query('SELECT nextval("crm3_id")', {
-                type: QueryTypes.SELECT,
-            });
+            // const crm = await sequelize.query('SELECT nextval("crm3_id")', {
+            //     type: QueryTypes.SELECT,
+            // });
             
 
             return res.status(200).json(crm);
