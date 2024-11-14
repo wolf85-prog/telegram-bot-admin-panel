@@ -1,16 +1,19 @@
 const ApiError = require('../error/ApiError')
 const { sequelize } = require('sequelize')
+const { QueryTypes } = require('sequelize');
 
 class crmIDController {
 
     //get plans
     async getCrmID(req, res) {
 
-        try {           
+        try {     
             
-            const crm = sequelize.query("SELECT nextval('crm_id')", { 
-                type: collection.Sequelize.QueryTypes.SELECT 
-               });
+            
+            const crm = await sequelize.query('SELECT nextval(`crm_id`)', {
+                type: QueryTypes.SELECT,
+            });
+            
 
             return res.status(200).json(crm);
         } catch (error) {
