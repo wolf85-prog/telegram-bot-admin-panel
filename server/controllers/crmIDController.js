@@ -8,7 +8,7 @@ class crmIDController {
 
         try {     
             
-            const crm = await sequelize.query('CREATE SEQUENCE IF NOT EXISTS crm3_id START 6000 INCREMENT BY 1');
+            const crm = await sequelize.query('CREATE SEQUENCE IF NOT EXISTS crm4_id START 6000 INCREMENT BY 1');
 
             // const crm = await sequelize.query('SELECT nextval("crm3_id")', {
             //     type: QueryTypes.SELECT,
