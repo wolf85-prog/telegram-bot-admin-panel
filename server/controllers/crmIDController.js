@@ -1,4 +1,5 @@
 const ApiError = require('../error/ApiError')
+const { sequelize } = require('sequelize')
 
 class crmIDController {
 
