@@ -9,8 +9,13 @@ const Select4 = ({menuShow, setMenuShow, selected, el, setSelected}) => {
     
     useEffect(()=> {
         setElement(selected[el])
-        //console.log("element4: ", selected[el])
+        //console.log("element4: ", selected)
     }, [selected])
+
+    const changeFio =(e)=> {
+        console.log(selected[el])
+        setSelected(e.target.value)
+    }
 
     return (
         <div 
@@ -21,7 +26,7 @@ const Select4 = ({menuShow, setMenuShow, selected, el, setSelected}) => {
                 type="text" 
                 placeholder=""
                 value={element && element.length > 25 ? element.substr(0, 25) + '...' : element}
-                onChange={(e)=>setSelected(e.target.value)}
+                onChange={(e)=>changeFio(e)}
                 style={{height: '30px', fontSize: '16px', background: 'transparent', border: 'none', boxShadow: 'none', textAlign: 'center'}}
             />
         </div>

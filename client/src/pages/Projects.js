@@ -1402,7 +1402,7 @@ const Projects = () => {
                                     <CTableHeaderCell className="text-center" style={{width: '56px'}}>
                                       <CFormCheck
                                         name="allselect"
-                                        checked={!mainspec.some((user)=>user?.isChecked !== true)}
+                                        checked={ !mainspec.some((user)=>user?.isChecked !== true) }
                                         onChange={handleChange}
                                         style={{backgroundColor: '#181924', border: '1px solid #121212'}}
                                       />
