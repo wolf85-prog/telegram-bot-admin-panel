@@ -295,19 +295,22 @@ const Projects = () => {
 
 
 // Открыть проект  
-  const openProject = async(month, item, number, id, name, 
-    end, status, timeStart, specifika) => {
-
+  const openProject = async(month, item, number, id, name, end, status, timeStart, specifika) => {
     console.log("item: ", month+1, item, number, specifika, end)
 
     const resProj = await getProjectId(id)
-    console.log("resProj: ", resProj)
-    console.log("startDate: ", resProj.dateStart)
+
+    setId(id)
+    setProjectName(name)
+      
+    var d = new Date(resProj.dateStart); // создаём объект даты
+    setStartDate(d.setHours(d.getHours() - 3))
+    setEndDate(resProj.dateEnd)
+    setStartTime(timeStart) 
 
     let resMain
     resMain = await getMainSpecProject(id)
     console.log("resMain: ", resMain)
-    
 
     if (resMain.length > 0) {
       let arr = []
@@ -355,11 +358,13 @@ const Projects = () => {
 
     } else {
       //новый состав специалистов
-      const startDate = new Date(resProj.dateStart.split('T')[0]).toLocaleString().split(',')[0]
-      const startTime = resProj.dateStart.split('T')[1].slice(0,5)
+      const startD = new Date(resProj.dateStart.split('T')[0]).getDay()+'.'+new Date(resProj.dateStart.split('T')[0]).getMonth()+'.'+new Date(resProj.dateStart.split('T')[0]).getFullYear()
+      const startT = resProj.dateStart.split('T')[1]
+
+      console.log("startD: ", startD, startT)
 
       const data = {
-        date: startDate+'T'+startTime,
+        date: startD+'T'+resProj.dateStart.split('T')[1].slice(0,5),
         vidWork: null,
         specId: null,
         specialization: null,
@@ -371,10 +376,10 @@ const Projects = () => {
         projectId: id,    
       }
 
-      const resAdd1 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 1, stavka: "№1"})
-      const resAdd2 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 2, stavka: "№1"})
-      const resAdd3 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 3, stavka: "№1"})
-      const resAdd4 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 4, stavka: "№1"})
+      const resAdd1 = await addMainspec({date: startD+'T'+startT, projectId: id, number: 1, stavka: "№1"})
+      const resAdd2 = await addMainspec({date: startD+'T'+startT, projectId: id, number: 2, stavka: "№1"})
+      const resAdd3 = await addMainspec({date: startD+'T'+startT, projectId: id, number: 3, stavka: "№1"})
+      const resAdd4 = await addMainspec({date: startD+'T'+startT, projectId: id, number: 4, stavka: "№1"})
 
       let arr = []
       setMainspec(
@@ -387,13 +392,7 @@ const Projects = () => {
     setStatusProject({name: status, color: statusData.find((stat)=> stat.label === status)?.color})
     setSpecifikaProject({name: specifika, color: specifikaData.find((stat)=> stat.label === specifika)?.color})
 
-    setId(id)
-    setProjectName(name)
-    setStartDate(resProj.dateStart)
-    setEndDate(resProj.dateEnd)
-    setStartTime(timeStart) 
-    console.log("timeStart: ", timeStart)
-    //setEndTime(end?.split('T')[1]?.slice(0, 5))
+    
 
     const compTitle = companysAll.find(item=> item.id.toString() === resProj.companyId)
     setCompanyName(compTitle?.title)
@@ -713,7 +712,7 @@ const Projects = () => {
         date: resAdd.date,
         specId: resAdd.specId,
         vidWork: JSON.stringify({name: resAdd.vidWork, color: ''}),
-        specialization: resAdd.specialization,
+        specialization: JSON.stringify({name: resAdd.specialization, color: ''}),
         stavka: JSON.stringify({name: resAdd.stavka, color: ''}),
         taxi: resAdd.number,
         merch: resAdd.merch,
