@@ -109,7 +109,7 @@ const Projects = () => {
 
   const [id, setId] = useState('');
   const [projectName, setProjectName] = useState('');
-  const [startDate, setStartDate] = useState(new Date())
+  const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
   const [startTime, setStartTime] = useState('00:00')
   const [endTime, setEndTime] = useState('')
@@ -302,6 +302,7 @@ const Projects = () => {
 
     const resProj = await getProjectId(id)
     console.log("resProj: ", resProj)
+    console.log("startDate: ", resProj.dateStart)
 
     let resMain
     resMain = await getMainSpecProject(id)
@@ -388,9 +389,10 @@ const Projects = () => {
 
     setId(id)
     setProjectName(name)
-    setStartDate(resProj ? resProj.dateStart : new Date().toISOString())
+    setStartDate(resProj.dateStart)
     setEndDate(resProj.dateEnd)
     setStartTime(timeStart) 
+    console.log("timeStart: ", timeStart)
     //setEndTime(end?.split('T')[1]?.slice(0, 5))
 
     const compTitle = companysAll.find(item=> item.id.toString() === resProj.companyId)
