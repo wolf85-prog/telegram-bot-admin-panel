@@ -354,12 +354,15 @@ const Projects = () => {
 
     } else {
       //новый состав специалистов
+      const startDate = new Date(resProj.dateStart.split('T')[0]).toLocaleString().split(',')[0]
+      const startTime = resProj.dateStart.split('T')[1].slice(0,5)
+
       const data = {
         date: startDate+'T'+startTime,
         vidWork: null,
         specId: null,
         specialization: null,
-        stavka: JSON.stringify({label: '№1', name: '№1'}),
+        stavka: JSON.stringify({label: '№1', name: '№1', color: ''}),
         comment: null,
         comteg: null,
         taxi: null,
@@ -367,19 +370,14 @@ const Projects = () => {
         projectId: id,    
       }
 
-      const startDate = new Date(resProj.dateStart.split('T')[0]).toLocaleString().split(',')[0]
-      const startTime = resProj.dateStart.split('T')[1].slice(0,5)
-
       const resAdd1 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 1, stavka: "№1"})
       const resAdd2 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 2, stavka: "№1"})
       const resAdd3 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 3, stavka: "№1"})
       const resAdd4 = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: 4, stavka: "№1"})
-      
-      console.log("resAdd: ", resAdd1)  
 
       let arr = []
       setMainspec(
-        [...arr, resAdd1, resAdd2, resAdd3, resAdd4]
+        [...arr, data, data, data, data]
       );
     }
 
