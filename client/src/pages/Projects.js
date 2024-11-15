@@ -687,21 +687,25 @@ const Projects = () => {
 
     //дублировать
     if (eventkey.split(' ')[0] === '2' || eventkey==='2') {
-      const resBubl = await getMainSpecId(eventkey.split(' ')[1])
+      //const resBubl = await getMainSpecId(eventkey.split(' ')[1])
+      //console.log("resBubl: ", resBubl, eventkey.split(' ')[1])
 
-      console.log("resBubl: ", resBubl)
+      const dublSpec = mainspec.find((item)=>item.id === parseInt(eventkey.split(' ')[1]))
+      console.log("dublSpec: ", dublSpec)
+
+
       //добавить строку в основной состав
 		  const resAdd = await addMainspec({
-        projectId: resBubl.projectId, 
-        date: resBubl.date,
-        specId: resBubl.specId,
-        vidWork: resBubl.vidWork,
-        specialization: resBubl.specialization,
-        stavka: resBubl.stavka,
-        taxi: resBubl.taxi,
-        merch: resBubl.merch,
-        comment: resBubl.comment,
-        comteg: resBubl.comteg,
+        projectId: dublSpec.projectId, 
+        date: dublSpec.date,
+        specId: dublSpec.specId,
+        vidWork: JSON.parse(dublSpec.vidWork).name,
+        specialization: JSON.parse(dublSpec.specialization).name,
+        stavka: JSON.parse(dublSpec.stavka).name,
+        comteg: JSON.parse(dublSpec.comteg).name,
+        taxi: dublSpec.taxi,
+        merch: dublSpec.merch,
+        comment: dublSpec.comment,
         number: parseInt(eventkey.split(' ')[2])+1,
       })
 
