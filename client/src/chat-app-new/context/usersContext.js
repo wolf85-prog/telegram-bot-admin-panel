@@ -499,7 +499,7 @@ useEffect(() => {
 				  avatar: user.profile,
 				  //from: user.from,
 				  promoId: user.promoId,
-				  block: user.block,
+				  blockW: user.blockW,
 				  deleted: user.deleted,
 				}
 		
@@ -535,7 +535,7 @@ useEffect(() => {
 					avatar: user.profile,
 					//from: user.from,
 					promoId: user.promoId,
-					block: user.block,
+					blockW: user.blockW,
 					deleted: user.deleted,
 				}
 		
@@ -658,7 +658,7 @@ useEffect(() => {
 						avatar: worker?.avatar, //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
 						conversationId: conversationId ? conversationId : 0,
 						block: userbot?.block ? userbot?.block : '',
-						blockw: worker?.block,
+						blockW: worker?.blockW,
 						unread: 0, 
 						pinned: false,
 						typing: false,

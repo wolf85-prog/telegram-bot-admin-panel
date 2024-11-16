@@ -35,7 +35,7 @@ const baseURL = process.env.REACT_APP_API_URL
 const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
 
 const Chat = () => {
-	const { userWorkers, setUserAsUnread, addNewMessage2, conversations } = useUsersContext();
+	const { userWorkers, setUserAsUnread, addNewMessage2, conversations, workersAll } = useUsersContext();
 	const { personW } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
@@ -601,6 +601,7 @@ https://t.me/ULEY_Office_Bot
 
 				<Header
 					user={personW}
+					worker={workersAll.filter((item)=> item.chatId === user.chatId)}
 					openProfileSidebar={() => openSidebar(setShowProfileSidebar)}
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 					closeSidebar={() => closeSidebar(setShowProfileSidebar)}
