@@ -51,3 +51,12 @@ export const getSpecialistId = async (id) =>{
         console.log("error while calling getSpecialistId api", error.message);
     }
 }
+
+export const blockedSpecialist = async (id) =>{
+    try {
+       let response = await $host.get(`api/specialist/block/${id}`);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling blockedSpecialist api", error.message);
+    }
+}

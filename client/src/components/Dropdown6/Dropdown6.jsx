@@ -24,10 +24,10 @@ const Dropdown6 = ({options, selected, setSelected, index, element, inputValue, 
     }, [selected])
 
     useEffect(()=> {
-      console.log("selected6: ", text)
+      //console.log("selected6: ", text)
       const arr = options.filter(item=> item.label?.toLowerCase().includes(text?.toLowerCase()))
       setFilterOptions(text === '' ? options : arr)
-      console.log(arr)
+      //console.log(arr)
     }, [text])
 
     const selectOption = (e) => {

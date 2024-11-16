@@ -16,7 +16,7 @@ const Select4 = ({menuShow, setMenuShow, selected, el, setInputValue, setSelecte
         //console.log(selected[el])
         //setSelected(e.target.value)
 
-        console.log(e.target.value)
+        //console.log(e.target.value)
         setInputValue(e.target.value)
     }
 

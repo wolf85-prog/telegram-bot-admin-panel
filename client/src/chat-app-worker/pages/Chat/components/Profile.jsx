@@ -21,6 +21,7 @@ import {
 import { $host } from './../../../../http/index';
 import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3';
 import ishodCall from './../../../../assets/sound/ishod.mp3';
+import { blockedSpecialist } from "src/http/specAPI";
 
 const Profile = ({ user, closeSidebar }) => {
 
@@ -151,10 +152,11 @@ const Profile = ({ user, closeSidebar }) => {
 		fetch()
 	}, [user])
 
-	const clickSetBlocked = () => {
+	const clickSetBlocked = async() => {
 		setBlockWorker(!blockWorker)
 		//заблокировать/разблокировать пользователю рассылки
-		blockedWorkers(user.chatId)
+		const res = await blockedSpecialist(user.chatId)
+		console.log("res block: ", res)
 	}
 	
 	const onImageError = (e) => {

@@ -41,7 +41,7 @@ const { newPretendent, getPretendent, getPretendentId, getAllPretendent, getAllP
 
 const { newPlan, getPlan, addTimer } = require('../controllers/planController')
 
-const { getSpecialist, getSpecCount, editSpecialist, getSpecialistId, addSpecialist, deleteSpecialist, getSpecCountAll, getSpecialistPhone, getSpecialistChatId } = require('../controllers/specialistController')
+const { getSpecialist, getSpecCount, editSpecialist, getSpecialistId, addSpecialist, deleteSpecialist, getSpecCountAll, getSpecialistPhone, getSpecialistChatId, blockSpecialist } = require('../controllers/specialistController')
 
 const { getManagers, getManagerCount, editManager, getManagerId, addManager, deleteManager, getManagerCountAll } = require('../controllers/managersController')
 
@@ -193,6 +193,7 @@ route.post("/specialist/add", addSpecialist);
 route.get("/specialist/count/get", getSpecCountAll);
 route.get("/specialist/phone/:id", getSpecialistPhone);
 route.get("/specialist/chat/:id", getSpecialistChatId);
+route.get('/specialist/block/:id', blockSpecialist)
 
 
 //----------------- Менеджеры ---------------------------------

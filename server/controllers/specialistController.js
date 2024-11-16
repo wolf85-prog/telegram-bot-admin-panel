@@ -229,6 +229,25 @@ class SpecialistController {
         }
     }
 
+    async blockSpecialist(req, res) { 
+        const {id} = req.params      
+        try {    
+            let exist=await Specialist.findOne( {where: {chatId: id}} )
+            
+            if(!exist){
+                res.status(500).json({msg: "user not exist"});
+                return;
+            }
+
+            const newUser = await Specialist.update(
+                { block: exist.dataValues.blockW !==null ? !exist.dataValues.blockW : true},
+                { where: {chatId: id} })
+            return res.status(200).json(newUser);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
 }
 
 module.exports = new SpecialistController()
