@@ -240,7 +240,7 @@ class SpecialistController {
             }
 
             const newUser = await Specialist.update(
-                { block: exist.dataValues.blockW !==null ? !exist.dataValues.blockW : true},
+                { blockW: exist.dataValues.blockW !==null ? !exist.dataValues.blockW : true},
                 { where: {chatId: id} })
             return res.status(200).json(newUser);
         } catch (error) {

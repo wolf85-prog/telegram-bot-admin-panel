@@ -21,7 +21,7 @@ import {
 import { $host } from './../../../../http/index';
 import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3';
 import ishodCall from './../../../../assets/sound/ishod.mp3';
-import { blockedSpecialist } from "src/http/specAPI";
+import { getSpecialistId, blockedSpecialist, getSpecialistChatId } from "src/http/specAPI";
 
 const Profile = ({ user, closeSidebar }) => {
 
@@ -144,9 +144,9 @@ const Profile = ({ user, closeSidebar }) => {
 				setCrmId('—')
 			}	
 			
-			const blocked = await getWorker(user.chatId)
-			//console.log("blocked: ", blocked)
-			setBlockWorker(blocked?.block ? blocked?.block : false)
+			const blocked = await getSpecialistChatId(user.chatId)
+			console.log("blocked: ", blocked, user.chatId)
+			setBlockWorker(blocked?.blockW ? blocked?.blockW : false)
 		}
 		
 		fetch()

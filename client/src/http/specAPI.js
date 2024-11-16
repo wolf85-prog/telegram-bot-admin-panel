@@ -52,6 +52,15 @@ export const getSpecialistId = async (id) =>{
     }
 }
 
+export const getSpecialistChatId = async (id) =>{
+    try {
+       let response = await $host.get(`api/specialist/chat/${id}`);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getSpecialistChatId api", error.message);
+    }
+}
+
 export const blockedSpecialist = async (id) =>{
     try {
        let response = await $host.get(`api/specialist/block/${id}`);
