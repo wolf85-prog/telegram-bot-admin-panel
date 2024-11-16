@@ -1,5 +1,5 @@
-const { Distribution, Distributionw }= require('../models/models')
-const {Message, Conversation, Worker} = require('../models/workers')
+const { Distribution, Distributionw, Specialist }= require('../models/models')
+const {Message, Conversation} = require('../models/workers')
 const ApiError = require('../error/ApiError')
 
 const { Op } = require('sequelize')
@@ -398,13 +398,13 @@ class DistributionController {
                     }) 
 
                     //найти специалиста
-                    const blockedWork = await Worker.findOne({
+                    const blockedWork = await Specialist.findOne({
                         where: {
                             chatId: user
                         },
                     })
 
-                    if (blockedWork.dataValues.block !== null && blockedWork.dataValues.block) {
+                    if (blockedWork.dataValues.blockW !== null && blockedWork.dataValues.blockW) {
                         console.log("Блок: ", user)
                     } else {
                         //найти беседу
@@ -492,7 +492,7 @@ class DistributionController {
                             sendTextToTelegram = await $host.get(url_send_msg)
                                     .catch(async(err) => {
                                         if (err.response.status === 403 && err.response.data.description === "Forbidden: bot was blocked by the user") {
-                                            await Worker.update({ 
+                                            await Specialist.update({ 
                                                 deleted: true  
                                             },
                                             {
@@ -532,7 +532,7 @@ class DistributionController {
                             sendPhotoToTelegram = await $host.get(url_send_photo)
                                 .catch(async(err) => {
                                     if (err.response.status === 403 && err.response.data.description === "Forbidden: bot was blocked by the user") {
-                                        await Worker.update({ 
+                                        await Specialist.update({ 
                                             deleted: true  
                                         },
                                         {
