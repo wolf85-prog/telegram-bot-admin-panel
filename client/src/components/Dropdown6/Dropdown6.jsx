@@ -5,14 +5,11 @@ import {
   CFormInput,
 } from '@coreui/react'
 
-const Dropdown6 = ({options, selected, setSelected, index, element, placeholder, style}) => {
+const Dropdown6 = ({options, selected, setSelected, index, element, inputValue, setInputValue, placeholder, style}) => {
     const [menuShow, setMenuShow] = useState(false)
-    // const [selected, setSelected] = useState(options[0])
     const [text, setText] = useState('');
     const [filterOptions, setFilterOptions] = useState([]);
     const [arrSelect, setArrSelect] = useState({})
-
-    //console.log(options)
 
     useEffect(()=> {
       //setSelected(selected ? selected : placeholder)
@@ -23,8 +20,15 @@ const Dropdown6 = ({options, selected, setSelected, index, element, placeholder,
     useEffect(()=> {
       //console.log("selected6: ", selected)
       const arr = options.filter(item=> item.label?.toLowerCase().includes(selected[index]?.specId?.toLowerCase()))
-      setFilterOptions(selected?.name === '' ? options : arr)
+      //setFilterOptions(selected?.name === '' ? options : arr)
     }, [selected])
+
+    useEffect(()=> {
+      console.log("selected6: ", text)
+      const arr = options.filter(item=> item.label?.toLowerCase().includes(text?.toLowerCase()))
+      setFilterOptions(text === '' ? options : arr)
+      console.log(arr)
+    }, [text])
 
     const selectOption = (e) => {
         let arr = JSON.parse(JSON.stringify(selected));
@@ -72,6 +76,8 @@ const Dropdown6 = ({options, selected, setSelected, index, element, placeholder,
                 index={index}
                 el={element}
                 setSelected={setSelected}
+                inputValue={text}
+                setInputValue={setText}
                 style={{border: 'none!important', color: ``}}
             />
             <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`} style={style}>

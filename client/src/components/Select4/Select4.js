@@ -4,7 +4,7 @@ import {
     CFormInput,
   } from '@coreui/react'
 
-const Select4 = ({menuShow, setMenuShow, selected, el, setSelected}) => {
+const Select4 = ({menuShow, setMenuShow, selected, el, setInputValue, setSelected}) => {
     const [element, setElement] = useState()
     
     useEffect(()=> {
@@ -13,8 +13,11 @@ const Select4 = ({menuShow, setMenuShow, selected, el, setSelected}) => {
     }, [selected])
 
     const changeFio =(e)=> {
-        console.log(selected[el])
-        setSelected(e.target.value)
+        //console.log(selected[el])
+        //setSelected(e.target.value)
+
+        console.log(e.target.value)
+        setInputValue(e.target.value)
     }
 
     return (
@@ -25,7 +28,7 @@ const Select4 = ({menuShow, setMenuShow, selected, el, setSelected}) => {
             <CFormInput 
                 type="text" 
                 placeholder=""
-                value={element && element.length > 25 ? element.substr(0, 25) + '...' : element}
+                value={element && element.length > 23 ? element.substr(0, 23) + '...' : element}
                 onChange={(e)=>changeFio(e)}
                 style={{height: '30px', fontSize: '16px', background: 'transparent', border: 'none', boxShadow: 'none', textAlign: 'center'}}
             />

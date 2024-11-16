@@ -170,6 +170,8 @@ const Projects = () => {
   const [timeProject, setTimeProject] = useState([])
   const [commentMain, setCommentMain] = useState([])
 
+  const [inputValue, setInputValue] = useState('');
+
   const table = useReactTable({
     defaultColumn: {
       size: 200, //starting column size
@@ -1502,6 +1504,8 @@ const Projects = () => {
                                         setSelected={setMainspec}
                                         index={index}
                                         element={'specId'}
+                                        // inputValue={inputValue}
+                                        // setInputValue={setInputValue}
                                         placeholder=''
                                         style={{width: '370px'}}
                                       />
