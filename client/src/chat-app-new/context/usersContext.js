@@ -794,7 +794,7 @@ useEffect(() => {
 	useEffect(() => {
     	const fetchData = async () => {
 			let response = await getManager();
-      		console.log("managers context: ", response)
+      		//console.log("managers context: ", response)
 
 			let arr = []
 			response.map(async (user, i) => {
@@ -859,7 +859,7 @@ useEffect(() => {
 	useEffect(() => {
     	const fetchData = async () => {
 			let company = await getCompany();
-      		console.log("companys context: ", company)
+      		//console.log("companys context: ", company)
 
 			  let arrManagers = []
 			  let managersDB = await getManager()
@@ -960,7 +960,7 @@ useEffect(() => {
 useEffect(() => {
 	const fetchData = async () => {
 		let platforms = await getPlatforms();
-		  console.log("platforms context: ", platforms)
+		  //console.log("platforms context: ", platforms)
 	
 		  let arrCompanys = []
 	
@@ -991,7 +991,7 @@ useEffect(() => {
 					}
 					return 0;
 				})
-				console.log("sortedUser: ", sortedUser)
+				//console.log("sortedUser: ", sortedUser)
 	
 				setPlatformsAll(sortedUser)
 						

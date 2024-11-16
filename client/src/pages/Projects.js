@@ -762,8 +762,15 @@ const Projects = () => {
     //удалить
     if (eventkey.split(' ')[0] === '4') {
       console.log("index: ", eventkey.split(' ')[1])
-      setMainspec([...mainspec].filter(item=>item.id !== parseInt(eventkey.split(' ')[1])))
-      deleteMainspec(eventkey.split(' ')[1])
+      const checkedItem = mainspec.find((item)=>item.isChecked === true)
+      //console.log("checkedItem: ", checkedItem)
+
+      if (checkedItem) {
+        handleAllDelete()
+      } else {
+        setMainspec([...mainspec].filter(item=>item.id !== parseInt(eventkey.split(' ')[1])))
+        deleteMainspec(eventkey.split(' ')[1])
+      }
     }
 	}
 
@@ -804,6 +811,7 @@ const Projects = () => {
 
   const handleChange=(e)=> {
     const {name, checked} = e.target
+    console.log("checked: ", name, checked)
 
     if (name ==='allselect') {
       const checkedvalue = mainspec.map((user)=>{ return {...user, isChecked: checked}})
@@ -811,7 +819,7 @@ const Projects = () => {
       setMainspec(checkedvalue)
     } else {
       const checkedvalue = mainspec.map((user)=>
-      user.id === name ? {...user, isChecked: checked} : user)
+      user.id === parseInt(name) ? {...user, isChecked: checked} : user)
       console.log(checkedvalue)
       setMainspec(checkedvalue)
     }
@@ -819,11 +827,25 @@ const Projects = () => {
 
   const handleAllDelete =()=> {
     const checkedinputvalue=[]
-    for(let i=0; i<mainspec.length; i++) {
+    for(let i=0; i<mainspec.length; i++) 
+    {
       if (mainspec[i].isChecked === true) {
-        checkedinputvalue.push(mainspec[i].id)
+        checkedinputvalue.push(parseInt(mainspec[i].id))
       }
     }
+
+    const copyArray = JSON.parse(JSON.stringify(mainspec));
+    
+    checkedinputvalue.map(async(item)=> {
+      //await deleteMainspec(item)
+      console.log("item: ", item)
+    })
+
+    const result = copyArray.filter(item => !checkedinputvalue.some(el => item.id === el));
+
+    console.log("copyArray: ", result)
+
+    setMainspec(result)
   }
 
   return (
