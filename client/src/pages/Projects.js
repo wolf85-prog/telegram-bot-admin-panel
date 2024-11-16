@@ -348,7 +348,8 @@ const Projects = () => {
           comment: item.comment,
           stavka: JSON.stringify(obj2),   
           numder: item.number, 
-          hr: item.hr,    
+          hr: item.hr,  
+          count: item.count,  
         }
 
         arr.push(newObj)
@@ -1524,7 +1525,7 @@ const Projects = () => {
                                       />
                                       
                                       {/* {item.hr ? '' : <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span>} */}
-                                      {item.hr ? '' : <span style={{position: 'absolute', left: '45px', top: '8px'}}>{index+1}</span>}
+                                      {item.hr ? '' : <span style={{position: 'absolute', left: '45px', top: '8px'}}>{item.count}</span>}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       {item.hr ?

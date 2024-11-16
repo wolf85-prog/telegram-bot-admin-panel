@@ -56,6 +56,7 @@ class MainspecController {
                 comment,
                 hr,
                 number,
+                count,
             } = req.body
 
             const newUser = await MainSpec.update(
@@ -69,6 +70,7 @@ class MainspecController {
                     comment,
                     hr,
                     number,
+                    count,
                 },
                 { where: {id: id} })
             return res.status(200).json(newUser);
@@ -99,7 +101,9 @@ class MainspecController {
                 taxi,
                 merch,
                 comment,
-                comteg,} = req.body
+                comteg,
+                count,
+            } = req.body
 
             const newUser = await MainSpec.create({
                 projectId, 
@@ -114,6 +118,7 @@ class MainspecController {
                 merch,
                 comment,
                 comteg,
+                count,
             })
             return res.status(200).json(newUser);
         } catch (error) {
