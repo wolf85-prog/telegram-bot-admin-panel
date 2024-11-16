@@ -255,7 +255,8 @@ const MainSpec = sequelize.define('mainspec', {
     taxi: {type: DataTypes.STRING},
     projectId: {type: DataTypes.STRING},
     hr: {type: DataTypes.BOOLEAN},
-    number: {type: DataTypes.INTEGER}
+    number: {type: DataTypes.INTEGER},
+    count: {type: DataTypes.INTEGER},
 })
 
 
