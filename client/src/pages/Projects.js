@@ -881,7 +881,7 @@ const Projects = () => {
 
     console.log("arrayCopy: ", arrayCopy)
 
-    setMainspec([...mainspec], arr)
+    setMainspec(arrayCopy)
   }
 
   const handleAllDelete =()=> {
@@ -1584,8 +1584,6 @@ const Projects = () => {
                                         setSelected={setMainspec}
                                         index={index}
                                         element={'specId'}
-                                        // inputValue={inputValue}
-                                        // setInputValue={setInputValue}
                                         placeholder=''
                                         style={{width: '370px'}}
                                       />

@@ -5,11 +5,10 @@ import {
   CFormInput,
 } from '@coreui/react'
 
-const Dropdown6 = ({options, selected, setSelected, index, element, inputValue, setInputValue, placeholder, style}) => {
+const Dropdown6 = ({options, selected, setSelected, index, element, placeholder, style}) => {
     const [menuShow, setMenuShow] = useState(false)
     const [text, setText] = useState('');
     const [filterOptions, setFilterOptions] = useState([]);
-    const [arrSelect, setArrSelect] = useState({})
 
     useEffect(()=> {
       //setSelected(selected ? selected : placeholder)
@@ -19,7 +18,7 @@ const Dropdown6 = ({options, selected, setSelected, index, element, inputValue, 
 
     useEffect(()=> {
       //console.log("selected6: ", selected)
-      const arr = options.filter(item=> item.label?.toLowerCase().includes(selected[index]?.specId?.toLowerCase()))
+      //const arr = options.filter(item=> item.label?.toLowerCase().includes(selected[index]?.specId?.toLowerCase()))
       //setFilterOptions(selected?.name === '' ? options : arr)
     }, [selected])
 
@@ -36,8 +35,6 @@ const Dropdown6 = ({options, selected, setSelected, index, element, inputValue, 
 			  arr[index] = { ...userObject, [element]: e.target.innerText};
 
         setSelected(arr)
-        //setSelected(e.target.innerText)
-        setArrSelect(arr[index])
 
         setMenuShow(!menuShow)
     }
