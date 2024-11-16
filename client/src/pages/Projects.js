@@ -516,6 +516,7 @@ const Projects = () => {
             stavka: item.stavka ? JSON.parse(item.stavka).name : '',
             comteg: item.comteg ? JSON.parse(item.comteg).name : '',
             comment: item.comment,
+            projectId: item.projectId,
             number: index+1,
           }, item.id
         )
@@ -840,6 +841,7 @@ const Projects = () => {
 
 
     const arrayCopy = JSON.parse(JSON.stringify(mainspec));
+    let arr = []
 
     checkedinputvalue.map(async(item)=> {
 
@@ -871,14 +873,15 @@ const Projects = () => {
           merch: resAdd.merch,
           comment: resAdd.comment,
           comteg: JSON.stringify({name: resAdd.comteg, color: ''}),
+          projectId: resAdd.projectId, 
           hr: resAdd.hr,
         }
         arrayCopy.push(newObj)
     })
 
-    //console.log("arrayCopy: ", arrayCopy)
+    console.log("arrayCopy: ", arrayCopy)
 
-    setMainspec(arrayCopy)
+    setMainspec([...mainspec], arr)
   }
 
   const handleAllDelete =()=> {

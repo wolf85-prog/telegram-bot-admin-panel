@@ -102,15 +102,19 @@ class ProjectController {
             managerId, companyId, chatId, spec, geo, comment, equipment, index, number} = req.body
 
         try {
-            const generate = await sequelize.query('SELECT generate_series(1000,10000,1)', {
-                // тип запроса - выборка
-                type: QueryTypes.SELECT,
-              })
+            // const generate = await sequelize.query('SELECT generate_series(1000,10000,1)', {
+            //     // тип запроса - выборка
+            //     type: QueryTypes.SELECT,
+            //   })
 
-              const generateId = generate[index].generate_series
+            //   const generateId = generate[index].generate_series
+
+            const crm = await sequelize.query("SELECT nextval('crm_id')");
+
+            const resid = crm[0][0].nextval
             
               const obj = {                
-                crmID: generateId.toString(),
+                crmID: resid.toString(),
                 name,
                 status,
                 specifika,
