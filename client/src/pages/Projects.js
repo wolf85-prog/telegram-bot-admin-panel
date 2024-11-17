@@ -247,8 +247,9 @@ const Projects = () => {
     //console.log("workersAll: ", workersAll)
     workersAll.map((item, index)=> {
       const obj = {
+        id: item.id,
         label: item.userfamily + ' ' + item.username,
-        value: index
+        value: index,
       }
       arrWorkers.push(obj)
     })

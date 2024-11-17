@@ -30,6 +30,7 @@ const Dropdown6 = ({options, selected, setSelected, index, element, placeholder,
     }, [text])
 
     const selectOption = (e) => {
+        console.log(e.target.value)
         let arr = JSON.parse(JSON.stringify(selected));
         const userObject = arr[index];
 			  arr[index] = { ...userObject, [element]: e.target.innerText};
@@ -40,7 +41,7 @@ const Dropdown6 = ({options, selected, setSelected, index, element, placeholder,
     }
 
     const dropdownList = filterOptions.map((option, i) =>
-        <li key={i} onClick={(e)=>selectOption(e)}>{option.label}</li>
+        <li key={i} value={option.id} onClick={(e)=>selectOption(e)}>{option.label}</li>
     )
 
     const wrapperRef = useRef(null);
