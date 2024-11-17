@@ -108,6 +108,7 @@ const Projects = () => {
   const [projects, setProjects] = useState([]);
 
   const [id, setId] = useState('');
+  const [crmID, setCrmID] = useState('');
   const [projectName, setProjectName] = useState('');
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
@@ -301,8 +302,10 @@ const Projects = () => {
     console.log("item: ", month+1, item, number, specifika, end)
 
     const resProj = await getProjectId(id)
+    console.log("resProj: ", resProj)
 
     setId(id)
+    setCrmID(resProj.crmID)
     setProjectName(name)
       
     var d = new Date(resProj.dateStart); // создаём объект даты
@@ -312,7 +315,7 @@ const Projects = () => {
 
     let resMain
     resMain = await getMainSpecProject(id)
-    //console.log("resMain: ", resMain)
+    console.log("resMain: ", resMain)
 
     if (resMain.length > 0) {
       let arr = []
@@ -934,7 +937,7 @@ const Projects = () => {
                                     <div style={{position: 'relative', height: '494px', display: 'flex', flexDirection: 'row', marginTop: '35px'}}>
                                               <div style={{position: 'absolute', top: '-34px', left: '0px'}}>
                                                 <div className="text-field">
-                                                  <input disabled={true} className="text-field__input" type="text" name="projectId" id="projectId" value={id} style={{width: '120px', marginRight: '25px'}}/>
+                                                  <input disabled={true} className="text-field__input" type="text" name="projectId" id="projectId" value={crmID} style={{width: '120px', marginRight: '25px'}}/>
                                                 </div>
                                               </div>
                                               
