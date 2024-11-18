@@ -34,6 +34,14 @@ export const deleteMainspec = async (id) =>{
     }
 }
 
+export const deleteMainspecProject = async (id) =>{
+    try {
+        await $host.get(`api/mainspec/project/delete/${id}`); 
+    } catch (error) {
+        console.log("error while calling deleteMainspecProject api",error.message);
+    }
+}
+
 export const getMainSpecId = async (id) =>{
     try {
        let response = await $host.get(`api/mainspec/${id}`);

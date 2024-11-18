@@ -86,7 +86,7 @@ import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
-import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId } from '../http/mainspecAPI'
+import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
 
 const Projects = () => {
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
@@ -463,6 +463,10 @@ const Projects = () => {
     console.log("managerId: ", managersAll.find(item=> item.fio === managerName)?.id)
     console.log("managerId2: ", managersAll.find(item=> item.fio === managerName)?.id)
     console.log("companyId: ", companysAll.find(item=> item.title === companyName)?.id)
+
+    //удаляем старые записи из Основного состава
+    const resAllDel = await deleteMainspecProject(id)
+    console.log("resAllDel: ", resAllDel)
 
     const month = String(new Date(startDate).getMonth()+1).padStart(2, "0");
     const day = String(new Date(startDate).getDate()).padStart(2, "0");

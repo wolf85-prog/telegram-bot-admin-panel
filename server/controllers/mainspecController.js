@@ -141,6 +141,18 @@ class MainspecController {
         }
     }
 
+    async deleteMainspecProject(req, res) {      
+        const {id} = req.params 
+        try {              
+            await MainSpec.destroy({
+                where: { projectId: String(id) },
+            })
+            return res.status(200).json("Данные успешно удалены!");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
     async getMainspecCountAll(req, res) {
         try {
             const count = await MainSpec.count();
