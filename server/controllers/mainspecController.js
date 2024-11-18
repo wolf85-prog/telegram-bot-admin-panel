@@ -92,7 +92,10 @@ class MainspecController {
 
     async addMainspec(req, res) {       
         try {    
-            const {projectId, hr, number, 
+            const {
+                projectId, 
+                hr, 
+                number, 
                 date,
                 specId,
                 vidWork,

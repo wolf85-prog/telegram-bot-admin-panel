@@ -382,11 +382,11 @@ const Projects = () => {
         projectId: id,    
       }
 
-      console.log([...arr, {...data, id: parseInt(crmID)+1}, {...data, id: parseInt(crmID)+2}, {...data, id: parseInt(crmID)+3}, {...data, id: parseInt(crmID)+4}])
+      //console.log([...arr, {...data, id: parseInt(resProj.crmID)+1}, {...data, id: parseInt(resProj.crmID)+2}, {...data, id: parseInt(resProj.crmID)+3}, {...data, id: parseInt(resProj.crmID)+4}])
 
       let arr = []
       setMainspec(
-        [...arr, {...data, id: parseInt(crmID)+1}, {...data, id: parseInt(crmID)+2}, {...data, id: parseInt(crmID)+3}, {...data, id: parseInt(crmID)+4}]
+        [...arr, {...data, id: parseInt(resProj.crmID)+1}, {...data, id: parseInt(resProj.crmID)+2}, {...data, id: parseInt(resProj.crmID)+3}, {...data, id: parseInt(resProj.crmID)+4}]
       );
     }
 
