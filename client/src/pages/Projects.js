@@ -693,21 +693,6 @@ const Projects = () => {
         const dublSpec = mainspec.find((item)=>item.id === parseInt(eventkey.split(' ')[1]))
         console.log("dublSpec: ", dublSpec)
 
-        //добавить строку в основной состав
-        // const resAdd = await addMainspec({
-        //   projectId: dublSpec.projectId, 
-        //   date: dublSpec.date,
-        //   specId: dublSpec.specId,
-        //   vidWork: JSON.parse(dublSpec.vidWork).name,
-        //   specialization: JSON.parse(dublSpec.specialization).name,
-        //   stavka: JSON.parse(dublSpec.stavka).name,
-        //   comteg: JSON.parse(dublSpec.comteg).name,
-        //   taxi: dublSpec.taxi,
-        //   merch: dublSpec.merch,
-        //   comment: dublSpec.comment,
-        //   number: parseInt(eventkey.split(' ')[2])+1,
-        // })
-
         const arrayCopy = JSON.parse(JSON.stringify(mainspec));
         
         arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
@@ -722,6 +707,7 @@ const Projects = () => {
           comment: dublSpec.comment,
           comteg: dublSpec.comteg, //JSON.stringify({name: resAdd.comteg, color: ''}),
           hr: dublSpec.hr,
+          projectId: dublSpec.projectId,
         })
         console.log("arrayCopy: ", arrayCopy)
 
