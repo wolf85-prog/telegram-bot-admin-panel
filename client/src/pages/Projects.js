@@ -40,12 +40,6 @@ import {
 } from '@tanstack/react-table'
 import Autocomplete from '@mui/material/Autocomplete';
 
-// import dayjs from 'dayjs';
-// import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { DesktopDateTimePicker } from '@mui/x-date-pickers/DesktopDateTimePicker';
-
 import DatePicker from "react-datepicker";
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
@@ -169,9 +163,7 @@ const Projects = () => {
   const [mainspec, setMainspec] = useState([])
   const [dateProject, setDateProject] = useState([])
   const [timeProject, setTimeProject] = useState([])
-  const [commentMain, setCommentMain] = useState([])
-
-  const [inputValue, setInputValue] = useState('');
+  //const [commentMain, setCommentMain] = useState([])
 
   const table = useReactTable({
     defaultColumn: {
@@ -310,9 +302,14 @@ const Projects = () => {
     setProjectName(name)
       
     var d = new Date(resProj.dateStart); // создаём объект даты
+    var d2 = resProj.dateEnd ? new Date(resProj.dateEnd) : ''; // создаём объект даты
     setStartDate(d.setHours(d.getHours() - 3))
-    setEndDate(resProj.dateEnd)
+    setEndDate(d2 !== '' ? d2.setHours(d2.getHours() - 3) : '')
+
     setStartTime(timeStart) 
+
+    //console.log("resProj.dateEnd: ", resProj.dateEnd)
+    setEndTime(resProj.dateEnd?.split('T')[1].slice(0, 5)) 
 
     let resMain
     resMain = await getMainSpecProject(id)
@@ -363,8 +360,8 @@ const Projects = () => {
 
     } else {
       //новый состав специалистов
-      const startD = new Date(resProj.dateStart.split('T')[0]).getDay()+'.'+new Date(resProj.dateStart.split('T')[0]).getMonth()+'.'+new Date(resProj.dateStart.split('T')[0]).getFullYear()
-      const startT = resProj.dateStart.split('T')[1]
+      const startD = new Date(resProj.dateStart?.split('T')[0]).toLocaleString().split(',')[0]
+      const startT = resProj.dateStart?.split('T')[1].slice(0, 5)
 
       console.log("startD: ", startD, startT)
 
@@ -392,12 +389,8 @@ const Projects = () => {
       );
     }
 
-
-
     setStatusProject({name: status, color: statusData.find((stat)=> stat.label === status)?.color})
     setSpecifikaProject({name: specifika, color: specifikaData.find((stat)=> stat.label === specifika)?.color})
-
-    
 
     const compTitle = companysAll.find(item=> item.id.toString() === resProj.companyId)
     setCompanyName(compTitle?.title)
@@ -505,10 +498,6 @@ const Projects = () => {
     console.log("resSave: ", resSave)
 
     console.log("mainSpec: ", mainspec)
-    //console.log("dateProject: ", dateProject)
-    let arr = []
-    let arr2 = []
-
     mainspec.map(async(item, index)=> {
       //setTimeout(async()=> {
         await editMainspec(
@@ -811,10 +800,9 @@ const Projects = () => {
   const changeCommentMain=(e, index)=> {
     console.log(e.target.value, index)
     let arr = []
-    arr = [...commentMain]
-    arr[index] = e.target.value
-    console.log("commentMain: ", commentMain)
-    setCommentMain(arr)
+    arr = [...mainspec]
+    arr[index].comment = e.target.value
+    setMainspec(arr)
   }
 
 
@@ -842,7 +830,7 @@ const Projects = () => {
         checkedinputvalue.push(parseInt(mainspec[i].id))
       }
     }
-
+    console.log("checkedinputvalue: ", checkedinputvalue)
 
     const arrayCopy = JSON.parse(JSON.stringify(mainspec));
     let arr = []
@@ -880,12 +868,22 @@ const Projects = () => {
           projectId: resAdd.projectId, 
           hr: resAdd.hr,
         }
-        arrayCopy.push(newObj)
+
+        arr.push(newObj)
+        //arrayCopy.splice(arrayCopy.length(), 0, newObj)
+        //arrayCopy.push(newObj)
     })
 
-    console.log("arrayCopy: ", arrayCopy)
+    console.log("arr: ", arr)
 
-    setMainspec(arrayCopy)
+    const newArray = [...arrayCopy, ...arr]
+    console.log("newArray: ", newArray)
+
+    const checkedvalue = newArray.map((user)=>{ return {...user, isChecked: false}})
+      //console.log(checkedvalue)
+    setMainspec(checkedvalue)
+
+    //setMainspec(arrayCopy)
   }
 
   const handleAllDelete =()=> {
@@ -1645,7 +1643,7 @@ const Projects = () => {
                                       <></>
                                       :<input
                                         name='commentMain'
-                                        value={commentMain[index]}
+                                        value={item.comment}
                                         onChange={(e)=>changeCommentMain(e, index)}
                                         style={{backgroundColor: 'transparent', height: '15px', textAlign: 'center', border: 'none', width: '140px', padding: '5px 0px', color: '#f3f3f3', fontSize: '14px'}} 
                                       ></input>

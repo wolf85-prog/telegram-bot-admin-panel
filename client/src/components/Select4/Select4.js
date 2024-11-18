@@ -8,9 +8,9 @@ const Select4 = ({menuShow, setMenuShow, selected, el, setInputValue, setSelecte
     const [element, setElement] = useState()
     
     useEffect(()=> {
-        console.log("options: ", options)
+        //console.log("options: ", options)
         const fio = options.find((item)=> item.id === parseInt(selected[el]))
-        console.log("fio: ", fio)
+        //console.log("fio: ", fio)
         setElement(fio?.label)
         //console.log("element4: ", selected)
     }, [selected])
@@ -31,7 +31,7 @@ const Select4 = ({menuShow, setMenuShow, selected, el, setInputValue, setSelecte
             <CFormInput 
                 type="text" 
                 placeholder=""
-                value={element && element.length > 23 ? element.substr(0, 25) + '...' : element}
+                value={element && element.length > 25 ? element.substr(0, 25) + '...' : element}
                 onChange={(e)=>changeFio(e)}
                 style={{height: '30px', fontSize: '16px', background: 'transparent', border: 'none', boxShadow: 'none', textAlign: 'center'}}
             />
