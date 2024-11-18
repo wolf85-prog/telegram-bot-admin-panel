@@ -4,11 +4,14 @@ import {
     CFormInput,
   } from '@coreui/react'
 
-const Select4 = ({menuShow, setMenuShow, selected, el, setInputValue, setSelected}) => {
+const Select4 = ({menuShow, setMenuShow, selected, el, setInputValue, setSelected, options}) => {
     const [element, setElement] = useState()
     
     useEffect(()=> {
-        setElement(selected[el])
+        console.log("options: ", options)
+        const fio = options.find((item)=> item.id === parseInt(selected[el]))
+        console.log("fio: ", fio)
+        setElement(fio?.label)
         //console.log("element4: ", selected)
     }, [selected])
 

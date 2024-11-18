@@ -796,7 +796,7 @@ const Projects = () => {
     let arr = []
     arr = [...mainspec]
     // console.log("arr: ", arr)
-    arr[index].date = e.target.value+'T' + arr[index].date.split('T')[1]
+    arr[index].date = e.target.value+'T' + arr[index].date?.split('T')[1]
     setMainspec(arr)
   }
 

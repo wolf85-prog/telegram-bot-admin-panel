@@ -33,7 +33,7 @@ const Dropdown6 = ({options, selected, setSelected, index, element, placeholder,
         console.log(e.target.value)
         let arr = JSON.parse(JSON.stringify(selected));
         const userObject = arr[index];
-			  arr[index] = { ...userObject, [element]: e.target.innerText};
+			  arr[index] = { ...userObject, [element]: e.target.value};
 
         setSelected(arr)
 
@@ -76,6 +76,7 @@ const Dropdown6 = ({options, selected, setSelected, index, element, placeholder,
                 setSelected={setSelected}
                 inputValue={text}
                 setInputValue={setText}
+                options={options}
                 style={{border: 'none!important', color: ``}}
             />
             <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`} style={style}>
