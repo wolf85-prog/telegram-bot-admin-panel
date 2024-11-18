@@ -1110,6 +1110,7 @@ const Projects = () => {
                                                       className="text-field__input" 
                                                       type="text" {...params.inputProps} 
                                                       placeholder=''
+                                                      autoComplete='off'
                                                   />
                                               </div>
                                               )}
