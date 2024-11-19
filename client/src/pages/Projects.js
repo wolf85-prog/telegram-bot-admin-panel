@@ -634,7 +634,7 @@ const Projects = () => {
 		  return (
 			<div
 			  ref={ref}
-			  style={{backgroundColor: '#20272b', left: '5px', borderRadius: '6px', padding: '0 0 0 0', fontSize: '14px', top: '-65px', minWidth:'50px'}}
+			  style={{backgroundColor: '#20272b', left: '5px', borderRadius: '6px', padding: '0 0 0 0', fontSize: '14px', top: '-45px', minWidth:'50px'}}
 			  className={className}
 			  aria-labelledby={labeledBy}
 			>
@@ -1483,7 +1483,13 @@ const Projects = () => {
                                     <CTableDataCell className="text-center" style={{position: 'relative', height: '30px'}}>
                                       <div className="parent-element" style={{position: 'absolute', left: '3px', top: '6px'}}>
                                         <Dropdown onSelect={changeAddSpec}>
-                                          <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
+                                          <Dropdown.Toggle 
+                                            as={CustomToggle} 
+                                            //id="dropdown-custom-components"
+                                            key={item.id}
+                                            id={`dropdown-button-drop-${item.id}`}
+                                            drop={index === mainspec.length-1 ? 'up' : 'down'}
+                                          >											
                                           </Dropdown.Toggle>
                                           <Dropdown.Menu as={CustomMenu}> 
                                           <Dropdown.Item eventKey={`1 ${item.id} ${index}`}>Добавить</Dropdown.Item>
@@ -1642,7 +1648,7 @@ const Projects = () => {
                           <CCardHeader onClick={() => setVisibleB(!visibleB)}>Претенденты</CCardHeader>
                           <CCollapse visible={visibleB}>
                             <CCardBody style={{padding: '12px'}}>
-                            <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1471px', borderRadius: '5px' }}>
+                            <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'auto', width: '1471px', borderRadius: '5px' }}>
                                 <CTableHead className="text-center" color="light">
                                   <CTableRow>
                                     <CTableHeaderCell className="text-center" style={{width: '61px'}}>
