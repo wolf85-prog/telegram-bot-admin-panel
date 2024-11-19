@@ -49,6 +49,7 @@ import {
   getProjectCash,
   getProjectsApi,
   getProjectsNewApi,
+  getProjectsNewApi2,
 } from '../http/adminAPI';
 
 import { uploadFile, delMessage, distribFile } from '../http/chatAPI';
@@ -80,6 +81,7 @@ const DistributionAddW = () => {
   const [contacts, setContacts]= useState([{value: 0, name: "Выбрать...", label: 'Выбрать...',}]);
   const [contacts2, setContacts2]= useState([{value: 0, name: "Выбрать...", label: 'Выбрать...',}]);
   const [projects, setProjects]= useState([]); 
+  const [projects2, setProjects2]= useState([]); 
   const [labelName, setLabelName] = useState({})
   const [proj, setProj] = useState('');
   const [planShow, setPlanShow] = useState(false);
@@ -181,11 +183,14 @@ const DistributionAddW = () => {
     const fetchData = async () => {
 
       let projects = await getProjectsNewApi() //getProjectNewCash();
+      let projects2 = await getProjectsNewApi2() //getProjectNewCash();
       console.log("Загрузка проектов из БД ...")
       console.log("projects planer: ", projects)
+      console.log("projects planer2: ", projects2)
       console.log("clients: ", clients)
 
       setProjects(projects)
+      setProjects2(projects2)
       setLoaderStart(false)  
     }
 
@@ -247,8 +252,8 @@ const DistributionAddW = () => {
       value: '0',
     }]
 
-    if (projects && projects.length > 0) {
-      projects.map((project) => {
+    if (projects2 && projects2.length > 0) {
+      projects2.map((project) => {
         if (project != null) {
           const newObj = {
             label: project.crmID,
@@ -263,7 +268,7 @@ const DistributionAddW = () => {
       setContacts2(arrProjects)
     }
           
-  }, [projects]);
+  }, [projects2]);
 
 //=======================================================
 
