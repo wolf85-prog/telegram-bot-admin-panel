@@ -1417,8 +1417,8 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                         onClick={()=>openProject(month, index, 4, projectId4[index], projectName4[index], projectEnd4[index], projectStatus4[index], projectTime4[index], projectSpecifika4[index])} 
                                         style={{border: `1px solid ${projectColor4[index]}`}}
                                     >
-                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName4[index]}</p>   
-                                        <p className='viewStatus' style={{color: `${projectColor4[index]}`}}>{projectName4[index] && projectName4[index].length > 15 ? projectName4[index].substr(0, 15) + '...' : projectName4[index]}</p>
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName4[index] && projectName4[index].length > 15 ? projectName4[index].substr(0, 15) + '...' : projectName4[index]}</p>   
+                                        <p className='viewStatus' style={{color: `${projectColor4[index]}`}}>{projectStatus4[index]}</p>
 
                                         <p className='time-project' style={{color: `${projectColor4[index]}`}}>{projectTime4[index]}</p>
                                     </div></>
@@ -1477,8 +1477,8 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                         onClick={()=>openProject(month, index, 7, projectId7[index], projectName7[index], projectEnd7[index], projectStatus7[index], projectTime7[index], projectSpecifika7[index])} 
                                         style={{border: `1px solid ${projectColor7[index]}`}}
                                     >
-                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName7[index]}</p>   
-                                        <p className='viewStatus' style={{color: `${projectColor7[index]}`}}>{projectName7[index] && projectName7[index].length > 15 ? projectName7[index].substr(0, 15) + '...' : projectName7[index]}</p>
+                                        <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName7[index] && projectName7[index].length > 15 ? projectName7[index].substr(0, 15) + '...' : projectName7[index]}</p>   
+                                        <p className='viewStatus' style={{color: `${projectColor7[index]}`}}>{projectStatus7[index]}</p>
 
                                         <p className='time-project' style={{color: `${projectColor7[index]}`}}>{projectTime7[index]}</p>
                                     </div></>
