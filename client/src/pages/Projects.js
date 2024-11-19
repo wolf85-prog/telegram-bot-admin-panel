@@ -725,13 +725,13 @@ const Projects = () => {
     //добавить разделитель
     if (eventkey.split(' ')[0] === '3' || eventkey==='3') {
       //добавить строку в основной состав
-		  const resAdd = await addMainspec({projectId: id, hr: true, number: parseInt(eventkey.split(' ')[2])+1})
-      console.log("resAdd: ", resAdd.id)
+		  // const resAdd = await addMainspec({projectId: id, hr: true, number: parseInt(eventkey.split(' ')[2])+1})
+      // console.log("resAdd: ", resAdd.id)
 
       const arrayCopy = JSON.parse(JSON.stringify(mainspec));
       
       arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
-        id: resAdd.id,
+        id: parseInt(eventkey.split(' ')[2]) + arrayCopy.length,
         date: '',
         specId: '', 
         vidWork: '', 
@@ -741,7 +741,7 @@ const Projects = () => {
         stavka: '',
         taxi: '',
         merch: '',
-        projectId: '',
+        projectId: id,
         hr: true,
       })
       console.log("arrayCopy: ", arrayCopy)
