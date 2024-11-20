@@ -58,28 +58,6 @@ const DistributionAdd = () => {
        navigate('/distribution');
   } 
 
-
-  const [selectedCities, setSelectedCities] = useState(null);
-    // const cities = [
-    //     { name: 'New York', code: 'NY' },
-    //     { name: 'Rome', code: 'RM' },
-    //     { name: 'London', code: 'LDN' },
-    //     { name: 'Istanbul', code: 'IST' },
-    //     { name: 'Paris', code: 'PRS' }
-    // ];
-
-  // const options = [
-  //   { name: "Grapes 🍇", code: "grapes" },
-  //   { name: "Mango 🥭", code: "mango" },
-  //   { name: "Strawberry 🍓", code: "strawberry" },
-  //   { name: "Watermelon 🍉", code: "watermelon" },
-  //   { name: "Pear 🍐", code: "pear", disabled: true },
-  //   { name: "Apple 🍎", code: "apple" },
-  //   { name: "Tangerine 🍊", code: "tangerine" },
-  //   { name: "Pineapple 🍍", code: "pineapple" },
-  //   { name: "Peach 🍑", code: "peach" }
-  // ];
-
   useEffect(() => {
     const arrClients = []
       
