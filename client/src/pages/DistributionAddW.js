@@ -182,15 +182,14 @@ const DistributionAddW = () => {
   useEffect(() => {
     const fetchData = async () => {
 
-      let projects = await getProjectsNewApi() //getProjectNewCash();
-      let projects2 = await getProjectsNewApi2() //getProjectNewCash();
+      //let projects = await getProjectsNewApi() //getProjectNewCash();
+      let projects = await getProjectsNewApi2() //getProjectNewCash();
       console.log("Загрузка проектов из БД ...")
       console.log("projects planer: ", projects)
       console.log("projects planer2: ", projects2)
       console.log("clients: ", clients)
 
       setProjects(projects)
-      setProjects2(projects2)
       setLoaderStart(false)  
     }
 
@@ -223,7 +222,7 @@ const DistributionAddW = () => {
     if (projects && projects.length > 0) {
       projects.map((project) => {
         if (project != null) {
-          const d = new Date(project.datestart);
+          const d = new Date(project.dateStart);
           const month = String(d.getMonth()+1).padStart(2, "0");
           const day = String(d.getDate()).padStart(2, "0");
 
@@ -252,8 +251,8 @@ const DistributionAddW = () => {
       value: '0',
     }]
 
-    if (projects2 && projects2.length > 0) {
-      projects2.map((project) => {
+    if (projects && projects.length > 0) {
+      projects.map((project) => {
         if (project != null) {
           const newObj = {
             label: project.crmID,
@@ -268,7 +267,7 @@ const DistributionAddW = () => {
       setContacts2(arrProjects)
     }
           
-  }, [projects2]);
+  }, [projects]);
 
 //=======================================================
 
