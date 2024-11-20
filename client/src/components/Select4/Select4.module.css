@@ -23,4 +23,11 @@
 }
 
 
+.close {
+    position: absolute;
+    right: 12px; 
+    top: -15px;
+    cursor: pointer;
+}
+
 

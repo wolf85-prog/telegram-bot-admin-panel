@@ -70,6 +70,8 @@ const specOnlyData2 = [
 
             {value: 59, label: 'Мероприятие под ключ',},
             {value: 60, label: 'Отдельные технические задачи',},
+            
+            {value: 61, label: 'Менеджер «U.L.E.Y»',},
 
 ];
 

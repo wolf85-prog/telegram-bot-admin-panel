@@ -1,11 +1,14 @@
 import React, {useState, useRef, useEffect} from 'react';
 import cl from './Select4.module.css'
+import Close from "../../assets/images/close.svg"
+
 import { 
     CFormInput,
   } from '@coreui/react'
 
 const Select4 = ({menuShow, setMenuShow, selected, el, setInputValue, setSelected, options}) => {
     const [element, setElement] = useState()
+    const [showClose, setShowClose] = useState(false)
     
     useEffect(()=> {
         //console.log("options: ", options)
@@ -23,6 +26,10 @@ const Select4 = ({menuShow, setMenuShow, selected, el, setInputValue, setSelecte
         setInputValue(e.target.value)
     }
 
+    const clickClear = ()=> {
+        setElement('')
+    }
+
     return (
         <div 
             className={`${cl.select} ${menuShow && cl.selectClicked}`}
@@ -35,6 +42,7 @@ const Select4 = ({menuShow, setMenuShow, selected, el, setInputValue, setSelecte
                 onChange={(e)=>changeFio(e)}
                 style={{height: '30px', fontSize: '16px', background: 'transparent', border: 'none', boxShadow: 'none', textAlign: 'center'}}
             />
+            <div style={{position: 'relative'}}><img src={Close} onClick={clickClear} width={15} alt='' className={cl.close} style={{visibility: showClose ? 'visible' : 'hidden'}}></img></div>
         </div>
     );
 };

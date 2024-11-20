@@ -70,6 +70,10 @@ const DistributionAdd = () => {
     setContacts(arrClients)      
   }, [clients]);
 
+  useEffect(() => {
+    console.log("contacts: ", contacts)  
+  }, [contacts]);
+
   const onChangeText = (e) => {
     setText(e.target.value)
     setCountChar(e.target.value.length)

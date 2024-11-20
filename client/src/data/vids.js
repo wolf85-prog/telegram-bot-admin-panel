@@ -128,6 +128,12 @@ const vids = [
       value: '20',
       color: '#1E90FF'
     },
+    {
+      label: 'Офис',
+      name: 'Офис',
+      value: '21',
+      color: 'red'
+    },
     
 ]
 
