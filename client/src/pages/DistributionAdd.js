@@ -15,7 +15,11 @@ import {
   CFormCheck,
 } from '@coreui/react'
 
-import { MultiSelect } from "react-multi-select-component";
+import { MultiSelect } from 'primereact/multiselect';
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+
+//import { MultiSelect } from "react-multi-select-component";
+
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { $host } from './../http/index'
 import { useNavigate } from 'react-router-dom';
@@ -35,7 +39,7 @@ const DistributionAdd = () => {
   const { addNewMessage, setDistributions } = useUsersContext();
   const [contacts, setContacts]= useState([]);
 
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState(null);
   const [text, setText] = useState('');
   const [countChar, setCountChar] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -54,25 +58,44 @@ const DistributionAdd = () => {
        navigate('/distribution');
   } 
 
+
+  const [selectedCities, setSelectedCities] = useState(null);
+    // const cities = [
+    //     { name: 'New York', code: 'NY' },
+    //     { name: 'Rome', code: 'RM' },
+    //     { name: 'London', code: 'LDN' },
+    //     { name: 'Istanbul', code: 'IST' },
+    //     { name: 'Paris', code: 'PRS' }
+    // ];
+
+  // const options = [
+  //   { name: "Grapes 🍇", code: "grapes" },
+  //   { name: "Mango 🥭", code: "mango" },
+  //   { name: "Strawberry 🍓", code: "strawberry" },
+  //   { name: "Watermelon 🍉", code: "watermelon" },
+  //   { name: "Pear 🍐", code: "pear", disabled: true },
+  //   { name: "Apple 🍎", code: "apple" },
+  //   { name: "Tangerine 🍊", code: "tangerine" },
+  //   { name: "Pineapple 🍍", code: "pineapple" },
+  //   { name: "Peach 🍑", code: "peach" }
+  // ];
+
   useEffect(() => {
     const arrClients = []
-    //console.log("users: ", clients)
-    
+      
     clients.map((client) => {
       const newObj = {
-        label: client.name, 
-        value: client.chatId,
+        name: client.name, 
+        code: client.chatId,
       }
       arrClients.push(newObj)
     })
 
     console.log("users: ", arrClients)
+    
     setContacts(arrClients)      
   }, [clients]);
 
-  useEffect(() => {
-    console.log("contacts: ", contacts)  
-  }, [contacts]);
 
   const onChangeText = (e) => {
     setText(e.target.value)
@@ -146,17 +169,18 @@ const DistributionAdd = () => {
     
     selected.map(async (user, index) => {
       setTimeout(async()=> { 
-        console.log("Пользователю ID: " + user.value + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
+        console.log("Пользователю ID: " + user.code + " сообщение " + text + " отправлено! Кнопка " + textButton + " отправлена!")
 
         //по-умолчанию пока сообщение не отправлено
         arrUsers.push({
-          label: user.label,
-          value: user.value,
+          label: user.name,
+          value: user.code,
           status: 500,
           mess: null,
         }) 
 
-        let client = clients.filter((client) => client.chatId === user.value.toString())[0];
+        let client = clients.find((client) => client.chatId === user.code);
+        console.log("client: ", client)
         
         //Передаем данные боту
         const keyboard = JSON.stringify({
@@ -171,7 +195,7 @@ const DistributionAdd = () => {
         let sendToTelegram
         if (text !== '') {
           console.log(arrUsers, distrNew)
-          const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.value}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+          const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.code}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
           console.log("url_send_msg: ", url_send_msg)
           sendToTelegram = await $host.get(url_send_msg);
           console.log('sendToTelegram: ', sendToTelegram)
@@ -193,7 +217,7 @@ const DistributionAdd = () => {
                               
         }  
 
-        const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.value}&reply_markup=${keyboard}`
+        const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.code}&reply_markup=${keyboard}`
         console.log("url_send_photo: ", url_send_photo)
         
         let sendPhotoToTelegram
@@ -225,7 +249,7 @@ const DistributionAdd = () => {
           if(!file) {
               message = {
                   senderId: chatAdminId, 
-                  receiverId: user.value,
+                  receiverId: user.code,
                   conversationId: client.conversationId,
                   type: "text",
                   text: text,
@@ -236,7 +260,7 @@ const DistributionAdd = () => {
           } else {
               message = {
                   senderId: chatAdminId, 
-                  receiverId: user.value,
+                  receiverId: user.code,
                   conversationId: client.conversationId,
                   type: "image",
                   text: host + image,
@@ -252,9 +276,9 @@ const DistributionAdd = () => {
 
           //сохранить в контексте
           if(!file) {
-            addNewMessage(user.value, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
+            addNewMessage(user.code, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
           } else {
-            addNewMessage(user.value, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
+            addNewMessage(user.code, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
           }
     
         }  
@@ -263,9 +287,9 @@ const DistributionAdd = () => {
     })
 
     //обновить список рассылок
-    let response = await getDistributions();
-    console.log("distribution new add: ", response.length)
-    setDistributions(response)
+    // let response = await getDistributions();
+    // console.log("distribution new add: ", response.length)
+    // setDistributions(response)
 
     setSelected([])
     setSendToAdmin(false)
@@ -275,8 +299,13 @@ const DistributionAdd = () => {
     setVisible(true)
     setValue('')
 
-    navigate('/distribution');
+    //navigate('/distribution');
   }
+
+  const selectChange = (e)=> {
+    console.log(selected)
+    setSelected(e.value)
+  } 
 
   return (
     <div className='dark-theme'>
@@ -301,8 +330,8 @@ const DistributionAdd = () => {
                               <CForm>
                                 <div className="mb-3" style={{color: '#f3f3f3'}}>
                                   <CFormLabel htmlFor="exampleFormControlInput1">Выберите получателей:</CFormLabel>
-                                  <MultiSelect
-                                    options={contacts}
+                                  {/* <MultiSelect
+                                    options={options}
                                     value={selected}
                                     onChange={setSelected}
                                     style={{color: '#1e1919'}}
@@ -317,8 +346,40 @@ const DistributionAdd = () => {
                                       "selectSomeItems": "Выбрать...",
                                       "create": "Создать",
                                     }}   
+                                  /> */}
+
+                                  <MultiSelect 
+                                    id="exampleFormControlInput1"
+                                    value={selected} 
+                                    onChange={(e) => selectChange(e)} 
+                                    options={contacts} 
+                                    optionLabel="name" 
+                                    maxSelectedLabels={3} 
+                                    className="w-full md:w-20rem" 
+                                    filter 
+                                    virtualScrollerOptions={{ itemSize: 43 }}
+                                    placeholder=""
                                   />
-                                  <p style={{color: '#767676'}}>Получателей: <span>{selected.length}</span></p>
+
+                                  {/* <MultiSelect 
+                                    value={selected} 
+                                    onChange={(e)=>selectChange(e)} 
+                                    options={options} 
+                                    style={{color: '#1e1919'}}
+                                    filter 
+                                    virtualScrollerOptions={{ itemSize: 43 }}
+                                    maxSelectedLabels={3}
+                                    placeholder="Select Items"
+                                  /> */}
+                                  {/* <MultiSelect
+                                    id="exampleFormControlInput1"
+                                    options={options}
+                                    value={selected}
+                                    onChange={setSelected}
+                                    labelledBy={"Select"}
+                                    isCreatable={true}
+                                  /> */}
+                                  <p style={{color: '#767676'}}>Получателей: <span>{selected?.length}</span></p>
                                 </div>
 
                                 <div className='mb-3' style={{color: '#f3f3f3'}}>
