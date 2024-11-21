@@ -368,7 +368,7 @@ const clearSearch = () => {
 const clickAdd = async()=> {   
 
   const data = {
-    title: 'Название',
+    title: 'Новая площадка',
   }
   
   const res = await addPlatform(data)
