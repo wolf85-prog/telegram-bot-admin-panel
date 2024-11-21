@@ -1197,17 +1197,21 @@ ${loc.url}`;
                                             />
                                           </div>
 
-                                          <label className='title-label'>Адрес</label>
-                                          <div className="text-field" style={{marginBottom: '0px'}}>
-                                            <textarea 
-                                              className="text-field__input" 
-                                              type="text" 
-                                              name="address" 
-                                              id="address"
-                                              value={address}
-                                              style={{resize: 'none', width: '320px', height: '80px', whiteSpace: 'nowrap', borderRadius: '6px', textAlign: 'left'}}
-                                            />
-                                          </div> 
+                                          <div style={{position:'relative'}}>
+                                            <label className='title-label'>Адрес</label>
+                                            <div className="text-field" style={{marginBottom: '0px'}}>
+                                              <textarea 
+                                                className="text-field__input" 
+                                                type="text" 
+                                                name="address" 
+                                                id="address"
+                                                value={address}
+                                                style={{resize: 'none', width: '320px', height: '80px', whiteSpace: 'nowrap', borderRadius: '6px', textAlign: 'left'}}
+                                              />
+                                            </div> 
+                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(address)}} alt="" style={{position: 'absolute', top: '30px', left: '288px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                                          </div>
+                                          
                                         </div>
 
                                         {/* 3 */}   
