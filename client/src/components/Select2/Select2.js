@@ -23,7 +23,7 @@ const Select2 = ({menuShow, setMenuShow, clearShow, setClearShow, selected, el})
 
     const clickSelect = () => {
         setMenuShow(!menuShow)
-        setClearShow(!clearShow)
+        setClearShow(true)
     }
 
     return (

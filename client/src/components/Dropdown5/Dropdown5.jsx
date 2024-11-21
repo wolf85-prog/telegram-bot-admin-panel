@@ -26,7 +26,7 @@ const Dropdown5 = ({options, selected, setSelected, index, element, placeholder,
         setSelected(arr)
 
         setMenuShow(!menuShow)
-        setClearShow(!clearShow)
+        setClearShow(false)
     }
 
     const dropdownList = options.map((option, i) =>
@@ -58,7 +58,15 @@ const Dropdown5 = ({options, selected, setSelected, index, element, placeholder,
 
   const clickClear = ()=> {
     setClearShow(false)
+    setMenuShow(false)
     //setElement('')
+
+    let arr = JSON.parse(JSON.stringify(selected));
+    const userObject = arr[index];
+		arr[index] = { ...userObject, [element]: JSON.stringify({name: '', color: ''})};
+        
+    //console.log("arr: ", arr)
+    setSelected(arr)
   }
 
     return (

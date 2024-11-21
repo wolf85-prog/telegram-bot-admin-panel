@@ -85,6 +85,7 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
+import { getPretendentProjectId } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
 
@@ -164,6 +165,8 @@ const Projects = () => {
   const [dateProject, setDateProject] = useState([])
   const [timeProject, setTimeProject] = useState([])
   //const [commentMain, setCommentMain] = useState([])
+
+  const [pretendents, setPretendents] = useState([])
 
   const table = useReactTable({
     defaultColumn: {
@@ -296,6 +299,25 @@ const Projects = () => {
 
     const resProj = await getProjectId(id)
     console.log("resProj: ", resProj)
+
+    const resPretendents = await getPretendentProjectId(id)
+    console.log("pretendents: ", resPretendents)
+
+    
+
+    let newArray = []
+    resPretendents.map((item)=> {
+      const fioSpec = workersAll.find(el=> el.id === parseInt(item.workerId))
+      //console.log("workers: ", workersAll)
+      //console.log("fioSpec: ", fioSpec)
+      const newObj = {
+        data: new Date(item.createdAt).toLocaleString().split(',')[0] + " | " + item.createdAt.split('T')[1].slice(0, 5),
+        status: '',
+        fio: fioSpec?.userfamily + " " + fioSpec?.username,  
+      }
+      newArray.push(newObj)
+    })
+    setPretendents(newArray)
 
     setId(id)
     setCrmID(resProj.crmID)
@@ -516,6 +538,7 @@ const Projects = () => {
             comment: item.comment,
             projectId: item.projectId,
             number: index+1,
+            hr: item.hr,
           }
         )
       //}, 500 * ++index)
@@ -1668,8 +1691,10 @@ const Projects = () => {
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Д</CTableHeaderCell>
                                   </CTableRow>
                                 </CTableHead>
-                                <CTableBody>                                  
-                                  <CTableRow v-for="item in tableItems" style={{lineHeight: '14px'}}>
+                                <CTableBody>   
+                                { pretendents.length > 0 ?
+                                 pretendents.map((item, index)=> (                               
+                                  <CTableRow key={item.id}  v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                     <CTableDataCell className="text-center" style={{position: 'relative'}}>
                                       <div className="parent-element" style={{position: 'absolute', left: '2px', top: '6px'}}>
                                         <Dropdown>
@@ -1689,10 +1714,10 @@ const Projects = () => {
                                         
                                       />
                                       
-                                      <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span>
+                                      {/* <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span> */}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                      01.01.2024 | 00:00
+                                      {item.data}
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center">
                                       <MyDropdown5
@@ -1705,7 +1730,7 @@ const Projects = () => {
                                       />
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
-                                      Иванов Иван Иванович
+                                      {item.fio}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                       <img src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
@@ -1741,6 +1766,9 @@ const Projects = () => {
                                       🟩
                                     </CTableDataCell>           
                                   </CTableRow>
+                                  ))
+                                  :""
+                                }
                                 </CTableBody>                   
                               </CTable>
                             </CCardBody>

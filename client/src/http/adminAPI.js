@@ -499,6 +499,16 @@ export const getPretendentId = async(id)=>{
      }
 }
 
+export const getPretendentProjectId = async(id)=>{
+    try {
+        let response = await $host.get(`api/pretendent/project/get/${id}`);
+        //console.log(response);
+        return response.data;
+     } catch (error) {
+         console.log("error while calling getPretendentProjectId api", error.message);
+     }
+}
+
 
 export const getCountMessage = async()=>{
     try {
