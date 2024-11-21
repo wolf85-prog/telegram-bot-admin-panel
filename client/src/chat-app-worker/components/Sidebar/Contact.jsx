@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import formatTime from "./../../../chat-app-new/utils/formatTime";
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider'
 import avatarDefault from "./../../../chat-app-new/assets/images/no-avatar.png";
-import avatarBlacklist from "./../../../chat-app-worker/assets/images/uncheck.png";
+import avatarKrest from "./../../../chat-app-worker/assets/images/uncheck.png";
 import blockUser from "./../../../chat-app-worker/assets/images/stop.png";
 import block18 from "./../../../assets/images/block18.png";
 
@@ -148,7 +148,7 @@ const Contact = ({ contact, worker }) => {
 				{
                     worker.length !== 0 ?  
                     ((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ? 
-                    <img src={avatarBlacklist} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
+                    <img src={avatarKrest} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
                     : "")
                     : ""
                 }

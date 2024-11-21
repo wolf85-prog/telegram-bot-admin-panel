@@ -1175,7 +1175,11 @@ const Projects = () => {
                                                       const loc = platformsAll.find(item=> item.title === newValue)
                                                       console.log("loc: ", loc)
                                                       if (loc) {
-                                                        setAddress(loc.address)
+                                                        let text = `${loc.city}
+${loc.address}     
+${loc.track}   
+${loc.url}`;
+                                                        setAddress(text)
                                                       }
                                                   }  
                                               }}
