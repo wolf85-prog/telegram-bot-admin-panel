@@ -235,7 +235,11 @@ const Projects = () => {
     managersAll.map((item, index)=> {
       arrManagers.push(item.fio)
     })
-    setManagersData(arrManagers)
+    const sortedManager = [...arrManagers].sort((a, b) => {       
+      return (a < b) ? -1 : (a > b) ? 1 : 0;  //сортировка по возрастанию 
+    })
+    //console.log("sortedManager: ", sortedManager)
+    setManagersData(sortedManager)
 
     //3
     let arrWorkers = []
@@ -281,6 +285,12 @@ const Projects = () => {
     fetchData()
     
 }, [])
+
+
+// const managerName = React.useMemo(
+//   () => managersData.filter((v) => v.selected),
+//   [managersData],
+// );
 
 
   useEffect(()=> {
@@ -433,7 +443,7 @@ const Projects = () => {
 
     const comp2 = managersAll.find(item=> item.fio === managerFio2?.fio)
     if (comp2) {
-      setPhone2(comp2.phone2)
+      setPhone2(comp2.phone)
     } else {
       setPhone2('')
     }
@@ -441,10 +451,15 @@ const Projects = () => {
     setLocationProject(resProj.geo)
     const loc = platformsAll.find(item=> item.title === resProj?.geo)
     if (loc) {
-      setAddress(loc.address)
+      let text = `${loc.city}
+${loc.address}     
+${loc.track}   
+${loc.url}`;
+      setAddress(text)
     } else {
       setAddress('')
     }
+
 
     setCity(resProj.city)
     setComment(resProj.comment) 
@@ -590,7 +605,7 @@ const Projects = () => {
   const onChangeManager = (e, index) => {
     console.log(e.target.value, index)
 
-    //setManagerName(e.target.value)
+    setManagerName(e.target.value)
 
     // setManagersObj((managersObj) => {                                           
     //   const usersCopy = JSON.parse(JSON.stringify(managersObj));			
@@ -599,6 +614,10 @@ const Projects = () => {
     //   //console.log(usersCopy) 
     //   return usersCopy;
     // });   
+  }
+
+  const onChangeManager2 = (e, index) => {
+    setManagerName2(e.target.value) 
   }
 
   const clickDelete = (id) => {
@@ -1061,15 +1080,14 @@ const Projects = () => {
                                               }}
                                               className="text-field__input" 
                                               openOnFocus
-                                              id="custom-input-demo"
+                                              id="custom-input-company"
                                               options={companysData}
                                               style={{width: '100%', padding: '0'}}
                                               onInputChange={(e)=>onChangeCompany(e)}
                                               //onInputChange={(e)=>console.log(e.target.value)}
                                               isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onChange={(event, newValue) => {
-                                                  if (newValue && newValue.length) {
-                                                      
+                                                  if (newValue && newValue.length) {                                       
                                                       const comp = companysAll.find(item=> item.title === newValue)
                                                       console.log("comp: ", comp)
                                                       if (comp) {
@@ -1246,7 +1264,9 @@ ${loc.url}`;
                                               }}
                                               className="text-field__input" 
                                               openOnFocus
-                                              id="custom-input-demo"
+                                              //filterOptions={(x) => x} 
+                                              //getOptionLabel={(option) => option.fio}
+                                              id="custom-input-manager"
                                               options={managersData}
                                               style={{width: '100%', padding: '0'}}
                                               isOptionEqualToValue={(option, value) => option.value === value.value}
@@ -1297,11 +1317,11 @@ ${loc.url}`;
                                               }}
                                               className="text-field__input" 
                                               openOnFocus
-                                              id="custom-input-demo"
+                                              id="custom-input-manager2"
                                               options={managersData}
                                               style={{width: '100%', padding: '0'}}
                                               isOptionEqualToValue={(option, value) => option.value === value.value}
-                                              onInputChange={(e)=>onChangeManager(e)}
+                                              onInputChange={(e)=>onChangeManager2(e)}
                                               onChange={(event, newValue) => {
                                                 if (newValue && newValue.length) {                                                      
                                                   const comp = managersAll.find(item=> item.fio === newValue)
@@ -1761,7 +1781,7 @@ ${loc.url}`;
                                       />
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                      001 | 010
+                                      0 | 0
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center">
                                       <MyDropdown5
