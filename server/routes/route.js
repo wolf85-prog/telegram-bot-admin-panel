@@ -37,7 +37,7 @@ const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers
 const { newMessageWorker, delMessageWorker, getMessagesWorker, getMessagesWorker2, getAllMessagesWorker, getMessagesWorkerCount } = require('../controllers/wmessageController')
 const { newConversationWorker, getConversationWorker, getConversationsW } = require('../controllers/wconversationController')
 const { getWorkers, getWorkersCount, getWorker, editWorker, blockWorker, getCanceled, updateWorkers} = require('../controllers/workersController')
-const { newPretendent, getPretendent, getPretendentId, getAllPretendent, getAllPretendentCount } = require('../controllers/pretendentController')
+const { newPretendent, getPretendent, getPretendentId, getAllPretendent, getAllPretendentCount, getPretendentProjectId } = require('../controllers/pretendentController')
 
 const { newPlan, getPlan, addTimer } = require('../controllers/planController')
 
@@ -166,6 +166,7 @@ route.get('/pretendent/get/:id', getPretendentId)
 route.post('/pretendent/get', getPretendent)
 route.get('/pretendents/get', getAllPretendent)
 route.get('/pretendents/count/get/:count/:prev', getAllPretendentCount) //еще
+route.get('/pretendent/project/get/:id', getPretendentProjectId) //претенденты в проекте
 
 //------------------PLAN-----------------------------------
 route.post('/plan/add', newPlan)

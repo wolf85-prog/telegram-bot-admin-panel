@@ -107,6 +107,29 @@ class PretendentController {
         }
     }
 
+
+    //get message conversation
+    async getPretendentProjectId(req, res) {
+        const projectId = req.params.id
+        try {           
+            const count = await Pretendent.count({
+                where: { projectId, accept: false },
+              });
+            //console.log("Кол-во претендентов: ", count)
+
+            const spec = await Pretendent.findAll({
+                where: {projectId, accept: false },
+                // Add order conditions here....
+                order: [
+                    ['updatedAt', 'ASC'], //DESC
+                ],
+            })
+            return res.status(200).json(spec);
+        } catch (error) {
+            return res.status(500).json(error.spec);
+        }
+    }
+
 }
 
 module.exports = new PretendentController()
