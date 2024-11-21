@@ -281,7 +281,7 @@ const Specialist = () => {
           samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
           passportScan: worker.passportScan, 
           email: worker.email, 
-          blockW: worker.blockW,
+          //blockW: worker.blockW,
           block18: worker.block18,
           krest: worker.krest,
           createdAt: worker.createdAt,
@@ -623,7 +623,7 @@ const Specialist = () => {
           samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
           passportScan: worker.passportScan, 
           email: worker.email, 
-          blockW: worker.blockW,
+          //blockW: worker.blockW,
           block18: worker.block18,
           krest: worker.krest,
           createdAt: worker.createdAt,
@@ -773,7 +773,7 @@ const Specialist = () => {
       email,
       promo,
       passport,
-      blockW,
+      //blockW,
       block18,
       krest
     }
@@ -804,7 +804,7 @@ const Specialist = () => {
         email,
         promo,
         passport,
-        blockW,
+        //blockW,
         block18,
         krest,
       };
