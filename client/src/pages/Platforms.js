@@ -72,7 +72,7 @@ import specOnlyData2 from 'src/data/specOnlyData2';
 import { getProjectsDel, editProject } from '../http/projectAPI'
 import { useAsyncError } from 'react-router-dom';
 import Filters from 'src/components/table/Filters2'
-import { getPlatforms, getPlatformId, editPlatform, getPlatformCount } from 'src/http/platformAPI';
+import { getPlatforms, getPlatformId, editPlatform, getPlatformCount, addPlatform } from 'src/http/platformAPI';
 
 const Platforms = () => {
   const { platforms, setPlatforms, platformsAll, setPlatformsAll } = useUsersContext();
@@ -368,31 +368,30 @@ const clearSearch = () => {
 const clickAdd = async()=> {   
 
   const data = {
-    fio: 'ФИО',
+    title: 'Название',
   }
-  //const res = await addSpecialist(data)
+  
+  const res = await addPlatform(data)
 
 
-  // specialist.push(
-  //   {
-  //     id: res?.id, 
-  //     fio: res?.fio, 
-  //     speclist: '',
-  //     skill: '',
-  //     merch: '',  
-  //     company: '', 
-  //     comteg: '', 
-  //     comteg2: '', 
-  //     comment: '', 
-  //     comment2: '', 
-  // })
+  platforms.push(
+    {
+      id: res?.id, 
+      title: res?.title, 
+      city: '',
+      address: '',
+      track: '',  
+      url: '', 
+      karta: '', 
+      comment: '', 
+  })
 
-  // const sortedUser = [...specialist].sort((a, b) => {       
-  //   var idA = a.id, idB = b.id 
-  //   return idB-idA  //сортировка по возрастанию 
-  // })
+  const sortedUser = [...platforms].sort((a, b) => {       
+    var idA = a.id, idB = b.id 
+    return idB-idA  //сортировка по возрастанию 
+  })
 
-  // setSpecialist(sortedUser)
+  setPlatforms(sortedUser)
 }
 
 //ЕЩЁ
