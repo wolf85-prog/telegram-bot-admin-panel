@@ -182,9 +182,10 @@ const Specialist = sequelize.define('specialist', {
     passportScan: {type: DataTypes.TEXT},
     email: {type: DataTypes.STRING},  
     blockW: {type: DataTypes.BOOLEAN},
-    deleted: {type: DataTypes.BOOLEAN},
+    deleted: {type: DataTypes.BOOLEAN}, //distrib
     great: {type: DataTypes.BOOLEAN}, //hello
-    block18: {type: DataTypes.BOOLEAN},
+    block18: {type: DataTypes.BOOLEAN}, 
+    krest: {type: DataTypes.BOOLEAN}, //bad
 })
 
 const Manager = sequelize.define('manager', {

@@ -91,9 +91,9 @@ const Specialist = () => {
   const [showMenuBlock18, setShowMenuBlock18] = useState(false)
   const [showBlock18, setShowBlock18] = useState(false)
   const [block18, setBlock18] = useState(false)
-  const [blockW, setBlockW] = useState(false)
+  //const [blockW, setBlockW] = useState(false)
   const [showMenuKrest, setShowMenuKrest] = useState(false)
-  const [showKrest, setShowKrest] = useState(false)
+  const [krest, setKrest] = useState(false)
   
   const [cityValue, setCityValue] = useState(0)
   
@@ -283,6 +283,7 @@ const Specialist = () => {
           email: worker.email, 
           blockW: worker.blockW,
           block18: worker.block18,
+          krest: worker.krest,
           createdAt: worker.createdAt,
         }
         arrWorkers.push(newWorker)
@@ -427,10 +428,10 @@ const Specialist = () => {
     }
     setDateReg(worker.createdAt)
 
-    setBlockW(worker.blockW)
+    //setBlockW(worker.blockW)
     setBlock18(worker.block18)
+    setKrest(worker.krest)
 
-    setShowKrest(worker.blockW)
     setShowBlock18(worker.block18)
     console.log("user", userbots.find((user) => user.chatId === worker.chatId))
   }
@@ -624,6 +625,7 @@ const Specialist = () => {
           email: worker.email, 
           blockW: worker.blockW,
           block18: worker.block18,
+          krest: worker.krest,
           createdAt: worker.createdAt,
         }
 		
@@ -772,7 +774,8 @@ const Specialist = () => {
       promo,
       passport,
       blockW,
-      block18
+      block18,
+      krest
     }
     console.log(saveData)
 
@@ -803,6 +806,7 @@ const Specialist = () => {
         passport,
         blockW,
         block18,
+        krest,
       };
 
       console.log("update user: ", usersCopy[userIndex])
@@ -878,9 +882,9 @@ const Specialist = () => {
   }  
 
   const onChangeKrest = () => {
-    setShowKrest(!showKrest)
+    setKrest(!krest)
     setShowMenuKrest(false)
-    setBlockW(!blockW)
+    //setBlockW(!blockW)
   } 
 
   {/* Добавление файла */}
@@ -1205,9 +1209,9 @@ const Specialist = () => {
                                     <span onClick={onChangeBlock18} style={{cursor: 'pointer'}}>{block18 ? 'Убрать' : 'Добавить'} 18+</span>
                                   </div>
                                   
-                                  <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '215px', left: '215px', opacity: blockW ? '1' : '0' }}/>
+                                  <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '215px', left: '215px', opacity: krest ? '1' : '0' }}/>
                                   <div className="menu-content-krest">
-                                    <span onClick={onChangeKrest} style={{cursor: 'pointer'}}>{blockW ? 'Убрать' : 'Добавить'}</span>
+                                    <span onClick={onChangeKrest} style={{cursor: 'pointer'}}>{krest ? 'Убрать' : 'Добавить'}</span>
                                   </div>
 
                                   {/* ФИО */}
