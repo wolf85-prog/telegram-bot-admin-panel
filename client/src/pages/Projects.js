@@ -1205,7 +1205,7 @@ ${loc.url}`;
                                               name="address" 
                                               id="address"
                                               value={address}
-                                              style={{resize: 'none', width: '320px', height: '80px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                              style={{resize: 'none', width: '320px', height: '80px', whiteSpace: 'nowrap', borderRadius: '6px', textAlign: 'left'}}
                                             />
                                           </div> 
                                         </div>
