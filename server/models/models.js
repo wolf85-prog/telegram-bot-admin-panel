@@ -241,6 +241,7 @@ const Platform = sequelize.define('platform', {
     track: {type: DataTypes.STRING}, //
     url: {type: DataTypes.STRING}, //
     karta: {type: DataTypes.STRING}, //
+    comment: {type: DataTypes.TEXT},
 })
 
 const MainSpec = sequelize.define('mainspec', {

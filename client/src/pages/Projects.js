@@ -901,6 +901,14 @@ const Projects = () => {
     setMainspec(result)
   }
 
+  const onChangeCity = (e) => {
+    //console.log(e.target.value)
+    if (e) {
+      setCity(e.target.value)  
+    }
+      
+}
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -1119,7 +1127,7 @@ const Projects = () => {
                                               options={sortedCities}
                                               style={{width: '100%', padding: '0'}}
                                               isOptionEqualToValue={(option, value) => option.value === value.value}
-                                              onInputChange={(e)=>setCity(e.target.value)}
+                                              onInputChange={onChangeCity}
                                               onChange={(event, newValue) => {
                                                 if (newValue && newValue.length) {                                                      
                                                   setCity(newValue)
