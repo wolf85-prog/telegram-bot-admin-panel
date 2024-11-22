@@ -1,6 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react';
 import Select4 from '../Select4/Select4'
 import drp from './Dropdown6.module.css'
+import Close from "../../assets/images/close.svg"
 import { 
   CFormInput,
 } from '@coreui/react'
@@ -9,6 +10,7 @@ const Dropdown6 = ({options, selected, setSelected, index, element, placeholder,
     const [menuShow, setMenuShow] = useState(false)
     const [text, setText] = useState('');
     const [filterOptions, setFilterOptions] = useState([]);
+    const [clearShow, setClearShow] = useState(false)
 
     useEffect(()=> {
       //setSelected(selected ? selected : placeholder)
@@ -38,6 +40,7 @@ const Dropdown6 = ({options, selected, setSelected, index, element, placeholder,
         setSelected(arr)
 
         setMenuShow(!menuShow)
+        setClearShow(false)
     }
 
     const dropdownList = filterOptions.map((option, i) =>
@@ -53,6 +56,8 @@ const Dropdown6 = ({options, selected, setSelected, index, element, placeholder,
       function handleClickOutside(event) {
         if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
           //alert("You clicked outside of me!");
+          setClearShow(false)
+
           setMenuShow(false)
           event.stopPropagation();
         }
@@ -65,11 +70,28 @@ const Dropdown6 = ({options, selected, setSelected, index, element, placeholder,
       };
   }, [wrapperRef ]);
 
+
+  const clickClear = ()=> {
+    setClearShow(false)
+    setMenuShow(false)
+    //setElement('')
+
+    let arr = JSON.parse(JSON.stringify(selected));
+    const userObject = arr[index];
+		arr[index] = { ...userObject, [element]: ''};
+
+    console.log("arr: ", arr)
+    setSelected(arr)
+    //setText('')
+  }
+
     return (
         <div className={drp.dropdown} ref={wrapperRef}>
             <Select4
                 menuShow={menuShow}
                 setMenuShow={setMenuShow}
+                clearShow={clearShow} 
+                setClearShow={setClearShow}
                 selected={selected ? selected[index] : ''}
                 index={index}
                 el={element}
@@ -79,6 +101,9 @@ const Dropdown6 = ({options, selected, setSelected, index, element, placeholder,
                 options={options}
                 style={{border: 'none!important', color: ``}}
             />
+            <div style={{position: 'relative'}}>
+                <img src={Close} onClick={clickClear} width={15} alt='' className={drp.close} style={{visibility: clearShow ? 'visible' : 'hidden'}}></img>
+            </div>
             <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`} style={style}>
                 {dropdownList}
             </ul>

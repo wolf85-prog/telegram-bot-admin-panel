@@ -16,20 +16,15 @@ const Select2 = ({menuShow, setMenuShow, clearShow, setClearShow, selected, el})
         //console.log("element: ", selected?.vidWork !== undefined && selected?.vidWork !== '' ? JSON.parse(selected?.vidWork) : '')
     }, [selected])
 
-    const clickClear = ()=> {
-        setShowClose(false)
-        setElement('')
-    }
-
     const clickSelect = () => {
         setMenuShow(!menuShow)
-        setClearShow(true)
+        setClearShow(!clearShow)
     }
 
     return (
         <div 
             className={`${cl.select} ${menuShow && cl.selectClicked}`}
-            onClick={()=> clickSelect()}
+            onClick={clickSelect}
         >
             <span style={{color: `${element?.color}`}}>
                 {element?.name && element?.name.length > 25 ? element?.name.substr(0, 25) + '...' : element?.name}

@@ -612,7 +612,7 @@ ${loc.url}`;
   }
 
   const onChangeManager = (e, index) => {
-    console.log(e.target.value, index)
+    //console.log(e.target.value, index)
 
     setManagerName(e.target.value)
 
@@ -936,6 +936,21 @@ ${loc.url}`;
     }
       
   }
+
+
+  const filterOptions = (options, state) => {
+    let newOptions = [];
+    options.forEach((element) => {
+      if (
+        element
+          //.replace(",", "")
+          .toLowerCase()
+          .includes(state.inputValue.toLowerCase())
+      )
+        newOptions.push(element);
+    });
+    return newOptions;
+  };
 
   return (
     <div className='dark-theme'>
@@ -1272,14 +1287,15 @@ ${loc.url}`;
                                                   }
                                               }}
                                               className="text-field__input" 
-                                              openOnFocus
-                                              //filterOptions={(x) => x} 
-                                              //getOptionLabel={(option) => option.fio}
                                               id="custom-input-manager"
                                               options={managersData}
                                               style={{width: '100%', padding: '0'}}
-                                              isOptionEqualToValue={(option, value) => option.value === value.value}
-                                              onInputChange={(e)=>onChangeManager(e)}
+                                              //isOptionEqualToValue={(option, value) => option.value === value.value}
+                                              //filterOptions={filterOptions}
+                                              //onInputChange={(e)=>setManagerName(e.target.value)}
+                                              onInputChange={(event, newInputValue) => {
+                                                setManagerName(newInputValue);
+                                              }}
                                               onChange={(event, newValue) => {
                                                 if (newValue && newValue.length) {                                                      
                                                   const comp = managersAll.find(item=> item.fio === newValue)
@@ -1293,13 +1309,13 @@ ${loc.url}`;
                                               value={managerName} 
                                               inputValue={managerName}
                                               renderInput={(params) => (
-                                              <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                                  <input 
-                                                      className="text-field__input" 
-                                                      type="text" {...params.inputProps} 
-                                                      placeholder='ФИО'
-                                                  />
-                                              </div>
+                                                <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                                    <input 
+                                                        className="text-field__input" 
+                                                        type="text" {...params.inputProps} 
+                                                        placeholder='ФИО'
+                                                    />
+                                                </div>
                                               )}
                                             />
                                           </div>
