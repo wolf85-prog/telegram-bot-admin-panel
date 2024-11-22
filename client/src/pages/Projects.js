@@ -236,7 +236,9 @@ const Projects = () => {
     //2
     let arrManagers = []
     managersAll.map((item, index)=> {
-      arrManagers.push(item.fio)
+      if (item.fio) {
+        arrManagers.push(item.fio)
+      }  
     })
     const sortedManager = [...arrManagers].sort((a, b) => {       
       return (a < b) ? -1 : (a > b) ? 1 : 0;  //сортировка по возрастанию 
