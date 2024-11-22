@@ -1,5 +1,6 @@
 import React, { Suspense, useState, useEffect, useRef } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
+import { Link, useLocation } from 'react-router-dom'
 import { 
   CContainer, 
   CSpinner, 
@@ -90,6 +91,8 @@ import { getProjects, deleteProject, editProject, getProjectId } from '../http/p
 import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
 
 const Projects = () => {
+  //const navigate = useNavigate();
+
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
   const { companysAll, managersAll, workersAll, platformsAll } = useUsersContext();
 
@@ -319,11 +322,15 @@ const Projects = () => {
     resPretendents.map((item)=> {
       const fioSpec = workersAll.find(el=> el.id === parseInt(item.workerId))
       //console.log("workers: ", workersAll)
-      //console.log("fioSpec: ", fioSpec)
+      console.log("fioSpec: ", fioSpec)
+      const localDate = new Date(item.createdAt).toLocaleString().split(',')[0] + " | " + new Date(item.createdAt).toLocaleString().split(',')[1].slice(1, 6)
       const newObj = {
-        data: new Date(item.createdAt).toLocaleString().split(',')[0] + " | " + item.createdAt.split('T')[1].slice(0, 5),
+        data: localDate,
         status: '',
-        fio: fioSpec?.userfamily + " " + fioSpec?.username,  
+        fio: fioSpec?.userfamily + " " + fioSpec?.username, 
+        spec: JSON.parse(fioSpec?.worklist)[0].spec,
+        comment: '',
+        comteg: '',
       }
       newArray.push(newObj)
     })
@@ -926,7 +933,14 @@ ${loc.url}`;
       setCity(e.target.value)  
     }
       
-}
+  }
+
+  // const clickFio = (worker)=> {
+  //   console.log("worker: ", worker)
+  //   //setShowProfile(true)
+  //   navigate('/specialist');
+
+  // }
 
   return (
     <div className='dark-theme'>
@@ -1765,8 +1779,10 @@ ${loc.url}`;
                                         style={{height: '105px'}}
                                       />
                                     </CTableDataCell>   
-                                    <CTableDataCell className="text-center">
-                                      {item.fio}
+                                    <CTableDataCell className="text-center" style={{cursor: 'pointer'}}>
+                                      <Link to={'/specialist'} state={{ worker: item, }}>
+                                        {item.fio}
+                                      </Link>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                       <img src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
@@ -1774,10 +1790,11 @@ ${loc.url}`;
                                     <CTableDataCell className="text-center widthSpace">
                                       <MyDropdown5
                                         options={specOnlyData2}
-                                        selected={spec}
-                                        setSelected={setSpec}
                                         style={{width: '400px'}}
-                                        // onChange={addCity}
+                                        selected={pretendents}
+                                        setSelected={setPretendents}
+                                        index={index}
+                                        element={'spec'}
                                       />
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">

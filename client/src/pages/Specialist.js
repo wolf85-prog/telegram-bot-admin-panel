@@ -1022,7 +1022,7 @@ const Specialist = () => {
                                             {index+1}
                                           </CTableDataCell>
                                           <CTableDataCell onClick={()=>clickFio(item)} className="widthSpace myfio-td" style={{cursor: 'pointer', textAlign: 'left'}}>
-                                          {item.fio ? (item.fio.length > 30 ? item.fio.substr(0, 30) + '...' : item.fio) : ''}
+                                            {item.fio ? (item.fio.length > 30 ? item.fio.substr(0, 30) + '...' : item.fio) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                             {item.chatId}
