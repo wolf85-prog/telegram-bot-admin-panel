@@ -1,4 +1,5 @@
 import React, { Suspense, useEffect, useState, useRef } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AppSidebar, AppFooter, AppHeader, AppRightbar } from '../components/index'
 import DataTable, { createTheme } from 'react-data-table-component';
 import { useSelector, useDispatch } from 'react-redux'
@@ -68,6 +69,9 @@ import cities from 'src/data/cities';
 
 //Workers.js
 const Specialist = () => {
+  const location = useLocation()
+  const workerId= location.state?.workerId
+  //console.log("workerId: ", workerId)
 
   const { specialist, setSpecialist, specialistAll, setSpecialistAll, specialistsCount, setSpecialistsCount, addNewSpecialist } = useUsersContext();
   //const { userWorkers: specusers } = useUsersContext();
@@ -183,6 +187,12 @@ const Specialist = () => {
 
 
   useEffect(()=> {
+
+    if (workerId) {
+      const res = specialistAll.find((item)=>item.id === workerId)
+      console.log("res: ", res)
+      clickFio(res)
+    }
 
     // сортировка городов
     const newCities = cities.map((item)=> { 

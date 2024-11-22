@@ -325,9 +325,11 @@ const Projects = () => {
       console.log("fioSpec: ", fioSpec)
       const localDate = new Date(item.createdAt).toLocaleString().split(',')[0] + " | " + new Date(item.createdAt).toLocaleString().split(',')[1].slice(1, 6)
       const newObj = {
+        id: item.id,
         data: localDate,
         status: '',
         fio: fioSpec?.userfamily + " " + fioSpec?.username, 
+        workerId: fioSpec.id,
         spec: JSON.parse(fioSpec?.worklist)[0].spec,
         comment: '',
         comteg: '',
@@ -934,13 +936,6 @@ ${loc.url}`;
     }
       
   }
-
-  // const clickFio = (worker)=> {
-  //   console.log("worker: ", worker)
-  //   //setShowProfile(true)
-  //   navigate('/specialist');
-
-  // }
 
   return (
     <div className='dark-theme'>
@@ -1780,7 +1775,7 @@ ${loc.url}`;
                                       />
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center" style={{cursor: 'pointer'}}>
-                                      <Link to={'/specialist'} state={{ worker: item, }}>
+                                      <Link to={'/specialist'} state={{ workerId: item.workerId, }}>
                                         {item.fio}
                                       </Link>
                                     </CTableDataCell> 
@@ -1788,29 +1783,16 @@ ${loc.url}`;
                                       <img src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
-                                      <MyDropdown5
-                                        options={specOnlyData2}
-                                        style={{width: '400px'}}
-                                        selected={pretendents}
-                                        setSelected={setPretendents}
-                                        index={index}
-                                        element={'spec'}
-                                      />
+                                      {item.spec}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       0 | 0
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center">
-                                      <MyDropdown5
-                                        options={comtegs}
-                                        selected={comteg}
-                                        setSelected={setComteg}
-                                        // onChange={addCity}
-                                        style={{width: '300px'}}
-                                      />
+                                      {item.comteg}
                                     </CTableDataCell>    
                                     <CTableDataCell className="text-center">
-                                      Тест
+                                      {item.comment}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       🟩
