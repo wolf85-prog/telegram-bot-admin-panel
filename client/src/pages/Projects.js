@@ -1345,7 +1345,7 @@ ${loc.url}`;
                                               id="custom-input-manager2"
                                               options={managersData}
                                               style={{width: '100%', padding: '0'}}
-                                              isOptionEqualToValue={(option, value) => option.value === value.value}
+                                              //isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onInputChange={(e)=>onChangeManager2(e)}
                                               onChange={(event, newValue) => {
                                                 if (newValue && newValue.length) {                                                      
