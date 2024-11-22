@@ -122,7 +122,7 @@ const Profile = ({ user, closeSidebar }) => {
 
 		const fetch = async() => {
 			const pretendentArray = await getLastPretendent(user.chatId)
-			//console.log("pretendentArray: ", pretendentArray.length)
+			console.log("pretendentArray: ", pretendentArray)
 			
 			if (pretendentArray.length > 0) {
 				const projectId = pretendentArray[pretendentArray.length-1]?.projectId
@@ -130,17 +130,17 @@ const Profile = ({ user, closeSidebar }) => {
 				const projectId3 = pretendentArray[pretendentArray.length-3]?.projectId
 				
 				//получить CrmId по id проекта
-				// const project = await getProjectId(projectId)
-				// const project2 = await getProjectId(projectId2)
-				// const project3 = await getProjectId(projectId3)
+				const project = await getProjectId(projectId)
+				const project2 = await getProjectId(projectId)
+				const project3 = await getProjectId(projectId)
 
-				// const crmId = project?.properties ? project?.properties?.Crm_ID.rich_text[0].plain_text : '—'
-				// const crmId2 = project?.properties ? project2?.properties?.Crm_ID.rich_text[0].plain_text : '—'
-				// const crmId3 = project?.properties ? project3?.properties?.Crm_ID.rich_text[0].plain_text : '—' 
+				const crmId = project ? project.crmId : '—'
+				const crmId2 = project2 ? project2.crmId : '—'
+				const crmId3 = project3 ? project3.crmId : '—' 
 
-				// setCrmId(crmId)
-				// setCrmId2(crmId2)
-				// setCrmId3(crmId3)
+				setCrmId(crmId)
+				setCrmId2(crmId2)
+				setCrmId3(crmId3)
 			} else {
 				setCrmId('—')
 			}	
