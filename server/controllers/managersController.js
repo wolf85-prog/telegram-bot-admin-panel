@@ -24,11 +24,11 @@ class ManagersController {
                 order: [
                     ['id', 'DESC'], //DESC, ASC
                 ],
-                where: {
-                    chatId: {
-                        [Op.ne]: null
-                    }
-                }
+                // where: {
+                //     chatId: {
+                //         [Op.ne]: null
+                //     }
+                // }
             })
             return res.status(200).json(workers);
         } catch (error) {
