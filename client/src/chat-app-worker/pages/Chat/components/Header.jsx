@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect, useRef }  from "react";
+import { Link, useLocation } from 'react-router-dom'
 import Icon from "./../../../components/Icon";
 import OptionsBtn from "./../../../components/OptionsButton";
 
@@ -7,6 +8,7 @@ import avatarBlacklist from "./../../../../chat-app-worker/assets/images/uncheck
 import blockUser from "./../../../../chat-app-worker/assets/images/stop.png";
 import block18 from "./../../../../assets/images/block18.png";
 import robot from "./../../../../chat-app-worker/assets/images/robot.png";
+import editIcon from './../../../../assets/images/pencil.png'
 
 import { 
 	CButton
@@ -127,6 +129,16 @@ const Header = ({ user, worker, openProfileSidebar, openSearchSidebar, closeSide
 				>
 					<img className='star-icon' src={robot} width={25} alt='' style={{verticalAlign: 'text-top'}} />
 				</button>
+
+				<Link to={'/specialist'} state={{ workerId: worker[0]?.id, }}>
+					<button
+						className="chat__action"
+						aria-label="profile"
+						//onClick={()=>console.log(user?.id)}
+					>
+						<img src={editIcon} width={18} alt='' style={{verticalAlign: 'text-bottom'}} />
+					</button>
+				</Link>
 
 				<button
 					className="chat__action"

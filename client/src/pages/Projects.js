@@ -27,6 +27,7 @@ import {
   CCardText,
   CCollapse,
   CFormCheck,
+  CTooltip,
 } from '@coreui/react'
 
 import Icon from "./../chat-app-worker/components/Icon";
@@ -143,7 +144,7 @@ const Projects = () => {
   const [teh8, setTeh8] = useState('');
   const [tehText, setTehText] = useState('');
   const [address, setAddress] = useState('');
-  const [geo, setGeo] = useState('');
+  const [geoId, setGeoId] = useState('');
   const [comment, setComment] = useState('');
   
   const [comteg, setComteg] = useState([]);
@@ -170,6 +171,7 @@ const Projects = () => {
   //const [commentMain, setCommentMain] = useState([])
 
   const [pretendents, setPretendents] = useState([])
+  const [worker, setWorker] = useState()
 
   const table = useReactTable({
     defaultColumn: {
@@ -296,6 +298,12 @@ const Projects = () => {
 //   () => managersData.filter((v) => v.selected),
 //   [managersData],
 // );
+
+
+  useEffect(()=> {
+    console.log("pretendents status: ", worker.status)
+    console.log("pretendents id: ", worker.workerId)
+  }, [worker])
 
 
   useEffect(()=> {
@@ -459,14 +467,16 @@ const Projects = () => {
       setPhone2('')
     }
 
-    setLocationProject(resProj.geo)
-    const loc = platformsAll.find(item=> item.title === resProj?.geo)
+    //setLocationProject(resProj.geo)
+    const loc = platformsAll.find(item=> item.id === parseInt(resProj?.geo))
+    console.log("loc: ", loc)
     if (loc) {
       let text = `${loc.city}
 ${loc.address}     
 ${loc.track}   
 ${loc.url}`;
       setAddress(text)
+      setLocationProject(loc.title)
     } else {
       setAddress('')
     }
@@ -536,7 +546,7 @@ ${loc.url}`;
       teh6,
       teh7,
       teh8,
-      geo: locationProject, 
+      geo: geoId, 
       managerId: managersAll.find(item=> item.fio === managerName)?.id, 
       managerId2: managersAll.find(item=> item.fio === managerName2)?.id,
       companyId: companysAll.find(item=> item.title === companyName)?.id, 
@@ -1232,6 +1242,7 @@ ${loc.address}
 ${loc.track}   
 ${loc.url}`;
                                                         setAddress(text)
+                                                        setGeoId(loc.id)
                                                       }
                                                   }  
                                               }}
@@ -1785,9 +1796,11 @@ ${loc.url}`;
                                     <CTableDataCell className="text-center">
                                       <MyDropdown5
                                         options={[{label: "В Проект", name: 'В Проект'}, {label: "Отказано", name: 'Отказано'}, {label: "0.00", name: '0.00'}, {label: "Передумал", name: 'Передумал'}]}
-                                        selected={statusPretendent}
-                                        setSelected={setStatusPretendent}
-                                        // onChange={addCity}
+                                        selected={pretendents}
+                                        setSelected={setPretendents}
+                                        index={index}
+                                        setWorker={setWorker}
+                                        element={'status'}
                                         placeholder='—'
                                         style={{height: '105px'}}
                                       />
@@ -1801,16 +1814,37 @@ ${loc.url}`;
                                       <img src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
-                                      {item.spec}
+                                      {item.spec ? 
+                                      // <CTooltip
+                                      //   content={item.spec}
+                                      //   placement="top"
+                                      // >
+                                        item.spec
+                                      // </CTooltip>
+                                      :''}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       0 | 0
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center">
-                                      {item.comteg}
+                                      {item.comteg ? 
+                                      // <CTooltip
+                                      //   content={item.comteg}
+                                      //   placement="top"
+                                      // >
+                                        item.comteg
+                                      // </CTooltip>
+                                      :''}
                                     </CTableDataCell>    
                                     <CTableDataCell className="text-center">
-                                      {item.comment}
+                                      {item.comment ? 
+                                      // <CTooltip
+                                      //   content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+                                      //   placement="top"
+                                      // >
+                                        item.comment
+                                      // </CTooltip>  
+                                      :''}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       🟩

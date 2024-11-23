@@ -3,8 +3,9 @@ import media from "./../../../../chat-app-new/assets/images/placeholder.jpeg";
 import Checkbox from "./../../../components/Checkbox";
 import Icon from "./../../../components/Icon";
 import { editContact, uploadFile, editContactAvatar } from './../../../../http/chatAPI';
-import { getWorkerNotionId, getWorkerChildrenId, getLastPretendent, getProjectId, blockedWorkers, getWorker } from './../../../../http/workerAPI';
+import { getLastPretendent, blockedWorkers, getWorker } from './../../../../http/workerAPI';
 import { getSendCall } from './../../../../http/adminAPI';
+import { getProjectId } from './../../../../http/projectAPI';
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
 import defaultAvatar from "./../../../../chat-app-new/assets/images/no-avatar.png";
@@ -131,12 +132,15 @@ const Profile = ({ user, closeSidebar }) => {
 				
 				//получить CrmId по id проекта
 				const project = await getProjectId(projectId)
-				const project2 = await getProjectId(projectId)
-				const project3 = await getProjectId(projectId)
+				console.log("project profile: ", project)
+				const project2 = await getProjectId(projectId2)
+				const project3 = await getProjectId(projectId3)
 
-				const crmId = project ? project.crmId : '—'
-				const crmId2 = project2 ? project2.crmId : '—'
-				const crmId3 = project3 ? project3.crmId : '—' 
+				const crmId = project ? project.crmID : '—'
+				const crmId2 = project2 ? project2.crmID : '—'
+				const crmId3 = project3 ? project3.crmID : '—' 
+
+				console.log("crmId: ", crmId, crmId2, crmId3)
 
 				setCrmId(crmId)
 				setCrmId2(crmId2)
