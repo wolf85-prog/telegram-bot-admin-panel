@@ -89,6 +89,7 @@ import specOnlyData2 from 'src/data/specOnlyData2';
 
 import { getPretendentProjectId } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
+import { sendSpecialistOtkaz } from '../http/specAPI'
 import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
 
 const Projects = () => {
@@ -300,10 +301,11 @@ const Projects = () => {
 // );
 
 
-  useEffect(()=> {
-    console.log("pretendents status: ", worker.status)
-    console.log("pretendents id: ", worker.workerId)
-  }, [worker])
+  // useEffect(()=> {
+  //   // console.log("pretendents status: ", worker.status)
+  //   // console.log("pretendents id: ", worker.workerId)
+  //   // sendSpecialistOtkaz(worker.workerId, {projectId: '120'})
+  // }, [worker])
 
 
   useEffect(()=> {

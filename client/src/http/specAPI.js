@@ -1,4 +1,4 @@
-import {$authHost, $host} from "./index";
+import {$authHost, $host, $host_worker} from "./index";
 
 export const getSpecialist = async () =>{
     try {
@@ -67,5 +67,15 @@ export const blockedSpecialist = async (id) =>{
        return response.data;
     } catch (error) {
         console.log("error while calling blockedSpecialist api", error.message);
+    }
+}
+
+
+export const sendSpecialistOtkaz = async (id, data) =>{
+    try {
+       let response = await $host_worker.post(`api/specialist/otkaz/send/${id}`, data);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getSpecialistChatId api", error.message);
     }
 }
