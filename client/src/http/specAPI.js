@@ -76,6 +76,6 @@ export const sendSpecialistOtkaz = async (id, data) =>{
        let response = await $host_worker.post(`api/specialist/otkaz/send/${id}`, data);
        return response.data;
     } catch (error) {
-        console.log("error while calling getSpecialistChatId api", error.message);
+        console.log("error while calling sendSpecialistOtkaz api", error.message);
     }
 }

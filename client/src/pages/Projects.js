@@ -87,7 +87,7 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
-import { getPretendentProjectId } from '../http/adminAPI'
+import { getPretendentProjectId, editPretendent } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 import { sendSpecialistOtkaz } from '../http/specAPI'
 import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
@@ -156,9 +156,11 @@ const Projects = () => {
   const [visibleDelete, setVisibleDelete] = useState(false)
   const [visibleA, setVisibleA] = useState(false)
   const [visibleB, setVisibleB] = useState(false)
+  const [visibleC, setVisibleC] = useState(false)
 
   const [showMainTable, setShowMainTable] = useState(false)
   const [showPretendentTable, setShowPretendentTable] = useState(false)
+  const [showPosterTable, setShowPosterTable] = useState(false)
   const [showDots, setShowDots] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
@@ -172,7 +174,7 @@ const Projects = () => {
   //const [commentMain, setCommentMain] = useState([])
 
   const [pretendents, setPretendents] = useState([])
-  const [worker, setWorker] = useState()
+  const [worker, setWorker] = useState([])
 
   const table = useReactTable({
     defaultColumn: {
@@ -581,6 +583,23 @@ ${loc.url}`;
           }
         )
       //}, 500 * ++index)
+    })
+
+    // pretendents.map(async(item, index)=> {
+    //     await editPretendent(id, {status: })
+    // })
+
+    console.log("worker save: ", worker)
+    //send otkaz
+    worker.map(async(item)=> {
+      if (item.status) {
+        if (JSON.parse(item.status).name === 'Отказано') {
+          console.log("send!!!!!!!!")
+          await sendSpecialistOtkaz(item.workerId, {projectId: '120'})
+        }
+
+        await editPretendent(item.id, {status: JSON.parse(item.status).name})
+      }   
     })
 
     //const resTable = await editMainspec({date: dateProject + 'T' + timeProject})
@@ -1873,6 +1892,15 @@ ${loc.url}`;
                                 }
                                 </CTableBody>                   
                               </CTable>
+                            </CCardBody>
+                          </CCollapse>
+                        </CCard>
+
+                        <CCard className="mb-4" style={{display: showPosterTable ? 'block' : 'none'}}>
+                          <CCardHeader onClick={() => setVisibleC(!visibleC)}>Постеры</CCardHeader>
+                          <CCollapse visible={visibleC}>
+                            <CCardBody style={{padding: '12px'}}>
+                                 
                             </CCardBody>
                           </CCollapse>
                         </CCard>

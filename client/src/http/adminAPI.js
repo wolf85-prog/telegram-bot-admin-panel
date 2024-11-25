@@ -509,6 +509,16 @@ export const getPretendentProjectId = async(id)=>{
      }
 }
 
+export const editPretendent = async(id, data)=>{
+    try {
+        let response = await $host.patch(`api/pretendent/update/${id}`, data);
+        //console.log(response);
+        return response.data;
+     } catch (error) {
+         console.log("error while calling editPretendent api", error.message);
+     }
+}
+
 
 export const getCountMessage = async()=>{
     try {

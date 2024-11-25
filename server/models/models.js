@@ -139,6 +139,7 @@ const Pretendent = sequelize.define('pretendent', {
     otclick: {type: DataTypes.INTEGER}, //количество согласий
     cancel: {type: DataTypes.INTEGER}, // количество отказов
     blockDistrib: {type: DataTypes.BOOLEAN}, //блокировка рассылки по проекту
+    status: {type: DataTypes.STRING}, //статус претендента;
 })
 
 const Plan = sequelize.define('plan', {

@@ -130,6 +130,31 @@ class PretendentController {
         }
     }
 
+    async editPretendent(req, res) { 
+        const {id} = req.params      
+        try {    
+            let exist=await Pretendent.findOne( {where: {id: id}} )
+            
+            if(!exist){
+                res.status(500).json({msg: "user not exist"});
+                return;
+            }
+
+            const {
+                status,
+            } = req.body
+
+            const newUser = await Pretendent.update(
+                { 
+                    status,
+                },
+                { where: {id: id} })
+            return res.status(200).json(newUser);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
 }
 
 module.exports = new PretendentController()

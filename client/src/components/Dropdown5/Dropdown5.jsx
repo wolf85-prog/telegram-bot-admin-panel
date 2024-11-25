@@ -22,7 +22,7 @@ const Dropdown5 = ({options, selected, setSelected, index, element, placeholder,
         const userObject = arr[index];
 			  arr[index] = { ...userObject, [element]: JSON.stringify({name: e.target.innerText, color: color})};
 
-        setWorker(arr[index])
+        setWorker(arr)
         
         console.log("arr: ", arr)
         setSelected(arr)
