@@ -12,7 +12,7 @@ const Dropdown5 = ({options, selected, setSelected, index, element, placeholder,
     const [clearShow, setClearShow] = useState(false)
 
     useEffect(()=> {
-      //console.log("selected2: ", selected, index)
+      console.log("selected2: ", selected, index)
     }, [selected])
 
     const selectOption = (e, color) => {

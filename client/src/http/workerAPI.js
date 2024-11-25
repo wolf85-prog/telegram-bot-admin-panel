@@ -283,3 +283,14 @@ export const getCanceled = async()=>{
         
     }
 }
+
+export const addCanceled = async(data)=>{
+    try {
+        let response= await $host.post(`api/canceled/add`, data);
+        
+        return response.data;
+    } catch (error) {
+        console.log("error while calling addCanceled api",error.message);
+        
+    }
+}

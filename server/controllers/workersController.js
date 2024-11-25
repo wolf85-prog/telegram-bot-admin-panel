@@ -125,6 +125,16 @@ class WorkersController {
         }
     }
 
+    async addCanceled(req, res) {
+        const {projectId, workerId, receiverId, cancel} = req.body
+        try {
+            const newUser = await Canceled.create({projectId, workerId, receiverId, cancel})
+            return res.status(200).json(newUser);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
 
     // Define a sleep function that returns a promise
 //------------------------------------------------------------

@@ -87,6 +87,7 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
+import { addCanceled, getCanceled } from '../http/workerAPI'
 import { getPretendentProjectId, editPretendent } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 import { sendSpecialistOtkaz } from '../http/specAPI'
@@ -174,7 +175,7 @@ const Projects = () => {
   //const [commentMain, setCommentMain] = useState([])
 
   const [pretendents, setPretendents] = useState([])
-  const [worker, setWorker] = useState([])
+  //const [worker, setWorker] = useState([])
 
   const table = useReactTable({
     defaultColumn: {
@@ -344,6 +345,8 @@ const Projects = () => {
         status: '',
         fio: fioSpec?.userfamily + " " + fioSpec?.username, 
         workerId: fioSpec.id,
+        projectId: item.projectId,
+        receiverId: item.receiverId,
         spec: JSON.parse(fioSpec?.worklist)[0].spec,
         comment: '',
         comteg: '',
@@ -589,13 +592,26 @@ ${loc.url}`;
     //     await editPretendent(id, {status: })
     // })
 
-    console.log("worker save: ", worker)
+    //console.log("worker save: ", worker)
     //send otkaz
-    worker.map(async(item)=> {
+    pretendents.map(async(item)=> {
+      console.log("pretendent: ", item)
       if (item.status) {
         if (JSON.parse(item.status).name === 'Отказано') {
           console.log("send!!!!!!!!")
-          await sendSpecialistOtkaz(item.workerId, {projectId: '120'})
+          //отправка сообщения об отказе
+          //await sendSpecialistOtkaz(item.workerId, {projectId: '120'})
+
+          //сохранение отказа в базе
+          const newObj = {
+            projectId: item.projectId,
+            workerId: item.workerId,  
+            receiverId: item.receiverId, 
+            cancel: true
+          }
+          console.log("newObj: ", newObj)
+          const resAdd = await addCanceled(newObj)
+          console.log("resAdd: ", resAdd)
         }
 
         await editPretendent(item.id, {status: JSON.parse(item.status).name})
@@ -1679,7 +1695,7 @@ ${loc.url}`;
                                         index={index}
                                         element={'vidWork'}
                                         placeholder='—'
-                                        setWorker={setWorker}
+                                        setWorker={setPretendents}
                                       />
                                       }
                                     </CTableDataCell>   
@@ -1709,7 +1725,7 @@ ${loc.url}`;
                                         setSelected={setMainspec}
                                         index={index}
                                         element={'specialization'}
-                                        setWorker={setWorker}
+                                        setWorker={setPretendents}
                                       />
                                     }
                                     </CTableDataCell> 
@@ -1723,7 +1739,7 @@ ${loc.url}`;
                                         index={index}
                                         element={'stavka'}
                                         style={{width: '130px'}}
-                                        setWorker={setWorker}
+                                        setWorker={setPretendents}
                                       />
                                     }
                                     </CTableDataCell> 
@@ -1743,7 +1759,7 @@ ${loc.url}`;
                                         index={index}
                                         element={'comteg'}
                                         style={{width: '300px'}}
-                                        setWorker={setWorker}
+                                        setWorker={setPretendents}
                                       />
                                     }
                                     </CTableDataCell>   
@@ -1833,7 +1849,7 @@ ${loc.url}`;
                                         selected={pretendents}
                                         setSelected={setPretendents}
                                         index={index}
-                                        setWorker={setWorker}
+                                        setWorker={setPretendents}
                                         element={'status'}
                                         placeholder='—'
                                         style={{height: '105px'}}
