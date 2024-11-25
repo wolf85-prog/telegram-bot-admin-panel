@@ -1856,7 +1856,7 @@ ${loc.url}`;
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center">
                                       <MyDropdown5
-                                        options={[{label: "В Проект", name: 'В Проект'}, {label: "Отказано", name: 'Отказано'}, {label: "0.00", name: '0.00'}, {label: "Передумал", name: 'Передумал'}]}
+                                        options={[{label: "В Проект", name: 'В Проект'}, {label: "Отказано", name: 'Отказано'}]}
                                         selected={pretendents}
                                         setSelected={setPretendents}
                                         index={index}
