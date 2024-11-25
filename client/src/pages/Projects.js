@@ -342,7 +342,7 @@ const Projects = () => {
       const newObj = {
         id: item.id,
         data: localDate,
-        status: '',
+        status: item.status ? JSON.stringify({name: item.status, color: ''}) : '',
         fio: fioSpec?.userfamily + " " + fioSpec?.username, 
         workerId: fioSpec.id,
         projectId: item.projectId,
@@ -598,8 +598,6 @@ ${loc.url}`;
       console.log("pretendent: ", item)
       if (item.status) {
         if (JSON.parse(item.status).name === 'Отказано') {
-          //отправка сообщения об отказе
-          await sendSpecialistOtkaz(item.workerId, {projectId: item.projectId})
 
           //сохранение отказа в базе
           const newObj = {
@@ -610,7 +608,12 @@ ${loc.url}`;
           }
           console.log("newObj: ", newObj)
 
-          //const retCanceled = await getCanceledId(newObj)
+          //отправка сообщения об отказе
+          const retCanceled = await getCanceledId(newObj)
+          console.log("retCanceled: ", retCanceled)
+          // if (!retCanceled) {
+          //   await sendSpecialistOtkaz(item.workerId, {projectId: item.projectId})
+          // }
 
           const resAdd = await addCanceled(newObj)
           console.log("resAdd: ", resAdd)
