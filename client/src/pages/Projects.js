@@ -599,7 +599,7 @@ ${loc.url}`;
       if (item.status) {
         if (JSON.parse(item.status).name === 'Отказано') {
           //отправка сообщения об отказе
-          await sendSpecialistOtkaz(item.workerId, {projectId: '120'})
+          await sendSpecialistOtkaz(item.workerId, {projectId: item.projectId})
 
           //сохранение отказа в базе
           const newObj = {
@@ -610,8 +610,8 @@ ${loc.url}`;
           }
           console.log("newObj: ", newObj)
 
-          const retCanceled = await getCanceledId(newObj)
-          
+          //const retCanceled = await getCanceledId(newObj)
+
           const resAdd = await addCanceled(newObj)
           console.log("resAdd: ", resAdd)
         }

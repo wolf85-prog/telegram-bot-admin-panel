@@ -153,6 +153,12 @@ class WorkersController {
     async addCanceled(req, res) {
         const {projectId, workerId, receiverId, blockId, cancel} = req.body
         try {
+            let exist=await Canceled.findOne( {where: {projectId, workerId, receiverId, cancel: true}} )
+            
+            if(exist){
+                res.status(500).json({msg: "user not exist"});
+                return;
+            }
             const newUser = await Canceled.create({projectId, workerId, receiverId, blockId, cancel})
             return res.status(200).json(newUser);
         } catch (error) {
