@@ -480,6 +480,7 @@ ${loc.url}`;
       setAddress(text)
       setLocationProject(loc.title)
     } else {
+      setLocationProject('')
       setAddress('')
     }
 
@@ -951,6 +952,13 @@ ${loc.url}`;
       
   }
 
+  const changeLocation = (e) => {
+    setLocationProject(e.target.value)
+    if (e.target.value === '') {
+      setAddress('')
+    }
+  }
+
 
   const filterOptions = (options, state) => {
     let newOptions = [];
@@ -965,6 +973,7 @@ ${loc.url}`;
     });
     return newOptions;
   };
+  
 
   return (
     <div className='dark-theme'>
@@ -1651,6 +1660,7 @@ ${loc.url}`;
                                         index={index}
                                         element={'vidWork'}
                                         placeholder='—'
+                                        setWorker={setWorker}
                                       />
                                       }
                                     </CTableDataCell>   
@@ -1680,6 +1690,7 @@ ${loc.url}`;
                                         setSelected={setMainspec}
                                         index={index}
                                         element={'specialization'}
+                                        setWorker={setWorker}
                                       />
                                     }
                                     </CTableDataCell> 
@@ -1693,6 +1704,7 @@ ${loc.url}`;
                                         index={index}
                                         element={'stavka'}
                                         style={{width: '130px'}}
+                                        setWorker={setWorker}
                                       />
                                     }
                                     </CTableDataCell> 
@@ -1712,6 +1724,7 @@ ${loc.url}`;
                                         index={index}
                                         element={'comteg'}
                                         style={{width: '300px'}}
+                                        setWorker={setWorker}
                                       />
                                     }
                                     </CTableDataCell>   

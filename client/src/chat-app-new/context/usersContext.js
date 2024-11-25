@@ -824,10 +824,10 @@ useEffect(() => {
 		  
 				const newUser = {
 				  id: user.id,
-				  fio: user.fio,
-				  chatId: user.chatId, 
-				  phone: user.phone, 
-				  phone2: user.phone2,
+				  fio: user.fio ? user.fio : '',
+				  chatId: user.chatId ? user.chatId : '', 
+				  phone: user.phone ? user.phone : '', 
+				  phone2: user.phone2 ? user.phone2 : '',
 				  city: user.city, 
 				  sfera: str_sfera,
 				  dolgnost: user.dolgnost,
