@@ -287,10 +287,11 @@ export const getCanceled = async()=>{
 export const getCanceledId = async(data)=>{
     try {
         let response= await $host.post(`api/canceled/project/get`, data);
+        console.log("response: ", response)
         
         return response.data;
     } catch (error) {
-        console.log("error while calling getCanceled api",error.message);
+        console.log("error while calling getCanceledId api: ",error.message);
         
     }
 }

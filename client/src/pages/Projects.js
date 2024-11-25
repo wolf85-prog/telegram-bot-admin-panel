@@ -510,6 +510,7 @@ ${loc.url}`;
     setVisibleB(true)
     setShowMainTable(true)
     setShowPretendentTable(true)
+    setShowPosterTable(true)
 
 
     setTimeout(()=> {
@@ -588,39 +589,39 @@ ${loc.url}`;
       //}, 500 * ++index)
     })
 
-    // pretendents.map(async(item, index)=> {
-    //     await editPretendent(id, {status: })
-    // })
 
-    //console.log("worker save: ", worker)
     //send otkaz
-    pretendents.map(async(item)=> {
-      console.log("pretendent: ", item)
-      if (item.status) {
-        if (JSON.parse(item.status).name === 'Отказано') {
+    pretendents.map(async(item, index)=> {
+      console.log("pretendent: ", item, index)
+      setTimeout(async() => {
+        if (item.status) {
+          if (JSON.parse(item.status).name === 'Отказано') {
 
-          //сохранение отказа в базе
-          const newObj = {
-            projectId: item.projectId,
-            workerId: item.workerId,  
-            receiverId: item.receiverId, 
-            cancel: true
+            //сохранение отказа в базе
+            const newObj = {
+              projectId: item.projectId,
+              workerId: item.workerId.toString(),  
+              receiverId: item.receiverId, 
+              cancel: true
+            }
+            console.log("newObj: ", newObj)
+
+            //отправка сообщения об отказе
+            const retCanceled = await getCanceledId(newObj)
+            console.log("retCanceled: ", retCanceled)
+            if (!retCanceled) {
+              await sendSpecialistOtkaz(item.workerId, {projectId: item.projectId})
+            }
+
+            const resAdd = await addCanceled(newObj)
+            console.log("resAdd: ", resAdd)
           }
-          console.log("newObj: ", newObj)
 
-          //отправка сообщения об отказе
-          const retCanceled = await getCanceledId(newObj)
-          console.log("retCanceled: ", retCanceled)
-          // if (!retCanceled) {
-          //   await sendSpecialistOtkaz(item.workerId, {projectId: item.projectId})
-          // }
-
-          const resAdd = await addCanceled(newObj)
-          console.log("resAdd: ", resAdd)
-        }
-
-        await editPretendent(item.id, {status: JSON.parse(item.status).name})
-      }   
+          await editPretendent(item.id, {status: JSON.parse(item.status).name})
+        } 
+      }, 1000 * ++index)
+      
+        
     })
 
     //const resTable = await editMainspec({date: dateProject + 'T' + timeProject})
@@ -660,6 +661,7 @@ ${loc.url}`;
     setShowCalendar2(true)
     setShowMainTable(false)
     setShowPretendentTable(false)
+    setShowPosterTable(false)
   }
 
   const onChangeCompany = (e) => {
@@ -1014,6 +1016,10 @@ ${loc.url}`;
     return newOptions;
   };
   
+
+  const clickSave = () => {
+
+  }
 
   return (
     <div className='dark-theme'>
@@ -1866,7 +1872,7 @@ ${loc.url}`;
                                       </Link>
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                      <img src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+                                      <img src={Trubka} alt='' onClick={clickSave} style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
                                       {item.spec ? 
