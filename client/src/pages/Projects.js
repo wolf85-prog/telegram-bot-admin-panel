@@ -87,7 +87,7 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
-import { addCanceled, getCanceled } from '../http/workerAPI'
+import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
 import { getPretendentProjectId, editPretendent } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 import { sendSpecialistOtkaz } from '../http/specAPI'
@@ -598,9 +598,8 @@ ${loc.url}`;
       console.log("pretendent: ", item)
       if (item.status) {
         if (JSON.parse(item.status).name === 'Отказано') {
-          console.log("send!!!!!!!!")
           //отправка сообщения об отказе
-          //await sendSpecialistOtkaz(item.workerId, {projectId: '120'})
+          await sendSpecialistOtkaz(item.workerId, {projectId: '120'})
 
           //сохранение отказа в базе
           const newObj = {
@@ -610,6 +609,9 @@ ${loc.url}`;
             cancel: true
           }
           console.log("newObj: ", newObj)
+
+          const retCanceled = await getCanceledId(newObj)
+          
           const resAdd = await addCanceled(newObj)
           console.log("resAdd: ", resAdd)
         }

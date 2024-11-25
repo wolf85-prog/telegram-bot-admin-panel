@@ -125,10 +125,35 @@ class WorkersController {
         }
     }
 
-    async addCanceled(req, res) {
-        const {projectId, workerId, receiverId, cancel} = req.body
+    async getCanceled(req, res) {
         try {
-            const newUser = await Canceled.create({projectId, workerId, receiverId, cancel})
+            const workers = await Canceled.findAll({
+                order: [
+                    ['id', 'DESC'], //DESC, ASC
+                ],
+            })
+            return res.status(200).json(workers);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    async getCanceledId(req, res) {
+        const {projectId, workerId, receiverId} = req.body
+        try {
+            const workers = await Canceled.findOne({
+                where: {projectId, workerId, receiverId, cancel: true },
+            })
+            return res.status(200).json(workers);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    async addCanceled(req, res) {
+        const {projectId, workerId, receiverId, blockId, cancel} = req.body
+        try {
+            const newUser = await Canceled.create({projectId, workerId, receiverId, blockId, cancel})
             return res.status(200).json(newUser);
         } catch (error) {
             return res.status(500).json(error.message);
