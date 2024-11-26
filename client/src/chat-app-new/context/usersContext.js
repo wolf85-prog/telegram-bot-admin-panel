@@ -499,6 +499,8 @@ useEffect(() => {
 				  promoId: user.promoId,
 				  blockW: user.blockW,
 				  deleted: user.deleted,
+				  comment: user.comment,
+				  comteg: user.comteg,
 				}
 		
 				arrayWorkerAll.push(newWorker)

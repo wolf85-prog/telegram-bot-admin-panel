@@ -348,8 +348,8 @@ const Projects = () => {
         projectId: item.projectId,
         receiverId: item.receiverId,
         spec: JSON.parse(fioSpec?.worklist)[0].spec,
-        comment: '',
-        comteg: '',
+        comment: JSON.parse(fioSpec?.comment),
+        comteg: JSON.parse(fioSpec?.comteg),
       }
       newArray.push(newObj)
     })
@@ -1875,36 +1875,35 @@ ${loc.url}`;
                                       <img src={Trubka} alt='' onClick={clickSave} style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
-                                      {item.spec ? 
-                                      // <CTooltip
-                                      //   content={item.spec}
-                                      //   placement="top"
-                                      // >
-                                        item.spec
-                                      // </CTooltip>
-                                      :''}
+                                      <CTooltip
+                                        content={item.spec}
+                                        placement="bottom"
+                                      >
+                                        <div>{item.spec}</div>
+                                      </CTooltip>
+
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       0 | 0
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center">
                                       {item.comteg ? 
-                                      // <CTooltip
-                                      //   content={item.comteg}
-                                      //   placement="top"
-                                      // >
-                                        item.comteg
-                                      // </CTooltip>
+                                      <CTooltip
+                                        content={item.comteg}
+                                        placement="bottom"
+                                      >
+                                      <div>{item.comteg[0].name}</div>
+                                      </CTooltip>
                                       :''}
                                     </CTableDataCell>    
                                     <CTableDataCell className="text-center">
                                       {item.comment ? 
-                                      // <CTooltip
-                                      //   content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
-                                      //   placement="top"
-                                      // >
-                                        item.comment
-                                      // </CTooltip>  
+                                      <CTooltip
+                                        content={item.comment}
+                                        placement="bottom"
+                                      >
+                                        <div>{item.comment}</div>
+                                      </CTooltip>  
                                       :''}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
