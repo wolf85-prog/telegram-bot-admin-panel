@@ -1927,7 +1927,33 @@ ${loc.url}`;
                           <CCardHeader onClick={() => setVisibleC(!visibleC)}>Постеры</CCardHeader>
                           <CCollapse visible={visibleC}>
                             <CCardBody style={{padding: '12px'}}>
-                                 
+                              <table className='frame2'>
+                                <><tr>
+                                    <td className='day2'>
+                                        <p className='date-day'></p>
+                                    </td>
+                                    <td className='day2'>
+                                        <p className='date-day'></p>
+                                    </td>
+                                    <td className='day2'>
+                                        <p className='date-day'></p>
+                                    </td>
+                                    <td className='day2'>
+                                        <p className='date-day'></p>
+                                    </td>
+                                    <td className='day2'>
+                                        <p className='date-day'></p>
+                                    </td>
+                                    <td className='day2'>
+                                        <p className='date-day'></p>
+                                    </td>
+                                    <td className='day2'>
+                                        <p className='date-day'></p>
+                                    </td>
+                                </tr>
+                                <tr style={{height: '20px'}}></tr>
+                                </>
+                              </table>
                             </CCardBody>
                           </CCollapse>
                         </CCard>
