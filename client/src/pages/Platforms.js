@@ -241,6 +241,7 @@ const openPlatform = (resPlatform) => {
     setAddress(resPlatform.address)
     setTrack(resPlatform.track)
     setUrl(resPlatform.url)
+    setComment(resPlatform.comment)
   }
   
   
