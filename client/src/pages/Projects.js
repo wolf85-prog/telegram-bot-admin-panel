@@ -1890,22 +1890,22 @@ ${loc.url}`;
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center">
                                       {item.comteg ? 
-                                      <CTooltip
-                                        content={item.comteg}
-                                        placement="bottom"
-                                      >
-                                      <div>{item.comteg[0].name}</div>
-                                      </CTooltip>
+                                      // <CTooltip
+                                      //   content={item.comteg[0]?.name}
+                                      //   placement="bottom"
+                                      // >
+                                      <div>{item.comteg[0]?.name}</div>
+                                      // </CTooltip>
                                       :''}
                                     </CTableDataCell>    
                                     <CTableDataCell className="text-center">
                                       {item.comment ? 
-                                      <CTooltip
-                                        content={item.comment}
-                                        placement="bottom"
-                                      >
-                                        <div>{item.comment}</div>
-                                      </CTooltip>  
+                                      // <CTooltip
+                                      //   content={item.comment[0]?.content}
+                                      //   placement="bottom"
+                                      // >
+                                        <div>{item.comment[0]?.content}</div>
+                                      // </CTooltip>  
                                       :''}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
