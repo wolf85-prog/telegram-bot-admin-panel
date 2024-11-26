@@ -1904,7 +1904,7 @@ ${loc.url}`;
                                         content={item.comment[0]?.content}
                                         placement="bottom"
                                       >
-                                        <div>{item.comment[0]?.content && item.comment[0]?.content.length > 20 ? item.comment[0]?.content.substr(0, 20) + '...' : item.comment[0]?.content}</div>
+                                        <div>{item.comment[0]?.content && item.comment[0]?.content.length > 10 ? item.comment[0]?.content.substr(0, 10) + '...' : item.comment[0]?.content}</div>
                                       </CTooltip>  
                                       :''}
                                     </CTableDataCell> 
