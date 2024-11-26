@@ -120,19 +120,19 @@ const vids = [
       label: 'Фальшстарт',
       name: 'Фальшстарт',
       value: '19',
-      color: '#1E90FF'
+      color: 'red'
     },
     {
       label: 'Отмена',
       name: 'Отмена',
       value: '20',
-      color: '#1E90FF'
+      color: 'red'
     },
     {
       label: 'Офис',
       name: 'Офис',
       value: '21',
-      color: 'red'
+      color: 'purple'
     },
     
 ]

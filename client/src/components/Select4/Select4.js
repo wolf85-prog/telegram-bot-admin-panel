@@ -11,16 +11,13 @@ const Select4 = ({menuShow, setMenuShow, clearShow, setClearShow, selected, el, 
     const [showClose, setShowClose] = useState(false)
     
     useEffect(()=> {
-        console.log("selected: ", selected)
+        //console.log("selected: ", selected)
         const fio = options.find((item)=> item.id === parseInt(selected[el]))
-        console.log("fio: ", fio)
         if (fio) {
            setElement(fio?.label) 
         } else {
             setElement('') 
         }
-        
-        //console.log("element4: ", selected)
 
         setShowClose(true)
     }, [selected])
