@@ -1863,7 +1863,7 @@ ${loc.url}`;
                                         setWorker={setPretendents}
                                         element={'status'}
                                         placeholder='—'
-                                        style={{height: '105px'}}
+                                        style={{height: '60px'}}
                                       />
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center" style={{cursor: 'pointer'}}>
