@@ -1293,7 +1293,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
     const nextMonth = () => {
         setDate(new Date(year, month + 1, day))
-        setMonth(month + 1)
+        //setMonth(month + 1)
     }
 
     const prevMonth = () => {
