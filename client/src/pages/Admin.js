@@ -1518,8 +1518,10 @@ useEffect(() => {
                   </CCol> 
                 </CRow>
                 
-{/*---------------------------------------- Renthub ------------------------------------  */} 
+
                 <CCard className='rounded-bottom' style={{borderRadius: '0px', borderColor: '#131c21', borderTopRightRadius: '0.375rem'}}>
+
+{/*---------------------------------------- Renthub ------------------------------------  */} 
                   <CCardBody id="Renthub" style={{display: showRenthub ? 'block' : 'none'}}>
                     <CRow>
                       <CCol xs>
@@ -1638,7 +1640,6 @@ useEffect(() => {
                   </CCardBody>
 
 {/*----------------------------------------- Workhub ----------------------------------------  */}
-     
                   <CCardBody id="Workhub" style={{display: showWorkhub ? 'block' : 'none'}}>
                     <CRow>
                       <CCol xs>
@@ -1772,7 +1773,6 @@ useEffect(() => {
                   </CCardBody>
 
 {/*----------------------------------------- Renthub 2.0 ----------------------------------------  */}
-     
                   <CCardBody id="Renthub2" style={{display: showRenthub2 ? 'block' : 'none'}}>
                     <CRow>
                       <CCol xs>
@@ -1906,8 +1906,7 @@ useEffect(() => {
                     </CRow>
                   </CCardBody>
 
-{/*----------------------------------------- Удаленные -----------------------------------------  */}
-     
+{/*----------------------------------------- Удаленные -----------------------------------------  */}  
                   <CCardBody id="Deleted" style={{display: showDeleted ? 'block' : 'none'}}>
                     <CRow>
                       <CCol xs>
