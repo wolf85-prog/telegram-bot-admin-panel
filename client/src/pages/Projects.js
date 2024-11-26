@@ -75,7 +75,7 @@ import Disketa from "./../assets/images/disketa.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 import threeDots from 'src/assets/images/three-dots.svg'
 
-import btnBlue from 'src/assets/images/button_blue.png'
+import btnBlue from 'src/assets/images/button_blue.jpg'
 import btnRed from 'src/assets/images/button_red.png'
 import btnGreen from 'src/assets/images/button_green.jpg'
 import btnYellow from 'src/assets/images/button_yellow.jpg'
