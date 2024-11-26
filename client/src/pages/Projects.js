@@ -1900,12 +1900,12 @@ ${loc.url}`;
                                     </CTableDataCell>    
                                     <CTableDataCell className="text-center">
                                       {item.comment ? 
-                                      // <CTooltip
-                                      //   content={item.comment[0]?.content}
-                                      //   placement="bottom"
-                                      // >
-                                        <div>{item.comment[0]?.content}</div>
-                                      // </CTooltip>  
+                                      <CTooltip
+                                        content={item.comment[0]?.content}
+                                        placement="bottom"
+                                      >
+                                        <div>{item.comment[0]?.content && item.comment[0]?.content.length > 20 ? item.comment[0]?.content.substr(0, 20) + '...' : item.comment[0]?.content}</div>
+                                      </CTooltip>  
                                       :''}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
