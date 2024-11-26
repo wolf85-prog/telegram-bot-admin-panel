@@ -88,10 +88,10 @@ const Header = ({ user, worker, openProfileSidebar, openSearchSidebar, closeSide
 				} */}
 				{
 					user.avatar
-					? <> {worker[0].blockW ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', zIndex: '2', width: '40px', height: '40px'}} /> : <></>}
+					? <> {worker[0]?.blockW ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', zIndex: '2', width: '40px', height: '40px'}} /> : <></>}
 						<img src={`${user.avatar}`} alt='' onError={onImageError} className="avatar-adm" />
 					</>
-					: <> {worker[0].blockW ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', zIndex: '2', width: '40px', height: '40px'}} /> : <></>}
+					: <> {worker[0]?.blockW ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', zIndex: '2', width: '40px', height: '40px'}} /> : <></>}
 						<img src={avatarDefault} alt='' className="avatar-adm" />
 					</>
 				}

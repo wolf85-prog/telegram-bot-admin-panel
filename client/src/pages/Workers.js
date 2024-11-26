@@ -25,7 +25,9 @@ import arrowDown from '../assets/images/arrowDown.svg'
 
 import { getAllPretendent, getAllPretendentCount, getWorkers, getWorkersNotion100, getWorkersNotion, getWorkerNotionId} from './../http/workerAPI'
 
-import { getProjects } from './../http/projectAPI'
+import { getProjectsApi } from './../http/adminAPI'
+
+//import { getProjects } from './../http/projectAPI'
 
 
 //Workers.js
@@ -77,13 +79,14 @@ const Workers = () => {
       let workers = await getWorkers()
       //console.log("workers context: ", workers)
 
-      let projects = await getProjects();
+      //let projects = await getProjects();
+      let projects = await getProjectsApi()
       console.log("projects workers: ", projects)
 
       pretendents.map(async (worker, i) => {
 
         let userObject = projects.find((proj) => proj.id === worker.projectId.toString());  
-        console.log("userObject: ", userObject)
+        console.log("userObject: ", worker?.projectId.toString())
         const projectName = userObject?.name
 
         let workerObject = workers.find((item) => item.chatId === worker.receiverId);  

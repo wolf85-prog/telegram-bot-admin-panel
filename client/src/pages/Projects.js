@@ -990,6 +990,8 @@ ${loc.url}`;
     //console.log(e.target.value)
     if (e) {
       setCity(e.target.value)  
+    } else {
+      setCity('')  
     }
       
   }
@@ -1002,19 +1004,19 @@ ${loc.url}`;
   }
 
 
-  const filterOptions = (options, state) => {
-    let newOptions = [];
-    options.forEach((element) => {
-      if (
-        element
-          //.replace(",", "")
-          .toLowerCase()
-          .includes(state.inputValue.toLowerCase())
-      )
-        newOptions.push(element);
-    });
-    return newOptions;
-  };
+  // const filterOptions = (options, state) => {
+  //   let newOptions = [];
+  //   options.forEach((element) => {
+  //     if (
+  //       element
+  //         //.replace(",", "")
+  //         .toLowerCase()
+  //         .includes(state.inputValue.toLowerCase())
+  //     )
+  //       newOptions.push(element);
+  //   });
+  //   return newOptions;
+  // };
   
 
   const clickSave = () => {
@@ -1237,7 +1239,7 @@ ${loc.url}`;
                                               id="custom-input-demo"
                                               options={sortedCities}
                                               style={{width: '100%', padding: '0'}}
-                                              isOptionEqualToValue={(option, value) => option.value === value.value}
+                                              //isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onInputChange={onChangeCity}
                                               onChange={(event, newValue) => {
                                                 if (newValue && newValue.length) {                                                      
