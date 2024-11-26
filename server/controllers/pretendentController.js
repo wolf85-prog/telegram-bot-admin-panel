@@ -113,12 +113,12 @@ class PretendentController {
         const projectId = req.params.id
         try {           
             const count = await Pretendent.count({
-                where: { projectId, accept: false },
+                where: { projectId, accept: true },
               });
             //console.log("Кол-во претендентов: ", count)
 
             const spec = await Pretendent.findAll({
-                where: {projectId, accept: false },
+                where: {projectId, accept: true },
                 // Add order conditions here....
                 order: [
                     ['updatedAt', 'ASC'], //DESC
