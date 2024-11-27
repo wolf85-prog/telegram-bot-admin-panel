@@ -359,8 +359,6 @@ const Projects = () => {
     setEndDate(d2 !== '' ? d2.setHours(d2.getHours() - 3) : '')
 
     setStartTime(timeStart) 
-
-    //console.log("resProj.dateEnd: ", resProj.dateEnd)
     setEndTime(resProj.dateEnd?.split('T')[1]?.slice(0, 5)) 
 
     let resMain
@@ -485,6 +483,7 @@ ${loc.url}`;
       setAddress('')
     }
 
+    setGeoId(resProj?.geo)
 
     setCity(resProj.city)
     setComment(resProj.comment) 
@@ -869,7 +868,8 @@ ${loc.url}`;
 
   useEffect(()=> {
     if (endDate !== '' && endDate !== null) {
-      setEndTime('00:00')
+      //setEndTime('00:00')
+      console.log("endDate: ", endDate)
     }
     
   }, [endDate])
