@@ -44,7 +44,6 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 import DatePicker from "react-datepicker";
 import Dropdown from 'react-bootstrap/Dropdown';
-import Form from 'react-bootstrap/Form';
 
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
@@ -164,18 +163,13 @@ const Projects = () => {
   const [showPosterTable, setShowPosterTable] = useState(false)
   const [showDots, setShowDots] = useState(false)
   const [showModal, setShowModal] = useState(false)
-
   const [playPoster, setPlayPoster] = useState(false)
-
   const [sortedCities, setSortedCities] = useState([])
-
   const [mainspec, setMainspec] = useState([])
   const [dateProject, setDateProject] = useState([])
   const [timeProject, setTimeProject] = useState([])
-  //const [commentMain, setCommentMain] = useState([])
-
   const [pretendents, setPretendents] = useState([])
-  //const [worker, setWorker] = useState([])
+
 
   const table = useReactTable({
     defaultColumn: {
@@ -1654,7 +1648,7 @@ ${loc.url}`;
                                           <Dropdown.Item eventKey={`4 ${item.id} ${index}`}>Удалить</Dropdown.Item>
                                           </Dropdown.Menu>
                                         </Dropdown>
-                                      </div>  
+                                      </div>                              
 
                                       <CFormCheck 
                                         name={item.id}
