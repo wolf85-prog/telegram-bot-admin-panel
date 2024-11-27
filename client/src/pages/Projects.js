@@ -470,6 +470,8 @@ const Projects = () => {
 
     //setLocationProject(resProj.geo)
     const loc = platformsAll.find(item=> item.id === parseInt(resProj?.geo))
+    console.log("platformsAll: ", platformsAll)
+    console.log("geo: ", resProj?.geo)
     console.log("loc: ", loc)
     if (loc) {
       let text = `${loc.city}
