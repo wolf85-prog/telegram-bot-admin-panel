@@ -328,15 +328,20 @@ const Projects = () => {
     
 
     let newArray = []
+    let colorStatus = ''
     resPretendents.map((item)=> {
       const fioSpec = workersAll.find(el=> el.id === parseInt(item.workerId))
       //console.log("workers: ", workersAll)
       console.log("fioSpec: ", fioSpec)
       const localDate = new Date(item.createdAt).toLocaleString().split(',')[0] + " | " + new Date(item.createdAt).toLocaleString().split(',')[1].slice(1, 6)
+
+      if (item.status === 'В проект') colorStatus = 'green'
+      if (item.status === 'Отказано') colorStatus = 'yellow'
+
       const newObj = {
         id: item.id,
         data: localDate,
-        status: item.status ? JSON.stringify({name: item.status, color: ''}) : '',
+        status: item.status ? JSON.stringify({name: item.status, color: colorStatus}) : '',
         fio: fioSpec?.userfamily + " " + fioSpec?.username, 
         workerId: fioSpec.id,
         projectId: item.projectId,
@@ -367,11 +372,16 @@ const Projects = () => {
 
     if (resMain.length > 0) {
       let arr = []
+      let myColor = ''
+      let myColor2 = ''
 
       resMain.map((item)=>{
+        if (item.vidWork === 'Фальшстарт' || item.vidWork === 'Отмена') myColor = 'red'
+        if (item.vidWork === 'Офис') myColor = 'purple'
+
         const obj = {
           name: item.vidWork,
-          color: ''
+          color: myColor
         }
 
         const obj1 = {
@@ -384,9 +394,11 @@ const Projects = () => {
           color: ''
         }
 
+        if (item.comteg === 'Опоздание' || item.comteg === 'Невыход') myColor = 'red'
+
         const obj3 = {
           name: item.comteg,
-          color: ''
+          color: myColor2
         }
 
         const newObj = {
@@ -1854,7 +1866,7 @@ ${loc.url}`;
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center">
                                       <MyDropdown5
-                                        options={[{label: "В Проект", name: 'В Проект'}, {label: "Отказано", name: 'Отказано'}]}
+                                        options={[{label: "В Проект", name: 'В Проект', color: 'green'}, {label: "Отказано", name: 'Отказано', color: 'yellow'}]}
                                         selected={pretendents}
                                         setSelected={setPretendents}
                                         index={index}
