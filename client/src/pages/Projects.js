@@ -103,6 +103,8 @@ const Projects = () => {
   const [showCalendar2, setShowCalendar2] = useState(true)
   const [showProject, setShowProject] = useState(false)
 
+  const [showSaveAddress, setShowSaveAddress] = useState(false)
+
   const [height, setHeight] = useState(600)
 
   const [projects, setProjects] = useState([]);
@@ -1053,11 +1055,14 @@ ${loc.url}`;
     setPlayPredSmeta(!playPredSmeta)
 
     //api
+    console.log("crmID: ", crmID)
     const resAddSmeta = await getCreatePredSmeta(crmID)
     console.log("resAddSmeta: ", resAddSmeta)
 
     setTimeout(()=> {
-      setDonePredSmeta(true)
+      if (resAddSmeta) {
+        setDonePredSmeta(true)
+      }
     }, 5000)
   }
 
@@ -1372,7 +1377,7 @@ ${loc.url}`;
 
                                           <div style={{position:'relative'}}>
                                             <label className='title-label'>Адрес</label>
-                                            <div className="text-field" style={{marginBottom: '0px'}}>
+                                            <div className="text-field" style={{marginBottom: '0px'}} onMouseOver={()=>setShowSaveAddress(true)} onMouseOut={()=>setShowSaveAddress(false)}>
                                               <textarea 
                                                 className="text-field__input" 
                                                 type="text" 
@@ -1382,7 +1387,7 @@ ${loc.url}`;
                                                 style={{resize: 'none', width: '320px', height: '80px', whiteSpace: 'nowrap', borderRadius: '6px', textAlign: 'left'}}
                                               />
                                             </div> 
-                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(address)}} alt="" style={{position: 'absolute', top: '30px', left: '288px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(address)}} alt="" style={{visibility: showSaveAddress ? 'visible' : 'hidden', position: 'absolute', top: '30px', left: '288px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                                           </div>
                                           
                                         </div>

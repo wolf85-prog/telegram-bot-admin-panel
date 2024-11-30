@@ -717,7 +717,7 @@ export const getProcess= async (count, on) =>{
 export const getCreatePredSmeta = async(id)=>{
     try {
         const response = await $host_smeta.post('/api/estimate/pre', {
-            "srm_id": id
+            "srm_id": id.toString()
         });
         console.log("call: ", response.data);
         return response.data;
@@ -730,7 +730,7 @@ export const getCreatePredSmeta = async(id)=>{
 export const getCreatePoster = async(id)=>{
     try {
         const response = await $host_smeta.post('/api/poster', {
-            "srm_id": id
+            "srm_id": id.toString()
         });
         console.log("call: ", response.data);
         return response.data;
