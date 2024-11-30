@@ -1071,7 +1071,7 @@ ${loc.url}`;
     setShowLoader(true)
 
     //api
-    const resAddPoster = await getCreatePredSmeta(crmID)
+    const resAddPoster = await getCreatePoster(crmID)
     console.log("resAddPoster: ", resAddPoster)
 
     setTimeout(()=> {
