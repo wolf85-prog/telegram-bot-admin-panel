@@ -1,4 +1,4 @@
-import {$authHost, $host, $host_bot, $host_bottest, $host_call} from "./index";
+import {$authHost, $host, $host_bot, $host_bottest, $host_call, $host_smeta} from "./index";
 
 
 export const getManagers = async () =>{
@@ -709,5 +709,32 @@ export const getProcess= async (count, on) =>{
         return response.data;
     } catch (error) {
         console.log("error while calling getProcess api", error.message);
+    }
+}
+
+
+//create pred smeta
+export const getCreatePredSmeta = async(id)=>{
+    try {
+        const response = await $host_smeta.post('/api/estimate/pre', {
+            "srm_id": id
+        });
+        console.log("call: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getCreatePredSmeta api", error.message);
+    }
+}
+
+//create poster
+export const getCreatePoster = async(id)=>{
+    try {
+        const response = await $host_smeta.post('/api/poster', {
+            "srm_id": id
+        });
+        console.log("call: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getCreatePoster api", error.message);
     }
 }

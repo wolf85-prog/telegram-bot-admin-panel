@@ -87,7 +87,7 @@ import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
-import { getPretendentProjectId, editPretendent } from '../http/adminAPI'
+import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreatePoster } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 import { sendSpecialistOtkaz } from '../http/specAPI'
 import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
@@ -163,7 +163,13 @@ const Projects = () => {
   const [showPosterTable, setShowPosterTable] = useState(false)
   const [showDots, setShowDots] = useState(false)
   const [showModal, setShowModal] = useState(false)
+
+  const [playPredSmeta, setPlayPredSmeta] = useState(false)
+  const [donePredSmeta, setDonePredSmeta] = useState(false)
+  const [playFinSmeta, setPlayFinSmeta] = useState(false)
+
   const [playPoster, setPlayPoster] = useState(false)
+  const [showLoader, setShowLoader] = useState(false)
   const [sortedCities, setSortedCities] = useState([])
   const [mainspec, setMainspec] = useState([])
   const [dateProject, setDateProject] = useState([])
@@ -1031,6 +1037,43 @@ ${loc.url}`;
 
   }
 
+  // const createPredSmeta = async(id) => {
+	// 	// Button begins to shake
+	// 	setPress(true);
+	// 	console.log(press)
+        
+	// 	// Buttons stops to shake after 2 seconds
+	// 	setTimeout(() => setPress(false), 200);
+
+	// 	audioIshodCall.play();
+	// 	await getSendCall(id)
+	// }
+
+  const pressPredSmeta = async() => {
+    setPlayPredSmeta(!playPredSmeta)
+
+    //api
+    const resAddSmeta = await getCreatePredSmeta(crmID)
+    console.log("resAddSmeta: ", resAddSmeta)
+
+    setTimeout(()=> {
+      setDonePredSmeta(true)
+    }, 5000)
+  }
+
+  const pressPoster = async() => {
+    setPlayPoster(!playPoster)
+    setShowLoader(true)
+
+    //api
+    const resAddPoster = await getCreatePredSmeta(crmID)
+    console.log("resAddPoster: ", resAddPoster)
+
+    setTimeout(()=> {
+      setShowLoader(false)
+    }, 2000)
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -1568,16 +1611,29 @@ ${loc.url}`;
                                             <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
 
-                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', marginTop: '40px'}}>
-                                            🟥
+                                          <div onClick={pressPredSmeta} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', marginTop: '40px'}}>
+                                            {
+                                              playPredSmeta ? 
+                                              (donePredSmeta ? <img src={btnYellow} alt='' width={25} style={{marginBottom: '7px'}}/> :   
+                                                <img src={btnBlue} alt='' width={25} style={{marginBottom: '7px'}}/>
+                                              )
+                                              
+                                              : '🟥'
+                                            }
                                           </div>
 
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px'}}>
                                             <img src={btnRed} alt='' width={25} style={{marginBottom: '7px'}}/>
                                           </div>
 
-                                          <div onClick={()=>setPlayPoster(!playPoster)} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', color: 'blue'}}>
-                                            {playPoster ? <img src={btnYellow} alt='' width={25} style={{marginBottom: '7px'}}/> : <img src={btnBlue} alt='' width={25} style={{marginBottom: '7px'}}/>}
+                                          <div onClick={pressPoster} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', color: 'blue'}}>
+                                            {
+                                              playPoster ? 
+                                              (showLoader ? <CSpinner style={{width: '20px', height: '20px'}}/> :
+                                                <img src={btnYellow} alt='' width={25} style={{marginBottom: '7px'}}/>
+                                              )
+                                              : <img src={btnBlue} alt='' width={25} style={{marginBottom: '7px'}}/>
+                                            }
                                           </div>
                                         </div>
                                         
