@@ -96,15 +96,6 @@ const AppSidebar = () => {
       style: {cursor: 'pointer'},
     },
     {
-      component: CNavLink,
-      name: 'Площадки',
-      to: '/platforms',
-      //href: 'https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be',
-      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-      //onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be'),
-      style: {cursor: 'pointer'},
-    },
-    {
       component: CNavItem,
       name: 'Компании',
       to: '/companys',
@@ -112,6 +103,15 @@ const AppSidebar = () => {
       //onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/b1b7c39c50a7497da828d7e568f062de?v=5f8ceffc7f7340f4ba5aa3739457f1e7'),
       //style: {color: '#e55353',},
     },
+    {
+      component: CNavLink,
+      name: 'Площадки',
+      to: '/platforms',
+      //href: 'https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be',
+      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      //onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be'),
+      style: {cursor: 'pointer'},
+    },  
 
 //----------------------------------------------------------------------------------
     {
