@@ -2,26 +2,25 @@ const sequelize = require('../db_renthub')
 const {DataTypes} = require('sequelize')
 
 const Manager = sequelize.define('manager', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
-    chatId: {type: DataTypes.STRING, unique: true}, // telegram id
-    fio: {type: DataTypes.STRING}, //фио менеджера
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    fio: {type: DataTypes.STRING},
+    chatId: {type: DataTypes.STRING, unique: true},
     phone: {type: DataTypes.STRING}, //телефон менеджера
     phone2: {type: DataTypes.STRING}, //телефон менеджера
     city: {type: DataTypes.STRING},
-    dolgnost: {type: DataTypes.STRING},
-    sfera: {type: DataTypes.TEXT}, 
-    projects: {type: DataTypes.STRING}, 
+    dolgnost: {type: DataTypes.STRING}, 
+    companyId: {type: DataTypes.STRING}, // id заказчика  
+    projects: {type: DataTypes.STRING},
     email: {type: DataTypes.STRING}, //почта менеджера
-    inn: {type: DataTypes.STRING}, //инн компании
-    comteg: {type: DataTypes.TEXT},
-    comment: {type: DataTypes.TEXT}, 
-    profile: {type: DataTypes.TEXT},
+    comteg: {type: DataTypes.STRING},
+    worklist: {type: DataTypes.STRING},
     dogovor: {type: DataTypes.BOOLEAN}, 
     block: {type: DataTypes.BOOLEAN},
     deleted: {type: DataTypes.BOOLEAN},
     great: {type: DataTypes.BOOLEAN}, //hello
-    companyId: {type: DataTypes.STRING}, // id заказчика
-    GUID: {type: DataTypes.STRING}, 
+    sfera: {type: DataTypes.TEXT},
+    comment: {type: DataTypes.TEXT}, 
+    avatar: {type: DataTypes.TEXT},
 })
 
 const Company = sequelize.define('company', {
