@@ -239,10 +239,13 @@ const Managers = () => {
 
         let str_company = ''
         let str_company_name = ''
-        const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.companyId))
+        let str_company_avatar = ''
+        const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.companyId) || item.GUID === user.companyId)
+        console.log("comp: ", comp)
         if (comp) {
           str_company = comp.id
           str_company_name = comp.title
+          str_company_avatar = comp.profile
         }
 
         const newUser = {
@@ -259,7 +262,7 @@ const Managers = () => {
           comteg: str_komteg, 
           comment: str_comment, 
           inn: user.inn, 
-          profile: user.profile, 
+          profile: str_company_avatar, 
           dogovor: user.dogovor ? '🟢' : '🔴', 
           email: user.email, 
           projects: user.projects,
@@ -464,7 +467,8 @@ const clickNext = async() => {
       let str_company = ''
       let str_company_name = ''
       let str_company_avatar = ''
-      const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.companyId))
+      const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.companyId) || item.GUID === user.companyId)
+      console.log("comp: ", comp)
       if (comp) {
         str_company = comp.id
         str_company_name = comp.title
@@ -529,6 +533,15 @@ const clickNext = async() => {
 
     const currentYear = new Date().getFullYear()
 
+    let str_company_avatar = ''
+    const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.company) || item.GUID === user.company)
+    //console.log("comp: ", comp)
+    if (comp) {
+      //str_company = comp.id
+      //str_company_name = comp.title
+      str_company_avatar = comp.profile
+    }
+
     setId(user.id)
     setFio(user.fio)
     setCity(user.city ? user.city : '')
@@ -545,7 +558,7 @@ const clickNext = async() => {
     setComteg(user.comteg ? user.comteg.split(',') : [])
     setEmail(user.email)
     setComment(user.comment)
-    setProfile(user.profile)
+    setProfile(str_company_avatar)
     setDogovor(user.dogovor)
     setOffice(user.office)
     setSklad(user.sklad)
