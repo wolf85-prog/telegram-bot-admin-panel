@@ -1,4 +1,4 @@
-const {Company} = require('../models/models')
+const {Company} = require('../models/renthub')
 const ApiError = require('../error/ApiError')
 const { Op } = require('sequelize')
 
