@@ -463,10 +463,12 @@ const clickNext = async() => {
 
       let str_company = ''
       let str_company_name = ''
+      let str_company_avatar = ''
       const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.companyId))
       if (comp) {
         str_company = comp.id
         str_company_name = comp.title
+        str_company_avatar = comp.profile
       }
 
       let str_comment = ''
@@ -489,7 +491,7 @@ const clickNext = async() => {
         comteg: str_komteg, 
         comment: str_comment, 
         inn: user.inn, 
-        profile: user.profile, 
+        profile: str_company_avatar, 
         dogovor: user.dogovor ? '🟢' : '🔴', 
         email: user.email, 
         projects: user.projects,
@@ -899,7 +901,7 @@ const clickNext = async() => {
                                   )
                                   }
                                   <div className="file-upload" style={{marginBottom: '8px'}}>
-                                    <img src={addAvatar} alt="upload" style={{display: showUpload ? 'block' : 'none', position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
+                                    {/* <img src={addAvatar} alt="upload" style={{display: showUpload ? 'block' : 'none', position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
                                     <input 
                                       type="file"
                                       id="formFile" 
@@ -907,7 +909,7 @@ const clickNext = async() => {
                                       name="avatar"
                                       onChange={(e) => onFileChange(e)}
                                       style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}
-                                    />
+                                    /> */}
                                   </div>
 
                                   <div className="menu-reyting">
@@ -979,7 +981,7 @@ const clickNext = async() => {
                                   {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
-                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
+                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
                                     <div style={{display: 'flex'}}>
                                       <Icon id="delete" onClick={()=>clickDelete(id)} />

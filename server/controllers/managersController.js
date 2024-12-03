@@ -1,4 +1,5 @@
-const {Manager} = require('../models/models')
+//const {Manager} = require('../models/models')
+const {Manager} = require('../models/renthub')
 const ApiError = require('../error/ApiError')
 const { Op } = require('sequelize')
 
