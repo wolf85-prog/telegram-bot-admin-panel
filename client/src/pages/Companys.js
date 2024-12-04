@@ -274,6 +274,7 @@ const Companys = () => {
     fetchData()
   }, [])
 
+  //Добавить компанию
   const clickAdd = async()=> {   
 
     const data = {

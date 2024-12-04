@@ -123,6 +123,7 @@ class ManagersController {
         try {    
 
             const {fio} = req.body
+            console.log("fio: ", fio)
 
             const newUser = await Manager.create({fio})
             return res.status(200).json(newUser);

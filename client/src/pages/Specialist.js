@@ -348,14 +348,16 @@ const Specialist = () => {
     getImage();
   }, [file])
   
+
+  //Добавить специалиста
   const clickAdd = async()=> {   
 
     const data = {
       fio: 'ФИО',
     }
     const res = await addSpecialist(data)
-
-    // console.log("res: ", res)
+    console.log("res: ", res)
+    
     // if (res) {
     //   await addNewSpecialist(res?.id, res?.fio, res?.profile)
     // }

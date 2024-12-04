@@ -300,17 +300,14 @@ const Managers = () => {
     fetchData()
   }, [])
 
+  //Добавить менеджера
   const clickAdd = async()=> {   
-
-    //setShowProfile(true)
-    //setModalWorker(worker)
-    //setShowSearch(false)
-    //setShowClear(false)
 
     const data = {
       fio: 'ФИО',
     }
     const res = await addManager(data)
+    console.log("res: ", res)
 
     //контекст
     // if (res) {
