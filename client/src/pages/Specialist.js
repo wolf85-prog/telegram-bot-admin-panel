@@ -137,6 +137,7 @@ const Specialist = () => {
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
   const [countPressCity, setCountPressCity] = useState(0);
+  const [countPressCategory, setCountPressCategory] = useState(0);
 
   const [blockProfile, setBlockProfile] = useState(true)
   const [showBlacklist, setShowBlacklist] = useState(false)
@@ -177,7 +178,7 @@ const Specialist = () => {
 
   //поиск
   useEffect(() => {
-		const filteredData = specialistAll.filter(user=> (user.fio + user.chatId + user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+		const filteredData = specialistAll.filter(user=> (user.fio + user.chatId + user.phone + user.speclist)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setSpecialist(text === '' ? specialistCount : filteredData); 
 
     setSpecialistsCount(text === '' ? specialistAll.length : filteredData.length)
@@ -357,7 +358,7 @@ const Specialist = () => {
     }
     const res = await addSpecialist(data)
     console.log("res: ", res)
-    
+
     // if (res) {
     //   await addNewSpecialist(res?.id, res?.fio, res?.profile)
     // }
@@ -532,6 +533,39 @@ const Specialist = () => {
       })
       setSpecialist(sortedWorker)
     } else if (countPressCity + 1 === 2) {
+      const sortedWorker = [...specialist].sort((a, b) => {       
+        var cityA = a.city, cityB = b.city
+        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSpecialist(sortedWorker)
+    } else {
+      const sortedWorker = [...specialist].sort((a, b) => {       
+        var idA = a.id, idB = b.id 
+        return idB-idA  //сортировка по убыванию 
+      })
+
+      //setSpecialistCount(sortedWorker)
+      setSpecialist(sortedWorker)
+    }
+    
+  }
+
+  //сортировка по Специальности
+  const onSortCategory = () => {
+    setCountPressCategory(countPressCategory + 1)
+    
+    if (countPressCategory + 1 >= 3) {
+      setCountPressCity(0)
+    }
+    //console.log("check sort", countPressTG + 1)
+
+    if (countPressCategory + 1 === 1) {
+      const sortedWorker = [...specialist].sort((a, b) => {       
+        var cityA = a.city, cityB = b.city
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSpecialist(sortedWorker)
+    } else if (countPressCategory + 1 === 2) {
       const sortedWorker = [...specialist].sort((a, b) => {       
         var cityA = a.city, cityB = b.city
         return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
