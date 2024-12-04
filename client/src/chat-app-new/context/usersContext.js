@@ -799,6 +799,11 @@ useEffect(() => {
 			let arr = []
 			response.map(async (user, i) => {
 
+				let str_worklist = ''
+				user.worklist && JSON.parse(user.worklist).map((item, index)=> {
+					str_worklist = str_worklist + item.name + (index+1 !== JSON.parse(user.worklist).length ? ', ' : '')
+				})
+
 				let str_sfera = ''
 				user.sfera && JSON.parse(user.sfera).map((item, index)=> {
 				  str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
@@ -829,6 +834,7 @@ useEffect(() => {
 				  phone: user.phone ? user.phone : '', 
 				  phone2: user.phone2 ? user.phone2 : '',
 				  city: user.city, 
+				  worklist: str_worklist,
 				  sfera: str_sfera,
 				  dolgnost: user.dolgnost,
 				  company: str_company, 

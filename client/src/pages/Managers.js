@@ -571,7 +571,7 @@ const clickNext = async() => {
     setBlock(user.block)
     setShowBlacklist(user.sfera ? user.sfera.includes('Blacklist') : false)
 
-    setWorklist(user.worklist)
+    setWorklist(user.worklist ? user.worklist.split(',') : [])
 
     if (userbots) {
       setNik(userbots.find((item) => item.chatId?.toString() === user.chatId?.toString())?.username)
