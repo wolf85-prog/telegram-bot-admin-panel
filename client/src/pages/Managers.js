@@ -682,6 +682,7 @@ const clickNext = async() => {
       const comp = companysAll.find(item=> parseInt(item.id) === parseInt(company))
       if (comp) {
         str_company = comp.id
+        console.log("str_company: ", str_company)
         str_company_name = comp.title
       }
 
