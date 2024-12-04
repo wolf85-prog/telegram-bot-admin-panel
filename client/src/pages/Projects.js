@@ -87,7 +87,7 @@ import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
-import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreatePoster } from '../http/adminAPI'
+import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreateFinSmeta, getCreatePoster } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 import { sendSpecialistOtkaz } from '../http/specAPI'
 import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
@@ -168,7 +168,9 @@ const Projects = () => {
 
   const [playPredSmeta, setPlayPredSmeta] = useState(false)
   const [donePredSmeta, setDonePredSmeta] = useState(false)
+
   const [playFinSmeta, setPlayFinSmeta] = useState(false)
+  const [doneFinSmeta, setDoneFinSmeta] = useState(false)
 
   const [playPoster, setPlayPoster] = useState(false)
   const [showLoader, setShowLoader] = useState(false)
@@ -1066,6 +1068,21 @@ ${loc.url}`;
     }, 5000)
   }
 
+  const pressFinSmeta = async() => {
+    setPlayFinSmeta(!playFinSmeta)
+
+    //api
+    console.log("crmID: ", crmID)
+    const resAddSmeta = await getCreateFinSmeta(crmID)
+    console.log("resAddSmeta: ", resAddSmeta)
+
+    setTimeout(()=> {
+      if (resAddSmeta) {
+        setDoneFinSmeta(true)
+      }
+    }, 5000)
+  }
+
   const pressPoster = async() => {
     setPlayPoster(!playPoster)
     setShowLoader(true)
@@ -1627,8 +1644,15 @@ ${loc.url}`;
                                             }
                                           </div>
 
-                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px'}}>
-                                            <img src={btnRed} alt='' width={25} style={{marginBottom: '7px'}}/>
+                                          <div onClick={pressFinSmeta} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px'}}>
+                                          {
+                                              playFinSmeta ? 
+                                              (doneFinSmeta ? <img src={btnYellow} alt='' width={25} style={{marginBottom: '7px'}}/> :   
+                                                <img src={btnBlue} alt='' width={25} style={{marginBottom: '7px'}}/>
+                                              )
+                                              
+                                              : <img src={btnRed} alt='' width={25} style={{marginBottom: '7px'}}/>
+                                            }                   
                                           </div>
 
                                           <div onClick={pressPoster} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', color: 'blue'}}>

@@ -726,6 +726,19 @@ export const getCreatePredSmeta = async(id)=>{
     }
 }
 
+//create pred smeta
+export const getCreateFinSmeta = async(id)=>{
+    try {
+        const response = await $host_smeta.post('/api/estimate/pre-final', {
+            "srm_id": id.toString()
+        });
+        console.log("call: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getCreatePredSmeta api", error.message);
+    }
+}
+
 //create poster
 export const getCreatePoster = async(id)=>{
     try {
