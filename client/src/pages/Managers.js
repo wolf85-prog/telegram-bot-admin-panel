@@ -54,6 +54,7 @@ import cities from 'src/data/cities';
 import dolgnostData from 'src/data/dolgnostData';
 import sferaData from 'src/data/sfera';
 import companyData from 'src/data/companyData';
+import distribData from 'src/data/specDistribData';
 
 import { getManager, getManagerCount, editManager, addManager, deleteManager } from './../http/managerAPI'
 import { getCompany} from '../http/companyAPI'
@@ -109,6 +110,7 @@ const Managers = () => {
   const [company, setCompany] = useState('');
   const [comteg, setComteg] = useState([]);
   const [sfera, setSfera] = useState([]);
+  const [worklist, setWorklist] = useState([]);
   const [dolgnost, setDolgnost] = useState('');
   const [inn, setInn] = useState('');
   const [email, setEmail] = useState('');
@@ -221,6 +223,12 @@ const Managers = () => {
         const min = String(d2.getMinutes()).padStart(2, "0");
         const newDate = `${day}.${month} ${chas}:${min}`;
 
+        let str_worklist = ''
+        user.worklist && JSON.parse(user.worklist).map((item, index)=> {
+          str_worklist = str_worklist + item.name + (index+1 !== JSON.parse(user.worklist).length ? ', ' : '')
+        })
+        console.log(str_worklist)
+
         let str_sfera = ''
         user.sfera && JSON.parse(user.sfera).map((item, index)=> {
           str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
@@ -255,6 +263,7 @@ const Managers = () => {
           phone: user.phone, 
           phone2: user.phone2,
           city: user.city, 
+          worklist: str_worklist,
           sfera: str_sfera,
           dolgnost: user.dolgnost,
           company: str_company, 
@@ -561,6 +570,8 @@ const clickNext = async() => {
     setSklad(user.sklad)
     setBlock(user.block)
     setShowBlacklist(user.sfera ? user.sfera.includes('Blacklist') : false)
+
+    setWorklist(user.worklist)
 
     if (userbots) {
       setNik(userbots.find((item) => item.chatId?.toString() === user.chatId?.toString())?.username)
@@ -982,6 +993,18 @@ const clickNext = async() => {
                                       </div>
                                     </div>  
                                   </div>
+
+                                  <div style={{position: 'absolute', top: '535px'}}>
+                                      <label className='title-label'>Рассылки</label>
+                                      <div className="text-field"> 
+                                        <MyDropdown2
+                                          tags={worklist}
+                                          setTags={setWorklist}
+                                          options={distribData}
+                                          widthStyle='250px'
+                                        />
+                                      </div>
+                                    </div> 
                                   
                                   <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '215px', left: '215px', opacity: block ? '1' : '0' }}/>
                                   <div className="menu-content-krest">

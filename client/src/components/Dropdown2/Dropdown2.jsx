@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import drp from './Dropdown2.module.css'
 import Close from "../../assets/images/close.svg"
 
-const Dropdown2 = ({options, tags, setTags}) => {
+const Dropdown2 = ({options, tags, setTags, widthStyle}) => {
     const [menuShow, setMenuShow] = useState(false)
     const [selected, setSelected] = useState(options[0])
     const [showClose, setShowClose] = useState(false)
@@ -64,7 +64,7 @@ const Dropdown2 = ({options, tags, setTags}) => {
 
     return (
         <div className={drp.dropdown} ref={wrapperRef}>
-            <ul onClick={()=>setMenuShow(!menuShow)} className={`${drp.speclist}`}>
+            <ul onClick={()=>setMenuShow(!menuShow)} className={`${drp.speclist}`} style={{width: widthStyle}}>
                 {specList}
             </ul>
 
