@@ -174,6 +174,13 @@ const Managers = () => {
   }, [text]);
 
 
+  useEffect(()=> {
+    console.log("companyName: ", companyName)
+    if (companyName === '') {
+      setCompany('')
+    }
+  }, [companyName])
+
 
   //-----------------------------------------------------------------------------------------
   //			get managers
