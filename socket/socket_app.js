@@ -17,6 +17,11 @@ const host = process.env.HOST
 const app = express();
 app.use(cors())
 
+// Enable CORS for all routes  localho.st
+// app.use(cors({ 
+//     origin: 'http://localhost:3000', 
+// }));
+
 // Certificate
 const privateKey = fs.readFileSync('privkey.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('cert.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/cert.pem', 'utf8');

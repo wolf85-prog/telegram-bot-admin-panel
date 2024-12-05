@@ -95,12 +95,12 @@ const UsersProvider = ({ children }) => {
 	   	return parsedUserWorkers || "";
 	}); 
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
-	//const [workersAll, setWorkersAll] = useState([]); //все специалисты;
-	const [workersAll, setWorkersAll] =  useState( () => {
-		const savedUserWorkers = localStorage.getItem("specialist");
-	   	const parsedUserWorkers = JSON.parse(savedUserWorkers);
-	   	return parsedUserWorkers || "";
-	});  //все специалисты;
+	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
+	// const [workersAll, setWorkersAll] =  useState( () => {
+	// 	const savedUserWorkers = localStorage.getItem("specialist");
+	//    	const parsedUserWorkers = JSON.parse(savedUserWorkers);
+	//    	return parsedUserWorkers || "";
+	// });  //все специалисты;
 
 	const [specialist, setSpecialist] =  useState([])
 
@@ -205,64 +205,64 @@ const UsersProvider = ({ children }) => {
 	const audio10 = new Audio(sound10);
 	const audio5 = new Audio(sound5);
 
-	const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    const DAYS_OF_THE_WEEK = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
-	const MONTHS = ['Январь', 'Февраль', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+	// const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    // const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    // const DAYS_OF_THE_WEEK = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+	// const MONTHS = ['Январь', 'Февраль', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
     // // Will be implemented below
-    const today = new Date();
-    const [date, setDate] = useState(today);
-	const [day, setDay] = useState(date.getDate());
-    const [month, setMonth] = useState(date.getMonth());
-    const [year, setYear] = useState(date.getFullYear());
-    const [startDay, setStartDay] = useState(getStartDayOfMonth(date));
-	const [currentDays, setCurrentDays] = useState([]);
+    // const today = new Date();
+    // const [date, setDate] = useState(today);
+	// const [day, setDay] = useState(date.getDate());
+    // const [month, setMonth] = useState(date.getMonth());
+    // const [year, setYear] = useState(date.getFullYear());
+    // const [startDay, setStartDay] = useState(getStartDayOfMonth(date));
+	// const [currentDays, setCurrentDays] = useState([]);
     //const [showButtonAdd, setShowButtonAdd] = useState([])
 
-	useEffect(() => {
-        setDay(date.getDate());
-        setMonth(date.getMonth());
-        setYear(date.getFullYear());
-        setStartDay(getStartDayOfMonth(date));
+	// useEffect(() => {
+    //     setDay(date.getDate());
+    //     setMonth(date.getMonth());
+    //     setYear(date.getFullYear());
+    //     setStartDay(getStartDayOfMonth(date));
 
-        const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-        const weekdayOfFirstDay = firstDayOfMonth.getDay();
+    //     const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    //     const weekdayOfFirstDay = firstDayOfMonth.getDay();
         
-        let arr = []
-        for (let day = 0; day < 35; day++) {
-        if (day === 0 && weekdayOfFirstDay === 0) {
-            firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 7);
-        } else if (day === 0) {
-            firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (day - weekdayOfFirstDay));
-        } else {
-            firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
-        }
+    //     let arr = []
+    //     for (let day = 0; day < 35; day++) {
+    //     if (day === 0 && weekdayOfFirstDay === 0) {
+    //         firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 7);
+    //     } else if (day === 0) {
+    //         firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (day - weekdayOfFirstDay));
+    //     } else {
+    //         firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
+    //     }
     
-        let calendarDay = {
-            currentMonth: (firstDayOfMonth.getMonth() === date.getMonth()),
-            date: (new Date(firstDayOfMonth)),
-            month: firstDayOfMonth.getMonth(),
-            number: firstDayOfMonth.getDate(),
-            selected: (firstDayOfMonth.toDateString() === date.toDateString()),
-            year: firstDayOfMonth.getFullYear()
-        }
+    //     let calendarDay = {
+    //         currentMonth: (firstDayOfMonth.getMonth() === date.getMonth()),
+    //         date: (new Date(firstDayOfMonth)),
+    //         month: firstDayOfMonth.getMonth(),
+    //         number: firstDayOfMonth.getDate(),
+    //         selected: (firstDayOfMonth.toDateString() === date.toDateString()),
+    //         year: firstDayOfMonth.getFullYear()
+    //     }
     
-        arr.push(calendarDay);
-        setCurrentDays(arr)
-        //console.log(currentDays)
-        }
-    }, [date]);
+    //     arr.push(calendarDay);
+    //     setCurrentDays(arr)
+    //     //console.log(currentDays)
+    //     }
+    // }, [date]);
 
-	function isLeapYear(year) {
-        return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
-    }
+	// function isLeapYear(year) {
+    //     return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+    // }
 
-    const days = isLeapYear(date.getFullYear()) ? DAYS_LEAP : DAYS;
+    // const days = isLeapYear(date.getFullYear()) ? DAYS_LEAP : DAYS;
 
-	function getStartDayOfMonth(date) {
-        return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-    }
+	// function getStartDayOfMonth(date) {
+    //     return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+    // }
 
 //-------------get count messages------------------------------------------
 	// useEffect(() => {
@@ -319,98 +319,100 @@ const UsersProvider = ({ children }) => {
 			//console.log("contacts: ", response)
 
 			const arrayContact = []
-
+		setTimeout(()=> {		
 			response.map(async (user, index) => {
 				
 				let conversationId = await getConversation(user.chatId)
 				let messages = await getMessages(conversationId)
 
-				//console.log("count message: ", messages.length)
-
 				//получить последнее сообщение
-				const messageDates = Object.keys(messages);
-				const recentMessageDate = messageDates[messageDates.length - 1];
-				const message = messages[recentMessageDate];
+				//if (messages) {
+					const messageDates = Object.keys(messages);
+					const recentMessageDate = messageDates[messageDates.length - 1];
+					const message = messages[recentMessageDate];
 
-				const dateMessage = message ? messages[recentMessageDate].createdAt : "2000-01-01T00:00:00";
-				const lastMessage = message ? messages[recentMessageDate].text : "";			
+					const dateMessage = message ? messages[recentMessageDate].createdAt : "2000-01-01T00:00:00";
+					const lastMessage = message ? messages[recentMessageDate].text : "";			
 
-				const arrayMessage = []
-				const allDate = []
+					const arrayMessage = []
+					const allDate = []
 
-				messages.map(message => {
-					const d = new Date(message.createdAt);
-					const year = d.getFullYear();
-					const month = String(d.getMonth()+1).padStart(2, "0");
-					const day = String(d.getDate()).padStart(2, "0");
-					const chas = d.getHours();
-					const minut = String(d.getMinutes()).padStart(2, "0");
+					messages.map(message => {
+						const d = new Date(message.createdAt);
+						const year = d.getFullYear();
+						const month = String(d.getMonth()+1).padStart(2, "0");
+						const day = String(d.getDate()).padStart(2, "0");
+						const chas = d.getHours();
+						const minut = String(d.getMinutes()).padStart(2, "0");
 
-					const newDateMessage = `${day}.${month}.${year}`
+						const newDateMessage = `${day}.${month}.${year}`
 
-					const newMessage = {
-						date: newDateMessage,
-						content: message.text,
-						image: message.type === 'image' ? true : false,
-						descript: message.buttons ? message.buttons : '',
-						sender: message.senderId,
-						time: chas + ' : ' + minut,
-						status: 'sent',
-						id:message.messageId,
-						reply:message.replyId,
-					}
-					arrayMessage.push(newMessage)
-					allDate.push(newDateMessage)
-				})
-
-				const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
-
-				let obj = {};
-				for (let i = 0; i < dates.length; i++) {
-					const arrayDateMessage = []
-					for (let j = 0; j < arrayMessage.length; j++) {
-						if (arrayMessage[j].date === dates[i]) {
-							arrayDateMessage.push(arrayMessage[j])							
+						const newMessage = {
+							date: newDateMessage,
+							content: message.text,
+							image: message.type === 'image' ? true : false,
+							descript: message.buttons ? message.buttons : '',
+							sender: message.senderId,
+							time: chas + ' : ' + minut,
+							status: 'sent',
+							id:message.messageId,
+							reply:message.replyId,
 						}
-					}	
-					obj[dates[i]] = arrayDateMessage;
-				}
-
-				let first_name = user.firstname != null ? user.firstname : ''
-				let last_name = user.lastname != null ? user.lastname : ''
-
-				let chatName = user.username ? user.username : first_name + ' ' + last_name
-
-				const newUser = {
-					id: user.id,
-					name: chatName,
-					chatId: user.chatId,
-					avatar: user.avatar,
-					conversationId: conversationId,
-					unread: 0, 
-					pinned: false,
-					typing: false,
-					message:  lastMessage,
-					date: dateMessage,
-					messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
-				}
-
-				arrayContact.push(newUser)
-
-				//если элемент массива последний
-				if (index === response.length-1) {
-					const sortedClients = [...arrayContact].sort((a, b) => {       
-						var dateA = new Date(a.date), dateB = new Date(b.date) 
-						return dateB-dateA  //сортировка по убывающей дате  
+						arrayMessage.push(newMessage)
+						allDate.push(newDateMessage)
 					})
 
-					setUsers(sortedClients)
-					
-					//сохранить кэш
-					//localStorage.setItem("users", JSON.stringify(sortedClients));
-				}
+					const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
+
+					let obj = {};
+					for (let i = 0; i < dates.length; i++) {
+						const arrayDateMessage = []
+						for (let j = 0; j < arrayMessage.length; j++) {
+							if (arrayMessage[j].date === dates[i]) {
+								arrayDateMessage.push(arrayMessage[j])							
+							}
+						}	
+						obj[dates[i]] = arrayDateMessage;
+					}
+
+					let first_name = user.firstname != null ? user.firstname : ''
+					let last_name = user.lastname != null ? user.lastname : ''
+
+					let chatName = user.username ? user.username : first_name + ' ' + last_name
+
+					const newUser = {
+						id: user.id,
+						name: chatName,
+						chatId: user.chatId,
+						avatar: user.avatar,
+						conversationId: conversationId,
+						unread: 0, 
+						pinned: false,
+						typing: false,
+						message:  lastMessage,
+						date: dateMessage,
+						messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
+					}
+
+					arrayContact.push(newUser)
+
+					//если элемент массива последний
+					if (index === response.length-1) {
+						const sortedClients = [...arrayContact].sort((a, b) => {       
+							var dateA = new Date(a.date), dateB = new Date(b.date) 
+							return dateB-dateA  //сортировка по убывающей дате  
+						})
+
+						setUsers(sortedClients)
+						
+						//сохранить кэш
+						//localStorage.setItem("users", JSON.stringify(sortedClients));
+					}
+				//}
+				
 			})
-	}
+		}, 2000)
+		}
 	
 	fetchData()
 
@@ -509,7 +511,7 @@ useEffect(() => {
 			setWorkersAll(arrayWorkerAll)
 
 			//сохранить кэш
-			localStorage.setItem("specialist", JSON.stringify(arrayWorkerAll));
+			//localStorage.setItem("specialist", JSON.stringify(arrayWorkerAll));
 
 			//1 все специалисты 100
 			//let response = await getWorkersCount(100, workers.length);
@@ -2442,17 +2444,17 @@ function isObjectEmpty(obj) {
 			setPlatformsAll,
 			specialistsCount, 
 			setSpecialistsCount,
-			date, 
-			setDate,
-			MONTHS,
-			DAYS_OF_THE_WEEK,
-			month,
-			setMonth,
-			year,
-			setYear,
-			startDay, 
-			setStartDay,
-			currentDays,
+			// date, 
+			// setDate,
+			// MONTHS,
+			// DAYS_OF_THE_WEEK,
+			// month,
+			// setMonth,
+			// year,
+			// setYear,
+			// startDay, 
+			// setStartDay,
+			// currentDays,
 
 		}}>
 			{children}
