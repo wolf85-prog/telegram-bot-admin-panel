@@ -181,6 +181,10 @@ const Managers = () => {
     }
   }, [companyName])
 
+  useEffect(()=> {
+    console.log("companyId: ", company)
+  }, [company])
+
 
   //-----------------------------------------------------------------------------------------
   //			get managers
@@ -1123,7 +1127,6 @@ const clickNext = async() => {
                                         isOptionEqualToValue={(option, value) => option.value === value.value}
                                         onChange={(event, newValue) => {
                                             if (newValue && newValue.length) {
-                                                
                                                 const comp = companysAll.find(item=> item.title === newValue)
                                                 console.log("comp: ", comp)
                                                 if (comp) {
