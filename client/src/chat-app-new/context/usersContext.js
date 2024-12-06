@@ -95,12 +95,12 @@ const UsersProvider = ({ children }) => {
 	   	return parsedUserWorkers || "";
 	}); 
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
-	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
-	// const [workersAll, setWorkersAll] =  useState( () => {
-	// 	const savedUserWorkers = localStorage.getItem("specialist");
-	//    	const parsedUserWorkers = JSON.parse(savedUserWorkers);
-	//    	return parsedUserWorkers || "";
-	// });  //все специалисты;
+	//const [workersAll, setWorkersAll] = useState([]); //все специалисты;
+	const [workersAll, setWorkersAll] =  useState( () => {
+		const savedUserWorkers = localStorage.getItem("specialist");
+	   	const parsedUserWorkers = JSON.parse(savedUserWorkers);
+	   	return parsedUserWorkers || "";
+	});  //все специалисты;
 
 	const [specialist, setSpecialist] =  useState([])
 
@@ -406,7 +406,7 @@ const UsersProvider = ({ children }) => {
 						setUsers(sortedClients)
 						
 						//сохранить кэш
-						//localStorage.setItem("users", JSON.stringify(sortedClients));
+						localStorage.setItem("users", JSON.stringify(sortedClients));
 					}
 				//}
 			}, 100 * ++index)	
@@ -511,7 +511,7 @@ useEffect(() => {
 			setWorkersAll(arrayWorkerAll)
 
 			//сохранить кэш
-			//localStorage.setItem("specialist", JSON.stringify(arrayWorkerAll));
+			localStorage.setItem("specialist", JSON.stringify(arrayWorkerAll));
 
 			//1 все специалисты 100
 			//let response = await getWorkersCount(100, workers.length);
