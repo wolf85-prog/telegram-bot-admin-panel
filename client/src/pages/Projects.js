@@ -347,10 +347,10 @@ const Projects = () => {
     resPretendents.map((item)=> {
       const fioSpec = workersAll.find(el=> el.id === parseInt(item.workerId))
       //console.log("workers: ", workersAll)
-      console.log("fioSpec: ", fioSpec)
+      //console.log("fioSpec: ", fioSpec)
       const localDate = new Date(item.createdAt).toLocaleString().split(',')[0] + " | " + new Date(item.createdAt).toLocaleString().split(',')[1].slice(1, 6)
 
-      if (item.status === 'В проект') colorStatus = 'green'
+      if (item.status === 'В Проект') colorStatus = 'green'
       if (item.status === 'Отказано') colorStatus = 'yellow'
 
       const newObj = {
@@ -471,7 +471,8 @@ const Projects = () => {
     setSpecifikaProject({name: specifika, color: specifikaData.find((stat)=> stat.label === specifika)?.color})
 
     const compTitle = companysAll.find(item=> item.id.toString() === resProj.companyId)
-    setCompanyName(compTitle?.title)
+    //console.log("companyName: ", compTitle?.title ? compTitle?.title : '')
+    setCompanyName(compTitle?.title ? compTitle?.title : '')
 
     const managerFio = managersAll.find(item=> item.id.toString() === resProj.managerId)
     setManagerName(managerFio?.fio)
@@ -684,11 +685,6 @@ ${loc.url}`;
     setShowPosterTable(false)
   }
 
-  const onChangeCompany = (e) => {
-    //if (e) {
-      setCompanyName(e.target.value) 
-    //}    
-  }
 
   const onChangeManager = (e, index) => {
     //console.log(e.target.value, index)
@@ -705,9 +701,11 @@ ${loc.url}`;
   }
 
   const onChangeManager2 = (e, index) => {
-    //if (e) {
+    if (e) {
       setManagerName2(e.target.value) 
-    //} 
+    } else {
+      setManagerName2('') 
+    }
   }
 
   const clickDelete = (id) => {
@@ -1017,8 +1015,16 @@ ${loc.url}`;
       setCity(e.target.value)  
     } else {
       setCity('')  
-    }
-      
+    }    
+  }
+
+  const onChangeCompany= (e) => {
+    //console.log(e.target.value)
+    if (e) {
+      setCompanyName(e.target.value)  
+    } else {
+      setCompanyName('')  
+    }    
   }
 
   const changeLocation = (e) => {
@@ -1258,8 +1264,7 @@ ${loc.url}`;
                                               id="custom-input-company"
                                               options={companysData}
                                               style={{width: '100%', padding: '0'}}
-                                              onInputChange={(e)=>setCompanyName(e.target.value)}
-                                              //onInputChange={(e)=>console.log(e.target.value)}
+                                              onInputChange={onChangeCompany}
                                               //isOptionEqualToValue={(option, value) => option === value}
                                               onChange={(event, newValue) => {
                                                   if (newValue && newValue.length) {                                       
@@ -1498,7 +1503,7 @@ ${loc.url}`;
                                               options={managersData}
                                               style={{width: '100%', padding: '0'}}
                                               //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                              onInputChange={(e)=>setManagerName2(e.target.value)}
+                                              onInputChange={onChangeManager2}
                                               onChange={(event, newValue) => {
                                                 if (newValue && newValue.length) {                                                      
                                                   const comp = managersAll.find(item=> item.fio === newValue)
