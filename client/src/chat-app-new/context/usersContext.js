@@ -803,7 +803,7 @@ useEffect(() => {
 
 				let str_worklist = ''
 				user.worklist && JSON.parse(user.worklist).map((item, index)=> {
-					str_worklist = str_worklist + item.name + (index+1 !== JSON.parse(user.worklist).length ? ', ' : '')
+					str_worklist = str_worklist + item.cat + (index+1 !== JSON.parse(user.worklist).length ? ', ' : '')
 				})
 
 				let str_sfera = ''
