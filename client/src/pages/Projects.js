@@ -332,16 +332,7 @@ const Projects = () => {
     setShowProject(true)
     setShowCalendar(false)
     setShowCalendar2(false)
-    setVisibleA(true)
-    setVisibleB(true)
-    setShowMainTable(true)
-    setShowPretendentTable(true)
-    setShowPosterTable(true)
-
-
-    setTimeout(()=> {
-      setHeight(509)
-    }, 200)
+    
 
     const resProj = await getProjectId(id)
     console.log("resProj: ", resProj)
@@ -367,7 +358,7 @@ const Projects = () => {
         data: localDate,
         status: item.status ? JSON.stringify({name: item.status, color: colorStatus}) : '',
         fio: fioSpec?.userfamily + " " + fioSpec?.username, 
-        workerId: fioSpec.id,
+        workerId: fioSpec?.id,
         projectId: item.projectId,
         receiverId: item.receiverId,
         spec: JSON.parse(fioSpec?.worklist)[0]?.spec,
@@ -533,6 +524,18 @@ ${loc.url}`;
     setTeh6(resProj.teh6)
     setTeh7(resProj.teh7)
     setTeh8(resProj.teh8)
+
+    
+    setVisibleA(true)
+    setVisibleB(true)
+    setShowMainTable(true)
+    setShowPretendentTable(true)
+    setShowPosterTable(true)
+
+
+    setTimeout(()=> {
+      setHeight(509)
+    }, 200)
     
   }
 
@@ -682,7 +685,9 @@ ${loc.url}`;
   }
 
   const onChangeCompany = (e) => {
-    setCompanyName(e.target.value)     
+    //if (e) {
+      setCompanyName(e.target.value) 
+    //}    
   }
 
   const onChangeManager = (e, index) => {
@@ -700,7 +705,9 @@ ${loc.url}`;
   }
 
   const onChangeManager2 = (e, index) => {
-    setManagerName2(e.target.value) 
+    //if (e) {
+      setManagerName2(e.target.value) 
+    //} 
   }
 
   const clickDelete = (id) => {
@@ -1251,9 +1258,9 @@ ${loc.url}`;
                                               id="custom-input-company"
                                               options={companysData}
                                               style={{width: '100%', padding: '0'}}
-                                              onInputChange={(e)=>onChangeCompany(e)}
+                                              onInputChange={(e)=>setCompanyName(e.target.value)}
                                               //onInputChange={(e)=>console.log(e.target.value)}
-                                              isOptionEqualToValue={(option, value) => option.value === value.value}
+                                              //isOptionEqualToValue={(option, value) => option === value}
                                               onChange={(event, newValue) => {
                                                   if (newValue && newValue.length) {                                       
                                                       const comp = companysAll.find(item=> item.title === newValue)
@@ -1361,7 +1368,7 @@ ${loc.url}`;
                                               style={{width: '100%', padding: '0'}}
                                               onInputChange={(e)=>setLocationProject(e.target.value)}
                                               //onInputChange={(e)=>console.log(e.target.value)}
-                                              isOptionEqualToValue={(option, value) => option.value === value.value}
+                                              //isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onChange={(event, newValue) => {
                                                   if (newValue && newValue.length) {
                                                       setLocationProject(newValue)
@@ -1491,7 +1498,7 @@ ${loc.url}`;
                                               options={managersData}
                                               style={{width: '100%', padding: '0'}}
                                               //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                              onInputChange={(e)=>onChangeManager2(e)}
+                                              onInputChange={(e)=>setManagerName2(e.target.value)}
                                               onChange={(event, newValue) => {
                                                 if (newValue && newValue.length) {                                                      
                                                   const comp = managersAll.find(item=> item.fio === newValue)

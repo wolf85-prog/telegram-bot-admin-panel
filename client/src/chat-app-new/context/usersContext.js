@@ -319,9 +319,9 @@ const UsersProvider = ({ children }) => {
 			//console.log("contacts: ", response)
 
 			const arrayContact = []
-		setTimeout(()=> {		
-			response.map(async (user, index) => {
 				
+			response.map(async (user, index) => {
+			setTimeout(async()=> {
 				let conversationId = await getConversation(user.chatId)
 				let messages = await getMessages(conversationId)
 
@@ -409,9 +409,9 @@ const UsersProvider = ({ children }) => {
 						//localStorage.setItem("users", JSON.stringify(sortedClients));
 					}
 				//}
-				
+			}, 100 * ++index)	
 			})
-		}, 2000)
+		
 		}
 	
 	fetchData()
