@@ -329,6 +329,20 @@ const Projects = () => {
   const openProject = async(month, item, number, id, name, end, status, timeStart, specifika) => {
     console.log("item: ", month+1, item, number, specifika, end)
 
+    setShowProject(true)
+    setShowCalendar(false)
+    setShowCalendar2(false)
+    setVisibleA(true)
+    setVisibleB(true)
+    setShowMainTable(true)
+    setShowPretendentTable(true)
+    setShowPosterTable(true)
+
+
+    setTimeout(()=> {
+      setHeight(509)
+    }, 200)
+
     const resProj = await getProjectId(id)
     console.log("resProj: ", resProj)
 
@@ -356,7 +370,7 @@ const Projects = () => {
         workerId: fioSpec.id,
         projectId: item.projectId,
         receiverId: item.receiverId,
-        spec: JSON.parse(fioSpec?.worklist)[0].spec,
+        spec: JSON.parse(fioSpec?.worklist)[0]?.spec,
         comment: JSON.parse(fioSpec?.comment),
         comteg: JSON.parse(fioSpec?.comteg),
       }
@@ -519,20 +533,6 @@ ${loc.url}`;
     setTeh6(resProj.teh6)
     setTeh7(resProj.teh7)
     setTeh8(resProj.teh8)
-
-    setShowProject(true)
-    setShowCalendar(false)
-    setShowCalendar2(false)
-    setVisibleA(true)
-    setVisibleB(true)
-    setShowMainTable(true)
-    setShowPretendentTable(true)
-    setShowPosterTable(true)
-
-
-    setTimeout(()=> {
-      setHeight(509)
-    }, 200)
     
   }
 
