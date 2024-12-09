@@ -657,6 +657,16 @@ const clickNext = async() => {
       setShowClose(true)
       console.log(id)
 
+      let worklistArr = []
+      let strWorklist = ''
+      sfera.map((item, index)=> {
+        const obj = {
+          name: item,
+        }
+        strWorklist = strWorklist + item + (index+1 !== worklist.length ? ', ' : '')
+        worklistArr.push(obj)
+      })
+
       let sferaArr = []
       let strSfera = ''
       sfera.map((item, index)=> {
@@ -702,6 +712,7 @@ const clickNext = async() => {
         phone, 
         phone2,
         city, 
+        worklist: JSON.stringify(worklistArr),
         sfera: JSON.stringify(sferaArr),
         dolgnost: dolgnost,
         company: str_company,
@@ -726,6 +737,7 @@ const clickNext = async() => {
           phone, 
           phone2,
           city: city, 
+          worklist: strWorklist,
           sfera: strSfera,
           dolgnost: dolgnost,
           company: str_company,
