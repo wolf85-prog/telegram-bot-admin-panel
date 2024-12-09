@@ -118,7 +118,7 @@ const Workers = () => {
           //workerName: workerObject?.username,
           worklist: worklist, 
           rang: rang, 
-          comment: JSON.parse(comment)[0].content, 
+          comment: comment ? JSON.parse(comment)[0].content : '', 
           phone: phone, 
           accept: worker.accept,
         }
