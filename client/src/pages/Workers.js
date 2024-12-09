@@ -23,11 +23,11 @@ import { useUsersContext } from "../chat-app-new/context/usersContext";
 
 import arrowDown from '../assets/images/arrowDown.svg'
 
-import { getAllPretendent, getAllPretendentCount, getWorkers, getWorkersNotion100, getWorkersNotion, getWorkerNotionId} from './../http/workerAPI'
+import { getAllPretendent, getAllPretendentCount, getWorkersNotion100, getWorkersNotion, getWorkerNotionId} from './../http/workerAPI'
+import { getSpecialist } from './../http/specAPI'
+//import { getProjectsApi } from './../http/adminAPI'
 
-import { getProjectsApi } from './../http/adminAPI'
-
-//import { getProjects } from './../http/projectAPI'
+import { getProjects } from './../http/projectAPI'
 
 
 //Workers.js
@@ -76,21 +76,21 @@ const Workers = () => {
 
       setCountWorker(countWorker+20)
 
-      let workers = await getWorkers()
+      let workers = await getSpecialist()
       //console.log("workers context: ", workers)
 
-      //let projects = await getProjects();
-      let projects = await getProjectsApi()
-      console.log("projects workers: ", projects)
+      let projects = await getProjects()
+      //console.log("projects workers: ", projects)
 
       pretendents.map(async (worker, i) => {
 
-        let userObject = projects.find((proj) => proj.id === worker.projectId.toString());  
-        console.log("userObject: ", worker?.projectId.toString())
+        let userObject = projects.find((proj) => proj.id === parseInt(worker.projectId));  
+        //console.log("userObject: ", userObject)
         const projectName = userObject?.name
 
-        let workerObject = workers.find((item) => item.chatId === worker.receiverId);  
-        const workerName = workerObject?.userfamily + " "+ workerObject?.username
+        let workerObject = workers.find((item) => item.chatId === worker.receiverId); 
+        //console.log("workerObject: ", workerObject) 
+        const workerName = workerObject?.fio
 
         const worklist = workerObject?.worklist ? JSON.parse(workerObject?.worklist) : ''
         const rang = workerObject?.rank ? workerObject?.rank : ''
@@ -114,11 +114,11 @@ const Workers = () => {
           date: newDate, 
           projectId: worker.projectId,
           project: projectName,
-          workerFamily: workerObject?.userfamily,
-          workerName: workerObject?.username,
+          workerFamily: workerName,
+          //workerName: workerObject?.username,
           worklist: worklist, 
           rang: rang, 
-          comment: comment, 
+          comment: JSON.parse(comment)[0].content, 
           phone: phone, 
           accept: worker.accept,
         }
@@ -207,10 +207,10 @@ const Workers = () => {
                                   <CTableBody>                                  
                                     {spec.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
-                                        <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
+                                        <CTableDataCell className="text-center" style={{color: !item.accept && "red"}}>
                                           {item.date}
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
+                                        <CTableDataCell className="text-center" style={{color: !item.accept && "red"}}>
                                           <CTooltip
                                               content={item.projectId}
                                               placement="top"
@@ -218,12 +218,12 @@ const Workers = () => {
                                               <div>{item.project}</div>
                                           </CTooltip>
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 || item.accept ? 'red' : ''}}>
+                                        <CTableDataCell className="text-center" style={{color: item.dateborn >= 2005 || !item.accept ? 'red' : ''}}>
                                           <CTooltip
                                             content={item.workerId}
                                             placement="top"
                                           > 
-                                            <div>{item.workerFamily + " " + item.workerName}</div>
+                                            <div>{item.workerFamily}</div>
                                           </CTooltip>
                                         </CTableDataCell>
                                         <CTableDataCell style={{fontSize: '13px', textAlign: 'left'}}>
@@ -241,7 +241,7 @@ const Workers = () => {
                                             </table>
                                           </CCollapse>
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center" style={{color: item.accept && 'red'}}>
+                                        <CTableDataCell className="text-center" style={{color: !item.accept && 'red'}}>
                                           {item.rang}
                                         </CTableDataCell>
                                         <CTableDataCell style={{fontSize: '13px', textAlign: 'left'}}>
@@ -250,7 +250,7 @@ const Workers = () => {
                                             {item.comment ? item.comment : <></>}
                                           </CCollapse>
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center" style={{color: item.accept && "red"}}>
+                                        <CTableDataCell className="text-center" style={{color: !item.accept && "red"}}>
                                           <div>{item.phone}</div>
                                         </CTableDataCell>
                                       </CTableRow>
