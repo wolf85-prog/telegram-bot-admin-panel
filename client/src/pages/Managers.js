@@ -659,9 +659,9 @@ const clickNext = async() => {
 
       let worklistArr = []
       let strWorklist = ''
-      sfera.map((item, index)=> {
+      worklist.map((item, index)=> {
         const obj = {
-          name: item,
+          cat: item,
         }
         strWorklist = strWorklist + item + (index+1 !== worklist.length ? ', ' : '')
         worklistArr.push(obj)
