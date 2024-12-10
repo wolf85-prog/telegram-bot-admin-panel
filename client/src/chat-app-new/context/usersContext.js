@@ -54,11 +54,12 @@ const useUsersContext = () => useContext(UsersContext);
 
 const UsersProvider = ({ children }) => {
 	const socket = useSocketContext();
-	const [users, setUsers] = useState( () => {
-		const savedUsers = localStorage.getItem("users");
-	   	const parsedUsers = JSON.parse(savedUsers);
-	   	return parsedUsers || "";
-	});  //useState(contacts);	
+	const [users, setUsers] = useState([]); //все специалисты;
+	// const [users, setUsers] = useState( () => {
+	// 	const savedUsers = localStorage.getItem("users");
+	//    	const parsedUsers = JSON.parse(savedUsers);
+	//    	return parsedUsers || "";
+	// });  //useState(contacts);	
 	const [contacts, setContacts] = useState([]); //useState(contacts);
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const [count, setCount] = useState(0)
@@ -95,12 +96,12 @@ const UsersProvider = ({ children }) => {
 	   	return parsedUserWorkers || "";
 	}); 
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
-	//const [workersAll, setWorkersAll] = useState([]); //все специалисты;
-	const [workersAll, setWorkersAll] =  useState( () => {
-		const savedUserWorkers = localStorage.getItem("specialist");
-	   	const parsedUserWorkers = JSON.parse(savedUserWorkers);
-	   	return parsedUserWorkers || "";
-	});  //все специалисты;
+	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
+	// const [workersAll, setWorkersAll] =  useState( () => {
+	// 	const savedUserWorkers = localStorage.getItem("specialist");
+	//    	const parsedUserWorkers = JSON.parse(savedUserWorkers);
+	//    	return parsedUserWorkers || "";
+	// });  //все специалисты;
 
 	const [specialist, setSpecialist] =  useState([])
 
@@ -406,7 +407,7 @@ const UsersProvider = ({ children }) => {
 						setUsers(sortedClients)
 						
 						//сохранить кэш
-						localStorage.setItem("users", JSON.stringify(sortedClients));
+						//localStorage.setItem("users", JSON.stringify(sortedClients));
 					}
 				//}
 			}, 100 * ++index)	
@@ -511,7 +512,7 @@ useEffect(() => {
 			setWorkersAll(arrayWorkerAll)
 
 			//сохранить кэш
-			localStorage.setItem("specialist", JSON.stringify(arrayWorkerAll));
+			//localStorage.setItem("specialist", JSON.stringify(arrayWorkerAll));
 
 			//1 все специалисты 100
 			//let response = await getWorkersCount(100, workers.length);
