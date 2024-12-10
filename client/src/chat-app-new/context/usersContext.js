@@ -54,12 +54,12 @@ const useUsersContext = () => useContext(UsersContext);
 
 const UsersProvider = ({ children }) => {
 	const socket = useSocketContext();
-	const [users, setUsers] = useState([]); //все специалисты;
-	// const [users, setUsers] = useState( () => {
-	// 	const savedUsers = localStorage.getItem("users");
-	//    	const parsedUsers = JSON.parse(savedUsers);
-	//    	return parsedUsers || "";
-	// });  //useState(contacts);	
+	//const [users, setUsers] = useState([]); //все специалисты;
+	const [users, setUsers] = useState( () => {
+		const savedUsers = localStorage.getItem("users");
+	   	const parsedUsers = JSON.parse(savedUsers);
+	   	return parsedUsers || "";
+	});  //useState(contacts);	
 	const [contacts, setContacts] = useState([]); //useState(contacts);
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 	const [count, setCount] = useState(0)
@@ -407,7 +407,7 @@ const UsersProvider = ({ children }) => {
 						setUsers(sortedClients)
 						
 						//сохранить кэш
-						//localStorage.setItem("users", JSON.stringify(sortedClients));
+						localStorage.setItem("users", JSON.stringify(sortedClients));
 					}
 				//}
 			}, 100 * ++index)	
