@@ -180,6 +180,8 @@ const Projects = () => {
   const [timeProject, setTimeProject] = useState([])
   const [pretendents, setPretendents] = useState([])
 
+  const [countPressDate, setCountPressDate] = useState(0);
+
 
   const table = useReactTable({
     defaultColumn: {
@@ -1109,6 +1111,37 @@ ${loc.url}`;
     }, 2000)
   }
 
+
+  const sortDate = () => {
+    setCountPressDate(countPressDate + 1)
+    
+    if (countPressDate + 1 >= 3) {
+      setCountPressDate(0)
+    }
+    console.log("check sort", countPressDate + 1)
+
+    if (countPressDate + 1 === 1) {
+      const sortedWorker = [...pretendents].sort((a, b) => {       
+        var tgA = a.data, tgB = b.data 
+        return (tgA < tgB) ? -1 : (tgA > tgB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setPretendents(sortedWorker)
+    } else if (countPressDate + 1 === 2) {
+      const sortedWorker = [...pretendents].sort((a, b) => {       
+        var tgA = a.data, tgB = b.data 
+        return (tgA > tgB) ? -1 : (tgA < tgB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setPretendents(sortedWorker)
+    } else {
+      const sortedWorker = [...pretendents].sort((a, b) => {       
+        var fioA = a.id, fioB = b.id 
+        return fioB-fioA  //сортировка по убыванию 
+      })
+
+      setPretendents(sortedWorker)
+    }
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -1920,8 +1953,9 @@ ${loc.url}`;
                                       <CFormCheck
                                         style={{backgroundColor: '#181924', border: '1px solid #121212'}}
                                       />
+                                      <split style={{position: 'absolute', left: '65px', top: '61px'}}>{pretendents.length}</split>
                                     </CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{width: '160px'}}>Дата</CTableHeaderCell> 
+                                    <CTableHeaderCell onClick={sortDate} className="text-center" style={{width: '160px'}}>Дата</CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Статус</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>ФИО</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}></CTableHeaderCell> 
