@@ -121,7 +121,7 @@ class PretendentController {
                 where: {projectId, accept: true },
                 // Add order conditions here....
                 order: [
-                    ['updatedAt', 'ASC'], //DESC
+                    ['updatedAt', 'DESC'], //DESC ASC
                 ],
             })
             return res.status(200).json(spec);
