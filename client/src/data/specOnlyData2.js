@@ -15,7 +15,7 @@ const specOnlyData2 = [
             {value: 11, label: 'Инженер VMix', name: 'Инженер VMix', color: ''},
             {value: 12, label: 'Инженер Resolume', name: 'Инженер Resolume', color: ''},
             {value: 13, label: 'Оператор Zoom', name: 'Оператор Zoom', color: ''},
-            {value: 14, label: 'Оператор [cameraman]', name: 'Оператор [cameraman]', color: ''},
+            {value: 14, label: 'Оператор', name: 'Оператор', color: ''},
             {value: 15, label: 'Оператор Action съемки', name: 'Оператор Action съемки', color: ''},
             {value: 16, label: 'Оператор-постановщик', name: 'Оператор-постановщик', color: ''},
             {value: 17, label: 'Режиссер эфиров', name: 'Режиссер эфиров', color: ''},
