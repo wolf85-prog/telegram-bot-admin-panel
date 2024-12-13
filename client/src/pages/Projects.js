@@ -57,6 +57,7 @@ import Calendar2 from "src/components/Calendar3/Calendar2";
 import MyDropdown from 'src/components/Dropdown/Dropdown';
 import MyDropdown4 from 'src/components/Dropdown4/Dropdown4';
 import MyDropdown5 from 'src/components/Dropdown5/Dropdown5';
+import MyDropdown52 from 'src/components/Dropdown52/Dropdown52';
 import MyDropdown6 from 'src/components/Dropdown6/Dropdown6';
 
 
@@ -542,6 +543,10 @@ ${loc.url}`;
     
   }
 
+  useEffect(()=>{
+    console.log("Основной состав: ", mainspec)
+  }, [mainspec])
+
   //сохранить проект
   const saveProject = async(id) => {
 
@@ -555,8 +560,8 @@ ${loc.url}`;
     console.log("companyId: ", companysAll.find(item=> item.title === companyName)?.id)
 
     //удаляем старые записи из Основного состава
-    const resAllDel = await deleteMainspecProject(id)
-    console.log("resAllDel: ", resAllDel)
+    //const resAllDel = await deleteMainspecProject(id)
+    //console.log("resAllDel: ", resAllDel)
 
     const month = String(new Date(startDate).getMonth()+1).padStart(2, "0");
     const day = String(new Date(startDate).getDate()).padStart(2, "0");
@@ -595,20 +600,39 @@ ${loc.url}`;
     console.log("mainSpec save: ", mainspec)
     mainspec.map(async(item, index)=> {
       //setTimeout(async()=> {
-        await addMainspec(
-          {
-            date: item.date,
-            vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
-            specId: item.specId,
-            specialization: item.specialization ? JSON.parse(item.specialization).name : '',
-            stavka: item.stavka ? JSON.parse(item.stavka).name : '',
-            comteg: item.comteg ? JSON.parse(item.comteg).name : '',
-            comment: item.comment,
-            projectId: item.projectId,
-            number: index+1,
-            hr: item.hr,
-          }
-        )
+        if (item.id) {
+          await editMainspec(
+            {
+              date: item.date,
+              vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
+              specId: item.specId,
+              specialization: item.specialization ? JSON.parse(item.specialization).name : '',
+              stavka: item.stavka ? JSON.parse(item.stavka).name : '',
+              comteg: item.comteg ? JSON.parse(item.comteg).name : '',
+              comment: item.comment,
+              projectId: item.projectId,
+              number: index+1,
+              hr: item.hr,
+            },
+            item.id
+          )
+        } else {
+          await addMainspec(
+            {
+              date: item.date,
+              vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
+              specId: item.specId,
+              specialization: item.specialization ? JSON.parse(item.specialization).name : '',
+              stavka: item.stavka ? JSON.parse(item.stavka).name : '',
+              comteg: item.comteg ? JSON.parse(item.comteg).name : '',
+              comment: item.comment,
+              projectId: item.projectId,
+              number: index+1,
+              hr: item.hr,
+            }
+          )
+        }
+        
       //}, 500 * ++index)
     })
 
@@ -1879,7 +1903,6 @@ ${loc.url}`;
                                         index={index}
                                         element={'vidWork'}
                                         placeholder='—'
-                                        setWorker={setPretendents}
                                       />
                                       }
                                     </CTableDataCell>   
@@ -1909,7 +1932,6 @@ ${loc.url}`;
                                         setSelected={setMainspec}
                                         index={index}
                                         element={'specialization'}
-                                        setWorker={setPretendents}
                                       />
                                     }
                                     </CTableDataCell> 
@@ -1923,7 +1945,6 @@ ${loc.url}`;
                                         index={index}
                                         element={'stavka'}
                                         style={{width: '130px'}}
-                                        setWorker={setPretendents}
                                       />
                                     }
                                     </CTableDataCell> 
@@ -1943,7 +1964,6 @@ ${loc.url}`;
                                         index={index}
                                         element={'comteg'}
                                         style={{width: '300px'}}
-                                        setWorker={setPretendents}
                                       />
                                     }
                                     </CTableDataCell>   
@@ -2029,7 +2049,7 @@ ${loc.url}`;
                                       {item.data}
                                     </CTableDataCell>  
                                     <CTableDataCell className="text-center">
-                                      <MyDropdown5
+                                      <MyDropdown52
                                         options={[{label: "В Проект", name: 'В Проект', color: 'green'}, {label: "Отказано", name: 'Отказано', color: 'yellow'}]}
                                         selected={pretendents}
                                         setSelected={setPretendents}

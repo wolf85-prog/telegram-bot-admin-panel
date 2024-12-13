@@ -1,12 +1,12 @@
 import React, {useState, useRef, useEffect} from 'react';
 import Select2 from '../Select2/Select2'
-import drp from './Dropdown5.module.css'
+import drp from './Dropdown52.module.css'
 import Close from "../../assets/images/close.svg"
 import { 
   CFormInput,
 } from '@coreui/react'
 
-const Dropdown5 = ({options, selected, setSelected, index, element, placeholder, style}) => {
+const Dropdown5 = ({options, selected, setSelected, index, element, placeholder, setWorker, style}) => {
     const [menuShow, setMenuShow] = useState(false)
     const [arrSelect, setArrSelect] = useState({})
     const [clearShow, setClearShow] = useState(false)
@@ -21,6 +21,8 @@ const Dropdown5 = ({options, selected, setSelected, index, element, placeholder,
         let arr = JSON.parse(JSON.stringify(selected));
         const userObject = arr[index];
 			  arr[index] = { ...userObject, [element]: JSON.stringify({name: e.target.innerText, color: color})};
+
+        setWorker(arr)
         
         console.log("arr: ", arr)
         setSelected(arr)
