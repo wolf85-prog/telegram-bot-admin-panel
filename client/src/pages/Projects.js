@@ -437,8 +437,7 @@ const Projects = () => {
         arr.push(newObj)
       })
 
-      console.log(arr)
-
+      //console.log(arr)
       setMainspec(arr)
 
     } else {
@@ -446,10 +445,10 @@ const Projects = () => {
       const startD = new Date(resProj.dateStart?.split('T')[0]).toLocaleString().split(',')[0]
       const startT = resProj.dateStart?.split('T')[1]?.slice(0, 5)
 
-      console.log("startD: ", startD, startT)
+      //console.log("startD: ", startD, startT)
 
       const data = {
-        id: resProj.crmID+1,
+        //id: resProj.crmID+1,
         date: startD+'T'+resProj.dateStart?.split('T')[1].slice(0,5),
         vidWork: null,
         specId: null,
@@ -462,11 +461,10 @@ const Projects = () => {
         projectId: id,    
       }
 
-      //console.log([...arr, {...data, id: parseInt(resProj.crmID)+1}, {...data, id: parseInt(resProj.crmID)+2}, {...data, id: parseInt(resProj.crmID)+3}, {...data, id: parseInt(resProj.crmID)+4}])
-
       let arr = []
       setMainspec(
-        [...arr, {...data, id: parseInt(resProj.crmID)+1}, {...data, id: parseInt(resProj.crmID)+2}, {...data, id: parseInt(resProj.crmID)+3}, {...data, id: parseInt(resProj.crmID)+4}]
+        //[...arr, {...data, id: parseInt(resProj.crmID)+1}, {...data, id: parseInt(resProj.crmID)+2}, {...data, id: parseInt(resProj.crmID)+3}, {...data, id: parseInt(resProj.crmID)+4}]
+        [...arr, data, data, data, data]
       );
     }
 
@@ -600,8 +598,9 @@ ${loc.url}`;
     console.log("mainSpec save: ", mainspec)
     mainspec.map(async(item, index)=> {
       //setTimeout(async()=> {
+        console.log("id item: ", item.id)
         if (item.id) {
-          await editMainspec(
+          const resEdit = await editMainspec(
             {
               date: item.date,
               vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
@@ -616,6 +615,7 @@ ${loc.url}`;
             },
             item.id
           )
+          console.log("resEdit: ", resEdit)
         } else {
           await addMainspec(
             {
