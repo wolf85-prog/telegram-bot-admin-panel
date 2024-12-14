@@ -124,7 +124,7 @@ const AppSidebar = () => {
       component: CNavLink,
       name: 'Менеджеры',
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '21px', marginLeft: '4px' }} />,
-      onClick: ()=>handleLinkClick2('https://proj.uley.team:3002/chatwork'),
+      onClick: ()=>handleLinkClick2('https://proj.uley.team:3002/chatrent'),
       style: {cursor: 'pointer', backgroundColor: '#0078d421'},
       badge: countMessageRent > 0 ? {color: 'info', text: countMessageRent,} : '',
     },
