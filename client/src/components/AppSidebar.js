@@ -202,7 +202,7 @@ const AppSidebar = () => {
       //href: 'https://t.me/ULEY_Assistant',
       icon: <CIcon icon={cilSend} customClassName="nav-icon" />,
       onClick: ()=>handleLinkClick('https://t.me/ULEY_Assistant'),
-      style: {cursor: 'pointer'},
+      style: {backgroundColor: '#0078d421', cursor: 'pointer'},
     },
     {
       component: CNavItem,
