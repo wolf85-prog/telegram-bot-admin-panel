@@ -204,20 +204,21 @@ const AppSidebar = () => {
       onClick: ()=>handleLinkClick('https://t.me/ULEY_Assistant'),
       style: {cursor: 'pointer'},
     },
-//--------------------------------------------------------------------------------------------------------    
-    {
-      component: CNavTitle,
-      name: '',
-    },
-//---------------------------------------------------------------------------------------------------------
     {
       component: CNavItem,
       name: 'Архив',
       to: '/chat2',
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
-      style: {backgroundColor: '#0078d421', сolor: '#e55353',},
+      style: {сolor: '#e55353',},
     },
+//--------------------------------------------------------------------------------------------------------    
+    {
+      component: CNavTitle,
+      name: '',
+    },
+//---------------------------------------------------------------------------------------------------------
+    
     
     // {
     //   component: CNavItem,
