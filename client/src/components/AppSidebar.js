@@ -90,9 +90,7 @@ const AppSidebar = () => {
     {
       component: CNavLink,
       name: 'В эфире',
-      //href: 'https://www.notion.so/amusienko/On-Air-fc187957a95a4814ac365d6ce6188585',
       icon: <CIcon icon={cilMicrophone} customClassName="nav-icon" />,
-      //onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/On-Air-fc187957a95a4814ac365d6ce6188585'),
       style: {cursor: 'pointer'},
     },
     {
@@ -100,16 +98,12 @@ const AppSidebar = () => {
       name: 'Компании',
       to: '/companys',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-      //onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/b1b7c39c50a7497da828d7e568f062de?v=5f8ceffc7f7340f4ba5aa3739457f1e7'),
-      //style: {color: '#e55353',},
     },
     {
       component: CNavLink,
       name: 'Площадки',
       to: '/platforms',
-      //href: 'https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-      //onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/0fd7496301ad48d0abe1cd19fc5d1930?v=4c1b2cf253324a80baad33f591da43be'),
       style: {cursor: 'pointer'},
     },  
 
@@ -187,8 +181,6 @@ const AppSidebar = () => {
       name: 'Профиль',
       to: '/specialist',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-      //onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/b1b7c39c50a7497da828d7e568f062de?v=5f8ceffc7f7340f4ba5aa3739457f1e7'),
-      //style: {color: '#e55353',},
     },
     {
       component: CNavItem,
@@ -227,22 +219,22 @@ const AppSidebar = () => {
       style: {backgroundColor: '#0078d421', сolor: '#e55353',},
     },
     
-    {
-      component: CNavItem,
-      name: 'Рассылки',
-      to: '/distribution',
-      icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
-      style: {сolor: '#e55353',},
-    },
+    // {
+    //   component: CNavItem,
+    //   name: 'Рассылки',
+    //   to: '/distribution',
+    //   icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+    //   style: {сolor: '#e55353',},
+    // },
    
-    {
-      component: CNavItem,
-      name: 'Уведомления',
-      to: '/notifications',
-      icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-      badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
-      style: {сolor: '#e55353',},
-    },
+    // {
+    //   component: CNavItem,
+    //   name: 'Уведомления',
+    //   to: '/notifications',
+    //   icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
+    //   badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
+    //   style: {сolor: '#e55353',},
+    // },
     // {
     //   component: CNavItem,
     //   name: 'Специалисты 2.0',
