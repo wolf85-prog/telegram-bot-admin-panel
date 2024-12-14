@@ -206,89 +206,6 @@ const UsersProvider = ({ children }) => {
 	const audio10 = new Audio(sound10);
 	const audio5 = new Audio(sound5);
 
-	// const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    // const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    // const DAYS_OF_THE_WEEK = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
-	// const MONTHS = ['Январь', 'Февраль', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-
-    // // Will be implemented below
-    // const today = new Date();
-    // const [date, setDate] = useState(today);
-	// const [day, setDay] = useState(date.getDate());
-    // const [month, setMonth] = useState(date.getMonth());
-    // const [year, setYear] = useState(date.getFullYear());
-    // const [startDay, setStartDay] = useState(getStartDayOfMonth(date));
-	// const [currentDays, setCurrentDays] = useState([]);
-    //const [showButtonAdd, setShowButtonAdd] = useState([])
-
-	// useEffect(() => {
-    //     setDay(date.getDate());
-    //     setMonth(date.getMonth());
-    //     setYear(date.getFullYear());
-    //     setStartDay(getStartDayOfMonth(date));
-
-    //     const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    //     const weekdayOfFirstDay = firstDayOfMonth.getDay();
-        
-    //     let arr = []
-    //     for (let day = 0; day < 35; day++) {
-    //     if (day === 0 && weekdayOfFirstDay === 0) {
-    //         firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 7);
-    //     } else if (day === 0) {
-    //         firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (day - weekdayOfFirstDay));
-    //     } else {
-    //         firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
-    //     }
-    
-    //     let calendarDay = {
-    //         currentMonth: (firstDayOfMonth.getMonth() === date.getMonth()),
-    //         date: (new Date(firstDayOfMonth)),
-    //         month: firstDayOfMonth.getMonth(),
-    //         number: firstDayOfMonth.getDate(),
-    //         selected: (firstDayOfMonth.toDateString() === date.toDateString()),
-    //         year: firstDayOfMonth.getFullYear()
-    //     }
-    
-    //     arr.push(calendarDay);
-    //     setCurrentDays(arr)
-    //     //console.log(currentDays)
-    //     }
-    // }, [date]);
-
-	// function isLeapYear(year) {
-    //     return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
-    // }
-
-    // const days = isLeapYear(date.getFullYear()) ? DAYS_LEAP : DAYS;
-
-	// function getStartDayOfMonth(date) {
-    //     return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-    // }
-
-//-------------get count messages------------------------------------------
-	// useEffect(() => {
-
-	// 	const fetchData = async () => {
-	// 		const kol = await getCountMessage()
-	// 		console.log("kol: ", kol)
-
-	// 		setCountMessage(kol.managers)
-	// 		setCountMessageWork(kol.workers)
-
-	// 		setCountProjects(kol.projects)
-	// 		setCountPretendent(kol.pretendents)
-	// 	}
-
-	// 	fetchData()
-
-	// }, [])
-
-	// useEffect(() => {
-	// 	const saved = localStorage.getItem("countMessageWork");
-	// 	setCountMessageWork(saved)
-	// })
-
-
 //----------------------------------------------------------------------
 
 	useEffect(() => {	
@@ -1930,8 +1847,24 @@ const fetchMessageRentResponse = async(data) => {
 	//const kol = await getCountMessage()
 	setCountMessageRent(count+1)
 	//const res = await newCountMessage(kol.managers + 1)
-	console.log("Пришло новое сообщение в renthub: ", count + 1)
 
+	if (data.text.startsWith('Предварительная смета одобрена!')) {
+			
+	} else if (data.text.startsWith('Проект успешно создан') && !data.text.includes('_reply_')) {
+
+	}
+	else {
+		console.log("Пришло новое сообщение в renthub: ", count+1)
+		//play sound
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+			audioMessage.volume = parseFloat(savedVolume)
+			audioMessage.play();
+		}
+	}
 };
 
 
