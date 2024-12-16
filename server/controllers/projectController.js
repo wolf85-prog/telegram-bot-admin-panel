@@ -95,6 +95,18 @@ class ProjectController {
         }
     }
 
+    async getProjectNewChatId(req, res) {
+        const {id} = req.params
+        try {
+            const projects = await ProjectNew.findAll({
+                where: {chatId: id},
+            })
+            return res.status(200).json(projects);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
 
 
     async getProjectNewCreate(req, res) {
