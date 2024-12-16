@@ -885,11 +885,14 @@ ${loc.url}`;
       } else {
         const dublSpec = mainspec.find((item)=>item.id === parseInt(eventkey.split(' ')[1]))
         console.log("dublSpec: ", dublSpec)
+        
+        const resAdd = await addMainspec({projectId: dublSpec.projectId, hr: dublSpec.hr})
+        console.log("resAddId: ", resAdd.id)
 
         const arrayCopy = JSON.parse(JSON.stringify(mainspec));
         
         arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
-          id: parseInt(eventkey.split(' ')[2]) + arrayCopy.length,
+          id: resAdd.id,
           date: dublSpec.date,
           specId: dublSpec.specId,
           vidWork: dublSpec.vidWork, //JSON.stringify({name: resAdd.vidWork, color: ''}),
@@ -903,24 +906,19 @@ ${loc.url}`;
           projectId: dublSpec.projectId,
         })
         console.log("arrayCopy: ", arrayCopy)
-
         setMainspec(arrayCopy)
-
       }
-
-
     } else
-
     //добавить разделитель
     if (eventkey.split(' ')[0] === '3' || eventkey==='3') {
       //добавить строку в основной состав
-		  // const resAdd = await addMainspec({projectId: id, hr: true, number: parseInt(eventkey.split(' ')[2])+1})
-      // console.log("resAdd: ", resAdd.id)
+		  const resAdd = await addMainspec({projectId: id, hr: true, number: parseInt(eventkey.split(' ')[2])+1})
+      console.log("resAddId: ", resAdd.id)
 
       const arrayCopy = JSON.parse(JSON.stringify(mainspec));
       
       arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
-        id: parseInt(eventkey.split(' ')[2]) + arrayCopy.length,
+        id: resAdd.id,
         date: '',
         specId: '', 
         vidWork: '', 
@@ -1013,7 +1011,7 @@ ${loc.url}`;
         checkedinputvalue.push(parseInt(mainspec[i].id))
       }
     }
-    console.log("checkedinputvalue: ", checkedinputvalue)
+    //console.log("checkedinputvalue: ", checkedinputvalue)
 
     const arrayCopy = JSON.parse(JSON.stringify(mainspec));
     let arr = []
@@ -1022,9 +1020,12 @@ ${loc.url}`;
 
       const dublSpec = mainspec.find((el)=>el.id === parseInt(item))
       console.log("dublSpec: ", dublSpec)
+
+      const resAdd = await addMainspec({projectId: dublSpec.projectId, hr: dublSpec.hr})
+      console.log("resAddId: ", resAdd.id)
     
       const newObj = {
-          id: dublSpec.id + checkedinputvalue.length,
+          id: resAdd.id,
           date: dublSpec.date,
           specId: dublSpec.specId,
           vidWork: dublSpec.vidWork, //JSON.stringify({name: dublSpec.vidWork, color: ''}),
