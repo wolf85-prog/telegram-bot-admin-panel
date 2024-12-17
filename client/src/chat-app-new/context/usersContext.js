@@ -695,6 +695,7 @@ useEffect(() => {
           email: worker.email, 
 		  blockW: worker.blockW,
           block18: worker.block18,
+		  krest: worker.krest
         }
         arrAllWorkers.push(newWorker)
       }) 
