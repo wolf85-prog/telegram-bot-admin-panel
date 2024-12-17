@@ -1017,15 +1017,15 @@ ${loc.url}`;
     let arr = []
 
     checkedinputvalue.map(async(item, index)=> {
-      setTimeout(async()=> {
+      //setTimeout(async()=> {
         const dublSpec = mainspec.find((el)=>el.id === parseInt(item))
         console.log("dublSpec: ", dublSpec)
 
-        const resAdd = await addMainspec({projectId: dublSpec.projectId, hr: dublSpec.hr})
-        console.log("resAddId: ", resAdd.id)
+        // const resAdd = await addMainspec({projectId: dublSpec.projectId, hr: dublSpec.hr})
+        // console.log("resAddId: ", resAdd.id)
       
         const newObj = {
-            id: resAdd.id,
+            //id: resAdd.id,
             date: dublSpec.date,
             specId: dublSpec.specId,
             vidWork: dublSpec.vidWork, //JSON.stringify({name: dublSpec.vidWork, color: ''}),
@@ -1039,13 +1039,26 @@ ${loc.url}`;
             hr: dublSpec.hr,
         }
 
+        console.log("newObj: ", newObj)
         arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, newObj)
-      }, 1000)
-      
+      //}, 2000)   
     })
 
     console.log("newArr: ", arrayCopy)
     const checkedvalue = arrayCopy.map((user)=>{ return {...user, isChecked: false}})
+
+    // const newCheckArr = checkedvalue.map(async(item)=> {
+    //   if (!item.id) {
+    //     const resAdd = await addMainspec({projectId: item.projectId, hr: item.hr})
+    //     console.log("resAddId: ", resAdd.id)
+
+    //     return {...item, id: resAdd.id}
+    //   }
+    //   return item
+
+    // })
+    // //setMainspec(newCheckArr)
+    
     setMainspec(checkedvalue)
   }
 
