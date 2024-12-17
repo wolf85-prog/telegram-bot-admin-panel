@@ -881,7 +881,7 @@ ${loc.url}`;
 
       if (checkedItem) {
         console.log("edit all checked")
-        handleAllEdit()
+        handleAllEdit(eventkey)
       } else {
         const dublSpec = mainspec.find((item)=>item.id === parseInt(eventkey.split(' ')[1]))
         console.log("dublSpec: ", dublSpec)
@@ -1003,7 +1003,7 @@ ${loc.url}`;
     }
   }
 
-  const handleAllEdit = async()=> {
+  const handleAllEdit = async(eventkey)=> {
     const checkedinputvalue=[]
     for(let i=0; i<mainspec.length; i++) 
     {
@@ -1017,34 +1017,35 @@ ${loc.url}`;
     let arr = []
 
     checkedinputvalue.map(async(item, index)=> {
+      setTimeout(async()=> {
+        const dublSpec = mainspec.find((el)=>el.id === parseInt(item))
+        console.log("dublSpec: ", dublSpec)
 
-      const dublSpec = mainspec.find((el)=>el.id === parseInt(item))
-      console.log("dublSpec: ", dublSpec)
-
-      const resAdd = await addMainspec({projectId: dublSpec.projectId, hr: dublSpec.hr})
-      console.log("resAddId: ", resAdd.id)
-    
-      const newObj = {
-          id: resAdd.id,
-          date: dublSpec.date,
-          specId: dublSpec.specId,
-          vidWork: dublSpec.vidWork, //JSON.stringify({name: dublSpec.vidWork, color: ''}),
-          specialization: dublSpec.specialization, //JSON.stringify({name: dublSpec.specialization, color: ''}),
-          stavka: dublSpec.stavka, //JSON.stringify({name: dublSpec.stavka, color: ''}),
-          taxi: dublSpec.number,
-          merch: dublSpec.merch,
-          comment: dublSpec.comment,
-          comteg: dublSpec.comteg, //JSON.stringify({name: dublSpec.comteg, color: ''}),
-          projectId: dublSpec.projectId, 
-          hr: dublSpec.hr,
+        const resAdd = await addMainspec({projectId: dublSpec.projectId, hr: dublSpec.hr})
+        console.log("resAddId: ", resAdd.id)
+      
+        const newObj = {
+            id: resAdd.id,
+            date: dublSpec.date,
+            specId: dublSpec.specId,
+            vidWork: dublSpec.vidWork, //JSON.stringify({name: dublSpec.vidWork, color: ''}),
+            specialization: dublSpec.specialization, //JSON.stringify({name: dublSpec.specialization, color: ''}),
+            stavka: dublSpec.stavka, //JSON.stringify({name: dublSpec.stavka, color: ''}),
+            taxi: dublSpec.number,
+            merch: dublSpec.merch,
+            comment: dublSpec.comment,
+            comteg: dublSpec.comteg, //JSON.stringify({name: dublSpec.comteg, color: ''}),
+            projectId: dublSpec.projectId, 
+            hr: dublSpec.hr,
         }
 
-        arr.push(newObj)
+        arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, newObj)
+      }, 1000)
+      
     })
 
-    const newArray = [...arrayCopy, ...arr]
-
-    const checkedvalue = newArray.map((user)=>{ return {...user, isChecked: false}})
+    console.log("newArr: ", arrayCopy)
+    const checkedvalue = arrayCopy.map((user)=>{ return {...user, isChecked: false}})
     setMainspec(checkedvalue)
   }
 
