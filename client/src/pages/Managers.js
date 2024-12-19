@@ -190,6 +190,9 @@ const Managers = () => {
   //			get managers
   //-----------------------------------------------------------------------------------------
   useEffect(()=> {
+    console.log("companys: ", companysAll)
+    //console.log("managers: ", managersAll)
+
     // сортировка городов
     const newCities = cities.map((item)=> { 
       const newArr = item.label
@@ -259,8 +262,8 @@ const Managers = () => {
         let str_company = ''
         let str_company_name = ''
         let str_company_avatar = ''
-        const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.companyId) || item.GUID === user.companyId)
-        console.log("comp: ", comp)
+        const comp = companysAll.find(item=> item.id.toString() === user.companyId || item.GUID === user.companyId)
+        //console.log("comp: ", comp)
         if (comp) {
           str_company = comp.id
           str_company_name = comp.title
@@ -489,7 +492,7 @@ const clickNext = async() => {
       let str_company = ''
       let str_company_name = ''
       let str_company_avatar = ''
-      const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.companyId) || item.GUID === user.companyId)
+      const comp = companysAll.find(item=> item.id.toString() === user.companyId || item.GUID === user.companyId)
       console.log("comp: ", comp)
       if (comp) {
         str_company = comp.id
@@ -557,7 +560,8 @@ const clickNext = async() => {
     const currentYear = new Date().getFullYear()
 
     let str_company_avatar = ''
-    const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.company) || item.GUID === user.company)
+    //const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.company) || item.GUID === user.company)
+    const comp = companysAll.find(item=> item.id.toString() === user.company || item.GUID === user.company)
     //console.log("comp: ", comp)
     if (comp) {
       //str_company = comp.id
@@ -699,7 +703,8 @@ const clickNext = async() => {
 
       let str_company = ''
       let str_company_name = ''
-      const comp = companysAll.find(item=> parseInt(item.id) === parseInt(company))
+      //const comp = companysAll.find(item=> parseInt(item.id) === parseInt(company))
+      const comp = companysAll.find(item=> item.id.toString() === company || item.GUID === company)
       if (comp) {
         str_company = comp.id
         console.log("str_company: ", str_company)
