@@ -17,7 +17,7 @@ const $host_worker = axios.create({
 })
 
 const $host_renthub = axios.create({
-    baseURL: process.env.REACT_APP_RENTHUB_API_URL
+    baseURL: process.env.REACT_APP_API_URL_RENT
 })
 
 const $host_call = axios.create({
@@ -41,6 +41,7 @@ $authHost.interceptors.request.use(authInterceptor)
 
 export {
     $host,
+    $host_renthub,
     $host_bot,
     $host_bottest,
     $host_worker,
