@@ -22,7 +22,6 @@ import { getDistributionsW,
 	newCountProjects,
 	getCountMessage, 
 	getWorkerId,
-	getProjects3,
 	getProjectAll,
 	getProjects,
 	getProjectNewCash,
@@ -1577,7 +1576,7 @@ const fetchMessageSpecResponse = async(data) => {
 		let pretendents = await getAllPretendent();
 		//setPretendents(pretendents)
 		let workers = await getWorkers()
-      	let projects = await getProjects3();
+      	let projects = await getProjectsApi();
       	//setProjects(projects) 
 
 		pretendents.map(async (worker, i) => {

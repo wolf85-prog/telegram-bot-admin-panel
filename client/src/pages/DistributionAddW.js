@@ -34,7 +34,6 @@ import {
   getDistributionsW,
   getDistributionW, 
   getWorkerId, 
-  getProjects3, 
   getBlocks, 
   getDatabaseId,
   getPretendent,
