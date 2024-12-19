@@ -20,7 +20,7 @@ export const getManagerCount = async (count, prev) =>{
 
 export const editManager = async (data, id) =>{
     try {
-        await $host.patch(`api/managers/update/${id}`, data); 
+        await $host_renthub.patch(`api/managers/update/${id}`, data); 
     } catch (error) {
         console.log("error while calling editManager api",error.message);
     }
@@ -46,7 +46,7 @@ export const deleteManager = async (id) =>{
 
 export const getManagerCountAll = async () =>{
     try {
-        let response = await $host.get(`api/managers/count/get`);
+        let response = await $host_renthub.get(`api/managers/count/get`);
         return response.data; 
     } catch (error) {
         console.log("error while calling getManagerCountAll api",error.message);
