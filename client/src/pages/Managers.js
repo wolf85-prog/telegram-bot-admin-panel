@@ -642,12 +642,12 @@ const clickNext = async() => {
 
   }
 
-  //удаление специалиста
+  //удаление менеджера
   const deleteProfile = async(id) => {
     console.log(id)
     setVisibleDelete(false)
 
-    //await deleteSpecialist(id)
+    await deleteManager(id)
     addToast(deleteToast) //ваши данные сохранены
   
   }
