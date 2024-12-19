@@ -1,15 +1,4 @@
-import {$authHost, $host, $host_bot, $host_bottest, $host_call, $host_smeta} from "./index";
-
-
-export const getManagers = async () =>{
-    try {
-       let response = await $host_bot.get('managers');
-       //console.log(response);
-       return response.data;
-    } catch (error) {
-        console.log("error while calling getManagers api", error.message);
-    }
-}
+import {$authHost, $host, $host_bot, $host_bottest, $host_call, $host_renthub, $host_smeta} from "./index";
 
 export const getProjects = async () =>{
     try {
@@ -31,16 +20,6 @@ export const getProjects2 = async () =>{
     }
 }
 
-//api notion
-export const getProjects3 = async () =>{
-    try {
-        let response = await $host_bot.get('projects3');
-        //console.log("projectsAPI: ", response.data);
-        return response.data;
-    } catch (error) {
-        console.log("error while calling getProjects3 api", error.message);
-    }
-}
 
 //api notion
 export const getProjectAll = async () =>{
@@ -271,7 +250,7 @@ export const getProjectsNewApi2 = async () =>{
 
 export const getCompanys = async () =>{
     try {
-       let response = await $host_bot.get('companys');
+       let response = await $host_renthub.get('companys');
        return response.data;
     } catch (error) {
         console.log("error while calling getCompanys api", error.message);
@@ -280,7 +259,7 @@ export const getCompanys = async () =>{
 
 export const getCompanyId = async (id) =>{
     try {
-       let response = await $host_bot.get(`company/${id}`);
+       let response = await $host_renthub.get(`company/${id}`);
        //console.log("getCompanyId: ", response.data);
        return response.data;
     } catch (error) {
