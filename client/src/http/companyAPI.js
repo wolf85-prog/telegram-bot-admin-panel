@@ -1,4 +1,4 @@
-import {$authHost, $host_renthub} from "./index";
+import {$authHost, $host, $host_renthub} from "./index";
 
 export const getCompany = async () =>{
     try {
