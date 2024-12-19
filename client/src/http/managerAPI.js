@@ -1,4 +1,4 @@
-import {$authHost, $host_renthub} from "./index";
+import {$authHost, $host, $host_renthub} from "./index";
 
 export const getManager = async () =>{
     try {
@@ -20,7 +20,7 @@ export const getManagerCount = async (count, prev) =>{
 
 export const editManager = async (data, id) =>{
     try {
-        await $host_renthub.patch(`api/managers/update/${id}`, data); 
+        await $host.patch(`api/managers/update/${id}`, data); 
     } catch (error) {
         console.log("error while calling editManager api",error.message);
     }
