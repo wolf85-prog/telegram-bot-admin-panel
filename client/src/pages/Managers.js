@@ -703,8 +703,8 @@ const clickNext = async() => {
 
       let str_company = ''
       let str_company_name = ''
-      //const comp = companysAll.find(item=> parseInt(item.id) === parseInt(company))
-      const comp = companysAll.find(item=> item.id.toString() === company || item.GUID === company)
+      const comp = companysAll.find(item=> parseInt(item.id) === parseInt(company))
+      //const comp = companysAll.find(item=> item.id.toString() === company)
       if (comp) {
         str_company = comp.id
         console.log("str_company: ", str_company)
