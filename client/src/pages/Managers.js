@@ -651,9 +651,15 @@ const clickNext = async() => {
     console.log(id)
     setVisibleDelete(false)
 
+    const resFilter = managers.filter(item=>item.id !== id)
+    setManagers(resFilter)
+
     await deleteManager(id)
     addToast(deleteToast) //ваши данные сохранены
-  
+
+    setTimeout(()=> {
+      closeProfile()
+    }, 2000)
   }
 
   //сохранить профиль
@@ -1049,7 +1055,7 @@ const clickNext = async() => {
                                   {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
-                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
+                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '450px'}}></input>
                                     </div>
                                     <div style={{display: 'flex'}}>
                                       <Icon id="delete" onClick={()=>clickDelete(id)} />
