@@ -21,6 +21,7 @@ const Manager = sequelize.define('manager', {
     sfera: {type: DataTypes.TEXT},
     comment: {type: DataTypes.TEXT}, 
     avatar: {type: DataTypes.TEXT},
+    GUID: {type: DataTypes.STRING}, 
 })
 
 const Company = sequelize.define('company', {
