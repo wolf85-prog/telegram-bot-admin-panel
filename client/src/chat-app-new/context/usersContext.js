@@ -741,7 +741,8 @@ useEffect(() => {
 		  
 				let str_company = ''
 				let str_company_name = ''
-				const comp = companysAll.find(item=> item.id.toString() === user.companyId || item.GUID === user.companyId)
+				//const comp = companysAll.find(item=> item.id.toString() === user.companyId || item.GUID === user.companyId)
+				const comp = companysAll.find(item=>user.companyId !== null && (item.id.toString() === user.companyId || item.GUID === user.companyId))
 				//console.log("comp: ", comp.title, user.companyId)
 				if (comp) {
 				  str_company = comp.id

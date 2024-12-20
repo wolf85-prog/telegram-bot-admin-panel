@@ -164,7 +164,7 @@ const Managers = () => {
 
   //поиск
   useEffect(() => {
-		const filteredData = managersAll.filter(user=> (user.fio + user.chatId + user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+		const filteredData = managersAll.filter(user=> (user.fio + user.chatId + user.phone + user.companyName)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
     
     setManagers(text === '' ? managerCount : filteredData); 
 
@@ -229,6 +229,7 @@ const Managers = () => {
       let arrManagers = []
 
       users.map(async (user, i) => {
+        console.log("user: ", user)
         const d = new Date(user.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
         const d2 = new Date(d)
         const month = String(d2.getMonth()+1).padStart(2, "0");
@@ -262,12 +263,16 @@ const Managers = () => {
         let str_company = ''
         let str_company_name = ''
         let str_company_avatar = ''
-        const comp = companysAll.find(item=> item.id.toString() === user.companyId || item.GUID === user.companyId)
-        //console.log("comp: ", comp)
+        const comp = companysAll.find(item=>user.companyId !== null && (item.id.toString() === user.companyId || item.GUID === user.companyId))
+        //console.log("comp: ", user, comp)
         if (comp) {
           str_company = comp.id
           str_company_name = comp.title
           str_company_avatar = comp.profile
+        } else {
+          str_company = ''
+          str_company_name = ''
+          str_company_avatar = ''
         }
 
         const newUser = {
@@ -292,7 +297,7 @@ const Managers = () => {
           block: user.block,
         }
         arrManagers.push(newUser)
-        console.log(newUser)
+        console.log("newUser: ", newUser)
 
         //если элемент массива последний
 				if (i === users.length-1) {
@@ -365,23 +370,23 @@ const Managers = () => {
     console.log("check sort", countPress + 1)
 
     if (countPress + 1 === 1) {
-      const sortedWorker = [...managers].sort((a, b) => {       
+      const sortedWorker = [...managersAll].sort((a, b) => {       
         var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
         return (fioA < fioB) ? -1 : (fioA > fioB) ? 1 : 0;  //сортировка по возрастанию 
       })
-      setManagers(sortedWorker)
+      setManagers(sortedWorker.slice(0, managers.length))
     } else if (countPress + 1 === 2) {
-      const sortedWorker = [...managers].sort((a, b) => {       
+      const sortedWorker = [...managersAll].sort((a, b) => {       
         var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
         return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
       })
-      setManagers(sortedWorker)
+      setManagers(sortedWorker.slice(0, managers.length))
     } else {
-      const sortedWorker = [...managers].sort((a, b) => {       
+      const sortedWorker = [...managersAll].sort((a, b) => {       
         var fioA = a.id, fioB = b.id 
         return fioB-fioA  //сортировка по убыванию 
       })
-      setManagers(sortedWorker)
+      setManagers(sortedWorker.slice(0, managers.length))
     }
     
   }
@@ -396,25 +401,25 @@ const Managers = () => {
     console.log("check sort", countPressTG + 1)
 
     if (countPressTG + 1 === 1) {
-      const sortedWorker = [...managers].sort((a, b) => {       
+      const sortedWorker = [...managersAll].sort((a, b) => {       
         var tgA = a.telegram, tgB = b.telegram 
         return (tgA < tgB) ? -1 : (tgA > tgB) ? 1 : 0;  //сортировка по возрастанию 
       })
-      setManagers(sortedWorker)
+      setManagers(sortedWorker.slice(0, managers.length))
     } else if (countPressTG + 1 === 2) {
-      const sortedWorker = [...managers].sort((a, b) => {       
+      const sortedWorker = [...managersAll].sort((a, b) => {       
         var tgA = a.telegram, tgB = b.telegram 
         return (tgA > tgB) ? -1 : (tgA < tgB) ? 1 : 0;  //сортировка по возрастанию 
       })
-      setManagers(sortedWorker)
+      setManagers(sortedWorker.slice(0, managers.length))
     } else {
-      const sortedWorker = [...managers].sort((a, b) => {       
+      const sortedWorker = [...managersAll].sort((a, b) => {       
         var fioA = a.id, fioB = b.id 
         return fioB-fioA  //сортировка по убыванию 
       })
 
       //setManagerCount(sortedWorker)
-      setManagers(sortedWorker)
+      setManagers(sortedWorker.slice(0, managers.length))
     }
     
   }
@@ -429,25 +434,25 @@ const Managers = () => {
     //console.log("check sort", countPressTG + 1)
 
     if (countPressCity + 1 === 1) {
-      const sortedWorker = [...managers].sort((a, b) => {       
+      const sortedWorker = [...managersAll].sort((a, b) => {       
         var cityA = a.city, cityB = b.city
         return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
       })
-      setManagers(sortedWorker)
+      setManagers(sortedWorker.slice(0, managers.length))
     } else if (countPressCity + 1 === 2) {
-      const sortedWorker = [...managers].sort((a, b) => {       
+      const sortedWorker = [...managersAll].sort((a, b) => {       
         var cityA = a.city, cityB = b.city
         return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
       })
-      setManagers(sortedWorker)
+      setManagers(sortedWorker.slice(0, managers.length))
     } else {
-      const sortedWorker = [...companys].sort((a, b) => {       
+      const sortedWorker = [...managersAll].sort((a, b) => {       
         var idA = a.id, idB = b.id 
         return idB-idA  //сортировка по убыванию 
       })
 
       //setManagerCount(sortedWorker)
-      setManagers(sortedWorker)
+      setManagers(sortedWorker.slice(0, managers.length))
     }
     
   }
@@ -492,12 +497,17 @@ const clickNext = async() => {
       let str_company = ''
       let str_company_name = ''
       let str_company_avatar = ''
-      const comp = companysAll.find(item=> item.id.toString() === user.companyId || item.GUID === user.companyId)
+      //const comp = companysAll.find(item=> item.id.toString() === user.companyId || item.GUID === user.companyId)
+      const comp = companysAll.find(item=>user.companyId !== null && (item.id.toString() === user.companyId || item.GUID === user.companyId))
       console.log("comp: ", comp)
       if (comp) {
         str_company = comp.id
         str_company_name = comp.title
         str_company_avatar = comp.profile
+      } else {
+        str_company = ''
+        str_company_name = ''
+        str_company_avatar = ''
       }
 
       let str_comment = ''
@@ -561,12 +571,15 @@ const clickNext = async() => {
 
     let str_company_avatar = ''
     //const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.company) || item.GUID === user.company)
-    const comp = companysAll.find(item=> item.id.toString() === user.company || item.GUID === user.company)
+    //const comp = companysAll.find(item=> item.id.toString() === user.company || item.GUID === user.company)
+    const comp = companysAll.find(item=>user.companyId !== null && (item.id.toString() === user.companyId || item.GUID === user.companyId))
     //console.log("comp: ", comp)
     if (comp) {
       //str_company = comp.id
       //str_company_name = comp.title
       str_company_avatar = comp.profile
+    } else {
+      str_company_avatar = ''
     }
 
     setId(user.id)
@@ -704,11 +717,14 @@ const clickNext = async() => {
       let str_company = ''
       let str_company_name = ''
       //const comp = companysAll.find(item=> parseInt(item.id) === parseInt(company))
-      const comp = companysAll.find(item=> item.id.toString() === company || item.GUID === company)
+      //const comp = companysAll.find(item=> item.id.toString() === company || item.GUID === company)
+      const comp = companysAll.find(item=>company !== null && (item.id.toString() === company || item.GUID === company))
       if (comp) {
         str_company = comp.id
-        console.log("str_company: ", str_company)
         str_company_name = comp.title
+      } else {
+        str_company = ''
+        str_company_name = ''
       }
 
       const saveData = {
@@ -841,6 +857,7 @@ const clickNext = async() => {
                               (loading ? 
                                       
                                 <CSpinner/> :
+                                <>
                                 <div className='scrooll-table'>
                                   <div className="table-head-content"></div>
                                   <div className="table-head-content2"></div>
@@ -936,9 +953,12 @@ const clickNext = async() => {
                                     
                                   </CTableBody>                   
                                   </CTable>
+                                  
                                 </div>
-                                
-                                
+                                <div style={{marginTop: '15px', marginLeft: '15px', textAlign: 'left'}}>
+                                  {managersCount}/{managers.length}
+                                </div>  
+                                </>
                               )
                               :
                               <div style={{position: 'relative', height: '660px', display: 'flex', flexDirection: 'row'}}>
