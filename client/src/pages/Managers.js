@@ -724,7 +724,8 @@ const clickNext = async() => {
       let str_company_name = ''
       //const comp = companysAll.find(item=> parseInt(item.id) === parseInt(company))
       //const comp = companysAll.find(item=> item.id.toString() === company || item.GUID === company)
-      const comp = companysAll.find(item=>company !== null && (item.id.toString() === company || item.GUID === company))
+      const comp = companysAll.find(item=>company !== '' && (item.id === company || item.GUID === company))
+      console.log("comp save: ", comp, company)
       if (comp) {
         str_company = comp.id
         str_company_name = comp.title
@@ -732,6 +733,7 @@ const clickNext = async() => {
         str_company = ''
         str_company_name = ''
       }
+
 
       const saveData = {
         fio,
@@ -742,7 +744,7 @@ const clickNext = async() => {
         worklist: JSON.stringify(worklistArr),
         sfera: JSON.stringify(sferaArr),
         dolgnost: dolgnost,
-        company: str_company,
+        company: company,
         comteg: JSON.stringify(comtegArr),
         comment: JSON.stringify(commentArr), 
         profile, 
