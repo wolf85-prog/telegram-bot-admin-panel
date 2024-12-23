@@ -1297,11 +1297,11 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
         D.setMonth(D.getMonth() + 1);
         console.log("Месяц: ", D.getMonth(), D.getFullYear())
 
-        if (parseInt(month)+1 === 12) {
-            setDate(new Date(2025, month + 1, day))
-        } else {
-            setDate(new Date(year, month + 1, day))
-        }
+        //if (parseInt(month)+1 === 12) {
+            setDate(new Date(2025, 0, day))
+        // } else {
+        //     setDate(new Date(year, month + 1, day))
+        // }
 
         
 
