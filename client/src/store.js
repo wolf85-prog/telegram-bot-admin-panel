@@ -1,15 +1,17 @@
-import { createStore, combineReducers } from 'redux'
+import { createStore } from 'redux'
 
-// Ваши редюсеры
-import changeState from './reducers/changeState.jsx';
-import counterReducer from './reducers/counterReducer.jsx';
+const initialState = {
+  sidebarShow: true,
+}
 
-const rootReducer = combineReducers({
-  state: changeState,
-  counter: counterReducer,
-});
-
-
+const changeState = (state = initialState, { type, ...rest }) => {
+  switch (type) {
+    case 'set':
+      return { ...state, ...rest }
+    default:
+      return state
+  }
+}
 
 const store = createStore(changeState)
 export default store

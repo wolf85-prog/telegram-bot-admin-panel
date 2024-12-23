@@ -56,7 +56,23 @@ const specData = [
     },
     {
         id: 5,
-        name: 'Промо \/ Кастинг',
+        name: 'Кино / Театр',
+        icon: 'Kino',
+        models: [
+            {id: 1, name: 'Режиссер', color: '#fff'},
+            {id: 2, name: 'Оператор-постановщик', color: '#fff'},
+            {id: 3, name: 'Стедикам', color: '#fff'},
+            {id: 4, name: 'Оператор крана', color: '#fff'},
+            {id: 5, name: 'Оператор Action-съемки', color: '#fff'},
+            {id: 6, name: 'Гафер', color: '#fff'},
+            {id: 7, name: 'Актер', color: '#fff'},
+            {id: 8, name: 'Гример', color: '#fff'},
+            {id: 9, name: 'Костюмер', color: '#fff'},
+        ]
+    },
+    {
+        id: 6,
+        name: 'Промо',
         icon: 'Promo',
         models: [
             {id: 1, name: 'Промоутер',},
@@ -66,7 +82,7 @@ const specData = [
         ]
     },
     {
-        id: 6,
+        id: 7,
         name: 'Кейтеринг',
         icon: 'Catering',
         models: [
@@ -78,16 +94,16 @@ const specData = [
         ]
     },  
     {
-        id: 7,
-        name: 'Помощники \/ Грузчики',
+        id: 8,
+        name: 'Помощники',
         icon: 'Stagehands',
         models: [
             {id: 1, name: 'Помощник \/ Грузчик',},
         ]
     },
     {
-        id: 8,
-        name: 'Риггер \/ Граунд',
+        id: 9,
+        name: 'Риггеры \/ Сцена',
         icon: 'Riggers \/ Ground',
         models: [
             {id: 1, name: 'Верхний Риггер',},
@@ -97,8 +113,8 @@ const specData = [
         ]
     }, 
     {
-        id: 9,
-        name: 'Водители',
+        id: 10,
+        name: 'Грузоперевозки',
         icon: 'Trucks',
         models: [
             {id: 1, name: 'С гидролифтом',},
@@ -109,7 +125,7 @@ const specData = [
         ]
     },
     {
-        id: 10,
+        id: 11,
         name: 'Артисты',
         icon: 'Party',
         models: [
@@ -124,7 +140,7 @@ const specData = [
         ]
     },
     {
-        id: 11,
+        id: 12,
         name: 'Игры',
         icon: 'Games',
         models: [
@@ -137,8 +153,8 @@ const specData = [
         ]
     },
     {
-        id: 12,
-        name: 'Технический продакшн',
+        id: 13,
+        name: 'Продакшн',
         icon: 'Production',
         models: [
             {id: 1, name: 'Мероприятие под ключ',},
@@ -148,7 +164,7 @@ const specData = [
     },
 
     {
-        id: 13,
+        id: 14,
         name: 'Декорации',
         icon: 'Decor',
         models: [
