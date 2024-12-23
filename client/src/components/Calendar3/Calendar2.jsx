@@ -242,15 +242,8 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                 if (item?.dateEnd) {
                     if (new Date(item?.dateStart.split('T')[0]).toISOString() === new Date(item?.dateEnd?.split('T')[0]).toISOString() || 
                         new Date(item?.dateStart.split('T')[0]).getTime() > new Date(item?.dateEnd?.split('T')[0]).getTime()) {
-                        // console.log("d==: ", ind,
-                        //     new Date(item?.dateStart.split('T')[0]).toISOString(),
-                        //     new Date(item?.dateEnd.split('T')[0]).toISOString(), //.setHours(new Date(item?.dateStart).getHours()))
-                        // ) 
-                        if ((new Date(new Date(year, month, d).setHours(new Date(year, month, d).getHours()+3)).toISOString() === new Date(item?.dateStart.split('T')[0]).toISOString()) ) {
-                            // console.log("d: ", ind,
-                            //     new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).toISOString(),
-                            //     new Date(item?.dateEnd.split('T')[0]).toISOString() //.setHours(new Date(item?.dateStart).getHours()))
-                            // )  
+ 
+                        if ((new Date(new Date(date.getFullYear(), month, d).setHours(new Date(date.getFullYear(), month, d).getHours()+3)).toISOString() === new Date(item?.dateStart.split('T')[0]).toISOString()) ) {
 
                             if (!nameProj[index]) {
                             arr[index] = true 
@@ -460,8 +453,8 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                         }
 
                     } else {
-                        if ((new Date(new Date(year, month, d).setHours(new Date(year, month, d).getHours()+3)).getTime() >= new Date(item?.dateStart.split('T')[0]).getTime()) && 
-                            (new Date(new Date(year, month, d).setHours(new Date(year, month, d).getHours()+3)).getTime() <= new Date(item?.dateEnd?.split('T')[0]).getTime()) ) {
+                        if ((new Date(new Date(date.getFullYear(), month, d).setHours(new Date(date.getFullYear(), month, d).getHours()+3)).getTime() >= new Date(item?.dateStart.split('T')[0]).getTime()) && 
+                            (new Date(new Date(date.getFullYear(), month, d).setHours(new Date(date.getFullYear(), month, d).getHours()+3)).getTime() <= new Date(item?.dateEnd?.split('T')[0]).getTime()) ) {
 
                             if (!nameProj[index]) {
                             arr[index] = true 
@@ -671,7 +664,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                         }
                     } 
                 } else {
-                    if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).toISOString() === new Date(item?.dateStart.split('T')[0]).toISOString()) ) {
+                    if ((new Date(new Date(date.getFullYear(), month, d).setHours(new Date(date.getFullYear(), month, d).getHours()+3)).toISOString() === new Date(item?.dateStart.split('T')[0]).toISOString()) ) {
                         if (!nameProj[index]) {
                             arr[index] = true 
                             nameProj[index] = item.name
@@ -1296,16 +1289,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
         var D = date;
         D.setMonth(D.getMonth() + 1);
         console.log("Месяц: ", D.getMonth(), D.getFullYear())
-
-        //if (parseInt(month)+1 === 12) {
-            setDate(new Date(2025, 0, day))
-        // } else {
-        //     setDate(new Date(year, month + 1, day))
-        // }
-
         
+        setDate(new Date(2025, 0, day))  
 
-        //setMonth(month + 1)
     }
 
     const prevMonth = () => {
