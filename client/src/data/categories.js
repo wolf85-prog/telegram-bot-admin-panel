@@ -79,17 +79,17 @@ const categories = [
       label: 'Удаленные',
       name: 'Delete',
       value: '15',
-    }, 
-    {
-      label: 'Тест',
-      name: 'Test',
-      value: '16',
-    },
+    },     
     {
       label: 'Все',
       name: 'All',
-      value: '17',
+      value: '16',
     }, 
+    {
+      label: 'Менеджер «U.L.E.Y»',
+      name: 'Менеджер «U.L.E.Y»',
+      value: '17',
+    },
     
 ]
 
