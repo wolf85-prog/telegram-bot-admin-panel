@@ -246,7 +246,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                         //     new Date(item?.dateStart.split('T')[0]).toISOString(),
                         //     new Date(item?.dateEnd.split('T')[0]).toISOString(), //.setHours(new Date(item?.dateStart).getHours()))
                         // ) 
-                        if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).toISOString() === new Date(item?.dateStart.split('T')[0]).toISOString()) ) {
+                        if ((new Date(new Date(year, month, d).setHours(new Date(year, month, d).getHours()+3)).toISOString() === new Date(item?.dateStart.split('T')[0]).toISOString()) ) {
                             // console.log("d: ", ind,
                             //     new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).toISOString(),
                             //     new Date(item?.dateEnd.split('T')[0]).toISOString() //.setHours(new Date(item?.dateStart).getHours()))
@@ -460,8 +460,8 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                         }
 
                     } else {
-                        if ((new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() >= new Date(item?.dateStart.split('T')[0]).getTime()) && 
-                            (new Date(new Date(2024, month, d).setHours(new Date(2024, month, d).getHours()+3)).getTime() <= new Date(item?.dateEnd?.split('T')[0]).getTime()) ) {
+                        if ((new Date(new Date(year, month, d).setHours(new Date(year, month, d).getHours()+3)).getTime() >= new Date(item?.dateStart.split('T')[0]).getTime()) && 
+                            (new Date(new Date(year, month, d).setHours(new Date(year, month, d).getHours()+3)).getTime() <= new Date(item?.dateEnd?.split('T')[0]).getTime()) ) {
 
                             if (!nameProj[index]) {
                             arr[index] = true 
