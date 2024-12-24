@@ -1048,7 +1048,7 @@ useEffect(() => {
 			const kol = await getCountMessage()
 			setCountProjects(count + 1)
 			//const res = await newCountProjects(kol.projects + 1)
-			console.log("Пришел новое проект в renthub: ", count + 1)
+			console.log("Пришел новый проект в renthub: ", count + 1)
 
 			//play sound
 			const savedVolume = localStorage.getItem("soundVolume");
@@ -1854,7 +1854,17 @@ const fetchMessageRentResponse = async(data) => {
 	if (data.text.startsWith('Предварительная смета одобрена!')) {
 			
 	} else if (data.text.startsWith('Проект успешно создан') && !data.text.includes('_reply_')) {
+		console.log("Пришел новый проект в renthub: ")
 
+		//play sound
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+			audioProject.volume = parseFloat(savedVolume)
+			audioProject.play();
+		}
 	}
 	else {
 		console.log("Пришло новое сообщение в renthub: ", count+1)
