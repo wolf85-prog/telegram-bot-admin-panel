@@ -542,6 +542,10 @@ ${loc.url}`;
   }
 
   useEffect(()=>{
+    console.log("Локация: ", geoId)
+  }, [geoId])
+
+  useEffect(()=>{
     console.log("Основной состав: ", mainspec)
   }, [mainspec])
 
@@ -1101,11 +1105,18 @@ ${loc.url}`;
     }    
   }
 
-  const changeLocation = (e) => {
-    setLocationProject(e.target.value)
-    if (e.target.value === '') {
-      setAddress('')
+  const onChangeLocation = (e) => {
+    if (e) {
+      setLocationProject(e.target.value)
+      if (e.target.value === '') {
+        setGeoId('')
+      }
+    } else {
+      setLocationProject('')
+      setGeoId('')
     }
+
+    //setAddress('')
   }
 
 
@@ -1476,7 +1487,8 @@ ${loc.url}`;
                                               id="custom-input-demo"
                                               options={platformsData}
                                               style={{width: '100%', padding: '0'}}
-                                              onInputChange={(e)=>setLocationProject(e.target.value)}
+                                              //onInputChange={(e)=>setLocationProject(e.target.value)}
+                                              onInputChange={onChangeLocation}
                                               //onInputChange={(e)=>console.log(e.target.value)}
                                               //isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onChange={(event, newValue) => {
