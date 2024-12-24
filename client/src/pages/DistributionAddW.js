@@ -680,7 +680,7 @@ const onAddCategory = (e) => {
       workersAll.map((worker)=> {
         JSON.parse(worker.worklist).map((work) => {
           result.map((cat)=> {
-            if (work.cat === cat) {
+            if (work.cat === cat || work.cat === "Менеджер «U.L.E.Y»") {
               arrSelect.push(worker.chatId)
               //console.log(worker)
               arrSelectAll.push(worker)

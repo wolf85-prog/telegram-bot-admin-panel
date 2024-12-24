@@ -670,7 +670,7 @@ ${loc.url}`;
 
           await editPretendent(item.id, {status: JSON.parse(item.status).name})
         } 
-      }, 1000 * ++index)
+      }, 3000 * ++index)
       
         
     })

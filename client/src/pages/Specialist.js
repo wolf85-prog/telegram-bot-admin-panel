@@ -731,6 +731,8 @@ const Specialist = () => {
       }
     })
 
+    console.log("specArr: ", specArr)
+
     let skillArr = []
     let strSkill = ''
     skill.map((item, index)=> {
@@ -876,6 +878,13 @@ const Specialist = () => {
     
 
   }, [city, cityValue]);
+
+
+  useEffect(() => {
+    console.log("speclist: ", speclist)
+    
+
+  }, [speclist]);
 
 
   const handleTg = event => {

@@ -174,7 +174,14 @@ const specData = [
             {id: 3, name: 'Event-менеджер',},
         ]
     },
-
+    {
+        id: 15,
+        name: 'Менеджер «U.L.E.Y»',
+        icon: 'Менеджер «U.L.E.Y»',
+        models: [
+            {id: 1, name: 'Менеджер «U.L.E.Y»',},
+        ]
+    },
     
 ];
 
