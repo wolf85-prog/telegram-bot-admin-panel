@@ -22,101 +22,102 @@ const specOnlyData = [
             {id: 15, label: 'Оператор',},
             {id: 16, label: 'Оператор Zoom-конференций',},
             {id: 17, label: 'Оператор Action-съемки',},
-            {id: 18, label: 'Оператор-постановщик',},
-            {id: 19, label: 'Режиссер эфиров',},
-            {id: 20, label: 'Техник по монтажу экранов',},
+            {id: 18, label: 'Режиссер эфиров',},
+            {id: 19, label: 'Техник по монтажу экранов',},
 
             {label: '—'},
 
-            {id: 21, label: 'Документальная съемка',},
-            {id: 22, label: 'Репортажная съемка',},
-            {id: 23, label: 'Свадебная съемка',},
-            {id: 24, label: 'Портретная съемка',},
-            {id: 25, label: 'Предметная съемка',},
+            {id: 20, label: 'Документальная съемка',},
+            {id: 21, label: 'Репортажная съемка',},
+            {id: 22, label: 'Свадебная съемка',},
+            {id: 23, label: 'Портретная съемка',},
+            {id: 24, label: 'Предметная съемка',},
             
             {label: '—'},
 
-            {id: 26, label: 'Режиссер', color: '#fff'},
-            {id: 27, label: 'Оператор-постановщик', color: '#fff'},
-            {id: 28, label: 'Стедикам', color: '#fff'},
-            {id: 29, label: 'Оператор крана', color: '#fff'},
-            {id: 30, label: 'Оператор Action-съемки', color: '#fff'},
-            {id: 31, label: 'Гафер', color: '#fff'},
-            {id: 32, label: 'Актер', color: '#fff'},
-            {id: 33, label: 'Гример', color: '#fff'},
-            {id: 34, label: 'Костюмер', color: '#fff'},
+            {id: 25, label: 'Режиссер', color: '#fff'},
+            {id: 26, label: 'Оператор-постановщик', color: '#fff'},
+            {id: 27, label: 'Стедикам', color: '#fff'},
+            {id: 28, label: 'Оператор крана', color: '#fff'},
+            {id: 29, label: 'Оператор Action-съемки', color: '#fff'},
+            {id: 30, label: 'Гафер', color: '#fff'},
+            {id: 31, label: 'Актер', color: '#fff'},
+            {id: 32, label: 'Гример', color: '#fff'},
+            {id: 33, label: 'Костюмер', color: '#fff'},
 
             {label: '—'},
 
+            {id: 34, label: 'Модель', color: ''},
             {id: 35, label: 'Промоутер', color: ''},
-            {id: 36, label: 'Модель', color: ''},
-            {id: 37, label: 'Визажист', color: ''},
-            {id: 38, label: 'Костюмер', color: ''},
+            {id: 36, label: 'Визажист', color: ''},
+            {id: 37, label: 'Костюмер', color: ''},
 
             {label: '—'},
 
-            {id: 39, label: 'Банкетный менеджер', color: '#fff'}, 
-            {id: 40, label: 'Повар', color: '#fff'},  
-            {id: 41, label: 'Хостес', color: '#fff'}, 
-            {id: 42, label: 'Бармен', color: '#fff'}, 
-            {id: 43, label: 'Официант', color: '#fff'},   
+            {id: 38, label: 'Банкетный менеджер', color: '#fff'}, 
+            {id: 39, label: 'Повар', color: '#fff'},  
+            {id: 40, label: 'Хостес', color: '#fff'}, 
+            {id: 41, label: 'Бармен', color: '#fff'}, 
+            {id: 42, label: 'Официант', color: '#fff'},   
 
             {label: '—'}, 
 
-            {id: 44, label: 'Помощник \/ Грузчик', color: ''},
+            {id: 43, label: 'Помощник \/ Грузчик', color: ''},
 
             {label: '—'}, 
 
-            {id: 45, label: 'Верхний Риггер', color: '#fff'},
-            {id: 46, label: 'Нижний Риггер', color: '#fff'},
-            {id: 47, label: 'Монтаж конструктива сцены', color: '#fff'},
-            {id: 48, label: 'Монтаж шатров', color: '#fff'},
+            {id: 44, label: 'Верхний Риггер', color: '#fff'},
+            {id: 45, label: 'Нижний Риггер', color: '#fff'},
+            {id: 46, label: 'Монтаж конструктива сцены', color: '#fff'},
+            {id: 47, label: 'Монтаж шатров', color: '#fff'},
 
             {label: '—'},
 
-            {id: 49, label: 'С гидролифтом', color: ''},
-            {id: 50, label: 'Без гидролифта', color: ''},
-            {id: 51, label: 'C личным ТС [B\/C]', color: ''},
-            {id: 52, label: 'Без личного ТС [B\/C]', color: ''},
-            {id: 53, label: 'Мотокурьер', color: ''},  
-
-            {label: '—'},
-
-            {id: 54, label: 'Кавер-бенд', color: '#fff'},
-            {id: 55, label: 'Танцевальный коллектив', color: '#fff'},
-            {id: 56, label: 'Диджей', color: '#fff'},
-            {id: 57, label: 'Ведущий', color: '#fff'},
-            {id: 58, label: 'Певец \/ певица', color: '#fff'},
-            {id: 59, label: 'Артист оригинального жанра', color: '#fff'},
-            {id: 60, label: 'Go-Go', color: '#fff'},
-            {id: 61, label: 'Фаир-шоу', color: '#fff'},
-
-            {label: '—'},
-
-            {id: 62, label: 'Квест', color: ''},
-            {id: 63, label: 'Квиз', color: ''},
-            {id: 64, label: 'Аниматор', color: ''},
-            {id: 65, label: 'Пневмокостюм \/ ростовая кукла', color: ''},
-            {id: 66, label: 'Настольные игры \/ игровые автоматы', color: ''},
-            {id: 67, label: 'Активности \/ аттракционы', color: ''},
-
-            {label: '—'},
-
-            {id: 68, label: 'Мероприятие под ключ', color: '#fff'},
-            {id: 69, label: 'Отдельные технические задачи', color: '#fff'},
-            {id: 70, label: 'Event-менеджер', color: '#fff'},
-            
-            {label: '—'},
-
-            {id: 71, label: 'Декоратор', color: ''},
-            {id: 72, label: 'Флорист оформитель', color: ''},
-            {id: 73, label: 'Монтаж мебели', color: ''},
-            {id: 74, label: 'Монтаж выставочных стендов', color: ''},
-            {id: 75, label: 'Напольные покрытия', color: ''},
+            {id: 48, label: 'Декоратор', color: ''},
+            {id: 49, label: 'Флорист оформитель', color: ''},
+            {id: 50, label: 'Монтаж мебели', color: ''},
+            {id: 51, label: 'Монтаж выставочных стендов', color: ''},
+            {id: 52, label: 'Напольные покрытия', color: ''},
             
 
             {label: '—'},
-            {id: 76, label: 'Менеджер «U.L.E.Y»',},
+
+            {id: 53, label: 'С гидролифтом', color: ''},
+            {id: 54, label: 'Без гидролифта', color: ''},
+            {id: 55, label: 'C личным ТС [B\/C]', color: ''},
+            {id: 56, label: 'Без личного ТС [B\/C]', color: ''},
+            {id: 57, label: 'Мотокурьер', color: ''},  
+
+            {label: '—'},
+
+            {id: 58, label: 'Кавер-бенд', color: '#fff'},
+            {id: 59, label: 'Танцевальный коллектив', color: '#fff'},
+            {id: 60, label: 'Диджей', color: '#fff'},
+            {id: 61, label: 'Ведущий', color: '#fff'},
+            {id: 62, label: 'Певец \/ певица', color: '#fff'},
+            {id: 63, label: 'Артист оригинального жанра', color: '#fff'},
+            {id: 64, label: 'Фаир-шоу', color: '#fff'},
+            {id: 65, label: 'Go-Go', color: '#fff'},
+
+            {label: '—'},
+
+            {id: 66, label: 'Квест', color: ''},
+            {id: 67, label: 'Квиз', color: ''},
+            {id: 68, label: 'Аниматор', color: ''},
+            {id: 69, label: 'Пневмокостюм \/ ростовая кукла', color: ''},
+            {id: 70, label: 'Настольные игры \/ игровые автоматы', color: ''},
+            {id: 71, label: 'Активности \/ аттракционы', color: ''},
+
+            {label: '—'},
+
+            {id: 72, label: 'Мероприятие под ключ', color: '#fff'},
+            {id: 73, label: 'Отдельные технические задачи', color: '#fff'},
+            {id: 74, label: 'Event-менеджер', color: '#fff'},
+            
+           
+
+            {label: '—'},
+            {id: 75, label: 'Менеджер «U.L.E.Y»',},
 
 ];
 

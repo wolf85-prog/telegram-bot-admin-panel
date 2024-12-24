@@ -26,69 +26,80 @@ const categories = [
       value: '4',
     },
     {
-      label: 'Промо / Кастинг',
-      name: 'Promo',
+      label: 'Кино / Театр',
+      name: 'Kino',
       value: '5',
+    },
+    {
+      label: 'Промо',
+      name: 'Promo',
+      value: '6',
     },
     {
       label: 'Кейтеринг',
       name: 'Catering',
-      value: '6',
-    },
-    {
-      label: 'Помощники / Грузчики',
-      name: 'Stagehands',
       value: '7',
     },
     {
-      label: 'Риггер / Граунд',
-      name: 'Riggers \/ Ground',
+      label: 'Помощники',
+      name: 'Stagehands',
       value: '8',
     },
     {
-      label: 'Водители',
-      name: 'Trucks',
+      label: 'Риггеры / Сцена',
+      name: 'Riggers \/ Ground',
       value: '9',
+    },
+    {
+      label: 'Декорации',
+      name: 'Decor',
+      value: '10',
+    },
+    
+    {
+      label: 'Грузоперевозки',
+      name: 'Trucks',
+      value: '11',
     },
     {
       label: 'Артисты',
       name: 'Party',
-      value: '10',
+      value: '12',
     },
     {
       label: 'Игры',
       name: 'Games',
-      value: '11',
+      value: '13',
     },
     {
-      label: 'Технический продакшн',
+      label: 'Продакшн',
       name: 'Production',
-      value: '12',
+      value: '14',
     },
     {
       label: '__________________________',
       disabled: true,
-      value: '13',
+      value: '15',
     },
     {
       label: 'Вне категории',
       name: 'NoTag',
-      value: '14',
+      value: '16',
     },   
     {
       label: 'Удаленные',
       name: 'Delete',
-      value: '15',
+      value: '17',
     },     
     {
       label: 'Все',
       name: 'All',
-      value: '16',
+      value: '18',
     }, 
     {
       label: 'Менеджер «U.L.E.Y»',
       name: 'Менеджер «U.L.E.Y»',
-      value: '17',
+      value: '19',
     },
     
 ]

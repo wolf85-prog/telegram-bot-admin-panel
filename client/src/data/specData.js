@@ -75,10 +75,10 @@ const specData = [
         name: 'Промо',
         icon: 'Promo',
         models: [
-            {id: 1, name: 'Промоутер',},
-            {id: 2, name: 'Модель',},
-            {id: 4, name: 'Визажист',},
-            {id: 5, name: 'Костюмер',},
+            {id: 1, name: 'Модель',},
+            {id: 2, name: 'Промоутер',},         
+            {id: 3, name: 'Визажист',},
+            {id: 4, name: 'Костюмер',},
         ]
     },
     {
@@ -114,6 +114,18 @@ const specData = [
     }, 
     {
         id: 10,
+        name: 'Декорации',
+        icon: 'Decor',
+        models: [
+            {id: 1, name: 'Декоратор',},
+            {id: 2, name: 'Флорист оформитель',},
+            {id: 3, name: 'Монтаж мебели',},
+            {id: 3, name: 'Монтаж выставочных стендов',},
+            {id: 3, name: 'Напольные покрытия',},
+        ]
+    },
+    {
+        id: 11,
         name: 'Грузоперевозки',
         icon: 'Trucks',
         models: [
@@ -125,7 +137,7 @@ const specData = [
         ]
     },
     {
-        id: 11,
+        id: 12,
         name: 'Артисты',
         icon: 'Party',
         models: [
@@ -135,12 +147,12 @@ const specData = [
             {id: 4, name: 'Ведущий',},
             {id: 5, name: 'Певец \/ певица',},
             {id: 6, name: 'Артист оригинального жанра',},
-            {id: 7, name: 'Go-Go',},
-            {id: 8, name: 'Фаир-шоу',},
+            {id: 7, name: 'Фаир-шоу',},
+            {id: 8, name: 'Go-Go',},
         ]
     },
     {
-        id: 12,
+        id: 13,
         name: 'Игры',
         icon: 'Games',
         models: [
@@ -153,7 +165,7 @@ const specData = [
         ]
     },
     {
-        id: 13,
+        id: 14,
         name: 'Продакшн',
         icon: 'Production',
         models: [
@@ -163,18 +175,7 @@ const specData = [
         ]
     },
 
-    {
-        id: 14,
-        name: 'Декорации',
-        icon: 'Decor',
-        models: [
-            {id: 1, name: 'Декоратор',},
-            {id: 2, name: 'Флорист оформитель',},
-            {id: 3, name: 'Монтаж мебели',},
-            {id: 3, name: 'Монтаж выставочных стендов',},
-            {id: 3, name: 'Напольные покрытия',},
-        ]
-    },
+    
 ];
 
 export default specData;
