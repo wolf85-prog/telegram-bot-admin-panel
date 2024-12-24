@@ -263,6 +263,16 @@ io.on("connection", (socket) => {
     })
 
 
+    // Renthub мониторинг
+    //send and get message in workers
+    socket.on("sendZakazchik", ({task, data})=>{
+        io.emit("getZakazchik", {
+            task,
+            data,
+        })
+    }) 
+
+
     //when disconnect
     socket.on("disconnect", ()=> {
         removeUser(socket.id);
