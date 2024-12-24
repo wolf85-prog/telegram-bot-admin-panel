@@ -67,7 +67,7 @@ import specOnlyData2 from 'src/data/specOnlyData2';
 import { getProjectsDel, editProject } from '../http/projectAPI'
 import { useAsyncError } from 'react-router-dom';
 import Filters from 'src/components/table/Filters2'
-import { getPlatforms, getPlatformId, editPlatform, getPlatformCount, addPlatform } from 'src/http/platformAPI';
+import { getPlatforms, getPlatformId, editPlatform, getPlatformCount, addPlatform, deletePlatform } from 'src/http/platformAPI';
 
 const Platforms = () => {
   const { platforms, setPlatforms, platformsAll, setPlatformsAll } = useUsersContext();
@@ -538,9 +538,31 @@ const onSortAddress = () => {
 
     //setSpecialistCount(sortedWorker)
     setPlatforms(sortedWorker)
-  }
-  
+  } 
 }
+
+  const clickDelete = (id) => {
+    console.log(id)
+
+    setVisibleDelete(!visibleDelete)
+
+  }
+
+  //удаление платформы
+  const deleteProfile = async(id) => {
+    console.log(id)
+    setVisibleDelete(false)
+
+    //удаление платформы из БД
+    await deletePlatform(id)
+
+
+    //addToast(deleteToast) //ваши данные сохранены
+
+    setPlatforms([...platforms].filter(item=>item.id !== id))
+
+    closeProfile()
+  }
 
   return (
     <div className='dark-theme'>
@@ -687,7 +709,7 @@ const onSortAddress = () => {
                                       <input type="text" name="title" id="title" value={title} onChange={(e)=>setTitle(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
                                     <div style={{display: 'flex'}}>
-                                      <Icon id="delete" />
+                                      <Icon id="delete" onClick={()=>clickDelete(id)} />
                                       <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={blockProfile ? zamok : zamok2} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
@@ -850,6 +872,26 @@ const onSortAddress = () => {
                       <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '15px'}}>
                         Данные успешно сохранены!
                       </CModalBody>
+                    </CModal>
+
+                    <CModal
+                      backdrop="static"
+                      visible={visibleDelete}
+                      onClose={() => setVisibleDelete(false)}
+                      aria-labelledby="StaticBackdropExampleLabel"
+                    >
+                      <CModalHeader>
+                        <CModalTitle id="StaticBackdropExampleLabel">Предупреждение</CModalTitle>
+                      </CModalHeader>
+                                          <CModalBody>
+                                            Площадка будет удалена из базы!
+                                          </CModalBody>
+                                          <CModalFooter>
+                                            <CButton color="secondary" onClick={() => setVisibleDelete(false)}>
+                                              Отмена
+                                            </CButton>
+                                            <CButton color="primary" onClick={()=>deleteProfile(id)}>Удалить</CButton>
+                                          </CModalFooter>                    
                     </CModal>
                 </Suspense>
             </CContainer>
