@@ -43,8 +43,8 @@ import arrowDown from '../assets/images/arrowDown.svg'
 
 const DistributionW = () => {
   const socket = useSocketContext();
-  const { workersAll } = useUsersContext();
-  const [distributionsWork, setDistributionsWork]= useState([]);
+  const { workersAll, distributionsWork, setDistributionsWork } = useUsersContext();
+  //const [distributionsWork, setDistributionsWork]= useState([]);
   const [userReceivers, setUserReceivers]= useState([]);
   const [users, setUsers]= useState([]);
   const [loading, setLoading]= useState(true);

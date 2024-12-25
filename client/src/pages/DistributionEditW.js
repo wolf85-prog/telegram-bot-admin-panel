@@ -1340,6 +1340,7 @@ const delCategory7 = (category) => {
   //-------------Удаление сообщений в рассылке-------------------
   //------------------------------------------------------------
   const onDeleteMessages = (id) => {
+    console.log("Рассылка id: ", id)
     const distrib = distributionsWork.filter(p => p.id === id)
     console.log("distrib: ", distrib)
     const arrUsers = JSON.parse(distrib[0].report)
