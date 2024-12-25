@@ -1331,8 +1331,9 @@ const onChangeSelectCity = (e) => {
       console.log("distrNew: ", distrNew.id)
       //console.log(hostServerTest + 'distributionsw/send/' + distrNew.id +'&'+ typeFile)
       //const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id); 
+
       const res = await $host_bottest.get(hostServerTest + 'distributionsw/send/' + distrNew.id +'/'+ typeFile);
-      //const res = await $host_bottest.get(hostServerTest + 'distributionsw/send/' + distrNew.id);
+      //const res = await $host_bottest.get(hostServerTest + 'distributionsw/custom/send/' + distrNew.id +'/'+ typeFile);
 
       setShowSend(false)
 
@@ -1896,7 +1897,15 @@ const onChangeSelectCity = (e) => {
                                         }             
                                       </div>
                                       <div>
-                                        <CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton>
+                                        {planShow ? 
+                                          <CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton>
+                                          :<Link to={''} state={{ project: `${proj}`, }}>
+                                            <CButton color="secondary">
+                                              {showUpload ? <CSpinner style={{width: '20px', height: '20px'}}/> : 'Разослать сейчас'}
+                                              </CButton>
+                                          </Link>
+                                        }
+                                        
                               
                                         
                                         <CModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
