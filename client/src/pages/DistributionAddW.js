@@ -647,9 +647,10 @@ const onAddCategory = (e) => {
   } else {
     setLoaderCount(true)
     const cat_name = categories[e.target.value].name
-    console.log("cat_name1: ", cat_name)
     const cat_label = categories[e.target.value].label
+
     console.log("select1: ", cat_label)
+
     setArrSelect([])
     arrCategory.pop()
     arrCategory.push(cat_name)
@@ -661,11 +662,13 @@ const onAddCategory = (e) => {
 
     const result = [...arrCategory]
     const result2 = [...arrTemp]
+
     console.log("result: ", arrCategory)
     console.log("categoryAll: ", arrTemp)
     console.log("deleted: ", delNotWorkers)
 
     if (cat_name === 'All') {
+      console.log("Все")
       workersAll.map((worker)=> {
         arrSelect.push(worker.chatId)
         arrSelectAll.push(worker)
@@ -677,10 +680,11 @@ const onAddCategory = (e) => {
         arrSelect.push(worker.chatId)
       })
     } else {
+      console.log("Категории", workersAll)
       workersAll.map((worker)=> {
         JSON.parse(worker.worklist).map((work) => {
           result.map((cat)=> {
-            if (work.cat === cat || work.cat === "Менеджер «U.L.E.Y»" || worker.deleted === true) {
+            if (work.cat === cat || work.cat === "Менеджер «U.L.E.Y»") {
               arrSelect.push(worker.chatId)
               //console.log(worker)
               arrSelectAll.push(worker)
@@ -695,6 +699,9 @@ const onAddCategory = (e) => {
     //выбрать уникальных специалистов
     const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     //const arr2 = [...arrSelectAll].filter((el, ind) => ind === arrSelectAll.indexOf(el));
+    
+    console.log("Уникальные получатели: ", arr)
+    
     setSelected(arr)
     setSelectedCat(arr)
     setLoaderCount(false)
@@ -735,21 +742,20 @@ const onAddCategory2 = (e) => {
   e.preventDefault();
   setValueSelect2(e.target.value)
 
-  if (e.target.value === 0) {
+  if (e.target.value === '0') {
     setSelected([])
   } else {
     const cat_name = categories[e.target.value].name
     const cat_label = categories[e.target.value].label
+
     console.log("cat_name2: ", cat_name)
     console.log("select2: ", cat_label)
     console.log("categoryAll2: ", categoryAll2)
     console.log("categoryAll: ", categoryAll)
 
     setArrSelect([])
-
     arrCategory2.pop()
     arrCategory2.push(cat_name)
-
     arrTemp2.pop()
     arrTemp2.push(cat_label)
     
@@ -758,6 +764,7 @@ const onAddCategory2 = (e) => {
 
     const result = [...categoryAll2, ...arrCategory2]
     const result2 = [...categoryAll, ...arrTemp2]
+
     console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
@@ -766,15 +773,22 @@ const onAddCategory2 = (e) => {
         result.map((cat)=> {
           if (work.cat === cat) {
             arrSelect.push(worker.chatId)
+
+            arrSelectAll.push(worker)
           } 
         })
       })
     })
+
+    //console.log("arrSelect2: ", arrSelect)
+
     //выбрать уникальных специалистов
     const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
     
     setSelected(arr)
-    console.log(arr)
+    setSelectedCat(arr)
+    
+    //console.log("Уникальные получатели 2: ", arr)
   }
 }
 
