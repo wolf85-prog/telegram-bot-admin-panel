@@ -204,7 +204,7 @@ const DistributionAddW = () => {
     //const arrDel = workersAll.filter(item => item.deleted !== true)
     //setDelWorkers(arrDel)
 
-    const arrNotDel = workersAll.filter(item => item.deleted === true)
+    const arrNotDel = workersAll.filter(item => item.deleted === true || item.worklist.include("Менеджер «U.L.E.Y»"))
     setDelNotWorkers(arrNotDel)
 
   }, [workersAll])
@@ -771,7 +771,7 @@ const onAddCategory2 = (e) => {
     workersAll.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
-          if (work.cat === cat) {
+          if (work.cat === cat || work.cat === "Менеджер «U.L.E.Y»") {
             arrSelect.push(worker.chatId)
 
             arrSelectAll.push(worker)
