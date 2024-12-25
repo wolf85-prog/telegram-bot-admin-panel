@@ -204,7 +204,7 @@ const DistributionAddW = () => {
     //const arrDel = workersAll.filter(item => item.deleted !== true)
     //setDelWorkers(arrDel)
 
-    const arrNotDel = workersAll.filter(item => item.deleted === true || item.worklist.include("Менеджер «U.L.E.Y»"))
+    const arrNotDel = workersAll.filter(item => item.deleted === true || item.worklist.includes("Менеджер «U.L.E.Y»"))
     setDelNotWorkers(arrNotDel)
 
   }, [workersAll])
