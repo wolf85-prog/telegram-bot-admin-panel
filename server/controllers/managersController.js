@@ -100,7 +100,7 @@ class ManagersController {
                     companyId: company,
                     comteg,
                     comment,
-                    profile,
+                    avatar: profile,
                     email,
                     block: block,
                 },

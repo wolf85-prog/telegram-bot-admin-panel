@@ -778,7 +778,7 @@ const clickNext = async() => {
           email,
         };
   
-        console.log("update user: ", usersCopy[userIndex])
+        console.log("update user: ", usersCopy[userIndex], id)
   
         return usersCopy;
       });
