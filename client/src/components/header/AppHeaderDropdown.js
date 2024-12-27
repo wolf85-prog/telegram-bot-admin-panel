@@ -39,33 +39,31 @@ const AppHeaderDropdown = observer(() => {
         <CAvatar src={avatar} size="md" />
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
-        <CDropdownHeader className="bg-light fw-semibold py-2">Аккаунт</CDropdownHeader>
-        <CDropdownItem href="#">
+        <CDropdownHeader className="bg-light dark:bg-white dark:bg-opacity-10 fw-semibold py-2">Аккаунт ID: 1</CDropdownHeader>
+
+        <CDropdownHeader className="bg-light dark:bg-white dark:bg-opacity-10 fw-semibold py-2">Роль: Пользователь</CDropdownHeader>
+
+        <CDropdownItem href="/profile">
+          <CIcon icon={cilUser} className="me-2" />
+          Профиль
+        </CDropdownItem>
+        {/* <CDropdownItem href="#">
           <CIcon icon={cilEnvelopeOpen} className="me-2" />
           Сообщений
           <CBadge color="success" className="ms-2">
             0
           </CBadge>
-        </CDropdownItem>
-        <CDropdownItem href="#">
+        </CDropdownItem> */}
+        {/* <CDropdownItem href="#">
           <CIcon icon={cilFile} className="me-2" />
           Проекты
           <CBadge color="primary" className="ms-2">
             42
           </CBadge>
-        </CDropdownItem>
-        <CDropdownItem href="/workers2">
-          <CIcon icon={cilFile} className="me-2" />
-          Отказы
-          <CBadge color="primary" className="ms-2">
-            0
-          </CBadge>
-        </CDropdownItem>
-        <CDropdownHeader className="bg-light fw-semibold py-2">Настройки</CDropdownHeader>
-        <CDropdownItem href="#">
-          <CIcon icon={cilUser} className="me-2" />
-          Профиль
-        </CDropdownItem>
+        </CDropdownItem> */}
+
+        {/* <CDropdownHeader className="bg-light fw-semibold py-2">Настройки</CDropdownHeader> */}
+        
         <CDropdownItem href="#">
           <CIcon icon={cilSettings} className="me-2" />
           Настройки
