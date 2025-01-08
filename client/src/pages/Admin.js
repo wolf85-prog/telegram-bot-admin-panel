@@ -893,7 +893,7 @@ useEffect(() => {
         setTimeout(() =>setWdthGrafik(grafik.current ? grafik.current.clientWidth - 100 : 0), 2000 )
 
         //фильтрация таблицы за год
-        let arr = workersAll.filter(item => item.createDate.split('T')[0].split('-')[0] === '2024');
+        let arr = workersAll.filter(item => item.createDate.split('T')[0].split('-')[0] === '2025');
         let categories = []
         let count_cat
 
@@ -924,11 +924,11 @@ useEffect(() => {
         //массив новых пользователей
 
          //массив новых пользователей за год
-         const arrNew = workersAll.filter(item => item.createDate.split('T')[0].split('-')[0] === '2024')
+         const arrNew = workersAll.filter(item => item.createDate.split('T')[0].split('-')[0] === '2025')
          setNewWorkers2(arrNew)
 
         //массив удаленных пользователей
-        const arrDel = delWorkers.filter(item => item.deleted === true && item.createDate.split('T')[0].split('-')[0] === '2024')
+        const arrDel = delWorkers.filter(item => item.deleted === true && item.createDate.split('T')[0].split('-')[0] === '2025')
         setDelWorkers2(arrDel)
 
         arr.map((item)=>console.log("month: ", new Date(item.createDate).getMonth()+1))
@@ -1657,7 +1657,7 @@ useEffect(() => {
                                   onChange={changeDate1}>
                                   {(inputProps) => <CFormInput 
                                                     {...inputProps} 
-                                                    placeholder="01.01.2024" 
+                                                    placeholder="01.01.2025" 
                                                     disableUnderline
                                                     aria-label="sm input example"
                                                     style={{marginLeft: '10px'}}    
@@ -1670,7 +1670,7 @@ useEffect(() => {
                                   onChange={changeDate2}>
                                   {(inputProps) => <CFormInput 
                                                     {...inputProps} 
-                                                    placeholder="31.12.2024" 
+                                                    placeholder="31.12.2025" 
                                                     disableUnderline
                                                     aria-label="sm input example"
                                                     style={{marginLeft: '10px'}} 
@@ -1790,7 +1790,7 @@ useEffect(() => {
                                   onChange={changeDate1}>
                                   {(inputProps) => <CFormInput 
                                                     {...inputProps} 
-                                                    placeholder="01.01.2024" 
+                                                    placeholder="01.01.2025" 
                                                     disableUnderline
                                                     aria-label="sm input example"
                                                     style={{marginLeft: '10px'}}    
@@ -1803,7 +1803,7 @@ useEffect(() => {
                                   onChange={changeDate2}>
                                   {(inputProps) => <CFormInput 
                                                     {...inputProps} 
-                                                    placeholder="31.12.2024" 
+                                                    placeholder="31.12.2025" 
                                                     disableUnderline
                                                     aria-label="sm input example"
                                                     style={{marginLeft: '10px'}} 
@@ -1924,7 +1924,7 @@ useEffect(() => {
                                   onChange={changeDate1}>
                                   {(inputProps) => <CFormInput 
                                                     {...inputProps} 
-                                                    placeholder="01.01.2024" 
+                                                    placeholder="01.01.2025" 
                                                     disableUnderline
                                                     aria-label="sm input example"
                                                     style={{marginLeft: '10px'}}    
@@ -1937,7 +1937,7 @@ useEffect(() => {
                                   onChange={changeDate2}>
                                   {(inputProps) => <CFormInput 
                                                     {...inputProps} 
-                                                    placeholder="31.12.2024" 
+                                                    placeholder="31.12.2025" 
                                                     disableUnderline
                                                     aria-label="sm input example"
                                                     style={{marginLeft: '10px'}} 

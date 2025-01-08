@@ -1222,7 +1222,7 @@ const Specialist = () => {
                                     <div>
                                       <label className='title-label'>Самозанятость</label>
                                       <div style={{display: 'flex'}}>
-                                        <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
+                                        <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2025' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
                                         <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
                                           <input className="text-field__input" type="text" name="dogovor" id="dogovor" value={dogovor} onChange={(e) => setDogovor(e.target.value)} style={{width: '40px', padding: '0', fontSize: '20px'}}/>
                                         </div>
@@ -1232,7 +1232,7 @@ const Specialist = () => {
                                     <div>
                                       <label className='title-label'>Договор</label>
                                       <div style={{display: 'flex'}}>
-                                        <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
+                                        <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2025' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
                                         <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
                                           <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={samozanjatost} onChange={(e) => setSamozanjatost(e.target.value)} style={{width: '40px', padding: '0', fontSize: '20px'}}/>
                                         </div> 

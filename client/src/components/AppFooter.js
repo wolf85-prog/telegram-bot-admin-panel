@@ -9,7 +9,7 @@ const AppFooter = () => {
         <a href="https://uley.team/" target="_blank" rel="noopener noreferrer">
           U.L.E.Y TEAM
         </a>
-        <span className="ms-1">&copy; 2024 Все права защищены.</span>
+        <span className="ms-1">&copy; 2025 Все права защищены.</span>
       </div>
       <div className="ms-auto">
         {/* <span className="me-1">Сделано</span> */}
