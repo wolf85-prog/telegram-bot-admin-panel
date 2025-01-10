@@ -197,12 +197,20 @@ const AppSidebar = () => {
 //-------------------------------------------------------------------------------------------------------------
 
     {
+      component: CNavItem,
+      name: 'Тех. поддержка',
+      to: '/support',
+      icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
+      badge: countMessageWork !== '0' ? {color: 'info', text: countMessageWork,} : "",
+      style: {backgroundColor: '#0078d421'},
+    },
+    {
       component: CNavLink,
       name: 'Telegram',
       //href: 'https://t.me/ULEY_Assistant',
       icon: <CIcon icon={cilSend} customClassName="nav-icon" />,
       onClick: ()=>handleLinkClick('https://t.me/ULEY_Assistant'),
-      style: {backgroundColor: '#0078d421', cursor: 'pointer'},
+      style: {cursor: 'pointer'},
     },
     {
       component: CNavItem,
