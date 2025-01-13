@@ -737,7 +737,7 @@ const clickNext = async() => {
 
       const saveData = {
         fio,
-        //chatId: telegram,
+        chatId: telegram ? telegram : '',
         phone, 
         phone2,
         city, 
