@@ -150,7 +150,7 @@ io.on("connection", (socket) => {
     })
 
 
-    // Чат renthub
+// Чат renthub
 //------------------------------------------------------------------
     //send and get message in workers
     socket.on("sendMessageRent", ({senderId, receiverId, text, type, convId, messageId, replyId, isBot})=>{
@@ -189,6 +189,49 @@ io.on("connection", (socket) => {
             chatId,
         })
     })
+
+
+// Чат тех. поддержки
+//------------------------------------------------------------------
+    //send and get message in workers
+    socket.on("sendMessageSupport", ({senderId, receiverId, text, type, convId, messageId, replyId, isBot})=>{
+        const user = getUser(receiverId)
+        io.emit("getMessageSupport", {
+            senderId,
+            text,
+            type,
+            convId,
+            messageId,
+            replyId,
+            isBot, 
+        })
+    })
+
+    //send and get message
+    socket.on("sendAdminSupport", ({senderId, receiverId, text, type, buttons, convId, messageId, isBot})=>{
+        io.emit("getAdminSupport", {
+            senderId,
+            receiverId,
+            text,
+            type,
+            buttons,
+            convId,
+            messageId,
+            isBot,
+        })
+    })
+
+    //send and get message
+    socket.on("delAdminSupport", ({messageId, messageDate, chatId})=>{
+        io.emit("getDelAdminSupport", {
+            messageId,
+            messageDate,
+            chatId,
+        })
+    })
+
+
+    
 
     // Notifications
     //------------------------------------------------------------------
