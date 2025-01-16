@@ -20,6 +20,7 @@ import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import CompIcon from 'src/assets/images/dashboard3.png'
 import ProjIcon from 'src/assets/images/projects.png'
 import ChatIcon from 'src/assets/images/chat.png'
+import SupportIcon from 'src/assets/images/support_icon.png'
 import { newPretendent, getCountMessage } from 'src/http/adminAPI'
 
 // sidebar nav config
@@ -197,11 +198,11 @@ const AppSidebar = () => {
 //-------------------------------------------------------------------------------------------------------------
 
     {
-      component: CNavItem,
+      component: CNavLink,
       name: 'Тех. поддержка',
       //to: '/support',
       onClick: ()=>handleLinkClick2('https://proj.uley.team:3001/support'),
-      icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
+      icon: <img src={SupportIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       // badge: countMessageWork !== '0' ? {color: 'info', text: countMessageWork,} : "",
       style: {backgroundColor: '#0078d421', cursor: 'pointer'},
     },
