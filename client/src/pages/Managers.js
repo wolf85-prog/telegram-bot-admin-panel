@@ -104,7 +104,7 @@ const Managers = () => {
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
-  const [telegram, setTelegram] = useState('');
+  const [telegram, setTelegram] = useState(null);
   const [reyting, setReyting] = useState('');
   const [rank, setRank] = useState('');
   const [company, setCompany] = useState('');
@@ -591,7 +591,7 @@ const clickNext = async() => {
     setSfera(user.sfera ? user.sfera.split(',') : [])
     setPhone(user.phone)
     setPhone2(user.phone2)
-    setTelegram(user.chatId ? user.chatId : '')
+    setTelegram(user.chatId ? user.chatId : null)
     setProjects(user.projects)
     // setCompany(worker.company ? worker.company.split(',') : [])
     setInn(user.inn === null ? '' : user.inn)
@@ -737,7 +737,7 @@ const clickNext = async() => {
 
       const saveData = {
         fio,
-        chatId: telegram ? telegram : '',
+        chatId: telegram ? telegram : null,
         phone, 
         phone2,
         city, 
@@ -904,7 +904,7 @@ const clickNext = async() => {
                                           {item.fio ? (item.fio.length > 30 ? item.fio.substr(0, 30) + '...' : item.fio) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                            {item.chatId}
+                                            {item.chatId ? item.chatId : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.city ? (item.city.length > 30 ? item.city.substr(0, 30) + '...' : item.city) : ''}
@@ -1364,7 +1364,7 @@ const clickNext = async() => {
                                       pattern="[0-9]*"
                                       name="telegram" 
                                       id="telegram" 
-                                      value={telegram} 
+                                      value={telegram ? telegram : ''} 
                                       onChange={handleTg} 
                                       style={{width: '250px'}}
                                     />
