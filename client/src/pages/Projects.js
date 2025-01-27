@@ -2144,13 +2144,13 @@ ${loc.url}`;
                         </CCard>
 
                         <CCard className="mb-4" style={{display: showPosterTable ? 'block' : 'none'}}>
-                          <CCardHeader onClick={() => setVisibleC(!visibleC)}>Постеры</CCardHeader>
+                          <CCardHeader onClick={() => setVisibleC(!visibleC)}>Постеры8</CCardHeader>
                           <CCollapse visible={visibleC}>
                             <CCardBody style={{padding: '12px'}}>
                               <table className='frame2'>
                                 <><tr>
                                     <td className='day2'>
-                                        <p className='date-day'></p>
+                                        <img src='https://storage.yandexcloud.net/ota-stor/cover_3229_18.jpg'></img>
                                     </td>
                                     <td className='day2'>
                                         <p className='date-day'></p>
