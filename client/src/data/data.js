@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 const STATUS_IN_PROGRESS = { id: 1, name: 'В работе', color: 'yellow.400', icon: '🟨' }
 const STATUS_DONE = { id: 1, name: 'Расчитан', color: 'uley_green.0', icon: '🟩' }
 const STATUS_NEW = { id: 1, name: 'Новый', color: 'uley_orange.0', icon: '🟧' }
@@ -558,4 +559,43 @@ export const groups = [
   { id: 11, name: 'Игры' },
   { id: 12, name: 'Технический продакшн' },
   { id: 13, name: 'U.L.E.Y' },
+]
+
+export const posterList = [
+  {
+    id: 1,
+    createdAt: dayjs('2025-01-13 19:18'),
+    url: 'https://storage.yandexcloud.net/ota-stor/cover_3229_18.jpg'   
+  },
+  {
+    id: 2,
+    createdAt: dayjs('2025-01-14 19:25'),
+    url: 'https://storage.yandexcloud.net/ota-stor/cover_3229_19.jpg'    
+  },
+  {
+    id: 3,
+    createdAt: dayjs('2025-01-14 19:25'),
+    url: 'https://storage.yandexcloud.net/ota-stor/cover_3229_19.jpg'    
+  },
+  {
+    id: 4,
+    createdAt: dayjs('2025-01-14 19:25'),
+    url: 'https://storage.yandexcloud.net/ota-stor/cover_3229_19.jpg'    
+  },
+  {
+    id: 5,
+    createdAt: dayjs('2025-01-14 19:25'),
+    url: 'https://storage.yandexcloud.net/ota-stor/cover_3229_19.jpg'    
+  },
+  {
+    id: 6,
+    createdAt: dayjs('2025-01-14 19:25'),
+    url: 'https://storage.yandexcloud.net/ota-stor/cover_3229_19.jpg'    
+  },
+  {
+    id: 7,
+    createdAt: dayjs('2025-01-14 19:25'),
+    url: 'https://storage.yandexcloud.net/ota-stor/cover_3229_19.jpg'    
+  },
+
 ]
