@@ -682,7 +682,7 @@ const onAddCategory = (e) => {
     } else {
       console.log("Категории", workersAll)
       workersAll.map((worker)=> {
-        JSON.parse(worker.worklist).map((work) => {
+        worker.worklist && JSON.parse(worker.worklist).map((work) => {
           result.map((cat)=> {
             if (work.cat === cat || work.cat === "Менеджер «U.L.E.Y»") {
               arrSelect.push(worker.chatId)
