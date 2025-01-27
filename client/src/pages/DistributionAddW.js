@@ -769,7 +769,7 @@ const onAddCategory2 = (e) => {
     console.log("categoryAll: ", result2)
 
     workersAll.map((worker)=> {
-      JSON.parse(worker.worklist).map((work) => {
+      worker.worklist && JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat || work.cat === "Менеджер «U.L.E.Y»") {
             arrSelect.push(worker.chatId)
@@ -821,7 +821,7 @@ const onAddCategory3 = (e) => {
     console.log("categoryAll: ", result2)
 
     workersAll.map((worker)=> {
-      JSON.parse(worker.worklist).map((work) => {
+      worker.worklist && JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
             arrSelect.push(worker.chatId)
@@ -864,7 +864,7 @@ const onAddCategory4 = (e) => {
     console.log("categoryAll: ", result2)
 
     workersAll.map((worker)=> {
-      JSON.parse(worker.worklist).map((work) => {
+      worker.worklist && JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
             arrSelect.push(worker.chatId)
@@ -907,7 +907,7 @@ const onAddCategory5 = (e) => {
     console.log("categoryAll: ", result2)
 
     workersAll.map((worker)=> {
-      JSON.parse(worker.worklist).map((work) => {
+      worker.worklist && JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
             arrSelect.push(worker.chatId)
@@ -950,7 +950,7 @@ const onAddCategory6 = (e) => {
     console.log("categoryAll: ", result2)
 
     workersAll.map((worker)=> {
-      JSON.parse(worker.worklist).map((work) => {
+      worker.worklist && JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
           if (work.cat === cat) {
             arrSelect.push(worker.chatId)
