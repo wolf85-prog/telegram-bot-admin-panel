@@ -97,8 +97,7 @@ import {
 } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 import { sendSpecialistOtkaz } from '../http/specAPI'
-import { getPosters } from '../http/postersApi'
-
+import { getPosters,getPostersAll, deletePoster} from '../http/postersApi'
 
 import {
   addMainspec,
@@ -184,6 +183,8 @@ const Projects = () => {
   const [showPosterTable, setShowPosterTable] = useState(false)
   const [showDots, setShowDots] = useState(false)
   const [showModal, setShowModal] = useState(false)
+
+  const [posters, setPosters] = useState([])
 
   const [playPredSmeta, setPlayPredSmeta] = useState(false)
   const [donePredSmeta, setDonePredSmeta] = useState(false)
@@ -331,18 +332,18 @@ const Projects = () => {
   //   // sendSpecialistOtkaz(worker.workerId, {projectId: '120'})
   // }, [worker])
 
-  const {
-    isPending: isPendingPosters,
-    error: postersError,
-    data: posters,
-  } = useQuery({
-    queryKey: ['posters'],
-    queryFn: () => {
-      console.log("start!!!!!!")
-      getPosters(crmID)
-    },
-    initialData: []
-  })
+  // const {
+  //   isPending: isPendingPosters,
+  //   error: postersError,
+  //   data: posters,
+  // } = useQuery({
+  //   queryKey: ['posters'],
+  //   queryFn: () => {
+  //     console.log('start!!!!!!')
+  //     getPostersAll(crmID)
+  //   },
+  //   initialData: [],
+  // })
 
   useEffect(() => {
     console.log('height: ', height)
@@ -367,6 +368,10 @@ const Projects = () => {
 
     const resPretendents = await getPretendentProjectId(id)
     console.log('pretendents: ', resPretendents)
+
+    const resPosters = await getPosters(resProj.crmID)
+    console.log('pretendents: ', resPosters)
+    setPosters(resPosters)
 
     let newArray = []
     let colorStatus = ''
@@ -1212,6 +1217,13 @@ ${loc.url}`
     }, 5000)
   }
 
+  const handleDeletePoster = async (posterId) => {
+    await deletePoster(posterId)
+    const resPosters = await getPosters(crmID)
+    console.log('pretendents: ', resPosters)
+    setPosters(resPosters)
+  }
+
   const pressPoster = async () => {
     setPlayPoster(!playPoster)
     setShowLoader(true)
@@ -1220,9 +1232,14 @@ ${loc.url}`
     const resAddPoster = await getCreatePoster(crmID)
     console.log('resAddPoster: ', resAddPoster)
 
-    setTimeout(() => {
-      setShowLoader(false)
-    }, 2000)
+    const resPosters = await getPosters(crmID)
+    console.log('pretendents: ', resPosters)
+    setPosters(resPosters)
+
+    // setTimeout(() => {
+    //   setShowLoader(false)
+    // }, 2000)
+    setShowLoader(false)
   }
 
   const sortDate = () => {
@@ -2874,7 +2891,7 @@ ${loc.url}`
                                         height={'100'}
                                         width={'177'}
                                         onClick={() => setVisiblePoster(item.id)}
-                                        src={item.url}
+                                        src={`https://storage.yandexcloud.net/uley/${item.url}`}
                                       />
                                       {visiblePoster === item.id && (
                                         <CModal
@@ -2889,28 +2906,33 @@ ${loc.url}`
                                              
                                             </CModalTitle> */}
                                             <div>
-                                              
-                                                <a  rel="noopener noreferrer" target="_blank" href={item.url}>
-                                                <CButton
-                                                style={{ margin: '.25rem .125rem' }}
-                                                color="light"
+                                              <a
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                                href={`https://storage.yandexcloud.net/uley/${item.url}`}
                                               >
+                                                <CButton
+                                                  style={{ margin: '.25rem .125rem' }}
+                                                  color="light"
+                                                >
                                                   Скачать
-                                                  </CButton>
-                                                </a>
-                                              
+                                                </CButton>
+                                              </a>
+
                                               <CButton
                                                 style={{ margin: '.25rem .125rem' }}
                                                 color="light"
+                                                disabled
                                               >
                                                 Отправить
-                                              </CButton>
+                                              </CButton>                                              
+                                              <Icon id="delete" style={{cursor: 'pointer'}} onClick={()=> handleDeletePoster(item.id)} />
                                             </div>
                                           </CModalHeader>
                                           <img
                                             alt=""
                                             // width={'760'}
-                                            src={item.url}
+                                            src={`https://storage.yandexcloud.net/uley/${item.url}`}
                                           />
                                           {/* <CModalBody>
                                             <img
