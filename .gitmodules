@@ -1,3 +1,0 @@
-[submodule "client"]
-	path = client
-	url = https://github.com/wolf85-prog/telegram-bot-admin-panel.git
