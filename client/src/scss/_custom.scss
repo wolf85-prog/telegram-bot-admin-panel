@@ -3,6 +3,7 @@
 
 .uley_react_select {
     margin-right: 10px;
+    z-index: 100
   }
   
   .custom-select_1 {
@@ -97,7 +98,6 @@
       background-color: #1f282c !important;
       width: 115px !important;
       text-align: center !important;
-      
     }
     &__option {
       cursor: pointer !important;
