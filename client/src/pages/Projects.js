@@ -30,7 +30,8 @@ import {
   CFormCheck,
   CTooltip,
 } from '@coreui/react'
-
+import { cilPlus, cilCopy, cilVerticalAlignBottom, cilClearAll } from '@coreui/icons'
+import CIcon from '@coreui/icons-react'
 import Icon from './../chat-app-worker/components/Icon'
 import InputMask from 'react-input-mask'
 import {
@@ -97,7 +98,7 @@ import {
 } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 import { sendSpecialistOtkaz } from '../http/specAPI'
-import { getPosters,getPostersAll, deletePoster} from '../http/postersApi'
+import { getPosters, getPostersAll, deletePoster } from '../http/postersApi'
 
 import {
   addMainspec,
@@ -1240,6 +1241,7 @@ ${loc.url}`
     //   setShowLoader(false)
     // }, 2000)
     setShowLoader(false)
+    setPlayPoster(false)
   }
 
   const sortDate = () => {
@@ -2880,68 +2882,61 @@ ${loc.url}`
                     <CCardHeader onClick={() => setVisibleC(!visibleC)}>Постеры</CCardHeader>
                     <CCollapse visible={visibleC}>
                       <CCardBody style={{ padding: '12px' }}>
-                        <table className="frame2">
+                        <table >
                           <>
                             <tr>
                               {posters.length > 0
                                 ? posters.map((item, index) => (
-                                    <td key={item.id} className="day2">
+                                    <td  key={item.id} style={{width: ''}} className="day2">
                                       <img
+                                      style={{cursor: 'pointer'}}
                                         alt=""
                                         height={'100'}
-                                        width={'177'}
+                                        width={'178'}
                                         onClick={() => setVisiblePoster(item.id)}
                                         src={`https://storage.yandexcloud.net/uley/${item.url}`}
                                       />
                                       {visiblePoster === item.id && (
-                                        <CModal
-                                          size="lg"
-                                          alignment="center"
-                                          visible={visiblePoster}
-                                          onClose={() => setVisiblePoster(false)}
-                                          aria-labelledby="LiveDemoExampleLabel"
-                                        >
-                                          <CModalHeader onClose={() => setVisiblePoster(false)}>
-                                            {/* <CModalTitle id="LiveDemoExampleLabel">
-                                             
-                                            </CModalTitle> */}
-                                            <div>
+                                        <>
+                                          <CModal
+                                            size="lg"
+                                            alignment="center"
+                                            visible={visiblePoster}
+                                            onClose={() => setVisiblePoster(false)}
+                                            aria-labelledby="LiveDemoExampleLabel"
+                                            // style={{position: 'relative'}}
+                                          >
+                                            <img
+                                              alt=""
+                                              src={`https://storage.yandexcloud.net/uley/${item.url}`}
+                                            />
+                                            <div style={{ position: 'absolute', right: '0' }}>
                                               <a
+                                                style={{ verticalAlign: 'middle' }}
                                                 rel="noopener noreferrer"
                                                 target="_blank"
                                                 href={`https://storage.yandexcloud.net/uley/${item.url}`}
                                               >
-                                                <CButton
-                                                  style={{ margin: '.25rem .125rem' }}
-                                                  color="light"
-                                                >
-                                                  Скачать
-                                                </CButton>
+                                                <CIcon
+                                                  style={{
+                                                    cursor: 'pointer',
+                                                    margin: '0 10px',
+                                                    '--ci-primary-color': 'white',
+                                                  }}
+                                                  size="xl"
+                                                  icon={cilVerticalAlignBottom}
+                                                  // onClick={handlePasteTemplate}
+                                                />
                                               </a>
 
-                                              <CButton
-                                                style={{ margin: '.25rem .125rem' }}
-                                                color="light"
-                                                disabled
-                                              >
-                                                Отправить
-                                              </CButton>                                              
-                                              <Icon id="delete" style={{cursor: 'pointer'}} onClick={()=> handleDeletePoster(item.id)} />
+                                              <Icon
+                                                id="delete"
+                                                style={{ cursor: 'pointer' }}
+                                                onClick={() => handleDeletePoster(item.id)}
+                                              />
                                             </div>
-                                          </CModalHeader>
-                                          <img
-                                            alt=""
-                                            // width={'760'}
-                                            src={`https://storage.yandexcloud.net/uley/${item.url}`}
-                                          />
-                                          {/* <CModalBody>
-                                            <img
-                                              alt=""
-                                              width={'760'}
-                                              src={item.url}
-                                            />
-                                          </CModalBody> */}
-                                        </CModal>
+                                          </CModal>
+                                        </>
                                       )}
                                     </td>
                                   ))
