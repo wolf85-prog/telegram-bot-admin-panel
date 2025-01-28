@@ -2887,7 +2887,7 @@ ${loc.url}`
                             <tr>
                               {posters.length > 0
                                 ? posters.map((item, index) => (
-                                    <td  key={item.id} style={{width: ''}} className="day2">
+                                    <td  key={item.id} style={{width: ''}} className="">
                                       <img
                                       style={{cursor: 'pointer'}}
                                         alt=""
