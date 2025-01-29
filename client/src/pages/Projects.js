@@ -120,6 +120,8 @@ const Projects = () => {
   const [showCalendar2, setShowCalendar2] = useState(true)
   const [showProject, setShowProject] = useState(false)
 
+  const [showPosterMenu, setShowPosterMenu] = useState('none')
+
   const [showSaveAddress, setShowSaveAddress] = useState(false)
 
   const [height, setHeight] = useState(600)
@@ -2909,8 +2911,11 @@ ${loc.url}`
                                             <img
                                               alt=""
                                               src={`https://storage.yandexcloud.net/uley/${item.url}`}
+                                              onMouseEnter={() => setShowPosterMenu('block')}
+                                              onMouseLeave={() => setShowPosterMenu('none')}
+                                              
                                             />
-                                            <div style={{ position: 'absolute', right: '0' }}>
+                                            <div  style={{ position: 'absolute', right: '5px', top: '5px',  display: showPosterMenu }}>
                                               <a
                                                 style={{ verticalAlign: 'middle' }}
                                                 rel="noopener noreferrer"
@@ -2921,9 +2926,9 @@ ${loc.url}`
                                                   style={{
                                                     cursor: 'pointer',
                                                     margin: '0 10px',
-                                                    '--ci-primary-color': 'white',
+                                                    '--ci-primary-color': '#7a8287',
                                                   }}
-                                                  size="xl"
+                                                  size="lg"
                                                   icon={cilVerticalAlignBottom}
                                                   // onClick={handlePasteTemplate}
                                                 />
@@ -2931,7 +2936,7 @@ ${loc.url}`
 
                                               <Icon
                                                 id="delete"
-                                                style={{ cursor: 'pointer' }}
+                                                style={{ cursor: 'pointer', color: '#7a8287' }}
                                                 onClick={() => handleDeletePoster(item.id)}
                                               />
                                             </div>
