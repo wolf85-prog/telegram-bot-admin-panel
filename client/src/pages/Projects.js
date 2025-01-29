@@ -81,6 +81,11 @@ import btnRed from 'src/assets/images/button_red.png'
 import btnGreen from 'src/assets/images/button_green.png'
 import btnYellow from 'src/assets/images/button_yellow.png'
 
+import btnBlue2 from 'src/assets/images/button_blue2.png'
+import btnRed2 from 'src/assets/images/button_red2.png'
+import btnGreen2 from 'src/assets/images/button_green2.png'
+import btnYellow2 from 'src/assets/images/button_yellow2.png'
+
 import statusData from 'src/data/statusData'
 import cities from 'src/data/cities'
 import specifikaData from 'src/data/specifikaData'
@@ -2192,19 +2197,24 @@ ${loc.url}`
                                   <img
                                     src={btnYellow}
                                     alt=""
-                                    width={25}
+                                    width={30}
                                     style={{ marginBottom: '7px' }}
                                   />
                                 ) : (
                                   <img
                                     src={btnBlue}
                                     alt=""
-                                    width={25}
+                                    width={30}
                                     style={{ marginBottom: '7px' }}
                                   />
                                 )
                               ) : (
-                                '🟥'
+                                <img
+                                  src={btnRed}
+                                  alt=""
+                                  width={30}
+                                  style={{ marginBottom: '7px' }}
+                                />
                               )}
                             </div>
 
@@ -2224,14 +2234,14 @@ ${loc.url}`
                                   <img
                                     src={btnYellow}
                                     alt=""
-                                    width={25}
+                                    width={30}
                                     style={{ marginBottom: '7px' }}
                                   />
                                 ) : (
                                   <img
                                     src={btnBlue}
                                     alt=""
-                                    width={25}
+                                    width={30}
                                     style={{ marginBottom: '7px' }}
                                   />
                                 )
@@ -2239,7 +2249,7 @@ ${loc.url}`
                                 <img
                                   src={btnRed}
                                   alt=""
-                                  width={25}
+                                  width={30}
                                   style={{ marginBottom: '7px' }}
                                 />
                               )}
@@ -2264,7 +2274,7 @@ ${loc.url}`
                                   <img
                                     src={btnYellow}
                                     alt=""
-                                    width={25}
+                                    width={30}
                                     style={{ marginBottom: '7px' }}
                                   />
                                 )
@@ -2272,7 +2282,7 @@ ${loc.url}`
                                 <img
                                   src={btnBlue}
                                   alt=""
-                                  width={25}
+                                  width={30}
                                   style={{ marginBottom: '7px' }}
                                 />
                               )}
