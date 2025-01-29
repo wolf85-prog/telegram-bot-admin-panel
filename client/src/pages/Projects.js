@@ -76,10 +76,10 @@ import Disketa from './../assets/images/disketa.png'
 import arrowDown from 'src/assets/images/arrowDown.svg'
 import threeDots from 'src/assets/images/three-dots.svg'
 
-import btnBlue from 'src/assets/images/button_blue.png'
-import btnRed from 'src/assets/images/button_red.png'
-import btnGreen from 'src/assets/images/button_green.png'
-import btnYellow from 'src/assets/images/button_yellow.png'
+import btnPause from 'src/assets/images/button_pause.png'
+import btnRec from 'src/assets/images/button_rec.png'
+import btnPlay from 'src/assets/images/button_play.png'
+import btnStop from 'src/assets/images/button_stop.png'
 
 import btnBlue2 from 'src/assets/images/button_blue2.png'
 import btnRed2 from 'src/assets/images/button_red2.png'
@@ -2179,7 +2179,7 @@ ${loc.url}`
                                 style={{ cursor: 'pointer', width: '24px', height: '24px' }}
                               />
                             </div>
-
+                            {/* Предварительная смета */}
                             <div
                               onClick={pressPredSmeta}
                               className="text-field text-field__input"
@@ -2195,14 +2195,14 @@ ${loc.url}`
                               {playPredSmeta ? (
                                 donePredSmeta ? (
                                   <img
-                                    src={btnYellow}
+                                    src={btnPlay}
                                     alt=""
                                     width={30}
                                     style={{ marginBottom: '7px' }}
                                   />
                                 ) : (
                                   <img
-                                    src={btnBlue}
+                                    src={btnPause}
                                     alt=""
                                     width={30}
                                     style={{ marginBottom: '7px' }}
@@ -2210,14 +2210,14 @@ ${loc.url}`
                                 )
                               ) : (
                                 <img
-                                  src={btnRed}
+                                  src={btnStop}
                                   alt=""
                                   width={30}
                                   style={{ marginBottom: '7px' }}
                                 />
                               )}
                             </div>
-
+                            {/* Финальная смета */}
                             <div
                               onClick={pressFinSmeta}
                               className="text-field text-field__input"
@@ -2232,14 +2232,14 @@ ${loc.url}`
                               {playFinSmeta ? (
                                 doneFinSmeta ? (
                                   <img
-                                    src={btnYellow}
+                                    src={btnStop}
                                     alt=""
                                     width={30}
                                     style={{ marginBottom: '7px' }}
                                   />
                                 ) : (
                                   <img
-                                    src={btnBlue}
+                                    src={btnPlay}
                                     alt=""
                                     width={30}
                                     style={{ marginBottom: '7px' }}
@@ -2247,7 +2247,7 @@ ${loc.url}`
                                 )
                               ) : (
                                 <img
-                                  src={btnRed}
+                                  src={btnPause}
                                   alt=""
                                   width={30}
                                   style={{ marginBottom: '7px' }}
@@ -2255,6 +2255,7 @@ ${loc.url}`
                               )}
                             </div>
 
+                            {/* Постер */}
                             <div
                               onClick={pressPoster}
                               className="text-field text-field__input"
@@ -2272,7 +2273,7 @@ ${loc.url}`
                                   <CSpinner style={{ width: '20px', height: '20px' }} />
                                 ) : (
                                   <img
-                                    src={btnYellow}
+                                    src={btnPause}
                                     alt=""
                                     width={30}
                                     style={{ marginBottom: '7px' }}
@@ -2280,7 +2281,7 @@ ${loc.url}`
                                 )
                               ) : (
                                 <img
-                                  src={btnBlue}
+                                  src={btnRec}
                                   alt=""
                                   width={30}
                                   style={{ marginBottom: '7px' }}
