@@ -78,8 +78,8 @@ import threeDots from 'src/assets/images/three-dots.svg'
 
 import btnBlue from 'src/assets/images/button_blue.png'
 import btnRed from 'src/assets/images/button_red.png'
-import btnGreen from 'src/assets/images/button_green.jpg'
-import btnYellow from 'src/assets/images/button_yellow.jpg'
+import btnGreen from 'src/assets/images/button_green.png'
+import btnYellow from 'src/assets/images/button_yellow.png'
 
 import statusData from 'src/data/statusData'
 import cities from 'src/data/cities'
