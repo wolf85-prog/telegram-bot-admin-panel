@@ -99,6 +99,7 @@ const Admin = () => {
   const [showRenthub2, setShowRenthub2]= useState(false);
   const [showWorkhub, setShowWorkhub]= useState(true);
   const [showDeleted, setShowDeleted]= useState(false);
+  const [showCompanyhub, setShowCompanyhub]= useState(false);
 
   const [activeKey, setActiveKey] = useState(2)
 
@@ -351,6 +352,7 @@ useEffect(() => {
       setShowRenthub(false)
       setShowRenthub2(false)
       setShowDeleted(false)
+      setShowCompanyhub(false)
       setActiveKey(2)
       setShowWidget(false)
       setShowWidget2(true)
@@ -361,6 +363,7 @@ useEffect(() => {
       setShowRenthub(true)
       setShowRenthub2(false)
       setShowDeleted(false)
+      setShowCompanyhub(false)
       setActiveKey(1)
       setShowWidget(true)
       setShowWidget2(false)
@@ -371,20 +374,33 @@ useEffect(() => {
       setShowRenthub(false)
       setShowRenthub2(true)
       setShowDeleted(false)
+      setShowCompanyhub(false)
       setActiveKey(3)
       setShowWidget(true)
       setShowWidget2(false)
       setTabhub('Renthub 2.0')
     }
+    
     if (hub === 'Удаленные') { 
       setShowWorkhub(false)
       setShowRenthub(false)
       setShowRenthub2(false)
       setShowDeleted(true)
+      setShowCompanyhub(false)
       setActiveKey(4)
       // setShowWidget(true)
       // setShowWidget2(false)
       setTabhub('Удаленные')
+    }
+
+    if (hub === 'Companyhub') { 
+      setShowWorkhub(false)
+      setShowRenthub(false)
+      setShowRenthub2(false)
+      setShowDeleted(false)
+      setShowCompanyhub(true)
+      setActiveKey(5)
+      setTabhub('Company')
     }
   }
 
@@ -1494,6 +1510,14 @@ useEffect(() => {
                           </CNavItem>
                           <CNavItem>
                             <CNavLink 
+                              style={{background: activeKey !== 5 ? '#08080869' : '', cursor: 'pointer'}} 
+                              onClick={() => openHub('Companyhub')} 
+                              active={activeKey === 5}>
+                                Company
+                            </CNavLink>
+                          </CNavItem>
+                          <CNavItem>
+                            <CNavLink 
                               style={{background: activeKey !== 3 ? '#08080869' : '', cursor: 'pointer'}} 
                               onClick={() => openHub('Renthub2')} 
                               active={activeKey === 3}>
@@ -2036,6 +2060,95 @@ useEffect(() => {
                                 Всего: {sortWorkers.length}
                               </CCol> */}
                             </CRow>
+                      </CCol>
+                    </CRow>
+                  </CCardBody>
+
+{/*----------------------------------------- Company -----------------------------------------  */}  
+                  <CCardBody id="Company" style={{display: showCompanyhub ? 'block' : 'none'}}>
+                    <CRow>
+                      <CCol xs>
+                            <CRow>
+                              <CCol md={6} style={{textAlign: 'left'}}>
+                                <CButton color="dark" onClick={()=>showBlock(1)} style={{marginRight: '20px', width: '100px'}}>Сутки</CButton>
+                                <CButton color="dark" onClick={()=>showBlock(2)} style={{marginRight: '20px', width: '100px'}}>Неделя</CButton>
+                                <CButton color="dark" onClick={()=>showBlock(3)} style={{marginRight: '20px', width: '100px'}}>Месяц</CButton>
+                                <CButton color="dark" onClick={()=>showBlock(4)} style={{marginRight: '20px', width: '100px'}}>Год</CButton>
+                              </CCol>
+                              <CCol md={6} style={{textAlign: 'center', display: 'flex'}}>
+                                <InputMask 
+                                  mask="99.99.9999"
+                                  value={periodDate1}
+                                  onChange={changeDate1}>
+                                  {(inputProps) => <CFormInput 
+                                                    {...inputProps} 
+                                                    placeholder="01.01.2025" 
+                                                    disableUnderline
+                                                    aria-label="sm input example"
+                                                    style={{marginLeft: '10px'}}    
+                                                  />}
+                                </InputMask>
+
+                                <InputMask 
+                                  mask="99.99.9999"
+                                  value={periodDate2}
+                                  onChange={changeDate2}>
+                                  {(inputProps) => <CFormInput 
+                                                    {...inputProps} 
+                                                    placeholder="31.12.2025" 
+                                                    disableUnderline
+                                                    aria-label="sm input example"
+                                                    style={{marginLeft: '10px'}} 
+                                                  />}
+                                </InputMask>                             
+                                            
+                                <CButton color="dark" onClick={()=>showBlock(5)} style={{marginLeft: '10px'}}>Применить</CButton>
+                              </CCol>      
+                            </CRow>
+                            
+                            <br/>
+                            <CRow className="mb-3">
+                              <CCol sm={3} >
+                                <CFormInput placeholder="Поиск..." onChange={(e)=>setText(e.target.value)} aria-label="workers"/>
+                              </CCol>
+                              <CCol sm={6}></CCol>
+
+                              <CCol sm={3} style={{textAlign: 'right', position: 'absolute', top: '-538px', right: '0', marginRight: '35px'}}>
+                                {/* {showCountAll ? sortWorkers.length : ''} */}
+                              </CCol>
+                            </CRow>
+                            
+                            <CRow>
+                              <CCol style={{textAlign: 'center'}}>
+                              {loading2 ? 
+                                      
+                                <CSpinner/> :
+
+                                <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '14px'}}>
+                                  <CTableHead className='table-light'>
+                                    <CTableRow>
+                                      <CTableHeaderCell className="text-center" style={{width: '90px'}}>Дата</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{width: '70px'}}>Время</CTableHeaderCell>  
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '240px'}}>ФИО</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{width: '130px'}}>Город</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" >Специальность</CTableHeaderCell>  
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Дата</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>                         
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>{ showNick ? 'Ник' : 'ID' }</CTableHeaderCell>
+                                    </CTableRow>
+                                  </CTableHead>
+                                  <CTableBody>                                  
+                                    
+                                </CTableBody>                   
+                              </CTable>
+                              
+                            }
+                            
+                              </CCol>
+                            </CRow>
+                            <div style={{display: 'flex', justifyContent: 'center' }}>
+                              <img src={arrowDown} alt='' onClick={()=>clickNext()} style={{width: '50px', marginTop: '15px', cursor: 'pointer'}}></img>
+                            </div>
                       </CCol>
                     </CRow>
                   </CCardBody>
