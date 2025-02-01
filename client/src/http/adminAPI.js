@@ -1,4 +1,4 @@
-import {$authHost, $host, $host_bot, $host_bottest, $host_call, $host_renthub, $host_smeta} from "./index";
+import {$authHost, $host, $host_bot, $host_bottest, $host_call, $host_person, $host_renthub, $host_smeta} from "./index";
 
 export const getProjects = async () =>{
     try {
@@ -728,5 +728,18 @@ export const getCreatePoster = async(id)=>{
         return response.data;
     } catch (error) {
         console.log("error while calling getCreatePoster api", error.message);
+    }
+}
+
+
+//-----------------------------------------------------------
+//api бд
+export const getManagerPerson= async () =>{
+    try {
+        let response = await $host_person.get('api/managers/get');
+        //console.log("projectsAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getPretendent api", error.message);
     }
 }

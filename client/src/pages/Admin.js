@@ -40,6 +40,7 @@ import arrowDown from 'src/assets/images/arrowDown.svg'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { getAllMessages, getMessages } from './../http/chatAPI.js'
 import { getAllWMessages, getWorkersCount } from './../http/workerAPI.js'
+import { getManagerPerson } from '../http/adminAPI'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 import WidgetsDropdown2 from '../views/widgets/WidgetsDropdown2'
@@ -47,6 +48,7 @@ import WidgetsDropdown3 from '../views/widgets/WidgetsDropdown3'
 import WidgetsDropdown4 from '../views/widgets/WidgetsDropdown4'
 import WidgetsDropdown5 from '../views/widgets/WidgetsDropdown5'
 import WidgetsDropdown6 from '../views/widgets/WidgetsDropdown6'
+import WidgetsDropdown7 from '../views/widgets/WidgetsDropdown7'
 
 import InputMask from 'react-input-mask';
 
@@ -109,6 +111,7 @@ const Admin = () => {
   const [showWidget4, setShowWidget4] = useState(false)
   const [showWidget5, setShowWidget5] = useState(false)
   const [showWidget6, setShowWidget6] = useState(false)
+  const [showWidget7, setShowWidget7] = useState(false)
 
   const [showCharts, setShowCharts]= useState(false);
   const [showCharts2, setShowCharts2]= useState(false);
@@ -131,8 +134,11 @@ const Admin = () => {
   const [textDelete, setTextDelete]= useState("");
   const [showTable, setShowTable] = useState([])
 
+  const [managersP, setManagersP] = useState([])
+
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
+  const hostPersonal= process.env.REACT_APP_PERSON_ADMIN_API_URL
   
   useEffect(() => {
     //set tab
@@ -343,6 +349,20 @@ useEffect(() => {
     fetchData();
     
   },[projs])
+//---------------------------------------------------------------------------------------------
+  //get managers personal
+  useEffect(() => {
+   
+    const fetchData = async() => {
+      const workersP = await getManagerPerson()
+      console.log("workersP: ", workersP)
+
+      setManagersP(workersP)
+    }
+
+    fetchData()
+
+  }, [])
 
 //-----------------------------------------------------------------------------------------------
 
@@ -388,8 +408,6 @@ useEffect(() => {
       setShowDeleted(true)
       setShowCompanyhub(false)
       setActiveKey(4)
-      // setShowWidget(true)
-      // setShowWidget2(false)
       setTabhub('Удаленные')
     }
 
@@ -400,6 +418,8 @@ useEffect(() => {
       setShowDeleted(false)
       setShowCompanyhub(true)
       setActiveKey(5)
+      setShowWidget(false)
+      setShowWidget7(true)
       setTabhub('Company')
     }
   }
@@ -1295,6 +1315,15 @@ useEffect(() => {
                   delUsers={delWorkers2}
                 />
                 :""}
+
+                {showWidget7 
+                ?<WidgetsDropdown7
+                  all={[]}
+                  companys={[]} 
+                  clients={[]} 
+                  workers={[]}
+                />
+                :""}
                 
 
 {/* График Сутки */}
@@ -2131,14 +2160,46 @@ useEffect(() => {
                                       <CTableHeaderCell className="text-center" style={{width: '70px'}}>Время</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{minWidth: '240px'}}>ФИО</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '130px'}}>Город</CTableHeaderCell> 
-                                      <CTableHeaderCell className="text-center" >Специальность</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Дата</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>                         
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>{ showNick ? 'Ник' : 'ID' }</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" >Компания</CTableHeaderCell>  
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Должность</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>  
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Почта</CTableHeaderCell>                         
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>ID</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
-                                    
+                                  {managersP.map((item, index) => (
+                                      <CTableRow v-for="item in tableItems" key={index}>
+                                        <CTableDataCell className="text-center">
+                                          {String(new Date(item.createDate).getDate()).padStart(2, "0")+ "."+ String(new Date(item.createDate).getMonth()+1).padStart(2, "0") + "." +new Date(item.createDate).getFullYear()}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          {new Date(item.createDate).getHours() + ' : '+ String(new Date(item.createDate).getMinutes()).padStart(2, "0")}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                            {item.fio ? item.fio : ''}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          {item.city ? item.city : ''}
+                                        </CTableDataCell>
+                                        <CTableDataCell style={{textAlign: 'left'}}>
+                                          {item.companyId ? item.companyId : ''}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          {item.dolgnost ? item.dolgnost : ''}
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div>{item.phone ? item.phone : ''}</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="text-center">
+                                          <div>{item.chatId ? item.chatId : ''}</div>
+                                        </CTableDataCell> 
+                                        <CTableDataCell className="text-center">
+                                          {item.email ? item.email : ''}
+                                        </CTableDataCell> 
+                                      </CTableRow>
+                                      ))
+                                    }
                                 </CTableBody>                   
                               </CTable>
                               
