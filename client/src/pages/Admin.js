@@ -76,6 +76,7 @@ const Admin = () => {
   const [loading2, setLoading2] = useState(true);
   const [loading3, setLoading3] = useState(true);
   const [loading4, setLoading4] = useState(true);
+  const [loading5, setLoading5] = useState(true);
   
   const [sortWorkers, setSortWorkers] = useState([]);
   const [newWorkers, setNewWorkers] = useState([]);
@@ -355,9 +356,12 @@ useEffect(() => {
    
     const fetchData = async() => {
       const workersP = await getManagerPerson()
-      console.log("workersP: ", workersP)
-
-      setManagersP(workersP)
+      if (workersP) {
+        console.log("workersP: ", workersP)
+        setManagersP(workersP)
+        setLoading5(false)
+      }
+      
     }
 
     fetchData()
@@ -2155,7 +2159,7 @@ useEffect(() => {
                             
                             <CRow>
                               <CCol style={{textAlign: 'center'}}>
-                              {loading2 ? 
+                              {loading5 ? 
                                       
                                 <CSpinner/> :
 
