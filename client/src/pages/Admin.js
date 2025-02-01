@@ -2149,7 +2149,7 @@ useEffect(() => {
                               <CCol sm={6}></CCol>
 
                               <CCol sm={3} style={{textAlign: 'right', position: 'absolute', top: '-538px', right: '0', marginRight: '35px'}}>
-                                {managersP ? managersP.length : ''}
+                                {/* {managersP ? managersP.length : ''} */}
                               </CCol>
                             </CRow>
                             
