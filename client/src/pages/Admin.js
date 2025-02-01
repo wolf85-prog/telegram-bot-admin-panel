@@ -376,6 +376,7 @@ useEffect(() => {
       setActiveKey(2)
       setShowWidget(false)
       setShowWidget2(true)
+      setShowWidget7(false)
       setTabhub('Workhub')
     }
     if (hub === 'Renthub') { 
@@ -387,6 +388,7 @@ useEffect(() => {
       setActiveKey(1)
       setShowWidget(true)
       setShowWidget2(false)
+      setShowWidget7(false)
       setTabhub('Renthub')
     }
     if (hub === 'Renthub2') { 
@@ -398,6 +400,7 @@ useEffect(() => {
       setActiveKey(3)
       setShowWidget(true)
       setShowWidget2(false)
+      setShowWidget7(false)
       setTabhub('Renthub 2.0')
     }
     
@@ -406,6 +409,8 @@ useEffect(() => {
       setShowRenthub(false)
       setShowRenthub2(false)
       setShowDeleted(true)
+      setShowWidget2(true)
+      setShowWidget7(false)
       setShowCompanyhub(false)
       setActiveKey(4)
       setTabhub('Удаленные')
@@ -418,7 +423,8 @@ useEffect(() => {
       setShowDeleted(false)
       setShowCompanyhub(true)
       setActiveKey(5)
-      setShowWidget(false)
+      //setShowWidget(false)
+      setShowWidget2(false)
       setShowWidget7(true)
       setTabhub('Company')
     }
@@ -2143,7 +2149,7 @@ useEffect(() => {
                               <CCol sm={6}></CCol>
 
                               <CCol sm={3} style={{textAlign: 'right', position: 'absolute', top: '-538px', right: '0', marginRight: '35px'}}>
-                                {/* {showCountAll ? sortWorkers.length : ''} */}
+                                {managersP ? managersP.length : ''}
                               </CCol>
                             </CRow>
                             
@@ -2171,10 +2177,10 @@ useEffect(() => {
                                   {managersP.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
                                         <CTableDataCell className="text-center">
-                                          {String(new Date(item.createDate).getDate()).padStart(2, "0")+ "."+ String(new Date(item.createDate).getMonth()+1).padStart(2, "0") + "." +new Date(item.createDate).getFullYear()}
+                                          {String(new Date(item.createdAt).getDate()).padStart(2, "0")+ "."+ String(new Date(item.createdAt).getMonth()+1).padStart(2, "0") + "." +new Date(item.createdAt).getFullYear()}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          {new Date(item.createDate).getHours() + ' : '+ String(new Date(item.createDate).getMinutes()).padStart(2, "0")}
+                                          {new Date(item.createdAt).getHours() + ' : '+ String(new Date(item.createdAt).getMinutes()).padStart(2, "0")}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                             {item.fio ? item.fio : ''}
@@ -2192,10 +2198,10 @@ useEffect(() => {
                                           <div>{item.phone ? item.phone : ''}</div>
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          <div>{item.chatId ? item.chatId : ''}</div>
+                                          <div>{item.email ? item.email : ''}</div>
                                         </CTableDataCell> 
                                         <CTableDataCell className="text-center">
-                                          {item.email ? item.email : ''}
+                                          {item.chatId ? item.chatId : ''}
                                         </CTableDataCell> 
                                       </CTableRow>
                                       ))
