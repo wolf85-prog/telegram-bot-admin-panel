@@ -23,7 +23,7 @@ const WidgetsDropdown7 = ({
           color="primary"
           value={
             <>
-              {all.length} {/*{' '}
+              {all} {/*{' '}
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
@@ -44,10 +44,10 @@ const WidgetsDropdown7 = ({
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-primary'),
                     data: [
-                      (all.filter(item => new Date(item.createDate).getMonth() === 0)).length*100/all.length-5, 
-                      (all.filter(item => new Date(item.createDate).getMonth() === 1)).length*100/all.length-5, 
-                      (all.filter(item => new Date(item.createDate).getMonth() === 2)).length*100/all.length-5, 
-                      (all.filter(item => new Date(item.createDate).getMonth() === 3)).length*100/all.length-5, 
+                      0, 
+                      0, 
+                      0, 
+                      0, 
                      0, 0, 0
                     ],
                   },
@@ -104,7 +104,7 @@ const WidgetsDropdown7 = ({
           color="info"
           value={
             <>
-              {companys.length} 
+              {companys} 
               {/* <span className="fs-6 fw-normal">
                 (40.9% <CIcon icon={cilArrowTop} />)
               </span> */}
@@ -125,10 +125,10 @@ const WidgetsDropdown7 = ({
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-info'),
                     data: [
-                      (companys.filter(item => new Date(item.createDate).getMonth() === 0)).length*100/companys.length-5, 
-                      (companys.filter(item => new Date(item.createDate).getMonth() === 1)).length*100/companys.length-5, 
-                      (companys.filter(item => new Date(item.createDate).getMonth() === 2)).length*100/companys.length-5, 
-                      (companys.filter(item => new Date(item.createDate).getMonth() === 3)).length*100/companys.length-5, 
+                      0, 
+                      0, 
+                      0, 
+                      0, 
                       0, 0, 0
                     ],
                   },
@@ -184,7 +184,7 @@ const WidgetsDropdown7 = ({
           color="warning"
           value={
             <>
-              {clients.length} {/*{' '}
+              {clients} {/*{' '}
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
@@ -245,7 +245,7 @@ const WidgetsDropdown7 = ({
           color="danger"
           value={
             <>
-              {workers.length}
+              {workers}
             </>
           }
           title={"Сотрудники"}

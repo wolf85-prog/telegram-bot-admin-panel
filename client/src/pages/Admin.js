@@ -40,7 +40,7 @@ import arrowDown from 'src/assets/images/arrowDown.svg'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { getAllMessages, getMessages } from './../http/chatAPI.js'
 import { getAllWMessages, getWorkersCount } from './../http/workerAPI.js'
-import { getManagerPerson, getManagerCompany } from '../http/adminAPI'
+import { getManagerPerson, getManagerCompany, getWorkerCount, getClientCount, getCompanyCount, getManagerCount } from '../http/adminAPI'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 import WidgetsDropdown2 from '../views/widgets/WidgetsDropdown2'
@@ -136,6 +136,11 @@ const Admin = () => {
   const [showTable, setShowTable] = useState([])
 
   const [managersP, setManagersP] = useState([])
+
+  const [allCount, setAllCount] = useState(0);
+  const [companyCount, setCompanyCount] = useState(0);
+  const [clientCount, setClientCount] = useState(0);
+  const [workerCount, setWorkerCount] = useState(0);
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
@@ -355,6 +360,17 @@ useEffect(() => {
   useEffect(() => {
    
     const fetchData = async() => {
+      const allCount = await getManagerCount()
+      console.log("allCount: ", allCount)
+      setAllCount(allCount)
+      const workerCount = await getWorkerCount()
+      setWorkerCount(workerCount)
+      const clientCount = await getClientCount() 
+      setClientCount(allCount)
+      const companyCount = await getCompanyCount() 
+      setCompanyCount(companyCount)
+
+      
       const workersP = await getManagerPerson()
       if (workersP) {
         console.log("workersP: ", workersP)
@@ -368,7 +384,7 @@ useEffect(() => {
       if (companyP) {
         console.log("companyP: ", companyP)
         workersP.map((item)=> {
-          const comp = companyP.find(item2 => item2.id === item.companyId)
+          const comp = companyP.find(item2 => item2.id.toString() === item.companyId)
           console.log("comp: ", comp)
           const newObj = {
             ...item, company: comp?.title
@@ -1347,10 +1363,10 @@ useEffect(() => {
 
                 {showWidget7 
                 ?<WidgetsDropdown7
-                  all={[]}
-                  companys={[]} 
-                  clients={[]} 
-                  workers={[]}
+                  all={allCount}
+                  companys={companyCount} 
+                  clients={clientCount} 
+                  workers={workerCount}
                 />
                 :""}
                 
@@ -2193,7 +2209,7 @@ useEffect(() => {
                                       <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Должность</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Почта</CTableHeaderCell>                         
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>ID</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>ID</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
@@ -2224,7 +2240,7 @@ useEffect(() => {
                                           <div>{item.email ? item.email : ''}</div>
                                         </CTableDataCell> 
                                         <CTableDataCell className="text-center">
-                                          {item.chatId ? item.chatId : ''}
+                                          {item.id}
                                         </CTableDataCell> 
                                       </CTableRow>
                                       ))
