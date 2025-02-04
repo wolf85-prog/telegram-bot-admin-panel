@@ -740,6 +740,17 @@ export const getManagerPerson= async () =>{
         //console.log("projectsAPI: ", response.data);
         return response.data;
     } catch (error) {
-        console.log("error while calling getPretendent api", error.message);
+        console.log("error while calling getManagerPerson api", error.message);
+    }
+}
+
+
+export const getManagerCompany= async () =>{
+    try {
+        let response = await $host_person.get('api/companyprof/get');
+        //console.log("projectsAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getManagerCompany api", error.message);
     }
 }

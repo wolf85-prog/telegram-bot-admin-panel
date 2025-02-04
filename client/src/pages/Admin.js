@@ -40,7 +40,7 @@ import arrowDown from 'src/assets/images/arrowDown.svg'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { getAllMessages, getMessages } from './../http/chatAPI.js'
 import { getAllWMessages, getWorkersCount } from './../http/workerAPI.js'
-import { getManagerPerson } from '../http/adminAPI'
+import { getManagerPerson, getManagerCompany } from '../http/adminAPI'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 import WidgetsDropdown2 from '../views/widgets/WidgetsDropdown2'
@@ -358,9 +358,28 @@ useEffect(() => {
       const workersP = await getManagerPerson()
       if (workersP) {
         console.log("workersP: ", workersP)
-        setManagersP(workersP)
+        //setManagersP(workersP)
+        //setLoading5(false)
+      }
+
+      let arr = []
+
+      const companyP = await getManagerCompany()
+      if (companyP) {
+        console.log("companyP: ", companyP)
+        workersP.map((item)=> {
+          const comp = companyP.find(item2 => item2.id === item.companyId)
+          console.log("comp: ", comp)
+          const newObj = {
+            ...item, company: comp?.title
+          }
+          arr.push(newObj)
+        })
+
+        setManagersP(arr)
         setLoading5(false)
       }
+
       
     }
 
@@ -2193,7 +2212,7 @@ useEffect(() => {
                                           {item.city ? item.city : ''}
                                         </CTableDataCell>
                                         <CTableDataCell style={{textAlign: 'left'}}>
-                                          {item.companyId ? item.companyId : ''}
+                                          {item.company ? item.company : ''}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           {item.dolgnost ? item.dolgnost : ''}
