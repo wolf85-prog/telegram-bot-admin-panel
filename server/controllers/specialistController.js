@@ -36,6 +36,21 @@ class SpecialistController {
         }
     }
 
+    async getSpecialistFilter(req, res) {
+        try {
+            const workers = await Specialist.findAll({
+                order: [
+                    ['id', 'DESC'], //DESC, ASC
+                ],
+                attributes: ['id', 'fio'],
+                
+            })
+            return res.status(200).json(workers);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
     async getSpecCount(req, res) {
         const kol = req.params.count
         const prev = req.params.prev
