@@ -2240,7 +2240,7 @@ useEffect(() => {
                                           <div>{item.email ? item.email : ''}</div>
                                         </CTableDataCell> 
                                         <CTableDataCell className="text-center">
-                                          {item.id}
+                                          {item.userId}
                                         </CTableDataCell> 
                                       </CTableRow>
                                       ))
