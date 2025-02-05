@@ -1532,7 +1532,7 @@ const Specialist = () => {
                                         type="text" 
                                         name="inn" 
                                         id="inn"
-                                        mask="9999-999999-99"
+                                        mask="999-999-999-9999"
                                         maskChar=""
                                         onChange={(e) => setInn(e.target.value)} 
                                         value={inn}
