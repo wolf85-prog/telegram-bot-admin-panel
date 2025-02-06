@@ -29,6 +29,7 @@ import { getDistributionsW,
 
 import boopSfx from './../assets/sounds/zvuk-icq.mp3';
 import soundMessage from './../assets/sounds/U.L.E.Y_messageNew.mp3';
+import soundMessageSupport from './../assets/sounds/SUPPORT_messageNew.mp3';
 import soundProject from './../assets/sounds/project_new2.mp3';
 import soundSmeta from './../assets/sounds/predvarit_smeta2.mp3';
 import sound120 from './../../assets/sound/120_minut_ULEY_new.mp3';
@@ -183,6 +184,7 @@ const UsersProvider = ({ children }) => {
 	})
 
 	const audioMessage = new Audio(soundMessage);
+	const audioMessageSupport = new Audio(soundMessageSupport);
 	const audioMessageW = new Audio(boopSfx);
 	const audioProject = new Audio(soundProject);
 	const audioSmeta = new Audio(soundSmeta);
