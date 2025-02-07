@@ -2215,8 +2215,8 @@ useEffect(() => {
                                     <CTableRow>
                                       <CTableHeaderCell className="text-center" style={{width: '90px'}}>Дата</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '70px'}}>Время</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '240px'}}>ФИО</CTableHeaderCell> 
-                                      <CTableHeaderCell className="text-center" style={{width: '130px'}}>Город</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>ФИО</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Город</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" >Компания</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Должность</CTableHeaderCell>
                                       <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>  
@@ -2234,10 +2234,16 @@ useEffect(() => {
                                           {new Date(item.createdAt).getHours() + ' : '+ String(new Date(item.createdAt).getMinutes()).padStart(2, "0")}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                            {item.fio ? item.fio : ''}
+                                          {item.fio &&
+                                            item.fio.length > 20
+                                              ? item.fio.substr(0, 20) + '...'
+                                              : item.fio}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          {item.city ? item.city : ''}
+                                          {item.city &&
+                                            item.city.length > 10
+                                              ? item.city.substr(0, 10) + '...'
+                                              : item.city}
                                         </CTableDataCell>
                                         <CTableDataCell style={{textAlign: 'left'}}>
                                           {item.company &&
