@@ -142,6 +142,9 @@ const Admin = () => {
   const [clientCount, setClientCount] = useState(0);
   const [workerCount, setWorkerCount] = useState(0);
 
+  const [textCompany, setTextCompany]= useState("");
+  const [sortManagers, setSortManagers] = useState([]);
+
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
   const hostPersonal= process.env.REACT_APP_PERSON_ADMIN_API_URL
@@ -175,6 +178,14 @@ const Admin = () => {
 		const filteredData = delWorkers.filter(user=> (user.userfamily + user.username + user.chatId)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(textDelete.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setSortDelWorkers(textDelete === '' ? delWorkers : filteredData);  
   }, [textDelete]);
+
+
+  //поиск на вкладке Company
+  useEffect(() => {
+		const filteredData = managersP.filter(user=> (user.fio + user.id)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+    setSortManagers(text === '' ? managersP : filteredData); 
+    //setWorkers(text === '' ? workers : filteredData);  
+  }, [textCompany]);
 
 
   //get filter workers
@@ -2183,7 +2194,7 @@ useEffect(() => {
                             <br/>
                             <CRow className="mb-3">
                               <CCol sm={3} >
-                                <CFormInput placeholder="Поиск..." onChange={(e)=>setText(e.target.value)} aria-label="workers"/>
+                                <CFormInput placeholder="Поиск..." onChange={(e)=>setTextCompany(e.target.value)} aria-label="workers"/>
                               </CCol>
                               <CCol sm={6}></CCol>
 
@@ -2213,7 +2224,7 @@ useEffect(() => {
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
-                                  {managersP && managersP.map((item, index) => (
+                                  {sortManagers && sortManagers.map((item, index) => (
                                       <CTableRow v-for="item in tableItems" key={index}>
                                         <CTableDataCell className="text-center">
                                           {String(new Date(item.createdAt).getDate()).padStart(2, "0")+ "."+ String(new Date(item.createdAt).getMonth()+1).padStart(2, "0") + "." +new Date(item.createdAt).getFullYear()}
