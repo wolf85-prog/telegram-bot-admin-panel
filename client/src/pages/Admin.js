@@ -182,8 +182,9 @@ const Admin = () => {
 
   //поиск на вкладке Company
   useEffect(() => {
-		const filteredData = managersP.filter(user=> (user.fio + user.id)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
-    setSortManagers(text === '' ? managersP : filteredData); 
+    console.log("textCompany: ", textCompany)
+		const filteredData = managersP.filter(user=> (user.fio + user.id + user.dolgnost)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(textCompany.replace(/[её]/g, '(е|ё)').toLowerCase()));
+    setSortManagers(textCompany === '' ? managersP : filteredData); 
     //setWorkers(text === '' ? workers : filteredData);  
   }, [textCompany]);
 
@@ -2239,10 +2240,16 @@ useEffect(() => {
                                           {item.city ? item.city : ''}
                                         </CTableDataCell>
                                         <CTableDataCell style={{textAlign: 'left'}}>
-                                          {item.company ? item.company : ''}
+                                          {item.company &&
+                                            item.company.length > 10
+                                              ? item.company.substr(0, 10) + '...'
+                                              : item.company}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          {item.dolgnost ? item.dolgnost : ''}
+                                          {item.dolgnost &&
+                                            item.dolgnost.length > 10
+                                              ? item.dolgnost.substr(0, 10) + '...'
+                                              : item.dolgnost}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div>{item.phone ? item.phone : ''}</div>
