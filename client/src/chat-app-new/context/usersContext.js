@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 import { useSocketContext } from "./socketContext";
+import { useSocketContextSupport } from "./socketContextSupport";
 import { getAllMessages, getContacts, getConversation, getMessages } from '../../http/chatAPI'
 import { getAllPretendent, getWContacts, getWConversation, 
 	getWConversations, getWMessages, getWorkers, getWorker, getAllWMessages, 
@@ -54,6 +55,7 @@ const useUsersContext = () => useContext(UsersContext);
 
 const UsersProvider = ({ children }) => {
 	const socket = useSocketContext();
+	const socketSupport = useSocketContextSupport();
 	const [users, setUsers] = useState([]); //все специалисты;
 	// const [users, setUsers] = useState( () => {
 	// 	const savedUsers = localStorage.getItem("users");
@@ -1337,6 +1339,13 @@ useEffect(() => {
 		socket.on("stop_typing", setUserAsNotTyping);
 		
 	}, [socket]);
+
+	//------------------------------------------------------------------------------------
+	useEffect(() => {
+		console.log("socket support work!")
+		//socketSupport.on("getMessage", fetchMessageResponse);
+		
+	}, [socketSupport]);
 
 //------------------------------------------------------------------------------------
 	const setUserAsUnread = (userId) => {
