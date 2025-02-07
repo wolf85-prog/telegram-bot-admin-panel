@@ -104,6 +104,7 @@ const Specialist = () => {
   const [showSave, setShowSave] = useState(false)
   const [showSave2, setShowSave2] = useState(false)
   const [showSave3, setShowSave3] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   const [id, setId] = useState('');
   const [fio, setFio] = useState('');
@@ -702,7 +703,9 @@ const Specialist = () => {
 
   //сохранить профиль
   const saveProfile = async(id) => { 
-    setShowClose(true)
+    setShowModal(true)
+
+    //setShowClose(true)
     console.log(id)
 
     let specArr = []
@@ -865,7 +868,12 @@ const Specialist = () => {
     //сохранить изменения в базе
     await editSpecialist(saveData, id)
 
-    addToast(exampleToast) //ваши данные сохранены
+    //addToast(exampleToast) //ваши данные сохранены
+
+    setTimeout(()=> {
+      setShowModal(false)
+      closeProfile()
+    }, 2000)
   }
 
   const blockedProfile = () => { 
@@ -1585,6 +1593,17 @@ const Specialist = () => {
                           </CCard>
                         </CCol>
                     </CRow>
+
+                    <CModal
+                      alignment="center"
+                      visible={showModal}
+                      onClose={() => setShowModal(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                         Данные успешно сохранены
+                      </CModalBody>
+                    </CModal>
 
                     <CModal
                       backdrop="static"

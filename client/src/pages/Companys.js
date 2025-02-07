@@ -84,6 +84,7 @@ const Companys = () => {
   const [showSave3, setShowSave3] = useState(false)
   const [showSaveOffice, setShowSaveOffice] = useState(false)
   const [showSaveSklad, setShowSaveSklad] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   const [id, setId] = useState('');
   const [title, setTitle] = useState('Название компании');
@@ -521,7 +522,11 @@ const Companys = () => {
 
   //сохранить профиль
   const saveProfile = async(id) => { 
-      setShowClose(true)
+      //setShowClose(true)
+
+      //Toast
+      setShowModal(true)
+
       console.log("managersObj: ", managersObj)
   
       let sferaArr = []
@@ -641,9 +646,10 @@ const Companys = () => {
       //сохранить изменения в базе
       //await editManager(saveData, id)
   
-      addToast(exampleToast) //ваши данные сохранены
+      //addToast(exampleToast) //ваши данные сохранены
 
-      setTimeout(()=> {
+      setTimeout(()=> {     
+        setShowModal(false)
         closeProfile()
       }, 2000)
   }
@@ -1255,6 +1261,17 @@ const Companys = () => {
                           </CCard>
                         </CCol>
                     </CRow>
+
+                    <CModal
+                      alignment="center"
+                      visible={showModal}
+                      onClose={() => setShowModal(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                        Данные успешно сохранены
+                      </CModalBody>
+                    </CModal>
 
                     <CModal
                       backdrop="static"

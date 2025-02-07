@@ -742,7 +742,7 @@ ${loc.url}`
     setTimeout(() => {
       setShowModal(false)
       closeProfile()
-    }, 500)
+    }, 2000)
   }
 
   const closeProfile = () => {
@@ -2978,10 +2978,10 @@ ${loc.url}`
                     height: '100px',
                     textAlign: 'center',
                     fontSize: '18px',
-                    paddingTop: '15px',
+                    paddingTop: '35px',
                   }}
                 >
-                  Идёт сохранение данных...
+                  Данные успешно сохранены
                 </CModalBody>
               </CModal>
 
