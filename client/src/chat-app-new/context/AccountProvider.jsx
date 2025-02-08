@@ -15,6 +15,7 @@ const AccountProvider = ({ children }) => {
     const [newMessageFlag, setNewMessageFlag] = useState(false);
 
     const socket = useRef();
+    const socketSupport = useRef();
 
     useEffect(()=>{
         //socket.current = io("https://proj.uley.team:9000");
@@ -34,6 +35,7 @@ const AccountProvider = ({ children }) => {
             personR, 
             setPersonR,
             socket,
+            socketSupport,
             activeUsers,
             setActiveUsers,
             newMessageFlag,

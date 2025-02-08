@@ -125,6 +125,13 @@ const UsersProvider = ({ children }) => {
 		return initialValue || 0;
 	});
 
+	const [countMessageSupport, setCountMessageSupport] = useState(() => {
+		// getting stored value
+		const saved = localStorage.getItem("countMessageSupport");
+		const initialValue = saved;
+		return initialValue || 0;
+	});
+
 
 	const [distributionsWork, setDistributionsWork] = useState([]); 
 
@@ -226,6 +233,11 @@ const UsersProvider = ({ children }) => {
 		// storing input name
 		localStorage.setItem("countMessageWork", countMessageWork);
 	}, [countMessageWork]);
+
+	useEffect(() => {	
+		// storing input name
+		localStorage.setItem("countMessageSupport", countMessageSupport);
+	}, [countMessageSupport]);
 
 
 	useEffect(() => {	
@@ -1315,8 +1327,38 @@ useEffect(() => {
 		});
 	}
 
+
+	//=======================================================================
+// 						Support
+//=======================================================================
+
+//получить сообщение из телеграмма WorkersBot
+const fetchMessageSupportResponse = async(data) => {
+	
+	console.log("Получено сообщение от Support: ", data)
+	const { isBot} = data;
+
+	let arrWorkers = []
+
+	//пришло новое сообщение
+	const kol = await getCountMessage()
+	setCountMessageSupport(count + 1)
+	//const res = await newCountWMessage(kol.workers + 1)
+	
+	//play sound
+	const savedVolume = localStorage.getItem("soundVolume");
+	const savedMute = localStorage.getItem("soundMute");
+
+	//if (savedMute === 'false') {
+		//audioMessageSupport.volume = parseFloat(savedVolume)
+		audioMessageSupport.play();
+	//}
+
+};
+
 //------------------------------------------------------------------------------------
 	useEffect(() => {
+		console.log("socket work!")
 		socket.on("getMessage", fetchMessageResponse);
 		socket.on("getMessageSpec", fetchMessageSpecResponse);
 		socket.on("getMessageRent", fetchMessageRentResponse);
@@ -1343,7 +1385,7 @@ useEffect(() => {
 	//------------------------------------------------------------------------------------
 	useEffect(() => {
 		console.log("socket support work!")
-		//socketSupport.on("getMessage", fetchMessageResponse);
+		socketSupport.on("getMessagePersonSupport", fetchMessageSupportResponse);
 		
 	}, [socketSupport]);
 
@@ -2321,6 +2363,8 @@ function isObjectEmpty(obj) {
 			delWMessageContext,
 			countMessageWork,
 			setCountMessageWork,
+			countMessageSupport,
+			setCountMessageSupport,
 			newPretendent,
 			setNewPretendent,
 			countPretendent, 

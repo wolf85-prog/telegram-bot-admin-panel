@@ -397,7 +397,7 @@ useEffect(() => {
         console.log("companyP: ", companyP)
         workersP.map((item)=> {
           const comp = companyP.find(item2 => item2.id.toString() === item.companyId)
-          console.log("comp: ", comp)
+          //console.log("comp: ", comp)
           const newObj = {
             ...item, company: comp?.title
           }

@@ -9,10 +9,10 @@ const SocketContext = createContext();
 
 const useSocketContextSupport = () => useContext(SocketContext);
 
-const SocketProvider = ({ children }) => {
+const SocketSupportProvider = ({ children }) => {
 	return (
 		<SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
 	);
 };
 
-export { useSocketContextSupport, SocketProvider };
+export { useSocketContextSupport, SocketSupportProvider };

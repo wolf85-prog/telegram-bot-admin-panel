@@ -31,7 +31,7 @@ const AppSidebar = () => {
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { countMessage, countMessageRent, countProjects, countMessageWork, countPretendent, showGetMess } = useUsersContext();
+  const { countMessage, countMessageRent, countProjects, countMessageWork, countPretendent, showGetMess, countMessageSupport } = useUsersContext();
 
   const [count, setCount ] = useState(0);
   const [countMesW, setCountMesW ] = useState(0);
@@ -203,7 +203,7 @@ const AppSidebar = () => {
       //to: '/support',
       onClick: ()=>handleLinkClick2('https://proj.uley.team:3001/support'),
       icon: <img src={SupportIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
-      // badge: countMessageWork !== '0' ? {color: 'info', text: countMessageWork,} : "",
+      badge: countMessageSupport !== '0' ? {color: 'info', text: countMessageSupport,} : "",
       style: {backgroundColor: '#0078d421', cursor: 'pointer'},
     },
 
