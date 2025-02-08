@@ -145,6 +145,10 @@ const Admin = () => {
   const [textCompany, setTextCompany]= useState("");
   const [sortManagers, setSortManagers] = useState([]);
 
+  const [countPress, setCountPress] = useState(0);
+  const [countPressTG, setCountPressTG] = useState(0);
+  const [countPressCity, setCountPressCity] = useState(0);
+
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
   const hostPersonal= process.env.REACT_APP_PERSON_ADMIN_API_URL
@@ -183,7 +187,7 @@ const Admin = () => {
   //поиск на вкладке Company
   useEffect(() => {
     console.log("textCompany: ", textCompany)
-		const filteredData = managersP.filter(user=> (user.fio + user.id + user.dolgnost)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(textCompany.replace(/[её]/g, '(е|ё)').toLowerCase()));
+		const filteredData = managersP.filter(user=> (user.fio + user.city + user.dolgnost + user.phone + user.email + user.id)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(textCompany.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setSortManagers(textCompany === '' ? managersP : filteredData); 
     //setWorkers(text === '' ? workers : filteredData);  
   }, [textCompany]);
@@ -405,6 +409,7 @@ useEffect(() => {
         })
 
         setManagersP(arr)
+        setSortManagers(arr)
         setLoading5(false)
       }
 
@@ -1307,6 +1312,38 @@ useEffect(() => {
 			
       setWorkers(arrayWorker)	
       console.log("Ещё: ", arrayWorker.length)
+  }
+
+
+  //сортировка по ФИО
+  const onSortFio = () => {
+    setCountPress(countPress + 1)
+    
+    if (countPress + 1 >= 3) {
+      setCountPress(0)
+    }
+    console.log("check sort", countPress + 1)
+
+    if (countPress + 1 === 1) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
+        return (fioA < fioB) ? -1 : (fioA > fioB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else if (countPress + 1 === 2) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
+        return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var fioA = a.id, fioB = b.id 
+        return fioB-fioA  //сортировка по убыванию 
+      })
+      setSortManagers(sortedManager)
+    }
+    
   }
   
   return (
@@ -2215,7 +2252,7 @@ useEffect(() => {
                                     <CTableRow>
                                       <CTableHeaderCell className="text-center" style={{width: '90px'}}>Дата</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '70px'}}>Время</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>ФИО</CTableHeaderCell> 
+                                      <CTableHeaderCell onClick={onSortFio} className="text-center" style={{minWidth: '200px'}}>ФИО</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '100px'}}>Город</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" >Компания</CTableHeaderCell>  
                                       <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Должность</CTableHeaderCell>
