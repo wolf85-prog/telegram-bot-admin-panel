@@ -104,13 +104,13 @@ const Header = ({ user, worker, openProfileSidebar, openSearchSidebar, closeSide
                     : ""
                 }
                 
-				{/* {
-                    worker.length !== 0 ? 
-                    ((JSON.parse(worker[0].worklist)).find(item => item.spec === '+18') ?   
-                    <img src={block18} alt='' width={18} style={{position: 'absolute', top: '-5px', left: '32px', width: '23px'}}/>
+				{
+                    worker && worker.length !== 0 ? 
+                    (worker[0].block18 ?   
+                    <img src={block18} alt='' width={18} style={{position: 'absolute', top: '2px', left: '32px', width: '23px'}}/>
                     : "")
                     : ""
-                } */}
+                }
 			</div>
 
 			<div className="chat__contact-wrapper" onClick={openProfileSidebar}>

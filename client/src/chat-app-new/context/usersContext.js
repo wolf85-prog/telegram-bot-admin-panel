@@ -433,6 +433,7 @@ useEffect(() => {
 				  //from: user.from,
 				  promoId: user.promoId,
 				  blockW: user.blockW,
+				  block18: user.block18,
 				  deleted: user.deleted,
 				  comment: user.comment,
 				  comteg: user.comteg,

@@ -187,7 +187,7 @@ const Admin = () => {
   //поиск на вкладке Company
   useEffect(() => {
     console.log("textCompany: ", textCompany)
-		const filteredData = managersP.filter(user=> (user.fio + user.city + user.dolgnost + user.phone + user.email + user.id)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(textCompany.replace(/[её]/g, '(е|ё)').toLowerCase()));
+		const filteredData = managersP.filter(user=> (user.fio + user.city + user.dolgnost + user.phone + user.email + user.userId)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(textCompany.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setSortManagers(textCompany === '' ? managersP : filteredData); 
     //setWorkers(text === '' ? workers : filteredData);  
   }, [textCompany]);
@@ -1345,6 +1345,161 @@ useEffect(() => {
     }
     
   }
+
+  //сортировка по Городу
+  const onSortCity = () => {
+    setCountPress(countPress + 1)
+    
+    if (countPress + 1 >= 3) {
+      setCountPress(0)
+    }
+    console.log("check sort", countPress + 1)
+
+    if (countPress + 1 === 1) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.city.toUpperCase(), cityB = b.city.toUpperCase(); 
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else if (countPress + 1 === 2) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.city.toUpperCase(), cityB = b.city.toUpperCase(); 
+        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.id, cityB = b.id 
+        return cityB-cityA  //сортировка по убыванию 
+      })
+      setSortManagers(sortedManager)
+    }
+    
+  }
+
+  //сортировка по Должности
+  const onSortDolgnost = () => {
+    setCountPress(countPress + 1)
+    
+    if (countPress + 1 >= 3) {
+      setCountPress(0)
+    }
+    console.log("check sort", countPress + 1)
+
+    if (countPress + 1 === 1) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.dolgnost.toUpperCase(), cityB = b.dolgnost.toUpperCase(); 
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else if (countPress + 1 === 2) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.dolgnost.toUpperCase(), cityB = b.dolgnost.toUpperCase(); 
+        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.id, cityB = b.id 
+        return cityB-cityA  //сортировка по убыванию 
+      })
+      setSortManagers(sortedManager)
+    }
+    
+  }
+
+  //сортировка по id
+  const onSortID = () => {
+    setCountPress(countPress + 1)
+    
+    if (countPress + 1 >= 3) {
+      setCountPress(0)
+    }
+    console.log("check sort", countPress + 1)
+
+    if (countPress + 1 === 1) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.userId.toUpperCase(), cityB = b.userId.toUpperCase(); 
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else if (countPress + 1 === 2) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.userId.toUpperCase(), cityB = b.userId.toUpperCase(); 
+        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.id, cityB = b.id 
+        return cityB-cityA  //сортировка по убыванию 
+      })
+      setSortManagers(sortedManager)
+    }
+    
+  }
+
+  //сортировка по телефону
+  const onSortPhone = () => {
+    setCountPress(countPress + 1)
+    
+    if (countPress + 1 >= 3) {
+      setCountPress(0)
+    }
+    console.log("check sort", countPress + 1)
+
+    if (countPress + 1 === 1) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.phone.toUpperCase(), cityB = b.phone.toUpperCase(); 
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else if (countPress + 1 === 2) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.phone.toUpperCase(), cityB = b.phone.toUpperCase(); 
+        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.id, cityB = b.id 
+        return cityB-cityA  //сортировка по убыванию 
+      })
+      setSortManagers(sortedManager)
+    }
+    
+  }
+
+  //сортировка по почте
+  const onSortEmail = () => {
+    setCountPress(countPress + 1)
+    
+    if (countPress + 1 >= 3) {
+      setCountPress(0)
+    }
+    console.log("check sort", countPress + 1)
+
+    if (countPress + 1 === 1) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.email.toUpperCase(), cityB = b.email.toUpperCase(); 
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else if (countPress + 1 === 2) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.email.toUpperCase(), cityB = b.email.toUpperCase(); 
+        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.id, cityB = b.id 
+        return cityB-cityA  //сортировка по убыванию 
+      })
+      setSortManagers(sortedManager)
+    }
+    
+  }
   
   return (
     <div className='dark-theme'>
@@ -2253,12 +2408,12 @@ useEffect(() => {
                                       <CTableHeaderCell className="text-center" style={{width: '90px'}}>Дата</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '70px'}}>Время</CTableHeaderCell>  
                                       <CTableHeaderCell onClick={onSortFio} className="text-center" style={{minWidth: '200px'}}>ФИО</CTableHeaderCell> 
-                                      <CTableHeaderCell className="text-center" style={{width: '100px'}}>Город</CTableHeaderCell> 
+                                      <CTableHeaderCell onClick={onSortCity} className="text-center" style={{width: '100px'}}>Город</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" >Компания</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Должность</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Почта</CTableHeaderCell>                         
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>ID</CTableHeaderCell>
+                                      <CTableHeaderCell onClick={onSortDolgnost} className="text-center" style={{minWidth: '90px'}}>Должность</CTableHeaderCell>
+                                      <CTableHeaderCell onClick={onSortPhone} className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>  
+                                      <CTableHeaderCell onClick={onSortEmail} className="text-center" style={{minWidth: '150px'}}>Почта</CTableHeaderCell>                         
+                                      <CTableHeaderCell onClick={onSortID} className="text-center" style={{minWidth: '90px'}}>ID</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
