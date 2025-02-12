@@ -167,7 +167,7 @@ const Contact = ({ contact, worker }) => {
 					worker && worker.length !== 0 ? 
 					(worker[0].krest ?  
 					((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ?  ''
-					: <img src={krest} alt='' width={18} style={{position: 'absolute', top: '35px', left: '32px', width: '16px'}}/>)
+					: <img src={avatarKrest} alt='' width={18} style={{position: 'absolute', top: '35px', left: '32px', width: '16px'}}/>)
 					: "")
 					: ""
 				}

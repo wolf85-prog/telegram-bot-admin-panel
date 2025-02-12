@@ -10,6 +10,7 @@ import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
 
 import defaultAvatar from "./../../../../chat-app-new/assets/images/no-avatar.png";
+import avatarKrest from "./../../../../chat-app-worker/assets/images/uncheck.png";
 import block18 from "./../../../../assets/images/block18.png";
 import krest from "./../../../../assets/images/krestik.png";
 

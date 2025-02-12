@@ -5,6 +5,7 @@ import OptionsBtn from "./../../../components/OptionsButton";
 
 import avatarDefault from "./../../../../chat-app-new/assets/images/no-avatar.png";
 import avatarBlacklist from "./../../../../chat-app-worker/assets/images/B_icon.png";
+import avatarKrest from "./../../../../chat-app-worker/assets/images/uncheck.png";
 import blockUser from "./../../../../chat-app-worker/assets/images/stop.png";
 import block18 from "./../../../../assets/images/block18.png";
 import robot from "./../../../../chat-app-worker/assets/images/robot.png";
@@ -117,7 +118,7 @@ const Header = ({ user, worker, openProfileSidebar, openSearchSidebar, closeSide
 					worker && worker.length !== 0 ? 
 					(worker[0].krest ?  
 					((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ?  ''
-					: <img src={krest} alt='' width={18} style={{position: 'absolute', top: '35px', left: '32px', width: '16px'}}/>)
+					: <img src={avatarKrest} alt='' width={18} style={{position: 'absolute', top: '35px', left: '32px', width: '16px'}}/>)
 					: "")
 					: ""
 				}

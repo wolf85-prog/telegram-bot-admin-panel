@@ -31,7 +31,7 @@ const AppSidebar = () => {
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { countMessage, countMessageRent, countProjects, countMessageWork, countPretendent, showGetMess, countMessageSupport } = useUsersContext();
+  const { countMessage, countMessageRent, countProjects, countMessageWork, countPretendent, showGetMess, countMessageSupport, setCountMessageSupport } = useUsersContext();
 
   const [count, setCount ] = useState(0);
   const [countMesW, setCountMesW ] = useState(0);
@@ -201,7 +201,10 @@ const AppSidebar = () => {
       component: CNavLink,
       name: 'Тех. поддержка',
       //to: '/support',
-      onClick: ()=>handleLinkClick2('https://proj.uley.team:3001/support'),
+      onClick: ()=>{
+        handleLinkClick2('https://proj.uley.team:3001/support')
+        setCountMessageSupport(0)
+      },
       icon: <img src={SupportIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       badge: countMessageSupport !== '0' ? {color: 'info', text: countMessageSupport,} : "",
       style: {backgroundColor: '#0078d421', cursor: 'pointer'},
