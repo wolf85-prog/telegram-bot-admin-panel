@@ -146,8 +146,11 @@ const Admin = () => {
   const [sortManagers, setSortManagers] = useState([]);
 
   const [countPress, setCountPress] = useState(0);
-  const [countPressTG, setCountPressTG] = useState(0);
+  const [countPressID, setCountPressID] = useState(0);
   const [countPressCity, setCountPressCity] = useState(0);
+  const [countPressDolgnost, setCountPressDolgnost] = useState(0);
+  const [countPressEmail, setCountPressEmail] = useState(0);
+  const [countPressPhone, setCountPressPhone] = useState(0);
 
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
@@ -1348,20 +1351,20 @@ useEffect(() => {
 
   //сортировка по Городу
   const onSortCity = () => {
-    setCountPress(countPress + 1)
+    setCountPressCity(countPressCity + 1)
     
-    if (countPress + 1 >= 3) {
-      setCountPress(0)
+    if (countPressCity + 1 >= 3) {
+      setCountPressCity(0)
     }
-    console.log("check sort", countPress + 1)
+    console.log("check sort", countPressCity + 1)
 
-    if (countPress + 1 === 1) {
+    if (countPressCity + 1 === 1) {
       const sortedManager = [...managersP].sort((a, b) => {       
         var cityA = a.city.toUpperCase(), cityB = b.city.toUpperCase(); 
         return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
       })
       setSortManagers(sortedManager)
-    } else if (countPress + 1 === 2) {
+    } else if (countPressCity + 1 === 2) {
       const sortedManager = [...managersP].sort((a, b) => {       
         var cityA = a.city.toUpperCase(), cityB = b.city.toUpperCase(); 
         return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
@@ -1379,20 +1382,20 @@ useEffect(() => {
 
   //сортировка по Должности
   const onSortDolgnost = () => {
-    setCountPress(countPress + 1)
+    setCountPressDolgnost(countPressDolgnost + 1)
     
-    if (countPress + 1 >= 3) {
-      setCountPress(0)
+    if (countPressDolgnost + 1 >= 3) {
+      setCountPressDolgnost(0)
     }
-    console.log("check sort", countPress + 1)
+    console.log("check sort", countPressDolgnost + 1)
 
-    if (countPress + 1 === 1) {
+    if (countPressDolgnost + 1 === 1) {
       const sortedManager = [...managersP].sort((a, b) => {       
         var cityA = a.dolgnost.toUpperCase(), cityB = b.dolgnost.toUpperCase(); 
         return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
       })
       setSortManagers(sortedManager)
-    } else if (countPress + 1 === 2) {
+    } else if (countPressDolgnost + 1 === 2) {
       const sortedManager = [...managersP].sort((a, b) => {       
         var cityA = a.dolgnost.toUpperCase(), cityB = b.dolgnost.toUpperCase(); 
         return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
@@ -1410,20 +1413,20 @@ useEffect(() => {
 
   //сортировка по id
   const onSortID = () => {
-    setCountPress(countPress + 1)
+    setCountPressID(countPressID + 1)
     
-    if (countPress + 1 >= 3) {
-      setCountPress(0)
+    if (countPressID + 1 >= 3) {
+      setCountPressID(0)
     }
-    console.log("check sort", countPress + 1)
+    console.log("check sort", countPressID + 1)
 
-    if (countPress + 1 === 1) {
+    if (countPressID + 1 === 1) {
       const sortedManager = [...managersP].sort((a, b) => {       
         var cityA = a.userId.toUpperCase(), cityB = b.userId.toUpperCase(); 
         return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
       })
       setSortManagers(sortedManager)
-    } else if (countPress + 1 === 2) {
+    } else if (countPressID + 1 === 2) {
       const sortedManager = [...managersP].sort((a, b) => {       
         var cityA = a.userId.toUpperCase(), cityB = b.userId.toUpperCase(); 
         return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
@@ -1472,20 +1475,20 @@ useEffect(() => {
 
   //сортировка по почте
   const onSortEmail = () => {
-    setCountPress(countPress + 1)
+    setCountPressEmail(countPressEmail + 1)
     
-    if (countPress + 1 >= 3) {
-      setCountPress(0)
+    if (countPressEmail + 1 >= 3) {
+      setCountPressEmail(0)
     }
-    console.log("check sort", countPress + 1)
+    console.log("check sort", countPressEmail + 1)
 
-    if (countPress + 1 === 1) {
+    if (countPressEmail + 1 === 1) {
       const sortedManager = [...managersP].sort((a, b) => {       
         var cityA = a.email.toUpperCase(), cityB = b.email.toUpperCase(); 
         return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
       })
       setSortManagers(sortedManager)
-    } else if (countPress + 1 === 2) {
+    } else if (countPressEmail + 1 === 2) {
       const sortedManager = [...managersP].sort((a, b) => {       
         var cityA = a.email.toUpperCase(), cityB = b.email.toUpperCase(); 
         return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
@@ -2407,13 +2410,13 @@ useEffect(() => {
                                     <CTableRow>
                                       <CTableHeaderCell className="text-center" style={{width: '90px'}}>Дата</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '70px'}}>Время</CTableHeaderCell>  
-                                      <CTableHeaderCell onClick={onSortFio} className="text-center" style={{minWidth: '200px'}}>ФИО</CTableHeaderCell> 
-                                      <CTableHeaderCell onClick={onSortCity} className="text-center" style={{width: '100px'}}>Город</CTableHeaderCell> 
+                                      <CTableHeaderCell onClick={onSortFio} className="text-center" style={{minWidth: '200px', cursor: 'pointer'}}>ФИО</CTableHeaderCell> 
+                                      <CTableHeaderCell onClick={onSortCity} className="text-center" style={{width: '100px', cursor: 'pointer'}}>Город</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" >Компания</CTableHeaderCell>  
-                                      <CTableHeaderCell onClick={onSortDolgnost} className="text-center" style={{minWidth: '90px'}}>Должность</CTableHeaderCell>
-                                      <CTableHeaderCell onClick={onSortPhone} className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>  
-                                      <CTableHeaderCell onClick={onSortEmail} className="text-center" style={{minWidth: '150px'}}>Почта</CTableHeaderCell>                         
-                                      <CTableHeaderCell onClick={onSortID} className="text-center" style={{minWidth: '90px'}}>ID</CTableHeaderCell>
+                                      <CTableHeaderCell onClick={onSortDolgnost} className="text-center" style={{minWidth: '90px', cursor: 'pointer'}}>Должность</CTableHeaderCell>
+                                      <CTableHeaderCell onClick={onSortPhone} className="text-center" style={{minWidth: '160px', cursor: 'pointer'}}>Телефон</CTableHeaderCell>  
+                                      <CTableHeaderCell onClick={onSortEmail} className="text-center" style={{minWidth: '150px', cursor: 'pointer'}}>Почта</CTableHeaderCell>                         
+                                      <CTableHeaderCell onClick={onSortID} className="text-center" style={{minWidth: '90px', cursor: 'pointer'}}>ID</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
