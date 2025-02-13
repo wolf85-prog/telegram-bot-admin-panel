@@ -191,7 +191,7 @@ const Admin = () => {
   //поиск на вкладке Company
   useEffect(() => {
     console.log("textCompany: ", textCompany)
-		const filteredData = managersP.filter(user=> (user.fio + user.city + user.dolgnost + user.phone + user.email + user.userId)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(textCompany.replace(/[её]/g, '(е|ё)').toLowerCase()));
+		const filteredData = managersP.filter(user=> (user.fio + user.city + user.company + user.dolgnost + user.phone + user.email + user.userId)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(textCompany.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setSortManagers(textCompany === '' ? managersP : filteredData); 
     //setWorkers(text === '' ? workers : filteredData);  
   }, [textCompany]);
