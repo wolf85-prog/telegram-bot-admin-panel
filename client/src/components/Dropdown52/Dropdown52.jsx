@@ -6,6 +6,8 @@ import {
   CFormInput,
 } from '@coreui/react'
 
+import { sendSpecialistOtkaz } from '../../http/specAPI'
+
 const Dropdown5 = ({options, selected, setSelected, index, element, placeholder, setWorker, style}) => {
     const [menuShow, setMenuShow] = useState(false)
     const [arrSelect, setArrSelect] = useState({})
@@ -15,12 +17,19 @@ const Dropdown5 = ({options, selected, setSelected, index, element, placeholder,
       //console.log("selected2: ", selected, index)
     }, [selected])
 
-    const selectOption = (e, color) => {
+    const selectOption = async(e, color) => {
         console.log("selected: ", {name: e.target.innerText, color: color})
         
         let arr = JSON.parse(JSON.stringify(selected));
         const userObject = arr[index];
 			  arr[index] = { ...userObject, [element]: JSON.stringify({name: e.target.innerText, color: color})};
+
+        if (e.target.innerText === 'Отказано') {
+          console.log("Отправляю отказ!")
+          await sendSpecialistOtkaz(arr[index].workerId, { projectId: arr[index].projectId })
+        }
+
+        //console.log("item send: ", arr[index])
 
         setWorker(arr)
         

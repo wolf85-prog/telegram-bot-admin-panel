@@ -590,6 +590,10 @@ ${loc.url}`
     console.log('Основной состав: ', mainspec)
   }, [mainspec])
 
+  useEffect(()=> {
+    console.log(pretendents)
+  }, [pretendents])
+
   //сохранить проект
   const saveProject = async (id) => {
     //Toast
@@ -681,35 +685,35 @@ ${loc.url}`
     })
 
     //send otkaz
-    pretendents.map(async (item, index) => {
-      console.log('pretendent: ', item, index)
-      setTimeout(async () => {
-        if (item.status) {
-          if (JSON.parse(item.status).name === 'Отказано') {
-            //сохранение отказа в базе
-            const newObj = {
-              projectId: item.projectId,
-              workerId: item.workerId.toString(),
-              receiverId: item.receiverId,
-              cancel: true,
-            }
-            console.log('newObj: ', newObj)
+    // pretendents.map(async (item, index) => {
+    //   console.log('pretendent: ', item, index)
+    //   setTimeout(async () => {
+    //     if (item.status) {
+    //       if (JSON.parse(item.status).name === 'Отказано') {
+    //         //сохранение отказа в базе
+    //         const newObj = {
+    //           projectId: item.projectId,
+    //           workerId: item.workerId.toString(),
+    //           receiverId: item.receiverId,
+    //           cancel: true,
+    //         }
+    //         console.log('newObj: ', newObj)
 
-            //отправка сообщения об отказе
-            const retCanceled = await getCanceledId(newObj)
-            console.log('retCanceled: ', retCanceled)
-            if (!retCanceled) {
-              await sendSpecialistOtkaz(item.workerId, { projectId: item.projectId })
-            }
+    //         //отправка сообщения об отказе
+    //         const retCanceled = await getCanceledId(newObj)
+    //         console.log('retCanceled: ', retCanceled)
+    //         if (!retCanceled) {
+    //           await sendSpecialistOtkaz(item.workerId, { projectId: item.projectId })
+    //         }
 
-            const resAdd = await addCanceled(newObj)
-            console.log('resAdd: ', resAdd)
-          }
+    //         const resAdd = await addCanceled(newObj)
+    //         console.log('resAdd: ', resAdd)
+    //       }
 
-          await editPretendent(item.id, { status: JSON.parse(item.status).name })
-        }
-      }, 3000 * ++index)
-    })
+    //       await editPretendent(item.id, { status: JSON.parse(item.status).name })
+    //     }
+    //   }, 3000 * ++index)
+    // })
 
     //const resTable = await editMainspec({date: dateProject + 'T' + timeProject})
 
@@ -2898,7 +2902,7 @@ ${loc.url}`
                         <table >
                           <>
                             <tr>
-                              {posters.length > 0
+                              {posters && posters.length > 0
                                 ? posters.map((item, index) => (
                                     <td  key={item.id} style={{width: ''}} className="">
                                       <img
