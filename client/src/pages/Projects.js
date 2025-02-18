@@ -50,7 +50,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import { useUsersContext } from '../chat-app-new/context/usersContext'
 
 import { useTableData } from 'src/components/table/useTableData'
-import TableHeader from 'src/components/table/TableHeader'
+//import TableHeader from 'src/components/table/TableHeader'
 import Filters from 'src/components/table/Filters'
 // import Calendar from 'src/components/Calendar/Calendar_old'
 import Calendar from 'src/components/Calendar/Calendar'
@@ -2832,9 +2832,9 @@ ${loc.url}`
                                     </CTableDataCell>
                                     <CTableDataCell
                                       className="text-center"
-                                      style={{ cursor: 'pointer' }}
+                                      style={{ cursor: 'pointer', }}
                                     >
-                                      <Link to={'/specialist'} state={{ workerId: item.workerId }}>
+                                      <Link to={'/specialist'} state={{ workerId: item.workerId }} style={{color: '#f3f3f3' }}>
                                         {item.fio}
                                       </Link>
                                     </CTableDataCell>
