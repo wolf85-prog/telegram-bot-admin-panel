@@ -7,6 +7,9 @@ import {
 } from '@coreui/react'
 
 import { sendSpecialistOtkaz } from '../../http/specAPI'
+import {
+  editPretendent,
+} from '../../http/adminAPI'
 
 const Dropdown5 = ({options, selected, setSelected, index, element, placeholder, setWorker, style}) => {
     const [menuShow, setMenuShow] = useState(false)
@@ -28,6 +31,9 @@ const Dropdown5 = ({options, selected, setSelected, index, element, placeholder,
           console.log("Отправляю отказ!")
           await sendSpecialistOtkaz(arr[index].workerId, { projectId: arr[index].projectId })
         }
+
+        //сохранение статуса в базе
+        await editPretendent(item.id, { status: JSON.parse(item.status).name })
 
         //console.log("item send: ", arr[index])
 

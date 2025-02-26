@@ -2608,8 +2608,8 @@ ${loc.url}`
                                             { value: 4, label: '№4', name: '№4', color: '' },
                                             { value: 5, label: '№5', name: '№5', color: '' },
                                             { value: 6, label: '№6', name: '№6', color: '' },
-                                            { value: 7, label: '№7', value: '7', color: '' },
-                                            { value: 8, label: '№8', value: '8', color: '' },
+                                            { value: 7, label: '№7', name: '№7', color: '' },
+                                            { value: 8, label: '№8', name: '№8', color: '' },
                                           ]}
                                           selected={mainspec}
                                           setSelected={setMainspec}
