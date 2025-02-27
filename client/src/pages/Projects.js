@@ -2831,11 +2831,11 @@ ${loc.url}`
                                       />
                                     </CTableDataCell>
                                     <CTableDataCell
-                                      className="text-center"
+                                      className="text-left"
                                       style={{ cursor: 'pointer', }}
                                     >
                                       <Link to={'/specialist'} state={{ workerId: item.workerId }} style={{color: '#f3f3f3' }}>
-                                        {item.fio}
+                                        {item.fio ? (item.fio.length > 23 ? item.fio.substr(0, 23) + '...' : item.fio) : ''}
                                       </Link>
                                     </CTableDataCell>
                                     <CTableDataCell

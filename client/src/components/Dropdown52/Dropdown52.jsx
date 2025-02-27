@@ -33,9 +33,8 @@ const Dropdown5 = ({options, selected, setSelected, index, element, placeholder,
         }
 
         //сохранение статуса в базе
-        await editPretendent(item.id, { status: JSON.parse(item.status).name })
-
-        //console.log("item send: ", arr[index])
+        const resEdit = await editPretendent(arr[index].id, { status: JSON.parse(arr[index].status).name })
+        console.log("resEdit pretendent: ", resEdit)
 
         setWorker(arr)
         
