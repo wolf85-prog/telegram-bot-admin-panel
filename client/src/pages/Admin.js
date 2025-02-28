@@ -386,7 +386,7 @@ useEffect(() => {
       const workerCount = await getWorkerCount()
       setWorkerCount(workerCount)
       const clientCount = await getClientCount() 
-      setClientCount(allCount)
+      setClientCount(clientCount)
       const companyCount = await getCompanyCount() 
       setCompanyCount(companyCount)
 
