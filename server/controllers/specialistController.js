@@ -11,12 +11,36 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path')
 const sharp = require('sharp');
+const tryParseInt = require('../utils/parser');
 
 //socket.io
 const {io} = require("socket.io-client");
 const socketUrl = process.env.SOCKET_APP_URL
 
 class SpecialistController {
+
+    async getPaginatedSpecialist (req, res) {
+        const page = tryParseInt(req.query.page, 0);
+        const limit = tryParseInt(req.query.limit, 10);
+      
+        try {
+          const { count, rows } = await Specialist.findAndCountAll({
+            order: [["id", "DESC"]],           
+            offset: limit * page,
+            limit: limit,
+            
+          });
+      
+          res.status(200).json({
+            page: page,
+            limit: limit,
+            total: count,
+            data: rows,
+        });
+        } catch (err) {
+          res.status(500).json({ error: err.message });
+        }
+      };
 
     async getSpecialist(req, res) {
         try {
