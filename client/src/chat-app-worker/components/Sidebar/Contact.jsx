@@ -7,6 +7,8 @@ import avatarDefault from "./../../../chat-app-new/assets/images/no-avatar.png";
 import avatarKrest from "./../../../chat-app-worker/assets/images/uncheck.png";
 import blockUser from "./../../../chat-app-worker/assets/images/stop.png";
 import block18 from "./../../../assets/images/block18.png";
+import krest from "./../../../assets/images/krestik.png";
+import avatarBlacklist from "./../../../chat-app-worker/assets/images/B_icon.png";
 
 import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 
@@ -137,10 +139,10 @@ const Contact = ({ contact, worker }) => {
 			<div className="sidebar-contact__avatar-wrapper" style={{position: 'relative'}}>
 				{
 					contact.avatar
-					? <> {contact.blockW ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
+					? <> {worker[0].blockW ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
 						<img src={`${contact.avatar}`} alt='' onError={onImageError} className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
 					</>
-					: <> {contact.blockW ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
+					: <> {worker[0].blockW ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
 						<img src={avatarDefault} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
 					</>
 				}
@@ -148,18 +150,27 @@ const Contact = ({ contact, worker }) => {
 				{
                     worker.length !== 0 ?  
                     ((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ? 
-                    <img src={avatarKrest} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
+                    <img src={avatarBlacklist} alt='' width={18} style={{position: 'absolute', width: '25px', top: '30px', left: '28px'}}/>
                     : "")
                     : ""
                 }
                 
 				{
-                    worker.length !== 0 ? 
-                    ((JSON.parse(worker[0].worklist)).find(item => item.spec === '+18') ?   
-                    <img src={block18} alt='' width={18} style={{position: 'absolute', top: '-5px', left: '32px', width: '23px'}}/>
-                    : "")
-                    : ""
+                    worker && worker.length !== 0 ? 
+					(worker[0].block18 ?   
+					<img src={block18} alt='' width={18} style={{position: 'absolute', top: '-5px', left: '32px', width: '23px'}}/>
+					: "")
+					: ""
                 }
+
+				{
+					worker && worker.length !== 0 ? 
+					(worker[0].krest ?  
+					((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ?  ''
+					: <img src={avatarKrest} alt='' width={18} style={{position: 'absolute', top: '35px', left: '32px', width: '16px'}}/>)
+					: "")
+					: ""
+				}
 
 				
 			</div>

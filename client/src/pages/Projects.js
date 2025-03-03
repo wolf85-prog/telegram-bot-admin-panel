@@ -50,7 +50,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import { useUsersContext } from '../chat-app-new/context/usersContext'
 
 import { useTableData } from 'src/components/table/useTableData'
-import TableHeader from 'src/components/table/TableHeader'
+//import TableHeader from 'src/components/table/TableHeader'
 import Filters from 'src/components/table/Filters'
 // import Calendar from 'src/components/Calendar/Calendar_old'
 import Calendar from 'src/components/Calendar/Calendar'
@@ -590,6 +590,10 @@ ${loc.url}`
     console.log('Основной состав: ', mainspec)
   }, [mainspec])
 
+  useEffect(()=> {
+    console.log(pretendents)
+  }, [pretendents])
+
   //сохранить проект
   const saveProject = async (id) => {
     //Toast
@@ -681,35 +685,35 @@ ${loc.url}`
     })
 
     //send otkaz
-    pretendents.map(async (item, index) => {
-      console.log('pretendent: ', item, index)
-      setTimeout(async () => {
-        if (item.status) {
-          if (JSON.parse(item.status).name === 'Отказано') {
-            //сохранение отказа в базе
-            const newObj = {
-              projectId: item.projectId,
-              workerId: item.workerId.toString(),
-              receiverId: item.receiverId,
-              cancel: true,
-            }
-            console.log('newObj: ', newObj)
+    // pretendents.map(async (item, index) => {
+    //   console.log('pretendent: ', item, index)
+    //   setTimeout(async () => {
+    //     if (item.status) {
+    //       if (JSON.parse(item.status).name === 'Отказано') {
+    //         //сохранение отказа в базе
+    //         const newObj = {
+    //           projectId: item.projectId,
+    //           workerId: item.workerId.toString(),
+    //           receiverId: item.receiverId,
+    //           cancel: true,
+    //         }
+    //         console.log('newObj: ', newObj)
 
-            //отправка сообщения об отказе
-            const retCanceled = await getCanceledId(newObj)
-            console.log('retCanceled: ', retCanceled)
-            if (!retCanceled) {
-              await sendSpecialistOtkaz(item.workerId, { projectId: item.projectId })
-            }
+    //         //отправка сообщения об отказе
+    //         const retCanceled = await getCanceledId(newObj)
+    //         console.log('retCanceled: ', retCanceled)
+    //         if (!retCanceled) {
+    //           await sendSpecialistOtkaz(item.workerId, { projectId: item.projectId })
+    //         }
 
-            const resAdd = await addCanceled(newObj)
-            console.log('resAdd: ', resAdd)
-          }
+    //         const resAdd = await addCanceled(newObj)
+    //         console.log('resAdd: ', resAdd)
+    //       }
 
-          await editPretendent(item.id, { status: JSON.parse(item.status).name })
-        }
-      }, 3000 * ++index)
-    })
+    //       await editPretendent(item.id, { status: JSON.parse(item.status).name })
+    //     }
+    //   }, 3000 * ++index)
+    // })
 
     //const resTable = await editMainspec({date: dateProject + 'T' + timeProject})
 
@@ -742,7 +746,7 @@ ${loc.url}`
     setTimeout(() => {
       setShowModal(false)
       closeProfile()
-    }, 500)
+    }, 2000)
   }
 
   const closeProfile = () => {
@@ -2604,8 +2608,8 @@ ${loc.url}`
                                             { value: 4, label: '№4', name: '№4', color: '' },
                                             { value: 5, label: '№5', name: '№5', color: '' },
                                             { value: 6, label: '№6', name: '№6', color: '' },
-                                            { value: 7, label: '№7', value: '7', color: '' },
-                                            { value: 8, label: '№8', value: '8', color: '' },
+                                            { value: 7, label: '№7', name: '№7', color: '' },
+                                            { value: 8, label: '№8', name: '№8', color: '' },
                                           ]}
                                           selected={mainspec}
                                           setSelected={setMainspec}
@@ -2827,11 +2831,11 @@ ${loc.url}`
                                       />
                                     </CTableDataCell>
                                     <CTableDataCell
-                                      className="text-center"
-                                      style={{ cursor: 'pointer' }}
+                                      className="text-left"
+                                      style={{ cursor: 'pointer', }}
                                     >
-                                      <Link to={'/specialist'} state={{ workerId: item.workerId }}>
-                                        {item.fio}
+                                      <Link to={'/specialist'} state={{ workerId: item.workerId }} style={{color: '#f3f3f3' }}>
+                                        {item.fio ? (item.fio.length > 23 ? item.fio.substr(0, 23) + '...' : item.fio) : ''}
                                       </Link>
                                     </CTableDataCell>
                                     <CTableDataCell
@@ -2898,7 +2902,7 @@ ${loc.url}`
                         <table >
                           <>
                             <tr>
-                              {posters.length > 0
+                              {posters && posters.length > 0
                                 ? posters.map((item, index) => (
                                     <td  key={item.id} style={{width: ''}} className="">
                                       <img
@@ -2978,10 +2982,10 @@ ${loc.url}`
                     height: '100px',
                     textAlign: 'center',
                     fontSize: '18px',
-                    paddingTop: '15px',
+                    paddingTop: '35px',
                   }}
                 >
-                  Идёт сохранение данных...
+                  Данные успешно сохранены
                 </CModalBody>
               </CModal>
 

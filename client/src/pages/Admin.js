@@ -40,7 +40,7 @@ import arrowDown from 'src/assets/images/arrowDown.svg'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { getAllMessages, getMessages } from './../http/chatAPI.js'
 import { getAllWMessages, getWorkersCount } from './../http/workerAPI.js'
-import { getManagerPerson } from '../http/adminAPI'
+import { getManagerPerson, getManagerCompany, getWorkerCount, getClientCount, getCompanyCount, getManagerCount } from '../http/adminAPI'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 import WidgetsDropdown2 from '../views/widgets/WidgetsDropdown2'
@@ -137,6 +137,22 @@ const Admin = () => {
 
   const [managersP, setManagersP] = useState([])
 
+  const [allCount, setAllCount] = useState(0);
+  const [companyCount, setCompanyCount] = useState(0);
+  const [clientCount, setClientCount] = useState(0);
+  const [workerCount, setWorkerCount] = useState(0);
+
+  const [textCompany, setTextCompany]= useState("");
+  const [sortManagers, setSortManagers] = useState([]);
+
+  const [countPress, setCountPress] = useState(0);
+  const [countPressID, setCountPressID] = useState(0);
+  const [countPressCity, setCountPressCity] = useState(0);
+  const [countPressDolgnost, setCountPressDolgnost] = useState(0);
+  const [countPressEmail, setCountPressEmail] = useState(0);
+  const [countPressPhone, setCountPressPhone] = useState(0);
+  const [countPressComp, setCountPressComp] = useState(0);
+
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
   const hostPersonal= process.env.REACT_APP_PERSON_ADMIN_API_URL
@@ -170,6 +186,15 @@ const Admin = () => {
 		const filteredData = delWorkers.filter(user=> (user.userfamily + user.username + user.chatId)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(textDelete.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setSortDelWorkers(textDelete === '' ? delWorkers : filteredData);  
   }, [textDelete]);
+
+
+  //поиск на вкладке Company
+  useEffect(() => {
+    console.log("textCompany: ", textCompany)
+		const filteredData = managersP.filter(user=> (user.fio + user.city + user.company + user.dolgnost + user.phone + user.email + user.userId)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(textCompany.replace(/[её]/g, '(е|ё)').toLowerCase()));
+    setSortManagers(textCompany === '' ? managersP : filteredData); 
+    //setWorkers(text === '' ? workers : filteredData);  
+  }, [textCompany]);
 
 
   //get filter workers
@@ -355,12 +380,43 @@ useEffect(() => {
   useEffect(() => {
    
     const fetchData = async() => {
+      const allCount = await getManagerCount()
+      console.log("allCount: ", allCount)
+      setAllCount(allCount)
+      const workerCount = await getWorkerCount()
+      setWorkerCount(workerCount)
+      const clientCount = await getClientCount() 
+      setClientCount(clientCount)
+      const companyCount = await getCompanyCount() 
+      setCompanyCount(companyCount)
+
+      
       const workersP = await getManagerPerson()
       if (workersP) {
         console.log("workersP: ", workersP)
-        setManagersP(workersP)
+        //setManagersP(workersP)
+        //setLoading5(false)
+      }
+
+      let arr = []
+
+      const companyP = await getManagerCompany()
+      if (companyP) {
+        console.log("companyP: ", companyP)
+        workersP.map((item)=> {
+          const comp = companyP.find(item2 => item2.id.toString() === item.companyId)
+          //console.log("comp: ", comp)
+          const newObj = {
+            ...item, company: comp?.title
+          }
+          arr.push(newObj)
+        })
+
+        setManagersP(arr)
+        setSortManagers(arr)
         setLoading5(false)
       }
+
       
     }
 
@@ -1261,6 +1317,224 @@ useEffect(() => {
       setWorkers(arrayWorker)	
       console.log("Ещё: ", arrayWorker.length)
   }
+
+
+  //сортировка по ФИО
+  const onSortFio = () => {
+    setCountPress(countPress + 1)
+    
+    if (countPress + 1 >= 3) {
+      setCountPress(0)
+    }
+    console.log("check sort", countPress + 1)
+
+    if (countPress + 1 === 1) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var fioA = a.fio?.toUpperCase(), fioB = b.fio?.toUpperCase(); 
+        return (fioA < fioB) ? -1 : (fioA > fioB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else if (countPress + 1 === 2) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var fioA = a.fio?.toUpperCase(), fioB = b.fio?.toUpperCase(); 
+        return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var fioA = a.id, fioB = b.id 
+        return fioB-fioA  //сортировка по убыванию 
+      })
+      setSortManagers(sortedManager)
+    }
+    
+  }
+
+  //сортировка по Городу
+  const onSortCity = () => {
+    setCountPressCity(countPressCity + 1)
+    
+    if (countPressCity + 1 >= 3) {
+      setCountPressCity(0)
+    }
+    console.log("check sort", countPressCity + 1)
+
+    if (countPressCity + 1 === 1) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.city?.toUpperCase(), cityB = b.city?.toUpperCase(); 
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else if (countPressCity + 1 === 2) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.city?.toUpperCase(), cityB = b.city?.toUpperCase(); 
+        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.id, cityB = b.id 
+        return cityB-cityA  //сортировка по убыванию 
+      })
+      setSortManagers(sortedManager)
+    }
+    
+  }
+
+  //сортировка по компании
+  const onSortComp = () => {
+    setCountPressComp(countPressComp + 1)
+    
+    if (countPressComp + 1 >= 3) {
+      setCountPressComp(0)
+    }
+    console.log("check sort", countPressComp + 1)
+
+    if (countPress + 1 === 1) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var companyA = a.company?.toUpperCase(), companyB = b.company?.toUpperCase(); 
+        return (companyA < companyB) ? -1 : (companyA > companyB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else if (countPress + 1 === 2) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var companyA = a.company?.toUpperCase(), companyB = b.company?.toUpperCase(); 
+        return (companyA > companyB) ? -1 : (companyA < companyB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var companyA = a.id, companyB = b.id 
+        return companyB-companyA  //сортировка по убыванию 
+      })
+      setSortManagers(sortedManager)
+    }
+    
+  }
+
+  //сортировка по Должности
+  const onSortDolgnost = () => {
+    setCountPressDolgnost(countPressDolgnost + 1)
+    
+    if (countPressDolgnost + 1 >= 3) {
+      setCountPressDolgnost(0)
+    }
+    console.log("check sort", countPressDolgnost + 1)
+
+    if (countPressDolgnost + 1 === 1) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.dolgnost?.toUpperCase(), cityB = b.dolgnost?.toUpperCase(); 
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else if (countPressDolgnost + 1 === 2) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.dolgnost?.toUpperCase(), cityB = b.dolgnost?.toUpperCase(); 
+        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.id, cityB = b.id 
+        return cityB-cityA  //сортировка по убыванию 
+      })
+      setSortManagers(sortedManager)
+    }
+    
+  }
+
+  //сортировка по id
+  const onSortID = () => {
+    setCountPressID(countPressID + 1)
+    
+    if (countPressID + 1 >= 3) {
+      setCountPressID(0)
+    }
+    console.log("check sort", countPressID + 1)
+
+    if (countPressID + 1 === 1) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.userId, cityB = b.userId; 
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else if (countPressID + 1 === 2) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.userId, cityB = b.userId; 
+        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.id, cityB = b.id 
+        return cityB-cityA  //сортировка по убыванию 
+      })
+      setSortManagers(sortedManager)
+    }
+    
+  }
+
+  //сортировка по телефону
+  const onSortPhone = () => {
+    setCountPressPhone(countPressPhone + 1)
+    
+    if (countPressPhone + 1 >= 3) {
+      setCountPressPhone(0)
+    }
+    console.log("check sort", countPressPhone + 1)
+
+    if (countPress + 1 === 1) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.phone, cityB = b.phone; 
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else if (countPress + 1 === 2) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.phone, cityB = b.phone; 
+        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.id, cityB = b.id 
+        return cityB-cityA  //сортировка по убыванию 
+      })
+      setSortManagers(sortedManager)
+    }
+    
+  }
+
+  //сортировка по почте
+  const onSortEmail = () => {
+    setCountPressEmail(countPressEmail + 1)
+    
+    if (countPressEmail + 1 >= 3) {
+      setCountPressEmail(0)
+    }
+    console.log("check sort", countPressEmail + 1)
+
+    if (countPressEmail + 1 === 1) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.email?.toUpperCase(), cityB = b.email?.toUpperCase(); 
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else if (countPressEmail + 1 === 2) {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.email?.toUpperCase(), cityB = b.email?.toUpperCase(); 
+        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+      })
+      setSortManagers(sortedManager)
+    } else {
+      const sortedManager = [...managersP].sort((a, b) => {       
+        var cityA = a.id, cityB = b.id 
+        return cityB-cityA  //сортировка по убыванию 
+      })
+      setSortManagers(sortedManager)
+    }
+    
+  }
   
   return (
     <div className='dark-theme'>
@@ -1328,10 +1602,10 @@ useEffect(() => {
 
                 {showWidget7 
                 ?<WidgetsDropdown7
-                  all={[]}
-                  companys={[]} 
-                  clients={[]} 
-                  workers={[]}
+                  all={allCount}
+                  companys={companyCount} 
+                  clients={clientCount} 
+                  workers={workerCount}
                 />
                 :""}
                 
@@ -2148,7 +2422,7 @@ useEffect(() => {
                             <br/>
                             <CRow className="mb-3">
                               <CCol sm={3} >
-                                <CFormInput placeholder="Поиск..." onChange={(e)=>setText(e.target.value)} aria-label="workers"/>
+                                <CFormInput placeholder="Поиск..." onChange={(e)=>setTextCompany(e.target.value)} aria-label="workers"/>
                               </CCol>
                               <CCol sm={6}></CCol>
 
@@ -2168,18 +2442,18 @@ useEffect(() => {
                                     <CTableRow>
                                       <CTableHeaderCell className="text-center" style={{width: '90px'}}>Дата</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '70px'}}>Время</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '240px'}}>ФИО</CTableHeaderCell> 
-                                      <CTableHeaderCell className="text-center" style={{width: '130px'}}>Город</CTableHeaderCell> 
-                                      <CTableHeaderCell className="text-center" >Компания</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '90px'}}>Должность</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '160px'}}>Телефон</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Почта</CTableHeaderCell>                         
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>ID</CTableHeaderCell>
+                                      <CTableHeaderCell onClick={onSortFio} className="text-center" style={{minWidth: '200px', cursor: 'pointer'}}>ФИО</CTableHeaderCell> 
+                                      <CTableHeaderCell onClick={onSortCity} className="text-center" style={{width: '100px', cursor: 'pointer'}}>Город</CTableHeaderCell> 
+                                      <CTableHeaderCell onClick={onSortComp} className="text-center" style={{cursor: 'pointer'}}>Компания</CTableHeaderCell>  
+                                      <CTableHeaderCell onClick={onSortDolgnost} className="text-center" style={{minWidth: '90px', cursor: 'pointer'}}>Должность</CTableHeaderCell>
+                                      <CTableHeaderCell onClick={onSortPhone} className="text-center" style={{minWidth: '160px', cursor: 'pointer'}}>Телефон</CTableHeaderCell>  
+                                      <CTableHeaderCell onClick={onSortEmail} className="text-center" style={{minWidth: '150px', cursor: 'pointer'}}>Почта</CTableHeaderCell>                         
+                                      <CTableHeaderCell onClick={onSortID} className="text-center" style={{minWidth: '90px', cursor: 'pointer'}}>ID</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>
                                   <CTableBody>                                  
-                                  {managersP && managersP.map((item, index) => (
-                                      <CTableRow v-for="item in tableItems" key={index}>
+                                  {sortManagers && sortManagers.map((item, index) => (
+                                      <CTableRow v-for="item in tableItems" key={index} style={{lineHeight: '14px'}}>
                                         <CTableDataCell className="text-center">
                                           {String(new Date(item.createdAt).getDate()).padStart(2, "0")+ "."+ String(new Date(item.createdAt).getMonth()+1).padStart(2, "0") + "." +new Date(item.createdAt).getFullYear()}
                                         </CTableDataCell>
@@ -2187,16 +2461,28 @@ useEffect(() => {
                                           {new Date(item.createdAt).getHours() + ' : '+ String(new Date(item.createdAt).getMinutes()).padStart(2, "0")}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                            {item.fio ? item.fio : ''}
+                                          {item.fio &&
+                                            item.fio.length > 20
+                                              ? item.fio.substr(0, 20) + '...'
+                                              : item.fio}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          {item.city ? item.city : ''}
+                                          {item.city &&
+                                            item.city.length > 10
+                                              ? item.city.substr(0, 10) + '...'
+                                              : item.city}
                                         </CTableDataCell>
                                         <CTableDataCell style={{textAlign: 'left'}}>
-                                          {item.companyId ? item.companyId : ''}
+                                          {item.company &&
+                                            item.company.length > 10
+                                              ? item.company.substr(0, 10) + '...'
+                                              : item.company}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
-                                          {item.dolgnost ? item.dolgnost : ''}
+                                          {item.dolgnost &&
+                                            item.dolgnost.length > 10
+                                              ? item.dolgnost.substr(0, 10) + '...'
+                                              : item.dolgnost}
                                         </CTableDataCell>
                                         <CTableDataCell className="text-center">
                                           <div>{item.phone ? item.phone : ''}</div>
@@ -2205,7 +2491,7 @@ useEffect(() => {
                                           <div>{item.email ? item.email : ''}</div>
                                         </CTableDataCell> 
                                         <CTableDataCell className="text-center">
-                                          {item.chatId ? item.chatId : ''}
+                                          {item.userId}
                                         </CTableDataCell> 
                                       </CTableRow>
                                       ))

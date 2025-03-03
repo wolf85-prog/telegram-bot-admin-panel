@@ -257,6 +257,9 @@ const openPlatform = (resPlatform) => {
  const savePlatforma = async() => { 
   console.log("id: ", id)
 
+  //Toast
+  setShowModal(true)
+
   const saveData = {   
     title, 
     city,
@@ -290,14 +293,13 @@ const openPlatform = (resPlatform) => {
   //сохранить изменения в базе
   await editPlatform(saveData, id)
 
-  //Toast
-  setShowModal(true)
+  
   //addToast(exampleToast) //ваши данные сохранены
 
   setTimeout(()=> {
     setShowModal(false)
     closeProfile()
-  }, 500)
+  }, 2000)
  
 }
 
@@ -869,8 +871,8 @@ const onSortAddress = () => {
                       onClose={() => setShowModal(false)}
                       aria-labelledby="VerticallyCenteredExample"
                     >
-                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '15px'}}>
-                        Данные успешно сохранены!
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                        Данные успешно сохранены
                       </CModalBody>
                     </CModal>
 

@@ -8,7 +8,12 @@ import { getSendCall } from './../../../../http/adminAPI';
 import { getProjectId } from './../../../../http/projectAPI';
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
+
 import defaultAvatar from "./../../../../chat-app-new/assets/images/no-avatar.png";
+import avatarKrest from "./../../../../chat-app-worker/assets/images/uncheck.png";
+import block18 from "./../../../../assets/images/block18.png";
+import krest from "./../../../../assets/images/krestik.png";
+
 import CIcon from '@coreui/icons-react'
 import {
   cilPen,
@@ -189,7 +194,29 @@ const Profile = ({ user, closeSidebar }) => {
 							? <img src={user?.avatar} onError={onImageError} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />//<img src={`${host}${user.avatar}`} alt={user?.name} className="avatar-adm" />
 							: <img src={defaultAvatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />
 					}
+
+					{
+						worker ? 
+						(worker.block18 ?   
+						<img src={block18} alt='' width={18} style={{position: 'absolute', top: '2px', right: '5px', width: '55px'}}/>
+						: "")
+						: ""
+					}
+
+					{
+						worker ? 
+						(worker.krest ?   
+						<img src={krest} alt='' width={18} style={{position: 'absolute', top: '310px', right: '10px', width: '40px'}}/>
+						: "")
+						: ""
+					}
 				</div>
+				{worker ?  
+					((JSON.parse(worker.worklist)).find(item => item.spec === 'Blacklist') ? 
+					<h2 className="profile__name" style={{textAlign: 'center', color: 'red', fontWeight: '700', position: 'absolute', top: '378px'}}>Blacklist</h2>
+					: "")
+				: ""}
+				
 				<h2 className="profile__name" style={{textAlign: 'center'}}>{user?.name.split(' ')[0] === user?.name.split(' ')[1] ? user?.name.split(' ')[0] : user?.name}</h2>
 			</div>
 

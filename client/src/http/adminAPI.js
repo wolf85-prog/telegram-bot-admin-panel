@@ -740,6 +740,58 @@ export const getManagerPerson= async () =>{
         //console.log("projectsAPI: ", response.data);
         return response.data;
     } catch (error) {
-        console.log("error while calling getPretendent api", error.message);
+        console.log("error while calling getManagerPerson api", error.message);
+    }
+}
+
+
+export const getManagerCompany= async () =>{
+    try {
+        let response = await $host_person.get('api/companyprof/get');
+        //console.log("projectsAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getManagerCompany api", error.message);
+    }
+}
+
+
+export const getManagerCount= async () =>{
+    try {
+        let response = await $host_person.get('api/managers/count/get');
+        //console.log("projectsAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getManagerCount api", error.message);
+    }
+}
+
+export const getCompanyCount= async () =>{
+    try {
+        let response = await $host_person.get('api/companys/count/get');
+        //console.log("projectsAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getCompanyCount api", error.message);
+    }
+}
+
+export const getClientCount= async () =>{
+    try {
+        let response = await $host_person.get('api/client/count/get');
+        //console.log("projectsAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getClientCount api", error.message);
+    }
+}
+
+export const getWorkerCount= async () =>{
+    try {
+        let response = await $host_person.get('api/workers/count/get');
+        //console.log("projectsAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getWorkerCount api", error.message);
     }
 }

@@ -98,6 +98,7 @@ const Managers = () => {
   const [showSavePhone2, setShowSavePhone2] = useState(false)
   const [showSaveTg, setShowSaveTg] = useState(false)
   const [showSave3, setShowSave3] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   const [id, setId] = useState('');
   const [fio, setFio] = useState('');
@@ -677,7 +678,9 @@ const clickNext = async() => {
 
   //сохранить профиль
   const saveProfile = async(id) => { 
-      setShowClose(true)
+      setShowModal(true)
+
+      //setShowClose(true)
       console.log(id)
 
       let worklistArr = []
@@ -786,9 +789,10 @@ const clickNext = async() => {
       //сохранить изменения в базе
       await editManager(saveData, id)
   
-      addToast(exampleToast) //ваши данные сохранены
+      //addToast(exampleToast) //ваши данные сохранены
 
       setTimeout(()=> {
+        setShowModal(false)
         closeProfile()
       }, 2000)
   }
@@ -1402,6 +1406,17 @@ const clickNext = async() => {
                           </CCard>
                         </CCol>
                     </CRow>
+
+                    <CModal
+                      alignment="center"
+                      visible={showModal}
+                      onClose={() => setShowModal(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                        Данные успешно сохранены
+                      </CModalBody>
+                    </CModal>
 
                     <CModal
                       backdrop="static"

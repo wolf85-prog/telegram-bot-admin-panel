@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 import { useSocketContext } from "./socketContext";
+import { useSocketContextSupport } from "./socketContextSupport";
 import { getAllMessages, getContacts, getConversation, getMessages } from '../../http/chatAPI'
 import { getAllPretendent, getWContacts, getWConversation, 
 	getWConversations, getWMessages, getWorkers, getWorker, getAllWMessages, 
@@ -29,6 +30,7 @@ import { getDistributionsW,
 
 import boopSfx from './../assets/sounds/zvuk-icq.mp3';
 import soundMessage from './../assets/sounds/U.L.E.Y_messageNew.mp3';
+import soundMessageSupport from './../../assets/sound/SUPPORT_messageNew.wav';
 import soundProject from './../assets/sounds/project_new2.mp3';
 import soundSmeta from './../assets/sounds/predvarit_smeta2.mp3';
 import sound120 from './../../assets/sound/120_minut_ULEY_new.mp3';
@@ -53,6 +55,7 @@ const useUsersContext = () => useContext(UsersContext);
 
 const UsersProvider = ({ children }) => {
 	const socket = useSocketContext();
+	const socketSupport = useSocketContextSupport();
 	const [users, setUsers] = useState([]); //все специалисты;
 	// const [users, setUsers] = useState( () => {
 	// 	const savedUsers = localStorage.getItem("users");
@@ -122,6 +125,13 @@ const UsersProvider = ({ children }) => {
 		return initialValue || 0;
 	});
 
+	const [countMessageSupport, setCountMessageSupport] = useState(() => {
+		// getting stored value
+		const saved = localStorage.getItem("countMessageSupport");
+		const initialValue = saved;
+		return initialValue || 0;
+	});
+
 
 	const [distributionsWork, setDistributionsWork] = useState([]); 
 
@@ -183,6 +193,7 @@ const UsersProvider = ({ children }) => {
 	})
 
 	const audioMessage = new Audio(soundMessage);
+	const audioMessageSupport = new Audio(soundMessageSupport);
 	const audioMessageW = new Audio(boopSfx);
 	const audioProject = new Audio(soundProject);
 	const audioSmeta = new Audio(soundSmeta);
@@ -222,6 +233,11 @@ const UsersProvider = ({ children }) => {
 		// storing input name
 		localStorage.setItem("countMessageWork", countMessageWork);
 	}, [countMessageWork]);
+
+	useEffect(() => {	
+		// storing input name
+		localStorage.setItem("countMessageSupport", countMessageSupport);
+	}, [countMessageSupport]);
 
 
 	useEffect(() => {	
@@ -417,6 +433,8 @@ useEffect(() => {
 				  //from: user.from,
 				  promoId: user.promoId,
 				  blockW: user.blockW,
+				  block18: user.block18,
+				  krest: user.krest,
 				  deleted: user.deleted,
 				  comment: user.comment,
 				  comteg: user.comteg,
@@ -455,6 +473,8 @@ useEffect(() => {
 					//from: user.from,
 					promoId: user.promoId,
 					blockW: user.blockW,
+					block18: user.block18,
+					krest: user.krest,
 					deleted: user.deleted,
 				}
 		
@@ -1311,8 +1331,38 @@ useEffect(() => {
 		});
 	}
 
+
+	//=======================================================================
+// 						Support
+//=======================================================================
+
+//получить сообщение из телеграмма WorkersBot
+const fetchMessageSupportResponse = async(data) => {
+	
+	console.log("Получено сообщение от Support: ", data)
+	const { isBot} = data;
+
+	let arrWorkers = []
+
+	//пришло новое сообщение
+	const kol = await getCountMessage()
+	setCountMessageSupport(count + 1)
+	//const res = await newCountWMessage(kol.workers + 1)
+	
+	//play sound
+	const savedVolume = localStorage.getItem("soundVolume");
+	const savedMute = localStorage.getItem("soundMute");
+
+	//if (savedMute === 'false') {
+		//audioMessageSupport.volume = parseFloat(savedVolume)
+		audioMessageSupport.play();
+	//}
+
+};
+
 //------------------------------------------------------------------------------------
 	useEffect(() => {
+		console.log("socket work!")
 		socket.on("getMessage", fetchMessageResponse);
 		socket.on("getMessageSpec", fetchMessageSpecResponse);
 		socket.on("getMessageRent", fetchMessageRentResponse);
@@ -1335,6 +1385,13 @@ useEffect(() => {
 		socket.on("stop_typing", setUserAsNotTyping);
 		
 	}, [socket]);
+
+	//------------------------------------------------------------------------------------
+	useEffect(() => {
+		console.log("socket support work!")
+		socketSupport.on("getMessagePersonSupport", fetchMessageSupportResponse);
+		
+	}, [socketSupport]);
 
 //------------------------------------------------------------------------------------
 	const setUserAsUnread = (userId) => {
@@ -2310,6 +2367,8 @@ function isObjectEmpty(obj) {
 			delWMessageContext,
 			countMessageWork,
 			setCountMessageWork,
+			countMessageSupport,
+			setCountMessageSupport,
 			newPretendent,
 			setNewPretendent,
 			countPretendent, 
