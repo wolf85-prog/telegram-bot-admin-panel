@@ -975,15 +975,6 @@ ${loc.url}`
 
       arrayCopy.splice(parseInt(eventkey.split(' ')[2]) + 1, 0, {
         id: resAdd.id,
-        date: '',
-        specId: '',
-        vidWork: '',
-        specialization: '',
-        comteg: '',
-        comment: '',
-        stavka: '',
-        taxi: '',
-        merch: '',
         projectId: id,
         hr: true,
       })
@@ -1086,7 +1077,7 @@ ${loc.url}`
         vidWork: dublSpec.vidWork, //JSON.stringify({name: dublSpec.vidWork, color: ''}),
         specialization: dublSpec.specialization, //JSON.stringify({name: dublSpec.specialization, color: ''}),
         stavka: dublSpec.stavka, //JSON.stringify({name: dublSpec.stavka, color: ''}),
-        taxi: dublSpec.number,
+        taxi: dublSpec.taxi,
         merch: dublSpec.merch,
         comment: dublSpec.comment,
         comteg: dublSpec.comteg, //JSON.stringify({name: dublSpec.comteg, color: ''}),
