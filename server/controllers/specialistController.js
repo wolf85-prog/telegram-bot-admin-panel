@@ -19,7 +19,7 @@ const socketUrl = process.env.SOCKET_APP_URL
 
 class SpecialistController {
 
-    async getPaginatedSpecialist (req, res) {
+    async getPaginatedSpecialist (req, res) {        
         const page = tryParseInt(req.query.page, 0);
         const limit = tryParseInt(req.query.limit, 10);
       
@@ -42,7 +42,18 @@ class SpecialistController {
         }
       };
 
-    async getSpecialist(req, res) {
+      async searchSpecialists(req, res) {
+        const {q} = req.query
+        
+        try {
+            const worker = await Specialist.findAll({where: {fio: {[Op.iLike]: `%${q}%`}}})
+            return res.status(200).json(worker);
+        } catch (err) {
+            return res.status(500).json(err);
+        }
+    }
+
+    async getSpecialist(req, res) {        
         try {
             const workers = await Specialist.findAll({
                 order: [
@@ -60,22 +71,23 @@ class SpecialistController {
         }
     }
 
-    async getSpecialistFilter(req, res) {
+    async getSpecialistFilter(req, res) {        
         try {
             const workers = await Specialist.findAll({
                 order: [
                     ['id', 'DESC'], //DESC, ASC
                 ],
-                attributes: ['id', 'fio'],
+                attributes: [['id', 'value'],  ['fio', 'label'] ],
                 
             })
+            
             return res.status(200).json(workers);
         } catch (error) {
             return res.status(500).json(error.message);
         }
     }
 
-    async getSpecCount(req, res) {
+    async getSpecCount(req, res) {        
         const kol = req.params.count
         const prev = req.params.prev
         try {
@@ -97,7 +109,7 @@ class SpecialistController {
         }
     }
 
-    async editSpecialist(req, res) { 
+    async editSpecialist(req, res) {         
         const {id} = req.params      
         try {    
             let exist=await Specialist.findOne( {where: {id: id}} )
@@ -164,7 +176,7 @@ class SpecialistController {
         }
     }
 
-    async getSpecialistId(req, res) {
+    async getSpecialistId(req, res) {        
         const {id} = req.params
         try {
             const worker = await Specialist.findOne({where: {id: id.toString()}})
@@ -174,7 +186,7 @@ class SpecialistController {
         }
     }
 
-    async getSpecialistChatId(req, res) {
+    async getSpecialistChatId(req, res) {        
         const {id} = req.params
         try {
             const workers = await Specialist.findOne({where: {chatId: id.toString()}})
@@ -249,6 +261,7 @@ class SpecialistController {
     }
 
     async getSpecCountAll(req, res) {
+        console.log(req)
         try {
             const count = await Specialist.count();
 
@@ -258,7 +271,7 @@ class SpecialistController {
         }
     }
 
-    async getSpecialistPhone(req, res) {
+    async getSpecialistPhone(req, res) {        
         const {id} = req.params
         try {
             const worker = await Specialist.findOne({where: {
