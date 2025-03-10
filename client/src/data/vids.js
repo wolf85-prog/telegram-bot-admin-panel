@@ -4,25 +4,25 @@ const vids = [
       label: 'Сборы',
       name: 'Сборы',
       value: '1',
-      color: '#1E90FF'
+      color: '#fff'
     },
     {
       label: 'Погрузка',
       name: 'Погрузка',
       value: '2',
-      color: '#1E90FF'
+      color: '#fff'
     },
     {
       label: 'Монтаж',
       name: 'Монтаж',
       value: '3',
-      color: '#1E90FF'
+      color: '#fff'
     },
     {
       label: 'Демонтаж',
       name: 'Демонтаж',
       value: '4',
-      color: '#1E90FF'
+      color: '#fff'
     },
 
 
@@ -30,25 +30,25 @@ const vids = [
       label: 'Дежурство',
       name: 'Дежурство',
       value: '5',
-      color: 'red'
+      color: ''
     },
     {
       label: 'Съемки',
       name: 'Съемки',
       value: '6',
-      color: 'red'
+      color: ''
     },
     {
       label: 'Репетиция',
       name: 'Репетиция',
       value: '7',
-      color: 'red'
+      color: ''
     },
     {
       label: 'Тесты / Чеки',
       name: 'Тесты / Чеки',
       value: '8',
-      color: 'red'
+      color: ''
     },
 
 
@@ -56,25 +56,25 @@ const vids = [
       label: 'Эфир',
       name: 'Эфир',
       value: '9',
-      color: '#1E90FF'
+      color: '#fff'
     },
     {
       label: 'Мероприятие',
       name: 'Мероприятие',
       value: '10',
-      color: '#1E90FF'
+      color: '#fff'
     },
     {
       label: 'Сопровождение',
       name: 'Сопровождение',
       value: '11',
-      color: '#1E90FF'
+      color: '#fff'
     },
     {
       label: 'Полный цикл',
       name: 'Полный цикл',
       value: '12',
-      color: '#1E90FF'
+      color: '#fff'
     },
 
     
@@ -82,25 +82,25 @@ const vids = [
       label: 'Постоянная работа',
       name: 'Постоянная работа',
       value: '13',
-      color: 'red'
+      color: ''
     },    
     {
       label: 'Работы на складе',
       name: 'Работы на складе',
       value: '14',
-      color: 'red'
+      color: ''
     },
     {
       label: 'Водитель ТС',
       name: 'Водитель ТС',
       value: '15',
-      color: 'red'
+      color: ''
     },
     {
       label: 'Доставка',
       name: 'Доставка',
       value: '16',
-      color: 'red'
+      color: ''
     },
 
     
@@ -108,13 +108,13 @@ const vids = [
       label: 'Выезд / Перелет',
       name: 'Выезд / Перелет',
       value: '17',
-      color: '#1E90FF'
+      color: '#fff'
     },
     {
       label: 'Запасной состав',
       name: 'Запасной состав',
       value: '18',
-      color: '#1E90FF'
+      color: '#fff'
     },
     {
       label: 'Фальшстарт',
@@ -132,7 +132,7 @@ const vids = [
       label: 'Офис',
       name: 'Офис',
       value: '21',
-      color: 'purple'
+      color: 'fff'
     },
     
 ]
