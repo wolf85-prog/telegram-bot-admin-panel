@@ -40,7 +40,7 @@ import arrowDown from 'src/assets/images/arrowDown.svg'
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { getAllMessages, getMessages } from './../http/chatAPI.js'
 import { getAllWMessages, getWorkersCount } from './../http/workerAPI.js'
-import { getManagerPerson, getManagerCompany, getWorkerCount, getClientCount, getCompanyCount, getManagerCount } from '../http/adminAPI'
+import { getManagerPerson, getManagerCompany, getWorkerCount, getClientCount, getCompanyCount, getManagerCount, getProjectCount } from '../http/adminAPI'
 
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 import WidgetsDropdown2 from '../views/widgets/WidgetsDropdown2'
@@ -141,6 +141,7 @@ const Admin = () => {
   const [companyCount, setCompanyCount] = useState(0);
   const [clientCount, setClientCount] = useState(0);
   const [workerCount, setWorkerCount] = useState(0);
+  const [projectCount, setProjectCount] = useState(0);
 
   const [textCompany, setTextCompany]= useState("");
   const [sortManagers, setSortManagers] = useState([]);
@@ -383,10 +384,17 @@ useEffect(() => {
       const allCount = await getManagerCount()
       console.log("allCount: ", allCount)
       setAllCount(allCount)
+
+      const projectCount = await getProjectCount()
+      console.log("projectCount: ", projectCount)
+      setProjectCount(projectCount)
+
       const workerCount = await getWorkerCount()
       setWorkerCount(workerCount)
-      const clientCount = await getClientCount() 
-      setClientCount(clientCount)
+
+      // const clientCount = await getClientCount() 
+      // setClientCount(clientCount)
+
       const companyCount = await getCompanyCount() 
       setCompanyCount(companyCount)
 
@@ -1604,7 +1612,7 @@ useEffect(() => {
                 ?<WidgetsDropdown7
                   all={allCount}
                   companys={companyCount} 
-                  clients={clientCount} 
+                  projects={projectCount} 
                   workers={workerCount}
                 />
                 :""}

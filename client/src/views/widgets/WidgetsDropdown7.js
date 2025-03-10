@@ -11,7 +11,7 @@ import Workers from 'src/pages/Workers'
 const WidgetsDropdown7 = ({
   all, 
   companys, 
-  clients, 
+  projects, 
   workers, 
 }) => {
 
@@ -184,13 +184,13 @@ const WidgetsDropdown7 = ({
           color="warning"
           value={
             <>
-              {clients} {/*{' '}
+              {projects} {/*{' '}
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
-          title={"Клиенты"}
+          title={"Проекты"}
           action={""}
           chart={
             <CChartLine
@@ -203,7 +203,7 @@ const WidgetsDropdown7 = ({
                     label: 'Специалисты',
                     backgroundColor: 'rgba(255,255,255,.2)',
                     borderColor: 'rgba(255,255,255,.55)',
-                    data: [clients, 0, 0, 0, 0, 0, 0],
+                    data: [projects, 0, 0, 0, 0, 0, 0],
                     fill: true,
                   },
                 ],

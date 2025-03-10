@@ -745,7 +745,7 @@ export const getManagerPerson= async () =>{
 }
 
 
-export const getManagerCompany= async () =>{
+export const getManagerCompany = async () =>{
     try {
         let response = await $host_person.get('api/companyprof/get');
         //console.log("projectsAPI: ", response.data);
@@ -756,7 +756,7 @@ export const getManagerCompany= async () =>{
 }
 
 
-export const getManagerCount= async () =>{
+export const getManagerCount = async () =>{
     try {
         let response = await $host_person.get('api/managers/count/get');
         //console.log("projectsAPI: ", response.data);
@@ -766,9 +766,9 @@ export const getManagerCount= async () =>{
     }
 }
 
-export const getCompanyCount= async () =>{
+export const getCompanyCount = async () =>{
     try {
-        let response = await $host_person.get('api/companys/count/get');
+        let response = await $host_person.get('api/companyprof/count/get');
         //console.log("projectsAPI: ", response.data);
         return response.data;
     } catch (error) {
@@ -776,7 +776,7 @@ export const getCompanyCount= async () =>{
     }
 }
 
-export const getClientCount= async () =>{
+export const getClientCount = async () =>{
     try {
         let response = await $host_person.get('api/client/count/get');
         //console.log("projectsAPI: ", response.data);
@@ -786,12 +786,22 @@ export const getClientCount= async () =>{
     }
 }
 
-export const getWorkerCount= async () =>{
+export const getWorkerCount = async () =>{
     try {
         let response = await $host_person.get('api/workers/count/get');
         //console.log("projectsAPI: ", response.data);
         return response.data;
     } catch (error) {
         console.log("error while calling getWorkerCount api", error.message);
+    }
+}
+
+export const getProjectCount = async () =>{
+    try {
+        let response = await $host_person.get('api/projects/count/get');
+        //console.log("projectsAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectCount api", error.message);
     }
 }
