@@ -823,8 +823,10 @@ const onAddCategory3 = (e) => {
     workersAll.map((worker)=> {
       worker.worklist && JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
-          if (work.cat === cat) {
+          if (work.cat === cat || work.cat === "Менеджер «U.L.E.Y»") {
             arrSelect.push(worker.chatId)
+
+            arrSelectAll.push(worker)
           } 
         })
       })
@@ -866,9 +868,11 @@ const onAddCategory4 = (e) => {
     workersAll.map((worker)=> {
       worker.worklist && JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
-          if (work.cat === cat) {
+          if (work.cat === cat || work.cat === "Менеджер «U.L.E.Y»") {
             arrSelect.push(worker.chatId)
-          } 
+
+            arrSelectAll.push(worker)
+          }
         })
       })
     })
@@ -909,9 +913,11 @@ const onAddCategory5 = (e) => {
     workersAll.map((worker)=> {
       worker.worklist && JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
-          if (work.cat === cat) {
+          if (work.cat === cat || work.cat === "Менеджер «U.L.E.Y»") {
             arrSelect.push(worker.chatId)
-          } 
+
+            arrSelectAll.push(worker)
+          }
         })
       })
     })
@@ -952,9 +958,11 @@ const onAddCategory6 = (e) => {
     workersAll.map((worker)=> {
       worker.worklist && JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
-          if (work.cat === cat) {
+          if (work.cat === cat || work.cat === "Менеджер «U.L.E.Y»") {
             arrSelect.push(worker.chatId)
-          } 
+
+            arrSelectAll.push(worker)
+          }
         })
       })
     })
@@ -995,9 +1003,11 @@ const onAddCategory7 = (e) => {
     workersAll.map((worker)=> {
       JSON.parse(worker.worklist).map((work) => {
         result.map((cat)=> {
-          if (work.cat === cat) {
+          if (work.cat === cat || work.cat === "Менеджер «U.L.E.Y»") {
             arrSelect.push(worker.chatId)
-          } 
+
+            arrSelectAll.push(worker)
+          }
         })
       })
     })

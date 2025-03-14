@@ -264,7 +264,7 @@ const DistributionW = () => {
     let count = 0
     let count2 = 0
     let arrReceiver = []
-    JSON.parse(users).map((item, index)=> {
+    users && JSON.parse(users).map((item, index)=> {
       if (item.status === 200) {
         count++
       } else {
@@ -274,14 +274,15 @@ const DistributionW = () => {
       const obj = {
         user: item.user,
         status: item.status,
-        userfamily: worker.userfamily,
-        username: worker.username,
-        categories: worker.worklist,
+        userfamily: worker?.userfamily,
+        username: worker?.username,
+        categories: worker?.worklist,
       }
       arrReceiver.push(obj)
     })
     setCount(count)
     setCount2(count2)
+    console.log("arrReceiver: ", arrReceiver)
     setUserReceivers(arrReceiver)
     setUsers(arrReceiver)
     //console.log(JSON.stringify(users))
@@ -471,7 +472,7 @@ const DistributionW = () => {
                                                     <CTableRow key={index+1}>
                                                       <CTableHeaderCell style={{width: '45px'}} scope="row">{index < 9 ? '0'+(index+1) : index+1}</CTableHeaderCell>
                                                       <CTableDataCell style={{width: '110px'}}>{item.user}</CTableDataCell>
-                                                      <CTableDataCell style={{width: '170px'}}>{item.userfamily} {item.username}</CTableDataCell>
+                                                      <CTableDataCell style={{width: '170px'}}>{item.userfamily ? item.userfamily : ''} {item.username}</CTableDataCell>
                                                       <CTableDataCell style={{fontSize: '11px', width: '180px'}}>
                                                         {/* {JSON.parse(item.categories).map(it=>"- "+it.spec).join('\n')} */}
                                                         
@@ -479,7 +480,7 @@ const DistributionW = () => {
                                                         <CCollapse visible={showTable[index]}>
                                                           <table>
                                                             <tbody>
-                                                              {item.categories !== '' ? (JSON.parse(item.categories)).map((spec, index)=>( 
+                                                              {item.categories ? (item.categories && JSON.parse(item.categories)).map((spec, index)=>( 
                                                                   <tr key={index}>
                                                                     <td>{spec.spec !== '' ? "- " + spec.spec : ''}</td>
                                                                   </tr>          
