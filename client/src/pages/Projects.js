@@ -94,6 +94,7 @@ import comtegs from 'src/data/comtegs'
 import specOnlyData2 from 'src/data/specOnlyData2'
 import { posterList } from 'src/data/data'
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
+import { getSpecialist, getSpecCount, editSpecialist, getSpecialistId } from './../http/specAPI'
 import {
   getPretendentProjectId,
   editPretendent,
@@ -118,7 +119,7 @@ const Projects = () => {
   //const navigate = useNavigate();
   const queryClient = useQueryClient()
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
-  const { companysAll, managersAll, workersAll, platformsAll } = useUsersContext()
+  const { companysAll, managersAll, workersAll, setWorkersAll, platformsAll } = useUsersContext()
 
   const [showSidebar, setShowSidebar] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
@@ -287,18 +288,8 @@ const Projects = () => {
     setManagersData(sortedManager)
 
     //3
-    let arrWorkers = []
-    //console.log("workersAll: ", workersAll)
-    workersAll.map((item, index) => {
-      const obj = {
-        id: item.id,
-        label: item.userfamily + ' ' + item.username,
-        value: index,
-      }
-      arrWorkers.push(obj)
-    })
-    //console.log("arrWorkers: ", arrWorkers)
-    setWorkersData(arrWorkers)
+    
+    
 
     //4
     let arrPlatfroms = []
@@ -324,6 +315,52 @@ const Projects = () => {
       })
 
       setProjects(sortProj)
+
+      //0 все специалисты
+      let all = await getSpecialist()
+      const arrayWorkerAll = []
+          
+      all.map(async (user) => {
+              const newWorker = {
+                id: user.id,
+                userfamily: user.fio, //user.userfamily != null ? user.userfamily : '',
+                username: '',//user.username,
+                phone: user.phone,
+                dateborn: user.age,
+                city: user.city, 
+                //newcity: user.newcity, 
+                companys: user.company,
+                //stag: user.stag,
+                worklist:  user.specialization,
+                chatId: user.chatId,
+                createDate: user.createdAt,
+                avatar: user.profile,
+                //from: user.from,
+                promoId: user.promoId,
+                blockW: user.blockW,
+                block18: user.block18,
+                krest: user.krest,
+                deleted: user.deleted,
+                comment: user.comment,
+                comteg: user.comteg,
+              }
+          
+              arrayWorkerAll.push(newWorker)
+      })
+          
+      setWorkersAll(arrayWorkerAll)
+      let arrWorkers = []
+      //console.log("workersAll: ", workersAll)
+      arrayWorkerAll.map((item, index) => {
+        const obj = {
+          id: item.id,
+          label: item.userfamily + ' ' + item.username,
+          value: index,
+        }
+        arrWorkers.push(obj)
+      })
+      //console.log("arrWorkers: ", arrWorkers)
+      setWorkersData(arrWorkers)
     }
 
     fetchData()
