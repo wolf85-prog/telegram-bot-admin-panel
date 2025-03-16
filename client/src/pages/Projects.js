@@ -2951,11 +2951,16 @@ ${loc.url}`
                                             aria-labelledby="LiveDemoExampleLabel"
                                             // style={{position: 'relative'}}
                                           >
+                                            <div  
+                                              onMouseEnter={() => setShowPosterMenu('block')}
+                                              onMouseLeave={() => setShowPosterMenu('none')}                                              
+                                              >
+
                                             <img
                                               alt=""
                                               src={`https://storage.yandexcloud.net/uley/${item.url}`}
-                                              onMouseEnter={() => setShowPosterMenu('block')}
-                                              onMouseLeave={() => setShowPosterMenu('none')}
+                                              style={{height: '479px', width: '798px'}}
+                                             
                                               
                                             />
                                             <div  style={{ position: 'absolute', right: '5px', top: '5px',  display: showPosterMenu }}>
@@ -2982,6 +2987,7 @@ ${loc.url}`
                                                 style={{ cursor: 'pointer', color: '#7a8287' }}
                                                 onClick={() => handleDeletePoster(item.id)}
                                               />
+                                            </div>
                                             </div>
                                           </CModal>
                                         </>
