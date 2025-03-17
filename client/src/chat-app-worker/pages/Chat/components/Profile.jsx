@@ -154,9 +154,9 @@ const Profile = ({ user, closeSidebar }) => {
 				setCrmId('—')
 			}	
 			
-			const blocked = await getSpecialistChatId(user.chatId)
-			console.log("blocked: ", blocked, user.chatId)
-			setBlockWorker(blocked?.blockW ? blocked?.blockW : false)
+			const profile = await getSpecialistChatId(user.chatId)
+			console.log("profile: ", profile, user.chatId)
+			setBlockWorker(profile?.blockW ? profile?.blockW : false)
 		}
 		
 		fetch()
