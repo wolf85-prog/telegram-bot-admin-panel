@@ -470,8 +470,11 @@ const Projects = () => {
       let myColor2 = ''
 
       resMain.map((item) => {
-        if (item.vidWork === 'Фальшстарт' || item.vidWork === 'Отмена') myColor = 'red'
-        //if (item.vidWork === 'Офис') myColor = 'purple'
+        if (item.vidWork === 'Фальшстарт' || item.vidWork === 'Отмена') {
+          myColor = 'red'
+        } else {
+          myColor = ''
+        }
 
         const obj = {
           name: item.vidWork,
@@ -488,7 +491,11 @@ const Projects = () => {
           color: '',
         }
 
-        if (item.comteg === 'Опоздание' || item.comteg === 'Невыход') myColor2 = 'red'
+        if (item.comteg === 'Опоздание' || item.comteg === 'Невыход') {
+          myColor2 = 'red'
+        } else {
+          myColor2 = ''
+        }
 
         const obj3 = {
           name: item.comteg,
