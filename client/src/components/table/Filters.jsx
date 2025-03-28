@@ -118,7 +118,7 @@ const filters = {
   period: periodList,
 }
 
-export default function Filters({ columnFilters, setColumnFilters, setShowCalendar, setShowCalendar2 }) {
+export default function Filters({ columnFilters, setColumnFilters, setShowCalendar, setShowCalendar2, projects, setProjectsSort }) {
   const { MONTHS, date, setDate, day, setDay, month, setMonth, year, setYear, startDay, setStartDay, currentDays } = useUsersContext();
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
@@ -132,6 +132,15 @@ export default function Filters({ columnFilters, setColumnFilters, setShowCalend
   const [filter6, setFilter6] = useState(cityList)
 
   const [countPress, setCountPress] = useState(0);
+
+  const [filterText, setFilterText] = useState('');
+
+  //поиск
+  useEffect(() => {
+    console.log("projects: ", projects)
+    const filteredData = projects.filter(proj=> (proj.crmID)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(filterText.replace(/[её]/g, '(е|ё)').toLowerCase()));
+    setProjectsSort(filterText === '' ? projects : filteredData); 
+  }, [filterText]);
 
   const handleChangeFilterType = (selectedOption) => {
     setFilterType(selectedOption)
@@ -162,6 +171,10 @@ export default function Filters({ columnFilters, setColumnFilters, setShowCalend
       setShowCalendar2(false)
     } 
     
+  }
+
+  const startFilter = (e) => {
+    setFilterText(e.target.value)
   }
 
   return (
@@ -209,7 +222,7 @@ export default function Filters({ columnFilters, setColumnFilters, setShowCalend
                 </span>
               </CButton>
 
-              <input className="form-control" style={{background: 'transparent', width: '150px', marginRight: '10px'}} placeholder='Поиск'></input>
+              <input onChange={(e)=>startFilter(e)} className="form-control" style={{background: 'transparent', width: '150px', marginRight: '10px'}} placeholder='Поиск'></input>
               
               <CCloseButton
                 className="uley_select_reset"

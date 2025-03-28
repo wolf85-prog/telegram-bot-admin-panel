@@ -143,6 +143,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
     const [projectId7, setProjectId7] = useState([])
 
     const ref = useRef(null)
+    const refSr = useRef(null)
 
     useEffect(() => {
         console.log("projects: ", projects)
@@ -1183,6 +1184,15 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
         
     })
 
+    const scrollToMyRef = () => {
+        refSr.current?.scrollIntoView({ block: "center", behavior: "smooth" })
+        //elementRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    useEffect(() => {
+        setTimeout(scrollToMyRef, 1000);
+    }, [])
+
     useEffect(() => {
         //console.log(today)
         setDay(date.getDate());
@@ -1344,9 +1354,18 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                 const isWeekend = new Date(date.getFullYear(), month, d) 
                 //console.log("index: ", index, startDay, d)
 
+                const currentDay = new Date().getDate()
+                const day = isWeekend.getDate()
+                let ind = 0
+                
+                if (currentDay === day) {
+                    ind = index
+                    console.log("index: ", currentDay, day, index)
+                }
+
                 if (d > 0) {
                     return (
-                        <><tr key={index}>
+                        <><tr key={index} ref={index === ind ? refSr : null}>
                             <td className='day2' onMouseOver={()=>overDay(index, 1)} onMouseOut={()=>outDay(index, 1)} style={{backgroundColor: isWeekend.getDay() == 6 || isWeekend.getDay() == 0 ? '#11171a' : ''}}>
                                 <p className='date-day'>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                 <CButton onClick={()=>addNewProject(index, 1, new Date(date.getFullYear(), month, d))} className='uley_add_user uley_select_reset joinBtn' style={{display: showButtonAdd[index] ? 'block' : 'none', height: '26px', width: '26px'}}>

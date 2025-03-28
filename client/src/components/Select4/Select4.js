@@ -46,7 +46,7 @@ const Select4 = ({menuShow, setMenuShow, clearShow, setClearShow, selected, el, 
                 placeholder=""
                 value={element && element.length > 25 ? element.substr(0, 25) + '...' : element}
                 onChange={(e)=>changeFio(e)}
-                style={{height: '30px', fontSize: '16px', background: 'transparent', border: 'none', boxShadow: 'none', textAlign: 'center'}}
+                style={{height: '30px', fontSize: '16px', background: 'transparent', border: 'none', boxShadow: 'none', textAlign: 'left'}}
             />
         </div>
     );

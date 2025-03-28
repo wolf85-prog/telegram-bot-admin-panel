@@ -133,6 +133,7 @@ const Projects = () => {
   const [height, setHeight] = useState(600)
 
   const [projects, setProjects] = useState([])
+  const [projectsSort, setProjectsSort] = useState([])
 
   const [id, setId] = useState('')
   const [crmID, setCrmID] = useState('')
@@ -315,6 +316,7 @@ const Projects = () => {
       })
 
       setProjects(sortProj)
+      setProjectsSort(sortProj)
 
       //0 все специалисты
       let all = await getSpecialist()
@@ -1344,6 +1346,8 @@ ${loc.url}`
                           setShowCalendar2={setShowCalendar2}
                           columnFilters={columnFilters}
                           setColumnFilters={setColumnFilters}
+                          projects={projects}
+                          setProjectsSort={setProjectsSort}
                         />
                       ) : (
                         ''
@@ -1356,8 +1360,8 @@ ${loc.url}`
                       ) : showCalendar2 ? (
                         <Calendar2
                           openProject={openProject}
-                          projects={projects}
-                          setProjects={setProjects}
+                          projects={projectsSort}
+                          setProjects={setProjectsSort}
                           showSidebar={showSidebar}
                           setShowSidebar={setShowSidebar}
                           setShowProject={setShowProject}
@@ -2597,7 +2601,7 @@ ${loc.url}`
                                         />
                                       )}
                                     </CTableDataCell>
-                                    <CTableDataCell className="text-center">
+                                    <CTableDataCell className="text-left">
                                       {item.hr ? (
                                         <></>
                                       ) : (
