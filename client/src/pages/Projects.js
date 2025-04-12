@@ -320,9 +320,11 @@ const Projects = () => {
 
       //0 все специалисты
       let all = await getSpecialist()
+      console.log("Все специалисты: ", all)
       const arrayWorkerAll = []
           
       all.map(async (user) => {
+          if (user.fio !== 'Неизвестный специалист') {
               const newWorker = {
                 id: user.id,
                 userfamily: user.fio, //user.userfamily != null ? user.userfamily : '',
@@ -348,6 +350,7 @@ const Projects = () => {
               }
           
               arrayWorkerAll.push(newWorker)
+            }
       })
           
       setWorkersAll(arrayWorkerAll)
@@ -1335,10 +1338,33 @@ ${loc.url}`
             <Suspense fallback={<CSpinner color="primary" />}>
               {/* <h2>Проекты</h2> */}
               <CRow className="mt-2">
-                <CCol xs>
-                  <CCard className="mb-4">
-                    {/* <CCardHeader>Сметы</CCardHeader> */}
+                <CCol xs style={{overflow: 'scroll', height: '450px'}}>
 
+                  <CCard className="mb-4" style={{display: showHeader ? 'block' : 'none', position: 'sticky', top: '0', zIndex:'100'}}>
+                    <CCardBody>                                                  
+                              <div style={{color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
+                                <div className="text-field" style={{marginBottom: '0'}}>
+                                  <input disabled={true} className="text-field__input" type="text" name="projectId" id="projectId" value={crmID} style={{width: '120px', marginRight: '25px'}}/>
+                                </div>
+                                <div style={{display: 'flex', alignItems: 'center'}}>
+                                  <CTooltip content="Удалить проекты" placement="bottom" style={customTooltipStyle}>
+                                    <img src={DeleteIcon} onClick={() => setVisibleDelete(true)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
+                                  </CTooltip>
+                                 
+                                  <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                  <CTooltip content="Сохранить проект" placement="bottom" style={customTooltipStyle}>
+                                    <img src={Disketa} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                  </CTooltip>
+                                  <CTooltip content="Закрыть окно" placement="bottom" style={customTooltipStyle}>
+                                    <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                  </CTooltip>
+                                  
+                                </div>                 
+                              </div>
+                    </CCardBody> 
+                  </CCard> 
+                  
+                  <CCard className="mb-4">
                     <CCardBody style={{ padding: '12px', height: `${height}px` }}>
                       {!showProject ? (
                         <Filters
@@ -1457,6 +1483,7 @@ ${loc.url}`
                               />
                             </div>
                           </div>
+
                           {/* 1 */}
                           <div
                             style={{
