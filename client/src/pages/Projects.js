@@ -212,6 +212,8 @@ const Projects = () => {
 
   const [countPressDate, setCountPressDate] = useState(0)
 
+  const [showHeader, setShowHeader] = useState(false)
+
   const table = useReactTable({
     defaultColumn: {
       size: 200, //starting column size
@@ -408,6 +410,7 @@ const Projects = () => {
   const openProject = async (month, item, number, id, name, end, status, timeStart, specifika) => {
     console.log('item: ', month + 1, item, number, specifika, end)
 
+    setShowHeader(true)
     setShowProject(true)
     setShowCalendar(false)
     setShowCalendar2(false)
@@ -1347,15 +1350,15 @@ ${loc.url}`
                                   <input disabled={true} className="text-field__input" type="text" name="projectId" id="projectId" value={crmID} style={{width: '120px', marginRight: '25px'}}/>
                                 </div>
                                 <div style={{display: 'flex', alignItems: 'center'}}>
-                                  <CTooltip content="Удалить проекты" placement="bottom" style={customTooltipStyle}>
-                                    <img src={DeleteIcon} onClick={() => setVisibleDelete(true)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
+                                  <CTooltip content="Удалить проекты" placement="bottom" >
+                                    <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/>  
                                   </CTooltip>
                                  
                                   <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                  <CTooltip content="Сохранить проект" placement="bottom" style={customTooltipStyle}>
+                                  <CTooltip content="Сохранить проект" placement="bottom" >
                                     <img src={Disketa} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                   </CTooltip>
-                                  <CTooltip content="Закрыть окно" placement="bottom" style={customTooltipStyle}>
+                                  <CTooltip content="Закрыть окно" placement="bottom" >
                                     <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                   </CTooltip>
                                   

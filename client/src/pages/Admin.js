@@ -1574,28 +1574,28 @@ useEffect(() => {
 
                 {showWidget3 
                 ?<WidgetsDropdown3
-                  soundUsers={catCount[0].count}
-                  lightUsers={catCount[1].count}
-                  videoUsers={catCount[2].count}
-                  photoUsers={catCount[3].count}
+                  soundUsers={catCount[0]?.count}
+                  lightUsers={catCount[1]?.count}
+                  videoUsers={catCount[2]?.count}
+                  photoUsers={catCount[3]?.count}
                 />
                 :""}
 
                 {showWidget4 
                 ?<WidgetsDropdown4                
-                  promoUsers={catCount[4].count}
-                  cateringUsers={catCount[5].count}
-                  stagehandsUsers={catCount[6].count}
-                  riggerUsers={catCount[7].count}
+                  promoUsers={catCount[4]?.count}
+                  cateringUsers={catCount[5]?.count}
+                  stagehandsUsers={catCount[6]?.count}
+                  riggerUsers={catCount[7]?.count}
                 />
                 : ""}
 
                 {showWidget5 
                 ?<WidgetsDropdown5
-                  trucksUsers={catCount[8].count}
-                  partyUsers={catCount[9].count}
-                  gamesUsers={catCount[10].count}
-                  productionUsers={catCount[11].count}
+                  trucksUsers={catCount[8]?.count}
+                  partyUsers={catCount[9]?.count}
+                  gamesUsers={catCount[10]?.count}
+                  productionUsers={catCount[11]?.count}
                 />
                 : ""}
 
