@@ -356,6 +356,10 @@ const Specialist = () => {
 
     const data = {
       fio: 'ФИО',
+      specialization: JSON.stringify([{
+        spec: 'Вне категории',
+        cat: 'NoTag'
+      }]),
     }
     const res = await addSpecialist(data)
     console.log("res: ", res)
