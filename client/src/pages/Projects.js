@@ -802,6 +802,7 @@ ${loc.url}`
   }
 
   const closeProfile = () => {
+    setShowHeader(false)
     setShowProject(false)
     setShowCalendar2(true)
     setShowMainTable(false)
@@ -1341,7 +1342,7 @@ ${loc.url}`
             <Suspense fallback={<CSpinner color="primary" />}>
               {/* <h2>Проекты</h2> */}
               <CRow className="mt-2">
-                <CCol xs style={{overflow: 'scroll', height: '450px'}}>
+                <CCol xs style={{overflow: 'scroll', height: '650px'}}>
 
                   <CCard className="mb-4" style={{display: showHeader ? 'block' : 'none', position: 'sticky', top: '0', zIndex:'100'}}>
                     <CCardBody>                                                  
@@ -1353,7 +1354,16 @@ ${loc.url}`
                                   <CTooltip content="Удалить проекты" placement="bottom" >
                                     <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/>  
                                   </CTooltip>
-                                 
+                                  <img src={Trubka} style={{cursor: 'pointer',width: '24px',height: '24px',marginLeft: '20px',}}/>
+                                  <img
+                                    src={Tg}
+                                    style={{
+                                      cursor: 'pointer',
+                                      width: '24px',
+                                      height: '24px',
+                                      marginLeft: '20px',
+                                    }}
+                                  />
                                   <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
                                   <CTooltip content="Сохранить проект" placement="bottom" >
                                     <img src={Disketa} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
@@ -1405,87 +1415,9 @@ ${loc.url}`
                             height: '494px',
                             display: 'flex',
                             flexDirection: 'row',
-                            marginTop: '35px',
+                            //marginTop: '35px',
                           }}
                         >
-                          <div style={{ position: 'absolute', top: '-34px', left: '0px' }}>
-                            <div className="text-field">
-                              <input
-                                disabled={true}
-                                className="text-field__input"
-                                type="text"
-                                name="projectId"
-                                id="projectId"
-                                value={crmID}
-                                style={{ width: '120px', marginRight: '25px' }}
-                              />
-                            </div>
-                          </div>
-
-                          <div
-                            style={{
-                              position: 'absolute',
-                              top: '-25px',
-                              right: '4px',
-                              color: '#fff',
-                              fontSize: '33px',
-                              zIndex: '100',
-                              display: 'flex',
-                              justifyContent: 'flex-end',
-                              width: '-webkit-fill-available',
-                            }}
-                          >
-                            <div style={{ display: 'flex' }}>
-                              <Icon id="delete" onClick={() => clickDelete(id)} />
-                              <img
-                                src={Trubka}
-                                style={{
-                                  cursor: 'pointer',
-                                  width: '24px',
-                                  height: '24px',
-                                  marginLeft: '20px',
-                                }}
-                              />
-                              <img
-                                src={Tg}
-                                style={{
-                                  cursor: 'pointer',
-                                  width: '24px',
-                                  height: '24px',
-                                  marginLeft: '20px',
-                                }}
-                              />
-                              <img
-                                src={zamok}
-                                style={{
-                                  cursor: 'pointer',
-                                  width: '19px',
-                                  height: '24px',
-                                  marginLeft: '20px',
-                                }}
-                              />
-                              <img
-                                src={Disketa}
-                                onClick={() => saveProject(id)}
-                                style={{
-                                  cursor: 'pointer',
-                                  width: '24px',
-                                  height: '24px',
-                                  marginLeft: '20px',
-                                }}
-                              />
-                              <img
-                                src={Close}
-                                onClick={closeProfile}
-                                style={{
-                                  cursor: 'pointer',
-                                  width: '19px',
-                                  height: '24px',
-                                  marginLeft: '20px',
-                                }}
-                              />
-                            </div>
-                          </div>
 
                           {/* 1 */}
                           <div
