@@ -1345,7 +1345,7 @@ ${loc.url}`
                 <CCol xs style={{overflow: 'scroll', height: '650px'}}>
 
                   <CCard className="mb-4" style={{display: showHeader ? 'block' : 'none', position: 'sticky', top: '0', zIndex:'100'}}>
-                    <CCardBody>                                                  
+                    <CCardBody style={{padding: '5px'}}>                                                  
                               <div style={{color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                 <div className="text-field" style={{marginBottom: '0'}}>
                                   <input disabled={true} className="text-field__input" type="text" name="projectId" id="projectId" value={crmID} style={{width: '120px', marginRight: '25px'}}/>
