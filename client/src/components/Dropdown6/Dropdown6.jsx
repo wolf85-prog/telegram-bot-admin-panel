@@ -74,6 +74,7 @@ const Dropdown6 = ({options, selected, setSelected, index, element, placeholder,
   const clickClear = ()=> {
     setClearShow(false)
     setMenuShow(false)
+    setText('')
     //setElement('')
 
     let arr = JSON.parse(JSON.stringify(selected));

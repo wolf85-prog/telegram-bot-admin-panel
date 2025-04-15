@@ -66,7 +66,7 @@
 
 .close {
     position: absolute;
-    right: 12px; 
+    right: 0; 
     top: -10px;
     cursor: pointer;
 }

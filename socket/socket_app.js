@@ -183,6 +183,20 @@ io.on("connection", (socket) => {
         })
     })
 
+    //edit and get message
+    socket.on("editAdminRent", ({senderId, receiverId, text, type, buttons, convId, messageId, isBot})=>{
+        io.emit("getEditAdminRent", {
+            senderId,
+            receiverId,
+            text,
+            type,
+            buttons,
+            convId,
+            messageId,
+            isBot,
+        })
+    })
+
     //send and get message
     socket.on("delAdminRent", ({messageId, messageDate, chatId})=>{
         io.emit("getDelAdminRent", {

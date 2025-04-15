@@ -1366,6 +1366,7 @@ const fetchMessageSupportResponse = async(data) => {
 		socket.on("getMessage", fetchMessageResponse);
 		socket.on("getMessageSpec", fetchMessageSpecResponse);
 		socket.on("getMessageRent", fetchMessageRentResponse);
+		socket.on("getEditMessageRent", fetchEditMessageRentResponse);
 		
 		socket.on("getAdmin", fetchAdmin);	
 		socket.on("getDelAdmin", fetchDelAdmin);	
@@ -1935,6 +1936,22 @@ const fetchMessageRentResponse = async(data) => {
 			audioMessage.play();
 		}
 	}
+};
+
+//обновить сообщение из телеграмма
+const fetchEditMessageRentResponse = async(data) => {
+
+	console.log("Пришло новое сообщение в renthub: ", count+1)
+	//play sound
+	const savedVolume = localStorage.getItem("soundVolume");
+	const savedMute = localStorage.getItem("soundMute");
+
+	if (savedMute === 'false') {
+		console.log("savedMute: ", savedMute)
+		audioMessage.volume = parseFloat(savedVolume)
+		audioMessage.play();
+	}
+
 };
 
 
