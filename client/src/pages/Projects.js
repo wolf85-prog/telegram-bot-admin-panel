@@ -1344,7 +1344,7 @@ ${loc.url}`
               <CRow className="mt-2">
                 <CCol xs>
 
-                  <CCard className="mb-4" style={{display: showHeader ? 'block' : 'none', zIndex:'100'}}>
+                  <CCard className="mb-4" style={{display: showHeader ? 'block' : 'none', position: 'sticky', top: '113px', zIndex:'100'}}>
                     <CCardBody style={{padding: '5px'}}>                                                  
                               <div style={{color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                 <div className="text-field" style={{marginBottom: '0'}}>
@@ -2698,14 +2698,14 @@ ${loc.url}`
                         >
                           <CTableHead className="text-center" color="light">
                             <CTableRow>
-                              <CTableHeaderCell className="text-center" style={{ width: '61px' }}>
-                                <CFormCheck
+                              <CTableHeaderCell className="text-center">
+                                {/* <CFormCheck
                                   style={{
                                     backgroundColor: '#181924',
                                     border: '1px solid #121212',
                                   }}
-                                />
-                                <split style={{ position: 'absolute', left: '65px', top: '61px' }}>
+                                /> */}
+                                <split style={{ position: 'absolute', left: '47px', top: '63px' }}>
                                   {pretendents.length}
                                 </split>
                               </CTableHeaderCell>
@@ -2784,7 +2784,7 @@ ${loc.url}`
                                     >
                                       <div
                                         className="parent-element"
-                                        style={{ position: 'absolute', left: '2px', top: '6px' }}
+                                        style={{ position: 'absolute', left: '5px', top: '6px' }}
                                       >
                                         <Dropdown>
                                           <Dropdown.Toggle
@@ -2799,19 +2799,6 @@ ${loc.url}`
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>
-
-                                      <CFormCheck
-                                        style={{
-                                          backgroundColor: '#181924',
-                                          border: '1px solid #434343',
-                                          margin: '0px 5px',
-                                          position: 'absolute',
-                                          left: '15px',
-                                          top: '7px',
-                                        }}
-                                      />
-
-                                      {/* <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span> */}
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
                                       {item.data}
