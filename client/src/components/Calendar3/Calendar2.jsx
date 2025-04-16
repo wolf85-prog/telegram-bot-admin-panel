@@ -1340,7 +1340,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             </CButton>
         </div>
         <table className='frame2'>
-            <tr style={{position: 'sticky', top: '0px', backgroundColor: '#131c21', zIndex: '10'}}>
+            <tr style={{position: 'sticky', top: '-1px', backgroundColor: '#131c21', zIndex: '10'}}>
                 <th className='table-header'>1</th>
                 <th className='table-header'>2</th>
                 <th className='table-header'>3</th>

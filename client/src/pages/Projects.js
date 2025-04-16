@@ -1378,7 +1378,7 @@ ${loc.url}`
                   </CCard> 
                   
                   <CCard className="mb-4">
-                    <CCardBody style={{ padding: '12px', height: `${height}px` }}>
+                    <CCardBody style={{ padding: '12px', height: showHeader ? `${height}px` : `${height+25}px` }}>
                       {!showProject ? (
                         <Filters
                           setShowCalendar={setShowCalendar}
