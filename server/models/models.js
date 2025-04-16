@@ -77,6 +77,7 @@ const ProjectNew = sequelize.define('projectnew', {
     teh7: {type: DataTypes.STRING},
     teh8: {type: DataTypes.STRING},
     deleted: {type: DataTypes.BOOLEAN},
+    webforma: {type: DataTypes.BOOLEAN},
 })
 
 const Distribution = sequelize.define('distribution', {
