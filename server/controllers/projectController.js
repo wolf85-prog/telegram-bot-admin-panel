@@ -111,7 +111,7 @@ class ProjectController {
 
     async getProjectNewCreate(req, res) {
         const {name, status, specifika, city, datestart, dateend, teh, 
-            managerId, companyId, chatId, spec, geo, comment, equipment, index, number} = req.body
+            managerId, companyId, chatId, spec, geo, comment, equipment, index, number, webforma} = req.body
 
         try {
             // const generate = await sequelize.query('SELECT generate_series(1000,10000,1)', {
@@ -142,6 +142,7 @@ class ProjectController {
                 comment,
                 equipment,
                 number,
+                webforma,
             }
 
             const project = await ProjectNew.create(obj)
