@@ -54,6 +54,14 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
     const [project6, setProject6] = useState([])
     const [project7, setProject7] = useState([])
 
+    const [webforma, setWebforma] = useState([])
+    const [webforma2, setWebforma2] = useState([])
+    const [webforma3, setWebforma3] = useState([])
+    const [webforma4, setWebforma4] = useState([])
+    const [webforma5, setWebforma5] = useState([])
+    const [webforma6, setWebforma6] = useState([])
+    const [webforma7, setWebforma7] = useState([])
+
     const [projectName, setProjectName] = useState([])
     const [projectName2, setProjectName2] = useState([])
     const [projectName3, setProjectName3] = useState([])
@@ -236,10 +244,20 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
         let idProj6 = []
         let idProj7 = []
 
+        let forma = [] 
+        let forma2 = []
+        let forma3 = []
+        let forma4 = []
+        let forma5 = []
+        let forma6 = []
+        let forma7 = []
+
         Array(days[month] + (startDay - 1)).fill(null).map((_, index) => {
             const d = index - (startDay - 2);
                 
             projects.map((item, ind)=> {
+                console.log("item: ", item)
+                
                 if (item?.dateEnd) {
                     if (new Date(item?.dateStart.split('T')[0]).toISOString() === new Date(item?.dateEnd?.split('T')[0]).toISOString() || 
                         new Date(item?.dateStart.split('T')[0]).getTime() > new Date(item?.dateEnd?.split('T')[0]).getTime()) {
@@ -276,6 +294,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                             idProj[index] = item.id
                             setProjectId(idProj)
+
+                            forma[index] = item.webforma 
+                            setWebforma(forma)
                             } 
                             else if (!nameProj2[index]) {
                                 arr2[index] = true 
@@ -305,6 +326,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 idProj2[index] = item.id
                                 setProjectId2(idProj2)
+
+                                forma2[index] = item.webforma 
+                                setWebforma2(forma)
                             } 
                             else if (!nameProj3[index]) {
                                 arr3[index] = true 
@@ -334,6 +358,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 idProj3[index] = item.id
                                 setProjectId3(idProj3)
+
+                                forma3[index] = item.webforma 
+                                setWebforma3(forma3)
                             } 
                             else if (!nameProj4[index]) { 
                                 arr4[index] = true 
@@ -363,6 +390,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 idProj4[index] = item.id
                                 setProjectId4(idProj4)
+
+                                forma4[index] = item.webforma 
+                                setWebforma4(forma4)
                             } 
                             else if (!nameProj5[index]) {
                                 arr5[index] = true 
@@ -392,6 +422,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 idProj5[index] = item.id
                                 setProjectId5(idProj5)
+
+                                forma5[index] = item.webforma 
+                                setWebforma5(forma5)
                             }  
                             else if (!nameProj6[index]) {
                                 arr6[index] = true 
@@ -421,6 +454,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 idProj6[index] = item.id
                                 setProjectId6(idProj6)
+
+                                forma6[index] = item.webforma 
+                                setWebforma6(forma6)
                             } 
                             else if (!nameProj7[index]) {
                                 arr7[index] = true 
@@ -450,6 +486,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 idProj7[index] = item.id
                                 setProjectId7(idProj7)
+
+                                forma7[index] = item.webforma 
+                                setWebforma7(forma7)
                             }                 
                         }
 
@@ -487,6 +526,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                             idProj[index] = item.id
                             setProjectId(idProj)
+
+                            forma[index] = item.webforma 
+                            setWebforma(forma)
                             } 
                             else if (!nameProj2[index]) {
                                 arr2[index] = true 
@@ -516,6 +558,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 idProj2[index] = item.id
                                 setProjectId2(idProj2)
+
+                                forma2[index] = item.webforma 
+                                setWebforma2(forma2)
                             } 
                             else if (!nameProj3[index]) {
                                 arr3[index] = true 
@@ -545,6 +590,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 idProj3[index] = item.id
                                 setProjectId3(idProj3)
+
+                                forma3[index] = item.webforma 
+                                setWebforma3(forma3)
                             } 
                             else if (!nameProj4[index]) { 
                                 arr4[index] = true 
@@ -574,6 +622,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 idProj4[index] = item.id
                                 setProjectId4(idProj4)
+
+                                forma4[index] = item.webforma 
+                                setWebforma4(forma4)
                             } 
                             else if (!nameProj5[index]) {
                                 arr5[index] = true 
@@ -603,6 +654,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 idProj5[index] = item.id
                                 setProjectId5(idProj5)
+
+                                forma5[index] = item.webforma 
+                                setWebforma5(forma5)
                             }  
                             else if (!nameProj6[index]) {
                                 arr6[index] = true 
@@ -632,6 +686,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 idProj6[index] = item.id
                                 setProjectId6(idProj6)
+
+                                forma6[index] = item.webforma 
+                                setWebforma6(forma6)
                             } 
                             else if (!nameProj7[index]) {
                                 arr7[index] = true 
@@ -661,6 +718,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 idProj7[index] = item.id
                                 setProjectId7(idProj7)
+
+                                forma7[index] = item.webforma 
+                                setWebforma7(forma7)
                             }                 
                         }
                     } 
@@ -696,6 +756,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                             idProj[index] = item.id
                             setProjectId(idProj)
+
+                            forma[index] = item.webforma 
+                            setWebforma(forma)
                         } 
                         else if (!nameProj2[index]) {
                             arr2[index] = true 
@@ -725,6 +788,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                             idProj2[index] = item.id
                             setProjectId2(idProj2)
+
+                            forma2[index] = item.webforma 
+                            setWebforma2(forma2)
                         } 
                         else if (!nameProj3[index]) {
                             arr3[index] = true 
@@ -754,6 +820,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                             idProj3[index] = item.id
                             setProjectId3(idProj3)
+
+                            forma3[index] = item.webforma 
+                            setWebforma3(forma3)
                         } 
                         else if (!nameProj4[index]) { 
                             arr4[index] = true 
@@ -783,6 +852,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                             idProj4[index] = item.id
                             setProjectId4(idProj4)
+
+                            forma4[index] = item.webforma 
+                            setWebforma4(forma4)
                         } 
                         else if (!nameProj5[index]) {
                             arr5[index] = true 
@@ -812,6 +884,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                             idProj5[index] = item.id
                             setProjectId5(idProj5)
+
+                            forma5[index] = item.webforma 
+                            setWebforma5(forma5)
                         }  
                         else if (!nameProj6[index]) {
                             arr6[index] = true 
@@ -841,6 +916,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                             idProj6[index] = item.id
                             setProjectId6(idProj6)
+
+                            forma6[index] = item.webforma 
+                            setWebforma6(forma6)
                         } 
                         else if (!nameProj7[index]) {
                             arr7[index] = true 
@@ -870,6 +948,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                             idProj7[index] = item.id
                             setProjectId7(idProj7)
+
+                            forma7[index] = item.webforma 
+                            setWebforma7(forma7)
                         }                 
                     }
                 }
@@ -884,6 +965,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             setProject5(arr5) 
             setProject6(arr6) 
             setProject7(arr7) 
+ 
         })
 
     }, [projects, month])
@@ -1372,6 +1454,11 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
+                                {/* вэб форма */}
+                                <div className='joinBtn' style={{display: webforma[index] ? 'block' : 'none', height: '26px', width: '26px', border: `1px solid ${projectColor[index]}`, borderRadius: '6px'}}>
+                                    <span style={{fontSize: '25px', color: `${projectColor[index]}`, position: 'absolute', top: '-10px', left: '4px'}}>
+                                    {webforma[index] ? 'P' : ''}</span>
+                                </div>
                                 {project[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
@@ -1392,6 +1479,11 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
+                                {/* вэб форма */}
+                                <div className='joinBtn' style={{display: webforma2[index] ? 'block' : 'none', height: '26px', width: '26px', border: `1px solid ${projectColor2[index]}`, borderRadius: '6px'}}>
+                                    <span style={{fontSize: '25px', color: `${projectColor2[index]}`, position: 'absolute', top: '-10px', left: '4px'}}>
+                                    {webforma2[index] ? 'P' : ''}</span>
+                                </div>
                                 {project2[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor2[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
@@ -1412,6 +1504,11 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
+                                {/* вэб форма */}
+                                <div className='joinBtn' style={{display: webforma3[index] ? 'block' : 'none', height: '26px', width: '26px', border: `1px solid ${projectColor3[index]}`, borderRadius: '6px'}}>
+                                    <span style={{fontSize: '25px', color: `${projectColor3[index]}`, position: 'absolute', top: '-10px', left: '4px'}}>
+                                    {webforma3[index] ? 'P' : ''}</span>
+                                </div>
                                 {project3[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor3[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
@@ -1432,6 +1529,11 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
+                                {/* вэб форма */}
+                                <div className='joinBtn' style={{display: webforma4[index] ? 'block' : 'none', height: '26px', width: '26px', border: `1px solid ${projectColor4[index]}`, borderRadius: '6px'}}>
+                                    <span style={{fontSize: '25px', color: `${projectColor4[index]}`, position: 'absolute', top: '-10px', left: '4px'}}>
+                                    {webforma4[index] ? 'P' : ''}</span>
+                                </div>
                                 {project4[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor4[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
@@ -1452,6 +1554,11 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
+                                {/* вэб форма */}
+                                <div className='joinBtn' style={{display: webforma5[index] ? 'block' : 'none', height: '26px', width: '26px', border: `1px solid ${projectColor5[index]}`, borderRadius: '6px'}}>
+                                    <span style={{fontSize: '25px', color: `${projectColor5[index]}`, position: 'absolute', top: '-10px', left: '4px'}}>
+                                    {webforma5[index] ? 'P' : ''}</span>
+                                </div>
                                 {project5[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor5[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
@@ -1472,6 +1579,11 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
+                                {/* вэб форма */}
+                                <div className='joinBtn' style={{display: webforma6[index] ? 'block' : 'none', height: '26px', width: '26px', border: `1px solid ${projectColor6[index]}`, borderRadius: '6px'}}>
+                                    <span style={{fontSize: '25px', color: `${projectColor6[index]}`, position: 'absolute', top: '-10px', left: '4px'}}>
+                                    {webforma6[index] ? 'P' : ''}</span>
+                                </div>
                                 {project6[index] ?
                                     <><p className='date-proj-day2' style={{color: `${projectColor6[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
@@ -1492,6 +1604,11 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                     <span style={{fontSize: '25px', color: '#2d2e38', position: 'absolute', top: '-10px', left: '4px'}}>
                                     +</span>
                                 </CButton>
+                                {/* вэб форма */}
+                                <div className='joinBtn' style={{display: webforma7[index] ? 'block' : 'none', height: '26px', width: '26px', border: `1px solid ${projectColor7[index]}`, borderRadius: '6px'}}>
+                                    <span style={{fontSize: '25px', color: `${projectColor7[index]}`, position: 'absolute', top: '-10px', left: '4px'}}>
+                                    {webforma7[index] ? 'P' : ''}</span>
+                                </div>
                                 {project7[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor7[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 

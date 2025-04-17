@@ -93,6 +93,7 @@ import vids from 'src/data/vids'
 import comtegs from 'src/data/comtegs'
 import specOnlyData2 from 'src/data/specOnlyData2'
 import { posterList } from 'src/data/data'
+import startData from 'src/data/startData';
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
 import { getSpecialist, getSpecCount, editSpecialist, getSpecialistId } from './../http/specAPI'
 import {
@@ -125,7 +126,7 @@ const Projects = () => {
   const [showCalendar, setShowCalendar] = useState(false)
   const [showCalendar2, setShowCalendar2] = useState(true)
   const [showProject, setShowProject] = useState(false)
-
+  const [showSaveTreck, setShowSaveTreck] = useState(false)
   const [showPosterMenu, setShowPosterMenu] = useState('none')
 
   const [showSaveAddress, setShowSaveAddress] = useState(false)
@@ -173,6 +174,7 @@ const Projects = () => {
   const [teh8, setTeh8] = useState('')
   const [tehText, setTehText] = useState('')
   const [address, setAddress] = useState('')
+  const [track, setTrack] = useState('');
   const [geoId, setGeoId] = useState('')
   const [comment, setComment] = useState('')
 
@@ -213,6 +215,8 @@ const Projects = () => {
   const [countPressDate, setCountPressDate] = useState(0)
 
   const [showHeader, setShowHeader] = useState(false)
+
+  const [startProject, setStartProject] = useState({name: '', color: ''});
 
   const table = useReactTable({
     defaultColumn: {
@@ -630,7 +634,7 @@ ${loc.url}`
     setShowPosterTable(true)
 
     setTimeout(() => {
-      setHeight(509)
+      setHeight(560)
     }, 200)
   }
 
@@ -1511,6 +1515,17 @@ ${loc.url}`
                               {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '40px'}}/> */}
                             </div>
 
+                            <label className='title-label'>Старт</label>
+                            <div className="text-field">
+                              <MyDropdown4
+                                style={{backgroundColor: '#131c21'}}
+                                options={startData}
+                                selected={startProject}
+                                setSelected={setStartProject}
+                                placeholder='Выбери старт'
+                              />
+                            </div>
+
                             <label className="title-label">Специфика</label>
                             <div className="text-field">
                               <MyDropdown4
@@ -1745,7 +1760,6 @@ ${loc.url}`
                               <label className="title-label">Адрес</label>
                               <div
                                 className="text-field"
-                                style={{ marginBottom: '0px' }}
                                 onMouseOver={() => setShowSaveAddress(true)}
                                 onMouseOut={() => setShowSaveAddress(false)}
                               >
@@ -1758,7 +1772,7 @@ ${loc.url}`
                                   style={{
                                     resize: 'none',
                                     width: '320px',
-                                    height: '80px',
+                                    height: '40px',
                                     whiteSpace: 'nowrap',
                                     borderRadius: '6px',
                                     textAlign: 'left',
@@ -1781,6 +1795,22 @@ ${loc.url}`
                                   height: '25px',
                                 }}
                               />
+                            </div>
+
+                            <div style={{position:'relative'}}>
+                              <label className='title-label'>Как добраться</label>
+                              <div className="text-field" style={{marginBottom: '0px'}} >
+                                <textarea 
+                                  className="text-field__input widthBlock5" 
+                                  type="text" 
+                                  name="treck" 
+                                  id="treck"
+                                  value={track}
+                                  style={{resize: 'none',  height: '80px', whiteSpace: 'nowrap', borderRadius: '6px', textAlign: 'left', marginBottom: '0px'}}
+                                  onMouseOver={()=>setShowSaveTreck(true)} onMouseOut={()=>setShowSaveTreck(false)}
+                                />
+                              </div> 
+                              <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(track)}} alt="" style={{visibility: showSaveTreck ? 'visible' : 'hidden', position: 'absolute', top: '30px', right: '-40px', cursor: 'pointer', width: '15px', height: '15px'}}/>
                             </div>
                           </div>
 
@@ -1914,7 +1944,7 @@ ${loc.url}`
                                 style={{
                                   resize: 'none',
                                   width: '320px',
-                                  height: '123px',
+                                  height: '210px',
                                   whiteSpace: 'pre-line',
                                   borderRadius: '6px',
                                   textAlign: 'left',
@@ -1928,7 +1958,7 @@ ${loc.url}`
                               style={{
                                 marginTop: '44px',
                                 position: 'absolute',
-                                top: '300px',
+                                top: '380px',
                                 right: '240px',
                               }}
                             >
@@ -1936,7 +1966,7 @@ ${loc.url}`
                             </label>
 
                             <div
-                              style={{ display: 'flex', flexDirection: 'row', marginTop: '45px' }}
+                              style={{ display: 'flex', flexDirection: 'row', marginTop: '42px' }}
                             >
                               <div>
                                 <div style={{ display: 'flex' }}>
@@ -2077,7 +2107,7 @@ ${loc.url}`
                               </label>
                             </div>
 
-                            <div style={{ marginTop: '52px', marginLeft: '-40px' }}>
+                            <div style={{ marginTop: '136px', marginLeft: '-40px' }}>
                               <div style={{ display: 'flex' }}>
                                 <div className="text-field" style={{ marginBottom: '0px' }}>
                                   <input
