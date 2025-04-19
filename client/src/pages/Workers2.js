@@ -50,6 +50,11 @@ const Workers = () => {
 
   const [loadingCount, setLoadingCount] = useState(false); 
 
+  const customTooltipStyle = {
+    '--cui-tooltip-bg': '#2e4053',
+    '--cui-tootip-color': '#fff'
+  }
+
     //поиск
   useEffect(() => {
     //let cancels = getCanceled();
@@ -221,6 +226,7 @@ const Workers = () => {
                                           <CTooltip
                                               content={item.projectId}
                                               placement="top"
+                                              style={customTooltipStyle}
                                             >
                                               <div>{item.project}</div>
                                           </CTooltip>
@@ -232,6 +238,7 @@ const Workers = () => {
                                           <CTooltip
                                             content={item.workerId}
                                             placement="top"
+                                            style={customTooltipStyle}
                                           > 
                                             <div>{item.workerFamily + " " + item.workerName}</div>
                                           </CTooltip>

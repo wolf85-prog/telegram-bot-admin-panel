@@ -65,6 +65,11 @@ const DistributionW = () => {
   const [toast, addToast] = useState(0)
   const toaster = useRef()
 
+  const customTooltipStyle = {
+    '--cui-tooltip-bg': '#2e4053',
+    '--cui-tootip-color': '#fff'
+  }
+
   const exampleToast = (
     <CToast autohide={true} visible={true} color="success" className="text-white align-items-center">
       <div className="d-flex">
@@ -376,6 +381,7 @@ const DistributionW = () => {
                                           <CTooltip
                                             content={item.projectId}
                                             placement="top"
+                                            style={customTooltipStyle}
                                           >
                                             <div>{item.project}</div>
                                           </CTooltip>

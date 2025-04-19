@@ -1130,6 +1130,7 @@ const clickNext = async() => {
                                               openOnFocus
                                               id="custom-input-demo"
                                               options={sortedCities}
+                                              noOptionsText={'Пусто'}
                                               style={{width: '100%', padding: '0'}}
                                               isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onInputChange={(e)=>setCity(e.target.value)}
@@ -1176,6 +1177,7 @@ const clickNext = async() => {
                                         openOnFocus
                                         id="custom-input-demo"
                                         options={companysData}
+                                        noOptionsText={'Пусто'}
                                         style={{width: '100%', padding: '0'}}
                                         onInputChange={(e)=>onChangeCompany(e)}
                                         //onInputChange={(e)=>console.log(e.target.value)}

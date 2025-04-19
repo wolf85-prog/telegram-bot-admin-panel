@@ -157,6 +157,11 @@ const Admin = () => {
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
   const hostPersonal= process.env.REACT_APP_PERSON_ADMIN_API_URL
+
+  const customTooltipStyle = {
+    '--cui-tooltip-bg': '#2e4053',
+    '--cui-tootip-color': '#fff'
+  }
   
   useEffect(() => {
     //set tab

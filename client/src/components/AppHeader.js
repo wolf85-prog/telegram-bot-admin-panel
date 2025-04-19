@@ -82,6 +82,10 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
 
 //const [audio120] = useSound(sound120, {volume: soundVolume, soundEnabled: soundMute});
 
+const customTooltipStyle = {
+  '--cui-tooltip-bg': '#2e4053',
+  '--cui-tootip-color': '#fff'
+}
 
   const clickPhone = () => {
     //addToast(exampleToast) //ваша рассылка удалена
@@ -247,6 +251,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
             <CTooltip
               content="Инструкция"
               placement="bottom"
+              style={customTooltipStyle}
             >
               <CNavLink onClick={()=>handleLinkClick('https://www.notion.so/amusienko/dfed170e9f0242f8af156b8d175f038e?v=d6a54b36fb4b4e2487256a2f2578ecbc')} style={{position: 'relative', cursor: 'pointer'}}>
                 <img src={Vopros} onMouseOver={e => (e.currentTarget.src = Vopros2)} onMouseOut={e => (e.currentTarget.src = Vopros)}  style={{width: '18px', paddingBottom: '5px'}}/>               
@@ -259,6 +264,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
             <CTooltip
               content="Команды / Триггеры"
               placement="bottom"
+              style={customTooltipStyle}
             >
               <CNavLink onClick={()=>setShowBarHelp(!showBarHelp)} style={{position: 'relative',  cursor: 'pointer'}}>
                 <img src={Help} onMouseOver={e => (e.currentTarget.src = Help2)} onMouseOut={e => (e.currentTarget.src = Help)}  style={{width: '18px', paddingBottom: '5px'}}/>
@@ -339,6 +345,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               <CTooltip
                 content="Обновление данных"
                 placement="bottom"
+                style={customTooltipStyle}
               >
                 <CIcon icon={cilList} size="lg" onClick={()=>setShowBar(!showBar)}/>
               </CTooltip>
@@ -376,6 +383,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
             <CTooltip
               content="Mango"
               placement="bottom"
+              style={customTooltipStyle}
             >
               <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
                 <CIcon icon={cilPhone} size="lg"/>
@@ -520,6 +528,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
             <CTooltip
               content="10 ближайших проектов"
               placement="bottom"
+              style={customTooltipStyle}
             >
               <CNavLink href="#" style={{position: 'relative'}}>
                 <img src={Next} onMouseOver={e => (e.currentTarget.src = Next2)} onMouseOut={e => (e.currentTarget.src = Next)}  style={{width: '18px', paddingBottom: '5px'}}/>               
@@ -532,6 +541,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
             <CTooltip
               content="Удаленные проекты"
               placement="bottom"
+              style={customTooltipStyle}
             >
               <CNavLink href="/trash" style={{position: 'relative'}}>
                 <img src={Delete} onMouseOver={e => (e.currentTarget.src = Delete2)} onMouseOut={e => (e.currentTarget.src = Delete)} style={{width: '18px', paddingBottom: '5px'}}/>               
@@ -544,6 +554,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
             <CTooltip
               content="Ошибки в проектах"
               placement="bottom"
+              style={customTooltipStyle}
             >
               <CNavLink href="#" style={{position: 'relative'}}>
                 <img src={Error} onMouseOver={e => (e.currentTarget.src = Error2)} onMouseOut={e => (e.currentTarget.src = Error)}  style={{width: '18px', paddingBottom: '5px'}}/>               
@@ -556,6 +567,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
             <CTooltip
               content="Звуковые уведомления"
               placement="bottom"
+              style={customTooltipStyle}
             >
               <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
                 <CIcon onClick={clickBell} icon={cilBell} size="lg" />

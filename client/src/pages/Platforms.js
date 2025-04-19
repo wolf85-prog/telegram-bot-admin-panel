@@ -134,6 +134,11 @@ const Platforms = () => {
   const [countPressCity, setCountPressCity] = useState(0);
 
 
+  const customTooltipStyle = {
+    '--cui-tooltip-bg': '#2e4053',
+    '--cui-tootip-color': '#fff'
+  }
+
     //поиск
   useEffect(() => {
     const filteredData = platformsAll.filter(user=> (user.title)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
@@ -752,6 +757,7 @@ const onSortAddress = () => {
                                               openOnFocus
                                               id="custom-input-demo"
                                               options={sortedCities}
+                                              noOptionsText={'Пусто'}
                                               style={{width: '100%', padding: '0'}}
                                               isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onInputChange={(e)=>setCity(e.target.value)}

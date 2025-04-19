@@ -218,6 +218,11 @@ const Projects = () => {
 
   const [startProject, setStartProject] = useState({name: '', color: ''});
 
+  const customTooltipStyle = {
+    '--cui-tooltip-bg': '#2e4053',
+    '--cui-tootip-color': '#fff'
+  }
+
   const table = useReactTable({
     defaultColumn: {
       size: 200, //starting column size
@@ -1355,7 +1360,7 @@ ${loc.url}`
                                   <input disabled={true} className="text-field__input" type="text" name="projectId" id="projectId" value={crmID} style={{width: '120px', marginRight: '25px'}}/>
                                 </div>
                                 <div style={{display: 'flex', alignItems: 'center'}}>
-                                  <CTooltip content="Удалить проекты" placement="bottom" >
+                                  <CTooltip content="Удалить" placement="bottom" style={customTooltipStyle}>
                                     <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/>  
                                   </CTooltip>
                                   <img src={Trubka} style={{cursor: 'pointer',width: '24px',height: '24px',marginLeft: '20px',}}/>
@@ -1369,10 +1374,10 @@ ${loc.url}`
                                     }}
                                   />
                                   <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                  <CTooltip content="Сохранить проект" placement="bottom" >
+                                  <CTooltip content="Сохранить" placement="bottom" style={customTooltipStyle}>
                                     <img src={Disketa} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                   </CTooltip>
-                                  <CTooltip content="Закрыть окно" placement="bottom" >
+                                  <CTooltip content="Закрыть" placement="bottom" style={customTooltipStyle}>
                                     <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                   </CTooltip>
                                   
@@ -1609,6 +1614,7 @@ ${loc.url}`
                                 openOnFocus
                                 id="custom-input-company"
                                 options={companysData}
+                                noOptionsText={'Пусто'}
                                 style={{ width: '100%', padding: '0' }}
                                 onInputChange={onChangeCompany}
                                 //isOptionEqualToValue={(option, value) => option === value}
@@ -1671,6 +1677,7 @@ ${loc.url}`
                                 openOnFocus
                                 id="custom-input-demo"
                                 options={sortedCities}
+                                noOptionsText={'Пусто'}
                                 style={{ width: '100%', padding: '0' }}
                                 //isOptionEqualToValue={(option, value) => option.value === value.value}
                                 onInputChange={onChangeCity}
@@ -1720,6 +1727,7 @@ ${loc.url}`
                                 openOnFocus
                                 id="custom-input-demo"
                                 options={platformsData}
+                                noOptionsText={'Пусто'}
                                 style={{ width: '100%', padding: '0' }}
                                 //onInputChange={(e)=>setLocationProject(e.target.value)}
                                 onInputChange={onChangeLocation}
@@ -1847,6 +1855,7 @@ ${loc.url}`
                                 className="text-field__input"
                                 id="custom-input-manager"
                                 options={managersData}
+                                noOptionsText={'Пусто'}
                                 style={{ width: '100%', padding: '0' }}
                                 //isOptionEqualToValue={(option, value) => option.value === value.value}
                                 //filterOptions={filterOptions}
@@ -1904,6 +1913,7 @@ ${loc.url}`
                                 openOnFocus
                                 id="custom-input-manager2"
                                 options={managersData}
+                                noOptionsText={'Пусто'}
                                 style={{ width: '100%', padding: '0' }}
                                 //isOptionEqualToValue={(option, value) => option.value === value.value}
                                 onInputChange={onChangeManager2}
@@ -2868,7 +2878,7 @@ ${loc.url}`
                                       />
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
-                                      <CTooltip content={item.spec} placement="bottom">
+                                      <CTooltip content={item.spec} placement="bottom" style={customTooltipStyle}>
                                         <div>{item.spec}</div>
                                       </CTooltip>
                                     </CTableDataCell>
@@ -2890,6 +2900,7 @@ ${loc.url}`
                                         <CTooltip
                                           content={item.comment[0]?.content}
                                           placement="bottom"
+                                          style={customTooltipStyle}
                                         >
                                           <div>
                                             {item.comment[0]?.content &&

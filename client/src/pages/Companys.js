@@ -972,6 +972,7 @@ const Companys = () => {
                                               openOnFocus
                                               id="custom-input-demo"
                                               options={sortedCities}
+                                              noOptionsText={'Пусто'}
                                               style={{width: '100%', padding: '0'}}
                                               isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onInputChange={(e)=>setCity(e.target.value)}
@@ -1051,6 +1052,7 @@ const Companys = () => {
                                         openOnFocus
                                         id="custom-input-demo"
                                         options={managersData}
+                                        noOptionsText={'Пусто'}
                                         style={{width: '100%', padding: '0'}}
                                         isOptionEqualToValue={(option, value) => option.value === value.value}
                                         onInputChange={(e)=>onChangeManager(e, index)}
