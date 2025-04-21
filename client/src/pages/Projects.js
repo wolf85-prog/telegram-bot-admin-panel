@@ -205,6 +205,7 @@ const Projects = () => {
   const [doneFinSmeta, setDoneFinSmeta] = useState(false)
 
   const [playPoster, setPlayPoster] = useState(false)
+  const [playPereklichka, setPlayPereklichka] = useState(false)
   const [showLoader, setShowLoader] = useState(false)
   const [sortedCities, setSortedCities] = useState([])
   const [mainspec, setMainspec] = useState([])
@@ -216,7 +217,7 @@ const Projects = () => {
 
   const [showHeader, setShowHeader] = useState(false)
 
-  const [startProject, setStartProject] = useState({name: '', color: ''});
+  const [startProject, setStartProject] = useState({name: 'Проект 120 минут', color: '#1E90FF'});
 
   const customTooltipStyle = {
     '--cui-tooltip-bg': '#2e4053',
@@ -1308,6 +1309,26 @@ ${loc.url}`
     setPlayPoster(false)
   }
 
+
+  const pressPereklichka = async () => {
+    setPlayPereklichka(!playPereklichka)
+    setShowLoader(true)
+
+    //api
+    //const resAddPoster = await getCreatePoster(crmID)
+    //console.log('resAddPoster: ', resAddPoster)
+
+    //const resPosters = await getPosters(crmID)
+    //console.log('pretendents: ', resPosters)
+    //setPosters(resPosters)
+
+    // setTimeout(() => {
+    //   setShowLoader(false)
+    // }, 2000)
+    setShowLoader(false)
+    setPlayPereklichka(false)
+  }
+
   const sortDate = () => {
     setCountPressDate(countPressDate + 1)
 
@@ -2115,9 +2136,13 @@ ${loc.url}`
                               <label className="title-label" style={{ marginTop: '20px' }}>
                                 Постер
                               </label>
+
+                              <label className="title-label" style={{ marginTop: '20px' }}>
+                                Перекличка
+                              </label>
                             </div>
 
-                            <div style={{ marginTop: '136px', marginLeft: '-40px' }}>
+                            <div style={{ marginTop: '92px', marginLeft: '-40px' }}>
                               <div style={{ display: 'flex' }}>
                                 <div className="text-field" style={{ marginBottom: '0px' }}>
                                   <input
@@ -2327,6 +2352,40 @@ ${loc.url}`
                               ) : (
                                 <img
                                   src={btnRec}
+                                  alt=""
+                                  width={30}
+                                  style={{ marginBottom: '7px' }}
+                                />
+                              )}
+                            </div>
+
+                            {/* Перекличка */}
+                            <div
+                              onClick={pressPereklichka}
+                              className="text-field text-field__input"
+                              style={{
+                                textAlign: 'center',
+                                height: '40px',
+                                width: '40px',
+                                marginBottom: '5px',
+                                fontSize: '20px',
+                                color: 'blue',
+                              }}
+                            >
+                              {playPereklichka ? (
+                                showLoader ? (
+                                  <CSpinner style={{ width: '20px', height: '20px' }} />
+                                ) : (
+                                  <img
+                                    src={btnPause}
+                                    alt=""
+                                    width={30}
+                                    style={{ marginBottom: '7px' }}
+                                  />
+                                )
+                              ) : (
+                                <img
+                                  src={btnPlay}
                                   alt=""
                                   width={30}
                                   style={{ marginBottom: '7px' }}
@@ -2848,6 +2907,8 @@ ${loc.url}`
                                         options={[
                                           { label: 'В Проект', name: 'В Проект', color: 'green' },
                                           { label: 'Отказано', name: 'Отказано', color: 'yellow' },
+                                          { label: 'Анбординг', name: 'Анбординг', color: 'pink' },
+                                          { label: 'Запас', name: 'Запас', color: 'blue' },
                                         ]}
                                         selected={pretendents}
                                         setSelected={setPretendents}
@@ -2855,7 +2916,7 @@ ${loc.url}`
                                         setWorker={setPretendents}
                                         element={'status'}
                                         placeholder="—"
-                                        style={{ height: '60px' }}
+                                        style={{ height: '100px' }}
                                       />
                                     </CTableDataCell>
                                     <CTableDataCell
