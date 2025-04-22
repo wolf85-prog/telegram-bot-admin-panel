@@ -72,7 +72,8 @@ import Trubka from './../assets/images/trubka.png'
 import Tg from './../assets/images/tg.png'
 import Star from './../assets/images/star.png'
 import StarActive from './../assets/images/star_activ.svg'
-import Disketa from './../assets/images/disketa.png'
+import Disketa from './../assets/images/copy.png'
+import Disketa2 from './../assets/images/disketa.png'
 import arrowDown from 'src/assets/images/arrowDown.svg'
 import threeDots from 'src/assets/images/three-dots.svg'
 
@@ -217,7 +218,7 @@ const Projects = () => {
 
   const [showHeader, setShowHeader] = useState(false)
 
-  const [startProject, setStartProject] = useState({name: 'Проект 120 минут', color: '#1E90FF'});
+  const [startProject, setStartProject] = useState({name: '120 минут', color: '#1E90FF'});
 
   const customTooltipStyle = {
     '--cui-tooltip-bg': '#2e4053',
@@ -1396,7 +1397,7 @@ ${loc.url}`
                                   />
                                   <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
                                   <CTooltip content="Сохранить" placement="bottom" style={customTooltipStyle}>
-                                    <img src={Disketa} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                    <img src={Disketa2} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                   </CTooltip>
                                   <CTooltip content="Закрыть" placement="bottom" style={customTooltipStyle}>
                                     <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
@@ -1761,11 +1762,9 @@ ${loc.url}`
                                     const loc = platformsAll.find((item) => item.title === newValue)
                                     console.log('loc: ', loc)
                                     if (loc) {
-                                      let text = `${loc.city}
-${loc.address}     
-${loc.track}   
-${loc.url}`
+                                      let text = `${loc.address}`
                                       setAddress(text)
+                                      setTrack(loc.track)
                                       setGeoId(loc.id)
                                     }
                                   }
@@ -1792,7 +1791,23 @@ ${loc.url}`
                                 onMouseOver={() => setShowSaveAddress(true)}
                                 onMouseOut={() => setShowSaveAddress(false)}
                               >
-                                <textarea
+                                <img
+                                  src={Disketa}
+                                  onClick={() => {
+                                    navigator.clipboard.writeText(address)
+                                  }}
+                                  alt=""
+                                  style={{
+                                    visibility: showSaveAddress ? 'visible' : 'hidden',
+                                    position: 'absolute',
+                                    top: '10px',
+                                    left: '288px',
+                                    cursor: 'pointer',
+                                    width: '15px',
+                                    height: '15px',
+                                  }}
+                                />
+                                <input
                                   className="text-field__input"
                                   type="text"
                                   name="address"
@@ -1808,38 +1823,23 @@ ${loc.url}`
                                   }}
                                 />
                               </div>
-                              <img
-                                src={Disketa}
-                                onClick={() => {
-                                  navigator.clipboard.writeText(address)
-                                }}
-                                alt=""
-                                style={{
-                                  visibility: showSaveAddress ? 'visible' : 'hidden',
-                                  position: 'absolute',
-                                  top: '30px',
-                                  left: '288px',
-                                  cursor: 'pointer',
-                                  width: '25px',
-                                  height: '25px',
-                                }}
-                              />
+                              
                             </div>
 
                             <div style={{position:'relative'}}>
                               <label className='title-label'>Как добраться</label>
-                              <div className="text-field" style={{marginBottom: '0px'}} >
+                              <div className="text-field" style={{marginBottom: '0px'}} onMouseOver={()=>setShowSaveTreck(true)} onMouseOut={()=>setShowSaveTreck(false)}>
+                                <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(track)}} alt="" style={{visibility: showSaveTreck ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '10px', cursor: 'pointer', width: '15px', height: '15px'}}/>
                                 <textarea 
                                   className="text-field__input widthBlock5" 
                                   type="text" 
                                   name="treck" 
                                   id="treck"
                                   value={track}
-                                  style={{resize: 'none',  height: '80px', whiteSpace: 'nowrap', borderRadius: '6px', textAlign: 'left', marginBottom: '0px'}}
-                                  onMouseOver={()=>setShowSaveTreck(true)} onMouseOut={()=>setShowSaveTreck(false)}
+                                  style={{resize: 'none',  height: '80px', borderRadius: '6px', textAlign: 'left', marginBottom: '0px'}}
                                 />
                               </div> 
-                              <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(track)}} alt="" style={{visibility: showSaveTreck ? 'visible' : 'hidden', position: 'absolute', top: '30px', right: '-40px', cursor: 'pointer', width: '15px', height: '15px'}}/>
+                              
                             </div>
                           </div>
 
