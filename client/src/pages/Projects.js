@@ -608,15 +608,16 @@ const Projects = () => {
     console.log('geo: ', resProj?.geo)
     console.log('loc: ', loc)
     if (loc) {
-      let text = `${loc.city}
-${loc.address}     
-${loc.track}   
-${loc.url}`
+      let text = `${loc.address}`
       setAddress(text)
+      let text2 = `${loc.track} 
+${loc.url}`
+      setTrack(text2)
       setLocationProject(loc.title)
     } else {
       setLocationProject('')
       setAddress('')
+      setTrack('')
     }
 
     setGeoId(resProj?.geo)
