@@ -56,6 +56,7 @@ import StarActive from "./../assets/images/star_activ.svg";
 import Disketa from "./../assets/images/disketa.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 import threeDots from 'src/assets/images/three-dots.svg'
+import PaperIcon from "src/assets/images/paper-clip.png"
 
 import statusData from 'src/data/statusData';
 import cities from 'src/data/cities';
@@ -132,6 +133,10 @@ const Platforms = () => {
   const [countPress, setCountPress] = useState(0);
   const [countPressAddress, setCountPressAddress] = useState(0);
   const [countPressCity, setCountPressCity] = useState(0);
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedName, setSelectedName] = useState("");
+  const [imageKarta, setImageKarta]= useState("");
 
 
   const customTooltipStyle = {
@@ -571,6 +576,15 @@ const onSortAddress = () => {
     closeProfile()
   }
 
+
+  {/* Добавление файла */}
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+    setSelectedName(file.name);
+    // Additional validation logic
+  };
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -616,10 +630,10 @@ const onSortAddress = () => {
                                       <CTableHeaderCell className="text-center" style={{width: '61px'}}>№</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{width: '270px', cursor: 'pointer'}} onClick={onSortTitle}>Название</CTableHeaderCell> 
                                       <CTableHeaderCell className="text-center" style={{minWidth: '150px', cursor: 'pointer'}} onClick={onSortCity}>Город</CTableHeaderCell>  
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '250px', cursor: 'pointer'}} onClick={onSortAddress}>Адрес</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '265px'}}>Как добраться</CTableHeaderCell> 
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Ссылка</CTableHeaderCell>                      
-                                      <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Карта</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '290px', cursor: 'pointer'}} onClick={onSortAddress}>Адрес</CTableHeaderCell>
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '290px'}}>Как добраться</CTableHeaderCell> 
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '200px'}}>Ссылка</CTableHeaderCell>                      
+                                      <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Карта</CTableHeaderCell>
                                     </CTableRow>
                                   </CTableHead>      
                                   <CTableBody> 
@@ -634,13 +648,13 @@ const onSortAddress = () => {
                                         <CTableDataCell className="text-center">
                                           {item.city} 
                                         </CTableDataCell>   
-                                        <CTableDataCell className="text-center">
-                                          {item.address && item.address.length > 25 ? item.address.substr(0, 25) + '...' : item.address} 
+                                        <CTableDataCell style={{textAlign: 'left'}}>
+                                          {item.address && item.address.length > 30 ? item.address.substr(0, 30) + '...' : item.address} 
                                         </CTableDataCell> 
-                                        <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                          {item.track && item.track.length > 25 ? item.track.substr(0, 25) + '...' : item.track} 
+                                        <CTableDataCell style={{padding: '0px 5px', textAlign: 'left'}}>
+                                          {item.track && item.track.length > 30 ? item.track.substr(0, 30) + '...' : item.track} 
                                         </CTableDataCell>
-                                        <CTableDataCell className="text-center widthSpace">
+                                        <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
                                           {item.url && item.url.length > 20 ? item.url.substr(0, 20) + '...' : item.url} 
                                         </CTableDataCell>   
                                         <CTableDataCell className="text-center">
@@ -828,7 +842,11 @@ const onSortAddress = () => {
 
                                       <label className='title-label'>Карта</label>
                                       <div className="text-field">
-                                        <input disabled className="text-field__input" type="text" />
+                                        <div className='text-field__input' style={{textAlign: 'start'}}>
+                                          <img src={PaperIcon} alt="upload" width={20} height={20} />
+                                          <input className='text-field__input' style={{position: 'absolute', top: '0', opacity: '0', width: '20px'}} type="file"  name="photo"  onChange={handleFileChange} />
+                                          {image && image.length > 20 ? " " + image.substr(0, 20) + '...' : image}
+                                        </div> 
                                       </div> 
                                     </div>
 
