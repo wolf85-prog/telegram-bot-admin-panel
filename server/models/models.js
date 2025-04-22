@@ -200,6 +200,7 @@ const Platform = sequelize.define('platform', {
     url: {type: DataTypes.STRING}, //
     karta: {type: DataTypes.STRING}, //
     comment: {type: DataTypes.TEXT},
+    profile: {type: DataTypes.TEXT},
 })
 
 const MainSpec = sequelize.define('mainspec', {

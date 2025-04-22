@@ -71,6 +71,7 @@ class PlatformsController {
                 track,
                 url,
                 comment,
+                profile,
             } = req.body
 
             const newUser = await Platform.update(
@@ -80,7 +81,8 @@ class PlatformsController {
                     address,
                     track,
                     url,
-                    comment,   
+                    comment,  
+                    profile, 
                 },
                 { where: {id: id} })
             return res.status(200).json(newUser);
@@ -104,7 +106,9 @@ class PlatformsController {
 
             const {title} = req.body
 
-            const newUser = await Platform.create({title})
+            const urlAvatar = 'https://uley.company:2000/uploads/2025-04-04T13:01:59.490Z.png'
+
+            const newUser = await Platform.create({title, profile: urlAvatar})
             return res.status(200).json(newUser);
         } catch (error) {
             return res.status(500).json(error.message);
