@@ -113,6 +113,7 @@ const Platforms = () => {
   const [track, setTrack] = useState('');
   const [url, setUrl] = useState('');
   const [comment, setComment] = useState('');
+  const [profile, setProfile] = useState('');
 
   const [blockProfile, setBlockProfile] = useState(true)
   const [showBlacklist, setShowBlacklist] = useState(false)
@@ -196,6 +197,7 @@ const Platforms = () => {
           track: platform.track,
           url: platform.url,
           comment: platform.comment, 
+          profile: platform.profile, 
           createdAt: platform.createdAt,
         }
         arrWorkers.push(newPlatform)
@@ -252,6 +254,7 @@ const openPlatform = (resPlatform) => {
     setTrack(resPlatform.track)
     setUrl(resPlatform.url)
     setComment(resPlatform.comment)
+    setProfile(resPlatform.profile)
   }
   
   
@@ -277,6 +280,7 @@ const openPlatform = (resPlatform) => {
     track,
     url,
     comment,
+    profile,
   }
   console.log("saveData: ", saveData)
 
@@ -293,6 +297,7 @@ const openPlatform = (resPlatform) => {
       track,
       url,
       comment,
+      profile,
     };
 
     console.log("update user: ", usersCopy[userIndex])
@@ -392,6 +397,7 @@ const clickAdd = async()=> {
       url: '', 
       karta: '', 
       comment: '', 
+      profile: res?.profile, 
   })
 
   const sortedUser = [...platforms].sort((a, b) => {       
@@ -428,7 +434,8 @@ const clickNext = async() => {
         address: platform.address,
         track: platform.track,
         url: platform.url,
-        comment: platform.comment, 
+        comment: platform.comment,
+        profile: platform.profile,
         createdAt: platform.createdAt,
       }
   

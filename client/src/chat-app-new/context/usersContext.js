@@ -923,6 +923,8 @@ useEffect(() => {
 			  track: user.track, //
 			  url: user.url,
 			  karta: user.karta,
+			  comment: user.comment,
+			  profile: user.profile,
 			}
 			arrCompanys.push(newUser)
 	
