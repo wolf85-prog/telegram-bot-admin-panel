@@ -578,6 +578,11 @@ const Projects = () => {
       color: specifikaData.find((stat) => stat.label === specifika)?.color,
     })
 
+    setStartProject({
+      name: resProj.start,
+      color: startData.find((stat) => stat.label === resProj.start)?.color,
+    })
+
     const compTitle = companysAll.find((item) => item.id.toString() === resProj.companyId)
     //console.log("companyName: ", compTitle?.title ? compTitle?.title : '')
     setCompanyName(compTitle?.title ? compTitle?.title : '')
@@ -682,6 +687,7 @@ ${loc.url}`
     const saveData = {
       name: projectName,
       status: statusProject.name,
+      start: startProject.name,
       datestart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}:00.000Z`,
       dateend: endDate
         ? `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}:00.000Z`
@@ -795,6 +801,7 @@ ${loc.url}`
         id: id,
         name: projectName,
         status: statusProject.name,
+        start: startProject.name,
         specifika: specifikaProject.name,
         dateStart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}:00.000Z`,
         dateEnd: endDate
@@ -830,6 +837,7 @@ ${loc.url}`
     setStartTime('')
     setEndTime('')
     setStatusProject({ name: '', color: '' })
+    setStartProject({ name: '120 минут', color: '' })
     setSpecifikaProject({ name: '', color: '' })
     setCompanyName('')
     setManagerName('')
