@@ -57,6 +57,7 @@ import Disketa from "./../assets/images/disketa.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 import threeDots from 'src/assets/images/three-dots.svg'
 import PaperIcon from "src/assets/images/paper-clip.png"
+import ULEY from "src/assets/images/avatars/home_chat.png"
 
 import statusData from 'src/data/statusData';
 import cities from 'src/data/cities';
@@ -147,7 +148,7 @@ const Platforms = () => {
 
     //поиск
   useEffect(() => {
-    const filteredData = platformsAll.filter(user=> (user.title)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+    const filteredData = platformsAll.filter(user=> (user.title + user.city + user.address + user.track)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setPlatforms(text === '' ? platformCount : filteredData); 
   
     //setSpecialistsCount(text === '' ? specialistAll.length : filteredData.length)
@@ -676,15 +677,16 @@ const onSortAddress = () => {
                         :
                         <div style={{position: 'relative', height: '448px', display: 'flex', flexDirection: 'row'}}>
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
-                                  {/* {
+                                 {
                                     profile ? 
                                   <img src={profile} width='250px' height='250px' alt='poster' style={{borderRadius: '7px', marginBottom: '5px'}}/>
-                                  :  */}
-                                  <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
-                                    <rect width="250px" height="250px" fill="#007aff" rx="40"></rect> 
-                                  </svg>
+                                  :  
+                                  // <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
+                                  //   <rect width="250px" height="250px" fill="#007aff" rx="40"></rect> 
+                                  // </svg>
+                                  <img src={ULEY} width='250px' height='250px' alt='poster' style={{borderRadius: '7px', marginBottom: '5px'}}/>
                                   
-                                  {/* } */}
+                                  }
                                   <div className="file-upload" style={{marginBottom: '8px'}}>
                                     <img src={addAvatar} alt="upload" style={{display: showUpload ? 'block' : 'none', position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
                                     <input 
