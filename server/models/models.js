@@ -189,6 +189,10 @@ const Specialist = sequelize.define('specialist', {
     great: {type: DataTypes.BOOLEAN}, //hello
     block18: {type: DataTypes.BOOLEAN}, 
     krest: {type: DataTypes.BOOLEAN}, //bad
+    projectAll: {type: DataTypes.INTEGER},
+    projectMonth: {type: DataTypes.INTEGER},
+    lateness: {type: DataTypes.INTEGER},
+    noExit: {type: DataTypes.INTEGER},
 })
 
 
