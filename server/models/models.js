@@ -54,6 +54,7 @@ const ProjectNew = sequelize.define('projectnew', {
     crmID: {type: DataTypes.STRING},
     name: {type: DataTypes.STRING},  //название проекта
     status: {type: DataTypes.STRING},
+    start: {type: DataTypes.STRING},
     specifika: {type: DataTypes.STRING},
     city: {type: DataTypes.STRING},
     dateStart: {type: DataTypes.STRING},  //дата начала проекта

@@ -110,7 +110,7 @@ class ProjectController {
 
 
     async getProjectNewCreate(req, res) {
-        const {name, status, specifika, city, datestart, dateend, teh, 
+        const {name, status, start, specifika, city, datestart, dateend, teh, 
             managerId, companyId, chatId, spec, geo, comment, equipment, index, number, webforma} = req.body
 
         try {
@@ -129,6 +129,7 @@ class ProjectController {
                 crmID: resid.toString(),
                 name,
                 status,
+                start,
                 specifika,
                 city,
                 dateStart: datestart, 
@@ -154,7 +155,7 @@ class ProjectController {
 
     async getProjectNewUpdate(req, res) {
         const {id} = req.params 
-        const {name, status, datestart, dateend, teh, geo, managerId, managerId2, companyId, 
+        const {name, status, start, datestart, dateend, teh, geo, managerId, managerId2, companyId, 
             comment, specifika, city, teh1, teh2, teh3, teh4, teh5, teh6, teh7, teh8, deleted} = req.body
 
         try {
@@ -169,6 +170,7 @@ class ProjectController {
                 {
                     name: name,
                     status: status,
+                    start,
                     specifika,
                     city,
                     dateStart: datestart, 
