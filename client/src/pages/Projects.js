@@ -207,6 +207,8 @@ const Projects = () => {
 
   const [playPoster, setPlayPoster] = useState(false)
   const [playPereklichka, setPlayPereklichka] = useState(false)
+  const [playSpiski, setPlaySpiski] = useState(false)
+
   const [showLoader, setShowLoader] = useState(false)
   const [sortedCities, setSortedCities] = useState([])
   const [mainspec, setMainspec] = useState([])
@@ -2149,9 +2151,13 @@ ${loc.url}`
                               <label className="title-label" style={{ marginTop: '20px' }}>
                                 Перекличка
                               </label>
+
+                              <label className="title-label" style={{ marginTop: '20px' }}>
+                                Списки
+                              </label>
                             </div>
 
-                            <div style={{ marginTop: '92px', marginLeft: '-40px' }}>
+                            <div style={{ marginTop: '48px', marginLeft: '-40px' }}>
                               <div style={{ display: 'flex' }}>
                                 <div className="text-field" style={{ marginBottom: '0px' }}>
                                   <input
@@ -2401,6 +2407,41 @@ ${loc.url}`
                                 />
                               )}
                             </div>
+
+                            {/* Списки */}
+                            <div
+                              //onClick={pressPereklichka}
+                              className="text-field text-field__input"
+                              style={{
+                                textAlign: 'center',
+                                height: '40px',
+                                width: '40px',
+                                marginBottom: '5px',
+                                fontSize: '20px',
+                                color: 'blue',
+                              }}
+                            >
+                              {playSpiski ? (
+                                showLoader ? (
+                                  <CSpinner style={{ width: '20px', height: '20px' }} />
+                                ) : (
+                                  <img
+                                    src={btnPause}
+                                    alt=""
+                                    width={30}
+                                    style={{ marginBottom: '7px' }}
+                                  />
+                                )
+                              ) : (
+                                <img
+                                  src={btnPlay}
+                                  alt=""
+                                  width={30}
+                                  style={{ marginBottom: '7px' }}
+                                />
+                              )}
+                            </div>
+
                           </div>
                         </div>
                       ) : (
