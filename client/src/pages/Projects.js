@@ -581,8 +581,8 @@ const Projects = () => {
     })
 
     setStartProject({
-      name: resProj.start,
-      color: startData.find((stat) => stat.label === resProj.start)?.color,
+      name: resProj.start ? resProj.start : '120 минут',
+      color: resProj.start ? startData.find((stat) => stat.label === resProj.start)?.color : startData.find((stat) => stat.label === '120 минут')?.color,
     })
 
     const compTitle = companysAll.find((item) => item.id.toString() === resProj.companyId)
