@@ -107,6 +107,18 @@ class ProjectController {
         }
     }
 
+    async getProjectNewCrmId(req, res) {
+        const {id} = req.params
+        try {
+            const project = await ProjectNew.findOne({
+                where: {crmID: id},
+            })
+            return res.status(200).json(project);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
 
 
     async getProjectNewCreate(req, res) {
