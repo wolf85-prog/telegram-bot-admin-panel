@@ -27,6 +27,23 @@ class MainspecController {
                 ],
                 where: {
                     projectId: id,
+                }
+            })
+            return res.status(200).json(workers);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    async getMainSpecProject2(req, res) {
+        const {id} = req.params  
+        try {
+            const workers = await MainSpec.findAll({
+                order: [
+                    ['number', 'ASC'], //DESC, ASC
+                ],
+                where: {
+                    projectId: id,
                     vidWork: {[Op.ne]:'Запасной состав'}
                 }
             })

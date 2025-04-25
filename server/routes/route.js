@@ -51,7 +51,8 @@ const { getCompanys, getCompanyCount, editCompany, getCompanyId, addCompany, del
 
 const { getPlatforms, getPlatformCount, editPlatform, getPlatformId, addPlatform, deletePlatform, getPlatformCountAll } = require('../controllers/platformsController')
 
-const { getMainSpecProject, getMainSpecId, editMainspec, deleteMainspec, addMainspec, getMainspecCountAll, deleteMainspecProject } = require('../controllers/mainspecController')
+const { getMainSpecProject, getMainSpecProject2, getMainSpecId, editMainspec, deleteMainspec, addMainspec,
+     getMainspecCountAll, deleteMainspecProject } = require('../controllers/mainspecController')
 
 const { addCrmID, getCrmID } = require('../controllers/crmIDController')
 
@@ -239,6 +240,7 @@ route.get("/platforms/count/get", getPlatformCountAll);
 
 //----------------- Основной состав (специалисты) ---------------------------------
 route.get('/mainspec/project/get/:id', getMainSpecProject)
+route.get('/mainspec/project/webapp/get/:id', getMainSpecProject2)
 route.get("/mainspec/:id", getMainSpecId);
 //route.get('/mainspec/count/get/:count/:prev', getMainspecCount) //еще
 route.patch('/mainspec/update/:id', editMainspec)
