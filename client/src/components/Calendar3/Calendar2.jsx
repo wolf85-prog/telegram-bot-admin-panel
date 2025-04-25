@@ -986,6 +986,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
         const data = {
             name: projectTitle, 
             status: projectStatus,
+            start: '120 минут',
             specifika: '',
             city: '',
             datestart: day, 
