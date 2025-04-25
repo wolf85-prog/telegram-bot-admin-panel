@@ -26,7 +26,8 @@ class MainspecController {
                     ['number', 'ASC'], //DESC, ASC
                 ],
                 where: {
-                    projectId: id
+                    projectId: id,
+                    vidWork: {[Op.ne]:'Запасной состав'}
                 }
             })
             return res.status(200).json(workers);
