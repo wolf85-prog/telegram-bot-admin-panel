@@ -192,17 +192,27 @@ const ChatInput = ({
 					title=''
 					// 
 				>
-					<Dropdown.Item class="dropdown-menu" eventKey="0">Стандартный ответ</Dropdown.Item>
-					<Dropdown.Item eventKey="1">Паспорт</Dropdown.Item>
-					<Dropdown.Item eventKey="2">Кнопка с номером</Dropdown.Item>
-					<Dropdown.Item eventKey="3">Запас</Dropdown.Item>
-					<Dropdown.Item eventKey="4">Офис U.L.E.Y</Dropdown.Item>
-					<Dropdown.Item eventKey="5">Оплата / смета</Dropdown.Item>
-					<Dropdown.Item eventKey="6">Заявка отклонена</Dropdown.Item>
-					<Dropdown.Item eventKey="7">Заявка одобрена</Dropdown.Item>
-					<Dropdown.Item eventKey="8">Запрос ключевых данных</Dropdown.Item>
+					<Dropdown.Item class="dropdown-menu" >Правила</Dropdown.Item>
+
+					<Dropdown.Item eventKey="1">Условия</Dropdown.Item>
+
+					<Dropdown.Item eventKey="2">Информация</Dropdown.Item>
+
+					<Dropdown.Item eventKey="3">Проект</Dropdown.Item>
+
+					<Dropdown.Item eventKey="4">Ответ</Dropdown.Item>
+
+					<Dropdown.Item eventKey="5">Быстрый ответ</Dropdown.Item>
+
+					<Dropdown.Item eventKey="6">Контакты</Dropdown.Item>
+
+					<Dropdown.Item eventKey="7">Renthub | Плашка</Dropdown.Item>
+
+					<Dropdown.Item eventKey="8">Workhub | Текст</Dropdown.Item>
+
 					<Dropdown.Divider />
 					<Dropdown.Item eventKey="9">Первый проект</Dropdown.Item>
+
 					<Dropdown.Item eventKey="10">Постер</Dropdown.Item>
 				</DropdownButton>
 				{/* <CFormSelect 
