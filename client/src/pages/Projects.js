@@ -223,8 +223,10 @@ const Projects = () => {
   const [startProject, setStartProject] = useState({name: '120 минут', color: '#1E90FF'});
 
   const customTooltipStyle = {
-    '--cui-tooltip-bg': '#2e4053',
-    '--cui-tootip-color': '#fff'
+    '--cui-tooltip-bg': '#2a2f32',
+    '--cui-tootip-color': '#fff',
+    'color': '#fff',
+    'background-color': '#2a2f32'
   }
 
   const table = useReactTable({
@@ -464,6 +466,8 @@ const Projects = () => {
         spec: JSON.parse(fioSpec?.worklist)[0]?.spec,
         comment: JSON.parse(fioSpec?.comment),
         comteg: JSON.parse(fioSpec?.comteg),
+        projectAll: fioSpec.projectAll,
+        projectMonth: fioSpec.projectMonth,
       }
       newArray.push(newObj)
     })
@@ -2993,7 +2997,7 @@ ${loc.url}`
                                         <div>{item.spec}</div>
                                       </CTooltip>
                                     </CTableDataCell>
-                                    <CTableDataCell className="text-center">0 | 0</CTableDataCell>
+                                    <CTableDataCell className="text-center">{item.projectAll ? item.projectAll : '0'} | {item.projectMonth ? item.projectMonth : '0'}</CTableDataCell>
                                     <CTableDataCell className="text-center">
                                       {item.comteg ? (
                                         // <CTooltip

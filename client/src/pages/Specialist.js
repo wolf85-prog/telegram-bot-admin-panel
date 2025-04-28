@@ -111,6 +111,10 @@ const Specialist = () => {
   const [city, setCity] = useState('');
   const [age, setAge] = useState('');
   const [age2, setAge2] = useState(0);
+  const [projectAll, setProjectAll] = useState(0);
+  const [projectMonth, setProjectMonth] = useState(0);
+  const [lateness, setLateness] = useState(0);
+  const [noExit, setNoExit] = useState(0);
   const [speclist, setSpeclist] = useState([]);
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
@@ -416,6 +420,11 @@ const Specialist = () => {
     setCity(worker.city ? worker.city : '')
     setAge(worker.age ? worker.age.split('-')[0] : '')
     setAge2(worker.age ? parseInt(currentYear) - parseInt(worker.age ? worker.age.split('-')[0] : 0) : '')
+
+    setProjectAll(worker.projectAll ? worker.projectAll : '0')
+    setProjectMonth(worker.projectMonth ? worker.ProjectMonth : '0')
+    setLateness(worker.lateness ? worker.lateness : '0')
+    setNoExit(worker.noExit ? worker.noExit : '0')
 
     setSpeclist(worker.speclist ? worker.speclist.split(', ') : [])
 
@@ -1418,23 +1427,23 @@ const Specialist = () => {
                                     </div>
                                     {/* год рождения */}
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="age" id="age" value={age} onChange={(e) => setAge(e.target.value)} style={{width: '80px', marginRight: '8px'}}/>
+                                      <input disabled className="text-field__input" type="text" name="age" id="age" value={age} onChange={(e) => setAge(e.target.value)} style={{width: '80px', marginRight: '8px'}}/>
                                     </div>
                                     {/* проекты за месяц */}
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                      <div className="text-field__input" type="text" name="reyting" id="reyting"  style={{width: '40px', marginRight: '8px', paddingTop: '8px'}}>{projectAll}</div>
                                     </div>
                                     {/* проекты всего */}
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                      <div className="text-field__input" type="text" name="rank" id="rank"  style={{width: '40px', marginRight: '8px', paddingTop: '8px'}}>{projectMonth}</div>
                                     </div>
                                     {/* опоздания */}
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px', color: 'red'}}/>
+                                      <div className="text-field__input" type="text" name="rank" id="rank"  style={{width: '40px', marginRight: '8px', color: 'red', paddingTop: '8px'}}>{lateness}</div>
                                     </div>
                                     {/* невыходы */}
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', color: 'red'}}/>
+                                      <div className="text-field__input" type="text" name="rank" id="rank"  style={{width: '40px', color: 'red', paddingTop: '8px'}}>{noExit}</div>
                                     </div>
                                   </div>
                                   
