@@ -11,6 +11,8 @@ import { SocketProvider } from "./chat-app-new/context/socketContext";
 import { SocketSupportProvider } from "./chat-app-new/context/socketContextSupport";
 import AccountProvider from './chat-app-new/context/AccountProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+//import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+// import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export const Context = createContext(null)
 const queryClient = new QueryClient()
