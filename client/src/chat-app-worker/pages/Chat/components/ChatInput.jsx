@@ -485,7 +485,7 @@ const ChatInput = ({
 						</ul>						
 					</Dropdown.Item>
 
-					<Dropdown.Item class="dropdown-menu" onMouseOver={()=>setShowSave10(true)} onMouseOut={()=>setShowSave10(false)}>
+					{/* <Dropdown.Item class="dropdown-menu" onMouseOver={()=>setShowSave10(true)} onMouseOut={()=>setShowSave10(false)}>
 						Первый проект 
 						<span style={{position: 'absolute', right: '15px'}}>
 							&raquo;
@@ -513,7 +513,7 @@ const ChatInput = ({
 								Submenu item 2
 							</Dropdown.Item>
 						</ul>						
-					</Dropdown.Item>
+					</Dropdown.Item> */}
 
 
 
