@@ -10,7 +10,6 @@ import {
 
 import useAutosizeTextArea from "./useAutosizeTextArea.ts";
 import {Dropdown, DropdownButton, ButtonGroup } from 'react-bootstrap';
-import { MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem, MDBDropdownLink, MDBContainer } from 'mdb-react-ui-kit';
 
 const ChatInput = ({
 	showAttach,
