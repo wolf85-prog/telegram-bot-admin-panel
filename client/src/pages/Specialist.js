@@ -422,7 +422,7 @@ const Specialist = () => {
     setAge2(worker.age ? parseInt(currentYear) - parseInt(worker.age ? worker.age.split('-')[0] : 0) : '')
 
     setProjectAll(worker.projectAll ? worker.projectAll : '0')
-    setProjectMonth(worker.projectMonth ? worker.ProjectMonth : '0')
+    setProjectMonth(worker.projectMonth ? worker.projectMonth : '0')
     setLateness(worker.lateness ? worker.lateness : '0')
     setNoExit(worker.noExit ? worker.noExit : '0')
 
@@ -1431,11 +1431,11 @@ const Specialist = () => {
                                     </div>
                                     {/* проекты за месяц */}
                                     <div className="text-field">
-                                      <div className="text-field__input" type="text" name="reyting" id="reyting"  style={{width: '40px', marginRight: '8px', paddingTop: '8px'}}>{projectAll}</div>
+                                      <div className="text-field__input" type="text" name="reyting" id="reyting"  style={{width: '40px', marginRight: '8px', paddingTop: '8px'}}>{projectMonth}</div>
                                     </div>
                                     {/* проекты всего */}
                                     <div className="text-field">
-                                      <div className="text-field__input" type="text" name="rank" id="rank"  style={{width: '40px', marginRight: '8px', paddingTop: '8px'}}>{projectMonth}</div>
+                                      <div className="text-field__input" type="text" name="rank" id="rank"  style={{width: '40px', marginRight: '8px', paddingTop: '8px'}}>{projectAll}</div>
                                     </div>
                                     {/* опоздания */}
                                     <div className="text-field">

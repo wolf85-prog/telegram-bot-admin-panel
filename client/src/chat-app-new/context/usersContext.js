@@ -714,7 +714,11 @@ useEffect(() => {
           email: worker.email, 
 		  blockW: worker.blockW,
           block18: worker.block18,
-		  krest: worker.krest
+		  krest: worker.krest,
+		  projectAll: worker.projectAll,
+		  projectMonth: worker.projectMonth,
+		  lateness: worker.lateness,
+		  noExit: worker.noExit,
         }
         arrAllWorkers.push(newWorker)
       }) 
