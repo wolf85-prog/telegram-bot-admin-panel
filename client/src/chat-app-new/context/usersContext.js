@@ -412,7 +412,7 @@ useEffect(() => {
 			//0 все специалисты
 			//let all = await getWorkers()
 			let all = await getSpecialist()
-			//console.log("specialist all: ", all)
+			console.log("specialist all: ", all)
 			const arrayWorkerAll = []
 		
 			all.map(async (user) => {
@@ -438,6 +438,8 @@ useEffect(() => {
 				  deleted: user.deleted,
 				  comment: user.comment,
 				  comteg: user.comteg,
+				  projectAll: user.projectAll,
+				  projectMonth: user.projectMonth,
 				}
 		
 				arrayWorkerAll.push(newWorker)

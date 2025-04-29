@@ -364,6 +364,8 @@ const Projects = () => {
                 deleted: user.deleted,
                 comment: user.comment,
                 comteg: user.comteg,
+                projectAll: user.projectAll,
+                projectMonth: user.projectMonth,
               }
           
               arrayWorkerAll.push(newWorker)
