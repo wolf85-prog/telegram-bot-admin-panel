@@ -2999,7 +2999,7 @@ ${loc.url}`
                                         <div>{item.spec}</div>
                                       </CTooltip>
                                     </CTableDataCell>
-                                    <CTableDataCell className="text-center">{item.projectAll ? item.projectAll : '0'} | {item.projectMonth ? item.projectMonth : '0'}</CTableDataCell>
+                                    <CTableDataCell className="text-center">{item.projectMonth ? item.projectMonth : '0'} | {item.projectAll ? item.projectAll : '0'}</CTableDataCell>
                                     <CTableDataCell className="text-center">
                                       {item.comteg ? (
                                         // <CTooltip
