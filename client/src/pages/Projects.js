@@ -1381,6 +1381,61 @@ ${loc.url}`
     }
   }
 
+
+  const CustomToggleBottom = React.forwardRef(({ children, onClick }, ref) => (
+      <button
+        aria-label="Message options"
+        style={{backgroundColor: 'transparent', border: 'none', padding: '0'}}
+        ref={ref}
+        onClick={(e) => {
+          e.preventDefault();
+          onClick(e);
+        }}
+      >
+        {children}
+        <img
+          src={btnPlay}
+          alt=""
+          width={30}
+          style={{ marginBottom: '7px' }}
+        /> 									
+      </button>
+    ));
+  
+  
+    CustomToggleBottom.displayName = "menu";
+
+    const CustomToggleMenu = React.forwardRef(
+      ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+        const [value, setValue] = useState('')
+  
+        return (
+          <div
+            ref={ref}
+            style={{
+              backgroundColor: '#20272b',
+              right: '55px',
+              borderRadius: '5px',
+              padding: '0 0 0 0',
+              fontSize: '14px',
+              top: '-45px',
+              minWidth: '50px',
+            }}
+            className={className}
+            aria-labelledby={labeledBy}
+          >
+            <ul className="list-unstyled" style={{ marginBottom: '0', padding: '5px 10px' }}>
+              {React.Children.toArray(children).filter(
+                (child) => !value || child.props.children?.toLowerCase().startsWith(value),
+              )}
+            </ul>
+          </div>
+        )
+      },
+    )
+  
+    CustomToggleMenu.displayName = 'Menu'
+
   return (
     <div className="dark-theme">
       <AppSidebar />
@@ -2416,15 +2471,28 @@ ${loc.url}`
                             </div>
 
                             {/* Списки */}
-                            <div>
-                                    <DropdownButton
-                                      //onSelect={change}
-                                      as={ButtonGroup}
-                                      id={`dropdown-button-drop-up`}
-                                      drop='up'
-                                      variant="secondary"
-                                      title=''
-                                    >
+                            <div 
+                              className="text-field text-field__input"
+                              style={{
+                                textAlign: 'center',
+                                height: '40px',
+                                width: '40px',
+                                marginBottom: '5px',
+                                fontSize: '20px',
+                                color: 'blue',
+                              }}>
+                                
+                              <Dropdown
+                                //onSelect={change}
+                                as={ButtonGroup}
+                                id={`dropdown-button-drop-up`}
+                                drop='up'
+                                variant="secondary"
+                                title=''
+                              >
+                                <Dropdown.Toggle as={CustomToggleBottom} id="dropdown-custom-components">											
+                                </Dropdown.Toggle>
+                                  <Dropdown.Menu as={CustomToggleMenu}>
                                       <Dropdown.Item class="dropdown-menu">
                                         ФИО 					            						
                                       </Dropdown.Item>
@@ -2440,9 +2508,12 @@ ${loc.url}`
                                       <Dropdown.Item class="dropdown-menu">
                                         Полный фарш 					            						
                                       </Dropdown.Item>
-                                    </DropdownButton>
+                                  </Dropdown.Menu>
+                              </Dropdown>
+
+                              
                             
-                                  </div>
+                            </div>
 
                           </div>
                         </div>
