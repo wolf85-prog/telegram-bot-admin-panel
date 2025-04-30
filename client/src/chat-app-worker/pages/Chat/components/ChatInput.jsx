@@ -187,8 +187,6 @@ const ChatInput = ({
 			</div>
 
 			<div style={{marginLeft: '8px', marginRight: '8px'}}>
-			
-
 				<DropdownButton
 					onSelect={change}
 					as={ButtonGroup}
@@ -333,7 +331,7 @@ const ChatInput = ({
 						<span style={{position: 'absolute', right: '15px'}}>
 							&raquo;
 						</span>
-						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave5 ? 'block' : 'none'}}>
+						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave5 ? 'block' : 'none', top: '0px'}}>
 							<Dropdown.Item>
 							Стандартный ответ
 							</Dropdown.Item>
@@ -366,7 +364,7 @@ const ChatInput = ({
 						<span style={{position: 'absolute', right: '15px'}}>
 							&raquo;
 						</span>
-						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave6 ? 'block' : 'none'}}>
+						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave6 ? 'block' : 'none', top: '0px'}}>
 							<Dropdown.Item>
 								Принято, спасибо
 							</Dropdown.Item>
@@ -394,12 +392,12 @@ const ChatInput = ({
 						</ul>						
 					</Dropdown.Item>
 
-					<Dropdown.Item class="dropdown-menu" onMouseOver={()=>setShowSave7(true)} onMouseOut={()=>setShowSave7(false)}>
+					<Dropdown.Item class="dropdown-menu" onMouseOver={()=>setShowSave7(true)} onMouseOut={()=>setShowSave7(false)} style={{position: 'relative'}}>
 						Контакты 
 						<span style={{position: 'absolute', right: '15px'}}>
 							&raquo;
 						</span>
-						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave7 ? 'block' : 'none'}}>
+						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave7 ? 'block' : 'none', top: '0px'}}>
 							<Dropdown.Item>
 							Контакты
 							</Dropdown.Item>

@@ -45,7 +45,8 @@ import {
 import Autocomplete from '@mui/material/Autocomplete'
 
 import DatePicker from 'react-datepicker'
-import Dropdown from 'react-bootstrap/Dropdown'
+//import Dropdown from 'react-bootstrap/Dropdown'
+import {Dropdown, DropdownButton, ButtonGroup } from 'react-bootstrap';
 
 import { useUsersContext } from '../chat-app-new/context/usersContext'
 
@@ -2415,38 +2416,33 @@ ${loc.url}`
                             </div>
 
                             {/* Списки */}
-                            <div
-                              //onClick={pressPereklichka}
-                              className="text-field text-field__input"
-                              style={{
-                                textAlign: 'center',
-                                height: '40px',
-                                width: '40px',
-                                marginBottom: '5px',
-                                fontSize: '20px',
-                                color: 'blue',
-                              }}
-                            >
-                              {playSpiski ? (
-                                showLoader ? (
-                                  <CSpinner style={{ width: '20px', height: '20px' }} />
-                                ) : (
-                                  <img
-                                    src={btnPause}
-                                    alt=""
-                                    width={30}
-                                    style={{ marginBottom: '7px' }}
-                                  />
-                                )
-                              ) : (
-                                <img
-                                  src={btnPlay}
-                                  alt=""
-                                  width={30}
-                                  style={{ marginBottom: '7px' }}
-                                />
-                              )}
-                            </div>
+                            <div>
+                                    <DropdownButton
+                                      //onSelect={change}
+                                      as={ButtonGroup}
+                                      id={`dropdown-button-drop-up`}
+                                      drop='up'
+                                      variant="secondary"
+                                      title=''
+                                    >
+                                      <Dropdown.Item class="dropdown-menu">
+                                        ФИО 					            						
+                                      </Dropdown.Item>
+                                      <Dropdown.Item class="dropdown-menu">
+                                        Серия / Номер 					            						
+                                      </Dropdown.Item>
+                                      <Dropdown.Item class="dropdown-menu">
+                                        Контакты 					            						
+                                      </Dropdown.Item>
+                                      <Dropdown.Item class="dropdown-menu">
+                                        Дата рождения 					            						
+                                      </Dropdown.Item>
+                                      <Dropdown.Item class="dropdown-menu">
+                                        Полный фарш 					            						
+                                      </Dropdown.Item>
+                                    </DropdownButton>
+                            
+                                  </div>
 
                           </div>
                         </div>
