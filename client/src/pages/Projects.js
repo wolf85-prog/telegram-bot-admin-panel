@@ -107,7 +107,7 @@ import {
 } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 import { sendSpecialistOtkaz } from '../http/specAPI'
-import { getPosters, getPostersAll, deletePoster } from '../http/postersApi'
+import { getPosters, getPostersAll, deletePoster, getWorkersReport, createWorkersReport } from '../http/postersApi'
 
 import {
   addMainspec,
@@ -199,6 +199,7 @@ const Projects = () => {
   const [showModal, setShowModal] = useState(false)
 
   const [posters, setPosters] = useState([])
+  const [workersReport, setWorkersReport] = useState([])
 
   const [playPredSmeta, setPlayPredSmeta] = useState(false)
   const [donePredSmeta, setDonePredSmeta] = useState(false)
@@ -441,8 +442,12 @@ const Projects = () => {
     console.log('pretendents: ', resPretendents)
 
     const resPosters = await getPosters(resProj.crmID)
-    console.log('pretendents: ', resPosters)
+    console.log('posters: ', resPosters)
     setPosters(resPosters)
+
+    const resWorkersReport = await getWorkersReport(resProj.crmID)
+    console.log('posters: ', resWorkersReport)
+    setWorkersReport(resWorkersReport)
 
     let newArray = []
     let colorStatus = ''
@@ -1300,6 +1305,22 @@ ${loc.url}`
         setDoneFinSmeta(true)
       }
     }, 5000)
+  }
+
+  
+  const handleCreateReport = async (e) => {
+    console.log(e, typeof e)
+    if (e === '1'){
+      const reportRequest = {type: 'fio', crmId:crmID }
+      const resTemp = await createWorkersReport(reportRequest)
+    }
+    if (e === '2'){
+      const reportRequest = {type: 'contact', crmId:crmID }
+      const resTemp = await createWorkersReport(reportRequest)
+    }
+    
+    // console.log('posters: ', resPosters)
+    // setPosters(resPosters)
   }
 
   const handleDeletePoster = async (posterId) => {
@@ -2483,7 +2504,7 @@ ${loc.url}`
                               }}>
                                 
                               <Dropdown
-                                //onSelect={change}
+                                onSelect={(e) => handleCreateReport(e)}
                                 as={ButtonGroup}
                                 id={`dropdown-button-drop-up`}
                                 drop='up'
@@ -2493,13 +2514,13 @@ ${loc.url}`
                                 <Dropdown.Toggle as={CustomToggleBottom} id="dropdown-custom-components">											
                                 </Dropdown.Toggle>
                                   <Dropdown.Menu as={CustomToggleMenu}>
-                                      <Dropdown.Item class="dropdown-menu">
+                                      <Dropdown.Item eventKey={1} class="dropdown-menu">
                                         ФИО 					            						
                                       </Dropdown.Item>
                                       <Dropdown.Item class="dropdown-menu">
                                         Серия / Номер 					            						
                                       </Dropdown.Item>
-                                      <Dropdown.Item class="dropdown-menu">
+                                      <Dropdown.Item eventKey={2} class="dropdown-menu">
                                         Контакты 					            						
                                       </Dropdown.Item>
                                       <Dropdown.Item class="dropdown-menu">
@@ -3112,7 +3133,9 @@ ${loc.url}`
                     <CCardHeader onClick={() => setVisibleC(!visibleC)}>Постеры</CCardHeader>
                     <CCollapse visible={visibleC}>
                       <CCardBody style={{ padding: '12px' }}>
-                        <table >
+                        <CRow>
+                          <CCol>
+                            <table >
                           <>
                             <tr>
                               {posters && posters.length > 0
@@ -3181,9 +3204,83 @@ ${loc.url}`
                                   ))
                                 : ''}
                             </tr>
-                            {/* <tr style={{ height: '20px' }}></tr> */}
+                            
                           </>
                         </table>
+                        </CCol>
+                        <CCol><table >
+                          <>
+                            <tr>
+                              {workersReport && workersReport.length > 0
+                                ? workersReport.map((item, index) => (
+                                    <td  key={item.id} style={{width: ''}} className="">
+                                      <img
+                                      style={{cursor: 'pointer'}}
+                                        alt=""
+                                        height={'100'}
+                                        width={'178'}
+                                        onClick={() => setVisiblePoster(item.id)}
+                                        src={`https://testtm.uley.team/files/${item.url}.jpg`}
+                                      />
+                                      {visiblePoster === item.id && (
+                                        <>
+                                          <CModal
+                                            size="lg"
+                                            alignment="center"
+                                            visible={visiblePoster}
+                                            onClose={() => setVisiblePoster(false)}
+                                            aria-labelledby="LiveDemoExampleLabel"
+                                            // style={{position: 'relative'}}
+                                          >
+                                            <div  
+                                              onMouseEnter={() => setShowPosterMenu('block')}
+                                              onMouseLeave={() => setShowPosterMenu('none')}                                              
+                                              >
+
+                                            <img
+                                              alt=""
+                                              src={`https://testtm.uley.team/files/${item.url}.jpg`}
+                                              style={{height: '479px', width: '798px'}}
+                                             
+                                              
+                                            />
+                                            <div  style={{ position: 'absolute', right: '5px', top: '5px',  display: showPosterMenu }}>
+                                              <a
+                                                style={{ verticalAlign: 'middle' }}
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                                href={`https://testtm.uley.team/files/${item.url}.pdf`}
+                                              >
+                                                <CIcon
+                                                  style={{
+                                                    cursor: 'pointer',
+                                                    margin: '0 10px',
+                                                    '--ci-primary-color': '#7a8287',
+                                                  }}
+                                                  size="lg"
+                                                  icon={cilVerticalAlignBottom}
+                                                  // onClick={handlePasteTemplate}
+                                                />
+                                              </a>
+
+                                              <Icon
+                                                id="delete"
+                                                style={{ cursor: 'pointer', color: '#7a8287' }}
+                                                // onClick={() => handleDeletePoster(item.id)}
+                                              />
+                                            </div>
+                                            </div>
+                                          </CModal>
+                                        </>
+                                      )}
+                                    </td>
+                                  ))
+                                : ''}
+                            </tr>
+                            
+                          </>
+                        </table></CCol>
+                        </CRow>
                       </CCardBody>
                     </CCollapse>
                   </CCard>

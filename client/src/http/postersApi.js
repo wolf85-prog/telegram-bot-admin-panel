@@ -40,3 +40,29 @@ export const getPostersAll = async (srmId) =>{
         console.log("error while calling getPosters api", error.message);
     }
 }
+
+
+export const getWorkersReport = async (srmId) =>{
+    try {
+        console.log(srmId)
+       let response = await axiosInstance.get(`api/report/workers/${srmId}`);
+       //console.log(response);
+       console.log(response.data)
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getWorkersReport api", error.message);
+    }
+}
+
+export const createWorkersReport = async (data) =>{
+    try {
+        
+       let response = await axiosInstance.post(`api/report/workers`, data);
+       //console.log(response);
+       console.log(response.data)
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getWorkersReport api", error.message);
+    }
+}
+
