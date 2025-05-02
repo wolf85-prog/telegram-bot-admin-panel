@@ -66,3 +66,14 @@ export const createWorkersReport = async (data) =>{
     }
 }
 
+export const deleteWorkersReport = async (reportId) =>{
+    try {
+        console.log(reportId)
+       let response = await axiosInstance.delete(`api/report/workers/report/${reportId}`);
+       //console.log(response);
+       console.log(response.data)
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getPosters api", error.message);
+    }
+}

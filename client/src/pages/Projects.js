@@ -30,7 +30,7 @@ import {
   CFormCheck,
   CTooltip,
 } from '@coreui/react'
-import { cilPlus, cilCopy, cilVerticalAlignBottom, cilClearAll } from '@coreui/icons'
+import { cilPlus, cilCopy, cilVerticalAlignBottom, cilClearAll, cilSend } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import Icon from './../chat-app-worker/components/Icon'
 import InputMask from 'react-input-mask'
@@ -46,7 +46,7 @@ import Autocomplete from '@mui/material/Autocomplete'
 
 import DatePicker from 'react-datepicker'
 //import Dropdown from 'react-bootstrap/Dropdown'
-import {Dropdown, DropdownButton, ButtonGroup } from 'react-bootstrap';
+import { Dropdown, DropdownButton, ButtonGroup } from 'react-bootstrap'
 
 import { useUsersContext } from '../chat-app-new/context/usersContext'
 
@@ -95,7 +95,7 @@ import vids from 'src/data/vids'
 import comtegs from 'src/data/comtegs'
 import specOnlyData2 from 'src/data/specOnlyData2'
 import { posterList } from 'src/data/data'
-import startData from 'src/data/startData';
+import startData from 'src/data/startData'
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
 import { getSpecialist, getSpecCount, editSpecialist, getSpecialistId } from './../http/specAPI'
 import {
@@ -107,7 +107,14 @@ import {
 } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 import { sendSpecialistOtkaz } from '../http/specAPI'
-import { getPosters, getPostersAll, deletePoster, getWorkersReport, createWorkersReport } from '../http/postersApi'
+import {
+  getPosters,
+  getPostersAll,
+  deletePoster,
+  getWorkersReport,
+  createWorkersReport,
+  deleteWorkersReport,
+} from '../http/postersApi'
 
 import {
   addMainspec,
@@ -117,6 +124,7 @@ import {
   getMainSpecId,
   deleteMainspecProject,
 } from '../http/mainspecAPI'
+import { toast } from "react-toastify";
 
 const Projects = () => {
   //const navigate = useNavigate();
@@ -176,7 +184,7 @@ const Projects = () => {
   const [teh8, setTeh8] = useState('')
   const [tehText, setTehText] = useState('')
   const [address, setAddress] = useState('')
-  const [track, setTrack] = useState('');
+  const [track, setTrack] = useState('')
   const [geoId, setGeoId] = useState('')
   const [comment, setComment] = useState('')
 
@@ -222,13 +230,13 @@ const Projects = () => {
 
   const [showHeader, setShowHeader] = useState(false)
 
-  const [startProject, setStartProject] = useState({name: '120 минут', color: '#1E90FF'});
+  const [startProject, setStartProject] = useState({ name: '120 минут', color: '#1E90FF' })
 
   const customTooltipStyle = {
     '--cui-tooltip-bg': '#2a2f32',
     '--cui-tootip-color': '#fff',
-    'color': '#fff',
-    'background-color': '#2a2f32'
+    color: '#fff',
+    'background-color': '#2a2f32',
   }
 
   const table = useReactTable({
@@ -308,8 +316,6 @@ const Projects = () => {
     setManagersData(sortedManager)
 
     //3
-    
-    
 
     //4
     let arrPlatfroms = []
@@ -339,41 +345,41 @@ const Projects = () => {
 
       //0 все специалисты
       let all = await getSpecialist()
-      console.log("Все специалисты: ", all)
+      console.log('Все специалисты: ', all)
       const arrayWorkerAll = []
-          
+
       all.map(async (user) => {
-          if (user.fio !== 'Неизвестный специалист') {
-              const newWorker = {
-                id: user.id,
-                userfamily: user.fio, //user.userfamily != null ? user.userfamily : '',
-                username: '',//user.username,
-                phone: user.phone,
-                dateborn: user.age,
-                city: user.city, 
-                //newcity: user.newcity, 
-                companys: user.company,
-                //stag: user.stag,
-                worklist:  user.specialization,
-                chatId: user.chatId,
-                createDate: user.createdAt,
-                avatar: user.profile,
-                //from: user.from,
-                promoId: user.promoId,
-                blockW: user.blockW,
-                block18: user.block18,
-                krest: user.krest,
-                deleted: user.deleted,
-                comment: user.comment,
-                comteg: user.comteg,
-                projectAll: user.projectAll,
-                projectMonth: user.projectMonth,
-              }
-          
-              arrayWorkerAll.push(newWorker)
-            }
+        if (user.fio !== 'Неизвестный специалист') {
+          const newWorker = {
+            id: user.id,
+            userfamily: user.fio, //user.userfamily != null ? user.userfamily : '',
+            username: '', //user.username,
+            phone: user.phone,
+            dateborn: user.age,
+            city: user.city,
+            //newcity: user.newcity,
+            companys: user.company,
+            //stag: user.stag,
+            worklist: user.specialization,
+            chatId: user.chatId,
+            createDate: user.createdAt,
+            avatar: user.profile,
+            //from: user.from,
+            promoId: user.promoId,
+            blockW: user.blockW,
+            block18: user.block18,
+            krest: user.krest,
+            deleted: user.deleted,
+            comment: user.comment,
+            comteg: user.comteg,
+            projectAll: user.projectAll,
+            projectMonth: user.projectMonth,
+          }
+
+          arrayWorkerAll.push(newWorker)
+        }
       })
-          
+
       setWorkersAll(arrayWorkerAll)
       let arrWorkers = []
       //console.log("workersAll: ", workersAll)
@@ -553,7 +559,7 @@ const Projects = () => {
         arr.push(newObj)
       })
 
-      console.log("arr: ", arr)
+      console.log('arr: ', arr)
       setMainspec(arr)
     } else {
       //новый состав специалистов
@@ -594,7 +600,9 @@ const Projects = () => {
 
     setStartProject({
       name: resProj.start ? resProj.start : '120 минут',
-      color: resProj.start ? startData.find((stat) => stat.label === resProj.start)?.color : startData.find((stat) => stat.label === '120 минут')?.color,
+      color: resProj.start
+        ? startData.find((stat) => stat.label === resProj.start)?.color
+        : startData.find((stat) => stat.label === '120 минут')?.color,
     })
 
     const compTitle = companysAll.find((item) => item.id.toString() === resProj.companyId)
@@ -673,7 +681,7 @@ ${loc.url}`
     console.log('Основной состав: ', mainspec)
   }, [mainspec])
 
-  useEffect(()=> {
+  useEffect(() => {
     console.log(pretendents)
   }, [pretendents])
 
@@ -1307,20 +1315,31 @@ ${loc.url}`
     }, 5000)
   }
 
-  
   const handleCreateReport = async (e) => {
     console.log(e, typeof e)
-    if (e === '1'){
-      const reportRequest = {type: 'fio', crmId:crmID }
+    if (e === '1') {
+      const reportRequest = { type: 'fio', crmId: crmID }
       const resTemp = await createWorkersReport(reportRequest)
     }
-    if (e === '2'){
-      const reportRequest = {type: 'contact', crmId:crmID }
+    if (e === '2') {
+      const reportRequest = { type: 'contact', crmId: crmID }
       const resTemp = await createWorkersReport(reportRequest)
     }
-    
+
     // console.log('posters: ', resPosters)
     // setPosters(resPosters)
+  }
+
+  const handleSendWorkersReport = async (e) => {
+    console.log(e)
+    toast.info('Отправка отчета еще в разработке')
+  }
+
+  const handleDeleteReport = async (reportId) => {
+    await deleteWorkersReport(reportId)
+    const resWorkersReport = await getWorkersReport(crmID)
+    console.log('resWorkersReport: ', resWorkersReport)
+    setWorkersReport(resWorkersReport)
   }
 
   const handleDeletePoster = async (posterId) => {
@@ -1348,7 +1367,6 @@ ${loc.url}`
     setShowLoader(false)
     setPlayPoster(false)
   }
-
 
   const pressPereklichka = async () => {
     setPlayPereklichka(!playPereklichka)
@@ -1402,60 +1420,53 @@ ${loc.url}`
     }
   }
 
-
   const CustomToggleBottom = React.forwardRef(({ children, onClick }, ref) => (
-      <button
-        aria-label="Message options"
-        style={{backgroundColor: 'transparent', border: 'none', padding: '0'}}
-        ref={ref}
-        onClick={(e) => {
-          e.preventDefault();
-          onClick(e);
-        }}
-      >
-        {children}
-        <img
-          src={btnPlay}
-          alt=""
-          width={30}
-          style={{ marginBottom: '7px' }}
-        /> 									
-      </button>
-    ));
-  
-  
-    CustomToggleBottom.displayName = "menu";
+    <button
+      aria-label="Message options"
+      style={{ backgroundColor: 'transparent', border: 'none', padding: '0' }}
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault()
+        onClick(e)
+      }}
+    >
+      {children}
+      <img src={btnPlay} alt="" width={30} style={{ marginBottom: '7px' }} />
+    </button>
+  ))
 
-    const CustomToggleMenu = React.forwardRef(
-      ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
-        const [value, setValue] = useState('')
-  
-        return (
-          <div
-            ref={ref}
-            style={{
-              backgroundColor: '#20272b',
-              right: '55px',
-              borderRadius: '5px',
-              padding: '0 0 0 0',
-              fontSize: '14px',
-              top: '-45px',
-              minWidth: '50px',
-            }}
-            className={className}
-            aria-labelledby={labeledBy}
-          >
-            <ul className="list-unstyled" style={{ marginBottom: '0', padding: '5px 10px' }}>
-              {React.Children.toArray(children).filter(
-                (child) => !value || child.props.children?.toLowerCase().startsWith(value),
-              )}
-            </ul>
-          </div>
-        )
-      },
-    )
-  
-    CustomToggleMenu.displayName = 'Menu'
+  CustomToggleBottom.displayName = 'menu'
+
+  const CustomToggleMenu = React.forwardRef(
+    ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+      const [value, setValue] = useState('')
+
+      return (
+        <div
+          ref={ref}
+          style={{
+            backgroundColor: '#20272b',
+            right: '55px',
+            borderRadius: '5px',
+            padding: '0 0 0 0',
+            fontSize: '14px',
+            top: '-45px',
+            minWidth: '50px',
+          }}
+          className={className}
+          aria-labelledby={labeledBy}
+        >
+          <ul className="list-unstyled" style={{ marginBottom: '0', padding: '5px 10px' }}>
+            {React.Children.toArray(children).filter(
+              (child) => !value || child.props.children?.toLowerCase().startsWith(value),
+            )}
+          </ul>
+        </div>
+      )
+    },
+  )
+
+  CustomToggleMenu.displayName = 'Menu'
 
   return (
     <div className="dark-theme">
@@ -1468,42 +1479,111 @@ ${loc.url}`
               {/* <h2>Проекты</h2> */}
               <CRow className="mt-2">
                 <CCol xs>
+                  <CCard
+                    className="mb-4"
+                    style={{
+                      display: showHeader ? 'block' : 'none',
+                      position: 'sticky',
+                      top: '113px',
+                      zIndex: '100',
+                    }}
+                  >
+                    <CCardBody style={{ padding: '5px' }}>
+                      <div
+                        style={{
+                          color: '#fff',
+                          zIndex: '100',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          width: '-webkit-fill-available',
+                        }}
+                      >
+                        <div className="text-field" style={{ marginBottom: '0' }}>
+                          <input
+                            disabled={true}
+                            className="text-field__input"
+                            type="text"
+                            name="projectId"
+                            id="projectId"
+                            value={crmID}
+                            style={{ width: '120px', marginRight: '25px' }}
+                          />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <CTooltip content="Удалить" placement="bottom" style={customTooltipStyle}>
+                            <Icon
+                              id="delete"
+                              onClick={() => clickDelete(id)}
+                              style={{ cursor: 'pointer' }}
+                            />
+                          </CTooltip>
+                          <img
+                            src={Trubka}
+                            style={{
+                              cursor: 'pointer',
+                              width: '24px',
+                              height: '24px',
+                              marginLeft: '20px',
+                            }}
+                          />
+                          <img
+                            src={Tg}
+                            style={{
+                              cursor: 'pointer',
+                              width: '24px',
+                              height: '24px',
+                              marginLeft: '20px',
+                            }}
+                          />
+                          <img
+                            src={zamok}
+                            style={{
+                              cursor: 'pointer',
+                              width: '19px',
+                              height: '24px',
+                              marginLeft: '20px',
+                            }}
+                          />
+                          <CTooltip
+                            content="Сохранить"
+                            placement="bottom"
+                            style={customTooltipStyle}
+                          >
+                            <img
+                              src={Disketa2}
+                              onClick={() => saveProject(id)}
+                              style={{
+                                cursor: 'pointer',
+                                width: '24px',
+                                height: '24px',
+                                marginLeft: '20px',
+                              }}
+                            />
+                          </CTooltip>
+                          <CTooltip content="Закрыть" placement="bottom" style={customTooltipStyle}>
+                            <img
+                              src={Close}
+                              onClick={closeProfile}
+                              style={{
+                                cursor: 'pointer',
+                                width: '19px',
+                                height: '24px',
+                                marginLeft: '20px',
+                              }}
+                            />
+                          </CTooltip>
+                        </div>
+                      </div>
+                    </CCardBody>
+                  </CCard>
 
-                  <CCard className="mb-4" style={{display: showHeader ? 'block' : 'none', position: 'sticky', top: '113px', zIndex:'100'}}>
-                    <CCardBody style={{padding: '5px'}}>                                                  
-                              <div style={{color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
-                                <div className="text-field" style={{marginBottom: '0'}}>
-                                  <input disabled={true} className="text-field__input" type="text" name="projectId" id="projectId" value={crmID} style={{width: '120px', marginRight: '25px'}}/>
-                                </div>
-                                <div style={{display: 'flex', alignItems: 'center'}}>
-                                  <CTooltip content="Удалить" placement="bottom" style={customTooltipStyle}>
-                                    <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/>  
-                                  </CTooltip>
-                                  <img src={Trubka} style={{cursor: 'pointer',width: '24px',height: '24px',marginLeft: '20px',}}/>
-                                  <img
-                                    src={Tg}
-                                    style={{
-                                      cursor: 'pointer',
-                                      width: '24px',
-                                      height: '24px',
-                                      marginLeft: '20px',
-                                    }}
-                                  />
-                                  <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                  <CTooltip content="Сохранить" placement="bottom" style={customTooltipStyle}>
-                                    <img src={Disketa2} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                  </CTooltip>
-                                  <CTooltip content="Закрыть" placement="bottom" style={customTooltipStyle}>
-                                    <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
-                                  </CTooltip>
-                                  
-                                </div>                 
-                              </div>
-                    </CCardBody> 
-                  </CCard> 
-                  
                   <CCard className="mb-4">
-                    <CCardBody style={{ padding: '12px', height: showHeader ? `${height}px` : `${height+25}px` }}>
+                    <CCardBody
+                      style={{
+                        padding: '12px',
+                        height: showHeader ? `${height}px` : `${height + 25}px`,
+                      }}
+                    >
                       {!showProject ? (
                         <Filters
                           setShowCalendar={setShowCalendar}
@@ -1543,7 +1623,6 @@ ${loc.url}`
                             //marginTop: '35px',
                           }}
                         >
-
                           {/* 1 */}
                           <div
                             style={{
@@ -1636,14 +1715,14 @@ ${loc.url}`
                               {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '40px'}}/> */}
                             </div>
 
-                            <label className='title-label'>Старт</label>
+                            <label className="title-label">Старт</label>
                             <div className="text-field">
                               <MyDropdown4
-                                style={{backgroundColor: '#131c21'}}
+                                style={{ backgroundColor: '#131c21' }}
                                 options={startData}
                                 selected={startProject}
                                 setSelected={setStartProject}
-                                placeholder='Выбери старт'
+                                placeholder="Выбери старт"
                               />
                             </div>
 
@@ -1917,23 +1996,47 @@ ${loc.url}`
                                   }}
                                 />
                               </div>
-                              
                             </div>
 
-                            <div style={{position:'relative'}}>
-                              <label className='title-label'>Как добраться</label>
-                              <div className="text-field" style={{marginBottom: '0px'}} onMouseOver={()=>setShowSaveTreck(true)} onMouseOut={()=>setShowSaveTreck(false)}>
-                                <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(track)}} alt="" style={{visibility: showSaveTreck ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '10px', cursor: 'pointer', width: '15px', height: '15px'}}/>
-                                <textarea 
-                                  className="text-field__input widthBlock5" 
-                                  type="text" 
-                                  name="treck" 
+                            <div style={{ position: 'relative' }}>
+                              <label className="title-label">Как добраться</label>
+                              <div
+                                className="text-field"
+                                style={{ marginBottom: '0px' }}
+                                onMouseOver={() => setShowSaveTreck(true)}
+                                onMouseOut={() => setShowSaveTreck(false)}
+                              >
+                                <img
+                                  src={Disketa}
+                                  onClick={() => {
+                                    navigator.clipboard.writeText(track)
+                                  }}
+                                  alt=""
+                                  style={{
+                                    visibility: showSaveTreck ? 'visible' : 'hidden',
+                                    position: 'absolute',
+                                    top: '10px',
+                                    right: '10px',
+                                    cursor: 'pointer',
+                                    width: '15px',
+                                    height: '15px',
+                                  }}
+                                />
+                                <textarea
+                                  className="text-field__input widthBlock5"
+                                  type="text"
+                                  name="treck"
                                   id="treck"
                                   value={track}
-                                  style={{resize: 'none',  height: '80px', borderRadius: '6px', textAlign: 'left', marginBottom: '0px'}}
+                                  style={{
+                                    resize: 'none',
+                                    height: '80px',
+                                    borderRadius: '6px',
+                                    textAlign: 'left',
+                                    marginBottom: '0px',
+                                  }}
                                 />
-                              </div> 
-                              
+                              </div>
                             </div>
                           </div>
 
@@ -2492,7 +2595,7 @@ ${loc.url}`
                             </div>
 
                             {/* Списки */}
-                            <div 
+                            <div
                               className="text-field text-field__input"
                               style={{
                                 textAlign: 'center',
@@ -2501,41 +2604,33 @@ ${loc.url}`
                                 marginBottom: '5px',
                                 fontSize: '20px',
                                 color: 'blue',
-                              }}>
-                                
+                              }}
+                            >
                               <Dropdown
                                 onSelect={(e) => handleCreateReport(e)}
                                 as={ButtonGroup}
                                 id={`dropdown-button-drop-up`}
-                                drop='up'
+                                drop="up"
                                 variant="secondary"
-                                title=''
+                                title=""
                               >
-                                <Dropdown.Toggle as={CustomToggleBottom} id="dropdown-custom-components">											
-                                </Dropdown.Toggle>
-                                  <Dropdown.Menu as={CustomToggleMenu}>
-                                      <Dropdown.Item eventKey={1} class="dropdown-menu">
-                                        ФИО 					            						
-                                      </Dropdown.Item>
-                                      <Dropdown.Item class="dropdown-menu">
-                                        Серия / Номер 					            						
-                                      </Dropdown.Item>
-                                      <Dropdown.Item eventKey={2} class="dropdown-menu">
-                                        Контакты 					            						
-                                      </Dropdown.Item>
-                                      <Dropdown.Item class="dropdown-menu">
-                                        Дата рождения 					            						
-                                      </Dropdown.Item>
-                                      <Dropdown.Item class="dropdown-menu">
-                                        Полный фарш 					            						
-                                      </Dropdown.Item>
-                                  </Dropdown.Menu>
+                                <Dropdown.Toggle
+                                  as={CustomToggleBottom}
+                                  id="dropdown-custom-components"
+                                ></Dropdown.Toggle>
+                                <Dropdown.Menu as={CustomToggleMenu}>
+                                  <Dropdown.Item eventKey={1} class="dropdown-menu">
+                                    ФИО
+                                  </Dropdown.Item>
+                                  <Dropdown.Item class="dropdown-menu">Серия / Номер</Dropdown.Item>
+                                  <Dropdown.Item eventKey={2} class="dropdown-menu">
+                                    Контакты
+                                  </Dropdown.Item>
+                                  <Dropdown.Item class="dropdown-menu">Дата рождения</Dropdown.Item>
+                                  <Dropdown.Item class="dropdown-menu">Полный фарш</Dropdown.Item>
+                                </Dropdown.Menu>
                               </Dropdown>
-
-                              
-                            
                             </div>
-
                           </div>
                         </div>
                       ) : (
@@ -3065,10 +3160,18 @@ ${loc.url}`
                                     </CTableDataCell>
                                     <CTableDataCell
                                       className="text-left"
-                                      style={{ cursor: 'pointer', }}
+                                      style={{ cursor: 'pointer' }}
                                     >
-                                      <Link to={'/specialist'} state={{ workerId: item.workerId }} style={{color: '#f3f3f3' }}>
-                                        {item.fio ? (item.fio.length > 23 ? item.fio.substr(0, 23) + '...' : item.fio) : ''}
+                                      <Link
+                                        to={'/specialist'}
+                                        state={{ workerId: item.workerId }}
+                                        style={{ color: '#f3f3f3' }}
+                                      >
+                                        {item.fio
+                                          ? item.fio.length > 23
+                                            ? item.fio.substr(0, 23) + '...'
+                                            : item.fio
+                                          : ''}
                                       </Link>
                                     </CTableDataCell>
                                     <CTableDataCell
@@ -3083,11 +3186,18 @@ ${loc.url}`
                                       />
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
-                                      <CTooltip content={item.spec} placement="bottom" style={customTooltipStyle}>
+                                      <CTooltip
+                                        content={item.spec}
+                                        placement="bottom"
+                                        style={customTooltipStyle}
+                                      >
                                         <div>{item.spec}</div>
                                       </CTooltip>
                                     </CTableDataCell>
-                                    <CTableDataCell className="text-center">{item.projectMonth ? item.projectMonth : '0'} | {item.projectAll ? item.projectAll : '0'}</CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                      {item.projectMonth ? item.projectMonth : '0'} |{' '}
+                                      {item.projectAll ? item.projectAll : '0'}
+                                    </CTableDataCell>
                                     <CTableDataCell className="text-center">
                                       {item.comteg ? (
                                         // <CTooltip
@@ -3133,45 +3243,46 @@ ${loc.url}`
                     <CCardHeader onClick={() => setVisibleC(!visibleC)}>Постеры</CCardHeader>
                     <CCollapse visible={visibleC}>
                       <CCardBody style={{ padding: '12px' }}>
-                        <CRow>
-                          <CCol>
-                            <table >
-                          <>
-                            <tr>
-                              {posters && posters.length > 0
-                                ? posters.map((item, index) => (
-                                    <td  key={item.id} style={{width: ''}} className="">
-                                      <img
-                                      style={{cursor: 'pointer'}}
-                                        alt=""
-                                        height={'100'}
-                                        width={'178'}
-                                        onClick={() => setVisiblePoster(item.id)}
-                                        src={`https://storage.yandexcloud.net/uley/${item.url}`}
-                                      />
-                                      {visiblePoster === item.id && (
-                                        <>
-                                          <CModal
-                                            size="lg"
-                                            alignment="center"
-                                            visible={visiblePoster}
-                                            onClose={() => setVisiblePoster(false)}
-                                            aria-labelledby="LiveDemoExampleLabel"
-                                            // style={{position: 'relative'}}
+                        <CRow className="justify-content-between">
+                          <CCol md={6} xl={6} className="align-self-center">
+                            {posters && posters.length > 0
+                              ? posters.map((item, index) => (
+                                  <>
+                                    <img
+                                      style={{ cursor: 'pointer', margin: '5px' }}
+                                      alt=""
+                                      height={'100'}
+                                      width={'178'}
+                                      onClick={() => setVisiblePoster(item.id)}
+                                      src={`https://storage.yandexcloud.net/uley/${item.url}`}
+                                    />
+                                    {visiblePoster === item.id && (
+                                      <>
+                                        <CModal
+                                          size="lg"
+                                          alignment="center"
+                                          visible={visiblePoster}
+                                          onClose={() => setVisiblePoster(false)}
+                                          aria-labelledby="LiveDemoExampleLabel"
+                                          // style={{position: 'relative'}}
+                                        >
+                                          <div
+                                            onMouseEnter={() => setShowPosterMenu('block')}
+                                            onMouseLeave={() => setShowPosterMenu('none')}
                                           >
-                                            <div  
-                                              onMouseEnter={() => setShowPosterMenu('block')}
-                                              onMouseLeave={() => setShowPosterMenu('none')}                                              
-                                              >
-
                                             <img
                                               alt=""
                                               src={`https://storage.yandexcloud.net/uley/${item.url}`}
-                                              style={{height: '479px', width: '798px'}}
-                                             
-                                              
+                                              style={{ height: '479px', width: '798px' }}
                                             />
-                                            <div  style={{ position: 'absolute', right: '5px', top: '5px',  display: showPosterMenu }}>
+                                            <div
+                                              style={{
+                                                position: 'absolute',
+                                                right: '5px',
+                                                top: '5px',
+                                                display: showPosterMenu,
+                                              }}
+                                            >
                                               <a
                                                 style={{ verticalAlign: 'middle' }}
                                                 rel="noopener noreferrer"
@@ -3192,33 +3303,36 @@ ${loc.url}`
 
                                               <Icon
                                                 id="delete"
-                                                style={{ cursor: 'pointer', color: '#7a8287' }}
+                                                style={{
+                                                  cursor: 'pointer',
+                                                  color: '#7a8287',
+                                                }}
                                                 onClick={() => handleDeletePoster(item.id)}
                                               />
                                             </div>
-                                            </div>
-                                          </CModal>
-                                        </>
-                                      )}
-                                    </td>
-                                  ))
-                                : ''}
-                            </tr>
-                            
-                          </>
-                        </table>
-                        </CCol>
-                        <CCol><table >
-                          <>
-                            <tr>
+                                          </div>
+                                        </CModal>
+                                      </>
+                                    )}
+                                  </>
+                                ))
+                              : ''}
+                          </CCol>
+                          <CCol
+                            style={{ textAlign: 'right' }}
+                            md={6}
+                            xl={6}
+                            className="align-self-center"
+                          >
+                            <>
                               {workersReport && workersReport.length > 0
                                 ? workersReport.map((item, index) => (
-                                    <td  key={item.id} style={{width: ''}} className="">
+                                    <>
                                       <img
-                                      style={{cursor: 'pointer'}}
+                                        style={{ cursor: 'pointer', margin: '0 10px' }}
                                         alt=""
-                                        height={'100'}
-                                        width={'178'}
+                                        // height={'100'}
+                                        width={'138'}
                                         onClick={() => setVisiblePoster(item.id)}
                                         src={`https://testtm.uley.team/files/${item.url}.jpg`}
                                       />
@@ -3232,24 +3346,22 @@ ${loc.url}`
                                             aria-labelledby="LiveDemoExampleLabel"
                                             // style={{position: 'relative'}}
                                           >
-                                            <div  
+                                            <div
                                               onMouseEnter={() => setShowPosterMenu('block')}
-                                              onMouseLeave={() => setShowPosterMenu('none')}                                              
-                                              >
-
-                                            <img
-                                              alt=""
-                                              src={`https://testtm.uley.team/files/${item.url}.jpg`}
-                                              style={{height: '479px', width: '798px'}}
-                                             
-                                              
-                                            />
-                                            <div  style={{ position: 'absolute', right: '5px', top: '5px',  display: showPosterMenu }}>
-                                              <a
-                                                style={{ verticalAlign: 'middle' }}
-                                                rel="noopener noreferrer"
-                                                target="_blank"
-                                                href={`https://testtm.uley.team/files/${item.url}.pdf`}
+                                              onMouseLeave={() => setShowPosterMenu('none')}
+                                            >
+                                              <img
+                                                alt=""
+                                                src={`https://testtm.uley.team/files/${item.url}.jpg`}
+                                                style={{ width: '798px' }}
+                                              />
+                                              <div
+                                                style={{
+                                                  position: 'absolute',
+                                                  right: '5px',
+                                                  top: '5px',
+                                                  display: showPosterMenu,
+                                                }}
                                               >
                                                 <CIcon
                                                   style={{
@@ -3258,28 +3370,46 @@ ${loc.url}`
                                                     '--ci-primary-color': '#7a8287',
                                                   }}
                                                   size="lg"
-                                                  icon={cilVerticalAlignBottom}
-                                                  // onClick={handlePasteTemplate}
+                                                  icon={cilSend}
+                                                  onClick={()=> handleSendWorkersReport(item)}
                                                 />
-                                              </a>
 
-                                              <Icon
-                                                id="delete"
-                                                style={{ cursor: 'pointer', color: '#7a8287' }}
-                                                // onClick={() => handleDeletePoster(item.id)}
-                                              />
-                                            </div>
+                                                <a
+                                                  style={{ verticalAlign: 'middle' }}
+                                                  rel="noopener noreferrer"
+                                                  target="_blank"
+                                                  href={`https://testtm.uley.team/files/${item.url}.pdf`}
+                                                >
+                                                  <CIcon
+                                                    style={{
+                                                      cursor: 'pointer',
+                                                      margin: '0 10px',
+                                                      '--ci-primary-color': '#7a8287',
+                                                    }}
+                                                    size="lg"
+                                                    icon={cilVerticalAlignBottom}
+                                                    // onClick={handlePasteTemplate}
+                                                  />
+                                                </a>
+
+                                                <Icon
+                                                  id="delete"
+                                                  style={{
+                                                    cursor: 'pointer',
+                                                    color: '#7a8287',
+                                                  }}
+                                                  onClick={() => handleDeleteReport(item.id)}
+                                                />
+                                              </div>
                                             </div>
                                           </CModal>
                                         </>
                                       )}
-                                    </td>
+                                    </>
                                   ))
                                 : ''}
-                            </tr>
-                            
-                          </>
-                        </table></CCol>
+                            </>
+                          </CCol>
                         </CRow>
                       </CCardBody>
                     </CCollapse>
