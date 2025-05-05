@@ -1316,18 +1316,14 @@ ${loc.url}`
   }
 
   const handleCreateReport = async (e) => {
-    console.log(e, typeof e)
-    if (e === '1') {
-      const reportRequest = { type: 'fio', crmId: crmID }
-      const resTemp = await createWorkersReport(reportRequest)
-    }
-    if (e === '2') {
-      const reportRequest = { type: 'contact', crmId: crmID }
-      const resTemp = await createWorkersReport(reportRequest)
-    }
-
-    // console.log('posters: ', resPosters)
-    // setPosters(resPosters)
+    console.log(e, typeof e)   
+    const reportRequest = { type: e, crmId: crmID }
+    const resTemp = await createWorkersReport(reportRequest)
+    console.log("Ответ 2", resTemp)
+    
+    const resWorkersReport = await getWorkersReport(crmID)
+    console.log('resWorkersReport: ', resWorkersReport)
+    setWorkersReport(resWorkersReport)
   }
 
   const handleSendWorkersReport = async (e) => {
@@ -2622,12 +2618,12 @@ ${loc.url}`
                                   <Dropdown.Item eventKey={1} class="dropdown-menu">
                                     ФИО
                                   </Dropdown.Item>
-                                  <Dropdown.Item class="dropdown-menu">Серия / Номер</Dropdown.Item>
-                                  <Dropdown.Item eventKey={2} class="dropdown-menu">
+                                  <Dropdown.Item eventKey={2} class="dropdown-menu">Серия / Номер</Dropdown.Item>
+                                  <Dropdown.Item eventKey={3} class="dropdown-menu">
                                     Контакты
                                   </Dropdown.Item>
-                                  <Dropdown.Item class="dropdown-menu">Дата рождения</Dropdown.Item>
-                                  <Dropdown.Item class="dropdown-menu">Полный фарш</Dropdown.Item>
+                                  <Dropdown.Item eventKey={4} class="dropdown-menu">Дата рождения</Dropdown.Item>
+                                  <Dropdown.Item eventKey={5} class="dropdown-menu">Полный фарш</Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                             </div>
@@ -3334,7 +3330,7 @@ ${loc.url}`
                                         // height={'100'}
                                         width={'138'}
                                         onClick={() => setVisiblePoster(item.id)}
-                                        src={`https://testtm.uley.team/files/${item.url}.jpg`}
+                                        src={`https://testtm.uley.team/files/${item.url}_crop.jpg`}
                                       />
                                       {visiblePoster === item.id && (
                                         <>

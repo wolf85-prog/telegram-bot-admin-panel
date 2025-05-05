@@ -256,7 +256,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             const d = index - (startDay - 2);
                 
             projects.map((item, ind)=> {
-                console.log("item: ", item)
+                // console.log("item: ", item)
                 
                 if (item?.dateEnd) {
                     if (new Date(item?.dateStart.split('T')[0]).toISOString() === new Date(item?.dateEnd?.split('T')[0]).toISOString() || 

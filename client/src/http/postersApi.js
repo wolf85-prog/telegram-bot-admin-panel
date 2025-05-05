@@ -1,5 +1,6 @@
 import axios from "axios";
 import {$host_smeta} from "./index";
+import { toast } from "react-toastify";
 
 const axiosInstance = axios.create({
     baseURL: process.env.REACT_APP_WEBAPP_SMETA
@@ -59,10 +60,11 @@ export const createWorkersReport = async (data) =>{
         
        let response = await axiosInstance.post(`api/report/workers`, data);
        //console.log(response);
-       console.log(response.data)
+       console.log("Ответ 1", response.data)
        return response.data;
     } catch (error) {
-        console.log("error while calling getWorkersReport api", error.message);
+        console.log("error while calling getWorkersReport api", error.response.data.detail);
+        toast.error(error.response.data.detail)
     }
 }
 
