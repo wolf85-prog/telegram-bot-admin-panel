@@ -200,6 +200,9 @@ const Specialist = sequelize.define('specialist', {
     pascode: {type: DataTypes.STRING},
     pasbornplace: {type: DataTypes.STRING},
     pasaddress: {type: DataTypes.STRING},
+    surname: {type: DataTypes.STRING},
+    name: {type: DataTypes.STRING},
+    second: {type: DataTypes.STRING},
 })
 
 
