@@ -193,6 +193,13 @@ const Specialist = sequelize.define('specialist', {
     projectMonth: {type: DataTypes.INTEGER},
     lateness: {type: DataTypes.INTEGER},
     noExit: {type: DataTypes.INTEGER},
+    passeria: {type: DataTypes.STRING},
+    pasnumber: {type: DataTypes.STRING},
+    paskemvidan: {type: DataTypes.STRING},
+    pasdatevidan: {type: DataTypes.STRING},
+    pascode: {type: DataTypes.STRING},
+    pasbornplace: {type: DataTypes.STRING},
+    pasaddress: {type: DataTypes.STRING},
 })
 
 
