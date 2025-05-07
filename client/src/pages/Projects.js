@@ -3235,20 +3235,20 @@ ${loc.url}`
                     </CCollapse>
                   </CCard>
 
-                  <CCard className="mb-4" style={{ display: showPosterTable ? 'block' : 'none' }}>
+                  <CCard className="mb-4" style={{ display: showPosterTable ? 'block' : 'none', margin: 0, padding: 0 }}>
                     <CCardHeader onClick={() => setVisibleC(!visibleC)}>Постеры</CCardHeader>
                     <CCollapse visible={visibleC}>
-                      <CCardBody style={{ padding: '12px' }}>
+                      <CCardBody style={{ padding: 0 }}>
                         <CRow className="justify-content-between">
                           <CCol md={6} xl={6} className="align-self-center">
                             {posters && posters.length > 0
                               ? posters.map((item, index) => (
                                   <>
                                     <img
-                                      style={{ cursor: 'pointer', margin: '5px' }}
+                                      style={{ cursor: 'pointer', margin: '5px 0 5px 5px'}}
                                       alt=""
-                                      height={'100'}
-                                      width={'178'}
+                                      height={'107'}
+                                      width={'190'}
                                       onClick={() => setVisiblePoster(item.id)}
                                       src={`https://storage.yandexcloud.net/uley/${item.url}`}
                                     />
@@ -3325,10 +3325,10 @@ ${loc.url}`
                                 ? workersReport.map((item, index) => (
                                     <>
                                       <img
-                                        style={{ cursor: 'pointer', margin: '0 10px' }}
+                                        style={{ cursor: 'pointer', margin: '5px 5px 5px 0' }}
                                         alt=""
-                                        // height={'100'}
-                                        width={'138'}
+                                        height={'107'}
+                                        width={'190'}
                                         onClick={() => setVisiblePoster(item.id)}
                                         src={`https://testtm.uley.team/files/${item.url}_crop.jpg`}
                                       />
