@@ -68,6 +68,7 @@ const specData = [
             {id: 7, name: 'Актер', color: '#fff'},
             {id: 8, name: 'Гример', color: '#fff'},
             {id: 9, name: 'Костюмер', color: '#fff'},
+            {id: 10, name: 'Художник-постановщик', color: '#fff'},
         ]
     },
     {
