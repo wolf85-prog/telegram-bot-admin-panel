@@ -301,7 +301,7 @@ const ChatInput = ({
 							<Dropdown.Item>
 								Аккредитация на проект
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item eventKey="1">
 								Анкета для аккредитации
 							</Dropdown.Item>
 							<Dropdown.Item>
