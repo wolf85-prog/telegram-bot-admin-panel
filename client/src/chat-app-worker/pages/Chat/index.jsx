@@ -95,7 +95,7 @@ const Chat = () => {
 	}, [userWorkers]);
 
 	useEffect(() => {
-		console.log(selectedElement)
+		console.log("selectedElement: ", selectedElement)
 		setSelectedElement(selectedElement);
 		setScenari(selectedElement)
 

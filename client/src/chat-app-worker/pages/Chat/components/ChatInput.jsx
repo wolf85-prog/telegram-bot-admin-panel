@@ -94,7 +94,7 @@ const ChatInput = ({
 	CustomMenu.displayName = CustomMenu
 
 	const change = async (eventkey) => {
-		//alert(`you chosen: ${eventkey}`)
+		alert(`you chosen: ${eventkey}`)
 		setSelectedElement(eventkey)
 	}
 
@@ -286,7 +286,7 @@ const ChatInput = ({
 						</ul>						
 					</Dropdown.Item>
 
-					<Dropdown.Item class="dropdown-menu" onMouseOver={()=>setShowSave4(true)} onMouseOut={()=>setShowSave4(false)}>
+					<Dropdown.Item eventKey="1" class="dropdown-menu" onMouseOver={()=>setShowSave4(true)} onMouseOut={()=>setShowSave4(false)}>
 						Проект 
 						<span style={{position: 'absolute', right: '15px'}}>
 							&raquo;
