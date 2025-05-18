@@ -200,6 +200,10 @@ const Projects = () => {
 
   const [visiblePoster, setVisiblePoster] = useState('')
 
+  const [visiblePereklichka, setVisiblePereklichka] = useState(false)
+
+  
+
   const [showMainTable, setShowMainTable] = useState(false)
   const [showPretendentTable, setShowPretendentTable] = useState(false)
   const [showPosterTable, setShowPosterTable] = useState(false)
@@ -239,39 +243,39 @@ const Projects = () => {
     'background-color': '#2a2f32',
   }
 
-  const table = useReactTable({
-    defaultColumn: {
-      size: 200, //starting column size
-      minSize: 40, //enforced during column resizing
-      maxSize: 500, //enforced during column resizing
-    },
-    data,
-    columns,
-    state: {
-      columnFilters,
-    },
-    meta: {
-      updateData: (rowIndex, columnId, value) =>
-        setData((prev) =>
-          prev.map((row, index) =>
-            index === rowIndex ? { ...prev[rowIndex], [columnId]: value } : row,
-          ),
-        ),
-    },
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+  // const table = useReactTable({
+  //   defaultColumn: {
+  //     size: 200, //starting column size
+  //     minSize: 40, //enforced during column resizing
+  //     maxSize: 500, //enforced during column resizing
+  //   },
+  //   data,
+  //   columns,
+  //   state: {
+  //     columnFilters,
+  //   },
+  //   meta: {
+  //     updateData: (rowIndex, columnId, value) =>
+  //       setData((prev) =>
+  //         prev.map((row, index) =>
+  //           index === rowIndex ? { ...prev[rowIndex], [columnId]: value } : row,
+  //         ),
+  //       ),
+  //   },
+  //   getCoreRowModel: getCoreRowModel(),
+  //   getSortedRowModel: getSortedRowModel(),
 
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    // filterFns: {
-    //   fuzzy: fuzzyFilter, //define as a filter function that can be used in column definitions
-    // },
+  //   getFilteredRowModel: getFilteredRowModel(),
+  //   onColumnFiltersChange: setColumnFilters,
+  //   // filterFns: {
+  //   //   fuzzy: fuzzyFilter, //define as a filter function that can be used in column definitions
+  //   // },
 
-    getPaginationRowModel: getPaginationRowModel(),
+  //   getPaginationRowModel: getPaginationRowModel(),
 
-    enableRowSelection: true,
-    getRowCanExpand: () => true,
-  })
+  //   enableRowSelection: true,
+  //   getRowCanExpand: () => true,
+  // })
 
   useEffect(() => {
     // сортировка городов
@@ -281,11 +285,11 @@ const Projects = () => {
     })
     const one = [...newCities].slice(0, 4)
     const city = [...newCities].slice(5)
-    const sorted = city.sort((a, b) => {
-      var cityA = a,
-        cityB = b
-      return cityA < cityB ? -1 : cityA > cityB ? 1 : 0 //сортировка по возрастанию
-    })
+    // const sorted = city.sort((a, b) => {
+    //   var cityA = a,
+    //     cityB = b
+    //   return cityA < cityB ? -1 : cityA > cityB ? 1 : 0 //сортировка по возрастанию
+    // })
     const newSorted = [...one, ...city]
     setSortedCities(newSorted)
 
@@ -1365,8 +1369,9 @@ ${loc.url}`
   }
 
   const pressPereklichka = async () => {
-    setPlayPereklichka(!playPereklichka)
+    setPlayPereklichka(!playPereklichka)    
     setShowLoader(true)
+    setVisiblePereklichka(!visiblePereklichka)
 
     //api
     //const resAddPoster = await getCreatePoster(crmID)
@@ -1379,8 +1384,8 @@ ${loc.url}`
     // setTimeout(() => {
     //   setShowLoader(false)
     // }, 2000)
-    setShowLoader(false)
-    setPlayPereklichka(false)
+    // setShowLoader(false)
+    // setPlayPereklichka(false)
   }
 
   const sortDate = () => {
@@ -2579,6 +2584,8 @@ ${loc.url}`
                                     width={30}
                                     style={{ marginBottom: '7px' }}
                                   />
+                                  
+                                  
                                 )
                               ) : (
                                 <img
@@ -2587,7 +2594,85 @@ ${loc.url}`
                                   width={30}
                                   style={{ marginBottom: '7px' }}
                                 />
+                               
                               )}
+                              <CModal
+                                  size="lg"
+                                  alignment="center"
+                                  visible={visiblePereklichka}
+                                  onClose={() => setVisiblePereklichka(!visiblePereklichka)}
+                                  aria-labelledby="LiveDemoExampleLabel"
+                                  // style={{position: 'relative'}}
+                                >
+                                 <div style={{display: 'flex', justifyContent: 'space-between', padding: '5px'}}>
+                                   <div style={{display: 'flex'}}>
+                                    <div>
+                                    <label className="title-label">Дата</label>
+                                    <div className="text-field">
+                                      <input
+                                        disabled={false}
+                                        className="text-field__input"
+                                        type="text"
+                                        name="perekDate"
+                                        id="perekDate"
+                                        // value={projectName}
+                                        // onChange={(e) => setProjectName(e.target.value)}
+                                        style={{ width: '120px' }}
+                                      />
+                                    </div></div>
+                                    <div>
+                                    <label className="title-label">Время</label>
+                                    <div className="text-field">
+                                      <input
+                                        disabled={false}
+                                        className="text-field__input"
+                                        type="text"
+                                        name="perekTime"
+                                        id="perekTime"
+                                        // value={projectName}
+                                        // onChange={(e) => setProjectName(e.target.value)}
+                                        style={{ width: '120px' }}
+                                      />
+                                    </div></div>
+                                  </div>
+                                  <div >                                   
+                                    
+                                    <div className="text-field">
+                                      <input
+                                        disabled={false}
+                                        className="text-field__input"
+                                        type="text"
+                                        name="perekDate"
+                                        id="perekDate"
+                                        // value={projectName}
+                                        // onChange={(e) => setProjectName(e.target.value)}
+                                        style={{ width: '350px',  height: '250px' }}
+                                      />
+                                    </div>
+                                    
+                                    
+                                    
+                                    <div className="text-field">
+                                      <input
+                                        disabled={false}
+                                        className="text-field__input"
+                                        type="text"
+                                        name="perekTime"
+                                        id="perekTime"
+                                        // value={projectName}
+                                        // onChange={(e) => setProjectName(e.target.value)}
+                                        style={{ width: '350px',   }}
+                                      />
+                                    </div>
+                                    
+                                  </div>
+                                 </div>
+                                </CModal>
+                              
+                                      
+                                
+                                     
+                                   
                             </div>
 
                             {/* Списки */}
