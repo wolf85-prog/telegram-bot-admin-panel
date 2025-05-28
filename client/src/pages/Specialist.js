@@ -1790,7 +1790,7 @@ const Specialist = () => {
 
                             <label className='title-label'>Серия</label>
                             <div className="text-field">
-                              <input 
+                              {/* <input 
                                 className="text-field__input" 
                                 type="text" 
                                 name="promo" 
@@ -1799,7 +1799,18 @@ const Specialist = () => {
                                 onChange={handleSeria} 
                                 style={{width: '240px'}}
                                 pattern="[0-9]*"
-                              />
+                              /> */}
+                              <InputMask
+                                className="text-field__input" 
+                                type="text" 
+                                mask="9999"
+                                maskChar=""
+                                value={pasSeria} 
+                                onChange={handleSeria} 
+                                style={{width: '240px'}}
+                                placeholder=''
+                              >
+                              </InputMask>
                             </div>
                           </div>
 
@@ -1817,13 +1828,24 @@ const Specialist = () => {
 
                             <label className='title-label'>Номер</label>
                             <div className="text-field">
-                              <input 
+                              {/* <input 
                                 className="text-field__input" 
                                 type="text" 
                                 value={pasNumber} 
                                 onChange={handleNumber} 
                                 style={{width: '240px'}}
-                              />
+                              /> */}
+                              <InputMask
+                                className="text-field__input" 
+                                type="text" 
+                                mask="9999"
+                                maskChar=""
+                                value={pasNumber} 
+                                onChange={handleNumber} 
+                                style={{width: '240px'}}
+                                placeholder=''
+                              >
+                              </InputMask>
                             </div>
                           </div>
 
@@ -1841,13 +1863,13 @@ const Specialist = () => {
 
                             <label className='title-label'>Дата рождения</label>
                             <div className="text-field">
-                              <input 
+                              <InputMask
+                                mask="99.99.9999"
                                 className="text-field__input" 
-                                type="text" 
                                 value={pasDataBorn} 
                                 onChange={handleDataBorn} 
                                 style={{width: '250px'}}
-                              />
+                              ></InputMask>
                             </div>
                           </div>
 
@@ -1893,25 +1915,43 @@ const Specialist = () => {
                           <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '250px', position: 'relative', marginLeft: '15px'}}>
                             <label className='title-label'>Дата выдачи</label>
                             <div className="text-field">
-                              <input 
+                              {/* <input 
                                 className="text-field__input" 
                                 type="text" 
                                 value={pasData} 
                                 onChange={handleData} 
                                 style={{width: '250px'}}
-                              />
+                              /> */}
+                              <InputMask
+                                mask="99.99.9999"
+                                className="text-field__input" 
+                                value={pasData} 
+                                onChange={handleData} 
+                                style={{width: '250px'}}
+                              ></InputMask>
                             </div>
 
                             <label className='title-label'>Код подразделения</label>
                             <div className="text-field">
-                              <input 
+                              {/* <input 
                                 className="text-field__input" 
                                 type="text" 
                                 value={pasCode} 
                                 onChange={handleCode} 
                                 style={{width: '250px'}}
                                 pattern="[0-9]*"
-                              />
+                              /> */}
+                              <InputMask
+                                className="text-field__input" 
+                                style={{width: '250px'}}
+                                type="text" 
+                                mask="999-999"
+                                maskChar=""
+                                onChange={(e) => setPasCode(e.target.value)} 
+                                value={pasCode}
+                                placeholder=''
+                              >
+                              </InputMask>
                             </div>
 
                             <div className="text-field" style={{marginTop: '24px'}}>
