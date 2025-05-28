@@ -486,7 +486,7 @@ const Specialist = () => {
     setPasAddress(worker.pasaddress)
     setPasCode(worker.pascode)
     setPasData(worker.pasdatevidan)
-    setPasDataBorn(worker.age)
+    setPasDataBorn(`${worker.age.split('-')[2]}-${worker.age.split('-')[1]}-${worker.age.split('-')[0]}`)
     setPasKemVidan(worker.paskemvidan)
     setPasPlaceBorn(worker.pasbornplace)
 
@@ -1114,6 +1114,7 @@ const Specialist = () => {
         surname: pasLastName,
         name: pasName,
         secondname: pasSecondName,
+        age: `${pasDataBorn?.split('.')[2]}-${pasDataBorn?.split('.')[1]}-${pasDataBorn?.split('.')[0]}`
       }
 
       console.log("saveData: ", data, id)
