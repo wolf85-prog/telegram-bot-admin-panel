@@ -52,6 +52,7 @@ import Tg from "./../assets/images/tg.png";
 import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
 import Disketa from "./../assets/images/disketa.png";
+import Pencil from "./../assets/images/pen.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 
 import { array } from 'prop-types';
@@ -139,6 +140,18 @@ const Specialist = () => {
   const [dateReg, setDateReg] = useState('');
   const [profile, setProfile] = useState('');
 
+  const [pasCode, setPasCode] = useState('');
+  const [pasData, setPasData] = useState('');
+  const [pasAddress, setPasAddress] = useState('');
+  const [pasPlaceBorn, setPasPlaceBorn] = useState('');
+  const [pasKemVidan, setPasKemVidan] = useState('');
+  const [pasDataBorn, setPasDataBorn] = useState('');
+  const [pasName, setPasName] = useState('');
+  const [pasSecondName, setPasSecondName] = useState('');
+  const [pasLastName, setPasLastName] = useState('');
+  const [pasSeria, setPasSeria] = useState('');
+  const [pasNumber, setPasNumber] = useState('');
+
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
   const [countPressCity, setCountPressCity] = useState(0);
@@ -151,6 +164,7 @@ const Specialist = () => {
   const [showClearCity, setShowClearCity] = useState(false)
 
   const [visibleDelete, setVisibleDelete] = useState(false)
+  const [visiblePassport, setVisiblePassport] = useState(false)
 
   const [file, setFile] = useState(0);
   const [filePreview, setFilePreview] = useState();
@@ -306,6 +320,16 @@ const Specialist = () => {
           block18: worker.block18,
           krest: worker.krest,
           createdAt: worker.createdAt,
+          passeria: worker.passeria,
+          pasnumber: worker.pasnumber,
+          paskemvidan: worker.paskemvidan,
+          pasdatevidan: worker.pasdatevidan,
+          pascode: worker.pascode,
+          pasbornplace: worker.pasbornplace,
+          pasaddress: worker.pasaddress,
+          surname: worker.surname,
+          name: worker.name,
+          secondname: worker.secondname,
         }
         arrWorkers.push(newWorker)
 
@@ -452,6 +476,20 @@ const Specialist = () => {
     setDogovor(worker.dogovor)
     setSamozanjatost(worker.samozanjatost)
     setPassportScan(worker.passportScan)
+
+
+    setPasName(worker.name)
+    setPasSecondName(worker.secondname)
+    setPasLastName(worker.surname)
+    setPasSeria(worker.passeria)
+    setPasNumber(worker.pasnumber)
+    setPasAddress(worker.pasaddress)
+    setPasCode(worker.pascode)
+    setPasData(worker.pasdatevidan)
+    setPasDataBorn(worker.age)
+    setPasKemVidan(worker.paskemvidan)
+    setPasPlaceBorn(worker.pasbornplace)
+
     
     if (userbots) {
       setNik(userbots.find((user) => user.chatId?.toString() === worker.chatId?.toString())?.username)
@@ -884,7 +922,8 @@ const Specialist = () => {
     });
 
     //сохранить изменения в базе
-    await editSpecialist(saveData, id)
+    const resSave = await editSpecialist(saveData, id)
+    console.log("resSave: ", resSave)
 
     //addToast(exampleToast) //ваши данные сохранены
 
@@ -1016,6 +1055,81 @@ const Specialist = () => {
     setCity('')
     setCityValue(0)
   }
+
+  const pressEditPassport = () => {
+    setVisiblePassport(!visiblePassport)
+  } 
+  
+  const handleCode = event => {
+    const result = event.target.value;
+    setPasCode(result);
+  };
+
+  const handleData = event => {
+    const result = event.target.value;
+    setPasData(result);
+  };
+
+  const handleAddress = event => {
+    const result = event.target.value;
+    setPasAddress(result);
+  };
+
+  const handleBorn = event => {
+    const result = event.target.value;
+    setPasPlaceBorn(result);
+  };
+
+  const handleKemVidan = event => {
+    const result = event.target.value;
+    setPasKemVidan(result);
+  };
+
+  const handleDataBorn = event => {
+    const result = event.target.value;
+    setPasDataBorn(result);
+  };
+
+  const handleSeria = event => {
+    const result = event.target.value.replace(/\D/g, '');
+    setPasSeria(result);
+  };
+
+  const handleNumber = event => {
+    const result = event.target.value.replace(/\D/g, '');
+    setPasNumber(result);
+  };
+
+
+  const savePassport = async(id) => {
+    
+      const data = {
+        passeria: pasSeria,
+        pasnumber: pasNumber,
+        paskemvidan: pasKemVidan,
+        pasdatevidan: pasData,
+        pascode: pasCode,
+        pasbornplace: pasPlaceBorn,
+        pasaddress: pasAddress,
+        surname: pasLastName,
+        name: pasName,
+        secondname: pasSecondName,
+      }
+
+      console.log("saveData: ", data, id)
+
+      setVisiblePassport(false)
+      setShowModal(true)
+
+      //сохранить изменения в базе
+      const res = await editSpecialist(data, id)
+      console.log("res save: ", res)
+
+      setTimeout(()=> {
+        setShowModal(false)
+      }, 2000)
+  };
+
 
 
   return (
@@ -1282,6 +1396,7 @@ const Specialist = () => {
                                         style={{resize: 'none', width: '250px', height: '270px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'6px'}}/>
                                     </div> 
                                     <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(passport)}} alt="" style={{position: 'absolute', top: '40px', left: '205px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                                    <img src={Pencil} onClick={pressEditPassport} alt="" style={{position: 'absolute', top: '80px', left: '205px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                                   </div>
                                   
                                 </div>
@@ -1643,6 +1758,179 @@ const Specialist = () => {
                         <CButton color="primary" onClick={()=>deleteProfile(id)}>Удалить</CButton>
                       </CModalFooter>
                     </CModal>
+
+
+                    <CModal
+                      alignment="center"
+                      size="lg"
+                      visible={visiblePassport}
+                      onClose={() => setVisiblePassport(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalHeader>
+                        <CModalTitle id="VerticallyCenteredExample">Редактирование паспорта</CModalTitle>
+                      </CModalHeader>
+                      <CModalBody>
+                        <div style={{ display: 'flex', flexDirection: 'row'}}>
+                          <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '240px', position: 'relative'}}>
+                            <label className='title-label'>Фамилия</label>
+                            <div className="text-field">
+                              <input 
+                                className="text-field__input" 
+                                type="text" 
+                                name="promo" 
+                                id="promo" 
+                                value={pasLastName} 
+                                onChange={(e)=>setPasLastName(e.target.value)} 
+                                style={{width: '240px'}}
+                                pattern="[0-9]*"
+                              />
+                            </div>
+
+                            <label className='title-label'>Серия</label>
+                            <div className="text-field">
+                              <input 
+                                className="text-field__input" 
+                                type="text" 
+                                name="promo" 
+                                id="promo" 
+                                value={pasSeria} 
+                                onChange={handleSeria} 
+                                style={{width: '240px'}}
+                                pattern="[0-9]*"
+                              />
+                            </div>
+                          </div>
+
+                          <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '240px', position: 'relative', marginLeft: '15px'}}>
+                            <label className='title-label'>Имя</label>
+                            <div className="text-field">
+                              <input 
+                                className="text-field__input" 
+                                type="text" 
+                                value={pasName} 
+                                onChange={(e)=>setPasName(e.target.value)} 
+                                style={{width: '240px'}}
+                              />
+                            </div>
+
+                            <label className='title-label'>Номер</label>
+                            <div className="text-field">
+                              <input 
+                                className="text-field__input" 
+                                type="text" 
+                                value={pasNumber} 
+                                onChange={handleNumber} 
+                                style={{width: '240px'}}
+                              />
+                            </div>
+                          </div>
+
+                          <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '240px', position: 'relative', marginLeft: '20px'}}>
+                            <label className='title-label'>Отчество</label>
+                            <div className="text-field">
+                              <input 
+                                className="text-field__input" 
+                                type="text" 
+                                value={pasSecondName} 
+                                onChange={(e)=>setPasSecondName(e.target.value)} 
+                                style={{width: '250px'}}
+                              />
+                            </div>
+
+                            <label className='title-label'>Дата рождения</label>
+                            <div className="text-field">
+                              <input 
+                                className="text-field__input" 
+                                type="text" 
+                                value={pasDataBorn} 
+                                onChange={handleDataBorn} 
+                                style={{width: '250px'}}
+                              />
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'row'}}>
+                          <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '500px', position: 'relative'}}>
+                            <label className='title-label'>Выдан</label>
+                            <div className="text-field">
+                              <input 
+                                className="text-field__input" 
+                                type="text" 
+                                value={pasKemVidan} 
+                                onChange={handleKemVidan} 
+                                style={{width: '500px'}}
+                              />
+                            </div>
+
+                            <label className='title-label'>Место рождения</label>
+                            <div className="text-field">
+                              <input 
+                                className="text-field__input" 
+                                type="text" 
+                                value={pasPlaceBorn} 
+                                onChange={handleBorn} 
+                                style={{width: '500px'}}
+                              />
+                            </div>
+
+                            
+                            <label className='title-label'>Адрес регистрации</label>
+                            <div className="text-field">
+                              <input 
+                                className="text-field__input" 
+                                type="text" 
+                                value={pasAddress} 
+                                onChange={handleAddress} 
+                                style={{width: '500px'}}
+                              />
+                            </div>
+                          </div>
+
+                          <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '250px', position: 'relative', marginLeft: '15px'}}>
+                            <label className='title-label'>Дата выдачи</label>
+                            <div className="text-field">
+                              <input 
+                                className="text-field__input" 
+                                type="text" 
+                                value={pasData} 
+                                onChange={handleData} 
+                                style={{width: '250px'}}
+                              />
+                            </div>
+
+                            <label className='title-label'>Код подразделения</label>
+                            <div className="text-field">
+                              <input 
+                                className="text-field__input" 
+                                type="text" 
+                                value={pasCode} 
+                                onChange={handleCode} 
+                                style={{width: '250px'}}
+                                pattern="[0-9]*"
+                              />
+                            </div>
+
+                            <div className="text-field" style={{marginTop: '24px'}}>
+                              <div onClick={()=>savePassport(id)} className="text-field__input"  style={{width: '250px', border: '1px solid green'}}>
+                                Сохранить
+                              </div>  
+                            </div>
+                          </div>
+                        </div>
+
+                      </CModalBody>
+                      
+                      {/* <CModalFooter>
+                        <CButton color="secondary" onClick={() => setVisiblePassport(false)}>
+                          Отмена
+                        </CButton>
+                        <CButton color="primary">Сохранить</CButton>
+                      </CModalFooter> */}
+                    </CModal>
+
                   </Suspense>
             </CContainer>
         </div>

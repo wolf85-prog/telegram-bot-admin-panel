@@ -721,6 +721,17 @@ useEffect(() => {
 		  projectMonth: worker.projectMonth,
 		  lateness: worker.lateness,
 		  noExit: worker.noExit,
+		  
+		  passeria: worker.passeria,
+          pasnumber: worker.pasnumber,
+          paskemvidan: worker.paskemvidan,
+          pasdatevidan: worker.pasdatevidan,
+          pascode: worker.pascode,
+          pasbornplace: worker.pasbornplace,
+          pasaddress: worker.pasaddress,
+          surname: worker.surname,
+          name: worker.name,
+          secondname: worker.secondname,
         }
         arrAllWorkers.push(newWorker)
       }) 

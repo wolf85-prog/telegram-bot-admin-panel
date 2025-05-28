@@ -141,7 +141,17 @@ class SpecialistController {
                 passport,
                 blockW,
                 block18,
-                krest
+                krest,
+                passeria,
+                pasnumber,
+                paskemvidan,
+                pasdatevidan,
+                pascode,
+                pasbornplace,
+                pasaddress,
+                surname,
+                name,
+                secondname,
             } = req.body
 
             const newUser = await Specialist.update(
@@ -167,7 +177,17 @@ class SpecialistController {
                     email,
                     blockW,
                     block18,
-                    krest
+                    krest,
+                    passeria,
+                    pasnumber,
+                    paskemvidan,
+                    pasdatevidan,
+                    pascode,
+                    pasbornplace,
+                    pasaddress,
+                    surname,
+                    name,
+                    secondname,
                 },
                 { where: {id: id} })
             return res.status(200).json(newUser);
