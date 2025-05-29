@@ -1102,6 +1102,18 @@ const Specialist = () => {
 
 
   const savePassport = async(id) => {
+
+    const pass_str = `${pasLastName} ${pasName} ${pasSecondName} 
+                            
+Паспорт: ${pasSeria} ${pasNumber}
+Дата рождения: ${pasDataBorn}
+Выдан: ${pasKemVidan} 
+Дата выдачи: ${pasData}   
+Код подразделения: ${pasCode}
+                            
+Место рождения: ${pasPlaceBorn}
+                            
+Адрес регистрации: ${pasAddress}` 
     
       const data = {
         passeria: pasSeria,
@@ -1114,7 +1126,8 @@ const Specialist = () => {
         surname: pasLastName,
         name: pasName,
         secondname: pasSecondName,
-        age: `${pasDataBorn?.split('.')[2]}-${pasDataBorn?.split('.')[1]}-${pasDataBorn?.split('.')[0]}`
+        age: `${pasDataBorn?.split('.')[2]}-${pasDataBorn?.split('.')[1]}-${pasDataBorn?.split('.')[0]}`,
+        passport: pass_str,
       }
 
       console.log("saveData: ", data, id)
