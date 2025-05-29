@@ -1132,6 +1132,19 @@ const Specialist = () => {
 
       console.log("saveData: ", data, id)
 
+
+      setSpecialist((specialist) => {	
+        let userIndex = specialist.findIndex((spec) => spec.id === id);
+        const usersCopy = JSON.parse(JSON.stringify(specialist));
+
+        const userObject = usersCopy[userIndex];
+        usersCopy[userIndex] = { ...userObject, 
+          passport: pass_str, 
+        };
+
+        return usersCopy;
+      });
+
       setVisiblePassport(false)
       setShowModal(true)
 
