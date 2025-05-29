@@ -486,7 +486,7 @@ const Specialist = () => {
     setPasAddress(worker.pasaddress)
     setPasCode(worker.pascode)
     setPasData(worker.pasdatevidan)
-    setPasDataBorn(`${worker.age.split('-')[2]}-${worker.age.split('-')[1]}-${worker.age.split('-')[0]}`)
+    setPasDataBorn(`${worker.age ? worker.age.split('-')[2] : ''}-${worker.age ? worker.age.split('-')[1] : ''}-${worker.age ? worker.age.split('-')[0] : ''}`)
     setPasKemVidan(worker.paskemvidan)
     setPasPlaceBorn(worker.pasbornplace)
 
