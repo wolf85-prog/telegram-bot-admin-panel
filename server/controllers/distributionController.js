@@ -361,7 +361,8 @@ class DistributionController {
 
     //send message
     async sendDistribW(req, res) {
-        const {id} = req.params  
+        const {id, type} = req.params  
+        console.log("id, type: ", id, type)
         let arrUsers = []
         let countSuccess = 0
 
@@ -383,6 +384,9 @@ class DistributionController {
             const target = exist.dataValues.target
 
             //console.log("selected: ", selected)
+
+            // Подключаемся к серверу socket
+            let socket = io(socketUrl);
 
             selected.map(async (user, index) => {      
                 setTimeout(async()=> { 
@@ -515,19 +519,38 @@ class DistributionController {
                                 arrUsers[index-1].mess = sendTextToTelegram.data?.result?.message_id 
 
                                 //обновить бд рассылку
-                                const newDistrib = await Distributionw.update(
-                                    {   
-                                        delivered: true,
-                                        deleted: false,  
-                                        report: JSON.stringify(arrUsers),  
-                                        success: countSuccess
-                                    },
-                                    { where: {id: id} }
-                                )
+                                // const newDistrib = await Distributionw.update(
+                                //     {   
+                                //         delivered: true,
+                                //         deleted: false,  
+                                //         report: JSON.stringify(arrUsers),  
+                                //         success: countSuccess
+                                //     },
+                                //     { where: {id: id} }
+                                // )
                             }                    
                         } else {
-                            url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${editButton ? keyboard : keyboard2}`
-                            console.log("url_send_photo2: ", url_send_photo)
+                            if (type === '1') {
+                                url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${editButton ? keyboard : keyboard2}`
+                                console.log("url_send_photo2: ", url_send_photo)
+                            } 
+                            else if (type === '2') { 
+                                url_send_photo = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${user}&document=${image}&reply_markup=${editButton ? keyboard : keyboard2}`
+                                console.log("url_send_document2: ", url_send_photo)
+                            }
+                            else if (type === '3') { 
+                                url_send_photo = `https://api.telegram.org/bot${token}/sendAudio?chat_id=${user}&audio=${image}&reply_markup=${editButton ? keyboard : keyboard2}`
+                                console.log("url_send_audio2: ", url_send_photo)
+                            }
+                            else if (type === '4') { 
+                                url_send_photo = `https://api.telegram.org/bot${token}/sendVideo?chat_id=${user}&video=${image}&reply_markup=${editButton ? keyboard : keyboard2}`
+                                console.log("url_send_video2: ", url_send_photo)
+                            }
+                            else {
+                                url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${editButton ? keyboard : keyboard2}`
+                                console.log("url_send_else2: ", url_send_photo)
+                            }
+                          
 
                             sendPhotoToTelegram = await $host.get(url_send_photo)
                                 .catch(async(err) => {
@@ -544,30 +567,36 @@ class DistributionController {
                                 });
                             
 
-                            const { status } = sendPhotoToTelegram;
+                            if (sendPhotoToTelegram) {
+                                console.log("ОТПРАВКА СООБЩЕНИЯ В ТЕЛЕГРАММ ПРОШЛА УСПЕШНО (отправка сразу)!")
+                                const { status } = sendPhotoToTelegram;
 
-                            if (status === 200 && text === '') {
-                                console.log("статус 200 фото")
-                                countSuccess = countSuccess + 1  
-                                        
-                                //обновить статус доставки
-                                arrUsers[index-1].status = 200
-                                arrUsers[index-1].mess = sendPhotoToTelegram.data?.result?.message_id   
+                                if (status === 200 && text === '') {
+                                    //console.log("статус 200 фото")
+                                    countSuccess = countSuccess + 1  
+                                            
+                                    //обновить статус доставки
+                                    arrUsers[index-1].status = 200
+                                    arrUsers[index-1].mess = sendPhotoToTelegram.data?.result?.message_id   
 
-                                //обновить бд рассылку
-                                const newDistrib = await Distributionw.update(
-                                    { delivered: true,
-                                        report: JSON.stringify(arrUsers),  
-                                        success: countSuccess},
-                                    { where: {id: id} }
-                                )
+                                    //обновить бд рассылку
+                                    // const newDistrib = await Distributionw.update(
+                                    //     { delivered: true,
+                                    //         report: JSON.stringify(arrUsers),  
+                                    //         success: countSuccess},
+                                    //     { where: {id: id} }
+                                    // )
+                                }
+                            } else {
+                                console.log("ОШИБКА ОТПРАВКИ СООБЩЕНИЯ В ТЕЛЕГРАММ (отправка сразу)!")
                             }
+  
                         }
                     
                         //отправить в админку
                         let message = {};
                         if (text !== '') {
-                            console.log("no file")
+                            //console.log("no file")
                                 message = {
                                     senderId: chatAdminId, 
                                     receiverId: user,
@@ -579,7 +608,7 @@ class DistributionController {
                                     buttons: '',
                                 }
                         } else if (image) {
-                            console.log("file yes")
+                            //console.log("file yes")
                                 message = {
                                     senderId: chatAdminId, 
                                     receiverId: user,
@@ -593,14 +622,13 @@ class DistributionController {
                         }
                         //console.log("message send: ", message);
 
-                        //сохранение сообщения в базе данных wmessage
-                        await Message.create(message)
+                        if (sendPhotoToTelegram) {
+                            //сохранение сообщения в базе данных wmessage
+                            await Message.create(message)
+                        } 
 
                         //сохранить в контексте
                         if(!image) {
-                            // Подключаемся к серверу socket
-                            let socket = io(socketUrl);
-                            socket.emit("addUser", user)
                             
                             //отправить сообщение в админку
                             socket.emit("sendAdminSpec", { 
@@ -614,25 +642,34 @@ class DistributionController {
                                 isBot: true,
                             })
                         } else {
-                            // Подключаемся к серверу socket
-                            let socket = io(socketUrl);
-                            socket.emit("addUser", user)
-                            
-                            //отправить сообщение в админку
-                            socket.emit("sendAdminSpec", { 
-                                senderId: chatAdminId,
-                                receiverId: user,
-                                text: image,
-                                type: 'image',
-                                buttons: textButton,
-                                convId: conversation_id,
-                                messageId: sendPhotoToTelegram.data.result.message_id,
-                                isBot: true,
-                            })
+                            if (sendPhotoToTelegram) {
+                                //отправить сообщение в админку
+                                socket.emit("sendAdminSpec", { 
+                                    senderId: chatAdminId,
+                                    receiverId: user,
+                                    text: image,
+                                    type: 'image',
+                                    buttons: textButton,
+                                    convId: conversation_id,
+                                    messageId: sendPhotoToTelegram.data.result.message_id,
+                                    isBot: true,
+                                })
+                            }
                         }
                     }  
 
-                }, 1000 * ++index) 
+                    if (index === (selected.length)) {
+                        //обновить бд рассылку
+                        const newDistrib = await Distributionw.update(
+                            { delivered: true,
+                                report: JSON.stringify(arrUsers),  
+                                success: countSuccess},
+                            { where: {id: id} }
+                        )
+                        console.log("Обновление рассылки (отчет): ", newDistrib)
+                    }
+
+                }, 2000 * ++index) 
 
             })
 
