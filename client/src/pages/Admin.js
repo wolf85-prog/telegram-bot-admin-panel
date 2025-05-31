@@ -896,7 +896,7 @@ useEffect(() => {
           count_cat = 0;
 
           arr.map((item)=> {
-            if (JSON.parse(item.worklist).find(work => work.cat === category.icon)) { //category.name
+            if (item.worklist && JSON.parse(item.worklist).find(work => work.cat === category.icon)) { //category.name
               count_cat++
             }
           })
