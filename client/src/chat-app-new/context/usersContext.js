@@ -412,7 +412,7 @@ useEffect(() => {
 			//0 все специалисты
 			//let all = await getWorkers()
 			let all = await getSpecialist()
-			console.log("specialist all: ", all)
+			//console.log("specialist all: ", all)
 			const arrayWorkerAll = []
 		
 			all.map(async (user) => {
@@ -751,7 +751,7 @@ useEffect(() => {
 	useEffect(() => {
     	const fetchData = async () => {
 			let response = await getManager();
-      		console.log("managers context: ", response)
+      		//console.log("managers context: ", response)
 
 			let arr = []
 			response.map(async (user, i) => {
@@ -1064,7 +1064,7 @@ useEffect(() => {
 		const kol = await getCountMessage()
 		setCountMessage(count+1)
 		//const res = await newCountMessage(kol.managers + 1)
-		console.log("Пришло новое сообщение в renthub: ", count + 1)
+		//console.log("Пришло новое сообщение в renthub: ", count + 1)
 		setShowGetMess(true)
 
 
@@ -1087,7 +1087,7 @@ useEffect(() => {
 			const kol = await getCountMessage()
 			setCountProjects(count + 1)
 			//const res = await newCountProjects(kol.projects + 1)
-			console.log("Пришел новый проект в renthub: ", count + 1)
+			//console.log("Пришел новый проект в renthub: ", count + 1)
 
 			//play sound
 			const savedVolume = localStorage.getItem("soundVolume");

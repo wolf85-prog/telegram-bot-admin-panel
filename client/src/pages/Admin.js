@@ -206,7 +206,7 @@ const Admin = () => {
   //get filter workers
   useEffect(() => {
     //setSortWorkers(workers)
-    console.log("workersAll: ", workersAll)
+    //console.log("workersAll: ", workersAll)
 
     const currentDate = new Date()
     const currentMonth = currentDate.getMonth()
@@ -510,7 +510,7 @@ useEffect(() => {
 
       //за сутки
       case 1:{
-        console.log("Фильтр за сутки: ", ind)
+        //console.log("Фильтр за сутки: ", ind)
         clearTimeout(timerId);
 
         //закрыть все плашки
@@ -577,7 +577,7 @@ useEffect(() => {
 
         //кол-во часов
         const currentChas = new Date().getHours()
-        console.log("currentChas: ", currentChas)
+        //console.log("currentChas: ", currentChas)
         
         //за несколько часов
         const needDate = carrentDate - currentChas*3600000
@@ -724,8 +724,8 @@ useEffect(() => {
         let categories = []
         let count_cat
 
-        console.log("arr2: ", arr)
-        console.log("specData: ", specData)
+        //console.log("arr2: ", arr)
+        //console.log("specData: ", specData)
 
         specData.map((category)=> {
           count_cat = 0;
@@ -743,7 +743,7 @@ useEffect(() => {
           categories.push(obj)
         })
 
-        console.log("categories: ", categories)
+        //console.log("categories: ", categories)
         setCatCount(categories)
 
         setSortWorkers(arr)
@@ -809,7 +809,7 @@ useEffect(() => {
               }
           week2.push(newObj)
         }  
-        console.log("week: ", week2)     
+        //console.log("week: ", week2)     
         setWeekWorkers(week2)
         break;
       }
@@ -890,7 +890,7 @@ useEffect(() => {
         let categories = []
         let count_cat
 
-        console.log("arr3: ", arr)
+        //console.log("arr3: ", arr)
 
         specData.map((category)=> {
           count_cat = 0;
@@ -908,7 +908,7 @@ useEffect(() => {
           categories.push(obj)
         })
 
-        console.log("categories: ", categories)
+        //console.log("categories: ", categories)
         setCatCount(categories)
 
         setSortWorkers(arr)
@@ -939,7 +939,7 @@ useEffect(() => {
           }
           month3.push(newObj)
         }  
-        console.log("month3: ", month3)     
+        //console.log("month3: ", month3)     
         setMonthWorkers(month3)
         break;
       }
@@ -1012,7 +1012,7 @@ useEffect(() => {
         let categories = []
         let count_cat
 
-        console.log("arr year: ", arr)
+        //console.log("arr year: ", arr)
 
         specData.map((category)=> {
           count_cat = 0;
@@ -1030,7 +1030,7 @@ useEffect(() => {
           categories.push(obj)
         })
 
-        console.log("categories: ", categories)
+        //console.log("categories: ", categories)
         setCatCount(categories)
 
         setSortWorkers(arr)
@@ -1046,7 +1046,7 @@ useEffect(() => {
         const arrDel = delWorkers.filter(item => item.deleted === true && item.createDate.split('T')[0].split('-')[0] === '2025')
         setDelWorkers2(arrDel)
 
-        arr.map((item)=>console.log("month: ", new Date(item.createDate).getMonth()+1))
+        //arr.map((item)=>console.log("month: ", new Date(item.createDate).getMonth()+1))
 
         //график
         let year4 = []
@@ -1120,14 +1120,14 @@ useEffect(() => {
               }
               year4.push(newObj)
         }  
-        console.log("year4: ", year4)     
+        //console.log("year4: ", year4)     
         setYearWorkers(year4)
         break;
       }
 
       //за период
       case 5:{
-        console.log("за период", periodDate1, periodDate2)
+        //console.log("за период", periodDate1, periodDate2)
 
         clearTimeout(timerId);
 
@@ -1211,7 +1211,7 @@ useEffect(() => {
         let categories = []
         let count_cat
 
-        console.log("arr5 period: ", arr5)
+        //console.log("arr5 period: ", arr5)
 
         specData.map((category)=> {
           count_cat = 0;
@@ -1229,7 +1229,7 @@ useEffect(() => {
           categories.push(obj)
         })
 
-        console.log("categories: ", categories)
+        //console.log("categories: ", categories)
         setCatCount(categories)
         setSortWorkers(arr5)
         setWorkers(arr5)
@@ -1252,7 +1252,7 @@ useEffect(() => {
           nextDay.setDate(nextDay.getDate() + 1);
         }
         
-        console.log("period5: ", period5)     
+        //console.log("period5: ", period5)     
         setPeriodWorkers(period5)
 
         break;
