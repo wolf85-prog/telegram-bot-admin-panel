@@ -406,7 +406,7 @@ useEffect(() => {
       
       const workersP = await getManagerPerson()
       if (workersP) {
-        console.log("workersP: ", workersP)
+        //console.log("workersP: ", workersP)
         //setManagersP(workersP)
         //setLoading5(false)
       }
@@ -415,7 +415,7 @@ useEffect(() => {
 
       const companyP = await getManagerCompany()
       if (companyP) {
-        console.log("companyP: ", companyP)
+        //console.log("companyP: ", companyP)
         workersP.map((item)=> {
           const comp = companyP.find(item2 => item2.id.toString() === item.companyId)
           //console.log("comp: ", comp)
@@ -1018,7 +1018,7 @@ useEffect(() => {
           count_cat = 0;
 
           arr.map((item)=> {
-            if (JSON.parse(item.worklist).find(work => work.cat === category.icon)) { //category.name
+            if (item.worklist && JSON.parse(item.worklist).find(work => work.cat === category.icon)) { //category.name
               count_cat++
             }
           })
