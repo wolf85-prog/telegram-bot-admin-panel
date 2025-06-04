@@ -415,7 +415,7 @@ const Chat = () => {
 		//Паспорт
 		if (selectedElement === '1') {
 			//send photo
-			let anketa = 'https://proj.uley.team/upload/2023-11-10T15:12:36.770Z.png' //poster anketa
+			let anketa = 'https://proj.uley.team/upload/9af754db-d1bb-4cd8-8453-aeba0c65c07a.jfif' //poster anketa
 			const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${user.chatId}&photo=${anketa}&reply_markup=${keyboard}`
 			console.log(url_send_photo)	
 			sendToTelegram = await $host.get(url_send_photo);
