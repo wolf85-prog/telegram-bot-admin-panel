@@ -1741,8 +1741,8 @@ const Specialist = () => {
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
                                     <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
-                                    
-                                    </ul>
+                                      {projects}
+                                    </ul>  
                                   </div> 
                                 </div>
 
