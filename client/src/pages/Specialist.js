@@ -151,6 +151,7 @@ const Specialist = () => {
   const [pasLastName, setPasLastName] = useState('');
   const [pasSeria, setPasSeria] = useState('');
   const [pasNumber, setPasNumber] = useState('');
+  const [projects, setProjects] = useState('');
 
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
@@ -489,6 +490,7 @@ const Specialist = () => {
     setPasDataBorn(worker.pasdateborn)
     setPasKemVidan(worker.paskemvidan)
     setPasPlaceBorn(worker.pasbornplace)
+    setProjects(worker.projects)
 
     
     if (userbots) {

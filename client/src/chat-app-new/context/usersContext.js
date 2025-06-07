@@ -732,6 +732,8 @@ useEffect(() => {
           surname: worker.surname,
           name: worker.name,
           secondname: worker.secondname,
+		  pasdateborn: worker.pasdateborn,
+		  projects: worker.projects,
         }
         arrAllWorkers.push(newWorker)
       }) 
