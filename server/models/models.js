@@ -203,6 +203,8 @@ const Specialist = sequelize.define('specialist', {
     surname: {type: DataTypes.STRING},
     name: {type: DataTypes.STRING},
     secondname: {type: DataTypes.STRING},
+    pasdateborn: {type: DataTypes.STRING},
+    projects: {type: DataTypes.TEXT},
 })
 
 
