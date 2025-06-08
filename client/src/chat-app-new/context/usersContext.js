@@ -75,11 +75,7 @@ const UsersProvider = ({ children }) => {
 	const [managers, setManagers]= useState([]); // менеджеры (заказчики)
 
 	const [companys, setCompanys]= useState([]);
-	const [companysAll, setCompanysAll] =  useState( () => {
-		const savedUserWorkers = localStorage.getItem("companys");
-	   	const parsedUserWorkers = JSON.parse(savedUserWorkers);
-	   	return parsedUserWorkers || "";
-	});  //все компании;
+	const [companysAll, setCompanysAll] =  useState([]);  //все компании;
 
 	const [platforms, setPlatforms] = useState([])
 	const [platformsAll, setPlatformsAll] = useState([])
@@ -92,11 +88,7 @@ const UsersProvider = ({ children }) => {
 	const [newPretendent, setNewPretendent] = useState(false);
 	const [countPretendent, setCountPretendent] = useState(0)
 
-	const [userWorkers, setUserWorkers] = useState( () => {
-		const savedUserWorkers = localStorage.getItem("userWorkers");
-	   	const parsedUserWorkers = JSON.parse(savedUserWorkers);
-	   	return parsedUserWorkers || "";
-	}); 
+	const [userWorkers, setUserWorkers] = useState([]);
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
 	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
 	// const [workersAll, setWorkersAll] =  useState( () => {
@@ -112,11 +104,7 @@ const UsersProvider = ({ children }) => {
 	const [companysCount, setCompanysCount] = useState(0)
 
 
-	const [userRenthub, setUserRenthub] = useState( () => {
-		const savedUserRenthub = localStorage.getItem("userRenthub");
-	   	const parsedUserRenthub = JSON.parse(savedUserRenthub);
-	   	return parsedUserRenthub || "";
-	}); 
+	const [userRenthub, setUserRenthub] = useState([]); 
 
 	const [countMessageWork, setCountMessageWork] = useState(() => {
 		// getting stored value
@@ -339,7 +327,7 @@ const UsersProvider = ({ children }) => {
 						setUsers(sortedClients)
 						
 						//сохранить кэш
-						localStorage.setItem("users", JSON.stringify(sortedClients));
+						//localStorage.setItem("users", JSON.stringify(sortedClients));
 					}
 				//}
 			}, 100 * ++index)	
@@ -625,7 +613,7 @@ useEffect(() => {
 					setUserWorkers(sortedClients)
 
 					//сохранить кэш
-					localStorage.setItem("userWorkers", JSON.stringify(sortedClients));
+					//localStorage.setItem("userWorkers", JSON.stringify(sortedClients));
 				}				
 			})	
 		}
@@ -910,7 +898,7 @@ useEffect(() => {
 				  	//setCompanys(sortedUser)
 							
 					//сохранить кэш
-					localStorage.setItem("companys", JSON.stringify(sortedUser));
+					//localStorage.setItem("companys", JSON.stringify(sortedUser));
 				}
 		
 			  })

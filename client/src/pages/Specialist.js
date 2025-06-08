@@ -203,12 +203,20 @@ const Specialist = () => {
 
   //поиск
   useEffect(() => {
-		const filteredData = specialistAll.filter(user=> (user.fio + user.chatId + user.phone + user.speclist)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
-    setSpecialist(text === '' ? specialistCount : filteredData); 
+    //console.log("specialistAll: ", specialistAll.length)
 
-    setSpecialistsCount(text === '' ? specialistAll.length : filteredData.length)
-    //console.log("specialist", specialist)
-    setShowClear(text === '' ? false : true)
+    setTimeout(()=> {
+      //console.log("specialistAll: ", specialistAll.length)
+      const filteredData = specialistAll.filter(user=> 
+        (user.fio + user.chatId + user.phone + user.speclist)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase())
+      );
+      setSpecialist(text === '' ? specialistCount : filteredData); 
+
+      setSpecialistsCount(text === '' ? specialistAll.length : filteredData.length)
+      //console.log("specialist", specialist)
+      setShowClear(text === '' ? false : true)
+    }, [100])
+		
   }, [text]);
 
 
@@ -238,7 +246,7 @@ const Specialist = () => {
 
       // 2 специалисты 20 чел.
       let workers = await getSpecCount(20, specialist.length)
-      console.log("specialist: ", workers)
+      //console.log("specialist: ", workers)
 
       let arrWorkers = []
 
@@ -344,8 +352,6 @@ const Specialist = () => {
 					setSpecialistCount(sortedWorker)
           setSpecialist(sortedWorker)
 					
-					//сохранить кэш
-					localStorage.setItem("specialist", JSON.stringify(sortedWorker));
 				}
 
       })  
@@ -353,7 +359,7 @@ const Specialist = () => {
       setLoading(false)
 
       let wuserbots = await getWContacts();
-      console.log("wuserbots: ", wuserbots)
+      console.log("wuserbots: ", wuserbots?.length)
       setUserbots(wuserbots)
 
       
@@ -1182,7 +1188,7 @@ const Specialist = () => {
                           style={{display: showSearch ? 'block' : 'none'}}
                         >   
                         </CFormInput>
-                        <img src={Close} alt='' onClick={clearSearch} width={10} style={{display: showClear ? 'block' : 'none', position: 'absolute', top: '15px', right: '20px'}}/>
+                        <img src={Close} alt='' onClick={clearSearch} width={10} style={{display: showClear ? 'block' : 'none', position: 'absolute', top: '15px', right: '20px', cursor: 'pointer'}}/>
                       </CCol>
                       <CCol>
                         <CButton onClick={clickAdd} className='uley_add_user' style={{display: showSearch ? 'block' : 'none'}}>
