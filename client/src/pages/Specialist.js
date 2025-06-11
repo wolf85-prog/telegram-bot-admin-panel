@@ -82,8 +82,10 @@ const Specialist = () => {
 
   const [userbots, setUserbots] = useState([]);
 
-  const [loading, setLoading]= useState(true);
+  const [loading, setLoading]= useState(false);
   const [text, setText]= useState("");
+  const [filteredUsers, setFilteredUsers] = useState(specialistAll)
+
   //const [spec, setSpec] = useState([]); 
   const [visibleSm, setVisibleSm] = useState(false)
   const [modalWorker, setModalWorker] = useState({})
@@ -200,22 +202,47 @@ const Specialist = () => {
     </CToast>
   )
 
+  //поле поиска
+  const handleInputChange = (e) => {
+    setShowClear(true)
+    const searchTerm = e.target.value;
+    setText(searchTerm)
+
+    // const filteredItems = specialistAll.filter((user) =>
+    //   user.fio.toLowerCase().includes(searchTerm.toLowerCase())
+    // );
+
+    // setFilteredUsers(filteredItems);
+  }
+
+  const clearSearch = () => {
+    setText('')
+  }
+
 
   //поиск
   useEffect(() => {
-    //console.log("specialistAll: ", specialistAll.length)
+    console.log("search text: ", text)
 
-    setTimeout(()=> {
-      //console.log("specialistAll: ", specialistAll.length)
+    setLoading(text === '' ? false : true)
+    //let filteredData = []
+
+    //setTimeout(()=> {
+      //setLoading(true)
+
       const filteredData = specialistAll.filter(user=> 
         (user.fio + user.chatId + user.phone + user.speclist)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase())
+        //(user.fio + user.chatId + user.phone)?.toLowerCase().includes(text.toLowerCase())
       );
-      setSpecialist(text === '' ? specialistCount : filteredData); 
+      
 
       setSpecialistsCount(text === '' ? specialistAll.length : filteredData.length)
       //console.log("specialist", specialist)
       setShowClear(text === '' ? false : true)
-    }, [100])
+      setLoading(filteredData ? false : true)
+    //}, [3000])
+
+    //setSpecialist(text === '' ? specialistCount : filteredData); 
 		
   }, [text]);
 
@@ -243,6 +270,8 @@ const Specialist = () => {
     setSortedCities(newSorted)
 
     const fetchData = async() => {
+      console.log("Загрузка специалистов...")
+      setLoading(true)
 
       // 2 специалисты 20 чел.
       let workers = await getSpecCount(20, specialist.length)
@@ -296,8 +325,9 @@ const Specialist = () => {
 
         let str_comment2 = ''
         worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
-          str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? ', ' : '')
+          str_comment2 = str_comment2 + item.content
         })
+        console.log("str_comment2: ", str_comment2)
 
         const newWorker = {
           id: worker.id,
@@ -704,7 +734,7 @@ const Specialist = () => {
 
         let str_comment2 = ''
         worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
-          str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? ', ' : '')
+          str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? '' : '')
         })
         
 
@@ -946,18 +976,14 @@ const Specialist = () => {
   }
 
 
-  useEffect(() => {
-    console.log("city: ", cityValue)
-    
-
-  }, [city, cityValue]);
+  // useEffect(() => {
+  //   console.log("city: ", cityValue)  
+  // }, [city, cityValue]);
 
 
   useEffect(() => {
-    console.log("speclist: ", speclist)
-    
-
-  }, [speclist]);
+    console.log("specialistCount: ", specialistCount)
+  }, [specialistCount]);
 
 
   const handleTg = event => {
@@ -1021,15 +1047,7 @@ const Specialist = () => {
     setFilePreview(URL.createObjectURL(e.target.files[0]));
   }
 
-  const clickSearch = (e) => {
-    setShowClear(true)
-    setText(e.target.value)
-  }
-
-  const clearSearch = () => {
-    setText('')
-  }
-
+  
   const clickDelete = (id) => {
     console.log(id)
 
@@ -1182,7 +1200,7 @@ const Specialist = () => {
                       <CCol sm={3} style={{position: 'relative'}}>
                         <CFormInput 
                           placeholder="Поиск..." 
-                          onChange={(e)=>clickSearch(e)} 
+                          onChange={handleInputChange} 
                           aria-label="spec"
                           value={text}
                           style={{display: showSearch ? 'block' : 'none'}}

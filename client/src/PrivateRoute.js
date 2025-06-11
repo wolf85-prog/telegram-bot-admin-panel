@@ -7,7 +7,7 @@ const PrivateRoute = observer(() => {
     const isAuth = false; // определить, разрешено ли, из контекста
     const {user} = useContext(Context)
 
-    console.log(user.isAuth)
+    //console.log(user.isAuth)
 
     if (!user.isAuth) {
         // Redirect them to the /login page, but save the current location they were

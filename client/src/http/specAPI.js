@@ -43,6 +43,15 @@ export const deleteSpecialist = async (id) =>{
     }
 }
 
+export const getSpecCountAll = async () =>{
+    try {
+        let response = await $host.get(`api/specialist/count/get`);
+        return response.data; 
+    } catch (error) {
+        console.log("error while calling getSpecCountAll api",error.message);
+    }
+}
+
 export const getSpecialistId = async (id) =>{
     try {
        let response = await $host.get(`api/specialist/${id}`);

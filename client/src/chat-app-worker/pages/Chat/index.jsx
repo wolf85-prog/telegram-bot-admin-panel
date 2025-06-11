@@ -35,7 +35,7 @@ const baseURL = process.env.REACT_APP_API_URL
 const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
 
 const Chat = () => {
-	const { userWorkers, setUserAsUnread, addNewMessage2, conversations, workersAll } = useUsersContext();
+	const { userWorkers, setUserAsUnread, addNewMessage2, workersAll, conversations} = useUsersContext();
 	const { personW } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
@@ -76,7 +76,8 @@ const Chat = () => {
 
 	const refreshPage = ()=>{
 		window.location.reload(true);
-	 }
+	}
+
 
 	useEffect(() => {
 		//console.log("personW: ", personW.id)
