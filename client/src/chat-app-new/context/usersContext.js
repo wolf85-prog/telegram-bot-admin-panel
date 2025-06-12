@@ -402,6 +402,8 @@ useEffect(() => {
       // 1 Все специалисты
       const res = await getSpecialist()
 
+	  //console.log("res: ", res)
+
       let arrAllWorkers = []
       res.map(async (worker, i) => {
         let str_spec = ''
@@ -441,7 +443,12 @@ useEffect(() => {
 
         let str_comment2 = ''
         worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
-          str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? ', ' : '')
+          str_comment2 = str_comment2 + item.content
+        })
+
+		let str_projects = ''
+        worker.projects && JSON.parse(worker.projects).map((item, index)=> {
+          str_projects = str_projects + item.content
         })
 
         const newWorker = {
@@ -489,7 +496,7 @@ useEffect(() => {
           name: worker.name,
           secondname: worker.secondname,
 		  pasdateborn: worker.pasdateborn,
-		  projects: worker.projects,
+		  projects: str_projects,
         }
         arrAllWorkers.push(newWorker)
       }) 

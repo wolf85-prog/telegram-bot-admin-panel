@@ -242,7 +242,7 @@ const Specialist = () => {
       setLoading(filteredData ? false : true)
     //}, [3000])
 
-    //setSpecialist(text === '' ? specialistCount : filteredData); 
+    setSpecialist(text === '' ? specialistCount : filteredData); 
 		
   }, [text]);
 
@@ -275,7 +275,7 @@ const Specialist = () => {
 
       // 2 специалисты 20 чел.
       let workers = await getSpecCount(20, specialist.length)
-      //console.log("specialist: ", workers)
+      console.log("specialist: ", workers)
 
       let arrWorkers = []
 
@@ -327,7 +327,12 @@ const Specialist = () => {
         worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
           str_comment2 = str_comment2 + item.content
         })
-        console.log("str_comment2: ", str_comment2)
+        //console.log("str_comment2: ", str_comment2)
+
+        let str_projects = ''
+        worker.projects && JSON.parse(worker.projects).map((item, index)=> {
+          str_projects = str_projects + item.content
+        })
 
         const newWorker = {
           id: worker.id,
@@ -369,6 +374,7 @@ const Specialist = () => {
           surname: worker.surname,
           name: worker.name,
           secondname: worker.secondname,
+          projects: str_projects,
         }
         arrWorkers.push(newWorker)
 
@@ -1764,7 +1770,7 @@ const Specialist = () => {
 
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', paddingLeft: '10px'}}>
                                       {projects}
                                     </ul>  
                                   </div> 
