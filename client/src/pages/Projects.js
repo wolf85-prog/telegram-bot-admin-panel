@@ -134,9 +134,8 @@ import {
   deleteMainspecProject,
 } from '../http/mainspecAPI'
 import { toast } from "react-toastify";
-
 import { $host } from '../http/index'
-import { toast } from 'react-toastify'
+
 
 const Projects = () => {
   //const navigate = useNavigate();
