@@ -1,7 +1,8 @@
-import React, { Suspense, useState, useEffect, useRef } from 'react'
+import React, { Suspense, useState, useEffect, useRef, useMemo } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import { Link, useLocation } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { Select as AntSelect } from 'antd';
 import {
   CContainer,
   CSpinner,
@@ -29,6 +30,13 @@ import {
   CCollapse,
   CFormCheck,
   CTooltip,
+  CFormSelect,
+  CForm,
+  CFormLabel,
+  CInputGroup,
+  CInputGroupText,
+  CFormFeedback,
+  CFormTextarea,
 } from '@coreui/react'
 import { cilPlus, cilCopy, cilVerticalAlignBottom, cilClearAll, cilSend } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
@@ -114,6 +122,7 @@ import {
   getWorkersReport,
   createWorkersReport,
   deleteWorkersReport,
+  createPereklichkaPoster,
 } from '../http/postersApi'
 
 import {
@@ -125,8 +134,8 @@ import {
   deleteMainspecProject,
 } from '../http/mainspecAPI'
 import { toast } from "react-toastify";
-
 import { $host } from '../http/index'
+
 
 const Projects = () => {
   //const navigate = useNavigate();
@@ -353,7 +362,7 @@ const Projects = () => {
 
       //0 все специалисты
       let all = await getSpecialist()
-      console.log('Все специалисты: ', all)
+      console.log('Все специалисты: ', 'all')
       const arrayWorkerAll = []
 
       all.map(async (user) => {
@@ -640,7 +649,7 @@ const Projects = () => {
 
     //setLocationProject(resProj.geo)
     const loc = platformsAll.find((item) => item.id === parseInt(resProj?.geo))
-    console.log('platformsAll: ', platformsAll)
+    console.log('platformsAll: ', 'platformsAll')
     console.log('geo: ', resProj?.geo)
     console.log('loc: ', loc)
     if (loc) {
@@ -693,6 +702,27 @@ ${loc.url}`
   useEffect(() => {
     console.log(pretendents)
   }, [pretendents])
+
+
+  // список дат из основного состава
+
+
+  // const mainSpecDates = mainspec.map((mainSpecItem) => ({
+  //     label: mainSpecItem.date,
+  //     data: mainSpecItem.date,
+  //   }))
+  
+  const mainSpecDates = useMemo(() =>
+     mainspec.map((mainSpecItem) => ({
+       label: mainSpecItem.date,
+       value: mainSpecItem.date,
+    })).filter((value, index, self) =>
+    index === self.findIndex((t) => (
+        t.value === value.value && value.value !== null
+    ))),
+      [mainspec]
+    );
+
 
   //сохранить проект
   const saveProject = async (id) => {
@@ -1325,11 +1355,11 @@ ${loc.url}`
   }
 
   const handleCreateReport = async (e) => {
-    console.log(e, typeof e)   
+    console.log(e, typeof e)
     const reportRequest = { type: e, crmId: crmID }
     const resTemp = await createWorkersReport(reportRequest)
-    console.log("Ответ 2", resTemp)
-    
+    console.log('Ответ 2', resTemp)
+
     const resWorkersReport = await getWorkersReport(crmID)
     console.log('resWorkersReport: ', resWorkersReport)
     setWorkersReport(resWorkersReport)
@@ -1370,6 +1400,35 @@ ${loc.url}`
     setPosters(resPosters)
   }
 
+  const handleSubmitPereklichka = async (e) =>{
+    e.preventDefault()    
+    const formData = new FormData(e.currentTarget)
+
+    // const newServices = serviceList.map((service) => ({
+    //   ...service,
+    //   service_price: format(Number(service.service_price)),
+    // }))
+
+    const pereclichkaForm = {
+      crmID: crmID,
+      pereklichkaDateTime: formData.get('pereklichkaDateTime'),
+      pereklichkaTechText: formData.get('pereklichkaTechText'),
+      pereklichkaStartScenario: formData.get('pereklichkaStartScenario'),
+      pereklichkaMerch: formData.get('pereklichkaMerch'),
+      pereklichkaWarmClothes: formData.get('pereklichkaWarmClothes'),
+      pereklichkaSpecific: formData.get('pereklichkaSpecific'),
+      pereklichkaDress: formData.get('pereklichkaDress'),
+      
+    }
+    console.log(pereclichkaForm)
+    console.log(mainspec)
+    createPereklichkaPoster(pereclichkaForm)
+    // navigate('/business/partner')
+    
+    setVisiblePereklichka(false)
+    toast.info('Делаем перекличку')
+  }
+
   const pressPoster = async () => {
     setPlayPoster(!playPoster)
     setShowLoader(true)
@@ -1390,7 +1449,7 @@ ${loc.url}`
   }
 
   const pressPereklichka = async () => {
-    setPlayPereklichka(!playPereklichka)    
+    setPlayPereklichka(!playPereklichka)
     setShowLoader(true)
     setVisiblePereklichka(!visiblePereklichka)
 
@@ -2582,7 +2641,7 @@ ${loc.url}`
                               )}
                             </div>
 
-                            {/* Перекличка */}
+                            {/* Перекличка старое
                             <div
                               onClick={pressPereklichka}
                               className="text-field text-field__input"
@@ -2694,9 +2753,150 @@ ${loc.url}`
                                 
                                      
                                    
-                            </div>
+                            </div>*/}
+                            <div
+                              onClick={pressPereklichka}
+                              className="text-field text-field__input"
+                              style={{
+                                textAlign: 'center',
+                                height: '40px',
+                                width: '40px',
+                                marginBottom: '5px',
+                                fontSize: '20px',
+                                color: 'blue',
+                              }}
+                            > 
+                          <img
+                                  src={btnPlay}
+                                  alt=""
+                                  width={30}
+                                  style={{ marginBottom: '7px' }}
+                                />
+                        </div>
+
+                            <CModal
+                              alignment="center"
+                              size="lg"
+                              visible={visiblePereklichka}
+                              onClose={() => setVisiblePereklichka(false)}
+                              aria-labelledby="VerticallyCenteredExample"
+                            >
+                              <CModalHeader>
+                                <CModalTitle id="VerticallyCenteredExample">
+                                  Создание переклички
+                                </CModalTitle>
+                              </CModalHeader>
+                              <CModalBody>
+                               <CForm
+                                  className="row g-3 needs-validation"
+                                  noValidate
+                                  // validated={true}
+                                  onSubmit={handleSubmitPereklichka}
+                                >
+                                  <CCol md={6}>
+                                    
+                                    <CFormSelect
+                                    style={{"--form-select-bg": '#1f282c', backgroundColor:"#1f282c"}}        
+                                    name="pereklichkaDateTime"
+                                      label="Смена"                                       
+                                      options={mainSpecDates}
+                                    ></CFormSelect>
+                                  </CCol>
+
+                                  
+                                  <CCol md={6} >
+                                     <CFormTextarea
+                                    
+                                      id="validationTextarea"
+                                      name="pereklichkaTechText"
+                                      label="Техзадание"
+                                      required
+                                      
+                                    ></CFormTextarea>
+                                  </CCol>
+                                 
+                                  <CCol md={6}>
+                                    
+                                    <CFormSelect
+                                    style={{"--form-select-bg": '#1f282c', backgroundColor:"#1f282c"}}                                  
+                                      name="pereklichkaStartScenario"
+                                      label="Старт"
+                                      options={[
+                                        { label: '180 минут', value: '180' },
+                                        { label: '150 минут', value: '150' },
+                                        { label: '120 минут', value: '120' },
+                                        { label: '90 минут', value: '90' },
+                                        { label: '60 минут', value: '60' },
+                                        { label: '30 минут', value: '30' },
+                                        { label: '15 минут', value: '15' },
+                                      ]}
+                                    ></CFormSelect>
+                                    
+                                  </CCol>
+                                  <CCol xs={6}>
+                                    <div style={{display: 'flex', gap: '15px', marginTop: "25px"}}>
+                                      <CFormCheck
+                                    className="mb-3"
+                                    name="pereklichkaMerch"
+                                    label="Мерч"
+                                    value={"Мерч"}
+                                    
+                                    
+                                  />
+                                   <CFormCheck
+                                    className="mb-3"
+                                    name="pereklichkaDress"
+                                    label="Дресс-код"
+                                    value={"Дресс-код"}
+                                    
+                                    
+                                  />
+                                  
+                                   <CFormCheck
+                                    className="mb-3"
+                                    id="validationFormCheck1"
+                                    label="Тёплая одежда"
+                                    value={"Тёплая одежда"}
+                                    name="pereklichkaWarmClothes"
+                                    
+                                  /></div>
+                                  </CCol>
+                                  <CCol xs={6}>
+                                    
+                                  <CFormCheck
+                                    type="radio"
+                                    value={"Улица"}
+                                    name="pereklichkaSpecific"
+                                    label="Улица"
+                                    
+                                  />
+                                  <CFormCheck
+                                    className="mb-3"
+                                    type="radio"
+                                    value={"Помещение"}
+                                    name="pereklichkaSpecific"
+                                   
+                                    label="Помещение"
+                             
+                                  /></CCol>
+                                  <CCol xs={12}>
+                                    <CButton color="primary" type="submit">
+                                      Отправить
+                                    </CButton>
+                                  </CCol>
+                                </CForm>
+                              </CModalBody>
+
+                              {/* <CModalFooter>
+                                <CButton color="secondary" onClick={() => setVisiblePassport(false)}>
+                                  Отмена
+                                </CButton>
+                                <CButton color="primary">Сохранить</CButton>
+                              </CModalFooter> */}
+                            </CModal>
 
                             {/* Списки */}
+
                             <div
                               className="text-field text-field__input"
                               style={{
@@ -2724,12 +2924,18 @@ ${loc.url}`
                                   <Dropdown.Item eventKey={1} class="dropdown-menu">
                                     ФИО
                                   </Dropdown.Item>
-                                  <Dropdown.Item eventKey={2} class="dropdown-menu">Серия / Номер</Dropdown.Item>
+                                  <Dropdown.Item eventKey={2} class="dropdown-menu">
+                                    Серия / Номер
+                                  </Dropdown.Item>
                                   <Dropdown.Item eventKey={3} class="dropdown-menu">
                                     Контакты
                                   </Dropdown.Item>
-                                  <Dropdown.Item eventKey={4} class="dropdown-menu">Дата рождения</Dropdown.Item>
-                                  <Dropdown.Item eventKey={5} class="dropdown-menu">Полный фарш</Dropdown.Item>
+                                  <Dropdown.Item eventKey={4} class="dropdown-menu">
+                                    Дата рождения
+                                  </Dropdown.Item>
+                                  <Dropdown.Item eventKey={5} class="dropdown-menu">
+                                    Полный фарш
+                                  </Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                             </div>
@@ -3341,7 +3547,10 @@ ${loc.url}`
                     </CCollapse>
                   </CCard>
 
-                  <CCard className="mb-4" style={{ display: showPosterTable ? 'block' : 'none', margin: 0, padding: 0 }}>
+                  <CCard
+                    className="mb-4"
+                    style={{ display: showPosterTable ? 'block' : 'none', margin: 0, padding: 0 }}
+                  >
                     <CCardHeader onClick={() => setVisibleC(!visibleC)}>Постеры</CCardHeader>
                     <CCollapse visible={visibleC}>
                       <CCardBody style={{ padding: 0 }}>
@@ -3351,7 +3560,7 @@ ${loc.url}`
                               ? posters.map((item, index) => (
                                   <>
                                     <img
-                                      style={{ cursor: 'pointer', margin: '5px 0 5px 5px'}}
+                                      style={{ cursor: 'pointer', margin: '5px 0 5px 5px' }}
                                       alt=""
                                       height={'107'}
                                       width={'190'}
@@ -3473,7 +3682,7 @@ ${loc.url}`
                                                   }}
                                                   size="lg"
                                                   icon={cilSend}
-                                                  onClick={()=> handleSendWorkersReport(item)}
+                                                  onClick={() => handleSendWorkersReport(item)}
                                                 />
 
                                                 <a
