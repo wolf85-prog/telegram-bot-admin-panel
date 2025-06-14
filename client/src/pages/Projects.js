@@ -2,6 +2,7 @@ import React, { Suspense, useState, useEffect, useRef, useMemo } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import { Link, useLocation } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { Select as AntSelect } from 'antd';
 import {
   CContainer,
   CSpinner,
@@ -121,6 +122,7 @@ import {
   getWorkersReport,
   createWorkersReport,
   deleteWorkersReport,
+  createPereklichkaPoster,
 } from '../http/postersApi'
 
 import {
@@ -703,11 +705,14 @@ ${loc.url}`
   //     data: mainSpecItem.date,
   //   }))
   
-  const mainSpecDates = useMemo(
+  const mainSpecDates = useMemo(() =>
      mainspec.map((mainSpecItem) => ({
        label: mainSpecItem.date,
        value: mainSpecItem.date,
-    })),
+    })).filter((value, index, self) =>
+    index === self.findIndex((t) => (
+        t.value === value.value && value.value !== null
+    ))),
       [mainspec]
     );
 
@@ -1382,16 +1387,19 @@ ${loc.url}`
     // }))
 
     const pereclichkaForm = {
-      pereklichkaTethtext: formData.get('pereklichkaTethtext'),
+      crmID: crmID,
+      pereklichkaDateTime: formData.get('pereklichkaDateTime'),
+      pereklichkaTechText: formData.get('pereklichkaTechText'),
       pereklichkaStartScenario: formData.get('pereklichkaStartScenario'),
       pereklichkaMerch: formData.get('pereklichkaMerch'),
       pereklichkaWarmClothes: formData.get('pereklichkaWarmClothes'),
-      pereklichkaSpecific: formData.get('pereklichkaSpecific'),      
+      pereklichkaSpecific: formData.get('pereklichkaSpecific'),
+      pereklichkaDress: formData.get('pereklichkaDress'),
       
     }
     console.log(pereclichkaForm)
     console.log(mainspec)
-    // createComplects(formValues)
+    createPereklichkaPoster(pereclichkaForm)
     // navigate('/business/partner')
     
     setVisiblePereklichka(false)
@@ -2758,8 +2766,9 @@ ${loc.url}`
                                   <CCol md={6}>
                                     
                                     <CFormSelect
-                                      name="pereklichkaStartScenario"
-                                      label="Смена"
+                                    style={{"--form-select-bg": '#1f282c', backgroundColor:"#1f282c"}}        
+                                    name="pereklichkaDateTime"
+                                      label="Смена"                                       
                                       options={mainSpecDates}
                                     ></CFormSelect>
                                   </CCol>
@@ -2769,53 +2778,72 @@ ${loc.url}`
                                      <CFormTextarea
                                     
                                       id="validationTextarea"
-                                      name="pereklichkaTethtext"
-                                      label="Техзадание"                                      
+                                      name="pereklichkaTechText"
+                                      label="Техзадание"
+                                      required
                                       
                                     ></CFormTextarea>
                                   </CCol>
                                  
                                   <CCol md={6}>
+                                    
                                     <CFormSelect
+                                    style={{"--form-select-bg": '#1f282c', backgroundColor:"#1f282c"}}                                  
                                       name="pereklichkaStartScenario"
                                       label="Старт"
                                       options={[
-                                       
-                                        { label: '120 минут', value: '120 минут' },
-                                        { label: '60 минут', value: '60 минут' },
-                                        { label: '30 минут', value: '30 минут' },
+                                        { label: '180 минут', value: '180' },
+                                        { label: '150 минут', value: '150' },
+                                        { label: '120 минут', value: '120' },
+                                        { label: '90 минут', value: '90' },
+                                        { label: '60 минут', value: '60' },
+                                        { label: '30 минут', value: '30' },
+                                        { label: '15 минут', value: '15' },
                                       ]}
                                     ></CFormSelect>
                                     
                                   </CCol>
                                   <CCol xs={6}>
-                                    <CFormCheck
+                                    <div style={{display: 'flex', gap: '15px', marginTop: "25px"}}>
+                                      <CFormCheck
                                     className="mb-3"
                                     name="pereklichkaMerch"
                                     label="Мерч"
+                                    value={"Мерч"}
                                     
                                     
                                   />
                                    <CFormCheck
                                     className="mb-3"
-                                    id="validationFormCheck1"
-                                    label="Тёплая одежда"
-                                    name="pereklichkaWarmClothes"
+                                    name="pereklichkaDress"
+                                    label="Дресс-код"
+                                    value={"Дресс-код"}
+                                    
                                     
                                   />
+                                  
+                                   <CFormCheck
+                                    className="mb-3"
+                                    id="validationFormCheck1"
+                                    label="Тёплая одежда"
+                                    value={"Тёплая одежда"}
+                                    name="pereklichkaWarmClothes"
+                                    
+                                  /></div>
                                   </CCol>
                                   <CCol xs={6}>
                                     
                                   <CFormCheck
                                     type="radio"
-                                    
+                                    value={"Улица"}
                                     name="pereklichkaSpecific"
                                     label="Улица"
-                                    required
+                                    
                                   />
                                   <CFormCheck
                                     className="mb-3"
                                     type="radio"
+                                    value={"Помещение"}
                                     name="pereklichkaSpecific"
                                    
                                     label="Помещение"
