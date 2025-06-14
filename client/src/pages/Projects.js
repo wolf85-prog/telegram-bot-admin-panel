@@ -2,7 +2,6 @@ import React, { Suspense, useState, useEffect, useRef, useMemo } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import { Link, useLocation } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Select as AntSelect } from 'antd';
 import {
   CContainer,
   CSpinner,
