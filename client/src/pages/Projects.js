@@ -2765,7 +2765,14 @@ ${loc.url}`
                                 fontSize: '20px',
                                 color: 'blue',
                               }}
-                            ></div>
+                            > 
+                          <img
+                                  src={btnPlay}
+                                  alt=""
+                                  width={30}
+                                  style={{ marginBottom: '7px' }}
+                                />
+                        </div>
 
                             <CModal
                               alignment="center"
