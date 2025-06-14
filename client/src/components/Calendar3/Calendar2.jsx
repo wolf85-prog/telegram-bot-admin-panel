@@ -1443,7 +1443,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                 
                 if (currentDay === day) {
                     ind = index
-                    console.log("index: ", currentDay, day, index)
+                    //console.log("index: ", currentDay, day, index)
                 }
 
                 if (d > 0) {

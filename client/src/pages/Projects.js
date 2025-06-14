@@ -133,6 +133,9 @@ import {
   getMainSpecId,
   deleteMainspecProject,
 } from '../http/mainspecAPI'
+import { toast } from "react-toastify";
+
+import { $host } from '../http/index'
 import { toast } from 'react-toastify'
 
 const Projects = () => {
@@ -140,6 +143,8 @@ const Projects = () => {
   const queryClient = useQueryClient()
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
   const { companysAll, managersAll, workersAll, setWorkersAll, platformsAll } = useUsersContext()
+
+  const tokenManager = process.env.REACT_APP_TELEGRAM_API_TOKEN
 
   const [showSidebar, setShowSidebar] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
@@ -210,6 +215,8 @@ const Projects = () => {
   const [visiblePoster, setVisiblePoster] = useState('')
 
   const [visiblePereklichka, setVisiblePereklichka] = useState(false)
+
+  const [projectChatId, setProjectChatId] = useState('')
 
   const [showMainTable, setShowMainTable] = useState(false)
   const [showPretendentTable, setShowPretendentTable] = useState(false)
@@ -454,6 +461,7 @@ const Projects = () => {
 
     const resProj = await getProjectId(id)
     console.log('resProj: ', resProj)
+    setProjectChatId(resProj.chatId)
 
     const resPretendents = await getPretendentProjectId(id)
     console.log('pretendents: ', resPretendents)
@@ -1360,7 +1368,23 @@ ${loc.url}`
 
   const handleSendWorkersReport = async (e) => {
     console.log(e)
-    toast.info('Отправка отчета еще в разработке')
+    toast.info(`Отчет отправлен менеджеру с id: ${projectChatId}`)
+
+    //send photo
+    let poster = 'https://proj.uley.team/upload/poster_akkreditacija.jfif' //poster anketa
+    const keyboard = JSON.stringify({
+			inline_keyboard: [
+				[
+					{"text": "XLSX", callback_data:'/report_XLSX'},
+          {"text": "PSD", callback_data:'/report_PSD'},
+				],
+			]
+		});
+    const chatId = "805436270"
+
+    const url_send_photo = `https://api.telegram.org/bot${tokenManager}/sendPhoto?chat_id=${projectChatId}&photo=${poster}&reply_markup=${keyboard}`
+    console.log(url_send_photo)	
+    await $host.get(url_send_photo);
   }
 
   const handleDeleteReport = async (reportId) => {
