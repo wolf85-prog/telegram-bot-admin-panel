@@ -2,7 +2,7 @@ import React, { Suspense, useState, useEffect, useRef, useMemo } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import { Link, useLocation } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Select as AntSelect } from 'antd';
+import { Select as AntSelect, ConfigProvider, Button, Flex } from 'antd';
 import {
   CContainer,
   CSpinner,
@@ -2782,9 +2782,7 @@ ${loc.url}`
                               aria-labelledby="VerticallyCenteredExample"
                             >
                               <CModalHeader>
-                                <CModalTitle id="VerticallyCenteredExample">
-                                  Создание переклички
-                                </CModalTitle>
+                                
                               </CModalHeader>
                               <CModalBody>
                                <CForm
@@ -2815,13 +2813,30 @@ ${loc.url}`
                                     ></CFormTextarea>
                                   </CCol>
                                  
-                                  <CCol md={6}>
-                                    
-                                    <CFormSelect
-                                    style={{"--form-select-bg": '#1f282c', backgroundColor:"#1f282c"}}                                  
-                                      name="pereklichkaStartScenario"
-                                      label="Старт"
-                                      options={[
+                                  <Flex justify='space-between'>
+                                    <ConfigProvider
+                                      theme={{
+                                        components: {
+                                          Select: {                                            
+                                            selectorBg:"#1D1F2B",                                            
+                                            border: 'none',
+                                            colorBorder: "#6c6666",
+                                            // color: "#ffffff"
+                                            colorText: '#ffffff',
+                                            optionSelectedBg: '6c6666',
+                                            optionSelectedColor: '#ffffff'
+                                          },
+                                          
+                                        },
+                                      }}
+                                    ><AntSelect
+                                     suffixIcon={null}
+                                      showSearch
+                                      defaultValue={{ label: '180 минут', value: '180' }}
+                                      optionFilterProp="label"
+                                      // onChange={onChange}
+                                      // onSearch={onSearch}
+                                       options={[
                                         { label: '180 минут', value: '180' },
                                         { label: '150 минут', value: '150' },
                                         { label: '120 минут', value: '120' },
@@ -2830,9 +2845,29 @@ ${loc.url}`
                                         { label: '30 минут', value: '30' },
                                         { label: '15 минут', value: '15' },
                                       ]}
-                                    ></CFormSelect>
+                                      styles={{
+                                        root:{
+                                          width: '100px',                                          
+                                          color: '#ffffff'
+                                          
+                                        },                                        
+                                        popup: {
+                                          root: {
+                                            backgroundColor: '#1D1F2B',                                            
+                                            border: 'none',
+                                            width: '100px',
+                                            zIndex: '1060',
+                                            color: '#ffffff'
+                                          }
+                                        }
+                                      }}                                       
+                                    /></ConfigProvider>
                                     
-                                  </CCol>
+                                    <Button type="primary" onClick={()=> console.log("444")}>
+                                    Toggle disabled
+                                  </Button>
+                                      
+                                  </Flex>
                                   <CCol xs={6}>
                                     <div style={{display: 'flex', gap: '15px', marginTop: "25px"}}>
                                       <CFormCheck
@@ -2861,24 +2896,7 @@ ${loc.url}`
                                     
                                   /></div>
                                   </CCol>
-                                  <CCol xs={6}>
-                                    
-                                  <CFormCheck
-                                    type="radio"
-                                    value={"Улица"}
-                                    name="pereklichkaSpecific"
-                                    label="Улица"
-                                    
-                                  />
-                                  <CFormCheck
-                                    className="mb-3"
-                                    type="radio"
-                                    value={"Помещение"}
-                                    name="pereklichkaSpecific"
-                                   
-                                    label="Помещение"
-                             
-                                  /></CCol>
+                                
                                   <CCol xs={12}>
                                     <CButton color="primary" type="submit">
                                       Отправить
