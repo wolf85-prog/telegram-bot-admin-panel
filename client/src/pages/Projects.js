@@ -2781,40 +2781,30 @@ ${loc.url}`
                               onClose={() => setVisiblePereklichka(false)}
                               aria-labelledby="VerticallyCenteredExample"
                             >
-                              <CModalHeader>
-                                
-                              </CModalHeader>
+               
                               <CModalBody>
                                <CForm
-                                  className="row g-3 needs-validation"
+                                 
                                   noValidate
                                   // validated={true}
                                   onSubmit={handleSubmitPereklichka}
                                 >
-                                  <CCol md={6}>
+                                  <CRow>
+                                    <CCol md={6} lg={6}>
                                     
-                                    <CFormSelect
-                                    style={{"--form-select-bg": '#1f282c', backgroundColor:"#1f282c"}}        
-                                    name="pereklichkaDateTime"
-                                      label="Смена"                                       
-                                      options={mainSpecDates}
-                                    ></CFormSelect>
-                                  </CCol>
+                                      <CRow className="justify-content-between"> 
+                                        <CFormSelect
+                                      style={{"--form-select-bg": '#1f282c', backgroundColor:"#1f282c"}}        
+                                      name="pereklichkaDateTime"                                                           
+                                        options={mainSpecDates}
+                                      >
 
-                                  
-                                  <CCol md={6} >
-                                     <CFormTextarea
-                                    
-                                      id="validationTextarea"
-                                      name="pereklichkaTechText"
-                                      label="Техзадание"
-                                      required
-                                      
-                                    ></CFormTextarea>
-                                  </CCol>
-                                 
-                                  <Flex justify='space-between'>
-                                    <ConfigProvider
+                                      </CFormSelect>
+                                    </CRow>
+                                   
+                                    <CRow className="justify-content-between">
+                                      <CCol lg={6} >
+                                      <ConfigProvider
                                       theme={{
                                         components: {
                                           Select: {                                            
@@ -2862,13 +2852,34 @@ ${loc.url}`
                                         }
                                       }}                                       
                                     /></ConfigProvider>
-                                    
-                                    <Button type="primary" onClick={()=> console.log("444")}>
+                                    </CCol>
+                                    <CCol lg={6} >
+                                      <Button type="primary" onClick={()=> console.log("444")}>
                                     Toggle disabled
                                   </Button>
+                                  </CCol></CRow>
+                                  </CCol>
+
+                                  
+                                  <CCol md={6}  lg={6}>
+                                     <CFormTextarea
+
+                                    style={{height: "100px"}}
+                                      id="validationTextarea"
+                                      name="pereklichkaTechText"                                     
                                       
-                                  </Flex>
-                                  <CCol xs={6}>
+                                      
+                                    ></CFormTextarea>
+                                  </CCol>
+                                 
+                                  
+                                    
+                                    
+                                  </CRow>
+                                      
+                                  
+                                  <CRow>
+                                    <CCol xs={6}  lg={6}>
                                     <div style={{display: 'flex', gap: '15px', marginTop: "25px"}}>
                                       <CFormCheck
                                     className="mb-3"
@@ -2897,20 +2908,16 @@ ${loc.url}`
                                   /></div>
                                   </CCol>
                                 
-                                  <CCol xs={12}>
+                                  <CCol xs={6} lg={6}>
                                     <CButton color="primary" type="submit">
                                       Отправить
                                     </CButton>
                                   </CCol>
+                                  </CRow>
                                 </CForm>
                               </CModalBody>
 
-                              {/* <CModalFooter>
-                                <CButton color="secondary" onClick={() => setVisiblePassport(false)}>
-                                  Отмена
-                                </CButton>
-                                <CButton color="primary">Сохранить</CButton>
-                              </CModalFooter> */}
+                              
                             </CModal>
 
                             {/* Списки */}
