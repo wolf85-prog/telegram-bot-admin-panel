@@ -1770,9 +1770,10 @@ const Specialist = () => {
                                     <input className="text-field__input" type="text" name="passportScan" id="passportScan" value={passportScan} onChange={(e) => setPassportScan(e.target.value)} style={{width: '250px', overflow: 'hidden', textOverflow: 'ellipsis'}}/>
                                   </div> 
 
+                                  {/* проекты */}
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', paddingLeft: '10px'}}>
+                                    <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', paddingLeft: '10px', overflowY: 'scroll'}}>
                                       {projects}
                                     </ul>  
                                   </div> 
