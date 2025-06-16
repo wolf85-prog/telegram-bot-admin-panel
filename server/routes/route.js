@@ -35,7 +35,8 @@ const { getProjects, getProjectsId, getProjectNew, getProjectsAll, getProjectsDe
 const { uploadFile, getImage, sendNarush } = require( "../controllers/fileController.js")
 
 const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers/wuserbotController')
-const { newMessageWorker, delMessageWorker, getMessagesWorker, getMessagesWorker2, getAllMessagesWorker, getMessagesWorkerCount } = require('../controllers/wmessageController')
+const { newMessageWorker, delMessageWorker, getMessagesWorker, getMessagesWorker2, getAllMessagesWorker, 
+    getMessagesWorkerCount } = require('../controllers/wmessageController')
 const { newConversationWorker, getConversationWorker, getConversationsW } = require('../controllers/wconversationController')
 const { getWorkers, getWorkersCount, getWorker, editWorker, blockWorker, getCanceled, getCanceledId, addCanceled, updateWorkers} = require('../controllers/workersController')
 const { newPretendent, getPretendent, getPretendentId, getAllPretendent, 
@@ -43,13 +44,18 @@ const { newPretendent, getPretendent, getPretendentId, getAllPretendent,
 
 const { newPlan, getPlan, addTimer } = require('../controllers/planController')
 
-const { getSpecialist, getSpecCount, editSpecialist, getSpecialistId, addSpecialist, deleteSpecialist, getSpecCountAll, getSpecialistPhone, getSpecialistChatId, blockSpecialist, getPaginatedSpecialist, getSpecialistFilter, searchSpecialists} = require('../controllers/specialistController')
+const { getSpecialist, getSpecCount, editSpecialist, getSpecialistId, addSpecialist, deleteSpecialist, 
+    getSpecCountAll, getSpecialistPhone, getSpecialistChatId, blockSpecialist, getPaginatedSpecialist, 
+    getSpecialistFilter, searchSpecialists} = require('../controllers/specialistController')
 
-const { getManagers, getManagerCount, editManager, getManagerId, addManager, deleteManager, getManagerCountAll } = require('../controllers/managersController')
+const { getManagers, getManagerCount, editManager, getManagerId, getManagerChatId, addManager, 
+    deleteManager, getManagerCountAll } = require('../controllers/managersController')
 
-const { getCompanys, getCompanyCount, editCompany, getCompanyId, addCompany, deleteCompany, getCompanyCountAll } = require('../controllers/companysController')
+const { getCompanys, getCompanyCount, editCompany, getCompanyId, addCompany, 
+    deleteCompany, getCompanyCountAll } = require('../controllers/companysController')
 
-const { getPlatforms, getPlatformCount, editPlatform, getPlatformId, addPlatform, deletePlatform, getPlatformCountAll } = require('../controllers/platformsController')
+const { getPlatforms, getPlatformCount, editPlatform, getPlatformId, addPlatform, 
+    deletePlatform, getPlatformCountAll } = require('../controllers/platformsController')
 
 const { getMainSpecProject, getMainSpecProject2, getMainSpecId, editMainspec, deleteMainspec, addMainspec,
      getMainspecCountAll, deleteMainspecProject } = require('../controllers/mainspecController')
@@ -218,7 +224,7 @@ route.patch('/managers/update/:id', editManager)
 route.get("/managers/delete/:id", deleteManager);
 route.post("/managers/add", addManager);
 route.get("/managers/count/get", getManagerCountAll);
-route.get("/managers/chat/:id", getManagerId);
+route.get("/managers/chat/:id", getManagerChatId);
 
 //----------------- Компании ---------------------------------
 route.get('/companys/get', getCompanys)

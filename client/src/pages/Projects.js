@@ -134,6 +134,7 @@ import {
 } from '../http/mainspecAPI'
 import { toast } from "react-toastify";
 import { $host } from '../http/index'
+import { getManagerId } from 'src/http/managerAPI'
 
 
 const Projects = () => {
@@ -459,7 +460,10 @@ const Projects = () => {
 
     const resProj = await getProjectId(id)
     console.log('resProj: ', resProj)
-    setProjectChatId(resProj.chatId)
+
+    const resManager = await getManagerId(resProj.managerId)
+    console.log('resManager: ', resManager)
+    setProjectChatId(resManager.chatId)
 
     const resPretendents = await getPretendentProjectId(id)
     console.log('pretendents: ', resPretendents)
@@ -1366,6 +1370,7 @@ ${loc.url}`
 
   const handleSendWorkersReport = async (e) => {
     console.log(e)
+
     toast.info(`Отчет отправлен менеджеру с id: ${projectChatId}`)
 
     //send photo
@@ -1378,7 +1383,7 @@ ${loc.url}`
 				],
 			]
 		});
-    const chatId = "805436270"
+    //const chatId = "805436270"
 
     const url_send_photo = `https://api.telegram.org/bot${tokenManager}/sendPhoto?chat_id=${projectChatId}&photo=${poster}&reply_markup=${keyboard}`
     console.log(url_send_photo)	

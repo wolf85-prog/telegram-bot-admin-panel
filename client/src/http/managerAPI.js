@@ -9,6 +9,15 @@ export const getManager = async () =>{
     }
 }
 
+export const getManagerId = async (id) =>{
+    try {
+       let response = await $host.get(`api/managers/get/${id}`);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getManagerId api", error.message);
+    }
+}
+
 export const getManagerCount = async (count, prev) =>{
     try {
        let response = await $host.get(`api/managers/count/get/${count}/${prev}`);

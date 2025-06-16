@@ -111,10 +111,20 @@ class ManagersController {
         }
     }
 
-    async getManagerId(req, res) {
+    async getManagerChatId(req, res) {
         const {id} = req.params
         try {
             const manager = await Manager.findOne({where: {chatId: id.toString()}})
+            return res.status(200).json(manager);
+        } catch (err) {
+            return res.status(500).json(err);
+        }
+    }
+
+    async getManagerId(req, res) {
+        const {id} = req.params
+        try {
+            const manager = await Manager.findOne({where: {id: id.toString()}})
             return res.status(200).json(manager);
         } catch (err) {
             return res.status(500).json(err);
