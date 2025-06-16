@@ -1177,12 +1177,14 @@ const Specialist = () => {
         return usersCopy;
       });
 
+      setPassport(pass_str)
+
       setVisiblePassport(false)
       setShowModal(true)
 
       //сохранить изменения в базе
       const res = await editSpecialist(data, id)
-      console.log("res save: ", res)
+      //console.log("res save: ", res)
 
       setTimeout(()=> {
         setShowModal(false)
