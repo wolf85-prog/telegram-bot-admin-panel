@@ -1379,7 +1379,7 @@ ${loc.url}`
 			inline_keyboard: [
 				[
 					{"text": "XLSX", callback_data:'/report_XLSX'},
-          {"text": "PSD", callback_data:'/report_PSD'},
+          {"text": "PDF", callback_data:'/report_PDF'},
 				],
 			]
 		});
