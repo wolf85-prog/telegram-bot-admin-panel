@@ -1600,13 +1600,16 @@ const fetchAdminSpec = (data) => {
 		const currentDate = new Date().toLocaleDateString()
 
 		//if (usersCopy[userIndex].messages[currentDate]) {
-		if (!isObjectEmpty(usersCopy[userIndex].messages)) {
-			if (usersCopy[userIndex].messages[currentDate]) {
-				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
-			} else {
-				usersCopy[userIndex].messages[currentDate] = [];
-				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+		if (!isObjectEmpty(usersCopy[userIndex]?.messages)) {
+			if (usersCopy[userIndex]) {
+				if (usersCopy[userIndex].messages[currentDate]) {
+					usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+				} else {
+					usersCopy[userIndex].messages[currentDate] = [];
+					usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+				}
 			}
+			
 		} else {
 			usersCopy[userIndex].messages[currentDate] = [];
 			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
@@ -2124,6 +2127,7 @@ const fetchNotifAdmin = async (dataAll) => {
 }
 
 function isObjectEmpty(obj) {
+	if (obj)
 	return Object.keys(obj).length === 0;
 }
 
