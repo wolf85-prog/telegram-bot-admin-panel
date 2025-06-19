@@ -1432,8 +1432,8 @@ ${loc.url}`
     const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "XLSX", callback_data:'/report_XLSX'},
-          {"text": "PDF", callback_data:'/report_PDF'},
+					{"text": "XLSX", url:'https://proj.uley.team/upload/poster_akkreditacija.xlsx'},
+          {"text": "PDF", url:'https://proj.uley.team/upload/poster_akkreditacija.pdf'},
 				],
 			]
 		});
