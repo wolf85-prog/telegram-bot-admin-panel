@@ -362,7 +362,8 @@ const Projects = () => {
     //1
     let arrCompanys = []
     companysAll.map((item, index) => {
-      arrCompanys.push(item.title)
+      if (item.title !== 'Неизвестная компания')
+        arrCompanys.push(item.title)
     })
     const sortedComp = [...arrCompanys].sort((a, b) => {
       var cityA = a,
@@ -3228,7 +3229,9 @@ ${loc.url}`
                                             )}
                                           </InputMask>
                                           <InputMask
-                                            mask="99:99"
+                                            mask={mask2}
+                                            formatChars={formatChars2}
+                                            beforeMaskedValueChange={beforeMaskedValueChange2}
                                             value={
                                               item.date !== 'undefined'
                                                 ? item.date?.split('T')[1]

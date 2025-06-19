@@ -1205,7 +1205,7 @@ const Companys = () => {
                                   </div>
 
                                   {/* phone */}
-                                  <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} style={{marginBottom: '44px'}}>
+                                  <div className="text-field" onMouseOver={()=>setShowSavePhone(true)} onMouseOut={()=>setShowSavePhone(false)} style={{marginBottom: '44px'}}>
                                       <img 
                                         src={Disketa} 
                                         onClick={()=>{navigator.clipboard.writeText(phone)}} 
