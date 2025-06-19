@@ -517,7 +517,7 @@ const Projects = () => {
 
     const resManager = await getManagerId(resProj.managerId)
     console.log('resManager: ', resManager)
-    setProjectChatId(resManager.chatId)
+    setProjectChatId(resManager?.chatId)
 
     const resPretendents = await getPretendentProjectId(id)
     console.log('pretendents: ', resPretendents)
