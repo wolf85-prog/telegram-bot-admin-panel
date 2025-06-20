@@ -136,7 +136,7 @@ import {
 import { toast } from "react-toastify";
 import { $host } from '../http/index'
 import { getManagerId } from 'src/http/managerAPI'
-
+import RollCall from '../components/RollCall'
 
 const Projects = () => {
   //const navigate = useNavigate();
@@ -770,11 +770,18 @@ ${loc.url}`
   //     data: mainSpecItem.date,
   //   }))
   
-  const mainSpecDates = useMemo(() =>
-     mainspec.map((mainSpecItem) => ({
-       label: mainSpecItem.date,
-       value: mainSpecItem.date,
-    })).filter((value, index, self) =>
+  // const inititalShiftData = useMemo(() =>
+  //    mainspec.map((mainSpecItem) => ({
+  //      label: mainSpecItem.date,
+  //      value: mainSpecItem.date,
+  //   })).filter((value, index, self) =>
+  //   index === self.findIndex((t) => (
+  //       t.value === value.value && value.value !== null
+  //   ))),
+  //     [mainspec]
+  //   );
+    const inititalShiftData = useMemo(() =>
+     mainspec.map((mainSpecItem) =>  mainSpecItem.date).filter((value, index, self) =>
     index === self.findIndex((t) => (
         t.value === value.value && value.value !== null
     ))),
@@ -2840,145 +2847,18 @@ ${loc.url}`
 
                             <CModal
                               alignment="center"
-                              size="lg"
+                              // size="lg"
                               visible={visiblePereklichka}
                               onClose={() => setVisiblePereklichka(false)}
-                              aria-labelledby="VerticallyCenteredExample"
+                              style={{ '--cui-modal-width': '650px' }}
                             >
                
                               <CModalBody>
-                               <CForm
-                                 
-                                  noValidate
-                                  // validated={true}
-                                  onSubmit={handleSubmitPereklichka}
-                                >
-                                  <CRow>
-                                    <CCol md={6} lg={6}>
-                                    
-                                      <CRow className="justify-content-between"> 
-                                        <CFormSelect
-                                      style={{"--form-select-bg": '#1f282c', backgroundColor:"#1f282c"}}        
-                                      name="pereklichkaDateTime"                                                           
-                                        options={mainSpecDates}
-                                      >
-
-                                      </CFormSelect>
-                                    </CRow>
-                                   
-                                    <CRow className="justify-content-between">
-                                      <CCol lg={6} >
-                                      <ConfigProvider
-                                      theme={{
-                                        components: {
-                                          Select: {                                            
-                                            selectorBg:"#1D1F2B",                                            
-                                            border: 'none',
-                                            colorBorder: "#6c6666",
-                                            // color: "#ffffff"
-                                            colorText: '#ffffff',
-                                            optionSelectedBg: '6c6666',
-                                            optionSelectedColor: '#ffffff'
-                                          },
-                                          
-                                        },
-                                      }}
-                                    ><AntSelect
-                                     suffixIcon={null}
-                                      showSearch
-                                      defaultValue={{ label: '180 минут', value: '180' }}
-                                      optionFilterProp="label"
-                                      // onChange={onChange}
-                                      // onSearch={onSearch}
-                                       options={[
-                                        { label: '180 минут', value: '180' },
-                                        { label: '150 минут', value: '150' },
-                                        { label: '120 минут', value: '120' },
-                                        { label: '90 минут', value: '90' },
-                                        { label: '60 минут', value: '60' },
-                                        { label: '30 минут', value: '30' },
-                                        { label: '15 минут', value: '15' },
-                                      ]}
-                                      styles={{
-                                        root:{
-                                          width: '100px',                                          
-                                          color: '#ffffff'
-                                          
-                                        },                                        
-                                        popup: {
-                                          root: {
-                                            backgroundColor: '#1D1F2B',                                            
-                                            border: 'none',
-                                            width: '100px',
-                                            zIndex: '1060',
-                                            color: '#ffffff'
-                                          }
-                                        }
-                                      }}                                       
-                                    /></ConfigProvider>
-                                    </CCol>
-                                    <CCol lg={6} >
-                                      <Button type="primary" onClick={()=> console.log("444")}>
-                                    Toggle disabled
-                                  </Button>
-                                  </CCol></CRow>
-                                  </CCol>
-
-                                  
-                                  <CCol md={6}  lg={6}>
-                                     <CFormTextarea
-
-                                    style={{height: "100px"}}
-                                      id="validationTextarea"
-                                      name="pereklichkaTechText"                                     
-                                      
-                                      
-                                    ></CFormTextarea>
-                                  </CCol>
-                                 
-                                  
-                                    
-                                    
-                                  </CRow>
-                                      
-                                  
-                                  <CRow>
-                                    <CCol xs={6}  lg={6}>
-                                    <div style={{display: 'flex', gap: '15px', marginTop: "25px"}}>
-                                      <CFormCheck
-                                    className="mb-3"
-                                    name="pereklichkaMerch"
-                                    label="Мерч"
-                                    value={"Мерч"}
-                                    
-                                    
-                                  />
-                                   <CFormCheck
-                                    className="mb-3"
-                                    name="pereklichkaDress"
-                                    label="Дресс-код"
-                                    value={"Дресс-код"}
-                                    
-                                    
-                                  />
-                                  
-                                   <CFormCheck
-                                    className="mb-3"
-                                    id="validationFormCheck1"
-                                    label="Тёплая одежда"
-                                    value={"Тёплая одежда"}
-                                    name="pereklichkaWarmClothes"
-                                    
-                                  /></div>
-                                  </CCol>
-                                
-                                  <CCol xs={6} lg={6}>
-                                    <CButton color="primary" type="submit">
-                                      Отправить
-                                    </CButton>
-                                  </CCol>
-                                  </CRow>
-                                </CForm>
+                               <RollCall
+                                  inititalShiftData={inititalShiftData}
+                                  crmId={crmID}
+                                  setVisiblePereklichka={setVisiblePereklichka}
+                                />
                               </CModalBody>
 
                               

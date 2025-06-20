@@ -85,8 +85,6 @@ export const createPereklichkaPoster = async (data) =>{
     try {
         
        let response = await axiosInstance.post(`api/report/pereklichka`, data);
-       //console.log(response);
-       console.log("Ответ 1", response.data)
        return response.data;
     } catch (error) {
         console.log("error while calling getWorkersReport api", error.response.data.detail);
