@@ -770,20 +770,11 @@ ${loc.url}`
   //     data: mainSpecItem.date,
   //   }))
   
-  // const inititalShiftData = useMemo(() =>
-  //    mainspec.map((mainSpecItem) => ({
-  //      label: mainSpecItem.date,
-  //      value: mainSpecItem.date,
-  //   })).filter((value, index, self) =>
-  //   index === self.findIndex((t) => (
-  //       t.value === value.value && value.value !== null
-  //   ))),
-  //     [mainspec]
-  //   );
+
     const inititalShiftData = useMemo(() =>
      mainspec.map((mainSpecItem) =>  mainSpecItem.date).filter((value, index, self) =>
     index === self.findIndex((t) => (
-        t.value === value.value && value.value !== null
+        t === value && value !== null
     ))),
       [mainspec]
     );
