@@ -3201,9 +3201,9 @@ ${loc.url}`
                                       ) : (
                                         <div style={{ display: 'flex' }}>
                                           <InputMask
-                                            mask={mask}
-                                            formatChars={formatChars}
-                                            beforeMaskedValueChange={beforeMaskedValueChange}
+                                            mask="99.99.9999"
+                                            // formatChars={formatChars}
+                                            // beforeMaskedValueChange={beforeMaskedValueChange}
                                             value={
                                               item.date !== 'undefined'
                                                 ? item.date?.split('T')[0]
