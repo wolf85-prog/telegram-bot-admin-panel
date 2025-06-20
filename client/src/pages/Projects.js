@@ -135,6 +135,7 @@ import {
 } from '../http/mainspecAPI'
 import { toast } from "react-toastify";
 import { $host } from '../http/index'
+import { getManagerId } from 'src/http/managerAPI'
 
 
 const Projects = () => {
@@ -256,6 +257,59 @@ const Projects = () => {
     'background-color': '#2a2f32',
   }
 
+  let mask = '12.34.5678';
+  let formatChars = {
+    '1': '[0-3]',
+    '2': '[0-9]',
+    '3': '[0-1]',
+    '4': '[0-9]',
+    '5': '[1-2]',
+    '6': '[0-0]',
+    '7': '[0-3]',
+    '8': '[0-9]'
+  };
+
+  let beforeMaskedValueChange = (newState, oldState, userInput) => {
+    let { value } = newState;
+
+    // Conditional mask for the 2nd digit base on the first digit
+    if(value.startsWith('0')) {
+      console.log(0)
+      formatChars['2'] = '[1-9]'; // To block 24, 25, etc.
+      if (value.startsWith('1', 3)) {
+        formatChars['4'] = '[0-2]'; 
+        console.log(1)
+      } 
+    }  
+    else if(value.startsWith('1'))
+      formatChars['2'] = '[0-9]'; // To allow 05, 12, etc.
+    else if(value.startsWith('2'))
+      formatChars['2'] = '[0-9]'; // To allow 05, 12, etc.      
+    else 
+      formatChars['2'] = '[0-1]'; // To allow 05, 12, etc.
+    return {value, selection: newState.selection};
+  }
+
+
+  let mask2 = '12:34';
+  let formatChars2 = {
+    '1': '[0-2]',
+    '2': '[0-9]',
+    '3': '[0-5]',
+    '4': '[0-9]'
+  };
+
+  let beforeMaskedValueChange2 = (newState, oldState, userInput) => {
+    let { value } = newState;
+
+    // Conditional mask for the 2nd digit base on the first digit
+    if(value.startsWith('2'))
+      formatChars['2'] = '[0-3]'; // To block 24, 25, etc.
+    else
+      formatChars['2'] = '[0-9]'; // To allow 05, 12, etc.
+    return {value, selection: newState.selection};
+  }
+
   // const table = useReactTable({
   //   defaultColumn: {
   //     size: 200, //starting column size
@@ -309,7 +363,8 @@ const Projects = () => {
     //1
     let arrCompanys = []
     companysAll.map((item, index) => {
-      arrCompanys.push(item.title)
+      if (item.title !== 'Неизвестная компания')
+        arrCompanys.push(item.title)
     })
     const sortedComp = [...arrCompanys].sort((a, b) => {
       var cityA = a,
@@ -460,7 +515,10 @@ const Projects = () => {
 
     const resProj = await getProjectId(id)
     console.log('resProj: ', resProj)
-    setProjectChatId(resProj.chatId)
+
+    const resManager = await getManagerId(resProj.managerId)
+    console.log('resManager: ', resManager)
+    setProjectChatId(resManager?.chatId)
 
     const resPretendents = await getPretendentProjectId(id)
     console.log('pretendents: ', resPretendents)
@@ -1367,6 +1425,7 @@ ${loc.url}`
 
   const handleSendWorkersReport = async (e) => {
     console.log(e)
+
     toast.info(`Отчет отправлен менеджеру с id: ${projectChatId}`)
 
     //send photo
@@ -1374,12 +1433,12 @@ ${loc.url}`
     const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "XLSX", callback_data:'/report_XLSX'},
-          {"text": "PSD", callback_data:'/report_PSD'},
+					{"text": "XLSX", url:`https://testtm.uley.team/files/${e.url}.xlsx`},
+          {"text": "PDF", url:`https://testtm.uley.team/files/${e.url}.pdf`},
 				],
 			]
 		});
-    const chatId = "805436270"
+    //const chatId = "805436270"
 
     const url_send_photo = `https://api.telegram.org/bot${tokenManager}/sendPhoto?chat_id=${projectChatId}&photo=${poster}&reply_markup=${keyboard}`
     console.log(url_send_photo)	
@@ -1737,10 +1796,12 @@ ${loc.url}`
                                 />
                               </div>
                               <div className="text-field">
-                                <input
+                                <InputMask
                                   disabled={false}
                                   className="text-field__input"
-                                  type="text"
+                                  mask={mask2}
+                                  formatChars={formatChars2}
+                                  beforeMaskedValueChange={beforeMaskedValueChange2}
                                   value={startTime}
                                   onChange={(e) => setStartTime(e.target.value)}
                                   name="dateReg2"
@@ -1771,8 +1832,11 @@ ${loc.url}`
                                 />
                               </div>
                               <div className="text-field">
-                                <input
+                                <InputMask
                                   disabled={false}
+                                  mask={mask2}
+                                  formatChars={formatChars2}
+                                  beforeMaskedValueChange={beforeMaskedValueChange2}
                                   className="text-field__input"
                                   type="text"
                                   value={endTime}
@@ -3164,6 +3228,8 @@ ${loc.url}`
                                         <div style={{ display: 'flex' }}>
                                           <InputMask
                                             mask="99.99.9999"
+                                            // formatChars={formatChars}
+                                            // beforeMaskedValueChange={beforeMaskedValueChange}
                                             value={
                                               item.date !== 'undefined'
                                                 ? item.date?.split('T')[0]
@@ -3189,7 +3255,9 @@ ${loc.url}`
                                             )}
                                           </InputMask>
                                           <InputMask
-                                            mask="99:99"
+                                            mask={mask2}
+                                            formatChars={formatChars2}
+                                            beforeMaskedValueChange={beforeMaskedValueChange2}
                                             value={
                                               item.date !== 'undefined'
                                                 ? item.date?.split('T')[1]

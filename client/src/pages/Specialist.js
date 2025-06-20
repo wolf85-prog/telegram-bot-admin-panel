@@ -184,6 +184,39 @@ const Specialist = () => {
     '--cui-tootip-color': '#fff'
   }
 
+  let mask = '12.34.5678';
+  let formatChars = {
+    '1': '[0-3]',
+    '2': '[0-9]',
+    '3': '[0-1]',
+    '4': '[0-9]',
+    '5': '[1-2]',
+    '6': '[0-0]',
+    '7': '[0-3]',
+    '8': '[0-9]'
+  };
+
+  let beforeMaskedValueChange = (newState, oldState, userInput) => {
+    let { value } = newState;
+
+    // Conditional mask for the 2nd digit base on the first digit
+    if(value.startsWith('0')) {
+      console.log(0)
+      formatChars['2'] = '[1-9]'; // To block 24, 25, etc.
+      if (value.startsWith('1', 3)) {
+        formatChars['4'] = '[0-2]'; 
+        console.log(1)
+      } 
+    }  
+    else if(value.startsWith('1'))
+      formatChars['2'] = '[0-9]'; // To allow 05, 12, etc.
+    else if(value.startsWith('2'))
+      formatChars['2'] = '[0-9]'; // To allow 05, 12, etc.      
+    else 
+      formatChars['2'] = '[0-1]'; // To allow 05, 12, etc.
+    return {value, selection: newState.selection};
+  }
+
   const exampleToast = (
     <CToast autohide={true} visible={true} color="success" className="text-white align-items-center">
       <div className="d-flex">
@@ -1177,12 +1210,14 @@ const Specialist = () => {
         return usersCopy;
       });
 
+      setPassport(pass_str)
+
       setVisiblePassport(false)
       setShowModal(true)
 
       //сохранить изменения в базе
       const res = await editSpecialist(data, id)
-      console.log("res save: ", res)
+      //console.log("res save: ", res)
 
       setTimeout(()=> {
         setShowModal(false)
@@ -1768,9 +1803,10 @@ const Specialist = () => {
                                     <input className="text-field__input" type="text" name="passportScan" id="passportScan" value={passportScan} onChange={(e) => setPassportScan(e.target.value)} style={{width: '250px', overflow: 'hidden', textOverflow: 'ellipsis'}}/>
                                   </div> 
 
+                                  {/* проекты */}
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', paddingLeft: '10px'}}>
+                                    <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', paddingLeft: '10px', overflowY: 'scroll'}}>
                                       {projects}
                                     </ul>  
                                   </div> 
@@ -1905,11 +1941,13 @@ const Specialist = () => {
                             <label className='title-label'>Дата рождения</label>
                             <div className="text-field">
                               <InputMask
-                                mask="99.99.9999"
+                                mask={mask}
                                 className="text-field__input" 
                                 value={pasDataBorn} 
                                 onChange={handleDataBorn} 
                                 style={{width: '250px'}}
+                                formatChars={formatChars}
+                                beforeMaskedValueChange={beforeMaskedValueChange}
                               ></InputMask>
                             </div>
                           </div>
@@ -1957,7 +1995,9 @@ const Specialist = () => {
                             <label className='title-label'>Дата выдачи</label>
                             <div className="text-field">
                               <InputMask
-                                mask="99.99.9999"
+                                mask={mask}
+                                formatChars={formatChars}
+                                beforeMaskedValueChange={beforeMaskedValueChange}
                                 className="text-field__input" 
                                 value={pasData} 
                                 onChange={handleData} 
