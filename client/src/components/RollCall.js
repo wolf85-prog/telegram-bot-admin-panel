@@ -279,26 +279,26 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
               },
             }}
           >
-            <Form.Item name="shiftCondition" initialValue={'1'} noStyle>
+            <Form.Item name="rollCallCondition" initialValue={'Мерч'} noStyle>
               <AntSelect
                 suffixIcon={null}
                 defaultValue={{
                   label: 'Мерч',
-                  value: '1',
+                  value: 'Мерч',
                   color: 'red',
                 }}
                 optionFilterProp="label"
                 // onChange={onChange}
                 // onSearch={onSearch}
-                name="specificity2"
+                name="rollCallCondition"
                 style={{ width: '100%' }}
                 size="large"
                 options={[
-                  { label: 'Мерч', value: '1', color: 'red' },
-                  { label: 'Дресс-код', value: '2', color: 'blue' },
+                  { label: 'Мерч', value: 'Мерч', color: 'red' },
+                  { label: 'Дресс-код', value: 'Дресс-код', color: 'blue' },
                   {
                     label: 'Мерч | Дресс-код',
-                    value: '3',
+                    value: 'Мерч | Дресс-код',
                     color: 'blue',
                   },
                 ]}
@@ -338,7 +338,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
               },
             }}
           >
-            <Form.Item name="shiftConditionStreet" noStyle>
+            <Form.Item name="rollCallConditionStreet" noStyle>
               <AntSelect
                 suffixIcon={null}
                 optionFilterProp="label"
@@ -347,15 +347,15 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                 style={{ width: '100%' }}
                 size="large"
                 options={[
-                  { label: 'Дождевик', value: '4', color: 'red' },
+                  { label: 'Дождевик', value: 'Дождевик', color: 'red' },
                   {
                     label: 'Тёплая одежда',
-                    value: '5',
+                    value: 'Тёплая одежда',
                     color: 'black',
                   },
                   {
                     label: 'Дождевик | Теплая одежда',
-                    value: '6',
+                    value: 'Дождевик | Теплая одежда',
                     color: 'black',
                   },
                 ]}
