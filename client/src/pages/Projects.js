@@ -2,7 +2,8 @@ import React, { Suspense, useState, useEffect, useRef, useMemo } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import { Link, useLocation } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Select as AntSelect, ConfigProvider, Button, Flex } from 'antd';
+import { Select as AntSelect, ConfigProvider, Button, Flex, Modal, theme} from 'antd';
+import ruRU from 'antd/locale/ru_RU'
 import {
   CContainer,
   CSpinner,
@@ -2835,25 +2836,45 @@ ${loc.url}`
                                   style={{ marginBottom: '7px' }}
                                 />
                         </div>
+                        <ConfigProvider
+                          locale={ruRU}
+                          theme={{
+                            // 1. Use dark algorithm
+                            algorithm: theme.darkAlgorithm,
 
-                            <CModal
-                              alignment="center"
-                              // size="lg"
-                              visible={visiblePereklichka}
-                              onClose={() => setVisiblePereklichka(false)}
-                              style={{ '--cui-modal-width': '650px' }}
-                            >
+                            // 2. Combine dark algorithm and compact algorithm
+                            // algorithm: [theme.darkAlgorithm, theme.compactAlgorithm],
+                            components: {
+                              Modal: {
+                                contentBg: '#1d1f2b',
+                              },
+                            },
+                          }}
+                        ><Modal
+                            // alignment="center"
+                            // size="lg"
+                            // visible={visiblePereklichka}
+                            open={visiblePereklichka}
+                            width={650}
+                            zIndex={1060}
+                            closable={false}
+                            onCancel={() => setVisiblePereklichka(false)}
+                            footer={false}
+                          >
                
-                              <CModalBody>
+                              
                                <RollCall
                                   inititalShiftData={inititalShiftData}
                                   crmId={crmID}
                                   setVisiblePereklichka={setVisiblePereklichka}
                                 />
-                              </CModalBody>
+                              
 
                               
-                            </CModal>
+                            </Modal>
+                            </ConfigProvider>
+
+                           
 
                             {/* Списки */}
 

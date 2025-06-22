@@ -45,7 +45,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
   }
 
   const onFinish = (values) => {
-    const rollCallData = { ...values, crmId: crmId, rollCallTime: shiftHours, rollCallSpecificity: specificity  }
+    const rollCallData = { ...values, crmId: crmId, shiftTime: shiftHours, rollCallSpecificity: specificity  }
     setVisiblePereklichka(false)
     console.log(rollCallData)
     createPereklichkaPoster(rollCallData)
@@ -84,7 +84,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                 }}
               >
                 <Form.Item
-                  name="rollCallDate"
+                  name="shiftDate"
                   noStyle
                   initialValue={Object.keys(newList)[0]}
                 >
@@ -279,26 +279,26 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
               },
             }}
           >
-            <Form.Item name="rollCallCondition" initialValue={'Мерч'} noStyle>
+            <Form.Item name="shiftCondition" initialValue={'1'} noStyle>
               <AntSelect
                 suffixIcon={null}
                 defaultValue={{
                   label: 'Мерч',
-                  value: 'Мерч',
+                  value: '1',
                   color: 'red',
                 }}
                 optionFilterProp="label"
                 // onChange={onChange}
                 // onSearch={onSearch}
-                name="rollCallCondition"
+                name="specificity2"
                 style={{ width: '100%' }}
                 size="large"
                 options={[
-                  { label: 'Мерч', value: 'Мерч', color: 'red' },
-                  { label: 'Дресс-код', value: 'Дресс-код', color: 'blue' },
+                  { label: 'Мерч', value: '1', color: 'red' },
+                  { label: 'Дресс-код', value: '2', color: 'blue' },
                   {
                     label: 'Мерч | Дресс-код',
-                    value: 'Мерч | Дресс-код',
+                    value: '3',
                     color: 'blue',
                   },
                 ]}
@@ -338,7 +338,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
               },
             }}
           >
-            <Form.Item name="rollCallConditionStreet" initialValue={null} noStyle>
+            <Form.Item name="shiftConditionStreet" noStyle>
               <AntSelect
                 suffixIcon={null}
                 optionFilterProp="label"
@@ -347,15 +347,15 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                 style={{ width: '100%' }}
                 size="large"
                 options={[
-                  { label: 'Дождевик', value: 'Дождевик', color: 'red' },
+                  { label: 'Дождевик', value: '4', color: 'red' },
                   {
                     label: 'Тёплая одежда',
-                    value: 'Тёплая одежда',
+                    value: '5',
                     color: 'black',
                   },
                   {
                     label: 'Дождевик | Теплая одежда',
-                    value: 'Дождевик | Теплая одежда',
+                    value: '6',
                     color: 'black',
                   },
                 ]}
