@@ -2846,7 +2846,7 @@ ${loc.url}`
                             // algorithm: [theme.darkAlgorithm, theme.compactAlgorithm],
                             components: {
                               Modal: {
-                                contentBg: '#1d1f2b',
+                                contentBg: '#131c21',
                               },
                             },
                           }}
@@ -2854,6 +2854,7 @@ ${loc.url}`
                             // alignment="center"
                             // size="lg"
                             // visible={visiblePereklichka}
+                            centered
                             open={visiblePereklichka}
                             width={650}
                             zIndex={1060}
