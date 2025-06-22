@@ -45,7 +45,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
   }
 
   const onFinish = (values) => {
-    const rollCallData = { ...values, crmId: crmId, shiftTime: shiftHours, rollCallSpecificity: specificity  }
+    const rollCallData = { ...values, crmId: crmId, rollCallTime: shiftHours, rollCallSpecificity: specificity  }
     setVisiblePereklichka(false)
     console.log(rollCallData)
     createPereklichkaPoster(rollCallData)
@@ -84,7 +84,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                 }}
               >
                 <Form.Item
-                  name="shiftDate"
+                  name="rollCallDate"
                   noStyle
                   initialValue={Object.keys(newList)[0]}
                 >
@@ -338,7 +338,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
               },
             }}
           >
-            <Form.Item name="rollCallConditionStreet" noStyle>
+            <Form.Item name="rollCallConditionStreet" noStyle initialValue={null}>
               <AntSelect
                 suffixIcon={null}
                 optionFilterProp="label"
