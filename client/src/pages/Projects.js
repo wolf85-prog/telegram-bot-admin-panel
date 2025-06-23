@@ -2856,6 +2856,7 @@ ${loc.url}`
                                 contentBg: '#131c21',
                               },
                             },
+                            
                           }}
                         ><Modal
                             // alignment="center"
@@ -2868,6 +2869,14 @@ ${loc.url}`
                             closable={false}
                             onCancel={() => setVisiblePereklichka(false)}
                             footer={false}
+                            styles={{
+                              footer:{
+                                display: 'none'
+                              },
+                              content:{
+                                padding:'12px 12px'
+                              }
+                            }}
                           >
                
                               
