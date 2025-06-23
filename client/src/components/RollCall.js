@@ -21,6 +21,8 @@ import {
   createPereklichkaPoster,
 } from '../http/postersApi'
 import { parseShift } from '../utils/helpers'
+import dayjs from 'dayjs'
+
 const { TextArea } = Input
 
 const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
@@ -143,10 +145,10 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                   suffixIcon={null}
                   style={{ width: '100%' }}
                   size="large"
-                  value={shiftHours}
+                  value={dayjs(shiftHours, 'DD.MM.YYYYTHH:mm').format('HH:mm')}
                   onChange={onShiftHoursChange}
                   options={shifts.map((shift) => ({
-                    label: shift,
+                    label: dayjs(shift, 'DD.MM.YYYYTHH:mm').format('HH:mm'),
                     value: shift,
                   }))}
                   styles={{
