@@ -8,6 +8,8 @@ import OptionsBtn from "./../../../chat-app-new/components/OptionsButton";
 import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 import { CSpinner} from '@coreui/react'
 
+import Loader from './../../../components/LoaderMini/LoaderMini'
+
 import { getWContacts, getWConversations, getWMessagesCount} from 'src/http/workerAPI'
 import { getSpecialist, getSpecCount} from 'src/http/specAPI'
 
@@ -359,8 +361,8 @@ const Sidebar = () => {
 			
 			{/* Conversations */}
 			<div className="sidebar__contacts">
-				{loading ? 
-				<CSpinner style={{margin: '50%'}}/> :
+				{2>1 ? 
+				<Loader /> :
 				
 				contacts.map((contact, ind) => (
 					contact.chatId !== chatAdminId &&

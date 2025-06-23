@@ -230,7 +230,7 @@ const Managers = () => {
       let arrManagers = []
 
       users.map(async (user, i) => {
-        console.log("user: ", user)
+        //console.log("user: ", user)
         const d = new Date(user.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
         const d2 = new Date(d)
         const month = String(d2.getMonth()+1).padStart(2, "0");
@@ -264,7 +264,7 @@ const Managers = () => {
         let str_company = ''
         let str_company_name = ''
         let str_company_avatar = ''
-        const comp = companysAll.find(item=>user.companyId !== null && (item.id.toString() === user.companyId || item.GUID === user.companyId))
+        const comp = companysAll.find(item=>user.companyId  && (item.id.toString() === user.companyId || item.GUID === user.companyId))
         //console.log("comp: ", user, comp)
         if (comp) {
           str_company = comp.id
@@ -286,7 +286,7 @@ const Managers = () => {
           worklist: str_worklist,
           sfera: str_sfera,
           dolgnost: user.dolgnost,
-          company: str_company, 
+          companyId: str_company, 
           companyName: str_company_name,
           comteg: str_komteg, 
           comment: str_comment, 
@@ -298,7 +298,7 @@ const Managers = () => {
           block: user.block,
         }
         arrManagers.push(newUser)
-        console.log("newUser: ", newUser)
+        //console.log("newUser: ", newUser)
 
         //если элемент массива последний
 				if (i === users.length-1) {
@@ -499,7 +499,7 @@ const clickNext = async() => {
       let str_company_name = ''
       let str_company_avatar = ''
       //const comp = companysAll.find(item=> item.id.toString() === user.companyId || item.GUID === user.companyId)
-      const comp = companysAll.find(item=>user.companyId !== null && (item.id.toString() === user.companyId || item.GUID === user.companyId))
+      const comp = companysAll.find(item=>user.companyId && (item.id.toString() === user.companyId || item.GUID === user.companyId))
       console.log("comp: ", comp)
       if (comp) {
         str_company = comp.id
@@ -573,7 +573,7 @@ const clickNext = async() => {
     let str_company_avatar = ''
     //const comp = companysAll.find(item=> parseInt(item.id) === parseInt(user.company) || item.GUID === user.company)
     //const comp = companysAll.find(item=> item.id.toString() === user.company || item.GUID === user.company)
-    const comp = companysAll.find(item=>user.companyId !== null && (item.id.toString() === user.companyId || item.GUID === user.companyId))
+    const comp = companysAll.find(item=>user.companyId && (item.id.toString() === user.companyId || item.GUID === user.companyId))
     //console.log("comp: ", comp)
     if (comp) {
       //str_company = comp.id
