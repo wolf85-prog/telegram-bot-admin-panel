@@ -361,7 +361,7 @@ const Sidebar = () => {
 			
 			{/* Conversations */}
 			<div className="sidebar__contacts">
-				{2>1 ? 
+				{loading ? 
 				<Loader /> :
 				
 				contacts.map((contact, ind) => (
