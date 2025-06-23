@@ -1,14 +1,26 @@
+import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+import 'dayjs/locale/ru'
 export function parseShift(shifts, current, i) {
-    // console.log(shifts, current, i)
+  dayjs.locale('ru')
+  dayjs.extend(customParseFormat)
+  let dayFilter = dayjs().subtract(1, 'day') 
+  
+  let currentDateTime = dayjs(current, 'DD.MM.YYYYTHH:mm', 'Europe/Moscow')  
 
-  const [shift, hour] = current.split('T')
-
-  if (shifts === undefined) {
-    shifts[shift] = [hour]
-  } else if (shift in shifts) {
-    shifts[shift].push(hour)
-  } else {
-    shifts[shift] = [hour]
+  if (
+    currentDateTime.format('DD.MM') in shifts &&
+    currentDateTime > dayFilter
+  ) {
+    shifts[currentDateTime.format('DD.MM')].push(
+      currentDateTime.format('HH:mm'),
+    )
+  } else if (
+    !(currentDateTime.format('DD.MM') in shifts) &&
+    currentDateTime > dayFilter
+  ) {
+    shifts[currentDateTime.format('DD.MM')] = [currentDateTime.format('HH:mm')]
   }
+  
   return shifts
 }
