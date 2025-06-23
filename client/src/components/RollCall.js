@@ -56,7 +56,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
       labelCol={{ span: 4 }}
       wrapperCol={{ span: 14 }}
       layout="horizontal"
-      style={{ maxWidth: 600 }}
+      style={{ maxWidth: 650 }}
       // onSubmit={handleSubmitPereklichka}
       onFinish={onFinish}
     >
@@ -72,7 +72,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                 theme={{
                   components: {
                     Select: {
-                      selectorBg: '#1D1F2B',
+                      selectorBg: '#131c21',
                       // border: 'none',
                       colorBorder: '#2d2e38',
                       // color: "#ffffff"
@@ -103,7 +103,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                       },
                       popup: {
                         root: {
-                          backgroundColor: '#1D1F2B',
+                          backgroundColor: '#131c21',
                           border: 'none',
                           margin: 'auto',
                           zIndex: '9999',
@@ -126,7 +126,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                 theme={{
                   components: {
                     Select: {
-                      selectorBg: '#1D1F2B',
+                      selectorBg: '#131c21',
                       border: 'none',
                       colorBorder: '#2d2e38',
                       // color: "#ffffff"
@@ -174,7 +174,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                 theme={{
                   components: {
                     Select: {
-                      selectorBg: '#1D1F2B',
+                      selectorBg: '#131c21',
                       border: 'none',
                       colorBorder: '#2d2e38',
                       // color: "#ffffff"
@@ -210,7 +210,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                       },
                       popup: {
                         root: {
-                          backgroundColor: '#1D1F2B',
+                          backgroundColor: '#131c21',
                           border: 'none',
                           zIndex: '9999',
                           color: '#ffffff',
@@ -250,7 +250,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
             <TextArea
               style={{
                 height: '100px',
-                width: '350px',
+                // width: '350px',
                 resize: 'none',
                 background: 'transparent',
                 color: 'white',
@@ -268,7 +268,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
             theme={{
               components: {
                 Select: {
-                  selectorBg: '#1D1F2B',
+                  selectorBg: '#131c21',
                   border: 'none',
                   colorBorder: '#2d2e38',
                   // color: "#ffffff"
@@ -310,7 +310,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                   },
                   popup: {
                     root: {
-                      backgroundColor: '#1D1F2B',
+                      backgroundColor: '#131c21',
                       border: 'none',
 
                       zIndex: '9999',
@@ -327,7 +327,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
             theme={{
               components: {
                 Select: {
-                  selectorBg: '#1D1F2B',
+                  selectorBg: '#131c21',
                   border: 'none',
                   colorBorder: '#2d2e38',
                   // color: "#ffffff"
@@ -344,6 +344,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                 optionFilterProp="label"
                 // onChange={onChange}
                 // onSearch={onSearch}
+                allowClear
                 style={{ width: '100%' }}
                 size="large"
                 options={[

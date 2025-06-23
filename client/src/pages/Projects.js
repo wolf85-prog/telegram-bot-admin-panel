@@ -139,6 +139,7 @@ import { $host } from '../http/index'
 import { getManagerId } from 'src/http/managerAPI'
 import RollCall from '../components/RollCall'
 
+
 const Projects = () => {
   //const navigate = useNavigate();
   const queryClient = useQueryClient()
@@ -2859,7 +2860,12 @@ ${loc.url}`
                             zIndex={1060}
                             closable={false}
                             onCancel={() => setVisiblePereklichka(false)}
-                            footer={false}
+                            footer={false}  
+                            styles={{footer: {
+                              display: 'none'
+                            }, content:{
+                              padding: '12px 12px'
+                            }}}                          
                           >
                
                               
