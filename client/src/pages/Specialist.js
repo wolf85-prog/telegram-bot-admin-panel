@@ -279,6 +279,9 @@ const Specialist = () => {
 		
   }, [text]);
 
+  useEffect(()=> {
+    //setSpecialist(specialistCount)
+  }, [specialistCount])
 
   useEffect(()=> {
 
@@ -791,7 +794,7 @@ const Specialist = () => {
           merch: str_merch,  
           company: str_company, 
           comteg: str_komteg, 
-          comteg2: str_komteg, 
+          comteg2: str_komteg2, 
           comment: str_comment, 
           comment2: str_comment2, 
           age: worker.age, 
@@ -867,7 +870,7 @@ const Specialist = () => {
       }
     })
 
-    console.log("specArr: ", specArr)
+    //console.log("specArr: ", specArr)
 
     let skillArr = []
     let strSkill = ''
@@ -961,7 +964,7 @@ const Specialist = () => {
       block18,
       krest
     }
-    console.log(saveData)
+    //console.log(saveData)
 
     setSpecialist((specialist) => {	
 
@@ -998,6 +1001,72 @@ const Specialist = () => {
 			return usersCopy;
     });
 
+    setSpecialistAll((specialist) => {	
+
+			let userIndex = specialist.findIndex((spec) => spec.id === id);
+			const usersCopy = JSON.parse(JSON.stringify(specialist));
+
+      const userObject = usersCopy[userIndex];
+			usersCopy[userIndex] = { ...userObject, 
+        fio, 
+        phone, 
+        city: city, 
+        age: age ? age+'-01-01' : '', 
+        speclist: strSpec,
+        company: strCompany,
+        skill: strSkill,
+        merch: strMerch,
+        comteg: strComteg,
+        comteg2: strComteg2,
+        comment: strComment,
+        comment2: strComment2,
+        chatId: telegram,
+        profile,
+        inn,
+        email,
+        promo,
+        passport,
+        //blockW,
+        block18,
+        krest,
+      };
+
+			return usersCopy;
+    });
+
+    setSpecialistCount((specialist) => {	
+
+			let userIndex = specialist.findIndex((spec) => spec.id === id);
+			const usersCopy = JSON.parse(JSON.stringify(specialist));
+
+      const userObject = usersCopy[userIndex];
+			usersCopy[userIndex] = { ...userObject, 
+        fio, 
+        phone, 
+        city: city, 
+        age: age ? age+'-01-01' : '', 
+        speclist: strSpec,
+        company: strCompany,
+        skill: strSkill,
+        merch: strMerch,
+        comteg: strComteg,
+        comteg2: strComteg2,
+        comment: strComment,
+        comment2: strComment2,
+        chatId: telegram,
+        profile,
+        inn,
+        email,
+        promo,
+        passport,
+        //blockW,
+        block18,
+        krest,
+      };
+
+			return usersCopy;
+    });
+
     //сохранить изменения в базе
     const resSave = await editSpecialist(saveData, id)
     console.log("resSave: ", resSave)
@@ -1013,16 +1082,6 @@ const Specialist = () => {
   const blockedProfile = () => { 
     setBlockProfile(!blockProfile)
   }
-
-
-  // useEffect(() => {
-  //   console.log("city: ", cityValue)  
-  // }, [city, cityValue]);
-
-
-  useEffect(() => {
-    console.log("specialistCount: ", specialistCount)
-  }, [specialistCount]);
 
 
   const handleTg = event => {
