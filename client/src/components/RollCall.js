@@ -33,11 +33,10 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
   //   [inititalSiftData],
   // )
   const newList = inititalShiftData.reduce(parseShift, {})
-  console.log("list!!!!", newList)
 
-  const [shifts, setShifts] = useState(newList[Object.keys(newList)[0]])
+  const [shifts, setShifts] = useState(Object.keys(newList).length > 0? newList[Object.keys(newList)[0]] : "Нет смен")
   const [shiftHours, setShiftHours] = useState(
-    newList[Object.keys(newList)[0]][0],
+    Object.keys(newList).length > 0? newList[Object.keys(newList)[0]][0] : "Нет смен",
   )
   const handleShiftChange = (value) => {
     setShifts(newList[value])
@@ -53,7 +52,9 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
     console.log(rollCallData)
     createPereklichkaPoster(rollCallData)
   }
+  if (Object.keys(newList).length === 0) return <div>Нет смен</div>
 
+  
   return (
     <Form
       labelCol={{ span: 4 }}
