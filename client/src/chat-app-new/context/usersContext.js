@@ -516,7 +516,10 @@ useEffect(() => {
 	useEffect(() => {
     	const fetchData = async () => {
 			let response = await getManager();
-      		//console.log("managers context: ", response)
+      		console.log("managers context: ", response)
+
+			let companys= await getCompany();
+			console.log("companys context: ", companys)
 
 			let arr = []
 			response.map(async (user, i) => {
@@ -544,7 +547,7 @@ useEffect(() => {
 				let str_company = ''
 				let str_company_name = ''
 				//const comp = companysAll.find(item=> item.id.toString() === user.companyId || item.GUID === user.companyId)
-				const comp = companysAll.find(item=>user.companyId !== null && (item.id.toString() === user.companyId || item.GUID === user.companyId))
+				const comp = companys.find(item=>user.companyId && (item.id.toString() === user.companyId || item.GUID === user.companyId))
 				//console.log("comp: ", comp.title, user.companyId)
 				if (comp) {
 				  str_company = comp.id
@@ -562,7 +565,7 @@ useEffect(() => {
 				  worklist: str_worklist,
 				  sfera: str_sfera,
 				  dolgnost: user.dolgnost,
-				  company: str_company, 
+				  companyId: str_company, 
 				  companyName: str_company_name,
 				  comteg: str_komteg, 
 				  comment: str_comment, 
@@ -576,6 +579,8 @@ useEffect(() => {
 				arr.push(newUser)
 
 			  }) 
+
+			console.log("ManagersAll: ", arr)
 
 			setManagersAll(arr)
 		}

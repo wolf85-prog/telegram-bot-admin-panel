@@ -152,6 +152,8 @@ const Profile = ({ user, closeSidebar }) => {
 				setCrmId3(crmId3)
 			} else {
 				setCrmId('—')
+				setCrmId2('—')
+				setCrmId3('—')
 			}	
 			
 			const profile = await getSpecialistChatId(user.chatId)

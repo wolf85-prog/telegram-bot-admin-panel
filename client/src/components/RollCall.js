@@ -31,6 +31,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
   //   [inititalSiftData],
   // )
   const newList = inititalShiftData.reduce(parseShift, {})
+  console.log("list!!!!", newList)
 
   const [shifts, setShifts] = useState(newList[Object.keys(newList)[0]])
   const [shiftHours, setShiftHours] = useState(
@@ -45,7 +46,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
   }
 
   const onFinish = (values) => {
-    const rollCallData = { ...values, crmId: crmId, shiftTime: shiftHours, rollCallSpecificity: specificity  }
+    const rollCallData = { ...values, crmId: crmId, rollCallTime: shiftHours, rollCallSpecificity: specificity  }
     setVisiblePereklichka(false)
     console.log(rollCallData)
     createPereklichkaPoster(rollCallData)
@@ -56,7 +57,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
       labelCol={{ span: 4 }}
       wrapperCol={{ span: 14 }}
       layout="horizontal"
-      style={{ maxWidth: 650 }}
+      // style={{ maxWidth: 650 }}
       // onSubmit={handleSubmitPereklichka}
       onFinish={onFinish}
     >
@@ -84,7 +85,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                 }}
               >
                 <Form.Item
-                  name="shiftDate"
+                  name="rollCallDate"
                   noStyle
                   initialValue={Object.keys(newList)[0]}
                 >
@@ -155,7 +156,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                     },
                     popup: {
                       root: {
-                        backgroundColor: '#1D1F2B',
+                        backgroundColor: '#131c21',
                         border: 'none',
                         zIndex: '9999',
                         color: '#ffffff',
@@ -279,26 +280,26 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
               },
             }}
           >
-            <Form.Item name="shiftCondition" initialValue={'1'} noStyle>
+            <Form.Item name="rollCallCondition" initialValue={'Мерч'} noStyle>
               <AntSelect
                 suffixIcon={null}
                 defaultValue={{
                   label: 'Мерч',
-                  value: '1',
+                  value: 'Мерч',
                   color: 'red',
                 }}
                 optionFilterProp="label"
                 // onChange={onChange}
                 // onSearch={onSearch}
-                name="specificity2"
+                name="rollCallCondition"
                 style={{ width: '100%' }}
                 size="large"
                 options={[
-                  { label: 'Мерч', value: '1', color: 'red' },
-                  { label: 'Дресс-код', value: '2', color: 'blue' },
+                  { label: 'Мерч', value: 'Мерч', color: 'red' },
+                  { label: 'Дресс-код', value: 'Дресс-код', color: 'blue' },
                   {
                     label: 'Мерч | Дресс-код',
-                    value: '3',
+                    value: 'Мерч | Дресс-код',
                     color: 'blue',
                   },
                 ]}
@@ -338,7 +339,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
               },
             }}
           >
-            <Form.Item name="shiftConditionStreet" noStyle>
+            <Form.Item name="rollCallConditionStreet" noStyle initialValue={null}>
               <AntSelect
                 suffixIcon={null}
                 optionFilterProp="label"
@@ -347,16 +348,17 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                 allowClear
                 style={{ width: '100%' }}
                 size="large"
+                allowClear
                 options={[
-                  { label: 'Дождевик', value: '4', color: 'red' },
+                  { label: 'Дождевик', value: 'Дождевик', color: 'red' },
                   {
                     label: 'Тёплая одежда',
-                    value: '5',
+                    value: 'Тёплая одежда',
                     color: 'black',
                   },
                   {
                     label: 'Дождевик | Теплая одежда',
-                    value: '6',
+                    value: 'Дождевик | Теплая одежда',
                     color: 'black',
                   },
                 ]}
@@ -368,7 +370,7 @@ const RollCall = ({ inititalShiftData, crmId, setVisiblePereklichka }) => {
                   },
                   popup: {
                     root: {
-                      backgroundColor: '#1D1F2B',
+                      backgroundColor: '#131c21',
                       border: 'none',
                       zIndex: '9999',
                       color: '#ffffff',

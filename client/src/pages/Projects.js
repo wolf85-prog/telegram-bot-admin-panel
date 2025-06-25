@@ -585,8 +585,9 @@ const Projects = () => {
       let arr = []
       let myColor = ''
       let myColor2 = ''
+      let i = 1
 
-      resMain.map((item) => {
+      resMain.map((item, index) => {
         if (item.vidWork === 'Фальшстарт' || item.vidWork === 'Отмена') {
           myColor = 'red'
         } else {
@@ -619,6 +620,11 @@ const Projects = () => {
           color: myColor2,
         }
 
+        if (resMain[index]?.date !== resMain[index-1]?.date)
+          i = 1
+        if (resMain[index].date === null)
+          i = 0
+
         const newObj = {
           id: item.id,
           date: item.date,
@@ -632,6 +638,7 @@ const Projects = () => {
           hr: item.hr,
           count: item.count,
           projectId: id,
+          ind: i !== 0 ? i++ : '',
         }
 
         arr.push(newObj)
@@ -2847,25 +2854,30 @@ ${loc.url}`
                             // algorithm: [theme.darkAlgorithm, theme.compactAlgorithm],
                             components: {
                               Modal: {
-                                contentBg: '#1d1f2b',
+                                contentBg: '#131c21',
                               },
                             },
+                            
                           }}
                         ><Modal
                             // alignment="center"
                             // size="lg"
                             // visible={visiblePereklichka}
+                            centered
                             open={visiblePereklichka}
                             width={650}
                             zIndex={1060}
                             closable={false}
                             onCancel={() => setVisiblePereklichka(false)}
-                            footer={false}  
-                            styles={{footer: {
-                              display: 'none'
-                            }, content:{
-                              padding: '12px 12px'
-                            }}}                          
+                            footer={false}
+                            styles={{
+                              footer:{
+                                display: 'none'
+                              },
+                              content:{
+                                padding:'12px 12px'
+                              }
+                            }}
                           >
                
                               
@@ -2992,6 +3004,12 @@ ${loc.url}`
                                 style={{ minWidth: '170px' }}
                               >
                                 Вид работ
+                              </CTableHeaderCell>
+                              <CTableHeaderCell
+                                className="text-center"
+                                style={{ minWidth: '50px' }}
+                              >
+                                
                               </CTableHeaderCell>
                               <CTableHeaderCell
                                 className="text-center"
@@ -3199,6 +3217,9 @@ ${loc.url}`
                                           placeholder="—"
                                         />
                                       )}
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                      {item.ind}
                                     </CTableDataCell>
                                     <CTableDataCell className="text-left">
                                       {item.hr ? (
