@@ -78,11 +78,14 @@ const Profile = ({ user, closeSidebar }) => {
 		//получить данные из ноушена по телеграм id
 		const fetchData = async () => {
 			console.log("user: ", user)
-			console.log("specialist: ", workersAll)
-			const fio_notion = workersAll.find(item=>item.chatId === user.chatId) //await getWorkerNotionId(user.chatId)
-			console.log("worker: ", fio_notion)
+			//console.log("specialist: ", workersAll)
+
+			const fioBD = await getSpecialistChatId(user.chatId)
+			console.log("worker: ", fioBD)
+			//const fio_notion = workersAll.find(item=>item.chatId === user.chatId) //await getWorkerNotionId(user.chatId)
+			//console.log("worker: ", fio_notion)
 			
-			setWorker(fio_notion)
+			setWorker(fioBD)
 
 			//const avatars = await getWorkerChildrenId(fio_notion[0]?.id)
 			//const avatars = await getWorker(user.chatId)
@@ -214,7 +217,7 @@ const Profile = ({ user, closeSidebar }) => {
 					}
 				</div>
 				{worker ?  
-					((JSON.parse(worker.worklist)).find(item => item.spec === 'Blacklist') ? 
+					((JSON.parse(worker.specialization)).find(item => item.spec === 'Blacklist') ? 
 					<h2 className="profile__name" style={{textAlign: 'center', color: 'red', fontWeight: '700', position: 'absolute', top: '378px'}}>Blacklist</h2>
 					: "")
 				: ""}
@@ -283,7 +286,7 @@ const Profile = ({ user, closeSidebar }) => {
 						</span>
 						<span className="profile__action-text--top" style={{textAlign: 'right'}}>
 							{/* {worker.spec?.map((item)=>item.name).join('')} */}
-							<table className="table-noborder">{worker ? JSON.parse(worker.worklist)?.map((worker, index) => <tr key={index}><td>{worker.spec}</td></tr> ) : '—'}</table>
+							<table className="table-noborder">{worker ? JSON.parse(worker.specialization)?.map((worker, index) => <tr key={index}><td>{worker.spec}</td></tr> ) : '—'}</table>
 						</span>	
 					</p>
 				</li>

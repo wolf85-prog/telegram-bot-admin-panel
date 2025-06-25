@@ -293,7 +293,7 @@ class SpecialistController {
     }
 
     async getSpecCountAll(req, res) {
-        console.log(req)
+        //console.log(req)
         try {
             const count = await Specialist.count();
 
