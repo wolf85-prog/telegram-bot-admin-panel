@@ -415,6 +415,7 @@ const Specialist = () => {
           pasdatevidan: worker.pasdatevidan,
           pascode: worker.pascode,
           pasbornplace: worker.pasbornplace,
+          pasdateborn: worker.pasdateborn,
           pasaddress: worker.pasaddress,
           surname: worker.surname,
           name: worker.name,
