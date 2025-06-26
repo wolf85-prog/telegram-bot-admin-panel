@@ -191,8 +191,8 @@ const Specialist = () => {
     '3': '[0-1]',
     '4': '[0-9]',
     '5': '[1-2]',
-    '6': '[0-0]',
-    '7': '[0-3]',
+    '6': '[0-9]',
+    '7': '[0-9]',
     '8': '[0-9]'
   };
 
@@ -207,9 +207,18 @@ const Specialist = () => {
         formatChars['4'] = '[0-2]'; 
         console.log(1)
       } 
+      if (value.startsWith('1', 5)) {
+        formatChars['6'] = '[9]]'; 
+        console.log(1)
+      }
     }  
-    else if(value.startsWith('1'))
+    else if(value.startsWith('1')) {
       formatChars['2'] = '[0-9]'; // To allow 05, 12, etc.
+      if (value.startsWith('1', 5)) {
+        formatChars['6'] = '[9]]'; 
+        console.log(1)
+      }
+    }
     else if(value.startsWith('2'))
       formatChars['2'] = '[0-9]'; // To allow 05, 12, etc.      
     else 
