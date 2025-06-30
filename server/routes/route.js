@@ -62,6 +62,11 @@ const { getMainSpecProject, getMainSpecProject2, getMainSpecId, editMainspec, de
 
 const { addCrmID, getCrmID } = require('../controllers/crmIDController')
 
+const { sendMessageToTelegram, sendPhotoToTelegram, sendDocumentToTelegram, sendDocumentFormToTelegram,
+    sendVideoToTelegram, sendAudioToTelegram, delMessageToTelegram, 
+    sendMessageToTelegram2, sendPhotoToTelegram2 } = require('../controllers/telegramController')
+
+
 //const upload = require( "../utils/upload.js")
 //const upload = multer({dest:"uploads"});
 const upload = require('../middleware/file')
@@ -257,5 +262,20 @@ route.get("/mainspec/count/get", getMainspecCountAll);
 
 route.get("/crmid/add", addCrmID);
 route.get("/crmid/get", getCrmID);
+
+
+//----------------- Telegram Workhub---------------------------------
+route.post(`/botworhub/sendmessage`, sendMessageToTelegram)
+route.post(`/botworhub/sendphoto`, sendPhotoToTelegram)
+route.post(`/botworhub/senddocument`, sendDocumentToTelegram)
+route.post(`/botworhub/senddocumentform`, sendDocumentFormToTelegram)
+route.post(`/botworhub/sendvideo`, sendVideoToTelegram)
+route.post(`/botworhub/sendaudio`, sendAudioToTelegram)
+route.post(`/botworhub/delmessage`, delMessageToTelegram)
+
+//----------------- Telegram Renthub---------------------------------
+route.post(`/botrenthub/sendmessage`, sendMessageToTelegram2)
+route.post(`/botrenthub/sendphoto`, sendPhotoToTelegram2)
+
 
 module.exports = route

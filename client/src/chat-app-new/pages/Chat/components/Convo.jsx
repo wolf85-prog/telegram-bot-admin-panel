@@ -9,6 +9,7 @@ import { useUsersContext } from "./../../../context/usersContext";
 import { $host } from './../../../../http/index'
 import { delMessage } from "src/http/chatAPI";
 import Dropdown from 'react-bootstrap/Dropdown';
+import { delMessageToTelegram } from "src/http/telegramAPI";
 
 const Convo = ({ lastMsgRef, messages: allMessages }) => {
 	const { person } = useContext(AccountContext);
@@ -81,9 +82,9 @@ const Convo = ({ lastMsgRef, messages: allMessages }) => {
 		//удалить сообщение в базе данных
 		delMessage(message.id)
 
-		const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${person.id}&message_id=${message.id}`
-
-		const delToTelegram = await $host.get(url_del_msg);
+		//const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${person.id}&message_id=${message.id}`
+		//const delToTelegram = await $host.get(url_del_msg);
+		const delToTelegram = await delMessageToTelegram({user: person.id, messageId: message.id})
 
 		console.log("Удаляемое сообщение: ", message.id)
 		console.log("Дата сообщения: ", message.date)

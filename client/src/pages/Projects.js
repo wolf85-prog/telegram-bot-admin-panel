@@ -137,6 +137,7 @@ import {
 import { toast } from "react-toastify";
 import { $host } from '../http/index'
 import { getManagerId } from 'src/http/managerAPI'
+import { sendMessageToTelegram2, sendPhotoToTelegram2 } from 'src/http/telegramAPI'
 import RollCall from '../components/RollCall'
 
 const Projects = () => {
@@ -1446,9 +1447,9 @@ ${loc.url}`
 		});
     //const chatId = "805436270"
 
-    const url_send_photo = `https://api.telegram.org/bot${tokenManager}/sendPhoto?chat_id=${projectChatId}&photo=${poster}&reply_markup=${keyboard}`
-    console.log(url_send_photo)	
-    await $host.get(url_send_photo);
+    //const url_send_photo = `https://api.telegram.org/bot${tokenManager}/sendPhoto?chat_id=${projectChatId}&photo=${poster}&reply_markup=${keyboard}`
+    //await $host.get(url_send_photo);
+    await sendPhotoToTelegram2({user: projectChatId, image: poster, keyboard: keyboard})
   }
 
   const handleDeleteReport = async (reportId) => {

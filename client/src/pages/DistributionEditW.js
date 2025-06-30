@@ -46,6 +46,7 @@ import {
 
 import { uploadFile } from '../http/chatAPI';
 import { newMessage, delWMessage } from '../http/workerAPI';
+import { delMessageToTelegram } from "src/http/telegramAPI"; 
 import specData from '../data/specData';
 import categories from '../data/categories';
 
@@ -1300,12 +1301,6 @@ const delCategory7 = (category) => {
       const distrNew = await newDistributionW(message)
       console.log("distrNew: ", distrNew.id)
 
-      // selected.map(async (user, index) => { 
-      //   const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
-      //   const sendTextToTelegram = await $host.get(url_send_msg);
-      //   console.log("res: ", sendTextToTelegram)
-      // })
-
       const res = await $host_bottest.get(hostServerTest + 'api/distributionsw/send/' + distrNew.id +'/'+ typeFile);
 
       setShowSend(false)
@@ -1356,10 +1351,9 @@ const delCategory7 = (category) => {
         await delWMessage(item.mess)
       } 
 
-      const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${item.user}&message_id=${item.mess}`
-
-      const delToTelegram = await $host.get(url_del_msg);
-
+      //const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${item.user}&message_id=${item.mess}`
+      //const delToTelegram = await $host.get(url_del_msg);
+      const delToTelegram = await delMessageToTelegram({user: item.user, messageId: item.mess})
 
       //Выводим сообщение об успешном удалении
       if (delToTelegram) {

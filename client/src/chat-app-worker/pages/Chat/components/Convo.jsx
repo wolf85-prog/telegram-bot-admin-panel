@@ -11,6 +11,7 @@ import { AccountContext } from './../../../../chat-app-new/context/AccountProvid
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { $host } from './../../../../http/index'
 import { delWMessage, getWMessages2 } from "src/http/workerAPI";
+import { delMessageToTelegram } from "src/http/telegramAPI";
 import Dropdown from 'react-bootstrap/Dropdown';
 import imageIcon from "./../../../assets/images/sp-i-m-image-placeholder.svg";
 
@@ -261,9 +262,9 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		//удалить сообщение в базе данных
 		await delWMessage(message.id)
 
-		const url_del_msg = `https://api.telegram.org/bot${tokenW}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
-
-		const delToTelegram = await $host.get(url_del_msg);
+		//const url_del_msg = `https://api.telegram.org/bot${tokenW}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
+		//const delToTelegram = await $host.get(url_del_msg);
+		const delToTelegram = await delMessageToTelegram({user: personW.id, messageId: message.id})
 
 		console.log("Удаляемое сообщение: ", message.id)
 		console.log("Дата сообщения: ", message.date)
