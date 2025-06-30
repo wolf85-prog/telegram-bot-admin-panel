@@ -176,7 +176,7 @@ const DistributionAdd = () => {
           console.log(arrUsers, distrNew)
           //const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.code}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
           //sendToTelegram = await $host.get(url_send_msg);
-          sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+          // sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
 
           const { status } = sendToTelegram;              
           if (status === 200) {
