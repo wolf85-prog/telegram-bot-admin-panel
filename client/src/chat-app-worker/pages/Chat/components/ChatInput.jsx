@@ -42,7 +42,7 @@ const ChatInput = ({
 	useAutosizeTextArea(textAreaRef.current, mess);
 
 	const handleChange = (e) => {
-		console.log(e.target.value)
+		//console.log(e.target.value)
 		setMess(e.target.value)
 	};
 
@@ -94,7 +94,7 @@ const ChatInput = ({
 	CustomMenu.displayName = CustomMenu
 
 	const change = async (eventkey) => {
-		alert(`you chosen: ${eventkey}`)
+		//alert(`you chosen: ${eventkey}`)
 		setSelectedElement(eventkey)
 	}
 

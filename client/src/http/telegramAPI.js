@@ -3,7 +3,7 @@ import {$authHost, $host} from "./index";
 export const sendMessageToTelegram = async (data) =>{
     try {
        let response = await $host.post('api/botworhub/sendmessage', data);
-       console.log(response);
+       console.log("response: ", response);
        return response;
     } catch (error) {
         console.log("error while calling sendMessageToTelegram api", error.message);

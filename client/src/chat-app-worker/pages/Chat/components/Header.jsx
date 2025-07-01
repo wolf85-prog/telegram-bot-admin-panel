@@ -32,8 +32,8 @@ const Header = ({ user, worker, openProfileSidebar, openSearchSidebar, closeSide
 
 	const host = process.env.REACT_APP_API_URL
 
-	console.log("user: ", user)
-	console.log("worker: ", worker)
+	//console.log("user: ", user)
+	//console.log("worker: ", worker)
 
 	const onSelected = (index) => {
 		switch(index) {

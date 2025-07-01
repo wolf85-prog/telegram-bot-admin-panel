@@ -262,7 +262,9 @@ const Chat = () => {
 		cb(false);
 	};
 
+	//---------------------------------------------------------
 	//функция отправки сообщения
+	//---------------------------------------------------------
 	const sendText = async () => {
 		console.log("selectedElement: ", selectedElement)
 		if (selectedElement === '1') { //выбран паспорт
@@ -293,9 +295,11 @@ const Chat = () => {
 			let sendToTelegram
 
 			if(!file) {
-				const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`	
-				sendToTelegram = await $host.get(url_send_msg);
-				//sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+				//const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`	
+				//sendToTelegram = await $host.get(url_send_msg);
+				
+				sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+				console.log("sendToTelegram: ", sendToTelegram)
 			} else {
 				if (fileType === 'doc') { //(image.slice(-3) === 'gif' || image.slice(-3)==='zip') {
 						//const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personW.id}&document=${host+image}`
