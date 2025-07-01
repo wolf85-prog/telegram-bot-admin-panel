@@ -195,11 +195,13 @@ const Chat = () => {
 				sendPhotoToTelegram = await sendPhotoToTelegram({user: person.id, photo: host+image})
 			}
 		}
+
+		//console.log(sendToTelegram)
         
 
 		//Выводим сообщение об успешной отправке
 		if (sendToTelegram) {
-			console.log('Спасибо! Ваша сообщение отправлено! ', sendToTelegram.data.result.message_id);
+			console.log('Спасибо! Ваша сообщение отправлено! ', sendToTelegram?.data.result.message_id);
 		}           
 		//А здесь сообщение об ошибке при отправке
 		else {
