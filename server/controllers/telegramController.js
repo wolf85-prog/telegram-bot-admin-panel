@@ -34,6 +34,7 @@ class TelegramController {
             console.log("Отправка текста в телеграм...")
                             
             const res = await $host.get(url_send_msg)
+            console.log("res: ", res)
 
             return res
 
