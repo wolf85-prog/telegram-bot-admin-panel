@@ -3,8 +3,8 @@ import {$authHost, $host} from "./index";
 export const sendMessageToTelegram = async (data) =>{
     try {
        let response = await $host.post('api/botworhub/sendmessage', data);
-       //console.log(response);
-       return response.data;
+       console.log(response);
+       return response;
     } catch (error) {
         console.log("error while calling sendMessageToTelegram api", error.message);
     }
@@ -76,7 +76,7 @@ export const sendMessageToTelegram2 = async (data) =>{
     try {
        let response = await $host.post('api/botrenthub/sendmessage', data);
        //console.log(response);
-       return response.data;
+       return response;
     } catch (error) {
         console.log("error while calling sendMessageToTelegram2 api", error.message);
     }

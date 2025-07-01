@@ -190,9 +190,9 @@ const Chat = () => {
 				// sendPhotoToTelegram = await $host.get(url_send_doc);
 				sendPhotoToTelegram = await sendDocumentToTelegram({user: person.id, document: host+image})
 			} else {
-				// const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${person.id}&photo=${host+image}`
-				// sendPhotoToTelegram = await $host.get(url_send_photo);
-				sendPhotoToTelegram = await sendPhotoToTelegram({user: person.id, photo: host+image})
+				const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${person.id}&photo=${host+image}`
+				sendPhotoToTelegram = await $host.get(url_send_photo);
+				//sendPhotoToTelegram = await sendPhotoToTelegram({user: person.id, photo: host+image})
 			}
 		}
 
