@@ -265,13 +265,13 @@ route.get("/crmid/get", getCrmID);
 
 
 //----------------- Telegram Workhub---------------------------------
-route.post(`/botworkhub/sendmessage`, sendMessageToTelegram)
-route.post(`/botworkhub/sendphoto`, sendPhotoToTelegram)
-route.post(`/botworkhub/senddocument`, sendDocumentToTelegram)
-route.post(`/botworkhub/senddocumentform`, sendDocumentFormToTelegram)
-route.post(`/botworkhub/sendvideo`, sendVideoToTelegram)
-route.post(`/botworkhub/sendaudio`, sendAudioToTelegram)
-route.post(`/botworkhub/delmessage`, delMessageToTelegram)
+route.post(`/botworhub/sendmessage`, sendMessageToTelegram)
+route.post(`/botworhub/sendphoto`, sendPhotoToTelegram)
+route.post(`/botworhub/senddocument`, sendDocumentToTelegram)
+route.post(`/botworhub/senddocumentform`, sendDocumentFormToTelegram)
+route.post(`/botworhub/sendvideo`, sendVideoToTelegram)
+route.post(`/botworhub/sendaudio`, sendAudioToTelegram)
+route.post(`/botworhub/delmessage`, delMessageToTelegram)
 
 //----------------- Telegram Renthub---------------------------------
 route.post(`/botrenthub/sendmessage`, sendMessageToTelegram2)
