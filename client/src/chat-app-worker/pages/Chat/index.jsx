@@ -318,8 +318,8 @@ const Chat = () => {
 					// } else {
 						const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
 						//console.log("url_send_photo: ", url_send_photo)
-						sendToTelegram = await $host.get(url_send_photo);
-						//sendToTelegram = await sendPhotoToTelegram({user: personW.id, image: host+image})
+						//sendToTelegram = await $host.get(url_send_photo);
+						sendToTelegram = await sendPhotoToTelegram({user: personW.id, image: host+image})
 					//}		
 				}	
 			}
