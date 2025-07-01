@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useEffect} from "react";
 import Icon from "./../../../components/Icon";
 import EmojiPicker from 'emoji-picker-react';
 
@@ -95,8 +95,14 @@ const ChatInput = ({
 
 	const change = async (eventkey) => {
 		//alert(`you chosen: ${eventkey}`)
+		console.log(eventkey)
 		setSelectedElement(eventkey)
 	}
+
+
+	// useEffect(()=> {
+
+	// }, [selectedElement])
 
 	const clickEmojis = () => {
 		setShowPicker(true)
@@ -188,7 +194,7 @@ const ChatInput = ({
 
 			<div style={{marginLeft: '8px', marginRight: '8px'}}>
 				<DropdownButton
-					onSelect={change}
+					//onSelect={change}
 					as={ButtonGroup}
 					id={`dropdown-button-drop-up`}
 					drop='up'
@@ -202,25 +208,25 @@ const ChatInput = ({
 							&raquo;
 						</span>
 						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave ? 'block' : 'none'}}>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(1)}>
 								Правила работы
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(2)}>
 								Первый проект
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(3)}>
 								Форс-мажор
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(4)}>
 								Штраф
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(5)}>
 								Нестандартная ситуация
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(6)}>
 								Регламент начала
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(7)}>
 								Регламент окончания
 							</Dropdown.Item>
 						</ul>						
@@ -232,28 +238,28 @@ const ChatInput = ({
 							&raquo;
 						</span>
 						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave2 ? 'block' : 'none'}}>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(8)}>
 								Самозанятость
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(9)}>
 								Договор
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(10)}>
 							Оплата №1
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(11)}>
 							Оплата №2
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(12)}>
 							Акция и промокод
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(13)}>
 							Такси
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(14)}>
 							Проекты ночью №1
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(15)}>
 							Проекты ночью №2
 							</Dropdown.Item>
 						</ul>						
@@ -265,61 +271,61 @@ const ChatInput = ({
 							&raquo;
 						</span>
 						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave3 ? 'block' : 'none'}}>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(16)}>
 								Постер [инструкция]
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(17)}>
 							Новая специальность [инструкция]
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(18)}>
 							Новая специальность [инструкция]
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(19)}>
 							Следи за балансом 24/7
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(20)}>
 							Ставка
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(21)}>
 							Новости VK | Telegram
 							</Dropdown.Item>
 						</ul>						
 					</Dropdown.Item>
 
-					<Dropdown.Item eventKey="1" class="dropdown-menu" onMouseOver={()=>setShowSave4(true)} onMouseOut={()=>setShowSave4(false)}>
+					<Dropdown.Item class="dropdown-menu" onMouseOver={()=>setShowSave4(true)} onMouseOut={()=>setShowSave4(false)}>
 						Проект 
 						<span style={{position: 'absolute', right: '15px'}}>
 							&raquo;
 						</span>
 						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave4 ? 'block' : 'none'}}>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(22)}>
 								Анбординг
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(23)}>
 								Аккредитация ФИО и номер телефона
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(24)}>
 								Аккредитация на проект
 							</Dropdown.Item>
-							<Dropdown.Item eventKey="1">
+							<Dropdown.Item onClick={()=>change(25)}>
 								Анкета для аккредитации
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(26)}>
 								Заявка принята
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(27)}>
 								Ваша кандидатура на рассмотрении
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(28)}>
 								Заявка отклонена
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(29)}>
 								Запасной состав
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(30)}>
 								Ссылка на чат
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(31)}>
 								Обработка претендентов
 							</Dropdown.Item>
 
@@ -332,28 +338,28 @@ const ChatInput = ({
 							&raquo;
 						</span>
 						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave5 ? 'block' : 'none', top: '0px'}}>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(32)}>
 							Стандартный ответ
-							</Dropdown.Item>
-							<Dropdown.Item>
+							</Dropdown.Item >
+							<Dropdown.Item onClick={()=>change(33)}>
 							Диалог по телефону
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(34)}>
 							Повторная рассылка
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(35)}>
 							Все предложения работы
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(36)}>
 							Положительный ответ
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(37)}>
 							Обратная связь по работе сервиса
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(38)}>
 							Обновление системы / ошибки
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(39)}>
 							Обработка претендентов
 							</Dropdown.Item>
 						</ul>						
@@ -365,28 +371,28 @@ const ChatInput = ({
 							&raquo;
 						</span>
 						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave6 ? 'block' : 'none', top: '0px'}}>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(40)}>
 								Принято, спасибо
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(41)}>
 							Информация получена, ваш вопрос уже в работе
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(42)}>
 							Информация получена, мы уже работаем в этом направлении
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(43)}>
 							Информация зафиксирована, мы уже работаем над этим
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(44)}>
 							Спасибо за информацию, сообщим вам, как только все будет готово
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(45)}>
 							Мы работаем над вашим запросом и уже скоро предоставим вам результаты
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(46)}>
 							Информация принята, постараемся ответить на ваш вопрос в ближайшее время
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(47)}>
 							На данный момент мы изучаем ваш вопрос и постараемся вернуться к вам с ответом как можно скорее
 							</Dropdown.Item>
 						</ul>						
@@ -398,19 +404,19 @@ const ChatInput = ({
 							&raquo;
 						</span>
 						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave7 ? 'block' : 'none', top: '0px'}}>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(48)}>
 							Контакты
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(49)}>
 							Офис «U.L.E.Y»
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(50)}>
 							Чат Office
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(51)}>
 							Реквизиты №1
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(52)}>
 							Реквизиты №2
 							</Dropdown.Item>
 						</ul>						
@@ -422,22 +428,22 @@ const ChatInput = ({
 							&raquo;
 						</span>
 						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave8 ? 'block' : 'none'}}>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(53)}>
 							Приветствие
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(54)}>
 							Дорогие коллеги
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(55)}>
 							Новости
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(56)}>
 							СПИСОК ПАСПОРТНЫХ ДАННЫХ
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(57)}>
 							Инструкция подачи заявки
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(58)}>
 							Продолжаем поиски
 							</Dropdown.Item>
 						</ul>						
@@ -449,91 +455,39 @@ const ChatInput = ({
 							&raquo;
 						</span>
 						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave9 ? 'block' : 'none'}}>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(59)}>
 							Заявка принята
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(60)}>
 							Данный вопрос мы настоятельно рекомендуем вам обсудить с нашим менеджером по телефону
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(61)}>
 							Готовы выйти на проект?
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(62)}>
 							Отказ???
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(63)}>
 							На проект нужны специалисты
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(64)}>
 							Аккредитация ФИО и номер телефона
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(65)}>
 							Ссылка на чат ?
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(66)}>
 							Рассылка/Вакансия закрыта
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(67)}>
 							Не получаешь рассылку?
 							</Dropdown.Item>
-							<Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(68)}>
 							На проект нужны специалисты
 							</Dropdown.Item>
 						</ul>						
 					</Dropdown.Item>
 
-					{/* <Dropdown.Item class="dropdown-menu" onMouseOver={()=>setShowSave10(true)} onMouseOut={()=>setShowSave10(false)}>
-						Первый проект 
-						<span style={{position: 'absolute', right: '15px'}}>
-							&raquo;
-						</span>
-						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave10 ? 'block' : 'none'}}>
-							<Dropdown.Item>
-								Submenu item 1
-							</Dropdown.Item>
-							<Dropdown.Item>
-								Submenu item 2
-							</Dropdown.Item>
-						</ul>						
-					</Dropdown.Item>
-
-					<Dropdown.Item class="dropdown-menu" onMouseOver={()=>setShowSave11(true)} onMouseOut={()=>setShowSave11(false)}>
-						Постер 
-						<span style={{position: 'absolute', right: '15px'}}>
-							&raquo;
-						</span>
-						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave11 ? 'block' : 'none'}}>
-							<Dropdown.Item>
-								Submenu item 1
-							</Dropdown.Item>
-							<Dropdown.Item>
-								Submenu item 2
-							</Dropdown.Item>
-						</ul>						
-					</Dropdown.Item> */}
-
-
-
-				
-
-					{/* <Dropdown.Item eventKey="2">Информация</Dropdown.Item> */}
-
-					{/* <Dropdown.Item eventKey="3">Проект</Dropdown.Item>
-
-					<Dropdown.Item eventKey="4">Ответ</Dropdown.Item>
-
-					<Dropdown.Item eventKey="5">Быстрый ответ</Dropdown.Item>
-
-					<Dropdown.Item eventKey="6">Контакты</Dropdown.Item>
-
-					<Dropdown.Item eventKey="7">Renthub | Плашка</Dropdown.Item>
-
-					<Dropdown.Item eventKey="8">Workhub | Текст</Dropdown.Item>
-
-					<Dropdown.Divider />
-					<Dropdown.Item eventKey="9">Первый проект</Dropdown.Item>
-
-					<Dropdown.Item eventKey="10">Постер</Dropdown.Item> */}
 				</DropdownButton>
 
 			</div>

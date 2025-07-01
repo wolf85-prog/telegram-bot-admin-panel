@@ -103,21 +103,31 @@ const Chat = () => {
 
 		let text = ''
 		
+		//Правила
+		if (selectedElement === 1) {
+			text = 'Отправка сценария "Правила работы"...'
+			console.log(text)
+			setMess(text)
+		}
+
 		//Стандартный ответ
-		if (selectedElement === '0') {
-			text = `${user.name.split(' ')[1]}, я юный чат-бот и еще не всё умею. Любой вопрос поможет решить наш оператор: +7 (499) 500-14-11`
-			setMess(text)
-		}
+		// if (selectedElement === '0') {
+		// 	text = `${user.name.split(' ')[1]}, я юный чат-бот и еще не всё умею. Любой вопрос поможет решить наш оператор: +7 (499) 500-14-11`
+		// 	setMess(text)
+		// }
+
 		//Паспорт
-		else if (selectedElement === '1') {
-			text = "Отправка запроса паспорта..."
-			setMess(text)
-		}
+		// else if (selectedElement === '1') {
+		// 	text = "Отправка запроса паспорта..."
+		// 	setMess(text)
+		// }
+
 		//Кнопка с номером
 		else if (selectedElement === '2') {
 			text = `+7 (499) 500-14-11 - Менеджер U.L.E.Y`
 			setMess(text)
 		}
+
 		//Запас
 		else if (selectedElement === '3') {
 			text = `${user.name.split(' ')[1]}, мы готовы поставить Вас в запас на этот проект. Запас оплачивается.
@@ -126,6 +136,7 @@ const Chat = () => {
 			
 			setMess(text)
 		}
+
 		//Офис U.L.E.Y
 		else if (selectedElement === '4') {
 			text = `Офис | U.L.E.Y
@@ -136,6 +147,7 @@ const Chat = () => {
 
 			setMess(text)
 		}
+
 		//Оплата / смета
 		else if (selectedElement === '5') {
 			text = `Для согласования и получения оплаты: 
@@ -143,6 +155,7 @@ const Chat = () => {
 
 			setMess(text)
 		}
+
 		//Заявка отклонена
 		else if (selectedElement === '6') {
 			text = `Добрый день, ${user.name.split(' ')[1]}. Спасибо, что откликнулись на эту заявку. 
@@ -151,6 +164,7 @@ const Chat = () => {
 
 			setMess(text)
 		}
+
 		//Заявка одобрена
 		else if (selectedElement === '7') {
 			text = `Добрый день, ${user.name.split(' ')[1]}. Спасибо, что откликнулись на заявку. 
@@ -159,6 +173,7 @@ const Chat = () => {
 
 			setMess(text)
 		}
+
 		//Запрос ключевых данных
 		else if (selectedElement === '8') {
 			text = `Добрый день, ${user.name.split(' ')[1]}. Вы впервые откликнулись на заявку от компании U.L.E.Y
@@ -267,10 +282,37 @@ const Chat = () => {
 	//---------------------------------------------------------
 	const sendText = async () => {
 		console.log("selectedElement: ", selectedElement)
-		if (selectedElement === '1') { //выбран паспорт
+		
+		//Передаем данные боту
+			let temp=mess.replace(/\n/g, '%0A'); //экранирование переноса строки
+			temp = temp.replace(/#/g, '%23'); 		 //экранирование решетки
+			temp = temp.replace(/&/g, '%26'); 		 //экранирование &
+			temp = temp.replace(/\+/g, '%2b'); 		 //экранирование +
+			temp = temp.replace(/>/g, '%3e'); 		 //экранирование >
+			temp = temp.replace(/</g, '%3c'); 		 //экранирование <
+
+		if (selectedElement === 1) { //выбран Правила
 			//отправка сценария
 			console.log("отправка сценария: ", selectedElement)
-			sendMyMessage()
+
+			let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: user.chatId,
+				conversationId: convs.id,
+				type: "text",
+				text: mess,
+				isBot: null,
+				messageId: sendToTelegram?.data.result.message_id,
+			}
+
+			//сохранение сообщения в базе данных
+			await newMessage(message)	
+
+			//сохранить в контексте
+			addNewMessage2(user.chatId, mess, 'text', '', convs.id, sendToTelegram?.data.result.message_id, null);
+
+			sendScenariy1()
 
 		} else if (selectedElement === '9') { //выбран Правила
 				//отправка сценария
@@ -283,14 +325,6 @@ const Chat = () => {
 	
 		} else {
 			//отправка сообщения
-
-			//Передаем данные боту
-			let temp=mess.replace(/\n/g, '%0A'); //экранирование переноса строки
-			temp = temp.replace(/#/g, '%23'); 		 //экранирование решетки
-			temp = temp.replace(/&/g, '%26'); 		 //экранирование &
-			temp = temp.replace(/\+/g, '%2b'); 		 //экранирование +
-			temp = temp.replace(/>/g, '%3e'); 		 //экранирование >
-			temp = temp.replace(/</g, '%3c'); 		 //экранирование <
 			
 			let sendToTelegram
 
@@ -383,6 +417,69 @@ const Chat = () => {
         setImage("");
 		setSelectedElement('')
 	};
+
+
+	//отправка сценария
+	const sendScenariy1 = async() => {
+		console.log("send scenariy1")
+		//audio.play();
+
+		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+
+		const keyboard = JSON.stringify({
+			inline_keyboard: [
+				[
+					{"text": "Принято / Понято", callback_data:'/accept_rule'},
+				],
+			]
+		});
+
+		//отправить в телеграмм
+		let sendToTelegram
+		let text = ''
+		
+		//Паспорт
+		if (selectedElement === 1) {
+			//send photo
+			let poster1 = 'https://proj.uley.team/upload/pravila1.jpg' //poster 1
+			let poster2 = 'https://proj.uley.team/upload/pravila2.jpg' //poster 2
+			let poster3 = 'https://proj.uley.team/upload/pravila3.jpg' //poster 3
+			let poster4 = 'https://proj.uley.team/upload/pravila4.jpg' //poster 4
+			let poster5 = 'https://proj.uley.team/upload/pravila5.jpg' //poster 5
+			let poster6 = 'https://proj.uley.team/upload/pravila6.jpg' //poster 6
+
+			let arr = [poster1, poster2, poster3, poster4, poster5, poster6]
+
+			arr.map(async(item, index)=> {
+				setTimeout(async()=> {
+					await sendPhotoToTelegram({user: user.chatId, photo: arr[index], keyboard: index===5 ? keyboard : ''})
+				}, 500 * ++index)
+			})				
+			
+		} 
+		
+
+		//отправить в админку
+		// let message = {};
+			
+		// message = {
+		// 	senderId: chatAdminId, 
+		// 	receiverId: user.chatId,
+		// 	conversationId: client.conversationId,
+		// 	type: "text",
+		// 	text: text,
+		// 	messageId: sendToTelegram.data.result.message_id,
+		// 	buttons: 'Согласен предоставить персональные данные',
+		// }
+			
+		// console.log("message send: ", message);
+	
+		//сохранение сообщения в базе данных
+		//await newMessage(message)
+	
+		//сохранить в контексте
+		//addNewMessage2(user.chatId, text, 'text', 'Согласен предоставить персональные данные', client.conversationId, sendToTelegram.data.result.message_id);
+    }
 
 
 	//отправка сценария
