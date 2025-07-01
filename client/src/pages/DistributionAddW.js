@@ -57,6 +57,7 @@ import specData from './../data/specData';
 import categories from './../data/categories';
 import cityData from './../data/cityData';
 import cityRegData from './../data/cityRegData';
+import { getSpecialist } from './../http/specAPI'
 
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 import phone_image from './../assets/images/phone2.png';
@@ -75,7 +76,7 @@ const DistributionAddW = () => {
   const hostServer = process.env.REACT_APP_API_URL
   const hostServerTest = process.env.REACT_APP_ADMIN_API_URL_TEST
 
-  const { userWorkers: clients, workersAll, projectsNew } = useUsersContext();
+  const { userWorkers: clients, workersAll, setWorkersAll, projectsNew } = useUsersContext();
   const { addNewDistrib, addNewMessage2, distributionsWork, setDistributionsWork, delMessageContext } = useUsersContext();
   const [contacts, setContacts]= useState([{value: 0, name: "Выбрать...", label: 'Выбрать...',}]);
   const [contacts2, setContacts2]= useState([{value: 0, name: "Выбрать...", label: 'Выбрать...',}]);
@@ -189,6 +190,44 @@ const DistributionAddW = () => {
       console.log("clients: ", clients)
 
       setProjects(projects)
+
+      //0 все специалисты
+      //let all = await getWorkers()
+      let all = await getSpecialist()
+      //console.log("specialist all: ", all)
+      const arrayWorkerAll = []
+              
+                all.map(async (user) => {
+                  const newWorker = {
+                    id: user.id,
+                    userfamily: user.fio, //user.userfamily != null ? user.userfamily : '',
+                    username: '',//user.username,
+                    phone: user.phone,
+                    dateborn: user.age,
+                    city: user.city, 
+                    //newcity: user.newcity, 
+                    companys: user.company,
+                    //stag: user.stag,
+                    worklist:  user.specialization,
+                    chatId: user.chatId,
+                    createDate: user.createdAt,
+                    avatar: user.profile,
+                    //from: user.from,
+                    promoId: user.promoId,
+                    blockW: user.blockW,
+                    block18: user.block18,
+                    krest: user.krest,
+                    deleted: user.deleted,
+                    comment: user.comment,
+                    comteg: user.comteg,
+                    projectAll: user.projectAll,
+                    projectMonth: user.projectMonth,
+                  }
+              
+                  arrayWorkerAll.push(newWorker)
+                })
+              
+      setWorkersAll(arrayWorkerAll)
       setLoaderStart(false)  
     }
 

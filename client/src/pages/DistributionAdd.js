@@ -25,7 +25,7 @@ import { $host } from './../http/index'
 import { useNavigate } from 'react-router-dom';
 import { newDistribution, getDistributions, editDistribution } from './../http/adminAPI';
 import { newMessage, uploadFile } from './../http/chatAPI';
-import { sendMessageToTelegram } from './../http/telegramAPI';
+import { sendMessageToTelegram2, sendPhotoToTelegram2 } from './../http/telegramAPI';
 import sendSound from './../chat-app-new/assets/sounds/distribution_sound.mp3';
 
 
@@ -176,7 +176,7 @@ const DistributionAdd = () => {
           console.log(arrUsers, distrNew)
           //const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.code}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
           //sendToTelegram = await $host.get(url_send_msg);
-          sendToTelegram = await sendMessageToTelegram({user: user.code, text: text.replace(/\n/g, '%0A')})
+          sendToTelegram = await sendMessageToTelegram2({user: user.code, text: text.replace(/\n/g, '%0A')})
 
           const { status } = sendToTelegram;              
           if (status === 200) {
@@ -195,72 +195,72 @@ const DistributionAdd = () => {
                               
         }  
 
-        //const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.code}&reply_markup=${keyboard}`
+        const url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user.code}&reply_markup=${keyboard}`
         
-        // let sendPhotoToTelegram
-        // if (file) {
-        //   const form = new FormData();
-        //   form.append("photo", file);
+        let sendPhotoToTelegram
+        if (file) {
+          const form = new FormData();
+          form.append("photo", file);
 
-        //   //sendPhotoToTelegram = await $host.post(url_send_photo, form);
-        //   sendPhotoToTelegram = await sendPhotoToTelegram2({user: user.code, photo:  keyboard: keyboard})
+          sendPhotoToTelegram = await $host.post(url_send_photo, form);
+          //sendPhotoToTelegram = await sendPhotoToTelegram2({user: user.code, photo:  keyboard: keyboard})
 
-        //   //console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
+          //console.log('sendPhotoToTelegram: ', sendPhotoToTelegram)
 
-        //   const { status } = sendPhotoToTelegram;
+          const { status } = sendPhotoToTelegram;
 
-        //   if (status === 200 && text === '') {
-        //     console.log("статус 200 фото")
-        //     //countSuccess = countSuccess + 1  
+          if (status === 200 && text === '') {
+            console.log("статус 200 фото")
+            //countSuccess = countSuccess + 1  
                     
-        //     //обновить статус доставки
-        //     arrUsers[index-1].status = 200
-        //     arrUsers[index-1].mess = sendPhotoToTelegram.data?.result?.message_id   
+            //обновить статус доставки
+            arrUsers[index-1].status = 200
+            arrUsers[index-1].mess = sendPhotoToTelegram.data?.result?.message_id   
 
-        //     //обновить бд рассылку
-        //     await editDistribution({receivers: JSON.stringify(arrUsers)}, distrNew.id)
-        //   }
-        // } 
+            //обновить бд рассылку
+            await editDistribution({receivers: JSON.stringify(arrUsers)}, distrNew.id)
+          }
+        } 
 
-        // //отправить в админку
-        // if (sendToAdmin) {
-        //   let message = {};
-        //   if(!file) {
-        //       message = {
-        //           senderId: chatAdminId, 
-        //           receiverId: user.code,
-        //           conversationId: client.conversationId,
-        //           type: "text",
-        //           text: text,
-        //           is_bot: true,
-        //           messageId: sendToTelegram.data.result.message_id,
-        //           buttons: '',
-        //       }
-        //   } else {
-        //       message = {
-        //           senderId: chatAdminId, 
-        //           receiverId: user.code,
-        //           conversationId: client.conversationId,
-        //           type: "image",
-        //           text: host + image,
-        //           is_bot: true,
-        //           messageId: sendPhotoToTelegram.data.result.message_id,
-        //           buttons: textButton,
-        //       }
-        //   }
-        //   console.log("message send: ", message);
+        //отправить в админку
+        if (sendToAdmin) {
+          let message = {};
+          if(!file) {
+              message = {
+                  senderId: chatAdminId, 
+                  receiverId: user.code,
+                  conversationId: client.conversationId,
+                  type: "text",
+                  text: text,
+                  is_bot: true,
+                  messageId: sendToTelegram.data.result.message_id,
+                  buttons: '',
+              }
+          } else {
+              message = {
+                  senderId: chatAdminId, 
+                  receiverId: user.code,
+                  conversationId: client.conversationId,
+                  type: "image",
+                  text: host + image,
+                  is_bot: true,
+                  messageId: sendPhotoToTelegram.data.result.message_id,
+                  buttons: textButton,
+              }
+          }
+          console.log("message send: ", message);
 
-        //   //сохранение сообщения в базе данных
-        //   await newMessage(message)
+          //сохранение сообщения в базе данных
+          await newMessage(message)
 
-        //   //сохранить в контексте
-        //   if(!file) {
-        //     addNewMessage(user.code, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
-        //   } else {
-        //     addNewMessage(user.code, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
-        //   }
+          //сохранить в контексте
+          if(!file) {
+            addNewMessage(user.code, text, 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
+          } else {
+            addNewMessage(user.code, host + image, 'image', textButton, client.conversationId, sendPhotoToTelegram.data.result.message_id);
+          }
     
-        //}  
+        }  
 
       }, 3000 * ++index) 
     })
