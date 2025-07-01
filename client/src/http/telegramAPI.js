@@ -2,7 +2,7 @@ import {$authHost, $host} from "./index";
 
 export const sendMessageToTelegram = async (data) =>{
     try {
-       let response = await $host.post('api/botworhub/sendmessage', data);
+       let response = await $host.post('api/botworkhub/sendmessage', data);
        console.log("response: ", response);
        return response;
     } catch (error) {
@@ -12,7 +12,7 @@ export const sendMessageToTelegram = async (data) =>{
 
 export const delMessageToTelegram = async (data) =>{
     try {
-       let response = await $host.post('api/botworhub/delmessage', data);
+       let response = await $host.post('api/botworkhub/delmessage', data);
        //console.log(response);
        return response;
     } catch (error) {
@@ -22,7 +22,7 @@ export const delMessageToTelegram = async (data) =>{
 
 export const sendPhotoToTelegram = async (data) =>{
     try {
-       let response = await $host.post('api/botworhub/sendphoto', data);
+       let response = await $host.post('api/botworkhub/sendphoto', data);
        //console.log(response);
        return response;
     } catch (error) {
@@ -32,7 +32,7 @@ export const sendPhotoToTelegram = async (data) =>{
 
 export const sendDocumentToTelegram = async (data) =>{
     try {
-       let response = await $host.post('api/botworhub/senddocument', data);
+       let response = await $host.post('api/botworkhub/senddocument', data);
        //console.log(response);
        return response;
     } catch (error) {
@@ -42,7 +42,7 @@ export const sendDocumentToTelegram = async (data) =>{
 
 export const sendDocumentFormToTelegram = async (data) =>{
     try {
-       let response = await $host.post('api/botworhub/senddocumentform', data);
+       let response = await $host.post('api/botworkhub/senddocumentform', data);
        //console.log(response);
        return response.data;
     } catch (error) {
@@ -52,7 +52,7 @@ export const sendDocumentFormToTelegram = async (data) =>{
 
 export const sendVideoToTelegram = async (data) =>{
     try {
-       let response = await $host.post('api/botworhub/sendvideo', data);
+       let response = await $host.post('api/botworkhub/sendvideo', data);
        //console.log(response);
        return response;
     } catch (error) {
@@ -62,7 +62,7 @@ export const sendVideoToTelegram = async (data) =>{
 
 export const sendAudioToTelegram = async (data) =>{
     try {
-       let response = await $host.post('api/botworhub/sendaudio', data);
+       let response = await $host.post('api/botworkhub/sendaudio', data);
        //console.log(response);
        return response;
     } catch (error) {

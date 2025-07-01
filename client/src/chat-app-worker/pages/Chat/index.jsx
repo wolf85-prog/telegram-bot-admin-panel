@@ -316,7 +316,7 @@ const Chat = () => {
 					// if (image.slice(-3) !== 'png' || image.slice(-3)!=='jpg' || image.slice(-3)!=='peg' || image.slice(-3) !== 'PNG' || image.slice(-3)!=='JPG' || image.slice(-3)!=='PEG') {
 					// 	setShowErrorFile(true)
 					// } else {
-						const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
+						//const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
 						//console.log("url_send_photo: ", url_send_photo)
 						//sendToTelegram = await $host.get(url_send_photo);
 						sendToTelegram = await sendPhotoToTelegram({user: personW.id, image: host+image})
@@ -326,7 +326,7 @@ const Chat = () => {
 
 			//Выводим сообщение об успешной отправке
 			if (sendToTelegram) {
-				console.log('Спасибо! Ваша сообщение отправлено! ', sendToTelegram.data.result.message_id);
+				console.log('Спасибо! Ваше сообщение отправлено! ', sendToTelegram.data.result.message_id);
 			}           
 			//А здесь сообщение об ошибке при отправке
 			else {
@@ -358,14 +358,14 @@ const Chat = () => {
 					type: "image",
 					text: host + image,
 					isBot: null,
-					messageId: sendToTelegram.data.result.message_id,
+					messageId: sendToTelegram?.data.result.message_id,
 				}
 
 				//сохранение сообщения в базе данных
 				await newMessage(message)	
 
 				//сохранить в контексте
-				addNewMessage2(user.chatId, host + image, 'image', '', convs.id, sendToTelegram.data.result.message_id, null);
+				addNewMessage2(user.chatId, host + image, 'image', '', convs.id, sendToTelegram?.data.result.message_id, null);
 			}
 			console.log("message send: ", message);
 
