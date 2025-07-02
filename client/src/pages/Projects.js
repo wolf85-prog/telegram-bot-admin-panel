@@ -105,7 +105,7 @@ import comtegs from 'src/data/comtegs'
 import specOnlyData2 from 'src/data/specOnlyData2'
 import { posterList } from 'src/data/data'
 import startData from 'src/data/startData'
-import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
+import { newMessage, uploadFile } from "src/http/workerAPI";
 import { getSpecialist, getSpecCount, editSpecialist, getSpecialistId } from './../http/specAPI'
 import {
   getPretendentProjectId,
@@ -139,14 +139,16 @@ import { $host } from '../http/index'
 import { getManagerId } from 'src/http/managerAPI'
 import { sendMessageToTelegram2, sendPhotoToTelegram2 } from 'src/http/telegramAPI'
 import RollCall from '../components/RollCall'
+import { getRConversation, newRMessage } from 'src/http/renthubAPI';
 
 const Projects = () => {
   //const navigate = useNavigate();
   const queryClient = useQueryClient()
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
-  const { companysAll, managersAll, workersAll, setWorkersAll, platformsAll } = useUsersContext()
+  const { companysAll, managersAll, workersAll, setWorkersAll, platformsAll, addNewMessageRent } = useUsersContext()
 
   const tokenManager = process.env.REACT_APP_TELEGRAM_API_TOKEN
+  const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
   const [showSidebar, setShowSidebar] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
@@ -176,6 +178,8 @@ const Projects = () => {
   const [company, setCompany] = useState('')
   const [companyName, setCompanyName] = useState('')
   const [companysData, setCompanysData] = useState([])
+
+  const [managerConvs, setManagerConvs] = useState([])
 
   const [managerName, setManagerName] = useState('')
   const [managerName2, setManagerName2] = useState('')
@@ -406,6 +410,10 @@ const Projects = () => {
 
     //5
     const fetchData = async () => {
+      // const convs = await getRConversation()
+      // console.log("Renthub Conver: ", convs)
+      // setManagerConvs(convs)
+
       const projs = await getProjects()
       //console.log("projs: ", projs)
       const sortProj = [...projs].sort((a, b) => {
@@ -1445,11 +1453,32 @@ ${loc.url}`
 				],
 			]
 		});
-    //const chatId = "805436270"
+    const chatId = "805436270"
 
-    //const url_send_photo = `https://api.telegram.org/bot${tokenManager}/sendPhoto?chat_id=${projectChatId}&photo=${poster}&reply_markup=${keyboard}`
-    //await $host.get(url_send_photo);
-    await sendPhotoToTelegram2({user: projectChatId, image: poster, keyboard: keyboard})
+
+    //await sendPhotoToTelegram2({user: projectChatId, image: poster, keyboard: keyboard})
+
+    //let conv = managerConvs.find((conv) => conv.members[0] === chatId);
+    const convId = await getRConversation(chatId)
+    console.log("conv: ", convId)
+    const temp = "Список отправлен..."
+
+    //отправка списков
+    const message = {
+      senderId: chatAdminId, 
+      receiverId: chatId,
+      conversationId: convId,
+      type: "text",
+      text: temp,
+      isBot: null,
+      messageId: null,
+    }
+    
+    //сохранение сообщения в базе данных
+    await newRMessage(message)	
+    
+    //сохранить в контексте
+    addNewMessageRent(chatId, temp, 'text', '', convId, null, null);
   }
 
   const handleDeleteReport = async (reportId) => {

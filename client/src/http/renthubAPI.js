@@ -1,4 +1,4 @@
-import {$authHost, $host, $host_worker} from "./index";
+import {$authHost, $host, $host_renthub, $host_worker} from "./index";
 
 export const getRManagers = async () =>{
     try {
@@ -78,7 +78,7 @@ export const setRConversation= async (data)=>{
 
 export const getRConversation= async (id)=>{
     try {
-       let response= await $host.get(`api/rconversation/get/${id}`);
+       let response= await $host_renthub.get(`api/conversation/get/${id}`);
        if (response.data === null) {
             return null;
        }
@@ -90,7 +90,7 @@ export const getRConversation= async (id)=>{
 
 export const getRConversations= async ()=>{
     try {
-       let response= await $host.get(`api/rconversations/get`);
+       let response= await $host_renthub.get(`api/conversations/get`);
        return response.data;
     } catch (error) {
         console.log("error while calling getConversation api", error.message);       
@@ -100,7 +100,7 @@ export const getRConversations= async ()=>{
 // message
 export const newRMessage = async (data) =>{
     try {
-        await $host.post(`api/rmessage/add`, data); 
+        await $host_renthub.post(`api/message/add`, data); 
     } catch (error) {
         console.log("error while calling newMessage api",error.message);
     }
@@ -108,7 +108,7 @@ export const newRMessage = async (data) =>{
 
 export const delRMessage = async (id) =>{
     try {
-        await $host.delete(`api/rmessage/delete/${id}`); 
+        await $host_renthub.delete(`api/message/delete/${id}`); 
     } catch (error) {
         console.log("error while calling delMessage api",error.message);
     }
@@ -119,7 +119,7 @@ export const getRMessages = async(id)=>{
     try {
         let response
         if (id !== null) {
-            response = await $host.get(`api/rmessage/get/${id}`);
+            response = await $host_renthub.get(`api/message/get/${id}`);
         } else {
             return [] 
         }

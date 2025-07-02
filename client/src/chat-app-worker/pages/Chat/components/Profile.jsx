@@ -77,18 +77,11 @@ const Profile = ({ user, closeSidebar }) => {
 
 		//получить данные из ноушена по телеграм id
 		const fetchData = async () => {
-			console.log("user: ", user)
-			//console.log("specialist: ", workersAll)
 
 			const fioBD = await getSpecialistChatId(user.chatId)
-			console.log("worker: ", fioBD)
-			//const fio_notion = workersAll.find(item=>item.chatId === user.chatId) //await getWorkerNotionId(user.chatId)
-			//console.log("worker: ", fio_notion)
+			//console.log("worker: ", fioBD)
 			
 			setWorker(fioBD)
-
-			//const avatars = await getWorkerChildrenId(fio_notion[0]?.id)
-			//const avatars = await getWorker(user.chatId)
 			setAvatar(user.avatar)
 		}
 
@@ -96,7 +89,7 @@ const Profile = ({ user, closeSidebar }) => {
 	}, [user]);
 
 	useEffect(() => {
-		console.log("user: ", user)
+		//console.log("user: ", user)
 
 		setTimeout(()=>{
 			setHeightImage(divBlock.current.getBoundingClientRect())
@@ -131,7 +124,7 @@ const Profile = ({ user, closeSidebar }) => {
 
 		const fetch = async() => {
 			const pretendentArray = await getLastPretendent(user.chatId)
-			console.log("pretendentArray: ", pretendentArray)
+			//console.log("pretendentArray: ", pretendentArray)
 			
 			if (pretendentArray.length > 0) {
 				const projectId = pretendentArray[pretendentArray.length-1]?.projectId
@@ -140,7 +133,7 @@ const Profile = ({ user, closeSidebar }) => {
 				
 				//получить CrmId по id проекта
 				const project = await getProjectId(projectId)
-				console.log("project profile: ", project)
+				//console.log("project profile: ", project)
 				const project2 = await getProjectId(projectId2)
 				const project3 = await getProjectId(projectId3)
 
@@ -148,7 +141,7 @@ const Profile = ({ user, closeSidebar }) => {
 				const crmId2 = project2 ? project2.crmID : '—'
 				const crmId3 = project3 ? project3.crmID : '—' 
 
-				console.log("crmId: ", crmId, crmId2, crmId3)
+				//console.log("crmId: ", crmId, crmId2, crmId3)
 
 				setCrmId(crmId)
 				setCrmId2(crmId2)
@@ -160,7 +153,7 @@ const Profile = ({ user, closeSidebar }) => {
 			}	
 			
 			const profile = await getSpecialistChatId(user.chatId)
-			console.log("profile: ", profile, user.chatId)
+			//console.log("profile: ", profile, user.chatId)
 			setBlockWorker(profile?.blockW ? profile?.blockW : false)
 		}
 		

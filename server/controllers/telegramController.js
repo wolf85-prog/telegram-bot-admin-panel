@@ -34,7 +34,8 @@ class TelegramController {
             console.log("Отправка текста в телеграм...")
                             
             const ressend = await $host.get(url_send_msg)
-
+            console.log("ressend: ", ressend)
+            
             return res.status(200).json(ressend);
 
         } catch (error) {
@@ -51,9 +52,10 @@ class TelegramController {
                             
             console.log("Удаление сообщения в телеграм...")
                             
-            const ressend = await $host.get(url_send_msg)
+            const ressend = await $host.post(url_send_msg)
+            console.log("ressend: ", ressend)
 
-            return res.status(200).json(ressend);
+            return res;
 
         } catch (error) {
             return res.status(500).json(error.message);

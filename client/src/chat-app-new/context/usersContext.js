@@ -502,6 +502,12 @@ useEffect(() => {
       }) 
       //console.log("specialistAll: ", res)
       setSpecialistAll(arrAllWorkers)
+
+
+	  //3 все беседы (conversations)
+		let convers = await getWConversations()
+		console.log("Всего бесед: ", convers.length)
+		setConversations(convers)
       
     }
 
@@ -1746,6 +1752,21 @@ const fetchEditMessageRentResponse = async(data) => {
 
 };
 
+//отправить сообщение из админки workhub
+const addNewMessageRent = (userId, message, type, textButton, convId, messageId, isBot) => {
+
+	socket.emit("sendAdminRent", { 
+		senderId: chatAdminId,
+		receiverId: userId,
+		text: message,
+		type: type,
+		buttons: textButton,
+		convId: convId,
+		messageId,
+		isBot: isBot,
+	})
+};
+
 
 //отправить номер процесса и данные
 const sendNumberProcess = (number, data, interval, time) => {
@@ -2261,8 +2282,8 @@ function isObjectEmpty(obj) {
 			specialistsCount, 
 			setSpecialistsCount,
 			distributionsWork, 
-			setDistributionsWork
-
+			setDistributionsWork,
+			addNewMessageRent
 		}}>
 			{children}
 		</UsersContext.Provider>
