@@ -34,9 +34,8 @@ class TelegramController {
             console.log("Отправка текста в телеграм...")
                             
             const ressend = await $host.get(url_send_msg)
-            //console.log("ressend: ", ressend)
 
-            return res.status(200).json(ressend.data);;
+            return res.status(200).json(ressend.data);
 
         } catch (error) {
             return res.status(500).json(error.message);
@@ -53,9 +52,8 @@ class TelegramController {
             console.log("Удаление сообщения в телеграм...")
                             
             const ressend = await $host.post(url_send_msg)
-            console.log("ressend: ", ressend)
 
-            return res;
+            return res.status(200).json(ressend.data);
 
         } catch (error) {
             return res.status(500).json(error.message);
@@ -73,7 +71,7 @@ class TelegramController {
                             
             const ressend = await $host.get(url_send_msg)
 
-            return res.status(200).json(ressend);
+            return res.status(200).json(ressend.data);
         } catch (error) {
             return res.status(500).json(error.message);
         }
@@ -90,7 +88,7 @@ class TelegramController {
                             
             const ressend = await $host.get(url_send_msg)
 
-            return res.status(200).json(ressend);
+            return res.status(200).json(ressend.data);
         } catch (error) {
             return res.status(500).json(error.message);
         }
@@ -106,7 +104,7 @@ class TelegramController {
                             
             const ressend = await $host.get(`https://api.telegram.org/bot${token}/sendDocument`, form, {headers: headers,})
 
-            return res.status(200).json(ressend);
+            return res.status(200).json(ressend.data);
         } catch (error) {
             return res.status(500).json(error.message);
         }
@@ -123,7 +121,7 @@ class TelegramController {
                             
             const ressend = await $host.get(url_send_msg)
 
-            return res.status(200).json(ressend);
+            return res.status(200).json(ressend.data);
         } catch (error) {
             return res.status(500).json(error.message);
         }
@@ -140,7 +138,7 @@ class TelegramController {
                             
             const ressend = await $host.get(url_send_msg)
 
-            return res.status(200).json(ressend);
+            return res.status(200).json(ressend.data);
         } catch (error) {
             return res.status(500).json(error.message);
         }
@@ -159,7 +157,7 @@ class TelegramController {
                             
             const ressend = await $host.get(url_send_msg)
 
-            return res.status(200).json(ressend);
+            return res.status(200).json(ressend.data);
         } catch (error) {
             return res.status(500).json(error.message);
         }
@@ -176,7 +174,7 @@ class TelegramController {
                             
             const ressend = await $host.get(url_send_msg)
 
-            return res.status(200).json(ressend);
+            return res.status(200).json(ressend.data);
         } catch (error) {
             return res.status(500).json(error.message);
         }
