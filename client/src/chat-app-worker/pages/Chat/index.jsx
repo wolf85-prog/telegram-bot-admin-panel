@@ -333,7 +333,7 @@ const Chat = () => {
 				//sendToTelegram = await $host.get(url_send_msg);
 				
 				sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
-				console.log("sendToTelegram: ", sendToTelegram)
+				//console.log("sendToTelegram: ", sendToTelegram)
 			} else {
 				if (fileType === 'doc') { //(image.slice(-3) === 'gif' || image.slice(-3)==='zip') {
 						//const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personW.id}&document=${host+image}`

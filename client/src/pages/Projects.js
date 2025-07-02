@@ -571,7 +571,12 @@ const Projects = () => {
       }
       newArray.push(newObj)
     })
-    setPretendents(newArray)
+    const sortPretendent = newArray.sort((a, b)=> {
+      var fioA = a.fio, fioB = b.fio
+      return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
+    })
+    console.log("sortPretendent: ", sortPretendent)
+    setPretendents(sortPretendent)
 
     setId(id)
     setCrmID(resProj.crmID)
