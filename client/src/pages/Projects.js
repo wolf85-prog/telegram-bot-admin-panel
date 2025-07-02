@@ -1458,32 +1458,29 @@ ${loc.url}`
 				],
 			]
 		});
-    const chatId = "805436270"
+    //const chatId = "805436270"
 
+    const resSendToTelegram = await sendPhotoToTelegram2({user: projectChatId, image: poster, keyboard: keyboard})
 
-    //await sendPhotoToTelegram2({user: projectChatId, image: poster, keyboard: keyboard})
-
-    //let conv = managerConvs.find((conv) => conv.members[0] === chatId);
-    const convId = await getRConversation(chatId)
+    const convId = await getRConversation(projectChatId)
     console.log("conv: ", convId)
-    const temp = "Список отправлен..."
 
     //отправка списков
     const message = {
       senderId: chatAdminId, 
-      receiverId: chatId,
+      receiverId: projectChatId,
       conversationId: convId,
-      type: "text",
-      text: temp,
+      type: "image",
+      text: poster,
       isBot: null,
-      messageId: null,
+      messageId: resSendToTelegram.data?.result.message_id,
     }
     
     //сохранение сообщения в базе данных
     await newRMessage(message)	
     
     //сохранить в контексте
-    addNewMessageRent(chatId, temp, 'text', '', convId, null, null);
+    addNewMessageRent(projectChatId, poster, 'image', '', convId, null, resSendToTelegram.data?.result.message_id);
   }
 
   const handleDeleteReport = async (reportId) => {
