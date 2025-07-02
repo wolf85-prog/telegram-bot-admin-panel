@@ -36,7 +36,7 @@ class TelegramController {
             const ressend = await $host.get(url_send_msg)
             //console.log("ressend: ", ressend)
 
-            return ressend.data;
+            return res.status(200).json(ressend.data);;
 
         } catch (error) {
             return res.status(500).json(error.message);
