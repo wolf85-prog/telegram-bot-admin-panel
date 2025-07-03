@@ -65,7 +65,7 @@ class TelegramController {
         const {user, photo, keyboard} = req.body 
 
         try {   
-            const url_send_msg = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${photo}&reply_markup=${keyboard}`
+            const url_send_msg = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${photo}&reply_markup=${keyboard ? keyboard : ''}`
                             
             console.log("Отправка фото в телеграм...", url_send_msg)
                             
@@ -82,7 +82,7 @@ class TelegramController {
         const {user, document, keyboard} = req.body 
 
         try {   
-            const url_send_msg = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${user}&document=${document}&reply_markup=${keyboard}`
+            const url_send_msg = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${user}&document=${document}&reply_markup=${keyboard ? keyboard : ''}`
                             
             console.log("Отправка документы в телеграм...")
                             
@@ -115,7 +115,7 @@ class TelegramController {
         const {user, video, keyboard} = req.body 
 
         try {   
-            const url_send_msg = `https://api.telegram.org/bot${token}/sendVideo?chat_id=${user}&video=${video}&reply_markup=${keyboard}`
+            const url_send_msg = `https://api.telegram.org/bot${token}/sendVideo?chat_id=${user}&video=${video}&reply_markup=${keyboard ? keyboard : ''}`
                             
             console.log("Отправка видео в телеграм...")
                             
@@ -132,7 +132,7 @@ class TelegramController {
         const {user, audio, keyboard} = req.body 
 
         try {   
-            const url_send_msg = `https://api.telegram.org/bot${token}/sendAudio?chat_id=${user}&audio=${audio}&reply_markup=${keyboard}`
+            const url_send_msg = `https://api.telegram.org/bot${token}/sendAudio?chat_id=${user}&audio=${audio}&reply_markup=${keyboard ? keyboard : ''}`
                             
             console.log("Отправка аудио в телеграм...")
                             
@@ -168,7 +168,7 @@ class TelegramController {
         const {user, image, keyboard} = req.body 
 
         try {   
-            const url_send_msg = `https://api.telegram.org/bot${tokenRent}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${keyboard}`
+            const url_send_msg = `https://api.telegram.org/bot${tokenRent}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${keyboard ? keyboard : ''}`
                             
             console.log("Отправка фото в телеграм...")
                             
