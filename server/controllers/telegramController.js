@@ -62,10 +62,10 @@ class TelegramController {
 
     //send photo
     async sendPhotoToTelegram(req, res) {
-        const {user, image, keyboard} = req.body 
+        const {user, photo, keyboard} = req.body 
 
         try {   
-            const url_send_msg = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${keyboard}`
+            const url_send_msg = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${photo}&reply_markup=${keyboard}`
                             
             console.log("Отправка фото в телеграм...")
                             

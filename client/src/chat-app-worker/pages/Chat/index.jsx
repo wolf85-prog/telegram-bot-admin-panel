@@ -117,10 +117,10 @@ const Chat = () => {
 		// }
 
 		//Паспорт
-		// else if (selectedElement === '1') {
-		// 	text = "Отправка запроса паспорта..."
-		// 	setMess(text)
-		// }
+		else if (selectedElement === 25) {
+			text = "Отправка запроса паспорта..."
+			setMess(text)
+		}
 
 		//Кнопка с номером
 		else if (selectedElement === '2') {
@@ -313,6 +313,10 @@ const Chat = () => {
 			addNewMessage2(personW.id, temp, 'text', '', convs.id, null, null);
 
 			sendScenariy1()
+		} else if (selectedElement === 25) {
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement)
+			sendMyMessage()
 
 		} else if (selectedElement === '9') { //выбран Правила
 				//отправка сценария
@@ -354,7 +358,7 @@ const Chat = () => {
 						//const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
 						//console.log("url_send_photo: ", url_send_photo)
 						//sendToTelegram = await $host.get(url_send_photo);
-						sendToTelegram = await sendPhotoToTelegram({user: personW.id, image: host+image})
+						sendToTelegram = await sendPhotoToTelegram({user: personW.id, photo: host+image})
 					//}		
 				}	
 			}
@@ -483,7 +487,7 @@ const Chat = () => {
     }
 
 
-	//отправка сценария
+	//отправка сценария Паспорт
 	const sendMyMessage = async() => {
 		console.log("send passport")
 		//audio.play();
@@ -500,10 +504,10 @@ const Chat = () => {
 
 		//отправить в телеграмм
 		let sendToTelegram
-		let text = ''
+		let text = 'Отправка запроса паспорта...'
 		
 		//Паспорт
-		if (selectedElement === '1') {
+		if (selectedElement === 25) {
 			//send photo
 			let anketa = 'https://proj.uley.team/upload/9af754db-d1bb-4cd8-8453-aeba0c65c07a.jfif' //poster anketa
 			//const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${user.chatId}&photo=${anketa}&reply_markup=${keyboard}`
@@ -521,7 +525,7 @@ const Chat = () => {
 			conversationId: client.conversationId,
 			type: "text",
 			text: text,
-			messageId: sendToTelegram.data.result.message_id,
+			messageId: sendToTelegram?.data.result.message_id,
 			buttons: 'Согласен предоставить персональные данные',
 		}
 			
@@ -531,7 +535,7 @@ const Chat = () => {
 		await newMessage(message)
 	
 		//сохранить в контексте
-		addNewMessage2(user.chatId, text, 'text', 'Согласен предоставить персональные данные', client.conversationId, sendToTelegram.data.result.message_id);
+		addNewMessage2(user.chatId, text, 'text', 'Согласен предоставить персональные данные', client.conversationId, sendToTelegram?.data.result.message_id);
     }
 
 	//отправка сценария Правила
