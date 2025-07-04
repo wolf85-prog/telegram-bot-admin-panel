@@ -35,8 +35,10 @@ const { getProjects, getProjectsId, getProjectNew, getProjectsAll, getProjectsDe
 const { uploadFile, getImage, sendNarush } = require( "../controllers/fileController.js")
 
 const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers/wuserbotController')
+
 const { newMessageWorker, delMessageWorker, getMessagesWorker, getMessagesWorker2, getAllMessagesWorker, 
-    getMessagesWorkerCount } = require('../controllers/wmessageController')
+    getMessagesWorkerCount, getMessagesWorkerCountAll } = require('../controllers/wmessageController')
+
 const { newConversationWorker, getConversationWorker, getConversationsW } = require('../controllers/wconversationController')
 const { getWorkers, getWorkersCount, getWorker, editWorker, blockWorker, getCanceled, getCanceledId, addCanceled, updateWorkers} = require('../controllers/workersController')
 const { newPretendent, getPretendent, getPretendentId, getAllPretendent, 
@@ -163,6 +165,7 @@ route.delete('/wmessage/delete/:id', delMessageWorker)
 route.get('/wmessage/get', getAllMessagesWorker)
 route.get('/wmessage/get/:id', getMessagesWorker)
 route.get('/wmessage/get/count/:count', getMessagesWorkerCount)
+route.get('/wmessage/get/:id/countAll', getMessagesWorkerCountAll) //еще
 route.get('/wmessage2/get/:id/:count/:prev', getMessagesWorker2) //еще
 
 route.post('/wconversation/add', newConversationWorker)

@@ -112,6 +112,20 @@ class WmessageController {
             return res.status(500).json(error.message);
         }
     }
+
+
+    //количество сообщений всего
+    async getMessagesWorkerCountAll(req, res) {
+        const count = req.params.count
+        try {   
+            const countAll = await Message.count();
+            console.log("MessagesAll: ", countAll)
+
+            return res.status(200).json(countAll);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
 }
 
 module.exports = new WmessageController()

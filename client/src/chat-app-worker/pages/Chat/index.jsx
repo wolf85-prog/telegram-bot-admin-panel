@@ -429,12 +429,12 @@ const Chat = () => {
 		console.log("send scenariy1")
 		//audio.play();
 
-		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+		let client = userWorkers.find((client) => client.chatId === user.chatId);
 
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "Принято / Понято", callback_data:'/accept_rule'},
+					{"text": "Принято / Понято", callback_data:'/poster_accept1'},
 				],
 			]
 		});
@@ -446,20 +446,22 @@ const Chat = () => {
 		//Паспорт
 		if (selectedElement === 1) {
 			//send photo
-			let poster1 = 'https://proj.uley.team/upload/pravila1.jpg' //poster 1
-			let poster2 = 'https://proj.uley.team/upload/pravila2.jpg' //poster 2
-			let poster3 = 'https://proj.uley.team/upload/pravila3.jpg' //poster 3
-			let poster4 = 'https://proj.uley.team/upload/pravila4.jpg' //poster 4
-			let poster5 = 'https://proj.uley.team/upload/pravila5.jpg' //poster 5
-			let poster6 = 'https://proj.uley.team/upload/pravila6.jpg' //poster 6
+			let poster1 = 'https://proj.uley.team/upload/pravila_1.jpg' //poster 1
+			let poster2 = 'https://proj.uley.team/upload/pravila_2.jpg' //poster 2
+			let poster3 = 'https://proj.uley.team/upload/pravila_3.jpg' //poster 3
+			let poster4 = 'https://proj.uley.team/upload/pravila_4.jpg' //poster 4
+			let poster5 = 'https://proj.uley.team/upload/pravila_5.jpg' //poster 5
+			let poster6 = 'https://proj.uley.team/upload/pravila_6.jpg' //poster 6
 
 			let arr = [poster1, poster2, poster3, poster4, poster5, poster6]
 
 			arr.map(async(item, index)=> {
 				setTimeout(async()=> {
-					await sendPhotoToTelegram({user: user.chatId, photo: arr[index], keyboard: index===5 ? keyboard : ''})
+					sendToTelegram = await sendPhotoToTelegram({user: user.chatId, photo: item, keyboard: index===6 ? keyboard : ''})
+					//console.log("sendToTelegram: ", sendToTelegram)
 				}, 500 * ++index)
-			})				
+			})	
+			
 			
 		} 
 		
@@ -492,7 +494,7 @@ const Chat = () => {
 		console.log("send passport")
 		//audio.play();
 
-		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+		let client = userWorkers.find((client) => client.chatId === user.chatId);
 
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
@@ -543,7 +545,7 @@ const Chat = () => {
 		console.log("send rule")
 		//audio.play();
 
-		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+		let client = userWorkers.find((client) => client.chatId === user.chatId);
 
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
