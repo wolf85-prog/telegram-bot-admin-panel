@@ -165,7 +165,7 @@ route.delete('/wmessage/delete/:id', delMessageWorker)
 route.get('/wmessage/get', getAllMessagesWorker)
 route.get('/wmessage/get/:id', getMessagesWorker)
 route.get('/wmessage/get/count/:count', getMessagesWorkerCount)
-route.get('/wmessage/get/countAll', getMessagesWorkerCountAll) //еще
+route.get('/wmessage/countAll/get', getMessagesWorkerCountAll) //еще
 route.get('/wmessage2/get/:id/:count/:prev', getMessagesWorker2) //еще
 route.get('/wmessage2/countAll/get/:id', getMessagesWorkerCount2)
 

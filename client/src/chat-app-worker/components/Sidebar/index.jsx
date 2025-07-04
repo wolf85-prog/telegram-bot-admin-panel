@@ -32,7 +32,6 @@ const Sidebar = () => {
 					console.log("Старт загрузки сообщений специалистов...")
 				
 					//0 все специалисты
-					//let all = await getWorkers()
 					let all = await getSpecialist()
 					//console.log("specialist all: ", all)
 					const arrayWorkerAll = []
@@ -45,14 +44,11 @@ const Sidebar = () => {
 						  phone: user.phone,
 						  dateborn: user.age,
 						  city: user.city, 
-						  //newcity: user.newcity, 
 						  companys: user.company,
-						  //stag: user.stag,
 						  worklist:  user.specialization,
 						  chatId: user.chatId,
 						  createDate: user.createdAt,
 						  avatar: user.profile,
-						  //from: user.from,
 						  promoId: user.promoId,
 						  blockW: user.blockW,
 						  block18: user.block18,
@@ -67,34 +63,29 @@ const Sidebar = () => {
 						arrayWorkerAll.push(newWorker)
 					})
 				
-					setWorkersAll(arrayWorkerAll)
-		
-					//сохранить кэш
-					//localStorage.setItem("specialist", JSON.stringify(arrayWorkerAll));
+					setWorkersAll(arrayWorkerAll)	
 		
 					//1 все специалисты 100
-					//let response = await getWorkersCount(100, workers.length);
-					let response = await getSpecCount(100, specialist.length);
-					console.log("specialist 100: ", response)
+					const arrTemp = arrayWorkerAll.slice(0, 100)
+					console.log("arrayWorkerAll 100: ", arrTemp)
+					// let response = await getSpecCount(100, specialist.length);
+					// console.log("specialist 100: ", response)
 				
 					const arrayWorker = []
 				
-					response.reverse().map(async (user) => {
+					arrTemp.map(async (user) => {
 						const newWorker = {
 							id: user.id,
 							userfamily: user.fio, //user.userfamily != null ? user.userfamily : '',
-							username: '',//user.username,
+							username: '',
 							phone: user.phone,
 							dateborn: user.age,
 							city: user.city, 
-							//newcity: user.newcity, 
 							companys: user.company,
-							//stag: user.stag,
 							worklist:  user.specialization,
 							chatId: user.chatId,
 							createDate: user.createdAt,
 							avatar: user.profile,
-							//from: user.from,
 							promoId: user.promoId,
 							blockW: user.blockW,
 							block18: user.block18,
@@ -116,6 +107,10 @@ const Sidebar = () => {
 					let convers = await getWConversations()
 					console.log("Всего бесед: ", convers.length)
 					setConversations(convers)
+
+
+					//сохранить кэш количество загруженных сообщений
+					localStorage.setItem("specialist", JSON.stringify(arrayWorkerAll));
 		
 					//4 все сообщения бота
 					let messagesAll = await getWMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
