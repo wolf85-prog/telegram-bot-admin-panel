@@ -66,6 +66,7 @@ class WmessageController {
         }
     }
 
+
     async getAllMessagesWorker(req, res) {
         try {           
             const messages = await Message.findAll({
@@ -122,6 +123,22 @@ class WmessageController {
             //console.log("MessagesAll: ", countAll)
 
             return res.status(200).json(countAll);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    async getMessagesWorkerCount2(req, res) {
+        const conversationId = req.params.id
+
+        try {   
+            const count = await Message.count({
+                where: { conversationId },
+            });
+
+            console.log("Всего сообщений спеца: ", count)
+            
+            return res.status(200).json(count);
         } catch (error) {
             return res.status(500).json(error.message);
         }
