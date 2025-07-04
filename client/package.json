@@ -48,6 +48,7 @@
     "dayjs": "^1.11.10",
     "dotenv": "^16.4.5",
     "emoji-picker-react": "^4.11.1",
+    "js-cookie": "^3.0.5",
     "jwt-decode": "^3.1.2",
     "mobx": "^6.7.0",
     "mobx-react-lite": "^3.4.0",

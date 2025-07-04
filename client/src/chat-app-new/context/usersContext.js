@@ -232,6 +232,11 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {	
 		// storing input name
 		localStorage.setItem("currentTask", JSON.stringify([]));
+
+		localStorage.removeItem('token');
+		localStorage.removeItem('users');
+		localStorage.removeItem('specialist');
+
 	}, []);
 
 //---------get Userbots---------------------------------------------------
@@ -522,10 +527,10 @@ useEffect(() => {
 	useEffect(() => {
     	const fetchData = async () => {
 			let response = await getManager();
-      		console.log("managers context: ", response)
+      		console.log("managers context: ", response.length)
 
 			let companys= await getCompany();
-			console.log("companys context: ", companys)
+			console.log("companys context: ", companys.length)
 
 			let arr = []
 			response.map(async (user, i) => {
@@ -586,7 +591,7 @@ useEffect(() => {
 
 			  }) 
 
-			console.log("ManagersAll: ", arr)
+			//console.log("ManagersAll: ", arr.)
 
 			setManagersAll(arr)
 		}
@@ -1787,7 +1792,7 @@ const sendNumberProcess = (number, data, interval, time) => {
 //                  Notifications
 //===============================================================
 const fetchNotifAdmin = async (dataAll) => {
-	console.log("Получено уведомление: ", dataAll)
+	//console.log("Получено уведомление: ", dataAll)
 	const { task, 
 		tg_id,
 		fio,
@@ -2111,7 +2116,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		//console.log("fio: ", fio)
 
 		const worker = await getSpecialistId(tg_id)
-		console.log("worker: ", worker)
+		//console.log("worker: ", worker)
 		setWorkerCall({
 			tg_id,
 			fio,

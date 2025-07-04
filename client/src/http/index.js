@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie"
 
 const $host = axios.create({
     baseURL: process.env.REACT_APP_API_URL
@@ -37,7 +38,8 @@ const $authHost = axios.create({
 })
 
 const authInterceptor = config => {
-    config.headers.authorization = `Bearer ${localStorage.getItem('token')}`
+    //config.headers.authorization = `Bearer ${localStorage.getItem('token')}`
+    config.headers.authorization = `Bearer ${Cookies.get("token")}`
     return config
 }
 

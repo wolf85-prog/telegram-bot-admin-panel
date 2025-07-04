@@ -10,7 +10,7 @@ import { CSpinner} from '@coreui/react'
 
 import Loader from './../../../components/LoaderMini/LoaderMini'
 
-import { getWContacts, getWConversations, getWMessagesCount} from 'src/http/workerAPI'
+import { getWContacts, getWConversations, getWMessagesCount, getWMessages2} from 'src/http/workerAPI'
 import { getSpecialist, getSpecCount} from 'src/http/specAPI'
 
 const Sidebar = () => {
@@ -67,13 +67,14 @@ const Sidebar = () => {
 		
 					//1 все специалисты 100
 					const arrTemp = arrayWorkerAll.slice(0, 100)
-					console.log("arrayWorkerAll 100: ", arrTemp)
+					console.log("arrayWorkerAll 100: ", arrTemp.length)
+					
 					// let response = await getSpecCount(100, specialist.length);
 					// console.log("specialist 100: ", response)
 				
 					const arrayWorker = []
 				
-					arrTemp.map(async (user) => {
+					arrTemp.reverse().map(async (user) => {
 						const newWorker = {
 							id: user.id,
 							userfamily: user.fio, //user.userfamily != null ? user.userfamily : '',
@@ -106,15 +107,19 @@ const Sidebar = () => {
 					//3 все беседы (conversations)
 					let convers = await getWConversations()
 					console.log("Всего бесед: ", convers.length)
+					//const convers100 = convers.
 					setConversations(convers)
 
 
 					//сохранить кэш количество загруженных сообщений
-					localStorage.setItem("specialist", JSON.stringify(arrayWorkerAll));
+					//localStorage.setItem("specialist", JSON.stringify(arrayWorkerAll));
 		
+					//let messagesAll
+
 					//4 все сообщения бота
-					let messagesAll = await getWMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
-					//console.log("messagesAll: ", messagesAll.length)
+					const messagesAll = await getWMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
+					console.log("messagesAll: ", messagesAll.length)
+					
 		
 					let count = 0
 					convers.forEach(async (user, index) => {
@@ -136,10 +141,11 @@ const Sidebar = () => {
 							if (messagesAll[i].conversationId === conversationId.toString())
 								messages.push(messagesAll[i])
 							
-							if (messages.length === 10)
+							if (messages.length === 5)
 							  break;
 						}
-		
+
+						//messages = await getWMessages2(conversationId, 10, 0)		
 						//console.log("messages: ", messages)
 		
 						//получить последнее сообщение (без сообщений из рассылки)
@@ -150,8 +156,6 @@ const Sidebar = () => {
 								}	
 							})
 						}
-		
-						//console.log("last messages: ", user, messages2)
 							
 						const messageDates = Object.keys(messages2); //messages
 		
@@ -207,14 +211,13 @@ const Sidebar = () => {
 						if (worker) {
 							const newUser = {
 								id: worker.id,
-								username: userbot?.username ? userbot?.username : '', // user.username ? user.username : '',
-								name: worker?.userfamily + " " + worker?.username, //notion[0]?.fio ? notion[0]?.fio : '',
-								city: worker?.city, //notion[0]?.city ? notion[0]?.city : '',
-								//newcity: worker?.newcity,
-								phone: worker?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
-								age: worker?.dateborn, //notion[0]?.age ? notion[0]?.age : "",
+								username: userbot?.username ? userbot?.username : '',
+								name: worker?.userfamily + " " + worker?.username, 
+								city: worker?.city, 
+								phone: worker?.phone, 
+								age: worker?.dateborn, 
 								chatId: worker?.chatId,
-								avatar: worker?.avatar, //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
+								avatar: worker?.avatar, 
 								conversationId: conversationId ? conversationId : 0,
 								block: userbot?.block ? userbot?.block : '',
 								blockW: worker?.blockW,
@@ -225,21 +228,20 @@ const Sidebar = () => {
 								date: dateMessage,
 								messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
 							}
-							//console.log(newUser)
 							arrayContact.push(newUser)
 						}		
 						
 						//console.log(arrayContact)
 					
 						//если элемент массива последний
-						//if (index === convers.length-1) {
+						if (index === convers.length-1) {
 							const sortedClients = [...arrayContact].sort((a, b) => {       
 								var dateA = new Date(a.date), dateB = new Date(b.date) 
 								return dateB-dateA  //сортировка по убывающей дате  
 							})
 				
 							setUserWorkers(sortedClients)
-						//}				
+						}				
 					})	
 		}
 				
@@ -267,7 +269,7 @@ const Sidebar = () => {
 			  break;
 		}
 
-		console.log("contacts: ", arr)
+		console.log("contacts: ", arr.length)
 
 		setContacts(arr)
 		
