@@ -31,7 +31,7 @@ class PretendentController {
                 where: {receiverId, accept: true },
                 // Add order conditions here....
                 order: [
-                    ['updatedAt', 'ASC'], //DESC
+                    ['createdAt', 'ASC'], //DESC
                 ],
             })
             return res.status(200).json(spec);
@@ -121,7 +121,7 @@ class PretendentController {
                 where: {projectId, accept: true },
                 // Add order conditions here....
                 order: [
-                    ['updatedAt', 'DESC'], //DESC ASC
+                    ['createdAt', 'DESC'], //DESC ASC
                 ],
             })
             return res.status(200).json(spec);

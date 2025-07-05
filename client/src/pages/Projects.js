@@ -427,7 +427,7 @@ const Projects = () => {
 
       //0 все специалисты
       let all = await getSpecialist()
-      console.log('Все специалисты: ', 'all')
+      //console.log('Все специалисты: ', 'all')
       const arrayWorkerAll = []
 
       all.map(async (user) => {
@@ -504,9 +504,9 @@ const Projects = () => {
   //   initialData: [],
   // })
 
-  useEffect(() => {
-    console.log('height: ', height)
-  }, [height])
+  // useEffect(() => {
+  //   console.log('height: ', height)
+  // }, [height])
 
   useEffect(() => {
     //console.log("Mainspec: ", mainspec)
@@ -515,7 +515,7 @@ const Projects = () => {
 
   // Открыть проект
   const openProject = async (month, item, number, id, name, end, status, timeStart, specifika) => {
-    console.log('item: ', month + 1, item, number, specifika, end)
+    //console.log('item: ', month + 1, item, number, specifika, end)
 
     setShowHeader(true)
     setShowProject(true)
@@ -524,21 +524,21 @@ const Projects = () => {
     queryClient.invalidateQueries('estimateJobs', 'estimate')
 
     const resProj = await getProjectId(id)
-    console.log('resProj: ', resProj)
+    //console.log('resProj: ', resProj)
 
     const resManager = await getManagerId(resProj.managerId)
-    console.log('resManager: ', resManager)
+    //console.log('resManager: ', resManager)
     setProjectChatId(resManager?.chatId)
 
     const resPretendents = await getPretendentProjectId(id)
-    console.log('pretendents: ', resPretendents)
+    //console.log('pretendents: ', resPretendents)
 
     const resPosters = await getPosters(resProj.crmID)
-    console.log('posters: ', resPosters)
+    //console.log('posters: ', resPosters)
     setPosters(resPosters)
 
     const resWorkersReport = await getWorkersReport(resProj.crmID)
-    console.log('posters: ', resWorkersReport)
+    //console.log('posters: ', resWorkersReport)
     setWorkersReport(resWorkersReport)
 
     let newArray = []
@@ -571,12 +571,12 @@ const Projects = () => {
       }
       newArray.push(newObj)
     })
-    const sortPretendent = newArray.sort((a, b)=> {
-      var fioA = a.fio, fioB = b.fio
-      return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
-    })
-    console.log("sortPretendent: ", sortPretendent)
-    setPretendents(sortPretendent)
+    // const sortPretendent = newArray.sort((a, b)=> {
+    //   var fioA = a.fio, fioB = b.fio
+    //   return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
+    // })
+    //console.log("sortPretendent: ", sortPretendent)
+    setPretendents(newArray)
 
     setId(id)
     setCrmID(resProj.crmID)
@@ -592,7 +592,7 @@ const Projects = () => {
 
     let resMain
     resMain = await getMainSpecProject(id)
-    console.log('resMain: ', resMain)
+    //console.log('resMain: ', resMain)
 
     if (resMain.length > 0) {
       let arr = []
@@ -657,7 +657,7 @@ const Projects = () => {
         arr.push(newObj)
       })
 
-      console.log('arr: ', arr)
+      //console.log('arr: ', arr)
       setMainspec(arr)
     } else {
       //новый состав специалистов
@@ -729,9 +729,9 @@ const Projects = () => {
 
     //setLocationProject(resProj.geo)
     const loc = platformsAll.find((item) => item.id === parseInt(resProj?.geo))
-    console.log('platformsAll: ', 'platformsAll')
-    console.log('geo: ', resProj?.geo)
-    console.log('loc: ', loc)
+    // console.log('platformsAll: ', 'platformsAll')
+    // console.log('geo: ', resProj?.geo)
+    // console.log('loc: ', loc)
     if (loc) {
       let text = `${loc.address}`
       setAddress(text)
@@ -771,17 +771,17 @@ ${loc.url}`
     }, 200)
   }
 
-  useEffect(() => {
-    console.log('Локация: ', geoId)
-  }, [geoId])
+  // useEffect(() => {
+  //   console.log('Локация: ', geoId)
+  // }, [geoId])
 
-  useEffect(() => {
-    console.log('Основной состав: ', mainspec)
-  }, [mainspec])
+  // useEffect(() => {
+  //   console.log('Основной состав: ', mainspec)
+  // }, [mainspec])
 
-  useEffect(() => {
-    console.log(pretendents)
-  }, [pretendents])
+  // useEffect(() => {
+  //   console.log(pretendents)
+  // }, [pretendents])
 
 
   // список дат из основного состава
@@ -807,11 +807,11 @@ ${loc.url}`
     //Toast
     setShowModal(true)
 
-    console.log('start: ', startDate)
-    console.log('end: ', endDate)
-    console.log('managerId: ', managersAll.find((item) => item.fio === managerName)?.id)
-    console.log('managerId2: ', managersAll.find((item) => item.fio === managerName)?.id)
-    console.log('companyId: ', companysAll.find((item) => item.title === companyName)?.id)
+    // console.log('start: ', startDate)
+    // console.log('end: ', endDate)
+    // console.log('managerId: ', managersAll.find((item) => item.fio === managerName)?.id)
+    // console.log('managerId2: ', managersAll.find((item) => item.fio === managerName)?.id)
+    // console.log('companyId: ', companysAll.find((item) => item.title === companyName)?.id)
 
     //удаляем старые записи из Основного состава
     //const resAllDel = await deleteMainspecProject(id)
@@ -848,16 +848,16 @@ ${loc.url}`
       specifika: specifikaProject.name,
       city,
     }
-    console.log(saveData)
+    //console.log(saveData)
 
     //сохранить изменения в базе
     const resSave = await editProject(saveData, id)
-    console.log('resSave: ', resSave)
+    //console.log('resSave: ', resSave)
 
-    console.log('mainSpec save: ', mainspec)
+    //console.log('mainSpec save: ', mainspec)
     mainspec.map(async (item, index) => {
       //setTimeout(async()=> {
-      console.log('id item: ', item.id)
+      //console.log('id item: ', item.id)
       if (item.id) {
         const resEdit = await editMainspec(
           {
@@ -931,7 +931,7 @@ ${loc.url}`
       const day = String(new Date(startDate).getDate()).padStart(2, '0')
 
       let userIndex = projects.findIndex((item) => item.id === id)
-      console.log(userIndex)
+      //console.log(userIndex)
       const usersCopy = JSON.parse(JSON.stringify(projects))
 
       const userObject = usersCopy[userIndex]
@@ -948,7 +948,7 @@ ${loc.url}`
           : '',
       }
 
-      console.log('update user: ', usersCopy)
+      //console.log('update user: ', usersCopy)
 
       return usersCopy
     })
@@ -1025,14 +1025,14 @@ ${loc.url}`
   }
 
   const clickDelete = (id) => {
-    console.log(id)
+    //console.log(id)
 
     setVisibleDelete(!visibleDelete)
   }
 
   //удаление специалиста
   const deleteProfile = async (id) => {
-    console.log(id)
+    //console.log(id)
     setVisibleDelete(false)
 
     //удаление проекта из БД
@@ -1102,7 +1102,7 @@ ${loc.url}`
   CustomMenu.displayName = 'Edit'
 
   const changeAddSpec = async (eventkey) => {
-    console.log('spec: ', eventkey)
+    //console.log('spec: ', eventkey)
 
     //Добавить
     if (eventkey.split(' ')[0] === '1' || eventkey === '1') {
@@ -1117,7 +1117,7 @@ ${loc.url}`
         number: parseInt(eventkey.split(' ')[2]) + 1,
         stavka: '№1',
       })
-      console.log('resAdd: ', resAdd.id)
+      //console.log('resAdd: ', resAdd.id)
 
       const arrayCopy = JSON.parse(JSON.stringify(mainspec))
       //readyArray.splice(2, 0, 60);
@@ -1135,7 +1135,7 @@ ${loc.url}`
         projectId: id,
         number: parseInt(eventkey.split(' ')[2]) + 1,
       })
-      console.log('arrayCopy: ', arrayCopy)
+      //console.log('arrayCopy: ', arrayCopy)
       setMainspec(arrayCopy)
     }
 
@@ -1144,14 +1144,14 @@ ${loc.url}`
       const checkedItem = mainspec.find((item) => item.isChecked === true)
 
       if (checkedItem) {
-        console.log('edit all checked')
+        //console.log('edit all checked')
         handleAllEdit(eventkey)
       } else {
         const dublSpec = mainspec.find((item) => item.id === parseInt(eventkey.split(' ')[1]))
-        console.log('dublSpec: ', dublSpec)
+        //console.log('dublSpec: ', dublSpec)
 
         const resAdd = await addMainspec({ projectId: dublSpec.projectId, hr: dublSpec.hr })
-        console.log('resAddId: ', resAdd.id)
+        //console.log('resAddId: ', resAdd.id)
 
         const arrayCopy = JSON.parse(JSON.stringify(mainspec))
 
@@ -1169,7 +1169,7 @@ ${loc.url}`
           hr: dublSpec.hr,
           projectId: dublSpec.projectId,
         })
-        console.log('arrayCopy: ', arrayCopy)
+        //console.log('arrayCopy: ', arrayCopy)
         setMainspec(arrayCopy)
       }
     }
@@ -1181,7 +1181,7 @@ ${loc.url}`
         hr: true,
         number: parseInt(eventkey.split(' ')[2]) + 1,
       })
-      console.log('resAddId: ', resAdd.id)
+      //console.log('resAddId: ', resAdd.id)
 
       const arrayCopy = JSON.parse(JSON.stringify(mainspec))
 
@@ -1190,13 +1190,13 @@ ${loc.url}`
         projectId: id,
         hr: true,
       })
-      console.log('arrayCopy: ', arrayCopy)
+      //console.log('arrayCopy: ', arrayCopy)
       setMainspec(arrayCopy)
     }
 
     //удалить
     else if (eventkey.split(' ')[0] === '4') {
-      console.log('index: ', eventkey.split(' ')[1])
+      //console.log('index: ', eventkey.split(' ')[1])
       const checkedItem = mainspec.find((item) => item.isChecked === true)
       //console.log("checkedItem: ", checkedItem)
 
@@ -1212,16 +1212,16 @@ ${loc.url}`
   useEffect(() => {
     if (endDate !== '' && endDate !== null) {
       //setEndTime('00:00')
-      console.log('endDate: ', endDate)
+      //console.log('endDate: ', endDate)
     }
   }, [endDate])
 
   const changeDateProject = (e, index) => {
-    console.log('change Date: ', index, e.target.value + 'T' + '00:00')
+    //console.log('change Date: ', index, e.target.value + 'T' + '00:00')
     let arr = []
     arr = [...mainspec]
     // console.log("arr: ", arr)
-    arr[index].date = e.target.value + 'T' + arr[index].date?.split('T')[1]
+    arr[index].date = e.target.value + '2025T' + arr[index].date?.split('T')[1]
     setMainspec(arr)
   }
 
@@ -1243,21 +1243,21 @@ ${loc.url}`
 
   const handleChange = (e) => {
     const { name, checked } = e.target
-    console.log('checked: ', name, checked)
+    //console.log('checked: ', name, checked)
 
     if (name === 'allselect') {
       const checkedvalue = mainspec.map((user) => {
         return { ...user, isChecked: checked }
       })
-      console.log(checkedvalue)
+      //console.log(checkedvalue)
       setMainspec(checkedvalue)
     } else {
-      console.log('mainspec: ', mainspec)
+      //console.log('mainspec: ', mainspec)
 
       const checkedvalue = mainspec.map((user) =>
         user.id === parseInt(name) ? { ...user, isChecked: checked } : user,
       )
-      console.log('checkedvalue: ', checkedvalue)
+      //console.log('checkedvalue: ', checkedvalue)
       setMainspec(checkedvalue)
     }
   }
@@ -1277,7 +1277,7 @@ ${loc.url}`
     checkedinputvalue.map(async (item, index) => {
       //setTimeout(async()=> {
       const dublSpec = mainspec.find((el) => el.id === parseInt(item))
-      console.log('dublSpec: ', dublSpec)
+      //console.log('dublSpec: ', dublSpec)
 
       // const resAdd = await addMainspec({projectId: dublSpec.projectId, hr: dublSpec.hr})
       // console.log("resAddId: ", resAdd.id)
@@ -1297,12 +1297,12 @@ ${loc.url}`
         hr: dublSpec.hr,
       }
 
-      console.log('newObj: ', newObj)
+      //console.log('newObj: ', newObj)
       arrayCopy.splice(parseInt(eventkey.split(' ')[2]) + 1, 0, newObj)
       //}, 2000)
     })
 
-    console.log('newArr: ', arrayCopy)
+    //console.log('newArr: ', arrayCopy)
     const checkedvalue = arrayCopy.map((user) => {
       return { ...user, isChecked: false }
     })
@@ -1337,7 +1337,7 @@ ${loc.url}`
     })
 
     const result = copyArray.filter((item) => !checkedinputvalue.some((el) => item.id === el))
-    console.log('copyArray: ', result)
+    //console.log('copyArray: ', result)
 
     setMainspec(result)
   }
@@ -1406,9 +1406,9 @@ ${loc.url}`
     setPlayPredSmeta(!playPredSmeta)
 
     //api
-    console.log('crmID: ', crmID)
+    //console.log('crmID: ', crmID)
     const resAddSmeta = await getCreatePredSmeta(crmID)
-    console.log('resAddSmeta: ', resAddSmeta)
+    //console.log('resAddSmeta: ', resAddSmeta)
 
     setTimeout(() => {
       if (resAddSmeta) {
@@ -1421,9 +1421,9 @@ ${loc.url}`
     setPlayFinSmeta(!playFinSmeta)
 
     //api
-    console.log('crmID: ', crmID)
+    //console.log('crmID: ', crmID)
     const resAddSmeta = await getCreateFinSmeta(crmID)
-    console.log('resAddSmeta: ', resAddSmeta)
+    //console.log('resAddSmeta: ', resAddSmeta)
 
     setTimeout(() => {
       if (resAddSmeta) {
@@ -1463,7 +1463,7 @@ ${loc.url}`
     const resSendToTelegram = await sendPhotoToTelegram2({user: projectChatId, image: poster, keyboard: keyboard})
 
     const convId = await getRConversation(projectChatId)
-    console.log("conv: ", convId)
+    //console.log("conv: ", convId)
 
     //отправка списков
     const message = {
@@ -1571,7 +1571,7 @@ ${loc.url}`
     if (countPressDate + 1 >= 3) {
       setCountPressDate(0)
     }
-    console.log('check sort', countPressDate + 1)
+    //console.log('check sort', countPressDate + 1)
 
     if (countPressDate + 1 === 1) {
       const sortedWorker = [...pretendents].sort((a, b) => {
@@ -1999,7 +1999,7 @@ ${loc.url}`
                                 onChange={(event, newValue) => {
                                   if (newValue && newValue.length) {
                                     const comp = companysAll.find((item) => item.title === newValue)
-                                    console.log('comp: ', comp)
+                                    //console.log('comp: ', comp)
                                     if (comp) {
                                       setCompanyName(comp.title)
                                       setCompany(comp.id)
@@ -2116,7 +2116,7 @@ ${loc.url}`
                                     setLocationProject(newValue)
 
                                     const loc = platformsAll.find((item) => item.title === newValue)
-                                    console.log('loc: ', loc)
+                                    //console.log('loc: ', loc)
                                     if (loc) {
                                       let text = `${loc.address}`
                                       setAddress(text)
@@ -2267,7 +2267,7 @@ ${loc.url}`
                                 onChange={(event, newValue) => {
                                   if (newValue && newValue.length) {
                                     const comp = managersAll.find((item) => item.fio === newValue)
-                                    console.log('comp: ', comp)
+                                    //console.log('comp: ', comp)
                                     if (comp) {
                                       setPhone(comp.phone)
                                       setManagerName(comp.fio)
@@ -2321,7 +2321,7 @@ ${loc.url}`
                                 onChange={(event, newValue) => {
                                   if (newValue && newValue.length) {
                                     const comp = managersAll.find((item) => item.fio === newValue)
-                                    console.log('comp: ', comp)
+                                    //console.log('comp: ', comp)
                                     if (comp) {
                                       setPhone2(comp.phone)
                                       setManagerName2(comp.fio)
@@ -3174,7 +3174,7 @@ ${loc.url}`
                                       ) : (
                                         <div style={{ display: 'flex' }}>
                                           <InputMask
-                                            mask="99.99.9999"
+                                            mask="99.99" //99.99.9999
                                             // formatChars={formatChars}
                                             // beforeMaskedValueChange={beforeMaskedValueChange}
                                             value={
@@ -3193,10 +3193,10 @@ ${loc.url}`
                                                 style={{
                                                   backgroundColor: 'transparent',
                                                   height: '14px',
-                                                  textAlign: 'center',
+                                                  textAlign: 'right',
                                                   border: 'none',
                                                   borderRadius: '5px',
-                                                  width: '100px',
+                                                  width: '80px',
                                                 }}
                                               />
                                             )}

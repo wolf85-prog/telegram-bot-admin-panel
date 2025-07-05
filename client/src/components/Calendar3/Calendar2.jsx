@@ -154,7 +154,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
     const refSr = useRef(null)
 
     useEffect(() => {
-        console.log("projects: ", projects)
+        //console.log("projects: ", projects)
 
         let arr = [] 
         let arr2 = []

@@ -137,7 +137,7 @@ export default function Filters({ columnFilters, setColumnFilters, setShowCalend
 
   //поиск
   useEffect(() => {
-    console.log("projects: ", projects)
+    //console.log("projects: ", projects)
     const filteredData = projects.filter(proj=> (proj.crmID)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(filterText.replace(/[её]/g, '(е|ё)').toLowerCase()));
     setProjectsSort(filterText === '' ? projects : filteredData); 
   }, [filterText]);
