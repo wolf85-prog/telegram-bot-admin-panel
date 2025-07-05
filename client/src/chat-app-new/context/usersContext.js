@@ -236,6 +236,8 @@ const UsersProvider = ({ children }) => {
 		localStorage.removeItem('token');
 		localStorage.removeItem('users');
 		localStorage.removeItem('specialist');
+		localStorage.removeItem('userWorkers');
+		localStorage.removeItem('companys');
 
 	}, []);
 
